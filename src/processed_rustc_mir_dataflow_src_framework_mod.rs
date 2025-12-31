@@ -37,11 +37,11 @@ use std::cmp::Ordering;
 use crate::rustc_data_structures::work_queue::WorkQueue;
 use rustc_index::bit_set::{DenseBitSet, MixedBitSet};
 use rustc_index::{Idx, IndexVec};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::{
     self, BasicBlock, CallReturnPlaces, Location, SwitchTargetValue, TerminatorEdges, traversal,
 };
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::error;
 
 use self::graphviz::write_graphviz_results;

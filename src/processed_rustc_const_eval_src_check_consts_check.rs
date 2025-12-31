@@ -6,21 +6,21 @@ use std::mem;
 use std::num::NonZero;
 use std::ops::Deref;
 
-use rustc_errors::{Diag, ErrorGuaranteed};
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::{self as hir, LangItem};
+use crate::rustc_complete::{Diag, ErrorGuaranteed};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, LangItem};
 use rustc_index::bit_set::DenseBitSet;
-use rustc_infer::infer::TyCtxtInferExt;
-use crate::rustc_middle::mir::visit::Visitor;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::adjustment::PointerCoercion;
-use crate::rustc_middle::ty::{self, Ty, TypeVisitableExt};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::adjustment::PointerCoercion;
+use crate::rustc_complete::ty::{self, Ty, TypeVisitableExt};
 use rustc_mir_dataflow::Analysis;
 use rustc_mir_dataflow::impls::{MaybeStorageLive, always_storage_live_locals};
-use crate::rustc_span::{Span, Symbol, sym};
-use rustc_trait_selection::traits::{
+use crate::rustc_complete::{Span, Symbol, sym};
+use crate::rustc_trait_selection::traits::{
     Obligation, ObligationCause, ObligationCauseCode, ObligationCtxt,
 };
 use tracing::{instrument, trace};

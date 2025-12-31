@@ -11,9 +11,9 @@
 
 use std::fmt;
 
-use rustc_errors::{DiagInner, TRACK_DIAGNOSTIC};
-use crate::rustc_middle::dep_graph::{DepNodeExt, TaskDepsRef};
-use crate::rustc_middle::ty::tls;
+use crate::rustc_complete::{DiagInner, TRACK_DIAGNOSTIC};
+use crate::rustc_complete::dep_graph::{DepNodeExt, TaskDepsRef};
+use crate::rustc_complete::ty::tls;
 use rustc_query_impl::QueryCtxt;
 use rustc_query_system::dep_graph::dep_node::default_dep_kind_debug;
 use rustc_query_system::dep_graph::{DepContext, DepKind, DepNode};

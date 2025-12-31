@@ -17,14 +17,14 @@ use std::{cmp, fmt, fs, iter};
 use externs::{ExternOpt, split_extern_opt};
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 use crate::rustc_data_structures::stable_hasher::{StableHasher, StableOrd, ToStableHashKey};
-use rustc_errors::emitter::HumanReadableErrorType;
-use rustc_errors::{ColorConfig, DiagArgValue, DiagCtxtFlags, IntoDiagArg};
+use crate::rustc_complete::emitter::HumanReadableErrorType;
+use crate::rustc_complete::{ColorConfig, DiagArgValue, DiagCtxtFlags, IntoDiagArg};
 use rustc_feature::UnstableFeatures;
 use rustc_hashes::Hash64;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-use crate::rustc_span::edition::{DEFAULT_EDITION, EDITION_NAME_LIST, Edition, LATEST_STABLE_EDITION};
-use crate::rustc_span::source_map::FilePathMapping;
-use crate::rustc_span::{
+use crate::rustc_complete::edition::{DEFAULT_EDITION, EDITION_NAME_LIST, Edition, LATEST_STABLE_EDITION};
+use crate::rustc_complete::source_map::FilePathMapping;
+use crate::rustc_complete::{
     FileName, FileNameDisplayPreference, FileNameEmbeddablePreference, RealFileName,
     SourceFileHashAlgorithm, Symbol, sym,
 };
@@ -3207,11 +3207,11 @@ pub(crate) mod dep_tracking {
     use rustc_abi::Align;
     use crate::rustc_data_structures::fx::FxIndexMap;
     use crate::rustc_data_structures::stable_hasher::StableHasher;
-    use rustc_errors::LanguageIdentifier;
+    use crate::rustc_complete::LanguageIdentifier;
     use rustc_feature::UnstableFeatures;
     use rustc_hashes::Hash64;
-    use crate::rustc_span::RealFileName;
-    use crate::rustc_span::edition::Edition;
+    use crate::rustc_complete::RealFileName;
+    use crate::rustc_complete::edition::Edition;
     use rustc_target::spec::{
         CodeModel, FramePointer, MergeFunctions, OnBrokenPipe, PanicStrategy, RelocModel,
         RelroLevel, SanitizerSet, SplitDebuginfo, StackProtector, SymbolVisibility, TargetTuple,

@@ -1,14 +1,14 @@
-use crate::rustc_hir::{self as hir, LangItem};
-use rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes};
-use rustc_infer::traits::{
+use crate::rustc_complete::{self as hir, LangItem};
+use crate::rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes};
+use crate::rustc_infer::traits::{
     ImplDerivedHostCause, ImplSource, Obligation, ObligationCause, ObligationCauseCode,
     PredicateObligation,
 };
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::traits::query::NoSolution;
-use crate::rustc_middle::ty::elaborate::elaborate;
-use crate::rustc_middle::ty::fast_reject::DeepRejectCtxt;
-use crate::rustc_middle::ty::{self, TypingMode};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::elaborate::elaborate;
+use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
+use crate::rustc_complete::ty::{self, TypingMode};
 use thin_vec::{ThinVec, thin_vec};
 
 use super::SelectionContext;

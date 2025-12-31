@@ -1,8 +1,8 @@
 use std::collections::hash_map::Entry;
 
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_middle::ty::error::TypeError;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::ty::error::TypeError;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitableExt};
 use tracing::instrument;
 
 use crate::infer::region_constraints::VerifyIfEq;

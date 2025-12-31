@@ -1,12 +1,12 @@
 use std::sync::Arc;
 
-use crate::rustc_ast::{self as ast, *};
-use crate::rustc_hir::def::{DefKind, PartialRes, PerNS, Res};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::{self as hir, GenericArg};
-use crate::rustc_middle::{span_bug, ty};
-use crate::rustc_session::parse::add_feature_diagnostics;
-use crate::rustc_span::{BytePos, DUMMY_SP, DesugaringKind, Ident, Span, Symbol, sym};
+use crate::rustc_complete::{self as ast, *};
+use crate::rustc_complete::def::{DefKind, PartialRes, PerNS, Res};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, GenericArg};
+use crate::rustc_complete::{span_bug, ty};
+use crate::rustc_complete::parse::add_feature_diagnostics;
+use crate::rustc_complete::{BytePos, DUMMY_SP, DesugaringKind, Ident, Span, Symbol, sym};
 use smallvec::smallvec;
 use tracing::{debug, instrument};
 

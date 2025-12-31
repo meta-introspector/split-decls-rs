@@ -18,14 +18,14 @@
 //
 
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::{HirId, attrs};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{HirId, attrs};
 use rustc_index::{IndexSlice, IndexVec};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::thir::*;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_span::Span;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::Span;
 
 
 pub(super) fn build_custom_mir<'tcx>(

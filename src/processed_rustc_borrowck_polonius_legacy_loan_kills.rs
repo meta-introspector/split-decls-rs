@@ -1,9 +1,9 @@
-use crate::rustc_middle::mir::visit::Visitor;
-use crate::rustc_middle::mir::{
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::{
     Body, Local, Location, Place, PlaceRef, ProjectionElem, Rvalue, Statement, StatementKind,
     Terminator, TerminatorKind,
 };
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::debug;
 
 use super::{PoloniusFacts, PoloniusLocationTable};

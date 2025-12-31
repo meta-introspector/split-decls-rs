@@ -494,7 +494,7 @@ pub(crate) enum AtomicOrdering {
 
 impl AtomicOrdering {
     pub(crate) fn from_generic(ao: crate::rustc_middle::ty::AtomicOrdering) -> Self {
-        use crate::rustc_middle::ty::AtomicOrdering as Common;
+        use crate::rustc_complete::ty::AtomicOrdering as Common;
         match ao {
             Common::Relaxed => Self::Monotonic,
             Common::Acquire => Self::Acquire,
@@ -974,7 +974,7 @@ pub(crate) mod debuginfo {
             // not break anything and to allow users to have 'limited' debug info.
             //
             // See https://github.com/rust-lang/rust/issues/60020 for details.
-            use crate::rustc_session::config::DebugInfo;
+            use crate::rustc_complete::config::DebugInfo;
             match kind {
                 DebugInfo::None => DebugEmissionKind::NoDebug,
                 DebugInfo::LineDirectivesOnly => DebugEmissionKind::DebugDirectivesOnly,

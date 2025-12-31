@@ -1,12 +1,12 @@
 use std::sync::Arc;
 
-use crate::rustc_ast::*;
+use crate::rustc_complete::*;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::{self as hir, LangItem, Target};
-use crate::rustc_middle::span_bug;
-use crate::rustc_span::source_map::{Spanned, respan};
-use crate::rustc_span::{DesugaringKind, Ident, Span};
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::{self as hir, LangItem, Target};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::source_map::{Spanned, respan};
+use crate::rustc_complete::{DesugaringKind, Ident, Span};
 
 use super::errors::{
     ArbitraryExpressionInPattern, ExtraDoubleDot, MisplacedDoubleDot, SubTupleBinding,

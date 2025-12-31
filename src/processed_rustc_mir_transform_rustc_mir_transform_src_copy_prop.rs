@@ -1,8 +1,8 @@
 use rustc_index::IndexSlice;
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::mir::visit::*;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::visit::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::{debug, instrument};
 
 use crate::ssa::SsaLocals;

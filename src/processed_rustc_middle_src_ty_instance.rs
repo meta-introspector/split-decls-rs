@@ -2,15 +2,15 @@ use std::assert_matches::assert_matches;
 use std::fmt;
 
 use crate::rustc_data_structures::fx::FxHashMap;
-use rustc_errors::ErrorGuaranteed;
+use crate::rustc_complete::ErrorGuaranteed;
 use rustc_hir as hir;
-use crate::rustc_hir::def::{CtorKind, DefKind, Namespace};
-use crate::rustc_hir::def_id::{CrateNum, DefId};
-use crate::rustc_hir::lang_items::LangItem;
+use crate::rustc_complete::def::{CtorKind, DefKind, Namespace};
+use crate::rustc_complete::def_id::{CrateNum, DefId};
+use crate::rustc_complete::lang_items::LangItem;
 use rustc_index::bit_set::FiniteBitSet;
 use rustc_macros::{Decodable, Encodable, HashStable, Lift, TyDecodable, TyEncodable};
-use crate::rustc_span::def_id::LOCAL_CRATE;
-use crate::rustc_span::{DUMMY_SP, Span, Symbol};
+use crate::rustc_complete::def_id::LOCAL_CRATE;
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
 use tracing::{debug, instrument};
 
 use crate::error;
@@ -301,7 +301,7 @@ impl<'tcx> InstanceKind<'tcx> {
     /// Note that this is only a hint. See the documentation for
     /// `generates_cgu_internal_copy` for more information.
     pub fn requires_inline(&self, tcx: TyCtxt<'tcx>) -> bool {
-        use crate::rustc_hir::definitions::DefPathData;
+        use crate::rustc_complete::definitions::DefPathData;
         let def_id = match *self {
             ty::InstanceKind::Item(def) => def,
             ty::InstanceKind::DropGlue(_, Some(_)) => return false,

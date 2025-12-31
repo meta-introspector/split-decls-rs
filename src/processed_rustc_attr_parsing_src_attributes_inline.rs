@@ -2,7 +2,7 @@
 //                      note: need to model better how duplicate attr errors work when not using
 //                      SingleAttributeParser which is what we have two of here.
 
-use crate::rustc_hir::attrs::{AttributeKind, InlineAttr};
+use crate::rustc_complete::attrs::{AttributeKind, InlineAttr};
 
 use super::prelude::*;
 

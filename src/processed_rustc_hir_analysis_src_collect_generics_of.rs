@@ -1,14 +1,14 @@
 use std::assert_matches::assert_matches;
 use std::ops::ControlFlow;
 
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_hir::intravisit::{self, Visitor, VisitorExt};
-use crate::rustc_hir::{self as hir, AmbigArg, GenericParamKind, HirId, Node};
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::{self, TyCtxt};
-use crate::rustc_session::lint;
-use crate::rustc_span::{Span, Symbol, kw};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::intravisit::{self, Visitor, VisitorExt};
+use crate::rustc_complete::{self as hir, AmbigArg, GenericParamKind, HirId, Node};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{self, TyCtxt};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::{Span, Symbol, kw};
 use tracing::{debug, instrument};
 
 use crate::delegation::inherit_generics_for_delegation_item;
@@ -16,7 +16,7 @@ use crate::middle::resolve_bound_vars as rbv;
 
 #[instrument(level = "debug", skip(tcx), ret)]
 pub(super) fn generics_of(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::Generics {
-    use crate::rustc_hir::*;
+    use crate::rustc_complete::*;
 
     // For an RPITIT, synthesize generics which are equal to the opaque's generics
     // and parent fn's generics compressed into one list.
@@ -407,7 +407,7 @@ enum ParamDefaultPolicy {
 }
 
 fn param_default_policy(node: Node<'_>) -> Option<ParamDefaultPolicy> {
-    use crate::rustc_hir::*;
+    use crate::rustc_complete::*;
 
     Some(match node {
         Node::Item(item) => match item.kind {

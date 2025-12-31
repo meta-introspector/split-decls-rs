@@ -2,16 +2,16 @@ use std::ops::Not;
 
 use rustc_abi::ExternAbi;
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::{Node, find_attr};
-use rustc_infer::infer::TyCtxtInferExt;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::{self, TyCtxt, TypingMode};
-use crate::rustc_session::config::EntryFnType;
-use crate::rustc_span::Span;
-use crate::rustc_span::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::traits::{self, ObligationCause, ObligationCauseCode};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::{Node, find_attr};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{self, TyCtxt, TypingMode};
+use crate::rustc_complete::config::EntryFnType;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::traits::{self, ObligationCause, ObligationCauseCode};
 
 use super::check_function_signature;
 use crate::errors;

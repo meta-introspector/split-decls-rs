@@ -1,12 +1,12 @@
 use std::ops::ControlFlow;
 
 use rustc_hir as hir;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::def_id::DefId;
-use rustc_infer::traits::ObligationCauseCode;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitor};
-use crate::rustc_span::{Span, kw};
-use rustc_trait_selection::traits;
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_infer::traits::ObligationCauseCode;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitor};
+use crate::rustc_complete::{Span, kw};
+use crate::rustc_trait_selection::traits;
 
 use crate::FnCtxt;
 

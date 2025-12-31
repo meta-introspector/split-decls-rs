@@ -2,11 +2,11 @@
 // to hold.
 
 use crate::rustc_data_structures::fx::FxIndexSet;
-use rustc_errors::{ErrorGuaranteed, MultiSpan};
+use crate::rustc_complete::{ErrorGuaranteed, MultiSpan};
 use rustc_hir as hir;
-use crate::rustc_hir::intravisit::VisitorExt;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::TypeVisitor;
+use crate::rustc_complete::intravisit::VisitorExt;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::TypeVisitor;
 use tracing::debug;
 
 use crate::error_reporting::infer::nice_region_error::NiceRegionError;

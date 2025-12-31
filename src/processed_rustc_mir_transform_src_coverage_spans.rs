@@ -1,8 +1,8 @@
-use crate::rustc_middle::mir;
-use crate::rustc_middle::mir::coverage::{Mapping, MappingKind, START_BCB};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_span::source_map::SourceMap;
-use crate::rustc_span::{BytePos, DesugaringKind, ExpnId, ExpnKind, MacroKind, Span};
+use crate::rustc_complete::mir;
+use crate::rustc_complete::mir::coverage::{Mapping, MappingKind, START_BCB};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{BytePos, DesugaringKind, ExpnId, ExpnKind, MacroKind, Span};
 use tracing::instrument;
 
 use crate::coverage::expansion::{self, ExpnTree, SpanWithBcb};

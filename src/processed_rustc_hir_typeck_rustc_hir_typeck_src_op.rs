@@ -1,20 +1,20 @@
 // Code related to processing overloaded binary and unary operators.
 
 use crate::rustc_data_structures::packed::Pu128;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, Diag, struct_span_code_err};
-use rustc_infer::traits::ObligationCauseCode;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::adjustment::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, Diag, struct_span_code_err};
+use crate::rustc_infer::traits::ObligationCauseCode;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::adjustment::{
     Adjust, Adjustment, AllowTwoPhase, AutoBorrow, AutoBorrowMutability,
 };
-use crate::rustc_middle::ty::print::with_no_trimmed_paths;
-use crate::rustc_middle::ty::{self, IsSuggestable, Ty, TyCtxt, TypeVisitableExt};
-use crate::rustc_session::errors::ExprParenthesesNeeded;
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{Span, Symbol, sym};
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits::{FulfillmentError, Obligation, ObligationCtxt};
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{self, IsSuggestable, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::errors::ExprParenthesesNeeded;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Span, Symbol, sym};
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits::{FulfillmentError, Obligation, ObligationCtxt};
 use tracing::debug;
 use {rustc_ast as ast, rustc_hir as hir};
 
@@ -424,7 +424,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                             lhs_expr.span.shrink_to_lo(),
                             msg,
                             "*",
-                            rustc_errors::Applicability::MachineApplicable,
+                            crate::rustc_errors::Applicability::MachineApplicable,
                         );
                     }
                 };
@@ -461,7 +461,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                                         (lhs_expr.span.shrink_to_lo(), "&*".to_string()),
                                         (rhs_expr.span.shrink_to_lo(), "&*".to_string()),
                                     ],
-                                    rustc_errors::Applicability::MachineApplicable,
+                                    crate::rustc_errors::Applicability::MachineApplicable,
                                 );
                             } else {
                                 let mut suggest_new_borrow =
@@ -472,7 +472,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                                                 sp.shrink_to_lo(),
                                                 "consider reborrowing this side",
                                                 "&*",
-                                                rustc_errors::Applicability::MachineApplicable,
+                                                crate::rustc_errors::Applicability::MachineApplicable,
                                             );
                                         // Works on &mut but have &
                                         } else {

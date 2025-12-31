@@ -1,4 +1,4 @@
-use crate::rustc_middle::ty::RegionVid;
+use crate::rustc_complete::ty::RegionVid;
 use rustc_mir_dataflow::points::PointIndex;
 
 /// A localized outlives constraint reifies the CFG location where the outlives constraint holds,

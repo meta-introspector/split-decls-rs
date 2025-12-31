@@ -1,13 +1,13 @@
 #[cfg(feature = "master")]
 use gccjit::FnAttribute;
 use gccjit::{Context, FunctionType, RValue, ToRValue, Type};
-use crate::rustc_ast::expand::allocator::{
+use crate::rustc_complete::expand::allocator::{
     ALLOCATOR_METHODS, AllocatorKind, AllocatorTy, NO_ALLOC_SHIM_IS_UNSTABLE,
     alloc_error_handler_name, default_fn_name, global_fn_name,
 };
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::config::OomStrategy;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::OomStrategy;
 use rustc_symbol_mangling::mangle_internal_symbol;
 
 use crate::GccContext;

@@ -13,7 +13,7 @@ use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 use crate::rustc_data_structures::sync;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic, Walkable};
 use rustc_serialize::{Decodable, Encodable};
-use crate::rustc_span::{DUMMY_SP, Span, SpanDecoder, SpanEncoder, Symbol, sym};
+use crate::rustc_complete::{DUMMY_SP, Span, SpanDecoder, SpanEncoder, Symbol, sym};
 use thin_vec::ThinVec;
 
 use crate::ast::AttrStyle;

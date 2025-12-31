@@ -3,7 +3,7 @@
 use std::path::Path;
 
 use rustc_ast as ast;
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 
 use crate::Session;
 use crate::config::{self, CrateType, OutFileName, OutputFilenames, OutputType};

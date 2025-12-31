@@ -1,5 +1,5 @@
 use rustc_abi as abi;
-use crate::rustc_middle::mir::interpret::{ConstAllocation, Scalar};
+use crate::rustc_complete::mir::interpret::{ConstAllocation, Scalar};
 
 use super::BackendTypes;
 

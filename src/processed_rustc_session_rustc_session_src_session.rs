@@ -6,30 +6,30 @@ use std::sync::atomic::AtomicBool;
 use std::{env, io};
 
 use rand::{RngCore, rng};
-use crate::rustc_ast::NodeId;
+use crate::rustc_complete::NodeId;
 use crate::rustc_data_structures::base_n::{CASE_INSENSITIVE, ToBaseN};
 use crate::rustc_data_structures::flock;
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexSet};
 use crate::rustc_data_structures::profiling::{SelfProfiler, SelfProfilerRef};
 use crate::rustc_data_structures::sync::{DynSend, DynSync, Lock, MappedReadGuard, ReadGuard, RwLock};
-use rustc_errors::annotate_snippet_emitter_writer::AnnotateSnippetEmitter;
-use rustc_errors::codes::*;
-use rustc_errors::emitter::{
+use crate::rustc_complete::annotate_snippet_emitter_writer::AnnotateSnippetEmitter;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::emitter::{
     DynEmitter, HumanEmitter, HumanReadableErrorType, OutputTheme, stderr_destination,
 };
-use rustc_errors::json::JsonEmitter;
-use rustc_errors::timings::TimingSectionHandler;
-use rustc_errors::translation::Translator;
-use rustc_errors::{
+use crate::rustc_complete::json::JsonEmitter;
+use crate::rustc_complete::timings::TimingSectionHandler;
+use crate::rustc_complete::translation::Translator;
+use crate::rustc_complete::{
     Diag, DiagCtxt, DiagCtxtHandle, DiagMessage, Diagnostic, ErrorGuaranteed, FatalAbort,
     LintEmitter, TerminalUrl, fallback_fluent_bundle,
 };
-use crate::rustc_hir::limit::Limit;
+use crate::rustc_complete::limit::Limit;
 use rustc_macros::HashStable_Generic;
-pub use crate::rustc_span::def_id::StableCrateId;
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::source_map::{FilePathMapping, SourceMap};
-use crate::rustc_span::{FileNameDisplayPreference, RealFileName, Span, Symbol};
+pub use crate::rustc_complete::def_id::StableCrateId;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::source_map::{FilePathMapping, SourceMap};
+use crate::rustc_complete::{FileNameDisplayPreference, RealFileName, Span, Symbol};
 use rustc_target::asm::InlineAsmArch;
 use rustc_target::spec::{
     CodeModel, DebuginfoKind, PanicStrategy, RelocModel, RelroLevel, SanitizerSet,
@@ -173,8 +173,8 @@ impl LintEmitter for &'_ Session {
         self,
         lint: &'static rustc_lint_defs::Lint,
         node_id: Self::Id,
-        span: impl Into<rustc_errors::MultiSpan>,
-        decorator: impl for<'a> rustc_errors::LintDiagnostic<'a, ()> + DynSend + 'static,
+        span: impl Into<crate::rustc_errors::MultiSpan>,
+        decorator: impl for<'a> crate::rustc_errors::LintDiagnostic<'a, ()> + DynSend + 'static,
     ) {
         self.psess.buffer_lint(lint, span, node_id, decorator);
     }
@@ -998,8 +998,8 @@ fn default_emitter(
 pub fn build_session(
     sopts: config::Options,
     io: CompilerIO,
-    fluent_bundle: Option<Arc<rustc_errors::FluentBundle>>,
-    registry: rustc_errors::registry::Registry,
+    fluent_bundle: Option<Arc<crate::rustc_errors::FluentBundle>>,
+    registry: crate::rustc_errors::registry::Registry,
     fluent_resources: Vec<&'static str>,
     driver_lint_caps: FxHashMap<lint::LintId, lint::Level>,
     target: Target,
@@ -1477,7 +1477,7 @@ fn mk_emitter(output: ErrorOutputType) -> Box<DynEmitter> {
     // FIXME(#100717): early errors aren't translated at the moment, so this is fine, but it will
     // need to reference every crate that might emit an early error for translation to work.
     let translator =
-        Translator::with_fallback_bundle(vec![rustc_errors::DEFAULT_LOCALE_RESOURCE], false);
+        Translator::with_fallback_bundle(vec![crate::rustc_errors::DEFAULT_LOCALE_RESOURCE], false);
     let emitter: Box<DynEmitter> = match output {
         config::ErrorOutputType::HumanReadable { kind, color_config } => {
             let short = kind.short();

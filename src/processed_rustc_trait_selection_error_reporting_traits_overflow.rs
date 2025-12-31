@@ -1,13 +1,13 @@
 use std::fmt;
 
-use rustc_errors::{Diag, E0275, EmissionGuarantee, ErrorGuaranteed, struct_span_code_err};
-use crate::rustc_hir::def::Namespace;
-use crate::rustc_hir::def_id::LOCAL_CRATE;
-use crate::rustc_hir::limit::Limit;
-use rustc_infer::traits::{Obligation, PredicateObligation};
-use crate::rustc_middle::ty::print::{FmtPrinter, Print};
-use crate::rustc_middle::ty::{self, TyCtxt, Upcast};
-use crate::rustc_span::Span;
+use crate::rustc_complete::{Diag, E0275, EmissionGuarantee, ErrorGuaranteed, struct_span_code_err};
+use crate::rustc_complete::def::Namespace;
+use crate::rustc_complete::def_id::LOCAL_CRATE;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_infer::traits::{Obligation, PredicateObligation};
+use crate::rustc_complete::ty::print::{FmtPrinter, Print};
+use crate::rustc_complete::ty::{self, TyCtxt, Upcast};
+use crate::rustc_complete::Span;
 use tracing::debug;
 
 use crate::error_reporting::TypeErrCtxt;

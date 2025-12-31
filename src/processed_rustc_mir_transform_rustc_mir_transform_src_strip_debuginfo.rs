@@ -1,6 +1,6 @@
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::config::MirStripDebugInfo;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::MirStripDebugInfo;
 
 /// Conditionally remove some of the VarDebugInfo in MIR.
 ///

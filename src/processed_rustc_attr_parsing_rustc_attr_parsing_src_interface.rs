@@ -1,14 +1,14 @@
 use std::borrow::Cow;
 
 use rustc_ast as ast;
-use crate::rustc_ast::NodeId;
-use rustc_errors::DiagCtxtHandle;
+use crate::rustc_complete::NodeId;
+use crate::rustc_complete::DiagCtxtHandle;
 use rustc_feature::{AttributeTemplate, Features};
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::lints::AttributeLint;
-use crate::rustc_hir::{AttrArgs, AttrItem, AttrPath, Attribute, HashIgnoredAttrId, Target};
-use crate::rustc_session::Session;
-use crate::rustc_span::{DUMMY_SP, Span, Symbol, sym};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::lints::AttributeLint;
+use crate::rustc_complete::{AttrArgs, AttrItem, AttrPath, Attribute, HashIgnoredAttrId, Target};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol, sym};
 
 use crate::context::{AcceptContext, FinalizeContext, SharedContext, Stage};
 use crate::parser::{ArgParser, MetaItemParser, PathParser};

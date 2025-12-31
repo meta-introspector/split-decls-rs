@@ -1,5 +1,5 @@
-use crate::rustc_middle::mir::Body;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::Body;
+use crate::rustc_complete::ty::TyCtxt;
 use rustc_mir_dataflow::rustc_peek::sanity_check;
 
 pub(super) struct SanityCheck;

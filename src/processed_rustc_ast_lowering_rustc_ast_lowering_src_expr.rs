@@ -1,18 +1,18 @@
 use std::ops::ControlFlow;
 use std::sync::Arc;
 
-use crate::rustc_ast::*;
+use crate::rustc_complete::*;
 use rustc_ast_pretty::pprust::expr_to_string;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::{HirId, Target, find_attr};
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::errors::report_lit_error;
-use crate::rustc_span::source_map::{Spanned, respan};
-use crate::rustc_span::{DUMMY_SP, DesugaringKind, Ident, Span, Symbol, sym};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::{HirId, Target, find_attr};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::errors::report_lit_error;
+use crate::rustc_complete::source_map::{Spanned, respan};
+use crate::rustc_complete::{DUMMY_SP, DesugaringKind, Ident, Span, Symbol, sym};
 use thin_vec::{ThinVec, thin_vec};
 use visit::{Visitor, walk_expr};
 
@@ -1517,7 +1517,7 @@ impl<'hir> LoweringContext<'_, 'hir> {
         e2: Option<&Expr>,
         lims: RangeLimits,
     ) -> hir::ExprKind<'hir> {
-        use crate::rustc_ast::RangeLimits::*;
+        use crate::rustc_complete::RangeLimits::*;
 
         let lang_item = match (e1, e2, lims) {
             (None, None, HalfOpen) => hir::LangItem::RangeFull,

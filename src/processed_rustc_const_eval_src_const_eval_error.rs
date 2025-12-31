@@ -1,12 +1,12 @@
 use std::mem;
 
-use rustc_errors::{Diag, DiagArgName, DiagArgValue, DiagMessage, IntoDiagArg};
-use crate::rustc_middle::mir::AssertKind;
-use crate::rustc_middle::mir::interpret::{AllocId, Provenance, ReportedErrorInfo, UndefinedBehaviorInfo};
-use crate::rustc_middle::query::TyCtxtAt;
-use crate::rustc_middle::ty::ConstInt;
-use crate::rustc_middle::ty::layout::LayoutError;
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Diag, DiagArgName, DiagArgValue, DiagMessage, IntoDiagArg};
+use crate::rustc_complete::mir::AssertKind;
+use crate::rustc_complete::mir::interpret::{AllocId, Provenance, ReportedErrorInfo, UndefinedBehaviorInfo};
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::ty::ConstInt;
+use crate::rustc_complete::ty::layout::LayoutError;
+use crate::rustc_complete::{Span, Symbol};
 
 use super::CompileTimeMachine;
 use crate::errors::{self, FrameNote, ReportErrorExt};
@@ -236,7 +236,7 @@ pub(super) fn lint<'tcx, L>(
     lint: &'static crate::rustc_session::lint::Lint,
     decorator: impl FnOnce(Vec<errors::FrameNote>) -> L,
 ) where
-    L: for<'a> rustc_errors::LintDiagnostic<'a, ()>,
+    L: for<'a> crate::rustc_errors::LintDiagnostic<'a, ()>,
 {
     let (span, frames) = get_span_and_frames(tcx, &machine.stack);
 

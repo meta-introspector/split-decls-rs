@@ -9,13 +9,13 @@
 // `thir_abstract_const` which can then be checked for structural equality with other
 // generic constants mentioned in the `caller_bounds` of the current environment.
 
-use crate::rustc_hir::def::DefKind;
-use rustc_infer::infer::InferCtxt;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::traits::ObligationCause;
-use crate::rustc_middle::ty::abstract_const::NotConstEvaluatable;
-use crate::rustc_middle::ty::{self, TyCtxt, TypeVisitable, TypeVisitableExt, TypeVisitor};
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_infer::infer::InferCtxt;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty::abstract_const::NotConstEvaluatable;
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitable, TypeVisitableExt, TypeVisitor};
+use crate::rustc_complete::{DUMMY_SP, Span};
 use tracing::{debug, instrument};
 
 use super::EvaluateConstErr;
@@ -124,7 +124,7 @@ pub fn is_const_evaluatable<'tcx>(
                         DUMMY_SP,
                         "consider enabling this feature",
                         "#[feature(generic_const_exprs)]\n",
-                        rustc_errors::Applicability::MaybeIncorrect,
+                        crate::rustc_errors::Applicability::MaybeIncorrect,
                     )
                     .emit()
             }

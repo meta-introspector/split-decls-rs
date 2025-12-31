@@ -2,8 +2,8 @@
 // from various crates in no particular order.
 
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-use crate::rustc_hir::{self as hir, HashIgnoredAttrId};
-use crate::rustc_span::SourceFile;
+use crate::rustc_complete::{self as hir, HashIgnoredAttrId};
+use crate::rustc_complete::SourceFile;
 use smallvec::SmallVec;
 
 use crate::ich::StableHashingContext;

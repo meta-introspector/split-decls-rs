@@ -3,8 +3,8 @@
 use cranelift_codegen::entity::EntityRef;
 use cranelift_codegen::ir::immediates::Offset32;
 use cranelift_frontend::Variable;
-use crate::rustc_middle::ty::FnSig;
-use crate::rustc_middle::ty::layout::HasTypingEnv;
+use crate::rustc_complete::ty::FnSig;
+use crate::rustc_complete::ty::layout::HasTypingEnv;
 
 use crate::prelude::*;
 

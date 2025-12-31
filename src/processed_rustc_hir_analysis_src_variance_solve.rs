@@ -5,8 +5,8 @@
 // optimal solution to the constraints. The final variance for each
 // inferred is then written into the `variance_map` in the tcx.
 
-use crate::rustc_hir::def_id::DefIdMap;
-use crate::rustc_middle::ty;
+use crate::rustc_complete::def_id::DefIdMap;
+use crate::rustc_complete::ty;
 use tracing::debug;
 
 use super::constraints::*;

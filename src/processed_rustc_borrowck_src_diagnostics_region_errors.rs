@@ -1,30 +1,30 @@
 // Error reporting machinery for lifetime errors.
 
 use crate::rustc_data_structures::fx::FxIndexSet;
-use rustc_errors::{Applicability, Diag, ErrorGuaranteed, MultiSpan};
+use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed, MultiSpan};
 use rustc_hir as hir;
-use crate::rustc_hir::GenericBound::Trait;
-use crate::rustc_hir::QPath::Resolved;
-use crate::rustc_hir::WherePredicateKind::BoundPredicate;
-use crate::rustc_hir::def::Res::Def;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::intravisit::VisitorExt;
-use crate::rustc_hir::{PolyTraitRef, TyKind, WhereBoundPredicate};
-use rustc_infer::infer::{NllRegionVariableOrigin, SubregionOrigin};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::hir::place::PlaceBase;
-use crate::rustc_middle::mir::{AnnotationSource, ConstraintCategory, ReturnConstraint};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::GenericBound::Trait;
+use crate::rustc_complete::QPath::Resolved;
+use crate::rustc_complete::WherePredicateKind::BoundPredicate;
+use crate::rustc_complete::def::Res::Def;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::intravisit::VisitorExt;
+use crate::rustc_complete::{PolyTraitRef, TyKind, WhereBoundPredicate};
+use crate::rustc_infer::infer::{NllRegionVariableOrigin, SubregionOrigin};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::hir::place::PlaceBase;
+use crate::rustc_complete::mir::{AnnotationSource, ConstraintCategory, ReturnConstraint};
+use crate::rustc_complete::ty::{
     self, GenericArgs, Region, RegionVid, Ty, TyCtxt, TypeFoldable, TypeVisitor, fold_regions,
 };
-use crate::rustc_span::{Ident, Span, kw};
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::error_reporting::infer::nice_region_error::{
+use crate::rustc_complete::{Ident, Span, kw};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::error_reporting::infer::nice_region_error::{
     self, HirTraitObjectVisitor, NiceRegionError, TraitObjectVisitor, find_anon_type,
     find_param_with_region, suggest_adding_lifetime_params,
 };
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits::{Obligation, ObligationCtxt};
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits::{Obligation, ObligationCtxt};
 use tracing::{debug, instrument, trace};
 
 use super::{OutlivesSuggestionBuilder, RegionName, RegionNameSource};

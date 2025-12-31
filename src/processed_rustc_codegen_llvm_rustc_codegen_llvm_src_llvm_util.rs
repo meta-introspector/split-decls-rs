@@ -12,9 +12,9 @@ use rustc_codegen_ssa::{TargetConfig, target_features};
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::small_c_str::SmallCStr;
 use rustc_fs_util::path_to_c_string;
-use crate::rustc_middle::bug;
-use crate::rustc_session::Session;
-use crate::rustc_session::config::{PrintKind, PrintRequest};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{PrintKind, PrintRequest};
 use rustc_target::spec::{MergeFunctions, PanicStrategy, SmallDataThresholdSupport};
 use smallvec::{SmallVec, smallvec};
 

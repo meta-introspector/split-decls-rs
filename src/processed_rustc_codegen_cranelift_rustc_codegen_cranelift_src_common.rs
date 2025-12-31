@@ -2,11 +2,11 @@ use cranelift_codegen::isa::TargetFrontendConfig;
 use cranelift_frontend::{FunctionBuilder, FunctionBuilderContext};
 use rustc_abi::{Float, Integer, Primitive};
 use rustc_index::IndexVec;
-use crate::rustc_middle::ty::TypeFoldable;
-use crate::rustc_middle::ty::layout::{
+use crate::rustc_complete::ty::TypeFoldable;
+use crate::rustc_complete::ty::layout::{
     self, FnAbiError, FnAbiOfHelpers, FnAbiRequest, LayoutError, LayoutOfHelpers,
 };
-use crate::rustc_span::source_map::Spanned;
+use crate::rustc_complete::source_map::Spanned;
 use rustc_target::callconv::FnAbi;
 use rustc_target::spec::{HasTargetSpec, Target};
 

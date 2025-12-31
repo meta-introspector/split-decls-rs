@@ -1,8 +1,8 @@
-use crate::rustc_ast::tokenstream::TokenStream;
-use crate::rustc_ast::{ExprKind, LitKind, UnOp};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{ExprKind, LitKind, UnOp};
 use rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
-use crate::rustc_session::errors::report_lit_error;
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::errors::report_lit_error;
+use crate::rustc_complete::Symbol;
 
 use crate::errors;
 use crate::util::get_exprs_from_tts;

@@ -3,9 +3,9 @@ use std::assert_matches::debug_assert_matches;
 use rustc_abi::IntegerType;
 use crate::rustc_data_structures::stable_hasher::StableHasher;
 use rustc_hashes::Hash128;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_middle::ty::{self, Instance, Ty, TyCtxt};
-use crate::rustc_span::symbol::{Symbol, sym};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt};
+use crate::rustc_complete::symbol::{Symbol, sym};
 
 trait AbiHashStable<'tcx> {
     fn abi_hash(&self, tcx: TyCtxt<'tcx>, hasher: &mut StableHasher);

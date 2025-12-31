@@ -8,7 +8,7 @@
 #[feature(try_blocks)]
 // tidy-alphabetical-end
 
-use crate::rustc_middle::ty;
+use crate::rustc_complete::ty;
 
 // Please change the public `use` directives cautiously, as they might be used by external tools.
 // See issue #120130.

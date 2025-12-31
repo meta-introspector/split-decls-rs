@@ -5,7 +5,7 @@
 // which have their own parser in `rustc_metadata`.)
 
 use rustc_feature::UnstableFeatures;
-use crate::rustc_hir::attrs::NativeLibKind;
+use crate::rustc_complete::attrs::NativeLibKind;
 
 use crate::EarlyDiagCtxt;
 use crate::config::UnstableOptions;

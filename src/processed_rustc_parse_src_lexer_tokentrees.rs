@@ -1,7 +1,7 @@
-use crate::rustc_ast::token::{self, Delimiter, Token};
-use crate::rustc_ast::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
+use crate::rustc_complete::token::{self, Delimiter, Token};
+use crate::rustc_complete::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
 use rustc_ast_pretty::pprust::token_to_string;
-use rustc_errors::Diag;
+use crate::rustc_complete::Diag;
 
 use super::diagnostics::{
     report_missing_open_delim, report_suspicious_mismatch_block, same_indentation_level,

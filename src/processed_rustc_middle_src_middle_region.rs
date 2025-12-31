@@ -11,9 +11,9 @@ use std::fmt;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hir as hir;
-use crate::rustc_hir::{HirId, HirIdMap, Node};
+use crate::rustc_complete::{HirId, HirIdMap, Node};
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::{DUMMY_SP, Span};
 use tracing::debug;
 
 use crate::mir::BackwardIncompatibleDropReason;

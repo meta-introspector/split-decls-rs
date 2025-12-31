@@ -29,10 +29,10 @@ use rustc_codegen_ssa::back::write::{CodegenContext, FatLtoInput};
 use rustc_codegen_ssa::traits::*;
 use rustc_codegen_ssa::{ModuleCodegen, ModuleKind, looks_like_rust_object_file};
 use crate::rustc_data_structures::memmap::Mmap;
-use rustc_errors::DiagCtxtHandle;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::dep_graph::WorkProduct;
-use crate::rustc_session::config::Lto;
+use crate::rustc_complete::DiagCtxtHandle;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::dep_graph::WorkProduct;
+use crate::rustc_complete::config::Lto;
 use rustc_target::spec::RelocModel;
 use tempfile::{TempDir, tempdir};
 

@@ -6,11 +6,11 @@
 use std::env;
 use std::env::VarError;
 
-use crate::rustc_ast::token::{self, LitKind};
-use crate::rustc_ast::tokenstream::TokenStream;
-use crate::rustc_ast::{ExprKind, GenericArg, Mutability};
+use crate::rustc_complete::token::{self, LitKind};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{ExprKind, GenericArg, Mutability};
 use rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
-use crate::rustc_span::{Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::{Ident, Span, Symbol, kw, sym};
 use thin_vec::thin_vec;
 
 use crate::errors;

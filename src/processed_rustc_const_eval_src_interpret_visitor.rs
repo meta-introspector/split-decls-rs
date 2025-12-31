@@ -5,8 +5,8 @@ use std::num::NonZero;
 
 use rustc_abi::{FieldIdx, FieldsShape, VariantIdx, Variants};
 use rustc_index::IndexVec;
-use crate::rustc_middle::mir::interpret::InterpResult;
-use crate::rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::mir::interpret::InterpResult;
+use crate::rustc_complete::ty::{self, Ty};
 use tracing::trace;
 
 use super::{InterpCx, MPlaceTy, Machine, Projectable, interp_ok, throw_inval};

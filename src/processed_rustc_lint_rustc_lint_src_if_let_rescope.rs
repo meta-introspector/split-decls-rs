@@ -2,19 +2,19 @@ use std::iter::repeat;
 use std::ops::ControlFlow;
 
 use hir::intravisit::{self, Visitor};
-use crate::rustc_ast::Recovered;
-use rustc_errors::{Applicability, Diag, EmissionGuarantee, Subdiagnostic, SuggestionStyle};
-use crate::rustc_hir::{self as hir, HirIdSet};
+use crate::rustc_complete::Recovered;
+use crate::rustc_complete::{Applicability, Diag, EmissionGuarantee, Subdiagnostic, SuggestionStyle};
+use crate::rustc_complete::{self as hir, HirIdSet};
 use rustc_macros::{LintDiagnostic, Subdiagnostic};
-use crate::rustc_middle::ty::adjustment::Adjust;
-use crate::rustc_middle::ty::significant_drop_order::{
+use crate::rustc_complete::ty::adjustment::Adjust;
+use crate::rustc_complete::ty::significant_drop_order::{
     extract_component_with_significant_dtor, ty_dtor_span,
 };
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_session::lint::{FutureIncompatibilityReason, LintId};
-use crate::rustc_session::{declare_lint, impl_lint_pass};
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::lint::{FutureIncompatibilityReason, LintId};
+use crate::rustc_complete::{declare_lint, impl_lint_pass};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{DUMMY_SP, Span};
 use smallvec::SmallVec;
 
 use crate::{LateContext, LateLintPass};

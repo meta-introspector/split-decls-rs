@@ -9,13 +9,13 @@ use std::{io, ops, str};
 
 use regex::Regex;
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::mir::{
+use crate::rustc_complete::mir::{
     self, BasicBlock, Body, Location, MirDumper, graphviz_safe_def_name, traversal,
 };
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_middle::ty::print::with_no_trimmed_paths;
-use crate::rustc_span::def_id::DefId;
-use crate::rustc_span::{Symbol, sym};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{Symbol, sym};
 use tracing::debug;
 use {rustc_ast as ast, rustc_graphviz as dot};
 

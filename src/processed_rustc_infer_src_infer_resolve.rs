@@ -1,5 +1,5 @@
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{
     self, Const, DelayedMap, FallibleTypeFolder, InferConst, Ty, TyCtxt, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeVisitableExt,
 };

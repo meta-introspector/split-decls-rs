@@ -1,6 +1,6 @@
-use crate::rustc_middle::mir::visit::{MutatingUseContext, PlaceContext, Visitor};
-use crate::rustc_middle::mir::{Body, Local, Location, Place};
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::visit::{MutatingUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::mir::{Body, Local, Location, Place};
+use crate::rustc_complete::ty::TyCtxt;
 use rustc_mir_dataflow::move_paths::{LookupResult, MoveData};
 use tracing::debug;
 

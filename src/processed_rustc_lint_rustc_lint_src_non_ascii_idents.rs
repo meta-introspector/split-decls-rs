@@ -1,8 +1,8 @@
 use rustc_ast as ast;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::unord::UnordMap;
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::Symbol;
 use unicode_security::general_security_profile::IdentifierType;
 
 use crate::lints::{
@@ -155,8 +155,8 @@ impl EarlyLintPass for NonAsciiIdents {
     fn check_crate(&mut self, cx: &EarlyContext<'_>, _: &ast::Crate) {
         use std::collections::BTreeMap;
 
-        use crate::rustc_session::lint::Level;
-        use crate::rustc_span::Span;
+        use crate::rustc_complete::lint::Level;
+        use crate::rustc_complete::Span;
         use unicode_security::GeneralSecurityProfile;
 
         let check_non_ascii_idents = cx.builder.lint_level(NON_ASCII_IDENTS).level != Level::Allow;

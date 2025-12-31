@@ -5,9 +5,9 @@ use std::cell::Cell;
 use std::mem;
 use std::sync::Arc;
 
-use crate::rustc_ast::{self as ast, Crate, NodeId, attr};
+use crate::rustc_complete::{self as ast, Crate, NodeId, attr};
 use rustc_ast_pretty::pprust;
-use rustc_errors::{Applicability, DiagCtxtHandle, StashKey};
+use crate::rustc_complete::{Applicability, DiagCtxtHandle, StashKey};
 use rustc_expand::base::{
     Annotatable, DeriveResolution, Indeterminate, ResolverExpand, SyntaxExtension,
     SyntaxExtensionKind,
@@ -16,22 +16,22 @@ use rustc_expand::compile_declarative_macro;
 use rustc_expand::expand::{
     AstFragment, AstFragmentKind, Invocation, InvocationKind, SupportsMacroExpansion,
 };
-use crate::rustc_hir::StabilityLevel;
-use crate::rustc_hir::attrs::{CfgEntry, StrippedCfgItem};
-use crate::rustc_hir::def::{self, DefKind, MacroKinds, Namespace, NonMacroAttrKind};
-use crate::rustc_hir::def_id::{CrateNum, DefId, LocalDefId};
-use crate::rustc_middle::middle::stability;
-use crate::rustc_middle::ty::{RegisteredTools, TyCtxt};
-use crate::rustc_session::lint::BuiltinLintDiag;
-use crate::rustc_session::lint::builtin::{
+use crate::rustc_complete::StabilityLevel;
+use crate::rustc_complete::attrs::{CfgEntry, StrippedCfgItem};
+use crate::rustc_complete::def::{self, DefKind, MacroKinds, Namespace, NonMacroAttrKind};
+use crate::rustc_complete::def_id::{CrateNum, DefId, LocalDefId};
+use crate::rustc_complete::middle::stability;
+use crate::rustc_complete::ty::{RegisteredTools, TyCtxt};
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::{
     LEGACY_DERIVE_HELPERS, OUT_OF_SCOPE_MACRO_CALLS, UNKNOWN_DIAGNOSTIC_ATTRIBUTES,
     UNUSED_MACRO_RULES, UNUSED_MACROS,
 };
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::edit_distance::find_best_match_for_name;
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::hygiene::{self, AstPass, ExpnData, ExpnKind, LocalExpnId, MacroKind};
-use crate::rustc_span::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::hygiene::{self, AstPass, ExpnData, ExpnKind, LocalExpnId, MacroKind};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
 
 use crate::Namespace::*;
 use crate::errors::{

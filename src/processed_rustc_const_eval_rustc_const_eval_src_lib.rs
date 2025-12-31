@@ -21,8 +21,8 @@
 
 use std::sync::atomic::AtomicBool;
 
-use crate::rustc_middle::ty;
-use crate::rustc_middle::util::Providers;
+use crate::rustc_complete::ty;
+use crate::rustc_complete::util::Providers;
 
 pub use self::errors::ReportErrorExt;
 

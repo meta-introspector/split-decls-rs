@@ -1,9 +1,9 @@
 use std::collections::VecDeque;
 
 use crate::rustc_data_structures::fx::FxIndexSet;
-use crate::rustc_middle::mir::visit::{PlaceContext, Visitor};
-use crate::rustc_middle::mir::{self, Body, Local, Location};
-use crate::rustc_middle::ty::{RegionVid, TyCtxt};
+use crate::rustc_complete::mir::visit::{PlaceContext, Visitor};
+use crate::rustc_complete::mir::{self, Body, Local, Location};
+use crate::rustc_complete::ty::{RegionVid, TyCtxt};
 
 use crate::def_use::{self, DefUse};
 use crate::region_infer::{Cause, RegionInferenceContext};

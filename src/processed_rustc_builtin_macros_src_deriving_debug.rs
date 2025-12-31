@@ -1,7 +1,7 @@
-use crate::rustc_ast::{self as ast, EnumDef, MetaItem};
+use crate::rustc_complete::{self as ast, EnumDef, MetaItem};
 use rustc_expand::base::{Annotatable, ExtCtxt};
-use crate::rustc_session::config::FmtDebug;
-use crate::rustc_span::{Ident, Span, Symbol, sym};
+use crate::rustc_complete::config::FmtDebug;
+use crate::rustc_complete::{Ident, Span, Symbol, sym};
 use thin_vec::{ThinVec, thin_vec};
 
 use crate::deriving::generic::ty::*;

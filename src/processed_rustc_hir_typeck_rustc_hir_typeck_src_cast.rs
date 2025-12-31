@@ -28,23 +28,23 @@
 // expression, `e as U2` is not necessarily so (in fact it will only be valid if
 // `U1` coerces to `U2`).
 
-use crate::rustc_ast::util::parser::ExprPrecedence;
+use crate::rustc_complete::util::parser::ExprPrecedence;
 use crate::rustc_data_structures::fx::FxHashSet;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, Diag, ErrorGuaranteed};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::{self as hir, ExprKind};
-use rustc_infer::infer::DefineOpaqueTypes;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, ExprKind};
+use crate::rustc_infer::infer::DefineOpaqueTypes;
 use rustc_macros::{TypeFoldable, TypeVisitable};
-use crate::rustc_middle::mir::Mutability;
-use crate::rustc_middle::ty::adjustment::AllowTwoPhase;
-use crate::rustc_middle::ty::cast::{CastKind, CastTy};
-use crate::rustc_middle::ty::error::TypeError;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, TypeAndMut, TypeVisitableExt, VariantDef, elaborate};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::lint;
-use crate::rustc_span::{DUMMY_SP, Span, sym};
-use rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_complete::mir::Mutability;
+use crate::rustc_complete::ty::adjustment::AllowTwoPhase;
+use crate::rustc_complete::ty::cast::{CastKind, CastTy};
+use crate::rustc_complete::ty::error::TypeError;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeAndMut, TypeVisitableExt, VariantDef, elaborate};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::{DUMMY_SP, Span, sym};
+use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::{debug, instrument};
 
 use super::FnCtxt;
@@ -730,8 +730,8 @@ impl<'a, 'tcx> CastCheck<'tcx> {
     /// can return Ok and create type errors in the fcx rather than returning
     /// directly. coercion-cast is handled in check instead of here.
     fn do_check(&self, fcx: &FnCtxt<'a, 'tcx>) -> Result<CastKind, CastError<'tcx>> {
-        use crate::rustc_middle::ty::cast::CastTy::*;
-        use crate::rustc_middle::ty::cast::IntTy::*;
+        use crate::rustc_complete::ty::cast::CastTy::*;
+        use crate::rustc_complete::ty::cast::IntTy::*;
 
         let (t_from, t_cast) = match (CastTy::from_ty(self.expr_ty), CastTy::from_ty(self.cast_ty))
         {

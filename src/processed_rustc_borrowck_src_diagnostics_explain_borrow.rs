@@ -5,20 +5,20 @@
 
 use std::assert_matches::assert_matches;
 
-use rustc_errors::{Applicability, Diag, EmissionGuarantee};
+use crate::rustc_complete::{Applicability, Diag, EmissionGuarantee};
 use rustc_hir as hir;
-use crate::rustc_hir::intravisit::Visitor;
-use rustc_infer::infer::NllRegionVariableOrigin;
-use crate::rustc_middle::middle::resolve_bound_vars::ObjectLifetimeDefault;
-use crate::rustc_middle::mir::{
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_infer::infer::NllRegionVariableOrigin;
+use crate::rustc_complete::middle::resolve_bound_vars::ObjectLifetimeDefault;
+use crate::rustc_complete::mir::{
     Body, CallSource, CastKind, ConstraintCategory, FakeReadCause, Local, LocalInfo, Location,
     Operand, Place, Rvalue, Statement, StatementKind, TerminatorKind,
 };
-use crate::rustc_middle::ty::adjustment::PointerCoercion;
-use crate::rustc_middle::ty::{self, RegionVid, Ty, TyCtxt};
-use crate::rustc_span::{DesugaringKind, Span, kw, sym};
-use rustc_trait_selection::error_reporting::traits::FindExprBySpan;
-use rustc_trait_selection::error_reporting::traits::call_kind::CallKind;
+use crate::rustc_complete::ty::adjustment::PointerCoercion;
+use crate::rustc_complete::ty::{self, RegionVid, Ty, TyCtxt};
+use crate::rustc_complete::{DesugaringKind, Span, kw, sym};
+use crate::rustc_trait_selection::error_reporting::traits::FindExprBySpan;
+use crate::rustc_trait_selection::error_reporting::traits::call_kind::CallKind;
 use tracing::{debug, instrument};
 
 use super::{RegionName, UseSpans, find_use};

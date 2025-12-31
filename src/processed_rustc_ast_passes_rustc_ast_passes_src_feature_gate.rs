@@ -1,11 +1,11 @@
 use rustc_ast as ast;
-use crate::rustc_ast::visit::{self, AssocCtxt, FnCtxt, FnKind, Visitor};
-use crate::rustc_ast::{NodeId, PatKind, attr, token};
+use crate::rustc_complete::visit::{self, AssocCtxt, FnCtxt, FnKind, Visitor};
+use crate::rustc_complete::{NodeId, PatKind, attr, token};
 use rustc_feature::{AttributeGate, BUILTIN_ATTRIBUTE_MAP, BuiltinAttribute, Features};
-use crate::rustc_session::Session;
-use crate::rustc_session::parse::{feature_err, feature_warn};
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::parse::{feature_err, feature_warn};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Span, Symbol, sym};
 use thin_vec::ThinVec;
 
 use crate::errors;

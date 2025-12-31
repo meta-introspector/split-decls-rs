@@ -9,11 +9,11 @@ use synstructure::Structure;
 ///
 /// ```ignore (rust)
 /// # extern crate rustc_errors;
-/// # use rustc_errors::Applicability;
+/// # use crate::rustc_complete::Applicability;
 /// # extern crate rustc_span;
-/// # use crate::rustc_span::{Ident, Span};
+/// # use crate::rustc_complete::{Ident, Span};
 /// # extern crate rust_middle;
-/// # use crate::rustc_middle::ty::Ty;
+/// # use crate::rustc_complete::ty::Ty;
 /// #[derive(Diagnostic)]
 /// #[diag(borrowck_move_out_of_borrow, code = E0505)]
 /// pub struct MoveOutOfBorrowError<'tcx> {

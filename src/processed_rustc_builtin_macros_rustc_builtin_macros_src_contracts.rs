@@ -1,9 +1,9 @@
-use crate::rustc_ast::token;
-use crate::rustc_ast::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
-use rustc_errors::ErrorGuaranteed;
+use crate::rustc_complete::token;
+use crate::rustc_complete::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
+use crate::rustc_complete::ErrorGuaranteed;
 use rustc_expand::base::{AttrProcMacro, ExtCtxt};
-use crate::rustc_span::Span;
-use crate::rustc_span::symbol::{Ident, Symbol, kw};
+use crate::rustc_complete::Span;
+use crate::rustc_complete::symbol::{Ident, Symbol, kw};
 
 pub(crate) struct ExpandRequires;
 

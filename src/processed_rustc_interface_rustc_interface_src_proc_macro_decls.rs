@@ -1,8 +1,8 @@
-use crate::rustc_ast::attr;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_span::sym;
+use crate::rustc_complete::attr;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::sym;
 
 fn proc_macro_decls_static(tcx: TyCtxt<'_>, (): ()) -> Option<LocalDefId> {
     let mut decls = None;

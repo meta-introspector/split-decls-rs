@@ -1,7 +1,7 @@
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::unord::UnordSet;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_span::Span;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::Span;
 use smallvec::{SmallVec, smallvec};
 use tracing::{debug, instrument};
 

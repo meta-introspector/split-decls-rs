@@ -1,14 +1,14 @@
 use hir::HirId;
 use rustc_abi::Primitive::Pointer;
 use rustc_abi::VariantIdx;
-use rustc_errors::codes::*;
-use rustc_errors::struct_span_code_err;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::struct_span_code_err;
 use rustc_hir as hir;
 use rustc_index::Idx;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::layout::{LayoutError, SizeSkeleton};
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::{LayoutError, SizeSkeleton};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::def_id::LocalDefId;
 use tracing::trace;
 
 /// If the type is `Option<T>`, it will return `T`, otherwise

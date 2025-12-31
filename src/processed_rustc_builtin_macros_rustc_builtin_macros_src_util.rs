@@ -1,15 +1,15 @@
-use crate::rustc_ast::tokenstream::TokenStream;
-use crate::rustc_ast::{self as ast, AttrStyle, Attribute, MetaItem, attr, token};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{self as ast, AttrStyle, Attribute, MetaItem, attr, token};
 use rustc_attr_parsing::validate_attr;
-use rustc_errors::{Applicability, Diag, ErrorGuaranteed};
+use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed};
 use rustc_expand::base::{Annotatable, ExpandResult, ExtCtxt};
 use rustc_expand::expand::AstFragment;
 use rustc_feature::AttributeTemplate;
 use rustc_lint_defs::BuiltinLintDiag;
 use rustc_lint_defs::builtin::DUPLICATE_MACRO_ATTRIBUTES;
 use rustc_parse::{exp, parser};
-use crate::rustc_session::errors::report_lit_error;
-use crate::rustc_span::{BytePos, Span, Symbol};
+use crate::rustc_complete::errors::report_lit_error;
+use crate::rustc_complete::{BytePos, Span, Symbol};
 
 use crate::errors;
 

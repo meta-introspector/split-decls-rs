@@ -4,7 +4,7 @@
 // and use that to decide when one free region outlives another, and so forth.
 
 use crate::rustc_data_structures::transitive_relation::TransitiveRelation;
-use crate::rustc_middle::ty::{Region, TyCtxt};
+use crate::rustc_complete::ty::{Region, TyCtxt};
 use tracing::debug;
 
 /// Combines a `FreeRegionMap` and a `TyCtxt`.

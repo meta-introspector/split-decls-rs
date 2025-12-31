@@ -3,9 +3,9 @@
 use std::fs::File;
 use std::io;
 
-use crate::rustc_middle::mir::{Body, write_mir_pretty};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::config::{OutFileName, OutputType};
+use crate::rustc_complete::mir::{Body, write_mir_pretty};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::{OutFileName, OutputType};
 
 pub(super) struct Marker(pub &'static str);
 

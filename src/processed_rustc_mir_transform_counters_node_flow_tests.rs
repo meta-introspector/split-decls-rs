@@ -2,7 +2,7 @@ use itertools::Itertools;
 use crate::rustc_data_structures::graph;
 use crate::rustc_data_structures::graph::vec_graph::VecGraph;
 use rustc_index::Idx;
-use crate::rustc_middle::mir::coverage::Op;
+use crate::rustc_complete::mir::coverage::Op;
 
 use crate::coverage::counters::node_flow::{
     CounterTerm, NodeCounters, NodeFlowData, make_node_counters, node_flow_data_for_balanced_graph,

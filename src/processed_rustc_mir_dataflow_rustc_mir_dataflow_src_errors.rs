@@ -1,5 +1,5 @@
 use rustc_macros::Diagnostic;
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 
 #[derive(Diagnostic)]
 #[diag(mir_dataflow_path_must_end_in_filename)]

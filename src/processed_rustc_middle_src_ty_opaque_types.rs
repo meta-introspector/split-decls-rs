@@ -1,6 +1,6 @@
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_span::Span;
-use crate::rustc_span::def_id::DefId;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::DefId;
 use tracing::{debug, instrument, trace};
 
 use crate::error::ConstNotUsedTraitAlias;

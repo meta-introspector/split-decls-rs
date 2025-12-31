@@ -1,6 +1,6 @@
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{self, TyCtxt};
-use crate::rustc_span::sym;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, TyCtxt};
+use crate::rustc_complete::sym;
 
 pub(crate) fn inferred_outlives(tcx: TyCtxt<'_>) {
     for id in tcx.hir_free_items() {

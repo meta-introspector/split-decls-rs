@@ -1,11 +1,11 @@
 use std::fmt::{self, Debug, Display, Formatter};
 
 use rustc_abi::{HasDataLayout, Size};
-use crate::rustc_hir::def_id::DefId;
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, Lift, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-use crate::rustc_session::RemapFileNameExt;
-use crate::rustc_session::config::RemapPathScopeComponents;
-use crate::rustc_span::{DUMMY_SP, Span, Symbol};
+use crate::rustc_complete::RemapFileNameExt;
+use crate::rustc_complete::config::RemapPathScopeComponents;
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
 use rustc_type_ir::TypeVisitableExt;
 
 use super::interpret::ReportedErrorInfo;

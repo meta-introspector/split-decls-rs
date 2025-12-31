@@ -1,6 +1,6 @@
-use crate::rustc_ast::{MetaItemInner, MetaItemKind, MetaItemLit};
+use crate::rustc_complete::{MetaItemInner, MetaItemKind, MetaItemLit};
 use rustc_parse_format::{ParseMode, Parser, Piece, Position};
-use crate::rustc_span::{DesugaringKind, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::{DesugaringKind, Ident, Span, Symbol, kw, sym};
 
 use crate::errors::InvalidOnClause;
 
@@ -294,7 +294,7 @@ pub(crate) struct ConditionOptions {
     pub(crate) self_types: Vec<String>,
     // The kind of compiler desugaring.
     pub(crate) from_desugaring: Option<DesugaringKind>,
-    /// Match on a variant of [rustc_infer::traits::ObligationCauseCode].
+    /// Match on a variant of [crate::rustc_infer::traits::ObligationCauseCode].
     pub(crate) cause: Option<String>,
     pub(crate) crate_local: bool,
     /// Is the obligation "directly" user-specified, rather than derived?

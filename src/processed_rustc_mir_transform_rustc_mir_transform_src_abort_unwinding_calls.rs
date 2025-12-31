@@ -1,8 +1,8 @@
 use rustc_abi::ExternAbi;
-use crate::rustc_ast::InlineAsmOptions;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::{self, TyCtxt, layout};
+use crate::rustc_complete::InlineAsmOptions;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{self, TyCtxt, layout};
 use rustc_target::spec::PanicStrategy;
 
 /// A pass that runs which is targeted at ensuring that codegen guarantees about

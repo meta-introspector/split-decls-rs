@@ -1,11 +1,11 @@
 // Migration code for the `expr_fragment_specifier_2024` rule.
 
-use crate::rustc_ast::token::{Token, TokenKind};
-use crate::rustc_ast::tokenstream::{TokenStream, TokenTree};
-use crate::rustc_session::lint::FutureIncompatibilityReason;
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::sym;
+use crate::rustc_complete::token::{Token, TokenKind};
+use crate::rustc_complete::tokenstream::{TokenStream, TokenTree};
+use crate::rustc_complete::lint::FutureIncompatibilityReason;
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::sym;
 use tracing::debug;
 
 use crate::EarlyLintPass;

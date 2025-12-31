@@ -1,5 +1,5 @@
-use crate::rustc_ast::{self as ast, AsmMacro};
-use crate::rustc_span::{Span, Symbol, kw};
+use crate::rustc_complete::{self as ast, AsmMacro};
+use crate::rustc_complete::{Span, Symbol, kw};
 
 use super::{ExpKeywordPair, ForceCollect, IdentIsRaw, Trailing, UsePreAttrPos};
 use crate::{PResult, Parser, errors, exp, token};

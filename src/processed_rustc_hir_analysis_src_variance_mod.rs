@@ -6,10 +6,10 @@
 use itertools::Itertools;
 use rustc_arena::DroplessArena;
 use rustc_hir as hir;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{
     self, CrateVariancesMap, GenericArgsRef, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
 };
 use tracing::{debug, instrument};

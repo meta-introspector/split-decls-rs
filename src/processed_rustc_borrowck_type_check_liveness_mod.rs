@@ -1,10 +1,10 @@
 use itertools::{Either, Itertools};
 use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_middle::mir::visit::{TyContext, Visitor};
-use crate::rustc_middle::mir::{Body, Local, Location, SourceInfo};
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::relate::Relate;
-use crate::rustc_middle::ty::{GenericArgsRef, Region, RegionVid, Ty, TyCtxt, TypeVisitable};
+use crate::rustc_complete::mir::visit::{TyContext, Visitor};
+use crate::rustc_complete::mir::{Body, Local, Location, SourceInfo};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::relate::Relate;
+use crate::rustc_complete::ty::{GenericArgsRef, Region, RegionVid, Ty, TyCtxt, TypeVisitable};
 use rustc_mir_dataflow::move_paths::MoveData;
 use rustc_mir_dataflow::points::DenseLocationMap;
 use tracing::debug;

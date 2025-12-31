@@ -1,16 +1,16 @@
 use std::io::Error;
 use std::path::{Path, PathBuf};
 
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, DiagSymbolList, Diagnostic, EmissionGuarantee, Level,
     MultiSpan, Subdiagnostic,
 };
-use crate::rustc_hir::Target;
-use crate::rustc_hir::attrs::{MirDialect, MirPhase};
+use crate::rustc_complete::Target;
+use crate::rustc_complete::attrs::{MirDialect, MirPhase};
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-use crate::rustc_middle::ty::{MainDefinition, Ty};
-use crate::rustc_span::{DUMMY_SP, Span, Symbol};
+use crate::rustc_complete::ty::{MainDefinition, Ty};
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
 
 use crate::check_attr::ProcMacroKind;
 use crate::fluent_generated as fluent;

@@ -1,9 +1,9 @@
 // Attributes that are only used on function prototypes.
 
 use rustc_feature::{AttributeTemplate, template};
-use crate::rustc_hir::Target;
-use crate::rustc_hir::attrs::{AttributeKind, MirDialect, MirPhase};
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::Target;
+use crate::rustc_complete::attrs::{AttributeKind, MirDialect, MirPhase};
+use crate::rustc_complete::{Span, Symbol, sym};
 
 use super::{AttributeOrder, OnDuplicate};
 use crate::attributes::SingleAttributeParser;

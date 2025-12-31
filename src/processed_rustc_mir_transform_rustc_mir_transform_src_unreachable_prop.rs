@@ -4,10 +4,10 @@
 
 use rustc_abi::Size;
 use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::interpret::Scalar;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::interpret::Scalar;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, TyCtxt};
 
 use crate::patch::MirPatch;
 

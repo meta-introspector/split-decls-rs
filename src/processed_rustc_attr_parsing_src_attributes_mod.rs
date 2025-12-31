@@ -21,8 +21,8 @@
 use std::marker::PhantomData;
 
 use rustc_feature::{AttributeTemplate, AttributeType, template};
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::{Span, Symbol};
 use thin_vec::ThinVec;
 
 use crate::context::{AcceptContext, FinalizeContext, Stage};

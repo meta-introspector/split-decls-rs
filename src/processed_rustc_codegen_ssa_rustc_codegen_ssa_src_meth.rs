@@ -1,6 +1,6 @@
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{self, GenericArgKind, Ty, TyCtxt};
-use crate::rustc_session::config::Lto;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, GenericArgKind, Ty, TyCtxt};
+use crate::rustc_complete::config::Lto;
 use rustc_symbol_mangling::typeid_for_trait_ref;
 use rustc_target::callconv::FnAbi;
 use tracing::{debug, instrument};

@@ -1,8 +1,8 @@
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::Res;
-use crate::rustc_hir::{self as hir, AmbigArg, GenericArg, PathSegment, QPath, TyKind, find_attr};
-use crate::rustc_middle::ty;
-use crate::rustc_session::{declare_lint_pass, declare_tool_lint};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::Res;
+use crate::rustc_complete::{self as hir, AmbigArg, GenericArg, PathSegment, QPath, TyKind, find_attr};
+use crate::rustc_complete::ty;
+use crate::rustc_complete::{declare_lint_pass, declare_tool_lint};
 
 use crate::lints::PassByValueDiag;
 use crate::{LateContext, LateLintPass, LintContext};

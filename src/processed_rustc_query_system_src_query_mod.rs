@@ -14,12 +14,12 @@ pub use self::caches::{DefIdCache, DefaultCache, QueryCache, SingleCache, VecCac
 
 use crate::rustc_data_structures::jobserver::Proxy;
 use crate::rustc_data_structures::sync::{DynSend, DynSync};
-use rustc_errors::DiagInner;
+use crate::rustc_complete::DiagInner;
 use rustc_hashes::Hash64;
-use crate::rustc_hir::def::DefKind;
+use crate::rustc_complete::def::DefKind;
 use rustc_macros::{Decodable, Encodable};
-use crate::rustc_span::Span;
-use crate::rustc_span::def_id::DefId;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::DefId;
 
 pub use self::config::{HashResult, QueryConfig};
 use crate::dep_graph::{DepKind, DepNodeIndex, HasDepContext, SerializedDepNodeIndex};

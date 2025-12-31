@@ -7,20 +7,20 @@ mod llvm_enzyme {
     use std::str::FromStr;
     use std::string::String;
 
-    use crate::rustc_ast::expand::autodiff_attrs::{
+    use crate::rustc_complete::expand::autodiff_attrs::{
         AutoDiffAttrs, DiffActivity, DiffMode, valid_input_activity, valid_ret_activity,
         valid_ty_for_activity,
     };
-    use crate::rustc_ast::token::{Lit, LitKind, Token, TokenKind};
-    use crate::rustc_ast::tokenstream::*;
-    use crate::rustc_ast::visit::AssocCtxt::*;
-    use crate::rustc_ast::{
+    use crate::rustc_complete::token::{Lit, LitKind, Token, TokenKind};
+    use crate::rustc_complete::tokenstream::*;
+    use crate::rustc_complete::visit::AssocCtxt::*;
+    use crate::rustc_complete::{
         self as ast, AngleBracketedArg, AngleBracketedArgs, AnonConst, AssocItemKind, BindingMode,
         FnRetTy, FnSig, GenericArg, GenericArgs, GenericParamKind, Generics, ItemKind,
         MetaItemInner, PatKind, Path, PathSegment, TyKind, Visibility,
     };
     use rustc_expand::base::{Annotatable, ExtCtxt};
-    use crate::rustc_span::{Ident, Span, Symbol, sym};
+    use crate::rustc_complete::{Ident, Span, Symbol, sym};
     use thin_vec::{ThinVec, thin_vec};
     use tracing::{debug, trace};
 

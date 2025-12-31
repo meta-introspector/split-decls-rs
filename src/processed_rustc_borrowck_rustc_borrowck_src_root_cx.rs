@@ -3,10 +3,10 @@ use std::rc::Rc;
 
 use rustc_abi::FieldIdx;
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap};
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_middle::mir::ConstraintCategory;
-use crate::rustc_middle::ty::{self, TyCtxt};
-use crate::rustc_span::ErrorGuaranteed;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::mir::ConstraintCategory;
+use crate::rustc_complete::ty::{self, TyCtxt};
+use crate::rustc_complete::ErrorGuaranteed;
 use smallvec::SmallVec;
 
 use crate::consumers::BorrowckConsumer;

@@ -1,6 +1,6 @@
 use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_middle::mir::{Body, Location, Statement, StatementKind, Terminator, TerminatorKind};
-use crate::rustc_middle::ty::{TyCtxt, TypeVisitable};
+use crate::rustc_complete::mir::{Body, Location, Statement, StatementKind, Terminator, TerminatorKind};
+use crate::rustc_complete::ty::{TyCtxt, TypeVisitable};
 use rustc_mir_dataflow::points::PointIndex;
 
 use super::{LocalizedOutlivesConstraint, LocalizedOutlivesConstraintSet};

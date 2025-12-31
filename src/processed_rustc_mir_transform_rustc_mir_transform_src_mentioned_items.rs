@@ -1,9 +1,9 @@
-use crate::rustc_middle::mir::visit::Visitor;
-use crate::rustc_middle::mir::{self, Location, MentionedItem};
-use crate::rustc_middle::ty::adjustment::PointerCoercion;
-use crate::rustc_middle::ty::{self, TyCtxt};
-use crate::rustc_session::Session;
-use crate::rustc_span::source_map::Spanned;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::{self, Location, MentionedItem};
+use crate::rustc_complete::ty::adjustment::PointerCoercion;
+use crate::rustc_complete::ty::{self, TyCtxt};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::source_map::Spanned;
 
 pub(super) struct MentionedItems;
 

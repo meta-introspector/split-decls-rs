@@ -1,10 +1,10 @@
 // Error Reporting for Anonymous Region Lifetime Errors
 // where both the regions are anonymous.
 
-use rustc_errors::{Diag, ErrorGuaranteed, Subdiagnostic};
-use crate::rustc_hir::Ty;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_middle::ty::{Region, TyCtxt};
+use crate::rustc_complete::{Diag, ErrorGuaranteed, Subdiagnostic};
+use crate::rustc_complete::Ty;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::ty::{Region, TyCtxt};
 use tracing::debug;
 
 use crate::error_reporting::infer::nice_region_error::NiceRegionError;

@@ -1,8 +1,8 @@
 use crate::rustc_data_structures::fx::FxIndexMap;
-use rustc_errors::ErrorGuaranteed;
-use crate::rustc_hir::def_id::{DefId, DefIdMap};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def_id::{DefId, DefIdMap};
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-use crate::rustc_span::sym;
+use crate::rustc_complete::sym;
 
 use crate::error::StrictCoherenceNeedsNegativeCoherence;
 use crate::ty::fast_reject::SimplifiedType;

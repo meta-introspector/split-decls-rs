@@ -1,4 +1,4 @@
-use crate::rustc_ast::tokenstream::TokenStream;
+use crate::rustc_complete::tokenstream::TokenStream;
 use rustc_ast_pretty::pprust;
 use rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
 

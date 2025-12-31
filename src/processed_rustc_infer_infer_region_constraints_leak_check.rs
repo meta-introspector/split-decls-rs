@@ -2,8 +2,8 @@ use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::graph::scc::Sccs;
 use crate::rustc_data_structures::graph::vec_graph::VecGraph;
 use rustc_index::Idx;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::error::TypeError;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::error::TypeError;
 use tracing::{debug, instrument};
 
 use super::*;

@@ -2,9 +2,9 @@ use std::cmp;
 use std::marker::PhantomData;
 
 use crate::rustc_data_structures::unify::{NoError, UnifyKey, UnifyValue};
-use crate::rustc_middle::{bug, ty};
-use crate::rustc_span::Span;
-use crate::rustc_span::def_id::DefId;
+use crate::rustc_complete::{bug, ty};
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::DefId;
 
 #[derive(Copy, Clone, Debug)]
 pub(crate) enum RegionVariableValue<'tcx> {

@@ -5,15 +5,15 @@
 // This is necessary for `Drop` and negative impls to be well-formed.
 
 use crate::rustc_data_structures::fx::FxHashSet;
-use rustc_errors::codes::*;
-use rustc_errors::{ErrorGuaranteed, struct_span_code_err};
-use rustc_infer::infer::{RegionResolutionError, TyCtxtInferExt};
-use rustc_infer::traits::{ObligationCause, ObligationCauseCode};
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::util::CheckRegions;
-use crate::rustc_middle::ty::{self, GenericArgsRef, Ty, TyCtxt, TypingMode};
-use rustc_trait_selection::regions::InferCtxtRegionExt;
-use rustc_trait_selection::traits::{self, ObligationCtxt};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{ErrorGuaranteed, struct_span_code_err};
+use crate::rustc_infer::infer::{RegionResolutionError, TyCtxtInferExt};
+use crate::rustc_infer::traits::{ObligationCause, ObligationCauseCode};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::util::CheckRegions;
+use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, TypingMode};
+use crate::rustc_trait_selection::regions::InferCtxtRegionExt;
+use crate::rustc_trait_selection::traits::{self, ObligationCtxt};
 
 use crate::errors;
 use crate::hir::def_id::{DefId, LocalDefId};

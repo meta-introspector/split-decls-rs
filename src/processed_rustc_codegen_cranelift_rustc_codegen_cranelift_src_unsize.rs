@@ -3,8 +3,8 @@
 // [`PointerCoercion::Unsize`]: `crate::rustc_middle::ty::adjustment::PointerCoercion::Unsize`
 
 use rustc_codegen_ssa::base::validate_trivial_unsize;
-use crate::rustc_middle::ty::layout::HasTypingEnv;
-use crate::rustc_middle::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
+use crate::rustc_complete::ty::layout::HasTypingEnv;
+use crate::rustc_complete::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
 
 use crate::base::codegen_panic_nounwind;
 use crate::prelude::*;

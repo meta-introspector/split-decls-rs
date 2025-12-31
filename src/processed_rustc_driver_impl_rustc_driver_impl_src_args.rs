@@ -1,6 +1,6 @@
 use std::{env, error, fmt, fs, io};
 
-use crate::rustc_session::EarlyDiagCtxt;
+use crate::rustc_complete::EarlyDiagCtxt;
 
 /// Expands argfiles in command line arguments.
 #[derive(Default)]

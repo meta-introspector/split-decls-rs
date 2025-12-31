@@ -1,8 +1,8 @@
-use rustc_errors::MultiSpan;
+use crate::rustc_complete::MultiSpan;
 use rustc_hir as hir;
-use crate::rustc_middle::ty;
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::{Symbol, sym};
+use crate::rustc_complete::ty;
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::{Symbol, sym};
 
 use crate::lints::{NonBindingLet, NonBindingLetSub};
 use crate::{LateContext, LateLintPass, LintContext};

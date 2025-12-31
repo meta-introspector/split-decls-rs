@@ -10,7 +10,7 @@ use gccjit::{
 use rustc_abi::{CanonAbi, Endian, ExternAbi};
 use rustc_codegen_ssa::common::{IntPredicate, TypeKind};
 use rustc_codegen_ssa::traits::{BackendTypes, BaseTypeCodegenMethods, BuilderMethods, OverflowOp};
-use crate::rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::ty::{self, Ty};
 use rustc_target::callconv::{ArgAbi, ArgAttributes, FnAbi, PassMode};
 use rustc_type_ir::{Interner, TyKind};
 
@@ -274,9 +274,9 @@ impl<'a, 'gcc, 'tcx> Builder<'a, 'gcc, 'tcx> {
         lhs: <Self as BackendTypes>::Value,
         rhs: <Self as BackendTypes>::Value,
     ) -> (<Self as BackendTypes>::Value, <Self as BackendTypes>::Value) {
-        use crate::rustc_middle::ty::IntTy::*;
-        use crate::rustc_middle::ty::UintTy::*;
-        use crate::rustc_middle::ty::{Int, Uint};
+        use crate::rustc_complete::ty::IntTy::*;
+        use crate::rustc_complete::ty::UintTy::*;
+        use crate::rustc_complete::ty::{Int, Uint};
 
         let new_kind = match *typ.kind() {
             Int(t @ Isize) => Int(t.normalize(self.tcx.sess.target.pointer_width)),
@@ -1080,9 +1080,9 @@ impl<'gcc, 'tcx> CodegenCx<'gcc, 'tcx> {
 }
 
 fn type_kind_to_gcc_type<I: Interner>(kind: TyKind<I>) -> CType {
-    use crate::rustc_middle::ty::IntTy::*;
-    use crate::rustc_middle::ty::UintTy::*;
-    use crate::rustc_middle::ty::{Int, Uint};
+    use crate::rustc_complete::ty::IntTy::*;
+    use crate::rustc_complete::ty::UintTy::*;
+    use crate::rustc_complete::ty::{Int, Uint};
 
     match kind {
         Int(I8) => CType::Int8t,

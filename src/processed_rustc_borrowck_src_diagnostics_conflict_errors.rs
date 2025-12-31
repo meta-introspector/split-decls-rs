@@ -9,35 +9,35 @@ use std::ops::ControlFlow;
 use either::Either;
 use hir::{ClosureKind, Path};
 use crate::rustc_data_structures::fx::FxIndexSet;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, Diag, MultiSpan, struct_span_code_err};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, Diag, MultiSpan, struct_span_code_err};
 use rustc_hir as hir;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::intravisit::{Visitor, walk_block, walk_expr};
-use crate::rustc_hir::{CoroutineDesugaring, CoroutineKind, CoroutineSource, LangItem, PatField};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::hir::nested_filter::OnlyBodies;
-use crate::rustc_middle::mir::{
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::intravisit::{Visitor, walk_block, walk_expr};
+use crate::rustc_complete::{CoroutineDesugaring, CoroutineKind, CoroutineSource, LangItem, PatField};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::hir::nested_filter::OnlyBodies;
+use crate::rustc_complete::mir::{
     self, AggregateKind, BindingForm, BorrowKind, ClearCrossCrate, ConstraintCategory,
     FakeBorrowKind, FakeReadCause, LocalDecl, LocalInfo, LocalKind, Location, MutBorrowKind,
     Operand, Place, PlaceRef, PlaceTy, ProjectionElem, Rvalue, Statement, StatementKind,
     Terminator, TerminatorKind, VarBindingForm, VarDebugInfoContents,
 };
-use crate::rustc_middle::ty::print::PrintTraitRefExt as _;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::print::PrintTraitRefExt as _;
+use crate::rustc_complete::ty::{
     self, PredicateKind, Ty, TyCtxt, TypeSuperVisitable, TypeVisitor, Upcast,
     suggest_constraining_type_params,
 };
 use rustc_mir_dataflow::move_paths::{InitKind, MoveOutIndex, MovePathIndex};
-use crate::rustc_span::def_id::{DefId, LocalDefId};
-use crate::rustc_span::hygiene::DesugaringKind;
-use crate::rustc_span::{BytePos, Ident, Span, Symbol, kw, sym};
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::error_reporting::traits::FindExprBySpan;
-use rustc_trait_selection::error_reporting::traits::call_kind::CallKind;
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
-use rustc_trait_selection::traits::{
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::hygiene::DesugaringKind;
+use crate::rustc_complete::{BytePos, Ident, Span, Symbol, kw, sym};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::error_reporting::traits::FindExprBySpan;
+use crate::rustc_trait_selection::error_reporting::traits::call_kind::CallKind;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
+use crate::rustc_trait_selection::traits::{
     Obligation, ObligationCause, ObligationCtxt, supertrait_def_ids,
 };
 use tracing::{debug, instrument};
@@ -3987,7 +3987,7 @@ impl<'infcx, 'tcx> MirBorrowckCtxt<'_, 'infcx, 'tcx> {
 
     /// Describe the reason for the fake borrow that was assigned to `place`.
     fn classify_immutable_section(&self, place: Place<'tcx>) -> Option<&'static str> {
-        use crate::rustc_middle::mir::visit::Visitor;
+        use crate::rustc_complete::mir::visit::Visitor;
         struct FakeReadCauseFinder<'tcx> {
             place: Place<'tcx>,
             cause: Option<FakeReadCause>,

@@ -6,7 +6,7 @@ use std::io;
 use rustc_codegen_ssa::back::archive::{
     ArArchiveBuilder, ArchiveBuilder, ArchiveBuilderBuilder, DEFAULT_OBJECT_READER, ObjectReader,
 };
-use crate::rustc_session::Session;
+use crate::rustc_complete::Session;
 
 use crate::llvm;
 

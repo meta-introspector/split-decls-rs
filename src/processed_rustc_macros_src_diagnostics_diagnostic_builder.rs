@@ -404,7 +404,7 @@ impl DiagnosticDeriveVariantBuilder {
 
                 let applicability = applicability
                     .value()
-                    .unwrap_or_else(|| quote! { rustc_errors::Applicability::Unspecified });
+                    .unwrap_or_else(|| quote! { crate::rustc_errors::Applicability::Unspecified });
                 let style = suggestion_kind.to_suggestion_style();
 
                 self.formatting_init.extend(code_init);

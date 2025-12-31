@@ -1,6 +1,6 @@
 use rustc_index::IndexVec;
-use crate::rustc_middle::mir::visit::{PlaceContext, Visitor};
-use crate::rustc_middle::mir::{Body, Local, Location};
+use crate::rustc_complete::mir::visit::{PlaceContext, Visitor};
+use crate::rustc_complete::mir::{Body, Local, Location};
 use rustc_mir_dataflow::points::{DenseLocationMap, PointIndex};
 
 use crate::def_use::{self, DefUse};

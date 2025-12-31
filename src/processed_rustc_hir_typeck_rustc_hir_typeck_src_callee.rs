@@ -1,25 +1,25 @@
 use std::iter;
 
 use rustc_abi::{CanonAbi, ExternAbi};
-use crate::rustc_ast::util::parser::ExprPrecedence;
-use rustc_errors::{Applicability, Diag, ErrorGuaranteed, StashKey};
-use crate::rustc_hir::def::{self, CtorKind, Namespace, Res};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::{self as hir, HirId, LangItem};
+use crate::rustc_complete::util::parser::ExprPrecedence;
+use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed, StashKey};
+use crate::rustc_complete::def::{self, CtorKind, Namespace, Res};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, HirId, LangItem};
 use rustc_hir_analysis::autoderef::Autoderef;
-use rustc_infer::infer::BoundRegionConversionTime;
-use rustc_infer::traits::{Obligation, ObligationCause, ObligationCauseCode};
-use crate::rustc_middle::ty::adjustment::{
+use crate::rustc_infer::infer::BoundRegionConversionTime;
+use crate::rustc_infer::traits::{Obligation, ObligationCause, ObligationCauseCode};
+use crate::rustc_complete::ty::adjustment::{
     Adjust, Adjustment, AllowTwoPhase, AutoBorrow, AutoBorrowMutability,
 };
-use crate::rustc_middle::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeVisitableExt};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::def_id::LocalDefId;
-use crate::rustc_span::{Span, sym};
+use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{Span, sym};
 use rustc_target::spec::{AbiMap, AbiMapping};
-use rustc_trait_selection::error_reporting::traits::DefIdOrName;
-use rustc_trait_selection::infer::InferCtxtExt as _;
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
+use crate::rustc_trait_selection::error_reporting::traits::DefIdOrName;
+use crate::rustc_trait_selection::infer::InferCtxtExt as _;
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
 use tracing::{debug, instrument};
 
 use super::method::MethodCallee;

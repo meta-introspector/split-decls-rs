@@ -3,19 +3,19 @@ use std::fmt::Write;
 
 use either::Either;
 use rustc_abi::WrappingRange;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Diag, DiagArgValue, DiagMessage, Diagnostic, EmissionGuarantee, Level, MultiSpan, Subdiagnostic,
 };
-use crate::rustc_hir::ConstContext;
+use crate::rustc_complete::ConstContext;
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-use crate::rustc_middle::mir::interpret::{
+use crate::rustc_complete::mir::interpret::{
     CtfeProvenance, ExpectedKind, InterpErrorKind, InvalidMetaKind, InvalidProgramInfo,
     Misalignment, Pointer, PointerKind, ResourceExhaustionInfo, UndefinedBehaviorInfo,
     UnsupportedOpInfo, ValidationErrorInfo,
 };
-use crate::rustc_middle::ty::{self, Mutability, Ty};
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::ty::{self, Mutability, Ty};
+use crate::rustc_complete::{Span, Symbol};
 
 use crate::fluent_generated as fluent;
 use crate::interpret::InternKind;
@@ -651,7 +651,7 @@ impl<'a> ReportErrorExt for UndefinedBehaviorInfo<'a> {
 
 impl<'tcx> ReportErrorExt for ValidationErrorInfo<'tcx> {
     fn diagnostic_message(&self) -> DiagMessage {
-        use crate::rustc_middle::mir::interpret::ValidationErrorKind::*;
+        use crate::rustc_complete::mir::interpret::ValidationErrorKind::*;
 
         use crate::fluent_generated::*;
         match self.kind {
@@ -723,7 +723,7 @@ impl<'tcx> ReportErrorExt for ValidationErrorInfo<'tcx> {
     }
 
     fn add_args<G: EmissionGuarantee>(self, err: &mut Diag<'_, G>) {
-        use crate::rustc_middle::mir::interpret::ValidationErrorKind::*;
+        use crate::rustc_complete::mir::interpret::ValidationErrorKind::*;
 
         use crate::fluent_generated as fluent;
 
@@ -939,7 +939,7 @@ impl ReportErrorExt for ResourceExhaustionInfo {
     fn add_args<G: EmissionGuarantee>(self, _: &mut Diag<'_, G>) {}
 }
 
-impl rustc_errors::IntoDiagArg for InternKind {
+impl crate::rustc_errors::IntoDiagArg for InternKind {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
         DiagArgValue::Str(Cow::Borrowed(match self {
             InternKind::Static(Mutability::Not) => "static",

@@ -1,9 +1,9 @@
 use rustc_index::IndexVec;
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::visit::{MutVisitor, PlaceContext, Visitor};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext, Visitor};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 
 /// Various parts of MIR building introduce temporaries that are commonly not needed.
 ///

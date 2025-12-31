@@ -1,6 +1,6 @@
-use crate::rustc_middle::mir::coverage::{CoverageKind, FunctionCoverageInfo};
-use crate::rustc_middle::mir::{self, BasicBlock, Statement, StatementKind, TerminatorKind};
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::coverage::{CoverageKind, FunctionCoverageInfo};
+use crate::rustc_complete::mir::{self, BasicBlock, Statement, StatementKind, TerminatorKind};
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::{debug, debug_span, trace};
 
 use crate::coverage::counters::BcbCountersData;

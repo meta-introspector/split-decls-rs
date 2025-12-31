@@ -1,5 +1,5 @@
 use rustc_index::IndexVec;
-use crate::rustc_middle::mir::{BasicBlock, Body, Location};
+use crate::rustc_complete::mir::{BasicBlock, Body, Location};
 use tracing::debug;
 
 /// Maps between a MIR Location, which identifies a particular

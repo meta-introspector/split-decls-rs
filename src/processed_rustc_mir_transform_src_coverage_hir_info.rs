@@ -1,9 +1,9 @@
 use rustc_hir as hir;
-use crate::rustc_hir::intravisit::{Visitor, walk_expr};
-use crate::rustc_middle::hir::nested_filter;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_span::Span;
-use crate::rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::intravisit::{Visitor, walk_expr};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::LocalDefId;
 
 /// Function information extracted from HIR by the coverage instrumentor.
 #[derive(Debug)]

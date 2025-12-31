@@ -1,26 +1,26 @@
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 use crate::rustc_data_structures::sorted_map::SortedMap;
 use crate::rustc_data_structures::unord::UnordMap;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, ErrorGuaranteed, MultiSpan, SuggestionStyle, listify, pluralize,
     struct_span_code_err,
 };
-use crate::rustc_hir::def::{CtorOf, DefKind, Res};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::{self as hir, HirId, PolyTraitRef};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::fast_reject::{TreatParams, simplify_type};
-use crate::rustc_middle::ty::print::{PrintPolyTraitRefExt as _, PrintTraitRefExt as _};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::def::{CtorOf, DefKind, Res};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, HirId, PolyTraitRef};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::fast_reject::{TreatParams, simplify_type};
+use crate::rustc_complete::ty::print::{PrintPolyTraitRefExt as _, PrintTraitRefExt as _};
+use crate::rustc_complete::ty::{
     self, AdtDef, GenericParamDefKind, Ty, TyCtxt, TypeVisitableExt,
     suggest_constraining_type_param,
 };
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::edit_distance::find_best_match_for_name;
-use crate::rustc_span::{BytePos, DUMMY_SP, Ident, Span, Symbol, kw, sym};
-use rustc_trait_selection::error_reporting::traits::report_dyn_incompatibility;
-use rustc_trait_selection::traits::{
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_complete::{BytePos, DUMMY_SP, Ident, Span, Symbol, kw, sym};
+use crate::rustc_trait_selection::error_reporting::traits::report_dyn_incompatibility;
+use crate::rustc_trait_selection::traits::{
     FulfillmentError, dyn_compatibility_violations_for_assoc_item,
 };
 use smallvec::SmallVec;

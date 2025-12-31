@@ -1,14 +1,14 @@
 use std::fmt::Debug;
 use std::ops::ControlFlow;
 
-use crate::rustc_hir::def_id::DefId;
-use rustc_infer::traits::util::PredicateSet;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_infer::traits::util::PredicateSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{
     self, GenericArgs, GenericParamDefKind, Ty, TyCtxt, TypeVisitableExt, Upcast, VtblEntry,
 };
-use crate::rustc_span::DUMMY_SP;
+use crate::rustc_complete::DUMMY_SP;
 use smallvec::{SmallVec, smallvec};
 use tracing::debug;
 

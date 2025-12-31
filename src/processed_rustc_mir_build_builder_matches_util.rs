@@ -1,7 +1,7 @@
 use crate::rustc_data_structures::fx::FxIndexMap;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::Ty;
-use crate::rustc_span::Span;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::Span;
 use tracing::debug;
 
 use crate::builder::Builder;

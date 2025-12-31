@@ -1,14 +1,14 @@
 // Unsafety checker: every impl either implements a trait defined in this
 // crate or pertains to a type defined in this crate.
 
-use rustc_errors::codes::*;
-use rustc_errors::struct_span_code_err;
-use crate::rustc_hir::{LangItem, Safety};
-use crate::rustc_middle::ty::ImplPolarity::*;
-use crate::rustc_middle::ty::print::PrintTraitRefExt as _;
-use crate::rustc_middle::ty::{ImplTraitHeader, TraitDef, TyCtxt};
-use crate::rustc_span::ErrorGuaranteed;
-use crate::rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::struct_span_code_err;
+use crate::rustc_complete::{LangItem, Safety};
+use crate::rustc_complete::ty::ImplPolarity::*;
+use crate::rustc_complete::ty::print::PrintTraitRefExt as _;
+use crate::rustc_complete::ty::{ImplTraitHeader, TraitDef, TyCtxt};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def_id::LocalDefId;
 
 pub(super) fn check_item(
     tcx: TyCtxt<'_>,
@@ -46,7 +46,7 @@ pub(super) fn check_item(
                 span.with_hi(span.lo() + crate::rustc_span::BytePos(7)),
                 "remove `unsafe` from this trait implementation",
                 "",
-                rustc_errors::Applicability::MachineApplicable,
+                crate::rustc_errors::Applicability::MachineApplicable,
             )
             .emit());
         }
@@ -80,7 +80,7 @@ pub(super) fn check_item(
                 span.shrink_to_lo(),
                 "add `unsafe` to this trait implementation",
                 "unsafe ",
-                rustc_errors::Applicability::MaybeIncorrect,
+                crate::rustc_errors::Applicability::MaybeIncorrect,
             )
             .emit());
         }
@@ -104,7 +104,7 @@ pub(super) fn check_item(
                 span.shrink_to_lo(),
                 "add `unsafe` to this trait implementation",
                 "unsafe ",
-                rustc_errors::Applicability::MaybeIncorrect,
+                crate::rustc_errors::Applicability::MaybeIncorrect,
             )
             .emit());
         }

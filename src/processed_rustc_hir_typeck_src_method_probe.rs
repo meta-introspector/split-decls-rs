@@ -6,36 +6,36 @@ use std::ops::Deref;
 use rustc_attr_parsing::is_doc_alias_attrs_contain_symbol;
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::sso::SsoHashSet;
-use rustc_errors::Applicability;
+use crate::rustc_complete::Applicability;
 use rustc_hir as hir;
-use crate::rustc_hir::HirId;
-use crate::rustc_hir::def::DefKind;
+use crate::rustc_complete::HirId;
+use crate::rustc_complete::def::DefKind;
 use rustc_hir_analysis::autoderef::{self, Autoderef};
-use rustc_infer::infer::canonical::{Canonical, OriginalQueryValues, QueryResponse};
-use rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferOk, TyCtxtInferExt};
-use rustc_infer::traits::ObligationCauseCode;
-use crate::rustc_middle::middle::stability;
-use crate::rustc_middle::ty::elaborate::supertrait_def_ids;
-use crate::rustc_middle::ty::fast_reject::{DeepRejectCtxt, TreatParams, simplify_type};
-use crate::rustc_middle::ty::{
+use crate::rustc_infer::infer::canonical::{Canonical, OriginalQueryValues, QueryResponse};
+use crate::rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferOk, TyCtxtInferExt};
+use crate::rustc_infer::traits::ObligationCauseCode;
+use crate::rustc_complete::middle::stability;
+use crate::rustc_complete::ty::elaborate::supertrait_def_ids;
+use crate::rustc_complete::ty::fast_reject::{DeepRejectCtxt, TreatParams, simplify_type};
+use crate::rustc_complete::ty::{
     self, AssocContainer, AssocItem, GenericArgs, GenericArgsRef, GenericParamDefKind, ParamEnvAnd,
     Ty, TyCtxt, TypeVisitableExt, Upcast,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::lint;
-use crate::rustc_span::def_id::{DefId, LocalDefId};
-use crate::rustc_span::edit_distance::{
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::edit_distance::{
     edit_distance_with_substrings, find_best_match_for_name_with_substrings,
 };
-use crate::rustc_span::{DUMMY_SP, Ident, Span, Symbol, sym};
-use rustc_trait_selection::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
-use rustc_trait_selection::infer::InferCtxtExt as _;
-use rustc_trait_selection::traits::query::CanonicalTyGoal;
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
-use rustc_trait_selection::traits::query::method_autoderef::{
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, sym};
+use crate::rustc_trait_selection::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
+use crate::rustc_trait_selection::infer::InferCtxtExt as _;
+use crate::rustc_trait_selection::traits::query::CanonicalTyGoal;
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
+use crate::rustc_trait_selection::traits::query::method_autoderef::{
     CandidateStep, MethodAutoderefBadTy, MethodAutoderefStepsResult,
 };
-use rustc_trait_selection::traits::{self, ObligationCause, ObligationCtxt};
+use crate::rustc_trait_selection::traits::{self, ObligationCause, ObligationCtxt};
 use smallvec::{SmallVec, smallvec};
 use tracing::{debug, instrument};
 

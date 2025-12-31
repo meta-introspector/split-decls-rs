@@ -13,20 +13,20 @@ use rustc_codegen_ssa::traits::*;
 use crate::rustc_data_structures::base_n::{ALPHANUMERIC_ONLY, ToBaseN};
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::small_c_str::SmallCStr;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::middle::codegen_fn_attrs::PatchableFunctionEntry;
-use crate::rustc_middle::mir::mono::CodegenUnit;
-use crate::rustc_middle::ty::layout::{
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::middle::codegen_fn_attrs::PatchableFunctionEntry;
+use crate::rustc_complete::mir::mono::CodegenUnit;
+use crate::rustc_complete::ty::layout::{
     FnAbiError, FnAbiOfHelpers, FnAbiRequest, HasTypingEnv, LayoutError, LayoutOfHelpers,
 };
-use crate::rustc_middle::ty::{self, Instance, Ty, TyCtxt};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::Session;
-use crate::rustc_session::config::{
+use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{
     BranchProtection, CFGuard, CFProtection, CrateType, DebugInfo, FunctionReturn, PAuthKey, PacRet,
 };
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{DUMMY_SP, Span};
 use rustc_symbol_mangling::mangle_internal_symbol;
 use rustc_target::spec::{HasTargetSpec, RelocModel, SmallDataThresholdSupport, Target, TlsModel};
 use smallvec::SmallVec;

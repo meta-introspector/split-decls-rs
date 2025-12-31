@@ -1,15 +1,15 @@
-use rustc_errors::ErrorGuaranteed;
-use crate::rustc_hir::LangItem;
-use crate::rustc_hir::def_id::DefId;
-use rustc_infer::infer::TyCtxtInferExt;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::traits::{BuiltinImplSource, CodegenObligationError};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::traits::{BuiltinImplSource, CodegenObligationError};
+use crate::rustc_complete::ty::{
     self, ClosureKind, GenericArgsRef, Instance, PseudoCanonicalInput, TyCtxt, TypeVisitableExt,
 };
-use crate::rustc_span::sym;
-use rustc_trait_selection::traits;
+use crate::rustc_complete::sym;
+use crate::rustc_trait_selection::traits;
 use tracing::debug;
 use traits::translate_args;
 
@@ -145,7 +145,7 @@ fn resolve_associated_item<'tcx>(
             // in `TypingMode::PostAnalysis`.
             //
             // NOTE: This should be kept in sync with the similar code in
-            // `rustc_trait_selection::traits::project::assemble_candidates_from_impls()`.
+            // `crate::rustc_trait_selection::traits::project::assemble_candidates_from_impls()`.
             let eligible = if leaf_def.is_final() {
                 // Non-specializable items are always projectable.
                 true

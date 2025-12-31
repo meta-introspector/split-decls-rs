@@ -6,11 +6,11 @@ use std::{convert, fmt, mem, ops};
 use either::Either;
 use rustc_abi::{Align, Size, VariantIdx, WrappingRange};
 use crate::rustc_data_structures::sync::Lock;
-use rustc_errors::{DiagArgName, DiagArgValue, DiagMessage, ErrorGuaranteed, IntoDiagArg};
+use crate::rustc_complete::{DiagArgName, DiagArgValue, DiagMessage, ErrorGuaranteed, IntoDiagArg};
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-use crate::rustc_session::CtfeBacktrace;
-use crate::rustc_span::def_id::DefId;
-use crate::rustc_span::{DUMMY_SP, Span, Symbol};
+use crate::rustc_complete::CtfeBacktrace;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
 
 use super::{AllocId, AllocRange, ConstAllocation, Pointer, Scalar};
 use crate::error;
@@ -704,7 +704,7 @@ macro_rules! err_ub_custom {
                 msg: || $msg,
                 add_args: Box::new(move |mut set_arg| {
                     $($(
-                        set_arg(stringify!($name).into(), rustc_errors::IntoDiagArg::into_diag_arg($name, &mut None));
+                        set_arg(stringify!($name).into(), crate::rustc_errors::IntoDiagArg::into_diag_arg($name, &mut None));
                     )*)?
                 })
             }

@@ -5,7 +5,7 @@
 // see design document in the tracking issue #89653.
 
 use bitflags::bitflags;
-use crate::rustc_middle::ty::{Instance, Ty, TyCtxt};
+use crate::rustc_complete::ty::{Instance, Ty, TyCtxt};
 use rustc_target::callconv::FnAbi;
 
 bitflags! {

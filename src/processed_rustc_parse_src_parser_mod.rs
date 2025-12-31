@@ -13,24 +13,24 @@ pub use expr::LetChainsPolicy;
 pub(crate) use item::{FnContext, FnParseMode};
 pub use pat::{CommaRecoveryMode, RecoverColon, RecoverComma};
 pub use path::PathStyle;
-use crate::rustc_ast::token::{
+use crate::rustc_complete::token::{
     self, IdentIsRaw, InvisibleOrigin, MetaVarKind, NtExprKind, NtPatKind, Token, TokenKind,
 };
-use crate::rustc_ast::tokenstream::{
+use crate::rustc_complete::tokenstream::{
     ParserRange, ParserReplacement, Spacing, TokenCursor, TokenStream, TokenTree, TokenTreeCursor,
 };
-use crate::rustc_ast::util::case::Case;
-use crate::rustc_ast::{
+use crate::rustc_complete::util::case::Case;
+use crate::rustc_complete::{
     self as ast, AnonConst, AttrArgs, AttrId, ByRef, Const, CoroutineKind, DUMMY_NODE_ID,
     DelimArgs, Expr, ExprKind, Extern, HasAttrs, HasTokens, Mutability, Recovered, Safety, StrLit,
     Visibility, VisibilityKind,
 };
 use rustc_ast_pretty::pprust;
 use crate::rustc_data_structures::fx::FxHashMap;
-use rustc_errors::{Applicability, Diag, FatalError, MultiSpan, PResult};
+use crate::rustc_complete::{Applicability, Diag, FatalError, MultiSpan, PResult};
 use rustc_index::interval::IntervalSet;
-use crate::rustc_session::parse::ParseSess;
-use crate::rustc_span::{Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::{Ident, Span, Symbol, kw, sym};
 use thin_vec::ThinVec;
 use token_type::TokenTypeSet;
 pub use token_type::{ExpKeywordPair, ExpTokenPair, TokenType};

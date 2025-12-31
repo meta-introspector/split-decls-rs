@@ -1,21 +1,21 @@
 use diagnostics::make_errors_for_mismatched_closing_delims;
-use crate::rustc_ast::ast::{self, AttrStyle};
-use crate::rustc_ast::token::{self, CommentKind, Delimiter, IdentIsRaw, Token, TokenKind};
-use crate::rustc_ast::tokenstream::TokenStream;
-use crate::rustc_ast::util::unicode::{TEXT_FLOW_CONTROL_CHARS, contains_text_flow_control_chars};
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, Diag, DiagCtxtHandle, StashKey};
+use crate::rustc_complete::ast::{self, AttrStyle};
+use crate::rustc_complete::token::{self, CommentKind, Delimiter, IdentIsRaw, Token, TokenKind};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::util::unicode::{TEXT_FLOW_CONTROL_CHARS, contains_text_flow_control_chars};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, Diag, DiagCtxtHandle, StashKey};
 use rustc_lexer::{
     Base, Cursor, DocStyle, FrontmatterAllowed, LiteralKind, RawStrError, is_horizontal_whitespace,
 };
 use rustc_literal_escaper::{EscapeError, Mode, check_for_errors};
-use crate::rustc_session::lint::BuiltinLintDiag;
-use crate::rustc_session::lint::builtin::{
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::{
     RUST_2021_PREFIXES_INCOMPATIBLE_SYNTAX, RUST_2024_GUARDED_STRING_INCOMPATIBLE_SYNTAX,
     TEXT_DIRECTION_CODEPOINT_IN_COMMENT, TEXT_DIRECTION_CODEPOINT_IN_LITERAL,
 };
-use crate::rustc_session::parse::ParseSess;
-use crate::rustc_span::{BytePos, Pos, Span, Symbol, sym};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::{BytePos, Pos, Span, Symbol, sym};
 use tracing::debug;
 
 use crate::errors;

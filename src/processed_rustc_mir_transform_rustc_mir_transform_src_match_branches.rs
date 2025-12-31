@@ -2,9 +2,9 @@ use std::iter;
 
 use rustc_abi::Integer;
 use rustc_index::IndexSlice;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::layout::{IntegerExt, TyAndLayout};
-use crate::rustc_middle::ty::{self, ScalarInt, Ty, TyCtxt};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::layout::{IntegerExt, TyAndLayout};
+use crate::rustc_complete::ty::{self, ScalarInt, Ty, TyCtxt};
 use tracing::instrument;
 
 use super::simplify::simplify_cfg;

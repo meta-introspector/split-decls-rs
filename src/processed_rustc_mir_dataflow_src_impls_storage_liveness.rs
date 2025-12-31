@@ -1,8 +1,8 @@
 use std::borrow::Cow;
 
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::mir::visit::{NonMutatingUseContext, PlaceContext, Visitor};
-use crate::rustc_middle::mir::*;
+use crate::rustc_complete::mir::visit::{NonMutatingUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::mir::*;
 
 use super::MaybeBorrowedLocals;
 use crate::{Analysis, GenKill, ResultsCursor};

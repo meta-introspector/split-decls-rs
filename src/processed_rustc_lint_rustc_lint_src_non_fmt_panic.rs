@@ -1,14 +1,14 @@
 use rustc_ast as ast;
-use rustc_errors::Applicability;
-use crate::rustc_hir::{self as hir, LangItem};
-use rustc_infer::infer::TyCtxtInferExt;
-use crate::rustc_middle::{bug, ty};
+use crate::rustc_complete::Applicability;
+use crate::rustc_complete::{self as hir, LangItem};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::{bug, ty};
 use rustc_parse_format::{ParseMode, Parser, Piece};
-use crate::rustc_session::lint::FutureIncompatibilityReason;
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::{InnerSpan, Span, Symbol, hygiene, sym};
-use rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_complete::lint::FutureIncompatibilityReason;
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{InnerSpan, Span, Symbol, hygiene, sym};
+use crate::rustc_trait_selection::infer::InferCtxtExt;
 
 use crate::lints::{NonFmtPanicBraces, NonFmtPanicUnused};
 use crate::{LateContext, LateLintPass, LintContext, fluent_generated as fluent};

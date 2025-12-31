@@ -1,11 +1,11 @@
 // Errors emitted by ast_passes.
 
 use rustc_abi::ExternAbi;
-use crate::rustc_ast::ParamKindOrd;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, Diag, EmissionGuarantee, Subdiagnostic};
+use crate::rustc_complete::ParamKindOrd;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, Diag, EmissionGuarantee, Subdiagnostic};
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-use crate::rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::{Ident, Span, Symbol};
 
 use crate::fluent_generated as fluent;
 

@@ -3,16 +3,16 @@
 use std::borrow::Cow;
 
 use gccjit::{LValue, RValue, ToRValue, Type};
-use crate::rustc_ast::ast::{InlineAsmOptions, InlineAsmTemplatePiece};
+use crate::rustc_complete::ast::{InlineAsmOptions, InlineAsmTemplatePiece};
 use rustc_codegen_ssa::mir::operand::OperandValue;
 use rustc_codegen_ssa::mir::place::PlaceRef;
 use rustc_codegen_ssa::traits::{
     AsmBuilderMethods, AsmCodegenMethods, BaseTypeCodegenMethods, BuilderMethods,
     GlobalAsmOperandRef, InlineAsmOperandRef,
 };
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::Instance;
-use crate::rustc_span::Span;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::Instance;
+use crate::rustc_complete::Span;
 use rustc_target::asm::*;
 
 use crate::builder::Builder;

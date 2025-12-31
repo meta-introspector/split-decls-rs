@@ -1,7 +1,7 @@
 // Characters and their corresponding confusables were collected from
 // <https://www.unicode.org/Public/security/10.0.0/confusables.txt>
 
-use crate::rustc_span::{BytePos, Pos, Span, kw};
+use crate::rustc_complete::{BytePos, Pos, Span, kw};
 
 use super::Lexer;
 use crate::errors::TokenSubstitution;

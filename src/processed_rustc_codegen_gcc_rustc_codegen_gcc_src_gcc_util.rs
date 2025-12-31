@@ -1,7 +1,7 @@
 #[cfg(feature = "master")]
 use gccjit::Context;
 use rustc_codegen_ssa::target_features;
-use crate::rustc_session::Session;
+use crate::rustc_complete::Session;
 use smallvec::{SmallVec, smallvec};
 
 fn gcc_features_by_flags(sess: &Session, features: &mut Vec<String>) {

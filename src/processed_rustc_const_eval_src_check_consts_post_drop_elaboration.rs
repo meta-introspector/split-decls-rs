@@ -1,7 +1,7 @@
-use crate::rustc_middle::mir::visit::Visitor;
-use crate::rustc_middle::mir::{self, BasicBlock, Location};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_span::sym;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::{self, BasicBlock, Location};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::sym;
 use tracing::trace;
 
 use super::ConstCx;

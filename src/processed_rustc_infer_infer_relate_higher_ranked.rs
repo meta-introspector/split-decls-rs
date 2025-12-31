@@ -1,7 +1,7 @@
 // Helper routines for higher-ranked things. See the `doc` module at
 // the end of the file for details.
 
-use crate::rustc_middle::ty::{self, FnMutDelegate, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, FnMutDelegate, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
 use tracing::{debug, instrument};
 
 use super::RelateResult;

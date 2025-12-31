@@ -9,14 +9,14 @@ use std::cmp::Ordering;
 use std::sync::Arc;
 
 use crate::rustc_data_structures::fx::FxIndexMap;
-use crate::rustc_hir::{LangItem, RangeEnd};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::util::IntTypeExt;
-use crate::rustc_middle::ty::{self, GenericArg, Ty, TyCtxt};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::def_id::DefId;
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{DUMMY_SP, Span, Symbol, sym};
+use crate::rustc_complete::{LangItem, RangeEnd};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::util::IntTypeExt;
+use crate::rustc_complete::ty::{self, GenericArg, Ty, TyCtxt};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol, sym};
 use tracing::{debug, instrument};
 
 use crate::builder::Builder;

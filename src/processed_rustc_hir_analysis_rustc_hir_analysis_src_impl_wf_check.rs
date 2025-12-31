@@ -12,11 +12,11 @@ use std::assert_matches::debug_assert_matches;
 
 use min_specialization::check_min_specialization;
 use crate::rustc_data_structures::fx::FxHashSet;
-use rustc_errors::codes::*;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_middle::ty::{self, TyCtxt, TypeVisitableExt};
-use crate::rustc_span::ErrorGuaranteed;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::ErrorGuaranteed;
 
 use crate::constrained_generic_params as cgp;
 use crate::errors::UnconstrainedGenericParameter;

@@ -1,7 +1,7 @@
 // See docs in build/expr/mod.rs
 
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::thir::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
 use tracing::{debug, instrument};
 
 use crate::builder::expr::category::Category;

@@ -19,21 +19,21 @@ use std::cell::Cell;
 use std::iter;
 
 use crate::rustc_data_structures::fx::FxIndexMap;
-use rustc_errors::Diag;
-use crate::rustc_hir::BodyOwnerKind;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::lang_items::LangItem;
+use crate::rustc_complete::Diag;
+use crate::rustc_complete::BodyOwnerKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::lang_items::LangItem;
 use rustc_index::IndexVec;
-use rustc_infer::infer::NllRegionVariableOrigin;
+use crate::rustc_infer::infer::NllRegionVariableOrigin;
 use rustc_macros::extension;
-use crate::rustc_middle::ty::print::with_no_trimmed_paths;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{
     self, GenericArgs, GenericArgsRef, InlineConstArgs, InlineConstArgsParts, RegionVid, Ty,
     TyCtxt, TypeFoldable, TypeVisitableExt, fold_regions,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::{ErrorGuaranteed, kw, sym};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::{ErrorGuaranteed, kw, sym};
 use tracing::{debug, instrument};
 
 use crate::BorrowckInferCtxt;

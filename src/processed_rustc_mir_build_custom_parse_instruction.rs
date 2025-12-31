@@ -1,11 +1,11 @@
 use rustc_abi::{FieldIdx, VariantIdx};
-use crate::rustc_middle::mir::interpret::Scalar;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::thir::*;
-use crate::rustc_middle::ty;
-use crate::rustc_middle::ty::cast::mir_cast_kind;
-use crate::rustc_span::Span;
-use crate::rustc_span::source_map::Spanned;
+use crate::rustc_complete::mir::interpret::Scalar;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty;
+use crate::rustc_complete::ty::cast::mir_cast_kind;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::source_map::Spanned;
 
 use super::{PResult, ParseCtxt, parse_by_kind};
 use crate::builder::custom::ParseError;

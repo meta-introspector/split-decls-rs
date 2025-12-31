@@ -1,8 +1,8 @@
-use crate::rustc_hir::lang_items::LangItem;
+use crate::rustc_complete::lang_items::LangItem;
 use rustc_index::IndexVec;
-use crate::rustc_middle::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 use tracing::{debug, trace};
 
 /// Details of a pointer check, the condition on which we decide whether to

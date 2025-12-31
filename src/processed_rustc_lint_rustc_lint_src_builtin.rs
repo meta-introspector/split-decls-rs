@@ -17,36 +17,36 @@ use std::fmt::Write;
 
 use ast::token::TokenKind;
 use rustc_abi::BackendRepr;
-use crate::rustc_ast::tokenstream::{TokenStream, TokenTree};
-use crate::rustc_ast::visit::{FnCtxt, FnKind};
-use crate::rustc_ast::{self as ast, *};
+use crate::rustc_complete::tokenstream::{TokenStream, TokenTree};
+use crate::rustc_complete::visit::{FnCtxt, FnKind};
+use crate::rustc_complete::{self as ast, *};
 use rustc_ast_pretty::pprust::expr_to_string;
 use rustc_attr_parsing::AttributeParser;
-use rustc_errors::{Applicability, LintDiagnostic};
+use crate::rustc_complete::{Applicability, LintDiagnostic};
 use rustc_feature::GateIssue;
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
-use crate::rustc_hir::intravisit::FnKind as HirFnKind;
-use crate::rustc_hir::{Body, FnDecl, ImplItemImplKind, PatKind, PredicateOrigin, find_attr};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::lint::LevelAndSource;
-use crate::rustc_middle::ty::layout::LayoutOf;
-use crate::rustc_middle::ty::print::with_no_trimmed_paths;
-use crate::rustc_middle::ty::{self, AssocContainer, Ty, TyCtxt, TypeVisitableExt, Upcast, VariantDef};
-use crate::rustc_session::lint::FutureIncompatibilityReason;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
+use crate::rustc_complete::intravisit::FnKind as HirFnKind;
+use crate::rustc_complete::{Body, FnDecl, ImplItemImplKind, PatKind, PredicateOrigin, find_attr};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::lint::LevelAndSource;
+use crate::rustc_complete::ty::layout::LayoutOf;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{self, AssocContainer, Ty, TyCtxt, TypeVisitableExt, Upcast, VariantDef};
+use crate::rustc_complete::lint::FutureIncompatibilityReason;
 // hardwired lints from rustc_lint_defs
-pub use crate::rustc_session::lint::builtin::*;
-use crate::rustc_session::{declare_lint, declare_lint_pass, impl_lint_pass};
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{BytePos, DUMMY_SP, Ident, InnerSpan, Span, Symbol, kw, sym};
+pub use crate::rustc_complete::lint::builtin::*;
+use crate::rustc_complete::{declare_lint, declare_lint_pass, impl_lint_pass};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{BytePos, DUMMY_SP, Ident, InnerSpan, Span, Symbol, kw, sym};
 use rustc_target::asm::InlineAsmArch;
-use rustc_trait_selection::infer::{InferCtxtExt, TyCtxtInferExt};
-use rustc_trait_selection::traits::misc::type_allowed_to_implement_copy;
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
-use rustc_trait_selection::traits::{self};
+use crate::rustc_trait_selection::infer::{InferCtxtExt, TyCtxtInferExt};
+use crate::rustc_trait_selection::traits::misc::type_allowed_to_implement_copy;
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
+use crate::rustc_trait_selection::traits::{self};
 
 use crate::errors::BuiltinEllipsisInclusiveRangePatterns;
 use crate::lints::{
@@ -810,7 +810,7 @@ impl EarlyLintPass for AnonymousParameters {
 }
 
 fn warn_if_doc(cx: &EarlyContext<'_>, node_span: Span, node_kind: &str, attrs: &[ast::Attribute]) {
-    use crate::rustc_ast::token::CommentKind;
+    use crate::rustc_complete::token::CommentKind;
 
     let mut attrs = attrs.iter().peekable();
 
@@ -1518,7 +1518,7 @@ declare_lint_pass!(
 
 impl<'tcx> LateLintPass<'tcx> for TrivialConstraints {
     fn check_item(&mut self, cx: &LateContext<'tcx>, item: &'tcx hir::Item<'tcx>) {
-        use crate::rustc_middle::ty::ClauseKind;
+        use crate::rustc_complete::ty::ClauseKind;
 
         if cx.tcx.features().trivial_bounds() {
             let predicates = cx.tcx.predicates_of(item.owner_id);
@@ -1993,7 +1993,7 @@ impl ExplicitOutlivesRequirements {
         predicate_span: Span,
         item: DefId,
     ) -> Vec<(usize, Span)> {
-        use crate::rustc_middle::middle::resolve_bound_vars::ResolvedArg;
+        use crate::rustc_complete::middle::resolve_bound_vars::ResolvedArg;
 
         let item_generics = tcx.generics_of(item);
 
@@ -2085,7 +2085,7 @@ impl ExplicitOutlivesRequirements {
 
 impl<'tcx> LateLintPass<'tcx> for ExplicitOutlivesRequirements {
     fn check_item(&mut self, cx: &LateContext<'tcx>, item: &'tcx hir::Item<'_>) {
-        use crate::rustc_middle::middle::resolve_bound_vars::ResolvedArg;
+        use crate::rustc_complete::middle::resolve_bound_vars::ResolvedArg;
 
         let def_id = item.owner_id.def_id;
         if let hir::ItemKind::Struct(_, generics, _)
@@ -2439,7 +2439,7 @@ impl<'tcx> LateLintPass<'tcx> for InvalidValue {
         /// Test if this constant is all-0.
         fn is_zero(expr: &hir::Expr<'_>) -> bool {
             use hir::ExprKind::*;
-            use crate::rustc_ast::LitKind::*;
+            use crate::rustc_complete::LitKind::*;
             match &expr.kind {
                 Lit(lit) => {
                     if let Int(i, _) = lit.node {

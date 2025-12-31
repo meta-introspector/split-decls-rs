@@ -2,8 +2,8 @@
 use gccjit::{FnAttribute, ToRValue};
 use gccjit::{Function, FunctionType, GlobalKind, LValue, RValue, Type};
 use rustc_codegen_ssa::traits::BaseTypeCodegenMethods;
-use crate::rustc_middle::ty::Ty;
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::Symbol;
 use rustc_target::callconv::FnAbi;
 
 use crate::abi::{FnAbiGcc, FnAbiGccExt};

@@ -3,11 +3,11 @@ use std::fmt::Write;
 use rustc_abi::Primitive::{Float, Int, Pointer};
 use rustc_abi::{Align, BackendRepr, FieldsShape, Scalar, Size, Variants};
 use rustc_codegen_ssa::traits::*;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::layout::{LayoutOf, TyAndLayout};
-use crate::rustc_middle::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
-use crate::rustc_middle::ty::{self, CoroutineArgsExt, Ty, TypeVisitableExt};
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
+use crate::rustc_complete::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
+use crate::rustc_complete::ty::{self, CoroutineArgsExt, Ty, TypeVisitableExt};
+use crate::rustc_complete::{DUMMY_SP, Span};
 use tracing::debug;
 
 use crate::common::*;

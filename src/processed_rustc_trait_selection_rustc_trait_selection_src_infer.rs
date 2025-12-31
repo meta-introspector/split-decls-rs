@@ -1,16 +1,16 @@
 use std::fmt::Debug;
 
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::lang_items::LangItem;
-pub use rustc_infer::infer::*;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::lang_items::LangItem;
+pub use crate::rustc_infer::infer::*;
 use rustc_macros::extension;
-use crate::rustc_middle::arena::ArenaAllocatable;
-use crate::rustc_middle::infer::canonical::{
+use crate::rustc_complete::arena::ArenaAllocatable;
+use crate::rustc_complete::infer::canonical::{
     Canonical, CanonicalQueryInput, CanonicalQueryResponse, QueryResponse,
 };
-use crate::rustc_middle::traits::query::NoSolution;
-use crate::rustc_middle::ty::{self, GenericArg, Ty, TyCtxt, TypeFoldable, Upcast};
-use crate::rustc_span::DUMMY_SP;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::{self, GenericArg, Ty, TyCtxt, TypeFoldable, Upcast};
+use crate::rustc_complete::DUMMY_SP;
 use tracing::instrument;
 
 use crate::infer::at::ToTrace;

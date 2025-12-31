@@ -1,7 +1,7 @@
 use std::sync::{Arc, Condvar, Mutex};
 
 use crate::rustc_data_structures::jobserver::{self, HelperThread};
-use rustc_errors::DiagCtxtHandle;
+use crate::rustc_complete::DiagCtxtHandle;
 
 // FIXME don't panic when a worker thread panics
 
@@ -67,7 +67,7 @@ impl ConcurrencyLimiter {
                     } else {
                         // The error was already emitted, but compilation continued. Raise a silent
                         // fatal error.
-                        rustc_errors::FatalError.raise();
+                        crate::rustc_errors::FatalError.raise();
                     }
                 }
             }

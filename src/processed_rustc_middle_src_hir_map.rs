@@ -3,20 +3,20 @@
 // stays as `map` because there isn't an obviously better name for it.
 
 use rustc_abi::ExternAbi;
-use crate::rustc_ast::visit::{VisitorResult, walk_list};
+use crate::rustc_complete::visit::{VisitorResult, walk_list};
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 use crate::rustc_data_structures::svh::Svh;
 use crate::rustc_data_structures::sync::{DynSend, DynSync, par_for_each_in, try_par_for_each_in};
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::def_id::{DefId, LOCAL_CRATE, LocalDefId, LocalModDefId};
-use crate::rustc_hir::definitions::{DefKey, DefPath, DefPathHash};
-use crate::rustc_hir::intravisit::Visitor;
-use crate::rustc_hir::*;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE, LocalDefId, LocalModDefId};
+use crate::rustc_complete::definitions::{DefKey, DefPath, DefPathHash};
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::*;
 use rustc_hir_pretty as pprust_hir;
-use crate::rustc_span::def_id::StableCrateId;
-use crate::rustc_span::{ErrorGuaranteed, Ident, Span, Symbol, kw, with_metavar_spans};
+use crate::rustc_complete::def_id::StableCrateId;
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, Symbol, kw, with_metavar_spans};
 
 use crate::hir::{ModuleItems, nested_filter};
 use crate::middle::debugger_visualizer::DebuggerVisualizerFile;

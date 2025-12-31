@@ -2,12 +2,12 @@
 
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 use rustc_hir as hir;
-use crate::rustc_hir::def::Res;
-use crate::rustc_hir::intravisit::{self, Visitor};
-use crate::rustc_hir::{self, HirId};
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_span::Span;
+use crate::rustc_complete::def::Res;
+use crate::rustc_complete::intravisit::{self, Visitor};
+use crate::rustc_complete::{self, HirId};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Span;
 
 pub(crate) fn provide(providers: &mut Providers) {
     providers.upvars_mentioned = |tcx, def_id| {

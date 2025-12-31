@@ -2,10 +2,10 @@ use std::fmt;
 
 use rustc_abi::ExternAbi;
 use rustc_feature::Features;
-use crate::rustc_session::Session;
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::symbol::sym;
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::symbol::sym;
+use crate::rustc_complete::{Span, Symbol};
 
 pub(crate) fn enabled_names(features: &rustc_feature::Features, span: Span) -> Vec<&'static str> {
     ExternAbi::ALL_VARIANTS

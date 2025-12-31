@@ -1,11 +1,11 @@
-use rustc_errors::MultiSpan;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::intravisit::{self, Visitor, VisitorExt};
-use crate::rustc_hir::{Body, HirId, Item, ItemKind, Node, Path, TyKind};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::{declare_lint, impl_lint_pass};
-use crate::rustc_span::def_id::{DefId, LOCAL_CRATE};
-use crate::rustc_span::{ExpnKind, Span, kw, sym};
+use crate::rustc_complete::MultiSpan;
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::intravisit::{self, Visitor, VisitorExt};
+use crate::rustc_complete::{Body, HirId, Item, ItemKind, Node, Path, TyKind};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::{declare_lint, impl_lint_pass};
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
+use crate::rustc_complete::{ExpnKind, Span, kw, sym};
 
 use crate::lints::{NonLocalDefinitionsCargoUpdateNote, NonLocalDefinitionsDiag};
 use crate::{LateContext, LateLintPass, LintContext, fluent_generated as fluent};

@@ -12,10 +12,10 @@ use std::marker::{DiscriminantKind, PointeeSized};
 
 use rustc_abi::{FieldIdx, VariantIdx};
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_hir::def_id::LocalDefId;
+use crate::rustc_complete::def_id::LocalDefId;
 use rustc_serialize::{Decodable, Encodable};
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{Span, SpanDecoder, SpanEncoder};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Span, SpanDecoder, SpanEncoder};
 
 use crate::arena::ArenaAllocatable;
 use crate::infer::canonical::{CanonicalVarKind, CanonicalVarKinds};

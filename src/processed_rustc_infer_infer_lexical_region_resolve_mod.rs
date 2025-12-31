@@ -9,12 +9,12 @@ use crate::rustc_data_structures::graph::linked_graph::{
 use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_data_structures::unord::UnordSet;
 use rustc_index::{IndexSlice, IndexVec};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, ReBound, ReEarlyParam, ReErased, ReError, ReLateParam, RePlaceholder, ReStatic, ReVar,
     Region, RegionVid, Ty, TyCtxt, TypeFoldable, fold_regions,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::Span;
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
 
 use super::outlives::test_type_match;

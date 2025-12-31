@@ -1,6 +1,6 @@
 use std::iter::Enumerate;
 
-use crate::rustc_span::{Ident, Span};
+use crate::rustc_complete::{Ident, Span};
 
 use crate::def::{CtorOf, DefKind, Res};
 use crate::def_id::{DefId, DefIdSet};

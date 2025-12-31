@@ -5,10 +5,10 @@
 
 use std::cell::{Cell, RefCell};
 
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::ty::TyCtxt;
 use rustc_public_bridge::context::CompilerCtxt;
 use rustc_public_bridge::{Bridge, Container, Tables};
-use crate::rustc_span::def_id::CrateNum;
+use crate::rustc_complete::def_id::CrateNum;
 use scoped_tls::scoped_thread_local;
 
 use crate::Error;
@@ -184,7 +184,7 @@ macro_rules! optional {
 macro_rules! run_driver {
     ($args:expr, $callback:expr $(, $with_tcx:ident)?) => {{
         use rustc_driver::{Callbacks, Compilation, run_compiler};
-        use crate::rustc_middle::ty::TyCtxt;
+        use crate::rustc_complete::ty::TyCtxt;
         use rustc_interface::interface;
         use rustc_public::rustc_internal;
         use rustc_public::CompilerError;

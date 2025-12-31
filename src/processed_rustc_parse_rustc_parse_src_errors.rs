@@ -2,18 +2,18 @@
 
 use std::borrow::Cow;
 
-use crate::rustc_ast::token::Token;
-use crate::rustc_ast::util::parser::ExprPrecedence;
-use crate::rustc_ast::{Path, Visibility};
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::token::Token;
+use crate::rustc_complete::util::parser::ExprPrecedence;
+use crate::rustc_complete::{Path, Visibility};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level, Subdiagnostic,
     SuggestionStyle,
 };
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-use crate::rustc_session::errors::ExprParenthesesNeeded;
-use crate::rustc_span::edition::{Edition, LATEST_STABLE_EDITION};
-use crate::rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::errors::ExprParenthesesNeeded;
+use crate::rustc_complete::edition::{Edition, LATEST_STABLE_EDITION};
+use crate::rustc_complete::{Ident, Span, Symbol};
 
 use crate::fluent_generated as fluent;
 use crate::parser::{ForbiddenLetReason, TokenDescription};

@@ -2,10 +2,10 @@ use std::fmt;
 
 use crate::rustc_data_structures::fx::FxIndexMap;
 use rustc_index::bit_set::{DenseBitSet, MixedBitSet};
-use crate::rustc_middle::mir::{
+use crate::rustc_complete::mir::{
     self, BasicBlock, Body, CallReturnPlaces, Location, Place, TerminatorEdges,
 };
-use crate::rustc_middle::ty::{RegionVid, TyCtxt};
+use crate::rustc_complete::ty::{RegionVid, TyCtxt};
 use rustc_mir_dataflow::fmt::DebugWithContext;
 use rustc_mir_dataflow::impls::{
     EverInitializedPlaces, EverInitializedPlacesDomain, MaybeUninitializedPlaces,

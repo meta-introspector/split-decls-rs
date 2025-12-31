@@ -1,11 +1,11 @@
 use std::fmt;
 
-use rustc_errors::ErrorGuaranteed;
-use crate::rustc_hir::def_id::LocalDefId;
-use rustc_infer::infer::region_constraints::RegionConstraintData;
-use crate::rustc_middle::traits::query::NoSolution;
-use crate::rustc_middle::ty::{TyCtxt, TypeFoldable};
-use crate::rustc_span::Span;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_infer::infer::region_constraints::RegionConstraintData;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::{TyCtxt, TypeFoldable};
+use crate::rustc_complete::Span;
 use tracing::info;
 
 use crate::infer::InferCtxt;

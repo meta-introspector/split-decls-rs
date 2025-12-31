@@ -7,10 +7,10 @@ use std::sync::Arc;
 
 use parking_lot::{Condvar, Mutex};
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
-use rustc_errors::{Diag, DiagCtxtHandle};
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_session::Session;
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::{Diag, DiagCtxtHandle};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::{DUMMY_SP, Span};
 
 use super::QueryStackFrameExtra;
 use crate::dep_graph::DepContext;

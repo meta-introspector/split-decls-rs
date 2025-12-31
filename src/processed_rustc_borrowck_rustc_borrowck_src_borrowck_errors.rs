@@ -1,12 +1,12 @@
 #[allow(rustc::diagnostic_outside_of_impl)]
 #[allow(rustc::untranslatable_diagnostic)]
 
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, Diag, DiagCtxtHandle, struct_span_code_err};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, Diag, DiagCtxtHandle, struct_span_code_err};
 use rustc_hir as hir;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_span::Span;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::Span;
 
 impl<'infcx, 'tcx> crate::MirBorrowckCtxt<'_, 'infcx, 'tcx> {
     pub(crate) fn dcx(&self) -> DiagCtxtHandle<'infcx> {

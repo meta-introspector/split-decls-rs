@@ -1,6 +1,6 @@
-use crate::rustc_middle::lint::LevelAndSource;
-use crate::rustc_session::lint::builtin::NON_EXHAUSTIVE_OMITTED_PATTERNS;
-use crate::rustc_span::ErrorGuaranteed;
+use crate::rustc_complete::lint::LevelAndSource;
+use crate::rustc_complete::lint::builtin::NON_EXHAUSTIVE_OMITTED_PATTERNS;
+use crate::rustc_complete::ErrorGuaranteed;
 use tracing::instrument;
 
 use crate::MatchArm;
@@ -99,7 +99,7 @@ pub(crate) fn lint_nonexhaustive_missing_variants<'p, 'tcx>(
                     lint_name: "non_exhaustive_omitted_patterns",
                 };
 
-                use rustc_errors::LintDiagnostic;
+                use crate::rustc_complete::LintDiagnostic;
                 let mut err = rcx.tcx.dcx().struct_span_warn(arm.pat.data().span, "");
                 decorator.decorate_lint(&mut err);
                 err.emit();

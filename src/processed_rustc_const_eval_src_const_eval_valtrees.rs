@@ -1,10 +1,10 @@
 use rustc_abi::{BackendRepr, FieldIdx, VariantIdx};
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
-use crate::rustc_middle::mir::interpret::{EvalToValTreeResult, GlobalId, ValTreeCreationError};
-use crate::rustc_middle::ty::layout::{LayoutCx, TyAndLayout};
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_middle::{bug, mir};
-use crate::rustc_span::DUMMY_SP;
+use crate::rustc_complete::mir::interpret::{EvalToValTreeResult, GlobalId, ValTreeCreationError};
+use crate::rustc_complete::ty::layout::{LayoutCx, TyAndLayout};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::{bug, mir};
+use crate::rustc_complete::DUMMY_SP;
 use tracing::{debug, instrument, trace};
 
 use super::VALTREE_MAX_NODES;

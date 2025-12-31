@@ -1,5 +1,5 @@
-use crate::rustc_middle::ty::{self, Ty};
-use crate::rustc_span::Span;
+use crate::rustc_complete::ty::{self, Ty};
+use crate::rustc_complete::Span;
 
 use super::Expectation::*;
 use super::FnCtxt;

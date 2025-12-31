@@ -6,9 +6,9 @@ use std::borrow::Cow;
 
 use crate::rustc_data_structures::fx::FxHashSet;
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::mir::visit::{PlaceContext, Visitor};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::visit::{PlaceContext, Visitor};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 use rustc_mir_dataflow::impls::{MaybeStorageDead, MaybeStorageLive, always_storage_live_locals};
 use rustc_mir_dataflow::{Analysis, ResultsCursor};
 

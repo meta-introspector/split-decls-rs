@@ -2,18 +2,18 @@ use std::assert_matches::debug_assert_matches;
 
 use either::{Left, Right};
 use rustc_abi::{Align, HasDataLayout, Size, TargetDataLayout};
-use rustc_errors::DiagCtxtHandle;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::limit::Limit;
-use crate::rustc_middle::mir::interpret::{ErrorHandled, InvalidMetaKind, ReportedErrorInfo};
-use crate::rustc_middle::query::TyCtxtAt;
-use crate::rustc_middle::ty::layout::{
+use crate::rustc_complete::DiagCtxtHandle;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_complete::mir::interpret::{ErrorHandled, InvalidMetaKind, ReportedErrorInfo};
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::ty::layout::{
     self, FnAbiError, FnAbiOf, FnAbiOfHelpers, FnAbiRequest, LayoutError, LayoutOf,
     LayoutOfHelpers, TyAndLayout,
 };
-use crate::rustc_middle::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeFoldable, TypingEnv, Variance};
-use crate::rustc_middle::{mir, span_bug};
-use crate::rustc_span::Span;
+use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeFoldable, TypingEnv, Variance};
+use crate::rustc_complete::{mir, span_bug};
+use crate::rustc_complete::Span;
 use rustc_target::callconv::FnAbi;
 use tracing::{debug, trace};
 

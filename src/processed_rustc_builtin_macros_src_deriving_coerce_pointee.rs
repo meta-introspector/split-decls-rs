@@ -1,15 +1,15 @@
 use ast::HasAttrs;
-use crate::rustc_ast::mut_visit::MutVisitor;
-use crate::rustc_ast::visit::BoundKind;
-use crate::rustc_ast::{
+use crate::rustc_complete::mut_visit::MutVisitor;
+use crate::rustc_complete::visit::BoundKind;
+use crate::rustc_complete::{
     self as ast, GenericArg, GenericBound, GenericParamKind, Generics, ItemKind, MetaItem,
     TraitBoundModifiers, VariantData, WherePredicate,
 };
 use crate::rustc_data_structures::flat_map_in_place::FlatMapInPlace;
-use rustc_errors::E0802;
+use crate::rustc_complete::E0802;
 use rustc_expand::base::{Annotatable, ExtCtxt};
 use rustc_macros::Diagnostic;
-use crate::rustc_span::{Ident, Span, Symbol, sym};
+use crate::rustc_complete::{Ident, Span, Symbol, sym};
 use thin_vec::{ThinVec, thin_vec};
 
 use crate::errors;

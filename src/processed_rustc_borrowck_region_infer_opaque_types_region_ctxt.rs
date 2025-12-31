@@ -2,8 +2,8 @@ use std::rc::Rc;
 
 use crate::rustc_data_structures::frozen::Frozen;
 use rustc_index::IndexVec;
-use rustc_infer::infer::NllRegionVariableOrigin;
-use crate::rustc_middle::ty::{RegionVid, UniverseIndex};
+use crate::rustc_infer::infer::NllRegionVariableOrigin;
+use crate::rustc_complete::ty::{RegionVid, UniverseIndex};
 use rustc_mir_dataflow::points::DenseLocationMap;
 
 use crate::BorrowckInferCtxt;

@@ -1,13 +1,13 @@
 use rustc_abi::Size;
 use crate::rustc_data_structures::fx::FxIndexSet;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::limit::Limit;
-use crate::rustc_middle::mir::visit::Visitor as MirVisitor;
-use crate::rustc_middle::mir::{self, Location, traversal};
-use crate::rustc_middle::ty::{self, AssocTag, Instance, Ty, TyCtxt, TypeFoldable};
-use crate::rustc_session::lint::builtin::LARGE_ASSIGNMENTS;
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{Ident, Span, sym};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_complete::mir::visit::Visitor as MirVisitor;
+use crate::rustc_complete::mir::{self, Location, traversal};
+use crate::rustc_complete::ty::{self, AssocTag, Instance, Ty, TyCtxt, TypeFoldable};
+use crate::rustc_complete::lint::builtin::LARGE_ASSIGNMENTS;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Ident, Span, sym};
 use tracing::{debug, trace};
 
 use crate::errors::LargeAssignmentsLint;

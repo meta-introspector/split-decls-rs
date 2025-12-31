@@ -6,8 +6,8 @@ use std::fmt;
 use std::marker::PhantomData;
 
 use rustc_index::bit_set::MixedBitSet;
-use crate::rustc_middle::mir::visit::Visitor;
-use crate::rustc_middle::mir::{
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::{
     self, BasicBlock, CallReturnPlaces, Local, Location, Statement, StatementKind, TerminatorEdges,
 };
 use rustc_mir_dataflow::fmt::DebugWithContext;

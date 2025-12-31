@@ -5,7 +5,7 @@
 
 use std::cell::Cell;
 
-use crate::rustc_hir::def::DefKind;
+use crate::rustc_complete::def::DefKind;
 use rustc_public_bridge::context::CompilerCtxt;
 use rustc_public_bridge::{Bridge, Container};
 use tracing::debug;

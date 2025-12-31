@@ -2,7 +2,7 @@
 
 use std::path::PathBuf;
 
-use rustc_errors::{Diag, FatalAbort};
+use crate::rustc_complete::{Diag, FatalAbort};
 
 use super::UnstableOptions;
 use crate::EarlyDiagCtxt;

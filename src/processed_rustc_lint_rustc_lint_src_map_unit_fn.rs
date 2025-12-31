@@ -1,7 +1,7 @@
-use crate::rustc_hir::{Expr, ExprKind, Stmt, StmtKind};
-use crate::rustc_middle::ty::{self};
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::sym;
+use crate::rustc_complete::{Expr, ExprKind, Stmt, StmtKind};
+use crate::rustc_complete::ty::{self};
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::sym;
 
 use crate::lints::MappingToUnit;
 use crate::{LateContext, LateLintPass, LintContext};

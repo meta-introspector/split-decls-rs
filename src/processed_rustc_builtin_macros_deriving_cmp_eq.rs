@@ -1,7 +1,7 @@
-use crate::rustc_ast::{self as ast, MetaItem};
+use crate::rustc_complete::{self as ast, MetaItem};
 use crate::rustc_data_structures::fx::FxHashSet;
 use rustc_expand::base::{Annotatable, ExtCtxt};
-use crate::rustc_span::{Span, sym};
+use crate::rustc_complete::{Span, sym};
 use thin_vec::{ThinVec, thin_vec};
 
 use crate::deriving::generic::ty::*;

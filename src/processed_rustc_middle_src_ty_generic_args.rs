@@ -6,8 +6,8 @@ use std::num::NonZero;
 use std::ptr::NonNull;
 
 use crate::rustc_data_structures::intern::Interned;
-use rustc_errors::{DiagArgValue, IntoDiagArg};
-use crate::rustc_hir::def_id::DefId;
+use crate::rustc_complete::{DiagArgValue, IntoDiagArg};
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, extension};
 use rustc_serialize::{Decodable, Encodable};
 use rustc_type_ir::WithCachedTypeInfo;

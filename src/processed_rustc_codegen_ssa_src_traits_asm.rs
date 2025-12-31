@@ -1,7 +1,7 @@
-use crate::rustc_ast::{InlineAsmOptions, InlineAsmTemplatePiece};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::ty::Instance;
-use crate::rustc_span::Span;
+use crate::rustc_complete::{InlineAsmOptions, InlineAsmTemplatePiece};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::ty::Instance;
+use crate::rustc_complete::Span;
 use rustc_target::asm::InlineAsmRegOrRegClass;
 
 use super::BackendTypes;

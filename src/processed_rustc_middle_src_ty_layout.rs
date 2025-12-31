@@ -7,14 +7,14 @@ use rustc_abi::{
     TyAbiInterface, VariantIdx, Variants,
 };
 use rustc_error_messages::DiagMessage;
-use rustc_errors::{
+use crate::rustc_complete::{
     Diag, DiagArgValue, DiagCtxtHandle, Diagnostic, EmissionGuarantee, IntoDiagArg, Level,
 };
-use crate::rustc_hir::LangItem;
-use crate::rustc_hir::def_id::DefId;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, extension};
-use crate::rustc_session::config::OptLevel;
-use crate::rustc_span::{DUMMY_SP, ErrorGuaranteed, Span, Symbol, sym};
+use crate::rustc_complete::config::OptLevel;
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span, Symbol, sym};
 use rustc_target::callconv::FnAbi;
 use rustc_target::spec::{HasTargetSpec, HasX86AbiOpt, PanicStrategy, Target, X86Abi};
 use tracing::debug;

@@ -17,9 +17,9 @@ use crate::rustc_data_structures::owned_slice::{OwnedSlice, try_slice_owned};
 use rustc_metadata::EncodedMetadata;
 use rustc_metadata::creader::MetadataLoader;
 use rustc_metadata::fs::METADATA_FILENAME;
-use crate::rustc_middle::bug;
-use crate::rustc_session::Session;
-use crate::rustc_span::sym;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::sym;
 use rustc_target::spec::{RelocModel, Target, ef_avr_arch};
 use tracing::debug;
 

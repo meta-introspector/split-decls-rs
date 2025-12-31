@@ -4,14 +4,14 @@ use std::cell::Cell;
 use std::fmt::Write;
 
 use rustc_ast_pretty::pprust as pprust_ast;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::{write_mir_graphviz, write_mir_pretty};
-use crate::rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::{write_mir_graphviz, write_mir_pretty};
+use crate::rustc_complete::ty::{self, TyCtxt};
 use rustc_mir_build::thir::print::{thir_flat, thir_tree};
 use rustc_public::rustc_internal::pretty::write_smir_pretty;
-use crate::rustc_session::Session;
-use crate::rustc_session::config::{OutFileName, PpHirMode, PpMode, PpSourceMode};
-use crate::rustc_span::{FileName, Ident};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{OutFileName, PpHirMode, PpMode, PpSourceMode};
+use crate::rustc_complete::{FileName, Ident};
 use tracing::debug;
 use {rustc_ast as ast, rustc_hir_pretty as pprust_hir};
 

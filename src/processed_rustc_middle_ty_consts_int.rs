@@ -4,7 +4,7 @@ use std::num::NonZero;
 use rustc_abi::Size;
 use rustc_apfloat::Float;
 use rustc_apfloat::ieee::{Double, Half, Quad, Single};
-use rustc_errors::{DiagArgValue, IntoDiagArg};
+use crate::rustc_complete::{DiagArgValue, IntoDiagArg};
 use rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
 
 use crate::ty::TyCtxt;

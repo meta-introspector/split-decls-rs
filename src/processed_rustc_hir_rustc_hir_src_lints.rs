@@ -1,6 +1,6 @@
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 use rustc_macros::HashStable_Generic;
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::{AttrPath, HirId, Target};
 

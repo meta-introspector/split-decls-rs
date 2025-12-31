@@ -4,11 +4,11 @@ use rustc_codegen_ssa::mir::debuginfo::{DebugScope, FunctionDebugContext};
 use rustc_codegen_ssa::traits::*;
 use crate::rustc_data_structures::fx::FxHashMap;
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::mir::{Body, SourceScope};
-use crate::rustc_middle::ty::layout::{FnAbiOf, HasTypingEnv};
-use crate::rustc_middle::ty::{self, Instance};
-use crate::rustc_session::config::DebugInfo;
-use crate::rustc_span::{BytePos, DUMMY_SP, hygiene};
+use crate::rustc_complete::mir::{Body, SourceScope};
+use crate::rustc_complete::ty::layout::{FnAbiOf, HasTypingEnv};
+use crate::rustc_complete::ty::{self, Instance};
+use crate::rustc_complete::config::DebugInfo;
+use crate::rustc_complete::{BytePos, DUMMY_SP, hygiene};
 
 use super::metadata::file_metadata;
 use super::utils::DIB;

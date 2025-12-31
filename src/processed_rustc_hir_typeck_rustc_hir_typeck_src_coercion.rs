@@ -37,27 +37,27 @@
 
 use std::ops::Deref;
 
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, Diag, struct_span_code_err};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, Diag, struct_span_code_err};
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::InlineAttr;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::attrs::InlineAttr;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 use rustc_hir_analysis::hir_ty_lowering::HirTyLowerer;
-use rustc_infer::infer::relate::RelateResult;
-use rustc_infer::infer::{DefineOpaqueTypes, InferOk, InferResult, RegionVariableOrigin};
-use rustc_infer::traits::{
+use crate::rustc_infer::infer::relate::RelateResult;
+use crate::rustc_infer::infer::{DefineOpaqueTypes, InferOk, InferResult, RegionVariableOrigin};
+use crate::rustc_infer::traits::{
     MatchExpressionArmCause, Obligation, PredicateObligation, PredicateObligations, SelectionError,
 };
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::adjustment::{
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::adjustment::{
     Adjust, Adjustment, AllowTwoPhase, AutoBorrow, AutoBorrowMutability, PointerCoercion,
 };
-use crate::rustc_middle::ty::error::TypeError;
-use crate::rustc_middle::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeVisitableExt};
-use crate::rustc_span::{BytePos, DUMMY_SP, DesugaringKind, Span};
-use rustc_trait_selection::infer::InferCtxtExt as _;
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
-use rustc_trait_selection::traits::{
+use crate::rustc_complete::ty::error::TypeError;
+use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::{BytePos, DUMMY_SP, DesugaringKind, Span};
+use crate::rustc_trait_selection::infer::InferCtxtExt as _;
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
+use crate::rustc_trait_selection::traits::{
     self, ImplSource, NormalizeExt, ObligationCause, ObligationCauseCode, ObligationCtxt,
 };
 use smallvec::{SmallVec, smallvec};

@@ -88,12 +88,12 @@ impl SubdiagnosticDerive {
         // FIXME(edition_2024): Fix the `keyword_idents_2024` lint to not trigger here?
         #[allow(keyword_idents_2024)]
         let ret = structure.gen_impl(quote! {
-            gen impl rustc_errors::Subdiagnostic for @Self {
+            gen impl crate::rustc_errors::Subdiagnostic for @Self {
                 fn add_to_diag<__G>(
                     self,
-                    #diag: &mut rustc_errors::Diag<'_, __G>,
+                    #diag: &mut crate::rustc_errors::Diag<'_, __G>,
                 ) where
-                    __G: rustc_errors::EmissionGuarantee,
+                    __G: crate::rustc_errors::EmissionGuarantee,
                 {
                     #implementation
                 }
@@ -550,7 +550,7 @@ impl<'parent, 'a> SubdiagnosticDeriveVariantBuilder<'parent, 'a> {
                         .value()
                         .map(|a| quote! { #a })
                         .or_else(|| self.applicability.take().value())
-                        .unwrap_or_else(|| quote! { rustc_errors::Applicability::Unspecified });
+                        .unwrap_or_else(|| quote! { crate::rustc_errors::Applicability::Unspecified });
 
                     if let Some(span) = span_field {
                         let style = suggestion_kind.to_suggestion_style();
@@ -565,7 +565,7 @@ impl<'parent, 'a> SubdiagnosticDeriveVariantBuilder<'parent, 'a> {
                         .value()
                         .map(|a| quote! { #a })
                         .or_else(|| self.applicability.take().value())
-                        .unwrap_or_else(|| quote! { rustc_errors::Applicability::Unspecified });
+                        .unwrap_or_else(|| quote! { crate::rustc_errors::Applicability::Unspecified });
 
                     if !self.has_suggestion_parts {
                         span_err(

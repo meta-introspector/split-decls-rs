@@ -6,8 +6,8 @@
 use std::iter;
 
 use either::Either;
-use crate::rustc_middle::mir::{Body, Local, LocalKind, Location, START_BLOCK};
-use crate::rustc_middle::ty::{GenericArg, TyCtxt};
+use crate::rustc_complete::mir::{Body, Local, LocalKind, Location, START_BLOCK};
+use crate::rustc_complete::ty::{GenericArg, TyCtxt};
 use rustc_mir_dataflow::move_paths::{InitKind, InitLocation, MoveData};
 use tracing::debug;
 

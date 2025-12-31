@@ -2,23 +2,23 @@ use std::borrow::Cow;
 use std::mem;
 use std::ops::Bound;
 
-use crate::rustc_ast::AsmMacro;
+use crate::rustc_complete::AsmMacro;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::DiagArgValue;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::{self as hir, BindingMode, ByRef, HirId, Mutability, find_attr};
-use crate::rustc_middle::middle::codegen_fn_attrs::{TargetFeature, TargetFeatureKind};
-use crate::rustc_middle::mir::BorrowKind;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::thir::visit::Visitor;
-use crate::rustc_middle::thir::*;
-use crate::rustc_middle::ty::print::with_no_trimmed_paths;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_session::lint::Level;
-use crate::rustc_session::lint::builtin::{DEPRECATED_SAFE_2024, UNSAFE_OP_IN_UNSAFE_FN, UNUSED_UNSAFE};
-use crate::rustc_span::def_id::{DefId, LocalDefId};
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::DiagArgValue;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::{self as hir, BindingMode, ByRef, HirId, Mutability, find_attr};
+use crate::rustc_complete::middle::codegen_fn_attrs::{TargetFeature, TargetFeatureKind};
+use crate::rustc_complete::mir::BorrowKind;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::thir::visit::Visitor;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::lint::Level;
+use crate::rustc_complete::lint::builtin::{DEPRECATED_SAFE_2024, UNSAFE_OP_IN_UNSAFE_FN, UNUSED_UNSAFE};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::{Span, Symbol, sym};
 
 use crate::builder::ExprCategory;
 use crate::errors::*;
@@ -587,7 +587,7 @@ impl<'a, 'tcx> Visitor<'a, 'tcx> for UnsafetyVisitor<'a, 'tcx> {
                 // For inline asm, do not use `walk_expr`, since we want to handle the label block
                 // specially.
                 for op in &**operands {
-                    use crate::rustc_middle::thir::InlineAsmOperand::*;
+                    use crate::rustc_complete::thir::InlineAsmOperand::*;
                     match op {
                         In { expr, reg: _ }
                         | Out { expr: Some(expr), reg: _, late: _ }

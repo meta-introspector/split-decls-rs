@@ -7,25 +7,25 @@ use rustc_ast_lowering::stability::extern_abi_stability;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::unord::{ExtendUnord, UnordMap, UnordSet};
 use rustc_feature::{EnabledLangFeature, EnabledLibFeature};
-use crate::rustc_hir::attrs::{AttributeKind, DeprecatedSince};
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, LOCAL_CRATE, LocalDefId, LocalModDefId};
-use crate::rustc_hir::intravisit::{self, Visitor, VisitorExt};
-use crate::rustc_hir::{
+use crate::rustc_complete::attrs::{AttributeKind, DeprecatedSince};
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, LOCAL_CRATE, LocalDefId, LocalModDefId};
+use crate::rustc_complete::intravisit::{self, Visitor, VisitorExt};
+use crate::rustc_complete::{
     self as hir, AmbigArg, ConstStability, DefaultBodyStability, FieldDef, Item, ItemKind,
     Stability, StabilityLevel, StableSince, TraitRef, Ty, TyKind, UnstableReason,
     VERSION_PLACEHOLDER, Variant, find_attr,
 };
-use crate::rustc_middle::hir::nested_filter;
-use crate::rustc_middle::middle::lib_features::{FeatureStability, LibFeatures};
-use crate::rustc_middle::middle::privacy::EffectiveVisibilities;
-use crate::rustc_middle::middle::stability::{AllowUnstable, Deprecated, DeprecationEntry, EvalResult};
-use crate::rustc_middle::query::{LocalCrate, Providers};
-use crate::rustc_middle::ty::print::with_no_trimmed_paths;
-use crate::rustc_middle::ty::{AssocContainer, TyCtxt};
-use crate::rustc_session::lint;
-use crate::rustc_session::lint::builtin::{DEPRECATED, INEFFECTIVE_UNSTABLE_TRAIT_IMPL};
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::middle::lib_features::{FeatureStability, LibFeatures};
+use crate::rustc_complete::middle::privacy::EffectiveVisibilities;
+use crate::rustc_complete::middle::stability::{AllowUnstable, Deprecated, DeprecationEntry, EvalResult};
+use crate::rustc_complete::query::{LocalCrate, Providers};
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{AssocContainer, TyCtxt};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::lint::builtin::{DEPRECATED, INEFFECTIVE_UNSTABLE_TRAIT_IMPL};
+use crate::rustc_complete::{Span, Symbol, sym};
 use tracing::instrument;
 
 use crate::errors;

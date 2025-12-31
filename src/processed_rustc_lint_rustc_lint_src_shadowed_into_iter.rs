@@ -1,8 +1,8 @@
-use crate::rustc_hir::{self as hir, LangItem};
-use crate::rustc_middle::ty::{self, Ty};
-use crate::rustc_session::lint::FutureIncompatibilityReason;
-use crate::rustc_session::{declare_lint, impl_lint_pass};
-use crate::rustc_span::edition::Edition;
+use crate::rustc_complete::{self as hir, LangItem};
+use crate::rustc_complete::ty::{self, Ty};
+use crate::rustc_complete::lint::FutureIncompatibilityReason;
+use crate::rustc_complete::{declare_lint, impl_lint_pass};
+use crate::rustc_complete::edition::Edition;
 
 use crate::lints::{ShadowedIntoIterDiag, ShadowedIntoIterDiagSub};
 use crate::{LateContext, LateLintPass, LintContext};

@@ -1,10 +1,10 @@
 use rustc_abi::ExternAbi;
-use crate::rustc_hir::def_id::{LOCAL_CRATE, LocalDefId};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::query::{LocalCrate, Providers};
-use crate::rustc_middle::ty::{self, TyCtxt, layout};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::lint::builtin::FFI_UNWIND_CALLS;
+use crate::rustc_complete::def_id::{LOCAL_CRATE, LocalDefId};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::query::{LocalCrate, Providers};
+use crate::rustc_complete::ty::{self, TyCtxt, layout};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::lint::builtin::FFI_UNWIND_CALLS;
 use rustc_target::spec::PanicStrategy;
 use tracing::debug;
 

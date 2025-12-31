@@ -1,7 +1,7 @@
 use std::ops::Range;
 
 use crate::rustc_data_structures::{snapshot_vec as sv, unify as ut};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, ConstVid, FloatVid, IntVid, RegionVid, Ty, TyCtxt, TyVid, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeVisitableExt,
 };

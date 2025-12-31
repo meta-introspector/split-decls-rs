@@ -1,5 +1,5 @@
-use crate::rustc_middle::mir::{self, NonDivergingIntrinsic};
-use crate::rustc_middle::span_bug;
+use crate::rustc_complete::mir::{self, NonDivergingIntrinsic};
+use crate::rustc_complete::span_bug;
 use tracing::instrument;
 
 use super::{FunctionCx, LocalRef};

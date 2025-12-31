@@ -12,8 +12,8 @@ use crate::rustc_data_structures::fingerprint::Fingerprint;
 use crate::rustc_data_structures::sharded::{self, Sharded};
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_data_structures::{outline, sync};
-use rustc_errors::{Diag, FatalError, StashKey};
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::{Diag, FatalError, StashKey};
+use crate::rustc_complete::{DUMMY_SP, Span};
 use tracing::instrument;
 
 use super::{QueryConfig, QueryStackFrameExtra};

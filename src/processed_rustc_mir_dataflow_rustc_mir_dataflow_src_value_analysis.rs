@@ -6,9 +6,9 @@ use crate::rustc_data_structures::fx::{FxHashMap, FxIndexSet, StdEntry};
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use rustc_index::IndexVec;
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::mir::visit::{PlaceContext, Visitor};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::mir::visit::{PlaceContext, Visitor};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 use tracing::debug;
 
 use crate::JoinSemiLattice;

@@ -8,8 +8,8 @@ use crate::rustc_data_structures::undo_log::UndoLogs;
 use crate::rustc_data_structures::unify as ut;
 use rustc_index::IndexVec;
 use rustc_macros::{TypeFoldable, TypeVisitable};
-use crate::rustc_middle::ty::{self, ReBound, ReStatic, ReVar, Region, RegionVid, Ty, TyCtxt};
-use crate::rustc_middle::{bug, span_bug};
+use crate::rustc_complete::ty::{self, ReBound, ReStatic, ReVar, Region, RegionVid, Ty, TyCtxt};
+use crate::rustc_complete::{bug, span_bug};
 use tracing::{debug, instrument};
 
 use self::CombineMapType::*;

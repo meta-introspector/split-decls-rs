@@ -19,9 +19,9 @@ use derive_setters::Setters;
 use crate::rustc_data_structures::sync::IntoDynSyncSend;
 use rustc_error_messages::FluentArgs;
 use rustc_lint_defs::Applicability;
-use crate::rustc_span::Span;
-use crate::rustc_span::hygiene::ExpnData;
-use crate::rustc_span::source_map::{FilePathMapping, SourceMap};
+use crate::rustc_complete::Span;
+use crate::rustc_complete::hygiene::ExpnData;
+use crate::rustc_complete::source_map::{FilePathMapping, SourceMap};
 use serde::Serialize;
 use termcolor::{ColorSpec, WriteColor};
 
@@ -303,7 +303,7 @@ struct UnusedExterns<'a> {
 }
 
 impl Diagnostic {
-    /// Converts from `rustc_errors::DiagInner` to `Diagnostic`.
+    /// Converts from `crate::rustc_errors::DiagInner` to `Diagnostic`.
     fn from_errors_diagnostic(
         diag: crate::DiagInner,
         je: &JsonEmitter,

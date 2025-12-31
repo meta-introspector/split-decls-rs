@@ -1,8 +1,8 @@
 use std::assert_matches::assert_matches;
 
 use rustc_abi::{BackendRepr, FieldsShape, Scalar, Size, TagEncoding, Variants};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::layout::{HasTyCtxt, LayoutCx, TyAndLayout};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::{HasTyCtxt, LayoutCx, TyAndLayout};
 
 /// Enforce some basic invariants on layouts.
 pub(super) fn layout_sanity_check<'tcx>(cx: &LayoutCx<'tcx>, layout: &TyAndLayout<'tcx>) {

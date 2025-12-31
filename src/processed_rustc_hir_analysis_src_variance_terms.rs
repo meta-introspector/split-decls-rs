@@ -12,9 +12,9 @@
 use std::fmt;
 
 use rustc_arena::DroplessArena;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{LocalDefId, LocalDefIdMap};
-use crate::rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{LocalDefId, LocalDefIdMap};
+use crate::rustc_complete::ty::{self, TyCtxt};
 use tracing::debug;
 
 use self::VarianceTerm::*;

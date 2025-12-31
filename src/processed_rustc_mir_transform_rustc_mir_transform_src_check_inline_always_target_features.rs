@@ -1,7 +1,7 @@
-use crate::rustc_hir::attrs::InlineAttr;
-use crate::rustc_middle::middle::codegen_fn_attrs::{TargetFeature, TargetFeatureKind};
-use crate::rustc_middle::mir::{Body, TerminatorKind};
-use crate::rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::attrs::InlineAttr;
+use crate::rustc_complete::middle::codegen_fn_attrs::{TargetFeature, TargetFeatureKind};
+use crate::rustc_complete::mir::{Body, TerminatorKind};
+use crate::rustc_complete::ty::{self, TyCtxt};
 
 use crate::pass_manager::MirLint;
 

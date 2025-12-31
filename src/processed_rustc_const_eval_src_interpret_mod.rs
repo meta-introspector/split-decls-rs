@@ -2,7 +2,7 @@
 
 
 #[doc(no_inline)]
-pub use crate::rustc_middle::mir::interpret::*; // have all the `interpret` symbols in one place: here
+pub use crate::rustc_complete::mir::interpret::*; // have all the `interpret` symbols in one place: here
 
 pub use self::call::FnArg;
 pub use self::eval_context::{InterpCx, format_interp_error};

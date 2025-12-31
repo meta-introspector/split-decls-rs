@@ -2,23 +2,23 @@ use std::any::Any;
 use std::mem;
 use std::sync::Arc;
 
-use crate::rustc_hir::attrs::Deprecation;
-use crate::rustc_hir::def::{CtorKind, DefKind};
-use crate::rustc_hir::def_id::{CrateNum, DefId, DefIdMap, LOCAL_CRATE};
-use crate::rustc_hir::definitions::{DefKey, DefPath, DefPathHash};
-use crate::rustc_middle::arena::ArenaAllocatable;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::metadata::ModChild;
-use crate::rustc_middle::middle::exported_symbols::ExportedSymbol;
-use crate::rustc_middle::middle::stability::DeprecationEntry;
-use crate::rustc_middle::query::{ExternProviders, LocalCrate};
-use crate::rustc_middle::ty::fast_reject::SimplifiedType;
-use crate::rustc_middle::ty::{self, TyCtxt};
-use crate::rustc_middle::util::Providers;
-use crate::rustc_session::cstore::{CrateStore, ExternCrate};
-use crate::rustc_session::{Session, StableCrateId};
-use crate::rustc_span::hygiene::ExpnId;
-use crate::rustc_span::{Span, Symbol, kw};
+use crate::rustc_complete::attrs::Deprecation;
+use crate::rustc_complete::def::{CtorKind, DefKind};
+use crate::rustc_complete::def_id::{CrateNum, DefId, DefIdMap, LOCAL_CRATE};
+use crate::rustc_complete::definitions::{DefKey, DefPath, DefPathHash};
+use crate::rustc_complete::arena::ArenaAllocatable;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::metadata::ModChild;
+use crate::rustc_complete::middle::exported_symbols::ExportedSymbol;
+use crate::rustc_complete::middle::stability::DeprecationEntry;
+use crate::rustc_complete::query::{ExternProviders, LocalCrate};
+use crate::rustc_complete::ty::fast_reject::SimplifiedType;
+use crate::rustc_complete::ty::{self, TyCtxt};
+use crate::rustc_complete::util::Providers;
+use crate::rustc_complete::cstore::{CrateStore, ExternCrate};
+use crate::rustc_complete::{Session, StableCrateId};
+use crate::rustc_complete::hygiene::ExpnId;
+use crate::rustc_complete::{Span, Symbol, kw};
 
 use super::{Decodable, DecodeContext, DecodeIterator};
 use crate::creader::{CStore, LoadedMacro};
@@ -145,7 +145,7 @@ macro_rules! provide_one {
             // External query providers call `crate_hash` in order to register a dependency
             // on the crate metadata. The exception is `crate_hash` itself, which obviously
             // doesn't need to do this (and can't, as it would cause a query cycle).
-            use crate::rustc_middle::dep_graph::dep_kinds;
+            use crate::rustc_complete::dep_graph::dep_kinds;
             if dep_kinds::$name != dep_kinds::crate_hash && $tcx.dep_graph.is_fully_enabled() {
                 $tcx.ensure_ok().crate_hash($def_id.krate);
             }

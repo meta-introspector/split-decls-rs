@@ -1,6 +1,6 @@
-use rustc_errors::E0799;
+use crate::rustc_complete::E0799;
 use rustc_macros::Diagnostic;
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 
 #[derive(Diagnostic)]
 #[diag(hir_analysis_param_not_captured)]

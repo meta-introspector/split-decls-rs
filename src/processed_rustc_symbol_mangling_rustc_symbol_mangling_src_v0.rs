@@ -10,17 +10,17 @@ use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_data_structures::stable_hasher::StableHasher;
 use rustc_hashes::Hash64;
 use rustc_hir as hir;
-use crate::rustc_hir::def::CtorKind;
-use crate::rustc_hir::def_id::{CrateNum, DefId};
-use crate::rustc_hir::definitions::{DefPathData, DisambiguatedDefPathData};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::layout::IntegerExt;
-use crate::rustc_middle::ty::print::{Print, PrintError, Printer};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::def::CtorKind;
+use crate::rustc_complete::def_id::{CrateNum, DefId};
+use crate::rustc_complete::definitions::{DefPathData, DisambiguatedDefPathData};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::IntegerExt;
+use crate::rustc_complete::ty::print::{Print, PrintError, Printer};
+use crate::rustc_complete::ty::{
     self, FloatTy, GenericArg, GenericArgKind, Instance, IntTy, ReifyReason, Ty, TyCtxt,
     TypeVisitable, TypeVisitableExt, UintTy,
 };
-use crate::rustc_span::sym;
+use crate::rustc_complete::sym;
 
 pub(super) fn mangle<'tcx>(
     tcx: TyCtxt<'tcx>,

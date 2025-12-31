@@ -1,8 +1,8 @@
 // Implementation of InternalCx.
 
 pub(crate) use helpers::*;
-use crate::rustc_middle::ty::{List, Ty, TyCtxt};
-use crate::rustc_middle::{mir, ty};
+use crate::rustc_complete::ty::{List, Ty, TyCtxt};
+use crate::rustc_complete::{mir, ty};
 
 use super::InternalCx;
 

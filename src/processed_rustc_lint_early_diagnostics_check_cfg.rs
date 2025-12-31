@@ -1,10 +1,10 @@
-use crate::rustc_hir::def_id::LOCAL_CRATE;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::Session;
-use crate::rustc_session::config::ExpectedValues;
-use crate::rustc_span::edit_distance::find_best_match_for_name;
-use crate::rustc_span::{ExpnKind, Ident, Span, Symbol, sym};
+use crate::rustc_complete::def_id::LOCAL_CRATE;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::ExpectedValues;
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_complete::{ExpnKind, Ident, Span, Symbol, sym};
 
 use crate::lints;
 

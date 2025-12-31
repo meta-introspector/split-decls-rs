@@ -1,19 +1,19 @@
 use std::ops::Bound;
 
-use crate::rustc_ast::mut_visit::{self, MutVisitor};
-use crate::rustc_ast::token::NtPatKind::*;
-use crate::rustc_ast::token::{self, IdentIsRaw, MetaVarKind, Token};
-use crate::rustc_ast::util::parser::ExprPrecedence;
-use crate::rustc_ast::visit::{self, Visitor};
-use crate::rustc_ast::{
+use crate::rustc_complete::mut_visit::{self, MutVisitor};
+use crate::rustc_complete::token::NtPatKind::*;
+use crate::rustc_complete::token::{self, IdentIsRaw, MetaVarKind, Token};
+use crate::rustc_complete::util::parser::ExprPrecedence;
+use crate::rustc_complete::visit::{self, Visitor};
+use crate::rustc_complete::{
     self as ast, Arm, AttrVec, BindingMode, ByRef, Expr, ExprKind, LocalKind, MacCall, Mutability,
     Pat, PatField, PatFieldsRest, PatKind, Path, QSelf, RangeEnd, RangeSyntax, Stmt, StmtKind,
 };
 use rustc_ast_pretty::pprust;
-use rustc_errors::{Applicability, Diag, DiagArgValue, PResult, StashKey};
-use crate::rustc_session::errors::ExprParenthesesNeeded;
-use crate::rustc_span::source_map::{Spanned, respan};
-use crate::rustc_span::{BytePos, ErrorGuaranteed, Ident, Span, kw, sym};
+use crate::rustc_complete::{Applicability, Diag, DiagArgValue, PResult, StashKey};
+use crate::rustc_complete::errors::ExprParenthesesNeeded;
+use crate::rustc_complete::source_map::{Spanned, respan};
+use crate::rustc_complete::{BytePos, ErrorGuaranteed, Ident, Span, kw, sym};
 use thin_vec::{ThinVec, thin_vec};
 
 use super::{ForceCollect, Parser, PathStyle, Restrictions, Trailing, UsePreAttrPos};

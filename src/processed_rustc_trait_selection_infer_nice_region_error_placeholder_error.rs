@@ -1,13 +1,13 @@
 use std::fmt;
 
 use crate::rustc_data_structures::intern::Interned;
-use rustc_errors::{Diag, IntoDiagArg};
-use crate::rustc_hir::def::Namespace;
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, DefId};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::error::ExpectedFound;
-use crate::rustc_middle::ty::print::{FmtPrinter, Print, PrintTraitRefExt as _, RegionHighlightMode};
-use crate::rustc_middle::ty::{self, GenericArgsRef, RePlaceholder, Region, TyCtxt};
+use crate::rustc_complete::{Diag, IntoDiagArg};
+use crate::rustc_complete::def::Namespace;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::error::ExpectedFound;
+use crate::rustc_complete::ty::print::{FmtPrinter, Print, PrintTraitRefExt as _, RegionHighlightMode};
+use crate::rustc_complete::ty::{self, GenericArgsRef, RePlaceholder, Region, TyCtxt};
 use tracing::{debug, instrument};
 
 use crate::error_reporting::infer::nice_region_error::NiceRegionError;
@@ -31,8 +31,8 @@ impl<'tcx, T> IntoDiagArg for Highlighted<'tcx, T>
 where
     T: for<'a> Print<'tcx, FmtPrinter<'a, 'tcx>>,
 {
-    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
-        rustc_errors::DiagArgValue::Str(self.to_string().into())
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
+        crate::rustc_errors::DiagArgValue::Str(self.to_string().into())
     }
 }
 

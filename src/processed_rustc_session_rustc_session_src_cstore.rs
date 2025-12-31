@@ -7,13 +7,13 @@ use std::path::PathBuf;
 
 use rustc_abi::ExternAbi;
 use crate::rustc_data_structures::sync::{self, AppendOnlyIndexVec, FreezeLock};
-use crate::rustc_hir::attrs::{CfgEntry, NativeLibKind, PeImportNameType};
-use crate::rustc_hir::def_id::{
+use crate::rustc_complete::attrs::{CfgEntry, NativeLibKind, PeImportNameType};
+use crate::rustc_complete::def_id::{
     CrateNum, DefId, LOCAL_CRATE, LocalDefId, StableCrateId, StableCrateIdMap,
 };
-use crate::rustc_hir::definitions::{DefKey, DefPath, DefPathHash, Definitions};
+use crate::rustc_complete::definitions::{DefKey, DefPath, DefPathHash, Definitions};
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 
 use crate::search_paths::PathKind;
 

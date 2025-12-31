@@ -2,7 +2,7 @@ use std::ffi::OsStr;
 use std::intrinsics::transmute_unchecked;
 use std::mem::MaybeUninit;
 
-use crate::rustc_span::ErrorGuaranteed;
+use crate::rustc_complete::ErrorGuaranteed;
 
 use crate::mir::interpret::EvalToValTreeResult;
 use crate::query::CyclePlaceholder;
@@ -94,12 +94,12 @@ impl<T> EraseType for Result<&'_ [T], traits::query::NoSolution> {
     type Result = [u8; size_of::<Result<&'static [()], traits::query::NoSolution>>()];
 }
 
-impl<T> EraseType for Result<&'_ T, rustc_errors::ErrorGuaranteed> {
-    type Result = [u8; size_of::<Result<&'static (), rustc_errors::ErrorGuaranteed>>()];
+impl<T> EraseType for Result<&'_ T, crate::rustc_errors::ErrorGuaranteed> {
+    type Result = [u8; size_of::<Result<&'static (), crate::rustc_errors::ErrorGuaranteed>>()];
 }
 
-impl<T> EraseType for Result<&'_ [T], rustc_errors::ErrorGuaranteed> {
-    type Result = [u8; size_of::<Result<&'static [()], rustc_errors::ErrorGuaranteed>>()];
+impl<T> EraseType for Result<&'_ [T], crate::rustc_errors::ErrorGuaranteed> {
+    type Result = [u8; size_of::<Result<&'static [()], crate::rustc_errors::ErrorGuaranteed>>()];
 }
 
 impl<T> EraseType for Result<&'_ T, traits::CodegenObligationError> {
@@ -110,26 +110,26 @@ impl<T> EraseType for Result<&'_ T, &'_ ty::layout::FnAbiError<'_>> {
     type Result = [u8; size_of::<Result<&'static (), &'static ty::layout::FnAbiError<'static>>>()];
 }
 
-impl<T> EraseType for Result<(&'_ T, crate::thir::ExprId), rustc_errors::ErrorGuaranteed> {
+impl<T> EraseType for Result<(&'_ T, crate::thir::ExprId), crate::rustc_errors::ErrorGuaranteed> {
     type Result = [u8; size_of::<
-        Result<(&'static (), crate::thir::ExprId), rustc_errors::ErrorGuaranteed>,
+        Result<(&'static (), crate::thir::ExprId), crate::rustc_errors::ErrorGuaranteed>,
     >()];
 }
 
-impl EraseType for Result<Option<ty::Instance<'_>>, rustc_errors::ErrorGuaranteed> {
+impl EraseType for Result<Option<ty::Instance<'_>>, crate::rustc_errors::ErrorGuaranteed> {
     type Result =
-        [u8; size_of::<Result<Option<ty::Instance<'static>>, rustc_errors::ErrorGuaranteed>>()];
+        [u8; size_of::<Result<Option<ty::Instance<'static>>, crate::rustc_errors::ErrorGuaranteed>>()];
 }
 
-impl EraseType for Result<CoerceUnsizedInfo, rustc_errors::ErrorGuaranteed> {
-    type Result = [u8; size_of::<Result<CoerceUnsizedInfo, rustc_errors::ErrorGuaranteed>>()];
+impl EraseType for Result<CoerceUnsizedInfo, crate::rustc_errors::ErrorGuaranteed> {
+    type Result = [u8; size_of::<Result<CoerceUnsizedInfo, crate::rustc_errors::ErrorGuaranteed>>()];
 }
 
 impl EraseType
-    for Result<Option<ty::EarlyBinder<'_, ty::Const<'_>>>, rustc_errors::ErrorGuaranteed>
+    for Result<Option<ty::EarlyBinder<'_, ty::Const<'_>>>, crate::rustc_errors::ErrorGuaranteed>
 {
     type Result = [u8; size_of::<
-        Result<Option<ty::EarlyBinder<'static, ty::Const<'static>>>, rustc_errors::ErrorGuaranteed>,
+        Result<Option<ty::EarlyBinder<'static, ty::Const<'static>>>, crate::rustc_errors::ErrorGuaranteed>,
     >()];
 }
 
@@ -272,7 +272,7 @@ trivial! {
     Option<usize>,
     Option<crate::rustc_middle::ty::IntrinsicDef>,
     Option<rustc_abi::Align>,
-    Result<(), rustc_errors::ErrorGuaranteed>,
+    Result<(), crate::rustc_errors::ErrorGuaranteed>,
     Result<(), crate::rustc_middle::traits::query::NoSolution>,
     Result<crate::rustc_middle::traits::EvaluationResult, crate::rustc_middle::traits::OverflowError>,
     rustc_abi::ReprOptions,
@@ -280,7 +280,7 @@ trivial! {
     crate::rustc_hir::DefaultBodyStability,
     crate::rustc_hir::attrs::Deprecation,
     crate::rustc_data_structures::svh::Svh,
-    rustc_errors::ErrorGuaranteed,
+    crate::rustc_errors::ErrorGuaranteed,
     crate::rustc_hir::Constness,
     crate::rustc_hir::ConstStability,
     crate::rustc_hir::def_id::DefId,

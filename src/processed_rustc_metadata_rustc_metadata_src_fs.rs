@@ -3,10 +3,10 @@ use std::{fs, io};
 
 use crate::rustc_data_structures::temp_dir::MaybeTempDir;
 use rustc_fs_util::TempDirBuilder;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::Session;
-use crate::rustc_session::config::{CrateType, OutFileName, OutputType};
-use crate::rustc_session::output::filename_for_metadata;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{CrateType, OutFileName, OutputType};
+use crate::rustc_complete::output::filename_for_metadata;
 
 use crate::errors::{
     BinaryOutputToTty, FailedCopyToStdout, FailedCreateEncodedMetadata, FailedCreateFile,

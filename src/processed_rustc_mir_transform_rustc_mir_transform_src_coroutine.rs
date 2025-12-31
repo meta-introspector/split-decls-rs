@@ -60,19 +60,19 @@ use drop::{
 };
 use rustc_abi::{FieldIdx, VariantIdx};
 use crate::rustc_data_structures::fx::FxHashSet;
-use rustc_errors::pluralize;
+use crate::rustc_complete::pluralize;
 use rustc_hir as hir;
-use crate::rustc_hir::lang_items::LangItem;
-use crate::rustc_hir::{CoroutineDesugaring, CoroutineKind};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{CoroutineDesugaring, CoroutineKind};
 use rustc_index::bit_set::{BitMatrix, DenseBitSet, GrowableBitSet};
 use rustc_index::{Idx, IndexVec};
-use crate::rustc_middle::mir::visit::{MutVisitor, PlaceContext, Visitor};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::util::Discr;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext, Visitor};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::util::Discr;
+use crate::rustc_complete::ty::{
     self, CoroutineArgs, CoroutineArgsExt, GenericArgsRef, InstanceKind, Ty, TyCtxt, TypingMode,
 };
-use crate::rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 use rustc_mir_dataflow::impls::{
     MaybeBorrowedLocals, MaybeLiveLocals, MaybeRequiresStorage, MaybeStorageLive,
     always_storage_live_locals,
@@ -80,14 +80,14 @@ use rustc_mir_dataflow::impls::{
 use rustc_mir_dataflow::{
     Analysis, Results, ResultsCursor, ResultsVisitor, visit_reachable_results,
 };
-use crate::rustc_span::def_id::{DefId, LocalDefId};
-use crate::rustc_span::source_map::dummy_spanned;
-use crate::rustc_span::symbol::sym;
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::source_map::dummy_spanned;
+use crate::rustc_complete::symbol::sym;
+use crate::rustc_complete::{DUMMY_SP, Span};
 use rustc_target::spec::PanicStrategy;
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::infer::TyCtxtInferExt as _;
-use rustc_trait_selection::traits::{ObligationCause, ObligationCauseCode, ObligationCtxt};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::infer::TyCtxtInferExt as _;
+use crate::rustc_trait_selection::traits::{ObligationCause, ObligationCauseCode, ObligationCtxt};
 use tracing::{debug, instrument, trace};
 
 use crate::deref_separator::deref_finder;
@@ -1234,7 +1234,7 @@ fn create_coroutine_resume_function<'tcx>(
 
     let mut cases = create_cases(body, &transform, Operation::Resume);
 
-    use crate::rustc_middle::mir::AssertKind::{ResumedAfterPanic, ResumedAfterReturn};
+    use crate::rustc_complete::mir::AssertKind::{ResumedAfterPanic, ResumedAfterReturn};
 
     // Jump to the entry point on the unresumed
     cases.insert(0, (CoroutineArgs::UNRESUMED, START_BLOCK));

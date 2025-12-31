@@ -3,7 +3,7 @@ use std::sync::OnceLock;
 
 use crate::rustc_data_structures::profiling::VerboseTimingGuard;
 use rustc_fs_util::try_canonicalize;
-use crate::rustc_hir::attrs::NativeLibKind;
+use crate::rustc_complete::attrs::NativeLibKind;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
 
 use crate::session::Session;

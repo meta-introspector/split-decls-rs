@@ -10,10 +10,10 @@ use rustc_codegen_ssa::MemFlags;
 use rustc_codegen_ssa::mir::operand::{OperandRef, OperandValue};
 use rustc_codegen_ssa::mir::place::{PlaceRef, PlaceValue};
 use rustc_codegen_ssa::traits::*;
-use crate::rustc_middle::ty::Ty;
-use crate::rustc_middle::ty::layout::LayoutOf;
-use crate::rustc_middle::{bug, ty};
-use crate::rustc_session::config;
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::LayoutOf;
+use crate::rustc_complete::{bug, ty};
+use crate::rustc_complete::config;
 use rustc_target::callconv::{
     ArgAbi, ArgAttribute, ArgAttributes, ArgExtension, CastTarget, FnAbi, PassMode,
 };

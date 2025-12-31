@@ -1,11 +1,11 @@
 use std::mem;
 
-use crate::rustc_ast::visit::Visitor;
-use crate::rustc_ast::{Crate, EnumDef, ast, visit};
+use crate::rustc_complete::visit::Visitor;
+use crate::rustc_complete::{Crate, EnumDef, ast, visit};
 use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, LocalDefId};
-use crate::rustc_middle::middle::privacy::{EffectiveVisibilities, EffectiveVisibility, Level};
-use crate::rustc_middle::ty::Visibility;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, LocalDefId};
+use crate::rustc_complete::middle::privacy::{EffectiveVisibilities, EffectiveVisibility, Level};
+use crate::rustc_complete::ty::Visibility;
 use tracing::info;
 
 use crate::{NameBinding, NameBindingKind, Resolver};

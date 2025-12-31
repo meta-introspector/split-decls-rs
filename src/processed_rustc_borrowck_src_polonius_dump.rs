@@ -2,11 +2,11 @@ use std::io;
 
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap, FxIndexSet};
 use rustc_index::IndexVec;
-use crate::rustc_middle::mir::pretty::{MirDumper, PassWhere, PrettyPrintMirOptions};
-use crate::rustc_middle::mir::{Body, Location};
-use crate::rustc_middle::ty::{RegionVid, TyCtxt};
+use crate::rustc_complete::mir::pretty::{MirDumper, PassWhere, PrettyPrintMirOptions};
+use crate::rustc_complete::mir::{Body, Location};
+use crate::rustc_complete::ty::{RegionVid, TyCtxt};
 use rustc_mir_dataflow::points::PointIndex;
-use crate::rustc_session::config::MirIncludeSpans;
+use crate::rustc_complete::config::MirIncludeSpans;
 
 use crate::borrow_set::BorrowSet;
 use crate::constraints::OutlivesConstraint;
@@ -232,7 +232,7 @@ fn emit_polonius_mir<'tcx>(
 
 /// Emits a mermaid flowchart of the CFG blocks and edges, similar to the graphviz version.
 fn emit_mermaid_cfg(body: &Body<'_>, out: &mut dyn io::Write) -> io::Result<()> {
-    use crate::rustc_middle::mir::{TerminatorEdges, TerminatorKind};
+    use crate::rustc_complete::mir::{TerminatorEdges, TerminatorKind};
 
     // The mermaid chart type: a top-down flowchart.
     writeln!(out, "flowchart TD")?;

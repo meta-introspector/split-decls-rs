@@ -12,37 +12,37 @@ use cc::windows_registry;
 use itertools::Itertools;
 use regex::Regex;
 use rustc_arena::TypedArena;
-use crate::rustc_ast::CRATE_NODE_ID;
+use crate::rustc_complete::CRATE_NODE_ID;
 use rustc_attr_parsing::{ShouldEmit, eval_config_entry};
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_data_structures::memmap::Mmap;
 use crate::rustc_data_structures::temp_dir::MaybeTempDir;
-use rustc_errors::{DiagCtxtHandle, LintDiagnostic};
+use crate::rustc_complete::{DiagCtxtHandle, LintDiagnostic};
 use rustc_fs_util::{TempDirBuilder, fix_windows_verbatim_for_gcc, try_canonicalize};
-use crate::rustc_hir::attrs::NativeLibKind;
-use crate::rustc_hir::def_id::{CrateNum, LOCAL_CRATE};
+use crate::rustc_complete::attrs::NativeLibKind;
+use crate::rustc_complete::def_id::{CrateNum, LOCAL_CRATE};
 use rustc_macros::LintDiagnostic;
 use rustc_metadata::fs::{METADATA_FILENAME, copy_to_stdout, emit_wrapper_file};
 use rustc_metadata::{
     EncodedMetadata, NativeLibSearchFallback, find_native_static_library,
     walk_native_lib_search_dirs,
 };
-use crate::rustc_middle::bug;
-use crate::rustc_middle::lint::lint_level;
-use crate::rustc_middle::middle::debugger_visualizer::DebuggerVisualizerFile;
-use crate::rustc_middle::middle::dependency_format::Linkage;
-use crate::rustc_middle::middle::exported_symbols::SymbolExportKind;
-use crate::rustc_session::config::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::lint::lint_level;
+use crate::rustc_complete::middle::debugger_visualizer::DebuggerVisualizerFile;
+use crate::rustc_complete::middle::dependency_format::Linkage;
+use crate::rustc_complete::middle::exported_symbols::SymbolExportKind;
+use crate::rustc_complete::config::{
     self, CFGuard, CrateType, DebugInfo, LinkerFeaturesCli, OutFileName, OutputFilenames,
     OutputType, PrintKind, SplitDwarfKind, Strip,
 };
-use crate::rustc_session::lint::builtin::LINKER_MESSAGES;
-use crate::rustc_session::output::{check_file_is_writeable, invalid_output_for_target, out_filename};
-use crate::rustc_session::search_paths::PathKind;
+use crate::rustc_complete::lint::builtin::LINKER_MESSAGES;
+use crate::rustc_complete::output::{check_file_is_writeable, invalid_output_for_target, out_filename};
+use crate::rustc_complete::search_paths::PathKind;
 /// For all the linkers we support, and information they might
 /// need out of the shared crate context before we get rid of it.
-use crate::rustc_session::{Session, filesearch};
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::{Session, filesearch};
+use crate::rustc_complete::Symbol;
 use rustc_target::spec::crt_objects::CrtObjects;
 use rustc_target::spec::{
     BinaryFormat, Cc, LinkOutputKind, LinkSelfContainedComponents, LinkSelfContainedDefault,

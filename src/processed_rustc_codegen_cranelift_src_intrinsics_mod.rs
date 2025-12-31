@@ -14,12 +14,12 @@ macro_rules! intrinsic_args {
 
 
 use cranelift_codegen::ir::AtomicRmwOp;
-use crate::rustc_middle::ty;
-use crate::rustc_middle::ty::GenericArgsRef;
-use crate::rustc_middle::ty::layout::ValidityRequirement;
-use crate::rustc_middle::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{Symbol, sym};
+use crate::rustc_complete::ty;
+use crate::rustc_complete::ty::GenericArgsRef;
+use crate::rustc_complete::ty::layout::ValidityRequirement;
+use crate::rustc_complete::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Symbol, sym};
 
 pub(crate) use self::llvm::codegen_llvm_intrinsic_call;
 use crate::cast::clif_intcast;

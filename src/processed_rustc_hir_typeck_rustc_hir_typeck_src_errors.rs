@@ -3,18 +3,18 @@
 use std::borrow::Cow;
 
 use rustc_abi::ExternAbi;
-use crate::rustc_ast::Label;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::Label;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagArgValue, DiagCtxtHandle, DiagSymbolList, Diagnostic,
     EmissionGuarantee, IntoDiagArg, Level, MultiSpan, Subdiagnostic,
 };
 use rustc_hir as hir;
-use crate::rustc_hir::ExprKind;
+use crate::rustc_complete::ExprKind;
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-use crate::rustc_middle::ty::{self, Ty};
-use crate::rustc_span::edition::{Edition, LATEST_STABLE_EDITION};
-use crate::rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::ty::{self, Ty};
+use crate::rustc_complete::edition::{Edition, LATEST_STABLE_EDITION};
+use crate::rustc_complete::{Ident, Span, Symbol};
 
 use crate::fluent_generated as fluent;
 
@@ -882,7 +882,7 @@ pub(crate) enum CastUnknownPointerSub {
     From(Span),
 }
 
-impl rustc_errors::Subdiagnostic for CastUnknownPointerSub {
+impl crate::rustc_errors::Subdiagnostic for CastUnknownPointerSub {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
         match self {
             CastUnknownPointerSub::To(span) => {

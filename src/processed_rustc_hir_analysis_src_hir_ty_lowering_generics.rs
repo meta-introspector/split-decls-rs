@@ -1,14 +1,14 @@
-use crate::rustc_ast::ast::ParamKindOrd;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, Diag, ErrorGuaranteed, MultiSpan, struct_span_code_err};
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::{self as hir, GenericArg};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ast::ParamKindOrd;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed, MultiSpan, struct_span_code_err};
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, GenericArg};
+use crate::rustc_complete::ty::{
     self, GenericArgsRef, GenericParamDef, GenericParamDefKind, IsSuggestable, Ty,
 };
-use crate::rustc_session::lint::builtin::LATE_BOUND_LIFETIME_ARGUMENTS;
-use crate::rustc_span::kw;
+use crate::rustc_complete::lint::builtin::LATE_BOUND_LIFETIME_ARGUMENTS;
+use crate::rustc_complete::kw;
 use smallvec::SmallVec;
 use tracing::{debug, instrument};
 

@@ -5,8 +5,8 @@ use crate::rustc_data_structures::fingerprint::Fingerprint;
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 use rustc_macros::HashStable;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{self, ExistentialTraitRef, Ty, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, ExistentialTraitRef, Ty, TyCtxt};
 
 use super::{DefinitionLocation, SmallVec, UNKNOWN_LINE_NUMBER, unknown_file_metadata};
 use crate::common::{AsCCharPtr, CodegenCx};

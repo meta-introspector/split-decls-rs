@@ -64,9 +64,9 @@ use precedence::*;
 use ptr_nulls::*;
 use redundant_semicolon::*;
 use reference_casting::*;
-use crate::rustc_hir::def_id::LocalModDefId;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::def_id::LocalModDefId;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::TyCtxt;
 use shadowed_into_iter::ShadowedIntoIter;
 pub use shadowed_into_iter::{ARRAY_INTO_ITER, BOXED_SLICE_INTO_ITER};
 use static_mut_refs::*;
@@ -85,9 +85,9 @@ pub use early::{EarlyCheckNode, check_ast_node};
 pub use late::{check_crate, late_lint_mod, unerased_lint_store};
 pub use levels::LintLevelsBuilder;
 pub use passes::{EarlyLintPass, LateLintPass};
-pub use rustc_errors::BufferedEarlyLint;
-pub use crate::rustc_session::lint::Level::{self, *};
-pub use crate::rustc_session::lint::{FutureIncompatibleInfo, Lint, LintId, LintPass, LintVec};
+pub use crate::rustc_complete::BufferedEarlyLint;
+pub use crate::rustc_complete::lint::Level::{self, *};
+pub use crate::rustc_complete::lint::{FutureIncompatibleInfo, Lint, LintId, LintPass, LintVec};
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
 

@@ -1,10 +1,10 @@
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level, MultiSpan, SingleLabelManySpans,
     Subdiagnostic,
 };
 use rustc_macros::{Diagnostic, Subdiagnostic};
-use crate::rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::{Ident, Span, Symbol};
 
 #[derive(Diagnostic)]
 #[diag(builtin_macros_requires_cfg_pattern)]

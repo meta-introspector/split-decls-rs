@@ -3,16 +3,16 @@ use std::iter;
 use rustc_abi::Primitive::Pointer;
 use rustc_abi::{BackendRepr, ExternAbi, PointerKind, Scalar, Size};
 use rustc_hir as hir;
-use crate::rustc_hir::lang_items::LangItem;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::layout::{
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::layout::{
     FnAbiError, HasTyCtxt, HasTypingEnv, LayoutCx, LayoutOf, TyAndLayout, fn_can_unwind,
 };
-use crate::rustc_middle::ty::{self, InstanceKind, Ty, TyCtxt};
-use crate::rustc_session::config::OptLevel;
-use crate::rustc_span::DUMMY_SP;
-use crate::rustc_span::def_id::DefId;
+use crate::rustc_complete::ty::{self, InstanceKind, Ty, TyCtxt};
+use crate::rustc_complete::config::OptLevel;
+use crate::rustc_complete::DUMMY_SP;
+use crate::rustc_complete::def_id::DefId;
 use rustc_target::callconv::{
     AbiMap, ArgAbi, ArgAttribute, ArgAttributes, ArgExtension, FnAbi, PassMode,
 };

@@ -1,7 +1,7 @@
-use crate::rustc_ast::{self as ast, Generics, ItemKind, MetaItem, VariantData};
+use crate::rustc_complete::{self as ast, Generics, ItemKind, MetaItem, VariantData};
 use crate::rustc_data_structures::fx::FxHashSet;
 use rustc_expand::base::{Annotatable, ExtCtxt};
-use crate::rustc_span::{Ident, Span, kw, sym};
+use crate::rustc_complete::{Ident, Span, kw, sym};
 use thin_vec::{ThinVec, thin_vec};
 
 use crate::deriving::generic::ty::*;

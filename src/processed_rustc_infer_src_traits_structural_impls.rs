@@ -1,6 +1,6 @@
 use std::fmt;
 
-use crate::rustc_middle::ty;
+use crate::rustc_complete::ty;
 
 use crate::traits;
 use crate::traits::project::Normalized;

@@ -1,7 +1,7 @@
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::visit::*;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::visit::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 
 const INSTR_COST: usize = 5;
 const CALL_PENALTY: usize = 25;

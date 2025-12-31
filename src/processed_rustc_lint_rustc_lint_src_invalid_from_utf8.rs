@@ -1,10 +1,10 @@
 use std::str::Utf8Error;
 
-use crate::rustc_ast::LitKind;
-use crate::rustc_hir::{Expr, ExprKind};
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::sym;
+use crate::rustc_complete::LitKind;
+use crate::rustc_complete::{Expr, ExprKind};
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::sym;
 
 use crate::lints::InvalidFromUtf8Diag;
 use crate::{LateContext, LateLintPass, LintContext};

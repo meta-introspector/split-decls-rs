@@ -4,8 +4,8 @@
 // of MIR building, and only after this pass we think of the program has having the
 // normal MIR semantics.
 
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 
 pub(super) struct AddRetag;
 

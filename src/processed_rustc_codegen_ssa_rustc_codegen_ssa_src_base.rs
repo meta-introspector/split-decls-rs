@@ -6,33 +6,33 @@ use std::time::{Duration, Instant};
 use itertools::Itertools;
 use rustc_abi::FIRST_VARIANT;
 use rustc_ast as ast;
-use crate::rustc_ast::expand::allocator::AllocatorKind;
+use crate::rustc_complete::expand::allocator::AllocatorKind;
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexSet};
 use crate::rustc_data_structures::profiling::{get_resident_set_size, print_time_passes_entry};
 use crate::rustc_data_structures::sync::{IntoDynSyncSend, par_map};
 use crate::rustc_data_structures::unord::UnordMap;
-use crate::rustc_hir::attrs::OptimizeAttr;
-use crate::rustc_hir::def_id::{DefId, LOCAL_CRATE};
-use crate::rustc_hir::lang_items::LangItem;
-use crate::rustc_hir::{ItemId, Target};
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrs;
-use crate::rustc_middle::middle::debugger_visualizer::{DebuggerVisualizerFile, DebuggerVisualizerType};
-use crate::rustc_middle::middle::dependency_format::Dependencies;
-use crate::rustc_middle::middle::exported_symbols::{self, SymbolExportKind};
-use crate::rustc_middle::middle::lang_items;
-use crate::rustc_middle::mir::BinOp;
-use crate::rustc_middle::mir::interpret::ErrorHandled;
-use crate::rustc_middle::mir::mono::{CodegenUnit, CodegenUnitNameBuilder, MonoItem, MonoItemPartitions};
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutOf, TyAndLayout};
-use crate::rustc_middle::ty::{self, Instance, Ty, TyCtxt};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::Session;
-use crate::rustc_session::config::{self, CrateType, EntryFnType};
-use crate::rustc_span::{DUMMY_SP, Symbol, sym};
+use crate::rustc_complete::attrs::OptimizeAttr;
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{ItemId, Target};
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
+use crate::rustc_complete::middle::debugger_visualizer::{DebuggerVisualizerFile, DebuggerVisualizerType};
+use crate::rustc_complete::middle::dependency_format::Dependencies;
+use crate::rustc_complete::middle::exported_symbols::{self, SymbolExportKind};
+use crate::rustc_complete::middle::lang_items;
+use crate::rustc_complete::mir::BinOp;
+use crate::rustc_complete::mir::interpret::ErrorHandled;
+use crate::rustc_complete::mir::mono::{CodegenUnit, CodegenUnitNameBuilder, MonoItem, MonoItemPartitions};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutOf, TyAndLayout};
+use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{self, CrateType, EntryFnType};
+use crate::rustc_complete::{DUMMY_SP, Symbol, sym};
 use rustc_symbol_mangling::mangle_internal_symbol;
-use rustc_trait_selection::infer::{BoundRegionConversionTime, TyCtxtInferExt};
-use rustc_trait_selection::traits::{ObligationCause, ObligationCtxt};
+use crate::rustc_trait_selection::infer::{BoundRegionConversionTime, TyCtxtInferExt};
+use crate::rustc_trait_selection::traits::{ObligationCause, ObligationCtxt};
 use tracing::{debug, info};
 
 use crate::assert_module_sources::CguReuse;
@@ -638,7 +638,7 @@ pub fn allocator_kind_for_codegen(tcx: TyCtxt<'_>) -> Option<AllocatorKind> {
     // and let needs_allocator_shim_for_linking decide at link time whether or
     // not to use it for any particular linker invocation.
     let all_crate_types_any_dynamic_crate = tcx.dependency_formats(()).iter().all(|(_, list)| {
-        use crate::rustc_middle::middle::dependency_format::Linkage;
+        use crate::rustc_complete::middle::dependency_format::Linkage;
         list.iter().any(|&linkage| linkage == Linkage::Dynamic)
     });
     if all_crate_types_any_dynamic_crate { None } else { tcx.allocator_kind(()) }
@@ -651,7 +651,7 @@ pub(crate) fn needs_allocator_shim_for_linking(
     dependency_formats: &Dependencies,
     crate_type: CrateType,
 ) -> bool {
-    use crate::rustc_middle::middle::dependency_format::Linkage;
+    use crate::rustc_complete::middle::dependency_format::Linkage;
     let any_dynamic_crate =
         dependency_formats[&crate_type].iter().any(|&linkage| linkage == Linkage::Dynamic);
     !any_dynamic_crate

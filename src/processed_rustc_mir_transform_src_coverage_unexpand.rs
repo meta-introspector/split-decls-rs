@@ -1,4 +1,4 @@
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 
 /// Walks through the expansion ancestors of `original_span` to find a span that
 /// is contained in `body_span` and has the same [syntax context] as `body_span`.

@@ -1,9 +1,9 @@
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::{Expr, ExprKind};
-use crate::rustc_middle::ty;
-use crate::rustc_middle::ty::adjustment::Adjust;
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::sym;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::{Expr, ExprKind};
+use crate::rustc_complete::ty;
+use crate::rustc_complete::ty::adjustment::Adjust;
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::sym;
 
 use crate::context::LintContext;
 use crate::lints::{

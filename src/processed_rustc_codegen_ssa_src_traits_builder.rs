@@ -2,11 +2,11 @@ use std::assert_matches::assert_matches;
 use std::ops::Deref;
 
 use rustc_abi::{Align, Scalar, Size, WrappingRange};
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrs;
-use crate::rustc_middle::ty::layout::{FnAbiOf, LayoutOf, TyAndLayout};
-use crate::rustc_middle::ty::{AtomicOrdering, Instance, Ty};
-use crate::rustc_session::config::OptLevel;
-use crate::rustc_span::Span;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
+use crate::rustc_complete::ty::layout::{FnAbiOf, LayoutOf, TyAndLayout};
+use crate::rustc_complete::ty::{AtomicOrdering, Instance, Ty};
+use crate::rustc_complete::config::OptLevel;
+use crate::rustc_complete::Span;
 use rustc_target::callconv::FnAbi;
 
 use super::abi::AbiBuilderMethods;

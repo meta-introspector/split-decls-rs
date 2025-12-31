@@ -22,9 +22,9 @@ use crate::rustc_data_structures::sync::{DynSend, IntoDynSyncSend};
 use rustc_error_messages::{FluentArgs, SpanLabel};
 use rustc_lexer;
 use rustc_lint_defs::pluralize;
-use crate::rustc_span::hygiene::{ExpnKind, MacroKind};
-use crate::rustc_span::source_map::SourceMap;
-use crate::rustc_span::{FileLines, FileName, SourceFile, Span, char_width, str_width};
+use crate::rustc_complete::hygiene::{ExpnKind, MacroKind};
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{FileLines, FileName, SourceFile, Span, char_width, str_width};
 use termcolor::{Buffer, BufferWriter, Color, ColorChoice, ColorSpec, StandardStream, WriteColor};
 use tracing::{debug, instrument, trace, warn};
 

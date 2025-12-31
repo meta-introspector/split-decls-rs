@@ -2,11 +2,11 @@ use std::fmt::Write;
 
 use crate::rustc_data_structures::fx::FxIndexMap;
 use rustc_hir as hir;
-use crate::rustc_hir::HirId;
-use crate::rustc_hir::def_id::LocalDefId;
+use crate::rustc_complete::HirId;
+use crate::rustc_complete::def_id::LocalDefId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-use crate::rustc_span::def_id::LocalDefIdMap;
-use crate::rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::def_id::LocalDefIdMap;
+use crate::rustc_complete::{Ident, Span, Symbol};
 
 use super::TyCtxt;
 use crate::hir::place::{

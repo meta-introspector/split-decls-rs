@@ -1,7 +1,7 @@
 use rustc_hir as hir;
-use crate::rustc_middle::ty::{Ty, TypeVisitableExt};
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::{Span, sym};
+use crate::rustc_complete::ty::{Ty, TypeVisitableExt};
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::{Span, sym};
 
 use crate::context::LintContext;
 use crate::lints::{EnumIntrinsicsMemDiscriminate, EnumIntrinsicsMemVariant};

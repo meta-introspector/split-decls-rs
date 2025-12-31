@@ -1,7 +1,7 @@
-use rustc_infer::infer::at::At;
-use rustc_infer::traits::TraitEngine;
+use crate::rustc_infer::infer::at::At;
+use crate::rustc_infer::traits::TraitEngine;
 use rustc_macros::extension;
-use crate::rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::ty::{self, Ty};
 
 use crate::traits::{NormalizeExt, Obligation};
 

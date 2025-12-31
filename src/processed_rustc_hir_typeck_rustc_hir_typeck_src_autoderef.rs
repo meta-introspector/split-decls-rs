@@ -4,11 +4,11 @@ use std::iter;
 
 use itertools::Itertools;
 use rustc_hir_analysis::autoderef::{Autoderef, AutoderefKind};
-use rustc_infer::infer::InferOk;
-use rustc_infer::traits::PredicateObligations;
-use crate::rustc_middle::ty::adjustment::{Adjust, Adjustment, OverloadedDeref};
-use crate::rustc_middle::ty::{self, Ty};
-use crate::rustc_span::Span;
+use crate::rustc_infer::infer::InferOk;
+use crate::rustc_infer::traits::PredicateObligations;
+use crate::rustc_complete::ty::adjustment::{Adjust, Adjustment, OverloadedDeref};
+use crate::rustc_complete::ty::{self, Ty};
+use crate::rustc_complete::Span;
 
 use super::method::MethodCallee;
 use super::{FnCtxt, PlaceOp};

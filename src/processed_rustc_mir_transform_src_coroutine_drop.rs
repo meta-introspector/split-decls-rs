@@ -417,7 +417,7 @@ pub(super) fn expand_async_drops<'tcx>(
                 }))
             };
 
-        use crate::rustc_middle::mir::AssertKind::ResumedAfterDrop;
+        use crate::rustc_complete::mir::AssertKind::ResumedAfterDrop;
         let panic_bb = insert_panic_block(tcx, body, ResumedAfterDrop(coroutine_kind));
 
         if is_dropline_bb {
@@ -646,7 +646,7 @@ pub(super) fn create_coroutine_drop_shim_async<'tcx>(
 
     cases.insert(0, (CoroutineArgs::UNRESUMED, drop_clean));
 
-    use crate::rustc_middle::mir::AssertKind::ResumedAfterPanic;
+    use crate::rustc_complete::mir::AssertKind::ResumedAfterPanic;
     // Panic when resumed on the returned or poisoned state
     if can_unwind {
         cases.insert(

@@ -1,17 +1,17 @@
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap, FxIndexSet};
-use rustc_errors::codes::*;
-use rustc_errors::struct_span_code_err;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::struct_span_code_err;
 use rustc_hir as hir;
-use crate::rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::def::{DefKind, Res};
 use rustc_lint_defs::builtin::UNUSED_ASSOCIATED_TYPE_BOUNDS;
-use crate::rustc_middle::ty::elaborate::ClauseWithSupertraitSpan;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::elaborate::ClauseWithSupertraitSpan;
+use crate::rustc_complete::ty::{
     self, BottomUpFolder, DynKind, ExistentialPredicateStableCmpExt as _, Ty, TyCtxt, TypeFoldable,
     TypeVisitableExt, Upcast,
 };
-use crate::rustc_span::{ErrorGuaranteed, Span};
-use rustc_trait_selection::error_reporting::traits::report_dyn_incompatibility;
-use rustc_trait_selection::traits;
+use crate::rustc_complete::{ErrorGuaranteed, Span};
+use crate::rustc_trait_selection::error_reporting::traits::report_dyn_incompatibility;
+use crate::rustc_trait_selection::traits;
 use smallvec::{SmallVec, smallvec};
 use tracing::{debug, instrument};
 

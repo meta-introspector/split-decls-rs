@@ -1,6 +1,6 @@
 // List of the accepted feature gates.
 
-use crate::rustc_span::sym;
+use crate::rustc_complete::sym;
 
 use super::{Feature, to_nonzero};
 

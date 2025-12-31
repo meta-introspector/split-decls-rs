@@ -1,20 +1,20 @@
 use std::iter;
 use std::path::PathBuf;
 
-use crate::rustc_ast::{LitKind, MetaItem, MetaItemInner, MetaItemKind, MetaItemLit};
-use rustc_errors::codes::*;
-use rustc_errors::{ErrorGuaranteed, struct_span_code_err};
+use crate::rustc_complete::{LitKind, MetaItem, MetaItemInner, MetaItemKind, MetaItemLit};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{ErrorGuaranteed, struct_span_code_err};
 use rustc_hir as hir;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::{AttrArgs, Attribute};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::{AttrArgs, Attribute};
 use rustc_macros::LintDiagnostic;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::print::PrintTraitRefExt;
-use crate::rustc_middle::ty::{self, GenericArgsRef, GenericParamDef, GenericParamDefKind, TyCtxt};
-use crate::rustc_session::lint::builtin::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::print::PrintTraitRefExt;
+use crate::rustc_complete::ty::{self, GenericArgsRef, GenericParamDef, GenericParamDefKind, TyCtxt};
+use crate::rustc_complete::lint::builtin::{
     MALFORMED_DIAGNOSTIC_ATTRIBUTES, MALFORMED_DIAGNOSTIC_FORMAT_LITERALS,
 };
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 use tracing::{debug, info};
 
 use super::{ObligationCauseCode, PredicateObligation};

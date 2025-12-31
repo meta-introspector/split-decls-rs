@@ -1,12 +1,12 @@
-use rustc_errors::codes::*;
-use rustc_errors::{Diag, LintDiagnostic};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Diag, LintDiagnostic};
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-use crate::rustc_middle::mir::AssertKind;
-use crate::rustc_middle::query::Key;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::lint::{self, Lint};
-use crate::rustc_span::def_id::DefId;
-use crate::rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::mir::AssertKind;
+use crate::rustc_complete::query::Key;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::lint::{self, Lint};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{Ident, Span, Symbol};
 
 use crate::fluent_generated as fluent;
 
@@ -170,7 +170,7 @@ pub(crate) struct MustNotSupend<'a, 'tcx> {
 
 // Needed for def_path_str
 impl<'a> LintDiagnostic<'a, ()> for MustNotSupend<'_, '_> {
-    fn decorate_lint<'b>(self, diag: &'b mut rustc_errors::Diag<'a, ()>) {
+    fn decorate_lint<'b>(self, diag: &'b mut crate::rustc_errors::Diag<'a, ()>) {
         diag.primary_message(fluent::mir_transform_must_not_suspend);
         diag.span_label(self.yield_sp, fluent::_subdiag::label);
         if let Some(reason) = self.reason {

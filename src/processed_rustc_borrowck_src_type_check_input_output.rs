@@ -11,10 +11,10 @@ use std::assert_matches::assert_matches;
 
 use itertools::Itertools;
 use rustc_hir as hir;
-use rustc_infer::infer::{BoundRegionConversionTime, RegionVariableOrigin};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, Ty};
-use crate::rustc_span::Span;
+use crate::rustc_infer::infer::{BoundRegionConversionTime, RegionVariableOrigin};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty};
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
 
 use super::{Locations, TypeChecker};

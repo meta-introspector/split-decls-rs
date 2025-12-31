@@ -1,5 +1,5 @@
-use crate::rustc_middle::mir::visit::Visitor;
-use crate::rustc_middle::mir::{Body, ConstOperand, Location, traversal};
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::{Body, ConstOperand, Location, traversal};
 
 pub(super) struct RequiredConstsVisitor<'tcx> {
     required_consts: Vec<ConstOperand<'tcx>>,

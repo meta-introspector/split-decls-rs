@@ -1,7 +1,7 @@
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{
     self, GenericArgsRef, Region, RegionVid, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
     TypeVisitor,
 };

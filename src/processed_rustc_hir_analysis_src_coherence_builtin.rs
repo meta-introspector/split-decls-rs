@@ -5,25 +5,25 @@ use std::assert_matches::assert_matches;
 use std::collections::BTreeMap;
 
 use crate::rustc_data_structures::fx::FxHashSet;
-use rustc_errors::{ErrorGuaranteed, MultiSpan};
+use crate::rustc_complete::{ErrorGuaranteed, MultiSpan};
 use rustc_hir as hir;
-use crate::rustc_hir::ItemKind;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::lang_items::LangItem;
-use rustc_infer::infer::{self, RegionResolutionError, SubregionOrigin, TyCtxtInferExt};
-use rustc_infer::traits::Obligation;
-use crate::rustc_middle::ty::adjustment::CoerceUnsizedInfo;
-use crate::rustc_middle::ty::print::PrintTraitRefExt as _;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ItemKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_infer::infer::{self, RegionResolutionError, SubregionOrigin, TyCtxtInferExt};
+use crate::rustc_infer::traits::Obligation;
+use crate::rustc_complete::ty::adjustment::CoerceUnsizedInfo;
+use crate::rustc_complete::ty::print::PrintTraitRefExt as _;
+use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeVisitableExt, TypingMode, suggest_constraining_type_params,
 };
-use crate::rustc_span::{DUMMY_SP, Span, sym};
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::traits::misc::{
+use crate::rustc_complete::{DUMMY_SP, Span, sym};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::traits::misc::{
     ConstParamTyImplementationError, CopyImplementationError, InfringingFieldsReason,
     type_allowed_to_implement_const_param_ty, type_allowed_to_implement_copy,
 };
-use rustc_trait_selection::traits::{self, ObligationCause, ObligationCtxt};
+use crate::rustc_trait_selection::traits::{self, ObligationCause, ObligationCtxt};
 use tracing::debug;
 
 use crate::errors;

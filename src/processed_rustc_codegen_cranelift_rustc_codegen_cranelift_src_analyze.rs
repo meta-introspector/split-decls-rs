@@ -1,7 +1,7 @@
 // SSA analysis
 
 use rustc_index::IndexVec;
-use crate::rustc_middle::mir::StatementKind::*;
+use crate::rustc_complete::mir::StatementKind::*;
 
 use crate::prelude::*;
 

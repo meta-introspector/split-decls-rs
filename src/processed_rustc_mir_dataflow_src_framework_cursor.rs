@@ -6,7 +6,7 @@ use std::ops::{Deref, DerefMut};
 
 #[cfg(debug_assertions)]
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::mir::{self, BasicBlock, Location};
+use crate::rustc_complete::mir::{self, BasicBlock, Location};
 
 use super::{Analysis, Direction, Effect, EffectIndex, Results};
 

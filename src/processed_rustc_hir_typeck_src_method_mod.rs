@@ -3,20 +3,20 @@
 // [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/method-lookup.html
 
 
-use rustc_errors::{Applicability, Diag, SubdiagMessage};
+use crate::rustc_complete::{Applicability, Diag, SubdiagMessage};
 use rustc_hir as hir;
-use crate::rustc_hir::def::{CtorOf, DefKind, Namespace};
-use crate::rustc_hir::def_id::DefId;
-use rustc_infer::infer::{BoundRegionConversionTime, InferOk};
-use rustc_infer::traits::PredicateObligations;
-use crate::rustc_middle::traits::ObligationCause;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::def::{CtorOf, DefKind, Namespace};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_infer::infer::{BoundRegionConversionTime, InferOk};
+use crate::rustc_infer::traits::PredicateObligations;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty::{
     self, GenericArgs, GenericArgsRef, GenericParamDefKind, Ty, TypeVisitableExt,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::{ErrorGuaranteed, Ident, Span, Symbol};
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
-use rustc_trait_selection::traits::{self, NormalizeExt};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, Symbol};
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
+use crate::rustc_trait_selection::traits::{self, NormalizeExt};
 use tracing::{debug, instrument};
 
 pub(crate) use self::MethodError::*;

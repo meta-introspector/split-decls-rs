@@ -5,13 +5,13 @@
 // FIXME(const_trait_impl): This API should be really reworked. It's dangerously general for
 // having basically only two use-cases that act in different ways.
 
-use rustc_errors::ErrorGuaranteed;
-use crate::rustc_hir::LangItem;
-use rustc_infer::infer::TyCtxtInferExt;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, AdtDef, Ty};
-use crate::rustc_middle::{bug, mir};
-use rustc_trait_selection::traits::{Obligation, ObligationCause, ObligationCtxt};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::LangItem;
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, AdtDef, Ty};
+use crate::rustc_complete::{bug, mir};
+use crate::rustc_trait_selection::traits::{Obligation, ObligationCause, ObligationCtxt};
 use tracing::instrument;
 
 use super::ConstCx;

@@ -1,6 +1,6 @@
 use crate::rustc_data_structures::fx::FxIndexMap;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::ty::{self, OutlivesPredicate, TyCtxt};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::ty::{self, OutlivesPredicate, TyCtxt};
 
 use super::utils::*;
 

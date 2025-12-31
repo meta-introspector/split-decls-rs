@@ -6,7 +6,7 @@ use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap};
 use crate::rustc_data_structures::graph::DirectedGraph;
 use rustc_index::IndexVec;
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::mir::coverage::{CounterId, CovTerm, Expression, ExpressionId, Op};
+use crate::rustc_complete::mir::coverage::{CounterId, CovTerm, Expression, ExpressionId, Op};
 
 use crate::coverage::counters::balanced_flow::BalancedFlowGraph;
 use crate::coverage::counters::node_flow::{

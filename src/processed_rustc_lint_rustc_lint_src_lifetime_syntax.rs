@@ -1,8 +1,8 @@
 use crate::rustc_data_structures::fx::FxIndexMap;
-use crate::rustc_hir::intravisit::{self, Visitor};
-use crate::rustc_hir::{self as hir, LifetimeSource};
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::Span;
+use crate::rustc_complete::intravisit::{self, Visitor};
+use crate::rustc_complete::{self as hir, LifetimeSource};
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::Span;
 use tracing::instrument;
 
 use crate::{LateContext, LateLintPass, LintContext, lints};

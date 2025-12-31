@@ -10,13 +10,13 @@
 use std::ops::ControlFlow;
 
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
-use crate::rustc_hir::lang_items::LangItem;
-use rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferOk};
-use rustc_infer::traits::ObligationCauseCode;
-use crate::rustc_middle::traits::{BuiltinImplSource, SignatureMismatchData};
-use crate::rustc_middle::ty::{self, GenericArgsRef, Region, SizedTraitKind, Ty, TyCtxt, Upcast};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::def_id::DefId;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferOk};
+use crate::rustc_infer::traits::ObligationCauseCode;
+use crate::rustc_complete::traits::{BuiltinImplSource, SignatureMismatchData};
+use crate::rustc_complete::ty::{self, GenericArgsRef, Region, SizedTraitKind, Ty, TyCtxt, Upcast};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::def_id::DefId;
 use thin_vec::thin_vec;
 use tracing::{debug, instrument};
 

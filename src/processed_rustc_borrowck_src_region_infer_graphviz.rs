@@ -7,7 +7,7 @@ use std::io::{self, Write};
 
 use itertools::Itertools;
 use rustc_graphviz as dot;
-use crate::rustc_middle::ty::UniverseIndex;
+use crate::rustc_complete::ty::UniverseIndex;
 
 use super::*;
 

@@ -1,27 +1,27 @@
-use crate::rustc_ast::attr::AttributeExt;
+use crate::rustc_complete::attr::AttributeExt;
 use rustc_ast_pretty::pprust;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 use crate::rustc_data_structures::unord::UnordSet;
-use rustc_errors::{Diag, LintDiagnostic, MultiSpan};
+use crate::rustc_complete::{Diag, LintDiagnostic, MultiSpan};
 use rustc_feature::{Features, GateIssue};
-use crate::rustc_hir::HirId;
-use crate::rustc_hir::intravisit::{self, Visitor};
+use crate::rustc_complete::HirId;
+use crate::rustc_complete::intravisit::{self, Visitor};
 use rustc_index::IndexVec;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::hir::nested_filter;
-use crate::rustc_middle::lint::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::lint::{
     LevelAndSource, LintExpectation, LintLevelSource, ShallowLintLevelMap, lint_level,
     reveal_actual_level,
 };
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{RegisteredTools, TyCtxt};
-use crate::rustc_session::Session;
-use crate::rustc_session::lint::builtin::{
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{RegisteredTools, TyCtxt};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::lint::builtin::{
     self, FORBIDDEN_LINT_GROUPS, RENAMED_AND_REMOVED_LINTS, SINGLE_USE_LIFETIMES,
     UNFULFILLED_LINT_EXPECTATIONS, UNKNOWN_LINTS, UNUSED_ATTRIBUTES,
 };
-use crate::rustc_session::lint::{Level, Lint, LintExpectationId, LintId};
-use crate::rustc_span::{DUMMY_SP, Span, Symbol, sym};
+use crate::rustc_complete::lint::{Level, Lint, LintExpectationId, LintId};
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol, sym};
 use tracing::{debug, instrument};
 use {rustc_ast as ast, rustc_hir as hir};
 

@@ -1,9 +1,9 @@
 use rustc_feature::Features;
-use crate::rustc_hir::attrs::AttributeKind::{LinkName, LinkOrdinal, LinkSection};
-use crate::rustc_hir::attrs::*;
-use crate::rustc_session::Session;
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::kw;
+use crate::rustc_complete::attrs::AttributeKind::{LinkName, LinkOrdinal, LinkSection};
+use crate::rustc_complete::attrs::*;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::kw;
 use rustc_target::spec::BinaryFormat;
 
 use super::prelude::*;

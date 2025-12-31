@@ -8,8 +8,8 @@ use std::fmt::{self, Debug};
 
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher, StableOrd, ToStableHashKey};
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-pub use crate::rustc_span::HashStableContext;
-use crate::rustc_span::def_id::{CRATE_DEF_ID, DefId, DefIndex, DefPathHash, LocalDefId};
+pub use crate::rustc_complete::HashStableContext;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, DefIndex, DefPathHash, LocalDefId};
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Encodable, Decodable)]
 pub struct OwnerId {

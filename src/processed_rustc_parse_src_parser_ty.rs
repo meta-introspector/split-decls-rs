@@ -1,14 +1,14 @@
-use crate::rustc_ast::token::{self, IdentIsRaw, MetaVarKind, Token, TokenKind};
-use crate::rustc_ast::util::case::Case;
-use crate::rustc_ast::{
+use crate::rustc_complete::token::{self, IdentIsRaw, MetaVarKind, Token, TokenKind};
+use crate::rustc_complete::util::case::Case;
+use crate::rustc_complete::{
     self as ast, BoundAsyncness, BoundConstness, BoundPolarity, DUMMY_NODE_ID, FnPtrTy, FnRetTy,
     GenericBound, GenericBounds, GenericParam, Generics, Lifetime, MacCall, MutTy, Mutability,
     Pinnedness, PolyTraitRef, PreciseCapturingArg, TraitBoundModifiers, TraitObjectSyntax, Ty,
     TyKind, UnsafeBinderTy,
 };
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::{Applicability, Diag, PResult};
-use crate::rustc_span::{ErrorGuaranteed, Ident, Span, kw, sym};
+use crate::rustc_complete::{Applicability, Diag, PResult};
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, kw, sym};
 use thin_vec::{ThinVec, thin_vec};
 
 use super::{Parser, PathStyle, SeqSep, TokenType, Trailing};

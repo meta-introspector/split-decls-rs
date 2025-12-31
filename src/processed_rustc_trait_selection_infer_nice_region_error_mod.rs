@@ -1,7 +1,7 @@
-use rustc_errors::{Diag, ErrorGuaranteed};
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_middle::ty::{self, TyCtxt};
-use crate::rustc_span::Span;
+use crate::rustc_complete::{Diag, ErrorGuaranteed};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::ty::{self, TyCtxt};
+use crate::rustc_complete::Span;
 
 use crate::error_reporting::TypeErrCtxt;
 use crate::infer::RegionResolutionError;

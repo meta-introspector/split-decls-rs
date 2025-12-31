@@ -1,11 +1,11 @@
 use rustc_ast as ast;
 use crate::rustc_data_structures::stable_hasher::{HashStable, HashingControls, StableHasher};
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::definitions::DefPathHash;
-use crate::rustc_session::Session;
-use crate::rustc_session::cstore::Untracked;
-use crate::rustc_span::source_map::SourceMap;
-use crate::rustc_span::{
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::definitions::DefPathHash;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::cstore::Untracked;
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{
     BytePos, CachingSourceMapView, DUMMY_SP, Span, SpanData, StableSourceFileId, Symbol,
 };
 

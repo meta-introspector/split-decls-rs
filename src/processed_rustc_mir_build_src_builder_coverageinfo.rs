@@ -2,11 +2,11 @@ use std::assert_matches::assert_matches;
 use std::collections::hash_map::Entry;
 
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_middle::mir::coverage::{BlockMarkerId, BranchSpan, CoverageInfoHi, CoverageKind};
-use crate::rustc_middle::mir::{self, BasicBlock, SourceInfo, UnOp};
-use crate::rustc_middle::thir::{ExprId, ExprKind, Pat, Thir};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::mir::coverage::{BlockMarkerId, BranchSpan, CoverageInfoHi, CoverageKind};
+use crate::rustc_complete::mir::{self, BasicBlock, SourceInfo, UnOp};
+use crate::rustc_complete::thir::{ExprId, ExprKind, Pat, Thir};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::def_id::LocalDefId;
 
 use crate::builder::{Builder, CFG};
 

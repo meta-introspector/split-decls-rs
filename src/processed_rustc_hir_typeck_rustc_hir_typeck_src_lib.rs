@@ -14,21 +14,21 @@
 pub use coercion::can_coerce;
 use fn_ctxt::FnCtxt;
 use crate::rustc_data_structures::unord::UnordSet;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, ErrorGuaranteed, pluralize, struct_span_code_err};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, ErrorGuaranteed, pluralize, struct_span_code_err};
 use rustc_hir as hir;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::{HirId, HirIdMap, Node};
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::{HirId, HirIdMap, Node};
 use rustc_hir_analysis::check::{check_abi, check_custom_abi};
 use rustc_hir_analysis::hir_ty_lowering::HirTyLowerer;
-use rustc_infer::traits::{ObligationCauseCode, ObligationInspector, WellFormedLoc};
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::config;
-use crate::rustc_span::Span;
-use crate::rustc_span::def_id::LocalDefId;
+use crate::rustc_infer::traits::{ObligationCauseCode, ObligationInspector, WellFormedLoc};
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::config;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::LocalDefId;
 use tracing::{debug, instrument};
 use typeck_root_ctxt::TypeckRootCtxt;
 
@@ -44,7 +44,7 @@ rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
 #[macro_export]
 macro_rules! type_error_struct {
     ($dcx:expr, $span:expr, $typ:expr, $code:expr, $($message:tt)*) => ({
-        let mut err = rustc_errors::struct_span_code_err!($dcx, $span, $code, $($message)*);
+        let mut err = crate::rustc_errors::struct_span_code_err!($dcx, $span, $code, $($message)*);
 
         if $typ.references_error() {
             err.downgrade_to_delayed_bug();

@@ -1,16 +1,16 @@
-use rustc_errors::Applicability::{MachineApplicable, MaybeIncorrect};
-use rustc_errors::{Diag, MultiSpan, pluralize};
+use crate::rustc_complete::Applicability::{MachineApplicable, MaybeIncorrect};
+use crate::rustc_complete::{Diag, MultiSpan, pluralize};
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::find_attr;
-use crate::rustc_middle::traits::{ObligationCause, ObligationCauseCode};
-use crate::rustc_middle::ty::error::{ExpectedFound, TypeError};
-use crate::rustc_middle::ty::fast_reject::DeepRejectCtxt;
-use crate::rustc_middle::ty::print::{FmtPrinter, Printer};
-use crate::rustc_middle::ty::{self, Ty, suggest_constraining_type_param};
-use crate::rustc_span::def_id::DefId;
-use crate::rustc_span::{BytePos, Span, Symbol};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::find_attr;
+use crate::rustc_complete::traits::{ObligationCause, ObligationCauseCode};
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
+use crate::rustc_complete::ty::print::{FmtPrinter, Printer};
+use crate::rustc_complete::ty::{self, Ty, suggest_constraining_type_param};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{BytePos, Span, Symbol};
 use tracing::debug;
 
 use crate::error_reporting::TypeErrCtxt;

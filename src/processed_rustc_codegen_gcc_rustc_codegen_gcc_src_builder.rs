@@ -21,14 +21,14 @@ use rustc_codegen_ssa::traits::{
     LayoutTypeCodegenMethods, OverflowOp, StaticBuilderMethods,
 };
 use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrs;
-use crate::rustc_middle::ty::layout::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
+use crate::rustc_complete::ty::layout::{
     FnAbiError, FnAbiOfHelpers, FnAbiRequest, HasTyCtxt, HasTypingEnv, LayoutError, LayoutOfHelpers,
 };
-use crate::rustc_middle::ty::{self, AtomicOrdering, Instance, Ty, TyCtxt};
-use crate::rustc_span::Span;
-use crate::rustc_span::def_id::DefId;
+use crate::rustc_complete::ty::{self, AtomicOrdering, Instance, Ty, TyCtxt};
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::DefId;
 use rustc_target::callconv::FnAbi;
 use rustc_target::spec::{HasTargetSpec, HasX86AbiOpt, Target, X86Abi};
 

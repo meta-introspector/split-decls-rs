@@ -6,16 +6,16 @@
 
 use std::ops::ControlFlow;
 
-use rustc_errors::FatalError;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::{self as hir, LangItem};
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::FatalError;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, LangItem};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{
     self, EarlyBinder, GenericArgs, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable,
     TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode, Upcast,
     elaborate,
 };
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::{DUMMY_SP, Span};
 use smallvec::SmallVec;
 use tracing::{debug, instrument};
 

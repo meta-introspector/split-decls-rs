@@ -1,8 +1,8 @@
 use rustc_ast as ast;
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_hir::def_id::DefId;
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-use crate::rustc_span::{Span, Symbol, kw};
+use crate::rustc_complete::{Span, Symbol, kw};
 use tracing::instrument;
 
 use super::{Clause, InstantiatedPredicates, ParamConst, ParamTy, Ty, TyCtxt};

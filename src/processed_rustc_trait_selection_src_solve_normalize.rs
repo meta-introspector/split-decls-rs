@@ -1,12 +1,12 @@
 use std::fmt::Debug;
 
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_infer::infer::InferCtxt;
-use rustc_infer::infer::at::At;
-use rustc_infer::traits::solve::Goal;
-use rustc_infer::traits::{FromSolverError, Obligation, TraitEngine};
-use crate::rustc_middle::traits::ObligationCause;
-use crate::rustc_middle::ty::{
+use crate::rustc_infer::infer::InferCtxt;
+use crate::rustc_infer::infer::at::At;
+use crate::rustc_infer::traits::solve::Goal;
+use crate::rustc_infer::traits::{FromSolverError, Obligation, TraitEngine};
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty::{
     self, FallibleTypeFolder, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable,
     TypeVisitableExt, UniverseIndex,
 };

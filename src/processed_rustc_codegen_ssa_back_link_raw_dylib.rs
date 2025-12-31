@@ -7,10 +7,10 @@ use crate::rustc_data_structures::base_n::{CASE_INSENSITIVE, ToBaseN};
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap};
 use crate::rustc_data_structures::stable_hasher::StableHasher;
 use rustc_hashes::Hash128;
-use crate::rustc_hir::attrs::NativeLibKind;
-use crate::rustc_session::Session;
-use crate::rustc_session::cstore::DllImport;
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::attrs::NativeLibKind;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::cstore::DllImport;
+use crate::rustc_complete::Symbol;
 
 use crate::back::archive::ImportLibraryItem;
 use crate::back::link::ArchiveBuilderBuilder;

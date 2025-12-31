@@ -1,8 +1,8 @@
 use crate::rustc_data_structures::fx::FxIndexMap;
-use crate::rustc_middle::ty::outlives::{Component, push_outlives_components};
-use crate::rustc_middle::ty::{self, GenericArg, GenericArgKind, Region, Ty, TyCtxt};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::Span;
+use crate::rustc_complete::ty::outlives::{Component, push_outlives_components};
+use crate::rustc_complete::ty::{self, GenericArg, GenericArgKind, Region, Ty, TyCtxt};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::Span;
 use smallvec::smallvec;
 
 /// Tracks the `T: 'a` or `'a: 'a` predicates that we have inferred

@@ -9,17 +9,17 @@ use libc::{c_longlong, c_uint};
 use rustc_abi::{Align, Size};
 use rustc_codegen_ssa::debuginfo::type_names::{VTableNameKind, cpp_like_debuginfo};
 use rustc_codegen_ssa::traits::*;
-use crate::rustc_hir::def::{CtorKind, DefKind};
-use crate::rustc_hir::def_id::{DefId, LOCAL_CRATE};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::layout::{
+use crate::rustc_complete::def::{CtorKind, DefKind};
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::{
     HasTypingEnv, LayoutOf, TyAndLayout, WIDE_PTR_ADDR, WIDE_PTR_EXTRA,
 };
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, AdtKind, CoroutineArgsExt, ExistentialTraitRef, Instance, Ty, TyCtxt, Visibility,
 };
-use crate::rustc_session::config::{self, DebugInfo, Lto};
-use crate::rustc_span::{
+use crate::rustc_complete::config::{self, DebugInfo, Lto};
+use crate::rustc_complete::{
     DUMMY_SP, FileName, FileNameDisplayPreference, SourceFile, Span, Symbol, hygiene,
 };
 use rustc_symbol_mangling::typeid_for_trait_ref;
@@ -549,7 +549,7 @@ pub(crate) fn file_metadata<'ll>(cx: &CodegenCx<'ll, '_>, source_file: &SourceFi
         let filename_display_preference =
             cx.sess().filename_display_preference(RemapPathScopeComponents::DEBUGINFO);
 
-        use crate::rustc_session::config::RemapPathScopeComponents;
+        use crate::rustc_complete::config::RemapPathScopeComponents;
         let (directory, file_name) = match &source_file.name {
             FileName::Real(filename) => {
                 let working_directory = &cx.sess().opts.working_dir;
@@ -878,8 +878,8 @@ pub(crate) fn build_compile_unit_di_node<'ll, 'tcx>(
     codegen_unit_name: &str,
     debug_context: &CodegenUnitDebugContext<'ll, 'tcx>,
 ) -> &'ll DIDescriptor {
-    use crate::rustc_session::RemapFileNameExt;
-    use crate::rustc_session::config::RemapPathScopeComponents;
+    use crate::rustc_complete::RemapFileNameExt;
+    use crate::rustc_complete::config::RemapPathScopeComponents;
     let mut name_in_debuginfo = tcx
         .sess
         .local_crate_source_file()

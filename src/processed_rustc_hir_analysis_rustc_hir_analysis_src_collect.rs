@@ -20,29 +20,29 @@ use std::iter;
 use std::ops::Bound;
 
 use rustc_abi::ExternAbi;
-use crate::rustc_ast::Recovered;
+use crate::rustc_complete::Recovered;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 use crate::rustc_data_structures::unord::UnordMap;
-use rustc_errors::{
+use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, E0228, ErrorGuaranteed, StashKey, struct_span_code_err,
 };
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::intravisit::{InferKind, Visitor, VisitorExt};
-use crate::rustc_hir::{self as hir, GenericParamKind, HirId, Node, PreciseCapturingArgKind, find_attr};
-use rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
-use rustc_infer::traits::{DynCompatibilityViolation, ObligationCause};
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::util::{Discr, IntTypeExt};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::intravisit::{InferKind, Visitor, VisitorExt};
+use crate::rustc_complete::{self as hir, GenericParamKind, HirId, Node, PreciseCapturingArgKind, find_attr};
+use crate::rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
+use crate::rustc_infer::traits::{DynCompatibilityViolation, ObligationCause};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::util::{Discr, IntTypeExt};
+use crate::rustc_complete::ty::{
     self, AdtKind, Const, IsSuggestable, Ty, TyCtxt, TypeVisitableExt, TypingMode, fold_regions,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
-use rustc_trait_selection::error_reporting::traits::suggestions::NextTypeParamName;
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits::{
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
+use crate::rustc_trait_selection::error_reporting::traits::suggestions::NextTypeParamName;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits::{
     FulfillmentError, ObligationCtxt, hir_ty_lowering_dyn_compatibility_violations,
 };
 use tracing::{debug, instrument};
@@ -111,7 +111,7 @@ pub(crate) fn provide(providers: &mut Providers) {
 /// An important thing to note is that `ItemCtxt` does no inference -- it has no [`InferCtxt`] --
 /// while `FnCtxt` does do inference.
 ///
-/// [`InferCtxt`]: rustc_infer::infer::InferCtxt
+/// [`InferCtxt`]: crate::rustc_infer::infer::InferCtxt
 ///
 /// # Trait predicates
 ///
@@ -287,7 +287,7 @@ impl<'tcx> ItemCtxt<'tcx> {
                 format!(
                     "try replacing `_` with the type{} in the corresponding trait method \
                         signature",
-                    rustc_errors::pluralize!(infer_replacements.len()),
+                    crate::rustc_errors::pluralize!(infer_replacements.len()),
                 ),
                 infer_replacements,
                 Applicability::MachineApplicable,
@@ -775,7 +775,7 @@ fn lower_variant<'tcx>(
 }
 
 fn adt_def(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::AdtDef<'_> {
-    use crate::rustc_hir::*;
+    use crate::rustc_complete::*;
 
     let Node::Item(item) = tcx.hir_node_by_def_id(def_id) else {
         bug!("expected ADT to be an item");
@@ -982,8 +982,8 @@ fn trait_def(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::TraitDef {
 
 #[instrument(level = "debug", skip(tcx), ret)]
 fn fn_sig(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::EarlyBinder<'_, ty::PolyFnSig<'_>> {
-    use crate::rustc_hir::Node::*;
-    use crate::rustc_hir::*;
+    use crate::rustc_complete::Node::*;
+    use crate::rustc_complete::*;
 
     let hir_id = tcx.local_def_id_to_hir_id(def_id);
 

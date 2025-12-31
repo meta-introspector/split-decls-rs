@@ -1,13 +1,13 @@
 // Performs various peephole optimizations.
 
 use rustc_abi::ExternAbi;
-use crate::rustc_ast::attr;
-use crate::rustc_hir::LangItem;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::layout::ValidityRequirement;
-use crate::rustc_middle::ty::{self, GenericArgsRef, Ty, TyCtxt, layout};
-use crate::rustc_span::{DUMMY_SP, Symbol, sym};
+use crate::rustc_complete::attr;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::layout::ValidityRequirement;
+use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, layout};
+use crate::rustc_complete::{DUMMY_SP, Symbol, sym};
 
 use crate::simplify::simplify_duplicate_switch_targets;
 

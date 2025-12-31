@@ -1,8 +1,8 @@
 use cranelift_frontend::{FunctionBuilder, FunctionBuilderContext};
-use crate::rustc_hir::LangItem;
-use crate::rustc_middle::ty::{AssocTag, GenericArg};
-use crate::rustc_session::config::EntryFnType;
-use crate::rustc_span::{DUMMY_SP, Ident};
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::ty::{AssocTag, GenericArg};
+use crate::rustc_complete::config::EntryFnType;
+use crate::rustc_complete::{DUMMY_SP, Ident};
 
 use crate::prelude::*;
 

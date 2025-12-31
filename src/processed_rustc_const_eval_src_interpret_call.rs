@@ -5,11 +5,11 @@ use std::borrow::Cow;
 
 use either::{Left, Right};
 use rustc_abi::{self as abi, ExternAbi, FieldIdx, Integer, VariantIdx};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::ty::layout::{IntegerExt, TyAndLayout};
-use crate::rustc_middle::ty::{self, AdtDef, Instance, Ty, VariantDef};
-use crate::rustc_middle::{bug, mir, span_bug};
-use crate::rustc_span::sym;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::ty::layout::{IntegerExt, TyAndLayout};
+use crate::rustc_complete::ty::{self, AdtDef, Instance, Ty, VariantDef};
+use crate::rustc_complete::{bug, mir, span_bug};
+use crate::rustc_complete::sym;
 use rustc_target::callconv::{ArgAbi, FnAbi, PassMode};
 use tracing::field::Empty;
 use tracing::{info, instrument, trace};

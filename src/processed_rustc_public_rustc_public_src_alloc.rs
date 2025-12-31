@@ -5,8 +5,8 @@
 // to `rustc_public_bridge::alloc` to maintain stability guarantees.
 
 use rustc_abi::Align;
-use crate::rustc_middle::mir::ConstValue;
-use crate::rustc_middle::mir::interpret::AllocRange;
+use crate::rustc_complete::mir::ConstValue;
+use crate::rustc_complete::mir::interpret::AllocRange;
 use rustc_public_bridge::bridge::Error as _;
 use rustc_public_bridge::context::CompilerCtxt;
 use rustc_public_bridge::{Tables, alloc};

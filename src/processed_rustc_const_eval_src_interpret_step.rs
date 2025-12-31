@@ -8,9 +8,9 @@ use either::Either;
 use rustc_abi::{FIRST_VARIANT, FieldIdx};
 use crate::rustc_data_structures::fx::FxHashSet;
 use rustc_index::IndexSlice;
-use crate::rustc_middle::ty::{self, Instance, Ty};
-use crate::rustc_middle::{bug, mir, span_bug};
-use crate::rustc_span::source_map::Spanned;
+use crate::rustc_complete::ty::{self, Instance, Ty};
+use crate::rustc_complete::{bug, mir, span_bug};
+use crate::rustc_complete::source_map::Spanned;
 use rustc_target::callconv::FnAbi;
 use tracing::field::Empty;
 use tracing::{info, instrument, trace};
@@ -88,7 +88,7 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         )
         .or_if_tracing_disabled(|| info!(stmt = ?stmt.kind));
 
-        use crate::rustc_middle::mir::StatementKind::*;
+        use crate::rustc_complete::mir::StatementKind::*;
 
         match &stmt.kind {
             Assign(box (place, rvalue)) => self.eval_rvalue_into_place(rvalue, *place)?,
@@ -175,7 +175,7 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         // FIXME: ensure some kind of non-aliasing between LHS and RHS?
         // Also see https://github.com/rust-lang/rust/issues/68364.
 
-        use crate::rustc_middle::mir::Rvalue::*;
+        use crate::rustc_complete::mir::Rvalue::*;
         match *rvalue {
             ThreadLocalRef(did) => {
                 let ptr = M::thread_local_static_pointer(self, did)?;
@@ -508,7 +508,7 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         )
         .or_if_tracing_disabled(|| info!(terminator = ?terminator.kind));
 
-        use crate::rustc_middle::mir::TerminatorKind::*;
+        use crate::rustc_complete::mir::TerminatorKind::*;
         match terminator.kind {
             Return => {
                 self.return_from_current_stack_frame(/* unwinding */ false)?

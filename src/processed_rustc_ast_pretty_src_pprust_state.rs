@@ -6,20 +6,20 @@
 use std::borrow::Cow;
 use std::sync::Arc;
 
-use crate::rustc_ast::attr::AttrIdGenerator;
-use crate::rustc_ast::token::{self, CommentKind, Delimiter, Token, TokenKind};
-use crate::rustc_ast::tokenstream::{Spacing, TokenStream, TokenTree};
-use crate::rustc_ast::util::classify;
-use crate::rustc_ast::util::comments::{Comment, CommentStyle};
-use crate::rustc_ast::{
+use crate::rustc_complete::attr::AttrIdGenerator;
+use crate::rustc_complete::token::{self, CommentKind, Delimiter, Token, TokenKind};
+use crate::rustc_complete::tokenstream::{Spacing, TokenStream, TokenTree};
+use crate::rustc_complete::util::classify;
+use crate::rustc_complete::util::comments::{Comment, CommentStyle};
+use crate::rustc_complete::{
     self as ast, AttrArgs, BindingMode, BlockCheckMode, ByRef, DelimArgs, GenericArg, GenericBound,
     InlineAsmOperand, InlineAsmOptions, InlineAsmRegOrRegClass, InlineAsmTemplatePiece, PatKind,
     RangeEnd, RangeSyntax, Safety, SelfKind, Term, attr,
 };
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::source_map::{SourceMap, Spanned};
-use crate::rustc_span::symbol::IdentPrinter;
-use crate::rustc_span::{BytePos, CharPos, DUMMY_SP, FileName, Ident, Pos, Span, Symbol, kw, sym};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::source_map::{SourceMap, Spanned};
+use crate::rustc_complete::symbol::IdentPrinter;
+use crate::rustc_complete::{BytePos, CharPos, DUMMY_SP, FileName, Ident, Pos, Span, Symbol, kw, sym};
 
 use crate::pp::Breaks::{Consistent, Inconsistent};
 use crate::pp::{self, BoxMarker, Breaks};

@@ -1,8 +1,8 @@
 use crate::rustc_data_structures::fx::FxIndexMap;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::ty::{self, GenericArg, GenericArgKind, Ty, TyCtxt};
-use crate::rustc_span::Span;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::ty::{self, GenericArg, GenericArgKind, Ty, TyCtxt};
+use crate::rustc_complete::Span;
 use tracing::debug;
 
 use super::explicit::ExplicitPredicatesMap;

@@ -85,17 +85,17 @@ use std::mem;
 
 use interpret::ErrorHandled;
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_hir::{self as hir, HirId};
+use crate::rustc_complete::{self as hir, HirId};
 use rustc_index::{IndexSlice, IndexVec};
-use crate::rustc_middle::middle::region;
-use crate::rustc_middle::mir::{self, *};
-use crate::rustc_middle::thir::{AdtExpr, AdtExprBase, ArmId, ExprId, ExprKind, LintLevel};
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, TypeVisitableExt, ValTree};
-use crate::rustc_middle::{bug, span_bug};
+use crate::rustc_complete::middle::region;
+use crate::rustc_complete::mir::{self, *};
+use crate::rustc_complete::thir::{AdtExpr, AdtExprBase, ArmId, ExprId, ExprKind, LintLevel};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitableExt, ValTree};
+use crate::rustc_complete::{bug, span_bug};
 use rustc_pattern_analysis::rustc::RustcPatCtxt;
-use crate::rustc_session::lint::Level;
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::lint::Level;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{DUMMY_SP, Span};
 use tracing::{debug, instrument};
 
 use super::matches::BuiltMatchTree;

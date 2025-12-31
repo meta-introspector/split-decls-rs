@@ -1,18 +1,18 @@
 // See docs in `build/expr/mod.rs`.
 
 use rustc_abi::FieldIdx;
-use crate::rustc_hir::lang_items::LangItem;
+use crate::rustc_complete::lang_items::LangItem;
 use rustc_index::{Idx, IndexVec};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::middle::region;
-use crate::rustc_middle::mir::interpret::Scalar;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::thir::*;
-use crate::rustc_middle::ty::cast::{CastTy, mir_cast_kind};
-use crate::rustc_middle::ty::util::IntTypeExt;
-use crate::rustc_middle::ty::{self, Ty, UpvarArgs};
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::region;
+use crate::rustc_complete::mir::interpret::Scalar;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::cast::{CastTy, mir_cast_kind};
+use crate::rustc_complete::ty::util::IntTypeExt;
+use crate::rustc_complete::ty::{self, Ty, UpvarArgs};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{DUMMY_SP, Span};
 use tracing::debug;
 
 use crate::builder::expr::as_place::PlaceBase;

@@ -1,11 +1,11 @@
 use rustc_abi::{BackendRepr, Float, Integer, Primitive, RegKind};
-use crate::rustc_hir::attrs::{InstructionSetAttr, Linkage};
-use crate::rustc_middle::mir::mono::{MonoItemData, Visibility};
-use crate::rustc_middle::mir::{InlineAsmOperand, START_BLOCK};
-use crate::rustc_middle::ty::layout::{FnAbiOf, LayoutOf, TyAndLayout};
-use crate::rustc_middle::ty::{Instance, Ty, TyCtxt, TypeVisitableExt};
-use crate::rustc_middle::{bug, ty};
-use crate::rustc_span::sym;
+use crate::rustc_complete::attrs::{InstructionSetAttr, Linkage};
+use crate::rustc_complete::mir::mono::{MonoItemData, Visibility};
+use crate::rustc_complete::mir::{InlineAsmOperand, START_BLOCK};
+use crate::rustc_complete::ty::layout::{FnAbiOf, LayoutOf, TyAndLayout};
+use crate::rustc_complete::ty::{Instance, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::{bug, ty};
+use crate::rustc_complete::sym;
 use rustc_target::callconv::{ArgAbi, FnAbi, PassMode};
 use rustc_target::spec::BinaryFormat;
 

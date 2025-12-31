@@ -6,10 +6,10 @@ use AttributeDuplicates::*;
 use AttributeGate::*;
 use AttributeType::*;
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_hir::AttrStyle;
-use crate::rustc_hir::attrs::EncodeCrossCrate;
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::{Symbol, sym};
+use crate::rustc_complete::AttrStyle;
+use crate::rustc_complete::attrs::EncodeCrossCrate;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{Symbol, sym};
 
 use crate::Features;
 

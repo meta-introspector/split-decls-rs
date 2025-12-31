@@ -8,19 +8,19 @@ use std::mem;
 use hir::def_id::{LocalDefIdMap, LocalDefIdSet};
 use rustc_abi::FieldIdx;
 use crate::rustc_data_structures::fx::FxIndexSet;
-use rustc_errors::MultiSpan;
-use crate::rustc_hir::def::{CtorOf, DefKind, Res};
-use crate::rustc_hir::def_id::{DefId, LocalDefId, LocalModDefId};
-use crate::rustc_hir::intravisit::{self, Visitor};
-use crate::rustc_hir::{self as hir, Node, PatKind, QPath};
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use crate::rustc_middle::middle::privacy::Level;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{self, AssocTag, TyCtxt};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::lint::builtin::DEAD_CODE;
-use crate::rustc_session::lint::{self, LintExpectationId};
-use crate::rustc_span::{Symbol, kw, sym};
+use crate::rustc_complete::MultiSpan;
+use crate::rustc_complete::def::{CtorOf, DefKind, Res};
+use crate::rustc_complete::def_id::{DefId, LocalDefId, LocalModDefId};
+use crate::rustc_complete::intravisit::{self, Visitor};
+use crate::rustc_complete::{self as hir, Node, PatKind, QPath};
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::middle::privacy::Level;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, AssocTag, TyCtxt};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::lint::builtin::DEAD_CODE;
+use crate::rustc_complete::lint::{self, LintExpectationId};
+use crate::rustc_complete::{Symbol, kw, sym};
 
 use crate::errors::{
     ChangeFields, IgnoredDerivedImpls, MultipleDeadCodes, ParentInfo, UselessAssignment,

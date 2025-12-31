@@ -3,7 +3,7 @@
 #[allow(rustc::usage_of_qualified_ty)]
 
 use rustc_abi::{ArmCall, CanonAbi, InterruptKind, X86Call};
-use crate::rustc_middle::ty;
+use crate::rustc_complete::ty;
 use rustc_public_bridge::Tables;
 use rustc_public_bridge::context::CompilerCtxt;
 use rustc_target::callconv;

@@ -2,12 +2,12 @@
 // a literal `true` or `false` based on whether the given cfg matches the
 // current compilation environment.
 
-use crate::rustc_ast::token;
-use crate::rustc_ast::tokenstream::TokenStream;
-use rustc_errors::PResult;
+use crate::rustc_complete::token;
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::PResult;
 use rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
 use rustc_parse::exp;
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 use {rustc_ast as ast, rustc_attr_parsing as attr};
 
 use crate::errors;

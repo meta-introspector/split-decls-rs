@@ -5,8 +5,8 @@
 // [`codegen_static`]: crate::constant::codegen_static
 
 use crate::rustc_data_structures::profiling::SelfProfilerRef;
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use crate::rustc_middle::mir::mono::{MonoItem, MonoItemData};
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::mir::mono::{MonoItem, MonoItemData};
 
 use crate::prelude::*;
 

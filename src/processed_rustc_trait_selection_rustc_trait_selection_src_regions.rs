@@ -1,10 +1,10 @@
-use crate::rustc_hir::def_id::LocalDefId;
-use rustc_infer::infer::outlives::env::OutlivesEnvironment;
-use rustc_infer::infer::{InferCtxt, RegionResolutionError};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_infer::infer::outlives::env::OutlivesEnvironment;
+use crate::rustc_infer::infer::{InferCtxt, RegionResolutionError};
 use rustc_macros::extension;
-use crate::rustc_middle::traits::ObligationCause;
-use crate::rustc_middle::traits::query::NoSolution;
-use crate::rustc_middle::ty::{self, Ty, elaborate};
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::{self, Ty, elaborate};
 
 use crate::traits::ScrubbedTraitError;
 use crate::traits::outlives_bounds::InferCtxtExt;

@@ -15,9 +15,9 @@ use std::ops::{Index, IndexMut};
 
 use crate::rustc_data_structures::fx::FxHashMap;
 use rustc_index::{IndexSlice, IndexVec};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{Ty, TyCtxt};
-use crate::rustc_span::Span;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{Ty, TyCtxt};
+use crate::rustc_complete::Span;
 use smallvec::SmallVec;
 
 use crate::un_derefer::UnDerefer;

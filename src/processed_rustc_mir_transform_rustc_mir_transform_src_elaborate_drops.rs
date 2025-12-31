@@ -3,15 +3,15 @@ use std::fmt;
 use rustc_abi::{FieldIdx, VariantIdx};
 use rustc_index::IndexVec;
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, TyCtxt};
 use rustc_mir_dataflow::impls::{MaybeInitializedPlaces, MaybeUninitializedPlaces};
 use rustc_mir_dataflow::move_paths::{LookupResult, MoveData, MovePathIndex};
 use rustc_mir_dataflow::{
     Analysis, DropFlagState, MoveDataTypingEnv, ResultsCursor, on_all_children_bits,
     on_lookup_result_bits,
 };
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
 
 use crate::deref_separator::deref_finder;

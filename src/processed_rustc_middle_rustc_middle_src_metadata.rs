@@ -1,7 +1,7 @@
-use crate::rustc_hir::def::Res;
+use crate::rustc_complete::def::Res;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-use crate::rustc_span::Ident;
-use crate::rustc_span::def_id::DefId;
+use crate::rustc_complete::Ident;
+use crate::rustc_complete::def_id::DefId;
 use smallvec::SmallVec;
 
 use crate::ty;

@@ -4,7 +4,7 @@ use std::path::PathBuf;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 
 use super::{Feature, to_nonzero};
 

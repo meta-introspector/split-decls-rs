@@ -1,4 +1,4 @@
-use crate::rustc_middle::mir::coverage::{CounterId, CovTerm, ExpressionId};
+use crate::rustc_complete::mir::coverage::{CounterId, CovTerm, ExpressionId};
 
 /// Must match the layout of `LLVMRustCounterKind`.
 #[derive(Copy, Clone, Debug)]

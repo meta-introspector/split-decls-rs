@@ -6,13 +6,13 @@ use std::sync::Arc;
 use crate::rustc_data_structures::memmap::Mmap;
 use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hashes::Hash64;
-use crate::rustc_middle::dep_graph::{DepGraph, DepsType, SerializedDepGraph, WorkProductMap};
-use crate::rustc_middle::query::on_disk_cache::OnDiskCache;
+use crate::rustc_complete::dep_graph::{DepGraph, DepsType, SerializedDepGraph, WorkProductMap};
+use crate::rustc_complete::query::on_disk_cache::OnDiskCache;
 use rustc_serialize::Decodable;
 use rustc_serialize::opaque::MemDecoder;
-use crate::rustc_session::Session;
-use crate::rustc_session::config::IncrementalStateAssertion;
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::IncrementalStateAssertion;
+use crate::rustc_complete::Symbol;
 use tracing::{debug, warn};
 
 use super::data::*;

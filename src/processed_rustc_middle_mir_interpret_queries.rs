@@ -1,7 +1,7 @@
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_session::lint;
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::lint;
+use crate::rustc_complete::{DUMMY_SP, Span};
 use tracing::{debug, instrument};
 
 use super::{

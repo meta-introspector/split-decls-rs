@@ -4,22 +4,22 @@ use std::rc::Rc;
 use crate::rustc_data_structures::frozen::Frozen;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 use crate::rustc_data_structures::graph::scc::Sccs;
-use rustc_errors::Diag;
-use crate::rustc_hir::def_id::CRATE_DEF_ID;
+use crate::rustc_complete::Diag;
+use crate::rustc_complete::def_id::CRATE_DEF_ID;
 use rustc_index::IndexVec;
-use rustc_infer::infer::outlives::test_type_match;
-use rustc_infer::infer::region_constraints::{GenericKind, VerifyBound, VerifyIfEq};
-use rustc_infer::infer::{InferCtxt, NllRegionVariableOrigin};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::{
+use crate::rustc_infer::infer::outlives::test_type_match;
+use crate::rustc_infer::infer::region_constraints::{GenericKind, VerifyBound, VerifyIfEq};
+use crate::rustc_infer::infer::{InferCtxt, NllRegionVariableOrigin};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::{
     AnnotationSource, BasicBlock, Body, ConstraintCategory, Local, Location, ReturnConstraint,
     TerminatorKind,
 };
-use crate::rustc_middle::traits::{ObligationCause, ObligationCauseCode};
-use crate::rustc_middle::ty::{self, RegionVid, Ty, TyCtxt, TypeFoldable, UniverseIndex, fold_regions};
+use crate::rustc_complete::traits::{ObligationCause, ObligationCauseCode};
+use crate::rustc_complete::ty::{self, RegionVid, Ty, TyCtxt, TypeFoldable, UniverseIndex, fold_regions};
 use rustc_mir_dataflow::points::DenseLocationMap;
-use crate::rustc_span::hygiene::DesugaringKind;
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::hygiene::DesugaringKind;
+use crate::rustc_complete::{DUMMY_SP, Span};
 use tracing::{Level, debug, enabled, instrument, trace};
 
 use crate::constraints::graph::NormalConstraintGraph;
@@ -176,7 +176,7 @@ pub(crate) enum Cause {
 ///
 /// For more information about this translation, see
 /// `InferCtxt::process_registered_region_obligations` and
-/// `InferCtxt::type_must_outlive` in `rustc_infer::infer::InferCtxt`.
+/// `InferCtxt::type_must_outlive` in `crate::rustc_infer::infer::InferCtxt`.
 #[derive(Clone, Debug)]
 pub(crate) struct TypeTest<'tcx> {
     /// The type `T` that must outlive the region.

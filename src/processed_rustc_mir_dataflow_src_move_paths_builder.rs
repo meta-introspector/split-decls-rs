@@ -1,9 +1,9 @@
 use std::mem;
 
 use rustc_index::IndexVec;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, TypeVisitableExt};
-use crate::rustc_middle::{bug, span_bug};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::{bug, span_bug};
 use smallvec::{SmallVec, smallvec};
 use tracing::debug;
 

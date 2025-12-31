@@ -2,22 +2,22 @@
 
 use rustc_abi::{ExternAbi, FIRST_VARIANT, Size};
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
-use crate::rustc_hir::LangItem;
-use crate::rustc_hir::attrs::InlineAttr;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::attrs::InlineAttr;
 use rustc_index::IndexVec;
 use rustc_index::bit_set::DenseBitSet;
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_infer::traits::{Obligation, ObligationCause};
-use crate::rustc_middle::mir::coverage::CoverageKind;
-use crate::rustc_middle::mir::visit::{NonUseContext, PlaceContext, Visitor};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::adjustment::PointerCoercion;
-use crate::rustc_middle::ty::print::with_no_trimmed_paths;
-use crate::rustc_middle::ty::{
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::traits::{Obligation, ObligationCause};
+use crate::rustc_complete::mir::coverage::CoverageKind;
+use crate::rustc_complete::mir::visit::{NonUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::adjustment::PointerCoercion;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{
     self, CoroutineArgsExt, InstanceKind, ScalarInt, Ty, TyCtxt, TypeVisitableExt, Upcast, Variance,
 };
-use crate::rustc_middle::{bug, span_bug};
-use rustc_trait_selection::traits::ObligationCtxt;
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_trait_selection::traits::ObligationCtxt;
 
 use crate::util::{self, is_within_packed};
 

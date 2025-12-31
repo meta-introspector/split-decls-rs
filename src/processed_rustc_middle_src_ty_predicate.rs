@@ -1,7 +1,7 @@
 use std::cmp::Ordering;
 
 use crate::rustc_data_structures::intern::Interned;
-use crate::rustc_hir::def_id::DefId;
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, extension};
 use rustc_type_ir as ir;
 
@@ -143,20 +143,20 @@ impl<'tcx> Predicate<'tcx> {
     }
 }
 
-impl<'tcx> rustc_errors::IntoDiagArg for Predicate<'tcx> {
-    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+impl<'tcx> crate::rustc_errors::IntoDiagArg for Predicate<'tcx> {
+    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         ty::tls::with(|tcx| {
             let pred = tcx.short_string(self, path);
-            rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(pred))
+            crate::rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(pred))
         })
     }
 }
 
-impl<'tcx> rustc_errors::IntoDiagArg for Clause<'tcx> {
-    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+impl<'tcx> crate::rustc_errors::IntoDiagArg for Clause<'tcx> {
+    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         ty::tls::with(|tcx| {
             let clause = tcx.short_string(self, path);
-            rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(clause))
+            crate::rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(clause))
         })
     }
 }

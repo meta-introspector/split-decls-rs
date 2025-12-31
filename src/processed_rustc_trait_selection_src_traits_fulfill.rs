@@ -3,20 +3,20 @@ use std::marker::PhantomData;
 use crate::rustc_data_structures::obligation_forest::{
     Error, ForestObligation, ObligationForest, ObligationProcessor, Outcome, ProcessResult,
 };
-use crate::rustc_hir::def_id::LocalDefId;
-use rustc_infer::infer::DefineOpaqueTypes;
-use rustc_infer::traits::{
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_infer::infer::DefineOpaqueTypes;
+use crate::rustc_infer::traits::{
     FromSolverError, PolyTraitObligation, PredicateObligations, ProjectionCacheKey, SelectionError,
     TraitEngine,
 };
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::abstract_const::NotConstEvaluatable;
-use crate::rustc_middle::ty::error::{ExpectedFound, TypeError};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::abstract_const::NotConstEvaluatable;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::ty::{
     self, Binder, Const, GenericArgsRef, TypeVisitable, TypeVisitableExt, TypingMode,
     may_use_unstable_feature,
 };
-use crate::rustc_span::DUMMY_SP;
+use crate::rustc_complete::DUMMY_SP;
 use thin_vec::{ThinVec, thin_vec};
 use tracing::{debug, debug_span, instrument};
 
@@ -682,7 +682,7 @@ impl<'a, 'tcx> ObligationProcessor for FulfillProcessor<'a, 'tcx> {
                         let c2 = tcx.expand_abstract_consts(c2);
                         debug!("equating consts:\nc1= {:?}\nc2= {:?}", c1, c2);
 
-                        use crate::rustc_hir::def::DefKind;
+                        use crate::rustc_complete::def::DefKind;
                         match (c1.kind(), c2.kind()) {
                             (ty::ConstKind::Unevaluated(a), ty::ConstKind::Unevaluated(b))
                                 if a.def == b.def && tcx.def_kind(a.def) == DefKind::AssocConst =>

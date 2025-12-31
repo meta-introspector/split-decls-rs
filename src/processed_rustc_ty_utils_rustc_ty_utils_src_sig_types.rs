@@ -1,11 +1,11 @@
 // This module contains helpers for walking all types of
 // a signature, while preserving spans as much as possible
 
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::{self, TyCtxt, TypeVisitable, VisitorResult, try_visit};
-use crate::rustc_span::Span;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitable, VisitorResult, try_visit};
+use crate::rustc_complete::Span;
 use tracing::{instrument, trace};
 
 pub trait SpannedTypeVisitor<'tcx> {

@@ -1,36 +1,36 @@
 use itertools::Itertools as _;
-use crate::rustc_ast::visit::{self, Visitor};
-use crate::rustc_ast::{
+use crate::rustc_complete::visit::{self, Visitor};
+use crate::rustc_complete::{
     self as ast, CRATE_NODE_ID, Crate, ItemKind, ModKind, NodeId, Path, join_path_idents,
 };
 use rustc_ast_pretty::pprust;
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, ErrorGuaranteed, MultiSpan, SuggestionStyle,
     report_ambiguity_error, struct_span_code_err,
 };
 use rustc_feature::BUILTIN_ATTRIBUTES;
-use crate::rustc_hir::attrs::{AttributeKind, CfgEntry, StrippedCfgItem};
-use crate::rustc_hir::def::Namespace::{self, *};
-use crate::rustc_hir::def::{self, CtorKind, CtorOf, DefKind, MacroKinds, NonMacroAttrKind, PerNS};
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, DefId};
-use crate::rustc_hir::{PrimTy, Stability, StabilityLevel, find_attr};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::Session;
-use crate::rustc_session::lint::builtin::{
+use crate::rustc_complete::attrs::{AttributeKind, CfgEntry, StrippedCfgItem};
+use crate::rustc_complete::def::Namespace::{self, *};
+use crate::rustc_complete::def::{self, CtorKind, CtorOf, DefKind, MacroKinds, NonMacroAttrKind, PerNS};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
+use crate::rustc_complete::{PrimTy, Stability, StabilityLevel, find_attr};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::lint::builtin::{
     ABSOLUTE_PATHS_NOT_STARTING_WITH_CRATE, AMBIGUOUS_GLOB_IMPORTS,
     MACRO_EXPANDED_MACRO_EXPORTS_ACCESSED_BY_ABSOLUTE_PATHS,
 };
-use crate::rustc_session::lint::{AmbiguityErrorDiag, BuiltinLintDiag};
-use crate::rustc_session::utils::was_invoked_from_cargo;
-use crate::rustc_span::edit_distance::find_best_match_for_name;
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::hygiene::MacroKind;
-use crate::rustc_span::source_map::SourceMap;
-use crate::rustc_span::{BytePos, Ident, Macros20NormalizedIdent, Span, Symbol, SyntaxContext, kw, sym};
+use crate::rustc_complete::lint::{AmbiguityErrorDiag, BuiltinLintDiag};
+use crate::rustc_complete::utils::was_invoked_from_cargo;
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::hygiene::MacroKind;
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{BytePos, Ident, Macros20NormalizedIdent, Span, Symbol, SyntaxContext, kw, sym};
 use thin_vec::{ThinVec, thin_vec};
 use tracing::{debug, instrument};
 
@@ -198,7 +198,7 @@ impl<'ra, 'tcx> Resolver<'ra, 'tcx> {
             } else if let [segment] = path.as_slice()
                 && is_call
             {
-                err.stash(segment.ident.span, rustc_errors::StashKey::CallIntoMethod);
+                err.stash(segment.ident.span, crate::rustc_errors::StashKey::CallIntoMethod);
             } else {
                 err.emit();
             }

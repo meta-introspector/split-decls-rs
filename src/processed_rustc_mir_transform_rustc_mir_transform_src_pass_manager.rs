@@ -2,9 +2,9 @@ use std::cell::RefCell;
 use std::collections::hash_map::Entry;
 
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexSet};
-use crate::rustc_middle::mir::{Body, MirDumper, MirPhase, RuntimePhase};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::Session;
+use crate::rustc_complete::mir::{Body, MirDumper, MirPhase, RuntimePhase};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
 use tracing::trace;
 
 use crate::lint::lint_body;

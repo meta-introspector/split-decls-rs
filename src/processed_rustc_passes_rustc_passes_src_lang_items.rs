@@ -8,15 +8,15 @@
 // * Functions called by the compiler itself.
 
 use rustc_ast as ast;
-use crate::rustc_ast::visit;
+use crate::rustc_complete::visit;
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::lang_items::{GenericRequirement, extract};
-use crate::rustc_hir::{LangItem, LanguageItems, MethodKind, Target};
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{ResolverAstLowering, TyCtxt};
-use crate::rustc_session::cstore::ExternCrate;
-use crate::rustc_span::Span;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::lang_items::{GenericRequirement, extract};
+use crate::rustc_complete::{LangItem, LanguageItems, MethodKind, Target};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{ResolverAstLowering, TyCtxt};
+use crate::rustc_complete::cstore::ExternCrate;
+use crate::rustc_complete::Span;
 
 use crate::errors::{
     DuplicateLangItem, IncorrectCrateType, IncorrectTarget, LangItemOnIncorrectTarget,

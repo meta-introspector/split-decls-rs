@@ -1,9 +1,9 @@
 use rustc_abi::FieldIdx;
 use rustc_hir as hir;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::lang_items::LangItem;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::lang_items::LangItem;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::ty::{Ty, TyCtxt};
 

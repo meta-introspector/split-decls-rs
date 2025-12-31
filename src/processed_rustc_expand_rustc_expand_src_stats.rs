@@ -1,9 +1,9 @@
 use std::iter;
 
-use crate::rustc_ast::{self as ast, DUMMY_NODE_ID, Expr, ExprKind};
+use crate::rustc_complete::{self as ast, DUMMY_NODE_ID, Expr, ExprKind};
 use rustc_ast_pretty::pprust;
-use crate::rustc_span::hygiene::{ExpnKind, MacroKind};
-use crate::rustc_span::{Span, Symbol, kw, sym};
+use crate::rustc_complete::hygiene::{ExpnKind, MacroKind};
+use crate::rustc_complete::{Span, Symbol, kw, sym};
 use smallvec::SmallVec;
 
 use crate::base::{Annotatable, ExtCtxt};

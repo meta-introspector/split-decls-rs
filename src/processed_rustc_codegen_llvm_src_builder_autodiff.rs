@@ -1,10 +1,10 @@
 use std::ptr;
 
-use crate::rustc_ast::expand::autodiff_attrs::{AutoDiffAttrs, DiffActivity, DiffMode};
+use crate::rustc_complete::expand::autodiff_attrs::{AutoDiffAttrs, DiffActivity, DiffMode};
 use rustc_codegen_ssa::common::TypeKind;
 use rustc_codegen_ssa::traits::{BaseTypeCodegenMethods, BuilderMethods};
-use crate::rustc_middle::ty::{PseudoCanonicalInput, Ty, TyCtxt, TypingEnv};
-use crate::rustc_middle::{bug, ty};
+use crate::rustc_complete::ty::{PseudoCanonicalInput, Ty, TyCtxt, TypingEnv};
+use crate::rustc_complete::{bug, ty};
 use tracing::debug;
 
 use crate::builder::{Builder, PlaceRef, UNNAMED};

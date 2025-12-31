@@ -1,19 +1,19 @@
 use std::collections::VecDeque;
 
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
-use crate::rustc_hir::LangItem;
-use crate::rustc_hir::def_id::DefId;
-use rustc_infer::infer::InferCtxt;
-use rustc_infer::traits::PolyTraitObligation;
-pub use rustc_infer::traits::util::*;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::fast_reject::DeepRejectCtxt;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_infer::infer::InferCtxt;
+use crate::rustc_infer::traits::PolyTraitObligation;
+pub use crate::rustc_infer::traits::util::*;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
+use crate::rustc_complete::ty::{
     self, PolyTraitPredicate, PredicatePolarity, SizedTraitKind, TraitPredicate, TraitRef, Ty,
     TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt,
 };
 pub use rustc_next_trait_solver::placeholder::BoundVarReplacer;
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 use smallvec::{SmallVec, smallvec};
 use tracing::debug;
 

@@ -1,10 +1,10 @@
 use crate::rustc_data_structures::fx::FxIndexMap;
 use rustc_hir as hir;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::query::LocalCrate;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::cstore::ForeignModule;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::query::LocalCrate;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::cstore::ForeignModule;
 
 pub(crate) fn collect(tcx: TyCtxt<'_>, LocalCrate: LocalCrate) -> FxIndexMap<DefId, ForeignModule> {
     let mut modules = FxIndexMap::default();

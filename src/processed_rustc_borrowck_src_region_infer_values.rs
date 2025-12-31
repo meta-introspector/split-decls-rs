@@ -5,8 +5,8 @@ use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
 use rustc_index::Idx;
 use rustc_index::bit_set::SparseBitMatrix;
 use rustc_index::interval::{IntervalSet, SparseIntervalMatrix};
-use crate::rustc_middle::mir::{BasicBlock, Location};
-use crate::rustc_middle::ty::{self, RegionVid};
+use crate::rustc_complete::mir::{BasicBlock, Location};
+use crate::rustc_complete::ty::{self, RegionVid};
 use rustc_mir_dataflow::points::{DenseLocationMap, PointIndex};
 use tracing::debug;
 

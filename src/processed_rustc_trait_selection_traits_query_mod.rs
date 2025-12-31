@@ -6,4 +6,4 @@
 // `rustc_traits`.
 
 
-pub use crate::rustc_middle::traits::query::*;
+pub use crate::rustc_complete::traits::query::*;

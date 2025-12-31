@@ -54,11 +54,11 @@ use std::cmp::max;
 use std::iter;
 
 use rustc_hir as hir;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::{
     Body, BorrowKind, FakeBorrowKind, MutBorrowKind, Place, PlaceElem, PlaceRef, ProjectionElem,
 };
-use crate::rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::ty::{self, TyCtxt};
 use tracing::{debug, instrument};
 
 use crate::{AccessDepth, ArtificialField, Deep, Overlap, Shallow};

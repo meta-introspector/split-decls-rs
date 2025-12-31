@@ -4,7 +4,7 @@ use rustc_ast as ast;
 use rustc_attr_parsing::validate_attr;
 use rustc_expand::base::{Annotatable, ExpandResult, ExtCtxt, Indeterminate, MultiItemModifier};
 use rustc_feature::AttributeTemplate;
-use crate::rustc_span::{Span, sym};
+use crate::rustc_complete::{Span, sym};
 
 use crate::errors;
 

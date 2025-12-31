@@ -4,15 +4,15 @@
 // The intention is that this file only contains datatype declarations, no code.
 
 use rustc_abi::{FieldIdx, VariantIdx};
-use crate::rustc_ast::{InlineAsmOptions, InlineAsmTemplatePiece, Mutability};
+use crate::rustc_complete::{InlineAsmOptions, InlineAsmTemplatePiece, Mutability};
 use crate::rustc_data_structures::packed::Pu128;
-use crate::rustc_hir::CoroutineKind;
-use crate::rustc_hir::def_id::DefId;
+use crate::rustc_complete::CoroutineKind;
+use crate::rustc_complete::def_id::DefId;
 use rustc_index::IndexVec;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-use crate::rustc_span::def_id::LocalDefId;
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Span, Symbol};
 use rustc_target::asm::InlineAsmRegOrRegClass;
 use smallvec::SmallVec;
 

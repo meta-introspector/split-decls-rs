@@ -51,30 +51,30 @@ use std::path::PathBuf;
 use std::{cmp, fmt, iter};
 
 use rustc_abi::ExternAbi;
-use crate::rustc_ast::join_path_syms;
+use crate::rustc_complete::join_path_syms;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-use rustc_errors::{
+use crate::rustc_complete::{
     Applicability, Diag, DiagStyledString, IntoDiagArg, MultiSpan, StringPart, pluralize,
 };
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::intravisit::Visitor;
-use crate::rustc_hir::lang_items::LangItem;
-use crate::rustc_hir::{self as hir};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{self as hir};
 use rustc_macros::extension;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::dep_graph::DepContext;
-use crate::rustc_middle::traits::PatternOriginExpr;
-use crate::rustc_middle::ty::error::{ExpectedFound, TypeError, TypeErrorToStringExt};
-use crate::rustc_middle::ty::print::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::dep_graph::DepContext;
+use crate::rustc_complete::traits::PatternOriginExpr;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError, TypeErrorToStringExt};
+use crate::rustc_complete::ty::print::{
     PrintError, PrintTraitRefExt as _, WrapBinderMode, with_forced_trimmed_paths,
 };
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, List, ParamEnv, Region, Ty, TyCtxt, TypeFoldable, TypeSuperVisitable, TypeVisitable,
     TypeVisitableExt,
 };
-use crate::rustc_span::def_id::LOCAL_CRATE;
-use crate::rustc_span::{BytePos, DUMMY_SP, DesugaringKind, Pos, Span, Symbol, sym};
+use crate::rustc_complete::def_id::LOCAL_CRATE;
+use crate::rustc_complete::{BytePos, DUMMY_SP, DesugaringKind, Pos, Span, Symbol, sym};
 use tracing::{debug, instrument};
 
 use crate::error_reporting::TypeErrCtxt;
@@ -214,7 +214,7 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         // FIXME(estebank): unify with `report_similar_impl_candidates`. The message is similar,
         // even if the logic needed to detect the case is very different.
         use hir::def_id::CrateNum;
-        use crate::rustc_hir::definitions::DisambiguatedDefPathData;
+        use crate::rustc_complete::definitions::DisambiguatedDefPathData;
         use ty::GenericArg;
         use ty::print::Printer;
 
@@ -862,7 +862,7 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         let sig2 = &(self.normalize_fn_sig)(*sig2);
 
         let get_lifetimes = |sig| {
-            use crate::rustc_hir::def::Namespace;
+            use crate::rustc_complete::def::Namespace;
             let (sig, reg) = ty::print::FmtPrinter::new(self.tcx, Namespace::TypeNS)
                 .name_all_regions(sig, WrapBinderMode::ForAll)
                 .unwrap();
@@ -2448,7 +2448,7 @@ impl<'tcx> ObligationCause<'tcx> {
 pub struct ObligationCauseAsDiagArg<'tcx>(pub ObligationCause<'tcx>);
 
 impl IntoDiagArg for ObligationCauseAsDiagArg<'_> {
-    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         let kind = match self.0.code() {
             ObligationCauseCode::CompareImplItem { kind: ty::AssocKind::Fn { .. }, .. } => {
                 "method_compat"
@@ -2466,7 +2466,7 @@ impl IntoDiagArg for ObligationCauseAsDiagArg<'_> {
             _ => "other",
         }
         .into();
-        rustc_errors::DiagArgValue::Str(kind)
+        crate::rustc_errors::DiagArgValue::Str(kind)
     }
 }
 

@@ -4,9 +4,9 @@ use rustc_abi::{self as abi, HasDataLayout};
 use rustc_codegen_ssa::traits::{
     BaseTypeCodegenMethods, ConstCodegenMethods, MiscCodegenMethods, StaticCodegenMethods,
 };
-use crate::rustc_middle::mir::Mutability;
-use crate::rustc_middle::mir::interpret::{ConstAllocation, GlobalAlloc, Scalar};
-use crate::rustc_middle::ty::layout::LayoutOf;
+use crate::rustc_complete::mir::Mutability;
+use crate::rustc_complete::mir::interpret::{ConstAllocation, GlobalAlloc, Scalar};
+use crate::rustc_complete::ty::layout::LayoutOf;
 
 use crate::context::CodegenCx;
 use crate::type_of::LayoutGccExt;

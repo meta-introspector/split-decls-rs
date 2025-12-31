@@ -1,5 +1,5 @@
-use crate::rustc_hir::attrs::{CoverageAttrKind, OptimizeAttr, SanitizerSet, UsedBy};
-use crate::rustc_session::parse::feature_err;
+use crate::rustc_complete::attrs::{CoverageAttrKind, OptimizeAttr, SanitizerSet, UsedBy};
+use crate::rustc_complete::parse::feature_err;
 
 use super::prelude::*;
 use crate::session_diagnostics::{NakedFunctionIncompatibleAttribute, NullOnExport};

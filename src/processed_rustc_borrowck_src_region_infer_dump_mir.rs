@@ -5,8 +5,8 @@
 
 use std::io::{self, Write};
 
-use rustc_infer::infer::NllRegionVariableOrigin;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_infer::infer::NllRegionVariableOrigin;
+use crate::rustc_complete::ty::TyCtxt;
 
 use super::{OutlivesConstraint, RegionInferenceContext};
 use crate::type_check::Locations;

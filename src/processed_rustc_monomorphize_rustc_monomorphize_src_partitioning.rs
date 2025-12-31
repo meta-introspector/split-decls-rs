@@ -101,24 +101,24 @@ use std::path::{Path, PathBuf};
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 use crate::rustc_data_structures::sync;
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-use crate::rustc_hir::LangItem;
-use crate::rustc_hir::attrs::{InlineAttr, Linkage};
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, DefIdSet, LOCAL_CRATE};
-use crate::rustc_hir::definitions::DefPathDataName;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use crate::rustc_middle::middle::exported_symbols::{SymbolExportInfo, SymbolExportLevel};
-use crate::rustc_middle::mir::mono::{
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::attrs::{InlineAttr, Linkage};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, DefIdSet, LOCAL_CRATE};
+use crate::rustc_complete::definitions::DefPathDataName;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::middle::exported_symbols::{SymbolExportInfo, SymbolExportLevel};
+use crate::rustc_complete::mir::mono::{
     CodegenUnit, CodegenUnitNameBuilder, InstantiationMode, MonoItem, MonoItemData,
     MonoItemPartitions, Visibility,
 };
-use crate::rustc_middle::ty::print::{characteristic_def_id_of_type, with_no_trimmed_paths};
-use crate::rustc_middle::ty::{self, InstanceKind, TyCtxt};
-use crate::rustc_middle::util::Providers;
-use crate::rustc_session::CodegenUnits;
-use crate::rustc_session::config::{DumpMonoStatsFormat, SwitchWithOptPath};
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::ty::print::{characteristic_def_id_of_type, with_no_trimmed_paths};
+use crate::rustc_complete::ty::{self, InstanceKind, TyCtxt};
+use crate::rustc_complete::util::Providers;
+use crate::rustc_complete::CodegenUnits;
+use crate::rustc_complete::config::{DumpMonoStatsFormat, SwitchWithOptPath};
+use crate::rustc_complete::Symbol;
 use rustc_target::spec::SymbolVisibility;
 use tracing::debug;
 

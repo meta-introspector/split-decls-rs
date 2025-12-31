@@ -4,14 +4,14 @@
 
 use crate::rustc_data_structures::sso::SsoHashMap;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_infer::traits::PredicateObligations;
+use crate::rustc_infer::traits::PredicateObligations;
 use rustc_macros::extension;
-pub use crate::rustc_middle::traits::query::NormalizationResult;
-use crate::rustc_middle::ty::{
+pub use crate::rustc_complete::traits::query::NormalizationResult;
+use crate::rustc_complete::ty::{
     self, FallibleTypeFolder, Ty, TyCtxt, TypeFoldable, TypeSuperFoldable, TypeSuperVisitable,
     TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode,
 };
-use crate::rustc_span::DUMMY_SP;
+use crate::rustc_complete::DUMMY_SP;
 use tracing::{debug, info, instrument};
 
 use super::NoSolution;
@@ -208,7 +208,7 @@ impl<'a, 'tcx> FallibleTypeFolder<TyCtxt<'tcx>> for QueryNormalizer<'a, 'tcx> {
             }
         };
 
-        // See note in `rustc_trait_selection::traits::project` about why we
+        // See note in `crate::rustc_trait_selection::traits::project` about why we
         // wait to fold the args.
         let res = match kind {
             ty::Opaque => {
@@ -254,7 +254,7 @@ impl<'a, 'tcx> FallibleTypeFolder<TyCtxt<'tcx>> for QueryNormalizer<'a, 'tcx> {
             }
 
             ty::Projection | ty::Inherent | ty::Free => {
-                // See note in `rustc_trait_selection::traits::project`
+                // See note in `crate::rustc_trait_selection::traits::project`
 
                 let infcx = self.infcx;
                 let tcx = infcx.tcx;

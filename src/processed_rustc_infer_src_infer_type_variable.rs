@@ -4,11 +4,11 @@ use std::ops::Range;
 
 use crate::rustc_data_structures::undo_log::Rollback;
 use crate::rustc_data_structures::{snapshot_vec as sv, unify as ut};
-use crate::rustc_hir::def_id::DefId;
+use crate::rustc_complete::def_id::DefId;
 use rustc_index::IndexVec;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{self, Ty, TyVid};
-use crate::rustc_span::Span;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, Ty, TyVid};
+use crate::rustc_complete::Span;
 use tracing::debug;
 
 use crate::infer::InferCtxtUndoLogs;

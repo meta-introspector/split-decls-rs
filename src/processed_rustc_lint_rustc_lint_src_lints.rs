@@ -3,21 +3,21 @@
 #[allow(rustc::untranslatable_diagnostic)]
 use std::num::NonZero;
 
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagArgValue, DiagMessage, DiagStyledString, ElidedLifetimeInPathSubdiag,
     EmissionGuarantee, LintDiagnostic, MultiSpan, Subdiagnostic, SuggestionStyle,
 };
 use rustc_hir as hir;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::intravisit::VisitorExt;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::intravisit::VisitorExt;
 use rustc_macros::{LintDiagnostic, Subdiagnostic};
-use crate::rustc_middle::ty::inhabitedness::InhabitedPredicate;
-use crate::rustc_middle::ty::{Clause, PolyExistentialTraitRef, Ty, TyCtxt};
-use crate::rustc_session::Session;
-use crate::rustc_session::lint::AmbiguityErrorDiag;
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::{Ident, MacroRulesNormalizedIdent, Span, Symbol, sym};
+use crate::rustc_complete::ty::inhabitedness::InhabitedPredicate;
+use crate::rustc_complete::ty::{Clause, PolyExistentialTraitRef, Ty, TyCtxt};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::lint::AmbiguityErrorDiag;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{Ident, MacroRulesNormalizedIdent, Span, Symbol, sym};
 
 use crate::builtin::{InitError, ShorthandAssocTyCollector, TypeAliasBounds};
 use crate::errors::{OverruledAttributeSub, RequestedLevel};
@@ -185,7 +185,7 @@ pub(crate) struct BuiltinMissingDebugImpl<'a> {
 
 // Needed for def_path_str
 impl<'a> LintDiagnostic<'a, ()> for BuiltinMissingDebugImpl<'_> {
-    fn decorate_lint<'b>(self, diag: &'b mut rustc_errors::Diag<'a, ()>) {
+    fn decorate_lint<'b>(self, diag: &'b mut crate::rustc_errors::Diag<'a, ()>) {
         diag.primary_message(fluent::lint_builtin_missing_debug_impl);
         diag.arg("debug", self.tcx.def_path_str(self.def_id));
     }
@@ -2294,9 +2294,9 @@ pub(crate) struct UnexpectedCfgName {
 }
 
 pub(crate) mod unexpected_cfg_name {
-    use rustc_errors::DiagSymbolList;
+    use crate::rustc_complete::DiagSymbolList;
     use rustc_macros::Subdiagnostic;
-    use crate::rustc_span::{Ident, Span, Symbol};
+    use crate::rustc_complete::{Ident, Span, Symbol};
 
     #[derive(Subdiagnostic)]
     pub(crate) enum CodeSuggestion {
@@ -2422,9 +2422,9 @@ pub(crate) struct UnexpectedCfgValue {
 }
 
 pub(crate) mod unexpected_cfg_value {
-    use rustc_errors::DiagSymbolList;
+    use crate::rustc_complete::DiagSymbolList;
     use rustc_macros::Subdiagnostic;
-    use crate::rustc_span::{Span, Symbol};
+    use crate::rustc_complete::{Span, Symbol};
 
     #[derive(Subdiagnostic)]
     pub(crate) enum CodeSuggestion {
@@ -3026,7 +3026,7 @@ pub(crate) struct AmbiguousGlobImports {
 impl<'a, G: EmissionGuarantee> LintDiagnostic<'a, G> for AmbiguousGlobImports {
     fn decorate_lint<'b>(self, diag: &'b mut Diag<'a, G>) {
         diag.primary_message(self.ambiguity.msg.clone());
-        rustc_errors::report_ambiguity_error(diag, self.ambiguity);
+        crate::rustc_errors::report_ambiguity_error(diag, self.ambiguity);
     }
 }
 

@@ -1,11 +1,11 @@
-use crate::rustc_hir::{self as hir, AmbigArg};
-use rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::{self as hir, AmbigArg};
+use crate::rustc_infer::infer::TyCtxtInferExt;
 use rustc_macros::{LintDiagnostic, Subdiagnostic};
-use crate::rustc_middle::ty::print::{PrintTraitPredicateExt as _, TraitPredPrintModifiersAndPath};
-use crate::rustc_middle::ty::{self, BottomUpFolder, Ty, TypeFoldable};
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::{Span, kw};
-use rustc_trait_selection::traits::{self, ObligationCtxt};
+use crate::rustc_complete::ty::print::{PrintTraitPredicateExt as _, TraitPredPrintModifiersAndPath};
+use crate::rustc_complete::ty::{self, BottomUpFolder, Ty, TypeFoldable};
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::{Span, kw};
+use crate::rustc_trait_selection::traits::{self, ObligationCtxt};
 
 use crate::{LateContext, LateLintPass, LintContext};
 

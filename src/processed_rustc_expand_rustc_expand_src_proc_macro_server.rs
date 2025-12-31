@@ -2,12 +2,12 @@ use std::ops::{Bound, Range};
 
 use ast::token::IdentIsRaw;
 use rustc_ast as ast;
-use crate::rustc_ast::token;
-use crate::rustc_ast::tokenstream::{self, DelimSpacing, Spacing, TokenStream};
-use crate::rustc_ast::util::literal::escape_byte_str_symbol;
+use crate::rustc_complete::token;
+use crate::rustc_complete::tokenstream::{self, DelimSpacing, Spacing, TokenStream};
+use crate::rustc_complete::util::literal::escape_byte_str_symbol;
 use rustc_ast_pretty::pprust;
 use crate::rustc_data_structures::fx::FxHashMap;
-use rustc_errors::{Diag, ErrorGuaranteed, MultiSpan, PResult};
+use crate::rustc_complete::{Diag, ErrorGuaranteed, MultiSpan, PResult};
 use rustc_parse::lexer::{StripTokens, nfc_normalize};
 use rustc_parse::parser::Parser;
 use rustc_parse::{exp, new_parser_from_source_str, source_str_to_stream, unwrap_or_emit_fatal};
@@ -15,9 +15,9 @@ use rustc_proc_macro::bridge::{
     DelimSpan, Diagnostic, ExpnGlobals, Group, Ident, LitKind, Literal, Punct, TokenTree, server,
 };
 use rustc_proc_macro::{Delimiter, Level};
-use crate::rustc_session::parse::ParseSess;
-use crate::rustc_span::def_id::CrateNum;
-use crate::rustc_span::{BytePos, FileName, Pos, Span, Symbol, sym};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::def_id::CrateNum;
+use crate::rustc_complete::{BytePos, FileName, Pos, Span, Symbol, sym};
 use smallvec::{SmallVec, smallvec};
 
 use crate::base::ExtCtxt;
@@ -105,7 +105,7 @@ impl ToInternal<token::LitKind> for LitKind {
 
 impl FromInternal<(TokenStream, &mut Rustc<'_, '_>)> for Vec<TokenTree<TokenStream, Span, Symbol>> {
     fn from_internal((stream, rustc): (TokenStream, &mut Rustc<'_, '_>)) -> Self {
-        use crate::rustc_ast::token::*;
+        use crate::rustc_complete::token::*;
 
         // Estimate the capacity as `stream.len()` rounded up to the next power
         // of two to limit the number of required reallocations.
@@ -327,7 +327,7 @@ impl ToInternal<SmallVec<[tokenstream::TokenTree; 2]>>
     for (TokenTree<TokenStream, Span, Symbol>, &mut Rustc<'_, '_>)
 {
     fn to_internal(self) -> SmallVec<[tokenstream::TokenTree; 2]> {
-        use crate::rustc_ast::token::*;
+        use crate::rustc_complete::token::*;
 
         // The code below is conservative, using `token_alone`/`Spacing::Alone`
         // in most places. It's hard in general to do better when working at
@@ -419,13 +419,13 @@ impl ToInternal<SmallVec<[tokenstream::TokenTree; 2]>>
     }
 }
 
-impl ToInternal<rustc_errors::Level> for Level {
-    fn to_internal(self) -> rustc_errors::Level {
+impl ToInternal<crate::rustc_errors::Level> for Level {
+    fn to_internal(self) -> crate::rustc_errors::Level {
         match self {
-            Level::Error => rustc_errors::Level::Error,
-            Level::Warning => rustc_errors::Level::Warning,
-            Level::Note => rustc_errors::Level::Note,
-            Level::Help => rustc_errors::Level::Help,
+            Level::Error => crate::rustc_errors::Level::Error,
+            Level::Warning => crate::rustc_errors::Level::Warning,
+            Level::Note => crate::rustc_errors::Level::Note,
+            Level::Help => crate::rustc_errors::Level::Help,
             _ => unreachable!("unknown proc_macro::Level variant: {:?}", self),
         }
     }
@@ -543,7 +543,7 @@ impl server::FreeFunctions for Rustc<'_, '_> {
     }
 
     fn emit_diagnostic(&mut self, diagnostic: Diagnostic<Self::Span>) {
-        let message = rustc_errors::DiagMessage::from(diagnostic.message);
+        let message = crate::rustc_errors::DiagMessage::from(diagnostic.message);
         let mut diag: Diag<'_, ()> =
             Diag::new(self.psess().dcx(), diagnostic.level.to_internal(), message);
         diag.span(MultiSpan::from_spans(diagnostic.spans));

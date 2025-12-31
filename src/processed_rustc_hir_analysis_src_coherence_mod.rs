@@ -5,14 +5,14 @@
 // done by the orphan and overlap modules. Then we build up various
 // mappings. That mapping code resides here.
 
-use rustc_errors::codes::*;
-use rustc_errors::struct_span_code_err;
-use crate::rustc_hir::LangItem;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{self, TyCtxt, TypeVisitableExt, elaborate};
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::{ErrorGuaranteed, sym};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::struct_span_code_err;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt, elaborate};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{ErrorGuaranteed, sym};
 use tracing::debug;
 
 use crate::check::always_applicable;

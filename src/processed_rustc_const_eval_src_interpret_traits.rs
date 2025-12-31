@@ -1,6 +1,6 @@
 use rustc_abi::{Align, Size};
-use crate::rustc_middle::mir::interpret::{InterpResult, Pointer};
-use crate::rustc_middle::ty::{self, ExistentialPredicateStableCmpExt, Ty, TyCtxt, VtblEntry};
+use crate::rustc_complete::mir::interpret::{InterpResult, Pointer};
+use crate::rustc_complete::ty::{self, ExistentialPredicateStableCmpExt, Ty, TyCtxt, VtblEntry};
 use tracing::trace;
 
 use super::util::ensure_monomorphic_enough;

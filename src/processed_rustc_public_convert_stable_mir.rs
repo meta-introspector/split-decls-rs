@@ -1,7 +1,7 @@
 // Conversion of internal Rust compiler `mir` items to stable ones.
 
-use crate::rustc_middle::mir::mono::MonoItem;
-use crate::rustc_middle::{bug, mir};
+use crate::rustc_complete::mir::mono::MonoItem;
+use crate::rustc_complete::{bug, mir};
 use rustc_public_bridge::context::CompilerCtxt;
 use rustc_public_bridge::{Tables, bridge};
 
@@ -196,7 +196,7 @@ impl<'tcx> Stable<'tcx> for mir::Rvalue<'tcx> {
         tables: &mut Tables<'cx, BridgeTys>,
         cx: &CompilerCtxt<'cx, BridgeTys>,
     ) -> Self::T {
-        use crate::rustc_middle::mir::Rvalue::*;
+        use crate::rustc_complete::mir::Rvalue::*;
         match self {
             Use(op) => crate::mir::Rvalue::Use(op.stable(tables, cx)),
             Repeat(op, len) => {
@@ -259,7 +259,7 @@ impl<'tcx> Stable<'tcx> for mir::Rvalue<'tcx> {
 impl<'tcx> Stable<'tcx> for mir::Mutability {
     type T = crate::mir::Mutability;
     fn stable(&self, _: &mut Tables<'_, BridgeTys>, _: &CompilerCtxt<'_, BridgeTys>) -> Self::T {
-        use crate::rustc_hir::Mutability::*;
+        use crate::rustc_complete::Mutability::*;
         match *self {
             Not => crate::mir::Mutability::Not,
             Mut => crate::mir::Mutability::Mut,
@@ -286,7 +286,7 @@ impl<'tcx> Stable<'tcx> for mir::BorrowKind {
         tables: &mut Tables<'cx, BridgeTys>,
         cx: &CompilerCtxt<'cx, BridgeTys>,
     ) -> Self::T {
-        use crate::rustc_middle::mir::BorrowKind::*;
+        use crate::rustc_complete::mir::BorrowKind::*;
         match *self {
             Shared => crate::mir::BorrowKind::Shared,
             Fake(kind) => crate::mir::BorrowKind::Fake(kind.stable(tables, cx)),
@@ -298,7 +298,7 @@ impl<'tcx> Stable<'tcx> for mir::BorrowKind {
 impl<'tcx> Stable<'tcx> for mir::MutBorrowKind {
     type T = crate::mir::MutBorrowKind;
     fn stable(&self, _: &mut Tables<'_, BridgeTys>, _: &CompilerCtxt<'_, BridgeTys>) -> Self::T {
-        use crate::rustc_middle::mir::MutBorrowKind::*;
+        use crate::rustc_complete::mir::MutBorrowKind::*;
         match *self {
             Default => crate::mir::MutBorrowKind::Default,
             TwoPhaseBorrow => crate::mir::MutBorrowKind::TwoPhaseBorrow,
@@ -310,7 +310,7 @@ impl<'tcx> Stable<'tcx> for mir::MutBorrowKind {
 impl<'tcx> Stable<'tcx> for mir::FakeBorrowKind {
     type T = crate::mir::FakeBorrowKind;
     fn stable(&self, _: &mut Tables<'_, BridgeTys>, _: &CompilerCtxt<'_, BridgeTys>) -> Self::T {
-        use crate::rustc_middle::mir::FakeBorrowKind::*;
+        use crate::rustc_complete::mir::FakeBorrowKind::*;
         match *self {
             Deep => crate::mir::FakeBorrowKind::Deep,
             Shallow => crate::mir::FakeBorrowKind::Shallow,
@@ -325,7 +325,7 @@ impl<'tcx> Stable<'tcx> for mir::NullOp<'tcx> {
         tables: &mut Tables<'cx, BridgeTys>,
         cx: &CompilerCtxt<'cx, BridgeTys>,
     ) -> Self::T {
-        use crate::rustc_middle::mir::NullOp::*;
+        use crate::rustc_complete::mir::NullOp::*;
         match self {
             SizeOf => crate::mir::NullOp::SizeOf,
             AlignOf => crate::mir::NullOp::AlignOf,
@@ -345,7 +345,7 @@ impl<'tcx> Stable<'tcx> for mir::CastKind {
         tables: &mut Tables<'cx, BridgeTys>,
         cx: &CompilerCtxt<'cx, BridgeTys>,
     ) -> Self::T {
-        use crate::rustc_middle::mir::CastKind::*;
+        use crate::rustc_complete::mir::CastKind::*;
         match self {
             PointerExposeProvenance => crate::mir::CastKind::PointerExposeAddress,
             PointerWithExposedProvenance => crate::mir::CastKind::PointerWithExposedProvenance,
@@ -364,7 +364,7 @@ impl<'tcx> Stable<'tcx> for mir::CastKind {
 impl<'tcx> Stable<'tcx> for mir::FakeReadCause {
     type T = crate::mir::FakeReadCause;
     fn stable(&self, _: &mut Tables<'_, BridgeTys>, _: &CompilerCtxt<'_, BridgeTys>) -> Self::T {
-        use crate::rustc_middle::mir::FakeReadCause::*;
+        use crate::rustc_complete::mir::FakeReadCause::*;
         match self {
             ForMatchGuard => crate::mir::FakeReadCause::ForMatchGuard,
             ForMatchedPlace(local_def_id) => {
@@ -384,7 +384,7 @@ impl<'tcx> Stable<'tcx> for mir::Operand<'tcx> {
         tables: &mut Tables<'cx, BridgeTys>,
         cx: &CompilerCtxt<'cx, BridgeTys>,
     ) -> Self::T {
-        use crate::rustc_middle::mir::Operand::*;
+        use crate::rustc_complete::mir::Operand::*;
         match self {
             Copy(place) => crate::mir::Operand::Copy(place.stable(tables, cx)),
             Move(place) => crate::mir::Operand::Move(place.stable(tables, cx)),
@@ -430,7 +430,7 @@ impl<'tcx> Stable<'tcx> for mir::PlaceElem<'tcx> {
         tables: &mut Tables<'cx, BridgeTys>,
         cx: &CompilerCtxt<'cx, BridgeTys>,
     ) -> Self::T {
-        use crate::rustc_middle::mir::ProjectionElem::*;
+        use crate::rustc_complete::mir::ProjectionElem::*;
         match self {
             Deref => crate::mir::ProjectionElem::Deref,
             Field(idx, ty) => {
@@ -478,7 +478,7 @@ impl<'tcx> Stable<'tcx> for mir::Local {
 impl<'tcx> Stable<'tcx> for mir::RetagKind {
     type T = crate::mir::RetagKind;
     fn stable(&self, _: &mut Tables<'_, BridgeTys>, _: &CompilerCtxt<'_, BridgeTys>) -> Self::T {
-        use crate::rustc_middle::mir::RetagKind;
+        use crate::rustc_complete::mir::RetagKind;
         match self {
             RetagKind::FnEntry => crate::mir::RetagKind::FnEntry,
             RetagKind::TwoPhase => crate::mir::RetagKind::TwoPhase,
@@ -491,7 +491,7 @@ impl<'tcx> Stable<'tcx> for mir::RetagKind {
 impl<'tcx> Stable<'tcx> for mir::UnwindAction {
     type T = crate::mir::UnwindAction;
     fn stable(&self, _: &mut Tables<'_, BridgeTys>, _: &CompilerCtxt<'_, BridgeTys>) -> Self::T {
-        use crate::rustc_middle::mir::UnwindAction;
+        use crate::rustc_complete::mir::UnwindAction;
         match self {
             UnwindAction::Continue => crate::mir::UnwindAction::Continue,
             UnwindAction::Unreachable => crate::mir::UnwindAction::Unreachable,
@@ -509,7 +509,7 @@ impl<'tcx> Stable<'tcx> for mir::NonDivergingIntrinsic<'tcx> {
         tables: &mut Tables<'cx, BridgeTys>,
         cx: &CompilerCtxt<'cx, BridgeTys>,
     ) -> Self::T {
-        use crate::rustc_middle::mir::NonDivergingIntrinsic;
+        use crate::rustc_complete::mir::NonDivergingIntrinsic;
 
         use crate::mir::CopyNonOverlapping;
         match self {
@@ -534,7 +534,7 @@ impl<'tcx> Stable<'tcx> for mir::AssertMessage<'tcx> {
         tables: &mut Tables<'cx, BridgeTys>,
         cx: &CompilerCtxt<'cx, BridgeTys>,
     ) -> Self::T {
-        use crate::rustc_middle::mir::AssertKind;
+        use crate::rustc_complete::mir::AssertKind;
         match self {
             AssertKind::BoundsCheck { len, index } => crate::mir::AssertMessage::BoundsCheck {
                 len: len.stable(tables, cx),
@@ -580,7 +580,7 @@ impl<'tcx> Stable<'tcx> for mir::AssertMessage<'tcx> {
 impl<'tcx> Stable<'tcx> for mir::BinOp {
     type T = crate::mir::BinOp;
     fn stable(&self, _: &mut Tables<'_, BridgeTys>, _: &CompilerCtxt<'_, BridgeTys>) -> Self::T {
-        use crate::rustc_middle::mir::BinOp;
+        use crate::rustc_complete::mir::BinOp;
         match self {
             BinOp::Add => crate::mir::BinOp::Add,
             BinOp::AddUnchecked => crate::mir::BinOp::AddUnchecked,
@@ -615,7 +615,7 @@ impl<'tcx> Stable<'tcx> for mir::BinOp {
 impl<'tcx> Stable<'tcx> for mir::UnOp {
     type T = crate::mir::UnOp;
     fn stable(&self, _: &mut Tables<'_, BridgeTys>, _: &CompilerCtxt<'_, BridgeTys>) -> Self::T {
-        use crate::rustc_middle::mir::UnOp;
+        use crate::rustc_complete::mir::UnOp;
         match self {
             UnOp::Not => crate::mir::UnOp::Not,
             UnOp::Neg => crate::mir::UnOp::Neg,
@@ -676,7 +676,7 @@ impl<'tcx> Stable<'tcx> for mir::InlineAsmOperand<'tcx> {
         tables: &mut Tables<'cx, BridgeTys>,
         cx: &CompilerCtxt<'cx, BridgeTys>,
     ) -> Self::T {
-        use crate::rustc_middle::mir::InlineAsmOperand;
+        use crate::rustc_complete::mir::InlineAsmOperand;
 
         let (in_value, out_place) = match self {
             InlineAsmOperand::In { value, .. } => (Some(value.stable(tables, cx)), None),

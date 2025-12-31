@@ -1,12 +1,12 @@
 // Detecting usage of the `#[debugger_visualizer]` attribute.
 
-use crate::rustc_ast::Attribute;
+use crate::rustc_complete::Attribute;
 use rustc_expand::base::resolve_path;
-use crate::rustc_middle::middle::debugger_visualizer::{DebuggerVisualizerFile, DebuggerVisualizerType};
-use crate::rustc_middle::query::{LocalCrate, Providers};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::Session;
-use crate::rustc_span::sym;
+use crate::rustc_complete::middle::debugger_visualizer::{DebuggerVisualizerFile, DebuggerVisualizerType};
+use crate::rustc_complete::query::{LocalCrate, Providers};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::sym;
 
 use crate::errors::{DebugVisualizerInvalid, DebugVisualizerUnreadable};
 

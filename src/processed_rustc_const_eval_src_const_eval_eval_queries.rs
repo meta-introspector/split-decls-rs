@@ -2,17 +2,17 @@ use std::sync::atomic::Ordering::Relaxed;
 
 use either::{Left, Right};
 use rustc_abi::{self as abi, BackendRepr};
-use rustc_errors::E0080;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_middle::mir::interpret::{AllocId, ErrorHandled, InterpErrorInfo, ReportedErrorInfo};
-use crate::rustc_middle::mir::{self, ConstAlloc, ConstValue};
-use crate::rustc_middle::query::TyCtxtAt;
-use crate::rustc_middle::ty::layout::HasTypingEnv;
-use crate::rustc_middle::ty::print::with_no_trimmed_paths;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_middle::{bug, throw_inval};
-use crate::rustc_span::def_id::LocalDefId;
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::E0080;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::mir::interpret::{AllocId, ErrorHandled, InterpErrorInfo, ReportedErrorInfo};
+use crate::rustc_complete::mir::{self, ConstAlloc, ConstValue};
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::ty::layout::HasTypingEnv;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::{bug, throw_inval};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{DUMMY_SP, Span};
 use tracing::{debug, instrument, trace};
 
 use super::{CanAccessMutGlobal, CompileTimeInterpCx, CompileTimeMachine};

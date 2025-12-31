@@ -1,9 +1,9 @@
-use rustc_infer::traits::Obligation;
-use crate::rustc_middle::traits::ObligationCause;
-use crate::rustc_middle::traits::query::NoSolution;
-pub use crate::rustc_middle::traits::query::type_op::ProvePredicate;
-use crate::rustc_middle::ty::{self, ParamEnvAnd, TyCtxt};
-use crate::rustc_span::Span;
+use crate::rustc_infer::traits::Obligation;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::traits::query::NoSolution;
+pub use crate::rustc_complete::traits::query::type_op::ProvePredicate;
+use crate::rustc_complete::ty::{self, ParamEnvAnd, TyCtxt};
+use crate::rustc_complete::Span;
 
 use crate::infer::canonical::{CanonicalQueryInput, CanonicalQueryResponse};
 use crate::traits::{ObligationCtxt, sizedness_fast_path};

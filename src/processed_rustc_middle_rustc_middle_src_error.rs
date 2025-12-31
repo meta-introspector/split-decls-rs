@@ -1,10 +1,10 @@
 use std::path::Path;
 use std::{fmt, io};
 
-use rustc_errors::codes::*;
-use rustc_errors::{DiagArgName, DiagArgValue, DiagMessage};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{DiagArgName, DiagArgValue, DiagMessage};
 use rustc_macros::{Diagnostic, Subdiagnostic};
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 
 use crate::ty::{Instance, Ty};
 

@@ -1,7 +1,7 @@
-use crate::rustc_ast::{Block, BlockCheckMode, Local, LocalKind, Stmt, StmtKind};
+use crate::rustc_complete::{Block, BlockCheckMode, Local, LocalKind, Stmt, StmtKind};
 use rustc_hir as hir;
-use crate::rustc_hir::Target;
-use crate::rustc_span::sym;
+use crate::rustc_complete::Target;
+use crate::rustc_complete::sym;
 use smallvec::SmallVec;
 
 use crate::{ImplTraitContext, ImplTraitPosition, LoweringContext};

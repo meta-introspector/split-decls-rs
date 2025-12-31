@@ -1,7 +1,7 @@
 use rustc_hir as hir;
 use rustc_macros::{LintDiagnostic, Subdiagnostic};
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::Span;
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::Span;
 
 use crate::{LateContext, LateLintPass};
 

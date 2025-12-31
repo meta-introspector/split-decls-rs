@@ -21,7 +21,7 @@
 
 use std::num::NonZero;
 
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::Symbol;
 
 #[derive(Debug, Clone)]
 pub struct Feature {

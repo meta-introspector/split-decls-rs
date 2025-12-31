@@ -1,6 +1,6 @@
-use crate::rustc_ast::{MetaItem, Mutability};
+use crate::rustc_complete::{MetaItem, Mutability};
 use rustc_expand::base::{Annotatable, ExtCtxt};
-use crate::rustc_span::{Span, sym};
+use crate::rustc_complete::{Span, sym};
 use thin_vec::thin_vec;
 
 use crate::deriving::generic::ty::*;

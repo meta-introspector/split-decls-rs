@@ -1,13 +1,13 @@
-use crate::rustc_ast::token::{self, Delimiter, IdentIsRaw};
-use crate::rustc_ast::tokenstream::{DelimSpan, TokenStream, TokenTree};
-use crate::rustc_ast::{
+use crate::rustc_complete::token::{self, Delimiter, IdentIsRaw};
+use crate::rustc_complete::tokenstream::{DelimSpan, TokenStream, TokenTree};
+use crate::rustc_complete::{
     BinOpKind, BorrowKind, DUMMY_NODE_ID, DelimArgs, Expr, ExprKind, ItemKind, MacCall, MethodCall,
     Mutability, Path, PathSegment, Stmt, StructRest, UnOp, UseTree, UseTreeKind,
 };
 use rustc_ast_pretty::pprust;
 use crate::rustc_data_structures::fx::FxHashSet;
 use rustc_expand::base::ExtCtxt;
-use crate::rustc_span::{Ident, Span, Symbol, sym};
+use crate::rustc_complete::{Ident, Span, Symbol, sym};
 use thin_vec::{ThinVec, thin_vec};
 
 pub(super) struct Context<'cx, 'a> {

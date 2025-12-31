@@ -9,14 +9,14 @@ use rustc_apfloat::ieee::{Double, Half, Quad, Single};
 use crate::rustc_data_structures::fx::{FxIndexMap, IndexEntry};
 use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hir as hir;
-use crate::rustc_hir::LangItem;
-use crate::rustc_hir::def::{self, CtorKind, DefKind, Namespace};
-use crate::rustc_hir::def_id::{DefIdMap, DefIdSet, LOCAL_CRATE, ModDefId};
-use crate::rustc_hir::definitions::{DefKey, DefPathDataName};
-use crate::rustc_hir::limit::Limit;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def::{self, CtorKind, DefKind, Namespace};
+use crate::rustc_complete::def_id::{DefIdMap, DefIdSet, LOCAL_CRATE, ModDefId};
+use crate::rustc_complete::definitions::{DefKey, DefPathDataName};
+use crate::rustc_complete::limit::Limit;
 use rustc_macros::{Lift, extension};
-use crate::rustc_session::cstore::{ExternCrate, ExternCrateSource};
-use crate::rustc_span::{FileNameDisplayPreference, Ident, Symbol, kw, sym};
+use crate::rustc_complete::cstore::{ExternCrate, ExternCrateSource};
+use crate::rustc_complete::{FileNameDisplayPreference, Ident, Symbol, kw, sym};
 use rustc_type_ir::{Upcast as _, elaborate};
 use smallvec::SmallVec;
 
@@ -2921,11 +2921,11 @@ where
 #[derive(Copy, Clone, TypeFoldable, TypeVisitable, Lift, Hash)]
 pub struct TraitRefPrintOnlyTraitPath<'tcx>(ty::TraitRef<'tcx>);
 
-impl<'tcx> rustc_errors::IntoDiagArg for TraitRefPrintOnlyTraitPath<'tcx> {
-    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+impl<'tcx> crate::rustc_errors::IntoDiagArg for TraitRefPrintOnlyTraitPath<'tcx> {
+    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         ty::tls::with(|tcx| {
             let trait_ref = tcx.short_string(self, path);
-            rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(trait_ref))
+            crate::rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(trait_ref))
         })
     }
 }
@@ -2941,11 +2941,11 @@ impl<'tcx> fmt::Debug for TraitRefPrintOnlyTraitPath<'tcx> {
 #[derive(Copy, Clone, TypeFoldable, TypeVisitable, Lift, Hash)]
 pub struct TraitRefPrintSugared<'tcx>(ty::TraitRef<'tcx>);
 
-impl<'tcx> rustc_errors::IntoDiagArg for TraitRefPrintSugared<'tcx> {
-    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+impl<'tcx> crate::rustc_errors::IntoDiagArg for TraitRefPrintSugared<'tcx> {
+    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         ty::tls::with(|tcx| {
             let trait_ref = tcx.short_string(self, path);
-            rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(trait_ref))
+            crate::rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(trait_ref))
         })
     }
 }

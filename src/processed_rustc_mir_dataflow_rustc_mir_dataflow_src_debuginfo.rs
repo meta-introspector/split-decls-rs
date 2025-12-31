@@ -1,6 +1,6 @@
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::mir::visit::*;
-use crate::rustc_middle::mir::*;
+use crate::rustc_complete::mir::visit::*;
+use crate::rustc_complete::mir::*;
 
 /// Return the set of locals that appear in debuginfo.
 pub fn debuginfo_locals(body: &Body<'_>) -> DenseBitSet<Local> {

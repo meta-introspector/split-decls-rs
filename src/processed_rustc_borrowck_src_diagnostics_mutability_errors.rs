@@ -6,22 +6,22 @@ use core::ops::ControlFlow;
 use either::Either;
 use hir::{ExprKind, Param};
 use rustc_abi::FieldIdx;
-use rustc_errors::{Applicability, Diag};
-use crate::rustc_hir::intravisit::Visitor;
-use crate::rustc_hir::{self as hir, BindingMode, ByRef, Node};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::hir::place::PlaceBase;
-use crate::rustc_middle::mir::visit::PlaceContext;
-use crate::rustc_middle::mir::{
+use crate::rustc_complete::{Applicability, Diag};
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::{self as hir, BindingMode, ByRef, Node};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::hir::place::PlaceBase;
+use crate::rustc_complete::mir::visit::PlaceContext;
+use crate::rustc_complete::mir::{
     self, BindingForm, Body, BorrowKind, Local, LocalDecl, LocalInfo, LocalKind, Location,
     Mutability, Operand, Place, PlaceRef, ProjectionElem, RawPtrKind, Rvalue, Statement,
     StatementKind, TerminatorKind,
 };
-use crate::rustc_middle::ty::{self, InstanceKind, Ty, TyCtxt, Upcast};
-use crate::rustc_span::{BytePos, DesugaringKind, Span, Symbol, kw, sym};
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits;
+use crate::rustc_complete::ty::{self, InstanceKind, Ty, TyCtxt, Upcast};
+use crate::rustc_complete::{BytePos, DesugaringKind, Span, Symbol, kw, sym};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits;
 use tracing::{debug, trace};
 
 use crate::diagnostics::BorrowedContentSource;
@@ -36,7 +36,7 @@ pub(crate) enum AccessKind {
 /// Finds all statements that assign directly to local (i.e., X = ...) and returns their
 /// locations.
 fn find_assignments(body: &Body<'_>, local: Local) -> Vec<Location> {
-    use crate::rustc_middle::mir::visit::Visitor;
+    use crate::rustc_complete::mir::visit::Visitor;
 
     struct FindLocalAssignmentVisitor {
         needle: Local,

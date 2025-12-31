@@ -19,12 +19,12 @@ use rustc_const_eval::check_consts::{ConstCx, qualifs};
 use crate::rustc_data_structures::fx::FxHashSet;
 use rustc_hir as hir;
 use rustc_index::{IndexSlice, IndexVec};
-use crate::rustc_middle::mir::visit::{MutVisitor, MutatingUseContext, PlaceContext, Visitor};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, GenericArgs, List, Ty, TyCtxt, TypeVisitableExt};
-use crate::rustc_middle::{bug, mir, span_bug};
-use crate::rustc_span::Span;
-use crate::rustc_span::source_map::Spanned;
+use crate::rustc_complete::mir::visit::{MutVisitor, MutatingUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, GenericArgs, List, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::{bug, mir, span_bug};
+use crate::rustc_complete::Span;
+use crate::rustc_complete::source_map::Spanned;
 use tracing::{debug, instrument};
 
 /// A `MirPass` for promotion.

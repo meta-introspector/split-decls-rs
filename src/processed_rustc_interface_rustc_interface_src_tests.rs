@@ -6,10 +6,10 @@ use std::sync::atomic::AtomicBool;
 
 use rustc_abi::Align;
 use crate::rustc_data_structures::profiling::TimePassesFormat;
-use rustc_errors::emitter::HumanReadableErrorType;
-use rustc_errors::{ColorConfig, registry};
-use crate::rustc_hir::attrs::NativeLibKind;
-use crate::rustc_session::config::{
+use crate::rustc_complete::emitter::HumanReadableErrorType;
+use crate::rustc_complete::{ColorConfig, registry};
+use crate::rustc_complete::attrs::NativeLibKind;
+use crate::rustc_complete::config::{
     AutoDiff, BranchProtection, CFGuard, Cfg, CollapseMacroDebuginfo, CoverageLevel,
     CoverageOptions, DebugInfo, DumpMonoStatsFormat, ErrorOutputType, ExternEntry, ExternLocation,
     Externs, FmtDebug, FunctionReturn, InliningThreshold, Input, InstrumentCoverage,
@@ -19,13 +19,13 @@ use crate::rustc_session::config::{
     SwitchWithOptPath, SymbolManglingVersion, WasiExecModel, build_configuration,
     build_session_options, rustc_optgroups,
 };
-use crate::rustc_session::lint::Level;
-use crate::rustc_session::search_paths::SearchPath;
-use crate::rustc_session::utils::{CanonicalizedPath, NativeLib};
-use crate::rustc_session::{CompilerIO, EarlyDiagCtxt, Session, build_session, getopts};
-use crate::rustc_span::edition::{DEFAULT_EDITION, Edition};
-use crate::rustc_span::source_map::{RealFileLoader, SourceMapInputs};
-use crate::rustc_span::{FileName, SourceFileHashAlgorithm, sym};
+use crate::rustc_complete::lint::Level;
+use crate::rustc_complete::search_paths::SearchPath;
+use crate::rustc_complete::utils::{CanonicalizedPath, NativeLib};
+use crate::rustc_complete::{CompilerIO, EarlyDiagCtxt, Session, build_session, getopts};
+use crate::rustc_complete::edition::{DEFAULT_EDITION, Edition};
+use crate::rustc_complete::source_map::{RealFileLoader, SourceMapInputs};
+use crate::rustc_complete::{FileName, SourceFileHashAlgorithm, sym};
 use rustc_target::spec::{
     CodeModel, FramePointer, LinkerFlavorCli, MergeFunctions, OnBrokenPipe, PanicStrategy,
     RelocModel, RelroLevel, SanitizerSet, SplitDebuginfo, StackProtector, TlsModel,

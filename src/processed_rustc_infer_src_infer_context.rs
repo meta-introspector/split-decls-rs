@@ -1,10 +1,10 @@
 // Definition of `InferCtxtLike` from the librarified type layer.
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::traits::ObligationCause;
-use crate::rustc_middle::ty::relate::RelateResult;
-use crate::rustc_middle::ty::relate::combine::PredicateEmittingRelation;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, TypeFoldable};
-use crate::rustc_span::{DUMMY_SP, ErrorGuaranteed, Span};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty::relate::RelateResult;
+use crate::rustc_complete::ty::relate::combine::PredicateEmittingRelation;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeFoldable};
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
 
 use super::{
     BoundRegionConversionTime, InferCtxt, OpaqueTypeStorageEntries, RegionVariableOrigin,

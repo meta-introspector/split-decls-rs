@@ -11,16 +11,16 @@
 
 use crate::rustc_data_structures::stable_hasher::HashStable;
 use crate::rustc_data_structures::sync::AtomicU64;
-use crate::rustc_middle::arena::Arena;
-use crate::rustc_middle::dep_graph::{self, DepKind, DepKindStruct, DepNodeIndex};
-use crate::rustc_middle::query::erase::{Erase, erase, restore};
-use crate::rustc_middle::query::on_disk_cache::{CacheEncoder, EncodedDepNodeIndex, OnDiskCache};
-use crate::rustc_middle::query::plumbing::{DynamicQuery, QuerySystem, QuerySystemFns};
-use crate::rustc_middle::query::{
+use crate::rustc_complete::arena::Arena;
+use crate::rustc_complete::dep_graph::{self, DepKind, DepKindStruct, DepNodeIndex};
+use crate::rustc_complete::query::erase::{Erase, erase, restore};
+use crate::rustc_complete::query::on_disk_cache::{CacheEncoder, EncodedDepNodeIndex, OnDiskCache};
+use crate::rustc_complete::query::plumbing::{DynamicQuery, QuerySystem, QuerySystemFns};
+use crate::rustc_complete::query::{
     AsLocalKey, DynamicQueries, ExternProviders, Providers, QueryCaches, QueryEngine, QueryStates,
     queries,
 };
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::ty::TyCtxt;
 use rustc_query_system::dep_graph::SerializedDepNodeIndex;
 use rustc_query_system::ich::StableHashingContext;
 use rustc_query_system::query::{
@@ -28,7 +28,7 @@ use rustc_query_system::query::{
     QueryState, get_query_incr, get_query_non_incr,
 };
 use rustc_query_system::{HandleCycleError, Value};
-use crate::rustc_span::{ErrorGuaranteed, Span};
+use crate::rustc_complete::{ErrorGuaranteed, Span};
 
 use crate::plumbing::{__rust_begin_short_backtrace, encode_all_query_results, try_mark_green};
 use crate::profiling_support::QueryKeyStringCache;

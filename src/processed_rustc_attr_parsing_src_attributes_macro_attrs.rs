@@ -1,5 +1,5 @@
-use rustc_errors::DiagArgValue;
-use crate::rustc_hir::attrs::MacroUseArgs;
+use crate::rustc_complete::DiagArgValue;
+use crate::rustc_complete::attrs::MacroUseArgs;
 
 use super::prelude::*;
 use crate::session_diagnostics::IllFormedAttributeInputLint;

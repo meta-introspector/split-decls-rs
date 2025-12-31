@@ -3,14 +3,14 @@ use std::borrow::Cow;
 use std::fmt::Debug;
 
 use rustc_ast as ast;
-use crate::rustc_ast::NodeId;
+use crate::rustc_complete::NodeId;
 use crate::rustc_data_structures::stable_hasher::ToStableHashKey;
 use crate::rustc_data_structures::unord::UnordMap;
 use rustc_error_messages::{DiagArgValue, IntoDiagArg};
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-use crate::rustc_span::Symbol;
-use crate::rustc_span::def_id::{DefId, LocalDefId};
-use crate::rustc_span::hygiene::MacroKind;
+use crate::rustc_complete::Symbol;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::hygiene::MacroKind;
 
 use crate::definitions::DefPathData;
 use crate::hir;

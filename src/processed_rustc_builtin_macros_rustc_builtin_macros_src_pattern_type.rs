@@ -1,10 +1,10 @@
-use crate::rustc_ast::tokenstream::TokenStream;
-use crate::rustc_ast::{AnonConst, DUMMY_NODE_ID, Ty, TyPat, TyPatKind, ast, token};
-use rustc_errors::PResult;
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{AnonConst, DUMMY_NODE_ID, Ty, TyPat, TyPatKind, ast, token};
+use crate::rustc_complete::PResult;
 use rustc_expand::base::{self, DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
 use rustc_parse::exp;
 use rustc_parse::parser::{CommaRecoveryMode, RecoverColon, RecoverComma};
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 
 pub(crate) fn expand<'cx>(
     cx: &'cx mut ExtCtxt<'_>,

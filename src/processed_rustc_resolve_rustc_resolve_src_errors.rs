@@ -1,10 +1,10 @@
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, ElidedLifetimeInPathSubdiag, EmissionGuarantee, IntoDiagArg, MultiSpan,
     Subdiagnostic,
 };
 use rustc_macros::{Diagnostic, Subdiagnostic};
-use crate::rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::{Ident, Span, Symbol};
 
 use crate::late::PatternSource;
 use crate::{Res, fluent_generated as fluent};

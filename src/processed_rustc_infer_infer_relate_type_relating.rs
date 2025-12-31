@@ -1,10 +1,10 @@
-use crate::rustc_middle::traits::solve::Goal;
-use crate::rustc_middle::ty::relate::combine::{super_combine_consts, super_combine_tys};
-use crate::rustc_middle::ty::relate::{
+use crate::rustc_complete::traits::solve::Goal;
+use crate::rustc_complete::ty::relate::combine::{super_combine_consts, super_combine_tys};
+use crate::rustc_complete::ty::relate::{
     Relate, RelateResult, TypeRelation, relate_args_invariantly, relate_args_with_variances,
 };
-use crate::rustc_middle::ty::{self, DelayedSet, Ty, TyCtxt, TyVar};
-use crate::rustc_span::Span;
+use crate::rustc_complete::ty::{self, DelayedSet, Ty, TyCtxt, TyVar};
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
 
 use crate::infer::BoundRegionConversionTime::HigherRankedType;

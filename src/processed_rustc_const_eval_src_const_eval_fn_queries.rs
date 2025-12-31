@@ -1,8 +1,8 @@
 use rustc_hir as hir;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::TyCtxt;
 
 fn parent_impl_or_trait_constness(tcx: TyCtxt<'_>, def_id: LocalDefId) -> hir::Constness {
     let parent_id = tcx.local_parent(def_id);

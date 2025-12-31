@@ -2,15 +2,15 @@ use std::cell::RefCell;
 
 use rustc_abi::ExternAbi;
 use rustc_hir as hir;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::lang_items::LangItem;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::lang_items::LangItem;
 use rustc_hir_analysis::check::check_function_signature;
-use rustc_infer::infer::RegionVariableOrigin;
-use rustc_infer::traits::WellFormedLoc;
-use crate::rustc_middle::ty::{self, Binder, Ty, TyCtxt};
-use crate::rustc_span::def_id::LocalDefId;
-use crate::rustc_span::sym;
-use rustc_trait_selection::traits::{ObligationCause, ObligationCauseCode};
+use crate::rustc_infer::infer::RegionVariableOrigin;
+use crate::rustc_infer::traits::WellFormedLoc;
+use crate::rustc_complete::ty::{self, Binder, Ty, TyCtxt};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::sym;
+use crate::rustc_trait_selection::traits::{ObligationCause, ObligationCauseCode};
 use tracing::{debug, instrument};
 
 use crate::coercion::CoerceMany;

@@ -1,9 +1,9 @@
 use rustc_hir as hir;
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, LocalDefId};
-use crate::rustc_hir::intravisit;
-use crate::rustc_middle::hir::nested_filter;
-use crate::rustc_middle::ty::{self, TyCtxt, TypeVisitableExt};
-use crate::rustc_span::sym;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, LocalDefId};
+use crate::rustc_complete::intravisit;
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::sym;
 
 pub(crate) fn opaque_hidden_types(tcx: TyCtxt<'_>) {
     if !tcx.has_attr(CRATE_DEF_ID, sym::rustc_hidden_type_of_opaques) {

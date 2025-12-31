@@ -1,26 +1,26 @@
 use itertools::Itertools;
 use rustc_abi::{FIRST_VARIANT, FieldIdx};
-use crate::rustc_ast::UnsafeBinderCastKind;
+use crate::rustc_complete::UnsafeBinderCastKind;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::{CtorKind, CtorOf, DefKind, Res};
-use crate::rustc_hir::find_attr;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{CtorKind, CtorOf, DefKind, Res};
+use crate::rustc_complete::find_attr;
 use rustc_index::Idx;
-use crate::rustc_middle::hir::place::{
+use crate::rustc_complete::hir::place::{
     Place as HirPlace, PlaceBase as HirPlaceBase, ProjectionKind as HirProjectionKind,
 };
-use crate::rustc_middle::middle::region;
-use crate::rustc_middle::mir::{self, AssignOp, BinOp, BorrowKind, UnOp};
-use crate::rustc_middle::thir::*;
-use crate::rustc_middle::ty::adjustment::{
+use crate::rustc_complete::middle::region;
+use crate::rustc_complete::mir::{self, AssignOp, BinOp, BorrowKind, UnOp};
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::adjustment::{
     Adjust, Adjustment, AutoBorrow, AutoBorrowMutability, PointerCoercion,
 };
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, AdtKind, GenericArgs, InlineConstArgs, InlineConstArgsParts, ScalarInt, Ty, UpvarArgs,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::{Span, sym};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::{Span, sym};
 use tracing::{debug, info, instrument, trace};
 
 use crate::errors::*;
@@ -291,7 +291,7 @@ impl<'tcx> ThirBuildCx<'tcx> {
             let idx = adt_def.variant_index_with_ctor_id(variant_ctor_id);
             let (discr_did, discr_offset) = adt_def.discriminant_def_for_variant(idx);
 
-            use crate::rustc_middle::ty::util::IntTypeExt;
+            use crate::rustc_complete::ty::util::IntTypeExt;
             let ty = adt_def.repr().discr_type();
             let discr_ty = ty.to_ty(tcx);
 
@@ -1470,7 +1470,7 @@ trait ToBorrowKind {
 
 impl ToBorrowKind for AutoBorrowMutability {
     fn to_borrow_kind(&self) -> BorrowKind {
-        use crate::rustc_middle::ty::adjustment::AllowTwoPhase;
+        use crate::rustc_complete::ty::adjustment::AllowTwoPhase;
         match *self {
             AutoBorrowMutability::Mut { allow_two_phase_borrow } => BorrowKind::Mut {
                 kind: match allow_two_phase_borrow {

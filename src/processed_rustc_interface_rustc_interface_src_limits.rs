@@ -8,11 +8,11 @@
 // Users can override these limits via an attribute on the crate like
 // `#[recursion_limit="22"]`. This pass just looks for those attributes.
 
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::limit::Limit;
-use crate::rustc_hir::{Attribute, find_attr};
-use crate::rustc_middle::query::Providers;
-use crate::rustc_session::Limits;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_complete::{Attribute, find_attr};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::Limits;
 
 pub(crate) fn provide(providers: &mut Providers) {
     providers.limits = |tcx, ()| {

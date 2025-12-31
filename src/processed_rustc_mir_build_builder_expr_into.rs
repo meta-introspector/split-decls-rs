@@ -1,17 +1,17 @@
 // See docs in build/expr/mod.rs
 
-use crate::rustc_ast::{AsmMacro, InlineAsmOptions};
+use crate::rustc_complete::{AsmMacro, InlineAsmOptions};
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use rustc_hir as hir;
-use crate::rustc_hir::lang_items::LangItem;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::thir::*;
-use crate::rustc_middle::ty::{self, CanonicalUserTypeAnnotation, Ty};
-use crate::rustc_span::DUMMY_SP;
-use crate::rustc_span::source_map::Spanned;
-use rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::{self, CanonicalUserTypeAnnotation, Ty};
+use crate::rustc_complete::DUMMY_SP;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::{debug, instrument};
 
 use crate::builder::expr::category::{Category, RvalueFunc};
@@ -608,7 +608,7 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
                 options,
                 line_spans,
             }) => {
-                use crate::rustc_middle::{mir, thir};
+                use crate::rustc_complete::{mir, thir};
 
                 let destination_block = this.cfg.start_new_block();
                 let mut targets =

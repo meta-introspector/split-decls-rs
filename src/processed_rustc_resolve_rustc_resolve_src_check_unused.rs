@@ -24,16 +24,16 @@
 //    in the last step
 
 use rustc_ast as ast;
-use crate::rustc_ast::visit::{self, Visitor};
+use crate::rustc_complete::visit::{self, Visitor};
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap, FxIndexSet};
 use crate::rustc_data_structures::unord::UnordSet;
-use rustc_errors::MultiSpan;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_session::lint::BuiltinLintDiag;
-use crate::rustc_session::lint::builtin::{
+use crate::rustc_complete::MultiSpan;
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::{
     MACRO_USE_EXTERN_CRATE, UNUSED_EXTERN_CRATES, UNUSED_IMPORTS, UNUSED_QUALIFICATIONS,
 };
-use crate::rustc_span::{DUMMY_SP, Ident, Macros20NormalizedIdent, Span, kw};
+use crate::rustc_complete::{DUMMY_SP, Ident, Macros20NormalizedIdent, Span, kw};
 
 use crate::imports::{Import, ImportKind};
 use crate::{LexicalScopeBinding, NameBindingKind, Resolver, module_to_string};

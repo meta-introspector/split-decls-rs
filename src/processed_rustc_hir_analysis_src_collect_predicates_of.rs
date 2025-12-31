@@ -3,15 +3,15 @@ use std::assert_matches::assert_matches;
 use hir::Node;
 use crate::rustc_data_structures::fx::FxIndexSet;
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::find_attr;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::find_attr;
+use crate::rustc_complete::ty::{
     self, GenericPredicates, ImplTraitInTraitData, Ty, TyCtxt, TypeVisitable, TypeVisitor, Upcast,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::{DUMMY_SP, Ident, Span};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span};
 use tracing::{debug, instrument, trace};
 
 use super::item_bounds::explicit_item_bounds_with_filter;
@@ -79,7 +79,7 @@ pub(super) fn predicates_of(tcx: TyCtxt<'_>, def_id: DefId) -> ty::GenericPredic
 /// N.B., this does not include any implied/inferred constraints.
 #[instrument(level = "trace", skip(tcx), ret)]
 fn gather_explicit_predicates_of(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::GenericPredicates<'_> {
-    use crate::rustc_hir::*;
+    use crate::rustc_complete::*;
 
     match tcx.opt_rpitit_info(def_id.to_def_id()) {
         Some(ImplTraitInTraitData::Trait { fn_def_id, .. }) => {

@@ -2,18 +2,18 @@
 use std::{fmt, iter};
 
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-use rustc_errors::{Applicability, Diag, E0038, E0276, MultiSpan, struct_span_code_err};
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::intravisit::Visitor;
-use crate::rustc_hir::{self as hir, AmbigArg};
-use rustc_infer::traits::solve::Goal;
-use rustc_infer::traits::{
+use crate::rustc_complete::{Applicability, Diag, E0038, E0276, MultiSpan, struct_span_code_err};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::{self as hir, AmbigArg};
+use crate::rustc_infer::traits::solve::Goal;
+use crate::rustc_infer::traits::{
     DynCompatibilityViolation, Obligation, ObligationCause, ObligationCauseCode,
     PredicateObligation, SelectionError,
 };
-use crate::rustc_middle::ty::print::{PrintTraitRefExt as _, with_no_trimmed_paths};
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_span::{ErrorGuaranteed, ExpnKind, Span};
+use crate::rustc_complete::ty::print::{PrintTraitRefExt as _, with_no_trimmed_paths};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::{ErrorGuaranteed, ExpnKind, Span};
 use tracing::{info, instrument};
 
 pub use self::overflow::*;

@@ -1,5 +1,5 @@
 use rustc_index::{Idx, IndexVec};
-use crate::rustc_middle::mir::{BasicBlock, Body, Location};
+use crate::rustc_complete::mir::{BasicBlock, Body, Location};
 
 /// Maps between a `Location` and a `PointIndex` (and vice versa).
 pub struct DenseLocationMap {

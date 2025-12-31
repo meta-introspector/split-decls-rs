@@ -1,10 +1,10 @@
 use std::borrow::Cow;
 
-use crate::rustc_ast::ast;
-use rustc_errors::codes::*;
-use crate::rustc_hir::limit::Limit;
+use crate::rustc_complete::ast;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::limit::Limit;
 use rustc_macros::{Diagnostic, Subdiagnostic};
-use crate::rustc_span::{Ident, MacroRulesNormalizedIdent, Span, Symbol};
+use crate::rustc_complete::{Ident, MacroRulesNormalizedIdent, Span, Symbol};
 
 #[derive(Diagnostic)]
 #[diag(expand_expr_repeat_no_syntax_vars)]

@@ -4,18 +4,18 @@ use std::iter::once;
 
 use rustc_abi::{FIRST_VARIANT, FieldIdx, Integer, VariantIdx};
 use rustc_arena::DroplessArena;
-use crate::rustc_hir::HirId;
-use crate::rustc_hir::def_id::DefId;
+use crate::rustc_complete::HirId;
+use crate::rustc_complete::def_id::DefId;
 use rustc_index::{Idx, IndexVec};
-use crate::rustc_middle::middle::stability::EvalResult;
-use crate::rustc_middle::thir::{self, Pat, PatKind, PatRange, PatRangeBoundary};
-use crate::rustc_middle::ty::layout::IntegerExt;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::middle::stability::EvalResult;
+use crate::rustc_complete::thir::{self, Pat, PatKind, PatRange, PatRangeBoundary};
+use crate::rustc_complete::ty::layout::IntegerExt;
+use crate::rustc_complete::ty::{
     self, FieldDef, OpaqueTypeKey, ScalarInt, Ty, TyCtxt, TypeVisitableExt, VariantDef,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::lint;
-use crate::rustc_span::{DUMMY_SP, ErrorGuaranteed, Span};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
 
 use crate::constructor::Constructor::*;
 use crate::constructor::{

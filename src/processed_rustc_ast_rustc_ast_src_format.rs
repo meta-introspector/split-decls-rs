@@ -1,6 +1,6 @@
 use crate::rustc_data_structures::fx::FxHashMap;
 use rustc_macros::{Decodable, Encodable, Walkable};
-use crate::rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::{Ident, Span, Symbol};
 
 use crate::Expr;
 use crate::token::LitKind;

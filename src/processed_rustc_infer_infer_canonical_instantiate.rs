@@ -7,7 +7,7 @@
 // [c]: https://rust-lang.github.io/chalk/book/canonical_queries/canonicalization.html
 
 use rustc_macros::extension;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, DelayedMap, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeSuperVisitable,
     TypeVisitableExt, TypeVisitor,
 };

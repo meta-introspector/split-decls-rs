@@ -1,9 +1,9 @@
-use crate::rustc_hir::def::DefKind;
+use crate::rustc_complete::def::DefKind;
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{self, Representability, Ty, TyCtxt};
-use crate::rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, Representability, Ty, TyCtxt};
+use crate::rustc_complete::def_id::LocalDefId;
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers =

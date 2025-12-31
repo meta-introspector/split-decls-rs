@@ -1,5 +1,5 @@
 /// This module provides types and traits for buffering lints until later in compilation.
-use crate::rustc_ast::node_id::NodeId;
+use crate::rustc_complete::node_id::NodeId;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use rustc_error_messages::MultiSpan;
 use rustc_lint_defs::{BuiltinLintDiag, Lint, LintId};

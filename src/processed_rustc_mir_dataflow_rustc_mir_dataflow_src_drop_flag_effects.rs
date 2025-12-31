@@ -1,5 +1,5 @@
 use rustc_abi::VariantIdx;
-use crate::rustc_middle::mir::{self, Body, Location, Terminator, TerminatorKind};
+use crate::rustc_complete::mir::{self, Body, Location, Terminator, TerminatorKind};
 use smallvec::SmallVec;
 use tracing::debug;
 

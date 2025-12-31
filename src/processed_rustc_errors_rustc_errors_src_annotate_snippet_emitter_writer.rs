@@ -9,8 +9,8 @@ use std::sync::Arc;
 
 use annotate_snippets::{Renderer, Snippet};
 use rustc_error_messages::FluentArgs;
-use crate::rustc_span::SourceFile;
-use crate::rustc_span::source_map::SourceMap;
+use crate::rustc_complete::SourceFile;
+use crate::rustc_complete::source_map::SourceMap;
 
 use crate::emitter::FileWithAnnotatedLines;
 use crate::registry::Registry;

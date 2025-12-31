@@ -3,9 +3,9 @@
 use std::iter::once;
 use std::ops::Range;
 
-use rustc_errors::{Applicability, DiagCtxtHandle, ErrorGuaranteed};
+use crate::rustc_complete::{Applicability, DiagCtxtHandle, ErrorGuaranteed};
 use rustc_literal_escaper::{EscapeError, Mode};
-use crate::rustc_span::{BytePos, Span};
+use crate::rustc_complete::{BytePos, Span};
 use tracing::debug;
 
 use crate::errors::{MoreThanOneCharNote, MoreThanOneCharSugg, NoBraceUnicodeSub, UnescapeError};

@@ -1,8 +1,8 @@
-use crate::rustc_hir::{self as hir, LangItem};
-use crate::rustc_middle::ty;
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::{Ident, sym};
-use rustc_trait_selection::traits::supertraits;
+use crate::rustc_complete::{self as hir, LangItem};
+use crate::rustc_complete::ty;
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::{Ident, sym};
+use crate::rustc_trait_selection::traits::supertraits;
 
 use crate::lints::{SupertraitAsDerefTarget, SupertraitAsDerefTargetLabel};
 use crate::{LateContext, LateLintPass, LintContext};

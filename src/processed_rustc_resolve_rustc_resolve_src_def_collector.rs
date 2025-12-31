@@ -1,16 +1,16 @@
 use std::mem;
 
-use crate::rustc_ast::visit::FnKind;
-use crate::rustc_ast::*;
+use crate::rustc_complete::visit::FnKind;
+use crate::rustc_complete::*;
 use rustc_attr_parsing::{AttributeParser, Early, OmitDoc, ShouldEmit};
 use rustc_expand::expand::AstFragment;
 use rustc_hir as hir;
-use crate::rustc_hir::Target;
-use crate::rustc_hir::def::{CtorKind, CtorOf, DefKind};
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_middle::span_bug;
-use crate::rustc_span::hygiene::LocalExpnId;
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::Target;
+use crate::rustc_complete::def::{CtorKind, CtorOf, DefKind};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::hygiene::LocalExpnId;
+use crate::rustc_complete::{Span, Symbol, sym};
 use tracing::debug;
 
 use crate::{ImplTraitContext, InvocationParent, Resolver};

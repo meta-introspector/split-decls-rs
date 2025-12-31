@@ -5,8 +5,8 @@
 // closure.
 
 use rustc_codegen_ssa::common;
-use crate::rustc_middle::ty::layout::{FnAbiOf, HasTyCtxt, HasTypingEnv};
-use crate::rustc_middle::ty::{self, Instance, TypeVisitableExt};
+use crate::rustc_complete::ty::layout::{FnAbiOf, HasTyCtxt, HasTypingEnv};
+use crate::rustc_complete::ty::{self, Instance, TypeVisitableExt};
 use tracing::debug;
 
 use crate::context::CodegenCx;

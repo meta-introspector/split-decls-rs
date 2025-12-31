@@ -2,7 +2,7 @@ use std::io;
 use std::path::Path;
 
 use rustc_macros::Diagnostic;
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 
 #[derive(Diagnostic)]
 #[diag(interface_crate_name_does_not_match)]

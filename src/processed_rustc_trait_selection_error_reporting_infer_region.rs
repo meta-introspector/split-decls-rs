@@ -1,20 +1,20 @@
 use std::iter;
 
 use crate::rustc_data_structures::fx::FxIndexSet;
-use rustc_errors::{
+use crate::rustc_complete::{
     Applicability, Diag, E0309, E0310, E0311, E0803, Subdiagnostic, struct_span_code_err,
 };
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::intravisit::Visitor;
-use crate::rustc_hir::{self as hir, ParamName};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::traits::ObligationCauseCode;
-use crate::rustc_middle::ty::error::TypeError;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::{self as hir, ParamName};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::traits::ObligationCauseCode;
+use crate::rustc_complete::ty::error::TypeError;
+use crate::rustc_complete::ty::{
     self, IsSuggestable, Region, Ty, TyCtxt, TypeVisitableExt as _, Upcast as _,
 };
-use crate::rustc_span::{BytePos, ErrorGuaranteed, Span, Symbol, kw};
+use crate::rustc_complete::{BytePos, ErrorGuaranteed, Span, Symbol, kw};
 use tracing::{debug, instrument};
 
 use super::ObligationCauseAsDiagArg;

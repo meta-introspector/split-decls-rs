@@ -1,17 +1,17 @@
 // Error Reporting for `impl` items that do not match the obligations from their `trait`.
 
-use rustc_errors::ErrorGuaranteed;
-use crate::rustc_hir::def::{Namespace, Res};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::intravisit::{Visitor, walk_ty};
-use crate::rustc_hir::{self as hir, AmbigArg};
-use rustc_infer::infer::SubregionOrigin;
-use crate::rustc_middle::hir::nested_filter;
-use crate::rustc_middle::traits::ObligationCauseCode;
-use crate::rustc_middle::ty::error::ExpectedFound;
-use crate::rustc_middle::ty::print::RegionHighlightMode;
-use crate::rustc_middle::ty::{self, TyCtxt, TypeVisitable};
-use crate::rustc_span::Span;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def::{Namespace, Res};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::intravisit::{Visitor, walk_ty};
+use crate::rustc_complete::{self as hir, AmbigArg};
+use crate::rustc_infer::infer::SubregionOrigin;
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::traits::ObligationCauseCode;
+use crate::rustc_complete::ty::error::ExpectedFound;
+use crate::rustc_complete::ty::print::RegionHighlightMode;
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitable};
+use crate::rustc_complete::Span;
 use tracing::debug;
 
 use crate::error_reporting::infer::nice_region_error::NiceRegionError;

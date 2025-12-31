@@ -60,11 +60,11 @@
 // imply that `'b: 'a`.
 
 use crate::rustc_data_structures::undo_log::UndoLogs;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::ConstraintCategory;
-use crate::rustc_middle::traits::query::NoSolution;
-use crate::rustc_middle::ty::outlives::{Component, push_outlives_components};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::ConstraintCategory;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::outlives::{Component, push_outlives_components};
+use crate::rustc_complete::ty::{
     self, GenericArgKind, GenericArgsRef, PolyTypeOutlivesPredicate, Region, Ty, TyCtxt,
     TypeFoldable as _, TypeVisitableExt,
 };

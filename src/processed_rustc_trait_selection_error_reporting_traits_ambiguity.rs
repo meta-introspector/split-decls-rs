@@ -1,19 +1,19 @@
 use std::ops::ControlFlow;
 
-use rustc_errors::{Applicability, Diag, E0283, E0284, E0790, MultiSpan, struct_span_code_err};
+use crate::rustc_complete::{Applicability, Diag, E0283, E0284, E0790, MultiSpan, struct_span_code_err};
 use rustc_hir as hir;
-use crate::rustc_hir::LangItem;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, DefId};
-use crate::rustc_hir::intravisit::Visitor as _;
-use rustc_infer::infer::{BoundRegionConversionTime, InferCtxt};
-use rustc_infer::traits::util::elaborate;
-use rustc_infer::traits::{
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
+use crate::rustc_complete::intravisit::Visitor as _;
+use crate::rustc_infer::infer::{BoundRegionConversionTime, InferCtxt};
+use crate::rustc_infer::traits::util::elaborate;
+use crate::rustc_infer::traits::{
     Obligation, ObligationCause, ObligationCauseCode, PolyTraitObligation, PredicateObligation,
 };
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, TypeVisitable as _, TypeVisitableExt as _};
-use crate::rustc_session::parse::feature_err_unstable_feature_bound;
-use crate::rustc_span::{DUMMY_SP, ErrorGuaranteed, Span};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitable as _, TypeVisitableExt as _};
+use crate::rustc_complete::parse::feature_err_unstable_feature_bound;
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
 use tracing::{debug, instrument};
 
 use crate::error_reporting::TypeErrCtxt;

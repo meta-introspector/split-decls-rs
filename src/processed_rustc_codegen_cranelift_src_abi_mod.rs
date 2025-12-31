@@ -10,12 +10,12 @@ use cranelift_module::ModuleError;
 use rustc_abi::{CanonAbi, ExternAbi, X86Call};
 use rustc_codegen_ssa::base::is_call_from_compiler_builtins_to_upstream_monomorphization;
 use rustc_codegen_ssa::errors::CompilerBuiltinsCannotCall;
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use crate::rustc_middle::ty::TypeVisitableExt;
-use crate::rustc_middle::ty::layout::FnAbiOf;
-use crate::rustc_middle::ty::print::with_no_trimmed_paths;
-use crate::rustc_session::Session;
-use crate::rustc_span::source_map::Spanned;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::ty::TypeVisitableExt;
+use crate::rustc_complete::ty::layout::FnAbiOf;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::source_map::Spanned;
 use rustc_target::callconv::{FnAbi, PassMode};
 use smallvec::SmallVec;
 

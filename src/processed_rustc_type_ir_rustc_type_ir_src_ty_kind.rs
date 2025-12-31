@@ -605,7 +605,7 @@ pub enum InferTy {
 
     /// A [`FreshTy`][Self::FreshTy] is one that is generated as a replacement
     /// for an unbound type variable. This is convenient for caching etc. See
-    /// `rustc_infer::infer::freshen` for more details.
+    /// `crate::rustc_infer::infer::freshen` for more details.
     ///
     /// Compare with [`TyVar`][Self::TyVar].
     FreshTy(u32),

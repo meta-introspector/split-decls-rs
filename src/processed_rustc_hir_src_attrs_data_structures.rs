@@ -3,13 +3,13 @@ use std::path::PathBuf;
 
 pub use ReprAttr::*;
 use rustc_abi::Align;
-use crate::rustc_ast::token::CommentKind;
-use crate::rustc_ast::{AttrStyle, ast};
+use crate::rustc_complete::token::CommentKind;
+use crate::rustc_complete::{AttrStyle, ast};
 use rustc_error_messages::{DiagArgValue, IntoDiagArg};
 use rustc_macros::{Decodable, Encodable, HashStable_Generic, PrintAttribute};
-use crate::rustc_span::def_id::DefId;
-use crate::rustc_span::hygiene::Transparency;
-use crate::rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::hygiene::Transparency;
+use crate::rustc_complete::{Ident, Span, Symbol};
 pub use rustc_target::spec::SanitizerSet;
 use thin_vec::ThinVec;
 

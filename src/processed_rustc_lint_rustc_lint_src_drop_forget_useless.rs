@@ -1,7 +1,7 @@
-use crate::rustc_hir::{Arm, Expr, ExprKind, Node, StmtKind};
-use crate::rustc_middle::ty;
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::sym;
+use crate::rustc_complete::{Arm, Expr, ExprKind, Node, StmtKind};
+use crate::rustc_complete::ty;
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::sym;
 
 use crate::lints::{
     DropCopyDiag, DropRefDiag, ForgetCopyDiag, ForgetRefDiag, UndroppedManuallyDropsDiag,

@@ -480,7 +480,7 @@ where
 }
 
 // FIXME: needs to be pub to be accessed by downstream
-// `rustc_trait_selection::solve::inspect::analyse`.
+// `crate::rustc_trait_selection::solve::inspect::analyse`.
 pub fn instantiate_canonical_state<D, I, T: TypeFoldable<I>>(
     delegate: &D,
     span: I::Span,

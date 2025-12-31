@@ -8,9 +8,9 @@ use std::assert_matches::assert_matches;
 use std::iter;
 
 use rustc_abi::{FieldIdx, VariantIdx};
-use crate::rustc_middle::mir::{ProjectionElem, UserTypeProjection, UserTypeProjections};
-use crate::rustc_middle::ty::{AdtDef, UserTypeAnnotationIndex};
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::mir::{ProjectionElem, UserTypeProjection, UserTypeProjections};
+use crate::rustc_complete::ty::{AdtDef, UserTypeAnnotationIndex};
+use crate::rustc_complete::Symbol;
 
 /// One of a list of "operations" that can be used to lazily build projections
 /// of user-specified types.

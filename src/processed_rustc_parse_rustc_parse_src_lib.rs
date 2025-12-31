@@ -17,20 +17,20 @@ use std::str::Utf8Error;
 use std::sync::Arc;
 
 use rustc_ast as ast;
-use crate::rustc_ast::tokenstream::{DelimSpan, TokenStream};
-use crate::rustc_ast::{AttrItem, Attribute, MetaItemInner, token};
+use crate::rustc_complete::tokenstream::{DelimSpan, TokenStream};
+use crate::rustc_complete::{AttrItem, Attribute, MetaItemInner, token};
 use rustc_ast_pretty::pprust;
-use rustc_errors::{Diag, EmissionGuarantee, FatalError, PResult, pluralize};
-use crate::rustc_session::parse::ParseSess;
-use crate::rustc_span::source_map::SourceMap;
-use crate::rustc_span::{FileName, SourceFile, Span};
+use crate::rustc_complete::{Diag, EmissionGuarantee, FatalError, PResult, pluralize};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{FileName, SourceFile, Span};
 pub use unicode_normalization::UNICODE_VERSION as UNICODE_NORMALIZATION_VERSION;
 
 pub const MACRO_ARGUMENTS: Option<&str> = Some("macro arguments");
 
 #[macro_use]
 use parser::Parser;
-use crate::rustc_ast::token::Delimiter;
+use crate::rustc_complete::token::Delimiter;
 
 use crate::lexer::StripTokens;
 

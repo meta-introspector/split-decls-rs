@@ -1,8 +1,8 @@
 use rustc_index::IndexSlice;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::thir::*;
-use crate::rustc_middle::ty::{self, Ty};
-use crate::rustc_span::Span;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::{self, Ty};
+use crate::rustc_complete::Span;
 
 use super::{PResult, ParseCtxt, ParseError};
 

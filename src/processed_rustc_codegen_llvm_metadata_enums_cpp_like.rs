@@ -6,9 +6,9 @@ use rustc_codegen_ssa::debuginfo::type_names::compute_debuginfo_type_name;
 use rustc_codegen_ssa::debuginfo::{tag_base_type, wants_c_like_enum_debuginfo};
 use rustc_codegen_ssa::traits::{ConstCodegenMethods, MiscCodegenMethods};
 use rustc_index::IndexVec;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::layout::{LayoutOf, TyAndLayout};
-use crate::rustc_middle::ty::{self, AdtDef, CoroutineArgs, CoroutineArgsExt, Ty};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
+use crate::rustc_complete::ty::{self, AdtDef, CoroutineArgs, CoroutineArgsExt, Ty};
 use smallvec::smallvec;
 
 use crate::common::{AsCCharPtr, CodegenCx};

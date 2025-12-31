@@ -1,17 +1,17 @@
 use rustc_abi::FieldIdx;
-use crate::rustc_ast::InlineAsmTemplatePiece;
+use crate::rustc_complete::InlineAsmTemplatePiece;
 use crate::rustc_data_structures::fx::FxIndexSet;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::{self as hir, LangItem};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{self, Article, FloatTy, IntTy, Ty, TyCtxt, TypeVisitableExt, UintTy};
-use crate::rustc_session::lint;
-use crate::rustc_span::def_id::LocalDefId;
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, LangItem};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, Article, FloatTy, IntTy, Ty, TyCtxt, TypeVisitableExt, UintTy};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{Span, Symbol, sym};
 use rustc_target::asm::{
     InlineAsmReg, InlineAsmRegClass, InlineAsmRegOrRegClass, InlineAsmType, ModifierInfo,
 };
-use rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
 
 use crate::FnCtxt;
 use crate::errors::RegisterTypeUnstable;

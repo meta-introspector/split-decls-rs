@@ -10,8 +10,8 @@ use crate::rustc_data_structures::graph;
 use crate::rustc_data_structures::union_find::UnionFind;
 use rustc_index::bit_set::DenseBitSet;
 use rustc_index::{Idx, IndexSlice, IndexVec};
-pub(crate) use crate::rustc_middle::mir::coverage::NodeFlowData;
-use crate::rustc_middle::mir::coverage::Op;
+pub(crate) use crate::rustc_complete::mir::coverage::NodeFlowData;
+use crate::rustc_complete::mir::coverage::Op;
 
 
 /// Creates a "merged" view of an underlying graph.

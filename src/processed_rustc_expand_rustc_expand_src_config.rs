@@ -2,11 +2,11 @@
 
 use std::iter;
 
-use crate::rustc_ast::token::{Delimiter, Token, TokenKind};
-use crate::rustc_ast::tokenstream::{
+use crate::rustc_complete::token::{Delimiter, Token, TokenKind};
+use crate::rustc_complete::tokenstream::{
     AttrTokenStream, AttrTokenTree, LazyAttrTokenStream, Spacing, TokenTree,
 };
-use crate::rustc_ast::{
+use crate::rustc_complete::{
     self as ast, AttrKind, AttrStyle, Attribute, HasAttrs, HasTokens, MetaItem, MetaItemInner,
     NodeId, NormalAttr,
 };
@@ -22,9 +22,9 @@ use rustc_feature::{
     REMOVED_LANG_FEATURES, UNSTABLE_LANG_FEATURES,
 };
 use rustc_lint_defs::BuiltinLintDiag;
-use crate::rustc_session::Session;
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::{STDLIB_STABLE_CRATES, Span, Symbol, sym};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{STDLIB_STABLE_CRATES, Span, Symbol, sym};
 use thin_vec::ThinVec;
 use tracing::instrument;
 

@@ -2,8 +2,8 @@ use std::ops::Deref;
 
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::undo_log::UndoLogs;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{self, OpaqueHiddenType, OpaqueTypeKey, Ty};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, OpaqueHiddenType, OpaqueTypeKey, Ty};
 use tracing::instrument;
 
 use crate::infer::snapshot::undo_log::{InferCtxtUndoLogs, UndoLog};

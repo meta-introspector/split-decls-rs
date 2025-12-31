@@ -6,13 +6,13 @@ use std::assert_matches::assert_matches;
 use either::{Either, Left, Right};
 use rustc_abi as abi;
 use rustc_abi::{BackendRepr, HasDataLayout, Size};
-use crate::rustc_hir::def::Namespace;
-use crate::rustc_middle::mir::interpret::ScalarSizeMismatch;
-use crate::rustc_middle::ty::layout::{HasTyCtxt, HasTypingEnv, TyAndLayout};
-use crate::rustc_middle::ty::print::{FmtPrinter, PrettyPrinter};
-use crate::rustc_middle::ty::{ConstInt, ScalarInt, Ty, TyCtxt};
-use crate::rustc_middle::{bug, mir, span_bug, ty};
-use crate::rustc_span::DUMMY_SP;
+use crate::rustc_complete::def::Namespace;
+use crate::rustc_complete::mir::interpret::ScalarSizeMismatch;
+use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv, TyAndLayout};
+use crate::rustc_complete::ty::print::{FmtPrinter, PrettyPrinter};
+use crate::rustc_complete::ty::{ConstInt, ScalarInt, Ty, TyCtxt};
+use crate::rustc_complete::{bug, mir, span_bug, ty};
+use crate::rustc_complete::DUMMY_SP;
 use tracing::field::Empty;
 use tracing::trace;
 
@@ -836,7 +836,7 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         let _trace =
             enter_trace_span!(M, step::eval_operand, ?mir_op, tracing_separate_thread = Empty);
 
-        use crate::rustc_middle::mir::Operand::*;
+        use crate::rustc_complete::mir::Operand::*;
         let op = match mir_op {
             // FIXME: do some more logic on `move` to invalidate the old location
             &Copy(place) | &Move(place) => self.eval_place_to_op(place, layout)?,

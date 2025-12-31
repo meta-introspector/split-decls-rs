@@ -1,4 +1,4 @@
-use crate::rustc_hir::def::CtorOf;
+use crate::rustc_complete::def::CtorOf;
 use rustc_index::Idx;
 
 use crate::rmeta::*;

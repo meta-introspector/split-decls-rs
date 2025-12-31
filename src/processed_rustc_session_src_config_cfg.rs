@@ -24,10 +24,10 @@ use std::hash::Hash;
 use std::iter;
 
 use rustc_abi::Align;
-use crate::rustc_ast::ast;
+use crate::rustc_complete::ast;
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexSet};
 use rustc_lint_defs::builtin::EXPLICIT_BUILTIN_CFGS_IN_FLAGS;
-use crate::rustc_span::{Symbol, sym};
+use crate::rustc_complete::{Symbol, sym};
 use rustc_target::spec::{PanicStrategy, RelocModel, SanitizerSet, Target};
 
 use crate::config::{CrateType, FmtDebug};

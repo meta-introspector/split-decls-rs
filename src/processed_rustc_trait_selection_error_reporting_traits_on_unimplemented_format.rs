@@ -2,14 +2,14 @@ use std::fmt;
 use std::ops::Range;
 
 use errors::*;
-use crate::rustc_middle::ty::print::TraitRefPrintSugared;
-use crate::rustc_middle::ty::{GenericParamDefKind, TyCtxt};
+use crate::rustc_complete::ty::print::TraitRefPrintSugared;
+use crate::rustc_complete::ty::{GenericParamDefKind, TyCtxt};
 use rustc_parse_format::{
     Argument, FormatSpec, ParseError, ParseMode, Parser, Piece as RpfPiece, Position,
 };
-use crate::rustc_session::lint::builtin::MALFORMED_DIAGNOSTIC_FORMAT_LITERALS;
-use crate::rustc_span::def_id::DefId;
-use crate::rustc_span::{InnerSpan, Span, Symbol, kw, sym};
+use crate::rustc_complete::lint::builtin::MALFORMED_DIAGNOSTIC_FORMAT_LITERALS;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{InnerSpan, Span, Symbol, kw, sym};
 
 /// Like [std::fmt::Arguments] this is a string that has been parsed into "pieces",
 /// either as string pieces or dynamic arguments.
@@ -305,7 +305,7 @@ fn slice_span(input: Span, Range { start, end }: Range<usize>, is_source_literal
 
 pub mod errors {
     use rustc_macros::LintDiagnostic;
-    use crate::rustc_span::Ident;
+    use crate::rustc_complete::Ident;
 
     use super::*;
 

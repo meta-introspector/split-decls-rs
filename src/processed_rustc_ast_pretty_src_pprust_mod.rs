@@ -2,8 +2,8 @@
 use std::borrow::Cow;
 
 use rustc_ast as ast;
-use crate::rustc_ast::token::{Token, TokenKind};
-use crate::rustc_ast::tokenstream::{TokenStream, TokenTree};
+use crate::rustc_complete::token::{Token, TokenKind};
+use crate::rustc_complete::tokenstream::{TokenStream, TokenTree};
 pub use state::{
     AnnNode, Comments, PpAnn, PrintState, State, print_crate, print_crate_as_interface,
 };

@@ -9,17 +9,17 @@ use rustc_attr_parsing::{ShouldEmit, validate_attr};
 use rustc_codegen_ssa::traits::CodegenBackend;
 use crate::rustc_data_structures::jobserver::Proxy;
 use crate::rustc_data_structures::sync;
-use rustc_errors::LintBuffer;
+use crate::rustc_complete::LintBuffer;
 use rustc_metadata::{DylibError, load_symbol_from_dylib};
-use crate::rustc_middle::ty::CurrentGcx;
-use crate::rustc_session::config::{Cfg, OutFileName, OutputFilenames, OutputTypes, Sysroot, host_tuple};
-use crate::rustc_session::lint::{self, BuiltinLintDiag};
-use crate::rustc_session::output::{CRATE_TYPES, categorize_crate_type};
-use crate::rustc_session::{EarlyDiagCtxt, Session, filesearch};
-use crate::rustc_span::edit_distance::find_best_match_for_name;
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::source_map::SourceMapInputs;
-use crate::rustc_span::{SessionGlobals, Symbol, sym};
+use crate::rustc_complete::ty::CurrentGcx;
+use crate::rustc_complete::config::{Cfg, OutFileName, OutputFilenames, OutputTypes, Sysroot, host_tuple};
+use crate::rustc_complete::lint::{self, BuiltinLintDiag};
+use crate::rustc_complete::output::{CRATE_TYPES, categorize_crate_type};
+use crate::rustc_complete::{EarlyDiagCtxt, Session, filesearch};
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::source_map::SourceMapInputs;
+use crate::rustc_complete::{SessionGlobals, Symbol, sym};
 use rustc_target::spec::Target;
 use tracing::info;
 
@@ -180,7 +180,7 @@ pub(crate) fn run_in_thread_pool_with_globals<
 
     use crate::rustc_data_structures::defer;
     use crate::rustc_data_structures::sync::FromDyn;
-    use crate::rustc_middle::ty::tls;
+    use crate::rustc_complete::ty::tls;
     use rustc_query_impl::QueryCtxt;
     use rustc_query_system::query::{QueryContext, break_query_cycles};
 

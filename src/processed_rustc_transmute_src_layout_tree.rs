@@ -250,11 +250,11 @@ pub(crate) mod rustc {
     use rustc_abi::{
         FieldIdx, FieldsShape, Layout, Size, TagEncoding, TyAndLayout, VariantIdx, Variants,
     };
-    use crate::rustc_middle::ty::layout::{HasTyCtxt, LayoutCx, LayoutError};
-    use crate::rustc_middle::ty::{
+    use crate::rustc_complete::ty::layout::{HasTyCtxt, LayoutCx, LayoutError};
+    use crate::rustc_complete::ty::{
         self, AdtDef, AdtKind, List, Region, ScalarInt, Ty, TyCtxt, TypeVisitableExt,
     };
-    use crate::rustc_span::ErrorGuaranteed;
+    use crate::rustc_complete::ErrorGuaranteed;
 
     use super::Tree;
     use crate::layout::Reference;

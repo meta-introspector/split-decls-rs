@@ -4,14 +4,14 @@ use std::ops::{Deref, DerefMut};
 use std::sync::LazyLock;
 
 use private::Sealed;
-use crate::rustc_ast::{AttrStyle, CRATE_NODE_ID, MetaItemLit, NodeId};
-use rustc_errors::{Diag, Diagnostic, Level};
+use crate::rustc_complete::{AttrStyle, CRATE_NODE_ID, MetaItemLit, NodeId};
+use crate::rustc_complete::{Diag, Diagnostic, Level};
 use rustc_feature::{AttributeTemplate, AttributeType};
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::lints::{AttributeLint, AttributeLintKind};
-use crate::rustc_hir::{AttrPath, CRATE_HIR_ID, HirId};
-use crate::rustc_session::Session;
-use crate::rustc_span::{ErrorGuaranteed, Span, Symbol};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::lints::{AttributeLint, AttributeLintKind};
+use crate::rustc_complete::{AttrPath, CRATE_HIR_ID, HirId};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::{ErrorGuaranteed, Span, Symbol};
 
 use crate::AttributeParser;
 use crate::attributes::allow_unstable::{

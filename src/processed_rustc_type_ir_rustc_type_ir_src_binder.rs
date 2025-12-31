@@ -160,7 +160,7 @@ impl<I: Interner, T> Binder<I, T> {
     /// any generic arguments, e.g. a `DefId`, or when you're making sure you only pass the
     /// value to things which can handle escaping bound vars.
     ///
-    /// See existing uses of `.skip_binder()` in `rustc_trait_selection::traits::select`
+    /// See existing uses of `.skip_binder()` in `crate::rustc_trait_selection::traits::select`
     /// or `rustc_next_trait_solver` for examples.
     pub fn skip_binder(self) -> T {
         self.value

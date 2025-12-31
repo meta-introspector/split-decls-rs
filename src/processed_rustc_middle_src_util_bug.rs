@@ -3,8 +3,8 @@
 use std::fmt;
 use std::panic::{Location, panic_any};
 
-use rustc_errors::MultiSpan;
-use crate::rustc_span::Span;
+use crate::rustc_complete::MultiSpan;
+use crate::rustc_complete::Span;
 
 use crate::ty::{TyCtxt, tls};
 

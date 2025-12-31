@@ -6,8 +6,8 @@ use std::str::FromStr;
 use std::time::Duration;
 use std::{cmp, env, iter};
 
-use crate::rustc_ast::expand::allocator::{AllocatorKind, alloc_error_handler_name, global_fn_name};
-use crate::rustc_ast::{self as ast, *};
+use crate::rustc_complete::expand::allocator::{AllocatorKind, alloc_error_handler_name, global_fn_name};
+use crate::rustc_complete::{self as ast, *};
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::owned_slice::OwnedSlice;
 use crate::rustc_data_structures::svh::Svh;
@@ -16,25 +16,25 @@ use crate::rustc_data_structures::unord::UnordMap;
 use rustc_expand::base::SyntaxExtension;
 use rustc_fs_util::try_canonicalize;
 use rustc_hir as hir;
-use crate::rustc_hir::def_id::{CrateNum, LOCAL_CRATE, LocalDefId, StableCrateId};
-use crate::rustc_hir::definitions::Definitions;
+use crate::rustc_complete::def_id::{CrateNum, LOCAL_CRATE, LocalDefId, StableCrateId};
+use crate::rustc_complete::definitions::Definitions;
 use rustc_index::IndexVec;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::data_structures::IndexSet;
-use crate::rustc_middle::ty::{TyCtxt, TyCtxtFeed};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::data_structures::IndexSet;
+use crate::rustc_complete::ty::{TyCtxt, TyCtxtFeed};
 use rustc_proc_macro::bridge::client::ProcMacro;
-use crate::rustc_session::Session;
-use crate::rustc_session::config::{
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{
     CrateType, ExtendedTargetModifierInfo, ExternLocation, Externs, OptionsTargetModifiers,
     TargetModifier,
 };
-use crate::rustc_session::cstore::{CrateDepKind, CrateSource, ExternCrate, ExternCrateSource};
-use crate::rustc_session::lint::{self, BuiltinLintDiag};
-use crate::rustc_session::output::validate_crate_name;
-use crate::rustc_session::search_paths::PathKind;
-use crate::rustc_span::def_id::DefId;
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::{DUMMY_SP, Ident, Span, Symbol, sym};
+use crate::rustc_complete::cstore::{CrateDepKind, CrateSource, ExternCrate, ExternCrateSource};
+use crate::rustc_complete::lint::{self, BuiltinLintDiag};
+use crate::rustc_complete::output::validate_crate_name;
+use crate::rustc_complete::search_paths::PathKind;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, sym};
 use rustc_target::spec::{PanicStrategy, Target};
 use tracing::{debug, info, trace};
 

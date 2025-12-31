@@ -1,9 +1,9 @@
 use std::fmt::{self, Write};
 
-use crate::rustc_middle::thir::*;
-use crate::rustc_middle::ty;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::def_id::LocalDefId;
 
 /// Create a THIR tree for debugging.
 pub fn thir_tree(tcx: TyCtxt<'_>, owner_def: LocalDefId) -> String {
@@ -194,7 +194,7 @@ impl<'a, 'tcx> ThirPrinter<'a, 'tcx> {
     }
 
     fn print_expr_kind(&mut self, expr_kind: &ExprKind<'tcx>, depth_lvl: usize) {
-        use crate::rustc_middle::thir::ExprKind::*;
+        use crate::rustc_complete::thir::ExprKind::*;
 
         match expr_kind {
             Scope { region_scope, value, lint_level } => {

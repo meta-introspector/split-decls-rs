@@ -3,7 +3,7 @@ use std::ops::Range;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 use crate::rustc_data_structures::graph;
 use crate::rustc_data_structures::graph::vec_graph::VecGraph;
-use crate::rustc_middle::ty::RegionVid;
+use crate::rustc_complete::ty::RegionVid;
 
 use crate::constraints::ConstraintSccIndex;
 use crate::region_infer::ConstraintSccs;

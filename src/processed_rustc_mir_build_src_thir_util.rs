@@ -1,9 +1,9 @@
 use std::assert_matches::assert_matches;
 
 use rustc_hir as hir;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{self, CanonicalUserType, TyCtxt};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, CanonicalUserType, TyCtxt};
 use tracing::debug;
 
 /// Looks up the type associated with this hir-id and applies the

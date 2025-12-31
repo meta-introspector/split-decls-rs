@@ -1,7 +1,7 @@
 use std::fmt::Debug;
 
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{Ty, TyCtxt};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{Ty, TyCtxt};
 use tracing::trace;
 
 use super::simplify::simplify_cfg;

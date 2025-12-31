@@ -1,4 +1,4 @@
-use crate::rustc_middle::thir::*;
+use crate::rustc_complete::thir::*;
 
 #[derive(Debug, PartialEq)]
 pub(crate) enum Category {

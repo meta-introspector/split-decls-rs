@@ -6,17 +6,17 @@
 use std::iter;
 
 use rustc_hir as hir;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::lang_items::LangItem;
-use rustc_infer::traits::{ObligationCauseCode, PredicateObligations};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_infer::traits::{ObligationCauseCode, PredicateObligations};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{
     self, GenericArgsRef, Term, TermKind, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
     TypeVisitableExt, TypeVisitor,
 };
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::def_id::{DefId, LocalDefId};
-use crate::rustc_span::{Span, sym};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::{Span, sym};
 use tracing::{debug, instrument, trace};
 
 use crate::infer::InferCtxt;

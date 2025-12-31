@@ -6,28 +6,28 @@ use core::ops::{Bound, ControlFlow};
 use ast::mut_visit::{self, MutVisitor};
 use ast::token::IdentIsRaw;
 use ast::{CoroutineKind, ForLoopKind, GenBlockKind, MatchKind, Pat, Path, PathSegment, Recovered};
-use crate::rustc_ast::token::{self, Delimiter, InvisibleOrigin, MetaVarKind, Token, TokenKind};
-use crate::rustc_ast::tokenstream::TokenTree;
-use crate::rustc_ast::util::case::Case;
-use crate::rustc_ast::util::classify;
-use crate::rustc_ast::util::parser::{AssocOp, ExprPrecedence, Fixity, prec_let_scrutinee_needs_par};
-use crate::rustc_ast::visit::{Visitor, walk_expr};
-use crate::rustc_ast::{
+use crate::rustc_complete::token::{self, Delimiter, InvisibleOrigin, MetaVarKind, Token, TokenKind};
+use crate::rustc_complete::tokenstream::TokenTree;
+use crate::rustc_complete::util::case::Case;
+use crate::rustc_complete::util::classify;
+use crate::rustc_complete::util::parser::{AssocOp, ExprPrecedence, Fixity, prec_let_scrutinee_needs_par};
+use crate::rustc_complete::visit::{Visitor, walk_expr};
+use crate::rustc_complete::{
     self as ast, AnonConst, Arm, AssignOp, AssignOpKind, AttrStyle, AttrVec, BinOp, BinOpKind,
     BlockCheckMode, CaptureBy, ClosureBinder, DUMMY_NODE_ID, Expr, ExprField, ExprKind, FnDecl,
     FnRetTy, Label, MacCall, MetaItemLit, Movability, Param, RangeLimits, StmtKind, Ty, TyKind,
     UnOp, UnsafeBinderCastKind, YieldKind,
 };
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::{Applicability, Diag, PResult, StashKey, Subdiagnostic};
+use crate::rustc_complete::{Applicability, Diag, PResult, StashKey, Subdiagnostic};
 use rustc_literal_escaper::unescape_char;
 use rustc_macros::Subdiagnostic;
-use crate::rustc_session::errors::{ExprParenthesesNeeded, report_lit_error};
-use crate::rustc_session::lint::BuiltinLintDiag;
-use crate::rustc_session::lint::builtin::BREAK_WITH_LABEL_AND_LOOP;
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::source_map::{self, Spanned};
-use crate::rustc_span::{BytePos, ErrorGuaranteed, Ident, Pos, Span, Symbol, kw, sym};
+use crate::rustc_complete::errors::{ExprParenthesesNeeded, report_lit_error};
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::BREAK_WITH_LABEL_AND_LOOP;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::source_map::{self, Spanned};
+use crate::rustc_complete::{BytePos, ErrorGuaranteed, Ident, Pos, Span, Symbol, kw, sym};
 use thin_vec::{ThinVec, thin_vec};
 use tracing::instrument;
 

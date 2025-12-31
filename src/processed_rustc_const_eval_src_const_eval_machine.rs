@@ -3,17 +3,17 @@ use std::fmt;
 use std::hash::Hash;
 
 use rustc_abi::{Align, Size};
-use crate::rustc_ast::Mutability;
+use crate::rustc_complete::Mutability;
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap, IndexEntry};
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::{self as hir, CRATE_HIR_ID, LangItem};
-use crate::rustc_middle::mir::AssertMessage;
-use crate::rustc_middle::mir::interpret::ReportedErrorInfo;
-use crate::rustc_middle::query::TyCtxtAt;
-use crate::rustc_middle::ty::layout::{HasTypingEnv, TyAndLayout, ValidityRequirement};
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_middle::{bug, mir};
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::{self as hir, CRATE_HIR_ID, LangItem};
+use crate::rustc_complete::mir::AssertMessage;
+use crate::rustc_complete::mir::interpret::ReportedErrorInfo;
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::ty::layout::{HasTypingEnv, TyAndLayout, ValidityRequirement};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::{bug, mir};
+use crate::rustc_complete::{Span, Symbol, sym};
 use rustc_target::callconv::FnAbi;
 use tracing::debug;
 
@@ -208,8 +208,8 @@ impl<'tcx> CompileTimeInterpCx<'tcx> {
         let topmost = span.ctxt().outer_expn().expansion_cause().unwrap_or(span);
         let caller = self.tcx.sess.source_map().lookup_char_pos(topmost.lo());
 
-        use crate::rustc_session::RemapFileNameExt;
-        use crate::rustc_session::config::RemapPathScopeComponents;
+        use crate::rustc_complete::RemapFileNameExt;
+        use crate::rustc_complete::config::RemapPathScopeComponents;
         (
             Symbol::intern(
                 &caller
@@ -615,7 +615,7 @@ impl<'tcx> interpret::Machine<'tcx> for CompileTimeMachine<'tcx> {
         msg: &AssertMessage<'tcx>,
         _unwind: mir::UnwindAction,
     ) -> InterpResult<'tcx> {
-        use crate::rustc_middle::mir::AssertKind::*;
+        use crate::rustc_complete::mir::AssertKind::*;
         // Convert `AssertKind<Operand>` to `AssertKind<Scalar>`.
         let eval_to_int =
             |op| ecx.read_immediate(&ecx.eval_operand(op, None)?).map(|x| x.to_const_int());

@@ -6,10 +6,10 @@
 
 
 use metavar_expr::MetaVarExpr;
-use crate::rustc_ast::token::{Delimiter, NonterminalKind, Token, TokenKind};
-use crate::rustc_ast::tokenstream::{DelimSpacing, DelimSpan};
+use crate::rustc_complete::token::{Delimiter, NonterminalKind, Token, TokenKind};
+use crate::rustc_complete::tokenstream::{DelimSpacing, DelimSpan};
 use rustc_macros::{Decodable, Encodable};
-use crate::rustc_span::{Ident, Span};
+use crate::rustc_complete::{Ident, Span};
 
 /// Contains the sub-token-trees of a "delimited" token tree such as `(a b c)`.
 /// The delimiters are not represented explicitly in the `tts` vector.

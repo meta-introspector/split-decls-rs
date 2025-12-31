@@ -11,7 +11,7 @@ use init_mask::*;
 pub use init_mask::{InitChunk, InitChunkIter};
 use provenance_map::*;
 use rustc_abi::{Align, HasDataLayout, Size};
-use crate::rustc_ast::Mutability;
+use crate::rustc_complete::Mutability;
 use crate::rustc_data_structures::intern::Interned;
 use rustc_macros::HashStable;
 use rustc_serialize::{Decodable, Decoder, Encodable, Encoder};

@@ -1,12 +1,12 @@
-use crate::rustc_ast::expand::allocator::{
+use crate::rustc_complete::expand::allocator::{
     ALLOCATOR_METHODS, AllocatorMethod, AllocatorMethodInput, AllocatorTy, global_fn_name,
 };
-use crate::rustc_ast::{
+use crate::rustc_complete::{
     self as ast, AttrVec, Expr, Fn, FnHeader, FnSig, Generics, ItemKind, Mutability, Param, Safety,
     Stmt, StmtKind, Ty, TyKind,
 };
 use rustc_expand::base::{Annotatable, ExtCtxt};
-use crate::rustc_span::{Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::{Ident, Span, Symbol, kw, sym};
 use thin_vec::{ThinVec, thin_vec};
 
 use crate::errors;

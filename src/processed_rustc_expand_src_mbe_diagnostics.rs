@@ -1,13 +1,13 @@
 use std::borrow::Cow;
 
-use crate::rustc_ast::token::{self, Token};
-use crate::rustc_ast::tokenstream::TokenStream;
-use rustc_errors::{Applicability, Diag, DiagCtxtHandle, DiagMessage};
+use crate::rustc_complete::token::{self, Token};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{Applicability, Diag, DiagCtxtHandle, DiagMessage};
 use rustc_macros::Subdiagnostic;
 use rustc_parse::parser::{Parser, Recovery, token_descr};
-use crate::rustc_session::parse::ParseSess;
-use crate::rustc_span::source_map::SourceMap;
-use crate::rustc_span::{DUMMY_SP, ErrorGuaranteed, Ident, Span};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Ident, Span};
 use tracing::debug;
 
 use super::macro_rules::{MacroRule, NoopTracker, parser_from_cx};

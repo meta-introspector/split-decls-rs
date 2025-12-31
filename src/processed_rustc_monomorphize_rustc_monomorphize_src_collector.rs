@@ -212,28 +212,28 @@ use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::sync::{MTLock, par_for_each_in};
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::InlineAttr;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, DefIdMap, LocalDefId};
-use crate::rustc_hir::lang_items::LangItem;
-use crate::rustc_hir::limit::Limit;
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use crate::rustc_middle::mir::interpret::{AllocId, ErrorHandled, GlobalAlloc, Scalar};
-use crate::rustc_middle::mir::mono::{CollectionMode, InstantiationMode, MonoItem};
-use crate::rustc_middle::mir::visit::Visitor as MirVisitor;
-use crate::rustc_middle::mir::{self, Location, MentionedItem, traversal};
-use crate::rustc_middle::query::TyCtxtAt;
-use crate::rustc_middle::ty::adjustment::{CustomCoerceUnsized, PointerCoercion};
-use crate::rustc_middle::ty::layout::ValidityRequirement;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::attrs::InlineAttr;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, DefIdMap, LocalDefId};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::mir::interpret::{AllocId, ErrorHandled, GlobalAlloc, Scalar};
+use crate::rustc_complete::mir::mono::{CollectionMode, InstantiationMode, MonoItem};
+use crate::rustc_complete::mir::visit::Visitor as MirVisitor;
+use crate::rustc_complete::mir::{self, Location, MentionedItem, traversal};
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::ty::adjustment::{CustomCoerceUnsized, PointerCoercion};
+use crate::rustc_complete::ty::layout::ValidityRequirement;
+use crate::rustc_complete::ty::{
     self, GenericArgs, GenericParamDefKind, Instance, InstanceKind, Ty, TyCtxt, TypeFoldable,
     TypeVisitableExt, VtblEntry,
 };
-use crate::rustc_middle::util::Providers;
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::config::{DebugInfo, EntryFnType};
-use crate::rustc_span::source_map::{Spanned, dummy_spanned, respan};
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::util::Providers;
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::config::{DebugInfo, EntryFnType};
+use crate::rustc_complete::source_map::{Spanned, dummy_spanned, respan};
+use crate::rustc_complete::{DUMMY_SP, Span};
 use tracing::{debug, instrument, trace};
 
 use crate::collector::autodiff::collect_autodiff_fn;

@@ -1,8 +1,8 @@
 use crate::rustc_data_structures::fx::FxHashSet;
-use rustc_infer::traits::query::type_op::DropckOutlives;
-use crate::rustc_middle::traits::query::{DropckConstraint, DropckOutlivesResult};
-use crate::rustc_middle::ty::{self, EarlyBinder, ParamEnvAnd, Ty, TyCtxt};
-use crate::rustc_span::Span;
+use crate::rustc_infer::traits::query::type_op::DropckOutlives;
+use crate::rustc_complete::traits::query::{DropckConstraint, DropckOutlivesResult};
+use crate::rustc_complete::ty::{self, EarlyBinder, ParamEnvAnd, Ty, TyCtxt};
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
 
 use crate::solve::NextSolverError;

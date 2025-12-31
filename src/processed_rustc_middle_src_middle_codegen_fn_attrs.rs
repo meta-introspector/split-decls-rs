@@ -1,9 +1,9 @@
 use std::borrow::Cow;
 
 use rustc_abi::Align;
-use crate::rustc_hir::attrs::{InlineAttr, InstructionSetAttr, Linkage, OptimizeAttr};
+use crate::rustc_complete::attrs::{InlineAttr, InstructionSetAttr, Linkage, OptimizeAttr};
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::Symbol;
 use rustc_target::spec::SanitizerSet;
 
 use crate::ty::{InstanceKind, TyCtxt};

@@ -3,14 +3,14 @@ use std::borrow::Cow;
 use std::fmt;
 
 use rustc_abi::ExternAbi;
-use crate::rustc_ast::attr::AttributeExt;
-use crate::rustc_ast::token::CommentKind;
-use crate::rustc_ast::util::parser::ExprPrecedence;
-use crate::rustc_ast::{
+use crate::rustc_complete::attr::AttributeExt;
+use crate::rustc_complete::token::CommentKind;
+use crate::rustc_complete::util::parser::ExprPrecedence;
+use crate::rustc_complete::{
     self as ast, FloatTy, InlineAsmOptions, InlineAsmTemplatePiece, IntTy, Label, LitIntType,
     LitKind, TraitObjectSyntax, UintTy, UnsafeBinderCastKind, join_path_idents,
 };
-pub use crate::rustc_ast::{
+pub use crate::rustc_complete::{
     AssignOp, AssignOpKind, AttrId, AttrStyle, BinOp, BinOpKind, BindingMode, BorrowKind,
     BoundConstness, BoundPolarity, ByRef, CaptureBy, DelimArgs, ImplPolarity, IsAuto,
     MetaItemInner, MetaItemLit, Movability, Mutability, UnOp,
@@ -21,9 +21,9 @@ use crate::rustc_data_structures::tagged_ptr::TaggedRef;
 use rustc_error_messages::{DiagArgValue, IntoDiagArg};
 use rustc_index::IndexVec;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-use crate::rustc_span::def_id::LocalDefId;
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{BytePos, DUMMY_SP, ErrorGuaranteed, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{BytePos, DUMMY_SP, ErrorGuaranteed, Ident, Span, Symbol, kw, sym};
 use rustc_target::asm::InlineAsmRegOrRegClass;
 use smallvec::SmallVec;
 use thin_vec::ThinVec;

@@ -1,9 +1,9 @@
-use rustc_infer::infer::TyCtxtInferExt;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::traits::query::NoSolution;
-use crate::rustc_middle::ty::{self, PseudoCanonicalInput, TyCtxt, TypeFoldable, TypeVisitableExt};
-use rustc_trait_selection::traits::query::normalize::QueryNormalizeExt;
-use rustc_trait_selection::traits::{Normalized, ObligationCause};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::{self, PseudoCanonicalInput, TyCtxt, TypeFoldable, TypeVisitableExt};
+use crate::rustc_trait_selection::traits::query::normalize::QueryNormalizeExt;
+use crate::rustc_trait_selection::traits::{Normalized, ObligationCause};
 use tracing::debug;
 
 pub(crate) fn provide(p: &mut Providers) {

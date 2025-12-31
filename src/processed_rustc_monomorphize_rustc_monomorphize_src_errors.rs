@@ -1,6 +1,6 @@
 use rustc_macros::{Diagnostic, LintDiagnostic};
-use crate::rustc_middle::ty::{Instance, Ty};
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::ty::{Instance, Ty};
+use crate::rustc_complete::{Span, Symbol};
 
 #[derive(Diagnostic)]
 #[diag(monomorphize_recursion_limit)]

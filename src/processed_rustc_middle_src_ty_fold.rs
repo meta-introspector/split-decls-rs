@@ -1,5 +1,5 @@
 use crate::rustc_data_structures::fx::FxIndexMap;
-use crate::rustc_hir::def_id::DefId;
+use crate::rustc_complete::def_id::DefId;
 use rustc_type_ir::data_structures::DelayedMap;
 
 use crate::ty::{

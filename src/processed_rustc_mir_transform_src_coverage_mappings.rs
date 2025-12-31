@@ -1,9 +1,9 @@
 use rustc_index::IndexVec;
-use crate::rustc_middle::mir::coverage::{
+use crate::rustc_complete::mir::coverage::{
     BlockMarkerId, BranchSpan, CoverageInfoHi, CoverageKind, Mapping, MappingKind,
 };
-use crate::rustc_middle::mir::{self, BasicBlock, StatementKind};
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::{self, BasicBlock, StatementKind};
+use crate::rustc_complete::ty::TyCtxt;
 
 use crate::coverage::graph::CoverageGraph;
 use crate::coverage::hir_info::ExtractedHirInfo;

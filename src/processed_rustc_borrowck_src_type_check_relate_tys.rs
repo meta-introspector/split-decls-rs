@@ -1,18 +1,18 @@
 use crate::rustc_data_structures::fx::FxHashMap;
-use rustc_errors::ErrorGuaranteed;
-use rustc_infer::infer::relate::{
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_infer::infer::relate::{
     PredicateEmittingRelation, Relate, RelateResult, StructurallyRelateAliases, TypeRelation,
 };
-use rustc_infer::infer::{InferCtxt, NllRegionVariableOrigin};
-use rustc_infer::traits::Obligation;
-use rustc_infer::traits::solve::Goal;
-use crate::rustc_middle::mir::ConstraintCategory;
-use crate::rustc_middle::traits::ObligationCause;
-use crate::rustc_middle::traits::query::NoSolution;
-use crate::rustc_middle::ty::relate::combine::{super_combine_consts, super_combine_tys};
-use crate::rustc_middle::ty::{self, FnMutDelegate, Ty, TyCtxt, TypeVisitableExt};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_infer::infer::{InferCtxt, NllRegionVariableOrigin};
+use crate::rustc_infer::traits::Obligation;
+use crate::rustc_infer::traits::solve::Goal;
+use crate::rustc_complete::mir::ConstraintCategory;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::relate::combine::{super_combine_consts, super_combine_tys};
+use crate::rustc_complete::ty::{self, FnMutDelegate, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::{Span, Symbol, sym};
 use tracing::{debug, instrument};
 
 use crate::constraints::OutlivesConstraint;

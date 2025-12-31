@@ -1,6 +1,6 @@
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
 use crate::rustc_data_structures::transitive_relation::TransitiveRelationBuilder;
-use crate::rustc_middle::{bug, ty};
+use crate::rustc_complete::{bug, ty};
 use tracing::debug;
 
 use super::explicit_outlives_bounds;

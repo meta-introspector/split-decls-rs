@@ -4,7 +4,7 @@ use std::fmt::Debug;
 use std::sync::atomic::{AtomicU32, Ordering};
 
 use rustc_index::bit_set::GrowableBitSet;
-use crate::rustc_span::{Ident, Span, Symbol, sym};
+use crate::rustc_complete::{Ident, Span, Symbol, sym};
 use smallvec::{SmallVec, smallvec};
 use thin_vec::{ThinVec, thin_vec};
 

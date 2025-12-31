@@ -13,22 +13,22 @@ use hir::Expr;
 use hir::def::DefKind;
 use hir::pat_util::EnumerateAndAdjustIterator as _;
 use rustc_abi::{FIRST_VARIANT, FieldIdx, VariantIdx};
-use crate::rustc_ast::UnsafeBinderCastKind;
+use crate::rustc_complete::UnsafeBinderCastKind;
 use crate::rustc_data_structures::fx::FxIndexMap;
-use crate::rustc_hir::def::{CtorOf, Res};
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_hir::{self as hir, HirId, PatExpr, PatExprKind, PatKind};
+use crate::rustc_complete::def::{CtorOf, Res};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{self as hir, HirId, PatExpr, PatExprKind, PatKind};
 use rustc_lint::LateContext;
-use crate::rustc_middle::hir::place::ProjectionKind;
+use crate::rustc_complete::hir::place::ProjectionKind;
 // Export these here so that Clippy can use them.
-pub use crate::rustc_middle::hir::place::{Place, PlaceBase, PlaceWithHirId, Projection};
-use crate::rustc_middle::mir::FakeReadCause;
-use crate::rustc_middle::ty::{
+pub use crate::rustc_complete::hir::place::{Place, PlaceBase, PlaceWithHirId, Projection};
+use crate::rustc_complete::mir::FakeReadCause;
+use crate::rustc_complete::ty::{
     self, BorrowKind, Ty, TyCtxt, TypeFoldable, TypeVisitableExt as _, adjustment,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::{ErrorGuaranteed, Span};
-use rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::{ErrorGuaranteed, Span};
+use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::{debug, instrument, trace};
 
 use crate::fn_ctxt::FnCtxt;

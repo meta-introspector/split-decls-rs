@@ -8,8 +8,8 @@
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::sso::SsoHashMap;
 use rustc_index::Idx;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{
     self, BoundVar, GenericArg, InferConst, List, Ty, TyCtxt, TypeFlags, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeVisitableExt,
 };

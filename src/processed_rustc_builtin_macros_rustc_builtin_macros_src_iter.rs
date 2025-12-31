@@ -1,8 +1,8 @@
-use crate::rustc_ast::tokenstream::TokenStream;
-use crate::rustc_ast::{CoroutineKind, DUMMY_NODE_ID, Expr, ast, token};
-use rustc_errors::PResult;
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{CoroutineKind, DUMMY_NODE_ID, Expr, ast, token};
+use crate::rustc_complete::PResult;
 use rustc_expand::base::{self, DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 
 pub(crate) fn expand<'cx>(
     cx: &'cx mut ExtCtxt<'_>,

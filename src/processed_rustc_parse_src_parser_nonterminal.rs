@@ -1,8 +1,8 @@
-use crate::rustc_ast::token::NtExprKind::*;
-use crate::rustc_ast::token::NtPatKind::*;
-use crate::rustc_ast::token::{self, InvisibleOrigin, MetaVarKind, NonterminalKind, Token};
-use rustc_errors::PResult;
-use crate::rustc_span::{Ident, kw};
+use crate::rustc_complete::token::NtExprKind::*;
+use crate::rustc_complete::token::NtPatKind::*;
+use crate::rustc_complete::token::{self, InvisibleOrigin, MetaVarKind, NonterminalKind, Token};
+use crate::rustc_complete::PResult;
+use crate::rustc_complete::{Ident, kw};
 
 use crate::errors::UnexpectedNonterminal;
 use crate::parser::pat::{CommaRecoveryMode, RecoverColon, RecoverComma};

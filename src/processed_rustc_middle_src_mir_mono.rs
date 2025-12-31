@@ -8,13 +8,13 @@ use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher, ToStableHashKey};
 use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hashes::Hash128;
-use crate::rustc_hir::ItemId;
-use crate::rustc_hir::attrs::{InlineAttr, Linkage};
-use crate::rustc_hir::def_id::{CrateNum, DefId, DefIdSet, LOCAL_CRATE};
+use crate::rustc_complete::ItemId;
+use crate::rustc_complete::attrs::{InlineAttr, Linkage};
+use crate::rustc_complete::def_id::{CrateNum, DefId, DefIdSet, LOCAL_CRATE};
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 use rustc_query_system::ich::StableHashingContext;
-use crate::rustc_session::config::OptLevel;
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::config::OptLevel;
+use crate::rustc_complete::{Span, Symbol};
 use rustc_target::spec::SymbolVisibility;
 use tracing::debug;
 

@@ -4,9 +4,9 @@ use std::io::Write;
 use measureme::{StringComponent, StringId};
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::profiling::SelfProfiler;
-use crate::rustc_hir::def_id::{CrateNum, DefId, DefIndex, LOCAL_CRATE, LocalDefId};
-use crate::rustc_hir::definitions::DefPathData;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::def_id::{CrateNum, DefId, DefIndex, LOCAL_CRATE, LocalDefId};
+use crate::rustc_complete::definitions::DefPathData;
+use crate::rustc_complete::ty::TyCtxt;
 use rustc_query_system::query::QueryCache;
 
 pub(crate) struct QueryKeyStringCache {

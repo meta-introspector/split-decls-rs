@@ -8,13 +8,13 @@ use rustc_codegen_ssa::ModuleCodegen;
 use rustc_codegen_ssa::base::maybe_create_entry_wrapper;
 use rustc_codegen_ssa::mono_item::MonoItemExt;
 use rustc_codegen_ssa::traits::DebugInfoCodegenMethods;
-use crate::rustc_hir::attrs::Linkage;
-use crate::rustc_middle::dep_graph;
+use crate::rustc_complete::attrs::Linkage;
+use crate::rustc_complete::dep_graph;
 #[cfg(feature = "master")]
-use crate::rustc_middle::mir::mono::Visibility;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::config::DebugInfo;
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::mir::mono::Visibility;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::DebugInfo;
+use crate::rustc_complete::Symbol;
 #[cfg(feature = "master")]
 use rustc_target::spec::SymbolVisibility;
 use rustc_target::spec::{PanicStrategy, RelocModel};

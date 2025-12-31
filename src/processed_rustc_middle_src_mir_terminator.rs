@@ -2,9 +2,9 @@
 
 use std::slice;
 
-use crate::rustc_ast::InlineAsmOptions;
+use crate::rustc_complete::InlineAsmOptions;
 use crate::rustc_data_structures::packed::Pu128;
-use crate::rustc_hir::LangItem;
+use crate::rustc_complete::LangItem;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
 use smallvec::{SmallVec, smallvec};
 

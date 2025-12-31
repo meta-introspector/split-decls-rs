@@ -9,12 +9,12 @@ use std::sync::Arc;
 
 use rustc_abi::Align;
 use rustc_codegen_ssa::traits::{BaseTypeCodegenMethods as _, ConstCodegenMethods};
-use crate::rustc_middle::mir::coverage::{
+use crate::rustc_complete::mir::coverage::{
     BasicCoverageBlock, CovTerm, CoverageIdsInfo, Expression, FunctionCoverageInfo, Mapping,
     MappingKind, Op,
 };
-use crate::rustc_middle::ty::{Instance, TyCtxt};
-use crate::rustc_span::{SourceFile, Span};
+use crate::rustc_complete::ty::{Instance, TyCtxt};
+use crate::rustc_complete::{SourceFile, Span};
 use rustc_target::spec::HasTargetSpec;
 use tracing::debug;
 

@@ -14,14 +14,14 @@ use std::ops::Index;
 use std::sync::Arc;
 
 use rustc_abi::{FieldIdx, Integer, Size, VariantIdx};
-use crate::rustc_ast::{AsmMacro, InlineAsmOptions, InlineAsmTemplatePiece};
+use crate::rustc_complete::{AsmMacro, InlineAsmOptions, InlineAsmTemplatePiece};
 use rustc_hir as hir;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::{BindingMode, ByRef, HirId, MatchSource, RangeEnd};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{BindingMode, ByRef, HirId, MatchSource, RangeEnd};
 use rustc_index::{IndexVec, newtype_index};
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeVisitable};
-use crate::rustc_span::def_id::LocalDefId;
-use crate::rustc_span::{ErrorGuaranteed, Span, Symbol};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{ErrorGuaranteed, Span, Symbol};
 use rustc_target::asm::InlineAsmRegOrRegClass;
 use tracing::instrument;
 

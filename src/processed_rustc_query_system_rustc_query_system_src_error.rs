@@ -1,7 +1,7 @@
-use rustc_errors::codes::*;
-use crate::rustc_hir::limit::Limit;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::limit::Limit;
 use rustc_macros::{Diagnostic, Subdiagnostic};
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 
 #[derive(Subdiagnostic)]
 #[note(query_system_cycle_stack_middle)]

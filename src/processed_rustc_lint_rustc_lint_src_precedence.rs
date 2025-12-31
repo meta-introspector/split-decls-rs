@@ -1,6 +1,6 @@
-use crate::rustc_ast::token::LitKind;
-use crate::rustc_ast::{Expr, ExprKind, MethodCall, UnOp};
-use crate::rustc_session::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::token::LitKind;
+use crate::rustc_complete::{Expr, ExprKind, MethodCall, UnOp};
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
 
 use crate::lints::{
     AmbiguousNegativeLiteralsCurrentBehaviorSuggestion, AmbiguousNegativeLiteralsDiag,

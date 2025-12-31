@@ -1,17 +1,17 @@
 use std::mem;
 
-use crate::rustc_ast::token::{
+use crate::rustc_complete::token::{
     self, Delimiter, IdentIsRaw, InvisibleOrigin, Lit, LitKind, MetaVarKind, Token, TokenKind,
 };
-use crate::rustc_ast::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
-use crate::rustc_ast::{ExprKind, StmtKind, TyKind, UnOp};
+use crate::rustc_complete::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
+use crate::rustc_complete::{ExprKind, StmtKind, TyKind, UnOp};
 use crate::rustc_data_structures::fx::FxHashMap;
-use rustc_errors::{Diag, DiagCtxtHandle, PResult, pluralize};
+use crate::rustc_complete::{Diag, DiagCtxtHandle, PResult, pluralize};
 use rustc_parse::lexer::nfc_normalize;
 use rustc_parse::parser::ParseNtResult;
-use crate::rustc_session::parse::ParseSess;
-use crate::rustc_span::hygiene::{LocalExpnId, Transparency};
-use crate::rustc_span::{
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::hygiene::{LocalExpnId, Transparency};
+use crate::rustc_complete::{
     Ident, MacroRulesNormalizedIdent, Span, Symbol, SyntaxContext, sym, with_metavar_spans,
 };
 use smallvec::{SmallVec, smallvec};

@@ -96,16 +96,16 @@ use rustc_const_eval::interpret::{
 };
 use crate::rustc_data_structures::fx::{FxIndexSet, MutableValues};
 use crate::rustc_data_structures::graph::dominators::Dominators;
-use crate::rustc_hir::def::DefKind;
+use crate::rustc_complete::def::DefKind;
 use rustc_index::bit_set::DenseBitSet;
 use rustc_index::{IndexVec, newtype_index};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::interpret::GlobalAlloc;
-use crate::rustc_middle::mir::visit::*;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::layout::HasTypingEnv;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_span::DUMMY_SP;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::interpret::GlobalAlloc;
+use crate::rustc_complete::mir::visit::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::layout::HasTypingEnv;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::DUMMY_SP;
 use smallvec::SmallVec;
 use tracing::{debug, instrument, trace};
 
@@ -1297,7 +1297,7 @@ impl<'body, 'tcx> VnState<'body, 'tcx> {
         location: Location,
     ) -> Option<VnIndex> {
         use CastKind::*;
-        use crate::rustc_middle::ty::adjustment::PointerCoercion::*;
+        use crate::rustc_complete::ty::adjustment::PointerCoercion::*;
 
         let mut kind = *initial_kind;
         let mut value = self.simplify_operand(initial_operand, location)?;

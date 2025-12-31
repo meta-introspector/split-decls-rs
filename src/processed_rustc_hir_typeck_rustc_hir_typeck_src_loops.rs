@@ -3,16 +3,16 @@ use std::fmt;
 
 use Context::*;
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_hir::intravisit::{self, Visitor};
-use crate::rustc_hir::{Destination, Node, find_attr};
-use crate::rustc_middle::hir::nested_filter;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_span::hygiene::DesugaringKind;
-use crate::rustc_span::{BytePos, Span};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::intravisit::{self, Visitor};
+use crate::rustc_complete::{Destination, Node, find_attr};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::hygiene::DesugaringKind;
+use crate::rustc_complete::{BytePos, Span};
 
 use crate::errors::{
     BreakInsideClosure, BreakInsideCoroutine, BreakNonLoop, ConstContinueBadLabel,

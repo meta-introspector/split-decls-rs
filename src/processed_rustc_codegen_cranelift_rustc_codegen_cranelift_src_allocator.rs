@@ -2,12 +2,12 @@
 // Adapted from rustc
 
 use cranelift_frontend::{FunctionBuilder, FunctionBuilderContext};
-use crate::rustc_ast::expand::allocator::{
+use crate::rustc_complete::expand::allocator::{
     ALLOCATOR_METHODS, AllocatorKind, AllocatorTy, NO_ALLOC_SHIM_IS_UNSTABLE,
     alloc_error_handler_name, default_fn_name, global_fn_name,
 };
 use rustc_codegen_ssa::base::allocator_kind_for_codegen;
-use crate::rustc_session::config::OomStrategy;
+use crate::rustc_complete::config::OomStrategy;
 use rustc_symbol_mangling::mangle_internal_symbol;
 
 use crate::prelude::*;

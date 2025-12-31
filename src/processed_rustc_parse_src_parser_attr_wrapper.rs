@@ -1,15 +1,15 @@
 use std::borrow::Cow;
 use std::mem;
 
-use crate::rustc_ast::token::Token;
-use crate::rustc_ast::tokenstream::{
+use crate::rustc_complete::token::Token;
+use crate::rustc_complete::tokenstream::{
     AttrsTarget, LazyAttrTokenStream, NodeRange, ParserRange, Spacing, TokenCursor,
 };
-use crate::rustc_ast::{self as ast, AttrVec, Attribute, HasAttrs, HasTokens};
+use crate::rustc_complete::{self as ast, AttrVec, Attribute, HasAttrs, HasTokens};
 use crate::rustc_data_structures::fx::FxHashSet;
-use rustc_errors::PResult;
-use crate::rustc_session::parse::ParseSess;
-use crate::rustc_span::{DUMMY_SP, sym};
+use crate::rustc_complete::PResult;
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::{DUMMY_SP, sym};
 use thin_vec::ThinVec;
 
 use super::{Capturing, ForceCollect, Parser, Trailing};

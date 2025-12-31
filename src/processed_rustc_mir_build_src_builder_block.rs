@@ -1,8 +1,8 @@
-use crate::rustc_middle::middle::region::Scope;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::thir::*;
-use crate::rustc_middle::{span_bug, ty};
-use crate::rustc_span::Span;
+use crate::rustc_complete::middle::region::Scope;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::{span_bug, ty};
+use crate::rustc_complete::Span;
 use tracing::debug;
 
 use crate::builder::ForGuard::OutsideGuard;

@@ -5,22 +5,22 @@ use std::cmp::Ordering;
 use std::sync::Arc;
 
 use rustc_abi::{FieldIdx, Integer};
-use rustc_errors::codes::*;
-use crate::rustc_hir::def::{CtorOf, DefKind, Res};
-use crate::rustc_hir::pat_util::EnumerateAndAdjustIterator;
-use crate::rustc_hir::{self as hir, LangItem, RangeEnd};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::def::{CtorOf, DefKind, Res};
+use crate::rustc_complete::pat_util::EnumerateAndAdjustIterator;
+use crate::rustc_complete::{self as hir, LangItem, RangeEnd};
 use rustc_index::Idx;
-use rustc_infer::infer::TyCtxtInferExt;
-use crate::rustc_middle::mir::interpret::LitToConstInput;
-use crate::rustc_middle::thir::{
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::mir::interpret::LitToConstInput;
+use crate::rustc_complete::thir::{
     Ascription, FieldPat, LocalVarId, Pat, PatKind, PatRange, PatRangeBoundary,
 };
-use crate::rustc_middle::ty::adjustment::{PatAdjust, PatAdjustment};
-use crate::rustc_middle::ty::layout::IntegerExt;
-use crate::rustc_middle::ty::{self, CanonicalUserTypeAnnotation, Ty, TyCtxt, TypingMode};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::def_id::DefId;
-use crate::rustc_span::{ErrorGuaranteed, Span};
+use crate::rustc_complete::ty::adjustment::{PatAdjust, PatAdjustment};
+use crate::rustc_complete::ty::layout::IntegerExt;
+use crate::rustc_complete::ty::{self, CanonicalUserTypeAnnotation, Ty, TyCtxt, TypingMode};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{ErrorGuaranteed, Span};
 use tracing::{debug, instrument};
 
 pub(crate) use self::check_match::check_match;
@@ -171,7 +171,7 @@ impl<'a, 'tcx> PatCtxt<'a, 'tcx> {
         expr: Option<&'tcx hir::PatExpr<'tcx>>,
         ty: Ty<'tcx>,
     ) -> Result<(), ErrorGuaranteed> {
-        use crate::rustc_ast::ast::LitKind;
+        use crate::rustc_complete::ast::LitKind;
 
         let Some(expr) = expr else {
             return Ok(());

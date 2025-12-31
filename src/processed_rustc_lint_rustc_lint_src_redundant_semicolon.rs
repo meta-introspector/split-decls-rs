@@ -1,6 +1,6 @@
-use crate::rustc_ast::{Block, StmtKind};
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::Span;
+use crate::rustc_complete::{Block, StmtKind};
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::Span;
 
 use crate::lints::{RedundantSemicolonsDiag, RedundantSemicolonsSuggestion};
 use crate::{EarlyContext, EarlyLintPass, LintContext};

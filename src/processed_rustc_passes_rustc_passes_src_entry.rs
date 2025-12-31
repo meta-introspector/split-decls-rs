@@ -1,14 +1,14 @@
-use crate::rustc_ast::attr;
-use crate::rustc_ast::entry::EntryPointType;
-use rustc_errors::codes::*;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, DefId, LOCAL_CRATE, LocalDefId};
-use crate::rustc_hir::{CRATE_HIR_ID, ItemId, Node};
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::RemapFileNameExt;
-use crate::rustc_session::config::{CrateType, EntryFnType, RemapPathScopeComponents, sigpipe};
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::attr;
+use crate::rustc_complete::entry::EntryPointType;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LOCAL_CRATE, LocalDefId};
+use crate::rustc_complete::{CRATE_HIR_ID, ItemId, Node};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::RemapFileNameExt;
+use crate::rustc_complete::config::{CrateType, EntryFnType, RemapPathScopeComponents, sigpipe};
+use crate::rustc_complete::{Span, Symbol, sym};
 
 use crate::errors::{AttrOnlyInFunctions, ExternMain, MultipleRustcMain, NoMainErr};
 

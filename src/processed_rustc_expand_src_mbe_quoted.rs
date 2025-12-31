@@ -1,12 +1,12 @@
-use crate::rustc_ast::token::{self, Delimiter, IdentIsRaw, NonterminalKind, Token};
-use crate::rustc_ast::tokenstream::TokenStreamIter;
-use crate::rustc_ast::{NodeId, tokenstream};
+use crate::rustc_complete::token::{self, Delimiter, IdentIsRaw, NonterminalKind, Token};
+use crate::rustc_complete::tokenstream::TokenStreamIter;
+use crate::rustc_complete::{NodeId, tokenstream};
 use rustc_ast_pretty::pprust;
 use rustc_feature::Features;
-use crate::rustc_session::Session;
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::{Ident, Span, kw, sym};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{Ident, Span, kw, sym};
 
 use crate::errors;
 use crate::mbe::macro_parser::count_metavar_decls;

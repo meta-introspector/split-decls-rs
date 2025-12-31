@@ -1,6 +1,6 @@
 use crate::rustc_data_structures::profiling::SelfProfilerRef;
 use rustc_query_system::ich::StableHashingContext;
-use crate::rustc_session::Session;
+use crate::rustc_complete::Session;
 
 use crate::ty::print::with_reduced_queries;
 use crate::ty::{self, TyCtxt};

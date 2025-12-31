@@ -1,9 +1,9 @@
-use rustc_infer::infer::TyCtxtInferExt;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{ParamEnvAnd, TyCtxt};
-use crate::rustc_span::DUMMY_SP;
-use rustc_trait_selection::traits::query::CanonicalPredicateGoal;
-use rustc_trait_selection::traits::{
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{ParamEnvAnd, TyCtxt};
+use crate::rustc_complete::DUMMY_SP;
+use crate::rustc_trait_selection::traits::query::CanonicalPredicateGoal;
+use crate::rustc_trait_selection::traits::{
     EvaluationResult, Obligation, ObligationCause, OverflowError, SelectionContext, TraitQueryMode,
     sizedness_fast_path,
 };

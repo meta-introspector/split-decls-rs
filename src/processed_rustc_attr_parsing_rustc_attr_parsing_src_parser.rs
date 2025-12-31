@@ -6,17 +6,17 @@
 use std::borrow::Cow;
 use std::fmt::{Debug, Display};
 
-use crate::rustc_ast::token::{self, Delimiter, MetaVarKind};
-use crate::rustc_ast::tokenstream::TokenStream;
-use crate::rustc_ast::{AttrArgs, DelimArgs, Expr, ExprKind, LitKind, MetaItemLit, NormalAttr, Path};
+use crate::rustc_complete::token::{self, Delimiter, MetaVarKind};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{AttrArgs, DelimArgs, Expr, ExprKind, LitKind, MetaItemLit, NormalAttr, Path};
 use rustc_ast_pretty::pprust;
-use rustc_errors::{Diag, PResult};
-use crate::rustc_hir::{self as hir, AttrPath};
+use crate::rustc_complete::{Diag, PResult};
+use crate::rustc_complete::{self as hir, AttrPath};
 use rustc_parse::exp;
 use rustc_parse::parser::{Parser, PathStyle, token_descr};
-use crate::rustc_session::errors::{create_lit_error, report_lit_error};
-use crate::rustc_session::parse::ParseSess;
-use crate::rustc_span::{ErrorGuaranteed, Ident, Span, Symbol, sym};
+use crate::rustc_complete::errors::{create_lit_error, report_lit_error};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, Symbol, sym};
 use thin_vec::ThinVec;
 
 use crate::ShouldEmit;

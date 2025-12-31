@@ -1,6 +1,6 @@
-use crate::rustc_ast::MetaItem;
+use crate::rustc_complete::MetaItem;
 use rustc_expand::base::{Annotatable, ExtCtxt};
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::deriving::generic::*;
 use crate::deriving::path_std;

@@ -1,12 +1,12 @@
-use crate::rustc_ast::token::Delimiter;
-use crate::rustc_ast::tokenstream::TokenStream;
-use crate::rustc_ast::util::literal;
-use crate::rustc_ast::{
+use crate::rustc_complete::token::Delimiter;
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::util::literal;
+use crate::rustc_complete::{
     self as ast, AnonConst, AttrItem, AttrVec, BlockCheckMode, Expr, LocalKind, MatchKind, PatKind,
     UnOp, attr, token, tokenstream,
 };
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
 use thin_vec::{ThinVec, thin_vec};
 
 use crate::base::ExtCtxt;

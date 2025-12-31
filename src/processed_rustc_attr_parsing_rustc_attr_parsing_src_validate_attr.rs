@@ -2,20 +2,20 @@
 
 use std::slice;
 
-use crate::rustc_ast::token::Delimiter;
-use crate::rustc_ast::tokenstream::DelimSpan;
-use crate::rustc_ast::{
+use crate::rustc_complete::token::Delimiter;
+use crate::rustc_complete::tokenstream::DelimSpan;
+use crate::rustc_complete::{
     self as ast, AttrArgs, Attribute, DelimArgs, MetaItem, MetaItemInner, MetaItemKind, NodeId,
     Path, Safety,
 };
-use rustc_errors::{Applicability, DiagCtxtHandle, FatalError, PResult};
+use crate::rustc_complete::{Applicability, DiagCtxtHandle, FatalError, PResult};
 use rustc_feature::{AttributeSafety, AttributeTemplate, BUILTIN_ATTRIBUTE_MAP, BuiltinAttribute};
 use rustc_parse::parse_in;
-use crate::rustc_session::errors::report_lit_error;
-use crate::rustc_session::lint::BuiltinLintDiag;
-use crate::rustc_session::lint::builtin::{ILL_FORMED_ATTRIBUTE_INPUT, UNSAFE_ATTR_OUTSIDE_UNSAFE};
-use crate::rustc_session::parse::ParseSess;
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::errors::report_lit_error;
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::{ILL_FORMED_ATTRIBUTE_INPUT, UNSAFE_ATTR_OUTSIDE_UNSAFE};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::{Span, Symbol, sym};
 
 use crate::{AttributeParser, Late, session_diagnostics as errors};
 

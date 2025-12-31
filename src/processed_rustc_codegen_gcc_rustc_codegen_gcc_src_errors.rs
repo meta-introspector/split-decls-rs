@@ -1,5 +1,5 @@
 use rustc_macros::Diagnostic;
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 
 #[derive(Diagnostic)]
 #[diag(codegen_gcc_unwinding_inline_asm)]

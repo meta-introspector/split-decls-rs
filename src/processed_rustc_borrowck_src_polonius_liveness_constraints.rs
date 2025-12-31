@@ -1,9 +1,9 @@
 use std::collections::BTreeMap;
 
 use rustc_index::bit_set::SparseBitMatrix;
-use crate::rustc_middle::mir::{Body, Location};
-use crate::rustc_middle::ty::relate::{self, Relate, RelateResult, TypeRelation};
-use crate::rustc_middle::ty::{self, RegionVid, Ty, TyCtxt, TypeVisitable};
+use crate::rustc_complete::mir::{Body, Location};
+use crate::rustc_complete::ty::relate::{self, Relate, RelateResult, TypeRelation};
+use crate::rustc_complete::ty::{self, RegionVid, Ty, TyCtxt, TypeVisitable};
 use rustc_mir_dataflow::points::PointIndex;
 
 use super::{

@@ -1,14 +1,14 @@
 use std::assert_matches::assert_matches;
 
 use rustc_abi::{BackendRepr, Float, Integer, Primitive, Scalar};
-use crate::rustc_ast::{InlineAsmOptions, InlineAsmTemplatePiece};
+use crate::rustc_complete::{InlineAsmOptions, InlineAsmTemplatePiece};
 use rustc_codegen_ssa::mir::operand::OperandValue;
 use rustc_codegen_ssa::traits::*;
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_middle::ty::Instance;
-use crate::rustc_middle::ty::layout::TyAndLayout;
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::{Pos, Span, Symbol, sym};
+use crate::rustc_complete::ty::Instance;
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::{Pos, Span, Symbol, sym};
 use rustc_target::asm::*;
 use smallvec::SmallVec;
 use tracing::debug;

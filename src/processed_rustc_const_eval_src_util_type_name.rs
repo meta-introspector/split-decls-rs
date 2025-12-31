@@ -1,11 +1,11 @@
 use std::fmt::Write;
 
 use crate::rustc_data_structures::intern::Interned;
-use crate::rustc_hir::def_id::{CrateNum, DefId};
-use crate::rustc_hir::definitions::DisambiguatedDefPathData;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::print::{PrettyPrinter, PrintError, Printer};
-use crate::rustc_middle::ty::{self, GenericArg, Ty, TyCtxt};
+use crate::rustc_complete::def_id::{CrateNum, DefId};
+use crate::rustc_complete::definitions::DisambiguatedDefPathData;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::print::{PrettyPrinter, PrintError, Printer};
+use crate::rustc_complete::ty::{self, GenericArg, Ty, TyCtxt};
 
 struct TypeNamePrinter<'tcx> {
     tcx: TyCtxt<'tcx>,

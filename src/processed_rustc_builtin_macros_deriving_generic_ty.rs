@@ -2,10 +2,10 @@
 // when specifying impls to be derived.
 
 pub(crate) use Ty::*;
-use crate::rustc_ast::{self as ast, Expr, GenericArg, GenericParamKind, Generics, SelfKind, TyKind};
+use crate::rustc_complete::{self as ast, Expr, GenericArg, GenericParamKind, Generics, SelfKind, TyKind};
 use rustc_expand::base::ExtCtxt;
-use crate::rustc_span::source_map::respan;
-use crate::rustc_span::{DUMMY_SP, Ident, Span, Symbol, kw};
+use crate::rustc_complete::source_map::respan;
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw};
 use thin_vec::ThinVec;
 
 /// A path, e.g., `::std::option::Option::<i32>` (global). Has support

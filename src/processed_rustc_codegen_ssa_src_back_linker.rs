@@ -5,19 +5,19 @@ use std::path::{Path, PathBuf};
 use std::{env, io, iter, mem, str};
 
 use cc::windows_registry;
-use crate::rustc_hir::def_id::{CrateNum, LOCAL_CRATE};
+use crate::rustc_complete::def_id::{CrateNum, LOCAL_CRATE};
 use rustc_metadata::{
     find_native_static_library, try_find_native_dynamic_library, try_find_native_static_library,
 };
-use crate::rustc_middle::bug;
-use crate::rustc_middle::middle::dependency_format::Linkage;
-use crate::rustc_middle::middle::exported_symbols::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::dependency_format::Linkage;
+use crate::rustc_complete::middle::exported_symbols::{
     self, ExportedSymbol, SymbolExportInfo, SymbolExportKind, SymbolExportLevel,
 };
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::Session;
-use crate::rustc_session::config::{self, CrateType, DebugInfo, LinkerPluginLto, Lto, OptLevel, Strip};
-use crate::rustc_span::sym;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{self, CrateType, DebugInfo, LinkerPluginLto, Lto, OptLevel, Strip};
+use crate::rustc_complete::sym;
 use rustc_target::spec::{Cc, LinkOutputKind, LinkerFlavor, Lld};
 use tracing::{debug, warn};
 

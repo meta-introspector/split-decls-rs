@@ -5,10 +5,10 @@
 // delegates all query-related operations to this implementation.
 
 use rustc_abi::{Size, TyAndLayout};
-use crate::rustc_middle::mir::interpret::{
+use crate::rustc_complete::mir::interpret::{
     AllocId, AllocInit, AllocRange, Allocation, ConstAllocation, Pointer, Scalar, alloc_range,
 };
-use crate::rustc_middle::ty::{Ty, layout};
+use crate::rustc_complete::ty::{Ty, layout};
 
 use super::{CompilerCtxt, Tables};
 use crate::bridge::Allocation as _;

@@ -2,7 +2,7 @@ use std::fmt;
 use std::ops::Deref;
 
 use crate::rustc_data_structures::intern::Interned;
-use crate::rustc_hir::def::Namespace;
+use crate::rustc_complete::def::Namespace;
 use rustc_macros::{HashStable, Lift, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
 
 use super::ScalarInt;

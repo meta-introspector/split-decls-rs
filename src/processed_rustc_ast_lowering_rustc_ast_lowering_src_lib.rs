@@ -40,29 +40,29 @@
 
 use std::sync::Arc;
 
-use crate::rustc_ast::node_id::NodeMap;
-use crate::rustc_ast::{self as ast, *};
+use crate::rustc_complete::node_id::NodeMap;
+use crate::rustc_complete::{self as ast, *};
 use rustc_attr_parsing::{AttributeParser, Late, OmitDoc};
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 use crate::rustc_data_structures::sorted_map::SortedMap;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 use crate::rustc_data_structures::sync::spawn;
 use crate::rustc_data_structures::tagged_ptr::TaggedRef;
-use rustc_errors::{DiagArgFromDisplay, DiagCtxtHandle};
-use crate::rustc_hir::def::{DefKind, LifetimeRes, Namespace, PartialRes, PerNS, Res};
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, LOCAL_CRATE, LocalDefId};
-use crate::rustc_hir::lints::DelayedLint;
-use crate::rustc_hir::{
+use crate::rustc_complete::{DiagArgFromDisplay, DiagCtxtHandle};
+use crate::rustc_complete::def::{DefKind, LifetimeRes, Namespace, PartialRes, PerNS, Res};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, LOCAL_CRATE, LocalDefId};
+use crate::rustc_complete::lints::DelayedLint;
+use crate::rustc_complete::{
     self as hir, AngleBrackets, ConstArg, GenericArg, HirId, ItemLocalMap, LifetimeSource,
     LifetimeSyntax, ParamName, Target, TraitCandidate,
 };
 use rustc_index::{Idx, IndexSlice, IndexVec};
 use rustc_macros::extension;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::{ResolverAstLowering, TyCtxt};
-use crate::rustc_session::parse::add_feature_diagnostics;
-use crate::rustc_span::symbol::{Ident, Symbol, kw, sym};
-use crate::rustc_span::{DUMMY_SP, DesugaringKind, Span};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{ResolverAstLowering, TyCtxt};
+use crate::rustc_complete::parse::add_feature_diagnostics;
+use crate::rustc_complete::symbol::{Ident, Symbol, kw, sym};
+use crate::rustc_complete::{DUMMY_SP, DesugaringKind, Span};
 use smallvec::SmallVec;
 use thin_vec::ThinVec;
 use tracing::{debug, instrument, trace};

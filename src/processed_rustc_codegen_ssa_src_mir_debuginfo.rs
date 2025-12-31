@@ -5,12 +5,12 @@ use std::ops::Range;
 use rustc_abi::{BackendRepr, FieldIdx, FieldsShape, Size, VariantIdx};
 use crate::rustc_data_structures::fx::FxHashMap;
 use rustc_index::IndexVec;
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use crate::rustc_middle::ty::layout::{LayoutOf, TyAndLayout};
-use crate::rustc_middle::ty::{Instance, Ty};
-use crate::rustc_middle::{bug, mir, ty};
-use crate::rustc_session::config::DebugInfo;
-use crate::rustc_span::{BytePos, Span, Symbol, hygiene, sym};
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
+use crate::rustc_complete::ty::{Instance, Ty};
+use crate::rustc_complete::{bug, mir, ty};
+use crate::rustc_complete::config::DebugInfo;
+use crate::rustc_complete::{BytePos, Span, Symbol, hygiene, sym};
 
 use super::operand::{OperandRef, OperandValue};
 use super::place::{PlaceRef, PlaceValue};

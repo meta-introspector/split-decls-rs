@@ -5,18 +5,18 @@ use std::iter;
 use std::ops::{Range, RangeFrom};
 
 use rustc_abi::{ExternAbi, FieldIdx};
-use crate::rustc_hir::attrs::{InlineAttr, OptimizeAttr};
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::DefId;
+use crate::rustc_complete::attrs::{InlineAttr, OptimizeAttr};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::DefId;
 use rustc_index::Idx;
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrs;
-use crate::rustc_middle::mir::visit::*;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, Instance, InstanceKind, Ty, TyCtxt, TypeFlags, TypeVisitableExt};
-use crate::rustc_session::config::{DebugInfo, OptLevel};
-use crate::rustc_span::source_map::Spanned;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
+use crate::rustc_complete::mir::visit::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Instance, InstanceKind, Ty, TyCtxt, TypeFlags, TypeVisitableExt};
+use crate::rustc_complete::config::{DebugInfo, OptLevel};
+use crate::rustc_complete::source_map::Spanned;
 use tracing::{debug, instrument, trace, trace_span};
 
 use crate::cost_checker::{CostChecker, is_call_like};

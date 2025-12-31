@@ -5,10 +5,10 @@ use rustc_abi as abi;
 use crate::rustc_data_structures::graph::dominators::Dominators;
 use rustc_index::bit_set::DenseBitSet;
 use rustc_index::{IndexSlice, IndexVec};
-use crate::rustc_middle::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
-use crate::rustc_middle::mir::{self, DefLocation, Location, TerminatorKind, traversal};
-use crate::rustc_middle::ty::layout::LayoutOf;
-use crate::rustc_middle::{bug, span_bug};
+use crate::rustc_complete::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::mir::{self, DefLocation, Location, TerminatorKind, traversal};
+use crate::rustc_complete::ty::layout::LayoutOf;
+use crate::rustc_complete::{bug, span_bug};
 use tracing::debug;
 
 use super::FunctionCx;

@@ -1,13 +1,13 @@
 use crate::rustc_data_structures::fx::FxIndexMap;
-use crate::rustc_hir::OpaqueTyOrigin;
-use crate::rustc_hir::def_id::LocalDefId;
-use rustc_infer::infer::outlives::env::OutlivesEnvironment;
-use rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::OpaqueTyOrigin;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_infer::infer::outlives::env::OutlivesEnvironment;
+use crate::rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
+use crate::rustc_complete::ty::{
     self, DefiningScopeKind, GenericArgKind, GenericArgs, OpaqueTypeKey, Ty, TyCtxt,
     TypeVisitableExt, TypingMode, fold_regions,
 };
-use crate::rustc_span::{ErrorGuaranteed, Span};
+use crate::rustc_complete::{ErrorGuaranteed, Span};
 
 use crate::errors::NonGenericOpaqueTypeParam;
 use crate::regions::OutlivesEnvironmentBuildExt;

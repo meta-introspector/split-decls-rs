@@ -6,10 +6,10 @@
 
 use rustc_index::bit_set::DenseBitSet;
 use rustc_index::{IndexSlice, IndexVec};
-use crate::rustc_middle::mir::visit::{MutVisitor, PlaceContext, Visitor};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::Session;
+use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext, Visitor};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
 
 /// Rearranges the basic blocks into a *reverse post-order*.
 ///

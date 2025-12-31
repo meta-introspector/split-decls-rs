@@ -12,9 +12,9 @@
 use std::fmt;
 
 use rustc_abi::{FieldIdx, VariantIdx};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{self, AdtDef, Ty, TyCtxt};
-use crate::rustc_span::sym;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, AdtDef, Ty, TyCtxt};
+use crate::rustc_complete::sym;
 
 #[derive(Clone, Debug)]
 pub(crate) struct FieldPat {

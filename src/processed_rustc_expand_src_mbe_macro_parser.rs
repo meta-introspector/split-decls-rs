@@ -77,12 +77,12 @@ use std::rc::Rc;
 
 pub(crate) use NamedMatch::*;
 pub(crate) use ParseResult::*;
-use crate::rustc_ast::token::{self, DocComment, NonterminalKind, Token, TokenKind};
+use crate::rustc_complete::token::{self, DocComment, NonterminalKind, Token, TokenKind};
 use crate::rustc_data_structures::fx::FxHashMap;
-use rustc_errors::ErrorGuaranteed;
+use crate::rustc_complete::ErrorGuaranteed;
 use rustc_lint_defs::pluralize;
 use rustc_parse::parser::{ParseNtResult, Parser, token_descr};
-use crate::rustc_span::{Ident, MacroRulesNormalizedIdent, Span};
+use crate::rustc_complete::{Ident, MacroRulesNormalizedIdent, Span};
 
 use crate::mbe::macro_rules::Tracker;
 use crate::mbe::{KleeneOp, TokenTree};

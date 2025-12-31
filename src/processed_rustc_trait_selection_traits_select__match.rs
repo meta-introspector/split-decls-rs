@@ -1,8 +1,8 @@
-use rustc_infer::infer::relate::{
+use crate::rustc_infer::infer::relate::{
     self, Relate, RelateResult, TypeRelation, structurally_relate_tys,
 };
-use crate::rustc_middle::ty::error::{ExpectedFound, TypeError};
-use crate::rustc_middle::ty::{self, InferConst, Ty, TyCtxt};
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::ty::{self, InferConst, Ty, TyCtxt};
 use tracing::instrument;
 
 /// A type "A" *matches* "B" if the fresh types in B could be

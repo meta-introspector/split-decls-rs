@@ -1,17 +1,17 @@
 use crate::rustc_data_structures::fx::FxHashSet;
 use rustc_hir as hir;
-use crate::rustc_hir::def::DefKind;
+use crate::rustc_complete::def::DefKind;
 use rustc_index::bit_set::DenseBitSet;
-use rustc_infer::infer::TyCtxtInferExt;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{
     self, SizedTraitKind, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitor, Upcast,
     fold_regions,
 };
-use crate::rustc_span::DUMMY_SP;
-use crate::rustc_span::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
-use rustc_trait_selection::traits;
+use crate::rustc_complete::DUMMY_SP;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
+use crate::rustc_trait_selection::traits;
 use tracing::instrument;
 
 /// If `ty` implements the given `sizedness` trait, returns `None`. Otherwise, returns the type

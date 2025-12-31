@@ -13,11 +13,11 @@ use std::collections::VecDeque;
 use std::{fmt, ptr};
 
 use rustc_abi::{Align, HasDataLayout, Size};
-use crate::rustc_ast::Mutability;
+use crate::rustc_complete::Mutability;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
-use crate::rustc_middle::mir::display_allocation;
-use crate::rustc_middle::ty::{self, Instance, Ty, TyCtxt};
-use crate::rustc_middle::{bug, throw_ub_format};
+use crate::rustc_complete::mir::display_allocation;
+use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt};
+use crate::rustc_complete::{bug, throw_ub_format};
 use tracing::{debug, instrument, trace};
 
 use super::{

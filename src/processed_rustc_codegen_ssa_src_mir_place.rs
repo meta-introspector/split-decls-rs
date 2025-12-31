@@ -1,11 +1,11 @@
 use rustc_abi::{
     Align, BackendRepr, FieldIdx, FieldsShape, Size, TagEncoding, VariantIdx, Variants,
 };
-use crate::rustc_middle::mir::PlaceTy;
-use crate::rustc_middle::mir::interpret::Scalar;
-use crate::rustc_middle::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutOf, TyAndLayout};
-use crate::rustc_middle::ty::{self, Ty};
-use crate::rustc_middle::{bug, mir};
+use crate::rustc_complete::mir::PlaceTy;
+use crate::rustc_complete::mir::interpret::Scalar;
+use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutOf, TyAndLayout};
+use crate::rustc_complete::ty::{self, Ty};
+use crate::rustc_complete::{bug, mir};
 use tracing::{debug, instrument};
 
 use super::operand::OperandValue;

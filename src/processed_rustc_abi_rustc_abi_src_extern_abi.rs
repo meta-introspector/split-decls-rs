@@ -7,7 +7,7 @@ use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher, Stab
 #[cfg(feature = "nightly")]
 use rustc_macros::{Decodable, Encodable};
 #[cfg(feature = "nightly")]
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::Symbol;
 
 use crate::AbiFromStrErr;
 

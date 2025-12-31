@@ -1,6 +1,6 @@
 use crate::rustc_data_structures::graph;
 use rustc_index::IndexVec;
-use crate::rustc_middle::ty::RegionVid;
+use crate::rustc_complete::ty::RegionVid;
 
 use crate::constraints::{OutlivesConstraint, OutlivesConstraintIndex, OutlivesConstraintSet};
 

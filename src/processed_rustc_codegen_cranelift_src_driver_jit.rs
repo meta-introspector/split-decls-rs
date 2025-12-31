@@ -6,10 +6,10 @@ use std::os::raw::{c_char, c_int};
 
 use cranelift_jit::{JITBuilder, JITModule};
 use rustc_codegen_ssa::CrateInfo;
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use crate::rustc_middle::mir::mono::MonoItem;
-use crate::rustc_session::Session;
-use crate::rustc_span::sym;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::mir::mono::MonoItem;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::sym;
 
 use crate::CodegenCx;
 use crate::debuginfo::TypeDebugContext;
@@ -157,7 +157,7 @@ fn dep_symbol_lookup_fn(
     sess: &Session,
     crate_info: CrateInfo,
 ) -> Box<dyn Fn(&str) -> Option<*const u8> + Send> {
-    use crate::rustc_middle::middle::dependency_format::Linkage;
+    use crate::rustc_complete::middle::dependency_format::Linkage;
 
     let mut dylib_paths = Vec::new();
 

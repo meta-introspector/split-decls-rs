@@ -1,10 +1,10 @@
-use crate::rustc_hir::limit::Limit;
-use rustc_infer::infer::InferCtxt;
-use rustc_infer::traits::PredicateObligations;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, TypeVisitableExt};
-use crate::rustc_span::def_id::{LOCAL_CRATE, LocalDefId};
-use crate::rustc_span::{ErrorGuaranteed, Span};
-use rustc_trait_selection::traits::ObligationCtxt;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_infer::infer::InferCtxt;
+use crate::rustc_infer::traits::PredicateObligations;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::def_id::{LOCAL_CRATE, LocalDefId};
+use crate::rustc_complete::{ErrorGuaranteed, Span};
+use crate::rustc_trait_selection::traits::ObligationCtxt;
 use tracing::{debug, instrument};
 
 use crate::errors::AutoDerefReachedRecursionLimit;

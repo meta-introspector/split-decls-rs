@@ -36,10 +36,10 @@
 
 use itertools::Itertools as _;
 use rustc_index::{Idx, IndexSlice, IndexVec};
-use crate::rustc_middle::mir::visit::{MutVisitor, MutatingUseContext, PlaceContext, Visitor};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_span::DUMMY_SP;
+use crate::rustc_complete::mir::visit::{MutVisitor, MutatingUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::DUMMY_SP;
 use smallvec::SmallVec;
 use tracing::{debug, trace};
 

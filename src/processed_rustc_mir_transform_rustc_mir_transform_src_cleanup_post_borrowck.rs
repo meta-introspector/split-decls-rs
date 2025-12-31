@@ -16,10 +16,10 @@
 // [`BlockMarker`]: crate::rustc_middle::mir::coverage::CoverageKind::BlockMarker
 // [`SpanMarker`]: crate::rustc_middle::mir::coverage::CoverageKind::SpanMarker
 
-use crate::rustc_middle::mir::coverage::CoverageKind;
-use crate::rustc_middle::mir::{Body, BorrowKind, CastKind, Rvalue, StatementKind, TerminatorKind};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_middle::ty::adjustment::PointerCoercion;
+use crate::rustc_complete::mir::coverage::CoverageKind;
+use crate::rustc_complete::mir::{Body, BorrowKind, CastKind, Rvalue, StatementKind, TerminatorKind};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::ty::adjustment::PointerCoercion;
 
 pub(super) struct CleanupPostBorrowck;
 

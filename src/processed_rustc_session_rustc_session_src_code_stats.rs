@@ -3,7 +3,7 @@ use std::cmp;
 use rustc_abi::{Align, Size};
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::sync::Lock;
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::Symbol;
 
 #[derive(Clone, PartialEq, Eq, Hash, Debug)]
 pub struct VariantInfo {

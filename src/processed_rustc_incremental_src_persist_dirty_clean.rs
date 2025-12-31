@@ -19,17 +19,17 @@
 // Errors are reported if we are in the suitable configuration but
 // the required condition is not met.
 
-use crate::rustc_ast::{self as ast, MetaItemInner};
+use crate::rustc_complete::{self as ast, MetaItemInner};
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::unord::UnordSet;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_hir::{
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{
     Attribute, ImplItemKind, ItemKind as HirItem, Node as HirNode, TraitItemKind, intravisit,
 };
-use crate::rustc_middle::dep_graph::{DepNode, DepNodeExt, label_strs};
-use crate::rustc_middle::hir::nested_filter;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::dep_graph::{DepNode, DepNodeExt, label_strs};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::{Span, Symbol, sym};
 use thin_vec::ThinVec;
 use tracing::debug;
 

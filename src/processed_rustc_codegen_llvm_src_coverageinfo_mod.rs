@@ -5,8 +5,8 @@ use rustc_codegen_ssa::traits::{
     ConstCodegenMethods, CoverageInfoBuilderMethods, MiscCodegenMethods,
 };
 use crate::rustc_data_structures::fx::FxIndexMap;
-use crate::rustc_middle::mir::coverage::CoverageKind;
-use crate::rustc_middle::ty::Instance;
+use crate::rustc_complete::mir::coverage::CoverageKind;
+use crate::rustc_complete::ty::Instance;
 use tracing::{debug, instrument};
 
 use crate::builder::Builder;

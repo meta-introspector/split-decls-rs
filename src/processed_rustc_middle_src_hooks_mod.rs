@@ -3,10 +3,10 @@
 // similar to queries, but queries come with a lot of machinery for caching and incremental
 // compilation, whereas hooks are just plain function pointers without any of the query magic.
 
-use crate::rustc_hir::def_id::{DefId, DefPathHash};
-use crate::rustc_session::StableCrateId;
-use crate::rustc_span::def_id::{CrateNum, LocalDefId};
-use crate::rustc_span::{ExpnHash, ExpnId};
+use crate::rustc_complete::def_id::{DefId, DefPathHash};
+use crate::rustc_complete::StableCrateId;
+use crate::rustc_complete::def_id::{CrateNum, LocalDefId};
+use crate::rustc_complete::{ExpnHash, ExpnId};
 
 use crate::mir;
 use crate::ty::{Ty, TyCtxt};

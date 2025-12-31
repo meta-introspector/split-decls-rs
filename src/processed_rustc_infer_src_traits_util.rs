@@ -1,7 +1,7 @@
 use crate::rustc_data_structures::fx::FxHashSet;
-pub use crate::rustc_middle::ty::elaborate::*;
-use crate::rustc_middle::ty::{self, TyCtxt};
-use crate::rustc_span::{Ident, Span};
+pub use crate::rustc_complete::ty::elaborate::*;
+use crate::rustc_complete::ty::{self, TyCtxt};
+use crate::rustc_complete::{Ident, Span};
 
 use crate::traits::{self, Obligation, ObligationCauseCode, PredicateObligation};
 

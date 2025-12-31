@@ -28,29 +28,29 @@ use crate::rustc_data_structures::steal::Steal;
 use crate::rustc_data_structures::sync::{
     self, DynSend, DynSync, FreezeReadGuard, Lock, RwLock, WorkerLocal,
 };
-use rustc_errors::{
+use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, ErrorGuaranteed, LintDiagnostic, LintEmitter, MultiSpan,
 };
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::{CtorKind, CtorOf, DefKind};
-use crate::rustc_hir::def_id::{CrateNum, DefId, LOCAL_CRATE, LocalDefId};
-use crate::rustc_hir::definitions::{DefPathData, Definitions, DisambiguatorState};
-use crate::rustc_hir::intravisit::VisitorExt;
-use crate::rustc_hir::lang_items::LangItem;
-use crate::rustc_hir::limit::Limit;
-use crate::rustc_hir::{self as hir, Attribute, HirId, Node, TraitCandidate, find_attr};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{CtorKind, CtorOf, DefKind};
+use crate::rustc_complete::def_id::{CrateNum, DefId, LOCAL_CRATE, LocalDefId};
+use crate::rustc_complete::definitions::{DefPathData, Definitions, DisambiguatorState};
+use crate::rustc_complete::intravisit::VisitorExt;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_complete::{self as hir, Attribute, HirId, Node, TraitCandidate, find_attr};
 use rustc_index::IndexVec;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 use rustc_query_system::cache::WithDepNode;
 use rustc_query_system::dep_graph::DepNodeIndex;
 use rustc_query_system::ich::StableHashingContext;
 use rustc_serialize::opaque::{FileEncodeResult, FileEncoder};
-use crate::rustc_session::Session;
-use crate::rustc_session::config::CrateType;
-use crate::rustc_session::cstore::{CrateStoreDyn, Untracked};
-use crate::rustc_session::lint::Lint;
-use crate::rustc_span::def_id::{CRATE_DEF_ID, DefPathHash, StableCrateId};
-use crate::rustc_span::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::CrateType;
+use crate::rustc_complete::cstore::{CrateStoreDyn, Untracked};
+use crate::rustc_complete::lint::Lint;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefPathHash, StableCrateId};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
 use rustc_type_ir::TyKind::*;
 use rustc_type_ir::lang_items::{SolverAdtLangItem, SolverLangItem, SolverTraitLangItem};
 pub use rustc_type_ir::lift::Lift;
@@ -3249,7 +3249,7 @@ impl<'tcx> TyCtxt<'tcx> {
         m.spans.inject_use_span.shrink_to_lo()
     }
 
-    pub fn disabled_nightly_features<E: rustc_errors::EmissionGuarantee>(
+    pub fn disabled_nightly_features<E: crate::rustc_errors::EmissionGuarantee>(
         self,
         diag: &mut Diag<'_, E>,
         features: impl IntoIterator<Item = (String, Symbol)>,

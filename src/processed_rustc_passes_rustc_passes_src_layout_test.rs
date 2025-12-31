@@ -1,15 +1,15 @@
 use rustc_abi::{HasDataLayout, TargetDataLayout};
-use crate::rustc_hir::Attribute;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutError, LayoutOfHelpers};
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{Span, sym};
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::infer::TyCtxtInferExt;
-use rustc_trait_selection::traits;
+use crate::rustc_complete::Attribute;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutError, LayoutOfHelpers};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Span, sym};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::infer::TyCtxtInferExt;
+use crate::rustc_trait_selection::traits;
 
 use crate::errors::{
     LayoutAbi, LayoutAlign, LayoutHomogeneousAggregate, LayoutInvalidAttribute, LayoutOf,

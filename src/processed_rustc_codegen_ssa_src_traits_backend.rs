@@ -1,17 +1,17 @@
 use std::any::Any;
 use std::hash::Hash;
 
-use crate::rustc_ast::expand::allocator::AllocatorKind;
+use crate::rustc_complete::expand::allocator::AllocatorKind;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::sync::{DynSend, DynSync};
 use rustc_metadata::EncodedMetadata;
 use rustc_metadata::creader::MetadataLoaderDyn;
-use crate::rustc_middle::dep_graph::{WorkProduct, WorkProductId};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_middle::util::Providers;
-use crate::rustc_session::Session;
-use crate::rustc_session::config::{self, OutputFilenames, PrintRequest};
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::util::Providers;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{self, OutputFilenames, PrintRequest};
+use crate::rustc_complete::Symbol;
 
 use super::CodegenObject;
 use super::write::WriteBackendMethods;

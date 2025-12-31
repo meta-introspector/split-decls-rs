@@ -2,15 +2,15 @@ use std::fmt::Write;
 
 use hir::def_id::DefId;
 use hir::{HirId, ItemKind};
-use crate::rustc_ast::join_path_idents;
-use rustc_errors::Applicability;
+use crate::rustc_complete::join_path_idents;
+use crate::rustc_complete::Applicability;
 use rustc_hir as hir;
 use rustc_lint::{ARRAY_INTO_ITER, BOXED_SLICE_INTO_ITER};
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::{self, Ty};
-use crate::rustc_session::lint::builtin::{RUST_2021_PRELUDE_COLLISIONS, RUST_2024_PRELUDE_COLLISIONS};
-use crate::rustc_span::{Ident, STDLIB_STABLE_CRATES, Span, kw, sym};
-use rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{self, Ty};
+use crate::rustc_complete::lint::builtin::{RUST_2021_PRELUDE_COLLISIONS, RUST_2024_PRELUDE_COLLISIONS};
+use crate::rustc_complete::{Ident, STDLIB_STABLE_CRATES, Span, kw, sym};
+use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::debug;
 
 use crate::FnCtxt;

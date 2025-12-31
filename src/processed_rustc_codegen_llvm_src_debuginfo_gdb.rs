@@ -2,10 +2,10 @@
 
 use rustc_codegen_ssa::base::collect_debugger_visualizers_transitive;
 use rustc_codegen_ssa::traits::*;
-use crate::rustc_hir::def_id::LOCAL_CRATE;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::middle::debugger_visualizer::DebuggerVisualizerType;
-use crate::rustc_session::config::{CrateType, DebugInfo};
+use crate::rustc_complete::def_id::LOCAL_CRATE;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::debugger_visualizer::DebuggerVisualizerType;
+use crate::rustc_complete::config::{CrateType, DebugInfo};
 
 use crate::builder::Builder;
 use crate::common::CodegenCx;

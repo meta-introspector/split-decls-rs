@@ -1,6 +1,6 @@
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet, IndexEntry};
-use crate::rustc_middle::mir::coverage::BasicCoverageBlock;
-use crate::rustc_span::{ExpnId, ExpnKind, Span};
+use crate::rustc_complete::mir::coverage::BasicCoverageBlock;
+use crate::rustc_complete::{ExpnId, ExpnKind, Span};
 
 #[derive(Clone, Copy, Debug)]
 pub(crate) struct SpanWithBcb {

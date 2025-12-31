@@ -1,10 +1,10 @@
 use std::borrow::Cow;
 
-use crate::rustc_ast::AttrStyle;
-use rustc_errors::DiagArgValue;
+use crate::rustc_complete::AttrStyle;
+use crate::rustc_complete::DiagArgValue;
 use rustc_feature::{AttributeType, Features};
-use crate::rustc_hir::lints::AttributeLintKind;
-use crate::rustc_hir::{MethodKind, Target};
+use crate::rustc_complete::lints::AttributeLintKind;
+use crate::rustc_complete::{MethodKind, Target};
 
 use crate::AttributeParser;
 use crate::context::{AcceptContext, Stage};

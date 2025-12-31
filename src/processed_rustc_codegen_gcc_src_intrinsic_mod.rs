@@ -20,12 +20,12 @@ use rustc_codegen_ssa::traits::{
     ArgAbiBuilderMethods, BaseTypeCodegenMethods, BuilderMethods, ConstCodegenMethods,
     IntrinsicCallBuilderMethods,
 };
-use crate::rustc_middle::bug;
+use crate::rustc_complete::bug;
 #[cfg(feature = "master")]
-use crate::rustc_middle::ty::layout::FnAbiOf;
-use crate::rustc_middle::ty::layout::LayoutOf;
-use crate::rustc_middle::ty::{self, Instance, Ty};
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::ty::layout::FnAbiOf;
+use crate::rustc_complete::ty::layout::LayoutOf;
+use crate::rustc_complete::ty::{self, Instance, Ty};
+use crate::rustc_complete::{Span, Symbol, sym};
 use rustc_target::callconv::{ArgAbi, PassMode};
 use rustc_target::spec::PanicStrategy;
 

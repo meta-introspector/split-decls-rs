@@ -1,11 +1,11 @@
-use rustc_infer::infer::InferOk;
-use rustc_infer::infer::resolve::OpportunisticRegionResolver;
-use rustc_infer::traits::query::type_op::ImpliedOutlivesBounds;
+use crate::rustc_infer::infer::InferOk;
+use crate::rustc_infer::infer::resolve::OpportunisticRegionResolver;
+use crate::rustc_infer::traits::query::type_op::ImpliedOutlivesBounds;
 use rustc_macros::extension;
-use crate::rustc_middle::infer::canonical::{OriginalQueryValues, QueryRegionConstraints};
-pub use crate::rustc_middle::traits::query::OutlivesBound;
-use crate::rustc_middle::ty::{self, ParamEnv, Ty, TypeFolder, TypeVisitableExt};
-use crate::rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::infer::canonical::{OriginalQueryValues, QueryRegionConstraints};
+pub use crate::rustc_complete::traits::query::OutlivesBound;
+use crate::rustc_complete::ty::{self, ParamEnv, Ty, TypeFolder, TypeVisitableExt};
+use crate::rustc_complete::def_id::LocalDefId;
 use tracing::instrument;
 
 use crate::infer::InferCtxt;

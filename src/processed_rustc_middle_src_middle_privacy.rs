@@ -6,10 +6,10 @@ use std::hash::Hash;
 
 use crate::rustc_data_structures::fx::{FxIndexMap, IndexEntry};
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-use crate::rustc_hir::def::DefKind;
+use crate::rustc_complete::def::DefKind;
 use rustc_macros::HashStable;
 use rustc_query_system::ich::StableHashingContext;
-use crate::rustc_span::def_id::{CRATE_DEF_ID, LocalDefId};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, LocalDefId};
 
 use crate::ty::{TyCtxt, Visibility};
 

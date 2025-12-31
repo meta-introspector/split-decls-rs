@@ -4,19 +4,19 @@ use std::ops::ControlFlow;
 
 use crate::rustc_data_structures::sso::SsoHashSet;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::ErrorGuaranteed;
-use crate::rustc_hir::lang_items::LangItem;
-use rustc_infer::infer::DefineOpaqueTypes;
-use rustc_infer::infer::resolve::OpportunisticRegionResolver;
-use rustc_infer::traits::{ObligationCauseCode, PredicateObligations};
-use crate::rustc_middle::traits::select::OverflowError;
-use crate::rustc_middle::traits::{BuiltinImplSource, ImplSource, ImplSourceUserDefinedData};
-use crate::rustc_middle::ty::fast_reject::DeepRejectCtxt;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_infer::infer::DefineOpaqueTypes;
+use crate::rustc_infer::infer::resolve::OpportunisticRegionResolver;
+use crate::rustc_infer::traits::{ObligationCauseCode, PredicateObligations};
+use crate::rustc_complete::traits::select::OverflowError;
+use crate::rustc_complete::traits::{BuiltinImplSource, ImplSource, ImplSourceUserDefinedData};
+use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
+use crate::rustc_complete::ty::{
     self, Term, Ty, TyCtxt, TypeFoldable, TypeVisitableExt, TypingMode, Upcast,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::sym;
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::sym;
 use tracing::{debug, instrument};
 
 use super::{

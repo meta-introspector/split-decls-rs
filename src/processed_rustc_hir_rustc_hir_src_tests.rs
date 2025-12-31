@@ -1,9 +1,9 @@
 #[allow(rustc::symbol_intern_string_literal)]
 
 use rustc_hashes::Hash64;
-use crate::rustc_span::def_id::{DefPathHash, StableCrateId};
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::{Symbol, create_session_globals_then};
+use crate::rustc_complete::def_id::{DefPathHash, StableCrateId};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{Symbol, create_session_globals_then};
 
 use crate::definitions::{DefKey, DefPathData, DisambiguatedDefPathData};
 

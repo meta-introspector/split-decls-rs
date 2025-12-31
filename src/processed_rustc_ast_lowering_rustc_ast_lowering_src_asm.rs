@@ -1,12 +1,12 @@
 use std::collections::hash_map::Entry;
 use std::fmt::Write;
 
-use crate::rustc_ast::*;
+use crate::rustc_complete::*;
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexMap};
 use rustc_hir as hir;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::{Span, sym};
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{Span, sym};
 use rustc_target::asm;
 
 use super::LoweringContext;

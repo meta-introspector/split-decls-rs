@@ -14,10 +14,10 @@ use rustc_codegen_ssa::mir::place::PlaceRef;
 use rustc_codegen_ssa::traits::{BaseTypeCodegenMethods, BuilderMethods};
 #[cfg(feature = "master")]
 use rustc_hir as hir;
-use crate::rustc_middle::mir::BinOp;
-use crate::rustc_middle::ty::layout::HasTyCtxt;
-use crate::rustc_middle::ty::{self, Ty};
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::mir::BinOp;
+use crate::rustc_complete::ty::layout::HasTyCtxt;
+use crate::rustc_complete::ty::{self, Ty};
+use crate::rustc_complete::{Span, Symbol, sym};
 
 use crate::builder::Builder;
 #[cfg(not(feature = "master"))]

@@ -14,19 +14,19 @@
 // about type information, we want to avoid doing that.
 
 use hir::def::DefKind;
-use crate::rustc_ast::Mutability;
+use crate::rustc_complete::Mutability;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 use rustc_hir as hir;
-use crate::rustc_hir::definitions::{DefPathData, DisambiguatorState};
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrs;
-use crate::rustc_middle::mir::interpret::{
+use crate::rustc_complete::definitions::{DefPathData, DisambiguatorState};
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
+use crate::rustc_complete::mir::interpret::{
     AllocBytes, ConstAllocation, CtfeProvenance, InterpResult, Provenance,
 };
-use crate::rustc_middle::query::TyCtxtAt;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_middle::ty::layout::TyAndLayout;
-use crate::rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::def_id::LocalDefId;
 use tracing::{instrument, trace};
 
 use super::{AllocId, Allocation, InterpCx, MPlaceTy, Machine, MemoryKind, PlaceTy, interp_ok};

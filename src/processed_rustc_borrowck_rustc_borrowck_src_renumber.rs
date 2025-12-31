@@ -1,9 +1,9 @@
 use rustc_index::IndexSlice;
-use rustc_infer::infer::NllRegionVariableOrigin;
-use crate::rustc_middle::mir::visit::{MutVisitor, TyContext};
-use crate::rustc_middle::mir::{Body, ConstOperand, Location, Promoted};
-use crate::rustc_middle::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeFoldable, fold_regions};
-use crate::rustc_span::Symbol;
+use crate::rustc_infer::infer::NllRegionVariableOrigin;
+use crate::rustc_complete::mir::visit::{MutVisitor, TyContext};
+use crate::rustc_complete::mir::{Body, ConstOperand, Location, Promoted};
+use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeFoldable, fold_regions};
+use crate::rustc_complete::Symbol;
 use tracing::{debug, instrument};
 
 use crate::BorrowckInferCtxt;

@@ -3,10 +3,10 @@
 // We retrieve and monomorphize the rustc body representation, i.e., we generate a
 // monomorphic body using internal representation.
 
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_middle::mir;
-use crate::rustc_middle::mir::visit::MutVisitor;
-use crate::rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::mir;
+use crate::rustc_complete::mir::visit::MutVisitor;
+use crate::rustc_complete::ty::{self, TyCtxt};
 
 /// Builds a monomorphic body for a given instance.
 pub(crate) struct BodyBuilder<'tcx> {

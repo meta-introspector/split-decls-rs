@@ -3,13 +3,13 @@ use std::mem;
 use std::ops::ControlFlow;
 
 use crate::rustc_data_structures::thinvec::ExtractIf;
-use crate::rustc_hir::def_id::LocalDefId;
-use rustc_infer::infer::InferCtxt;
-use rustc_infer::traits::query::NoSolution;
-use rustc_infer::traits::{
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_infer::infer::InferCtxt;
+use crate::rustc_infer::traits::query::NoSolution;
+use crate::rustc_infer::traits::{
     FromSolverError, PredicateObligation, PredicateObligations, TraitEngine,
 };
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, DelayedSet, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor,
     TypingMode,
 };
@@ -17,7 +17,7 @@ use rustc_next_trait_solver::delegate::SolverDelegate as _;
 use rustc_next_trait_solver::solve::{
     GoalEvaluation, GoalStalledOn, HasChanged, SolverDelegateEvalExt as _,
 };
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 use thin_vec::ThinVec;
 use tracing::instrument;
 

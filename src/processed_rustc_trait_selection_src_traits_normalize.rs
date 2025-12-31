@@ -1,16 +1,16 @@
 // Deeply normalize types using the old trait solver.
 
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
-use crate::rustc_hir::def::DefKind;
-use rustc_infer::infer::at::At;
-use rustc_infer::infer::{InferCtxt, InferOk};
-use rustc_infer::traits::{
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_infer::infer::at::At;
+use crate::rustc_infer::infer::{InferCtxt, InferOk};
+use crate::rustc_infer::traits::{
     FromSolverError, Normalized, Obligation, PredicateObligations, TraitEngine,
 };
 use rustc_macros::extension;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::traits::{ObligationCause, ObligationCauseCode};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::traits::{ObligationCause, ObligationCauseCode};
+use crate::rustc_complete::ty::{
     self, AliasTerm, Term, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitable,
     TypeVisitableExt, TypingMode,
 };

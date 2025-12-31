@@ -13,7 +13,7 @@
 // tidy-alphabetical-end
 
 
-pub use crate::rustc_span::def_id;
+pub use crate::rustc_complete::def_id;
 pub use rustc_hir_id::{self as hir_id, *};
 
 

@@ -13,7 +13,7 @@
 // "Go to file" feature to silently ignore all files in the module, probably
 // because it assumes that "build" is a build-output directory. See #134365.
 
-use crate::rustc_middle::util::Providers;
+use crate::rustc_complete::util::Providers;
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
 

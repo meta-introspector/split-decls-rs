@@ -1,6 +1,6 @@
 use crate::rustc_data_structures::fx::FxIndexSet;
-use crate::rustc_middle::mir::visit::{PlaceContext, Visitor};
-use crate::rustc_middle::mir::{
+use crate::rustc_complete::mir::visit::{PlaceContext, Visitor};
+use crate::rustc_complete::mir::{
     Local, Location, Place, Statement, StatementKind, Terminator, TerminatorKind,
 };
 use tracing::debug;

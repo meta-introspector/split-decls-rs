@@ -1,4 +1,4 @@
-use crate::rustc_span::ErrorGuaranteed;
+use crate::rustc_complete::ErrorGuaranteed;
 
 use crate::dep_graph::DepContext;
 use crate::query::CycleError;

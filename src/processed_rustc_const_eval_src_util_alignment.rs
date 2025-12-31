@@ -1,6 +1,6 @@
 use rustc_abi::Align;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, TyCtxt};
 use tracing::debug;
 
 /// Returns `true` if this place is allowed to be less aligned

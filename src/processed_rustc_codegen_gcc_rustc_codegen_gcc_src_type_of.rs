@@ -9,10 +9,10 @@ use rustc_abi::{
 use rustc_codegen_ssa::traits::{
     BaseTypeCodegenMethods, DerivedTypeCodegenMethods, LayoutTypeCodegenMethods,
 };
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::layout::{LayoutOf, TyAndLayout};
-use crate::rustc_middle::ty::print::with_no_trimmed_paths;
-use crate::rustc_middle::ty::{self, CoroutineArgsExt, Ty, TypeVisitableExt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{self, CoroutineArgsExt, Ty, TypeVisitableExt};
 use rustc_target::callconv::{CastTarget, FnAbi};
 
 use crate::abi::{FnAbiGcc, FnAbiGccExt, GccType};
@@ -204,7 +204,7 @@ impl<'tcx> LayoutGccExt<'tcx> for TyAndLayout<'tcx> {
     /// of that field's type - this is useful for taking the address of
     /// that field and ensuring the struct has the right alignment.
     fn gcc_type<'gcc>(&self, cx: &CodegenCx<'gcc, 'tcx>) -> Type<'gcc> {
-        use crate::rustc_middle::ty::layout::FnAbiOf;
+        use crate::rustc_complete::ty::layout::FnAbiOf;
         // This must produce the same result for `repr(transparent)` wrappers as for the inner type!
         // In other words, this should generally not look at the type at all, but only at the
         // layout.

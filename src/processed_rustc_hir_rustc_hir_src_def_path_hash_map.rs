@@ -1,5 +1,5 @@
 use rustc_hashes::Hash64;
-use crate::rustc_span::def_id::DefIndex;
+use crate::rustc_complete::def_id::DefIndex;
 
 #[derive(Clone, Default)]
 pub struct Config;

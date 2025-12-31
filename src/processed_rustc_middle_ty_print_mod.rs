@@ -2,8 +2,8 @@ use hir::def::Namespace;
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::sso::SsoHashSet;
 use rustc_hir as hir;
-use crate::rustc_hir::def_id::{CrateNum, DefId};
-use crate::rustc_hir::definitions::{DefPathData, DisambiguatedDefPathData};
+use crate::rustc_complete::def_id::{CrateNum, DefId};
+use crate::rustc_complete::definitions::{DefPathData, DisambiguatedDefPathData};
 use tracing::{debug, instrument, trace};
 
 use crate::ty::{self, GenericArg, Ty, TyCtxt};

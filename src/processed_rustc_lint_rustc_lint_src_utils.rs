@@ -1,5 +1,5 @@
-use crate::rustc_hir::{Expr, ExprKind};
-use crate::rustc_span::sym;
+use crate::rustc_complete::{Expr, ExprKind};
+use crate::rustc_complete::sym;
 
 use crate::LateContext;
 

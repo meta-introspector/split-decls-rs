@@ -1,11 +1,11 @@
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexSet};
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_data_structures::unord::UnordSet;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::limit::Limit;
-use crate::rustc_middle::mir::TerminatorKind;
-use crate::rustc_middle::ty::{self, GenericArgsRef, InstanceKind, TyCtxt, TypeVisitableExt};
-use crate::rustc_span::sym;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_complete::mir::TerminatorKind;
+use crate::rustc_complete::ty::{self, GenericArgsRef, InstanceKind, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::sym;
 use tracing::{instrument, trace};
 
 #[instrument(level = "debug", skip(tcx), ret)]

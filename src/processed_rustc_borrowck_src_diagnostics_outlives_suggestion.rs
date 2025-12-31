@@ -7,8 +7,8 @@
 use std::collections::BTreeMap;
 
 use crate::rustc_data_structures::fx::FxIndexSet;
-use rustc_errors::Diag;
-use crate::rustc_middle::ty::RegionVid;
+use crate::rustc_complete::Diag;
+use crate::rustc_complete::ty::RegionVid;
 use smallvec::SmallVec;
 use tracing::debug;
 

@@ -10,15 +10,15 @@ use std::mem;
 
 use crate::rustc_data_structures::fx::FxHashMap;
 use rustc_hir as hir;
-use crate::rustc_hir::def::{CtorKind, DefKind, Res};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::intravisit::{self, Visitor};
-use crate::rustc_hir::{Arm, Block, Expr, LetStmt, Pat, PatKind, Stmt};
+use crate::rustc_complete::def::{CtorKind, DefKind, Res};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::intravisit::{self, Visitor};
+use crate::rustc_complete::{Arm, Block, Expr, LetStmt, Pat, PatKind, Stmt};
 use rustc_index::Idx;
-use crate::rustc_middle::middle::region::*;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::lint;
-use crate::rustc_span::source_map;
+use crate::rustc_complete::middle::region::*;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::lint;
+use crate::rustc_complete::source_map;
 use tracing::debug;
 
 #[derive(Debug, Copy, Clone)]

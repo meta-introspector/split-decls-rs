@@ -3,18 +3,18 @@
 
 use std::num::NonZero;
 
-use crate::rustc_ast::NodeId;
-use rustc_errors::{Applicability, Diag, EmissionGuarantee, LintBuffer};
+use crate::rustc_complete::NodeId;
+use crate::rustc_complete::{Applicability, Diag, EmissionGuarantee, LintBuffer};
 use rustc_feature::GateIssue;
-use crate::rustc_hir::attrs::{DeprecatedSince, Deprecation};
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::{self as hir, ConstStability, DefaultBodyStability, HirId, Stability};
+use crate::rustc_complete::attrs::{DeprecatedSince, Deprecation};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::{self as hir, ConstStability, DefaultBodyStability, HirId, Stability};
 use rustc_macros::{Decodable, Encodable, HashStable, Subdiagnostic};
-use crate::rustc_session::Session;
-use crate::rustc_session::lint::builtin::{DEPRECATED, DEPRECATED_IN_FUTURE, SOFT_UNSTABLE};
-use crate::rustc_session::lint::{BuiltinLintDiag, DeprecatedSinceKind, Level, Lint};
-use crate::rustc_session::parse::feature_err_issue;
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::lint::builtin::{DEPRECATED, DEPRECATED_IN_FUTURE, SOFT_UNSTABLE};
+use crate::rustc_complete::lint::{BuiltinLintDiag, DeprecatedSinceKind, Level, Lint};
+use crate::rustc_complete::parse::feature_err_issue;
+use crate::rustc_complete::{Span, Symbol, sym};
 use tracing::debug;
 
 pub use self::StabilityLevel::*;
@@ -126,7 +126,7 @@ pub struct Deprecated {
     pub since_kind: DeprecatedSinceKind,
 }
 
-impl<'a, G: EmissionGuarantee> rustc_errors::LintDiagnostic<'a, G> for Deprecated {
+impl<'a, G: EmissionGuarantee> crate::rustc_errors::LintDiagnostic<'a, G> for Deprecated {
     fn decorate_lint<'b>(self, diag: &'b mut Diag<'a, G>) {
         diag.primary_message(match &self.since_kind {
             DeprecatedSinceKind::InEffect => crate::fluent_generated::middle_deprecated,

@@ -1,7 +1,7 @@
 // Conversion of internal Rust compiler `ty` items to stable ones.
 
-use crate::rustc_middle::ty::Ty;
-use crate::rustc_middle::{bug, mir, ty};
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::{bug, mir, ty};
 use rustc_public_bridge::Tables;
 use rustc_public_bridge::context::CompilerCtxt;
 
@@ -138,7 +138,7 @@ impl<'tcx> Stable<'tcx> for ty::adjustment::PointerCoercion {
         tables: &mut Tables<'cx, BridgeTys>,
         cx: &CompilerCtxt<'cx, BridgeTys>,
     ) -> Self::T {
-        use crate::rustc_middle::ty::adjustment::PointerCoercion;
+        use crate::rustc_complete::ty::adjustment::PointerCoercion;
         match self {
             PointerCoercion::ReifyFnPointer => crate::mir::PointerCoercion::ReifyFnPointer,
             PointerCoercion::UnsafeFnPointer => crate::mir::PointerCoercion::UnsafeFnPointer,
@@ -694,7 +694,7 @@ impl<'tcx> Stable<'tcx> for ty::PredicateKind<'tcx> {
         tables: &mut Tables<'cx, BridgeTys>,
         cx: &CompilerCtxt<'cx, BridgeTys>,
     ) -> Self::T {
-        use crate::rustc_middle::ty::PredicateKind;
+        use crate::rustc_complete::ty::PredicateKind;
         match self {
             PredicateKind::Clause(clause_kind) => {
                 crate::ty::PredicateKind::Clause(clause_kind.stable(tables, cx))
@@ -732,7 +732,7 @@ impl<'tcx> Stable<'tcx> for ty::ClauseKind<'tcx> {
         tables: &mut Tables<'cx, BridgeTys>,
         cx: &CompilerCtxt<'cx, BridgeTys>,
     ) -> Self::T {
-        use crate::rustc_middle::ty::ClauseKind;
+        use crate::rustc_complete::ty::ClauseKind;
         match *self {
             ClauseKind::Trait(trait_object) => {
                 crate::ty::ClauseKind::Trait(trait_object.stable(tables, cx))
@@ -774,7 +774,7 @@ impl<'tcx> Stable<'tcx> for ty::ClosureKind {
     type T = crate::ty::ClosureKind;
 
     fn stable(&self, _: &mut Tables<'_, BridgeTys>, _: &CompilerCtxt<'_, BridgeTys>) -> Self::T {
-        use crate::rustc_middle::ty::ClosureKind::*;
+        use crate::rustc_complete::ty::ClosureKind::*;
         match self {
             Fn => crate::ty::ClosureKind::Fn,
             FnMut => crate::ty::ClosureKind::FnMut,
@@ -813,7 +813,7 @@ impl<'tcx> Stable<'tcx> for ty::AliasRelationDirection {
     type T = crate::ty::AliasRelationDirection;
 
     fn stable(&self, _: &mut Tables<'_, BridgeTys>, _: &CompilerCtxt<'_, BridgeTys>) -> Self::T {
-        use crate::rustc_middle::ty::AliasRelationDirection::*;
+        use crate::rustc_complete::ty::AliasRelationDirection::*;
         match self {
             Equate => crate::ty::AliasRelationDirection::Equate,
             Subtype => crate::ty::AliasRelationDirection::Subtype,
@@ -873,7 +873,7 @@ impl<'tcx> Stable<'tcx> for ty::ImplPolarity {
     type T = crate::ty::ImplPolarity;
 
     fn stable(&self, _: &mut Tables<'_, BridgeTys>, _: &CompilerCtxt<'_, BridgeTys>) -> Self::T {
-        use crate::rustc_middle::ty::ImplPolarity::*;
+        use crate::rustc_complete::ty::ImplPolarity::*;
         match self {
             Positive => crate::ty::ImplPolarity::Positive,
             Negative => crate::ty::ImplPolarity::Negative,
@@ -886,7 +886,7 @@ impl<'tcx> Stable<'tcx> for ty::PredicatePolarity {
     type T = crate::ty::PredicatePolarity;
 
     fn stable(&self, _: &mut Tables<'_, BridgeTys>, _: &CompilerCtxt<'_, BridgeTys>) -> Self::T {
-        use crate::rustc_middle::ty::PredicatePolarity::*;
+        use crate::rustc_complete::ty::PredicatePolarity::*;
         match self {
             Positive => crate::ty::PredicatePolarity::Positive,
             Negative => crate::ty::PredicatePolarity::Negative,

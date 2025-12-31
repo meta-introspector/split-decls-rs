@@ -2,13 +2,13 @@
 #[doc(hidden)]
 pub(super) use rustc_feature::{AttributeTemplate, AttributeType, template};
 #[doc(hidden)]
-pub(super) use crate::rustc_hir::attrs::AttributeKind;
+pub(super) use crate::rustc_complete::attrs::AttributeKind;
 #[doc(hidden)]
-pub(super) use crate::rustc_hir::lints::AttributeLintKind;
+pub(super) use crate::rustc_complete::lints::AttributeLintKind;
 #[doc(hidden)]
-pub(super) use crate::rustc_hir::{MethodKind, Target};
+pub(super) use crate::rustc_complete::{MethodKind, Target};
 #[doc(hidden)]
-pub(super) use crate::rustc_span::{DUMMY_SP, Ident, Span, Symbol, sym};
+pub(super) use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, sym};
 #[doc(hidden)]
 pub(super) use thin_vec::ThinVec;
 

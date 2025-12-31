@@ -5,8 +5,8 @@ use std::rc::Rc;
 use std::sync::Arc;
 
 use rustc_ast as ast;
-use crate::rustc_ast::tokenstream::TokenStream;
-use crate::rustc_ast::{join_path_idents, token};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{join_path_idents, token};
 use rustc_ast_pretty::pprust;
 use rustc_expand::base::{
     DummyResult, ExpandResult, ExtCtxt, MacEager, MacResult, MacroExpanderResult, resolve_path,
@@ -16,10 +16,10 @@ use rustc_lint_defs::BuiltinLintDiag;
 use rustc_parse::lexer::StripTokens;
 use rustc_parse::parser::ForceCollect;
 use rustc_parse::{new_parser_from_file, unwrap_or_emit_fatal, utf8_error};
-use crate::rustc_session::lint::builtin::INCOMPLETE_INCLUDE;
-use crate::rustc_session::parse::ParseSess;
-use crate::rustc_span::source_map::SourceMap;
-use crate::rustc_span::{ByteSymbol, Pos, Span, Symbol};
+use crate::rustc_complete::lint::builtin::INCOMPLETE_INCLUDE;
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{ByteSymbol, Pos, Span, Symbol};
 use smallvec::SmallVec;
 
 use crate::errors;
@@ -69,8 +69,8 @@ pub(crate) fn expand_file(
     let topmost = cx.expansion_cause().unwrap_or(sp);
     let loc = cx.source_map().lookup_char_pos(topmost.lo());
 
-    use crate::rustc_session::RemapFileNameExt;
-    use crate::rustc_session::config::RemapPathScopeComponents;
+    use crate::rustc_complete::RemapFileNameExt;
+    use crate::rustc_complete::config::RemapPathScopeComponents;
     ExpandResult::Ready(MacEager::expr(cx.expr_str(
         topmost,
         Symbol::intern(

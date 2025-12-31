@@ -13,7 +13,7 @@
 #[feature(rustdoc_internals)]
 // tidy-alphabetical-end
 
-use crate::rustc_middle::util::Providers;
+use crate::rustc_complete::util::Providers;
 
 #[cfg(debug_assertions)]
 

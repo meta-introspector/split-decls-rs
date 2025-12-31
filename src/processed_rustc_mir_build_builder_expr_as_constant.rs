@@ -2,15 +2,15 @@
 
 use rustc_abi::Size;
 use rustc_ast as ast;
-use crate::rustc_hir::LangItem;
-use crate::rustc_middle::mir::interpret::{CTFE_ALLOC_SALT, LitToConstInput, Scalar};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::thir::*;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::mir::interpret::{CTFE_ALLOC_SALT, LitToConstInput, Scalar};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::{
     self, CanonicalUserType, CanonicalUserTypeAnnotation, Ty, TyCtxt, TypeVisitableExt as _,
     UserTypeAnnotationIndex,
 };
-use crate::rustc_middle::{bug, mir, span_bug};
+use crate::rustc_complete::{bug, mir, span_bug};
 use tracing::{instrument, trace};
 
 use crate::builder::{Builder, parse_float_into_constval};

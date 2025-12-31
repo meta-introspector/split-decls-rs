@@ -8,14 +8,14 @@
 // is computed by selecting an idea from this table.
 
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::find_attr;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::fast_reject::{SimplifiedType, TreatParams, simplify_type};
-use crate::rustc_middle::ty::{self, CrateInherentImpls, Ty, TyCtxt};
-use crate::rustc_span::{ErrorGuaranteed, sym};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::find_attr;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::fast_reject::{SimplifiedType, TreatParams, simplify_type};
+use crate::rustc_complete::ty::{self, CrateInherentImpls, Ty, TyCtxt};
+use crate::rustc_complete::{ErrorGuaranteed, sym};
 
 use crate::errors;
 

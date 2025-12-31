@@ -17,28 +17,28 @@ use errors::{
     ItemIsPrivate, PrivateInterfacesOrBoundsLint, ReportEffectiveVisibility, UnnameableTypesLint,
     UnnamedItemIsPrivate,
 };
-use crate::rustc_ast::MacroDef;
-use crate::rustc_ast::visit::{VisitorResult, try_visit};
+use crate::rustc_complete::MacroDef;
+use crate::rustc_complete::visit::{VisitorResult, try_visit};
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::intern::Interned;
-use rustc_errors::{MultiSpan, listify};
+use crate::rustc_complete::{MultiSpan, listify};
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::def_id::{DefId, LocalDefId, LocalModDefId};
-use crate::rustc_hir::intravisit::{self, InferKind, Visitor};
-use crate::rustc_hir::{AmbigArg, ForeignItemId, ItemId, OwnerId, PatKind, find_attr};
-use crate::rustc_middle::middle::privacy::{EffectiveVisibilities, EffectiveVisibility, Level};
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::print::PrintTraitRefExt as _;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::def_id::{DefId, LocalDefId, LocalModDefId};
+use crate::rustc_complete::intravisit::{self, InferKind, Visitor};
+use crate::rustc_complete::{AmbigArg, ForeignItemId, ItemId, OwnerId, PatKind, find_attr};
+use crate::rustc_complete::middle::privacy::{EffectiveVisibilities, EffectiveVisibility, Level};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::print::PrintTraitRefExt as _;
+use crate::rustc_complete::ty::{
     self, Const, GenericParamDefKind, TraitRef, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
     TypeVisitor,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::lint;
-use crate::rustc_span::hygiene::Transparency;
-use crate::rustc_span::{Ident, Span, Symbol, sym};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::hygiene::Transparency;
+use crate::rustc_complete::{Ident, Span, Symbol, sym};
 use tracing::debug;
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }

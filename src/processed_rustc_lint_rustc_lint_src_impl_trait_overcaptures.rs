@@ -3,30 +3,30 @@ use std::cell::LazyCell;
 
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap, FxIndexSet};
 use crate::rustc_data_structures::unord::UnordSet;
-use rustc_errors::{LintDiagnostic, Subdiagnostic};
+use crate::rustc_complete::{LintDiagnostic, Subdiagnostic};
 use rustc_hir as hir;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_infer::infer::outlives::env::OutlivesEnvironment;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::infer::outlives::env::OutlivesEnvironment;
 use rustc_macros::LintDiagnostic;
-use crate::rustc_middle::middle::resolve_bound_vars::ResolvedArg;
-use crate::rustc_middle::ty::relate::{
+use crate::rustc_complete::middle::resolve_bound_vars::ResolvedArg;
+use crate::rustc_complete::ty::relate::{
     Relate, RelateResult, TypeRelation, structurally_relate_consts, structurally_relate_tys,
 };
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::lint::FutureIncompatibilityReason;
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::{Span, Symbol};
-use rustc_trait_selection::errors::{
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::lint::FutureIncompatibilityReason;
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{Span, Symbol};
+use crate::rustc_trait_selection::errors::{
     AddPreciseCapturingForOvercapture, impl_trait_overcapture_suggestion,
 };
-use rustc_trait_selection::regions::OutlivesEnvironmentBuildExt;
-use rustc_trait_selection::traits::ObligationCtxt;
+use crate::rustc_trait_selection::regions::OutlivesEnvironmentBuildExt;
+use crate::rustc_trait_selection::traits::ObligationCtxt;
 
 use crate::{LateContext, LateLintPass, fluent_generated as fluent};
 
@@ -435,7 +435,7 @@ struct ImplTraitOvercapturesLint<'tcx> {
 }
 
 impl<'a> LintDiagnostic<'a, ()> for ImplTraitOvercapturesLint<'_> {
-    fn decorate_lint<'b>(self, diag: &'b mut rustc_errors::Diag<'a, ()>) {
+    fn decorate_lint<'b>(self, diag: &'b mut crate::rustc_errors::Diag<'a, ()>) {
         diag.primary_message(fluent::lint_impl_trait_overcaptures);
         diag.arg("self_ty", self.self_ty.to_string())
             .arg("num_captured", self.num_captured)

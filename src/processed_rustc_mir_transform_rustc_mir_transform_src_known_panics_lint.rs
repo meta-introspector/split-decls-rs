@@ -10,16 +10,16 @@ use rustc_const_eval::interpret::{
     ImmTy, InterpCx, InterpResult, Projectable, Scalar, format_interp_error, interp_ok,
 };
 use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_hir::HirId;
-use crate::rustc_hir::def::DefKind;
+use crate::rustc_complete::HirId;
+use crate::rustc_complete::def::DefKind;
 use rustc_index::IndexVec;
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::layout::{LayoutError, LayoutOf, LayoutOfHelpers, TyAndLayout};
-use crate::rustc_middle::ty::{self, ConstInt, ScalarInt, Ty, TyCtxt, TypeVisitableExt};
-use crate::rustc_span::Span;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::layout::{LayoutError, LayoutOf, LayoutOfHelpers, TyAndLayout};
+use crate::rustc_complete::ty::{self, ConstInt, ScalarInt, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument, trace};
 
 use crate::errors::{AssertLint, AssertLintKind};
@@ -541,7 +541,7 @@ impl<'mir, 'tcx> ConstPropagator<'mir, 'tcx> {
         if !dest.projection.is_empty() {
             return None;
         }
-        use crate::rustc_middle::mir::Rvalue::*;
+        use crate::rustc_complete::mir::Rvalue::*;
         let layout = self.ecx.layout_of(dest.ty(self.body, self.tcx).ty).ok()?;
         trace!(?layout);
 
@@ -923,7 +923,7 @@ impl CanConstProp {
 
 impl<'tcx> Visitor<'tcx> for CanConstProp {
     fn visit_place(&mut self, place: &Place<'tcx>, mut context: PlaceContext, loc: Location) {
-        use crate::rustc_middle::mir::visit::PlaceContext::*;
+        use crate::rustc_complete::mir::visit::PlaceContext::*;
 
         // Dereferencing just read the address of `place.local`.
         if place.projection.first() == Some(&PlaceElem::Deref) {
@@ -935,7 +935,7 @@ impl<'tcx> Visitor<'tcx> for CanConstProp {
     }
 
     fn visit_local(&mut self, local: Local, context: PlaceContext, _: Location) {
-        use crate::rustc_middle::mir::visit::PlaceContext::*;
+        use crate::rustc_complete::mir::visit::PlaceContext::*;
         match context {
             // These are just stores, where the storing is not propagatable, but there may be later
             // mutations of the same local via `Store`

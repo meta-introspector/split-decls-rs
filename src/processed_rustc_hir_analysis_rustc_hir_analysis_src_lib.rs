@@ -78,16 +78,16 @@ This API is completely unstable and subject to change.
 
 pub use errors::NoVariantNamed;
 use rustc_abi::{CVariadicStatus, ExternAbi};
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::lints::DelayedLint;
-use crate::rustc_hir::{self as hir};
-use crate::rustc_middle::middle;
-use crate::rustc_middle::mir::interpret::GlobalId;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{self, Const, Ty, TyCtxt};
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::{ErrorGuaranteed, Span};
-use rustc_trait_selection::traits;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::lints::DelayedLint;
+use crate::rustc_complete::{self as hir};
+use crate::rustc_complete::middle;
+use crate::rustc_complete::mir::interpret::GlobalId;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, Const, Ty, TyCtxt};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{ErrorGuaranteed, Span};
+use crate::rustc_trait_selection::traits;
 
 pub use crate::collect::suggest_impl_trait;
 use crate::hir_ty_lowering::{FeedConstTy, HirTyLowerer};

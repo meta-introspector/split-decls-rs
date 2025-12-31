@@ -6,8 +6,8 @@ use std::path::Path;
 
 use polonius_engine::{AllFacts, Atom, Output};
 use rustc_macros::extension;
-use crate::rustc_middle::mir::Local;
-use crate::rustc_middle::ty::{RegionVid, TyCtxt};
+use crate::rustc_complete::mir::Local;
+use crate::rustc_complete::ty::{RegionVid, TyCtxt};
 use rustc_mir_dataflow::move_paths::MovePathIndex;
 
 use super::{LocationIndex, PoloniusLocationTable};

@@ -1,9 +1,9 @@
 use std::ops::Range;
 
 use rustc_abi::Size;
-use crate::rustc_middle::mir;
-use crate::rustc_middle::ty::{ExistentialTraitRef, Instance, Ty};
-use crate::rustc_span::{SourceFile, Span, Symbol};
+use crate::rustc_complete::mir;
+use crate::rustc_complete::ty::{ExistentialTraitRef, Instance, Ty};
+use crate::rustc_complete::{SourceFile, Span, Symbol};
 use rustc_target::callconv::FnAbi;
 
 use super::BackendTypes;

@@ -1,14 +1,14 @@
 #[cfg(feature = "master")]
 use gccjit::{FnAttribute, VarAttribute};
 use rustc_codegen_ssa::traits::PreDefineCodegenMethods;
-use crate::rustc_hir::attrs::Linkage;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LOCAL_CRATE};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use crate::rustc_middle::mir::mono::Visibility;
-use crate::rustc_middle::ty::layout::{FnAbiOf, HasTypingEnv, LayoutOf};
-use crate::rustc_middle::ty::{self, Instance, TypeVisitableExt};
+use crate::rustc_complete::attrs::Linkage;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::mir::mono::Visibility;
+use crate::rustc_complete::ty::layout::{FnAbiOf, HasTypingEnv, LayoutOf};
+use crate::rustc_complete::ty::{self, Instance, TypeVisitableExt};
 
 use crate::context::CodegenCx;
 use crate::type_of::LayoutGccExt;

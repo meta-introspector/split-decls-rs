@@ -3,24 +3,24 @@ use std::ops::{Deref, DerefMut};
 
 use ast::token::IdentIsRaw;
 use rustc_ast as ast;
-use crate::rustc_ast::token::{self, Lit, LitKind, Token, TokenKind};
-use crate::rustc_ast::util::parser::AssocOp;
-use crate::rustc_ast::{
+use crate::rustc_complete::token::{self, Lit, LitKind, Token, TokenKind};
+use crate::rustc_complete::util::parser::AssocOp;
+use crate::rustc_complete::{
     AngleBracketedArg, AngleBracketedArgs, AnonConst, AttrVec, BinOpKind, BindingMode, Block,
     BlockCheckMode, Expr, ExprKind, GenericArg, Generics, Item, ItemKind, Param, Pat, PatKind,
     Path, PathSegment, QSelf, Recovered, Ty, TyKind,
 };
 use rustc_ast_pretty::pprust;
 use crate::rustc_data_structures::fx::FxHashSet;
-use rustc_errors::{
+use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, ErrorGuaranteed, PResult, Subdiagnostic, Suggestions,
     pluralize,
 };
-use crate::rustc_session::errors::ExprParenthesesNeeded;
-use crate::rustc_span::edit_distance::find_best_match_for_name;
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::symbol::used_keywords;
-use crate::rustc_span::{BytePos, DUMMY_SP, Ident, Span, SpanSnippetError, Symbol, kw, sym};
+use crate::rustc_complete::errors::ExprParenthesesNeeded;
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::symbol::used_keywords;
+use crate::rustc_complete::{BytePos, DUMMY_SP, Ident, Span, SpanSnippetError, Symbol, kw, sym};
 use thin_vec::{ThinVec, thin_vec};
 use tracing::{debug, trace};
 

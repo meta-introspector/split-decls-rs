@@ -27,13 +27,13 @@ use std::borrow::Cow;
 use std::fmt;
 
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-use rustc_errors::{DiagArgValue, IntoDiagArg};
+use crate::rustc_complete::{DiagArgValue, IntoDiagArg};
 use rustc_hir as hir;
-use crate::rustc_hir::def_id::LOCAL_CRATE;
-use crate::rustc_middle::mir::mono::CodegenUnitNameBuilder;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::Session;
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::def_id::LOCAL_CRATE;
+use crate::rustc_complete::mir::mono::CodegenUnitNameBuilder;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::{Span, Symbol, sym};
 use thin_vec::ThinVec;
 use tracing::debug;
 

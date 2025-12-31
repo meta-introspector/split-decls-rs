@@ -1,6 +1,6 @@
 use std::io;
 
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::ty::TyCtxt;
 
 use super::run;
 

@@ -1,18 +1,18 @@
 use std::{mem, slice};
 
-use crate::rustc_ast::visit::{self, Visitor};
-use crate::rustc_ast::{self as ast, HasNodeId, NodeId, attr};
+use crate::rustc_complete::visit::{self, Visitor};
+use crate::rustc_complete::{self as ast, HasNodeId, NodeId, attr};
 use rustc_ast_pretty::pprust;
 use rustc_attr_parsing::AttributeParser;
-use rustc_errors::DiagCtxtHandle;
+use crate::rustc_complete::DiagCtxtHandle;
 use rustc_expand::base::{ExtCtxt, ResolverExpand};
 use rustc_expand::expand::{AstFragment, ExpansionConfig};
 use rustc_feature::Features;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_session::Session;
-use crate::rustc_span::hygiene::AstPass;
-use crate::rustc_span::source_map::SourceMap;
-use crate::rustc_span::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::hygiene::AstPass;
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
 use smallvec::smallvec;
 use thin_vec::{ThinVec, thin_vec};
 

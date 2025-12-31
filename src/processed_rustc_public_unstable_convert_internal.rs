@@ -5,7 +5,7 @@
 
 // Prefer importing rustc_public over internal rustc constructs to make this file more readable.
 
-use crate::rustc_middle::ty::{self as rustc_ty, Const as InternalConst, Ty as InternalTy};
+use crate::rustc_complete::ty::{self as rustc_ty, Const as InternalConst, Ty as InternalTy};
 use rustc_public_bridge::Tables;
 
 use crate::abi::Layout;
@@ -376,7 +376,7 @@ impl RustcInternal for MonoItem {
         tables: &mut Tables<'_, BridgeTys>,
         tcx: impl InternalCx<'tcx>,
     ) -> Self::T<'tcx> {
-        use crate::rustc_middle::mir::mono as rustc_mono;
+        use crate::rustc_complete::mir::mono as rustc_mono;
         match self {
             MonoItem::Fn(instance) => rustc_mono::MonoItem::Fn(instance.internal(tables, tcx)),
             MonoItem::Static(def) => rustc_mono::MonoItem::Static(def.internal(tables, tcx)),

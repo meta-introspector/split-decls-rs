@@ -1,5 +1,5 @@
-use crate::rustc_middle::ty;
-use crate::rustc_span::Span;
+use crate::rustc_complete::ty;
+use crate::rustc_complete::Span;
 
 use super::BackendTypes;
 use crate::mir::operand::OperandRef;

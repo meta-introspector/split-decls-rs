@@ -222,14 +222,14 @@ use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 use crate::rustc_data_structures::memmap::Mmap;
 use crate::rustc_data_structures::owned_slice::{OwnedSlice, slice_owned};
 use crate::rustc_data_structures::svh::Svh;
-use rustc_errors::{DiagArgValue, IntoDiagArg};
+use crate::rustc_complete::{DiagArgValue, IntoDiagArg};
 use rustc_fs_util::try_canonicalize;
-use crate::rustc_session::cstore::CrateSource;
-use crate::rustc_session::filesearch::FileSearch;
-use crate::rustc_session::search_paths::PathKind;
-use crate::rustc_session::utils::CanonicalizedPath;
-use crate::rustc_session::{Session, config};
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::cstore::CrateSource;
+use crate::rustc_complete::filesearch::FileSearch;
+use crate::rustc_complete::search_paths::PathKind;
+use crate::rustc_complete::utils::CanonicalizedPath;
+use crate::rustc_complete::{Session, config};
+use crate::rustc_complete::{Span, Symbol};
 use rustc_target::spec::{Target, TargetTuple};
 use tempfile::Builder as TempFileBuilder;
 use tracing::{debug, info};
@@ -290,7 +290,7 @@ impl fmt::Display for CrateFlavor {
 }
 
 impl IntoDiagArg for CrateFlavor {
-    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         match self {
             CrateFlavor::Rlib => DiagArgValue::Str(Cow::Borrowed("rlib")),
             CrateFlavor::Rmeta => DiagArgValue::Str(Cow::Borrowed("rmeta")),

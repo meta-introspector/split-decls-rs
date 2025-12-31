@@ -1,19 +1,19 @@
 use std::fmt;
 
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_infer::infer::canonical::{Canonical, CanonicalQueryInput, QueryResponse};
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::traits::query::NoSolution;
-use crate::rustc_middle::ty::{Clause, FnSig, ParamEnvAnd, PolyFnSig, Ty, TyCtxt, TypeFoldable};
-use crate::rustc_span::DUMMY_SP;
-use rustc_trait_selection::infer::InferCtxtBuilderExt;
-use rustc_trait_selection::traits::query::normalize::QueryNormalizeExt;
-use rustc_trait_selection::traits::query::type_op::ascribe_user_type::{
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::infer::canonical::{Canonical, CanonicalQueryInput, QueryResponse};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::{Clause, FnSig, ParamEnvAnd, PolyFnSig, Ty, TyCtxt, TypeFoldable};
+use crate::rustc_complete::DUMMY_SP;
+use crate::rustc_trait_selection::infer::InferCtxtBuilderExt;
+use crate::rustc_trait_selection::traits::query::normalize::QueryNormalizeExt;
+use crate::rustc_trait_selection::traits::query::type_op::ascribe_user_type::{
     AscribeUserType, type_op_ascribe_user_type_with_span,
 };
-use rustc_trait_selection::traits::query::type_op::normalize::Normalize;
-use rustc_trait_selection::traits::query::type_op::prove_predicate::ProvePredicate;
-use rustc_trait_selection::traits::{Normalized, Obligation, ObligationCause, ObligationCtxt};
+use crate::rustc_trait_selection::traits::query::type_op::normalize::Normalize;
+use crate::rustc_trait_selection::traits::query::type_op::prove_predicate::ProvePredicate;
+use crate::rustc_trait_selection::traits::{Normalized, Obligation, ObligationCause, ObligationCtxt};
 
 pub(crate) fn provide(p: &mut Providers) {
     *p = Providers {

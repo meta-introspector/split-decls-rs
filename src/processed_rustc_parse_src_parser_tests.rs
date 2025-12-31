@@ -8,16 +8,16 @@ use std::sync::{Arc, Mutex};
 use std::{io, str};
 
 use ast::token::IdentIsRaw;
-use crate::rustc_ast::token::{self, Delimiter, Token};
-use crate::rustc_ast::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
-use crate::rustc_ast::{self as ast, PatKind, visit};
+use crate::rustc_complete::token::{self, Delimiter, Token};
+use crate::rustc_complete::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
+use crate::rustc_complete::{self as ast, PatKind, visit};
 use rustc_ast_pretty::pprust::item_to_string;
-use rustc_errors::emitter::{HumanEmitter, OutputTheme};
-use rustc_errors::translation::Translator;
-use rustc_errors::{DiagCtxt, MultiSpan, PResult};
-use crate::rustc_session::parse::ParseSess;
-use crate::rustc_span::source_map::{FilePathMapping, SourceMap};
-use crate::rustc_span::{
+use crate::rustc_complete::emitter::{HumanEmitter, OutputTheme};
+use crate::rustc_complete::translation::Translator;
+use crate::rustc_complete::{DiagCtxt, MultiSpan, PResult};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::source_map::{FilePathMapping, SourceMap};
+use crate::rustc_complete::{
     BytePos, FileName, Pos, Span, Symbol, create_default_session_globals_then, kw, sym,
 };
 use termcolor::WriteColor;

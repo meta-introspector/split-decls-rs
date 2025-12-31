@@ -8,12 +8,12 @@ use std::ops::{ControlFlow, Range};
 
 use hir::def::{CtorKind, DefKind};
 use rustc_abi::{FIRST_VARIANT, FieldIdx, VariantIdx};
-use rustc_errors::{ErrorGuaranteed, MultiSpan};
+use crate::rustc_complete::{ErrorGuaranteed, MultiSpan};
 use rustc_hir as hir;
-use crate::rustc_hir::LangItem;
-use crate::rustc_hir::def_id::DefId;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, extension};
-use crate::rustc_span::{DUMMY_SP, Span, Symbol, sym};
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol, sym};
 use rustc_type_ir::TyKind::*;
 use rustc_type_ir::solve::SizedTraitKind;
 use rustc_type_ir::walk::TypeWalker;

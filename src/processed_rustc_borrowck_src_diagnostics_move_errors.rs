@@ -2,17 +2,17 @@
 #[allow(rustc::untranslatable_diagnostic)]
 
 use crate::rustc_data_structures::fx::FxHashSet;
-use rustc_errors::{Applicability, Diag};
-use crate::rustc_hir::intravisit::Visitor;
-use crate::rustc_hir::{self as hir, CaptureBy, ExprKind, HirId, Node};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::{Applicability, Diag};
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::{self as hir, CaptureBy, ExprKind, HirId, Node};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 use rustc_mir_dataflow::move_paths::{LookupResult, MovePathIndex};
-use crate::rustc_span::def_id::DefId;
-use crate::rustc_span::{BytePos, DUMMY_SP, ExpnKind, MacroKind, Span};
-use rustc_trait_selection::error_reporting::traits::FindExprBySpan;
-use rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{BytePos, DUMMY_SP, ExpnKind, MacroKind, Span};
+use crate::rustc_trait_selection::error_reporting::traits::FindExprBySpan;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::debug;
 
 use crate::MirBorrowckCtxt;

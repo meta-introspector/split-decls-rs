@@ -1,7 +1,7 @@
 use std::str;
 
-use crate::rustc_span::BytePos;
-use crate::rustc_span::source_map::FilePathMapping;
+use crate::rustc_complete::BytePos;
+use crate::rustc_complete::source_map::FilePathMapping;
 use serde::Deserialize;
 
 use super::*;

@@ -204,7 +204,7 @@ pub(super) fn codegen_simd_intrinsic_call<'tcx>(
             // FIXME: this is a terrible abstraction-breaking hack.
             // Find a way to reuse `immediate_const_vector` from `codegen_ssa` instead.
             let indexes = {
-                use crate::rustc_middle::mir::interpret::*;
+                use crate::rustc_complete::mir::interpret::*;
                 let idx_const = if let Some(const_) = idx.node.constant() {
                     crate::constant::eval_mir_constant(fx, const_).0
                 } else {

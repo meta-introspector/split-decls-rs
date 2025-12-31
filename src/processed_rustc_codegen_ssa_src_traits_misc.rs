@@ -1,8 +1,8 @@
 use std::cell::RefCell;
 
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_middle::ty::{self, Instance, Ty};
-use crate::rustc_session::Session;
+use crate::rustc_complete::ty::{self, Instance, Ty};
+use crate::rustc_complete::Session;
 
 use super::BackendTypes;
 

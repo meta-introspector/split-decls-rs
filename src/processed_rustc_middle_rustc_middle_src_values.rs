@@ -3,14 +3,14 @@ use std::fmt::Write;
 use std::ops::ControlFlow;
 
 use crate::rustc_data_structures::fx::FxHashSet;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, MultiSpan, pluralize, struct_span_code_err};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, MultiSpan, pluralize, struct_span_code_err};
 use rustc_hir as hir;
-use crate::rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::def::{DefKind, Res};
 use rustc_query_system::Value;
 use rustc_query_system::query::{CycleError, report_cycle};
-use crate::rustc_span::def_id::LocalDefId;
-use crate::rustc_span::{ErrorGuaranteed, Span};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{ErrorGuaranteed, Span};
 
 use crate::dep_graph::dep_kinds;
 use crate::query::plumbing::CyclePlaceholder;

@@ -7,8 +7,8 @@ use std::path::{Path, PathBuf};
 
 use crate::rustc_data_structures::unord::UnordMap;
 use rustc_fs_util::link_or_copy;
-use crate::rustc_middle::dep_graph::{WorkProduct, WorkProductId};
-use crate::rustc_session::Session;
+use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
+use crate::rustc_complete::Session;
 use tracing::debug;
 
 use crate::errors;

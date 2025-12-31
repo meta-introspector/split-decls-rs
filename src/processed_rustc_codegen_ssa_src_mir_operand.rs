@@ -5,12 +5,12 @@ use rustc_abi as abi;
 use rustc_abi::{
     Align, BackendRepr, FIRST_VARIANT, FieldIdx, Primitive, Size, TagEncoding, VariantIdx, Variants,
 };
-use crate::rustc_middle::mir::interpret::{Pointer, Scalar, alloc_range};
-use crate::rustc_middle::mir::{self, ConstValue};
-use crate::rustc_middle::ty::Ty;
-use crate::rustc_middle::ty::layout::{LayoutOf, TyAndLayout};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::config::OptLevel;
+use crate::rustc_complete::mir::interpret::{Pointer, Scalar, alloc_range};
+use crate::rustc_complete::mir::{self, ConstValue};
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::config::OptLevel;
 use tracing::{debug, instrument};
 
 use super::place::{PlaceRef, PlaceValue};

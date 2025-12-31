@@ -15,7 +15,7 @@ pub use persist::{
     in_incr_comp_dir, in_incr_comp_dir_sess, load_query_result_cache, save_work_product_index,
     setup_dep_graph,
 };
-use crate::rustc_middle::util::Providers;
+use crate::rustc_complete::util::Providers;
 
 #[allow(missing_docs)]
 pub fn provide(providers: &mut Providers) {

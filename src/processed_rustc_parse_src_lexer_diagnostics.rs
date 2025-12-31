@@ -1,8 +1,8 @@
-use crate::rustc_ast::token::Delimiter;
-use rustc_errors::Diag;
-use crate::rustc_session::parse::ParseSess;
-use crate::rustc_span::Span;
-use crate::rustc_span::source_map::SourceMap;
+use crate::rustc_complete::token::Delimiter;
+use crate::rustc_complete::Diag;
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::source_map::SourceMap;
 
 use super::UnmatchedDelim;
 use crate::errors::MismatchedClosingDelimiter;

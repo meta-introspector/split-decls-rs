@@ -1,4 +1,4 @@
-use crate::rustc_middle::mir::{self, BasicBlock, Location, traversal};
+use crate::rustc_complete::mir::{self, BasicBlock, Location, traversal};
 
 use super::{Analysis, Direction, Results};
 

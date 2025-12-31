@@ -1,8 +1,8 @@
 #[cfg(feature = "master")]
 use gccjit::{FnAttribute, Visibility};
 use gccjit::{Function, FunctionType};
-use crate::rustc_middle::ty::layout::{FnAbiOf, HasTyCtxt};
-use crate::rustc_middle::ty::{self, Instance, TypeVisitableExt};
+use crate::rustc_complete::ty::layout::{FnAbiOf, HasTyCtxt};
+use crate::rustc_complete::ty::{self, Instance, TypeVisitableExt};
 
 use crate::attributes;
 use crate::context::CodegenCx;

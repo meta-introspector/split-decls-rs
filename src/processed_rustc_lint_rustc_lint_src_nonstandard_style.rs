@@ -1,17 +1,17 @@
 use rustc_abi::ExternAbi;
 use rustc_attr_parsing::AttributeParser;
-use rustc_errors::Applicability;
-use crate::rustc_hir::attrs::{AttributeKind, ReprAttr};
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::intravisit::{FnKind, Visitor};
-use crate::rustc_hir::{Attribute, GenericParamKind, PatExprKind, PatKind, find_attr};
-use crate::rustc_middle::hir::nested_filter::All;
-use crate::rustc_middle::ty::AssocContainer;
-use crate::rustc_session::config::CrateType;
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::def_id::LocalDefId;
-use crate::rustc_span::{BytePos, Ident, Span, sym};
+use crate::rustc_complete::Applicability;
+use crate::rustc_complete::attrs::{AttributeKind, ReprAttr};
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::intravisit::{FnKind, Visitor};
+use crate::rustc_complete::{Attribute, GenericParamKind, PatExprKind, PatKind, find_attr};
+use crate::rustc_complete::hir::nested_filter::All;
+use crate::rustc_complete::ty::AssocContainer;
+use crate::rustc_complete::config::CrateType;
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{BytePos, Ident, Span, sym};
 use {rustc_ast as ast, rustc_hir as hir};
 
 use crate::lints::{

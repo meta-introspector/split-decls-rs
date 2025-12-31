@@ -50,7 +50,7 @@ use back::lto::{ThinBuffer, ThinData};
 use gccjit::{CType, Context, OptimizationLevel};
 #[cfg(feature = "master")]
 use gccjit::{TargetInfo, Version};
-use crate::rustc_ast::expand::allocator::AllocatorKind;
+use crate::rustc_complete::expand::allocator::AllocatorKind;
 use rustc_codegen_ssa::back::lto::{SerializedModule, ThinModule};
 use rustc_codegen_ssa::back::write::{
     CodegenContext, FatLtoInput, ModuleConfig, TargetMachineFactoryFn,
@@ -61,13 +61,13 @@ use rustc_codegen_ssa::traits::{CodegenBackend, ExtraBackendMethods, WriteBacken
 use rustc_codegen_ssa::{CodegenResults, CompiledModule, ModuleCodegen, TargetConfig};
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::sync::IntoDynSyncSend;
-use rustc_errors::DiagCtxtHandle;
-use crate::rustc_middle::dep_graph::{WorkProduct, WorkProductId};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_middle::util::Providers;
-use crate::rustc_session::Session;
-use crate::rustc_session::config::{OptLevel, OutputFilenames};
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::DiagCtxtHandle;
+use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::util::Providers;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{OptLevel, OutputFilenames};
+use crate::rustc_complete::Symbol;
 use rustc_target::spec::RelocModel;
 use tempfile::TempDir;
 

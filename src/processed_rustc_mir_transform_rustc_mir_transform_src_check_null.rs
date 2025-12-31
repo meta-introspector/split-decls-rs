@@ -1,8 +1,8 @@
 use rustc_index::IndexVec;
-use crate::rustc_middle::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{Ty, TyCtxt};
-use crate::rustc_session::Session;
+use crate::rustc_complete::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{Ty, TyCtxt};
+use crate::rustc_complete::Session;
 
 use crate::check_pointers::{BorrowedFieldProjectionMode, PointerCheck, check_pointers};
 

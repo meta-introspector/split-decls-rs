@@ -1,9 +1,9 @@
 use rustc_abi::Size;
-use crate::rustc_ast::{self as ast};
-use crate::rustc_hir::LangItem;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::interpret::LitToConstInput;
-use crate::rustc_middle::ty::{self, ScalarInt, TyCtxt, TypeVisitableExt as _};
+use crate::rustc_complete::{self as ast};
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::interpret::LitToConstInput;
+use crate::rustc_complete::ty::{self, ScalarInt, TyCtxt, TypeVisitableExt as _};
 use tracing::trace;
 
 use crate::builder::parse_float_into_scalar;

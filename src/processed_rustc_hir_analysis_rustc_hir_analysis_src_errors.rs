@@ -1,15 +1,15 @@
 // Errors emitted by `rustc_hir_analysis`.
 
 use rustc_abi::ExternAbi;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, DiagSymbolList, Diagnostic, EmissionGuarantee, Level,
     MultiSpan,
 };
-use crate::rustc_hir::limit::Limit;
+use crate::rustc_complete::limit::Limit;
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-use crate::rustc_middle::ty::Ty;
-use crate::rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::{Ident, Span, Symbol};
 
 use crate::fluent_generated as fluent;
 

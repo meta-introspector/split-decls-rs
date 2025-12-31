@@ -1,18 +1,18 @@
-use crate::rustc_ast::Path;
+use crate::rustc_complete::Path;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, DiagMessage, DiagStyledString, Diagnostic,
     EmissionGuarantee, IntoDiagArg, Level, MultiSpan, Subdiagnostic,
 };
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::intravisit::{Visitor, VisitorExt, walk_ty};
-use crate::rustc_hir::{self as hir, AmbigArg, FnRetTy, GenericParamKind, Node};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::intravisit::{Visitor, VisitorExt, walk_ty};
+use crate::rustc_complete::{self as hir, AmbigArg, FnRetTy, GenericParamKind, Node};
 use rustc_macros::{Diagnostic, Subdiagnostic};
-use crate::rustc_middle::ty::print::{PrintTraitRefExt as _, TraitRefPrintOnlyTraitPath};
-use crate::rustc_middle::ty::{self, Binder, ClosureKind, FnSig, GenericArg, Region, Ty, TyCtxt};
-use crate::rustc_span::{BytePos, Ident, Span, Symbol, kw};
+use crate::rustc_complete::ty::print::{PrintTraitRefExt as _, TraitRefPrintOnlyTraitPath};
+use crate::rustc_complete::ty::{self, Binder, ClosureKind, FnSig, GenericArg, Region, Ty, TyCtxt};
+use crate::rustc_complete::{BytePos, Ident, Span, Symbol, kw};
 
 use crate::error_reporting::infer::ObligationCauseAsDiagArg;
 use crate::error_reporting::infer::need_type_info::UnderspecifiedArgKind;
@@ -778,7 +778,7 @@ pub enum TyOrSig<'tcx> {
 }
 
 impl IntoDiagArg for TyOrSig<'_> {
-    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         match self {
             TyOrSig::Ty(ty) => ty.into_diag_arg(path),
             TyOrSig::ClosureSig(sig) => sig.into_diag_arg(path),
@@ -1505,7 +1505,7 @@ impl Subdiagnostic for SuggestTuplePatternMany {
                     (self.cause_span.shrink_to_hi(), ")".to_string()),
                 ]
             }),
-            rustc_errors::Applicability::MaybeIncorrect,
+            crate::rustc_errors::Applicability::MaybeIncorrect,
         );
     }
 }

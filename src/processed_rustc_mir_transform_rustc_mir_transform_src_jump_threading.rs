@@ -41,14 +41,14 @@ use rustc_const_eval::interpret::{ImmTy, Immediate, InterpCx, OpTy, Projectable}
 use crate::rustc_data_structures::fx::FxHashSet;
 use rustc_index::IndexVec;
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::interpret::Scalar;
-use crate::rustc_middle::mir::visit::Visitor;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, ScalarInt, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::interpret::Scalar;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, ScalarInt, TyCtxt};
 use rustc_mir_dataflow::lattice::HasBottom;
 use rustc_mir_dataflow::value_analysis::{Map, PlaceIndex, State, TrackElem};
-use crate::rustc_span::DUMMY_SP;
+use crate::rustc_complete::DUMMY_SP;
 use tracing::{debug, instrument, trace};
 
 use crate::cost_checker::CostChecker;

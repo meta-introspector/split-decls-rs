@@ -1,7 +1,7 @@
 use crate::rustc_data_structures::owned_slice::OwnedSlice;
-use crate::rustc_hir::def_path_hash_map::{Config as HashMapConfig, DefPathHashMap};
+use crate::rustc_complete::def_path_hash_map::{Config as HashMapConfig, DefPathHashMap};
 use rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
-use crate::rustc_span::def_id::{DefIndex, DefPathHash};
+use crate::rustc_complete::def_id::{DefIndex, DefPathHash};
 
 use crate::rmeta::{DecodeContext, EncodeContext};
 

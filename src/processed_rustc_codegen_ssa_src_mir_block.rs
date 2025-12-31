@@ -2,18 +2,18 @@ use std::cmp;
 
 use rustc_abi::{Align, BackendRepr, ExternAbi, HasDataLayout, Reg, Size, WrappingRange};
 use rustc_ast as ast;
-use crate::rustc_ast::{InlineAsmOptions, InlineAsmTemplatePiece};
+use crate::rustc_complete::{InlineAsmOptions, InlineAsmTemplatePiece};
 use crate::rustc_data_structures::packed::Pu128;
-use crate::rustc_hir::lang_items::LangItem;
+use crate::rustc_complete::lang_items::LangItem;
 use rustc_lint_defs::builtin::TAIL_CALL_TRACK_CALLER;
-use crate::rustc_middle::mir::{self, AssertKind, InlineAsmMacro, SwitchTargets, UnwindTerminateReason};
-use crate::rustc_middle::ty::layout::{HasTyCtxt, LayoutOf, ValidityRequirement};
-use crate::rustc_middle::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
-use crate::rustc_middle::ty::{self, Instance, Ty};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::config::OptLevel;
-use crate::rustc_span::Span;
-use crate::rustc_span::source_map::Spanned;
+use crate::rustc_complete::mir::{self, AssertKind, InlineAsmMacro, SwitchTargets, UnwindTerminateReason};
+use crate::rustc_complete::ty::layout::{HasTyCtxt, LayoutOf, ValidityRequirement};
+use crate::rustc_complete::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
+use crate::rustc_complete::ty::{self, Instance, Ty};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::config::OptLevel;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::source_map::Spanned;
 use rustc_target::callconv::{ArgAbi, CastTarget, FnAbi, PassMode};
 use tracing::{debug, info};
 

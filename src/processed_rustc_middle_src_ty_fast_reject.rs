@@ -1,4 +1,4 @@
-use crate::rustc_hir::def_id::DefId;
+use crate::rustc_complete::def_id::DefId;
 pub use rustc_type_ir::fast_reject::*;
 
 use super::TyCtxt;

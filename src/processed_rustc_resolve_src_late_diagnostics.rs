@@ -4,29 +4,29 @@ use std::borrow::Cow;
 use std::iter;
 use std::ops::Deref;
 
-use crate::rustc_ast::visit::{FnCtxt, FnKind, LifetimeCtxt, Visitor, walk_ty};
-use crate::rustc_ast::{
+use crate::rustc_complete::visit::{FnCtxt, FnKind, LifetimeCtxt, Visitor, walk_ty};
+use crate::rustc_complete::{
     self as ast, AssocItemKind, DUMMY_NODE_ID, Expr, ExprKind, GenericParam, GenericParamKind,
     Item, ItemKind, MethodCall, NodeId, Path, PathSegment, Ty, TyKind,
 };
 use rustc_ast_pretty::pprust::where_bound_predicate_to_string;
 use rustc_attr_parsing::is_doc_alias_attrs_contain_symbol;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, ErrorGuaranteed, MultiSpan, SuggestionStyle, pluralize,
     struct_span_code_err,
 };
 use rustc_hir as hir;
-use crate::rustc_hir::def::Namespace::{self, *};
-use crate::rustc_hir::def::{self, CtorKind, CtorOf, DefKind, MacroKinds};
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, DefId};
-use crate::rustc_hir::{MissingLifetimeKind, PrimTy};
-use crate::rustc_middle::ty;
-use crate::rustc_session::{Session, lint};
-use crate::rustc_span::edit_distance::{edit_distance, find_best_match_for_name};
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::def::Namespace::{self, *};
+use crate::rustc_complete::def::{self, CtorKind, CtorOf, DefKind, MacroKinds};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
+use crate::rustc_complete::{MissingLifetimeKind, PrimTy};
+use crate::rustc_complete::ty;
+use crate::rustc_complete::{Session, lint};
+use crate::rustc_complete::edit_distance::{edit_distance, find_best_match_for_name};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
 use thin_vec::ThinVec;
 use tracing::debug;
 

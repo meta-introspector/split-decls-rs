@@ -1,10 +1,10 @@
 use itertools::Itertools as _;
 use rustc_abi::{self as abi, FIRST_VARIANT};
-use crate::rustc_middle::ty::adjustment::PointerCoercion;
-use crate::rustc_middle::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutOf, TyAndLayout};
-use crate::rustc_middle::ty::{self, Instance, Ty, TyCtxt};
-use crate::rustc_middle::{bug, mir, span_bug};
-use crate::rustc_session::config::OptLevel;
+use crate::rustc_complete::ty::adjustment::PointerCoercion;
+use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutOf, TyAndLayout};
+use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt};
+use crate::rustc_complete::{bug, mir, span_bug};
+use crate::rustc_complete::config::OptLevel;
 use tracing::{debug, instrument};
 
 use super::operand::{OperandRef, OperandRefBuilder, OperandValue};

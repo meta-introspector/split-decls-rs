@@ -1,7 +1,7 @@
 pub mod lib_features {
     use crate::rustc_data_structures::unord::UnordMap;
     use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-    use crate::rustc_span::{Span, Symbol};
+    use crate::rustc_complete::{Span, Symbol};
 
     #[derive(Copy, Clone, Debug, PartialEq, Eq)]
     #[derive(HashStable, TyEncodable, TyDecodable)]

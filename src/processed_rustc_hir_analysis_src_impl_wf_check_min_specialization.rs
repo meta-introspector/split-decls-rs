@@ -66,17 +66,17 @@
 // on traits with methods can.
 
 use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_infer::traits::ObligationCause;
-use rustc_infer::traits::specialization_graph::Node;
-use crate::rustc_middle::ty::trait_def::TraitSpecializationKind;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::traits::ObligationCause;
+use crate::rustc_infer::traits::specialization_graph::Node;
+use crate::rustc_complete::ty::trait_def::TraitSpecializationKind;
+use crate::rustc_complete::ty::{
     self, GenericArg, GenericArgs, GenericArgsRef, TyCtxt, TypeVisitableExt, TypingMode,
 };
-use crate::rustc_span::{ErrorGuaranteed, Span};
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::traits::{self, ObligationCtxt, translate_args_with_cause, wf};
+use crate::rustc_complete::{ErrorGuaranteed, Span};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::traits::{self, ObligationCtxt, translate_args_with_cause, wf};
 use tracing::{debug, instrument};
 
 use crate::errors::GenericArgsOnOverriddenImpl;

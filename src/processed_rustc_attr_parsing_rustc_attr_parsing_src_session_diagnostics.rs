@@ -1,14 +1,14 @@
 use std::num::IntErrorKind;
 
-use crate::rustc_ast::{self as ast, AttrStyle, Path};
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::{self as ast, AttrStyle, Path};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagArgValue, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level,
 };
 use rustc_feature::AttributeTemplate;
-use crate::rustc_hir::{AttrPath, Target};
+use crate::rustc_complete::{AttrPath, Target};
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 
 use crate::fluent_generated as fluent;
 

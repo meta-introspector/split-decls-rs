@@ -1,25 +1,25 @@
 // Concrete error types for all operations which may be invalid in a certain const context.
 
 use hir::{ConstContext, LangItem};
-use rustc_errors::Diag;
-use rustc_errors::codes::*;
+use crate::rustc_complete::Diag;
+use crate::rustc_complete::codes::*;
 use rustc_hir as hir;
-use crate::rustc_hir::def_id::DefId;
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_infer::traits::{ImplSource, Obligation, ObligationCause};
-use crate::rustc_middle::mir::CallSource;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::print::{PrintTraitRefExt as _, with_no_trimmed_paths};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::traits::{ImplSource, Obligation, ObligationCause};
+use crate::rustc_complete::mir::CallSource;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::print::{PrintTraitRefExt as _, with_no_trimmed_paths};
+use crate::rustc_complete::ty::{
     self, Closure, FnDef, FnPtr, GenericArgKind, GenericArgsRef, Param, TraitRef, Ty,
     suggest_constraining_type_param,
 };
-use crate::rustc_session::parse::add_feature_diagnostics;
-use crate::rustc_span::{BytePos, Pos, Span, Symbol, sym};
-use rustc_trait_selection::error_reporting::traits::call_kind::{
+use crate::rustc_complete::parse::add_feature_diagnostics;
+use crate::rustc_complete::{BytePos, Pos, Span, Symbol, sym};
+use crate::rustc_trait_selection::error_reporting::traits::call_kind::{
     CallDesugaringKind, CallKind, call_kind,
 };
-use rustc_trait_selection::traits::SelectionContext;
+use crate::rustc_trait_selection::traits::SelectionContext;
 use tracing::debug;
 
 use super::ConstCx;

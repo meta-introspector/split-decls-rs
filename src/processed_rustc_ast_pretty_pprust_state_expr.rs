@@ -2,10 +2,10 @@ use std::fmt::Write;
 
 use ast::{ForLoopKind, MatchKind};
 use itertools::{Itertools, Position};
-use crate::rustc_ast::util::classify;
-use crate::rustc_ast::util::literal::escape_byte_str_symbol;
-use crate::rustc_ast::util::parser::{self, ExprPrecedence, Fixity};
-use crate::rustc_ast::{
+use crate::rustc_complete::util::classify;
+use crate::rustc_complete::util::literal::escape_byte_str_symbol;
+use crate::rustc_complete::util::parser::{self, ExprPrecedence, Fixity};
+use crate::rustc_complete::{
     self as ast, BinOpKind, BlockCheckMode, FormatAlignment, FormatArgPosition, FormatArgsPiece,
     FormatCount, FormatDebugHex, FormatSign, FormatTrait, YieldKind, token,
 };

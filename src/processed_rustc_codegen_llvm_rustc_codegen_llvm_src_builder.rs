@@ -12,17 +12,17 @@ use rustc_codegen_ssa::mir::operand::{OperandRef, OperandValue};
 use rustc_codegen_ssa::mir::place::PlaceRef;
 use rustc_codegen_ssa::traits::*;
 use crate::rustc_data_structures::small_c_str::SmallCStr;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrs;
-use crate::rustc_middle::ty::layout::{
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
+use crate::rustc_complete::ty::layout::{
     FnAbiError, FnAbiOfHelpers, FnAbiRequest, HasTypingEnv, LayoutError, LayoutOfHelpers,
     TyAndLayout,
 };
-use crate::rustc_middle::ty::{self, Instance, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt};
 use rustc_sanitizers::{cfi, kcfi};
-use crate::rustc_session::config::OptLevel;
-use crate::rustc_span::Span;
+use crate::rustc_complete::config::OptLevel;
+use crate::rustc_complete::Span;
 use rustc_target::callconv::{FnAbi, PassMode};
 use rustc_target::spec::{HasTargetSpec, SanitizerSet, Target};
 use smallvec::SmallVec;

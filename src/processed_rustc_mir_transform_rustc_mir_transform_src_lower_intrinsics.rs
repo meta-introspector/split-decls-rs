@@ -1,9 +1,9 @@
 // Lowers intrinsic calls
 
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, TyCtxt};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::sym;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, TyCtxt};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::sym;
 
 use crate::take_array;
 

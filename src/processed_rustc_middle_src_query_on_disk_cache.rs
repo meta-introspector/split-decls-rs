@@ -7,19 +7,19 @@ use crate::rustc_data_structures::memmap::Mmap;
 use crate::rustc_data_structures::sync::{HashMapExt, Lock, RwLock};
 use crate::rustc_data_structures::unhash::UnhashMap;
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-use crate::rustc_hir::def_id::{CrateNum, DefId, DefIndex, LOCAL_CRATE, LocalDefId, StableCrateId};
-use crate::rustc_hir::definitions::DefPathHash;
+use crate::rustc_complete::def_id::{CrateNum, DefId, DefIndex, LOCAL_CRATE, LocalDefId, StableCrateId};
+use crate::rustc_complete::definitions::DefPathHash;
 use rustc_index::{Idx, IndexVec};
 use rustc_macros::{Decodable, Encodable};
 use rustc_query_system::query::QuerySideEffect;
 use rustc_serialize::opaque::{FileEncodeResult, FileEncoder, IntEncodedWithFixedSize, MemDecoder};
 use rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
-use crate::rustc_session::Session;
-use crate::rustc_span::hygiene::{
+use crate::rustc_complete::Session;
+use crate::rustc_complete::hygiene::{
     ExpnId, HygieneDecodeContext, HygieneEncodeContext, SyntaxContext, SyntaxContextKey,
 };
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{
     BytePos, ByteSymbol, CachingSourceMapView, ExpnData, ExpnHash, Pos, RelativeBytePos,
     SourceFile, Span, SpanDecoder, SpanEncoder, StableSourceFileId, Symbol,
 };

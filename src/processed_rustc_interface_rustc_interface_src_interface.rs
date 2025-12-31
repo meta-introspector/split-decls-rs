@@ -2,27 +2,27 @@ use std::path::PathBuf;
 use std::result;
 use std::sync::Arc;
 
-use crate::rustc_ast::{LitKind, MetaItemKind, token};
+use crate::rustc_complete::{LitKind, MetaItemKind, token};
 use rustc_codegen_ssa::traits::CodegenBackend;
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
 use crate::rustc_data_structures::jobserver::{self, Proxy};
 use crate::rustc_data_structures::stable_hasher::StableHasher;
-use rustc_errors::registry::Registry;
-use rustc_errors::{DiagCtxtHandle, ErrorGuaranteed};
+use crate::rustc_complete::registry::Registry;
+use crate::rustc_complete::{DiagCtxtHandle, ErrorGuaranteed};
 use rustc_lint::LintStore;
-use crate::rustc_middle::ty;
-use crate::rustc_middle::ty::CurrentGcx;
-use crate::rustc_middle::util::Providers;
+use crate::rustc_complete::ty;
+use crate::rustc_complete::ty::CurrentGcx;
+use crate::rustc_complete::util::Providers;
 use rustc_parse::lexer::StripTokens;
 use rustc_parse::new_parser_from_source_str;
 use rustc_parse::parser::attr::AllowLeadingUnsafe;
 use rustc_query_impl::QueryCtxt;
 use rustc_query_system::query::print_query_stack;
-use crate::rustc_session::config::{self, Cfg, CheckCfg, ExpectedValues, Input, OutFileName};
-use crate::rustc_session::parse::ParseSess;
-use crate::rustc_session::{CompilerIO, EarlyDiagCtxt, Session, lint};
-use crate::rustc_span::source_map::{FileLoader, RealFileLoader, SourceMapInputs};
-use crate::rustc_span::{FileName, sym};
+use crate::rustc_complete::config::{self, Cfg, CheckCfg, ExpectedValues, Input, OutFileName};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::{CompilerIO, EarlyDiagCtxt, Session, lint};
+use crate::rustc_complete::source_map::{FileLoader, RealFileLoader, SourceMapInputs};
+use crate::rustc_complete::{FileName, sym};
 use tracing::trace;
 
 use crate::util;
@@ -331,7 +331,7 @@ pub struct Config {
     /// running rustc without having to save". (See #102759.)
     pub file_loader: Option<Box<dyn FileLoader + Send + Sync>>,
     /// The list of fluent resources, used for lints declared with
-    /// [`Diagnostic`](rustc_errors::Diagnostic) and [`LintDiagnostic`](rustc_errors::LintDiagnostic).
+    /// [`Diagnostic`](crate::rustc_errors::Diagnostic) and [`LintDiagnostic`](crate::rustc_errors::LintDiagnostic).
     pub locale_resources: Vec<&'static str>,
 
     pub lint_caps: FxHashMap<lint::LintId, lint::Level>,
@@ -447,7 +447,7 @@ pub fn run_compiler<R: Send>(config: Config, f: impl FnOnce(&Compiler) -> R + Se
 
             let temps_dir = config.opts.unstable_opts.temps_dir.as_deref().map(PathBuf::from);
 
-            let bundle = match rustc_errors::fluent_bundle(
+            let bundle = match crate::rustc_errors::fluent_bundle(
                 &config.opts.sysroot.all_paths().collect::<Vec<_>>(),
                 config.opts.unstable_opts.translate_lang.clone(),
                 config.opts.unstable_opts.translate_additional_ftl.as_deref(),

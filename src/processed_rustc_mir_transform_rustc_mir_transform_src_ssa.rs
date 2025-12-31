@@ -9,11 +9,11 @@
 use crate::rustc_data_structures::graph::dominators::Dominators;
 use rustc_index::bit_set::DenseBitSet;
 use rustc_index::{IndexSlice, IndexVec};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::middle::resolve_bound_vars::Set1;
-use crate::rustc_middle::mir::visit::*;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::resolve_bound_vars::Set1;
+use crate::rustc_complete::mir::visit::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, TyCtxt};
 use tracing::{debug, instrument, trace};
 
 pub(super) struct SsaLocals {

@@ -1,11 +1,11 @@
 use hir::Node;
 use hir::def_id::DefId;
 use rustc_hir as hir;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::middle::region::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::region::{
     ScopeCompatibility, RvalueCandidate, Scope, ScopeTree,
 };
-use crate::rustc_middle::ty::RvalueScopes;
+use crate::rustc_complete::ty::RvalueScopes;
 use tracing::debug;
 
 use super::FnCtxt;

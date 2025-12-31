@@ -1,13 +1,13 @@
-use crate::rustc_ast::{LitKind, MetaItem, MetaItemInner, MetaItemKind, MetaItemLit, NodeId};
+use crate::rustc_complete::{LitKind, MetaItem, MetaItemInner, MetaItemKind, MetaItemLit, NodeId};
 use rustc_ast_pretty::pprust;
 use rustc_feature::{Features, GatedCfg, find_gated_cfg};
-use crate::rustc_hir::RustcVersion;
-use crate::rustc_session::Session;
-use crate::rustc_session::config::ExpectedValues;
-use crate::rustc_session::lint::builtin::UNEXPECTED_CFGS;
-use crate::rustc_session::lint::{BuiltinLintDiag, Lint};
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::RustcVersion;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::ExpectedValues;
+use crate::rustc_complete::lint::builtin::UNEXPECTED_CFGS;
+use crate::rustc_complete::lint::{BuiltinLintDiag, Lint};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{Span, Symbol, sym};
 
 use crate::session_diagnostics::{self, UnsupportedLiteralReason};
 use crate::{fluent_generated, parse_version};

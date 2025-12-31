@@ -1,13 +1,13 @@
 // Check whether a type has (potentially) non-trivial drop glue.
 
 use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::limit::Limit;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::util::{AlwaysRequiresDrop, needs_drop_components};
-use crate::rustc_middle::ty::{self, EarlyBinder, GenericArgsRef, Ty, TyCtxt};
-use crate::rustc_span::sym;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::util::{AlwaysRequiresDrop, needs_drop_components};
+use crate::rustc_complete::ty::{self, EarlyBinder, GenericArgsRef, Ty, TyCtxt};
+use crate::rustc_complete::sym;
 use tracing::{debug, instrument};
 
 use crate::errors::NeedsDropOverflow;

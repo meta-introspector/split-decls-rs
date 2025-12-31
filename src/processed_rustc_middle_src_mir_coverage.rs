@@ -5,7 +5,7 @@ use std::fmt::{self, Debug, Formatter};
 use crate::rustc_data_structures::fx::FxIndexMap;
 use rustc_index::{Idx, IndexVec};
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 
 rustc_index::newtype_index! {
     /// Used by [`CoverageKind::BlockMarker`] to mark blocks during THIR-to-MIR

@@ -2,11 +2,11 @@
 
 use std::ffi::OsStr;
 
-use crate::rustc_hir::def_id::{CrateNum, DefId, LOCAL_CRATE, LocalDefId, LocalModDefId, ModDefId};
-use crate::rustc_hir::hir_id::{HirId, OwnerId};
+use crate::rustc_complete::def_id::{CrateNum, DefId, LOCAL_CRATE, LocalDefId, LocalModDefId, ModDefId};
+use crate::rustc_complete::hir_id::{HirId, OwnerId};
 use rustc_query_system::dep_graph::DepNodeIndex;
 use rustc_query_system::query::{DefIdCache, DefaultCache, SingleCache, VecCache};
-use crate::rustc_span::{DUMMY_SP, Ident, Span, Symbol};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol};
 
 use crate::infer::canonical::CanonicalQueryInput;
 use crate::mir::mono::CollectionMode;

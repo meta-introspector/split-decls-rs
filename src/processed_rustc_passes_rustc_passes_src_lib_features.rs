@@ -4,14 +4,14 @@
 // but are not declared in one single location (unlike lang features), which means we need to
 // collect them instead.
 
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::intravisit::Visitor;
-use crate::rustc_hir::{Attribute, StabilityLevel, StableSince};
-use crate::rustc_middle::hir::nested_filter;
-use crate::rustc_middle::middle::lib_features::{FeatureStability, LibFeatures};
-use crate::rustc_middle::query::{LocalCrate, Providers};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::{Attribute, StabilityLevel, StableSince};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::middle::lib_features::{FeatureStability, LibFeatures};
+use crate::rustc_complete::query::{LocalCrate, Providers};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::{Span, Symbol, sym};
 
 use crate::errors::{FeaturePreviouslyDeclared, FeatureStableTwice};
 

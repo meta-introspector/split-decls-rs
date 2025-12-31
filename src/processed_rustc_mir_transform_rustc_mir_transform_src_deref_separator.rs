@@ -1,7 +1,7 @@
-use crate::rustc_middle::mir::visit::NonUseContext::VarDebugInfo;
-use crate::rustc_middle::mir::visit::{MutVisitor, PlaceContext};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::visit::NonUseContext::VarDebugInfo;
+use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 
 use crate::patch::MirPatch;
 

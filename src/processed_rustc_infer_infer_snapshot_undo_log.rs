@@ -3,7 +3,7 @@ use std::marker::PhantomData;
 
 use crate::rustc_data_structures::undo_log::{Rollback, UndoLogs};
 use crate::rustc_data_structures::{snapshot_vec as sv, unify as ut};
-use crate::rustc_middle::ty::{self, OpaqueHiddenType, OpaqueTypeKey};
+use crate::rustc_complete::ty::{self, OpaqueHiddenType, OpaqueTypeKey};
 use tracing::debug;
 
 use crate::infer::unify_key::{ConstVidKey, RegionVidKey};

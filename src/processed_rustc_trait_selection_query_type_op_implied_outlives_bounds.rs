@@ -1,15 +1,15 @@
 use std::ops::ControlFlow;
 
-use rustc_infer::infer::TypeOutlivesConstraint;
-use rustc_infer::infer::canonical::CanonicalQueryInput;
-use rustc_infer::traits::query::OutlivesBound;
-use rustc_infer::traits::query::type_op::ImpliedOutlivesBounds;
-use crate::rustc_middle::infer::canonical::CanonicalQueryResponse;
-use crate::rustc_middle::traits::ObligationCause;
-use crate::rustc_middle::ty::outlives::{Component, push_outlives_components};
-use crate::rustc_middle::ty::{self, ParamEnvAnd, Ty, TyCtxt, TypeVisitable, TypeVisitor};
-use crate::rustc_span::def_id::CRATE_DEF_ID;
-use crate::rustc_span::{DUMMY_SP, Span, sym};
+use crate::rustc_infer::infer::TypeOutlivesConstraint;
+use crate::rustc_infer::infer::canonical::CanonicalQueryInput;
+use crate::rustc_infer::traits::query::OutlivesBound;
+use crate::rustc_infer::traits::query::type_op::ImpliedOutlivesBounds;
+use crate::rustc_complete::infer::canonical::CanonicalQueryResponse;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty::outlives::{Component, push_outlives_components};
+use crate::rustc_complete::ty::{self, ParamEnvAnd, Ty, TyCtxt, TypeVisitable, TypeVisitor};
+use crate::rustc_complete::def_id::CRATE_DEF_ID;
+use crate::rustc_complete::{DUMMY_SP, Span, sym};
 use smallvec::{SmallVec, smallvec};
 
 use crate::traits::query::NoSolution;

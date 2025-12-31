@@ -6,9 +6,9 @@ use std::assert_matches::assert_matches;
 
 use either::{Either, Left, Right};
 use rustc_abi::{BackendRepr, HasDataLayout, Size};
-use crate::rustc_middle::ty::Ty;
-use crate::rustc_middle::ty::layout::TyAndLayout;
-use crate::rustc_middle::{bug, mir, span_bug};
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::{bug, mir, span_bug};
 use tracing::field::Empty;
 use tracing::{instrument, trace};
 

@@ -2,5 +2,5 @@
 // (except for some relations used for diagnostics and heuristics in the compiler).
 // As well as the implementation of `Relate` for interned things (`Ty`/`Const`/etc).
 
-pub use crate::rustc_middle::ty::relate::combine::PredicateEmittingRelation;
-pub use crate::rustc_middle::ty::relate::{RelateResult, *};
+pub use crate::rustc_complete::ty::relate::combine::PredicateEmittingRelation;
+pub use crate::rustc_complete::ty::relate::{RelateResult, *};

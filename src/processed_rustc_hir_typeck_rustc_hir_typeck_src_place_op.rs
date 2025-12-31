@@ -1,14 +1,14 @@
-use rustc_errors::Applicability;
+use crate::rustc_complete::Applicability;
 use rustc_hir_analysis::autoderef::Autoderef;
-use rustc_infer::infer::InferOk;
-use rustc_infer::traits::{Obligation, ObligationCauseCode};
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::adjustment::{
+use crate::rustc_infer::infer::InferOk;
+use crate::rustc_infer::traits::{Obligation, ObligationCauseCode};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::adjustment::{
     Adjust, Adjustment, AllowTwoPhase, AutoBorrow, AutoBorrowMutability, OverloadedDeref,
     PointerCoercion,
 };
-use crate::rustc_middle::ty::{self, Ty};
-use crate::rustc_span::{Span, sym};
+use crate::rustc_complete::ty::{self, Ty};
+use crate::rustc_complete::{Span, sym};
 use tracing::debug;
 use {rustc_ast as ast, rustc_hir as hir};
 

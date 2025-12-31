@@ -3,19 +3,19 @@
 use std::mem;
 
 use rustc_ast as ast;
-use crate::rustc_ast::entry::EntryPointType;
-use crate::rustc_ast::mut_visit::*;
-use crate::rustc_ast::visit::Visitor;
-use crate::rustc_ast::{ModKind, attr};
-use rustc_errors::DiagCtxtHandle;
+use crate::rustc_complete::entry::EntryPointType;
+use crate::rustc_complete::mut_visit::*;
+use crate::rustc_complete::visit::Visitor;
+use crate::rustc_complete::{ModKind, attr};
+use crate::rustc_complete::DiagCtxtHandle;
 use rustc_expand::base::{ExtCtxt, ResolverExpand};
 use rustc_expand::expand::{AstFragment, ExpansionConfig};
 use rustc_feature::Features;
 use rustc_lint_defs::BuiltinLintDiag;
-use crate::rustc_session::Session;
-use crate::rustc_session::lint::builtin::UNNAMEABLE_TEST_ITEMS;
-use crate::rustc_span::hygiene::{AstPass, SyntaxContext, Transparency};
-use crate::rustc_span::{DUMMY_SP, Ident, Span, Symbol, sym};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::lint::builtin::UNNAMEABLE_TEST_ITEMS;
+use crate::rustc_complete::hygiene::{AstPass, SyntaxContext, Transparency};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, sym};
 use rustc_target::spec::PanicStrategy;
 use smallvec::smallvec;
 use thin_vec::{ThinVec, thin_vec};

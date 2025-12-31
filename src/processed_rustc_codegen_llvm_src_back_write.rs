@@ -20,14 +20,14 @@ use rustc_codegen_ssa::traits::*;
 use rustc_codegen_ssa::{CompiledModule, ModuleCodegen, ModuleKind};
 use crate::rustc_data_structures::profiling::SelfProfilerRef;
 use crate::rustc_data_structures::small_c_str::SmallCStr;
-use rustc_errors::{DiagCtxtHandle, Level};
+use crate::rustc_complete::{DiagCtxtHandle, Level};
 use rustc_fs_util::{link_or_copy, path_to_c_string};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::Session;
-use crate::rustc_session::config::{
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{
     self, Lto, OutputType, Passes, RemapPathScopeComponents, SplitDwarfKind, SwitchWithOptPath,
 };
-use crate::rustc_span::{BytePos, InnerSpan, Pos, SpanData, SyntaxContext, sym};
+use crate::rustc_complete::{BytePos, InnerSpan, Pos, SpanData, SyntaxContext, sym};
 use rustc_target::spec::{CodeModel, FloatAbi, RelocModel, SanitizerSet, SplitDebuginfo, TlsModel};
 use tracing::{debug, trace};
 

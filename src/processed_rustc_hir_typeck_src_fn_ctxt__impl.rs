@@ -3,12 +3,12 @@ use std::slice;
 
 use rustc_abi::FieldIdx;
 use crate::rustc_data_structures::fx::FxHashSet;
-use rustc_errors::{Applicability, Diag, ErrorGuaranteed, MultiSpan};
-use crate::rustc_hir::def::{CtorOf, DefKind, Res};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::intravisit::VisitorExt;
-use crate::rustc_hir::lang_items::LangItem;
-use crate::rustc_hir::{self as hir, AmbigArg, ExprKind, GenericArg, HirId, Node, QPath, intravisit};
+use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed, MultiSpan};
+use crate::rustc_complete::def::{CtorOf, DefKind, Res};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::intravisit::VisitorExt;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{self as hir, AmbigArg, ExprKind, GenericArg, HirId, Node, QPath, intravisit};
 use rustc_hir_analysis::hir_ty_lowering::errors::GenericsArgsErrExtend;
 use rustc_hir_analysis::hir_ty_lowering::generics::{
     check_generic_arg_count_for_call, lower_generic_args,
@@ -17,22 +17,22 @@ use rustc_hir_analysis::hir_ty_lowering::{
     ExplicitLateBound, FeedConstTy, GenericArgCountMismatch, GenericArgCountResult,
     GenericArgsLowerer, GenericPathSegment, HirTyLowerer, IsMethodCall, RegionInferReason,
 };
-use rustc_infer::infer::canonical::{Canonical, OriginalQueryValues, QueryResponse};
-use rustc_infer::infer::{DefineOpaqueTypes, InferResult};
+use crate::rustc_infer::infer::canonical::{Canonical, OriginalQueryValues, QueryResponse};
+use crate::rustc_infer::infer::{DefineOpaqueTypes, InferResult};
 use rustc_lint::builtin::SELF_CONSTRUCTOR_FROM_OUTER_ITEM;
-use crate::rustc_middle::ty::adjustment::{Adjust, Adjustment, AutoBorrow, AutoBorrowMutability};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::adjustment::{Adjust, Adjustment, AutoBorrow, AutoBorrowMutability};
+use crate::rustc_complete::ty::{
     self, AdtKind, CanonicalUserType, GenericArgsRef, GenericParamDefKind, IsIdentity,
     SizedTraitKind, Ty, TyCtxt, TypeFoldable, TypeVisitable, TypeVisitableExt, UserArgs,
     UserSelfTy,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::lint;
-use crate::rustc_span::Span;
-use crate::rustc_span::def_id::LocalDefId;
-use crate::rustc_span::hygiene::DesugaringKind;
-use rustc_trait_selection::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
-use rustc_trait_selection::traits::{
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::hygiene::DesugaringKind;
+use crate::rustc_trait_selection::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
+use crate::rustc_trait_selection::traits::{
     self, NormalizeExt, ObligationCauseCode, StructurallyNormalizeExt,
 };
 use tracing::{debug, instrument};
@@ -1452,7 +1452,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 }
             }
         } else if self.tcx.features().generic_const_exprs() {
-            rustc_trait_selection::traits::evaluate_const(&self.infcx, ct, self.param_env)
+            crate::rustc_trait_selection::traits::evaluate_const(&self.infcx, ct, self.param_env)
         } else {
             ct
         }

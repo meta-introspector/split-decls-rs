@@ -1,18 +1,18 @@
 use rustc_abi::ExternAbi;
-use crate::rustc_ast::visit::AssocCtxt;
-use crate::rustc_ast::*;
-use rustc_errors::{E0570, ErrorGuaranteed, struct_span_code_err};
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::{DefKind, PerNS, Res};
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, LocalDefId};
-use crate::rustc_hir::{
+use crate::rustc_complete::visit::AssocCtxt;
+use crate::rustc_complete::*;
+use crate::rustc_complete::{E0570, ErrorGuaranteed, struct_span_code_err};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{DefKind, PerNS, Res};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, LocalDefId};
+use crate::rustc_complete::{
     self as hir, HirId, ImplItemImplKind, LifetimeSource, PredicateOrigin, Target, find_attr,
 };
 use rustc_index::{IndexSlice, IndexVec};
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::{ResolverAstLowering, TyCtxt};
-use crate::rustc_span::edit_distance::find_best_match_for_name;
-use crate::rustc_span::{DUMMY_SP, DesugaringKind, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{ResolverAstLowering, TyCtxt};
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_complete::{DUMMY_SP, DesugaringKind, Ident, Span, Symbol, kw, sym};
 use smallvec::{SmallVec, smallvec};
 use thin_vec::ThinVec;
 use tracing::instrument;

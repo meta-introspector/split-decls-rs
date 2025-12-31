@@ -1,6 +1,6 @@
-use crate::rustc_middle::traits::query::{DropckOutlivesResult, NoSolution};
-use crate::rustc_middle::ty::{ParamEnvAnd, TyCtxt};
-use crate::rustc_span::Span;
+use crate::rustc_complete::traits::query::{DropckOutlivesResult, NoSolution};
+use crate::rustc_complete::ty::{ParamEnvAnd, TyCtxt};
+use crate::rustc_complete::Span;
 
 use crate::infer::canonical::{CanonicalQueryInput, CanonicalQueryResponse};
 use crate::traits::ObligationCtxt;

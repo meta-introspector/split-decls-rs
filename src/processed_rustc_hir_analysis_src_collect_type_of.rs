@@ -1,17 +1,17 @@
 use core::ops::ControlFlow;
 
-use rustc_errors::{Applicability, StashKey, Suggestions};
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::intravisit::VisitorExt;
-use crate::rustc_hir::{self as hir, AmbigArg, HirId};
-use crate::rustc_middle::query::plumbing::CyclePlaceholder;
-use crate::rustc_middle::ty::print::with_forced_trimmed_paths;
-use crate::rustc_middle::ty::util::IntTypeExt;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::{Applicability, StashKey, Suggestions};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::intravisit::VisitorExt;
+use crate::rustc_complete::{self as hir, AmbigArg, HirId};
+use crate::rustc_complete::query::plumbing::CyclePlaceholder;
+use crate::rustc_complete::ty::print::with_forced_trimmed_paths;
+use crate::rustc_complete::ty::util::IntTypeExt;
+use crate::rustc_complete::ty::{
     self, DefiningScopeKind, IsSuggestable, Ty, TyCtxt, TypeVisitableExt, fold_regions,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::{DUMMY_SP, Ident, Span};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span};
 
 use super::{HirPlaceholderCollector, ItemCtxt, bad_placeholder};
 use crate::check::wfcheck::check_static_item;
@@ -21,7 +21,7 @@ use crate::hir_ty_lowering::HirTyLowerer;
 
 fn anon_const_type_of<'tcx>(icx: &ItemCtxt<'tcx>, def_id: LocalDefId) -> Ty<'tcx> {
     use hir::*;
-    use crate::rustc_middle::ty::Ty;
+    use crate::rustc_complete::ty::Ty;
     let tcx = icx.tcx;
     let hir_id = tcx.local_def_id_to_hir_id(def_id);
 
@@ -79,7 +79,7 @@ fn anon_const_type_of<'tcx>(icx: &ItemCtxt<'tcx>, def_id: LocalDefId) -> Ty<'tcx
 
 fn const_arg_anon_type_of<'tcx>(icx: &ItemCtxt<'tcx>, arg_hir_id: HirId, span: Span) -> Ty<'tcx> {
     use hir::*;
-    use crate::rustc_middle::ty::Ty;
+    use crate::rustc_complete::ty::Ty;
 
     let tcx = icx.tcx;
 
@@ -114,8 +114,8 @@ fn const_arg_anon_type_of<'tcx>(icx: &ItemCtxt<'tcx>, arg_hir_id: HirId, span: S
 }
 
 pub(super) fn type_of(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::EarlyBinder<'_, Ty<'_>> {
-    use crate::rustc_hir::*;
-    use crate::rustc_middle::ty::Ty;
+    use crate::rustc_complete::*;
+    use crate::rustc_complete::ty::Ty;
 
     // If we are computing `type_of` the synthesized associated type for an RPITIT in the impl
     // side, use `collect_return_position_impl_trait_in_trait_tys` to infer the value of the
@@ -507,8 +507,8 @@ fn infer_placeholder_type<'tcx>(
 
 fn check_feature_inherent_assoc_ty(tcx: TyCtxt<'_>, span: Span) {
     if !tcx.features().inherent_associated_types() {
-        use crate::rustc_session::parse::feature_err;
-        use crate::rustc_span::sym;
+        use crate::rustc_complete::parse::feature_err;
+        use crate::rustc_complete::sym;
         feature_err(
             &tcx.sess,
             sym::inherent_associated_types,

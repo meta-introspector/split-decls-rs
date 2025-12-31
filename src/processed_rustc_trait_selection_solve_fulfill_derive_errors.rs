@@ -1,16 +1,16 @@
 use std::ops::ControlFlow;
 
-use crate::rustc_hir::LangItem;
-use rustc_infer::infer::InferCtxt;
-use rustc_infer::traits::solve::{CandidateSource, GoalSource, MaybeCause};
-use rustc_infer::traits::{
+use crate::rustc_complete::LangItem;
+use crate::rustc_infer::infer::InferCtxt;
+use crate::rustc_infer::traits::solve::{CandidateSource, GoalSource, MaybeCause};
+use crate::rustc_infer::traits::{
     self, MismatchedProjectionTypes, Obligation, ObligationCause, ObligationCauseCode,
     PredicateObligation, SelectionError,
 };
-use crate::rustc_middle::traits::query::NoSolution;
-use crate::rustc_middle::ty::error::{ExpectedFound, TypeError};
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_middle::{bug, span_bug};
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::{bug, span_bug};
 use rustc_next_trait_solver::solve::{GoalEvaluation, SolverDelegateEvalExt as _};
 use tracing::{instrument, trace};
 

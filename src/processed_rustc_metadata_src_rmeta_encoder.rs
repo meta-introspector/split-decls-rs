@@ -12,24 +12,24 @@ use crate::rustc_data_structures::temp_dir::MaybeTempDir;
 use crate::rustc_data_structures::thousands::usize_with_underscores;
 use rustc_feature::Features;
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::{AttributeKind, EncodeCrossCrate};
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, CRATE_DEF_INDEX, LOCAL_CRATE, LocalDefId, LocalDefIdSet};
-use crate::rustc_hir::definitions::DefPathData;
-use crate::rustc_hir::find_attr;
+use crate::rustc_complete::attrs::{AttributeKind, EncodeCrossCrate};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, CRATE_DEF_INDEX, LOCAL_CRATE, LocalDefId, LocalDefIdSet};
+use crate::rustc_complete::definitions::DefPathData;
+use crate::rustc_complete::find_attr;
 use rustc_hir_pretty::id_to_string;
-use crate::rustc_middle::dep_graph::WorkProductId;
-use crate::rustc_middle::middle::dependency_format::Linkage;
-use crate::rustc_middle::mir::interpret;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::traits::specialization_graph;
-use crate::rustc_middle::ty::AssocContainer;
-use crate::rustc_middle::ty::codec::TyEncoder;
-use crate::rustc_middle::ty::fast_reject::{self, TreatParams};
-use crate::rustc_middle::{bug, span_bug};
+use crate::rustc_complete::dep_graph::WorkProductId;
+use crate::rustc_complete::middle::dependency_format::Linkage;
+use crate::rustc_complete::mir::interpret;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::traits::specialization_graph;
+use crate::rustc_complete::ty::AssocContainer;
+use crate::rustc_complete::ty::codec::TyEncoder;
+use crate::rustc_complete::ty::fast_reject::{self, TreatParams};
+use crate::rustc_complete::{bug, span_bug};
 use rustc_serialize::{Decodable, Decoder, Encodable, Encoder, opaque};
-use crate::rustc_session::config::{CrateType, OptLevel, TargetModifier};
-use crate::rustc_span::hygiene::HygieneEncodeContext;
-use crate::rustc_span::{
+use crate::rustc_complete::config::{CrateType, OptLevel, TargetModifier};
+use crate::rustc_complete::hygiene::HygieneEncodeContext;
+use crate::rustc_complete::{
     ByteSymbol, ExternalSource, FileName, SourceFile, SpanData, SpanEncoder, StableSourceFileId,
     Symbol, SyntaxContext, sym,
 };

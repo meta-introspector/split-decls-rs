@@ -1,10 +1,10 @@
-use crate::rustc_hir::HirId;
-use crate::rustc_middle::mir::visit::Visitor;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::lint::builtin::CONST_ITEM_MUTATION;
-use crate::rustc_span::Span;
-use crate::rustc_span::def_id::DefId;
+use crate::rustc_complete::HirId;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::lint::builtin::CONST_ITEM_MUTATION;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::DefId;
 
 use crate::errors;
 

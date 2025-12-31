@@ -1,5 +1,5 @@
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::visit::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::visit::{
     MutatingUseContext, NonMutatingUseContext, NonUseContext, PlaceContext,
 };
 

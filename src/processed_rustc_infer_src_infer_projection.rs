@@ -1,5 +1,5 @@
-use crate::rustc_middle::traits::ObligationCause;
-use crate::rustc_middle::ty;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty;
 
 use super::InferCtxt;
 use crate::infer::Term;

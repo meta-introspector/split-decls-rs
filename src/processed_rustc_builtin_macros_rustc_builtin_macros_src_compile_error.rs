@@ -1,8 +1,8 @@
 // The compiler code necessary to support the compile_error! extension.
 
-use crate::rustc_ast::tokenstream::TokenStream;
+use crate::rustc_complete::tokenstream::TokenStream;
 use rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::util::get_single_str_from_tts;
 

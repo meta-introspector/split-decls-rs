@@ -6,37 +6,37 @@ use std::{fmt, iter, mem};
 use rustc_abi::FieldIdx;
 use crate::rustc_data_structures::frozen::Frozen;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-use rustc_errors::ErrorGuaranteed;
+use crate::rustc_complete::ErrorGuaranteed;
 use rustc_hir as hir;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_hir::lang_items::LangItem;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::lang_items::LangItem;
 use rustc_index::{IndexSlice, IndexVec};
-use rustc_infer::infer::canonical::QueryRegionConstraints;
-use rustc_infer::infer::outlives::env::RegionBoundPairs;
-use rustc_infer::infer::region_constraints::RegionConstraintData;
-use rustc_infer::infer::{
+use crate::rustc_infer::infer::canonical::QueryRegionConstraints;
+use crate::rustc_infer::infer::outlives::env::RegionBoundPairs;
+use crate::rustc_infer::infer::region_constraints::RegionConstraintData;
+use crate::rustc_infer::infer::{
     BoundRegionConversionTime, InferCtxt, NllRegionVariableOrigin, RegionVariableOrigin,
 };
-use rustc_infer::traits::PredicateObligations;
-use crate::rustc_middle::mir::visit::{NonMutatingUseContext, PlaceContext, Visitor};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::traits::query::NoSolution;
-use crate::rustc_middle::ty::adjustment::PointerCoercion;
-use crate::rustc_middle::ty::cast::CastTy;
-use crate::rustc_middle::ty::{
+use crate::rustc_infer::traits::PredicateObligations;
+use crate::rustc_complete::mir::visit::{NonMutatingUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::adjustment::PointerCoercion;
+use crate::rustc_complete::ty::cast::CastTy;
+use crate::rustc_complete::ty::{
     self, CanonicalUserTypeAnnotation, CanonicalUserTypeAnnotations, CoroutineArgsExt,
     GenericArgsRef, Ty, TyCtxt, TypeVisitableExt, UserArgs, UserTypeAnnotationIndex, fold_regions,
 };
-use crate::rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 use rustc_mir_dataflow::move_paths::MoveData;
 use rustc_mir_dataflow::points::DenseLocationMap;
-use crate::rustc_span::def_id::CRATE_DEF_ID;
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{Span, sym};
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits::query::type_op::custom::scrape_region_constraints;
-use rustc_trait_selection::traits::query::type_op::{TypeOp, TypeOpOutput};
+use crate::rustc_complete::def_id::CRATE_DEF_ID;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Span, sym};
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits::query::type_op::custom::scrape_region_constraints;
+use crate::rustc_trait_selection::traits::query::type_op::{TypeOp, TypeOpOutput};
 use tracing::{debug, instrument, trace};
 
 use crate::borrow_set::BorrowSet;

@@ -1,7 +1,7 @@
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-use crate::rustc_span::Symbol;
-use crate::rustc_span::def_id::DefIdMap;
+use crate::rustc_complete::Symbol;
+use crate::rustc_complete::def_id::DefIdMap;
 
 use crate::def_id::DefId;
 

@@ -4,7 +4,7 @@ use std::path::{Path, PathBuf};
 use std::{fs, io};
 
 use rustc_abi::Size;
-use crate::rustc_ast::InlineAsmTemplatePiece;
+use crate::rustc_complete::InlineAsmTemplatePiece;
 use tracing::trace;
 use ty::print::PrettyPrinter;
 
@@ -602,7 +602,7 @@ fn write_function_coverage_info(
 }
 
 fn write_mir_sig(tcx: TyCtxt<'_>, body: &Body<'_>, w: &mut dyn io::Write) -> io::Result<()> {
-    use crate::rustc_hir::def::DefKind;
+    use crate::rustc_complete::def::DefKind;
 
     trace!("write_mir_sig: {:?}", body.source.instance);
     let def_id = body.source.def_id();

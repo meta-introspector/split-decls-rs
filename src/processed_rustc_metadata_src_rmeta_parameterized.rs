@@ -1,10 +1,10 @@
 use std::hash::Hash;
 
 use crate::rustc_data_structures::unord::UnordMap;
-use crate::rustc_hir::def_id::DefIndex;
+use crate::rustc_complete::def_id::DefIndex;
 use rustc_index::{Idx, IndexVec};
-use crate::rustc_middle::ty::{Binder, EarlyBinder};
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::ty::{Binder, EarlyBinder};
+use crate::rustc_complete::Symbol;
 
 use crate::rmeta::{LazyArray, LazyValue};
 

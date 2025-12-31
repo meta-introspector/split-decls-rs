@@ -2,7 +2,7 @@
 
 use std::num::{NonZero, NonZeroU32};
 
-use crate::rustc_span::sym;
+use crate::rustc_complete::sym;
 
 use super::{Feature, to_nonzero};
 

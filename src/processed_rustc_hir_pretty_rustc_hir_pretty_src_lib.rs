@@ -9,20 +9,20 @@ use std::cell::Cell;
 use std::vec;
 
 use rustc_abi::ExternAbi;
-use crate::rustc_ast::util::parser::{self, ExprPrecedence, Fixity};
-use crate::rustc_ast::{DUMMY_NODE_ID, DelimArgs};
+use crate::rustc_complete::util::parser::{self, ExprPrecedence, Fixity};
+use crate::rustc_complete::{DUMMY_NODE_ID, DelimArgs};
 use rustc_ast_pretty::pp::Breaks::{Consistent, Inconsistent};
 use rustc_ast_pretty::pp::{self, BoxMarker, Breaks};
 use rustc_ast_pretty::pprust::state::MacHeader;
 use rustc_ast_pretty::pprust::{Comments, PrintState};
-use crate::rustc_hir::attrs::{AttributeKind, PrintAttribute};
-use crate::rustc_hir::{
+use crate::rustc_complete::attrs::{AttributeKind, PrintAttribute};
+use crate::rustc_complete::{
     BindingMode, ByRef, ConstArgKind, GenericArg, GenericBound, GenericParam, GenericParamKind,
     HirId, ImplicitSelfKind, LifetimeParamKind, Node, PatKind, PreciseCapturingArg, RangeEnd, Term,
     TyPatKind,
 };
-use crate::rustc_span::source_map::SourceMap;
-use crate::rustc_span::{FileName, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{FileName, Ident, Span, Symbol, kw, sym};
 use {rustc_ast as ast, rustc_hir as hir};
 
 pub fn id_to_string(cx: &dyn crate::rustc_hir::intravisit::HirTyCtxt<'_>, hir_id: HirId) -> String {

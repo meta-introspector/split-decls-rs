@@ -3,33 +3,33 @@ use core::cmp::min;
 use core::iter;
 
 use hir::def_id::LocalDefId;
-use crate::rustc_ast::util::parser::ExprPrecedence;
+use crate::rustc_complete::util::parser::ExprPrecedence;
 use crate::rustc_data_structures::packed::Pu128;
-use rustc_errors::{Applicability, Diag, MultiSpan, listify};
-use crate::rustc_hir::def::{CtorKind, CtorOf, DefKind, Res};
-use crate::rustc_hir::lang_items::LangItem;
-use crate::rustc_hir::{
+use crate::rustc_complete::{Applicability, Diag, MultiSpan, listify};
+use crate::rustc_complete::def::{CtorKind, CtorOf, DefKind, Res};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{
     self as hir, Arm, CoroutineDesugaring, CoroutineKind, CoroutineSource, Expr, ExprKind,
     GenericBound, HirId, Node, PatExpr, PatExprKind, Path, QPath, Stmt, StmtKind, TyKind,
     WherePredicateKind, expr_needs_parens,
 };
 use rustc_hir_analysis::hir_ty_lowering::HirTyLowerer;
 use rustc_hir_analysis::suggest_impl_trait;
-use crate::rustc_middle::middle::stability::EvalResult;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::print::with_no_trimmed_paths;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::middle::stability::EvalResult;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{
     self, Article, Binder, IsSuggestable, Ty, TyCtxt, TypeVisitableExt, Upcast,
     suggest_constraining_type_params,
 };
-use crate::rustc_session::errors::ExprParenthesesNeeded;
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{ExpnKind, Ident, MacroKind, Span, Symbol, sym};
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::error_reporting::traits::DefIdOrName;
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits;
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
+use crate::rustc_complete::errors::ExprParenthesesNeeded;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{ExpnKind, Ident, MacroKind, Span, Symbol, sym};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::error_reporting::traits::DefIdOrName;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits;
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
 use tracing::{debug, instrument};
 
 use super::FnCtxt;

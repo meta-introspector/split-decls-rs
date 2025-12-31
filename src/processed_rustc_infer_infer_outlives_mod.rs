@@ -1,8 +1,8 @@
 // Various code related to computing outlives relations.
 
 use crate::rustc_data_structures::undo_log::UndoLogs;
-use crate::rustc_middle::traits::query::{NoSolution, OutlivesBound};
-use crate::rustc_middle::ty;
+use crate::rustc_complete::traits::query::{NoSolution, OutlivesBound};
+use crate::rustc_complete::ty;
 use tracing::instrument;
 
 use self::env::OutlivesEnvironment;

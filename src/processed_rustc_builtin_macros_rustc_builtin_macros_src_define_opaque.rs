@@ -1,6 +1,6 @@
-use crate::rustc_ast::{DUMMY_NODE_ID, ast};
+use crate::rustc_complete::{DUMMY_NODE_ID, ast};
 use rustc_expand::base::{Annotatable, ExtCtxt};
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 
 pub(crate) fn expand(
     ecx: &mut ExtCtxt<'_>,

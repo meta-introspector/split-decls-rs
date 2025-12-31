@@ -8,18 +8,18 @@
 use std::fmt::Debug;
 use std::ops::ControlFlow;
 
-use rustc_errors::ErrorGuaranteed;
-use crate::rustc_hir::def::DefKind;
-pub use rustc_infer::traits::*;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::error::{ExpectedFound, TypeError};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def::DefKind;
+pub use crate::rustc_infer::traits::*;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::ty::{
     self, GenericArgs, GenericArgsRef, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable,
     TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypingMode, Upcast,
 };
-use crate::rustc_span::Span;
-use crate::rustc_span::def_id::DefId;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::DefId;
 use tracing::{debug, instrument};
 
 pub use self::coherence::{
@@ -625,7 +625,7 @@ pub fn try_evaluate_const<'tcx>(
             let uv = ty::UnevaluatedConst::new(uv.def, args);
             let erased_uv = tcx.erase_and_anonymize_regions(uv);
 
-            use crate::rustc_middle::mir::interpret::ErrorHandled;
+            use crate::rustc_complete::mir::interpret::ErrorHandled;
             // FIXME: `def_span` will point at the definition of this const; ideally, we'd point at
             // where it gets used as a const generic.
             match tcx.const_eval_resolve_for_typeck(typing_env, erased_uv, tcx.def_span(uv.def)) {

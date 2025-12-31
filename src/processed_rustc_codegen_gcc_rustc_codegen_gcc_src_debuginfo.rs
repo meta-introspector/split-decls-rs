@@ -7,10 +7,10 @@ use rustc_codegen_ssa::mir::debuginfo::{DebugScope, FunctionDebugContext, Variab
 use rustc_codegen_ssa::traits::{DebugInfoBuilderMethods, DebugInfoCodegenMethods};
 use rustc_index::bit_set::DenseBitSet;
 use rustc_index::{Idx, IndexVec};
-use crate::rustc_middle::mir::{self, Body, SourceScope};
-use crate::rustc_middle::ty::{ExistentialTraitRef, Instance, Ty};
-use crate::rustc_session::config::DebugInfo;
-use crate::rustc_span::{BytePos, Pos, SourceFile, SourceFileAndLine, Span, Symbol};
+use crate::rustc_complete::mir::{self, Body, SourceScope};
+use crate::rustc_complete::ty::{ExistentialTraitRef, Instance, Ty};
+use crate::rustc_complete::config::DebugInfo;
+use crate::rustc_complete::{BytePos, Pos, SourceFile, SourceFileAndLine, Span, Symbol};
 use rustc_target::callconv::FnAbi;
 
 use crate::builder::Builder;

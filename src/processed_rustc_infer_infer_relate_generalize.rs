@@ -2,14 +2,14 @@ use std::mem;
 
 use crate::rustc_data_structures::sso::SsoHashMap;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::error::TypeError;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::error::TypeError;
+use crate::rustc_complete::ty::{
     self, AliasRelationDirection, InferConst, Term, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
     TypeVisitableExt, TypeVisitor, TypingMode,
 };
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument, warn};
 
 use super::{

@@ -3,11 +3,11 @@ use std::mem::{self, discriminant};
 
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 use rustc_hashes::Hash64;
-use crate::rustc_hir::def_id::{CrateNum, DefId};
-use crate::rustc_hir::definitions::{DefPathData, DisambiguatedDefPathData};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::print::{PrettyPrinter, Print, PrintError, Printer};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::def_id::{CrateNum, DefId};
+use crate::rustc_complete::definitions::{DefPathData, DisambiguatedDefPathData};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::print::{PrettyPrinter, Print, PrintError, Printer};
+use crate::rustc_complete::ty::{
     self, GenericArg, GenericArgKind, Instance, ReifyReason, Ty, TyCtxt, TypeVisitableExt,
 };
 use tracing::debug;

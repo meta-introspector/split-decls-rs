@@ -2,15 +2,15 @@ use std::cell::{Cell, RefCell};
 use std::ops::Deref;
 
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_hir::{self as hir, HirId, HirIdMap, LangItem};
-use rustc_infer::infer::{InferCtxt, InferOk, OpaqueTypeStorageEntries, TyCtxtInferExt};
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, TypeVisitableExt, TypingMode};
-use crate::rustc_span::Span;
-use crate::rustc_span::def_id::LocalDefIdMap;
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
-use rustc_trait_selection::traits::{
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{self as hir, HirId, HirIdMap, LangItem};
+use crate::rustc_infer::infer::{InferCtxt, InferOk, OpaqueTypeStorageEntries, TyCtxtInferExt};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitableExt, TypingMode};
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::LocalDefIdMap;
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
+use crate::rustc_trait_selection::traits::{
     self, FulfillmentError, PredicateObligation, TraitEngine, TraitEngineExt as _,
 };
 use tracing::{debug, instrument};

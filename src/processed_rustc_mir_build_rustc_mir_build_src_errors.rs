@@ -1,14 +1,14 @@
 use crate::rustc_data_structures::fx::FxIndexMap;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagArgValue, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level,
     MultiSpan, Subdiagnostic, pluralize,
 };
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-use crate::rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::ty::{self, Ty};
 use rustc_pattern_analysis::errors::Uncovered;
 use rustc_pattern_analysis::rustc::RustcPatCtxt;
-use crate::rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::{Ident, Span, Symbol};
 
 use crate::fluent_generated as fluent;
 

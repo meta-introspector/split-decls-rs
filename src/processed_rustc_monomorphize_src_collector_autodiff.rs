@@ -1,5 +1,5 @@
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{self, GenericArg, IntrinsicDef, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, GenericArg, IntrinsicDef, TyCtxt};
 
 use crate::collector::{MonoItems, create_fn_mono_item};
 

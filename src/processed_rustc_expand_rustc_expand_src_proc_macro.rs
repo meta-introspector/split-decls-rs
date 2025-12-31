@@ -1,9 +1,9 @@
-use crate::rustc_ast::tokenstream::TokenStream;
-use rustc_errors::ErrorGuaranteed;
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::ErrorGuaranteed;
 use rustc_parse::parser::{ForceCollect, Parser};
-use crate::rustc_session::config::ProcMacroExecutionStrategy;
-use crate::rustc_span::Span;
-use crate::rustc_span::profiling::SpannedEventArgRecorder;
+use crate::rustc_complete::config::ProcMacroExecutionStrategy;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::profiling::SpannedEventArgRecorder;
 use {rustc_ast as ast, rustc_proc_macro as pm};
 
 use crate::base::{self, *};

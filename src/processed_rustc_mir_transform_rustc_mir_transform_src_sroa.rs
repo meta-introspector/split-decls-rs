@@ -1,12 +1,12 @@
 use rustc_abi::FieldIdx;
 use crate::rustc_data_structures::flat_map_in_place::FlatMapInPlace;
-use crate::rustc_hir::LangItem;
+use crate::rustc_complete::LangItem;
 use rustc_index::IndexVec;
 use rustc_index::bit_set::{DenseBitSet, GrowableBitSet};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::visit::*;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::visit::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 use rustc_mir_dataflow::value_analysis::{excluded_locals, iter_fields};
 use tracing::{debug, instrument};
 

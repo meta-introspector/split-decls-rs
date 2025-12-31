@@ -1,7 +1,7 @@
 use rustc_abi::FieldIdx;
 use rustc_index::bit_set::MixedBitSet;
-use crate::rustc_middle::mir::{Body, TerminatorKind};
-use crate::rustc_middle::ty::{self, GenericArgsRef, Ty, TyCtxt, VariantDef};
+use crate::rustc_complete::mir::{Body, TerminatorKind};
+use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, VariantDef};
 use rustc_mir_dataflow::impls::MaybeInitializedPlaces;
 use rustc_mir_dataflow::move_paths::{LookupResult, MoveData, MovePathIndex};
 use rustc_mir_dataflow::{Analysis, MaybeReachable, move_path_children_matching};

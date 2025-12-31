@@ -2,9 +2,9 @@ use std::ffi::CString;
 use std::path::Path;
 
 use crate::rustc_data_structures::small_c_str::SmallCStr;
-use rustc_errors::{Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level};
+use crate::rustc_complete::{Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level};
 use rustc_macros::Diagnostic;
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::fluent_generated as fluent;
 

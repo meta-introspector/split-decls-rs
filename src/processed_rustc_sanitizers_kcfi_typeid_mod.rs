@@ -6,7 +6,7 @@
 
 use std::hash::Hasher;
 
-use crate::rustc_middle::ty::{Instance, InstanceKind, ReifyReason, Ty, TyCtxt};
+use crate::rustc_complete::ty::{Instance, InstanceKind, ReifyReason, Ty, TyCtxt};
 use rustc_target::callconv::FnAbi;
 use twox_hash::XxHash64;
 

@@ -7,9 +7,9 @@ use rustc_abi::{AddressSpace, Align, Integer, Reg, Size};
 use rustc_codegen_ssa::common::TypeKind;
 use rustc_codegen_ssa::traits::*;
 use crate::rustc_data_structures::small_c_str::SmallCStr;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::layout::TyAndLayout;
-use crate::rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::ty::{self, Ty};
 use rustc_target::callconv::{CastTarget, FnAbi};
 
 use crate::abi::{FnAbiLlvmExt, LlvmType};

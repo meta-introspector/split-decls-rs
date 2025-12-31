@@ -1,13 +1,13 @@
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_infer::infer::canonical::{Canonical, QueryResponse};
-use rustc_infer::traits::PredicateObligations;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{ParamEnvAnd, TyCtxt};
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::infer::InferCtxtBuilderExt;
-use rustc_trait_selection::traits::query::normalize::NormalizationResult;
-use rustc_trait_selection::traits::query::{CanonicalAliasGoal, NoSolution};
-use rustc_trait_selection::traits::{self, ObligationCause, ScrubbedTraitError, SelectionContext};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::infer::canonical::{Canonical, QueryResponse};
+use crate::rustc_infer::traits::PredicateObligations;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{ParamEnvAnd, TyCtxt};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::infer::InferCtxtBuilderExt;
+use crate::rustc_trait_selection::traits::query::normalize::NormalizationResult;
+use crate::rustc_trait_selection::traits::query::{CanonicalAliasGoal, NoSolution};
+use crate::rustc_trait_selection::traits::{self, ObligationCause, ScrubbedTraitError, SelectionContext};
 use tracing::debug;
 
 pub(crate) fn provide(p: &mut Providers) {

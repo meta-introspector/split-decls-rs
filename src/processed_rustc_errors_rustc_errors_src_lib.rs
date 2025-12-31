@@ -63,10 +63,10 @@ use rustc_hashes::Hash128;
 pub use rustc_lint_defs::{Applicability, listify, pluralize};
 use rustc_lint_defs::{Lint, LintExpectationId};
 use rustc_macros::{Decodable, Encodable};
-pub use crate::rustc_span::ErrorGuaranteed;
-pub use crate::rustc_span::fatal_error::{FatalError, FatalErrorMarker};
-use crate::rustc_span::source_map::SourceMap;
-use crate::rustc_span::{BytePos, DUMMY_SP, Loc, Span};
+pub use crate::rustc_complete::ErrorGuaranteed;
+pub use crate::rustc_complete::fatal_error::{FatalError, FatalErrorMarker};
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{BytePos, DUMMY_SP, Loc, Span};
 pub use snippet::Style;
 // Used by external projects such as `rust-gpu`.
 // See https://github.com/rust-lang/rust/pull/115393.
@@ -297,7 +297,7 @@ impl CodeSuggestion {
         // corresponds to the output snippet's lines, while the second level corresponds to the
         // substrings within that line that should be highlighted.
 
-        use crate::rustc_span::{CharPos, Pos};
+        use crate::rustc_complete::{CharPos, Pos};
 
         /// Extracts a substring from the provided `line_opt` based on the specified low and high
         /// indices, appends it to the given buffer `buf`, and returns the count of newline

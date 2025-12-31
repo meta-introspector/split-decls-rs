@@ -7,7 +7,7 @@
 /// If the bug should only be emitted when compilation didn't fail,
 /// [`DiagCtxtHandle::span_delayed_bug`] may be useful.
 ///
-/// [`DiagCtxtHandle::span_delayed_bug`]: rustc_errors::DiagCtxtHandle::span_delayed_bug
+/// [`DiagCtxtHandle::span_delayed_bug`]: crate::rustc_errors::DiagCtxtHandle::span_delayed_bug
 /// [`span_bug`]: crate::span_bug
 #[macro_export]
 macro_rules! bug {
@@ -27,7 +27,7 @@ macro_rules! bug {
 /// If the bug should only be emitted when compilation didn't fail,
 /// [`DiagCtxtHandle::span_delayed_bug`] may be useful.
 ///
-/// [`DiagCtxtHandle::span_delayed_bug`]: rustc_errors::DiagCtxtHandle::span_delayed_bug
+/// [`DiagCtxtHandle::span_delayed_bug`]: crate::rustc_errors::DiagCtxtHandle::span_delayed_bug
 #[macro_export]
 macro_rules! span_bug {
     ($span:expr, $($arg:tt)+) => (

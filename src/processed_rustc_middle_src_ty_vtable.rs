@@ -1,6 +1,6 @@
 use std::fmt;
 
-use crate::rustc_ast::Mutability;
+use crate::rustc_complete::Mutability;
 use rustc_macros::HashStable;
 use rustc_type_ir::elaborate;
 

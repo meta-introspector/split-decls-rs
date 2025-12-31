@@ -71,14 +71,14 @@ use rustc_abi::{FieldIdx, VariantIdx};
 use crate::rustc_data_structures::steal::Steal;
 use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hir as hir;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::definitions::DisambiguatorState;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::hir::place::{Projection, ProjectionKind};
-use crate::rustc_middle::mir::visit::MutVisitor;
-use crate::rustc_middle::mir::{self, MirDumper};
-use crate::rustc_middle::ty::{self, InstanceKind, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::definitions::DisambiguatorState;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::hir::place::{Projection, ProjectionKind};
+use crate::rustc_complete::mir::visit::MutVisitor;
+use crate::rustc_complete::mir::{self, MirDumper};
+use crate::rustc_complete::ty::{self, InstanceKind, Ty, TyCtxt, TypeVisitableExt};
 
 pub(crate) fn coroutine_by_move_body_def_id<'tcx>(
     tcx: TyCtxt<'tcx>,

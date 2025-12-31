@@ -11,7 +11,7 @@ use crate::ty::{self, Ty, TyCtxt};
 
 pub use int::*;
 pub use kind::*;
-use crate::rustc_span::{DUMMY_SP, ErrorGuaranteed};
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed};
 pub use valtree::*;
 
 pub type ConstKind<'tcx> = ir::ConstKind<TyCtxt<'tcx>>;

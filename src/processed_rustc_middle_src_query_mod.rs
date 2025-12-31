@@ -69,21 +69,21 @@ use std::sync::Arc;
 
 use rustc_abi::Align;
 use rustc_arena::TypedArena;
-use crate::rustc_ast::expand::allocator::AllocatorKind;
+use crate::rustc_complete::expand::allocator::AllocatorKind;
 use crate::rustc_data_structures::fingerprint::Fingerprint;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 use crate::rustc_data_structures::sorted_map::SortedMap;
 use crate::rustc_data_structures::steal::Steal;
 use crate::rustc_data_structures::svh::Svh;
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-use rustc_errors::ErrorGuaranteed;
-use crate::rustc_hir::attrs::StrippedCfgItem;
-use crate::rustc_hir::def::{DefKind, DocLinkResMap};
-use crate::rustc_hir::def_id::{
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::attrs::StrippedCfgItem;
+use crate::rustc_complete::def::{DefKind, DocLinkResMap};
+use crate::rustc_complete::def_id::{
     CrateNum, DefId, DefIdMap, LocalDefId, LocalDefIdMap, LocalDefIdSet, LocalModDefId,
 };
-use crate::rustc_hir::lang_items::{LangItem, LanguageItems};
-use crate::rustc_hir::{Crate, ItemLocalId, ItemLocalMap, PreciseCapturingArgKind, TraitCandidate};
+use crate::rustc_complete::lang_items::{LangItem, LanguageItems};
+use crate::rustc_complete::{Crate, ItemLocalId, ItemLocalMap, PreciseCapturingArgKind, TraitCandidate};
 use rustc_index::IndexVec;
 use rustc_lint_defs::LintId;
 use rustc_macros::rustc_queries;
@@ -91,15 +91,15 @@ use rustc_query_system::ich::StableHashingContext;
 use rustc_query_system::query::{
     QueryCache, QueryMode, QueryStackDeferred, QueryState, try_get_cached,
 };
-use crate::rustc_session::Limits;
-use crate::rustc_session::config::{EntryFnType, OptLevel, OutputFilenames, SymbolManglingVersion};
-use crate::rustc_session::cstore::{
+use crate::rustc_complete::Limits;
+use crate::rustc_complete::config::{EntryFnType, OptLevel, OutputFilenames, SymbolManglingVersion};
+use crate::rustc_complete::cstore::{
     CrateDepKind, CrateSource, ExternCrate, ForeignModule, LinkagePreference, NativeLib,
 };
-use crate::rustc_session::lint::LintExpectationId;
-use crate::rustc_span::def_id::LOCAL_CRATE;
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{DUMMY_SP, Span, Symbol};
+use crate::rustc_complete::lint::LintExpectationId;
+use crate::rustc_complete::def_id::LOCAL_CRATE;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
 use rustc_target::spec::{PanicStrategy, SanitizerSet};
 use {rustc_abi as abi, rustc_ast as ast, rustc_hir as hir};
 
@@ -1139,7 +1139,7 @@ rustc_queries! {
     }
 
     /// Checks well-formedness of tail calls (`become f()`).
-    query check_tail_calls(key: LocalDefId) -> Result<(), rustc_errors::ErrorGuaranteed> {
+    query check_tail_calls(key: LocalDefId) -> Result<(), crate::rustc_errors::ErrorGuaranteed> {
         desc { |tcx| "tail-call-checking `{}`", tcx.def_path_str(key) }
         return_result_from_ensure_ok
     }
@@ -1397,7 +1397,7 @@ rustc_queries! {
         desc { "converting literal to const" }
     }
 
-    query check_match(key: LocalDefId) -> Result<(), rustc_errors::ErrorGuaranteed> {
+    query check_match(key: LocalDefId) -> Result<(), crate::rustc_errors::ErrorGuaranteed> {
         desc { |tcx| "match-checking `{}`", tcx.def_path_str(key) }
         return_result_from_ensure_ok
     }

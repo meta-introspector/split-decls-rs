@@ -1,7 +1,7 @@
 use std::num::NonZero;
 
 use rustc_macros::{Decodable, Encodable, HashStable_Generic, PrintAttribute};
-use crate::rustc_span::{ErrorGuaranteed, Symbol, sym};
+use crate::rustc_complete::{ErrorGuaranteed, Symbol, sym};
 
 use crate::RustcVersion;
 use crate::attrs::PrintAttribute;

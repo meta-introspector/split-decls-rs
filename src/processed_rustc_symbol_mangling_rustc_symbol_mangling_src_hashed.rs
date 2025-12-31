@@ -2,8 +2,8 @@ use std::fmt::Write;
 
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 use rustc_hashes::Hash64;
-use crate::rustc_hir::def_id::CrateNum;
-use crate::rustc_middle::ty::{Instance, TyCtxt};
+use crate::rustc_complete::def_id::CrateNum;
+use crate::rustc_complete::ty::{Instance, TyCtxt};
 
 use crate::v0;
 

@@ -4,14 +4,14 @@
 use std::assert_matches::assert_matches;
 use std::iter;
 
-use crate::rustc_ast::{self as ast, GenericParamKind, HasNodeId, attr, join_path_idents};
+use crate::rustc_complete::{self as ast, GenericParamKind, HasNodeId, attr, join_path_idents};
 use rustc_ast_pretty::pprust;
 use rustc_attr_parsing::AttributeParser;
-use rustc_errors::{Applicability, Diag, Level};
+use crate::rustc_complete::{Applicability, Diag, Level};
 use rustc_expand::base::*;
-use crate::rustc_hir::Attribute;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_span::{ErrorGuaranteed, FileNameDisplayPreference, Ident, Span, Symbol, sym};
+use crate::rustc_complete::Attribute;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::{ErrorGuaranteed, FileNameDisplayPreference, Ident, Span, Symbol, sym};
 use thin_vec::{ThinVec, thin_vec};
 use tracing::debug;
 

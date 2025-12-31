@@ -15,24 +15,24 @@ pub use relate::combine::PredicateEmittingRelation;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 use crate::rustc_data_structures::undo_log::{Rollback, UndoLogs};
 use crate::rustc_data_structures::unify as ut;
-use rustc_errors::{DiagCtxtHandle, ErrorGuaranteed};
+use crate::rustc_complete::{DiagCtxtHandle, ErrorGuaranteed};
 use rustc_hir as hir;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 use rustc_macros::extension;
 pub use rustc_macros::{TypeFoldable, TypeVisitable};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::infer::canonical::{CanonicalQueryInput, CanonicalVarValues};
-use crate::rustc_middle::mir::ConstraintCategory;
-use crate::rustc_middle::traits::select;
-use crate::rustc_middle::traits::solve::Goal;
-use crate::rustc_middle::ty::error::{ExpectedFound, TypeError};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::infer::canonical::{CanonicalQueryInput, CanonicalVarValues};
+use crate::rustc_complete::mir::ConstraintCategory;
+use crate::rustc_complete::traits::select;
+use crate::rustc_complete::traits::solve::Goal;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::ty::{
     self, BoundVarReplacerDelegate, ConstVid, FloatVid, GenericArg, GenericArgKind, GenericArgs,
     GenericArgsRef, GenericParamDefKind, InferConst, IntVid, OpaqueHiddenType, OpaqueTypeKey,
     PseudoCanonicalInput, Term, TermKind, Ty, TyCtxt, TyVid, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeVisitable, TypeVisitableExt, TypingEnv, TypingMode, fold_regions,
 };
-use crate::rustc_span::{DUMMY_SP, Span, Symbol};
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
 use snapshot::undo_log::InferCtxtUndoLogs;
 use tracing::{debug, instrument};
 use type_variable::TypeVariableOrigin;

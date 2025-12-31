@@ -2,8 +2,8 @@
 
 use crate::rustc_data_structures::snapshot_map::{self, SnapshotMapRef, SnapshotMapStorage};
 use crate::rustc_data_structures::undo_log::Rollback;
-use crate::rustc_middle::traits::EvaluationResult;
-use crate::rustc_middle::ty;
+use crate::rustc_complete::traits::EvaluationResult;
+use crate::rustc_complete::ty;
 use tracing::{debug, info};
 
 use super::PredicateObligations;

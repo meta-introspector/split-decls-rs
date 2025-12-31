@@ -1,7 +1,7 @@
 use std::num::NonZero;
 
-use rustc_errors::ErrorGuaranteed;
-use crate::rustc_hir::{
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::{
     DefaultBodyStability, MethodKind, PartialConstStability, Stability, StabilityLevel,
     StableSince, Target, UnstableReason, VERSION_PLACEHOLDER,
 };

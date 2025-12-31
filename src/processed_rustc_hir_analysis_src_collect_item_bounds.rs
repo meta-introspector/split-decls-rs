@@ -1,13 +1,13 @@
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 use rustc_hir as hir;
-use rustc_infer::traits::util;
-use crate::rustc_middle::ty::{
+use crate::rustc_infer::traits::util;
+use crate::rustc_complete::ty::{
     self, GenericArgs, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt,
     Upcast, shift_vars,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::Span;
-use crate::rustc_span::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 use tracing::{debug, instrument};
 
 use super::ItemCtxt;

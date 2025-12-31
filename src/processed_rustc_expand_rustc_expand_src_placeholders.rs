@@ -1,9 +1,9 @@
-use crate::rustc_ast::mut_visit::*;
-use crate::rustc_ast::token::Delimiter;
-use crate::rustc_ast::visit::AssocCtxt;
-use crate::rustc_ast::{self as ast, Safety};
+use crate::rustc_complete::mut_visit::*;
+use crate::rustc_complete::token::Delimiter;
+use crate::rustc_complete::visit::AssocCtxt;
+use crate::rustc_complete::{self as ast, Safety};
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_span::{DUMMY_SP, Ident};
+use crate::rustc_complete::{DUMMY_SP, Ident};
 use smallvec::{SmallVec, smallvec};
 use thin_vec::ThinVec;
 

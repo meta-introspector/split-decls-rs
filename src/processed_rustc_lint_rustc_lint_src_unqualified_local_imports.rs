@@ -1,6 +1,6 @@
-use crate::rustc_hir::{self as hir};
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::kw;
+use crate::rustc_complete::{self as hir};
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::kw;
 
 use crate::{LateContext, LateLintPass, LintContext, lints};
 

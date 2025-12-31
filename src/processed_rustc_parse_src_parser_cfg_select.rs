@@ -1,9 +1,9 @@
-use crate::rustc_ast::token::Token;
-use crate::rustc_ast::tokenstream::{TokenStream, TokenTree};
-use crate::rustc_ast::util::classify;
-use crate::rustc_ast::{MetaItemInner, token};
-use rustc_errors::PResult;
-use crate::rustc_span::Span;
+use crate::rustc_complete::token::Token;
+use crate::rustc_complete::tokenstream::{TokenStream, TokenTree};
+use crate::rustc_complete::util::classify;
+use crate::rustc_complete::{MetaItemInner, token};
+use crate::rustc_complete::PResult;
+use crate::rustc_complete::Span;
 
 use crate::exp;
 use crate::parser::{AttrWrapper, ForceCollect, Parser, Restrictions, Trailing, UsePreAttrPos};

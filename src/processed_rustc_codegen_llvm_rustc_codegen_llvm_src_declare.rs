@@ -16,7 +16,7 @@ use std::borrow::Borrow;
 use itertools::Itertools;
 use rustc_codegen_ssa::traits::TypeMembershipCodegenMethods;
 use crate::rustc_data_structures::fx::FxIndexSet;
-use crate::rustc_middle::ty::{Instance, Ty};
+use crate::rustc_complete::ty::{Instance, Ty};
 use rustc_sanitizers::{cfi, kcfi};
 use rustc_target::callconv::FnAbi;
 use smallvec::SmallVec;

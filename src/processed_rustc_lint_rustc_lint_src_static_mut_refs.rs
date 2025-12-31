@@ -1,10 +1,10 @@
 use rustc_hir as hir;
-use crate::rustc_hir::{Expr, Stmt};
-use crate::rustc_middle::ty::{Mutability, TyKind};
-use crate::rustc_session::lint::FutureIncompatibilityReason;
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::{BytePos, Span};
+use crate::rustc_complete::{Expr, Stmt};
+use crate::rustc_complete::ty::{Mutability, TyKind};
+use crate::rustc_complete::lint::FutureIncompatibilityReason;
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{BytePos, Span};
 
 use crate::lints::{MutRefSugg, RefOfMutStatic};
 use crate::{LateContext, LateLintPass, LintContext};

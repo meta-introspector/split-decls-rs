@@ -1,9 +1,9 @@
 // Functions for reading and writing discriminants of multi-variant layouts (enums and coroutines).
 
 use rustc_abi::{self as abi, FieldIdx, TagEncoding, VariantIdx, Variants};
-use crate::rustc_middle::ty::layout::{PrimitiveExt, TyAndLayout};
-use crate::rustc_middle::ty::{self, CoroutineArgsExt, ScalarInt, Ty};
-use crate::rustc_middle::{mir, span_bug};
+use crate::rustc_complete::ty::layout::{PrimitiveExt, TyAndLayout};
+use crate::rustc_complete::ty::{self, CoroutineArgsExt, ScalarInt, Ty};
+use crate::rustc_complete::{mir, span_bug};
 use tracing::{instrument, trace};
 
 use super::{

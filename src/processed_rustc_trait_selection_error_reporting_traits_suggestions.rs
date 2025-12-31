@@ -9,35 +9,35 @@ use itertools::{EitherOrBoth, Itertools};
 use rustc_abi::ExternAbi;
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, EmissionGuarantee, MultiSpan, Style, SuggestionStyle, pluralize,
     struct_span_code_err,
 };
-use crate::rustc_hir::def::{CtorOf, DefKind, Res};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::intravisit::{Visitor, VisitorExt};
-use crate::rustc_hir::lang_items::LangItem;
-use crate::rustc_hir::{
+use crate::rustc_complete::def::{CtorOf, DefKind, Res};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::intravisit::{Visitor, VisitorExt};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{
     self as hir, AmbigArg, CoroutineDesugaring, CoroutineKind, CoroutineSource, Expr, HirId, Node,
     expr_needs_parens, is_range_literal,
 };
-use rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferCtxt, InferOk};
-use crate::rustc_middle::middle::privacy::Level;
-use crate::rustc_middle::traits::IsConstable;
-use crate::rustc_middle::ty::error::TypeError;
-use crate::rustc_middle::ty::print::{
+use crate::rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferCtxt, InferOk};
+use crate::rustc_complete::middle::privacy::Level;
+use crate::rustc_complete::traits::IsConstable;
+use crate::rustc_complete::ty::error::TypeError;
+use crate::rustc_complete::ty::print::{
     PrintPolyTraitPredicateExt as _, PrintPolyTraitRefExt, PrintTraitPredicateExt as _,
     with_forced_trimmed_paths, with_no_trimmed_paths, with_types_for_suggestion,
 };
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, AdtKind, GenericArgs, InferTy, IsSuggestable, Ty, TyCtxt, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeSuperVisitable, TypeVisitableExt, TypeVisitor, TypeckResults, Upcast,
     suggest_arbitrary_trait_bound, suggest_constraining_type_param,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::def_id::LocalDefId;
-use crate::rustc_span::{
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{
     BytePos, DUMMY_SP, DesugaringKind, ExpnKind, Ident, MacroKind, Span, Symbol, kw, sym,
 };
 use tracing::{debug, instrument};
@@ -1404,7 +1404,7 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                 if has_custom_message {
                     err.note(msg);
                 } else {
-                    err.messages = vec![(rustc_errors::DiagMessage::from(msg), Style::NoStyle)];
+                    err.messages = vec![(crate::rustc_errors::DiagMessage::from(msg), Style::NoStyle)];
                 }
                 err.span_label(
                     span,

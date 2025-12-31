@@ -4,31 +4,31 @@ use std::collections::BTreeMap;
 
 use rustc_abi::{FieldIdx, VariantIdx};
 use crate::rustc_data_structures::fx::FxIndexMap;
-use rustc_errors::{Applicability, Diag, EmissionGuarantee, MultiSpan, listify};
-use crate::rustc_hir::def::{CtorKind, Namespace};
-use crate::rustc_hir::{
+use crate::rustc_complete::{Applicability, Diag, EmissionGuarantee, MultiSpan, listify};
+use crate::rustc_complete::def::{CtorKind, Namespace};
+use crate::rustc_complete::{
     self as hir, CoroutineKind, GenericBound, LangItem, WhereBoundPredicate, WherePredicateKind,
 };
 use rustc_index::{IndexSlice, IndexVec};
-use rustc_infer::infer::{BoundRegionConversionTime, NllRegionVariableOrigin};
-use rustc_infer::traits::SelectionError;
-use crate::rustc_middle::mir::{
+use crate::rustc_infer::infer::{BoundRegionConversionTime, NllRegionVariableOrigin};
+use crate::rustc_infer::traits::SelectionError;
+use crate::rustc_complete::mir::{
     AggregateKind, CallSource, ConstOperand, ConstraintCategory, FakeReadCause, Local, LocalInfo,
     LocalKind, Location, Operand, Place, PlaceRef, PlaceTy, ProjectionElem, Rvalue, Statement,
     StatementKind, Terminator, TerminatorKind, VarDebugInfoContents, find_self_call,
 };
-use crate::rustc_middle::ty::print::Print;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_middle::{bug, span_bug};
+use crate::rustc_complete::ty::print::Print;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::{bug, span_bug};
 use rustc_mir_dataflow::move_paths::{InitLocation, LookupResult, MoveOutIndex};
-use crate::rustc_session::lint::builtin::MACRO_EXTENDED_TEMPORARY_SCOPES;
-use crate::rustc_span::def_id::LocalDefId;
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{DUMMY_SP, ErrorGuaranteed, Span, Symbol, sym};
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::error_reporting::traits::call_kind::{CallDesugaringKind, call_kind};
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits::{
+use crate::rustc_complete::lint::builtin::MACRO_EXTENDED_TEMPORARY_SCOPES;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span, Symbol, sym};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::error_reporting::traits::call_kind::{CallDesugaringKind, call_kind};
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits::{
     FulfillmentError, FulfillmentErrorCode, type_known_to_meet_bound_modulo_regions,
 };
 use tracing::debug;
@@ -51,7 +51,7 @@ pub(crate) use mutability_errors::AccessKind;
 pub(crate) use outlives_suggestion::OutlivesSuggestionBuilder;
 pub(crate) use region_errors::{ErrorConstraintInfo, RegionErrorKind, RegionErrors};
 pub(crate) use region_name::{RegionName, RegionNameSource};
-pub(crate) use rustc_trait_selection::error_reporting::traits::call_kind::CallKind;
+pub(crate) use crate::rustc_trait_selection::error_reporting::traits::call_kind::CallKind;
 
 pub(super) struct DescribePlaceOpt {
     including_downcast: bool,

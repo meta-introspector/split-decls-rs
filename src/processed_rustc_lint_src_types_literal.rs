@@ -1,10 +1,10 @@
 use hir::{ExprKind, Node, is_range_literal};
 use rustc_abi::{Integer, Size};
-use crate::rustc_hir::{HirId, attrs};
-use crate::rustc_middle::ty::Ty;
-use crate::rustc_middle::ty::layout::IntegerExt;
-use crate::rustc_middle::{bug, ty};
-use crate::rustc_span::Span;
+use crate::rustc_complete::{HirId, attrs};
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::IntegerExt;
+use crate::rustc_complete::{bug, ty};
+use crate::rustc_complete::Span;
 use {rustc_ast as ast, rustc_hir as hir};
 
 use crate::LateContext;
@@ -58,7 +58,7 @@ fn lint_overflowing_range_endpoint<'tcx>(
         return false;
     };
 
-    use crate::rustc_ast::{LitIntType, LitKind};
+    use crate::rustc_complete::{LitIntType, LitKind};
     let suffix = match lit.node {
         LitKind::Int(_, LitIntType::Signed(s)) => s.name_str(),
         LitKind::Int(_, LitIntType::Unsigned(s)) => s.name_str(),

@@ -52,7 +52,7 @@ impl<'a> DiagnosticDerive<'a> {
                 Some(slug) => {
                     slugs.borrow_mut().push(slug.clone());
                     quote! {
-                        let mut diag = rustc_errors::Diag::new(
+                        let mut diag = crate::rustc_errors::Diag::new(
                             dcx,
                             level,
                             crate::fluent_generated::#slug
@@ -75,15 +75,15 @@ impl<'a> DiagnosticDerive<'a> {
         // FIXME(edition_2024): Fix the `keyword_idents_2024` lint to not trigger here?
         #[allow(keyword_idents_2024)]
         let mut imp = structure.gen_impl(quote! {
-            gen impl<'_sess, G> rustc_errors::Diagnostic<'_sess, G> for @Self
-                where G: rustc_errors::EmissionGuarantee
+            gen impl<'_sess, G> crate::rustc_errors::Diagnostic<'_sess, G> for @Self
+                where G: crate::rustc_errors::EmissionGuarantee
             {
                 #[track_caller]
                 fn into_diag(
                     self,
-                    dcx: rustc_errors::DiagCtxtHandle<'_sess>,
-                    level: rustc_errors::Level
-                ) -> rustc_errors::Diag<'_sess, G> {
+                    dcx: crate::rustc_errors::DiagCtxtHandle<'_sess>,
+                    level: crate::rustc_errors::Level
+                ) -> crate::rustc_errors::Diag<'_sess, G> {
                     #implementation
                 }
             }
@@ -154,11 +154,11 @@ impl<'a> LintDiagnosticDerive<'a> {
         // FIXME(edition_2024): Fix the `keyword_idents_2024` lint to not trigger here?
         #[allow(keyword_idents_2024)]
         let mut imp = structure.gen_impl(quote! {
-            gen impl<'__a> rustc_errors::LintDiagnostic<'__a, ()> for @Self {
+            gen impl<'__a> crate::rustc_errors::LintDiagnostic<'__a, ()> for @Self {
                 #[track_caller]
                 fn decorate_lint<'__b>(
                     self,
-                    diag: &'__b mut rustc_errors::Diag<'__a, ()>
+                    diag: &'__b mut crate::rustc_errors::Diag<'__a, ()>
                 ) {
                     #implementation;
                 }

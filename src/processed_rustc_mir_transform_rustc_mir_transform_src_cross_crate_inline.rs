@@ -1,12 +1,12 @@
-use crate::rustc_hir::attrs::InlineAttr;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_middle::mir::visit::Visitor;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::config::{InliningThreshold, OptLevel};
-use crate::rustc_span::sym;
+use crate::rustc_complete::attrs::InlineAttr;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::{InliningThreshold, OptLevel};
+use crate::rustc_complete::sym;
 
 use crate::{inline, pass_manager as pm};
 

@@ -1,4 +1,4 @@
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 use rustc_type_ir::elaborate::Elaboratable;
 
 use crate::ty::{self, TyCtxt};

@@ -3,34 +3,34 @@ use std::ops::ControlFlow;
 
 use rustc_abi::{ExternAbi, FieldIdx};
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-use rustc_errors::codes::*;
-use rustc_errors::{EmissionGuarantee, MultiSpan};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{EmissionGuarantee, MultiSpan};
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::attrs::ReprAttr::ReprPacked;
-use crate::rustc_hir::def::{CtorKind, DefKind};
-use crate::rustc_hir::{LangItem, Node, attrs, find_attr, intravisit};
-use rustc_infer::infer::{RegionVariableOrigin, TyCtxtInferExt};
-use rustc_infer::traits::{Obligation, ObligationCauseCode, WellFormedLoc};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::attrs::ReprAttr::ReprPacked;
+use crate::rustc_complete::def::{CtorKind, DefKind};
+use crate::rustc_complete::{LangItem, Node, attrs, find_attr, intravisit};
+use crate::rustc_infer::infer::{RegionVariableOrigin, TyCtxtInferExt};
+use crate::rustc_infer::traits::{Obligation, ObligationCauseCode, WellFormedLoc};
 use rustc_lint_defs::builtin::{
     REPR_TRANSPARENT_EXTERNAL_PRIVATE_FIELDS, UNSUPPORTED_CALLING_CONVENTIONS,
 };
-use crate::rustc_middle::hir::nested_filter;
-use crate::rustc_middle::middle::resolve_bound_vars::ResolvedArg;
-use crate::rustc_middle::middle::stability::EvalResult;
-use crate::rustc_middle::ty::error::TypeErrorToStringExt;
-use crate::rustc_middle::ty::layout::{LayoutError, MAX_SIMD_LANES};
-use crate::rustc_middle::ty::util::Discr;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::middle::resolve_bound_vars::ResolvedArg;
+use crate::rustc_complete::middle::stability::EvalResult;
+use crate::rustc_complete::ty::error::TypeErrorToStringExt;
+use crate::rustc_complete::ty::layout::{LayoutError, MAX_SIMD_LANES};
+use crate::rustc_complete::ty::util::Discr;
+use crate::rustc_complete::ty::{
     AdtDef, BottomUpFolder, FnSig, GenericArgKind, RegionKind, TypeFoldable, TypeSuperVisitable,
     TypeVisitable, TypeVisitableExt, fold_regions,
 };
-use crate::rustc_session::lint::builtin::UNINHABITED_STATIC;
+use crate::rustc_complete::lint::builtin::UNINHABITED_STATIC;
 use rustc_target::spec::{AbiMap, AbiMapping};
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::error_reporting::traits::on_unimplemented::OnUnimplementedDirective;
-use rustc_trait_selection::traits;
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::error_reporting::traits::on_unimplemented::OnUnimplementedDirective;
+use crate::rustc_trait_selection::traits;
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
 use tracing::{debug, instrument};
 use ty::TypingMode;
 
@@ -836,7 +836,7 @@ pub(crate) fn check_item_type(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Result<(),
                 match assoc_item.kind {
                     ty::AssocKind::Type { .. } if assoc_item.defaultness(tcx).has_value() => {
                         let trait_args = GenericArgs::identity_for_item(tcx, def_id);
-                        let _: Result<_, rustc_errors::ErrorGuaranteed> = check_type_bounds(
+                        let _: Result<_, crate::rustc_errors::ErrorGuaranteed> = check_type_bounds(
                             tcx,
                             assoc_item,
                             assoc_item,

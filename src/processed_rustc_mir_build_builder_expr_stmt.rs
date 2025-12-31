@@ -1,8 +1,8 @@
-use crate::rustc_middle::middle::region;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::thir::*;
-use crate::rustc_span::source_map::Spanned;
+use crate::rustc_complete::middle::region;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::source_map::Spanned;
 use tracing::debug;
 
 use crate::builder::scope::BreakableTarget;

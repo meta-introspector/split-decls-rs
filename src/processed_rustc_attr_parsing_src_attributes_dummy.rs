@@ -1,6 +1,6 @@
 use rustc_feature::{AttributeTemplate, template};
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_span::{Symbol, sym};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::{Symbol, sym};
 
 use crate::attributes::{AttributeOrder, OnDuplicate, SingleAttributeParser};
 use crate::context::{AcceptContext, Stage};

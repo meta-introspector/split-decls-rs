@@ -1,6 +1,6 @@
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
-use crate::rustc_middle::mir::{
+use crate::rustc_complete::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::mir::{
     self, CallReturnPlaces, Local, Location, Place, StatementKind, TerminatorEdges,
 };
 

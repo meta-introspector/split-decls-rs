@@ -11,27 +11,27 @@ use std::ops::ControlFlow;
 use hir::def::DefKind;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::{Diag, EmissionGuarantee};
+use crate::rustc_complete::{Diag, EmissionGuarantee};
 use rustc_hir as hir;
-use crate::rustc_hir::LangItem;
-use crate::rustc_hir::def_id::DefId;
-use rustc_infer::infer::BoundRegionConversionTime::{self, HigherRankedType};
-use rustc_infer::infer::DefineOpaqueTypes;
-use rustc_infer::infer::at::ToTrace;
-use rustc_infer::infer::relate::TypeRelation;
-use rustc_infer::traits::{PredicateObligations, TraitObligation};
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_infer::infer::BoundRegionConversionTime::{self, HigherRankedType};
+use crate::rustc_infer::infer::DefineOpaqueTypes;
+use crate::rustc_infer::infer::at::ToTrace;
+use crate::rustc_infer::infer::relate::TypeRelation;
+use crate::rustc_infer::traits::{PredicateObligations, TraitObligation};
 use rustc_macros::{TypeFoldable, TypeVisitable};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::dep_graph::{DepNodeIndex, dep_kinds};
-pub use crate::rustc_middle::traits::select::*;
-use crate::rustc_middle::ty::abstract_const::NotConstEvaluatable;
-use crate::rustc_middle::ty::error::TypeErrorToStringExt;
-use crate::rustc_middle::ty::print::{PrintTraitRefExt as _, with_no_trimmed_paths};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::dep_graph::{DepNodeIndex, dep_kinds};
+pub use crate::rustc_complete::traits::select::*;
+use crate::rustc_complete::ty::abstract_const::NotConstEvaluatable;
+use crate::rustc_complete::ty::error::TypeErrorToStringExt;
+use crate::rustc_complete::ty::print::{PrintTraitRefExt as _, with_no_trimmed_paths};
+use crate::rustc_complete::ty::{
     self, DeepRejectCtxt, GenericArgsRef, PolyProjectionPredicate, SizedTraitKind, Ty, TyCtxt,
     TypeFoldable, TypeVisitableExt, TypingMode, Upcast, elaborate, may_use_unstable_feature,
 };
-use crate::rustc_span::{Symbol, sym};
+use crate::rustc_complete::{Symbol, sym};
 use tracing::{debug, instrument, trace};
 
 use self::EvaluationResult::*;
@@ -865,7 +865,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
                             c1, c2
                         );
 
-                        use crate::rustc_hir::def::DefKind;
+                        use crate::rustc_complete::def::DefKind;
                         match (c1.kind(), c2.kind()) {
                             (ty::ConstKind::Unevaluated(a), ty::ConstKind::Unevaluated(b))
                                 if a.def == b.def && tcx.def_kind(a.def) == DefKind::AssocConst =>

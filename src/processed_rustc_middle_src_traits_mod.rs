@@ -7,15 +7,15 @@ use std::borrow::Cow;
 use std::hash::{Hash, Hasher};
 use std::sync::Arc;
 
-use rustc_errors::{Applicability, Diag, EmissionGuarantee, ErrorGuaranteed};
+use crate::rustc_complete::{Applicability, Diag, EmissionGuarantee, ErrorGuaranteed};
 use rustc_hir as hir;
-use crate::rustc_hir::HirId;
-use crate::rustc_hir::def_id::DefId;
+use crate::rustc_complete::HirId;
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{
     Decodable, Encodable, HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable,
 };
-use crate::rustc_span::def_id::{CRATE_DEF_ID, LocalDefId};
-use crate::rustc_span::{DUMMY_SP, Span, Symbol};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, LocalDefId};
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
 use smallvec::{SmallVec, smallvec};
 use thin_vec::ThinVec;
 

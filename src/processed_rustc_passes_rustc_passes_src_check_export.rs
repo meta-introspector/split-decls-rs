@@ -4,19 +4,19 @@ use std::ops::ControlFlow;
 use rustc_abi::ExternAbi;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::find_attr;
-use crate::rustc_hir::intravisit::{self, Visitor};
-use crate::rustc_middle::hir::nested_filter;
-use crate::rustc_middle::middle::privacy::{EffectiveVisibility, Level};
-use crate::rustc_middle::query::{LocalCrate, Providers};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::find_attr;
+use crate::rustc_complete::intravisit::{self, Visitor};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::middle::privacy::{EffectiveVisibility, Level};
+use crate::rustc_complete::query::{LocalCrate, Providers};
+use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitor, Visibility,
 };
-use crate::rustc_session::config::CrateType;
-use crate::rustc_span::Span;
+use crate::rustc_complete::config::CrateType;
+use crate::rustc_complete::Span;
 
 use crate::errors::UnexportableItem;
 

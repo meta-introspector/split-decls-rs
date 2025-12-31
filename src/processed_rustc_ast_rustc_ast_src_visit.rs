@@ -15,8 +15,8 @@
 
 pub use rustc_ast_ir::visit::VisitorResult;
 pub use rustc_ast_ir::{try_visit, visit_opt, walk_list, walk_visitable_list};
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Ident, Span, Symbol};
 use thin_vec::ThinVec;
 
 use crate::ast::*;

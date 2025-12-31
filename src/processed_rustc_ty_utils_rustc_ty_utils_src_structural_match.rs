@@ -1,8 +1,8 @@
-use crate::rustc_hir::lang_items::LangItem;
-use rustc_infer::infer::TyCtxtInferExt;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, TypingMode};
-use rustc_trait_selection::traits::{ObligationCause, ObligationCtxt};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypingMode};
+use crate::rustc_trait_selection::traits::{ObligationCause, ObligationCtxt};
 
 /// This method returns true if and only if `adt_ty` itself has been marked as
 /// eligible for structural-match: namely, if it implements

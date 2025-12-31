@@ -29,10 +29,10 @@ use cranelift_codegen::isa::TargetIsa;
 use cranelift_codegen::settings::{self, Configurable};
 use rustc_codegen_ssa::traits::CodegenBackend;
 use rustc_codegen_ssa::{CodegenResults, TargetConfig};
-use crate::rustc_middle::dep_graph::{WorkProduct, WorkProductId};
-use crate::rustc_session::Session;
-use crate::rustc_session::config::OutputFilenames;
-use crate::rustc_span::{Symbol, sym};
+use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::OutputFilenames;
+use crate::rustc_complete::{Symbol, sym};
 
 pub use crate::config::*;
 use crate::prelude::*;
@@ -49,14 +49,14 @@ mod prelude {
     pub(crate) use cranelift_module::{self, DataDescription, FuncId, Linkage, Module};
     pub(crate) use rustc_abi::{BackendRepr, FIRST_VARIANT, FieldIdx, Scalar, Size, VariantIdx};
     pub(crate) use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap};
-    pub(crate) use crate::rustc_hir::def_id::{DefId, LOCAL_CRATE};
+    pub(crate) use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
     pub(crate) use rustc_index::Idx;
-    pub(crate) use crate::rustc_middle::mir::{self, *};
-    pub(crate) use crate::rustc_middle::ty::layout::{LayoutOf, TyAndLayout};
-    pub(crate) use crate::rustc_middle::ty::{
+    pub(crate) use crate::rustc_complete::mir::{self, *};
+    pub(crate) use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
+    pub(crate) use crate::rustc_complete::ty::{
         self, FloatTy, Instance, InstanceKind, IntTy, Ty, TyCtxt, UintTy,
     };
-    pub(crate) use crate::rustc_span::Span;
+    pub(crate) use crate::rustc_complete::Span;
 
     pub(crate) use crate::abi::*;
     pub(crate) use crate::base::{codegen_operand, codegen_place};
@@ -120,7 +120,7 @@ impl CodegenBackend for CraneliftCodegenBackend {
     }
 
     fn init(&self, sess: &Session) {
-        use crate::rustc_session::config::{InstrumentCoverage, Lto};
+        use crate::rustc_complete::config::{InstrumentCoverage, Lto};
         match sess.lto() {
             Lto::No | Lto::ThinLocal => {}
             Lto::Thin | Lto::Fat => {
@@ -269,7 +269,7 @@ fn build_isa(sess: &Session, jit: bool) -> Arc<dyn TargetIsa + 'static> {
             .unwrap();
     }
 
-    use crate::rustc_session::config::OptLevel;
+    use crate::rustc_complete::config::OptLevel;
     match sess.opts.optimize {
         OptLevel::No => {
             flags_builder.set("opt_level", "none").unwrap();

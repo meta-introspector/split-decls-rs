@@ -1,12 +1,12 @@
 use either::Either;
 use rustc_abi::Size;
 use rustc_apfloat::{Float, FloatConvert};
-use crate::rustc_middle::mir::NullOp;
-use crate::rustc_middle::mir::interpret::{InterpResult, PointerArithmetic, Scalar};
-use crate::rustc_middle::ty::layout::TyAndLayout;
-use crate::rustc_middle::ty::{self, FloatTy, ScalarInt, Ty};
-use crate::rustc_middle::{bug, mir, span_bug};
-use crate::rustc_span::sym;
+use crate::rustc_complete::mir::NullOp;
+use crate::rustc_complete::mir::interpret::{InterpResult, PointerArithmetic, Scalar};
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::ty::{self, FloatTy, ScalarInt, Ty};
+use crate::rustc_complete::{bug, mir, span_bug};
+use crate::rustc_complete::sym;
 use tracing::trace;
 
 use super::{ImmTy, InterpCx, Machine, MemPlaceMeta, interp_ok, throw_ub};
@@ -18,7 +18,7 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
     }
 
     fn binary_char_op(&self, bin_op: mir::BinOp, l: char, r: char) -> ImmTy<'tcx, M::Provenance> {
-        use crate::rustc_middle::mir::BinOp::*;
+        use crate::rustc_complete::mir::BinOp::*;
 
         if bin_op == Cmp {
             return self.three_way_compare(l, r);
@@ -37,7 +37,7 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
     }
 
     fn binary_bool_op(&self, bin_op: mir::BinOp, l: bool, r: bool) -> ImmTy<'tcx, M::Provenance> {
-        use crate::rustc_middle::mir::BinOp::*;
+        use crate::rustc_complete::mir::BinOp::*;
 
         let res = match bin_op {
             Eq => l == r,
@@ -61,7 +61,7 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         l: F,
         r: F,
     ) -> ImmTy<'tcx, M::Provenance> {
-        use crate::rustc_middle::mir::BinOp::*;
+        use crate::rustc_complete::mir::BinOp::*;
 
         // Performs appropriate non-deterministic adjustments of NaN results.
         let adjust_nan = |f: F| -> F { self.adjust_nan(f, &[l, r]) };
@@ -88,7 +88,7 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         left: &ImmTy<'tcx, M::Provenance>,
         right: &ImmTy<'tcx, M::Provenance>,
     ) -> InterpResult<'tcx, ImmTy<'tcx, M::Provenance>> {
-        use crate::rustc_middle::mir::BinOp::*;
+        use crate::rustc_complete::mir::BinOp::*;
 
         // This checks the size, so that we can just assert it below.
         let l = left.to_scalar_int()?;
@@ -307,7 +307,7 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         left: &ImmTy<'tcx, M::Provenance>,
         right: &ImmTy<'tcx, M::Provenance>,
     ) -> InterpResult<'tcx, ImmTy<'tcx, M::Provenance>> {
-        use crate::rustc_middle::mir::BinOp::*;
+        use crate::rustc_complete::mir::BinOp::*;
 
         match bin_op {
             // Pointer ops that are always supported.
@@ -436,7 +436,7 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         un_op: mir::UnOp,
         val: &ImmTy<'tcx, M::Provenance>,
     ) -> InterpResult<'tcx, ImmTy<'tcx, M::Provenance>> {
-        use crate::rustc_middle::mir::UnOp::*;
+        use crate::rustc_complete::mir::UnOp::*;
 
         let layout = val.layout;
         trace!("Running unary op {:?}: {:?} ({})", un_op, val, layout.ty);
@@ -511,7 +511,7 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         null_op: NullOp<'tcx>,
         arg_ty: Ty<'tcx>,
     ) -> InterpResult<'tcx, ImmTy<'tcx, M::Provenance>> {
-        use crate::rustc_middle::mir::NullOp::*;
+        use crate::rustc_complete::mir::NullOp::*;
 
         let layout = self.layout_of(arg_ty)?;
         let usize_layout = || self.layout_of(self.tcx.types.usize).unwrap();

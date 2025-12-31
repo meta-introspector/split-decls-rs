@@ -8,12 +8,12 @@ use std::num::NonZero;
 use std::{fmt, io};
 
 use rustc_abi::{AddressSpace, Align, Endian, HasDataLayout, Size};
-use crate::rustc_ast::{LitKind, Mutability};
+use crate::rustc_complete::{LitKind, Mutability};
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::sharded::ShardedHashMap;
 use crate::rustc_data_structures::sync::{AtomicU64, Lock};
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
 use rustc_serialize::{Decodable, Encodable};
 use tracing::{debug, trace};

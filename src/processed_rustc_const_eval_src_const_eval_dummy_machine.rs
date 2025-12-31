@@ -1,10 +1,10 @@
-use crate::rustc_middle::mir::interpret::{AllocId, ConstAllocation, InterpResult};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::query::TyCtxtAt;
-use crate::rustc_middle::ty::Ty;
-use crate::rustc_middle::ty::layout::TyAndLayout;
-use crate::rustc_middle::{bug, span_bug, ty};
-use crate::rustc_span::def_id::DefId;
+use crate::rustc_complete::mir::interpret::{AllocId, ConstAllocation, InterpResult};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::{bug, span_bug, ty};
+use crate::rustc_complete::def_id::DefId;
 use rustc_target::callconv::FnAbi;
 
 use crate::interpret::{
@@ -27,13 +27,13 @@ pub macro throw_machine_stop_str($($tt:tt)*) {{
     }
 
     impl crate::rustc_middle::mir::interpret::MachineStopType for Zst {
-        fn diagnostic_message(&self) -> rustc_errors::DiagMessage {
+        fn diagnostic_message(&self) -> crate::rustc_errors::DiagMessage {
             self.to_string().into()
         }
 
         fn add_args(
             self: Box<Self>,
-            _: &mut dyn FnMut(rustc_errors::DiagArgName, rustc_errors::DiagArgValue),
+            _: &mut dyn FnMut(crate::rustc_errors::DiagArgName, crate::rustc_errors::DiagArgValue),
         ) {}
     }
     throw_machine_stop!(Zst)
@@ -128,7 +128,7 @@ impl<'tcx> interpret::Machine<'tcx> for DummyMachine {
         left: &interpret::ImmTy<'tcx, Self::Provenance>,
         right: &interpret::ImmTy<'tcx, Self::Provenance>,
     ) -> interpret::InterpResult<'tcx, ImmTy<'tcx, Self::Provenance>> {
-        use crate::rustc_middle::mir::BinOp::*;
+        use crate::rustc_complete::mir::BinOp::*;
         interp_ok(match bin_op {
             Eq | Ne | Lt | Le | Gt | Ge => {
                 // Types can differ, e.g. fn ptrs with different `for`.

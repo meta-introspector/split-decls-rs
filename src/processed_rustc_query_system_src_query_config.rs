@@ -4,7 +4,7 @@ use std::fmt::Debug;
 use std::hash::Hash;
 
 use crate::rustc_data_structures::fingerprint::Fingerprint;
-use crate::rustc_span::ErrorGuaranteed;
+use crate::rustc_complete::ErrorGuaranteed;
 
 use super::QueryStackFrameExtra;
 use crate::dep_graph::{DepKind, DepNode, DepNodeParams, SerializedDepNodeIndex};

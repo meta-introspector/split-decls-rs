@@ -3,12 +3,12 @@ use std::ops::ControlFlow;
 use crate::rustc_data_structures::graph::iterate::{
     NodeStatus, TriColorDepthFirstSearch, TriColorVisitor,
 };
-use crate::rustc_hir::LangItem;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_middle::mir::{self, BasicBlock, BasicBlocks, Body, Terminator, TerminatorKind};
-use crate::rustc_middle::ty::{self, GenericArg, GenericArgs, Instance, Ty, TyCtxt};
-use crate::rustc_session::lint::builtin::UNCONDITIONAL_RECURSION;
-use crate::rustc_span::Span;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::mir::{self, BasicBlock, BasicBlocks, Body, Terminator, TerminatorKind};
+use crate::rustc_complete::ty::{self, GenericArg, GenericArgs, Instance, Ty, TyCtxt};
+use crate::rustc_complete::lint::builtin::UNCONDITIONAL_RECURSION;
+use crate::rustc_complete::Span;
 
 use crate::errors::UnconditionalRecursion;
 use crate::pass_manager::MirLint;

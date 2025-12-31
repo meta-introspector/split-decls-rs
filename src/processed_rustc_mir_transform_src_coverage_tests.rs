@@ -27,9 +27,9 @@
 use itertools::Itertools;
 use crate::rustc_data_structures::graph::{DirectedGraph, Successors};
 use rustc_index::{Idx, IndexVec};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::{bug, ty};
-use crate::rustc_span::{BytePos, DUMMY_SP, Pos, Span};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::{bug, ty};
+use crate::rustc_complete::{BytePos, DUMMY_SP, Pos, Span};
 
 use super::graph::{self, BasicCoverageBlock};
 

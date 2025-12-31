@@ -3,7 +3,7 @@
 // These traits are primarily used to clarify the behavior of different
 // functions that share the same name across various contexts.
 
-use crate::rustc_middle::ty;
+use crate::rustc_complete::ty;
 
 pub(crate) trait ExistentialProjectionHelpers<'tcx> {
     fn new_from_args(

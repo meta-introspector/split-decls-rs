@@ -13,14 +13,14 @@ use rustc_codegen_ssa::mir::debuginfo::VariableKind::*;
 use rustc_codegen_ssa::mir::debuginfo::{DebugScope, FunctionDebugContext, VariableKind};
 use rustc_codegen_ssa::traits::*;
 use crate::rustc_data_structures::unord::UnordMap;
-use crate::rustc_hir::def_id::{DefId, DefIdMap};
+use crate::rustc_complete::def_id::{DefId, DefIdMap};
 use rustc_index::IndexVec;
-use crate::rustc_middle::mir;
-use crate::rustc_middle::ty::layout::{HasTypingEnv, LayoutOf};
-use crate::rustc_middle::ty::{self, GenericArgsRef, Instance, Ty, TypeVisitableExt};
-use crate::rustc_session::Session;
-use crate::rustc_session::config::{self, DebugInfo};
-use crate::rustc_span::{
+use crate::rustc_complete::mir;
+use crate::rustc_complete::ty::layout::{HasTypingEnv, LayoutOf};
+use crate::rustc_complete::ty::{self, GenericArgsRef, Instance, Ty, TypeVisitableExt};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{self, DebugInfo};
+use crate::rustc_complete::{
     BytePos, Pos, SourceFile, SourceFileAndLine, SourceFileHash, Span, StableSourceFileId, Symbol,
 };
 use rustc_target::callconv::FnAbi;

@@ -1,25 +1,25 @@
 use std::fmt;
 use std::rc::Rc;
 
-use rustc_errors::Diag;
-use crate::rustc_hir::def_id::LocalDefId;
-use rustc_infer::infer::region_constraints::{Constraint, ConstraintKind, RegionConstraintData};
-use rustc_infer::infer::{
+use crate::rustc_complete::Diag;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_infer::infer::region_constraints::{Constraint, ConstraintKind, RegionConstraintData};
+use crate::rustc_infer::infer::{
     InferCtxt, RegionResolutionError, RegionVariableOrigin, SubregionOrigin, TyCtxtInferExt as _,
 };
-use rustc_infer::traits::ObligationCause;
-use rustc_infer::traits::query::{
+use crate::rustc_infer::traits::ObligationCause;
+use crate::rustc_infer::traits::query::{
     CanonicalTypeOpAscribeUserTypeGoal, CanonicalTypeOpDeeplyNormalizeGoal,
     CanonicalTypeOpNormalizeGoal, CanonicalTypeOpProvePredicateGoal,
 };
-use crate::rustc_middle::ty::error::TypeError;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::error::TypeError;
+use crate::rustc_complete::ty::{
     self, RePlaceholder, Region, RegionVid, Ty, TyCtxt, TypeFoldable, UniverseIndex,
 };
-use crate::rustc_span::Span;
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::error_reporting::infer::nice_region_error::NiceRegionError;
-use rustc_trait_selection::traits::ObligationCtxt;
+use crate::rustc_complete::Span;
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::error_reporting::infer::nice_region_error::NiceRegionError;
+use crate::rustc_trait_selection::traits::ObligationCtxt;
 use rustc_traits::{type_op_ascribe_user_type_with_span, type_op_prove_predicate_with_cause};
 use tracing::{debug, instrument};
 

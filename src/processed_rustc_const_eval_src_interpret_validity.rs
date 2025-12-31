@@ -15,18 +15,18 @@ use rustc_abi::{
     BackendRepr, FieldIdx, FieldsShape, Scalar as ScalarAbi, Size, VariantIdx, Variants,
     WrappingRange,
 };
-use crate::rustc_ast::Mutability;
+use crate::rustc_complete::Mutability;
 use crate::rustc_data_structures::fx::FxHashSet;
 use rustc_hir as hir;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::interpret::ValidationErrorKind::{self, *};
-use crate::rustc_middle::mir::interpret::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::interpret::ValidationErrorKind::{self, *};
+use crate::rustc_complete::mir::interpret::{
     ExpectedKind, InterpErrorKind, InvalidMetaKind, Misalignment, PointerKind, Provenance,
     UnsupportedOpInfo, ValidationErrorInfo, alloc_range, interp_ok,
 };
-use crate::rustc_middle::ty::layout::{LayoutCx, TyAndLayout};
-use crate::rustc_middle::ty::{self, Ty};
-use crate::rustc_span::{Symbol, sym};
+use crate::rustc_complete::ty::layout::{LayoutCx, TyAndLayout};
+use crate::rustc_complete::ty::{self, Ty};
+use crate::rustc_complete::{Symbol, sym};
 use tracing::trace;
 
 use super::machine::AllocMap;

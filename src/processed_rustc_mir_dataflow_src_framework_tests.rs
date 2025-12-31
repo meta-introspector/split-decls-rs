@@ -3,8 +3,8 @@
 use std::marker::PhantomData;
 
 use rustc_index::IndexVec;
-use crate::rustc_middle::ty;
-use crate::rustc_span::DUMMY_SP;
+use crate::rustc_complete::ty;
+use crate::rustc_complete::DUMMY_SP;
 
 use super::*;
 

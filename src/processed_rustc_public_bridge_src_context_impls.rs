@@ -5,23 +5,23 @@
 use std::iter;
 
 use rustc_abi::{Endian, Layout, ReprOptions};
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::{Attribute, LangItem};
-use crate::rustc_middle::mir::interpret::{AllocId, ConstAllocation, ErrorHandled, GlobalAlloc, Scalar};
-use crate::rustc_middle::mir::{BinOp, Body, Const as MirConst, ConstValue, UnOp};
-use crate::rustc_middle::ty::layout::{FnAbiOf, LayoutOf};
-use crate::rustc_middle::ty::print::{with_forced_trimmed_paths, with_no_trimmed_paths};
-use crate::rustc_middle::ty::util::Discr;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::{Attribute, LangItem};
+use crate::rustc_complete::mir::interpret::{AllocId, ConstAllocation, ErrorHandled, GlobalAlloc, Scalar};
+use crate::rustc_complete::mir::{BinOp, Body, Const as MirConst, ConstValue, UnOp};
+use crate::rustc_complete::ty::layout::{FnAbiOf, LayoutOf};
+use crate::rustc_complete::ty::print::{with_forced_trimmed_paths, with_no_trimmed_paths};
+use crate::rustc_complete::ty::util::Discr;
+use crate::rustc_complete::ty::{
     AdtDef, AdtKind, AssocItem, Binder, ClosureKind, CoroutineArgsExt, EarlyBinder,
     ExistentialTraitRef, FnSig, GenericArgsRef, Instance, InstanceKind, IntrinsicDef, List,
     PolyFnSig, ScalarInt, TraitDef, TraitRef, Ty, TyCtxt, TyKind, TypeVisitableExt, UintTy,
     ValTree, VariantDef,
 };
-use crate::rustc_middle::{mir, ty};
-use crate::rustc_session::cstore::ForeignModule;
-use crate::rustc_span::def_id::{CrateNum, DefId, LOCAL_CRATE};
-use crate::rustc_span::{FileNameDisplayPreference, Span, Symbol};
+use crate::rustc_complete::{mir, ty};
+use crate::rustc_complete::cstore::ForeignModule;
+use crate::rustc_complete::def_id::{CrateNum, DefId, LOCAL_CRATE};
+use crate::rustc_complete::{FileNameDisplayPreference, Span, Symbol};
 use rustc_target::callconv::FnAbi;
 
 use super::{AllocRangeHelpers, CompilerCtxt, TyHelpers, TypingEnvHelpers};

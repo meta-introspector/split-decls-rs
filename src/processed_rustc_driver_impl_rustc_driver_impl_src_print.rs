@@ -15,6 +15,6 @@ macro_rules! safe_println {
 
 pub(crate) fn print(args: fmt::Arguments<'_>) {
     if let Err(_) = io::stdout().write_fmt(args) {
-        rustc_errors::FatalError.raise();
+        crate::rustc_errors::FatalError.raise();
     }
 }

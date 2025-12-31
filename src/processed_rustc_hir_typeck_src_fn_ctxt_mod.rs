@@ -3,19 +3,19 @@ use std::cell::{Cell, RefCell};
 use std::ops::Deref;
 
 use hir::def_id::CRATE_DEF_ID;
-use rustc_errors::DiagCtxtHandle;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::{self as hir, HirId, ItemLocalMap};
+use crate::rustc_complete::DiagCtxtHandle;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::{self as hir, HirId, ItemLocalMap};
 use rustc_hir_analysis::hir_ty_lowering::{
     HirTyLowerer, InherentAssocCandidate, RegionInferReason,
 };
-use rustc_infer::infer::{self, RegionVariableOrigin};
-use rustc_infer::traits::{DynCompatibilityViolation, Obligation};
-use crate::rustc_middle::ty::{self, Const, Ty, TyCtxt, TypeVisitableExt};
-use crate::rustc_session::Session;
-use crate::rustc_span::{self, DUMMY_SP, ErrorGuaranteed, Ident, Span, sym};
-use rustc_trait_selection::error_reporting::TypeErrCtxt;
-use rustc_trait_selection::traits::{
+use crate::rustc_infer::infer::{self, RegionVariableOrigin};
+use crate::rustc_infer::traits::{DynCompatibilityViolation, Obligation};
+use crate::rustc_complete::ty::{self, Const, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::{self, DUMMY_SP, ErrorGuaranteed, Ident, Span, sym};
+use crate::rustc_trait_selection::error_reporting::TypeErrCtxt;
+use crate::rustc_trait_selection::traits::{
     self, FulfillmentError, ObligationCause, ObligationCauseCode, ObligationCtxt,
 };
 
@@ -179,7 +179,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     /// `TypeckResults` which is used for diagnostics.
     /// Use [`InferCtxtErrorExt::err_ctxt`] to start one without a `TypeckResults`.
     ///
-    /// [`InferCtxtErrorExt::err_ctxt`]: rustc_trait_selection::error_reporting::InferCtxtErrorExt::err_ctxt
+    /// [`InferCtxtErrorExt::err_ctxt`]: crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt::err_ctxt
     pub(crate) fn err_ctxt(&'a self) -> TypeErrCtxt<'a, 'tcx> {
         TypeErrCtxt {
             infcx: &self.infcx,

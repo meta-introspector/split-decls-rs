@@ -1,7 +1,7 @@
 use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, TypeFoldable, TypeSuperVisitable, TypeVisitor};
-use crate::rustc_span::Span;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeFoldable, TypeSuperVisitable, TypeVisitor};
+use crate::rustc_complete::Span;
 use tracing::debug;
 
 #[derive(Clone, PartialEq, Eq, Hash, Debug)]

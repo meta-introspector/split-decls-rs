@@ -1,5 +1,5 @@
 pub(crate) mod printf {
-    use crate::rustc_span::InnerSpan;
+    use crate::rustc_complete::InnerSpan;
 
     use super::strcursor::StrCursor as Cur;
 
@@ -616,7 +616,7 @@ pub(crate) mod printf {
 }
 
 pub(crate) mod shell {
-    use crate::rustc_span::InnerSpan;
+    use crate::rustc_complete::InnerSpan;
 
     use super::strcursor::StrCursor as Cur;
 

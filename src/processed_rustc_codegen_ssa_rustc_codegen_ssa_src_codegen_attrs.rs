@@ -1,21 +1,21 @@
 use std::str::FromStr;
 
 use rustc_abi::{Align, ExternAbi};
-use crate::rustc_ast::expand::autodiff_attrs::{AutoDiffAttrs, DiffActivity, DiffMode};
-use crate::rustc_ast::{LitKind, MetaItem, MetaItemInner, attr};
-use crate::rustc_hir::attrs::{AttributeKind, InlineAttr, InstructionSetAttr, UsedBy};
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LOCAL_CRATE, LocalDefId};
-use crate::rustc_hir::{self as hir, Attribute, LangItem, find_attr, lang_items};
-use crate::rustc_middle::middle::codegen_fn_attrs::{
+use crate::rustc_complete::expand::autodiff_attrs::{AutoDiffAttrs, DiffActivity, DiffMode};
+use crate::rustc_complete::{LitKind, MetaItem, MetaItemInner, attr};
+use crate::rustc_complete::attrs::{AttributeKind, InlineAttr, InstructionSetAttr, UsedBy};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE, LocalDefId};
+use crate::rustc_complete::{self as hir, Attribute, LangItem, find_attr, lang_items};
+use crate::rustc_complete::middle::codegen_fn_attrs::{
     CodegenFnAttrFlags, CodegenFnAttrs, PatchableFunctionEntry,
 };
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::{self as ty, TyCtxt};
-use crate::rustc_session::lint;
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::{Ident, Span, sym};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{self as ty, TyCtxt};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{Ident, Span, sym};
 use rustc_target::spec::SanitizerSet;
 
 use crate::errors;

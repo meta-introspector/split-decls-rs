@@ -1,10 +1,10 @@
 use std::ops::ControlFlow;
 
 use crate::rustc_data_structures::graph::dominators::Dominators;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::visit::Visitor;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::debug;
 
 use super::{PoloniusFacts, PoloniusLocationTable};
@@ -141,7 +141,7 @@ impl<'a, 'tcx> Visitor<'tcx> for LoanInvalidationsGenerator<'a, 'tcx> {
             }
             TerminatorKind::Assert { cond, expected: _, msg, target: _, unwind: _ } => {
                 self.consume_operand(location, cond);
-                use crate::rustc_middle::mir::AssertKind;
+                use crate::rustc_complete::mir::AssertKind;
                 if let AssertKind::BoundsCheck { len, index } = &**msg {
                     self.consume_operand(location, len);
                     self.consume_operand(location, index);

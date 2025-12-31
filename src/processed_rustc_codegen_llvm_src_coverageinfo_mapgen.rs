@@ -7,10 +7,10 @@ use rustc_codegen_ssa::traits::{BaseTypeCodegenMethods, ConstCodegenMethods};
 use crate::rustc_data_structures::fx::FxIndexMap;
 use rustc_index::IndexVec;
 use rustc_macros::TryFromU32;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::RemapFileNameExt;
-use crate::rustc_session::config::RemapPathScopeComponents;
-use crate::rustc_span::{SourceFile, StableSourceFileId};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::RemapFileNameExt;
+use crate::rustc_complete::config::RemapPathScopeComponents;
+use crate::rustc_complete::{SourceFile, StableSourceFileId};
 use tracing::debug;
 
 use crate::common::CodegenCx;

@@ -1,14 +1,14 @@
-use crate::rustc_hir::def::DefKind;
-use rustc_infer::traits::ObligationCause;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_infer::traits::ObligationCause;
+use crate::rustc_complete::ty::{
     self, DefiningScopeKind, EarlyBinder, OpaqueHiddenType, OpaqueTypeKey, TypeVisitableExt,
     TypingMode,
 };
-use rustc_trait_selection::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
-use rustc_trait_selection::opaque_types::{
+use crate::rustc_trait_selection::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
+use crate::rustc_trait_selection::opaque_types::{
     NonDefiningUseReason, opaque_type_has_defining_use_args, report_item_does_not_constrain_error,
 };
-use rustc_trait_selection::solve;
+use crate::rustc_trait_selection::solve;
 use tracing::{debug, instrument};
 
 use crate::FnCtxt;

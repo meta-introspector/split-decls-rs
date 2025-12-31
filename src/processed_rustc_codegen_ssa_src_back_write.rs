@@ -7,14 +7,14 @@ use std::sync::mpsc::{Receiver, Sender, channel};
 use std::{fs, io, mem, str, thread};
 
 use rustc_abi::Size;
-use crate::rustc_ast::attr;
+use crate::rustc_complete::attr;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::jobserver::{self, Acquired};
 use crate::rustc_data_structures::memmap::Mmap;
 use crate::rustc_data_structures::profiling::{SelfProfilerRef, VerboseTimingGuard};
-use rustc_errors::emitter::Emitter;
-use rustc_errors::translation::Translator;
-use rustc_errors::{
+use crate::rustc_complete::emitter::Emitter;
+use crate::rustc_complete::translation::Translator;
+use crate::rustc_complete::{
     Diag, DiagArgMap, DiagCtxt, DiagMessage, ErrCode, FatalErrorMarker, Level, MultiSpan, Style,
     Suggestions,
 };
@@ -23,15 +23,15 @@ use rustc_incremental::{
     copy_cgu_workproduct_to_incr_comp_cache_dir, in_incr_comp_dir, in_incr_comp_dir_sess,
 };
 use rustc_metadata::fs::copy_to_stdout;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::dep_graph::{WorkProduct, WorkProductId};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::Session;
-use crate::rustc_session::config::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{
     self, CrateType, Lto, OutFileName, OutputFilenames, OutputType, Passes, SwitchWithOptPath,
 };
-use crate::rustc_span::source_map::SourceMap;
-use crate::rustc_span::{FileName, InnerSpan, Span, SpanData, sym};
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{FileName, InnerSpan, Span, SpanData, sym};
 use rustc_target::spec::{MergeFunctions, SanitizerSet};
 use tracing::debug;
 
@@ -1045,9 +1045,9 @@ pub(crate) enum Message<B: WriteBackendMethods> {
 /// process another codegen unit.
 pub struct CguMessage;
 
-// A cut-down version of `rustc_errors::DiagInner` that impls `Send`, which
+// A cut-down version of `crate::rustc_errors::DiagInner` that impls `Send`, which
 // can be used to send diagnostics from codegen threads to the main thread.
-// It's missing the following fields from `rustc_errors::DiagInner`.
+// It's missing the following fields from `crate::rustc_errors::DiagInner`.
 // - `span`: it doesn't impl `Send`.
 // - `suggestions`: it doesn't impl `Send`, and isn't used for codegen
 //   diagnostics.
@@ -1062,8 +1062,8 @@ struct Diagnostic {
     args: DiagArgMap,
 }
 
-// A cut-down version of `rustc_errors::Subdiag` that impls `Send`. It's
-// missing the following fields from `rustc_errors::Subdiag`.
+// A cut-down version of `crate::rustc_errors::Subdiag` that impls `Send`. It's
+// missing the following fields from `crate::rustc_errors::Subdiag`.
 // - `span`: it doesn't impl `Send`.
 pub(crate) struct Subdiagnostic {
     level: Level,
@@ -1798,8 +1798,8 @@ impl SharedEmitter {
 impl Emitter for SharedEmitter {
     fn emit_diagnostic(
         &mut self,
-        mut diag: rustc_errors::DiagInner,
-        _registry: &rustc_errors::registry::Registry,
+        mut diag: crate::rustc_errors::DiagInner,
+        _registry: &crate::rustc_errors::registry::Registry,
     ) {
         // Check that we aren't missing anything interesting when converting to
         // the cut-down local `DiagInner`.
@@ -1855,12 +1855,12 @@ impl SharedEmitterMain {
                     // Convert it back to a full `Diagnostic` and emit.
                     let dcx = sess.dcx();
                     let mut d =
-                        rustc_errors::DiagInner::new_with_messages(diag.level, diag.messages);
+                        crate::rustc_errors::DiagInner::new_with_messages(diag.level, diag.messages);
                     d.code = diag.code; // may be `None`, that's ok
                     d.children = diag
                         .children
                         .into_iter()
-                        .map(|sub| rustc_errors::Subdiag {
+                        .map(|sub| crate::rustc_errors::Subdiag {
                             level: sub.level,
                             messages: sub.messages,
                             span: MultiSpan::new(),

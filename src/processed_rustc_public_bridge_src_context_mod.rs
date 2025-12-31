@@ -5,9 +5,9 @@
 use std::marker::PhantomData;
 
 use rustc_abi::HasDataLayout;
-use crate::rustc_middle::ty;
-use crate::rustc_middle::ty::layout::{FnAbiOfHelpers, HasTyCtxt, HasTypingEnv, LayoutOfHelpers};
-use crate::rustc_middle::ty::{Ty, TyCtxt};
+use crate::rustc_complete::ty;
+use crate::rustc_complete::ty::layout::{FnAbiOfHelpers, HasTyCtxt, HasTypingEnv, LayoutOfHelpers};
+use crate::rustc_complete::ty::{Ty, TyCtxt};
 
 use crate::{Bridge, Error};
 

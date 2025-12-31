@@ -10,9 +10,9 @@
 // them automatically, preferring the built-in instead, they're common in generic code (such as
 // `Vec::truncate`) so removing them from things like inlined `Vec<u8>` is helpful.
 
-use crate::rustc_hir::LangItem;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::{debug, trace};
 
 use super::simplify::simplify_cfg;

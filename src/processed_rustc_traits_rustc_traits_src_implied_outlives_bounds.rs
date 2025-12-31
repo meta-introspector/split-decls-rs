@@ -1,17 +1,17 @@
 // Provider for the `implied_outlives_bounds` query.
 // Do not call this query directory. See
-// [`rustc_trait_selection::traits::query::type_op::implied_outlives_bounds`].
+// [`crate::rustc_trait_selection::traits::query::type_op::implied_outlives_bounds`].
 
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_infer::infer::canonical::{self, Canonical};
-use rustc_infer::traits::query::OutlivesBound;
-use rustc_infer::traits::query::type_op::ImpliedOutlivesBounds;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{ParamEnvAnd, TyCtxt};
-use crate::rustc_span::DUMMY_SP;
-use rustc_trait_selection::infer::InferCtxtBuilderExt;
-use rustc_trait_selection::traits::query::type_op::implied_outlives_bounds::compute_implied_outlives_bounds_inner;
-use rustc_trait_selection::traits::query::{CanonicalImpliedOutlivesBoundsGoal, NoSolution};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::infer::canonical::{self, Canonical};
+use crate::rustc_infer::traits::query::OutlivesBound;
+use crate::rustc_infer::traits::query::type_op::ImpliedOutlivesBounds;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{ParamEnvAnd, TyCtxt};
+use crate::rustc_complete::DUMMY_SP;
+use crate::rustc_trait_selection::infer::InferCtxtBuilderExt;
+use crate::rustc_trait_selection::traits::query::type_op::implied_outlives_bounds::compute_implied_outlives_bounds_inner;
+use crate::rustc_trait_selection::traits::query::{CanonicalImpliedOutlivesBoundsGoal, NoSolution};
 
 pub(crate) fn provide(p: &mut Providers) {
     *p = Providers { implied_outlives_bounds, ..*p };

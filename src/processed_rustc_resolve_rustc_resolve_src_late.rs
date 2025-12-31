@@ -11,28 +11,28 @@ use std::borrow::Cow;
 use std::collections::hash_map::Entry;
 use std::mem::{replace, swap, take};
 
-use crate::rustc_ast::visit::{
+use crate::rustc_complete::visit::{
     AssocCtxt, BoundKind, FnCtxt, FnKind, Visitor, try_visit, visit_opt, walk_list,
 };
-use crate::rustc_ast::*;
+use crate::rustc_complete::*;
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexMap};
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, DiagArgValue, ErrorGuaranteed, IntoDiagArg, StashKey, Suggestions,
 };
-use crate::rustc_hir::def::Namespace::{self, *};
-use crate::rustc_hir::def::{self, CtorKind, DefKind, LifetimeRes, NonMacroAttrKind, PartialRes, PerNS};
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, DefId, LOCAL_CRATE, LocalDefId};
-use crate::rustc_hir::{MissingLifetimeKind, PrimTy, TraitCandidate};
-use crate::rustc_middle::middle::resolve_bound_vars::Set1;
-use crate::rustc_middle::ty::{DelegationFnSig, Visibility};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::config::{CrateType, ResolveDocLinks};
-use crate::rustc_session::lint::{self, BuiltinLintDiag};
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::source_map::{Spanned, respan};
-use crate::rustc_span::{BytePos, Ident, Span, Symbol, SyntaxContext, kw, sym};
+use crate::rustc_complete::def::Namespace::{self, *};
+use crate::rustc_complete::def::{self, CtorKind, DefKind, LifetimeRes, NonMacroAttrKind, PartialRes, PerNS};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LOCAL_CRATE, LocalDefId};
+use crate::rustc_complete::{MissingLifetimeKind, PrimTy, TraitCandidate};
+use crate::rustc_complete::middle::resolve_bound_vars::Set1;
+use crate::rustc_complete::ty::{DelegationFnSig, Visibility};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::config::{CrateType, ResolveDocLinks};
+use crate::rustc_complete::lint::{self, BuiltinLintDiag};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::source_map::{Spanned, respan};
+use crate::rustc_complete::{BytePos, Ident, Span, Symbol, SyntaxContext, kw, sym};
 use smallvec::{SmallVec, smallvec};
 use thin_vec::ThinVec;
 use tracing::{debug, instrument, trace};
@@ -2060,7 +2060,7 @@ impl<'a, 'ast, 'ra, 'tcx> LateResolutionVisitor<'a, 'ast, 'ra, 'tcx> {
                     LifetimeRibKind::AnonymousCreateParameter { report_in_path: true, .. }
                     | LifetimeRibKind::StaticIfNoLifetimeInScope { .. } => {
                         let sess = self.r.tcx.sess;
-                        let subdiag = rustc_errors::elided_lifetime_in_path_suggestion(
+                        let subdiag = crate::rustc_errors::elided_lifetime_in_path_suggestion(
                             sess.source_map(),
                             expected_lifetimes,
                             path_span,
@@ -4272,7 +4272,7 @@ impl<'a, 'ast, 'ra, 'tcx> LateResolutionVisitor<'a, 'ast, 'ra, 'tcx> {
                             // let foo = Foo {};
                             // foo::bar(); // possibly suggest to foo.bar();
                             //```
-                            err.stash(segment.ident.span, rustc_errors::StashKey::CallAssocMethod);
+                            err.stash(segment.ident.span, crate::rustc_errors::StashKey::CallAssocMethod);
                         } else {
                             // When there is no suggested imports, we can just emit the error
                             // and suggestions immediately. Note that we bypass the usually error

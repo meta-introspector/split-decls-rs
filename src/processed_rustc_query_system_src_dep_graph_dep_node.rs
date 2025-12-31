@@ -61,7 +61,7 @@ use std::hash::Hash;
 use crate::rustc_data_structures::AtomicRef;
 use crate::rustc_data_structures::fingerprint::{Fingerprint, PackedFingerprint};
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher, StableOrd, ToStableHashKey};
-use crate::rustc_hir::definitions::DefPathHash;
+use crate::rustc_complete::definitions::DefPathHash;
 use rustc_macros::{Decodable, Encodable};
 
 use super::{DepContext, FingerprintStyle, SerializedDepNodeIndex};

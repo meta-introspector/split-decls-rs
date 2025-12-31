@@ -11,17 +11,17 @@
 
 
 use crate::rustc_data_structures::fx::FxIndexSet;
-use rustc_errors::codes::*;
-use rustc_errors::{Diag, EmissionGuarantee};
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use rustc_infer::traits::Obligation;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::query::LocalCrate;
-use crate::rustc_middle::traits::query::NoSolution;
-use crate::rustc_middle::ty::print::PrintTraitRefExt as _;
-use crate::rustc_middle::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeVisitableExt, TypingMode};
-use crate::rustc_session::lint::builtin::COHERENCE_LEAK_CHECK;
-use crate::rustc_span::{DUMMY_SP, ErrorGuaranteed, Span, sym};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Diag, EmissionGuarantee};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_infer::traits::Obligation;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::LocalCrate;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::print::PrintTraitRefExt as _;
+use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeVisitableExt, TypingMode};
+use crate::rustc_complete::lint::builtin::COHERENCE_LEAK_CHECK;
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span, sym};
 use specialization_graph::GraphExt;
 use tracing::{debug, instrument};
 

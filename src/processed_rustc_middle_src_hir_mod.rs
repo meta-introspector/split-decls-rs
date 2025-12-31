@@ -7,12 +7,12 @@ use crate::rustc_data_structures::fingerprint::Fingerprint;
 use crate::rustc_data_structures::sorted_map::SortedMap;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 use crate::rustc_data_structures::sync::{DynSend, DynSync, try_par_for_each_in};
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LocalDefId, LocalModDefId};
-use crate::rustc_hir::lints::DelayedLint;
-use crate::rustc_hir::*;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId, LocalModDefId};
+use crate::rustc_complete::lints::DelayedLint;
+use crate::rustc_complete::*;
 use rustc_macros::{Decodable, Encodable, HashStable};
-use crate::rustc_span::{ErrorGuaranteed, ExpnId, Span};
+use crate::rustc_complete::{ErrorGuaranteed, ExpnId, Span};
 
 use crate::query::Providers;
 use crate::ty::{EarlyBinder, ImplSubject, TyCtxt};

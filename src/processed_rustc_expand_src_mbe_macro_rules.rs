@@ -4,30 +4,30 @@ use std::sync::Arc;
 use std::{mem, slice};
 
 use ast::token::IdentIsRaw;
-use crate::rustc_ast::token::NtPatKind::*;
-use crate::rustc_ast::token::TokenKind::*;
-use crate::rustc_ast::token::{self, Delimiter, NonterminalKind, Token, TokenKind};
-use crate::rustc_ast::tokenstream::{self, DelimSpan, TokenStream};
-use crate::rustc_ast::{self as ast, DUMMY_NODE_ID, NodeId};
+use crate::rustc_complete::token::NtPatKind::*;
+use crate::rustc_complete::token::TokenKind::*;
+use crate::rustc_complete::token::{self, Delimiter, NonterminalKind, Token, TokenKind};
+use crate::rustc_complete::tokenstream::{self, DelimSpan, TokenStream};
+use crate::rustc_complete::{self as ast, DUMMY_NODE_ID, NodeId};
 use rustc_ast_pretty::pprust;
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap};
-use rustc_errors::{Applicability, Diag, ErrorGuaranteed, MultiSpan};
+use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed, MultiSpan};
 use rustc_feature::Features;
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::MacroKinds;
-use crate::rustc_hir::find_attr;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::MacroKinds;
+use crate::rustc_complete::find_attr;
 use rustc_lint_defs::BuiltinLintDiag;
 use rustc_lint_defs::builtin::{
     RUST_2021_INCOMPATIBLE_OR_PATTERNS, SEMICOLON_IN_EXPRESSIONS_FROM_MACROS,
 };
 use rustc_parse::exp;
 use rustc_parse::parser::{Parser, Recovery};
-use crate::rustc_session::Session;
-use crate::rustc_session::parse::{ParseSess, feature_err};
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::hygiene::Transparency;
-use crate::rustc_span::{Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::parse::{ParseSess, feature_err};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::hygiene::Transparency;
+use crate::rustc_complete::{Ident, Span, Symbol, kw, sym};
 use tracing::{debug, instrument, trace, trace_span};
 
 use super::diagnostics::{FailedMacro, failed_to_match_macro};

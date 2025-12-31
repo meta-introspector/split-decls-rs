@@ -1,11 +1,11 @@
 use crate::rustc_data_structures::sorted_map::SortedIndexMultiMap;
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::{DefKind, Namespace};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::find_attr;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{DefKind, Namespace};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::find_attr;
 use rustc_macros::{Decodable, Encodable, HashStable};
-use crate::rustc_span::{ErrorGuaranteed, Ident, Symbol};
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Symbol};
 
 use super::{TyCtxt, Visibility};
 use crate::ty;

@@ -7,7 +7,7 @@ use std::process::ExitStatus;
 
 use rustc_ast as ast;
 use rustc_ast_pretty::pprust;
-use crate::rustc_span::edition::Edition;
+use crate::rustc_complete::edition::Edition;
 
 use crate::{DiagArgValue, IntoDiagArg};
 

@@ -1,14 +1,14 @@
 use Determinacy::*;
 use Namespace::*;
-use crate::rustc_ast::{self as ast, NodeId};
-use rustc_errors::ErrorGuaranteed;
-use crate::rustc_hir::def::{DefKind, MacroKinds, Namespace, NonMacroAttrKind, PartialRes, PerNS};
-use crate::rustc_middle::bug;
-use crate::rustc_session::lint::BuiltinLintDiag;
-use crate::rustc_session::lint::builtin::PROC_MACRO_DERIVE_RESOLUTION_FALLBACK;
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::hygiene::{ExpnId, ExpnKind, LocalExpnId, MacroKind, SyntaxContext};
-use crate::rustc_span::{Ident, Span, kw, sym};
+use crate::rustc_complete::{self as ast, NodeId};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def::{DefKind, MacroKinds, Namespace, NonMacroAttrKind, PartialRes, PerNS};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::PROC_MACRO_DERIVE_RESOLUTION_FALLBACK;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::hygiene::{ExpnId, ExpnKind, LocalExpnId, MacroKind, SyntaxContext};
+use crate::rustc_complete::{Ident, Span, kw, sym};
 use tracing::{debug, instrument};
 
 use crate::errors::{ParamKindInEnumDiscriminant, ParamKindInNonTrivialAnonConst};

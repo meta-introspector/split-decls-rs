@@ -1,11 +1,11 @@
 // Automatic migration of Rust 2021 patterns to a form valid in both Editions 2021 and 2024.
 
 use crate::rustc_data_structures::fx::FxIndexMap;
-use rustc_errors::MultiSpan;
-use crate::rustc_hir::{BindingMode, ByRef, HirId, Mutability};
+use crate::rustc_complete::MultiSpan;
+use crate::rustc_complete::{BindingMode, ByRef, HirId, Mutability};
 use rustc_lint as lint;
-use crate::rustc_middle::ty::{self, Rust2024IncompatiblePatInfo, TyCtxt};
-use crate::rustc_span::{Ident, Span};
+use crate::rustc_complete::ty::{self, Rust2024IncompatiblePatInfo, TyCtxt};
+use crate::rustc_complete::{Ident, Span};
 
 use crate::errors::{Rust2024IncompatiblePat, Rust2024IncompatiblePatSugg};
 use crate::fluent_generated as fluent;

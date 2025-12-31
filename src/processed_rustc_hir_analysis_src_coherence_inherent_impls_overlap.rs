@@ -1,14 +1,14 @@
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet, IndexEntry};
-use rustc_errors::codes::*;
-use rustc_errors::struct_span_code_err;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::struct_span_code_err;
 use rustc_hir as hir;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::DefId;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::DefId;
 use rustc_index::IndexVec;
-use crate::rustc_middle::traits::specialization_graph::OverlapMode;
-use crate::rustc_middle::ty::{self, TyCtxt};
-use crate::rustc_span::{ErrorGuaranteed, Symbol};
-use rustc_trait_selection::traits::{self, SkipLeakCheck};
+use crate::rustc_complete::traits::specialization_graph::OverlapMode;
+use crate::rustc_complete::ty::{self, TyCtxt};
+use crate::rustc_complete::{ErrorGuaranteed, Symbol};
+use crate::rustc_trait_selection::traits::{self, SkipLeakCheck};
 use smallvec::SmallVec;
 use tracing::debug;
 

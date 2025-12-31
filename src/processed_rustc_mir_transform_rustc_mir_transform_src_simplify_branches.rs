@@ -1,5 +1,5 @@
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::trace;
 
 pub(super) enum SimplifyConstCondition {

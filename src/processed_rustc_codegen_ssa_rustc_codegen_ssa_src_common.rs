@@ -1,12 +1,12 @@
 #[allow(non_camel_case_types)]
 
-use crate::rustc_hir::LangItem;
-use crate::rustc_hir::attrs::PeImportNameType;
-use crate::rustc_middle::ty::layout::TyAndLayout;
-use crate::rustc_middle::ty::{self, Instance, TyCtxt};
-use crate::rustc_middle::{bug, mir, span_bug};
-use crate::rustc_session::cstore::{DllCallingConvention, DllImport};
-use crate::rustc_span::Span;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::attrs::PeImportNameType;
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::ty::{self, Instance, TyCtxt};
+use crate::rustc_complete::{bug, mir, span_bug};
+use crate::rustc_complete::cstore::{DllCallingConvention, DllImport};
+use crate::rustc_complete::Span;
 use rustc_target::spec::Target;
 
 use crate::traits::*;

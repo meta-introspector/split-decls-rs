@@ -9,11 +9,11 @@ use std::hash::{Hash, Hasher};
 use hir::def_id::LocalDefId;
 use rustc_hir as hir;
 use rustc_macros::{TypeFoldable, TypeVisitable};
-use crate::rustc_middle::traits::query::NoSolution;
-use crate::rustc_middle::traits::solve::Certainty;
-pub use crate::rustc_middle::traits::*;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, Upcast};
-use crate::rustc_span::Span;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::traits::solve::Certainty;
+pub use crate::rustc_complete::traits::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, Upcast};
+use crate::rustc_complete::Span;
 use thin_vec::ThinVec;
 
 pub use self::engine::{FromSolverError, ScrubbedTraitError, TraitEngine};

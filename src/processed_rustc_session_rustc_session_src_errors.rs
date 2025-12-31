@@ -1,14 +1,14 @@
 use std::num::{NonZero, ParseIntError};
 
-use crate::rustc_ast::token;
-use crate::rustc_ast::util::literal::LitError;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::token;
+use crate::rustc_complete::util::literal::LitError;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Diag, DiagCtxtHandle, DiagMessage, Diagnostic, EmissionGuarantee, ErrorGuaranteed, Level,
     MultiSpan,
 };
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 use rustc_target::spec::{SplitDebuginfo, StackProtector, TargetTuple};
 
 use crate::config::CrateType;

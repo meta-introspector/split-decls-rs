@@ -2,9 +2,9 @@ use std::fmt;
 use std::ops::Index;
 
 use rustc_index::{IndexSlice, IndexVec};
-use crate::rustc_middle::mir::ConstraintCategory;
-use crate::rustc_middle::ty::{RegionVid, TyCtxt, VarianceDiagInfo};
-use crate::rustc_span::Span;
+use crate::rustc_complete::mir::ConstraintCategory;
+use crate::rustc_complete::ty::{RegionVid, TyCtxt, VarianceDiagInfo};
+use crate::rustc_complete::Span;
 use tracing::debug;
 
 use crate::type_check::Locations;

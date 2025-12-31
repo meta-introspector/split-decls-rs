@@ -46,7 +46,7 @@ pub(crate) mod test {
 
 #[cfg(feature = "rustc")]
 mod rustc {
-    use crate::rustc_middle::ty::{Region, Ty, TyCtxt};
+    use crate::rustc_complete::ty::{Region, Ty, TyCtxt};
 
     use super::*;
 

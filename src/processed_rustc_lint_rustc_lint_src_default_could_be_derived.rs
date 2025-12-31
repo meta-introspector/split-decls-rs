@@ -1,14 +1,14 @@
 use crate::rustc_data_structures::fx::FxHashMap;
-use rustc_errors::{Applicability, Diag};
+use crate::rustc_complete::{Applicability, Diag};
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::find_attr;
-use crate::rustc_middle::ty;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::{declare_lint, impl_lint_pass};
-use crate::rustc_span::Symbol;
-use crate::rustc_span::def_id::DefId;
-use crate::rustc_span::symbol::sym;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::find_attr;
+use crate::rustc_complete::ty;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::{declare_lint, impl_lint_pass};
+use crate::rustc_complete::Symbol;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::symbol::sym;
 
 use crate::{LateContext, LateLintPass};
 

@@ -17,12 +17,12 @@ use rustc_abi::Integer;
 use crate::rustc_data_structures::fx::FxHashSet;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 use rustc_hashes::Hash64;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::definitions::{DefPathData, DefPathDataName, DisambiguatedDefPathData};
-use crate::rustc_hir::{CoroutineDesugaring, CoroutineKind, CoroutineSource, Mutability};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::layout::{IntegerExt, TyAndLayout};
-use crate::rustc_middle::ty::{self, ExistentialProjection, GenericArgKind, GenericArgsRef, Ty, TyCtxt};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::definitions::{DefPathData, DefPathDataName, DisambiguatedDefPathData};
+use crate::rustc_complete::{CoroutineDesugaring, CoroutineKind, CoroutineSource, Mutability};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::{IntegerExt, TyAndLayout};
+use crate::rustc_complete::ty::{self, ExistentialProjection, GenericArgKind, GenericArgsRef, Ty, TyCtxt};
 use smallvec::SmallVec;
 
 use crate::debuginfo::wants_c_like_enum_debuginfo;

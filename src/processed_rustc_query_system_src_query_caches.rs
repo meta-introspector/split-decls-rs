@@ -4,9 +4,9 @@ use std::sync::OnceLock;
 
 use crate::rustc_data_structures::sharded::ShardedHashMap;
 pub use crate::rustc_data_structures::vec_cache::VecCache;
-use crate::rustc_hir::def_id::LOCAL_CRATE;
+use crate::rustc_complete::def_id::LOCAL_CRATE;
 use rustc_index::Idx;
-use crate::rustc_span::def_id::{DefId, DefIndex};
+use crate::rustc_complete::def_id::{DefId, DefIndex};
 
 use crate::dep_graph::DepNodeIndex;
 

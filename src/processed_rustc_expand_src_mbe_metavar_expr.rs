@@ -1,11 +1,11 @@
-use crate::rustc_ast::token::{self, Delimiter, IdentIsRaw, Lit, Token, TokenKind};
-use crate::rustc_ast::tokenstream::{TokenStream, TokenStreamIter, TokenTree};
-use crate::rustc_ast::{LitIntType, LitKind};
+use crate::rustc_complete::token::{self, Delimiter, IdentIsRaw, Lit, Token, TokenKind};
+use crate::rustc_complete::tokenstream::{TokenStream, TokenStreamIter, TokenTree};
+use crate::rustc_complete::{LitIntType, LitKind};
 use rustc_ast_pretty::pprust;
-use rustc_errors::{Applicability, PResult};
+use crate::rustc_complete::{Applicability, PResult};
 use rustc_macros::{Decodable, Encodable};
-use crate::rustc_session::parse::ParseSess;
-use crate::rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::{Ident, Span, Symbol};
 
 use crate::errors;
 

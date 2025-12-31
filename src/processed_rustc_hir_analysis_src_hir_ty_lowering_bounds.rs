@@ -2,19 +2,19 @@ use std::assert_matches::assert_matches;
 use std::ops::ControlFlow;
 
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-use rustc_errors::codes::*;
-use rustc_errors::struct_span_code_err;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::struct_span_code_err;
 use rustc_hir as hir;
-use crate::rustc_hir::PolyTraitRef;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::PolyTraitRef;
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{
     self as ty, IsSuggestable, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt,
     TypeVisitor, Upcast,
 };
-use crate::rustc_span::{ErrorGuaranteed, Ident, Span, kw, sym};
-use rustc_trait_selection::traits;
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, kw, sym};
+use crate::rustc_trait_selection::traits;
 use smallvec::SmallVec;
 use tracing::{debug, instrument};
 

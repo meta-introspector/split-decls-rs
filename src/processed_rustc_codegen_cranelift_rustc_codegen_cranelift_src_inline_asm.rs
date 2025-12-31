@@ -3,9 +3,9 @@
 use std::fmt::Write;
 
 use cranelift_codegen::isa::CallConv;
-use crate::rustc_ast::ast::{InlineAsmOptions, InlineAsmTemplatePiece};
-use crate::rustc_hir::LangItem;
-use crate::rustc_span::sym;
+use crate::rustc_complete::ast::{InlineAsmOptions, InlineAsmTemplatePiece};
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::sym;
 use rustc_target::asm::*;
 use target_lexicon::BinaryFormat;
 

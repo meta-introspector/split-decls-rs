@@ -9,21 +9,21 @@ use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 use crate::rustc_data_structures::sync::{DynSend, DynSync};
 use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hashes::Hash64;
-use crate::rustc_hir::limit::Limit;
+use crate::rustc_complete::limit::Limit;
 use rustc_index::Idx;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::dep_graph::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::dep_graph::{
     self, DepContext, DepKind, DepKindStruct, DepNode, DepNodeIndex, SerializedDepNodeIndex,
     dep_kinds,
 };
-use crate::rustc_middle::query::Key;
-use crate::rustc_middle::query::on_disk_cache::{
+use crate::rustc_complete::query::Key;
+use crate::rustc_complete::query::on_disk_cache::{
     AbsoluteBytePos, CacheDecoder, CacheEncoder, EncodedDepNodeIndex,
 };
-use crate::rustc_middle::ty::codec::TyEncoder;
-use crate::rustc_middle::ty::print::with_reduced_queries;
-use crate::rustc_middle::ty::tls::{self, ImplicitCtxt};
-use crate::rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::ty::codec::TyEncoder;
+use crate::rustc_complete::ty::print::with_reduced_queries;
+use crate::rustc_complete::ty::tls::{self, ImplicitCtxt};
+use crate::rustc_complete::ty::{self, TyCtxt};
 use rustc_query_system::dep_graph::{DepNodeParams, HasDepContext};
 use rustc_query_system::ich::StableHashingContext;
 use rustc_query_system::query::{
@@ -32,7 +32,7 @@ use rustc_query_system::query::{
 };
 use rustc_query_system::{QueryOverflow, QueryOverflowNote};
 use rustc_serialize::{Decodable, Encodable};
-use crate::rustc_span::def_id::LOCAL_CRATE;
+use crate::rustc_complete::def_id::LOCAL_CRATE;
 
 use crate::QueryConfigRestored;
 
@@ -838,7 +838,7 @@ macro_rules! define_queries {
         #[allow(nonstandard_style)]
         mod query_callbacks {
             use super::*;
-            use crate::rustc_middle::bug;
+            use crate::rustc_complete::bug;
             use rustc_query_system::dep_graph::FingerprintStyle;
 
             // We use this for most things when incr. comp. is turned off.

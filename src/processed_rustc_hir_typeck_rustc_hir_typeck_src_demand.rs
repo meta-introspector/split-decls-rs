@@ -1,16 +1,16 @@
-use rustc_errors::{Applicability, Diag, MultiSpan, listify};
+use crate::rustc_complete::{Applicability, Diag, MultiSpan, listify};
 use rustc_hir as hir;
-use crate::rustc_hir::def::Res;
-use crate::rustc_hir::intravisit::Visitor;
-use rustc_infer::infer::DefineOpaqueTypes;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::adjustment::AllowTwoPhase;
-use crate::rustc_middle::ty::error::{ExpectedFound, TypeError};
-use crate::rustc_middle::ty::print::with_no_trimmed_paths;
-use crate::rustc_middle::ty::{self, AssocItem, BottomUpFolder, Ty, TypeFoldable, TypeVisitableExt};
-use crate::rustc_span::{DUMMY_SP, Ident, Span, sym};
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits::ObligationCause;
+use crate::rustc_complete::def::Res;
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_infer::infer::DefineOpaqueTypes;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::adjustment::AllowTwoPhase;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{self, AssocItem, BottomUpFolder, Ty, TypeFoldable, TypeVisitableExt};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, sym};
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits::ObligationCause;
 use tracing::instrument;
 
 use super::method::probe;

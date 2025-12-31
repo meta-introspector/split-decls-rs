@@ -5,8 +5,8 @@
 use std::ops::{Index, IndexMut};
 
 use rustc_index::IndexVec;
-use crate::rustc_middle::mir;
-use crate::rustc_middle::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::mir;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use tracing::{debug, warn};
 
 use crate::mir::{FunctionCx, LocalRef};

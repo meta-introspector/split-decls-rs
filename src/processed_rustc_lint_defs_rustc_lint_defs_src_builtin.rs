@@ -7,7 +7,7 @@
 // When removing a lint, make sure to also add a call to `register_removed` in
 // compiler/rustc_lint/src/lib.rs.
 
-use crate::rustc_span::edition::Edition;
+use crate::rustc_complete::edition::Edition;
 
 use crate::{FutureIncompatibilityReason, declare_lint, declare_lint_pass};
 

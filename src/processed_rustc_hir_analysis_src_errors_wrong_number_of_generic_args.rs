@@ -1,11 +1,11 @@
 use std::iter;
 
 use GenericArgsInfo::*;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, Diag, Diagnostic, EmissionGuarantee, MultiSpan, pluralize};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, Diag, Diagnostic, EmissionGuarantee, MultiSpan, pluralize};
 use rustc_hir as hir;
-use crate::rustc_middle::ty::{self as ty, AssocItems, TyCtxt};
-use crate::rustc_span::def_id::DefId;
+use crate::rustc_complete::ty::{self as ty, AssocItems, TyCtxt};
+use crate::rustc_complete::def_id::DefId;
 use tracing::debug;
 
 /// Handles the `wrong number of type / lifetime / ... arguments` family of error messages.
@@ -1139,8 +1139,8 @@ impl<'a, 'tcx> WrongNumberOfGenericArgs<'a, 'tcx> {
 impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for WrongNumberOfGenericArgs<'_, '_> {
     fn into_diag(
         self,
-        dcx: rustc_errors::DiagCtxtHandle<'a>,
-        level: rustc_errors::Level,
+        dcx: crate::rustc_errors::DiagCtxtHandle<'a>,
+        level: crate::rustc_errors::Level,
     ) -> Diag<'a, G> {
         let msg = self.create_error_message();
         let mut err = Diag::new(dcx, level, msg);

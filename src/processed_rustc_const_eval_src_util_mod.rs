@@ -1,4 +1,4 @@
-use crate::rustc_middle::mir;
+use crate::rustc_complete::mir;
 
 
 pub use self::alignment::{is_disaligned, is_within_packed};
@@ -11,7 +11,7 @@ pub use self::type_name::type_name;
 /// same type as the result.
 #[inline]
 pub fn binop_left_homogeneous(op: mir::BinOp) -> bool {
-    use crate::rustc_middle::mir::BinOp::*;
+    use crate::rustc_complete::mir::BinOp::*;
     match op {
         Add | AddUnchecked | Sub | SubUnchecked | Mul | MulUnchecked | Div | Rem | BitXor
         | BitAnd | BitOr | Offset | Shl | ShlUnchecked | Shr | ShrUnchecked => true,
@@ -25,7 +25,7 @@ pub fn binop_left_homogeneous(op: mir::BinOp) -> bool {
 /// same type as the LHS.
 #[inline]
 pub fn binop_right_homogeneous(op: mir::BinOp) -> bool {
-    use crate::rustc_middle::mir::BinOp::*;
+    use crate::rustc_complete::mir::BinOp::*;
     match op {
         Add | AddUnchecked | AddWithOverflow | Sub | SubUnchecked | SubWithOverflow | Mul
         | MulUnchecked | MulWithOverflow | Div | Rem | BitXor | BitAnd | BitOr | Eq | Ne | Lt

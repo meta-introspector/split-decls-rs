@@ -1,6 +1,6 @@
-use crate::rustc_hir::{self as hir, AmbigArg, LangItem};
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::sym;
+use crate::rustc_complete::{self as hir, AmbigArg, LangItem};
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::sym;
 
 use crate::lints::{DropGlue, DropTraitConstraintsDiag};
 use crate::{LateContext, LateLintPass, LintContext};
@@ -87,7 +87,7 @@ declare_lint_pass!(
 
 impl<'tcx> LateLintPass<'tcx> for DropTraitConstraints {
     fn check_item(&mut self, cx: &LateContext<'tcx>, item: &'tcx hir::Item<'tcx>) {
-        use crate::rustc_middle::ty::ClauseKind;
+        use crate::rustc_complete::ty::ClauseKind;
 
         let predicates = cx.tcx.explicit_predicates_of(item.owner_id);
         for &(predicate, span) in predicates.predicates {

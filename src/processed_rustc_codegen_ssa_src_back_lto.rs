@@ -2,10 +2,10 @@ use std::ffi::CString;
 use std::sync::Arc;
 
 use crate::rustc_data_structures::memmap::Mmap;
-use crate::rustc_hir::def_id::{CrateNum, LOCAL_CRATE};
-use crate::rustc_middle::middle::exported_symbols::{ExportedSymbol, SymbolExportInfo, SymbolExportLevel};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::config::{CrateType, Lto};
+use crate::rustc_complete::def_id::{CrateNum, LOCAL_CRATE};
+use crate::rustc_complete::middle::exported_symbols::{ExportedSymbol, SymbolExportInfo, SymbolExportLevel};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::{CrateType, Lto};
 use tracing::info;
 
 use crate::back::symbol_export::{self, allocator_shim_symbols, symbol_name_for_instance_in_crate};

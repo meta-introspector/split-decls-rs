@@ -1,8 +1,8 @@
-use crate::rustc_ast::{BorrowKind, UnOp};
-use crate::rustc_hir::{Expr, ExprKind, Mutability};
-use crate::rustc_middle::ty::adjustment::{Adjust, Adjustment, AutoBorrow, OverloadedDeref};
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::sym;
+use crate::rustc_complete::{BorrowKind, UnOp};
+use crate::rustc_complete::{Expr, ExprKind, Mutability};
+use crate::rustc_complete::ty::adjustment::{Adjust, Adjustment, AutoBorrow, OverloadedDeref};
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::sym;
 
 use crate::lints::{
     ImplicitUnsafeAutorefsDiag, ImplicitUnsafeAutorefsMethodNote, ImplicitUnsafeAutorefsOrigin,

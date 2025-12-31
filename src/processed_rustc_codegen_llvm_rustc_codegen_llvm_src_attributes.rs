@@ -1,10 +1,10 @@
 // Set and unset common attributes on LLVM values.
 use rustc_codegen_ssa::traits::*;
-use crate::rustc_hir::attrs::{InlineAttr, InstructionSetAttr, OptimizeAttr};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::middle::codegen_fn_attrs::{CodegenFnAttrFlags, PatchableFunctionEntry};
-use crate::rustc_middle::ty::{self, TyCtxt};
-use crate::rustc_session::config::{BranchProtection, FunctionReturn, OptLevel, PAuthKey, PacRet};
+use crate::rustc_complete::attrs::{InlineAttr, InstructionSetAttr, OptimizeAttr};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::middle::codegen_fn_attrs::{CodegenFnAttrFlags, PatchableFunctionEntry};
+use crate::rustc_complete::ty::{self, TyCtxt};
+use crate::rustc_complete::config::{BranchProtection, FunctionReturn, OptLevel, PAuthKey, PacRet};
 use rustc_symbol_mangling::mangle_internal_symbol;
 use rustc_target::spec::{FramePointer, SanitizerSet, StackProbeType, StackProtector};
 use smallvec::SmallVec;

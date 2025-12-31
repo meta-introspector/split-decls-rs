@@ -6,12 +6,12 @@ pub use NtExprKind::*;
 pub use NtPatKind::*;
 pub use TokenKind::*;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::symbol::IdentPrintMode;
-use crate::rustc_span::{DUMMY_SP, ErrorGuaranteed, Span, kw, sym};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::symbol::IdentPrintMode;
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span, kw, sym};
 #[allow(clippy::useless_attribute)] // FIXME: following use of `hidden_glob_reexports` incorrectly triggers `useless_attribute` lint.
 #[allow(hidden_glob_reexports)]
-use crate::rustc_span::{Ident, Symbol};
+use crate::rustc_complete::{Ident, Symbol};
 
 use crate::ast;
 use crate::util::case::Case;

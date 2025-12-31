@@ -1,5 +1,5 @@
 use rustc_abi::{FieldIdx, VariantIdx};
-use crate::rustc_hir::HirId;
+use crate::rustc_complete::HirId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
 
 use crate::ty;

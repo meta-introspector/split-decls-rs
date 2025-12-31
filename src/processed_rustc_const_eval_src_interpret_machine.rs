@@ -8,11 +8,11 @@ use std::hash::Hash;
 
 use rustc_abi::{Align, Size};
 use rustc_apfloat::{Float, FloatConvert};
-use crate::rustc_middle::query::TyCtxtAt;
-use crate::rustc_middle::ty::Ty;
-use crate::rustc_middle::ty::layout::TyAndLayout;
-use crate::rustc_middle::{mir, ty};
-use crate::rustc_span::def_id::DefId;
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::{mir, ty};
+use crate::rustc_complete::def_id::DefId;
 use rustc_target::callconv::FnAbi;
 
 use super::{

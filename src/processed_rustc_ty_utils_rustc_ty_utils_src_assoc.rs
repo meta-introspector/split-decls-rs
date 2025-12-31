@@ -1,13 +1,13 @@
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, DefIdMap, LocalDefId};
-use crate::rustc_hir::definitions::{DefPathData, DisambiguatorState};
-use crate::rustc_hir::intravisit::{self, Visitor};
-use crate::rustc_hir::{self as hir, ImplItemImplKind, ItemKind};
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{self, ImplTraitInTraitData, TyCtxt};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::Ident;
-use crate::rustc_span::symbol::kw;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, DefIdMap, LocalDefId};
+use crate::rustc_complete::definitions::{DefPathData, DisambiguatorState};
+use crate::rustc_complete::intravisit::{self, Visitor};
+use crate::rustc_complete::{self as hir, ImplItemImplKind, ItemKind};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, ImplTraitInTraitData, TyCtxt};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::Ident;
+use crate::rustc_complete::symbol::kw;
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers {

@@ -1,11 +1,11 @@
-use crate::rustc_hir::Attribute;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::layout::{FnAbiError, LayoutError};
-use crate::rustc_middle::ty::{self, GenericArgs, Instance, Ty, TyCtxt};
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::sym;
+use crate::rustc_complete::Attribute;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::layout::{FnAbiError, LayoutError};
+use crate::rustc_complete::ty::{self, GenericArgs, Instance, Ty, TyCtxt};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::sym;
 use rustc_target::callconv::FnAbi;
 
 use super::layout_test::ensure_wf;

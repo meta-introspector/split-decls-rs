@@ -4,18 +4,18 @@ use std::ops::ControlFlow;
 use bitflags::bitflags;
 use rustc_abi::VariantIdx;
 use crate::rustc_data_structures::fx::FxHashSet;
-use rustc_errors::DiagMessage;
-use crate::rustc_hir::def::CtorKind;
-use crate::rustc_hir::intravisit::VisitorExt;
-use crate::rustc_hir::{self as hir, AmbigArg};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::DiagMessage;
+use crate::rustc_complete::def::CtorKind;
+use crate::rustc_complete::intravisit::VisitorExt;
+use crate::rustc_complete::{self as hir, AmbigArg};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{
     self, Adt, AdtDef, AdtKind, GenericArgsRef, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
     TypeVisitableExt,
 };
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::def_id::LocalDefId;
-use crate::rustc_span::{Span, sym};
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{Span, sym};
 use tracing::debug;
 
 use super::repr_nullable_ptr;

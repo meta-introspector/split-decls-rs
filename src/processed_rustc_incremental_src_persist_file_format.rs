@@ -17,7 +17,7 @@ use std::{env, fs};
 use crate::rustc_data_structures::memmap::Mmap;
 use rustc_serialize::Encoder;
 use rustc_serialize::opaque::{FileEncodeResult, FileEncoder};
-use crate::rustc_session::Session;
+use crate::rustc_complete::Session;
 use tracing::debug;
 
 use crate::errors;

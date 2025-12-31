@@ -105,14 +105,14 @@
 // stored when entering a macro definition starting from the state in which the meta-variable is
 // bound.
 
-use crate::rustc_ast::token::{Delimiter, IdentIsRaw, Token, TokenKind};
-use crate::rustc_ast::{DUMMY_NODE_ID, NodeId};
+use crate::rustc_complete::token::{Delimiter, IdentIsRaw, Token, TokenKind};
+use crate::rustc_complete::{DUMMY_NODE_ID, NodeId};
 use crate::rustc_data_structures::fx::FxHashMap;
-use rustc_errors::MultiSpan;
+use crate::rustc_complete::MultiSpan;
 use rustc_lint_defs::BuiltinLintDiag;
-use crate::rustc_session::lint::builtin::META_VARIABLE_MISUSE;
-use crate::rustc_session::parse::ParseSess;
-use crate::rustc_span::{ErrorGuaranteed, MacroRulesNormalizedIdent, Span, kw};
+use crate::rustc_complete::lint::builtin::META_VARIABLE_MISUSE;
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::{ErrorGuaranteed, MacroRulesNormalizedIdent, Span, kw};
 use smallvec::SmallVec;
 
 use crate::errors;

@@ -2,10 +2,10 @@
 // (thus indicating there is a loop in the CFG), or whose terminator is a function call.
 
 use crate::rustc_data_structures::graph::dominators::Dominators;
-use crate::rustc_middle::mir::{
+use crate::rustc_complete::mir::{
     BasicBlock, BasicBlockData, Body, Statement, StatementKind, TerminatorKind,
 };
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::instrument;
 
 pub(super) struct CtfeLimit;

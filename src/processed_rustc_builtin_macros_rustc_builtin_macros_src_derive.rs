@@ -1,12 +1,12 @@
 use rustc_ast as ast;
-use crate::rustc_ast::{GenericParamKind, ItemKind, MetaItemInner, MetaItemKind, StmtKind};
+use crate::rustc_complete::{GenericParamKind, ItemKind, MetaItemInner, MetaItemKind, StmtKind};
 use rustc_attr_parsing::validate_attr;
 use rustc_expand::base::{
     Annotatable, DeriveResolution, ExpandResult, ExtCtxt, Indeterminate, MultiItemModifier,
 };
 use rustc_feature::AttributeTemplate;
-use crate::rustc_session::Session;
-use crate::rustc_span::{ErrorGuaranteed, Ident, Span, sym};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, sym};
 
 use crate::cfg_eval::cfg_eval;
 use crate::errors;

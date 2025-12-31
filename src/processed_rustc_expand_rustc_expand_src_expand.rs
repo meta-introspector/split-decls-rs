@@ -3,10 +3,10 @@ use std::rc::Rc;
 use std::sync::Arc;
 use std::{iter, mem, slice};
 
-use crate::rustc_ast::mut_visit::*;
-use crate::rustc_ast::tokenstream::TokenStream;
-use crate::rustc_ast::visit::{self, AssocCtxt, Visitor, VisitorResult, try_visit, walk_list};
-use crate::rustc_ast::{
+use crate::rustc_complete::mut_visit::*;
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::visit::{self, AssocCtxt, Visitor, VisitorResult, try_visit, walk_list};
+use crate::rustc_complete::{
     self as ast, AssocItemKind, AstNodeWrapper, AttrArgs, AttrStyle, AttrVec, DUMMY_NODE_ID,
     ExprKind, ForeignItemKind, HasAttrs, HasNodeId, Inline, ItemKind, MacStmtStyle, MetaItemInner,
     MetaItemKind, ModKind, NodeId, PatKind, StmtKind, TyKind, token,
@@ -15,21 +15,21 @@ use rustc_ast_pretty::pprust;
 use rustc_attr_parsing::{AttributeParser, Early, EvalConfigResult, ShouldEmit, validate_attr};
 use crate::rustc_data_structures::flat_map_in_place::FlatMapInPlace;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::PResult;
+use crate::rustc_complete::PResult;
 use rustc_feature::Features;
-use crate::rustc_hir::Target;
-use crate::rustc_hir::def::MacroKinds;
-use crate::rustc_hir::limit::Limit;
+use crate::rustc_complete::Target;
+use crate::rustc_complete::def::MacroKinds;
+use crate::rustc_complete::limit::Limit;
 use rustc_parse::parser::{
     AttemptLocalParseRecovery, CommaRecoveryMode, ForceCollect, Parser, RecoverColon, RecoverComma,
     token_descr,
 };
-use crate::rustc_session::Session;
-use crate::rustc_session::lint::BuiltinLintDiag;
-use crate::rustc_session::lint::builtin::{UNUSED_ATTRIBUTES, UNUSED_DOC_COMMENTS};
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::hygiene::SyntaxContext;
-use crate::rustc_span::{ErrorGuaranteed, FileName, Ident, LocalExpnId, Span, Symbol, sym};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::{UNUSED_ATTRIBUTES, UNUSED_DOC_COMMENTS};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::hygiene::SyntaxContext;
+use crate::rustc_complete::{ErrorGuaranteed, FileName, Ident, LocalExpnId, Span, Symbol, sym};
 use smallvec::SmallVec;
 
 use crate::base::*;

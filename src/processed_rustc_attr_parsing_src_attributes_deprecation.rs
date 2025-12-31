@@ -1,4 +1,4 @@
-use crate::rustc_hir::attrs::{DeprecatedSince, Deprecation};
+use crate::rustc_complete::attrs::{DeprecatedSince, Deprecation};
 
 use super::prelude::*;
 use super::util::parse_version;

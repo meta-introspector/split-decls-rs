@@ -39,8 +39,8 @@ use late::{
 };
 use macros::{MacroRulesBinding, MacroRulesScope, MacroRulesScopeRef};
 use rustc_arena::{DroplessArena, TypedArena};
-use crate::rustc_ast::node_id::NodeMap;
-use crate::rustc_ast::{
+use crate::rustc_complete::node_id::NodeMap;
+use crate::rustc_complete::{
     self as ast, AngleBracketedArg, CRATE_NODE_ID, Crate, Expr, ExprKind, GenericArg, GenericArgs,
     LitKind, NodeId, Path, attr,
 };
@@ -49,33 +49,33 @@ use crate::rustc_data_structures::intern::Interned;
 use crate::rustc_data_structures::steal::Steal;
 use crate::rustc_data_structures::sync::{FreezeReadGuard, FreezeWriteGuard};
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-use rustc_errors::{Applicability, Diag, ErrCode, ErrorGuaranteed, LintBuffer};
+use crate::rustc_complete::{Applicability, Diag, ErrCode, ErrorGuaranteed, LintBuffer};
 use rustc_expand::base::{DeriveResolution, SyntaxExtension, SyntaxExtensionKind};
 use rustc_feature::BUILTIN_ATTRIBUTES;
-use crate::rustc_hir::attrs::StrippedCfgItem;
-use crate::rustc_hir::def::Namespace::{self, *};
-use crate::rustc_hir::def::{
+use crate::rustc_complete::attrs::StrippedCfgItem;
+use crate::rustc_complete::def::Namespace::{self, *};
+use crate::rustc_complete::def::{
     self, CtorOf, DefKind, DocLinkResMap, LifetimeRes, MacroKinds, NonMacroAttrKind, PartialRes,
     PerNS,
 };
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, CrateNum, DefId, LOCAL_CRATE, LocalDefId, LocalDefIdMap};
-use crate::rustc_hir::definitions::DisambiguatorState;
-use crate::rustc_hir::{PrimTy, TraitCandidate};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, CrateNum, DefId, LOCAL_CRATE, LocalDefId, LocalDefIdMap};
+use crate::rustc_complete::definitions::DisambiguatorState;
+use crate::rustc_complete::{PrimTy, TraitCandidate};
 use rustc_index::bit_set::DenseBitSet;
 use rustc_metadata::creader::CStore;
-use crate::rustc_middle::metadata::ModChild;
-use crate::rustc_middle::middle::privacy::EffectiveVisibilities;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::metadata::ModChild;
+use crate::rustc_complete::middle::privacy::EffectiveVisibilities;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{
     self, DelegationFnSig, Feed, MainDefinition, RegisteredTools, ResolverAstLowering,
     ResolverGlobalCtxt, TyCtxt, TyCtxtFeed, Visibility,
 };
 use rustc_query_system::ich::StableHashingContext;
-use crate::rustc_session::lint::BuiltinLintDiag;
-use crate::rustc_session::lint::builtin::PRIVATE_MACRO_USE;
-use crate::rustc_span::hygiene::{ExpnId, LocalExpnId, MacroKind, SyntaxContext, Transparency};
-use crate::rustc_span::{DUMMY_SP, Ident, Macros20NormalizedIdent, Span, Symbol, kw, sym};
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::PRIVATE_MACRO_USE;
+use crate::rustc_complete::hygiene::{ExpnId, LocalExpnId, MacroKind, SyntaxContext, Transparency};
+use crate::rustc_complete::{DUMMY_SP, Ident, Macros20NormalizedIdent, Span, Symbol, kw, sym};
 use smallvec::{SmallVec, smallvec};
 use tracing::debug;
 

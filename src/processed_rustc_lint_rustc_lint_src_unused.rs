@@ -1,18 +1,18 @@
 use std::iter;
 
-use crate::rustc_ast::util::{classify, parser};
-use crate::rustc_ast::{self as ast, ExprKind, FnRetTy, HasAttrs as _, StmtKind};
+use crate::rustc_complete::util::{classify, parser};
+use crate::rustc_complete::{self as ast, ExprKind, FnRetTy, HasAttrs as _, StmtKind};
 use crate::rustc_data_structures::fx::FxHashMap;
-use rustc_errors::{MultiSpan, pluralize};
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::{self as hir, LangItem, find_attr};
-use rustc_infer::traits::util::elaborate;
-use crate::rustc_middle::ty::{self, Ty, adjustment};
-use crate::rustc_session::{declare_lint, declare_lint_pass, impl_lint_pass};
-use crate::rustc_span::edition::Edition::Edition2015;
-use crate::rustc_span::{BytePos, Span, Symbol, kw, sym};
+use crate::rustc_complete::{MultiSpan, pluralize};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, LangItem, find_attr};
+use crate::rustc_infer::traits::util::elaborate;
+use crate::rustc_complete::ty::{self, Ty, adjustment};
+use crate::rustc_complete::{declare_lint, declare_lint_pass, impl_lint_pass};
+use crate::rustc_complete::edition::Edition::Edition2015;
+use crate::rustc_complete::{BytePos, Span, Symbol, kw, sym};
 use tracing::instrument;
 
 use crate::lints::{
@@ -870,7 +870,7 @@ trait UnusedDelimLint {
     }
 
     fn check_expr(&mut self, cx: &EarlyContext<'_>, e: &ast::Expr) {
-        use crate::rustc_ast::ExprKind::*;
+        use crate::rustc_complete::ExprKind::*;
         let (value, ctx, followed_by_block, left_pos, right_pos, is_kw) = match e.kind {
             // Do not lint `unused_braces` in `if let` expressions.
             If(ref cond, ref block, _)
@@ -1426,7 +1426,7 @@ impl EarlyLintPass for UnusedParens {
     }
 
     fn enter_where_predicate(&mut self, _: &EarlyContext<'_>, pred: &ast::WherePredicate) {
-        use crate::rustc_ast::{WhereBoundPredicate, WherePredicateKind};
+        use crate::rustc_complete::{WhereBoundPredicate, WherePredicateKind};
         if let WherePredicateKind::BoundPredicate(WhereBoundPredicate {
             bounded_ty,
             bound_generic_params,

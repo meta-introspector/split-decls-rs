@@ -18,7 +18,7 @@ use fluent_syntax::parser::ParserError;
 use intl_memoizer::concurrent::IntlLangMemoizer;
 use crate::rustc_data_structures::sync::{DynSend, IntoDynSyncSend};
 use rustc_macros::{Decodable, Encodable};
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::{instrument, trace};
 pub use unic_langid::{LanguageIdentifier, langid};
 

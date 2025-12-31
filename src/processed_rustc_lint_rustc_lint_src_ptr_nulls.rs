@@ -1,8 +1,8 @@
-use crate::rustc_ast::LitKind;
-use crate::rustc_hir::{BinOpKind, Expr, ExprKind, TyKind};
-use crate::rustc_middle::ty::RawPtr;
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::{Span, sym};
+use crate::rustc_complete::LitKind;
+use crate::rustc_complete::{BinOpKind, Expr, ExprKind, TyKind};
+use crate::rustc_complete::ty::RawPtr;
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::{Span, sym};
 
 use crate::lints::{InvalidNullArgumentsDiag, UselessPtrNullChecksDiag};
 use crate::utils::peel_casts;

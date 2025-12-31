@@ -1,8 +1,8 @@
 // Namespace Handling.
 
 use rustc_codegen_ssa::debuginfo::type_names;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::ty::{self, Instance};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::ty::{self, Instance};
 
 use super::utils::{DIB, debug_context};
 use crate::common::CodegenCx;

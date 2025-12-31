@@ -1,15 +1,15 @@
 use std::ops::ControlFlow;
 
-use rustc_infer::infer::InferCtxt;
-use rustc_infer::traits::solve::inspect::ProbeKind;
-use rustc_infer::traits::solve::{CandidateSource, Certainty, Goal};
-use rustc_infer::traits::{
+use crate::rustc_infer::infer::InferCtxt;
+use crate::rustc_infer::traits::solve::inspect::ProbeKind;
+use crate::rustc_infer::traits::solve::{CandidateSource, Certainty, Goal};
+use crate::rustc_infer::traits::{
     BuiltinImplSource, ImplSource, ImplSourceUserDefinedData, Obligation, ObligationCause,
     Selection, SelectionError, SelectionResult, TraitObligation,
 };
 use rustc_macros::extension;
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::Span;
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::Span;
 use thin_vec::thin_vec;
 
 use crate::solve::inspect::{self, ProofTreeInferCtxtExt};

@@ -1,9 +1,9 @@
 use std::borrow::Cow;
 
-use rustc_errors::{DiagArgValue, LintEmitter};
-use crate::rustc_hir::Target;
-use crate::rustc_hir::lints::{AttributeLint, AttributeLintKind};
-use crate::rustc_span::sym;
+use crate::rustc_complete::{DiagArgValue, LintEmitter};
+use crate::rustc_complete::Target;
+use crate::rustc_complete::lints::{AttributeLint, AttributeLintKind};
+use crate::rustc_complete::sym;
 
 use crate::session_diagnostics;
 

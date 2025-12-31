@@ -2,15 +2,15 @@
 // crate or pertains to a type defined in this crate.
 
 use crate::rustc_data_structures::fx::FxIndexSet;
-use rustc_errors::ErrorGuaranteed;
-use rustc_infer::infer::{DefineOpaqueTypes, InferCtxt, TyCtxtInferExt};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_infer::infer::{DefineOpaqueTypes, InferCtxt, TyCtxtInferExt};
 use rustc_lint_defs::builtin::UNCOVERED_PARAM_IN_PROJECTION;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::def_id::{DefId, LocalDefId};
-use rustc_trait_selection::traits::{
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_trait_selection::traits::{
     self, IsFirstInputType, OrphanCheckErr, OrphanCheckMode, UncoveredTyParams,
 };
 use tracing::{debug, instrument};

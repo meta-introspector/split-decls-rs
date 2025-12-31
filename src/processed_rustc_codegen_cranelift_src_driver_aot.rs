@@ -18,13 +18,13 @@ use rustc_codegen_ssa::{
 use crate::rustc_data_structures::profiling::SelfProfilerRef;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 use crate::rustc_data_structures::sync::{IntoDynSyncSend, par_map};
-use crate::rustc_hir::attrs::Linkage as RLinkage;
+use crate::rustc_complete::attrs::Linkage as RLinkage;
 use rustc_metadata::fs::copy_to_stdout;
-use crate::rustc_middle::dep_graph::{WorkProduct, WorkProductId};
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use crate::rustc_middle::mir::mono::{CodegenUnit, MonoItem, MonoItemData, Visibility};
-use crate::rustc_session::Session;
-use crate::rustc_session::config::{DebugInfo, OutFileName, OutputFilenames, OutputType};
+use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::mir::mono::{CodegenUnit, MonoItem, MonoItemData, Visibility};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{DebugInfo, OutFileName, OutputFilenames, OutputType};
 
 use crate::CodegenCx;
 use crate::base::CodegenedFunction;

@@ -1,7 +1,7 @@
 // Routines for manipulating the control-flow graph.
 
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::debug;
 
 use crate::builder::CFG;

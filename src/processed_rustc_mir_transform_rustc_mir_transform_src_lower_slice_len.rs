@@ -1,9 +1,9 @@
 // This pass lowers calls to core::slice::len to just PtrMetadata op.
 // It should run before inlining!
 
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 
 pub(super) struct LowerSliceLenCalls;
 

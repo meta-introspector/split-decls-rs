@@ -2,11 +2,11 @@ use std::iter;
 
 use rustc_index::IndexVec;
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use crate::rustc_middle::mir::{Body, Local, UnwindTerminateReason, traversal};
-use crate::rustc_middle::ty::layout::{FnAbiOf, HasTyCtxt, HasTypingEnv, TyAndLayout};
-use crate::rustc_middle::ty::{self, Instance, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
-use crate::rustc_middle::{bug, mir, span_bug};
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::mir::{Body, Local, UnwindTerminateReason, traversal};
+use crate::rustc_complete::ty::layout::{FnAbiOf, HasTyCtxt, HasTypingEnv, TyAndLayout};
+use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
+use crate::rustc_complete::{bug, mir, span_bug};
 use rustc_target::callconv::{FnAbi, PassMode};
 use tracing::{debug, instrument};
 

@@ -2,13 +2,13 @@
 
 use rustc_abi::Variants;
 use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::{
     BasicBlock, BasicBlockData, BasicBlocks, Body, Local, Operand, Rvalue, StatementKind,
     TerminatorKind,
 };
-use crate::rustc_middle::ty::layout::TyAndLayout;
-use crate::rustc_middle::ty::{Ty, TyCtxt};
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::ty::{Ty, TyCtxt};
 use tracing::trace;
 
 use crate::patch::MirPatch;

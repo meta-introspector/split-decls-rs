@@ -5,7 +5,7 @@ use std::{ascii, fmt, str};
 use rustc_literal_escaper::{
     MixedUnit, unescape_byte, unescape_byte_str, unescape_c_str, unescape_char, unescape_str,
 };
-use crate::rustc_span::{ByteSymbol, Span, Symbol, kw, sym};
+use crate::rustc_complete::{ByteSymbol, Span, Symbol, kw, sym};
 use tracing::debug;
 
 use crate::ast::{self, LitKind, MetaItemLit, StrStyle};

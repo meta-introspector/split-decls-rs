@@ -1,10 +1,10 @@
 use rustc_ast as ast;
-use crate::rustc_ast::token::{self, MetaVarKind};
-use crate::rustc_ast::tokenstream::ParserRange;
-use crate::rustc_ast::{Attribute, attr};
-use rustc_errors::codes::*;
-use rustc_errors::{Diag, PResult};
-use crate::rustc_span::{BytePos, Span};
+use crate::rustc_complete::token::{self, MetaVarKind};
+use crate::rustc_complete::tokenstream::ParserRange;
+use crate::rustc_complete::{Attribute, attr};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Diag, PResult};
+use crate::rustc_complete::{BytePos, Span};
 use thin_vec::ThinVec;
 use tracing::debug;
 
@@ -83,7 +83,7 @@ impl<'a> Parser<'a> {
                             replacement_span,
                             fluent::parse_suggestion,
                             "",
-                            rustc_errors::Applicability::MachineApplicable,
+                            crate::rustc_errors::Applicability::MachineApplicable,
                         );
                     }
                     err.emit();
@@ -217,7 +217,7 @@ impl<'a> Parser<'a> {
                             OuterAttributeType::DocBlockComment => "*",
                             OuterAttributeType::DocComment => "/",
                         },
-                        rustc_errors::Applicability::MachineApplicable,
+                        crate::rustc_errors::Applicability::MachineApplicable,
                     );
                 }
                 return None;

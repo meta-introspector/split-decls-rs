@@ -3,11 +3,11 @@
 // Box is not actually a pointer so it is incorrect to dereference it directly.
 
 use rustc_abi::FieldIdx;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::mir::visit::MutVisitor;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::{Ty, TyCtxt};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::mir::visit::MutVisitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{Ty, TyCtxt};
 
 use crate::patch::MirPatch;
 

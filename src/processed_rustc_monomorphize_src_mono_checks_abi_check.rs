@@ -1,11 +1,11 @@
 // This module ensures that if a function's ABI requires a particular target feature,
 // that target feature is enabled both on the callee and all callers.
 use rustc_abi::{BackendRepr, CanonAbi, RegKind, X86Call};
-use crate::rustc_hir::{CRATE_HIR_ID, HirId};
-use crate::rustc_middle::mir::{self, Location, traversal};
-use crate::rustc_middle::ty::{self, Instance, InstanceKind, Ty, TyCtxt};
-use crate::rustc_span::def_id::DefId;
-use crate::rustc_span::{DUMMY_SP, Span, Symbol, sym};
+use crate::rustc_complete::{CRATE_HIR_ID, HirId};
+use crate::rustc_complete::mir::{self, Location, traversal};
+use crate::rustc_complete::ty::{self, Instance, InstanceKind, Ty, TyCtxt};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol, sym};
 use rustc_target::callconv::{FnAbi, PassMode};
 
 use crate::errors;

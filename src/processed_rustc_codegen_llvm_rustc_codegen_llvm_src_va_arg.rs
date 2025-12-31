@@ -5,8 +5,8 @@ use rustc_codegen_ssa::mir::operand::OperandRef;
 use rustc_codegen_ssa::traits::{
     BaseTypeCodegenMethods, BuilderMethods, ConstCodegenMethods, LayoutTypeCodegenMethods,
 };
-use crate::rustc_middle::ty::Ty;
-use crate::rustc_middle::ty::layout::{HasTyCtxt, LayoutOf};
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::{HasTyCtxt, LayoutOf};
 
 use crate::builder::Builder;
 use crate::type_::Type;

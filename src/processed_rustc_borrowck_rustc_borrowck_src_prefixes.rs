@@ -4,7 +4,7 @@
 // is borrowed. But: writing `a` is legal if `*a` is borrowed,
 // whether or not `a` is a shared or mutable reference. [...] "
 
-use crate::rustc_middle::mir::{PlaceRef, ProjectionElem};
+use crate::rustc_complete::mir::{PlaceRef, ProjectionElem};
 
 use super::MirBorrowckCtxt;
 

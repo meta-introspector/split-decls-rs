@@ -7,8 +7,8 @@ use crate::rustc_data_structures::graph::dominators::Dominators;
 use crate::rustc_data_structures::graph::{self, DirectedGraph, StartNode};
 use rustc_index::IndexVec;
 use rustc_index::bit_set::DenseBitSet;
-pub(crate) use crate::rustc_middle::mir::coverage::{BasicCoverageBlock, START_BCB};
-use crate::rustc_middle::mir::{self, BasicBlock, Terminator, TerminatorKind};
+pub(crate) use crate::rustc_complete::mir::coverage::{BasicCoverageBlock, START_BCB};
+use crate::rustc_complete::mir::{self, BasicBlock, Terminator, TerminatorKind};
 use tracing::debug;
 
 /// A coverage-specific simplification of the MIR control flow graph (CFG). The `CoverageGraph`s

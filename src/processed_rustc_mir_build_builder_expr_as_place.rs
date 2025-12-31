@@ -4,14 +4,14 @@ use std::assert_matches::assert_matches;
 use std::iter;
 
 use rustc_abi::{FIRST_VARIANT, FieldIdx, VariantIdx};
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_middle::hir::place::{Projection as HirProjection, ProjectionKind as HirProjectionKind};
-use crate::rustc_middle::mir::AssertKind::BoundsCheck;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::thir::*;
-use crate::rustc_middle::ty::{self, AdtDef, CanonicalUserTypeAnnotation, Ty, Variance};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::Span;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::hir::place::{Projection as HirProjection, ProjectionKind as HirProjectionKind};
+use crate::rustc_complete::mir::AssertKind::BoundsCheck;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::{self, AdtDef, CanonicalUserTypeAnnotation, Ty, Variance};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument, trace};
 
 use crate::builder::ForGuard::{OutsideGuard, RefWithinGuard};

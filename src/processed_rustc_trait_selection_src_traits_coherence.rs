@@ -7,23 +7,23 @@
 use std::fmt::Debug;
 
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
-use rustc_errors::{Diag, EmissionGuarantee};
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, DefId};
-use rustc_infer::infer::{DefineOpaqueTypes, InferCtxt, TyCtxtInferExt};
-use rustc_infer::traits::PredicateObligations;
+use crate::rustc_complete::{Diag, EmissionGuarantee};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
+use crate::rustc_infer::infer::{DefineOpaqueTypes, InferCtxt, TyCtxtInferExt};
+use crate::rustc_infer::traits::PredicateObligations;
 use rustc_macros::{TypeFoldable, TypeVisitable};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::traits::query::NoSolution;
-use crate::rustc_middle::traits::solve::{CandidateSource, Certainty, Goal};
-use crate::rustc_middle::traits::specialization_graph::OverlapMode;
-use crate::rustc_middle::ty::fast_reject::DeepRejectCtxt;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::traits::solve::{CandidateSource, Certainty, Goal};
+use crate::rustc_complete::traits::specialization_graph::OverlapMode;
+use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
+use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode,
 };
 pub use rustc_next_trait_solver::coherence::*;
 use rustc_next_trait_solver::solve::SolverDelegateEvalExt;
-use crate::rustc_span::{DUMMY_SP, Span, sym};
+use crate::rustc_complete::{DUMMY_SP, Span, sym};
 use tracing::{debug, instrument, warn};
 
 use super::ObligationCtxt;

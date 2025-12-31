@@ -6,13 +6,13 @@ use std::path::PathBuf;
 use std::process::{Command, Stdio};
 use std::sync::Arc;
 
-use crate::rustc_ast::{InlineAsmOptions, InlineAsmTemplatePiece};
+use crate::rustc_complete::{InlineAsmOptions, InlineAsmTemplatePiece};
 use rustc_codegen_ssa::traits::{AsmCodegenMethods, GlobalAsmOperandRef};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_middle::ty::layout::{
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::ty::layout::{
     FnAbiError, FnAbiOfHelpers, FnAbiRequest, HasTyCtxt, HasTypingEnv, LayoutError, LayoutOfHelpers,
 };
-use crate::rustc_session::config::{OutputFilenames, OutputType};
+use crate::rustc_complete::config::{OutputFilenames, OutputType};
 use rustc_target::asm::InlineAsmArch;
 
 use crate::prelude::*;

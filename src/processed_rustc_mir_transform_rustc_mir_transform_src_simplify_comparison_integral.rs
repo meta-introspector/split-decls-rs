@@ -1,12 +1,12 @@
 use std::iter;
 
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::interpret::Scalar;
-use crate::rustc_middle::mir::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::interpret::Scalar;
+use crate::rustc_complete::mir::{
     BasicBlock, BinOp, Body, Operand, Place, Rvalue, Statement, StatementKind, SwitchTargets,
     TerminatorKind,
 };
-use crate::rustc_middle::ty::{Ty, TyCtxt};
+use crate::rustc_complete::ty::{Ty, TyCtxt};
 use tracing::trace;
 
 /// Pass to convert `if` conditions on integrals into switches on the integral.

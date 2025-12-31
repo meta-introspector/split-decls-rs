@@ -1,11 +1,11 @@
-use rustc_errors::{Applicability, Diag};
-use crate::rustc_hir::def::{CtorOf, DefKind, Res};
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_hir::{self as hir, ExprKind, HirId, PatKind};
+use crate::rustc_complete::{Applicability, Diag};
+use crate::rustc_complete::def::{CtorOf, DefKind, Res};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{self as hir, ExprKind, HirId, PatKind};
 use rustc_hir_pretty::ty_to_string;
-use crate::rustc_middle::ty::{self, Ty};
-use crate::rustc_span::Span;
-use rustc_trait_selection::traits::{
+use crate::rustc_complete::ty::{self, Ty};
+use crate::rustc_complete::Span;
+use crate::rustc_trait_selection::traits::{
     MatchExpressionArmCause, ObligationCause, ObligationCauseCode,
 };
 use tracing::{debug, instrument};

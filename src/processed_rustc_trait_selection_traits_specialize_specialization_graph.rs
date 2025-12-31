@@ -1,10 +1,10 @@
-use rustc_errors::ErrorGuaranteed;
-use crate::rustc_hir::def_id::DefId;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::extension;
-use crate::rustc_middle::bug;
-pub use crate::rustc_middle::traits::specialization_graph::*;
-use crate::rustc_middle::ty::fast_reject::{self, SimplifiedType, TreatParams};
-use crate::rustc_middle::ty::{self, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::bug;
+pub use crate::rustc_complete::traits::specialization_graph::*;
+use crate::rustc_complete::ty::fast_reject::{self, SimplifiedType, TreatParams};
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt};
 use tracing::{debug, instrument};
 
 use super::OverlapError;

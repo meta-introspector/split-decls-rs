@@ -1,16 +1,16 @@
 use std::{fmt, iter, mem};
 
 use rustc_abi::{FIRST_VARIANT, FieldIdx, VariantIdx};
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::lang_items::LangItem;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::lang_items::LangItem;
 use rustc_index::Idx;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::adjustment::PointerCoercion;
-use crate::rustc_middle::ty::util::IntTypeExt;
-use crate::rustc_middle::ty::{self, GenericArg, GenericArgsRef, Ty, TyCtxt};
-use crate::rustc_middle::{bug, span_bug, traits};
-use crate::rustc_span::DUMMY_SP;
-use crate::rustc_span::source_map::{Spanned, dummy_spanned};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::adjustment::PointerCoercion;
+use crate::rustc_complete::ty::util::IntTypeExt;
+use crate::rustc_complete::ty::{self, GenericArg, GenericArgsRef, Ty, TyCtxt};
+use crate::rustc_complete::{bug, span_bug, traits};
+use crate::rustc_complete::DUMMY_SP;
+use crate::rustc_complete::source_map::{Spanned, dummy_spanned};
 use tracing::{debug, instrument};
 
 use crate::patch::MirPatch;

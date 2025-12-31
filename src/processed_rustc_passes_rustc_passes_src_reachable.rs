@@ -25,18 +25,18 @@
 use hir::def_id::LocalDefIdSet;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use rustc_hir as hir;
-use crate::rustc_hir::Node;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::intravisit::{self, Visitor};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::middle::codegen_fn_attrs::{CodegenFnAttrFlags, CodegenFnAttrs};
-use crate::rustc_middle::middle::privacy::{self, Level};
-use crate::rustc_middle::mir::interpret::{ConstAllocation, ErrorHandled, GlobalAlloc};
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{self, ExistentialTraitRef, TyCtxt};
+use crate::rustc_complete::Node;
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::intravisit::{self, Visitor};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::codegen_fn_attrs::{CodegenFnAttrFlags, CodegenFnAttrs};
+use crate::rustc_complete::middle::privacy::{self, Level};
+use crate::rustc_complete::mir::interpret::{ConstAllocation, ErrorHandled, GlobalAlloc};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, ExistentialTraitRef, TyCtxt};
 use rustc_privacy::DefIdVisitor;
-use crate::rustc_session::config::CrateType;
+use crate::rustc_complete::config::CrateType;
 use tracing::debug;
 
 /// Determines whether this item is recursive for reachability. See `is_recursively_reachable_local`

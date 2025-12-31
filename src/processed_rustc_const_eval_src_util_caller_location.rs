@@ -1,8 +1,8 @@
 use rustc_abi::FieldIdx;
-use crate::rustc_hir::LangItem;
-use crate::rustc_middle::ty::{self, TyCtxt};
-use crate::rustc_middle::{bug, mir};
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::ty::{self, TyCtxt};
+use crate::rustc_complete::{bug, mir};
+use crate::rustc_complete::Symbol;
 use tracing::trace;
 
 use crate::const_eval::{CanAccessMutGlobal, CompileTimeInterpCx, mk_eval_cx_to_read_const_val};

@@ -3,8 +3,8 @@ use std::path::PathBuf;
 use std::process::Command;
 
 use itertools::Itertools;
-use crate::rustc_middle::middle::exported_symbols::SymbolExportKind;
-use crate::rustc_session::Session;
+use crate::rustc_complete::middle::exported_symbols::SymbolExportKind;
+use crate::rustc_complete::Session;
 use rustc_target::spec::Target;
 pub(super) use rustc_target::spec::apple::OSVersion;
 use tracing::debug;

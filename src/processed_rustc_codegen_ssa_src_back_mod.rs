@@ -1,6 +1,6 @@
 use std::borrow::Cow;
 
-use crate::rustc_session::Session;
+use crate::rustc_complete::Session;
 
 
 /// The target triple depends on the deployment target, and is required to

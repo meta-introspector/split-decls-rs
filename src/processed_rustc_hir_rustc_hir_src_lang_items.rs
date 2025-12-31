@@ -7,11 +7,11 @@
 // * Traits that represent operators; e.g., `Add`, `Sub`, `Index`.
 // * Functions called by the compiler itself.
 
-use crate::rustc_ast::attr::AttributeExt;
+use crate::rustc_complete::attr::AttributeExt;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-use crate::rustc_span::{Span, Symbol, kw, sym};
+use crate::rustc_complete::{Span, Symbol, kw, sym};
 
 use crate::def_id::DefId;
 use crate::{MethodKind, Target};

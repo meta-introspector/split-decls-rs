@@ -1,4 +1,4 @@
-use crate::rustc_span::def_id::DefIndex;
+use crate::rustc_complete::def_id::DefIndex;
 
 use super::*;
 

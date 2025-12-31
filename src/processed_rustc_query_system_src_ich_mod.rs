@@ -1,6 +1,6 @@
 // ICH - Incremental Compilation Hash
 
-use crate::rustc_span::{Symbol, sym};
+use crate::rustc_complete::{Symbol, sym};
 
 pub use self::hcx::StableHashingContext;
 

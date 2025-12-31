@@ -1,14 +1,14 @@
 use std::mem;
 
 use ast::token::IdentIsRaw;
-use crate::rustc_ast::token::{self, MetaVarKind, Token, TokenKind};
-use crate::rustc_ast::{
+use crate::rustc_complete::token::{self, MetaVarKind, Token, TokenKind};
+use crate::rustc_complete::{
     self as ast, AngleBracketedArg, AngleBracketedArgs, AnonConst, AssocItemConstraint,
     AssocItemConstraintKind, BlockCheckMode, GenericArg, GenericArgs, Generics, ParenthesizedArgs,
     Path, PathSegment, QSelf,
 };
-use rustc_errors::{Applicability, Diag, PResult};
-use crate::rustc_span::{BytePos, Ident, Span, kw, sym};
+use crate::rustc_complete::{Applicability, Diag, PResult};
+use crate::rustc_complete::{BytePos, Ident, Span, kw, sym};
 use thin_vec::ThinVec;
 use tracing::debug;
 

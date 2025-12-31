@@ -1,10 +1,10 @@
 use rustc_abi::{HasDataLayout, Size, TagEncoding, Variants};
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_middle::mir::interpret::AllocId;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::util::IntTypeExt;
-use crate::rustc_middle::ty::{self, AdtDef, Ty, TyCtxt};
-use crate::rustc_session::Session;
+use crate::rustc_complete::mir::interpret::AllocId;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::util::IntTypeExt;
+use crate::rustc_complete::ty::{self, AdtDef, Ty, TyCtxt};
+use crate::rustc_complete::Session;
 
 use crate::patch::MirPatch;
 

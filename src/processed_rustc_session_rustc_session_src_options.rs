@@ -7,12 +7,12 @@ use rustc_abi::Align;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::profiling::TimePassesFormat;
 use crate::rustc_data_structures::stable_hasher::StableHasher;
-use rustc_errors::{ColorConfig, LanguageIdentifier, TerminalUrl};
+use crate::rustc_complete::{ColorConfig, LanguageIdentifier, TerminalUrl};
 use rustc_feature::UnstableFeatures;
 use rustc_hashes::Hash64;
 use rustc_macros::{Decodable, Encodable};
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::{RealFileName, SourceFileHashAlgorithm};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{RealFileName, SourceFileHashAlgorithm};
 use rustc_target::spec::{
     CodeModel, FramePointer, LinkerFlavorCli, MergeFunctions, OnBrokenPipe, PanicStrategy,
     RelocModel, RelroLevel, SanitizerSet, SplitDebuginfo, StackProtector, SymbolVisibility,
@@ -975,7 +975,7 @@ pub mod parse {
     pub(crate) fn parse_opt_langid(slot: &mut Option<LanguageIdentifier>, v: Option<&str>) -> bool {
         match v {
             Some(s) => {
-                *slot = rustc_errors::LanguageIdentifier::from_str(s).ok();
+                *slot = crate::rustc_errors::LanguageIdentifier::from_str(s).ok();
                 true
             }
             None => false,

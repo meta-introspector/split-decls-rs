@@ -1,9 +1,9 @@
 // The compiler code necessary to implement the `#[derive]` extensions.
 
 use rustc_ast as ast;
-use crate::rustc_ast::{GenericArg, MetaItem};
+use crate::rustc_complete::{GenericArg, MetaItem};
 use rustc_expand::base::{Annotatable, ExpandResult, ExtCtxt, MultiItemModifier};
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 use thin_vec::{ThinVec, thin_vec};
 
 macro path_local($x:ident) {

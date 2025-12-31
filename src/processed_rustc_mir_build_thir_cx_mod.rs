@@ -3,16 +3,16 @@
 // etc., and instead goes through the `Cx` for most of its work.
 
 use crate::rustc_data_structures::steal::Steal;
-use rustc_errors::ErrorGuaranteed;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::lang_items::LangItem;
-use crate::rustc_hir::{self as hir, HirId, find_attr};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::middle::region;
-use crate::rustc_middle::thir::*;
-use crate::rustc_middle::ty::{self, RvalueScopes, TyCtxt};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{self as hir, HirId, find_attr};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::region;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::{self, RvalueScopes, TyCtxt};
 use tracing::instrument;
 
 use crate::thir::pattern::pat_from_hir;

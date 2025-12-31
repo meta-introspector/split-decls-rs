@@ -1,7 +1,7 @@
-use crate::rustc_hir::attrs::Linkage;
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use crate::rustc_middle::mir::mono::{MonoItem, MonoItemData, Visibility};
-use crate::rustc_middle::ty::layout::HasTyCtxt;
+use crate::rustc_complete::attrs::Linkage;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::mir::mono::{MonoItem, MonoItemData, Visibility};
+use crate::rustc_complete::ty::layout::HasTyCtxt;
 use tracing::debug;
 
 use crate::base;

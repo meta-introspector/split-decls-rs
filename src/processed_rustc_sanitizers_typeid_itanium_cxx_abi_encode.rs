@@ -11,14 +11,14 @@ use rustc_abi::{ExternAbi, Integer};
 use crate::rustc_data_structures::base_n::{ALPHANUMERIC_ONLY, CASE_INSENSITIVE, ToBaseN};
 use crate::rustc_data_structures::fx::FxHashMap;
 use rustc_hir as hir;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::layout::IntegerExt;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::IntegerExt;
+use crate::rustc_complete::ty::{
     self, Const, ExistentialPredicate, FloatTy, FnSig, GenericArg, GenericArgKind, GenericArgsRef,
     IntTy, List, Region, RegionKind, TermKind, Ty, TyCtxt, TypeFoldable, UintTy,
 };
-use crate::rustc_span::def_id::DefId;
-use crate::rustc_span::sym;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::sym;
 use tracing::instrument;
 
 use crate::cfi::typeid::TypeIdOptions;

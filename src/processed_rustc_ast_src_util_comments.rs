@@ -1,4 +1,4 @@
-use crate::rustc_span::{BytePos, Symbol};
+use crate::rustc_complete::{BytePos, Symbol};
 
 use crate::token::CommentKind;
 

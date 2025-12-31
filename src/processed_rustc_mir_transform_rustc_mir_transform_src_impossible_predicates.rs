@@ -26,9 +26,9 @@
 // the normalization code (leading to cycle errors), since
 // it's usually never invoked in this way.
 
-use crate::rustc_middle::mir::{Body, START_BLOCK, TerminatorKind};
-use crate::rustc_middle::ty::{TyCtxt, TypeFlags, TypeVisitableExt};
-use rustc_trait_selection::traits;
+use crate::rustc_complete::mir::{Body, START_BLOCK, TerminatorKind};
+use crate::rustc_complete::ty::{TyCtxt, TypeFlags, TypeVisitableExt};
+use crate::rustc_trait_selection::traits;
 use tracing::trace;
 
 use crate::pass_manager::MirPass;

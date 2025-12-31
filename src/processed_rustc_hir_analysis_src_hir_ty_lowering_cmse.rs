@@ -1,9 +1,9 @@
 use rustc_abi::ExternAbi;
-use rustc_errors::{DiagCtxtHandle, E0781, struct_span_code_err};
-use crate::rustc_hir::{self as hir, HirId};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::layout::LayoutError;
-use crate::rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::{DiagCtxtHandle, E0781, struct_span_code_err};
+use crate::rustc_complete::{self as hir, HirId};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::LayoutError;
+use crate::rustc_complete::ty::{self, TyCtxt};
 
 use crate::errors;
 

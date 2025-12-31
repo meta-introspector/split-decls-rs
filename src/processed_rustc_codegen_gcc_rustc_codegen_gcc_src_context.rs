@@ -10,17 +10,17 @@ use rustc_codegen_ssa::errors as ssa_errors;
 use rustc_codegen_ssa::traits::{BackendTypes, BaseTypeCodegenMethods, MiscCodegenMethods};
 use crate::rustc_data_structures::base_n::{ALPHANUMERIC_ONLY, ToBaseN};
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
-use crate::rustc_middle::mir::interpret::Allocation;
-use crate::rustc_middle::mir::mono::CodegenUnit;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::layout::{
+use crate::rustc_complete::mir::interpret::Allocation;
+use crate::rustc_complete::mir::mono::CodegenUnit;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::layout::{
     FnAbiError, FnAbiOf, FnAbiOfHelpers, FnAbiRequest, HasTyCtxt, HasTypingEnv, LayoutError,
     LayoutOfHelpers,
 };
-use crate::rustc_middle::ty::{self, ExistentialTraitRef, Instance, Ty, TyCtxt};
-use crate::rustc_session::Session;
-use crate::rustc_span::source_map::respan;
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::ty::{self, ExistentialTraitRef, Instance, Ty, TyCtxt};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::source_map::respan;
+use crate::rustc_complete::{DUMMY_SP, Span};
 use rustc_target::spec::{HasTargetSpec, HasX86AbiOpt, Target, TlsModel, X86Abi};
 
 #[cfg(feature = "master")]

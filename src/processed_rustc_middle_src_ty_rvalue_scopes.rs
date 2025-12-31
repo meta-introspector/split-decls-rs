@@ -1,5 +1,5 @@
 use rustc_hir as hir;
-use crate::rustc_hir::ItemLocalMap;
+use crate::rustc_complete::ItemLocalMap;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 use tracing::debug;
 

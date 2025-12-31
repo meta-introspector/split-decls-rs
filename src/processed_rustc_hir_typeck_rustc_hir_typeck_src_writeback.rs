@@ -13,22 +13,22 @@ use std::ops::ControlFlow;
 
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 use crate::rustc_data_structures::unord::ExtendUnord;
-use rustc_errors::{E0720, ErrorGuaranteed};
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_hir::intravisit::{self, InferKind, Visitor};
-use crate::rustc_hir::{self as hir, AmbigArg, HirId};
-use rustc_infer::traits::solve::Goal;
-use crate::rustc_middle::traits::ObligationCause;
-use crate::rustc_middle::ty::adjustment::{Adjust, Adjustment, PointerCoercion};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::{E0720, ErrorGuaranteed};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::intravisit::{self, InferKind, Visitor};
+use crate::rustc_complete::{self as hir, AmbigArg, HirId};
+use crate::rustc_infer::traits::solve::Goal;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty::adjustment::{Adjust, Adjustment, PointerCoercion};
+use crate::rustc_complete::ty::{
     self, DefiningScopeKind, OpaqueHiddenType, Ty, TyCtxt, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor,
     fold_regions,
 };
-use crate::rustc_span::{Span, sym};
-use rustc_trait_selection::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
-use rustc_trait_selection::opaque_types::opaque_type_has_defining_use_args;
-use rustc_trait_selection::solve;
+use crate::rustc_complete::{Span, sym};
+use crate::rustc_trait_selection::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
+use crate::rustc_trait_selection::opaque_types::opaque_type_has_defining_use_args;
+use crate::rustc_trait_selection::solve;
 use tracing::{debug, instrument};
 
 use crate::FnCtxt;

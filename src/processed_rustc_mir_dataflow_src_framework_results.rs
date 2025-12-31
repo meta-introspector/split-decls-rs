@@ -1,7 +1,7 @@
 // Dataflow analysis results.
 
 use rustc_index::IndexVec;
-use crate::rustc_middle::mir::{BasicBlock, Body};
+use crate::rustc_complete::mir::{BasicBlock, Body};
 
 use super::{Analysis, ResultsCursor};
 

@@ -1,8 +1,8 @@
 use rustc_hir as hir;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::intravisit::Visitor;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, TyCtxt};
 
 fn nested_bodies_within<'tcx>(tcx: TyCtxt<'tcx>, item: LocalDefId) -> &'tcx ty::List<LocalDefId> {
     let body = tcx.hir_body_owned_by(item);

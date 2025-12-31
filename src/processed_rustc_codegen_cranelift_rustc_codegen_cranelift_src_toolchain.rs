@@ -3,7 +3,7 @@
 use std::path::PathBuf;
 
 use rustc_codegen_ssa::back::link::linker_and_flavor;
-use crate::rustc_session::Session;
+use crate::rustc_complete::Session;
 
 /// Tries to infer the path of a binary for the target toolchain from the linker name.
 pub(crate) fn get_toolchain_binary(sess: &Session, tool: &str) -> PathBuf {

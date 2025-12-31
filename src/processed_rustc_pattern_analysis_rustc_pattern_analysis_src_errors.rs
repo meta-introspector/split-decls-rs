@@ -1,7 +1,7 @@
-use rustc_errors::{Diag, EmissionGuarantee, Subdiagnostic};
+use crate::rustc_complete::{Diag, EmissionGuarantee, Subdiagnostic};
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-use crate::rustc_middle::ty::Ty;
-use crate::rustc_span::Span;
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::Span;
 
 use crate::rustc::{RustcPatCtxt, WitnessPat};
 

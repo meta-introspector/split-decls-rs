@@ -4,22 +4,22 @@ use std::iter;
 use std::ops::ControlFlow;
 
 use rustc_abi::ExternAbi;
-use rustc_errors::ErrorGuaranteed;
+use crate::rustc_complete::ErrorGuaranteed;
 use rustc_hir as hir;
-use crate::rustc_hir::lang_items::LangItem;
+use crate::rustc_complete::lang_items::LangItem;
 use rustc_hir_analysis::hir_ty_lowering::HirTyLowerer;
-use rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferOk, InferResult};
-use rustc_infer::traits::{ObligationCauseCode, PredicateObligations};
+use crate::rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferOk, InferResult};
+use crate::rustc_infer::traits::{ObligationCauseCode, PredicateObligations};
 use rustc_macros::{TypeFoldable, TypeVisitable};
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{
     self, ClosureKind, GenericArgs, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
     TypeVisitableExt, TypeVisitor,
 };
-use crate::rustc_span::def_id::LocalDefId;
-use crate::rustc_span::{DUMMY_SP, Span};
-use rustc_trait_selection::error_reporting::traits::ArgKind;
-use rustc_trait_selection::traits;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{DUMMY_SP, Span};
+use crate::rustc_trait_selection::error_reporting::traits::ArgKind;
+use crate::rustc_trait_selection::traits;
 use tracing::{debug, instrument, trace};
 
 use super::{CoroutineTypes, Expectation, FnCtxt, check_fn};

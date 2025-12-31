@@ -1,13 +1,13 @@
 // Check that a body annotated with `#[rustc_force_inline]` will not fail to inline based on its
 // definition alone (irrespective of any specific caller).
 
-use crate::rustc_hir::attrs::InlineAttr;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use crate::rustc_middle::mir::{Body, TerminatorKind};
-use crate::rustc_middle::ty;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_span::sym;
+use crate::rustc_complete::attrs::InlineAttr;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::mir::{Body, TerminatorKind};
+use crate::rustc_complete::ty;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::sym;
 
 use crate::pass_manager::MirLint;
 

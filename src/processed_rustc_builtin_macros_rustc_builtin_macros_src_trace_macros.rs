@@ -1,6 +1,6 @@
-use crate::rustc_ast::tokenstream::{TokenStream, TokenTree};
+use crate::rustc_complete::tokenstream::{TokenStream, TokenTree};
 use rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
-use crate::rustc_span::{Span, kw};
+use crate::rustc_complete::{Span, kw};
 
 use crate::errors;
 

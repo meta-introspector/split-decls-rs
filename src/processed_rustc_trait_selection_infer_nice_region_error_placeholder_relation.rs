@@ -1,7 +1,7 @@
 use crate::rustc_data_structures::intern::Interned;
-use rustc_errors::Diag;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{self, RePlaceholder, Region};
+use crate::rustc_complete::Diag;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, RePlaceholder, Region};
 
 use crate::error_reporting::infer::nice_region_error::NiceRegionError;
 use crate::errors::PlaceholderRelationLfNotSatisfied;

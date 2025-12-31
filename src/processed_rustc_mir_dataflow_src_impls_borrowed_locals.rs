@@ -1,6 +1,6 @@
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::mir::visit::Visitor;
-use crate::rustc_middle::mir::*;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::*;
 
 use crate::{Analysis, GenKill};
 

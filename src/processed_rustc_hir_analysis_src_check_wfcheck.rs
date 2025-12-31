@@ -4,34 +4,34 @@ use std::ops::{ControlFlow, Deref};
 use hir::intravisit::{self, Visitor};
 use rustc_abi::ExternAbi;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap, FxIndexSet};
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, ErrorGuaranteed, pluralize, struct_span_code_err};
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::lang_items::LangItem;
-use crate::rustc_hir::{AmbigArg, ItemKind};
-use rustc_infer::infer::outlives::env::OutlivesEnvironment;
-use rustc_infer::infer::{self, InferCtxt, SubregionOrigin, TyCtxtInferExt};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, ErrorGuaranteed, pluralize, struct_span_code_err};
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{AmbigArg, ItemKind};
+use crate::rustc_infer::infer::outlives::env::OutlivesEnvironment;
+use crate::rustc_infer::infer::{self, InferCtxt, SubregionOrigin, TyCtxtInferExt};
 use rustc_lint_defs::builtin::SUPERTRAIT_ITEM_SHADOWING_DEFINITION;
 use rustc_macros::LintDiagnostic;
-use crate::rustc_middle::mir::interpret::ErrorHandled;
-use crate::rustc_middle::traits::solve::NoSolution;
-use crate::rustc_middle::ty::trait_def::TraitSpecializationKind;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::mir::interpret::ErrorHandled;
+use crate::rustc_complete::traits::solve::NoSolution;
+use crate::rustc_complete::ty::trait_def::TraitSpecializationKind;
+use crate::rustc_complete::ty::{
     self, AdtKind, GenericArgKind, GenericArgs, GenericParamDefKind, Ty, TyCtxt, TypeFlags,
     TypeFoldable, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode,
     Upcast,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::{DUMMY_SP, Span, sym};
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::regions::{InferCtxtRegionExt, OutlivesEnvironmentBuildExt};
-use rustc_trait_selection::traits::misc::{
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{DUMMY_SP, Span, sym};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::regions::{InferCtxtRegionExt, OutlivesEnvironmentBuildExt};
+use crate::rustc_trait_selection::traits::misc::{
     ConstParamTyImplementationError, type_allowed_to_implement_const_param_ty,
 };
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
-use rustc_trait_selection::traits::{
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
+use crate::rustc_trait_selection::traits::{
     self, FulfillmentError, Obligation, ObligationCause, ObligationCauseCode, ObligationCtxt,
     WellFormedLoc,
 };

@@ -39,15 +39,15 @@ use std::io::Write;
 
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_data_structures::graph::linked_graph::{Direction, INCOMING, NodeIndex, OUTGOING};
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
-use crate::rustc_hir::intravisit::{self, Visitor};
-use crate::rustc_middle::dep_graph::{
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
+use crate::rustc_complete::intravisit::{self, Visitor};
+use crate::rustc_complete::dep_graph::{
     DepGraphQuery, DepKind, DepNode, DepNodeExt, DepNodeFilter, EdgeFilter, dep_kinds,
 };
-use crate::rustc_middle::hir::nested_filter;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::{Span, Symbol, sym};
 use tracing::debug;
 use {rustc_graphviz as dot, rustc_hir as hir};
 

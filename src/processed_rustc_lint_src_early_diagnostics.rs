@@ -1,14 +1,14 @@
 use std::borrow::Cow;
 
-use crate::rustc_ast::util::unicode::TEXT_FLOW_CONTROL_CHARS;
-use rustc_errors::{
+use crate::rustc_complete::util::unicode::TEXT_FLOW_CONTROL_CHARS;
+use crate::rustc_complete::{
     Applicability, Diag, DiagArgValue, LintDiagnostic, elided_lifetime_in_path_suggestion,
 };
-use crate::rustc_middle::middle::stability;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::Session;
-use crate::rustc_session::lint::BuiltinLintDiag;
-use crate::rustc_span::BytePos;
+use crate::rustc_complete::middle::stability;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::BytePos;
 use tracing::debug;
 
 use crate::lints;

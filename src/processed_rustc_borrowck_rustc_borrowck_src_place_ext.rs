@@ -1,7 +1,7 @@
 use rustc_hir as hir;
 use rustc_macros::extension;
-use crate::rustc_middle::mir::{Body, Mutability, Place, ProjectionElem};
-use crate::rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::mir::{Body, Mutability, Place, ProjectionElem};
+use crate::rustc_complete::ty::{self, TyCtxt};
 use tracing::debug;
 
 use crate::borrow_set::LocalsStateAtExit;

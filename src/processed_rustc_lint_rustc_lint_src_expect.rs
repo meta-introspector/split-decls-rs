@@ -1,10 +1,10 @@
 use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_middle::lint::LintExpectation;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::lint::LintExpectationId;
-use crate::rustc_session::lint::builtin::UNFULFILLED_LINT_EXPECTATIONS;
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::lint::LintExpectation;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::lint::LintExpectationId;
+use crate::rustc_complete::lint::builtin::UNFULFILLED_LINT_EXPECTATIONS;
+use crate::rustc_complete::Symbol;
 
 use crate::lints::{Expectation, ExpectationNote};
 

@@ -1,7 +1,7 @@
-use crate::rustc_hir::attrs::Linkage;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::mir::mono::Visibility;
-use crate::rustc_middle::ty::Instance;
+use crate::rustc_complete::attrs::Linkage;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::mir::mono::Visibility;
+use crate::rustc_complete::ty::Instance;
 
 pub trait PreDefineCodegenMethods<'tcx> {
     fn predefine_static(

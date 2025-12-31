@@ -1,11 +1,11 @@
 // Queries for checking whether a type implements one of a few common traits.
 
-use crate::rustc_hir::lang_items::LangItem;
-use rustc_infer::infer::TyCtxtInferExt;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_span::DUMMY_SP;
-use rustc_trait_selection::traits;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::DUMMY_SP;
+use crate::rustc_trait_selection::traits;
 
 fn is_copy_raw<'tcx>(tcx: TyCtxt<'tcx>, query: ty::PseudoCanonicalInput<'tcx, Ty<'tcx>>) -> bool {
     is_item_raw(tcx, query, LangItem::Copy)

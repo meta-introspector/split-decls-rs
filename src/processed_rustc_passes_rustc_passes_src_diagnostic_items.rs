@@ -9,12 +9,12 @@
 //
 // * Compiler internal types like `Ty` and `TyCtxt`
 
-use crate::rustc_hir::diagnostic_items::DiagnosticItems;
-use crate::rustc_hir::{Attribute, CRATE_OWNER_ID, OwnerId};
-use crate::rustc_middle::query::{LocalCrate, Providers};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_span::def_id::{DefId, LOCAL_CRATE};
-use crate::rustc_span::{Symbol, sym};
+use crate::rustc_complete::diagnostic_items::DiagnosticItems;
+use crate::rustc_complete::{Attribute, CRATE_OWNER_ID, OwnerId};
+use crate::rustc_complete::query::{LocalCrate, Providers};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
+use crate::rustc_complete::{Symbol, sym};
 
 use crate::errors::DuplicateDiagnosticItemInCrate;
 

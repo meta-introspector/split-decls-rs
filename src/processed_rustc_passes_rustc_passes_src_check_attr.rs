@@ -10,43 +10,43 @@ use std::collections::hash_map::Entry;
 use std::slice;
 
 use rustc_abi::{Align, ExternAbi, Size};
-use crate::rustc_ast::{AttrStyle, LitKind, MetaItemInner, MetaItemKind, ast};
+use crate::rustc_complete::{AttrStyle, LitKind, MetaItemInner, MetaItemKind, ast};
 use rustc_attr_parsing::{AttributeParser, Late};
 use crate::rustc_data_structures::fx::FxHashMap;
-use rustc_errors::{Applicability, DiagCtxtHandle, IntoDiagArg, MultiSpan, StashKey};
+use crate::rustc_complete::{Applicability, DiagCtxtHandle, IntoDiagArg, MultiSpan, StashKey};
 use rustc_feature::{
     ACCEPTED_LANG_FEATURES, AttributeDuplicates, AttributeType, BUILTIN_ATTRIBUTE_MAP,
     BuiltinAttribute,
 };
-use crate::rustc_hir::attrs::{AttributeKind, InlineAttr, MirDialect, MirPhase, ReprAttr, SanitizerSet};
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::LocalModDefId;
-use crate::rustc_hir::intravisit::{self, Visitor};
-use crate::rustc_hir::{
+use crate::rustc_complete::attrs::{AttributeKind, InlineAttr, MirDialect, MirPhase, ReprAttr, SanitizerSet};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalModDefId;
+use crate::rustc_complete::intravisit::{self, Visitor};
+use crate::rustc_complete::{
     self as hir, Attribute, CRATE_HIR_ID, CRATE_OWNER_ID, FnSig, ForeignItem, HirId, Item,
     ItemKind, MethodKind, PartialConstStability, Safety, Stability, StabilityLevel, Target,
     TraitItem, find_attr,
 };
 use rustc_macros::LintDiagnostic;
-use crate::rustc_middle::hir::nested_filter;
-use crate::rustc_middle::middle::resolve_bound_vars::ObjectLifetimeDefault;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::traits::ObligationCause;
-use crate::rustc_middle::ty::error::{ExpectedFound, TypeError};
-use crate::rustc_middle::ty::{self, TyCtxt, TypingMode};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::config::CrateType;
-use crate::rustc_session::lint;
-use crate::rustc_session::lint::builtin::{
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::middle::resolve_bound_vars::ObjectLifetimeDefault;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::ty::{self, TyCtxt, TypingMode};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::config::CrateType;
+use crate::rustc_complete::lint;
+use crate::rustc_complete::lint::builtin::{
     CONFLICTING_REPR_HINTS, INVALID_DOC_ATTRIBUTES, INVALID_MACRO_EXPORT_ARGUMENTS,
     MALFORMED_DIAGNOSTIC_ATTRIBUTES, MISPLACED_DIAGNOSTIC_ATTRIBUTES, UNUSED_ATTRIBUTES,
 };
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::{BytePos, DUMMY_SP, Span, Symbol, edition, sym};
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::infer::{TyCtxtInferExt, ValuePairs};
-use rustc_trait_selection::traits::ObligationCtxt;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{BytePos, DUMMY_SP, Span, Symbol, edition, sym};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::infer::{TyCtxtInferExt, ValuePairs};
+use crate::rustc_trait_selection::traits::ObligationCtxt;
 use tracing::debug;
 
 use crate::{errors, fluent_generated as fluent};
@@ -89,7 +89,7 @@ pub(crate) enum ProcMacroKind {
 }
 
 impl IntoDiagArg for ProcMacroKind {
-    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         match self {
             ProcMacroKind::Attribute => "attribute proc macro",
             ProcMacroKind::Derive => "derive proc macro",

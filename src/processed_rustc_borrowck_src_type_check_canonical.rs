@@ -1,17 +1,17 @@
 use std::fmt;
 
-use rustc_errors::ErrorGuaranteed;
-use rustc_infer::infer::canonical::Canonical;
-use rustc_infer::infer::outlives::env::RegionBoundPairs;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::{Body, ConstraintCategory};
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, TypeFoldable, Upcast};
-use crate::rustc_span::Span;
-use crate::rustc_span::def_id::DefId;
-use rustc_trait_selection::solve::NoSolution;
-use rustc_trait_selection::traits::ObligationCause;
-use rustc_trait_selection::traits::query::type_op::custom::CustomTypeOp;
-use rustc_trait_selection::traits::query::type_op::{self, TypeOpOutput};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_infer::infer::canonical::Canonical;
+use crate::rustc_infer::infer::outlives::env::RegionBoundPairs;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::{Body, ConstraintCategory};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeFoldable, Upcast};
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_trait_selection::solve::NoSolution;
+use crate::rustc_trait_selection::traits::ObligationCause;
+use crate::rustc_trait_selection::traits::query::type_op::custom::CustomTypeOp;
+use crate::rustc_trait_selection::traits::query::type_op::{self, TypeOpOutput};
 use tracing::{debug, instrument};
 
 use super::{Locations, NormalizeLocation, TypeChecker};
@@ -86,7 +86,7 @@ impl<'a, 'tcx> TypeChecker<'a, 'tcx> {
     /// regions which are extracted and stored as having occurred at
     /// `locations`.
     ///
-    /// **Any `rustc_infer::infer` operations that might generate region
+    /// **Any `crate::rustc_infer::infer` operations that might generate region
     /// constraints should occur within this method so that those
     /// constraints can be properly localized!**
     #[instrument(skip(self, op), level = "trace")]

@@ -11,11 +11,11 @@ use std::ops::ControlFlow;
 use hir::LangItem;
 use hir::def_id::DefId;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
-use crate::rustc_hir::{self as hir, CoroutineDesugaring, CoroutineKind};
-use rustc_infer::traits::{Obligation, PolyTraitObligation, SelectionError};
-use crate::rustc_middle::ty::fast_reject::DeepRejectCtxt;
-use crate::rustc_middle::ty::{self, SizedTraitKind, Ty, TypeVisitableExt, TypingMode, elaborate};
-use crate::rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{self as hir, CoroutineDesugaring, CoroutineKind};
+use crate::rustc_infer::traits::{Obligation, PolyTraitObligation, SelectionError};
+use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
+use crate::rustc_complete::ty::{self, SizedTraitKind, Ty, TypeVisitableExt, TypingMode, elaborate};
+use crate::rustc_complete::{bug, span_bug};
 use tracing::{debug, instrument, trace};
 
 use super::SelectionCandidate::*;

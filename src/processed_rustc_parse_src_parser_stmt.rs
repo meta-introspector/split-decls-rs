@@ -4,15 +4,15 @@ use std::ops::Bound;
 
 use ast::Label;
 use rustc_ast as ast;
-use crate::rustc_ast::token::{self, Delimiter, InvisibleOrigin, MetaVarKind, TokenKind};
-use crate::rustc_ast::util::classify::{self, TrailingBrace};
-use crate::rustc_ast::visit::{Visitor, walk_expr};
-use crate::rustc_ast::{
+use crate::rustc_complete::token::{self, Delimiter, InvisibleOrigin, MetaVarKind, TokenKind};
+use crate::rustc_complete::util::classify::{self, TrailingBrace};
+use crate::rustc_complete::visit::{Visitor, walk_expr};
+use crate::rustc_complete::{
     AttrStyle, AttrVec, Block, BlockCheckMode, DUMMY_NODE_ID, Expr, ExprKind, HasAttrs, Local,
     LocalKind, MacCall, MacCallStmt, MacStmtStyle, Recovered, Stmt, StmtKind,
 };
-use rustc_errors::{Applicability, Diag, PResult};
-use crate::rustc_span::{BytePos, ErrorGuaranteed, Ident, Span, kw, sym};
+use crate::rustc_complete::{Applicability, Diag, PResult};
+use crate::rustc_complete::{BytePos, ErrorGuaranteed, Ident, Span, kw, sym};
 use thin_vec::{ThinVec, thin_vec};
 
 use super::attr::InnerAttrForbiddenReason;

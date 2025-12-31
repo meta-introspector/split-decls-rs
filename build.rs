@@ -195,6 +195,17 @@ fn generate_complete_includes(crate_files: &HashMap<String, Vec<String>>) -> Res
                     patched_content = patched_content.replace("rustc_data_structures::", "crate::rustc_data_structures::");
                     patched_content = patched_content.replace("rustc_session::", "crate::rustc_session::");
                     patched_content = patched_content.replace("rustc_span::", "crate::rustc_span::");
+                    patched_content = patched_content.replace("rustc_errors::", "crate::rustc_errors::");
+                    patched_content = patched_content.replace("rustc_infer::", "crate::rustc_infer::");
+                    patched_content = patched_content.replace("rustc_trait_selection::", "crate::rustc_trait_selection::");
+                    
+                    // Fix specific import patterns that are problematic
+                    patched_content = patched_content.replace("use crate::rustc_span::", "use crate::rustc_complete::");
+                    patched_content = patched_content.replace("use crate::rustc_ast::", "use crate::rustc_complete::");
+                    patched_content = patched_content.replace("use crate::rustc_middle::", "use crate::rustc_complete::");
+                    patched_content = patched_content.replace("use crate::rustc_errors::", "use crate::rustc_complete::");
+                    patched_content = patched_content.replace("use crate::rustc_session::", "use crate::rustc_complete::");
+                    patched_content = patched_content.replace("use crate::rustc_hir::", "use crate::rustc_complete::");
                     
                     // Remove proc_macro attributes since we're not a proc-macro crate
                     patched_content = patched_content.replace("#[proc_macro]", "// #[proc_macro] - removed");

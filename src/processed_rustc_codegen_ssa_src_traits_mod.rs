@@ -14,8 +14,8 @@
 
 use std::fmt;
 
-use crate::rustc_middle::ty::Ty;
-use crate::rustc_middle::ty::layout::{FnAbiOf, LayoutOf, TyAndLayout};
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::{FnAbiOf, LayoutOf, TyAndLayout};
 use rustc_target::callconv::FnAbi;
 
 pub use self::abi::AbiBuilderMethods;

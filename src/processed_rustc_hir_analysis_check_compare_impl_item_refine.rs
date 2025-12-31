@@ -1,18 +1,18 @@
 use itertools::Itertools as _;
 use crate::rustc_data_structures::fx::FxIndexSet;
 use rustc_hir as hir;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_infer::infer::TyCtxtInferExt;
 use rustc_lint_defs::builtin::{REFINING_IMPL_TRAIT_INTERNAL, REFINING_IMPL_TRAIT_REACHABLE};
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::traits::ObligationCause;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperVisitable, TypeVisitable,
     TypeVisitableExt, TypeVisitor, TypingMode,
 };
-use crate::rustc_span::Span;
-use rustc_trait_selection::regions::InferCtxtRegionExt;
-use rustc_trait_selection::traits::{ObligationCtxt, elaborate, normalize_param_env_or_error};
+use crate::rustc_complete::Span;
+use crate::rustc_trait_selection::regions::InferCtxtRegionExt;
+use crate::rustc_trait_selection::traits::{ObligationCtxt, elaborate, normalize_param_env_or_error};
 
 /// Check that an implementation does not refine an RPITIT from a trait method signature.
 pub(crate) fn check_refining_return_position_impl_trait_in_trait<'tcx>(

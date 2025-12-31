@@ -3,24 +3,24 @@ use std::rc::Rc;
 
 use crate::rustc_data_structures::frozen::Frozen;
 use crate::rustc_data_structures::fx::FxIndexMap;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use rustc_infer::infer::outlives::env::RegionBoundPairs;
-use rustc_infer::infer::{InferCtxt, NllRegionVariableOrigin, OpaqueTypeStorageEntries};
-use rustc_infer::traits::ObligationCause;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_infer::infer::outlives::env::RegionBoundPairs;
+use crate::rustc_infer::infer::{InferCtxt, NllRegionVariableOrigin, OpaqueTypeStorageEntries};
+use crate::rustc_infer::traits::ObligationCause;
 use rustc_macros::extension;
-use crate::rustc_middle::mir::{Body, ConcreteOpaqueTypes, ConstraintCategory};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::mir::{Body, ConcreteOpaqueTypes, ConstraintCategory};
+use crate::rustc_complete::ty::{
     self, DefiningScopeKind, EarlyBinder, FallibleTypeFolder, GenericArg, GenericArgsRef,
     OpaqueHiddenType, OpaqueTypeKey, Region, RegionVid, Ty, TyCtxt, TypeFoldable,
     TypeSuperFoldable, TypeVisitableExt, fold_regions,
 };
 use rustc_mir_dataflow::points::DenseLocationMap;
-use crate::rustc_span::Span;
-use rustc_trait_selection::opaque_types::{
+use crate::rustc_complete::Span;
+use crate::rustc_trait_selection::opaque_types::{
     NonDefiningUseReason, opaque_type_has_defining_use_args,
 };
-use rustc_trait_selection::solve::NoSolution;
-use rustc_trait_selection::traits::query::type_op::custom::CustomTypeOp;
+use crate::rustc_trait_selection::solve::NoSolution;
+use crate::rustc_trait_selection::traits::query::type_op::custom::CustomTypeOp;
 use tracing::{debug, instrument};
 
 use super::reverse_sccs::ReverseSccGraph;

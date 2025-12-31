@@ -1,8 +1,8 @@
 use crate::rustc_data_structures::unord::{ExtendUnord, UnordSet};
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::lint;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::lint;
 use tracing::debug;
 
 pub(super) fn check_unused_traits(tcx: TyCtxt<'_>, (): ()) {

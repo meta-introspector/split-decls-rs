@@ -3,12 +3,12 @@
 // seems likely that they should eventually be merged into more
 // general routines.
 
-use rustc_infer::infer::TyCtxtInferExt;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::traits::CodegenObligationError;
-use crate::rustc_middle::ty::{self, PseudoCanonicalInput, TyCtxt, TypeVisitableExt};
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::traits::{
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::traits::CodegenObligationError;
+use crate::rustc_complete::ty::{self, PseudoCanonicalInput, TyCtxt, TypeVisitableExt};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::traits::{
     ImplSource, Obligation, ObligationCause, ObligationCtxt, ScrubbedTraitError, SelectionContext,
     SelectionError,
 };

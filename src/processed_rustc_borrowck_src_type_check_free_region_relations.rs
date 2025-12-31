@@ -1,16 +1,16 @@
 use crate::rustc_data_structures::frozen::Frozen;
 use crate::rustc_data_structures::transitive_relation::{TransitiveRelation, TransitiveRelationBuilder};
-use crate::rustc_hir::def::DefKind;
-use rustc_infer::infer::canonical::QueryRegionConstraints;
-use rustc_infer::infer::outlives;
-use rustc_infer::infer::outlives::env::RegionBoundPairs;
-use rustc_infer::infer::region_constraints::GenericKind;
-use rustc_infer::traits::query::type_op::DeeplyNormalize;
-use crate::rustc_middle::mir::ConstraintCategory;
-use crate::rustc_middle::traits::query::OutlivesBound;
-use crate::rustc_middle::ty::{self, RegionVid, Ty, TypeVisitableExt};
-use crate::rustc_span::{ErrorGuaranteed, Span};
-use rustc_trait_selection::traits::query::type_op::{self, TypeOp};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_infer::infer::canonical::QueryRegionConstraints;
+use crate::rustc_infer::infer::outlives;
+use crate::rustc_infer::infer::outlives::env::RegionBoundPairs;
+use crate::rustc_infer::infer::region_constraints::GenericKind;
+use crate::rustc_infer::traits::query::type_op::DeeplyNormalize;
+use crate::rustc_complete::mir::ConstraintCategory;
+use crate::rustc_complete::traits::query::OutlivesBound;
+use crate::rustc_complete::ty::{self, RegionVid, Ty, TypeVisitableExt};
+use crate::rustc_complete::{ErrorGuaranteed, Span};
+use crate::rustc_trait_selection::traits::query::type_op::{self, TypeOp};
 use tracing::{debug, instrument};
 use type_op::TypeOpOutput;
 

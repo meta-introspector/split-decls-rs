@@ -16,7 +16,7 @@ use std::fmt;
 #[cfg(feature = "nightly")]
 use rustc_macros::{Decodable_NoContext, Encodable_NoContext, HashStable_NoContext};
 #[cfg(feature = "nightly")]
-use crate::rustc_span::{Symbol, sym};
+use crate::rustc_complete::{Symbol, sym};
 
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]

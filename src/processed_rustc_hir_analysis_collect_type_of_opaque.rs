@@ -1,10 +1,10 @@
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_hir::{self as hir, Expr, ImplItem, Item, Node, TraitItem, def, intravisit};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::hir::nested_filter;
-use crate::rustc_middle::ty::{self, DefiningScopeKind, Ty, TyCtxt, TypeVisitableExt};
-use rustc_trait_selection::opaque_types::report_item_does_not_constrain_error;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{self as hir, Expr, ImplItem, Item, Node, TraitItem, def, intravisit};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::ty::{self, DefiningScopeKind, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_trait_selection::opaque_types::report_item_does_not_constrain_error;
 use tracing::{debug, instrument, trace};
 
 use crate::errors::UnconstrainedOpaqueType;

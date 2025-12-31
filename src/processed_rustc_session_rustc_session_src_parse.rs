@@ -4,21 +4,21 @@
 use std::str;
 use std::sync::Arc;
 
-use crate::rustc_ast::attr::AttrIdGenerator;
-use crate::rustc_ast::node_id::NodeId;
+use crate::rustc_complete::attr::AttrIdGenerator;
+use crate::rustc_complete::node_id::NodeId;
 use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap, FxIndexSet};
 use crate::rustc_data_structures::sync::{AppendOnlyVec, Lock};
-use rustc_errors::emitter::{FatalOnlyEmitter, HumanEmitter, stderr_destination};
-use rustc_errors::translation::Translator;
-use rustc_errors::{
+use crate::rustc_complete::emitter::{FatalOnlyEmitter, HumanEmitter, stderr_destination};
+use crate::rustc_complete::translation::Translator;
+use crate::rustc_complete::{
     BufferedEarlyLint, ColorConfig, DecorateDiagCompat, Diag, DiagCtxt, DiagCtxtHandle,
     DiagMessage, EmissionGuarantee, MultiSpan, StashKey,
 };
 use rustc_feature::{GateIssue, UnstableFeatures, find_feature_issue};
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::hygiene::ExpnId;
-use crate::rustc_span::source_map::{FilePathMapping, SourceMap};
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::hygiene::ExpnId;
+use crate::rustc_complete::source_map::{FilePathMapping, SourceMap};
+use crate::rustc_complete::{Span, Symbol, sym};
 
 use crate::Session;
 use crate::config::{Cfg, CheckCfg};

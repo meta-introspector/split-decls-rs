@@ -8,10 +8,10 @@
 // this will introduce circular dependency between rustc_metadata and rustc_middle
 
 use crate::rustc_data_structures::fx::FxIndexMap;
-use crate::rustc_hir::def_id::CrateNum;
+use crate::rustc_complete::def_id::CrateNum;
 use rustc_index::IndexVec;
 use rustc_macros::{Decodable, Encodable, HashStable};
-use crate::rustc_session::config::CrateType;
+use crate::rustc_complete::config::CrateType;
 
 /// A list of dependencies for a certain crate type.
 pub type DependencyList = IndexVec<CrateNum, Linkage>;

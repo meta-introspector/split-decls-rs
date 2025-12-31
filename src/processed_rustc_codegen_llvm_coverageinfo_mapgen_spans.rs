@@ -1,5 +1,5 @@
-use crate::rustc_span::source_map::SourceMap;
-use crate::rustc_span::{BytePos, Pos, SourceFile, Span};
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{BytePos, Pos, SourceFile, Span};
 use tracing::debug;
 
 use crate::coverageinfo::ffi;

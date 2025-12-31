@@ -95,13 +95,13 @@
 #[feature(rustdoc_internals)]
 // tidy-alphabetical-end
 
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{CrateNum, LOCAL_CRATE};
-use crate::rustc_middle::middle::codegen_fn_attrs::{CodegenFnAttrFlags, CodegenFnAttrs};
-use crate::rustc_middle::mir::mono::{InstantiationMode, MonoItem};
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{self, Instance, TyCtxt};
-use crate::rustc_session::config::SymbolManglingVersion;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{CrateNum, LOCAL_CRATE};
+use crate::rustc_complete::middle::codegen_fn_attrs::{CodegenFnAttrFlags, CodegenFnAttrs};
+use crate::rustc_complete::mir::mono::{InstantiationMode, MonoItem};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, Instance, TyCtxt};
+use crate::rustc_complete::config::SymbolManglingVersion;
 use tracing::debug;
 
 

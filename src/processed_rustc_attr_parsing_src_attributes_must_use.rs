@@ -1,4 +1,4 @@
-use rustc_errors::DiagArgValue;
+use crate::rustc_complete::DiagArgValue;
 
 use super::prelude::*;
 use crate::session_diagnostics::IllFormedAttributeInputLint;

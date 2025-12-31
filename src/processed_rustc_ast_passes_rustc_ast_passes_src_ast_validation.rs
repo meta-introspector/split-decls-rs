@@ -22,20 +22,20 @@ use std::str::FromStr;
 
 use itertools::{Either, Itertools};
 use rustc_abi::{CanonAbi, ExternAbi, InterruptKind};
-use crate::rustc_ast::visit::{AssocCtxt, BoundKind, FnCtxt, FnKind, Visitor, walk_list};
-use crate::rustc_ast::*;
+use crate::rustc_complete::visit::{AssocCtxt, BoundKind, FnCtxt, FnKind, Visitor, walk_list};
+use crate::rustc_complete::*;
 use rustc_ast_pretty::pprust::{self, State};
 use rustc_attr_parsing::validate_attr;
 use crate::rustc_data_structures::fx::FxIndexMap;
-use rustc_errors::{DiagCtxtHandle, LintBuffer};
+use crate::rustc_complete::{DiagCtxtHandle, LintBuffer};
 use rustc_feature::Features;
-use crate::rustc_session::Session;
-use crate::rustc_session::lint::BuiltinLintDiag;
-use crate::rustc_session::lint::builtin::{
+use crate::rustc_complete::Session;
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::{
     DEPRECATED_WHERE_CLAUSE_LOCATION, MISSING_ABI, MISSING_UNSAFE_ON_EXTERN,
     PATTERNS_IN_FNS_WITHOUT_BODY,
 };
-use crate::rustc_span::{Ident, Span, kw, sym};
+use crate::rustc_complete::{Ident, Span, kw, sym};
 use rustc_target::spec::{AbiMap, AbiMapping};
 use thin_vec::thin_vec;
 
@@ -282,8 +282,8 @@ impl<'a> AstValidator<'a> {
             remove_const_sugg: (
                 self.sess.source_map().span_extend_while_whitespace(span),
                 match parent_constness {
-                    Some(_) => rustc_errors::Applicability::MachineApplicable,
-                    None => rustc_errors::Applicability::MaybeIncorrect,
+                    Some(_) => crate::rustc_errors::Applicability::MachineApplicable,
+                    None => crate::rustc_errors::Applicability::MaybeIncorrect,
                 },
             ),
             requires_multiple_changes: make_impl_const_sugg.is_some()

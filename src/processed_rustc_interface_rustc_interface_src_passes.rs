@@ -12,38 +12,38 @@ use crate::rustc_data_structures::jobserver::Proxy;
 use crate::rustc_data_structures::steal::Steal;
 use crate::rustc_data_structures::sync::{AppendOnlyIndexVec, FreezeLock, WorkerLocal};
 use crate::rustc_data_structures::{parallel, thousands};
-use rustc_errors::timings::TimingSection;
+use crate::rustc_complete::timings::TimingSection;
 use rustc_expand::base::{ExtCtxt, LintStoreExpand};
 use rustc_feature::Features;
 use rustc_fs_util::try_canonicalize;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def_id::{LOCAL_CRATE, StableCrateId, StableCrateIdMap};
-use crate::rustc_hir::definitions::Definitions;
-use crate::rustc_hir::limit::Limit;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def_id::{LOCAL_CRATE, StableCrateId, StableCrateIdMap};
+use crate::rustc_complete::definitions::Definitions;
+use crate::rustc_complete::limit::Limit;
 use rustc_incremental::setup_dep_graph;
 use rustc_lint::{BufferedEarlyLint, EarlyCheckNode, LintStore, unerased_lint_store};
 use rustc_metadata::EncodedMetadata;
 use rustc_metadata::creader::CStore;
-use crate::rustc_middle::arena::Arena;
-use crate::rustc_middle::dep_graph::DepsType;
-use crate::rustc_middle::ty::{self, CurrentGcx, GlobalCtxt, RegisteredTools, TyCtxt};
-use crate::rustc_middle::util::Providers;
+use crate::rustc_complete::arena::Arena;
+use crate::rustc_complete::dep_graph::DepsType;
+use crate::rustc_complete::ty::{self, CurrentGcx, GlobalCtxt, RegisteredTools, TyCtxt};
+use crate::rustc_complete::util::Providers;
 use rustc_parse::lexer::StripTokens;
 use rustc_parse::{new_parser_from_file, new_parser_from_source_str, unwrap_or_emit_fatal};
 use rustc_passes::{abi_test, input_stats, layout_test};
 use rustc_resolve::{Resolver, ResolverOutputs};
-use crate::rustc_session::Session;
-use crate::rustc_session::config::{CrateType, Input, OutFileName, OutputFilenames, OutputType};
-use crate::rustc_session::cstore::Untracked;
-use crate::rustc_session::output::{collect_crate_types, filename_for_input};
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_session::search_paths::PathKind;
-use crate::rustc_span::{
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{CrateType, Input, OutFileName, OutputFilenames, OutputType};
+use crate::rustc_complete::cstore::Untracked;
+use crate::rustc_complete::output::{collect_crate_types, filename_for_input};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::search_paths::PathKind;
+use crate::rustc_complete::{
     DUMMY_SP, ErrorGuaranteed, ExpnKind, FileName, SourceFileHash, SourceFileHashAlgorithm, Span,
     Symbol, sym,
 };
 use rustc_target::spec::PanicStrategy;
-use rustc_trait_selection::{solve, traits};
+use crate::rustc_trait_selection::{solve, traits};
 use tracing::{info, instrument};
 
 use crate::interface::Compiler;

@@ -1,11 +1,11 @@
 // Computing the size and alignment of a value.
 
 use rustc_abi::WrappingRange;
-use crate::rustc_hir::LangItem;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
-use crate::rustc_middle::ty::{self, Ty};
-use crate::rustc_span::DUMMY_SP;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
+use crate::rustc_complete::ty::{self, Ty};
+use crate::rustc_complete::DUMMY_SP;
 use tracing::{debug, trace};
 
 use crate::common::IntPredicate;

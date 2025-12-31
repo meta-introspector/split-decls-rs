@@ -1,9 +1,9 @@
 // Name resolution for lifetimes and late-bound type and const variables: type declarations.
 
 use crate::rustc_data_structures::sorted_map::SortedMap;
-use rustc_errors::ErrorGuaranteed;
-use crate::rustc_hir::ItemLocalId;
-use crate::rustc_hir::def_id::{DefId, LocalDefId, LocalDefIdMap};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::ItemLocalId;
+use crate::rustc_complete::def_id::{DefId, LocalDefId, LocalDefIdMap};
 use rustc_macros::{Decodable, Encodable, HashStable, TyDecodable, TyEncodable};
 
 use crate::ty;

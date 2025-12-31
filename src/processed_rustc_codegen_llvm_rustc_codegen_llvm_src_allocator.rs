@@ -1,12 +1,12 @@
 use libc::c_uint;
-use crate::rustc_ast::expand::allocator::{
+use crate::rustc_complete::expand::allocator::{
     ALLOCATOR_METHODS, AllocatorKind, AllocatorTy, NO_ALLOC_SHIM_IS_UNSTABLE,
     alloc_error_handler_name, default_fn_name, global_fn_name,
 };
 use rustc_codegen_ssa::traits::BaseTypeCodegenMethods as _;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::config::{DebugInfo, OomStrategy};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::{DebugInfo, OomStrategy};
 use rustc_symbol_mangling::mangle_internal_symbol;
 use smallvec::SmallVec;
 

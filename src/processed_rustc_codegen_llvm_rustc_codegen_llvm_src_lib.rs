@@ -29,7 +29,7 @@ use back::write::{create_informational_target_machine, create_target_machine};
 use context::SimpleCx;
 use errors::ParseTargetMachineConfig;
 use llvm_util::target_config;
-use crate::rustc_ast::expand::allocator::AllocatorKind;
+use crate::rustc_complete::expand::allocator::AllocatorKind;
 use rustc_codegen_ssa::back::lto::{SerializedModule, ThinModule};
 use rustc_codegen_ssa::back::write::{
     CodegenContext, FatLtoInput, ModuleConfig, TargetMachineFactoryConfig, TargetMachineFactoryFn,
@@ -37,14 +37,14 @@ use rustc_codegen_ssa::back::write::{
 use rustc_codegen_ssa::traits::*;
 use rustc_codegen_ssa::{CodegenResults, CompiledModule, ModuleCodegen, TargetConfig};
 use crate::rustc_data_structures::fx::FxIndexMap;
-use rustc_errors::DiagCtxtHandle;
+use crate::rustc_complete::DiagCtxtHandle;
 use rustc_metadata::EncodedMetadata;
-use crate::rustc_middle::dep_graph::{WorkProduct, WorkProductId};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_middle::util::Providers;
-use crate::rustc_session::Session;
-use crate::rustc_session::config::{OptLevel, OutputFilenames, PrintKind, PrintRequest};
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::util::Providers;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{OptLevel, OutputFilenames, PrintKind, PrintRequest};
+use crate::rustc_complete::Symbol;
 
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }

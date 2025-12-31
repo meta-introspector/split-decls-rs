@@ -4,12 +4,12 @@ use std::fmt::{self, Debug};
 
 use rustc_abi::{FieldIdx, VariantIdx};
 use crate::rustc_data_structures::fx::FxIndexMap;
-use rustc_errors::ErrorGuaranteed;
-use crate::rustc_hir::def_id::LocalDefId;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def_id::LocalDefId;
 use rustc_index::IndexVec;
 use rustc_index::bit_set::BitMatrix;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 
 use super::{ConstValue, SourceInfo};
 use crate::ty::{self, CoroutineArgsExt, OpaqueHiddenType, Ty};

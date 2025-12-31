@@ -3,7 +3,7 @@ use std::borrow::Cow;
 use rustc_abi::TargetDataLayoutErrors;
 use rustc_error_messages::{DiagArgValue, IntoDiagArg};
 use rustc_macros::Subdiagnostic;
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 
 use crate::diagnostic::DiagLocation;
 use crate::{

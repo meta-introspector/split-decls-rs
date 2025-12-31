@@ -36,10 +36,10 @@ use rustc_codegen_ssa::{CodegenErrors, CodegenResults};
 use crate::rustc_data_structures::profiling::{
     TimePassesFormat, get_resident_set_size, print_time_passes_entry,
 };
-use rustc_errors::emitter::stderr_destination;
-use rustc_errors::registry::Registry;
-use rustc_errors::translation::Translator;
-use rustc_errors::{ColorConfig, DiagCtxt, ErrCode, FatalError, PResult, markdown};
+use crate::rustc_complete::emitter::stderr_destination;
+use crate::rustc_complete::registry::Registry;
+use crate::rustc_complete::translation::Translator;
+use crate::rustc_complete::{ColorConfig, DiagCtxt, ErrCode, FatalError, PResult, markdown};
 use rustc_feature::find_gated_cfg;
 // This avoids a false positive with `-Wunused_crate_dependencies`.
 // `rust_index` isn't used in this crate's code, but it must be named in the
@@ -50,19 +50,19 @@ use rustc_interface::{Linker, create_and_enter_global_ctxt, interface, passes};
 use rustc_lint::unerased_lint_store;
 use rustc_metadata::creader::MetadataLoader;
 use rustc_metadata::locator;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::ty::TyCtxt;
 use rustc_parse::lexer::StripTokens;
 use rustc_parse::{new_parser_from_file, new_parser_from_source_str, unwrap_or_emit_fatal};
-use crate::rustc_session::config::{
+use crate::rustc_complete::config::{
     CG_OPTIONS, CrateType, ErrorOutputType, Input, OptionDesc, OutFileName, OutputType, Sysroot,
     UnstableOptions, Z_OPTIONS, nightly_options, parse_target_triple,
 };
-use crate::rustc_session::getopts::{self, Matches};
-use crate::rustc_session::lint::{Lint, LintId};
-use crate::rustc_session::output::{CRATE_TYPES, collect_crate_types, invalid_output_for_target};
-use crate::rustc_session::{EarlyDiagCtxt, Session, config};
-use crate::rustc_span::FileName;
-use crate::rustc_span::def_id::LOCAL_CRATE;
+use crate::rustc_complete::getopts::{self, Matches};
+use crate::rustc_complete::lint::{Lint, LintId};
+use crate::rustc_complete::output::{CRATE_TYPES, collect_crate_types, invalid_output_for_target};
+use crate::rustc_complete::{EarlyDiagCtxt, Session, config};
+use crate::rustc_complete::FileName;
+use crate::rustc_complete::def_id::LOCAL_CRATE;
 use rustc_target::json::ToJson;
 use rustc_target::spec::{Target, TargetTuple};
 use tracing::trace;
@@ -120,12 +120,12 @@ pub static DEFAULT_LOCALE_RESOURCES: &[&str] = &[
     rustc_builtin_macros::DEFAULT_LOCALE_RESOURCE,
     rustc_codegen_ssa::DEFAULT_LOCALE_RESOURCE,
     rustc_const_eval::DEFAULT_LOCALE_RESOURCE,
-    rustc_errors::DEFAULT_LOCALE_RESOURCE,
+    crate::rustc_errors::DEFAULT_LOCALE_RESOURCE,
     rustc_expand::DEFAULT_LOCALE_RESOURCE,
     rustc_hir_analysis::DEFAULT_LOCALE_RESOURCE,
     rustc_hir_typeck::DEFAULT_LOCALE_RESOURCE,
     rustc_incremental::DEFAULT_LOCALE_RESOURCE,
-    rustc_infer::DEFAULT_LOCALE_RESOURCE,
+    crate::rustc_infer::DEFAULT_LOCALE_RESOURCE,
     rustc_interface::DEFAULT_LOCALE_RESOURCE,
     rustc_lint::DEFAULT_LOCALE_RESOURCE,
     rustc_metadata::DEFAULT_LOCALE_RESOURCE,
@@ -141,7 +141,7 @@ pub static DEFAULT_LOCALE_RESOURCES: &[&str] = &[
     rustc_query_system::DEFAULT_LOCALE_RESOURCE,
     rustc_resolve::DEFAULT_LOCALE_RESOURCE,
     crate::rustc_session::DEFAULT_LOCALE_RESOURCE,
-    rustc_trait_selection::DEFAULT_LOCALE_RESOURCE,
+    crate::rustc_trait_selection::DEFAULT_LOCALE_RESOURCE,
     rustc_ty_utils::DEFAULT_LOCALE_RESOURCE,
     // tidy-alphabetical-end
 ];
@@ -207,7 +207,7 @@ impl Callbacks for TimePassesCallbacks {
 }
 
 pub fn diagnostics_registry() -> Registry {
-    Registry::new(rustc_errors::codes::DIAGNOSTICS)
+    Registry::new(crate::rustc_errors::codes::DIAGNOSTICS)
 }
 
 /// This is the primary entry point for rustc.
@@ -619,7 +619,7 @@ fn print_crate_info(
     sess: &Session,
     parse_attrs: bool,
 ) -> Compilation {
-    use crate::rustc_session::config::PrintKind::*;
+    use crate::rustc_complete::config::PrintKind::*;
     // This import prevents the following code from using the printing macros
     // used by the rest of the module. Within this function, we only write to
     // the output specified by `sess.io.output_file`.
@@ -1308,7 +1308,7 @@ fn parse_crate_attrs<'a>(sess: &'a Session) -> PResult<'a, ast::AttrVec> {
 /// the panic into a `Result` instead.
 pub fn catch_fatal_errors<F: FnOnce() -> R, R>(f: F) -> Result<R, FatalError> {
     catch_unwind(panic::AssertUnwindSafe(f)).map_err(|value| {
-        if value.is::<rustc_errors::FatalErrorMarker>() {
+        if value.is::<crate::rustc_errors::FatalErrorMarker>() {
             FatalError
         } else {
             panic::resume_unwind(value);
@@ -1423,7 +1423,7 @@ pub fn install_ice_hook(bug_report_url: &'static str, extra_info: fn(&DiagCtxt))
 
             // Invoke the default handler, which prints the actual panic message and optionally a backtrace
             // Don't do this for delayed bugs, which already emit their own more useful backtrace.
-            if !info.payload().is::<rustc_errors::DelayedBugPanic>() {
+            if !info.payload().is::<crate::rustc_errors::DelayedBugPanic>() {
                 default_hook(info);
                 // Separate the output with an empty line
                 eprintln!();
@@ -1472,17 +1472,17 @@ fn report_ice(
     using_internal_features: &AtomicBool,
 ) {
     let translator = default_translator();
-    let emitter = Box::new(rustc_errors::emitter::HumanEmitter::new(
-        stderr_destination(rustc_errors::ColorConfig::Auto),
+    let emitter = Box::new(crate::rustc_errors::emitter::HumanEmitter::new(
+        stderr_destination(crate::rustc_errors::ColorConfig::Auto),
         translator,
     ));
-    let dcx = rustc_errors::DiagCtxt::new(emitter);
+    let dcx = crate::rustc_errors::DiagCtxt::new(emitter);
     let dcx = dcx.handle();
 
     // a .span_bug or .bug call has already printed what
     // it wants to print.
-    if !info.payload().is::<rustc_errors::ExplicitBug>()
-        && !info.payload().is::<rustc_errors::DelayedBugPanic>()
+    if !info.payload().is::<crate::rustc_errors::ExplicitBug>()
+        && !info.payload().is::<crate::rustc_errors::DelayedBugPanic>()
     {
         dcx.emit_err(session_diagnostics::Ice);
     }

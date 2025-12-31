@@ -2,22 +2,22 @@ use std::borrow::Cow;
 use std::iter;
 use std::path::PathBuf;
 
-use rustc_errors::codes::*;
-use rustc_errors::{Diag, IntoDiagArg};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Diag, IntoDiagArg};
 use rustc_hir as hir;
-use crate::rustc_hir::def::{CtorOf, DefKind, Namespace, Res};
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::intravisit::{self, Visitor};
-use crate::rustc_hir::{Body, Closure, Expr, ExprKind, FnRetTy, HirId, LetStmt, LocalSource};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::hir::nested_filter;
-use crate::rustc_middle::ty::adjustment::{Adjust, Adjustment, AutoBorrow};
-use crate::rustc_middle::ty::print::{FmtPrinter, PrettyPrinter, Print, Printer};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::def::{CtorOf, DefKind, Namespace, Res};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::intravisit::{self, Visitor};
+use crate::rustc_complete::{Body, Closure, Expr, ExprKind, FnRetTy, HirId, LetStmt, LocalSource};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::ty::adjustment::{Adjust, Adjustment, AutoBorrow};
+use crate::rustc_complete::ty::print::{FmtPrinter, PrettyPrinter, Print, Printer};
+use crate::rustc_complete::ty::{
     self, GenericArg, GenericArgKind, GenericArgsRef, InferConst, IsSuggestable, Term, TermKind,
     Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt, TypeckResults,
 };
-use crate::rustc_span::{BytePos, DUMMY_SP, Ident, Span, sym};
+use crate::rustc_complete::{BytePos, DUMMY_SP, Ident, Span, sym};
 use tracing::{debug, instrument, warn};
 
 use super::nice_region_error::placeholder_error::Highlighted;
@@ -136,13 +136,13 @@ impl InferenceDiagnosticsParentData {
 }
 
 impl IntoDiagArg for UnderspecifiedArgKind {
-    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         let kind = match self {
             Self::Type { .. } => "type",
             Self::Const { is_parameter: true } => "const_with_param",
             Self::Const { is_parameter: false } => "const",
         };
-        rustc_errors::DiagArgValue::Str(kind.into())
+        crate::rustc_errors::DiagArgValue::Str(kind.into())
     }
 }
 

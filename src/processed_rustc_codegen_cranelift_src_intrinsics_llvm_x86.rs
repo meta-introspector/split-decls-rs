@@ -1,6 +1,6 @@
 // Emulate x86 LLVM intrinsics
 
-use crate::rustc_ast::ast::{InlineAsmOptions, InlineAsmTemplatePiece};
+use crate::rustc_complete::ast::{InlineAsmOptions, InlineAsmTemplatePiece};
 use rustc_target::asm::*;
 
 use crate::inline_asm::{CInlineAsmOperand, codegen_inline_asm_inner};

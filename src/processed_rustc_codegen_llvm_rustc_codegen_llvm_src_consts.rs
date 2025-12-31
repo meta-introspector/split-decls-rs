@@ -3,19 +3,19 @@ use std::ops::Range;
 use rustc_abi::{Align, HasDataLayout, Primitive, Scalar, Size, WrappingRange};
 use rustc_codegen_ssa::common;
 use rustc_codegen_ssa::traits::*;
-use crate::rustc_hir::LangItem;
-use crate::rustc_hir::attrs::Linkage;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LOCAL_CRATE};
-use crate::rustc_middle::middle::codegen_fn_attrs::{CodegenFnAttrFlags, CodegenFnAttrs};
-use crate::rustc_middle::mir::interpret::{
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::attrs::Linkage;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
+use crate::rustc_complete::middle::codegen_fn_attrs::{CodegenFnAttrFlags, CodegenFnAttrs};
+use crate::rustc_complete::mir::interpret::{
     Allocation, ConstAllocation, ErrorHandled, InitChunk, Pointer, Scalar as InterpScalar,
     read_target_uint,
 };
-use crate::rustc_middle::mir::mono::MonoItem;
-use crate::rustc_middle::ty::layout::{HasTypingEnv, LayoutOf};
-use crate::rustc_middle::ty::{self, Instance};
-use crate::rustc_middle::{bug, span_bug};
+use crate::rustc_complete::mir::mono::MonoItem;
+use crate::rustc_complete::ty::layout::{HasTypingEnv, LayoutOf};
+use crate::rustc_complete::ty::{self, Instance};
+use crate::rustc_complete::{bug, span_bug};
 use tracing::{debug, instrument, trace};
 
 use crate::common::CodegenCx;

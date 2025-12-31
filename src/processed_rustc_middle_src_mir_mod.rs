@@ -11,21 +11,21 @@ pub use basic_blocks::{BasicBlocks, SwitchTargetValue};
 use either::Either;
 use polonius_engine::Atom;
 use rustc_abi::{FieldIdx, VariantIdx};
-pub use crate::rustc_ast::Mutability;
+pub use crate::rustc_complete::Mutability;
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
 use crate::rustc_data_structures::graph::dominators::Dominators;
-use rustc_errors::{DiagArgName, DiagArgValue, DiagMessage, ErrorGuaranteed, IntoDiagArg};
-use crate::rustc_hir::def::{CtorKind, Namespace};
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, DefId};
-use crate::rustc_hir::{
+use crate::rustc_complete::{DiagArgName, DiagArgValue, DiagMessage, ErrorGuaranteed, IntoDiagArg};
+use crate::rustc_complete::def::{CtorKind, Namespace};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
+use crate::rustc_complete::{
     self as hir, BindingMode, ByRef, CoroutineDesugaring, CoroutineKind, HirId, ImplicitSelfKind,
 };
 use rustc_index::bit_set::DenseBitSet;
 use rustc_index::{Idx, IndexSlice, IndexVec};
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
 use rustc_serialize::{Decodable, Encodable};
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{DUMMY_SP, Span, Symbol};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
 use tracing::{debug, trace};
 
 pub use self::query::*;

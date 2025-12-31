@@ -22,7 +22,7 @@ use std::sync::Arc;
 
 use rustc_expand::base::{MacroExpanderFn, ResolverExpand, SyntaxExtensionKind};
 use rustc_expand::proc_macro::BangProcMacro;
-use crate::rustc_span::sym;
+use crate::rustc_complete::sym;
 
 use crate::deriving::*;
 

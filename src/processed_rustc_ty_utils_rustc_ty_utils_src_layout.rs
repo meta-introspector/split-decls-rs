@@ -8,17 +8,17 @@ use rustc_abi::{
 };
 use rustc_hashes::Hash64;
 use rustc_index::IndexVec;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::layout::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::layout::{
     FloatExt, HasTyCtxt, IntegerExt, LayoutCx, LayoutError, LayoutOf, TyAndLayout,
 };
-use crate::rustc_middle::ty::print::with_no_trimmed_paths;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{
     self, AdtDef, CoroutineArgsExt, EarlyBinder, PseudoCanonicalInput, Ty, TyCtxt, TypeVisitableExt,
 };
-use crate::rustc_session::{DataTypeKind, FieldInfo, FieldKind, SizeKind, VariantInfo};
-use crate::rustc_span::{Symbol, sym};
+use crate::rustc_complete::{DataTypeKind, FieldInfo, FieldKind, SizeKind, VariantInfo};
+use crate::rustc_complete::{Symbol, sym};
 use tracing::{debug, instrument};
 use {rustc_abi as abi, rustc_hir as hir};
 
@@ -481,7 +481,7 @@ fn layout_of_uncached<'tcx>(
         }
 
         ty::Coroutine(def_id, args) => {
-            use crate::rustc_middle::ty::layout::PrimitiveExt as _;
+            use crate::rustc_complete::ty::layout::PrimitiveExt as _;
 
             let info = tcx.coroutine_layout(def_id, args)?;
 

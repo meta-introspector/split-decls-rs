@@ -1,10 +1,10 @@
 use std::io::Error;
 use std::path::{Path, PathBuf};
 
-use rustc_errors::codes::*;
-use rustc_errors::{Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level};
 use rustc_macros::{Diagnostic, Subdiagnostic};
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 use rustc_target::spec::{PanicStrategy, TargetTuple};
 
 use crate::fluent_generated as fluent;

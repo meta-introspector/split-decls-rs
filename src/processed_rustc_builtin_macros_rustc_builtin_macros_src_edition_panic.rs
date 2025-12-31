@@ -1,9 +1,9 @@
-use crate::rustc_ast::token::Delimiter;
-use crate::rustc_ast::tokenstream::{DelimSpan, TokenStream};
-use crate::rustc_ast::*;
+use crate::rustc_complete::token::Delimiter;
+use crate::rustc_complete::tokenstream::{DelimSpan, TokenStream};
+use crate::rustc_complete::*;
 use rustc_expand::base::*;
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::{Span, sym};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{Span, sym};
 
 /// This expands to either
 /// - `$crate::panic::panic_2015!(...)` or

@@ -27,25 +27,25 @@ use std::sync::Arc;
 
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 use crate::rustc_data_structures::unord::UnordMap;
-use crate::rustc_hir::CRATE_HIR_ID;
-use crate::rustc_hir::attrs::{CfgEntry, NativeLibKind};
-use crate::rustc_hir::def_id::CrateNum;
+use crate::rustc_complete::CRATE_HIR_ID;
+use crate::rustc_complete::attrs::{CfgEntry, NativeLibKind};
+use crate::rustc_complete::def_id::CrateNum;
 use rustc_macros::{Decodable, Encodable, HashStable};
 use rustc_metadata::EncodedMetadata;
-use crate::rustc_middle::dep_graph::WorkProduct;
-use crate::rustc_middle::lint::LevelAndSource;
-use crate::rustc_middle::middle::debugger_visualizer::DebuggerVisualizerFile;
-use crate::rustc_middle::middle::dependency_format::Dependencies;
-use crate::rustc_middle::middle::exported_symbols::SymbolExportKind;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_middle::util::Providers;
+use crate::rustc_complete::dep_graph::WorkProduct;
+use crate::rustc_complete::lint::LevelAndSource;
+use crate::rustc_complete::middle::debugger_visualizer::DebuggerVisualizerFile;
+use crate::rustc_complete::middle::dependency_format::Dependencies;
+use crate::rustc_complete::middle::exported_symbols::SymbolExportKind;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::util::Providers;
 use rustc_serialize::opaque::{FileEncoder, MemDecoder};
 use rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
-use crate::rustc_session::Session;
-use crate::rustc_session::config::{CrateType, OutputFilenames, OutputType, RUST_CGU_EXT};
-use crate::rustc_session::cstore::{self, CrateSource};
-use crate::rustc_session::lint::builtin::LINKER_MESSAGES;
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{CrateType, OutputFilenames, OutputType, RUST_CGU_EXT};
+use crate::rustc_complete::cstore::{self, CrateSource};
+use crate::rustc_complete::lint::builtin::LINKER_MESSAGES;
+use crate::rustc_complete::Symbol;
 
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }

@@ -11,19 +11,19 @@ use rustc_const_eval::interpret::{
     ImmTy, Immediate, InterpCx, OpTy, PlaceTy, Projectable, interp_ok,
 };
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::interpret::{InterpResult, Scalar};
-use crate::rustc_middle::mir::visit::{MutVisitor, PlaceContext, Visitor};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::interpret::{InterpResult, Scalar};
+use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext, Visitor};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 use rustc_mir_dataflow::fmt::DebugWithContext;
 use rustc_mir_dataflow::lattice::{FlatSet, HasBottom};
 use rustc_mir_dataflow::value_analysis::{
     Map, PlaceIndex, State, TrackElem, ValueOrPlace, debug_with_context,
 };
 use rustc_mir_dataflow::{Analysis, ResultsVisitor, visit_reachable_results};
-use crate::rustc_span::DUMMY_SP;
+use crate::rustc_complete::DUMMY_SP;
 use tracing::{debug, debug_span, instrument};
 
 // These constants are somewhat random guesses and have not been optimized.

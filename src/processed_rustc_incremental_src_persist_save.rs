@@ -3,13 +3,13 @@ use std::sync::Arc;
 
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::sync::join;
-use crate::rustc_middle::dep_graph::{
+use crate::rustc_complete::dep_graph::{
     DepGraph, SerializedDepGraph, WorkProduct, WorkProductId, WorkProductMap,
 };
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::ty::TyCtxt;
 use rustc_serialize::Encodable as RustcEncodable;
 use rustc_serialize::opaque::{FileEncodeResult, FileEncoder};
-use crate::rustc_session::Session;
+use crate::rustc_complete::Session;
 use tracing::debug;
 
 use super::data::*;

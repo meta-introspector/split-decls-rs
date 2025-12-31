@@ -2,8 +2,8 @@
 
 use std::fmt;
 
-use rustc_errors::{Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level};
-use crate::rustc_span::Span;
+use crate::rustc_complete::{Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level};
+use crate::rustc_complete::Span;
 
 pub struct TestOutput {
     pub span: Span,

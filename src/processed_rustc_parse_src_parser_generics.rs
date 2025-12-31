@@ -1,9 +1,9 @@
-use crate::rustc_ast::{
+use crate::rustc_complete::{
     self as ast, AttrVec, DUMMY_NODE_ID, GenericBounds, GenericParam, GenericParamKind, TyKind,
     WhereClause, token,
 };
-use rustc_errors::{Applicability, PResult};
-use crate::rustc_span::{Ident, Span, kw, sym};
+use crate::rustc_complete::{Applicability, PResult};
+use crate::rustc_complete::{Ident, Span, kw, sym};
 use thin_vec::ThinVec;
 
 use super::{ForceCollect, Parser, Trailing, UsePreAttrPos};

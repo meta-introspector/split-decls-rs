@@ -2,8 +2,8 @@
 // monomorphization of all functions. This lets us implement monomorphization-time
 // checks in a way that is friendly to incremental compilation.
 
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{Instance, TyCtxt};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{Instance, TyCtxt};
 
 
 fn check_mono_item<'tcx>(tcx: TyCtxt<'tcx>, instance: Instance<'tcx>) {

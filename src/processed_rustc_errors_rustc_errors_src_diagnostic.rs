@@ -11,8 +11,8 @@ use crate::rustc_data_structures::fx::FxIndexMap;
 use rustc_error_messages::{DiagArgName, DiagArgValue, IntoDiagArg};
 use rustc_lint_defs::{Applicability, LintExpectationId};
 use rustc_macros::{Decodable, Encodable};
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{DUMMY_SP, Span, Symbol};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
 use tracing::debug;
 
 use crate::snippet::Style;

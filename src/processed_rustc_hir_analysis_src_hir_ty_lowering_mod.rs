@@ -17,32 +17,32 @@
 use std::assert_matches::assert_matches;
 use std::slice;
 
-use crate::rustc_ast::TraitObjectSyntax;
+use crate::rustc_complete::TraitObjectSyntax;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap, FxIndexSet};
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, ErrorGuaranteed, FatalError, struct_span_code_err,
 };
-use crate::rustc_hir::def::{CtorKind, CtorOf, DefKind, Res};
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::{self as hir, AnonConst, GenericArg, GenericArgs, HirId};
-use rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
-use rustc_infer::traits::DynCompatibilityViolation;
+use crate::rustc_complete::def::{CtorKind, CtorOf, DefKind, Res};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::{self as hir, AnonConst, GenericArg, GenericArgs, HirId};
+use crate::rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
+use crate::rustc_infer::traits::DynCompatibilityViolation;
 use rustc_macros::{TypeFoldable, TypeVisitable};
-use crate::rustc_middle::middle::stability::AllowUnstable;
-use crate::rustc_middle::mir::interpret::LitToConstInput;
-use crate::rustc_middle::ty::print::PrintPolyTraitRefExt as _;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::middle::stability::AllowUnstable;
+use crate::rustc_complete::mir::interpret::LitToConstInput;
+use crate::rustc_complete::ty::print::PrintPolyTraitRefExt as _;
+use crate::rustc_complete::ty::{
     self, Const, GenericArgKind, GenericArgsRef, GenericParamDefKind, Ty, TyCtxt, TypeVisitableExt,
     TypingMode, Upcast, fold_regions,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::lint::builtin::AMBIGUOUS_ASSOCIATED_ITEMS;
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::{DUMMY_SP, Ident, Span, kw, sym};
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits::wf::object_region_bounds;
-use rustc_trait_selection::traits::{self, FulfillmentError};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::lint::builtin::AMBIGUOUS_ASSOCIATED_ITEMS;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, kw, sym};
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits::wf::object_region_bounds;
+use crate::rustc_trait_selection::traits::{self, FulfillmentError};
 use tracing::{debug, instrument};
 
 use crate::check::check_abi;

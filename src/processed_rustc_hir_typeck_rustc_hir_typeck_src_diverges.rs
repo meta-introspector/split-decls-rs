@@ -1,6 +1,6 @@
 use std::{cmp, ops};
 
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::{DUMMY_SP, Span};
 
 /// Tracks whether executing a node may exit normally (versus
 /// return/break/panic, which "diverge", leaving dead code in their

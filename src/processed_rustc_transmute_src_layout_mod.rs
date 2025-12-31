@@ -131,8 +131,8 @@ impl Type for () {}
 #[cfg(feature = "rustc")]
 pub mod rustc {
     use rustc_abi::Layout;
-    use crate::rustc_middle::ty::layout::{HasTyCtxt, LayoutCx, LayoutError};
-    use crate::rustc_middle::ty::{self, Region, Ty};
+    use crate::rustc_complete::ty::layout::{HasTyCtxt, LayoutCx, LayoutError};
+    use crate::rustc_complete::ty::{self, Region, Ty};
 
     /// A visibility node in the layout.
     #[derive(Debug, Hash, Eq, PartialEq, Clone, Copy)]
@@ -160,7 +160,7 @@ pub mod rustc {
         cx: LayoutCx<'tcx>,
         ty: Ty<'tcx>,
     ) -> Result<Layout<'tcx>, &'tcx LayoutError<'tcx>> {
-        use crate::rustc_middle::ty::layout::LayoutOf;
+        use crate::rustc_complete::ty::layout::LayoutOf;
         let ty = cx.tcx().erase_and_anonymize_regions(ty);
         cx.layout_of(ty).map(|tl| tl.layout)
     }

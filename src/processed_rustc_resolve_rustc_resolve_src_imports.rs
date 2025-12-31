@@ -3,25 +3,25 @@
 use std::cell::Cell;
 use std::mem;
 
-use crate::rustc_ast::NodeId;
+use crate::rustc_complete::NodeId;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
 use crate::rustc_data_structures::intern::Interned;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, MultiSpan, pluralize, struct_span_code_err};
-use crate::rustc_hir::def::{self, DefKind, PartialRes};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::metadata::{ModChild, Reexport};
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::Visibility;
-use crate::rustc_session::lint::BuiltinLintDiag;
-use crate::rustc_session::lint::builtin::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, MultiSpan, pluralize, struct_span_code_err};
+use crate::rustc_complete::def::{self, DefKind, PartialRes};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::metadata::{ModChild, Reexport};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::Visibility;
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::{
     AMBIGUOUS_GLOB_REEXPORTS, EXPORTED_PRIVATE_DEPENDENCIES, HIDDEN_GLOB_REEXPORTS,
     PUB_USE_OF_PRIVATE_EXTERN_CRATE, REDUNDANT_IMPORTS, UNUSED_IMPORTS,
 };
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::edit_distance::find_best_match_for_name;
-use crate::rustc_span::hygiene::LocalExpnId;
-use crate::rustc_span::{Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_complete::hygiene::LocalExpnId;
+use crate::rustc_complete::{Ident, Span, Symbol, kw, sym};
 use smallvec::SmallVec;
 use tracing::debug;
 

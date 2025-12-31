@@ -1,13 +1,13 @@
 // Checks validity of naked functions.
 
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_hir::intravisit::Visitor;
-use crate::rustc_hir::{ExprKind, HirIdSet, StmtKind, find_attr};
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_span::Span;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::{ExprKind, HirIdSet, StmtKind, find_attr};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Span;
 
 use crate::errors::{
     NakedFunctionsAsmBlock, NakedFunctionsMustNakedAsm, NoPatterns, ParamsNotAllowed,

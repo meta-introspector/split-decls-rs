@@ -2,11 +2,11 @@
 // as well as errors when attempting to call a non-const function in a const
 // context.
 
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::{LangItem, lang_items};
-use crate::rustc_middle::ty::{AssocContainer, GenericArgsRef, Instance, Ty, TyCtxt, TypingEnv};
-use crate::rustc_span::{DUMMY_SP, DesugaringKind, Ident, Span, sym};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{LangItem, lang_items};
+use crate::rustc_complete::ty::{AssocContainer, GenericArgsRef, Instance, Ty, TyCtxt, TypingEnv};
+use crate::rustc_complete::{DUMMY_SP, DesugaringKind, Ident, Span, sym};
 use tracing::debug;
 
 use crate::traits::specialization_graph;

@@ -6,13 +6,13 @@
 #[feature(once_cell_get_mut)]
 // tidy-alphabetical-end
 
-use crate::rustc_hir::lang_items::LangItem;
-use crate::rustc_middle::query::TyCtxtAt;
-use crate::rustc_middle::ty::adjustment::CustomCoerceUnsized;
-use crate::rustc_middle::ty::{self, Ty};
-use crate::rustc_middle::util::Providers;
-use crate::rustc_middle::{bug, traits};
-use crate::rustc_span::ErrorGuaranteed;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::ty::adjustment::CustomCoerceUnsized;
+use crate::rustc_complete::ty::{self, Ty};
+use crate::rustc_complete::util::Providers;
+use crate::rustc_complete::{bug, traits};
+use crate::rustc_complete::ErrorGuaranteed;
 
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }

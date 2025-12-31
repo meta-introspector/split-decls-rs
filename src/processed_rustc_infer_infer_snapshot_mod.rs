@@ -1,5 +1,5 @@
 use crate::rustc_data_structures::undo_log::UndoLogs;
-use crate::rustc_middle::ty;
+use crate::rustc_complete::ty;
 use tracing::{debug, instrument};
 
 use super::InferCtxt;

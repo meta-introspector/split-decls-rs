@@ -1,5 +1,5 @@
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_middle::mir::*;
+use crate::rustc_complete::mir::*;
 
 /// Used for reverting changes made by `DerefSeparator`
 #[derive(Default, Debug)]

@@ -1,10 +1,10 @@
 use core::ops::ControlFlow;
 
 use rustc_ast as ast;
-use crate::rustc_ast::visit::visit_opt;
-use crate::rustc_ast::{EnumDef, VariantData, attr};
+use crate::rustc_complete::visit::visit_opt;
+use crate::rustc_complete::{EnumDef, VariantData, attr};
 use rustc_expand::base::{Annotatable, DummyResult, ExtCtxt};
-use crate::rustc_span::{ErrorGuaranteed, Ident, Span, kw, sym};
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, kw, sym};
 use smallvec::SmallVec;
 use thin_vec::{ThinVec, thin_vec};
 

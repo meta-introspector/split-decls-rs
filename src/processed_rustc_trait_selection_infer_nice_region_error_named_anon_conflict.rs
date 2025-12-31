@@ -1,7 +1,7 @@
 // Error Reporting for Anonymous Region Lifetime Errors
 // where one region is named and the other is anonymous.
 
-use rustc_errors::Diag;
+use crate::rustc_complete::Diag;
 use tracing::debug;
 
 use crate::error_reporting::infer::nice_region_error::NiceRegionError;

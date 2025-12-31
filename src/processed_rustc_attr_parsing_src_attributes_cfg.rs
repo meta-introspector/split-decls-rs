@@ -1,13 +1,13 @@
-use crate::rustc_ast::{LitKind, NodeId};
+use crate::rustc_complete::{LitKind, NodeId};
 use rustc_feature::{AttributeTemplate, Features, template};
-use crate::rustc_hir::RustcVersion;
-use crate::rustc_hir::attrs::CfgEntry;
-use crate::rustc_session::Session;
-use crate::rustc_session::config::ExpectedValues;
-use crate::rustc_session::lint::BuiltinLintDiag;
-use crate::rustc_session::lint::builtin::UNEXPECTED_CFGS;
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::RustcVersion;
+use crate::rustc_complete::attrs::CfgEntry;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::ExpectedValues;
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::UNEXPECTED_CFGS;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{Span, Symbol, sym};
 use thin_vec::ThinVec;
 
 use crate::context::{AcceptContext, ShouldEmit, Stage};

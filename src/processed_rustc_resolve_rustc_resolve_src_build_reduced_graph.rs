@@ -8,8 +8,8 @@
 use std::cell::Cell;
 use std::sync::Arc;
 
-use crate::rustc_ast::visit::{self, AssocCtxt, Visitor, WalkItemKind};
-use crate::rustc_ast::{
+use crate::rustc_complete::visit::{self, AssocCtxt, Visitor, WalkItemKind};
+use crate::rustc_complete::{
     self as ast, AssocItem, AssocItemKind, Block, ConstItem, Delegation, Fn, ForeignItem,
     ForeignItemKind, Inline, Item, ItemKind, NodeId, StaticItem, StmtKind, TyAlias,
 };
@@ -17,17 +17,17 @@ use rustc_attr_parsing as attr;
 use rustc_attr_parsing::AttributeParser;
 use rustc_expand::base::ResolverExpand;
 use rustc_expand::expand::AstFragment;
-use crate::rustc_hir::Attribute;
-use crate::rustc_hir::attrs::{AttributeKind, MacroUseArgs};
-use crate::rustc_hir::def::{self, *};
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
+use crate::rustc_complete::Attribute;
+use crate::rustc_complete::attrs::{AttributeKind, MacroUseArgs};
+use crate::rustc_complete::def::{self, *};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
 use rustc_index::bit_set::DenseBitSet;
 use rustc_metadata::creader::LoadedMacro;
-use crate::rustc_middle::metadata::ModChild;
-use crate::rustc_middle::ty::{Feed, Visibility};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::hygiene::{ExpnId, LocalExpnId, MacroKind};
-use crate::rustc_span::{Ident, Macros20NormalizedIdent, Span, Symbol, kw, sym};
+use crate::rustc_complete::metadata::ModChild;
+use crate::rustc_complete::ty::{Feed, Visibility};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::hygiene::{ExpnId, LocalExpnId, MacroKind};
+use crate::rustc_complete::{Ident, Macros20NormalizedIdent, Span, Symbol, kw, sym};
 use thin_vec::ThinVec;
 use tracing::debug;
 

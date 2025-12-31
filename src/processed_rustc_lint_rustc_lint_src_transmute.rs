@@ -1,12 +1,12 @@
-use crate::rustc_ast::LitKind;
-use rustc_errors::Applicability;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_hir::{self as hir};
+use crate::rustc_complete::LitKind;
+use crate::rustc_complete::Applicability;
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{self as hir};
 use rustc_macros::LintDiagnostic;
-use crate::rustc_middle::ty::{self, Ty};
-use crate::rustc_session::{declare_lint, impl_lint_pass};
-use crate::rustc_span::sym;
+use crate::rustc_complete::ty::{self, Ty};
+use crate::rustc_complete::{declare_lint, impl_lint_pass};
+use crate::rustc_complete::sym;
 
 use crate::lints::{IntegerToPtrTransmutes, IntegerToPtrTransmutesSuggestion};
 use crate::{LateContext, LateLintPass};

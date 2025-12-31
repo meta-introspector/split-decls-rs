@@ -1,16 +1,16 @@
 // Error Reporting for static impl Traits.
 
 use crate::rustc_data_structures::fx::FxIndexSet;
-use rustc_errors::{Applicability, Diag, ErrorGuaranteed};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::intravisit::{Visitor, VisitorExt, walk_ty};
-use crate::rustc_hir::{
+use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::intravisit::{Visitor, VisitorExt, walk_ty};
+use crate::rustc_complete::{
     self as hir, AmbigArg, GenericBound, GenericParam, GenericParamKind, Item, ItemKind, Lifetime,
     LifetimeKind, LifetimeParamKind, MissingLifetimeKind, Node, TyKind,
 };
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitor};
-use crate::rustc_span::def_id::LocalDefId;
-use crate::rustc_span::{Ident, Span};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitor};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{Ident, Span};
 use tracing::debug;
 
 use crate::error_reporting::infer::nice_region_error::NiceRegionError;

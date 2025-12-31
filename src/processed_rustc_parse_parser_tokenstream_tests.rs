@@ -1,8 +1,8 @@
 #[allow(rustc::symbol_intern_string_literal)]
 
-use crate::rustc_ast::token::{self, IdentIsRaw};
-use crate::rustc_ast::tokenstream::{TokenStream, TokenTree};
-use crate::rustc_span::{BytePos, Span, Symbol, create_default_session_globals_then};
+use crate::rustc_complete::token::{self, IdentIsRaw};
+use crate::rustc_complete::tokenstream::{TokenStream, TokenTree};
+use crate::rustc_complete::{BytePos, Span, Symbol, create_default_session_globals_then};
 
 use crate::parser::tests::string_to_stream;
 

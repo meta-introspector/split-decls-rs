@@ -6,7 +6,7 @@ use std::path::{Component, Path};
 use cranelift_codegen::MachSrcLoc;
 use cranelift_codegen::binemit::CodeOffset;
 use gimli::write::{AttributeValue, FileId, FileInfo, LineProgram, LineString, LineStringTable};
-use crate::rustc_span::{
+use crate::rustc_complete::{
     FileName, Pos, SourceFile, SourceFileAndLine, SourceFileHash, SourceFileHashAlgorithm, hygiene,
 };
 

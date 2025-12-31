@@ -1,4 +1,4 @@
-use crate::rustc_span::kw;
+use crate::rustc_complete::kw;
 
 use crate::ast::{self, AssignOpKind, BinOpKind, RangeLimits};
 use crate::token::{self, Token};

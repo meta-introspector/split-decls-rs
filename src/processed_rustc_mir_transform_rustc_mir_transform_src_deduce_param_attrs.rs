@@ -5,12 +5,12 @@
 // purposes on a best-effort basis. We compute them here and store them into the crate metadata so
 // dependent crates can use them.
 
-use crate::rustc_hir::def_id::LocalDefId;
+use crate::rustc_complete::def_id::LocalDefId;
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::mir::visit::{NonMutatingUseContext, PlaceContext, Visitor};
-use crate::rustc_middle::mir::{Body, Location, Operand, Place, RETURN_PLACE, Terminator, TerminatorKind};
-use crate::rustc_middle::ty::{self, DeducedParamAttrs, Ty, TyCtxt};
-use crate::rustc_session::config::OptLevel;
+use crate::rustc_complete::mir::visit::{NonMutatingUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::mir::{Body, Location, Operand, Place, RETURN_PLACE, Terminator, TerminatorKind};
+use crate::rustc_complete::ty::{self, DeducedParamAttrs, Ty, TyCtxt};
+use crate::rustc_complete::config::OptLevel;
 
 /// A visitor that determines which arguments have been mutated. We can't use the mutability field
 /// on LocalDecl for this because it has no meaning post-optimization.

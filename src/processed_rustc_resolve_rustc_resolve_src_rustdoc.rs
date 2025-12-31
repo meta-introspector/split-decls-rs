@@ -6,15 +6,15 @@ use pulldown_cmark::{
     BrokenLink, BrokenLinkCallback, CowStr, Event, LinkType, Options, Parser, Tag,
 };
 use rustc_ast as ast;
-use crate::rustc_ast::attr::AttributeExt;
-use crate::rustc_ast::join_path_syms;
-use crate::rustc_ast::util::comments::beautify_doc_string;
+use crate::rustc_complete::attr::AttributeExt;
+use crate::rustc_complete::join_path_syms;
+use crate::rustc_complete::util::comments::beautify_doc_string;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::unord::UnordSet;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_span::def_id::DefId;
-use crate::rustc_span::source_map::SourceMap;
-use crate::rustc_span::{DUMMY_SP, InnerSpan, Span, Symbol, sym};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{DUMMY_SP, InnerSpan, Span, Symbol, sym};
 use thin_vec::ThinVec;
 use tracing::{debug, trace};
 
@@ -563,7 +563,7 @@ pub fn source_span_for_markdown_range_inner(
     md_range: &Range<usize>,
     fragments: &[DocFragment],
 ) -> Option<(Span, bool)> {
-    use crate::rustc_span::BytePos;
+    use crate::rustc_complete::BytePos;
 
     if let &[fragment] = &fragments
         && fragment.kind == DocFragmentKind::RawDoc

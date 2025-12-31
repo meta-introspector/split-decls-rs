@@ -1,8 +1,8 @@
 use rustc_ast as ast;
-use crate::rustc_ast::{ItemKind, VariantData};
-use rustc_errors::MultiSpan;
+use crate::rustc_complete::{ItemKind, VariantData};
+use crate::rustc_complete::MultiSpan;
 use rustc_expand::base::{Annotatable, DummyResult, ExtCtxt};
-use crate::rustc_span::{Ident, Span, kw, sym};
+use crate::rustc_complete::{Ident, Span, kw, sym};
 use thin_vec::thin_vec;
 
 use crate::deriving::generic::ty::{Bounds, Path, PathKind, Ty};

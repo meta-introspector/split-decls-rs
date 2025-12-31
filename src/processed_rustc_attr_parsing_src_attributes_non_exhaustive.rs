@@ -1,6 +1,6 @@
-use crate::rustc_hir::Target;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::Target;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::{Span, Symbol, sym};
 
 use crate::attributes::{NoArgsAttributeParser, OnDuplicate};
 use crate::context::Stage;

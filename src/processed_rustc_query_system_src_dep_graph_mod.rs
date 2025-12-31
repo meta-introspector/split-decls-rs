@@ -7,7 +7,7 @@ pub use graph::{DepGraph, DepNodeIndex, TaskDepsRef, WorkProduct, WorkProductMap
 pub use query::DepGraphQuery;
 use crate::rustc_data_structures::profiling::SelfProfilerRef;
 use crate::rustc_data_structures::sync::DynSync;
-use crate::rustc_session::Session;
+use crate::rustc_complete::Session;
 pub use serialized::{SerializedDepGraph, SerializedDepNodeIndex};
 use tracing::instrument;
 
@@ -63,7 +63,7 @@ pub trait DepContext: Copy {
         if let Some(f) = cb.force_from_dep_node {
             match panic::catch_unwind(panic::AssertUnwindSafe(|| f(self, dep_node, prev_index))) {
                 Err(value) => {
-                    if !value.is::<rustc_errors::FatalErrorMarker>() {
+                    if !value.is::<crate::rustc_errors::FatalErrorMarker>() {
                         print_markframe_trace(self.dep_graph(), frame);
                     }
                     panic::resume_unwind(value)

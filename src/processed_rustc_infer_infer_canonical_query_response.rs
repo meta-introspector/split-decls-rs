@@ -11,10 +11,10 @@ use std::fmt::Debug;
 use std::iter;
 
 use rustc_index::{Idx, IndexVec};
-use crate::rustc_middle::arena::ArenaAllocatable;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::infer::canonical::CanonicalVarKind;
-use crate::rustc_middle::ty::{self, BoundVar, GenericArg, GenericArgKind, Ty, TyCtxt, TypeFoldable};
+use crate::rustc_complete::arena::ArenaAllocatable;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::infer::canonical::CanonicalVarKind;
+use crate::rustc_complete::ty::{self, BoundVar, GenericArg, GenericArgKind, Ty, TyCtxt, TypeFoldable};
 use tracing::{debug, instrument};
 
 use crate::infer::canonical::instantiate::{CanonicalExt, instantiate_value};

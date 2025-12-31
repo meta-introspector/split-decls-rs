@@ -1,11 +1,11 @@
 // This file provides API for compiler consumers.
 
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_hir::def_id::LocalDefId;
+use crate::rustc_complete::def_id::LocalDefId;
 use rustc_index::IndexVec;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::{Body, Promoted};
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::{Body, Promoted};
+use crate::rustc_complete::ty::TyCtxt;
 
 pub use super::borrow_set::{BorrowData, BorrowSet, TwoPhaseActivation};
 pub use super::constraints::OutlivesConstraint;

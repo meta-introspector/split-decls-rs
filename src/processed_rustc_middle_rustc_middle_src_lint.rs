@@ -2,13 +2,13 @@ use std::cmp;
 
 use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::sorted_map::SortedMap;
-use rustc_errors::{Diag, MultiSpan};
-use crate::rustc_hir::{HirId, ItemLocalId};
+use crate::rustc_complete::{Diag, MultiSpan};
+use crate::rustc_complete::{HirId, ItemLocalId};
 use rustc_macros::{Decodable, Encodable, HashStable};
-use crate::rustc_session::Session;
-use crate::rustc_session::lint::builtin::{self, FORBIDDEN_LINT_GROUPS};
-use crate::rustc_session::lint::{FutureIncompatibilityReason, Level, Lint, LintExpectationId, LintId};
-use crate::rustc_span::{DUMMY_SP, Span, Symbol, kw};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::lint::builtin::{self, FORBIDDEN_LINT_GROUPS};
+use crate::rustc_complete::lint::{FutureIncompatibilityReason, Level, Lint, LintExpectationId, LintId};
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol, kw};
 use tracing::instrument;
 
 use crate::ty::TyCtxt;
@@ -331,7 +331,7 @@ pub fn lint_level(
         let err_level = match level {
             Level::Allow => {
                 if has_future_breakage {
-                    rustc_errors::Level::Allow
+                    crate::rustc_errors::Level::Allow
                 } else {
                     return;
                 }
@@ -344,11 +344,11 @@ pub fn lint_level(
                 // We can also not mark the lint expectation as fulfilled here right away, as it
                 // can still be cancelled in the decorate function. All of this means that we simply
                 // create a `Diag` and continue as we would for warnings.
-                rustc_errors::Level::Expect
+                crate::rustc_errors::Level::Expect
             }
-            Level::ForceWarn => rustc_errors::Level::ForceWarning,
-            Level::Warn => rustc_errors::Level::Warning,
-            Level::Deny | Level::Forbid => rustc_errors::Level::Error,
+            Level::ForceWarn => crate::rustc_errors::Level::ForceWarning,
+            Level::Warn => crate::rustc_errors::Level::Warning,
+            Level::Deny | Level::Forbid => crate::rustc_errors::Level::Error,
         };
         let mut err = Diag::new(sess.dcx(), err_level, "");
         if let Some(span) = span {
@@ -441,12 +441,12 @@ pub fn lint_level(
         // emitted or we'll get a `must_produce_diag` ICE.
         //
         // When is a diagnostic *eventually* emitted? Well, that is determined by 2 factors:
-        // 1. If the corresponding `rustc_errors::Level` is beyond warning, i.e. `ForceWarning(_)`
+        // 1. If the corresponding `crate::rustc_errors::Level` is beyond warning, i.e. `ForceWarning(_)`
         //    or `Error`, then the diagnostic will be emitted regardless of CLI options.
-        // 2. If the corresponding `rustc_errors::Level` is warning, then that can be affected by
+        // 2. If the corresponding `crate::rustc_errors::Level` is warning, then that can be affected by
         //    `-A warnings` or `--cap-lints=xxx` on the command line. In which case, the diagnostic
         //    will be emitted if `can_emit_warnings` is true.
-        let skip = err_level == rustc_errors::Level::Warning && !sess.dcx().can_emit_warnings();
+        let skip = err_level == crate::rustc_errors::Level::Warning && !sess.dcx().can_emit_warnings();
 
         if !skip {
             decorate(&mut err);

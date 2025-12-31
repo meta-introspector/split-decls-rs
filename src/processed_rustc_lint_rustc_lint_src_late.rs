@@ -8,14 +8,14 @@ use std::cell::Cell;
 
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_data_structures::sync::join;
-use crate::rustc_hir::def_id::{LocalDefId, LocalModDefId};
-use crate::rustc_hir::{self as hir, AmbigArg, HirId, intravisit as hir_visit};
-use crate::rustc_middle::hir::nested_filter;
-use crate::rustc_middle::ty::{self, TyCtxt};
-use crate::rustc_session::Session;
-use crate::rustc_session::lint::LintPass;
-use crate::rustc_session::lint::builtin::HardwiredLints;
-use crate::rustc_span::Span;
+use crate::rustc_complete::def_id::{LocalDefId, LocalModDefId};
+use crate::rustc_complete::{self as hir, AmbigArg, HirId, intravisit as hir_visit};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::ty::{self, TyCtxt};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::lint::LintPass;
+use crate::rustc_complete::lint::builtin::HardwiredLints;
+use crate::rustc_complete::Span;
 use tracing::debug;
 
 use crate::passes::LateLintPassObject;

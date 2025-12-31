@@ -1,5 +1,5 @@
-use crate::rustc_middle::mir::coverage::CoverageKind;
-use crate::rustc_middle::ty::Instance;
+use crate::rustc_complete::mir::coverage::CoverageKind;
+use crate::rustc_complete::ty::Instance;
 
 pub trait CoverageInfoBuilderMethods<'tcx> {
     /// Handle the MIR coverage info in a backend-specific way.

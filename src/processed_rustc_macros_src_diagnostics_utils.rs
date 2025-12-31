@@ -366,7 +366,7 @@ pub(crate) trait HasFieldMap {
     }
 }
 
-/// `Applicability` of a suggestion - mirrors `rustc_errors::Applicability` - and used to represent
+/// `Applicability` of a suggestion - mirrors `crate::rustc_errors::Applicability` - and used to represent
 /// the user's selection of applicability if specified in an attribute.
 #[derive(Clone, Copy)]
 pub(crate) enum Applicability {
@@ -394,16 +394,16 @@ impl quote::ToTokens for Applicability {
     fn to_tokens(&self, tokens: &mut TokenStream) {
         tokens.extend(match self {
             Applicability::MachineApplicable => {
-                quote! { rustc_errors::Applicability::MachineApplicable }
+                quote! { crate::rustc_errors::Applicability::MachineApplicable }
             }
             Applicability::MaybeIncorrect => {
-                quote! { rustc_errors::Applicability::MaybeIncorrect }
+                quote! { crate::rustc_errors::Applicability::MaybeIncorrect }
             }
             Applicability::HasPlaceholders => {
-                quote! { rustc_errors::Applicability::HasPlaceholders }
+                quote! { crate::rustc_errors::Applicability::HasPlaceholders }
             }
             Applicability::Unspecified => {
-                quote! { rustc_errors::Applicability::Unspecified }
+                quote! { crate::rustc_errors::Applicability::Unspecified }
             }
         });
     }
@@ -541,19 +541,19 @@ impl SuggestionKind {
     pub(crate) fn to_suggestion_style(&self) -> TokenStream {
         match self {
             SuggestionKind::Normal => {
-                quote! { rustc_errors::SuggestionStyle::ShowCode }
+                quote! { crate::rustc_errors::SuggestionStyle::ShowCode }
             }
             SuggestionKind::Short => {
-                quote! { rustc_errors::SuggestionStyle::HideCodeInline }
+                quote! { crate::rustc_errors::SuggestionStyle::HideCodeInline }
             }
             SuggestionKind::Hidden => {
-                quote! { rustc_errors::SuggestionStyle::HideCodeAlways }
+                quote! { crate::rustc_errors::SuggestionStyle::HideCodeAlways }
             }
             SuggestionKind::Verbose => {
-                quote! { rustc_errors::SuggestionStyle::ShowAlways }
+                quote! { crate::rustc_errors::SuggestionStyle::ShowAlways }
             }
             SuggestionKind::ToolOnly => {
-                quote! { rustc_errors::SuggestionStyle::CompletelyHidden }
+                quote! { crate::rustc_errors::SuggestionStyle::CompletelyHidden }
             }
         }
     }

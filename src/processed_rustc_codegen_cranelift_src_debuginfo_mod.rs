@@ -11,10 +11,10 @@ use gimli::write::{
 use gimli::{AArch64, Encoding, Format, LineEncoding, Register, RiscV, RunTimeEndian, X86_64};
 use indexmap::IndexSet;
 use rustc_codegen_ssa::debuginfo::type_names;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::DefIdMap;
-use crate::rustc_session::Session;
-use crate::rustc_span::{FileNameDisplayPreference, SourceFileHash, StableSourceFileId};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::DefIdMap;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::{FileNameDisplayPreference, SourceFileHash, StableSourceFileId};
 use rustc_target::callconv::FnAbi;
 
 pub(crate) use self::emit::{DebugReloc, DebugRelocName};
@@ -79,7 +79,7 @@ impl DebugContext {
 
         let mut dwarf = DwarfUnit::new(encoding);
 
-        use crate::rustc_session::config::RemapPathScopeComponents;
+        use crate::rustc_complete::config::RemapPathScopeComponents;
 
         let filename_display_preference =
             tcx.sess.filename_display_preference(RemapPathScopeComponents::DEBUGINFO);

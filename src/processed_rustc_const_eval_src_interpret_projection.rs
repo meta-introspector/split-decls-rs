@@ -11,9 +11,9 @@ use std::marker::PhantomData;
 use std::ops::Range;
 
 use rustc_abi::{self as abi, FieldIdx, Size, VariantIdx};
-use crate::rustc_middle::ty::Ty;
-use crate::rustc_middle::ty::layout::TyAndLayout;
-use crate::rustc_middle::{bug, mir, span_bug, ty};
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::{bug, mir, span_bug, ty};
 use tracing::{debug, instrument};
 
 use super::{
@@ -389,7 +389,7 @@ where
     where
         P: Projectable<'tcx, M::Provenance> + From<MPlaceTy<'tcx, M::Provenance>> + std::fmt::Debug,
     {
-        use crate::rustc_middle::mir::ProjectionElem::*;
+        use crate::rustc_complete::mir::ProjectionElem::*;
         interp_ok(match proj_elem {
             OpaqueCast(ty) => {
                 span_bug!(self.cur_span(), "OpaqueCast({ty}) encountered after borrowck")

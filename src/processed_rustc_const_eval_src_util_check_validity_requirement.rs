@@ -1,10 +1,10 @@
 use rustc_abi::{BackendRepr, FieldsShape, Scalar, Variants};
-use crate::rustc_middle::ty::layout::{
+use crate::rustc_complete::ty::layout::{
     HasTyCtxt, LayoutCx, LayoutError, LayoutOf, TyAndLayout, ValidityRequirement,
 };
-use crate::rustc_middle::ty::{PseudoCanonicalInput, ScalarInt, Ty, TyCtxt};
-use crate::rustc_middle::{bug, ty};
-use crate::rustc_span::DUMMY_SP;
+use crate::rustc_complete::ty::{PseudoCanonicalInput, ScalarInt, Ty, TyCtxt};
+use crate::rustc_complete::{bug, ty};
+use crate::rustc_complete::DUMMY_SP;
 
 use crate::const_eval::{CanAccessMutGlobal, CheckAlignment, CompileTimeMachine};
 use crate::interpret::{InterpCx, MemoryKind};

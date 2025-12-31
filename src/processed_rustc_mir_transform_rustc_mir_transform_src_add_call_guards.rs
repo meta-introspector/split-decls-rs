@@ -1,6 +1,6 @@
 use rustc_index::{Idx, IndexVec};
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::debug;
 
 #[derive(PartialEq)]

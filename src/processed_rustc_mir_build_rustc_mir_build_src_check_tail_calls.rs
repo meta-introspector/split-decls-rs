@@ -1,15 +1,15 @@
 use rustc_abi::ExternAbi;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::Applicability;
-use crate::rustc_hir::LangItem;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::CRATE_DEF_ID;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::thir::visit::{self, Visitor};
-use crate::rustc_middle::thir::{BodyTy, Expr, ExprId, ExprKind, Thir};
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_span::def_id::{DefId, LocalDefId};
-use crate::rustc_span::{DUMMY_SP, ErrorGuaranteed, Span};
+use crate::rustc_complete::Applicability;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::CRATE_DEF_ID;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::thir::visit::{self, Visitor};
+use crate::rustc_complete::thir::{BodyTy, Expr, ExprId, ExprKind, Thir};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
 
 pub(crate) fn check_tail_calls(tcx: TyCtxt<'_>, def: LocalDefId) -> Result<(), ErrorGuaranteed> {
     let (thir, expr) = tcx.thir_body(def)?;

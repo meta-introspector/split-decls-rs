@@ -5,8 +5,8 @@
 // tidy-alphabetical-end
 
 
-use crate::rustc_middle::query::Providers;
-pub use rustc_trait_selection::traits::query::type_op::ascribe_user_type::type_op_ascribe_user_type_with_span;
+use crate::rustc_complete::query::Providers;
+pub use crate::rustc_trait_selection::traits::query::type_op::ascribe_user_type::type_op_ascribe_user_type_with_span;
 pub use type_op::type_op_prove_predicate_with_cause;
 
 pub fn provide(p: &mut Providers) {

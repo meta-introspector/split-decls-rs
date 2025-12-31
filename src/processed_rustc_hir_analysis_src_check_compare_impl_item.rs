@@ -4,24 +4,24 @@ use std::iter;
 
 use hir::def_id::{DefId, DefIdMap, LocalDefId};
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, ErrorGuaranteed, MultiSpan, pluralize, struct_span_code_err};
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::intravisit::VisitorExt;
-use crate::rustc_hir::{self as hir, AmbigArg, GenericParamKind, ImplItemKind, intravisit};
-use rustc_infer::infer::{self, BoundRegionConversionTime, InferCtxt, TyCtxtInferExt};
-use rustc_infer::traits::util;
-use crate::rustc_middle::ty::error::{ExpectedFound, TypeError};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, ErrorGuaranteed, MultiSpan, pluralize, struct_span_code_err};
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::intravisit::VisitorExt;
+use crate::rustc_complete::{self as hir, AmbigArg, GenericParamKind, ImplItemKind, intravisit};
+use crate::rustc_infer::infer::{self, BoundRegionConversionTime, InferCtxt, TyCtxtInferExt};
+use crate::rustc_infer::traits::util;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::ty::{
     self, BottomUpFolder, GenericArgs, GenericParamDefKind, Ty, TyCtxt, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode, Upcast,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::{DUMMY_SP, Span};
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::regions::InferCtxtRegionExt;
-use rustc_trait_selection::traits::{
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::{DUMMY_SP, Span};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::regions::InferCtxtRegionExt;
+use crate::rustc_trait_selection::traits::{
     self, FulfillmentError, ObligationCause, ObligationCauseCode, ObligationCtxt,
 };
 use tracing::{debug, instrument};

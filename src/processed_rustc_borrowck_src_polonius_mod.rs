@@ -49,8 +49,8 @@ use std::collections::BTreeMap;
 use crate::rustc_data_structures::fx::FxHashSet;
 use rustc_index::bit_set::SparseBitMatrix;
 use rustc_index::interval::SparseIntervalMatrix;
-use crate::rustc_middle::mir::{Body, Local};
-use crate::rustc_middle::ty::{RegionVid, TyCtxt};
+use crate::rustc_complete::mir::{Body, Local};
+use crate::rustc_complete::ty::{RegionVid, TyCtxt};
 use rustc_mir_dataflow::points::PointIndex;
 
 pub(crate) use self::constraints::*;

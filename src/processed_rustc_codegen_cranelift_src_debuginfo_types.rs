@@ -3,8 +3,8 @@
 use gimli::write::{AttributeValue, UnitEntryId};
 use rustc_codegen_ssa::debuginfo::type_names;
 use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_middle::ty::layout::LayoutOf;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::ty::layout::LayoutOf;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 
 use crate::{DebugContext, FullyMonomorphizedLayoutCx};
 

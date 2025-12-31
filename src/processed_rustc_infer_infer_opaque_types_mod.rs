@@ -1,14 +1,14 @@
 use hir::def_id::{DefId, LocalDefId};
 use rustc_hir as hir;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::traits::ObligationCause;
-use crate::rustc_middle::traits::solve::Goal;
-use crate::rustc_middle::ty::error::{ExpectedFound, TypeError};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::traits::solve::Goal;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::ty::{
     self, BottomUpFolder, OpaqueHiddenType, OpaqueTypeKey, Ty, TyCtxt, TypeFoldable,
     TypeVisitableExt,
 };
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
 
 use super::{DefineOpaqueTypes, RegionVariableOrigin};

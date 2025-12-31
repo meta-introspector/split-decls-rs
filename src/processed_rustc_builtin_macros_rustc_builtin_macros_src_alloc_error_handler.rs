@@ -1,8 +1,8 @@
-use crate::rustc_ast::{
+use crate::rustc_complete::{
     self as ast, Fn, FnHeader, FnSig, Generics, ItemKind, Safety, Stmt, StmtKind, TyKind,
 };
 use rustc_expand::base::{Annotatable, ExtCtxt};
-use crate::rustc_span::{Ident, Span, kw, sym};
+use crate::rustc_complete::{Ident, Span, kw, sym};
 use thin_vec::{ThinVec, thin_vec};
 
 use crate::errors;

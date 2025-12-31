@@ -2,14 +2,14 @@
 // pieces of AST and HIR. The resulting numbers are good approximations but not
 // completely accurate (some things might be counted twice, others missed).
 
-use crate::rustc_ast::visit::BoundKind;
-use crate::rustc_ast::{self as ast, NodeId, visit as ast_visit};
+use crate::rustc_complete::visit::BoundKind;
+use crate::rustc_complete::{self as ast, NodeId, visit as ast_visit};
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
 use crate::rustc_data_structures::thousands::usize_with_underscores;
-use crate::rustc_hir::{self as hir, AmbigArg, HirId, intravisit as hir_visit};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_span::Span;
-use crate::rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::{self as hir, AmbigArg, HirId, intravisit as hir_visit};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::LocalDefId;
 
 struct NodeStats {
     count: usize,
@@ -69,7 +69,7 @@ pub fn print_hir_stats(tcx: TyCtxt<'_>) {
 }
 
 pub fn print_ast_stats(tcx: TyCtxt<'_>, krate: &ast::Crate) {
-    use crate::rustc_ast::visit::Visitor;
+    use crate::rustc_complete::visit::Visitor;
 
     let mut collector =
         StatCollector { tcx: None, nodes: FxHashMap::default(), seen: FxHashSet::default() };

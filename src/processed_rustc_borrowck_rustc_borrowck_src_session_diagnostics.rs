@@ -1,8 +1,8 @@
-use rustc_errors::MultiSpan;
-use rustc_errors::codes::*;
+use crate::rustc_complete::MultiSpan;
+use crate::rustc_complete::codes::*;
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-use crate::rustc_middle::ty::{GenericArg, Ty};
-use crate::rustc_span::Span;
+use crate::rustc_complete::ty::{GenericArg, Ty};
+use crate::rustc_complete::Span;
 
 use crate::diagnostics::RegionName;
 

@@ -1,17 +1,17 @@
 use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_hir::def_id::LocalDefId;
-use rustc_infer::infer::SubregionOrigin;
-use rustc_infer::infer::canonical::QueryRegionConstraints;
-use rustc_infer::infer::outlives::env::RegionBoundPairs;
-use rustc_infer::infer::outlives::obligations::{TypeOutlives, TypeOutlivesDelegate};
-use rustc_infer::infer::region_constraints::{GenericKind, VerifyBound};
-use rustc_infer::traits::query::type_op::DeeplyNormalize;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_infer::infer::SubregionOrigin;
+use crate::rustc_infer::infer::canonical::QueryRegionConstraints;
+use crate::rustc_infer::infer::outlives::env::RegionBoundPairs;
+use crate::rustc_infer::infer::outlives::obligations::{TypeOutlives, TypeOutlivesDelegate};
+use crate::rustc_infer::infer::region_constraints::{GenericKind, VerifyBound};
+use crate::rustc_infer::traits::query::type_op::DeeplyNormalize;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{
     self, GenericArgKind, Ty, TyCtxt, TypeFoldable, TypeVisitableExt, elaborate, fold_regions,
 };
-use crate::rustc_span::Span;
-use rustc_trait_selection::traits::query::type_op::{TypeOp, TypeOpOutput};
+use crate::rustc_complete::Span;
+use crate::rustc_trait_selection::traits::query::type_op::{TypeOp, TypeOpOutput};
 use tracing::{debug, instrument};
 
 use crate::constraints::OutlivesConstraint;

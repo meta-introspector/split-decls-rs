@@ -68,27 +68,27 @@ use std::num::NonZero;
 pub use check::{check_abi, check_custom_abi};
 use rustc_abi::VariantIdx;
 use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
-use rustc_errors::{Diag, ErrorGuaranteed, pluralize, struct_span_code_err};
-use crate::rustc_hir::LangItem;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::intravisit::Visitor;
+use crate::rustc_complete::{Diag, ErrorGuaranteed, pluralize, struct_span_code_err};
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::intravisit::Visitor;
 use rustc_index::bit_set::DenseBitSet;
-use rustc_infer::infer::{self, TyCtxtInferExt as _};
-use rustc_infer::traits::ObligationCause;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::error::{ExpectedFound, TypeError};
-use crate::rustc_middle::ty::print::with_types_for_signature;
-use crate::rustc_middle::ty::{
+use crate::rustc_infer::infer::{self, TyCtxtInferExt as _};
+use crate::rustc_infer::traits::ObligationCause;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::ty::print::with_types_for_signature;
+use crate::rustc_complete::ty::{
     self, GenericArgs, GenericArgsRef, GenericParamDefKind, Ty, TyCtxt, TypingMode,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::def_id::CRATE_DEF_ID;
-use crate::rustc_span::{BytePos, DUMMY_SP, Ident, Span, Symbol, kw, sym};
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::error_reporting::infer::ObligationCauseExt as _;
-use rustc_trait_selection::error_reporting::traits::suggestions::ReturnsVisitor;
-use rustc_trait_selection::traits::ObligationCtxt;
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::def_id::CRATE_DEF_ID;
+use crate::rustc_complete::{BytePos, DUMMY_SP, Ident, Span, Symbol, kw, sym};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::error_reporting::infer::ObligationCauseExt as _;
+use crate::rustc_trait_selection::error_reporting::traits::suggestions::ReturnsVisitor;
+use crate::rustc_trait_selection::traits::ObligationCtxt;
 use tracing::debug;
 
 use self::compare_impl_item::collect_return_position_impl_trait_in_trait_tys;

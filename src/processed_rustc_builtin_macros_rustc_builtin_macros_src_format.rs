@@ -1,15 +1,15 @@
 use std::ops::Range;
 
 use parse::Position::ArgumentNamed;
-use crate::rustc_ast::tokenstream::TokenStream;
-use crate::rustc_ast::{
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{
     Expr, ExprKind, FormatAlignment, FormatArgPosition, FormatArgPositionKind, FormatArgs,
     FormatArgsPiece, FormatArgument, FormatArgumentKind, FormatArguments, FormatCount,
     FormatDebugHex, FormatOptions, FormatPlaceholder, FormatSign, FormatTrait, Recovered, StmtKind,
     token,
 };
 use crate::rustc_data_structures::fx::FxHashSet;
-use rustc_errors::{
+use crate::rustc_complete::{
     Applicability, BufferedEarlyLint, Diag, MultiSpan, PResult, SingleLabelManySpans, listify,
     pluralize,
 };
@@ -18,7 +18,7 @@ use rustc_lint_defs::builtin::NAMED_ARGUMENTS_USED_POSITIONALLY;
 use rustc_lint_defs::{BuiltinLintDiag, LintId};
 use rustc_parse::exp;
 use rustc_parse_format as parse;
-use crate::rustc_span::{BytePos, ErrorGuaranteed, Ident, InnerSpan, Span, Symbol};
+use crate::rustc_complete::{BytePos, ErrorGuaranteed, Ident, InnerSpan, Span, Symbol};
 
 use crate::errors;
 use crate::util::{ExprToSpannedString, expr_to_spanned_string};

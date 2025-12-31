@@ -1,13 +1,13 @@
 
-use crate::rustc_ast::token::Delimiter;
-use crate::rustc_ast::tokenstream::{DelimSpan, TokenStream};
-use crate::rustc_ast::{DelimArgs, Expr, ExprKind, MacCall, Path, PathSegment, UnOp, token};
+use crate::rustc_complete::token::Delimiter;
+use crate::rustc_complete::tokenstream::{DelimSpan, TokenStream};
+use crate::rustc_complete::{DelimArgs, Expr, ExprKind, MacCall, Path, PathSegment, UnOp, token};
 use rustc_ast_pretty::pprust;
-use rustc_errors::PResult;
+use crate::rustc_complete::PResult;
 use rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
 use rustc_parse::exp;
 use rustc_parse::parser::Parser;
-use crate::rustc_span::{DUMMY_SP, Ident, Span, Symbol, sym};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, sym};
 use thin_vec::thin_vec;
 
 use crate::edition_panic::use_panic_2021;

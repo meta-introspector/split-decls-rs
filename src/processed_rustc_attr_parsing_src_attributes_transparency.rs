@@ -1,4 +1,4 @@
-use crate::rustc_span::hygiene::Transparency;
+use crate::rustc_complete::hygiene::Transparency;
 
 use super::prelude::*;
 

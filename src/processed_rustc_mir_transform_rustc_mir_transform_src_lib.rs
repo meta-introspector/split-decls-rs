@@ -19,20 +19,20 @@ use rustc_const_eval::util;
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_data_structures::steal::Steal;
 use rustc_hir as hir;
-use crate::rustc_hir::def::{CtorKind, DefKind};
-use crate::rustc_hir::def_id::LocalDefId;
+use crate::rustc_complete::def::{CtorKind, DefKind};
+use crate::rustc_complete::def_id::LocalDefId;
 use rustc_index::IndexVec;
-use crate::rustc_middle::mir::{
+use crate::rustc_complete::mir::{
     AnalysisPhase, Body, CallSource, ClearCrossCrate, ConstOperand, ConstQualifs, LocalDecl,
     MirPhase, Operand, Place, ProjectionElem, Promoted, RuntimePhase, Rvalue, START_BLOCK,
     SourceInfo, Statement, StatementKind, TerminatorKind,
 };
-use crate::rustc_middle::ty::{self, TyCtxt, TypeVisitableExt};
-use crate::rustc_middle::util::Providers;
-use crate::rustc_middle::{bug, query, span_bug};
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::util::Providers;
+use crate::rustc_complete::{bug, query, span_bug};
 use rustc_mir_build::builder::build_mir;
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{DUMMY_SP, sym};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{DUMMY_SP, sym};
 use tracing::debug;
 
 #[macro_use]

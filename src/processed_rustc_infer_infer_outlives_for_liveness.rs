@@ -1,4 +1,4 @@
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor,
 };
 

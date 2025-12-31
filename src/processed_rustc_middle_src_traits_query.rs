@@ -6,7 +6,7 @@
 // `rustc_traits`.
 
 use rustc_macros::{HashStable, TypeFoldable, TypeVisitable};
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::error::DropCheckOverflow;
 use crate::infer::canonical::{Canonical, CanonicalQueryInput, QueryResponse};

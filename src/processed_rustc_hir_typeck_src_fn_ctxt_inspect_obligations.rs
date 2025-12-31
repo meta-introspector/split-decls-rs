@@ -1,11 +1,11 @@
 // A utility module to inspect currently ambiguous obligations in the current context.
 
-use rustc_infer::traits::{self, ObligationCause, PredicateObligations};
-use crate::rustc_middle::traits::solve::GoalSource;
-use crate::rustc_middle::ty::{self, Ty, TypeVisitableExt};
-use crate::rustc_span::Span;
-use rustc_trait_selection::solve::Certainty;
-use rustc_trait_selection::solve::inspect::{
+use crate::rustc_infer::traits::{self, ObligationCause, PredicateObligations};
+use crate::rustc_complete::traits::solve::GoalSource;
+use crate::rustc_complete::ty::{self, Ty, TypeVisitableExt};
+use crate::rustc_complete::Span;
+use crate::rustc_trait_selection::solve::Certainty;
+use crate::rustc_trait_selection::solve::inspect::{
     InspectConfig, InspectGoal, ProofTreeInferCtxtExt, ProofTreeVisitor,
 };
 use tracing::{debug, instrument, trace};

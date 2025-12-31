@@ -14,11 +14,11 @@ use rustc_codegen_ssa::traits::*;
 use rustc_codegen_ssa::{ModuleCodegen, ModuleKind, looks_like_rust_object_file};
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::memmap::Mmap;
-use rustc_errors::DiagCtxtHandle;
-use crate::rustc_hir::attrs::SanitizerSet;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::dep_graph::WorkProduct;
-use crate::rustc_session::config::{self, Lto};
+use crate::rustc_complete::DiagCtxtHandle;
+use crate::rustc_complete::attrs::SanitizerSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::dep_graph::WorkProduct;
+use crate::rustc_complete::config::{self, Lto};
 use tracing::{debug, info};
 
 use crate::back::write::{

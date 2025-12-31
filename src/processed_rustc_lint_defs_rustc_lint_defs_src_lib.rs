@@ -1,7 +1,7 @@
 use std::borrow::Cow;
 
-use crate::rustc_ast::AttrId;
-use crate::rustc_ast::attr::AttributeExt;
+use crate::rustc_complete::AttrId;
+use crate::rustc_complete::attr::AttributeExt;
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_data_structures::stable_hasher::{
     HashStable, StableCompare, StableHasher, ToStableHashKey,
@@ -9,9 +9,9 @@ use crate::rustc_data_structures::stable_hasher::{
 use rustc_error_messages::{DiagArgValue, DiagMessage, IntoDiagArg, MultiSpan};
 use rustc_hir_id::{HashStableContext, HirId, ItemLocalId};
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
-use crate::rustc_span::def_id::DefPathHash;
-pub use crate::rustc_span::edition::Edition;
-use crate::rustc_span::{Ident, MacroRulesNormalizedIdent, Span, Symbol, sym};
+use crate::rustc_complete::def_id::DefPathHash;
+pub use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{Ident, MacroRulesNormalizedIdent, Span, Symbol, sym};
 use serde::{Deserialize, Serialize};
 
 pub use self::Level::*;

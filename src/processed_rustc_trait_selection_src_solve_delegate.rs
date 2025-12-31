@@ -1,20 +1,20 @@
 use std::ops::Deref;
 
 use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_hir::LangItem;
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, DefId};
-use rustc_infer::infer::canonical::query_response::make_query_region_constraints;
-use rustc_infer::infer::canonical::{
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
+use crate::rustc_infer::infer::canonical::query_response::make_query_region_constraints;
+use crate::rustc_infer::infer::canonical::{
     Canonical, CanonicalExt as _, CanonicalQueryInput, CanonicalVarKind, CanonicalVarValues,
 };
-use rustc_infer::infer::{InferCtxt, RegionVariableOrigin, SubregionOrigin, TyCtxtInferExt};
-use rustc_infer::traits::solve::Goal;
-use crate::rustc_middle::traits::query::NoSolution;
-use crate::rustc_middle::traits::solve::Certainty;
-use crate::rustc_middle::ty::{
+use crate::rustc_infer::infer::{InferCtxt, RegionVariableOrigin, SubregionOrigin, TyCtxtInferExt};
+use crate::rustc_infer::traits::solve::Goal;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::traits::solve::Certainty;
+use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeFlags, TypeFoldable, TypeVisitableExt as _, TypingMode,
 };
-use crate::rustc_span::{DUMMY_SP, ErrorGuaranteed, Span};
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
 
 use crate::traits::{EvaluateConstErr, ObligationCause, sizedness_fast_path, specialization_graph};
 

@@ -1,6 +1,6 @@
-use crate::rustc_ast::util::classify;
-use crate::rustc_ast::util::parser::{self, ExprPrecedence};
-use crate::rustc_ast::{Expr, ExprKind, YieldKind};
+use crate::rustc_complete::util::classify;
+use crate::rustc_complete::util::parser::{self, ExprPrecedence};
+use crate::rustc_complete::{Expr, ExprKind, YieldKind};
 
 // The default amount of fixing is minimal fixing, so all fixups are set to `false` by `Default`.
 // Fixups should be turned on in a targeted fashion where needed.

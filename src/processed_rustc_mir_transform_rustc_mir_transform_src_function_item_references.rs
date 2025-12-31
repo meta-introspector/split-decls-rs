@@ -1,12 +1,12 @@
 use itertools::Itertools;
 use rustc_abi::ExternAbi;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::mir::visit::Visitor;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, EarlyBinder, GenericArgsRef, Ty, TyCtxt};
-use crate::rustc_session::lint::builtin::FUNCTION_ITEM_REFERENCES;
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{Span, sym};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, EarlyBinder, GenericArgsRef, Ty, TyCtxt};
+use crate::rustc_complete::lint::builtin::FUNCTION_ITEM_REFERENCES;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Span, sym};
 
 use crate::errors;
 

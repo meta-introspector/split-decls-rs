@@ -1,11 +1,11 @@
 // See the docs for [`RenameReturnPlace`].
 
-use crate::rustc_hir::Mutability;
+use crate::rustc_complete::Mutability;
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::visit::{MutVisitor, NonUseContext, PlaceContext, Visitor};
-use crate::rustc_middle::mir::{self, BasicBlock, Local, Location};
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::visit::{MutVisitor, NonUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::mir::{self, BasicBlock, Local, Location};
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::{debug, trace};
 
 /// This pass looks for MIR that always copies the same local into the return place and eliminates

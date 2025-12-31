@@ -1,7 +1,7 @@
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_middle::ty::{self, CratePredicatesMap, GenericArgKind, TyCtxt, Upcast};
-use crate::rustc_span::Span;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::ty::{self, CratePredicatesMap, GenericArgKind, TyCtxt, Upcast};
+use crate::rustc_complete::Span;
 
 
 pub(super) fn inferred_outlives_of(

@@ -7,9 +7,9 @@ use std::fmt::{self, Debug};
 use std::marker::PhantomData;
 
 use rustc_abi::TyAndLayout;
-use crate::rustc_hir::def::Namespace;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_span::source_map::Spanned;
+use crate::rustc_complete::def::Namespace;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::source_map::Spanned;
 use rustc_type_ir::{ConstKind, TypeFolder, VisitorResult, try_visit};
 
 use super::{GenericArg, GenericArgKind, Pattern, Region};

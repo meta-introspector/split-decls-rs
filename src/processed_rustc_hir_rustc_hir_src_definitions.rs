@@ -12,7 +12,7 @@ use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hashes::Hash64;
 use rustc_index::IndexVec;
 use rustc_macros::{Decodable, Encodable};
-use crate::rustc_span::{Symbol, kw, sym};
+use crate::rustc_complete::{Symbol, kw, sym};
 use tracing::{debug, instrument};
 
 pub use crate::def_id::DefPathHash;

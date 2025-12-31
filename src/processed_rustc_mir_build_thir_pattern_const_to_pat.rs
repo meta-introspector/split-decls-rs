@@ -3,23 +3,23 @@ use core::ops::ControlFlow;
 use rustc_abi::{FieldIdx, VariantIdx};
 use rustc_apfloat::Float;
 use crate::rustc_data_structures::fx::FxHashSet;
-use rustc_errors::Diag;
+use crate::rustc_complete::Diag;
 use rustc_hir as hir;
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::find_attr;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::find_attr;
 use rustc_index::Idx;
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_infer::traits::Obligation;
-use crate::rustc_middle::mir::interpret::ErrorHandled;
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::thir::{FieldPat, Pat, PatKind};
-use crate::rustc_middle::ty::{
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::traits::Obligation;
+use crate::rustc_complete::mir::interpret::ErrorHandled;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::thir::{FieldPat, Pat, PatKind};
+use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitableExt, TypeVisitor, ValTree,
 };
-use crate::rustc_span::def_id::DefId;
-use crate::rustc_span::{DUMMY_SP, Span};
-use rustc_trait_selection::traits::ObligationCause;
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{DUMMY_SP, Span};
+use crate::rustc_trait_selection::traits::ObligationCause;
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
 use tracing::{debug, instrument, trace};
 
 use super::PatCtxt;

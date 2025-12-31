@@ -6,14 +6,14 @@ use std::io::Error;
 use std::path::{Path, PathBuf};
 use std::process::ExitStatus;
 
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Diag, DiagArgValue, DiagCtxtHandle, Diagnostic, EmissionGuarantee, IntoDiagArg, Level,
 };
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-use crate::rustc_middle::ty::layout::LayoutError;
-use crate::rustc_middle::ty::{FloatTy, Ty};
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::ty::layout::LayoutError;
+use crate::rustc_complete::ty::{FloatTy, Ty};
+use crate::rustc_complete::{Span, Symbol};
 
 use crate::assert_module_sources::CguReuse;
 use crate::back::command::Command;
@@ -227,7 +227,7 @@ impl<'a> CopyPath<'a> {
 struct DebugArgPath<'a>(pub &'a Path);
 
 impl IntoDiagArg for DebugArgPath<'_> {
-    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         DiagArgValue::Str(Cow::Owned(format!("{:?}", self.0)))
     }
 }
@@ -553,7 +553,7 @@ pub(crate) struct LinkExeUnexpectedError;
 pub(crate) struct LinkExeStatusStackBufferOverrun;
 
 impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for LinkExeStatusStackBufferOverrun {
-    fn into_diag(self, dcx: rustc_errors::DiagCtxtHandle<'a>, level: Level) -> Diag<'a, G> {
+    fn into_diag(self, dcx: crate::rustc_errors::DiagCtxtHandle<'a>, level: Level) -> Diag<'a, G> {
         let mut diag =
             Diag::new(dcx, level, fluent::codegen_ssa_link_exe_status_stack_buffer_overrun);
         diag.note(fluent::codegen_ssa_abort_note);

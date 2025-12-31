@@ -56,7 +56,7 @@ use rustc_index::IndexVec;
 use rustc_serialize::opaque::mem_encoder::MemEncoder;
 use rustc_serialize::opaque::{FileEncodeResult, FileEncoder, IntEncodedWithFixedSize, MemDecoder};
 use rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
-use crate::rustc_session::Session;
+use crate::rustc_complete::Session;
 use tracing::{debug, instrument};
 
 use super::graph::{CurrentDepGraph, DepNodeColor, DepNodeColorMap};

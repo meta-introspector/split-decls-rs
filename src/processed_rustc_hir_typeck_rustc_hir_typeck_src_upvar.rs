@@ -35,22 +35,22 @@ use std::iter;
 use rustc_abi::FIRST_VARIANT;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 use crate::rustc_data_structures::unord::{ExtendUnord, UnordSet};
-use rustc_errors::{Applicability, MultiSpan};
+use crate::rustc_complete::{Applicability, MultiSpan};
 use rustc_hir as hir;
-use crate::rustc_hir::HirId;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_hir::intravisit::{self, Visitor};
-use crate::rustc_middle::hir::place::{Place, PlaceBase, PlaceWithHirId, Projection, ProjectionKind};
-use crate::rustc_middle::mir::FakeReadCause;
-use crate::rustc_middle::traits::ObligationCauseCode;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::HirId;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::intravisit::{self, Visitor};
+use crate::rustc_complete::hir::place::{Place, PlaceBase, PlaceWithHirId, Projection, ProjectionKind};
+use crate::rustc_complete::mir::FakeReadCause;
+use crate::rustc_complete::traits::ObligationCauseCode;
+use crate::rustc_complete::ty::{
     self, BorrowKind, ClosureSizeProfileData, Ty, TyCtxt, TypeVisitableExt as _, TypeckResults,
     UpvarArgs, UpvarCapture,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::lint;
-use crate::rustc_span::{BytePos, Pos, Span, Symbol, sym};
-use rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::{BytePos, Pos, Span, Symbol, sym};
+use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::{debug, instrument};
 
 use super::FnCtxt;

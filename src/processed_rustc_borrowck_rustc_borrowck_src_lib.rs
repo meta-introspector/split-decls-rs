@@ -28,30 +28,30 @@ use rustc_abi::FieldIdx;
 use crate::rustc_data_structures::frozen::Frozen;
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 use crate::rustc_data_structures::graph::dominators::Dominators;
-use rustc_errors::LintDiagnostic;
+use crate::rustc_complete::LintDiagnostic;
 use rustc_hir as hir;
-use crate::rustc_hir::CRATE_HIR_ID;
-use crate::rustc_hir::def_id::LocalDefId;
+use crate::rustc_complete::CRATE_HIR_ID;
+use crate::rustc_complete::def_id::LocalDefId;
 use rustc_index::bit_set::MixedBitSet;
 use rustc_index::{IndexSlice, IndexVec};
-use rustc_infer::infer::outlives::env::RegionBoundPairs;
-use rustc_infer::infer::{
+use crate::rustc_infer::infer::outlives::env::RegionBoundPairs;
+use crate::rustc_infer::infer::{
     InferCtxt, NllRegionVariableOrigin, RegionVariableOrigin, TyCtxtInferExt,
 };
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{
     self, ParamEnv, RegionVid, Ty, TyCtxt, TypeFoldable, TypeVisitable, TypingMode, fold_regions,
 };
-use crate::rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 use rustc_mir_dataflow::impls::{EverInitializedPlaces, MaybeUninitializedPlaces};
 use rustc_mir_dataflow::move_paths::{
     InitIndex, InitLocation, LookupResult, MoveData, MovePathIndex,
 };
 use rustc_mir_dataflow::points::DenseLocationMap;
 use rustc_mir_dataflow::{Analysis, Results, ResultsVisitor, visit_results};
-use crate::rustc_session::lint::builtin::{TAIL_EXPR_DROP_ORDER, UNUSED_MUT};
-use crate::rustc_span::{ErrorGuaranteed, Span, Symbol};
+use crate::rustc_complete::lint::builtin::{TAIL_EXPR_DROP_ORDER, UNUSED_MUT};
+use crate::rustc_complete::{ErrorGuaranteed, Span, Symbol};
 use smallvec::SmallVec;
 use tracing::{debug, instrument};
 
@@ -439,7 +439,7 @@ fn borrowck_check_region_constraints<'tcx>(
     // While promoteds should mostly be correct by construction, we need to check them for
     // invalid moves to detect moving out of arrays:`struct S; fn main() { &([S][0]); }`.
     for promoted_body in &promoted {
-        use crate::rustc_middle::mir::visit::Visitor;
+        use crate::rustc_complete::mir::visit::Visitor;
         // This assumes that we won't use some of the fields of the `promoted_mbcx`
         // when detecting and reporting move errors. While it would be nice to move
         // this check out of `MirBorrowckCtxt`, actually doing so is far from trivial.

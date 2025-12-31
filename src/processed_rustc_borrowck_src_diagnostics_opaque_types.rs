@@ -6,16 +6,16 @@ use std::ops::ControlFlow;
 use either::Either;
 use itertools::Itertools as _;
 use crate::rustc_data_structures::fx::FxIndexSet;
-use rustc_errors::{Diag, Subdiagnostic};
+use crate::rustc_complete::{Diag, Subdiagnostic};
 use rustc_hir as hir;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::mir::{self, ConstraintCategory, Location};
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::mir::{self, ConstraintCategory, Location};
+use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor,
 };
-use crate::rustc_span::Span;
-use rustc_trait_selection::error_reporting::infer::region::unexpected_hidden_region_diagnostic;
-use rustc_trait_selection::errors::impl_trait_overcapture_suggestion;
+use crate::rustc_complete::Span;
+use crate::rustc_trait_selection::error_reporting::infer::region::unexpected_hidden_region_diagnostic;
+use crate::rustc_trait_selection::errors::impl_trait_overcapture_suggestion;
 
 use crate::MirBorrowckCtxt;
 use crate::borrow_set::BorrowData;

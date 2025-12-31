@@ -4,10 +4,10 @@
 // def-path. This is used for unit testing the code that generates
 // paths etc in all kinds of annoying scenarios.
 
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_middle::ty::print::with_no_trimmed_paths;
-use crate::rustc_middle::ty::{GenericArgs, Instance, TyCtxt};
-use crate::rustc_span::{Symbol, sym};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{GenericArgs, Instance, TyCtxt};
+use crate::rustc_complete::{Symbol, sym};
 
 use crate::errors::{Kind, TestOutput};
 

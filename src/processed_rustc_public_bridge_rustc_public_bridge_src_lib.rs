@@ -31,11 +31,11 @@ use std::ops::Index;
 use bridge::*;
 use context::CompilerCtxt;
 use crate::rustc_data_structures::fx::{self, FxIndexMap};
-use crate::rustc_middle::mir;
-use crate::rustc_middle::mir::interpret::AllocId;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_span::Span;
-use crate::rustc_span::def_id::{CrateNum, DefId, LOCAL_CRATE};
+use crate::rustc_complete::mir;
+use crate::rustc_complete::mir::interpret::AllocId;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::{CrateNum, DefId, LOCAL_CRATE};
 
 
 #[deprecated(note = "please use `rustc_public::rustc_internal` instead")]

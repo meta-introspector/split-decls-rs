@@ -1,10 +1,10 @@
 use rustc_hir as hir;
-use crate::rustc_hir::intravisit::{self, Visitor};
-use crate::rustc_hir::{HirId, PatKind};
-use rustc_infer::traits::ObligationCauseCode;
-use crate::rustc_middle::ty::{self, Ty};
-use crate::rustc_span::Span;
-use crate::rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::intravisit::{self, Visitor};
+use crate::rustc_complete::{HirId, PatKind};
+use crate::rustc_infer::traits::ObligationCauseCode;
+use crate::rustc_complete::ty::{self, Ty};
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::LocalDefId;
 use tracing::debug;
 
 use crate::FnCtxt;

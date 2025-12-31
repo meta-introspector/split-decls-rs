@@ -1,10 +1,10 @@
 use rustc_codegen_ssa::traits::{BaseTypeCodegenMethods, ConstCodegenMethods};
 use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_middle::mir;
-use crate::rustc_middle::mir::mono::MonoItemPartitions;
-use crate::rustc_middle::ty::{self, TyCtxt};
-use crate::rustc_span::def_id::DefIdSet;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::mir;
+use crate::rustc_complete::mir::mono::MonoItemPartitions;
+use crate::rustc_complete::ty::{self, TyCtxt};
+use crate::rustc_complete::def_id::DefIdSet;
 
 use crate::common::CodegenCx;
 use crate::coverageinfo::mapgen::covfun::{CovfunRecord, prepare_covfun_record};

@@ -1,7 +1,7 @@
 // LLVM diagnostic reports.
 
 use libc::c_uint;
-use crate::rustc_span::InnerSpan;
+use crate::rustc_complete::InnerSpan;
 
 pub(crate) use self::Diagnostic::*;
 use self::OptimizationDiagnosticKind::*;

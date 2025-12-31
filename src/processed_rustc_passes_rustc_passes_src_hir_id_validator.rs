@@ -1,10 +1,10 @@
 use crate::rustc_data_structures::sync::Lock;
 use rustc_hir as hir;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_hir::{HirId, ItemLocalId, intravisit};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{HirId, ItemLocalId, intravisit};
 use rustc_index::bit_set::GrowableBitSet;
-use crate::rustc_middle::hir::nested_filter;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::ty::TyCtxt;
 
 pub fn check_crate(tcx: TyCtxt<'_>) {
     let errors = Lock::new(Vec::new());

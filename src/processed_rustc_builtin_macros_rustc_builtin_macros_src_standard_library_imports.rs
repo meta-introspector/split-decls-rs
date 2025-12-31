@@ -1,11 +1,11 @@
-use crate::rustc_ast::{self as ast, attr};
+use crate::rustc_complete::{self as ast, attr};
 use rustc_expand::base::{ExtCtxt, ResolverExpand};
 use rustc_expand::expand::ExpansionConfig;
 use rustc_feature::Features;
-use crate::rustc_session::Session;
-use crate::rustc_span::edition::Edition::*;
-use crate::rustc_span::hygiene::AstPass;
-use crate::rustc_span::{DUMMY_SP, Ident, Symbol, kw, sym};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::edition::Edition::*;
+use crate::rustc_complete::hygiene::AstPass;
+use crate::rustc_complete::{DUMMY_SP, Ident, Symbol, kw, sym};
 use thin_vec::thin_vec;
 
 pub fn inject(

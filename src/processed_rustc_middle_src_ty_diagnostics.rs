@@ -4,13 +4,13 @@ use std::fmt::Write;
 use std::ops::ControlFlow;
 
 use crate::rustc_data_structures::fx::FxIndexMap;
-use rustc_errors::{
+use crate::rustc_complete::{
     Applicability, Diag, DiagArgValue, IntoDiagArg, into_diag_arg_using_display, listify, pluralize,
 };
-use crate::rustc_hir::def::{DefKind, Namespace};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::{self as hir, AmbigArg, LangItem, PredicateOrigin, WherePredicateKind};
-use crate::rustc_span::{BytePos, Span};
+use crate::rustc_complete::def::{DefKind, Namespace};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, AmbigArg, LangItem, PredicateOrigin, WherePredicateKind};
+use crate::rustc_complete::{BytePos, Span};
 use rustc_type_ir::TyKind::*;
 
 use crate::ty::{
@@ -20,7 +20,7 @@ use crate::ty::{
 };
 
 impl IntoDiagArg for Ty<'_> {
-    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         ty::tls::with(|tcx| {
             let ty = tcx.short_string(self, path);
             DiagArgValue::Str(std::borrow::Cow::Owned(ty))
@@ -29,7 +29,7 @@ impl IntoDiagArg for Ty<'_> {
 }
 
 impl IntoDiagArg for Instance<'_> {
-    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         ty::tls::with(|tcx| {
             let instance = tcx.short_string_namespace(self, path, Namespace::ValueNS);
             DiagArgValue::Str(std::borrow::Cow::Owned(instance))

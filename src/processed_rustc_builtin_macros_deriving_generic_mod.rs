@@ -180,17 +180,17 @@ use std::{iter, vec};
 
 pub(crate) use StaticFields::*;
 pub(crate) use SubstructureFields::*;
-use crate::rustc_ast::token::{IdentIsRaw, LitKind, Token, TokenKind};
-use crate::rustc_ast::tokenstream::{DelimSpan, Spacing, TokenTree};
-use crate::rustc_ast::{
+use crate::rustc_complete::token::{IdentIsRaw, LitKind, Token, TokenKind};
+use crate::rustc_complete::tokenstream::{DelimSpan, Spacing, TokenTree};
+use crate::rustc_complete::{
     self as ast, AnonConst, AttrArgs, BindingMode, ByRef, DelimArgs, EnumDef, Expr, GenericArg,
     GenericParamKind, Generics, Mutability, PatKind, Safety, VariantData,
 };
 use rustc_attr_parsing::AttributeParser;
 use rustc_expand::base::{Annotatable, ExtCtxt};
-use crate::rustc_hir::Attribute;
-use crate::rustc_hir::attrs::{AttributeKind, ReprPacked};
-use crate::rustc_span::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::Attribute;
+use crate::rustc_complete::attrs::{AttributeKind, ReprPacked};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
 use thin_vec::{ThinVec, thin_vec};
 use ty::{Bounds, Path, Ref, Self_, Ty};
 
@@ -404,7 +404,7 @@ fn find_type_parameters(
     ty_param_names: &[Symbol],
     cx: &ExtCtxt<'_>,
 ) -> Vec<TypeParameter> {
-    use crate::rustc_ast::visit;
+    use crate::rustc_complete::visit;
 
     struct Visitor<'a, 'b> {
         cx: &'a ExtCtxt<'b>,

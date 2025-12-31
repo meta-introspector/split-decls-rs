@@ -2302,7 +2302,7 @@ pub fn char_width(ch: char) -> usize {
     // just accept that sometimes the code line will be longer than desired.
     match ch {
         '\t' => 4,
-        // Keep the following list in sync with `rustc_errors::emitter::OUTPUT_REPLACEMENTS`. These
+        // Keep the following list in sync with `crate::rustc_errors::emitter::OUTPUT_REPLACEMENTS`. These
         // are control points that we replace before printing with a visible codepoint for the sake
         // of being able to point at them with underlines.
         '\u{0000}' | '\u{0001}' | '\u{0002}' | '\u{0003}' | '\u{0004}' | '\u{0005}'

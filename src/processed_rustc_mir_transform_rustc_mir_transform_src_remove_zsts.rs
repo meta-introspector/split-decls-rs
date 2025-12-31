@@ -1,8 +1,8 @@
 // Removes operations on ZST places, and convert ZST operands to constants.
 
-use crate::rustc_middle::mir::visit::*;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::mir::visit::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 
 pub(super) struct RemoveZsts;
 

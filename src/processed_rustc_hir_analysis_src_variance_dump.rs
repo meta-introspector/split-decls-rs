@@ -1,8 +1,8 @@
 use std::fmt::Write;
 
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, LocalDefId};
-use crate::rustc_middle::ty::{GenericArgs, TyCtxt};
-use crate::rustc_span::sym;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, LocalDefId};
+use crate::rustc_complete::ty::{GenericArgs, TyCtxt};
+use crate::rustc_complete::sym;
 
 fn format_variances(tcx: TyCtxt<'_>, def_id: LocalDefId) -> String {
     let variances = tcx.variances_of(def_id);

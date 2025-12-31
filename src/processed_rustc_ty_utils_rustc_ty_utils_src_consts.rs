@@ -1,17 +1,17 @@
 use std::iter;
 
 use rustc_abi::{FIRST_VARIANT, VariantIdx};
-use rustc_errors::ErrorGuaranteed;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_middle::mir::interpret::LitToConstInput;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::thir::visit;
-use crate::rustc_middle::thir::visit::Visitor;
-use crate::rustc_middle::ty::abstract_const::CastKind;
-use crate::rustc_middle::ty::{self, Expr, TyCtxt, TypeVisitableExt};
-use crate::rustc_middle::{bug, mir, thir};
-use crate::rustc_span::Span;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::mir::interpret::LitToConstInput;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::thir::visit;
+use crate::rustc_complete::thir::visit::Visitor;
+use crate::rustc_complete::ty::abstract_const::CastKind;
+use crate::rustc_complete::ty::{self, Expr, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::{bug, mir, thir};
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
 
 use crate::errors::{GenericConstantTooComplex, GenericConstantTooComplexSub};

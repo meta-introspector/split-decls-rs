@@ -2,8 +2,8 @@ use std::ops::ControlFlow;
 
 use rustc_abi::FieldIdx;
 use crate::rustc_data_structures::graph::dominators::Dominators;
-use crate::rustc_middle::mir::{BasicBlock, Body, Location, Place, PlaceRef, ProjectionElem};
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::{BasicBlock, Body, Location, Place, PlaceRef, ProjectionElem};
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::debug;
 
 use crate::borrow_set::{BorrowData, BorrowSet, TwoPhaseActivation};

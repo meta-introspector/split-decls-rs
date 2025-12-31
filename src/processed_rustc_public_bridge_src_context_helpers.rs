@@ -3,10 +3,10 @@
 // These traits abstract rustc's internal APIs, allowing rustc_public to maintain a stable
 // interface regardless of internal compiler changes.
 
-use crate::rustc_middle::mir::interpret::AllocRange;
-use crate::rustc_middle::ty;
-use crate::rustc_middle::ty::Ty;
-use crate::rustc_span::def_id::DefId;
+use crate::rustc_complete::mir::interpret::AllocRange;
+use crate::rustc_complete::ty;
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::def_id::DefId;
 
 pub trait TyHelpers<'tcx> {
     fn new_foreign(&self, def_id: DefId) -> Ty<'tcx>;

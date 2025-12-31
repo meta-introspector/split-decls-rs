@@ -17,7 +17,7 @@
 #[feature(rustdoc_internals)]
 // tidy-alphabetical-end
 
-use crate::rustc_middle::query::Providers;
+use crate::rustc_complete::query::Providers;
 
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }

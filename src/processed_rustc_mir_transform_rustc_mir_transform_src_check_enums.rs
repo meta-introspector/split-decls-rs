@@ -1,12 +1,12 @@
 use rustc_abi::{Scalar, Size, TagEncoding, Variants, WrappingRange};
-use crate::rustc_hir::LangItem;
+use crate::rustc_complete::LangItem;
 use rustc_index::IndexVec;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::visit::Visitor;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::ty::layout::PrimitiveExt;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, TypingEnv};
-use crate::rustc_session::Session;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::layout::PrimitiveExt;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypingEnv};
+use crate::rustc_complete::Session;
 use tracing::debug;
 
 /// This pass inserts checks for a valid enum discriminant where they are most

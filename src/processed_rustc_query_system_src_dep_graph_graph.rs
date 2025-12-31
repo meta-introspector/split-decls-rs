@@ -13,11 +13,11 @@ use crate::rustc_data_structures::sharded::{self, ShardedHashMap};
 use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 use crate::rustc_data_structures::sync::{AtomicU64, Lock, is_dyn_thread_safe};
 use crate::rustc_data_structures::unord::UnordMap;
-use rustc_errors::DiagInner;
+use crate::rustc_complete::DiagInner;
 use rustc_index::IndexVec;
 use rustc_macros::{Decodable, Encodable};
 use rustc_serialize::opaque::{FileEncodeResult, FileEncoder};
-use crate::rustc_session::Session;
+use crate::rustc_complete::Session;
 use tracing::{debug, instrument};
 #[cfg(debug_assertions)]
 use {super::debug::EdgeFilter, std::env};

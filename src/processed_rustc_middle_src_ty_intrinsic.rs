@@ -1,6 +1,6 @@
 use rustc_macros::{Decodable, Encodable, HashStable};
-use crate::rustc_span::Symbol;
-use crate::rustc_span::def_id::DefId;
+use crate::rustc_complete::Symbol;
+use crate::rustc_complete::def_id::DefId;
 
 use super::TyCtxt;
 

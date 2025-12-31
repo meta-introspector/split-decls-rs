@@ -1,5 +1,5 @@
-use crate::rustc_ast::token::TokenKind;
-use crate::rustc_span::symbol::{Symbol, kw, sym};
+use crate::rustc_complete::token::TokenKind;
+use crate::rustc_complete::symbol::{Symbol, kw, sym};
 
 /// Used in "expected"/"expected one of" error messages. Tokens are added here
 /// as necessary. Tokens with values (e.g. literals, identifiers) are

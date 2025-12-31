@@ -1,10 +1,10 @@
 use std::borrow::Cow;
 
-use crate::rustc_ast::*;
+use crate::rustc_complete::*;
 use crate::rustc_data_structures::fx::FxIndexMap;
 use rustc_hir as hir;
-use crate::rustc_session::config::FmtDebug;
-use crate::rustc_span::{DesugaringKind, Ident, Span, Symbol, sym};
+use crate::rustc_complete::config::FmtDebug;
+use crate::rustc_complete::{DesugaringKind, Ident, Span, Symbol, sym};
 
 use super::LoweringContext;
 

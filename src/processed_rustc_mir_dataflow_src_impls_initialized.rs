@@ -3,12 +3,12 @@ use std::assert_matches::assert_matches;
 use rustc_abi::VariantIdx;
 use rustc_index::Idx;
 use rustc_index::bit_set::{DenseBitSet, MixedBitSet};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::{
     self, Body, CallReturnPlaces, Location, SwitchTargetValue, TerminatorEdges,
 };
-use crate::rustc_middle::ty::util::Discr;
-use crate::rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::ty::util::Discr;
+use crate::rustc_complete::ty::{self, TyCtxt};
 use smallvec::SmallVec;
 use tracing::{debug, instrument};
 

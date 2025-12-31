@@ -1,12 +1,12 @@
 use std::iter;
 
 use rustc_abi::{BackendRepr, TagEncoding, Variants, WrappingRange};
-use crate::rustc_hir::{Expr, ExprKind, HirId, LangItem};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::layout::{LayoutOf, SizeSkeleton};
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, TypeVisitableExt};
-use crate::rustc_session::{declare_lint, declare_lint_pass, impl_lint_pass};
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Expr, ExprKind, HirId, LangItem};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::{LayoutOf, SizeSkeleton};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::{declare_lint, declare_lint_pass, impl_lint_pass};
+use crate::rustc_complete::{Span, Symbol, sym};
 use tracing::debug;
 use {rustc_ast as ast, rustc_hir as hir};
 

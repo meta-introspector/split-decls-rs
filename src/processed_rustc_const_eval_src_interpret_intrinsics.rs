@@ -6,12 +6,12 @@ use std::assert_matches::assert_matches;
 
 use rustc_abi::{FieldIdx, HasDataLayout, Size};
 use rustc_apfloat::ieee::{Double, Half, Quad, Single};
-use crate::rustc_middle::mir::interpret::{CTFE_ALLOC_SALT, read_target_uint, write_target_uint};
-use crate::rustc_middle::mir::{self, BinOp, ConstValue, NonDivergingIntrinsic};
-use crate::rustc_middle::ty::layout::TyAndLayout;
-use crate::rustc_middle::ty::{Ty, TyCtxt};
-use crate::rustc_middle::{bug, ty};
-use crate::rustc_span::{Symbol, sym};
+use crate::rustc_complete::mir::interpret::{CTFE_ALLOC_SALT, read_target_uint, write_target_uint};
+use crate::rustc_complete::mir::{self, BinOp, ConstValue, NonDivergingIntrinsic};
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::ty::{Ty, TyCtxt};
+use crate::rustc_complete::{bug, ty};
+use crate::rustc_complete::{Symbol, sym};
 use tracing::trace;
 
 use super::memory::MemoryKind;

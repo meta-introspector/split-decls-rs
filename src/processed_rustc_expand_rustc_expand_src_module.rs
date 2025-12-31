@@ -1,14 +1,14 @@
 use std::iter::once;
 use std::path::{self, Path, PathBuf};
 
-use crate::rustc_ast::{AttrVec, Attribute, Inline, Item, ModSpans};
+use crate::rustc_complete::{AttrVec, Attribute, Inline, Item, ModSpans};
 use rustc_attr_parsing::validate_attr;
-use rustc_errors::{Diag, ErrorGuaranteed};
+use crate::rustc_complete::{Diag, ErrorGuaranteed};
 use rustc_parse::lexer::StripTokens;
 use rustc_parse::{exp, new_parser_from_file, unwrap_or_emit_fatal};
-use crate::rustc_session::Session;
-use crate::rustc_session::parse::ParseSess;
-use crate::rustc_span::{Ident, Span, sym};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::{Ident, Span, sym};
 use thin_vec::ThinVec;
 
 use crate::base::ModuleData;

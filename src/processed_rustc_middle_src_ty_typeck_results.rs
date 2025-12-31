@@ -5,17 +5,17 @@ use std::iter;
 use rustc_abi::{FieldIdx, VariantIdx};
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 use crate::rustc_data_structures::unord::{ExtendUnord, UnordItems, UnordSet};
-use rustc_errors::ErrorGuaranteed;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_hir::def_id::{DefId, LocalDefId, LocalDefIdMap};
-use crate::rustc_hir::hir_id::OwnerId;
-use crate::rustc_hir::{
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::def_id::{DefId, LocalDefId, LocalDefIdMap};
+use crate::rustc_complete::hir_id::OwnerId;
+use crate::rustc_complete::{
     self as hir, BindingMode, ByRef, HirId, ItemLocalId, ItemLocalMap, ItemLocalSet, Mutability,
 };
 use rustc_index::IndexVec;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-use crate::rustc_session::Session;
-use crate::rustc_span::Span;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::Span;
 
 use super::RvalueScopes;
 use crate::hir::place::Place as HirPlace;

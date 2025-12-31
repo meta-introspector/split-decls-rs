@@ -63,8 +63,8 @@ use cranelift_codegen::entity::SecondaryMap;
 use cranelift_codegen::ir::Fact;
 use cranelift_codegen::ir::entities::AnyEntity;
 use cranelift_codegen::write::{FuncWriter, PlainWriter};
-use crate::rustc_middle::ty::print::with_no_trimmed_paths;
-use crate::rustc_session::config::{OutputFilenames, OutputType};
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::config::{OutputFilenames, OutputType};
 use rustc_target::callconv::FnAbi;
 
 use crate::prelude::*;

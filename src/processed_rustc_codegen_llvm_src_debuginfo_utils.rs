@@ -1,8 +1,8 @@
 // Utility Functions.
 
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_middle::ty::layout::{HasTypingEnv, LayoutOf};
-use crate::rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::ty::layout::{HasTypingEnv, LayoutOf};
+use crate::rustc_complete::ty::{self, Ty};
 use tracing::trace;
 
 use super::CodegenUnitDebugContext;

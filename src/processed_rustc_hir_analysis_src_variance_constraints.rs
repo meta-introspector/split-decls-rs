@@ -5,9 +5,9 @@
 
 use hir::def_id::{DefId, LocalDefId};
 use rustc_hir as hir;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_middle::ty::{self, GenericArgKind, GenericArgsRef, Ty, TyCtxt};
-use crate::rustc_middle::{bug, span_bug};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::ty::{self, GenericArgKind, GenericArgsRef, Ty, TyCtxt};
+use crate::rustc_complete::{bug, span_bug};
 use tracing::{debug, instrument};
 
 use super::terms::VarianceTerm::*;

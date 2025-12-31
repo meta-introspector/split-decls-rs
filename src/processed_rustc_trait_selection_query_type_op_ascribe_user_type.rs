@@ -1,10 +1,10 @@
-use crate::rustc_hir::def_id::{CRATE_DEF_ID, DefId};
-use rustc_infer::traits::Obligation;
-use crate::rustc_middle::traits::query::NoSolution;
-pub use crate::rustc_middle::traits::query::type_op::AscribeUserType;
-use crate::rustc_middle::traits::{ObligationCause, ObligationCauseCode};
-use crate::rustc_middle::ty::{self, ParamEnvAnd, Ty, TyCtxt, UserArgs, UserSelfTy, UserTypeKind};
-use crate::rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
+use crate::rustc_infer::traits::Obligation;
+use crate::rustc_complete::traits::query::NoSolution;
+pub use crate::rustc_complete::traits::query::type_op::AscribeUserType;
+use crate::rustc_complete::traits::{ObligationCause, ObligationCauseCode};
+use crate::rustc_complete::ty::{self, ParamEnvAnd, Ty, TyCtxt, UserArgs, UserSelfTy, UserTypeKind};
+use crate::rustc_complete::{DUMMY_SP, Span};
 use tracing::{debug, instrument};
 
 use crate::infer::canonical::{CanonicalQueryInput, CanonicalQueryResponse};

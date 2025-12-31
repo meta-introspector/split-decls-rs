@@ -6,11 +6,11 @@ use rustc_abi::{ArmCall, CanonAbi, InterruptKind, X86Call};
 use rustc_abi::{Reg, RegKind};
 use rustc_codegen_ssa::traits::{AbiBuilderMethods, BaseTypeCodegenMethods};
 use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::Ty;
-use crate::rustc_middle::ty::layout::LayoutOf;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::LayoutOf;
 #[cfg(feature = "master")]
-use crate::rustc_session::config;
+use crate::rustc_complete::config;
 use rustc_target::callconv::{ArgAttributes, CastTarget, FnAbi, PassMode};
 
 use crate::builder::Builder;

@@ -1,31 +1,31 @@
 use rustc_arena::{DroplessArena, TypedArena};
-use crate::rustc_ast::Mutability;
+use crate::rustc_complete::Mutability;
 use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, ErrorGuaranteed, MultiSpan, struct_span_code_err};
-use crate::rustc_hir::def::*;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_hir::{self as hir, BindingMode, ByRef, HirId, MatchSource};
-use rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, ErrorGuaranteed, MultiSpan, struct_span_code_err};
+use crate::rustc_complete::def::*;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{self as hir, BindingMode, ByRef, HirId, MatchSource};
+use crate::rustc_infer::infer::TyCtxtInferExt;
 use rustc_lint::Level;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::thir::visit::Visitor;
-use crate::rustc_middle::thir::*;
-use crate::rustc_middle::ty::print::with_no_trimmed_paths;
-use crate::rustc_middle::ty::{self, AdtDef, Ty, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::thir::visit::Visitor;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{self, AdtDef, Ty, TyCtxt};
 use rustc_pattern_analysis::errors::Uncovered;
 use rustc_pattern_analysis::rustc::{
     Constructor, DeconstructedPat, MatchArm, RedundancyExplanation, RevealedTy,
     RustcPatCtxt as PatCtxt, Usefulness, UsefulnessReport, WitnessPat,
 };
-use crate::rustc_session::lint::builtin::{
+use crate::rustc_complete::lint::builtin::{
     BINDINGS_WITH_VARIANT_NAME, IRREFUTABLE_LET_PATTERNS, UNREACHABLE_PATTERNS,
 };
-use crate::rustc_span::edit_distance::find_best_match_for_name;
-use crate::rustc_span::hygiene::DesugaringKind;
-use crate::rustc_span::{Ident, Span};
-use rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_complete::hygiene::DesugaringKind;
+use crate::rustc_complete::{Ident, Span};
+use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::instrument;
 
 use crate::errors::*;
@@ -1248,7 +1248,7 @@ fn report_non_exhaustive_match<'p, 'tcx>(
         sp,
         format!(
             "pattern{} {} not covered",
-            rustc_errors::pluralize!(witnesses.len()),
+            crate::rustc_errors::pluralize!(witnesses.len()),
             joined_patterns
         ),
     );

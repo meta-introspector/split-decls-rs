@@ -7,15 +7,15 @@
 use std::iter;
 
 use rustc_hir as hir;
-use crate::rustc_hir::LangItem;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{
     self, ExistentialPredicateStableCmpExt as _, Instance, InstanceKind, IntTy, List, TraitRef, Ty,
     TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt, UintTy,
 };
-use crate::rustc_span::def_id::DefId;
-use crate::rustc_span::{DUMMY_SP, sym};
-use rustc_trait_selection::traits;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{DUMMY_SP, sym};
+use crate::rustc_trait_selection::traits;
 use tracing::{debug, instrument};
 
 use crate::cfi::typeid::TypeIdOptions;

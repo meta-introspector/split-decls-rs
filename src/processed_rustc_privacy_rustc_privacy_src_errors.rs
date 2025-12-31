@@ -1,7 +1,7 @@
-use rustc_errors::codes::*;
-use rustc_errors::{DiagArgFromDisplay, MultiSpan};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{DiagArgFromDisplay, MultiSpan};
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 
 #[derive(Diagnostic)]
 #[diag(privacy_field_is_private, code = E0451)]

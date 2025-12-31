@@ -1,4 +1,4 @@
-use crate::rustc_span::{Symbol, sym};
+use crate::rustc_complete::{Symbol, sym};
 
 use crate::attr::{self, AttributeExt};
 

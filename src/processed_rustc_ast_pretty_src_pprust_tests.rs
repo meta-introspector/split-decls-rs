@@ -1,5 +1,5 @@
 use rustc_ast as ast;
-use crate::rustc_span::{DUMMY_SP, Ident, create_default_session_globals_then};
+use crate::rustc_complete::{DUMMY_SP, Ident, create_default_session_globals_then};
 use thin_vec::ThinVec;
 
 use super::*;

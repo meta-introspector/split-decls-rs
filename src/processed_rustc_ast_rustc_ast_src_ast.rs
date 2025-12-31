@@ -29,9 +29,9 @@ use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_data_structures::tagged_ptr::Tag;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic, Walkable};
-pub use crate::rustc_span::AttrId;
-use crate::rustc_span::source_map::{Spanned, respan};
-use crate::rustc_span::{ByteSymbol, DUMMY_SP, ErrorGuaranteed, Ident, Span, Symbol, kw, sym};
+pub use crate::rustc_complete::AttrId;
+use crate::rustc_complete::source_map::{Spanned, respan};
+use crate::rustc_complete::{ByteSymbol, DUMMY_SP, ErrorGuaranteed, Ident, Span, Symbol, kw, sym};
 use thin_vec::{ThinVec, thin_vec};
 
 pub use crate::format::*;

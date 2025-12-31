@@ -5,7 +5,7 @@ use rustc_codegen_ssa::back::link::ensure_removed;
 use rustc_codegen_ssa::back::write::{BitcodeSection, CodegenContext, EmitObj, ModuleConfig};
 use rustc_codegen_ssa::{CompiledModule, ModuleCodegen};
 use rustc_fs_util::link_or_copy;
-use crate::rustc_session::config::OutputType;
+use crate::rustc_complete::config::OutputType;
 use rustc_target::spec::SplitDebuginfo;
 
 use crate::base::add_pic_option;

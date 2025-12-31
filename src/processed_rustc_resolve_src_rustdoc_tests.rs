@@ -1,8 +1,8 @@
 use std::path::PathBuf;
 
-use crate::rustc_span::source_map::{FilePathMapping, SourceMap};
-use crate::rustc_span::symbol::sym;
-use crate::rustc_span::{BytePos, Span};
+use crate::rustc_complete::source_map::{FilePathMapping, SourceMap};
+use crate::rustc_complete::symbol::sym;
+use crate::rustc_complete::{BytePos, Span};
 
 use super::{DocFragment, DocFragmentKind, source_span_for_markdown_range_inner};
 

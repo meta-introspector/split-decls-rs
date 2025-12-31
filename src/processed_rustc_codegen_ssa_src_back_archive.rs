@@ -15,8 +15,8 @@ use crate::rustc_data_structures::fx::FxIndexSet;
 use crate::rustc_data_structures::memmap::Mmap;
 use rustc_fs_util::TempDirBuilder;
 use rustc_metadata::EncodedMetadata;
-use crate::rustc_session::Session;
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::Symbol;
 use tracing::trace;
 
 use super::metadata::{create_compressed_metadata_file, search_for_section};

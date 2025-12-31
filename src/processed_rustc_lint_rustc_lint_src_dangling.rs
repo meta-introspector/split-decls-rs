@@ -1,12 +1,12 @@
-use crate::rustc_ast::visit::{visit_opt, walk_list};
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::Res;
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_hir::intravisit::{FnKind, Visitor, walk_expr};
-use crate::rustc_hir::{Block, Body, Expr, ExprKind, FnDecl, FnRetTy, LangItem, TyKind, find_attr};
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_session::{declare_lint, impl_lint_pass};
-use crate::rustc_span::{Span, sym};
+use crate::rustc_complete::visit::{visit_opt, walk_list};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::Res;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::intravisit::{FnKind, Visitor, walk_expr};
+use crate::rustc_complete::{Block, Body, Expr, ExprKind, FnDecl, FnRetTy, LangItem, TyKind, find_attr};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::{declare_lint, impl_lint_pass};
+use crate::rustc_complete::{Span, sym};
 
 use crate::lints::{DanglingPointersFromLocals, DanglingPointersFromTemporaries};
 use crate::{LateContext, LateLintPass};

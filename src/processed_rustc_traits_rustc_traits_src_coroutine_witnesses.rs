@@ -1,10 +1,10 @@
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_infer::infer::canonical::query_response::make_query_region_constraints;
-use rustc_infer::infer::resolve::OpportunisticRegionResolver;
-use rustc_infer::traits::{Obligation, ObligationCause};
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, TypeFoldable, TypeVisitableExt, fold_regions};
-use crate::rustc_span::def_id::DefId;
-use rustc_trait_selection::traits::{ObligationCtxt, with_replaced_escaping_bound_vars};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::infer::canonical::query_response::make_query_region_constraints;
+use crate::rustc_infer::infer::resolve::OpportunisticRegionResolver;
+use crate::rustc_infer::traits::{Obligation, ObligationCause};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeFoldable, TypeVisitableExt, fold_regions};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_trait_selection::traits::{ObligationCtxt, with_replaced_escaping_bound_vars};
 
 /// Return the set of types that should be taken into account when checking
 /// trait bounds on a coroutine's internal state. This properly replaces

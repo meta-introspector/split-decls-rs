@@ -11,17 +11,17 @@
 
 use std::assert_matches::assert_matches;
 
-use rustc_infer::infer::InferCtxt;
-use rustc_infer::traits::Obligation;
+use crate::rustc_infer::infer::InferCtxt;
+use crate::rustc_infer::traits::Obligation;
 use rustc_macros::extension;
-use crate::rustc_middle::traits::ObligationCause;
-use crate::rustc_middle::traits::solve::{Certainty, Goal, GoalSource, NoSolution, QueryResult};
-use crate::rustc_middle::ty::{TyCtxt, VisitorResult, try_visit};
-use crate::rustc_middle::{bug, ty};
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::traits::solve::{Certainty, Goal, GoalSource, NoSolution, QueryResult};
+use crate::rustc_complete::ty::{TyCtxt, VisitorResult, try_visit};
+use crate::rustc_complete::{bug, ty};
 use rustc_next_trait_solver::resolve::eager_resolve_vars;
 use rustc_next_trait_solver::solve::inspect::{self, instantiate_canonical_state};
 use rustc_next_trait_solver::solve::{MaybeCause, SolverDelegateEvalExt as _};
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::instrument;
 
 use crate::solve::delegate::SolverDelegate;

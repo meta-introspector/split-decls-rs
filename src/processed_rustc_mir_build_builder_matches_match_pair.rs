@@ -1,9 +1,9 @@
 use std::sync::Arc;
 
-use crate::rustc_hir::ByRef;
-use crate::rustc_middle::mir::*;
-use crate::rustc_middle::thir::*;
-use crate::rustc_middle::ty::{self, Ty, TypeVisitableExt};
+use crate::rustc_complete::ByRef;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::{self, Ty, TypeVisitableExt};
 
 use crate::builder::Builder;
 use crate::builder::expr::as_place::{PlaceBase, PlaceBuilder};

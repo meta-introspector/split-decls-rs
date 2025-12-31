@@ -1,4 +1,4 @@
-use crate::rustc_hir::def_id::{DefId, LOCAL_CRATE};
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
 use rustc_macros::{Decodable, Encodable, HashStable, TyDecodable, TyEncodable};
 
 use crate::ty::{self, GenericArgsRef, Ty, TyCtxt};

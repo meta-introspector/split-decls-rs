@@ -4,9 +4,9 @@ use std::cmp::Ordering;
 
 use cranelift_module::*;
 use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use crate::rustc_middle::mir::interpret::{AllocId, GlobalAlloc, Scalar, read_target_uint};
-use crate::rustc_middle::ty::{ExistentialTraitRef, ScalarInt};
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::mir::interpret::{AllocId, GlobalAlloc, Scalar, read_target_uint};
+use crate::rustc_complete::ty::{ExistentialTraitRef, ScalarInt};
 
 use crate::prelude::*;
 

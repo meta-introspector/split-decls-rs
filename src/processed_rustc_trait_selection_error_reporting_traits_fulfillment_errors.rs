@@ -3,35 +3,35 @@ use std::borrow::Cow;
 use std::path::PathBuf;
 
 use rustc_abi::ExternAbi;
-use crate::rustc_ast::ast::LitKind;
-use crate::rustc_ast::{LitIntType, TraitObjectSyntax};
+use crate::rustc_complete::ast::LitKind;
+use crate::rustc_complete::{LitIntType, TraitObjectSyntax};
 use crate::rustc_data_structures::fx::FxHashMap;
 use crate::rustc_data_structures::unord::UnordSet;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, ErrorGuaranteed, Level, MultiSpan, StashKey, StringPart, Suggestions,
     pluralize, struct_span_code_err,
 };
-use crate::rustc_hir::def_id::{DefId, LOCAL_CRATE, LocalDefId};
-use crate::rustc_hir::intravisit::Visitor;
-use crate::rustc_hir::{self as hir, LangItem, Node};
-use rustc_infer::infer::{InferOk, TypeTrace};
-use rustc_infer::traits::ImplSource;
-use rustc_infer::traits::solve::Goal;
-use crate::rustc_middle::traits::SignatureMismatchData;
-use crate::rustc_middle::traits::select::OverflowError;
-use crate::rustc_middle::ty::abstract_const::NotConstEvaluatable;
-use crate::rustc_middle::ty::error::{ExpectedFound, TypeError};
-use crate::rustc_middle::ty::print::{
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE, LocalDefId};
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::{self as hir, LangItem, Node};
+use crate::rustc_infer::infer::{InferOk, TypeTrace};
+use crate::rustc_infer::traits::ImplSource;
+use crate::rustc_infer::traits::solve::Goal;
+use crate::rustc_complete::traits::SignatureMismatchData;
+use crate::rustc_complete::traits::select::OverflowError;
+use crate::rustc_complete::ty::abstract_const::NotConstEvaluatable;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::ty::print::{
     PrintPolyTraitPredicateExt, PrintTraitPredicateExt as _, PrintTraitRefExt as _,
     with_forced_trimmed_paths,
 };
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, GenericArgKind, TraitRef, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable,
     TypeVisitableExt, Upcast,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::{BytePos, DUMMY_SP, STDLIB_STABLE_CRATES, Span, Symbol, sym};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::{BytePos, DUMMY_SP, STDLIB_STABLE_CRATES, Span, Symbol, sym};
 use tracing::{debug, instrument};
 
 use super::on_unimplemented::{AppendConstMessage, OnUnimplementedNote};

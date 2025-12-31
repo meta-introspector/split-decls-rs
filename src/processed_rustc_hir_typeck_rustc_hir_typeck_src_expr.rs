@@ -6,36 +6,36 @@
 // See [`rustc_hir_analysis::check`] for more context on type checking in general.
 
 use rustc_abi::{FIRST_VARIANT, FieldIdx};
-use crate::rustc_ast::util::parser::ExprPrecedence;
+use crate::rustc_complete::util::parser::ExprPrecedence;
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use crate::rustc_data_structures::unord::UnordMap;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, ErrorGuaranteed, MultiSpan, StashKey, Subdiagnostic, listify, pluralize,
     struct_span_code_err,
 };
-use crate::rustc_hir::attrs::AttributeKind;
-use crate::rustc_hir::def::{CtorKind, DefKind, Res};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::lang_items::LangItem;
-use crate::rustc_hir::{ExprKind, HirId, QPath, find_attr};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{CtorKind, DefKind, Res};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{ExprKind, HirId, QPath, find_attr};
 use rustc_hir_analysis::NoVariantNamed;
 use rustc_hir_analysis::hir_ty_lowering::{FeedConstTy, HirTyLowerer as _};
-use rustc_infer::infer::{self, DefineOpaqueTypes, InferOk, RegionVariableOrigin};
-use rustc_infer::traits::query::NoSolution;
-use crate::rustc_middle::ty::adjustment::{Adjust, Adjustment, AllowTwoPhase};
-use crate::rustc_middle::ty::error::{ExpectedFound, TypeError};
-use crate::rustc_middle::ty::{self, AdtKind, GenericArgsRef, Ty, TypeVisitableExt};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::errors::ExprParenthesesNeeded;
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::edit_distance::find_best_match_for_name;
-use crate::rustc_span::hygiene::DesugaringKind;
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{Ident, Span, Symbol, kw, sym};
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits::{self, ObligationCauseCode, ObligationCtxt};
+use crate::rustc_infer::infer::{self, DefineOpaqueTypes, InferOk, RegionVariableOrigin};
+use crate::rustc_infer::traits::query::NoSolution;
+use crate::rustc_complete::ty::adjustment::{Adjust, Adjustment, AllowTwoPhase};
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::ty::{self, AdtKind, GenericArgsRef, Ty, TypeVisitableExt};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::errors::ExprParenthesesNeeded;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_complete::hygiene::DesugaringKind;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Ident, Span, Symbol, kw, sym};
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits::{self, ObligationCauseCode, ObligationCtxt};
 use tracing::{debug, instrument, trace};
 use {rustc_ast as ast, rustc_hir as hir};
 

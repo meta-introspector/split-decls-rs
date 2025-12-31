@@ -1,13 +1,13 @@
 // Some lints that are only useful in the compiler or crates that use compiler internals, such as
 // Clippy.
 
-use crate::rustc_hir::def::Res;
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::{Expr, ExprKind, HirId};
-use crate::rustc_middle::ty::{self, GenericArgsRef, PredicatePolarity, Ty};
-use crate::rustc_session::{declare_lint_pass, declare_tool_lint};
-use crate::rustc_span::hygiene::{ExpnKind, MacroKind};
-use crate::rustc_span::{Span, sym};
+use crate::rustc_complete::def::Res;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{Expr, ExprKind, HirId};
+use crate::rustc_complete::ty::{self, GenericArgsRef, PredicatePolarity, Ty};
+use crate::rustc_complete::{declare_lint_pass, declare_tool_lint};
+use crate::rustc_complete::hygiene::{ExpnKind, MacroKind};
+use crate::rustc_complete::{Span, sym};
 use tracing::debug;
 use {rustc_ast as ast, rustc_hir as hir};
 
@@ -345,7 +345,7 @@ declare_tool_lint! {
 
 declare_tool_lint! {
     /// The `usage_of_type_ir_traits` lint detects usage of `rustc_type_ir::Interner`,
-    /// or `rustc_infer::InferCtxtLike`.
+    /// or `crate::rustc_infer::InferCtxtLike`.
     ///
     /// Methods of this trait should only be used within the type system abstraction layer,
     /// and in the generic next trait solver implementation. Look for an analogously named

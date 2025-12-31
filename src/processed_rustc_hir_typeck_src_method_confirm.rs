@@ -1,29 +1,29 @@
 use std::ops::Deref;
 
 use rustc_hir as hir;
-use crate::rustc_hir::GenericArg;
-use crate::rustc_hir::def_id::DefId;
+use crate::rustc_complete::GenericArg;
+use crate::rustc_complete::def_id::DefId;
 use rustc_hir_analysis::hir_ty_lowering::generics::{
     check_generic_arg_count_for_call, lower_generic_args,
 };
 use rustc_hir_analysis::hir_ty_lowering::{
     FeedConstTy, GenericArgsLowerer, HirTyLowerer, IsMethodCall, RegionInferReason,
 };
-use rustc_infer::infer::{
+use crate::rustc_infer::infer::{
     BoundRegionConversionTime, DefineOpaqueTypes, InferOk, RegionVariableOrigin,
 };
 use rustc_lint::builtin::SUPERTRAIT_ITEM_SHADOWING_USAGE;
-use crate::rustc_middle::traits::ObligationCauseCode;
-use crate::rustc_middle::ty::adjustment::{
+use crate::rustc_complete::traits::ObligationCauseCode;
+use crate::rustc_complete::ty::adjustment::{
     Adjust, Adjustment, AllowTwoPhase, AutoBorrow, AutoBorrowMutability, PointerCoercion,
 };
-use crate::rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, GenericArgs, GenericArgsRef, GenericParamDefKind, Ty, TyCtxt, TypeFoldable,
     TypeVisitableExt, UserArgs,
 };
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::{DUMMY_SP, Span};
-use rustc_trait_selection::traits;
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::{DUMMY_SP, Span};
+use crate::rustc_trait_selection::traits;
 use tracing::debug;
 
 use super::{MethodCallee, probe};

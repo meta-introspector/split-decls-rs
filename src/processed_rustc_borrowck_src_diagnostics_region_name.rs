@@ -5,14 +5,14 @@ use std::fmt::{self, Display};
 use std::iter;
 
 use crate::rustc_data_structures::fx::IndexEntry;
-use rustc_errors::{Diag, EmissionGuarantee};
+use crate::rustc_complete::{Diag, EmissionGuarantee};
 use rustc_hir as hir;
-use crate::rustc_hir::def::{DefKind, Res};
-use crate::rustc_middle::ty::print::RegionHighlightMode;
-use crate::rustc_middle::ty::{self, GenericArgKind, GenericArgsRef, RegionVid, Ty};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_span::{DUMMY_SP, Span, Symbol, kw, sym};
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_complete::def::{DefKind, Res};
+use crate::rustc_complete::ty::print::RegionHighlightMode;
+use crate::rustc_complete::ty::{self, GenericArgKind, GenericArgsRef, RegionVid, Ty};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol, kw, sym};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
 use tracing::{debug, instrument};
 
 use crate::MirBorrowckCtxt;
@@ -193,8 +193,8 @@ impl Display for RegionName {
     }
 }
 
-impl rustc_errors::IntoDiagArg for RegionName {
-    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+impl crate::rustc_errors::IntoDiagArg for RegionName {
+    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         self.to_string().into_diag_arg(path)
     }
 }

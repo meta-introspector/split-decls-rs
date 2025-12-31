@@ -1,8 +1,8 @@
 use ast::StaticItem;
 use itertools::{Itertools, Position};
 use rustc_ast as ast;
-use crate::rustc_ast::ModKind;
-use crate::rustc_span::Ident;
+use crate::rustc_complete::ModKind;
+use crate::rustc_complete::Ident;
 
 use crate::pp::BoxMarker;
 use crate::pp::Breaks::Inconsistent;

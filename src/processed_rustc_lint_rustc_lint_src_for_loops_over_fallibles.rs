@@ -1,11 +1,11 @@
 use hir::{Expr, Pat};
-use crate::rustc_hir::{self as hir, LangItem};
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_infer::traits::ObligationCause;
-use crate::rustc_middle::ty;
-use crate::rustc_session::{declare_lint, declare_lint_pass};
-use crate::rustc_span::{Span, sym};
-use rustc_trait_selection::traits::ObligationCtxt;
+use crate::rustc_complete::{self as hir, LangItem};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::traits::ObligationCause;
+use crate::rustc_complete::ty;
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+use crate::rustc_complete::{Span, sym};
+use crate::rustc_trait_selection::traits::ObligationCtxt;
 
 use crate::lints::{
     ForLoopsOverFalliblesDiag, ForLoopsOverFalliblesLoopSub, ForLoopsOverFalliblesQuestionMark,
@@ -170,7 +170,7 @@ fn suggest_question_mark<'tcx>(
 
     let body_def_id = cx.tcx.hir_body_owner_def_id(body_id);
     let cause =
-        ObligationCause::new(span, body_def_id, rustc_infer::traits::ObligationCauseCode::Misc);
+        ObligationCause::new(span, body_def_id, crate::rustc_infer::traits::ObligationCauseCode::Misc);
 
     ocx.register_bound(
         cause,

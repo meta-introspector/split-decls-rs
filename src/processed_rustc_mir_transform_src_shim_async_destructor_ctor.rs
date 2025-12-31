@@ -1,12 +1,12 @@
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::lang_items::LangItem;
-use crate::rustc_hir::{CoroutineDesugaring, CoroutineKind, CoroutineSource, Safety};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{CoroutineDesugaring, CoroutineKind, CoroutineSource, Safety};
 use rustc_index::{Idx, IndexVec};
-use crate::rustc_middle::mir::{
+use crate::rustc_complete::mir::{
     BasicBlock, BasicBlockData, Body, Local, LocalDecl, MirSource, Operand, Place, Rvalue,
     SourceInfo, Statement, StatementKind, Terminator, TerminatorKind,
 };
-use crate::rustc_middle::ty::{self, EarlyBinder, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, EarlyBinder, Ty, TyCtxt, TypeVisitableExt};
 
 use super::*;
 use crate::patch::MirPatch;

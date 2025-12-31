@@ -17,11 +17,11 @@
 //
 // [lattices]: https://en.wikipedia.org/wiki/Lattice_(order)
 
-use crate::rustc_middle::traits::solve::Goal;
-use crate::rustc_middle::ty::relate::combine::{super_combine_consts, super_combine_tys};
-use crate::rustc_middle::ty::relate::{Relate, RelateResult, TypeRelation};
-use crate::rustc_middle::ty::{self, Ty, TyCtxt, TyVar, TypeVisitableExt};
-use crate::rustc_span::Span;
+use crate::rustc_complete::traits::solve::Goal;
+use crate::rustc_complete::ty::relate::combine::{super_combine_consts, super_combine_tys};
+use crate::rustc_complete::ty::relate::{Relate, RelateResult, TypeRelation};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TyVar, TypeVisitableExt};
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
 
 use super::StructurallyRelateAliases;

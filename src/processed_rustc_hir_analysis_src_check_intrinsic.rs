@@ -1,12 +1,12 @@
 // Type-checking for the `#[rustc_intrinsic]` intrinsics that the compiler exposes.
 
 use rustc_abi::ExternAbi;
-use rustc_errors::DiagMessage;
-use crate::rustc_hir::{self as hir, LangItem};
-use crate::rustc_middle::traits::{ObligationCause, ObligationCauseCode};
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_span::def_id::LocalDefId;
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::DiagMessage;
+use crate::rustc_complete::{self as hir, LangItem};
+use crate::rustc_complete::traits::{ObligationCause, ObligationCauseCode};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{Span, Symbol, sym};
 
 use crate::check::check_function_signature;
 use crate::errors::{UnrecognizedIntrinsicFunction, WrongNumberOfGenericArgumentsToIntrinsic};

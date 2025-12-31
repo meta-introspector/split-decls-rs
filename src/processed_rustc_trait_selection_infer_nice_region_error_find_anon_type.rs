@@ -1,11 +1,11 @@
 use core::ops::ControlFlow;
 
-use crate::rustc_hir::def_id::{DefId, LocalDefId};
-use crate::rustc_hir::intravisit::{self, Visitor, VisitorExt};
-use crate::rustc_hir::{self as hir, AmbigArg};
-use crate::rustc_middle::hir::nested_filter;
-use crate::rustc_middle::middle::resolve_bound_vars as rbv;
-use crate::rustc_middle::ty::{self, Region, TyCtxt};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::intravisit::{self, Visitor, VisitorExt};
+use crate::rustc_complete::{self as hir, AmbigArg};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::middle::resolve_bound_vars as rbv;
+use crate::rustc_complete::ty::{self, Region, TyCtxt};
 use tracing::debug;
 
 /// This function calls the `visit_ty` method for the parameters

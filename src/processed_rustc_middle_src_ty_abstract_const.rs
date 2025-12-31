@@ -1,6 +1,6 @@
 // A subset of a mir body used for const evaluability checking.
 
-use rustc_errors::ErrorGuaranteed;
+use crate::rustc_complete::ErrorGuaranteed;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeVisitable};
 
 use crate::ty::{

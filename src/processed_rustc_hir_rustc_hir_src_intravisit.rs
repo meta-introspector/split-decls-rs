@@ -64,10 +64,10 @@
 // This order consistency is required in a few places in rustc, for
 // example coroutine inference, and possibly also HIR borrowck.
 
-use crate::rustc_ast::Label;
-use crate::rustc_ast::visit::{VisitorResult, try_visit, visit_opt, walk_list};
-use crate::rustc_span::def_id::LocalDefId;
-use crate::rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::Label;
+use crate::rustc_complete::visit::{VisitorResult, try_visit, visit_opt, walk_list};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{Ident, Span, Symbol};
 
 use crate::hir::*;
 

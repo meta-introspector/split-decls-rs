@@ -6,9 +6,9 @@ use std::iter;
 
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet, IndexEntry};
 use crate::rustc_data_structures::unord::UnordSet;
-use crate::rustc_hir::def_id::CRATE_DEF_ID;
-use rustc_infer::infer::DefineOpaqueTypes;
-use crate::rustc_middle::ty::{Region, RegionVid};
+use crate::rustc_complete::def_id::CRATE_DEF_ID;
+use crate::rustc_infer::infer::DefineOpaqueTypes;
+use crate::rustc_complete::ty::{Region, RegionVid};
 use tracing::debug;
 
 use super::*;

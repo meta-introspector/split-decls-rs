@@ -8,8 +8,8 @@ pub use normalize::{
     deeply_normalize, deeply_normalize_with_skipped_universes,
     deeply_normalize_with_skipped_universes_and_ambiguous_coroutine_goals,
 };
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::TyCtxt;
 pub use select::InferCtxtSelectExt;
 
 fn evaluate_root_goal_for_proof_tree_raw<'tcx>(

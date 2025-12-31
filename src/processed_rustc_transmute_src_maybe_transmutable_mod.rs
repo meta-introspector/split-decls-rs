@@ -28,8 +28,8 @@ where
 // FIXME: Nix this cfg, so we can write unit tests independently of rustc
 #[cfg(feature = "rustc")]
 mod rustc {
-    use crate::rustc_middle::ty::layout::LayoutCx;
-    use crate::rustc_middle::ty::{Ty, TyCtxt, TypingEnv};
+    use crate::rustc_complete::ty::layout::LayoutCx;
+    use crate::rustc_complete::ty::{Ty, TyCtxt, TypingEnv};
 
     use super::*;
     use crate::layout::tree::rustc::Err;

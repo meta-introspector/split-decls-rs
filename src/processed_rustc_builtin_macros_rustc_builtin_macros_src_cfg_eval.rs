@@ -1,17 +1,17 @@
 use core::ops::ControlFlow;
 
 use rustc_ast as ast;
-use crate::rustc_ast::mut_visit::MutVisitor;
-use crate::rustc_ast::visit::{AssocCtxt, Visitor};
-use crate::rustc_ast::{Attribute, HasAttrs, HasTokens, NodeId, mut_visit, visit};
-use rustc_errors::PResult;
+use crate::rustc_complete::mut_visit::MutVisitor;
+use crate::rustc_complete::visit::{AssocCtxt, Visitor};
+use crate::rustc_complete::{Attribute, HasAttrs, HasTokens, NodeId, mut_visit, visit};
+use crate::rustc_complete::PResult;
 use rustc_expand::base::{Annotatable, ExtCtxt};
 use rustc_expand::config::StripUnconfigured;
 use rustc_expand::configure;
 use rustc_feature::Features;
 use rustc_parse::parser::{ForceCollect, Parser};
-use crate::rustc_session::Session;
-use crate::rustc_span::{Span, sym};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::{Span, sym};
 use smallvec::SmallVec;
 use tracing::instrument;
 

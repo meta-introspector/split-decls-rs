@@ -28,7 +28,7 @@ impl<'tcx> Stable<'tcx> for FieldIdx {
 impl<'tcx> Stable<'tcx> for crate::rustc_hir::CoroutineSource {
     type T = crate::mir::CoroutineSource;
     fn stable(&self, _: &mut Tables<'_, BridgeTys>, _: &CompilerCtxt<'_, BridgeTys>) -> Self::T {
-        use crate::rustc_hir::CoroutineSource;
+        use crate::rustc_complete::CoroutineSource;
         match self {
             CoroutineSource::Block => crate::mir::CoroutineSource::Block,
             CoroutineSource::Closure => crate::mir::CoroutineSource::Closure,
@@ -44,7 +44,7 @@ impl<'tcx> Stable<'tcx> for crate::rustc_hir::CoroutineKind {
         tables: &mut Tables<'cx, BridgeTys>,
         cx: &CompilerCtxt<'cx, BridgeTys>,
     ) -> Self::T {
-        use crate::rustc_hir::{CoroutineDesugaring, CoroutineKind};
+        use crate::rustc_complete::{CoroutineDesugaring, CoroutineKind};
         match *self {
             CoroutineKind::Desugared(CoroutineDesugaring::Async, source) => {
                 crate::mir::CoroutineKind::Desugared(

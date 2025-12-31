@@ -1,15 +1,15 @@
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexSet};
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
-use crate::rustc_hir::attrs::InstructionSetAttr;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LOCAL_CRATE, LocalDefId};
-use crate::rustc_middle::middle::codegen_fn_attrs::{TargetFeature, TargetFeatureKind};
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::Session;
-use crate::rustc_session::lint::builtin::AARCH64_SOFTFLOAT_NEON;
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::attrs::InstructionSetAttr;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE, LocalDefId};
+use crate::rustc_complete::middle::codegen_fn_attrs::{TargetFeature, TargetFeatureKind};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::lint::builtin::AARCH64_SOFTFLOAT_NEON;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{Span, Symbol, sym};
 use rustc_target::target_features::{RUSTC_SPECIFIC_FEATURES, Stability};
 use smallvec::SmallVec;
 

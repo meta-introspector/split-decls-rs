@@ -3,10 +3,10 @@
 use std::assert_matches::assert_matches;
 
 use hir::LangItem;
-use crate::rustc_ast::Mutability;
+use crate::rustc_complete::Mutability;
 use rustc_hir as hir;
-use rustc_infer::infer::{RegionResolutionError, TyCtxtInferExt};
-use crate::rustc_middle::ty::{self, AdtDef, Ty, TyCtxt, TypeVisitableExt, TypingMode};
+use crate::rustc_infer::infer::{RegionResolutionError, TyCtxtInferExt};
+use crate::rustc_complete::ty::{self, AdtDef, Ty, TyCtxt, TypeVisitableExt, TypingMode};
 
 use crate::regions::InferCtxtRegionExt;
 use crate::traits::{self, FulfillmentError, ObligationCause};

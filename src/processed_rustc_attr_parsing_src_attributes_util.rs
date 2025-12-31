@@ -1,8 +1,8 @@
-use crate::rustc_ast::LitKind;
-use crate::rustc_ast::attr::AttributeExt;
+use crate::rustc_complete::LitKind;
+use crate::rustc_complete::attr::AttributeExt;
 use rustc_feature::is_builtin_attr_name;
-use crate::rustc_hir::RustcVersion;
-use crate::rustc_span::{Symbol, sym};
+use crate::rustc_complete::RustcVersion;
+use crate::rustc_complete::{Symbol, sym};
 
 use crate::context::{AcceptContext, Stage};
 use crate::parser::ArgParser;

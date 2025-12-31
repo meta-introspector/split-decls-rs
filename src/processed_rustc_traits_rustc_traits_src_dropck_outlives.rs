@@ -1,17 +1,17 @@
 use crate::rustc_data_structures::fx::FxHashSet;
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_infer::infer::canonical::{Canonical, QueryResponse};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::query::Providers;
-use crate::rustc_middle::traits::query::{DropckConstraint, DropckOutlivesResult};
-use crate::rustc_middle::ty::{self, GenericArgs, TyCtxt};
-use crate::rustc_span::DUMMY_SP;
-use crate::rustc_span::def_id::DefId;
-use rustc_trait_selection::infer::InferCtxtBuilderExt;
-use rustc_trait_selection::traits::query::dropck_outlives::{
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::infer::canonical::{Canonical, QueryResponse};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::traits::query::{DropckConstraint, DropckOutlivesResult};
+use crate::rustc_complete::ty::{self, GenericArgs, TyCtxt};
+use crate::rustc_complete::DUMMY_SP;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_trait_selection::infer::InferCtxtBuilderExt;
+use crate::rustc_trait_selection::traits::query::dropck_outlives::{
     compute_dropck_outlives_inner, dtorck_constraint_for_ty_inner,
 };
-use rustc_trait_selection::traits::query::{CanonicalDropckOutlivesGoal, NoSolution};
+use crate::rustc_trait_selection::traits::query::{CanonicalDropckOutlivesGoal, NoSolution};
 use tracing::debug;
 
 pub(crate) fn provide(p: &mut Providers) {

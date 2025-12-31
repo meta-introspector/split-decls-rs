@@ -5,13 +5,13 @@ use std::{fmt, mem};
 
 use either::{Either, Left, Right};
 use rustc_hir as hir;
-use crate::rustc_hir::definitions::DefPathData;
+use crate::rustc_complete::definitions::DefPathData;
 use rustc_index::IndexVec;
-use crate::rustc_middle::ty::layout::TyAndLayout;
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_middle::{bug, mir};
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::{bug, mir};
 use rustc_mir_dataflow::impls::always_storage_live_locals;
-use crate::rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::field::Empty;
 use tracing::{info_span, instrument, trace};
 

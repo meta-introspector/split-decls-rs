@@ -1,8 +1,8 @@
-use crate::rustc_ast::MetaItem;
-use crate::rustc_middle::mir::{self, Body, Local, Location};
-use crate::rustc_middle::ty::{self, Ty, TyCtxt};
-use crate::rustc_span::def_id::DefId;
-use crate::rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::MetaItem;
+use crate::rustc_complete::mir::{self, Body, Local, Location};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{Span, Symbol, sym};
 use tracing::{debug, info};
 
 use crate::errors::{

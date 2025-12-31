@@ -1,8 +1,8 @@
 use crate::rustc_data_structures::intern::Interned;
-use rustc_errors::MultiSpan;
-use crate::rustc_hir::def_id::DefId;
+use crate::rustc_complete::MultiSpan;
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-use crate::rustc_span::{DUMMY_SP, ErrorGuaranteed, Symbol, kw, sym};
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Symbol, kw, sym};
 use rustc_type_ir::RegionKind as IrRegionKind;
 pub use rustc_type_ir::RegionVid;
 use tracing::debug;

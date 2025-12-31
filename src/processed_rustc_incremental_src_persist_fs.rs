@@ -115,11 +115,11 @@ use crate::rustc_data_structures::svh::Svh;
 use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
 use crate::rustc_data_structures::{base_n, flock};
 use rustc_fs_util::{LinkOrCopy, link_or_copy, try_canonicalize};
-use crate::rustc_middle::bug;
-use crate::rustc_session::config::CrateType;
-use crate::rustc_session::output::collect_crate_types;
-use crate::rustc_session::{Session, StableCrateId};
-use crate::rustc_span::Symbol;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::config::CrateType;
+use crate::rustc_complete::output::collect_crate_types;
+use crate::rustc_complete::{Session, StableCrateId};
+use crate::rustc_complete::Symbol;
 use tracing::debug;
 
 use crate::errors;

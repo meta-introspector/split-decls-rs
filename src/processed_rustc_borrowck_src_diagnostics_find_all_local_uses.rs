@@ -1,7 +1,7 @@
 use std::collections::BTreeSet;
 
-use crate::rustc_middle::mir::visit::{PlaceContext, Visitor};
-use crate::rustc_middle::mir::{Body, Local, Location};
+use crate::rustc_complete::mir::visit::{PlaceContext, Visitor};
+use crate::rustc_complete::mir::{Body, Local, Location};
 
 /// Find all uses of (including assignments to) a [`Local`].
 ///

@@ -1,8 +1,8 @@
-use rustc_errors::codes::*;
-use rustc_errors::{Diag, EmissionGuarantee, Subdiagnostic};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Diag, EmissionGuarantee, Subdiagnostic};
 use rustc_macros::{Diagnostic, Subdiagnostic};
-use crate::rustc_session::lint::Level;
-use crate::rustc_span::{Span, Symbol};
+use crate::rustc_complete::lint::Level;
+use crate::rustc_complete::{Span, Symbol};
 
 use crate::fluent_generated as fluent;
 

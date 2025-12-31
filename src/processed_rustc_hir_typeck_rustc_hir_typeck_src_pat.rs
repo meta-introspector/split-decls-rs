@@ -4,30 +4,30 @@ use std::collections::hash_map::Entry::{Occupied, Vacant};
 use rustc_abi::FieldIdx;
 use rustc_ast as ast;
 use crate::rustc_data_structures::fx::FxHashMap;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, ErrorGuaranteed, MultiSpan, pluralize, struct_span_code_err,
 };
-use crate::rustc_hir::def::{CtorKind, DefKind, Res};
-use crate::rustc_hir::def_id::DefId;
-use crate::rustc_hir::pat_util::EnumerateAndAdjustIterator;
-use crate::rustc_hir::{
+use crate::rustc_complete::def::{CtorKind, DefKind, Res};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::pat_util::EnumerateAndAdjustIterator;
+use crate::rustc_complete::{
     self as hir, BindingMode, ByRef, ExprKind, HirId, LangItem, Mutability, Pat, PatExpr,
     PatExprKind, PatKind, expr_needs_parens,
 };
 use rustc_hir_analysis::autoderef::report_autoderef_recursion_limit_error;
-use rustc_infer::infer::RegionVariableOrigin;
-use crate::rustc_middle::traits::PatternOriginExpr;
-use crate::rustc_middle::ty::{self, Ty, TypeVisitableExt};
-use crate::rustc_middle::{bug, span_bug};
-use crate::rustc_session::lint::builtin::NON_EXHAUSTIVE_OMITTED_PATTERNS;
-use crate::rustc_session::parse::feature_err;
-use crate::rustc_span::edit_distance::find_best_match_for_name;
-use crate::rustc_span::edition::Edition;
-use crate::rustc_span::source_map::Spanned;
-use crate::rustc_span::{BytePos, DUMMY_SP, Ident, Span, kw, sym};
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits::{ObligationCause, ObligationCauseCode};
+use crate::rustc_infer::infer::RegionVariableOrigin;
+use crate::rustc_complete::traits::PatternOriginExpr;
+use crate::rustc_complete::ty::{self, Ty, TypeVisitableExt};
+use crate::rustc_complete::{bug, span_bug};
+use crate::rustc_complete::lint::builtin::NON_EXHAUSTIVE_OMITTED_PATTERNS;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{BytePos, DUMMY_SP, Ident, Span, kw, sym};
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits::{ObligationCause, ObligationCauseCode};
 use tracing::{debug, instrument, trace};
 use ty::VariantDef;
 use ty::adjustment::{PatAdjust, PatAdjustment};
@@ -2388,7 +2388,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
 
         self.tcx.node_span_lint(NON_EXHAUSTIVE_OMITTED_PATTERNS, pat.hir_id, pat.span, |lint| {
             lint.primary_message("some fields are not explicitly listed");
-            lint.span_label(pat.span, format!("field{} {} not listed", rustc_errors::pluralize!(unmentioned_fields.len()), joined_patterns));
+            lint.span_label(pat.span, format!("field{} {} not listed", crate::rustc_errors::pluralize!(unmentioned_fields.len()), joined_patterns));
             lint.help(
                 "ensure that all fields are mentioned explicitly by adding the suggested fields",
             );

@@ -1,11 +1,11 @@
 use std::num::NonZero;
 
 use rustc_abi::Align;
-use crate::rustc_ast::token::CommentKind;
-use crate::rustc_ast::{AttrStyle, IntTy, UintTy};
+use crate::rustc_complete::token::CommentKind;
+use crate::rustc_complete::{AttrStyle, IntTy, UintTy};
 use rustc_ast_pretty::pp::Printer;
-use crate::rustc_span::hygiene::Transparency;
-use crate::rustc_span::{ErrorGuaranteed, Ident, Span, Symbol};
+use crate::rustc_complete::hygiene::Transparency;
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, Symbol};
 use rustc_target::spec::SanitizerSet;
 use thin_vec::ThinVec;
 

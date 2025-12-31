@@ -52,15 +52,15 @@
 // than finding a number of solutions (there are normally quite a few).
 
 use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
-use crate::rustc_hir::def_id::{CrateNum, LOCAL_CRATE};
+use crate::rustc_complete::def_id::{CrateNum, LOCAL_CRATE};
 use rustc_index::IndexVec;
-use crate::rustc_middle::bug;
-use crate::rustc_middle::middle::dependency_format::{Dependencies, DependencyList, Linkage};
-use crate::rustc_middle::ty::TyCtxt;
-use crate::rustc_session::config::CrateType;
-use crate::rustc_session::cstore::CrateDepKind;
-use crate::rustc_session::cstore::LinkagePreference::{self, RequireDynamic, RequireStatic};
-use crate::rustc_span::sym;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::dependency_format::{Dependencies, DependencyList, Linkage};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::CrateType;
+use crate::rustc_complete::cstore::CrateDepKind;
+use crate::rustc_complete::cstore::LinkagePreference::{self, RequireDynamic, RequireStatic};
+use crate::rustc_complete::sym;
 use tracing::info;
 
 use crate::creader::CStore;

@@ -2,7 +2,7 @@ use core::cmp::Ordering;
 use std::cmp;
 
 use rustc_index::IndexVec;
-use crate::rustc_middle::ty::error::TypeError;
+use crate::rustc_complete::ty::error::TypeError;
 
 rustc_index::newtype_index! {
     #[orderable]

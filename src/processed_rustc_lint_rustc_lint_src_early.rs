@@ -4,15 +4,15 @@
 // resolution, just before AST lowering. These lints are for purely
 // syntactical lints.
 
-use crate::rustc_ast::visit::{self as ast_visit, Visitor, walk_list};
-use crate::rustc_ast::{self as ast, HasAttrs};
+use crate::rustc_complete::visit::{self as ast_visit, Visitor, walk_list};
+use crate::rustc_complete::{self as ast, HasAttrs};
 use crate::rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::{BufferedEarlyLint, DecorateDiagCompat, LintBuffer};
+use crate::rustc_complete::{BufferedEarlyLint, DecorateDiagCompat, LintBuffer};
 use rustc_feature::Features;
-use crate::rustc_middle::ty::{RegisteredTools, TyCtxt};
-use crate::rustc_session::Session;
-use crate::rustc_session::lint::LintPass;
-use crate::rustc_span::{Ident, Span};
+use crate::rustc_complete::ty::{RegisteredTools, TyCtxt};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::lint::LintPass;
+use crate::rustc_complete::{Ident, Span};
 use tracing::debug;
 
 use crate::context::{EarlyContext, LintContext, LintStore};

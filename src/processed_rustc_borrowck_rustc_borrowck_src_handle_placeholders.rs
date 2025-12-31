@@ -6,9 +6,9 @@ use crate::rustc_data_structures::fx::FxIndexMap;
 use crate::rustc_data_structures::graph::scc;
 use crate::rustc_data_structures::graph::scc::Sccs;
 use rustc_index::IndexVec;
-use rustc_infer::infer::RegionVariableOrigin;
-use crate::rustc_middle::mir::ConstraintCategory;
-use crate::rustc_middle::ty::{RegionVid, UniverseIndex};
+use crate::rustc_infer::infer::RegionVariableOrigin;
+use crate::rustc_complete::mir::ConstraintCategory;
+use crate::rustc_complete::ty::{RegionVid, UniverseIndex};
 use tracing::{debug, trace};
 
 use crate::constraints::{ConstraintSccIndex, OutlivesConstraintSet};

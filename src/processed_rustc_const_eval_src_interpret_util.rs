@@ -1,8 +1,8 @@
-use crate::rustc_hir::def_id::LocalDefId;
-use crate::rustc_middle::mir;
-use crate::rustc_middle::mir::interpret::{AllocInit, Allocation, GlobalAlloc, InterpResult, Pointer};
-use crate::rustc_middle::ty::layout::TyAndLayout;
-use crate::rustc_middle::ty::{TyCtxt, TypeVisitable, TypeVisitableExt};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::mir;
+use crate::rustc_complete::mir::interpret::{AllocInit, Allocation, GlobalAlloc, InterpResult, Pointer};
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::ty::{TyCtxt, TypeVisitable, TypeVisitableExt};
 use tracing::debug;
 
 use super::{InterpCx, MPlaceTy, MemoryKind, interp_ok, throw_inval};

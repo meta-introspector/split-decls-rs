@@ -1,12 +1,12 @@
 use rustc_codegen_ssa::traits::*;
-use crate::rustc_hir::attrs::Linkage;
-use crate::rustc_hir::def::DefKind;
-use crate::rustc_hir::def_id::{DefId, LOCAL_CRATE};
-use crate::rustc_middle::bug;
-use crate::rustc_middle::mir::mono::Visibility;
-use crate::rustc_middle::ty::layout::{FnAbiOf, HasTypingEnv, LayoutOf};
-use crate::rustc_middle::ty::{self, Instance, TypeVisitableExt};
-use crate::rustc_session::config::CrateType;
+use crate::rustc_complete::attrs::Linkage;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::mono::Visibility;
+use crate::rustc_complete::ty::layout::{FnAbiOf, HasTypingEnv, LayoutOf};
+use crate::rustc_complete::ty::{self, Instance, TypeVisitableExt};
+use crate::rustc_complete::config::CrateType;
 use rustc_target::spec::RelocModel;
 use tracing::debug;
 

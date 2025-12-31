@@ -6,8 +6,8 @@
 
 use std::fmt::{self, Display};
 
-use crate::rustc_ast::visit::AssocCtxt;
-use crate::rustc_ast::{AssocItemKind, ForeignItemKind, ast};
+use crate::rustc_complete::visit::AssocCtxt;
+use crate::rustc_complete::{AssocItemKind, ForeignItemKind, ast};
 use rustc_macros::HashStable_Generic;
 
 use crate::def::DefKind;

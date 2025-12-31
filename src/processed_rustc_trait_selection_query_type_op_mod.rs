@@ -1,11 +1,11 @@
 use std::fmt;
 
-use rustc_errors::ErrorGuaranteed;
-use crate::rustc_hir::def_id::LocalDefId;
-use rustc_infer::traits::PredicateObligations;
-use crate::rustc_middle::traits::query::NoSolution;
-use crate::rustc_middle::ty::{ParamEnvAnd, TyCtxt, TypeFoldable};
-use crate::rustc_span::Span;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_infer::traits::PredicateObligations;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::{ParamEnvAnd, TyCtxt, TypeFoldable};
+use crate::rustc_complete::Span;
 
 use crate::infer::canonical::{
     CanonicalQueryInput, CanonicalQueryResponse, Certainty, OriginalQueryValues,
@@ -15,7 +15,7 @@ use crate::infer::{InferCtxt, InferOk};
 use crate::traits::{ObligationCause, ObligationCtxt};
 
 
-pub use crate::rustc_middle::traits::query::type_op::*;
+pub use crate::rustc_complete::traits::query::type_op::*;
 
 use self::custom::scrape_region_constraints;
 

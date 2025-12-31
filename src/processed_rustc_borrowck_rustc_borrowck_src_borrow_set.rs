@@ -3,10 +3,10 @@ use std::ops::Index;
 
 use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_middle::mir::visit::{MutatingUseContext, NonUseContext, PlaceContext, Visitor};
-use crate::rustc_middle::mir::{self, Body, Local, Location, traversal};
-use crate::rustc_middle::span_bug;
-use crate::rustc_middle::ty::{RegionVid, TyCtxt};
+use crate::rustc_complete::mir::visit::{MutatingUseContext, NonUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::mir::{self, Body, Local, Location, traversal};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{RegionVid, TyCtxt};
 use rustc_mir_dataflow::move_paths::MoveData;
 use tracing::debug;
 
