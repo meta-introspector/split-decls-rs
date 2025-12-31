@@ -12,7 +12,7 @@ fn main() -> Result<()> {
     // Copy all files from current directory
     copy_dir(".", instance_path)?;
     
-    // Add advanced features
+    // Add advanced features by copying actual source files
     add_compiler_integration(instance_path)?;
     add_nix_flake_enhancement(instance_path)?;
     
@@ -37,141 +37,30 @@ fn main() -> Result<()> {
 }
 
 fn add_compiler_integration(instance_path: &Path) -> Result<()> {
-    let compiler_macro = r#"/// Advanced compiler integration macros
-#[macro_export]
-macro_rules! mkcompiler {
-    ($name:ident) => {
-        pub struct $name {
-            pub version: &'static str,
-            pub features: Vec<&'static str>,
-        }
-        
-        impl $name {
-            pub fn compile(&self, source: &str) -> Result<String, String> {
-                Ok(format!("Compiled {} with {}", source, self.version))
-            }
-        }
-    };
-}
-
-#[macro_export]
-macro_rules! mkrust {
-    () => {
-        mkcompiler!(RustCompiler);
-        
-        pub fn create_rust_universe() -> RustCompiler {
-            RustCompiler {
-                version: "1.83.0",
-                features: vec!["self_replication", "macro_expansion", "universe_creation"],
-            }
-        }
-    };
-}
-"#;
-    
-    fs::write(instance_path.join("src/compiler_macros.rs"), compiler_macro)?;
-    
-    // Generate test binary with correct imports
-    let test_compiler = r#"use split_decls_genesis::{mkrust, mkcompiler};
-
-fn main() {
-    println!("🧬 Testing compiler integration macros...");
-    
-    // Create the Rust universe using our mkrust! macro
-    mkrust!();
-    
-    let compiler = create_rust_universe();
-    println!("✅ Created Rust compiler: version {}", compiler.version);
-    println!("✅ Features: {:?}", compiler.features);
-    
-    // Test compilation
-    let source_code = "fn hello() { println!(\"Hello from generated code!\"); }";
-    match compiler.compile(source_code) {
-        Ok(result) => println!("✅ Compilation result: {}", result),
-        Err(e) => println!("❌ Compilation error: {}", e),
-    }
-    
-    println!("🎉 Compiler integration test complete!");
-}
-"#;
+    // Copy the actual source files instead of generating strings
+    fs::copy("src/airdrop.rs", instance_path.join("src/airdrop.rs"))?;
+    fs::copy("src/compiler_macros.rs", instance_path.join("src/compiler_macros.rs"))?;
+    fs::copy("src/blockchain_macros.rs", instance_path.join("src/blockchain_macros.rs"))?;
     
     fs::create_dir_all(instance_path.join("src/bin"))?;
-    fs::write(instance_path.join("src/bin/test_compiler.rs"), test_compiler)?;
+    fs::copy("src/bin/test_compiler.rs", instance_path.join("src/bin/test_compiler.rs"))?;
     
-    // Create the build.rs that generates lib.rs with module declarations (this was the manual fix)
-    let build_rs_content = r#"// build.rs - The Genesis Build System
-use anyhow::Result;
+    // Create build.rs that generates lib.rs with module declarations (the key manual fix)
+    let build_rs = r#"use anyhow::Result;
 use std::fs;
 
 fn main() -> Result<()> {
     println!("🧬 GENESIS BUILD SYSTEM ACTIVATED");
     
-    // Generate the complete system in src/lib.rs with module declarations
-    let system_code = r#"
-//! # Split-Decls-Genesis: Pure Macro System
-
-pub mod blockchain_macros;
-pub mod compiler_macros;
-
-// Re-export all macros
-pub use blockchain_macros::*;
-pub use compiler_macros::*;
-
-/// Core system initialization macro
-#[macro_export]
-macro_rules! mknix {
-    () => {
-        // NIX environment setup
-    };
-}
-
-/// Git repository management macro  
-#[macro_export]
-macro_rules! mkgit {
-    ($repo:expr) => {
-        // Git repository configuration
-    };
-}
-
-/// Function declaration wrapper macro
-#[macro_export]
-macro_rules! mkdeclfn {
-    ($vis:vis fn $name:ident($($args:tt)*) -> $ret:ty $body:block) => {
-        $vis fn $name($($args)*) -> $ret {
-            println!("🔧 EXECUTING: {}", stringify!($name));
-            $body
-        }
-    };
-}
-
-/// Complete system orchestration macro
-#[macro_export]
-macro_rules! mksystem {
-    () => {
-        mknix!();
-        mkgit!("split-decls-genesis");
-        
-        mkdeclfn! {
-            pub fn run_system() -> anyhow::Result<()> {
-                println!("🚀 SYSTEM: Complete macro-driven system running!");
-                Ok(())
-            }
-        }
-    };
-}
-
-// Initialize the complete system
-mksystem!();
-"#;
+    let system_code = "//! # Split-Decls-Genesis: Pure Macro System\n\npub mod airdrop;\npub mod blockchain_macros;\npub mod compiler_macros;\n\npub use blockchain_macros::*;\npub use compiler_macros::*;\n\n#[macro_export]\nmacro_rules! mknix {\n    () => {\n        // NIX environment setup\n    };\n}\n\n#[macro_export]\nmacro_rules! mkgit {\n    ($repo:expr) => {\n        // Git repository configuration\n    };\n}\n\n#[macro_export]\nmacro_rules! mkdeclfn {\n    ($vis:vis fn $name:ident($($args:tt)*) -> $ret:ty $body:block) => {\n        $vis fn $name($($args)*) -> $ret {\n            println!(\"🔧 EXECUTING: {}\", stringify!($name));\n            $body\n        }\n    };\n}\n\n#[macro_export]\nmacro_rules! mksystem {\n    () => {\n        mknix!();\n        mkgit!(\"split-decls-genesis\");\n        \n        mkdeclfn! {\n            pub fn run_system() -> anyhow::Result<()> {\n                println!(\"🚀 SYSTEM: Complete macro-driven system running!\");\n                Ok(())\n            }\n        }\n    };\n}\n\nmksystem!();";
 
     fs::write("src/lib.rs", system_code)?;
     
-    println!("✨ Generated complete macro-driven system with module declarations!");
+    println!("✨ Generated complete macro-driven system!");
     Ok(())
-}
-"#;
+}"#;
     
-    fs::write(instance_path.join("build.rs"), build_rs_content)?;
+    fs::write(instance_path.join("build.rs"), build_rs)?;
     
     Ok(())
 }
@@ -226,8 +115,7 @@ fn add_nix_flake_enhancement(instance_path: &Path) -> Result<()> {
         '';
       };
     };
-}
-"#;
+}"#;
     
     fs::write(instance_path.join("flake.nix"), enhanced_flake)?;
     Ok(())

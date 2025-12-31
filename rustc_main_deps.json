@@ -1,0 +1,15 @@
+{
+  "dependency_tree": {
+    "conditional_expr": 1,
+    "env::var": 1,
+    "main": 0,
+    "println": 1,
+    "target_arch": 1,
+    "target_env": 1,
+    "target_os": 1,
+    "target_vendor": 1
+  },
+  "max_depth": 1,
+  "root": "main",
+  "total_dependencies": 8
+}
