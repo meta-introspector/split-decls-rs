@@ -1,1 +1,0 @@
-/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/libsplit_decls_genesis.rlib: /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/build.rs /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/src/lib.rs
