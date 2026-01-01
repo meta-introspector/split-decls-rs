@@ -1,0 +1,20 @@
+/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_index/src/idx.rs:144:36: warning: unexpected `cfg` condition name: `bootstrap`
+/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_index/src/idx.rs:133:11: warning: unexpected `cfg` condition name: `bootstrap`
+/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_index/src/idx.rs:138:15: warning: unexpected `cfg` condition name: `bootstrap`
+warning: `rustc_index` (lib) generated 3 warnings
+/mnt/data1/nix/vendor/rust/cargo2nix/submodules/rust/compiler/rustc_span/src/lib.rs:20:13: warning: unexpected `cfg` condition name: `bootstrap`
+warning: `rustc_span` (lib) generated 1 warning
+warning: unused imports: `Attribute`, `ItemMod`, `Meta`, `parse_file`, `parse_str`, and `visit::Visit`
+ --> build.rs:7:11
+  |
+7 | use syn::{parse_file, Item, ItemMod, Attribute, Meta, parse_str, visit::Visit};
+  |           ^^^^^^^^^^        ^^^^^^^  ^^^^^^^^^  ^^^^  ^^^^^^^^^  ^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused imports: `ToTokens` and `quote`
+ --> build.rs:8:13
+  |
+8 | use quote::{quote, ToTokens};
+  |             ^^^^^  ^^^^^^^^
+

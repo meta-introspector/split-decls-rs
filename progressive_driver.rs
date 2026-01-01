@@ -1,13 +1,54 @@
 use std::fs;
-use std::io::Write;
+use std::io::{Write, Read};
 use std::process::Command;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("🔧 Progressive Incremental Compiler Driver");
     println!("Testing progressively larger sets until failure");
     
-    // Simulate a list of files (in real version, load from symbol map)
-    let test_files = vec![
+    // Load actual files from compressed symbol map
+    let symbol_map_content = match fs::read("symbol_map.json.gz") {
+        Ok(compressed_data) => {
+            println!("📦 Decompressing symbol_map.json.gz in memory...");
+            match decompress_gzip(&compressed_data) {
+                Ok(content) => content,
+                Err(e) => {
+                    println!("⚠️  Failed to decompress: {}, using fallback", e);
+                    return run_fallback_test();
+                }
+            }
+        },
+        Err(_) => {
+            println!("⚠️  symbol_map.json.gz not found, using fallback test set");
+            return run_fallback_test();
+        }
+    };
+    
+    // Parse symbol map and extract file paths
+    let test_files: Vec<String> = symbol_map_content
+        .lines()
+        .filter(|line| line.contains("\"file\":"))
+        .filter_map(|line| {
+            line.split("\"file\":\"").nth(1)?.split("\"").next()
+        })
+        .map(|s| s.to_string())
+        .collect();
+    
+    println!("📁 Loaded {} files from symbol map", test_files.len());
+    run_progressive_test(test_files)
+}
+
+fn decompress_gzip(data: &[u8]) -> Result<String, Box<dyn std::error::Error>> {
+    use std::io::Read;
+    
+    // Simple gzip decompression using flate2 would be ideal, but let's use a basic approach
+    // For now, let's just use the fallback since we don't have flate2 dependency
+    Err("Gzip decompression not implemented".into())
+}
+
+fn run_fallback_test() -> Result<(), Box<dyn std::error::Error>> {
+    println!("🔄 Using extended fallback test set");
+    let test_files: Vec<String> = vec![
         "rustc_ast/src/lib.rs",
         "rustc_data_structures/src/lib.rs", 
         "rustc_span/src/lib.rs",
@@ -17,9 +58,22 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "rustc_session/src/lib.rs",
         "rustc_infer/src/lib.rs",
         "rustc_trait_selection/src/lib.rs",
-        "rustc_borrowck/src/lib.rs",  // This might fail
-    ];
-    
+        "rustc_borrowck/src/lib.rs",
+        "rustc_resolve/src/lib.rs",
+        "rustc_lint/src/lib.rs",
+        "rustc_codegen_ssa/src/lib.rs",
+        "rustc_mir_build/src/lib.rs",
+        "rustc_mir_transform/src/lib.rs",
+        "rustc_const_eval/src/lib.rs",
+        "rustc_ty_utils/src/lib.rs",
+        "rustc_metadata/src/lib.rs",
+        "rustc_passes/src/lib.rs",
+        "rustc_driver/src/lib.rs",
+    ].into_iter().map(|s| s.to_string()).collect();
+    run_progressive_test(test_files)
+}
+
+fn run_progressive_test(test_files: Vec<String>) -> Result<(), Box<dyn std::error::Error>> {
     println!("📁 Testing with {} files", test_files.len());
     
     // Progressive testing: start with 1 file, increase until failure
@@ -29,7 +83,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("\n🧪 Testing with {} files...", test_size);
         
         // Generate rustc_complete.rs with first N files
-        generate_rustc_complete(&test_files[..test_size])?;
+        generate_rustc_complete(&test_files[..test_size].iter().map(|s| s.as_str()).collect::<Vec<_>>())?;
         
         // Test compilation
         let success = test_compilation();
@@ -52,7 +106,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Generate final working version
     if last_working_size > 0 {
         println!("\n📝 Generating final rustc_complete.rs with {} files", last_working_size);
-        generate_rustc_complete(&test_files[..last_working_size])?;
+        generate_rustc_complete(&test_files[..last_working_size].iter().map(|s| s.as_str()).collect::<Vec<_>>())?;
         println!("✅ Final working set saved to src/rustc_complete.rs");
     }
     
@@ -105,21 +159,48 @@ fn generate_rustc_complete(files: &[&str]) -> Result<(), Box<dyn std::error::Err
 fn test_compilation() -> bool {
     println!("  🔍 Testing compilation...");
     let output = Command::new("cargo")
-        .args(&["check", "--quiet"])
+        .args(&["check", "--lib", "--message-format=short"])
         .output();
     
     match output {
         Ok(result) => {
             let success = result.status.success();
             if !success {
-                // Show some error details
+                println!("    💥 COMPILATION FAILED - Error Details:");
                 let stderr = String::from_utf8_lossy(&result.stderr);
-                let error_lines: Vec<&str> = stderr.lines().take(3).collect();
-                for line in error_lines {
-                    if line.contains("error") {
-                        println!("    💥 {}", line);
+                
+                // Extract and show actionable errors
+                let mut error_count = 0;
+                for line in stderr.lines() {
+                    if line.contains("error:") || line.contains("error[E") {
+                        println!("    🚨 {}", line);
+                        error_count += 1;
+                        if error_count >= 5 { // Limit to first 5 errors
+                            println!("    ... (showing first 5 errors)");
+                            break;
+                        }
                     }
                 }
+                
+                // Show summary
+                let total_errors = stderr.matches("error:").count() + stderr.matches("error[E").count();
+                println!("    📊 Total errors: {}", total_errors);
+                
+                // Suggest actions
+                if stderr.contains("unresolved import") {
+                    println!("    💡 ACTION: Add missing imports or modules");
+                }
+                if stderr.contains("can't find crate") {
+                    println!("    💡 ACTION: Add missing extern crate declarations");
+                }
+                if stderr.contains("defined multiple times") {
+                    println!("    💡 ACTION: Remove duplicate module definitions");
+                }
+                if stderr.contains("file not found for module") {
+                    println!("    💡 ACTION: Create missing module files or comment out module declarations");
+                }
+            } else {
+                println!("    ✅ Compilation successful");
             }
             success
         },
