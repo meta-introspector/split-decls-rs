@@ -6,12 +6,12 @@ Generated 15 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=8
 
 ```rust
-//! Experimental types for the trait query interface. The methods
-//! defined in this module are all based on **canonicalization**,
-//! which makes a canonical query by replacing unbound inference
-//! variables and regions, so that results can be reused more broadly.
-//! The providers for the queries defined here can be found in
-//! `rustc_traits`.
+// Experimental types for the trait query interface. The methods
+// defined in this module are all based on **canonicalization**,
+// which makes a canonical query by replacing unbound inference
+// variables and regions, so that results can be reused more broadly.
+// The providers for the queries defined here can be found in
+// `rustc_traits`.
 
 use rustc_macros::{HashStable, TypeFoldable, TypeVisitable};
 ```
@@ -20,7 +20,7 @@ use rustc_macros::{HashStable, TypeFoldable, TypeVisitable};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::error::DropCheckOverflow;
 use crate::infer::canonical::{Canonical, CanonicalQueryInput, QueryResponse};

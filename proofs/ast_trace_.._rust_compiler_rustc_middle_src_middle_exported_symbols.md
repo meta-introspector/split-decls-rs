@@ -6,7 +6,7 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefId, LOCAL_CRATE};
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
 ```
 
 ## Block 2

@@ -8,21 +8,21 @@ Generated 4 AST blocks from source file
 ```rust
 use std::fmt::Write;
 
-use rustc_hir::def_id::{CRATE_DEF_ID, LocalDefId};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{GenericArgs, TyCtxt};
+use crate::rustc_complete::ty::{GenericArgs, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=format_variances | COMPLEXITY=11 | LINES=19
 
 ```rust
-use rustc_span::sym;
+use crate::rustc_complete::sym;
 
 fn format_variances(tcx: TyCtxt<'_>, def_id: LocalDefId) -> String {
     let variances = tcx.variances_of(def_id);

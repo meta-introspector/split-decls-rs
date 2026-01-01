@@ -20,9 +20,9 @@ use rustc_macros::{Decodable, Encodable, HashStable_Generic};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::edition::Edition;
-use rustc_span::symbol::IdentPrintMode;
-use rustc_span::{DUMMY_SP, ErrorGuaranteed, Span, kw, sym};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::symbol::IdentPrintMode;
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span, kw, sym};
 ```
 
 ## Block 3
@@ -31,7 +31,7 @@ use rustc_span::{DUMMY_SP, ErrorGuaranteed, Span, kw, sym};
 ```rust
 #[allow(clippy::useless_attribute)] // FIXME: following use of `hidden_glob_reexports` incorrectly triggers `useless_attribute` lint.
 #[allow(hidden_glob_reexports)]
-use rustc_span::{Ident, Symbol};
+use crate::rustc_complete::{Ident, Symbol};
 ```
 
 ## Block 4
@@ -1332,7 +1332,7 @@ impl fmt::Display for NonterminalKind {
 // Some types are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
 mod size_asserts {
-    use rustc_data_structures::static_assert_size;
+    use crate::rustc_data_structures::static_assert_size;
 
     use super::*;
     // tidy-alphabetical-start

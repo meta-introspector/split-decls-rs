@@ -6,34 +6,34 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=34
 
 ```rust
-//! Codegen the MIR to the LLVM IR.
-//!
-//! Hopefully useful general knowledge about codegen:
-//!
-//! * There's no way to find out the [`Ty`] type of a [`Value`]. Doing so
-//!   would be "trying to get the eggs out of an omelette" (credit:
-//!   pcwalton). You can, instead, find out its [`llvm::Type`] by calling [`val_ty`],
-//!   but one [`llvm::Type`] corresponds to many [`Ty`]s; for instance, `tup(int, int,
-//!   int)` and `rec(x=int, y=int, z=int)` will have the same [`llvm::Type`].
-//!
-//! [`Ty`]: rustc_middle::ty::Ty
-//! [`val_ty`]: crate::common::val_ty
+// Codegen the MIR to the LLVM IR.
+//
+// Hopefully useful general knowledge about codegen:
+//
+// * There's no way to find out the [`Ty`] type of a [`Value`]. Doing so
+//   would be "trying to get the eggs out of an omelette" (credit:
+//   pcwalton). You can, instead, find out its [`llvm::Type`] by calling [`val_ty`],
+//   but one [`llvm::Type`] corresponds to many [`Ty`]s; for instance, `tup(int, int,
+//   int)` and `rec(x=int, y=int, z=int)` will have the same [`llvm::Type`].
+//
+// [`Ty`]: crate::rustc_middle::ty::Ty
+// [`val_ty`]: crate::common::val_ty
 
 use std::time::Instant;
 
-use rustc_codegen_ssa::ModuleCodegen;
-use rustc_codegen_ssa::base::maybe_create_entry_wrapper;
-use rustc_codegen_ssa::mono_item::MonoItemExt;
-use rustc_codegen_ssa::traits::*;
-use rustc_data_structures::small_c_str::SmallCStr;
-use rustc_hir::attrs::Linkage;
-use rustc_middle::dep_graph;
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrs;
-use rustc_middle::mir::mono::Visibility;
-use rustc_middle::ty::TyCtxt;
-use rustc_session::config::DebugInfo;
-use rustc_span::Symbol;
-use rustc_target::spec::SanitizerSet;
+use crate::rustc_codegen_ssa::ModuleCodegen;
+use crate::rustc_codegen_ssa::base::maybe_create_entry_wrapper;
+use crate::rustc_codegen_ssa::mono_item::MonoItemExt;
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_data_structures::small_c_str::SmallCStr;
+use crate::rustc_complete::attrs::Linkage;
+use crate::rustc_complete::dep_graph;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
+use crate::rustc_complete::mir::mono::Visibility;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::DebugInfo;
+use crate::rustc_complete::Symbol;
+use crate::rustc_target::spec::SanitizerSet;
 
 use super::ModuleLlvm;
 use crate::builder::Builder;

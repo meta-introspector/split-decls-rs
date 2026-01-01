@@ -6,13 +6,13 @@ Generated 21 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=9
 
 ```rust
-//! Diagnostics related methods for `Ty`.
+// Diagnostics related methods for `Ty`.
 
 use std::fmt::Write;
 use std::ops::ControlFlow;
 
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_errors::{
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_complete::{
     Applicability, Diag, DiagArgValue, IntoDiagArg, into_diag_arg_using_display, listify, pluralize,
 };
 ```
@@ -21,22 +21,22 @@ use rustc_errors::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def::{DefKind, Namespace};
+use crate::rustc_complete::def::{DefKind, Namespace};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_hir::{self as hir, AmbigArg, LangItem, PredicateOrigin, WherePredicateKind};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, AmbigArg, LangItem, PredicateOrigin, WherePredicateKind};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{BytePos, Span};
+use crate::rustc_complete::{BytePos, Span};
 ```
 
 ## Block 5
@@ -57,7 +57,7 @@ use crate::ty::{
 
 ```rust
 impl IntoDiagArg for Ty<'_> {
-    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         ty::tls::with(|tcx| {
             let ty = tcx.short_string(self, path);
             DiagArgValue::Str(std::borrow::Cow::Owned(ty))
@@ -71,7 +71,7 @@ impl IntoDiagArg for Ty<'_> {
 
 ```rust
 impl IntoDiagArg for Instance<'_> {
-    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         ty::tls::with(|tcx| {
             let instance = tcx.short_string_namespace(self, path, Namespace::ValueNS);
             DiagArgValue::Str(std::borrow::Cow::Owned(instance))

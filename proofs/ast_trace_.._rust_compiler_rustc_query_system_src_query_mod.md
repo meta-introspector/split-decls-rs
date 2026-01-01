@@ -34,17 +34,17 @@ pub use self::caches::{DefIdCache, DefaultCache, QueryCache, SingleCache, VecCac
 
 ```rust
 mod config;
-use rustc_data_structures::jobserver::Proxy;
-use rustc_data_structures::sync::{DynSend, DynSync};
+use crate::rustc_data_structures::jobserver::Proxy;
+use crate::rustc_data_structures::sync::{DynSend, DynSync};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_errors::DiagInner;
+use crate::rustc_complete::DiagInner;
 use rustc_hashes::Hash64;
-use rustc_hir::def::DefKind;
+use crate::rustc_complete::def::DefKind;
 use rustc_macros::{Decodable, Encodable};
 ```
 
@@ -52,8 +52,8 @@ use rustc_macros::{Decodable, Encodable};
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_span::Span;
-use rustc_span::def_id::DefId;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::DefId;
 
 pub use self::config::{HashResult, QueryConfig};
 ```

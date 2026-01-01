@@ -8,38 +8,38 @@ Generated 17 AST blocks from source file
 ```rust
 use std::iter;
 
-use rustc_index::IndexVec;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use rustc_middle::mir::{Body, Local, UnwindTerminateReason, traversal};
+use crate::rustc_index::IndexVec;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::mir::{Body, Local, UnwindTerminateReason, traversal};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::layout::{FnAbiOf, HasTyCtxt, HasTypingEnv, TyAndLayout};
+use crate::rustc_complete::ty::layout::{FnAbiOf, HasTyCtxt, HasTypingEnv, TyAndLayout};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Instance, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, mir, span_bug};
+use crate::rustc_complete::{bug, mir, span_bug};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_target::callconv::{FnAbi, PassMode};
+use crate::rustc_target::callconv::{FnAbi, PassMode};
 ```
 
 ## Block 6

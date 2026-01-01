@@ -6,9 +6,9 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::def_id::LocalDefId;
-use rustc_infer::infer::outlives::env::OutlivesEnvironment;
-use rustc_infer::infer::{InferCtxt, RegionResolutionError};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_infer::infer::outlives::env::OutlivesEnvironment;
+use crate::rustc_infer::infer::{InferCtxt, RegionResolutionError};
 ```
 
 ## Block 2
@@ -16,9 +16,9 @@ use rustc_infer::infer::{InferCtxt, RegionResolutionError};
 
 ```rust
 use rustc_macros::extension;
-use rustc_middle::traits::ObligationCause;
-use rustc_middle::traits::query::NoSolution;
-use rustc_middle::ty::{self, Ty, elaborate};
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::{self, Ty, elaborate};
 ```
 
 ## Block 3

@@ -6,31 +6,31 @@ Generated 28 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! Set and unset common attributes on LLVM values.
-use rustc_codegen_ssa::traits::*;
-use rustc_hir::attrs::{InlineAttr, InstructionSetAttr, OptimizeAttr};
+// Set and unset common attributes on LLVM values.
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_complete::attrs::{InlineAttr, InstructionSetAttr, OptimizeAttr};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_middle::middle::codegen_fn_attrs::{CodegenFnAttrFlags, PatchableFunctionEntry};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::middle::codegen_fn_attrs::{CodegenFnAttrFlags, PatchableFunctionEntry};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::config::{BranchProtection, FunctionReturn, OptLevel, PAuthKey, PacRet};
+use crate::rustc_complete::config::{BranchProtection, FunctionReturn, OptLevel, PAuthKey, PacRet};
 ```
 
 ## Block 5
@@ -38,7 +38,7 @@ use rustc_session::config::{BranchProtection, FunctionReturn, OptLevel, PAuthKey
 
 ```rust
 use rustc_symbol_mangling::mangle_internal_symbol;
-use rustc_target::spec::{FramePointer, SanitizerSet, StackProbeType, StackProtector};
+use crate::rustc_target::spec::{FramePointer, SanitizerSet, StackProbeType, StackProtector};
 ```
 
 ## Block 6

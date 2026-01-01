@@ -6,20 +6,20 @@ Generated 14 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=14
 
 ```rust
-//! This file declares the `ScopeTree` type, which describes
-//! the parent links in the region hierarchy.
-//!
-//! For more information about how MIR-based region-checking works,
-//! see the [rustc dev guide].
-//!
-//! [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/borrow_check.html
+// This file declares the `ScopeTree` type, which describes
+// the parent links in the region hierarchy.
+//
+// For more information about how MIR-based region-checking works,
+// see the [rustc dev guide].
+//
+// [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/borrow_check.html
 
 use std::fmt;
 
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_data_structures::unord::UnordMap;
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hir as hir;
-use rustc_hir::{HirId, HirIdMap, Node};
+use crate::rustc_complete::{HirId, HirIdMap, Node};
 ```
 
 ## Block 2
@@ -33,7 +33,7 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 4
@@ -195,7 +195,7 @@ pub enum ScopeData {
 **Metadata**: AST_ID=9 | TYPE=STRUCT | NAME=FirstStatementIndex | COMPLEXITY=12 | LINES=24
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// Represents a subscope of `block` for a binding that is introduced
     /// by `block.stmts[first_statement_index]`. Such subscopes represent
     /// a suffix of the block. Note that each subscope does not include
@@ -225,7 +225,7 @@ rustc_index::newtype_index! {
 
 ```rust
 // compilation error if size of `ScopeData` is not the same as a `u32`
-rustc_data_structures::static_assert_size!(ScopeData, 4);
+crate::rustc_data_structures::static_assert_size!(ScopeData, 4);
 
 impl Scope {
     pub fn hir_id(&self, scope_tree: &ScopeTree) -> Option<HirId> {

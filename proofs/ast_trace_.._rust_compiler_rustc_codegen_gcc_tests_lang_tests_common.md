@@ -6,9 +6,9 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5
 
 ```rust
-//! The common code for `tests/lang_tests_*.rs`
+// The common code for `tests/lang_tests_*.rs`
 
-#![allow(clippy::uninlined_format_args)]
+#[allow(clippy::uninlined_format_args)]
 
 use std::env::{self, current_dir};
 ```

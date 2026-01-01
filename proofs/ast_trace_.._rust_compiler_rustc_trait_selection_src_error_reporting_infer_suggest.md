@@ -23,8 +23,8 @@ use hir::{LetStmt, QPath};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::fx::FxIndexSet;
-use rustc_errors::{Applicability, Diag};
+use crate::rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_complete::{Applicability, Diag};
 ```
 
 ## Block 4
@@ -32,31 +32,31 @@ use rustc_errors::{Applicability, Diag};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::def::Res;
-use rustc_hir::{MatchSource, Node};
+use crate::rustc_complete::def::Res;
+use crate::rustc_complete::{MatchSource, Node};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::traits::{MatchExpressionArmCause, ObligationCause, ObligationCauseCode};
+use crate::rustc_complete::traits::{MatchExpressionArmCause, ObligationCause, ObligationCauseCode};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::error::TypeError;
-use rustc_middle::ty::print::with_no_trimmed_paths;
-use rustc_middle::ty::{self as ty, GenericArgKind, IsSuggestable, Ty, TypeVisitableExt};
+use crate::rustc_complete::ty::error::TypeError;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{self as ty, GenericArgKind, IsSuggestable, Ty, TypeVisitableExt};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, sym};
+use crate::rustc_complete::{Span, sym};
 ```
 
 ## Block 8
@@ -880,7 +880,7 @@ impl<'tcx> TypeErrCtxt<'_, 'tcx> {
             _ => return None,
         };
         let span = if last_stmt.span.from_expansion() {
-            let mac_call = rustc_span::source_map::original_sp(last_stmt.span, blk.span);
+            let mac_call = crate::rustc_span::source_map::original_sp(last_stmt.span, blk.span);
             self.tcx.sess.source_map().mac_call_stmt_semi_span(mac_call)?
         } else {
             self.tcx

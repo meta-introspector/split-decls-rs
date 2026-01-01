@@ -7,7 +7,7 @@ Generated 4 AST blocks from source file
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::ItemLocalMap;
+use crate::rustc_complete::ItemLocalMap;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 ```
 
@@ -27,7 +27,7 @@ use crate::middle::region::{ScopeCompatibility, Scope, ScopeData, ScopeTree};
 use crate::mir::BackwardIncompatibleDropReason;
 
 /// `RvalueScopes` is a mapping from sub-expressions to _extended_ lifetime as determined by
-/// rules laid out in `rustc_hir_analysis::check::rvalue_scopes`.
+/// rules laid out in `crate::rustc_hir_analysis::check::rvalue_scopes`.
 #[derive(TyEncodable, TyDecodable, Clone, Debug, Default, Eq, PartialEq, HashStable)]
 pub struct RvalueScopes {
     map: ItemLocalMap<(Option<Scope>, Option<(Scope, BackwardIncompatibleDropReason)>)>,

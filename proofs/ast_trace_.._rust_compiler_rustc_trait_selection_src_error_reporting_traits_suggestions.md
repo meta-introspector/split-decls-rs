@@ -20,11 +20,11 @@ use itertools::{EitherOrBoth, Itertools};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_abi::ExternAbi;
-use rustc_data_structures::fx::FxHashSet;
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, EmissionGuarantee, MultiSpan, Style, SuggestionStyle, pluralize,
     struct_span_code_err,
 };
@@ -34,23 +34,23 @@ use rustc_errors::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def::{CtorOf, DefKind, Res};
+use crate::rustc_complete::def::{CtorOf, DefKind, Res};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_hir::intravisit::{Visitor, VisitorExt};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::intravisit::{Visitor, VisitorExt};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_hir::lang_items::LangItem;
-use rustc_hir::{
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{
     self as hir, AmbigArg, CoroutineDesugaring, CoroutineKind, CoroutineSource, Expr, HirId, Node,
     expr_needs_parens, is_range_literal,
 };
@@ -60,17 +60,17 @@ use rustc_hir::{
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferCtxt, InferOk};
+use crate::rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferCtxt, InferOk};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_middle::middle::privacy::Level;
-use rustc_middle::traits::IsConstable;
-use rustc_middle::ty::error::TypeError;
-use rustc_middle::ty::print::{
+use crate::rustc_complete::middle::privacy::Level;
+use crate::rustc_complete::traits::IsConstable;
+use crate::rustc_complete::ty::error::TypeError;
+use crate::rustc_complete::ty::print::{
     PrintPolyTraitPredicateExt as _, PrintPolyTraitRefExt, PrintTraitPredicateExt as _,
     with_forced_trimmed_paths, with_no_trimmed_paths, with_types_for_suggestion,
 };
@@ -80,7 +80,7 @@ use rustc_middle::ty::print::{
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, AdtKind, GenericArgs, InferTy, IsSuggestable, Ty, TyCtxt, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeSuperVisitable, TypeVisitableExt, TypeVisitor, TypeckResults, Upcast,
     suggest_arbitrary_trait_bound, suggest_constraining_type_param,
@@ -91,15 +91,15 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_span::def_id::LocalDefId;
-use rustc_span::{
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{
     BytePos, DUMMY_SP, DesugaringKind, ExpnKind, Ident, MacroKind, Span, Symbol, kw, sym,
 };
 ```
@@ -1514,7 +1514,7 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                 if has_custom_message {
                     err.note(msg);
                 } else {
-                    err.messages = vec![(rustc_errors::DiagMessage::from(msg), Style::NoStyle)];
+                    err.messages = vec![(crate::rustc_errors::DiagMessage::from(msg), Style::NoStyle)];
                 }
                 err.span_label(
                     span,
@@ -3907,7 +3907,7 @@ ObligationCauseCode::ImplDerived(ref data) => {
                 if tcx.is_diagnostic_item(sym::FromResidual, parent_def_id)
                     && !tcx.features().enabled(sym::try_trait_v2)
                 {
-                    // If `#![feature(try_trait_v2)]` is not enabled, then there's no point on
+                    // If `#[feature(try_trait_v2)]` is not enabled, then there's no point on
                     // talking about `FromResidual<Result<A, B>>`, as the end user has nothing they
                     // can do about it. As far as they are concerned, `?` is compiler magic.
                     return;
@@ -6513,7 +6513,7 @@ fn get_deref_type_and_refs(mut ty: Ty<'_>) -> (Ty<'_>, Vec<hir::Mutability>) {
 /// Look for type `param` in an ADT being used only through a reference to confirm that suggesting
 /// `param: ?Sized` would be a valid constraint.
 struct FindTypeParam {
-    param: rustc_span::Symbol,
+    param: crate::rustc_span::Symbol,
     invalid_spans: Vec<Span> = Vec::new(),
     nested: bool = false,
 }

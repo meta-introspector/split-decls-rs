@@ -7,7 +7,7 @@ Generated 9 AST blocks from source file
 
 ```rust
 use rustc_ast as ast;
-use rustc_ast::{GenericParamKind, ItemKind, MetaItemInner, MetaItemKind, StmtKind};
+use crate::rustc_complete::{GenericParamKind, ItemKind, MetaItemInner, MetaItemKind, StmtKind};
 ```
 
 ## Block 2
@@ -15,7 +15,7 @@ use rustc_ast::{GenericParamKind, ItemKind, MetaItemInner, MetaItemKind, StmtKin
 
 ```rust
 use rustc_attr_parsing::validate_attr;
-use rustc_expand::base::{
+use crate::rustc_expand::base::{
     Annotatable, DeriveResolution, ExpandResult, ExtCtxt, Indeterminate, MultiItemModifier,
 };
 ```
@@ -24,9 +24,9 @@ use rustc_expand::base::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_feature::AttributeTemplate;
-use rustc_session::Session;
-use rustc_span::{ErrorGuaranteed, Ident, Span, sym};
+use crate::rustc_feature::AttributeTemplate;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, sym};
 ```
 
 ## Block 4

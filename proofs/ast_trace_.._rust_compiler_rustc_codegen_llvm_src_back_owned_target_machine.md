@@ -11,7 +11,7 @@ use std::ffi::CStr;
 use std::marker::PhantomData;
 use std::ptr::NonNull;
 
-use rustc_data_structures::small_c_str::SmallCStr;
+use crate::rustc_data_structures::small_c_str::SmallCStr;
 
 use crate::errors::LlvmError;
 use crate::llvm;

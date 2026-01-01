@@ -31,39 +31,39 @@ use rand::{RngCore, rng};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::NodeId;
-use rustc_data_structures::base_n::{CASE_INSENSITIVE, ToBaseN};
+use crate::rustc_complete::NodeId;
+use crate::rustc_data_structures::base_n::{CASE_INSENSITIVE, ToBaseN};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::flock;
-use rustc_data_structures::fx::{FxHashMap, FxIndexSet};
+use crate::rustc_data_structures::flock;
+use crate::rustc_data_structures::fx::{FxHashMap, FxIndexSet};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::profiling::{SelfProfiler, SelfProfilerRef};
+use crate::rustc_data_structures::profiling::{SelfProfiler, SelfProfilerRef};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::sync::{DynSend, DynSync, Lock, MappedReadGuard, ReadGuard, RwLock};
+use crate::rustc_data_structures::sync::{DynSend, DynSync, Lock, MappedReadGuard, ReadGuard, RwLock};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_errors::annotate_snippet_emitter_writer::AnnotateSnippetEmitter;
-use rustc_errors::codes::*;
-use rustc_errors::emitter::{
+use crate::rustc_complete::annotate_snippet_emitter_writer::AnnotateSnippetEmitter;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::emitter::{
     DynEmitter, HumanEmitter, HumanReadableErrorType, OutputTheme, stderr_destination,
 };
 ```
@@ -72,10 +72,10 @@ use rustc_errors::emitter::{
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_errors::json::JsonEmitter;
-use rustc_errors::timings::TimingSectionHandler;
-use rustc_errors::translation::Translator;
-use rustc_errors::{
+use crate::rustc_complete::json::JsonEmitter;
+use crate::rustc_complete::timings::TimingSectionHandler;
+use crate::rustc_complete::translation::Translator;
+use crate::rustc_complete::{
     Diag, DiagCtxt, DiagCtxtHandle, DiagMessage, Diagnostic, ErrorGuaranteed, FatalAbort,
     LintEmitter, TerminalUrl, fallback_fluent_bundle,
 };
@@ -85,26 +85,26 @@ use rustc_errors::{
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_hir::limit::Limit;
+use crate::rustc_complete::limit::Limit;
 use rustc_macros::HashStable_Generic;
-pub use rustc_span::def_id::StableCrateId;
-use rustc_span::edition::Edition;
-use rustc_span::source_map::{FilePathMapping, SourceMap};
+pub use crate::rustc_complete::def_id::StableCrateId;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::source_map::{FilePathMapping, SourceMap};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{FileNameDisplayPreference, RealFileName, Span, Symbol};
+use crate::rustc_complete::{FileNameDisplayPreference, RealFileName, Span, Symbol};
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_target::asm::InlineAsmArch;
-use rustc_target::spec::{
+use crate::rustc_target::asm::InlineAsmArch;
+use crate::rustc_target::spec::{
     CodeModel, DebuginfoKind, PanicStrategy, RelocModel, RelroLevel, SanitizerSet,
     SmallDataThresholdSupport, SplitDebuginfo, StackProtector, SymbolVisibility, Target,
     TargetTuple, TlsModel, apple,
@@ -297,10 +297,10 @@ impl LintEmitter for &'_ Session {
 
     fn emit_node_span_lint(
         self,
-        lint: &'static rustc_lint_defs::Lint,
+        lint: &'static crate::rustc_lint_defs::Lint,
         node_id: Self::Id,
-        span: impl Into<rustc_errors::MultiSpan>,
-        decorator: impl for<'a> rustc_errors::LintDiagnostic<'a, ()> + DynSend + 'static,
+        span: impl Into<crate::rustc_errors::MultiSpan>,
+        decorator: impl for<'a> crate::rustc_errors::LintDiagnostic<'a, ()> + DynSend + 'static,
     ) {
         self.psess.buffer_lint(lint, span, node_id, decorator);
     }
@@ -526,7 +526,7 @@ impl Session {
         {
             // FIXME: When crate_type is not available,
             // we use compiler options to determine the crate_type.
-            // We can't check `#![crate_type = "proc-macro"]` here.
+            // We can't check `#[crate_type = "proc-macro"]` here.
             false
         } else {
             self.target.crt_static_default
@@ -1159,8 +1159,8 @@ fn default_emitter(
 pub fn build_session(
     sopts: config::Options,
     io: CompilerIO,
-    fluent_bundle: Option<Arc<rustc_errors::FluentBundle>>,
-    registry: rustc_errors::registry::Registry,
+    fluent_bundle: Option<Arc<crate::rustc_errors::FluentBundle>>,
+    registry: crate::rustc_errors::registry::Registry,
     fluent_resources: Vec<&'static str>,
     driver_lint_caps: FxHashMap<lint::LintId, lint::Level>,
     target: Target,
@@ -1187,7 +1187,7 @@ pub fn build_session(
             sopts.unstable_opts.translate_directionality_markers,
         ),
     };
-    let source_map = rustc_span::source_map::get_source_map().unwrap();
+    let source_map = crate::rustc_span::source_map::get_source_map().unwrap();
     let emitter = default_emitter(&sopts, Arc::clone(&source_map), translator);
 
     let mut dcx = DiagCtxt::new(emitter)
@@ -1663,7 +1663,7 @@ fn mk_emitter(output: ErrorOutputType) -> Box<DynEmitter> {
     // FIXME(#100717): early errors aren't translated at the moment, so this is fine, but it will
     // need to reference every crate that might emit an early error for translation to work.
     let translator =
-        Translator::with_fallback_bundle(vec![rustc_errors::DEFAULT_LOCALE_RESOURCE], false);
+        Translator::with_fallback_bundle(vec![crate::rustc_errors::DEFAULT_LOCALE_RESOURCE], false);
     let emitter: Box<DynEmitter> = match output {
         config::ErrorOutputType::HumanReadable { kind, color_config } => {
             let short = kind.short();
@@ -1712,8 +1712,8 @@ pub trait RemapFileNameExt {
 **Metadata**: AST_ID=36 | TYPE=FUNCTION | NAME=for_scope | COMPLEXITY=10 | LINES=16
 
 ```rust
-impl RemapFileNameExt for rustc_span::FileName {
-    type Output<'a> = rustc_span::FileNameDisplay<'a>;
+impl RemapFileNameExt for crate::rustc_span::FileName {
+    type Output<'a> = crate::rustc_span::FileNameDisplay<'a>;
 
     fn for_scope(&self, sess: &Session, scope: RemapPathScopeComponents) -> Self::Output<'_> {
         assert!(
@@ -1733,7 +1733,7 @@ impl RemapFileNameExt for rustc_span::FileName {
 **Metadata**: AST_ID=37 | TYPE=FUNCTION | NAME=for_scope | COMPLEXITY=10 | LINES=16
 
 ```rust
-impl RemapFileNameExt for rustc_span::RealFileName {
+impl RemapFileNameExt for crate::rustc_span::RealFileName {
     type Output<'a> = &'a Path;
 
     fn for_scope(&self, sess: &Session, scope: RemapPathScopeComponents) -> Self::Output<'_> {

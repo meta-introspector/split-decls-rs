@@ -6,10 +6,10 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-//! Constraint construction and representation
-//!
-//! The second pass over the HIR determines the set of constraints.
-//! We walk the set of items and, for each member, generate new constraints.
+// Constraint construction and representation
+//
+// The second pass over the HIR determines the set of constraints.
+// We walk the set of items and, for each member, generate new constraints.
 
 use hir::def_id::{DefId, LocalDefId};
 ```
@@ -19,15 +19,15 @@ use hir::def_id::{DefId, LocalDefId};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::def::DefKind;
-use rustc_middle::ty::{self, GenericArgKind, GenericArgsRef, Ty, TyCtxt};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::ty::{self, GenericArgKind, GenericArgsRef, Ty, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 4

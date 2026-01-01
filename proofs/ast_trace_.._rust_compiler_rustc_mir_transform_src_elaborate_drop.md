@@ -13,35 +13,35 @@ use std::{fmt, iter, mem};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::{FIRST_VARIANT, FieldIdx, VariantIdx};
+use crate::rustc_abi::{FIRST_VARIANT, FieldIdx, VariantIdx};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_hir::lang_items::LangItem;
-use rustc_index::Idx;
-use rustc_middle::mir::*;
-use rustc_middle::ty::adjustment::PointerCoercion;
-use rustc_middle::ty::util::IntTypeExt;
-use rustc_middle::ty::{self, GenericArg, GenericArgsRef, Ty, TyCtxt};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_index::Idx;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::adjustment::PointerCoercion;
+use crate::rustc_complete::ty::util::IntTypeExt;
+use crate::rustc_complete::ty::{self, GenericArg, GenericArgsRef, Ty, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug, traits};
+use crate::rustc_complete::{bug, span_bug, traits};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::DUMMY_SP;
-use rustc_span::source_map::{Spanned, dummy_spanned};
+use crate::rustc_complete::DUMMY_SP;
+use crate::rustc_complete::source_map::{Spanned, dummy_spanned};
 ```
 
 ## Block 6

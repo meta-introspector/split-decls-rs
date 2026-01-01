@@ -6,17 +6,17 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::DefId;
-use rustc_middle::ty::{self, GenericArg, GenericArgKind, Ty, TyCtxt};
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::ty::{self, GenericArg, GenericArgKind, Ty, TyCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=55 | LINES=107
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::debug;
 
 use super::explicit::ExplicitPredicatesMap;

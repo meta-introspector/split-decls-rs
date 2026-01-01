@@ -6,8 +6,8 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_middle::traits::ObligationCause;
-use rustc_middle::ty;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty;
 
 use super::InferCtxt;
 use crate::infer::Term;

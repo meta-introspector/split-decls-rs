@@ -8,15 +8,15 @@ Generated 10 AST blocks from source file
 ```rust
 // Utility Functions.
 
-use rustc_hir::def_id::DefId;
-use rustc_middle::ty::layout::{HasTypingEnv, LayoutOf};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::ty::layout::{HasTypingEnv, LayoutOf};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 3

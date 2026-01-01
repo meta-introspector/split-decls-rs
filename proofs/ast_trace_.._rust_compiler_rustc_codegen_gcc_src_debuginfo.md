@@ -16,52 +16,52 @@ use gccjit::{Function, Location, RValue};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::Size;
-use rustc_codegen_ssa::mir::debuginfo::{DebugScope, FunctionDebugContext, VariableKind};
+use crate::rustc_abi::Size;
+use crate::rustc_codegen_ssa::mir::debuginfo::{DebugScope, FunctionDebugContext, VariableKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::traits::{DebugInfoBuilderMethods, DebugInfoCodegenMethods};
+use crate::rustc_codegen_ssa::traits::{DebugInfoBuilderMethods, DebugInfoCodegenMethods};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_index::bit_set::DenseBitSet;
-use rustc_index::{Idx, IndexVec};
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_index::{Idx, IndexVec};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{self, Body, SourceScope};
+use crate::rustc_complete::mir::{self, Body, SourceScope};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{ExistentialTraitRef, Instance, Ty};
+use crate::rustc_complete::ty::{ExistentialTraitRef, Instance, Ty};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::config::DebugInfo;
-use rustc_span::{BytePos, Pos, SourceFile, SourceFileAndLine, Span, Symbol};
+use crate::rustc_complete::config::DebugInfo;
+use crate::rustc_complete::{BytePos, Pos, SourceFile, SourceFileAndLine, Span, Symbol};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=dbg_var_addr | COMPLEXITY=16 | LINES=42
 
 ```rust
-use rustc_target::callconv::FnAbi;
+use crate::rustc_target::callconv::FnAbi;
 
 use crate::builder::Builder;
 use crate::context::CodegenCx;
@@ -200,7 +200,7 @@ fn make_mir_scope<'gcc, 'tcx>(
 
     let inlined_at = scope_data.inlined.map(|(_, callsite_span)| {
         // FIXME(eddyb) this doesn't account for the macro-related
-        // `Span` fixups that `rustc_codegen_ssa::mir::debuginfo` does.
+        // `Span` fixups that `crate::rustc_codegen_ssa::mir::debuginfo` does.
 
         // TODO(tempdragon): Add scope support and then revert to cg_llvm version of this closure
         // NOTE: These variables passed () here.
@@ -230,7 +230,7 @@ fn make_mir_scope<'gcc, 'tcx>(
 ```rust
 /// A source code location used to generate debug information.
 // FIXME(eddyb) rename this to better indicate it's a duplicate of
-// `rustc_span::Loc` rather than `DILocation`, perhaps by making
+// `crate::rustc_span::Loc` rather than `DILocation`, perhaps by making
 // `lookup_char_pos` return the right information instead.
 pub struct DebugLoc {
     /// Information about the original source file.
@@ -361,15 +361,15 @@ impl<'gcc, 'tcx> DebugInfoCodegenMethods<'tcx> for CodegenCx<'gcc, 'tcx> {
         let pos = span.lo();
         let DebugLoc { file, line, col } = self.lookup_debug_loc(pos);
         match file.name {
-            rustc_span::FileName::Real(ref name) => match *name {
-                rustc_span::RealFileName::LocalPath(ref name) => {
+            crate::rustc_span::FileName::Real(ref name) => match *name {
+                crate::rustc_span::RealFileName::LocalPath(ref name) => {
                     if let Some(name) = name.to_str() {
                         self.context.new_location(name, line as i32, col as i32)
                     } else {
                         Location::null()
                     }
                 }
-                rustc_span::RealFileName::Remapped {
+                crate::rustc_span::RealFileName::Remapped {
                     ref local_path,
                     virtual_name: ref _unused,
                 } => {

@@ -37,36 +37,36 @@ use std::ops::{Deref, DerefMut};
 ```rust
 use std::str;
 
-use rustc_abi::{HasDataLayout, Size, TargetDataLayout, VariantIdx};
+use crate::rustc_abi::{HasDataLayout, Size, TargetDataLayout, VariantIdx};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_codegen_ssa::back::versioned_llvm_target;
-use rustc_codegen_ssa::base::{wants_msvc_seh, wants_wasm_eh};
+use crate::rustc_codegen_ssa::back::versioned_llvm_target;
+use crate::rustc_codegen_ssa::base::{wants_msvc_seh, wants_wasm_eh};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_codegen_ssa::errors as ssa_errors;
-use rustc_codegen_ssa::traits::*;
-use rustc_data_structures::base_n::{ALPHANUMERIC_ONLY, ToBaseN};
+use crate::rustc_codegen_ssa::errors as ssa_errors;
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_data_structures::base_n::{ALPHANUMERIC_ONLY, ToBaseN};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_data_structures::small_c_str::SmallCStr;
-use rustc_hir::def_id::DefId;
-use rustc_middle::middle::codegen_fn_attrs::PatchableFunctionEntry;
-use rustc_middle::mir::mono::CodegenUnit;
-use rustc_middle::ty::layout::{
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::small_c_str::SmallCStr;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::middle::codegen_fn_attrs::PatchableFunctionEntry;
+use crate::rustc_complete::mir::mono::CodegenUnit;
+use crate::rustc_complete::ty::layout::{
     FnAbiError, FnAbiOfHelpers, FnAbiRequest, HasTypingEnv, LayoutError, LayoutOfHelpers,
 };
 ```
@@ -75,22 +75,22 @@ use rustc_middle::ty::layout::{
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Instance, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_session::Session;
-use rustc_session::config::{
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{
     BranchProtection, CFGuard, CFProtection, CrateType, DebugInfo, FunctionReturn, PAuthKey, PacRet,
 };
 ```
@@ -99,8 +99,8 @@ use rustc_session::config::{
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::source_map::Spanned;
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 13
@@ -108,7 +108,7 @@ use rustc_span::{DUMMY_SP, Span};
 
 ```rust
 use rustc_symbol_mangling::mangle_internal_symbol;
-use rustc_target::spec::{HasTargetSpec, RelocModel, SmallDataThresholdSupport, Target, TlsModel};
+use crate::rustc_target::spec::{HasTargetSpec, RelocModel, SmallDataThresholdSupport, Target, TlsModel};
 ```
 
 ## Block 14
@@ -1023,7 +1023,7 @@ impl<'ll, 'tcx> MiscCodegenMethods<'tcx> for CodegenCx<'ll, 'tcx> {
             Some(llfn)
         } else {
             // If the symbol already exists, it is an error: for example, the user wrote
-            // #[no_mangle] extern "C" fn main(..) {..}
+            // #[unsafe(no_mangle)] extern "C" fn main(..) {..}
             None
         }
     }

@@ -6,10 +6,10 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-//! Dataflow analysis results.
+// Dataflow analysis results.
 
-use rustc_index::IndexVec;
-use rustc_middle::mir::{BasicBlock, Body};
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::mir::{BasicBlock, Body};
 ```
 
 ## Block 2

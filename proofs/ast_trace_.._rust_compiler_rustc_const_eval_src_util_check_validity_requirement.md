@@ -6,14 +6,14 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{BackendRepr, FieldsShape, Scalar, Variants};
+use crate::rustc_abi::{BackendRepr, FieldsShape, Scalar, Variants};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::layout::{
+use crate::rustc_complete::ty::layout::{
     HasTyCtxt, LayoutCx, LayoutError, LayoutOf, TyAndLayout, ValidityRequirement,
 };
 ```
@@ -22,21 +22,21 @@ use rustc_middle::ty::layout::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{PseudoCanonicalInput, ScalarInt, Ty, TyCtxt};
+use crate::rustc_complete::ty::{PseudoCanonicalInput, ScalarInt, Ty, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, ty};
+use crate::rustc_complete::{bug, ty};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::DUMMY_SP;
+use crate::rustc_complete::DUMMY_SP;
 
 use crate::const_eval::{CanAccessMutGlobal, CheckAlignment, CompileTimeMachine};
 ```

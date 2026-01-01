@@ -7,36 +7,36 @@ Generated 13 AST blocks from source file
 
 ```rust
 use itertools::Itertools as _;
-use rustc_abi::{self as abi, FIRST_VARIANT};
+use crate::rustc_abi::{self as abi, FIRST_VARIANT};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::adjustment::PointerCoercion;
-use rustc_middle::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutOf, TyAndLayout};
+use crate::rustc_complete::ty::adjustment::PointerCoercion;
+use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutOf, TyAndLayout};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Instance, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, mir, span_bug};
+use crate::rustc_complete::{bug, mir, span_bug};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::config::OptLevel;
+use crate::rustc_complete::config::OptLevel;
 use tracing::{debug, instrument};
 ```
 

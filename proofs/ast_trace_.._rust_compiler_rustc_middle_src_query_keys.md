@@ -6,18 +6,18 @@ Generated 73 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! Defines the set of legal keys that can be used in queries.
+// Defines the set of legal keys that can be used in queries.
 
 use std::ffi::OsStr;
 
-use rustc_hir::def_id::{CrateNum, DefId, LOCAL_CRATE, LocalDefId, LocalModDefId, ModDefId};
+use crate::rustc_complete::def_id::{CrateNum, DefId, LOCAL_CRATE, LocalDefId, LocalModDefId, ModDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::hir_id::{HirId, OwnerId};
+use crate::rustc_complete::hir_id::{HirId, OwnerId};
 ```
 
 ## Block 3
@@ -32,7 +32,7 @@ use rustc_query_system::query::{DefIdCache, DefaultCache, SingleCache, VecCache}
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Ident, Span, Symbol};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol};
 ```
 
 ## Block 5
@@ -883,7 +883,7 @@ impl<'tcx> Key for (DefId, Ty<'tcx>, GenericArgsRef<'tcx>, ty::ParamEnv<'tcx>) {
 **Metadata**: AST_ID=65 | TYPE=FUNCTION | NAME=default_span | COMPLEXITY=5 | LINES=8
 
 ```rust
-impl<'tcx> Key for (Ty<'tcx>, rustc_abi::VariantIdx) {
+impl<'tcx> Key for (Ty<'tcx>, crate::rustc_abi::VariantIdx) {
     type Cache<V> = DefaultCache<Self, V>;
 
     fn default_span(&self, _tcx: TyCtxt<'_>) -> Span {

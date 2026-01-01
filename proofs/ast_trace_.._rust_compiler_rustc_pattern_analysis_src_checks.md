@@ -6,7 +6,7 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! Contains checks that must be run to validate matches before performing usefulness analysis.
+// Contains checks that must be run to validate matches before performing usefulness analysis.
 
 use crate::constructor::Constructor::*;
 use crate::pat_column::PatternColumn;

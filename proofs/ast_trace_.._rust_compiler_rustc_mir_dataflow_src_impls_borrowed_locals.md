@@ -6,9 +6,9 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::mir::visit::Visitor;
-use rustc_middle::mir::*;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::*;
 
 use crate::{Analysis, GenKill};
 ```

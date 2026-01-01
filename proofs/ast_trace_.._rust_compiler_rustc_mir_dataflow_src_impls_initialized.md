@@ -8,17 +8,17 @@ Generated 27 AST blocks from source file
 ```rust
 use std::assert_matches::assert_matches;
 
-use rustc_abi::VariantIdx;
-use rustc_index::Idx;
-use rustc_index::bit_set::{DenseBitSet, MixedBitSet};
+use crate::rustc_abi::VariantIdx;
+use crate::rustc_index::Idx;
+use crate::rustc_index::bit_set::{DenseBitSet, MixedBitSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::mir::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::{
     self, Body, CallReturnPlaces, Location, SwitchTargetValue, TerminatorEdges,
 };
 ```
@@ -27,8 +27,8 @@ use rustc_middle::mir::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::util::Discr;
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::ty::util::Discr;
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 4

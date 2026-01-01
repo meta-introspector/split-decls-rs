@@ -23,15 +23,15 @@ use std::{fmt, iter, mem, ptr, slice};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::aligned::{Aligned, align_of};
+use crate::rustc_data_structures::aligned::{Aligned, align_of};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::sync::DynSync;
-use rustc_serialize::{Encodable, Encoder};
+use crate::rustc_data_structures::sync::DynSync;
+use crate::rustc_serialize::{Encodable, Encoder};
 ```
 
 ## Block 5

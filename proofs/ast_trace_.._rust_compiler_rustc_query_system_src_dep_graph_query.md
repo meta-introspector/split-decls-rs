@@ -6,15 +6,15 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_data_structures::graph::linked_graph::{Direction, INCOMING, LinkedGraph, NodeIndex};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::graph::linked_graph::{Direction, INCOMING, LinkedGraph, NodeIndex};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_index::IndexVec;
+use crate::rustc_index::IndexVec;
 
 use super::{DepNode, DepNodeIndex};
 ```

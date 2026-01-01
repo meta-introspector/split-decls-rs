@@ -6,49 +6,49 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=14
 
 ```rust
-//! Confirmation.
-//!
-//! Confirmation unifies the output type parameters of the trait
-//! with the values found in the obligation, possibly yielding a
-//! type error. See the [rustc dev guide] for more details.
-//!
-//! [rustc dev guide]:
-//! https://rustc-dev-guide.rust-lang.org/traits/resolution.html#confirmation
+// Confirmation.
+//
+// Confirmation unifies the output type parameters of the trait
+// with the values found in the obligation, possibly yielding a
+// type error. See the [rustc dev guide] for more details.
+//
+// [rustc dev guide]:
+// https://rustc-dev-guide.rust-lang.org/traits/resolution.html#confirmation
 
 use std::ops::ControlFlow;
 
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_hir::lang_items::LangItem;
-use rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferOk};
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferOk};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_infer::traits::ObligationCauseCode;
-use rustc_middle::traits::{BuiltinImplSource, SignatureMismatchData};
+use crate::rustc_infer::traits::ObligationCauseCode;
+use crate::rustc_complete::traits::{BuiltinImplSource, SignatureMismatchData};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, GenericArgsRef, Region, SizedTraitKind, Ty, TyCtxt, Upcast};
+use crate::rustc_complete::ty::{self, GenericArgsRef, Region, SizedTraitKind, Ty, TyCtxt, Upcast};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::def_id::DefId;
+use crate::rustc_complete::def_id::DefId;
 use thin_vec::thin_vec;
 use tracing::{debug, instrument};
 ```

@@ -6,7 +6,7 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=15 | LINES=40
 
 ```rust
-use rustc_span::hygiene::Transparency;
+use crate::rustc_complete::hygiene::Transparency;
 
 use super::prelude::*;
 

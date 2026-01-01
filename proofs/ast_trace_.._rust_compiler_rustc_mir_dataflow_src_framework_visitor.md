@@ -6,7 +6,7 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{self, BasicBlock, Location, traversal};
+use crate::rustc_complete::mir::{self, BasicBlock, Location, traversal};
 ```
 
 ## Block 2

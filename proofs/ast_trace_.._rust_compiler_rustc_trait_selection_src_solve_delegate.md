@@ -8,17 +8,17 @@ Generated 9 AST blocks from source file
 ```rust
 use std::ops::Deref;
 
-use rustc_data_structures::fx::FxHashSet;
-use rustc_hir::LangItem;
-use rustc_hir::def_id::{CRATE_DEF_ID, DefId};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_infer::infer::canonical::query_response::make_query_region_constraints;
-use rustc_infer::infer::canonical::{
+use crate::rustc_infer::infer::canonical::query_response::make_query_region_constraints;
+use crate::rustc_infer::infer::canonical::{
     Canonical, CanonicalExt as _, CanonicalQueryInput, CanonicalVarKind, CanonicalVarValues,
 };
 ```
@@ -27,17 +27,17 @@ use rustc_infer::infer::canonical::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::{InferCtxt, RegionVariableOrigin, SubregionOrigin, TyCtxtInferExt};
+use crate::rustc_infer::infer::{InferCtxt, RegionVariableOrigin, SubregionOrigin, TyCtxtInferExt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_infer::traits::solve::Goal;
-use rustc_middle::traits::query::NoSolution;
-use rustc_middle::traits::solve::Certainty;
-use rustc_middle::ty::{
+use crate::rustc_infer::traits::solve::Goal;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::traits::solve::Certainty;
+use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeFlags, TypeFoldable, TypeVisitableExt as _, TypingMode,
 };
 ```
@@ -46,7 +46,7 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, ErrorGuaranteed, Span};
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
 ```
 
 ## Block 6

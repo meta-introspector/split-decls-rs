@@ -8,8 +8,8 @@ Generated 8 AST blocks from source file
 ```rust
 use std::fmt::Debug;
 
-use rustc_middle::mir::*;
-use rustc_middle::ty::{Ty, TyCtxt};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{Ty, TyCtxt};
 ```
 
 ## Block 2
@@ -125,7 +125,7 @@ use crate::patch::MirPatch;
 pub(super) struct EarlyOtherwiseBranch;
 
 impl<'tcx> crate::MirPass<'tcx> for EarlyOtherwiseBranch {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() >= 2
     }
 

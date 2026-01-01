@@ -6,7 +6,7 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! Definitions shared by macros / syntax extensions and e.g. `rustc_middle`.
+// Definitions shared by macros / syntax extensions and e.g. `rustc_middle`.
 
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
 ```

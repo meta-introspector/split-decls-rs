@@ -6,12 +6,12 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=8
 
 ```rust
-//! Cache for candidate selection.
+// Cache for candidate selection.
 
 use std::hash::Hash;
 
-use rustc_data_structures::fx::FxHashMap;
-use rustc_data_structures::sync::Lock;
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::sync::Lock;
 
 use crate::dep_graph::{DepContext, DepNodeIndex};
 ```

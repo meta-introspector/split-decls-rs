@@ -6,16 +6,16 @@ Generated 14 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12
 
 ```rust
-//! Propagate `Qualif`s between locals and query the results.
-//!
-//! This contains the dataflow analysis used to track `Qualif`s on complex control-flow graphs.
+// Propagate `Qualif`s between locals and query the results.
+//
+// This contains the dataflow analysis used to track `Qualif`s on complex control-flow graphs.
 
 use std::fmt;
 use std::marker::PhantomData;
 
-use rustc_index::bit_set::MixedBitSet;
-use rustc_middle::mir::visit::Visitor;
-use rustc_middle::mir::{
+use crate::rustc_index::bit_set::MixedBitSet;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::{
     self, BasicBlock, CallReturnPlaces, Local, Location, Statement, StatementKind, TerminatorEdges,
 };
 ```
@@ -24,8 +24,8 @@ use rustc_middle::mir::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_mir_dataflow::fmt::DebugWithContext;
-use rustc_mir_dataflow::{Analysis, JoinSemiLattice};
+use crate::rustc_mir_dataflow::fmt::DebugWithContext;
+use crate::rustc_mir_dataflow::{Analysis, JoinSemiLattice};
 ```
 
 ## Block 3

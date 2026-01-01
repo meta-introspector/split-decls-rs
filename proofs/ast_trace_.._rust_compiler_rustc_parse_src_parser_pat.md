@@ -8,30 +8,30 @@ Generated 64 AST blocks from source file
 ```rust
 use std::ops::Bound;
 
-use rustc_ast::mut_visit::{self, MutVisitor};
+use crate::rustc_complete::mut_visit::{self, MutVisitor};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::token::NtPatKind::*;
-use rustc_ast::token::{self, IdentIsRaw, MetaVarKind, Token};
+use crate::rustc_complete::token::NtPatKind::*;
+use crate::rustc_complete::token::{self, IdentIsRaw, MetaVarKind, Token};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::util::parser::ExprPrecedence;
-use rustc_ast::visit::{self, Visitor};
+use crate::rustc_complete::util::parser::ExprPrecedence;
+use crate::rustc_complete::visit::{self, Visitor};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_ast::{
+use crate::rustc_complete::{
     self as ast, Arm, AttrVec, BindingMode, ByRef, Expr, ExprKind, LocalKind, MacCall, Mutability,
     Pat, PatField, PatFieldsRest, PatKind, Path, QSelf, RangeEnd, RangeSyntax, Stmt, StmtKind,
 };
@@ -42,22 +42,22 @@ use rustc_ast::{
 
 ```rust
 use rustc_ast_pretty::pprust;
-use rustc_errors::{Applicability, Diag, DiagArgValue, PResult, StashKey};
+use crate::rustc_complete::{Applicability, Diag, DiagArgValue, PResult, StashKey};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::errors::ExprParenthesesNeeded;
-use rustc_span::source_map::{Spanned, respan};
+use crate::rustc_complete::errors::ExprParenthesesNeeded;
+use crate::rustc_complete::source_map::{Spanned, respan};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{BytePos, ErrorGuaranteed, Ident, Span, kw, sym};
+use crate::rustc_complete::{BytePos, ErrorGuaranteed, Ident, Span, kw, sym};
 ```
 
 ## Block 8

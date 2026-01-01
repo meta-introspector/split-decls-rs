@@ -6,7 +6,7 @@ Generated 16 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! Code related to parsing literals.
+// Code related to parsing literals.
 
 use std::{ascii, fmt, str};
 ```
@@ -24,7 +24,7 @@ use rustc_literal_escaper::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ByteSymbol, Span, Symbol, kw, sym};
+use crate::rustc_complete::{ByteSymbol, Span, Symbol, kw, sym};
 ```
 
 ## Block 4

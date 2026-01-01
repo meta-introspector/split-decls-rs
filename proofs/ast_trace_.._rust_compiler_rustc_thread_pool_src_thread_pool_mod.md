@@ -6,10 +6,10 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=10
 
 ```rust
-//! Contains support for user-managed thread pools, represented by the
-//! the [`ThreadPool`] type (see that struct for details).
-//!
-//! [`ThreadPool`]: struct.ThreadPool.html
+// Contains support for user-managed thread pools, represented by the
+// the [`ThreadPool`] type (see that struct for details).
+//
+// [`ThreadPool`]: struct.ThreadPool.html
 
 use std::error::Error;
 use std::fmt;
@@ -127,7 +127,7 @@ impl ThreadPool {
     /// # use rustc_thread_pool as rayon;
     /// fn main() {
     ///     rayon::ThreadPoolBuilder::new().num_threads(1).build_global().unwrap();
-    ///     let pool = rustc_thread_pool::ThreadPoolBuilder::default().build().unwrap();
+    ///     let pool = crate::rustc_thread_pool::ThreadPoolBuilder::default().build().unwrap();
     ///     let do_it = || {
     ///         print!("one ");
     ///         pool.install(||{});

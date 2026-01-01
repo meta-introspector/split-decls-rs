@@ -10,14 +10,14 @@ use std::borrow::Cow;
 use std::error::Error;
 use std::fmt;
 
-use rustc_error_messages::fluent_bundle::resolver::errors::{ReferenceKind, ResolverError};
+use crate::rustc_error_messages::fluent_bundle::resolver::errors::{ReferenceKind, ResolverError};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_error_messages::{FluentArgs, FluentError};
+use crate::rustc_error_messages::{FluentArgs, FluentError};
 ```
 
 ## Block 3

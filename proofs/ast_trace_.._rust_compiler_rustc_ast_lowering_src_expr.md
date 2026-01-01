@@ -9,36 +9,36 @@ Generated 14 AST blocks from source file
 use std::ops::ControlFlow;
 use std::sync::Arc;
 
-use rustc_ast::*;
+use crate::rustc_complete::*;
 use rustc_ast_pretty::pprust::expr_to_string;
-use rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use rustc_hir as hir;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{HirId, Target, find_attr};
+use crate::rustc_complete::{HirId, Target, find_attr};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::span_bug;
-use rustc_middle::ty::TyCtxt;
-use rustc_session::errors::report_lit_error;
-use rustc_span::source_map::{Spanned, respan};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::errors::report_lit_error;
+use crate::rustc_complete::source_map::{Spanned, respan};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, DesugaringKind, Ident, Span, Symbol, sym};
+use crate::rustc_complete::{DUMMY_SP, DesugaringKind, Ident, Span, Symbol, sym};
 ```
 
 ## Block 5
@@ -101,7 +101,7 @@ struct WillCreateDefIdsVisitor {}
 **Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=visit_anon_const | COMPLEXITY=13 | LINES=21
 
 ```rust
-impl<'v> rustc_ast::visit::Visitor<'v> for WillCreateDefIdsVisitor {
+impl<'v> crate::rustc_ast::visit::Visitor<'v> for WillCreateDefIdsVisitor {
     type Result = ControlFlow<Span>;
 
     fn visit_anon_const(&mut self, c: &'v AnonConst) -> Self::Result {
@@ -1128,7 +1128,7 @@ impl<'hir> LoweringContext<'_, 'hir> {
 
     fn lower_expr_closure(
         &mut self,
-        attrs: &[rustc_hir::Attribute],
+        attrs: &[crate::rustc_hir::Attribute],
         binder: &ClosureBinder,
         capture_clause: CaptureBy,
         closure_id: NodeId,
@@ -1593,7 +1593,7 @@ impl<'hir> LoweringContext<'_, 'hir> {
         e2: Option<&Expr>,
         lims: RangeLimits,
     ) -> hir::ExprKind<'hir> {
-        use rustc_ast::RangeLimits::*;
+        use crate::rustc_complete::RangeLimits::*;
 
         let lang_item = match (e1, e2, lims) {
             (None, None, HalfOpen) => hir::LangItem::RangeFull,
@@ -1768,7 +1768,7 @@ impl<'hir> LoweringContext<'_, 'hir> {
             && !self.tcx.features().coroutines()
             && !self.tcx.features().gen_blocks()
         {
-            rustc_session::parse::feature_err(
+            crate::rustc_session::parse::feature_err(
                 &self.tcx.sess,
                 sym::yield_expr,
                 span,

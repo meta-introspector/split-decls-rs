@@ -6,16 +6,16 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=13
 
 ```rust
-//! This module contains code to instantiate new values into a
-//! `Canonical<'tcx, T>`.
-//!
-//! For an overview of what canonicalization is and how it fits into
-//! rustc, check out the [chapter in the rustc dev guide][c].
-//!
-//! [c]: https://rust-lang.github.io/chalk/book/canonical_queries/canonicalization.html
+// This module contains code to instantiate new values into a
+// `Canonical<'tcx, T>`.
+//
+// For an overview of what canonicalization is and how it fits into
+// rustc, check out the [chapter in the rustc dev guide][c].
+//
+// [c]: https://rust-lang.github.io/chalk/book/canonical_queries/canonicalization.html
 
 use rustc_macros::extension;
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, DelayedMap, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeSuperVisitable,
     TypeVisitableExt, TypeVisitor,
 };

@@ -6,20 +6,20 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-//! Test exhaustiveness checking.
+// Test exhaustiveness checking.
 
-#![allow(unused_crate_dependencies)]
+#[allow(unused_crate_dependencies)]
 
 use common::*;
-use rustc_pattern_analysis::MatchArm;
-use rustc_pattern_analysis::pat::{DeconstructedPat, WitnessPat};
+use crate::rustc_pattern_analysis::MatchArm;
+use crate::rustc_pattern_analysis::pat::{DeconstructedPat, WitnessPat};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=run | COMPLEXITY=7 | LINES=23
 
 ```rust
-use rustc_pattern_analysis::usefulness::PlaceValidity;
+use crate::rustc_pattern_analysis::usefulness::PlaceValidity;
 
 #[macro_use]
 mod common;

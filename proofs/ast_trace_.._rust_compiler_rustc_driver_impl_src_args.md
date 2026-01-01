@@ -13,7 +13,7 @@ use std::{env, error, fmt, fs, io};
 **Metadata**: AST_ID=2 | TYPE=STRUCT | NAME=Expander | COMPLEXITY=2 | LINES=10
 
 ```rust
-use rustc_session::EarlyDiagCtxt;
+use crate::rustc_complete::EarlyDiagCtxt;
 
 /// Expands argfiles in command line arguments.
 #[derive(Default)]

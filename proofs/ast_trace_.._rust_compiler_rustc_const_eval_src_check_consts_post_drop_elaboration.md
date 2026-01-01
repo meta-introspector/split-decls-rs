@@ -6,16 +6,16 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::visit::Visitor;
-use rustc_middle::mir::{self, BasicBlock, Location};
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::{self, BasicBlock, Location};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=checking_enabled | COMPLEXITY=10 | LINES=23
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_span::sym;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::sym;
 use tracing::trace;
 
 use super::ConstCx;

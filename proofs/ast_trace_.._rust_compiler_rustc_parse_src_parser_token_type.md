@@ -6,8 +6,8 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::token::TokenKind;
-use rustc_span::symbol::{Symbol, kw, sym};
+use crate::rustc_complete::token::TokenKind;
+use crate::rustc_complete::symbol::{Symbol, kw, sym};
 ```
 
 ## Block 2
@@ -482,7 +482,7 @@ macro_rules! exp {
     // `ExpTokenPair` helper rules.
     (@tok, $tok:ident) => {
         $crate::parser::token_type::ExpTokenPair {
-            tok: rustc_ast::token::$tok,
+            tok: crate::rustc_ast::token::$tok,
             token_type: $crate::parser::token_type::TokenType::$tok
         }
     };
@@ -490,13 +490,13 @@ macro_rules! exp {
     // `ExpKeywordPair` helper rules.
     (@kw, $kw:ident, $token_type:ident) => {
         $crate::parser::token_type::ExpKeywordPair {
-            kw: rustc_span::symbol::kw::$kw,
+            kw: crate::rustc_span::symbol::kw::$kw,
             token_type: $crate::parser::token_type::TokenType::$token_type,
         }
     };
     (@sym, $kw:ident, $token_type:ident) => {
         $crate::parser::token_type::ExpKeywordPair {
-            kw: rustc_span::symbol::sym::$kw,
+            kw: crate::rustc_span::symbol::sym::$kw,
             token_type: $crate::parser::token_type::TokenType::$token_type,
         }
     };

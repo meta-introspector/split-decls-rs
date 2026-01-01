@@ -6,30 +6,30 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3
 
 ```rust
-//! Functions for reading and writing discriminants of multi-variant layouts (enums and coroutines).
+// Functions for reading and writing discriminants of multi-variant layouts (enums and coroutines).
 
-use rustc_abi::{self as abi, FieldIdx, TagEncoding, VariantIdx, Variants};
+use crate::rustc_abi::{self as abi, FieldIdx, TagEncoding, VariantIdx, Variants};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::layout::{PrimitiveExt, TyAndLayout};
+use crate::rustc_complete::ty::layout::{PrimitiveExt, TyAndLayout};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, CoroutineArgsExt, ScalarInt, Ty};
+use crate::rustc_complete::ty::{self, CoroutineArgsExt, ScalarInt, Ty};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{mir, span_bug};
+use crate::rustc_complete::{mir, span_bug};
 ```
 
 ## Block 5

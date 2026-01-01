@@ -8,7 +8,7 @@ Generated 13 AST blocks from source file
 ```rust
 use std::ops::ControlFlow;
 
-use rustc_data_structures::graph::iterate::{
+use crate::rustc_data_structures::graph::iterate::{
     NodeStatus, TriColorDepthFirstSearch, TriColorVisitor,
 };
 ```
@@ -17,24 +17,24 @@ use rustc_data_structures::graph::iterate::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::LangItem;
-use rustc_hir::def::DefKind;
-use rustc_middle::mir::{self, BasicBlock, BasicBlocks, Body, Terminator, TerminatorKind};
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::mir::{self, BasicBlock, BasicBlocks, Body, Terminator, TerminatorKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, GenericArg, GenericArgs, Instance, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, GenericArg, GenericArgs, Instance, Ty, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=run_lint | COMPLEXITY=15 | LINES=26
 
 ```rust
-use rustc_session::lint::builtin::UNCONDITIONAL_RECURSION;
-use rustc_span::Span;
+use crate::rustc_complete::lint::builtin::UNCONDITIONAL_RECURSION;
+use crate::rustc_complete::Span;
 
 use crate::errors::UnconditionalRecursion;
 use crate::pass_manager::MirLint;

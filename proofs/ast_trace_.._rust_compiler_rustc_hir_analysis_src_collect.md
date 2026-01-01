@@ -6,38 +6,38 @@ Generated 50 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=24
 
 ```rust
-//! "Collection" is the process of determining the type and other external
-//! details of each item in Rust. Collection is specifically concerned
-//! with *inter-procedural* things -- for example, for a function
-//! definition, collection will figure out the type and signature of the
-//! function, but it will not visit the *body* of the function in any way,
-//! nor examine type annotations on local variables (that's the job of
-//! type *checking*).
-//!
-//! Collecting is ultimately defined by a bundle of queries that
-//! inquire after various facts about the items in the crate (e.g.,
-//! `type_of`, `generics_of`, `predicates_of`, etc). See the `provide` function
-//! for the full set.
-//!
-//! At present, however, we do run collection across all items in the
-//! crate as a kind of pass. This should eventually be factored away.
+// "Collection" is the process of determining the type and other external
+// details of each item in Rust. Collection is specifically concerned
+// with *inter-procedural* things -- for example, for a function
+// definition, collection will figure out the type and signature of the
+// function, but it will not visit the *body* of the function in any way,
+// nor examine type annotations on local variables (that's the job of
+// type *checking*).
+//
+// Collecting is ultimately defined by a bundle of queries that
+// inquire after various facts about the items in the crate (e.g.,
+// `type_of`, `generics_of`, `predicates_of`, etc). See the `provide` function
+// for the full set.
+//
+// At present, however, we do run collection across all items in the
+// crate as a kind of pass. This should eventually be factored away.
 
 use std::assert_matches::assert_matches;
 use std::cell::Cell;
 use std::iter;
 use std::ops::Bound;
 
-use rustc_abi::ExternAbi;
-use rustc_ast::Recovered;
-use rustc_data_structures::fx::{FxHashSet, FxIndexMap};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_complete::Recovered;
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::unord::UnordMap;
-use rustc_errors::{
+use crate::rustc_data_structures::unord::UnordMap;
+use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, E0228, ErrorGuaranteed, StashKey, struct_span_code_err,
 };
 ```
@@ -46,52 +46,52 @@ use rustc_errors::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::intravisit::{InferKind, Visitor, VisitorExt};
+use crate::rustc_complete::intravisit::{InferKind, Visitor, VisitorExt};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, GenericParamKind, HirId, Node, PreciseCapturingArgKind, find_attr};
+use crate::rustc_complete::{self as hir, GenericParamKind, HirId, Node, PreciseCapturingArgKind, find_attr};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
+use crate::rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::traits::{DynCompatibilityViolation, ObligationCause};
+use crate::rustc_infer::traits::{DynCompatibilityViolation, ObligationCause};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::query::Providers;
-use rustc_middle::ty::util::{Discr, IntTypeExt};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::util::{Discr, IntTypeExt};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, AdtKind, Const, IsSuggestable, Ty, TyCtxt, TypeVisitableExt, TypingMode, fold_regions,
 };
 ```
@@ -100,23 +100,23 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_trait_selection::error_reporting::traits::suggestions::NextTypeParamName;
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits::{
+use crate::rustc_trait_selection::error_reporting::traits::suggestions::NextTypeParamName;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits::{
     FulfillmentError, ObligationCtxt, hir_ty_lowering_dyn_compatibility_violations,
 };
 ```
@@ -151,7 +151,7 @@ mod type_of;
 
 ///////////////////////////////////////////////////////////////////////////
 
-/// Adds query implementations to the [Providers] vtable, see [`rustc_middle::query`]
+/// Adds query implementations to the [Providers] vtable, see [`crate::rustc_middle::query`]
 pub(crate) fn provide(providers: &mut Providers) {
     resolve_bound_vars::provide(providers);
     *providers = Providers {
@@ -212,7 +212,7 @@ pub(crate) fn provide(providers: &mut Providers) {
 /// An important thing to note is that `ItemCtxt` does no inference -- it has no [`InferCtxt`] --
 /// while `FnCtxt` does do inference.
 ///
-/// [`InferCtxt`]: rustc_infer::infer::InferCtxt
+/// [`InferCtxt`]: crate::rustc_infer::infer::InferCtxt
 ///
 /// # Trait predicates
 ///
@@ -413,7 +413,7 @@ impl<'tcx> ItemCtxt<'tcx> {
                 format!(
                     "try replacing `_` with the type{} in the corresponding trait method \
                         signature",
-                    rustc_errors::pluralize!(infer_replacements.len()),
+                    crate::rustc_errors::pluralize!(infer_replacements.len()),
                 ),
                 infer_replacements,
                 Applicability::MachineApplicable,
@@ -545,7 +545,7 @@ impl<'tcx> HirTyLowerer<'tcx> for ItemCtxt<'tcx> {
         &self,
         span: Span,
         item_def_id: DefId,
-        item_segment: &rustc_hir::PathSegment<'tcx>,
+        item_segment: &crate::rustc_hir::PathSegment<'tcx>,
         poly_trait_ref: ty::PolyTraitRef<'tcx>,
     ) -> Result<(DefId, ty::GenericArgsRef<'tcx>), ErrorGuaranteed> {
         if let Some(trait_ref) = poly_trait_ref.no_bound_vars() {
@@ -643,7 +643,7 @@ impl<'tcx> HirTyLowerer<'tcx> for ItemCtxt<'tcx> {
         &self,
         decl: &hir::FnDecl<'tcx>,
         _generics: Option<&hir::Generics<'_>>,
-        hir_id: rustc_hir::HirId,
+        hir_id: crate::rustc_hir::HirId,
         _hir_ty: Option<&hir::Ty<'_>>,
     ) -> (Vec<Ty<'tcx>>, Ty<'tcx>) {
         let tcx = self.tcx();
@@ -966,7 +966,7 @@ fn lower_variant<'tcx>(
 
 ```rust
 fn adt_def(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::AdtDef<'_> {
-    use rustc_hir::*;
+    use crate::rustc_complete::*;
 
     let Node::Item(item) = tcx.hir_node_by_def_id(def_id) else {
         bug!("expected ADT to be an item");
@@ -1183,8 +1183,8 @@ fn trait_def(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::TraitDef {
 ```rust
 #[instrument(level = "debug", skip(tcx), ret)]
 fn fn_sig(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::EarlyBinder<'_, ty::PolyFnSig<'_>> {
-    use rustc_hir::Node::*;
-    use rustc_hir::*;
+    use crate::rustc_complete::Node::*;
+    use crate::rustc_complete::*;
 
     let hir_id = tcx.local_def_id_to_hir_id(def_id);
 
@@ -1557,7 +1557,7 @@ fn check_impl_constness(
                 if tcx.features().const_trait_impl() {
                     ""
                 } else {
-                    "enable `#![feature(const_trait_impl)]` in your crate and "
+                    "enable `#[feature(const_trait_impl)]` in your crate and "
                 },
             ),
             (false, _) | (_, false) => (None, ""),
@@ -1669,7 +1669,7 @@ fn coroutine_kind(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Option<hir::CoroutineK
     match tcx.hir_node_by_def_id(def_id) {
         Node::Expr(&hir::Expr {
             kind:
-                hir::ExprKind::Closure(&rustc_hir::Closure {
+                hir::ExprKind::Closure(&crate::rustc_hir::Closure {
                     kind: hir::ClosureKind::Coroutine(kind),
                     ..
                 }),
@@ -1685,7 +1685,7 @@ fn coroutine_kind(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Option<hir::CoroutineK
 
 ```rust
 fn coroutine_for_closure(tcx: TyCtxt<'_>, def_id: LocalDefId) -> DefId {
-    let &rustc_hir::Closure { kind: hir::ClosureKind::CoroutineClosure(_), body, .. } =
+    let &crate::rustc_hir::Closure { kind: hir::ClosureKind::CoroutineClosure(_), body, .. } =
         tcx.hir_node_by_def_id(def_id).expect_closure()
     else {
         bug!()
@@ -1693,7 +1693,7 @@ fn coroutine_for_closure(tcx: TyCtxt<'_>, def_id: LocalDefId) -> DefId {
 
     let &hir::Expr {
         kind:
-            hir::ExprKind::Closure(&rustc_hir::Closure {
+            hir::ExprKind::Closure(&crate::rustc_hir::Closure {
                 def_id,
                 kind: hir::ClosureKind::Coroutine(_),
                 ..

@@ -6,17 +6,17 @@ Generated 15 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=17
 
 ```rust
-//! Common utilities shared by both `rustc_ast` and `rustc_type_ir`.
-//!
-//! Don't depend on this crate directly; both of those crates should re-export
-//! the functionality. Additionally, if you're in scope of `rustc_middle`, then
-//! prefer imports via that too, to avoid needing to directly depend on (e.g.)
-//! `rustc_type_ir` for a single import.
+// Common utilities shared by both `rustc_ast` and `rustc_type_ir`.
+//
+// Don't depend on this crate directly; both of those crates should re-export
+// the functionality. Additionally, if you're in scope of `rustc_middle`, then
+// prefer imports via that too, to avoid needing to directly depend on (e.g.)
+// `rustc_type_ir` for a single import.
 
 // tidy-alphabetical-start
-#![cfg_attr(feature = "nightly", allow(internal_features))]
-#![cfg_attr(feature = "nightly", feature(never_type))]
-#![cfg_attr(feature = "nightly", feature(rustc_attrs))]
+#[cfg_attr(feature = "nightly", allow(internal_features))]
+#[cfg_attr(feature = "nightly", feature(never_type))]
+#[cfg_attr(feature = "nightly", feature(rustc_attrs))]
 // tidy-alphabetical-end
 
 use std::fmt;
@@ -30,7 +30,7 @@ use rustc_macros::{Decodable_NoContext, Encodable_NoContext, HashStable_NoContex
 
 ```rust
 #[cfg(feature = "nightly")]
-use rustc_span::{Symbol, sym};
+use crate::rustc_complete::{Symbol, sym};
 ```
 
 ## Block 3

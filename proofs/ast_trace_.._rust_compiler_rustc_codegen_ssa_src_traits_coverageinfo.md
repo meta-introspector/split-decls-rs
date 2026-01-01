@@ -6,8 +6,8 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=add_coverage | COMPLEXITY=2 | LINES=10
 
 ```rust
-use rustc_middle::mir::coverage::CoverageKind;
-use rustc_middle::ty::Instance;
+use crate::rustc_complete::mir::coverage::CoverageKind;
+use crate::rustc_complete::ty::Instance;
 
 pub trait CoverageInfoBuilderMethods<'tcx> {
     /// Handle the MIR coverage info in a backend-specific way.

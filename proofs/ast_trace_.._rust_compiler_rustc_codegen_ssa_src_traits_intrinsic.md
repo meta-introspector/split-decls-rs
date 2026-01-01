@@ -6,8 +6,8 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=codegen_intrinsic_call | COMPLEXITY=13 | LINES=45
 
 ```rust
-use rustc_middle::ty;
-use rustc_span::Span;
+use crate::rustc_complete::ty;
+use crate::rustc_complete::Span;
 
 use super::BackendTypes;
 use crate::mir::operand::OperandRef;

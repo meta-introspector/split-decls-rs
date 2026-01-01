@@ -12,7 +12,7 @@ use std::ops::Deref;
 use derive_where::derive_where;
 use rustc_ast_ir::Mutability;
 #[cfg(feature = "nightly")]
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 2
@@ -254,7 +254,7 @@ pub enum TyKind<I: Interner> {
     /// may end up as something like `for<'a> [Vec<i32>, &'a Vec<i32>]`:
     ///
     /// ```
-    /// #![feature(coroutines)]
+    /// #[feature(coroutines)]
     /// #[coroutine] static |a| {
     ///     let x = &vec![3];
     ///     yield a;
@@ -663,7 +663,7 @@ impl FloatVarValue {
 **Metadata**: AST_ID=21 | TYPE=STRUCT | NAME=TyVid | COMPLEXITY=4 | LINES=9
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// A **ty**pe **v**ariable **ID**.
     #[encodable]
     #[orderable]
@@ -677,7 +677,7 @@ rustc_index::newtype_index! {
 **Metadata**: AST_ID=22 | TYPE=STRUCT | NAME=IntVid | COMPLEXITY=4 | LINES=9
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// An **int**egral (`u32`, `i32`, `usize`, etc.) type **v**ariable **ID**.
     #[encodable]
     #[orderable]
@@ -691,7 +691,7 @@ rustc_index::newtype_index! {
 **Metadata**: AST_ID=23 | TYPE=STRUCT | NAME=FloatVid | COMPLEXITY=4 | LINES=9
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// A **float**ing-point (`f32` or `f64`) type **v**ariable **ID**.
     #[encodable]
     #[orderable]
@@ -732,7 +732,7 @@ pub enum InferTy {
 
     /// A [`FreshTy`][Self::FreshTy] is one that is generated as a replacement
     /// for an unbound type variable. This is convenient for caching etc. See
-    /// `rustc_infer::infer::freshen` for more details.
+    /// `crate::rustc_infer::infer::freshen` for more details.
     ///
     /// Compare with [`TyVar`][Self::TyVar].
     FreshTy(u32),
@@ -1113,11 +1113,11 @@ impl<I: Interner> Deref for UnsafeBinderInner<I> {
 
 ```rust
 #[cfg(feature = "nightly")]
-impl<I: Interner, E: rustc_serialize::Encoder> rustc_serialize::Encodable<E>
+impl<I: Interner, E: crate::rustc_serialize::Encoder> crate::rustc_serialize::Encodable<E>
     for UnsafeBinderInner<I>
 where
-    I::Ty: rustc_serialize::Encodable<E>,
-    I::BoundVarKinds: rustc_serialize::Encodable<E>,
+    I::Ty: crate::rustc_serialize::Encodable<E>,
+    I::BoundVarKinds: crate::rustc_serialize::Encodable<E>,
 {
     fn encode(&self, e: &mut E) {
         self.bound_vars().encode(e);
@@ -1131,16 +1131,16 @@ where
 
 ```rust
 #[cfg(feature = "nightly")]
-impl<I: Interner, D: rustc_serialize::Decoder> rustc_serialize::Decodable<D>
+impl<I: Interner, D: crate::rustc_serialize::Decoder> crate::rustc_serialize::Decodable<D>
     for UnsafeBinderInner<I>
 where
-    I::Ty: TypeVisitable<I> + rustc_serialize::Decodable<D>,
-    I::BoundVarKinds: rustc_serialize::Decodable<D>,
+    I::Ty: TypeVisitable<I> + crate::rustc_serialize::Decodable<D>,
+    I::BoundVarKinds: crate::rustc_serialize::Decodable<D>,
 {
     fn decode(decoder: &mut D) -> Self {
-        let bound_vars = rustc_serialize::Decodable::decode(decoder);
+        let bound_vars = crate::rustc_serialize::Decodable::decode(decoder);
         UnsafeBinderInner(ty::Binder::bind_with_vars(
-            rustc_serialize::Decodable::decode(decoder),
+            crate::rustc_serialize::Decodable::decode(decoder),
             bound_vars,
         ))
     }

@@ -6,7 +6,7 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=15 | LINES=93
 
 ```rust
-/*!
+/*
 
 # typeck
 
@@ -39,7 +39,7 @@ The type checker is defined into various submodules which are documented
 independently:
 
 - hir_ty_lowering: lowers type-system entities from the [HIR][hir] to the
-  [`rustc_middle::ty`] representation.
+  [`crate::rustc_middle::ty`] representation.
 
 - collect: computes the types of each top-level item and enters them into
   the `tcx.types` table for later use.
@@ -64,21 +64,21 @@ This API is completely unstable and subject to change.
 */
 
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![allow(rustc::diagnostic_outside_of_impl)]
-#![allow(rustc::untranslatable_diagnostic)]
-#![doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
-#![doc(rust_logo)]
-#![feature(assert_matches)]
-#![feature(debug_closure_helpers)]
-#![feature(gen_blocks)]
-#![feature(if_let_guard)]
-#![feature(iter_intersperse)]
-#![feature(never_type)]
-#![feature(rustdoc_internals)]
-#![feature(slice_partition_dedup)]
-#![feature(try_blocks)]
-#![feature(unwrap_infallible)]
+#[allow(internal_features)]
+#[allow(rustc::diagnostic_outside_of_impl)]
+#[allow(rustc::untranslatable_diagnostic)]
+#[doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
+#[doc(rust_logo)]
+#[feature(assert_matches)]
+#[feature(debug_closure_helpers)]
+#[feature(gen_blocks)]
+#[feature(if_let_guard)]
+#[feature(iter_intersperse)]
+#[feature(never_type)]
+#[feature(rustdoc_internals)]
+#[feature(slice_partition_dedup)]
+#[feature(try_blocks)]
+#[feature(unwrap_infallible)]
 // tidy-alphabetical-end
 
 // These are used by Clippy.
@@ -98,41 +98,41 @@ mod outlives;
 mod variance;
 
 pub use errors::NoVariantNamed;
-use rustc_abi::{CVariadicStatus, ExternAbi};
+use crate::rustc_abi::{CVariadicStatus, ExternAbi};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_hir::lints::DelayedLint;
-use rustc_hir::{self as hir};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::lints::DelayedLint;
+use crate::rustc_complete::{self as hir};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::middle;
-use rustc_middle::mir::interpret::GlobalId;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::{self, Const, Ty, TyCtxt};
+use crate::rustc_complete::middle;
+use crate::rustc_complete::mir::interpret::GlobalId;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, Const, Ty, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::parse::feature_err;
-use rustc_span::{ErrorGuaranteed, Span};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{ErrorGuaranteed, Span};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_trait_selection::traits;
+use crate::rustc_trait_selection::traits;
 
 pub use crate::collect::suggest_impl_trait;
 use crate::hir_ty_lowering::{FeedConstTy, HirTyLowerer};
@@ -184,7 +184,7 @@ fn check_c_variadic_abi(tcx: TyCtxt<'_>, decl: &hir::FnDecl<'_>, abi: ExternAbi,
 **Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=4 | LINES=19
 
 ```rust
-/// Adds query implementations to the [Providers] vtable, see [`rustc_middle::query`]
+/// Adds query implementations to the [Providers] vtable, see [`crate::rustc_middle::query`]
 pub fn provide(providers: &mut Providers) {
     collect::provide(providers);
     coherence::provide(providers);

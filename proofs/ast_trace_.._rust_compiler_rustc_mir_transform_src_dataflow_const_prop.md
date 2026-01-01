@@ -6,14 +6,14 @@ Generated 25 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-//! A constant propagation optimization pass based on dataflow analysis.
-//!
-//! Currently, this pass only propagates scalar values.
+// A constant propagation optimization pass based on dataflow analysis.
+//
+// Currently, this pass only propagates scalar values.
 
 use std::assert_matches::assert_matches;
 use std::fmt::Formatter;
 
-use rustc_abi::{BackendRepr, FIRST_VARIANT, FieldIdx, Size, VariantIdx};
+use crate::rustc_abi::{BackendRepr, FIRST_VARIANT, FieldIdx, Size, VariantIdx};
 ```
 
 ## Block 2
@@ -36,40 +36,40 @@ use rustc_const_eval::interpret::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_hir::def::DefKind;
-use rustc_middle::bug;
-use rustc_middle::mir::interpret::{InterpResult, Scalar};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::interpret::{InterpResult, Scalar};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::visit::{MutVisitor, PlaceContext, Visitor};
+use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext, Visitor};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_mir_dataflow::fmt::DebugWithContext;
-use rustc_mir_dataflow::lattice::{FlatSet, HasBottom};
+use crate::rustc_mir_dataflow::fmt::DebugWithContext;
+use crate::rustc_mir_dataflow::lattice::{FlatSet, HasBottom};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_mir_dataflow::value_analysis::{
+use crate::rustc_mir_dataflow::value_analysis::{
     Map, PlaceIndex, State, TrackElem, ValueOrPlace, debug_with_context,
 };
 ```
@@ -78,14 +78,14 @@ use rustc_mir_dataflow::value_analysis::{
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_mir_dataflow::{Analysis, ResultsVisitor, visit_reachable_results};
+use crate::rustc_mir_dataflow::{Analysis, ResultsVisitor, visit_reachable_results};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::DUMMY_SP;
+use crate::rustc_complete::DUMMY_SP;
 use tracing::{debug, debug_span, instrument};
 ```
 
@@ -101,7 +101,7 @@ const PLACE_LIMIT: usize = 100;
 pub(super) struct DataflowConstProp;
 
 impl<'tcx> crate::MirPass<'tcx> for DataflowConstProp {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() >= 3
     }
 
@@ -758,7 +758,7 @@ impl<'a, 'tcx> ConstAnalysis<'a, 'tcx> {
             // Exactly one side is known, attempt some algebraic simplifications.
             (FlatSet::Elem(const_arg), _) | (_, FlatSet::Elem(const_arg)) => {
                 let layout = const_arg.layout;
-                if !matches!(layout.backend_repr, rustc_abi::BackendRepr::Scalar(..)) {
+                if !matches!(layout.backend_repr, crate::rustc_abi::BackendRepr::Scalar(..)) {
                     return (FlatSet::Top, FlatSet::Top);
                 }
 

@@ -6,34 +6,34 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=14
 
 ```rust
-//! Throughout the compiler tree, there are several places which want to have
-//! access to state or queries while being inside crates that are dependencies
-//! of `rustc_middle`. To facilitate this, we have the
-//! `rustc_data_structures::AtomicRef` type, which allows us to setup a global
-//! static which can then be set in this file at program startup.
-//!
-//! See `SPAN_TRACK` for an example of how to set things up.
-//!
-//! The functions in this file should fall back to the default set in their
-//! origin crate when the `TyCtxt` is not present in TLS.
+// Throughout the compiler tree, there are several places which want to have
+// access to state or queries while being inside crates that are dependencies
+// of `rustc_middle`. To facilitate this, we have the
+// `crate::rustc_data_structures::AtomicRef` type, which allows us to setup a global
+// static which can then be set in this file at program startup.
+//
+// See `SPAN_TRACK` for an example of how to set things up.
+//
+// The functions in this file should fall back to the default set in their
+// origin crate when the `TyCtxt` is not present in TLS.
 
 use std::fmt;
 
-use rustc_errors::{DiagInner, TRACK_DIAGNOSTIC};
+use crate::rustc_complete::{DiagInner, TRACK_DIAGNOSTIC};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::dep_graph::{DepNodeExt, TaskDepsRef};
+use crate::rustc_complete::dep_graph::{DepNodeExt, TaskDepsRef};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::tls;
+use crate::rustc_complete::ty::tls;
 use rustc_query_impl::QueryCtxt;
 use rustc_query_system::dep_graph::dep_node::default_dep_kind_debug;
 use rustc_query_system::dep_graph::{DepContext, DepKind, DepNode};
@@ -43,7 +43,7 @@ use rustc_query_system::dep_graph::{DepContext, DepKind, DepNode};
 **Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=track_span_parent | COMPLEXITY=16 | LINES=18
 
 ```rust
-fn track_span_parent(def_id: rustc_span::def_id::LocalDefId) {
+fn track_span_parent(def_id: crate::rustc_span::def_id::LocalDefId) {
     tls::with_context_opt(|icx| {
         if let Some(icx) = icx {
             // `track_span_parent` gets called a lot from HIR lowering code.
@@ -91,7 +91,7 @@ fn track_diagnostic<R>(diagnostic: DiagInner, f: &mut dyn FnMut(DiagInner) -> R)
 ```rust
 /// This is a callback from `rustc_hir` as it cannot access the implicit state
 /// in `rustc_middle` otherwise.
-fn def_id_debug(def_id: rustc_hir::def_id::DefId, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+fn def_id_debug(def_id: crate::rustc_hir::def_id::DefId, f: &mut fmt::Formatter<'_>) -> fmt::Result {
     write!(f, "DefId({}:{}", def_id.krate, def_id.index.index())?;
     tls::with_opt(|opt_tcx| {
         if let Some(tcx) = opt_tcx {
@@ -155,8 +155,8 @@ pub fn dep_node_debug(node: DepNode, f: &mut std::fmt::Formatter<'_>) -> std::fm
 /// Sets up the callbacks in prior crates which we want to refer to the
 /// TyCtxt in.
 pub fn setup_callbacks() {
-    rustc_span::SPAN_TRACK.swap(&(track_span_parent as fn(_)));
-    rustc_hir::def_id::DEF_ID_DEBUG.swap(&(def_id_debug as fn(_, &mut fmt::Formatter<'_>) -> _));
+    crate::rustc_span::SPAN_TRACK.swap(&(track_span_parent as fn(_)));
+    crate::rustc_hir::def_id::DEF_ID_DEBUG.swap(&(def_id_debug as fn(_, &mut fmt::Formatter<'_>) -> _));
     rustc_query_system::dep_graph::dep_node::DEP_KIND_DEBUG
         .swap(&(dep_kind_debug as fn(_, &mut fmt::Formatter<'_>) -> _));
     rustc_query_system::dep_graph::dep_node::DEP_NODE_DEBUG

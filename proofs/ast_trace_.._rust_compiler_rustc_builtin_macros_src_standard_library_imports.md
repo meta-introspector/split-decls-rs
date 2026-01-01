@@ -6,26 +6,26 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{self as ast, attr};
+use crate::rustc_complete::{self as ast, attr};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_expand::base::{ExtCtxt, ResolverExpand};
+use crate::rustc_expand::base::{ExtCtxt, ResolverExpand};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_expand::expand::ExpansionConfig;
-use rustc_feature::Features;
-use rustc_session::Session;
-use rustc_span::edition::Edition::*;
-use rustc_span::hygiene::AstPass;
-use rustc_span::{DUMMY_SP, Ident, Symbol, kw, sym};
+use crate::rustc_expand::expand::ExpansionConfig;
+use crate::rustc_feature::Features;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::edition::Edition::*;
+use crate::rustc_complete::hygiene::AstPass;
+use crate::rustc_complete::{DUMMY_SP, Ident, Symbol, kw, sym};
 ```
 
 ## Block 4

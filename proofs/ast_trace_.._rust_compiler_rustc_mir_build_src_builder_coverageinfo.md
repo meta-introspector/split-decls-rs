@@ -9,30 +9,30 @@ Generated 11 AST blocks from source file
 use std::assert_matches::assert_matches;
 use std::collections::hash_map::Entry;
 
-use rustc_data_structures::fx::FxHashMap;
-use rustc_middle::mir::coverage::{BlockMarkerId, BranchSpan, CoverageInfoHi, CoverageKind};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::mir::coverage::{BlockMarkerId, BranchSpan, CoverageInfoHi, CoverageKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{self, BasicBlock, SourceInfo, UnOp};
+use crate::rustc_complete::mir::{self, BasicBlock, SourceInfo, UnOp};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::thir::{ExprId, ExprKind, Pat, Thir};
+use crate::rustc_complete::thir::{ExprId, ExprKind, Pat, Thir};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::def_id::LocalDefId;
 
 use crate::builder::{Builder, CFG};
 ```

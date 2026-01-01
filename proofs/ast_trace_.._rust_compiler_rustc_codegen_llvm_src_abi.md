@@ -10,7 +10,7 @@ use std::borrow::Borrow;
 use std::cmp;
 
 use libc::c_uint;
-use rustc_abi::{
+use crate::rustc_abi::{
     ArmCall, BackendRepr, CanonAbi, HasDataLayout, InterruptKind, Primitive, Reg, RegKind, Size,
     X86Call,
 };
@@ -20,33 +20,33 @@ use rustc_abi::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_codegen_ssa::MemFlags;
-use rustc_codegen_ssa::mir::operand::{OperandRef, OperandValue};
+use crate::rustc_codegen_ssa::MemFlags;
+use crate::rustc_codegen_ssa::mir::operand::{OperandRef, OperandValue};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::mir::place::{PlaceRef, PlaceValue};
+use crate::rustc_codegen_ssa::mir::place::{PlaceRef, PlaceValue};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_codegen_ssa::traits::*;
-use rustc_middle::ty::Ty;
-use rustc_middle::ty::layout::LayoutOf;
-use rustc_middle::{bug, ty};
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::LayoutOf;
+use crate::rustc_complete::{bug, ty};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_session::config;
-use rustc_target::callconv::{
+use crate::rustc_complete::config;
+use crate::rustc_target::callconv::{
     ArgAbi, ArgAttribute, ArgAttributes, ArgExtension, CastTarget, FnAbi, PassMode,
 };
 ```
@@ -55,7 +55,7 @@ use rustc_target::callconv::{
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_target::spec::SanitizerSet;
+use crate::rustc_target::spec::SanitizerSet;
 use smallvec::SmallVec;
 
 use crate::attributes::{self, llfn_attrs_from_instance};
@@ -322,7 +322,7 @@ impl<'ll, 'tcx> ArgAbiExt<'ll, 'tcx> for ArgAbi<'tcx, Ty<'tcx>> {
                 let llscratch = bx.alloca(scratch_size, scratch_align);
                 bx.lifetime_start(llscratch, scratch_size);
                 // ...store the value...
-                rustc_codegen_ssa::mir::store_cast(bx, cast, val, llscratch, scratch_align);
+                crate::rustc_codegen_ssa::mir::store_cast(bx, cast, val, llscratch, scratch_align);
                 // ... and then memcpy it to the intended destination.
                 bx.memcpy(
                     dst.val.llval,
@@ -541,7 +541,7 @@ impl<'ll, 'tcx> FnAbiLlvmExt<'ll, 'tcx> for FnAbi<'tcx, Ty<'tcx>> {
             i - 1
         };
 
-        let apply_range_attr = |idx: AttributePlace, scalar: rustc_abi::Scalar| {
+        let apply_range_attr = |idx: AttributePlace, scalar: crate::rustc_abi::Scalar| {
             if cx.sess().opts.optimize != config::OptLevel::No
                 && matches!(scalar.primitive(), Primitive::Int(..))
                 // If the value is a boolean, the range is 0..2 and that ultimately

@@ -6,8 +6,8 @@ Generated 25 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-//! Functions concerning immediate values and operands, and reading from operands.
-//! All high-level functions to read from memory work on operands as sources.
+// Functions concerning immediate values and operands, and reading from operands.
+// All high-level functions to read from memory work on operands as sources.
 
 use std::assert_matches::assert_matches;
 
@@ -19,44 +19,44 @@ use either::{Either, Left, Right};
 
 ```rust
 use rustc_abi as abi;
-use rustc_abi::{BackendRepr, HasDataLayout, Size};
+use crate::rustc_abi::{BackendRepr, HasDataLayout, Size};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::def::Namespace;
-use rustc_middle::mir::interpret::ScalarSizeMismatch;
-use rustc_middle::ty::layout::{HasTyCtxt, HasTypingEnv, TyAndLayout};
+use crate::rustc_complete::def::Namespace;
+use crate::rustc_complete::mir::interpret::ScalarSizeMismatch;
+use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv, TyAndLayout};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::print::{FmtPrinter, PrettyPrinter};
+use crate::rustc_complete::ty::print::{FmtPrinter, PrettyPrinter};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{ConstInt, ScalarInt, Ty, TyCtxt};
+use crate::rustc_complete::ty::{ConstInt, ScalarInt, Ty, TyCtxt};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, mir, span_bug, ty};
+use crate::rustc_complete::{bug, mir, span_bug, ty};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_span::DUMMY_SP;
+use crate::rustc_complete::DUMMY_SP;
 use tracing::field::Empty;
 use tracing::trace;
 
@@ -966,7 +966,7 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         let _trace =
             enter_trace_span!(M, step::eval_operand, ?mir_op, tracing_separate_thread = Empty);
 
-        use rustc_middle::mir::Operand::*;
+        use crate::rustc_complete::mir::Operand::*;
         let op = match mir_op {
             // FIXME: do some more logic on `move` to invalidate the old location
             &Copy(place) | &Move(place) => self.eval_place_to_op(place, layout)?,
@@ -1031,7 +1031,7 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
 // Some nodes are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
 mod size_asserts {
-    use rustc_data_structures::static_assert_size;
+    use crate::rustc_data_structures::static_assert_size;
 
     use super::*;
     // tidy-alphabetical-start

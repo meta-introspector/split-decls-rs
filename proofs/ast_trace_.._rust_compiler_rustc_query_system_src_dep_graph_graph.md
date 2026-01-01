@@ -18,46 +18,46 @@ use std::sync::atomic::{AtomicU32, Ordering};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::fingerprint::{Fingerprint, PackedFingerprint};
+use crate::rustc_data_structures::fingerprint::{Fingerprint, PackedFingerprint};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxHashMap, FxHashSet};
+use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::outline;
-use rustc_data_structures::profiling::QueryInvocationId;
-use rustc_data_structures::sharded::{self, ShardedHashMap};
+use crate::rustc_data_structures::outline;
+use crate::rustc_data_structures::profiling::QueryInvocationId;
+use crate::rustc_data_structures::sharded::{self, ShardedHashMap};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::sync::{AtomicU64, Lock, is_dyn_thread_safe};
+use crate::rustc_data_structures::sync::{AtomicU64, Lock, is_dyn_thread_safe};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::unord::UnordMap;
-use rustc_errors::DiagInner;
-use rustc_index::IndexVec;
+use crate::rustc_data_structures::unord::UnordMap;
+use crate::rustc_complete::DiagInner;
+use crate::rustc_index::IndexVec;
 use rustc_macros::{Decodable, Encodable};
 ```
 
@@ -65,14 +65,14 @@ use rustc_macros::{Decodable, Encodable};
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_serialize::opaque::{FileEncodeResult, FileEncoder};
+use crate::rustc_serialize::opaque::{FileEncodeResult, FileEncoder};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::Session;
+use crate::rustc_complete::Session;
 use tracing::{debug, instrument};
 ```
 
@@ -128,7 +128,7 @@ pub struct DepGraph<D: Deps> {
 **Metadata**: AST_ID=15 | TYPE=STRUCT | NAME=DepNodeIndex | COMPLEXITY=3 | LINES=4
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     pub struct DepNodeIndex {}
 }
 ```
@@ -140,7 +140,7 @@ rustc_index::newtype_index! {
 // We store a large collection of these in `prev_index_to_index` during
 // non-full incremental builds, and want to ensure that the element size
 // doesn't inadvertently increase.
-rustc_data_structures::static_assert_size!(Option<DepNodeIndex>, 4);
+crate::rustc_data_structures::static_assert_size!(Option<DepNodeIndex>, 4);
 
 impl DepNodeIndex {
     const SINGLETON_ZERO_DEPS_ANON_NODE: DepNodeIndex = DepNodeIndex::ZERO;
@@ -1268,7 +1268,7 @@ pub struct WorkProduct {
 pub type WorkProductMap = UnordMap<WorkProductId, WorkProduct>;
 
 // Index type for `DepNodeData`'s edges.
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     struct EdgeIndex {}
 }
 ```

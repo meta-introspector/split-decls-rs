@@ -8,7 +8,7 @@ Generated 18 AST blocks from source file
 ```rust
 use std::mem;
 
-use rustc_feature::AttributeType;
+use crate::rustc_feature::AttributeType;
 
 use super::prelude::*;
 use crate::attributes::{

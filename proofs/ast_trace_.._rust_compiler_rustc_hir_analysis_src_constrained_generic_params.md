@@ -6,16 +6,16 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_middle::bug;
-use rustc_middle::ty::{self, Ty, TyCtxt, TypeFoldable, TypeSuperVisitable, TypeVisitor};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeFoldable, TypeSuperVisitable, TypeVisitor};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=11
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::debug;
 
 #[derive(Clone, PartialEq, Eq, Hash, Debug)]

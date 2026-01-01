@@ -7,21 +7,21 @@ Generated 19 AST blocks from source file
 
 ```rust
 use hir::def_id::DefId;
-use rustc_abi::Integer::{I8, I32};
+use crate::rustc_abi::Integer::{I8, I32};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::Primitive::{self, Float, Int, Pointer};
+use crate::rustc_abi::Primitive::{self, Float, Int, Pointer};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_abi::{
+use crate::rustc_abi::{
     AddressSpace, BackendRepr, FIRST_VARIANT, FieldIdx, FieldsShape, HasDataLayout, Layout,
     LayoutCalculatorError, LayoutData, Niche, ReprOptions, Scalar, Size, StructKind, TagEncoding,
     VariantIdx, Variants, WrappingRange,
@@ -33,10 +33,10 @@ use rustc_abi::{
 
 ```rust
 use rustc_hashes::Hash64;
-use rustc_index::IndexVec;
-use rustc_middle::bug;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::layout::{
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::layout::{
     FloatExt, HasTyCtxt, IntegerExt, LayoutCx, LayoutError, LayoutOf, TyAndLayout,
 };
 ```
@@ -45,8 +45,8 @@ use rustc_middle::ty::layout::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::print::with_no_trimmed_paths;
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{
     self, AdtDef, CoroutineArgsExt, EarlyBinder, PseudoCanonicalInput, Ty, TyCtxt, TypeVisitableExt,
 };
 ```
@@ -55,14 +55,14 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::{DataTypeKind, FieldInfo, FieldKind, SizeKind, VariantInfo};
+use crate::rustc_complete::{DataTypeKind, FieldInfo, FieldKind, SizeKind, VariantInfo};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Symbol, sym};
+use crate::rustc_complete::{Symbol, sym};
 ```
 
 ## Block 8
@@ -573,7 +573,7 @@ fn layout_of_uncached<'tcx>(
         }
 
         ty::Coroutine(def_id, args) => {
-            use rustc_middle::ty::layout::PrimitiveExt as _;
+            use crate::rustc_complete::ty::layout::PrimitiveExt as _;
 
             let info = tcx.coroutine_layout(def_id, args)?;
 

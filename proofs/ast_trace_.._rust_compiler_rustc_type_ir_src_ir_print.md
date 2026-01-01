@@ -111,7 +111,7 @@ where
 ```rust
 #[cfg(feature = "nightly")]
 mod into_diag_arg_impls {
-    use rustc_error_messages::{DiagArgValue, IntoDiagArg};
+    use crate::rustc_error_messages::{DiagArgValue, IntoDiagArg};
 
     use super::*;
 

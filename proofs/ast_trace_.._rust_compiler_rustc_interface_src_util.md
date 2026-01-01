@@ -49,57 +49,57 @@ use rustc_attr_parsing::{ShouldEmit, validate_attr};
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_codegen_ssa::traits::CodegenBackend;
-use rustc_data_structures::jobserver::Proxy;
-use rustc_data_structures::sync;
-use rustc_errors::LintBuffer;
-use rustc_metadata::{DylibError, load_symbol_from_dylib};
+use crate::rustc_codegen_ssa::traits::CodegenBackend;
+use crate::rustc_data_structures::jobserver::Proxy;
+use crate::rustc_data_structures::sync;
+use crate::rustc_complete::LintBuffer;
+use crate::rustc_metadata::{DylibError, load_symbol_from_dylib};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::CurrentGcx;
-use rustc_session::config::{Cfg, OutFileName, OutputFilenames, OutputTypes, Sysroot, host_tuple};
+use crate::rustc_complete::ty::CurrentGcx;
+use crate::rustc_complete::config::{Cfg, OutFileName, OutputFilenames, OutputTypes, Sysroot, host_tuple};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::lint::{self, BuiltinLintDiag};
+use crate::rustc_complete::lint::{self, BuiltinLintDiag};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::output::{CRATE_TYPES, categorize_crate_type};
+use crate::rustc_complete::output::{CRATE_TYPES, categorize_crate_type};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::{EarlyDiagCtxt, Session, filesearch};
+use crate::rustc_complete::{EarlyDiagCtxt, Session, filesearch};
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_span::edit_distance::find_best_match_for_name;
-use rustc_span::edition::Edition;
-use rustc_span::source_map::SourceMapInputs;
-use rustc_span::{SessionGlobals, Symbol, sym};
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::source_map::SourceMapInputs;
+use crate::rustc_complete::{SessionGlobals, Symbol, sym};
 ```
 
 ## Block 13
 **Metadata**: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=21 | LINES=44
 
 ```rust
-use rustc_target::spec::Target;
+use crate::rustc_target::spec::Target;
 use tracing::info;
 
 use crate::errors;
@@ -242,7 +242,7 @@ fn run_in_thread_with_globals<F: FnOnce(CurrentGcx, Arc<Proxy>) -> R + Send, R: 
         // name contains null bytes.
         let r = builder
             .spawn_scoped(s, move || {
-                rustc_span::create_session_globals_then(
+                crate::rustc_span::create_session_globals_then(
                     edition,
                     extra_symbols,
                     Some(sm_inputs),
@@ -277,9 +277,9 @@ pub(crate) fn run_in_thread_pool_with_globals<
 ) -> R {
     use std::process;
 
-    use rustc_data_structures::defer;
-    use rustc_data_structures::sync::FromDyn;
-    use rustc_middle::ty::tls;
+    use crate::rustc_data_structures::defer;
+    use crate::rustc_data_structures::sync::FromDyn;
+    use crate::rustc_complete::ty::tls;
     use rustc_query_impl::QueryCtxt;
     use rustc_query_system::query::{QueryContext, break_query_cycles};
 
@@ -309,7 +309,7 @@ pub(crate) fn run_in_thread_pool_with_globals<
 
     let proxy_ = Arc::clone(&proxy);
     let proxy__ = Arc::clone(&proxy);
-    let builder = rustc_thread_pool::ThreadPoolBuilder::new()
+    let builder = crate::rustc_thread_pool::ThreadPoolBuilder::new()
         .thread_name(|_| "rustc".to_string())
         .acquire_thread_handler(move || proxy_.acquire_thread())
         .release_thread_handler(move || proxy__.release_thread())
@@ -319,8 +319,8 @@ pub(crate) fn run_in_thread_pool_with_globals<
             // locals to it. The new thread runs the deadlock handler.
 
             let current_gcx2 = current_gcx2.clone();
-            let registry = rustc_thread_pool::Registry::current();
-            let session_globals = rustc_span::with_session_globals(|session_globals| {
+            let registry = crate::rustc_thread_pool::Registry::current();
+            let session_globals = crate::rustc_span::with_session_globals(|session_globals| {
                 session_globals as *const SessionGlobals as usize
             });
             thread::Builder::new()
@@ -340,7 +340,7 @@ pub(crate) fn run_in_thread_pool_with_globals<
                             tls::with(|tcx| {
                                 // Accessing session globals is sound as they outlive `GlobalCtxt`.
                                 // They are needed to hash query keys containing spans or symbols.
-                                let query_map = rustc_span::set_session_globals_then(unsafe { &*(session_globals as *const SessionGlobals) }, || {
+                                let query_map = crate::rustc_span::set_session_globals_then(unsafe { &*(session_globals as *const SessionGlobals) }, || {
                                     // Ensure there was no errors collecting all active jobs.
                                     // We need the complete map to ensure we find a cycle to break.
                                     QueryCtxt::new(tcx).collect_active_jobs().ok().expect("failed to collect active queries in deadlock handler")
@@ -360,22 +360,22 @@ pub(crate) fn run_in_thread_pool_with_globals<
     // pool. Upon creation, each worker thread created gets a copy of the
     // session globals in TLS. This is possible because `SessionGlobals` impls
     // `Send` in the parallel compiler.
-    rustc_span::create_session_globals_then(edition, extra_symbols, Some(sm_inputs), || {
-        rustc_span::with_session_globals(|session_globals| {
+    crate::rustc_span::create_session_globals_then(edition, extra_symbols, Some(sm_inputs), || {
+        crate::rustc_span::with_session_globals(|session_globals| {
             let session_globals = FromDyn::from(session_globals);
             builder
                 .build_scoped(
                     // Initialize each new worker thread when created.
-                    move |thread: rustc_thread_pool::ThreadBuilder| {
+                    move |thread: crate::rustc_thread_pool::ThreadBuilder| {
                         // Register the thread for use with the `WorkerLocal` type.
                         registry.register();
 
-                        rustc_span::set_session_globals_then(session_globals.into_inner(), || {
+                        crate::rustc_span::set_session_globals_then(session_globals.into_inner(), || {
                             thread.run()
                         })
                     },
                     // Run `f` on the first thread in the thread pool.
-                    move |pool: &rustc_thread_pool::ThreadPool| {
+                    move |pool: &crate::rustc_thread_pool::ThreadPool| {
                         pool.install(|| f(current_gcx.into_inner(), proxy))
                     },
                 )
@@ -597,7 +597,7 @@ pub(crate) fn check_attr_crate_type(
                 }
             } else {
                 // This is here mainly to check for using a macro, such as
-                // `#![crate_type = foo!()]`. That is not supported since the
+                // `#[crate_type = foo!()]`. That is not supported since the
                 // crate type needs to be known very early in compilation long
                 // before expansion. Otherwise, validation would normally be
                 // caught during semantic analysis via `TyCtxt::check_mod_attrs`,

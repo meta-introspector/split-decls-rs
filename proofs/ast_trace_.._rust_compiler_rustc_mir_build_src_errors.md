@@ -6,9 +6,9 @@ Generated 109 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagArgValue, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level,
     MultiSpan, Subdiagnostic, pluralize,
 };
@@ -25,16 +25,16 @@ use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_pattern_analysis::errors::Uncovered;
-use rustc_pattern_analysis::rustc::RustcPatCtxt;
-use rustc_span::{Ident, Span, Symbol};
+use crate::rustc_pattern_analysis::errors::Uncovered;
+use crate::rustc_pattern_analysis::rustc::RustcPatCtxt;
+use crate::rustc_complete::{Ident, Span, Symbol};
 ```
 
 ## Block 5

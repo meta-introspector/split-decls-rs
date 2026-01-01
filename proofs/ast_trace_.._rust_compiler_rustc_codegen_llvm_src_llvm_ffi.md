@@ -6,19 +6,19 @@ Generated 62 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=15
 
 ```rust
-//! Bindings to the LLVM-C API (`LLVM*`), and to our own `extern "C"` wrapper
-//! functions around the unstable LLVM C++ API (`LLVMRust*`).
-//!
-//! ## Passing pointer/length strings as `*const c_uchar` (PTR_LEN_STR)
-//!
-//! Normally it's a good idea for Rust-side bindings to match the corresponding
-//! C-side function declarations as closely as possible. But when passing `&str`
-//! or `&[u8]` data as a pointer/length pair, it's more convenient to declare
-//! the Rust-side pointer as `*const c_uchar` instead of `*const c_char`.
-//! Both pointer types have the same ABI, and using `*const c_uchar` avoids
-//! the need for an extra cast from `*const u8` on the Rust side.
+// Bindings to the LLVM-C API (`LLVM*`), and to our own `extern "C"` wrapper
+// functions around the unstable LLVM C++ API (`LLVMRust*`).
+//
+// ## Passing pointer/length strings as `*const c_uchar` (PTR_LEN_STR)
+//
+// Normally it's a good idea for Rust-side bindings to match the corresponding
+// C-side function declarations as closely as possible. But when passing `&str`
+// or `&[u8]` data as a pointer/length pair, it's more convenient to declare
+// the Rust-side pointer as `*const c_uchar` instead of `*const c_char`.
+// Both pointer types have the same ABI, and using `*const c_uchar` avoids
+// the need for an extra cast from `*const u8` on the Rust side.
 
-#![allow(non_camel_case_types)]
+#[allow(non_camel_case_types)]
 
 use std::fmt::{self, Debug};
 ```
@@ -40,7 +40,7 @@ use libc::{c_char, c_int, c_uchar, c_uint, c_ulonglong, c_void, size_t};
 
 ```rust
 use rustc_macros::TryFromU32;
-use rustc_target::spec::SymbolVisibility;
+use crate::rustc_target::spec::SymbolVisibility;
 
 use super::RustString;
 use super::debuginfo::{
@@ -435,8 +435,8 @@ pub(crate) enum IntPredicate {
 
 ```rust
 impl IntPredicate {
-    pub(crate) fn from_generic(intpre: rustc_codegen_ssa::common::IntPredicate) -> Self {
-        use rustc_codegen_ssa::common::IntPredicate as Common;
+    pub(crate) fn from_generic(intpre: crate::rustc_codegen_ssa::common::IntPredicate) -> Self {
+        use crate::rustc_codegen_ssa::common::IntPredicate as Common;
         match intpre {
             Common::IntEQ => Self::IntEQ,
             Common::IntNE => Self::IntNE,
@@ -481,12 +481,12 @@ pub(crate) enum RealPredicate {
 ```
 
 ## Block 24
-**Metadata**: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=24
+**Metadata**: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=24
 
 ```rust
 impl RealPredicate {
-    pub(crate) fn from_generic(realp: rustc_codegen_ssa::common::RealPredicate) -> Self {
-        use rustc_codegen_ssa::common::RealPredicate as Common;
+    pub(crate) fn from_generic(realp: crate::rustc_codegen_ssa::common::RealPredicate) -> Self {
+        use crate::rustc_codegen_ssa::common::RealPredicate as Common;
         match realp {
             Common::RealPredicateFalse => Self::RealPredicateFalse,
             Common::RealOEQ => Self::RealOEQ,
@@ -550,8 +550,8 @@ pub(crate) enum TypeKind {
 
 ```rust
 impl TypeKind {
-    pub(crate) fn to_generic(self) -> rustc_codegen_ssa::common::TypeKind {
-        use rustc_codegen_ssa::common::TypeKind as Common;
+    pub(crate) fn to_generic(self) -> crate::rustc_codegen_ssa::common::TypeKind {
+        use crate::rustc_codegen_ssa::common::TypeKind as Common;
         match self {
             Self::Void => Common::Void,
             Self::Half => Common::Half,
@@ -604,8 +604,8 @@ pub(crate) enum AtomicRmwBinOp {
 
 ```rust
 impl AtomicRmwBinOp {
-    pub(crate) fn from_generic(op: rustc_codegen_ssa::common::AtomicRmwBinOp) -> Self {
-        use rustc_codegen_ssa::common::AtomicRmwBinOp as Common;
+    pub(crate) fn from_generic(op: crate::rustc_codegen_ssa::common::AtomicRmwBinOp) -> Self {
+        use crate::rustc_codegen_ssa::common::AtomicRmwBinOp as Common;
         match op {
             Common::AtomicXchg => Self::AtomicXchg,
             Common::AtomicAdd => Self::AtomicAdd,
@@ -649,8 +649,8 @@ pub(crate) enum AtomicOrdering {
 
 ```rust
 impl AtomicOrdering {
-    pub(crate) fn from_generic(ao: rustc_middle::ty::AtomicOrdering) -> Self {
-        use rustc_middle::ty::AtomicOrdering as Common;
+    pub(crate) fn from_generic(ao: crate::rustc_middle::ty::AtomicOrdering) -> Self {
+        use crate::rustc_complete::ty::AtomicOrdering as Common;
         match ao {
             Common::Relaxed => Self::Monotonic,
             Common::Acquire => Self::Acquire,
@@ -1248,7 +1248,7 @@ pub(crate) mod debuginfo {
     }
 
     impl DebugEmissionKind {
-        pub(crate) fn from_generic(kind: rustc_session::config::DebugInfo) -> Self {
+        pub(crate) fn from_generic(kind: crate::rustc_session::config::DebugInfo) -> Self {
             // We should be setting LLVM's emission kind to `LineTablesOnly` if
             // we are compiling with "limited" debuginfo. However, some of the
             // existing tools relied on slightly more debuginfo being generated than
@@ -1259,7 +1259,7 @@ pub(crate) mod debuginfo {
             // not break anything and to allow users to have 'limited' debug info.
             //
             // See https://github.com/rust-lang/rust/issues/60020 for details.
-            use rustc_session::config::DebugInfo;
+            use crate::rustc_complete::config::DebugInfo;
             match kind {
                 DebugInfo::None => DebugEmissionKind::NoDebug,
                 DebugInfo::LineDirectivesOnly => DebugEmissionKind::DebugDirectivesOnly,

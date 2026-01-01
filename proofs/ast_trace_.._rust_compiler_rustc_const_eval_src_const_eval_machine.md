@@ -16,67 +16,67 @@ use std::borrow::{Borrow, Cow};
 use std::fmt;
 use std::hash::Hash;
 
-use rustc_abi::{Align, Size};
+use crate::rustc_abi::{Align, Size};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::Mutability;
-use rustc_data_structures::fx::{FxHashMap, FxIndexMap, IndexEntry};
+use crate::rustc_complete::Mutability;
+use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap, IndexEntry};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, CRATE_HIR_ID, LangItem};
+use crate::rustc_complete::{self as hir, CRATE_HIR_ID, LangItem};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::mir::AssertMessage;
-use rustc_middle::mir::interpret::ReportedErrorInfo;
-use rustc_middle::query::TyCtxtAt;
-use rustc_middle::ty::layout::{HasTypingEnv, TyAndLayout, ValidityRequirement};
+use crate::rustc_complete::mir::AssertMessage;
+use crate::rustc_complete::mir::interpret::ReportedErrorInfo;
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::ty::layout::{HasTypingEnv, TyAndLayout, ValidityRequirement};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, mir};
+use crate::rustc_complete::{bug, mir};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_target::callconv::FnAbi;
+use crate::rustc_target::callconv::FnAbi;
 use tracing::debug;
 
 use super::error::*;
@@ -331,8 +331,8 @@ impl<'tcx> CompileTimeInterpCx<'tcx> {
         let topmost = span.ctxt().outer_expn().expansion_cause().unwrap_or(span);
         let caller = self.tcx.sess.source_map().lookup_char_pos(topmost.lo());
 
-        use rustc_session::RemapFileNameExt;
-        use rustc_session::config::RemapPathScopeComponents;
+        use crate::rustc_complete::RemapFileNameExt;
+        use crate::rustc_complete::config::RemapPathScopeComponents;
         (
             Symbol::intern(
                 &caller
@@ -748,7 +748,7 @@ impl<'tcx> interpret::Machine<'tcx> for CompileTimeMachine<'tcx> {
         msg: &AssertMessage<'tcx>,
         _unwind: mir::UnwindAction,
     ) -> InterpResult<'tcx> {
-        use rustc_middle::mir::AssertKind::*;
+        use crate::rustc_complete::mir::AssertKind::*;
         // Convert `AssertKind<Operand>` to `AssertKind<Scalar>`.
         let eval_to_int =
             |op| ecx.read_immediate(&ecx.eval_operand(op, None)?).map(|x| x.to_const_int());
@@ -807,14 +807,14 @@ impl<'tcx> interpret::Machine<'tcx> for CompileTimeMachine<'tcx> {
                 let is_error = ecx
                     .tcx
                     .lint_level_at_node(
-                        rustc_session::lint::builtin::LONG_RUNNING_CONST_EVAL,
+                        crate::rustc_session::lint::builtin::LONG_RUNNING_CONST_EVAL,
                         hir_id,
                     )
                     .level
                     .is_error();
                 let span = ecx.cur_span();
                 ecx.tcx.emit_node_span_lint(
-                    rustc_session::lint::builtin::LONG_RUNNING_CONST_EVAL,
+                    crate::rustc_session::lint::builtin::LONG_RUNNING_CONST_EVAL,
                     hir_id,
                     span,
                     LongRunning { item_span: ecx.tcx.span },

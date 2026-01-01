@@ -8,7 +8,7 @@ Generated 5 AST blocks from source file
 ```rust
 use std::ops::ControlFlow;
 
-use rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_data_structures::fx::FxIndexSet;
 use rustc_type_ir::TypeFoldable;
 
 use crate::ty::{

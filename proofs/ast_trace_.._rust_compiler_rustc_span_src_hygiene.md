@@ -6,11 +6,11 @@ Generated 59 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=13 | LINES=29
 
 ```rust
-//! Machinery for hygienic macros.
-//!
-//! Inspired by Matthew Flatt et al., “Macros That Work Together: Compile-Time Bindings, Partial
-//! Expansion, and Definition Contexts,” *Journal of Functional Programming* 22, no. 2
-//! (March 1, 2012): 181–216, <https://doi.org/10.1017/S0956796812000093>.
+// Machinery for hygienic macros.
+//
+// Inspired by Matthew Flatt et al., “Macros That Work Together: Compile-Time Bindings, Partial
+// Expansion, and Definition Contexts,” *Journal of Functional Programming* 22, no. 2
+// (March 1, 2012): 181–216, <https://doi.org/10.1017/S0956796812000093>.
 
 // Hygiene data is stored in a global variable and accessed via TLS, which
 // means that accesses are somewhat expensive. (`HygieneData::with`
@@ -41,25 +41,25 @@ use std::{fmt, iter, mem};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::fingerprint::Fingerprint;
-use rustc_data_structures::fx::{FxHashMap, FxHashSet};
+use crate::rustc_data_structures::fingerprint::Fingerprint;
+use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::stable_hasher::{HashStable, HashingControls, StableHasher};
+use crate::rustc_data_structures::stable_hasher::{HashStable, HashingControls, StableHasher};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_data_structures::sync::Lock;
-use rustc_data_structures::unhash::UnhashMap;
+use crate::rustc_data_structures::sync::Lock;
+use crate::rustc_data_structures::unhash::UnhashMap;
 use rustc_hashes::Hash64;
-use rustc_index::IndexVec;
+use crate::rustc_index::IndexVec;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
 ```
 
@@ -67,7 +67,7 @@ use rustc_macros::{Decodable, Encodable, HashStable_Generic};
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
+use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
 ```
 
 ## Block 6
@@ -174,7 +174,7 @@ impl SyntaxContextData {
 **Metadata**: AST_ID=14 | TYPE=STRUCT | NAME=ExpnIndex | COMPLEXITY=3 | LINES=6
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// A unique ID associated with a macro invocation and expansion.
     #[orderable]
     pub struct ExpnIndex {}
@@ -209,7 +209,7 @@ impl fmt::Debug for ExpnId {
 **Metadata**: AST_ID=17 | TYPE=STRUCT | NAME=LocalExpnId | COMPLEXITY=4 | LINES=6
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// A unique ID associated with a macro invocation and expansion.
     #[debug_format = "expn{}"]
     pub struct LocalExpnId {}
@@ -945,7 +945,7 @@ impl SyntaxContext {
     /// For example, consider the following three resolutions of `f`:
     ///
     /// ```rust
-    /// #![feature(decl_macro)]
+    /// #[feature(decl_macro)]
     /// mod foo {
     ///     pub fn f() {} // `f`'s `SyntaxContext` is empty.
     /// }
@@ -987,7 +987,7 @@ impl SyntaxContext {
     /// For example:
     ///
     /// ```compile_fail,E0425
-    /// #![feature(decl_macro)]
+    /// #[feature(decl_macro)]
     /// m!(f);
     /// macro m($i:ident) {
     ///     mod foo {

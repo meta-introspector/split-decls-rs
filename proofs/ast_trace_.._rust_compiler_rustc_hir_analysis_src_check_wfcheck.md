@@ -21,58 +21,58 @@ use hir::intravisit::{self, Visitor};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::ExternAbi;
-use rustc_data_structures::fx::{FxHashSet, FxIndexMap, FxIndexSet};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap, FxIndexSet};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, ErrorGuaranteed, pluralize, struct_span_code_err};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, ErrorGuaranteed, pluralize, struct_span_code_err};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::lang_items::LangItem;
-use rustc_hir::{AmbigArg, ItemKind};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{AmbigArg, ItemKind};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_infer::infer::outlives::env::OutlivesEnvironment;
-use rustc_infer::infer::{self, InferCtxt, SubregionOrigin, TyCtxtInferExt};
+use crate::rustc_infer::infer::outlives::env::OutlivesEnvironment;
+use crate::rustc_infer::infer::{self, InferCtxt, SubregionOrigin, TyCtxtInferExt};
 ```
 
 ## Block 9
-**Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10
+**Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=10
 
 ```rust
-use rustc_lint_defs::builtin::SUPERTRAIT_ITEM_SHADOWING_DEFINITION;
+use crate::rustc_lint_defs::builtin::SUPERTRAIT_ITEM_SHADOWING_DEFINITION;
 use rustc_macros::LintDiagnostic;
-use rustc_middle::mir::interpret::ErrorHandled;
-use rustc_middle::traits::solve::NoSolution;
-use rustc_middle::ty::trait_def::TraitSpecializationKind;
-use rustc_middle::ty::{
+use crate::rustc_complete::mir::interpret::ErrorHandled;
+use crate::rustc_complete::traits::solve::NoSolution;
+use crate::rustc_complete::ty::trait_def::TraitSpecializationKind;
+use crate::rustc_complete::ty::{
     self, AdtKind, GenericArgKind, GenericArgs, GenericParamDefKind, Ty, TyCtxt, TypeFlags,
     TypeFoldable, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode,
     Upcast,
@@ -83,30 +83,30 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::parse::feature_err;
-use rustc_span::{DUMMY_SP, Span, sym};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{DUMMY_SP, Span, sym};
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::regions::{InferCtxtRegionExt, OutlivesEnvironmentBuildExt};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::regions::{InferCtxtRegionExt, OutlivesEnvironmentBuildExt};
 ```
 
 ## Block 13
 **Metadata**: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_trait_selection::traits::misc::{
+use crate::rustc_trait_selection::traits::misc::{
     ConstParamTyImplementationError, type_allowed_to_implement_const_param_ty,
 };
 ```
@@ -115,8 +115,8 @@ use rustc_trait_selection::traits::misc::{
 **Metadata**: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
-use rustc_trait_selection::traits::{
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
+use crate::rustc_trait_selection::traits::{
     self, FulfillmentError, Obligation, ObligationCause, ObligationCauseCode, ObligationCtxt,
     WellFormedLoc,
 };
@@ -1251,7 +1251,7 @@ fn check_type_defn<'tcx>(
                         && let Res::Def(DefKind::ConstParam, _def_id) = path.res
                     {
                         // Do not evaluate bare `const` params, as those would ICE and are only
-                        // usable if `#![feature(generic_const_exprs)]` is enabled.
+                        // usable if `#[feature(generic_const_exprs)]` is enabled.
                     } else {
                         // Evaluate the constant proactively, to emit an error if the constant has
                         // an unconditional error. We only do so if the const has no type params.
@@ -2530,7 +2530,7 @@ struct CollectUsageSpans<'a> {
 impl<'tcx> Visitor<'tcx> for CollectUsageSpans<'_> {
     type Result = ();
 
-    fn visit_generics(&mut self, _g: &'tcx rustc_hir::Generics<'tcx>) -> Self::Result {
+    fn visit_generics(&mut self, _g: &'tcx crate::rustc_hir::Generics<'tcx>) -> Self::Result {
         // Skip the generics. We only care about fields, not where clause/param bounds.
     }
 
@@ -2748,7 +2748,7 @@ fn lint_redundant_lifetimes<'tcx>(
             {
                 shadowed.insert(victim);
                 tcx.emit_node_span_lint(
-                    rustc_lint_defs::builtin::REDUNDANT_LIFETIMES,
+                    crate::rustc_lint_defs::builtin::REDUNDANT_LIFETIMES,
                     tcx.local_def_id_to_hir_id(def_id.expect_local()),
                     tcx.def_span(def_id),
                     RedundantLifetimeArgsLint { candidate, victim },

@@ -7,17 +7,17 @@ Generated 5 AST blocks from source file
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::intravisit::{Visitor, walk_expr};
+use crate::rustc_complete::intravisit::{Visitor, walk_expr};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=19
 
 ```rust
-use rustc_middle::hir::nested_filter;
-use rustc_middle::ty::TyCtxt;
-use rustc_span::Span;
-use rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::LocalDefId;
 
 /// Function information extracted from HIR by the coverage instrumentor.
 #[derive(Debug)]

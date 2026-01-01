@@ -6,7 +6,7 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=pseudo_join | COMPLEXITY=3 | LINES=13
 
 ```rust
-#![allow(unused_crate_dependencies)]
+#[allow(unused_crate_dependencies)]
 
 /// Test that one can emulate join with `scope`:
 fn pseudo_join<F, G>(f: F, g: G)
@@ -14,7 +14,7 @@ where
     F: FnOnce() + Send,
     G: FnOnce() + Send,
 {
-    rustc_thread_pool::scope(|s| {
+    crate::rustc_thread_pool::scope(|s| {
         s.spawn(|_| g());
         f();
     });

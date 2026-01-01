@@ -6,29 +6,29 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-//! Unsafety checker: every impl either implements a trait defined in this
-//! crate or pertains to a type defined in this crate.
+// Unsafety checker: every impl either implements a trait defined in this
+// crate or pertains to a type defined in this crate.
 
-use rustc_errors::codes::*;
-use rustc_errors::struct_span_code_err;
-use rustc_hir::{LangItem, Safety};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::struct_span_code_err;
+use crate::rustc_complete::{LangItem, Safety};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::ImplPolarity::*;
-use rustc_middle::ty::print::PrintTraitRefExt as _;
-use rustc_middle::ty::{ImplTraitHeader, TraitDef, TyCtxt};
+use crate::rustc_complete::ty::ImplPolarity::*;
+use crate::rustc_complete::ty::print::PrintTraitRefExt as _;
+use crate::rustc_complete::ty::{ImplTraitHeader, TraitDef, TyCtxt};
 ```
 
 ## Block 3
-**Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=75 | LINES=113
+**Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=76 | LINES=113
 
 ```rust
-use rustc_span::ErrorGuaranteed;
-use rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def_id::LocalDefId;
 
 pub(super) fn check_item(
     tcx: TyCtxt<'_>,
@@ -44,9 +44,9 @@ pub(super) fn check_item(
     let trait_def_safety = if is_copy {
         // If `Self` has unsafe fields, `Copy` is unsafe to implement.
         if trait_header.trait_ref.skip_binder().self_ty().has_unsafe_fields() {
-            rustc_hir::Safety::Unsafe
+            crate::rustc_hir::Safety::Unsafe
         } else {
-            rustc_hir::Safety::Safe
+            crate::rustc_hir::Safety::Safe
         }
     } else {
         trait_def.safety
@@ -63,10 +63,10 @@ pub(super) fn check_item(
                 trait_ref.print_trait_sugared()
             )
             .with_span_suggestion_verbose(
-                span.with_hi(span.lo() + rustc_span::BytePos(7)),
+                span.with_hi(span.lo() + crate::rustc_span::BytePos(7)),
                 "remove `unsafe` from this trait implementation",
                 "",
-                rustc_errors::Applicability::MachineApplicable,
+                crate::rustc_errors::Applicability::MachineApplicable,
             )
             .emit());
         }
@@ -100,7 +100,7 @@ pub(super) fn check_item(
                 span.shrink_to_lo(),
                 "add `unsafe` to this trait implementation",
                 "unsafe ",
-                rustc_errors::Applicability::MaybeIncorrect,
+                crate::rustc_errors::Applicability::MaybeIncorrect,
             )
             .emit());
         }
@@ -124,7 +124,7 @@ pub(super) fn check_item(
                 span.shrink_to_lo(),
                 "add `unsafe` to this trait implementation",
                 "unsafe ",
-                rustc_errors::Applicability::MaybeIncorrect,
+                crate::rustc_errors::Applicability::MaybeIncorrect,
             )
             .emit());
         }

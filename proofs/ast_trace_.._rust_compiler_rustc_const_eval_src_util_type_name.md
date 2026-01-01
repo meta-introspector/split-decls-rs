@@ -8,24 +8,24 @@ Generated 8 AST blocks from source file
 ```rust
 use std::fmt::Write;
 
-use rustc_data_structures::intern::Interned;
-use rustc_hir::def_id::{CrateNum, DefId};
+use crate::rustc_data_structures::intern::Interned;
+use crate::rustc_complete::def_id::{CrateNum, DefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::definitions::DisambiguatedDefPathData;
-use rustc_middle::bug;
-use rustc_middle::ty::print::{PrettyPrinter, PrintError, Printer};
+use crate::rustc_complete::definitions::DisambiguatedDefPathData;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::print::{PrettyPrinter, PrintError, Printer};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, GenericArg, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, GenericArg, Ty, TyCtxt};
 ```
 
 ## Block 4

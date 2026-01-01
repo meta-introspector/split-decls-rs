@@ -6,18 +6,18 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::bug;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::{self, Representability, Ty, TyCtxt};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, Representability, Ty, TyCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=6
 
 ```rust
-use rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::def_id::LocalDefId;
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers =

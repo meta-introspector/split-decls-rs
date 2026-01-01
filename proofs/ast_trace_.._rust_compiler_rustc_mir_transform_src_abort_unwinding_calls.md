@@ -6,18 +6,18 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_abi::ExternAbi;
-use rustc_ast::InlineAsmOptions;
-use rustc_middle::mir::*;
-use rustc_middle::span_bug;
-use rustc_middle::ty::{self, TyCtxt, layout};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_complete::InlineAsmOptions;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{self, TyCtxt, layout};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=81 | LINES=118
 
 ```rust
-use rustc_target::spec::PanicStrategy;
+use crate::rustc_target::spec::PanicStrategy;
 
 /// A pass that runs which is targeted at ensuring that codegen guarantees about
 /// unwinding are upheld for compilations of panic=abort programs.

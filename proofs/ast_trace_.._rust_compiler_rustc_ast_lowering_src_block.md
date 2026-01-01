@@ -6,7 +6,7 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{Block, BlockCheckMode, Local, LocalKind, Stmt, StmtKind};
+use crate::rustc_complete::{Block, BlockCheckMode, Local, LocalKind, Stmt, StmtKind};
 ```
 
 ## Block 2
@@ -14,8 +14,8 @@ use rustc_ast::{Block, BlockCheckMode, Local, LocalKind, Stmt, StmtKind};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::Target;
-use rustc_span::sym;
+use crate::rustc_complete::Target;
+use crate::rustc_complete::sym;
 use smallvec::SmallVec;
 
 use crate::{ImplTraitContext, ImplTraitPosition, LoweringContext};

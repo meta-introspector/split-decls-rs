@@ -6,34 +6,34 @@ Generated 17 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=10
 
 ```rust
-//! Encodes type metadata identifiers for LLVM CFI and cross-language LLVM CFI support using Itanium
-//! C++ ABI mangling for encoding with vendor extended type qualifiers and types for Rust types that
-//! are not used across the FFI boundary.
-//!
-//! For more information about LLVM CFI and cross-language LLVM CFI support for the Rust compiler,
-//! see design document in the tracking issue #89653.
+// Encodes type metadata identifiers for LLVM CFI and cross-language LLVM CFI support using Itanium
+// C++ ABI mangling for encoding with vendor extended type qualifiers and types for Rust types that
+// are not used across the FFI boundary.
+//
+// For more information about LLVM CFI and cross-language LLVM CFI support for the Rust compiler,
+// see design document in the tracking issue #89653.
 
 use std::fmt::Write as _;
 
-use rustc_abi::{ExternAbi, Integer};
+use crate::rustc_abi::{ExternAbi, Integer};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::base_n::{ALPHANUMERIC_ONLY, CASE_INSENSITIVE, ToBaseN};
+use crate::rustc_data_structures::base_n::{ALPHANUMERIC_ONLY, CASE_INSENSITIVE, ToBaseN};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::fx::FxHashMap;
 use rustc_hir as hir;
-use rustc_middle::bug;
-use rustc_middle::ty::layout::IntegerExt;
-use rustc_middle::ty::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::IntegerExt;
+use crate::rustc_complete::ty::{
     self, Const, ExistentialPredicate, FloatTy, FnSig, GenericArg, GenericArgKind, GenericArgsRef,
     IntTy, List, Region, RegionKind, TermKind, Ty, TyCtxt, TypeFoldable, UintTy,
 };
@@ -43,8 +43,8 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_span::def_id::DefId;
-use rustc_span::sym;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::sym;
 use tracing::instrument;
 
 use crate::cfi::typeid::TypeIdOptions;

@@ -6,18 +6,18 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_infer::traits::Obligation;
-use rustc_middle::traits::ObligationCause;
-use rustc_middle::traits::query::NoSolution;
-pub use rustc_middle::traits::query::type_op::ProvePredicate;
-use rustc_middle::ty::{self, ParamEnvAnd, TyCtxt};
+use crate::rustc_infer::traits::Obligation;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::traits::query::NoSolution;
+pub use crate::rustc_complete::traits::query::type_op::ProvePredicate;
+use crate::rustc_complete::ty::{self, ParamEnvAnd, TyCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::infer::canonical::{CanonicalQueryInput, CanonicalQueryResponse};
 ```

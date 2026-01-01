@@ -8,7 +8,7 @@ Generated 7 AST blocks from source file
 ```rust
 // data structures
 #[doc(hidden)]
-pub(super) use rustc_feature::{AttributeTemplate, AttributeType, template};
+pub(super) use crate::rustc_feature::{AttributeTemplate, AttributeType, template};
 ```
 
 ## Block 2
@@ -16,11 +16,11 @@ pub(super) use rustc_feature::{AttributeTemplate, AttributeType, template};
 
 ```rust
 #[doc(hidden)]
-pub(super) use rustc_hir::attrs::AttributeKind;
+pub(super) use crate::rustc_complete::attrs::AttributeKind;
 #[doc(hidden)]
-pub(super) use rustc_hir::lints::AttributeLintKind;
+pub(super) use crate::rustc_complete::lints::AttributeLintKind;
 #[doc(hidden)]
-pub(super) use rustc_hir::{MethodKind, Target};
+pub(super) use crate::rustc_complete::{MethodKind, Target};
 ```
 
 ## Block 3
@@ -28,7 +28,7 @@ pub(super) use rustc_hir::{MethodKind, Target};
 
 ```rust
 #[doc(hidden)]
-pub(super) use rustc_span::{DUMMY_SP, Ident, Span, Symbol, sym};
+pub(super) use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, sym};
 ```
 
 ## Block 4

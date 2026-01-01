@@ -6,10 +6,10 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=Local(i32); | COMPLEXITY=5 | LINES=22
 
 ```rust
-#![allow(unused_crate_dependencies)]
+#[allow(unused_crate_dependencies)]
 
 use crossbeam_utils::thread;
-use rustc_thread_pool::ThreadPoolBuilder;
+use crate::rustc_thread_pool::ThreadPoolBuilder;
 
 #[derive(PartialEq, Eq, Debug)]
 struct Local(i32);

@@ -10,11 +10,11 @@ use std::marker::PhantomData;
 use std::mem;
 use std::ops::ControlFlow;
 
-use rustc_data_structures::thinvec::ExtractIf;
-use rustc_hir::def_id::LocalDefId;
-use rustc_infer::infer::InferCtxt;
-use rustc_infer::traits::query::NoSolution;
-use rustc_infer::traits::{
+use crate::rustc_data_structures::thinvec::ExtractIf;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_infer::infer::InferCtxt;
+use crate::rustc_infer::traits::query::NoSolution;
+use crate::rustc_infer::traits::{
     FromSolverError, PredicateObligation, PredicateObligations, TraitEngine,
 };
 ```
@@ -23,7 +23,7 @@ use rustc_infer::traits::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, DelayedSet, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor,
     TypingMode,
 };
@@ -43,7 +43,7 @@ use rustc_next_trait_solver::solve::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use thin_vec::ThinVec;
 use tracing::instrument;
 
@@ -401,7 +401,7 @@ pub struct StalledOnCoroutines<'tcx> {
 impl<'tcx> inspect::ProofTreeVisitor<'tcx> for StalledOnCoroutines<'tcx> {
     type Result = ControlFlow<()>;
 
-    fn span(&self) -> rustc_span::Span {
+    fn span(&self) -> crate::rustc_span::Span {
         self.span
     }
 

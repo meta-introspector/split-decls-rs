@@ -6,32 +6,32 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! See docs in build/expr/mod.rs
+// See docs in build/expr/mod.rs
 
-use rustc_ast::{AsmMacro, InlineAsmOptions};
+use crate::rustc_complete::{AsmMacro, InlineAsmOptions};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use rustc_hir as hir;
-use rustc_hir::lang_items::LangItem;
-use rustc_middle::mir::*;
-use rustc_middle::span_bug;
-use rustc_middle::thir::*;
-use rustc_middle::ty::{self, CanonicalUserTypeAnnotation, Ty};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::{self, CanonicalUserTypeAnnotation, Ty};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_span::DUMMY_SP;
-use rustc_span::source_map::Spanned;
-use rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_complete::DUMMY_SP;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::{debug, instrument};
 ```
 
@@ -656,7 +656,7 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
                 options,
                 line_spans,
             }) => {
-                use rustc_middle::{mir, thir};
+                use crate::rustc_complete::{mir, thir};
 
                 let destination_block = this.cfg.start_new_block();
                 let mut targets =

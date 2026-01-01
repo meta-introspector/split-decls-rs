@@ -6,39 +6,39 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_hir::intravisit::{self, Visitor, VisitorExt};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::intravisit::{self, Visitor, VisitorExt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, AmbigArg, ForeignItem, ForeignItemKind};
+use crate::rustc_complete::{self as hir, AmbigArg, ForeignItem, ForeignItemKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_infer::traits::{ObligationCause, ObligationCauseCode, WellFormedLoc};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::traits::{ObligationCause, ObligationCauseCode, WellFormedLoc};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::{self, TyCtxt, TypeVisitableExt, TypingMode, fold_regions};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt, TypingMode, fold_regions};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::LocalDefId;
-use rustc_trait_selection::traits::{self, ObligationCtxt};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_trait_selection::traits::{self, ObligationCtxt};
 ```
 
 ## Block 6

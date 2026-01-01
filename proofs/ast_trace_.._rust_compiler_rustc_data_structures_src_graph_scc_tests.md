@@ -3,11 +3,9 @@
 Generated 24 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=MaxReached(usize); | COMPLEXITY=7 | LINES=23
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=MaxReached(usize); | COMPLEXITY=7 | LINES=22
 
 ```rust
-extern crate test;
-
 use super::*;
 use crate::graph::tests::TestGraph;
 

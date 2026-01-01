@@ -8,17 +8,17 @@ Generated 21 AST blocks from source file
 ```rust
 use std::iter;
 
-use rustc_abi::Integer;
-use rustc_index::IndexSlice;
-use rustc_middle::mir::*;
-use rustc_middle::ty::layout::{IntegerExt, TyAndLayout};
+use crate::rustc_abi::Integer;
+use crate::rustc_index::IndexSlice;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::layout::{IntegerExt, TyAndLayout};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, ScalarInt, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, ScalarInt, Ty, TyCtxt};
 ```
 
 ## Block 3
@@ -33,7 +33,7 @@ use crate::patch::MirPatch;
 pub(super) struct MatchBranchSimplification;
 
 impl<'tcx> crate::MirPass<'tcx> for MatchBranchSimplification {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() >= 1
     }
 
@@ -309,7 +309,7 @@ impl<'tcx> SimplifyMatch<'tcx> for SimplifyToIf {
                             tcx,
                             discr_ty,
                             rustc_const_eval::interpret::Scalar::from_uint(val, size),
-                            rustc_span::DUMMY_SP,
+                            crate::rustc_span::DUMMY_SP,
                         );
                         let op = if f_b { BinOp::Eq } else { BinOp::Ne };
                         let rhs = Rvalue::BinaryOp(

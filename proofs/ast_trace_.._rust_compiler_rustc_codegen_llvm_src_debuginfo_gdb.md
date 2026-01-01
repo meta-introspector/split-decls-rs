@@ -8,12 +8,12 @@ Generated 4 AST blocks from source file
 ```rust
 // .debug_gdb_scripts binary section.
 
-use rustc_codegen_ssa::base::collect_debugger_visualizers_transitive;
-use rustc_codegen_ssa::traits::*;
-use rustc_hir::def_id::LOCAL_CRATE;
-use rustc_middle::bug;
-use rustc_middle::middle::debugger_visualizer::DebuggerVisualizerType;
-use rustc_session::config::{CrateType, DebugInfo};
+use crate::rustc_codegen_ssa::base::collect_debugger_visualizers_transitive;
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_complete::def_id::LOCAL_CRATE;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::debugger_visualizer::DebuggerVisualizerType;
+use crate::rustc_complete::config::{CrateType, DebugInfo};
 ```
 
 ## Block 2

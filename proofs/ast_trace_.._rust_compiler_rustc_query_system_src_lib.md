@@ -7,10 +7,10 @@ Generated 2 AST blocks from source file
 
 ```rust
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![feature(assert_matches)]
-#![feature(core_intrinsics)]
-#![feature(min_specialization)]
+#[allow(internal_features)]
+#[feature(assert_matches)]
+#[feature(core_intrinsics)]
+#[feature(min_specialization)]
 // tidy-alphabetical-end
 
 pub mod cache;

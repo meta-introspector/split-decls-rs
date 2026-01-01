@@ -14,7 +14,7 @@ use std::path::{self, Path, PathBuf};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::{AttrVec, Attribute, Inline, Item, ModSpans};
+use crate::rustc_complete::{AttrVec, Attribute, Inline, Item, ModSpans};
 ```
 
 ## Block 3
@@ -22,24 +22,24 @@ use rustc_ast::{AttrVec, Attribute, Inline, Item, ModSpans};
 
 ```rust
 use rustc_attr_parsing::validate_attr;
-use rustc_errors::{Diag, ErrorGuaranteed};
+use crate::rustc_complete::{Diag, ErrorGuaranteed};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_parse::lexer::StripTokens;
-use rustc_parse::{exp, new_parser_from_file, unwrap_or_emit_fatal};
+use crate::rustc_parse::lexer::StripTokens;
+use crate::rustc_parse::{exp, new_parser_from_file, unwrap_or_emit_fatal};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::Session;
-use rustc_session::parse::ParseSess;
-use rustc_span::{Ident, Span, sym};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::{Ident, Span, sym};
 ```
 
 ## Block 6

@@ -6,8 +6,8 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::{DiagArgFromDisplay, MultiSpan};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{DiagArgFromDisplay, MultiSpan};
 ```
 
 ## Block 2
@@ -21,7 +21,7 @@ use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 4

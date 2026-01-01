@@ -8,38 +8,38 @@ Generated 16 AST blocks from source file
 ```rust
 use std::fmt;
 
-use rustc_abi::{FieldIdx, VariantIdx};
+use crate::rustc_abi::{FieldIdx, VariantIdx};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_index::IndexVec;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::mir::*;
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_index::IndexVec;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_mir_dataflow::impls::{MaybeInitializedPlaces, MaybeUninitializedPlaces};
+use crate::rustc_mir_dataflow::impls::{MaybeInitializedPlaces, MaybeUninitializedPlaces};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_mir_dataflow::move_paths::{LookupResult, MoveData, MovePathIndex};
+use crate::rustc_mir_dataflow::move_paths::{LookupResult, MoveData, MovePathIndex};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_mir_dataflow::{
+use crate::rustc_mir_dataflow::{
     Analysis, DropFlagState, MoveDataTypingEnv, ResultsCursor, on_all_children_bits,
     on_lookup_result_bits,
 };
@@ -49,7 +49,7 @@ use rustc_mir_dataflow::{
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
 ```
 
@@ -283,14 +283,14 @@ impl<'a, 'tcx> DropElaborator<'a, 'tcx> for ElaborateDropsCtxt<'a, 'tcx> {
     }
 
     fn field_subpath(&self, path: Self::Path, field: FieldIdx) -> Option<Self::Path> {
-        rustc_mir_dataflow::move_path_children_matching(self.move_data(), path, |e| match e {
+        crate::rustc_mir_dataflow::move_path_children_matching(self.move_data(), path, |e| match e {
             ProjectionElem::Field(idx, _) => idx == field,
             _ => false,
         })
     }
 
     fn array_subpath(&self, path: Self::Path, index: u64, size: u64) -> Option<Self::Path> {
-        rustc_mir_dataflow::move_path_children_matching(self.move_data(), path, |e| match e {
+        crate::rustc_mir_dataflow::move_path_children_matching(self.move_data(), path, |e| match e {
             ProjectionElem::ConstantIndex { offset, min_length, from_end } => {
                 debug_assert!(size == min_length, "min_length should be exact for arrays");
                 assert!(!from_end, "from_end should not be used for array element ConstantIndex");
@@ -301,13 +301,13 @@ impl<'a, 'tcx> DropElaborator<'a, 'tcx> for ElaborateDropsCtxt<'a, 'tcx> {
     }
 
     fn deref_subpath(&self, path: Self::Path) -> Option<Self::Path> {
-        rustc_mir_dataflow::move_path_children_matching(self.move_data(), path, |e| {
+        crate::rustc_mir_dataflow::move_path_children_matching(self.move_data(), path, |e| {
             e == ProjectionElem::Deref
         })
     }
 
     fn downcast_subpath(&self, path: Self::Path, variant: VariantIdx) -> Option<Self::Path> {
-        rustc_mir_dataflow::move_path_children_matching(self.move_data(), path, |e| match e {
+        crate::rustc_mir_dataflow::move_path_children_matching(self.move_data(), path, |e| match e {
             ProjectionElem::Downcast(_, idx) => idx == variant,
             _ => false,
         })
@@ -541,7 +541,7 @@ impl<'a, 'tcx> ElaborateDropsCtxt<'a, 'tcx> {
 
     fn drop_flags_for_args(&mut self) {
         let loc = Location::START;
-        rustc_mir_dataflow::drop_flag_effects_for_function_entry(
+        crate::rustc_mir_dataflow::drop_flag_effects_for_function_entry(
             self.body,
             &self.env.move_data,
             |path, ds| {
@@ -578,7 +578,7 @@ impl<'a, 'tcx> ElaborateDropsCtxt<'a, 'tcx> {
                     }
                 }
                 let loc = Location { block: bb, statement_index: i };
-                rustc_mir_dataflow::drop_flag_effects_for_location(
+                crate::rustc_mir_dataflow::drop_flag_effects_for_location(
                     self.body,
                     &self.env.move_data,
                     loc,

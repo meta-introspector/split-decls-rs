@@ -6,7 +6,7 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=26
 
 ```rust
-//! An interpreter for MIR used in CTFE and by miri
+// An interpreter for MIR used in CTFE and by miri
 
 mod call;
 mod cast;
@@ -28,7 +28,7 @@ mod validity;
 mod visitor;
 
 #[doc(no_inline)]
-pub use rustc_middle::mir::interpret::*; // have all the `interpret` symbols in one place: here
+pub use crate::rustc_complete::mir::interpret::*; // have all the `interpret` symbols in one place: here
 
 pub use self::call::FnArg;
 pub use self::eval_context::{InterpCx, format_interp_error};

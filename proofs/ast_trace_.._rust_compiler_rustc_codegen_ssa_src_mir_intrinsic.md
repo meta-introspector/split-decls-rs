@@ -6,24 +6,24 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_abi::WrappingRange;
-use rustc_middle::mir::SourceInfo;
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_abi::WrappingRange;
+use crate::rustc_complete::mir::SourceInfo;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_session::config::OptLevel;
-use rustc_span::sym;
+use crate::rustc_complete::config::OptLevel;
+use crate::rustc_complete::sym;
 
 use super::FunctionCx;
 use super::operand::OperandRef;

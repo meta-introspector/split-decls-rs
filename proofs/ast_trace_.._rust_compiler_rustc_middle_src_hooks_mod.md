@@ -6,27 +6,27 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-//! "Hooks" let you write `tcx` methods in downstream crates and call them in this crate, reducing
-//! the amount of code that needs to be in this crate (which is already very big). This is somewhat
-//! similar to queries, but queries come with a lot of machinery for caching and incremental
-//! compilation, whereas hooks are just plain function pointers without any of the query magic.
+// "Hooks" let you write `tcx` methods in downstream crates and call them in this crate, reducing
+// the amount of code that needs to be in this crate (which is already very big). This is somewhat
+// similar to queries, but queries come with a lot of machinery for caching and incremental
+// compilation, whereas hooks are just plain function pointers without any of the query magic.
 
-use rustc_hir::def_id::{DefId, DefPathHash};
+use crate::rustc_complete::def_id::{DefId, DefPathHash};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::StableCrateId;
-use rustc_span::def_id::{CrateNum, LocalDefId};
+use crate::rustc_complete::StableCrateId;
+use crate::rustc_complete::def_id::{CrateNum, LocalDefId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ExpnHash, ExpnId};
+use crate::rustc_complete::{ExpnHash, ExpnId};
 ```
 
 ## Block 4
@@ -88,7 +88,7 @@ declare_hooks! {
     hook try_destructure_mir_constant_for_user_output(val: mir::ConstValue, ty: Ty<'tcx>) -> Option<mir::DestructuredConstant<'tcx>>;
 
     /// Getting a &core::panic::Location referring to a span.
-    hook const_caller_location(file: rustc_span::Symbol, line: u32, col: u32) -> mir::ConstValue;
+    hook const_caller_location(file: crate::rustc_span::Symbol, line: u32, col: u32) -> mir::ConstValue;
 
     /// Returns `true` if this def is a function-like thing that is eligible for
     /// coverage instrumentation under `-Cinstrument-coverage`.

@@ -6,11 +6,11 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=5
 
 ```rust
-//! Error Reporting for when the lifetime for a type doesn't match the `impl` selected for a predicate
-//! to hold.
+// Error Reporting for when the lifetime for a type doesn't match the `impl` selected for a predicate
+// to hold.
 
-use rustc_data_structures::fx::FxIndexSet;
-use rustc_errors::{ErrorGuaranteed, MultiSpan};
+use crate::rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_complete::{ErrorGuaranteed, MultiSpan};
 ```
 
 ## Block 2
@@ -18,9 +18,9 @@ use rustc_errors::{ErrorGuaranteed, MultiSpan};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::intravisit::VisitorExt;
-use rustc_middle::bug;
-use rustc_middle::ty::TypeVisitor;
+use crate::rustc_complete::intravisit::VisitorExt;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::TypeVisitor;
 use tracing::debug;
 
 use crate::error_reporting::infer::nice_region_error::NiceRegionError;

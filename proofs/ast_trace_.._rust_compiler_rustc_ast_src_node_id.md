@@ -8,15 +8,15 @@ Generated 3 AST blocks from source file
 ```rust
 use std::fmt;
 
-use rustc_span::LocalExpnId;
+use crate::rustc_complete::LocalExpnId;
 
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// Identifies an AST node.
     ///
     /// This identifies top-level definitions, expressions, and everything in between.
     /// This is later turned into [`DefId`] and `HirId` for the HIR.
     ///
-    /// [`DefId`]: rustc_span::def_id::DefId
+    /// [`DefId`]: crate::rustc_span::def_id::DefId
     #[encodable]
     #[orderable]
     #[debug_format = "NodeId({})"]
@@ -31,7 +31,7 @@ rustc_index::newtype_index! {
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=placeholder_from_expn_id | COMPLEXITY=5 | LINES=17
 
 ```rust
-rustc_data_structures::define_id_collections!(NodeMap, NodeSet, NodeMapEntry, NodeId);
+crate::rustc_data_structures::define_id_collections!(NodeMap, NodeSet, NodeMapEntry, NodeId);
 
 /// When parsing and at the beginning of doing expansions, we initially give all AST nodes
 /// this dummy AST [`NodeId`]. Then, during a later phase of expansion, we renumber them

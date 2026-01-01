@@ -6,19 +6,19 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=15
 
 ```rust
-//! Detecting lang items.
-//!
-//! Language items are items that represent concepts intrinsic to the language
-//! itself. Examples are:
-//!
-//! * Traits that specify "kinds"; e.g., `Sync`, `Send`.
-//! * Traits that represent operators; e.g., `Add`, `Sub`, `Index`.
-//! * Functions called by the compiler itself.
+// Detecting lang items.
+//
+// Language items are items that represent concepts intrinsic to the language
+// itself. Examples are:
+//
+// * Traits that specify "kinds"; e.g., `Sync`, `Send`.
+// * Traits that represent operators; e.g., `Add`, `Sub`, `Index`.
+// * Functions called by the compiler itself.
 
-use rustc_hir::LangItem;
-use rustc_hir::def_id::DefId;
-use rustc_span::Span;
-use rustc_target::spec::PanicStrategy;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::Span;
+use crate::rustc_target::spec::PanicStrategy;
 
 use crate::ty::{self, TyCtxt};
 ```

@@ -6,8 +6,8 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5
 
 ```rust
-//! Code that decides when workers should go to sleep. See README.md
-//! for an overview.
+// Code that decides when workers should go to sleep. See README.md
+// for an overview.
 
 use std::sync::atomic::Ordering;
 use std::sync::{Condvar, Mutex};

@@ -8,18 +8,18 @@ Generated 8 AST blocks from source file
 ```rust
 use std::fmt;
 
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::def_id::LocalDefId;
-use rustc_infer::traits::PredicateObligations;
-use rustc_middle::traits::query::NoSolution;
-use rustc_middle::ty::{ParamEnvAnd, TyCtxt, TypeFoldable};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_infer::traits::PredicateObligations;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::{ParamEnvAnd, TyCtxt, TypeFoldable};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::infer::canonical::{
     CanonicalQueryInput, CanonicalQueryResponse, Certainty, OriginalQueryValues,
@@ -52,7 +52,7 @@ pub mod normalize;
 pub mod outlives;
 pub mod prove_predicate;
 
-pub use rustc_middle::traits::query::type_op::*;
+pub use crate::rustc_complete::traits::query::type_op::*;
 
 use self::custom::scrape_region_constraints;
 

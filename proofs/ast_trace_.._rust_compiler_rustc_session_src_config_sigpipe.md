@@ -6,7 +6,7 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=25
 
 ```rust
-//! NOTE: Keep these constants in sync with `library/std/src/sys/pal/unix/mod.rs`!
+// NOTE: Keep these constants in sync with `library/std/src/sys/pal/unix/mod.rs`!
 
 /// The default value if `-Zon-broken-pipe=...` is not specified. This resolves
 /// to `SIG_IGN` in `library/std/src/sys/pal/unix/mod.rs`.

@@ -15,7 +15,7 @@ use either::{Either, Left, Right};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{HasDataLayout, Size};
+use crate::rustc_abi::{HasDataLayout, Size};
 ```
 
 ## Block 3
@@ -76,7 +76,7 @@ pub enum Scalar<Prov = CtfeProvenance> {
 
 ```rust
 #[cfg(target_pointer_width = "64")]
-rustc_data_structures::static_assert_size!(Scalar, 24);
+crate::rustc_data_structures::static_assert_size!(Scalar, 24);
 
 // We want the `Debug` output to be readable as it is used by `derive(Debug)` for
 // all the Miri types.

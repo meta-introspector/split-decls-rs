@@ -6,7 +6,7 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! The data that we will serialize and deserialize.
+// The data that we will serialize and deserialize.
 
 use rustc_macros::{Decodable, Encodable};
 ```
@@ -15,7 +15,7 @@ use rustc_macros::{Decodable, Encodable};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::dep_graph::{WorkProduct, WorkProductId};
+use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
 ```
 
 ## Block 3

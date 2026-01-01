@@ -8,22 +8,22 @@ Generated 19 AST blocks from source file
 ```rust
 use std::sync::OnceLock;
 
-use rustc_data_structures::graph;
-use rustc_data_structures::graph::dominators::{Dominators, dominators};
+use crate::rustc_data_structures::graph;
+use crate::rustc_data_structures::graph::dominators::{Dominators, dominators};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_index::{IndexSlice, IndexVec};
+use crate::rustc_index::{IndexSlice, IndexVec};
 ```
 
 ## Block 4
@@ -37,7 +37,7 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisit
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
+use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
 ```
 
 ## Block 6

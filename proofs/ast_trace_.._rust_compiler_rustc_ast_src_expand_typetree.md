@@ -6,44 +6,44 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=9
 
 ```rust
-//! This module contains the definition of the `TypeTree` and `Type` structs.
-//! They are thin Rust wrappers around the TypeTrees used by Enzyme as the LLVM based autodiff
-//! backend. The Enzyme TypeTrees currently have various limitations and should be rewritten, so the
-//! Rust frontend obviously has the same limitations. The main motivation of TypeTrees is to
-//! represent how a type looks like "in memory". Enzyme can deduce this based on usage patterns in
-//! the user code, but this is extremely slow and not even always sufficient. As such we lower some
-//! information from rustc to help Enzyme. For a full explanation of their design it is necessary to
-//! analyze the implementation in Enzyme core itself. As a rough summary, `-1` in Enzyme speech means
-//! everywhere. That is `{0:-1: Float}` means at index 0 you have a ptr, if you dereference it it
+// This module contains the definition of the `TypeTree` and `Type` structs.
+// They are thin Rust wrappers around the TypeTrees used by Enzyme as the LLVM based autodiff
+// backend. The Enzyme TypeTrees currently have various limitations and should be rewritten, so the
+// Rust frontend obviously has the same limitations. The main motivation of TypeTrees is to
+// represent how a type looks like "in memory". Enzyme can deduce this based on usage patterns in
+// the user code, but this is extremely slow and not even always sufficient. As such we lower some
+// information from rustc to help Enzyme. For a full explanation of their design it is necessary to
+// analyze the implementation in Enzyme core itself. As a rough summary, `-1` in Enzyme speech means
+// everywhere. That is `{0:-1: Float}` means at index 0 you have a ptr, if you dereference it it
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-//! will be floats everywhere. Thus `* f32`. If you have `{-1:int}` it means int's everywhere,
+// will be floats everywhere. Thus `* f32`. If you have `{-1:int}` it means int's everywhere,
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1
 
 ```rust
-//! e.g. [i32; N]. `{0:-1:-1 float}` then means one pointer at offset 0, if you dereference it there
+// e.g. [i32; N]. `{0:-1:-1 float}` then means one pointer at offset 0, if you dereference it there
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=13
 
 ```rust
-//! will be only pointers, if you dereference these new pointers they will point to array of floats.
-//! Generally, it allows byte-specific descriptions.
-//! FIXME: This description might be partly inaccurate and should be extended, along with
-//! adding documentation to the corresponding Enzyme core code.
-//! FIXME: Rewrite the TypeTree logic in Enzyme core to reduce the need for the rustc frontend to
-//! provide typetree information.
-//! FIXME: We should also re-evaluate where we create TypeTrees from Rust types, since MIR
-//! representations of some types might not be accurate. For example a vector of floats might be
-//! represented as a vector of u8s in MIR in some cases.
+// will be only pointers, if you dereference these new pointers they will point to array of floats.
+// Generally, it allows byte-specific descriptions.
+// FIXME: This description might be partly inaccurate and should be extended, along with
+// adding documentation to the corresponding Enzyme core code.
+// FIXME: Rewrite the TypeTree logic in Enzyme core to reduce the need for the rustc frontend to
+// provide typetree information.
+// FIXME: We should also re-evaluate where we create TypeTrees from Rust types, since MIR
+// representations of some types might not be accurate. For example a vector of floats might be
+// represented as a vector of u8s in MIR in some cases.
 
 use std::fmt;
 

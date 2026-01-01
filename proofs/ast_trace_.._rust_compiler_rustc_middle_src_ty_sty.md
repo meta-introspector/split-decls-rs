@@ -6,9 +6,9 @@ Generated 32 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-//! This module contains `TyKind` and its major components.
+// This module contains `TyKind` and its major components.
 
-#![allow(rustc::usage_of_ty_tykind)]
+#[allow(rustc::usage_of_ty_tykind)]
 
 use std::assert_matches::debug_assert_matches;
 use std::borrow::Cow;
@@ -26,14 +26,14 @@ use hir::def::{CtorKind, DefKind};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{FIRST_VARIANT, FieldIdx, VariantIdx};
+use crate::rustc_abi::{FIRST_VARIANT, FieldIdx, VariantIdx};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{ErrorGuaranteed, MultiSpan};
+use crate::rustc_complete::{ErrorGuaranteed, MultiSpan};
 ```
 
 ## Block 5
@@ -41,8 +41,8 @@ use rustc_errors::{ErrorGuaranteed, MultiSpan};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::LangItem;
-use rustc_hir::def_id::DefId;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, extension};
 ```
 
@@ -50,7 +50,7 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, extension
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Span, Symbol, sym};
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol, sym};
 ```
 
 ## Block 7
@@ -2235,7 +2235,7 @@ impl<'tcx> rustc_type_ir::inherent::Tys<TyCtxt<'tcx>> for &'tcx ty::List<Ty<'tcx
 // Some types are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
 mod size_asserts {
-    use rustc_data_structures::static_assert_size;
+    use crate::rustc_data_structures::static_assert_size;
 
     use super::*;
     // tidy-alphabetical-start

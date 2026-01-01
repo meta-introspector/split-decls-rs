@@ -6,8 +6,8 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-//! Manages calling a concrete function (with known MIR body) with argument passing,
-//! and returning the return value to the caller.
+// Manages calling a concrete function (with known MIR body) with argument passing,
+// and returning the return value to the caller.
 use std::assert_matches::assert_matches;
 use std::borrow::Cow;
 
@@ -18,37 +18,37 @@ use either::{Left, Right};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{self as abi, ExternAbi, FieldIdx, Integer, VariantIdx};
+use crate::rustc_abi::{self as abi, ExternAbi, FieldIdx, Integer, VariantIdx};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_middle::ty::layout::{IntegerExt, TyAndLayout};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::ty::layout::{IntegerExt, TyAndLayout};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, AdtDef, Instance, Ty, VariantDef};
+use crate::rustc_complete::ty::{self, AdtDef, Instance, Ty, VariantDef};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, mir, span_bug};
+use crate::rustc_complete::{bug, mir, span_bug};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::sym;
-use rustc_target::callconv::{ArgAbi, FnAbi, PassMode};
+use crate::rustc_complete::sym;
+use crate::rustc_target::callconv::{ArgAbi, FnAbi, PassMode};
 ```
 
 ## Block 7

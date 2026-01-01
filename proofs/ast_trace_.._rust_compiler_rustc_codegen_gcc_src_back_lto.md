@@ -56,34 +56,34 @@ use gccjit::{Context, OutputKind};
 
 ```rust
 use object::read::archive::ArchiveFile;
-use rustc_codegen_ssa::back::lto::{SerializedModule, ThinModule, ThinShared};
+use crate::rustc_codegen_ssa::back::lto::{SerializedModule, ThinModule, ThinShared};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::back::write::{CodegenContext, FatLtoInput};
+use crate::rustc_codegen_ssa::back::write::{CodegenContext, FatLtoInput};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_codegen_ssa::traits::*;
-use rustc_codegen_ssa::{ModuleCodegen, ModuleKind, looks_like_rust_object_file};
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_codegen_ssa::{ModuleCodegen, ModuleKind, looks_like_rust_object_file};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_data_structures::memmap::Mmap;
-use rustc_errors::DiagCtxtHandle;
-use rustc_middle::bug;
-use rustc_middle::dep_graph::WorkProduct;
-use rustc_session::config::Lto;
-use rustc_target::spec::RelocModel;
+use crate::rustc_data_structures::memmap::Mmap;
+use crate::rustc_complete::DiagCtxtHandle;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::dep_graph::WorkProduct;
+use crate::rustc_complete::config::Lto;
+use crate::rustc_target::spec::RelocModel;
 use tempfile::{TempDir, tempdir};
 ```
 

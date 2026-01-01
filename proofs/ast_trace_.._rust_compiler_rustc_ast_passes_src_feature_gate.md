@@ -7,37 +7,37 @@ Generated 17 AST blocks from source file
 
 ```rust
 use rustc_ast as ast;
-use rustc_ast::visit::{self, AssocCtxt, FnCtxt, FnKind, Visitor};
+use crate::rustc_complete::visit::{self, AssocCtxt, FnCtxt, FnKind, Visitor};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{NodeId, PatKind, attr, token};
+use crate::rustc_complete::{NodeId, PatKind, attr, token};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_feature::{AttributeGate, BUILTIN_ATTRIBUTE_MAP, BuiltinAttribute, Features};
+use crate::rustc_feature::{AttributeGate, BUILTIN_ATTRIBUTE_MAP, BuiltinAttribute, Features};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::Session;
-use rustc_session::parse::{feature_err, feature_warn};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::parse::{feature_err, feature_warn};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::source_map::Spanned;
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 6
@@ -662,7 +662,7 @@ pub fn check_crate(krate: &ast::Crate, sess: &Session, features: &Features) {
 
 ```rust
 fn maybe_stage_features(sess: &Session, features: &Features, krate: &ast::Crate) {
-    // checks if `#![feature]` has been used to enable any feature.
+    // checks if `#[feature]` has been used to enable any feature.
     if sess.opts.unstable_features.is_nightly_build() {
         return;
     }
@@ -716,7 +716,7 @@ fn check_incompatible_features(sess: &Session, features: &Features) {
         features.enabled_lib_features().iter().map(|feat| (feat.gate_name, feat.attr_sp));
     let enabled_features = enabled_lang_features.chain(enabled_lib_features);
 
-    for (f1, f2) in rustc_feature::INCOMPATIBLE_FEATURES
+    for (f1, f2) in crate::rustc_feature::INCOMPATIBLE_FEATURES
         .iter()
         .filter(|(f1, f2)| features.enabled(*f1) && features.enabled(*f2))
     {

@@ -6,22 +6,22 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=7
 
 ```rust
-//! Store the provenance for each byte in the range, with a more efficient
-//! representation for the common case where PTR_SIZE consecutive bytes have the same provenance.
+// Store the provenance for each byte in the range, with a more efficient
+// representation for the common case where PTR_SIZE consecutive bytes have the same provenance.
 
 use std::cmp;
 use std::ops::Range;
 
-use rustc_abi::{HasDataLayout, Size};
+use crate::rustc_abi::{HasDataLayout, Size};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::sorted_map::SortedMap;
+use crate::rustc_data_structures::sorted_map::SortedMap;
 use rustc_macros::HashStable;
-use rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
+use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
 ```
 
 ## Block 3

@@ -120,7 +120,7 @@ fn stable_hash_hashes_as_tuple() {
 /// tag in the pointer.
 ///
 /// ```compile_fail,E0080
-/// use rustc_data_structures::tagged_ptr::{TaggedRef, Tag};
+/// use crate::rustc_data_structures::tagged_ptr::{TaggedRef, Tag};
 ```
 
 ## Block 8

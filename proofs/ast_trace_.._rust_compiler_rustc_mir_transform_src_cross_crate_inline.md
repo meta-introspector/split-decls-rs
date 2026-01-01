@@ -6,21 +6,21 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_hir::attrs::InlineAttr;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::LocalDefId;
-use rustc_middle::mir::visit::Visitor;
-use rustc_middle::mir::*;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::TyCtxt;
-use rustc_session::config::{InliningThreshold, OptLevel};
+use crate::rustc_complete::attrs::InlineAttr;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::{InliningThreshold, OptLevel};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::sym;
+use crate::rustc_complete::sym;
 
 use crate::{inline, pass_manager as pm};
 ```

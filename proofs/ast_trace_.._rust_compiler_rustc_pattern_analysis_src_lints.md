@@ -6,9 +6,9 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_middle::lint::LevelAndSource;
-use rustc_session::lint::builtin::NON_EXHAUSTIVE_OMITTED_PATTERNS;
-use rustc_span::ErrorGuaranteed;
+use crate::rustc_complete::lint::LevelAndSource;
+use crate::rustc_complete::lint::builtin::NON_EXHAUSTIVE_OMITTED_PATTERNS;
+use crate::rustc_complete::ErrorGuaranteed;
 use tracing::instrument;
 
 use crate::MatchArm;
@@ -90,7 +90,7 @@ pub(crate) fn lint_nonexhaustive_missing_variants<'p, 'tcx>(
 ) -> Result<(), ErrorGuaranteed> {
     if !matches!(
         rcx.tcx.lint_level_at_node(NON_EXHAUSTIVE_OMITTED_PATTERNS, rcx.match_lint_level).level,
-        rustc_session::lint::Level::Allow
+        crate::rustc_session::lint::Level::Allow
     ) {
         let witnesses = collect_nonexhaustive_missing_variants(rcx, pat_column)?;
         if !witnesses.is_empty() {
@@ -115,7 +115,7 @@ pub(crate) fn lint_nonexhaustive_missing_variants<'p, 'tcx>(
         for arm in arms {
             let LevelAndSource { level, src, .. } =
                 rcx.tcx.lint_level_at_node(NON_EXHAUSTIVE_OMITTED_PATTERNS, arm.arm_data);
-            if !matches!(level, rustc_session::lint::Level::Allow) {
+            if !matches!(level, crate::rustc_session::lint::Level::Allow) {
                 let decorator = NonExhaustiveOmittedPatternLintOnArm {
                     lint_span: src.span(),
                     suggest_lint_on_match: rcx.whole_match_span.map(|span| span.shrink_to_lo()),
@@ -123,7 +123,7 @@ pub(crate) fn lint_nonexhaustive_missing_variants<'p, 'tcx>(
                     lint_name: "non_exhaustive_omitted_patterns",
                 };
 
-                use rustc_errors::LintDiagnostic;
+                use crate::rustc_complete::LintDiagnostic;
                 let mut err = rcx.tcx.dcx().struct_span_warn(arm.pat.data().span, "");
                 decorator.decorate_lint(&mut err);
                 err.emit();

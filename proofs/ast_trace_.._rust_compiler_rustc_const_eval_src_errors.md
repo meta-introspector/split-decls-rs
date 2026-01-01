@@ -10,9 +10,9 @@ use std::borrow::Cow;
 use std::fmt::Write;
 
 use either::Either;
-use rustc_abi::WrappingRange;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_abi::WrappingRange;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Diag, DiagArgValue, DiagMessage, Diagnostic, EmissionGuarantee, Level, MultiSpan, Subdiagnostic,
 };
 ```
@@ -21,7 +21,7 @@ use rustc_errors::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::ConstContext;
+use crate::rustc_complete::ConstContext;
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
 ```
 
@@ -29,7 +29,7 @@ use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::mir::interpret::{
+use crate::rustc_complete::mir::interpret::{
     CtfeProvenance, ExpectedKind, InterpErrorKind, InvalidMetaKind, InvalidProgramInfo,
     Misalignment, Pointer, PointerKind, ResourceExhaustionInfo, UndefinedBehaviorInfo,
     UnsupportedOpInfo, ValidationErrorInfo,
@@ -40,14 +40,14 @@ use rustc_middle::mir::interpret::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Mutability, Ty};
+use crate::rustc_complete::ty::{self, Mutability, Ty};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 6
@@ -244,7 +244,7 @@ pub(crate) struct UnstableIntrinsic {
     pub feature: Symbol,
     #[suggestion(
         const_eval_unstable_intrinsic_suggestion,
-        code = "#![feature({feature})]\n",
+        code = "#[feature({feature})]\n",
         applicability = "machine-applicable"
     )]
     pub suggestion: Span,
@@ -908,7 +908,7 @@ impl<'a> ReportErrorExt for UndefinedBehaviorInfo<'a> {
 ```rust
 impl<'tcx> ReportErrorExt for ValidationErrorInfo<'tcx> {
     fn diagnostic_message(&self) -> DiagMessage {
-        use rustc_middle::mir::interpret::ValidationErrorKind::*;
+        use crate::rustc_complete::mir::interpret::ValidationErrorKind::*;
 
         use crate::fluent_generated::*;
         match self.kind {
@@ -980,7 +980,7 @@ impl<'tcx> ReportErrorExt for ValidationErrorInfo<'tcx> {
     }
 
     fn add_args<G: EmissionGuarantee>(self, err: &mut Diag<'_, G>) {
-        use rustc_middle::mir::interpret::ValidationErrorKind::*;
+        use crate::rustc_complete::mir::interpret::ValidationErrorKind::*;
 
         use crate::fluent_generated as fluent;
 
@@ -1133,7 +1133,7 @@ impl ReportErrorExt for UnsupportedOpInfo {
             ReadPartialPointer(ptr) => {
                 diag.arg("ptr", ptr);
             }
-            ThreadLocalStatic(did) | ExternStatic(did) => rustc_middle::ty::tls::with(|tcx| {
+            ThreadLocalStatic(did) | ExternStatic(did) => crate::rustc_middle::ty::tls::with(|tcx| {
                 diag.arg("did", tcx.def_path_str(did));
             }),
         }
@@ -1221,7 +1221,7 @@ impl ReportErrorExt for ResourceExhaustionInfo {
 **Metadata**: AST_ID=55 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=9 | LINES=11
 
 ```rust
-impl rustc_errors::IntoDiagArg for InternKind {
+impl crate::rustc_errors::IntoDiagArg for InternKind {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
         DiagArgValue::Str(Cow::Borrowed(match self {
             InternKind::Static(Mutability::Not) => "static",

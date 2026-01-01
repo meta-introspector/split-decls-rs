@@ -6,7 +6,7 @@ Generated 15 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_abi::{
+use crate::rustc_abi::{
     Align, BackendRepr, FieldIdx, FieldsShape, Size, TagEncoding, VariantIdx, Variants,
 };
 ```
@@ -15,23 +15,23 @@ use rustc_abi::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::mir::PlaceTy;
-use rustc_middle::mir::interpret::Scalar;
-use rustc_middle::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutOf, TyAndLayout};
+use crate::rustc_complete::mir::PlaceTy;
+use crate::rustc_complete::mir::interpret::Scalar;
+use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutOf, TyAndLayout};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, mir};
+use crate::rustc_complete::{bug, mir};
 ```
 
 ## Block 5

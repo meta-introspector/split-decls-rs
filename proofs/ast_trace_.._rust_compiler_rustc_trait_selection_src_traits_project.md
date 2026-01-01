@@ -3,36 +3,36 @@
 Generated 48 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=11
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=11
 
 ```rust
-//! Code for projecting associated types out of trait references.
+// Code for projecting associated types out of trait references.
 
 use std::ops::ControlFlow;
 
-use rustc_data_structures::sso::SsoHashSet;
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::lang_items::LangItem;
-use rustc_infer::infer::DefineOpaqueTypes;
-use rustc_infer::infer::resolve::OpportunisticRegionResolver;
-use rustc_infer::traits::{ObligationCauseCode, PredicateObligations};
+use crate::rustc_data_structures::sso::SsoHashSet;
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_infer::infer::DefineOpaqueTypes;
+use crate::rustc_infer::infer::resolve::OpportunisticRegionResolver;
+use crate::rustc_infer::traits::{ObligationCauseCode, PredicateObligations};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::traits::select::OverflowError;
-use rustc_middle::traits::{BuiltinImplSource, ImplSource, ImplSourceUserDefinedData};
+use crate::rustc_complete::traits::select::OverflowError;
+use crate::rustc_complete::traits::{BuiltinImplSource, ImplSource, ImplSourceUserDefinedData};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::fast_reject::DeepRejectCtxt;
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
+use crate::rustc_complete::ty::{
     self, Term, Ty, TyCtxt, TypeFoldable, TypeVisitableExt, TypingMode, Upcast,
 };
 ```
@@ -41,14 +41,14 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::sym;
+use crate::rustc_complete::sym;
 use tracing::{debug, instrument};
 ```
 

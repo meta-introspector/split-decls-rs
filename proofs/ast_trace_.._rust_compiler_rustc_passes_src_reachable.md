@@ -6,79 +6,79 @@ Generated 16 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=13 | LINES=29
 
 ```rust
-//! Finds local items that are "reachable", which means that other crates need access to their
-//! compiled code or their *runtime* MIR. (Compile-time MIR is always encoded anyway, so we don't
-//! worry about that here.)
-//!
-//! An item is "reachable" if codegen that happens in downstream crates can end up referencing this
-//! item. This obviously includes all public items. However, some of these items cannot be codegen'd
-//! (because they are generic), and for some the compiled code is not sufficient (because we want to
-//! cross-crate inline them). These items "need cross-crate MIR". When a reachable function `f`
-//! needs cross-crate MIR, then its MIR may be codegen'd in a downstream crate, and hence items it
-//! mentions need to be considered reachable.
-//!
-//! Furthermore, if a `const`/`const fn` is reachable, then it can return pointers to other items,
-//! making those reachable as well. For instance, consider a `const fn` returning a pointer to an
-//! otherwise entirely private function: if a downstream crate calls that `const fn` to compute the
-//! initial value of a `static`, then it needs to generate a direct reference to this function --
-//! i.e., the function is directly reachable from that downstream crate! Hence we have to recurse
-//! into `const` and `const fn`.
-//!
-//! Conversely, reachability *stops* when it hits a monomorphic non-`const` function that we do not
-//! want to cross-crate inline. That function will just be codegen'd in this crate, which means the
-//! monomorphization collector will consider it a root and then do another graph traversal to
-//! codegen everything called by this function -- but that's a very different graph from what we are
-//! considering here as at that point, everything is monomorphic.
+// Finds local items that are "reachable", which means that other crates need access to their
+// compiled code or their *runtime* MIR. (Compile-time MIR is always encoded anyway, so we don't
+// worry about that here.)
+//
+// An item is "reachable" if codegen that happens in downstream crates can end up referencing this
+// item. This obviously includes all public items. However, some of these items cannot be codegen'd
+// (because they are generic), and for some the compiled code is not sufficient (because we want to
+// cross-crate inline them). These items "need cross-crate MIR". When a reachable function `f`
+// needs cross-crate MIR, then its MIR may be codegen'd in a downstream crate, and hence items it
+// mentions need to be considered reachable.
+//
+// Furthermore, if a `const`/`const fn` is reachable, then it can return pointers to other items,
+// making those reachable as well. For instance, consider a `const fn` returning a pointer to an
+// otherwise entirely private function: if a downstream crate calls that `const fn` to compute the
+// initial value of a `static`, then it needs to generate a direct reference to this function --
+// i.e., the function is directly reachable from that downstream crate! Hence we have to recurse
+// into `const` and `const fn`.
+//
+// Conversely, reachability *stops* when it hits a monomorphic non-`const` function that we do not
+// want to cross-crate inline. That function will just be codegen'd in this crate, which means the
+// monomorphization collector will consider it a root and then do another graph traversal to
+// codegen everything called by this function -- but that's a very different graph from what we are
+// considering here as at that point, everything is monomorphic.
 
 use hir::def_id::LocalDefIdSet;
-use rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use rustc_hir as hir;
-use rustc_hir::Node;
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::Node;
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::intravisit::{self, Visitor};
+use crate::rustc_complete::intravisit::{self, Visitor};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::middle::codegen_fn_attrs::{CodegenFnAttrFlags, CodegenFnAttrs};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::codegen_fn_attrs::{CodegenFnAttrFlags, CodegenFnAttrs};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::middle::privacy::{self, Level};
+use crate::rustc_complete::middle::privacy::{self, Level};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::interpret::{ConstAllocation, ErrorHandled, GlobalAlloc};
+use crate::rustc_complete::mir::interpret::{ConstAllocation, ErrorHandled, GlobalAlloc};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::query::Providers;
-use rustc_middle::ty::{self, ExistentialTraitRef, TyCtxt};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, ExistentialTraitRef, TyCtxt};
 ```
 
 ## Block 8
@@ -86,7 +86,7 @@ use rustc_middle::ty::{self, ExistentialTraitRef, TyCtxt};
 
 ```rust
 use rustc_privacy::DefIdVisitor;
-use rustc_session::config::CrateType;
+use crate::rustc_complete::config::CrateType;
 use tracing::debug;
 
 /// Determines whether this item is recursive for reachability. See `is_recursively_reachable_local`

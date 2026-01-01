@@ -6,29 +6,29 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=13
 
 ```rust
-//! This module contains the code to instantiate a "query result", and
-//! in particular to extract out the resulting region obligations and
-//! encode them therein.
-//!
-//! For an overview of what canonicalization is and how it fits into
-//! rustc, check out the [chapter in the rustc dev guide][c].
-//!
-//! [c]: https://rust-lang.github.io/chalk/book/canonical_queries/canonicalization.html
+// This module contains the code to instantiate a "query result", and
+// in particular to extract out the resulting region obligations and
+// encode them therein.
+//
+// For an overview of what canonicalization is and how it fits into
+// rustc, check out the [chapter in the rustc dev guide][c].
+//
+// [c]: https://rust-lang.github.io/chalk/book/canonical_queries/canonicalization.html
 
 use std::fmt::Debug;
 use std::iter;
 
-use rustc_index::{Idx, IndexVec};
+use crate::rustc_index::{Idx, IndexVec};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::arena::ArenaAllocatable;
-use rustc_middle::bug;
-use rustc_middle::infer::canonical::CanonicalVarKind;
-use rustc_middle::ty::{self, BoundVar, GenericArg, GenericArgKind, Ty, TyCtxt, TypeFoldable};
+use crate::rustc_complete::arena::ArenaAllocatable;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::infer::canonical::CanonicalVarKind;
+use crate::rustc_complete::ty::{self, BoundVar, GenericArg, GenericArgKind, Ty, TyCtxt, TypeFoldable};
 ```
 
 ## Block 3

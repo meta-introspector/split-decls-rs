@@ -692,77 +692,14 @@ fn load_symbol_map(symbol_map_path: &str) -> Result<HashMap<String, Value>, Box<
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    println!("cargo:rerun-if-changed=build.rs");
+    println!("cargo:rerun-if-changed=error_list.txt");
+    println!("🚀 BUILD.RS STARTING - This should appear in cargo build output!");
     println!("🔧 Incremental Build.rs - Processing files one by one");
     
-    // Check for incremental mode flag
-    let incremental = std::env::var("INCREMENTAL").is_ok();
-    let max_files = if incremental {
-        std::env::var("MAX_FILES")
-            .unwrap_or("10".to_string())
-            .parse::<usize>()
-            .unwrap_or(10)
-    } else {
-        usize::MAX
-    };
+    // Generate rustc_complete.rs with exclusions
+    build_rustc_from_symbol_map()?;
     
-    println!("📊 Mode: {} (max {} files)", 
-        if incremental { "INCREMENTAL" } else { "FULL" }, 
-        if max_files == usize::MAX { "ALL".to_string() } else { max_files.to_string() }
-    );
-    
-    let symbol_map_path = "symbol_map.json.gz";
-    if !Path::new(symbol_map_path).exists() {
-        eprintln!("❌ Symbol map not found: {}", symbol_map_path);
-        return Ok(());
-    }
-    
-    let symbol_map = load_symbol_map(symbol_map_path)?;
-    let exclusions = load_error_exclusions();
-    
-    // Extract unique source files from symbol map
-    let mut unique_files = HashSet::new();
-    for (_, symbol_data) in symbol_map.iter() {
-        if let Some(source_file) = symbol_data.get("source_file").and_then(|v| v.as_str()) {
-            if source_file.contains("/rust/compiler/") && source_file.ends_with(".rs") {
-                unique_files.insert(source_file.to_string());
-            }
-        }
-    }
-    
-    let mut processed_count = 0;
-    
-    for file_path in unique_files.iter() {
-        if processed_count >= max_files {
-            println!("🛑 Reached max files limit ({})", max_files);
-            break;
-        }
-        
-        // Check if file should be excluded
-        if should_exclude_file(file_path, &exclusions) {
-            println!("⏭️  Skipping {} (in error exclusion list)", file_path);
-            continue;
-        }
-        
-        print!("[{:3}] Processing {} ... ", processed_count + 1, file_path);
-        
-        match process_single_file(file_path) {
-            Ok(_) => {
-                println!("✅");
-                processed_count += 1;
-            }
-            Err(e) => {
-                println!("❌ {}", e);
-                if incremental {
-                    println!("    Skipping due to error in incremental mode");
-                    continue;
-                } else {
-                    return Err(e);
-                }
-            }
-        }
-    }
-    
-    println!("🎯 Processed {} files successfully", processed_count);
     Ok(())
 }
 
@@ -801,10 +738,11 @@ fn process_single_file(file_path: &str) -> Result<(), Box<dyn std::error::Error>
 }
 
 fn build_rustc_from_symbol_map() -> Result<(), Box<dyn std::error::Error>> {
-    println!("🔧 Building rustc from symbol_map.json...");
+    println!("🔧 build_rustc_from_symbol_map() starting...");
     
     // Load error exclusions
     let exclusions = load_error_exclusions();
+    println!("📊 Loaded {} exclusion patterns", exclusions.len());
     
     // Set required rustc environment variables
     println!("cargo:rustc-env=CFG_RELEASE_CHANNEL=dev");
@@ -833,13 +771,16 @@ fn build_rustc_from_symbol_map() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     }
+    println!("📁 Found {} unique source files", source_files.len());
     
     // Group files by crate (excluding error-prone files)
     let mut crate_files: HashMap<String, Vec<String>> = HashMap::new();
+    let mut excluded_count = 0;
     for file in &source_files {
         // Check if file should be excluded
         if should_exclude_file(file, &exclusions) {
             println!("⏭️  Skipping {} (in error exclusion list)", file);
+            excluded_count += 1;
             continue;
         }
         
@@ -847,6 +788,8 @@ fn build_rustc_from_symbol_map() -> Result<(), Box<dyn std::error::Error>> {
             crate_files.entry(crate_name).or_insert_with(Vec::new).push(file.clone());
         }
     }
+    println!("📊 Excluded {} files, processing {} files in {} crates", 
+             excluded_count, source_files.len() - excluded_count, crate_files.len());
     
     // Generate include file with all submodules
     generate_complete_includes(&crate_files)?;
@@ -892,7 +835,10 @@ fn extract_crate_name(file_path: &str) -> Option<String> {
 }
 
 fn generate_complete_includes(crate_files: &HashMap<String, Vec<String>>) -> Result<(), Box<dyn std::error::Error>> {
+    println!("🔧 generate_complete_includes called with {} crates", crate_files.len());
+    
     let mut include_file = fs::File::create("src/rustc_complete.rs")?;
+    println!("📝 Created src/rustc_complete.rs");
     
     writeln!(include_file, "// Auto-generated complete rustc includes from symbol_map.json")?;
     writeln!(include_file, "// All rustc crates and submodules in dependency order")?;

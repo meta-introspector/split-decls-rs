@@ -8,9 +8,9 @@ Generated 7 AST blocks from source file
 ```rust
 use std::iter;
 
-use rustc_middle::bug;
-use rustc_middle::mir::interpret::Scalar;
-use rustc_middle::mir::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::interpret::Scalar;
+use crate::rustc_complete::mir::{
     BasicBlock, BinOp, Body, Operand, Place, Rvalue, Statement, StatementKind, SwitchTargets,
     TerminatorKind,
 };
@@ -20,7 +20,7 @@ use rustc_middle::mir::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{Ty, TyCtxt};
+use crate::rustc_complete::ty::{Ty, TyCtxt};
 ```
 
 ## Block 3
@@ -46,7 +46,7 @@ use tracing::trace;
 pub(super) struct SimplifyComparisonIntegral;
 
 impl<'tcx> crate::MirPass<'tcx> for SimplifyComparisonIntegral {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() > 0
     }
 
@@ -192,7 +192,7 @@ impl<'tcx> OptimizationFinder<'_, 'tcx> {
                 // find switch
                 let (place_switched_on, targets, place_switched_on_moved) =
                     match &bb.terminator().kind {
-                        rustc_middle::mir::TerminatorKind::SwitchInt { discr, targets, .. } => {
+                        crate::rustc_middle::mir::TerminatorKind::SwitchInt { discr, targets, .. } => {
                             Some((discr.place()?, targets, discr.is_move()))
                         }
                         _ => None,
@@ -201,7 +201,7 @@ impl<'tcx> OptimizationFinder<'_, 'tcx> {
                 // find the statement that assigns the place being switched on
                 bb.statements.iter().enumerate().rev().find_map(|(stmt_idx, stmt)| {
                     match &stmt.kind {
-                        rustc_middle::mir::StatementKind::Assign(box (lhs, rhs))
+                        crate::rustc_middle::mir::StatementKind::Assign(box (lhs, rhs))
                             if *lhs == place_switched_on =>
                         {
                             match rhs {

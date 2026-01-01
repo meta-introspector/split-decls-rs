@@ -6,15 +6,15 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::MetaItem;
-use rustc_expand::base::{Annotatable, ExtCtxt};
+use crate::rustc_complete::MetaItem;
+use crate::rustc_expand::base::{Annotatable, ExtCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=28
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::deriving::generic::*;
 use crate::deriving::path_std;

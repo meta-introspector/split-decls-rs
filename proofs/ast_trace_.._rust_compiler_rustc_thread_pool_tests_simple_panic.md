@@ -6,9 +6,9 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=simple_panic | COMPLEXITY=3 | LINES=9
 
 ```rust
-#![allow(unused_crate_dependencies)]
+#[allow(unused_crate_dependencies)]
 
-use rustc_thread_pool::join;
+use crate::rustc_thread_pool::join;
 
 #[test]
 #[should_panic(expected = "should panic")]

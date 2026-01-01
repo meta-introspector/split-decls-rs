@@ -10,19 +10,19 @@ use core::ops::ControlFlow;
 use std::borrow::Cow;
 use std::path::PathBuf;
 
-use rustc_abi::ExternAbi;
-use rustc_ast::ast::LitKind;
-use rustc_ast::{LitIntType, TraitObjectSyntax};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_complete::ast::LitKind;
+use crate::rustc_complete::{LitIntType, TraitObjectSyntax};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_data_structures::unord::UnordSet;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::unord::UnordSet;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, ErrorGuaranteed, Level, MultiSpan, StashKey, StringPart, Suggestions,
     pluralize, struct_span_code_err,
 };
@@ -32,41 +32,41 @@ use rustc_errors::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefId, LOCAL_CRATE, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE, LocalDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::intravisit::Visitor;
-use rustc_hir::{self as hir, LangItem, Node};
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::{self as hir, LangItem, Node};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::{InferOk, TypeTrace};
+use crate::rustc_infer::infer::{InferOk, TypeTrace};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_infer::traits::ImplSource;
-use rustc_infer::traits::solve::Goal;
-use rustc_middle::traits::SignatureMismatchData;
-use rustc_middle::traits::select::OverflowError;
-use rustc_middle::ty::abstract_const::NotConstEvaluatable;
-use rustc_middle::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_infer::traits::ImplSource;
+use crate::rustc_infer::traits::solve::Goal;
+use crate::rustc_complete::traits::SignatureMismatchData;
+use crate::rustc_complete::traits::select::OverflowError;
+use crate::rustc_complete::ty::abstract_const::NotConstEvaluatable;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::print::{
+use crate::rustc_complete::ty::print::{
     PrintPolyTraitPredicateExt, PrintTraitPredicateExt as _, PrintTraitRefExt as _,
     with_forced_trimmed_paths,
 };
@@ -76,7 +76,7 @@ use rustc_middle::ty::print::{
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, GenericArgKind, TraitRef, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable,
     TypeVisitableExt, Upcast,
 };
@@ -86,14 +86,14 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{BytePos, DUMMY_SP, STDLIB_STABLE_CRATES, Span, Symbol, sym};
+use crate::rustc_complete::{BytePos, DUMMY_SP, STDLIB_STABLE_CRATES, Span, Symbol, sym};
 ```
 
 ## Block 11
@@ -1029,7 +1029,7 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                 .coroutine_kind(self.tcx.coroutine_for_closure(closure_def_id))
                 .unwrap()
             {
-                rustc_hir::CoroutineKind::Desugared(desugaring, _) => desugaring.to_string(),
+                crate::rustc_hir::CoroutineKind::Desugared(desugaring, _) => desugaring.to_string(),
                 coro => coro.to_string(),
             };
             let mut err = self.dcx().create_err(CoroClosureNotFn {

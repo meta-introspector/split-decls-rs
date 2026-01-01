@@ -8,36 +8,36 @@ Generated 16 AST blocks from source file
 ```rust
 use std::iter;
 
-use rustc_abi::{FIRST_VARIANT, VariantIdx};
+use crate::rustc_abi::{FIRST_VARIANT, VariantIdx};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::LocalDefId;
-use rustc_middle::mir::interpret::LitToConstInput;
-use rustc_middle::query::Providers;
-use rustc_middle::thir::visit;
-use rustc_middle::thir::visit::Visitor;
-use rustc_middle::ty::abstract_const::CastKind;
-use rustc_middle::ty::{self, Expr, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::mir::interpret::LitToConstInput;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::thir::visit;
+use crate::rustc_complete::thir::visit::Visitor;
+use crate::rustc_complete::ty::abstract_const::CastKind;
+use crate::rustc_complete::ty::{self, Expr, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, mir, thir};
+use crate::rustc_complete::{bug, mir, thir};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
 ```
 

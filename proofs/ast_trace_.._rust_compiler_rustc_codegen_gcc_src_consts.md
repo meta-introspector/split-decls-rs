@@ -21,14 +21,14 @@ use gccjit::{Function, GlobalKind, LValue, RValue, ToRValue, Type};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{self as abi, Align, HasDataLayout, Primitive, Size, WrappingRange};
+use crate::rustc_abi::{self as abi, Align, HasDataLayout, Primitive, Size, WrappingRange};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_codegen_ssa::traits::{
+use crate::rustc_codegen_ssa::traits::{
     BaseTypeCodegenMethods, ConstCodegenMethods, StaticCodegenMethods,
 };
 ```
@@ -37,17 +37,17 @@ use rustc_codegen_ssa::traits::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir::attrs::Linkage;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::LOCAL_CRATE;
-use rustc_middle::middle::codegen_fn_attrs::{CodegenFnAttrFlags, CodegenFnAttrs};
+use crate::rustc_complete::attrs::Linkage;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LOCAL_CRATE;
+use crate::rustc_complete::middle::codegen_fn_attrs::{CodegenFnAttrFlags, CodegenFnAttrs};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::mir::interpret::{
+use crate::rustc_complete::mir::interpret::{
     self, ConstAllocation, ErrorHandled, Scalar as InterpScalar, read_target_uint,
 };
 ```
@@ -56,22 +56,22 @@ use rustc_middle::mir::interpret::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::layout::LayoutOf;
-use rustc_middle::ty::{self, Instance};
+use crate::rustc_complete::ty::layout::LayoutOf;
+use crate::rustc_complete::ty::{self, Instance};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=set_global_alignment | COMPLEXITY=8 | LINES=19
 
 ```rust
-use rustc_span::def_id::DefId;
+use crate::rustc_complete::def_id::DefId;
 
 use crate::base;
 use crate::context::CodegenCx;
@@ -177,7 +177,7 @@ impl<'gcc, 'tcx> StaticCodegenMethods for CodegenCx<'gcc, 'tcx> {
             //
             // To workaround the bug, we trick LLVM into not increasing
             // the global's alignment by explicitly assigning a section to it
-            // (equivalent to automatically generating a `#[link_section]` attribute).
+            // (equivalent to automatically generating a `#[unsafe(link_section]` attribute).
             // See the comment in the `GlobalValue::canIncreaseAlignment()` function
             // of `lib/IR/Globals.cpp` for why this works.
             //

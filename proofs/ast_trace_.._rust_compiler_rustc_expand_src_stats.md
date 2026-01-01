@@ -8,7 +8,7 @@ Generated 12 AST blocks from source file
 ```rust
 use std::iter;
 
-use rustc_ast::{self as ast, DUMMY_NODE_ID, Expr, ExprKind};
+use crate::rustc_complete::{self as ast, DUMMY_NODE_ID, Expr, ExprKind};
 ```
 
 ## Block 2
@@ -16,14 +16,14 @@ use rustc_ast::{self as ast, DUMMY_NODE_ID, Expr, ExprKind};
 
 ```rust
 use rustc_ast_pretty::pprust;
-use rustc_span::hygiene::{ExpnKind, MacroKind};
+use crate::rustc_complete::hygiene::{ExpnKind, MacroKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol, kw, sym};
+use crate::rustc_complete::{Span, Symbol, kw, sym};
 ```
 
 ## Block 4
@@ -208,7 +208,7 @@ pub(crate) fn update_macro_stats(
         let span = ecx
             .sess
             .source_map()
-            .span_to_string(span, rustc_span::FileNameDisplayPreference::Local);
+            .span_to_string(span, crate::rustc_span::FileNameDisplayPreference::Local);
         eprint!(
             "\
             -------------------------------\n\

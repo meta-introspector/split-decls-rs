@@ -6,9 +6,9 @@ Generated 33 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=34
 
 ```rust
-//! Trait Resolution. See the [rustc dev guide] for more information on how this works.
-//!
-//! [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/traits/resolution.html
+// Trait Resolution. See the [rustc dev guide] for more information on how this works.
+//
+// [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/traits/resolution.html
 
 pub mod auto_trait;
 pub(crate) mod coherence;
@@ -34,19 +34,19 @@ pub mod wf;
 use std::fmt::Debug;
 use std::ops::ControlFlow;
 
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::def::DefKind;
-pub use rustc_infer::traits::*;
-use rustc_middle::query::Providers;
-use rustc_middle::span_bug;
-use rustc_middle::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def::DefKind;
+pub use crate::rustc_infer::traits::*;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, GenericArgs, GenericArgsRef, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable,
     TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypingMode, Upcast,
 };
@@ -56,8 +56,8 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::Span;
-use rustc_span::def_id::DefId;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::DefId;
 use tracing::{debug, instrument};
 ```
 
@@ -798,7 +798,7 @@ pub fn try_evaluate_const<'tcx>(
             let uv = ty::UnevaluatedConst::new(uv.def, args);
             let erased_uv = tcx.erase_and_anonymize_regions(uv);
 
-            use rustc_middle::mir::interpret::ErrorHandled;
+            use crate::rustc_complete::mir::interpret::ErrorHandled;
             // FIXME: `def_span` will point at the definition of this const; ideally, we'd point at
             // where it gets used as a const generic.
             match tcx.const_eval_resolve_for_typeck(typing_env, erased_uv, tcx.def_span(uv.def)) {

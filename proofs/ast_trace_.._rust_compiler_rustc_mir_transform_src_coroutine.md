@@ -6,63 +6,63 @@ Generated 66 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=21 | LINES=26
 
 ```rust
-//! This is the implementation of the pass which transforms coroutines into state machines.
-//!
-//! MIR generation for coroutines creates a function which has a self argument which
-//! passes by value. This argument is effectively a coroutine type which only contains upvars and
-//! is only used for this argument inside the MIR for the coroutine.
-//! It is passed by value to enable upvars to be moved out of it. Drop elaboration runs on that
-//! MIR before this pass and creates drop flags for MIR locals.
-//! It will also drop the coroutine argument (which only consists of upvars) if any of the upvars
-//! are moved out of. This pass elaborates the drops of upvars / coroutine argument in the case
-//! that none of the upvars were moved out of. This is because we cannot have any drops of this
-//! coroutine in the MIR, since it is used to create the drop glue for the coroutine. We'd get
-//! infinite recursion otherwise.
-//!
-//! This pass creates the implementation for either the `Coroutine::resume` or `Future::poll`
-//! function and the drop shim for the coroutine based on the MIR input.
-//! It converts the coroutine argument from Self to &mut Self adding derefs in the MIR as needed.
-//! It computes the final layout of the coroutine struct which looks like this:
-//!     First upvars are stored
-//!     It is followed by the coroutine state field.
-//!     Then finally the MIR locals which are live across a suspension point are stored.
-//!     ```ignore (illustrative)
-//!     struct Coroutine {
-//!         upvars...,
-//!         state: u32,
-//!         mir_locals...,
-//!     }
+// This is the implementation of the pass which transforms coroutines into state machines.
+//
+// MIR generation for coroutines creates a function which has a self argument which
+// passes by value. This argument is effectively a coroutine type which only contains upvars and
+// is only used for this argument inside the MIR for the coroutine.
+// It is passed by value to enable upvars to be moved out of it. Drop elaboration runs on that
+// MIR before this pass and creates drop flags for MIR locals.
+// It will also drop the coroutine argument (which only consists of upvars) if any of the upvars
+// are moved out of. This pass elaborates the drops of upvars / coroutine argument in the case
+// that none of the upvars were moved out of. This is because we cannot have any drops of this
+// coroutine in the MIR, since it is used to create the drop glue for the coroutine. We'd get
+// infinite recursion otherwise.
+//
+// This pass creates the implementation for either the `Coroutine::resume` or `Future::poll`
+// function and the drop shim for the coroutine based on the MIR input.
+// It converts the coroutine argument from Self to &mut Self adding derefs in the MIR as needed.
+// It computes the final layout of the coroutine struct which looks like this:
+//     First upvars are stored
+//     It is followed by the coroutine state field.
+//     Then finally the MIR locals which are live across a suspension point are stored.
+//     ```ignore (illustrative)
+//     struct Coroutine {
+//         upvars...,
+//         state: u32,
+//         mir_locals...,
+//     }
 ```
 
 ## Block 2
-**Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=29
+**Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=29
 
 ```rust
-//!     ```
-//! This pass computes the meaning of the state field and the MIR locals which are live
-//! across a suspension point. There are however three hardcoded coroutine states:
-//!     0 - Coroutine have not been resumed yet
-//!     1 - Coroutine has returned / is completed
-//!     2 - Coroutine has been poisoned
-//!
-//! It also rewrites `return x` and `yield y` as setting a new coroutine state and returning
-//! `CoroutineState::Complete(x)` and `CoroutineState::Yielded(y)`,
-//! or `Poll::Ready(x)` and `Poll::Pending` respectively.
-//! MIR locals which are live across a suspension point are moved to the coroutine struct
-//! with references to them being updated with references to the coroutine struct.
-//!
-//! The pass creates two functions which have a switch on the coroutine state giving
-//! the action to take.
-//!
-//! One of them is the implementation of `Coroutine::resume` / `Future::poll`.
-//! For coroutines with state 0 (unresumed) it starts the execution of the coroutine.
-//! For coroutines with state 1 (returned) and state 2 (poisoned) it panics.
-//! Otherwise it continues the execution from the last suspension point.
-//!
-//! The other function is the drop glue for the coroutine.
-//! For coroutines with state 0 (unresumed) it drops the upvars of the coroutine.
-//! For coroutines with state 1 (returned) and state 2 (poisoned) it does nothing.
-//! Otherwise it drops all the values in scope at the last suspension point.
+//     ```
+// This pass computes the meaning of the state field and the MIR locals which are live
+// across a suspension point. There are however three hardcoded coroutine states:
+//     0 - Coroutine have not been resumed yet
+//     1 - Coroutine has returned / is completed
+//     2 - Coroutine has been poisoned
+//
+// It also rewrites `return x` and `yield y` as setting a new coroutine state and returning
+// `CoroutineState::Complete(x)` and `CoroutineState::Yielded(y)`,
+// or `Poll::Ready(x)` and `Poll::Pending` respectively.
+// MIR locals which are live across a suspension point are moved to the coroutine struct
+// with references to them being updated with references to the coroutine struct.
+//
+// The pass creates two functions which have a switch on the coroutine state giving
+// the action to take.
+//
+// One of them is the implementation of `Coroutine::resume` / `Future::poll`.
+// For coroutines with state 0 (unresumed) it starts the execution of the coroutine.
+// For coroutines with state 1 (returned) and state 2 (poisoned) it panics.
+// Otherwise it continues the execution from the last suspension point.
+//
+// The other function is the drop glue for the coroutine.
+// For coroutines with state 0 (unresumed) it drops the upvars of the coroutine.
+// For coroutines with state 1 (returned) and state 2 (poisoned) it does nothing.
+// Otherwise it drops all the values in scope at the last suspension point.
 
 mod by_move_body;
 mod drop;
@@ -85,48 +85,48 @@ use drop::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{FieldIdx, VariantIdx};
+use crate::rustc_abi::{FieldIdx, VariantIdx};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_errors::pluralize;
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::pluralize;
 use rustc_hir as hir;
-use rustc_hir::lang_items::LangItem;
-use rustc_hir::{CoroutineDesugaring, CoroutineKind};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{CoroutineDesugaring, CoroutineKind};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_index::bit_set::{BitMatrix, DenseBitSet, GrowableBitSet};
+use crate::rustc_index::bit_set::{BitMatrix, DenseBitSet, GrowableBitSet};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_index::{Idx, IndexVec};
+use crate::rustc_index::{Idx, IndexVec};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::visit::{MutVisitor, PlaceContext, Visitor};
+use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext, Visitor};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::util::Discr;
-use rustc_middle::ty::{
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::util::Discr;
+use crate::rustc_complete::ty::{
     self, CoroutineArgs, CoroutineArgsExt, GenericArgsRef, InstanceKind, Ty, TyCtxt, TypingMode,
 };
 ```
@@ -135,14 +135,14 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_mir_dataflow::impls::{
+use crate::rustc_mir_dataflow::impls::{
     MaybeBorrowedLocals, MaybeLiveLocals, MaybeRequiresStorage, MaybeStorageLive,
     always_storage_live_locals,
 };
@@ -152,7 +152,7 @@ use rustc_mir_dataflow::impls::{
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_mir_dataflow::{
+use crate::rustc_mir_dataflow::{
     Analysis, Results, ResultsCursor, ResultsVisitor, visit_reachable_results,
 };
 ```
@@ -161,26 +161,26 @@ use rustc_mir_dataflow::{
 **Metadata**: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 14
 **Metadata**: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::source_map::dummy_spanned;
-use rustc_span::symbol::sym;
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::source_map::dummy_spanned;
+use crate::rustc_complete::symbol::sym;
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 15
 **Metadata**: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_target::spec::PanicStrategy;
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::infer::TyCtxtInferExt as _;
-use rustc_trait_selection::traits::{ObligationCause, ObligationCauseCode, ObligationCtxt};
+use crate::rustc_target::spec::PanicStrategy;
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::infer::TyCtxtInferExt as _;
+use crate::rustc_trait_selection::traits::{ObligationCause, ObligationCauseCode, ObligationCtxt};
 ```
 
 ## Block 16
@@ -1518,7 +1518,7 @@ fn create_coroutine_resume_function<'tcx>(
 
     let mut cases = create_cases(body, &transform, Operation::Resume);
 
-    use rustc_middle::mir::AssertKind::{ResumedAfterPanic, ResumedAfterReturn};
+    use crate::rustc_complete::mir::AssertKind::{ResumedAfterPanic, ResumedAfterReturn};
 
     // Jump to the entry point on the unresumed
     cases.insert(0, (CoroutineArgs::UNRESUMED, START_BLOCK));
@@ -2308,7 +2308,7 @@ fn check_must_not_suspend_def(
             reason: s.as_str().to_string(),
         });
         tcx.emit_node_span_lint(
-            rustc_session::lint::builtin::MUST_NOT_SUSPEND,
+            crate::rustc_session::lint::builtin::MUST_NOT_SUSPEND,
             hir_id,
             data.source_span,
             errors::MustNotSupend {

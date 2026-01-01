@@ -6,8 +6,8 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{
     self, Const, DelayedMap, FallibleTypeFolder, InferConst, Ty, TyCtxt, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeVisitableExt,
 };

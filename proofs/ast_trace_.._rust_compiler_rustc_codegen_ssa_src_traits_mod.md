@@ -6,18 +6,18 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=31
 
 ```rust
-//! Interface of a Rust codegen backend
-//!
-//! This crate defines all the traits that have to be implemented by a codegen backend in order to
-//! use the backend-agnostic codegen code in `rustc_codegen_ssa`.
-//!
-//! The interface is designed around two backend-specific data structures, the codegen context and
-//! the builder. The codegen context is supposed to be read-only after its creation and during the
-//! actual codegen, while the builder stores the information about the function during codegen and
-//! is used to produce the instructions of the backend IR.
-//!
-//! The traits contain associated types that are backend-specific, such as the backend's value or
-//! basic blocks.
+// Interface of a Rust codegen backend
+//
+// This crate defines all the traits that have to be implemented by a codegen backend in order to
+// use the backend-agnostic codegen code in `rustc_codegen_ssa`.
+//
+// The interface is designed around two backend-specific data structures, the codegen context and
+// the builder. The codegen context is supposed to be read-only after its creation and during the
+// actual codegen, while the builder stores the information about the function during codegen and
+// is used to produce the instructions of the backend IR.
+//
+// The traits contain associated types that are backend-specific, such as the backend's value or
+// basic blocks.
 
 mod abi;
 mod asm;
@@ -35,15 +35,15 @@ mod write;
 
 use std::fmt;
 
-use rustc_middle::ty::Ty;
-use rustc_middle::ty::layout::{FnAbiOf, LayoutOf, TyAndLayout};
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::{FnAbiOf, LayoutOf, TyAndLayout};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_target::callconv::FnAbi;
+use crate::rustc_target::callconv::FnAbi;
 
 pub use self::abi::AbiBuilderMethods;
 pub use self::asm::{

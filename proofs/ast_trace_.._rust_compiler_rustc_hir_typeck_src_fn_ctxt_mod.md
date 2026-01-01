@@ -23,22 +23,22 @@ use std::cell::{Cell, RefCell};
 use std::ops::Deref;
 
 use hir::def_id::CRATE_DEF_ID;
-use rustc_errors::DiagCtxtHandle;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::DiagCtxtHandle;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, HirId, ItemLocalMap};
+use crate::rustc_complete::{self as hir, HirId, ItemLocalMap};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir_analysis::hir_ty_lowering::{
+use crate::rustc_hir_analysis::hir_ty_lowering::{
     HirTyLowerer, InherentAssocCandidate, RegionInferReason,
 };
 ```
@@ -47,37 +47,37 @@ use rustc_hir_analysis::hir_ty_lowering::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::{self, RegionVariableOrigin};
+use crate::rustc_infer::infer::{self, RegionVariableOrigin};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::traits::{DynCompatibilityViolation, Obligation};
+use crate::rustc_infer::traits::{DynCompatibilityViolation, Obligation};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Const, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, Const, Ty, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::Session;
-use rustc_span::{self, DUMMY_SP, ErrorGuaranteed, Ident, Span, sym};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::{self, DUMMY_SP, ErrorGuaranteed, Ident, Span, sym};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_trait_selection::error_reporting::TypeErrCtxt;
-use rustc_trait_selection::traits::{
+use crate::rustc_trait_selection::error_reporting::TypeErrCtxt;
+use crate::rustc_trait_selection::traits::{
     self, FulfillmentError, ObligationCause, ObligationCauseCode, ObligationCtxt,
 };
 ```
@@ -100,7 +100,7 @@ use crate::{CoroutineTypes, Diverges, EnclosingBreakables, TypeckRootCtxt};
 /// functions, closures, and `const`s, including performing type inference
 /// with [`InferCtxt`].
 ///
-/// This is in contrast to `rustc_hir_analysis::collect::ItemCtxt`, which is
+/// This is in contrast to `crate::rustc_hir_analysis::collect::ItemCtxt`, which is
 /// used to type-check item *signatures* and thus does not perform type
 /// inference.
 ///
@@ -256,7 +256,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     /// `TypeckResults` which is used for diagnostics.
     /// Use [`InferCtxtErrorExt::err_ctxt`] to start one without a `TypeckResults`.
     ///
-    /// [`InferCtxtErrorExt::err_ctxt`]: rustc_trait_selection::error_reporting::InferCtxtErrorExt::err_ctxt
+    /// [`InferCtxtErrorExt::err_ctxt`]: crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt::err_ctxt
     pub(crate) fn err_ctxt(&'a self) -> TypeErrCtxt<'a, 'tcx> {
         TypeErrCtxt {
             infcx: &self.infcx,
@@ -460,7 +460,7 @@ impl<'tcx> HirTyLowerer<'tcx> for FnCtxt<'_, 'tcx> {
         &self,
         span: Span,
         item_def_id: DefId,
-        item_segment: &rustc_hir::PathSegment<'tcx>,
+        item_segment: &crate::rustc_hir::PathSegment<'tcx>,
         poly_trait_ref: ty::PolyTraitRef<'tcx>,
     ) -> Result<(DefId, ty::GenericArgsRef<'tcx>), ErrorGuaranteed> {
         let trait_ref = self.instantiate_binder_with_fresh_vars(
@@ -523,9 +523,9 @@ impl<'tcx> HirTyLowerer<'tcx> for FnCtxt<'_, 'tcx> {
 
     fn lower_fn_sig(
         &self,
-        decl: &rustc_hir::FnDecl<'tcx>,
-        _generics: Option<&rustc_hir::Generics<'_>>,
-        _hir_id: rustc_hir::HirId,
+        decl: &crate::rustc_hir::FnDecl<'tcx>,
+        _generics: Option<&crate::rustc_hir::Generics<'_>>,
+        _hir_id: crate::rustc_hir::HirId,
         _hir_ty: Option<&hir::Ty<'_>>,
     ) -> (Vec<Ty<'tcx>>, Ty<'tcx>) {
         let input_tys = decl.inputs.iter().map(|a| self.lowerer().lower_ty(a)).collect();
@@ -599,7 +599,7 @@ fn never_type_behavior(tcx: TyCtxt<'_>) -> (DivergingFallbackBehavior, Diverging
 **Metadata**: AST_ID=18 | TYPE=FUNCTION | NAME=default_fallback | COMPLEXITY=9 | LINES=16
 
 ```rust
-/// Returns the default fallback which is used when there is no explicit override via `#![never_type_options(...)]`.
+/// Returns the default fallback which is used when there is no explicit override via `#[never_type_options(...)]`.
 fn default_fallback(tcx: TyCtxt<'_>) -> DivergingFallbackBehavior {
     // Edition 2024: fallback to `!`
     if tcx.sess.edition().at_least_rust_2024() {

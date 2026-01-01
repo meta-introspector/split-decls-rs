@@ -8,7 +8,7 @@ Generated 3 AST blocks from source file
 ```rust
 use std::hash::BuildHasherDefault;
 
-pub use rustc_hash::{FxHashMap, FxHashSet, FxHasher};
+pub use crate::rustc_hash::{FxHashMap, FxHashSet, FxHasher};
 ```
 
 ## Block 2

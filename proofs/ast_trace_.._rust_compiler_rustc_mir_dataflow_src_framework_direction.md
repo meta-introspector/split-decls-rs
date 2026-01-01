@@ -8,8 +8,8 @@ Generated 5 AST blocks from source file
 ```rust
 use std::ops::RangeInclusive;
 
-use rustc_middle::bug;
-use rustc_middle::mir::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::{
     self, BasicBlock, CallReturnPlaces, Location, SwitchTargetValue, TerminatorEdges,
 };
 ```

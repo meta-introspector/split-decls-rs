@@ -7,30 +7,30 @@ Generated 19 AST blocks from source file
 
 ```rust
 use diagnostics::make_errors_for_mismatched_closing_delims;
-use rustc_ast::ast::{self, AttrStyle};
+use crate::rustc_complete::ast::{self, AttrStyle};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::token::{self, CommentKind, Delimiter, IdentIsRaw, Token, TokenKind};
+use crate::rustc_complete::token::{self, CommentKind, Delimiter, IdentIsRaw, Token, TokenKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::tokenstream::TokenStream;
-use rustc_ast::util::unicode::{TEXT_FLOW_CONTROL_CHARS, contains_text_flow_control_chars};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::util::unicode::{TEXT_FLOW_CONTROL_CHARS, contains_text_flow_control_chars};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, Diag, DiagCtxtHandle, StashKey};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, Diag, DiagCtxtHandle, StashKey};
 ```
 
 ## Block 5
@@ -53,8 +53,8 @@ use rustc_literal_escaper::{EscapeError, Mode, check_for_errors};
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_session::lint::BuiltinLintDiag;
-use rustc_session::lint::builtin::{
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::{
     RUST_2021_PREFIXES_INCOMPATIBLE_SYNTAX, RUST_2024_GUARDED_STRING_INCOMPATIBLE_SYNTAX,
     TEXT_DIRECTION_CODEPOINT_IN_COMMENT, TEXT_DIRECTION_CODEPOINT_IN_LITERAL,
 };
@@ -64,8 +64,8 @@ use rustc_session::lint::builtin::{
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::parse::ParseSess;
-use rustc_span::{BytePos, Pos, Span, Symbol, sym};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::{BytePos, Pos, Span, Symbol, sym};
 ```
 
 ## Block 9
@@ -95,7 +95,7 @@ use unescape_error_reporting::{emit_unescape_error, escaped_char};
 // This assertion is in this crate, rather than in `rustc_lexer`, because that
 // crate cannot depend on `rustc_data_structures`.
 #[cfg(target_pointer_width = "64")]
-rustc_data_structures::static_assert_size!(rustc_lexer::Token, 12);
+crate::rustc_data_structures::static_assert_size!(rustc_lexer::Token, 12);
 
 #[derive(Clone, Debug)]
 pub(crate) struct UnmatchedDelim {
@@ -256,7 +256,7 @@ impl<'psess, 'src> Lexer<'psess, 'src> {
             }
 
             // Now "cook" the token, converting the simple `rustc_lexer::TokenKind` enum into a
-            // rich `rustc_ast::TokenKind`. This turns strings into interned symbols and runs
+            // rich `crate::rustc_ast::TokenKind`. This turns strings into interned symbols and runs
             // additional validation.
             let kind = match token.kind {
                 rustc_lexer::TokenKind::LineComment { doc_style } => {

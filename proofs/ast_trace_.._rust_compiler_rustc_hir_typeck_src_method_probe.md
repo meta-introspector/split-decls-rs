@@ -18,44 +18,44 @@ use std::cmp::max;
 use std::ops::Deref;
 
 use rustc_attr_parsing::is_doc_alias_attrs_contain_symbol;
-use rustc_data_structures::fx::FxHashSet;
-use rustc_data_structures::sso::SsoHashSet;
-use rustc_errors::Applicability;
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_data_structures::sso::SsoHashSet;
+use crate::rustc_complete::Applicability;
 use rustc_hir as hir;
-use rustc_hir::HirId;
-use rustc_hir::def::DefKind;
-use rustc_hir_analysis::autoderef::{self, Autoderef};
+use crate::rustc_complete::HirId;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_hir_analysis::autoderef::{self, Autoderef};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::canonical::{Canonical, OriginalQueryValues, QueryResponse};
+use crate::rustc_infer::infer::canonical::{Canonical, OriginalQueryValues, QueryResponse};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferOk, TyCtxtInferExt};
+use crate::rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferOk, TyCtxtInferExt};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_infer::traits::ObligationCauseCode;
-use rustc_middle::middle::stability;
-use rustc_middle::ty::elaborate::supertrait_def_ids;
-use rustc_middle::ty::fast_reject::{DeepRejectCtxt, TreatParams, simplify_type};
+use crate::rustc_infer::traits::ObligationCauseCode;
+use crate::rustc_complete::middle::stability;
+use crate::rustc_complete::ty::elaborate::supertrait_def_ids;
+use crate::rustc_complete::ty::fast_reject::{DeepRejectCtxt, TreatParams, simplify_type};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, AssocContainer, AssocItem, GenericArgs, GenericArgsRef, GenericParamDefKind, ParamEnvAnd,
     Ty, TyCtxt, TypeVisitableExt, Upcast,
 };
@@ -65,22 +65,22 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::lint;
-use rustc_span::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::edit_distance::{
+use crate::rustc_complete::edit_distance::{
     edit_distance_with_substrings, find_best_match_for_name_with_substrings,
 };
 ```
@@ -89,18 +89,18 @@ use rustc_span::edit_distance::{
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Ident, Span, Symbol, sym};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, sym};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_trait_selection::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
-use rustc_trait_selection::infer::InferCtxtExt as _;
-use rustc_trait_selection::traits::query::CanonicalTyGoal;
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
-use rustc_trait_selection::traits::query::method_autoderef::{
+use crate::rustc_trait_selection::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
+use crate::rustc_trait_selection::infer::InferCtxtExt as _;
+use crate::rustc_trait_selection::traits::query::CanonicalTyGoal;
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
+use crate::rustc_trait_selection::traits::query::method_autoderef::{
     CandidateStep, MethodAutoderefBadTy, MethodAutoderefStepsResult,
 };
 ```
@@ -109,7 +109,7 @@ use rustc_trait_selection::traits::query::method_autoderef::{
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_trait_selection::traits::{self, ObligationCause, ObligationCtxt};
+use crate::rustc_trait_selection::traits::{self, ObligationCause, ObligationCtxt};
 ```
 
 ## Block 13

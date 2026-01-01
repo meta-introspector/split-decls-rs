@@ -6,15 +6,15 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::token::{self, Delimiter, IdentIsRaw, NonterminalKind, Token};
+use crate::rustc_complete::token::{self, Delimiter, IdentIsRaw, NonterminalKind, Token};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::tokenstream::TokenStreamIter;
-use rustc_ast::{NodeId, tokenstream};
+use crate::rustc_complete::tokenstream::TokenStreamIter;
+use crate::rustc_complete::{NodeId, tokenstream};
 ```
 
 ## Block 3
@@ -22,11 +22,11 @@ use rustc_ast::{NodeId, tokenstream};
 
 ```rust
 use rustc_ast_pretty::pprust;
-use rustc_feature::Features;
-use rustc_session::Session;
-use rustc_session::parse::feature_err;
-use rustc_span::edition::Edition;
-use rustc_span::{Ident, Span, kw, sym};
+use crate::rustc_feature::Features;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{Ident, Span, kw, sym};
 ```
 
 ## Block 4

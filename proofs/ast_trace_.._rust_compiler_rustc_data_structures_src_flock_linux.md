@@ -6,9 +6,9 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! We use `flock` rather than `fcntl` on Linux, because WSL1 does not support
-//! `fcntl`-style advisory locks properly (rust-lang/rust#72157). For other Unix
-//! targets we still use `fcntl` because it's more portable than `flock`.
+// We use `flock` rather than `fcntl` on Linux, because WSL1 does not support
+// `fcntl`-style advisory locks properly (rust-lang/rust#72157). For other Unix
+// targets we still use `fcntl` because it's more portable than `flock`.
 
 use std::fs::{File, OpenOptions};
 ```

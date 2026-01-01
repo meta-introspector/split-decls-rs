@@ -6,24 +6,24 @@ Generated 16 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=18
 
 ```rust
-//! This module specifies the type based interner for constants.
-//!
-//! After a const evaluation has computed a value, before we destroy the const evaluator's session
-//! memory, we need to extract all memory allocations to the global memory pool so they stay around.
-//!
-//! In principle, this is not very complicated: we recursively walk the final value, follow all the
-//! pointers, and move all reachable allocations to the global `tcx` memory. The only complication
-//! is picking the right mutability: the outermost allocation generally has a clear mutability, but
-//! what about the other allocations it points to that have also been created with this value? We
-//! don't want to do guesswork here. The rules are: `static`, `const`, and promoted can only create
-//! immutable allocations that way. `static mut` can be initialized with expressions like `&mut 42`,
-//! so all inner allocations are marked mutable. Some of them could potentially be made immutable,
-//! but that would require relying on type information, and given how many ways Rust has to lie
-//! about type information, we want to avoid doing that.
+// This module specifies the type based interner for constants.
+//
+// After a const evaluation has computed a value, before we destroy the const evaluator's session
+// memory, we need to extract all memory allocations to the global memory pool so they stay around.
+//
+// In principle, this is not very complicated: we recursively walk the final value, follow all the
+// pointers, and move all reachable allocations to the global `tcx` memory. The only complication
+// is picking the right mutability: the outermost allocation generally has a clear mutability, but
+// what about the other allocations it points to that have also been created with this value? We
+// don't want to do guesswork here. The rules are: `static`, `const`, and promoted can only create
+// immutable allocations that way. `static mut` can be initialized with expressions like `&mut 42`,
+// so all inner allocations are marked mutable. Some of them could potentially be made immutable,
+// but that would require relying on type information, and given how many ways Rust has to lie
+// about type information, we want to avoid doing that.
 
 use hir::def::DefKind;
-use rustc_ast::Mutability;
-use rustc_data_structures::fx::{FxHashSet, FxIndexMap};
+use crate::rustc_complete::Mutability;
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 ```
 
 ## Block 2
@@ -31,15 +31,15 @@ use rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::definitions::{DefPathData, DisambiguatorState};
+use crate::rustc_complete::definitions::{DefPathData, DisambiguatorState};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrs;
-use rustc_middle::mir::interpret::{
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
+use crate::rustc_complete::mir::interpret::{
     AllocBytes, ConstAllocation, CtfeProvenance, InterpResult, Provenance,
 };
 ```
@@ -48,11 +48,11 @@ use rustc_middle::mir::interpret::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_middle::query::TyCtxtAt;
-use rustc_middle::span_bug;
-use rustc_middle::ty::TyCtxt;
-use rustc_middle::ty::layout::TyAndLayout;
-use rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::def_id::LocalDefId;
 use tracing::{instrument, trace};
 ```
 
@@ -226,7 +226,7 @@ fn intern_as_new_static<'tcx>(
     }
 
     // These do not inherit the codegen attrs of the parent static allocation, since
-    // it doesn't make sense for them to inherit their `#[no_mangle]` and `#[link_name = ..]`
+    // it doesn't make sense for them to inherit their `#[unsafe(no_mangle)]` and `#[link_name = ..]`
     // and the like.
     feed.codegen_fn_attrs(CodegenFnAttrs::new());
 

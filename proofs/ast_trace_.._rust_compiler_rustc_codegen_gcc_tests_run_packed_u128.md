@@ -3,7 +3,7 @@
 Generated 3 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=ScalarInt | COMPLEXITY=2 | LINES=18
+**Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=ScalarInt | COMPLEXITY=2 | LINES=17
 
 ```rust
 // Compiler:
@@ -11,12 +11,11 @@ Generated 3 AST blocks from source file
 // Run-time:
 //   status: 0
 
-#![feature(no_core)]
-#![no_std]
-#![no_core]
-#![no_main]
+#[feature(no_core)]
+#[no_std]
+#[no_core]
+#[no_main]
 
-extern crate mini_core;
 use intrinsics::black_box;
 use mini_core::*;
 #[repr(packed(1))]
@@ -31,7 +30,7 @@ pub struct ScalarInt {
 
 ```rust
 #[inline(never)]
-#[no_mangle]
+#[unsafe(no_mangle)]
 fn read_data(a: &ScalarInt) {
     black_box(a.data);
 }
@@ -41,7 +40,7 @@ fn read_data(a: &ScalarInt) {
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=8
 
 ```rust
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
     let data =
         [black_box(ScalarInt { data: 0, size: 1 }), black_box(ScalarInt { data: 0, size: 1 })];

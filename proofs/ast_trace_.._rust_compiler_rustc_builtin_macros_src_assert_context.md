@@ -6,21 +6,21 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::token::{self, Delimiter, IdentIsRaw};
+use crate::rustc_complete::token::{self, Delimiter, IdentIsRaw};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::tokenstream::{DelimSpan, TokenStream, TokenTree};
+use crate::rustc_complete::tokenstream::{DelimSpan, TokenStream, TokenTree};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_ast::{
+use crate::rustc_complete::{
     BinOpKind, BorrowKind, DUMMY_NODE_ID, DelimArgs, Expr, ExprKind, ItemKind, MacCall, MethodCall,
     Mutability, Path, PathSegment, Stmt, StructRest, UnOp, UseTree, UseTreeKind,
 };
@@ -31,9 +31,9 @@ use rustc_ast::{
 
 ```rust
 use rustc_ast_pretty::pprust;
-use rustc_data_structures::fx::FxHashSet;
-use rustc_expand::base::ExtCtxt;
-use rustc_span::{Ident, Span, Symbol, sym};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_expand::base::ExtCtxt;
+use crate::rustc_complete::{Ident, Span, Symbol, sym};
 ```
 
 ## Block 5

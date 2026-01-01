@@ -6,17 +6,17 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::def_id::LocalDefId;
-use rustc_middle::mir;
-use rustc_middle::mir::interpret::{AllocInit, Allocation, GlobalAlloc, InterpResult, Pointer};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::mir;
+use crate::rustc_complete::mir::interpret::{AllocInit, Allocation, GlobalAlloc, InterpResult, Pointer};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::layout::TyAndLayout;
-use rustc_middle::ty::{TyCtxt, TypeVisitable, TypeVisitableExt};
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::ty::{TyCtxt, TypeVisitable, TypeVisitableExt};
 ```
 
 ## Block 3

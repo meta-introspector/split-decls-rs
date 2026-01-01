@@ -3,7 +3,7 @@
 Generated 6 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=Test | COMPLEXITY=2 | LINES=22
+**Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=Test | COMPLEXITY=2 | LINES=21
 
 ```rust
 // Compiler:
@@ -17,12 +17,11 @@ Generated 6 AST blocks from source file
 //      12
 //      1
 
-#![feature(no_core)]
-#![no_std]
-#![no_core]
-#![no_main]
+#[feature(no_core)]
+#[no_std]
+#[no_core]
+#[no_main]
 
-extern crate mini_core;
 use mini_core::*;
 
 struct Test {
@@ -66,7 +65,7 @@ static mut WITH_REF: WithRef = WithRef { refe: unsafe { &TEST } };
 **Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=15
 
 ```rust
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(argc: isize, _argv: *const *const u8) -> i32 {
     unsafe {
         libc::printf(b"%ld\n\0" as *const u8 as *const i8, CONSTANT);

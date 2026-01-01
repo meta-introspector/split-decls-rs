@@ -6,7 +6,7 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-#![allow(unused_crate_dependencies)]
+#[allow(unused_crate_dependencies)]
 
 use std::env;
 #[cfg(target_os = "linux")]
@@ -18,7 +18,7 @@ use std::process::{Command, ExitStatus, Stdio};
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=force_stack_overflow | COMPLEXITY=5 | LINES=11
 
 ```rust
-use rustc_thread_pool::ThreadPoolBuilder;
+use crate::rustc_thread_pool::ThreadPoolBuilder;
 
 fn force_stack_overflow(depth: u32) {
     let mut buffer = [0u8; 1024 * 1024];

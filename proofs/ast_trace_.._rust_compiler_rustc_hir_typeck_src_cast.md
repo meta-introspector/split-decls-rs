@@ -6,55 +6,55 @@ Generated 17 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=21 | LINES=34
 
 ```rust
-//! Code for type-checking cast expressions.
-//!
-//! A cast `e as U` is valid if one of the following holds:
-//! * `e` has type `T` and `T` coerces to `U`; *coercion-cast*
-//! * `e` has type `*T`, `U` is `*U_0`, and either `U_0: Sized` or
-//!    pointer_kind(`T`) = pointer_kind(`U_0`); *ptr-ptr-cast*
-//! * `e` has type `*T` and `U` is a numeric type, while `T: Sized`; *ptr-addr-cast*
-//! * `e` is an integer and `U` is `*U_0`, while `U_0: Sized`; *addr-ptr-cast*
-//! * `e` has type `T` and `T` and `U` are any numeric types; *numeric-cast*
-//! * `e` is a C-like enum and `U` is an integer type; *enum-cast*
-//! * `e` has type `bool` or `char` and `U` is an integer; *prim-int-cast*
-//! * `e` has type `u8` and `U` is `char`; *u8-char-cast*
-//! * `e` has type `&[T; n]` and `U` is `*const T`; *array-ptr-cast*
-//! * `e` is a function pointer type and `U` has type `*T`,
-//!   while `T: Sized`; *fptr-ptr-cast*
-//! * `e` is a function pointer type and `U` is an integer; *fptr-addr-cast*
-//!
-//! where `&.T` and `*T` are references of either mutability,
-//! and where pointer_kind(`T`) is the kind of the unsize info
-//! in `T` - the vtable for a trait definition (e.g., `fmt::Display` or
-//! `Iterator`, not `Iterator<Item=u8>`) or a length (or `()` if `T: Sized`).
-//!
-//! Note that lengths are not adjusted when casting raw slices -
-//! `T: *const [u16] as *const [u8]` creates a slice that only includes
-//! half of the original memory.
-//!
-//! Casting is not transitive, that is, even if `e as U1 as U2` is a valid
-//! expression, `e as U2` is not necessarily so (in fact it will only be valid if
-//! `U1` coerces to `U2`).
+// Code for type-checking cast expressions.
+//
+// A cast `e as U` is valid if one of the following holds:
+// * `e` has type `T` and `T` coerces to `U`; *coercion-cast*
+// * `e` has type `*T`, `U` is `*U_0`, and either `U_0: Sized` or
+//    pointer_kind(`T`) = pointer_kind(`U_0`); *ptr-ptr-cast*
+// * `e` has type `*T` and `U` is a numeric type, while `T: Sized`; *ptr-addr-cast*
+// * `e` is an integer and `U` is `*U_0`, while `U_0: Sized`; *addr-ptr-cast*
+// * `e` has type `T` and `T` and `U` are any numeric types; *numeric-cast*
+// * `e` is a C-like enum and `U` is an integer type; *enum-cast*
+// * `e` has type `bool` or `char` and `U` is an integer; *prim-int-cast*
+// * `e` has type `u8` and `U` is `char`; *u8-char-cast*
+// * `e` has type `&[T; n]` and `U` is `*const T`; *array-ptr-cast*
+// * `e` is a function pointer type and `U` has type `*T`,
+//   while `T: Sized`; *fptr-ptr-cast*
+// * `e` is a function pointer type and `U` is an integer; *fptr-addr-cast*
+//
+// where `&.T` and `*T` are references of either mutability,
+// and where pointer_kind(`T`) is the kind of the unsize info
+// in `T` - the vtable for a trait definition (e.g., `fmt::Display` or
+// `Iterator`, not `Iterator<Item=u8>`) or a length (or `()` if `T: Sized`).
+//
+// Note that lengths are not adjusted when casting raw slices -
+// `T: *const [u16] as *const [u8]` creates a slice that only includes
+// half of the original memory.
+//
+// Casting is not transitive, that is, even if `e as U1 as U2` is a valid
+// expression, `e as U2` is not necessarily so (in fact it will only be valid if
+// `U1` coerces to `U2`).
 
-use rustc_ast::util::parser::ExprPrecedence;
-use rustc_data_structures::fx::FxHashSet;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, Diag, ErrorGuaranteed};
+use crate::rustc_complete::util::parser::ExprPrecedence;
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_hir::{self as hir, ExprKind};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, ExprKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_infer::infer::DefineOpaqueTypes;
+use crate::rustc_infer::infer::DefineOpaqueTypes;
 use rustc_macros::{TypeFoldable, TypeVisitable};
 ```
 
@@ -62,39 +62,39 @@ use rustc_macros::{TypeFoldable, TypeVisitable};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::mir::Mutability;
-use rustc_middle::ty::adjustment::AllowTwoPhase;
-use rustc_middle::ty::cast::{CastKind, CastTy};
+use crate::rustc_complete::mir::Mutability;
+use crate::rustc_complete::ty::adjustment::AllowTwoPhase;
+use crate::rustc_complete::ty::cast::{CastKind, CastTy};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::error::TypeError;
-use rustc_middle::ty::{self, Ty, TyCtxt, TypeAndMut, TypeVisitableExt, VariantDef, elaborate};
+use crate::rustc_complete::ty::error::TypeError;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeAndMut, TypeVisitableExt, VariantDef, elaborate};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::lint;
-use rustc_span::{DUMMY_SP, Span, sym};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::{DUMMY_SP, Span, sym};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::{debug, instrument};
 ```
 
@@ -825,8 +825,8 @@ impl<'a, 'tcx> CastCheck<'tcx> {
     /// can return Ok and create type errors in the fcx rather than returning
     /// directly. coercion-cast is handled in check instead of here.
     fn do_check(&self, fcx: &FnCtxt<'a, 'tcx>) -> Result<CastKind, CastError<'tcx>> {
-        use rustc_middle::ty::cast::CastTy::*;
-        use rustc_middle::ty::cast::IntTy::*;
+        use crate::rustc_complete::ty::cast::CastTy::*;
+        use crate::rustc_complete::ty::cast::IntTy::*;
 
         let (t_from, t_cast) = match (CastTy::from_ty(self.expr_ty), CastTy::from_ty(self.cast_ty))
         {

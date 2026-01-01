@@ -6,99 +6,99 @@ Generated 33 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=46 | LINES=97
 
 ```rust
-//! Partitioning Codegen Units for Incremental Compilation
-//! ======================================================
-//!
-//! The task of this module is to take the complete set of monomorphizations of
-//! a crate and produce a set of codegen units from it, where a codegen unit
-//! is a named set of (mono-item, linkage) pairs. That is, this module
-//! decides which monomorphization appears in which codegen units with which
-//! linkage. The following paragraphs describe some of the background on the
-//! partitioning scheme.
-//!
-//! The most important opportunity for saving on compilation time with
-//! incremental compilation is to avoid re-codegenning and re-optimizing code.
-//! Since the unit of codegen and optimization for LLVM is "modules" or, how
-//! we call them "codegen units", the particulars of how much time can be saved
-//! by incremental compilation are tightly linked to how the output program is
-//! partitioned into these codegen units prior to passing it to LLVM --
-//! especially because we have to treat codegen units as opaque entities once
-//! they are created: There is no way for us to incrementally update an existing
-//! LLVM module and so we have to build any such module from scratch if it was
-//! affected by some change in the source code.
-//!
-//! From that point of view it would make sense to maximize the number of
-//! codegen units by, for example, putting each function into its own module.
-//! That way only those modules would have to be re-compiled that were actually
-//! affected by some change, minimizing the number of functions that could have
-//! been re-used but just happened to be located in a module that is
-//! re-compiled.
-//!
-//! However, since LLVM optimization does not work across module boundaries,
-//! using such a highly granular partitioning would lead to very slow runtime
-//! code since it would effectively prohibit inlining and other inter-procedure
-//! optimizations. We want to avoid that as much as possible.
-//!
-//! Thus we end up with a trade-off: The bigger the codegen units, the better
-//! LLVM's optimizer can do its work, but also the smaller the compilation time
-//! reduction we get from incremental compilation.
-//!
-//! Ideally, we would create a partitioning such that there are few big codegen
-//! units with few interdependencies between them. For now though, we use the
-//! following heuristic to determine the partitioning:
-//!
-//! - There are two codegen units for every source-level module:
-//! - One for "stable", that is non-generic, code
-//! - One for more "volatile" code, i.e., monomorphized instances of functions
-//!   defined in that module
-//!
-//! In order to see why this heuristic makes sense, let's take a look at when a
-//! codegen unit can get invalidated:
-//!
-//! 1. The most straightforward case is when the BODY of a function or global
-//! changes. Then any codegen unit containing the code for that item has to be
-//! re-compiled. Note that this includes all codegen units where the function
-//! has been inlined.
-//!
-//! 2. The next case is when the SIGNATURE of a function or global changes. In
-//! this case, all codegen units containing a REFERENCE to that item have to be
-//! re-compiled. This is a superset of case 1.
-//!
-//! 3. The final and most subtle case is when a REFERENCE to a generic function
-//! is added or removed somewhere. Even though the definition of the function
-//! might be unchanged, a new REFERENCE might introduce a new monomorphized
-//! instance of this function which has to be placed and compiled somewhere.
-//! Conversely, when removing a REFERENCE, it might have been the last one with
-//! that particular set of generic arguments and thus we have to remove it.
-//!
-//! From the above we see that just using one codegen unit per source-level
-//! module is not such a good idea, since just adding a REFERENCE to some
-//! generic item somewhere else would invalidate everything within the module
-//! containing the generic item. The heuristic above reduces this detrimental
-//! side-effect of references a little by at least not touching the non-generic
-//! code of the module.
-//!
-//! A Note on Inlining
-//! ------------------
-//! As briefly mentioned above, in order for LLVM to be able to inline a
-//! function call, the body of the function has to be available in the LLVM
-//! module where the call is made. This has a few consequences for partitioning:
-//!
-//! - The partitioning algorithm has to take care of placing functions into all
-//!   codegen units where they should be available for inlining. It also has to
-//!   decide on the correct linkage for these functions.
-//!
-//! - The partitioning algorithm has to know which functions are likely to get
-//!   inlined, so it can distribute function instantiations accordingly. Since
-//!   there is no way of knowing for sure which functions LLVM will decide to
-//!   inline in the end, we apply a heuristic here: Only functions marked with
-//!   `#[inline]` are considered for inlining by the partitioner. The current
-//!   implementation will not try to determine if a function is likely to be
-//!   inlined by looking at the functions definition.
-//!
-//! Note though that as a side-effect of creating a codegen units per
-//! source-level module, functions from the same module will be available for
-//! inlining, even when they are not marked `#[inline]`.
+// Partitioning Codegen Units for Incremental Compilation
+// ======================================================
+//
+// The task of this module is to take the complete set of monomorphizations of
+// a crate and produce a set of codegen units from it, where a codegen unit
+// is a named set of (mono-item, linkage) pairs. That is, this module
+// decides which monomorphization appears in which codegen units with which
+// linkage. The following paragraphs describe some of the background on the
+// partitioning scheme.
+//
+// The most important opportunity for saving on compilation time with
+// incremental compilation is to avoid re-codegenning and re-optimizing code.
+// Since the unit of codegen and optimization for LLVM is "modules" or, how
+// we call them "codegen units", the particulars of how much time can be saved
+// by incremental compilation are tightly linked to how the output program is
+// partitioned into these codegen units prior to passing it to LLVM --
+// especially because we have to treat codegen units as opaque entities once
+// they are created: There is no way for us to incrementally update an existing
+// LLVM module and so we have to build any such module from scratch if it was
+// affected by some change in the source code.
+//
+// From that point of view it would make sense to maximize the number of
+// codegen units by, for example, putting each function into its own module.
+// That way only those modules would have to be re-compiled that were actually
+// affected by some change, minimizing the number of functions that could have
+// been re-used but just happened to be located in a module that is
+// re-compiled.
+//
+// However, since LLVM optimization does not work across module boundaries,
+// using such a highly granular partitioning would lead to very slow runtime
+// code since it would effectively prohibit inlining and other inter-procedure
+// optimizations. We want to avoid that as much as possible.
+//
+// Thus we end up with a trade-off: The bigger the codegen units, the better
+// LLVM's optimizer can do its work, but also the smaller the compilation time
+// reduction we get from incremental compilation.
+//
+// Ideally, we would create a partitioning such that there are few big codegen
+// units with few interdependencies between them. For now though, we use the
+// following heuristic to determine the partitioning:
+//
+// - There are two codegen units for every source-level module:
+// - One for "stable", that is non-generic, code
+// - One for more "volatile" code, i.e., monomorphized instances of functions
+//   defined in that module
+//
+// In order to see why this heuristic makes sense, let's take a look at when a
+// codegen unit can get invalidated:
+//
+// 1. The most straightforward case is when the BODY of a function or global
+// changes. Then any codegen unit containing the code for that item has to be
+// re-compiled. Note that this includes all codegen units where the function
+// has been inlined.
+//
+// 2. The next case is when the SIGNATURE of a function or global changes. In
+// this case, all codegen units containing a REFERENCE to that item have to be
+// re-compiled. This is a superset of case 1.
+//
+// 3. The final and most subtle case is when a REFERENCE to a generic function
+// is added or removed somewhere. Even though the definition of the function
+// might be unchanged, a new REFERENCE might introduce a new monomorphized
+// instance of this function which has to be placed and compiled somewhere.
+// Conversely, when removing a REFERENCE, it might have been the last one with
+// that particular set of generic arguments and thus we have to remove it.
+//
+// From the above we see that just using one codegen unit per source-level
+// module is not such a good idea, since just adding a REFERENCE to some
+// generic item somewhere else would invalidate everything within the module
+// containing the generic item. The heuristic above reduces this detrimental
+// side-effect of references a little by at least not touching the non-generic
+// code of the module.
+//
+// A Note on Inlining
+// ------------------
+// As briefly mentioned above, in order for LLVM to be able to inline a
+// function call, the body of the function has to be available in the LLVM
+// module where the call is made. This has a few consequences for partitioning:
+//
+// - The partitioning algorithm has to take care of placing functions into all
+//   codegen units where they should be available for inlining. It also has to
+//   decide on the correct linkage for these functions.
+//
+// - The partitioning algorithm has to know which functions are likely to get
+//   inlined, so it can distribute function instantiations accordingly. Since
+//   there is no way of knowing for sure which functions LLVM will decide to
+//   inline in the end, we apply a heuristic here: Only functions marked with
+//   `#[inline]` are considered for inlining by the partitioner. The current
+//   implementation will not try to determine if a function is likely to be
+//   inlined by looking at the functions definition.
+//
+// Note though that as a side-effect of creating a codegen units per
+// source-level module, functions from the same module will be available for
+// inlining, even when they are not marked `#[inline]`.
 
 use std::cmp;
 use std::collections::hash_map::Entry;
@@ -117,48 +117,48 @@ use std::path::{Path, PathBuf};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
+use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::sync;
-use rustc_data_structures::unord::{UnordMap, UnordSet};
+use crate::rustc_data_structures::sync;
+use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::LangItem;
-use rustc_hir::attrs::{InlineAttr, Linkage};
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::attrs::{InlineAttr, Linkage};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, DefIdSet, LOCAL_CRATE};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, DefIdSet, LOCAL_CRATE};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir::definitions::DefPathDataName;
-use rustc_middle::bug;
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use rustc_middle::middle::exported_symbols::{SymbolExportInfo, SymbolExportLevel};
+use crate::rustc_complete::definitions::DefPathDataName;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::middle::exported_symbols::{SymbolExportInfo, SymbolExportLevel};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::mir::mono::{
+use crate::rustc_complete::mir::mono::{
     CodegenUnit, CodegenUnitNameBuilder, InstantiationMode, MonoItem, MonoItemData,
     MonoItemPartitions, Visibility,
 };
@@ -168,31 +168,31 @@ use rustc_middle::mir::mono::{
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::print::{characteristic_def_id_of_type, with_no_trimmed_paths};
+use crate::rustc_complete::ty::print::{characteristic_def_id_of_type, with_no_trimmed_paths};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, InstanceKind, TyCtxt};
+use crate::rustc_complete::ty::{self, InstanceKind, TyCtxt};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::util::Providers;
-use rustc_session::CodegenUnits;
-use rustc_session::config::{DumpMonoStatsFormat, SwitchWithOptPath};
+use crate::rustc_complete::util::Providers;
+use crate::rustc_complete::CodegenUnits;
+use crate::rustc_complete::config::{DumpMonoStatsFormat, SwitchWithOptPath};
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_span::Symbol;
-use rustc_target::spec::SymbolVisibility;
+use crate::rustc_complete::Symbol;
+use crate::rustc_target::spec::SymbolVisibility;
 use tracing::debug;
 
 use crate::collector::{self, MonoItemCollectionStrategy, UsageMap};

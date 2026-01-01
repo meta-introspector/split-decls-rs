@@ -6,14 +6,14 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=25 | LINES=553
 
 ```rust
-//! This library is used to gather all error codes into one place, to make
-//! their maintenance easier.
+// This library is used to gather all error codes into one place, to make
+// their maintenance easier.
 
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![deny(rustdoc::invalid_codeblock_attributes)]
-#![doc(rust_logo)]
-#![feature(rustdoc_internals)]
+#[allow(internal_features)]
+#[deny(rustdoc::invalid_codeblock_attributes)]
+#[doc(rust_logo)]
+#[feature(rustdoc_internals)]
 // tidy-alphabetical-end
 
 // This higher-order macro defines the error codes that are in use. It is used

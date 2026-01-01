@@ -6,34 +6,34 @@ Generated 14 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-#![allow(non_camel_case_types)]
+#[allow(non_camel_case_types)]
 
-use rustc_hir::LangItem;
-use rustc_hir::attrs::PeImportNameType;
-use rustc_middle::ty::layout::TyAndLayout;
-use rustc_middle::ty::{self, Instance, TyCtxt};
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::attrs::PeImportNameType;
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::ty::{self, Instance, TyCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, mir, span_bug};
+use crate::rustc_complete::{bug, mir, span_bug};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::cstore::{DllCallingConvention, DllImport};
+use crate::rustc_complete::cstore::{DllCallingConvention, DllImport};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=18
 
 ```rust
-use rustc_span::Span;
-use rustc_target::spec::Target;
+use crate::rustc_complete::Span;
+use crate::rustc_target::spec::Target;
 
 use crate::traits::*;
 
@@ -149,7 +149,7 @@ pub enum TypeKind {
 //            for now we content ourselves with providing a no-op HashStable
 //            implementation for CGUs.
 mod temp_stable_hash_impls {
-    use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+    use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 
     use crate::ModuleCodegen;
 

@@ -14,7 +14,7 @@ use std::ops::{Div, Mul};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_error_messages::{DiagArgValue, IntoDiagArg};
+use crate::rustc_error_messages::{DiagArgValue, IntoDiagArg};
 ```
 
 ## Block 3

@@ -6,17 +6,17 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{InlineAsmOptions, InlineAsmTemplatePiece};
+use crate::rustc_complete::{InlineAsmOptions, InlineAsmTemplatePiece};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=39
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_middle::ty::Instance;
-use rustc_span::Span;
-use rustc_target::asm::InlineAsmRegOrRegClass;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::ty::Instance;
+use crate::rustc_complete::Span;
+use crate::rustc_target::asm::InlineAsmRegOrRegClass;
 
 use super::BackendTypes;
 use crate::mir::operand::OperandRef;

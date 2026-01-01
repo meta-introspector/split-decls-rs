@@ -6,25 +6,25 @@ Generated 37 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=11
 
 ```rust
-//! "Dyn-compatibility"[^1] refers to the ability for a trait to be converted
-//! to a trait object. In general, traits may only be converted to a trait
-//! object if certain criteria are met.
-//!
-//! [^1]: Formerly known as "object safety".
+// "Dyn-compatibility"[^1] refers to the ability for a trait to be converted
+// to a trait object. In general, traits may only be converted to a trait
+// object if certain criteria are met.
+//
+// [^1]: Formerly known as "object safety".
 
 use std::ops::ControlFlow;
 
-use rustc_errors::FatalError;
-use rustc_hir::def_id::DefId;
-use rustc_hir::{self as hir, LangItem};
+use crate::rustc_complete::FatalError;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, LangItem};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_middle::query::Providers;
-use rustc_middle::ty::{
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{
     self, EarlyBinder, GenericArgs, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable,
     TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode, Upcast,
     elaborate,
@@ -35,7 +35,7 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 4
@@ -725,7 +725,7 @@ fn receiver_is_dispatchable<'tcx>(
     // the type `U` in the query
     // use a bogus type parameter to mimic a forall(U) query using u32::MAX for now.
     let unsized_self_ty: Ty<'tcx> =
-        Ty::new_param(tcx, u32::MAX, rustc_span::sym::RustaceansAreAwesome);
+        Ty::new_param(tcx, u32::MAX, crate::rustc_span::sym::RustaceansAreAwesome);
 
     // `Receiver[Self => U]`
     let unsized_receiver_ty =

@@ -6,82 +6,82 @@ Generated 69 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=33 | LINES=68
 
 ```rust
-//! HIR walker for walking the contents of nodes.
-//!
-//! Here are the three available patterns for the visitor strategy,
-//! in roughly the order of desirability:
-//!
-//! 1. **Shallow visit**: Get a simple callback for every item (or item-like thing) in the HIR.
-//!    - Example: find all items with a `#[foo]` attribute on them.
-//!    - How: Use the `hir_crate_items` or `hir_module_items` query to traverse over item-like ids
-//!       (ItemId, TraitItemId, etc.) and use tcx.def_kind and `tcx.hir_item*(id)` to filter and
-//!       access actual item-like thing, respectively.
-//!    - Pro: Efficient; just walks the lists of item ids and gives users control whether to access
-//!       the hir_owners themselves or not.
-//!    - Con: Don't get information about nesting
-//!    - Con: Don't have methods for specific bits of HIR, like "on
-//!      every expr, do this".
-//! 2. **Deep visit**: Want to scan for specific kinds of HIR nodes within
-//!    an item, but don't care about how item-like things are nested
-//!    within one another.
-//!    - Example: Examine each expression to look for its type and do some check or other.
-//!    - How: Implement `intravisit::Visitor` and override the `NestedFilter` type to
-//!      `nested_filter::OnlyBodies` (and implement `maybe_tcx`), and use
-//!      `tcx.hir_visit_all_item_likes_in_crate(&mut visitor)`. Within your
-//!      `intravisit::Visitor` impl, implement methods like `visit_expr()` (don't forget to invoke
-//!      `intravisit::walk_expr()` to keep walking the subparts).
-//!    - Pro: Visitor methods for any kind of HIR node, not just item-like things.
-//!    - Pro: Integrates well into dependency tracking.
-//!    - Con: Don't get information about nesting between items
-//! 3. **Nested visit**: Want to visit the whole HIR and you care about the nesting between
-//!    item-like things.
-//!    - Example: Lifetime resolution, which wants to bring lifetimes declared on the
-//!      impl into scope while visiting the impl-items, and then back out again.
-//!    - How: Implement `intravisit::Visitor` and override the `NestedFilter` type to
-//!      `nested_filter::All` (and implement `maybe_tcx`). Walk your crate with
-//!      `tcx.hir_walk_toplevel_module(visitor)`.
-//!    - Pro: Visitor methods for any kind of HIR node, not just item-like things.
-//!    - Pro: Preserves nesting information
-//!    - Con: Does not integrate well into dependency tracking.
-//!
-//! If you have decided to use this visitor, here are some general
-//! notes on how to do so:
-//!
-//! Each overridden visit method has full control over what
-//! happens with its node, it can do its own traversal of the node's children,
-//! call `intravisit::walk_*` to apply the default traversal algorithm, or prevent
-//! deeper traversal by doing nothing.
-//!
-//! When visiting the HIR, the contents of nested items are NOT visited
-//! by default. This is different from the AST visitor, which does a deep walk.
-//! Hence this module is called `intravisit`; see the method `visit_nested_item`
-//! for more details.
-//!
-//! Note: it is an important invariant that the default visitor walks
-//! the body of a function in "execution order" - more concretely, if
-//! we consider the reverse post-order (RPO) of the CFG implied by the HIR,
-//! then a pre-order traversal of the HIR is consistent with the CFG RPO
-//! on the *initial CFG point* of each HIR node, while a post-order traversal
-//! of the HIR is consistent with the CFG RPO on each *final CFG point* of
-//! each CFG node.
-//!
-//! One thing that follows is that if HIR node A always starts/ends executing
-//! before HIR node B, then A appears in traversal pre/postorder before B,
-//! respectively. (This follows from RPO respecting CFG domination).
-//!
-//! This order consistency is required in a few places in rustc, for
-//! example coroutine inference, and possibly also HIR borrowck.
+// HIR walker for walking the contents of nodes.
+//
+// Here are the three available patterns for the visitor strategy,
+// in roughly the order of desirability:
+//
+// 1. **Shallow visit**: Get a simple callback for every item (or item-like thing) in the HIR.
+//    - Example: find all items with a `#[foo]` attribute on them.
+//    - How: Use the `hir_crate_items` or `hir_module_items` query to traverse over item-like ids
+//       (ItemId, TraitItemId, etc.) and use tcx.def_kind and `tcx.hir_item*(id)` to filter and
+//       access actual item-like thing, respectively.
+//    - Pro: Efficient; just walks the lists of item ids and gives users control whether to access
+//       the hir_owners themselves or not.
+//    - Con: Don't get information about nesting
+//    - Con: Don't have methods for specific bits of HIR, like "on
+//      every expr, do this".
+// 2. **Deep visit**: Want to scan for specific kinds of HIR nodes within
+//    an item, but don't care about how item-like things are nested
+//    within one another.
+//    - Example: Examine each expression to look for its type and do some check or other.
+//    - How: Implement `intravisit::Visitor` and override the `NestedFilter` type to
+//      `nested_filter::OnlyBodies` (and implement `maybe_tcx`), and use
+//      `tcx.hir_visit_all_item_likes_in_crate(&mut visitor)`. Within your
+//      `intravisit::Visitor` impl, implement methods like `visit_expr()` (don't forget to invoke
+//      `intravisit::walk_expr()` to keep walking the subparts).
+//    - Pro: Visitor methods for any kind of HIR node, not just item-like things.
+//    - Pro: Integrates well into dependency tracking.
+//    - Con: Don't get information about nesting between items
+// 3. **Nested visit**: Want to visit the whole HIR and you care about the nesting between
+//    item-like things.
+//    - Example: Lifetime resolution, which wants to bring lifetimes declared on the
+//      impl into scope while visiting the impl-items, and then back out again.
+//    - How: Implement `intravisit::Visitor` and override the `NestedFilter` type to
+//      `nested_filter::All` (and implement `maybe_tcx`). Walk your crate with
+//      `tcx.hir_walk_toplevel_module(visitor)`.
+//    - Pro: Visitor methods for any kind of HIR node, not just item-like things.
+//    - Pro: Preserves nesting information
+//    - Con: Does not integrate well into dependency tracking.
+//
+// If you have decided to use this visitor, here are some general
+// notes on how to do so:
+//
+// Each overridden visit method has full control over what
+// happens with its node, it can do its own traversal of the node's children,
+// call `intravisit::walk_*` to apply the default traversal algorithm, or prevent
+// deeper traversal by doing nothing.
+//
+// When visiting the HIR, the contents of nested items are NOT visited
+// by default. This is different from the AST visitor, which does a deep walk.
+// Hence this module is called `intravisit`; see the method `visit_nested_item`
+// for more details.
+//
+// Note: it is an important invariant that the default visitor walks
+// the body of a function in "execution order" - more concretely, if
+// we consider the reverse post-order (RPO) of the CFG implied by the HIR,
+// then a pre-order traversal of the HIR is consistent with the CFG RPO
+// on the *initial CFG point* of each HIR node, while a post-order traversal
+// of the HIR is consistent with the CFG RPO on each *final CFG point* of
+// each CFG node.
+//
+// One thing that follows is that if HIR node A always starts/ends executing
+// before HIR node B, then A appears in traversal pre/postorder before B,
+// respectively. (This follows from RPO respecting CFG domination).
+//
+// This order consistency is required in a few places in rustc, for
+// example coroutine inference, and possibly also HIR borrowck.
 
-use rustc_ast::Label;
-use rustc_ast::visit::{VisitorResult, try_visit, visit_opt, walk_list};
+use crate::rustc_complete::Label;
+use crate::rustc_complete::visit::{VisitorResult, try_visit, visit_opt, walk_list};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::LocalDefId;
-use rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{Ident, Span, Symbol};
 ```
 
 ## Block 3
@@ -198,7 +198,7 @@ pub mod nested_filter {
     /// visit fn bodies for fns that it encounters, and closure bodies, but
     /// skip over nested item-like things.
     ///
-    /// See the comments at [`rustc_hir::intravisit`] for more details on the overall
+    /// See the comments at [`crate::rustc_hir::intravisit`] for more details on the overall
     /// visit strategy.
     pub trait NestedFilter<'hir> {
         type MaybeTyCtxt: HirTyCtxt<'hir>;
@@ -289,7 +289,7 @@ pub trait Visitor<'v>: Sized {
     /// nothing. **You probably don't want to override this method** --
     /// instead, override [`Self::NestedFilter`] or use the "shallow" or
     /// "deep" visit patterns described at
-    /// [`rustc_hir::intravisit`]. The only reason to override
+    /// [`crate::rustc_hir::intravisit`]. The only reason to override
     /// this method is if you want a nested pattern but cannot supply a
     /// `TyCtxt`; see `maybe_tcx` for advice.
     fn visit_nested_item(&mut self, id: ItemId) -> Self::Result {

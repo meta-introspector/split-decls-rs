@@ -6,27 +6,27 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! Detecting usage of the `#[debugger_visualizer]` attribute.
+// Detecting usage of the `#[debugger_visualizer]` attribute.
 
-use rustc_ast::Attribute;
-use rustc_expand::base::resolve_path;
-use rustc_middle::middle::debugger_visualizer::{DebuggerVisualizerFile, DebuggerVisualizerType};
+use crate::rustc_complete::Attribute;
+use crate::rustc_expand::base::resolve_path;
+use crate::rustc_complete::middle::debugger_visualizer::{DebuggerVisualizerFile, DebuggerVisualizerType};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::query::{LocalCrate, Providers};
+use crate::rustc_complete::query::{LocalCrate, Providers};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_session::Session;
-use rustc_span::sym;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::sym;
 
 use crate::errors::{DebugVisualizerInvalid, DebugVisualizerUnreadable};
 ```
@@ -108,10 +108,10 @@ struct DebuggerVisualizerCollector<'a> {
 **Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=visit_attribute | COMPLEXITY=5 | LINES=7
 
 ```rust
-impl<'ast> rustc_ast::visit::Visitor<'ast> for DebuggerVisualizerCollector<'_> {
+impl<'ast> crate::rustc_ast::visit::Visitor<'ast> for DebuggerVisualizerCollector<'_> {
     fn visit_attribute(&mut self, attr: &'ast Attribute) {
         self.check_for_debugger_visualizer(attr);
-        rustc_ast::visit::walk_attribute(self, attr);
+        crate::rustc_ast::visit::walk_attribute(self, attr);
     }
 }
 ```
@@ -126,7 +126,7 @@ fn debugger_visualizers(tcx: TyCtxt<'_>, _: LocalCrate) -> Vec<DebuggerVisualize
     let krate = &*resolver_and_krate.1;
 
     let mut visitor = DebuggerVisualizerCollector { sess: tcx.sess, visualizers: Vec::new() };
-    rustc_ast::visit::Visitor::visit_crate(&mut visitor, krate);
+    crate::rustc_ast::visit::Visitor::visit_crate(&mut visitor, krate);
 
     // We are collecting visualizers in AST-order, which is deterministic,
     // so we don't need to do any explicit sorting in order to get a

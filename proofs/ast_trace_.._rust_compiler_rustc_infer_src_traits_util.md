@@ -6,16 +6,16 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-pub use rustc_middle::ty::elaborate::*;
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_data_structures::fx::FxHashSet;
+pub use crate::rustc_complete::ty::elaborate::*;
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, Span};
+use crate::rustc_complete::{Ident, Span};
 ```
 
 ## Block 3

@@ -6,72 +6,72 @@ Generated 20 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=7
 
 ```rust
-//! Traits used to represent [lattices] for use as the domain of a dataflow analysis.
-//!
-//! # Overview
-//!
-//! The most common lattice is a powerset of some set `S`, ordered by [set inclusion]. The [Hasse
-//! diagram] for the powerset of a set with two elements (`X` and `Y`) is shown below. Note that
-//! distinct elements at the same height in a Hasse diagram (e.g. `{X}` and `{Y}`) are
+// Traits used to represent [lattices] for use as the domain of a dataflow analysis.
+//
+// # Overview
+//
+// The most common lattice is a powerset of some set `S`, ordered by [set inclusion]. The [Hasse
+// diagram] for the powerset of a set with two elements (`X` and `Y`) is shown below. Note that
+// distinct elements at the same height in a Hasse diagram (e.g. `{X}` and `{Y}`) are
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-//! *incomparable*, not equal.
-//!
-//! ```text
-//!      {X, Y}    <- top
+// *incomparable*, not equal.
+//
+// ```text
+//      {X, Y}    <- top
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=2
 
 ```rust
-//!       /  \
-//!    {X}    {Y}
+//       /  \
+//    {X}    {Y}
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-//!       \  /
-//!        {}      <- bottom
+//       \  /
+//        {}      <- bottom
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=27
 
 ```rust
-//!
-//! ```
-//!
-//! The defining characteristic of a lattice—the one that differentiates it from a [partially
-//! ordered set][poset]—is the existence of a *unique* least upper and greatest lower bound for
-//! every pair of elements. The lattice join operator (`∨`) returns the least upper bound, and the
-//! lattice meet operator (`∧`) returns the greatest lower bound. Types that implement one operator
-//! but not the other are known as semilattices. Dataflow analysis only uses the join operator and
-//! will work with any join-semilattice, but both should be specified when possible.
-//!
-//! ## `PartialOrd`
-//!
-//! Given that it represents a partially ordered set, you may be surprised that [`JoinSemiLattice`]
-//! does not have [`PartialOrd`] as a supertrait. This
-//! is because most standard library types use lexicographic ordering instead of set inclusion for
-//! their `PartialOrd` impl. Since we do not actually need to compare lattice elements to run a
-//! dataflow analysis, there's no need for a newtype wrapper with a custom `PartialOrd` impl. The
-//! only benefit would be the ability to check that the least upper (or greatest lower) bound
-//! returned by the lattice join (or meet) operator was in fact greater (or lower) than the inputs.
-//!
-//! [lattices]: https://en.wikipedia.org/wiki/Lattice_(order)
-//! [set inclusion]: https://en.wikipedia.org/wiki/Subset
-//! [Hasse diagram]: https://en.wikipedia.org/wiki/Hasse_diagram
-//! [poset]: https://en.wikipedia.org/wiki/Partially_ordered_set
+//
+// ```
+//
+// The defining characteristic of a lattice—the one that differentiates it from a [partially
+// ordered set][poset]—is the existence of a *unique* least upper and greatest lower bound for
+// every pair of elements. The lattice join operator (`∨`) returns the least upper bound, and the
+// lattice meet operator (`∧`) returns the greatest lower bound. Types that implement one operator
+// but not the other are known as semilattices. Dataflow analysis only uses the join operator and
+// will work with any join-semilattice, but both should be specified when possible.
+//
+// ## `PartialOrd`
+//
+// Given that it represents a partially ordered set, you may be surprised that [`JoinSemiLattice`]
+// does not have [`PartialOrd`] as a supertrait. This
+// is because most standard library types use lexicographic ordering instead of set inclusion for
+// their `PartialOrd` impl. Since we do not actually need to compare lattice elements to run a
+// dataflow analysis, there's no need for a newtype wrapper with a custom `PartialOrd` impl. The
+// only benefit would be the ability to check that the least upper (or greatest lower) bound
+// returned by the lattice join (or meet) operator was in fact greater (or lower) than the inputs.
+//
+// [lattices]: https://en.wikipedia.org/wiki/Lattice_(order)
+// [set inclusion]: https://en.wikipedia.org/wiki/Subset
+// [Hasse diagram]: https://en.wikipedia.org/wiki/Hasse_diagram
+// [poset]: https://en.wikipedia.org/wiki/Partially_ordered_set
 
-use rustc_index::Idx;
-use rustc_index::bit_set::{DenseBitSet, MixedBitSet};
+use crate::rustc_index::Idx;
+use crate::rustc_index::bit_set::{DenseBitSet, MixedBitSet};
 ```
 
 ## Block 6

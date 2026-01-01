@@ -6,25 +6,25 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{HasDataLayout, Size, TagEncoding, Variants};
+use crate::rustc_abi::{HasDataLayout, Size, TagEncoding, Variants};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_middle::mir::interpret::AllocId;
-use rustc_middle::mir::*;
-use rustc_middle::ty::util::IntTypeExt;
-use rustc_middle::ty::{self, AdtDef, Ty, TyCtxt};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::mir::interpret::AllocId;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::util::IntTypeExt;
+use crate::rustc_complete::ty::{self, AdtDef, Ty, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=13
 
 ```rust
-use rustc_session::Session;
+use crate::rustc_complete::Session;
 
 use crate::patch::MirPatch;
 
@@ -250,8 +250,8 @@ impl EnumSizeOpt {
         macro_rules! encode_store {
             ($curr_idx: expr, $endian: expr, $bytes: expr) => {
                 let bytes = match $endian {
-                    rustc_abi::Endian::Little => $bytes.to_le_bytes(),
-                    rustc_abi::Endian::Big => $bytes.to_be_bytes(),
+                    crate::rustc_abi::Endian::Little => $bytes.to_le_bytes(),
+                    crate::rustc_abi::Endian::Big => $bytes.to_be_bytes(),
                 };
                 for (i, b) in bytes.into_iter().enumerate() {
                     data[$curr_idx + i] = b;
@@ -264,10 +264,10 @@ impl EnumSizeOpt {
                 target_bytes * adt_def.discriminant_for_variant(tcx, var_idx).val as usize;
             let sz = layout.size;
             match ptr_sized_int {
-                rustc_abi::Integer::I32 => {
+                crate::rustc_abi::Integer::I32 => {
                     encode_store!(curr_idx, data_layout.endian, sz.bytes() as u32);
                 }
-                rustc_abi::Integer::I64 => {
+                crate::rustc_abi::Integer::I64 => {
                     encode_store!(curr_idx, data_layout.endian, sz.bytes());
                 }
                 _ => unreachable!(),

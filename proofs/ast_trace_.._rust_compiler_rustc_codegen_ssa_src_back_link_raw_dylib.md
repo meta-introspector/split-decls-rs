@@ -21,27 +21,27 @@ use std::path::{Path, PathBuf};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_abi::Endian;
-use rustc_data_structures::base_n::{CASE_INSENSITIVE, ToBaseN};
+use crate::rustc_abi::Endian;
+use crate::rustc_data_structures::base_n::{CASE_INSENSITIVE, ToBaseN};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxHashMap, FxIndexMap};
+use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11
 
 ```rust
-use rustc_data_structures::stable_hasher::StableHasher;
+use crate::rustc_data_structures::stable_hasher::StableHasher;
 use rustc_hashes::Hash128;
-use rustc_hir::attrs::NativeLibKind;
-use rustc_session::Session;
-use rustc_session::cstore::DllImport;
-use rustc_span::Symbol;
+use crate::rustc_complete::attrs::NativeLibKind;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::cstore::DllImport;
+use crate::rustc_complete::Symbol;
 
 use crate::back::archive::ImportLibraryItem;
 use crate::back::link::ArchiveBuilderBuilder;

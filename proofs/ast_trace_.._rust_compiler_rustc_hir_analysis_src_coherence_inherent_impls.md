@@ -6,42 +6,42 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=13
 
 ```rust
-//! The code in this module gathers up all of the inherent impls in
-//! the current crate and organizes them in a map. It winds up
-//! touching the whole crate and thus must be recomputed completely
-//! for any change, but it is very cheap to compute. In practice, most
-//! code in the compiler never *directly* requests this map. Instead,
-//! it requests the inherent impls specific to some type (via
-//! `tcx.inherent_impls(def_id)`). That value, however,
-//! is computed by selecting an idea from this table.
+// The code in this module gathers up all of the inherent impls in
+// the current crate and organizes them in a map. It winds up
+// touching the whole crate and thus must be recomputed completely
+// for any change, but it is very cheap to compute. In practice, most
+// code in the compiler never *directly* requests this map. Instead,
+// it requests the inherent impls specific to some type (via
+// `tcx.inherent_impls(def_id)`). That value, however,
+// is computed by selecting an idea from this table.
 
 use rustc_hir as hir;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::find_attr;
-use rustc_middle::bug;
-use rustc_middle::ty::fast_reject::{SimplifiedType, TreatParams, simplify_type};
+use crate::rustc_complete::find_attr;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::fast_reject::{SimplifiedType, TreatParams, simplify_type};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, CrateInherentImpls, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, CrateInherentImpls, Ty, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ErrorGuaranteed, sym};
+use crate::rustc_complete::{ErrorGuaranteed, sym};
 ```
 
 ## Block 5

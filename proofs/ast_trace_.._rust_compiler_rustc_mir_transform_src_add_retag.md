@@ -6,14 +6,14 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-//! This pass adds validation calls (AcquireValid, ReleaseValid) where appropriate.
-//! It has to be run really early, before transformations like inlining, because
-//! introducing these calls *adds* UB -- so, conceptually, this pass is actually part
-//! of MIR building, and only after this pass we think of the program has having the
-//! normal MIR semantics.
+// This pass adds validation calls (AcquireValid, ReleaseValid) where appropriate.
+// It has to be run really early, before transformations like inlining, because
+// introducing these calls *adds* UB -- so, conceptually, this pass is actually part
+// of MIR building, and only after this pass we think of the program has having the
+// normal MIR semantics.
 
-use rustc_middle::mir::*;
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 2
@@ -65,7 +65,7 @@ fn may_contain_reference<'tcx>(ty: Ty<'tcx>, depth: u32, tcx: TyCtxt<'tcx>) -> b
 
 ```rust
 impl<'tcx> crate::MirPass<'tcx> for AddRetag {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.opts.unstable_opts.mir_emit_retag
     }
 

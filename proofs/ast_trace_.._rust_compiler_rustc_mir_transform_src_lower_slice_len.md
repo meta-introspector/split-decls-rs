@@ -6,17 +6,17 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=13 | LINES=33
 
 ```rust
-//! This pass lowers calls to core::slice::len to just PtrMetadata op.
-//! It should run before inlining!
+// This pass lowers calls to core::slice::len to just PtrMetadata op.
+// It should run before inlining!
 
-use rustc_hir::def_id::DefId;
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 
 pub(super) struct LowerSliceLenCalls;
 
 impl<'tcx> crate::MirPass<'tcx> for LowerSliceLenCalls {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() > 0
     }
 

@@ -6,29 +6,29 @@ Generated 41 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=16
 
 ```rust
-//! THIR datatypes and definitions. See the [rustc dev guide] for more info.
-//!
-//! If you compare the THIR [`ExprKind`] to [`hir::ExprKind`], you will see it is
-//! a good bit simpler. In fact, a number of the more straight-forward
-//! MIR simplifications are already done in the lowering to THIR. For
-//! example, method calls and overloaded operators are absent: they are
-//! expected to be converted into [`ExprKind::Call`] instances.
-//!
-//! [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/thir.html
+// THIR datatypes and definitions. See the [rustc dev guide] for more info.
+//
+// If you compare the THIR [`ExprKind`] to [`hir::ExprKind`], you will see it is
+// a good bit simpler. In fact, a number of the more straight-forward
+// MIR simplifications are already done in the lowering to THIR. For
+// example, method calls and overloaded operators are absent: they are
+// expected to be converted into [`ExprKind::Call`] instances.
+//
+// [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/thir.html
 
 use std::cmp::Ordering;
 use std::fmt;
 use std::ops::Index;
 use std::sync::Arc;
 
-use rustc_abi::{FieldIdx, Integer, Size, VariantIdx};
+use crate::rustc_abi::{FieldIdx, Integer, Size, VariantIdx};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{AsmMacro, InlineAsmOptions, InlineAsmTemplatePiece};
+use crate::rustc_complete::{AsmMacro, InlineAsmOptions, InlineAsmTemplatePiece};
 ```
 
 ## Block 3
@@ -36,15 +36,15 @@ use rustc_ast::{AsmMacro, InlineAsmOptions, InlineAsmTemplatePiece};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::def_id::DefId;
-use rustc_hir::{BindingMode, ByRef, HirId, MatchSource, RangeEnd};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{BindingMode, ByRef, HirId, MatchSource, RangeEnd};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_index::{IndexVec, newtype_index};
+use crate::rustc_index::{IndexVec, newtype_index};
 ```
 
 ## Block 5
@@ -58,15 +58,15 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeVisitable};
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::LocalDefId;
-use rustc_span::{ErrorGuaranteed, Span, Symbol};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{ErrorGuaranteed, Span, Symbol};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_target::asm::InlineAsmRegOrRegClass;
+use crate::rustc_target::asm::InlineAsmRegOrRegClass;
 use tracing::instrument;
 
 use crate::middle::region;
@@ -1318,7 +1318,7 @@ impl<'tcx> PatRangeBoundary<'tcx> {
                 a.partial_cmp(&b)
             }
             ty::Int(ity) => {
-                let size = rustc_abi::Integer::from_int_ty(&tcx, *ity).size();
+                let size = crate::rustc_abi::Integer::from_int_ty(&tcx, *ity).size();
                 let a = size.sign_extend(a) as i128;
                 let b = size.sign_extend(b) as i128;
                 Some(a.cmp(&b))
@@ -1337,7 +1337,7 @@ impl<'tcx> PatRangeBoundary<'tcx> {
 // Some nodes are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
 mod size_asserts {
-    use rustc_data_structures::static_assert_size;
+    use crate::rustc_data_structures::static_assert_size;
 
     use super::*;
     // tidy-alphabetical-start

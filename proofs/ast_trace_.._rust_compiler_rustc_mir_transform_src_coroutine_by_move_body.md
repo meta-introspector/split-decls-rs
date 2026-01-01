@@ -6,129 +6,129 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=10
 
 ```rust
-//! This pass constructs a second coroutine body sufficient for return from
-//! `FnOnce`/`AsyncFnOnce` implementations for coroutine-closures (e.g. async closures).
-//!
-//! Consider an async closure like:
-//! ```rust
-//! let x = vec![1, 2, 3];
-//!
-//! let closure = async move || {
-//!     println!("{x:#?}");
-//! };
+// This pass constructs a second coroutine body sufficient for return from
+// `FnOnce`/`AsyncFnOnce` implementations for coroutine-closures (e.g. async closures).
+//
+// Consider an async closure like:
+// ```rust
+// let x = vec![1, 2, 3];
+//
+// let closure = async move || {
+//     println!("{x:#?}");
+// };
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=11
 
 ```rust
-//! ```
-//!
-//! This desugars to something like:
-//! ```rust,ignore (invalid-borrowck)
-//! let x = vec![1, 2, 3];
-//!
-//! let closure = move || {
-//!     async {
-//!         println!("{x:#?}");
-//!     }
-//! };
+// ```
+//
+// This desugars to something like:
+// ```rust,ignore (invalid-borrowck)
+// let x = vec![1, 2, 3];
+//
+// let closure = move || {
+//     async {
+//         println!("{x:#?}");
+//     }
+// };
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=20
 
 ```rust
-//! ```
-//!
-//! Important to note here is that while the outer closure *moves* `x: Vec<i32>`
-//! into its upvars, the inner `async` coroutine simply captures a ref of `x`.
-//! This is the "magic" of async closures -- the futures that they return are
-//! allowed to borrow from their parent closure's upvars.
-//!
-//! However, what happens when we call `closure` with `AsyncFnOnce` (or `FnOnce`,
-//! since all async closures implement that too)? Well, recall the signature:
-//! ```
-//! use std::future::Future;
-//! pub trait AsyncFnOnce<Args>
-//! {
-//!     type CallOnceFuture: Future<Output = Self::Output>;
-//!     type Output;
-//!     fn async_call_once(
-//!         self,
-//!         args: Args
-//!     ) -> Self::CallOnceFuture;
-//! }
+// ```
+//
+// Important to note here is that while the outer closure *moves* `x: Vec<i32>`
+// into its upvars, the inner `async` coroutine simply captures a ref of `x`.
+// This is the "magic" of async closures -- the futures that they return are
+// allowed to borrow from their parent closure's upvars.
+//
+// However, what happens when we call `closure` with `AsyncFnOnce` (or `FnOnce`,
+// since all async closures implement that too)? Well, recall the signature:
+// ```
+// use std::future::Future;
+// pub trait AsyncFnOnce<Args>
+// {
+//     type CallOnceFuture: Future<Output = Self::Output>;
+//     type Output;
+//     fn async_call_once(
+//         self,
+//         args: Args
+//     ) -> Self::CallOnceFuture;
+// }
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=29
 
 ```rust
-//! ```
-//!
-//! This signature *consumes* the async closure (`self`) and returns a `CallOnceFuture`.
-//! How do we deal with the fact that the coroutine is supposed to take a reference
-//! to the captured `x` from the parent closure, when that parent closure has been
-//! destroyed?
-//!
-//! This is the second piece of magic of async closures. We can simply create a
-//! *second* `async` coroutine body where that `x` that was previously captured
-//! by reference is now captured by value. This means that we consume the outer
-//! closure and return a new coroutine that will hold onto all of these captures,
-//! and drop them when it is finished (i.e. after it has been `.await`ed).
-//!
-//! We do this with the analysis below, which detects the captures that come from
-//! borrowing from the outer closure, and we simply peel off a `deref` projection
-//! from them. This second body is stored alongside the first body, and optimized
-//! with it in lockstep. When we need to resolve a body for `FnOnce` or `AsyncFnOnce`,
-//! we use this "by-move" body instead.
-//!
-//! ## How does this work?
-//!
-//! This pass essentially remaps the body of the (child) closure of the coroutine-closure
-//! to take the set of upvars of the parent closure by value. This at least requires
-//! changing a by-ref upvar to be by-value in the case that the outer coroutine-closure
-//! captures something by value; however, it may also require renumbering field indices
-//! in case precise captures (edition 2021 closure capture rules) caused the inner coroutine
-//! to split one field capture into two.
+// ```
+//
+// This signature *consumes* the async closure (`self`) and returns a `CallOnceFuture`.
+// How do we deal with the fact that the coroutine is supposed to take a reference
+// to the captured `x` from the parent closure, when that parent closure has been
+// destroyed?
+//
+// This is the second piece of magic of async closures. We can simply create a
+// *second* `async` coroutine body where that `x` that was previously captured
+// by reference is now captured by value. This means that we consume the outer
+// closure and return a new coroutine that will hold onto all of these captures,
+// and drop them when it is finished (i.e. after it has been `.await`ed).
+//
+// We do this with the analysis below, which detects the captures that come from
+// borrowing from the outer closure, and we simply peel off a `deref` projection
+// from them. This second body is stored alongside the first body, and optimized
+// with it in lockstep. When we need to resolve a body for `FnOnce` or `AsyncFnOnce`,
+// we use this "by-move" body instead.
+//
+// ## How does this work?
+//
+// This pass essentially remaps the body of the (child) closure of the coroutine-closure
+// to take the set of upvars of the parent closure by value. This at least requires
+// changing a by-ref upvar to be by-value in the case that the outer coroutine-closure
+// captures something by value; however, it may also require renumbering field indices
+// in case precise captures (edition 2021 closure capture rules) caused the inner coroutine
+// to split one field capture into two.
 
-use rustc_abi::{FieldIdx, VariantIdx};
+use crate::rustc_abi::{FieldIdx, VariantIdx};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_data_structures::steal::Steal;
-use rustc_data_structures::unord::UnordMap;
+use crate::rustc_data_structures::steal::Steal;
+use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hir as hir;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::definitions::DisambiguatorState;
-use rustc_middle::bug;
-use rustc_middle::hir::place::{Projection, ProjectionKind};
+use crate::rustc_complete::definitions::DisambiguatorState;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::hir::place::{Projection, ProjectionKind};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::visit::MutVisitor;
-use rustc_middle::mir::{self, MirDumper};
+use crate::rustc_complete::mir::visit::MutVisitor;
+use crate::rustc_complete::mir::{self, MirDumper};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, InstanceKind, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, InstanceKind, Ty, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 9

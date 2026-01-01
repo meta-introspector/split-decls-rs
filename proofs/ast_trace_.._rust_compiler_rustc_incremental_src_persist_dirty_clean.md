@@ -6,38 +6,38 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=Assertion | COMPLEXITY=129 | LINES=286
 
 ```rust
-//! Debugging code to test fingerprints computed for query results. For each node marked with
-//! `#[rustc_clean]` we will compare the fingerprint from the current and from the previous
-//! compilation session as appropriate:
-//!
-//! - `#[rustc_clean(cfg="rev2", except="typeck")]` if we are
-//!   in `#[cfg(rev2)]`, then the fingerprints associated with
-//!   `DepNode::typeck(X)` must be DIFFERENT (`X` is the `DefId` of the
-//!   current node).
-//! - `#[rustc_clean(cfg="rev2")]` same as above, except that the
-//!   fingerprints must be the SAME (along with all other fingerprints).
-//!
-//! - `#[rustc_clean(cfg="rev2", loaded_from_disk='typeck")]` asserts that
-//!   the query result for `DepNode::typeck(X)` was actually
-//!   loaded from disk (not just marked green). This can be useful
-//!   to ensure that a test is actually exercising the deserialization
-//!   logic for a particular query result. This can be combined with
-//!   `except`
-//!
-//! Errors are reported if we are in the suitable configuration but
-//! the required condition is not met.
+// Debugging code to test fingerprints computed for query results. For each node marked with
+// `#[rustc_clean]` we will compare the fingerprint from the current and from the previous
+// compilation session as appropriate:
+//
+// - `#[rustc_clean(cfg="rev2", except="typeck")]` if we are
+//   in `#[cfg(rev2)]`, then the fingerprints associated with
+//   `DepNode::typeck(X)` must be DIFFERENT (`X` is the `DefId` of the
+//   current node).
+// - `#[rustc_clean(cfg="rev2")]` same as above, except that the
+//   fingerprints must be the SAME (along with all other fingerprints).
+//
+// - `#[rustc_clean(cfg="rev2", loaded_from_disk='typeck")]` asserts that
+//   the query result for `DepNode::typeck(X)` was actually
+//   loaded from disk (not just marked green). This can be useful
+//   to ensure that a test is actually exercising the deserialization
+//   logic for a particular query result. This can be combined with
+//   `except`
+//
+// Errors are reported if we are in the suitable configuration but
+// the required condition is not met.
 
-use rustc_ast::{self as ast, MetaItemInner};
-use rustc_data_structures::fx::FxHashSet;
-use rustc_data_structures::unord::UnordSet;
-use rustc_hir::def_id::LocalDefId;
-use rustc_hir::{
+use crate::rustc_complete::{self as ast, MetaItemInner};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_data_structures::unord::UnordSet;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{
     Attribute, ImplItemKind, ItemKind as HirItem, Node as HirNode, TraitItemKind, intravisit,
 };
-use rustc_middle::dep_graph::{DepNode, DepNodeExt, label_strs};
-use rustc_middle::hir::nested_filter;
-use rustc_middle::ty::TyCtxt;
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::dep_graph::{DepNode, DepNodeExt, label_strs};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::{Span, Symbol, sym};
 use thin_vec::ThinVec;
 use tracing::debug;
 
@@ -178,7 +178,7 @@ pub(crate) fn check_dirty_clean_annotations(tcx: TyCtxt<'_>) {
 
         // Note that we cannot use the existing "unused attribute"-infrastructure
         // here, since that is running before codegen. This is also the reason why
-        // all codegen-specific attributes are `AssumedUsed` in rustc_ast::feature_gate.
+        // all codegen-specific attributes are `AssumedUsed` in crate::rustc_ast::feature_gate.
         all_attrs.report_unchecked_attrs(dirty_clean_visitor.checked_attrs);
     })
 }

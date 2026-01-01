@@ -6,29 +6,29 @@ Generated 43 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-//! This defines the syntax of MIR, i.e., the set of available MIR operations, and other definitions
-//! closely related to MIR semantics.
-//! This is in a dedicated file so that changes to this file can be reviewed more carefully.
-//! The intention is that this file only contains datatype declarations, no code.
+// This defines the syntax of MIR, i.e., the set of available MIR operations, and other definitions
+// closely related to MIR semantics.
+// This is in a dedicated file so that changes to this file can be reviewed more carefully.
+// The intention is that this file only contains datatype declarations, no code.
 
-use rustc_abi::{FieldIdx, VariantIdx};
+use crate::rustc_abi::{FieldIdx, VariantIdx};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{InlineAsmOptions, InlineAsmTemplatePiece, Mutability};
+use crate::rustc_complete::{InlineAsmOptions, InlineAsmTemplatePiece, Mutability};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_data_structures::packed::Pu128;
-use rustc_hir::CoroutineKind;
-use rustc_hir::def_id::DefId;
-use rustc_index::IndexVec;
+use crate::rustc_data_structures::packed::Pu128;
+use crate::rustc_complete::CoroutineKind;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_index::IndexVec;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
 ```
 
@@ -36,16 +36,16 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisit
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::def_id::LocalDefId;
-use rustc_span::source_map::Spanned;
-use rustc_span::{Span, Symbol};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_target::asm::InlineAsmRegOrRegClass;
+use crate::rustc_target::asm::InlineAsmRegOrRegClass;
 use smallvec::SmallVec;
 
 use super::{BasicBlock, Const, Local, UserTypeProjection};
@@ -455,7 +455,7 @@ pub enum StatementKind<'tcx> {
     ///
     /// Some locals have no `StorageLive` or `StorageDead` statements within the entire MIR body.
     /// These locals are implicitly allocated for the full duration of the function. There is a
-    /// convenience method at `rustc_mir_dataflow::storage::always_storage_live_locals` for
+    /// convenience method at `crate::rustc_mir_dataflow::storage::always_storage_live_locals` for
     /// computing these locals.
     ///
     /// If the local is already allocated, calling `StorageLive` again will implicitly free the
@@ -1896,7 +1896,7 @@ pub enum BinOp {
     /// The `<=>` operator (three-way comparison, like `Ord::cmp`)
     ///
     /// This is supported only on the integer types and `char`, always returning
-    /// [`rustc_hir::LangItem::OrderingEnum`] (aka [`std::cmp::Ordering`]).
+    /// [`crate::rustc_hir::LangItem::OrderingEnum`] (aka [`std::cmp::Ordering`]).
     ///
     /// [`Rvalue::BinaryOp`]`(BinOp::Cmp, A, B)` returns
     /// - `Ordering::Less` (`-1_i8`, as a Scalar) if `A < B`
@@ -1961,7 +1961,7 @@ impl From<AssignOp> for BinOp {
 // Some nodes are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
 mod size_asserts {
-    use rustc_data_structures::static_assert_size;
+    use crate::rustc_data_structures::static_assert_size;
 
     use super::*;
     // tidy-alphabetical-start

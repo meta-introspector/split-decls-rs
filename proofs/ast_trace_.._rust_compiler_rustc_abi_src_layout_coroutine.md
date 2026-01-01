@@ -6,37 +6,37 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=24
 
 ```rust
-//! Coroutine layout logic.
-//!
-//! When laying out coroutines, we divide our saved local fields into two
-//! categories: overlap-eligible and overlap-ineligible.
-//!
-//! Those fields which are ineligible for overlap go in a "prefix" at the
-//! beginning of the layout, and always have space reserved for them.
-//!
-//! Overlap-eligible fields are only assigned to one variant, so we lay
-//! those fields out for each variant and put them right after the
-//! prefix.
-//!
-//! Finally, in the layout details, we point to the fields from the
-//! variants they are assigned to. It is possible for some fields to be
-//! included in multiple variants. No field ever "moves around" in the
-//! layout; its offset is always the same.
-//!
-//! Also included in the layout are the upvars and the discriminant.
-//! These are included as fields on the "outer" layout; they are not part
-//! of any variant.
+// Coroutine layout logic.
+//
+// When laying out coroutines, we divide our saved local fields into two
+// categories: overlap-eligible and overlap-ineligible.
+//
+// Those fields which are ineligible for overlap go in a "prefix" at the
+// beginning of the layout, and always have space reserved for them.
+//
+// Overlap-eligible fields are only assigned to one variant, so we lay
+// those fields out for each variant and put them right after the
+// prefix.
+//
+// Finally, in the layout details, we point to the fields from the
+// variants they are assigned to. It is possible for some fields to be
+// included in multiple variants. No field ever "moves around" in the
+// layout; its offset is always the same.
+//
+// Also included in the layout are the upvars and the discriminant.
+// These are included as fields on the "outer" layout; they are not part
+// of any variant.
 
 use std::iter;
 
-use rustc_index::bit_set::{BitMatrix, DenseBitSet};
+use crate::rustc_index::bit_set::{BitMatrix, DenseBitSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_index::{Idx, IndexSlice, IndexVec};
+use crate::rustc_index::{Idx, IndexSlice, IndexVec};
 ```
 
 ## Block 3

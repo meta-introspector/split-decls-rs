@@ -6,9 +6,9 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=init_zero_threads | COMPLEXITY=2 | LINES=9
 
 ```rust
-#![allow(unused_crate_dependencies)]
+#[allow(unused_crate_dependencies)]
 
-use rustc_thread_pool::ThreadPoolBuilder;
+use crate::rustc_thread_pool::ThreadPoolBuilder;
 
 #[test]
 #[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]

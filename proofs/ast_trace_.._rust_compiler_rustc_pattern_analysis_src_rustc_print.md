@@ -6,35 +6,35 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=14
 
 ```rust
-//! Pattern analysis sometimes wants to print patterns as part of a user-visible
-//! diagnostic.
-//!
-//! Historically it did so by creating a synthetic [`thir::Pat`](rustc_middle::thir::Pat)
-//! and printing that, but doing so was making it hard to modify the THIR pattern
-//! representation for other purposes.
-//!
-//! So this module contains a forked copy of `thir::Pat` that is used _only_
-//! for diagnostics, and has been partly simplified to remove things that aren't
-//! needed for printing.
+// Pattern analysis sometimes wants to print patterns as part of a user-visible
+// diagnostic.
+//
+// Historically it did so by creating a synthetic [`thir::Pat`](crate::rustc_middle::thir::Pat)
+// and printing that, but doing so was making it hard to modify the THIR pattern
+// representation for other purposes.
+//
+// So this module contains a forked copy of `thir::Pat` that is used _only_
+// for diagnostics, and has been partly simplified to remove things that aren't
+// needed for printing.
 
 use std::fmt;
 
-use rustc_abi::{FieldIdx, VariantIdx};
+use crate::rustc_abi::{FieldIdx, VariantIdx};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::{self, AdtDef, Ty, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, AdtDef, Ty, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_span::sym;
+use crate::rustc_complete::sym;
 
 #[derive(Clone, Debug)]
 pub(crate) struct FieldPat {

@@ -6,8 +6,8 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::trace;
 
 pub(super) enum SimplifyConstCondition {

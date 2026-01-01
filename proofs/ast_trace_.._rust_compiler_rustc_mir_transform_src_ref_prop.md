@@ -8,15 +8,15 @@ Generated 11 AST blocks from source file
 ```rust
 use std::borrow::Cow;
 
-use rustc_data_structures::fx::FxHashSet;
-use rustc_index::IndexVec;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::bug;
-use rustc_middle::mir::visit::*;
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
-use rustc_mir_dataflow::Analysis;
-use rustc_mir_dataflow::impls::{MaybeStorageDead, always_storage_live_locals};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_index::IndexVec;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::visit::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_mir_dataflow::Analysis;
+use crate::rustc_mir_dataflow::impls::{MaybeStorageDead, always_storage_live_locals};
 ```
 
 ## Block 2
@@ -96,7 +96,7 @@ use crate::ssa::{SsaLocals, StorageLiveLocals};
 pub(super) struct ReferencePropagation;
 
 impl<'tcx> crate::MirPass<'tcx> for ReferencePropagation {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() >= 2
     }
 

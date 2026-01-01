@@ -6,13 +6,13 @@ Generated 38 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-//! This module used to be named `build`, but that was causing GitHub's
-//! "Go to file" feature to silently ignore all files in the module, probably
-//! because it assumes that "build" is a build-output directory.
-//! See <https://github.com/rust-lang/rust/pull/134365>.
+// This module used to be named `build`, but that was causing GitHub's
+// "Go to file" feature to silently ignore all files in the module, probably
+// because it assumes that "build" is a build-output directory.
+// See <https://github.com/rust-lang/rust/pull/134365>.
 
 use itertools::Itertools;
-use rustc_abi::{ExternAbi, FieldIdx};
+use crate::rustc_abi::{ExternAbi, FieldIdx};
 ```
 
 ## Block 2
@@ -27,66 +27,66 @@ use rustc_apfloat::ieee::{Double, Half, Quad, Single};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_ast::attr;
-use rustc_data_structures::fx::FxHashMap;
-use rustc_data_structures::sorted_map::SortedIndexMultiMap;
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::attr;
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::sorted_map::SortedIndexMultiMap;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, BindingMode, ByRef, HirId, ItemLocalId, Node, find_attr};
+use crate::rustc_complete::{self as hir, BindingMode, ByRef, HirId, ItemLocalId, Node, find_attr};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_index::bit_set::GrowableBitSet;
-use rustc_index::{Idx, IndexSlice, IndexVec};
+use crate::rustc_index::bit_set::GrowableBitSet;
+use crate::rustc_index::{Idx, IndexSlice, IndexVec};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
+use crate::rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::hir::place::PlaceBase as HirPlaceBase;
-use rustc_middle::middle::region;
-use rustc_middle::mir::*;
-use rustc_middle::thir::{self, ExprId, LintLevel, LocalVarId, Param, ParamId, PatKind, Thir};
+use crate::rustc_complete::hir::place::PlaceBase as HirPlaceBase;
+use crate::rustc_complete::middle::region;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::{self, ExprId, LintLevel, LocalVarId, Param, ParamId, PatKind, Thir};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, ScalarInt, Ty, TyCtxt, TypeVisitableExt, TypingMode};
+use crate::rustc_complete::ty::{self, ScalarInt, Ty, TyCtxt, TypeVisitableExt, TypingMode};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 11
@@ -521,7 +521,7 @@ struct CFG<'tcx> {
 **Metadata**: AST_ID=26 | TYPE=STRUCT | NAME=ScopeId | COMPLEXITY=3 | LINES=4
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     struct ScopeId {}
 }
 ```
@@ -1196,7 +1196,7 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
         if self.tcx.intrinsic(self.def_id).is_some_and(|i| i.must_be_overridden)
             || self.tcx.is_sdylib_interface_build()
         {
-            let source_info = self.source_info(rustc_span::DUMMY_SP);
+            let source_info = self.source_info(crate::rustc_span::DUMMY_SP);
             self.cfg.terminate(block, source_info, TerminatorKind::Unreachable);
             self.cfg.start_new_block().unit()
         } else {

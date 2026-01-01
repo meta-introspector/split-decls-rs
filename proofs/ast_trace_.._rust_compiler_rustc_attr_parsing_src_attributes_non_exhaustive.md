@@ -6,9 +6,9 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::Target;
-use rustc_hir::attrs::AttributeKind;
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::Target;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 2

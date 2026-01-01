@@ -6,14 +6,14 @@ Generated 16 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::attrs::{CoverageAttrKind, OptimizeAttr, SanitizerSet, UsedBy};
+use crate::rustc_complete::attrs::{CoverageAttrKind, OptimizeAttr, SanitizerSet, UsedBy};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_session::parse::feature_err;
+use crate::rustc_complete::parse::feature_err;
 
 use super::prelude::*;
 use crate::session_diagnostics::{NakedFunctionIncompatibleAttribute, NullOnExport};
@@ -149,7 +149,7 @@ impl<S: Stage> SingleAttributeParser<S> for CoverageParser {
 pub(crate) struct ExportNameParser;
 
 impl<S: Stage> SingleAttributeParser<S> for ExportNameParser {
-    const PATH: &[rustc_span::Symbol] = &[sym::export_name];
+    const PATH: &[crate::rustc_span::Symbol] = &[sym::export_name];
     const ATTRIBUTE_ORDER: AttributeOrder = AttributeOrder::KeepInnermost;
     const ON_DUPLICATE: OnDuplicate<S> = OnDuplicate::WarnButFutureError;
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[
@@ -175,7 +175,7 @@ impl<S: Stage> SingleAttributeParser<S> for ExportNameParser {
             return None;
         };
         if name.as_str().contains('\0') {
-            // `#[export_name = ...]` will be converted to a null-terminated string,
+            // `#[unsafe(export_name = ...]` will be converted to a null-terminated string,
             // so it may not contain any null characters.
             cx.emit_err(NullOnExport { span: cx.attr_span });
             return None;
@@ -235,7 +235,7 @@ impl<S: Stage> AttributeParser<S> for NakedParser {
         //
         // NOTE: when making changes to this list, check that `error_codes/E0736.md` remains
         // accurate.
-        const ALLOW_LIST: &[rustc_span::Symbol] = &[
+        const ALLOW_LIST: &[crate::rustc_span::Symbol] = &[
             // conditional compilation
             sym::cfg_trace,
             sym::cfg_attr_trace,

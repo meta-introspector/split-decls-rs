@@ -6,7 +6,7 @@ Generated 54 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-#![allow(non_snake_case)]
+#[allow(non_snake_case)]
 
 use std::ffi::{CStr, CString};
 ```
@@ -20,7 +20,7 @@ use std::ptr;
 use std::string::FromUtf8Error;
 
 use libc::c_uint;
-use rustc_abi::{Align, Size, WrappingRange};
+use crate::rustc_abi::{Align, Size, WrappingRange};
 ```
 
 ## Block 3

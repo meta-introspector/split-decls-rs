@@ -8,12 +8,12 @@ Generated 5 AST blocks from source file
 ```rust
 use std::fmt::Debug;
 
-use rustc_hir::def_id::DefId;
-use rustc_hir::lang_items::LangItem;
-pub use rustc_infer::infer::*;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::lang_items::LangItem;
+pub use crate::rustc_infer::infer::*;
 use rustc_macros::extension;
-use rustc_middle::arena::ArenaAllocatable;
-use rustc_middle::infer::canonical::{
+use crate::rustc_complete::arena::ArenaAllocatable;
+use crate::rustc_complete::infer::canonical::{
     Canonical, CanonicalQueryInput, CanonicalQueryResponse, QueryResponse,
 };
 ```
@@ -22,15 +22,15 @@ use rustc_middle::infer::canonical::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::traits::query::NoSolution;
-use rustc_middle::ty::{self, GenericArg, Ty, TyCtxt, TypeFoldable, Upcast};
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::{self, GenericArg, Ty, TyCtxt, TypeFoldable, Upcast};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_span::DUMMY_SP;
+use crate::rustc_complete::DUMMY_SP;
 use tracing::instrument;
 
 use crate::infer::at::ToTrace;

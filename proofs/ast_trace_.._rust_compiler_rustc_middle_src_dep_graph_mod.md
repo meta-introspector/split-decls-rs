@@ -6,9 +6,9 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_data_structures::profiling::SelfProfilerRef;
+use crate::rustc_data_structures::profiling::SelfProfilerRef;
 use rustc_query_system::ich::StableHashingContext;
-use rustc_session::Session;
+use crate::rustc_complete::Session;
 
 use crate::ty::print::with_reduced_queries;
 use crate::ty::{self, TyCtxt};

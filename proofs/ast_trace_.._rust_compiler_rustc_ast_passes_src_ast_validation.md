@@ -6,29 +6,29 @@ Generated 20 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=12
 
 ```rust
-//! Validate AST before lowering it to HIR.
-//!
-//! This pass intends to check that the constructed AST is *syntactically valid* to allow the rest
-//! of the compiler to assume that the AST is valid. These checks cannot be performed during parsing
-//! because attribute macros are allowed to accept certain pieces of invalid syntax such as a
-//! function without body outside of a trait definition:
-//!
-//! ```ignore (illustrative)
-//! #[my_attribute]
-//! mod foo {
-//!     fn missing_body();
-//! }
+// Validate AST before lowering it to HIR.
+//
+// This pass intends to check that the constructed AST is *syntactically valid* to allow the rest
+// of the compiler to assume that the AST is valid. These checks cannot be performed during parsing
+// because attribute macros are allowed to accept certain pieces of invalid syntax such as a
+// function without body outside of a trait definition:
+//
+// ```ignore (illustrative)
+// #[my_attribute]
+// mod foo {
+//     fn missing_body();
+// }
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=8
 
 ```rust
-//! ```
-//!
-//! These checks are run post-expansion, after AST is frozen, to be able to check for erroneous
-//! constructions produced by proc macros. This pass is only intended for simple checks that do not
-//! require name resolution or type checking, or other kinds of complex analysis.
+// ```
+//
+// These checks are run post-expansion, after AST is frozen, to be able to check for erroneous
+// constructions produced by proc macros. This pass is only intended for simple checks that do not
+// require name resolution or type checking, or other kinds of complex analysis.
 
 use std::mem;
 use std::ops::{Deref, DerefMut};
@@ -47,21 +47,21 @@ use itertools::{Either, Itertools};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{CanonAbi, ExternAbi, InterruptKind};
+use crate::rustc_abi::{CanonAbi, ExternAbi, InterruptKind};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::visit::{AssocCtxt, BoundKind, FnCtxt, FnKind, Visitor, walk_list};
+use crate::rustc_complete::visit::{AssocCtxt, BoundKind, FnCtxt, FnKind, Visitor, walk_list};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::*;
+use crate::rustc_complete::*;
 use rustc_ast_pretty::pprust::{self, State};
 ```
 
@@ -70,18 +70,18 @@ use rustc_ast_pretty::pprust::{self, State};
 
 ```rust
 use rustc_attr_parsing::validate_attr;
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_errors::{DiagCtxtHandle, LintBuffer};
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_complete::{DiagCtxtHandle, LintBuffer};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_feature::Features;
-use rustc_session::Session;
-use rustc_session::lint::BuiltinLintDiag;
-use rustc_session::lint::builtin::{
+use crate::rustc_feature::Features;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::{
     DEPRECATED_WHERE_CLAUSE_LOCATION, MISSING_ABI, MISSING_UNSAFE_ON_EXTERN,
     PATTERNS_IN_FNS_WITHOUT_BODY,
 };
@@ -91,14 +91,14 @@ use rustc_session::lint::builtin::{
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, Span, kw, sym};
+use crate::rustc_complete::{Ident, Span, kw, sym};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_target::spec::{AbiMap, AbiMapping};
+use crate::rustc_target::spec::{AbiMap, AbiMapping};
 ```
 
 ## Block 11
@@ -375,8 +375,8 @@ impl<'a> AstValidator<'a> {
             remove_const_sugg: (
                 self.sess.source_map().span_extend_while_whitespace(span),
                 match parent_constness {
-                    Some(_) => rustc_errors::Applicability::MachineApplicable,
-                    None => rustc_errors::Applicability::MaybeIncorrect,
+                    Some(_) => crate::rustc_errors::Applicability::MachineApplicable,
+                    None => crate::rustc_errors::Applicability::MaybeIncorrect,
                 },
             ),
             requires_multiple_changes: make_impl_const_sugg.is_some()
@@ -1813,7 +1813,7 @@ fn deny_equality_constraints(
                 let gen_args = args.as_deref().cloned();
                 // Build `<Bar = RhsTy>`.
                 let arg = AngleBracketedArg::Constraint(AssocItemConstraint {
-                    id: rustc_ast::node_id::DUMMY_NODE_ID,
+                    id: crate::rustc_ast::node_id::DUMMY_NODE_ID,
                     ident: *ident,
                     gen_args,
                     kind: AssocItemConstraintKind::Equality {

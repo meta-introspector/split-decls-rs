@@ -6,7 +6,7 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=InvalidErrorCode; | COMPLEXITY=2 | LINES=11
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::fx::FxHashMap;
 
 use crate::ErrCode;
 

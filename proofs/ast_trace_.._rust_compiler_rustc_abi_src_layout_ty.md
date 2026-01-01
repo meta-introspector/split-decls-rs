@@ -9,7 +9,7 @@ Generated 13 AST blocks from source file
 use std::fmt;
 use std::ops::Deref;
 
-use rustc_data_structures::intern::Interned;
+use crate::rustc_data_structures::intern::Interned;
 use rustc_macros::HashStable_Generic;
 
 use crate::{
@@ -24,7 +24,7 @@ use crate::{
 ```rust
 // Explicitly import `Float` to avoid ambiguity with `Primitive::Float`.
 
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// The *source-order* index of a field in a variant.
     ///
     /// This is how most code after type checking refers to fields, rather than
@@ -69,7 +69,7 @@ impl FieldIdx {
 **Metadata**: AST_ID=4 | TYPE=STRUCT | NAME=VariantIdx | COMPLEXITY=4 | LINES=20
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// The *source-order* index of a variant in a type.
     ///
     /// For enums, these are always `0..variant_count`, regardless of any
@@ -218,7 +218,7 @@ impl<'a, Ty> AsRef<LayoutData<FieldIdx, VariantIdx>> for TyAndLayout<'a, Ty> {
 
 ```rust
 /// Trait that needs to be implemented by the higher-level type representation
-/// (e.g. `rustc_middle::ty::Ty`), to provide `rustc_target::abi` functionality.
+/// (e.g. `crate::rustc_middle::ty::Ty`), to provide `crate::rustc_target::abi` functionality.
 pub trait TyAbiInterface<'a, C>: Sized + std::fmt::Debug {
     fn ty_and_layout_for_variant(
         this: TyAndLayout<'a, Self>,

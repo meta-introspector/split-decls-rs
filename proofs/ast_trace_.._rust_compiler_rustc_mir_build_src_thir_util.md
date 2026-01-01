@@ -9,9 +9,9 @@ Generated 2 AST blocks from source file
 use std::assert_matches::assert_matches;
 
 use rustc_hir as hir;
-use rustc_hir::def::DefKind;
-use rustc_middle::bug;
-use rustc_middle::ty::{self, CanonicalUserType, TyCtxt};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, CanonicalUserType, TyCtxt};
 ```
 
 ## Block 2

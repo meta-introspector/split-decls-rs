@@ -56,7 +56,7 @@ use cc::windows_registry;
 use itertools::Itertools;
 use regex::Regex;
 use rustc_arena::TypedArena;
-use rustc_ast::CRATE_NODE_ID;
+use crate::rustc_complete::CRATE_NODE_ID;
 use rustc_attr_parsing::{ShouldEmit, eval_config_entry};
 ```
 
@@ -64,10 +64,10 @@ use rustc_attr_parsing::{ShouldEmit, eval_config_entry};
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::fx::FxIndexSet;
-use rustc_data_structures::memmap::Mmap;
-use rustc_data_structures::temp_dir::MaybeTempDir;
-use rustc_errors::{DiagCtxtHandle, LintDiagnostic};
+use crate::rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_data_structures::memmap::Mmap;
+use crate::rustc_data_structures::temp_dir::MaybeTempDir;
+use crate::rustc_complete::{DiagCtxtHandle, LintDiagnostic};
 ```
 
 ## Block 9
@@ -81,8 +81,8 @@ use rustc_fs_util::{TempDirBuilder, fix_windows_verbatim_for_gcc, try_canonicali
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::attrs::NativeLibKind;
-use rustc_hir::def_id::{CrateNum, LOCAL_CRATE};
+use crate::rustc_complete::attrs::NativeLibKind;
+use crate::rustc_complete::def_id::{CrateNum, LOCAL_CRATE};
 ```
 
 ## Block 11
@@ -90,14 +90,14 @@ use rustc_hir::def_id::{CrateNum, LOCAL_CRATE};
 
 ```rust
 use rustc_macros::LintDiagnostic;
-use rustc_metadata::fs::{METADATA_FILENAME, copy_to_stdout, emit_wrapper_file};
+use crate::rustc_metadata::fs::{METADATA_FILENAME, copy_to_stdout, emit_wrapper_file};
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_metadata::{
+use crate::rustc_metadata::{
     EncodedMetadata, NativeLibSearchFallback, find_native_static_library,
     walk_native_lib_search_dirs,
 };
@@ -107,12 +107,12 @@ use rustc_metadata::{
 **Metadata**: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::lint::lint_level;
-use rustc_middle::middle::debugger_visualizer::DebuggerVisualizerFile;
-use rustc_middle::middle::dependency_format::Linkage;
-use rustc_middle::middle::exported_symbols::SymbolExportKind;
-use rustc_session::config::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::lint::lint_level;
+use crate::rustc_complete::middle::debugger_visualizer::DebuggerVisualizerFile;
+use crate::rustc_complete::middle::dependency_format::Linkage;
+use crate::rustc_complete::middle::exported_symbols::SymbolExportKind;
+use crate::rustc_complete::config::{
     self, CFGuard, CrateType, DebugInfo, LinkerFeaturesCli, OutFileName, OutputFilenames,
     OutputType, PrintKind, SplitDwarfKind, Strip,
 };
@@ -122,27 +122,27 @@ use rustc_session::config::{
 **Metadata**: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::lint::builtin::LINKER_MESSAGES;
-use rustc_session::output::{check_file_is_writeable, invalid_output_for_target, out_filename};
+use crate::rustc_complete::lint::builtin::LINKER_MESSAGES;
+use crate::rustc_complete::output::{check_file_is_writeable, invalid_output_for_target, out_filename};
 ```
 
 ## Block 15
 **Metadata**: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_session::search_paths::PathKind;
+use crate::rustc_complete::search_paths::PathKind;
 /// For all the linkers we support, and information they might
 /// need out of the shared crate context before we get rid of it.
-use rustc_session::{Session, filesearch};
+use crate::rustc_complete::{Session, filesearch};
 ```
 
 ## Block 16
 **Metadata**: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_span::Symbol;
-use rustc_target::spec::crt_objects::CrtObjects;
-use rustc_target::spec::{
+use crate::rustc_complete::Symbol;
+use crate::rustc_target::spec::crt_objects::CrtObjects;
+use crate::rustc_target::spec::{
     BinaryFormat, Cc, LinkOutputKind, LinkSelfContainedComponents, LinkSelfContainedDefault,
     LinkerFeatures, LinkerFlavor, LinkerFlavorCli, Lld, PanicStrategy, RelocModel, RelroLevel,
     SanitizerSet, SplitDebuginfo,
@@ -2189,7 +2189,7 @@ fn add_post_link_args(cmd: &mut dyn Linker, sess: &Session, flavor: LinkerFlavor
 /// Background: we implement rlibs as static library (archives). Linkers treat archives
 /// differently from object files: all object files participate in linking, while archives will
 /// only participate in linking if they can satisfy at least one undefined reference (version
-/// scripts doesn't count). This causes `#[no_mangle]` or `#[used]` items to be ignored by the
+/// scripts doesn't count). This causes `#[unsafe(no_mangle)]` or `#[used]` items to be ignored by the
 /// linker, and since they never participate in the linking, using `KEEP` in the linker scripts
 /// can't keep them either. This causes #47384.
 ///
@@ -2204,7 +2204,7 @@ fn add_post_link_args(cmd: &mut dyn Linker, sess: &Session, flavor: LinkerFlavor
 /// This method creates a synthetic object file, which contains undefined references to all symbols
 /// that are necessary for the linking. They are only present in symbol table but not actually
 /// used in any sections, so the linker will therefore pick relevant rlibs for linking, but
-/// unused `#[no_mangle]` or `#[used(compiler)]` can still be discard by GC sections.
+/// unused `#[unsafe(no_mangle)]` or `#[used(compiler)]` can still be discard by GC sections.
 ///
 /// There's a few internal crates in the standard library (aka libcore and
 /// libstd) which actually have a circular dependence upon one another. This
@@ -2238,7 +2238,7 @@ fn add_linked_symbol_object(
 
     if file.format() == object::BinaryFormat::MachO {
         // Divide up the sections into sub-sections via symbols for dead code stripping.
-        // Without this flag, unused `#[no_mangle]` or `#[used(compiler)]` cannot be
+        // Without this flag, unused `#[unsafe(no_mangle)]` or `#[used(compiler)]` cannot be
         // discard on MachO targets.
         file.set_subsections_via_symbols();
     }
@@ -3187,7 +3187,7 @@ fn rehome_lib_path(sess: &Session, path: &Path) -> PathBuf {
 // symbols). We must continue to include the rest of the rlib, however, as
 // it may contain static native libraries which must be linked in.
 //
-// (*) Crates marked with `#![no_builtins]` don't participate in LTO and
+// (*) Crates marked with `#[no_builtins]` don't participate in LTO and
 // their bytecode wasn't included. The object files in those libraries must
 // still be passed to the linker.
 //
@@ -3243,7 +3243,7 @@ fn add_static_crate(
 
                 // If we're performing LTO and this is a rust-generated object
                 // file, then we don't need the object file as it's part of the
-                // LTO module. Note that `#![no_builtins]` is excluded from LTO,
+                // LTO module. Note that `#[no_builtins]` is excluded from LTO,
                 // though, so we let that object file slide.
                 if upstream_rust_objects_already_included && is_rust_object && is_builtins {
                     return true;

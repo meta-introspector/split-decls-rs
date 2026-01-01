@@ -9,34 +9,34 @@ Generated 17 AST blocks from source file
 use std::collections::hash_map::Entry;
 use std::slice;
 
-use rustc_abi::FieldIdx;
-use rustc_data_structures::fx::FxHashSet;
-use rustc_errors::{Applicability, Diag, ErrorGuaranteed, MultiSpan};
+use crate::rustc_abi::FieldIdx;
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed, MultiSpan};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def::{CtorOf, DefKind, Res};
+use crate::rustc_complete::def::{CtorOf, DefKind, Res};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_hir::intravisit::VisitorExt;
-use rustc_hir::lang_items::LangItem;
-use rustc_hir::{self as hir, AmbigArg, ExprKind, GenericArg, HirId, Node, QPath, intravisit};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::intravisit::VisitorExt;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{self as hir, AmbigArg, ExprKind, GenericArg, HirId, Node, QPath, intravisit};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir_analysis::hir_ty_lowering::errors::GenericsArgsErrExtend;
-use rustc_hir_analysis::hir_ty_lowering::generics::{
+use crate::rustc_hir_analysis::hir_ty_lowering::errors::GenericsArgsErrExtend;
+use crate::rustc_hir_analysis::hir_ty_lowering::generics::{
     check_generic_arg_count_for_call, lower_generic_args,
 };
 ```
@@ -45,7 +45,7 @@ use rustc_hir_analysis::hir_ty_lowering::generics::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir_analysis::hir_ty_lowering::{
+use crate::rustc_hir_analysis::hir_ty_lowering::{
     ExplicitLateBound, FeedConstTy, GenericArgCountMismatch, GenericArgCountResult,
     GenericArgsLowerer, GenericPathSegment, HirTyLowerer, IsMethodCall, RegionInferReason,
 };
@@ -55,29 +55,29 @@ use rustc_hir_analysis::hir_ty_lowering::{
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::canonical::{Canonical, OriginalQueryValues, QueryResponse};
+use crate::rustc_infer::infer::canonical::{Canonical, OriginalQueryValues, QueryResponse};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::{DefineOpaqueTypes, InferResult};
+use crate::rustc_infer::infer::{DefineOpaqueTypes, InferResult};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_lint::builtin::SELF_CONSTRUCTOR_FROM_OUTER_ITEM;
-use rustc_middle::ty::adjustment::{Adjust, Adjustment, AutoBorrow, AutoBorrowMutability};
+use crate::rustc_lint::builtin::SELF_CONSTRUCTOR_FROM_OUTER_ITEM;
+use crate::rustc_complete::ty::adjustment::{Adjust, Adjustment, AutoBorrow, AutoBorrowMutability};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, AdtKind, CanonicalUserType, GenericArgsRef, GenericParamDefKind, IsIdentity,
     SizedTraitKind, Ty, TyCtxt, TypeFoldable, TypeVisitable, TypeVisitableExt, UserArgs,
     UserSelfTy,
@@ -88,19 +88,19 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_session::lint;
-use rustc_span::Span;
-use rustc_span::def_id::LocalDefId;
-use rustc_span::hygiene::DesugaringKind;
-use rustc_trait_selection::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
-use rustc_trait_selection::traits::{
+use crate::rustc_complete::lint;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::hygiene::DesugaringKind;
+use crate::rustc_trait_selection::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
+use crate::rustc_trait_selection::traits::{
     self, NormalizeExt, ObligationCauseCode, StructurallyNormalizeExt,
 };
 ```
@@ -1026,7 +1026,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         && inputs
                             .get(0)
                             .and_then(|self_ty| self_ty.ref_mutability())
-                            .is_some_and(rustc_ast::Mutability::is_mut)
+                            .is_some_and(crate::rustc_ast::Mutability::is_mut)
                 })
         };
 
@@ -1554,7 +1554,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 }
             }
         } else if self.tcx.features().generic_const_exprs() {
-            rustc_trait_selection::traits::evaluate_const(&self.infcx, ct, self.param_env)
+            crate::rustc_trait_selection::traits::evaluate_const(&self.infcx, ct, self.param_env)
         } else {
             ct
         }

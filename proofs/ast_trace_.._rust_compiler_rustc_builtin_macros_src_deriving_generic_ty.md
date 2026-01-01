@@ -6,20 +6,20 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! A mini version of ast::Ty, which is easier to use, and features an explicit `Self` type to use
-//! when specifying impls to be derived.
+// A mini version of ast::Ty, which is easier to use, and features an explicit `Self` type to use
+// when specifying impls to be derived.
 
 pub(crate) use Ty::*;
-use rustc_ast::{self as ast, Expr, GenericArg, GenericParamKind, Generics, SelfKind, TyKind};
+use crate::rustc_complete::{self as ast, Expr, GenericArg, GenericParamKind, Generics, SelfKind, TyKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_expand::base::ExtCtxt;
-use rustc_span::source_map::respan;
-use rustc_span::{DUMMY_SP, Ident, Span, Symbol, kw};
+use crate::rustc_expand::base::ExtCtxt;
+use crate::rustc_complete::source_map::respan;
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw};
 ```
 
 ## Block 3

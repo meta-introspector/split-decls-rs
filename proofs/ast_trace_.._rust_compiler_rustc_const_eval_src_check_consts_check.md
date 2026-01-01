@@ -6,7 +6,7 @@ Generated 19 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=9
 
 ```rust
-//! The `Visitor` responsible for actually checking a `mir::Body` for invalid operations.
+// The `Visitor` responsible for actually checking a `mir::Body` for invalid operations.
 
 use std::assert_matches::assert_matches;
 use std::borrow::Cow;
@@ -14,51 +14,51 @@ use std::mem;
 use std::num::NonZero;
 use std::ops::Deref;
 
-use rustc_errors::{Diag, ErrorGuaranteed};
+use crate::rustc_complete::{Diag, ErrorGuaranteed};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::DefId;
-use rustc_hir::{self as hir, LangItem};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, LangItem};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_index::bit_set::DenseBitSet;
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_middle::mir::visit::Visitor;
-use rustc_middle::mir::*;
-use rustc_middle::span_bug;
-use rustc_middle::ty::adjustment::PointerCoercion;
-use rustc_middle::ty::{self, Ty, TypeVisitableExt};
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::adjustment::PointerCoercion;
+use crate::rustc_complete::ty::{self, Ty, TypeVisitableExt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_mir_dataflow::Analysis;
-use rustc_mir_dataflow::impls::{MaybeStorageLive, always_storage_live_locals};
+use crate::rustc_mir_dataflow::Analysis;
+use crate::rustc_mir_dataflow::impls::{MaybeStorageLive, always_storage_live_locals};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_trait_selection::traits::{
+use crate::rustc_trait_selection::traits::{
     Obligation, ObligationCause, ObligationCauseCode, ObligationCtxt,
 };
 ```
@@ -100,7 +100,7 @@ use crate::check_consts::is_fn_or_trait_safe_to_expose_on_stable;
 use crate::errors;
 
 type QualifResults<'mir, 'tcx, Q> =
-    rustc_mir_dataflow::ResultsCursor<'mir, 'tcx, FlowSensitiveAnalysis<'mir, 'tcx, Q>>;
+    crate::rustc_mir_dataflow::ResultsCursor<'mir, 'tcx, FlowSensitiveAnalysis<'mir, 'tcx, Q>>;
 
 #[derive(Copy, Clone, PartialEq, Eq, Debug)]
 enum ConstConditionsHold {

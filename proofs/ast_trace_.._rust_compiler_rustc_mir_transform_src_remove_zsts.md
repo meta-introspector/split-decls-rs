@@ -6,11 +6,11 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! Removes operations on ZST places, and convert ZST operands to constants.
+// Removes operations on ZST places, and convert ZST operands to constants.
 
-use rustc_middle::mir::visit::*;
-use rustc_middle::mir::*;
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::mir::visit::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 2
@@ -20,7 +20,7 @@ use rustc_middle::ty::{self, Ty, TyCtxt};
 pub(super) struct RemoveZsts;
 
 impl<'tcx> crate::MirPass<'tcx> for RemoveZsts {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() > 0
     }
 
@@ -111,7 +111,7 @@ impl<'tcx> Replacer<'_, 'tcx> {
     fn make_zst(&self, ty: Ty<'tcx>) -> ConstOperand<'tcx> {
         debug_assert!(self.known_to_be_zst(ty));
         ConstOperand {
-            span: rustc_span::DUMMY_SP,
+            span: crate::rustc_span::DUMMY_SP,
             user_ty: None,
             const_: Const::Val(ConstValue::ZeroSized, ty),
         }

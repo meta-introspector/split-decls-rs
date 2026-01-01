@@ -6,9 +6,9 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=SubTypeChecker | COMPLEXITY=2 | LINES=13
 
 ```rust
-use rustc_middle::mir::visit::MutVisitor;
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::visit::MutVisitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 
 use crate::patch::MirPatch;
 

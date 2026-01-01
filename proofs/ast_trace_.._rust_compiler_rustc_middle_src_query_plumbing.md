@@ -8,21 +8,21 @@ Generated 30 AST blocks from source file
 ```rust
 use std::ops::Deref;
 
-use rustc_data_structures::sync::{AtomicU64, WorkerLocal};
+use crate::rustc_data_structures::sync::{AtomicU64, WorkerLocal};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir::hir_id::OwnerId;
+use crate::rustc_complete::hir_id::OwnerId;
 use rustc_macros::HashStable;
 use rustc_query_system::HandleCycleError;
 use rustc_query_system::dep_graph::{DepNodeIndex, SerializedDepNodeIndex};
@@ -34,7 +34,7 @@ use rustc_query_system::dep_graph::{DepNodeIndex, SerializedDepNodeIndex};
 ```rust
 pub(crate) use rustc_query_system::query::QueryJobId;
 use rustc_query_system::query::*;
-use rustc_span::{DUMMY_SP, ErrorGuaranteed, Span};
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
 ```
 
 ## Block 5
@@ -225,7 +225,7 @@ impl<'tcx> TyCtxt<'tcx> {
     /// (As with all query calls, execution is also skipped if the query result
     /// is already cached in memory.)
     ///
-    /// [`Steal`]: rustc_data_structures::steal::Steal
+    /// [`Steal`]: crate::rustc_data_structures::steal::Steal
     #[inline(always)]
     pub fn ensure_done(self) -> TyCtxtEnsureDone<'tcx> {
         TyCtxtEnsureDone { tcx: self }
@@ -773,7 +773,7 @@ macro_rules! define_feedable {
 // as they will raise an fatal error on query cycles instead.
 
 mod sealed {
-    use rustc_hir::def_id::{LocalModDefId, ModDefId};
+    use crate::rustc_complete::def_id::{LocalModDefId, ModDefId};
 
     use super::{DefId, LocalDefId, OwnerId};
 

@@ -11,25 +11,25 @@ use std::collections::hash_map;
 use std::rc::Rc;
 
 use itertools::Itertools as _;
-use rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexMap};
+use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexMap};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::unord::{UnordMap, UnordSet};
+use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_errors::Subdiagnostic;
-use rustc_hir::CRATE_HIR_ID;
-use rustc_hir::def_id::LocalDefId;
-use rustc_index::bit_set::MixedBitSet;
-use rustc_index::{IndexSlice, IndexVec};
+use crate::rustc_complete::Subdiagnostic;
+use crate::rustc_complete::CRATE_HIR_ID;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_index::bit_set::MixedBitSet;
+use crate::rustc_index::{IndexSlice, IndexVec};
 ```
 
 ## Block 4
@@ -43,8 +43,8 @@ use rustc_macros::{LintDiagnostic, Subdiagnostic};
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::mir::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::{
     self, BackwardIncompatibleDropReason, BasicBlock, Body, ClearCrossCrate, Local, Location,
     MirDumper, Place, StatementKind, TerminatorKind,
 };
@@ -54,7 +54,7 @@ use rustc_middle::mir::{
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::significant_drop_order::{
+use crate::rustc_complete::ty::significant_drop_order::{
     extract_component_with_significant_dtor, ty_dtor_span,
 };
 ```
@@ -63,37 +63,37 @@ use rustc_middle::ty::significant_drop_order::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_mir_dataflow::impls::MaybeInitializedPlaces;
-use rustc_mir_dataflow::move_paths::{LookupResult, MoveData, MovePathIndex};
+use crate::rustc_mir_dataflow::impls::MaybeInitializedPlaces;
+use crate::rustc_mir_dataflow::move_paths::{LookupResult, MoveData, MovePathIndex};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_mir_dataflow::{Analysis, MaybeReachable, ResultsCursor};
+use crate::rustc_mir_dataflow::{Analysis, MaybeReachable, ResultsCursor};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::lint::builtin::TAIL_EXPR_DROP_ORDER;
-use rustc_session::lint::{self};
+use crate::rustc_complete::lint::builtin::TAIL_EXPR_DROP_ORDER;
+use crate::rustc_complete::lint::{self};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Span, Symbol};
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
 ```
 
 ## Block 12
@@ -281,7 +281,7 @@ fn place_descendent_of_bids<'tcx>(
 ```rust
 /// The core of the lint `tail-expr-drop-order`
 pub(crate) fn run_lint<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId, body: &Body<'tcx>) {
-    if matches!(tcx.def_kind(def_id), rustc_hir::def::DefKind::SyntheticCoroutineBody) {
+    if matches!(tcx.def_kind(def_id), crate::rustc_hir::def::DefKind::SyntheticCoroutineBody) {
         // A synthetic coroutine has no HIR body and it is enough to just analyse the original body
         return;
     }
@@ -647,7 +647,7 @@ struct LocalLabel<'a> {
 ```rust
 /// A custom `Subdiagnostic` implementation so that the notes are delivered in a specific order
 impl Subdiagnostic for LocalLabel<'_> {
-    fn add_to_diag<G: rustc_errors::EmissionGuarantee>(self, diag: &mut rustc_errors::Diag<'_, G>) {
+    fn add_to_diag<G: crate::rustc_errors::EmissionGuarantee>(self, diag: &mut crate::rustc_errors::Diag<'_, G>) {
         // Because parent uses this field , we need to remove it delay before adding it.
         diag.remove_arg("name");
         diag.arg("name", self.name);

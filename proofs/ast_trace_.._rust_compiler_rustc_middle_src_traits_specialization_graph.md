@@ -6,9 +6,9 @@ Generated 16 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::def_id::{DefId, DefIdMap};
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def_id::{DefId, DefIdMap};
 ```
 
 ## Block 2
@@ -22,7 +22,7 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_span::sym;
+use crate::rustc_complete::sym;
 
 use crate::error::StrictCoherenceNeedsNegativeCoherence;
 use crate::ty::fast_reject::SimplifiedType;
@@ -259,7 +259,7 @@ pub struct LeafDef {
     /// Example:
     ///
     /// ```
-    /// #![feature(specialization)]
+    /// #[feature(specialization)]
     /// trait Tr {
     ///     fn assoc(&self);
     /// }

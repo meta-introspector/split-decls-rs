@@ -6,22 +6,22 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{Applicability, Diag};
+use crate::rustc_complete::{Applicability, Diag};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def::{CtorOf, DefKind, Res};
+use crate::rustc_complete::def::{CtorOf, DefKind, Res};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::LocalDefId;
-use rustc_hir::{self as hir, ExprKind, HirId, PatKind};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{self as hir, ExprKind, HirId, PatKind};
 ```
 
 ## Block 4
@@ -29,15 +29,15 @@ use rustc_hir::{self as hir, ExprKind, HirId, PatKind};
 
 ```rust
 use rustc_hir_pretty::ty_to_string;
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_span::Span;
-use rustc_trait_selection::traits::{
+use crate::rustc_complete::Span;
+use crate::rustc_trait_selection::traits::{
     MatchExpressionArmCause, ObligationCause, ObligationCauseCode,
 };
 ```

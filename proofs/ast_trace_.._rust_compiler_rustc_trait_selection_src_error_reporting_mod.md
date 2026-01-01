@@ -8,12 +8,12 @@ Generated 5 AST blocks from source file
 ```rust
 use std::ops::Deref;
 
-use rustc_errors::DiagCtxtHandle;
-use rustc_infer::infer::InferCtxt;
-use rustc_infer::traits::PredicateObligations;
+use crate::rustc_complete::DiagCtxtHandle;
+use crate::rustc_infer::infer::InferCtxt;
+use crate::rustc_infer::traits::PredicateObligations;
 use rustc_macros::extension;
-use rustc_middle::bug;
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 2

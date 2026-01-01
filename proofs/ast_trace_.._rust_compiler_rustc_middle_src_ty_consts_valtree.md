@@ -9,8 +9,8 @@ Generated 13 AST blocks from source file
 use std::fmt;
 use std::ops::Deref;
 
-use rustc_data_structures::intern::Interned;
-use rustc_hir::def::Namespace;
+use crate::rustc_data_structures::intern::Interned;
+use crate::rustc_complete::def::Namespace;
 use rustc_macros::{HashStable, Lift, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
 ```
 

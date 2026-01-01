@@ -6,31 +6,31 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::tokenstream::TokenStream;
-use rustc_ast::{AnonConst, DUMMY_NODE_ID, Ty, TyPat, TyPatKind, ast, token};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{AnonConst, DUMMY_NODE_ID, Ty, TyPat, TyPatKind, ast, token};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::PResult;
-use rustc_expand::base::{self, DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
+use crate::rustc_complete::PResult;
+use crate::rustc_expand::base::{self, DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_parse::exp;
-use rustc_parse::parser::{CommaRecoveryMode, RecoverColon, RecoverComma};
+use crate::rustc_parse::exp;
+use crate::rustc_parse::parser::{CommaRecoveryMode, RecoverColon, RecoverComma};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=16
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 pub(crate) fn expand<'cx>(
     cx: &'cx mut ExtCtxt<'_>,

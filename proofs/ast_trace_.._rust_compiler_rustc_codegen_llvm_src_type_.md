@@ -22,26 +22,26 @@ use std::{fmt, ptr};
 
 ```rust
 use libc::c_uint;
-use rustc_abi::{AddressSpace, Align, Integer, Reg, Size};
+use crate::rustc_abi::{AddressSpace, Align, Integer, Reg, Size};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_codegen_ssa::common::TypeKind;
-use rustc_codegen_ssa::traits::*;
-use rustc_data_structures::small_c_str::SmallCStr;
-use rustc_middle::bug;
-use rustc_middle::ty::layout::TyAndLayout;
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_codegen_ssa::common::TypeKind;
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_data_structures::small_c_str::SmallCStr;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_target::callconv::{CastTarget, FnAbi};
+use crate::rustc_target::callconv::{CastTarget, FnAbi};
 ```
 
 ## Block 6

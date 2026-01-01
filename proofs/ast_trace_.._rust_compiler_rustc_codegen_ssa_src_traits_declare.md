@@ -6,10 +6,10 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=predefine_static | COMPLEXITY=3 | LINES=21
 
 ```rust
-use rustc_hir::attrs::Linkage;
-use rustc_hir::def_id::DefId;
-use rustc_middle::mir::mono::Visibility;
-use rustc_middle::ty::Instance;
+use crate::rustc_complete::attrs::Linkage;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::mir::mono::Visibility;
+use crate::rustc_complete::ty::Instance;
 
 pub trait PreDefineCodegenMethods<'tcx> {
     fn predefine_static(

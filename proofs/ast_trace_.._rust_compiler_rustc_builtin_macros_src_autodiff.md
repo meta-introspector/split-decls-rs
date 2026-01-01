@@ -6,42 +6,42 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=has_ret | COMPLEXITY=450 | LINES=877
 
 ```rust
-//! This module contains the implementation of the `#[autodiff]` attribute.
-//! Currently our linter isn't smart enough to see that each import is used in one of the two
-//! configs (autodiff enabled or disabled), so we have to add cfg's to each import.
-//! FIXME(ZuseZ4): Remove this once we have a smarter linter.
+// This module contains the implementation of the `#[autodiff]` attribute.
+// Currently our linter isn't smart enough to see that each import is used in one of the two
+// configs (autodiff enabled or disabled), so we have to add cfg's to each import.
+// FIXME(ZuseZ4): Remove this once we have a smarter linter.
 
 mod llvm_enzyme {
     use std::str::FromStr;
     use std::string::String;
 
-    use rustc_ast::expand::autodiff_attrs::{
+    use crate::rustc_complete::expand::autodiff_attrs::{
         AutoDiffAttrs, DiffActivity, DiffMode, valid_input_activity, valid_ret_activity,
         valid_ty_for_activity,
     };
-    use rustc_ast::token::{Lit, LitKind, Token, TokenKind};
-    use rustc_ast::tokenstream::*;
-    use rustc_ast::visit::AssocCtxt::*;
-    use rustc_ast::{
+    use crate::rustc_complete::token::{Lit, LitKind, Token, TokenKind};
+    use crate::rustc_complete::tokenstream::*;
+    use crate::rustc_complete::visit::AssocCtxt::*;
+    use crate::rustc_complete::{
         self as ast, AngleBracketedArg, AngleBracketedArgs, AnonConst, AssocItemKind, BindingMode,
         FnRetTy, FnSig, GenericArg, GenericArgs, GenericParamKind, Generics, ItemKind,
         MetaItemInner, PatKind, Path, PathSegment, TyKind, Visibility,
     };
-    use rustc_expand::base::{Annotatable, ExtCtxt};
-    use rustc_span::{Ident, Span, Symbol, sym};
+    use crate::rustc_expand::base::{Annotatable, ExtCtxt};
+    use crate::rustc_complete::{Ident, Span, Symbol, sym};
     use thin_vec::{ThinVec, thin_vec};
     use tracing::{debug, trace};
 
     use crate::errors;
 
     pub(crate) fn outer_normal_attr(
-        kind: &Box<rustc_ast::NormalAttr>,
-        id: rustc_ast::AttrId,
+        kind: &Box<crate::rustc_ast::NormalAttr>,
+        id: crate::rustc_ast::AttrId,
         span: Span,
-    ) -> rustc_ast::Attribute {
-        let style = rustc_ast::AttrStyle::Outer;
-        let kind = rustc_ast::AttrKind::Normal(kind.clone());
-        rustc_ast::Attribute { kind, id, style, span }
+    ) -> crate::rustc_ast::Attribute {
+        let style = crate::rustc_ast::AttrStyle::Outer;
+        let kind = crate::rustc_ast::AttrKind::Normal(kind.clone());
+        crate::rustc_ast::Attribute { kind, id, style, span }
     }
 
     // If we have a default `()` return type or explicitley `()` return type,
@@ -52,12 +52,12 @@ mod llvm_enzyme {
             FnRetTy::Default(_) => false,
         }
     }
-    fn first_ident(x: &MetaItemInner) -> rustc_span::Ident {
+    fn first_ident(x: &MetaItemInner) -> crate::rustc_span::Ident {
         if let Some(l) = x.lit() {
             match l.kind {
                 ast::LitKind::Int(val, _) => {
                     // get an Ident from a lit
-                    return rustc_span::Ident::from_str(val.get().to_string().as_str());
+                    return crate::rustc_span::Ident::from_str(val.get().to_string().as_str());
                 }
                 _ => {}
             }
@@ -433,9 +433,9 @@ mod llvm_enzyme {
             }
         };
         // Now update for d_fn
-        rustc_ad_attr.item.args = rustc_ast::AttrArgs::Delimited(rustc_ast::DelimArgs {
+        rustc_ad_attr.item.args = crate::rustc_ast::AttrArgs::Delimited(crate::rustc_ast::DelimArgs {
             dspan: DelimSpan::dummy(),
-            delim: rustc_ast::token::Delimiter::Parenthesis,
+            delim: crate::rustc_ast::token::Delimiter::Parenthesis,
             tokens: ts,
         });
 
@@ -516,7 +516,7 @@ mod llvm_enzyme {
         d_sig: &FnSig,
         generics: &Generics,
         is_impl: bool,
-    ) -> rustc_ast::Stmt {
+    ) -> crate::rustc_ast::Stmt {
         let primal_path_expr = gen_turbofish_expr(ecx, primal, generics, span, is_impl);
         let diff_path_expr = gen_turbofish_expr(ecx, diff, generics, span, is_impl);
 
@@ -798,7 +798,7 @@ mod llvm_enzyme {
                 FnRetTy::Default(span) => {
                     // We want to return std::hint::black_box(()).
                     let kind = TyKind::Tup(ThinVec::new());
-                    let ty = Box::new(rustc_ast::Ty {
+                    let ty = Box::new(crate::rustc_ast::Ty {
                         kind,
                         id: ast::DUMMY_NODE_ID,
                         span,
@@ -818,13 +818,13 @@ mod llvm_enzyme {
                     TyKind::Tup(thin_vec![ty.clone(), ty.clone()])
                 } else {
                     // We have to return [T; width+1], +1 for the primal return.
-                    let anon_const = rustc_ast::AnonConst {
+                    let anon_const = crate::rustc_ast::AnonConst {
                         id: ast::DUMMY_NODE_ID,
                         value: ecx.expr_usize(span, 1 + x.width as usize),
                     };
                     TyKind::Array(ty.clone(), anon_const)
                 };
-                let ty = Box::new(rustc_ast::Ty { kind, id: ty.id, span: ty.span, tokens: None });
+                let ty = Box::new(crate::rustc_ast::Ty { kind, id: ty.id, span: ty.span, tokens: None });
                 d_decl.output = FnRetTy::Ty(ty);
             }
             if matches!(x.ret_activity, DiffActivity::DualOnly | DiffActivity::DualvOnly) {
@@ -832,13 +832,13 @@ mod llvm_enzyme {
                 // we will just return the shadow in place of the primal return.
                 // However, if we have a width > 1, then we don't return -> T, but -> [T; width]
                 if x.width > 1 {
-                    let anon_const = rustc_ast::AnonConst {
+                    let anon_const = crate::rustc_ast::AnonConst {
                         id: ast::DUMMY_NODE_ID,
                         value: ecx.expr_usize(span, x.width as usize),
                     };
                     let kind = TyKind::Array(ty.clone(), anon_const);
                     let ty =
-                        Box::new(rustc_ast::Ty { kind, id: ty.id, span: ty.span, tokens: None });
+                        Box::new(crate::rustc_ast::Ty { kind, id: ty.id, span: ty.span, tokens: None });
                     d_decl.output = FnRetTy::Ty(ty);
                 }
             }
@@ -860,14 +860,14 @@ mod llvm_enzyme {
                         act_ret.insert(0, ty.clone());
                     }
                     let kind = TyKind::Tup(act_ret);
-                    Box::new(rustc_ast::Ty { kind, id: ty.id, span: ty.span, tokens: None })
+                    Box::new(crate::rustc_ast::Ty { kind, id: ty.id, span: ty.span, tokens: None })
                 }
                 FnRetTy::Default(span) => {
                     if act_ret.len() == 1 {
                         act_ret[0].clone()
                     } else {
                         let kind = TyKind::Tup(act_ret.iter().map(|arg| arg.clone()).collect());
-                        Box::new(rustc_ast::Ty { kind, id: ast::DUMMY_NODE_ID, span, tokens: None })
+                        Box::new(crate::rustc_ast::Ty { kind, id: ast::DUMMY_NODE_ID, span, tokens: None })
                     }
                 }
             };
@@ -876,7 +876,7 @@ mod llvm_enzyme {
 
         let mut d_header = sig.header.clone();
         if unsafe_activities {
-            d_header.safety = rustc_ast::Safety::Unsafe(span);
+            d_header.safety = crate::rustc_ast::Safety::Unsafe(span);
         }
         let d_sig = FnSig { header: d_header, decl: d_decl, span };
         trace!("Generated signature: {:?}", d_sig);

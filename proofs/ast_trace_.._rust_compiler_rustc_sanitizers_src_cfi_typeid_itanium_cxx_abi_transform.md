@@ -6,18 +6,18 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=15
 
 ```rust
-//! Transforms instances and types for LLVM CFI and cross-language LLVM CFI support using Itanium
-//! C++ ABI mangling.
-//!
-//! For more information about LLVM CFI and cross-language LLVM CFI support for the Rust compiler,
-//! see design document in the tracking issue #89653.
+// Transforms instances and types for LLVM CFI and cross-language LLVM CFI support using Itanium
+// C++ ABI mangling.
+//
+// For more information about LLVM CFI and cross-language LLVM CFI support for the Rust compiler,
+// see design document in the tracking issue #89653.
 
 use std::iter;
 
 use rustc_hir as hir;
-use rustc_hir::LangItem;
-use rustc_middle::bug;
-use rustc_middle::ty::{
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{
     self, ExistentialPredicateStableCmpExt as _, Instance, InstanceKind, IntTy, List, TraitRef, Ty,
     TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt, UintTy,
 };
@@ -27,15 +27,15 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::DefId;
-use rustc_span::{DUMMY_SP, sym};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{DUMMY_SP, sym};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_trait_selection::traits;
+use crate::rustc_trait_selection::traits;
 use tracing::{debug, instrument};
 ```
 

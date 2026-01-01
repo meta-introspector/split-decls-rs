@@ -6,39 +6,39 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! See docs in `build/expr/mod.rs`.
+// See docs in `build/expr/mod.rs`.
 
-use rustc_abi::FieldIdx;
-use rustc_hir::lang_items::LangItem;
-use rustc_index::{Idx, IndexVec};
+use crate::rustc_abi::FieldIdx;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_index::{Idx, IndexVec};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::middle::region;
-use rustc_middle::mir::interpret::Scalar;
-use rustc_middle::mir::*;
-use rustc_middle::thir::*;
-use rustc_middle::ty::cast::{CastTy, mir_cast_kind};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::region;
+use crate::rustc_complete::mir::interpret::Scalar;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::cast::{CastTy, mir_cast_kind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::util::IntTypeExt;
-use rustc_middle::ty::{self, Ty, UpvarArgs};
+use crate::rustc_complete::ty::util::IntTypeExt;
+use crate::rustc_complete::ty::{self, Ty, UpvarArgs};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::source_map::Spanned;
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 5

@@ -6,10 +6,10 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-//! This is in essence an (improved) duplicate of `rustc_ast/attr/mod.rs`.
-//! That module is intended to be deleted in its entirety.
-//!
-//! FIXME(jdonszelmann): delete `rustc_ast/attr/mod.rs`
+// This is in essence an (improved) duplicate of `rustc_ast/attr/mod.rs`.
+// That module is intended to be deleted in its entirety.
+//
+// FIXME(jdonszelmann): delete `rustc_ast/attr/mod.rs`
 
 use std::borrow::Cow;
 use std::fmt::{Debug, Display};
@@ -19,15 +19,15 @@ use std::fmt::{Debug, Display};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::token::{self, Delimiter, MetaVarKind};
+use crate::rustc_complete::token::{self, Delimiter, MetaVarKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::tokenstream::TokenStream;
-use rustc_ast::{AttrArgs, DelimArgs, Expr, ExprKind, LitKind, MetaItemLit, NormalAttr, Path};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{AttrArgs, DelimArgs, Expr, ExprKind, LitKind, MetaItemLit, NormalAttr, Path};
 ```
 
 ## Block 4
@@ -35,37 +35,37 @@ use rustc_ast::{AttrArgs, DelimArgs, Expr, ExprKind, LitKind, MetaItemLit, Norma
 
 ```rust
 use rustc_ast_pretty::pprust;
-use rustc_errors::{Diag, PResult};
+use crate::rustc_complete::{Diag, PResult};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, AttrPath};
+use crate::rustc_complete::{self as hir, AttrPath};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_parse::exp;
-use rustc_parse::parser::{Parser, PathStyle, token_descr};
+use crate::rustc_parse::exp;
+use crate::rustc_parse::parser::{Parser, PathStyle, token_descr};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::errors::{create_lit_error, report_lit_error};
+use crate::rustc_complete::errors::{create_lit_error, report_lit_error};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::parse::ParseSess;
-use rustc_span::{ErrorGuaranteed, Ident, Span, Symbol, sym};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, Symbol, sym};
 ```
 
 ## Block 9
@@ -317,7 +317,7 @@ impl<'a> Debug for MetaItemParser<'a> {
 
 impl<'a> MetaItemParser<'a> {
     /// Create a new parser from a [`NormalAttr`], which is stored inside of any
-    /// [`ast::Attribute`](rustc_ast::Attribute)
+    /// [`ast::Attribute`](crate::rustc_ast::Attribute)
     pub fn from_attr<'sess>(
         attr: &'a NormalAttr,
         parts: &[Symbol],
@@ -572,7 +572,7 @@ impl<'a, 'sess> MetaItemListParserContext<'a, 'sess> {
         if self.parser.token == token::Minus
             && self
                 .parser
-                .look_ahead(1, |t| matches!(t.kind, rustc_ast::token::TokenKind::Literal { .. }))
+                .look_ahead(1, |t| matches!(t.kind, crate::rustc_ast::token::TokenKind::Literal { .. }))
         {
             err.remove_neg_sugg =
                 Some(InvalidMetaItemRemoveNegSugg { negative_sign: self.parser.token.span });

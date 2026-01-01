@@ -6,26 +6,26 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::interpret::{AllocId, ConstAllocation, InterpResult};
+use crate::rustc_complete::mir::interpret::{AllocId, ConstAllocation, InterpResult};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::query::TyCtxtAt;
-use rustc_middle::ty::Ty;
-use rustc_middle::ty::layout::TyAndLayout;
-use rustc_middle::{bug, span_bug, ty};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::{bug, span_bug, ty};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_span::def_id::DefId;
-use rustc_target::callconv::FnAbi;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_target::callconv::FnAbi;
 
 use crate::interpret::{
     self, HasStaticRootDefId, ImmTy, Immediate, InterpCx, PointerArithmetic, interp_ok,
@@ -51,14 +51,14 @@ pub macro throw_machine_stop_str($($tt:tt)*) {{
         }
     }
 
-    impl rustc_middle::mir::interpret::MachineStopType for Zst {
-        fn diagnostic_message(&self) -> rustc_errors::DiagMessage {
+    impl crate::rustc_middle::mir::interpret::MachineStopType for Zst {
+        fn diagnostic_message(&self) -> crate::rustc_errors::DiagMessage {
             self.to_string().into()
         }
 
         fn add_args(
             self: Box<Self>,
-            _: &mut dyn FnMut(rustc_errors::DiagArgName, rustc_errors::DiagArgValue),
+            _: &mut dyn FnMut(crate::rustc_errors::DiagArgName, crate::rustc_errors::DiagArgValue),
         ) {}
     }
     throw_machine_stop!(Zst)
@@ -72,7 +72,7 @@ pub macro throw_machine_stop_str($($tt:tt)*) {{
 pub struct DummyMachine;
 
 impl HasStaticRootDefId for DummyMachine {
-    fn static_def_id(&self) -> Option<rustc_hir::def_id::LocalDefId> {
+    fn static_def_id(&self) -> Option<crate::rustc_hir::def_id::LocalDefId> {
         None
     }
 }
@@ -151,7 +151,7 @@ impl<'tcx> interpret::Machine<'tcx> for DummyMachine {
 
     fn assert_panic(
         _ecx: &mut InterpCx<'tcx, Self>,
-        _msg: &rustc_middle::mir::AssertMessage<'tcx>,
+        _msg: &crate::rustc_middle::mir::AssertMessage<'tcx>,
         _unwind: UnwindAction,
     ) -> interpret::InterpResult<'tcx> {
         unimplemented!()
@@ -163,7 +163,7 @@ impl<'tcx> interpret::Machine<'tcx> for DummyMachine {
         left: &interpret::ImmTy<'tcx, Self::Provenance>,
         right: &interpret::ImmTy<'tcx, Self::Provenance>,
     ) -> interpret::InterpResult<'tcx, ImmTy<'tcx, Self::Provenance>> {
-        use rustc_middle::mir::BinOp::*;
+        use crate::rustc_complete::mir::BinOp::*;
         interp_ok(match bin_op {
             Eq | Ne | Lt | Le | Gt | Ge => {
                 // Types can differ, e.g. fn ptrs with different `for`.
@@ -234,7 +234,7 @@ impl<'tcx> interpret::Machine<'tcx> for DummyMachine {
 
     fn get_default_alloc_params(
         &self,
-    ) -> <Self::Bytes as rustc_middle::mir::interpret::AllocBytes>::AllocParams {
+    ) -> <Self::Bytes as crate::rustc_middle::mir::interpret::AllocBytes>::AllocParams {
     }
 }
 ```

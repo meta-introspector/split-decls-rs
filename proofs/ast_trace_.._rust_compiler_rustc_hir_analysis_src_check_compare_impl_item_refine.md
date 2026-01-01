@@ -7,26 +7,26 @@ Generated 14 AST blocks from source file
 
 ```rust
 use itertools::Itertools as _;
-use rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_data_structures::fx::FxIndexSet;
 use rustc_hir as hir;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_lint_defs::builtin::{REFINING_IMPL_TRAIT_INTERNAL, REFINING_IMPL_TRAIT_REACHABLE};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_lint_defs::builtin::{REFINING_IMPL_TRAIT_INTERNAL, REFINING_IMPL_TRAIT_REACHABLE};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_middle::span_bug;
-use rustc_middle::traits::ObligationCause;
-use rustc_middle::ty::{
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperVisitable, TypeVisitable,
     TypeVisitableExt, TypeVisitor, TypingMode,
 };
@@ -36,9 +36,9 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::Span;
-use rustc_trait_selection::regions::InferCtxtRegionExt;
-use rustc_trait_selection::traits::{ObligationCtxt, elaborate, normalize_param_env_or_error};
+use crate::rustc_complete::Span;
+use crate::rustc_trait_selection::regions::InferCtxtRegionExt;
+use crate::rustc_trait_selection::traits::{ObligationCtxt, elaborate, normalize_param_env_or_error};
 ```
 
 ## Block 5
@@ -493,7 +493,7 @@ fn report_mismatched_rpitit_captures<'tcx>(
     let Some(use_bound_span) =
         tcx.hir_node_by_def_id(impl_opaque_def_id).expect_opaque_ty().bounds.iter().find_map(
             |bound| match *bound {
-                rustc_hir::GenericBound::Use(_, span) => Some(span),
+                crate::rustc_hir::GenericBound::Use(_, span) => Some(span),
                 hir::GenericBound::Trait(_) | hir::GenericBound::Outlives(_) => None,
             },
         )

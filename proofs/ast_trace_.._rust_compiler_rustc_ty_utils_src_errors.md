@@ -6,9 +6,9 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-//! Errors emitted by ty_utils
+// Errors emitted by ty_utils
 
-use rustc_errors::codes::*;
+use crate::rustc_complete::codes::*;
 use rustc_macros::{Diagnostic, Subdiagnostic};
 ```
 
@@ -16,14 +16,14 @@ use rustc_macros::{Diagnostic, Subdiagnostic};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{GenericArg, Ty};
+use crate::rustc_complete::ty::{GenericArg, Ty};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 #[derive(Diagnostic)]
 #[diag(ty_utils_needs_drop_overflow)]

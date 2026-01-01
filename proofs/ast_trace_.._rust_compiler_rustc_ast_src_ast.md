@@ -6,25 +6,25 @@ Generated 256 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=21
 
 ```rust
-//! The Rust abstract syntax tree module.
-//!
-//! This module contains common structures forming the language AST.
-//! Two main entities in the module are [`Item`] (which represents an AST element with
-//! additional metadata), and [`ItemKind`] (which represents a concrete type and contains
-//! information specific to the type of the item).
-//!
-//! Other module items worth mentioning:
-//! - [`Ty`] and [`TyKind`]: A parsed Rust type.
-//! - [`Expr`] and [`ExprKind`]: A parsed Rust expression.
-//! - [`Pat`] and [`PatKind`]: A parsed Rust pattern. Patterns are often dual to expressions.
-//! - [`Stmt`] and [`StmtKind`]: An executable action that does not return a value.
-//! - [`FnDecl`], [`FnHeader`] and [`Param`]: Metadata associated with a function declaration.
-//! - [`Generics`], [`GenericParam`], [`WhereClause`]: Metadata associated with generic parameters.
-//! - [`EnumDef`] and [`Variant`]: Enum declaration.
-//! - [`MetaItemLit`] and [`LitKind`]: Literal expressions.
-//! - [`MacroDef`], [`MacStmtStyle`], [`MacCall`]: Macro definition and invocation.
-//! - [`Attribute`]: Metadata associated with item.
-//! - [`UnOp`], [`BinOp`], and [`BinOpKind`]: Unary and binary operators.
+// The Rust abstract syntax tree module.
+//
+// This module contains common structures forming the language AST.
+// Two main entities in the module are [`Item`] (which represents an AST element with
+// additional metadata), and [`ItemKind`] (which represents a concrete type and contains
+// information specific to the type of the item).
+//
+// Other module items worth mentioning:
+// - [`Ty`] and [`TyKind`]: A parsed Rust type.
+// - [`Expr`] and [`ExprKind`]: A parsed Rust expression.
+// - [`Pat`] and [`PatKind`]: A parsed Rust pattern. Patterns are often dual to expressions.
+// - [`Stmt`] and [`StmtKind`]: An executable action that does not return a value.
+// - [`FnDecl`], [`FnHeader`] and [`Param`]: Metadata associated with a function declaration.
+// - [`Generics`], [`GenericParam`], [`WhereClause`]: Metadata associated with generic parameters.
+// - [`EnumDef`] and [`Variant`]: Enum declaration.
+// - [`MetaItemLit`] and [`LitKind`]: Literal expressions.
+// - [`MacroDef`], [`MacStmtStyle`], [`MacCall`]: Macro definition and invocation.
+// - [`Attribute`]: Metadata associated with item.
+// - [`UnOp`], [`BinOp`], and [`BinOpKind`]: Unary and binary operators.
 
 use std::borrow::{Borrow, Cow};
 ```
@@ -49,16 +49,16 @@ pub use rustc_ast_ir::{FloatTy, IntTy, Movability, Mutability, Pinnedness, UintT
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::packed::Pu128;
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::packed::Pu128;
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_data_structures::tagged_ptr::Tag;
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_data_structures::tagged_ptr::Tag;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic, Walkable};
 ```
 
@@ -66,15 +66,15 @@ use rustc_macros::{Decodable, Encodable, HashStable_Generic, Walkable};
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-pub use rustc_span::AttrId;
-use rustc_span::source_map::{Spanned, respan};
+pub use crate::rustc_complete::AttrId;
+use crate::rustc_complete::source_map::{Spanned, respan};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ByteSymbol, DUMMY_SP, ErrorGuaranteed, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::{ByteSymbol, DUMMY_SP, ErrorGuaranteed, Ident, Span, Symbol, kw, sym};
 ```
 
 ## Block 8
@@ -242,7 +242,7 @@ impl PartialEq<&[Symbol]> for Path {
 **Metadata**: AST_ID=22 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=8 | LINES=9
 
 ```rust
-impl<CTX: rustc_span::HashStableContext> HashStable<CTX> for Path {
+impl<CTX: crate::rustc_span::HashStableContext> HashStable<CTX> for Path {
     fn hash_stable(&self, hcx: &mut CTX, hasher: &mut StableHasher) {
         self.segments.len().hash_stable(hcx, hasher);
         for segment in &self.segments {
@@ -271,7 +271,7 @@ impl Path {
     /// be represented without an anon const in the HIR.
     ///
     /// If `allow_mgca_arg` is true (as should be the case in most situations when
-    /// `#![feature(min_generic_const_args)]` is enabled), then this always returns true
+    /// `#[feature(min_generic_const_args)]` is enabled), then this always returns true
     /// because all paths are valid.
     ///
     /// Otherwise, it returns true iff the path has exactly one segment, and it has no generic args
@@ -4379,7 +4379,7 @@ pub enum AttrKind {
     /// A normal attribute.
     Normal(Box<NormalAttr>),
 
-    /// A doc comment (e.g. `/// ...`, `//! ...`, `/** ... */`, `/*! ... */`).
+    /// A doc comment (e.g. `/// ...`, `// ...`, `/** ... */`, `/* ... */`).
     /// Doc attributes (e.g. `#[doc="..."]`) are represented with the `Normal`
     /// variant (which is much less compact and thus more expensive).
     DocComment(CommentKind, Symbol),
@@ -4393,7 +4393,7 @@ pub enum AttrKind {
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct NormalAttr {
     pub item: AttrItem,
-    // Tokens for the full attribute, e.g. `#[foo]`, `#![bar]`.
+    // Tokens for the full attribute, e.g. `#[foo]`, `#[bar]`.
     pub tokens: Option<LazyAttrTokenStream>,
 }
 ```
@@ -4426,7 +4426,7 @@ pub struct AttrItem {
     pub unsafety: Safety,
     pub path: Path,
     pub args: AttrArgs,
-    // Tokens for the meta item, e.g. just the `foo` within `#[foo]` or `#![foo]`.
+    // Tokens for the meta item, e.g. just the `foo` within `#[foo]` or `#[foo]`.
     pub tokens: Option<LazyAttrTokenStream>,
 }
 ```
@@ -4718,7 +4718,7 @@ pub enum Extern {
     ///
     /// E.g. `extern fn foo() {}`.
     ///
-    /// This is just `extern "C"` (see `rustc_abi::ExternAbi::FALLBACK`).
+    /// This is just `extern "C"` (see `crate::rustc_abi::ExternAbi::FALLBACK`).
     Implicit(Span),
     /// An explicit extern keyword was used with an explicit ABI.
     ///
@@ -5357,7 +5357,7 @@ pub type ForeignItem = Item<ForeignItemKind>;
 // Some nodes are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
 mod size_asserts {
-    use rustc_data_structures::static_assert_size;
+    use crate::rustc_data_structures::static_assert_size;
 
     use super::*;
     // tidy-alphabetical-start

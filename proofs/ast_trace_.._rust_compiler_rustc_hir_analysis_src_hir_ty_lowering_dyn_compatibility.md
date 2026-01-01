@@ -6,26 +6,26 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxHashSet, FxIndexMap, FxIndexSet};
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap, FxIndexSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::struct_span_code_err;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::struct_span_code_err;
 use rustc_hir as hir;
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_lint_defs::builtin::UNUSED_ASSOCIATED_TYPE_BOUNDS;
-use rustc_middle::ty::elaborate::ClauseWithSupertraitSpan;
-use rustc_middle::ty::{
+use crate::rustc_lint_defs::builtin::UNUSED_ASSOCIATED_TYPE_BOUNDS;
+use crate::rustc_complete::ty::elaborate::ClauseWithSupertraitSpan;
+use crate::rustc_complete::ty::{
     self, BottomUpFolder, DynKind, ExistentialPredicateStableCmpExt as _, Ty, TyCtxt, TypeFoldable,
     TypeVisitableExt, Upcast,
 };
@@ -35,15 +35,15 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ErrorGuaranteed, Span};
+use crate::rustc_complete::{ErrorGuaranteed, Span};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_trait_selection::error_reporting::traits::report_dyn_incompatibility;
-use rustc_trait_selection::traits;
+use crate::rustc_trait_selection::error_reporting::traits::report_dyn_incompatibility;
+use crate::rustc_trait_selection::traits;
 use smallvec::{SmallVec, smallvec};
 ```
 

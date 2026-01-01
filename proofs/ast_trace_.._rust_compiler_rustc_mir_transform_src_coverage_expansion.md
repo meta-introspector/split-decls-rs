@@ -6,15 +6,15 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxIndexMap, FxIndexSet, IndexEntry};
+use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet, IndexEntry};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::coverage::BasicCoverageBlock;
-use rustc_span::{ExpnId, ExpnKind, Span};
+use crate::rustc_complete::mir::coverage::BasicCoverageBlock;
+use crate::rustc_complete::{ExpnId, ExpnKind, Span};
 ```
 
 ## Block 3

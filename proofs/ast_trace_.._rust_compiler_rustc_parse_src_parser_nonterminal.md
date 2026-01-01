@@ -6,17 +6,17 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_ast::token::NtExprKind::*;
-use rustc_ast::token::NtPatKind::*;
-use rustc_ast::token::{self, InvisibleOrigin, MetaVarKind, NonterminalKind, Token};
+use crate::rustc_complete::token::NtExprKind::*;
+use crate::rustc_complete::token::NtPatKind::*;
+use crate::rustc_complete::token::{self, InvisibleOrigin, MetaVarKind, NonterminalKind, Token};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::PResult;
-use rustc_span::{Ident, kw};
+use crate::rustc_complete::PResult;
+use crate::rustc_complete::{Ident, kw};
 ```
 
 ## Block 3

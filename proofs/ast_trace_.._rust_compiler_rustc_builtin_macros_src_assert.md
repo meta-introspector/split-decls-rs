@@ -8,15 +8,15 @@ Generated 10 AST blocks from source file
 ```rust
 mod context;
 
-use rustc_ast::token::Delimiter;
-use rustc_ast::tokenstream::{DelimSpan, TokenStream};
+use crate::rustc_complete::token::Delimiter;
+use crate::rustc_complete::tokenstream::{DelimSpan, TokenStream};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{DelimArgs, Expr, ExprKind, MacCall, Path, PathSegment, UnOp, token};
+use crate::rustc_complete::{DelimArgs, Expr, ExprKind, MacCall, Path, PathSegment, UnOp, token};
 ```
 
 ## Block 3
@@ -24,17 +24,17 @@ use rustc_ast::{DelimArgs, Expr, ExprKind, MacCall, Path, PathSegment, UnOp, tok
 
 ```rust
 use rustc_ast_pretty::pprust;
-use rustc_errors::PResult;
-use rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
+use crate::rustc_complete::PResult;
+use crate::rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_parse::exp;
-use rustc_parse::parser::Parser;
-use rustc_span::{DUMMY_SP, Ident, Span, Symbol, sym};
+use crate::rustc_parse::exp;
+use crate::rustc_parse::parser::Parser;
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, sym};
 ```
 
 ## Block 5

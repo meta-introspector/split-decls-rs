@@ -6,21 +6,21 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=8
 
 ```rust
-//! Routines to check for relations between fully inferred types.
-//!
-//! FIXME: Move this to a more general place. The utility of this extends to
-//! other areas of the compiler as well.
+// Routines to check for relations between fully inferred types.
+//
+// FIXME: Move this to a more general place. The utility of this extends to
+// other areas of the compiler as well.
 
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_middle::traits::ObligationCause;
-use rustc_middle::ty::{Ty, TyCtxt, TypingEnv, Variance};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty::{Ty, TyCtxt, TypingEnv, Variance};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=sub_types | COMPLEXITY=2 | LINES=11
 
 ```rust
-use rustc_trait_selection::traits::ObligationCtxt;
+use crate::rustc_trait_selection::traits::ObligationCtxt;
 
 /// Returns whether `src` is a subtype of `dest`, i.e. `src <: dest`.
 pub fn sub_types<'tcx>(

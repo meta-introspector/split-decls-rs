@@ -7,26 +7,26 @@ Generated 27 AST blocks from source file
 
 ```rust
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![allow(rustc::diagnostic_outside_of_impl)]
-#![allow(rustc::untranslatable_diagnostic)]
-#![doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
-#![doc(rust_logo)]
-#![feature(assert_matches)]
-#![feature(box_patterns)]
-#![feature(file_buffered)]
-#![feature(if_let_guard)]
-#![feature(negative_impls)]
-#![feature(rustdoc_internals)]
-#![feature(string_from_utf8_lossy_owned)]
-#![feature(trait_alias)]
-#![feature(try_blocks)]
-#![recursion_limit = "256"]
+#[allow(internal_features)]
+#[allow(rustc::diagnostic_outside_of_impl)]
+#[allow(rustc::untranslatable_diagnostic)]
+#[doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
+#[doc(rust_logo)]
+#[feature(assert_matches)]
+#[feature(box_patterns)]
+#[feature(file_buffered)]
+#[feature(if_let_guard)]
+#[feature(negative_impls)]
+#[feature(rustdoc_internals)]
+#[feature(string_from_utf8_lossy_owned)]
+#[feature(trait_alias)]
+#[feature(try_blocks)]
+#[recursion_limit = "256"]
 // tidy-alphabetical-end
 
-//! This crate contains codegen code that is used by all codegen backends (LLVM and others).
-//! The backend-agnostic functions of this crate use functions defined in various traits that
-//! have to be implemented by each backend.
+// This crate contains codegen code that is used by all codegen backends (LLVM and others).
+// The backend-agnostic functions of this crate use functions defined in various traits that
+// have to be implemented by each backend.
 
 use std::collections::BTreeSet;
 use std::io;
@@ -39,69 +39,69 @@ use std::path::{Path, PathBuf};
 ```rust
 use std::sync::Arc;
 
-use rustc_data_structures::fx::{FxHashSet, FxIndexMap};
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::unord::UnordMap;
-use rustc_hir::CRATE_HIR_ID;
-use rustc_hir::attrs::{CfgEntry, NativeLibKind};
+use crate::rustc_data_structures::unord::UnordMap;
+use crate::rustc_complete::CRATE_HIR_ID;
+use crate::rustc_complete::attrs::{CfgEntry, NativeLibKind};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::CrateNum;
+use crate::rustc_complete::def_id::CrateNum;
 use rustc_macros::{Decodable, Encodable, HashStable};
 ```
 
 ## Block 5
-**Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
+**Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=9
 
 ```rust
-use rustc_metadata::EncodedMetadata;
-use rustc_middle::dep_graph::WorkProduct;
-use rustc_middle::lint::LevelAndSource;
-use rustc_middle::middle::debugger_visualizer::DebuggerVisualizerFile;
-use rustc_middle::middle::dependency_format::Dependencies;
-use rustc_middle::middle::exported_symbols::SymbolExportKind;
-use rustc_middle::ty::TyCtxt;
-use rustc_middle::util::Providers;
-use rustc_serialize::opaque::{FileEncoder, MemDecoder};
+use crate::rustc_metadata::EncodedMetadata;
+use crate::rustc_complete::dep_graph::WorkProduct;
+use crate::rustc_complete::lint::LevelAndSource;
+use crate::rustc_complete::middle::debugger_visualizer::DebuggerVisualizerFile;
+use crate::rustc_complete::middle::dependency_format::Dependencies;
+use crate::rustc_complete::middle::exported_symbols::SymbolExportKind;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::util::Providers;
+use crate::rustc_serialize::opaque::{FileEncoder, MemDecoder};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
+use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::Session;
-use rustc_session::config::{CrateType, OutputFilenames, OutputType, RUST_CGU_EXT};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{CrateType, OutputFilenames, OutputType, RUST_CGU_EXT};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::cstore::{self, CrateSource};
+use crate::rustc_complete::cstore::{self, CrateSource};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=18
 
 ```rust
-use rustc_session::lint::builtin::LINKER_MESSAGES;
-use rustc_span::Symbol;
+use crate::rustc_complete::lint::builtin::LINKER_MESSAGES;
+use crate::rustc_complete::Symbol;
 
 pub mod assert_module_sources;
 pub mod back;

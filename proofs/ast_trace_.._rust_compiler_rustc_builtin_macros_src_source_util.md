@@ -6,7 +6,7 @@ Generated 16 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! The implementation of built-in macros which relate to the file system.
+// The implementation of built-in macros which relate to the file system.
 
 use std::path::{Path, PathBuf};
 ```
@@ -19,8 +19,8 @@ use std::rc::Rc;
 use std::sync::Arc;
 
 use rustc_ast as ast;
-use rustc_ast::tokenstream::TokenStream;
-use rustc_ast::{join_path_idents, token};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{join_path_idents, token};
 ```
 
 ## Block 3
@@ -28,7 +28,7 @@ use rustc_ast::{join_path_idents, token};
 
 ```rust
 use rustc_ast_pretty::pprust;
-use rustc_expand::base::{
+use crate::rustc_expand::base::{
     DummyResult, ExpandResult, ExtCtxt, MacEager, MacResult, MacroExpanderResult, resolve_path,
 };
 ```
@@ -37,21 +37,21 @@ use rustc_expand::base::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_expand::module::DirOwnership;
-use rustc_lint_defs::BuiltinLintDiag;
-use rustc_parse::lexer::StripTokens;
-use rustc_parse::parser::ForceCollect;
-use rustc_parse::{new_parser_from_file, unwrap_or_emit_fatal, utf8_error};
+use crate::rustc_expand::module::DirOwnership;
+use crate::rustc_lint_defs::BuiltinLintDiag;
+use crate::rustc_parse::lexer::StripTokens;
+use crate::rustc_parse::parser::ForceCollect;
+use crate::rustc_parse::{new_parser_from_file, unwrap_or_emit_fatal, utf8_error};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_session::lint::builtin::INCOMPLETE_INCLUDE;
-use rustc_session::parse::ParseSess;
-use rustc_span::source_map::SourceMap;
-use rustc_span::{ByteSymbol, Pos, Span, Symbol};
+use crate::rustc_complete::lint::builtin::INCOMPLETE_INCLUDE;
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{ByteSymbol, Pos, Span, Symbol};
 ```
 
 ## Block 6
@@ -122,8 +122,8 @@ pub(crate) fn expand_file(
     let topmost = cx.expansion_cause().unwrap_or(sp);
     let loc = cx.source_map().lookup_char_pos(topmost.lo());
 
-    use rustc_session::RemapFileNameExt;
-    use rustc_session::config::RemapPathScopeComponents;
+    use crate::rustc_complete::RemapFileNameExt;
+    use crate::rustc_complete::config::RemapPathScopeComponents;
     ExpandResult::Ready(MacEager::expr(cx.expr_str(
         topmost,
         Symbol::intern(
@@ -384,7 +384,7 @@ fn load_binary_file(
                         path_span,
                         "there is a file with the same name in a different directory",
                         format!("\"{}\"", new_path.replace('\\', "/").escape_debug()),
-                        rustc_lint_defs::Applicability::MachineApplicable,
+                        crate::rustc_lint_defs::Applicability::MachineApplicable,
                     );
                 }
             }

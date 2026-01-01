@@ -6,15 +6,15 @@ Generated 14 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::Align;
-use rustc_ast::{IntTy, LitIntType, LitKind, UintTy};
+use crate::rustc_abi::Align;
+use crate::rustc_complete::{IntTy, LitIntType, LitKind, UintTy};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::attrs::{IntType, ReprAttr};
+use crate::rustc_complete::attrs::{IntType, ReprAttr};
 ```
 
 ## Block 3

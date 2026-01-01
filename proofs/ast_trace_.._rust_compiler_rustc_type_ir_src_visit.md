@@ -6,48 +6,48 @@ Generated 28 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=26 | LINES=49
 
 ```rust
-//! A visiting traversal mechanism for complex data structures that contain type
-//! information.
-//!
-//! This is a read-only traversal of the data structure.
-//!
-//! This traversal has limited flexibility. Only a small number of "types of
-//! interest" within the complex data structures can receive custom
-//! visitation. These are the ones containing the most important type-related
-//! information, such as `Ty`, `Predicate`, `Region`, and `Const`.
-//!
-//! There are three traits involved in each traversal.
-//! - `TypeVisitable`. This is implemented once for many types, including:
-//!   - Types of interest, for which the methods delegate to the visitor.
-//!   - All other types, including generic containers like `Vec` and `Option`.
-//!     It defines a "skeleton" of how they should be visited.
-//! - `TypeSuperVisitable`. This is implemented only for recursive types of
-//!   interest, and defines the visiting "skeleton" for these types. (This
-//!   excludes `Region` because it is non-recursive, i.e. it never contains
-//!   other types of interest.)
-//! - `TypeVisitor`. This is implemented for each visitor. This defines how
-//!   types of interest are visited.
-//!
-//! This means each visit is a mixture of (a) generic visiting operations, and (b)
-//! custom visit operations that are specific to the visitor.
-//! - The `TypeVisitable` impls handle most of the traversal, and call into
-//!   `TypeVisitor` when they encounter a type of interest.
-//! - A `TypeVisitor` may call into another `TypeVisitable` impl, because some of
-//!   the types of interest are recursive and can contain other types of interest.
-//! - A `TypeVisitor` may also call into a `TypeSuperVisitable` impl, because each
-//!   visitor might provide custom handling only for some types of interest, or
-//!   only for some variants of each type of interest, and then use default
-//!   traversal for the remaining cases.
-//!
-//! For example, if you have `struct S(Ty, U)` where `S: TypeVisitable` and `U:
-//! TypeVisitable`, and an instance `s = S(ty, u)`, it would be visited like so:
-//! ```text
-//! s.visit_with(visitor) calls
-//! - ty.visit_with(visitor) calls
-//!   - visitor.visit_ty(ty) may call
-//!     - ty.super_visit_with(visitor)
-//! - u.visit_with(visitor)
-//! ```
+// A visiting traversal mechanism for complex data structures that contain type
+// information.
+//
+// This is a read-only traversal of the data structure.
+//
+// This traversal has limited flexibility. Only a small number of "types of
+// interest" within the complex data structures can receive custom
+// visitation. These are the ones containing the most important type-related
+// information, such as `Ty`, `Predicate`, `Region`, and `Const`.
+//
+// There are three traits involved in each traversal.
+// - `TypeVisitable`. This is implemented once for many types, including:
+//   - Types of interest, for which the methods delegate to the visitor.
+//   - All other types, including generic containers like `Vec` and `Option`.
+//     It defines a "skeleton" of how they should be visited.
+// - `TypeSuperVisitable`. This is implemented only for recursive types of
+//   interest, and defines the visiting "skeleton" for these types. (This
+//   excludes `Region` because it is non-recursive, i.e. it never contains
+//   other types of interest.)
+// - `TypeVisitor`. This is implemented for each visitor. This defines how
+//   types of interest are visited.
+//
+// This means each visit is a mixture of (a) generic visiting operations, and (b)
+// custom visit operations that are specific to the visitor.
+// - The `TypeVisitable` impls handle most of the traversal, and call into
+//   `TypeVisitor` when they encounter a type of interest.
+// - A `TypeVisitor` may call into another `TypeVisitable` impl, because some of
+//   the types of interest are recursive and can contain other types of interest.
+// - A `TypeVisitor` may also call into a `TypeSuperVisitable` impl, because each
+//   visitor might provide custom handling only for some types of interest, or
+//   only for some variants of each type of interest, and then use default
+//   traversal for the remaining cases.
+//
+// For example, if you have `struct S(Ty, U)` where `S: TypeVisitable` and `U:
+// TypeVisitable`, and an instance `s = S(ty, u)`, it would be visited like so:
+// ```text
+// s.visit_with(visitor) calls
+// - ty.visit_with(visitor) calls
+//   - visitor.visit_ty(ty) may call
+//     - ty.super_visit_with(visitor)
+// - u.visit_with(visitor)
+// ```
 
 use std::fmt;
 use std::ops::ControlFlow;
@@ -61,7 +61,7 @@ pub use rustc_ast_ir::{try_visit, walk_visitable_list};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_index::{Idx, IndexVec};
+use crate::rustc_index::{Idx, IndexVec};
 ```
 
 ## Block 3

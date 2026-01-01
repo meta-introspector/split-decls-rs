@@ -3,20 +3,19 @@
 Generated 32 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=18
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=17
 
 ```rust
 // Adapted from https://github.com/sunfishcode/mir2cranelift/blob/master/rust-examples/nocore-hello-world.rs
 
-#![feature(
+#[feature(
     no_core, unboxed_closures, lang_items, never_type, linkage,
     extern_types, thread_local
 )]
-#![no_core]
-#![allow(dead_code, internal_features, non_camel_case_types)]
-#![rustfmt_skip]
+#[no_core]
+#[allow(dead_code, internal_features, non_camel_case_types)]
+#[rustfmt_skip]
 
-extern crate mini_core;
 
 use mini_core::*;
 use mini_core::libc::*;

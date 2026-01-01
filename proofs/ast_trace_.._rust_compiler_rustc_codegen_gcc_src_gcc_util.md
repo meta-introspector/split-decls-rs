@@ -8,8 +8,8 @@ Generated 7 AST blocks from source file
 ```rust
 #[cfg(feature = "master")]
 use gccjit::Context;
-use rustc_codegen_ssa::target_features;
-use rustc_session::Session;
+use crate::rustc_codegen_ssa::target_features;
+use crate::rustc_complete::Session;
 use smallvec::{SmallVec, smallvec};
 ```
 

@@ -8,17 +8,17 @@ Generated 11 AST blocks from source file
 ```rust
 use std::borrow::Cow;
 
-use rustc_ast::AttrStyle;
-use rustc_errors::DiagArgValue;
-use rustc_feature::{AttributeType, Features};
+use crate::rustc_complete::AttrStyle;
+use crate::rustc_complete::DiagArgValue;
+use crate::rustc_feature::{AttributeType, Features};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::lints::AttributeLintKind;
-use rustc_hir::{MethodKind, Target};
+use crate::rustc_complete::lints::AttributeLintKind;
+use crate::rustc_complete::{MethodKind, Target};
 ```
 
 ## Block 3

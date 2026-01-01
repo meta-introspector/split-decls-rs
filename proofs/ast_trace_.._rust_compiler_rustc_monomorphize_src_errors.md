@@ -13,14 +13,14 @@ use rustc_macros::{Diagnostic, LintDiagnostic};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{Instance, Ty};
+use crate::rustc_complete::ty::{Instance, Ty};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 4

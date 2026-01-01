@@ -10,15 +10,15 @@ use std::fmt::Debug;
 use std::hash::Hash;
 use std::sync::OnceLock;
 
-use rustc_data_structures::sharded::ShardedHashMap;
-pub use rustc_data_structures::vec_cache::VecCache;
-use rustc_hir::def_id::LOCAL_CRATE;
-use rustc_index::Idx;
-use rustc_span::def_id::{DefId, DefIndex};
+use crate::rustc_data_structures::sharded::ShardedHashMap;
+pub use crate::rustc_data_structures::vec_cache::VecCache;
+use crate::rustc_complete::def_id::LOCAL_CRATE;
+use crate::rustc_index::Idx;
+use crate::rustc_complete::def_id::{DefId, DefIndex};
 ```
 
 ## Block 2
-**Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=lookup | COMPLEXITY=11 | LINES=24
+**Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=lookup | COMPLEXITY=12 | LINES=24
 
 ```rust
 use crate::dep_graph::DepNodeIndex;
@@ -27,7 +27,7 @@ use crate::dep_graph::DepNodeIndex;
 /// for a given key (argument) type and value (return) type.
 ///
 /// Types implementing this trait are associated with actual key/value types
-/// by the `Cache` associated type of the `rustc_middle::query::Key` trait.
+/// by the `Cache` associated type of the `crate::rustc_middle::query::Key` trait.
 pub trait QueryCache: Sized {
     type Key: Hash + Eq + Copy + Debug;
     type Value: Copy;

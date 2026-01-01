@@ -8,25 +8,25 @@ Generated 11 AST blocks from source file
 ```rust
 use std::mem;
 
-use rustc_errors::{Diag, DiagArgName, DiagArgValue, DiagMessage, IntoDiagArg};
+use crate::rustc_complete::{Diag, DiagArgName, DiagArgValue, DiagMessage, IntoDiagArg};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::AssertKind;
-use rustc_middle::mir::interpret::{AllocId, Provenance, ReportedErrorInfo, UndefinedBehaviorInfo};
+use crate::rustc_complete::mir::AssertKind;
+use crate::rustc_complete::mir::interpret::{AllocId, Provenance, ReportedErrorInfo, UndefinedBehaviorInfo};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::query::TyCtxtAt;
-use rustc_middle::ty::ConstInt;
-use rustc_middle::ty::layout::LayoutError;
-use rustc_span::{Span, Symbol};
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::ty::ConstInt;
+use crate::rustc_complete::ty::layout::LayoutError;
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 4
@@ -294,10 +294,10 @@ where
 pub(super) fn lint<'tcx, L>(
     tcx: TyCtxtAt<'tcx>,
     machine: &CompileTimeMachine<'tcx>,
-    lint: &'static rustc_session::lint::Lint,
+    lint: &'static crate::rustc_session::lint::Lint,
     decorator: impl FnOnce(Vec<errors::FrameNote>) -> L,
 ) where
-    L: for<'a> rustc_errors::LintDiagnostic<'a, ()>,
+    L: for<'a> crate::rustc_errors::LintDiagnostic<'a, ()>,
 {
     let (span, frames) = get_span_and_frames(tcx, &machine.stack);
 

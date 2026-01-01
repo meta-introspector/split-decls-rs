@@ -6,12 +6,12 @@ Generated 18 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=8
 
 ```rust
-//! A different sort of visitor for walking fn bodies. Unlike the
-//! normal visitor, which just walks the entire body in one shot, the
-//! `ExprUseVisitor` determines how expressions are being used.
-//!
-//! In the compiler, this is only used for upvar inference, but there
-//! are many uses within clippy.
+// A different sort of visitor for walking fn bodies. Unlike the
+// normal visitor, which just walks the entire body in one shot, the
+// `ExprUseVisitor` determines how expressions are being used.
+//
+// In the compiler, this is only used for upvar inference, but there
+// are many uses within clippy.
 
 use std::cell::{Ref, RefCell};
 ```
@@ -26,42 +26,42 @@ use std::slice::from_ref;
 use hir::Expr;
 use hir::def::DefKind;
 use hir::pat_util::EnumerateAndAdjustIterator as _;
-use rustc_abi::{FIRST_VARIANT, FieldIdx, VariantIdx};
+use crate::rustc_abi::{FIRST_VARIANT, FieldIdx, VariantIdx};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_ast::UnsafeBinderCastKind;
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_hir::def::{CtorOf, Res};
+use crate::rustc_complete::UnsafeBinderCastKind;
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_complete::def::{CtorOf, Res};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::LocalDefId;
-use rustc_hir::{self as hir, HirId, PatExpr, PatExprKind, PatKind};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{self as hir, HirId, PatExpr, PatExprKind, PatKind};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_lint::LateContext;
-use rustc_middle::hir::place::ProjectionKind;
+use crate::rustc_lint::LateContext;
+use crate::rustc_complete::hir::place::ProjectionKind;
 // Export these here so that Clippy can use them.
-pub use rustc_middle::hir::place::{Place, PlaceBase, PlaceWithHirId, Projection};
+pub use crate::rustc_complete::hir::place::{Place, PlaceBase, PlaceWithHirId, Projection};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::mir::FakeReadCause;
-use rustc_middle::ty::{
+use crate::rustc_complete::mir::FakeReadCause;
+use crate::rustc_complete::ty::{
     self, BorrowKind, Ty, TyCtxt, TypeFoldable, TypeVisitableExt as _, adjustment,
 };
 ```
@@ -70,21 +70,21 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ErrorGuaranteed, Span};
+use crate::rustc_complete::{ErrorGuaranteed, Span};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::{debug, instrument, trace};
 ```
 

@@ -9,8 +9,8 @@ Generated 4 AST blocks from source file
 use hir::Node;
 use hir::def_id::DefId;
 use rustc_hir as hir;
-use rustc_middle::bug;
-use rustc_middle::middle::region::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::region::{
     ScopeCompatibility, RvalueCandidate, Scope, ScopeTree,
 };
 ```
@@ -19,7 +19,7 @@ use rustc_middle::middle::region::{
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=record_rvalue_scope_rec | COMPLEXITY=23 | LINES=50
 
 ```rust
-use rustc_middle::ty::RvalueScopes;
+use crate::rustc_complete::ty::RvalueScopes;
 use tracing::debug;
 
 use super::FnCtxt;

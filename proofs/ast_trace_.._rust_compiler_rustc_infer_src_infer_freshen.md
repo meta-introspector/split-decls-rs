@@ -6,44 +6,44 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=21 | LINES=40
 
 ```rust
-//! Freshening is the process of replacing unknown variables with fresh types. The idea is that
-//! the type, after freshening, contains no inference variables but instead contains either a
-//! value for each variable or fresh "arbitrary" types wherever a variable would have been.
-//!
-//! Freshening is used primarily to get a good type for inserting into a cache. The result
-//! summarizes what the type inferencer knows "so far". The primary place it is used right now is
-//! in the trait matching algorithm, which needs to be able to cache whether an `impl` self type
-//! matches some other type X -- *without* affecting `X`. That means that if the type `X` is in
-//! fact an unbound type variable, we want the match to be regarded as ambiguous, because depending
-//! on what type that type variable is ultimately assigned, the match may or may not succeed.
-//!
-//! To handle closures, freshened types also have to contain the signature and kind of any
-//! closure in the local inference context, as otherwise the cache key might be invalidated.
-//! The way this is done is somewhat hacky - the closure signature is appended to the args,
-//! as well as the closure kind "encoded" as a type. Also, special handling is needed when
-//! the closure signature contains a reference to the original closure.
-//!
-//! Note that you should be careful not to allow the output of freshening to leak to the user in
-//! error messages or in any other form. Freshening is only really useful as an internal detail.
-//!
-//! Because of the manipulation required to handle closures, doing arbitrary operations on
-//! freshened types is not recommended. However, in addition to doing equality/hash
-//! comparisons (for caching), it is possible to do a `ty::_match` operation between
-//! two freshened types - this works even with the closure encoding.
-//!
-//! __An important detail concerning regions.__ The freshener also replaces *all* free regions with
-//! 'erased. The reason behind this is that, in general, we do not take region relationships into
-//! account when making type-overloaded decisions. This is important because of the design of the
-//! region inferencer, which is not based on unification but rather on accumulating and then
-//! solving a set of constraints. In contrast, the type inferencer assigns a value to each type
-//! variable only once, and it does so as soon as it can, so it is reasonable to ask what the type
-//! inferencer knows "so far".
+// Freshening is the process of replacing unknown variables with fresh types. The idea is that
+// the type, after freshening, contains no inference variables but instead contains either a
+// value for each variable or fresh "arbitrary" types wherever a variable would have been.
+//
+// Freshening is used primarily to get a good type for inserting into a cache. The result
+// summarizes what the type inferencer knows "so far". The primary place it is used right now is
+// in the trait matching algorithm, which needs to be able to cache whether an `impl` self type
+// matches some other type X -- *without* affecting `X`. That means that if the type `X` is in
+// fact an unbound type variable, we want the match to be regarded as ambiguous, because depending
+// on what type that type variable is ultimately assigned, the match may or may not succeed.
+//
+// To handle closures, freshened types also have to contain the signature and kind of any
+// closure in the local inference context, as otherwise the cache key might be invalidated.
+// The way this is done is somewhat hacky - the closure signature is appended to the args,
+// as well as the closure kind "encoded" as a type. Also, special handling is needed when
+// the closure signature contains a reference to the original closure.
+//
+// Note that you should be careful not to allow the output of freshening to leak to the user in
+// error messages or in any other form. Freshening is only really useful as an internal detail.
+//
+// Because of the manipulation required to handle closures, doing arbitrary operations on
+// freshened types is not recommended. However, in addition to doing equality/hash
+// comparisons (for caching), it is possible to do a `ty::_match` operation between
+// two freshened types - this works even with the closure encoding.
+//
+// __An important detail concerning regions.__ The freshener also replaces *all* free regions with
+// 'erased. The reason behind this is that, in general, we do not take region relationships into
+// account when making type-overloaded decisions. This is important because of the design of the
+// region inferencer, which is not based on unification but rather on accumulating and then
+// solving a set of constraints. In contrast, the type inferencer assigns a value to each type
+// variable only once, and it does so as soon as it can, so it is reasonable to ask what the type
+// inferencer knows "so far".
 
 use std::collections::hash_map::Entry;
 
-use rustc_data_structures::fx::FxHashMap;
-use rustc_middle::bug;
-use rustc_middle::ty::{
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt,
 };
 ```

@@ -8,18 +8,18 @@ Generated 6 AST blocks from source file
 ```rust
 use std::fmt;
 
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::def_id::LocalDefId;
-use rustc_infer::infer::region_constraints::RegionConstraintData;
-use rustc_middle::traits::query::NoSolution;
-use rustc_middle::ty::{TyCtxt, TypeFoldable};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_infer::infer::region_constraints::RegionConstraintData;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::{TyCtxt, TypeFoldable};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=STRUCT | NAME=CustomTypeOp | COMPLEXITY=2 | LINES=12
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::info;
 
 use crate::infer::InferCtxt;

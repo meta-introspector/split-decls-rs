@@ -6,7 +6,7 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=3
 
 ```rust
-//! A module for searching for libraries
+// A module for searching for libraries
 
 use std::path::{Path, PathBuf};
 ```
@@ -23,7 +23,7 @@ use std::{env, fs};
 
 ```rust
 use rustc_fs_util::try_canonicalize;
-use rustc_target::spec::Target;
+use crate::rustc_target::spec::Target;
 
 use crate::search_paths::{PathKind, SearchPath};
 ```
@@ -79,7 +79,7 @@ impl FileSearch {
 
 ```rust
 pub fn make_target_lib_path(sysroot: &Path, target_triple: &str) -> PathBuf {
-    let rustlib_path = rustc_target::relative_target_rustlib_path(sysroot, target_triple);
+    let rustlib_path = crate::rustc_target::relative_target_rustlib_path(sysroot, target_triple);
     sysroot.join(rustlib_path).join("lib")
 }
 ```
@@ -92,7 +92,7 @@ pub fn make_target_lib_path(sysroot: &Path, target_triple: &str) -> PathBuf {
 /// where binaries are usually installed, e.g. the self-contained linkers, lld-wrappers, LLVM tools,
 /// etc.
 pub fn make_target_bin_path(sysroot: &Path, target_triple: &str) -> PathBuf {
-    let rustlib_path = rustc_target::relative_target_rustlib_path(sysroot, target_triple);
+    let rustlib_path = crate::rustc_target::relative_target_rustlib_path(sysroot, target_triple);
     sysroot.join(rustlib_path).join("bin")
 }
 ```
@@ -302,7 +302,7 @@ pub(crate) fn default_sysroot() -> PathBuf {
         p.pop();
         p.pop();
         // Look for the target rustlib directory in the suspected sysroot.
-        let mut rustlib_path = rustc_target::relative_target_rustlib_path(&p, "dummy");
+        let mut rustlib_path = crate::rustc_target::relative_target_rustlib_path(&p, "dummy");
         rustlib_path.pop(); // pop off the dummy target.
         rustlib_path.exists().then_some(p)
     }

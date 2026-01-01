@@ -6,8 +6,8 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-//! A thin wrapper around `Command` in the standard library which allows us to
-//! read the arguments that are built up.
+// A thin wrapper around `Command` in the standard library which allows us to
+// read the arguments that are built up.
 
 use std::ffi::{OsStr, OsString};
 ```
@@ -30,7 +30,7 @@ use std::{fmt, io, mem};
 **Metadata**: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11
 
 ```rust
-use rustc_target::spec::LldFlavor;
+use crate::rustc_target::spec::LldFlavor;
 
 #[derive(Clone)]
 pub(crate) struct Command {

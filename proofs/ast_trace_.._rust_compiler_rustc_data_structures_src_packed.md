@@ -9,7 +9,7 @@ Generated 12 AST blocks from source file
 use std::cmp::Ordering;
 use std::fmt;
 
-use rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
+use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
 ```
 
 ## Block 2

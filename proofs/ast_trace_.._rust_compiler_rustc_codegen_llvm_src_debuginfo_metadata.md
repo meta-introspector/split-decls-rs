@@ -43,37 +43,37 @@ use libc::{c_longlong, c_uint};
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{Align, Size};
+use crate::rustc_abi::{Align, Size};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::debuginfo::type_names::{VTableNameKind, cpp_like_debuginfo};
+use crate::rustc_codegen_ssa::debuginfo::type_names::{VTableNameKind, cpp_like_debuginfo};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_codegen_ssa::traits::*;
-use rustc_hir::def::{CtorKind, DefKind};
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_complete::def::{CtorKind, DefKind};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefId, LOCAL_CRATE};
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::layout::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::{
     HasTypingEnv, LayoutOf, TyAndLayout, WIDE_PTR_ADDR, WIDE_PTR_EXTRA,
 };
 ```
@@ -82,7 +82,7 @@ use rustc_middle::ty::layout::{
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, AdtKind, CoroutineArgsExt, ExistentialTraitRef, Instance, Ty, TyCtxt, Visibility,
 };
 ```
@@ -91,14 +91,14 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::config::{self, DebugInfo, Lto};
+use crate::rustc_complete::config::{self, DebugInfo, Lto};
 ```
 
 ## Block 13
 **Metadata**: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::{
+use crate::rustc_complete::{
     DUMMY_SP, FileName, FileNameDisplayPreference, SourceFile, Span, Symbol, hygiene,
 };
 ```
@@ -108,7 +108,7 @@ use rustc_span::{
 
 ```rust
 use rustc_symbol_mangling::typeid_for_trait_ref;
-use rustc_target::spec::DebuginfoKind;
+use crate::rustc_target::spec::DebuginfoKind;
 use smallvec::smallvec;
 use tracing::{debug, instrument};
 ```
@@ -769,7 +769,7 @@ pub(crate) fn file_metadata<'ll>(cx: &CodegenCx<'ll, '_>, source_file: &SourceFi
         let filename_display_preference =
             cx.sess().filename_display_preference(RemapPathScopeComponents::DEBUGINFO);
 
-        use rustc_session::config::RemapPathScopeComponents;
+        use crate::rustc_complete::config::RemapPathScopeComponents;
         let (directory, file_name) = match &source_file.name {
             FileName::Real(filename) => {
                 let working_directory = &cx.sess().opts.working_dir;
@@ -843,10 +843,10 @@ pub(crate) fn file_metadata<'ll>(cx: &CodegenCx<'ll, '_>, source_file: &SourceFi
         };
 
         let hash_kind = match source_file.src_hash.kind {
-            rustc_span::SourceFileHashAlgorithm::Md5 => llvm::ChecksumKind::MD5,
-            rustc_span::SourceFileHashAlgorithm::Sha1 => llvm::ChecksumKind::SHA1,
-            rustc_span::SourceFileHashAlgorithm::Sha256 => llvm::ChecksumKind::SHA256,
-            rustc_span::SourceFileHashAlgorithm::Blake3 => llvm::ChecksumKind::None,
+            crate::rustc_span::SourceFileHashAlgorithm::Md5 => llvm::ChecksumKind::MD5,
+            crate::rustc_span::SourceFileHashAlgorithm::Sha1 => llvm::ChecksumKind::SHA1,
+            crate::rustc_span::SourceFileHashAlgorithm::Sha256 => llvm::ChecksumKind::SHA256,
+            crate::rustc_span::SourceFileHashAlgorithm::Blake3 => llvm::ChecksumKind::None,
         };
         let hash_value = hex_encode(source_file.src_hash.hash_bytes());
 
@@ -1153,8 +1153,8 @@ pub(crate) fn build_compile_unit_di_node<'ll, 'tcx>(
     codegen_unit_name: &str,
     debug_context: &CodegenUnitDebugContext<'ll, 'tcx>,
 ) -> &'ll DIDescriptor {
-    use rustc_session::RemapFileNameExt;
-    use rustc_session::config::RemapPathScopeComponents;
+    use crate::rustc_complete::RemapFileNameExt;
+    use crate::rustc_complete::config::RemapPathScopeComponents;
     let mut name_in_debuginfo = tcx
         .sess
         .local_crate_source_file()

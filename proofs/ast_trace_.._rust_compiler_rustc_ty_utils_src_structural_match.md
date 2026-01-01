@@ -6,17 +6,17 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir::lang_items::LangItem;
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::{self, Ty, TyCtxt, TypingMode};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypingMode};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_trait_selection::traits::{ObligationCause, ObligationCtxt};
+use crate::rustc_trait_selection::traits::{ObligationCause, ObligationCtxt};
 ```
 
 ## Block 3

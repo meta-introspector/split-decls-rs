@@ -6,16 +6,16 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::visit::NonUseContext::VarDebugInfo;
-use rustc_middle::mir::visit::{MutVisitor, PlaceContext};
+use crate::rustc_complete::mir::visit::NonUseContext::VarDebugInfo;
+use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=STRUCT | NAME=DerefChecker | COMPLEXITY=2 | LINES=12
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 
 use crate::patch::MirPatch;
 

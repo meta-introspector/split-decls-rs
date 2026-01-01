@@ -8,30 +8,30 @@ Generated 11 AST blocks from source file
 ```rust
 use core::ops::ControlFlow;
 
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::intravisit::{self, Visitor, VisitorExt};
+use crate::rustc_complete::intravisit::{self, Visitor, VisitorExt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, AmbigArg};
+use crate::rustc_complete::{self as hir, AmbigArg};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::hir::nested_filter;
-use rustc_middle::middle::resolve_bound_vars as rbv;
-use rustc_middle::ty::{self, Region, TyCtxt};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::middle::resolve_bound_vars as rbv;
+use crate::rustc_complete::ty::{self, Region, TyCtxt};
 ```
 
 ## Block 5

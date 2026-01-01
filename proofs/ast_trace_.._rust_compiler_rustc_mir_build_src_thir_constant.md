@@ -6,18 +6,18 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::Size;
-use rustc_ast::{self as ast};
+use crate::rustc_abi::Size;
+use crate::rustc_complete::{self as ast};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir::LangItem;
-use rustc_middle::bug;
-use rustc_middle::mir::interpret::LitToConstInput;
-use rustc_middle::ty::{self, ScalarInt, TyCtxt, TypeVisitableExt as _};
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::interpret::LitToConstInput;
+use crate::rustc_complete::ty::{self, ScalarInt, TyCtxt, TypeVisitableExt as _};
 ```
 
 ## Block 3

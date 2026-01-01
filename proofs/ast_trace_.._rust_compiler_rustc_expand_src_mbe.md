@@ -6,10 +6,10 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=16
 
 ```rust
-//! This module implements declarative macros: old `macro_rules` and the newer
-//! `macro`. Declarative macros are also known as "macro by example", and that's
-//! why we call this module `mbe`. For external documentation, prefer the
-//! official terminology: "declarative macros".
+// This module implements declarative macros: old `macro_rules` and the newer
+// `macro`. Declarative macros are also known as "macro by example", and that's
+// why we call this module `mbe`. For external documentation, prefer the
+// official terminology: "declarative macros".
 
 pub(crate) mod diagnostics;
 pub(crate) mod macro_rules;
@@ -21,14 +21,14 @@ mod quoted;
 mod transcribe;
 
 use metavar_expr::MetaVarExpr;
-use rustc_ast::token::{Delimiter, NonterminalKind, Token, TokenKind};
+use crate::rustc_complete::token::{Delimiter, NonterminalKind, Token, TokenKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::tokenstream::{DelimSpacing, DelimSpan};
+use crate::rustc_complete::tokenstream::{DelimSpacing, DelimSpan};
 ```
 
 ## Block 3
@@ -42,7 +42,7 @@ use rustc_macros::{Decodable, Encodable};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, Span};
+use crate::rustc_complete::{Ident, Span};
 ```
 
 ## Block 5

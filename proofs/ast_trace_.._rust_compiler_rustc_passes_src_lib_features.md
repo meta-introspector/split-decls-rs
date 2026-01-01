@@ -6,38 +6,38 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-//! Detecting lib features (i.e., features that are not lang features).
-//!
-//! These are declared using stability attributes (e.g., `#[stable (..)]` and `#[unstable (..)]`),
-//! but are not declared in one single location (unlike lang features), which means we need to
-//! collect them instead.
+// Detecting lib features (i.e., features that are not lang features).
+//
+// These are declared using stability attributes (e.g., `#[stable (..)]` and `#[unstable (..)]`),
+// but are not declared in one single location (unlike lang features), which means we need to
+// collect them instead.
 
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::intravisit::Visitor;
-use rustc_hir::{Attribute, StabilityLevel, StableSince};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::{Attribute, StabilityLevel, StableSince};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::hir::nested_filter;
-use rustc_middle::middle::lib_features::{FeatureStability, LibFeatures};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::middle::lib_features::{FeatureStability, LibFeatures};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::query::{LocalCrate, Providers};
+use crate::rustc_complete::query::{LocalCrate, Providers};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 5

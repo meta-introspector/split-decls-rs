@@ -8,8 +8,8 @@ Generated 43 AST blocks from source file
 ```rust
 use std::cmp::Ordering;
 
-use rustc_data_structures::intern::Interned;
-use rustc_hir::def_id::DefId;
+use crate::rustc_data_structures::intern::Interned;
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, extension};
 ```
 
@@ -182,11 +182,11 @@ impl<'tcx> Predicate<'tcx> {
 **Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=6 | LINES=9
 
 ```rust
-impl<'tcx> rustc_errors::IntoDiagArg for Predicate<'tcx> {
-    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+impl<'tcx> crate::rustc_errors::IntoDiagArg for Predicate<'tcx> {
+    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         ty::tls::with(|tcx| {
             let pred = tcx.short_string(self, path);
-            rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(pred))
+            crate::rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(pred))
         })
     }
 }
@@ -196,11 +196,11 @@ impl<'tcx> rustc_errors::IntoDiagArg for Predicate<'tcx> {
 **Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=6 | LINES=9
 
 ```rust
-impl<'tcx> rustc_errors::IntoDiagArg for Clause<'tcx> {
-    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+impl<'tcx> crate::rustc_errors::IntoDiagArg for Clause<'tcx> {
+    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         ty::tls::with(|tcx| {
             let clause = tcx.short_string(self, path);
-            rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(clause))
+            crate::rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(clause))
         })
     }
 }
@@ -889,7 +889,7 @@ impl<'tcx> Predicate<'tcx> {
 // Some types are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
 mod size_asserts {
-    use rustc_data_structures::static_assert_size;
+    use crate::rustc_data_structures::static_assert_size;
 
     use super::*;
     // tidy-alphabetical-start

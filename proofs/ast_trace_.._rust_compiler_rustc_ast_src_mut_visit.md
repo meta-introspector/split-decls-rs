@@ -6,21 +6,21 @@ Generated 34 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=15
 
 ```rust
-//! A `MutVisitor` represents an AST modification; it accepts an AST piece and
-//! mutates it in place. So, for instance, macro expansion is a `MutVisitor`
-//! that walks over an AST and modifies it.
-//!
-//! Note: using a `MutVisitor` (other than the `MacroExpander` `MutVisitor`) on
-//! an AST before macro expansion is probably a bad idea. For instance,
-//! a `MutVisitor` renaming item names in a module will miss all of those
-//! that are created by the expansion of a macro.
+// A `MutVisitor` represents an AST modification; it accepts an AST piece and
+// mutates it in place. So, for instance, macro expansion is a `MutVisitor`
+// that walks over an AST and modifies it.
+//
+// Note: using a `MutVisitor` (other than the `MacroExpander` `MutVisitor`) on
+// an AST before macro expansion is probably a bad idea. For instance,
+// a `MutVisitor` renaming item names in a module will miss all of those
+// that are created by the expansion of a macro.
 
 use std::ops::DerefMut;
 use std::panic;
 
-use rustc_data_structures::flat_map_in_place::FlatMapInPlace;
-use rustc_span::source_map::Spanned;
-use rustc_span::{Ident, Span, Symbol};
+use crate::rustc_data_structures::flat_map_in_place::FlatMapInPlace;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Ident, Span, Symbol};
 ```
 
 ## Block 2

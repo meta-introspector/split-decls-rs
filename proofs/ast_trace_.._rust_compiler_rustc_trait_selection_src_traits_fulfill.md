@@ -8,7 +8,7 @@ Generated 24 AST blocks from source file
 ```rust
 use std::marker::PhantomData;
 
-use rustc_data_structures::obligation_forest::{
+use crate::rustc_data_structures::obligation_forest::{
     Error, ForestObligation, ObligationForest, ObligationProcessor, Outcome, ProcessResult,
 };
 ```
@@ -17,9 +17,9 @@ use rustc_data_structures::obligation_forest::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_hir::def_id::LocalDefId;
-use rustc_infer::infer::DefineOpaqueTypes;
-use rustc_infer::traits::{
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_infer::infer::DefineOpaqueTypes;
+use crate::rustc_infer::traits::{
     FromSolverError, PolyTraitObligation, PredicateObligations, ProjectionCacheKey, SelectionError,
     TraitEngine,
 };
@@ -29,16 +29,16 @@ use rustc_infer::traits::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::abstract_const::NotConstEvaluatable;
-use rustc_middle::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::abstract_const::NotConstEvaluatable;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, Binder, Const, GenericArgsRef, TypeVisitable, TypeVisitableExt, TypingMode,
     may_use_unstable_feature,
 };
@@ -48,7 +48,7 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::DUMMY_SP;
+use crate::rustc_complete::DUMMY_SP;
 use thin_vec::{ThinVec, thin_vec};
 ```
 
@@ -177,7 +177,7 @@ pub struct PendingPredicateObligation<'tcx> {
 ```rust
 // `PendingPredicateObligation` is used a lot. Make sure it doesn't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
-rustc_data_structures::static_assert_size!(PendingPredicateObligation<'_>, 72);
+crate::rustc_data_structures::static_assert_size!(PendingPredicateObligation<'_>, 72);
 
 impl<'tcx, E> FulfillmentContext<'tcx, E>
 where
@@ -795,7 +795,7 @@ impl<'a, 'tcx> ObligationProcessor for FulfillProcessor<'a, 'tcx> {
                         let c2 = tcx.expand_abstract_consts(c2);
                         debug!("equating consts:\nc1= {:?}\nc2= {:?}", c1, c2);
 
-                        use rustc_hir::def::DefKind;
+                        use crate::rustc_complete::def::DefKind;
                         match (c1.kind(), c2.kind()) {
                             (ty::ConstKind::Unevaluated(a), ty::ConstKind::Unevaluated(b))
                                 if a.def == b.def && tcx.def_kind(a.def) == DefKind::AssocConst =>

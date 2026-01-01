@@ -6,22 +6,22 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-//! The compiler code necessary to support the cfg! extension, which expands to
-//! a literal `true` or `false` based on whether the given cfg matches the
-//! current compilation environment.
+// The compiler code necessary to support the cfg! extension, which expands to
+// a literal `true` or `false` based on whether the given cfg matches the
+// current compilation environment.
 
-use rustc_ast::token;
-use rustc_ast::tokenstream::TokenStream;
-use rustc_errors::PResult;
-use rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
+use crate::rustc_complete::token;
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::PResult;
+use crate::rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_parse::exp;
-use rustc_span::Span;
+use crate::rustc_parse::exp;
+use crate::rustc_complete::Span;
 use {rustc_ast as ast, rustc_attr_parsing as attr};
 ```
 

@@ -6,18 +6,18 @@ Generated 119 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=16
 
 ```rust
-//! Defines how the compiler represents types internally.
-//!
-//! Two important entities in this module are:
-//!
-//! - [`rustc_middle::ty::Ty`], used to represent the semantics of a type.
-//! - [`rustc_middle::ty::TyCtxt`], the central data structure in the compiler.
-//!
-//! For more information, see ["The `ty` module: representing types"] in the rustc-dev-guide.
-//!
-//! ["The `ty` module: representing types"]: https://rustc-dev-guide.rust-lang.org/ty.html
+// Defines how the compiler represents types internally.
+//
+// Two important entities in this module are:
+//
+// - [`crate::rustc_middle::ty::Ty`], used to represent the semantics of a type.
+// - [`crate::rustc_middle::ty::TyCtxt`], the central data structure in the compiler.
+//
+// For more information, see ["The `ty` module: representing types"] in the rustc-dev-guide.
+//
+// ["The `ty` module: representing types"]: https://rustc-dev-guide.rust-lang.org/ty.html
 
-#![allow(rustc::usage_of_ty_tykind)]
+#[allow(rustc::usage_of_ty_tykind)]
 
 use std::assert_matches::assert_matches;
 use std::fmt::Debug;
@@ -49,14 +49,14 @@ pub use generic_args::{GenericArgKind, TermKind, *};
 ```rust
 pub use generics::*;
 pub use intrinsic::IntrinsicDef;
-use rustc_abi::{Align, FieldIdx, Integer, IntegerType, ReprFlags, ReprOptions, VariantIdx};
+use crate::rustc_abi::{Align, FieldIdx, Integer, IntegerType, ReprFlags, ReprOptions, VariantIdx};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::node_id::NodeMap;
+use crate::rustc_complete::node_id::NodeMap;
 pub use rustc_ast_ir::{Movability, Mutability, try_visit};
 ```
 
@@ -64,67 +64,67 @@ pub use rustc_ast_ir::{Movability, Mutability, try_visit};
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexMap, FxIndexSet};
+use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexMap, FxIndexSet};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::intern::Interned;
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::intern::Interned;
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::steal::Steal;
-use rustc_data_structures::unord::{UnordMap, UnordSet};
+use crate::rustc_data_structures::steal::Steal;
+use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{Diag, ErrorGuaranteed, LintBuffer};
+use crate::rustc_complete::{Diag, ErrorGuaranteed, LintBuffer};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::attrs::{AttributeKind, StrippedCfgItem};
+use crate::rustc_complete::attrs::{AttributeKind, StrippedCfgItem};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def::{CtorKind, CtorOf, DefKind, DocLinkResMap, LifetimeRes, Res};
+use crate::rustc_complete::def::{CtorKind, CtorOf, DefKind, DocLinkResMap, LifetimeRes, Res};
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{CrateNum, DefId, DefIdMap, LocalDefId, LocalDefIdMap};
+use crate::rustc_complete::def_id::{CrateNum, DefId, DefIdMap, LocalDefId, LocalDefIdMap};
 ```
 
 ## Block 13
 **Metadata**: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::definitions::DisambiguatorState;
-use rustc_hir::{LangItem, attrs as attr, find_attr};
+use crate::rustc_complete::definitions::DisambiguatorState;
+use crate::rustc_complete::{LangItem, attrs as attr, find_attr};
 ```
 
 ## Block 14
 **Metadata**: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_index::IndexVec;
-use rustc_index::bit_set::BitMatrix;
+use crate::rustc_index::IndexVec;
+use crate::rustc_index::bit_set::BitMatrix;
 use rustc_macros::{
     Decodable, Encodable, HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable,
     extension,
@@ -136,16 +136,16 @@ use rustc_macros::{
 
 ```rust
 use rustc_query_system::ich::StableHashingContext;
-use rustc_serialize::{Decodable, Encodable};
+use crate::rustc_serialize::{Decodable, Encodable};
 ```
 
 ## Block 16
 **Metadata**: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-pub use rustc_session::lint::RegisteredTools;
-use rustc_span::hygiene::MacroKind;
-use rustc_span::{DUMMY_SP, ExpnId, ExpnKind, Ident, Span, Symbol, sym};
+pub use crate::rustc_complete::lint::RegisteredTools;
+use crate::rustc_complete::hygiene::MacroKind;
+use crate::rustc_complete::{DUMMY_SP, ExpnId, ExpnKind, Ident, Span, Symbol, sym};
 ```
 
 ## Block 17
@@ -809,8 +809,8 @@ impl<'tcx> rustc_type_ir::inherent::IntoKind for Term<'tcx> {
 **Metadata**: AST_ID=59 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5
 
 ```rust
-unsafe impl<'tcx> rustc_data_structures::sync::DynSend for Term<'tcx> where
-    &'tcx (Ty<'tcx>, Const<'tcx>): rustc_data_structures::sync::DynSend
+unsafe impl<'tcx> crate::rustc_data_structures::sync::DynSend for Term<'tcx> where
+    &'tcx (Ty<'tcx>, Const<'tcx>): crate::rustc_data_structures::sync::DynSend
 {
 }
 ```
@@ -819,8 +819,8 @@ unsafe impl<'tcx> rustc_data_structures::sync::DynSend for Term<'tcx> where
 **Metadata**: AST_ID=60 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=4
 
 ```rust
-unsafe impl<'tcx> rustc_data_structures::sync::DynSync for Term<'tcx> where
-    &'tcx (Ty<'tcx>, Const<'tcx>): rustc_data_structures::sync::DynSync
+unsafe impl<'tcx> crate::rustc_data_structures::sync::DynSync for Term<'tcx> where
+    &'tcx (Ty<'tcx>, Const<'tcx>): crate::rustc_data_structures::sync::DynSync
 {
 }
 ```
@@ -1674,7 +1674,7 @@ bitflags::bitflags! {
 **Metadata**: AST_ID=98 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-rustc_data_structures::external_bitflags_debug! { VariantFlags }
+crate::rustc_data_structures::external_bitflags_debug! { VariantFlags }
 ```
 
 ## Block 99
@@ -2141,7 +2141,7 @@ impl<'tcx> TyCtxt<'tcx> {
             let def_key = self.def_key(def_id);
             match def_key.disambiguated_data.data {
                 // The name of a constructor is that of its parent.
-                rustc_hir::definitions::DefPathData::Ctor => self
+                crate::rustc_hir::definitions::DefPathData::Ctor => self
                     .opt_item_name(DefId { krate: def_id.krate, index: def_key.parent.unwrap() }),
                 _ => def_key.get_opt_name(),
             }
@@ -2326,7 +2326,7 @@ impl<'tcx> TyCtxt<'tcx> {
     /// Gets all attributes.
     ///
     /// To see if an item has a specific attribute, you should use
-    /// [`rustc_hir::find_attr!`] so you can use matching.
+    /// [`crate::rustc_hir::find_attr!`] so you can use matching.
     pub fn get_all_attrs(self, did: impl Into<DefId>) -> &'tcx [hir::Attribute] {
         let did: DefId = did.into();
         if let Some(did) = did.as_local() {
@@ -2352,7 +2352,7 @@ impl<'tcx> TyCtxt<'tcx> {
         let did: DefId = did.into();
         if did.as_local().is_some() {
             // it's a crate local item, we need to check feature flags
-            if rustc_feature::is_stable_diagnostic_attribute(attr, self.features()) {
+            if crate::rustc_feature::is_stable_diagnostic_attribute(attr, self.features()) {
                 self.get_attrs_by_path(did, &[sym::diagnostic, sym::do_not_recommend]).next()
             } else {
                 None
@@ -2360,7 +2360,7 @@ impl<'tcx> TyCtxt<'tcx> {
         } else {
             // we filter out unstable diagnostic attributes before
             // encoding attributes
-            debug_assert!(rustc_feature::encode_cross_crate(attr));
+            debug_assert!(crate::rustc_feature::encode_cross_crate(attr));
             self.attrs_for_def(did)
                 .iter()
                 .find(|a| matches!(a.path().as_ref(), [sym::diagnostic, a] if *a == attr))
@@ -2381,7 +2381,7 @@ impl<'tcx> TyCtxt<'tcx> {
     }
 
     pub fn get_attr(self, did: impl Into<DefId>, attr: Symbol) -> Option<&'tcx hir::Attribute> {
-        if cfg!(debug_assertions) && !rustc_feature::is_valid_for_get_attr(attr) {
+        if cfg!(debug_assertions) && !crate::rustc_feature::is_valid_for_get_attr(attr) {
             let did: DefId = did.into();
             bug!("get_attr: unexpected called with DefId `{:?}`, attr `{:?}`", did, attr);
         } else {

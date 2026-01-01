@@ -10,7 +10,7 @@ use std::cell::Cell;
 use std::fmt;
 use std::iter::once;
 
-use rustc_abi::{FIRST_VARIANT, FieldIdx, Integer, VariantIdx};
+use crate::rustc_abi::{FIRST_VARIANT, FieldIdx, Integer, VariantIdx};
 ```
 
 ## Block 2
@@ -18,25 +18,25 @@ use rustc_abi::{FIRST_VARIANT, FieldIdx, Integer, VariantIdx};
 
 ```rust
 use rustc_arena::DroplessArena;
-use rustc_hir::HirId;
-use rustc_hir::def_id::DefId;
-use rustc_index::{Idx, IndexVec};
+use crate::rustc_complete::HirId;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_index::{Idx, IndexVec};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::middle::stability::EvalResult;
-use rustc_middle::thir::{self, Pat, PatKind, PatRange, PatRangeBoundary};
+use crate::rustc_complete::middle::stability::EvalResult;
+use crate::rustc_complete::thir::{self, Pat, PatKind, PatRange, PatRangeBoundary};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::layout::IntegerExt;
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::layout::IntegerExt;
+use crate::rustc_complete::ty::{
     self, FieldDef, OpaqueTypeKey, ScalarInt, Ty, TyCtxt, TypeVisitableExt, VariantDef,
 };
 ```
@@ -45,15 +45,15 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::lint;
-use rustc_span::{DUMMY_SP, ErrorGuaranteed, Span};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
 ```
 
 ## Block 7
@@ -692,8 +692,8 @@ impl<'p, 'tcx: 'p> RustcPatCtxt<'p, 'tcx> {
             PatKind::Range(patrange) => {
                 let PatRange { lo, hi, end, .. } = patrange.as_ref();
                 let end = match end {
-                    rustc_hir::RangeEnd::Included => RangeEnd::Included,
-                    rustc_hir::RangeEnd::Excluded => RangeEnd::Excluded,
+                    crate::rustc_hir::RangeEnd::Included => RangeEnd::Included,
+                    crate::rustc_hir::RangeEnd::Excluded => RangeEnd::Excluded,
                 };
                 ctor = match ty.kind() {
                     ty::Char | ty::Int(_) | ty::Uint(_) => {
@@ -841,7 +841,7 @@ impl<'p, 'tcx: 'p> RustcPatCtxt<'p, 'tcx> {
             value.to_string()
         } else {
             // We convert to an inclusive range for diagnostics.
-            let mut end = rustc_hir::RangeEnd::Included;
+            let mut end = crate::rustc_hir::RangeEnd::Included;
             let mut lo = cx.hoist_pat_range_bdy(range.lo, ty);
             if matches!(lo, PatRangeBoundary::PosInfinity) {
                 // The only reason to get `PosInfinity` here is the special case where
@@ -857,7 +857,7 @@ impl<'p, 'tcx: 'p> RustcPatCtxt<'p, 'tcx> {
                 hi
             } else {
                 // The range encodes `..ty::MIN`, so we can't convert it to an inclusive range.
-                end = rustc_hir::RangeEnd::Excluded;
+                end = crate::rustc_hir::RangeEnd::Excluded;
                 range.hi
             };
             let hi = cx.hoist_pat_range_bdy(hi, ty);
@@ -1072,7 +1072,7 @@ impl<'p, 'tcx: 'p> PatCx for RustcPatCtxt<'p, 'tcx> {
         let &thir_pat = pat.data();
         let thir::PatKind::Range(range) = &thir_pat.kind else { return };
         // Only lint when the left range is an exclusive range.
-        if range.end != rustc_hir::RangeEnd::Excluded {
+        if range.end != crate::rustc_hir::RangeEnd::Excluded {
             return;
         }
         // `pat` is an exclusive range like `lo..gap`. `gapped_with` contains ranges that start with
@@ -1080,7 +1080,7 @@ impl<'p, 'tcx: 'p> PatCx for RustcPatCtxt<'p, 'tcx> {
         let suggested_range: String = {
             // Suggest `lo..=gap` instead.
             let mut suggested_range = PatRange::clone(range);
-            suggested_range.end = rustc_hir::RangeEnd::Included;
+            suggested_range.end = crate::rustc_hir::RangeEnd::Included;
             suggested_range.to_string()
         };
         let gap_as_pat = self.print_pat_range(&gap, *pat.ty());

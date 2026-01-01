@@ -6,10 +6,10 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::mir::visit::*;
-use rustc_middle::mir::*;
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::visit::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 2

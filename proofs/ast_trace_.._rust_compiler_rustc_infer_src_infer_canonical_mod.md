@@ -6,40 +6,40 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=27
 
 ```rust
-//! **Canonicalization** is the key to constructing a query in the
-//! middle of type inference. Ordinarily, it is not possible to store
-//! types from type inference in query keys, because they contain
-//! references to inference variables whose lifetimes are too short
-//! and so forth. Canonicalizing a value T1 using `canonicalize_query`
-//! produces two things:
-//!
-//! - a value T2 where each unbound inference variable has been
-//!   replaced with a **canonical variable**;
-//! - a map M (of type `CanonicalVarValues`) from those canonical
-//!   variables back to the original.
-//!
-//! We can then do queries using T2. These will give back constraints
-//! on the canonical variables which can be translated, using the map
-//! M, into constraints in our source context. This process of
-//! translating the results back is done by the
-//! `instantiate_query_result` method.
-//!
-//! For a more detailed look at what is happening here, check
-//! out the [chapter in the rustc dev guide][c].
-//!
-//! [c]: https://rust-lang.github.io/chalk/book/canonical_queries/canonicalization.html
+// **Canonicalization** is the key to constructing a query in the
+// middle of type inference. Ordinarily, it is not possible to store
+// types from type inference in query keys, because they contain
+// references to inference variables whose lifetimes are too short
+// and so forth. Canonicalizing a value T1 using `canonicalize_query`
+// produces two things:
+//
+// - a value T2 where each unbound inference variable has been
+//   replaced with a **canonical variable**;
+// - a map M (of type `CanonicalVarValues`) from those canonical
+//   variables back to the original.
+//
+// We can then do queries using T2. These will give back constraints
+// on the canonical variables which can be translated, using the map
+// M, into constraints in our source context. This process of
+// translating the results back is done by the
+// `instantiate_query_result` method.
+//
+// For a more detailed look at what is happening here, check
+// out the [chapter in the rustc dev guide][c].
+//
+// [c]: https://rust-lang.github.io/chalk/book/canonical_queries/canonicalization.html
 
 pub use instantiate::CanonicalExt;
-use rustc_index::IndexVec;
-pub use rustc_middle::infer::canonical::*;
-use rustc_middle::ty::{self, GenericArg, Ty, TyCtxt, TypeFoldable};
+use crate::rustc_index::IndexVec;
+pub use crate::rustc_complete::infer::canonical::*;
+use crate::rustc_complete::ty::{self, GenericArg, Ty, TyCtxt, TypeFoldable};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::infer::{InferCtxt, RegionVariableOrigin};
 ```

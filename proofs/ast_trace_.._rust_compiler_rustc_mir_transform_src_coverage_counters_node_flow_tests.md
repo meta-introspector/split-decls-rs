@@ -7,10 +7,10 @@ Generated 5 AST blocks from source file
 
 ```rust
 use itertools::Itertools;
-use rustc_data_structures::graph;
-use rustc_data_structures::graph::vec_graph::VecGraph;
-use rustc_index::Idx;
-use rustc_middle::mir::coverage::Op;
+use crate::rustc_data_structures::graph;
+use crate::rustc_data_structures::graph::vec_graph::VecGraph;
+use crate::rustc_index::Idx;
+use crate::rustc_complete::mir::coverage::Op;
 
 use crate::coverage::counters::node_flow::{
     CounterTerm, NodeCounters, NodeFlowData, make_node_counters, node_flow_data_for_balanced_graph,

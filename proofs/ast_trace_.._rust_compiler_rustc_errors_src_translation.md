@@ -11,7 +11,7 @@ use std::env;
 use std::error::Report;
 use std::sync::Arc;
 
-pub use rustc_error_messages::{FluentArgs, LazyFallbackBundle};
+pub use crate::rustc_error_messages::{FluentArgs, LazyFallbackBundle};
 ```
 
 ## Block 2

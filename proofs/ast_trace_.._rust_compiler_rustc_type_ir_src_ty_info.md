@@ -17,9 +17,9 @@ use std::hash::{Hash, Hasher};
 use std::ops::Deref;
 
 #[cfg(feature = "nightly")]
-use rustc_data_structures::fingerprint::Fingerprint;
+use crate::rustc_data_structures::fingerprint::Fingerprint;
 #[cfg(feature = "nightly")]
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 3

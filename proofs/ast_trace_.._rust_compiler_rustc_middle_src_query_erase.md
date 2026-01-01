@@ -10,7 +10,7 @@ use std::ffi::OsStr;
 use std::intrinsics::transmute_unchecked;
 use std::mem::MaybeUninit;
 
-use rustc_span::ErrorGuaranteed;
+use crate::rustc_complete::ErrorGuaranteed;
 
 use crate::mir::interpret::EvalToValTreeResult;
 use crate::query::CyclePlaceholder;
@@ -146,8 +146,8 @@ impl<T> EraseType for &'_ ty::ListWithCachedTypeInfo<T> {
 **Metadata**: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4
 
 ```rust
-impl<I: rustc_index::Idx, T> EraseType for &'_ rustc_index::IndexSlice<I, T> {
-    type Result = [u8; size_of::<&'static rustc_index::IndexSlice<u32, ()>>()];
+impl<I: crate::rustc_index::Idx, T> EraseType for &'_ crate::rustc_index::IndexSlice<I, T> {
+    type Result = [u8; size_of::<&'static crate::rustc_index::IndexSlice<u32, ()>>()];
 }
 ```
 
@@ -173,8 +173,8 @@ impl<T> EraseType for Result<&'_ [T], traits::query::NoSolution> {
 **Metadata**: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4
 
 ```rust
-impl<T> EraseType for Result<&'_ T, rustc_errors::ErrorGuaranteed> {
-    type Result = [u8; size_of::<Result<&'static (), rustc_errors::ErrorGuaranteed>>()];
+impl<T> EraseType for Result<&'_ T, crate::rustc_errors::ErrorGuaranteed> {
+    type Result = [u8; size_of::<Result<&'static (), crate::rustc_errors::ErrorGuaranteed>>()];
 }
 ```
 
@@ -182,8 +182,8 @@ impl<T> EraseType for Result<&'_ T, rustc_errors::ErrorGuaranteed> {
 **Metadata**: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4
 
 ```rust
-impl<T> EraseType for Result<&'_ [T], rustc_errors::ErrorGuaranteed> {
-    type Result = [u8; size_of::<Result<&'static [()], rustc_errors::ErrorGuaranteed>>()];
+impl<T> EraseType for Result<&'_ [T], crate::rustc_errors::ErrorGuaranteed> {
+    type Result = [u8; size_of::<Result<&'static [()], crate::rustc_errors::ErrorGuaranteed>>()];
 }
 ```
 
@@ -209,9 +209,9 @@ impl<T> EraseType for Result<&'_ T, &'_ ty::layout::FnAbiError<'_>> {
 **Metadata**: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-impl<T> EraseType for Result<(&'_ T, crate::thir::ExprId), rustc_errors::ErrorGuaranteed> {
+impl<T> EraseType for Result<(&'_ T, crate::thir::ExprId), crate::rustc_errors::ErrorGuaranteed> {
     type Result = [u8; size_of::<
-        Result<(&'static (), crate::thir::ExprId), rustc_errors::ErrorGuaranteed>,
+        Result<(&'static (), crate::thir::ExprId), crate::rustc_errors::ErrorGuaranteed>,
     >()];
 }
 ```
@@ -220,9 +220,9 @@ impl<T> EraseType for Result<(&'_ T, crate::thir::ExprId), rustc_errors::ErrorGu
 **Metadata**: AST_ID=20 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=5
 
 ```rust
-impl EraseType for Result<Option<ty::Instance<'_>>, rustc_errors::ErrorGuaranteed> {
+impl EraseType for Result<Option<ty::Instance<'_>>, crate::rustc_errors::ErrorGuaranteed> {
     type Result =
-        [u8; size_of::<Result<Option<ty::Instance<'static>>, rustc_errors::ErrorGuaranteed>>()];
+        [u8; size_of::<Result<Option<ty::Instance<'static>>, crate::rustc_errors::ErrorGuaranteed>>()];
 }
 ```
 
@@ -230,8 +230,8 @@ impl EraseType for Result<Option<ty::Instance<'_>>, rustc_errors::ErrorGuarantee
 **Metadata**: AST_ID=21 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4
 
 ```rust
-impl EraseType for Result<CoerceUnsizedInfo, rustc_errors::ErrorGuaranteed> {
-    type Result = [u8; size_of::<Result<CoerceUnsizedInfo, rustc_errors::ErrorGuaranteed>>()];
+impl EraseType for Result<CoerceUnsizedInfo, crate::rustc_errors::ErrorGuaranteed> {
+    type Result = [u8; size_of::<Result<CoerceUnsizedInfo, crate::rustc_errors::ErrorGuaranteed>>()];
 }
 ```
 
@@ -240,10 +240,10 @@ impl EraseType for Result<CoerceUnsizedInfo, rustc_errors::ErrorGuaranteed> {
 
 ```rust
 impl EraseType
-    for Result<Option<ty::EarlyBinder<'_, ty::Const<'_>>>, rustc_errors::ErrorGuaranteed>
+    for Result<Option<ty::EarlyBinder<'_, ty::Const<'_>>>, crate::rustc_errors::ErrorGuaranteed>
 {
     type Result = [u8; size_of::<
-        Result<Option<ty::EarlyBinder<'static, ty::Const<'static>>>, rustc_errors::ErrorGuaranteed>,
+        Result<Option<ty::EarlyBinder<'static, ty::Const<'static>>>, crate::rustc_errors::ErrorGuaranteed>,
     >()];
 }
 ```
@@ -270,10 +270,10 @@ impl EraseType for Result<bool, &ty::layout::LayoutError<'_>> {
 **Metadata**: AST_ID=25 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=9
 
 ```rust
-impl EraseType for Result<rustc_abi::TyAndLayout<'_, Ty<'_>>, &ty::layout::LayoutError<'_>> {
+impl EraseType for Result<crate::rustc_abi::TyAndLayout<'_, Ty<'_>>, &ty::layout::LayoutError<'_>> {
     type Result = [u8; size_of::<
         Result<
-            rustc_abi::TyAndLayout<'static, Ty<'static>>,
+            crate::rustc_abi::TyAndLayout<'static, Ty<'static>>,
             &'static ty::layout::LayoutError<'static>,
         >,
     >()];
@@ -384,8 +384,8 @@ impl EraseType for Option<ty::EarlyBinder<'_, Ty<'_>>> {
 **Metadata**: AST_ID=37 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=4
 
 ```rust
-impl EraseType for rustc_hir::MaybeOwner<'_> {
-    type Result = [u8; size_of::<rustc_hir::MaybeOwner<'static>>()];
+impl EraseType for crate::rustc_hir::MaybeOwner<'_> {
+    type Result = [u8; size_of::<crate::rustc_hir::MaybeOwner<'static>>()];
 }
 ```
 
@@ -487,112 +487,112 @@ macro_rules! trivial {
 ```
 
 ## Block 48
-**Metadata**: AST_ID=48 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=108
+**Metadata**: AST_ID=48 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=108
 
 ```rust
 trivial! {
     (),
     bool,
-    Option<(rustc_span::def_id::DefId, rustc_session::config::EntryFnType)>,
-    Option<rustc_ast::expand::allocator::AllocatorKind>,
-    Option<rustc_hir::ConstStability>,
-    Option<rustc_hir::DefaultBodyStability>,
-    Option<rustc_hir::Stability>,
-    Option<rustc_data_structures::svh::Svh>,
-    Option<rustc_hir::def::DefKind>,
-    Option<rustc_hir::CoroutineKind>,
-    Option<rustc_hir::HirId>,
-    Option<rustc_middle::middle::stability::DeprecationEntry>,
-    Option<rustc_middle::ty::AsyncDestructor>,
-    Option<rustc_middle::ty::Destructor>,
-    Option<rustc_middle::ty::ImplTraitInTraitData>,
-    Option<rustc_middle::ty::ScalarInt>,
-    Option<rustc_span::def_id::CrateNum>,
-    Option<rustc_span::def_id::DefId>,
-    Option<rustc_span::def_id::LocalDefId>,
-    Option<rustc_span::Span>,
-    Option<rustc_abi::FieldIdx>,
-    Option<rustc_target::spec::PanicStrategy>,
+    Option<(crate::rustc_span::def_id::DefId, crate::rustc_session::config::EntryFnType)>,
+    Option<crate::rustc_ast::expand::allocator::AllocatorKind>,
+    Option<crate::rustc_hir::ConstStability>,
+    Option<crate::rustc_hir::DefaultBodyStability>,
+    Option<crate::rustc_hir::Stability>,
+    Option<crate::rustc_data_structures::svh::Svh>,
+    Option<crate::rustc_hir::def::DefKind>,
+    Option<crate::rustc_hir::CoroutineKind>,
+    Option<crate::rustc_hir::HirId>,
+    Option<crate::rustc_middle::middle::stability::DeprecationEntry>,
+    Option<crate::rustc_middle::ty::AsyncDestructor>,
+    Option<crate::rustc_middle::ty::Destructor>,
+    Option<crate::rustc_middle::ty::ImplTraitInTraitData>,
+    Option<crate::rustc_middle::ty::ScalarInt>,
+    Option<crate::rustc_span::def_id::CrateNum>,
+    Option<crate::rustc_span::def_id::DefId>,
+    Option<crate::rustc_span::def_id::LocalDefId>,
+    Option<crate::rustc_span::Span>,
+    Option<crate::rustc_abi::FieldIdx>,
+    Option<crate::rustc_target::spec::PanicStrategy>,
     Option<usize>,
-    Option<rustc_middle::ty::IntrinsicDef>,
-    Option<rustc_abi::Align>,
-    Result<(), rustc_errors::ErrorGuaranteed>,
-    Result<(), rustc_middle::traits::query::NoSolution>,
-    Result<rustc_middle::traits::EvaluationResult, rustc_middle::traits::OverflowError>,
-    rustc_abi::ReprOptions,
-    rustc_ast::expand::allocator::AllocatorKind,
-    rustc_hir::DefaultBodyStability,
-    rustc_hir::attrs::Deprecation,
-    rustc_data_structures::svh::Svh,
-    rustc_errors::ErrorGuaranteed,
-    rustc_hir::Constness,
-    rustc_hir::ConstStability,
-    rustc_hir::def_id::DefId,
-    rustc_hir::def_id::DefIndex,
-    rustc_hir::def_id::LocalDefId,
-    rustc_hir::def_id::LocalModDefId,
-    rustc_hir::def::DefKind,
-    rustc_hir::Defaultness,
-    rustc_hir::definitions::DefKey,
-    rustc_hir::CoroutineKind,
-    rustc_hir::HirId,
-    rustc_hir::IsAsync,
-    rustc_hir::ItemLocalId,
-    rustc_hir::LangItem,
-    rustc_hir::OpaqueTyOrigin<rustc_hir::def_id::DefId>,
-    rustc_hir::OwnerId,
-    rustc_hir::Stability,
-    rustc_hir::Upvar,
-    rustc_index::bit_set::FiniteBitSet<u32>,
-    rustc_middle::middle::dependency_format::Linkage,
-    rustc_middle::middle::exported_symbols::SymbolExportInfo,
-    rustc_middle::middle::resolve_bound_vars::ObjectLifetimeDefault,
-    rustc_middle::middle::resolve_bound_vars::ResolvedArg,
-    rustc_middle::middle::stability::DeprecationEntry,
-    rustc_middle::mir::ConstQualifs,
-    rustc_middle::mir::ConstValue,
-    rustc_middle::mir::interpret::AllocId,
-    rustc_middle::mir::interpret::CtfeProvenance,
-    rustc_middle::mir::interpret::ErrorHandled,
-    rustc_middle::thir::ExprId,
-    rustc_middle::traits::CodegenObligationError,
-    rustc_middle::traits::EvaluationResult,
-    rustc_middle::traits::OverflowError,
-    rustc_middle::traits::query::NoSolution,
-    rustc_middle::traits::WellFormedLoc,
-    rustc_middle::ty::adjustment::CoerceUnsizedInfo,
-    rustc_middle::ty::AssocItem,
-    rustc_middle::ty::AssocContainer,
-    rustc_middle::ty::Asyncness,
-    rustc_middle::ty::AsyncDestructor,
-    rustc_middle::ty::BoundVariableKind,
-    rustc_middle::ty::AnonConstKind,
-    rustc_middle::ty::DeducedParamAttrs,
-    rustc_middle::ty::Destructor,
-    rustc_middle::ty::fast_reject::SimplifiedType,
-    rustc_middle::ty::ImplPolarity,
-    rustc_middle::ty::Representability,
-    rustc_middle::ty::UnusedGenericParams,
-    rustc_middle::ty::util::AlwaysRequiresDrop,
-    rustc_middle::ty::Visibility<rustc_span::def_id::DefId>,
-    rustc_session::config::CrateType,
-    rustc_session::config::EntryFnType,
-    rustc_session::config::OptLevel,
-    rustc_session::config::SymbolManglingVersion,
-    rustc_session::cstore::CrateDepKind,
-    rustc_session::cstore::ExternCrate,
-    rustc_session::cstore::LinkagePreference,
-    rustc_session::Limits,
-    rustc_session::lint::LintExpectationId,
-    rustc_span::def_id::CrateNum,
-    rustc_span::def_id::DefPathHash,
-    rustc_span::ExpnHash,
-    rustc_span::ExpnId,
-    rustc_span::Span,
-    rustc_span::Symbol,
-    rustc_span::Ident,
-    rustc_target::spec::PanicStrategy,
-    rustc_target::spec::SanitizerSet,
+    Option<crate::rustc_middle::ty::IntrinsicDef>,
+    Option<crate::rustc_abi::Align>,
+    Result<(), crate::rustc_errors::ErrorGuaranteed>,
+    Result<(), crate::rustc_middle::traits::query::NoSolution>,
+    Result<crate::rustc_middle::traits::EvaluationResult, crate::rustc_middle::traits::OverflowError>,
+    crate::rustc_abi::ReprOptions,
+    crate::rustc_ast::expand::allocator::AllocatorKind,
+    crate::rustc_hir::DefaultBodyStability,
+    crate::rustc_hir::attrs::Deprecation,
+    crate::rustc_data_structures::svh::Svh,
+    crate::rustc_errors::ErrorGuaranteed,
+    crate::rustc_hir::Constness,
+    crate::rustc_hir::ConstStability,
+    crate::rustc_hir::def_id::DefId,
+    crate::rustc_hir::def_id::DefIndex,
+    crate::rustc_hir::def_id::LocalDefId,
+    crate::rustc_hir::def_id::LocalModDefId,
+    crate::rustc_hir::def::DefKind,
+    crate::rustc_hir::Defaultness,
+    crate::rustc_hir::definitions::DefKey,
+    crate::rustc_hir::CoroutineKind,
+    crate::rustc_hir::HirId,
+    crate::rustc_hir::IsAsync,
+    crate::rustc_hir::ItemLocalId,
+    crate::rustc_hir::LangItem,
+    crate::rustc_hir::OpaqueTyOrigin<crate::rustc_hir::def_id::DefId>,
+    crate::rustc_hir::OwnerId,
+    crate::rustc_hir::Stability,
+    crate::rustc_hir::Upvar,
+    crate::rustc_index::bit_set::FiniteBitSet<u32>,
+    crate::rustc_middle::middle::dependency_format::Linkage,
+    crate::rustc_middle::middle::exported_symbols::SymbolExportInfo,
+    crate::rustc_middle::middle::resolve_bound_vars::ObjectLifetimeDefault,
+    crate::rustc_middle::middle::resolve_bound_vars::ResolvedArg,
+    crate::rustc_middle::middle::stability::DeprecationEntry,
+    crate::rustc_middle::mir::ConstQualifs,
+    crate::rustc_middle::mir::ConstValue,
+    crate::rustc_middle::mir::interpret::AllocId,
+    crate::rustc_middle::mir::interpret::CtfeProvenance,
+    crate::rustc_middle::mir::interpret::ErrorHandled,
+    crate::rustc_middle::thir::ExprId,
+    crate::rustc_middle::traits::CodegenObligationError,
+    crate::rustc_middle::traits::EvaluationResult,
+    crate::rustc_middle::traits::OverflowError,
+    crate::rustc_middle::traits::query::NoSolution,
+    crate::rustc_middle::traits::WellFormedLoc,
+    crate::rustc_middle::ty::adjustment::CoerceUnsizedInfo,
+    crate::rustc_middle::ty::AssocItem,
+    crate::rustc_middle::ty::AssocContainer,
+    crate::rustc_middle::ty::Asyncness,
+    crate::rustc_middle::ty::AsyncDestructor,
+    crate::rustc_middle::ty::BoundVariableKind,
+    crate::rustc_middle::ty::AnonConstKind,
+    crate::rustc_middle::ty::DeducedParamAttrs,
+    crate::rustc_middle::ty::Destructor,
+    crate::rustc_middle::ty::fast_reject::SimplifiedType,
+    crate::rustc_middle::ty::ImplPolarity,
+    crate::rustc_middle::ty::Representability,
+    crate::rustc_middle::ty::UnusedGenericParams,
+    crate::rustc_middle::ty::util::AlwaysRequiresDrop,
+    crate::rustc_middle::ty::Visibility<crate::rustc_span::def_id::DefId>,
+    crate::rustc_session::config::CrateType,
+    crate::rustc_session::config::EntryFnType,
+    crate::rustc_session::config::OptLevel,
+    crate::rustc_session::config::SymbolManglingVersion,
+    crate::rustc_session::cstore::CrateDepKind,
+    crate::rustc_session::cstore::ExternCrate,
+    crate::rustc_session::cstore::LinkagePreference,
+    crate::rustc_session::Limits,
+    crate::rustc_session::lint::LintExpectationId,
+    crate::rustc_span::def_id::CrateNum,
+    crate::rustc_span::def_id::DefPathHash,
+    crate::rustc_span::ExpnHash,
+    crate::rustc_span::ExpnId,
+    crate::rustc_span::Span,
+    crate::rustc_span::Symbol,
+    crate::rustc_span::Ident,
+    crate::rustc_target::spec::PanicStrategy,
+    crate::rustc_target::spec::SanitizerSet,
     rustc_type_ir::Variance,
     u32,
     usize,
@@ -619,44 +619,44 @@ macro_rules! tcx_lifetime {
 
 ```rust
 tcx_lifetime! {
-    rustc_middle::middle::exported_symbols::ExportedSymbol,
-    rustc_middle::mir::Const,
-    rustc_middle::mir::DestructuredConstant,
-    rustc_middle::mir::ConstAlloc,
-    rustc_middle::mir::interpret::GlobalId,
-    rustc_middle::mir::interpret::LitToConstInput,
-    rustc_middle::mir::interpret::EvalStaticInitializerRawResult,
-    rustc_middle::mir::mono::MonoItemPartitions,
-    rustc_middle::traits::query::MethodAutoderefStepsResult,
-    rustc_middle::traits::query::type_op::AscribeUserType,
-    rustc_middle::traits::query::type_op::Eq,
-    rustc_middle::traits::query::type_op::ProvePredicate,
-    rustc_middle::traits::query::type_op::Subtype,
-    rustc_middle::ty::AdtDef,
-    rustc_middle::ty::AliasTy,
-    rustc_middle::ty::ClauseKind,
-    rustc_middle::ty::ClosureTypeInfo,
-    rustc_middle::ty::Const,
-    rustc_middle::ty::DestructuredConst,
-    rustc_middle::ty::ExistentialTraitRef,
-    rustc_middle::ty::FnSig,
-    rustc_middle::ty::GenericArg,
-    rustc_middle::ty::GenericPredicates,
-    rustc_middle::ty::ConstConditions,
-    rustc_middle::ty::inhabitedness::InhabitedPredicate,
-    rustc_middle::ty::Instance,
-    rustc_middle::ty::InstanceKind,
-    rustc_middle::ty::layout::FnAbiError,
-    rustc_middle::ty::layout::LayoutError,
-    rustc_middle::ty::ParamEnv,
-    rustc_middle::ty::TypingEnv,
-    rustc_middle::ty::Predicate,
-    rustc_middle::ty::SymbolName,
-    rustc_middle::ty::TraitRef,
-    rustc_middle::ty::Ty,
-    rustc_middle::ty::UnevaluatedConst,
-    rustc_middle::ty::ValTree,
-    rustc_middle::ty::VtblEntry,
+    crate::rustc_middle::middle::exported_symbols::ExportedSymbol,
+    crate::rustc_middle::mir::Const,
+    crate::rustc_middle::mir::DestructuredConstant,
+    crate::rustc_middle::mir::ConstAlloc,
+    crate::rustc_middle::mir::interpret::GlobalId,
+    crate::rustc_middle::mir::interpret::LitToConstInput,
+    crate::rustc_middle::mir::interpret::EvalStaticInitializerRawResult,
+    crate::rustc_middle::mir::mono::MonoItemPartitions,
+    crate::rustc_middle::traits::query::MethodAutoderefStepsResult,
+    crate::rustc_middle::traits::query::type_op::AscribeUserType,
+    crate::rustc_middle::traits::query::type_op::Eq,
+    crate::rustc_middle::traits::query::type_op::ProvePredicate,
+    crate::rustc_middle::traits::query::type_op::Subtype,
+    crate::rustc_middle::ty::AdtDef,
+    crate::rustc_middle::ty::AliasTy,
+    crate::rustc_middle::ty::ClauseKind,
+    crate::rustc_middle::ty::ClosureTypeInfo,
+    crate::rustc_middle::ty::Const,
+    crate::rustc_middle::ty::DestructuredConst,
+    crate::rustc_middle::ty::ExistentialTraitRef,
+    crate::rustc_middle::ty::FnSig,
+    crate::rustc_middle::ty::GenericArg,
+    crate::rustc_middle::ty::GenericPredicates,
+    crate::rustc_middle::ty::ConstConditions,
+    crate::rustc_middle::ty::inhabitedness::InhabitedPredicate,
+    crate::rustc_middle::ty::Instance,
+    crate::rustc_middle::ty::InstanceKind,
+    crate::rustc_middle::ty::layout::FnAbiError,
+    crate::rustc_middle::ty::layout::LayoutError,
+    crate::rustc_middle::ty::ParamEnv,
+    crate::rustc_middle::ty::TypingEnv,
+    crate::rustc_middle::ty::Predicate,
+    crate::rustc_middle::ty::SymbolName,
+    crate::rustc_middle::ty::TraitRef,
+    crate::rustc_middle::ty::Ty,
+    crate::rustc_middle::ty::UnevaluatedConst,
+    crate::rustc_middle::ty::ValTree,
+    crate::rustc_middle::ty::VtblEntry,
 }
 ```
 

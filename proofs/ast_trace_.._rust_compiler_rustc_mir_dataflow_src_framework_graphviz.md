@@ -6,7 +6,7 @@ Generated 28 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=8
 
 ```rust
-//! A helpful diagram for debugging dataflow problems.
+// A helpful diagram for debugging dataflow problems.
 
 use std::borrow::Cow;
 use std::cell::RefCell;
@@ -21,8 +21,8 @@ use std::{io, ops, str};
 
 ```rust
 use regex::Regex;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::mir::{
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::mir::{
     self, BasicBlock, Body, Location, MirDumper, graphviz_safe_def_name, traversal,
 };
 ```
@@ -31,10 +31,10 @@ use rustc_middle::mir::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_middle::ty::print::with_no_trimmed_paths;
-use rustc_span::def_id::DefId;
-use rustc_span::{Symbol, sym};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{Symbol, sym};
 ```
 
 ## Block 4

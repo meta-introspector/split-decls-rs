@@ -9,22 +9,22 @@ Generated 13 AST blocks from source file
 use core::ops::ControlFlow;
 
 use rustc_ast as ast;
-use rustc_ast::visit::visit_opt;
-use rustc_ast::{EnumDef, VariantData, attr};
+use crate::rustc_complete::visit::visit_opt;
+use crate::rustc_complete::{EnumDef, VariantData, attr};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_expand::base::{Annotatable, DummyResult, ExtCtxt};
+use crate::rustc_expand::base::{Annotatable, DummyResult, ExtCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ErrorGuaranteed, Ident, Span, kw, sym};
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, kw, sym};
 ```
 
 ## Block 4
@@ -160,7 +160,7 @@ fn default_enum_substructure(
                     vec![Ident::new(kw::SelfUpper, default_variant.span), default_variant.ident],
                 )),
                 VariantData::Struct { fields, .. } => {
-                    // This only happens if `#![feature(default_field_values)]`. We have validated
+                    // This only happens if `#[feature(default_field_values)]`. We have validated
                     // all fields have default values in the definition.
                     let default_fields = fields
                         .iter()
@@ -210,7 +210,7 @@ fn extract_default_variant<'a>(
     enum_def: &'a EnumDef,
     trait_span: Span,
     item_span: Span,
-) -> Result<&'a rustc_ast::Variant, ErrorGuaranteed> {
+) -> Result<&'a crate::rustc_ast::Variant, ErrorGuaranteed> {
     let default_variants: SmallVec<[_; 1]> = enum_def
         .variants
         .iter()
@@ -296,7 +296,7 @@ fn extract_default_variant<'a>(
 ```rust
 fn validate_default_attribute(
     cx: &ExtCtxt<'_>,
-    default_variant: &rustc_ast::Variant,
+    default_variant: &crate::rustc_ast::Variant,
 ) -> Result<(), ErrorGuaranteed> {
     let attrs: SmallVec<[_; 1]> =
         attr::filter_by_name(&default_variant.attrs, kw::Default).collect();
@@ -344,8 +344,8 @@ struct DetectNonVariantDefaultAttr<'a, 'b> {
 **Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=visit_attribute | COMPLEXITY=18 | LINES=24
 
 ```rust
-impl<'a, 'b> rustc_ast::visit::Visitor<'a> for DetectNonVariantDefaultAttr<'a, 'b> {
-    fn visit_attribute(&mut self, attr: &'a rustc_ast::Attribute) {
+impl<'a, 'b> crate::rustc_ast::visit::Visitor<'a> for DetectNonVariantDefaultAttr<'a, 'b> {
+    fn visit_attribute(&mut self, attr: &'a crate::rustc_ast::Attribute) {
         if attr.has_name(kw::Default) {
             let post = if self.cx.ecfg.features.default_field_values() {
                 " or variants where every field has a default value"
@@ -355,15 +355,15 @@ impl<'a, 'b> rustc_ast::visit::Visitor<'a> for DetectNonVariantDefaultAttr<'a, '
             self.cx.dcx().emit_err(errors::NonUnitDefault { span: attr.span, post });
         }
 
-        rustc_ast::visit::walk_attribute(self, attr);
+        crate::rustc_ast::visit::walk_attribute(self, attr);
     }
-    fn visit_variant(&mut self, v: &'a rustc_ast::Variant) {
+    fn visit_variant(&mut self, v: &'a crate::rustc_ast::Variant) {
         self.visit_ident(&v.ident);
         self.visit_vis(&v.vis);
         self.visit_variant_data(&v.data);
         visit_opt!(self, visit_anon_const, &v.disr_expr);
         for attr in &v.attrs {
-            rustc_ast::visit::walk_attribute(self, attr);
+            crate::rustc_ast::visit::walk_attribute(self, attr);
         }
     }
 }
@@ -376,9 +376,9 @@ impl<'a, 'b> rustc_ast::visit::Visitor<'a> for DetectNonVariantDefaultAttr<'a, '
 fn has_a_default_variant(item: &Annotatable) -> bool {
     struct HasDefaultAttrOnVariant;
 
-    impl<'ast> rustc_ast::visit::Visitor<'ast> for HasDefaultAttrOnVariant {
+    impl<'ast> crate::rustc_ast::visit::Visitor<'ast> for HasDefaultAttrOnVariant {
         type Result = ControlFlow<()>;
-        fn visit_variant(&mut self, v: &'ast rustc_ast::Variant) -> ControlFlow<()> {
+        fn visit_variant(&mut self, v: &'ast crate::rustc_ast::Variant) -> ControlFlow<()> {
             if v.attrs.iter().any(|attr| attr.has_name(kw::Default)) {
                 ControlFlow::Break(())
             } else {

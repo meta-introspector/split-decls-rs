@@ -6,18 +6,18 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_index::IndexVec;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::bug;
-use rustc_middle::mir::visit::{MutVisitor, PlaceContext, Visitor};
+use crate::rustc_index::IndexVec;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext, Visitor};
 ```
 
 ## Block 2
-**Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=50 | LINES=86
+**Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=51 | LINES=86
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 
 /// Various parts of MIR building introduce temporaries that are commonly not needed.
 ///
@@ -36,7 +36,7 @@ use rustc_middle::ty::TyCtxt;
 pub(super) struct SingleUseConsts;
 
 impl<'tcx> crate::MirPass<'tcx> for SingleUseConsts {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() > 0
     }
 

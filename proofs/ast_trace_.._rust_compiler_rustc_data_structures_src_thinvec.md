@@ -6,9 +6,9 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5
 
 ```rust
-//! This is a copy-paste of `Vec::extract_if` for `ThinVec`.
-//!
-//! FIXME: <https://github.com/Gankra/thin-vec/pull/66> is merged, this can be removed.
+// This is a copy-paste of `Vec::extract_if` for `ThinVec`.
+//
+// FIXME: <https://github.com/Gankra/thin-vec/pull/66> is merged, this can be removed.
 
 use std::{ptr, slice};
 ```

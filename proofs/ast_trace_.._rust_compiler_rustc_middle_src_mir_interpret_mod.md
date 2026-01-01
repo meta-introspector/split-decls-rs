@@ -6,7 +6,7 @@ Generated 33 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=11
 
 ```rust
-//! An interpreter for MIR used in CTFE and by miri.
+// An interpreter for MIR used in CTFE and by miri.
 
 #[macro_use]
 mod error;
@@ -31,31 +31,31 @@ use std::{fmt, io};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::{AddressSpace, Align, Endian, HasDataLayout, Size};
+use crate::rustc_abi::{AddressSpace, Align, Endian, HasDataLayout, Size};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{LitKind, Mutability};
+use crate::rustc_complete::{LitKind, Mutability};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_data_structures::sharded::ShardedHashMap;
-use rustc_data_structures::sync::{AtomicU64, Lock};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::sharded::ShardedHashMap;
+use crate::rustc_data_structures::sync::{AtomicU64, Lock};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 7
@@ -69,7 +69,7 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisit
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_serialize::{Decodable, Encodable};
+use crate::rustc_serialize::{Decodable, Encodable};
 ```
 
 ## Block 9

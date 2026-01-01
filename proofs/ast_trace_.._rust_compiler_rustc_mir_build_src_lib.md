@@ -6,15 +6,15 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=23
 
 ```rust
-//! Construction of MIR from HIR.
+// Construction of MIR from HIR.
 
 // tidy-alphabetical-start
-#![allow(rustc::diagnostic_outside_of_impl)]
-#![allow(rustc::untranslatable_diagnostic)]
-#![feature(assert_matches)]
-#![feature(box_patterns)]
-#![feature(if_let_guard)]
-#![feature(try_blocks)]
+#[allow(rustc::diagnostic_outside_of_impl)]
+#[allow(rustc::untranslatable_diagnostic)]
+#[feature(assert_matches)]
+#[feature(box_patterns)]
+#[feature(if_let_guard)]
+#[feature(try_blocks)]
 // tidy-alphabetical-end
 
 // The `builder` module used to be named `build`, but that was causing GitHub's
@@ -26,7 +26,7 @@ mod check_unsafety;
 mod errors;
 pub mod thir;
 
-use rustc_middle::util::Providers;
+use crate::rustc_complete::util::Providers;
 
 rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
 ```

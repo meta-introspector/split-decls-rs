@@ -6,16 +6,16 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=16 | LINES=27
 
 ```rust
-//! This pass removes `PlaceMention` statement, which has no effect at codegen.
+// This pass removes `PlaceMention` statement, which has no effect at codegen.
 
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::trace;
 
 pub(super) struct RemovePlaceMention;
 
 impl<'tcx> crate::MirPass<'tcx> for RemovePlaceMention {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         !sess.opts.unstable_opts.mir_preserve_ub
     }
 

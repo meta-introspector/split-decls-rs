@@ -52,7 +52,7 @@ impl<S: Stage> SingleAttributeParser<S> for RustcLayoutScalarValidRangeEnd {
 pub(crate) struct RustcObjectLifetimeDefaultParser;
 
 impl<S: Stage> SingleAttributeParser<S> for RustcObjectLifetimeDefaultParser {
-    const PATH: &[rustc_span::Symbol] = &[sym::rustc_object_lifetime_default];
+    const PATH: &[crate::rustc_span::Symbol] = &[sym::rustc_object_lifetime_default];
     const ATTRIBUTE_ORDER: AttributeOrder = AttributeOrder::KeepInnermost;
     const ON_DUPLICATE: OnDuplicate<S> = OnDuplicate::Error;
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Struct)]);

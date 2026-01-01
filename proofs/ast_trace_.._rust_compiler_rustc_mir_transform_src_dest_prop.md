@@ -6,179 +6,179 @@ Generated 24 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-//! Propagates assignment destinations backwards in the CFG to eliminate redundant assignments.
-//!
-//! # Motivation
-//!
-//! MIR building can insert a lot of redundant copies, and Rust code in general often tends to move
-//! values around a lot. The result is a lot of assignments of the form `dest = {move} src;` in MIR.
+// Propagates assignment destinations backwards in the CFG to eliminate redundant assignments.
+//
+// # Motivation
+//
+// MIR building can insert a lot of redundant copies, and Rust code in general often tends to move
+// values around a lot. The result is a lot of assignments of the form `dest = {move} src;` in MIR.
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=49 | LINES=137
 
 ```rust
-//! MIR building for constants in particular tends to create additional locals that are only used
-//! inside a single block to shuffle a value around unnecessarily.
-//!
-//! LLVM by itself is not good enough at eliminating these redundant copies (eg. see
-//! <https://github.com/rust-lang/rust/issues/32966>), so this leaves some performance on the table
-//! that we can regain by implementing an optimization for removing these assign statements in rustc
-//! itself. When this optimization runs fast enough, it can also speed up the constant evaluation
-//! and code generation phases of rustc due to the reduced number of statements and locals.
-//!
-//! # The Optimization
-//!
-//! Conceptually, this optimization is "destination propagation". It is similar to the Named Return
-//! Value Optimization, or NRVO, known from the C++ world, except that it isn't limited to return
-//! values or the return place `_0`. On a very high level, independent of the actual implementation
-//! details, it does the following:
-//!
-//! 1) Identify `dest = src;` statements with values for `dest` and `src` whose storage can soundly
-//!    be merged.
-//! 2) Replace all mentions of `src` with `dest` ("unifying" them and propagating the destination
-//!    backwards).
-//! 3) Delete the `dest = src;` statement (by making it a `nop`).
-//!
-//! Step 1) is by far the hardest, so it is explained in more detail below.
-//!
-//! ## Soundness
-//!
-//! We have a pair of places `p` and `q`, whose memory we would like to merge. In order for this to
-//! be sound, we need to check a number of conditions:
-//!
-//! * `p` and `q` must both be *constant* - it does not make much sense to talk about merging them
-//!   if they do not consistently refer to the same place in memory. This is satisfied if they do
-//!   not contain any indirection through a pointer or any indexing projections.
-//!
-//! * `p` and `q` must have the **same type**. If we replace a local with a subtype or supertype,
-//!   we may end up with a different vtable for that local. See the `subtyping-impacts-selection`
-//!   tests for an example where that causes issues.
-//!
-//! * We need to make sure that the goal of "merging the memory" is actually structurally possible
-//!   in MIR. For example, even if all the other conditions are satisfied, there is no way to
-//!   "merge" `_5.foo` and `_6.bar`. For now, we ensure this by requiring that both `p` and `q` are
-//!   locals with no further projections. Future iterations of this pass should improve on this.
-//!
-//! * Finally, we want `p` and `q` to use the same memory - however, we still need to make sure that
-//!   each of them has enough "ownership" of that memory to continue "doing its job." More
-//!   precisely, what we will check is that whenever the program performs a write to `p`, then it
-//!   does not currently care about what the value in `q` is (and vice versa). We formalize the
-//!   notion of "does not care what the value in `q` is" by checking the *liveness* of `q`.
-//!
-//!   Because of the difficulty of computing liveness of places that have their address taken, we do
-//!   not even attempt to do it. Any places that are in a local that has its address taken is
-//!   excluded from the optimization.
-//!
-//! The first two conditions are simple structural requirements on the `Assign` statements that can
-//! be trivially checked. The third requirement however is more difficult and costly to check.
-//!
-//! ## Current implementation
-//!
-//! The current implementation relies on live range computation to check for conflicts. We only
-//! allow to merge locals that have disjoint live ranges. The live range are defined with
-//! half-statement granularity, so as to make all writes be live for at least a half statement.
-//!
-//! ## Future Improvements
-//!
-//! There are a number of ways in which this pass could be improved in the future:
-//!
-//! * Merging storage liveness ranges instead of removing storage statements completely. This may
-//!   improve stack usage.
-//!
-//! * Allow merging locals into places with projections, eg `_5` into `_6.foo`.
-//!
-//! * Liveness analysis with more precision than whole locals at a time. The smaller benefit of this
-//!   is that it would allow us to dest prop at "sub-local" levels in some cases. The bigger benefit
-//!   of this is that such liveness analysis can report more accurate results about whole locals at
-//!   a time. For example, consider:
-//!
-//!   ```ignore (syntax-highlighting-only)
-//!   _1 = u;
-//!   // unrelated code
-//!   _1.f1 = v;
-//!   _2 = _1.f1;
-//!   ```
-//!
-//!   Because the current analysis only thinks in terms of locals, it does not have enough
-//!   information to report that `_1` is dead in the "unrelated code" section.
-//!
-//! * Liveness analysis enabled by alias analysis. This would allow us to not just bail on locals
-//!   that ever have their address taken. Of course that requires actually having alias analysis
-//!   (and a model to build it on), so this might be a bit of a ways off.
-//!
-//! * Various perf improvements. There are a bunch of comments in here marked `PERF` with ideas for
-//!   how to do things more efficiently. However, the complexity of the pass as a whole should be
-//!   kept in mind.
-//!
-//! ## Previous Work
-//!
-//! A [previous attempt][attempt 1] at implementing an optimization like this turned out to be a
-//! significant regression in compiler performance. Fixing the regressions introduced a lot of
-//! undesirable complexity to the implementation.
-//!
-//! A [subsequent approach][attempt 2] tried to avoid the costly computation by limiting itself to
-//! acyclic CFGs, but still turned out to be far too costly to run due to suboptimal performance
-//! within individual basic blocks, requiring a walk across the entire block for every assignment
-//! found within the block. For the `tuple-stress` benchmark, which has 458745 statements in a
-//! single block, this proved to be far too costly.
-//!
-//! [Another approach after that][attempt 3] was much closer to correct, but had some soundness
-//! issues - it was failing to consider stores outside live ranges, and failed to uphold some of the
-//! requirements that MIR has for non-overlapping places within statements. However, it also had
-//! performance issues caused by `O(l² * s)` runtime, where `l` is the number of locals and `s` is
-//! the number of statements and terminators.
-//!
-//! Since the first attempt at this, the compiler has improved dramatically, and new analysis
-//! frameworks have been added that should make this approach viable without requiring a limited
-//! approach that only works for some classes of CFGs:
-//! - rustc now has a powerful dataflow analysis framework that can handle forwards and backwards
-//!   analyses efficiently.
-//! - Layout optimizations for coroutines have been added to improve code generation for
-//!   async/await, which are very similar in spirit to what this optimization does.
-//!
-//! [The next approach][attempt 4] computes a conflict matrix between locals by forbidding merging
-//! locals with competing writes or with one write while the other is live.
-//!
-//! ## Pre/Post Optimization
-//!
-//! It is recommended to run `SimplifyCfg` and then `SimplifyLocals` some time after this pass, as
-//! it replaces the eliminated assign statements with `nop`s and leaves unused locals behind.
-//!
-//! [liveness]: https://en.wikipedia.org/wiki/Live_variable_analysis
-//! [attempt 1]: https://github.com/rust-lang/rust/pull/47954
-//! [attempt 2]: https://github.com/rust-lang/rust/pull/71003
-//! [attempt 3]: https://github.com/rust-lang/rust/pull/72632
-//! [attempt 4]: https://github.com/rust-lang/rust/pull/96451
+// MIR building for constants in particular tends to create additional locals that are only used
+// inside a single block to shuffle a value around unnecessarily.
+//
+// LLVM by itself is not good enough at eliminating these redundant copies (eg. see
+// <https://github.com/rust-lang/rust/issues/32966>), so this leaves some performance on the table
+// that we can regain by implementing an optimization for removing these assign statements in rustc
+// itself. When this optimization runs fast enough, it can also speed up the constant evaluation
+// and code generation phases of rustc due to the reduced number of statements and locals.
+//
+// # The Optimization
+//
+// Conceptually, this optimization is "destination propagation". It is similar to the Named Return
+// Value Optimization, or NRVO, known from the C++ world, except that it isn't limited to return
+// values or the return place `_0`. On a very high level, independent of the actual implementation
+// details, it does the following:
+//
+// 1) Identify `dest = src;` statements with values for `dest` and `src` whose storage can soundly
+//    be merged.
+// 2) Replace all mentions of `src` with `dest` ("unifying" them and propagating the destination
+//    backwards).
+// 3) Delete the `dest = src;` statement (by making it a `nop`).
+//
+// Step 1) is by far the hardest, so it is explained in more detail below.
+//
+// ## Soundness
+//
+// We have a pair of places `p` and `q`, whose memory we would like to merge. In order for this to
+// be sound, we need to check a number of conditions:
+//
+// * `p` and `q` must both be *constant* - it does not make much sense to talk about merging them
+//   if they do not consistently refer to the same place in memory. This is satisfied if they do
+//   not contain any indirection through a pointer or any indexing projections.
+//
+// * `p` and `q` must have the **same type**. If we replace a local with a subtype or supertype,
+//   we may end up with a different vtable for that local. See the `subtyping-impacts-selection`
+//   tests for an example where that causes issues.
+//
+// * We need to make sure that the goal of "merging the memory" is actually structurally possible
+//   in MIR. For example, even if all the other conditions are satisfied, there is no way to
+//   "merge" `_5.foo` and `_6.bar`. For now, we ensure this by requiring that both `p` and `q` are
+//   locals with no further projections. Future iterations of this pass should improve on this.
+//
+// * Finally, we want `p` and `q` to use the same memory - however, we still need to make sure that
+//   each of them has enough "ownership" of that memory to continue "doing its job." More
+//   precisely, what we will check is that whenever the program performs a write to `p`, then it
+//   does not currently care about what the value in `q` is (and vice versa). We formalize the
+//   notion of "does not care what the value in `q` is" by checking the *liveness* of `q`.
+//
+//   Because of the difficulty of computing liveness of places that have their address taken, we do
+//   not even attempt to do it. Any places that are in a local that has its address taken is
+//   excluded from the optimization.
+//
+// The first two conditions are simple structural requirements on the `Assign` statements that can
+// be trivially checked. The third requirement however is more difficult and costly to check.
+//
+// ## Current implementation
+//
+// The current implementation relies on live range computation to check for conflicts. We only
+// allow to merge locals that have disjoint live ranges. The live range are defined with
+// half-statement granularity, so as to make all writes be live for at least a half statement.
+//
+// ## Future Improvements
+//
+// There are a number of ways in which this pass could be improved in the future:
+//
+// * Merging storage liveness ranges instead of removing storage statements completely. This may
+//   improve stack usage.
+//
+// * Allow merging locals into places with projections, eg `_5` into `_6.foo`.
+//
+// * Liveness analysis with more precision than whole locals at a time. The smaller benefit of this
+//   is that it would allow us to dest prop at "sub-local" levels in some cases. The bigger benefit
+//   of this is that such liveness analysis can report more accurate results about whole locals at
+//   a time. For example, consider:
+//
+//   ```ignore (syntax-highlighting-only)
+//   _1 = u;
+//   // unrelated code
+//   _1.f1 = v;
+//   _2 = _1.f1;
+//   ```
+//
+//   Because the current analysis only thinks in terms of locals, it does not have enough
+//   information to report that `_1` is dead in the "unrelated code" section.
+//
+// * Liveness analysis enabled by alias analysis. This would allow us to not just bail on locals
+//   that ever have their address taken. Of course that requires actually having alias analysis
+//   (and a model to build it on), so this might be a bit of a ways off.
+//
+// * Various perf improvements. There are a bunch of comments in here marked `PERF` with ideas for
+//   how to do things more efficiently. However, the complexity of the pass as a whole should be
+//   kept in mind.
+//
+// ## Previous Work
+//
+// A [previous attempt][attempt 1] at implementing an optimization like this turned out to be a
+// significant regression in compiler performance. Fixing the regressions introduced a lot of
+// undesirable complexity to the implementation.
+//
+// A [subsequent approach][attempt 2] tried to avoid the costly computation by limiting itself to
+// acyclic CFGs, but still turned out to be far too costly to run due to suboptimal performance
+// within individual basic blocks, requiring a walk across the entire block for every assignment
+// found within the block. For the `tuple-stress` benchmark, which has 458745 statements in a
+// single block, this proved to be far too costly.
+//
+// [Another approach after that][attempt 3] was much closer to correct, but had some soundness
+// issues - it was failing to consider stores outside live ranges, and failed to uphold some of the
+// requirements that MIR has for non-overlapping places within statements. However, it also had
+// performance issues caused by `O(l² * s)` runtime, where `l` is the number of locals and `s` is
+// the number of statements and terminators.
+//
+// Since the first attempt at this, the compiler has improved dramatically, and new analysis
+// frameworks have been added that should make this approach viable without requiring a limited
+// approach that only works for some classes of CFGs:
+// - rustc now has a powerful dataflow analysis framework that can handle forwards and backwards
+//   analyses efficiently.
+// - Layout optimizations for coroutines have been added to improve code generation for
+//   async/await, which are very similar in spirit to what this optimization does.
+//
+// [The next approach][attempt 4] computes a conflict matrix between locals by forbidding merging
+// locals with competing writes or with one write while the other is live.
+//
+// ## Pre/Post Optimization
+//
+// It is recommended to run `SimplifyCfg` and then `SimplifyLocals` some time after this pass, as
+// it replaces the eliminated assign statements with `nop`s and leaves unused locals behind.
+//
+// [liveness]: https://en.wikipedia.org/wiki/Live_variable_analysis
+// [attempt 1]: https://github.com/rust-lang/rust/pull/47954
+// [attempt 2]: https://github.com/rust-lang/rust/pull/71003
+// [attempt 3]: https://github.com/rust-lang/rust/pull/72632
+// [attempt 4]: https://github.com/rust-lang/rust/pull/96451
 
-use rustc_data_structures::union_find::UnionFind;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_index::interval::SparseIntervalMatrix;
-use rustc_index::{IndexVec, newtype_index};
+use crate::rustc_data_structures::union_find::UnionFind;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_index::interval::SparseIntervalMatrix;
+use crate::rustc_index::{IndexVec, newtype_index};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::visit::{MutVisitor, PlaceContext, Visitor};
+use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext, Visitor};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
-use rustc_mir_dataflow::impls::{DefUse, MaybeLiveLocals};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_mir_dataflow::impls::{DefUse, MaybeLiveLocals};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_mir_dataflow::points::DenseLocationMap;
-use rustc_mir_dataflow::{Analysis, Results};
+use crate::rustc_mir_dataflow::points::DenseLocationMap;
+use crate::rustc_mir_dataflow::{Analysis, Results};
 ```
 
 ## Block 6
@@ -195,7 +195,7 @@ use tracing::{debug, trace};
 pub(super) struct DestinationPropagation;
 
 impl<'tcx> crate::MirPass<'tcx> for DestinationPropagation {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         // For now, only run at MIR opt level 3. Two things need to be changed before this can be
         // turned on by default:
         //  1. Because of the overeager removal of storage statements, this can cause stack space
@@ -212,7 +212,7 @@ impl<'tcx> crate::MirPass<'tcx> for DestinationPropagation {
         let def_id = body.source.def_id();
         trace!(?def_id);
 
-        let borrowed = rustc_mir_dataflow::impls::borrowed_locals(body);
+        let borrowed = crate::rustc_mir_dataflow::impls::borrowed_locals(body);
 
         let candidates = Candidates::find(body, &borrowed);
         trace!(?candidates);
@@ -601,7 +601,7 @@ enum Effect {
 **Metadata**: AST_ID=21 | TYPE=STRUCT | NAME=TwoStepIndex | COMPLEXITY=6 | LINES=9
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// A reversed `PointIndex` but with the lower bit encoding early/late inside the statement.
     /// The reversed order allows to use the more efficient `IntervalSet::append` method while we
     /// iterate on the statements in reverse order.

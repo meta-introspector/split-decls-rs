@@ -6,23 +6,23 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_infer::traits::query::type_op::DropckOutlives;
-use rustc_middle::traits::query::{DropckConstraint, DropckOutlivesResult};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_infer::traits::query::type_op::DropckOutlives;
+use crate::rustc_complete::traits::query::{DropckConstraint, DropckOutlivesResult};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, EarlyBinder, ParamEnvAnd, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, EarlyBinder, ParamEnvAnd, Ty, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
 ```
 
@@ -331,25 +331,25 @@ pub fn dtorck_constraint_for_ty_inner<'tcx>(
 
         ty::Pat(ety, _) | ty::Array(ety, _) | ty::Slice(ety) => {
             // single-element containers, behave like their element
-            rustc_data_structures::stack::ensure_sufficient_stack(|| {
+            crate::rustc_data_structures::stack::ensure_sufficient_stack(|| {
                 dtorck_constraint_for_ty_inner(tcx, typing_env, span, depth + 1, *ety, constraints)
             });
         }
 
-        ty::Tuple(tys) => rustc_data_structures::stack::ensure_sufficient_stack(|| {
+        ty::Tuple(tys) => crate::rustc_data_structures::stack::ensure_sufficient_stack(|| {
             for ty in tys.iter() {
                 dtorck_constraint_for_ty_inner(tcx, typing_env, span, depth + 1, ty, constraints);
             }
         }),
 
-        ty::Closure(_, args) => rustc_data_structures::stack::ensure_sufficient_stack(|| {
+        ty::Closure(_, args) => crate::rustc_data_structures::stack::ensure_sufficient_stack(|| {
             for ty in args.as_closure().upvar_tys() {
                 dtorck_constraint_for_ty_inner(tcx, typing_env, span, depth + 1, ty, constraints);
             }
         }),
 
         ty::CoroutineClosure(_, args) => {
-            rustc_data_structures::stack::ensure_sufficient_stack(|| {
+            crate::rustc_data_structures::stack::ensure_sufficient_stack(|| {
                 for ty in args.as_coroutine_closure().upvar_tys() {
                     dtorck_constraint_for_ty_inner(
                         tcx,

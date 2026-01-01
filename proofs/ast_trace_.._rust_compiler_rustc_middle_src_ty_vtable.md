@@ -8,7 +8,7 @@ Generated 7 AST blocks from source file
 ```rust
 use std::fmt;
 
-use rustc_ast::Mutability;
+use crate::rustc_complete::Mutability;
 use rustc_macros::HashStable;
 use rustc_type_ir::elaborate;
 

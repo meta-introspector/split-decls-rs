@@ -6,35 +6,35 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_ast::attr;
-use rustc_ast::entry::EntryPointType;
-use rustc_errors::codes::*;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{CRATE_DEF_ID, DefId, LOCAL_CRATE, LocalDefId};
+use crate::rustc_complete::attr;
+use crate::rustc_complete::entry::EntryPointType;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LOCAL_CRATE, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{CRATE_HIR_ID, ItemId, Node};
+use crate::rustc_complete::{CRATE_HIR_ID, ItemId, Node};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::query::Providers;
-use rustc_middle::ty::TyCtxt;
-use rustc_session::RemapFileNameExt;
-use rustc_session::config::{CrateType, EntryFnType, RemapPathScopeComponents, sigpipe};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::RemapFileNameExt;
+use crate::rustc_complete::config::{CrateType, EntryFnType, RemapPathScopeComponents, sigpipe};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 5
@@ -113,7 +113,7 @@ fn check_and_search_item(id: ItemId, ctxt: &mut EntryContext<'_>) {
     let at_root = ctxt.tcx.opt_local_parent(id.owner_id.def_id) == Some(CRATE_DEF_ID);
 
     let attrs = ctxt.tcx.hir_attrs(id.hir_id());
-    let entry_point_type = rustc_ast::entry::entry_point_type(
+    let entry_point_type = crate::rustc_ast::entry::entry_point_type(
         attrs,
         at_root,
         ctxt.tcx.opt_item_name(id.owner_id.to_def_id()),
@@ -175,10 +175,10 @@ fn configure_main(tcx: TyCtxt<'_>, visitor: &EntryContext<'_>) -> Option<(DefId,
 ```rust
 fn sigpipe(tcx: TyCtxt<'_>) -> u8 {
     match tcx.sess.opts.unstable_opts.on_broken_pipe {
-        rustc_target::spec::OnBrokenPipe::Default => sigpipe::DEFAULT,
-        rustc_target::spec::OnBrokenPipe::Kill => sigpipe::SIG_DFL,
-        rustc_target::spec::OnBrokenPipe::Error => sigpipe::SIG_IGN,
-        rustc_target::spec::OnBrokenPipe::Inherit => sigpipe::INHERIT,
+        crate::rustc_target::spec::OnBrokenPipe::Default => sigpipe::DEFAULT,
+        crate::rustc_target::spec::OnBrokenPipe::Kill => sigpipe::SIG_DFL,
+        crate::rustc_target::spec::OnBrokenPipe::Error => sigpipe::SIG_IGN,
+        crate::rustc_target::spec::OnBrokenPipe::Inherit => sigpipe::INHERIT,
     }
 }
 ```

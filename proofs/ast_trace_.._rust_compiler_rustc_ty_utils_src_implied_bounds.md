@@ -8,26 +8,26 @@ Generated 6 AST blocks from source file
 ```rust
 use std::iter;
 
-use rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::fx::FxHashMap;
 use rustc_hir as hir;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::LocalDefId;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::{self, Ty, TyCtxt, fold_regions};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, fold_regions};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=12
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers {

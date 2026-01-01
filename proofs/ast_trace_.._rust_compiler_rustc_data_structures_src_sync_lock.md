@@ -6,8 +6,8 @@ Generated 16 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10
 
 ```rust
-//! This module implements a lock which only uses synchronization if `might_be_dyn_thread_safe` is true.
-//! It implements `DynSend` and `DynSync` instead of the typical `Send` and `Sync` traits.
+// This module implements a lock which only uses synchronization if `might_be_dyn_thread_safe` is true.
+// It implements `DynSend` and `DynSync` instead of the typical `Send` and `Sync` traits.
 
 use std::fmt;
 

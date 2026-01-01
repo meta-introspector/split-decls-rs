@@ -52,9 +52,9 @@ use llvm::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_codegen_ssa::back::link::ensure_removed;
-use rustc_codegen_ssa::back::versioned_llvm_target;
-use rustc_codegen_ssa::back::write::{
+use crate::rustc_codegen_ssa::back::link::ensure_removed;
+use crate::rustc_codegen_ssa::back::versioned_llvm_target;
+use crate::rustc_codegen_ssa::back::write::{
     BitcodeSection, CodegenContext, EmitObj, ModuleConfig, TargetMachineFactoryConfig,
     TargetMachineFactoryFn,
 };
@@ -64,18 +64,18 @@ use rustc_codegen_ssa::back::write::{
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_codegen_ssa::base::wants_wasm_eh;
-use rustc_codegen_ssa::traits::*;
-use rustc_codegen_ssa::{CompiledModule, ModuleCodegen, ModuleKind};
+use crate::rustc_codegen_ssa::base::wants_wasm_eh;
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_codegen_ssa::{CompiledModule, ModuleCodegen, ModuleKind};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::profiling::SelfProfilerRef;
-use rustc_data_structures::small_c_str::SmallCStr;
-use rustc_errors::{DiagCtxtHandle, Level};
+use crate::rustc_data_structures::profiling::SelfProfilerRef;
+use crate::rustc_data_structures::small_c_str::SmallCStr;
+use crate::rustc_complete::{DiagCtxtHandle, Level};
 ```
 
 ## Block 10
@@ -89,9 +89,9 @@ use rustc_fs_util::{link_or_copy, path_to_c_string};
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_session::Session;
-use rustc_session::config::{
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{
     self, Lto, OutputType, Passes, RemapPathScopeComponents, SplitDwarfKind, SwitchWithOptPath,
 };
 ```
@@ -100,14 +100,14 @@ use rustc_session::config::{
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{BytePos, InnerSpan, Pos, SpanData, SyntaxContext, sym};
+use crate::rustc_complete::{BytePos, InnerSpan, Pos, SpanData, SyntaxContext, sym};
 ```
 
 ## Block 13
 **Metadata**: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_target::spec::{CodeModel, FloatAbi, RelocModel, SanitizerSet, SplitDebuginfo, TlsModel};
+use crate::rustc_target::spec::{CodeModel, FloatAbi, RelocModel, SanitizerSet, SplitDebuginfo, TlsModel};
 ```
 
 ## Block 14
@@ -427,17 +427,17 @@ pub(crate) fn target_machine_factory(
 
     let debuginfo_compression = sess.opts.debuginfo_compression.to_string();
     match sess.opts.debuginfo_compression {
-        rustc_session::config::DebugInfoCompression::Zlib => {
+        crate::rustc_session::config::DebugInfoCompression::Zlib => {
             if !unsafe { LLVMRustLLVMHasZlibCompressionForDebugSymbols() } {
                 sess.dcx().emit_warn(UnknownCompression { algorithm: "zlib" });
             }
         }
-        rustc_session::config::DebugInfoCompression::Zstd => {
+        crate::rustc_session::config::DebugInfoCompression::Zstd => {
             if !unsafe { LLVMRustLLVMHasZstdCompressionForDebugSymbols() } {
                 sess.dcx().emit_warn(UnknownCompression { algorithm: "zstd" });
             }
         }
-        rustc_session::config::DebugInfoCompression::None => {}
+        crate::rustc_session::config::DebugInfoCompression::None => {}
     };
     let debuginfo_compression = SmallCStr::new(&debuginfo_compression);
 

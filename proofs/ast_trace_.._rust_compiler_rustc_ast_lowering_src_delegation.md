@@ -6,61 +6,61 @@ Generated 15 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! This module implements expansion of delegation items with early resolved paths.
-//! It includes a delegation to a free functions:
-//!
-//! ```ignore (illustrative)
-//! reuse module::name { target_expr_template }
+// This module implements expansion of delegation items with early resolved paths.
+// It includes a delegation to a free functions:
+//
+// ```ignore (illustrative)
+// reuse module::name { target_expr_template }
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-//! ```
-//!
-//! And delegation to a trait methods:
-//!
-//! ```ignore (illustrative)
-//! reuse <Type as Trait>::name { target_expr_template }
+// ```
+//
+// And delegation to a trait methods:
+//
+// ```ignore (illustrative)
+// reuse <Type as Trait>::name { target_expr_template }
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=13
 
 ```rust
-//! ```
-//!
-//! After expansion for both cases we get:
-//!
-//! ```ignore (illustrative)
-//! fn name(
-//!     arg0: InferDelegation(sig_id, Input(0)),
-//!     arg1: InferDelegation(sig_id, Input(1)),
-//!     ...,
-//!     argN: InferDelegation(sig_id, Input(N)),
-//! ) -> InferDelegation(sig_id, Output) {
-//!     callee_path(target_expr_template(arg0), arg1, ..., argN)
-//! }
+// ```
+//
+// After expansion for both cases we get:
+//
+// ```ignore (illustrative)
+// fn name(
+//     arg0: InferDelegation(sig_id, Input(0)),
+//     arg1: InferDelegation(sig_id, Input(1)),
+//     ...,
+//     argN: InferDelegation(sig_id, Input(N)),
+// ) -> InferDelegation(sig_id, Output) {
+//     callee_path(target_expr_template(arg0), arg1, ..., argN)
+// }
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=3 | LINES=18
 
 ```rust
-//! ```
-//!
-//! Where `callee_path` is a path in delegation item e.g. `<Type as Trait>::name`.
-//! `sig_id` is a id of item from which the signature is inherited. It may be a delegation
-//! item id (`item_id`) in case of impl trait or path resolution id (`path_id`) otherwise.
-//!
-//! Since we do not have a proper way to obtain function type information by path resolution
-//! in AST, we mark each function parameter type as `InferDelegation` and inherit it during
-//! HIR ty lowering.
-//!
-//! Similarly generics, predicates and header are set to the "default" values.
-//! In case of discrepancy with callee function the `UnsupportedDelegation` error will
-//! also be emitted during HIR ty lowering.
+// ```
+//
+// Where `callee_path` is a path in delegation item e.g. `<Type as Trait>::name`.
+// `sig_id` is a id of item from which the signature is inherited. It may be a delegation
+// item id (`item_id`) in case of impl trait or path resolution id (`path_id`) otherwise.
+//
+// Since we do not have a proper way to obtain function type information by path resolution
+// in AST, we mark each function parameter type as `InferDelegation` and inherit it during
+// HIR ty lowering.
+//
+// Similarly generics, predicates and header are set to the "default" values.
+// In case of discrepancy with callee function the `UnsupportedDelegation` error will
+// also be emitted during HIR ty lowering.
 
 use std::iter;
 
@@ -79,20 +79,20 @@ use hir::{BodyId, HirId};
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_abi::ExternAbi;
-use rustc_ast::*;
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::def_id::DefId;
-use rustc_middle::span_bug;
-use rustc_middle::ty::{Asyncness, ResolverAstLowering};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_complete::*;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{Asyncness, ResolverAstLowering};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::symbol::kw;
-use rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::symbol::kw;
+use crate::rustc_complete::{Ident, Span, Symbol};
 ```
 
 ## Block 8

@@ -9,35 +9,35 @@ Generated 7 AST blocks from source file
 use std::any::Any;
 use std::hash::Hash;
 
-use rustc_ast::expand::allocator::AllocatorKind;
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_data_structures::sync::{DynSend, DynSync};
+use crate::rustc_complete::expand::allocator::AllocatorKind;
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_data_structures::sync::{DynSend, DynSync};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_metadata::EncodedMetadata;
-use rustc_metadata::creader::MetadataLoaderDyn;
-use rustc_middle::dep_graph::{WorkProduct, WorkProductId};
+use crate::rustc_metadata::EncodedMetadata;
+use crate::rustc_metadata::creader::MetadataLoaderDyn;
+use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_middle::util::Providers;
-use rustc_session::Session;
-use rustc_session::config::{self, OutputFilenames, PrintRequest};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::util::Providers;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{self, OutputFilenames, PrintRequest};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_span::Symbol;
+use crate::rustc_complete::Symbol;
 
 use super::CodegenObject;
 use super::write::WriteBackendMethods;

@@ -6,22 +6,22 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-//! Checks validity of naked functions.
+// Checks validity of naked functions.
 
 use rustc_hir as hir;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def_id::LocalDefId;
-use rustc_hir::intravisit::Visitor;
-use rustc_hir::{ExprKind, HirIdSet, StmtKind, find_attr};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::{ExprKind, HirIdSet, StmtKind, find_attr};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_middle::span_bug;
-use rustc_middle::ty::TyCtxt;
-use rustc_span::Span;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Span;
 
 use crate::errors::{
     NakedFunctionsAsmBlock, NakedFunctionsMustNakedAsm, NoPatterns, ParamsNotAllowed,
@@ -225,13 +225,13 @@ impl CheckInlineAssembly {
             }
 
             ExprKind::InlineAsm(asm) => match asm.asm_macro {
-                rustc_ast::AsmMacro::Asm => {
+                crate::rustc_ast::AsmMacro::Asm => {
                     self.items.push((ItemKind::InlineAsm, span));
                 }
-                rustc_ast::AsmMacro::NakedAsm => {
+                crate::rustc_ast::AsmMacro::NakedAsm => {
                     self.items.push((ItemKind::NakedAsm, span));
                 }
-                rustc_ast::AsmMacro::GlobalAsm => {
+                crate::rustc_ast::AsmMacro::GlobalAsm => {
                     span_bug!(span, "`global_asm!` is not allowed in this position")
                 }
             },

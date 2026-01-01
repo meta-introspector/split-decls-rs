@@ -6,22 +6,22 @@ Generated 18 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=9
 
 ```rust
-//! Support inheriting generic parameters and predicates for function delegation.
-//!
-//! For more information about delegation design, see the tracking issue #118212.
+// Support inheriting generic parameters and predicates for function delegation.
+//
+// For more information about delegation design, see the tracking issue #118212.
 
 use std::assert_matches::debug_assert_matches;
 
-use rustc_data_structures::fx::FxHashMap;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt,
 };
 ```
@@ -30,7 +30,7 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ErrorGuaranteed, Span};
+use crate::rustc_complete::{ErrorGuaranteed, Span};
 ```
 
 ## Block 4

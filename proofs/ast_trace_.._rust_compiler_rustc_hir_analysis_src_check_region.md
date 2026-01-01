@@ -6,45 +6,45 @@ Generated 18 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=13
 
 ```rust
-//! This file builds up the `ScopeTree`, which describes
-//! the parent links in the region hierarchy.
-//!
-//! For more information about how MIR-based region-checking works,
-//! see the [rustc dev guide].
-//!
-//! [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/borrow_check.html
+// This file builds up the `ScopeTree`, which describes
+// the parent links in the region hierarchy.
+//
+// For more information about how MIR-based region-checking works,
+// see the [rustc dev guide].
+//
+// [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/borrow_check.html
 
 use std::mem;
 
-use rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::fx::FxHashMap;
 use rustc_hir as hir;
-use rustc_hir::def::{CtorKind, DefKind, Res};
+use crate::rustc_complete::def::{CtorKind, DefKind, Res};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_hir::intravisit::{self, Visitor};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::intravisit::{self, Visitor};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{Arm, Block, Expr, LetStmt, Pat, PatKind, Stmt};
+use crate::rustc_complete::{Arm, Block, Expr, LetStmt, Pat, PatKind, Stmt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=STRUCT | NAME=Context | COMPLEXITY=2 | LINES=15
 
 ```rust
-use rustc_index::Idx;
-use rustc_middle::middle::region::*;
-use rustc_middle::ty::TyCtxt;
-use rustc_session::lint;
-use rustc_span::source_map;
+use crate::rustc_index::Idx;
+use crate::rustc_complete::middle::region::*;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::lint;
+use crate::rustc_complete::source_map;
 use tracing::debug;
 
 #[derive(Debug, Copy, Clone)]

@@ -6,9 +6,9 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=23 | LINES=38
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
-use rustc_session::config::MirStripDebugInfo;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::MirStripDebugInfo;
 
 /// Conditionally remove some of the VarDebugInfo in MIR.
 ///
@@ -17,7 +17,7 @@ use rustc_session::config::MirStripDebugInfo;
 pub(super) struct StripDebugInfo;
 
 impl<'tcx> crate::MirPass<'tcx> for StripDebugInfo {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.opts.unstable_opts.mir_strip_debuginfo != MirStripDebugInfo::None
     }
 

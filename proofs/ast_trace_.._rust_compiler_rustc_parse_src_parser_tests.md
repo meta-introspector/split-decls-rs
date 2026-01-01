@@ -6,7 +6,7 @@ Generated 88 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-#![allow(rustc::symbol_intern_string_literal)]
+#[allow(rustc::symbol_intern_string_literal)]
 
 use std::assert_matches::assert_matches;
 use std::io::prelude::*;
@@ -33,21 +33,21 @@ use std::{io, str};
 
 ```rust
 use ast::token::IdentIsRaw;
-use rustc_ast::token::{self, Delimiter, Token};
+use crate::rustc_complete::token::{self, Delimiter, Token};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
+use crate::rustc_complete::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{self as ast, PatKind, visit};
+use crate::rustc_complete::{self as ast, PatKind, visit};
 ```
 
 ## Block 7
@@ -55,30 +55,30 @@ use rustc_ast::{self as ast, PatKind, visit};
 
 ```rust
 use rustc_ast_pretty::pprust::item_to_string;
-use rustc_errors::emitter::{HumanEmitter, OutputTheme};
+use crate::rustc_complete::emitter::{HumanEmitter, OutputTheme};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::translation::Translator;
-use rustc_errors::{DiagCtxt, MultiSpan, PResult};
+use crate::rustc_complete::translation::Translator;
+use crate::rustc_complete::{DiagCtxt, MultiSpan, PResult};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::parse::ParseSess;
-use rustc_span::source_map::{FilePathMapping, SourceMap};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::source_map::{FilePathMapping, SourceMap};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::{
+use crate::rustc_complete::{
     BytePos, FileName, Pos, Span, Symbol, create_default_session_globals_then, kw, sym,
 };
 ```
@@ -2595,7 +2595,7 @@ fn parse_item_from_source_str(
 **Metadata**: AST_ID=67 | TYPE=FUNCTION | NAME=sp | COMPLEXITY=2 | LINES=5
 
 ```rust
-// Produces a `rustc_span::span`.
+// Produces a `crate::rustc_span::span`.
 fn sp(a: u32, b: u32) -> Span {
     Span::with_root_ctxt(BytePos(a), BytePos(b))
 }
@@ -2965,9 +2965,9 @@ fn ttdelim_span() {
 
 ```rust
 #[track_caller]
-fn look(p: &Parser<'_>, dist: usize, kind: rustc_ast::token::TokenKind) {
+fn look(p: &Parser<'_>, dist: usize, kind: crate::rustc_ast::token::TokenKind) {
     // Do the `assert_eq` outside the closure so that `track_caller` works.
-    // (`#![feature(closure_track_caller)]` + `#[track_caller]` on the closure
+    // (`#[feature(closure_track_caller)]` + `#[track_caller]` on the closure
     // doesn't give the line number in the test below if the assertion fails.)
     let tok = p.look_ahead(dist, |tok| *tok);
     assert_eq!(kind, tok.kind);

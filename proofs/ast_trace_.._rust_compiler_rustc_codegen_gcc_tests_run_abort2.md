@@ -3,7 +3,7 @@
 Generated 2 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=fail | COMPLEXITY=7 | LINES=17
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=fail | COMPLEXITY=7 | LINES=16
 
 ```rust
 // Compiler:
@@ -11,12 +11,11 @@ Generated 2 AST blocks from source file
 // Run-time:
 //   status: signal
 
-#![feature(no_core)]
-#![no_std]
-#![no_core]
-#![no_main]
+#[feature(no_core)]
+#[no_std]
+#[no_core]
+#[no_main]
 
-extern crate mini_core;
 use mini_core::*;
 
 fn fail() -> i32 {
@@ -29,7 +28,7 @@ fn fail() -> i32 {
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
     fail();
     0

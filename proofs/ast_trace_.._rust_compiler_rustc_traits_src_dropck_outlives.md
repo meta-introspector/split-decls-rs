@@ -6,35 +6,35 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_infer::infer::canonical::{Canonical, QueryResponse};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::infer::canonical::{Canonical, QueryResponse};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::query::Providers;
-use rustc_middle::traits::query::{DropckConstraint, DropckOutlivesResult};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::traits::query::{DropckConstraint, DropckOutlivesResult};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, GenericArgs, TyCtxt};
+use crate::rustc_complete::ty::{self, GenericArgs, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_span::DUMMY_SP;
-use rustc_span::def_id::DefId;
-use rustc_trait_selection::infer::InferCtxtBuilderExt;
-use rustc_trait_selection::traits::query::dropck_outlives::{
+use crate::rustc_complete::DUMMY_SP;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_trait_selection::infer::InferCtxtBuilderExt;
+use crate::rustc_trait_selection::traits::query::dropck_outlives::{
     compute_dropck_outlives_inner, dtorck_constraint_for_ty_inner,
 };
 ```
@@ -43,7 +43,7 @@ use rustc_trait_selection::traits::query::dropck_outlives::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_trait_selection::traits::query::{CanonicalDropckOutlivesGoal, NoSolution};
+use crate::rustc_trait_selection::traits::query::{CanonicalDropckOutlivesGoal, NoSolution};
 ```
 
 ## Block 6

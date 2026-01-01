@@ -3,14 +3,13 @@
 Generated 43 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=abc | COMPLEXITY=2 | LINES=11
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=abc | COMPLEXITY=2 | LINES=10
 
 ```rust
-#![feature(no_core, unboxed_closures)]
-#![no_core]
-#![allow(dead_code, unnecessary_transmutes)]
+#[feature(no_core, unboxed_closures)]
+#[no_core]
+#[allow(dead_code, unnecessary_transmutes)]
 
-extern crate mini_core;
 
 use mini_core::*;
 

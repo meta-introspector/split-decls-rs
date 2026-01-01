@@ -6,18 +6,18 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=27
 
 ```rust
-//! The next-generation trait solver, currently still WIP.
-//!
-//! As a user of rust, you can use `-Znext-solver` to enable the new trait solver.
-//!
-//! As a developer of rustc, you shouldn't be using the new trait
-//! solver without asking the trait-system-refactor-initiative, but it can
-//! be enabled with `InferCtxtBuilder::with_next_trait_solver`. This will
-//! ensure that trait solving using that inference context will be routed
-//! to the new trait solver.
-//!
-//! For a high-level overview of how this solver works, check out the relevant
-//! section of the rustc-dev-guide.
+// The next-generation trait solver, currently still WIP.
+//
+// As a user of rust, you can use `-Znext-solver` to enable the new trait solver.
+//
+// As a developer of rustc, you shouldn't be using the new trait
+// solver without asking the trait-system-refactor-initiative, but it can
+// be enabled with `InferCtxtBuilder::with_next_trait_solver`. This will
+// ensure that trait solving using that inference context will be routed
+// to the new trait solver.
+//
+// For a high-level overview of how this solver works, check out the relevant
+// section of the rustc-dev-guide.
 
 mod alias_relate;
 mod assembly;

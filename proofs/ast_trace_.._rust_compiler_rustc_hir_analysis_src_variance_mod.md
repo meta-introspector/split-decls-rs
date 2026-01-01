@@ -6,24 +6,24 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=10
 
 ```rust
-//! Module for inferring the variance of type and lifetime parameters. See the [rustc dev guide]
-//! chapter for more info.
-//!
-//! [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/variance.html
+// Module for inferring the variance of type and lifetime parameters. See the [rustc dev guide]
+// chapter for more info.
+//
+// [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/variance.html
 
 use itertools::Itertools;
 use rustc_arena::DroplessArena;
 use rustc_hir as hir;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::span_bug;
-use rustc_middle::ty::{
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{
     self, CrateVariancesMap, GenericArgsRef, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
 };
 ```

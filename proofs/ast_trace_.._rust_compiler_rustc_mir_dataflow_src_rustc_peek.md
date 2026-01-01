@@ -6,23 +6,23 @@ Generated 19 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::MetaItem;
-use rustc_middle::mir::{self, Body, Local, Location};
+use crate::rustc_complete::MetaItem;
+use crate::rustc_complete::mir::{self, Body, Local, Location};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::DefId;
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 4

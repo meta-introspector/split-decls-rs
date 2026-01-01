@@ -7,11 +7,11 @@ Generated 3 AST blocks from source file
 
 ```rust
 // tidy-alphabetical-start
-#![cfg_attr(all(feature = "nightly", test), feature(stmt_expr_attributes))]
-#![cfg_attr(feature = "nightly", allow(internal_features))]
-#![cfg_attr(feature = "nightly", feature(extend_one, step_trait, test))]
-#![cfg_attr(feature = "nightly", feature(new_range_api))]
-#![cfg_attr(feature = "nightly", feature(new_zeroed_alloc))]
+#[cfg_attr(all(feature = "nightly", test), feature(stmt_expr_attributes))]
+#[cfg_attr(feature = "nightly", allow(internal_features))]
+#[cfg_attr(feature = "nightly", feature(extend_one, step_trait, test))]
+#[cfg_attr(feature = "nightly", feature(new_range_api))]
+#[cfg_attr(feature = "nightly", feature(new_zeroed_alloc))]
 // tidy-alphabetical-end
 
 pub mod bit_set;
@@ -29,7 +29,7 @@ pub use idx::{Idx, IntoSliceIdx};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=25
 
 ```rust
-pub use rustc_index_macros::newtype_index;
+pub use crate::rustc_index_macros::newtype_index;
 pub use slice::IndexSlice;
 #[doc(no_inline)]
 pub use vec::IndexVec;

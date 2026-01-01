@@ -7,32 +7,32 @@ Generated 5 AST blocks from source file
 
 ```rust
 // tidy-alphabetical-start
-#![feature(array_windows)]
-#![feature(file_buffered)]
-#![feature(if_let_guard)]
-#![feature(impl_trait_in_assoc_type)]
-#![feature(once_cell_get_mut)]
+#[feature(array_windows)]
+#[feature(file_buffered)]
+#[feature(if_let_guard)]
+#[feature(impl_trait_in_assoc_type)]
+#[feature(once_cell_get_mut)]
 // tidy-alphabetical-end
 
-use rustc_hir::lang_items::LangItem;
-use rustc_middle::query::TyCtxtAt;
-use rustc_middle::ty::adjustment::CustomCoerceUnsized;
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::ty::adjustment::CustomCoerceUnsized;
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::util::Providers;
-use rustc_middle::{bug, traits};
+use crate::rustc_complete::util::Providers;
+use crate::rustc_complete::{bug, traits};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_span::ErrorGuaranteed;
+use crate::rustc_complete::ErrorGuaranteed;
 
 mod collector;
 mod errors;

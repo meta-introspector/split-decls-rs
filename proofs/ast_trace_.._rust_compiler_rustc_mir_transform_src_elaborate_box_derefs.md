@@ -6,16 +6,16 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10
 
 ```rust
-//! This pass transforms derefs of Box into a deref of the pointer inside Box.
-//!
-//! Box is not actually a pointer so it is incorrect to dereference it directly.
+// This pass transforms derefs of Box into a deref of the pointer inside Box.
+//
+// Box is not actually a pointer so it is incorrect to dereference it directly.
 
-use rustc_abi::FieldIdx;
-use rustc_hir::def_id::DefId;
-use rustc_middle::mir::visit::MutVisitor;
-use rustc_middle::mir::*;
-use rustc_middle::span_bug;
-use rustc_middle::ty::{Ty, TyCtxt};
+use crate::rustc_abi::FieldIdx;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::mir::visit::MutVisitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{Ty, TyCtxt};
 ```
 
 ## Block 2

@@ -11,44 +11,44 @@ use std::hash::Hasher;
 use std::iter;
 use std::ops::Range;
 
-use rustc_abi::{ExternAbi, Integer};
+use crate::rustc_abi::{ExternAbi, Integer};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_data_structures::base_n::ToBaseN;
-use rustc_data_structures::fx::FxHashMap;
-use rustc_data_structures::intern::Interned;
-use rustc_data_structures::stable_hasher::StableHasher;
+use crate::rustc_data_structures::base_n::ToBaseN;
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::intern::Interned;
+use crate::rustc_data_structures::stable_hasher::StableHasher;
 use rustc_hashes::Hash64;
 use rustc_hir as hir;
-use rustc_hir::def::CtorKind;
-use rustc_hir::def_id::{CrateNum, DefId};
+use crate::rustc_complete::def::CtorKind;
+use crate::rustc_complete::def_id::{CrateNum, DefId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::definitions::{DefPathData, DisambiguatedDefPathData};
+use crate::rustc_complete::definitions::{DefPathData, DisambiguatedDefPathData};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::layout::IntegerExt;
-use rustc_middle::ty::print::{Print, PrintError, Printer};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::IntegerExt;
+use crate::rustc_complete::ty::print::{Print, PrintError, Printer};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, FloatTy, GenericArg, GenericArgKind, Instance, IntTy, ReifyReason, Ty, TyCtxt,
     TypeVisitable, TypeVisitableExt, UintTy,
 };
@@ -58,7 +58,7 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=27 | LINES=60
 
 ```rust
-use rustc_span::sym;
+use crate::rustc_complete::sym;
 
 pub(super) fn mangle<'tcx>(
     tcx: TyCtxt<'tcx>,

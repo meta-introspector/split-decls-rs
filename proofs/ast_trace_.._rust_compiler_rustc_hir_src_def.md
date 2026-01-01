@@ -11,10 +11,10 @@ use std::borrow::Cow;
 use std::fmt::Debug;
 
 use rustc_ast as ast;
-use rustc_ast::NodeId;
-use rustc_data_structures::stable_hasher::ToStableHashKey;
-use rustc_data_structures::unord::UnordMap;
-use rustc_error_messages::{DiagArgValue, IntoDiagArg};
+use crate::rustc_complete::NodeId;
+use crate::rustc_data_structures::stable_hasher::ToStableHashKey;
+use crate::rustc_data_structures::unord::UnordMap;
+use crate::rustc_error_messages::{DiagArgValue, IntoDiagArg};
 ```
 
 ## Block 2
@@ -28,15 +28,15 @@ use rustc_macros::{Decodable, Encodable, HashStable_Generic};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::Symbol;
-use rustc_span::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::Symbol;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=13
 
 ```rust
-use rustc_span::hygiene::MacroKind;
+use crate::rustc_complete::hygiene::MacroKind;
 
 use crate::definitions::DefPathData;
 use crate::hir;

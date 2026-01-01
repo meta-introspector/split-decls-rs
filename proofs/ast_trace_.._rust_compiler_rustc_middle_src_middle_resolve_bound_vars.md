@@ -6,12 +6,12 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-//! Name resolution for lifetimes and late-bound type and const variables: type declarations.
+// Name resolution for lifetimes and late-bound type and const variables: type declarations.
 
-use rustc_data_structures::sorted_map::SortedMap;
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::ItemLocalId;
-use rustc_hir::def_id::{DefId, LocalDefId, LocalDefIdMap};
+use crate::rustc_data_structures::sorted_map::SortedMap;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::ItemLocalId;
+use crate::rustc_complete::def_id::{DefId, LocalDefId, LocalDefIdMap};
 ```
 
 ## Block 2

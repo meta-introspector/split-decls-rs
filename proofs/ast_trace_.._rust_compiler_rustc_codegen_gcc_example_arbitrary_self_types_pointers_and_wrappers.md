@@ -8,9 +8,9 @@ Generated 10 AST blocks from source file
 ```rust
 // Adapted from rustc run-pass test suite
 
-#![feature(arbitrary_self_types, unsize, coerce_unsized, dispatch_from_dyn)]
-#![feature(rustc_attrs)]
-#![allow(internal_features)]
+#[feature(arbitrary_self_types, unsize, coerce_unsized, dispatch_from_dyn)]
+#[feature(rustc_attrs)]
+#[allow(internal_features)]
 
 use std::{
     ops::{Deref, CoerceUnsized, DispatchFromDyn},

@@ -3,7 +3,7 @@
 Generated 2 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=index_slice | COMPLEXITY=7 | LINES=19
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=index_slice | COMPLEXITY=7 | LINES=18
 
 ```rust
 // Compiler:
@@ -12,12 +12,11 @@ Generated 2 AST blocks from source file
 //   status: 0
 //   stdout: 5
 
-#![feature(no_core)]
-#![no_std]
-#![no_core]
-#![no_main]
+#[feature(no_core)]
+#[no_std]
+#[no_core]
+#[no_main]
 
-extern crate mini_core;
 use mini_core::*;
 
 static mut TWO: usize = 2;
@@ -31,7 +30,7 @@ fn index_slice(s: &[u32]) -> u32 {
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=9
 
 ```rust
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
     let array = [42, 7, 5];
     unsafe {

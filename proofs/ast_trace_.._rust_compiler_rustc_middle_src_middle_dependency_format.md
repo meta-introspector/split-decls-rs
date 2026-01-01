@@ -6,18 +6,18 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=13
 
 ```rust
-//! Type definitions for learning about the dependency formats of all upstream
-//! crates (rlibs/dylibs/oh my).
-//!
-//! For all the gory details, see the provider of the `dependency_formats`
-//! query.
+// Type definitions for learning about the dependency formats of all upstream
+// crates (rlibs/dylibs/oh my).
+//
+// For all the gory details, see the provider of the `dependency_formats`
+// query.
 
-// FIXME: move this file to rustc_metadata::dependency_format, but
+// FIXME: move this file to crate::rustc_metadata::dependency_format, but
 // this will introduce circular dependency between rustc_metadata and rustc_middle
 
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_hir::def_id::CrateNum;
-use rustc_index::IndexVec;
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_complete::def_id::CrateNum;
+use crate::rustc_index::IndexVec;
 use rustc_macros::{Decodable, Encodable, HashStable};
 ```
 
@@ -25,7 +25,7 @@ use rustc_macros::{Decodable, Encodable, HashStable};
 **Metadata**: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=17
 
 ```rust
-use rustc_session::config::CrateType;
+use crate::rustc_complete::config::CrateType;
 
 /// A list of dependencies for a certain crate type.
 pub type DependencyList = IndexVec<CrateNum, Linkage>;

@@ -6,71 +6,71 @@ Generated 29 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=23 | LINES=71
 
 ```rust
-//! Rayon-core houses the core stable APIs of Rayon.
-//!
-//! These APIs have been mirrored in the Rayon crate and it is recommended to use these from there.
-//!
-//! [`join`] is used to take two closures and potentially run them in parallel.
-//!   - It will run in parallel if task B gets stolen before task A can finish.
-//!   - It will run sequentially if task A finishes before task B is stolen and can continue on task B.
-//!
-//! [`scope`] creates a scope in which you can run any number of parallel tasks.
-//! These tasks can spawn nested tasks and scopes, but given the nature of work stealing, the order of execution can not be guaranteed.
-//! The scope will exist until all tasks spawned within the scope have been completed.
-//!
-//! [`spawn`] add a task into the 'static' or 'global' scope, or a local scope created by the [`scope()`] function.
-//!
-//! [`ThreadPool`] can be used to create your own thread pools (using [`ThreadPoolBuilder`]) or to customize the global one.
-//! Tasks spawned within the pool (using [`install()`], [`join()`], etc.) will be added to a deque,
-//! where it becomes available for work stealing from other threads in the local threadpool.
-//!
-//! [`join`]: fn.join.html
-//! [`scope`]: fn.scope.html
-//! [`scope()`]: fn.scope.html
-//! [`spawn`]: fn.spawn.html
-//! [`ThreadPool`]: struct.threadpool.html
-//! [`install()`]: struct.ThreadPool.html#method.install
-//! [`spawn()`]: struct.ThreadPool.html#method.spawn
-//! [`join()`]: struct.ThreadPool.html#method.join
-//! [`ThreadPoolBuilder`]: struct.ThreadPoolBuilder.html
-//!
-//! # Global fallback when threading is unsupported
-//!
-//! Rayon uses `std` APIs for threading, but some targets have incomplete implementations that
-//! always return `Unsupported` errors. The WebAssembly `wasm32-unknown-unknown` and `wasm32-wasi`
-//! targets are notable examples of this. Rather than panicking on the unsupported error when
-//! creating the implicit global threadpool, Rayon configures a fallback mode instead.
-//!
-//! This fallback mode mostly functions as if it were using a single-threaded "pool", like setting
-//! `RAYON_NUM_THREADS=1`. For example, `join` will execute its two closures sequentially, since
-//! there is no other thread to share the work. However, since the pool is not running independent
-//! of the main thread, non-blocking calls like `spawn` may not execute at all, unless a lower-
-//! priority call like `broadcast` gives them an opening. The fallback mode does not try to emulate
-//! anything like thread preemption or `async` task switching, but `yield_now` or `yield_local`
-//! can also volunteer execution time.
-//!
-//! Explicit `ThreadPoolBuilder` methods always report their error without any fallback.
-//!
-//! # Restricting multiple versions
-//!
-//! In order to ensure proper coordination between threadpools, and especially
-//! to make sure there's only one global threadpool, `rayon-core` is actively
-//! restricted from building multiple versions of itself into a single target.
-//! You may see a build error like this in violation:
-//!
-//! ```text
-//! error: native library `rayon-core` is being linked to by more
-//! than one package, and can only be linked to by one package
-//! ```
-//!
-//! While we strive to keep `rayon-core` semver-compatible, it's still
-//! possible to arrive at this situation if different crates have overly
-//! restrictive tilde or inequality requirements for `rayon-core`. The
-//! conflicting requirements will need to be resolved before the build will
-//! succeed.
+// Rayon-core houses the core stable APIs of Rayon.
+//
+// These APIs have been mirrored in the Rayon crate and it is recommended to use these from there.
+//
+// [`join`] is used to take two closures and potentially run them in parallel.
+//   - It will run in parallel if task B gets stolen before task A can finish.
+//   - It will run sequentially if task A finishes before task B is stolen and can continue on task B.
+//
+// [`scope`] creates a scope in which you can run any number of parallel tasks.
+// These tasks can spawn nested tasks and scopes, but given the nature of work stealing, the order of execution can not be guaranteed.
+// The scope will exist until all tasks spawned within the scope have been completed.
+//
+// [`spawn`] add a task into the 'static' or 'global' scope, or a local scope created by the [`scope()`] function.
+//
+// [`ThreadPool`] can be used to create your own thread pools (using [`ThreadPoolBuilder`]) or to customize the global one.
+// Tasks spawned within the pool (using [`install()`], [`join()`], etc.) will be added to a deque,
+// where it becomes available for work stealing from other threads in the local threadpool.
+//
+// [`join`]: fn.join.html
+// [`scope`]: fn.scope.html
+// [`scope()`]: fn.scope.html
+// [`spawn`]: fn.spawn.html
+// [`ThreadPool`]: struct.threadpool.html
+// [`install()`]: struct.ThreadPool.html#method.install
+// [`spawn()`]: struct.ThreadPool.html#method.spawn
+// [`join()`]: struct.ThreadPool.html#method.join
+// [`ThreadPoolBuilder`]: struct.ThreadPoolBuilder.html
+//
+// # Global fallback when threading is unsupported
+//
+// Rayon uses `std` APIs for threading, but some targets have incomplete implementations that
+// always return `Unsupported` errors. The WebAssembly `wasm32-unknown-unknown` and `wasm32-wasi`
+// targets are notable examples of this. Rather than panicking on the unsupported error when
+// creating the implicit global threadpool, Rayon configures a fallback mode instead.
+//
+// This fallback mode mostly functions as if it were using a single-threaded "pool", like setting
+// `RAYON_NUM_THREADS=1`. For example, `join` will execute its two closures sequentially, since
+// there is no other thread to share the work. However, since the pool is not running independent
+// of the main thread, non-blocking calls like `spawn` may not execute at all, unless a lower-
+// priority call like `broadcast` gives them an opening. The fallback mode does not try to emulate
+// anything like thread preemption or `async` task switching, but `yield_now` or `yield_local`
+// can also volunteer execution time.
+//
+// Explicit `ThreadPoolBuilder` methods always report their error without any fallback.
+//
+// # Restricting multiple versions
+//
+// In order to ensure proper coordination between threadpools, and especially
+// to make sure there's only one global threadpool, `rayon-core` is actively
+// restricted from building multiple versions of itself into a single target.
+// You may see a build error like this in violation:
+//
+// ```text
+// error: native library `rayon-core` is being linked to by more
+// than one package, and can only be linked to by one package
+// ```
+//
+// While we strive to keep `rayon-core` semver-compatible, it's still
+// possible to arrive at this situation if different crates have overly
+// restrictive tilde or inequality requirements for `rayon-core`. The
+// conflicting requirements will need to be resolved before the build will
+// succeed.
 
-#![cfg_attr(test, allow(unused_crate_dependencies))]
-#![warn(rust_2018_idioms)]
+#[cfg_attr(test, allow(unused_crate_dependencies))]
+#[warn(rust_2018_idioms)]
 
 use std::any::Any;
 use std::error::Error;

@@ -17,41 +17,41 @@ use std::hash::{Hash, Hasher};
 use std::ops::Range;
 use std::str;
 
-use rustc_abi::{FIRST_VARIANT, ReprOptions, VariantIdx};
+use crate::rustc_abi::{FIRST_VARIANT, ReprOptions, VariantIdx};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::fingerprint::Fingerprint;
-use rustc_data_structures::fx::FxHashMap;
-use rustc_data_structures::intern::Interned;
-use rustc_data_structures::stable_hasher::{HashStable, HashingControls, StableHasher};
+use crate::rustc_data_structures::fingerprint::Fingerprint;
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::intern::Interned;
+use crate::rustc_data_structures::stable_hasher::{HashStable, HashingControls, StableHasher};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::{CtorKind, DefKind, Res};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{CtorKind, DefKind, Res};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_hir::{self as hir, LangItem, find_attr};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, LangItem, find_attr};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_index::{IndexSlice, IndexVec};
+use crate::rustc_index::{IndexSlice, IndexVec};
 ```
 
 ## Block 7
@@ -66,7 +66,7 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 
 ```rust
 use rustc_query_system::ich::StableHashingContext;
-use rustc_session::DataTypeKind;
+use crate::rustc_complete::DataTypeKind;
 use rustc_type_ir::solve::AdtDestructorKind;
 use tracing::{debug, info, trace};
 ```
@@ -129,7 +129,7 @@ bitflags::bitflags! {
 **Metadata**: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-rustc_data_structures::external_bitflags_debug! { AdtFlags }
+crate::rustc_data_structures::external_bitflags_debug! { AdtFlags }
 ```
 
 ## Block 13

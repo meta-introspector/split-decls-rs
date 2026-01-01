@@ -6,9 +6,9 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! Upvar (closure capture) collection from cross-body HIR uses of `Res::Local`s.
+// Upvar (closure capture) collection from cross-body HIR uses of `Res::Local`s.
 
-use rustc_data_structures::fx::{FxHashSet, FxIndexMap};
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 ```
 
 ## Block 2
@@ -16,24 +16,24 @@ use rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::def::Res;
-use rustc_hir::intravisit::{self, Visitor};
+use crate::rustc_complete::def::Res;
+use crate::rustc_complete::intravisit::{self, Visitor};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self, HirId};
+use crate::rustc_complete::{self, HirId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=30
 
 ```rust
-use rustc_middle::query::Providers;
-use rustc_middle::ty::TyCtxt;
-use rustc_span::Span;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Span;
 
 pub(crate) fn provide(providers: &mut Providers) {
     providers.upvars_mentioned = |tcx, def_id| {

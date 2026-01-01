@@ -7,16 +7,16 @@ Generated 5 AST blocks from source file
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=parent_impl_or_trait_constness | COMPLEXITY=13 | LINES=17
 
 ```rust
-use rustc_middle::query::Providers;
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::TyCtxt;
 
 fn parent_impl_or_trait_constness(tcx: TyCtxt<'_>, def_id: LocalDefId) -> hir::Constness {
     let parent_id = tcx.local_parent(def_id);

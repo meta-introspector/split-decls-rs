@@ -9,23 +9,23 @@ Generated 13 AST blocks from source file
 use std::ffi::CString;
 use std::sync::Arc;
 
-use rustc_data_structures::memmap::Mmap;
-use rustc_hir::def_id::{CrateNum, LOCAL_CRATE};
+use crate::rustc_data_structures::memmap::Mmap;
+use crate::rustc_complete::def_id::{CrateNum, LOCAL_CRATE};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::middle::exported_symbols::{ExportedSymbol, SymbolExportInfo, SymbolExportLevel};
+use crate::rustc_complete::middle::exported_symbols::{ExportedSymbol, SymbolExportInfo, SymbolExportLevel};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_session::config::{CrateType, Lto};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::{CrateType, Lto};
 ```
 
 ## Block 4

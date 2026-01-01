@@ -3,7 +3,7 @@
 Generated 4 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=fib | COMPLEXITY=8 | LINES=23
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=fib | COMPLEXITY=8 | LINES=22
 
 ```rust
 // Compiler:
@@ -11,12 +11,11 @@ Generated 4 AST blocks from source file
 // Run-time:
 //   status: 0
 
-#![feature(no_core)]
-#![no_std]
-#![no_core]
-#![no_main]
+#[feature(no_core)]
+#[no_std]
+#[no_core]
+#[no_main]
 
-extern crate mini_core;
 use mini_core::*;
 
 #[inline(always)]
@@ -67,7 +66,7 @@ fn fib_a(n: u8) -> u8 {
 **Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=8
 
 ```rust
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
     if fib(2) != fib_a(2) {
         intrinsics::abort();

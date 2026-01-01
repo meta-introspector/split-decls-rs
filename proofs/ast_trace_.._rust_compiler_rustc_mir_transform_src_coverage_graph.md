@@ -21,25 +21,25 @@ use std::{mem, slice};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_data_structures::graph::dominators::Dominators;
-use rustc_data_structures::graph::{self, DirectedGraph, StartNode};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_data_structures::graph::dominators::Dominators;
+use crate::rustc_data_structures::graph::{self, DirectedGraph, StartNode};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_index::IndexVec;
-use rustc_index::bit_set::DenseBitSet;
-pub(crate) use rustc_middle::mir::coverage::{BasicCoverageBlock, START_BCB};
+use crate::rustc_index::IndexVec;
+use crate::rustc_index::bit_set::DenseBitSet;
+pub(crate) use crate::rustc_complete::mir::coverage::{BasicCoverageBlock, START_BCB};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{self, BasicBlock, Terminator, TerminatorKind};
+use crate::rustc_complete::mir::{self, BasicBlock, Terminator, TerminatorKind};
 ```
 
 ## Block 6

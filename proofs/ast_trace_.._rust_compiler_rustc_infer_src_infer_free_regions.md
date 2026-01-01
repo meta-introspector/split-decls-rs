@@ -6,13 +6,13 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-//! This module handles the relationships between "free regions", i.e., lifetime parameters.
-//! Ordinarily, free regions are unrelated to one another, but they can be related via implied
-//! or explicit bounds. In that case, we track the bounds using the `TransitiveRelation` type,
-//! and use that to decide when one free region outlives another, and so forth.
+// This module handles the relationships between "free regions", i.e., lifetime parameters.
+// Ordinarily, free regions are unrelated to one another, but they can be related via implied
+// or explicit bounds. In that case, we track the bounds using the `TransitiveRelation` type,
+// and use that to decide when one free region outlives another, and so forth.
 
-use rustc_data_structures::transitive_relation::TransitiveRelation;
-use rustc_middle::ty::{Region, TyCtxt};
+use crate::rustc_data_structures::transitive_relation::TransitiveRelation;
+use crate::rustc_complete::ty::{Region, TyCtxt};
 ```
 
 ## Block 2

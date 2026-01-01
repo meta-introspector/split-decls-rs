@@ -6,7 +6,7 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=12
 
 ```rust
-//! Attributes that can be found in function body.
+// Attributes that can be found in function body.
 
 use super::prelude::*;
 
@@ -16,7 +16,7 @@ impl<S: Stage> NoArgsAttributeParser<S> for CoroutineParser {
     const PATH: &[Symbol] = &[sym::coroutine];
     const ON_DUPLICATE: OnDuplicate<S> = OnDuplicate::Error;
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Closure)]);
-    const CREATE: fn(rustc_span::Span) -> AttributeKind = |span| AttributeKind::Coroutine(span);
+    const CREATE: fn(crate::rustc_span::Span) -> AttributeKind = |span| AttributeKind::Coroutine(span);
 }
 ```
 

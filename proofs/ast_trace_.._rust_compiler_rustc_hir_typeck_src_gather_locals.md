@@ -7,30 +7,30 @@ Generated 11 AST blocks from source file
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::intravisit::{self, Visitor};
+use crate::rustc_complete::intravisit::{self, Visitor};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{HirId, PatKind};
+use crate::rustc_complete::{HirId, PatKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_infer::traits::ObligationCauseCode;
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_infer::traits::ObligationCauseCode;
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=16
 
 ```rust
-use rustc_span::Span;
-use rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::LocalDefId;
 use tracing::debug;
 
 use crate::FnCtxt;

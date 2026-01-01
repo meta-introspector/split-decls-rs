@@ -8,8 +8,8 @@ Generated 10 AST blocks from source file
 ```rust
 use std::borrow::Cow;
 
-use rustc_data_structures::intern::Interned;
-use rustc_error_messages::MultiSpan;
+use crate::rustc_data_structures::intern::Interned;
+use crate::rustc_error_messages::MultiSpan;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 ```
 
@@ -38,7 +38,7 @@ mod valtree;
 
 pub use int::*;
 pub use kind::*;
-use rustc_span::{DUMMY_SP, ErrorGuaranteed};
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed};
 ```
 
 ## Block 5
@@ -51,7 +51,7 @@ pub type ConstKind<'tcx> = ir::ConstKind<TyCtxt<'tcx>>;
 pub type UnevaluatedConst<'tcx> = ir::UnevaluatedConst<TyCtxt<'tcx>>;
 
 #[cfg(target_pointer_width = "64")]
-rustc_data_structures::static_assert_size!(ConstKind<'_>, 24);
+crate::rustc_data_structures::static_assert_size!(ConstKind<'_>, 24);
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, HashStable)]
 #[rustc_pass_by_value]

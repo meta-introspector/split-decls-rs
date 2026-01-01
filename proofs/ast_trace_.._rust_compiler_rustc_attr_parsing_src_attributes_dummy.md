@@ -6,15 +6,15 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_feature::{AttributeTemplate, template};
+use crate::rustc_feature::{AttributeTemplate, template};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::attrs::AttributeKind;
-use rustc_span::{Symbol, sym};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::{Symbol, sym};
 ```
 
 ## Block 3

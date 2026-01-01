@@ -6,22 +6,22 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-//! Check that a body annotated with `#[rustc_force_inline]` will not fail to inline based on its
-//! definition alone (irrespective of any specific caller).
+// Check that a body annotated with `#[rustc_force_inline]` will not fail to inline based on its
+// definition alone (irrespective of any specific caller).
 
-use rustc_hir::attrs::InlineAttr;
-use rustc_hir::def_id::DefId;
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use rustc_middle::mir::{Body, TerminatorKind};
+use crate::rustc_complete::attrs::InlineAttr;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::mir::{Body, TerminatorKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=run_lint | COMPLEXITY=15 | LINES=30
 
 ```rust
-use rustc_middle::ty;
-use rustc_middle::ty::TyCtxt;
-use rustc_span::sym;
+use crate::rustc_complete::ty;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::sym;
 
 use crate::pass_manager::MirLint;
 

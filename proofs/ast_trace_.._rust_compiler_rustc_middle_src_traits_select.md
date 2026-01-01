@@ -6,12 +6,12 @@ Generated 16 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7
 
 ```rust
-//! Candidate selection. See the [rustc dev guide] for more information on how this works.
-//!
-//! [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/traits/resolution.html#selection
+// Candidate selection. See the [rustc dev guide] for more information on how this works.
+//
+// [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/traits/resolution.html#selection
 
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::def_id::DefId;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, TypeVisitable};
 ```
 
@@ -226,12 +226,12 @@ pub enum SelectionCandidate<'tcx> {
 
     /// Matching `dyn Trait` with a supertrait of `Trait`. The index is the
     /// position in the iterator returned by
-    /// `rustc_infer::traits::util::supertraits`.
+    /// `crate::rustc_infer::traits::util::supertraits`.
     ObjectCandidate(usize),
 
     /// Perform trait upcasting coercion of `dyn Trait` to a supertrait of `Trait`.
     /// The index is the position in the iterator returned by
-    /// `rustc_infer::traits::util::supertraits`.
+    /// `crate::rustc_infer::traits::util::supertraits`.
     TraitUpcastingUnsizeCandidate(usize),
 
     BuiltinObjectCandidate,

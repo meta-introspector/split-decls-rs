@@ -6,28 +6,28 @@ Generated 14 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{LitKind, NodeId};
+use crate::rustc_complete::{LitKind, NodeId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_feature::{AttributeTemplate, Features, template};
+use crate::rustc_feature::{AttributeTemplate, Features, template};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_hir::RustcVersion;
-use rustc_hir::attrs::CfgEntry;
-use rustc_session::Session;
-use rustc_session::config::ExpectedValues;
-use rustc_session::lint::BuiltinLintDiag;
-use rustc_session::lint::builtin::UNEXPECTED_CFGS;
-use rustc_session::parse::feature_err;
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::RustcVersion;
+use crate::rustc_complete::attrs::CfgEntry;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::ExpectedValues;
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::UNEXPECTED_CFGS;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 4

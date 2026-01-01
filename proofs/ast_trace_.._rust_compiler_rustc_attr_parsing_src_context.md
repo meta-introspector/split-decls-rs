@@ -18,44 +18,44 @@ use std::ops::{Deref, DerefMut};
 use std::sync::LazyLock;
 
 use private::Sealed;
-use rustc_ast::{AttrStyle, CRATE_NODE_ID, MetaItemLit, NodeId};
+use crate::rustc_complete::{AttrStyle, CRATE_NODE_ID, MetaItemLit, NodeId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{Diag, Diagnostic, Level};
+use crate::rustc_complete::{Diag, Diagnostic, Level};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_feature::{AttributeTemplate, AttributeType};
+use crate::rustc_feature::{AttributeTemplate, AttributeType};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::lints::{AttributeLint, AttributeLintKind};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::lints::{AttributeLint, AttributeLintKind};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{AttrPath, CRATE_HIR_ID, HirId};
+use crate::rustc_complete::{AttrPath, CRATE_HIR_ID, HirId};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::Session;
-use rustc_span::{ErrorGuaranteed, Span, Symbol};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::{ErrorGuaranteed, Span, Symbol};
 ```
 
 ## Block 8

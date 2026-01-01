@@ -17,18 +17,18 @@ use std::num::{IntErrorKind, NonZero};
 use std::path::PathBuf;
 use std::str;
 
-use rustc_abi::Align;
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_data_structures::profiling::TimePassesFormat;
-use rustc_data_structures::stable_hasher::StableHasher;
-use rustc_errors::{ColorConfig, LanguageIdentifier, TerminalUrl};
+use crate::rustc_abi::Align;
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_data_structures::profiling::TimePassesFormat;
+use crate::rustc_data_structures::stable_hasher::StableHasher;
+use crate::rustc_complete::{ColorConfig, LanguageIdentifier, TerminalUrl};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_feature::UnstableFeatures;
+use crate::rustc_feature::UnstableFeatures;
 use rustc_hashes::Hash64;
 use rustc_macros::{Decodable, Encodable};
 ```
@@ -37,15 +37,15 @@ use rustc_macros::{Decodable, Encodable};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::edition::Edition;
-use rustc_span::{RealFileName, SourceFileHashAlgorithm};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{RealFileName, SourceFileHashAlgorithm};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_target::spec::{
+use crate::rustc_target::spec::{
     CodeModel, FramePointer, LinkerFlavorCli, MergeFunctions, OnBrokenPipe, PanicStrategy,
     RelocModel, RelroLevel, SanitizerSet, SplitDebuginfo, StackProtector, SymbolVisibility,
     TargetTuple, TlsModel,
@@ -984,7 +984,7 @@ mod desc {
         "one of `none`, `locals-in-tiny-functions`, or `all-locals`";
     pub(crate) const parse_collapse_macro_debuginfo: &str = "one of `no`, `external`, or `yes`";
     pub(crate) const parse_strip: &str = "either `none`, `debuginfo`, or `symbols`";
-    pub(crate) const parse_linker_flavor: &str = ::rustc_target::spec::LinkerFlavorCli::one_of();
+    pub(crate) const parse_linker_flavor: &str = ::crate::rustc_target::spec::LinkerFlavorCli::one_of();
     pub(crate) const parse_dump_mono_stats: &str = "`markdown` (default) or `json`";
     pub(crate) const parse_instrument_coverage: &str = parse_bool;
     pub(crate) const parse_coverage_options: &str = "`block` | `branch` | `condition`";
@@ -1146,7 +1146,7 @@ pub mod parse {
     pub(crate) fn parse_opt_langid(slot: &mut Option<LanguageIdentifier>, v: Option<&str>) -> bool {
         match v {
             Some(s) => {
-                *slot = rustc_errors::LanguageIdentifier::from_str(s).ok();
+                *slot = crate::rustc_errors::LanguageIdentifier::from_str(s).ok();
                 true
             }
             None => false,

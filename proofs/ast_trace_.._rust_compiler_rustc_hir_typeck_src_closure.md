@@ -6,24 +6,24 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=11
 
 ```rust
-//! Code for type-checking closure expressions.
+// Code for type-checking closure expressions.
 
 use std::iter;
 use std::ops::ControlFlow;
 
-use rustc_abi::ExternAbi;
-use rustc_errors::ErrorGuaranteed;
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_complete::ErrorGuaranteed;
 use rustc_hir as hir;
-use rustc_hir::lang_items::LangItem;
-use rustc_hir_analysis::hir_ty_lowering::HirTyLowerer;
-use rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferOk, InferResult};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_hir_analysis::hir_ty_lowering::HirTyLowerer;
+use crate::rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes, InferOk, InferResult};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::traits::{ObligationCauseCode, PredicateObligations};
+use crate::rustc_infer::traits::{ObligationCauseCode, PredicateObligations};
 ```
 
 ## Block 3
@@ -37,8 +37,8 @@ use rustc_macros::{TypeFoldable, TypeVisitable};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::span_bug;
-use rustc_middle::ty::{
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{
     self, ClosureKind, GenericArgs, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
     TypeVisitableExt, TypeVisitor,
 };
@@ -48,16 +48,16 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::LocalDefId;
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_trait_selection::error_reporting::traits::ArgKind;
-use rustc_trait_selection::traits;
+use crate::rustc_trait_selection::error_reporting::traits::ArgKind;
+use crate::rustc_trait_selection::traits;
 use tracing::{debug, instrument, trace};
 ```
 

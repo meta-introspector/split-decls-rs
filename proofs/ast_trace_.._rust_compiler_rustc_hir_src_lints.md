@@ -6,9 +6,9 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_data_structures::fingerprint::Fingerprint;
+use crate::rustc_data_structures::fingerprint::Fingerprint;
 use rustc_macros::HashStable_Generic;
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::{AttrPath, HirId, Target};
 ```

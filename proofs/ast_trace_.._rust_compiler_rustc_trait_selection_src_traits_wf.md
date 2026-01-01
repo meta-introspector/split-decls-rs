@@ -6,25 +6,25 @@ Generated 21 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=11
 
 ```rust
-//! Core logic responsible for determining what it means for various type system
-//! primitives to be "well formed". Actually checking whether these primitives are
-//! well formed is performed elsewhere (e.g. during type checking or item well formedness
-//! checking).
+// Core logic responsible for determining what it means for various type system
+// primitives to be "well formed". Actually checking whether these primitives are
+// well formed is performed elsewhere (e.g. during type checking or item well formedness
+// checking).
 
 use std::iter;
 
 use rustc_hir as hir;
-use rustc_hir::def::DefKind;
-use rustc_hir::lang_items::LangItem;
-use rustc_infer::traits::{ObligationCauseCode, PredicateObligations};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_infer::traits::{ObligationCauseCode, PredicateObligations};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{
     self, GenericArgsRef, Term, TermKind, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
     TypeVisitableExt, TypeVisitor,
 };
@@ -34,15 +34,15 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::parse::feature_err;
-use rustc_span::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, sym};
+use crate::rustc_complete::{Span, sym};
 ```
 
 ## Block 5

@@ -6,56 +6,56 @@ Generated 37 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-//! A pass that annotates every item and method with its stability level,
-//! propagating default levels lexically from parent to children ast nodes.
+// A pass that annotates every item and method with its stability level,
+// propagating default levels lexically from parent to children ast nodes.
 
 use std::num::NonZero;
 
 use rustc_ast_lowering::stability::extern_abi_stability;
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_data_structures::unord::{ExtendUnord, UnordMap, UnordSet};
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_data_structures::unord::{ExtendUnord, UnordMap, UnordSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_feature::{EnabledLangFeature, EnabledLibFeature};
+use crate::rustc_feature::{EnabledLangFeature, EnabledLibFeature};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::attrs::{AttributeKind, DeprecatedSince};
+use crate::rustc_complete::attrs::{AttributeKind, DeprecatedSince};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{CRATE_DEF_ID, LOCAL_CRATE, LocalDefId, LocalModDefId};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, LOCAL_CRATE, LocalDefId, LocalModDefId};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::intravisit::{self, Visitor, VisitorExt};
+use crate::rustc_complete::intravisit::{self, Visitor, VisitorExt};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_hir::{
+use crate::rustc_complete::{
     self as hir, AmbigArg, ConstStability, DefaultBodyStability, FieldDef, Item, ItemKind,
     Stability, StabilityLevel, StableSince, TraitRef, Ty, TyKind, UnstableReason,
     VERSION_PLACEHOLDER, Variant, find_attr,
@@ -66,46 +66,46 @@ use rustc_hir::{
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::hir::nested_filter;
-use rustc_middle::middle::lib_features::{FeatureStability, LibFeatures};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::middle::lib_features::{FeatureStability, LibFeatures};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::middle::privacy::EffectiveVisibilities;
-use rustc_middle::middle::stability::{AllowUnstable, Deprecated, DeprecationEntry, EvalResult};
+use crate::rustc_complete::middle::privacy::EffectiveVisibilities;
+use crate::rustc_complete::middle::stability::{AllowUnstable, Deprecated, DeprecationEntry, EvalResult};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::query::{LocalCrate, Providers};
+use crate::rustc_complete::query::{LocalCrate, Providers};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::print::with_no_trimmed_paths;
-use rustc_middle::ty::{AssocContainer, TyCtxt};
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{AssocContainer, TyCtxt};
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::lint;
-use rustc_session::lint::builtin::{DEPRECATED, INEFFECTIVE_UNSTABLE_TRAIT_IMPL};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::lint::builtin::{DEPRECATED, INEFFECTIVE_UNSTABLE_TRAIT_IMPL};
 ```
 
 ## Block 13
 **Metadata**: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 14
@@ -780,7 +780,7 @@ impl<'tcx> Visitor<'tcx> for Checker<'tcx> {
                     // See: https://github.com/rust-lang/rust/issues/55436
                     //
                     // The exception is when there are both  #[unstable_feature_bound(..)] and
-                    //  #![unstable(feature = "..", issue = "..")] that have the same symbol because
+                    //  #[unstable(feature = "..", issue = "..")] that have the same symbol because
                     // that can effectively mark an impl as unstable.
                     //
                     // For example:
@@ -828,7 +828,7 @@ impl<'tcx> Visitor<'tcx> for Checker<'tcx> {
                         let stable_or_implied_stable = match const_stab {
                             None => true,
                             Some(stab) if stab.is_const_stable() => {
-                                // `#![feature(const_trait_impl)]` is unstable, so any impl declared stable
+                                // `#[feature(const_trait_impl)]` is unstable, so any impl declared stable
                                 // needs to have an error emitted.
                                 // Note: Remove this error once `const_trait_impl` is stabilized
                                 self.tcx
@@ -1156,7 +1156,7 @@ pub fn check_unused_or_stable_features(tcx: TyCtxt<'_>) {
 
     /// For each feature in `defined_features`..
     ///
-    /// - If it is in `remaining_lib_features` (those features with `#![feature(..)]` attributes in
+    /// - If it is in `remaining_lib_features` (those features with `#[feature(..)]` attributes in
     ///   the current crate), check if it is stable (or partially stable) and thus an unnecessary
     ///   attribute.
     /// - If it is in `remaining_implications` (a feature that is referenced by an `implied_by`

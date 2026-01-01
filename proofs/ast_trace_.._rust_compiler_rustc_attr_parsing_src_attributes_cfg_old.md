@@ -6,7 +6,7 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{LitKind, MetaItem, MetaItemInner, MetaItemKind, MetaItemLit, NodeId};
+use crate::rustc_complete::{LitKind, MetaItem, MetaItemInner, MetaItemKind, MetaItemLit, NodeId};
 ```
 
 ## Block 2
@@ -14,26 +14,26 @@ use rustc_ast::{LitKind, MetaItem, MetaItemInner, MetaItemKind, MetaItemLit, Nod
 
 ```rust
 use rustc_ast_pretty::pprust;
-use rustc_feature::{Features, GatedCfg, find_gated_cfg};
+use crate::rustc_feature::{Features, GatedCfg, find_gated_cfg};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_hir::RustcVersion;
-use rustc_session::Session;
-use rustc_session::config::ExpectedValues;
-use rustc_session::lint::builtin::UNEXPECTED_CFGS;
-use rustc_session::lint::{BuiltinLintDiag, Lint};
+use crate::rustc_complete::RustcVersion;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::ExpectedValues;
+use crate::rustc_complete::lint::builtin::UNEXPECTED_CFGS;
+use crate::rustc_complete::lint::{BuiltinLintDiag, Lint};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::parse::feature_err;
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 5

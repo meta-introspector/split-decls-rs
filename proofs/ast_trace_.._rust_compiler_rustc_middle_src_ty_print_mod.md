@@ -7,17 +7,17 @@ Generated 14 AST blocks from source file
 
 ```rust
 use hir::def::Namespace;
-use rustc_data_structures::fx::FxHashSet;
-use rustc_data_structures::sso::SsoHashSet;
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_data_structures::sso::SsoHashSet;
 use rustc_hir as hir;
-use rustc_hir::def_id::{CrateNum, DefId};
+use crate::rustc_complete::def_id::{CrateNum, DefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::definitions::{DefPathData, DisambiguatedDefPathData};
+use crate::rustc_complete::definitions::{DefPathData, DisambiguatedDefPathData};
 ```
 
 ## Block 3

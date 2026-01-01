@@ -38,22 +38,22 @@ use region_constraints::{
 ```rust
 pub use relate::StructurallyRelateAliases;
 pub use relate::combine::PredicateEmittingRelation;
-use rustc_data_structures::fx::{FxHashSet, FxIndexMap};
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::undo_log::{Rollback, UndoLogs};
+use crate::rustc_data_structures::undo_log::{Rollback, UndoLogs};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::unify as ut;
-use rustc_errors::{DiagCtxtHandle, ErrorGuaranteed};
+use crate::rustc_data_structures::unify as ut;
+use crate::rustc_complete::{DiagCtxtHandle, ErrorGuaranteed};
 ```
 
 ## Block 7
@@ -61,7 +61,7 @@ use rustc_errors::{DiagCtxtHandle, ErrorGuaranteed};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 8
@@ -76,25 +76,25 @@ pub use rustc_macros::{TypeFoldable, TypeVisitable};
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::infer::canonical::{CanonicalQueryInput, CanonicalVarValues};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::infer::canonical::{CanonicalQueryInput, CanonicalVarValues};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::mir::ConstraintCategory;
-use rustc_middle::traits::select;
-use rustc_middle::traits::solve::Goal;
-use rustc_middle::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::mir::ConstraintCategory;
+use crate::rustc_complete::traits::select;
+use crate::rustc_complete::traits::solve::Goal;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, BoundVarReplacerDelegate, ConstVid, FloatVid, GenericArg, GenericArgKind, GenericArgs,
     GenericArgsRef, GenericParamDefKind, InferConst, IntVid, OpaqueHiddenType, OpaqueTypeKey,
     PseudoCanonicalInput, Term, TermKind, Ty, TyCtxt, TyVid, TypeFoldable, TypeFolder,
@@ -106,7 +106,7 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Span, Symbol};
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
 ```
 
 ## Block 13
@@ -547,7 +547,7 @@ pub enum SubregionOrigin<'tcx> {
 ```rust
 // `SubregionOrigin` is used a lot. Make sure it doesn't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
-rustc_data_structures::static_assert_size!(SubregionOrigin<'_>, 32);
+crate::rustc_data_structures::static_assert_size!(SubregionOrigin<'_>, 32);
 
 impl<'tcx> SubregionOrigin<'tcx> {
     pub fn to_constraint_category(&self) -> ConstraintCategory<'tcx> {

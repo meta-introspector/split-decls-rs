@@ -6,9 +6,9 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_errors::E0799;
+use crate::rustc_complete::E0799;
 use rustc_macros::Diagnostic;
-use rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 2

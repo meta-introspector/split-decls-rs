@@ -6,14 +6,14 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=check | COMPLEXITY=7 | LINES=22
 
 ```rust
-//! Test the computation of arm intersections.
+// Test the computation of arm intersections.
 
-#![allow(unused_crate_dependencies)]
+#[allow(unused_crate_dependencies)]
 
 use common::*;
-use rustc_pattern_analysis::MatchArm;
-use rustc_pattern_analysis::pat::DeconstructedPat;
-use rustc_pattern_analysis::usefulness::PlaceValidity;
+use crate::rustc_pattern_analysis::MatchArm;
+use crate::rustc_pattern_analysis::pat::DeconstructedPat;
+use crate::rustc_pattern_analysis::usefulness::PlaceValidity;
 
 #[macro_use]
 mod common;

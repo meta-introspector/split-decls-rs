@@ -11,50 +11,50 @@ Generated 23 AST blocks from source file
 use std::mem;
 
 use rustc_ast as ast;
-use rustc_ast::entry::EntryPointType;
-use rustc_ast::mut_visit::*;
-use rustc_ast::visit::Visitor;
-use rustc_ast::{ModKind, attr};
+use crate::rustc_complete::entry::EntryPointType;
+use crate::rustc_complete::mut_visit::*;
+use crate::rustc_complete::visit::Visitor;
+use crate::rustc_complete::{ModKind, attr};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::DiagCtxtHandle;
-use rustc_expand::base::{ExtCtxt, ResolverExpand};
+use crate::rustc_complete::DiagCtxtHandle;
+use crate::rustc_expand::base::{ExtCtxt, ResolverExpand};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_expand::expand::{AstFragment, ExpansionConfig};
+use crate::rustc_expand::expand::{AstFragment, ExpansionConfig};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_feature::Features;
-use rustc_lint_defs::BuiltinLintDiag;
-use rustc_session::Session;
-use rustc_session::lint::builtin::UNNAMEABLE_TEST_ITEMS;
-use rustc_span::hygiene::{AstPass, SyntaxContext, Transparency};
+use crate::rustc_feature::Features;
+use crate::rustc_lint_defs::BuiltinLintDiag;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::lint::builtin::UNNAMEABLE_TEST_ITEMS;
+use crate::rustc_complete::hygiene::{AstPass, SyntaxContext, Transparency};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Ident, Span, Symbol, sym};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, sym};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_target::spec::PanicStrategy;
+use crate::rustc_target::spec::PanicStrategy;
 use smallvec::smallvec;
 use thin_vec::{ThinVec, thin_vec};
 ```
@@ -105,7 +105,7 @@ pub fn inject(
     let panic_strategy = sess.panic_strategy();
     let platform_panic_strategy = sess.target.panic_strategy;
 
-    // Check for #![reexport_test_harness_main = "some_name"] which gives the
+    // Check for #[reexport_test_harness_main = "some_name"] which gives the
     // main test function the name `some_name` without hygiene. This needs to be
     // unconditional, so that the attribute is still marked as used in
     // non-test builds.
@@ -258,7 +258,7 @@ impl<'a> Visitor<'a> for InnerItemLinter<'_> {
 fn entry_point_type(item: &ast::Item, at_root: bool) -> EntryPointType {
     match &item.kind {
         ast::ItemKind::Fn(fn_) => {
-            rustc_ast::entry::entry_point_type(&item.attrs, at_root, Some(fn_.ident.name))
+            crate::rustc_ast::entry::entry_point_type(&item.attrs, at_root, Some(fn_.ident.name))
         }
         _ => EntryPointType::None,
     }

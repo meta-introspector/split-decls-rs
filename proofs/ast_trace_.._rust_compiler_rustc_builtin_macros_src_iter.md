@@ -6,23 +6,23 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::tokenstream::TokenStream;
-use rustc_ast::{CoroutineKind, DUMMY_NODE_ID, Expr, ast, token};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{CoroutineKind, DUMMY_NODE_ID, Expr, ast, token};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::PResult;
-use rustc_expand::base::{self, DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
+use crate::rustc_complete::PResult;
+use crate::rustc_expand::base::{self, DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=16
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 pub(crate) fn expand<'cx>(
     cx: &'cx mut ExtCtxt<'_>,

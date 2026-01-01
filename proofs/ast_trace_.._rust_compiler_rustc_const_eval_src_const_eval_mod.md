@@ -8,28 +8,28 @@ Generated 6 AST blocks from source file
 ```rust
 // Not in interpret to make sure we do not use private implementation details
 
-use rustc_abi::{FieldIdx, VariantIdx};
+use crate::rustc_abi::{FieldIdx, VariantIdx};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, mir};
+use crate::rustc_complete::{bug, mir};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=18
 
 ```rust
-use rustc_span::DUMMY_SP;
+use crate::rustc_complete::DUMMY_SP;
 use tracing::instrument;
 
 use crate::interpret::InterpCx;
@@ -64,7 +64,7 @@ pub(crate) fn try_destructure_mir_constant_for_user_output<'tcx>(
 ) -> Option<mir::DestructuredConstant<'tcx>> {
     let typing_env = ty::TypingEnv::fully_monomorphized();
     // FIXME: use a proper span here?
-    let (ecx, op) = mk_eval_cx_for_const_val(tcx.at(rustc_span::DUMMY_SP), typing_env, val, ty)?;
+    let (ecx, op) = mk_eval_cx_for_const_val(tcx.at(crate::rustc_span::DUMMY_SP), typing_env, val, ty)?;
 
     // We go to `usize` as we cannot allocate anything bigger anyway.
     let (field_count, variant, down) = match ty.kind() {

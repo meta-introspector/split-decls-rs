@@ -8,22 +8,22 @@ Generated 3 AST blocks from source file
 ```rust
 use std::borrow::Cow;
 
-use rustc_errors::{DiagArgValue, LintEmitter};
+use crate::rustc_complete::{DiagArgValue, LintEmitter};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::Target;
-use rustc_hir::lints::{AttributeLint, AttributeLintKind};
+use crate::rustc_complete::Target;
+use crate::rustc_complete::lints::{AttributeLint, AttributeLintKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=emit_attribute_lint | COMPLEXITY=30 | LINES=79
 
 ```rust
-use rustc_span::sym;
+use crate::rustc_complete::sym;
 
 use crate::session_diagnostics;
 
@@ -33,14 +33,14 @@ pub fn emit_attribute_lint<L: LintEmitter>(lint: &AttributeLint<L::Id>, lint_emi
     match kind {
         &AttributeLintKind::UnusedDuplicate { this, other, warning } => lint_emitter
             .emit_node_span_lint(
-                rustc_session::lint::builtin::UNUSED_ATTRIBUTES,
+                crate::rustc_session::lint::builtin::UNUSED_ATTRIBUTES,
                 *id,
                 *span,
                 session_diagnostics::UnusedDuplicate { this, other, warning },
             ),
         AttributeLintKind::IllFormedAttributeInput { suggestions } => {
             lint_emitter.emit_node_span_lint(
-                rustc_session::lint::builtin::ILL_FORMED_ATTRIBUTE_INPUT,
+                crate::rustc_session::lint::builtin::ILL_FORMED_ATTRIBUTE_INPUT,
                 *id,
                 *span,
                 session_diagnostics::IllFormedAttributeInput {
@@ -52,7 +52,7 @@ pub fn emit_attribute_lint<L: LintEmitter>(lint: &AttributeLint<L::Id>, lint_emi
             );
         }
         AttributeLintKind::EmptyAttribute { first_span } => lint_emitter.emit_node_span_lint(
-            rustc_session::lint::builtin::UNUSED_ATTRIBUTES,
+            crate::rustc_session::lint::builtin::UNUSED_ATTRIBUTES,
             *id,
             *first_span,
             session_diagnostics::EmptyAttributeList { attr_span: *first_span },
@@ -70,9 +70,9 @@ pub fn emit_attribute_lint<L: LintEmitter>(lint: &AttributeLint<L::Id>, lint_emi
                     ]
                     .contains(target)
                 {
-                    rustc_session::lint::builtin::USELESS_DEPRECATED
+                    crate::rustc_session::lint::builtin::USELESS_DEPRECATED
                 } else {
-                    rustc_session::lint::builtin::UNUSED_ATTRIBUTES
+                    crate::rustc_session::lint::builtin::UNUSED_ATTRIBUTES
                 },
                 *id,
                 *span,
@@ -89,7 +89,7 @@ pub fn emit_attribute_lint<L: LintEmitter>(lint: &AttributeLint<L::Id>, lint_emi
 
         &AttributeLintKind::InvalidStyle { ref name, is_used_as_inner, target, target_span } => {
             lint_emitter.emit_node_span_lint(
-                rustc_session::lint::builtin::UNUSED_ATTRIBUTES,
+                crate::rustc_session::lint::builtin::UNUSED_ATTRIBUTES,
                 *id,
                 *span,
                 session_diagnostics::InvalidAttrStyle {

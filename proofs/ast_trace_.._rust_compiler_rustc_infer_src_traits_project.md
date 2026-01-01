@@ -6,18 +6,18 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3
 
 ```rust
-//! Code for projecting associated types out of trait references.
+// Code for projecting associated types out of trait references.
 
-use rustc_data_structures::snapshot_map::{self, SnapshotMapRef, SnapshotMapStorage};
+use crate::rustc_data_structures::snapshot_map::{self, SnapshotMapRef, SnapshotMapStorage};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::undo_log::Rollback;
-use rustc_middle::traits::EvaluationResult;
-use rustc_middle::ty;
+use crate::rustc_data_structures::undo_log::Rollback;
+use crate::rustc_complete::traits::EvaluationResult;
+use crate::rustc_complete::ty;
 use tracing::{debug, info};
 ```
 

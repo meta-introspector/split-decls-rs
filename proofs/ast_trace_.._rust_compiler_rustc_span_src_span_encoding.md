@@ -6,10 +6,10 @@ Generated 17 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-use rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_data_structures::fx::FxIndexSet;
 // This code is very hot and uses lots of arithmetic, avoid overflow checks for performance.
 // See https://github.com/rust-lang/rust/pull/119440#issuecomment-1874255727
-use rustc_serialize::int_overflow::DebugStrictAdd;
+use crate::rustc_serialize::int_overflow::DebugStrictAdd;
 
 use crate::def_id::{DefIndex, LocalDefId};
 ```

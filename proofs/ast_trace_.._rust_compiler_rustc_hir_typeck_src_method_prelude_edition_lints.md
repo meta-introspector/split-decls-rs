@@ -16,39 +16,39 @@ use hir::{HirId, ItemKind};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_ast::join_path_idents;
-use rustc_errors::Applicability;
+use crate::rustc_complete::join_path_idents;
+use crate::rustc_complete::Applicability;
 use rustc_hir as hir;
-use rustc_lint::{ARRAY_INTO_ITER, BOXED_SLICE_INTO_ITER};
+use crate::rustc_lint::{ARRAY_INTO_ITER, BOXED_SLICE_INTO_ITER};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::span_bug;
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::lint::builtin::{RUST_2021_PRELUDE_COLLISIONS, RUST_2024_PRELUDE_COLLISIONS};
+use crate::rustc_complete::lint::builtin::{RUST_2021_PRELUDE_COLLISIONS, RUST_2024_PRELUDE_COLLISIONS};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, STDLIB_STABLE_CRATES, Span, kw, sym};
+use crate::rustc_complete::{Ident, STDLIB_STABLE_CRATES, Span, kw, sym};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::debug;
 
 use crate::FnCtxt;

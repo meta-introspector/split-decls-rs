@@ -33,8 +33,8 @@ pub use normalize::{
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=evaluate_root_goal_for_proof_tree_raw | COMPLEXITY=2 | LINES=13
 
 ```rust
-use rustc_middle::query::Providers;
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::TyCtxt;
 pub use select::InferCtxtSelectExt;
 
 fn evaluate_root_goal_for_proof_tree_raw<'tcx>(

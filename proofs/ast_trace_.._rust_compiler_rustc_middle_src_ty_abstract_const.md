@@ -6,9 +6,9 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=4
 
 ```rust
-//! A subset of a mir body used for const evaluability checking.
+// A subset of a mir body used for const evaluability checking.
 
-use rustc_errors::ErrorGuaranteed;
+use crate::rustc_complete::ErrorGuaranteed;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeVisitable};
 ```
 

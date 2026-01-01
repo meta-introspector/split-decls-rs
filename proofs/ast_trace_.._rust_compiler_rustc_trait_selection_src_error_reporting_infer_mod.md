@@ -6,52 +6,52 @@ Generated 58 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=51
 
 ```rust
-//! Error Reporting Code for the inference engine
-//!
-//! Because of the way inference, and in particular region inference,
-//! works, it often happens that errors are not detected until far after
-//! the relevant line of code has been type-checked. Therefore, there is
-//! an elaborate system to track why a particular constraint in the
-//! inference graph arose so that we can explain to the user what gave
-//! rise to a particular error.
-//!
-//! The system is based around a set of "origin" types. An "origin" is the
-//! reason that a constraint or inference variable arose. There are
-//! different "origin" enums for different kinds of constraints/variables
-//! (e.g., `TypeOrigin`, `RegionVariableOrigin`). An origin always has
-//! a span, but also more information so that we can generate a meaningful
-//! error message.
-//!
-//! Having a catalog of all the different reasons an error can arise is
-//! also useful for other reasons, like cross-referencing FAQs etc, though
-//! we are not really taking advantage of this yet.
-//!
-//! # Region Inference
-//!
-//! Region inference is particularly tricky because it always succeeds "in
-//! the moment" and simply registers a constraint. Then, at the end, we
-//! can compute the full graph and report errors, so we need to be able to
-//! store and later report what gave rise to the conflicting constraints.
-//!
-//! # Subtype Trace
-//!
-//! Determining whether `T1 <: T2` often involves a number of subtypes and
-//! subconstraints along the way. A "TypeTrace" is an extended version
-//! of an origin that traces the types and other values that were being
-//! compared. It is not necessarily comprehensive (in fact, at the time of
-//! this writing it only tracks the root values being compared) but I'd
-//! like to extend it to include significant "waypoints". For example, if
-//! you are comparing `(T1, T2) <: (T3, T4)`, and the problem is that `T2
-//! <: T4` fails, I'd like the trace to include enough information to say
-//! "in the 2nd element of the tuple". Similarly, failures when comparing
-//! arguments or return types in fn types should be able to cite the
-//! specific position, etc.
-//!
-//! # Reality vs plan
-//!
-//! Of course, there is still a LOT of code in typeck that has yet to be
-//! ported to this system, and which relies on string concatenation at the
-//! time of error detection.
+// Error Reporting Code for the inference engine
+//
+// Because of the way inference, and in particular region inference,
+// works, it often happens that errors are not detected until far after
+// the relevant line of code has been type-checked. Therefore, there is
+// an elaborate system to track why a particular constraint in the
+// inference graph arose so that we can explain to the user what gave
+// rise to a particular error.
+//
+// The system is based around a set of "origin" types. An "origin" is the
+// reason that a constraint or inference variable arose. There are
+// different "origin" enums for different kinds of constraints/variables
+// (e.g., `TypeOrigin`, `RegionVariableOrigin`). An origin always has
+// a span, but also more information so that we can generate a meaningful
+// error message.
+//
+// Having a catalog of all the different reasons an error can arise is
+// also useful for other reasons, like cross-referencing FAQs etc, though
+// we are not really taking advantage of this yet.
+//
+// # Region Inference
+//
+// Region inference is particularly tricky because it always succeeds "in
+// the moment" and simply registers a constraint. Then, at the end, we
+// can compute the full graph and report errors, so we need to be able to
+// store and later report what gave rise to the conflicting constraints.
+//
+// # Subtype Trace
+//
+// Determining whether `T1 <: T2` often involves a number of subtypes and
+// subconstraints along the way. A "TypeTrace" is an extended version
+// of an origin that traces the types and other values that were being
+// compared. It is not necessarily comprehensive (in fact, at the time of
+// this writing it only tracks the root values being compared) but I'd
+// like to extend it to include significant "waypoints". For example, if
+// you are comparing `(T1, T2) <: (T3, T4)`, and the problem is that `T2
+// <: T4` fails, I'd like the trace to include enough information to say
+// "in the 2nd element of the tuple". Similarly, failures when comparing
+// arguments or return types in fn types should be able to cite the
+// specific position, etc.
+//
+// # Reality vs plan
+//
+// Of course, there is still a LOT of code in typeck that has yet to be
+// ported to this system, and which relies on string concatenation at the
+// time of error detection.
 
 use std::borrow::Cow;
 use std::ops::ControlFlow;
@@ -63,16 +63,16 @@ use std::{cmp, fmt, iter};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_abi::ExternAbi;
-use rustc_ast::join_path_syms;
-use rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_complete::join_path_syms;
+use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_errors::{
+use crate::rustc_complete::{
     Applicability, Diag, DiagStyledString, IntoDiagArg, MultiSpan, StringPart, pluralize,
 };
 ```
@@ -81,11 +81,11 @@ use rustc_errors::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::DefId;
-use rustc_hir::intravisit::Visitor;
-use rustc_hir::lang_items::LangItem;
-use rustc_hir::{self as hir};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{self as hir};
 ```
 
 ## Block 5
@@ -93,17 +93,17 @@ use rustc_hir::{self as hir};
 
 ```rust
 use rustc_macros::extension;
-use rustc_middle::bug;
-use rustc_middle::dep_graph::DepContext;
-use rustc_middle::traits::PatternOriginExpr;
-use rustc_middle::ty::error::{ExpectedFound, TypeError, TypeErrorToStringExt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::dep_graph::DepContext;
+use crate::rustc_complete::traits::PatternOriginExpr;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError, TypeErrorToStringExt};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::print::{
+use crate::rustc_complete::ty::print::{
     PrintError, PrintTraitRefExt as _, WrapBinderMode, with_forced_trimmed_paths,
 };
 ```
@@ -112,7 +112,7 @@ use rustc_middle::ty::print::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, List, ParamEnv, Region, Ty, TyCtxt, TypeFoldable, TypeSuperVisitable, TypeVisitable,
     TypeVisitableExt,
 };
@@ -122,8 +122,8 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::LOCAL_CRATE;
-use rustc_span::{BytePos, DUMMY_SP, DesugaringKind, Pos, Span, Symbol, sym};
+use crate::rustc_complete::def_id::LOCAL_CRATE;
+use crate::rustc_complete::{BytePos, DUMMY_SP, DesugaringKind, Pos, Span, Symbol, sym};
 ```
 
 ## Block 9
@@ -313,7 +313,7 @@ let mut err = mk_diag(self.ty_to_string(actual_ty));
         // FIXME(estebank): unify with `report_similar_impl_candidates`. The message is similar,
         // even if the logic needed to detect the case is very different.
         use hir::def_id::CrateNum;
-        use rustc_hir::definitions::DisambiguatedDefPathData;
+        use crate::rustc_complete::definitions::DisambiguatedDefPathData;
         use ty::GenericArg;
         use ty::print::Printer;
 
@@ -477,7 +477,7 @@ let mut err = mk_diag(self.ty_to_string(actual_ty));
 ```rust
 };
                             let dependency = if both_direct_dependencies {
-                                if let rustc_session::cstore::ExternCrateSource::Extern(def_id) =
+                                if let crate::rustc_session::cstore::ExternCrateSource::Extern(def_id) =
                                     data.src
                                     && let Some(name) = self.tcx.opt_item_name(def_id)
                                 {
@@ -1057,7 +1057,7 @@ Applicability::MaybeIncorrect,
         let sig2 = &(self.normalize_fn_sig)(*sig2);
 
         let get_lifetimes = |sig| {
-            use rustc_hir::def::Namespace;
+            use crate::rustc_complete::def::Namespace;
             let (sig, reg) = ty::print::FmtPrinter::new(self.tcx, Namespace::TypeNS)
                 .name_all_regions(sig, WrapBinderMode::ForAll)
                 .unwrap();
@@ -2171,7 +2171,7 @@ exp_found, expected, found
                                     self.tcx
                                         .signature_unclosure(
                                             args.as_closure().sig(),
-                                            rustc_hir::Safety::Safe,
+                                            crate::rustc_hir::Safety::Safe,
                                         )
                                         .to_string(),
                                 ),
@@ -2556,7 +2556,7 @@ let span = trace.cause.span;
 ```
 
 ## Block 58
-**Metadata**: AST_ID=58 | TYPE=FUNCTION | NAME=expected_found_str | COMPLEXITY=175 | LINES=299
+**Metadata**: AST_ID=58 | TYPE=FUNCTION | NAME=expected_found_str | COMPLEXITY=176 | LINES=299
 
 ```rust
 fn expected_found_str<T: fmt::Display + TypeFoldable<TyCtxt<'tcx>>>(
@@ -2796,7 +2796,7 @@ impl<'tcx> ObligationCause<'tcx> {
 pub struct ObligationCauseAsDiagArg<'tcx>(pub ObligationCause<'tcx>);
 
 impl IntoDiagArg for ObligationCauseAsDiagArg<'_> {
-    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         let kind = match self.0.code() {
             ObligationCauseCode::CompareImplItem { kind: ty::AssocKind::Fn { .. }, .. } => {
                 "method_compat"
@@ -2814,7 +2814,7 @@ impl IntoDiagArg for ObligationCauseAsDiagArg<'_> {
             _ => "other",
         }
         .into();
-        rustc_errors::DiagArgValue::Str(kind)
+        crate::rustc_errors::DiagArgValue::Str(kind)
     }
 }
 

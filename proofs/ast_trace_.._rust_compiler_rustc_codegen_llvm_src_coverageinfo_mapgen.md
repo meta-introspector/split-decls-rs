@@ -10,21 +10,21 @@ use std::assert_matches::assert_matches;
 use std::sync::Arc;
 
 use itertools::Itertools;
-use rustc_abi::Align;
-use rustc_codegen_ssa::traits::{BaseTypeCodegenMethods, ConstCodegenMethods};
+use crate::rustc_abi::Align;
+use crate::rustc_codegen_ssa::traits::{BaseTypeCodegenMethods, ConstCodegenMethods};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_index::IndexVec;
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_index::IndexVec;
 use rustc_macros::TryFromU32;
-use rustc_middle::ty::TyCtxt;
-use rustc_session::RemapFileNameExt;
-use rustc_session::config::RemapPathScopeComponents;
-use rustc_span::{SourceFile, StableSourceFileId};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::RemapFileNameExt;
+use crate::rustc_complete::config::RemapPathScopeComponents;
+use crate::rustc_complete::{SourceFile, StableSourceFileId};
 ```
 
 ## Block 3
@@ -216,7 +216,7 @@ impl GlobalFileTable {
 **Metadata**: AST_ID=8 | TYPE=STRUCT | NAME=GlobalFileId | COMPLEXITY=3 | LINES=6
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// An index into the CGU's overall list of file paths. The underlying paths
     /// will be embedded in the `__llvm_covmap` linker section.
     struct GlobalFileId {}
@@ -227,7 +227,7 @@ rustc_index::newtype_index! {
 **Metadata**: AST_ID=9 | TYPE=STRUCT | NAME=LocalFileId | COMPLEXITY=3 | LINES=6
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// An index into a function's list of global file IDs. That underlying list
     /// of local-to-global mappings will be embedded in the function's record in
     /// the `__llvm_covfun` linker section.

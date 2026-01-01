@@ -12,28 +12,28 @@ use std::ops::Bound;
 
 use ast::Label;
 use rustc_ast as ast;
-use rustc_ast::token::{self, Delimiter, InvisibleOrigin, MetaVarKind, TokenKind};
+use crate::rustc_complete::token::{self, Delimiter, InvisibleOrigin, MetaVarKind, TokenKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::util::classify::{self, TrailingBrace};
+use crate::rustc_complete::util::classify::{self, TrailingBrace};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::visit::{Visitor, walk_expr};
+use crate::rustc_complete::visit::{Visitor, walk_expr};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_ast::{
+use crate::rustc_complete::{
     AttrStyle, AttrVec, Block, BlockCheckMode, DUMMY_NODE_ID, Expr, ExprKind, HasAttrs, Local,
     LocalKind, MacCall, MacCallStmt, MacStmtStyle, Recovered, Stmt, StmtKind,
 };
@@ -43,14 +43,14 @@ use rustc_ast::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{Applicability, Diag, PResult};
+use crate::rustc_complete::{Applicability, Diag, PResult};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{BytePos, ErrorGuaranteed, Ident, Span, kw, sym};
+use crate::rustc_complete::{BytePos, ErrorGuaranteed, Ident, Span, kw, sym};
 ```
 
 ## Block 7
@@ -284,7 +284,7 @@ impl<'a> Parser<'a> {
             })?;
             // `DUMMY_SP` will get overwritten later in this function
             Ok((
-                this.mk_stmt(rustc_span::DUMMY_SP, StmtKind::Expr(expr)),
+                this.mk_stmt(crate::rustc_span::DUMMY_SP, StmtKind::Expr(expr)),
                 Trailing::No,
                 UsePreAttrPos::No,
             ))

@@ -6,20 +6,20 @@ Generated 33 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=27
 
 ```rust
-//! HIR ty lowering: Lowers type-system entities[^1] from the [HIR][hir] to
-//! the [`rustc_middle::ty`] representation.
-//!
-//! Not to be confused with *AST lowering* which lowers AST constructs to HIR ones
-//! or with *THIR* / *MIR* *lowering* / *building* which lowers HIR *bodies*
-//! (i.e., “executable code”) to THIR / MIR.
-//!
-//! Most lowering routines are defined on [`dyn HirTyLowerer`](HirTyLowerer) directly,
-//! like the main routine of this module, `lower_ty`.
-//!
-//! This module used to be called `astconv`.
-//!
-//! [^1]: This includes types, lifetimes / regions, constants in type positions,
-//! trait references and bounds.
+// HIR ty lowering: Lowers type-system entities[^1] from the [HIR][hir] to
+// the [`crate::rustc_middle::ty`] representation.
+//
+// Not to be confused with *AST lowering* which lowers AST constructs to HIR ones
+// or with *THIR* / *MIR* *lowering* / *building* which lowers HIR *bodies*
+// (i.e., “executable code”) to THIR / MIR.
+//
+// Most lowering routines are defined on [`dyn HirTyLowerer`](HirTyLowerer) directly,
+// like the main routine of this module, `lower_ty`.
+//
+// This module used to be called `astconv`.
+//
+// [^1]: This includes types, lifetimes / regions, constants in type positions,
+// trait references and bounds.
 
 mod bounds;
 mod cmse;
@@ -31,16 +31,16 @@ mod lint;
 use std::assert_matches::assert_matches;
 use std::slice;
 
-use rustc_ast::TraitObjectSyntax;
-use rustc_data_structures::fx::{FxHashSet, FxIndexMap, FxIndexSet};
+use crate::rustc_complete::TraitObjectSyntax;
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap, FxIndexSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, ErrorGuaranteed, FatalError, struct_span_code_err,
 };
 ```
@@ -49,35 +49,35 @@ use rustc_errors::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def::{CtorKind, CtorOf, DefKind, Res};
+use crate::rustc_complete::def::{CtorKind, CtorOf, DefKind, Res};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, AnonConst, GenericArg, GenericArgs, HirId};
+use crate::rustc_complete::{self as hir, AnonConst, GenericArg, GenericArgs, HirId};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
+use crate::rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_infer::traits::DynCompatibilityViolation;
+use crate::rustc_infer::traits::DynCompatibilityViolation;
 use rustc_macros::{TypeFoldable, TypeVisitable};
 ```
 
@@ -85,10 +85,10 @@ use rustc_macros::{TypeFoldable, TypeVisitable};
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_middle::middle::stability::AllowUnstable;
-use rustc_middle::mir::interpret::LitToConstInput;
-use rustc_middle::ty::print::PrintPolyTraitRefExt as _;
-use rustc_middle::ty::{
+use crate::rustc_complete::middle::stability::AllowUnstable;
+use crate::rustc_complete::mir::interpret::LitToConstInput;
+use crate::rustc_complete::ty::print::PrintPolyTraitRefExt as _;
+use crate::rustc_complete::ty::{
     self, Const, GenericArgKind, GenericArgsRef, GenericParamDefKind, Ty, TyCtxt, TypeVisitableExt,
     TypingMode, Upcast, fold_regions,
 };
@@ -98,25 +98,25 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::lint::builtin::AMBIGUOUS_ASSOCIATED_ITEMS;
-use rustc_session::parse::feature_err;
-use rustc_span::{DUMMY_SP, Ident, Span, kw, sym};
+use crate::rustc_complete::lint::builtin::AMBIGUOUS_ASSOCIATED_ITEMS;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, kw, sym};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits::wf::object_region_bounds;
-use rustc_trait_selection::traits::{self, FulfillmentError};
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits::wf::object_region_bounds;
+use crate::rustc_trait_selection::traits::{self, FulfillmentError};
 ```
 
 ## Block 12
@@ -220,7 +220,7 @@ pub struct InherentAssocCandidate {
 
 ```rust
 /// A context which can lower type-system entities from the [HIR][hir] to
-/// the [`rustc_middle::ty`] representation.
+/// the [`crate::rustc_middle::ty`] representation.
 ///
 /// This trait used to be called `AstConv`.
 pub trait HirTyLowerer<'tcx> {
@@ -552,7 +552,7 @@ pub trait GenericArgsLowerer<'a, 'tcx> {
 ```
 
 ## Block 33
-**Metadata**: AST_ID=33 | TYPE=FUNCTION | NAME=lower_lifetime | COMPLEXITY=1003 | LINES=2457
+**Metadata**: AST_ID=33 | TYPE=FUNCTION | NAME=lower_lifetime | COMPLEXITY=1004 | LINES=2457
 
 ```rust
 impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
@@ -952,7 +952,7 @@ impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
         // we still need to perform several validation steps (see below). Instead, simply "pour" all
         // resulting bounds "down the drain", i.e., into a new `Vec` that just gets dropped at the end.
         let (polarity, bounds) = match polarity {
-            rustc_ast::BoundPolarity::Positive
+            crate::rustc_ast::BoundPolarity::Positive
                 if tcx.is_lang_item(trait_def_id, hir::LangItem::PointeeSized) =>
             {
                 // To elaborate on the comment directly above, regarding `PointeeSized` specifically,
@@ -962,9 +962,9 @@ impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
                 // supertrait / bound / predicate is added to some items.
                 (ty::PredicatePolarity::Positive, &mut Vec::new())
             }
-            rustc_ast::BoundPolarity::Positive => (ty::PredicatePolarity::Positive, bounds),
-            rustc_ast::BoundPolarity::Negative(_) => (ty::PredicatePolarity::Negative, bounds),
-            rustc_ast::BoundPolarity::Maybe(_) => {
+            crate::rustc_ast::BoundPolarity::Positive => (ty::PredicatePolarity::Positive, bounds),
+            crate::rustc_ast::BoundPolarity::Negative(_) => (ty::PredicatePolarity::Negative, bounds),
+            crate::rustc_ast::BoundPolarity::Maybe(_) => {
                 (ty::PredicatePolarity::Positive, &mut Vec::new())
             }
         };
@@ -1010,7 +1010,7 @@ impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
                 // This may have performance implications, so please check perf when
                 // removing it.
                 // This was added in <https://github.com/rust-lang/rust/pull/123302>.
-                if tcx.is_lang_item(trait_def_id, rustc_hir::LangItem::Sized) {
+                if tcx.is_lang_item(trait_def_id, crate::rustc_hir::LangItem::Sized) {
                     bounds.insert(0, bound);
                 } else {
                     bounds.push(bound);
@@ -1030,7 +1030,7 @@ impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
                         if self.tcx().features().const_trait_impl() {
                             ""
                         } else {
-                            "enable `#![feature(const_trait_impl)]` in your crate and "
+                            "enable `#[feature(const_trait_impl)]` in your crate and "
                         },
                     ),
                     (false, _) | (_, false) => (Some(tcx.def_span(trait_def_id)), None, ""),
@@ -2845,7 +2845,7 @@ impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
         &self,
         hir_id: HirId,
         safety: hir::Safety,
-        abi: rustc_abi::ExternAbi,
+        abi: crate::rustc_abi::ExternAbi,
         decl: &hir::FnDecl<'tcx>,
         generics: Option<&hir::Generics<'_>>,
         hir_ty: Option<&hir::Ty<'_>>,

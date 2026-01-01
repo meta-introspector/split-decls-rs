@@ -6,20 +6,20 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{FieldIdx, VariantIdx};
+use crate::rustc_abi::{FieldIdx, VariantIdx};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_middle::mir::interpret::Scalar;
-use rustc_middle::mir::*;
-use rustc_middle::thir::*;
-use rustc_middle::ty;
-use rustc_middle::ty::cast::mir_cast_kind;
-use rustc_span::Span;
-use rustc_span::source_map::Spanned;
+use crate::rustc_complete::mir::interpret::Scalar;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty;
+use crate::rustc_complete::ty::cast::mir_cast_kind;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::source_map::Spanned;
 
 use super::{PResult, ParseCtxt, parse_by_kind};
 ```

@@ -8,28 +8,28 @@ Generated 10 AST blocks from source file
 ```rust
 use std::ops::ControlFlow;
 
-use rustc_infer::infer::TypeOutlivesConstraint;
-use rustc_infer::infer::canonical::CanonicalQueryInput;
-use rustc_infer::traits::query::OutlivesBound;
-use rustc_infer::traits::query::type_op::ImpliedOutlivesBounds;
-use rustc_middle::infer::canonical::CanonicalQueryResponse;
-use rustc_middle::traits::ObligationCause;
-use rustc_middle::ty::outlives::{Component, push_outlives_components};
+use crate::rustc_infer::infer::TypeOutlivesConstraint;
+use crate::rustc_infer::infer::canonical::CanonicalQueryInput;
+use crate::rustc_infer::traits::query::OutlivesBound;
+use crate::rustc_infer::traits::query::type_op::ImpliedOutlivesBounds;
+use crate::rustc_complete::infer::canonical::CanonicalQueryResponse;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty::outlives::{Component, push_outlives_components};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, ParamEnvAnd, Ty, TyCtxt, TypeVisitable, TypeVisitor};
+use crate::rustc_complete::ty::{self, ParamEnvAnd, Ty, TyCtxt, TypeVisitable, TypeVisitor};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::CRATE_DEF_ID;
-use rustc_span::{DUMMY_SP, Span, sym};
+use crate::rustc_complete::def_id::CRATE_DEF_ID;
+use crate::rustc_complete::{DUMMY_SP, Span, sym};
 ```
 
 ## Block 4
@@ -111,7 +111,7 @@ pub fn compute_implied_outlives_bounds_inner<'tcx>(
     // process it next. Because the resulting predicates aren't always
     // guaranteed to be a subset of the original type, so we need to store the
     // WF args we've computed in a set.
-    let mut checked_wf_args = rustc_data_structures::fx::FxHashSet::default();
+    let mut checked_wf_args = crate::rustc_data_structures::fx::FxHashSet::default();
     let mut wf_args = vec![ty.into(), normalize_ty(ty)?.into()];
 
     let mut outlives_bounds: Vec<OutlivesBound<'tcx>> = vec![];

@@ -9,29 +9,29 @@ Generated 20 AST blocks from source file
 // ignore-tidy-filelength
 // FIXME: we should move the field error reporting code somewhere else.
 
-//! Type checking expressions.
-//!
-//! See [`rustc_hir_analysis::check`] for more context on type checking in general.
+// Type checking expressions.
+//
+// See [`crate::rustc_hir_analysis::check`] for more context on type checking in general.
 
-use rustc_abi::{FIRST_VARIANT, FieldIdx};
+use crate::rustc_abi::{FIRST_VARIANT, FieldIdx};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::util::parser::ExprPrecedence;
-use rustc_data_structures::fx::{FxHashMap, FxHashSet};
+use crate::rustc_complete::util::parser::ExprPrecedence;
+use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_data_structures::unord::UnordMap;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_data_structures::unord::UnordMap;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, ErrorGuaranteed, MultiSpan, StashKey, Subdiagnostic, listify, pluralize,
     struct_span_code_err,
 };
@@ -41,81 +41,81 @@ use rustc_errors::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::{CtorKind, DefKind, Res};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{CtorKind, DefKind, Res};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_hir::lang_items::LangItem;
-use rustc_hir::{ExprKind, HirId, QPath, find_attr};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{ExprKind, HirId, QPath, find_attr};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir_analysis::NoVariantNamed;
-use rustc_hir_analysis::hir_ty_lowering::{FeedConstTy, HirTyLowerer as _};
+use crate::rustc_hir_analysis::NoVariantNamed;
+use crate::rustc_hir_analysis::hir_ty_lowering::{FeedConstTy, HirTyLowerer as _};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::{self, DefineOpaqueTypes, InferOk, RegionVariableOrigin};
+use crate::rustc_infer::infer::{self, DefineOpaqueTypes, InferOk, RegionVariableOrigin};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_infer::traits::query::NoSolution;
-use rustc_middle::ty::adjustment::{Adjust, Adjustment, AllowTwoPhase};
+use crate::rustc_infer::traits::query::NoSolution;
+use crate::rustc_complete::ty::adjustment::{Adjust, Adjustment, AllowTwoPhase};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, AdtKind, GenericArgsRef, Ty, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, AdtKind, GenericArgsRef, Ty, TypeVisitableExt};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_session::errors::ExprParenthesesNeeded;
-use rustc_session::parse::feature_err;
-use rustc_span::edit_distance::find_best_match_for_name;
-use rustc_span::hygiene::DesugaringKind;
-use rustc_span::source_map::Spanned;
-use rustc_span::{Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::errors::ExprParenthesesNeeded;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_complete::hygiene::DesugaringKind;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Ident, Span, Symbol, kw, sym};
 ```
 
 ## Block 13
 **Metadata**: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits::{self, ObligationCauseCode, ObligationCtxt};
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits::{self, ObligationCauseCode, ObligationCtxt};
 ```
 
 ## Block 14
@@ -2558,7 +2558,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 you_can = if self.tcx.features().default_field_values() {
                     "you can"
                 } else {
-                    "if you added `#![feature(default_field_values)]` to your crate you could"
+                    "if you added `#[feature(default_field_values)]` to your crate you could"
                 },
             );
             if let Some(hir_field) = hir_fields.last() {
@@ -3301,8 +3301,8 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         let expr_snippet =
             self.tcx.sess.source_map().span_to_snippet(expr.span).unwrap_or_default();
         let is_wrapped = expr_snippet.starts_with('(') && expr_snippet.ends_with(')');
-        let after_open = expr.span.lo() + rustc_span::BytePos(1);
-        let before_close = expr.span.hi() - rustc_span::BytePos(1);
+        let after_open = expr.span.lo() + crate::rustc_span::BytePos(1);
+        let before_close = expr.span.hi() - crate::rustc_span::BytePos(1);
 
         if expr_is_call && is_wrapped {
             err.multipart_suggestion(
@@ -3907,7 +3907,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     }
 
     fn check_expr_asm(&self, asm: &'tcx hir::InlineAsm<'tcx>, span: Span) -> Ty<'tcx> {
-        if let rustc_ast::AsmMacro::NakedAsm = asm.asm_macro {
+        if let crate::rustc_ast::AsmMacro::NakedAsm = asm.asm_macro {
             if !find_attr!(self.tcx.get_all_attrs(self.body_id), AttributeKind::Naked(..)) {
                 self.tcx.dcx().emit_err(NakedAsmOutsideNakedFn { span });
             }
@@ -3979,7 +3979,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         self.tcx.adjust_ident_and_get_scope(field, container_def.did(), block);
 
                     if !self.tcx.features().offset_of_enum() {
-                        rustc_session::parse::feature_err(
+                        crate::rustc_session::parse::feature_err(
                             &self.tcx.sess,
                             sym::offset_of_enum,
                             ident.span,

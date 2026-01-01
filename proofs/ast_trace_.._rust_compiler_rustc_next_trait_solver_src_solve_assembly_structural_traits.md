@@ -6,8 +6,8 @@ Generated 23 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=7
 
 ```rust
-//! Code which is used by built-in goals that match "structurally", such a auto
-//! traits, `Copy`/`Clone`.
+// Code which is used by built-in goals that match "structurally", such a auto
+// traits, `Copy`/`Clone`.
 
 use derive_where::derive_where;
 use rustc_type_ir::data_structures::HashMap;

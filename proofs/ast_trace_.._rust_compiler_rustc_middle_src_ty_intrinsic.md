@@ -13,8 +13,8 @@ use rustc_macros::{Decodable, Encodable, HashStable};
 **Metadata**: AST_ID=2 | TYPE=STRUCT | NAME=IntrinsicDef | COMPLEXITY=2 | LINES=13
 
 ```rust
-use rustc_span::Symbol;
-use rustc_span::def_id::DefId;
+use crate::rustc_complete::Symbol;
+use crate::rustc_complete::def_id::DefId;
 
 use super::TyCtxt;
 

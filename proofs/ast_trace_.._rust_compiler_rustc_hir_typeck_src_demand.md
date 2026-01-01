@@ -6,7 +6,7 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{Applicability, Diag, MultiSpan, listify};
+use crate::rustc_complete::{Applicability, Diag, MultiSpan, listify};
 ```
 
 ## Block 2
@@ -14,35 +14,35 @@ use rustc_errors::{Applicability, Diag, MultiSpan, listify};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::def::Res;
-use rustc_hir::intravisit::Visitor;
-use rustc_infer::infer::DefineOpaqueTypes;
-use rustc_middle::bug;
-use rustc_middle::ty::adjustment::AllowTwoPhase;
-use rustc_middle::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::def::Res;
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_infer::infer::DefineOpaqueTypes;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::adjustment::AllowTwoPhase;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::print::with_no_trimmed_paths;
-use rustc_middle::ty::{self, AssocItem, BottomUpFolder, Ty, TypeFoldable, TypeVisitableExt};
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{self, AssocItem, BottomUpFolder, Ty, TypeFoldable, TypeVisitableExt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Ident, Span, sym};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, sym};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=adjust_expr_for_assert_eq_macro | COMPLEXITY=622 | LINES=1264
 
 ```rust
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits::ObligationCause;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits::ObligationCause;
 use tracing::instrument;
 
 use super::method::probe;
@@ -667,7 +667,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         // Locate all other `break` statements within the same `loop` that might
                         // have affected inference.
                         struct FindBreaks<'tcx> {
-                            label: Option<rustc_ast::Label>,
+                            label: Option<crate::rustc_ast::Label>,
                             uses: Vec<&'tcx hir::Expr<'tcx>>,
                             nest_depth: usize,
                         }

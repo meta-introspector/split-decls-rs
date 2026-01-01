@@ -6,9 +6,9 @@ Generated 37 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12
 
 ```rust
-//! The implementation of the query system itself. This defines the macros that
-//! generate the actual methods on tcx which find and execute the provider,
-//! manage the caches, and so forth.
+// The implementation of the query system itself. This defines the macros that
+// generate the actual methods on tcx which find and execute the provider,
+// manage the caches, and so forth.
 
 use std::cell::Cell;
 use std::fmt::Debug;
@@ -16,30 +16,30 @@ use std::hash::Hash;
 use std::mem;
 
 use hashbrown::hash_table::Entry;
-use rustc_data_structures::fingerprint::Fingerprint;
-use rustc_data_structures::sharded::{self, Sharded};
+use crate::rustc_data_structures::fingerprint::Fingerprint;
+use crate::rustc_data_structures::sharded::{self, Sharded};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_data_structures::{outline, sync};
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_data_structures::{outline, sync};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{Diag, FatalError, StashKey};
+use crate::rustc_complete::{Diag, FatalError, StashKey};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 5

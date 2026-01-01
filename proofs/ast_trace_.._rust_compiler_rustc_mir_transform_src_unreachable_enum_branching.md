@@ -6,12 +6,12 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-//! A pass that eliminates branches on uninhabited or unreachable enum variants.
+// A pass that eliminates branches on uninhabited or unreachable enum variants.
 
-use rustc_abi::Variants;
-use rustc_data_structures::fx::FxHashSet;
-use rustc_middle::bug;
-use rustc_middle::mir::{
+use crate::rustc_abi::Variants;
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::{
     BasicBlock, BasicBlockData, BasicBlocks, Body, Local, Operand, Rvalue, StatementKind,
     TerminatorKind,
 };
@@ -21,8 +21,8 @@ use rustc_middle::mir::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::layout::TyAndLayout;
-use rustc_middle::ty::{Ty, TyCtxt};
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::ty::{Ty, TyCtxt};
 ```
 
 ## Block 3
@@ -113,7 +113,7 @@ fn variant_discriminants<'tcx>(
 
 ```rust
 impl<'tcx> crate::MirPass<'tcx> for UnreachableEnumBranching {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() > 0
     }
 

@@ -6,12 +6,12 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=14
 
 ```rust
-//! Experimental types for the trait query interface. The methods
-//! defined in this module are all based on **canonicalization**,
-//! which makes a canonical query by replacing unbound inference
-//! variables and regions, so that results can be reused more broadly.
-//! The providers for the queries defined here can be found in
-//! `rustc_traits`.
+// Experimental types for the trait query interface. The methods
+// defined in this module are all based on **canonicalization**,
+// which makes a canonical query by replacing unbound inference
+// variables and regions, so that results can be reused more broadly.
+// The providers for the queries defined here can be found in
+// `rustc_traits`.
 
 pub mod dropck_outlives;
 pub mod evaluate_obligation;
@@ -19,7 +19,7 @@ pub mod method_autoderef;
 pub mod normalize;
 pub mod type_op;
 
-pub use rustc_middle::traits::query::*;
+pub use crate::rustc_complete::traits::query::*;
 ```
 
 ---

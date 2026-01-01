@@ -8,38 +8,38 @@ Generated 7 AST blocks from source file
 ```rust
 use std::fmt;
 
-use rustc_errors::{Diag, E0275, EmissionGuarantee, ErrorGuaranteed, struct_span_code_err};
+use crate::rustc_complete::{Diag, E0275, EmissionGuarantee, ErrorGuaranteed, struct_span_code_err};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir::def::Namespace;
-use rustc_hir::def_id::LOCAL_CRATE;
-use rustc_hir::limit::Limit;
-use rustc_infer::traits::{Obligation, PredicateObligation};
+use crate::rustc_complete::def::Namespace;
+use crate::rustc_complete::def_id::LOCAL_CRATE;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_infer::traits::{Obligation, PredicateObligation};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::print::{FmtPrinter, Print};
+use crate::rustc_complete::ty::print::{FmtPrinter, Print};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, TyCtxt, Upcast};
+use crate::rustc_complete::ty::{self, TyCtxt, Upcast};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::debug;
 
 use crate::error_reporting::TypeErrCtxt;
@@ -64,7 +64,7 @@ pub fn suggest_new_overflow_limit<'tcx, G: EmissionGuarantee>(
     };
     err.help(format!(
         "consider increasing the recursion limit by adding a \
-         `#![recursion_limit = \"{}\"]` attribute to your crate (`{}`)",
+         `#[recursion_limit = \"{}\"]` attribute to your crate (`{}`)",
         suggested_limit,
         tcx.crate_name(LOCAL_CRATE),
     ));

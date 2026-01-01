@@ -6,44 +6,44 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=4
 
 ```rust
-//! Error Reporting for `impl` items that do not match the obligations from their `trait`.
+// Error Reporting for `impl` items that do not match the obligations from their `trait`.
 
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::def::{Namespace, Res};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def::{Namespace, Res};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_hir::intravisit::{Visitor, walk_ty};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::intravisit::{Visitor, walk_ty};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, AmbigArg};
+use crate::rustc_complete::{self as hir, AmbigArg};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_infer::infer::SubregionOrigin;
-use rustc_middle::hir::nested_filter;
-use rustc_middle::traits::ObligationCauseCode;
-use rustc_middle::ty::error::ExpectedFound;
-use rustc_middle::ty::print::RegionHighlightMode;
-use rustc_middle::ty::{self, TyCtxt, TypeVisitable};
+use crate::rustc_infer::infer::SubregionOrigin;
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::traits::ObligationCauseCode;
+use crate::rustc_complete::ty::error::ExpectedFound;
+use crate::rustc_complete::ty::print::RegionHighlightMode;
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitable};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::debug;
 
 use crate::error_reporting::infer::nice_region_error::NiceRegionError;

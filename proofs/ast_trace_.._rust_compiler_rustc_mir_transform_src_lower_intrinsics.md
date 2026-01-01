@@ -6,24 +6,24 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-//! Lowers intrinsic calls
+// Lowers intrinsic calls
 
-use rustc_middle::mir::*;
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 3
-**Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=172 | LINES=381
+**Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=173 | LINES=381
 
 ```rust
-use rustc_span::sym;
+use crate::rustc_complete::sym;
 
 use crate::take_array;
 
@@ -89,7 +89,7 @@ impl<'tcx> crate::MirPass<'tcx> for LowerIntrinsics {
                             terminator.source_info,
                             StatementKind::Intrinsic(Box::new(
                                 NonDivergingIntrinsic::CopyNonOverlapping(
-                                    rustc_middle::mir::CopyNonOverlapping {
+                                    crate::rustc_middle::mir::CopyNonOverlapping {
                                         src: src.node,
                                         dst: dst.node,
                                         count: count.node,

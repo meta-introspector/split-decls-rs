@@ -6,7 +6,7 @@ Generated 15 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=17
 
 ```rust
-//! Code shared by trait and projection goals for candidate assembly.
+// Code shared by trait and projection goals for candidate assembly.
 
 pub(super) mod structural_traits;
 

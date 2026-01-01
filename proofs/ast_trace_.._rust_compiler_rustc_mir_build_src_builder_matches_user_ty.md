@@ -6,37 +6,37 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=10
 
 ```rust
-//! Helper code for building a linked list of user-type projections on the
-//! stack while visiting a THIR pattern.
-//!
-//! This avoids having to repeatedly clone a partly-built [`UserTypeProjections`]
-//! at every step of the traversal, which is what the previous code was doing.
+// Helper code for building a linked list of user-type projections on the
+// stack while visiting a THIR pattern.
+//
+// This avoids having to repeatedly clone a partly-built [`UserTypeProjections`]
+// at every step of the traversal, which is what the previous code was doing.
 
 use std::assert_matches::assert_matches;
 use std::iter;
 
-use rustc_abi::{FieldIdx, VariantIdx};
+use crate::rustc_abi::{FieldIdx, VariantIdx};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{ProjectionElem, UserTypeProjection, UserTypeProjections};
+use crate::rustc_complete::mir::{ProjectionElem, UserTypeProjection, UserTypeProjections};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{AdtDef, UserTypeAnnotationIndex};
+use crate::rustc_complete::ty::{AdtDef, UserTypeAnnotationIndex};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=14
 
 ```rust
-use rustc_span::Symbol;
+use crate::rustc_complete::Symbol;
 
 /// One of a list of "operations" that can be used to lazily build projections
 /// of user-specified types.

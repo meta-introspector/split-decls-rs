@@ -6,37 +6,37 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=23
 
 ```rust
-//! This crate contains implementations of built-in macros and other code generating facilities
-//! injecting code into the crate before it is lowered to HIR.
+// This crate contains implementations of built-in macros and other code generating facilities
+// injecting code into the crate before it is lowered to HIR.
 
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![allow(rustc::diagnostic_outside_of_impl)]
-#![allow(rustc::untranslatable_diagnostic)]
-#![doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
-#![doc(rust_logo)]
-#![feature(assert_matches)]
-#![feature(box_patterns)]
-#![feature(decl_macro)]
-#![feature(if_let_guard)]
-#![feature(proc_macro_internals)]
-#![feature(proc_macro_quote)]
-#![feature(rustdoc_internals)]
-#![feature(try_blocks)]
-#![recursion_limit = "256"]
+#[allow(internal_features)]
+#[allow(rustc::diagnostic_outside_of_impl)]
+#[allow(rustc::untranslatable_diagnostic)]
+#[doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
+#[doc(rust_logo)]
+#[feature(assert_matches)]
+#[feature(box_patterns)]
+#[feature(decl_macro)]
+#[feature(if_let_guard)]
+#[feature(proc_macro_internals)]
+#[feature(proc_macro_quote)]
+#[feature(rustdoc_internals)]
+#[feature(try_blocks)]
+#[recursion_limit = "256"]
 // tidy-alphabetical-end
 
 use std::sync::Arc;
 
-use rustc_expand::base::{MacroExpanderFn, ResolverExpand, SyntaxExtensionKind};
+use crate::rustc_expand::base::{MacroExpanderFn, ResolverExpand, SyntaxExtensionKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=40
 
 ```rust
-use rustc_expand::proc_macro::BangProcMacro;
-use rustc_span::sym;
+use crate::rustc_expand::proc_macro::BangProcMacro;
+use crate::rustc_complete::sym;
 
 use crate::deriving::*;
 
@@ -160,7 +160,7 @@ pub fn register_builtin_macros(resolver: &mut dyn ResolverExpand) {
         From: from::expand_deriving_from,
     }
 
-    let client = rustc_proc_macro::bridge::client::Client::expand1(rustc_proc_macro::quote);
+    let client = crate::rustc_proc_macro::bridge::client::Client::expand1(crate::rustc_proc_macro::quote);
     register(sym::quote, SyntaxExtensionKind::Bang(Arc::new(BangProcMacro { client })));
     let requires = SyntaxExtensionKind::Attr(Arc::new(contracts::ExpandRequires));
     register(sym::contracts_requires, requires);

@@ -20,15 +20,15 @@ use gccjit::{Context, OutputKind};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_codegen_ssa::back::link::ensure_removed;
-use rustc_codegen_ssa::back::write::{BitcodeSection, CodegenContext, EmitObj, ModuleConfig};
+use crate::rustc_codegen_ssa::back::link::ensure_removed;
+use crate::rustc_codegen_ssa::back::write::{BitcodeSection, CodegenContext, EmitObj, ModuleConfig};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::{CompiledModule, ModuleCodegen};
+use crate::rustc_codegen_ssa::{CompiledModule, ModuleCodegen};
 ```
 
 ## Block 5
@@ -36,8 +36,8 @@ use rustc_codegen_ssa::{CompiledModule, ModuleCodegen};
 
 ```rust
 use rustc_fs_util::link_or_copy;
-use rustc_session::config::OutputType;
-use rustc_target::spec::SplitDebuginfo;
+use crate::rustc_complete::config::OutputType;
+use crate::rustc_target::spec::SplitDebuginfo;
 
 use crate::base::add_pic_option;
 use crate::errors::CopyBitcode;

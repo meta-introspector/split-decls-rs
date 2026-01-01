@@ -16,34 +16,34 @@ use gccjit::{ToLValue, ToRValue, Type};
 
 ```rust
 #[cfg(feature = "master")]
-use rustc_abi::{ArmCall, CanonAbi, InterruptKind, X86Call};
+use crate::rustc_abi::{ArmCall, CanonAbi, InterruptKind, X86Call};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{Reg, RegKind};
+use crate::rustc_abi::{Reg, RegKind};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::traits::{AbiBuilderMethods, BaseTypeCodegenMethods};
+use crate::rustc_codegen_ssa::traits::{AbiBuilderMethods, BaseTypeCodegenMethods};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_middle::bug;
-use rustc_middle::ty::Ty;
-use rustc_middle::ty::layout::LayoutOf;
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::LayoutOf;
 #[cfg(feature = "master")]
-use rustc_session::config;
-use rustc_target::callconv::{ArgAttributes, CastTarget, FnAbi, PassMode};
+use crate::rustc_complete::config;
+use crate::rustc_target::callconv::{ArgAttributes, CastTarget, FnAbi, PassMode};
 ```
 
 ## Block 6
@@ -203,10 +203,10 @@ impl<'gcc, 'tcx> FnAbiGccExt<'gcc, 'tcx> for FnAbi<'tcx, Ty<'tcx>> {
             if cx.sess().opts.optimize == config::OptLevel::No {
                 return ty;
             }
-            if attrs.regular.contains(rustc_target::callconv::ArgAttribute::NoAlias) {
+            if attrs.regular.contains(crate::rustc_target::callconv::ArgAttribute::NoAlias) {
                 ty = ty.make_restrict()
             }
-            if attrs.regular.contains(rustc_target::callconv::ArgAttribute::NonNull) {
+            if attrs.regular.contains(crate::rustc_target::callconv::ArgAttribute::NonNull) {
                 non_null_args.push(arg_index as i32 + 1);
             }
             ty

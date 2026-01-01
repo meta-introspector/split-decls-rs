@@ -6,49 +6,49 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=13
 
 ```rust
-//! Detecting lang items.
-//!
-//! Language items are items that represent concepts intrinsic to the language
-//! itself. Examples are:
-//!
-//! * Traits that specify "kinds"; e.g., `Sync`, `Send`.
-//! * Traits that represent operators; e.g., `Add`, `Sub`, `Index`.
-//! * Functions called by the compiler itself.
+// Detecting lang items.
+//
+// Language items are items that represent concepts intrinsic to the language
+// itself. Examples are:
+//
+// * Traits that specify "kinds"; e.g., `Sync`, `Send`.
+// * Traits that represent operators; e.g., `Add`, `Sub`, `Index`.
+// * Functions called by the compiler itself.
 
 use rustc_ast as ast;
-use rustc_ast::visit;
-use rustc_data_structures::fx::FxHashMap;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::visit;
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::lang_items::{GenericRequirement, extract};
+use crate::rustc_complete::lang_items::{GenericRequirement, extract};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{LangItem, LanguageItems, MethodKind, Target};
+use crate::rustc_complete::{LangItem, LanguageItems, MethodKind, Target};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::query::Providers;
-use rustc_middle::ty::{ResolverAstLowering, TyCtxt};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{ResolverAstLowering, TyCtxt};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_session::cstore::ExternCrate;
-use rustc_span::Span;
+use crate::rustc_complete::cstore::ExternCrate;
+use crate::rustc_complete::Span;
 
 use crate::errors::{
     DuplicateLangItem, IncorrectCrateType, IncorrectTarget, LangItemOnIncorrectTarget,
@@ -285,7 +285,7 @@ impl<'ast, 'tcx> LanguageItemCollector<'ast, 'tcx> {
             }
         }
 
-        if self.tcx.crate_types().contains(&rustc_session::config::CrateType::Sdylib) {
+        if self.tcx.crate_types().contains(&crate::rustc_session::config::CrateType::Sdylib) {
             self.tcx.dcx().emit_err(IncorrectCrateType { span: attr_span });
         }
 

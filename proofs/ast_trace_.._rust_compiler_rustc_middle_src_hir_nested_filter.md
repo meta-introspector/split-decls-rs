@@ -6,7 +6,7 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_hir::intravisit::nested_filter::NestedFilter;
+use crate::rustc_complete::intravisit::nested_filter::NestedFilter;
 
 use crate::ty::TyCtxt;
 

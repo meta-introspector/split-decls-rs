@@ -6,20 +6,20 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::LangItem;
-use rustc_hir::def_id::DefId;
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_middle::bug;
-use rustc_middle::query::Providers;
-use rustc_middle::traits::{BuiltinImplSource, CodegenObligationError};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::traits::{BuiltinImplSource, CodegenObligationError};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, ClosureKind, GenericArgsRef, Instance, PseudoCanonicalInput, TyCtxt, TypeVisitableExt,
 };
 ```
@@ -28,8 +28,8 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=resolve_instance_raw | COMPLEXITY=52 | LINES=91
 
 ```rust
-use rustc_span::sym;
-use rustc_trait_selection::traits;
+use crate::rustc_complete::sym;
+use crate::rustc_trait_selection::traits;
 use tracing::debug;
 use traits::translate_args;
 
@@ -170,7 +170,7 @@ fn resolve_associated_item<'tcx>(
             // in `TypingMode::PostAnalysis`.
             //
             // NOTE: This should be kept in sync with the similar code in
-            // `rustc_trait_selection::traits::project::assemble_candidates_from_impls()`.
+            // `crate::rustc_trait_selection::traits::project::assemble_candidates_from_impls()`.
             let eligible = if leaf_def.is_final() {
                 // Non-specializable items are always projectable.
                 true

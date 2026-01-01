@@ -10,25 +10,25 @@ use std::cmp;
 use std::marker::PhantomData;
 use std::ops::Range;
 
-use rustc_data_structures::undo_log::Rollback;
-use rustc_data_structures::{snapshot_vec as sv, unify as ut};
+use crate::rustc_data_structures::undo_log::Rollback;
+use crate::rustc_data_structures::{snapshot_vec as sv, unify as ut};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_index::IndexVec;
-use rustc_middle::bug;
-use rustc_middle::ty::{self, Ty, TyVid};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, Ty, TyVid};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::debug;
 
 use crate::infer::InferCtxtUndoLogs;

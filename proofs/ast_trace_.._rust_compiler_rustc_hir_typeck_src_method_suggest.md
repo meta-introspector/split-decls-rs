@@ -6,8 +6,8 @@ Generated 72 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12
 
 ```rust
-//! Give useful errors and suggestions to users when an item can't be
-//! found or is otherwise invalid.
+// Give useful errors and suggestions to users when an item can't be
+// found or is otherwise invalid.
 
 // ignore-tidy-filelength
 
@@ -16,64 +16,64 @@ use std::borrow::Cow;
 use std::path::PathBuf;
 
 use hir::Expr;
-use rustc_ast::ast::Mutability;
-use rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
+use crate::rustc_complete::ast::Mutability;
+use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::sorted_map::SortedMap;
-use rustc_data_structures::unord::UnordSet;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, Diag, MultiSpan, StashKey, pluralize, struct_span_code_err};
+use crate::rustc_data_structures::sorted_map::SortedMap;
+use crate::rustc_data_structures::unord::UnordSet;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, Diag, MultiSpan, StashKey, pluralize, struct_span_code_err};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::{CtorKind, DefKind, Res};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{CtorKind, DefKind, Res};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_hir::intravisit::{self, Visitor};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::intravisit::{self, Visitor};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::lang_items::LangItem;
-use rustc_hir::{self as hir, ExprKind, HirId, Node, PathSegment, QPath, find_attr};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{self as hir, ExprKind, HirId, Node, PathSegment, QPath, find_attr};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::{BoundRegionConversionTime, RegionVariableOrigin};
+use crate::rustc_infer::infer::{BoundRegionConversionTime, RegionVariableOrigin};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::fast_reject::{DeepRejectCtxt, TreatParams, simplify_type};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::fast_reject::{DeepRejectCtxt, TreatParams, simplify_type};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::print::{
+use crate::rustc_complete::ty::print::{
     PrintTraitRefExt as _, with_crate_prefix, with_forced_trimmed_paths,
     with_no_visible_paths_if_doc_hidden,
 };
@@ -83,15 +83,15 @@ use rustc_middle::ty::print::{
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, GenericArgKind, IsSuggestable, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, GenericArgKind, IsSuggestable, Ty, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_span::def_id::DefIdSet;
-use rustc_span::{
+use crate::rustc_complete::def_id::DefIdSet;
+use crate::rustc_complete::{
     DUMMY_SP, ErrorGuaranteed, ExpnKind, FileName, Ident, MacroKind, Span, Symbol, edit_distance,
     kw, sym,
 };
@@ -101,11 +101,11 @@ use rustc_span::{
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_trait_selection::error_reporting::traits::DefIdOrName;
-use rustc_trait_selection::error_reporting::traits::on_unimplemented::OnUnimplementedNote;
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
-use rustc_trait_selection::traits::{
+use crate::rustc_trait_selection::error_reporting::traits::DefIdOrName;
+use crate::rustc_trait_selection::error_reporting::traits::on_unimplemented::OnUnimplementedNote;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
+use crate::rustc_trait_selection::traits::{
     FulfillmentError, Obligation, ObligationCause, ObligationCauseCode, supertraits,
 };
 ```
@@ -1276,7 +1276,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         entry.1.insert((self_ty.span, ""));
                     }
                     Some(Node::Item(hir::Item {
-                        kind: hir::ItemKind::Trait(_, rustc_ast::ast::IsAuto::Yes, ..),
+                        kind: hir::ItemKind::Trait(_, crate::rustc_ast::ast::IsAuto::Yes, ..),
                         span: item_span,
                         ..
                     })) => {

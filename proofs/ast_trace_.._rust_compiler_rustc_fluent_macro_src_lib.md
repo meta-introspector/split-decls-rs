@@ -7,13 +7,13 @@ Generated 5 AST blocks from source file
 
 ```rust
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![allow(rustc::default_hash_types)]
-#![doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
-#![doc(rust_logo)]
-#![feature(proc_macro_diagnostic)]
-#![feature(rustdoc_internals)]
-#![feature(track_path)]
+#[allow(internal_features)]
+#[allow(rustc::default_hash_types)]
+#[doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
+#[doc(rust_logo)]
+#[feature(proc_macro_diagnostic)]
+#[feature(rustdoc_internals)]
+#[feature(track_path)]
 // tidy-alphabetical-end
 
 use proc_macro::TokenStream;
@@ -97,7 +97,7 @@ mod fluent;
 /// Note: any crate using this macro must also have a dependency on
 /// `rustc_errors`, because the generated code refers to things from that
 /// crate.
-#[proc_macro]
+// #[proc_macro] - removed
 pub fn fluent_messages(input: TokenStream) -> TokenStream {
     fluent::fluent_messages(input)
 }

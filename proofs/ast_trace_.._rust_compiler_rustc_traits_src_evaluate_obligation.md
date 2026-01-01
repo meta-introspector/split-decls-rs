@@ -6,18 +6,18 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::{ParamEnvAnd, TyCtxt};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{ParamEnvAnd, TyCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_span::DUMMY_SP;
-use rustc_trait_selection::traits::query::CanonicalPredicateGoal;
-use rustc_trait_selection::traits::{
+use crate::rustc_complete::DUMMY_SP;
+use crate::rustc_trait_selection::traits::query::CanonicalPredicateGoal;
+use crate::rustc_trait_selection::traits::{
     EvaluationResult, Obligation, ObligationCause, OverflowError, SelectionContext, TraitQueryMode,
     sizedness_fast_path,
 };

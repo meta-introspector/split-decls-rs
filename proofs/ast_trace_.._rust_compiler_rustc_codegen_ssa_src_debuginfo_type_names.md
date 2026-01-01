@@ -6,7 +6,7 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=compute_debuginfo_type_name | COMPLEXITY=455 | LINES=815
 
 ```rust
-//! Type Names for Debug Info.
+// Type Names for Debug Info.
 
 // Notes on targeting MSVC:
 // In general, MSVC's debugger attempts to parse all arguments as C++ expressions,
@@ -21,16 +21,16 @@ Generated 1 AST blocks from source file
 
 use std::fmt::Write;
 
-use rustc_abi::Integer;
-use rustc_data_structures::fx::FxHashSet;
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_abi::Integer;
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 use rustc_hashes::Hash64;
-use rustc_hir::def_id::DefId;
-use rustc_hir::definitions::{DefPathData, DefPathDataName, DisambiguatedDefPathData};
-use rustc_hir::{CoroutineDesugaring, CoroutineKind, CoroutineSource, Mutability};
-use rustc_middle::bug;
-use rustc_middle::ty::layout::{IntegerExt, TyAndLayout};
-use rustc_middle::ty::{self, ExistentialProjection, GenericArgKind, GenericArgsRef, Ty, TyCtxt};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::definitions::{DefPathData, DefPathDataName, DisambiguatedDefPathData};
+use crate::rustc_complete::{CoroutineDesugaring, CoroutineKind, CoroutineSource, Mutability};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::{IntegerExt, TyAndLayout};
+use crate::rustc_complete::ty::{self, ExistentialProjection, GenericArgKind, GenericArgsRef, Ty, TyCtxt};
 use smallvec::SmallVec;
 
 use crate::debuginfo::wants_c_like_enum_debuginfo;
@@ -375,7 +375,7 @@ fn push_debuginfo_type_name<'tcx>(
             } else {
                 output.push_str(sig.safety.prefix_str());
 
-                if sig.abi != rustc_abi::ExternAbi::Rust {
+                if sig.abi != crate::rustc_abi::ExternAbi::Rust {
                     let _ = write!(output, "extern {} ", sig.abi);
                 }
 

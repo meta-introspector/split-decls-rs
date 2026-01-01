@@ -13,9 +13,9 @@ use std::marker::PhantomData;
 
 use rustc_ast_ir::Mutability;
 #[cfg(feature = "nightly")]
-use rustc_data_structures::fingerprint::Fingerprint;
+use crate::rustc_data_structures::fingerprint::Fingerprint;
 #[cfg(feature = "nightly")]
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher, ToStableHashKey};
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher, ToStableHashKey};
 ```
 
 ## Block 2

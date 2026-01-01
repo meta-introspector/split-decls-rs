@@ -6,20 +6,20 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=19
 
 ```rust
-//! rustc encodes a lot of hashes. If hashes are stored as `u64` or `u128`, a `derive(Encodable)`
-//! will apply varint encoding to the hashes, which is less efficient than directly encoding the 8
-//! or 16 bytes of the hash. And if that hash depends on the `StableCrateHash` (which most in rustc
-//! do), the varint encoding will make the number of bytes encoded fluctuate between compiler
-//! versions.
-//!
-//! The types in this module represent 64-bit or 128-bit hashes produced by a `StableHasher`.
-//! `Hash64` and `Hash128` expose some utility functions to encourage users to not extract the inner
-//! hash value as an integer type and accidentally apply varint encoding to it.
-//!
-//! In contrast with `Fingerprint`, users of these types cannot and should not attempt to construct
-//! and decompose these types into constituent pieces. The point of these types is only to
-//! connect the fact that they can only be produced by a `StableHasher` to their
-//! `Encode`/`Decode` impls.
+// rustc encodes a lot of hashes. If hashes are stored as `u64` or `u128`, a `derive(Encodable)`
+// will apply varint encoding to the hashes, which is less efficient than directly encoding the 8
+// or 16 bytes of the hash. And if that hash depends on the `StableCrateHash` (which most in rustc
+// do), the varint encoding will make the number of bytes encoded fluctuate between compiler
+// versions.
+//
+// The types in this module represent 64-bit or 128-bit hashes produced by a `StableHasher`.
+// `Hash64` and `Hash128` expose some utility functions to encourage users to not extract the inner
+// hash value as an integer type and accidentally apply varint encoding to it.
+//
+// In contrast with `Fingerprint`, users of these types cannot and should not attempt to construct
+// and decompose these types into constituent pieces. The point of these types is only to
+// connect the fact that they can only be produced by a `StableHasher` to their
+// `Encode`/`Decode` impls.
 
 use std::fmt;
 use std::ops::BitXorAssign;

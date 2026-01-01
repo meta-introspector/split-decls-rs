@@ -6,40 +6,40 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=11
 
 ```rust
-//! HIR datatypes. See the [rustc dev guide] for more info.
-//!
-//! [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/hir.html
+// HIR datatypes. See the [rustc dev guide] for more info.
+//
+// [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/hir.html
 
 pub mod map;
 pub mod nested_filter;
 pub mod place;
 
-use rustc_data_structures::fingerprint::Fingerprint;
-use rustc_data_structures::sorted_map::SortedMap;
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::fingerprint::Fingerprint;
+use crate::rustc_data_structures::sorted_map::SortedMap;
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::sync::{DynSend, DynSync, try_par_for_each_in};
+use crate::rustc_data_structures::sync::{DynSend, DynSync, try_par_for_each_in};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, LocalDefId, LocalModDefId};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId, LocalModDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::lints::DelayedLint;
-use rustc_hir::*;
+use crate::rustc_complete::lints::DelayedLint;
+use crate::rustc_complete::*;
 use rustc_macros::{Decodable, Encodable, HashStable};
 ```
 
@@ -47,7 +47,7 @@ use rustc_macros::{Decodable, Encodable, HashStable};
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ErrorGuaranteed, ExpnId, Span};
+use crate::rustc_complete::{ErrorGuaranteed, ExpnId, Span};
 ```
 
 ## Block 6

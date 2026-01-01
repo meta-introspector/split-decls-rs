@@ -6,14 +6,14 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_index::{Idx, IndexVec};
+use crate::rustc_index::{Idx, IndexVec};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{BasicBlock, Body, Location};
+use crate::rustc_complete::mir::{BasicBlock, Body, Location};
 ```
 
 ## Block 3
@@ -111,7 +111,7 @@ impl DenseLocationMap {
 **Metadata**: AST_ID=5 | TYPE=STRUCT | NAME=PointIndex | COMPLEXITY=4 | LINES=8
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// A single integer representing a `Location` in the MIR control-flow
     /// graph. Constructed efficiently from `DenseLocationMap`.
     #[orderable]

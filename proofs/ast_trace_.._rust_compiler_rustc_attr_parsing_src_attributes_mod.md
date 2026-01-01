@@ -6,37 +6,37 @@ Generated 17 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=14 | LINES=23
 
 ```rust
-//! This module defines traits for attribute parsers, little state machines that recognize and parse
-//! attributes out of a longer list of attributes. The main trait is called [`AttributeParser`].
-//! You can find more docs about [`AttributeParser`]s on the trait itself.
-//! However, for many types of attributes, implementing [`AttributeParser`] is not necessary.
-//! It allows for a lot of flexibility you might not want.
-//!
-//! Specifically, you might not care about managing the state of your [`AttributeParser`]
-//! state machine yourself. In this case you can choose to implement:
-//!
-//! - [`SingleAttributeParser`](crate::attributes::SingleAttributeParser): makes it easy to implement an attribute which should error if it
-//! appears more than once in a list of attributes
-//! - [`CombineAttributeParser`](crate::attributes::CombineAttributeParser): makes it easy to implement an attribute which should combine the
-//! contents of attributes, if an attribute appear multiple times in a list
-//!
-//! By default, attributes are allowed anywhere. When adding an attribute that should only be used
-//! at the crate root, consider setting the `TYPE` in the parser trait to
-//! [`AttributeType::CrateLevel`](rustc_feature::AttributeType::CrateLevel).
-//!
-//! Attributes should be added to `crate::context::ATTRIBUTE_PARSERS` to be parsed.
+// This module defines traits for attribute parsers, little state machines that recognize and parse
+// attributes out of a longer list of attributes. The main trait is called [`AttributeParser`].
+// You can find more docs about [`AttributeParser`]s on the trait itself.
+// However, for many types of attributes, implementing [`AttributeParser`] is not necessary.
+// It allows for a lot of flexibility you might not want.
+//
+// Specifically, you might not care about managing the state of your [`AttributeParser`]
+// state machine yourself. In this case you can choose to implement:
+//
+// - [`SingleAttributeParser`](crate::attributes::SingleAttributeParser): makes it easy to implement an attribute which should error if it
+// appears more than once in a list of attributes
+// - [`CombineAttributeParser`](crate::attributes::CombineAttributeParser): makes it easy to implement an attribute which should combine the
+// contents of attributes, if an attribute appear multiple times in a list
+//
+// By default, attributes are allowed anywhere. When adding an attribute that should only be used
+// at the crate root, consider setting the `TYPE` in the parser trait to
+// [`AttributeType::CrateLevel`](crate::rustc_feature::AttributeType::CrateLevel).
+//
+// Attributes should be added to `crate::context::ATTRIBUTE_PARSERS` to be parsed.
 
 use std::marker::PhantomData;
 
-use rustc_feature::{AttributeTemplate, AttributeType, template};
+use crate::rustc_feature::{AttributeTemplate, AttributeType, template};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::attrs::AttributeKind;
-use rustc_span::{Span, Symbol};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 3
@@ -385,7 +385,7 @@ type ConvertFn<E> = fn(ThinVec<E>, Span) -> AttributeKind;
 /// [`CombineAttributeParser`] can only convert a single kind of attribute, and cannot combine multiple
 /// attributes together like is necessary for `#[stable()]` and `#[unstable()]` for example.
 pub(crate) trait CombineAttributeParser<S: Stage>: 'static {
-    const PATH: &[rustc_span::Symbol];
+    const PATH: &[crate::rustc_span::Symbol];
 
     type Item;
     /// A function that converts individual items (of type [`Item`](Self::Item)) into the final attribute.

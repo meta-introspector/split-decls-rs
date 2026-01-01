@@ -6,10 +6,10 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=7 | LINES=10
 
 ```rust
-//! Sanitizers support for the Rust compiler.
-//!
-//! This crate contains the source code for providing support for the sanitizers to the Rust
-//! compiler.
+// Sanitizers support for the Rust compiler.
+//
+// This crate contains the source code for providing support for the sanitizers to the Rust
+// compiler.
 
 // tidy-alphabetical-start
 // tidy-alphabetical-end

@@ -24,40 +24,40 @@ use gccjit::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{Align, HasDataLayout, PointeeInfo, Size, TargetDataLayout, VariantIdx};
+use crate::rustc_abi::{Align, HasDataLayout, PointeeInfo, Size, TargetDataLayout, VariantIdx};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_codegen_ssa::base::wants_msvc_seh;
-use rustc_codegen_ssa::errors as ssa_errors;
-use rustc_codegen_ssa::traits::{BackendTypes, BaseTypeCodegenMethods, MiscCodegenMethods};
+use crate::rustc_codegen_ssa::base::wants_msvc_seh;
+use crate::rustc_codegen_ssa::errors as ssa_errors;
+use crate::rustc_codegen_ssa::traits::{BackendTypes, BaseTypeCodegenMethods, MiscCodegenMethods};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::base_n::{ALPHANUMERIC_ONLY, ToBaseN};
+use crate::rustc_data_structures::base_n::{ALPHANUMERIC_ONLY, ToBaseN};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxHashMap, FxHashSet};
+use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_middle::mir::interpret::Allocation;
-use rustc_middle::mir::mono::CodegenUnit;
-use rustc_middle::span_bug;
-use rustc_middle::ty::layout::{
+use crate::rustc_complete::mir::interpret::Allocation;
+use crate::rustc_complete::mir::mono::CodegenUnit;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::layout::{
     FnAbiError, FnAbiOf, FnAbiOfHelpers, FnAbiRequest, HasTyCtxt, HasTypingEnv, LayoutError,
     LayoutOfHelpers,
 };
@@ -67,23 +67,23 @@ use rustc_middle::ty::layout::{
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, ExistentialTraitRef, Instance, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, ExistentialTraitRef, Instance, Ty, TyCtxt};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::Session;
-use rustc_span::source_map::respan;
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::source_map::respan;
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_target::spec::{HasTargetSpec, HasX86AbiOpt, Target, TlsModel, X86Abi};
+use crate::rustc_target::spec::{HasTargetSpec, HasX86AbiOpt, Target, TlsModel, X86Abi};
 ```
 
 ## Block 11
@@ -575,7 +575,7 @@ impl<'gcc, 'tcx> MiscCodegenMethods<'tcx> for CodegenCx<'gcc, 'tcx> {
             Some(self.declare_entry_fn(entry_name, fn_type, conv))
         } else {
             // If the symbol already exists, it is an error: for example, the user wrote
-            // #[no_mangle] extern "C" fn main(..) {..}
+            // #[unsafe(no_mangle)] extern "C" fn main(..) {..}
             None
         }
     }

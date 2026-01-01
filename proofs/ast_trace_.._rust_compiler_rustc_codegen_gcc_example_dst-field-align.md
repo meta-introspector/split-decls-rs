@@ -7,7 +7,7 @@ Generated 6 AST blocks from source file
 
 ```rust
 // run-pass
-#![allow(dead_code)]
+#[allow(dead_code)]
 struct Foo<T: ?Sized> {
     a: u16,
     b: T

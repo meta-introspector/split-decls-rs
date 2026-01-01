@@ -6,28 +6,28 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_abi::FieldIdx;
-use rustc_data_structures::flat_map_in_place::FlatMapInPlace;
-use rustc_hir::LangItem;
-use rustc_index::IndexVec;
-use rustc_index::bit_set::{DenseBitSet, GrowableBitSet};
+use crate::rustc_abi::FieldIdx;
+use crate::rustc_data_structures::flat_map_in_place::FlatMapInPlace;
+use crate::rustc_complete::LangItem;
+use crate::rustc_index::IndexVec;
+use crate::rustc_index::bit_set::{DenseBitSet, GrowableBitSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::mir::visit::*;
-use rustc_middle::mir::*;
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::visit::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_mir_dataflow::value_analysis::{excluded_locals, iter_fields};
+use crate::rustc_mir_dataflow::value_analysis::{excluded_locals, iter_fields};
 ```
 
 ## Block 4
@@ -46,7 +46,7 @@ use crate::patch::MirPatch;
 pub(super) struct ScalarReplacementOfAggregates;
 
 impl<'tcx> crate::MirPass<'tcx> for ScalarReplacementOfAggregates {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() >= 2
     }
 

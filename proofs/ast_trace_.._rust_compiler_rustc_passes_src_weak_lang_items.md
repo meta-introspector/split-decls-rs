@@ -6,22 +6,22 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-//! Validity checking for weak lang items
+// Validity checking for weak lang items
 
 use rustc_ast as ast;
-use rustc_ast::visit;
-use rustc_data_structures::fx::FxHashSet;
-use rustc_hir::lang_items::{self, LangItem};
+use crate::rustc_complete::visit;
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::lang_items::{self, LangItem};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_hir::weak_lang_items::WEAK_LANG_ITEMS;
-use rustc_middle::middle::lang_items::required;
-use rustc_middle::ty::TyCtxt;
-use rustc_session::config::CrateType;
+use crate::rustc_complete::weak_lang_items::WEAK_LANG_ITEMS;
+use crate::rustc_complete::middle::lang_items::required;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::CrateType;
 
 use crate::errors::{
     MissingLangItem, MissingPanicHandler, PanicUnwindWithoutStd, UnknownExternLangItem,

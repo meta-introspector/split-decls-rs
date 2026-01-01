@@ -6,7 +6,7 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=17
 
 ```rust
-use rustc_middle::thir::*;
+use crate::rustc_complete::thir::*;
 
 #[derive(Debug, PartialEq)]
 pub(crate) enum Category {

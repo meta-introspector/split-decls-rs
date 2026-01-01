@@ -8,7 +8,7 @@ Generated 13 AST blocks from source file
 ```rust
 use std::ops::ControlFlow;
 
-use rustc_errors::{Applicability, Diag, E0283, E0284, E0790, MultiSpan, struct_span_code_err};
+use crate::rustc_complete::{Applicability, Diag, E0283, E0284, E0790, MultiSpan, struct_span_code_err};
 ```
 
 ## Block 2
@@ -16,31 +16,31 @@ use rustc_errors::{Applicability, Diag, E0283, E0284, E0790, MultiSpan, struct_s
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::LangItem;
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{CRATE_DEF_ID, DefId};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::intravisit::Visitor as _;
-use rustc_infer::infer::{BoundRegionConversionTime, InferCtxt};
+use crate::rustc_complete::intravisit::Visitor as _;
+use crate::rustc_infer::infer::{BoundRegionConversionTime, InferCtxt};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_infer::traits::util::elaborate;
-use rustc_infer::traits::{
+use crate::rustc_infer::traits::util::elaborate;
+use crate::rustc_infer::traits::{
     Obligation, ObligationCause, ObligationCauseCode, PolyTraitObligation, PredicateObligation,
 };
 ```
@@ -49,15 +49,15 @@ use rustc_infer::traits::{
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty, TyCtxt, TypeVisitable as _, TypeVisitableExt as _};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitable as _, TypeVisitableExt as _};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::parse::feature_err_unstable_feature_bound;
-use rustc_span::{DUMMY_SP, ErrorGuaranteed, Span};
+use crate::rustc_complete::parse::feature_err_unstable_feature_bound;
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
 ```
 
 ## Block 8

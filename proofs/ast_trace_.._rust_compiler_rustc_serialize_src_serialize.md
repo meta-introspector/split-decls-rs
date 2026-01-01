@@ -6,7 +6,7 @@ Generated 80 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=4
 
 ```rust
-//! Support code for encoding and decoding types.
+// Support code for encoding and decoding types.
 
 use std::borrow::Cow;
 use std::cell::{Cell, RefCell};
@@ -215,7 +215,7 @@ pub trait Decoder {
 /// * `Encodable` should be used in crates that don't depend on
 ///   `rustc_middle`.
 /// * `MetadataEncodable` is used in `rustc_metadata` for types that contain
-///   `rustc_metadata::rmeta::Lazy`.
+///   `crate::rustc_metadata::rmeta::Lazy`.
 /// * `TyEncodable` should be used for types that are only serialized in crate
 ///   metadata or the incremental cache. This is most types in `rustc_middle`.
 pub trait Encodable<S: Encoder>: PointeeSized {
@@ -235,7 +235,7 @@ pub trait Encodable<S: Encoder>: PointeeSized {
 /// * `Decodable` should be used in crates that don't depend on
 ///   `rustc_middle`.
 /// * `MetadataDecodable` is used in `rustc_metadata` for types that contain
-///   `rustc_metadata::rmeta::Lazy`.
+///   `crate::rustc_metadata::rmeta::Lazy`.
 /// * `TyDecodable` should be used for types that are only serialized in crate
 ///   metadata or the incremental cache. This is most types in `rustc_middle`.
 pub trait Decodable<D: Decoder>: Sized {

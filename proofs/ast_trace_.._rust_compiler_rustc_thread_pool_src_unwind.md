@@ -6,9 +6,9 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-//! Package up unwind recovery. Note that if you are in some sensitive
-//! place, you can use the `AbortIfPanic` helper to protect against
-//! accidental panics in the rayon code itself.
+// Package up unwind recovery. Note that if you are in some sensitive
+// place, you can use the `AbortIfPanic` helper to protect against
+// accidental panics in the rayon code itself.
 
 use std::any::Any;
 use std::panic::{self, AssertUnwindSafe};

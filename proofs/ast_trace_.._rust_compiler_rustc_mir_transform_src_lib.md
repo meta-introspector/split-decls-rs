@@ -7,17 +7,17 @@ Generated 30 AST blocks from source file
 
 ```rust
 // tidy-alphabetical-start
-#![feature(array_windows)]
-#![feature(assert_matches)]
-#![feature(box_patterns)]
-#![feature(const_type_name)]
-#![feature(cow_is_borrowed)]
-#![feature(file_buffered)]
-#![feature(gen_blocks)]
-#![feature(if_let_guard)]
-#![feature(impl_trait_in_assoc_type)]
-#![feature(try_blocks)]
-#![feature(yeet_expr)]
+#[feature(array_windows)]
+#[feature(assert_matches)]
+#[feature(box_patterns)]
+#[feature(const_type_name)]
+#[feature(cow_is_borrowed)]
+#[feature(file_buffered)]
+#[feature(gen_blocks)]
+#[feature(if_let_guard)]
+#[feature(impl_trait_in_assoc_type)]
+#[feature(try_blocks)]
+#[feature(yeet_expr)]
 // tidy-alphabetical-end
 
 use hir::ConstContext;
@@ -30,19 +30,19 @@ use rustc_const_eval::check_consts::{self, ConstCx};
 
 ```rust
 use rustc_const_eval::util;
-use rustc_data_structures::fx::FxIndexSet;
-use rustc_data_structures::steal::Steal;
+use crate::rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_data_structures::steal::Steal;
 use rustc_hir as hir;
-use rustc_hir::def::{CtorKind, DefKind};
+use crate::rustc_complete::def::{CtorKind, DefKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_hir::def_id::LocalDefId;
-use rustc_index::IndexVec;
-use rustc_middle::mir::{
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::mir::{
     AnalysisPhase, Body, CallSource, ClearCrossCrate, ConstOperand, ConstQualifs, LocalDecl,
     MirPhase, Operand, Place, ProjectionElem, Promoted, RuntimePhase, Rvalue, START_BLOCK,
     SourceInfo, Statement, StatementKind, TerminatorKind,
@@ -53,15 +53,15 @@ use rustc_middle::mir::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::util::Providers;
-use rustc_middle::{bug, query, span_bug};
+use crate::rustc_complete::util::Providers;
+use crate::rustc_complete::{bug, query, span_bug};
 ```
 
 ## Block 6
@@ -69,8 +69,8 @@ use rustc_middle::{bug, query, span_bug};
 
 ```rust
 use rustc_mir_build::builder::build_mir;
-use rustc_span::source_map::Spanned;
-use rustc_span::{DUMMY_SP, sym};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{DUMMY_SP, sym};
 ```
 
 ## Block 7

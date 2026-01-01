@@ -6,7 +6,7 @@ Generated 21 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! Metadata from source code coverage analysis and instrumentation.
+// Metadata from source code coverage analysis and instrumentation.
 
 use std::fmt::{self, Debug, Formatter};
 ```
@@ -15,8 +15,8 @@ use std::fmt::{self, Debug, Formatter};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_index::{Idx, IndexVec};
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_index::{Idx, IndexVec};
 ```
 
 ## Block 3
@@ -30,9 +30,9 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 **Metadata**: AST_ID=4 | TYPE=STRUCT | NAME=BlockMarkerId | COMPLEXITY=4 | LINES=10
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// Used by [`CoverageKind::BlockMarker`] to mark blocks during THIR-to-MIR
     /// lowering, so that those blocks can be identified later.
     #[derive(HashStable)]
@@ -46,7 +46,7 @@ rustc_index::newtype_index! {
 **Metadata**: AST_ID=5 | TYPE=STRUCT | NAME=CounterId | COMPLEXITY=5 | LINES=17
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// ID of a coverage counter. Values ascend from 0.
     ///
     /// Before MIR inlining, counter IDs are local to their enclosing function.
@@ -68,7 +68,7 @@ rustc_index::newtype_index! {
 **Metadata**: AST_ID=6 | TYPE=STRUCT | NAME=ExpressionId | COMPLEXITY=5 | LINES=17
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// ID of a coverage-counter expression. Values ascend from 0.
     ///
     /// Before MIR inlining, expression IDs are local to their enclosing function.
@@ -301,7 +301,7 @@ pub struct CoverageIdsInfo {
 **Metadata**: AST_ID=20 | TYPE=STRUCT | NAME=BasicCoverageBlock | COMPLEXITY=5 | LINES=16
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// During the `InstrumentCoverage` MIR pass, a BCB is a node in the
     /// "coverage graph", which is a refinement of the MIR control-flow graph
     /// that merges or omits some blocks that aren't relevant to coverage.

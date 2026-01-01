@@ -7,7 +7,7 @@ Generated 13 AST blocks from source file
 
 ```rust
 use rustc_macros::HashStable_Generic;
-use rustc_span::{Symbol, sym};
+use crate::rustc_complete::{Symbol, sym};
 ```
 
 ## Block 2

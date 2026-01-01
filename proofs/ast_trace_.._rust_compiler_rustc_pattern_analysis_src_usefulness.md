@@ -6,872 +6,872 @@ Generated 69 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=45 | LINES=53
 
 ```rust
-//! # Match exhaustiveness and redundancy algorithm
-//!
-//! This file contains the logic for exhaustiveness and usefulness checking for pattern-matching.
-//! Specifically, given a list of patterns in a match, we can tell whether:
-//! (a) a given pattern is redundant
-//! (b) the patterns cover every possible value for the type (exhaustiveness)
-//!
-//! The algorithm implemented here is inspired from the one described in [this
-//! paper](http://moscova.inria.fr/~maranget/papers/warn/index.html). We have however changed it in
-//! various ways to accommodate the variety of patterns that Rust supports. We thus explain our
-//! version here, without being as precise.
-//!
-//! Fun fact: computing exhaustiveness is NP-complete, because we can encode a SAT problem as an
-//! exhaustiveness problem. See [here](https://niedzejkob.p4.team/rust-np) for the fun details.
-//!
-//!
-//! # Summary
-//!
-//! The algorithm is given as input a list of patterns, one for each arm of a match, and computes
-//! the following:
-//! - a set of values that match none of the patterns (if any),
-//! - for each subpattern (taking into account or-patterns), whether removing it would change
-//!     anything about how the match executes, i.e. whether it is useful/not redundant.
-//!
-//! To a first approximation, the algorithm works by exploring all possible values for the type
-//! being matched on, and determining which arm(s) catch which value. To make this tractable we
-//! cleverly group together values, as we'll see below.
-//!
-//! The entrypoint of this file is the [`compute_match_usefulness`] function, which computes
-//! usefulness for each subpattern and exhaustiveness for the whole match.
-//!
-//! In this page we explain the necessary concepts to understand how the algorithm works.
-//!
-//!
-//! # Usefulness
-//!
-//! The central concept of this file is the notion of "usefulness". Given some patterns `p_1 ..
-//! p_n`, a pattern `q` is said to be *useful* if there is a value that is matched by `q` and by
-//! none of the `p_i`. We write `usefulness(p_1 .. p_n, q)` for a function that returns a list of
-//! such values. The aim of this file is to compute it efficiently.
-//!
-//! This is enough to compute usefulness: a pattern in a `match` expression is redundant iff it is
-//! not useful w.r.t. the patterns above it:
-//! ```compile_fail,E0004
-//! # fn foo() {
-//! match Some(0u32) {
-//!     Some(0..100) => {},
-//!     Some(90..190) => {}, // useful: `Some(150)` is matched by this but not the branch above
-//!     Some(50..150) => {}, // redundant: all the values this matches are already matched by
-//!                          //   the branches above
-//!     None => {},          // useful: `None` is matched by this but not the branches above
-//! }
-//! # }
+// # Match exhaustiveness and redundancy algorithm
+//
+// This file contains the logic for exhaustiveness and usefulness checking for pattern-matching.
+// Specifically, given a list of patterns in a match, we can tell whether:
+// (a) a given pattern is redundant
+// (b) the patterns cover every possible value for the type (exhaustiveness)
+//
+// The algorithm implemented here is inspired from the one described in [this
+// paper](http://moscova.inria.fr/~maranget/papers/warn/index.html). We have however changed it in
+// various ways to accommodate the variety of patterns that Rust supports. We thus explain our
+// version here, without being as precise.
+//
+// Fun fact: computing exhaustiveness is NP-complete, because we can encode a SAT problem as an
+// exhaustiveness problem. See [here](https://niedzejkob.p4.team/rust-np) for the fun details.
+//
+//
+// # Summary
+//
+// The algorithm is given as input a list of patterns, one for each arm of a match, and computes
+// the following:
+// - a set of values that match none of the patterns (if any),
+// - for each subpattern (taking into account or-patterns), whether removing it would change
+//     anything about how the match executes, i.e. whether it is useful/not redundant.
+//
+// To a first approximation, the algorithm works by exploring all possible values for the type
+// being matched on, and determining which arm(s) catch which value. To make this tractable we
+// cleverly group together values, as we'll see below.
+//
+// The entrypoint of this file is the [`compute_match_usefulness`] function, which computes
+// usefulness for each subpattern and exhaustiveness for the whole match.
+//
+// In this page we explain the necessary concepts to understand how the algorithm works.
+//
+//
+// # Usefulness
+//
+// The central concept of this file is the notion of "usefulness". Given some patterns `p_1 ..
+// p_n`, a pattern `q` is said to be *useful* if there is a value that is matched by `q` and by
+// none of the `p_i`. We write `usefulness(p_1 .. p_n, q)` for a function that returns a list of
+// such values. The aim of this file is to compute it efficiently.
+//
+// This is enough to compute usefulness: a pattern in a `match` expression is redundant iff it is
+// not useful w.r.t. the patterns above it:
+// ```compile_fail,E0004
+// # fn foo() {
+// match Some(0u32) {
+//     Some(0..100) => {},
+//     Some(90..190) => {}, // useful: `Some(150)` is matched by this but not the branch above
+//     Some(50..150) => {}, // redundant: all the values this matches are already matched by
+//                          //   the branches above
+//     None => {},          // useful: `None` is matched by this but not the branches above
+// }
+// # }
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=13
 
 ```rust
-//! ```
-//!
-//! This is also enough to compute exhaustiveness: a match is exhaustive iff the wildcard `_`
-//! pattern is _not_ useful w.r.t. the patterns in the match. The values returned by `usefulness`
-//! are used to tell the user which values are missing.
-//! ```compile_fail,E0004
-//! # fn foo(x: Option<u32>) {
-//! match x {
-//!     None => {},
-//!     Some(0) => {},
-//!     // not exhaustive: `_` is useful because it matches `Some(1)`
-//! }
-//! # }
+// ```
+//
+// This is also enough to compute exhaustiveness: a match is exhaustive iff the wildcard `_`
+// pattern is _not_ useful w.r.t. the patterns in the match. The values returned by `usefulness`
+// are used to tell the user which values are missing.
+// ```compile_fail,E0004
+// # fn foo(x: Option<u32>) {
+// match x {
+//     None => {},
+//     Some(0) => {},
+//     // not exhaustive: `_` is useful because it matches `Some(1)`
+// }
+// # }
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-//! ```
-//!
-//!
-//! # Constructors and fields
-//!
-//! In the value `Pair(Some(0), true)`, `Pair` is called the constructor of the value, and `Some(0)`
-//! and `true` are its fields. Every matchable value can be decomposed in this way. Examples of
-//! constructors are: `Some`, `None`, `(,)` (the 2-tuple constructor), `Foo {..}` (the constructor
+// ```
+//
+//
+// # Constructors and fields
+//
+// In the value `Pair(Some(0), true)`, `Pair` is called the constructor of the value, and `Some(0)`
+// and `true` are its fields. Every matchable value can be decomposed in this way. Examples of
+// constructors are: `Some`, `None`, `(,)` (the 2-tuple constructor), `Foo {..}` (the constructor
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=15 | LINES=18
 
 ```rust
-//! for a struct `Foo`), and `2` (the constructor for the number `2`).
-//!
-//! Each constructor takes a fixed number of fields; this is called its arity. `Pair` and `(,)` have
-//! arity 2, `Some` has arity 1, `None` and `42` have arity 0. Each type has a known set of
-//! constructors. Some types have many constructors (like `u64`) or even an infinitely many (like
-//! `&str` and `&[T]`).
-//!
-//! Patterns are similar: `Pair(Some(_), _)` has constructor `Pair` and two fields. The difference
-//! is that we get some extra pattern-only constructors, namely: the wildcard `_`, variable
-//! bindings, integer ranges like `0..=10`, and variable-length slices like `[_, .., _]`. We treat
-//! or-patterns separately, see the dedicated section below.
-//!
-//! Now to check if a value `v` matches a pattern `p`, we check if `v`'s constructor matches `p`'s
-//! constructor, then recursively compare their fields if necessary. A few representative examples:
-//!
-//! - `matches!(v, _) := true`
-//! - `matches!((v0,  v1), (p0,  p1)) := matches!(v0, p0) && matches!(v1, p1)`
-//! - `matches!(Foo { bar: v0, baz: v1 }, Foo { bar: p0, baz: p1 }) := matches!(v0, p0) && matches!(v1, p1)`
+// for a struct `Foo`), and `2` (the constructor for the number `2`).
+//
+// Each constructor takes a fixed number of fields; this is called its arity. `Pair` and `(,)` have
+// arity 2, `Some` has arity 1, `None` and `42` have arity 0. Each type has a known set of
+// constructors. Some types have many constructors (like `u64`) or even an infinitely many (like
+// `&str` and `&[T]`).
+//
+// Patterns are similar: `Pair(Some(_), _)` has constructor `Pair` and two fields. The difference
+// is that we get some extra pattern-only constructors, namely: the wildcard `_`, variable
+// bindings, integer ranges like `0..=10`, and variable-length slices like `[_, .., _]`. We treat
+// or-patterns separately, see the dedicated section below.
+//
+// Now to check if a value `v` matches a pattern `p`, we check if `v`'s constructor matches `p`'s
+// constructor, then recursively compare their fields if necessary. A few representative examples:
+//
+// - `matches!(v, _) := true`
+// - `matches!((v0,  v1), (p0,  p1)) := matches!(v0, p0) && matches!(v1, p1)`
+// - `matches!(Foo { bar: v0, baz: v1 }, Foo { bar: p0, baz: p1 }) := matches!(v0, p0) && matches!(v1, p1)`
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=13 | LINES=34
 
 ```rust
-//! - `matches!(Ok(v0), Ok(p0)) := matches!(v0, p0)`
-//! - `matches!(Ok(v0), Err(p0)) := false` (incompatible variants)
-//! - `matches!(v, 1..=100) := matches!(v, 1) || ... || matches!(v, 100)`
-//! - `matches!([v0], [p0, .., p1]) := false` (incompatible lengths)
-//! - `matches!([v0, v1, v2], [p0, .., p1]) := matches!(v0, p0) && matches!(v2, p1)`
-//!
-//! Constructors and relevant operations are defined in the [`crate::constructor`] module. A
-//! representation of patterns that uses constructors is available in [`crate::pat`]. The question
-//! of whether a constructor is matched by another one is answered by
-//! [`Constructor::is_covered_by`].
-//!
-//! Note 1: variable bindings (like the `x` in `Some(x)`) match anything, so we treat them as wildcards.
-//! Note 2: this only applies to matchable values. For example a value of type `Rc<u64>` can't be
-//! deconstructed that way.
-//!
-//!
-//!
-//! # Specialization
-//!
-//! The examples in the previous section motivate the operation at the heart of the algorithm:
-//! "specialization". It captures this idea of "removing one layer of constructor".
-//!
-//! `specialize(c, p)` takes a value-only constructor `c` and a pattern `p`, and returns a
-//! pattern-tuple or nothing. It works as follows:
-//!
-//! - Specializing for the wrong constructor returns nothing
-//!
-//!   - `specialize(None, Some(p0)) := <nothing>`
-//!   - `specialize([,,,], [p0]) := <nothing>`
-//!
-//! - Specializing for the correct constructor returns a tuple of the fields
-//!
-//!   - `specialize(Variant1, Variant1(p0, p1, p2)) := (p0, p1, p2)`
-//!   - `specialize(Foo{ bar, baz, quz }, Foo { bar: p0, baz: p1, .. }) := (p0, p1, _)`
+// - `matches!(Ok(v0), Ok(p0)) := matches!(v0, p0)`
+// - `matches!(Ok(v0), Err(p0)) := false` (incompatible variants)
+// - `matches!(v, 1..=100) := matches!(v, 1) || ... || matches!(v, 100)`
+// - `matches!([v0], [p0, .., p1]) := false` (incompatible lengths)
+// - `matches!([v0, v1, v2], [p0, .., p1]) := matches!(v0, p0) && matches!(v2, p1)`
+//
+// Constructors and relevant operations are defined in the [`crate::constructor`] module. A
+// representation of patterns that uses constructors is available in [`crate::pat`]. The question
+// of whether a constructor is matched by another one is answered by
+// [`Constructor::is_covered_by`].
+//
+// Note 1: variable bindings (like the `x` in `Some(x)`) match anything, so we treat them as wildcards.
+// Note 2: this only applies to matchable values. For example a value of type `Rc<u64>` can't be
+// deconstructed that way.
+//
+//
+//
+// # Specialization
+//
+// The examples in the previous section motivate the operation at the heart of the algorithm:
+// "specialization". It captures this idea of "removing one layer of constructor".
+//
+// `specialize(c, p)` takes a value-only constructor `c` and a pattern `p`, and returns a
+// pattern-tuple or nothing. It works as follows:
+//
+// - Specializing for the wrong constructor returns nothing
+//
+//   - `specialize(None, Some(p0)) := <nothing>`
+//   - `specialize([,,,], [p0]) := <nothing>`
+//
+// - Specializing for the correct constructor returns a tuple of the fields
+//
+//   - `specialize(Variant1, Variant1(p0, p1, p2)) := (p0, p1, p2)`
+//   - `specialize(Foo{ bar, baz, quz }, Foo { bar: p0, baz: p1, .. }) := (p0, p1, _)`
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=27 | LINES=67
 
 ```rust
-//!   - `specialize([,,,], [p0, .., p1]) := (p0, _, _, p1)`
-//!
-//! We get the following property: for any values `v_1, .., v_n` of appropriate types, we have:
-//! ```text
-//! matches!(c(v_1, .., v_n), p)
-//! <=> specialize(c, p) returns something
-//!     && matches!((v_1, .., v_n), specialize(c, p))
-//! ```
-//!
-//! We also extend specialization to pattern-tuples by applying it to the first pattern:
-//! `specialize(c, (p_0, .., p_n)) := specialize(c, p_0) ++ (p_1, .., p_m)`
-//! where `++` is concatenation of tuples.
-//!
-//!
-//! The previous property extends to pattern-tuples:
-//! ```text
-//! matches!((c(v_1, .., v_n), w_1, .., w_m), (p_0, p_1, .., p_m))
-//! <=> specialize(c, p_0) does not error
-//!     && matches!((v_1, .., v_n, w_1, .., w_m), specialize(c, (p_0, p_1, .., p_m)))
-//! ```
-//!
-//! Whether specialization returns something or not is given by [`Constructor::is_covered_by`].
-//! Specialization of a pattern is computed in [`DeconstructedPat::specialize`]. Specialization for
-//! a pattern-tuple is computed in [`PatStack::pop_head_constructor`]. Finally, specialization for a
-//! set of pattern-tuples is computed in [`Matrix::specialize_constructor`].
-//!
-//!
-//!
-//! # Undoing specialization
-//!
-//! To construct witnesses we will need an inverse of specialization. If `c` is a constructor of
-//! arity `n`, we define `unspecialize` as:
-//! `unspecialize(c, (p_1, .., p_n, q_1, .., q_m)) := (c(p_1, .., p_n), q_1, .., q_m)`.
-//!
-//! This is done for a single witness-tuple in [`WitnessStack::apply_constructor`], and for a set of
-//! witness-tuples in [`WitnessMatrix::apply_constructor`].
-//!
-//!
-//!
-//! # Computing usefulness
-//!
-//! We now present a naive version of the algorithm for computing usefulness. From now on we operate
-//! on pattern-tuples.
-//!
-//! Let `pt_1, .., pt_n` and `qt` be length-m tuples of patterns for the same type `(T_1, .., T_m)`.
-//! We compute `usefulness(tp_1, .., tp_n, tq)` as follows:
-//!
-//! - Base case: `m == 0`.
-//!     The pattern-tuples are all empty, i.e. they're all `()`. Thus `tq` is useful iff there are
-//!     no rows above it, i.e. if `n == 0`. In that case we return `()` as a witness-tuple of
-//!     usefulness of `tq`.
-//!
-//! - Inductive case: `m > 0`.
-//!     In this naive version, we list all the possible constructors for values of type `T1` (we
-//!     will be more clever in the next section).
-//!
-//!     - For each such constructor `c` for which `specialize(c, tq)` is not nothing:
-//!         - We recursively compute `usefulness(specialize(c, tp_1) ... specialize(c, tp_n), specialize(c, tq))`,
-//!             where we discard any `specialize(c, p_i)` that returns nothing.
-//!         - For each witness-tuple `w` found, we apply `unspecialize(c, w)` to it.
-//!
-//!     - We return the all the witnesses found, if any.
-//!
-//!
-//! Let's take the following example:
-//! ```compile_fail,E0004
-//! # enum Enum { Variant1(()), Variant2(Option<bool>, u32)}
+//   - `specialize([,,,], [p0, .., p1]) := (p0, _, _, p1)`
+//
+// We get the following property: for any values `v_1, .., v_n` of appropriate types, we have:
+// ```text
+// matches!(c(v_1, .., v_n), p)
+// <=> specialize(c, p) returns something
+//     && matches!((v_1, .., v_n), specialize(c, p))
+// ```
+//
+// We also extend specialization to pattern-tuples by applying it to the first pattern:
+// `specialize(c, (p_0, .., p_n)) := specialize(c, p_0) ++ (p_1, .., p_m)`
+// where `++` is concatenation of tuples.
+//
+//
+// The previous property extends to pattern-tuples:
+// ```text
+// matches!((c(v_1, .., v_n), w_1, .., w_m), (p_0, p_1, .., p_m))
+// <=> specialize(c, p_0) does not error
+//     && matches!((v_1, .., v_n, w_1, .., w_m), specialize(c, (p_0, p_1, .., p_m)))
+// ```
+//
+// Whether specialization returns something or not is given by [`Constructor::is_covered_by`].
+// Specialization of a pattern is computed in [`DeconstructedPat::specialize`]. Specialization for
+// a pattern-tuple is computed in [`PatStack::pop_head_constructor`]. Finally, specialization for a
+// set of pattern-tuples is computed in [`Matrix::specialize_constructor`].
+//
+//
+//
+// # Undoing specialization
+//
+// To construct witnesses we will need an inverse of specialization. If `c` is a constructor of
+// arity `n`, we define `unspecialize` as:
+// `unspecialize(c, (p_1, .., p_n, q_1, .., q_m)) := (c(p_1, .., p_n), q_1, .., q_m)`.
+//
+// This is done for a single witness-tuple in [`WitnessStack::apply_constructor`], and for a set of
+// witness-tuples in [`WitnessMatrix::apply_constructor`].
+//
+//
+//
+// # Computing usefulness
+//
+// We now present a naive version of the algorithm for computing usefulness. From now on we operate
+// on pattern-tuples.
+//
+// Let `pt_1, .., pt_n` and `qt` be length-m tuples of patterns for the same type `(T_1, .., T_m)`.
+// We compute `usefulness(tp_1, .., tp_n, tq)` as follows:
+//
+// - Base case: `m == 0`.
+//     The pattern-tuples are all empty, i.e. they're all `()`. Thus `tq` is useful iff there are
+//     no rows above it, i.e. if `n == 0`. In that case we return `()` as a witness-tuple of
+//     usefulness of `tq`.
+//
+// - Inductive case: `m > 0`.
+//     In this naive version, we list all the possible constructors for values of type `T1` (we
+//     will be more clever in the next section).
+//
+//     - For each such constructor `c` for which `specialize(c, tq)` is not nothing:
+//         - We recursively compute `usefulness(specialize(c, tp_1) ... specialize(c, tp_n), specialize(c, tq))`,
+//             where we discard any `specialize(c, p_i)` that returns nothing.
+//         - For each witness-tuple `w` found, we apply `unspecialize(c, w)` to it.
+//
+//     - We return the all the witnesses found, if any.
+//
+//
+// Let's take the following example:
+// ```compile_fail,E0004
+// # enum Enum { Variant1(()), Variant2(Option<bool>, u32)}
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=8
 
 ```rust
-//! # use Enum::*;
-//! # fn foo(x: Enum) {
-//! match x {
-//!     Variant1(_) => {} // `p1`
-//!     Variant2(None, 0) => {} // `p2`
-//!     Variant2(Some(_), 0) => {} // `q`
-//! }
-//! # }
+// # use Enum::*;
+// # fn foo(x: Enum) {
+// match x {
+//     Variant1(_) => {} // `p1`
+//     Variant2(None, 0) => {} // `p2`
+//     Variant2(Some(_), 0) => {} // `q`
+// }
+// # }
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=36 | LINES=76
 
 ```rust
-//! ```
-//!
-//! To compute the usefulness of `q`, we would proceed as follows:
-//! ```text
-//! Start:
-//!   `tp1 = [Variant1(_)]`
-//!   `tp2 = [Variant2(None, 0)]`
-//!   `tq  = [Variant2(Some(true), 0)]`
-//!
-//!   Constructors are `Variant1` and `Variant2`. Only `Variant2` can specialize `tq`.
-//!   Specialize with `Variant2`:
-//!     `tp2 = [None, 0]`
-//!     `tq  = [Some(true), 0]`
-//!
-//!     Constructors are `None` and `Some`. Only `Some` can specialize `tq`.
-//!     Specialize with `Some`:
-//!       `tq  = [true, 0]`
-//!
-//!       Constructors are `false` and `true`. Only `true` can specialize `tq`.
-//!       Specialize with `true`:
-//!         `tq  = [0]`
-//!
-//!         Constructors are `0`, `1`, .. up to infinity. Only `0` can specialize `tq`.
-//!         Specialize with `0`:
-//!           `tq  = []`
-//!
-//!           m == 0 and n == 0, so `tq` is useful with witness `[]`.
-//!             `witness  = []`
-//!
-//!         Unspecialize with `0`:
-//!           `witness  = [0]`
-//!       Unspecialize with `true`:
-//!         `witness  = [true, 0]`
-//!     Unspecialize with `Some`:
-//!       `witness  = [Some(true), 0]`
-//!   Unspecialize with `Variant2`:
-//!     `witness  = [Variant2(Some(true), 0)]`
-//! ```
-//!
-//! Therefore `usefulness(tp_1, tp_2, tq)` returns the single witness-tuple `[Variant2(Some(true), 0)]`.
-//!
-//!
-//! Computing the set of constructors for a type is done in [`PatCx::ctors_for_ty`]. See
-//! the following sections for more accurate versions of the algorithm and corresponding links.
-//!
-//!
-//!
-//! # Computing usefulness and exhaustiveness in one go
-//!
-//! The algorithm we have described so far computes usefulness of each pattern in turn, and ends by
-//! checking if `_` is useful to determine exhaustiveness of the whole match. In practice, instead
-//! of doing "for each pattern { for each constructor { ... } }", we do "for each constructor { for
-//! each pattern { ... } }". This allows us to compute everything in one go.
-//!
-//! [`Matrix`] stores the set of pattern-tuples under consideration. We track usefulness of each
-//! row mutably in the matrix as we go along. We ignore witnesses of usefulness of the match rows.
-//! We gather witnesses of the usefulness of `_` in [`WitnessMatrix`]. The algorithm that computes
-//! all this is in [`compute_exhaustiveness_and_usefulness`].
-//!
-//! See the full example at the bottom of this documentation.
-//!
-//!
-//!
-//! # Making usefulness tractable: constructor splitting
-//!
-//! We're missing one last detail: which constructors do we list? Naively listing all value
-//! constructors cannot work for types like `u64` or `&str`, so we need to be more clever. The final
-//! clever idea for this algorithm is that we can group together constructors that behave the same.
-//!
-//! Examples:
-//! ```compile_fail,E0004
-//! match (0, false) {
-//!     (0 ..=100, true) => {}
-//!     (50..=150, false) => {}
-//!     (0 ..=200, _) => {}
-//! }
+// ```
+//
+// To compute the usefulness of `q`, we would proceed as follows:
+// ```text
+// Start:
+//   `tp1 = [Variant1(_)]`
+//   `tp2 = [Variant2(None, 0)]`
+//   `tq  = [Variant2(Some(true), 0)]`
+//
+//   Constructors are `Variant1` and `Variant2`. Only `Variant2` can specialize `tq`.
+//   Specialize with `Variant2`:
+//     `tp2 = [None, 0]`
+//     `tq  = [Some(true), 0]`
+//
+//     Constructors are `None` and `Some`. Only `Some` can specialize `tq`.
+//     Specialize with `Some`:
+//       `tq  = [true, 0]`
+//
+//       Constructors are `false` and `true`. Only `true` can specialize `tq`.
+//       Specialize with `true`:
+//         `tq  = [0]`
+//
+//         Constructors are `0`, `1`, .. up to infinity. Only `0` can specialize `tq`.
+//         Specialize with `0`:
+//           `tq  = []`
+//
+//           m == 0 and n == 0, so `tq` is useful with witness `[]`.
+//             `witness  = []`
+//
+//         Unspecialize with `0`:
+//           `witness  = [0]`
+//       Unspecialize with `true`:
+//         `witness  = [true, 0]`
+//     Unspecialize with `Some`:
+//       `witness  = [Some(true), 0]`
+//   Unspecialize with `Variant2`:
+//     `witness  = [Variant2(Some(true), 0)]`
+// ```
+//
+// Therefore `usefulness(tp_1, tp_2, tq)` returns the single witness-tuple `[Variant2(Some(true), 0)]`.
+//
+//
+// Computing the set of constructors for a type is done in [`PatCx::ctors_for_ty`]. See
+// the following sections for more accurate versions of the algorithm and corresponding links.
+//
+//
+//
+// # Computing usefulness and exhaustiveness in one go
+//
+// The algorithm we have described so far computes usefulness of each pattern in turn, and ends by
+// checking if `_` is useful to determine exhaustiveness of the whole match. In practice, instead
+// of doing "for each pattern { for each constructor { ... } }", we do "for each constructor { for
+// each pattern { ... } }". This allows us to compute everything in one go.
+//
+// [`Matrix`] stores the set of pattern-tuples under consideration. We track usefulness of each
+// row mutably in the matrix as we go along. We ignore witnesses of usefulness of the match rows.
+// We gather witnesses of the usefulness of `_` in [`WitnessMatrix`]. The algorithm that computes
+// all this is in [`compute_exhaustiveness_and_usefulness`].
+//
+// See the full example at the bottom of this documentation.
+//
+//
+//
+// # Making usefulness tractable: constructor splitting
+//
+// We're missing one last detail: which constructors do we list? Naively listing all value
+// constructors cannot work for types like `u64` or `&str`, so we need to be more clever. The final
+// clever idea for this algorithm is that we can group together constructors that behave the same.
+//
+// Examples:
+// ```compile_fail,E0004
+// match (0, false) {
+//     (0 ..=100, true) => {}
+//     (50..=150, false) => {}
+//     (0 ..=200, _) => {}
+// }
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-//! ```
-//!
-//! In this example, trying any of `0`, `1`, .., `49` will give the same specialized matrix, and
-//! thus the same usefulness/exhaustiveness results. We can thus accelerate the algorithm by
-//! trying them all at once. Here in fact, the only cases we need to consider are: `0..50`,
-//! `50..=100`, `101..=150`,`151..=200` and `201..`.
-//!
-//! ```
-//! enum Direction { North, South, East, West }
+// ```
+//
+// In this example, trying any of `0`, `1`, .., `49` will give the same specialized matrix, and
+// thus the same usefulness/exhaustiveness results. We can thus accelerate the algorithm by
+// trying them all at once. Here in fact, the only cases we need to consider are: `0..50`,
+// `50..=100`, `101..=150`,`151..=200` and `201..`.
+//
+// ```
+// enum Direction { North, South, East, West }
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=5
 
 ```rust
-//! # let wind = (Direction::North, 0u8);
-//! match wind {
-//!     (Direction::North, 50..) => {}
-//!     (_, _) => {}
-//! }
+// # let wind = (Direction::North, 0u8);
+// match wind {
+//     (Direction::North, 50..) => {}
+//     (_, _) => {}
+// }
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=22
 
 ```rust
-//! ```
-//!
-//! In this example, trying any of `South`, `East`, `West` will give the same specialized matrix. By
-//! the same reasoning, we only need to try two cases: `North`, and "everything else".
-//!
-//! We call _constructor splitting_ the operation that computes such a minimal set of cases to try.
-//! This is done in [`ConstructorSet::split`] and explained in [`crate::constructor`].
-//!
-//!
-//!
-//! # `Missing` and relevancy
-//!
-//! ## Relevant values
-//!
-//! Take the following example:
-//!
-//! ```compile_fail,E0004
-//! # let foo = (true, true);
-//! match foo {
-//!     (true, _) => 1,
-//!     (_, true) => 2,
-//! };
+// ```
+//
+// In this example, trying any of `South`, `East`, `West` will give the same specialized matrix. By
+// the same reasoning, we only need to try two cases: `North`, and "everything else".
+//
+// We call _constructor splitting_ the operation that computes such a minimal set of cases to try.
+// This is done in [`ConstructorSet::split`] and explained in [`crate::constructor`].
+//
+//
+//
+// # `Missing` and relevancy
+//
+// ## Relevant values
+//
+// Take the following example:
+//
+// ```compile_fail,E0004
+// # let foo = (true, true);
+// match foo {
+//     (true, _) => 1,
+//     (_, true) => 2,
+// };
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=24
 
 ```rust
-//! ```
-//!
-//! Consider the value `(true, true)`:
-//! - Row 2 does not distinguish `(true, true)` and `(false, true)`;
-//! - `false` does not show up in the first column of the match, so without knowing anything else we
-//!     can deduce that `(false, true)` matches the same or fewer rows than `(true, true)`.
-//!
-//! Using those two facts together, we deduce that `(true, true)` will not give us more usefulness
-//! information about row 2 than `(false, true)` would. We say that "`(true, true)` is made
-//! irrelevant for row 2 by `(false, true)`". We will use this idea to prune the search tree.
-//!
-//!
-//! ## Computing relevancy
-//!
-//! We now generalize from the above example to approximate relevancy in a simple way. Note that we
-//! will only compute an approximation: we can sometimes determine when a case is irrelevant, but
-//! computing this precisely is at least as hard as computing usefulness.
-//!
-//! Our computation of relevancy relies on the `Missing` constructor. As explained in
-//! [`crate::constructor`], `Missing` represents the constructors not present in a given column. For
-//! example in the following:
-//!
-//! ```compile_fail,E0004
-//! enum Direction { North, South, East, West }
+// ```
+//
+// Consider the value `(true, true)`:
+// - Row 2 does not distinguish `(true, true)` and `(false, true)`;
+// - `false` does not show up in the first column of the match, so without knowing anything else we
+//     can deduce that `(false, true)` matches the same or fewer rows than `(true, true)`.
+//
+// Using those two facts together, we deduce that `(true, true)` will not give us more usefulness
+// information about row 2 than `(false, true)` would. We say that "`(true, true)` is made
+// irrelevant for row 2 by `(false, true)`". We will use this idea to prune the search tree.
+//
+//
+// ## Computing relevancy
+//
+// We now generalize from the above example to approximate relevancy in a simple way. Note that we
+// will only compute an approximation: we can sometimes determine when a case is irrelevant, but
+// computing this precisely is at least as hard as computing usefulness.
+//
+// Our computation of relevancy relies on the `Missing` constructor. As explained in
+// [`crate::constructor`], `Missing` represents the constructors not present in a given column. For
+// example in the following:
+//
+// ```compile_fail,E0004
+// enum Direction { North, South, East, West }
 ```
 
 ## Block 13
 **Metadata**: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=5
 
 ```rust
-//! # let wind = (Direction::North, 0u8);
-//! match wind {
-//!     (Direction::North, _) => 1,
-//!     (_, 50..) => 2,
-//! };
+// # let wind = (Direction::North, 0u8);
+// match wind {
+//     (Direction::North, _) => 1,
+//     (_, 50..) => 2,
+// };
 ```
 
 ## Block 14
 **Metadata**: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=17 | LINES=31
 
 ```rust
-//! ```
-//!
-//! Here `South`, `East` and `West` are missing in the first column, and `0..50`  is missing in the
-//! second. Both of these sets are represented by `Constructor::Missing` in their corresponding
-//! column.
-//!
-//! We then compute relevancy as follows: during the course of the algorithm, for a row `r`:
-//! - if `r` has a wildcard in the first column;
-//! - and some constructors are missing in that column;
-//! - then any `c != Missing` is considered irrelevant for row `r`.
-//!
-//! By this we mean that continuing the algorithm by specializing with `c` is guaranteed not to
-//! contribute more information about the usefulness of row `r` than what we would get by
-//! specializing with `Missing`. The argument is the same as in the previous subsection.
-//!
-//! Once we've specialized by a constructor `c` that is irrelevant for row `r`, we're guaranteed to
-//! only explore values irrelevant for `r`. If we then ever reach a point where we're only exploring
-//! values that are irrelevant to all of the rows (including the virtual wildcard row used for
-//! exhaustiveness), we skip that case entirely.
-//!
-//!
-//! ## Example
-//!
-//! Let's go through a variation on the first example:
-//!
-//! ```compile_fail,E0004
-//! # let foo = (true, true, true);
-//! match foo {
-//!     (true, _, true) => 1,
-//!     (_, true, _) => 2,
-//! };
+// ```
+//
+// Here `South`, `East` and `West` are missing in the first column, and `0..50`  is missing in the
+// second. Both of these sets are represented by `Constructor::Missing` in their corresponding
+// column.
+//
+// We then compute relevancy as follows: during the course of the algorithm, for a row `r`:
+// - if `r` has a wildcard in the first column;
+// - and some constructors are missing in that column;
+// - then any `c != Missing` is considered irrelevant for row `r`.
+//
+// By this we mean that continuing the algorithm by specializing with `c` is guaranteed not to
+// contribute more information about the usefulness of row `r` than what we would get by
+// specializing with `Missing`. The argument is the same as in the previous subsection.
+//
+// Once we've specialized by a constructor `c` that is irrelevant for row `r`, we're guaranteed to
+// only explore values irrelevant for `r`. If we then ever reach a point where we're only exploring
+// values that are irrelevant to all of the rows (including the virtual wildcard row used for
+// exhaustiveness), we skip that case entirely.
+//
+//
+// ## Example
+//
+// Let's go through a variation on the first example:
+//
+// ```compile_fail,E0004
+// # let foo = (true, true, true);
+// match foo {
+//     (true, _, true) => 1,
+//     (_, true, _) => 2,
+// };
 ```
 
 ## Block 15
 **Metadata**: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=17 | LINES=61
 
 ```rust
-//! ```
-//!
-//! ```text
-//!  ┐ Patterns:
-//!  │   1. `[(true, _, true)]`
-//!  │   2. `[(_, true, _)]`
-//!  │   3. `[_]` // virtual extra wildcard row
-//!  │
-//!  │ Specialize with `(,,)`:
-//!  ├─┐ Patterns:
-//!  │ │   1. `[true, _, true]`
-//!  │ │   2. `[_, true, _]`
-//!  │ │   3. `[_, _, _]`
-//!  │ │
-//!  │ │ There are missing constructors in the first column (namely `false`), hence
-//!  │ │ `true` is irrelevant for rows 2 and 3.
-//!  │ │
-//!  │ │ Specialize with `true`:
-//!  │ ├─┐ Patterns:
-//!  │ │ │   1. `[_, true]`
-//!  │ │ │   2. `[true, _]` // now exploring irrelevant cases
-//!  │ │ │   3. `[_, _]`    // now exploring irrelevant cases
-//!  │ │ │
-//!  │ │ │ There are missing constructors in the first column (namely `false`), hence
-//!  │ │ │ `true` is irrelevant for rows 1 and 3.
-//!  │ │ │
-//!  │ │ │ Specialize with `true`:
-//!  │ │ ├─┐ Patterns:
-//!  │ │ │ │   1. `[true]` // now exploring irrelevant cases
-//!  │ │ │ │   2. `[_]`    // now exploring irrelevant cases
-//!  │ │ │ │   3. `[_]`    // now exploring irrelevant cases
-//!  │ │ │ │
-//!  │ │ │ │ The current case is irrelevant for all rows: we backtrack immediately.
-//!  │ │ ├─┘
-//!  │ │ │
-//!  │ │ │ Specialize with `false`:
-//!  │ │ ├─┐ Patterns:
-//!  │ │ │ │   1. `[true]`
-//!  │ │ │ │   3. `[_]`    // now exploring irrelevant cases
-//!  │ │ │ │
-//!  │ │ │ │ Specialize with `true`:
-//!  │ │ │ ├─┐ Patterns:
-//!  │ │ │ │ │   1. `[]`
-//!  │ │ │ │ │   3. `[]`    // now exploring irrelevant cases
-//!  │ │ │ │ │
-//!  │ │ │ │ │ Row 1 is therefore useful.
-//!  │ │ │ ├─┘
-//! <etc...>
-//! ```
-//!
-//! Relevancy allowed us to skip the case `(true, true, _)` entirely. In some cases this pruning can
-//! give drastic speedups. The case this was built for is the following (#118437):
-//!
-//! ```ignore(illustrative)
-//! match foo {
-//!     (true, _, _, _, ..) => 1,
-//!     (_, true, _, _, ..) => 2,
-//!     (_, _, true, _, ..) => 3,
-//!     (_, _, _, true, ..) => 4,
-//!     ...
-//! }
+// ```
+//
+// ```text
+//  ┐ Patterns:
+//  │   1. `[(true, _, true)]`
+//  │   2. `[(_, true, _)]`
+//  │   3. `[_]` // virtual extra wildcard row
+//  │
+//  │ Specialize with `(,,)`:
+//  ├─┐ Patterns:
+//  │ │   1. `[true, _, true]`
+//  │ │   2. `[_, true, _]`
+//  │ │   3. `[_, _, _]`
+//  │ │
+//  │ │ There are missing constructors in the first column (namely `false`), hence
+//  │ │ `true` is irrelevant for rows 2 and 3.
+//  │ │
+//  │ │ Specialize with `true`:
+//  │ ├─┐ Patterns:
+//  │ │ │   1. `[_, true]`
+//  │ │ │   2. `[true, _]` // now exploring irrelevant cases
+//  │ │ │   3. `[_, _]`    // now exploring irrelevant cases
+//  │ │ │
+//  │ │ │ There are missing constructors in the first column (namely `false`), hence
+//  │ │ │ `true` is irrelevant for rows 1 and 3.
+//  │ │ │
+//  │ │ │ Specialize with `true`:
+//  │ │ ├─┐ Patterns:
+//  │ │ │ │   1. `[true]` // now exploring irrelevant cases
+//  │ │ │ │   2. `[_]`    // now exploring irrelevant cases
+//  │ │ │ │   3. `[_]`    // now exploring irrelevant cases
+//  │ │ │ │
+//  │ │ │ │ The current case is irrelevant for all rows: we backtrack immediately.
+//  │ │ ├─┘
+//  │ │ │
+//  │ │ │ Specialize with `false`:
+//  │ │ ├─┐ Patterns:
+//  │ │ │ │   1. `[true]`
+//  │ │ │ │   3. `[_]`    // now exploring irrelevant cases
+//  │ │ │ │
+//  │ │ │ │ Specialize with `true`:
+//  │ │ │ ├─┐ Patterns:
+//  │ │ │ │ │   1. `[]`
+//  │ │ │ │ │   3. `[]`    // now exploring irrelevant cases
+//  │ │ │ │ │
+//  │ │ │ │ │ Row 1 is therefore useful.
+//  │ │ │ ├─┘
+// <etc...>
+// ```
+//
+// Relevancy allowed us to skip the case `(true, true, _)` entirely. In some cases this pruning can
+// give drastic speedups. The case this was built for is the following (#118437):
+//
+// ```ignore(illustrative)
+// match foo {
+//     (true, _, _, _, ..) => 1,
+//     (_, true, _, _, ..) => 2,
+//     (_, _, true, _, ..) => 3,
+//     (_, _, _, true, ..) => 4,
+//     ...
+// }
 ```
 
 ## Block 16
 **Metadata**: AST_ID=16 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=18
 
 ```rust
-//! ```
-//!
-//! Without considering relevancy, we would explore all 2^n combinations of the `true` and `Missing`
-//! constructors. Relevancy tells us that e.g. `(true, true, false, false, false, ...)` is
-//! irrelevant for all the rows. This allows us to skip all cases with more than one `true`
-//! constructor, changing the runtime from exponential to linear.
-//!
-//!
-//! ## Relevancy and exhaustiveness
-//!
-//! For exhaustiveness, we do something slightly different w.r.t relevancy: we do not report
-//! witnesses of non-exhaustiveness that are irrelevant for the virtual wildcard row. For example,
-//! in:
-//!
-//! ```ignore(illustrative)
-//! match foo {
-//!     (true, true) => {}
-//! }
+// ```
+//
+// Without considering relevancy, we would explore all 2^n combinations of the `true` and `Missing`
+// constructors. Relevancy tells us that e.g. `(true, true, false, false, false, ...)` is
+// irrelevant for all the rows. This allows us to skip all cases with more than one `true`
+// constructor, changing the runtime from exponential to linear.
+//
+//
+// ## Relevancy and exhaustiveness
+//
+// For exhaustiveness, we do something slightly different w.r.t relevancy: we do not report
+// witnesses of non-exhaustiveness that are irrelevant for the virtual wildcard row. For example,
+// in:
+//
+// ```ignore(illustrative)
+// match foo {
+//     (true, true) => {}
+// }
 ```
 
 ## Block 17
 **Metadata**: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=13 | LINES=28
 
 ```rust
-//! ```
-//!
-//! we only report `(false, _)` as missing. This was a deliberate choice made early in the
-//! development of rust, for diagnostic and performance purposes. As showed in the previous section,
-//! ignoring irrelevant cases preserves usefulness, so this choice still correctly computes whether
-//! a match is exhaustive.
-//!
-//!
-//!
-//! # Or-patterns
-//!
-//! What we have described so far works well if there are no or-patterns. To handle them, if the
-//! first pattern of any row in the matrix is an or-pattern, we expand it by duplicating the rest of
-//! the row as necessary. For code reuse, this is implemented as "specializing with the `Or`
-//! constructor".
-//!
-//! This makes usefulness tracking subtle, because we also want to compute whether an alternative of
-//! an or-pattern is redundant, e.g. in `Some(_) | Some(0)`. We therefore track usefulness of each
-//! subpattern of the match.
-//!
-//!
-//!
-//! # Constants and opaques
-//!
-//! There are two kinds of constants in patterns:
-//!
-//! * literals (`1`, `true`, `"foo"`)
-//! * named or inline consts (`FOO`, `const { 5 + 6 }`)
+// ```
+//
+// we only report `(false, _)` as missing. This was a deliberate choice made early in the
+// development of rust, for diagnostic and performance purposes. As showed in the previous section,
+// ignoring irrelevant cases preserves usefulness, so this choice still correctly computes whether
+// a match is exhaustive.
+//
+//
+//
+// # Or-patterns
+//
+// What we have described so far works well if there are no or-patterns. To handle them, if the
+// first pattern of any row in the matrix is an or-pattern, we expand it by duplicating the rest of
+// the row as necessary. For code reuse, this is implemented as "specializing with the `Or`
+// constructor".
+//
+// This makes usefulness tracking subtle, because we also want to compute whether an alternative of
+// an or-pattern is redundant, e.g. in `Some(_) | Some(0)`. We therefore track usefulness of each
+// subpattern of the match.
+//
+//
+//
+// # Constants and opaques
+//
+// There are two kinds of constants in patterns:
+//
+// * literals (`1`, `true`, `"foo"`)
+// * named or inline consts (`FOO`, `const { 5 + 6 }`)
 ```
 
 ## Block 18
 **Metadata**: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//!
-//! The latter are converted into the corresponding patterns by a previous phase. For example
-//! `const_to_pat(const { [1, 2, 3] })` becomes an `Array(vec![Const(1), Const(2), Const(3)])`
+//
+// The latter are converted into the corresponding patterns by a previous phase. For example
+// `const_to_pat(const { [1, 2, 3] })` becomes an `Array(vec![Const(1), Const(2), Const(3)])`
 ```
 
 ## Block 19
 **Metadata**: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=14 | LINES=17
 
 ```rust
-//! pattern. This gets problematic when comparing the constant via `==` would behave differently
-//! from matching on the constant converted to a pattern. The situation around this is currently
-//! unclear and the lang team is working on clarifying what we want to do there. In any case, there
-//! are constants we will not turn into patterns. We capture these with `Constructor::Opaque`. These
-//! `Opaque` patterns do not participate in exhaustiveness, specialization or overlap checking.
-//!
-//!
-//!
-//! # Usefulness vs reachability, validity, and empty patterns
-//!
-//! This is likely the subtlest aspect of the algorithm. To be fully precise, a match doesn't
-//! operate on a value, it operates on a place. In certain unsafe circumstances, it is possible for
-//! a place to not contain valid data for its type. This has subtle consequences for empty types.
-//! Take the following:
-//!
-//! ```rust
-//! enum Void {}
+// pattern. This gets problematic when comparing the constant via `==` would behave differently
+// from matching on the constant converted to a pattern. The situation around this is currently
+// unclear and the lang team is working on clarifying what we want to do there. In any case, there
+// are constants we will not turn into patterns. We capture these with `Constructor::Opaque`. These
+// `Opaque` patterns do not participate in exhaustiveness, specialization or overlap checking.
+//
+//
+//
+// # Usefulness vs reachability, validity, and empty patterns
+//
+// This is likely the subtlest aspect of the algorithm. To be fully precise, a match doesn't
+// operate on a value, it operates on a place. In certain unsafe circumstances, it is possible for
+// a place to not contain valid data for its type. This has subtle consequences for empty types.
+// Take the following:
+//
+// ```rust
+// enum Void {}
 ```
 
 ## Block 20
 **Metadata**: AST_ID=20 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=7
 
 ```rust
-//! let x: u8 = 0;
-//! let ptr: *const Void = &x as *const u8 as *const Void;
-//! unsafe {
-//!     match *ptr {
-//!         _ => println!("Reachable!"),
-//!     }
-//! }
+// let x: u8 = 0;
+// let ptr: *const Void = &x as *const u8 as *const Void;
+// unsafe {
+//     match *ptr {
+//         _ => println!("Reachable!"),
+//     }
+// }
 ```
 
 ## Block 21
 **Metadata**: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10
 
 ```rust
-//! ```
-//!
-//! In this example, `ptr` is a valid pointer pointing to a place with invalid data. The `_` pattern
-//! does not look at the contents of `*ptr`, so this is ok and the arm is taken. In other words,
-//! despite the place we are inspecting being of type `Void`, there is a reachable arm. If the
-//! arm had a binding however:
-//!
-//! ```rust
-//! # #[derive(Copy, Clone)]
-//! # enum Void {}
+// ```
+//
+// In this example, `ptr` is a valid pointer pointing to a place with invalid data. The `_` pattern
+// does not look at the contents of `*ptr`, so this is ok and the arm is taken. In other words,
+// despite the place we are inspecting being of type `Void`, there is a reachable arm. If the
+// arm had a binding however:
+//
+// ```rust
+// # #[derive(Copy, Clone)]
+// # enum Void {}
 ```
 
 ## Block 22
 **Metadata**: AST_ID=22 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=7
 
 ```rust
-//! # let x: u8 = 0;
-//! # let ptr: *const Void = &x as *const u8 as *const Void;
-//! # unsafe {
-//! match *ptr {
-//!     _a => println!("Unreachable!"),
-//! }
-//! # }
+// # let x: u8 = 0;
+// # let ptr: *const Void = &x as *const u8 as *const Void;
+// # unsafe {
+// match *ptr {
+//     _a => println!("Unreachable!"),
+// }
+// # }
 ```
 
 ## Block 23
 **Metadata**: AST_ID=23 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=7
 
 ```rust
-//! ```
-//!
-//! Here the binding loads the value of type `Void` from the `*ptr` place. In this example, this
-//! causes UB since the data is not valid. In the general case, this asserts validity of the data at
-//! `*ptr`. Either way, this arm will never be taken.
-//!
-//! Finally, let's consider the empty match `match *ptr {}`. If we consider this exhaustive, then
+// ```
+//
+// Here the binding loads the value of type `Void` from the `*ptr` place. In this example, this
+// causes UB since the data is not valid. In the general case, this asserts validity of the data at
+// `*ptr`. Either way, this arm will never be taken.
+//
+// Finally, let's consider the empty match `match *ptr {}`. If we consider this exhaustive, then
 ```
 
 ## Block 24
 **Metadata**: AST_ID=24 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=35
 
 ```rust
-//! having invalid data at `*ptr` is invalid. In other words, the empty match is semantically
-//! equivalent to the `_a => ...` match. In the interest of explicitness, we prefer the case with an
-//! arm, hence we won't tell the user to remove the `_a` arm. In other words, the `_a` arm is
-//! unreachable yet not redundant. This is why we lint on redundant arms rather than unreachable
-//! arms, despite the fact that the lint says "unreachable".
-//!
-//! These considerations only affects certain places, namely those that can contain non-valid data
-//! without UB. These are: pointer dereferences, reference dereferences, and union field accesses.
-//! We track in the algorithm whether a given place is known to contain valid data. This is done
-//! first by inspecting the scrutinee syntactically (which gives us `cx.known_valid_scrutinee`), and
-//! then by tracking validity of each column of the matrix (which correspond to places) as we
-//! recurse into subpatterns. That second part is done through [`PlaceValidity`], most notably
-//! [`PlaceValidity::specialize`].
-//!
-//! Having said all that, we don't fully follow what's been presented in this section. For
-//! backwards-compatibility, we ignore place validity when checking whether a pattern is required
-//! for exhaustiveness in two cases: when the `exhaustive_patterns` feature gate is on, or when the
-//! match scrutinee itself has type `!` or `EmptyEnum`. I (Nadrieril) hope to deprecate this
-//! exception.
-//!
-//!
-//!
-//! # Full example
-//!
-//! We illustrate a full run of the algorithm on the following match.
-//!
-//! ```compile_fail,E0004
-//! # struct Pair(Option<u32>, bool);
-//! # fn foo(x: Pair) -> u32 {
-//! match x {
-//!     Pair(Some(0), _) => 1,
-//!     Pair(_, false) => 2,
-//!     Pair(Some(0), false) => 3,
-//! }
-//! # }
+// having invalid data at `*ptr` is invalid. In other words, the empty match is semantically
+// equivalent to the `_a => ...` match. In the interest of explicitness, we prefer the case with an
+// arm, hence we won't tell the user to remove the `_a` arm. In other words, the `_a` arm is
+// unreachable yet not redundant. This is why we lint on redundant arms rather than unreachable
+// arms, despite the fact that the lint says "unreachable".
+//
+// These considerations only affects certain places, namely those that can contain non-valid data
+// without UB. These are: pointer dereferences, reference dereferences, and union field accesses.
+// We track in the algorithm whether a given place is known to contain valid data. This is done
+// first by inspecting the scrutinee syntactically (which gives us `cx.known_valid_scrutinee`), and
+// then by tracking validity of each column of the matrix (which correspond to places) as we
+// recurse into subpatterns. That second part is done through [`PlaceValidity`], most notably
+// [`PlaceValidity::specialize`].
+//
+// Having said all that, we don't fully follow what's been presented in this section. For
+// backwards-compatibility, we ignore place validity when checking whether a pattern is required
+// for exhaustiveness in two cases: when the `exhaustive_patterns` feature gate is on, or when the
+// match scrutinee itself has type `!` or `EmptyEnum`. I (Nadrieril) hope to deprecate this
+// exception.
+//
+//
+//
+// # Full example
+//
+// We illustrate a full run of the algorithm on the following match.
+//
+// ```compile_fail,E0004
+// # struct Pair(Option<u32>, bool);
+// # fn foo(x: Pair) -> u32 {
+// match x {
+//     Pair(Some(0), _) => 1,
+//     Pair(_, false) => 2,
+//     Pair(Some(0), false) => 3,
+// }
+// # }
 ```
 
 ## Block 25
-**Metadata**: AST_ID=25 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=32 | LINES=149
+**Metadata**: AST_ID=25 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=31 | LINES=149
 
 ```rust
-//! ```
-//!
-//! We keep track of the original row for illustration purposes, this is not what the algorithm
-//! actually does (it tracks usefulness as a boolean on each row).
-//!
-//! ```text
-//!  ┐ Patterns:
-//!  │   1. `[Pair(Some(0), _)]`
-//!  │   2. `[Pair(_, false)]`
-//!  │   3. `[Pair(Some(0), false)]`
-//!  │
-//!  │ Specialize with `Pair`:
-//!  ├─┐ Patterns:
-//!  │ │   1. `[Some(0), _]`
-//!  │ │   2. `[_, false]`
-//!  │ │   3. `[Some(0), false]`
-//!  │ │
-//!  │ │ Specialize with `Some`:
-//!  │ ├─┐ Patterns:
-//!  │ │ │   1. `[0, _]`
-//!  │ │ │   2. `[_, false]`
-//!  │ │ │   3. `[0, false]`
-//!  │ │ │
-//!  │ │ │ Specialize with `0`:
-//!  │ │ ├─┐ Patterns:
-//!  │ │ │ │   1. `[_]`
-//!  │ │ │ │   3. `[false]`
-//!  │ │ │ │
-//!  │ │ │ │ Specialize with `true`:
-//!  │ │ │ ├─┐ Patterns:
-//!  │ │ │ │ │   1. `[]`
-//!  │ │ │ │ │
-//!  │ │ │ │ │ We note arm 1 is useful (by `Pair(Some(0), true)`).
-//!  │ │ │ ├─┘
-//!  │ │ │ │
-//!  │ │ │ │ Specialize with `false`:
-//!  │ │ │ ├─┐ Patterns:
-//!  │ │ │ │ │   1. `[]`
-//!  │ │ │ │ │   3. `[]`
-//!  │ │ │ │ │
-//!  │ │ │ │ │ We note arm 1 is useful (by `Pair(Some(0), false)`).
-//!  │ │ │ ├─┘
-//!  │ │ ├─┘
-//!  │ │ │
-//!  │ │ │ Specialize with `1..`:
-//!  │ │ ├─┐ Patterns:
-//!  │ │ │ │   2. `[false]`
-//!  │ │ │ │
-//!  │ │ │ │ Specialize with `true`:
-//!  │ │ │ ├─┐ Patterns:
-//!  │ │ │ │ │   // no rows left
-//!  │ │ │ │ │
-//!  │ │ │ │ │ We have found an unmatched value (`Pair(Some(1..), true)`)! This gives us a witness.
-//!  │ │ │ │ │ New witnesses:
-//!  │ │ │ │ │   `[]`
-//!  │ │ │ ├─┘
-//!  │ │ │ │ Unspecialize new witnesses with `true`:
-//!  │ │ │ │   `[true]`
-//!  │ │ │ │
-//!  │ │ │ │ Specialize with `false`:
-//!  │ │ │ ├─┐ Patterns:
-//!  │ │ │ │ │   2. `[]`
-//!  │ │ │ │ │
-//!  │ │ │ │ │ We note arm 2 is useful (by `Pair(Some(1..), false)`).
-//!  │ │ │ ├─┘
-//!  │ │ │ │
-//!  │ │ │ │ Total witnesses for `1..`:
-//!  │ │ │ │   `[true]`
-//!  │ │ ├─┘
-//!  │ │ │ Unspecialize new witnesses with `1..`:
-//!  │ │ │   `[1.., true]`
-//!  │ │ │
-//!  │ │ │ Total witnesses for `Some`:
-//!  │ │ │   `[1.., true]`
-//!  │ ├─┘
-//!  │ │ Unspecialize new witnesses with `Some`:
-//!  │ │   `[Some(1..), true]`
-//!  │ │
-//!  │ │ Specialize with `None`:
-//!  │ ├─┐ Patterns:
-//!  │ │ │   2. `[false]`
-//!  │ │ │
-//!  │ │ │ Specialize with `true`:
-//!  │ │ ├─┐ Patterns:
-//!  │ │ │ │   // no rows left
-//!  │ │ │ │
-//!  │ │ │ │ We have found an unmatched value (`Pair(None, true)`)! This gives us a witness.
-//!  │ │ │ │ New witnesses:
-//!  │ │ │ │   `[]`
-//!  │ │ ├─┘
-//!  │ │ │ Unspecialize new witnesses with `true`:
-//!  │ │ │   `[true]`
-//!  │ │ │
-//!  │ │ │ Specialize with `false`:
-//!  │ │ ├─┐ Patterns:
-//!  │ │ │ │   2. `[]`
-//!  │ │ │ │
-//!  │ │ │ │ We note arm 2 is useful (by `Pair(None, false)`).
-//!  │ │ ├─┘
-//!  │ │ │
-//!  │ │ │ Total witnesses for `None`:
-//!  │ │ │   `[true]`
-//!  │ ├─┘
-//!  │ │ Unspecialize new witnesses with `None`:
-//!  │ │   `[None, true]`
-//!  │ │
-//!  │ │ Total witnesses for `Pair`:
-//!  │ │   `[Some(1..), true]`
-//!  │ │   `[None, true]`
-//!  ├─┘
-//!  │ Unspecialize new witnesses with `Pair`:
-//!  │   `[Pair(Some(1..), true)]`
-//!  │   `[Pair(None, true)]`
-//!  │
-//!  │ Final witnesses:
-//!  │   `[Pair(Some(1..), true)]`
-//!  │   `[Pair(None, true)]`
-//!  ┘
-//! ```
-//!
-//! We conclude:
-//! - Arm 3 is redundant (it was never marked as useful);
-//! - The match is not exhaustive;
-//! - Adding arms with `Pair(Some(1..), true)` and `Pair(None, true)` would make the match exhaustive.
-//!
-//! Note that when we're deep in the algorithm, we don't know what specialization steps got us here.
-//! We can only figure out what our witnesses correspond to by unspecializing back up the stack.
-//!
-//!
-//! # Tests
-//!
-//! Note: tests specific to this file can be found in:
-//!
-//!   - `ui/pattern/usefulness`
-//!   - `ui/or-patterns`
-//!   - `ui/consts/const_in_pattern`
-//!   - `ui/rfc-2008-non-exhaustive`
-//!   - `ui/half-open-range-patterns`
-//!   - `ui/pattern/deref-patterns`
-//!   - probably many others
-//!
-//! I (Nadrieril) prefer to put new tests in `ui/pattern/usefulness` unless there's a specific
-//! reason not to, for example if they crucially depend on a particular feature like `or_patterns`.
+// ```
+//
+// We keep track of the original row for illustration purposes, this is not what the algorithm
+// actually does (it tracks usefulness as a boolean on each row).
+//
+// ```text
+//  ┐ Patterns:
+//  │   1. `[Pair(Some(0), _)]`
+//  │   2. `[Pair(_, false)]`
+//  │   3. `[Pair(Some(0), false)]`
+//  │
+//  │ Specialize with `Pair`:
+//  ├─┐ Patterns:
+//  │ │   1. `[Some(0), _]`
+//  │ │   2. `[_, false]`
+//  │ │   3. `[Some(0), false]`
+//  │ │
+//  │ │ Specialize with `Some`:
+//  │ ├─┐ Patterns:
+//  │ │ │   1. `[0, _]`
+//  │ │ │   2. `[_, false]`
+//  │ │ │   3. `[0, false]`
+//  │ │ │
+//  │ │ │ Specialize with `0`:
+//  │ │ ├─┐ Patterns:
+//  │ │ │ │   1. `[_]`
+//  │ │ │ │   3. `[false]`
+//  │ │ │ │
+//  │ │ │ │ Specialize with `true`:
+//  │ │ │ ├─┐ Patterns:
+//  │ │ │ │ │   1. `[]`
+//  │ │ │ │ │
+//  │ │ │ │ │ We note arm 1 is useful (by `Pair(Some(0), true)`).
+//  │ │ │ ├─┘
+//  │ │ │ │
+//  │ │ │ │ Specialize with `false`:
+//  │ │ │ ├─┐ Patterns:
+//  │ │ │ │ │   1. `[]`
+//  │ │ │ │ │   3. `[]`
+//  │ │ │ │ │
+//  │ │ │ │ │ We note arm 1 is useful (by `Pair(Some(0), false)`).
+//  │ │ │ ├─┘
+//  │ │ ├─┘
+//  │ │ │
+//  │ │ │ Specialize with `1..`:
+//  │ │ ├─┐ Patterns:
+//  │ │ │ │   2. `[false]`
+//  │ │ │ │
+//  │ │ │ │ Specialize with `true`:
+//  │ │ │ ├─┐ Patterns:
+//  │ │ │ │ │   // no rows left
+//  │ │ │ │ │
+//  │ │ │ │ │ We have found an unmatched value (`Pair(Some(1..), true)`)! This gives us a witness.
+//  │ │ │ │ │ New witnesses:
+//  │ │ │ │ │   `[]`
+//  │ │ │ ├─┘
+//  │ │ │ │ Unspecialize new witnesses with `true`:
+//  │ │ │ │   `[true]`
+//  │ │ │ │
+//  │ │ │ │ Specialize with `false`:
+//  │ │ │ ├─┐ Patterns:
+//  │ │ │ │ │   2. `[]`
+//  │ │ │ │ │
+//  │ │ │ │ │ We note arm 2 is useful (by `Pair(Some(1..), false)`).
+//  │ │ │ ├─┘
+//  │ │ │ │
+//  │ │ │ │ Total witnesses for `1..`:
+//  │ │ │ │   `[true]`
+//  │ │ ├─┘
+//  │ │ │ Unspecialize new witnesses with `1..`:
+//  │ │ │   `[1.., true]`
+//  │ │ │
+//  │ │ │ Total witnesses for `Some`:
+//  │ │ │   `[1.., true]`
+//  │ ├─┘
+//  │ │ Unspecialize new witnesses with `Some`:
+//  │ │   `[Some(1..), true]`
+//  │ │
+//  │ │ Specialize with `None`:
+//  │ ├─┐ Patterns:
+//  │ │ │   2. `[false]`
+//  │ │ │
+//  │ │ │ Specialize with `true`:
+//  │ │ ├─┐ Patterns:
+//  │ │ │ │   // no rows left
+//  │ │ │ │
+//  │ │ │ │ We have found an unmatched value (`Pair(None, true)`)! This gives us a witness.
+//  │ │ │ │ New witnesses:
+//  │ │ │ │   `[]`
+//  │ │ ├─┘
+//  │ │ │ Unspecialize new witnesses with `true`:
+//  │ │ │   `[true]`
+//  │ │ │
+//  │ │ │ Specialize with `false`:
+//  │ │ ├─┐ Patterns:
+//  │ │ │ │   2. `[]`
+//  │ │ │ │
+//  │ │ │ │ We note arm 2 is useful (by `Pair(None, false)`).
+//  │ │ ├─┘
+//  │ │ │
+//  │ │ │ Total witnesses for `None`:
+//  │ │ │   `[true]`
+//  │ ├─┘
+//  │ │ Unspecialize new witnesses with `None`:
+//  │ │   `[None, true]`
+//  │ │
+//  │ │ Total witnesses for `Pair`:
+//  │ │   `[Some(1..), true]`
+//  │ │   `[None, true]`
+//  ├─┘
+//  │ Unspecialize new witnesses with `Pair`:
+//  │   `[Pair(Some(1..), true)]`
+//  │   `[Pair(None, true)]`
+//  │
+//  │ Final witnesses:
+//  │   `[Pair(Some(1..), true)]`
+//  │   `[Pair(None, true)]`
+//  ┘
+// ```
+//
+// We conclude:
+// - Arm 3 is redundant (it was never marked as useful);
+// - The match is not exhaustive;
+// - Adding arms with `Pair(Some(1..), true)` and `Pair(None, true)` would make the match exhaustive.
+//
+// Note that when we're deep in the algorithm, we don't know what specialization steps got us here.
+// We can only figure out what our witnesses correspond to by unspecializing back up the stack.
+//
+//
+// # Tests
+//
+// Note: tests specific to this file can be found in:
+//
+//   - `ui/pattern/usefulness`
+//   - `ui/or-patterns`
+//   - `ui/consts/const_in_pattern`
+//   - `ui/rfc-2008-non-exhaustive`
+//   - `ui/half-open-range-patterns`
+//   - `ui/pattern/deref-patterns`
+//   - probably many others
+//
+// I (Nadrieril) prefer to put new tests in `ui/pattern/usefulness` unless there's a specific
+// reason not to, for example if they crucially depend on a particular feature like `or_patterns`.
 
 use std::fmt;
 
 #[cfg(feature = "rustc")]
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_hash::{FxHashMap, FxHashSet};
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_hash::{FxHashMap, FxHashSet};
 ```
 
 ## Block 26
 **Metadata**: AST_ID=26 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_index::bit_set::DenseBitSet;
+use crate::rustc_index::bit_set::DenseBitSet;
 use smallvec::{SmallVec, smallvec};
 ```
 

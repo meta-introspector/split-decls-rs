@@ -8,10 +8,10 @@ Generated 5 AST blocks from source file
 ```rust
 use std::sync::Arc;
 
-use rustc_hir::ByRef;
-use rustc_middle::mir::*;
-use rustc_middle::thir::*;
-use rustc_middle::ty::{self, Ty, TypeVisitableExt};
+use crate::rustc_complete::ByRef;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::{self, Ty, TypeVisitableExt};
 ```
 
 ## Block 2

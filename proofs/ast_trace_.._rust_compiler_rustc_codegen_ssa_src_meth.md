@@ -6,17 +6,17 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::{self, GenericArgKind, Ty, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, GenericArgKind, Ty, TyCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_session::config::Lto;
+use crate::rustc_complete::config::Lto;
 use rustc_symbol_mangling::typeid_for_trait_ref;
-use rustc_target::callconv::FnAbi;
+use crate::rustc_target::callconv::FnAbi;
 use tracing::{debug, instrument};
 ```
 

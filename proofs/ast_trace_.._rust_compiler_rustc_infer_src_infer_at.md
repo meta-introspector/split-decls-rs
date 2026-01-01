@@ -6,32 +6,32 @@ Generated 23 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=28
 
 ```rust
-//! A nice interface for working with the infcx. The basic idea is to
-//! do `infcx.at(cause, param_env)`, which sets the "cause" of the
-//! operation as well as the surrounding parameter environment. Then
-//! you can do something like `.sub(a, b)` or `.eq(a, b)` to create a
-//! subtype or equality relationship respectively. The first argument
-//! is always the "expected" output from the POV of diagnostics.
-//!
-//! Examples:
-//! ```ignore (fragment)
-//!     infcx.at(cause, param_env).sub(a, b)
-//!     // requires that `a <: b`, with `a` considered the "expected" type
-//!
-//!     infcx.at(cause, param_env).sup(a, b)
-//!     // requires that `b <: a`, with `a` considered the "expected" type
-//!
-//!     infcx.at(cause, param_env).eq(a, b)
-//!     // requires that `a == b`, with `a` considered the "expected" type
-//! ```
-//! For finer-grained control, you can also do use `trace`:
-//! ```ignore (fragment)
-//!     infcx.at(...).trace(a, b).sub(&c, &d)
-//! ```
-//! This will set `a` and `b` as the "root" values for
-//! error-reporting, but actually operate on `c` and `d`. This is
-//! sometimes useful when the types of `c` and `d` are not traceable
-//! things. (That system should probably be refactored.)
+// A nice interface for working with the infcx. The basic idea is to
+// do `infcx.at(cause, param_env)`, which sets the "cause" of the
+// operation as well as the surrounding parameter environment. Then
+// you can do something like `.sub(a, b)` or `.eq(a, b)` to create a
+// subtype or equality relationship respectively. The first argument
+// is always the "expected" output from the POV of diagnostics.
+//
+// Examples:
+// ```ignore (fragment)
+//     infcx.at(cause, param_env).sub(a, b)
+//     // requires that `a <: b`, with `a` considered the "expected" type
+//
+//     infcx.at(cause, param_env).sup(a, b)
+//     // requires that `b <: a`, with `a` considered the "expected" type
+//
+//     infcx.at(cause, param_env).eq(a, b)
+//     // requires that `a == b`, with `a` considered the "expected" type
+// ```
+// For finer-grained control, you can also do use `trace`:
+// ```ignore (fragment)
+//     infcx.at(...).trace(a, b).sub(&c, &d)
+// ```
+// This will set `a` and `b` as the "root" values for
+// error-reporting, but actually operate on `c` and `d`. This is
+// sometimes useful when the types of `c` and `d` are not traceable
+// things. (That system should probably be refactored.)
 
 use relate::lattice::{LatticeOp, LatticeOpKind};
 ```
@@ -40,9 +40,9 @@ use relate::lattice::{LatticeOp, LatticeOpKind};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::relate::solver_relating::RelateExt as NextSolverRelate;
-use rustc_middle::ty::{Const, ImplSubject, TypingMode};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::relate::solver_relating::RelateExt as NextSolverRelate;
+use crate::rustc_complete::ty::{Const, ImplSubject, TypingMode};
 ```
 
 ## Block 3

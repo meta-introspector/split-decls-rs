@@ -6,22 +6,22 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=20
 
 ```rust
-//! Implements the `AliasRelate` goal, which is used when unifying aliases.
-//! Doing this via a separate goal is called "deferred alias relation" and part
-//! of our more general approach to "lazy normalization".
-//!
-//! This is done by first structurally normalizing both sides of the goal, ending
-//! up in either a concrete type, rigid alias, or an infer variable.
-//! These are related further according to the rules below:
-//!
-//! (1.) If we end up with two rigid aliases, then we relate them structurally.
-//!
-//! (2.) If we end up with an infer var and a rigid alias, then we instantiate
-//! the infer var with the constructor of the alias and then recursively relate
-//! the terms.
-//!
-//! (3.) Otherwise, if we end with two rigid (non-projection) or infer types,
-//! relate them structurally.
+// Implements the `AliasRelate` goal, which is used when unifying aliases.
+// Doing this via a separate goal is called "deferred alias relation" and part
+// of our more general approach to "lazy normalization".
+//
+// This is done by first structurally normalizing both sides of the goal, ending
+// up in either a concrete type, rigid alias, or an infer variable.
+// These are related further according to the rules below:
+//
+// (1.) If we end up with two rigid aliases, then we relate them structurally.
+//
+// (2.) If we end up with an infer var and a rigid alias, then we instantiate
+// the infer var with the constructor of the alias and then recursively relate
+// the terms.
+//
+// (3.) Otherwise, if we end with two rigid (non-projection) or infer types,
+// relate them structurally.
 
 use rustc_type_ir::inherent::*;
 use rustc_type_ir::solve::GoalSource;

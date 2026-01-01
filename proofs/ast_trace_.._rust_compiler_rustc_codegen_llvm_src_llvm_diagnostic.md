@@ -6,10 +6,10 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-//! LLVM diagnostic reports.
+// LLVM diagnostic reports.
 
 use libc::c_uint;
-use rustc_span::InnerSpan;
+use crate::rustc_complete::InnerSpan;
 
 pub(crate) use self::Diagnostic::*;
 use self::OptimizationDiagnosticKind::*;

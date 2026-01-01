@@ -7,7 +7,7 @@ Generated 2 AST blocks from source file
 
 ```rust
 use rustc_hashes::Hash64;
-use rustc_span::def_id::DefIndex;
+use crate::rustc_complete::def_id::DefIndex;
 
 #[derive(Clone, Default)]
 pub struct Config;

@@ -7,12 +7,12 @@ Generated 35 AST blocks from source file
 
 ```rust
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
-#![doc(rust_logo)]
-#![feature(associated_type_defaults)]
-#![feature(rustdoc_internals)]
-#![feature(try_blocks)]
+#[allow(internal_features)]
+#[doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
+#[doc(rust_logo)]
+#[feature(associated_type_defaults)]
+#[feature(rustdoc_internals)]
+#[feature(try_blocks)]
 // tidy-alphabetical-end
 
 mod errors;
@@ -32,17 +32,17 @@ use errors::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::MacroDef;
-use rustc_ast::visit::{VisitorResult, try_visit};
+use crate::rustc_complete::MacroDef;
+use crate::rustc_complete::visit::{VisitorResult, try_visit};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_data_structures::intern::Interned;
-use rustc_errors::{MultiSpan, listify};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_data_structures::intern::Interned;
+use crate::rustc_complete::{MultiSpan, listify};
 ```
 
 ## Block 4
@@ -50,45 +50,45 @@ use rustc_errors::{MultiSpan, listify};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefId, LocalDefId, LocalModDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId, LocalModDefId};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::intravisit::{self, InferKind, Visitor};
+use crate::rustc_complete::intravisit::{self, InferKind, Visitor};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{AmbigArg, ForeignItemId, ItemId, OwnerId, PatKind, find_attr};
+use crate::rustc_complete::{AmbigArg, ForeignItemId, ItemId, OwnerId, PatKind, find_attr};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::middle::privacy::{EffectiveVisibilities, EffectiveVisibility, Level};
+use crate::rustc_complete::middle::privacy::{EffectiveVisibilities, EffectiveVisibility, Level};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_middle::query::Providers;
-use rustc_middle::ty::print::PrintTraitRefExt as _;
-use rustc_middle::ty::{
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::print::PrintTraitRefExt as _;
+use crate::rustc_complete::ty::{
     self, Const, GenericParamDefKind, TraitRef, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
     TypeVisitor,
 };
@@ -98,16 +98,16 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::lint;
-use rustc_span::hygiene::Transparency;
-use rustc_span::{Ident, Span, Symbol, sym};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::hygiene::Transparency;
+use crate::rustc_complete::{Ident, Span, Symbol, sym};
 ```
 
 ## Block 12
@@ -1386,7 +1386,7 @@ impl<'tcx> Visitor<'tcx> for TypePrivacyVisitor<'tcx> {
 
     fn visit_infer(
         &mut self,
-        inf_id: rustc_hir::HirId,
+        inf_id: crate::rustc_hir::HirId,
         inf_span: Span,
         _kind: InferKind<'tcx>,
     ) -> Self::Result {

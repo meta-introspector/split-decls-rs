@@ -6,11 +6,11 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7
 
 ```rust
-//! Computes a normalizes-to (projection) goal for inherent associated types,
-//! `#![feature(lazy_type_alias)]` and `#![feature(type_alias_impl_trait)]`.
-//!
-//! Since a free alias is never ambiguous, this just computes the `type_of` of
-//! the alias and registers the where-clauses of the type alias.
+// Computes a normalizes-to (projection) goal for inherent associated types,
+// `#[feature(lazy_type_alias)]` and `#[feature(type_alias_impl_trait)]`.
+//
+// Since a free alias is never ambiguous, this just computes the `type_of` of
+// the alias and registers the where-clauses of the type alias.
 
 use rustc_type_ir::{self as ty, Interner};
 ```

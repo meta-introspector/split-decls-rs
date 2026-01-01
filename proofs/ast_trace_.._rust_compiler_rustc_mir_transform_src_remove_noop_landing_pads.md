@@ -6,10 +6,10 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=43 | LINES=81
 
 ```rust
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
-use rustc_target::spec::PanicStrategy;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_target::spec::PanicStrategy;
 use tracing::debug;
 
 use crate::patch::MirPatch;
@@ -20,7 +20,7 @@ use crate::patch::MirPatch;
 pub(super) struct RemoveNoopLandingPads;
 
 impl<'tcx> crate::MirPass<'tcx> for RemoveNoopLandingPads {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.panic_strategy() != PanicStrategy::Abort
     }
 

@@ -6,21 +6,21 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{Align, Size};
+use crate::rustc_abi::{Align, Size};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::interpret::{InterpResult, Pointer};
+use crate::rustc_complete::mir::interpret::{InterpResult, Pointer};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, ExistentialPredicateStableCmpExt, Ty, TyCtxt, VtblEntry};
+use crate::rustc_complete::ty::{self, ExistentialPredicateStableCmpExt, Ty, TyCtxt, VtblEntry};
 ```
 
 ## Block 4

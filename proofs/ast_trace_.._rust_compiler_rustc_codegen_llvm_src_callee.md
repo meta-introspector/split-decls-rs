@@ -6,21 +6,21 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-//! Handles codegen of callees as well as other call-related
-//! things. Callees are a superset of normal rust values and sometimes
-//! have different representations. In particular, top-level fn items
-//! and methods are represented as just a fn ptr and not a full
-//! closure.
+// Handles codegen of callees as well as other call-related
+// things. Callees are a superset of normal rust values and sometimes
+// have different representations. In particular, top-level fn items
+// and methods are represented as just a fn ptr and not a full
+// closure.
 
-use rustc_codegen_ssa::common;
-use rustc_middle::ty::layout::{FnAbiOf, HasTyCtxt, HasTypingEnv};
+use crate::rustc_codegen_ssa::common;
+use crate::rustc_complete::ty::layout::{FnAbiOf, HasTyCtxt, HasTypingEnv};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Instance, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, Instance, TypeVisitableExt};
 ```
 
 ## Block 3
@@ -123,7 +123,7 @@ pub(crate) fn get_fn<'ll, 'tcx>(cx: &CodegenCx<'ll, 'tcx>, instance: Instance<'t
             // This is a monomorphization of a generic function.
             if !(cx.tcx.sess.opts.share_generics()
                 || tcx.codegen_instance_attrs(instance.def).inline
-                    == rustc_hir::attrs::InlineAttr::Never)
+                    == crate::rustc_hir::attrs::InlineAttr::Never)
             {
                 // When not sharing generics, all instances are in the same
                 // crate and have hidden visibility.

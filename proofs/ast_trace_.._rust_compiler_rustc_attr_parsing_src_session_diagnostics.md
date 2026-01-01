@@ -8,15 +8,15 @@ Generated 87 AST blocks from source file
 ```rust
 use std::num::IntErrorKind;
 
-use rustc_ast::{self as ast, AttrStyle, Path};
+use crate::rustc_complete::{self as ast, AttrStyle, Path};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagArgValue, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level,
 };
 ```
@@ -25,8 +25,8 @@ use rustc_errors::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_feature::AttributeTemplate;
-use rustc_hir::{AttrPath, Target};
+use crate::rustc_feature::AttributeTemplate;
+use crate::rustc_complete::{AttrPath, Target};
 ```
 
 ## Block 4
@@ -40,7 +40,7 @@ use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 6

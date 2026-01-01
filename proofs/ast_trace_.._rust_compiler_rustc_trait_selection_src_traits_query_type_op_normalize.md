@@ -8,23 +8,23 @@ Generated 11 AST blocks from source file
 ```rust
 use std::fmt;
 
-use rustc_middle::traits::ObligationCause;
-use rustc_middle::traits::query::NoSolution;
-pub use rustc_middle::traits::query::type_op::{DeeplyNormalize, Normalize};
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::traits::query::NoSolution;
+pub use crate::rustc_complete::traits::query::type_op::{DeeplyNormalize, Normalize};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Lift, ParamEnvAnd, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, Lift, ParamEnvAnd, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::infer::canonical::{CanonicalQueryInput, CanonicalQueryResponse};
 ```

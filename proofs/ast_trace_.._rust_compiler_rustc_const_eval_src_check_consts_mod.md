@@ -6,43 +6,43 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=9
 
 ```rust
-//! Check the bodies of `const`s, `static`s and `const fn`s for illegal operations.
-//!
-//! This module will eventually replace the parts of `qualify_consts.rs` that check whether a local
-//! has interior mutability or needs to be dropped, as well as the visitor that emits errors when
-//! it finds operations that are invalid in a certain context.
+// Check the bodies of `const`s, `static`s and `const fn`s for illegal operations.
+//
+// This module will eventually replace the parts of `qualify_consts.rs` that check whether a local
+// has interior mutability or needs to be dropped, as well as the visitor that emits errors when
+// it finds operations that are invalid in a certain context.
 
-use rustc_errors::DiagCtxtHandle;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::DiagCtxtHandle;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, find_attr};
+use crate::rustc_complete::{self as hir, find_attr};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, PolyFnSig, TyCtxt};
+use crate::rustc_complete::ty::{self, PolyFnSig, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, mir};
+use crate::rustc_complete::{bug, mir};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=STRUCT | NAME=ConstCx | COMPLEXITY=2 | LINES=18
 
 ```rust
-use rustc_span::Symbol;
+use crate::rustc_complete::Symbol;
 
 pub use self::qualifs::Qualif;
 

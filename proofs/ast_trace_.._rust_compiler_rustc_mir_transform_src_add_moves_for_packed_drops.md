@@ -6,8 +6,8 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 2

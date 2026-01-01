@@ -8,29 +8,29 @@ Generated 9 AST blocks from source file
 ```rust
 use std::ptr;
 
-use rustc_ast::expand::autodiff_attrs::{AutoDiffAttrs, DiffActivity, DiffMode};
+use crate::rustc_complete::expand::autodiff_attrs::{AutoDiffAttrs, DiffActivity, DiffMode};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_codegen_ssa::common::TypeKind;
-use rustc_codegen_ssa::traits::{BaseTypeCodegenMethods, BuilderMethods};
+use crate::rustc_codegen_ssa::common::TypeKind;
+use crate::rustc_codegen_ssa::traits::{BaseTypeCodegenMethods, BuilderMethods};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{PseudoCanonicalInput, Ty, TyCtxt, TypingEnv};
+use crate::rustc_complete::ty::{PseudoCanonicalInput, Ty, TyCtxt, TypingEnv};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, ty};
+use crate::rustc_complete::{bug, ty};
 ```
 
 ## Block 5

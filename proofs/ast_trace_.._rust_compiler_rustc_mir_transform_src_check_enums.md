@@ -6,27 +6,27 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{Scalar, Size, TagEncoding, Variants, WrappingRange};
+use crate::rustc_abi::{Scalar, Size, TagEncoding, Variants, WrappingRange};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_hir::LangItem;
-use rustc_index::IndexVec;
-use rustc_middle::bug;
-use rustc_middle::mir::visit::Visitor;
-use rustc_middle::mir::*;
-use rustc_middle::ty::layout::PrimitiveExt;
-use rustc_middle::ty::{self, Ty, TyCtxt, TypingEnv};
+use crate::rustc_complete::LangItem;
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::layout::PrimitiveExt;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypingEnv};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=51 | LINES=106
 
 ```rust
-use rustc_session::Session;
+use crate::rustc_complete::Session;
 use tracing::debug;
 
 /// This pass inserts checks for a valid enum discriminant where they are most

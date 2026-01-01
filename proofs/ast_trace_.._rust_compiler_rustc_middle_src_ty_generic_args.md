@@ -13,15 +13,15 @@ use std::marker::PhantomData;
 use std::num::NonZero;
 use std::ptr::NonNull;
 
-use rustc_data_structures::intern::Interned;
-use rustc_errors::{DiagArgValue, IntoDiagArg};
+use crate::rustc_data_structures::intern::Interned;
+use crate::rustc_complete::{DiagArgValue, IntoDiagArg};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::DefId;
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, extension};
 ```
 
@@ -29,7 +29,7 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable, extension};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_serialize::{Decodable, Encodable};
+use crate::rustc_serialize::{Decodable, Encodable};
 ```
 
 ## Block 4
@@ -189,8 +189,8 @@ impl<'tcx> rustc_type_ir::inherent::IntoKind for GenericArg<'tcx> {
 **Metadata**: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5
 
 ```rust
-unsafe impl<'tcx> rustc_data_structures::sync::DynSend for GenericArg<'tcx> where
-    &'tcx (Ty<'tcx>, ty::Region<'tcx>, ty::Const<'tcx>): rustc_data_structures::sync::DynSend
+unsafe impl<'tcx> crate::rustc_data_structures::sync::DynSend for GenericArg<'tcx> where
+    &'tcx (Ty<'tcx>, ty::Region<'tcx>, ty::Const<'tcx>): crate::rustc_data_structures::sync::DynSend
 {
 }
 ```
@@ -199,8 +199,8 @@ unsafe impl<'tcx> rustc_data_structures::sync::DynSend for GenericArg<'tcx> wher
 **Metadata**: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=4
 
 ```rust
-unsafe impl<'tcx> rustc_data_structures::sync::DynSync for GenericArg<'tcx> where
-    &'tcx (Ty<'tcx>, ty::Region<'tcx>, ty::Const<'tcx>): rustc_data_structures::sync::DynSync
+unsafe impl<'tcx> crate::rustc_data_structures::sync::DynSync for GenericArg<'tcx> where
+    &'tcx (Ty<'tcx>, ty::Region<'tcx>, ty::Const<'tcx>): crate::rustc_data_structures::sync::DynSync
 {
 }
 ```

@@ -6,24 +6,24 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::token;
-use rustc_ast::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
+use crate::rustc_complete::token;
+use crate::rustc_complete::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::ErrorGuaranteed;
-use rustc_expand::base::{AttrProcMacro, ExtCtxt};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_expand::base::{AttrProcMacro, ExtCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::Span;
-use rustc_span::symbol::{Ident, Symbol, kw};
+use crate::rustc_complete::Span;
+use crate::rustc_complete::symbol::{Ident, Symbol, kw};
 ```
 
 ## Block 4

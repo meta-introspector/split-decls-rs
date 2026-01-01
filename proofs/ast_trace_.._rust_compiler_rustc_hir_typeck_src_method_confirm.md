@@ -9,9 +9,9 @@ Generated 15 AST blocks from source file
 use std::ops::Deref;
 
 use rustc_hir as hir;
-use rustc_hir::GenericArg;
-use rustc_hir::def_id::DefId;
-use rustc_hir_analysis::hir_ty_lowering::generics::{
+use crate::rustc_complete::GenericArg;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_hir_analysis::hir_ty_lowering::generics::{
     check_generic_arg_count_for_call, lower_generic_args,
 };
 ```
@@ -20,7 +20,7 @@ use rustc_hir_analysis::hir_ty_lowering::generics::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir_analysis::hir_ty_lowering::{
+use crate::rustc_hir_analysis::hir_ty_lowering::{
     FeedConstTy, GenericArgsLowerer, HirTyLowerer, IsMethodCall, RegionInferReason,
 };
 ```
@@ -29,7 +29,7 @@ use rustc_hir_analysis::hir_ty_lowering::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_infer::infer::{
+use crate::rustc_infer::infer::{
     BoundRegionConversionTime, DefineOpaqueTypes, InferOk, RegionVariableOrigin,
 };
 ```
@@ -38,9 +38,9 @@ use rustc_infer::infer::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_lint::builtin::SUPERTRAIT_ITEM_SHADOWING_USAGE;
-use rustc_middle::traits::ObligationCauseCode;
-use rustc_middle::ty::adjustment::{
+use crate::rustc_lint::builtin::SUPERTRAIT_ITEM_SHADOWING_USAGE;
+use crate::rustc_complete::traits::ObligationCauseCode;
+use crate::rustc_complete::ty::adjustment::{
     Adjust, Adjustment, AllowTwoPhase, AutoBorrow, AutoBorrowMutability, PointerCoercion,
 };
 ```
@@ -49,7 +49,7 @@ use rustc_middle::ty::adjustment::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, GenericArgs, GenericArgsRef, GenericParamDefKind, Ty, TyCtxt, TypeFoldable,
     TypeVisitableExt, UserArgs,
 };
@@ -59,21 +59,21 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_trait_selection::traits;
+use crate::rustc_trait_selection::traits;
 use tracing::debug;
 
 use super::{MethodCallee, probe};

@@ -6,10 +6,10 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=4
 
 ```rust
-//! Helper routines for higher-ranked things. See the `doc` module at
-//! the end of the file for details.
+// Helper routines for higher-ranked things. See the `doc` module at
+// the end of the file for details.
 
-use rustc_middle::ty::{self, FnMutDelegate, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, FnMutDelegate, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
 ```
 
 ## Block 2

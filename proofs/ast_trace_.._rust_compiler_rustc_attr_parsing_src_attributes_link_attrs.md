@@ -6,19 +6,19 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_feature::Features;
-use rustc_hir::attrs::AttributeKind::{LinkName, LinkOrdinal, LinkSection};
+use crate::rustc_feature::Features;
+use crate::rustc_complete::attrs::AttributeKind::{LinkName, LinkOrdinal, LinkSection};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=16
 
 ```rust
-use rustc_hir::attrs::*;
-use rustc_session::Session;
-use rustc_session::parse::feature_err;
-use rustc_span::kw;
-use rustc_target::spec::BinaryFormat;
+use crate::rustc_complete::attrs::*;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::kw;
+use crate::rustc_target::spec::BinaryFormat;
 
 use super::prelude::*;
 use super::util::parse_single_integer;
@@ -523,7 +523,7 @@ impl<S: Stage> SingleAttributeParser<S> for LinkSectionParser {
             return None;
         };
         if name.as_str().contains('\0') {
-            // `#[link_section = ...]` will be converted to a null-terminated string,
+            // `#[unsafe(link_section = ...]` will be converted to a null-terminated string,
             // so it may not contain any null characters.
             cx.emit_err(NullOnLinkSection { span: cx.attr_span });
             return None;

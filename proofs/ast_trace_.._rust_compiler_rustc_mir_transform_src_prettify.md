@@ -6,30 +6,30 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=8
 
 ```rust
-//! These two passes provide no value to the compiler, so are off at every level.
-//!
-//! However, they can be enabled on the command line
-//! (`-Zmir-enable-passes=+ReorderBasicBlocks,+ReorderLocals`)
-//! to make the MIR easier to read for humans.
+// These two passes provide no value to the compiler, so are off at every level.
+//
+// However, they can be enabled on the command line
+// (`-Zmir-enable-passes=+ReorderBasicBlocks,+ReorderLocals`)
+// to make the MIR easier to read for humans.
 
-use rustc_index::bit_set::DenseBitSet;
-use rustc_index::{IndexSlice, IndexVec};
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_index::{IndexSlice, IndexVec};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::visit::{MutVisitor, PlaceContext, Visitor};
+use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext, Visitor};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=13 | LINES=33
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
-use rustc_session::Session;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
 
 /// Rearranges the basic blocks into a *reverse post-order*.
 ///
@@ -125,7 +125,7 @@ impl<'tcx> crate::MirPass<'tcx> for ReorderLocals {
 **Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=permute | COMPLEXITY=5 | LINES=9
 
 ```rust
-fn permute<I: rustc_index::Idx + Ord, T>(data: &mut IndexVec<I, T>, map: &IndexSlice<I, I>) {
+fn permute<I: crate::rustc_index::Idx + Ord, T>(data: &mut IndexVec<I, T>, map: &IndexSlice<I, I>) {
     // FIXME: It would be nice to have a less-awkward way to apply permutations,
     // but I don't know one that exists. `sort_by_cached_key` has logic for it
     // internally, but not in a way that we're allowed to use here.

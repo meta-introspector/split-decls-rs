@@ -6,21 +6,21 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::tokenstream::{TokenStream, TokenTree};
+use crate::rustc_complete::tokenstream::{TokenStream, TokenTree};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
+use crate::rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, kw};
+use crate::rustc_complete::{Span, kw};
 ```
 
 ## Block 4

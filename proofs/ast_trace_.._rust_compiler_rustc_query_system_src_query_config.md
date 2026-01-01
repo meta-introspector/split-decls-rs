@@ -6,13 +6,13 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10
 
 ```rust
-//! Query configuration and description traits.
+// Query configuration and description traits.
 
 use std::fmt::Debug;
 use std::hash::Hash;
 
-use rustc_data_structures::fingerprint::Fingerprint;
-use rustc_span::ErrorGuaranteed;
+use crate::rustc_data_structures::fingerprint::Fingerprint;
+use crate::rustc_complete::ErrorGuaranteed;
 
 use super::QueryStackFrameExtra;
 use crate::dep_graph::{DepKind, DepNode, DepNodeParams, SerializedDepNodeIndex};

@@ -8,10 +8,10 @@ Generated 10 AST blocks from source file
 ```rust
 use std::ops::Deref;
 
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_data_structures::undo_log::UndoLogs;
-use rustc_middle::bug;
-use rustc_middle::ty::{self, OpaqueHiddenType, OpaqueTypeKey, Ty};
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_data_structures::undo_log::UndoLogs;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, OpaqueHiddenType, OpaqueTypeKey, Ty};
 ```
 
 ## Block 2

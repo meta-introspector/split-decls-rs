@@ -6,7 +6,7 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3
 
 ```rust
-//! A helper class for dealing with static archives
+// A helper class for dealing with static archives
 
 use std::ffi::{CStr, c_char, c_void};
 ```
@@ -17,7 +17,7 @@ use std::ffi::{CStr, c_char, c_void};
 ```rust
 use std::io;
 
-use rustc_codegen_ssa::back::archive::{
+use crate::rustc_codegen_ssa::back::archive::{
     ArArchiveBuilder, ArchiveBuilder, ArchiveBuilderBuilder, DEFAULT_OBJECT_READER, ObjectReader,
 };
 ```
@@ -26,7 +26,7 @@ use rustc_codegen_ssa::back::archive::{
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=new_archive_builder | COMPLEXITY=5 | LINES=12
 
 ```rust
-use rustc_session::Session;
+use crate::rustc_complete::Session;
 
 use crate::llvm;
 

@@ -6,10 +6,10 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-//! Characters and their corresponding confusables were collected from
-//! <https://www.unicode.org/Public/security/10.0.0/confusables.txt>
+// Characters and their corresponding confusables were collected from
+// <https://www.unicode.org/Public/security/10.0.0/confusables.txt>
 
-use rustc_span::{BytePos, Pos, Span, kw};
+use crate::rustc_complete::{BytePos, Pos, Span, kw};
 ```
 
 ## Block 2

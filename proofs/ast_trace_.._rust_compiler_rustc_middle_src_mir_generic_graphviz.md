@@ -13,7 +13,7 @@ use std::io::{self, Write};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::graph::{self, iterate};
+use crate::rustc_data_structures::graph::{self, iterate};
 ```
 
 ## Block 3

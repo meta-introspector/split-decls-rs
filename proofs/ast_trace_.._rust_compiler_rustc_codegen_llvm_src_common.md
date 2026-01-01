@@ -6,7 +6,7 @@ Generated 21 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! Code that is useful in various codegen modules.
+// Code that is useful in various codegen modules.
 
 use std::borrow::Borrow;
 
@@ -17,18 +17,18 @@ use libc::{c_char, c_uint};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::Primitive::Pointer;
-use rustc_abi::{self as abi, HasDataLayout as _};
+use crate::rustc_abi::Primitive::Pointer;
+use crate::rustc_abi::{self as abi, HasDataLayout as _};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_ast::Mutability;
-use rustc_codegen_ssa::common::TypeKind;
-use rustc_codegen_ssa::traits::*;
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_complete::Mutability;
+use crate::rustc_codegen_ssa::common::TypeKind;
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 4
@@ -36,17 +36,17 @@ use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 
 ```rust
 use rustc_hashes::Hash128;
-use rustc_hir::def_id::DefId;
-use rustc_middle::bug;
-use rustc_middle::mir::interpret::{ConstAllocation, GlobalAlloc, Scalar};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::interpret::{ConstAllocation, GlobalAlloc, Scalar};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_session::cstore::DllImport;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::cstore::DllImport;
 use tracing::debug;
 
 use crate::consts::const_alloc_to_llvm;

@@ -50,65 +50,65 @@ use rustc_attr_parsing::{AttributeParser, ShouldEmit};
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_codegen_ssa::traits::CodegenBackend;
-use rustc_data_structures::jobserver::Proxy;
-use rustc_data_structures::steal::Steal;
-use rustc_data_structures::sync::{AppendOnlyIndexVec, FreezeLock, WorkerLocal};
+use crate::rustc_codegen_ssa::traits::CodegenBackend;
+use crate::rustc_data_structures::jobserver::Proxy;
+use crate::rustc_data_structures::steal::Steal;
+use crate::rustc_data_structures::sync::{AppendOnlyIndexVec, FreezeLock, WorkerLocal};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::{parallel, thousands};
+use crate::rustc_data_structures::{parallel, thousands};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::timings::TimingSection;
-use rustc_expand::base::{ExtCtxt, LintStoreExpand};
+use crate::rustc_complete::timings::TimingSection;
+use crate::rustc_expand::base::{ExtCtxt, LintStoreExpand};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_feature::Features;
+use crate::rustc_feature::Features;
 use rustc_fs_util::try_canonicalize;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def_id::{LOCAL_CRATE, StableCrateId, StableCrateIdMap};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def_id::{LOCAL_CRATE, StableCrateId, StableCrateIdMap};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir::definitions::Definitions;
-use rustc_hir::limit::Limit;
+use crate::rustc_complete::definitions::Definitions;
+use crate::rustc_complete::limit::Limit;
 use rustc_incremental::setup_dep_graph;
-use rustc_lint::{BufferedEarlyLint, EarlyCheckNode, LintStore, unerased_lint_store};
+use crate::rustc_lint::{BufferedEarlyLint, EarlyCheckNode, LintStore, unerased_lint_store};
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_metadata::EncodedMetadata;
-use rustc_metadata::creader::CStore;
-use rustc_middle::arena::Arena;
-use rustc_middle::dep_graph::DepsType;
-use rustc_middle::ty::{self, CurrentGcx, GlobalCtxt, RegisteredTools, TyCtxt};
+use crate::rustc_metadata::EncodedMetadata;
+use crate::rustc_metadata::creader::CStore;
+use crate::rustc_complete::arena::Arena;
+use crate::rustc_complete::dep_graph::DepsType;
+use crate::rustc_complete::ty::{self, CurrentGcx, GlobalCtxt, RegisteredTools, TyCtxt};
 ```
 
 ## Block 13
 **Metadata**: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::util::Providers;
-use rustc_parse::lexer::StripTokens;
-use rustc_parse::{new_parser_from_file, new_parser_from_source_str, unwrap_or_emit_fatal};
+use crate::rustc_complete::util::Providers;
+use crate::rustc_parse::lexer::StripTokens;
+use crate::rustc_parse::{new_parser_from_file, new_parser_from_source_str, unwrap_or_emit_fatal};
 ```
 
 ## Block 14
@@ -129,25 +129,25 @@ use rustc_resolve::{Resolver, ResolverOutputs};
 **Metadata**: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::Session;
-use rustc_session::config::{CrateType, Input, OutFileName, OutputFilenames, OutputType};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{CrateType, Input, OutFileName, OutputFilenames, OutputType};
 ```
 
 ## Block 17
 **Metadata**: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::cstore::Untracked;
-use rustc_session::output::{collect_crate_types, filename_for_input};
+use crate::rustc_complete::cstore::Untracked;
+use crate::rustc_complete::output::{collect_crate_types, filename_for_input};
 ```
 
 ## Block 18
 **Metadata**: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_session::parse::feature_err;
-use rustc_session::search_paths::PathKind;
-use rustc_span::{
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::search_paths::PathKind;
+use crate::rustc_complete::{
     DUMMY_SP, ErrorGuaranteed, ExpnKind, FileName, SourceFileHash, SourceFileHashAlgorithm, Span,
     Symbol, sym,
 };
@@ -157,8 +157,8 @@ use rustc_span::{
 **Metadata**: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_target::spec::PanicStrategy;
-use rustc_trait_selection::{solve, traits};
+use crate::rustc_target::spec::PanicStrategy;
+use crate::rustc_trait_selection::{solve, traits};
 ```
 
 ## Block 20
@@ -228,7 +228,7 @@ fn pre_expansion_lint<'a>(
 ) {
     sess.prof.generic_activity_with_arg("pre_AST_expansion_lint_checks", node_name.as_str()).run(
         || {
-            rustc_lint::check_ast_node(
+            crate::rustc_lint::check_ast_node(
                 sess,
                 None,
                 features,
@@ -236,7 +236,7 @@ fn pre_expansion_lint<'a>(
                 lint_store,
                 registered_tools,
                 None,
-                rustc_lint::BuiltinCombinedPreExpansionLintPass::new(),
+                crate::rustc_lint::BuiltinCombinedPreExpansionLintPass::new(),
                 check_node,
             );
         },
@@ -348,7 +348,7 @@ fn configure_and_expand(
 
         // Create the config for macro expansion
         let recursion_limit = get_recursion_limit(pre_configured_attrs, sess);
-        let cfg = rustc_expand::expand::ExpansionConfig {
+        let cfg = crate::rustc_expand::expand::ExpansionConfig {
             crate_name,
             features,
             recursion_limit,
@@ -624,7 +624,7 @@ fn early_lint_checks(tcx: TyCtxt<'_>, (): ()) {
     });
 
     let lint_store = unerased_lint_store(tcx.sess);
-    rustc_lint::check_ast_node(
+    crate::rustc_lint::check_ast_node(
         sess,
         Some(tcx),
         tcx.features(),
@@ -632,7 +632,7 @@ fn early_lint_checks(tcx: TyCtxt<'_>, (): ()) {
         lint_store,
         tcx.registered_tools(()),
         Some(lint_buffer),
-        rustc_lint::BuiltinCombinedEarlyLintPass::new(),
+        crate::rustc_lint::BuiltinCombinedEarlyLintPass::new(),
         (&**krate, &*krate.attrs),
     )
 }
@@ -1068,7 +1068,7 @@ pub fn write_dep_info(tcx: TyCtxt<'_>) {
 
 ```rust
 pub fn write_interface<'tcx>(tcx: TyCtxt<'tcx>) {
-    if !tcx.crate_types().contains(&rustc_session::config::CrateType::Sdylib) {
+    if !tcx.crate_types().contains(&crate::rustc_session::config::CrateType::Sdylib) {
         return;
     }
     let _timer = tcx.sess.timer("write_interface");
@@ -1103,7 +1103,7 @@ pub static DEFAULT_QUERY_PROVIDERS: LazyLock<Providers> = LazyLock::new(|| {
     limits::provide(providers);
     proc_macro_decls::provide(providers);
     rustc_const_eval::provide(providers);
-    rustc_middle::hir::provide(providers);
+    crate::rustc_middle::hir::provide(providers);
     rustc_borrowck::provide(providers);
     rustc_incremental::provide(providers);
     rustc_mir_build::provide(providers);
@@ -1112,7 +1112,7 @@ pub static DEFAULT_QUERY_PROVIDERS: LazyLock<Providers> = LazyLock::new(|| {
     rustc_privacy::provide(providers);
     rustc_query_impl::provide(providers);
     rustc_resolve::provide(providers);
-    rustc_hir_analysis::provide(providers);
+    crate::rustc_hir_analysis::provide(providers);
     rustc_hir_typeck::provide(providers);
     ty::provide(providers);
     traits::provide(providers);
@@ -1120,10 +1120,10 @@ pub static DEFAULT_QUERY_PROVIDERS: LazyLock<Providers> = LazyLock::new(|| {
     rustc_passes::provide(providers);
     rustc_traits::provide(providers);
     rustc_ty_utils::provide(providers);
-    rustc_metadata::provide(providers);
-    rustc_lint::provide(providers);
+    crate::rustc_metadata::provide(providers);
+    crate::rustc_lint::provide(providers);
     rustc_symbol_mangling::provide(providers);
-    rustc_codegen_ssa::provide(providers);
+    crate::rustc_codegen_ssa::provide(providers);
     *providers
 });
 ```
@@ -1134,12 +1134,12 @@ pub static DEFAULT_QUERY_PROVIDERS: LazyLock<Providers> = LazyLock::new(|| {
 ```rust
 pub fn create_and_enter_global_ctxt<T, F: for<'tcx> FnOnce(TyCtxt<'tcx>) -> T>(
     compiler: &Compiler,
-    krate: rustc_ast::Crate,
+    krate: crate::rustc_ast::Crate,
     f: F,
 ) -> T {
     let sess = &compiler.sess;
 
-    let pre_configured_attrs = rustc_expand::config::pre_configure_attrs(sess, &krate.attrs);
+    let pre_configured_attrs = crate::rustc_expand::config::pre_configure_attrs(sess, &krate.attrs);
 
     let crate_name = get_crate_name(sess, &pre_configured_attrs);
     let crate_types = collect_crate_types(sess, &pre_configured_attrs);
@@ -1182,7 +1182,7 @@ pub fn create_and_enter_global_ctxt<T, F: for<'tcx> FnOnce(TyCtxt<'tcx>) -> T>(
 
     let gcx_cell = OnceLock::new();
     let arena = WorkerLocal::new(|_| Arena::default());
-    let hir_arena = WorkerLocal::new(|_| rustc_hir::Arena::default());
+    let hir_arena = WorkerLocal::new(|_| crate::rustc_hir::Arena::default());
 
     // This closure is necessary to force rustc to perform the correct lifetime
     // subtyping for GlobalCtxt::enter to be allowed.
@@ -1193,7 +1193,7 @@ pub fn create_and_enter_global_ctxt<T, F: for<'tcx> FnOnce(TyCtxt<'tcx>) -> T>(
             Arc<Proxy>,
             &'tcx OnceLock<GlobalCtxt<'tcx>>,
             &'tcx WorkerLocal<Arena<'tcx>>,
-            &'tcx WorkerLocal<rustc_hir::Arena<'tcx>>,
+            &'tcx WorkerLocal<crate::rustc_hir::Arena<'tcx>>,
             F,
         ) -> T,
     > = Box::new(move |sess, current_gcx, jobserver_proxy, gcx_cell, arena, hir_arena, f| {
@@ -1222,7 +1222,7 @@ pub fn create_and_enter_global_ctxt<T, F: for<'tcx> FnOnce(TyCtxt<'tcx>) -> T>(
                 feed.crate_name(crate_name);
 
                 let feed = tcx.feed_unit_query();
-                feed.features_query(tcx.arena.alloc(rustc_expand::config::features(
+                feed.features_query(tcx.arena.alloc(crate::rustc_expand::config::features(
                     tcx.sess,
                     &pre_configured_attrs,
                     crate_name,
@@ -1300,7 +1300,7 @@ fn run_required_analyses(tcx: TyCtxt<'_>) {
         );
     });
 
-    rustc_hir_analysis::check_crate(tcx);
+    crate::rustc_hir_analysis::check_crate(tcx);
     // Freeze definitions as we don't add new ones at this point.
     // We need to wait until now since we synthesize a by-move body
     // for all coroutine-closures.
@@ -1400,7 +1400,7 @@ fn analysis(tcx: TyCtxt<'_>, (): ()) {
                     },
                     {
                         sess.time("lint_checking", || {
-                            rustc_lint::check_crate(tcx);
+                            crate::rustc_lint::check_crate(tcx);
                         });
                     },
                     {
@@ -1463,7 +1463,7 @@ pub(crate) fn start_codegen<'tcx>(
 
     info!("Pre-codegen\n{:?}", tcx.debug_stats());
 
-    let metadata = rustc_metadata::fs::encode_and_write_metadata(tcx);
+    let metadata = crate::rustc_metadata::fs::encode_and_write_metadata(tcx);
 
     let codegen = tcx.sess.time("codegen_crate", move || codegen_backend.codegen_crate(tcx));
 
@@ -1485,7 +1485,7 @@ pub(crate) fn start_codegen<'tcx>(
 ```rust
 /// Compute and validate the crate name.
 pub fn get_crate_name(sess: &Session, krate_attrs: &[ast::Attribute]) -> Symbol {
-    // We validate *all* occurrences of `#![crate_name]`, pick the first find and
+    // We validate *all* occurrences of `#[crate_name]`, pick the first find and
     // if a crate name was passed on the command line via `--crate-name` we enforce
     // that they match.
     // We perform the validation step here instead of later to ensure it gets run
@@ -1496,7 +1496,7 @@ pub fn get_crate_name(sess: &Session, krate_attrs: &[ast::Attribute]) -> Symbol 
         parse_crate_name(sess, krate_attrs, ShouldEmit::EarlyFatal { also_emit_lints: true });
 
     let validate = |name, span| {
-        rustc_session::output::validate_crate_name(sess, name, span);
+        crate::rustc_session::output::validate_crate_name(sess, name, span);
         name
     };
 
@@ -1541,13 +1541,13 @@ pub(crate) fn parse_crate_name(
     attrs: &[ast::Attribute],
     emit_errors: ShouldEmit,
 ) -> Option<(Symbol, Span)> {
-    let rustc_hir::Attribute::Parsed(AttributeKind::CrateName { name, name_span, .. }) =
+    let crate::rustc_hir::Attribute::Parsed(AttributeKind::CrateName { name, name_span, .. }) =
         AttributeParser::parse_limited_should_emit(
             sess,
             &attrs,
             sym::crate_name,
             DUMMY_SP,
-            rustc_ast::node_id::CRATE_NODE_ID,
+            crate::rustc_ast::node_id::CRATE_NODE_ID,
             None,
             emit_errors,
         )?
@@ -1569,7 +1569,7 @@ fn get_recursion_limit(krate_attrs: &[ast::Attribute], sess: &Session) -> Limit 
         &krate_attrs,
         sym::recursion_limit,
         DUMMY_SP,
-        rustc_ast::node_id::CRATE_NODE_ID,
+        crate::rustc_ast::node_id::CRATE_NODE_ID,
         None,
         // errors are fatal here, but lints aren't.
         // If things aren't fatal we continue, and will parse this again.

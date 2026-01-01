@@ -6,23 +6,23 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_hir::lang_items::LangItem;
-use rustc_hir::{CoroutineDesugaring, CoroutineKind, CoroutineSource, Safety};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{CoroutineDesugaring, CoroutineKind, CoroutineSource, Safety};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_index::{Idx, IndexVec};
+use crate::rustc_index::{Idx, IndexVec};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::mir::{
+use crate::rustc_complete::mir::{
     BasicBlock, BasicBlockData, Body, Local, LocalDecl, MirSource, Operand, Place, Rvalue,
     SourceInfo, Statement, StatementKind, Terminator, TerminatorKind,
 };
@@ -32,7 +32,7 @@ use rustc_middle::mir::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, EarlyBinder, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, EarlyBinder, Ty, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 5

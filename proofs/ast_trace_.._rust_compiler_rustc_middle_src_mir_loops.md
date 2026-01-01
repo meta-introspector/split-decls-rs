@@ -6,7 +6,7 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=maybe_loop_headers | COMPLEXITY=27 | LINES=29
 
 ```rust
-use rustc_index::bit_set::DenseBitSet;
+use crate::rustc_index::bit_set::DenseBitSet;
 
 use super::*;
 

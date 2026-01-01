@@ -9,8 +9,8 @@ Generated 11 AST blocks from source file
 use std::ops::Range;
 
 use parse::Position::ArgumentNamed;
-use rustc_ast::tokenstream::TokenStream;
-use rustc_ast::{
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{
     Expr, ExprKind, FormatAlignment, FormatArgPosition, FormatArgPositionKind, FormatArgs,
     FormatArgsPiece, FormatArgument, FormatArgumentKind, FormatArguments, FormatCount,
     FormatDebugHex, FormatOptions, FormatPlaceholder, FormatSign, FormatTrait, Recovered, StmtKind,
@@ -22,8 +22,8 @@ use rustc_ast::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_errors::{
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::{
     Applicability, BufferedEarlyLint, Diag, MultiSpan, PResult, SingleLabelManySpans, listify,
     pluralize,
 };
@@ -33,18 +33,18 @@ use rustc_errors::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_expand::base::*;
-use rustc_lint_defs::builtin::NAMED_ARGUMENTS_USED_POSITIONALLY;
-use rustc_lint_defs::{BuiltinLintDiag, LintId};
+use crate::rustc_expand::base::*;
+use crate::rustc_lint_defs::builtin::NAMED_ARGUMENTS_USED_POSITIONALLY;
+use crate::rustc_lint_defs::{BuiltinLintDiag, LintId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_parse::exp;
+use crate::rustc_parse::exp;
 use rustc_parse_format as parse;
-use rustc_span::{BytePos, ErrorGuaranteed, Ident, InnerSpan, Span, Symbol};
+use crate::rustc_complete::{BytePos, ErrorGuaranteed, Ident, InnerSpan, Span, Symbol};
 ```
 
 ## Block 5
@@ -208,7 +208,7 @@ fn parse_args<'a>(ecx: &ExtCtxt<'a>, sp: Span, tts: TokenStream) -> PResult<'a, 
 ```
 
 ## Block 9
-**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=make_format_args | COMPLEXITY=247 | LINES=454
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=make_format_args | COMPLEXITY=248 | LINES=454
 
 ```rust
 fn make_format_args(
@@ -294,8 +294,8 @@ fn make_format_args(
     };
 
     let str_style = match fmt_style {
-        rustc_ast::StrStyle::Cooked => None,
-        rustc_ast::StrStyle::Raw(raw) => Some(raw as usize),
+        crate::rustc_ast::StrStyle::Cooked => None,
+        crate::rustc_ast::StrStyle::Raw(raw) => Some(raw as usize),
     };
 
     let fmt_str = fmt_str.as_str(); // for the suggestions below
@@ -642,7 +642,7 @@ fn make_format_args(
             let arg_name = args.explicit_args()[index].kind.ident().unwrap();
             ecx.buffered_early_lint.push(BufferedEarlyLint {
                 span: Some(arg_name.span.into()),
-                node_id: rustc_ast::CRATE_NODE_ID,
+                node_id: crate::rustc_ast::CRATE_NODE_ID,
                 lint_id: LintId::of(NAMED_ARGUMENTS_USED_POSITIONALLY),
                 diagnostic: BuiltinLintDiag::NamedArgumentUsedPositionally {
                     position_sp_to_replace,

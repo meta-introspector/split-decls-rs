@@ -6,10 +6,10 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_middle::mir::*;
-use rustc_middle::ty::Ty;
-use rustc_span::Span;
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::Span;
 use tracing::debug;
 
 use crate::builder::Builder;

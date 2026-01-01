@@ -6,13 +6,13 @@ Generated 22 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7
 
 ```rust
-//! A lint that checks for known panics like overflows, division by zero,
-//! out-of-bound access etc. Uses const propagation to determine the values of
-//! operands during checks.
+// A lint that checks for known panics like overflows, division by zero,
+// out-of-bound access etc. Uses const propagation to determine the values of
+// operands during checks.
 
 use std::fmt::Debug;
 
-use rustc_abi::{BackendRepr, FieldIdx, HasDataLayout, Size, TargetDataLayout, VariantIdx};
+use crate::rustc_abi::{BackendRepr, FieldIdx, HasDataLayout, Size, TargetDataLayout, VariantIdx};
 ```
 
 ## Block 2
@@ -29,35 +29,35 @@ use rustc_const_eval::interpret::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_hir::HirId;
-use rustc_hir::def::DefKind;
-use rustc_index::IndexVec;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::bug;
-use rustc_middle::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::HirId;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_index::IndexVec;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::layout::{LayoutError, LayoutOf, LayoutOfHelpers, TyAndLayout};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::layout::{LayoutError, LayoutOf, LayoutOfHelpers, TyAndLayout};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, ConstInt, ScalarInt, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, ConstInt, ScalarInt, Ty, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument, trace};
 ```
 
@@ -634,7 +634,7 @@ impl<'mir, 'tcx> ConstPropagator<'mir, 'tcx> {
         if !dest.projection.is_empty() {
             return None;
         }
-        use rustc_middle::mir::Rvalue::*;
+        use crate::rustc_complete::mir::Rvalue::*;
         let layout = self.ecx.layout_of(dest.ty(self.body, self.tcx).ty).ok()?;
         trace!(?layout);
 
@@ -1041,7 +1041,7 @@ impl CanConstProp {
 ```rust
 impl<'tcx> Visitor<'tcx> for CanConstProp {
     fn visit_place(&mut self, place: &Place<'tcx>, mut context: PlaceContext, loc: Location) {
-        use rustc_middle::mir::visit::PlaceContext::*;
+        use crate::rustc_complete::mir::visit::PlaceContext::*;
 
         // Dereferencing just read the address of `place.local`.
         if place.projection.first() == Some(&PlaceElem::Deref) {
@@ -1053,7 +1053,7 @@ impl<'tcx> Visitor<'tcx> for CanConstProp {
     }
 
     fn visit_local(&mut self, local: Local, context: PlaceContext, _: Location) {
-        use rustc_middle::mir::visit::PlaceContext::*;
+        use crate::rustc_complete::mir::visit::PlaceContext::*;
         match context {
             // These are just stores, where the storing is not propagatable, but there may be later
             // mutations of the same local via `Store`

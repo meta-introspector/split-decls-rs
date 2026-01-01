@@ -6,13 +6,13 @@ Generated 29 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=10
 
 ```rust
-//! The memory subsystem.
-//!
-//! Generally, we use `Pointer` to denote memory addresses. However, some operations
-//! have a "size"-like parameter, and they take `Scalar` for the address because
-//! if the size is 0, then the pointer can also be a (properly aligned, non-null)
-//! integer. It is crucial that these operations call `check_align` *before*
-//! short-circuiting the empty case!
+// The memory subsystem.
+//
+// Generally, we use `Pointer` to denote memory addresses. However, some operations
+// have a "size"-like parameter, and they take `Scalar` for the address because
+// if the size is 0, then the pointer can also be a (properly aligned, non-null)
+// integer. It is crucial that these operations call `check_align` *before*
+// short-circuiting the empty case!
 
 use std::assert_matches::assert_matches;
 use std::borrow::{Borrow, Cow};
@@ -31,30 +31,30 @@ use std::{fmt, ptr};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::{Align, HasDataLayout, Size};
+use crate::rustc_abi::{Align, HasDataLayout, Size};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::Mutability;
-use rustc_data_structures::fx::{FxHashSet, FxIndexMap};
+use crate::rustc_complete::Mutability;
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::display_allocation;
-use rustc_middle::ty::{self, Instance, Ty, TyCtxt};
+use crate::rustc_complete::mir::display_allocation;
+use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, throw_ub_format};
+use crate::rustc_complete::{bug, throw_ub_format};
 ```
 
 ## Block 7
@@ -1237,7 +1237,7 @@ impl<'tcx, M: Machine<'tcx>> InterpCx<'tcx, M> {
         if alloc.size() != Size::ZERO {
             bytes = "\n".into();
             // FIXME(translation) there might be pieces that are translatable.
-            rustc_middle::mir::pretty::write_allocation_bytes(*self.tcx, alloc, &mut bytes, "    ")
+            crate::rustc_middle::mir::pretty::write_allocation_bytes(*self.tcx, alloc, &mut bytes, "    ")
                 .unwrap();
         }
         bytes

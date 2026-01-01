@@ -6,23 +6,23 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_ast::tokenstream::TokenStream;
+use crate::rustc_complete::tokenstream::TokenStream;
 use rustc_attr_parsing as attr;
-use rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
+use crate::rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_parse::parser::cfg_select::{CfgSelectBranches, CfgSelectPredicate, parse_cfg_select};
+use crate::rustc_parse::parser::cfg_select::{CfgSelectBranches, CfgSelectPredicate, parse_cfg_select};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, Span, sym};
+use crate::rustc_complete::{Ident, Span, sym};
 ```
 
 ## Block 4

@@ -8,15 +8,15 @@ Generated 2 AST blocks from source file
 ```rust
 use std::cell::RefCell;
 
-use rustc_data_structures::fx::FxHashMap;
-use rustc_middle::ty::{self, Instance, Ty};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::ty::{self, Instance, Ty};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=vtables | COMPLEXITY=8 | LINES=25
 
 ```rust
-use rustc_session::Session;
+use crate::rustc_complete::Session;
 
 use super::BackendTypes;
 

@@ -6,7 +6,7 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-//! Dealing with trait goals, i.e. `T: Trait<'a, U>`.
+// Dealing with trait goals, i.e. `T: Trait<'a, U>`.
 
 use rustc_type_ir::data_structures::IndexSet;
 use rustc_type_ir::fast_reject::DeepRejectCtxt;

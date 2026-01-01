@@ -8,47 +8,47 @@ Generated 23 AST blocks from source file
 ```rust
 use std::borrow::Cow;
 
-use rustc_abi::{FieldIdx, TagEncoding, VariantIdx, Variants};
+use crate::rustc_abi::{FieldIdx, TagEncoding, VariantIdx, Variants};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::debuginfo::type_names::{compute_debuginfo_type_name, cpp_like_debuginfo};
+use crate::rustc_codegen_ssa::debuginfo::type_names::{compute_debuginfo_type_name, cpp_like_debuginfo};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::debuginfo::{tag_base_type, wants_c_like_enum_debuginfo};
+use crate::rustc_codegen_ssa::debuginfo::{tag_base_type, wants_c_like_enum_debuginfo};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_codegen_ssa::traits::MiscCodegenMethods;
-use rustc_hir::def::CtorKind;
-use rustc_index::IndexSlice;
-use rustc_middle::bug;
-use rustc_middle::mir::CoroutineLayout;
-use rustc_middle::ty::layout::{LayoutOf, TyAndLayout};
+use crate::rustc_codegen_ssa::traits::MiscCodegenMethods;
+use crate::rustc_complete::def::CtorKind;
+use crate::rustc_index::IndexSlice;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::CoroutineLayout;
+use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, AdtDef, CoroutineArgs, CoroutineArgsExt, Ty, VariantDef};
+use crate::rustc_complete::ty::{self, AdtDef, CoroutineArgs, CoroutineArgsExt, Ty, VariantDef};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 7
@@ -205,7 +205,7 @@ fn build_enumeration_type_di_node<'ll, 'tcx>(
     type_name: &str,
     base_type: Ty<'tcx>,
     enumerators: impl Iterator<Item = (Cow<'tcx, str>, u128)>,
-    def_id: Option<rustc_span::def_id::DefId>,
+    def_id: Option<crate::rustc_span::def_id::DefId>,
     containing_scope: &'ll DIType,
 ) -> &'ll DIType {
     let is_unsigned = match base_type.kind() {

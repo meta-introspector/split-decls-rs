@@ -6,46 +6,46 @@ Generated 27 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=15 | LINES=47
 
 ```rust
-//! The data that we will serialize and deserialize.
-//!
-//! Notionally, the dep-graph is a sequence of NodeInfo with the dependencies
-//! specified inline. The total number of nodes and edges are stored as the last
-//! 16 bytes of the file, so we can find them easily at decoding time.
-//!
-//! The serialisation is performed on-demand when each node is emitted. Using this
-//! scheme, we do not need to keep the current graph in memory.
-//!
-//! The deserialization is performed manually, in order to convert from the stored
-//! sequence of NodeInfos to the different arrays in SerializedDepGraph. Since the
-//! node and edge count are stored at the end of the file, all the arrays can be
-//! pre-allocated with the right length.
-//!
-//! The encoding of the dep-graph is generally designed around the fact that fixed-size
-//! reads of encoded data are generally faster than variable-sized reads. Ergo we adopt
-//! essentially the same varint encoding scheme used in the rmeta format; the edge lists
-//! for each node on the graph store a 2-bit integer which is the number of bytes per edge
-//! index in that node's edge list. We effectively ignore that an edge index of 0 could be
-//! encoded with 0 bytes in order to not require 3 bits to store the byte width of the edges.
-//! The overhead of calculating the correct byte width for each edge is mitigated by
-//! building edge lists with [`EdgesVec`] which keeps a running max of the edges in a node.
-//!
-//! When we decode this data, we do not immediately create [`SerializedDepNodeIndex`] and
-//! instead keep the data in its denser serialized form which lets us turn our on-disk size
-//! efficiency directly into a peak memory reduction. When we convert these encoded-in-memory
-//! values into their fully-deserialized type, we use a fixed-size read of the encoded array
-//! then mask off any errant bytes we read. The array of edge index bytes is padded to permit this.
-//!
-//! We also encode and decode the entire rest of each node using [`SerializedNodeHeader`]
-//! to let this encoding and decoding be done in one fixed-size operation. These headers contain
-//! two [`Fingerprint`]s along with the serialized [`DepKind`], and the number of edge indices
-//! in the node and the number of bytes used to encode the edge indices for this node. The
-//! [`DepKind`], number of edges, and bytes per edge are all bit-packed together, if they fit.
-//! If the number of edges in this node does not fit in the bits available in the header, we
-//! store it directly after the header with leb128.
-//!
-//! Dep-graph indices are bulk allocated to threads inside `LocalEncoderState`. Having threads
-//! own these indices helps avoid races when they are conditionally used when marking nodes green.
-//! It also reduces congestion on the shared index count.
+// The data that we will serialize and deserialize.
+//
+// Notionally, the dep-graph is a sequence of NodeInfo with the dependencies
+// specified inline. The total number of nodes and edges are stored as the last
+// 16 bytes of the file, so we can find them easily at decoding time.
+//
+// The serialisation is performed on-demand when each node is emitted. Using this
+// scheme, we do not need to keep the current graph in memory.
+//
+// The deserialization is performed manually, in order to convert from the stored
+// sequence of NodeInfos to the different arrays in SerializedDepGraph. Since the
+// node and edge count are stored at the end of the file, all the arrays can be
+// pre-allocated with the right length.
+//
+// The encoding of the dep-graph is generally designed around the fact that fixed-size
+// reads of encoded data are generally faster than variable-sized reads. Ergo we adopt
+// essentially the same varint encoding scheme used in the rmeta format; the edge lists
+// for each node on the graph store a 2-bit integer which is the number of bytes per edge
+// index in that node's edge list. We effectively ignore that an edge index of 0 could be
+// encoded with 0 bytes in order to not require 3 bits to store the byte width of the edges.
+// The overhead of calculating the correct byte width for each edge is mitigated by
+// building edge lists with [`EdgesVec`] which keeps a running max of the edges in a node.
+//
+// When we decode this data, we do not immediately create [`SerializedDepNodeIndex`] and
+// instead keep the data in its denser serialized form which lets us turn our on-disk size
+// efficiency directly into a peak memory reduction. When we convert these encoded-in-memory
+// values into their fully-deserialized type, we use a fixed-size read of the encoded array
+// then mask off any errant bytes we read. The array of edge index bytes is padded to permit this.
+//
+// We also encode and decode the entire rest of each node using [`SerializedNodeHeader`]
+// to let this encoding and decoding be done in one fixed-size operation. These headers contain
+// two [`Fingerprint`]s along with the serialized [`DepKind`], and the number of edge indices
+// in the node and the number of bytes used to encode the edge indices for this node. The
+// [`DepKind`], number of edges, and bytes per edge are all bit-packed together, if they fit.
+// If the number of edges in this node does not fit in the bits available in the header, we
+// store it directly after the header with leb128.
+//
+// Dep-graph indices are bulk allocated to threads inside `LocalEncoderState`. Having threads
+// own these indices helps avoid races when they are conditionally used when marking nodes green.
+// It also reduces congestion on the shared index count.
 
 use std::cell::RefCell;
 use std::cmp::max;
@@ -59,41 +59,41 @@ use std::{iter, mem, u64};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::fingerprint::{Fingerprint, PackedFingerprint};
+use crate::rustc_data_structures::fingerprint::{Fingerprint, PackedFingerprint};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_data_structures::outline;
-use rustc_data_structures::profiling::SelfProfilerRef;
-use rustc_data_structures::sync::{AtomicU64, Lock, WorkerLocal, broadcast};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::outline;
+use crate::rustc_data_structures::profiling::SelfProfilerRef;
+use crate::rustc_data_structures::sync::{AtomicU64, Lock, WorkerLocal, broadcast};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::unhash::UnhashMap;
-use rustc_index::IndexVec;
-use rustc_serialize::opaque::mem_encoder::MemEncoder;
-use rustc_serialize::opaque::{FileEncodeResult, FileEncoder, IntEncodedWithFixedSize, MemDecoder};
+use crate::rustc_data_structures::unhash::UnhashMap;
+use crate::rustc_index::IndexVec;
+use crate::rustc_serialize::opaque::mem_encoder::MemEncoder;
+use crate::rustc_serialize::opaque::{FileEncodeResult, FileEncoder, IntEncodedWithFixedSize, MemDecoder};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
+use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::Session;
+use crate::rustc_complete::Session;
 use tracing::{debug, instrument};
 ```
 
@@ -121,7 +121,7 @@ use crate::dep_graph::edges::EdgesVec;
 // The maximum value of `SerializedDepNodeIndex` leaves the upper two bits
 // unused so that we can store multiple index types in `CompressedHybridIndex`,
 // and use those bits to encode which index type it contains.
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     #[encodable]
     #[max = 0x7FFF_FFFF]
     pub struct SerializedDepNodeIndex {}

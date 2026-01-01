@@ -6,11 +6,11 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=7
 
 ```rust
-//! This module implements some validity checks for attributes.
-//! In particular it verifies that `#[inline]` and `#[repr]` attributes are
-//! attached to items that actually support them and if there are
-//! conflicts between multiple such attributes attached to the same
-//! item.
+// This module implements some validity checks for attributes.
+// In particular it verifies that `#[inline]` and `#[repr]` attributes are
+// attached to items that actually support them and if there are
+// conflicts between multiple such attributes attached to the same
+// item.
 
 use std::fmt::{self, Display};
 ```
@@ -19,8 +19,8 @@ use std::fmt::{self, Display};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_ast::visit::AssocCtxt;
-use rustc_ast::{AssocItemKind, ForeignItemKind, ast};
+use crate::rustc_complete::visit::AssocCtxt;
+use crate::rustc_complete::{AssocItemKind, ForeignItemKind, ast};
 ```
 
 ## Block 3
@@ -123,7 +123,7 @@ impl Display for Target {
 **Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=is_associated_item | COMPLEXITY=161 | LINES=286
 
 ```rust
-rustc_error_messages::into_diag_arg_using_display!(Target);
+crate::rustc_error_messages::into_diag_arg_using_display!(Target);
 
 impl Target {
     pub fn is_associated_item(self) -> bool {

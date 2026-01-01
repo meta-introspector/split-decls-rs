@@ -8,16 +8,16 @@ Generated 22 AST blocks from source file
 ```rust
 use std::cell::RefCell;
 
-use rustc_abi::{Align, Size, VariantIdx};
+use crate::rustc_abi::{Align, Size, VariantIdx};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::fingerprint::Fingerprint;
-use rustc_data_structures::fx::FxHashMap;
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::fingerprint::Fingerprint;
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 3
@@ -25,8 +25,8 @@ use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 
 ```rust
 use rustc_macros::HashStable;
-use rustc_middle::bug;
-use rustc_middle::ty::{self, ExistentialTraitRef, Ty, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, ExistentialTraitRef, Ty, TyCtxt};
 ```
 
 ## Block 4

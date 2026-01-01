@@ -6,18 +6,18 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-#![allow(rustc::symbol_intern_string_literal)]
+#[allow(rustc::symbol_intern_string_literal)]
 
 use rustc_hashes::Hash64;
-use rustc_span::def_id::{DefPathHash, StableCrateId};
+use crate::rustc_complete::def_id::{DefPathHash, StableCrateId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::edition::Edition;
-use rustc_span::{Symbol, create_session_globals_then};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{Symbol, create_session_globals_then};
 ```
 
 ## Block 3

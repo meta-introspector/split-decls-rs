@@ -9,41 +9,41 @@ Generated 11 AST blocks from source file
 use core::ops::ControlFlow;
 
 use rustc_ast as ast;
-use rustc_ast::mut_visit::MutVisitor;
-use rustc_ast::visit::{AssocCtxt, Visitor};
+use crate::rustc_complete::mut_visit::MutVisitor;
+use crate::rustc_complete::visit::{AssocCtxt, Visitor};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{Attribute, HasAttrs, HasTokens, NodeId, mut_visit, visit};
+use crate::rustc_complete::{Attribute, HasAttrs, HasTokens, NodeId, mut_visit, visit};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::PResult;
-use rustc_expand::base::{Annotatable, ExtCtxt};
+use crate::rustc_complete::PResult;
+use crate::rustc_expand::base::{Annotatable, ExtCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_expand::config::StripUnconfigured;
-use rustc_expand::configure;
-use rustc_feature::Features;
-use rustc_parse::parser::{ForceCollect, Parser};
+use crate::rustc_expand::config::StripUnconfigured;
+use crate::rustc_expand::configure;
+use crate::rustc_feature::Features;
+use crate::rustc_parse::parser::{ForceCollect, Parser};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::Session;
-use rustc_span::{Span, sym};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::{Span, sym};
 ```
 
 ## Block 6

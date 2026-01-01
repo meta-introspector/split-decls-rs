@@ -6,24 +6,24 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=21
 
 ```rust
-//! Data structure used to inspect trait solver behavior.
-//!
-//! During trait solving we optionally build "proof trees", the root of
-//! which is a [GoalEvaluation]. These  trees are used by the compiler
-//! to inspect the behavior of the trait solver and to access its internal
-//! state, e.g. for diagnostics and when selecting impls during codegen.
-//!
-//! Because each nested goal in the solver gets [canonicalized] separately
-//! and we discard inference progress via "probes", we cannot mechanically
-//! use proof trees without somehow "lifting up" data local to the current
-//! `InferCtxt`. To use the data from evaluation we therefore canonicalize
-//! it and store it as a [CanonicalState].
-//!
-//! Proof trees are only shallow, we do not compute the proof tree for nested
-//! goals. Visiting proof trees instead recomputes nested goals in the parents
-//! inference context when necessary.
-//!
-//! [canonicalized]: https://rustc-dev-guide.rust-lang.org/solve/canonicalization.html
+// Data structure used to inspect trait solver behavior.
+//
+// During trait solving we optionally build "proof trees", the root of
+// which is a [GoalEvaluation]. These  trees are used by the compiler
+// to inspect the behavior of the trait solver and to access its internal
+// state, e.g. for diagnostics and when selecting impls during codegen.
+//
+// Because each nested goal in the solver gets [canonicalized] separately
+// and we discard inference progress via "probes", we cannot mechanically
+// use proof trees without somehow "lifting up" data local to the current
+// `InferCtxt`. To use the data from evaluation we therefore canonicalize
+// it and store it as a [CanonicalState].
+//
+// Proof trees are only shallow, we do not compute the proof tree for nested
+// goals. Visiting proof trees instead recomputes nested goals in the parents
+// inference context when necessary.
+//
+// [canonicalized]: https://rustc-dev-guide.rust-lang.org/solve/canonicalization.html
 
 use derive_where::derive_where;
 use rustc_type_ir_macros::{TypeFoldable_Generic, TypeVisitable_Generic};

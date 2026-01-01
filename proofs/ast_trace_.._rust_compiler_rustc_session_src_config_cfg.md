@@ -6,49 +6,49 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=12 | LINES=28
 
 ```rust
-//! cfg and check-cfg configuration
-//!
-//! This module contains the definition of [`Cfg`] and [`CheckCfg`]
-//! as well as the logic for creating the default configuration for a
-//! given [`Session`].
-//!
-//! It also contains the filling of the well known configs, which should
-//! ALWAYS be in sync with the default_configuration.
-//!
-//! ## Adding a new cfg
-//!
-//! Adding a new feature requires two new symbols one for the cfg itself
-//! and the second one for the unstable feature gate, those are defined in
-//! `rustc_span::symbol`.
-//!
-//! As well as the following points,
-//!  - Add the activation logic in [`default_configuration`]
-//!  - Add the cfg to [`CheckCfg::fill_well_known`] (and related files),
-//!    so that the compiler can know the cfg is expected
-//!  - Add the cfg in [`disallow_cfgs`] to disallow users from setting it via `--cfg`
-//!  - Add the feature gating in `compiler/rustc_feature/src/builtin_attrs.rs`
+// cfg and check-cfg configuration
+//
+// This module contains the definition of [`Cfg`] and [`CheckCfg`]
+// as well as the logic for creating the default configuration for a
+// given [`Session`].
+//
+// It also contains the filling of the well known configs, which should
+// ALWAYS be in sync with the default_configuration.
+//
+// ## Adding a new cfg
+//
+// Adding a new feature requires two new symbols one for the cfg itself
+// and the second one for the unstable feature gate, those are defined in
+// `crate::rustc_span::symbol`.
+//
+// As well as the following points,
+//  - Add the activation logic in [`default_configuration`]
+//  - Add the cfg to [`CheckCfg::fill_well_known`] (and related files),
+//    so that the compiler can know the cfg is expected
+//  - Add the cfg in [`disallow_cfgs`] to disallow users from setting it via `--cfg`
+//  - Add the feature gating in `compiler/rustc_feature/src/builtin_attrs.rs`
 
 use std::hash::Hash;
 use std::iter;
 
-use rustc_abi::Align;
-use rustc_ast::ast;
-use rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexSet};
+use crate::rustc_abi::Align;
+use crate::rustc_complete::ast;
+use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_lint_defs::builtin::EXPLICIT_BUILTIN_CFGS_IN_FLAGS;
-use rustc_span::{Symbol, sym};
+use crate::rustc_lint_defs::builtin::EXPLICIT_BUILTIN_CFGS_IN_FLAGS;
+use crate::rustc_complete::{Symbol, sym};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_target::spec::{PanicStrategy, RelocModel, SanitizerSet, Target};
+use crate::rustc_target::spec::{PanicStrategy, RelocModel, SanitizerSet, Target};
 ```
 
 ## Block 4
@@ -460,10 +460,10 @@ impl CheckCfg {
         ins!(sym::sanitizer_cfi_normalize_integers, no_values);
 
         ins!(sym::target_feature, empty_values).extend(
-            rustc_target::target_features::all_rust_features()
+            crate::rustc_target::target_features::all_rust_features()
                 .filter(|(_, s)| s.in_cfg())
                 .map(|(f, _s)| f)
-                .chain(rustc_target::target_features::RUSTC_SPECIFIC_FEATURES.iter().cloned())
+                .chain(crate::rustc_target::target_features::RUSTC_SPECIFIC_FEATURES.iter().cloned())
                 .map(Symbol::intern),
         );
 

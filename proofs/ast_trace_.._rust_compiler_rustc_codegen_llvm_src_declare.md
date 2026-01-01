@@ -6,25 +6,25 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=19
 
 ```rust
-//! Declare various LLVM values.
-//!
-//! Prefer using functions and methods from this module rather than calling LLVM
-//! functions directly. These functions do some additional work to ensure we do
-//! the right thing given the preconceptions of codegen.
-//!
-//! Some useful guidelines:
-//!
-//! * Use declare_* family of methods if you are declaring, but are not
-//!   interested in defining the Value they return.
-//! * Use define_* family of methods when you might be defining the Value.
-//! * When in doubt, define.
+// Declare various LLVM values.
+//
+// Prefer using functions and methods from this module rather than calling LLVM
+// functions directly. These functions do some additional work to ensure we do
+// the right thing given the preconceptions of codegen.
+//
+// Some useful guidelines:
+//
+// * Use declare_* family of methods if you are declaring, but are not
+//   interested in defining the Value they return.
+// * Use define_* family of methods when you might be defining the Value.
+// * When in doubt, define.
 
 use std::borrow::Borrow;
 
 use itertools::Itertools;
-use rustc_codegen_ssa::traits::TypeMembershipCodegenMethods;
-use rustc_data_structures::fx::FxIndexSet;
-use rustc_middle::ty::{Instance, Ty};
+use crate::rustc_codegen_ssa::traits::TypeMembershipCodegenMethods;
+use crate::rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_complete::ty::{Instance, Ty};
 ```
 
 ## Block 2
@@ -38,7 +38,7 @@ use rustc_sanitizers::{cfi, kcfi};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_target::callconv::FnAbi;
+use crate::rustc_target::callconv::FnAbi;
 use smallvec::SmallVec;
 use tracing::debug;
 
@@ -274,7 +274,7 @@ impl<'ll, CX: Borrow<SCx<'ll>>> GenericCx<'ll, CX> {
     /// Use this function when you intend to define a global. This function will
     /// return `None` if the name already has a definition associated with it. In that
     /// case an error should be reported to the user, because it usually happens due
-    /// to user’s fault (e.g., misuse of `#[no_mangle]` or `#[export_name]` attributes).
+    /// to user’s fault (e.g., misuse of `#[unsafe(no_mangle)]` or `#[unsafe(export_name]` attributes).
     pub(crate) fn define_global(&self, name: &str, ty: &'ll Type) -> Option<&'ll Value> {
         if self.get_defined_value(name).is_some() {
             None

@@ -7,24 +7,24 @@ Generated 23 AST blocks from source file
 
 ```rust
 // FIXME(jdonszelmann): should become rustc_attr_validation
-//! This module implements some validity checks for attributes.
-//! In particular it verifies that `#[inline]` and `#[repr]` attributes are
-//! attached to items that actually support them and if there are
-//! conflicts between multiple such attributes attached to the same
-//! item.
+// This module implements some validity checks for attributes.
+// In particular it verifies that `#[inline]` and `#[repr]` attributes are
+// attached to items that actually support them and if there are
+// conflicts between multiple such attributes attached to the same
+// item.
 
 use std::cell::Cell;
 use std::collections::hash_map::Entry;
 use std::slice;
 
-use rustc_abi::{Align, ExternAbi, Size};
+use crate::rustc_abi::{Align, ExternAbi, Size};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{AttrStyle, LitKind, MetaItemInner, MetaItemKind, ast};
+use crate::rustc_complete::{AttrStyle, LitKind, MetaItemInner, MetaItemKind, ast};
 ```
 
 ## Block 3
@@ -38,15 +38,15 @@ use rustc_attr_parsing::{AttributeParser, Late};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_errors::{Applicability, DiagCtxtHandle, IntoDiagArg, MultiSpan, StashKey};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::{Applicability, DiagCtxtHandle, IntoDiagArg, MultiSpan, StashKey};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_feature::{
+use crate::rustc_feature::{
     ACCEPTED_LANG_FEATURES, AttributeDuplicates, AttributeType, BUILTIN_ATTRIBUTE_MAP,
     BuiltinAttribute,
 };
@@ -56,23 +56,23 @@ use rustc_feature::{
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::attrs::{AttributeKind, InlineAttr, MirDialect, MirPhase, ReprAttr, SanitizerSet};
+use crate::rustc_complete::attrs::{AttributeKind, InlineAttr, MirDialect, MirPhase, ReprAttr, SanitizerSet};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::LocalModDefId;
-use rustc_hir::intravisit::{self, Visitor};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalModDefId;
+use crate::rustc_complete::intravisit::{self, Visitor};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_hir::{
+use crate::rustc_complete::{
     self as hir, Attribute, CRATE_HIR_ID, CRATE_OWNER_ID, FnSig, ForeignItem, HirId, Item,
     ItemKind, MethodKind, PartialConstStability, Safety, Stability, StabilityLevel, Target,
     TraitItem, find_attr,
@@ -84,34 +84,34 @@ use rustc_hir::{
 
 ```rust
 use rustc_macros::LintDiagnostic;
-use rustc_middle::hir::nested_filter;
-use rustc_middle::middle::resolve_bound_vars::ObjectLifetimeDefault;
-use rustc_middle::query::Providers;
-use rustc_middle::traits::ObligationCause;
-use rustc_middle::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::middle::resolve_bound_vars::ObjectLifetimeDefault;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, TyCtxt, TypingMode};
+use crate::rustc_complete::ty::{self, TyCtxt, TypingMode};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_session::config::CrateType;
-use rustc_session::lint;
-use rustc_session::lint::builtin::{
+use crate::rustc_complete::config::CrateType;
+use crate::rustc_complete::lint;
+use crate::rustc_complete::lint::builtin::{
     CONFLICTING_REPR_HINTS, INVALID_DOC_ATTRIBUTES, INVALID_MACRO_EXPORT_ARGUMENTS,
     MALFORMED_DIAGNOSTIC_ATTRIBUTES, MISPLACED_DIAGNOSTIC_ATTRIBUTES, UNUSED_ATTRIBUTES,
 };
@@ -121,24 +121,24 @@ use rustc_session::lint::builtin::{
 **Metadata**: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::parse::feature_err;
-use rustc_span::edition::Edition;
-use rustc_span::{BytePos, DUMMY_SP, Span, Symbol, edition, sym};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{BytePos, DUMMY_SP, Span, Symbol, edition, sym};
 ```
 
 ## Block 14
 **Metadata**: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::infer::{TyCtxtInferExt, ValuePairs};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::infer::{TyCtxtInferExt, ValuePairs};
 ```
 
 ## Block 15
 **Metadata**: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_trait_selection::traits::ObligationCtxt;
+use crate::rustc_trait_selection::traits::ObligationCtxt;
 use tracing::debug;
 
 use crate::{errors, fluent_generated as fluent};
@@ -201,7 +201,7 @@ pub(crate) enum ProcMacroKind {
 
 ```rust
 impl IntoDiagArg for ProcMacroKind {
-    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         match self {
             ProcMacroKind::Attribute => "attribute proc macro",
             ProcMacroKind::Derive => "derive proc macro",
@@ -1021,7 +1021,7 @@ impl<'tcx> CheckAttrVisitor<'tcx> {
 
         // FIXME: This should support attributes with namespace like `diagnostic::do_not_recommend`.
         fn is_builtin_attr(s: Symbol) -> bool {
-            rustc_feature::BUILTIN_ATTRIBUTE_MAP.contains_key(&s)
+            crate::rustc_feature::BUILTIN_ATTRIBUTE_MAP.contains_key(&s)
         }
 
         let value = match meta.value_str() {
@@ -1287,7 +1287,7 @@ impl<'tcx> CheckAttrVisitor<'tcx> {
         }
     }
 
-    /// Check that the `#![doc(cfg_hide(...))]` attribute only contains a list of attributes.
+    /// Check that the `#[doc(cfg_hide(...))]` attribute only contains a list of attributes.
     ///
     fn check_doc_cfg_hide(&self, meta: &MetaItemInner, hir_id: HirId) {
         if meta.meta_item_list().is_none() {
@@ -1809,7 +1809,7 @@ impl<'tcx> CheckAttrVisitor<'tcx> {
             };
         }
 
-        // catch `repr()` with no arguments, applied to an item (i.e. not `#![repr()]`)
+        // catch `repr()` with no arguments, applied to an item (i.e. not `#[repr()]`)
         if let Some(first_attr_span) = first_attr_span
             && reprs.is_empty()
             && item.is_some()
@@ -2269,12 +2269,12 @@ impl<'tcx> CheckAttrVisitor<'tcx> {
             let no_mangle_attr = if no_mangle_span.edition() >= Edition::Edition2024 {
                 "#[unsafe(no_mangle)]"
             } else {
-                "#[no_mangle]"
+                "#[unsafe(no_mangle)]"
             };
             let export_name_attr = if export_name_span.edition() >= Edition::Edition2024 {
                 "#[unsafe(export_name)]"
             } else {
-                "#[export_name]"
+                "#[unsafe(export_name]"
             };
 
             self.tcx.emit_node_span_lint(
@@ -2554,7 +2554,7 @@ fn check_invalid_crate_level_attr(tcx: TyCtxt<'_>, attrs: &[Attribute]) {
                 .source_map()
                 .span_to_snippet(span)
                 .ok()
-                .filter(|src| src.starts_with("#!["))
+                .filter(|src| src.starts_with("#["))
                 .map(|_| span.with_lo(span.lo() + BytePos(1)).with_hi(span.lo() + BytePos(2))),
             name,
             item,

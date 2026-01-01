@@ -6,14 +6,14 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{self, NonDivergingIntrinsic};
+use crate::rustc_complete::mir::{self, NonDivergingIntrinsic};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::span_bug;
+use crate::rustc_complete::span_bug;
 use tracing::instrument;
 
 use super::{FunctionCx, LocalRef};
@@ -103,7 +103,7 @@ impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
                 let count = self.codegen_operand(bx, count).immediate();
                 let pointee_layout = dst_val
                     .layout
-                    .pointee_info_at(bx, rustc_abi::Size::ZERO)
+                    .pointee_info_at(bx, crate::rustc_abi::Size::ZERO)
                     .expect("Expected pointer");
                 let bytes = bx.mul(count, bx.const_usize(pointee_layout.size.bytes()));
 

@@ -6,17 +6,17 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::unord::{ExtendUnord, UnordSet};
+use crate::rustc_data_structures::unord::{ExtendUnord, UnordSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=30 | LINES=41
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::LocalDefId;
-use rustc_middle::ty::TyCtxt;
-use rustc_session::lint;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::lint;
 use tracing::debug;
 
 pub(super) fn check_unused_traits(tcx: TyCtxt<'_>, (): ()) {

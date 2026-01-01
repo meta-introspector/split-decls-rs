@@ -9,21 +9,21 @@ Generated 16 AST blocks from source file
 use std::assert_matches::assert_matches;
 use std::marker::PhantomData;
 
-use rustc_data_structures::undo_log::{Rollback, UndoLogs};
+use crate::rustc_data_structures::undo_log::{Rollback, UndoLogs};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::{snapshot_vec as sv, unify as ut};
+use crate::rustc_data_structures::{snapshot_vec as sv, unify as ut};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, OpaqueHiddenType, OpaqueTypeKey};
+use crate::rustc_complete::ty::{self, OpaqueHiddenType, OpaqueTypeKey};
 ```
 
 ## Block 4

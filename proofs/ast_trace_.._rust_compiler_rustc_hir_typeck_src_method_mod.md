@@ -6,16 +6,16 @@ Generated 14 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=10
 
 ```rust
-//! Method lookup: the secret sauce of Rust. See the [rustc dev guide] for more information.
-//!
-//! [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/method-lookup.html
+// Method lookup: the secret sauce of Rust. See the [rustc dev guide] for more information.
+//
+// [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/method-lookup.html
 
 mod confirm;
 mod prelude_edition_lints;
 pub(crate) mod probe;
 mod suggest;
 
-use rustc_errors::{Applicability, Diag, SubdiagMessage};
+use crate::rustc_complete::{Applicability, Diag, SubdiagMessage};
 ```
 
 ## Block 2
@@ -23,24 +23,24 @@ use rustc_errors::{Applicability, Diag, SubdiagMessage};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::def::{CtorOf, DefKind, Namespace};
+use crate::rustc_complete::def::{CtorOf, DefKind, Namespace};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_infer::infer::{BoundRegionConversionTime, InferOk};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_infer::infer::{BoundRegionConversionTime, InferOk};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_infer::traits::PredicateObligations;
-use rustc_middle::traits::ObligationCause;
-use rustc_middle::ty::{
+use crate::rustc_infer::traits::PredicateObligations;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty::{
     self, GenericArgs, GenericArgsRef, GenericParamDefKind, Ty, TypeVisitableExt,
 };
 ```
@@ -49,22 +49,22 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ErrorGuaranteed, Ident, Span, Symbol};
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, Symbol};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
-use rustc_trait_selection::traits::{self, NormalizeExt};
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
+use crate::rustc_trait_selection::traits::{self, NormalizeExt};
 ```
 
 ## Block 8

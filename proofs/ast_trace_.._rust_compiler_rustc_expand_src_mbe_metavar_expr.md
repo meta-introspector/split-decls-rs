@@ -6,21 +6,21 @@ Generated 22 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::token::{self, Delimiter, IdentIsRaw, Lit, Token, TokenKind};
+use crate::rustc_complete::token::{self, Delimiter, IdentIsRaw, Lit, Token, TokenKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::tokenstream::{TokenStream, TokenStreamIter, TokenTree};
+use crate::rustc_complete::tokenstream::{TokenStream, TokenStreamIter, TokenTree};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{LitIntType, LitKind};
+use crate::rustc_complete::{LitIntType, LitKind};
 ```
 
 ## Block 4
@@ -28,7 +28,7 @@ use rustc_ast::{LitIntType, LitKind};
 
 ```rust
 use rustc_ast_pretty::pprust;
-use rustc_errors::{Applicability, PResult};
+use crate::rustc_complete::{Applicability, PResult};
 ```
 
 ## Block 5
@@ -42,8 +42,8 @@ use rustc_macros::{Decodable, Encodable};
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::parse::ParseSess;
-use rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::{Ident, Span, Symbol};
 ```
 
 ## Block 7

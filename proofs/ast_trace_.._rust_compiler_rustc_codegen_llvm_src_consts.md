@@ -8,33 +8,33 @@ Generated 15 AST blocks from source file
 ```rust
 use std::ops::Range;
 
-use rustc_abi::{Align, HasDataLayout, Primitive, Scalar, Size, WrappingRange};
+use crate::rustc_abi::{Align, HasDataLayout, Primitive, Scalar, Size, WrappingRange};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_codegen_ssa::common;
-use rustc_codegen_ssa::traits::*;
-use rustc_hir::LangItem;
-use rustc_hir::attrs::Linkage;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, LOCAL_CRATE};
+use crate::rustc_codegen_ssa::common;
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::attrs::Linkage;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::middle::codegen_fn_attrs::{CodegenFnAttrFlags, CodegenFnAttrs};
+use crate::rustc_complete::middle::codegen_fn_attrs::{CodegenFnAttrFlags, CodegenFnAttrs};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::mir::interpret::{
+use crate::rustc_complete::mir::interpret::{
     Allocation, ConstAllocation, ErrorHandled, InitChunk, Pointer, Scalar as InterpScalar,
     read_target_uint,
 };
@@ -44,22 +44,22 @@ use rustc_middle::mir::interpret::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::mono::MonoItem;
-use rustc_middle::ty::layout::{HasTypingEnv, LayoutOf};
+use crate::rustc_complete::mir::mono::MonoItem;
+use crate::rustc_complete::ty::layout::{HasTypingEnv, LayoutOf};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Instance};
+use crate::rustc_complete::ty::{self, Instance};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 8

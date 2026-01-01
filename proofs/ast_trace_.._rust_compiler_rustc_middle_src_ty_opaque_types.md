@@ -6,9 +6,9 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_span::Span;
-use rustc_span::def_id::DefId;
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::DefId;
 use tracing::{debug, instrument, trace};
 ```
 

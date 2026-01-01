@@ -10,44 +10,44 @@ use std::collections::hash_map::Entry;
 use std::hash::Hash;
 use std::iter;
 
-use rustc_abi::{FieldIdx, VariantIdx};
+use crate::rustc_abi::{FieldIdx, VariantIdx};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
+use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::unord::{ExtendUnord, UnordItems, UnordSet};
+use crate::rustc_data_structures::unord::{ExtendUnord, UnordItems, UnordSet};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefId, LocalDefId, LocalDefIdMap};
+use crate::rustc_complete::def_id::{DefId, LocalDefId, LocalDefIdMap};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir::hir_id::OwnerId;
-use rustc_hir::{
+use crate::rustc_complete::hir_id::OwnerId;
+use crate::rustc_complete::{
     self as hir, BindingMode, ByRef, HirId, ItemLocalId, ItemLocalMap, ItemLocalSet, Mutability,
 };
 ```
@@ -56,7 +56,7 @@ use rustc_hir::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_index::IndexVec;
+use crate::rustc_index::IndexVec;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
 ```
 
@@ -64,8 +64,8 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisit
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12
 
 ```rust
-use rustc_session::Session;
-use rustc_span::Span;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::Span;
 
 use super::RvalueScopes;
 use crate::hir::place::Place as HirPlace;
@@ -144,7 +144,7 @@ pub struct TypeckResults<'tcx> {
     /// leads to a `vec![&&Option<i32>, &Option<i32>]` and
     ///
     /// ```
-    /// #![feature(deref_patterns)]
+    /// #[feature(deref_patterns)]
     /// match &Box::new(Some(5i32)) {
     ///     Some(n) => {},
     ///     _ => {},
@@ -254,7 +254,7 @@ pub struct TypeckResults<'tcx> {
 
     /// Tracks the rvalue scoping rules which defines finer scoping for rvalue expressions
     /// by applying extended parameter rules.
-    /// Details may be found in `rustc_hir_analysis::check::rvalue_scopes`.
+    /// Details may be found in `crate::rustc_hir_analysis::check::rvalue_scopes`.
     pub rvalue_scopes: RvalueScopes,
 
     /// Stores the predicates that apply on coroutine witness types.
@@ -838,7 +838,7 @@ impl<'a> LocalSetInContextMut<'a> {
 **Metadata**: AST_ID=22 | TYPE=STRUCT | NAME=UserTypeAnnotationIndex | COMPLEXITY=4 | LINES=9
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     #[derive(HashStable)]
     #[encodable]
     #[debug_format = "UserType({})"]

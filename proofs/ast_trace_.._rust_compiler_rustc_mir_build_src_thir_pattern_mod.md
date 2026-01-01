@@ -6,7 +6,7 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10
 
 ```rust
-//! Validation of patterns/matches.
+// Validation of patterns/matches.
 
 mod check_match;
 mod const_to_pat;
@@ -15,33 +15,33 @@ mod migration;
 use std::cmp::Ordering;
 use std::sync::Arc;
 
-use rustc_abi::{FieldIdx, Integer};
+use crate::rustc_abi::{FieldIdx, Integer};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_hir::def::{CtorOf, DefKind, Res};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::def::{CtorOf, DefKind, Res};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::pat_util::EnumerateAndAdjustIterator;
-use rustc_hir::{self as hir, LangItem, RangeEnd};
+use crate::rustc_complete::pat_util::EnumerateAndAdjustIterator;
+use crate::rustc_complete::{self as hir, LangItem, RangeEnd};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_index::Idx;
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_middle::mir::interpret::LitToConstInput;
-use rustc_middle::thir::{
+use crate::rustc_index::Idx;
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::mir::interpret::LitToConstInput;
+use crate::rustc_complete::thir::{
     Ascription, FieldPat, LocalVarId, Pat, PatKind, PatRange, PatRangeBoundary,
 };
 ```
@@ -50,30 +50,30 @@ use rustc_middle::thir::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::adjustment::{PatAdjust, PatAdjustment};
+use crate::rustc_complete::ty::adjustment::{PatAdjust, PatAdjustment};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::layout::IntegerExt;
-use rustc_middle::ty::{self, CanonicalUserTypeAnnotation, Ty, TyCtxt, TypingMode};
+use crate::rustc_complete::ty::layout::IntegerExt;
+use crate::rustc_complete::ty::{self, CanonicalUserTypeAnnotation, Ty, TyCtxt, TypingMode};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::DefId;
-use rustc_span::{ErrorGuaranteed, Span};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{ErrorGuaranteed, Span};
 ```
 
 ## Block 9
@@ -159,7 +159,7 @@ impl<'a, 'tcx> PatCtxt<'a, 'tcx> {
         // ```
         //
         // the type assigned to `Some(n)` in `unadjusted_pat` would be `Option<i32>` (this is
-        // determined in rustc_hir_analysis::check::match). The adjustments would be
+        // determined in crate::rustc_hir_analysis::check::match). The adjustments would be
         //
         // `vec![&&Option<i32>, &Option<i32>]`.
         //
@@ -245,7 +245,7 @@ impl<'a, 'tcx> PatCtxt<'a, 'tcx> {
         expr: Option<&'tcx hir::PatExpr<'tcx>>,
         ty: Ty<'tcx>,
     ) -> Result<(), ErrorGuaranteed> {
-        use rustc_ast::ast::LitKind;
+        use crate::rustc_complete::ast::LitKind;
 
         let Some(expr) = expr else {
             return Ok(());
@@ -254,7 +254,7 @@ impl<'a, 'tcx> PatCtxt<'a, 'tcx> {
 
         // We need to inspect the original expression, because if we only inspect the output of
         // `eval_bits`, an overflowed value has already been wrapped around.
-        // We mostly copy the logic from the `rustc_lint::OVERFLOWING_LITERALS` lint.
+        // We mostly copy the logic from the `crate::rustc_lint::OVERFLOWING_LITERALS` lint.
         let hir::PatExprKind::Lit { lit, negated } = expr.kind else {
             return Ok(());
         };

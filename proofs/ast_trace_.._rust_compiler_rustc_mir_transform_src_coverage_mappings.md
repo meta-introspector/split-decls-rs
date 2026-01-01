@@ -6,8 +6,8 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_index::IndexVec;
-use rustc_middle::mir::coverage::{
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::mir::coverage::{
     BlockMarkerId, BranchSpan, CoverageInfoHi, CoverageKind, Mapping, MappingKind,
 };
 ```
@@ -16,14 +16,14 @@ use rustc_middle::mir::coverage::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{self, BasicBlock, StatementKind};
+use crate::rustc_complete::mir::{self, BasicBlock, StatementKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11
 
 ```rust
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::ty::TyCtxt;
 
 use crate::coverage::graph::CoverageGraph;
 use crate::coverage::hir_info::ExtractedHirInfo;

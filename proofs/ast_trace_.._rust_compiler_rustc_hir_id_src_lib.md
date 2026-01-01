@@ -6,11 +6,11 @@ Generated 25 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-//! Library containing Id types from `rustc_hir`, split out so crates can use it without depending
-//! on all of `rustc_hir` (which is large and depends on other large things like `rustc_target`).
-#![allow(internal_features)]
-#![feature(negative_impls)]
-#![feature(rustc_attrs)]
+// Library containing Id types from `rustc_hir`, split out so crates can use it without depending
+// on all of `rustc_hir` (which is large and depends on other large things like `rustc_target`).
+#[allow(internal_features)]
+#[feature(negative_impls)]
+#[feature(rustc_attrs)]
 
 use std::fmt::{self, Debug};
 ```
@@ -19,7 +19,7 @@ use std::fmt::{self, Debug};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher, StableOrd, ToStableHashKey};
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher, StableOrd, ToStableHashKey};
 ```
 
 ## Block 3
@@ -33,8 +33,8 @@ use rustc_macros::{Decodable, Encodable, HashStable_Generic};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-pub use rustc_span::HashStableContext;
-use rustc_span::def_id::{CRATE_DEF_ID, DefId, DefIndex, DefPathHash, LocalDefId};
+pub use crate::rustc_complete::HashStableContext;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, DefIndex, DefPathHash, LocalDefId};
 ```
 
 ## Block 5
@@ -97,7 +97,7 @@ impl OwnerId {
 **Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=new | COMPLEXITY=8 | LINES=12
 
 ```rust
-impl rustc_index::Idx for OwnerId {
+impl crate::rustc_index::Idx for OwnerId {
     #[inline]
     fn new(idx: usize) -> Self {
         OwnerId { def_id: LocalDefId { local_def_index: DefIndex::from_usize(idx) } }
@@ -235,15 +235,15 @@ impl fmt::Display for HirId {
 **Metadata**: AST_ID=19 | TYPE=STRUCT | NAME=ItemLocalId | COMPLEXITY=4 | LINES=23
 
 ```rust
-rustc_data_structures::define_stable_id_collections!(HirIdMap, HirIdSet, HirIdMapEntry, HirId);
-rustc_data_structures::define_id_collections!(
+crate::rustc_data_structures::define_stable_id_collections!(HirIdMap, HirIdSet, HirIdMapEntry, HirId);
+crate::rustc_data_structures::define_id_collections!(
     ItemLocalMap,
     ItemLocalSet,
     ItemLocalMapEntry,
     ItemLocalId
 );
 
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// An `ItemLocalId` uniquely identifies something within a given "item-like";
     /// that is, within a `hir::Item`, `hir::TraitItem`, or `hir::ImplItem`. There is no
     /// guarantee that the numerical value of a given `ItemLocalId` corresponds to
@@ -302,7 +302,7 @@ pub const CRATE_OWNER_ID: OwnerId = OwnerId { def_id: CRATE_DEF_ID };
 **Metadata**: AST_ID=24 | TYPE=FUNCTION | NAME=to_stable_hash_key | COMPLEXITY=5 | LINES=10
 
 ```rust
-impl<CTX: rustc_span::HashStableContext> ToStableHashKey<CTX> for HirId {
+impl<CTX: crate::rustc_span::HashStableContext> ToStableHashKey<CTX> for HirId {
     type KeyType = (DefPathHash, ItemLocalId);
 
     #[inline]

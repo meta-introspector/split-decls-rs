@@ -8,16 +8,16 @@ Generated 20 AST blocks from source file
 ```rust
 use std::ops::ControlFlow;
 
-use rustc_hir::LangItem;
-use rustc_infer::infer::InferCtxt;
-use rustc_infer::traits::solve::{CandidateSource, GoalSource, MaybeCause};
+use crate::rustc_complete::LangItem;
+use crate::rustc_infer::infer::InferCtxt;
+use crate::rustc_infer::traits::solve::{CandidateSource, GoalSource, MaybeCause};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_infer::traits::{
+use crate::rustc_infer::traits::{
     self, MismatchedProjectionTypes, Obligation, ObligationCause, ObligationCauseCode,
     PredicateObligation, SelectionError,
 };
@@ -27,22 +27,22 @@ use rustc_infer::traits::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::traits::query::NoSolution;
-use rustc_middle::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 6
@@ -494,7 +494,7 @@ impl<'tcx> BestObligation<'tcx> {
 impl<'tcx> ProofTreeVisitor<'tcx> for BestObligation<'tcx> {
     type Result = ControlFlow<PredicateObligation<'tcx>>;
 
-    fn span(&self) -> rustc_span::Span {
+    fn span(&self) -> crate::rustc_span::Span {
         self.obligation.cause.span
     }
 

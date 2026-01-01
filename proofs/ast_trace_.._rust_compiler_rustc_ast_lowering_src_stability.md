@@ -8,19 +8,19 @@ Generated 8 AST blocks from source file
 ```rust
 use std::fmt;
 
-use rustc_abi::ExternAbi;
-use rustc_feature::Features;
-use rustc_session::Session;
-use rustc_session::parse::feature_err;
-use rustc_span::symbol::sym;
-use rustc_span::{Span, Symbol};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_feature::Features;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::symbol::sym;
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-pub(crate) fn enabled_names(features: &rustc_feature::Features, span: Span) -> Vec<&'static str> {
+pub(crate) fn enabled_names(features: &crate::rustc_feature::Features, span: Span) -> Vec<&'static str> {
     ExternAbi::ALL_VARIANTS
         .into_iter()
         .filter(|abi| extern_abi_enabled(features, span, **abi).is_ok())
@@ -34,7 +34,7 @@ pub(crate) fn enabled_names(features: &rustc_feature::Features, span: Span) -> V
 
 ```rust
 pub(crate) fn extern_abi_enabled(
-    features: &rustc_feature::Features,
+    features: &crate::rustc_feature::Features,
     span: Span,
     abi: ExternAbi,
 ) -> Result<(), UnstableAbi> {

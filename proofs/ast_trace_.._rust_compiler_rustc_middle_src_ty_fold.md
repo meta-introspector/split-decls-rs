@@ -6,8 +6,8 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_hir::def_id::DefId;
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_complete::def_id::DefId;
 use rustc_type_ir::data_structures::DelayedMap;
 
 use crate::ty::{

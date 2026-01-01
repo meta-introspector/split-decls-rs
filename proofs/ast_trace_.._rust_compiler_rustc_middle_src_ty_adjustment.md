@@ -6,10 +6,10 @@ Generated 18 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_abi::FieldIdx;
+use crate::rustc_abi::FieldIdx;
 use rustc_hir as hir;
-use rustc_hir::def_id::DefId;
-use rustc_hir::lang_items::LangItem;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::lang_items::LangItem;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
 ```
 
@@ -17,7 +17,7 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisit
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::ty::{Ty, TyCtxt};
 ```

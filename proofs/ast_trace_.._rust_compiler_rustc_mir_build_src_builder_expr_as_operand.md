@@ -6,10 +6,10 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! See docs in build/expr/mod.rs
+// See docs in build/expr/mod.rs
 
-use rustc_middle::mir::*;
-use rustc_middle::thir::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
 use tracing::{debug, instrument};
 ```
 
@@ -73,7 +73,7 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
     /// local variable of unsized type. For example, consider this program:
     ///
     /// ```
-    /// #![feature(unsized_fn_params)]
+    /// #[feature(unsized_fn_params)]
     /// # use core::fmt::Debug;
     /// fn foo(_p: dyn Debug) {
     ///     /* ... */

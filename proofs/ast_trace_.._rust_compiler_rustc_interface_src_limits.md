@@ -6,27 +6,27 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=13
 
 ```rust
-//! Registering limits:
-//! - recursion_limit: there are various parts of the compiler that must impose arbitrary limits
-//!   on how deeply they recurse to prevent stack overflow.
-//! - move_size_limit
-//! - type_length_limit
-//! - pattern_complexity_limit
-//!
-//! Users can override these limits via an attribute on the crate like
-//! `#![recursion_limit="22"]`. This pass just looks for those attributes.
+// Registering limits:
+// - recursion_limit: there are various parts of the compiler that must impose arbitrary limits
+//   on how deeply they recurse to prevent stack overflow.
+// - move_size_limit
+// - type_length_limit
+// - pattern_complexity_limit
+//
+// Users can override these limits via an attribute on the crate like
+// `#[recursion_limit="22"]`. This pass just looks for those attributes.
 
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::limit::Limit;
-use rustc_hir::{Attribute, find_attr};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_complete::{Attribute, find_attr};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=20
 
 ```rust
-use rustc_middle::query::Providers;
-use rustc_session::Limits;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::Limits;
 
 pub(crate) fn provide(providers: &mut Providers) {
     providers.limits = |tcx, ()| {

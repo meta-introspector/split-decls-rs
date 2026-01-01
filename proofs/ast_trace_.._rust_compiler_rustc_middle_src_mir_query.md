@@ -6,7 +6,7 @@ Generated 15 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! Values computed by queries that use MIR.
+// Values computed by queries that use MIR.
 
 use std::fmt::{self, Debug};
 ```
@@ -15,18 +15,18 @@ use std::fmt::{self, Debug};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::{FieldIdx, VariantIdx};
+use crate::rustc_abi::{FieldIdx, VariantIdx};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::def_id::LocalDefId;
-use rustc_index::IndexVec;
-use rustc_index::bit_set::BitMatrix;
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_index::IndexVec;
+use crate::rustc_index::bit_set::BitMatrix;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
 ```
 
@@ -34,7 +34,7 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisit
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 5
@@ -55,7 +55,7 @@ use crate::ty::{self, CoroutineArgsExt, OpaqueHiddenType, Ty};
 **Metadata**: AST_ID=7 | TYPE=STRUCT | NAME=CoroutineSavedLocal | COMPLEXITY=4 | LINES=7
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     #[derive(HashStable)]
     #[encodable]
     #[debug_format = "_{}"]

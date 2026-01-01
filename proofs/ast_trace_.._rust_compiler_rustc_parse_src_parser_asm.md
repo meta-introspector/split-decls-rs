@@ -6,14 +6,14 @@ Generated 16 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{self as ast, AsmMacro};
+use crate::rustc_complete::{self as ast, AsmMacro};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol, kw};
+use crate::rustc_complete::{Span, Symbol, kw};
 ```
 
 ## Block 3
@@ -96,11 +96,11 @@ impl ast::HasAttrs for AsmAttrVec {
     // Follows `ast::Expr`.
     const SUPPORTS_CUSTOM_INNER_ATTRS: bool = false;
 
-    fn attrs(&self) -> &[rustc_ast::Attribute] {
+    fn attrs(&self) -> &[crate::rustc_ast::Attribute] {
         &self.0
     }
 
-    fn visit_attrs(&mut self, f: impl FnOnce(&mut rustc_ast::AttrVec)) {
+    fn visit_attrs(&mut self, f: impl FnOnce(&mut crate::rustc_ast::AttrVec)) {
         f(&mut self.0)
     }
 }
@@ -111,11 +111,11 @@ impl ast::HasAttrs for AsmAttrVec {
 
 ```rust
 impl ast::HasTokens for AsmAttrVec {
-    fn tokens(&self) -> Option<&rustc_ast::tokenstream::LazyAttrTokenStream> {
+    fn tokens(&self) -> Option<&crate::rustc_ast::tokenstream::LazyAttrTokenStream> {
         None
     }
 
-    fn tokens_mut(&mut self) -> Option<&mut Option<rustc_ast::tokenstream::LazyAttrTokenStream>> {
+    fn tokens_mut(&mut self) -> Option<&mut Option<crate::rustc_ast::tokenstream::LazyAttrTokenStream>> {
         None
     }
 }

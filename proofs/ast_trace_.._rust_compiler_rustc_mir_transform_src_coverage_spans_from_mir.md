@@ -8,9 +8,9 @@ Generated 8 AST blocks from source file
 ```rust
 use std::iter;
 
-use rustc_middle::bug;
-use rustc_middle::mir::coverage::CoverageKind;
-use rustc_middle::mir::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::coverage::CoverageKind;
+use crate::rustc_complete::mir::{
     self, FakeReadCause, Statement, StatementKind, Terminator, TerminatorKind,
 };
 ```
@@ -19,7 +19,7 @@ use rustc_middle::mir::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::coverage::graph::{BasicCoverageBlock, CoverageGraph};
 ```

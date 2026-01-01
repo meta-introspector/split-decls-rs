@@ -6,33 +6,33 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=9
 
 ```rust
-//! This module contains the functionality to convert from the wacky tcx data
-//! structures into the THIR. The `builder` is generally ignorant of the tcx,
-//! etc., and instead goes through the `Cx` for most of its work.
+// This module contains the functionality to convert from the wacky tcx data
+// structures into the THIR. The `builder` is generally ignorant of the tcx,
+// etc., and instead goes through the `Cx` for most of its work.
 
-use rustc_data_structures::steal::Steal;
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_data_structures::steal::Steal;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::lang_items::LangItem;
-use rustc_hir::{self as hir, HirId, find_attr};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{self as hir, HirId, find_attr};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::middle::region;
-use rustc_middle::thir::*;
-use rustc_middle::ty::{self, RvalueScopes, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::region;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::{self, RvalueScopes, TyCtxt};
 ```
 
 ## Block 4
@@ -113,12 +113,12 @@ impl<'tcx> ThirBuildCx<'tcx> {
         let hir_id = tcx.local_def_id_to_hir_id(def);
 
         let body_type = match tcx.hir_body_owner_kind(def) {
-            rustc_hir::BodyOwnerKind::Fn | rustc_hir::BodyOwnerKind::Closure => {
+            crate::rustc_hir::BodyOwnerKind::Fn | crate::rustc_hir::BodyOwnerKind::Closure => {
                 // fetch the fully liberated fn signature (that is, all bound
                 // types/lifetimes replaced)
                 BodyTy::Fn(typeck_results.liberated_fn_sigs()[hir_id])
             }
-            rustc_hir::BodyOwnerKind::Const { .. } | rustc_hir::BodyOwnerKind::Static(_) => {
+            crate::rustc_hir::BodyOwnerKind::Const { .. } | crate::rustc_hir::BodyOwnerKind::Static(_) => {
                 // Get the revealed type of this const. This is *not* the adjusted
                 // type of its body, which may be a subtype of this type. For
                 // example:
@@ -132,7 +132,7 @@ impl<'tcx> ThirBuildCx<'tcx> {
                 // equate them.
                 BodyTy::Const(typeck_results.node_type(hir_id))
             }
-            rustc_hir::BodyOwnerKind::GlobalAsm => {
+            crate::rustc_hir::BodyOwnerKind::GlobalAsm => {
                 BodyTy::GlobalAsm(typeck_results.node_type(hir_id))
             }
         };

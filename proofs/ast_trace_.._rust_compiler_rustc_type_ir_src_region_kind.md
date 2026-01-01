@@ -10,7 +10,7 @@ use std::fmt;
 
 use derive_where::derive_where;
 #[cfg(feature = "nightly")]
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 2
@@ -33,7 +33,7 @@ use crate::{DebruijnIndex, Interner};
 **Metadata**: AST_ID=4 | TYPE=STRUCT | NAME=RegionVid | COMPLEXITY=4 | LINES=10
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// A **region** **v**ariable **ID**.
     #[encodable]
     #[orderable]

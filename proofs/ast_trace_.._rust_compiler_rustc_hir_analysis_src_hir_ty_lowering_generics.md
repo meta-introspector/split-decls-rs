@@ -6,31 +6,31 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_ast::ast::ParamKindOrd;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, Diag, ErrorGuaranteed, MultiSpan, struct_span_code_err};
+use crate::rustc_complete::ast::ParamKindOrd;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed, MultiSpan, struct_span_code_err};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_hir::{self as hir, GenericArg};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, GenericArg};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, GenericArgsRef, GenericParamDef, GenericParamDefKind, IsSuggestable, Ty,
 };
 ```
@@ -39,8 +39,8 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_session::lint::builtin::LATE_BOUND_LIFETIME_ARGUMENTS;
-use rustc_span::kw;
+use crate::rustc_complete::lint::builtin::LATE_BOUND_LIFETIME_ARGUMENTS;
+use crate::rustc_complete::kw;
 use smallvec::SmallVec;
 use tracing::{debug, instrument};
 ```
@@ -71,7 +71,7 @@ use crate::hir_ty_lowering::{
 ```
 
 ## Block 9
-**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=generic_arg_mismatch_err | COMPLEXITY=82 | LINES=123
+**Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=generic_arg_mismatch_err | COMPLEXITY=83 | LINES=123
 
 ```rust
 /// Report an error that a generic argument did not match the generic parameter that was
@@ -111,7 +111,7 @@ fn generic_arg_mismatch_err(
     match (arg, &param.kind) {
         (
             GenericArg::Type(hir::Ty {
-                kind: hir::TyKind::Path(rustc_hir::QPath::Resolved(_, path)),
+                kind: hir::TyKind::Path(crate::rustc_hir::QPath::Resolved(_, path)),
                 ..
             }),
             GenericParamDefKind::Const { .. },
@@ -158,14 +158,14 @@ fn generic_arg_mismatch_err(
         }
         (GenericArg::Const(cnst), GenericParamDefKind::Type { .. }) => {
             if let hir::ConstArgKind::Path(qpath) = cnst.kind
-                && let rustc_hir::QPath::Resolved(_, path) = qpath
+                && let crate::rustc_hir::QPath::Resolved(_, path) = qpath
                 && let Res::Def(DefKind::Fn { .. }, id) = path.res
             {
                 err.help(format!("`{}` is a function item, not a type", tcx.item_name(id)));
                 err.help("function item types cannot be named directly");
             } else if let hir::ConstArgKind::Anon(anon) = cnst.kind
                 && let body = tcx.hir_body(anon.body)
-                && let rustc_hir::ExprKind::Path(rustc_hir::QPath::Resolved(_, path)) =
+                && let crate::rustc_hir::ExprKind::Path(crate::rustc_hir::QPath::Resolved(_, path)) =
                     body.value.kind
                 && let Res::Def(DefKind::Fn { .. }, id) = path.res
             {
@@ -202,7 +202,7 @@ fn generic_arg_mismatch_err(
 **Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=lower_generic_args | COMPLEXITY=123 | LINES=236
 
 ```rust
-/// Lower generic arguments from the HIR to the [`rustc_middle::ty`] representation.
+/// Lower generic arguments from the HIR to the [`crate::rustc_middle::ty`] representation.
 ///
 /// This is a rather complex function. Let us try to explain the role
 /// of each of its parameters:

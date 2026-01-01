@@ -6,14 +6,14 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=8 | LINES=24
 
 ```rust
-//! Analysis of patterns, notably match exhaustiveness checking. The main entrypoint for this crate
-//! is [`usefulness::compute_match_usefulness`]. For rustc-specific types and entrypoints, see the
-//! [`rustc`] module.
+// Analysis of patterns, notably match exhaustiveness checking. The main entrypoint for this crate
+// is [`usefulness::compute_match_usefulness`]. For rustc-specific types and entrypoints, see the
+// [`rustc`] module.
 
 // tidy-alphabetical-start
-#![allow(rustc::diagnostic_outside_of_impl)]
-#![allow(rustc::untranslatable_diagnostic)]
-#![allow(unused_crate_dependencies)]
+#[allow(rustc::diagnostic_outside_of_impl)]
+#[allow(rustc::untranslatable_diagnostic)]
+#[allow(unused_crate_dependencies)]
 // tidy-alphabetical-end
 
 pub(crate) mod checks;
@@ -38,7 +38,7 @@ rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
 ```rust
 use std::fmt;
 
-pub use rustc_index::{Idx, IndexVec}; // re-exported to avoid rustc_index version issues
+pub use crate::rustc_index::{Idx, IndexVec}; // re-exported to avoid rustc_index version issues
 ```
 
 ## Block 3

@@ -9,37 +9,37 @@ Generated 17 AST blocks from source file
 use std::borrow::Cow;
 
 use libc::c_uint;
-use rustc_abi::{Size, TagEncoding, VariantIdx, Variants};
+use crate::rustc_abi::{Size, TagEncoding, VariantIdx, Variants};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_codegen_ssa::debuginfo::type_names::compute_debuginfo_type_name;
-use rustc_codegen_ssa::debuginfo::{tag_base_type, wants_c_like_enum_debuginfo};
+use crate::rustc_codegen_ssa::debuginfo::type_names::compute_debuginfo_type_name;
+use crate::rustc_codegen_ssa::debuginfo::{tag_base_type, wants_c_like_enum_debuginfo};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::traits::{ConstCodegenMethods, MiscCodegenMethods};
+use crate::rustc_codegen_ssa::traits::{ConstCodegenMethods, MiscCodegenMethods};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::layout::{LayoutOf, TyAndLayout};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self};
+use crate::rustc_complete::ty::{self};
 ```
 
 ## Block 6
@@ -343,7 +343,7 @@ fn build_enum_variant_part_di_node<'ll, 'tcx>(
     cx: &CodegenCx<'ll, 'tcx>,
     enum_type_and_layout: TyAndLayout<'tcx>,
     enum_type_di_node: &'ll DIType,
-    enum_type_def_id: Option<rustc_span::def_id::DefId>,
+    enum_type_def_id: Option<crate::rustc_span::def_id::DefId>,
     variant_member_infos: &[VariantMemberInfo<'_, 'll>],
 ) -> &'ll DIType {
     let tag_member_di_node =

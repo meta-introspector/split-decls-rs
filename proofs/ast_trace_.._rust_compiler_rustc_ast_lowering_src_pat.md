@@ -8,31 +8,31 @@ Generated 8 AST blocks from source file
 ```rust
 use std::sync::Arc;
 
-use rustc_ast::*;
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::*;
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, LangItem, Target};
+use crate::rustc_complete::{self as hir, LangItem, Target};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::span_bug;
-use rustc_span::source_map::{Spanned, respan};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::source_map::{Spanned, respan};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DesugaringKind, Ident, Span};
+use crate::rustc_complete::{DesugaringKind, Ident, Span};
 ```
 
 ## Block 5

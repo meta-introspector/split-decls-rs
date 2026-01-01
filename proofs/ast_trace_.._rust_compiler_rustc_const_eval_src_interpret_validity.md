@@ -6,11 +6,11 @@ Generated 25 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12
 
 ```rust
-//! Check the validity invariant of a given value, and tell the user
-//! where in the value it got violated.
-//! In const context, this goes even further and tries to approximate const safety.
-//! That's useful because it means other passes (e.g. promotion) can rely on `const`s
-//! to be const-safe.
+// Check the validity invariant of a given value, and tell the user
+// where in the value it got violated.
+// In const context, this goes even further and tries to approximate const safety.
+// That's useful because it means other passes (e.g. promotion) can rely on `const`s
+// to be const-safe.
 
 use std::borrow::Cow;
 use std::fmt::Write;
@@ -25,7 +25,7 @@ use either::{Left, Right};
 
 ```rust
 use hir::def::DefKind;
-use rustc_abi::{
+use crate::rustc_abi::{
     BackendRepr, FieldIdx, FieldsShape, Scalar as ScalarAbi, Size, VariantIdx, Variants,
     WrappingRange,
 };
@@ -35,18 +35,18 @@ use rustc_abi::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_ast::Mutability;
-use rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::Mutability;
+use crate::rustc_data_structures::fx::FxHashSet;
 use rustc_hir as hir;
-use rustc_middle::bug;
-use rustc_middle::mir::interpret::ValidationErrorKind::{self, *};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::interpret::ValidationErrorKind::{self, *};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::mir::interpret::{
+use crate::rustc_complete::mir::interpret::{
     ExpectedKind, InterpErrorKind, InvalidMetaKind, Misalignment, PointerKind, Provenance,
     UnsupportedOpInfo, ValidationErrorInfo, alloc_range, interp_ok,
 };
@@ -56,21 +56,21 @@ use rustc_middle::mir::interpret::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::layout::{LayoutCx, TyAndLayout};
+use crate::rustc_complete::ty::layout::{LayoutCx, TyAndLayout};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Symbol, sym};
+use crate::rustc_complete::{Symbol, sym};
 ```
 
 ## Block 8

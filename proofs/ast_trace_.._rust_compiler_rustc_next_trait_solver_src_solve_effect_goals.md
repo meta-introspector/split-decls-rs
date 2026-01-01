@@ -6,8 +6,8 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-//! Dealing with host effect goals, i.e. enforcing the constness in
-//! `T: const Trait` or `T: [const] Trait`.
+// Dealing with host effect goals, i.e. enforcing the constness in
+// `T: const Trait` or `T: [const] Trait`.
 
 use rustc_type_ir::fast_reject::DeepRejectCtxt;
 use rustc_type_ir::inherent::*;

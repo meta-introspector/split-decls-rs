@@ -15,40 +15,40 @@ use std::cell::{Cell, RefCell};
 ```rust
 use std::ops::Deref;
 
-use rustc_data_structures::unord::{UnordMap, UnordSet};
+use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::LocalDefId;
-use rustc_hir::{self as hir, HirId, HirIdMap, LangItem};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{self as hir, HirId, HirIdMap, LangItem};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::{InferCtxt, InferOk, OpaqueTypeStorageEntries, TyCtxtInferExt};
+use crate::rustc_infer::infer::{InferCtxt, InferOk, OpaqueTypeStorageEntries, TyCtxtInferExt};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::span_bug;
-use rustc_middle::ty::{self, Ty, TyCtxt, TypeVisitableExt, TypingMode};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitableExt, TypingMode};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_span::Span;
-use rustc_span::def_id::LocalDefIdMap;
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
-use rustc_trait_selection::traits::{
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::LocalDefIdMap;
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
+use crate::rustc_trait_selection::traits::{
     self, FulfillmentError, PredicateObligation, TraitEngine, TraitEngineExt as _,
 };
 ```

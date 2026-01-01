@@ -6,7 +6,7 @@ Generated 19 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=9
 
 ```rust
-//! Reading of the rustc metadata for rlibs and dylibs
+// Reading of the rustc metadata for rlibs and dylibs
 
 use std::borrow::Cow;
 use std::fs::File;
@@ -31,22 +31,22 @@ use object::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_abi::Endian;
-use rustc_data_structures::memmap::Mmap;
-use rustc_data_structures::owned_slice::{OwnedSlice, try_slice_owned};
+use crate::rustc_abi::Endian;
+use crate::rustc_data_structures::memmap::Mmap;
+use crate::rustc_data_structures::owned_slice::{OwnedSlice, try_slice_owned};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_metadata::EncodedMetadata;
-use rustc_metadata::creader::MetadataLoader;
-use rustc_metadata::fs::METADATA_FILENAME;
-use rustc_middle::bug;
-use rustc_session::Session;
-use rustc_span::sym;
-use rustc_target::spec::{RelocModel, Target, ef_avr_arch};
+use crate::rustc_metadata::EncodedMetadata;
+use crate::rustc_metadata::creader::MetadataLoader;
+use crate::rustc_metadata::fs::METADATA_FILENAME;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::sym;
+use crate::rustc_target::spec::{RelocModel, Target, ef_avr_arch};
 ```
 
 ## Block 5
@@ -671,7 +671,7 @@ pub fn create_compressed_metadata_file(
     metadata: &EncodedMetadata,
     symbol_name: &str,
 ) -> Vec<u8> {
-    let mut packed_metadata = rustc_metadata::METADATA_HEADER.to_vec();
+    let mut packed_metadata = crate::rustc_metadata::METADATA_HEADER.to_vec();
     packed_metadata.write_all(&(metadata.stub_or_full().len() as u64).to_le_bytes()).unwrap();
     packed_metadata.extend(metadata.stub_or_full());
 

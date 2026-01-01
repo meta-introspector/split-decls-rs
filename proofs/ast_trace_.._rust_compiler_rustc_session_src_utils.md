@@ -9,9 +9,9 @@ Generated 8 AST blocks from source file
 use std::path::PathBuf;
 use std::sync::OnceLock;
 
-use rustc_data_structures::profiling::VerboseTimingGuard;
+use crate::rustc_data_structures::profiling::VerboseTimingGuard;
 use rustc_fs_util::try_canonicalize;
-use rustc_hir::attrs::NativeLibKind;
+use crate::rustc_complete::attrs::NativeLibKind;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
 ```
 

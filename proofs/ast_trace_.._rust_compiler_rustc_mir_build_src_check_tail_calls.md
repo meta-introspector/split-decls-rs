@@ -6,42 +6,42 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_abi::ExternAbi;
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::Applicability;
-use rustc_hir::LangItem;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::CRATE_DEF_ID;
-use rustc_middle::span_bug;
-use rustc_middle::thir::visit::{self, Visitor};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_complete::Applicability;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::CRATE_DEF_ID;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::thir::visit::{self, Visitor};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::thir::{BodyTy, Expr, ExprId, ExprKind, Thir};
+use crate::rustc_complete::thir::{BodyTy, Expr, ExprId, ExprKind, Thir};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, ErrorGuaranteed, Span};
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
 ```
 
 ## Block 6

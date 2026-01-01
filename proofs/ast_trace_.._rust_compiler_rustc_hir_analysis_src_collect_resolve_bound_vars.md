@@ -6,49 +6,49 @@ Generated 27 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=14
 
 ```rust
-//! Resolution of early vs late bound lifetimes.
-//!
-//! Name resolution for lifetimes is performed on the AST and embedded into HIR. From this
-//! information, typechecking needs to transform the lifetime parameters into bound lifetimes.
-//! Lifetimes can be early-bound or late-bound. Construction of typechecking terms needs to visit
-//! the types in HIR to identify late-bound lifetimes and assign their Debruijn indices. This file
-//! is also responsible for assigning their semantics to implicit lifetimes in trait objects.
+// Resolution of early vs late bound lifetimes.
+//
+// Name resolution for lifetimes is performed on the AST and embedded into HIR. From this
+// information, typechecking needs to transform the lifetime parameters into bound lifetimes.
+// Lifetimes can be early-bound or late-bound. Construction of typechecking terms needs to visit
+// the types in HIR to identify late-bound lifetimes and assign their Debruijn indices. This file
+// is also responsible for assigning their semantics to implicit lifetimes in trait objects.
 
 use std::cell::RefCell;
 use std::fmt;
 use std::ops::ControlFlow;
 
-use rustc_ast::visit::walk_list;
-use rustc_data_structures::fx::{FxHashSet, FxIndexMap, FxIndexSet};
+use crate::rustc_complete::visit::walk_list;
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap, FxIndexSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::definitions::{DefPathData, DisambiguatorState};
+use crate::rustc_complete::definitions::{DefPathData, DisambiguatorState};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::intravisit::{self, InferKind, Visitor, VisitorExt};
+use crate::rustc_complete::intravisit::{self, InferKind, Visitor, VisitorExt};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::{
+use crate::rustc_complete::{
     self as hir, AmbigArg, GenericArg, GenericParam, GenericParamKind, HirId, LifetimeKind, Node,
 };
 ```
@@ -58,31 +58,31 @@ use rustc_hir::{
 
 ```rust
 use rustc_macros::extension;
-use rustc_middle::hir::nested_filter;
-use rustc_middle::middle::resolve_bound_vars::*;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::{self, TyCtxt, TypeSuperVisitable, TypeVisitor};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::middle::resolve_bound_vars::*;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, TyCtxt, TypeSuperVisitable, TypeVisitor};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, Span, sym};
+use crate::rustc_complete::{Ident, Span, sym};
 ```
 
 ## Block 10
@@ -314,7 +314,7 @@ enum BinderScopeType {
 ```rust
 type ScopeRef<'a> = &'a Scope<'a>;
 
-/// Adds query implementations to the [Providers] vtable, see [`rustc_middle::query`]
+/// Adds query implementations to the [Providers] vtable, see [`crate::rustc_middle::query`]
 pub(crate) fn provide(providers: &mut Providers) {
     *providers = Providers {
         resolve_bound_vars,
@@ -638,7 +638,7 @@ impl<'a, 'tcx> Visitor<'tcx> for BoundVarContext<'a, 'tcx> {
     /// This method has special handling for opaques that capture all lifetimes,
     /// like async desugaring.
     #[instrument(level = "debug", skip(self))]
-    fn visit_opaque_ty(&mut self, opaque: &'tcx rustc_hir::OpaqueTy<'tcx>) {
+    fn visit_opaque_ty(&mut self, opaque: &'tcx crate::rustc_hir::OpaqueTy<'tcx>) {
         let captures = RefCell::new(FxIndexMap::default());
 
         let capture_all_in_scope_lifetimes = opaque_captures_all_in_scope_lifetimes(opaque);
@@ -1217,7 +1217,7 @@ fn object_lifetime_default(tcx: TyCtxt<'_>, param_def_id: LocalDefId) -> ObjectL
 ```
 
 ## Block 25
-**Metadata**: AST_ID=25 | TYPE=FUNCTION | NAME=with | COMPLEXITY=662 | LINES=1161
+**Metadata**: AST_ID=25 | TYPE=FUNCTION | NAME=with | COMPLEXITY=663 | LINES=1161
 
 ```rust
 impl<'a, 'tcx> BoundVarContext<'a, 'tcx> {
@@ -1383,7 +1383,7 @@ impl<'a, 'tcx> BoundVarContext<'a, 'tcx> {
                         && !self.tcx.asyncness(lifetime_ref.hir_id.owner.def_id).is_async()
                         && !self.tcx.features().anonymous_lifetime_in_impl_trait()
                     {
-                        let mut diag: rustc_errors::Diag<'_> = rustc_session::parse::feature_err(
+                        let mut diag: crate::rustc_errors::Diag<'_> = crate::rustc_session::parse::feature_err(
                             &self.tcx.sess,
                             sym::anonymous_lifetime_in_impl_trait,
                             lifetime_ref.ident.span,
@@ -1410,7 +1410,7 @@ impl<'a, 'tcx> BoundVarContext<'a, 'tcx> {
                             diag.multipart_suggestion(
                                 "consider introducing a named lifetime parameter",
                                 suggestions,
-                                rustc_errors::Applicability::MaybeIncorrect,
+                                crate::rustc_errors::Applicability::MaybeIncorrect,
                             );
                         }
 
@@ -2053,7 +2053,7 @@ impl<'a, 'tcx> BoundVarContext<'a, 'tcx> {
                 match bound_predicate.skip_binder() {
                     ty::ClauseKind::Trait(data) => {
                         // The order here needs to match what we would get from
-                        // `rustc_middle::ty::predicate::Clause::instantiate_supertrait`
+                        // `crate::rustc_middle::ty::predicate::Clause::instantiate_supertrait`
                         let pred_bound_vars = bound_predicate.bound_vars();
                         let mut all_bound_vars = bound_vars.clone();
                         all_bound_vars.extend(pred_bound_vars.iter());

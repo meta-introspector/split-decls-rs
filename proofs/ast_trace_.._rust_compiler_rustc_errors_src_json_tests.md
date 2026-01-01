@@ -8,8 +8,8 @@ Generated 13 AST blocks from source file
 ```rust
 use std::str;
 
-use rustc_span::BytePos;
-use rustc_span::source_map::FilePathMapping;
+use crate::rustc_complete::BytePos;
+use crate::rustc_complete::source_map::FilePathMapping;
 use serde::Deserialize;
 
 use super::*;
@@ -66,7 +66,7 @@ impl<T: Write> Write for Shared<T> {
 ```rust
 /// Test the span yields correct positions in JSON.
 fn test_positions(code: &str, span: (u32, u32), expected_output: SpanTestData) {
-    rustc_span::create_default_session_globals_then(|| {
+    crate::rustc_span::create_default_session_globals_then(|| {
         let sm = Arc::new(SourceMap::new(FilePathMapping::empty()));
         sm.new_source_file(Path::new("test.rs").to_owned().into(), code.to_owned());
         let translator =

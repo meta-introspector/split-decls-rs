@@ -8,8 +8,8 @@ Generated 12 AST blocks from source file
 ```rust
 use std::borrow::Cow;
 
-use rustc_abi::Align;
-use rustc_hir::attrs::{InlineAttr, InstructionSetAttr, Linkage, OptimizeAttr};
+use crate::rustc_abi::Align;
+use crate::rustc_complete::attrs::{InlineAttr, InstructionSetAttr, Linkage, OptimizeAttr};
 ```
 
 ## Block 2
@@ -23,8 +23,8 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_span::Symbol;
-use rustc_target::spec::SanitizerSet;
+use crate::rustc_complete::Symbol;
+use crate::rustc_target::spec::SanitizerSet;
 
 use crate::ty::{InstanceKind, TyCtxt};
 ```
@@ -54,7 +54,7 @@ impl<'tcx> TyCtxt<'tcx> {
 ```
 
 ## Block 5
-**Metadata**: AST_ID=5 | TYPE=STRUCT | NAME=CodegenFnAttrs | COMPLEXITY=14 | LINES=44
+**Metadata**: AST_ID=5 | TYPE=STRUCT | NAME=CodegenFnAttrs | COMPLEXITY=15 | LINES=44
 
 ```rust
 #[derive(Clone, TyEncodable, TyDecodable, HashStable, Debug)]
@@ -65,7 +65,7 @@ pub struct CodegenFnAttrs {
     /// Parsed representation of the `#[optimize]` attribute
     pub optimize: OptimizeAttr,
     /// The name this function will be imported/exported under. This can be set
-    /// using the `#[export_name = "..."]` or `#[link_name = "..."]` attribute
+    /// using the `#[unsafe(export_name = "..."]` or `#[link_name = "..."]` attribute
     /// depending on if this is a function definition or foreign function.
     pub symbol_name: Option<Symbol>,
     /// The `#[link_ordinal = "..."]` attribute, indicating an ordinal an
@@ -83,7 +83,7 @@ pub struct CodegenFnAttrs {
     pub linkage: Option<Linkage>,
     /// The `#[linkage = "..."]` attribute on foreign items and the value we found.
     pub import_linkage: Option<Linkage>,
-    /// The `#[link_section = "..."]` attribute, or what executable section this
+    /// The `#[unsafe(link_section = "..."]` attribute, or what executable section this
     /// should be placed in.
     pub link_section: Option<Symbol>,
     /// The `#[sanitize(xyz = "off")]` attribute. Indicates sanitizers for which
@@ -149,7 +149,7 @@ pub struct PatchableFunctionEntry {
 
 ```rust
 impl PatchableFunctionEntry {
-    pub fn from_config(config: rustc_session::config::PatchableFunctionEntry) -> Self {
+    pub fn from_config(config: crate::rustc_session::config::PatchableFunctionEntry) -> Self {
         Self { prefix: config.prefix(), entry: config.entry() }
     }
     pub fn from_prefix_and_entry(prefix: u8, entry: u8) -> Self {
@@ -180,7 +180,7 @@ bitflags::bitflags! {
         /// `#[naked]`: an indicator to LLVM that no function prologue/epilogue
         /// should be generated.
         const NAKED                     = 1 << 2;
-        /// `#[no_mangle]`: an indicator that the function's name should be the same
+        /// `#[unsafe(no_mangle)]`: an indicator that the function's name should be the same
         /// as its symbol.
         const NO_MANGLE                 = 1 << 3;
         /// `#[rustc_std_internal_symbol]`: an indicator that this symbol is a
@@ -225,7 +225,7 @@ bitflags::bitflags! {
 **Metadata**: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-rustc_data_structures::external_bitflags_debug! { CodegenFnAttrFlags }
+crate::rustc_data_structures::external_bitflags_debug! { CodegenFnAttrFlags }
 ```
 
 ## Block 12
@@ -256,8 +256,8 @@ impl CodegenFnAttrs {
 
     /// Returns `true` if it looks like this symbol needs to be exported, for example:
     ///
-    /// * `#[no_mangle]` is present
-    /// * `#[export_name(...)]` is present
+    /// * `#[unsafe(no_mangle)]` is present
+    /// * `#[unsafe(export_name(...)]` is present
     /// * `#[linkage]` is present
     ///
     /// Keep this in sync with the logic for the unused_attributes for `#[inline]` lint.

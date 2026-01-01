@@ -22,7 +22,7 @@ use gccjit::{
 
 ```rust
 use rustc_abi as abi;
-use rustc_abi::{Align, HasDataLayout, Size, TargetDataLayout, WrappingRange};
+use crate::rustc_abi::{Align, HasDataLayout, Size, TargetDataLayout, WrappingRange};
 ```
 
 ## Block 3
@@ -36,8 +36,8 @@ use rustc_apfloat::{Float, Round, Status, ieee};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_codegen_ssa::MemFlags;
-use rustc_codegen_ssa::common::{
+use crate::rustc_codegen_ssa::MemFlags;
+use crate::rustc_codegen_ssa::common::{
     AtomicRmwBinOp, IntPredicate, RealPredicate, SynchronizationScope, TypeKind,
 };
 ```
@@ -46,15 +46,15 @@ use rustc_codegen_ssa::common::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::mir::operand::{OperandRef, OperandValue};
+use crate::rustc_codegen_ssa::mir::operand::{OperandRef, OperandValue};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_codegen_ssa::mir::place::PlaceRef;
-use rustc_codegen_ssa::traits::{
+use crate::rustc_codegen_ssa::mir::place::PlaceRef;
+use crate::rustc_codegen_ssa::traits::{
     BackendTypes, BaseTypeCodegenMethods, BuilderMethods, ConstCodegenMethods,
     LayoutTypeCodegenMethods, OverflowOp, StaticBuilderMethods,
 };
@@ -64,10 +64,10 @@ use rustc_codegen_ssa::traits::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_middle::bug;
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrs;
-use rustc_middle::ty::layout::{
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
+use crate::rustc_complete::ty::layout::{
     FnAbiError, FnAbiOfHelpers, FnAbiRequest, HasTyCtxt, HasTypingEnv, LayoutError, LayoutOfHelpers,
 };
 ```
@@ -76,17 +76,17 @@ use rustc_middle::ty::layout::{
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, AtomicOrdering, Instance, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, AtomicOrdering, Instance, Ty, TyCtxt};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_span::Span;
-use rustc_span::def_id::DefId;
-use rustc_target::callconv::FnAbi;
-use rustc_target::spec::{HasTargetSpec, HasX86AbiOpt, Target, X86Abi};
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_target::callconv::FnAbi;
+use crate::rustc_target::spec::{HasTargetSpec, HasX86AbiOpt, Target, X86Abi};
 ```
 
 ## Block 10
@@ -828,7 +828,7 @@ impl<'a, 'gcc, 'tcx> BuilderMethods<'a, 'tcx> for Builder<'a, 'gcc, 'tcx> {
 
     fn exactsdiv(&mut self, a: RValue<'gcc>, b: RValue<'gcc>) -> RValue<'gcc> {
         // TODO(antoyo): poison if not exact.
-        // FIXME(antoyo): rustc_codegen_ssa::mir::intrinsic uses different types for a and b but they
+        // FIXME(antoyo): crate::rustc_codegen_ssa::mir::intrinsic uses different types for a and b but they
         // should be the same.
         let typ = a.get_type().to_signed(self);
         let b = self.gcc_int_cast(b, typ);

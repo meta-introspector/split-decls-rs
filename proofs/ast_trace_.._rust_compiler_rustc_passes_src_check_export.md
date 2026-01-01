@@ -9,8 +9,8 @@ Generated 18 AST blocks from source file
 use std::iter;
 use std::ops::ControlFlow;
 
-use rustc_abi::ExternAbi;
-use rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 ```
 
 ## Block 2
@@ -18,39 +18,39 @@ use rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::find_attr;
-use rustc_hir::intravisit::{self, Visitor};
+use crate::rustc_complete::find_attr;
+use crate::rustc_complete::intravisit::{self, Visitor};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::hir::nested_filter;
-use rustc_middle::middle::privacy::{EffectiveVisibility, Level};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::middle::privacy::{EffectiveVisibility, Level};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::query::{LocalCrate, Providers};
+use crate::rustc_complete::query::{LocalCrate, Providers};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitor, Visibility,
 };
 ```
@@ -59,8 +59,8 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=7 | TYPE=STRUCT | NAME=ExportableItemCollector | COMPLEXITY=2 | LINES=11
 
 ```rust
-use rustc_session::config::CrateType;
-use rustc_span::Span;
+use crate::rustc_complete::config::CrateType;
+use crate::rustc_complete::Span;
 
 use crate::errors::UnexportableItem;
 

@@ -6,19 +6,19 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! Miscellaneous builder routines that are not specific to building any particular
-//! kind of thing.
+// Miscellaneous builder routines that are not specific to building any particular
+// kind of thing.
 
-use rustc_middle::mir::*;
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=25 | LINES=65
 
 ```rust
-use rustc_span::Span;
-use rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_complete::Span;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::debug;
 
 use crate::builder::Builder;

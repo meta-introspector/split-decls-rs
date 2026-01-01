@@ -8,8 +8,8 @@ Generated 8 AST blocks from source file
 ```rust
 use std::time::Instant;
 
-use rustc_data_structures::fx::FxHashSet;
-use rustc_data_structures::sync::Lock;
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_data_structures::sync::Lock;
 
 use crate::DiagCtxtHandle;
 

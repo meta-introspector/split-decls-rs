@@ -6,30 +6,30 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7
 
 ```rust
-//! A pass that checks to make sure private fields and methods aren't used
-//! outside their scopes. This pass will also generate a set of exported items
-//! which are available for use externally when compiled as a library.
+// A pass that checks to make sure private fields and methods aren't used
+// outside their scopes. This pass will also generate a set of exported items
+// which are available for use externally when compiled as a library.
 
 use std::hash::Hash;
 
-use rustc_data_structures::fx::{FxIndexMap, IndexEntry};
+use crate::rustc_data_structures::fx::{FxIndexMap, IndexEntry};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir::def::DefKind;
+use crate::rustc_complete::def::DefKind;
 use rustc_macros::HashStable;
 use rustc_query_system::ich::StableHashingContext;
-use rustc_span::def_id::{CRATE_DEF_ID, LocalDefId};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, LocalDefId};
 ```
 
 ## Block 4

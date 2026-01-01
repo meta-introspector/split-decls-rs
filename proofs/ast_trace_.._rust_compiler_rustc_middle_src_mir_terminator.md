@@ -6,13 +6,13 @@ Generated 21 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=8
 
 ```rust
-//! Functionality for terminators and helper types that appear in terminators.
+// Functionality for terminators and helper types that appear in terminators.
 
 use std::slice;
 
-use rustc_ast::InlineAsmOptions;
-use rustc_data_structures::packed::Pu128;
-use rustc_hir::LangItem;
+use crate::rustc_complete::InlineAsmOptions;
+use crate::rustc_data_structures::packed::Pu128;
+use crate::rustc_complete::LangItem;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
 ```
 

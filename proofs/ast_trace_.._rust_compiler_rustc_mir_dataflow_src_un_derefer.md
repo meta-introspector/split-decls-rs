@@ -6,8 +6,8 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=8
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_middle::mir::*;
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::mir::*;
 
 /// Used for reverting changes made by `DerefSeparator`
 #[derive(Default, Debug)]

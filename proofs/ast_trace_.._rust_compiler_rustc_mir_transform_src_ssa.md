@@ -6,28 +6,28 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=11
 
 ```rust
-//! We denote as "SSA" the set of locals that verify the following properties:
-//! 1/ They are only assigned-to once, either as a function parameter, or in an assign statement;
-//! 2/ This single assignment dominates all uses;
-//!
-//! As we do not track indirect assignments, a local that has its address taken (via a borrow or raw
-//! borrow operator) is considered non-SSA. However, it is UB to modify through an immutable borrow
-//! of a `Freeze` local. Those can still be considered to be SSA.
+// We denote as "SSA" the set of locals that verify the following properties:
+// 1/ They are only assigned-to once, either as a function parameter, or in an assign statement;
+// 2/ This single assignment dominates all uses;
+//
+// As we do not track indirect assignments, a local that has its address taken (via a borrow or raw
+// borrow operator) is considered non-SSA. However, it is UB to modify through an immutable borrow
+// of a `Freeze` local. Those can still be considered to be SSA.
 
-use rustc_data_structures::graph::dominators::Dominators;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_index::{IndexSlice, IndexVec};
+use crate::rustc_data_structures::graph::dominators::Dominators;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_index::{IndexSlice, IndexVec};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::middle::resolve_bound_vars::Set1;
-use rustc_middle::mir::visit::*;
-use rustc_middle::mir::*;
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::resolve_bound_vars::Set1;
+use crate::rustc_complete::mir::visit::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 3

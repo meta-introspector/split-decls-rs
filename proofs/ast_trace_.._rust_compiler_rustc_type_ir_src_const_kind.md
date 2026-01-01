@@ -10,7 +10,7 @@ use std::fmt;
 
 use derive_where::derive_where;
 #[cfg(feature = "nightly")]
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 2
@@ -145,7 +145,7 @@ impl<I: Interner> UnevaluatedConst<I> {
 **Metadata**: AST_ID=11 | TYPE=STRUCT | NAME=ConstVid | COMPLEXITY=4 | LINES=9
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// A **`const`** **v**ariable **ID**.
     #[encodable]
     #[orderable]

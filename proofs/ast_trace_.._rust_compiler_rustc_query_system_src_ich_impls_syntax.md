@@ -6,36 +6,36 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=4
 
 ```rust
-//! This module contains `HashStable` implementations for various data types
-//! from various crates in no particular order.
+// This module contains `HashStable` implementations for various data types
+// from various crates in no particular order.
 
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, HashIgnoredAttrId};
+use crate::rustc_complete::{self as hir, HashIgnoredAttrId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-use rustc_span::SourceFile;
+use crate::rustc_complete::SourceFile;
 use smallvec::SmallVec;
 
 use crate::ich::StableHashingContext;
 
-impl<'ctx> rustc_abi::HashStableContext for StableHashingContext<'ctx> {}
+impl<'ctx> crate::rustc_abi::HashStableContext for StableHashingContext<'ctx> {}
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1
 
 ```rust
-impl<'ctx> rustc_ast::HashStableContext for StableHashingContext<'ctx> {}
+impl<'ctx> crate::rustc_ast::HashStableContext for StableHashingContext<'ctx> {}
 ```
 
 ## Block 5
@@ -71,7 +71,7 @@ impl<'a> HashStable<StableHashingContext<'a>> for [hir::Attribute] {
 **Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=hash_attr_id | COMPLEXITY=5 | LINES=6
 
 ```rust
-impl<'ctx> rustc_hir::HashStableContext for StableHashingContext<'ctx> {
+impl<'ctx> crate::rustc_hir::HashStableContext for StableHashingContext<'ctx> {
     fn hash_attr_id(&mut self, _id: &HashIgnoredAttrId, _hasher: &mut StableHasher) {
         /* we don't hash HashIgnoredAttrId, we ignore them */
     }
@@ -136,7 +136,7 @@ impl<'a> HashStable<StableHashingContext<'a>> for SourceFile {
 **Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=9
 
 ```rust
-impl<'tcx> HashStable<StableHashingContext<'tcx>> for rustc_feature::Features {
+impl<'tcx> HashStable<StableHashingContext<'tcx>> for crate::rustc_feature::Features {
     fn hash_stable(&self, hcx: &mut StableHashingContext<'tcx>, hasher: &mut StableHasher) {
         // Unfortunately we cannot exhaustively list fields here, since the
         // struct has private fields (to ensure its invariant is maintained)
@@ -150,9 +150,9 @@ impl<'tcx> HashStable<StableHashingContext<'tcx>> for rustc_feature::Features {
 **Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=6 | LINES=9
 
 ```rust
-impl<'tcx> HashStable<StableHashingContext<'tcx>> for rustc_feature::EnabledLangFeature {
+impl<'tcx> HashStable<StableHashingContext<'tcx>> for crate::rustc_feature::EnabledLangFeature {
     fn hash_stable(&self, hcx: &mut StableHashingContext<'tcx>, hasher: &mut StableHasher) {
-        let rustc_feature::EnabledLangFeature { gate_name, attr_sp, stable_since } = self;
+        let crate::rustc_feature::EnabledLangFeature { gate_name, attr_sp, stable_since } = self;
         gate_name.hash_stable(hcx, hasher);
         attr_sp.hash_stable(hcx, hasher);
         stable_since.hash_stable(hcx, hasher);
@@ -164,9 +164,9 @@ impl<'tcx> HashStable<StableHashingContext<'tcx>> for rustc_feature::EnabledLang
 **Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=6 | LINES=8
 
 ```rust
-impl<'tcx> HashStable<StableHashingContext<'tcx>> for rustc_feature::EnabledLibFeature {
+impl<'tcx> HashStable<StableHashingContext<'tcx>> for crate::rustc_feature::EnabledLibFeature {
     fn hash_stable(&self, hcx: &mut StableHashingContext<'tcx>, hasher: &mut StableHasher) {
-        let rustc_feature::EnabledLibFeature { gate_name, attr_sp } = self;
+        let crate::rustc_feature::EnabledLibFeature { gate_name, attr_sp } = self;
         gate_name.hash_stable(hcx, hasher);
         attr_sp.hash_stable(hcx, hasher);
     }

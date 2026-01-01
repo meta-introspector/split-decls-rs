@@ -6,9 +6,9 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=run_lint | COMPLEXITY=5 | LINES=11
 
 ```rust
-use rustc_middle::mir::Body;
-use rustc_middle::ty::TyCtxt;
-use rustc_mir_dataflow::rustc_peek::sanity_check;
+use crate::rustc_complete::mir::Body;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_mir_dataflow::rustc_peek::sanity_check;
 
 pub(super) struct SanityCheck;
 

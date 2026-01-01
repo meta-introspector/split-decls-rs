@@ -6,21 +6,21 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{ExprKind, ItemKind, MetaItem, PatKind};
+use crate::rustc_complete::{ExprKind, ItemKind, MetaItem, PatKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_expand::base::{Annotatable, ExtCtxt};
+use crate::rustc_expand::base::{Annotatable, ExtCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, Span, sym};
+use crate::rustc_complete::{Ident, Span, sym};
 ```
 
 ## Block 4

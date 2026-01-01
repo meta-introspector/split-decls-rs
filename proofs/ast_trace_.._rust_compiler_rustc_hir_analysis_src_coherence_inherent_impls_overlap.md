@@ -6,35 +6,35 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxIndexMap, FxIndexSet, IndexEntry};
+use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet, IndexEntry};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::struct_span_code_err;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::struct_span_code_err;
 use rustc_hir as hir;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::DefId;
-use rustc_index::IndexVec;
-use rustc_middle::traits::specialization_graph::OverlapMode;
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::traits::specialization_graph::OverlapMode;
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ErrorGuaranteed, Symbol};
+use crate::rustc_complete::{ErrorGuaranteed, Symbol};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_trait_selection::traits::{self, SkipLeakCheck};
+use crate::rustc_trait_selection::traits::{self, SkipLeakCheck};
 ```
 
 ## Block 5
@@ -70,7 +70,7 @@ struct InherentOverlapChecker<'tcx> {
 **Metadata**: AST_ID=7 | TYPE=STRUCT | NAME=RegionId | COMPLEXITY=3 | LINES=5
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     #[orderable]
     pub struct RegionId {}
 }

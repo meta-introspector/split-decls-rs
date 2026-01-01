@@ -14,17 +14,17 @@ use hir::def_id::{DefId, LocalDefId};
 
 ```rust
 use rustc_hir as hir;
-use rustc_middle::bug;
-use rustc_middle::traits::ObligationCause;
-use rustc_middle::traits::solve::Goal;
-use rustc_middle::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::traits::solve::Goal;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, BottomUpFolder, OpaqueHiddenType, OpaqueTypeKey, Ty, TyCtxt, TypeFoldable,
     TypeVisitableExt,
 };
@@ -34,7 +34,7 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
 ```
 

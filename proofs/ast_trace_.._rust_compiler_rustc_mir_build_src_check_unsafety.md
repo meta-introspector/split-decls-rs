@@ -10,53 +10,53 @@ use std::borrow::Cow;
 use std::mem;
 use std::ops::Bound;
 
-use rustc_ast::AsmMacro;
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::DiagArgValue;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::DefKind;
-use rustc_hir::{self as hir, BindingMode, ByRef, HirId, Mutability, find_attr};
+use crate::rustc_complete::AsmMacro;
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_complete::DiagArgValue;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::{self as hir, BindingMode, ByRef, HirId, Mutability, find_attr};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::middle::codegen_fn_attrs::{TargetFeature, TargetFeatureKind};
+use crate::rustc_complete::middle::codegen_fn_attrs::{TargetFeature, TargetFeatureKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_middle::mir::BorrowKind;
-use rustc_middle::span_bug;
-use rustc_middle::thir::visit::Visitor;
-use rustc_middle::thir::*;
-use rustc_middle::ty::print::with_no_trimmed_paths;
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::mir::BorrowKind;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::thir::visit::Visitor;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::lint::Level;
-use rustc_session::lint::builtin::{DEPRECATED_SAFE_2024, UNSAFE_OP_IN_UNSAFE_FN, UNUSED_UNSAFE};
+use crate::rustc_complete::lint::Level;
+use crate::rustc_complete::lint::builtin::{DEPRECATED_SAFE_2024, UNSAFE_OP_IN_UNSAFE_FN, UNUSED_UNSAFE};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 7
@@ -655,7 +655,7 @@ impl<'a, 'tcx> Visitor<'a, 'tcx> for UnsafetyVisitor<'a, 'tcx> {
                 // For inline asm, do not use `walk_expr`, since we want to handle the label block
                 // specially.
                 for op in &**operands {
-                    use rustc_middle::thir::InlineAsmOperand::*;
+                    use crate::rustc_complete::thir::InlineAsmOperand::*;
                     match op {
                         In { expr, reg: _ }
                         | Out { expr: Some(expr), reg: _, late: _ }

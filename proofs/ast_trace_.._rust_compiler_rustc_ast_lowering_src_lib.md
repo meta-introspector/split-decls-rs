@@ -6,50 +6,50 @@ Generated 36 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=16 | LINES=44
 
 ```rust
-//! Lowers the AST to the HIR.
-//!
-//! Since the AST and HIR are fairly similar, this is mostly a simple procedure,
-//! much like a fold. Where lowering involves a bit more work things get more
-//! interesting and there are some invariants you should know about. These mostly
-//! concern spans and IDs.
-//!
-//! Spans are assigned to AST nodes during parsing and then are modified during
-//! expansion to indicate the origin of a node and the process it went through
-//! being expanded. IDs are assigned to AST nodes just before lowering.
-//!
-//! For the simpler lowering steps, IDs and spans should be preserved. Unlike
-//! expansion we do not preserve the process of lowering in the spans, so spans
-//! should not be modified here. When creating a new node (as opposed to
-//! "folding" an existing one), create a new ID using `next_id()`.
-//!
-//! You must ensure that IDs are unique. That means that you should only use the
-//! ID from an AST node in a single HIR node (you can assume that AST node-IDs
-//! are unique). Every new node must have a unique ID. Avoid cloning HIR nodes.
-//! If you do, you must then set the new node's ID to a fresh one.
-//!
-//! Spans are used for error messages and for tools to map semantics back to
-//! source code. It is therefore not as important with spans as IDs to be strict
-//! about use (you can't break the compiler by screwing up a span). Obviously, a
-//! HIR node can only have a single span. But multiple nodes can have the same
-//! span and spans don't need to be kept in order, etc. Where code is preserved
-//! by lowering, it should have the same span as in the AST. Where HIR nodes are
-//! new it is probably best to give a span for the whole AST node being lowered.
-//! All nodes should have real spans; don't use dummy spans. Tools are likely to
-//! get confused if the spans from leaf AST nodes occur in multiple places
-//! in the HIR, especially for multiple identifiers.
+// Lowers the AST to the HIR.
+//
+// Since the AST and HIR are fairly similar, this is mostly a simple procedure,
+// much like a fold. Where lowering involves a bit more work things get more
+// interesting and there are some invariants you should know about. These mostly
+// concern spans and IDs.
+//
+// Spans are assigned to AST nodes during parsing and then are modified during
+// expansion to indicate the origin of a node and the process it went through
+// being expanded. IDs are assigned to AST nodes just before lowering.
+//
+// For the simpler lowering steps, IDs and spans should be preserved. Unlike
+// expansion we do not preserve the process of lowering in the spans, so spans
+// should not be modified here. When creating a new node (as opposed to
+// "folding" an existing one), create a new ID using `next_id()`.
+//
+// You must ensure that IDs are unique. That means that you should only use the
+// ID from an AST node in a single HIR node (you can assume that AST node-IDs
+// are unique). Every new node must have a unique ID. Avoid cloning HIR nodes.
+// If you do, you must then set the new node's ID to a fresh one.
+//
+// Spans are used for error messages and for tools to map semantics back to
+// source code. It is therefore not as important with spans as IDs to be strict
+// about use (you can't break the compiler by screwing up a span). Obviously, a
+// HIR node can only have a single span. But multiple nodes can have the same
+// span and spans don't need to be kept in order, etc. Where code is preserved
+// by lowering, it should have the same span as in the AST. Where HIR nodes are
+// new it is probably best to give a span for the whole AST node being lowered.
+// All nodes should have real spans; don't use dummy spans. Tools are likely to
+// get confused if the spans from leaf AST nodes occur in multiple places
+// in the HIR, especially for multiple identifiers.
 
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![doc(rust_logo)]
-#![feature(box_patterns)]
-#![feature(if_let_guard)]
-#![feature(rustdoc_internals)]
+#[allow(internal_features)]
+#[doc(rust_logo)]
+#[feature(box_patterns)]
+#[feature(if_let_guard)]
+#[feature(rustdoc_internals)]
 // tidy-alphabetical-end
 
 use std::sync::Arc;
 
-use rustc_ast::node_id::NodeMap;
-use rustc_ast::{self as ast, *};
+use crate::rustc_complete::node_id::NodeMap;
+use crate::rustc_complete::{self as ast, *};
 ```
 
 ## Block 2
@@ -63,40 +63,40 @@ use rustc_attr_parsing::{AttributeParser, Late, OmitDoc};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::fingerprint::Fingerprint;
-use rustc_data_structures::sorted_map::SortedMap;
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::fingerprint::Fingerprint;
+use crate::rustc_data_structures::sorted_map::SortedMap;
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::sync::spawn;
-use rustc_data_structures::tagged_ptr::TaggedRef;
-use rustc_errors::{DiagArgFromDisplay, DiagCtxtHandle};
+use crate::rustc_data_structures::sync::spawn;
+use crate::rustc_data_structures::tagged_ptr::TaggedRef;
+use crate::rustc_complete::{DiagArgFromDisplay, DiagCtxtHandle};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def::{DefKind, LifetimeRes, Namespace, PartialRes, PerNS, Res};
+use crate::rustc_complete::def::{DefKind, LifetimeRes, Namespace, PartialRes, PerNS, Res};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{CRATE_DEF_ID, LOCAL_CRATE, LocalDefId};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, LOCAL_CRATE, LocalDefId};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_hir::lints::DelayedLint;
-use rustc_hir::{
+use crate::rustc_complete::lints::DelayedLint;
+use crate::rustc_complete::{
     self as hir, AngleBrackets, ConstArg, GenericArg, HirId, ItemLocalMap, LifetimeSource,
     LifetimeSyntax, ParamName, Target, TraitCandidate,
 };
@@ -106,7 +106,7 @@ use rustc_hir::{
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_index::{Idx, IndexSlice, IndexVec};
+use crate::rustc_index::{Idx, IndexSlice, IndexVec};
 ```
 
 ## Block 9
@@ -114,23 +114,23 @@ use rustc_index::{Idx, IndexSlice, IndexVec};
 
 ```rust
 use rustc_macros::extension;
-use rustc_middle::span_bug;
-use rustc_middle::ty::{ResolverAstLowering, TyCtxt};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{ResolverAstLowering, TyCtxt};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::parse::add_feature_diagnostics;
-use rustc_span::symbol::{Ident, Symbol, kw, sym};
+use crate::rustc_complete::parse::add_feature_diagnostics;
+use crate::rustc_complete::symbol::{Ident, Symbol, kw, sym};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, DesugaringKind, Span};
+use crate::rustc_complete::{DUMMY_SP, DesugaringKind, Span};
 ```
 
 ## Block 12
@@ -860,7 +860,7 @@ impl<'a, 'hir> LoweringContext<'a, 'hir> {
         let bodies = SortedMap::from_presorted_elements(bodies);
 
         // Don't hash unless necessary, because it's expensive.
-        let rustc_middle::hir::Hashes { opt_hash_including_bodies, attrs_hash, delayed_lints_hash } =
+        let crate::rustc_middle::hir::Hashes { opt_hash_including_bodies, attrs_hash, delayed_lints_hash } =
             self.tcx.hash_owner_nodes(node, &bodies, &attrs, &delayed_lints, define_opaque);
         let num_nodes = self.item_local_id_counter.as_usize();
         let (nodes, parenting) = index::index_hir(self.tcx, node, &bodies, num_nodes);

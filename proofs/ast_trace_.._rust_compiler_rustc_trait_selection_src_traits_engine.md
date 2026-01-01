@@ -9,17 +9,17 @@ Generated 15 AST blocks from source file
 use std::cell::RefCell;
 use std::fmt::Debug;
 
-use rustc_data_structures::fx::FxIndexSet;
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_infer::infer::at::ToTrace;
-use rustc_infer::infer::canonical::{
+use crate::rustc_infer::infer::at::ToTrace;
+use crate::rustc_infer::infer::canonical::{
     Canonical, CanonicalQueryResponse, CanonicalVarValues, QueryResponse,
 };
 ```
@@ -28,20 +28,20 @@ use rustc_infer::infer::canonical::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::{DefineOpaqueTypes, InferCtxt, InferOk, RegionResolutionError, TypeTrace};
+use crate::rustc_infer::infer::{DefineOpaqueTypes, InferCtxt, InferOk, RegionResolutionError, TypeTrace};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_infer::traits::PredicateObligations;
+use crate::rustc_infer::traits::PredicateObligations;
 use rustc_macros::extension;
-use rustc_middle::arena::ArenaAllocatable;
-use rustc_middle::traits::query::NoSolution;
-use rustc_middle::ty::error::TypeError;
-use rustc_middle::ty::relate::Relate;
-use rustc_middle::ty::{self, Ty, TyCtxt, TypeFoldable, Upcast, Variance};
+use crate::rustc_complete::arena::ArenaAllocatable;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::error::TypeError;
+use crate::rustc_complete::ty::relate::Relate;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeFoldable, Upcast, Variance};
 ```
 
 ## Block 5

@@ -16,16 +16,16 @@ use std::{iter, mem, slice};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_ast::mut_visit::*;
-use rustc_ast::tokenstream::TokenStream;
-use rustc_ast::visit::{self, AssocCtxt, Visitor, VisitorResult, try_visit, walk_list};
+use crate::rustc_complete::mut_visit::*;
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::visit::{self, AssocCtxt, Visitor, VisitorResult, try_visit, walk_list};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_ast::{
+use crate::rustc_complete::{
     self as ast, AssocItemKind, AstNodeWrapper, AttrArgs, AttrStyle, AttrVec, DUMMY_NODE_ID,
     ExprKind, ForeignItemKind, HasAttrs, HasNodeId, Inline, ItemKind, MacStmtStyle, MetaItemInner,
     MetaItemKind, ModKind, NodeId, PatKind, StmtKind, TyKind, token,
@@ -44,14 +44,14 @@ use rustc_attr_parsing::{AttributeParser, Early, EvalConfigResult, ShouldEmit, v
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11
 
 ```rust
-use rustc_data_structures::flat_map_in_place::FlatMapInPlace;
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::PResult;
-use rustc_feature::Features;
-use rustc_hir::Target;
-use rustc_hir::def::MacroKinds;
-use rustc_hir::limit::Limit;
-use rustc_parse::parser::{
+use crate::rustc_data_structures::flat_map_in_place::FlatMapInPlace;
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_complete::PResult;
+use crate::rustc_feature::Features;
+use crate::rustc_complete::Target;
+use crate::rustc_complete::def::MacroKinds;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_parse::parser::{
     AttemptLocalParseRecovery, CommaRecoveryMode, ForceCollect, Parser, RecoverColon, RecoverComma,
     token_descr,
 };
@@ -61,18 +61,18 @@ use rustc_parse::parser::{
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::Session;
-use rustc_session::lint::BuiltinLintDiag;
-use rustc_session::lint::builtin::{UNUSED_ATTRIBUTES, UNUSED_DOC_COMMENTS};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::{UNUSED_ATTRIBUTES, UNUSED_DOC_COMMENTS};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::parse::feature_err;
-use rustc_span::hygiene::SyntaxContext;
-use rustc_span::{ErrorGuaranteed, FileName, Ident, LocalExpnId, Span, Symbol, sym};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::hygiene::SyntaxContext;
+use crate::rustc_complete::{ErrorGuaranteed, FileName, Ident, LocalExpnId, Span, Symbol, sym};
 ```
 
 ## Block 8
@@ -912,7 +912,7 @@ impl<'a, 'b> MacroExpander<'a, 'b> {
                         // Fake tokens when we are invoking an inner attribute, and
                         // we are invoking it on an out-of-line module or crate.
                         Annotatable::Crate(krate) => {
-                            rustc_parse::fake_token_stream_for_crate(&self.cx.sess.psess, krate)
+                            crate::rustc_parse::fake_token_stream_for_crate(&self.cx.sess.psess, krate)
                         }
                         Annotatable::Item(item_inner)
                             if matches!(attr.style, AttrStyle::Inner)
@@ -926,7 +926,7 @@ impl<'a, 'b> MacroExpander<'a, 'b> {
                                     )
                                 ) =>
                         {
-                            rustc_parse::fake_token_stream_for_item(&self.cx.sess.psess, item_inner)
+                            crate::rustc_parse::fake_token_stream_for_item(&self.cx.sess.psess, item_inner)
                         }
                         _ => item.to_tokens(),
                     };
@@ -3055,7 +3055,7 @@ fn collect_glob_delegation(
                     cfg_pos = Some(pos); // a cfg attr found, no need to search anymore
                     break;
                 } else if attr_pos.is_none()
-                    && !name.is_some_and(rustc_feature::is_builtin_attr_name)
+                    && !name.is_some_and(crate::rustc_feature::is_builtin_attr_name)
                 {
                     attr_pos = Some(pos); // a non-cfg attr found, still may find a cfg attr
                 }

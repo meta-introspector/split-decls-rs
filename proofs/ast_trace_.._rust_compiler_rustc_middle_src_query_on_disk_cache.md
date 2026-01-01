@@ -10,38 +10,38 @@ use std::collections::hash_map::Entry;
 use std::mem;
 use std::sync::Arc;
 
-use rustc_data_structures::fx::{FxHashMap, FxIndexMap, FxIndexSet};
+use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap, FxIndexSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::memmap::Mmap;
-use rustc_data_structures::sync::{HashMapExt, Lock, RwLock};
+use crate::rustc_data_structures::memmap::Mmap;
+use crate::rustc_data_structures::sync::{HashMapExt, Lock, RwLock};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::unhash::UnhashMap;
-use rustc_data_structures::unord::{UnordMap, UnordSet};
+use crate::rustc_data_structures::unhash::UnhashMap;
+use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{CrateNum, DefId, DefIndex, LOCAL_CRATE, LocalDefId, StableCrateId};
+use crate::rustc_complete::def_id::{CrateNum, DefId, DefIndex, LOCAL_CRATE, LocalDefId, StableCrateId};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::definitions::DefPathHash;
-use rustc_index::{Idx, IndexVec};
+use crate::rustc_complete::definitions::DefPathHash;
+use crate::rustc_index::{Idx, IndexVec};
 ```
 
 ## Block 6
@@ -56,22 +56,22 @@ use rustc_macros::{Decodable, Encodable};
 
 ```rust
 use rustc_query_system::query::QuerySideEffect;
-use rustc_serialize::opaque::{FileEncodeResult, FileEncoder, IntEncodedWithFixedSize, MemDecoder};
+use crate::rustc_serialize::opaque::{FileEncodeResult, FileEncoder, IntEncodedWithFixedSize, MemDecoder};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
+use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_session::Session;
-use rustc_span::hygiene::{
+use crate::rustc_complete::Session;
+use crate::rustc_complete::hygiene::{
     ExpnId, HygieneDecodeContext, HygieneEncodeContext, SyntaxContext, SyntaxContextKey,
 };
 ```
@@ -80,8 +80,8 @@ use rustc_span::hygiene::{
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_span::source_map::Spanned;
-use rustc_span::{
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{
     BytePos, ByteSymbol, CachingSourceMapView, ExpnData, ExpnHash, Pos, RelativeBytePos,
     SourceFile, Span, SpanDecoder, SpanEncoder, StableSourceFileId, Symbol,
 };
@@ -736,7 +736,7 @@ impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>> for Vec<u8> {
 impl<'a, 'tcx> SpanDecoder for CacheDecoder<'a, 'tcx> {
     fn decode_syntax_context(&mut self) -> SyntaxContext {
         let syntax_contexts = self.syntax_contexts;
-        rustc_span::hygiene::decode_syntax_context(self, self.hygiene_context, |this, id| {
+        crate::rustc_span::hygiene::decode_syntax_context(self, self.hygiene_context, |this, id| {
             // This closure is invoked if we haven't already decoded the data for the `SyntaxContext` we are deserializing.
             // We look up the position of the associated `SyntaxData` and decode it.
             let pos = syntax_contexts.get(&id).unwrap();
@@ -768,11 +768,11 @@ impl<'a, 'tcx> SpanDecoder for CacheDecoder<'a, 'tcx> {
 
             let data: ExpnData =
                 self.with_position(pos.to_usize(), |decoder| decode_tagged(decoder, TAG_EXPN_DATA));
-            let expn_id = rustc_span::hygiene::register_local_expn_id(data, hash);
+            let expn_id = crate::rustc_span::hygiene::register_local_expn_id(data, hash);
 
             #[cfg(debug_assertions)]
             {
-                use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+                use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
                 let local_hash = self.tcx.with_stable_hashing_context(|mut hcx| {
                     let mut hasher = StableHasher::new();
                     expn_id.expn_data().hash_stable(&mut hcx, &mut hasher);
@@ -871,7 +871,7 @@ impl<'a, 'tcx> SpanDecoder for CacheDecoder<'a, 'tcx> {
         }
     }
 
-    fn decode_attr_id(&mut self) -> rustc_span::AttrId {
+    fn decode_attr_id(&mut self) -> crate::rustc_span::AttrId {
         panic!("cannot decode `AttrId` with `CacheDecoder`");
     }
 }
@@ -933,7 +933,7 @@ impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>> for &'tcx [(ty::Clause<'tcx>, S
 **Metadata**: AST_ID=32 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=5 | LINES=7
 
 ```rust
-impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>> for &'tcx [rustc_ast::InlineAsmTemplatePiece] {
+impl<'a, 'tcx> Decodable<CacheDecoder<'a, 'tcx>> for &'tcx [crate::rustc_ast::InlineAsmTemplatePiece] {
     #[inline]
     fn decode(d: &mut CacheDecoder<'a, 'tcx>) -> Self {
         RefDecodable::decode(d)
@@ -989,12 +989,12 @@ macro_rules! impl_ref_decoder {
 ```rust
 impl_ref_decoder! {<'tcx>
     Span,
-    rustc_hir::Attribute,
-    rustc_span::Ident,
+    crate::rustc_hir::Attribute,
+    crate::rustc_span::Ident,
     ty::Variance,
-    rustc_span::def_id::DefId,
-    rustc_span::def_id::LocalDefId,
-    (rustc_middle::middle::exported_symbols::ExportedSymbol<'tcx>, rustc_middle::middle::exported_symbols::SymbolExportInfo),
+    crate::rustc_span::def_id::DefId,
+    crate::rustc_span::def_id::LocalDefId,
+    (crate::rustc_middle::middle::exported_symbols::ExportedSymbol<'tcx>, crate::rustc_middle::middle::exported_symbols::SymbolExportInfo),
     ty::DeducedParamAttrs,
 }
 ```
@@ -1086,7 +1086,7 @@ impl<'a, 'tcx> CacheEncoder<'a, 'tcx> {
 ```rust
 impl<'a, 'tcx> SpanEncoder for CacheEncoder<'a, 'tcx> {
     fn encode_syntax_context(&mut self, syntax_context: SyntaxContext) {
-        rustc_span::hygiene::raw_encode_syntax_context(syntax_context, self.hygiene_context, self);
+        crate::rustc_span::hygiene::raw_encode_syntax_context(syntax_context, self.hygiene_context, self);
     }
 
     fn encode_expn_id(&mut self, expn_id: ExpnId) {

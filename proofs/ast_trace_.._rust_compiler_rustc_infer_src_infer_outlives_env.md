@@ -6,15 +6,15 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxHashSet, FxIndexSet};
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::transitive_relation::TransitiveRelationBuilder;
-use rustc_middle::{bug, ty};
+use crate::rustc_data_structures::transitive_relation::TransitiveRelationBuilder;
+use crate::rustc_complete::{bug, ty};
 ```
 
 ## Block 3

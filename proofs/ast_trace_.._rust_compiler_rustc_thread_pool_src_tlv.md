@@ -6,8 +6,8 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-//! Allows access to the Rayon's thread local value
-//! which is preserved when moving jobs across threads
+// Allows access to the Rayon's thread local value
+// which is preserved when moving jobs across threads
 
 use std::cell::Cell;
 use std::ptr;

@@ -6,7 +6,7 @@ Generated 33 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5
 
 ```rust
-//! Inlining pass for MIR functions.
+// Inlining pass for MIR functions.
 
 use std::assert_matches::debug_assert_matches;
 use std::iter;
@@ -17,43 +17,43 @@ use std::ops::{Range, RangeFrom};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::{ExternAbi, FieldIdx};
+use crate::rustc_abi::{ExternAbi, FieldIdx};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::attrs::{InlineAttr, OptimizeAttr};
+use crate::rustc_complete::attrs::{InlineAttr, OptimizeAttr};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::DefId;
-use rustc_index::Idx;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::bug;
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrs;
-use rustc_middle::mir::visit::*;
-use rustc_middle::mir::*;
-use rustc_middle::ty::{self, Instance, InstanceKind, Ty, TyCtxt, TypeFlags, TypeVisitableExt};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_index::Idx;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
+use crate::rustc_complete::mir::visit::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Instance, InstanceKind, Ty, TyCtxt, TypeFlags, TypeVisitableExt};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::config::{DebugInfo, OptLevel};
+use crate::rustc_complete::config::{DebugInfo, OptLevel};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::source_map::Spanned;
+use crate::rustc_complete::source_map::Spanned;
 use tracing::{debug, instrument, trace, trace_span};
 ```
 
@@ -101,7 +101,7 @@ struct CallSite<'tcx> {
 pub struct Inline;
 
 impl<'tcx> crate::MirPass<'tcx> for Inline {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         if let Some(enabled) = sess.opts.unstable_opts.inline_mir {
             return enabled;
         }
@@ -150,7 +150,7 @@ impl ForceInline {
 
 ```rust
 impl<'tcx> crate::MirPass<'tcx> for ForceInline {
-    fn is_enabled(&self, _: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, _: &crate::rustc_session::Session) -> bool {
         true
     }
 
@@ -896,7 +896,7 @@ fn check_mir_is_available<'tcx, I: Inliner<'tcx>>(
     if let Some(callee_def_id) = callee_def_id.as_local()
         && !inliner
             .tcx()
-            .is_lang_item(inliner.tcx().parent(caller_def_id), rustc_hir::LangItem::FnOnce)
+            .is_lang_item(inliner.tcx().parent(caller_def_id), crate::rustc_hir::LangItem::FnOnce)
     {
         // If we know for sure that the function we're calling will itself try to
         // call us, then we avoid inlining that function.

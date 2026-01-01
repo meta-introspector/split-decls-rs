@@ -7,10 +7,10 @@ Generated 37 AST blocks from source file
 
 ```rust
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![doc(rust_logo)]
-#![feature(rustc_attrs)]
-#![feature(rustdoc_internals)]
+#[allow(internal_features)]
+#[doc(rust_logo)]
+#[feature(rustc_attrs)]
+#[feature(rustdoc_internals)]
 // tidy-alphabetical-end
 
 use std::borrow::Cow;
@@ -41,7 +41,7 @@ pub use fluent_bundle::{self, FluentArgs, FluentError, FluentValue};
 ```rust
 use fluent_syntax::parser::ParserError;
 use intl_memoizer::concurrent::IntlLangMemoizer;
-use rustc_data_structures::sync::{DynSend, IntoDynSyncSend};
+use crate::rustc_data_structures::sync::{DynSend, IntoDynSyncSend};
 ```
 
 ## Block 5
@@ -55,7 +55,7 @@ use rustc_macros::{Decodable, Encodable};
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::{instrument, trace};
 ```
 

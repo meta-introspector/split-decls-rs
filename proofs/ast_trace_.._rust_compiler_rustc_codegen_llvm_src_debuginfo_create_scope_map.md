@@ -8,39 +8,39 @@ Generated 8 AST blocks from source file
 ```rust
 use std::collections::hash_map::Entry;
 
-use rustc_codegen_ssa::mir::debuginfo::{DebugScope, FunctionDebugContext};
+use crate::rustc_codegen_ssa::mir::debuginfo::{DebugScope, FunctionDebugContext};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_codegen_ssa::traits::*;
-use rustc_data_structures::fx::FxHashMap;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::mir::{Body, SourceScope};
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::mir::{Body, SourceScope};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::layout::{FnAbiOf, HasTypingEnv};
+use crate::rustc_complete::ty::layout::{FnAbiOf, HasTypingEnv};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Instance};
+use crate::rustc_complete::ty::{self, Instance};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::config::DebugInfo;
-use rustc_span::{BytePos, DUMMY_SP, hygiene};
+use crate::rustc_complete::config::DebugInfo;
+use crate::rustc_complete::{BytePos, DUMMY_SP, hygiene};
 ```
 
 ## Block 6
@@ -59,7 +59,7 @@ use crate::llvm::debuginfo::{DILocation, DIScope};
 
 ```rust
 /// Produces DIScope DIEs for each MIR Scope which has variables defined in it.
-// FIXME(eddyb) almost all of this should be in `rustc_codegen_ssa::mir::debuginfo`.
+// FIXME(eddyb) almost all of this should be in `crate::rustc_codegen_ssa::mir::debuginfo`.
 pub(crate) fn compute_mir_scopes<'ll, 'tcx>(
     cx: &CodegenCx<'ll, 'tcx>,
     instance: Instance<'tcx>,
@@ -160,7 +160,7 @@ fn make_mir_scope<'ll, 'tcx>(
     let dbg_scope = match scope_data.inlined {
         Some((callee, _)) => {
             // FIXME(eddyb) this would be `self.monomorphize(&callee)`
-            // if this is moved to `rustc_codegen_ssa::mir::debuginfo`.
+            // if this is moved to `crate::rustc_codegen_ssa::mir::debuginfo`.
             let callee = cx.tcx.instantiate_and_normalize_erasing_regions(
                 instance.args,
                 cx.typing_env(),

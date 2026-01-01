@@ -6,16 +6,16 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::attrs::Linkage;
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use rustc_middle::mir::mono::{MonoItem, MonoItemData, Visibility};
+use crate::rustc_complete::attrs::Linkage;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::mir::mono::{MonoItem, MonoItemData, Visibility};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=define | COMPLEXITY=3 | LINES=23
 
 ```rust
-use rustc_middle::ty::layout::HasTyCtxt;
+use crate::rustc_complete::ty::layout::HasTyCtxt;
 use tracing::debug;
 
 use crate::base;

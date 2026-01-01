@@ -9,14 +9,14 @@ Generated 20 AST blocks from source file
 use std::fmt;
 use std::num::NonZero;
 
-use rustc_abi::{HasDataLayout, Size};
+use crate::rustc_abi::{HasDataLayout, Size};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::static_assert_size;
+use crate::rustc_data_structures::static_assert_size;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 ```
 

@@ -20,15 +20,15 @@ Generated 8 AST blocks from source file
 use std::fmt;
 
 use rustc_arena::DroplessArena;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{LocalDefId, LocalDefIdMap};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{LocalDefId, LocalDefIdMap};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 3

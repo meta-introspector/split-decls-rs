@@ -6,12 +6,12 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_data_structures::graph::scc::Sccs;
-use rustc_data_structures::graph::vec_graph::VecGraph;
-use rustc_index::Idx;
-use rustc_middle::span_bug;
-use rustc_middle::ty::error::TypeError;
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_data_structures::graph::scc::Sccs;
+use crate::rustc_data_structures::graph::vec_graph::VecGraph;
+use crate::rustc_index::Idx;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::error::TypeError;
 use tracing::{debug, instrument};
 ```
 
@@ -371,7 +371,7 @@ impl<'tcx> SccUniverse<'tcx> {
 **Metadata**: AST_ID=7 | TYPE=STRUCT | NAME=LeakCheckNode | COMPLEXITY=4 | LINES=6
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     #[orderable]
     #[debug_format = "LeakCheckNode({})"]
     struct LeakCheckNode {}
@@ -382,7 +382,7 @@ rustc_index::newtype_index! {
 **Metadata**: AST_ID=8 | TYPE=STRUCT | NAME=LeakCheckScc | COMPLEXITY=4 | LINES=6
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     #[orderable]
     #[debug_format = "LeakCheckScc({})"]
     struct LeakCheckScc {}

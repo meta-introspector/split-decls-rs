@@ -6,53 +6,53 @@ Generated 22 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=27
 
 ```rust
-//! # Type Coercion
-//!
-//! Under certain circumstances we will coerce from one type to another,
-//! for example by auto-borrowing. This occurs in situations where the
-//! compiler has a firm 'expected type' that was supplied from the user,
-//! and where the actual type is similar to that expected type in purpose
-//! but not in representation (so actual subtyping is inappropriate).
-//!
-//! ## Reborrowing
-//!
-//! Note that if we are expecting a reference, we will *reborrow*
-//! even if the argument provided was already a reference. This is
-//! useful for freezing mut things (that is, when the expected type is &T
-//! but you have &mut T) and also for avoiding the linearity
-//! of mut things (when the expected is &mut T and you have &mut T). See
-//! the various `tests/ui/coerce/*.rs` tests for
-//! examples of where this is useful.
-//!
-//! ## Subtle note
-//!
-//! When inferring the generic arguments of functions, the argument
-//! order is relevant, which can lead to the following edge case:
-//!
-//! ```ignore (illustrative)
-//! fn foo<T>(a: T, b: T) {
-//!     // ...
-//! }
+// # Type Coercion
+//
+// Under certain circumstances we will coerce from one type to another,
+// for example by auto-borrowing. This occurs in situations where the
+// compiler has a firm 'expected type' that was supplied from the user,
+// and where the actual type is similar to that expected type in purpose
+// but not in representation (so actual subtyping is inappropriate).
+//
+// ## Reborrowing
+//
+// Note that if we are expecting a reference, we will *reborrow*
+// even if the argument provided was already a reference. This is
+// useful for freezing mut things (that is, when the expected type is &T
+// but you have &mut T) and also for avoiding the linearity
+// of mut things (when the expected is &mut T and you have &mut T). See
+// the various `tests/ui/coerce/*.rs` tests for
+// examples of where this is useful.
+//
+// ## Subtle note
+//
+// When inferring the generic arguments of functions, the argument
+// order is relevant, which can lead to the following edge case:
+//
+// ```ignore (illustrative)
+// fn foo<T>(a: T, b: T) {
+//     // ...
+// }
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=14
 
 ```rust
-//!
-//! foo(&7i32, &mut 7i32);
-//! // This compiles, as we first infer `T` to be `&i32`,
-//! // and then coerce `&mut 7i32` to `&7i32`.
-//!
-//! foo(&mut 7i32, &7i32);
-//! // This does not compile, as we first infer `T` to be `&mut i32`
-//! // and are then unable to coerce `&7i32` to `&mut i32`.
-//! ```
+//
+// foo(&7i32, &mut 7i32);
+// // This compiles, as we first infer `T` to be `&i32`,
+// // and then coerce `&mut 7i32` to `&7i32`.
+//
+// foo(&mut 7i32, &7i32);
+// // This does not compile, as we first infer `T` to be `&mut i32`
+// // and are then unable to coerce `&7i32` to `&mut i32`.
+// ```
 
 use std::ops::Deref;
 
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, Diag, struct_span_code_err};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, Diag, struct_span_code_err};
 ```
 
 ## Block 3
@@ -60,24 +60,24 @@ use rustc_errors::{Applicability, Diag, struct_span_code_err};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::attrs::InlineAttr;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::attrs::InlineAttr;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir_analysis::hir_ty_lowering::HirTyLowerer;
-use rustc_infer::infer::relate::RelateResult;
-use rustc_infer::infer::{DefineOpaqueTypes, InferOk, InferResult, RegionVariableOrigin};
+use crate::rustc_hir_analysis::hir_ty_lowering::HirTyLowerer;
+use crate::rustc_infer::infer::relate::RelateResult;
+use crate::rustc_infer::infer::{DefineOpaqueTypes, InferOk, InferResult, RegionVariableOrigin};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_infer::traits::{
+use crate::rustc_infer::traits::{
     MatchExpressionArmCause, Obligation, PredicateObligation, PredicateObligations, SelectionError,
 };
 ```
@@ -86,8 +86,8 @@ use rustc_infer::traits::{
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::span_bug;
-use rustc_middle::ty::adjustment::{
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::adjustment::{
     Adjust, Adjustment, AllowTwoPhase, AutoBorrow, AutoBorrowMutability, PointerCoercion,
 };
 ```
@@ -96,24 +96,24 @@ use rustc_middle::ty::adjustment::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::error::TypeError;
-use rustc_middle::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::ty::error::TypeError;
+use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{BytePos, DUMMY_SP, DesugaringKind, Span};
+use crate::rustc_complete::{BytePos, DUMMY_SP, DesugaringKind, Span};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_trait_selection::infer::InferCtxtExt as _;
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
-use rustc_trait_selection::traits::{
+use crate::rustc_trait_selection::infer::InferCtxtExt as _;
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
+use crate::rustc_trait_selection::traits::{
     self, ImplSource, NormalizeExt, ObligationCause, ObligationCauseCode, ObligationCtxt,
 };
 ```

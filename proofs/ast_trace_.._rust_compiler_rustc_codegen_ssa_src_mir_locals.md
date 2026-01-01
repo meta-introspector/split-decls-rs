@@ -6,9 +6,9 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! Locals are in a private module as updating `LocalRef::Operand` has to
-//! be careful wrt to subtyping. To deal with this we only allow updates by using
-//! `FunctionCx::overwrite_local` which handles it automatically.
+// Locals are in a private module as updating `LocalRef::Operand` has to
+// be careful wrt to subtyping. To deal with this we only allow updates by using
+// `FunctionCx::overwrite_local` which handles it automatically.
 
 use std::ops::{Index, IndexMut};
 ```
@@ -17,9 +17,9 @@ use std::ops::{Index, IndexMut};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_index::IndexVec;
-use rustc_middle::mir;
-use rustc_middle::ty::print::with_no_trimmed_paths;
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::mir;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
 use tracing::{debug, warn};
 ```
 

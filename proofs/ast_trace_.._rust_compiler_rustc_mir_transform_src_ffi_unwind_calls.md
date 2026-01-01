@@ -6,38 +6,38 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::ExternAbi;
-use rustc_hir::def_id::{LOCAL_CRATE, LocalDefId};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_complete::def_id::{LOCAL_CRATE, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::query::{LocalCrate, Providers};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::query::{LocalCrate, Providers};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, TyCtxt, layout};
+use crate::rustc_complete::ty::{self, TyCtxt, layout};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=has_ffi_unwind_calls | COMPLEXITY=53 | LINES=95
 
 ```rust
-use rustc_session::lint::builtin::FFI_UNWIND_CALLS;
-use rustc_target::spec::PanicStrategy;
+use crate::rustc_complete::lint::builtin::FFI_UNWIND_CALLS;
+use crate::rustc_target::spec::PanicStrategy;
 use tracing::debug;
 
 use crate::errors;

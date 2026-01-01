@@ -9,22 +9,22 @@ Generated 44 AST blocks from source file
 use std::cell::LazyCell;
 use std::ops::ControlFlow;
 
-use rustc_abi::{ExternAbi, FieldIdx};
+use crate::rustc_abi::{ExternAbi, FieldIdx};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::unord::{UnordMap, UnordSet};
+use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::{EmissionGuarantee, MultiSpan};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{EmissionGuarantee, MultiSpan};
 ```
 
 ## Block 4
@@ -32,37 +32,37 @@ use rustc_errors::{EmissionGuarantee, MultiSpan};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::attrs::ReprAttr::ReprPacked;
-use rustc_hir::def::{CtorKind, DefKind};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::attrs::ReprAttr::ReprPacked;
+use crate::rustc_complete::def::{CtorKind, DefKind};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{LangItem, Node, attrs, find_attr, intravisit};
+use crate::rustc_complete::{LangItem, Node, attrs, find_attr, intravisit};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::{RegionVariableOrigin, TyCtxtInferExt};
+use crate::rustc_infer::infer::{RegionVariableOrigin, TyCtxtInferExt};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::traits::{Obligation, ObligationCauseCode, WellFormedLoc};
+use crate::rustc_infer::traits::{Obligation, ObligationCauseCode, WellFormedLoc};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_lint_defs::builtin::{
+use crate::rustc_lint_defs::builtin::{
     REPR_TRANSPARENT_EXTERNAL_PRIVATE_FIELDS, UNSUPPORTED_CALLING_CONVENTIONS,
 };
 ```
@@ -71,19 +71,19 @@ use rustc_lint_defs::builtin::{
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::hir::nested_filter;
-use rustc_middle::middle::resolve_bound_vars::ResolvedArg;
-use rustc_middle::middle::stability::EvalResult;
-use rustc_middle::ty::error::TypeErrorToStringExt;
-use rustc_middle::ty::layout::{LayoutError, MAX_SIMD_LANES};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::middle::resolve_bound_vars::ResolvedArg;
+use crate::rustc_complete::middle::stability::EvalResult;
+use crate::rustc_complete::ty::error::TypeErrorToStringExt;
+use crate::rustc_complete::ty::layout::{LayoutError, MAX_SIMD_LANES};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::ty::util::Discr;
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::util::Discr;
+use crate::rustc_complete::ty::{
     AdtDef, BottomUpFolder, FnSig, GenericArgKind, RegionKind, TypeFoldable, TypeSuperVisitable,
     TypeVisitable, TypeVisitableExt, fold_regions,
 };
@@ -93,18 +93,18 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::lint::builtin::UNINHABITED_STATIC;
-use rustc_target::spec::{AbiMap, AbiMapping};
+use crate::rustc_complete::lint::builtin::UNINHABITED_STATIC;
+use crate::rustc_target::spec::{AbiMap, AbiMapping};
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::error_reporting::traits::on_unimplemented::OnUnimplementedDirective;
-use rustc_trait_selection::traits;
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::error_reporting::traits::on_unimplemented::OnUnimplementedDirective;
+use crate::rustc_trait_selection::traits;
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
 use tracing::{debug, instrument};
 ```
 
@@ -1007,7 +1007,7 @@ pub(crate) fn check_item_type(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Result<(),
                 match assoc_item.kind {
                     ty::AssocKind::Type { .. } if assoc_item.defaultness(tcx).has_value() => {
                         let trait_args = GenericArgs::identity_for_item(tcx, def_id);
-                        let _: Result<_, rustc_errors::ErrorGuaranteed> = check_type_bounds(
+                        let _: Result<_, crate::rustc_errors::ErrorGuaranteed> = check_type_bounds(
                             tcx,
                             assoc_item,
                             assoc_item,
@@ -1389,7 +1389,7 @@ fn check_impl_items_against_trait<'tcx>(
 
         if self_is_guaranteed_unsize_self && tcx.generics_require_sized_self(ty_trait_item.def_id) {
             tcx.emit_node_span_lint(
-                rustc_lint_defs::builtin::DEAD_CODE,
+                crate::rustc_lint_defs::builtin::DEAD_CODE,
                 tcx.local_def_id_to_hir_id(ty_impl_item.def_id.expect_local()),
                 tcx.def_span(ty_impl_item.def_id),
                 errors::UselessImplItem,
@@ -1911,7 +1911,7 @@ fn detect_discriminant_duplicate<'tcx>(tcx: TyCtxt<'tcx>, adt: ty::AdtDef<'tcx>)
                 if let hir::Node::AnonConst(expr) =
                     tcx.hir_node_by_def_id(discr_def_id.expect_local())
                     && let hir::ExprKind::Lit(lit) = &tcx.hir_body(expr.body).value.kind
-                    && let rustc_ast::LitKind::Int(lit_value, _int_kind) = &lit.node
+                    && let crate::rustc_ast::LitKind::Int(lit_value, _int_kind) = &lit.node
                     && *lit_value != dis.val
                 {
                     (tcx.def_span(discr_def_id), format!("`{dis}` (overflowed from `{lit_value}`)"))

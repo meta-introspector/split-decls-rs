@@ -7,13 +7,13 @@ Generated 29 AST blocks from source file
 
 ```rust
 // tidy-alphabetical-start
-#![allow(rustc::diagnostic_outside_of_impl)]
-#![allow(rustc::untranslatable_diagnostic)]
-#![feature(assert_matches)]
-#![feature(box_patterns)]
-#![feature(if_let_guard)]
-#![feature(iter_intersperse)]
-#![feature(never_type)]
+#[allow(rustc::diagnostic_outside_of_impl)]
+#[allow(rustc::untranslatable_diagnostic)]
+#[feature(assert_matches)]
+#[feature(box_patterns)]
+#[feature(if_let_guard)]
+#[feature(iter_intersperse)]
+#[feature(never_type)]
 // tidy-alphabetical-end
 
 mod _match;
@@ -50,9 +50,9 @@ mod writeback;
 
 pub use coercion::can_coerce;
 use fn_ctxt::FnCtxt;
-use rustc_data_structures::unord::UnordSet;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, ErrorGuaranteed, pluralize, struct_span_code_err};
+use crate::rustc_data_structures::unord::UnordSet;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, ErrorGuaranteed, pluralize, struct_span_code_err};
 ```
 
 ## Block 2
@@ -60,54 +60,54 @@ use rustc_errors::{Applicability, ErrorGuaranteed, pluralize, struct_span_code_e
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{HirId, HirIdMap, Node};
+use crate::rustc_complete::{HirId, HirIdMap, Node};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir_analysis::check::{check_abi, check_custom_abi};
+use crate::rustc_hir_analysis::check::{check_abi, check_custom_abi};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir_analysis::hir_ty_lowering::HirTyLowerer;
-use rustc_infer::traits::{ObligationCauseCode, ObligationInspector, WellFormedLoc};
+use crate::rustc_hir_analysis::hir_ty_lowering::HirTyLowerer;
+use crate::rustc_infer::traits::{ObligationCauseCode, ObligationInspector, WellFormedLoc};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_session::config;
-use rustc_span::Span;
-use rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::config;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::LocalDefId;
 use tracing::{debug, instrument};
 ```
 
@@ -134,7 +134,7 @@ rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
 #[macro_export]
 macro_rules! type_error_struct {
     ($dcx:expr, $span:expr, $typ:expr, $code:expr, $($message:tt)*) => ({
-        let mut err = rustc_errors::struct_span_code_err!($dcx, $span, $code, $($message)*);
+        let mut err = crate::rustc_errors::struct_span_code_err!($dcx, $span, $code, $($message)*);
 
         if $typ.references_error() {
             err.downgrade_to_delayed_bug();
@@ -681,7 +681,7 @@ fn fatally_break_rust(tcx: TyCtxt<'_>, span: Span) -> ! {
          https://github.com/rust-lang/rust/issues/43162#issuecomment-320764675",
     );
     diag.note(format!("rustc {} running on {}", tcx.sess.cfg_version, config::host_tuple(),));
-    if let Some((flags, excluded_cargo_defaults)) = rustc_session::utils::extra_compiler_flags() {
+    if let Some((flags, excluded_cargo_defaults)) = crate::rustc_session::utils::extra_compiler_flags() {
         diag.note(format!("compiler flags: {}", flags.join(" ")));
         if excluded_cargo_defaults {
             diag.note("some of the compiler flags provided by cargo are hidden");
@@ -695,7 +695,7 @@ fn fatally_break_rust(tcx: TyCtxt<'_>, span: Span) -> ! {
 **Metadata**: AST_ID=29 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=3 | LINES=11
 
 ```rust
-/// Adds query implementations to the [Providers] vtable, see [`rustc_middle::query`]
+/// Adds query implementations to the [Providers] vtable, see [`crate::rustc_middle::query`]
 pub fn provide(providers: &mut Providers) {
     *providers = Providers {
         method_autoderef_steps: method::probe::method_autoderef_steps,

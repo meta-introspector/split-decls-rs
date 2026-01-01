@@ -10,9 +10,9 @@ Generated 1 AST blocks from source file
 // `rustc_driver_impl` to be compiled in parallel with other crates.
 
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![doc(rust_logo)]
-#![feature(rustdoc_internals)]
+#[allow(internal_features)]
+#[doc(rust_logo)]
+#[feature(rustdoc_internals)]
 // tidy-alphabetical-end
 
 pub use rustc_driver_impl::*;

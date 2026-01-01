@@ -13,7 +13,7 @@ use std::{mem, ptr};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::sync;
+use crate::rustc_data_structures::sync;
 
 use super::{GlobalCtxt, TyCtxt};
 ```
@@ -65,7 +65,7 @@ impl<'a, 'tcx> ImplicitCtxt<'a, 'tcx> {
 
 ```rust
 // Import the thread-local variable from Rayon, which is preserved for Rayon jobs.
-use rustc_thread_pool::tlv::TLV;
+use crate::rustc_thread_pool::tlv::TLV;
 
 #[inline]
 fn erase(context: &ImplicitCtxt<'_, '_>) -> *const () {
@@ -95,7 +95,7 @@ where
 {
     TLV.with(|tlv| {
         let old = tlv.replace(erase(context));
-        let _reset = rustc_data_structures::defer(move || tlv.set(old));
+        let _reset = crate::rustc_data_structures::defer(move || tlv.set(old));
         f()
     })
 }

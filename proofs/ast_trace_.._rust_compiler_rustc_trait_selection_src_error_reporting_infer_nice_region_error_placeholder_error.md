@@ -8,32 +8,32 @@ Generated 13 AST blocks from source file
 ```rust
 use std::fmt;
 
-use rustc_data_structures::intern::Interned;
-use rustc_errors::{Diag, IntoDiagArg};
+use crate::rustc_data_structures::intern::Interned;
+use crate::rustc_complete::{Diag, IntoDiagArg};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def::Namespace;
-use rustc_hir::def_id::{CRATE_DEF_ID, DefId};
+use crate::rustc_complete::def::Namespace;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::error::ExpectedFound;
-use rustc_middle::ty::print::{FmtPrinter, Print, PrintTraitRefExt as _, RegionHighlightMode};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::error::ExpectedFound;
+use crate::rustc_complete::ty::print::{FmtPrinter, Print, PrintTraitRefExt as _, RegionHighlightMode};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, GenericArgsRef, RePlaceholder, Region, TyCtxt};
+use crate::rustc_complete::ty::{self, GenericArgsRef, RePlaceholder, Region, TyCtxt};
 ```
 
 ## Block 5
@@ -90,8 +90,8 @@ impl<'tcx, T> IntoDiagArg for Highlighted<'tcx, T>
 where
     T: for<'a> Print<'tcx, FmtPrinter<'a, 'tcx>>,
 {
-    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
-        rustc_errors::DiagArgValue::Str(self.to_string().into())
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
+        crate::rustc_errors::DiagArgValue::Str(self.to_string().into())
     }
 }
 ```
@@ -485,7 +485,7 @@ impl<'tcx> NiceRegionError<'_, 'tcx> {
                 let closure_sig = self_ty.map(|closure| {
                     if let ty::Closure(_, args) = closure.kind() {
                         self.tcx()
-                            .signature_unclosure(args.as_closure().sig(), rustc_hir::Safety::Safe)
+                            .signature_unclosure(args.as_closure().sig(), crate::rustc_hir::Safety::Safe)
                     } else {
                         bug!("type is not longer closure");
                     }

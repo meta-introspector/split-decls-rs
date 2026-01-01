@@ -6,59 +6,59 @@ Generated 24 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=14
 
 ```rust
-//! During type inference, partially inferred terms are
-//! represented using inference variables (ty::Infer). These don't appear in
-//! the final [`ty::TypeckResults`] since all of the types should have been
-//! inferred once typeck is done.
-//!
-//! When type inference is running however, having to update the typeck results
-//! every time a new type is inferred would be unreasonably slow, so instead all
-//! of the replacement happens at the end in [`FnCtxt::resolve_type_vars_in_body`],
-//! which creates a new `TypeckResults` which doesn't contain any inference variables.
+// During type inference, partially inferred terms are
+// represented using inference variables (ty::Infer). These don't appear in
+// the final [`ty::TypeckResults`] since all of the types should have been
+// inferred once typeck is done.
+//
+// When type inference is running however, having to update the typeck results
+// every time a new type is inferred would be unreasonably slow, so instead all
+// of the replacement happens at the end in [`FnCtxt::resolve_type_vars_in_body`],
+// which creates a new `TypeckResults` which doesn't contain any inference variables.
 
 use std::mem;
 use std::ops::ControlFlow;
 
-use rustc_data_structures::fx::{FxHashSet, FxIndexMap};
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::unord::ExtendUnord;
-use rustc_errors::{E0720, ErrorGuaranteed};
+use crate::rustc_data_structures::unord::ExtendUnord;
+use crate::rustc_complete::{E0720, ErrorGuaranteed};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::LocalDefId;
-use rustc_hir::intravisit::{self, InferKind, Visitor};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::intravisit::{self, InferKind, Visitor};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, AmbigArg, HirId};
+use crate::rustc_complete::{self as hir, AmbigArg, HirId};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_infer::traits::solve::Goal;
-use rustc_middle::traits::ObligationCause;
-use rustc_middle::ty::adjustment::{Adjust, Adjustment, PointerCoercion};
+use crate::rustc_infer::traits::solve::Goal;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty::adjustment::{Adjust, Adjustment, PointerCoercion};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, DefiningScopeKind, OpaqueHiddenType, Ty, TyCtxt, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor,
     fold_regions,
@@ -69,16 +69,16 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, sym};
+use crate::rustc_complete::{Span, sym};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_trait_selection::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
-use rustc_trait_selection::opaque_types::opaque_type_has_defining_use_args;
-use rustc_trait_selection::solve;
+use crate::rustc_trait_selection::error_reporting::infer::need_type_info::TypeAnnotationNeeded;
+use crate::rustc_trait_selection::opaque_types::opaque_type_has_defining_use_args;
+use crate::rustc_trait_selection::solve;
 use tracing::{debug, instrument};
 ```
 

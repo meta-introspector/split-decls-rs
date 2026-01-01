@@ -9,22 +9,22 @@ Generated 19 AST blocks from source file
 use std::cell::RefCell;
 use std::collections::hash_map::Entry;
 
-use rustc_data_structures::fx::{FxHashMap, FxIndexSet};
+use crate::rustc_data_structures::fx::{FxHashMap, FxIndexSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{Body, MirDumper, MirPhase, RuntimePhase};
+use crate::rustc_complete::mir::{Body, MirDumper, MirPhase, RuntimePhase};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_session::Session;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
 use tracing::trace;
 
 use crate::lint::lint_body;

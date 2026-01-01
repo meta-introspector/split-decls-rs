@@ -22,26 +22,26 @@ use gccjit::{ComparisonOp, Function, FunctionType, RValue, ToRValue, UnaryOp};
 
 ```rust
 #[cfg(feature = "master")]
-use rustc_abi::ExternAbi;
-use rustc_abi::{BackendRepr, HasDataLayout};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_abi::{BackendRepr, HasDataLayout};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_codegen_ssa::MemFlags;
-use rustc_codegen_ssa::base::wants_msvc_seh;
-use rustc_codegen_ssa::common::IntPredicate;
-use rustc_codegen_ssa::errors::InvalidMonomorphization;
-use rustc_codegen_ssa::mir::operand::{OperandRef, OperandValue};
+use crate::rustc_codegen_ssa::MemFlags;
+use crate::rustc_codegen_ssa::base::wants_msvc_seh;
+use crate::rustc_codegen_ssa::common::IntPredicate;
+use crate::rustc_codegen_ssa::errors::InvalidMonomorphization;
+use crate::rustc_codegen_ssa::mir::operand::{OperandRef, OperandValue};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::mir::place::{PlaceRef, PlaceValue};
+use crate::rustc_codegen_ssa::mir::place::{PlaceRef, PlaceValue};
 ```
 
 ## Block 5
@@ -49,8 +49,8 @@ use rustc_codegen_ssa::mir::place::{PlaceRef, PlaceValue};
 
 ```rust
 #[cfg(feature = "master")]
-use rustc_codegen_ssa::traits::MiscCodegenMethods;
-use rustc_codegen_ssa::traits::{
+use crate::rustc_codegen_ssa::traits::MiscCodegenMethods;
+use crate::rustc_codegen_ssa::traits::{
     ArgAbiBuilderMethods, BaseTypeCodegenMethods, BuilderMethods, ConstCodegenMethods,
     IntrinsicCallBuilderMethods,
 };
@@ -60,32 +60,32 @@ use rustc_codegen_ssa::traits::{
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::bug;
+use crate::rustc_complete::bug;
 #[cfg(feature = "master")]
-use rustc_middle::ty::layout::FnAbiOf;
-use rustc_middle::ty::layout::LayoutOf;
-use rustc_middle::ty::{self, Instance, Ty};
+use crate::rustc_complete::ty::layout::FnAbiOf;
+use crate::rustc_complete::ty::layout::LayoutOf;
+use crate::rustc_complete::ty::{self, Instance, Ty};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_target::callconv::{ArgAbi, PassMode};
+use crate::rustc_target::callconv::{ArgAbi, PassMode};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_target::spec::PanicStrategy;
+use crate::rustc_target::spec::PanicStrategy;
 
 #[cfg(feature = "master")]
 use crate::abi::FnAbiGccExt;
@@ -618,7 +618,7 @@ impl<'a, 'gcc, 'tcx> IntrinsicCallBuilderMethods<'tcx> for Builder<'a, 'gcc, 'tc
             }
 
             sym::raw_eq => {
-                use rustc_abi::BackendRepr::*;
+                use crate::rustc_abi::BackendRepr::*;
                 let tp_ty = fn_args.type_at(0);
                 let layout = self.layout_of(tp_ty).layout;
                 let _use_integer_compare = match layout.backend_repr() {
@@ -863,7 +863,7 @@ impl<'gcc, 'tcx> ArgAbiExt<'gcc, 'tcx> for ArgAbi<'tcx, Ty<'tcx>> {
                 bx.lifetime_start(scratch, scratch_size);
 
                 // ... where we first store the value...
-                rustc_codegen_ssa::mir::store_cast(bx, cast, val, scratch, scratch_align);
+                crate::rustc_codegen_ssa::mir::store_cast(bx, cast, val, scratch, scratch_align);
 
                 // ... and then memcpy it to the intended destination.
                 bx.memcpy(
@@ -928,23 +928,23 @@ fn int_type_width_signed<'gcc, 'tcx>(
     match *ty.kind() {
         ty::Int(t) => Some((
             match t {
-                rustc_middle::ty::IntTy::Isize => u64::from(cx.tcx.sess.target.pointer_width),
-                rustc_middle::ty::IntTy::I8 => 8,
-                rustc_middle::ty::IntTy::I16 => 16,
-                rustc_middle::ty::IntTy::I32 => 32,
-                rustc_middle::ty::IntTy::I64 => 64,
-                rustc_middle::ty::IntTy::I128 => 128,
+                crate::rustc_middle::ty::IntTy::Isize => u64::from(cx.tcx.sess.target.pointer_width),
+                crate::rustc_middle::ty::IntTy::I8 => 8,
+                crate::rustc_middle::ty::IntTy::I16 => 16,
+                crate::rustc_middle::ty::IntTy::I32 => 32,
+                crate::rustc_middle::ty::IntTy::I64 => 64,
+                crate::rustc_middle::ty::IntTy::I128 => 128,
             },
             true,
         )),
         ty::Uint(t) => Some((
             match t {
-                rustc_middle::ty::UintTy::Usize => u64::from(cx.tcx.sess.target.pointer_width),
-                rustc_middle::ty::UintTy::U8 => 8,
-                rustc_middle::ty::UintTy::U16 => 16,
-                rustc_middle::ty::UintTy::U32 => 32,
-                rustc_middle::ty::UintTy::U64 => 64,
-                rustc_middle::ty::UintTy::U128 => 128,
+                crate::rustc_middle::ty::UintTy::Usize => u64::from(cx.tcx.sess.target.pointer_width),
+                crate::rustc_middle::ty::UintTy::U8 => 8,
+                crate::rustc_middle::ty::UintTy::U16 => 16,
+                crate::rustc_middle::ty::UintTy::U32 => 32,
+                crate::rustc_middle::ty::UintTy::U64 => 64,
+                crate::rustc_middle::ty::UintTy::U128 => 128,
             },
             false,
         )),
@@ -1581,7 +1581,7 @@ fn get_rust_try_fn<'a, 'gcc, 'tcx>(
             iter::once(i8p),
             tcx.types.unit,
             false,
-            rustc_hir::Safety::Unsafe,
+            crate::rustc_hir::Safety::Unsafe,
             ExternAbi::Rust,
         )),
     );
@@ -1592,7 +1592,7 @@ fn get_rust_try_fn<'a, 'gcc, 'tcx>(
             [i8p, i8p].iter().cloned(),
             tcx.types.unit,
             false,
-            rustc_hir::Safety::Unsafe,
+            crate::rustc_hir::Safety::Unsafe,
             ExternAbi::Rust,
         )),
     );
@@ -1601,7 +1601,7 @@ fn get_rust_try_fn<'a, 'gcc, 'tcx>(
         [try_fn_ty, i8p, catch_fn_ty],
         tcx.types.i32,
         false,
-        rustc_hir::Safety::Unsafe,
+        crate::rustc_hir::Safety::Unsafe,
         ExternAbi::Rust,
     ));
     let rust_try = gen_fn(cx, "__rust_try", rust_fn_sig, codegen);

@@ -6,7 +6,7 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::kw;
+use crate::rustc_complete::kw;
 
 use crate::ast::{self, AssignOpKind, BinOpKind, RangeLimits};
 ```

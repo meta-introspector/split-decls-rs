@@ -9,8 +9,8 @@ Generated 6 AST blocks from source file
 use std::collections::hash_map::Entry;
 use std::fmt::Write;
 
-use rustc_ast::*;
-use rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexMap};
+use crate::rustc_complete::*;
+use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexMap};
 ```
 
 ## Block 2
@@ -18,22 +18,22 @@ use rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexMap};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::parse::feature_err;
-use rustc_span::{Span, sym};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{Span, sym};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=11
 
 ```rust
-use rustc_target::asm;
+use crate::rustc_target::asm;
 
 use super::LoweringContext;
 use super::errors::{

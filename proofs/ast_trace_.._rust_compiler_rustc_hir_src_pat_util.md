@@ -8,7 +8,7 @@ Generated 9 AST blocks from source file
 ```rust
 use std::iter::Enumerate;
 
-use rustc_span::{Ident, Span};
+use crate::rustc_complete::{Ident, Span};
 ```
 
 ## Block 2

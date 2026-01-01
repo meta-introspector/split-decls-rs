@@ -6,28 +6,28 @@ Generated 19 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-//! Check whether a type has (potentially) non-trivial drop glue.
+// Check whether a type has (potentially) non-trivial drop glue.
 
-use rustc_data_structures::fx::FxHashSet;
-use rustc_hir::def_id::DefId;
-use rustc_hir::limit::Limit;
-use rustc_middle::bug;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::util::{AlwaysRequiresDrop, needs_drop_components};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::util::{AlwaysRequiresDrop, needs_drop_components};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, EarlyBinder, GenericArgsRef, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, EarlyBinder, GenericArgsRef, Ty, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::sym;
+use crate::rustc_complete::sym;
 use tracing::{debug, instrument};
 ```
 

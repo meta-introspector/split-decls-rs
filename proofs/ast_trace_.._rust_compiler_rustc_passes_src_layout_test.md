@@ -6,42 +6,42 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{HasDataLayout, TargetDataLayout};
+use crate::rustc_abi::{HasDataLayout, TargetDataLayout};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_hir::Attribute;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::LocalDefId;
-use rustc_middle::span_bug;
-use rustc_middle::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutError, LayoutOfHelpers};
+use crate::rustc_complete::Attribute;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutError, LayoutOfHelpers};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::source_map::Spanned;
-use rustc_span::{Span, sym};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Span, sym};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::infer::TyCtxtInferExt;
-use rustc_trait_selection::traits;
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::infer::TyCtxtInferExt;
+use crate::rustc_trait_selection::traits;
 
 use crate::errors::{
     LayoutAbi, LayoutAlign, LayoutHomogeneousAggregate, LayoutInvalidAttribute, LayoutOf,

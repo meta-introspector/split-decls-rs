@@ -6,11 +6,11 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! Automatic migration of Rust 2021 patterns to a form valid in both Editions 2021 and 2024.
+// Automatic migration of Rust 2021 patterns to a form valid in both Editions 2021 and 2024.
 
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_errors::MultiSpan;
-use rustc_hir::{BindingMode, ByRef, HirId, Mutability};
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_complete::MultiSpan;
+use crate::rustc_complete::{BindingMode, ByRef, HirId, Mutability};
 ```
 
 ## Block 2
@@ -18,14 +18,14 @@ use rustc_hir::{BindingMode, ByRef, HirId, Mutability};
 
 ```rust
 use rustc_lint as lint;
-use rustc_middle::ty::{self, Rust2024IncompatiblePatInfo, TyCtxt};
+use crate::rustc_complete::ty::{self, Rust2024IncompatiblePatInfo, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, Span};
+use crate::rustc_complete::{Ident, Span};
 ```
 
 ## Block 4

@@ -6,35 +6,35 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_abi::FieldIdx;
-use rustc_ast::InlineAsmTemplatePiece;
-use rustc_data_structures::fx::FxIndexSet;
-use rustc_hir::def_id::DefId;
-use rustc_hir::{self as hir, LangItem};
+use crate::rustc_abi::FieldIdx;
+use crate::rustc_complete::InlineAsmTemplatePiece;
+use crate::rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, LangItem};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::{self, Article, FloatTy, IntTy, Ty, TyCtxt, TypeVisitableExt, UintTy};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, Article, FloatTy, IntTy, Ty, TyCtxt, TypeVisitableExt, UintTy};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::lint;
-use rustc_span::def_id::LocalDefId;
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_target::asm::{
+use crate::rustc_target::asm::{
     InlineAsmReg, InlineAsmRegClass, InlineAsmRegOrRegClass, InlineAsmType, ModifierInfo,
 };
 ```
@@ -43,7 +43,7 @@ use rustc_target::asm::{
 **Metadata**: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
 
 use crate::FnCtxt;
 use crate::errors::RegisterTypeUnstable;

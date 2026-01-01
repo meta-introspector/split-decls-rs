@@ -6,19 +6,19 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_abi::Align;
-use rustc_index::IndexVec;
-use rustc_middle::mir::interpret::Scalar;
-use rustc_middle::mir::visit::PlaceContext;
-use rustc_middle::mir::*;
-use rustc_middle::ty::{Ty, TyCtxt};
+use crate::rustc_abi::Align;
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::mir::interpret::Scalar;
+use crate::rustc_complete::mir::visit::PlaceContext;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{Ty, TyCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::Session;
+use crate::rustc_complete::Session;
 
 use crate::check_pointers::{BorrowedFieldProjectionMode, PointerCheck, check_pointers};
 ```

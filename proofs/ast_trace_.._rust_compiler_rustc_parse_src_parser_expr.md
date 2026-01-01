@@ -31,31 +31,31 @@ use ast::{CoroutineKind, ForLoopKind, GenBlockKind, MatchKind, Pat, Path, PathSe
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::token::{self, Delimiter, InvisibleOrigin, MetaVarKind, Token, TokenKind};
+use crate::rustc_complete::token::{self, Delimiter, InvisibleOrigin, MetaVarKind, Token, TokenKind};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_ast::tokenstream::TokenTree;
-use rustc_ast::util::case::Case;
-use rustc_ast::util::classify;
-use rustc_ast::util::parser::{AssocOp, ExprPrecedence, Fixity, prec_let_scrutinee_needs_par};
+use crate::rustc_complete::tokenstream::TokenTree;
+use crate::rustc_complete::util::case::Case;
+use crate::rustc_complete::util::classify;
+use crate::rustc_complete::util::parser::{AssocOp, ExprPrecedence, Fixity, prec_let_scrutinee_needs_par};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::visit::{Visitor, walk_expr};
+use crate::rustc_complete::visit::{Visitor, walk_expr};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_ast::{
+use crate::rustc_complete::{
     self as ast, AnonConst, Arm, AssignOp, AssignOpKind, AttrStyle, AttrVec, BinOp, BinOpKind,
     BlockCheckMode, CaptureBy, ClosureBinder, DUMMY_NODE_ID, Expr, ExprField, ExprKind, FnDecl,
     FnRetTy, Label, MacCall, MetaItemLit, Movability, Param, RangeLimits, StmtKind, Ty, TyKind,
@@ -67,8 +67,8 @@ use rustc_ast::{
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::{Applicability, Diag, PResult, StashKey, Subdiagnostic};
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_complete::{Applicability, Diag, PResult, StashKey, Subdiagnostic};
 ```
 
 ## Block 9
@@ -77,24 +77,24 @@ use rustc_errors::{Applicability, Diag, PResult, StashKey, Subdiagnostic};
 ```rust
 use rustc_literal_escaper::unescape_char;
 use rustc_macros::Subdiagnostic;
-use rustc_session::errors::{ExprParenthesesNeeded, report_lit_error};
+use crate::rustc_complete::errors::{ExprParenthesesNeeded, report_lit_error};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_session::lint::BuiltinLintDiag;
-use rustc_session::lint::builtin::BREAK_WITH_LABEL_AND_LOOP;
-use rustc_span::edition::Edition;
-use rustc_span::source_map::{self, Spanned};
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::BREAK_WITH_LABEL_AND_LOOP;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::source_map::{self, Spanned};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{BytePos, ErrorGuaranteed, Ident, Pos, Span, Symbol, kw, sym};
+use crate::rustc_complete::{BytePos, ErrorGuaranteed, Ident, Pos, Span, Symbol, kw, sym};
 ```
 
 ## Block 12
@@ -753,7 +753,7 @@ impl<'a> Parser<'a> {
                 // `expr.span` is the interpolated span, because invisible open
                 // and close delims both get marked with the same span, one
                 // that covers the entire thing between them. (See
-                // `rustc_expand::mbe::transcribe::transcribe`.)
+                // `crate::rustc_expand::mbe::transcribe::transcribe`.)
                 self.prev_token.span
             }
             _ => expr.span,
@@ -3557,13 +3557,13 @@ pub(super) fn parse_arm(&mut self) -> PResult<'a, Arm> {
                                         ",",
                                         Applicability::MachineApplicable,
                                     );
-                                } else if arm_start_lines.lines[0].end_col + rustc_span::CharPos(1)
+                                } else if arm_start_lines.lines[0].end_col + crate::rustc_span::CharPos(1)
                                     == expr_lines.lines[0].end_col
                                 {
                                     // similar to the above, but we may typo a `.` or `/` at the end of the line
                                     let comma_span = arm_start_span
                                         .shrink_to_hi()
-                                        .with_hi(arm_start_span.hi() + rustc_span::BytePos(1));
+                                        .with_hi(arm_start_span.hi() + crate::rustc_span::BytePos(1));
                                     if let Ok(res) = sm.span_to_snippet(comma_span)
                                         && (res == "." || res == "/")
                                     {

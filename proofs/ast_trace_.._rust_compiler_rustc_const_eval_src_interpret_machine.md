@@ -6,9 +6,9 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! This module contains everything needed to instantiate an interpreter.
-//! This separation exists to ensure that no fancy miri features like
-//! interpreting common C functions leak into CTFE.
+// This module contains everything needed to instantiate an interpreter.
+// This separation exists to ensure that no fancy miri features like
+// interpreting common C functions leak into CTFE.
 
 use std::borrow::{Borrow, Cow};
 ```
@@ -20,7 +20,7 @@ use std::borrow::{Borrow, Cow};
 use std::fmt::Debug;
 use std::hash::Hash;
 
-use rustc_abi::{Align, Size};
+use crate::rustc_abi::{Align, Size};
 ```
 
 ## Block 3
@@ -34,18 +34,18 @@ use rustc_apfloat::{Float, FloatConvert};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::query::TyCtxtAt;
-use rustc_middle::ty::Ty;
-use rustc_middle::ty::layout::TyAndLayout;
-use rustc_middle::{mir, ty};
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::{mir, ty};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_span::def_id::DefId;
-use rustc_target::callconv::FnAbi;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_target::callconv::FnAbi;
 
 use super::{
     AllocBytes, AllocId, AllocKind, AllocRange, Allocation, CTFE_ALLOC_SALT, ConstAllocation,
@@ -686,7 +686,7 @@ pub macro compile_time_machine(<$tcx: lifetime>) {
 
     type MemoryKind = $crate::const_eval::MemoryKind;
     type MemoryMap =
-        rustc_data_structures::fx::FxIndexMap<AllocId, (MemoryKind<Self::MemoryKind>, Allocation)>;
+        crate::rustc_data_structures::fx::FxIndexMap<AllocId, (MemoryKind<Self::MemoryKind>, Allocation)>;
     const GLOBAL_KIND: Option<Self::MemoryKind> = None; // no copying of globals from `tcx` to machine memory
 
     type AllocExtra = ();

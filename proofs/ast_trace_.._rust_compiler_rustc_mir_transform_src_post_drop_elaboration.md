@@ -7,8 +7,8 @@ Generated 1 AST blocks from source file
 
 ```rust
 use rustc_const_eval::check_consts;
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 
 use crate::MirLint;
 

@@ -9,17 +9,17 @@ Generated 17 AST blocks from source file
 use std::cell::OnceCell;
 use std::ops::ControlFlow;
 
-use rustc_data_structures::fx::FxHashSet;
-use rustc_data_structures::graph::iterate::DepthFirstSearch;
-use rustc_data_structures::graph::vec_graph::VecGraph;
-use rustc_data_structures::graph::{self};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_data_structures::graph::iterate::DepthFirstSearch;
+use crate::rustc_data_structures::graph::vec_graph::VecGraph;
+use crate::rustc_data_structures::graph::{self};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::unord::{UnordBag, UnordMap, UnordSet};
+use crate::rustc_data_structures::unord::{UnordBag, UnordMap, UnordSet};
 ```
 
 ## Block 3
@@ -27,39 +27,39 @@ use rustc_data_structures::unord::{UnordBag, UnordMap, UnordSet};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::HirId;
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::HirId;
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_hir::intravisit::{InferKind, Visitor};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::intravisit::{InferKind, Visitor};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::lint;
-use rustc_span::def_id::LocalDefId;
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_trait_selection::traits::{ObligationCause, ObligationCtxt};
+use crate::rustc_trait_selection::traits::{ObligationCause, ObligationCtxt};
 ```
 
 ## Block 8
@@ -174,7 +174,7 @@ impl<'tcx> FnCtxt<'_, 'tcx> {
     //
     // - Non-numerics may get replaced with `()` or `!`, depending on
     //   how they were categorized by `calculate_diverging_fallback`
-    //   (and the setting of `#![feature(never_type_fallback)]`).
+    //   (and the setting of `#[feature(never_type_fallback)]`).
     //
     // Fallback becomes very dubious if we have encountered
     // type-checking errors. In that case, fallback to Error.
@@ -739,7 +739,7 @@ impl<'tcx> Visitor<'tcx> for AnnotateUnitFallbackVisitor<'_, 'tcx> {
 
     fn visit_qpath(
         &mut self,
-        qpath: &'tcx rustc_hir::QPath<'tcx>,
+        qpath: &'tcx crate::rustc_hir::QPath<'tcx>,
         id: HirId,
         span: Span,
     ) -> Self::Result {

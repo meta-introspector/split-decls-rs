@@ -6,49 +6,49 @@ Generated 20 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=5 | LINES=16
 
 ```rust
-//! Logic and data structures related to impl specialization, explained in
-//! greater detail below.
-//!
-//! At the moment, this implementation support only the simple "chain" rule:
-//! If any two impls overlap, one must be a strict subset of the other.
-//!
-//! See the [rustc dev guide] for a bit more detail on how specialization
-//! fits together with the rest of the trait machinery.
-//!
-//! [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/traits/specialization.html
+// Logic and data structures related to impl specialization, explained in
+// greater detail below.
+//
+// At the moment, this implementation support only the simple "chain" rule:
+// If any two impls overlap, one must be a strict subset of the other.
+//
+// See the [rustc dev guide] for a bit more detail on how specialization
+// fits together with the rest of the trait machinery.
+//
+// [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/traits/specialization.html
 
 pub mod specialization_graph;
 
-use rustc_data_structures::fx::FxIndexSet;
-use rustc_errors::codes::*;
-use rustc_errors::{Diag, EmissionGuarantee};
+use crate::rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Diag, EmissionGuarantee};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_infer::traits::Obligation;
-use rustc_middle::bug;
-use rustc_middle::query::LocalCrate;
-use rustc_middle::traits::query::NoSolution;
-use rustc_middle::ty::print::PrintTraitRefExt as _;
-use rustc_middle::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeVisitableExt, TypingMode};
+use crate::rustc_infer::traits::Obligation;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::LocalCrate;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::print::PrintTraitRefExt as _;
+use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeVisitableExt, TypingMode};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::lint::builtin::COHERENCE_LEAK_CHECK;
-use rustc_span::{DUMMY_SP, ErrorGuaranteed, Span, sym};
+use crate::rustc_complete::lint::builtin::COHERENCE_LEAK_CHECK;
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span, sym};
 ```
 
 ## Block 5

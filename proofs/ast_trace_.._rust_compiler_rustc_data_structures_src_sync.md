@@ -6,34 +6,34 @@ Generated 14 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=31
 
 ```rust
-//! This module defines various operations and types that are implemented in
-//! one way for the serial compiler, and another way the parallel compiler.
-//!
-//! Operations
-//! ----------
-//! The parallel versions of operations use Rayon to execute code in parallel,
-//! while the serial versions degenerate straightforwardly to serial execution.
-//! The operations include `join`, `parallel`, `par_iter`, and `par_for_each`.
-//!
-//! Types
-//! -----
-//! The parallel versions of types provide various kinds of synchronization,
-//! while the serial compiler versions do not.
-//!
-//! The following table shows how the types are implemented internally. Except
-//! where noted otherwise, the type in column one is defined as a
-//! newtype around the type from column two or three.
-//!
-//! | Type                    | Serial version      | Parallel version                |
-//! | ----------------------- | ------------------- | ------------------------------- |
-//! | `Lock<T>`               | `RefCell<T>`        | `RefCell<T>` or                 |
-//! |                         |                     | `parking_lot::Mutex<T>`         |
-//! | `RwLock<T>`             | `RefCell<T>`        | `parking_lot::RwLock<T>`        |
-//! | `MTLock<T>`        [^1] | `T`                 | `Lock<T>`                       |
-//!
-//! [^1]: `MTLock` is similar to `Lock`, but the serial version avoids the cost
-//! of a `RefCell`. This is appropriate when interior mutability is not
-//! required.
+// This module defines various operations and types that are implemented in
+// one way for the serial compiler, and another way the parallel compiler.
+//
+// Operations
+// ----------
+// The parallel versions of operations use Rayon to execute code in parallel,
+// while the serial versions degenerate straightforwardly to serial execution.
+// The operations include `join`, `parallel`, `par_iter`, and `par_for_each`.
+//
+// Types
+// -----
+// The parallel versions of types provide various kinds of synchronization,
+// while the serial compiler versions do not.
+//
+// The following table shows how the types are implemented internally. Except
+// where noted otherwise, the type in column one is defined as a
+// newtype around the type from column two or three.
+//
+// | Type                    | Serial version      | Parallel version                |
+// | ----------------------- | ------------------- | ------------------------------- |
+// | `Lock<T>`               | `RefCell<T>`        | `RefCell<T>` or                 |
+// |                         |                     | `parking_lot::Mutex<T>`         |
+// | `RwLock<T>`             | `RefCell<T>`        | `parking_lot::RwLock<T>`        |
+// | `MTLock<T>`        [^1] | `T`                 | `Lock<T>`                       |
+//
+// [^1]: `MTLock` is similar to `Lock`, but the serial version avoids the cost
+// of a `RefCell`. This is appropriate when interior mutability is not
+// required.
 
 use std::collections::HashMap;
 use std::hash::{BuildHasher, Hash};

@@ -6,18 +6,18 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::token::Delimiter;
-use rustc_ast::tokenstream::{DelimSpan, TokenStream};
+use crate::rustc_complete::token::Delimiter;
+use crate::rustc_complete::tokenstream::{DelimSpan, TokenStream};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_ast::*;
-use rustc_expand::base::*;
-use rustc_span::edition::Edition;
-use rustc_span::{Span, sym};
+use crate::rustc_complete::*;
+use crate::rustc_expand::base::*;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{Span, sym};
 ```
 
 ## Block 3
@@ -66,7 +66,7 @@ pub(crate) fn expand_unreachable<'cx>(
 
 ```rust
 fn expand<'cx>(
-    mac: rustc_span::Symbol,
+    mac: crate::rustc_span::Symbol,
     cx: &'cx ExtCtxt<'_>,
     sp: Span,
     tts: TokenStream,

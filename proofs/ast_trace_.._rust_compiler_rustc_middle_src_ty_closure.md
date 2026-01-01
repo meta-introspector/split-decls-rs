@@ -8,10 +8,10 @@ Generated 21 AST blocks from source file
 ```rust
 use std::fmt::Write;
 
-use rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_data_structures::fx::FxIndexMap;
 use rustc_hir as hir;
-use rustc_hir::HirId;
-use rustc_hir::def_id::LocalDefId;
+use crate::rustc_complete::HirId;
+use crate::rustc_complete::def_id::LocalDefId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
 ```
 
@@ -19,8 +19,8 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisit
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::LocalDefIdMap;
-use rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::def_id::LocalDefIdMap;
+use crate::rustc_complete::{Ident, Span, Symbol};
 ```
 
 ## Block 3

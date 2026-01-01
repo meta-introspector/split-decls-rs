@@ -8,50 +8,50 @@ Generated 24 AST blocks from source file
 ```rust
 use std::str::FromStr;
 
-use rustc_abi::{Align, ExternAbi};
+use crate::rustc_abi::{Align, ExternAbi};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::expand::autodiff_attrs::{AutoDiffAttrs, DiffActivity, DiffMode};
+use crate::rustc_complete::expand::autodiff_attrs::{AutoDiffAttrs, DiffActivity, DiffMode};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{LitKind, MetaItem, MetaItemInner, attr};
+use crate::rustc_complete::{LitKind, MetaItem, MetaItemInner, attr};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::attrs::{AttributeKind, InlineAttr, InstructionSetAttr, UsedBy};
+use crate::rustc_complete::attrs::{AttributeKind, InlineAttr, InstructionSetAttr, UsedBy};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, LOCAL_CRATE, LocalDefId};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE, LocalDefId};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, Attribute, LangItem, find_attr, lang_items};
+use crate::rustc_complete::{self as hir, Attribute, LangItem, find_attr, lang_items};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::middle::codegen_fn_attrs::{
+use crate::rustc_complete::middle::codegen_fn_attrs::{
     CodegenFnAttrFlags, CodegenFnAttrs, PatchableFunctionEntry,
 };
 ```
@@ -60,25 +60,25 @@ use rustc_middle::middle::codegen_fn_attrs::{
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::query::Providers;
-use rustc_middle::span_bug;
-use rustc_middle::ty::{self as ty, TyCtxt};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{self as ty, TyCtxt};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::lint;
-use rustc_session::parse::feature_err;
-use rustc_span::{Ident, Span, sym};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{Ident, Span, sym};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_target::spec::SanitizerSet;
+use crate::rustc_target::spec::SanitizerSet;
 
 use crate::errors;
 use crate::errors::NoMangleNameless;
@@ -185,7 +185,7 @@ fn parse_patchable_function_entry(
                 }
             };
 
-            let rustc_ast::LitKind::Int(val, _) = name_value_lit.kind else {
+            let crate::rustc_ast::LitKind::Int(val, _) = name_value_lit.kind else {
                 tcx.dcx().emit_err(errors::InvalidLiteralValue { span: name_value_lit.span });
                 continue;
             };
@@ -464,7 +464,7 @@ fn apply_overrides(tcx: TyCtxt<'_>, did: LocalDefId, codegen_fn_attrs: &mut Code
 
     // When `no_builtins` is applied at the crate level, we should add the
     // `no-builtins` attribute to each function to ensure it takes effect in LTO.
-    let crate_attrs = tcx.hir_attrs(rustc_hir::CRATE_HIR_ID);
+    let crate_attrs = tcx.hir_attrs(crate::rustc_hir::CRATE_HIR_ID);
     let no_builtins = attr::contains_name(crate_attrs, sym::no_builtins);
     if no_builtins {
         codegen_fn_attrs.flags |= CodegenFnAttrFlags::NO_BUILTINS;
@@ -618,7 +618,7 @@ fn handle_lang_items(
             .dcx()
             .struct_span_err(
                 interesting_spans.no_mangle.unwrap_or_default(),
-                "`#[no_mangle]` cannot be used on internal language items",
+                "`#[unsafe(no_mangle)]` cannot be used on internal language items",
             )
             .with_note("Rustc requires this item to have a specific mangled name.")
             .with_span_label(tcx.def_span(did), "should be the internal language item");

@@ -6,22 +6,22 @@ Generated 65 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=20
 
 ```rust
-//! The Rust compiler.
-//!
-//! # Note
-//!
-//! This API is completely unstable and subject to change.
+// The Rust compiler.
+//
+// # Note
+//
+// This API is completely unstable and subject to change.
 
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![allow(rustc::untranslatable_diagnostic)] // FIXME: make this translatable
-#![doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
-#![doc(rust_logo)]
-#![feature(decl_macro)]
-#![feature(panic_backtrace_config)]
-#![feature(panic_update_hook)]
-#![feature(rustdoc_internals)]
-#![feature(try_blocks)]
+#[allow(internal_features)]
+#[allow(rustc::untranslatable_diagnostic)] // FIXME: make this translatable
+#[doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
+#[doc(rust_logo)]
+#[feature(decl_macro)]
+#[feature(panic_backtrace_config)]
+#[feature(panic_update_hook)]
+#[feature(rustdoc_internals)]
+#[feature(try_blocks)]
 // tidy-alphabetical-end
 
 use std::cmp::max;
@@ -86,15 +86,15 @@ use std::{env, str};
 
 ```rust
 use rustc_ast as ast;
-use rustc_codegen_ssa::traits::CodegenBackend;
-use rustc_codegen_ssa::{CodegenErrors, CodegenResults};
+use crate::rustc_codegen_ssa::traits::CodegenBackend;
+use crate::rustc_codegen_ssa::{CodegenErrors, CodegenResults};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::profiling::{
+use crate::rustc_data_structures::profiling::{
     TimePassesFormat, get_resident_set_size, print_time_passes_entry,
 };
 ```
@@ -103,17 +103,17 @@ use rustc_data_structures::profiling::{
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_errors::emitter::stderr_destination;
-use rustc_errors::registry::Registry;
-use rustc_errors::translation::Translator;
-use rustc_errors::{ColorConfig, DiagCtxt, ErrCode, FatalError, PResult, markdown};
+use crate::rustc_complete::emitter::stderr_destination;
+use crate::rustc_complete::registry::Registry;
+use crate::rustc_complete::translation::Translator;
+use crate::rustc_complete::{ColorConfig, DiagCtxt, ErrCode, FatalError, PResult, markdown};
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-use rustc_feature::find_gated_cfg;
+use crate::rustc_feature::find_gated_cfg;
 // This avoids a false positive with `-Wunused_crate_dependencies`.
 // `rust_index` isn't used in this crate's code, but it must be named in the
 // `Cargo.toml` for the `rustc_randomized_layouts` feature.
@@ -132,19 +132,19 @@ use rustc_interface::{Linker, create_and_enter_global_ctxt, interface, passes};
 **Metadata**: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_lint::unerased_lint_store;
-use rustc_metadata::creader::MetadataLoader;
-use rustc_metadata::locator;
-use rustc_middle::ty::TyCtxt;
-use rustc_parse::lexer::StripTokens;
-use rustc_parse::{new_parser_from_file, new_parser_from_source_str, unwrap_or_emit_fatal};
+use crate::rustc_lint::unerased_lint_store;
+use crate::rustc_metadata::creader::MetadataLoader;
+use crate::rustc_metadata::locator;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_parse::lexer::StripTokens;
+use crate::rustc_parse::{new_parser_from_file, new_parser_from_source_str, unwrap_or_emit_fatal};
 ```
 
 ## Block 15
 **Metadata**: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_session::config::{
+use crate::rustc_complete::config::{
     CG_OPTIONS, CrateType, ErrorOutputType, Input, OptionDesc, OutFileName, OutputType, Sysroot,
     UnstableOptions, Z_OPTIONS, nightly_options, parse_target_triple,
 };
@@ -154,38 +154,38 @@ use rustc_session::config::{
 **Metadata**: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::getopts::{self, Matches};
+use crate::rustc_complete::getopts::{self, Matches};
 ```
 
 ## Block 17
 **Metadata**: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::lint::{Lint, LintId};
+use crate::rustc_complete::lint::{Lint, LintId};
 ```
 
 ## Block 18
 **Metadata**: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::output::{CRATE_TYPES, collect_crate_types, invalid_output_for_target};
+use crate::rustc_complete::output::{CRATE_TYPES, collect_crate_types, invalid_output_for_target};
 ```
 
 ## Block 19
 **Metadata**: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::{EarlyDiagCtxt, Session, config};
+use crate::rustc_complete::{EarlyDiagCtxt, Session, config};
 ```
 
 ## Block 20
 **Metadata**: AST_ID=20 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_span::FileName;
-use rustc_span::def_id::LOCAL_CRATE;
-use rustc_target::json::ToJson;
-use rustc_target::spec::{Target, TargetTuple};
+use crate::rustc_complete::FileName;
+use crate::rustc_complete::def_id::LOCAL_CRATE;
+use crate::rustc_target::json::ToJson;
+use crate::rustc_target::spec::{Target, TargetTuple};
 ```
 
 ## Block 21
@@ -285,30 +285,30 @@ pub static DEFAULT_LOCALE_RESOURCES: &[&str] = &[
     rustc_attr_parsing::DEFAULT_LOCALE_RESOURCE,
     rustc_borrowck::DEFAULT_LOCALE_RESOURCE,
     rustc_builtin_macros::DEFAULT_LOCALE_RESOURCE,
-    rustc_codegen_ssa::DEFAULT_LOCALE_RESOURCE,
+    crate::rustc_codegen_ssa::DEFAULT_LOCALE_RESOURCE,
     rustc_const_eval::DEFAULT_LOCALE_RESOURCE,
-    rustc_errors::DEFAULT_LOCALE_RESOURCE,
-    rustc_expand::DEFAULT_LOCALE_RESOURCE,
-    rustc_hir_analysis::DEFAULT_LOCALE_RESOURCE,
+    crate::rustc_errors::DEFAULT_LOCALE_RESOURCE,
+    crate::rustc_expand::DEFAULT_LOCALE_RESOURCE,
+    crate::rustc_hir_analysis::DEFAULT_LOCALE_RESOURCE,
     rustc_hir_typeck::DEFAULT_LOCALE_RESOURCE,
     rustc_incremental::DEFAULT_LOCALE_RESOURCE,
-    rustc_infer::DEFAULT_LOCALE_RESOURCE,
+    crate::rustc_infer::DEFAULT_LOCALE_RESOURCE,
     rustc_interface::DEFAULT_LOCALE_RESOURCE,
-    rustc_lint::DEFAULT_LOCALE_RESOURCE,
-    rustc_metadata::DEFAULT_LOCALE_RESOURCE,
-    rustc_middle::DEFAULT_LOCALE_RESOURCE,
+    crate::rustc_lint::DEFAULT_LOCALE_RESOURCE,
+    crate::rustc_metadata::DEFAULT_LOCALE_RESOURCE,
+    crate::rustc_middle::DEFAULT_LOCALE_RESOURCE,
     rustc_mir_build::DEFAULT_LOCALE_RESOURCE,
-    rustc_mir_dataflow::DEFAULT_LOCALE_RESOURCE,
+    crate::rustc_mir_dataflow::DEFAULT_LOCALE_RESOURCE,
     rustc_mir_transform::DEFAULT_LOCALE_RESOURCE,
     rustc_monomorphize::DEFAULT_LOCALE_RESOURCE,
-    rustc_parse::DEFAULT_LOCALE_RESOURCE,
+    crate::rustc_parse::DEFAULT_LOCALE_RESOURCE,
     rustc_passes::DEFAULT_LOCALE_RESOURCE,
-    rustc_pattern_analysis::DEFAULT_LOCALE_RESOURCE,
+    crate::rustc_pattern_analysis::DEFAULT_LOCALE_RESOURCE,
     rustc_privacy::DEFAULT_LOCALE_RESOURCE,
     rustc_query_system::DEFAULT_LOCALE_RESOURCE,
     rustc_resolve::DEFAULT_LOCALE_RESOURCE,
-    rustc_session::DEFAULT_LOCALE_RESOURCE,
-    rustc_trait_selection::DEFAULT_LOCALE_RESOURCE,
+    crate::rustc_session::DEFAULT_LOCALE_RESOURCE,
+    crate::rustc_trait_selection::DEFAULT_LOCALE_RESOURCE,
     rustc_ty_utils::DEFAULT_LOCALE_RESOURCE,
     // tidy-alphabetical-end
 ];
@@ -389,7 +389,7 @@ impl Callbacks for TimePassesCallbacks {
 
 ```rust
 pub fn diagnostics_registry() -> Registry {
-    Registry::new(rustc_errors::codes::DIAGNOSTICS)
+    Registry::new(crate::rustc_errors::codes::DIAGNOSTICS)
 }
 ```
 
@@ -851,7 +851,7 @@ fn print_crate_info(
     sess: &Session,
     parse_attrs: bool,
 ) -> Compilation {
-    use rustc_session::config::PrintKind::*;
+    use crate::rustc_complete::config::PrintKind::*;
     // This import prevents the following code from using the printing macros
     // used by the rest of the module. Within this function, we only write to
     // the output specified by `sess.io.output_file`.
@@ -885,23 +885,23 @@ fn print_crate_info(
 
         match req.kind {
             TargetList => {
-                let mut targets = rustc_target::spec::TARGETS.to_vec();
+                let mut targets = crate::rustc_target::spec::TARGETS.to_vec();
                 targets.sort_unstable();
                 println_info!("{}", targets.join("\n"));
             }
-            HostTuple => println_info!("{}", rustc_session::config::host_tuple()),
+            HostTuple => println_info!("{}", crate::rustc_session::config::host_tuple()),
             Sysroot => println_info!("{}", sess.opts.sysroot.path().display()),
             TargetLibdir => println_info!("{}", sess.target_tlib_path.dir.display()),
             TargetSpecJson => {
                 println_info!("{}", serde_json::to_string_pretty(&sess.target.to_json()).unwrap());
             }
             TargetSpecJsonSchema => {
-                let schema = rustc_target::spec::json_schema();
+                let schema = crate::rustc_target::spec::json_schema();
                 println_info!("{}", serde_json::to_string_pretty(&schema).unwrap());
             }
             AllTargetSpecsJson => {
                 let mut targets = BTreeMap::new();
-                for name in rustc_target::spec::TARGETS {
+                for name in crate::rustc_target::spec::TARGETS {
                     let triple = TargetTuple::from_tuple(name);
                     let target = Target::expect_builtin(&triple);
                     targets.insert(name, target.to_json());
@@ -917,7 +917,7 @@ fn print_crate_info(
                 let crate_name = passes::get_crate_name(sess, attrs);
                 let crate_types = collect_crate_types(sess, attrs);
                 for &style in &crate_types {
-                    let fname = rustc_session::output::filename_for_input(
+                    let fname = crate::rustc_session::output::filename_for_input(
                         sess, style, crate_name, &t_outputs,
                     );
                     println_info!("{}", fname.as_path().file_name().unwrap().to_string_lossy());
@@ -938,8 +938,8 @@ fn print_crate_info(
                 let crate_name = passes::get_crate_name(sess, attrs);
                 let lint_store = crate::unerased_lint_store(sess);
                 let registered_tools = rustc_resolve::registered_tools_ast(sess.dcx(), attrs);
-                let features = rustc_expand::config::features(sess, attrs, crate_name);
-                let lint_levels = rustc_lint::LintLevelsBuilder::crate_root(
+                let features = crate::rustc_expand::config::features(sess, attrs, crate_name);
+                let lint_levels = crate::rustc_lint::LintLevelsBuilder::crate_root(
                     sess,
                     &features,
                     true,
@@ -1022,7 +1022,7 @@ fn print_crate_info(
                 }
             }
             CallingConventions => {
-                let calling_conventions = rustc_abi::all_names();
+                let calling_conventions = crate::rustc_abi::all_names();
                 println_info!("{}", calling_conventions.join("\n"));
             }
             RelocationModels
@@ -1037,7 +1037,7 @@ fn print_crate_info(
             NativeStaticLibs => {}
             LinkArgs => {}
             SplitDebuginfo => {
-                use rustc_target::spec::SplitDebuginfo::{Off, Packed, Unpacked};
+                use crate::rustc_target::spec::SplitDebuginfo::{Off, Packed, Unpacked};
 
                 for split in &[Off, Packed, Unpacked] {
                     if sess.target.options.supported_split_debuginfo.contains(split) {
@@ -1049,7 +1049,7 @@ fn print_crate_info(
                 if sess.target.is_like_darwin {
                     println_info!(
                         "{}={}",
-                        rustc_target::spec::apple::deployment_target_env_var(&sess.target.os),
+                        crate::rustc_target::spec::apple::deployment_target_env_var(&sess.target.os),
                         sess.apple_deployment_target().fmt_pretty(),
                     )
                 } else {
@@ -1189,7 +1189,7 @@ fn print_wall_help() {
         "
 The flag `-Wall` does not exist in `rustc`. Most useful lints are enabled by
 default. Use `rustc -W help` to see all available lints. It's more common to put
-warning settings in the crate root using `#![warn(LINT_NAME)]` instead of using
+warning settings in the crate root using `#[warn(LINT_NAME)]` instead of using
 the command line flag directly.
 "
     );
@@ -1610,7 +1610,7 @@ fn parse_crate_attrs<'a>(sess: &'a Session) -> PResult<'a, ast::AttrVec> {
 /// the panic into a `Result` instead.
 pub fn catch_fatal_errors<F: FnOnce() -> R, R>(f: F) -> Result<R, FatalError> {
     catch_unwind(panic::AssertUnwindSafe(f)).map_err(|value| {
-        if value.is::<rustc_errors::FatalErrorMarker>() {
+        if value.is::<crate::rustc_errors::FatalErrorMarker>() {
             FatalError
         } else {
             panic::resume_unwind(value);
@@ -1663,7 +1663,7 @@ fn ice_path_with_config(config: Option<&UnstableOptions>) -> &'static Option<Pat
     }
 
     ICE_PATH.get_or_init(|| {
-        if !rustc_feature::UnstableFeatures::from_environment(None).is_nightly_build() {
+        if !crate::rustc_feature::UnstableFeatures::from_environment(None).is_nightly_build() {
             return None;
         }
         let mut path = match std::env::var_os("RUSTC_ICE") {
@@ -1745,7 +1745,7 @@ pub fn install_ice_hook(bug_report_url: &'static str, extra_info: fn(&DiagCtxt))
 
             // Invoke the default handler, which prints the actual panic message and optionally a backtrace
             // Don't do this for delayed bugs, which already emit their own more useful backtrace.
-            if !info.payload().is::<rustc_errors::DelayedBugPanic>() {
+            if !info.payload().is::<crate::rustc_errors::DelayedBugPanic>() {
                 default_hook(info);
                 // Separate the output with an empty line
                 eprintln!();
@@ -1799,17 +1799,17 @@ fn report_ice(
     using_internal_features: &AtomicBool,
 ) {
     let translator = default_translator();
-    let emitter = Box::new(rustc_errors::emitter::HumanEmitter::new(
-        stderr_destination(rustc_errors::ColorConfig::Auto),
+    let emitter = Box::new(crate::rustc_errors::emitter::HumanEmitter::new(
+        stderr_destination(crate::rustc_errors::ColorConfig::Auto),
         translator,
     ));
-    let dcx = rustc_errors::DiagCtxt::new(emitter);
+    let dcx = crate::rustc_errors::DiagCtxt::new(emitter);
     let dcx = dcx.handle();
 
     // a .span_bug or .bug call has already printed what
     // it wants to print.
-    if !info.payload().is::<rustc_errors::ExplicitBug>()
-        && !info.payload().is::<rustc_errors::DelayedBugPanic>()
+    if !info.payload().is::<crate::rustc_errors::ExplicitBug>()
+        && !info.payload().is::<crate::rustc_errors::DelayedBugPanic>()
     {
         dcx.emit_err(session_diagnostics::Ice);
     }
@@ -1820,7 +1820,7 @@ fn report_ice(
         dcx.emit_note(session_diagnostics::IceBugReport { bug_report_url });
 
         // Only emit update nightly hint for users on nightly builds.
-        if rustc_feature::UnstableFeatures::from_environment(None).is_nightly_build() {
+        if crate::rustc_feature::UnstableFeatures::from_environment(None).is_nightly_build() {
             dcx.emit_note(session_diagnostics::UpdateNightlyNote);
         }
     }
@@ -1858,7 +1858,7 @@ fn report_ice(
         None
     };
 
-    if let Some((flags, excluded_cargo_defaults)) = rustc_session::utils::extra_compiler_flags() {
+    if let Some((flags, excluded_cargo_defaults)) = crate::rustc_session::utils::extra_compiler_flags() {
         dcx.emit_note(session_diagnostics::IceFlags { flags: flags.join(" ") });
         if excluded_cargo_defaults {
             dcx.emit_note(session_diagnostics::IceExcludeCargoDefaults);

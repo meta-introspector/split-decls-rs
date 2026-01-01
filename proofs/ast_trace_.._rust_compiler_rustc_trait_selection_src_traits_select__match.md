@@ -6,7 +6,7 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_infer::infer::relate::{
+use crate::rustc_infer::infer::relate::{
     self, Relate, RelateResult, TypeRelation, structurally_relate_tys,
 };
 ```
@@ -15,14 +15,14 @@ use rustc_infer::infer::relate::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, InferConst, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, InferConst, Ty, TyCtxt};
 ```
 
 ## Block 4

@@ -8,36 +8,36 @@ Generated 6 AST blocks from source file
 ```rust
 use std::ops::Not;
 
-use rustc_abi::ExternAbi;
+use crate::rustc_abi::ExternAbi;
 use rustc_hir as hir;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::{Node, find_attr};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::{Node, find_attr};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_middle::span_bug;
-use rustc_middle::ty::{self, TyCtxt, TypingMode};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{self, TyCtxt, TypingMode};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::config::EntryFnType;
-use rustc_span::Span;
-use rustc_span::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
+use crate::rustc_complete::config::EntryFnType;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::traits::{self, ObligationCause, ObligationCauseCode};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::traits::{self, ObligationCause, ObligationCauseCode};
 ```
 
 ## Block 5

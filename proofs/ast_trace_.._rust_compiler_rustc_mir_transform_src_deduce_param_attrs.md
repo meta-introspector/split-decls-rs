@@ -6,37 +6,37 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=10
 
 ```rust
-//! Deduces supplementary parameter attributes from MIR.
-//!
-//! Deduced parameter attributes are those that can only be soundly determined by examining the
-//! body of the function instead of just the signature. These can be useful for optimization
-//! purposes on a best-effort basis. We compute them here and store them into the crate metadata so
-//! dependent crates can use them.
+// Deduces supplementary parameter attributes from MIR.
+//
+// Deduced parameter attributes are those that can only be soundly determined by examining the
+// body of the function instead of just the signature. These can be useful for optimization
+// purposes on a best-effort basis. We compute them here and store them into the crate metadata so
+// dependent crates can use them.
 
-use rustc_hir::def_id::LocalDefId;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::mir::visit::{NonMutatingUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::mir::visit::{NonMutatingUseContext, PlaceContext, Visitor};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{Body, Location, Operand, Place, RETURN_PLACE, Terminator, TerminatorKind};
+use crate::rustc_complete::mir::{Body, Location, Operand, Place, RETURN_PLACE, Terminator, TerminatorKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, DeducedParamAttrs, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, DeducedParamAttrs, Ty, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=STRUCT | NAME=DeduceReadOnly | COMPLEXITY=9 | LINES=10
 
 ```rust
-use rustc_session::config::OptLevel;
+use crate::rustc_complete::config::OptLevel;
 
 /// A visitor that determines which arguments have been mutated. We can't use the mutability field
 /// on LocalDecl for this because it has no meaning post-optimization.

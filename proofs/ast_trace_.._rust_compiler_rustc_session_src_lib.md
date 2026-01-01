@@ -7,14 +7,14 @@ Generated 3 AST blocks from source file
 
 ```rust
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![cfg_attr(bootstrap, feature(round_char_boundary))]
-#![feature(default_field_values)]
-#![feature(iter_intersperse)]
-#![feature(rustc_attrs)]
+#[allow(internal_features)]
+#[cfg_attr(bootstrap, feature(round_char_boundary))]
+#[feature(default_field_values)]
+#[feature(iter_intersperse)]
+#[feature(rustc_attrs)]
 // To generate CodegenOptionsTargetModifiers and UnstableOptionsTargetModifiers enums
 // with macro_rules, it is necessary to use recursive mechanic ("Incremental TT Munchers").
-#![recursion_limit = "256"]
+#[recursion_limit = "256"]
 // tidy-alphabetical-end
 
 pub mod errors;
@@ -55,7 +55,7 @@ rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
 /// Requirements for a `StableHashingContext` to be used in this crate.
 /// This is a hack to allow using the `HashStable_Generic` derive macro
 /// instead of implementing everything in `rustc_middle`.
-pub trait HashStableContext: rustc_ast::HashStableContext + rustc_hir::HashStableContext {}
+pub trait HashStableContext: crate::rustc_ast::HashStableContext + crate::rustc_hir::HashStableContext {}
 ```
 
 ---

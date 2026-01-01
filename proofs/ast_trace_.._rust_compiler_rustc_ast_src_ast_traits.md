@@ -6,9 +6,9 @@ Generated 25 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=13
 
 ```rust
-//! A set of traits implemented for various AST nodes,
-//! typically those used in AST fragments during macro expansion.
-//! The traits are not implemented exhaustively, only when actually necessary.
+// A set of traits implemented for various AST nodes,
+// typically those used in AST fragments during macro expansion.
+// The traits are not implemented exhaustively, only when actually necessary.
 
 use std::fmt;
 use std::marker::PhantomData;
@@ -247,7 +247,7 @@ impl HasTokens for Attribute {
 /// A trait for AST nodes having (or not having) attributes.
 pub trait HasAttrs {
     /// This is `true` if this `HasAttrs` might support 'custom' (proc-macro) inner
-    /// attributes. Attributes like `#![cfg]` and `#![cfg_attr]` are not
+    /// attributes. Attributes like `#[cfg]` and `#[cfg_attr]` are not
     /// considered 'custom' attributes.
     ///
     /// If this is `false`, then this `HasAttrs` definitely does

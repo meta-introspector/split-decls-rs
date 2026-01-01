@@ -6,31 +6,31 @@ Generated 19 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=13 | LINES=25
 
 ```rust
-//! This crate hosts a selection of "unit tests" for components of the `InstrumentCoverage` MIR
-//! pass.
-//!
-//! ```shell
-//! ./x.py test --keep-stage 1 compiler/rustc_mir --test-args '--show-output coverage'
-//! ```
-//!
-//! The tests construct a few "mock" objects, as needed, to support the `InstrumentCoverage`
-//! functions and algorithms. Mocked objects include instances of `mir::Body`; including
-//! `Terminator`s of various `kind`s, and `Span` objects. Some functions used by or used on
-//! real, runtime versions of these mocked-up objects have constraints (such as cross-thread
-//! limitations) and deep dependencies on other elements of the full Rust compiler (which is
-//! *not* constructed or mocked for these tests).
-//!
-//! Of particular note, attempting to simply print elements of the `mir::Body` with default
-//! `Debug` formatting can fail because some `Debug` format implementations require the
-//! `TyCtxt`, obtained via a static global variable that is *not* set for these tests.
-//! Initializing the global type context is prohibitively complex for the scope and scale of these
-//! tests (essentially requiring initializing the entire compiler).
-//!
-//! Also note, some basic features of `Span` also rely on the `Span`s own "session globals", which
-//! are unrelated to the `TyCtxt` global. Without initializing the `Span` session globals, some
-//! basic, coverage-specific features would be impossible to test, but thankfully initializing these
-//! globals is comparatively simpler. The easiest way is to wrap the test in a closure argument
-//! to: `rustc_span::create_default_session_globals_then(|| { test_here(); })`.
+// This crate hosts a selection of "unit tests" for components of the `InstrumentCoverage` MIR
+// pass.
+//
+// ```shell
+// ./x.py test --keep-stage 1 compiler/rustc_mir --test-args '--show-output coverage'
+// ```
+//
+// The tests construct a few "mock" objects, as needed, to support the `InstrumentCoverage`
+// functions and algorithms. Mocked objects include instances of `mir::Body`; including
+// `Terminator`s of various `kind`s, and `Span` objects. Some functions used by or used on
+// real, runtime versions of these mocked-up objects have constraints (such as cross-thread
+// limitations) and deep dependencies on other elements of the full Rust compiler (which is
+// *not* constructed or mocked for these tests).
+//
+// Of particular note, attempting to simply print elements of the `mir::Body` with default
+// `Debug` formatting can fail because some `Debug` format implementations require the
+// `TyCtxt`, obtained via a static global variable that is *not* set for these tests.
+// Initializing the global type context is prohibitively complex for the scope and scale of these
+// tests (essentially requiring initializing the entire compiler).
+//
+// Also note, some basic features of `Span` also rely on the `Span`s own "session globals", which
+// are unrelated to the `TyCtxt` global. Without initializing the `Span` session globals, some
+// basic, coverage-specific features would be impossible to test, but thankfully initializing these
+// globals is comparatively simpler. The easiest way is to wrap the test in a closure argument
+// to: `crate::rustc_span::create_default_session_globals_then(|| { test_here(); })`.
 ```
 
 ## Block 2
@@ -38,29 +38,29 @@ Generated 19 AST blocks from source file
 
 ```rust
 use itertools::Itertools;
-use rustc_data_structures::graph::{DirectedGraph, Successors};
+use crate::rustc_data_structures::graph::{DirectedGraph, Successors};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_index::{Idx, IndexVec};
+use crate::rustc_index::{Idx, IndexVec};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::{bug, ty};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::{bug, ty};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{BytePos, DUMMY_SP, Pos, Span};
+use crate::rustc_complete::{BytePos, DUMMY_SP, Pos, Span};
 ```
 
 ## Block 6

@@ -6,10 +6,10 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=PrivateMarker; | COMPLEXITY=11 | LINES=18
 
 ```rust
-//! The public parts of this private module are used to create traits
-//! that cannot be implemented outside of our own crate. This way we
-//! can feel free to extend those traits without worrying about it
-//! being a breaking change for other implementations.
+// The public parts of this private module are used to create traits
+// that cannot be implemented outside of our own crate. This way we
+// can feel free to extend those traits without worrying about it
+// being a breaking change for other implementations.
 
 /// If this type is pub but not publicly reachable, third parties
 /// can't name it and can't implement traits using it.

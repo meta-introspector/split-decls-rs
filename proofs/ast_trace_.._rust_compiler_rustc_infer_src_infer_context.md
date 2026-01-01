@@ -6,19 +6,19 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-//! Definition of `InferCtxtLike` from the librarified type layer.
-use rustc_hir::def_id::DefId;
-use rustc_middle::traits::ObligationCause;
-use rustc_middle::ty::relate::RelateResult;
-use rustc_middle::ty::relate::combine::PredicateEmittingRelation;
-use rustc_middle::ty::{self, Ty, TyCtxt, TypeFoldable};
+// Definition of `InferCtxtLike` from the librarified type layer.
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty::relate::RelateResult;
+use crate::rustc_complete::ty::relate::combine::PredicateEmittingRelation;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeFoldable};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, ErrorGuaranteed, Span};
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span};
 ```
 
 ## Block 3

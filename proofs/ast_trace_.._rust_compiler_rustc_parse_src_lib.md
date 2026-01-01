@@ -6,18 +6,18 @@ Generated 18 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=15
 
 ```rust
-//! The main parser interface.
+// The main parser interface.
 
 // tidy-alphabetical-start
-#![allow(rustc::diagnostic_outside_of_impl)]
-#![allow(rustc::untranslatable_diagnostic)]
-#![feature(assert_matches)]
-#![feature(box_patterns)]
-#![feature(debug_closure_helpers)]
-#![feature(default_field_values)]
-#![feature(if_let_guard)]
-#![feature(iter_intersperse)]
-#![recursion_limit = "256"]
+#[allow(rustc::diagnostic_outside_of_impl)]
+#[allow(rustc::untranslatable_diagnostic)]
+#[feature(assert_matches)]
+#[feature(box_patterns)]
+#[feature(debug_closure_helpers)]
+#[feature(default_field_values)]
+#[feature(if_let_guard)]
+#[feature(iter_intersperse)]
+#[recursion_limit = "256"]
 // tidy-alphabetical-end
 
 use std::path::{Path, PathBuf};
@@ -31,14 +31,14 @@ use std::str::Utf8Error;
 use std::sync::Arc;
 
 use rustc_ast as ast;
-use rustc_ast::tokenstream::{DelimSpan, TokenStream};
+use crate::rustc_complete::tokenstream::{DelimSpan, TokenStream};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{AttrItem, Attribute, MetaItemInner, token};
+use crate::rustc_complete::{AttrItem, Attribute, MetaItemInner, token};
 ```
 
 ## Block 4
@@ -46,16 +46,16 @@ use rustc_ast::{AttrItem, Attribute, MetaItemInner, token};
 
 ```rust
 use rustc_ast_pretty::pprust;
-use rustc_errors::{Diag, EmissionGuarantee, FatalError, PResult, pluralize};
+use crate::rustc_complete::{Diag, EmissionGuarantee, FatalError, PResult, pluralize};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::parse::ParseSess;
-use rustc_span::source_map::SourceMap;
-use rustc_span::{FileName, SourceFile, Span};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{FileName, SourceFile, Span};
 ```
 
 ## Block 6
@@ -69,7 +69,7 @@ pub const MACRO_ARGUMENTS: Option<&str> = Some("macro arguments");
 #[macro_use]
 pub mod parser;
 use parser::Parser;
-use rustc_ast::token::Delimiter;
+use crate::rustc_complete::token::Delimiter;
 
 use crate::lexer::StripTokens;
 

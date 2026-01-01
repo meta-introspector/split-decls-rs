@@ -6,8 +6,8 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::source_map::SourceMap;
-use rustc_span::{BytePos, Pos, SourceFile, Span};
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{BytePos, Pos, SourceFile, Span};
 ```
 
 ## Block 2

@@ -6,16 +6,16 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=13
 
 ```rust
-//! Code for the 'normalization' query. This consists of a wrapper
-//! which folds deeply, invoking the underlying
-//! `normalize_canonicalized_projection_ty` query when it encounters projections.
+// Code for the 'normalization' query. This consists of a wrapper
+// which folds deeply, invoking the underlying
+// `normalize_canonicalized_projection_ty` query when it encounters projections.
 
-use rustc_data_structures::sso::SsoHashMap;
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_infer::traits::PredicateObligations;
+use crate::rustc_data_structures::sso::SsoHashMap;
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_infer::traits::PredicateObligations;
 use rustc_macros::extension;
-pub use rustc_middle::traits::query::NormalizationResult;
-use rustc_middle::ty::{
+pub use crate::rustc_complete::traits::query::NormalizationResult;
+use crate::rustc_complete::ty::{
     self, FallibleTypeFolder, Ty, TyCtxt, TypeFoldable, TypeSuperFoldable, TypeSuperVisitable,
     TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode,
 };
@@ -25,7 +25,7 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::DUMMY_SP;
+use crate::rustc_complete::DUMMY_SP;
 use tracing::{debug, info, instrument};
 ```
 
@@ -258,7 +258,7 @@ impl<'a, 'tcx> FallibleTypeFolder<TyCtxt<'tcx>> for QueryNormalizer<'a, 'tcx> {
             }
         };
 
-        // See note in `rustc_trait_selection::traits::project` about why we
+        // See note in `crate::rustc_trait_selection::traits::project` about why we
         // wait to fold the args.
         let res = match kind {
             ty::Opaque => {
@@ -304,7 +304,7 @@ impl<'a, 'tcx> FallibleTypeFolder<TyCtxt<'tcx>> for QueryNormalizer<'a, 'tcx> {
             }
 
             ty::Projection | ty::Inherent | ty::Free => {
-                // See note in `rustc_trait_selection::traits::project`
+                // See note in `crate::rustc_trait_selection::traits::project`
 
                 let infcx = self.infcx;
                 let tcx = infcx.tcx;

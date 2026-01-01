@@ -6,9 +6,9 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-//! The outlives relation `T: 'a` or `'a: 'b`. This code frequently
-//! refers to rules defined in RFC 1214 (`OutlivesFooBar`), so see that
-//! RFC for reference.
+// The outlives relation `T: 'a` or `'a: 'b`. This code frequently
+// refers to rules defined in RFC 1214 (`OutlivesFooBar`), so see that
+// RFC for reference.
 
 use derive_where::derive_where;
 use smallvec::{SmallVec, smallvec};

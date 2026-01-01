@@ -9,8 +9,8 @@ Generated 14 AST blocks from source file
 use std::ffi::CString;
 use std::path::Path;
 
-use rustc_data_structures::small_c_str::SmallCStr;
-use rustc_errors::{Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level};
+use crate::rustc_data_structures::small_c_str::SmallCStr;
+use crate::rustc_complete::{Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level};
 ```
 
 ## Block 2
@@ -18,7 +18,7 @@ use rustc_errors::{Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level};
 
 ```rust
 use rustc_macros::Diagnostic;
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::fluent_generated as fluent;
 

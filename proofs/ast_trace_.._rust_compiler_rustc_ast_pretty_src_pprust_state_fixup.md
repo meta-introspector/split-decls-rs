@@ -6,15 +6,15 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::util::classify;
-use rustc_ast::util::parser::{self, ExprPrecedence};
+use crate::rustc_complete::util::classify;
+use crate::rustc_complete::util::parser::{self, ExprPrecedence};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{Expr, ExprKind, YieldKind};
+use crate::rustc_complete::{Expr, ExprKind, YieldKind};
 ```
 
 ## Block 3

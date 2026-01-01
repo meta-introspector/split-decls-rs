@@ -8,16 +8,16 @@ Generated 9 AST blocks from source file
 ```rust
 use std::ops::ControlFlow;
 
-use rustc_infer::infer::InferCtxt;
-use rustc_infer::traits::solve::inspect::ProbeKind;
-use rustc_infer::traits::solve::{CandidateSource, Certainty, Goal};
+use crate::rustc_infer::infer::InferCtxt;
+use crate::rustc_infer::traits::solve::inspect::ProbeKind;
+use crate::rustc_infer::traits::solve::{CandidateSource, Certainty, Goal};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_infer::traits::{
+use crate::rustc_infer::traits::{
     BuiltinImplSource, ImplSource, ImplSourceUserDefinedData, Obligation, ObligationCause,
     Selection, SelectionError, SelectionResult, TraitObligation,
 };
@@ -28,14 +28,14 @@ use rustc_infer::traits::{
 
 ```rust
 use rustc_macros::extension;
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use thin_vec::thin_vec;
 
 use crate::solve::inspect::{self, ProofTreeInferCtxtExt};

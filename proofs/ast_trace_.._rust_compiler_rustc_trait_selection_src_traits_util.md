@@ -8,21 +8,21 @@ Generated 19 AST blocks from source file
 ```rust
 use std::collections::VecDeque;
 
-use rustc_data_structures::fx::{FxHashSet, FxIndexMap};
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 ```
 
 ## Block 2
-**Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11
+**Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=11
 
 ```rust
-use rustc_hir::LangItem;
-use rustc_hir::def_id::DefId;
-use rustc_infer::infer::InferCtxt;
-use rustc_infer::traits::PolyTraitObligation;
-pub use rustc_infer::traits::util::*;
-use rustc_middle::bug;
-use rustc_middle::ty::fast_reject::DeepRejectCtxt;
-use rustc_middle::ty::{
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_infer::infer::InferCtxt;
+use crate::rustc_infer::traits::PolyTraitObligation;
+pub use crate::rustc_infer::traits::util::*;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
+use crate::rustc_complete::ty::{
     self, PolyTraitPredicate, PredicatePolarity, SizedTraitKind, TraitPredicate, TraitRef, Ty,
     TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt,
 };
@@ -33,7 +33,7 @@ use rustc_middle::ty::{
 
 ```rust
 pub use rustc_next_trait_solver::placeholder::BoundVarReplacer;
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use smallvec::{SmallVec, smallvec};
 ```
 

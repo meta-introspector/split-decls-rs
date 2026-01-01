@@ -6,9 +6,9 @@ Generated 21 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::intern::Interned;
-use rustc_errors::MultiSpan;
-use rustc_hir::def_id::DefId;
+use crate::rustc_data_structures::intern::Interned;
+use crate::rustc_complete::MultiSpan;
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 ```
 
@@ -16,7 +16,7 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, ErrorGuaranteed, Symbol, kw, sym};
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Symbol, kw, sym};
 ```
 
 ## Block 3
@@ -609,7 +609,7 @@ impl BoundRegionKind {
 // Some types are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
 mod size_asserts {
-    use rustc_data_structures::static_assert_size;
+    use crate::rustc_data_structures::static_assert_size;
 
     use super::*;
     // tidy-alphabetical-start

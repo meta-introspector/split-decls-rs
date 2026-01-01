@@ -6,23 +6,23 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::tokenstream::TokenStream;
-use rustc_ast::{ExprKind, LitIntType, LitKind, StrStyle, UintTy, token};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{ExprKind, LitIntType, LitKind, StrStyle, UintTy, token};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
+use crate::rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::errors::report_lit_error;
-use rustc_span::{ErrorGuaranteed, Span};
+use crate::rustc_complete::errors::report_lit_error;
+use crate::rustc_complete::{ErrorGuaranteed, Span};
 ```
 
 ## Block 4
@@ -119,8 +119,8 @@ fn invalid_type_err(
 fn handle_array_element(
     cx: &ExtCtxt<'_>,
     guar: &mut Option<ErrorGuaranteed>,
-    missing_literals: &mut Vec<rustc_span::Span>,
-    expr: &Box<rustc_ast::Expr>,
+    missing_literals: &mut Vec<crate::rustc_span::Span>,
+    expr: &Box<crate::rustc_ast::Expr>,
 ) -> Option<u8> {
     let dcx = cx.dcx();
 

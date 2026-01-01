@@ -6,19 +6,19 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! See docs in build/expr/mod.rs
+// See docs in build/expr/mod.rs
 
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_hir::HirId;
-use rustc_middle::middle::region::{Scope, ScopeData};
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_complete::HirId;
+use crate::rustc_complete::middle::region::{Scope, ScopeData};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::thir::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
 use tracing::{debug, instrument};
 ```
 

@@ -8,16 +8,16 @@ Generated 10 AST blocks from source file
 ```rust
 use std::cmp;
 
-use rustc_abi::{Align, Size};
+use crate::rustc_abi::{Align, Size};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=STRUCT | NAME=VariantInfo | COMPLEXITY=2 | LINES=12
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_data_structures::sync::Lock;
-use rustc_span::Symbol;
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_data_structures::sync::Lock;
+use crate::rustc_complete::Symbol;
 
 #[derive(Clone, PartialEq, Eq, Hash, Debug)]
 pub struct VariantInfo {

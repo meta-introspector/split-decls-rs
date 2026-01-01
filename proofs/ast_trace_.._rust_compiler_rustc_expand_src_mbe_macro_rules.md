@@ -17,23 +17,23 @@ use std::{mem, slice};
 
 ```rust
 use ast::token::IdentIsRaw;
-use rustc_ast::token::NtPatKind::*;
-use rustc_ast::token::TokenKind::*;
-use rustc_ast::token::{self, Delimiter, NonterminalKind, Token, TokenKind};
+use crate::rustc_complete::token::NtPatKind::*;
+use crate::rustc_complete::token::TokenKind::*;
+use crate::rustc_complete::token::{self, Delimiter, NonterminalKind, Token, TokenKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::tokenstream::{self, DelimSpan, TokenStream};
+use crate::rustc_complete::tokenstream::{self, DelimSpan, TokenStream};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{self as ast, DUMMY_NODE_ID, NodeId};
+use crate::rustc_complete::{self as ast, DUMMY_NODE_ID, NodeId};
 ```
 
 ## Block 5
@@ -41,27 +41,27 @@ use rustc_ast::{self as ast, DUMMY_NODE_ID, NodeId};
 
 ```rust
 use rustc_ast_pretty::pprust;
-use rustc_data_structures::fx::{FxHashMap, FxIndexMap};
+use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{Applicability, Diag, ErrorGuaranteed, MultiSpan};
+use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed, MultiSpan};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_feature::Features;
+use crate::rustc_feature::Features;
 use rustc_hir as hir;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::MacroKinds;
-use rustc_hir::find_attr;
-use rustc_lint_defs::BuiltinLintDiag;
-use rustc_lint_defs::builtin::{
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::MacroKinds;
+use crate::rustc_complete::find_attr;
+use crate::rustc_lint_defs::BuiltinLintDiag;
+use crate::rustc_lint_defs::builtin::{
     RUST_2021_INCOMPATIBLE_OR_PATTERNS, SEMICOLON_IN_EXPRESSIONS_FROM_MACROS,
 };
 ```
@@ -70,25 +70,25 @@ use rustc_lint_defs::builtin::{
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_parse::exp;
-use rustc_parse::parser::{Parser, Recovery};
+use crate::rustc_parse::exp;
+use crate::rustc_parse::parser::{Parser, Recovery};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::Session;
-use rustc_session::parse::{ParseSess, feature_err};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::parse::{ParseSess, feature_err};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::edition::Edition;
-use rustc_span::hygiene::Transparency;
-use rustc_span::{Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::hygiene::Transparency;
+use crate::rustc_complete::{Ident, Span, Symbol, kw, sym};
 ```
 
 ## Block 11
@@ -875,7 +875,7 @@ pub fn compile_declarative_macro(
     let exp_sep = if macro_rules { exp!(Semi) } else { exp!(Comma) };
 
     let body = macro_def.body.tokens.clone();
-    let mut p = Parser::new(&sess.psess, body, rustc_parse::MACRO_ARGUMENTS);
+    let mut p = Parser::new(&sess.psess, body, crate::rustc_parse::MACRO_ARGUMENTS);
 
     // Don't abort iteration early, so that multiple errors can be reported. We only abort early on
     // parse failures we can't recover from.
@@ -2036,7 +2036,7 @@ pub(super) fn parser_from_cx(
     recovery: Recovery,
 ) -> Parser<'_> {
     tts.desugar_doc_comments();
-    Parser::new(psess, tts, rustc_parse::MACRO_ARGUMENTS).recovery(recovery)
+    Parser::new(psess, tts, crate::rustc_parse::MACRO_ARGUMENTS).recovery(recovery)
 }
 ```
 

@@ -6,31 +6,31 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=18
 
 ```rust
-//! This pass enforces various "well-formedness constraints" on impls.
-//! Logically, it is part of wfcheck -- but we do it early so that we
-//! can stop compilation afterwards, since part of the trait matching
-//! infrastructure gets very grumpy if these conditions don't hold. In
-//! particular, if there are type parameters that are not part of the
-//! impl, then coherence will report strange inference ambiguity
-//! errors; if impls have duplicate items, we get misleading
-//! specialization errors. These things can (and probably should) be
-//! fixed, but for the moment it's easier to do these checks early.
+// This pass enforces various "well-formedness constraints" on impls.
+// Logically, it is part of wfcheck -- but we do it early so that we
+// can stop compilation afterwards, since part of the trait matching
+// infrastructure gets very grumpy if these conditions don't hold. In
+// particular, if there are type parameters that are not part of the
+// impl, then coherence will report strange inference ambiguity
+// errors; if impls have duplicate items, we get misleading
+// specialization errors. These things can (and probably should) be
+// fixed, but for the moment it's easier to do these checks early.
 
 use std::assert_matches::debug_assert_matches;
 
 use min_specialization::check_min_specialization;
-use rustc_data_structures::fx::FxHashSet;
-use rustc_errors::codes::*;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::LocalDefId;
-use rustc_middle::ty::{self, TyCtxt, TypeVisitableExt};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=23
 
 ```rust
-use rustc_span::ErrorGuaranteed;
+use crate::rustc_complete::ErrorGuaranteed;
 
 use crate::constrained_generic_params as cgp;
 use crate::errors::UnconstrainedGenericParameter;
@@ -134,7 +134,7 @@ pub(crate) fn enforce_impl_lifetime_params_are_constrained(
                 "potentially unconstrained type parameters weren't evaluated: {impl_self_ty:?}",
             ),
         );
-        // This is super fishy, but our current `rustc_hir_analysis::check_crate` pipeline depends on
+        // This is super fishy, but our current `crate::rustc_hir_analysis::check_crate` pipeline depends on
         // `type_of` having been called much earlier, and thus this value being read from cache.
         // Compilation must continue in order for other important diagnostics to keep showing up.
         return Ok(());
@@ -237,7 +237,7 @@ pub(crate) fn enforce_impl_non_lifetime_params_are_constrained(
                 "potentially unconstrained type parameters weren't evaluated: {impl_self_ty:?}",
             ),
         );
-        // This is super fishy, but our current `rustc_hir_analysis::check_crate` pipeline depends on
+        // This is super fishy, but our current `crate::rustc_hir_analysis::check_crate` pipeline depends on
         // `type_of` having been called much earlier, and thus this value being read from cache.
         // Compilation must continue in order for other important diagnostics to keep showing up.
         return Ok(());

@@ -6,9 +6,9 @@ Generated 14 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=11
 
 ```rust
-//! Trait Resolution. See the [rustc-dev-guide] for more information on how this works.
-//!
-//! [rustc-dev-guide]: https://rustc-dev-guide.rust-lang.org/traits/resolution.html
+// Trait Resolution. See the [rustc-dev-guide] for more information on how this works.
+//
+// [rustc-dev-guide]: https://rustc-dev-guide.rust-lang.org/traits/resolution.html
 
 mod engine;
 mod project;
@@ -32,17 +32,17 @@ use rustc_macros::{TypeFoldable, TypeVisitable};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::traits::query::NoSolution;
-use rustc_middle::traits::solve::Certainty;
-pub use rustc_middle::traits::*;
-use rustc_middle::ty::{self, Ty, TyCtxt, Upcast};
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::traits::solve::Certainty;
+pub use crate::rustc_complete::traits::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, Upcast};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use thin_vec::ThinVec;
 
 pub use self::engine::{FromSolverError, ScrubbedTraitError, TraitEngine};
@@ -187,7 +187,7 @@ impl<'tcx> PolyTraitObligation<'tcx> {
 ```rust
 // `PredicateObligation` is used a lot. Make sure it doesn't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
-rustc_data_structures::static_assert_size!(PredicateObligation<'_>, 48);
+crate::rustc_data_structures::static_assert_size!(PredicateObligation<'_>, 48);
 
 pub type Selection<'tcx> = ImplSource<'tcx, PredicateObligation<'tcx>>;
 

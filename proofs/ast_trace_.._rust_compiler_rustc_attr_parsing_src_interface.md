@@ -9,26 +9,26 @@ Generated 9 AST blocks from source file
 use std::borrow::Cow;
 
 use rustc_ast as ast;
-use rustc_ast::NodeId;
-use rustc_errors::DiagCtxtHandle;
-use rustc_feature::{AttributeTemplate, Features};
+use crate::rustc_complete::NodeId;
+use crate::rustc_complete::DiagCtxtHandle;
+use crate::rustc_feature::{AttributeTemplate, Features};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::lints::AttributeLint;
-use rustc_hir::{AttrArgs, AttrItem, AttrPath, Attribute, HashIgnoredAttrId, Target};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::lints::AttributeLint;
+use crate::rustc_complete::{AttrArgs, AttrItem, AttrPath, Attribute, HashIgnoredAttrId, Target};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::Session;
-use rustc_span::{DUMMY_SP, Span, Symbol, sym};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol, sym};
 ```
 
 ## Block 4
@@ -258,7 +258,7 @@ impl<'sess, S: Stage> AttributeParser<'sess, S> {
                 }
             }
 
-            // Sometimes, for example for `#![doc = include_str!("readme.md")]`,
+            // Sometimes, for example for `#[doc = include_str!("readme.md")]`,
             // doc still contains a non-literal. You might say, when we're lowering attributes
             // that's expanded right? But no, sometimes, when parsing attributes on macros,
             // we already use the lowering logic and these are still there. So, when `omit_doc`

@@ -7,7 +7,7 @@ Generated 10 AST blocks from source file
 
 ```rust
 use rustc_macros::Diagnostic;
-use rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 2

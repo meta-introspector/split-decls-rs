@@ -6,9 +6,9 @@ Generated 113 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-//! Type context book-keeping.
+// Type context book-keeping.
 
-#![allow(rustc::usage_of_ty_tykind)]
+#[allow(rustc::usage_of_ty_tykind)]
 
 pub mod tls;
 
@@ -58,7 +58,7 @@ use std::{fmt, iter, mem};
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::{ExternAbi, FieldIdx, Layout, LayoutData, TargetDataLayout, VariantIdx};
+use crate::rustc_abi::{ExternAbi, FieldIdx, Layout, LayoutData, TargetDataLayout, VariantIdx};
 ```
 
 ## Block 8
@@ -66,28 +66,28 @@ use rustc_abi::{ExternAbi, FieldIdx, Layout, LayoutData, TargetDataLayout, Varia
 
 ```rust
 use rustc_ast as ast;
-use rustc_data_structures::defer;
-use rustc_data_structures::fingerprint::Fingerprint;
-use rustc_data_structures::fx::FxHashMap;
-use rustc_data_structures::intern::Interned;
-use rustc_data_structures::jobserver::Proxy;
-use rustc_data_structures::profiling::SelfProfilerRef;
-use rustc_data_structures::sharded::{IntoPointer, ShardedHashMap};
+use crate::rustc_data_structures::defer;
+use crate::rustc_data_structures::fingerprint::Fingerprint;
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::intern::Interned;
+use crate::rustc_data_structures::jobserver::Proxy;
+use crate::rustc_data_structures::profiling::SelfProfilerRef;
+use crate::rustc_data_structures::sharded::{IntoPointer, ShardedHashMap};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::steal::Steal;
-use rustc_data_structures::sync::{
+use crate::rustc_data_structures::steal::Steal;
+use crate::rustc_data_structures::sync::{
     self, DynSend, DynSync, FreezeReadGuard, Lock, RwLock, WorkerLocal,
 };
 ```
@@ -96,7 +96,7 @@ use rustc_data_structures::sync::{
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_errors::{
+use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, ErrorGuaranteed, LintDiagnostic, LintEmitter, MultiSpan,
 };
 ```
@@ -105,39 +105,39 @@ use rustc_errors::{
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::{CtorKind, CtorOf, DefKind};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{CtorKind, CtorOf, DefKind};
 ```
 
 ## Block 13
 **Metadata**: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{CrateNum, DefId, LOCAL_CRATE, LocalDefId};
+use crate::rustc_complete::def_id::{CrateNum, DefId, LOCAL_CRATE, LocalDefId};
 ```
 
 ## Block 14
 **Metadata**: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::definitions::{DefPathData, Definitions, DisambiguatorState};
+use crate::rustc_complete::definitions::{DefPathData, Definitions, DisambiguatorState};
 ```
 
 ## Block 15
 **Metadata**: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir::intravisit::VisitorExt;
-use rustc_hir::lang_items::LangItem;
-use rustc_hir::limit::Limit;
-use rustc_hir::{self as hir, Attribute, HirId, Node, TraitCandidate, find_attr};
+use crate::rustc_complete::intravisit::VisitorExt;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_complete::{self as hir, Attribute, HirId, Node, TraitCandidate, find_attr};
 ```
 
 ## Block 16
 **Metadata**: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_index::IndexVec;
+use crate::rustc_index::IndexVec;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 ```
 
@@ -148,31 +148,31 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 use rustc_query_system::cache::WithDepNode;
 use rustc_query_system::dep_graph::DepNodeIndex;
 use rustc_query_system::ich::StableHashingContext;
-use rustc_serialize::opaque::{FileEncodeResult, FileEncoder};
+use crate::rustc_serialize::opaque::{FileEncodeResult, FileEncoder};
 ```
 
 ## Block 18
 **Metadata**: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::Session;
-use rustc_session::config::CrateType;
-use rustc_session::cstore::{CrateStoreDyn, Untracked};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::CrateType;
+use crate::rustc_complete::cstore::{CrateStoreDyn, Untracked};
 ```
 
 ## Block 19
 **Metadata**: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::lint::Lint;
-use rustc_span::def_id::{CRATE_DEF_ID, DefPathHash, StableCrateId};
+use crate::rustc_complete::lint::Lint;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefPathHash, StableCrateId};
 ```
 
 ## Block 20
 **Metadata**: AST_ID=20 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
 ```
 
 ## Block 21
@@ -550,7 +550,7 @@ impl<'tcx> Interner for TyCtxt<'tcx> {
         self.recursion_limit().0
     }
 
-    type Features = &'tcx rustc_feature::Features;
+    type Features = &'tcx crate::rustc_feature::Features;
 
     fn features(self) -> Self::Features {
         self.features()
@@ -567,7 +567,7 @@ impl<'tcx> Interner for TyCtxt<'tcx> {
         self.fn_sig(def_id)
     }
 
-    fn coroutine_movability(self, def_id: DefId) -> rustc_ast::Movability {
+    fn coroutine_movability(self, def_id: DefId) -> crate::rustc_ast::Movability {
         self.coroutine_movability(def_id)
     }
 
@@ -924,7 +924,7 @@ impl<'tcx> Interner for TyCtxt<'tcx> {
         self.coroutine_is_async_gen(coroutine_def_id)
     }
 
-    type UnsizingParams = &'tcx rustc_index::bit_set::DenseBitSet<u32>;
+    type UnsizingParams = &'tcx crate::rustc_index::bit_set::DenseBitSet<u32>;
     fn unsizing_params_for_adt(self, adt_def_id: DefId) -> Self::UnsizingParams {
         self.unsizing_params_for_adt(adt_def_id)
     }
@@ -1119,7 +1119,7 @@ impl<'tcx> rustc_type_ir::inherent::Safety<TyCtxt<'tcx>> for hir::Safety {
 **Metadata**: AST_ID=40 | TYPE=FUNCTION | NAME=generic_const_exprs | COMPLEXITY=11 | LINES=21
 
 ```rust
-impl<'tcx> rustc_type_ir::inherent::Features<TyCtxt<'tcx>> for &'tcx rustc_feature::Features {
+impl<'tcx> rustc_type_ir::inherent::Features<TyCtxt<'tcx>> for &'tcx crate::rustc_feature::Features {
     fn generic_const_exprs(self) -> bool {
         self.generic_const_exprs()
     }
@@ -1775,7 +1775,7 @@ impl<'tcx> TyCtxtFeed<'tcx, LocalDefId> {
         let bodies = Default::default();
         let attrs = hir::AttributeMap::EMPTY;
 
-        let rustc_middle::hir::Hashes { opt_hash_including_bodies, .. } =
+        let crate::rustc_middle::hir::Hashes { opt_hash_including_bodies, .. } =
             self.tcx.hash_owner_nodes(node, &bodies, &attrs.map, &[], attrs.define_opaque);
         let node = node.into();
         self.opt_hir_owner_nodes(Some(self.tcx.arena.alloc(hir::OwnerNodes {
@@ -2042,7 +2042,7 @@ impl CurrentGcx {
 ```
 
 ## Block 72
-**Metadata**: AST_ID=72 | TYPE=FUNCTION | NAME=has_typeck_results | COMPLEXITY=187 | LINES=432
+**Metadata**: AST_ID=72 | TYPE=FUNCTION | NAME=has_typeck_results | COMPLEXITY=188 | LINES=432
 
 ```rust
 impl<'tcx> TyCtxt<'tcx> {
@@ -2122,7 +2122,7 @@ impl<'tcx> TyCtxt<'tcx> {
     }
 
     /// Traits added on all bounds by default, excluding `Sized` which is treated separately.
-    pub fn default_traits(self) -> &'static [rustc_hir::LangItem] {
+    pub fn default_traits(self) -> &'static [crate::rustc_hir::LangItem] {
         if self.sess.opts.unstable_opts.experimental_default_bounds {
             &[
                 LangItem::DefaultTrait1,
@@ -2219,7 +2219,7 @@ impl<'tcx> TyCtxt<'tcx> {
     }
 
     /// Obtain all lang items of this crate and all dependencies (recursively)
-    pub fn lang_items(self) -> &'tcx rustc_hir::lang_items::LanguageItems {
+    pub fn lang_items(self) -> &'tcx crate::rustc_hir::lang_items::LanguageItems {
         self.get_lang_items(())
     }
 
@@ -2296,11 +2296,11 @@ impl<'tcx> TyCtxt<'tcx> {
         )
     }
 
-    pub fn features(self) -> &'tcx rustc_feature::Features {
+    pub fn features(self) -> &'tcx crate::rustc_feature::Features {
         self.features_query(())
     }
 
-    pub fn def_key(self, id: impl IntoQueryParam<DefId>) -> rustc_hir::definitions::DefKey {
+    pub fn def_key(self, id: impl IntoQueryParam<DefId>) -> crate::rustc_hir::definitions::DefKey {
         let id = id.into_query_param();
         // Accessing the DefKey is ok, since it is part of DefPathHash.
         if let Some(id) = id.as_local() {
@@ -2315,7 +2315,7 @@ impl<'tcx> TyCtxt<'tcx> {
     ///
     /// Note that if `id` is not local to this crate, the result will
     ///  be a non-local `DefPath`.
-    pub fn def_path(self, id: DefId) -> rustc_hir::definitions::DefPath {
+    pub fn def_path(self, id: DefId) -> crate::rustc_hir::definitions::DefPath {
         // Accessing the DefPath is ok, since it is part of DefPathHash.
         if let Some(id) = id.as_local() {
             self.definitions_untracked().def_path(id)
@@ -2325,7 +2325,7 @@ impl<'tcx> TyCtxt<'tcx> {
     }
 
     #[inline]
-    pub fn def_path_hash(self, def_id: DefId) -> rustc_hir::definitions::DefPathHash {
+    pub fn def_path_hash(self, def_id: DefId) -> crate::rustc_hir::definitions::DefPathHash {
         // Accessing the DefPathHash is ok, it is incr. comp. stable.
         if let Some(def_id) = def_id.as_local() {
             self.definitions_untracked().def_path_hash(def_id)
@@ -2571,7 +2571,7 @@ impl<'tcx> TyCtxt<'tcx> {
             // Recompute the number of definitions each time, because our caller may be creating
             // new ones.
             while i < { definitions.read().num_definitions() } {
-                let local_def_index = rustc_span::def_id::DefIndex::from_usize(i);
+                let local_def_index = crate::rustc_span::def_id::DefIndex::from_usize(i);
                 yield LocalDefId { local_def_index };
                 i += 1;
             }
@@ -2581,7 +2581,7 @@ impl<'tcx> TyCtxt<'tcx> {
         }
     }
 
-    pub fn def_path_table(self) -> &'tcx rustc_hir::definitions::DefPathTable {
+    pub fn def_path_table(self) -> &'tcx crate::rustc_hir::definitions::DefPathTable {
         // Depend on the `analysis` query to ensure compilation if finished.
         self.ensure_ok().analysis(());
 
@@ -2592,7 +2592,7 @@ impl<'tcx> TyCtxt<'tcx> {
 
     pub fn def_path_hash_to_def_index_map(
         self,
-    ) -> &'tcx rustc_hir::def_path_hash_map::DefPathHashMap {
+    ) -> &'tcx crate::rustc_hir::def_path_hash_map::DefPathHashMap {
         // Create a dependency to the crate to be sure we re-execute this when the amount of
         // definitions change.
         self.ensure_ok().hir_crate_items(());
@@ -3359,7 +3359,7 @@ macro_rules! slice_interners {
 ```
 
 ## Block 110
-**Metadata**: AST_ID=110 | TYPE=FUNCTION | NAME=safe_to_unsafe_fn_ty | COMPLEXITY=277 | LINES=752
+**Metadata**: AST_ID=110 | TYPE=FUNCTION | NAME=safe_to_unsafe_fn_ty | COMPLEXITY=278 | LINES=752
 
 ```rust
 // These functions intern slices. They all have a corresponding
@@ -3824,7 +3824,7 @@ impl<'tcx> TyCtxt<'tcx> {
 
     /// Emit a lint at the appropriate level for a hir node, with an associated span.
     ///
-    /// [`lint_level`]: rustc_middle::lint::lint_level#decorate-signature
+    /// [`lint_level`]: crate::rustc_middle::lint::lint_level#decorate-signature
     #[rustc_lint_diagnostics]
     #[track_caller]
     pub fn node_span_lint(
@@ -3845,7 +3845,7 @@ impl<'tcx> TyCtxt<'tcx> {
         m.spans.inject_use_span.shrink_to_lo()
     }
 
-    pub fn disabled_nightly_features<E: rustc_errors::EmissionGuarantee>(
+    pub fn disabled_nightly_features<E: crate::rustc_errors::EmissionGuarantee>(
         self,
         diag: &mut Diag<'_, E>,
         features: impl IntoIterator<Item = (String, Symbol)>,
@@ -3858,11 +3858,11 @@ impl<'tcx> TyCtxt<'tcx> {
         for (desc, feature) in features {
             // FIXME: make this string translatable
             let msg =
-                format!("add `#![feature({feature})]` to the crate attributes to enable{desc}");
+                format!("add `#[feature({feature})]` to the crate attributes to enable{desc}");
             diag.span_suggestion_verbose(
                 span,
                 msg,
-                format!("#![feature({feature})]\n"),
+                format!("#[feature({feature})]\n"),
                 Applicability::MaybeIncorrect,
             );
         }
@@ -3884,7 +3884,7 @@ impl<'tcx> TyCtxt<'tcx> {
 
     /// Emit a lint at the appropriate level for a hir node.
     ///
-    /// [`lint_level`]: rustc_middle::lint::lint_level#decorate-signature
+    /// [`lint_level`]: crate::rustc_middle::lint::lint_level#decorate-signature
     #[rustc_lint_diagnostics]
     #[track_caller]
     pub fn node_lint(

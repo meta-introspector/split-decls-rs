@@ -6,9 +6,9 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-//! A simple markdown parser that can write formatted text to the terminal
-//!
-//! Entrypoint is `MdStream::parse_str(...)`
+// A simple markdown parser that can write formatted text to the terminal
+//
+// Entrypoint is `MdStream::parse_str(...)`
 
 use std::io;
 

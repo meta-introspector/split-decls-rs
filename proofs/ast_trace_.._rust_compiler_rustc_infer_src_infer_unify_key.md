@@ -9,22 +9,22 @@ Generated 14 AST blocks from source file
 use std::cmp;
 use std::marker::PhantomData;
 
-use rustc_data_structures::unify::{NoError, UnifyKey, UnifyValue};
+use crate::rustc_data_structures::unify::{NoError, UnifyKey, UnifyValue};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, ty};
+use crate::rustc_complete::{bug, ty};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=8
 
 ```rust
-use rustc_span::Span;
-use rustc_span::def_id::DefId;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::DefId;
 
 #[derive(Copy, Clone, Debug)]
 pub(crate) enum RegionVariableValue<'tcx> {

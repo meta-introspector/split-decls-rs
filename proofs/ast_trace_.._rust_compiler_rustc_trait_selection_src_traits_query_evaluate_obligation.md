@@ -7,7 +7,7 @@ Generated 2 AST blocks from source file
 
 ```rust
 use rustc_macros::extension;
-use rustc_middle::span_bug;
+use crate::rustc_complete::span_bug;
 
 use crate::infer::InferCtxt;
 use crate::infer::canonical::OriginalQueryValues;
@@ -40,7 +40,7 @@ impl<'tcx> InferCtxt<'tcx> {
     /// # Example
     ///
     /// ```
-    /// # #![allow(dead_code)]
+    /// # #[allow(dead_code)]
     /// trait Trait {}
     ///
     /// fn check<T: Trait>() {}

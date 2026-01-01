@@ -6,9 +6,9 @@ Generated 40 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=12
 
 ```rust
-//! Trait Resolution. See the [rustc dev guide] for more information on how this works.
-//!
-//! [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/traits/resolution.html
+// Trait Resolution. See the [rustc dev guide] for more information on how this works.
+//
+// [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/traits/resolution.html
 
 pub mod query;
 pub mod select;
@@ -26,7 +26,7 @@ use std::hash::{Hash, Hasher};
 ```rust
 use std::sync::Arc;
 
-use rustc_errors::{Applicability, Diag, EmissionGuarantee, ErrorGuaranteed};
+use crate::rustc_complete::{Applicability, Diag, EmissionGuarantee, ErrorGuaranteed};
 ```
 
 ## Block 3
@@ -34,8 +34,8 @@ use rustc_errors::{Applicability, Diag, EmissionGuarantee, ErrorGuaranteed};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::HirId;
-use rustc_hir::def_id::DefId;
+use crate::rustc_complete::HirId;
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{
     Decodable, Encodable, HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable,
 };
@@ -45,14 +45,14 @@ use rustc_macros::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::def_id::{CRATE_DEF_ID, LocalDefId};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, LocalDefId};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Span, Symbol};
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
 ```
 
 ## Block 6
@@ -172,7 +172,7 @@ impl<'tcx> ObligationCause<'tcx> {
         parent_trait_pred: ty::PolyTraitPredicate<'tcx>,
         variant: impl FnOnce(DerivedCause<'tcx>) -> ObligationCauseCode<'tcx>,
     ) -> ObligationCause<'tcx> {
-        /*!
+        /*
          * Creates a cause for obligations that are derived from
          * `obligation` by a recursive search (e.g., for a builtin
          * bound, or eventually a `auto trait Foo`). If `obligation`
@@ -628,7 +628,7 @@ impl<'tcx> ObligationCauseCode<'tcx> {
 ```rust
 // `ObligationCauseCode` is used a lot. Make sure it doesn't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
-rustc_data_structures::static_assert_size!(ObligationCauseCode<'_>, 48);
+crate::rustc_data_structures::static_assert_size!(ObligationCauseCode<'_>, 48);
 
 #[derive(Clone, Debug, PartialEq, Eq, HashStable, TyEncodable, TyDecodable)]
 #[derive(TypeVisitable, TypeFoldable)]

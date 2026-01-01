@@ -6,48 +6,48 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=21
 
 ```rust
-//! # Lattice variables
-//!
-//! Generic code for operating on [lattices] of inference variables
-//! that are characterized by an upper- and lower-bound.
-//!
-//! The code is defined quite generically so that it can be
-//! applied both to type variables, which represent types being inferred,
-//! and fn variables, which represent function types being inferred.
-//! (It may eventually be applied to their types as well.)
-//! In some cases, the functions are also generic with respect to the
-//! operation on the lattice (GLB vs LUB).
-//!
-//! ## Note
-//!
-//! Although all the functions are generic, for simplicity, comments in the source code
-//! generally refer to type variables and the LUB operation.
-//!
-//! [lattices]: https://en.wikipedia.org/wiki/Lattice_(order)
+// # Lattice variables
+//
+// Generic code for operating on [lattices] of inference variables
+// that are characterized by an upper- and lower-bound.
+//
+// The code is defined quite generically so that it can be
+// applied both to type variables, which represent types being inferred,
+// and fn variables, which represent function types being inferred.
+// (It may eventually be applied to their types as well.)
+// In some cases, the functions are also generic with respect to the
+// operation on the lattice (GLB vs LUB).
+//
+// ## Note
+//
+// Although all the functions are generic, for simplicity, comments in the source code
+// generally refer to type variables and the LUB operation.
+//
+// [lattices]: https://en.wikipedia.org/wiki/Lattice_(order)
 
-use rustc_middle::traits::solve::Goal;
-use rustc_middle::ty::relate::combine::{super_combine_consts, super_combine_tys};
+use crate::rustc_complete::traits::solve::Goal;
+use crate::rustc_complete::ty::relate::combine::{super_combine_consts, super_combine_tys};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::relate::{Relate, RelateResult, TypeRelation};
+use crate::rustc_complete::ty::relate::{Relate, RelateResult, TypeRelation};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty, TyCtxt, TyVar, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TyVar, TypeVisitableExt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
 ```
 

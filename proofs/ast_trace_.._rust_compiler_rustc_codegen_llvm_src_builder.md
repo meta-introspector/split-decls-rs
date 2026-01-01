@@ -32,35 +32,35 @@ use libc::{c_char, c_uint, size_t};
 
 ```rust
 use rustc_abi as abi;
-use rustc_abi::{Align, Size, WrappingRange};
+use crate::rustc_abi::{Align, Size, WrappingRange};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_codegen_ssa::MemFlags;
-use rustc_codegen_ssa::common::{IntPredicate, RealPredicate, SynchronizationScope, TypeKind};
+use crate::rustc_codegen_ssa::MemFlags;
+use crate::rustc_codegen_ssa::common::{IntPredicate, RealPredicate, SynchronizationScope, TypeKind};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::mir::operand::{OperandRef, OperandValue};
+use crate::rustc_codegen_ssa::mir::operand::{OperandRef, OperandValue};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10
 
 ```rust
-use rustc_codegen_ssa::mir::place::PlaceRef;
-use rustc_codegen_ssa::traits::*;
-use rustc_data_structures::small_c_str::SmallCStr;
-use rustc_hir::def_id::DefId;
-use rustc_middle::bug;
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrs;
-use rustc_middle::ty::layout::{
+use crate::rustc_codegen_ssa::mir::place::PlaceRef;
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_data_structures::small_c_str::SmallCStr;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
+use crate::rustc_complete::ty::layout::{
     FnAbiError, FnAbiOfHelpers, FnAbiRequest, HasTypingEnv, LayoutError, LayoutOfHelpers,
     TyAndLayout,
 };
@@ -70,7 +70,7 @@ use rustc_middle::ty::layout::{
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Instance, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt};
 ```
 
 ## Block 9
@@ -84,16 +84,16 @@ use rustc_sanitizers::{cfi, kcfi};
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::config::OptLevel;
-use rustc_span::Span;
-use rustc_target::callconv::{FnAbi, PassMode};
+use crate::rustc_complete::config::OptLevel;
+use crate::rustc_complete::Span;
+use crate::rustc_target::callconv::{FnAbi, PassMode};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_target::spec::{HasTargetSpec, SanitizerSet, Target};
+use crate::rustc_target::spec::{HasTargetSpec, SanitizerSet, Target};
 ```
 
 ## Block 12
@@ -527,7 +527,7 @@ impl<'a, 'll, 'tcx> BuilderMethods<'a, 'tcx> for Builder<'a, 'll, 'tcx> {
         else_is_cold: bool,
         cases: impl ExactSizeIterator<Item = (u128, Self::BasicBlock, bool)>,
     ) {
-        if self.cx.sess().opts.optimize == rustc_session::config::OptLevel::No {
+        if self.cx.sess().opts.optimize == crate::rustc_session::config::OptLevel::No {
             self.switch(v, else_llbb, cases.map(|(val, dest, _)| (val, dest)));
             return;
         }
@@ -798,7 +798,7 @@ impl<'a, 'll, 'tcx> BuilderMethods<'a, 'tcx> for Builder<'a, 'll, 'tcx> {
         &mut self,
         ty: &'ll Type,
         ptr: &'ll Value,
-        order: rustc_middle::ty::AtomicOrdering,
+        order: crate::rustc_middle::ty::AtomicOrdering,
         size: Size,
     ) -> &'ll Value {
         unsafe {
@@ -1036,7 +1036,7 @@ impl<'a, 'll, 'tcx> BuilderMethods<'a, 'tcx> for Builder<'a, 'll, 'tcx> {
         &mut self,
         val: &'ll Value,
         ptr: &'ll Value,
-        order: rustc_middle::ty::AtomicOrdering,
+        order: crate::rustc_middle::ty::AtomicOrdering,
         size: Size,
     ) {
         debug!("Store {:?} -> {:?}", val, ptr);
@@ -1467,8 +1467,8 @@ impl<'a, 'll, 'tcx> BuilderMethods<'a, 'tcx> for Builder<'a, 'll, 'tcx> {
         dst: &'ll Value,
         cmp: &'ll Value,
         src: &'ll Value,
-        order: rustc_middle::ty::AtomicOrdering,
-        failure_order: rustc_middle::ty::AtomicOrdering,
+        order: crate::rustc_middle::ty::AtomicOrdering,
+        failure_order: crate::rustc_middle::ty::AtomicOrdering,
         weak: bool,
     ) -> (&'ll Value, &'ll Value) {
         unsafe {
@@ -1490,10 +1490,10 @@ impl<'a, 'll, 'tcx> BuilderMethods<'a, 'tcx> for Builder<'a, 'll, 'tcx> {
 
     fn atomic_rmw(
         &mut self,
-        op: rustc_codegen_ssa::common::AtomicRmwBinOp,
+        op: crate::rustc_codegen_ssa::common::AtomicRmwBinOp,
         dst: &'ll Value,
         src: &'ll Value,
-        order: rustc_middle::ty::AtomicOrdering,
+        order: crate::rustc_middle::ty::AtomicOrdering,
         ret_ptr: bool,
     ) -> &'ll Value {
         // FIXME: If `ret_ptr` is true and `src` is not a pointer, we *should* tell LLVM that the
@@ -1517,7 +1517,7 @@ impl<'a, 'll, 'tcx> BuilderMethods<'a, 'tcx> for Builder<'a, 'll, 'tcx> {
 
     fn atomic_fence(
         &mut self,
-        order: rustc_middle::ty::AtomicOrdering,
+        order: crate::rustc_middle::ty::AtomicOrdering,
         scope: SynchronizationScope,
     ) {
         let single_threaded = match scope {

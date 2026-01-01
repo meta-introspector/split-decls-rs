@@ -7,28 +7,28 @@ Generated 6 AST blocks from source file
 
 ```rust
 use hir::HirId;
-use rustc_abi::Primitive::Pointer;
-use rustc_abi::VariantIdx;
-use rustc_errors::codes::*;
-use rustc_errors::struct_span_code_err;
+use crate::rustc_abi::Primitive::Pointer;
+use crate::rustc_abi::VariantIdx;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::struct_span_code_err;
 use rustc_hir as hir;
-use rustc_index::Idx;
-use rustc_middle::bug;
-use rustc_middle::ty::layout::{LayoutError, SizeSkeleton};
+use crate::rustc_index::Idx;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::{LayoutError, SizeSkeleton};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=unpack_option_like | COMPLEXITY=17 | LINES=29
 
 ```rust
-use rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::def_id::LocalDefId;
 use tracing::trace;
 
 /// If the type is `Option<T>`, it will return `T`, otherwise

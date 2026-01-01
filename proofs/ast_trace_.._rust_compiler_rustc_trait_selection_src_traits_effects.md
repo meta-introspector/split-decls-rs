@@ -6,21 +6,21 @@ Generated 15 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, LangItem};
+use crate::rustc_complete::{self as hir, LangItem};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes};
+use crate::rustc_infer::infer::{BoundRegionConversionTime, DefineOpaqueTypes};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_infer::traits::{
+use crate::rustc_infer::traits::{
     ImplDerivedHostCause, ImplSource, Obligation, ObligationCause, ObligationCauseCode,
     PredicateObligation,
 };
@@ -30,11 +30,11 @@ use rustc_infer::traits::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::span_bug;
-use rustc_middle::traits::query::NoSolution;
-use rustc_middle::ty::elaborate::elaborate;
-use rustc_middle::ty::fast_reject::DeepRejectCtxt;
-use rustc_middle::ty::{self, TypingMode};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::elaborate::elaborate;
+use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
+use crate::rustc_complete::ty::{self, TypingMode};
 ```
 
 ## Block 5

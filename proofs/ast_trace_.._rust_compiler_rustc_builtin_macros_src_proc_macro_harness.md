@@ -13,14 +13,14 @@ use std::{mem, slice};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::visit::{self, Visitor};
+use crate::rustc_complete::visit::{self, Visitor};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{self as ast, HasNodeId, NodeId, attr};
+use crate::rustc_complete::{self as ast, HasNodeId, NodeId, attr};
 ```
 
 ## Block 4
@@ -29,27 +29,27 @@ use rustc_ast::{self as ast, HasNodeId, NodeId, attr};
 ```rust
 use rustc_ast_pretty::pprust;
 use rustc_attr_parsing::AttributeParser;
-use rustc_errors::DiagCtxtHandle;
-use rustc_expand::base::{ExtCtxt, ResolverExpand};
+use crate::rustc_complete::DiagCtxtHandle;
+use crate::rustc_expand::base::{ExtCtxt, ResolverExpand};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_expand::expand::{AstFragment, ExpansionConfig};
+use crate::rustc_expand::expand::{AstFragment, ExpansionConfig};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_feature::Features;
-use rustc_hir::attrs::AttributeKind;
-use rustc_session::Session;
-use rustc_span::hygiene::AstPass;
-use rustc_span::source_map::SourceMap;
-use rustc_span::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
+use crate::rustc_feature::Features;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::hygiene::AstPass;
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
 ```
 
 ## Block 7
@@ -174,7 +174,7 @@ impl<'a> CollectProcMacros<'a> {
         function_ident: Ident,
         attr: &'a ast::Attribute,
     ) {
-        let Some(rustc_hir::Attribute::Parsed(AttributeKind::ProcMacroDerive {
+        let Some(crate::rustc_hir::Attribute::Parsed(AttributeKind::ProcMacroDerive {
             trait_name,
             helper_attrs,
             ..
@@ -200,10 +200,10 @@ impl<'a> CollectProcMacros<'a> {
             }));
         } else {
             let msg = if !self.in_root {
-                "functions tagged with `#[proc_macro_derive]` must \
+                "functions tagged with `// #[proc_macro_derive]` must \
                  currently reside in the root of the crate"
             } else {
-                "functions tagged with `#[proc_macro_derive]` must be `pub`"
+                "functions tagged with `// #[proc_macro_derive]` must be `pub`"
             };
             self.dcx.span_err(self.source_map.guess_head_span(item.span), msg);
         }
@@ -236,10 +236,10 @@ impl<'a> CollectProcMacros<'a> {
             }));
         } else {
             let msg = if !self.in_root {
-                "functions tagged with `#[proc_macro]` must \
+                "functions tagged with `// #[proc_macro] - removed` must \
                  currently reside in the root of the crate"
             } else {
-                "functions tagged with `#[proc_macro]` must be `pub`"
+                "functions tagged with `// #[proc_macro] - removed` must be `pub`"
             };
             self.dcx.span_err(self.source_map.guess_head_span(item.span), msg);
         }
@@ -327,7 +327,7 @@ impl<'a> Visitor<'a> for CollectProcMacros<'a> {
             return;
         }
 
-        // Try to locate a `#[proc_macro_derive]` attribute.
+        // Try to locate a `// #[proc_macro_derive]` attribute.
         if attr.has_name(sym::proc_macro_derive) {
             self.collect_custom_derive(item, fn_ident, attr);
         } else if attr.has_name(sym::proc_macro_attribute) {

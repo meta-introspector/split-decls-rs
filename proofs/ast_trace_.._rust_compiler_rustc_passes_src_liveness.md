@@ -6,126 +6,126 @@ Generated 24 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=28 | LINES=93
 
 ```rust
-//! A classic liveness analysis based on dataflow over the AST. Computes,
-//! for each local variable in a function, whether that variable is live
-//! at a given point. Program execution points are identified by their
-//! IDs.
-//!
-//! # Basic idea
-//!
-//! The basic model is that each local variable is assigned an index. We
-//! represent sets of local variables using a vector indexed by this
-//! index. The value in the vector is either 0, indicating the variable
-//! is dead, or the ID of an expression that uses the variable.
-//!
-//! We conceptually walk over the AST in reverse execution order. If we
-//! find a use of a variable, we add it to the set of live variables. If
-//! we find an assignment to a variable, we remove it from the set of live
-//! variables. When we have to merge two flows, we take the union of
-//! those two flows -- if the variable is live on both paths, we simply
-//! pick one ID. In the event of loops, we continue doing this until a
-//! fixed point is reached.
-//!
-//! ## Checking initialization
-//!
-//! At the function entry point, all variables must be dead. If this is
-//! not the case, we can report an error using the ID found in the set of
-//! live variables, which identifies a use of the variable which is not
-//! dominated by an assignment.
-//!
-//! ## Checking moves
-//!
-//! After each explicit move, the variable must be dead.
-//!
-//! ## Computing last uses
-//!
-//! Any use of the variable where the variable is dead afterwards is a
-//! last use.
-//!
-//! # Implementation details
-//!
-//! The actual implementation contains two (nested) walks over the AST.
-//! The outer walk has the job of building up the ir_maps instance for the
-//! enclosing function. On the way down the tree, it identifies those AST
-//! nodes and variable IDs that will be needed for the liveness analysis
-//! and assigns them contiguous IDs. The liveness ID for an AST node is
-//! called a `live_node` (it's a newtype'd `u32`) and the ID for a variable
-//! is called a `variable` (another newtype'd `u32`).
-//!
-//! On the way back up the tree, as we are about to exit from a function
-//! declaration we allocate a `liveness` instance. Now that we know
-//! precisely how many nodes and variables we need, we can allocate all
-//! the various arrays that we will need to precisely the right size. We then
-//! perform the actual propagation on the `liveness` instance.
-//!
-//! This propagation is encoded in the various `propagate_through_*()`
-//! methods. It effectively does a reverse walk of the AST; whenever we
-//! reach a loop node, we iterate until a fixed point is reached.
-//!
-//! ## The `RWU` struct
-//!
-//! At each live node `N`, we track three pieces of information for each
-//! variable `V` (these are encapsulated in the `RWU` struct):
-//!
-//! - `reader`: the `LiveNode` ID of some node which will read the value
-//!    that `V` holds on entry to `N`. Formally: a node `M` such
-//!    that there exists a path `P` from `N` to `M` where `P` does not
-//!    write `V`. If the `reader` is `None`, then the current
-//!    value will never be read (the variable is dead, essentially).
-//!
-//! - `writer`: the `LiveNode` ID of some node which will write the
-//!    variable `V` and which is reachable from `N`. Formally: a node `M`
-//!    such that there exists a path `P` from `N` to `M` and `M` writes
-//!    `V`. If the `writer` is `None`, then there is no writer
-//!    of `V` that follows `N`.
-//!
-//! - `used`: a boolean value indicating whether `V` is *used*. We
-//!   distinguish a *read* from a *use* in that a *use* is some read that
-//!   is not just used to generate a new value. For example, `x += 1` is
-//!   a read but not a use. This is used to generate better warnings.
-//!
-//! ## Special nodes and variables
-//!
-//! We generate various special nodes for various, well, special purposes.
-//! These are described in the `Liveness` struct.
+// A classic liveness analysis based on dataflow over the AST. Computes,
+// for each local variable in a function, whether that variable is live
+// at a given point. Program execution points are identified by their
+// IDs.
+//
+// # Basic idea
+//
+// The basic model is that each local variable is assigned an index. We
+// represent sets of local variables using a vector indexed by this
+// index. The value in the vector is either 0, indicating the variable
+// is dead, or the ID of an expression that uses the variable.
+//
+// We conceptually walk over the AST in reverse execution order. If we
+// find a use of a variable, we add it to the set of live variables. If
+// we find an assignment to a variable, we remove it from the set of live
+// variables. When we have to merge two flows, we take the union of
+// those two flows -- if the variable is live on both paths, we simply
+// pick one ID. In the event of loops, we continue doing this until a
+// fixed point is reached.
+//
+// ## Checking initialization
+//
+// At the function entry point, all variables must be dead. If this is
+// not the case, we can report an error using the ID found in the set of
+// live variables, which identifies a use of the variable which is not
+// dominated by an assignment.
+//
+// ## Checking moves
+//
+// After each explicit move, the variable must be dead.
+//
+// ## Computing last uses
+//
+// Any use of the variable where the variable is dead afterwards is a
+// last use.
+//
+// # Implementation details
+//
+// The actual implementation contains two (nested) walks over the AST.
+// The outer walk has the job of building up the ir_maps instance for the
+// enclosing function. On the way down the tree, it identifies those AST
+// nodes and variable IDs that will be needed for the liveness analysis
+// and assigns them contiguous IDs. The liveness ID for an AST node is
+// called a `live_node` (it's a newtype'd `u32`) and the ID for a variable
+// is called a `variable` (another newtype'd `u32`).
+//
+// On the way back up the tree, as we are about to exit from a function
+// declaration we allocate a `liveness` instance. Now that we know
+// precisely how many nodes and variables we need, we can allocate all
+// the various arrays that we will need to precisely the right size. We then
+// perform the actual propagation on the `liveness` instance.
+//
+// This propagation is encoded in the various `propagate_through_*()`
+// methods. It effectively does a reverse walk of the AST; whenever we
+// reach a loop node, we iterate until a fixed point is reached.
+//
+// ## The `RWU` struct
+//
+// At each live node `N`, we track three pieces of information for each
+// variable `V` (these are encapsulated in the `RWU` struct):
+//
+// - `reader`: the `LiveNode` ID of some node which will read the value
+//    that `V` holds on entry to `N`. Formally: a node `M` such
+//    that there exists a path `P` from `N` to `M` where `P` does not
+//    write `V`. If the `reader` is `None`, then the current
+//    value will never be read (the variable is dead, essentially).
+//
+// - `writer`: the `LiveNode` ID of some node which will write the
+//    variable `V` and which is reachable from `N`. Formally: a node `M`
+//    such that there exists a path `P` from `N` to `M` and `M` writes
+//    `V`. If the `writer` is `None`, then there is no writer
+//    of `V` that follows `N`.
+//
+// - `used`: a boolean value indicating whether `V` is *used*. We
+//   distinguish a *read* from a *use* in that a *use* is some read that
+//   is not just used to generate a new value. For example, `x += 1` is
+//   a read but not a use. This is used to generate better warnings.
+//
+// ## Special nodes and variables
+//
+// We generate various special nodes for various, well, special purposes.
+// These are described in the `Liveness` struct.
 
 use std::io;
 use std::io::prelude::*;
 use std::rc::Rc;
 
-use rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_data_structures::fx::FxIndexMap;
 use rustc_hir as hir;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::*;
-use rustc_hir::def_id::LocalDefId;
-use rustc_hir::intravisit::{self, Visitor};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::*;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::intravisit::{self, Visitor};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{Expr, HirId, HirIdMap, HirIdSet, find_attr};
+use crate::rustc_complete::{Expr, HirId, HirIdMap, HirIdSet, find_attr};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_index::IndexVec;
-use rustc_middle::query::Providers;
-use rustc_middle::span_bug;
-use rustc_middle::ty::print::with_no_trimmed_paths;
-use rustc_middle::ty::{self, RootVariableMinCaptureList, Ty, TyCtxt};
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{self, RootVariableMinCaptureList, Ty, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::lint;
-use rustc_span::edit_distance::find_best_match_for_name;
-use rustc_span::{BytePos, Span, Symbol};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_complete::{BytePos, Span, Symbol};
 ```
 
 ## Block 5
@@ -145,7 +145,7 @@ use crate::errors;
 
 mod rwu_table;
 
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     #[debug_format = "v({})"]
     pub struct Variable {}
 }
@@ -155,7 +155,7 @@ rustc_index::newtype_index! {
 **Metadata**: AST_ID=7 | TYPE=STRUCT | NAME=LiveNode | COMPLEXITY=4 | LINES=5
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     #[debug_format = "ln({})"]
     pub struct LiveNode {}
 }
@@ -461,7 +461,7 @@ impl<'tcx> Visitor<'tcx> for IrMaps<'tcx> {
         let shorthand_field_ids = self.collect_shorthand_field_ids(param.pat);
         param.pat.each_binding(|_bm, hir_id, _x, ident| {
             let var = match param.pat.kind {
-                rustc_hir::PatKind::Struct(..) => Local(LocalInfo {
+                crate::rustc_hir::PatKind::Struct(..) => Local(LocalInfo {
                     id: hir_id,
                     name: ident.name,
                     is_shorthand: shorthand_field_ids.contains(&hir_id),
@@ -1137,7 +1137,7 @@ impl<'a, 'tcx> Liveness<'a, 'tcx> {
             }
 
             hir::ExprKind::Call(ref f, args) => {
-                let is_ctor = |f: &Expr<'_>| matches!(f.kind, hir::ExprKind::Path(hir::QPath::Resolved(_, path)) if matches!(path.res, rustc_hir::def::Res::Def(rustc_hir::def::DefKind::Ctor(_, _), _)));
+                let is_ctor = |f: &Expr<'_>| matches!(f.kind, hir::ExprKind::Path(hir::QPath::Resolved(_, path)) if matches!(path.res, crate::rustc_hir::def::Res::Def(crate::rustc_hir::def::DefKind::Ctor(_, _), _)));
                 let succ =
                     if !is_ctor(f) { self.check_is_ty_uninhabited(expr, succ) } else { succ };
 
@@ -1983,7 +1983,7 @@ impl<'tcx> Liveness<'_, 'tcx> {
         intravisit::walk_body(&mut visitor, opt_body);
         for lit_expr in visitor.lit_exprs {
             let hir::ExprKind::Lit(litx) = &lit_expr.kind else { continue };
-            let rustc_ast::LitKind::Str(syb, _) = litx.node else {
+            let crate::rustc_ast::LitKind::Str(syb, _) = litx.node else {
                 continue;
             };
             let name_str: &str = syb.as_str();

@@ -6,22 +6,22 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=9
 
 ```rust
-//! Walks the crate looking for items/impl-items/trait-items that have
-//! either a `rustc_symbol_name` or `rustc_def_path` attribute and
-//! generates an error giving, respectively, the symbol name or
-//! def-path. This is used for unit testing the code that generates
-//! paths etc in all kinds of annoying scenarios.
+// Walks the crate looking for items/impl-items/trait-items that have
+// either a `rustc_symbol_name` or `rustc_def_path` attribute and
+// generates an error giving, respectively, the symbol name or
+// def-path. This is used for unit testing the code that generates
+// paths etc in all kinds of annoying scenarios.
 
-use rustc_hir::def_id::LocalDefId;
-use rustc_middle::ty::print::with_no_trimmed_paths;
-use rustc_middle::ty::{GenericArgs, Instance, TyCtxt};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{GenericArgs, Instance, TyCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Symbol, sym};
+use crate::rustc_complete::{Symbol, sym};
 ```
 
 ## Block 3

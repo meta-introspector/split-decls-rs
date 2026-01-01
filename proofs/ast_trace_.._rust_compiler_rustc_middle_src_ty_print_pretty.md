@@ -22,7 +22,7 @@ use std::ops::{Deref, DerefMut};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::{ExternAbi, Size};
+use crate::rustc_abi::{ExternAbi, Size};
 ```
 
 ## Block 4
@@ -37,38 +37,38 @@ use rustc_apfloat::ieee::{Double, Half, Quad, Single};
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxIndexMap, IndexEntry};
+use crate::rustc_data_structures::fx::{FxIndexMap, IndexEntry};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::unord::UnordMap;
+use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hir as hir;
-use rustc_hir::LangItem;
-use rustc_hir::def::{self, CtorKind, DefKind, Namespace};
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def::{self, CtorKind, DefKind, Namespace};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefIdMap, DefIdSet, LOCAL_CRATE, ModDefId};
+use crate::rustc_complete::def_id::{DefIdMap, DefIdSet, LOCAL_CRATE, ModDefId};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::definitions::{DefKey, DefPathDataName};
+use crate::rustc_complete::definitions::{DefKey, DefPathDataName};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::limit::Limit;
+use crate::rustc_complete::limit::Limit;
 use rustc_macros::{Lift, extension};
 ```
 
@@ -76,14 +76,14 @@ use rustc_macros::{Lift, extension};
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::cstore::{ExternCrate, ExternCrateSource};
+use crate::rustc_complete::cstore::{ExternCrate, ExternCrateSource};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{FileNameDisplayPreference, Ident, Symbol, kw, sym};
+use crate::rustc_complete::{FileNameDisplayPreference, Ident, Symbol, kw, sym};
 ```
 
 ## Block 12
@@ -396,7 +396,7 @@ impl<'tcx> RegionHighlightMode<'tcx> {
 ```
 
 ## Block 28
-**Metadata**: AST_ID=28 | TYPE=FUNCTION | NAME=pretty_print_value_path | COMPLEXITY=1815 | LINES=3272
+**Metadata**: AST_ID=28 | TYPE=FUNCTION | NAME=pretty_print_value_path | COMPLEXITY=1816 | LINES=3272
 
 ```rust
 /// Trait for printers that pretty-print using `fmt::Write` to the printer.
@@ -963,7 +963,7 @@ pub trait PrettyPrinter<'tcx>: Printer<'tcx> + fmt::Write {
                 // We use verbose printing in 'NO_QUERIES' mode, to
                 // avoid needing to call `predicates_of`. This should
                 // only affect certain debug messages (e.g. messages printed
-                // from `rustc_middle::ty` during the computation of `tcx.predicates_of`),
+                // from `crate::rustc_middle::ty` during the computation of `tcx.predicates_of`),
                 // and should have no effect on any compiler output.
                 // [Unless `-Zverbose-internals` is used, e.g. in the output of
                 // `tests/ui/nll/ty-outlives/impl-trait-captures.rs`, for
@@ -3078,11 +3078,11 @@ where
 #[derive(Copy, Clone, TypeFoldable, TypeVisitable, Lift, Hash)]
 pub struct TraitRefPrintOnlyTraitPath<'tcx>(ty::TraitRef<'tcx>);
 
-impl<'tcx> rustc_errors::IntoDiagArg for TraitRefPrintOnlyTraitPath<'tcx> {
-    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+impl<'tcx> crate::rustc_errors::IntoDiagArg for TraitRefPrintOnlyTraitPath<'tcx> {
+    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         ty::tls::with(|tcx| {
             let trait_ref = tcx.short_string(self, path);
-            rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(trait_ref))
+            crate::rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(trait_ref))
         })
     }
 }
@@ -3098,11 +3098,11 @@ impl<'tcx> fmt::Debug for TraitRefPrintOnlyTraitPath<'tcx> {
 #[derive(Copy, Clone, TypeFoldable, TypeVisitable, Lift, Hash)]
 pub struct TraitRefPrintSugared<'tcx>(ty::TraitRef<'tcx>);
 
-impl<'tcx> rustc_errors::IntoDiagArg for TraitRefPrintSugared<'tcx> {
-    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+impl<'tcx> crate::rustc_errors::IntoDiagArg for TraitRefPrintSugared<'tcx> {
+    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         ty::tls::with(|tcx| {
             let trait_ref = tcx.short_string(self, path);
-            rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(trait_ref))
+            crate::rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(trait_ref))
         })
     }
 }
@@ -3601,7 +3601,7 @@ pub fn trimmed_def_paths(tcx: TyCtxt<'_>, (): ()) -> DefIdMap<Symbol> {
     // reporting. Record the fact that we did it, so we can abort if we later found it was
     // unnecessary.
     //
-    // The `rustc_middle::ty::print::with_no_trimmed_paths` wrapper can be used to suppress this
+    // The `crate::rustc_middle::ty::print::with_no_trimmed_paths` wrapper can be used to suppress this
     // checking, in exchange for full paths being formatted.
     tcx.sess.record_trimmed_def_paths();
 

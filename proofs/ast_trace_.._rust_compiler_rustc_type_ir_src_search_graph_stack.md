@@ -9,7 +9,7 @@ Generated 6 AST blocks from source file
 use std::ops::Index;
 
 use derive_where::derive_where;
-use rustc_index::IndexVec;
+use crate::rustc_index::IndexVec;
 
 use crate::search_graph::{
     AvailableDepth, CandidateHeadUsages, Cx, CycleHeads, HeadUsages, NestedGoals, PathKind,
@@ -20,7 +20,7 @@ use crate::search_graph::{
 **Metadata**: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=6
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     #[orderable]
     #[gate_rustc_only]
     pub(super) struct StackDepth {}

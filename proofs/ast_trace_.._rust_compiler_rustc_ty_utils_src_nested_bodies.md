@@ -7,16 +7,16 @@ Generated 6 AST blocks from source file
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::intravisit::Visitor;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 3

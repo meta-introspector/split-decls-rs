@@ -48,12 +48,12 @@ pub use ar_archive_writer::{DEFAULT_OBJECT_READER, ObjectReader};
 ```rust
 use object::read::archive::ArchiveFile;
 use object::read::macho::FatArch;
-use rustc_data_structures::fx::FxIndexSet;
-use rustc_data_structures::memmap::Mmap;
+use crate::rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_data_structures::memmap::Mmap;
 use rustc_fs_util::TempDirBuilder;
-use rustc_metadata::EncodedMetadata;
-use rustc_session::Session;
-use rustc_span::Symbol;
+use crate::rustc_metadata::EncodedMetadata;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::Symbol;
 use tracing::trace;
 
 use super::metadata::{create_compressed_metadata_file, search_for_section};

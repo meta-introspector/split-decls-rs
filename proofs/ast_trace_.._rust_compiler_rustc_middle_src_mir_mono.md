@@ -10,33 +10,33 @@ use std::borrow::Cow;
 use std::fmt;
 use std::hash::Hash;
 
-use rustc_data_structures::base_n::{BaseNString, CASE_INSENSITIVE, ToBaseN};
+use crate::rustc_data_structures::base_n::{BaseNString, CASE_INSENSITIVE, ToBaseN};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::fingerprint::Fingerprint;
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher, ToStableHashKey};
+use crate::rustc_data_structures::fingerprint::Fingerprint;
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher, ToStableHashKey};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::unord::UnordMap;
+use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hashes::Hash128;
-use rustc_hir::ItemId;
-use rustc_hir::attrs::{InlineAttr, Linkage};
+use crate::rustc_complete::ItemId;
+use crate::rustc_complete::attrs::{InlineAttr, Linkage};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{CrateNum, DefId, DefIdSet, LOCAL_CRATE};
+use crate::rustc_complete::def_id::{CrateNum, DefId, DefIdSet, LOCAL_CRATE};
 ```
 
 ## Block 5
@@ -51,15 +51,15 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 
 ```rust
 use rustc_query_system::ich::StableHashingContext;
-use rustc_session::config::OptLevel;
-use rustc_span::{Span, Symbol};
+use crate::rustc_complete::config::OptLevel;
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_target::spec::SymbolVisibility;
+use crate::rustc_target::spec::SymbolVisibility;
 use tracing::debug;
 
 use crate::dep_graph::{DepNode, WorkProduct, WorkProductId};

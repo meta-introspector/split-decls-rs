@@ -10,8 +10,8 @@ use std::fmt;
 use std::ops::Range;
 
 use errors::*;
-use rustc_middle::ty::print::TraitRefPrintSugared;
-use rustc_middle::ty::{GenericParamDefKind, TyCtxt};
+use crate::rustc_complete::ty::print::TraitRefPrintSugared;
+use crate::rustc_complete::ty::{GenericParamDefKind, TyCtxt};
 ```
 
 ## Block 2
@@ -27,9 +27,9 @@ use rustc_parse_format::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::lint::builtin::MALFORMED_DIAGNOSTIC_FORMAT_LITERALS;
-use rustc_span::def_id::DefId;
-use rustc_span::{InnerSpan, Span, Symbol, kw, sym};
+use crate::rustc_complete::lint::builtin::MALFORMED_DIAGNOSTIC_FORMAT_LITERALS;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{InnerSpan, Span, Symbol, kw, sym};
 ```
 
 ## Block 4
@@ -409,7 +409,7 @@ if is_source_literal { input.from_inner(InnerSpan { start, end }) } else { input
 ```rust
 pub mod errors {
     use rustc_macros::LintDiagnostic;
-    use rustc_span::Ident;
+    use crate::rustc_complete::Ident;
 
     use super::*;
 

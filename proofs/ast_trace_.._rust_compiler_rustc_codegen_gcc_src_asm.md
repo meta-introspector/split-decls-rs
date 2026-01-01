@@ -17,16 +17,16 @@ use gccjit::{LValue, RValue, ToRValue, Type};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::ast::{InlineAsmOptions, InlineAsmTemplatePiece};
+use crate::rustc_complete::ast::{InlineAsmOptions, InlineAsmTemplatePiece};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_codegen_ssa::mir::operand::OperandValue;
-use rustc_codegen_ssa::mir::place::PlaceRef;
-use rustc_codegen_ssa::traits::{
+use crate::rustc_codegen_ssa::mir::operand::OperandValue;
+use crate::rustc_codegen_ssa::mir::place::PlaceRef;
+use crate::rustc_codegen_ssa::traits::{
     AsmBuilderMethods, AsmCodegenMethods, BaseTypeCodegenMethods, BuilderMethods,
     GlobalAsmOperandRef, InlineAsmOperandRef,
 };
@@ -36,10 +36,10 @@ use rustc_codegen_ssa::traits::{
 **Metadata**: AST_ID=4 | TYPE=STRUCT | NAME=AsmOutOperand | COMPLEXITY=18 | LINES=72
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::Instance;
-use rustc_span::Span;
-use rustc_target::asm::*;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::Instance;
+use crate::rustc_complete::Span;
+use crate::rustc_target::asm::*;
 
 use crate::builder::Builder;
 use crate::callee::get_fn;

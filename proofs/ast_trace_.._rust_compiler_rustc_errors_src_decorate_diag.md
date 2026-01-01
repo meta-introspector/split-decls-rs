@@ -7,10 +7,10 @@ Generated 10 AST blocks from source file
 
 ```rust
 /// This module provides types and traits for buffering lints until later in compilation.
-use rustc_ast::node_id::NodeId;
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_error_messages::MultiSpan;
-use rustc_lint_defs::{BuiltinLintDiag, Lint, LintId};
+use crate::rustc_complete::node_id::NodeId;
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_error_messages::MultiSpan;
+use crate::rustc_lint_defs::{BuiltinLintDiag, Lint, LintId};
 ```
 
 ## Block 2
@@ -89,7 +89,7 @@ pub struct BufferedEarlyLint {
     pub node_id: NodeId,
 
     /// A lint Id that can be passed to
-    /// `rustc_lint::early::EarlyContextAndPass::check_id`.
+    /// `crate::rustc_lint::early::EarlyContextAndPass::check_id`.
     pub lint_id: LintId,
 
     /// Customization of the `Diag<'_>` for the lint.

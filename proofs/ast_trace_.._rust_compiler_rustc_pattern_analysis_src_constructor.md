@@ -6,249 +6,249 @@ Generated 34 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=25
 
 ```rust
-//! As explained in [`crate::usefulness`], values and patterns are made from constructors applied to
-//! fields. This file defines a `Constructor` enum and various operations to manipulate them.
-//!
-//! There are two important bits of core logic in this file: constructor inclusion and constructor
-//! splitting. Constructor inclusion, i.e. whether a constructor is included in/covered by another,
-//! is straightforward and defined in [`Constructor::is_covered_by`].
-//!
-//! Constructor splitting is mentioned in [`crate::usefulness`] but not detailed. We describe it
-//! precisely here.
-//!
-//!
-//!
-//! # Constructor grouping and splitting
-//!
-//! As explained in the corresponding section in [`crate::usefulness`], to make usefulness tractable
-//! we need to group together constructors that have the same effect when they are used to
-//! specialize the matrix.
-//!
-//! Example:
-//! ```compile_fail,E0004
-//! match (0, false) {
-//!     (0 ..=100, true) => {}
-//!     (50..=150, false) => {}
-//!     (0 ..=200, _) => {}
-//! }
+// As explained in [`crate::usefulness`], values and patterns are made from constructors applied to
+// fields. This file defines a `Constructor` enum and various operations to manipulate them.
+//
+// There are two important bits of core logic in this file: constructor inclusion and constructor
+// splitting. Constructor inclusion, i.e. whether a constructor is included in/covered by another,
+// is straightforward and defined in [`Constructor::is_covered_by`].
+//
+// Constructor splitting is mentioned in [`crate::usefulness`] but not detailed. We describe it
+// precisely here.
+//
+//
+//
+// # Constructor grouping and splitting
+//
+// As explained in the corresponding section in [`crate::usefulness`], to make usefulness tractable
+// we need to group together constructors that have the same effect when they are used to
+// specialize the matrix.
+//
+// Example:
+// ```compile_fail,E0004
+// match (0, false) {
+//     (0 ..=100, true) => {}
+//     (50..=150, false) => {}
+//     (0 ..=200, _) => {}
+// }
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=33
 
 ```rust
-//! ```
-//!
-//! In this example we can restrict specialization to 5 cases: `0..50`, `50..=100`, `101..=150`,
-//! `151..=200` and `200..`.
-//!
-//! In [`crate::usefulness`], we had said that `specialize` only takes value-only constructors. We
-//! now relax this restriction: we allow `specialize` to take constructors like `0..50` as long as
-//! we're careful to only do that with constructors that make sense. For example, `specialize(0..50,
-//! (0..=100, true))` is sensible, but `specialize(50..=200, (0..=100, true))` is not.
-//!
-//! Constructor splitting looks at the constructors in the first column of the matrix and constructs
-//! such a sensible set of constructors. Formally, we want to find a smallest disjoint set of
-//! constructors:
-//! - Whose union covers the whole type, and
-//! - That have no non-trivial intersection with any of the constructors in the column (i.e. they're
-//!     each either disjoint with or covered by any given column constructor).
-//!
-//! We compute this in two steps: first [`PatCx::ctors_for_ty`] determines the
-//! set of all possible constructors for the type. Then [`ConstructorSet::split`] looks at the
-//! column of constructors and splits the set into groups accordingly. The precise invariants of
-//! [`ConstructorSet::split`] is described in [`SplitConstructorSet`].
-//!
-//! Constructor splitting has two interesting special cases: integer range splitting (see
-//! [`IntRange::split`]) and slice splitting (see [`Slice::split`]).
-//!
-//!
-//!
-//! # The `Missing` constructor
-//!
-//! We detail a special case of constructor splitting that is a bit subtle. Take the following:
-//!
-//! ```
-//! enum Direction { North, South, East, West }
+// ```
+//
+// In this example we can restrict specialization to 5 cases: `0..50`, `50..=100`, `101..=150`,
+// `151..=200` and `200..`.
+//
+// In [`crate::usefulness`], we had said that `specialize` only takes value-only constructors. We
+// now relax this restriction: we allow `specialize` to take constructors like `0..50` as long as
+// we're careful to only do that with constructors that make sense. For example, `specialize(0..50,
+// (0..=100, true))` is sensible, but `specialize(50..=200, (0..=100, true))` is not.
+//
+// Constructor splitting looks at the constructors in the first column of the matrix and constructs
+// such a sensible set of constructors. Formally, we want to find a smallest disjoint set of
+// constructors:
+// - Whose union covers the whole type, and
+// - That have no non-trivial intersection with any of the constructors in the column (i.e. they're
+//     each either disjoint with or covered by any given column constructor).
+//
+// We compute this in two steps: first [`PatCx::ctors_for_ty`] determines the
+// set of all possible constructors for the type. Then [`ConstructorSet::split`] looks at the
+// column of constructors and splits the set into groups accordingly. The precise invariants of
+// [`ConstructorSet::split`] is described in [`SplitConstructorSet`].
+//
+// Constructor splitting has two interesting special cases: integer range splitting (see
+// [`IntRange::split`]) and slice splitting (see [`Slice::split`]).
+//
+//
+//
+// # The `Missing` constructor
+//
+// We detail a special case of constructor splitting that is a bit subtle. Take the following:
+//
+// ```
+// enum Direction { North, South, East, West }
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=5
 
 ```rust
-//! # let wind = (Direction::North, 0u8);
-//! match wind {
-//!     (Direction::North, 50..) => {}
-//!     (_, _) => {}
-//! }
+// # let wind = (Direction::North, 0u8);
+// match wind {
+//     (Direction::North, 50..) => {}
+//     (_, _) => {}
+// }
 ```
 
 ## Block 4
-**Metadata**: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=20
+**Metadata**: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=20
 
 ```rust
-//! ```
-//!
-//! Here we expect constructor splitting to output two cases: `North`, and "everything else". This
-//! "everything else" is represented by [`Constructor::Missing`]. Unlike other constructors, it's a
-//! bit contextual: to know the exact list of constructors it represents we have to look at the
-//! column. In practice however we don't need to, because by construction it only matches rows that
-//! have wildcards. This is how this constructor is special: the only constructor that covers it is
-//! `Wildcard`.
-//!
-//! The only place where we care about which constructors `Missing` represents is in diagnostics
-//! (see `crate::usefulness::WitnessMatrix::apply_constructor`).
-//!
-//! We choose whether to specialize with `Missing` in
-//! `crate::usefulness::compute_exhaustiveness_and_usefulness`.
-//!
-//!
-//!
-//! ## Empty types, empty constructors, and the `exhaustive_patterns` feature
-//!
-//! An empty type is a type that has no valid value, like `!`, `enum Void {}`, or `Result<!, !>`.
+// ```
+//
+// Here we expect constructor splitting to output two cases: `North`, and "everything else". This
+// "everything else" is represented by [`Constructor::Missing`]. Unlike other constructors, it's a
+// bit contextual: to know the exact list of constructors it represents we have to look at the
+// column. In practice however we don't need to, because by construction it only matches rows that
+// have wildcards. This is how this constructor is special: the only constructor that covers it is
+// `Wildcard`.
+//
+// The only place where we care about which constructors `Missing` represents is in diagnostics
+// (see `crate::usefulness::WitnessMatrix::apply_constructor`).
+//
+// We choose whether to specialize with `Missing` in
+// `crate::usefulness::compute_exhaustiveness_and_usefulness`.
+//
+//
+//
+// ## Empty types, empty constructors, and the `exhaustive_patterns` feature
+//
+// An empty type is a type that has no valid value, like `!`, `enum Void {}`, or `Result<!, !>`.
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=6
 
 ```rust
-//! They require careful handling.
-//!
-//! First, for soundness reasons related to the possible existence of invalid values, by default we
-//! don't treat empty types as empty. We force them to be matched with wildcards. Except if the
-//! `exhaustive_patterns` feature is turned on, in which case we do treat them as empty. And also
-//! except if the type has no constructors (like `enum Void {}` but not like `Result<!, !>`), we
+// They require careful handling.
+//
+// First, for soundness reasons related to the possible existence of invalid values, by default we
+// don't treat empty types as empty. We force them to be matched with wildcards. Except if the
+// `exhaustive_patterns` feature is turned on, in which case we do treat them as empty. And also
+// except if the type has no constructors (like `enum Void {}` but not like `Result<!, !>`), we
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=1
 
 ```rust
-//! specifically allow `match void {}` to be exhaustive. There are additionally considerations of
+// specifically allow `match void {}` to be exhaustive. There are additionally considerations of
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=14
 
 ```rust
-//! place validity that are handled in `crate::usefulness`. Yes this is a bit tricky.
-//!
-//! The second thing is that regardless of the above, it is always allowed to use all the
-//! constructors of a type. For example, all the following is ok:
-//!
-//! ```rust,ignore(example)
-//! # #![feature(never_type)]
-//! # #![feature(exhaustive_patterns)]
-//! fn foo(x: Option<!>) {
-//!   match x {
-//!     None => {}
-//!     Some(_) => {}
-//!   }
-//! }
+// place validity that are handled in `crate::usefulness`. Yes this is a bit tricky.
+//
+// The second thing is that regardless of the above, it is always allowed to use all the
+// constructors of a type. For example, all the following is ok:
+//
+// ```rust,ignore(example)
+// # #[feature(never_type)]
+// # #[feature(exhaustive_patterns)]
+// fn foo(x: Option<!>) {
+//   match x {
+//     None => {}
+//     Some(_) => {}
+//   }
+// }
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=7
 
 ```rust
-//! fn bar(x: &[!]) -> u32 {
-//!   match x {
-//!     [] => 1,
-//!     [_] => 2,
-//!     [_, _] => 3,
-//!   }
-//! }
+// fn bar(x: &[!]) -> u32 {
+//   match x {
+//     [] => 1,
+//     [_] => 2,
+//     [_, _] => 3,
+//   }
+// }
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=11
 
 ```rust
-//! ```
-//!
-//! Moreover, take the following:
-//!
-//! ```rust
-//! # #![feature(never_type)]
-//! # #![feature(exhaustive_patterns)]
-//! # let x = None::<!>;
-//! match x {
-//!   None => {}
-//! }
+// ```
+//
+// Moreover, take the following:
+//
+// ```rust
+// # #[feature(never_type)]
+// # #[feature(exhaustive_patterns)]
+// # let x = None::<!>;
+// match x {
+//   None => {}
+// }
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=36 | LINES=41
 
 ```rust
-//! ```
-//!
-//! On a normal type, we would identify `Some` as missing and tell the user. If `x: Option<!>`
-//! however (and `exhaustive_patterns` is on), it's ok to omit `Some`. When listing the constructors
-//! of a type, we must therefore track which can be omitted.
-//!
-//! Let's call "empty" a constructor that matches no valid value for the type, like `Some` for the
-//! type `Option<!>`. What this all means is that `ConstructorSet` must know which constructors are
-//! empty. The difference between empty and nonempty constructors is that empty constructors need
-//! not be present for the match to be exhaustive.
-//!
-//! A final remark: empty constructors of arity 0 break specialization, we must avoid them. The
-//! reason is that if we specialize by them, nothing remains to witness the emptiness; the rest of
-//! the algorithm can't distinguish them from a nonempty constructor. The only known case where this
-//! could happen is the `[..]` pattern on `[!; N]` with `N > 0` so we must take care to not emit it.
-//!
-//! This is all handled by [`PatCx::ctors_for_ty`] and
-//! [`ConstructorSet::split`]. The invariants of [`SplitConstructorSet`] are also of interest.
-//!
-//!
-//! ## Unions
-//!
-//! Unions allow us to match a value via several overlapping representations at the same time. For
-//! example, the following is exhaustive because when seeing the value as a boolean we handled all
-//! possible cases (other cases such as `n == 3` would trigger UB).
-//!
-//! ```rust
-//! # fn main() {
-//! union U8AsBool {
-//!     n: u8,
-//!     b: bool,
-//! }
-//! let x = U8AsBool { n: 1 };
-//! unsafe {
-//!     match x {
-//!         U8AsBool { n: 2 } => {}
-//!         U8AsBool { b: true } => {}
-//!         U8AsBool { b: false } => {}
-//!     }
-//! }
-//! # }
+// ```
+//
+// On a normal type, we would identify `Some` as missing and tell the user. If `x: Option<!>`
+// however (and `exhaustive_patterns` is on), it's ok to omit `Some`. When listing the constructors
+// of a type, we must therefore track which can be omitted.
+//
+// Let's call "empty" a constructor that matches no valid value for the type, like `Some` for the
+// type `Option<!>`. What this all means is that `ConstructorSet` must know which constructors are
+// empty. The difference between empty and nonempty constructors is that empty constructors need
+// not be present for the match to be exhaustive.
+//
+// A final remark: empty constructors of arity 0 break specialization, we must avoid them. The
+// reason is that if we specialize by them, nothing remains to witness the emptiness; the rest of
+// the algorithm can't distinguish them from a nonempty constructor. The only known case where this
+// could happen is the `[..]` pattern on `[!; N]` with `N > 0` so we must take care to not emit it.
+//
+// This is all handled by [`PatCx::ctors_for_ty`] and
+// [`ConstructorSet::split`]. The invariants of [`SplitConstructorSet`] are also of interest.
+//
+//
+// ## Unions
+//
+// Unions allow us to match a value via several overlapping representations at the same time. For
+// example, the following is exhaustive because when seeing the value as a boolean we handled all
+// possible cases (other cases such as `n == 3` would trigger UB).
+//
+// ```rust
+// # fn main() {
+// union U8AsBool {
+//     n: u8,
+//     b: bool,
+// }
+// let x = U8AsBool { n: 1 };
+// unsafe {
+//     match x {
+//         U8AsBool { n: 2 } => {}
+//         U8AsBool { b: true } => {}
+//         U8AsBool { b: false } => {}
+//     }
+// }
+// # }
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4
 
 ```rust
-//! ```
-//!
-//! Pattern-matching has no knowledge that e.g. `false as u8 == 0`, so the values we consider in the
-//! algorithm look like `U8AsBool { b: true, n: 2 }`. In other words, for the most part a union is
+// ```
+//
+// Pattern-matching has no knowledge that e.g. `false as u8 == 0`, so the values we consider in the
+// algorithm look like `U8AsBool { b: true, n: 2 }`. In other words, for the most part a union is
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=12
 
 ```rust
-//! treated like a struct with the same fields. The difference lies in how we construct witnesses of
-//! non-exhaustiveness.
-//!
-//!
-//! ## Opaque patterns
-//!
-//! Some patterns, such as constants that are not allowed to be matched structurally, cannot be
-//! inspected, which we handle with `Constructor::Opaque`. Since we know nothing of these patterns,
-//! we assume they never cover each other. In order to respect the invariants of
-//! [`SplitConstructorSet`], we give each `Opaque` constructor a unique id so we can recognize it.
+// treated like a struct with the same fields. The difference lies in how we construct witnesses of
+// non-exhaustiveness.
+//
+//
+// ## Opaque patterns
+//
+// Some patterns, such as constants that are not allowed to be matched structurally, cannot be
+// inspected, which we handle with `Constructor::Opaque`. Since we know nothing of these patterns,
+// we assume they never cover each other. In order to respect the invariants of
+// [`SplitConstructorSet`], we give each `Opaque` constructor a unique id so we can recognize it.
 
 use std::cmp::{self, Ordering, max, min};
 ```
@@ -267,8 +267,8 @@ use rustc_apfloat::ieee::{DoubleS, HalfS, IeeeFloat, QuadS, SingleS};
 **Metadata**: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_index::IndexVec;
-use rustc_index::bit_set::{DenseBitSet, GrowableBitSet};
+use crate::rustc_index::IndexVec;
+use crate::rustc_index::bit_set::{DenseBitSet, GrowableBitSet};
 ```
 
 ## Block 15

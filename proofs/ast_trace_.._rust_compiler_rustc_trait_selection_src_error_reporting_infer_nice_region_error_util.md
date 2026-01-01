@@ -6,25 +6,25 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! Helper functions corresponding to lifetime errors due to
-//! anonymous regions.
+// Helper functions corresponding to lifetime errors due to
+// anonymous regions.
 
 use rustc_hir as hir;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Binder, Region, Ty, TyCtxt, TypeFoldable, fold_regions};
+use crate::rustc_complete::ty::{self, Binder, Region, Ty, TyCtxt, TypeFoldable, fold_regions};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=STRUCT | NAME=AnonymousParamInfo | COMPLEXITY=3 | LINES=19
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::instrument;
 
 use crate::error_reporting::infer::nice_region_error::NiceRegionError;

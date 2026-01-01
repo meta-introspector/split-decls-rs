@@ -6,9 +6,9 @@ Generated 38 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-//! Candidate selection. See the [rustc dev guide] for more information on how this works.
-//!
-//! [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/traits/resolution.html#selection
+// Candidate selection. See the [rustc dev guide] for more information on how this works.
+//
+// [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/traits/resolution.html#selection
 
 use std::assert_matches::assert_matches;
 use std::cell::{Cell, RefCell};
@@ -29,15 +29,15 @@ use std::fmt::{self, Display};
 use std::ops::ControlFlow;
 
 use hir::def::DefKind;
-use rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
+use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::{Diag, EmissionGuarantee};
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_complete::{Diag, EmissionGuarantee};
 ```
 
 ## Block 5
@@ -45,19 +45,19 @@ use rustc_errors::{Diag, EmissionGuarantee};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::LangItem;
-use rustc_hir::def_id::DefId;
-use rustc_infer::infer::BoundRegionConversionTime::{self, HigherRankedType};
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_infer::infer::BoundRegionConversionTime::{self, HigherRankedType};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_infer::infer::DefineOpaqueTypes;
-use rustc_infer::infer::at::ToTrace;
-use rustc_infer::infer::relate::TypeRelation;
-use rustc_infer::traits::{PredicateObligations, TraitObligation};
+use crate::rustc_infer::infer::DefineOpaqueTypes;
+use crate::rustc_infer::infer::at::ToTrace;
+use crate::rustc_infer::infer::relate::TypeRelation;
+use crate::rustc_infer::traits::{PredicateObligations, TraitObligation};
 ```
 
 ## Block 7
@@ -71,25 +71,25 @@ use rustc_macros::{TypeFoldable, TypeVisitable};
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::dep_graph::{DepNodeIndex, dep_kinds};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::dep_graph::{DepNodeIndex, dep_kinds};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-pub use rustc_middle::traits::select::*;
-use rustc_middle::ty::abstract_const::NotConstEvaluatable;
-use rustc_middle::ty::error::TypeErrorToStringExt;
-use rustc_middle::ty::print::{PrintTraitRefExt as _, with_no_trimmed_paths};
+pub use crate::rustc_complete::traits::select::*;
+use crate::rustc_complete::ty::abstract_const::NotConstEvaluatable;
+use crate::rustc_complete::ty::error::TypeErrorToStringExt;
+use crate::rustc_complete::ty::print::{PrintTraitRefExt as _, with_no_trimmed_paths};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, DeepRejectCtxt, GenericArgsRef, PolyProjectionPredicate, SizedTraitKind, Ty, TyCtxt,
     TypeFoldable, TypeVisitableExt, TypingMode, Upcast, elaborate, may_use_unstable_feature,
 };
@@ -99,7 +99,7 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Symbol, sym};
+use crate::rustc_complete::{Symbol, sym};
 ```
 
 ## Block 12
@@ -1012,7 +1012,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
                             c1, c2
                         );
 
-                        use rustc_hir::def::DefKind;
+                        use crate::rustc_complete::def::DefKind;
                         match (c1.kind(), c2.kind()) {
                             (ty::ConstKind::Unevaluated(a), ty::ConstKind::Unevaluated(b))
                                 if a.def == b.def && tcx.def_kind(a.def) == DefKind::AssocConst =>

@@ -7,25 +7,25 @@ Generated 8 AST blocks from source file
 
 ```rust
 use rustc_ast as ast;
-use rustc_data_structures::stable_hasher::{HashStable, HashingControls, StableHasher};
+use crate::rustc_data_structures::stable_hasher::{HashStable, HashingControls, StableHasher};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_hir::definitions::DefPathHash;
-use rustc_session::Session;
-use rustc_session::cstore::Untracked;
-use rustc_span::source_map::SourceMap;
-use rustc_span::{
+use crate::rustc_complete::definitions::DefPathHash;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::cstore::Untracked;
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{
     BytePos, CachingSourceMapView, DUMMY_SP, Span, SpanData, StableSourceFileId, Symbol,
 };
 ```
@@ -133,7 +133,7 @@ impl<'a> HashStable<StableHashingContext<'a>> for ast::NodeId {
 **Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=hash_spans | COMPLEXITY=11 | LINES=35
 
 ```rust
-impl<'a> rustc_span::HashStableContext for StableHashingContext<'a> {
+impl<'a> crate::rustc_span::HashStableContext for StableHashingContext<'a> {
     #[inline]
     fn hash_spans(&self) -> bool {
         self.hashing_controls.hash_spans
@@ -173,7 +173,7 @@ impl<'a> rustc_span::HashStableContext for StableHashingContext<'a> {
 **Metadata**: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2
 
 ```rust
-impl<'a> rustc_session::HashStableContext for StableHashingContext<'a> {}
+impl<'a> crate::rustc_session::HashStableContext for StableHashingContext<'a> {}
 ```
 
 ---

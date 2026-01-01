@@ -9,15 +9,15 @@ Generated 24 AST blocks from source file
 use std::iter;
 use std::path::PathBuf;
 
-use rustc_ast::{LitKind, MetaItem, MetaItemInner, MetaItemKind, MetaItemLit};
+use crate::rustc_complete::{LitKind, MetaItem, MetaItemInner, MetaItemKind, MetaItemLit};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::{ErrorGuaranteed, struct_span_code_err};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{ErrorGuaranteed, struct_span_code_err};
 ```
 
 ## Block 3
@@ -25,14 +25,14 @@ use rustc_errors::{ErrorGuaranteed, struct_span_code_err};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{AttrArgs, Attribute};
+use crate::rustc_complete::{AttrArgs, Attribute};
 ```
 
 ## Block 5
@@ -40,16 +40,16 @@ use rustc_hir::{AttrArgs, Attribute};
 
 ```rust
 use rustc_macros::LintDiagnostic;
-use rustc_middle::bug;
-use rustc_middle::ty::print::PrintTraitRefExt;
-use rustc_middle::ty::{self, GenericArgsRef, GenericParamDef, GenericParamDefKind, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::print::PrintTraitRefExt;
+use crate::rustc_complete::ty::{self, GenericArgsRef, GenericParamDef, GenericParamDefKind, TyCtxt};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::lint::builtin::{
+use crate::rustc_complete::lint::builtin::{
     MALFORMED_DIAGNOSTIC_ATTRIBUTES, MALFORMED_DIAGNOSTIC_FORMAT_LITERALS,
 };
 ```
@@ -58,7 +58,7 @@ use rustc_session::lint::builtin::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 8
@@ -325,7 +325,7 @@ impl<'tcx> TypeErrCtxt<'_, 'tcx> {
             }
 
             // `&[{integral}]` - `FromIterator` needs that.
-            if let ty::Ref(_, ref_ty, rustc_ast::Mutability::Not) = self_ty.kind()
+            if let ty::Ref(_, ref_ty, crate::rustc_ast::Mutability::Not) = self_ty.kind()
                 && let ty::Slice(sty) = ref_ty.kind()
                 && sty.is_integral()
             {

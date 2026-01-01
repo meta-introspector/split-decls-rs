@@ -6,16 +6,16 @@ Generated 18 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::fingerprint::Fingerprint;
-use rustc_hir::def_id::{CrateNum, DefId, LOCAL_CRATE, LocalDefId, LocalModDefId, ModDefId};
+use crate::rustc_data_structures::fingerprint::Fingerprint;
+use crate::rustc_complete::def_id::{CrateNum, DefId, LOCAL_CRATE, LocalDefId, LocalModDefId, ModDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::definitions::DefPathHash;
-use rustc_hir::{HirId, ItemLocalId, OwnerId};
+use crate::rustc_complete::definitions::DefPathHash;
+use crate::rustc_complete::{HirId, ItemLocalId, OwnerId};
 ```
 
 ## Block 3
@@ -32,7 +32,7 @@ pub(crate) use rustc_query_system::dep_graph::{DepContext, DepNodeParams};
 **Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=47 | LINES=79
 
 ```rust
-use rustc_span::Symbol;
+use crate::rustc_complete::Symbol;
 
 use crate::mir::mono::MonoItem;
 use crate::ty::TyCtxt;

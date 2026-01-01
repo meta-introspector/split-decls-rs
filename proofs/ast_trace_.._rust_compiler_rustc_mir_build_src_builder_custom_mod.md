@@ -6,52 +6,52 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=14 | LINES=22
 
 ```rust
-//! Provides the implementation of the `custom_mir` attribute.
-//!
-//! Up until MIR building, this attribute has absolutely no effect. The `mir!` macro is a normal
-//! decl macro that expands like any other, and the code goes through parsing, name resolution and
-//! type checking like all other code. In MIR building we finally detect whether this attribute is
-//! present, and if so we branch off into this module, which implements the attribute by
-//! implementing a custom lowering from THIR to MIR.
-//!
-//! The result of this lowering is returned "normally" from `build_mir`, with the only
-//! notable difference being that the `injected` field in the body is set. Various components of the
-//! MIR pipeline, like borrowck and the pass manager will then consult this field (via
-//! `body.should_skip()`) to skip the parts of the MIR pipeline that precede the MIR phase the user
-//! specified.
-//!
-//! This file defines the general framework for the custom parsing. The parsing for all the
-//! "top-level" constructs can be found in the `parse` submodule, while the parsing for statements,
-//! terminators, and everything below can be found in the `parse::instruction` submodule.
-//!
+// Provides the implementation of the `custom_mir` attribute.
+//
+// Up until MIR building, this attribute has absolutely no effect. The `mir!` macro is a normal
+// decl macro that expands like any other, and the code goes through parsing, name resolution and
+// type checking like all other code. In MIR building we finally detect whether this attribute is
+// present, and if so we branch off into this module, which implements the attribute by
+// implementing a custom lowering from THIR to MIR.
+//
+// The result of this lowering is returned "normally" from `build_mir`, with the only
+// notable difference being that the `injected` field in the body is set. Various components of the
+// MIR pipeline, like borrowck and the pass manager will then consult this field (via
+// `body.should_skip()`) to skip the parts of the MIR pipeline that precede the MIR phase the user
+// specified.
+//
+// This file defines the general framework for the custom parsing. The parsing for all the
+// "top-level" constructs can be found in the `parse` submodule, while the parsing for statements,
+// terminators, and everything below can be found in the `parse::instruction` submodule.
+//
 
-use rustc_data_structures::fx::FxHashMap;
-use rustc_hir::def_id::DefId;
-use rustc_hir::{HirId, attrs};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{HirId, attrs};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_index::{IndexSlice, IndexVec};
+use crate::rustc_index::{IndexSlice, IndexVec};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::mir::*;
-use rustc_middle::thir::*;
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=73
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 mod parse;
 

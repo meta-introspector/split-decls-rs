@@ -6,18 +6,18 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_errors::Applicability;
-use rustc_hir_analysis::autoderef::Autoderef;
-use rustc_infer::infer::InferOk;
-use rustc_infer::traits::{Obligation, ObligationCauseCode};
+use crate::rustc_complete::Applicability;
+use crate::rustc_hir_analysis::autoderef::Autoderef;
+use crate::rustc_infer::infer::InferOk;
+use crate::rustc_infer::traits::{Obligation, ObligationCauseCode};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::span_bug;
-use rustc_middle::ty::adjustment::{
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::adjustment::{
     Adjust, Adjustment, AllowTwoPhase, AutoBorrow, AutoBorrowMutability, OverloadedDeref,
     PointerCoercion,
 };
@@ -27,14 +27,14 @@ use rustc_middle::ty::adjustment::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, sym};
+use crate::rustc_complete::{Span, sym};
 ```
 
 ## Block 5

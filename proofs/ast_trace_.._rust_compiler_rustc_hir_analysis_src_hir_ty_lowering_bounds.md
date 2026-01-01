@@ -9,33 +9,33 @@ Generated 20 AST blocks from source file
 use std::assert_matches::assert_matches;
 use std::ops::ControlFlow;
 
-use rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
+use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::struct_span_code_err;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::struct_span_code_err;
 use rustc_hir as hir;
-use rustc_hir::PolyTraitRef;
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::PolyTraitRef;
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{
     self as ty, IsSuggestable, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt,
     TypeVisitor, Upcast,
 };
@@ -45,14 +45,14 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ErrorGuaranteed, Ident, Span, kw, sym};
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, kw, sym};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_trait_selection::traits;
+use crate::rustc_trait_selection::traits;
 use smallvec::SmallVec;
 use tracing::{debug, instrument};
 ```
@@ -264,7 +264,7 @@ impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
     ) {
         let tcx = self.tcx();
 
-        // Skip adding any default bounds if `#![rustc_no_implicit_bounds]`
+        // Skip adding any default bounds if `#[rustc_no_implicit_bounds]`
         if tcx.has_attr(CRATE_DEF_ID, sym::rustc_no_implicit_bounds) {
             return;
         }
@@ -893,7 +893,7 @@ impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
 
         // Finally, move the fn return type's bound vars over to account for the early bound
         // params (and trait ref's late bound params). This logic is very similar to
-        // `rustc_middle::ty::predicate::Clause::instantiate_supertrait`
+        // `crate::rustc_middle::ty::predicate::Clause::instantiate_supertrait`
         // and it's no coincidence why.
         let shifted_output = tcx.shift_bound_var_indices(num_bound_vars, output);
         Ok(ty::EarlyBinder::bind(shifted_output).instantiate(tcx, args))

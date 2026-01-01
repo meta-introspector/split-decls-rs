@@ -6,77 +6,77 @@ Generated 19 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=16 | LINES=74
 
 ```rust
-//! This is an NFA-based parser, which calls out to the main Rust parser for named non-terminals
-//! (which it commits to fully when it hits one in a grammar). There's a set of current NFA threads
-//! and a set of next ones. Instead of NTs, we have a special case for Kleene star. The big-O, in
-//! pathological cases, is worse than traditional use of NFA or Earley parsing, but it's an easier
-//! fit for Macro-by-Example-style rules.
-//!
-//! (In order to prevent the pathological case, we'd need to lazily construct the resulting
-//! `NamedMatch`es at the very end. It'd be a pain, and require more memory to keep around old
-//! matcher positions, but it would also save overhead)
-//!
-//! We don't say this parser uses the Earley algorithm, because it's unnecessarily inaccurate.
-//! The macro parser restricts itself to the features of finite state automata. Earley parsers
-//! can be described as an extension of NFAs with completion rules, prediction rules, and recursion.
-//!
-//! Quick intro to how the parser works:
-//!
-//! A "matcher position" (a.k.a. "position" or "mp") is a dot in the middle of a matcher, usually
-//! written as a `·`. For example `· a $( a )* a b` is one, as is `a $( · a )* a b`.
-//!
-//! The parser walks through the input a token at a time, maintaining a list
-//! of threads consistent with the current position in the input string: `cur_mps`.
-//!
-//! As it processes them, it fills up `eof_mps` with threads that would be valid if
-//! the macro invocation is now over, `bb_mps` with threads that are waiting on
-//! a Rust non-terminal like `$e:expr`, and `next_mps` with threads that are waiting
-//! on a particular token. Most of the logic concerns moving the · through the
-//! repetitions indicated by Kleene stars. The rules for moving the · without
-//! consuming any input are called epsilon transitions. It only advances or calls
-//! out to the real Rust parser when no `cur_mps` threads remain.
-//!
-//! Example:
-//!
-//! ```text, ignore
-//! Start parsing a a a a b against [· a $( a )* a b].
-//!
-//! Remaining input: a a a a b
-//! next: [· a $( a )* a b]
-//!
-//! - - - Advance over an a. - - -
-//!
-//! Remaining input: a a a b
-//! cur: [a · $( a )* a b]
-//! Descend/Skip (first position).
-//! next: [a $( · a )* a b]  [a $( a )* · a b].
-//!
-//! - - - Advance over an a. - - -
-//!
-//! Remaining input: a a b
-//! cur: [a $( a · )* a b]  [a $( a )* a · b]
-//! Follow epsilon transition: Finish/Repeat (first position)
-//! next: [a $( a )* · a b]  [a $( · a )* a b]  [a $( a )* a · b]
-//!
-//! - - - Advance over an a. - - - (this looks exactly like the last step)
-//!
-//! Remaining input: a b
-//! cur: [a $( a · )* a b]  [a $( a )* a · b]
-//! Follow epsilon transition: Finish/Repeat (first position)
-//! next: [a $( a )* · a b]  [a $( · a )* a b]  [a $( a )* a · b]
-//!
-//! - - - Advance over an a. - - - (this looks exactly like the last step)
-//!
-//! Remaining input: b
-//! cur: [a $( a · )* a b]  [a $( a )* a · b]
-//! Follow epsilon transition: Finish/Repeat (first position)
-//! next: [a $( a )* · a b]  [a $( · a )* a b]  [a $( a )* a · b]
-//!
-//! - - - Advance over a b. - - -
-//!
-//! Remaining input: ''
-//! eof: [a $( a )* a b ·]
-//! ```
+// This is an NFA-based parser, which calls out to the main Rust parser for named non-terminals
+// (which it commits to fully when it hits one in a grammar). There's a set of current NFA threads
+// and a set of next ones. Instead of NTs, we have a special case for Kleene star. The big-O, in
+// pathological cases, is worse than traditional use of NFA or Earley parsing, but it's an easier
+// fit for Macro-by-Example-style rules.
+//
+// (In order to prevent the pathological case, we'd need to lazily construct the resulting
+// `NamedMatch`es at the very end. It'd be a pain, and require more memory to keep around old
+// matcher positions, but it would also save overhead)
+//
+// We don't say this parser uses the Earley algorithm, because it's unnecessarily inaccurate.
+// The macro parser restricts itself to the features of finite state automata. Earley parsers
+// can be described as an extension of NFAs with completion rules, prediction rules, and recursion.
+//
+// Quick intro to how the parser works:
+//
+// A "matcher position" (a.k.a. "position" or "mp") is a dot in the middle of a matcher, usually
+// written as a `·`. For example `· a $( a )* a b` is one, as is `a $( · a )* a b`.
+//
+// The parser walks through the input a token at a time, maintaining a list
+// of threads consistent with the current position in the input string: `cur_mps`.
+//
+// As it processes them, it fills up `eof_mps` with threads that would be valid if
+// the macro invocation is now over, `bb_mps` with threads that are waiting on
+// a Rust non-terminal like `$e:expr`, and `next_mps` with threads that are waiting
+// on a particular token. Most of the logic concerns moving the · through the
+// repetitions indicated by Kleene stars. The rules for moving the · without
+// consuming any input are called epsilon transitions. It only advances or calls
+// out to the real Rust parser when no `cur_mps` threads remain.
+//
+// Example:
+//
+// ```text, ignore
+// Start parsing a a a a b against [· a $( a )* a b].
+//
+// Remaining input: a a a a b
+// next: [· a $( a )* a b]
+//
+// - - - Advance over an a. - - -
+//
+// Remaining input: a a a b
+// cur: [a · $( a )* a b]
+// Descend/Skip (first position).
+// next: [a $( · a )* a b]  [a $( a )* · a b].
+//
+// - - - Advance over an a. - - -
+//
+// Remaining input: a a b
+// cur: [a $( a · )* a b]  [a $( a )* a · b]
+// Follow epsilon transition: Finish/Repeat (first position)
+// next: [a $( a )* · a b]  [a $( · a )* a b]  [a $( a )* a · b]
+//
+// - - - Advance over an a. - - - (this looks exactly like the last step)
+//
+// Remaining input: a b
+// cur: [a $( a · )* a b]  [a $( a )* a · b]
+// Follow epsilon transition: Finish/Repeat (first position)
+// next: [a $( a )* · a b]  [a $( · a )* a b]  [a $( a )* a · b]
+//
+// - - - Advance over an a. - - - (this looks exactly like the last step)
+//
+// Remaining input: b
+// cur: [a $( a · )* a b]  [a $( a )* a · b]
+// Follow epsilon transition: Finish/Repeat (first position)
+// next: [a $( a )* · a b]  [a $( · a )* a b]  [a $( a )* a · b]
+//
+// - - - Advance over a b. - - -
+//
+// Remaining input: ''
+// eof: [a $( a )* a b ·]
+// ```
 
 use std::borrow::Cow;
 use std::collections::hash_map::Entry::{Occupied, Vacant};
@@ -91,24 +91,24 @@ use std::rc::Rc;
 
 pub(crate) use NamedMatch::*;
 pub(crate) use ParseResult::*;
-use rustc_ast::token::{self, DocComment, NonterminalKind, Token, TokenKind};
+use crate::rustc_complete::token::{self, DocComment, NonterminalKind, Token, TokenKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_errors::ErrorGuaranteed;
-use rustc_lint_defs::pluralize;
-use rustc_parse::parser::{ParseNtResult, Parser, token_descr};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_lint_defs::pluralize;
+use crate::rustc_parse::parser::{ParseNtResult, Parser, token_descr};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, MacroRulesNormalizedIdent, Span};
+use crate::rustc_complete::{Ident, MacroRulesNormalizedIdent, Span};
 ```
 
 ## Block 5
@@ -320,7 +320,7 @@ struct MatcherPos {
 ```rust
 // This type is used a lot. Make sure it doesn't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
-rustc_data_structures::static_assert_size!(MatcherPos, 16);
+crate::rustc_data_structures::static_assert_size!(MatcherPos, 16);
 
 impl MatcherPos {
     /// Adds `m` as a named match for the `metavar_idx`-th metavar. There are only two call sites,
@@ -379,7 +379,7 @@ pub(crate) enum ParseResult<T, F> {
     /// The usize is the approximate position of the token in the input token stream.
     Failure(F),
     /// Fatal error (malformed macro?). Abort compilation.
-    Error(rustc_span::Span, String),
+    Error(crate::rustc_span::Span, String),
     ErrorReported(ErrorGuaranteed),
 }
 ```
@@ -811,7 +811,7 @@ impl TtParser {
     fn ambiguity_error<F>(
         &self,
         matcher: &[MatcherLoc],
-        token_span: rustc_span::Span,
+        token_span: crate::rustc_span::Span,
     ) -> NamedParseResult<F> {
         let nts = self
             .bb_mps

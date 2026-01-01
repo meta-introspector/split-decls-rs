@@ -6,21 +6,21 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=16
 
 ```rust
-//! This pass replaces a drop of a type that does not need dropping, with a goto.
-//!
-//! When the MIR is built, we check `needs_drop` before emitting a `Drop` for a place. This pass is
-//! useful because (unlike MIR building) it runs after type checking, so it can make use of
-//! `TypingMode::PostAnalysis` to provide more precise type information, especially about opaque
-//! types.
-//!
-//! When we're optimizing, we also remove calls to `drop_in_place<T>` when `T` isn't `needs_drop`,
-//! as those are essentially equivalent to `Drop` terminators. While the compiler doesn't insert
-//! them automatically, preferring the built-in instead, they're common in generic code (such as
-//! `Vec::truncate`) so removing them from things like inlined `Vec<u8>` is helpful.
+// This pass replaces a drop of a type that does not need dropping, with a goto.
+//
+// When the MIR is built, we check `needs_drop` before emitting a `Drop` for a place. This pass is
+// useful because (unlike MIR building) it runs after type checking, so it can make use of
+// `TypingMode::PostAnalysis` to provide more precise type information, especially about opaque
+// types.
+//
+// When we're optimizing, we also remove calls to `drop_in_place<T>` when `T` isn't `needs_drop`,
+// as those are essentially equivalent to `Drop` terminators. While the compiler doesn't insert
+// them automatically, preferring the built-in instead, they're common in generic code (such as
+// `Vec::truncate`) so removing them from things like inlined `Vec<u8>` is helpful.
 
-use rustc_hir::LangItem;
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::{debug, trace};
 ```
 

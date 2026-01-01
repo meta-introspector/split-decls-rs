@@ -11,7 +11,7 @@ Generated 4 AST blocks from source file
 #[must_use]
 pub struct FatalError;
 
-pub use rustc_data_structures::FatalErrorMarker;
+pub use crate::rustc_data_structures::FatalErrorMarker;
 
 // Don't implement Send on FatalError. This makes it impossible to `panic_any!(FatalError)`.
 // We don't want to invoke the panic handler and print a backtrace for fatal errors.

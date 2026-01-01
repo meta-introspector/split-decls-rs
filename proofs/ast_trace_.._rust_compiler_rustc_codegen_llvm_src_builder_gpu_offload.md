@@ -9,9 +9,9 @@ Generated 15 AST blocks from source file
 use std::ffi::CString;
 
 use llvm::Linkage::*;
-use rustc_abi::Align;
-use rustc_codegen_ssa::back::write::CodegenContext;
-use rustc_codegen_ssa::traits::BaseTypeCodegenMethods;
+use crate::rustc_abi::Align;
+use crate::rustc_codegen_ssa::back::write::CodegenContext;
+use crate::rustc_codegen_ssa::traits::BaseTypeCodegenMethods;
 
 use crate::builder::SBuilder;
 use crate::common::AsCCharPtr;
@@ -264,7 +264,7 @@ fn gen_define_handling<'ll>(
     // reference) types.
     let num_ptr_types = types
         .iter()
-        .filter(|&x| matches!(cx.type_kind(x), rustc_codegen_ssa::common::TypeKind::Pointer))
+        .filter(|&x| matches!(cx.type_kind(x), crate::rustc_codegen_ssa::common::TypeKind::Pointer))
         .count();
 
     // We do not know their size anymore at this level, so hardcode a placeholder.

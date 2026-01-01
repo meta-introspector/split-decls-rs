@@ -10,7 +10,7 @@ use std::fmt;
 
 use itertools::Either;
 use rustc_abi as abi;
-use rustc_abi::{
+use crate::rustc_abi::{
     Align, BackendRepr, FIRST_VARIANT, FieldIdx, Primitive, Size, TagEncoding, VariantIdx, Variants,
 };
 ```
@@ -19,36 +19,36 @@ use rustc_abi::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::interpret::{Pointer, Scalar, alloc_range};
+use crate::rustc_complete::mir::interpret::{Pointer, Scalar, alloc_range};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{self, ConstValue};
+use crate::rustc_complete::mir::{self, ConstValue};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::Ty;
-use rustc_middle::ty::layout::{LayoutOf, TyAndLayout};
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::config::OptLevel;
+use crate::rustc_complete::config::OptLevel;
 use tracing::{debug, instrument};
 ```
 
@@ -254,7 +254,7 @@ impl<'a, 'tcx, V: CodegenObject> OperandRef<'tcx, V> {
     fn from_const_alloc<Bx: BuilderMethods<'a, 'tcx, Value = V>>(
         bx: &mut Bx,
         layout: TyAndLayout<'tcx>,
-        alloc: rustc_middle::mir::interpret::ConstAllocation<'tcx>,
+        alloc: crate::rustc_middle::mir::interpret::ConstAllocation<'tcx>,
         offset: Size,
     ) -> Self {
         let alloc_align = alloc.inner().align;

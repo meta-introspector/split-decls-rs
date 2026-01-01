@@ -6,7 +6,7 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! Code to load the dep-graph from files.
+// Code to load the dep-graph from files.
 
 use std::path::{Path, PathBuf};
 ```
@@ -17,22 +17,22 @@ use std::path::{Path, PathBuf};
 ```rust
 use std::sync::Arc;
 
-use rustc_data_structures::memmap::Mmap;
-use rustc_data_structures::unord::UnordMap;
+use crate::rustc_data_structures::memmap::Mmap;
+use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hashes::Hash64;
-use rustc_middle::dep_graph::{DepGraph, DepsType, SerializedDepGraph, WorkProductMap};
+use crate::rustc_complete::dep_graph::{DepGraph, DepsType, SerializedDepGraph, WorkProductMap};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_middle::query::on_disk_cache::OnDiskCache;
-use rustc_serialize::Decodable;
-use rustc_serialize::opaque::MemDecoder;
-use rustc_session::Session;
-use rustc_session::config::IncrementalStateAssertion;
-use rustc_span::Symbol;
+use crate::rustc_complete::query::on_disk_cache::OnDiskCache;
+use crate::rustc_serialize::Decodable;
+use crate::rustc_serialize::opaque::MemDecoder;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::IncrementalStateAssertion;
+use crate::rustc_complete::Symbol;
 use tracing::{debug, warn};
 ```
 

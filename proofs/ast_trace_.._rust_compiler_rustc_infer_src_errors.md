@@ -7,7 +7,7 @@ Generated 1 AST blocks from source file
 
 ```rust
 use rustc_macros::Diagnostic;
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 #[derive(Diagnostic)]
 #[diag(infer_opaque_hidden_type)]

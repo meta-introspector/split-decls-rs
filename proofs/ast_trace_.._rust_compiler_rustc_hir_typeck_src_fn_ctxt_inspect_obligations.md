@@ -6,26 +6,26 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! A utility module to inspect currently ambiguous obligations in the current context.
+// A utility module to inspect currently ambiguous obligations in the current context.
 
-use rustc_infer::traits::{self, ObligationCause, PredicateObligations};
+use crate::rustc_infer::traits::{self, ObligationCause, PredicateObligations};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::traits::solve::GoalSource;
-use rustc_middle::ty::{self, Ty, TypeVisitableExt};
+use crate::rustc_complete::traits::solve::GoalSource;
+use crate::rustc_complete::ty::{self, Ty, TypeVisitableExt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_span::Span;
-use rustc_trait_selection::solve::Certainty;
-use rustc_trait_selection::solve::inspect::{
+use crate::rustc_complete::Span;
+use crate::rustc_trait_selection::solve::Certainty;
+use crate::rustc_trait_selection::solve::inspect::{
     InspectConfig, InspectGoal, ProofTreeInferCtxtExt, ProofTreeVisitor,
 };
 ```

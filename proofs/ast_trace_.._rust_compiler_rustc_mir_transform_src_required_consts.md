@@ -6,8 +6,8 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::visit::Visitor;
-use rustc_middle::mir::{Body, ConstOperand, Location, traversal};
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::{Body, ConstOperand, Location, traversal};
 ```
 
 ## Block 2

@@ -6,175 +6,175 @@ Generated 30 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=8
 
 ```rust
-//! Checks that meta-variables in macro definition are correctly declared and used.
-//!
-//! # What is checked
-//!
-//! ## Meta-variables must not be bound twice
-//!
-//! ```compile_fail
-//! macro_rules! foo { ($x:tt $x:tt) => { $x }; }
+// Checks that meta-variables in macro definition are correctly declared and used.
+//
+// # What is checked
+//
+// ## Meta-variables must not be bound twice
+//
+// ```compile_fail
+// macro_rules! foo { ($x:tt $x:tt) => { $x }; }
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=8
 
 ```rust
-//! ```
-//!
-//! This check is sound (no false-negative) and complete (no false-positive).
-//!
-//! ## Meta-variables must not be free
-//!
-//! ```
-//! macro_rules! foo { () => { $x }; }
+// ```
+//
+// This check is sound (no false-negative) and complete (no false-positive).
+//
+// ## Meta-variables must not be free
+//
+// ```
+// macro_rules! foo { () => { $x }; }
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=8
 
 ```rust
-//! ```
-//!
-//! This check is also done at macro instantiation but only if the branch is taken.
-//!
-//! ## Meta-variables must repeat at least as many times as their binder
-//!
-//! ```
-//! macro_rules! foo { ($($x:tt)*) => { $x }; }
+// ```
+//
+// This check is also done at macro instantiation but only if the branch is taken.
+//
+// ## Meta-variables must repeat at least as many times as their binder
+//
+// ```
+// macro_rules! foo { ($($x:tt)*) => { $x }; }
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=8
 
 ```rust
-//! ```
-//!
-//! This check is also done at macro instantiation but only if the branch is taken.
-//!
-//! ## Meta-variables must repeat with the same Kleene operators as their binder
-//!
-//! ```
-//! macro_rules! foo { ($($x:tt)+) => { $($x)* }; }
+// ```
+//
+// This check is also done at macro instantiation but only if the branch is taken.
+//
+// ## Meta-variables must repeat with the same Kleene operators as their binder
+//
+// ```
+// macro_rules! foo { ($($x:tt)+) => { $($x)* }; }
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=13 | LINES=21
 
 ```rust
-//! ```
-//!
-//! This check is not done at macro instantiation.
-//!
-//! # Disclaimer
-//!
-//! In the presence of nested macros (a macro defined in a macro), those checks may have false
-//! positives and false negatives. We try to detect those cases by recognizing potential macro
-//! definitions in RHSes, but nested macros may be hidden through the use of particular values of
-//! meta-variables.
-//!
-//! ## Examples of false positive
-//!
-//! False positives can come from cases where we don't recognize a nested macro, because it depends
-//! on particular values of meta-variables. In the following example, we think both instances of
-//! `$x` are free, which is a correct statement if `$name` is anything but `macro_rules`. But when
-//! `$name` is `macro_rules`, like in the instantiation below, then `$x:tt` is actually a binder of
-//! the nested macro and `$x` is bound to it.
-//!
-//! ```
-//! macro_rules! foo { ($name:ident) => { $name! bar { ($x:tt) => { $x }; } }; }
+// ```
+//
+// This check is not done at macro instantiation.
+//
+// # Disclaimer
+//
+// In the presence of nested macros (a macro defined in a macro), those checks may have false
+// positives and false negatives. We try to detect those cases by recognizing potential macro
+// definitions in RHSes, but nested macros may be hidden through the use of particular values of
+// meta-variables.
+//
+// ## Examples of false positive
+//
+// False positives can come from cases where we don't recognize a nested macro, because it depends
+// on particular values of meta-variables. In the following example, we think both instances of
+// `$x` are free, which is a correct statement if `$name` is anything but `macro_rules`. But when
+// `$name` is `macro_rules`, like in the instantiation below, then `$x:tt` is actually a binder of
+// the nested macro and `$x` is bound to it.
+//
+// ```
+// macro_rules! foo { ($name:ident) => { $name! bar { ($x:tt) => { $x }; } }; }
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=17 | LINES=9
 
 ```rust
-//! foo!(macro_rules);
-//! ```
-//!
-//! False positives can also come from cases where we think there is a nested macro while there
-//! isn't. In the following example, we think `$x` is free, which is incorrect because `bar` is not
-//! a nested macro since it is not evaluated as code by `stringify!`.
-//!
-//! ```
-//! macro_rules! foo { () => { stringify!(macro_rules! bar { () => { $x }; }) }; }
+// foo!(macro_rules);
+// ```
+//
+// False positives can also come from cases where we think there is a nested macro while there
+// isn't. In the following example, we think `$x` is free, which is incorrect because `bar` is not
+// a nested macro since it is not evaluated as code by `stringify!`.
+//
+// ```
+// macro_rules! foo { () => { stringify!(macro_rules! bar { () => { $x }; }) }; }
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=20 | LINES=12
 
 ```rust
-//! ```
-//!
-//! ## Examples of false negative
-//!
-//! False negatives can come from cases where we don't recognize a meta-variable, because it depends
-//! on particular values of meta-variables. In the following examples, we don't see that if `$d` is
-//! instantiated with `$` then `$d z` becomes `$z` in the nested macro definition and is thus a free
-//! meta-variable. Note however, that if `foo` is instantiated, then we would check the definition
-//! of `bar` and would see the issue.
-//!
-//! ```
-//! macro_rules! foo { ($d:tt) => { macro_rules! bar { ($y:tt) => { $d z }; } }; }
+// ```
+//
+// ## Examples of false negative
+//
+// False negatives can come from cases where we don't recognize a meta-variable, because it depends
+// on particular values of meta-variables. In the following examples, we don't see that if `$d` is
+// instantiated with `$` then `$d z` becomes `$z` in the nested macro definition and is thus a free
+// meta-variable. Note however, that if `foo` is instantiated, then we would check the definition
+// of `bar` and would see the issue.
+//
+// ```
+// macro_rules! foo { ($d:tt) => { macro_rules! bar { ($y:tt) => { $d z }; } }; }
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=34
 
 ```rust
-//! ```
-//!
-//! # How it is checked
-//!
-//! There are 3 main functions: `check_binders`, `check_occurrences`, and `check_nested_macro`. They
-//! all need some kind of environment.
-//!
-//! ## Environments
-//!
-//! Environments are used to pass information.
-//!
-//! ### From LHS to RHS
-//!
-//! When checking a LHS with `check_binders`, we produce (and use) an environment for binders,
-//! namely `Binders`. This is a mapping from binder name to information about that binder: the span
-//! of the binder for error messages and the stack of Kleene operators under which it was bound in
-//! the LHS.
-//!
-//! This environment is used by both the LHS and RHS. The LHS uses it to detect duplicate binders.
-//! The RHS uses it to detect the other errors.
-//!
-//! ### From outer macro to inner macro
-//!
-//! When checking the RHS of an outer macro and we detect a nested macro definition, we push the
-//! current state, namely `MacroState`, to an environment of nested macro definitions. Each state
-//! stores the LHS binders when entering the macro definition as well as the stack of Kleene
-//! operators under which the inner macro is defined in the RHS.
-//!
-//! This environment is a stack representing the nesting of macro definitions. As such, the stack of
-//! Kleene operators under which a meta-variable is repeating is the concatenation of the stacks
-//! stored when entering a macro definition starting from the state in which the meta-variable is
-//! bound.
+// ```
+//
+// # How it is checked
+//
+// There are 3 main functions: `check_binders`, `check_occurrences`, and `check_nested_macro`. They
+// all need some kind of environment.
+//
+// ## Environments
+//
+// Environments are used to pass information.
+//
+// ### From LHS to RHS
+//
+// When checking a LHS with `check_binders`, we produce (and use) an environment for binders,
+// namely `Binders`. This is a mapping from binder name to information about that binder: the span
+// of the binder for error messages and the stack of Kleene operators under which it was bound in
+// the LHS.
+//
+// This environment is used by both the LHS and RHS. The LHS uses it to detect duplicate binders.
+// The RHS uses it to detect the other errors.
+//
+// ### From outer macro to inner macro
+//
+// When checking the RHS of an outer macro and we detect a nested macro definition, we push the
+// current state, namely `MacroState`, to an environment of nested macro definitions. Each state
+// stores the LHS binders when entering the macro definition as well as the stack of Kleene
+// operators under which the inner macro is defined in the RHS.
+//
+// This environment is a stack representing the nesting of macro definitions. As such, the stack of
+// Kleene operators under which a meta-variable is repeating is the concatenation of the stacks
+// stored when entering a macro definition starting from the state in which the meta-variable is
+// bound.
 
-use rustc_ast::token::{Delimiter, IdentIsRaw, Token, TokenKind};
+use crate::rustc_complete::token::{Delimiter, IdentIsRaw, Token, TokenKind};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{DUMMY_NODE_ID, NodeId};
+use crate::rustc_complete::{DUMMY_NODE_ID, NodeId};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_errors::MultiSpan;
-use rustc_lint_defs::BuiltinLintDiag;
-use rustc_session::lint::builtin::META_VARIABLE_MISUSE;
-use rustc_session::parse::ParseSess;
-use rustc_span::{ErrorGuaranteed, MacroRulesNormalizedIdent, Span, kw};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::MultiSpan;
+use crate::rustc_lint_defs::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::META_VARIABLE_MISUSE;
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::{ErrorGuaranteed, MacroRulesNormalizedIdent, Span, kw};
 ```
 
 ## Block 11

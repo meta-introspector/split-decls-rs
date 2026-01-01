@@ -6,21 +6,21 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=8
 
 ```rust
-//! Type metadata identifiers for LLVM Control Flow Integrity (CFI) and cross-language LLVM CFI
-//! support for the Rust compiler.
-//!
-//! For more information about LLVM CFI and cross-language LLVM CFI support for the Rust compiler,
-//! see design document in the tracking issue #89653.
+// Type metadata identifiers for LLVM Control Flow Integrity (CFI) and cross-language LLVM CFI
+// support for the Rust compiler.
+//
+// For more information about LLVM CFI and cross-language LLVM CFI support for the Rust compiler,
+// see design document in the tracking issue #89653.
 
 use bitflags::bitflags;
-use rustc_middle::ty::{Instance, Ty, TyCtxt};
+use crate::rustc_complete::ty::{Instance, Ty, TyCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=STRUCT | NAME=TypeIdOptions: | COMPLEXITY=24 | LINES=27
 
 ```rust
-use rustc_target::callconv::FnAbi;
+use crate::rustc_target::callconv::FnAbi;
 
 bitflags! {
     /// Options for typeid_for_fnabi.

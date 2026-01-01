@@ -9,11 +9,11 @@ Generated 14 AST blocks from source file
 use std::fmt::Debug;
 use std::ops::ControlFlow;
 
-use rustc_hir::def_id::DefId;
-use rustc_infer::traits::util::PredicateSet;
-use rustc_middle::bug;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::{
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_infer::traits::util::PredicateSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{
     self, GenericArgs, GenericParamDefKind, Ty, TyCtxt, TypeVisitableExt, Upcast, VtblEntry,
 };
 ```
@@ -22,7 +22,7 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::DUMMY_SP;
+use crate::rustc_complete::DUMMY_SP;
 use smallvec::{SmallVec, smallvec};
 ```
 

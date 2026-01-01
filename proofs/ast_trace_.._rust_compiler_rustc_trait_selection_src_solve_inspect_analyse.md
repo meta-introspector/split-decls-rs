@@ -6,38 +6,38 @@ Generated 14 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=18
 
 ```rust
-//! An infrastructure to mechanically analyse proof trees.
-//!
-//! It is unavoidable that this representation is somewhat
-//! lossy as it should hide quite a few semantically relevant things,
-//! e.g. canonicalization and the order of nested goals.
-//!
-//! @lcnr: However, a lot of the weirdness here is not strictly necessary
-//! and could be improved in the future. This is mostly good enough for
-//! coherence right now and was annoying to implement, so I am leaving it
-//! as is until we start using it for something else.
+// An infrastructure to mechanically analyse proof trees.
+//
+// It is unavoidable that this representation is somewhat
+// lossy as it should hide quite a few semantically relevant things,
+// e.g. canonicalization and the order of nested goals.
+//
+// @lcnr: However, a lot of the weirdness here is not strictly necessary
+// and could be improved in the future. This is mostly good enough for
+// coherence right now and was annoying to implement, so I am leaving it
+// as is until we start using it for something else.
 
 use std::assert_matches::assert_matches;
 
-use rustc_infer::infer::InferCtxt;
-use rustc_infer::traits::Obligation;
+use crate::rustc_infer::infer::InferCtxt;
+use crate::rustc_infer::traits::Obligation;
 use rustc_macros::extension;
-use rustc_middle::traits::ObligationCause;
-use rustc_middle::traits::solve::{Certainty, Goal, GoalSource, NoSolution, QueryResult};
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::traits::solve::{Certainty, Goal, GoalSource, NoSolution, QueryResult};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{TyCtxt, VisitorResult, try_visit};
+use crate::rustc_complete::ty::{TyCtxt, VisitorResult, try_visit};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, ty};
+use crate::rustc_complete::{bug, ty};
 ```
 
 ## Block 4
@@ -59,7 +59,7 @@ use rustc_next_trait_solver::solve::{MaybeCause, SolverDelegateEvalExt as _};
 **Metadata**: AST_ID=6 | TYPE=STRUCT | NAME=InspectConfig | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::instrument;
 
 use crate::solve::delegate::SolverDelegate;

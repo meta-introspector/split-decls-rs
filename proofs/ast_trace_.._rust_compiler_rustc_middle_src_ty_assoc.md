@@ -6,18 +6,18 @@ Generated 15 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::sorted_map::SortedIndexMultiMap;
+use crate::rustc_data_structures::sorted_map::SortedIndexMultiMap;
 use rustc_hir as hir;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::{DefKind, Namespace};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{DefKind, Namespace};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_hir::find_attr;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::find_attr;
 use rustc_macros::{Decodable, Encodable, HashStable};
 ```
 
@@ -25,7 +25,7 @@ use rustc_macros::{Decodable, Encodable, HashStable};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ErrorGuaranteed, Ident, Symbol};
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Symbol};
 ```
 
 ## Block 4

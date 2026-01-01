@@ -6,7 +6,7 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_ast::{
+use crate::rustc_complete::{
     self as ast, AttrVec, DUMMY_NODE_ID, GenericBounds, GenericParam, GenericParamKind, TyKind,
     WhereClause, token,
 };
@@ -16,14 +16,14 @@ use rustc_ast::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{Applicability, PResult};
+use crate::rustc_complete::{Applicability, PResult};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, Span, kw, sym};
+use crate::rustc_complete::{Ident, Span, kw, sym};
 ```
 
 ## Block 4

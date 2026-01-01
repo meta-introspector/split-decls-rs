@@ -3,7 +3,7 @@
 Generated 31 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=89
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=68
 
 ```rust
 /*
@@ -23,46 +23,25 @@ Generated 31 AST blocks from source file
  * TODO(antoyo): remove the patches.
  */
 
-#![allow(internal_features)]
-#![doc(rust_logo)]
-#![feature(rustdoc_internals)]
-#![feature(rustc_private)]
-#![recursion_limit = "256"]
-#![warn(rust_2018_idioms)]
-#![warn(unused_lifetimes)]
-#![deny(clippy::pattern_type_mismatch)]
-#![allow(clippy::needless_lifetimes, clippy::uninlined_format_args)]
+#[allow(internal_features)]
+#[doc(rust_logo)]
+#[feature(rustdoc_internals)]
+#[feature(rustc_private)]
+#[recursion_limit = "256"]
+#[warn(rust_2018_idioms)]
+#[warn(unused_lifetimes)]
+#[deny(clippy::pattern_type_mismatch)]
+#[allow(clippy::needless_lifetimes, clippy::uninlined_format_args)]
 
 // These crates are pulled from the sysroot because they are part of
 // rustc's public API, so we need to ensure version compatibility.
-extern crate smallvec;
 #[macro_use]
-extern crate tracing;
 
 // The rustc crates we need
-extern crate rustc_abi;
-extern crate rustc_apfloat;
-extern crate rustc_ast;
-extern crate rustc_codegen_ssa;
-extern crate rustc_data_structures;
-extern crate rustc_errors;
-extern crate rustc_fluent_macro;
-extern crate rustc_fs_util;
-extern crate rustc_hir;
-extern crate rustc_index;
 #[cfg(feature = "master")]
-extern crate rustc_interface;
-extern crate rustc_macros;
-extern crate rustc_middle;
-extern crate rustc_session;
-extern crate rustc_span;
-extern crate rustc_symbol_mangling;
-extern crate rustc_target;
-extern crate rustc_type_ir;
 
 // This prevents duplicating functions and statics that are already part of the host rustc process.
 #[allow(unused_extern_crates)]
-extern crate rustc_driver;
 
 mod abi;
 mod allocator;
@@ -123,15 +102,15 @@ use gccjit::{TargetInfo, Version};
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::expand::allocator::AllocatorKind;
-use rustc_codegen_ssa::back::lto::{SerializedModule, ThinModule};
+use crate::rustc_complete::expand::allocator::AllocatorKind;
+use crate::rustc_codegen_ssa::back::lto::{SerializedModule, ThinModule};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_codegen_ssa::back::write::{
+use crate::rustc_codegen_ssa::back::write::{
     CodegenContext, FatLtoInput, ModuleConfig, TargetMachineFactoryFn,
 };
 ```
@@ -140,44 +119,44 @@ use rustc_codegen_ssa::back::write::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_codegen_ssa::base::codegen_crate;
-use rustc_codegen_ssa::target_features::cfg_target_feature;
-use rustc_codegen_ssa::traits::{CodegenBackend, ExtraBackendMethods, WriteBackendMethods};
+use crate::rustc_codegen_ssa::base::codegen_crate;
+use crate::rustc_codegen_ssa::target_features::cfg_target_feature;
+use crate::rustc_codegen_ssa::traits::{CodegenBackend, ExtraBackendMethods, WriteBackendMethods};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::{CodegenResults, CompiledModule, ModuleCodegen, TargetConfig};
+use crate::rustc_codegen_ssa::{CodegenResults, CompiledModule, ModuleCodegen, TargetConfig};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_data_structures::sync::IntoDynSyncSend;
-use rustc_errors::DiagCtxtHandle;
-use rustc_middle::dep_graph::{WorkProduct, WorkProductId};
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_data_structures::sync::IntoDynSyncSend;
+use crate::rustc_complete::DiagCtxtHandle;
+use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_middle::util::Providers;
-use rustc_session::Session;
-use rustc_session::config::{OptLevel, OutputFilenames};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::util::Providers;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{OptLevel, OutputFilenames};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_span::Symbol;
-use rustc_target::spec::RelocModel;
+use crate::rustc_complete::Symbol;
+use crate::rustc_target::spec::RelocModel;
 use tempfile::TempDir;
 
 use crate::back::lto::ModuleBuffer;
@@ -347,7 +326,7 @@ impl CodegenBackend for GccCodegenBackend {
         _outputs: &OutputFilenames,
     ) -> (CodegenResults, FxIndexMap<WorkProductId, WorkProduct>) {
         ongoing_codegen
-            .downcast::<rustc_codegen_ssa::back::write::OngoingCodegen<GccCodegenBackend>>()
+            .downcast::<crate::rustc_codegen_ssa::back::write::OngoingCodegen<GccCodegenBackend>>()
             .expect("Expected GccCodegenBackend's OngoingCodegen, found Box<Any>")
             .join(sess)
     }

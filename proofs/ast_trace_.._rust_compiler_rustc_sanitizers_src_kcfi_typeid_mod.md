@@ -6,22 +6,22 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=9
 
 ```rust
-//! Type metadata identifiers for LLVM Kernel Control Flow Integrity (KCFI) and cross-language LLVM
-//! KCFI support for the Rust compiler.
-//!
-//! For more information about LLVM KCFI and cross-language LLVM KCFI support for the Rust compiler,
-//! see the tracking issue #123479.
+// Type metadata identifiers for LLVM Kernel Control Flow Integrity (KCFI) and cross-language LLVM
+// KCFI support for the Rust compiler.
+//
+// For more information about LLVM KCFI and cross-language LLVM KCFI support for the Rust compiler,
+// see the tracking issue #123479.
 
 use std::hash::Hasher;
 
-use rustc_middle::ty::{Instance, InstanceKind, ReifyReason, Ty, TyCtxt};
+use crate::rustc_complete::ty::{Instance, InstanceKind, ReifyReason, Ty, TyCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_target::callconv::FnAbi;
+use crate::rustc_target::callconv::FnAbi;
 use twox_hash::XxHash64;
 
 pub use crate::cfi::typeid::{TypeIdOptions, itanium_cxx_abi};

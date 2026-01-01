@@ -9,7 +9,7 @@ Generated 3 AST blocks from source file
 use std::num::NonZero;
 
 use rustc_hashes::Hash64;
-use rustc_index::{Idx, IndexVec};
+use crate::rustc_index::{Idx, IndexVec};
 ```
 
 ## Block 2

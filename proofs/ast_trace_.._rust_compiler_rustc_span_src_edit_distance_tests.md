@@ -6,7 +6,7 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=test_edit_distance | COMPLEXITY=6 | LINES=21
 
 ```rust
-#![allow(rustc::symbol_intern_string_literal)]
+#[allow(rustc::symbol_intern_string_literal)]
 
 use super::*;
 

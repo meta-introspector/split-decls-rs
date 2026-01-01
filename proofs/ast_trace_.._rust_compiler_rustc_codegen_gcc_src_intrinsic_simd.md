@@ -23,15 +23,15 @@ use gccjit::{ComparisonOp, UnaryOp};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{Align, Size};
+use crate::rustc_abi::{Align, Size};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_codegen_ssa::base::compare_simd_types;
-use rustc_codegen_ssa::common::{IntPredicate, TypeKind};
+use crate::rustc_codegen_ssa::base::compare_simd_types;
+use crate::rustc_codegen_ssa::common::{IntPredicate, TypeKind};
 ```
 
 ## Block 5
@@ -39,11 +39,11 @@ use rustc_codegen_ssa::common::{IntPredicate, TypeKind};
 
 ```rust
 #[cfg(feature = "master")]
-use rustc_codegen_ssa::errors::ExpectedPointerMutability;
-use rustc_codegen_ssa::errors::InvalidMonomorphization;
-use rustc_codegen_ssa::mir::operand::OperandRef;
-use rustc_codegen_ssa::mir::place::PlaceRef;
-use rustc_codegen_ssa::traits::{BaseTypeCodegenMethods, BuilderMethods};
+use crate::rustc_codegen_ssa::errors::ExpectedPointerMutability;
+use crate::rustc_codegen_ssa::errors::InvalidMonomorphization;
+use crate::rustc_codegen_ssa::mir::operand::OperandRef;
+use crate::rustc_codegen_ssa::mir::place::PlaceRef;
+use crate::rustc_codegen_ssa::traits::{BaseTypeCodegenMethods, BuilderMethods};
 ```
 
 ## Block 6
@@ -52,16 +52,16 @@ use rustc_codegen_ssa::traits::{BaseTypeCodegenMethods, BuilderMethods};
 ```rust
 #[cfg(feature = "master")]
 use rustc_hir as hir;
-use rustc_middle::mir::BinOp;
-use rustc_middle::ty::layout::HasTyCtxt;
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::mir::BinOp;
+use crate::rustc_complete::ty::layout::HasTyCtxt;
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 8

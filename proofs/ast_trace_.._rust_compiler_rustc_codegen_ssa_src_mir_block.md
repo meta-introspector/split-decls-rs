@@ -8,7 +8,7 @@ Generated 23 AST blocks from source file
 ```rust
 use std::cmp;
 
-use rustc_abi::{Align, BackendRepr, ExternAbi, HasDataLayout, Reg, Size, WrappingRange};
+use crate::rustc_abi::{Align, BackendRepr, ExternAbi, HasDataLayout, Reg, Size, WrappingRange};
 ```
 
 ## Block 2
@@ -16,55 +16,55 @@ use rustc_abi::{Align, BackendRepr, ExternAbi, HasDataLayout, Reg, Size, Wrappin
 
 ```rust
 use rustc_ast as ast;
-use rustc_ast::{InlineAsmOptions, InlineAsmTemplatePiece};
+use crate::rustc_complete::{InlineAsmOptions, InlineAsmTemplatePiece};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::packed::Pu128;
-use rustc_hir::lang_items::LangItem;
-use rustc_lint_defs::builtin::TAIL_CALL_TRACK_CALLER;
-use rustc_middle::mir::{self, AssertKind, InlineAsmMacro, SwitchTargets, UnwindTerminateReason};
+use crate::rustc_data_structures::packed::Pu128;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_lint_defs::builtin::TAIL_CALL_TRACK_CALLER;
+use crate::rustc_complete::mir::{self, AssertKind, InlineAsmMacro, SwitchTargets, UnwindTerminateReason};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::layout::{HasTyCtxt, LayoutOf, ValidityRequirement};
+use crate::rustc_complete::ty::layout::{HasTyCtxt, LayoutOf, ValidityRequirement};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
+use crate::rustc_complete::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Instance, Ty};
+use crate::rustc_complete::ty::{self, Instance, Ty};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_session::config::OptLevel;
-use rustc_span::Span;
-use rustc_span::source_map::Spanned;
-use rustc_target::callconv::{ArgAbi, CastTarget, FnAbi, PassMode};
+use crate::rustc_complete::config::OptLevel;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_target::callconv::{ArgAbi, CastTarget, FnAbi, PassMode};
 ```
 
 ## Block 9

@@ -6,16 +6,16 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10
 
 ```rust
-//! A pass that propagates the unreachable terminator of a block to its predecessors
-//! when all of their successors are unreachable. This is achieved through a
-//! post-order traversal of the blocks.
+// A pass that propagates the unreachable terminator of a block to its predecessors
+// when all of their successors are unreachable. This is achieved through a
+// post-order traversal of the blocks.
 
-use rustc_abi::Size;
-use rustc_data_structures::fx::FxHashSet;
-use rustc_middle::bug;
-use rustc_middle::mir::interpret::Scalar;
-use rustc_middle::mir::*;
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_abi::Size;
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::interpret::Scalar;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 2
@@ -27,7 +27,7 @@ use crate::patch::MirPatch;
 pub(super) struct UnreachablePropagation;
 
 impl crate::MirPass<'_> for UnreachablePropagation {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         // Enable only under -Zmir-opt-level=2 as this can make programs less debuggable.
         sess.mir_opt_level() >= 2
     }

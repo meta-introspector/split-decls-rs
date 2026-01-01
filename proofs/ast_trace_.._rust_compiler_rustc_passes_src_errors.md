@@ -14,8 +14,8 @@ use std::path::{Path, PathBuf};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, DiagSymbolList, Diagnostic, EmissionGuarantee, Level,
     MultiSpan, Subdiagnostic,
 };
@@ -25,8 +25,8 @@ use rustc_errors::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::Target;
-use rustc_hir::attrs::{MirDialect, MirPhase};
+use crate::rustc_complete::Target;
+use crate::rustc_complete::attrs::{MirDialect, MirPhase};
 ```
 
 ## Block 4
@@ -40,14 +40,14 @@ use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{MainDefinition, Ty};
+use crate::rustc_complete::ty::{MainDefinition, Ty};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Span, Symbol};
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
 ```
 
 ## Block 7

@@ -6,15 +6,15 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=11
 
 ```rust
-//! This module contains `HashStable` implementations for various data types
-//! from `rustc_middle::ty` in no particular order.
+// This module contains `HashStable` implementations for various data types
+// from `crate::rustc_middle::ty` in no particular order.
 
 use std::cell::RefCell;
 use std::ptr;
 
-use rustc_data_structures::fingerprint::Fingerprint;
-use rustc_data_structures::fx::FxHashMap;
-use rustc_data_structures::stable_hasher::{
+use crate::rustc_data_structures::fingerprint::Fingerprint;
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::stable_hasher::{
     HashStable, HashingControls, StableHasher, ToStableHashKey,
 };
 ```

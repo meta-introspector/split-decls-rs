@@ -6,61 +6,61 @@ Generated 23 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-//! This module used to contain a type called `Map`. That type has since been
-//! eliminated, and all its methods are now on `TyCtxt`. But the module name
-//! stays as `map` because there isn't an obviously better name for it.
+// This module used to contain a type called `Map`. That type has since been
+// eliminated, and all its methods are now on `TyCtxt`. But the module name
+// stays as `map` because there isn't an obviously better name for it.
 
-use rustc_abi::ExternAbi;
-use rustc_ast::visit::{VisitorResult, walk_list};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_complete::visit::{VisitorResult, walk_list};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::fingerprint::Fingerprint;
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::fingerprint::Fingerprint;
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::svh::Svh;
-use rustc_data_structures::sync::{DynSend, DynSync, par_for_each_in, try_par_for_each_in};
+use crate::rustc_data_structures::svh::Svh;
+use crate::rustc_data_structures::sync::{DynSend, DynSync, par_for_each_in, try_par_for_each_in};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefId, LOCAL_CRATE, LocalDefId, LocalModDefId};
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE, LocalDefId, LocalModDefId};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::definitions::{DefKey, DefPath, DefPathHash};
+use crate::rustc_complete::definitions::{DefKey, DefPath, DefPathHash};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_hir::intravisit::Visitor;
-use rustc_hir::*;
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::*;
 use rustc_hir_pretty as pprust_hir;
-use rustc_span::def_id::StableCrateId;
-use rustc_span::{ErrorGuaranteed, Ident, Span, Symbol, kw, with_metavar_spans};
+use crate::rustc_complete::def_id::StableCrateId;
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, Symbol, kw, with_metavar_spans};
 ```
 
 ## Block 8

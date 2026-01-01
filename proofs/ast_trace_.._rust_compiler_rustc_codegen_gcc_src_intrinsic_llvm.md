@@ -15,7 +15,7 @@ use gccjit::{CType, Context, Field, Function, FunctionPtrType, RValue, ToRValue,
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=encode_key_128_type | COMPLEXITY=4 | LINES=25
 
 ```rust
-use rustc_codegen_ssa::traits::BuilderMethods;
+use crate::rustc_codegen_ssa::traits::BuilderMethods;
 
 use crate::builder::Builder;
 use crate::context::CodegenCx;

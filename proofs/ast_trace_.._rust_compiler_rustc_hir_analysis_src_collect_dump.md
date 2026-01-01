@@ -7,23 +7,23 @@ Generated 6 AST blocks from source file
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::def_id::{CRATE_DEF_ID, LocalDefId};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::intravisit;
-use rustc_middle::hir::nested_filter;
-use rustc_middle::ty::{self, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::intravisit;
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=22
 
 ```rust
-use rustc_span::sym;
+use crate::rustc_complete::sym;
 
 pub(crate) fn opaque_hidden_types(tcx: TyCtxt<'_>) {
     if !tcx.has_attr(CRATE_DEF_ID, sym::rustc_hidden_type_of_opaques) {
@@ -97,7 +97,7 @@ pub(crate) fn def_parents(tcx: TyCtxt<'_>) {
                     self.tcx
                 }
 
-                fn visit_anon_const(&mut self, c: &'tcx rustc_hir::AnonConst) {
+                fn visit_anon_const(&mut self, c: &'tcx crate::rustc_hir::AnonConst) {
                     self.anon_consts.push(c.def_id);
                     intravisit::walk_anon_const(self, c)
                 }

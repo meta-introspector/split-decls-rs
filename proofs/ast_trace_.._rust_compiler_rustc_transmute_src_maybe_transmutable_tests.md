@@ -3,11 +3,9 @@
 Generated 16 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-extern crate test;
-
 use itertools::Itertools;
 
 use super::query_context::test::{Def, UltraMinimal};
@@ -239,7 +237,7 @@ mod bool {
 
         let into_set = |alts: Vec<_>| {
             #[cfg(feature = "rustc")]
-            let mut set = rustc_data_structures::fx::FxIndexSet::default();
+            let mut set = crate::rustc_data_structures::fx::FxIndexSet::default();
             #[cfg(not(feature = "rustc"))]
             let mut set = std::collections::HashSet::new();
             set.extend(alts);

@@ -20,91 +20,91 @@ use std::path::{Path, PathBuf};
 use std::rc::Rc;
 use std::sync::Arc;
 
-use rustc_ast::attr::{AttributeExt, MarkedAttrs};
+use crate::rustc_complete::attr::{AttributeExt, MarkedAttrs};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_ast::token::MetaVarKind;
-use rustc_ast::tokenstream::TokenStream;
-use rustc_ast::visit::{AssocCtxt, Visitor};
+use crate::rustc_complete::token::MetaVarKind;
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::visit::{AssocCtxt, Visitor};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{self as ast, AttrVec, Attribute, HasAttrs, Item, NodeId, PatKind};
+use crate::rustc_complete::{self as ast, AttrVec, Attribute, HasAttrs, Item, NodeId, PatKind};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxHashMap, FxIndexMap};
+use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::sync;
-use rustc_errors::{BufferedEarlyLint, DiagCtxtHandle, ErrorGuaranteed, PResult};
+use crate::rustc_data_structures::sync;
+use crate::rustc_complete::{BufferedEarlyLint, DiagCtxtHandle, ErrorGuaranteed, PResult};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_feature::Features;
+use crate::rustc_feature::Features;
 use rustc_hir as hir;
-use rustc_hir::attrs::{AttributeKind, CfgEntry, Deprecation};
+use crate::rustc_complete::attrs::{AttributeKind, CfgEntry, Deprecation};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::def::MacroKinds;
-use rustc_hir::limit::Limit;
-use rustc_hir::{Stability, find_attr};
+use crate::rustc_complete::def::MacroKinds;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_complete::{Stability, find_attr};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_lint_defs::RegisteredTools;
-use rustc_parse::MACRO_ARGUMENTS;
-use rustc_parse::parser::{ForceCollect, Parser};
+use crate::rustc_lint_defs::RegisteredTools;
+use crate::rustc_parse::MACRO_ARGUMENTS;
+use crate::rustc_parse::parser::{ForceCollect, Parser};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_session::Session;
-use rustc_session::config::CollapseMacroDebuginfo;
-use rustc_session::parse::ParseSess;
-use rustc_span::def_id::{CrateNum, DefId, LocalDefId};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::CollapseMacroDebuginfo;
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::def_id::{CrateNum, DefId, LocalDefId};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::edition::Edition;
-use rustc_span::hygiene::{AstPass, ExpnData, ExpnKind, LocalExpnId, MacroKind};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::hygiene::{AstPass, ExpnData, ExpnKind, LocalExpnId, MacroKind};
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::source_map::SourceMap;
-use rustc_span::{DUMMY_SP, FileName, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{DUMMY_SP, FileName, Ident, Span, Symbol, kw, sym};
 ```
 
 ## Block 13
@@ -1396,7 +1396,7 @@ pub trait ResolverExpand {
         cfg_span: Span,
     );
 
-    /// Tools registered with `#![register_tool]` and used by tool attributes and lints.
+    /// Tools registered with `#[register_tool]` and used by tool attributes and lints.
     fn registered_tools(&self) -> &RegisteredTools;
 
     /// Mark this invocation id as a glob delegation.

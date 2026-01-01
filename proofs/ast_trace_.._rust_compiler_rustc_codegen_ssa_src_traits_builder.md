@@ -9,31 +9,31 @@ Generated 10 AST blocks from source file
 use std::assert_matches::assert_matches;
 use std::ops::Deref;
 
-use rustc_abi::{Align, Scalar, Size, WrappingRange};
+use crate::rustc_abi::{Align, Scalar, Size, WrappingRange};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrs;
-use rustc_middle::ty::layout::{FnAbiOf, LayoutOf, TyAndLayout};
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
+use crate::rustc_complete::ty::layout::{FnAbiOf, LayoutOf, TyAndLayout};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{AtomicOrdering, Instance, Ty};
+use crate::rustc_complete::ty::{AtomicOrdering, Instance, Ty};
 ```
 
 ## Block 4
-**Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12
+**Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=12
 
 ```rust
-use rustc_session::config::OptLevel;
-use rustc_span::Span;
-use rustc_target::callconv::FnAbi;
+use crate::rustc_complete::config::OptLevel;
+use crate::rustc_complete::Span;
+use crate::rustc_target::callconv::FnAbi;
 
 use super::abi::AbiBuilderMethods;
 use super::asm::AsmBuilderMethods;

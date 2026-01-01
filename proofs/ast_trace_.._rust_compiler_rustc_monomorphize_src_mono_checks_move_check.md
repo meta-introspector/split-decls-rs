@@ -6,28 +6,28 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_abi::Size;
-use rustc_data_structures::fx::FxIndexSet;
-use rustc_hir::def_id::DefId;
-use rustc_hir::limit::Limit;
-use rustc_middle::mir::visit::Visitor as MirVisitor;
-use rustc_middle::mir::{self, Location, traversal};
+use crate::rustc_abi::Size;
+use crate::rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_complete::mir::visit::Visitor as MirVisitor;
+use crate::rustc_complete::mir::{self, Location, traversal};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, AssocTag, Instance, Ty, TyCtxt, TypeFoldable};
+use crate::rustc_complete::ty::{self, AssocTag, Instance, Ty, TyCtxt, TypeFoldable};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::lint::builtin::LARGE_ASSIGNMENTS;
-use rustc_span::source_map::Spanned;
-use rustc_span::{Ident, Span, sym};
+use crate::rustc_complete::lint::builtin::LARGE_ASSIGNMENTS;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Ident, Span, sym};
 ```
 
 ## Block 4

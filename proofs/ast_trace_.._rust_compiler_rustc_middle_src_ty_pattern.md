@@ -8,7 +8,7 @@ Generated 6 AST blocks from source file
 ```rust
 use std::fmt;
 
-use rustc_data_structures::intern::Interned;
+use crate::rustc_data_structures::intern::Interned;
 use rustc_macros::HashStable;
 use rustc_type_ir::ir_print::IrPrint;
 use rustc_type_ir::{

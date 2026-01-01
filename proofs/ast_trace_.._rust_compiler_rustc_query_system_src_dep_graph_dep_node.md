@@ -6,82 +6,82 @@ Generated 21 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=21 | LINES=62
 
 ```rust
-//! This module defines the [`DepNode`] type which the compiler uses to represent
-//! nodes in the [dependency graph]. A `DepNode` consists of a [`DepKind`] (which
-//! specifies the kind of thing it represents, like a piece of HIR, MIR, etc.)
-//! and a [`Fingerprint`], a 128-bit hash value, the exact meaning of which
-//! depends on the node's `DepKind`. Together, the kind and the fingerprint
-//! fully identify a dependency node, even across multiple compilation sessions.
-//! In other words, the value of the fingerprint does not depend on anything
-//! that is specific to a given compilation session, like an unpredictable
-//! interning key (e.g., `NodeId`, `DefId`, `Symbol`) or the numeric value of a
-//! pointer. The concept behind this could be compared to how git commit hashes
-//! uniquely identify a given commit. The fingerprinting approach has
-//! a few advantages:
-//!
-//! * A `DepNode` can simply be serialized to disk and loaded in another session
-//!   without the need to do any "rebasing" (like we have to do for Spans and
-//!   NodeIds) or "retracing" (like we had to do for `DefId` in earlier
-//!   implementations of the dependency graph).
-//! * A `Fingerprint` is just a bunch of bits, which allows `DepNode` to
-//!   implement `Copy`, `Sync`, `Send`, `Freeze`, etc.
-//! * Since we just have a bit pattern, `DepNode` can be mapped from disk into
-//!   memory without any post-processing (e.g., "abomination-style" pointer
-//!   reconstruction).
-//! * Because a `DepNode` is self-contained, we can instantiate `DepNodes` that
-//!   refer to things that do not exist anymore. In previous implementations
-//!   `DepNode` contained a `DefId`. A `DepNode` referring to something that
-//!   had been removed between the previous and the current compilation session
-//!   could not be instantiated because the current compilation session
-//!   contained no `DefId` for thing that had been removed.
-//!
-//! `DepNode` definition happens in `rustc_middle` with the
-//! `define_dep_nodes!()` macro. This macro defines the `DepKind` enum. Each
-//! `DepKind` has its own parameters that are needed at runtime in order to
-//! construct a valid `DepNode` fingerprint. However, only `CompileCodegenUnit`
-//! and `CompileMonoItem` are constructed explicitly (with
-//! `make_compile_codegen_unit` and `make_compile_mono_item`).
-//!
-//! Because the macro sees what parameters a given `DepKind` requires, it can
-//! "infer" some properties for each kind of `DepNode`:
-//!
-//! * Whether a `DepNode` of a given kind has any parameters at all. Some
-//!   `DepNode`s could represent global concepts with only one value.
-//! * Whether it is possible, in principle, to reconstruct a query key from a
-//!   given `DepNode`. Many `DepKind`s only require a single `DefId` parameter,
-//!   in which case it is possible to map the node's fingerprint back to the
-//!   `DefId` it was computed from. In other cases, too much information gets
-//!   lost during fingerprint computation.
-//!
-//! `make_compile_codegen_unit` and `make_compile_mono_items`, together with
-//! `DepNode::new()`, ensure that only valid `DepNode` instances can be
-//! constructed. For example, the API does not allow for constructing
-//! parameterless `DepNode`s with anything other than a zeroed out fingerprint.
-//! More generally speaking, it relieves the user of the `DepNode` API of
-//! having to know how to compute the expected fingerprint for a given set of
-//! node parameters.
-//!
-//! [dependency graph]: https://rustc-dev-guide.rust-lang.org/query.html
+// This module defines the [`DepNode`] type which the compiler uses to represent
+// nodes in the [dependency graph]. A `DepNode` consists of a [`DepKind`] (which
+// specifies the kind of thing it represents, like a piece of HIR, MIR, etc.)
+// and a [`Fingerprint`], a 128-bit hash value, the exact meaning of which
+// depends on the node's `DepKind`. Together, the kind and the fingerprint
+// fully identify a dependency node, even across multiple compilation sessions.
+// In other words, the value of the fingerprint does not depend on anything
+// that is specific to a given compilation session, like an unpredictable
+// interning key (e.g., `NodeId`, `DefId`, `Symbol`) or the numeric value of a
+// pointer. The concept behind this could be compared to how git commit hashes
+// uniquely identify a given commit. The fingerprinting approach has
+// a few advantages:
+//
+// * A `DepNode` can simply be serialized to disk and loaded in another session
+//   without the need to do any "rebasing" (like we have to do for Spans and
+//   NodeIds) or "retracing" (like we had to do for `DefId` in earlier
+//   implementations of the dependency graph).
+// * A `Fingerprint` is just a bunch of bits, which allows `DepNode` to
+//   implement `Copy`, `Sync`, `Send`, `Freeze`, etc.
+// * Since we just have a bit pattern, `DepNode` can be mapped from disk into
+//   memory without any post-processing (e.g., "abomination-style" pointer
+//   reconstruction).
+// * Because a `DepNode` is self-contained, we can instantiate `DepNodes` that
+//   refer to things that do not exist anymore. In previous implementations
+//   `DepNode` contained a `DefId`. A `DepNode` referring to something that
+//   had been removed between the previous and the current compilation session
+//   could not be instantiated because the current compilation session
+//   contained no `DefId` for thing that had been removed.
+//
+// `DepNode` definition happens in `rustc_middle` with the
+// `define_dep_nodes!()` macro. This macro defines the `DepKind` enum. Each
+// `DepKind` has its own parameters that are needed at runtime in order to
+// construct a valid `DepNode` fingerprint. However, only `CompileCodegenUnit`
+// and `CompileMonoItem` are constructed explicitly (with
+// `make_compile_codegen_unit` and `make_compile_mono_item`).
+//
+// Because the macro sees what parameters a given `DepKind` requires, it can
+// "infer" some properties for each kind of `DepNode`:
+//
+// * Whether a `DepNode` of a given kind has any parameters at all. Some
+//   `DepNode`s could represent global concepts with only one value.
+// * Whether it is possible, in principle, to reconstruct a query key from a
+//   given `DepNode`. Many `DepKind`s only require a single `DefId` parameter,
+//   in which case it is possible to map the node's fingerprint back to the
+//   `DefId` it was computed from. In other cases, too much information gets
+//   lost during fingerprint computation.
+//
+// `make_compile_codegen_unit` and `make_compile_mono_items`, together with
+// `DepNode::new()`, ensure that only valid `DepNode` instances can be
+// constructed. For example, the API does not allow for constructing
+// parameterless `DepNode`s with anything other than a zeroed out fingerprint.
+// More generally speaking, it relieves the user of the `DepNode` API of
+// having to know how to compute the expected fingerprint for a given set of
+// node parameters.
+//
+// [dependency graph]: https://rustc-dev-guide.rust-lang.org/query.html
 
 use std::fmt;
 use std::hash::Hash;
 
-use rustc_data_structures::AtomicRef;
-use rustc_data_structures::fingerprint::{Fingerprint, PackedFingerprint};
+use crate::rustc_data_structures::AtomicRef;
+use crate::rustc_data_structures::fingerprint::{Fingerprint, PackedFingerprint};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher, StableOrd, ToStableHashKey};
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher, StableOrd, ToStableHashKey};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::definitions::DefPathHash;
+use crate::rustc_complete::definitions::DefPathHash;
 use rustc_macros::{Decodable, Encodable};
 ```
 
@@ -441,7 +441,7 @@ impl StableOrd for WorkProductId {
 // Some types are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
 mod size_asserts {
-    use rustc_data_structures::static_assert_size;
+    use crate::rustc_data_structures::static_assert_size;
 
     use super::*;
     // tidy-alphabetical-start

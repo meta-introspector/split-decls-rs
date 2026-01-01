@@ -6,16 +6,16 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=18 | LINES=29
 
 ```rust
-//! This pass removes storage markers if they won't be emitted during codegen.
+// This pass removes storage markers if they won't be emitted during codegen.
 
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::trace;
 
 pub(super) struct RemoveStorageMarkers;
 
 impl<'tcx> crate::MirPass<'tcx> for RemoveStorageMarkers {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() > 0 && !sess.emit_lifetime_markers()
     }
 

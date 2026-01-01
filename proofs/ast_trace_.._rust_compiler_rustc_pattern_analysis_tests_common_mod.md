@@ -6,8 +6,8 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-#![allow(dead_code, unreachable_pub)]
-use rustc_pattern_analysis::constructor::{
+#[allow(dead_code, unreachable_pub)]
+use crate::rustc_pattern_analysis::constructor::{
     Constructor, ConstructorSet, IntRange, MaybeInfiniteInt, RangeEnd, VariantVisibility,
 };
 ```
@@ -16,15 +16,15 @@ use rustc_pattern_analysis::constructor::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_pattern_analysis::pat::DeconstructedPat;
-use rustc_pattern_analysis::usefulness::{PlaceValidity, UsefulnessReport};
+use crate::rustc_pattern_analysis::pat::DeconstructedPat;
+use crate::rustc_pattern_analysis::usefulness::{PlaceValidity, UsefulnessReport};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_pattern_analysis::{MatchArm, PatCx, PrivateUninhabitedField};
+use crate::rustc_pattern_analysis::{MatchArm, PatCx, PrivateUninhabitedField};
 ```
 
 ## Block 4
@@ -190,7 +190,7 @@ pub(super) fn compute_match_usefulness<'p>(
     exhaustive_witnesses: bool,
 ) -> Result<UsefulnessReport<'p, Cx>, ()> {
     init_tracing();
-    rustc_pattern_analysis::usefulness::compute_match_usefulness(
+    crate::rustc_pattern_analysis::usefulness::compute_match_usefulness(
         &Cx { exhaustive_witnesses },
         arms,
         ty,
@@ -269,7 +269,7 @@ impl PatCx for Cx {
         _deref_pat: &DeconstructedPat<Self>,
         _normal_pat: &DeconstructedPat<Self>,
     ) -> Self::Error {
-        panic!("`rustc_pattern_analysis::tests` currently doesn't test deref pattern errors")
+        panic!("`crate::rustc_pattern_analysis::tests` currently doesn't test deref pattern errors")
     }
 }
 ```
@@ -320,7 +320,7 @@ macro_rules! pats {
     // Parse `type; ..`
     ($ty:expr; $($rest:tt)*) => {{
         #[allow(unused)]
-        use rustc_pattern_analysis::{
+        use crate::rustc_pattern_analysis::{
             constructor::{Constructor, IntRange, MaybeInfiniteInt, RangeEnd},
             pat::{DeconstructedPat, IndexedPat},
         };

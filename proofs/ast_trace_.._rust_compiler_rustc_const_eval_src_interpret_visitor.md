@@ -6,21 +6,21 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=6
 
 ```rust
-//! Visitor for a run-time value with a given layout: Traverse enums, structs and other compound
-//! types until we arrive at the leaves, with custom handling for primitive types.
+// Visitor for a run-time value with a given layout: Traverse enums, structs and other compound
+// types until we arrive at the leaves, with custom handling for primitive types.
 
 use std::num::NonZero;
 
-use rustc_abi::{FieldIdx, FieldsShape, VariantIdx, Variants};
+use crate::rustc_abi::{FieldIdx, FieldsShape, VariantIdx, Variants};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_index::IndexVec;
-use rustc_middle::mir::interpret::InterpResult;
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::mir::interpret::InterpResult;
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 3

@@ -3,16 +3,14 @@
 Generated 6 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=puts | COMPLEXITY=2 | LINES=19
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=puts | COMPLEXITY=2 | LINES=17
 
 ```rust
-#![feature(core_intrinsics, alloc_error_handler, lang_items)]
-#![no_std]
-#![no_main]
-#![allow(internal_features)]
+#[feature(core_intrinsics, alloc_error_handler, lang_items)]
+#[no_std]
+#[no_main]
+#[allow(internal_features)]
 
-extern crate alloc;
-extern crate alloc_system;
 
 use alloc::boxed::Box;
 
@@ -61,7 +59,7 @@ fn eh_personality() -> ! {
 **Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=5
 
 ```rust
-#[no_mangle]
+#[unsafe(no_mangle)]
 unsafe extern "C" fn _Unwind_Resume() {
     core::intrinsics::unreachable();
 }
@@ -71,7 +69,7 @@ unsafe extern "C" fn _Unwind_Resume() {
 **Metadata**: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=10
 
 ```rust
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(_argc: core::ffi::c_int, _argv: *const *const u8) -> core::ffi::c_int {
     let world: Box<&str> = Box::new("Hello World!\0");
     unsafe {

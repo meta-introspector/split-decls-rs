@@ -10,39 +10,39 @@ use std::collections::hash_map::Entry;
 use std::marker::PhantomData;
 use std::ops::Range;
 
-use rustc_abi::{BackendRepr, FieldIdx, FieldsShape, Size, VariantIdx};
+use crate::rustc_abi::{BackendRepr, FieldIdx, FieldsShape, Size, VariantIdx};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_index::IndexVec;
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use rustc_middle::ty::layout::{LayoutOf, TyAndLayout};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{Instance, Ty};
+use crate::rustc_complete::ty::{Instance, Ty};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, mir, ty};
+use crate::rustc_complete::{bug, mir, ty};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::config::DebugInfo;
-use rustc_span::{BytePos, Span, Symbol, hygiene, sym};
+use crate::rustc_complete::config::DebugInfo;
+use crate::rustc_complete::{BytePos, Span, Symbol, hygiene, sym};
 ```
 
 ## Block 6

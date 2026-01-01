@@ -3,23 +3,22 @@
 Generated 15 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=20
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=19
 
 ```rust
-#![cfg_attr(feature = "nightly", rustc_diagnostic_item = "type_ir")]
+#[cfg_attr(feature = "nightly", rustc_diagnostic_item = "type_ir")]
 // tidy-alphabetical-start
-#![allow(rustc::direct_use_of_rustc_type_ir)]
-#![allow(rustc::usage_of_ty_tykind)]
-#![allow(rustc::usage_of_type_ir_inherent)]
-#![allow(rustc::usage_of_type_ir_traits)]
-#![cfg_attr(
+#[allow(rustc::direct_use_of_rustc_type_ir)]
+#[allow(rustc::usage_of_ty_tykind)]
+#[allow(rustc::usage_of_type_ir_inherent)]
+#[allow(rustc::usage_of_type_ir_traits)]
+#[cfg_attr(
     feature = "nightly",
     feature(associated_type_defaults, never_type, rustc_attrs, negative_impls)
 )]
-#![cfg_attr(feature = "nightly", allow(internal_features))]
+#[cfg_attr(feature = "nightly", allow(internal_features))]
 // tidy-alphabetical-end
 
-extern crate self as rustc_type_ir;
 
 use std::fmt;
 use std::hash::Hash;
@@ -100,7 +99,7 @@ pub use ty_kind::*;
 pub use upcast::*;
 pub use visit::*;
 
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// A [De Bruijn index][dbi] is a standard means of representing
     /// regions (and perhaps later types) in a higher-ranked setting. In
     /// particular, imagine a type like this:
@@ -337,7 +336,7 @@ impl fmt::Debug for Variance {
 **Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=UniverseIndex | COMPLEXITY=12 | LINES=44
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// "Universes" are used during type- and trait-checking in the
     /// presence of `for<..>` binders to control what sets of names are
     /// visible. Universes are arranged into a tree: the root universe
@@ -442,7 +441,7 @@ impl Default for UniverseIndex {
 **Metadata**: AST_ID=12 | TYPE=STRUCT | NAME=BoundVar | COMPLEXITY=4 | LINES=9
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     #[cfg_attr(feature = "nightly", derive(HashStable_NoContext))]
     #[encodable]
     #[orderable]

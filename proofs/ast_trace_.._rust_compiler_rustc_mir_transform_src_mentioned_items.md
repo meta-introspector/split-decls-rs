@@ -6,24 +6,24 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::visit::Visitor;
-use rustc_middle::mir::{self, Location, MentionedItem};
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::{self, Location, MentionedItem};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::adjustment::PointerCoercion;
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::ty::adjustment::PointerCoercion;
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=STRUCT | NAME=MentionedItemsVisitor | COMPLEXITY=2 | LINES=10
 
 ```rust
-use rustc_session::Session;
-use rustc_span::source_map::Spanned;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::source_map::Spanned;
 
 pub(super) struct MentionedItems;
 

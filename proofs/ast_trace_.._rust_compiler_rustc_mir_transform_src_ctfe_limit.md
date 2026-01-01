@@ -6,11 +6,11 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7
 
 ```rust
-//! A pass that inserts the `ConstEvalCounter` instruction into any blocks that have a back edge
-//! (thus indicating there is a loop in the CFG), or whose terminator is a function call.
+// A pass that inserts the `ConstEvalCounter` instruction into any blocks that have a back edge
+// (thus indicating there is a loop in the CFG), or whose terminator is a function call.
 
-use rustc_data_structures::graph::dominators::Dominators;
-use rustc_middle::mir::{
+use crate::rustc_data_structures::graph::dominators::Dominators;
+use crate::rustc_complete::mir::{
     BasicBlock, BasicBlockData, Body, Statement, StatementKind, TerminatorKind,
 };
 ```
@@ -19,7 +19,7 @@ use rustc_middle::mir::{
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=19 | LINES=36
 
 ```rust
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::instrument;
 
 pub(super) struct CtfeLimit;

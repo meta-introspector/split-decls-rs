@@ -6,7 +6,7 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_middle::mir;
+use crate::rustc_complete::mir;
 
 mod alignment;
 pub(crate) mod caller_location;
@@ -36,7 +36,7 @@ pub use self::type_name::type_name;
 /// same type as the result.
 #[inline]
 pub fn binop_left_homogeneous(op: mir::BinOp) -> bool {
-    use rustc_middle::mir::BinOp::*;
+    use crate::rustc_complete::mir::BinOp::*;
     match op {
         Add | AddUnchecked | Sub | SubUnchecked | Mul | MulUnchecked | Div | Rem | BitXor
         | BitAnd | BitOr | Offset | Shl | ShlUnchecked | Shr | ShrUnchecked => true,
@@ -55,7 +55,7 @@ pub fn binop_left_homogeneous(op: mir::BinOp) -> bool {
 /// same type as the LHS.
 #[inline]
 pub fn binop_right_homogeneous(op: mir::BinOp) -> bool {
-    use rustc_middle::mir::BinOp::*;
+    use crate::rustc_complete::mir::BinOp::*;
     match op {
         Add | AddUnchecked | AddWithOverflow | Sub | SubUnchecked | SubWithOverflow | Mul
         | MulUnchecked | MulWithOverflow | Div | Rem | BitXor | BitAnd | BitOr | Eq | Ne | Lt

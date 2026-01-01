@@ -7,30 +7,30 @@ Generated 11 AST blocks from source file
 
 ```rust
 use rustc_ast as ast;
-use rustc_ast::token::{self, MetaVarKind};
+use crate::rustc_complete::token::{self, MetaVarKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::tokenstream::ParserRange;
-use rustc_ast::{Attribute, attr};
+use crate::rustc_complete::tokenstream::ParserRange;
+use crate::rustc_complete::{Attribute, attr};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::{Diag, PResult};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Diag, PResult};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{BytePos, Span};
+use crate::rustc_complete::{BytePos, Span};
 ```
 
 ## Block 5
@@ -146,7 +146,7 @@ impl<'a> Parser<'a> {
                             replacement_span,
                             fluent::parse_suggestion,
                             "",
-                            rustc_errors::Applicability::MachineApplicable,
+                            crate::rustc_errors::Applicability::MachineApplicable,
                         );
                     }
                     err.emit();
@@ -280,7 +280,7 @@ impl<'a> Parser<'a> {
                             OuterAttributeType::DocBlockComment => "*",
                             OuterAttributeType::DocComment => "/",
                         },
-                        rustc_errors::Applicability::MachineApplicable,
+                        crate::rustc_errors::Applicability::MachineApplicable,
                     );
                 }
                 return None;

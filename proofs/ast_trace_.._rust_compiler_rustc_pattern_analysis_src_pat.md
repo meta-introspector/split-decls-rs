@@ -6,8 +6,8 @@ Generated 20 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-//! As explained in [`crate::usefulness`], values and patterns are made from constructors applied to
-//! fields. This file defines types that represent patterns in this way.
+// As explained in [`crate::usefulness`], values and patterns are made from constructors applied to
+// fields. This file defines types that represent patterns in this way.
 
 use std::fmt;
 

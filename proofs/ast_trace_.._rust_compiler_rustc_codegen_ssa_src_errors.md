@@ -6,7 +6,7 @@ Generated 84 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-//! Errors emitted by codegen_ssa
+// Errors emitted by codegen_ssa
 
 use std::borrow::Cow;
 use std::ffi::OsString;
@@ -20,8 +20,8 @@ use std::path::{Path, PathBuf};
 ```rust
 use std::process::ExitStatus;
 
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Diag, DiagArgValue, DiagCtxtHandle, Diagnostic, EmissionGuarantee, IntoDiagArg, Level,
 };
 ```
@@ -37,15 +37,15 @@ use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::layout::LayoutError;
-use rustc_middle::ty::{FloatTy, Ty};
+use crate::rustc_complete::ty::layout::LayoutError;
+use crate::rustc_complete::ty::{FloatTy, Ty};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 6
@@ -389,7 +389,7 @@ impl<'a> CopyPath<'a> {
 struct DebugArgPath<'a>(pub &'a Path);
 
 impl IntoDiagArg for DebugArgPath<'_> {
-    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         DiagArgValue::Str(Cow::Owned(format!("{:?}", self.0)))
     }
 }
@@ -750,7 +750,7 @@ impl<G: EmissionGuarantee> Diagnostic<'_, G> for LinkingFailed<'_> {
             diag.note(fluent::codegen_ssa_extern_funcs_not_found)
                 .note(fluent::codegen_ssa_specify_libraries_to_link);
 
-            if rustc_session::utils::was_invoked_from_cargo() {
+            if crate::rustc_session::utils::was_invoked_from_cargo() {
                 diag.note(fluent::codegen_ssa_use_cargo_directive);
             }
         }
@@ -770,7 +770,7 @@ pub(crate) struct LinkExeUnexpectedError;
 pub(crate) struct LinkExeStatusStackBufferOverrun;
 
 impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for LinkExeStatusStackBufferOverrun {
-    fn into_diag(self, dcx: rustc_errors::DiagCtxtHandle<'a>, level: Level) -> Diag<'a, G> {
+    fn into_diag(self, dcx: crate::rustc_errors::DiagCtxtHandle<'a>, level: Level) -> Diag<'a, G> {
         let mut diag =
             Diag::new(dcx, level, fluent::codegen_ssa_link_exe_status_stack_buffer_overrun);
         diag.note(fluent::codegen_ssa_abort_note);

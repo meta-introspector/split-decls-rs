@@ -6,7 +6,7 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::coverage::{CounterId, CovTerm, ExpressionId};
+use crate::rustc_complete::mir::coverage::{CounterId, CovTerm, ExpressionId};
 ```
 
 ## Block 2

@@ -6,19 +6,19 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! Implementation of the `#[cfg_accessible(path)]` attribute macro.
+// Implementation of the `#[cfg_accessible(path)]` attribute macro.
 
 use rustc_ast as ast;
 use rustc_attr_parsing::validate_attr;
-use rustc_expand::base::{Annotatable, ExpandResult, ExtCtxt, Indeterminate, MultiItemModifier};
+use crate::rustc_expand::base::{Annotatable, ExpandResult, ExtCtxt, Indeterminate, MultiItemModifier};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_feature::AttributeTemplate;
-use rustc_span::{Span, sym};
+use crate::rustc_feature::AttributeTemplate;
+use crate::rustc_complete::{Span, sym};
 ```
 
 ## Block 3

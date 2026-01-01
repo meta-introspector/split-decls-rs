@@ -13,15 +13,15 @@ use std::sync::{Arc, LazyLock};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::sync::IntoDynSyncSend;
-use rustc_error_messages::fluent_bundle::resolver::errors::{ReferenceKind, ResolverError};
+use crate::rustc_data_structures::sync::IntoDynSyncSend;
+use crate::rustc_error_messages::fluent_bundle::resolver::errors::{ReferenceKind, ResolverError};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_error_messages::{DiagMessage, langid};
+use crate::rustc_error_messages::{DiagMessage, langid};
 ```
 
 ## Block 4

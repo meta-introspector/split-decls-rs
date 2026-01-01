@@ -6,66 +6,66 @@ Generated 21 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=14
 
 ```rust
-//! A jump threading optimization.
-//!
-//! This optimization seeks to replace join-then-switch control flow patterns by straight jumps
-//!    X = 0                                      X = 0
-//! ------------\      /--------              ------------
-//!    X = 1     X----X SwitchInt(X)     =>       X = 1
-//! ------------/      \--------              ------------
-//!
-//!
-//! We proceed by walking the cfg backwards starting from each `SwitchInt` terminator,
-//! looking for assignments that will turn the `SwitchInt` into a simple `Goto`.
-//!
-//! The algorithm maintains a set of replacement conditions:
-//! - `conditions[place]` contains `Condition { value, polarity: Eq, target }`
+// A jump threading optimization.
+//
+// This optimization seeks to replace join-then-switch control flow patterns by straight jumps
+//    X = 0                                      X = 0
+// ------------\      /--------              ------------
+//    X = 1     X----X SwitchInt(X)     =>       X = 1
+// ------------/      \--------              ------------
+//
+//
+// We proceed by walking the cfg backwards starting from each `SwitchInt` terminator,
+// looking for assignments that will turn the `SwitchInt` into a simple `Goto`.
+//
+// The algorithm maintains a set of replacement conditions:
+// - `conditions[place]` contains `Condition { value, polarity: Eq, target }`
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1
 
 ```rust
-//!   if assigning `value` to `place` turns the `SwitchInt` into `Goto { target }`.
+//   if assigning `value` to `place` turns the `SwitchInt` into `Goto { target }`.
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-//! - `conditions[place]` contains `Condition { value, polarity: Ne, target }`
+// - `conditions[place]` contains `Condition { value, polarity: Ne, target }`
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2
 
 ```rust
-//!   if assigning anything different from `value` to `place` turns the `SwitchInt`
-//!   into `Goto { target }`.
+//   if assigning anything different from `value` to `place` turns the `SwitchInt`
+//   into `Goto { target }`.
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=22
 
 ```rust
-//!
-//! In this file, we denote as `place ?= value` the existence of a replacement condition
-//! on `place` with given `value`, irrespective of the polarity and target of that
-//! replacement condition.
-//!
-//! We then walk the CFG backwards transforming the set of conditions.
-//! When we find a fulfilling assignment, we record a `ThreadingOpportunity`.
-//! All `ThreadingOpportunity`s are applied to the body, by duplicating blocks if required.
-//!
-//! The optimization search can be very heavy, as it performs a DFS on MIR starting from
-//! each `SwitchInt` terminator. To manage the complexity, we:
-//! - bound the maximum depth by a constant `MAX_BACKTRACK`;
-//! - we only traverse `Goto` terminators.
-//!
-//! We try to avoid creating irreducible control-flow by not threading through a loop header.
-//!
-//! Likewise, applying the optimisation can create a lot of new MIR, so we bound the instruction
-//! cost by `MAX_COST`.
+//
+// In this file, we denote as `place ?= value` the existence of a replacement condition
+// on `place` with given `value`, irrespective of the polarity and target of that
+// replacement condition.
+//
+// We then walk the CFG backwards transforming the set of conditions.
+// When we find a fulfilling assignment, we record a `ThreadingOpportunity`.
+// All `ThreadingOpportunity`s are applied to the body, by duplicating blocks if required.
+//
+// The optimization search can be very heavy, as it performs a DFS on MIR starting from
+// each `SwitchInt` terminator. To manage the complexity, we:
+// - bound the maximum depth by a constant `MAX_BACKTRACK`;
+// - we only traverse `Goto` terminators.
+//
+// We try to avoid creating irreducible control-flow by not threading through a loop header.
+//
+// Likewise, applying the optimisation can create a lot of new MIR, so we bound the instruction
+// cost by `MAX_COST`.
 
 use rustc_arena::DroplessArena;
 use rustc_const_eval::const_eval::DummyMachine;
@@ -76,29 +76,29 @@ use rustc_const_eval::interpret::{ImmTy, Immediate, InterpCx, OpTy, Projectable}
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_index::IndexVec;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::bug;
-use rustc_middle::mir::interpret::Scalar;
-use rustc_middle::mir::visit::Visitor;
-use rustc_middle::mir::*;
-use rustc_middle::ty::{self, ScalarInt, TyCtxt};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_index::IndexVec;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::interpret::Scalar;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, ScalarInt, TyCtxt};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_mir_dataflow::lattice::HasBottom;
-use rustc_mir_dataflow::value_analysis::{Map, PlaceIndex, State, TrackElem};
+use crate::rustc_mir_dataflow::lattice::HasBottom;
+use crate::rustc_mir_dataflow::value_analysis::{Map, PlaceIndex, State, TrackElem};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::DUMMY_SP;
+use crate::rustc_complete::DUMMY_SP;
 use tracing::{debug, instrument, trace};
 ```
 
@@ -115,7 +115,7 @@ const MAX_COST: usize = 100;
 const MAX_PLACES: usize = 100;
 
 impl<'tcx> crate::MirPass<'tcx> for JumpThreading {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() >= 2
     }
 

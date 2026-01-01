@@ -8,7 +8,7 @@ Generated 8 AST blocks from source file
 ```rust
 use std::num::IntErrorKind;
 
-use rustc_hir::limit::Limit;
+use crate::rustc_complete::limit::Limit;
 
 use super::prelude::*;
 use crate::session_diagnostics::LimitInvalid;

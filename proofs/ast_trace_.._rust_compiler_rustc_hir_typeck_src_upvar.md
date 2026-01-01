@@ -6,56 +6,56 @@ Generated 19 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=17 | LINES=36
 
 ```rust
-//! ### Inferring borrow kinds for upvars
-//!
-//! Whenever there is a closure expression, we need to determine how each
-//! upvar is used. We do this by initially assigning each upvar an
-//! immutable "borrow kind" (see `ty::BorrowKind` for details) and then
-//! "escalating" the kind as needed. The borrow kind proceeds according to
-//! the following lattice:
-//! ```ignore (not-rust)
-//! ty::ImmBorrow -> ty::UniqueImmBorrow -> ty::MutBorrow
-//! ```
-//! So, for example, if we see an assignment `x = 5` to an upvar `x`, we
-//! will promote its borrow kind to mutable borrow. If we see an `&mut x`
-//! we'll do the same. Naturally, this applies not just to the upvar, but
-//! to everything owned by `x`, so the result is the same for something
-//! like `x.f = 5` and so on (presuming `x` is not a borrowed pointer to a
-//! struct). These adjustments are performed in
-//! `adjust_for_non_move_closure` (you can trace backwards through the code
-//! from there).
-//!
-//! The fact that we are inferring borrow kinds as we go results in a
-//! semi-hacky interaction with the way `ExprUseVisitor` is computing
-//! `Place`s. In particular, it will query the current borrow kind as it
-//! goes, and we'll return the *current* value, but this may get
-//! adjusted later. Therefore, in this module, we generally ignore the
-//! borrow kind (and derived mutabilities) that `ExprUseVisitor` returns
-//! within `Place`s, since they may be inaccurate. (Another option
-//! would be to use a unification scheme, where instead of returning a
-//! concrete borrow kind like `ty::ImmBorrow`, we return a
-//! `ty::InferBorrow(upvar_id)` or something like that, but this would
-//! then mean that all later passes would have to check for these figments
-//! and report an error, and it just seems like more mess in the end.)
+// ### Inferring borrow kinds for upvars
+//
+// Whenever there is a closure expression, we need to determine how each
+// upvar is used. We do this by initially assigning each upvar an
+// immutable "borrow kind" (see `ty::BorrowKind` for details) and then
+// "escalating" the kind as needed. The borrow kind proceeds according to
+// the following lattice:
+// ```ignore (not-rust)
+// ty::ImmBorrow -> ty::UniqueImmBorrow -> ty::MutBorrow
+// ```
+// So, for example, if we see an assignment `x = 5` to an upvar `x`, we
+// will promote its borrow kind to mutable borrow. If we see an `&mut x`
+// we'll do the same. Naturally, this applies not just to the upvar, but
+// to everything owned by `x`, so the result is the same for something
+// like `x.f = 5` and so on (presuming `x` is not a borrowed pointer to a
+// struct). These adjustments are performed in
+// `adjust_for_non_move_closure` (you can trace backwards through the code
+// from there).
+//
+// The fact that we are inferring borrow kinds as we go results in a
+// semi-hacky interaction with the way `ExprUseVisitor` is computing
+// `Place`s. In particular, it will query the current borrow kind as it
+// goes, and we'll return the *current* value, but this may get
+// adjusted later. Therefore, in this module, we generally ignore the
+// borrow kind (and derived mutabilities) that `ExprUseVisitor` returns
+// within `Place`s, since they may be inaccurate. (Another option
+// would be to use a unification scheme, where instead of returning a
+// concrete borrow kind like `ty::ImmBorrow`, we return a
+// `ty::InferBorrow(upvar_id)` or something like that, but this would
+// then mean that all later passes would have to check for these figments
+// and report an error, and it just seems like more mess in the end.)
 
 use std::iter;
 
-use rustc_abi::FIRST_VARIANT;
-use rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
+use crate::rustc_abi::FIRST_VARIANT;
+use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::unord::{ExtendUnord, UnordSet};
+use crate::rustc_data_structures::unord::{ExtendUnord, UnordSet};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{Applicability, MultiSpan};
+use crate::rustc_complete::{Applicability, MultiSpan};
 ```
 
 ## Block 4
@@ -63,25 +63,25 @@ use rustc_errors::{Applicability, MultiSpan};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::HirId;
-use rustc_hir::def_id::LocalDefId;
-use rustc_hir::intravisit::{self, Visitor};
+use crate::rustc_complete::HirId;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::intravisit::{self, Visitor};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::hir::place::{Place, PlaceBase, PlaceWithHirId, Projection, ProjectionKind};
+use crate::rustc_complete::hir::place::{Place, PlaceBase, PlaceWithHirId, Projection, ProjectionKind};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_middle::mir::FakeReadCause;
-use rustc_middle::traits::ObligationCauseCode;
-use rustc_middle::ty::{
+use crate::rustc_complete::mir::FakeReadCause;
+use crate::rustc_complete::traits::ObligationCauseCode;
+use crate::rustc_complete::ty::{
     self, BorrowKind, ClosureSizeProfileData, Ty, TyCtxt, TypeVisitableExt as _, TypeckResults,
     UpvarArgs, UpvarCapture,
 };
@@ -91,22 +91,22 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::lint;
-use rustc_span::{BytePos, Pos, Span, Symbol, sym};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::{BytePos, Pos, Span, Symbol, sym};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::{debug, instrument};
 ```
 
@@ -548,7 +548,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         tupled_upvars_ty_for_borrow,
                         false,
                         hir::Safety::Safe,
-                        rustc_abi::ExternAbi::Rust,
+                        crate::rustc_abi::ExternAbi::Rust,
                     ),
                     self.tcx.mk_bound_variable_kinds(&[ty::BoundVariableKind::Region(
                         ty::BoundRegionKind::ClosureEnv,

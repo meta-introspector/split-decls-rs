@@ -22,16 +22,16 @@ use itertools::{Itertools, Position};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_ast::util::classify;
-use rustc_ast::util::literal::escape_byte_str_symbol;
-use rustc_ast::util::parser::{self, ExprPrecedence, Fixity};
+use crate::rustc_complete::util::classify;
+use crate::rustc_complete::util::literal::escape_byte_str_symbol;
+use crate::rustc_complete::util::parser::{self, ExprPrecedence, Fixity};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_ast::{
+use crate::rustc_complete::{
     self as ast, BinOpKind, BlockCheckMode, FormatAlignment, FormatArgPosition, FormatArgsPiece,
     FormatCount, FormatDebugHex, FormatSign, FormatTrait, YieldKind, token,
 };
@@ -444,7 +444,7 @@ impl<'a> State<'a> {
             // are required so that the attribute encompasses the right
             // subexpression and not just the left one.
             //
-            //     #![feature(stmt_expr_attributes)]
+            //     #[feature(stmt_expr_attributes)]
             //
             //     macro_rules! add_attr {
             //         ($e:expr) => { #[attr] $e };

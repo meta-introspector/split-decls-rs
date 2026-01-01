@@ -6,7 +6,7 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=14
 
 ```rust
-//! Safe wrappers for coverage-specific FFI functions.
+// Safe wrappers for coverage-specific FFI functions.
 
 use std::ffi::CString;
 

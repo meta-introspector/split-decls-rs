@@ -6,7 +6,7 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_ast::expand::allocator::{
+use crate::rustc_complete::expand::allocator::{
     ALLOCATOR_METHODS, AllocatorMethod, AllocatorMethodInput, AllocatorTy, global_fn_name,
 };
 ```
@@ -15,7 +15,7 @@ use rustc_ast::expand::allocator::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_ast::{
+use crate::rustc_complete::{
     self as ast, AttrVec, Expr, Fn, FnHeader, FnSig, Generics, ItemKind, Mutability, Param, Safety,
     Stmt, StmtKind, Ty, TyKind,
 };
@@ -25,14 +25,14 @@ use rustc_ast::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_expand::base::{Annotatable, ExtCtxt};
+use crate::rustc_expand::base::{Annotatable, ExtCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::{Ident, Span, Symbol, kw, sym};
 ```
 
 ## Block 5

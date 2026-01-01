@@ -6,32 +6,32 @@ Generated 15 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_abi::ExternAbi;
-use rustc_ast::visit::AssocCtxt;
-use rustc_ast::*;
-use rustc_errors::{E0570, ErrorGuaranteed, struct_span_code_err};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_complete::visit::AssocCtxt;
+use crate::rustc_complete::*;
+use crate::rustc_complete::{E0570, ErrorGuaranteed, struct_span_code_err};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::{DefKind, PerNS, Res};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{DefKind, PerNS, Res};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{CRATE_DEF_ID, LocalDefId};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, LocalDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::{
+use crate::rustc_complete::{
     self as hir, HirId, ImplItemImplKind, LifetimeSource, PredicateOrigin, Target, find_attr,
 };
 ```
@@ -40,23 +40,23 @@ use rustc_hir::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_index::{IndexSlice, IndexVec};
+use crate::rustc_index::{IndexSlice, IndexVec};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::span_bug;
-use rustc_middle::ty::{ResolverAstLowering, TyCtxt};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{ResolverAstLowering, TyCtxt};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::edit_distance::find_best_match_for_name;
-use rustc_span::{DUMMY_SP, DesugaringKind, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_complete::{DUMMY_SP, DesugaringKind, Ident, Span, Symbol, kw, sym};
 ```
 
 ## Block 8
@@ -1524,7 +1524,7 @@ impl<'hir> LoweringContext<'_, 'hir> {
                 // we can keep the same name for the parameter.
                 // This lets rustdoc render it correctly in documentation.
                 hir::PatKind::Binding(_, _, ident, _) => (ident, false),
-                hir::PatKind::Wild => (Ident::with_dummy_span(rustc_span::kw::Underscore), false),
+                hir::PatKind::Wild => (Ident::with_dummy_span(crate::rustc_span::kw::Underscore), false),
                 _ => {
                     // Replace the ident for bindings that aren't simple.
                     let name = format!("__arg{index}");

@@ -6,20 +6,20 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-//! This pass just dumps MIR at a specified point.
+// This pass just dumps MIR at a specified point.
 
 use std::fs::File;
 use std::io;
 
-use rustc_middle::mir::{Body, write_mir_pretty};
+use crate::rustc_complete::mir::{Body, write_mir_pretty};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_session::config::{OutFileName, OutputType};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::{OutFileName, OutputType};
 ```
 
 ## Block 3

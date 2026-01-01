@@ -8,32 +8,32 @@ Generated 29 AST blocks from source file
 ```rust
 use std::collections::hash_map::Entry::*;
 
-use rustc_abi::{CanonAbi, X86Call};
+use crate::rustc_abi::{CanonAbi, X86Call};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::expand::allocator::{ALLOCATOR_METHODS, NO_ALLOC_SHIM_IS_UNSTABLE, global_fn_name};
+use crate::rustc_complete::expand::allocator::{ALLOCATOR_METHODS, NO_ALLOC_SHIM_IS_UNSTABLE, global_fn_name};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::unord::UnordMap;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{CrateNum, DefId, DefIdMap, LOCAL_CRATE, LocalDefId};
+use crate::rustc_data_structures::unord::UnordMap;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{CrateNum, DefId, DefIdMap, LOCAL_CRATE, LocalDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use rustc_middle::middle::exported_symbols::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::middle::exported_symbols::{
     ExportedSymbol, SymbolExportInfo, SymbolExportKind, SymbolExportLevel,
 };
 ```
@@ -42,16 +42,16 @@ use rustc_middle::middle::exported_symbols::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::query::LocalCrate;
-use rustc_middle::ty::{self, GenericArgKind, GenericArgsRef, Instance, SymbolName, Ty, TyCtxt};
+use crate::rustc_complete::query::LocalCrate;
+use crate::rustc_complete::ty::{self, GenericArgKind, GenericArgsRef, Instance, SymbolName, Ty, TyCtxt};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::util::Providers;
-use rustc_session::config::{CrateType, OomStrategy};
+use crate::rustc_complete::util::Providers;
+use crate::rustc_complete::config::{CrateType, OomStrategy};
 ```
 
 ## Block 7
@@ -59,7 +59,7 @@ use rustc_session::config::{CrateType, OomStrategy};
 
 ```rust
 use rustc_symbol_mangling::mangle_internal_symbol;
-use rustc_target::spec::TlsModel;
+use crate::rustc_target::spec::TlsModel;
 use tracing::debug;
 
 use crate::back::symbol_export;
@@ -110,7 +110,7 @@ fn reachable_non_generics_provider(tcx: TyCtxt<'_>, _: LocalCrate) -> DefIdMap<S
 
     // Check to see if this crate is a "special runtime crate". These
     // crates, implementation details of the standard library, typically
-    // have a bunch of `pub extern` and `#[no_mangle]` functions as the
+    // have a bunch of `pub extern` and `#[unsafe(no_mangle)]` functions as the
     // ABI between them. We don't want their symbols to have a `C`
     // export level, however, as they're just implementation details.
     // Down below we'll hardwire all of the symbols to the `Rust` export
@@ -313,9 +313,9 @@ fn exported_generic_symbols_provider_local<'tcx>(
     let mut symbols: Vec<_> = vec![];
 
     if tcx.local_crate_exports_generics() {
-        use rustc_hir::attrs::Linkage;
-        use rustc_middle::mir::mono::{MonoItem, Visibility};
-        use rustc_middle::ty::InstanceKind;
+        use crate::rustc_complete::attrs::Linkage;
+        use crate::rustc_complete::mir::mono::{MonoItem, Visibility};
+        use crate::rustc_complete::ty::InstanceKind;
 
         // Normally, we require that shared monomorphizations are not hidden,
         // because if we want to re-use a monomorphization from a Rust dylib, it
@@ -375,7 +375,7 @@ fn exported_generic_symbols_provider_local<'tcx>(
 
             if !tcx.sess.opts.share_generics() {
                 if tcx.codegen_fn_attrs(mono_item.def_id()).inline
-                    == rustc_hir::attrs::InlineAttr::Never
+                    == crate::rustc_hir::attrs::InlineAttr::Never
                 {
                     // this is OK, we explicitly allow sharing inline(never) across crates even
                     // without share-generics.
@@ -736,7 +736,7 @@ pub(crate) fn symbol_name_for_instance_in_crate<'tcx>(
 fn calling_convention_for_symbol<'tcx>(
     tcx: TyCtxt<'tcx>,
     symbol: ExportedSymbol<'tcx>,
-) -> (CanonAbi, &'tcx [rustc_target::callconv::ArgAbi<'tcx, Ty<'tcx>>]) {
+) -> (CanonAbi, &'tcx [crate::rustc_target::callconv::ArgAbi<'tcx, Ty<'tcx>>]) {
     let instance = match symbol {
         ExportedSymbol::NonGeneric(def_id) | ExportedSymbol::Generic(def_id, _)
             if tcx.is_static(def_id) =>

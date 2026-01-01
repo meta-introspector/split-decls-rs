@@ -28,8 +28,8 @@ use std::{fs, io};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11
 
 ```rust
-use rustc_abi::Size;
-use rustc_ast::InlineAsmTemplatePiece;
+use crate::rustc_abi::Size;
+use crate::rustc_complete::InlineAsmTemplatePiece;
 use tracing::trace;
 use ty::print::PrettyPrinter;
 
@@ -793,7 +793,7 @@ writeln!(w)?;
 }
 
 fn write_mir_sig(tcx: TyCtxt<'_>, body: &Body<'_>, w: &mut dyn io::Write) -> io::Result<()> {
-    use rustc_hir::def::DefKind;
+    use crate::rustc_complete::def::DefKind;
 
     trace!("write_mir_sig: {:?}", body.source.instance);
     let def_id = body.source.def_id();
@@ -1734,7 +1734,7 @@ impl<'tcx> Visitor<'tcx> for ExtraComments<'tcx> {
 
             let fmt_val = |val: ConstValue, ty: Ty<'tcx>| {
                 let tcx = self.tcx;
-                rustc_data_structures::make_display(move |fmt| {
+                crate::rustc_data_structures::make_display(move |fmt| {
                     pretty_print_const_value_tcx(tcx, val, ty, fmt)
                 })
             };

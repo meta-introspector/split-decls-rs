@@ -6,8 +6,8 @@ Generated 23 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-//! Manages the low-level pushing and popping of stack frames and the (de)allocation of local variables.
-//! For handling of argument passing and return values, see the `call` module.
+// Manages the low-level pushing and popping of stack frames and the (de)allocation of local variables.
+// For handling of argument passing and return values, see the `call` module.
 use std::cell::Cell;
 use std::{fmt, mem};
 ```
@@ -24,25 +24,25 @@ use either::{Either, Left, Right};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::definitions::DefPathData;
-use rustc_index::IndexVec;
-use rustc_middle::ty::layout::TyAndLayout;
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::definitions::DefPathData;
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, mir};
+use crate::rustc_complete::{bug, mir};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_mir_dataflow::impls::always_storage_live_locals;
-use rustc_span::Span;
+use crate::rustc_mir_dataflow::impls::always_storage_live_locals;
+use crate::rustc_complete::Span;
 use tracing::field::Empty;
 use tracing::{info_span, instrument, trace};
 ```

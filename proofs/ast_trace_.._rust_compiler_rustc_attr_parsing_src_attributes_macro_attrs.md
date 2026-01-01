@@ -6,8 +6,8 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=13
 
 ```rust
-use rustc_errors::DiagArgValue;
-use rustc_hir::attrs::MacroUseArgs;
+use crate::rustc_complete::DiagArgValue;
+use crate::rustc_complete::attrs::MacroUseArgs;
 
 use super::prelude::*;
 use crate::session_diagnostics::IllFormedAttributeInputLint;

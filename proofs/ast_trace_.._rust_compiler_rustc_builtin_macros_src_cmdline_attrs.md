@@ -6,30 +6,30 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! Attributes injected into the crate root from command line using `-Z crate-attr`.
+// Attributes injected into the crate root from command line using `-Z crate-attr`.
 
-use rustc_ast::{self as ast};
+use crate::rustc_complete::{self as ast};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_errors::Diag;
-use rustc_parse::parser::attr::InnerAttrPolicy;
-use rustc_parse::{parse_in, source_str_to_stream};
+use crate::rustc_complete::Diag;
+use crate::rustc_parse::parser::attr::InnerAttrPolicy;
+use crate::rustc_parse::{parse_in, source_str_to_stream};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=inject | COMPLEXITY=17 | LINES=31
 
 ```rust
-use rustc_session::parse::ParseSess;
-use rustc_span::FileName;
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::FileName;
 
 pub fn inject(krate: &mut ast::Crate, psess: &ParseSess, attrs: &[String]) {
     for raw_attr in attrs {
-        let source = format!("#![{raw_attr}]");
+        let source = format!("#[{raw_attr}]");
         let parse = || -> Result<ast::Attribute, Vec<Diag<'_>>> {
             let tokens = source_str_to_stream(
                 psess,

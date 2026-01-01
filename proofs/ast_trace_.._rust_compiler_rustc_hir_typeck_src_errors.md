@@ -6,14 +6,14 @@ Generated 96 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11
 
 ```rust
-//! Errors emitted by `rustc_hir_typeck`.
+// Errors emitted by `rustc_hir_typeck`.
 
 use std::borrow::Cow;
 
-use rustc_abi::ExternAbi;
-use rustc_ast::Label;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_complete::Label;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagArgValue, DiagCtxtHandle, DiagSymbolList, Diagnostic,
     EmissionGuarantee, IntoDiagArg, Level, MultiSpan, Subdiagnostic,
 };
@@ -24,7 +24,7 @@ use rustc_errors::{
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::ExprKind;
+use crate::rustc_complete::ExprKind;
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
 ```
 
@@ -32,21 +32,21 @@ use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::edition::{Edition, LATEST_STABLE_EDITION};
+use crate::rustc_complete::edition::{Edition, LATEST_STABLE_EDITION};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::{Ident, Span, Symbol};
 ```
 
 ## Block 6
@@ -62,7 +62,7 @@ pub(crate) struct BaseExpressionDoubleDot {
     pub span: Span,
     #[suggestion(
         hir_typeck_base_expression_double_dot_enable_default_field_values,
-        code = "#![feature(default_field_values)]\n",
+        code = "#[feature(default_field_values)]\n",
         applicability = "machine-applicable",
         style = "verbose"
     )]
@@ -634,7 +634,7 @@ pub(crate) enum HelpUseLatestEdition {
 impl HelpUseLatestEdition {
     pub(crate) fn new() -> Self {
         let edition = LATEST_STABLE_EDITION;
-        if rustc_session::utils::was_invoked_from_cargo() {
+        if crate::rustc_session::utils::was_invoked_from_cargo() {
             Self::Cargo { edition }
         } else {
             Self::Standalone { edition }
@@ -1246,7 +1246,7 @@ pub(crate) enum CastUnknownPointerSub {
 **Metadata**: AST_ID=71 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=12 | LINES=17
 
 ```rust
-impl rustc_errors::Subdiagnostic for CastUnknownPointerSub {
+impl crate::rustc_errors::Subdiagnostic for CastUnknownPointerSub {
     fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
         match self {
             CastUnknownPointerSub::To(span) => {

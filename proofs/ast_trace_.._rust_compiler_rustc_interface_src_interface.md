@@ -10,69 +10,69 @@ use std::path::PathBuf;
 use std::result;
 use std::sync::Arc;
 
-use rustc_ast::{LitKind, MetaItemKind, token};
+use crate::rustc_complete::{LitKind, MetaItemKind, token};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_codegen_ssa::traits::CodegenBackend;
-use rustc_data_structures::fx::{FxHashMap, FxHashSet};
+use crate::rustc_codegen_ssa::traits::CodegenBackend;
+use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::jobserver::{self, Proxy};
+use crate::rustc_data_structures::jobserver::{self, Proxy};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::stable_hasher::StableHasher;
-use rustc_errors::registry::Registry;
-use rustc_errors::{DiagCtxtHandle, ErrorGuaranteed};
+use crate::rustc_data_structures::stable_hasher::StableHasher;
+use crate::rustc_complete::registry::Registry;
+use crate::rustc_complete::{DiagCtxtHandle, ErrorGuaranteed};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10
 
 ```rust
-use rustc_lint::LintStore;
-use rustc_middle::ty;
-use rustc_middle::ty::CurrentGcx;
-use rustc_middle::util::Providers;
-use rustc_parse::lexer::StripTokens;
-use rustc_parse::new_parser_from_source_str;
-use rustc_parse::parser::attr::AllowLeadingUnsafe;
+use crate::rustc_lint::LintStore;
+use crate::rustc_complete::ty;
+use crate::rustc_complete::ty::CurrentGcx;
+use crate::rustc_complete::util::Providers;
+use crate::rustc_parse::lexer::StripTokens;
+use crate::rustc_parse::new_parser_from_source_str;
+use crate::rustc_parse::parser::attr::AllowLeadingUnsafe;
 use rustc_query_impl::QueryCtxt;
 use rustc_query_system::query::print_query_stack;
-use rustc_session::config::{self, Cfg, CheckCfg, ExpectedValues, Input, OutFileName};
+use crate::rustc_complete::config::{self, Cfg, CheckCfg, ExpectedValues, Input, OutFileName};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::parse::ParseSess;
-use rustc_session::{CompilerIO, EarlyDiagCtxt, Session, lint};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::{CompilerIO, EarlyDiagCtxt, Session, lint};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::source_map::{FileLoader, RealFileLoader, SourceMapInputs};
+use crate::rustc_complete::source_map::{FileLoader, RealFileLoader, SourceMapInputs};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{FileName, sym};
+use crate::rustc_complete::{FileName, sym};
 ```
 
 ## Block 9
@@ -114,7 +114,7 @@ pub(crate) fn parse_cfg(dcx: DiagCtxtHandle<'_>, cfgs: Vec<String>) -> Cfg {
     cfgs.into_iter()
         .map(|s| {
             let psess = ParseSess::with_fatal_emitter(
-                vec![crate::DEFAULT_LOCALE_RESOURCE, rustc_parse::DEFAULT_LOCALE_RESOURCE],
+                vec![crate::DEFAULT_LOCALE_RESOURCE, crate::rustc_parse::DEFAULT_LOCALE_RESOURCE],
                 format!("this error occurred on the command line: `--cfg={s}`"),
             );
             let filename = FileName::cfg_spec_source_code(&s);
@@ -189,7 +189,7 @@ pub(crate) fn parse_check_cfg(dcx: DiagCtxtHandle<'_>, specs: Vec<String>) -> Ch
 ```rust
 for s in specs {
         let psess = ParseSess::with_fatal_emitter(
-            vec![crate::DEFAULT_LOCALE_RESOURCE, rustc_parse::DEFAULT_LOCALE_RESOURCE],
+            vec![crate::DEFAULT_LOCALE_RESOURCE, crate::rustc_parse::DEFAULT_LOCALE_RESOURCE],
             format!("this error occurred on the command line: `--check-cfg={s}`"),
         );
         let filename = FileName::cfg_spec_source_code(&s);
@@ -286,8 +286,8 @@ for s in specs {
                 if values_specified {
                     error!("`cfg()` names cannot be after values");
                 }
-                names.push(rustc_span::Ident::new(
-                    if boolean { rustc_span::kw::True } else { rustc_span::kw::False },
+                names.push(crate::rustc_span::Ident::new(
+                    if boolean { crate::rustc_span::kw::True } else { crate::rustc_span::kw::False },
                     arg.span(),
                 ));
             } else if arg.has_name(sym::any)
@@ -408,7 +408,7 @@ pub struct Config {
     /// running rustc without having to save". (See #102759.)
     pub file_loader: Option<Box<dyn FileLoader + Send + Sync>>,
     /// The list of fluent resources, used for lints declared with
-    /// [`Diagnostic`](rustc_errors::Diagnostic) and [`LintDiagnostic`](rustc_errors::LintDiagnostic).
+    /// [`Diagnostic`](crate::rustc_errors::Diagnostic) and [`LintDiagnostic`](crate::rustc_errors::LintDiagnostic).
     pub locale_resources: Vec<&'static str>,
 
     pub lint_caps: FxHashMap<lint::LintId, lint::Level>,
@@ -434,7 +434,7 @@ pub struct Config {
     pub override_queries: Option<fn(&Session, &mut Providers)>,
 
     /// An extra set of symbols to add to the symbol interner, the symbol indices
-    /// will start at [`PREDEFINED_SYMBOLS_COUNT`](rustc_span::symbol::PREDEFINED_SYMBOLS_COUNT)
+    /// will start at [`PREDEFINED_SYMBOLS_COUNT`](crate::rustc_span::symbol::PREDEFINED_SYMBOLS_COUNT)
     pub extra_symbols: Vec<&'static str>,
 
     /// This is a callback from the driver that is called to create a codegen backend.
@@ -485,7 +485,7 @@ pub fn run_compiler<R: Send>(config: Config, f: impl FnOnce(&Compiler) -> R + Se
     trace!("run_compiler");
 
     // Set parallel mode before thread pool creation, which will create `Lock`s.
-    rustc_data_structures::sync::set_dyn_thread_safe_mode(config.opts.unstable_opts.threads > 1);
+    crate::rustc_data_structures::sync::set_dyn_thread_safe_mode(config.opts.unstable_opts.threads > 1);
 
     // Check jobserver before run_in_thread_pool_with_globals, which call jobserver::acquire_thread
     let early_dcx = EarlyDiagCtxt::new(config.opts.error_format);
@@ -536,7 +536,7 @@ pub fn run_compiler<R: Send>(config: Config, f: impl FnOnce(&Compiler) -> R + Se
 
             let temps_dir = config.opts.unstable_opts.temps_dir.as_deref().map(PathBuf::from);
 
-            let bundle = match rustc_errors::fluent_bundle(
+            let bundle = match crate::rustc_errors::fluent_bundle(
                 &config.opts.sysroot.all_paths().collect::<Vec<_>>(),
                 config.opts.unstable_opts.translate_lang.clone(),
                 config.opts.unstable_opts.translate_additional_ftl.as_deref(),
@@ -553,7 +553,7 @@ pub fn run_compiler<R: Send>(config: Config, f: impl FnOnce(&Compiler) -> R + Se
             let mut locale_resources = config.locale_resources;
             locale_resources.push(codegen_backend.locale_resource());
 
-            let mut sess = rustc_session::build_session(
+            let mut sess = crate::rustc_session::build_session(
                 config.opts,
                 CompilerIO {
                     input: config.input,
@@ -596,7 +596,7 @@ pub fn run_compiler<R: Send>(config: Config, f: impl FnOnce(&Compiler) -> R + Se
             // Even though the session holds the lint store, we can't build the
             // lint store until after the session exists. And we wait until now
             // so that `register_lints` sees the fully initialized session.
-            let mut lint_store = rustc_lint::new_lint_store(sess.enable_internal_lints());
+            let mut lint_store = crate::rustc_lint::new_lint_store(sess.enable_internal_lints());
             if let Some(register_lints) = config.register_lints.as_deref() {
                 register_lints(&sess, &mut lint_store);
             }

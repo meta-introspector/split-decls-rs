@@ -6,18 +6,18 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12
 
 ```rust
-//! Defines lang items.
-//!
-//! Language items are items that represent concepts intrinsic to the language
-//! itself. Examples are:
-//!
-//! * Traits that specify "kinds"; e.g., `Sync`, `Send`.
-//! * Traits that represent operators; e.g., `Add`, `Sub`, `Index`.
-//! * Functions called by the compiler itself.
+// Defines lang items.
+//
+// Language items are items that represent concepts intrinsic to the language
+// itself. Examples are:
+//
+// * Traits that specify "kinds"; e.g., `Sync`, `Send`.
+// * Traits that represent operators; e.g., `Add`, `Sub`, `Index`.
+// * Functions called by the compiler itself.
 
-use rustc_ast::attr::AttributeExt;
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_complete::attr::AttributeExt;
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 2
@@ -31,7 +31,7 @@ use rustc_macros::{Decodable, Encodable, HashStable_Generic};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol, kw, sym};
+use crate::rustc_complete::{Span, Symbol, kw, sym};
 ```
 
 ## Block 4
@@ -389,7 +389,7 @@ language_item_table! {
     DropInPlace,             sym::drop_in_place,       drop_in_place_fn,           Target::Fn,             GenericRequirement::Minimum(1);
     AllocLayout,             sym::alloc_layout,        alloc_layout,               Target::Struct,         GenericRequirement::None;
 
-    /// For all binary crates without `#![no_main]`, Rust will generate a "main" function.
+    /// For all binary crates without `#[no_main]`, Rust will generate a "main" function.
     /// The exact name and signature are target-dependent. The "main" function will invoke
     /// this lang item, passing it the `argc` and `argv` (or null, if those don't exist
     /// on the current target) as well as the user-defined `fn main` from the binary crate.

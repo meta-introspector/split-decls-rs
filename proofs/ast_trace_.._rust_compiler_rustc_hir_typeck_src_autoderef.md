@@ -6,35 +6,35 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-//! Some helper functions for `AutoDeref`.
+// Some helper functions for `AutoDeref`.
 
 use std::iter;
 
 use itertools::Itertools;
-use rustc_hir_analysis::autoderef::{Autoderef, AutoderefKind};
+use crate::rustc_hir_analysis::autoderef::{Autoderef, AutoderefKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_infer::infer::InferOk;
-use rustc_infer::traits::PredicateObligations;
-use rustc_middle::ty::adjustment::{Adjust, Adjustment, OverloadedDeref};
+use crate::rustc_infer::infer::InferOk;
+use crate::rustc_infer::traits::PredicateObligations;
+use crate::rustc_complete::ty::adjustment::{Adjust, Adjustment, OverloadedDeref};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use super::method::MethodCallee;
 use super::{FnCtxt, PlaceOp};

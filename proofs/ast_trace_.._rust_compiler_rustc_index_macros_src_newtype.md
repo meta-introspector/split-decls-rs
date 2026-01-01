@@ -110,13 +110,13 @@ impl Parse for Newtype {
         let encodable_impls = if encodable {
             quote! {
                 #gate_rustc_only
-                impl<D: ::rustc_serialize::Decoder> ::rustc_serialize::Decodable<D> for #name {
+                impl<D: ::crate::rustc_serialize::Decoder> ::crate::rustc_serialize::Decodable<D> for #name {
                     fn decode(d: &mut D) -> Self {
                         Self::from_u32(d.read_u32())
                     }
                 }
                 #gate_rustc_only
-                impl<E: ::rustc_serialize::Encoder> ::rustc_serialize::Encodable<E> for #name {
+                impl<E: ::crate::rustc_serialize::Encoder> ::crate::rustc_serialize::Encodable<E> for #name {
                     fn encode(&self, e: &mut E) {
                         e.emit_u32(self.as_u32());
                     }
@@ -278,7 +278,7 @@ impl Parse for Newtype {
                 }
             }
 
-            impl rustc_index::Idx for #name {
+            impl crate::rustc_index::Idx for #name {
                 #[inline]
                 fn new(value: usize) -> Self {
                     Self::from_usize(value)

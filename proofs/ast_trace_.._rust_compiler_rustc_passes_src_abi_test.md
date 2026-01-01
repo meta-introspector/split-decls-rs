@@ -6,27 +6,27 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_hir::Attribute;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::LocalDefId;
-use rustc_middle::span_bug;
-use rustc_middle::ty::layout::{FnAbiError, LayoutError};
+use crate::rustc_complete::Attribute;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::layout::{FnAbiError, LayoutError};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, GenericArgs, Instance, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, GenericArgs, Instance, Ty, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_span::source_map::Spanned;
-use rustc_span::sym;
-use rustc_target::callconv::FnAbi;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::sym;
+use crate::rustc_target::callconv::FnAbi;
 
 use super::layout_test::ensure_wf;
 use crate::errors::{AbiInvalidAttribute, AbiNe, AbiOf, UnrecognizedArgument};

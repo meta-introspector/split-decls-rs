@@ -6,58 +6,58 @@ Generated 24 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=27
 
 ```rust
-//! This pass is only used for the UNIT TESTS and DEBUGGING NEEDS
-//! around dependency graph construction. It serves two purposes; it
-//! will dump graphs in graphviz form to disk, and it searches for
-//! `#[rustc_if_this_changed]` and `#[rustc_then_this_would_need]`
-//! annotations. These annotations can be used to test whether paths
-//! exist in the graph. These checks run after codegen, so they view the
-//! the final state of the dependency graph. Note that there are
-//! similar assertions found in `persist::dirty_clean` which check the
-//! **initial** state of the dependency graph, just after it has been
-//! loaded from disk.
-//!
-//! In this code, we report errors on each `rustc_if_this_changed`
-//! annotation. If a path exists in all cases, then we would report
-//! "all path(s) exist". Otherwise, we report: "no path to `foo`" for
-//! each case where no path exists. `ui` tests can then be
-//! used to check when paths exist or do not.
-//!
-//! The full form of the `rustc_if_this_changed` annotation is
-//! `#[rustc_if_this_changed("foo")]`, which will report a
-//! source node of `foo(def_id)`. The `"foo"` is optional and
-//! defaults to `"Hir"` if omitted.
-//!
-//! Example:
-//!
-//! ```ignore (needs flags)
-//! #[rustc_if_this_changed(Hir)]
-//! fn foo() { }
+// This pass is only used for the UNIT TESTS and DEBUGGING NEEDS
+// around dependency graph construction. It serves two purposes; it
+// will dump graphs in graphviz form to disk, and it searches for
+// `#[rustc_if_this_changed]` and `#[rustc_then_this_would_need]`
+// annotations. These annotations can be used to test whether paths
+// exist in the graph. These checks run after codegen, so they view the
+// the final state of the dependency graph. Note that there are
+// similar assertions found in `persist::dirty_clean` which check the
+// **initial** state of the dependency graph, just after it has been
+// loaded from disk.
+//
+// In this code, we report errors on each `rustc_if_this_changed`
+// annotation. If a path exists in all cases, then we would report
+// "all path(s) exist". Otherwise, we report: "no path to `foo`" for
+// each case where no path exists. `ui` tests can then be
+// used to check when paths exist or do not.
+//
+// The full form of the `rustc_if_this_changed` annotation is
+// `#[rustc_if_this_changed("foo")]`, which will report a
+// source node of `foo(def_id)`. The `"foo"` is optional and
+// defaults to `"Hir"` if omitted.
+//
+// Example:
+//
+// ```ignore (needs flags)
+// #[rustc_if_this_changed(Hir)]
+// fn foo() { }
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//!
-//! #[rustc_then_this_would_need(codegen)] //~ ERROR no path from `foo`
-//! fn bar() { }
+//
+// #[rustc_then_this_would_need(codegen)] //~ ERROR no path from `foo`
+// fn bar() { }
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//!
-//! #[rustc_then_this_would_need(codegen)] //~ ERROR OK
-//! fn baz() { foo(); }
+//
+// #[rustc_then_this_would_need(codegen)] //~ ERROR OK
+// fn baz() { foo(); }
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-//! ```
+// ```
 
 use std::env;
 use std::fs::{self, File};
@@ -69,29 +69,29 @@ use std::fs::{self, File};
 ```rust
 use std::io::Write;
 
-use rustc_data_structures::fx::FxIndexSet;
-use rustc_data_structures::graph::linked_graph::{Direction, INCOMING, NodeIndex, OUTGOING};
+use crate::rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_data_structures::graph::linked_graph::{Direction, INCOMING, NodeIndex, OUTGOING};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId, LocalDefId};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::intravisit::{self, Visitor};
+use crate::rustc_complete::intravisit::{self, Visitor};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::dep_graph::{
+use crate::rustc_complete::dep_graph::{
     DepGraphQuery, DepKind, DepNode, DepNodeExt, DepNodeFilter, EdgeFilter, dep_kinds,
 };
 ```
@@ -100,16 +100,16 @@ use rustc_middle::dep_graph::{
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::hir::nested_filter;
-use rustc_middle::ty::TyCtxt;
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 11

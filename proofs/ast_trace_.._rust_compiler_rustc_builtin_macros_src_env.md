@@ -14,29 +14,29 @@ Generated 9 AST blocks from source file
 use std::env;
 use std::env::VarError;
 
-use rustc_ast::token::{self, LitKind};
+use crate::rustc_complete::token::{self, LitKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::tokenstream::TokenStream;
-use rustc_ast::{ExprKind, GenericArg, Mutability};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{ExprKind, GenericArg, Mutability};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
+use crate::rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::{Ident, Span, Symbol, kw, sym};
 ```
 
 ## Block 5

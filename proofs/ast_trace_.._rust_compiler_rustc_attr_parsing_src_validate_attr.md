@@ -6,13 +6,13 @@ Generated 15 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=10
 
 ```rust
-//! Meta-syntax validation logic of attributes for post-expansion.
+// Meta-syntax validation logic of attributes for post-expansion.
 
 use std::slice;
 
-use rustc_ast::token::Delimiter;
-use rustc_ast::tokenstream::DelimSpan;
-use rustc_ast::{
+use crate::rustc_complete::token::Delimiter;
+use crate::rustc_complete::tokenstream::DelimSpan;
+use crate::rustc_complete::{
     self as ast, AttrArgs, Attribute, DelimArgs, MetaItem, MetaItemInner, MetaItemKind, NodeId,
     Path, Safety,
 };
@@ -22,32 +22,32 @@ use rustc_ast::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{Applicability, DiagCtxtHandle, FatalError, PResult};
+use crate::rustc_complete::{Applicability, DiagCtxtHandle, FatalError, PResult};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_feature::{AttributeSafety, AttributeTemplate, BUILTIN_ATTRIBUTE_MAP, BuiltinAttribute};
+use crate::rustc_feature::{AttributeSafety, AttributeTemplate, BUILTIN_ATTRIBUTE_MAP, BuiltinAttribute};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_parse::parse_in;
-use rustc_session::errors::report_lit_error;
-use rustc_session::lint::BuiltinLintDiag;
-use rustc_session::lint::builtin::{ILL_FORMED_ATTRIBUTE_INPUT, UNSAFE_ATTR_OUTSIDE_UNSAFE};
+use crate::rustc_parse::parse_in;
+use crate::rustc_complete::errors::report_lit_error;
+use crate::rustc_complete::lint::BuiltinLintDiag;
+use crate::rustc_complete::lint::builtin::{ILL_FORMED_ATTRIBUTE_INPUT, UNSAFE_ATTR_OUTSIDE_UNSAFE};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::parse::ParseSess;
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 6

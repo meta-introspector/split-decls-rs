@@ -14,8 +14,8 @@ use std::{fmt, io};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::{DiagArgName, DiagArgValue, DiagMessage};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{DiagArgName, DiagArgValue, DiagMessage};
 ```
 
 ## Block 3
@@ -29,7 +29,7 @@ use rustc_macros::{Diagnostic, Subdiagnostic};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 5
@@ -137,7 +137,7 @@ pub enum TypeMismatchReason {
 #[help]
 pub(crate) struct RecursionLimitReached<'tcx> {
     pub ty: Ty<'tcx>,
-    pub suggested_limit: rustc_hir::limit::Limit,
+    pub suggested_limit: crate::rustc_hir::limit::Limit,
 }
 ```
 

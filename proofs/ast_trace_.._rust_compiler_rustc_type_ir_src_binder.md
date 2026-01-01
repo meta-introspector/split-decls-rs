@@ -103,24 +103,24 @@ where
 macro_rules! impl_binder_encode_decode {
     ($($t:ty),+ $(,)?) => {
         $(
-            impl<I: Interner, E: rustc_serialize::Encoder> rustc_serialize::Encodable<E> for ty::Binder<I, $t>
+            impl<I: Interner, E: crate::rustc_serialize::Encoder> crate::rustc_serialize::Encodable<E> for ty::Binder<I, $t>
             where
-                $t: rustc_serialize::Encodable<E>,
-                I::BoundVarKinds: rustc_serialize::Encodable<E>,
+                $t: crate::rustc_serialize::Encodable<E>,
+                I::BoundVarKinds: crate::rustc_serialize::Encodable<E>,
             {
                 fn encode(&self, e: &mut E) {
                     self.bound_vars().encode(e);
                     self.as_ref().skip_binder().encode(e);
                 }
             }
-            impl<I: Interner, D: rustc_serialize::Decoder> rustc_serialize::Decodable<D> for ty::Binder<I, $t>
+            impl<I: Interner, D: crate::rustc_serialize::Decoder> crate::rustc_serialize::Decodable<D> for ty::Binder<I, $t>
             where
-                $t: TypeVisitable<I> + rustc_serialize::Decodable<D>,
-                I::BoundVarKinds: rustc_serialize::Decodable<D>,
+                $t: TypeVisitable<I> + crate::rustc_serialize::Decodable<D>,
+                I::BoundVarKinds: crate::rustc_serialize::Decodable<D>,
             {
                 fn decode(decoder: &mut D) -> Self {
-                    let bound_vars = rustc_serialize::Decodable::decode(decoder);
-                    ty::Binder::bind_with_vars(rustc_serialize::Decodable::decode(decoder), bound_vars)
+                    let bound_vars = crate::rustc_serialize::Decodable::decode(decoder);
+                    ty::Binder::bind_with_vars(crate::rustc_serialize::Decodable::decode(decoder), bound_vars)
                 }
             }
         )*
@@ -246,7 +246,7 @@ impl<I: Interner, T> Binder<I, T> {
     /// any generic arguments, e.g. a `DefId`, or when you're making sure you only pass the
     /// value to things which can handle escaping bound vars.
     ///
-    /// See existing uses of `.skip_binder()` in `rustc_trait_selection::traits::select`
+    /// See existing uses of `.skip_binder()` in `crate::rustc_trait_selection::traits::select`
     /// or `rustc_next_trait_solver` for examples.
     pub fn skip_binder(self) -> T {
         self.value

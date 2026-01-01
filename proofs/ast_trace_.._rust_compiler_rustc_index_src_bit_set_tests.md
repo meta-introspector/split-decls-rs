@@ -3,12 +3,11 @@
 Generated 23 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=test_new_filled | COMPLEXITY=5 | LINES=16
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=test_new_filled | COMPLEXITY=5 | LINES=15
 
 ```rust
 use super::*;
 
-extern crate test;
 use std::hint::black_box;
 
 use test::Bencher;

@@ -15,25 +15,25 @@ use either::{Left, Right};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{Align, HasDataLayout, Size, TargetDataLayout};
+use crate::rustc_abi::{Align, HasDataLayout, Size, TargetDataLayout};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_errors::DiagCtxtHandle;
-use rustc_hir::def_id::DefId;
-use rustc_hir::limit::Limit;
-use rustc_middle::mir::interpret::{ErrorHandled, InvalidMetaKind, ReportedErrorInfo};
+use crate::rustc_complete::DiagCtxtHandle;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_complete::mir::interpret::{ErrorHandled, InvalidMetaKind, ReportedErrorInfo};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::query::TyCtxtAt;
-use rustc_middle::ty::layout::{
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::ty::layout::{
     self, FnAbiError, FnAbiOf, FnAbiOfHelpers, FnAbiRequest, LayoutError, LayoutOf,
     LayoutOfHelpers, TyAndLayout,
 };
@@ -43,22 +43,22 @@ use rustc_middle::ty::layout::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeFoldable, TypingEnv, Variance};
+use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeFoldable, TypingEnv, Variance};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{mir, span_bug};
+use crate::rustc_complete::{mir, span_bug};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::Span;
-use rustc_target::callconv::FnAbi;
+use crate::rustc_complete::Span;
+use crate::rustc_target::callconv::FnAbi;
 use tracing::{debug, trace};
 ```
 

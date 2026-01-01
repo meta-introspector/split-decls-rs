@@ -6,12 +6,12 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-//! Related to out filenames of compilation (e.g. binaries).
+// Related to out filenames of compilation (e.g. binaries).
 
 use std::path::Path;
 
 use rustc_ast as ast;
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 2

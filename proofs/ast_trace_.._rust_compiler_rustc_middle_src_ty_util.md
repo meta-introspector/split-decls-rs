@@ -6,7 +6,7 @@ Generated 33 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! Miscellaneous type-system utilities that are too small to deserve their own modules.
+// Miscellaneous type-system utilities that are too small to deserve their own modules.
 
 use std::{fmt, iter};
 ```
@@ -15,7 +15,7 @@ use std::{fmt, iter};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::{Float, Integer, IntegerType, Size};
+use crate::rustc_abi::{Float, Integer, IntegerType, Size};
 ```
 
 ## Block 3
@@ -23,40 +23,40 @@ use rustc_abi::{Float, Integer, IntegerType, Size};
 
 ```rust
 use rustc_apfloat::Float as _;
-use rustc_data_structures::fx::{FxHashMap, FxHashSet};
+use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::ErrorGuaranteed;
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_complete::ErrorGuaranteed;
 use rustc_hashes::Hash128;
 use rustc_hir as hir;
-use rustc_hir::def::{CtorOf, DefKind, Res};
+use crate::rustc_complete::def::{CtorOf, DefKind, Res};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{CrateNum, DefId, LocalDefId};
+use crate::rustc_complete::def_id::{CrateNum, DefId, LocalDefId};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::limit::Limit;
-use rustc_index::bit_set::GrowableBitSet;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_index::bit_set::GrowableBitSet;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, extension};
 ```
 
@@ -64,7 +64,7 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable, extension};
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::sym;
+use crate::rustc_complete::sym;
 use rustc_type_ir::solve::SizedTraitKind;
 use smallvec::{SmallVec, smallvec};
 ```
@@ -937,9 +937,9 @@ impl<'tcx> TyCtxt<'tcx> {
     /// be shown in `impl` suggestions.
     ///
     /// [public]: TyCtxt::is_private_dep
-    /// [direct]: rustc_session::cstore::ExternCrate::is_direct
+    /// [direct]: crate::rustc_session::cstore::ExternCrate::is_direct
     pub fn is_user_visible_dep(self, key: CrateNum) -> bool {
-        // `#![rustc_private]` overrides defaults to make private dependencies usable.
+        // `#[rustc_private]` overrides defaults to make private dependencies usable.
         if self.features().enabled(sym::rustc_private) {
             return true;
         }

@@ -6,34 +6,34 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=20
 
 ```rust
-//! This module provides a pass that removes parts of MIR that are no longer relevant after
-//! analysis phase and borrowck. In particular, it removes false edges, user type annotations and
-//! replaces following statements with [`Nop`]s:
-//!
-//!   - [`AscribeUserType`]
-//!   - [`FakeRead`]
-//!   - [`Assign`] statements with a [`Fake`] borrow
-//!   - [`Coverage`] statements of kind [`BlockMarker`] or [`SpanMarker`]
-//!
-//! [`AscribeUserType`]: rustc_middle::mir::StatementKind::AscribeUserType
-//! [`Assign`]: rustc_middle::mir::StatementKind::Assign
-//! [`FakeRead`]: rustc_middle::mir::StatementKind::FakeRead
-//! [`Nop`]: rustc_middle::mir::StatementKind::Nop
-//! [`Fake`]: rustc_middle::mir::BorrowKind::Fake
-//! [`Coverage`]: rustc_middle::mir::StatementKind::Coverage
-//! [`BlockMarker`]: rustc_middle::mir::coverage::CoverageKind::BlockMarker
-//! [`SpanMarker`]: rustc_middle::mir::coverage::CoverageKind::SpanMarker
+// This module provides a pass that removes parts of MIR that are no longer relevant after
+// analysis phase and borrowck. In particular, it removes false edges, user type annotations and
+// replaces following statements with [`Nop`]s:
+//
+//   - [`AscribeUserType`]
+//   - [`FakeRead`]
+//   - [`Assign`] statements with a [`Fake`] borrow
+//   - [`Coverage`] statements of kind [`BlockMarker`] or [`SpanMarker`]
+//
+// [`AscribeUserType`]: crate::rustc_middle::mir::StatementKind::AscribeUserType
+// [`Assign`]: crate::rustc_middle::mir::StatementKind::Assign
+// [`FakeRead`]: crate::rustc_middle::mir::StatementKind::FakeRead
+// [`Nop`]: crate::rustc_middle::mir::StatementKind::Nop
+// [`Fake`]: crate::rustc_middle::mir::BorrowKind::Fake
+// [`Coverage`]: crate::rustc_middle::mir::StatementKind::Coverage
+// [`BlockMarker`]: crate::rustc_middle::mir::coverage::CoverageKind::BlockMarker
+// [`SpanMarker`]: crate::rustc_middle::mir::coverage::CoverageKind::SpanMarker
 
-use rustc_middle::mir::coverage::CoverageKind;
-use rustc_middle::mir::{Body, BorrowKind, CastKind, Rvalue, StatementKind, TerminatorKind};
+use crate::rustc_complete::mir::coverage::CoverageKind;
+use crate::rustc_complete::mir::{Body, BorrowKind, CastKind, Rvalue, StatementKind, TerminatorKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=37 | LINES=60
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_middle::ty::adjustment::PointerCoercion;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::ty::adjustment::PointerCoercion;
 
 pub(super) struct CleanupPostBorrowck;
 

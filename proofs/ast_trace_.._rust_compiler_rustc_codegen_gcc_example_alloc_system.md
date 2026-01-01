@@ -9,8 +9,8 @@ Generated 3 AST blocks from source file
 // SPDX-License-Identifier: MIT OR Apache-2.0
 // SPDX-FileCopyrightText: The Rust Project Developers (see https://thanks.rust-lang.org)
 
-#![no_std]
-#![feature(allocator_api, rustc_private)]
+#[no_std]
+#[feature(allocator_api, rustc_private)]
 
 // The minimum alignment guaranteed by the architecture. This value is used to
 // add fast paths for low alignment values.

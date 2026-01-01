@@ -6,16 +6,16 @@ Generated 83 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::Path;
-use rustc_data_structures::fx::{FxHashSet, FxIndexSet};
+use crate::rustc_complete::Path;
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, DiagMessage, DiagStyledString, Diagnostic,
     EmissionGuarantee, IntoDiagArg, Level, MultiSpan, Subdiagnostic,
 };
@@ -25,22 +25,22 @@ use rustc_errors::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::intravisit::{Visitor, VisitorExt, walk_ty};
+use crate::rustc_complete::intravisit::{Visitor, VisitorExt, walk_ty};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, AmbigArg, FnRetTy, GenericParamKind, Node};
+use crate::rustc_complete::{self as hir, AmbigArg, FnRetTy, GenericParamKind, Node};
 ```
 
 ## Block 6
@@ -54,21 +54,21 @@ use rustc_macros::{Diagnostic, Subdiagnostic};
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::print::{PrintTraitRefExt as _, TraitRefPrintOnlyTraitPath};
+use crate::rustc_complete::ty::print::{PrintTraitRefExt as _, TraitRefPrintOnlyTraitPath};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Binder, ClosureKind, FnSig, GenericArg, Region, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, Binder, ClosureKind, FnSig, GenericArg, Region, Ty, TyCtxt};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{BytePos, Ident, Span, Symbol, kw};
+use crate::rustc_complete::{BytePos, Ident, Span, Symbol, kw};
 ```
 
 ## Block 10
@@ -1005,7 +1005,7 @@ pub enum TyOrSig<'tcx> {
 
 ```rust
 impl IntoDiagArg for TyOrSig<'_> {
-    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         match self {
             TyOrSig::Ty(ty) => ty.into_diag_arg(path),
             TyOrSig::ClosureSig(sig) => sig.into_diag_arg(path),
@@ -1887,7 +1887,7 @@ impl Subdiagnostic for SuggestTuplePatternMany {
                     (self.cause_span.shrink_to_hi(), ")".to_string()),
                 ]
             }),
-            rustc_errors::Applicability::MaybeIncorrect,
+            crate::rustc_errors::Applicability::MaybeIncorrect,
         );
     }
 }
@@ -2257,7 +2257,7 @@ pub fn impl_trait_overcapture_suggestion<'tcx>(
             ("(", ")")
         }
         Node::Ty(ty) => match ty.kind {
-            rustc_hir::TyKind::Ptr(_) | rustc_hir::TyKind::Ref(..) => ("(", ")"),
+            crate::rustc_hir::TyKind::Ptr(_) | crate::rustc_hir::TyKind::Ref(..) => ("(", ")"),
             // FIXME: RPITs are not allowed to be nested in `impl Fn() -> ...`,
             // but we eventually could support that, and that would necessitate
             // making this more sophisticated.

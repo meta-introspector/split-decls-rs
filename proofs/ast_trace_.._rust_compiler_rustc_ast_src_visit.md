@@ -6,20 +6,20 @@ Generated 32 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=17
 
 ```rust
-//! AST walker. Each overridden visit method has full control over what
-//! happens with its node, it can do its own traversal of the node's children,
-//! call `visit::walk_*` to apply the default traversal algorithm, or prevent
-//! deeper traversal by doing nothing.
-//!
-//! Note: it is an important invariant that the default visitor walks the body
-//! of a function in "execution order" (more concretely, reverse post-order
-//! with respect to the CFG implied by the AST), meaning that if AST node A may
-//! execute before AST node B, then A is visited first. The borrow checker in
-//! particular relies on this property.
-//!
-//! Note: walking an AST before macro expansion is probably a bad idea. For
-//! instance, a walker looking for item names in a module will miss all of
-//! those that are created by the expansion of a macro.
+// AST walker. Each overridden visit method has full control over what
+// happens with its node, it can do its own traversal of the node's children,
+// call `visit::walk_*` to apply the default traversal algorithm, or prevent
+// deeper traversal by doing nothing.
+//
+// Note: it is an important invariant that the default visitor walks the body
+// of a function in "execution order" (more concretely, reverse post-order
+// with respect to the CFG implied by the AST), meaning that if AST node A may
+// execute before AST node B, then A is visited first. The borrow checker in
+// particular relies on this property.
+//
+// Note: walking an AST before macro expansion is probably a bad idea. For
+// instance, a walker looking for item names in a module will miss all of
+// those that are created by the expansion of a macro.
 
 pub use rustc_ast_ir::visit::VisitorResult;
 pub use rustc_ast_ir::{try_visit, visit_opt, walk_list, walk_visitable_list};
@@ -29,8 +29,8 @@ pub use rustc_ast_ir::{try_visit, visit_opt, walk_list, walk_visitable_list};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::source_map::Spanned;
-use rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Ident, Span, Symbol};
 ```
 
 ## Block 3
@@ -509,7 +509,7 @@ macro_rules! common_visitor_and_walkers {
         impl_visitable_noop!(<$($lt)? $($mut)?>
             AttrId,
             bool,
-            rustc_span::ByteSymbol,
+            crate::rustc_span::ByteSymbol,
             char,
             crate::token::CommentKind,
             crate::token::Delimiter,
@@ -519,9 +519,9 @@ macro_rules! common_visitor_and_walkers {
             crate::tokenstream::TokenStream,
             Movability,
             Mutability,
-            Result<(), rustc_span::ErrorGuaranteed>,
-            rustc_data_structures::fx::FxHashMap<Symbol, usize>,
-            rustc_span::ErrorGuaranteed,
+            Result<(), crate::rustc_span::ErrorGuaranteed>,
+            crate::rustc_data_structures::fx::FxHashMap<Symbol, usize>,
+            crate::rustc_span::ErrorGuaranteed,
             std::borrow::Cow<'_, str>,
             Symbol,
             u8,

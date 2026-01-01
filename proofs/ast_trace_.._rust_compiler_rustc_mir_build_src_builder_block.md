@@ -6,17 +6,17 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::middle::region::Scope;
-use rustc_middle::mir::*;
-use rustc_middle::thir::*;
-use rustc_middle::{span_bug, ty};
+use crate::rustc_complete::middle::region::Scope;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::{span_bug, ty};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::debug;
 
 use crate::builder::ForGuard::OutsideGuard;

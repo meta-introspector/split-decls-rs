@@ -14,18 +14,18 @@ use std::hash::{BuildHasherDefault, Hash, Hasher};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::AtomicRef;
-use rustc_data_structures::fingerprint::Fingerprint;
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher, StableOrd, ToStableHashKey};
+use crate::rustc_data_structures::AtomicRef;
+use crate::rustc_data_structures::fingerprint::Fingerprint;
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher, StableOrd, ToStableHashKey};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::unhash::Unhasher;
+use crate::rustc_data_structures::unhash::Unhasher;
 use rustc_hashes::Hash64;
-use rustc_index::Idx;
+use crate::rustc_index::Idx;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
 ```
 
@@ -33,7 +33,7 @@ use rustc_macros::{Decodable, Encodable, HashStable_Generic};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_serialize::{Decodable, Encodable};
+use crate::rustc_serialize::{Decodable, Encodable};
 ```
 
 ## Block 5
@@ -50,7 +50,7 @@ use crate::{HashStableContext, SpanDecoder, SpanEncoder, Symbol};
 pub type StableCrateIdMap =
     indexmap::IndexMap<StableCrateId, CrateNum, BuildHasherDefault<Unhasher>>;
 
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     #[orderable]
     #[debug_format = "crate{}"]
     pub struct CrateNum {}
@@ -279,7 +279,7 @@ impl fmt::LowerHex for StableCrateId {
 **Metadata**: AST_ID=14 | TYPE=STRUCT | NAME=DefIndex | COMPLEXITY=8 | LINES=13
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     /// A DefIndex is an index into the hir-map for a crate, identifying a
     /// particular definition. It should really be considered an interned
     /// shorthand for a particular DefPath.
@@ -454,7 +454,7 @@ impl fmt::Debug for DefId {
 **Metadata**: AST_ID=23 | TYPE=STRUCT | NAME=LocalDefId | COMPLEXITY=3 | LINES=13
 
 ```rust
-rustc_data_structures::define_id_collections!(DefIdMap, DefIdSet, DefIdMapEntry, DefId);
+crate::rustc_data_structures::define_id_collections!(DefIdMap, DefIdSet, DefIdMapEntry, DefId);
 
 /// A `LocalDefId` is equivalent to a `DefId` with `krate == LOCAL_CRATE`. Since
 /// we encode this information in the type, we can ensure at compile time that
@@ -562,7 +562,7 @@ impl<D: SpanDecoder> Decodable<D> for LocalDefId {
 **Metadata**: AST_ID=32 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=14
 
 ```rust
-rustc_data_structures::define_id_collections!(
+crate::rustc_data_structures::define_id_collections!(
     LocalDefIdMap,
     LocalDefIdSet,
     LocalDefIdMapEntry,
@@ -747,7 +747,7 @@ macro_rules! typed_def_id {
 
 ```rust
 // N.B.: when adding new typed `DefId`s update the corresponding trait impls in
-// `rustc_middle::dep_graph::def_node` for `DepNodeParams`.
+// `crate::rustc_middle::dep_graph::def_node` for `DepNodeParams`.
 typed_def_id! { ModDefId, LocalModDefId }
 ```
 

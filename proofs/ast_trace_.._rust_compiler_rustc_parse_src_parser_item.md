@@ -10,23 +10,23 @@ use std::fmt::Write;
 use std::mem;
 
 use ast::token::IdentIsRaw;
-use rustc_ast::ast::*;
-use rustc_ast::token::{self, Delimiter, InvisibleOrigin, MetaVarKind, TokenKind};
+use crate::rustc_complete::ast::*;
+use crate::rustc_complete::token::{self, Delimiter, InvisibleOrigin, MetaVarKind, TokenKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::tokenstream::{DelimSpan, TokenStream, TokenTree};
+use crate::rustc_complete::tokenstream::{DelimSpan, TokenStream, TokenTree};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::util::case::Case;
-use rustc_ast::{self as ast};
+use crate::rustc_complete::util::case::Case;
+use crate::rustc_complete::{self as ast};
 ```
 
 ## Block 4
@@ -34,17 +34,17 @@ use rustc_ast::{self as ast};
 
 ```rust
 use rustc_ast_pretty::pprust;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, PResult, StashKey, struct_span_code_err};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, PResult, StashKey, struct_span_code_err};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::edit_distance::edit_distance;
-use rustc_span::edition::Edition;
-use rustc_span::{DUMMY_SP, ErrorGuaranteed, Ident, Span, Symbol, kw, source_map, sym};
+use crate::rustc_complete::edit_distance::edit_distance;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Ident, Span, Symbol, kw, source_map, sym};
 ```
 
 ## Block 6

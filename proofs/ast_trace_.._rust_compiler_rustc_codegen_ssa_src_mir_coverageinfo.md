@@ -6,8 +6,8 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=19
 
 ```rust
-use rustc_middle::mir::SourceScope;
-use rustc_middle::mir::coverage::CoverageKind;
+use crate::rustc_complete::mir::SourceScope;
+use crate::rustc_complete::mir::coverage::CoverageKind;
 
 use super::FunctionCx;
 use crate::traits::*;

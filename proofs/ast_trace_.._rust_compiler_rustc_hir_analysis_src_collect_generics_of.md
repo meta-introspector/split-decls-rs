@@ -9,32 +9,32 @@ Generated 11 AST blocks from source file
 use std::assert_matches::assert_matches;
 use std::ops::ControlFlow;
 
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::LocalDefId;
-use rustc_hir::intravisit::{self, Visitor, VisitorExt};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::intravisit::{self, Visitor, VisitorExt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, AmbigArg, GenericParamKind, HirId, Node};
+use crate::rustc_complete::{self as hir, AmbigArg, GenericParamKind, HirId, Node};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::span_bug;
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::lint;
-use rustc_span::{Span, Symbol, kw};
+use crate::rustc_complete::lint;
+use crate::rustc_complete::{Span, Symbol, kw};
 ```
 
 ## Block 5
@@ -53,7 +53,7 @@ use crate::middle::resolve_bound_vars as rbv;
 
 #[instrument(level = "debug", skip(tcx), ret)]
 pub(super) fn generics_of(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::Generics {
-    use rustc_hir::*;
+    use crate::rustc_complete::*;
 
     // For an RPITIT, synthesize generics which are equal to the opaque's generics
     // and parent fn's generics compressed into one list.
@@ -400,7 +400,7 @@ pub(super) fn generics_of(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::Generics {
     if let Node::ConstBlock(_) = node {
         own_params.push(ty::GenericParamDef {
             index: next_index(),
-            name: rustc_span::sym::const_ty_placeholder,
+            name: crate::rustc_span::sym::const_ty_placeholder,
             def_id: def_id.to_def_id(),
             pure_wrt_drop: false,
             kind: ty::GenericParamDefKind::Type { has_default: false, synthetic: false },
@@ -454,7 +454,7 @@ enum ParamDefaultPolicy {
 
 ```rust
 fn param_default_policy(node: Node<'_>) -> Option<ParamDefaultPolicy> {
-    use rustc_hir::*;
+    use crate::rustc_complete::*;
 
     Some(match node {
         Node::Item(item) => match item.kind {

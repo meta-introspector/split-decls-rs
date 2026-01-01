@@ -6,9 +6,9 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=13
 
 ```rust
-//! When in incremental mode, this pass dumps out the dependency graph
-//! into the given directory. At the same time, it also hashes the
-//! various HIR nodes.
+// When in incremental mode, this pass dumps out the dependency graph
+// into the given directory. At the same time, it also hashes the
+// various HIR nodes.
 
 mod data;
 mod dirty_clean;

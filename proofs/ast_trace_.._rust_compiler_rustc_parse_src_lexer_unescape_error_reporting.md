@@ -6,12 +6,12 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-//! Utilities for rendering escape sequence errors as diagnostics.
+// Utilities for rendering escape sequence errors as diagnostics.
 
 use std::iter::once;
 use std::ops::Range;
 
-use rustc_errors::{Applicability, DiagCtxtHandle, ErrorGuaranteed};
+use crate::rustc_complete::{Applicability, DiagCtxtHandle, ErrorGuaranteed};
 ```
 
 ## Block 2
@@ -25,7 +25,7 @@ use rustc_literal_escaper::{EscapeError, Mode};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{BytePos, Span};
+use crate::rustc_complete::{BytePos, Span};
 ```
 
 ## Block 4

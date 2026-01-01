@@ -6,13 +6,13 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=run_lint | COMPLEXITY=7 | LINES=18
 
 ```rust
-use rustc_hir::HirId;
-use rustc_middle::mir::visit::Visitor;
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
-use rustc_session::lint::builtin::CONST_ITEM_MUTATION;
-use rustc_span::Span;
-use rustc_span::def_id::DefId;
+use crate::rustc_complete::HirId;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::lint::builtin::CONST_ITEM_MUTATION;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::DefId;
 
 use crate::errors;
 

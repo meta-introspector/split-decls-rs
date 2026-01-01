@@ -6,44 +6,44 @@ Generated 32 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=9
 
 ```rust
-//! See Rustc Dev Guide chapters on [trait-resolution] and [trait-specialization] for more info on
-//! how this works.
-//!
-//! [trait-resolution]: https://rustc-dev-guide.rust-lang.org/traits/resolution.html
-//! [trait-specialization]: https://rustc-dev-guide.rust-lang.org/traits/specialization.html
+// See Rustc Dev Guide chapters on [trait-resolution] and [trait-specialization] for more info on
+// how this works.
+//
+// [trait-resolution]: https://rustc-dev-guide.rust-lang.org/traits/resolution.html
+// [trait-specialization]: https://rustc-dev-guide.rust-lang.org/traits/specialization.html
 
 use std::fmt::Debug;
 
-use rustc_data_structures::fx::{FxHashSet, FxIndexSet};
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{Diag, EmissionGuarantee};
+use crate::rustc_complete::{Diag, EmissionGuarantee};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{CRATE_DEF_ID, DefId};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{CRATE_DEF_ID, DefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::{DefineOpaqueTypes, InferCtxt, TyCtxtInferExt};
+use crate::rustc_infer::infer::{DefineOpaqueTypes, InferCtxt, TyCtxtInferExt};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_infer::traits::PredicateObligations;
+use crate::rustc_infer::traits::PredicateObligations;
 use rustc_macros::{TypeFoldable, TypeVisitable};
 ```
 
@@ -51,18 +51,18 @@ use rustc_macros::{TypeFoldable, TypeVisitable};
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::traits::query::NoSolution;
-use rustc_middle::traits::solve::{CandidateSource, Certainty, Goal};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::traits::solve::{CandidateSource, Certainty, Goal};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::traits::specialization_graph::OverlapMode;
-use rustc_middle::ty::fast_reject::DeepRejectCtxt;
-use rustc_middle::ty::{
+use crate::rustc_complete::traits::specialization_graph::OverlapMode;
+use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
+use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode,
 };
 ```
@@ -73,7 +73,7 @@ use rustc_middle::ty::{
 ```rust
 pub use rustc_next_trait_solver::coherence::*;
 use rustc_next_trait_solver::solve::SolverDelegateEvalExt;
-use rustc_span::{DUMMY_SP, Span, sym};
+use crate::rustc_complete::{DUMMY_SP, Span, sym};
 ```
 
 ## Block 9

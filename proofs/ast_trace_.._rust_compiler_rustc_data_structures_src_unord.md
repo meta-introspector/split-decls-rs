@@ -6,9 +6,9 @@ Generated 44 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5
 
 ```rust
-//! This module contains collection types that don't expose their internal
-//! ordering. This is a useful property for deterministic computations, such
-//! as required by the query system.
+// This module contains collection types that don't expose their internal
+// ordering. This is a useful property for deterministic computations, such
+// as required by the query system.
 
 use std::borrow::{Borrow, BorrowMut};
 ```
@@ -34,7 +34,7 @@ use std::iter::{Product, Sum};
 ```rust
 use std::ops::Index;
 
-use rustc_hash::{FxHashMap, FxHashSet};
+use crate::rustc_hash::{FxHashMap, FxHashSet};
 ```
 
 ## Block 5

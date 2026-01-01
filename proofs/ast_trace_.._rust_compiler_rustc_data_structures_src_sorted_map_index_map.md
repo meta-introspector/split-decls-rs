@@ -6,7 +6,7 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! A variant of `SortedMap` that preserves insertion order.
+// A variant of `SortedMap` that preserves insertion order.
 
 use std::hash::{Hash, Hasher};
 ```
@@ -15,7 +15,7 @@ use std::hash::{Hash, Hasher};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_index::{Idx, IndexVec};
+use crate::rustc_index::{Idx, IndexVec};
 ```
 
 ## Block 3

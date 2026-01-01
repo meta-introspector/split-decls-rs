@@ -16,15 +16,15 @@ use std::ops::{Deref, DerefMut};
 ```rust
 use ast::token::IdentIsRaw;
 use rustc_ast as ast;
-use rustc_ast::token::{self, Lit, LitKind, Token, TokenKind};
+use crate::rustc_complete::token::{self, Lit, LitKind, Token, TokenKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_ast::util::parser::AssocOp;
-use rustc_ast::{
+use crate::rustc_complete::util::parser::AssocOp;
+use crate::rustc_complete::{
     AngleBracketedArg, AngleBracketedArgs, AnonConst, AttrVec, BinOpKind, BindingMode, Block,
     BlockCheckMode, Expr, ExprKind, GenericArg, Generics, Item, ItemKind, Param, Pat, PatKind,
     Path, PathSegment, QSelf, Recovered, Ty, TyKind,
@@ -36,8 +36,8 @@ use rustc_ast::{
 
 ```rust
 use rustc_ast_pretty::pprust;
-use rustc_data_structures::fx::FxHashSet;
-use rustc_errors::{
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, ErrorGuaranteed, PResult, Subdiagnostic, Suggestions,
     pluralize,
 };
@@ -47,11 +47,11 @@ use rustc_errors::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_session::errors::ExprParenthesesNeeded;
-use rustc_span::edit_distance::find_best_match_for_name;
-use rustc_span::source_map::Spanned;
-use rustc_span::symbol::used_keywords;
-use rustc_span::{BytePos, DUMMY_SP, Ident, Span, SpanSnippetError, Symbol, kw, sym};
+use crate::rustc_complete::errors::ExprParenthesesNeeded;
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::symbol::used_keywords;
+use crate::rustc_complete::{BytePos, DUMMY_SP, Ident, Span, SpanSnippetError, Symbol, kw, sym};
 ```
 
 ## Block 6
@@ -623,7 +623,7 @@ impl<'a> Parser<'a> {
             symbol,
             suffix: Some(suffix), // no suffix makes it a valid literal
         }) = self.token.kind
-            && rustc_ast::MetaItemLit::from_token(&self.token).is_none()
+            && crate::rustc_ast::MetaItemLit::from_token(&self.token).is_none()
         {
             Some((symbol.as_str().len(), suffix))
         } else {
@@ -866,7 +866,7 @@ impl<'a> Parser<'a> {
             // }
             // ```
             if !expected.contains(&TokenType::Comma) {
-                // We have something like `expr //!val` where the user likely meant `expr // !val`
+                // We have something like `expr //val` where the user likely meant `expr // !val`
                 let pos = self.token.span.lo() + BytePos(2);
                 let span = self.token.span.with_lo(pos).with_hi(pos);
                 err.span_suggestion_verbose(

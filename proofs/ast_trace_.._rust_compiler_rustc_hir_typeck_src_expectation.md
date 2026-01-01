@@ -6,14 +6,14 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=22
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use super::Expectation::*;
 use super::FnCtxt;

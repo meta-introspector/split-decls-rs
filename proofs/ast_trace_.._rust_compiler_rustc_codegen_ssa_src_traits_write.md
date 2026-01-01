@@ -8,8 +8,8 @@ Generated 6 AST blocks from source file
 ```rust
 use std::path::PathBuf;
 
-use rustc_errors::DiagCtxtHandle;
-use rustc_middle::dep_graph::WorkProduct;
+use crate::rustc_complete::DiagCtxtHandle;
+use crate::rustc_complete::dep_graph::WorkProduct;
 
 use crate::back::lto::{SerializedModule, ThinModule};
 ```

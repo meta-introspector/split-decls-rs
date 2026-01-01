@@ -9,14 +9,14 @@ Generated 12 AST blocks from source file
 use std::mem;
 
 use ast::token::IdentIsRaw;
-use rustc_ast::token::{self, MetaVarKind, Token, TokenKind};
+use crate::rustc_complete::token::{self, MetaVarKind, Token, TokenKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_ast::{
+use crate::rustc_complete::{
     self as ast, AngleBracketedArg, AngleBracketedArgs, AnonConst, AssocItemConstraint,
     AssocItemConstraintKind, BlockCheckMode, GenericArg, GenericArgs, Generics, ParenthesizedArgs,
     Path, PathSegment, QSelf,
@@ -27,14 +27,14 @@ use rustc_ast::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{Applicability, Diag, PResult};
+use crate::rustc_complete::{Applicability, Diag, PResult};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{BytePos, Ident, Span, kw, sym};
+use crate::rustc_complete::{BytePos, Ident, Span, kw, sym};
 ```
 
 ## Block 5
@@ -920,7 +920,7 @@ impl<'a> Parser<'a> {
     /// - A literal.
     /// - A numeric literal prefixed by `-`.
     /// - A single-segment path.
-    pub(super) fn expr_is_valid_const_arg(&self, expr: &Box<rustc_ast::Expr>) -> bool {
+    pub(super) fn expr_is_valid_const_arg(&self, expr: &Box<crate::rustc_ast::Expr>) -> bool {
         match &expr.kind {
             ast::ExprKind::Block(_, _)
             | ast::ExprKind::Lit(_)

@@ -6,7 +6,7 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_data_structures::intern::Interned;
+use crate::rustc_data_structures::intern::Interned;
 use rustc_macros::HashStable;
 use rustc_type_ir as ir;
 pub use rustc_type_ir::solve::*;

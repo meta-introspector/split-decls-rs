@@ -6,68 +6,68 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=15
 
 ```rust
-//! This module contains logic for determining whether a type is inhabited or
-//! uninhabited. The [`InhabitedPredicate`] type captures the minimum
-//! information needed to determine whether a type is inhabited given a
-//! `ParamEnv` and module ID.
-//!
-//! # Example
-//! ```rust
-//! #![feature(never_type)]
-//! mod a {
-//!     pub mod b {
-//!         pub struct SecretlyUninhabited {
-//!             _priv: !,
-//!         }
-//!     }
-//! }
+// This module contains logic for determining whether a type is inhabited or
+// uninhabited. The [`InhabitedPredicate`] type captures the minimum
+// information needed to determine whether a type is inhabited given a
+// `ParamEnv` and module ID.
+//
+// # Example
+// ```rust
+// #[feature(never_type)]
+// mod a {
+//     pub mod b {
+//         pub struct SecretlyUninhabited {
+//             _priv: !,
+//         }
+//     }
+// }
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=9
 
 ```rust
-//!
-//! mod c {
-//!     enum Void {}
-//!     pub struct AlsoSecretlyUninhabited {
-//!         _priv: Void,
-//!     }
-//!     mod d {
-//!     }
-//! }
+//
+// mod c {
+//     enum Void {}
+//     pub struct AlsoSecretlyUninhabited {
+//         _priv: Void,
+//     }
+//     mod d {
+//     }
+// }
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//!
-//! struct Foo {
-//!     x: a::b::SecretlyUninhabited,
-//!     y: c::AlsoSecretlyUninhabited,
-//! }
+//
+// struct Foo {
+//     x: a::b::SecretlyUninhabited,
+//     y: c::AlsoSecretlyUninhabited,
+// }
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=22
 
 ```rust
-//! ```
-//! In this code, the type `Foo` will only be visibly uninhabited inside the
-//! modules `b`, `c` and `d`. Calling `inhabited_predicate` on `Foo` will
-//! return `NotInModule(b) AND NotInModule(c)`.
-//!
-//! We need this information for pattern-matching on `Foo` or types that contain
-//! `Foo`.
-//!
-//! # Example
-//! ```ignore(illustrative)
-//! let foo_result: Result<T, Foo> = ... ;
-//! let Ok(t) = foo_result;
-//! ```
-//! This code should only compile in modules where the uninhabitedness of `Foo`
-//! is visible.
+// ```
+// In this code, the type `Foo` will only be visibly uninhabited inside the
+// modules `b`, `c` and `d`. Calling `inhabited_predicate` on `Foo` will
+// return `NotInModule(b) AND NotInModule(c)`.
+//
+// We need this information for pattern-matching on `Foo` or types that contain
+// `Foo`.
+//
+// # Example
+// ```ignore(illustrative)
+// let foo_result: Result<T, Foo> = ... ;
+// let Ok(t) = foo_result;
+// ```
+// This code should only compile in modules where the uninhabitedness of `Foo`
+// is visible.
 
 use rustc_type_ir::TyKind::*;
 use tracing::instrument;
@@ -183,7 +183,7 @@ impl<'tcx> Ty<'tcx> {
     ///
     /// # Example
     /// ```
-    /// #![feature(never_type)]
+    /// #[feature(never_type)]
     /// # fn main() {}
     /// enum Void {}
     /// mod a {

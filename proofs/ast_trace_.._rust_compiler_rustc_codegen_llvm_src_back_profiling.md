@@ -24,7 +24,7 @@ use measureme::{EventId, StringComponent, StringId};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::profiling::{SelfProfiler, TimingGuard};
+use crate::rustc_data_structures::profiling::{SelfProfiler, TimingGuard};
 ```
 
 ## Block 4

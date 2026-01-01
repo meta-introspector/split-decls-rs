@@ -7,16 +7,16 @@ Generated 4 AST blocks from source file
 
 ```rust
 // tidy-alphabetical-start
-#![feature(assert_matches)]
-#![feature(associated_type_defaults)]
-#![feature(box_patterns)]
-#![feature(exact_size_is_empty)]
-#![feature(file_buffered)]
-#![feature(never_type)]
-#![feature(try_blocks)]
+#[feature(assert_matches)]
+#[feature(associated_type_defaults)]
+#[feature(box_patterns)]
+#[feature(exact_size_is_empty)]
+#[feature(file_buffered)]
+#[feature(never_type)]
+#[feature(try_blocks)]
 // tidy-alphabetical-end
 
-use rustc_middle::ty;
+use crate::rustc_complete::ty;
 
 // Please change the public `use` directives cautiously, as they might be used by external tools.
 // See issue #120130.

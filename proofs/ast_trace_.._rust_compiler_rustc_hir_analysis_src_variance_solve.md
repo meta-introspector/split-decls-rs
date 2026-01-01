@@ -6,15 +6,15 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=glb | COMPLEXITY=12 | LINES=34
 
 ```rust
-//! Constraint solving
-//!
-//! The final phase iterates over the constraints, refining the variance
-//! for each inferred until a fixed point is reached. This will be the
-//! optimal solution to the constraints. The final variance for each
-//! inferred is then written into the `variance_map` in the tcx.
+// Constraint solving
+//
+// The final phase iterates over the constraints, refining the variance
+// for each inferred until a fixed point is reached. This will be the
+// optimal solution to the constraints. The final variance for each
+// inferred is then written into the `variance_map` in the tcx.
 
-use rustc_hir::def_id::DefIdMap;
-use rustc_middle::ty;
+use crate::rustc_complete::def_id::DefIdMap;
+use crate::rustc_complete::ty;
 use tracing::debug;
 
 use super::constraints::*;

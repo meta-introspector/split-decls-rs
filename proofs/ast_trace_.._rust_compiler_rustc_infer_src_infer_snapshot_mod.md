@@ -6,8 +6,8 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::undo_log::UndoLogs;
-use rustc_middle::ty;
+use crate::rustc_data_structures::undo_log::UndoLogs;
+use crate::rustc_complete::ty;
 use tracing::{debug, instrument};
 ```
 

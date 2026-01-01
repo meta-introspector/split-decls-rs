@@ -6,34 +6,34 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::LocalDefId;
-use rustc_hir::intravisit;
-use rustc_hir::intravisit::Visitor;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::util::{CheckRegions, NotUniqueParam};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::intravisit;
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::util::{CheckRegions, NotUniqueParam};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitor};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitor};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::{instrument, trace};
 ```
 
@@ -134,7 +134,7 @@ impl<'tcx> OpaqueTypeCollector<'tcx> {
         }
         impl<'v> intravisit::Visitor<'v> for TaitInBodyFinder<'_, '_> {
             #[instrument(level = "trace", skip(self))]
-            fn visit_nested_item(&mut self, id: rustc_hir::ItemId) {
+            fn visit_nested_item(&mut self, id: crate::rustc_hir::ItemId) {
                 let id = id.owner_id.def_id;
                 if let DefKind::TyAlias = self.collector.tcx.def_kind(id) {
                     let items = self.collector.tcx.opaque_types_defined_by(id);
@@ -143,7 +143,7 @@ impl<'tcx> OpaqueTypeCollector<'tcx> {
             }
             #[instrument(level = "trace", skip(self))]
             // Recurse into these, as they are type checked with their parent
-            fn visit_nested_body(&mut self, id: rustc_hir::BodyId) {
+            fn visit_nested_body(&mut self, id: crate::rustc_hir::BodyId) {
                 let body = self.collector.tcx.hir_body(id);
                 self.visit_body(body);
             }
@@ -159,9 +159,9 @@ impl<'tcx> OpaqueTypeCollector<'tcx> {
 
         // TAITs outside their defining scopes are ignored.
         match self.tcx.local_opaque_ty_origin(alias_ty.def_id.expect_local()) {
-            rustc_hir::OpaqueTyOrigin::FnReturn { .. }
-            | rustc_hir::OpaqueTyOrigin::AsyncFn { .. } => {}
-            rustc_hir::OpaqueTyOrigin::TyAlias { in_assoc_ty, .. } => match self.mode {
+            crate::rustc_hir::OpaqueTyOrigin::FnReturn { .. }
+            | crate::rustc_hir::OpaqueTyOrigin::AsyncFn { .. } => {}
+            crate::rustc_hir::OpaqueTyOrigin::TyAlias { in_assoc_ty, .. } => match self.mode {
                 // If we are collecting opaques in an assoc method, we are only looking at assoc types
                 // mentioned in the assoc method and only at opaques defined in there. We do not
                 // want to collect TAITs

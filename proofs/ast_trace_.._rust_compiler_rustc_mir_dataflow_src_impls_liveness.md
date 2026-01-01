@@ -6,15 +6,15 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::mir::{
+use crate::rustc_complete::mir::{
     self, CallReturnPlaces, Local, Location, Place, StatementKind, TerminatorEdges,
 };
 ```

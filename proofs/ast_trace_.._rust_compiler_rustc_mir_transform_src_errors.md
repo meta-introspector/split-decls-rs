@@ -6,8 +6,8 @@ Generated 21 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::{Diag, LintDiagnostic};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Diag, LintDiagnostic};
 ```
 
 ## Block 2
@@ -21,18 +21,18 @@ use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::mir::AssertKind;
-use rustc_middle::query::Key;
-use rustc_middle::ty::TyCtxt;
-use rustc_session::lint::{self, Lint};
+use crate::rustc_complete::mir::AssertKind;
+use crate::rustc_complete::query::Key;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::lint::{self, Lint};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::DefId;
-use rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{Ident, Span, Symbol};
 ```
 
 ## Block 5
@@ -266,7 +266,7 @@ pub(crate) struct MustNotSupend<'a, 'tcx> {
 ```rust
 // Needed for def_path_str
 impl<'a> LintDiagnostic<'a, ()> for MustNotSupend<'_, '_> {
-    fn decorate_lint<'b>(self, diag: &'b mut rustc_errors::Diag<'a, ()>) {
+    fn decorate_lint<'b>(self, diag: &'b mut crate::rustc_errors::Diag<'a, ()>) {
         diag.primary_message(fluent::mir_transform_must_not_suspend);
         diag.span_label(self.yield_sp, fluent::_subdiag::label);
         if let Some(reason) = self.reason {

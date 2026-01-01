@@ -9,19 +9,19 @@ Generated 21 AST blocks from source file
 use std::assert_matches::assert_matches;
 
 use hir::Node;
-use rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_data_structures::fx::FxIndexSet;
 use rustc_hir as hir;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir::find_attr;
-use rustc_middle::ty::{
+use crate::rustc_complete::find_attr;
+use crate::rustc_complete::ty::{
     self, GenericPredicates, ImplTraitInTraitData, Ty, TyCtxt, TypeVisitable, TypeVisitor, Upcast,
 };
 ```
@@ -30,14 +30,14 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Ident, Span};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span};
 ```
 
 ## Block 5
@@ -126,7 +126,7 @@ pub(super) fn predicates_of(tcx: TyCtxt<'_>, def_id: DefId) -> ty::GenericPredic
 /// N.B., this does not include any implied/inferred constraints.
 #[instrument(level = "trace", skip(tcx), ret)]
 fn gather_explicit_predicates_of(tcx: TyCtxt<'_>, def_id: LocalDefId) -> ty::GenericPredicates<'_> {
-    use rustc_hir::*;
+    use crate::rustc_complete::*;
 
     match tcx.opt_rpitit_info(def_id.to_def_id()) {
         Some(ImplTraitInTraitData::Trait { fn_def_id, .. }) => {

@@ -8,8 +8,8 @@ Generated 13 AST blocks from source file
 ```rust
 use std::borrow::Cow;
 
-use rustc_abi::TargetDataLayoutErrors;
-use rustc_error_messages::{DiagArgValue, IntoDiagArg};
+use crate::rustc_abi::TargetDataLayoutErrors;
+use crate::rustc_error_messages::{DiagArgValue, IntoDiagArg};
 ```
 
 ## Block 2
@@ -17,7 +17,7 @@ use rustc_error_messages::{DiagArgValue, IntoDiagArg};
 
 ```rust
 use rustc_macros::Subdiagnostic;
-use rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 3

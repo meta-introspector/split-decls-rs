@@ -9,7 +9,7 @@ Generated 33 AST blocks from source file
 use std::fmt;
 use std::num::NonZero;
 
-use rustc_abi::Size;
+use crate::rustc_abi::Size;
 use rustc_apfloat::Float;
 use rustc_apfloat::ieee::{Double, Half, Quad, Single};
 ```
@@ -18,14 +18,14 @@ use rustc_apfloat::ieee::{Double, Half, Quad, Single};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{DiagArgValue, IntoDiagArg};
+use crate::rustc_complete::{DiagArgValue, IntoDiagArg};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
+use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
 ```
 
 ## Block 4

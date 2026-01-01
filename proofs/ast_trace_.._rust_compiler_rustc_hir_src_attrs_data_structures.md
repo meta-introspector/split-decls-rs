@@ -10,16 +10,16 @@ use std::borrow::Cow;
 use std::path::PathBuf;
 
 pub use ReprAttr::*;
-use rustc_abi::Align;
-use rustc_ast::token::CommentKind;
-use rustc_ast::{AttrStyle, ast};
+use crate::rustc_abi::Align;
+use crate::rustc_complete::token::CommentKind;
+use crate::rustc_complete::{AttrStyle, ast};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_error_messages::{DiagArgValue, IntoDiagArg};
+use crate::rustc_error_messages::{DiagArgValue, IntoDiagArg};
 ```
 
 ## Block 3
@@ -33,16 +33,16 @@ use rustc_macros::{Decodable, Encodable, HashStable_Generic, PrintAttribute};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::def_id::DefId;
-use rustc_span::hygiene::Transparency;
-use rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::hygiene::Transparency;
+use crate::rustc_complete::{Ident, Span, Symbol};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-pub use rustc_target::spec::SanitizerSet;
+pub use crate::rustc_target::spec::SanitizerSet;
 use thin_vec::ThinVec;
 
 use crate::attrs::pretty_printing::PrintAttribute;
@@ -225,7 +225,7 @@ impl Deprecation {
         match self.since {
             DeprecatedSince::RustcVersion(since) => since <= RustcVersion::CURRENT,
             DeprecatedSince::Future => false,
-            // The `since` field doesn't have semantic purpose without `#![staged_api]`.
+            // The `since` field doesn't have semantic purpose without `#[staged_api]`.
             DeprecatedSince::NonStandard(_) => true,
             // Assume deprecation is in effect if "since" field is absent or invalid.
             DeprecatedSince::Unspecified | DeprecatedSince::Err => true,
@@ -556,7 +556,7 @@ pub struct LinkEntry {
 ```
 
 ## Block 34
-**Metadata**: AST_ID=34 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=51 | LINES=309
+**Metadata**: AST_ID=34 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=52 | LINES=309
 
 ```rust
 /// ```
@@ -681,7 +681,7 @@ pub enum AttributeKind {
     /// Represents `#[rustc_dummy]`.
     Dummy,
 
-    /// Represents [`#[export_name]`](https://doc.rust-lang.org/reference/abi.html#the-export_name-attribute).
+    /// Represents [`#[unsafe(export_name]`](https://doc.rust-lang.org/reference/abi.html#the-export_name-attribute).
     ExportName {
         /// The name to export this item with.
         /// It may not contain \0 bytes as it will be converted to a null-terminated string.
@@ -720,7 +720,7 @@ pub enum AttributeKind {
     /// Represents `#[link_ordinal]`.
     LinkOrdinal { ordinal: u16, span: Span },
 
-    /// Represents [`#[link_section]`](https://doc.rust-lang.org/reference/abi.html#the-link_section-attribute)
+    /// Represents [`#[unsafe(link_section]`](https://doc.rust-lang.org/reference/abi.html#the-link_section-attribute)
     LinkSection { name: Symbol, span: Span },
 
     /// Represents `#[linkage]`.
@@ -763,7 +763,7 @@ pub enum AttributeKind {
     /// Represents `#[no_implicit_prelude]`
     NoImplicitPrelude(Span),
 
-    /// Represents `#[no_mangle]`
+    /// Represents `#[unsafe(no_mangle)]`
     NoMangle(Span),
 
     /// Represents `#[no_std]`
@@ -790,13 +790,13 @@ pub enum AttributeKind {
     /// Represents `#[pointee]`
     Pointee(Span),
 
-    /// Represents `#[proc_macro]`
+    /// Represents `// #[proc_macro] - removed`
     ProcMacro(Span),
 
     /// Represents `#[proc_macro_attribute]`
     ProcMacroAttribute(Span),
 
-    /// Represents `#[proc_macro_derive]`
+    /// Represents `// #[proc_macro_derive]`
     ProcMacroDerive { trait_name: Symbol, helper_attrs: ThinVec<Symbol>, span: Span },
 
     /// Represents `#[rustc_pub_transparent]` (used by the `repr_transparent_external_private_fields` lint).

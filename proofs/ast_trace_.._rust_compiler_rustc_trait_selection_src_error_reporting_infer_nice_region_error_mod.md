@@ -6,22 +6,22 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{Diag, ErrorGuaranteed};
+use crate::rustc_complete::{Diag, ErrorGuaranteed};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::LocalDefId;
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=18
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::error_reporting::TypeErrCtxt;
 use crate::infer::RegionResolutionError;

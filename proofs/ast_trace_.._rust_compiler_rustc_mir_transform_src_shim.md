@@ -14,7 +14,7 @@ use std::{fmt, iter};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::{ExternAbi, FIRST_VARIANT, FieldIdx, VariantIdx};
+use crate::rustc_abi::{ExternAbi, FIRST_VARIANT, FieldIdx, VariantIdx};
 ```
 
 ## Block 3
@@ -22,25 +22,25 @@ use rustc_abi::{ExternAbi, FIRST_VARIANT, FieldIdx, VariantIdx};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::def_id::DefId;
-use rustc_hir::lang_items::LangItem;
-use rustc_index::{Idx, IndexVec};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_index::{Idx, IndexVec};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::visit::{MutVisitor, PlaceContext};
+use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::{
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{
     self, CoroutineArgs, CoroutineArgsExt, EarlyBinder, GenericArgs, Ty, TyCtxt,
 };
 ```
@@ -49,21 +49,21 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::source_map::{Spanned, dummy_spanned};
+use crate::rustc_complete::source_map::{Spanned, dummy_spanned};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 9

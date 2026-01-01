@@ -7,22 +7,22 @@ Generated 6 AST blocks from source file
 
 ```rust
 use rustc_ast as ast;
-use rustc_ast::{ItemKind, VariantData};
+use crate::rustc_complete::{ItemKind, VariantData};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::MultiSpan;
-use rustc_expand::base::{Annotatable, DummyResult, ExtCtxt};
+use crate::rustc_complete::MultiSpan;
+use crate::rustc_expand::base::{Annotatable, DummyResult, ExtCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, Span, kw, sym};
+use crate::rustc_complete::{Ident, Span, kw, sym};
 ```
 
 ## Block 4

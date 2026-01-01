@@ -3,14 +3,14 @@
 Generated 2 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=proc_macro_decls_static | COMPLEXITY=8 | LINES=18
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=proc_macro_decls_static | COMPLEXITY=9 | LINES=18
 
 ```rust
-use rustc_ast::attr;
-use rustc_hir::def_id::LocalDefId;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::TyCtxt;
-use rustc_span::sym;
+use crate::rustc_complete::attr;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::sym;
 
 fn proc_macro_decls_static(tcx: TyCtxt<'_>, (): ()) -> Option<LocalDefId> {
     let mut decls = None;

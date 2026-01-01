@@ -6,7 +6,7 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=24 | LINES=62
 
 ```rust
-use rustc_errors::DiagArgValue;
+use crate::rustc_complete::DiagArgValue;
 
 use super::prelude::*;
 use crate::session_diagnostics::IllFormedAttributeInputLint;

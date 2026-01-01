@@ -6,28 +6,28 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=13
 
 ```rust
-//! This file implements "place projections"; basically a symmetric API for 3 types: MPlaceTy, OpTy, PlaceTy.
-//!
-//! OpTy and PlaceTy generally work by "let's see if we are actually an MPlaceTy, and do something custom if not".
-//! For PlaceTy, the custom thing is basically always to call `force_allocation` and then use the MPlaceTy logic anyway.
-//! For OpTy, the custom thing on field pojections has to be pretty clever (since `Operand::Immediate` can have fields),
-//! but for array/slice operations it only has to worry about `Operand::Uninit`. That makes the value part trivial,
-//! but we still need to do bounds checking and adjust the layout. To not duplicate that with MPlaceTy, we actually
-//! implement the logic on OpTy, and MPlaceTy calls that.
+// This file implements "place projections"; basically a symmetric API for 3 types: MPlaceTy, OpTy, PlaceTy.
+//
+// OpTy and PlaceTy generally work by "let's see if we are actually an MPlaceTy, and do something custom if not".
+// For PlaceTy, the custom thing is basically always to call `force_allocation` and then use the MPlaceTy logic anyway.
+// For OpTy, the custom thing on field pojections has to be pretty clever (since `Operand::Immediate` can have fields),
+// but for array/slice operations it only has to worry about `Operand::Uninit`. That makes the value part trivial,
+// but we still need to do bounds checking and adjust the layout. To not duplicate that with MPlaceTy, we actually
+// implement the logic on OpTy, and MPlaceTy calls that.
 
 use std::marker::PhantomData;
 use std::ops::Range;
 
-use rustc_abi::{self as abi, FieldIdx, Size, VariantIdx};
+use crate::rustc_abi::{self as abi, FieldIdx, Size, VariantIdx};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::Ty;
-use rustc_middle::ty::layout::TyAndLayout;
-use rustc_middle::{bug, mir, span_bug, ty};
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::{bug, mir, span_bug, ty};
 ```
 
 ## Block 3
@@ -439,7 +439,7 @@ where
     where
         P: Projectable<'tcx, M::Provenance> + From<MPlaceTy<'tcx, M::Provenance>> + std::fmt::Debug,
     {
-        use rustc_middle::mir::ProjectionElem::*;
+        use crate::rustc_complete::mir::ProjectionElem::*;
         interp_ok(match proj_elem {
             OpaqueCast(ty) => {
                 span_bug!(self.cur_span(), "OpaqueCast({ty}) encountered after borrowck")

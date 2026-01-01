@@ -6,26 +6,26 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_infer::infer::InferOk;
-use rustc_infer::infer::resolve::OpportunisticRegionResolver;
-use rustc_infer::traits::query::type_op::ImpliedOutlivesBounds;
+use crate::rustc_infer::infer::InferOk;
+use crate::rustc_infer::infer::resolve::OpportunisticRegionResolver;
+use crate::rustc_infer::traits::query::type_op::ImpliedOutlivesBounds;
 use rustc_macros::extension;
-use rustc_middle::infer::canonical::{OriginalQueryValues, QueryRegionConstraints};
+use crate::rustc_complete::infer::canonical::{OriginalQueryValues, QueryRegionConstraints};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-pub use rustc_middle::traits::query::OutlivesBound;
-use rustc_middle::ty::{self, ParamEnv, Ty, TypeFolder, TypeVisitableExt};
+pub use crate::rustc_complete::traits::query::OutlivesBound;
+use crate::rustc_complete::ty::{self, ParamEnv, Ty, TypeFolder, TypeVisitableExt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=14
 
 ```rust
-use rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::def_id::LocalDefId;
 use tracing::instrument;
 
 use crate::infer::InferCtxt;

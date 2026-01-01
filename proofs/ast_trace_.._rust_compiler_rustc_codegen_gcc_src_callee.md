@@ -21,14 +21,14 @@ use gccjit::{Function, FunctionType};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::layout::{FnAbiOf, HasTyCtxt};
+use crate::rustc_complete::ty::layout::{FnAbiOf, HasTyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Instance, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, Instance, TypeVisitableExt};
 ```
 
 ## Block 5
@@ -137,7 +137,7 @@ pub fn get_fn<'gcc, 'tcx>(cx: &CodegenCx<'gcc, 'tcx>, instance: Instance<'tcx>) 
                 // This is a monomorphization of a generic function.
                 if !(cx.tcx.sess.opts.share_generics()
                     || tcx.codegen_instance_attrs(instance.def).inline
-                        == rustc_hir::attrs::InlineAttr::Never)
+                        == crate::rustc_hir::attrs::InlineAttr::Never)
                 {
                     // When not sharing generics, all instances are in the same
                     // crate and have hidden visibility.

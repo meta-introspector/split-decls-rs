@@ -6,8 +6,8 @@ Generated 98 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level, MultiSpan, SingleLabelManySpans,
     Subdiagnostic,
 };
@@ -24,7 +24,7 @@ use rustc_macros::{Diagnostic, Subdiagnostic};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::{Ident, Span, Symbol};
 ```
 
 ## Block 4
@@ -772,7 +772,7 @@ pub(crate) enum EnvNotDefined<'a> {
         #[primary_span]
         span: Span,
         var: Symbol,
-        var_expr: &'a rustc_ast::Expr,
+        var_expr: &'a crate::rustc_ast::Expr,
     },
     #[diag(builtin_macros_env_not_defined)]
     #[help(builtin_macros_custom)]
@@ -780,7 +780,7 @@ pub(crate) enum EnvNotDefined<'a> {
         #[primary_span]
         span: Span,
         var: Symbol,
-        var_expr: &'a rustc_ast::Expr,
+        var_expr: &'a crate::rustc_ast::Expr,
     },
 }
 ```

@@ -21,7 +21,7 @@ use std::process::ExitStatus;
 
 use rustc_ast as ast;
 use rustc_ast_pretty::pprust;
-use rustc_span::edition::Edition;
+use crate::rustc_complete::edition::Edition;
 
 use crate::{DiagArgValue, IntoDiagArg};
 ```
@@ -123,8 +123,8 @@ into_diag_arg_using_display!(
     Box<dyn std::error::Error>,
     std::num::NonZero<u32>,
     Edition,
-    rustc_span::Ident,
-    rustc_span::MacroRulesNormalizedIdent,
+    crate::rustc_span::Ident,
+    crate::rustc_span::MacroRulesNormalizedIdent,
     ParseIntError,
     ExitStatus,
 );
@@ -170,7 +170,7 @@ impl IntoDiagArg for Vec<char> {
 **Metadata**: AST_ID=12 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=5 | LINES=6
 
 ```rust
-impl IntoDiagArg for rustc_span::Symbol {
+impl IntoDiagArg for crate::rustc_span::Symbol {
     fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> DiagArgValue {
         self.to_ident_string().into_diag_arg(path)
     }
@@ -291,7 +291,7 @@ impl IntoDiagArg for std::ffi::CString {
 **Metadata**: AST_ID=23 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=5 | LINES=6
 
 ```rust
-impl IntoDiagArg for rustc_data_structures::small_c_str::SmallCStr {
+impl IntoDiagArg for crate::rustc_data_structures::small_c_str::SmallCStr {
     fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
         DiagArgValue::Str(Cow::Owned(self.to_string_lossy().into_owned()))
     }

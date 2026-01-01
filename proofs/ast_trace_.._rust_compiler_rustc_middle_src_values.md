@@ -10,9 +10,9 @@ use std::collections::VecDeque;
 use std::fmt::Write;
 use std::ops::ControlFlow;
 
-use rustc_data_structures::fx::FxHashSet;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, MultiSpan, pluralize, struct_span_code_err};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, MultiSpan, pluralize, struct_span_code_err};
 ```
 
 ## Block 2
@@ -20,7 +20,7 @@ use rustc_errors::{Applicability, MultiSpan, pluralize, struct_span_code_err};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 3
@@ -35,8 +35,8 @@ use rustc_query_system::query::{CycleError, report_cycle};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::LocalDefId;
-use rustc_span::{ErrorGuaranteed, Span};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{ErrorGuaranteed, Span};
 ```
 
 ## Block 5
@@ -117,8 +117,8 @@ impl<'tcx> Value<TyCtxt<'tcx>> for ty::Binder<'_, ty::FnSig<'_>> {
             std::iter::repeat(err).take(arity),
             err,
             false,
-            rustc_hir::Safety::Safe,
-            rustc_abi::ExternAbi::Rust,
+            crate::rustc_hir::Safety::Safe,
+            crate::rustc_abi::ExternAbi::Rust,
         ));
 
         // SAFETY: This is never called when `Self` is not `ty::Binder<'tcx, ty::FnSig<'tcx>>`.

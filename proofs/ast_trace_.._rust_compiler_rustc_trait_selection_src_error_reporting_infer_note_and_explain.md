@@ -6,14 +6,14 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::Applicability::{MachineApplicable, MaybeIncorrect};
+use crate::rustc_complete::Applicability::{MachineApplicable, MaybeIncorrect};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{Diag, MultiSpan, pluralize};
+use crate::rustc_complete::{Diag, MultiSpan, pluralize};
 ```
 
 ## Block 3
@@ -21,40 +21,40 @@ use rustc_errors::{Diag, MultiSpan, pluralize};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::DefKind;
-use rustc_hir::find_attr;
-use rustc_middle::traits::{ObligationCause, ObligationCauseCode};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::find_attr;
+use crate::rustc_complete::traits::{ObligationCause, ObligationCauseCode};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::fast_reject::DeepRejectCtxt;
-use rustc_middle::ty::print::{FmtPrinter, Printer};
+use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
+use crate::rustc_complete::ty::print::{FmtPrinter, Printer};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty, suggest_constraining_type_param};
+use crate::rustc_complete::ty::{self, Ty, suggest_constraining_type_param};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::DefId;
-use rustc_span::{BytePos, Span, Symbol};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{BytePos, Span, Symbol};
 ```
 
 ## Block 8
@@ -434,9 +434,9 @@ impl<T> Trait<T> for X {
                             let opaque_path = tcx.def_path_str(alias_def_id);
                             // FIXME(type_alias_impl_trait): make this a structured suggestion
                             match tcx.opaque_ty_origin(opaque_ty.def_id) {
-                                rustc_hir::OpaqueTyOrigin::FnReturn { .. } => {}
-                                rustc_hir::OpaqueTyOrigin::AsyncFn { .. } => {}
-                                rustc_hir::OpaqueTyOrigin::TyAlias {
+                                crate::rustc_hir::OpaqueTyOrigin::FnReturn { .. } => {}
+                                crate::rustc_hir::OpaqueTyOrigin::AsyncFn { .. } => {}
+                                crate::rustc_hir::OpaqueTyOrigin::TyAlias {
                                     in_assoc_ty: false, ..
                                 } => {
                                     diag.span_note(
@@ -445,7 +445,7 @@ impl<T> Trait<T> for X {
                                         attribute to be able to define hidden types"),
                                     );
                                 }
-                                rustc_hir::OpaqueTyOrigin::TyAlias {
+                                crate::rustc_hir::OpaqueTyOrigin::TyAlias {
                                     in_assoc_ty: true, ..
                                 } => {}
                             }
@@ -897,7 +897,7 @@ fn foo(&self) -> Self::T { String::new() }
 
         if let DefKind::Trait | DefKind::Impl { .. } = tcx.def_kind(parent_id) {
             let assoc_items = tcx.associated_items(parent_id);
-            // FIXME: account for `#![feature(specialization)]`
+            // FIXME: account for `#[feature(specialization)]`
             for assoc_item in assoc_items.in_definition_order() {
                 if assoc_item.is_type()
                     // FIXME: account for returning some type in a trait fn impl that has

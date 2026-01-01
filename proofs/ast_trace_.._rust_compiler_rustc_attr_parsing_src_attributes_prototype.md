@@ -6,24 +6,24 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! Attributes that are only used on function prototypes.
+// Attributes that are only used on function prototypes.
 
-use rustc_feature::{AttributeTemplate, template};
+use crate::rustc_feature::{AttributeTemplate, template};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::Target;
-use rustc_hir::attrs::{AttributeKind, MirDialect, MirPhase};
+use crate::rustc_complete::Target;
+use crate::rustc_complete::attrs::{AttributeKind, MirDialect, MirPhase};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 4
@@ -52,7 +52,7 @@ use crate::target_checking::Policy::Allow;
 pub(crate) struct CustomMirParser;
 
 impl<S: Stage> SingleAttributeParser<S> for CustomMirParser {
-    const PATH: &[rustc_span::Symbol] = &[sym::custom_mir];
+    const PATH: &[crate::rustc_span::Symbol] = &[sym::custom_mir];
 
     const ATTRIBUTE_ORDER: AttributeOrder = AttributeOrder::KeepOutermost;
 

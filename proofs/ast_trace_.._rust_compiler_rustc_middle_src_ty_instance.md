@@ -9,25 +9,25 @@ Generated 19 AST blocks from source file
 use std::assert_matches::assert_matches;
 use std::fmt;
 
-use rustc_data_structures::fx::FxHashMap;
-use rustc_errors::ErrorGuaranteed;
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::ErrorGuaranteed;
 use rustc_hir as hir;
-use rustc_hir::def::{CtorKind, DefKind, Namespace};
+use crate::rustc_complete::def::{CtorKind, DefKind, Namespace};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{CrateNum, DefId};
+use crate::rustc_complete::def_id::{CrateNum, DefId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::lang_items::LangItem;
-use rustc_index::bit_set::FiniteBitSet;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_index::bit_set::FiniteBitSet;
 use rustc_macros::{Decodable, Encodable, HashStable, Lift, TyDecodable, TyEncodable};
 ```
 
@@ -35,8 +35,8 @@ use rustc_macros::{Decodable, Encodable, HashStable, Lift, TyDecodable, TyEncoda
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::LOCAL_CRATE;
-use rustc_span::{DUMMY_SP, Span, Symbol};
+use crate::rustc_complete::def_id::LOCAL_CRATE;
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
 ```
 
 ## Block 5
@@ -274,7 +274,7 @@ impl<'tcx> Instance<'tcx> {
         if !tcx.sess.opts.share_generics()
             // However, if the def_id is marked inline(never), then it's fine to just reuse the
             // upstream monomorphization.
-            && tcx.codegen_fn_attrs(self.def_id()).inline != rustc_hir::attrs::InlineAttr::Never
+            && tcx.codegen_fn_attrs(self.def_id()).inline != crate::rustc_hir::attrs::InlineAttr::Never
         {
             return None;
         }
@@ -369,7 +369,7 @@ impl<'tcx> InstanceKind<'tcx> {
     /// Note that this is only a hint. See the documentation for
     /// `generates_cgu_internal_copy` for more information.
     pub fn requires_inline(&self, tcx: TyCtxt<'tcx>) -> bool {
-        use rustc_hir::definitions::DefPathData;
+        use crate::rustc_complete::definitions::DefPathData;
         let def_id = match *self {
             ty::InstanceKind::Item(def) => def,
             ty::InstanceKind::DropGlue(_, Some(_)) => return false,

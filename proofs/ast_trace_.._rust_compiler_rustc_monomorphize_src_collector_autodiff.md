@@ -6,8 +6,8 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::{self, GenericArg, IntrinsicDef, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, GenericArg, IntrinsicDef, TyCtxt};
 ```
 
 ## Block 2
@@ -31,7 +31,7 @@ pub(crate) fn collect_autodiff_fn<'tcx>(
     intrinsic: IntrinsicDef,
     output: &mut MonoItems<'tcx>,
 ) {
-    if intrinsic.name != rustc_span::sym::autodiff {
+    if intrinsic.name != crate::rustc_span::sym::autodiff {
         return;
     };
 

@@ -6,20 +6,20 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=21
 
 ```rust
-//! Canonicalization is used to separate some goal from its context,
-//! throwing away unnecessary information in the process.
-//!
-//! This is necessary to cache goals containing inference variables
-//! and placeholders without restricting them to the current `InferCtxt`.
-//!
-//! Canonicalization is fairly involved, for more details see the relevant
-//! section of the [rustc-dev-guide][c].
-//!
-//! [c]: https://rustc-dev-guide.rust-lang.org/solve/canonicalization.html
+// Canonicalization is used to separate some goal from its context,
+// throwing away unnecessary information in the process.
+//
+// This is necessary to cache goals containing inference variables
+// and placeholders without restricting them to the current `InferCtxt`.
+//
+// Canonicalization is fairly involved, for more details see the relevant
+// section of the [rustc-dev-guide][c].
+//
+// [c]: https://rustc-dev-guide.rust-lang.org/solve/canonicalization.html
 
 use std::iter;
 
-use rustc_index::IndexVec;
+use crate::rustc_index::IndexVec;
 use rustc_type_ir::data_structures::HashSet;
 use rustc_type_ir::inherent::*;
 use rustc_type_ir::relate::solver_relating::RelateExt;
@@ -529,7 +529,7 @@ where
 
 ```rust
 // FIXME: needs to be pub to be accessed by downstream
-// `rustc_trait_selection::solve::inspect::analyse`.
+// `crate::rustc_trait_selection::solve::inspect::analyse`.
 pub fn instantiate_canonical_state<D, I, T: TypeFoldable<I>>(
     delegate: &D,
     span: I::Span,

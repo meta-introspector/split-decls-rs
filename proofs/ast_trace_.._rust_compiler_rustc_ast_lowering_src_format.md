@@ -8,11 +8,11 @@ Generated 10 AST blocks from source file
 ```rust
 use std::borrow::Cow;
 
-use rustc_ast::*;
-use rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_complete::*;
+use crate::rustc_data_structures::fx::FxIndexMap;
 use rustc_hir as hir;
-use rustc_session::config::FmtDebug;
-use rustc_span::{DesugaringKind, Ident, Span, Symbol, sym};
+use crate::rustc_complete::config::FmtDebug;
+use crate::rustc_complete::{DesugaringKind, Ident, Span, Symbol, sym};
 ```
 
 ## Block 2

@@ -11,24 +11,24 @@ use core::cmp::min;
 use core::iter;
 
 use hir::def_id::LocalDefId;
-use rustc_ast::util::parser::ExprPrecedence;
-use rustc_data_structures::packed::Pu128;
-use rustc_errors::{Applicability, Diag, MultiSpan, listify};
+use crate::rustc_complete::util::parser::ExprPrecedence;
+use crate::rustc_data_structures::packed::Pu128;
+use crate::rustc_complete::{Applicability, Diag, MultiSpan, listify};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def::{CtorKind, CtorOf, DefKind, Res};
+use crate::rustc_complete::def::{CtorKind, CtorOf, DefKind, Res};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_hir::lang_items::LangItem;
-use rustc_hir::{
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{
     self as hir, Arm, CoroutineDesugaring, CoroutineKind, CoroutineSource, Expr, ExprKind,
     GenericBound, HirId, Node, PatExpr, PatExprKind, Path, QPath, Stmt, StmtKind, TyKind,
     WherePredicateKind, expr_needs_parens,
@@ -39,12 +39,12 @@ use rustc_hir::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_hir_analysis::hir_ty_lowering::HirTyLowerer;
-use rustc_hir_analysis::suggest_impl_trait;
-use rustc_middle::middle::stability::EvalResult;
-use rustc_middle::span_bug;
-use rustc_middle::ty::print::with_no_trimmed_paths;
-use rustc_middle::ty::{
+use crate::rustc_hir_analysis::hir_ty_lowering::HirTyLowerer;
+use crate::rustc_hir_analysis::suggest_impl_trait;
+use crate::rustc_complete::middle::stability::EvalResult;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{
     self, Article, Binder, IsSuggestable, Ty, TyCtxt, TypeVisitableExt, Upcast,
     suggest_constraining_type_params,
 };
@@ -54,20 +54,20 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::errors::ExprParenthesesNeeded;
-use rustc_span::source_map::Spanned;
-use rustc_span::{ExpnKind, Ident, MacroKind, Span, Symbol, sym};
+use crate::rustc_complete::errors::ExprParenthesesNeeded;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{ExpnKind, Ident, MacroKind, Span, Symbol, sym};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::error_reporting::traits::DefIdOrName;
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::traits;
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::error_reporting::traits::DefIdOrName;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::traits;
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
 use tracing::{debug, instrument};
 ```
 
@@ -76,7 +76,7 @@ use tracing::{debug, instrument};
 
 ```rust
 use super::FnCtxt;
-use crate::fn_ctxt::rustc_span::BytePos;
+use crate::fn_ctxt::crate::rustc_span::BytePos;
 use crate::method::probe;
 use crate::method::probe::{IsSuggestion, Mode, ProbeScope};
 ```
@@ -323,7 +323,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             let span = if let Some(recv_span) = recv_expr.span.find_ancestor_inside(expr.span) {
                 expr.span.with_lo(recv_span.hi())
             } else {
-                expr.span.with_lo(method.span.lo() - rustc_span::BytePos(1))
+                expr.span.with_lo(method.span.lo() - crate::rustc_span::BytePos(1))
             };
             err.span_suggestion_verbose(
                 span,
@@ -1691,13 +1691,13 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         (
                             blk.span
                                 .shrink_to_lo()
-                                .with_hi(rustc_span::BytePos(blk.span.lo().0 + 1)),
+                                .with_hi(crate::rustc_span::BytePos(blk.span.lo().0 + 1)),
                             "[".to_string(),
                         ),
                         (
                             blk.span
                                 .shrink_to_hi()
-                                .with_lo(rustc_span::BytePos(blk.span.hi().0 - 1)),
+                                .with_lo(crate::rustc_span::BytePos(blk.span.hi().0 - 1)),
                             "]".to_string(),
                         ),
                     ],
@@ -1746,7 +1746,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 true
             }
             ExprKind::Lit(Spanned {
-                node: rustc_ast::LitKind::Int(lit, rustc_ast::LitIntType::Unsuffixed),
+                node: crate::rustc_ast::LitKind::Int(lit, crate::rustc_ast::LitIntType::Unsuffixed),
                 span,
             }) => {
                 let Ok(snippet) = self.tcx.sess.source_map().span_to_snippet(span) else {
@@ -1791,7 +1791,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         };
 
         // Provided expression needs to be a literal `0`.
-        let ExprKind::Lit(Spanned { node: rustc_ast::LitKind::Int(Pu128(0), _), span }) = expr.kind
+        let ExprKind::Lit(Spanned { node: crate::rustc_ast::LitKind::Int(Pu128(0), _), span }) = expr.kind
         else {
             return false;
         };
@@ -2101,8 +2101,8 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         field.vis.is_accessible_from(self.tcx.parent_module(hir_id), self.tcx)
             // The field must not be unstable.
             && !matches!(
-                self.tcx.eval_stability(field.did, None, rustc_span::DUMMY_SP, None),
-                rustc_middle::middle::stability::EvalResult::Deny { .. }
+                self.tcx.eval_stability(field.did, None, crate::rustc_span::DUMMY_SP, None),
+                crate::rustc_middle::middle::stability::EvalResult::Deny { .. }
             )
             // If the field is from an external crate it must not be `doc(hidden)`.
             && (field.did.is_local() || !self.tcx.is_doc_hidden(field.did))
@@ -2342,7 +2342,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             // This can only detect const variable declarations and
             // calls to const functions.
 
-            // Checking this here instead of rustc_hir::hir because
+            // Checking this here instead of crate::rustc_hir::hir because
             // this check needs access to `self.tcx` but rustc_hir
             // has no access to `TyCtxt`.
             let expr_is_const_usize = expr_ty.is_usize()

@@ -6,8 +6,8 @@ Generated 16 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::tokenstream::TokenStream;
-use rustc_ast::{self as ast, AttrStyle, Attribute, MetaItem, attr, token};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{self as ast, AttrStyle, Attribute, MetaItem, attr, token};
 ```
 
 ## Block 2
@@ -15,33 +15,33 @@ use rustc_ast::{self as ast, AttrStyle, Attribute, MetaItem, attr, token};
 
 ```rust
 use rustc_attr_parsing::validate_attr;
-use rustc_errors::{Applicability, Diag, ErrorGuaranteed};
+use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_expand::base::{Annotatable, ExpandResult, ExtCtxt};
+use crate::rustc_expand::base::{Annotatable, ExpandResult, ExtCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_expand::expand::AstFragment;
-use rustc_feature::AttributeTemplate;
-use rustc_lint_defs::BuiltinLintDiag;
-use rustc_lint_defs::builtin::DUPLICATE_MACRO_ATTRIBUTES;
-use rustc_parse::{exp, parser};
+use crate::rustc_expand::expand::AstFragment;
+use crate::rustc_feature::AttributeTemplate;
+use crate::rustc_lint_defs::BuiltinLintDiag;
+use crate::rustc_lint_defs::builtin::DUPLICATE_MACRO_ATTRIBUTES;
+use crate::rustc_parse::{exp, parser};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::errors::report_lit_error;
-use rustc_span::{BytePos, Span, Symbol};
+use crate::rustc_complete::errors::report_lit_error;
+use crate::rustc_complete::{BytePos, Span, Symbol};
 ```
 
 ## Block 6

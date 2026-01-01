@@ -6,21 +6,21 @@ Generated 19 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-//! The various pretty-printing routines.
+// The various pretty-printing routines.
 
 use std::cell::Cell;
 use std::fmt::Write;
 
 use rustc_ast_pretty::pprust as pprust_ast;
-use rustc_middle::bug;
-use rustc_middle::mir::{write_mir_graphviz, write_mir_pretty};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::{write_mir_graphviz, write_mir_pretty};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 3
@@ -35,15 +35,15 @@ use rustc_mir_build::thir::print::{thir_flat, thir_tree};
 
 ```rust
 use rustc_public::rustc_internal::pretty::write_smir_pretty;
-use rustc_session::Session;
-use rustc_session::config::{OutFileName, PpHirMode, PpMode, PpSourceMode};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{OutFileName, PpHirMode, PpMode, PpSourceMode};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{FileName, Ident};
+use crate::rustc_complete::{FileName, Ident};
 ```
 
 ## Block 6
@@ -199,7 +199,7 @@ impl<'a> pprust_ast::PpAnn for AstHygieneAnn<'a> {
             pprust_ast::AnnNode::Crate(_) => {
                 s.s.hardbreak();
                 let verbose = self.sess.verbose_internals();
-                s.synth_comment(rustc_span::hygiene::debug_hygiene_data(verbose));
+                s.synth_comment(crate::rustc_span::hygiene::debug_hygiene_data(verbose));
                 s.s.hardbreak_if_not_bol();
             }
             _ => {}
@@ -419,7 +419,7 @@ pub fn print<'tcx>(sess: &Session, ppm: PpMode, ex: PrintExtra<'tcx>) {
         ThirTree => {
             let tcx = ex.tcx();
             let mut out = String::new();
-            rustc_hir_analysis::check_crate(tcx);
+            crate::rustc_hir_analysis::check_crate(tcx);
             tcx.dcx().abort_if_errors();
             debug!("pretty printing THIR tree");
             for did in tcx.hir_body_owners() {
@@ -430,7 +430,7 @@ pub fn print<'tcx>(sess: &Session, ppm: PpMode, ex: PrintExtra<'tcx>) {
         ThirFlat => {
             let tcx = ex.tcx();
             let mut out = String::new();
-            rustc_hir_analysis::check_crate(tcx);
+            crate::rustc_hir_analysis::check_crate(tcx);
             tcx.dcx().abort_if_errors();
             debug!("pretty printing THIR flat");
             for did in tcx.hir_body_owners() {

@@ -33,15 +33,15 @@ use std::panic;
 use std::path::PathBuf;
 use std::thread::panicking;
 
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_error_messages::{DiagArgName, DiagArgValue, IntoDiagArg};
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_error_messages::{DiagArgName, DiagArgValue, IntoDiagArg};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_lint_defs::{Applicability, LintExpectationId};
+use crate::rustc_lint_defs::{Applicability, LintExpectationId};
 ```
 
 ## Block 6
@@ -55,8 +55,8 @@ use rustc_macros::{Decodable, Encodable};
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::source_map::Spanned;
-use rustc_span::{DUMMY_SP, Span, Symbol};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
 ```
 
 ## Block 8
@@ -158,10 +158,10 @@ impl EmissionGuarantee for FatalAbort {
 **Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=emit_producing_guarantee | COMPLEXITY=5 | LINES=7
 
 ```rust
-impl EmissionGuarantee for rustc_span::fatal_error::FatalError {
+impl EmissionGuarantee for crate::rustc_span::fatal_error::FatalError {
     fn emit_producing_guarantee(diag: Diag<'_, Self>) -> Self::EmitResult {
         diag.emit_producing_nothing();
-        rustc_span::fatal_error::FatalError
+        crate::rustc_span::fatal_error::FatalError
     }
 }
 ```
@@ -675,7 +675,7 @@ impl<G> !Clone for Diag<'_, G> {}
 **Metadata**: AST_ID=38 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=10
 
 ```rust
-rustc_data_structures::static_assert_size!(Diag<'_, ()>, 3 * size_of::<usize>());
+crate::rustc_data_structures::static_assert_size!(Diag<'_, ()>, 3 * size_of::<usize>());
 
 impl<G: EmissionGuarantee> Deref for Diag<'_, G> {
     type Target = DiagInner;

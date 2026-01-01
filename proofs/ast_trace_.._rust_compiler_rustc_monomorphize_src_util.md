@@ -9,7 +9,7 @@ Generated 2 AST blocks from source file
 use std::fs::OpenOptions;
 use std::io::prelude::*;
 
-use rustc_middle::ty::{self, ClosureSizeProfileData, Instance, TyCtxt};
+use crate::rustc_complete::ty::{self, ClosureSizeProfileData, Instance, TyCtxt};
 ```
 
 ## Block 2

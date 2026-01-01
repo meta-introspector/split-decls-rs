@@ -6,18 +6,18 @@ Generated 20 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12
 
 ```rust
-//! Built-in attributes and `cfg` flag gating.
+// Built-in attributes and `cfg` flag gating.
 
 use std::sync::LazyLock;
 
 use AttributeDuplicates::*;
 use AttributeGate::*;
 use AttributeType::*;
-use rustc_data_structures::fx::FxHashMap;
-use rustc_hir::AttrStyle;
-use rustc_hir::attrs::EncodeCrossCrate;
-use rustc_span::edition::Edition;
-use rustc_span::{Symbol, sym};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::AttrStyle;
+use crate::rustc_complete::attrs::EncodeCrossCrate;
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{Symbol, sym};
 ```
 
 ## Block 2
@@ -128,7 +128,7 @@ pub enum AttributeSafety {
 pub enum AttributeGate {
     /// A gated attribute which requires a feature gate to be enabled.
     Gated {
-        /// The feature gate, for example `#![feature(rustc_attrs)]` for rustc_* attributes.
+        /// The feature gate, for example `#[feature(rustc_attrs)]` for rustc_* attributes.
         feature: Symbol,
         /// The error message displayed when an attempt is made to use the attribute without its feature gate.
         message: &'static str,
@@ -146,7 +146,7 @@ pub enum AttributeGate {
 **Metadata**: AST_ID=6 | TYPE=STRUCT | NAME=AttributeTemplate | COMPLEXITY=5 | LINES=19
 
 ```rust
-// FIXME(jdonszelmann): move to rustc_hir::attrs
+// FIXME(jdonszelmann): move to crate::rustc_hir::attrs
 /// A template that the attribute input must match.
 /// Only top-level shape (`#[attr]` vs `#[attr(...)]` vs `#[attr = ...]`) is considered now.
 #[derive(Clone, Copy, Default)]
@@ -1314,7 +1314,7 @@ pub static BUILTIN_ATTRIBUTES: &[BuiltinAttribute] = &[
     ),
     rustc_attr!(
         rustc_coherence_is_core, AttributeType::CrateLevel, template!(Word), ErrorFollowing, EncodeCrossCrate::No,
-        "`#![rustc_coherence_is_core]` allows inherent methods on builtin types, only intended to be used in `core`."
+        "`#[rustc_coherence_is_core]` allows inherent methods on builtin types, only intended to be used in `core`."
     ),
     rustc_attr!(
         rustc_coinductive, AttributeType::Normal, template!(Word), WarnFollowing, EncodeCrossCrate::No,
@@ -1326,7 +1326,7 @@ pub static BUILTIN_ATTRIBUTES: &[BuiltinAttribute] = &[
     ),
     rustc_attr!(
         rustc_preserve_ub_checks, AttributeType::CrateLevel, template!(Word), ErrorFollowing, EncodeCrossCrate::No,
-        "`#![rustc_preserve_ub_checks]` prevents the designated crate from evaluating whether UB checks are enabled when optimizing MIR",
+        "`#[rustc_preserve_ub_checks]` prevents the designated crate from evaluating whether UB checks are enabled when optimizing MIR",
     ),
     rustc_attr!(
         rustc_deny_explicit_impl,

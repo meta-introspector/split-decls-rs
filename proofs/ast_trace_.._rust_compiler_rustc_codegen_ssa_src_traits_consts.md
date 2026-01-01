@@ -7,7 +7,7 @@ Generated 2 AST blocks from source file
 
 ```rust
 use rustc_abi as abi;
-use rustc_middle::mir::interpret::{ConstAllocation, Scalar};
+use crate::rustc_complete::mir::interpret::{ConstAllocation, Scalar};
 ```
 
 ## Block 2

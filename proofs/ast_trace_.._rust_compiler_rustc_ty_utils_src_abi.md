@@ -8,8 +8,8 @@ Generated 13 AST blocks from source file
 ```rust
 use std::iter;
 
-use rustc_abi::Primitive::Pointer;
-use rustc_abi::{BackendRepr, ExternAbi, PointerKind, Scalar, Size};
+use crate::rustc_abi::Primitive::Pointer;
+use crate::rustc_abi::{BackendRepr, ExternAbi, PointerKind, Scalar, Size};
 ```
 
 ## Block 2
@@ -17,10 +17,10 @@ use rustc_abi::{BackendRepr, ExternAbi, PointerKind, Scalar, Size};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::lang_items::LangItem;
-use rustc_middle::bug;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::layout::{
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::layout::{
     FnAbiError, HasTyCtxt, HasTypingEnv, LayoutCx, LayoutOf, TyAndLayout, fn_can_unwind,
 };
 ```
@@ -29,17 +29,17 @@ use rustc_middle::ty::layout::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, InstanceKind, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, InstanceKind, Ty, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_session::config::OptLevel;
-use rustc_span::DUMMY_SP;
-use rustc_span::def_id::DefId;
-use rustc_target::callconv::{
+use crate::rustc_complete::config::OptLevel;
+use crate::rustc_complete::DUMMY_SP;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_target::callconv::{
     AbiMap, ArgAbi, ArgAttribute, ArgAttributes, ArgExtension, FnAbi, PassMode,
 };
 ```
@@ -76,7 +76,7 @@ fn fn_sig_for_fn_abi<'tcx>(
             tcx.thread_local_ptr_ty(instance.def_id()),
             false,
             hir::Safety::Safe,
-            rustc_abi::ExternAbi::Rust,
+            crate::rustc_abi::ExternAbi::Rust,
         );
     }
 
@@ -261,7 +261,7 @@ fn fn_sig_for_fn_abi<'tcx>(
                     ret_ty,
                     false,
                     hir::Safety::Safe,
-                    rustc_abi::ExternAbi::Rust,
+                    crate::rustc_abi::ExternAbi::Rust,
                 )
             } else {
                 // `Iterator::next` doesn't have a `resume` argument.
@@ -270,7 +270,7 @@ fn fn_sig_for_fn_abi<'tcx>(
                     ret_ty,
                     false,
                     hir::Safety::Safe,
-                    rustc_abi::ExternAbi::Rust,
+                    crate::rustc_abi::ExternAbi::Rust,
                 )
             }
         }

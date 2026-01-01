@@ -6,64 +6,64 @@ Generated 14 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{BackendRepr, Float, Integer, Primitive, RegKind};
+use crate::rustc_abi::{BackendRepr, Float, Integer, Primitive, RegKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::attrs::{InstructionSetAttr, Linkage};
+use crate::rustc_complete::attrs::{InstructionSetAttr, Linkage};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::mono::{MonoItemData, Visibility};
+use crate::rustc_complete::mir::mono::{MonoItemData, Visibility};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{InlineAsmOperand, START_BLOCK};
+use crate::rustc_complete::mir::{InlineAsmOperand, START_BLOCK};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::layout::{FnAbiOf, LayoutOf, TyAndLayout};
+use crate::rustc_complete::ty::layout::{FnAbiOf, LayoutOf, TyAndLayout};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{Instance, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::ty::{Instance, Ty, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, ty};
+use crate::rustc_complete::{bug, ty};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::sym;
-use rustc_target::callconv::{ArgAbi, FnAbi, PassMode};
+use crate::rustc_complete::sym;
+use crate::rustc_target::callconv::{ArgAbi, FnAbi, PassMode};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=FUNCTION | NAME=codegen_naked_asm | COMPLEXITY=7 | LINES=47
 
 ```rust
-use rustc_target::spec::BinaryFormat;
+use crate::rustc_target::spec::BinaryFormat;
 
 use crate::common;
 use crate::mir::AsmCodegenMethods;
@@ -83,7 +83,7 @@ pub fn codegen_naked_asm<
     assert!(!instance.args.has_infer());
     let mir = cx.tcx().instance_mir(instance.def);
 
-    let rustc_middle::mir::TerminatorKind::InlineAsm {
+    let crate::rustc_middle::mir::TerminatorKind::InlineAsm {
         asm_macro: _,
         template,
         ref operands,
@@ -104,9 +104,9 @@ pub fn codegen_naked_asm<
     let (begin, end) = prefix_and_suffix(cx.tcx(), instance, &name, item_data, fn_abi);
 
     let mut template_vec = Vec::new();
-    template_vec.push(rustc_ast::ast::InlineAsmTemplatePiece::String(begin.into()));
+    template_vec.push(crate::rustc_ast::ast::InlineAsmTemplatePiece::String(begin.into()));
     template_vec.extend(template.iter().cloned());
-    template_vec.push(rustc_ast::ast::InlineAsmTemplatePiece::String(end.into()));
+    template_vec.push(crate::rustc_ast::ast::InlineAsmTemplatePiece::String(end.into()));
 
     cx.codegen_global_asm(&template_vec, &operands, options, line_spans);
 }

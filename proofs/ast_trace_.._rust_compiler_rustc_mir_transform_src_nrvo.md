@@ -6,26 +6,26 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-//! See the docs for [`RenameReturnPlace`].
+// See the docs for [`RenameReturnPlace`].
 
-use rustc_hir::Mutability;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::bug;
-use rustc_middle::mir::visit::{MutVisitor, NonUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::Mutability;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::visit::{MutVisitor, NonUseContext, PlaceContext, Visitor};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{self, BasicBlock, Local, Location};
+use crate::rustc_complete::mir::{self, BasicBlock, Local, Location};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::{debug, trace};
 ```
 
@@ -64,7 +64,7 @@ use tracing::{debug, trace};
 pub(super) struct RenameReturnPlace;
 
 impl<'tcx> crate::MirPass<'tcx> for RenameReturnPlace {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         // unsound: #111005
         sess.mir_opt_level() > 0 && sess.opts.unstable_opts.unsound_mir_opts
     }

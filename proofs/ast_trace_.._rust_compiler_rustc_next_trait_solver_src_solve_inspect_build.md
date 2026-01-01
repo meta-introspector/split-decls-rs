@@ -6,11 +6,11 @@ Generated 14 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11
 
 ```rust
-//! Building proof trees incrementally during trait solving.
-//!
-//! This code is *a bit* of a mess and can hopefully be
-//! mostly ignored. For a general overview of how it works,
-//! see the comment on [ProofTreeBuilder].
+// Building proof trees incrementally during trait solving.
+//
+// This code is *a bit* of a mess and can hopefully be
+// mostly ignored. For a general overview of how it works,
+// see the comment on [ProofTreeBuilder].
 
 use std::marker::PhantomData;
 

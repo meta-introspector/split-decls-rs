@@ -6,11 +6,11 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_index::IndexSlice;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::mir::visit::*;
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_index::IndexSlice;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::mir::visit::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::{debug, instrument};
 ```
 
@@ -33,7 +33,7 @@ use crate::ssa::SsaLocals;
 pub(super) struct CopyProp;
 
 impl<'tcx> crate::MirPass<'tcx> for CopyProp {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() >= 1
     }
 

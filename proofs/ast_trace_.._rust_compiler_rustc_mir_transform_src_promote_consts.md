@@ -6,17 +6,17 @@ Generated 23 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=15
 
 ```rust
-//! A pass that promotes borrows of constant rvalues.
-//!
-//! The rvalues considered constant are trees of temps, each with exactly one
-//! initialization, and holding a constant value with no interior mutability.
-//! They are placed into a new MIR constant body in `promoted` and the borrow
-//! rvalue is replaced with a `Literal::Promoted` using the index into
-//! `promoted` of that constant MIR.
-//!
-//! This pass assumes that every use is dominated by an initialization and can
-//! otherwise silence errors, if move analysis runs after promotion on broken
-//! MIR.
+// A pass that promotes borrows of constant rvalues.
+//
+// The rvalues considered constant are trees of temps, each with exactly one
+// initialization, and holding a constant value with no interior mutability.
+// They are placed into a new MIR constant body in `promoted` and the borrow
+// rvalue is replaced with a `Literal::Promoted` using the index into
+// `promoted` of that constant MIR.
+//
+// This pass assumes that every use is dominated by an initialization and can
+// otherwise silence errors, if move analysis runs after promotion on broken
+// MIR.
 
 use std::assert_matches::assert_matches;
 use std::cell::Cell;
@@ -41,39 +41,39 @@ use rustc_const_eval::check_consts::{ConstCx, qualifs};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
+use crate::rustc_data_structures::fx::FxHashSet;
 use rustc_hir as hir;
-use rustc_index::{IndexSlice, IndexVec};
+use crate::rustc_index::{IndexSlice, IndexVec};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::visit::{MutVisitor, MutatingUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::mir::visit::{MutVisitor, MutatingUseContext, PlaceContext, Visitor};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::{self, GenericArgs, List, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, GenericArgs, List, Ty, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, mir, span_bug};
+use crate::rustc_complete::{bug, mir, span_bug};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::Span;
-use rustc_span::source_map::Spanned;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::source_map::Spanned;
 use tracing::{debug, instrument};
 ```
 

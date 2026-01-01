@@ -6,13 +6,13 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=mock_body | COMPLEXITY=12 | LINES=61
 
 ```rust
-//! A test for the logic that updates the state in a `ResultsCursor` during seek.
+// A test for the logic that updates the state in a `ResultsCursor` during seek.
 
 use std::marker::PhantomData;
 
-use rustc_index::IndexVec;
-use rustc_middle::ty;
-use rustc_span::DUMMY_SP;
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::ty;
+use crate::rustc_complete::DUMMY_SP;
 
 use super::*;
 

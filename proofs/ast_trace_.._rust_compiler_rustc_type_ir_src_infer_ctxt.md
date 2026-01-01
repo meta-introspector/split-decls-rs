@@ -32,7 +32,7 @@ use crate::{self as ty, Interner};
 ///
 /// In most cases you can get the correct typing mode automatically via:
 /// - `mir::Body::typing_mode`
-/// - `rustc_lint::LateContext::typing_mode`
+/// - `crate::rustc_lint::LateContext::typing_mode`
 ///
 /// If neither of these functions are available, feel free to reach out to
 /// t-types for help.
@@ -69,7 +69,7 @@ pub enum TypingMode<I: Interner> {
     /// fail to compile:
     ///
     /// ```compile_fail,E0308
-    /// #![feature(specialization)]
+    /// #[feature(specialization)]
     /// trait Assoc {
     ///     type Output;
     /// }

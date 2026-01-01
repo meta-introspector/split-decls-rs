@@ -6,18 +6,18 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_ast::mut_visit::*;
-use rustc_ast::token::Delimiter;
-use rustc_ast::visit::AssocCtxt;
-use rustc_ast::{self as ast, Safety};
+use crate::rustc_complete::mut_visit::*;
+use crate::rustc_complete::token::Delimiter;
+use crate::rustc_complete::visit::AssocCtxt;
+use crate::rustc_complete::{self as ast, Safety};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_span::{DUMMY_SP, Ident};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::{DUMMY_SP, Ident};
 ```
 
 ## Block 3

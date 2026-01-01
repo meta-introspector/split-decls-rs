@@ -6,14 +6,14 @@ Generated 16 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11
 
 ```rust
-//! The current rustc diagnostics emitter.
-//!
-//! An `Emitter` takes care of generating the output from a `Diag` struct.
-//!
-//! There are various `Emitter` implementations that generate different output formats such as
-//! JSON and human readable output.
-//!
-//! The output types are defined in `rustc_session::config::ErrorOutputType`.
+// The current rustc diagnostics emitter.
+//
+// An `Emitter` takes care of generating the output from a `Diag` struct.
+//
+// There are various `Emitter` implementations that generate different output formats such as
+// JSON and human readable output.
+//
+// The output types are defined in `crate::rustc_session::config::ErrorOutputType`.
 
 use std::borrow::Cow;
 use std::cmp::{Reverse, max, min};
@@ -37,21 +37,21 @@ use std::path::Path;
 use std::sync::Arc;
 
 use derive_setters::Setters;
-use rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
+use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::sync::{DynSend, IntoDynSyncSend};
+use crate::rustc_data_structures::sync::{DynSend, IntoDynSyncSend};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_error_messages::{FluentArgs, SpanLabel};
+use crate::rustc_error_messages::{FluentArgs, SpanLabel};
 ```
 
 ## Block 6
@@ -59,16 +59,16 @@ use rustc_error_messages::{FluentArgs, SpanLabel};
 
 ```rust
 use rustc_lexer;
-use rustc_lint_defs::pluralize;
-use rustc_span::hygiene::{ExpnKind, MacroKind};
+use crate::rustc_lint_defs::pluralize;
+use crate::rustc_complete::hygiene::{ExpnKind, MacroKind};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::source_map::SourceMap;
-use rustc_span::{FileLines, FileName, SourceFile, Span, char_width, str_width};
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{FileLines, FileName, SourceFile, Span, char_width, str_width};
 ```
 
 ## Block 8
@@ -287,7 +287,7 @@ pub trait Emitter {
     /// Currently only supported for the JSON format.
     fn emit_unused_externs(
         &mut self,
-        _lint_level: rustc_lint_defs::Level,
+        _lint_level: crate::rustc_lint_defs::Level,
         _unused_externs: &[&str],
     ) {
     }
@@ -3350,7 +3350,7 @@ impl FileWithAnnotatedLines {
                 let filter = |s: &str| {
                     let s = s.trim();
                     // Consider comments as empty, but don't consider docstrings to be empty.
-                    !(s.starts_with("//") && !(s.starts_with("///") || s.starts_with("//!")))
+                    !(s.starts_with("//") && !(s.starts_with("///") || s.starts_with("//")))
                         // Consider lines with nothing but whitespace, a single delimiter as empty.
                         && !["", "{", "}", "(", ")", "[", "]"].contains(&s)
                 };
@@ -3406,7 +3406,7 @@ fn num_decimal_digits(num: usize) -> usize {
 }
 
 // We replace some characters so the CLI output is always consistent and underlines aligned.
-// Keep the following list in sync with `rustc_span::char_width`.
+// Keep the following list in sync with `crate::rustc_span::char_width`.
 const OUTPUT_REPLACEMENTS: &[(char, &str)] = &[
     // In terminals without Unicode support the following will be garbled, but in *all* terminals
     // the underlying codepoint will be as well. We could gate this replacement behind a "unicode

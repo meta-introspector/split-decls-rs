@@ -8,9 +8,9 @@ Generated 12 AST blocks from source file
 ```rust
 use std::num::NonZero;
 
-use rustc_abi::Align;
-use rustc_ast::token::CommentKind;
-use rustc_ast::{AttrStyle, IntTy, UintTy};
+use crate::rustc_abi::Align;
+use crate::rustc_complete::token::CommentKind;
+use crate::rustc_complete::{AttrStyle, IntTy, UintTy};
 ```
 
 ## Block 2
@@ -18,15 +18,15 @@ use rustc_ast::{AttrStyle, IntTy, UintTy};
 
 ```rust
 use rustc_ast_pretty::pp::Printer;
-use rustc_span::hygiene::Transparency;
-use rustc_span::{ErrorGuaranteed, Ident, Span, Symbol};
+use crate::rustc_complete::hygiene::Transparency;
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, Symbol};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=should_render | COMPLEXITY=5 | LINES=19
 
 ```rust
-use rustc_target::spec::SanitizerSet;
+use crate::rustc_target::spec::SanitizerSet;
 use thin_vec::ThinVec;
 
 use crate::limit::Limit;

@@ -6,9 +6,9 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-//! Functions for saving and removing intermediate [work products].
-//!
-//! [work products]: WorkProduct
+// Functions for saving and removing intermediate [work products].
+//
+// [work products]: WorkProduct
 
 use std::fs as std_fs;
 use std::path::{Path, PathBuf};
@@ -18,16 +18,16 @@ use std::path::{Path, PathBuf};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::unord::UnordMap;
+use crate::rustc_data_structures::unord::UnordMap;
 use rustc_fs_util::link_or_copy;
-use rustc_middle::dep_graph::{WorkProduct, WorkProductId};
+use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=copy_cgu_workproduct_to_incr_comp_cache_dir | COMPLEXITY=20 | LINES=44
 
 ```rust
-use rustc_session::Session;
+use crate::rustc_complete::Session;
 use tracing::debug;
 
 use crate::errors;

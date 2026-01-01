@@ -3,14 +3,14 @@
 Generated 1 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=double_init_fail | COMPLEXITY=2 | LINES=15
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=double_init_fail | COMPLEXITY=3 | LINES=15
 
 ```rust
-#![allow(unused_crate_dependencies)]
+#[allow(unused_crate_dependencies)]
 
 use std::error::Error;
 
-use rustc_thread_pool::ThreadPoolBuilder;
+use crate::rustc_thread_pool::ThreadPoolBuilder;
 
 #[test]
 #[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]

@@ -6,25 +6,25 @@ Generated 19 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=28
 
 ```rust
-//! The Rust compiler.
-//!
-//! # Note
-//!
-//! This API is completely unstable and subject to change.
+// The Rust compiler.
+//
+// # Note
+//
+// This API is completely unstable and subject to change.
 
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
-#![doc(rust_logo)]
-#![feature(assert_matches)]
-#![feature(extern_types)]
-#![feature(file_buffered)]
-#![feature(if_let_guard)]
-#![feature(impl_trait_in_assoc_type)]
-#![feature(iter_intersperse)]
-#![feature(rustdoc_internals)]
-#![feature(slice_as_array)]
-#![feature(try_blocks)]
+#[allow(internal_features)]
+#[doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
+#[doc(rust_logo)]
+#[feature(assert_matches)]
+#[feature(extern_types)]
+#[feature(file_buffered)]
+#[feature(if_let_guard)]
+#[feature(impl_trait_in_assoc_type)]
+#[feature(iter_intersperse)]
+#[feature(rustdoc_internals)]
+#[feature(slice_as_array)]
+#[feature(try_blocks)]
 // tidy-alphabetical-end
 
 use std::any::Any;
@@ -43,15 +43,15 @@ use back::write::{create_informational_target_machine, create_target_machine};
 use context::SimpleCx;
 use errors::ParseTargetMachineConfig;
 use llvm_util::target_config;
-use rustc_ast::expand::allocator::AllocatorKind;
-use rustc_codegen_ssa::back::lto::{SerializedModule, ThinModule};
+use crate::rustc_complete::expand::allocator::AllocatorKind;
+use crate::rustc_codegen_ssa::back::lto::{SerializedModule, ThinModule};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_codegen_ssa::back::write::{
+use crate::rustc_codegen_ssa::back::write::{
     CodegenContext, FatLtoInput, ModuleConfig, TargetMachineFactoryConfig, TargetMachineFactoryFn,
 };
 ```
@@ -60,35 +60,35 @@ use rustc_codegen_ssa::back::write::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_codegen_ssa::traits::*;
-use rustc_codegen_ssa::{CodegenResults, CompiledModule, ModuleCodegen, TargetConfig};
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_codegen_ssa::{CodegenResults, CompiledModule, ModuleCodegen, TargetConfig};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_errors::DiagCtxtHandle;
-use rustc_metadata::EncodedMetadata;
-use rustc_middle::dep_graph::{WorkProduct, WorkProductId};
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_complete::DiagCtxtHandle;
+use crate::rustc_metadata::EncodedMetadata;
+use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_middle::util::Providers;
-use rustc_session::Session;
-use rustc_session::config::{OptLevel, OutputFilenames, PrintKind, PrintRequest};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::util::Providers;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{OptLevel, OutputFilenames, PrintKind, PrintRequest};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=27
 
 ```rust
-use rustc_span::Symbol;
+use crate::rustc_complete::Symbol;
 
 mod abi;
 mod allocator;
@@ -397,7 +397,7 @@ impl CodegenBackend for LlvmCodegenBackend {
     }
 
     fn codegen_crate<'tcx>(&self, tcx: TyCtxt<'tcx>) -> Box<dyn Any> {
-        Box::new(rustc_codegen_ssa::base::codegen_crate(
+        Box::new(crate::rustc_codegen_ssa::base::codegen_crate(
             LlvmCodegenBackend(()),
             tcx,
             crate::llvm_util::target_cpu(tcx.sess).to_string(),
@@ -411,7 +411,7 @@ impl CodegenBackend for LlvmCodegenBackend {
         outputs: &OutputFilenames,
     ) -> (CodegenResults, FxIndexMap<WorkProductId, WorkProduct>) {
         let (codegen_results, work_products) = ongoing_codegen
-            .downcast::<rustc_codegen_ssa::back::write::OngoingCodegen<LlvmCodegenBackend>>()
+            .downcast::<crate::rustc_codegen_ssa::back::write::OngoingCodegen<LlvmCodegenBackend>>()
             .expect("Expected LlvmCodegenBackend's OngoingCodegen, found Box<Any>")
             .join(sess);
 
@@ -432,7 +432,7 @@ impl CodegenBackend for LlvmCodegenBackend {
         metadata: EncodedMetadata,
         outputs: &OutputFilenames,
     ) {
-        use rustc_codegen_ssa::back::link::link_binary;
+        use crate::rustc_codegen_ssa::back::link::link_binary;
 
         use crate::back::archive::LlvmArchiveBuilderBuilder;
 

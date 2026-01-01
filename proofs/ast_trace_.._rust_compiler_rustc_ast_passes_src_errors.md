@@ -6,12 +6,12 @@ Generated 89 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-//! Errors emitted by ast_passes.
+// Errors emitted by ast_passes.
 
-use rustc_abi::ExternAbi;
-use rustc_ast::ParamKindOrd;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, Diag, EmissionGuarantee, Subdiagnostic};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_complete::ParamKindOrd;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, Diag, EmissionGuarantee, Subdiagnostic};
 ```
 
 ## Block 2
@@ -25,7 +25,7 @@ use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::{Ident, Span, Symbol};
 ```
 
 ## Block 4

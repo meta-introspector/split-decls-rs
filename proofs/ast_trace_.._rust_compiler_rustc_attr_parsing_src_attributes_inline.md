@@ -10,7 +10,7 @@ Generated 3 AST blocks from source file
 //                      note: need to model better how duplicate attr errors work when not using
 //                      SingleAttributeParser which is what we have two of here.
 
-use rustc_hir::attrs::{AttributeKind, InlineAttr};
+use crate::rustc_complete::attrs::{AttributeKind, InlineAttr};
 ```
 
 ## Block 2

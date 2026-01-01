@@ -6,10 +6,10 @@ Generated 38 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=12
 
 ```rust
-//! Set of traits which are used to emulate the inherent impls that are present in `rustc_middle`.
-//! It is customary to glob-import `rustc_type_ir::inherent::*` to bring all of these traits into
-//! scope when programming in interner-agnostic settings, and to avoid importing any of these
-//! directly elsewhere (i.e. specify the full path for an implementation downstream).
+// Set of traits which are used to emulate the inherent impls that are present in `rustc_middle`.
+// It is customary to glob-import `rustc_type_ir::inherent::*` to bring all of these traits into
+// scope when programming in interner-agnostic settings, and to avoid importing any of these
+// directly elsewhere (i.e. specify the full path for an implementation downstream).
 
 use std::fmt::Debug;
 use std::hash::Hash;

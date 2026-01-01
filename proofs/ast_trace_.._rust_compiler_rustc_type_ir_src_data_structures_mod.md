@@ -15,8 +15,8 @@ pub use ena::unify::{NoError, UnifyKey, UnifyValue};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hash::FxHasher;
-pub use rustc_hash::{FxHashMap as HashMap, FxHashSet as HashSet};
+use crate::rustc_hash::FxHasher;
+pub use crate::rustc_hash::{FxHashMap as HashMap, FxHashSet as HashSet};
 ```
 
 ## Block 3
@@ -30,8 +30,8 @@ mod delayed_map;
 
 #[cfg(feature = "nightly")]
 mod impl_ {
-    pub use rustc_data_structures::sso::{SsoHashMap, SsoHashSet};
-    pub use rustc_data_structures::stack::ensure_sufficient_stack;
+    pub use crate::rustc_data_structures::sso::{SsoHashMap, SsoHashSet};
+    pub use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 }
 ```
 

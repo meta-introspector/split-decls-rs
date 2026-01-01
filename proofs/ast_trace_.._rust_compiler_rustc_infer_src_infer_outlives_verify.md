@@ -8,14 +8,14 @@ Generated 6 AST blocks from source file
 ```rust
 use std::assert_matches::assert_matches;
 
-use rustc_middle::ty::outlives::{Component, compute_alias_components_recursive};
+use crate::rustc_complete::ty::outlives::{Component, compute_alias_components_recursive};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, OutlivesPredicate, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, OutlivesPredicate, Ty, TyCtxt};
 ```
 
 ## Block 3

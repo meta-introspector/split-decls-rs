@@ -3,7 +3,7 @@
 Generated 3 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=inc_ref | COMPLEXITY=2 | LINES=19
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=inc_ref | COMPLEXITY=2 | LINES=18
 
 ```rust
 // Compiler:
@@ -13,12 +13,11 @@ Generated 3 AST blocks from source file
 //     7 8
 //     10
 
-#![feature(no_core)]
-#![no_std]
-#![no_core]
-#![no_main]
+#[feature(no_core)]
+#[no_std]
+#[no_core]
+#[no_main]
 
-extern crate mini_core;
 use mini_core::*;
 
 fn inc_ref(num: &mut isize) -> isize {
@@ -40,7 +39,7 @@ fn inc(num: isize) -> isize {
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=19
 
 ```rust
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(mut argc: isize, _argv: *const *const u8) -> i32 {
     argc = inc(argc);
     unsafe {

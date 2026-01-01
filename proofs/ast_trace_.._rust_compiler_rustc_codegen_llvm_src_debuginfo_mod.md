@@ -6,7 +6,7 @@ Generated 20 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-#![doc = include_str!("doc.md")]
+#[doc = include_str!("doc.md")]
 
 use std::cell::{OnceCell, RefCell};
 ```
@@ -26,50 +26,50 @@ use std::{iter, ptr};
 ```rust
 use libc::c_uint;
 use metadata::create_subroutine_type;
-use rustc_abi::Size;
-use rustc_codegen_ssa::debuginfo::type_names;
-use rustc_codegen_ssa::mir::debuginfo::VariableKind::*;
-use rustc_codegen_ssa::mir::debuginfo::{DebugScope, FunctionDebugContext, VariableKind};
+use crate::rustc_abi::Size;
+use crate::rustc_codegen_ssa::debuginfo::type_names;
+use crate::rustc_codegen_ssa::mir::debuginfo::VariableKind::*;
+use crate::rustc_codegen_ssa::mir::debuginfo::{DebugScope, FunctionDebugContext, VariableKind};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_codegen_ssa::traits::*;
-use rustc_data_structures::unord::UnordMap;
-use rustc_hir::def_id::{DefId, DefIdMap};
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_data_structures::unord::UnordMap;
+use crate::rustc_complete::def_id::{DefId, DefIdMap};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_index::IndexVec;
-use rustc_middle::mir;
-use rustc_middle::ty::layout::{HasTypingEnv, LayoutOf};
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::mir;
+use crate::rustc_complete::ty::layout::{HasTypingEnv, LayoutOf};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, GenericArgsRef, Instance, Ty, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, GenericArgsRef, Instance, Ty, TypeVisitableExt};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::Session;
-use rustc_session::config::{self, DebugInfo};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{self, DebugInfo};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::{
+use crate::rustc_complete::{
     BytePos, Pos, SourceFile, SourceFileAndLine, SourceFileHash, Span, StableSourceFileId, Symbol,
 };
 ```
@@ -78,8 +78,8 @@ use rustc_span::{
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_target::callconv::FnAbi;
-use rustc_target::spec::DebuginfoKind;
+use crate::rustc_target::callconv::FnAbi;
+use crate::rustc_target::spec::DebuginfoKind;
 use smallvec::SmallVec;
 use tracing::debug;
 
@@ -351,7 +351,7 @@ impl<'ll> DebugInfoBuilderMethods for Builder<'_, 'll, '_> {
 ```rust
 /// A source code location used to generate debug information.
 // FIXME(eddyb) rename this to better indicate it's a duplicate of
-// `rustc_span::Loc` rather than `DILocation`, perhaps by making
+// `crate::rustc_span::Loc` rather than `DILocation`, perhaps by making
 // `lookup_char_pos` return the right information instead.
 struct DebugLoc {
     /// Information about the original source file.
@@ -720,7 +720,7 @@ impl<'ll, 'tcx> DebugInfoCodegenMethods<'tcx> for CodegenCx<'ll, 'tcx> {
     fn extend_scope_to_file(
         &self,
         scope_metadata: &'ll DIScope,
-        file: &rustc_span::SourceFile,
+        file: &crate::rustc_span::SourceFile,
     ) -> &'ll DILexicalBlock {
         metadata::extend_scope_to_file(self, scope_metadata, file)
     }

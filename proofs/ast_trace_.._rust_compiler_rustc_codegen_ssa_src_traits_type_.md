@@ -6,23 +6,23 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{AddressSpace, Float, Integer, Primitive, Reg, Scalar};
+use crate::rustc_abi::{AddressSpace, Float, Integer, Primitive, Reg, Scalar};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::Ty;
-use rustc_middle::ty::layout::{HasTyCtxt, HasTypingEnv, TyAndLayout};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv, TyAndLayout};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_target::callconv::{ArgAbi, CastTarget, FnAbi};
+use crate::rustc_target::callconv::{ArgAbi, CastTarget, FnAbi};
 ```
 
 ## Block 4

@@ -8,16 +8,16 @@ Generated 11 AST blocks from source file
 ```rust
 use std::mem;
 
-use rustc_index::IndexVec;
-use rustc_middle::mir::*;
-use rustc_middle::ty::{self, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 3

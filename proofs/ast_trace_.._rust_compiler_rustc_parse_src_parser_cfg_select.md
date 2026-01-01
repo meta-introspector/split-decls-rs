@@ -6,24 +6,24 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::token::Token;
-use rustc_ast::tokenstream::{TokenStream, TokenTree};
+use crate::rustc_complete::token::Token;
+use crate::rustc_complete::tokenstream::{TokenStream, TokenTree};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::util::classify;
-use rustc_ast::{MetaItemInner, token};
+use crate::rustc_complete::util::classify;
+use crate::rustc_complete::{MetaItemInner, token};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_errors::PResult;
-use rustc_span::Span;
+use crate::rustc_complete::PResult;
+use crate::rustc_complete::Span;
 
 use crate::exp;
 use crate::parser::{AttrWrapper, ForceCollect, Parser, Restrictions, Trailing, UsePreAttrPos};

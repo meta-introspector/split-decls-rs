@@ -6,17 +6,17 @@ Generated 19 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{Align, BackendRepr, Endian, HasDataLayout, Primitive, Size, TyAndLayout};
+use crate::rustc_abi::{Align, BackendRepr, Endian, HasDataLayout, Primitive, Size, TyAndLayout};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_codegen_ssa::MemFlags;
-use rustc_codegen_ssa::common::IntPredicate;
-use rustc_codegen_ssa::mir::operand::OperandRef;
-use rustc_codegen_ssa::traits::{
+use crate::rustc_codegen_ssa::MemFlags;
+use crate::rustc_codegen_ssa::common::IntPredicate;
+use crate::rustc_codegen_ssa::mir::operand::OperandRef;
+use crate::rustc_codegen_ssa::traits::{
     BaseTypeCodegenMethods, BuilderMethods, ConstCodegenMethods, LayoutTypeCodegenMethods,
 };
 ```
@@ -25,8 +25,8 @@ use rustc_codegen_ssa::traits::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::Ty;
-use rustc_middle::ty::layout::{HasTyCtxt, LayoutOf};
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::{HasTyCtxt, LayoutOf};
 ```
 
 ## Block 4
@@ -348,9 +348,9 @@ fn emit_powerpc_va_arg<'ll, 'tcx>(
 
     let (is_i64, is_int, is_f64) = match layout.layout.backend_repr() {
         BackendRepr::Scalar(scalar) => match scalar.primitive() {
-            rustc_abi::Primitive::Int(integer, _) => (integer.size().bits() == 64, true, false),
-            rustc_abi::Primitive::Float(float) => (false, false, float.size().bits() == 64),
-            rustc_abi::Primitive::Pointer(_) => (false, true, false),
+            crate::rustc_abi::Primitive::Int(integer, _) => (integer.size().bits() == 64, true, false),
+            crate::rustc_abi::Primitive::Float(float) => (false, false, float.size().bits() == 64),
+            crate::rustc_abi::Primitive::Pointer(_) => (false, true, false),
         },
         _ => unreachable!("all instances of VaArgSafe are represented as scalars"),
     };

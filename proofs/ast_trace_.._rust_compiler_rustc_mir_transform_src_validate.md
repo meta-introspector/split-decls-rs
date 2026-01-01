@@ -6,46 +6,46 @@ Generated 17 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! Validates the MIR to ensure that invariants are upheld.
+// Validates the MIR to ensure that invariants are upheld.
 
-use rustc_abi::{ExternAbi, FIRST_VARIANT, Size};
+use crate::rustc_abi::{ExternAbi, FIRST_VARIANT, Size};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxHashMap, FxHashSet};
+use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_hir::LangItem;
-use rustc_hir::attrs::InlineAttr;
-use rustc_index::IndexVec;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_infer::traits::{Obligation, ObligationCause};
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::attrs::InlineAttr;
+use crate::rustc_index::IndexVec;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::traits::{Obligation, ObligationCause};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::coverage::CoverageKind;
-use rustc_middle::mir::visit::{NonUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::mir::coverage::CoverageKind;
+use crate::rustc_complete::mir::visit::{NonUseContext, PlaceContext, Visitor};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::adjustment::PointerCoercion;
-use rustc_middle::ty::print::with_no_trimmed_paths;
-use rustc_middle::ty::{
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::adjustment::PointerCoercion;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{
     self, CoroutineArgsExt, InstanceKind, ScalarInt, Ty, TyCtxt, TypeVisitableExt, Upcast, Variance,
 };
 ```
@@ -54,14 +54,14 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_trait_selection::traits::ObligationCtxt;
+use crate::rustc_trait_selection::traits::ObligationCtxt;
 
 use crate::util::{self, is_within_packed};
 ```

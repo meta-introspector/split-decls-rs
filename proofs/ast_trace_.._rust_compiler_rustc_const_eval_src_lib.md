@@ -7,23 +7,23 @@ Generated 3 AST blocks from source file
 
 ```rust
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![allow(rustc::diagnostic_outside_of_impl)]
-#![cfg_attr(bootstrap, feature(strict_overflow_ops))]
-#![doc(rust_logo)]
-#![feature(array_try_map)]
-#![feature(assert_matches)]
-#![feature(box_patterns)]
-#![feature(decl_macro)]
-#![feature(if_let_guard)]
-#![feature(never_type)]
-#![feature(rustdoc_internals)]
-#![feature(slice_ptr_get)]
-#![feature(trait_alias)]
-#![feature(try_blocks)]
-#![feature(unqualified_local_imports)]
-#![feature(yeet_expr)]
-#![warn(unqualified_local_imports)]
+#[allow(internal_features)]
+#[allow(rustc::diagnostic_outside_of_impl)]
+#[cfg_attr(bootstrap, feature(strict_overflow_ops))]
+#[doc(rust_logo)]
+#[feature(array_try_map)]
+#[feature(assert_matches)]
+#[feature(box_patterns)]
+#[feature(decl_macro)]
+#[feature(if_let_guard)]
+#[feature(never_type)]
+#[feature(rustdoc_internals)]
+#[feature(slice_ptr_get)]
+#[feature(trait_alias)]
+#[feature(try_blocks)]
+#[feature(unqualified_local_imports)]
+#[feature(yeet_expr)]
+#[warn(unqualified_local_imports)]
 // tidy-alphabetical-end
 
 pub mod check_consts;
@@ -34,8 +34,8 @@ pub mod util;
 
 use std::sync::atomic::AtomicBool;
 
-use rustc_middle::ty;
-use rustc_middle::util::Providers;
+use crate::rustc_complete::ty;
+use crate::rustc_complete::util::Providers;
 
 pub use self::errors::ReportErrorExt;
 

@@ -6,10 +6,10 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_infer::infer::at::At;
-use rustc_infer::traits::TraitEngine;
+use crate::rustc_infer::infer::at::At;
+use crate::rustc_infer::traits::TraitEngine;
 use rustc_macros::extension;
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 2

@@ -6,7 +6,7 @@ Generated 34 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-//! The virtual memory representation of the MIR interpreter.
+// The virtual memory representation of the MIR interpreter.
 
 mod init_mask;
 mod provenance_map;
@@ -43,17 +43,17 @@ pub use init_mask::{InitChunk, InitChunkIter};
 
 ```rust
 use provenance_map::*;
-use rustc_abi::{Align, HasDataLayout, Size};
+use crate::rustc_abi::{Align, HasDataLayout, Size};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_ast::Mutability;
-use rustc_data_structures::intern::Interned;
+use crate::rustc_complete::Mutability;
+use crate::rustc_data_structures::intern::Interned;
 use rustc_macros::HashStable;
-use rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
+use crate::rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
 ```
 
 ## Block 7

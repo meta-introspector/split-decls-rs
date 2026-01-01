@@ -6,31 +6,31 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::traits::{BaseTypeCodegenMethods, ConstCodegenMethods};
+use crate::rustc_codegen_ssa::traits::{BaseTypeCodegenMethods, ConstCodegenMethods};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::mir;
-use rustc_middle::mir::mono::MonoItemPartitions;
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::mir;
+use crate::rustc_complete::mir::mono::MonoItemPartitions;
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_span::def_id::DefIdSet;
+use crate::rustc_complete::def_id::DefIdSet;
 
 use crate::common::CodegenCx;
 use crate::coverageinfo::mapgen::covfun::{CovfunRecord, prepare_covfun_record};

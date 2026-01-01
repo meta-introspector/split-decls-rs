@@ -6,30 +6,30 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::tokenstream::TokenStream;
-use rustc_ast::{ExprKind, LitKind, UnOp};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{ExprKind, LitKind, UnOp};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
+use crate::rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacEager, MacroExpanderResult};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=56 | LINES=83
 
 ```rust
-use rustc_session::errors::report_lit_error;
-use rustc_span::Symbol;
+use crate::rustc_complete::errors::report_lit_error;
+use crate::rustc_complete::Symbol;
 
 use crate::errors;
 use crate::util::get_exprs_from_tts;
 
 pub(crate) fn expand_concat(
     cx: &mut ExtCtxt<'_>,
-    sp: rustc_span::Span,
+    sp: crate::rustc_span::Span,
     tts: TokenStream,
 ) -> MacroExpanderResult<'static> {
     let ExpandResult::Ready(mac) = get_exprs_from_tts(cx, tts) else {

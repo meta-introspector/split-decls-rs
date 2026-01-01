@@ -6,23 +6,23 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7
 
 ```rust
-//! Support code for rustdoc and external tools.
-//! You really don't want to be using this unless you need to.
+// Support code for rustdoc and external tools.
+// You really don't want to be using this unless you need to.
 
 use std::collections::VecDeque;
 use std::iter;
 
-use rustc_data_structures::fx::{FxIndexMap, FxIndexSet, IndexEntry};
+use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet, IndexEntry};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::unord::UnordSet;
-use rustc_hir::def_id::CRATE_DEF_ID;
-use rustc_infer::infer::DefineOpaqueTypes;
-use rustc_middle::ty::{Region, RegionVid};
+use crate::rustc_data_structures::unord::UnordSet;
+use crate::rustc_complete::def_id::CRATE_DEF_ID;
+use crate::rustc_infer::infer::DefineOpaqueTypes;
+use crate::rustc_complete::ty::{Region, RegionVid};
 ```
 
 ## Block 3

@@ -6,10 +6,10 @@ Generated 61 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-//! This module contains implementations of the `Lift`, `TypeFoldable` and
-//! `TypeVisitable` traits for various types in the Rust compiler. Most are
-//! written by hand, though we've recently added some macros and proc-macros
-//! to help with the tedium.
+// This module contains implementations of the `Lift`, `TypeFoldable` and
+// `TypeVisitable` traits for various types in the Rust compiler. Most are
+// written by hand, though we've recently added some macros and proc-macros
+// to help with the tedium.
 
 use std::fmt::{self, Debug};
 ```
@@ -20,10 +20,10 @@ use std::fmt::{self, Debug};
 ```rust
 use std::marker::PhantomData;
 
-use rustc_abi::TyAndLayout;
-use rustc_hir::def::Namespace;
-use rustc_hir::def_id::LocalDefId;
-use rustc_span::source_map::Spanned;
+use crate::rustc_abi::TyAndLayout;
+use crate::rustc_complete::def::Namespace;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::source_map::Spanned;
 use rustc_type_ir::{ConstKind, TypeFolder, VisitorResult, try_visit};
 ```
 
@@ -359,10 +359,10 @@ TrivialLiftImpls! {
     crate::mir::interpret::AllocId,
     crate::mir::interpret::Scalar,
     crate::ty::ParamConst,
-    rustc_abi::ExternAbi,
-    rustc_abi::Size,
-    rustc_hir::Safety,
-    rustc_middle::mir::ConstValue,
+    crate::rustc_abi::ExternAbi,
+    crate::rustc_abi::Size,
+    crate::rustc_hir::Safety,
+    crate::rustc_middle::mir::ConstValue,
     rustc_type_ir::BoundConstness,
     rustc_type_ir::PredicatePolarity,
     // tidy-alphabetical-end
@@ -408,19 +408,19 @@ TrivialTypeTraversalImpls! {
     crate::ty::abstract_const::NotConstEvaluatable,
     crate::ty::adjustment::AutoBorrowMutability,
     crate::ty::adjustment::PointerCoercion,
-    rustc_abi::FieldIdx,
-    rustc_abi::VariantIdx,
-    rustc_ast::InlineAsmOptions,
-    rustc_ast::InlineAsmTemplatePiece,
-    rustc_hir::CoroutineKind,
-    rustc_hir::HirId,
-    rustc_hir::MatchSource,
-    rustc_hir::RangeEnd,
-    rustc_hir::def_id::LocalDefId,
-    rustc_span::Ident,
-    rustc_span::Span,
-    rustc_span::Symbol,
-    rustc_target::asm::InlineAsmRegOrRegClass,
+    crate::rustc_abi::FieldIdx,
+    crate::rustc_abi::VariantIdx,
+    crate::rustc_ast::InlineAsmOptions,
+    crate::rustc_ast::InlineAsmTemplatePiece,
+    crate::rustc_hir::CoroutineKind,
+    crate::rustc_hir::HirId,
+    crate::rustc_hir::MatchSource,
+    crate::rustc_hir::RangeEnd,
+    crate::rustc_hir::def_id::LocalDefId,
+    crate::rustc_span::Ident,
+    crate::rustc_span::Span,
+    crate::rustc_span::Symbol,
+    crate::rustc_target::asm::InlineAsmRegOrRegClass,
     // tidy-alphabetical-end
 }
 ```
@@ -438,7 +438,7 @@ TrivialTypeTraversalAndLiftImpls! {
     crate::ty::ParamTy,
     crate::ty::PlaceholderType,
     crate::ty::instance::ReifyReason,
-    rustc_hir::def_id::DefId,
+    crate::rustc_hir::def_id::DefId,
     // tidy-alphabetical-end
 }
 ```
@@ -985,7 +985,7 @@ impl<'tcx> TypeSuperVisitable<TyCtxt<'tcx>> for ty::Const<'tcx> {
 **Metadata**: AST_ID=54 | TYPE=FUNCTION | NAME=visit_with | COMPLEXITY=5 | LINES=6
 
 ```rust
-impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for rustc_span::ErrorGuaranteed {
+impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for crate::rustc_span::ErrorGuaranteed {
     fn visit_with<V: TypeVisitor<TyCtxt<'tcx>>>(&self, visitor: &mut V) -> V::Result {
         visitor.visit_error(*self)
     }
@@ -996,7 +996,7 @@ impl<'tcx> TypeVisitable<TyCtxt<'tcx>> for rustc_span::ErrorGuaranteed {
 **Metadata**: AST_ID=55 | TYPE=FUNCTION | NAME=try_fold_with | COMPLEXITY=6 | LINES=13
 
 ```rust
-impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for rustc_span::ErrorGuaranteed {
+impl<'tcx> TypeFoldable<TyCtxt<'tcx>> for crate::rustc_span::ErrorGuaranteed {
     fn try_fold_with<F: FallibleTypeFolder<TyCtxt<'tcx>>>(
         self,
         _folder: &mut F,

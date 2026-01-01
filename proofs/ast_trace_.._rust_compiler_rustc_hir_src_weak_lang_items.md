@@ -6,9 +6,9 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3
 
 ```rust
-//! Validity checking for weak lang items
+// Validity checking for weak lang items
 
-use rustc_span::{Symbol, sym};
+use crate::rustc_complete::{Symbol, sym};
 ```
 
 ## Block 2

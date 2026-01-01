@@ -22,37 +22,37 @@ use std::{fmt, iter};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
+use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{Applicability, Diag, E0038, E0276, MultiSpan, struct_span_code_err};
+use crate::rustc_complete::{Applicability, Diag, E0038, E0276, MultiSpan, struct_span_code_err};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::intravisit::Visitor;
-use rustc_hir::{self as hir, AmbigArg};
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::{self as hir, AmbigArg};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_infer::traits::solve::Goal;
-use rustc_infer::traits::{
+use crate::rustc_infer::traits::solve::Goal;
+use crate::rustc_infer::traits::{
     DynCompatibilityViolation, Obligation, ObligationCause, ObligationCauseCode,
     PredicateObligation, SelectionError,
 };
@@ -62,21 +62,21 @@ use rustc_infer::traits::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::print::{PrintTraitRefExt as _, with_no_trimmed_paths};
+use crate::rustc_complete::ty::print::{PrintTraitRefExt as _, with_no_trimmed_paths};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ErrorGuaranteed, ExpnKind, Span};
+use crate::rustc_complete::{ErrorGuaranteed, ExpnKind, Span};
 ```
 
 ## Block 10
@@ -163,7 +163,7 @@ impl<'hir> FindExprBySpan<'hir> {
 
 ```rust
 impl<'v> Visitor<'v> for FindExprBySpan<'v> {
-    type NestedFilter = rustc_middle::hir::nested_filter::OnlyBodies;
+    type NestedFilter = crate::rustc_middle::hir::nested_filter::OnlyBodies;
 
     fn maybe_tcx(&mut self) -> Self::MaybeTyCtxt {
         self.tcx

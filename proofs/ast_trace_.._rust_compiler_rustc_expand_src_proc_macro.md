@@ -6,18 +6,18 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_ast::tokenstream::TokenStream;
-use rustc_errors::ErrorGuaranteed;
-use rustc_parse::parser::{ForceCollect, Parser};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_parse::parser::{ForceCollect, Parser};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_session::config::ProcMacroExecutionStrategy;
-use rustc_span::Span;
-use rustc_span::profiling::SpannedEventArgRecorder;
+use crate::rustc_complete::config::ProcMacroExecutionStrategy;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::profiling::SpannedEventArgRecorder;
 use {rustc_ast as ast, rustc_proc_macro as pm};
 ```
 

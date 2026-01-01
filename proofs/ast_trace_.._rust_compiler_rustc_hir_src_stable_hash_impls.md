@@ -6,14 +6,14 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher, ToStableHashKey};
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher, ToStableHashKey};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_span::def_id::DefPathHash;
+use crate::rustc_complete::def_id::DefPathHash;
 
 use crate::HashIgnoredAttrId;
 use crate::hir::{
@@ -31,7 +31,7 @@ use crate::lints::DelayedLints;
 /// Requirements for a `StableHashingContext` to be used in this crate.
 /// This is a hack to allow using the `HashStable_Generic` derive macro
 /// instead of implementing everything in `rustc_middle`.
-pub trait HashStableContext: rustc_ast::HashStableContext + rustc_abi::HashStableContext {
+pub trait HashStableContext: crate::rustc_ast::HashStableContext + crate::rustc_abi::HashStableContext {
     fn hash_attr_id(&mut self, id: &HashIgnoredAttrId, hasher: &mut StableHasher);
 }
 ```

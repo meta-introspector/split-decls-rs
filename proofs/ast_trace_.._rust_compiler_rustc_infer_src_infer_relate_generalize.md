@@ -8,12 +8,12 @@ Generated 15 AST blocks from source file
 ```rust
 use std::mem;
 
-use rustc_data_structures::sso::SsoHashMap;
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_hir::def_id::DefId;
-use rustc_middle::bug;
-use rustc_middle::ty::error::TypeError;
-use rustc_middle::ty::{
+use crate::rustc_data_structures::sso::SsoHashMap;
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::error::TypeError;
+use crate::rustc_complete::ty::{
     self, AliasRelationDirection, InferConst, Term, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable,
     TypeVisitableExt, TypeVisitor, TypingMode,
 };
@@ -23,7 +23,7 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument, warn};
 ```
 
@@ -224,7 +224,7 @@ impl<'tcx> InferCtxt<'tcx> {
     /// A good example of this is the following:
     ///
     /// ```compile_fail,E0308
-    /// #![feature(generic_const_exprs)]
+    /// #[feature(generic_const_exprs)]
     ///
     /// fn bind<const N: usize>(value: [u8; N]) -> [u8; 3 + 4] {
     ///     todo!()

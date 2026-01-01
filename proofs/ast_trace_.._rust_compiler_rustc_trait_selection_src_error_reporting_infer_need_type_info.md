@@ -10,8 +10,8 @@ use std::borrow::Cow;
 use std::iter;
 use std::path::PathBuf;
 
-use rustc_errors::codes::*;
-use rustc_errors::{Diag, IntoDiagArg};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Diag, IntoDiagArg};
 ```
 
 ## Block 2
@@ -19,51 +19,51 @@ use rustc_errors::{Diag, IntoDiagArg};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::def::{CtorOf, DefKind, Namespace, Res};
+use crate::rustc_complete::def::{CtorOf, DefKind, Namespace, Res};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::intravisit::{self, Visitor};
+use crate::rustc_complete::intravisit::{self, Visitor};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{Body, Closure, Expr, ExprKind, FnRetTy, HirId, LetStmt, LocalSource};
+use crate::rustc_complete::{Body, Closure, Expr, ExprKind, FnRetTy, HirId, LetStmt, LocalSource};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::hir::nested_filter;
-use rustc_middle::ty::adjustment::{Adjust, Adjustment, AutoBorrow};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::ty::adjustment::{Adjust, Adjustment, AutoBorrow};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::print::{FmtPrinter, PrettyPrinter, Print, Printer};
+use crate::rustc_complete::ty::print::{FmtPrinter, PrettyPrinter, Print, Printer};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, GenericArg, GenericArgKind, GenericArgsRef, InferConst, IsSuggestable, Term, TermKind,
     Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt, TypeckResults,
 };
@@ -73,7 +73,7 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{BytePos, DUMMY_SP, Ident, Span, sym};
+use crate::rustc_complete::{BytePos, DUMMY_SP, Ident, Span, sym};
 ```
 
 ## Block 10
@@ -244,13 +244,13 @@ impl InferenceDiagnosticsParentData {
 
 ```rust
 impl IntoDiagArg for UnderspecifiedArgKind {
-    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> rustc_errors::DiagArgValue {
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
         let kind = match self {
             Self::Type { .. } => "type",
             Self::Const { is_parameter: true } => "const_with_param",
             Self::Const { is_parameter: false } => "const",
         };
-        rustc_errors::DiagArgValue::Str(kind.into())
+        crate::rustc_errors::DiagArgValue::Str(kind.into())
     }
 }
 ```

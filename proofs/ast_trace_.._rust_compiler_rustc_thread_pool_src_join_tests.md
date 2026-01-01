@@ -6,7 +6,7 @@ Generated 14 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=4
 
 ```rust
-//! Tests for the join code.
+// Tests for the join code.
 
 use rand::distr::StandardUniform;
 use rand::{Rng, SeedableRng};

@@ -8,7 +8,7 @@ Generated 3 AST blocks from source file
 ```rust
 use std::fmt;
 
-use rustc_middle::ty;
+use crate::rustc_complete::ty;
 
 use crate::traits;
 use crate::traits::project::Normalized;

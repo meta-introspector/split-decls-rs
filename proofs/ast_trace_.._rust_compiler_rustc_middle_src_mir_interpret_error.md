@@ -17,15 +17,15 @@ use std::{convert, fmt, mem, ops};
 
 ```rust
 use either::Either;
-use rustc_abi::{Align, Size, VariantIdx, WrappingRange};
+use crate::rustc_abi::{Align, Size, VariantIdx, WrappingRange};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::sync::Lock;
-use rustc_errors::{DiagArgName, DiagArgValue, DiagMessage, ErrorGuaranteed, IntoDiagArg};
+use crate::rustc_data_structures::sync::Lock;
+use crate::rustc_complete::{DiagArgName, DiagArgValue, DiagMessage, ErrorGuaranteed, IntoDiagArg};
 ```
 
 ## Block 4
@@ -39,9 +39,9 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::CtfeBacktrace;
-use rustc_span::def_id::DefId;
-use rustc_span::{DUMMY_SP, Span, Symbol};
+use crate::rustc_complete::CtfeBacktrace;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
 ```
 
 ## Block 6
@@ -244,7 +244,7 @@ pub type EvalToConstValueResult<'tcx> = Result<ConstValue, ErrorHandled>;
 pub type EvalToValTreeResult<'tcx> = Result<ValTree<'tcx>, ValTreeCreationError<'tcx>>;
 
 #[cfg(target_pointer_width = "64")]
-rustc_data_structures::static_assert_size!(InterpErrorInfo<'_>, 8);
+crate::rustc_data_structures::static_assert_size!(InterpErrorInfo<'_>, 8);
 
 /// Packages the kind of error we got from the const code interpreter
 /// up with a Rust-level backtrace of where the error occurred.
@@ -982,7 +982,7 @@ macro_rules! err_ub_custom {
                 msg: || $msg,
                 add_args: Box::new(move |mut set_arg| {
                     $($(
-                        set_arg(stringify!($name).into(), rustc_errors::IntoDiagArg::into_diag_arg($name, &mut None));
+                        set_arg(stringify!($name).into(), crate::rustc_errors::IntoDiagArg::into_diag_arg($name, &mut None));
                     )*)?
                 })
             }

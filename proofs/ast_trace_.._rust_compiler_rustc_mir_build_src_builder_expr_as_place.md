@@ -6,44 +6,44 @@ Generated 20 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-//! See docs in build/expr/mod.rs
+// See docs in build/expr/mod.rs
 
 use std::assert_matches::assert_matches;
 use std::iter;
 
-use rustc_abi::{FIRST_VARIANT, FieldIdx, VariantIdx};
+use crate::rustc_abi::{FIRST_VARIANT, FieldIdx, VariantIdx};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::LocalDefId;
-use rustc_middle::hir::place::{Projection as HirProjection, ProjectionKind as HirProjectionKind};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::hir::place::{Projection as HirProjection, ProjectionKind as HirProjectionKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::mir::AssertKind::BoundsCheck;
-use rustc_middle::mir::*;
-use rustc_middle::thir::*;
-use rustc_middle::ty::{self, AdtDef, CanonicalUserTypeAnnotation, Ty, Variance};
+use crate::rustc_complete::mir::AssertKind::BoundsCheck;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::{self, AdtDef, CanonicalUserTypeAnnotation, Ty, Variance};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument, trace};
 ```
 

@@ -17,104 +17,104 @@ use std::time::{Duration, Instant};
 
 ```rust
 use itertools::Itertools;
-use rustc_abi::FIRST_VARIANT;
+use crate::rustc_abi::FIRST_VARIANT;
 use rustc_ast as ast;
-use rustc_ast::expand::allocator::AllocatorKind;
-use rustc_data_structures::fx::{FxHashMap, FxIndexSet};
+use crate::rustc_complete::expand::allocator::AllocatorKind;
+use crate::rustc_data_structures::fx::{FxHashMap, FxIndexSet};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::profiling::{get_resident_set_size, print_time_passes_entry};
+use crate::rustc_data_structures::profiling::{get_resident_set_size, print_time_passes_entry};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::sync::{IntoDynSyncSend, par_map};
+use crate::rustc_data_structures::sync::{IntoDynSyncSend, par_map};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::unord::UnordMap;
-use rustc_hir::attrs::OptimizeAttr;
-use rustc_hir::def_id::{DefId, LOCAL_CRATE};
+use crate::rustc_data_structures::unord::UnordMap;
+use crate::rustc_complete::attrs::OptimizeAttr;
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::lang_items::LangItem;
-use rustc_hir::{ItemId, Target};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::{ItemId, Target};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrs;
-use rustc_middle::middle::debugger_visualizer::{DebuggerVisualizerFile, DebuggerVisualizerType};
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrs;
+use crate::rustc_complete::middle::debugger_visualizer::{DebuggerVisualizerFile, DebuggerVisualizerType};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::middle::dependency_format::Dependencies;
-use rustc_middle::middle::exported_symbols::{self, SymbolExportKind};
+use crate::rustc_complete::middle::dependency_format::Dependencies;
+use crate::rustc_complete::middle::exported_symbols::{self, SymbolExportKind};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::middle::lang_items;
-use rustc_middle::mir::BinOp;
-use rustc_middle::mir::interpret::ErrorHandled;
-use rustc_middle::mir::mono::{CodegenUnit, CodegenUnitNameBuilder, MonoItem, MonoItemPartitions};
+use crate::rustc_complete::middle::lang_items;
+use crate::rustc_complete::mir::BinOp;
+use crate::rustc_complete::mir::interpret::ErrorHandled;
+use crate::rustc_complete::mir::mono::{CodegenUnit, CodegenUnitNameBuilder, MonoItem, MonoItemPartitions};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::query::Providers;
-use rustc_middle::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutOf, TyAndLayout};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv, LayoutOf, TyAndLayout};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Instance, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt};
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 13
 **Metadata**: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::Session;
-use rustc_session::config::{self, CrateType, EntryFnType};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{self, CrateType, EntryFnType};
 ```
 
 ## Block 14
 **Metadata**: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Symbol, sym};
+use crate::rustc_complete::{DUMMY_SP, Symbol, sym};
 ```
 
 ## Block 15
@@ -122,14 +122,14 @@ use rustc_span::{DUMMY_SP, Symbol, sym};
 
 ```rust
 use rustc_symbol_mangling::mangle_internal_symbol;
-use rustc_trait_selection::infer::{BoundRegionConversionTime, TyCtxtInferExt};
+use crate::rustc_trait_selection::infer::{BoundRegionConversionTime, TyCtxtInferExt};
 ```
 
 ## Block 16
 **Metadata**: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_trait_selection::traits::{ObligationCause, ObligationCtxt};
+use crate::rustc_trait_selection::traits::{ObligationCause, ObligationCtxt};
 ```
 
 ## Block 17
@@ -585,12 +585,12 @@ where
     Cx: LayoutOf<'tcx, LayoutOfResult = TyAndLayout<'tcx>> + AsmCodegenMethods<'tcx>,
 {
     let item = cx.tcx().hir_item(item_id);
-    if let rustc_hir::ItemKind::GlobalAsm { asm, .. } = item.kind {
+    if let crate::rustc_hir::ItemKind::GlobalAsm { asm, .. } = item.kind {
         let operands: Vec<_> = asm
             .operands
             .iter()
             .map(|(op, op_sp)| match *op {
-                rustc_hir::InlineAsmOperand::Const { ref anon_const } => {
+                crate::rustc_hir::InlineAsmOperand::Const { ref anon_const } => {
                     match cx.tcx().const_eval_poly(anon_const.def_id.to_def_id()) {
                         Ok(const_value) => {
                             let ty =
@@ -615,7 +615,7 @@ where
                         }
                     }
                 }
-                rustc_hir::InlineAsmOperand::SymFn { expr } => {
+                crate::rustc_hir::InlineAsmOperand::SymFn { expr } => {
                     let ty = cx.tcx().typeck(item_id.owner_id).expr_ty(expr);
                     let instance = match ty.kind() {
                         &ty::FnDef(def_id, args) => Instance::expect_resolve(
@@ -630,14 +630,14 @@ where
 
                     GlobalAsmOperandRef::SymFn { instance }
                 }
-                rustc_hir::InlineAsmOperand::SymStatic { path: _, def_id } => {
+                crate::rustc_hir::InlineAsmOperand::SymStatic { path: _, def_id } => {
                     GlobalAsmOperandRef::SymStatic { def_id }
                 }
-                rustc_hir::InlineAsmOperand::In { .. }
-                | rustc_hir::InlineAsmOperand::Out { .. }
-                | rustc_hir::InlineAsmOperand::InOut { .. }
-                | rustc_hir::InlineAsmOperand::SplitInOut { .. }
-                | rustc_hir::InlineAsmOperand::Label { .. } => {
+                crate::rustc_hir::InlineAsmOperand::In { .. }
+                | crate::rustc_hir::InlineAsmOperand::Out { .. }
+                | crate::rustc_hir::InlineAsmOperand::InOut { .. }
+                | crate::rustc_hir::InlineAsmOperand::SplitInOut { .. }
+                | crate::rustc_hir::InlineAsmOperand::Label { .. } => {
                     span_bug!(*op_sp, "invalid operand type for global_asm!")
                 }
             })
@@ -843,7 +843,7 @@ pub fn allocator_kind_for_codegen(tcx: TyCtxt<'_>) -> Option<AllocatorKind> {
     // and let needs_allocator_shim_for_linking decide at link time whether or
     // not to use it for any particular linker invocation.
     let all_crate_types_any_dynamic_crate = tcx.dependency_formats(()).iter().all(|(_, list)| {
-        use rustc_middle::middle::dependency_format::Linkage;
+        use crate::rustc_complete::middle::dependency_format::Linkage;
         list.iter().any(|&linkage| linkage == Linkage::Dynamic)
     });
     if all_crate_types_any_dynamic_crate { None } else { tcx.allocator_kind(()) }
@@ -861,7 +861,7 @@ pub(crate) fn needs_allocator_shim_for_linking(
     dependency_formats: &Dependencies,
     crate_type: CrateType,
 ) -> bool {
-    use rustc_middle::middle::dependency_format::Linkage;
+    use crate::rustc_complete::middle::dependency_format::Linkage;
     let any_dynamic_crate =
         dependency_formats[&crate_type].iter().any(|&linkage| linkage == Linkage::Dynamic);
     !any_dynamic_crate
@@ -1115,7 +1115,7 @@ impl CrateInfo {
         let linked_symbols =
             crate_types.iter().map(|&c| (c, crate::back::linker::linked_symbols(tcx, c))).collect();
         let local_crate_name = tcx.crate_name(LOCAL_CRATE);
-        let crate_attrs = tcx.hir_attrs(rustc_hir::CRATE_HIR_ID);
+        let crate_attrs = tcx.hir_attrs(crate::rustc_hir::CRATE_HIR_ID);
         let subsystem =
             ast::attr::first_attr_value_str_by_name(crate_attrs, sym::windows_subsystem);
         let windows_subsystem = subsystem.map(|subsystem| {

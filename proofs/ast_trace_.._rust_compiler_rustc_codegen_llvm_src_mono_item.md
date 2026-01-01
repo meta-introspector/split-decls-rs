@@ -6,34 +6,34 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_codegen_ssa::traits::*;
-use rustc_hir::attrs::Linkage;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, LOCAL_CRATE};
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_complete::attrs::Linkage;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::mir::mono::Visibility;
-use rustc_middle::ty::layout::{FnAbiOf, HasTypingEnv, LayoutOf};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::mono::Visibility;
+use crate::rustc_complete::ty::layout::{FnAbiOf, HasTypingEnv, LayoutOf};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Instance, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, Instance, TypeVisitableExt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_session::config::CrateType;
-use rustc_target::spec::RelocModel;
+use crate::rustc_complete::config::CrateType;
+use crate::rustc_target::spec::RelocModel;
 use tracing::debug;
 
 use crate::context::CodegenCx;

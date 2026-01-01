@@ -16,7 +16,7 @@ use std::fmt::{self, Display};
 ```rust
 use std::sync::OnceLock;
 
-use rustc_error_messages::{DiagArgValue, IntoDiagArg};
+use crate::rustc_error_messages::{DiagArgValue, IntoDiagArg};
 ```
 
 ## Block 3

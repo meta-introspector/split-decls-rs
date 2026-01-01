@@ -6,19 +6,19 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=22 | LINES=41
 
 ```rust
-//! This pass removes jumps to basic blocks containing only a return, and replaces them with a
-//! return instead.
+// This pass removes jumps to basic blocks containing only a return, and replaces them with a
+// return instead.
 
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 
 use crate::simplify;
 
 pub(super) struct MultipleReturnTerminators;
 
 impl<'tcx> crate::MirPass<'tcx> for MultipleReturnTerminators {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() >= 4
     }
 

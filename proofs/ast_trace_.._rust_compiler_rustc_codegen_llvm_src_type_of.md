@@ -8,44 +8,44 @@ Generated 11 AST blocks from source file
 ```rust
 use std::fmt::Write;
 
-use rustc_abi::Primitive::{Float, Int, Pointer};
+use crate::rustc_abi::Primitive::{Float, Int, Pointer};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{Align, BackendRepr, FieldsShape, Scalar, Size, Variants};
+use crate::rustc_abi::{Align, BackendRepr, FieldsShape, Scalar, Size, Variants};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_codegen_ssa::traits::*;
-use rustc_middle::bug;
-use rustc_middle::ty::layout::{LayoutOf, TyAndLayout};
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
+use crate::rustc_complete::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, CoroutineArgsExt, Ty, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, CoroutineArgsExt, Ty, TypeVisitableExt};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 7
@@ -254,7 +254,7 @@ impl<'tcx> LayoutLlvmExt<'tcx> for TyAndLayout<'tcx> {
         }
     }
 
-    /// Gets the LLVM type corresponding to a Rust type, i.e., `rustc_middle::ty::Ty`.
+    /// Gets the LLVM type corresponding to a Rust type, i.e., `crate::rustc_middle::ty::Ty`.
     /// The pointee type of the pointer in `PlaceRef` is always this type.
     /// For sized types, it is also the right LLVM type for an `alloca`
     /// containing a value of that type, and most immediates (except `bool`).

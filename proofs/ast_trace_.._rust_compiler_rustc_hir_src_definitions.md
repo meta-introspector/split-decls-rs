@@ -6,11 +6,11 @@ Generated 21 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-//! For each definition, we track the following data. A definition
-//! here is defined somewhat circularly as "something with a `DefId`",
-//! but it generally corresponds to things like structs, enums, etc.
-//! There are also some rather random cases (like const initializer
-//! expressions) that are mostly just leftovers.
+// For each definition, we track the following data. A definition
+// here is defined somewhat circularly as "something with a `DefId`",
+// but it generally corresponds to things like structs, enums, etc.
+// There are also some rather random cases (like const initializer
+// expressions) that are mostly just leftovers.
 
 use std::fmt::{self, Write};
 ```
@@ -21,10 +21,10 @@ use std::fmt::{self, Write};
 ```rust
 use std::hash::Hash;
 
-use rustc_data_structures::stable_hasher::StableHasher;
-use rustc_data_structures::unord::UnordMap;
+use crate::rustc_data_structures::stable_hasher::StableHasher;
+use crate::rustc_data_structures::unord::UnordMap;
 use rustc_hashes::Hash64;
-use rustc_index::IndexVec;
+use crate::rustc_index::IndexVec;
 use rustc_macros::{Decodable, Encodable};
 ```
 
@@ -32,7 +32,7 @@ use rustc_macros::{Decodable, Encodable};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Symbol, kw, sym};
+use crate::rustc_complete::{Symbol, kw, sym};
 ```
 
 ## Block 4

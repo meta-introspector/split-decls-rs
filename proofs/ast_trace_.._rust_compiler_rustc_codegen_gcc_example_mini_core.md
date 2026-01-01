@@ -6,7 +6,7 @@ Generated 147 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=20
 
 ```rust
-#![feature(
+#[feature(
     no_core,
     lang_items,
     intrinsics,
@@ -19,10 +19,10 @@ Generated 147 AST blocks from source file
     freeze_impls,
     thread_local
 )]
-#![no_core]
-#![allow(dead_code, internal_features, ambiguous_wide_pointer_comparisons)]
+#[no_core]
+#[allow(dead_code, internal_features, ambiguous_wide_pointer_comparisons)]
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 unsafe extern "C" fn _Unwind_Resume() {
     intrinsics::unreachable();
 }
@@ -1545,7 +1545,7 @@ struct PanicLocation {
 **Metadata**: AST_ID=147 | TYPE=FUNCTION | NAME=get_tls | COMPLEXITY=2 | LINES=8
 
 ```rust
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub fn get_tls() -> u8 {
     #[thread_local]
     static A: u8 = 42;

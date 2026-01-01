@@ -6,109 +6,109 @@ Generated 19 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=74
 
 ```rust
-//! Global value numbering.
-//!
-//! MIR may contain repeated and/or redundant computations. The objective of this pass is to detect
-//! such redundancies and re-use the already-computed result when possible.
-//!
-//! From those assignments, we construct a mapping `VnIndex -> Vec<(Local, Location)>` of available
-//! values, the locals in which they are stored, and the assignment location.
-//!
-//! We traverse all assignments `x = rvalue` and operands.
-//!
-//! For each SSA one, we compute a symbolic representation of values that are assigned to SSA
-//! locals. This symbolic representation is defined by the `Value` enum. Each produced instance of
-//! `Value` is interned as a `VnIndex`, which allows us to cheaply compute identical values.
-//!
-//! For each non-SSA
-//! one, we compute the `VnIndex` of the rvalue. If this `VnIndex` is associated to a constant, we
-//! replace the rvalue/operand by that constant. Otherwise, if there is an SSA local `y`
-//! associated to this `VnIndex`, and if its definition location strictly dominates the assignment
-//! to `x`, we replace the assignment by `x = y`.
-//!
-//! By opportunity, this pass simplifies some `Rvalue`s based on the accumulated knowledge.
-//!
-//! # Operational semantic
-//!
-//! Operationally, this pass attempts to prove bitwise equality between locals. Given this MIR:
-//! ```ignore (MIR)
-//! _a = some value // has VnIndex i
-//! // some MIR
-//! _b = some other value // also has VnIndex i
-//! ```
-//!
-//! We consider it to be replaceable by:
-//! ```ignore (MIR)
-//! _a = some value // has VnIndex i
-//! // some MIR
-//! _c = some other value // also has VnIndex i
-//! assume(_a bitwise equal to _c) // follows from having the same VnIndex
-//! _b = _a // follows from the `assume`
-//! ```
-//!
-//! Which is simplifiable to:
-//! ```ignore (MIR)
-//! _a = some value // has VnIndex i
-//! // some MIR
-//! _b = _a
-//! ```
-//!
-//! # Handling of references
-//!
-//! We handle references by assigning a different "provenance" index to each Ref/RawPtr rvalue.
-//! This ensure that we do not spuriously merge borrows that should not be merged. Meanwhile, we
-//! consider all the derefs of an immutable reference to a freeze type to give the same value:
-//! ```ignore (MIR)
-//! _a = *_b // _b is &Freeze
-//! _c = *_b // replaced by _c = _a
-//! ```
-//!
-//! # Determinism of constant propagation
-//!
-//! When registering a new `Value`, we attempt to opportunistically evaluate it as a constant.
-//! The evaluated form is inserted in `evaluated` as an `OpTy` or `None` if evaluation failed.
-//!
-//! The difficulty is non-deterministic evaluation of MIR constants. Some `Const` can have
-//! different runtime values each time they are evaluated. This is the case with
-//! `Const::Slice` which have a new pointer each time they are evaluated, and constants that
-//! contain a fn pointer (`AllocId` pointing to a `GlobalAlloc::Function`) pointing to a different
-//! symbol in each codegen unit.
-//!
-//! Meanwhile, we want to be able to read indirect constants. For instance:
-//! ```
-//! static A: &'static &'static u8 = &&63;
-//! fn foo() -> u8 {
-//!     **A // We want to replace by 63.
-//! }
+// Global value numbering.
+//
+// MIR may contain repeated and/or redundant computations. The objective of this pass is to detect
+// such redundancies and re-use the already-computed result when possible.
+//
+// From those assignments, we construct a mapping `VnIndex -> Vec<(Local, Location)>` of available
+// values, the locals in which they are stored, and the assignment location.
+//
+// We traverse all assignments `x = rvalue` and operands.
+//
+// For each SSA one, we compute a symbolic representation of values that are assigned to SSA
+// locals. This symbolic representation is defined by the `Value` enum. Each produced instance of
+// `Value` is interned as a `VnIndex`, which allows us to cheaply compute identical values.
+//
+// For each non-SSA
+// one, we compute the `VnIndex` of the rvalue. If this `VnIndex` is associated to a constant, we
+// replace the rvalue/operand by that constant. Otherwise, if there is an SSA local `y`
+// associated to this `VnIndex`, and if its definition location strictly dominates the assignment
+// to `x`, we replace the assignment by `x = y`.
+//
+// By opportunity, this pass simplifies some `Rvalue`s based on the accumulated knowledge.
+//
+// # Operational semantic
+//
+// Operationally, this pass attempts to prove bitwise equality between locals. Given this MIR:
+// ```ignore (MIR)
+// _a = some value // has VnIndex i
+// // some MIR
+// _b = some other value // also has VnIndex i
+// ```
+//
+// We consider it to be replaceable by:
+// ```ignore (MIR)
+// _a = some value // has VnIndex i
+// // some MIR
+// _c = some other value // also has VnIndex i
+// assume(_a bitwise equal to _c) // follows from having the same VnIndex
+// _b = _a // follows from the `assume`
+// ```
+//
+// Which is simplifiable to:
+// ```ignore (MIR)
+// _a = some value // has VnIndex i
+// // some MIR
+// _b = _a
+// ```
+//
+// # Handling of references
+//
+// We handle references by assigning a different "provenance" index to each Ref/RawPtr rvalue.
+// This ensure that we do not spuriously merge borrows that should not be merged. Meanwhile, we
+// consider all the derefs of an immutable reference to a freeze type to give the same value:
+// ```ignore (MIR)
+// _a = *_b // _b is &Freeze
+// _c = *_b // replaced by _c = _a
+// ```
+//
+// # Determinism of constant propagation
+//
+// When registering a new `Value`, we attempt to opportunistically evaluate it as a constant.
+// The evaluated form is inserted in `evaluated` as an `OpTy` or `None` if evaluation failed.
+//
+// The difficulty is non-deterministic evaluation of MIR constants. Some `Const` can have
+// different runtime values each time they are evaluated. This is the case with
+// `Const::Slice` which have a new pointer each time they are evaluated, and constants that
+// contain a fn pointer (`AllocId` pointing to a `GlobalAlloc::Function`) pointing to a different
+// symbol in each codegen unit.
+//
+// Meanwhile, we want to be able to read indirect constants. For instance:
+// ```
+// static A: &'static &'static u8 = &&63;
+// fn foo() -> u8 {
+//     **A // We want to replace by 63.
+// }
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! fn bar() -> u8 {
-//!     b"abc"[1] // We want to replace by 'b'.
-//! }
+// fn bar() -> u8 {
+//     b"abc"[1] // We want to replace by 'b'.
+// }
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=14
 
 ```rust
-//! ```
-//!
-//! The `Value::Constant` variant stores a possibly unevaluated constant. Evaluating that constant
-//! may be non-deterministic. When that happens, we assign a disambiguator to ensure that we do not
-//! merge the constants. See `duplicate_slice` test in `gvn.rs`.
-//!
-//! Second, when writing constants in MIR, we do not write `Const::Slice` or `Const`
-//! that contain `AllocId`s.
+// ```
+//
+// The `Value::Constant` variant stores a possibly unevaluated constant. Evaluating that constant
+// may be non-deterministic. When that happens, we assign a disambiguator to ensure that we do not
+// merge the constants. See `duplicate_slice` test in `gvn.rs`.
+//
+// Second, when writing constants in MIR, we do not write `Const::Slice` or `Const`
+// that contain `AllocId`s.
 
 use std::borrow::Cow;
 
 use either::Either;
 use itertools::Itertools as _;
-use rustc_abi::{self as abi, BackendRepr, FIRST_VARIANT, FieldIdx, Primitive, Size, VariantIdx};
+use crate::rustc_abi::{self as abi, BackendRepr, FIRST_VARIANT, FieldIdx, Primitive, Size, VariantIdx};
 ```
 
 ## Block 4
@@ -126,36 +126,36 @@ use rustc_const_eval::interpret::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxIndexSet, MutableValues};
+use crate::rustc_data_structures::fx::{FxIndexSet, MutableValues};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::graph::dominators::Dominators;
-use rustc_hir::def::DefKind;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_index::{IndexVec, newtype_index};
+use crate::rustc_data_structures::graph::dominators::Dominators;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_index::{IndexVec, newtype_index};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::mir::interpret::GlobalAlloc;
-use rustc_middle::mir::visit::*;
-use rustc_middle::mir::*;
-use rustc_middle::ty::layout::HasTypingEnv;
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::interpret::GlobalAlloc;
+use crate::rustc_complete::mir::visit::*;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::layout::HasTypingEnv;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::DUMMY_SP;
+use crate::rustc_complete::DUMMY_SP;
 use smallvec::SmallVec;
 use tracing::{debug, instrument, trace};
 ```
@@ -169,7 +169,7 @@ use crate::ssa::SsaLocals;
 pub(super) struct GVN;
 
 impl<'tcx> crate::MirPass<'tcx> for GVN {
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() >= 2
     }
 
@@ -1377,7 +1377,7 @@ impl<'body, 'tcx> VnState<'body, 'tcx> {
         location: Location,
     ) -> Option<VnIndex> {
         use CastKind::*;
-        use rustc_middle::ty::adjustment::PointerCoercion::*;
+        use crate::rustc_complete::ty::adjustment::PointerCoercion::*;
 
         let mut kind = *initial_kind;
         let mut value = self.simplify_operand(initial_operand, location)?;

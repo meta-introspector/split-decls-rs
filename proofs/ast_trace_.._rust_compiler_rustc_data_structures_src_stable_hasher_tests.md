@@ -30,7 +30,7 @@ fn hash<T: HashStable<()>>(t: &T) -> Hash128 {
 // Check that bit set hash includes the domain size.
 #[test]
 fn test_hash_bit_set() {
-    use rustc_index::bit_set::DenseBitSet;
+    use crate::rustc_index::bit_set::DenseBitSet;
     let a: DenseBitSet<usize> = DenseBitSet::new_empty(1);
     let b: DenseBitSet<usize> = DenseBitSet::new_empty(2);
     assert_ne!(a, b);
@@ -45,7 +45,7 @@ fn test_hash_bit_set() {
 // Check that bit matrix hash includes the matrix dimensions.
 #[test]
 fn test_hash_bit_matrix() {
-    use rustc_index::bit_set::BitMatrix;
+    use crate::rustc_index::bit_set::BitMatrix;
     let a: BitMatrix<usize, usize> = BitMatrix::new(1, 1);
     let b: BitMatrix<usize, usize> = BitMatrix::new(1, 2);
     assert_ne!(a, b);

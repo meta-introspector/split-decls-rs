@@ -6,24 +6,24 @@ Generated 33 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10
 
 ```rust
-#![allow(rustc::bad_opt_access)]
+#[allow(rustc::bad_opt_access)]
 use std::collections::BTreeMap;
 use std::num::NonZero;
 use std::path::PathBuf;
 use std::sync::atomic::AtomicBool;
 
-use rustc_abi::Align;
-use rustc_data_structures::profiling::TimePassesFormat;
-use rustc_errors::emitter::HumanReadableErrorType;
-use rustc_errors::{ColorConfig, registry};
+use crate::rustc_abi::Align;
+use crate::rustc_data_structures::profiling::TimePassesFormat;
+use crate::rustc_complete::emitter::HumanReadableErrorType;
+use crate::rustc_complete::{ColorConfig, registry};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=11
 
 ```rust
-use rustc_hir::attrs::NativeLibKind;
-use rustc_session::config::{
+use crate::rustc_complete::attrs::NativeLibKind;
+use crate::rustc_complete::config::{
     AutoDiff, BranchProtection, CFGuard, Cfg, CollapseMacroDebuginfo, CoverageLevel,
     CoverageOptions, DebugInfo, DumpMonoStatsFormat, ErrorOutputType, ExternEntry, ExternLocation,
     Externs, FmtDebug, FunctionReturn, InliningThreshold, Input, InstrumentCoverage,
@@ -39,44 +39,44 @@ use rustc_session::config::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::lint::Level;
-use rustc_session::search_paths::SearchPath;
-use rustc_session::utils::{CanonicalizedPath, NativeLib};
+use crate::rustc_complete::lint::Level;
+use crate::rustc_complete::search_paths::SearchPath;
+use crate::rustc_complete::utils::{CanonicalizedPath, NativeLib};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::{CompilerIO, EarlyDiagCtxt, Session, build_session, getopts};
+use crate::rustc_complete::{CompilerIO, EarlyDiagCtxt, Session, build_session, getopts};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::edition::{DEFAULT_EDITION, Edition};
+use crate::rustc_complete::edition::{DEFAULT_EDITION, Edition};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::source_map::{RealFileLoader, SourceMapInputs};
+use crate::rustc_complete::source_map::{RealFileLoader, SourceMapInputs};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{FileName, SourceFileHashAlgorithm, sym};
+use crate::rustc_complete::{FileName, SourceFileHashAlgorithm, sym};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_target::spec::{
+use crate::rustc_target::spec::{
     CodeModel, FramePointer, LinkerFlavorCli, MergeFunctions, OnBrokenPipe, PanicStrategy,
     RelocModel, RelroLevel, SanitizerSet, SplitDebuginfo, StackProtector, TlsModel,
 };
@@ -102,7 +102,7 @@ where
 
     let matches = optgroups().parse(args).unwrap();
     let sessopts = build_session_options(&mut early_dcx, &matches);
-    let target = rustc_session::config::build_target_config(
+    let target = crate::rustc_session::config::build_target_config(
         &early_dcx,
         &sessopts.target_triple,
         sessopts.sysroot.path(),
@@ -116,7 +116,7 @@ where
         checksum_hash_kind,
     });
 
-    rustc_span::create_session_globals_then(DEFAULT_EDITION, &[], sm_inputs, || {
+    crate::rustc_span::create_session_globals_then(DEFAULT_EDITION, &[], sm_inputs, || {
         let temps_dir = sessopts.unstable_opts.temps_dir.as_deref().map(PathBuf::from);
         let io = CompilerIO {
             input: Input::Str { name: FileName::Custom(String::new()), input: String::new() },
@@ -958,7 +958,7 @@ fn test_unstable_options_tracking_hash() {
     tracked!(cross_crate_inline_threshold, InliningThreshold::Always);
     tracked!(debug_info_for_profiling, true);
     tracked!(debug_info_type_line_numbers, true);
-    tracked!(default_visibility, Some(rustc_target::spec::SymbolVisibility::Hidden));
+    tracked!(default_visibility, Some(crate::rustc_target::spec::SymbolVisibility::Hidden));
     tracked!(dep_info_omit_d_target, true);
     tracked!(direct_access_external_data, Some(true));
     tracked!(dual_proc_macros, true);

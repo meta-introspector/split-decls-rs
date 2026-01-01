@@ -16,8 +16,8 @@ use std::panic::{Location, panic_any};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_errors::MultiSpan;
-use rustc_span::Span;
+use crate::rustc_complete::MultiSpan;
+use crate::rustc_complete::Span;
 
 use crate::ty::{TyCtxt, tls};
 ```
@@ -79,7 +79,7 @@ fn opt_span_bug_fmt<S: Into<MultiSpan>>(
 /// A query to trigger a delayed bug. Clearly, if one has a `tcx` one can already trigger a
 /// delayed bug, so what is the point of this? It exists to help us test the interaction of delayed
 /// bugs with the query system and incremental.
-pub fn trigger_delayed_bug(tcx: TyCtxt<'_>, key: rustc_hir::def_id::DefId) {
+pub fn trigger_delayed_bug(tcx: TyCtxt<'_>, key: crate::rustc_hir::def_id::DefId) {
     tcx.dcx().span_delayed_bug(
         tcx.def_span(key),
         "delayed bug triggered by #[rustc_delayed_bug_from_inside_query]",

@@ -9,8 +9,8 @@ Generated 11 AST blocks from source file
 use std::borrow::Cow;
 use std::mem;
 
-use rustc_ast::token::Token;
-use rustc_ast::tokenstream::{
+use crate::rustc_complete::token::Token;
+use crate::rustc_complete::tokenstream::{
     AttrsTarget, LazyAttrTokenStream, NodeRange, ParserRange, Spacing, TokenCursor,
 };
 ```
@@ -19,17 +19,17 @@ use rustc_ast::tokenstream::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{self as ast, AttrVec, Attribute, HasAttrs, HasTokens};
+use crate::rustc_complete::{self as ast, AttrVec, Attribute, HasAttrs, HasTokens};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_errors::PResult;
-use rustc_session::parse::ParseSess;
-use rustc_span::{DUMMY_SP, sym};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::PResult;
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::{DUMMY_SP, sym};
 ```
 
 ## Block 4
@@ -188,7 +188,7 @@ impl<'a> Parser<'a> {
     /// mod m {                             //   0.. 3
     ///     #[cfg_attr(cond1, attr1)]       //   3..12
     ///     fn g() {                        //  12..17
-    ///         #![cfg_attr(cond2, attr2)]  //  17..27
+    ///         #[cfg_attr(cond2, attr2)]  //  17..27
     ///         let _x = 3;                 //  27..32
     ///     }                               //  32..33
     /// }                                   //  33..34
@@ -462,7 +462,7 @@ fn needs_tokens(attrs: &[ast::Attribute]) -> bool {
     attrs.iter().any(|attr| match attr.ident() {
         None => !attr.is_doc_comment(),
         Some(ident) => {
-            ident.name == sym::cfg_attr || !rustc_feature::is_builtin_attr_name(ident.name)
+            ident.name == sym::cfg_attr || !crate::rustc_feature::is_builtin_attr_name(ident.name)
         }
     })
 }

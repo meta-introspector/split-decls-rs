@@ -6,15 +6,15 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=20
 
 ```rust
-//! Support for serializing the dep-graph and reloading it.
+// Support for serializing the dep-graph and reloading it.
 
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![deny(missing_docs)]
-#![doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
-#![doc(rust_logo)]
-#![feature(file_buffered)]
-#![feature(rustdoc_internals)]
+#[allow(internal_features)]
+#[deny(missing_docs)]
+#[doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
+#[doc(rust_logo)]
+#[feature(file_buffered)]
+#[feature(rustdoc_internals)]
 // tidy-alphabetical-end
 
 mod assert_dep_graph;
@@ -32,7 +32,7 @@ pub use persist::{
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_middle::util::Providers;
+use crate::rustc_complete::util::Providers;
 
 #[allow(missing_docs)]
 pub fn provide(providers: &mut Providers) {

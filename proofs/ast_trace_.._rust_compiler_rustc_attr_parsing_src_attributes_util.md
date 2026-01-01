@@ -6,11 +6,11 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_ast::LitKind;
-use rustc_ast::attr::AttributeExt;
-use rustc_feature::is_builtin_attr_name;
-use rustc_hir::RustcVersion;
-use rustc_span::{Symbol, sym};
+use crate::rustc_complete::LitKind;
+use crate::rustc_complete::attr::AttributeExt;
+use crate::rustc_feature::is_builtin_attr_name;
+use crate::rustc_complete::RustcVersion;
+use crate::rustc_complete::{Symbol, sym};
 ```
 
 ## Block 2

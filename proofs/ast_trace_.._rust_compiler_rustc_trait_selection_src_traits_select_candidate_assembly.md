@@ -6,48 +6,48 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=13
 
 ```rust
-//! Candidate assembly.
-//!
-//! The selection process begins by examining all in-scope impls,
-//! caller obligations, and so forth and assembling a list of
-//! candidates. See the [rustc dev guide] for more details.
-//!
-//! [rustc dev guide]:https://rustc-dev-guide.rust-lang.org/traits/resolution.html#candidate-assembly
+// Candidate assembly.
+//
+// The selection process begins by examining all in-scope impls,
+// caller obligations, and so forth and assembling a list of
+// candidates. See the [rustc dev guide] for more details.
+//
+// [rustc dev guide]:https://rustc-dev-guide.rust-lang.org/traits/resolution.html#candidate-assembly
 
 use std::ops::ControlFlow;
 
 use hir::LangItem;
 use hir::def_id::DefId;
-use rustc_data_structures::fx::{FxHashSet, FxIndexSet};
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, CoroutineDesugaring, CoroutineKind};
+use crate::rustc_complete::{self as hir, CoroutineDesugaring, CoroutineKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::traits::{Obligation, PolyTraitObligation, SelectionError};
+use crate::rustc_infer::traits::{Obligation, PolyTraitObligation, SelectionError};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::fast_reject::DeepRejectCtxt;
-use rustc_middle::ty::{self, SizedTraitKind, Ty, TypeVisitableExt, TypingMode, elaborate};
+use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
+use crate::rustc_complete::ty::{self, SizedTraitKind, Ty, TypeVisitableExt, TypingMode, elaborate};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 6

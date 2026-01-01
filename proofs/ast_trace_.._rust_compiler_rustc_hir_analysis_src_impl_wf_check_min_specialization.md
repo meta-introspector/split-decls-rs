@@ -6,98 +6,98 @@ Generated 27 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=27 | LINES=33
 
 ```rust
-//! # Minimal Specialization
-//!
-//! This module contains the checks for sound specialization used when the
-//! `min_specialization` feature is enabled. This requires that the impl is
-//! *always applicable*.
-//!
-//! If `impl1` specializes `impl2` then `impl1` is always applicable if we know
-//! that all the bounds of `impl2` are satisfied, and all of the bounds of
-//! `impl1` are satisfied for some choice of lifetimes then we know that
-//! `impl1` applies for any choice of lifetimes.
-//!
-//! ## Basic approach
-//!
-//! To enforce this requirement on specializations we take the following
-//! approach:
-//!
-//! 1. Match up the args for `impl2` so that the implemented trait and
-//!    self-type match those for `impl1`.
-//! 2. Check for any direct use of `'static` in the args of `impl2`.
-//! 3. Check that all of the generic parameters of `impl1` occur at most once
-//!    in the *unconstrained* args for `impl2`. A parameter is constrained if
-//!    its value is completely determined by an associated type projection
-//!    predicate.
-//! 4. Check that all predicates on `impl1` either exist on `impl2` (after
-//!    matching args), or are well-formed predicates for the trait's type
-//!    arguments.
-//!
-//! ## Example
-//!
-//! Suppose we have the following always applicable impl:
-//!
-//! ```ignore (illustrative)
-//! impl<T> SpecExtend<T> for std::vec::IntoIter<T> { /* specialized impl */ }
+// # Minimal Specialization
+//
+// This module contains the checks for sound specialization used when the
+// `min_specialization` feature is enabled. This requires that the impl is
+// *always applicable*.
+//
+// If `impl1` specializes `impl2` then `impl1` is always applicable if we know
+// that all the bounds of `impl2` are satisfied, and all of the bounds of
+// `impl1` are satisfied for some choice of lifetimes then we know that
+// `impl1` applies for any choice of lifetimes.
+//
+// ## Basic approach
+//
+// To enforce this requirement on specializations we take the following
+// approach:
+//
+// 1. Match up the args for `impl2` so that the implemented trait and
+//    self-type match those for `impl1`.
+// 2. Check for any direct use of `'static` in the args of `impl2`.
+// 3. Check that all of the generic parameters of `impl1` occur at most once
+//    in the *unconstrained* args for `impl2`. A parameter is constrained if
+//    its value is completely determined by an associated type projection
+//    predicate.
+// 4. Check that all predicates on `impl1` either exist on `impl2` (after
+//    matching args), or are well-formed predicates for the trait's type
+//    arguments.
+//
+// ## Example
+//
+// Suppose we have the following always applicable impl:
+//
+// ```ignore (illustrative)
+// impl<T> SpecExtend<T> for std::vec::IntoIter<T> { /* specialized impl */ }
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=1
 
 ```rust
-//! impl<T, I: Iterator<Item=T>> SpecExtend<T> for I { /* default impl */ }
+// impl<T, I: Iterator<Item=T>> SpecExtend<T> for I { /* default impl */ }
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=9 | LINES=35
 
 ```rust
-//! ```
-//!
-//! We get that the generic parameters for `impl2` are `[T, std::vec::IntoIter<T>]`.
-//! `T` is constrained to be `<I as Iterator>::Item`, so we check only
-//! `std::vec::IntoIter<T>` for repeated parameters, which it doesn't have. The
-//! predicates of `impl1` are only `T: Sized`, which is also a predicate of
-//! `impl2`. So this specialization is sound.
-//!
-//! ## Extensions
-//!
-//! Unfortunately not all specializations in the standard library are allowed
-//! by this. So there are two extensions to these rules that allow specializing
-//! on some traits: that is, using them as bounds on the specializing impl,
-//! even when they don't occur in the base impl.
-//!
-//! ### rustc_specialization_trait
-//!
-//! If a trait is always applicable, then it's sound to specialize on it. We
-//! check trait is always applicable in the same way as impls, except that step
-//! 4 is now "all predicates on `impl1` are always applicable". We require that
-//! `specialization` or `min_specialization` is enabled to implement these
-//! traits.
-//!
-//! ### rustc_unsafe_specialization_marker
-//!
-//! There are also some specialization on traits with no methods, including the
-//! stable `FusedIterator` trait. We allow marking marker traits with an
-//! unstable attribute that means we ignore them in point 3 of the checks
-//! above. This is unsound, in the sense that the specialized impl may be used
-//! when it doesn't apply, but we allow it in the short term since it can't
-//! cause use after frees with purely safe code in the same way as specializing
-//! on traits with methods can.
+// ```
+//
+// We get that the generic parameters for `impl2` are `[T, std::vec::IntoIter<T>]`.
+// `T` is constrained to be `<I as Iterator>::Item`, so we check only
+// `std::vec::IntoIter<T>` for repeated parameters, which it doesn't have. The
+// predicates of `impl1` are only `T: Sized`, which is also a predicate of
+// `impl2`. So this specialization is sound.
+//
+// ## Extensions
+//
+// Unfortunately not all specializations in the standard library are allowed
+// by this. So there are two extensions to these rules that allow specializing
+// on some traits: that is, using them as bounds on the specializing impl,
+// even when they don't occur in the base impl.
+//
+// ### rustc_specialization_trait
+//
+// If a trait is always applicable, then it's sound to specialize on it. We
+// check trait is always applicable in the same way as impls, except that step
+// 4 is now "all predicates on `impl1` are always applicable". We require that
+// `specialization` or `min_specialization` is enabled to implement these
+// traits.
+//
+// ### rustc_unsafe_specialization_marker
+//
+// There are also some specialization on traits with no methods, including the
+// stable `FusedIterator` trait. We allow marking marker traits with an
+// unstable attribute that means we ignore them in point 3 of the checks
+// above. This is unsound, in the sense that the specialized impl may be used
+// when it doesn't apply, but we allow it in the short term since it can't
+// cause use after frees with purely safe code in the same way as specializing
+// on traits with methods can.
 
-use rustc_data_structures::fx::FxHashSet;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_infer::traits::ObligationCause;
-use rustc_infer::traits::specialization_graph::Node;
-use rustc_middle::ty::trait_def::TraitSpecializationKind;
-use rustc_middle::ty::{
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::traits::ObligationCause;
+use crate::rustc_infer::traits::specialization_graph::Node;
+use crate::rustc_complete::ty::trait_def::TraitSpecializationKind;
+use crate::rustc_complete::ty::{
     self, GenericArg, GenericArgs, GenericArgsRef, TyCtxt, TypeVisitableExt, TypingMode,
 };
 ```
@@ -106,15 +106,15 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ErrorGuaranteed, Span};
+use crate::rustc_complete::{ErrorGuaranteed, Span};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::traits::{self, ObligationCtxt, translate_args_with_cause, wf};
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::traits::{self, ObligationCtxt, translate_args_with_cause, wf};
 ```
 
 ## Block 7

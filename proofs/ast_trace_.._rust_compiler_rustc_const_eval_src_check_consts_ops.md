@@ -6,7 +6,7 @@ Generated 33 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3
 
 ```rust
-//! Concrete error types for all operations which may be invalid in a certain const context.
+// Concrete error types for all operations which may be invalid in a certain const context.
 
 use hir::{ConstContext, LangItem};
 ```
@@ -15,28 +15,28 @@ use hir::{ConstContext, LangItem};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_errors::Diag;
-use rustc_errors::codes::*;
+use crate::rustc_complete::Diag;
+use crate::rustc_complete::codes::*;
 use rustc_hir as hir;
-use rustc_hir::def_id::DefId;
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_infer::traits::{ImplSource, Obligation, ObligationCause};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::traits::{ImplSource, Obligation, ObligationCause};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::mir::CallSource;
-use rustc_middle::span_bug;
-use rustc_middle::ty::print::{PrintTraitRefExt as _, with_no_trimmed_paths};
+use crate::rustc_complete::mir::CallSource;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::print::{PrintTraitRefExt as _, with_no_trimmed_paths};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, Closure, FnDef, FnPtr, GenericArgKind, GenericArgsRef, Param, TraitRef, Ty,
     suggest_constraining_type_param,
 };
@@ -46,15 +46,15 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::parse::add_feature_diagnostics;
-use rustc_span::{BytePos, Pos, Span, Symbol, sym};
+use crate::rustc_complete::parse::add_feature_diagnostics;
+use crate::rustc_complete::{BytePos, Pos, Span, Symbol, sym};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_trait_selection::error_reporting::traits::call_kind::{
+use crate::rustc_trait_selection::error_reporting::traits::call_kind::{
     CallDesugaringKind, CallKind, call_kind,
 };
 ```
@@ -63,7 +63,7 @@ use rustc_trait_selection::error_reporting::traits::call_kind::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_trait_selection::traits::SelectionContext;
+use crate::rustc_trait_selection::traits::SelectionContext;
 use tracing::debug;
 
 use super::ConstCx;
@@ -378,7 +378,7 @@ fn build_error_for_const_call<'tcx>(
                         {
                             let mut num_refs = 0;
                             let mut tmp_ty = self_ty;
-                            while let rustc_middle::ty::Ref(_, inner_ty, _) = tmp_ty.kind() {
+                            while let crate::rustc_middle::ty::Ref(_, inner_ty, _) = tmp_ty.kind() {
                                 num_refs += 1;
                                 tmp_ty = *inner_ty;
                             }

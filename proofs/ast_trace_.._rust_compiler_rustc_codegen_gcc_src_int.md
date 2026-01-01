@@ -6,9 +6,9 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-//! Module to handle integer operations.
-//! This module exists because some integer types are not supported on some gcc platforms, e.g.
-//! 128-bit integers on 32-bit platforms and thus require to be handled manually.
+// Module to handle integer operations.
+// This module exists because some integer types are not supported on some gcc platforms, e.g.
+// 128-bit integers on 32-bit platforms and thus require to be handled manually.
 
 // cSpell:words cmpti divti modti mulodi muloti udivti umodti
 
@@ -21,35 +21,35 @@ use gccjit::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{CanonAbi, Endian, ExternAbi};
+use crate::rustc_abi::{CanonAbi, Endian, ExternAbi};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::common::{IntPredicate, TypeKind};
+use crate::rustc_codegen_ssa::common::{IntPredicate, TypeKind};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::traits::{BackendTypes, BaseTypeCodegenMethods, BuilderMethods, OverflowOp};
+use crate::rustc_codegen_ssa::traits::{BackendTypes, BaseTypeCodegenMethods, BuilderMethods, OverflowOp};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_target::callconv::{ArgAbi, ArgAttributes, FnAbi, PassMode};
+use crate::rustc_target::callconv::{ArgAbi, ArgAttributes, FnAbi, PassMode};
 ```
 
 ## Block 7
@@ -335,9 +335,9 @@ impl<'a, 'gcc, 'tcx> Builder<'a, 'gcc, 'tcx> {
         lhs: <Self as BackendTypes>::Value,
         rhs: <Self as BackendTypes>::Value,
     ) -> (<Self as BackendTypes>::Value, <Self as BackendTypes>::Value) {
-        use rustc_middle::ty::IntTy::*;
-        use rustc_middle::ty::UintTy::*;
-        use rustc_middle::ty::{Int, Uint};
+        use crate::rustc_complete::ty::IntTy::*;
+        use crate::rustc_complete::ty::UintTy::*;
+        use crate::rustc_complete::ty::{Int, Uint};
 
         let new_kind = match *typ.kind() {
             Int(t @ Isize) => Int(t.normalize(self.tcx.sess.target.pointer_width)),
@@ -1151,9 +1151,9 @@ impl<'gcc, 'tcx> CodegenCx<'gcc, 'tcx> {
 
 ```rust
 fn type_kind_to_gcc_type<I: Interner>(kind: TyKind<I>) -> CType {
-    use rustc_middle::ty::IntTy::*;
-    use rustc_middle::ty::UintTy::*;
-    use rustc_middle::ty::{Int, Uint};
+    use crate::rustc_complete::ty::IntTy::*;
+    use crate::rustc_complete::ty::UintTy::*;
+    use crate::rustc_complete::ty::{Int, Uint};
 
     match kind {
         Int(I8) => CType::Int8t,

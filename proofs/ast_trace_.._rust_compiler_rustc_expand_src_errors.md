@@ -8,9 +8,9 @@ Generated 49 AST blocks from source file
 ```rust
 use std::borrow::Cow;
 
-use rustc_ast::ast;
-use rustc_errors::codes::*;
-use rustc_hir::limit::Limit;
+use crate::rustc_complete::ast;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::limit::Limit;
 use rustc_macros::{Diagnostic, Subdiagnostic};
 ```
 
@@ -18,7 +18,7 @@ use rustc_macros::{Diagnostic, Subdiagnostic};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, MacroRulesNormalizedIdent, Span, Symbol};
+use crate::rustc_complete::{Ident, MacroRulesNormalizedIdent, Span, Symbol};
 ```
 
 ## Block 3

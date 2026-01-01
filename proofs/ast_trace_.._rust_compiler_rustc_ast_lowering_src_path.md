@@ -8,37 +8,37 @@ Generated 9 AST blocks from source file
 ```rust
 use std::sync::Arc;
 
-use rustc_ast::{self as ast, *};
+use crate::rustc_complete::{self as ast, *};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def::{DefKind, PartialRes, PerNS, Res};
+use crate::rustc_complete::def::{DefKind, PartialRes, PerNS, Res};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_hir::{self as hir, GenericArg};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, GenericArg};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{span_bug, ty};
+use crate::rustc_complete::{span_bug, ty};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::parse::add_feature_diagnostics;
-use rustc_span::{BytePos, DUMMY_SP, DesugaringKind, Ident, Span, Symbol, sym};
+use crate::rustc_complete::parse::add_feature_diagnostics;
+use crate::rustc_complete::{BytePos, DUMMY_SP, DesugaringKind, Ident, Span, Symbol, sym};
 ```
 
 ## Block 6
@@ -620,7 +620,7 @@ impl<'a, 'hir> LoweringContext<'a, 'hir> {
     /// An associated type binding (i.e., associated type equality constraint).
     pub(crate) fn assoc_ty_binding(
         &mut self,
-        assoc_ty_name: rustc_span::Symbol,
+        assoc_ty_name: crate::rustc_span::Symbol,
         span: Span,
         ty: &'hir hir::Ty<'hir>,
     ) -> hir::AssocItemConstraint<'hir> {

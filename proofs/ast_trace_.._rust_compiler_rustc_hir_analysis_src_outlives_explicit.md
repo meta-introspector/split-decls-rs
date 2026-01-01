@@ -6,9 +6,9 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_hir::def_id::DefId;
-use rustc_middle::ty::{self, OutlivesPredicate, TyCtxt};
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::ty::{self, OutlivesPredicate, TyCtxt};
 ```
 
 ## Block 2

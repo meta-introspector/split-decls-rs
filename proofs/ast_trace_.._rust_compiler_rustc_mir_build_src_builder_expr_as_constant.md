@@ -6,21 +6,21 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-//! See docs in build/expr/mod.rs
+// See docs in build/expr/mod.rs
 
-use rustc_abi::Size;
+use crate::rustc_abi::Size;
 use rustc_ast as ast;
-use rustc_hir::LangItem;
-use rustc_middle::mir::interpret::{CTFE_ALLOC_SALT, LitToConstInput, Scalar};
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::mir::interpret::{CTFE_ALLOC_SALT, LitToConstInput, Scalar};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::thir::*;
-use rustc_middle::ty::{
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::{
     self, CanonicalUserType, CanonicalUserTypeAnnotation, Ty, TyCtxt, TypeVisitableExt as _,
     UserTypeAnnotationIndex,
 };
@@ -30,7 +30,7 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, mir, span_bug};
+use crate::rustc_complete::{bug, mir, span_bug};
 ```
 
 ## Block 4

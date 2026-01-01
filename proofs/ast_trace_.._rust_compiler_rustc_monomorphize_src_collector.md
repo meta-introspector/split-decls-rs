@@ -6,244 +6,244 @@ Generated 50 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=31 | LINES=96
 
 ```rust
-//! Mono Item Collection
-//! ====================
-//!
-//! This module is responsible for discovering all items that will contribute
-//! to code generation of the crate. The important part here is that it not only
-//! needs to find syntax-level items (functions, structs, etc) but also all
-//! their monomorphized instantiations. Every non-generic, non-const function
-//! maps to one LLVM artifact. Every generic function can produce
-//! from zero to N artifacts, depending on the sets of type arguments it
-//! is instantiated with.
-//! This also applies to generic items from other crates: A generic definition
-//! in crate X might produce monomorphizations that are compiled into crate Y.
-//! We also have to collect these here.
-//!
-//! The following kinds of "mono items" are handled here:
-//!
-//! - Functions
-//! - Methods
-//! - Closures
-//! - Statics
-//! - Drop glue
-//!
-//! The following things also result in LLVM artifacts, but are not collected
-//! here, since we instantiate them locally on demand when needed in a given
-//! codegen unit:
-//!
-//! - Constants
-//! - VTables
-//! - Object Shims
-//!
-//! The main entry point is `collect_crate_mono_items`, at the bottom of this file.
-//!
-//! General Algorithm
-//! -----------------
-//! Let's define some terms first:
-//!
-//! - A "mono item" is something that results in a function or global in
-//!   the LLVM IR of a codegen unit. Mono items do not stand on their
-//!   own, they can use other mono items. For example, if function
-//!   `foo()` calls function `bar()` then the mono item for `foo()`
-//!   uses the mono item for function `bar()`. In general, the
-//!   definition for mono item A using a mono item B is that
-//!   the LLVM artifact produced for A uses the LLVM artifact produced
-//!   for B.
-//!
-//! - Mono items and the uses between them form a directed graph,
-//!   where the mono items are the nodes and uses form the edges.
-//!   Let's call this graph the "mono item graph".
-//!
-//! - The mono item graph for a program contains all mono items
-//!   that are needed in order to produce the complete LLVM IR of the program.
-//!
-//! The purpose of the algorithm implemented in this module is to build the
-//! mono item graph for the current crate. It runs in two phases:
-//!
-//! 1. Discover the roots of the graph by traversing the HIR of the crate.
-//! 2. Starting from the roots, find uses by inspecting the MIR
-//!    representation of the item corresponding to a given node, until no more
-//!    new nodes are found.
-//!
-//! ### Discovering roots
-//! The roots of the mono item graph correspond to the public non-generic
-//! syntactic items in the source code. We find them by walking the HIR of the
-//! crate, and whenever we hit upon a public function, method, or static item,
-//! we create a mono item consisting of the items DefId and, since we only
-//! consider non-generic items, an empty type-parameters set. (In eager
-//! collection mode, during incremental compilation, all non-generic functions
-//! are considered as roots, as well as when the `-Clink-dead-code` option is
-//! specified. Functions marked `#[no_mangle]` and functions called by inlinable
-//! functions also always act as roots.)
-//!
-//! ### Finding uses
-//! Given a mono item node, we can discover uses by inspecting its MIR. We walk
-//! the MIR to find other mono items used by each mono item. Since the mono
-//! item we are currently at is always monomorphic, we also know the concrete
-//! type arguments of its used mono items. The specific forms a use can take in
-//! MIR are quite diverse. Here is an overview:
-//!
-//! #### Calling Functions/Methods
-//! The most obvious way for one mono item to use another is a
-//! function or method call (represented by a CALL terminator in MIR). But
-//! calls are not the only thing that might introduce a use between two
-//! function mono items, and as we will see below, they are just a
-//! specialization of the form described next, and consequently will not get any
-//! special treatment in the algorithm.
-//!
-//! #### Taking a reference to a function or method
-//! A function does not need to actually be called in order to be used by
-//! another function. It suffices to just take a reference in order to introduce
-//! an edge. Consider the following example:
-//!
-//! ```
-//! # use core::fmt::Display;
-//! fn print_val<T: Display>(x: T) {
-//!     println!("{}", x);
-//! }
+// Mono Item Collection
+// ====================
+//
+// This module is responsible for discovering all items that will contribute
+// to code generation of the crate. The important part here is that it not only
+// needs to find syntax-level items (functions, structs, etc) but also all
+// their monomorphized instantiations. Every non-generic, non-const function
+// maps to one LLVM artifact. Every generic function can produce
+// from zero to N artifacts, depending on the sets of type arguments it
+// is instantiated with.
+// This also applies to generic items from other crates: A generic definition
+// in crate X might produce monomorphizations that are compiled into crate Y.
+// We also have to collect these here.
+//
+// The following kinds of "mono items" are handled here:
+//
+// - Functions
+// - Methods
+// - Closures
+// - Statics
+// - Drop glue
+//
+// The following things also result in LLVM artifacts, but are not collected
+// here, since we instantiate them locally on demand when needed in a given
+// codegen unit:
+//
+// - Constants
+// - VTables
+// - Object Shims
+//
+// The main entry point is `collect_crate_mono_items`, at the bottom of this file.
+//
+// General Algorithm
+// -----------------
+// Let's define some terms first:
+//
+// - A "mono item" is something that results in a function or global in
+//   the LLVM IR of a codegen unit. Mono items do not stand on their
+//   own, they can use other mono items. For example, if function
+//   `foo()` calls function `bar()` then the mono item for `foo()`
+//   uses the mono item for function `bar()`. In general, the
+//   definition for mono item A using a mono item B is that
+//   the LLVM artifact produced for A uses the LLVM artifact produced
+//   for B.
+//
+// - Mono items and the uses between them form a directed graph,
+//   where the mono items are the nodes and uses form the edges.
+//   Let's call this graph the "mono item graph".
+//
+// - The mono item graph for a program contains all mono items
+//   that are needed in order to produce the complete LLVM IR of the program.
+//
+// The purpose of the algorithm implemented in this module is to build the
+// mono item graph for the current crate. It runs in two phases:
+//
+// 1. Discover the roots of the graph by traversing the HIR of the crate.
+// 2. Starting from the roots, find uses by inspecting the MIR
+//    representation of the item corresponding to a given node, until no more
+//    new nodes are found.
+//
+// ### Discovering roots
+// The roots of the mono item graph correspond to the public non-generic
+// syntactic items in the source code. We find them by walking the HIR of the
+// crate, and whenever we hit upon a public function, method, or static item,
+// we create a mono item consisting of the items DefId and, since we only
+// consider non-generic items, an empty type-parameters set. (In eager
+// collection mode, during incremental compilation, all non-generic functions
+// are considered as roots, as well as when the `-Clink-dead-code` option is
+// specified. Functions marked `#[unsafe(no_mangle)]` and functions called by inlinable
+// functions also always act as roots.)
+//
+// ### Finding uses
+// Given a mono item node, we can discover uses by inspecting its MIR. We walk
+// the MIR to find other mono items used by each mono item. Since the mono
+// item we are currently at is always monomorphic, we also know the concrete
+// type arguments of its used mono items. The specific forms a use can take in
+// MIR are quite diverse. Here is an overview:
+//
+// #### Calling Functions/Methods
+// The most obvious way for one mono item to use another is a
+// function or method call (represented by a CALL terminator in MIR). But
+// calls are not the only thing that might introduce a use between two
+// function mono items, and as we will see below, they are just a
+// specialization of the form described next, and consequently will not get any
+// special treatment in the algorithm.
+//
+// #### Taking a reference to a function or method
+// A function does not need to actually be called in order to be used by
+// another function. It suffices to just take a reference in order to introduce
+// an edge. Consider the following example:
+//
+// ```
+// # use core::fmt::Display;
+// fn print_val<T: Display>(x: T) {
+//     println!("{}", x);
+// }
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-//!
-//! fn call_fn(f: &dyn Fn(i32), x: i32) {
-//!     f(x);
-//! }
+//
+// fn call_fn(f: &dyn Fn(i32), x: i32) {
+//     f(x);
+// }
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//!
-//! fn main() {
-//!     let print_i32 = print_val::<i32>;
-//!     call_fn(&print_i32, 0);
-//! }
+//
+// fn main() {
+//     let print_i32 = print_val::<i32>;
+//     call_fn(&print_i32, 0);
+// }
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=48 | LINES=108
 
 ```rust
-//! ```
-//! The MIR of none of these functions will contain an explicit call to
-//! `print_val::<i32>`. Nonetheless, in order to mono this program, we need
-//! an instance of this function. Thus, whenever we encounter a function or
-//! method in operand position, we treat it as a use of the current
-//! mono item. Calls are just a special case of that.
-//!
-//! #### Drop glue
-//! Drop glue mono items are introduced by MIR drop-statements. The
-//! generated mono item will have additional drop-glue item uses if the
-//! type to be dropped contains nested values that also need to be dropped. It
-//! might also have a function item use for the explicit `Drop::drop`
-//! implementation of its type.
-//!
-//! #### Unsizing Casts
-//! A subtle way of introducing use edges is by casting to a trait object.
-//! Since the resulting wide-pointer contains a reference to a vtable, we need to
-//! instantiate all dyn-compatible methods of the trait, as we need to store
-//! pointers to these functions even if they never get called anywhere. This can
-//! be seen as a special case of taking a function reference.
-//!
-//!
-//! Interaction with Cross-Crate Inlining
-//! -------------------------------------
-//! The binary of a crate will not only contain machine code for the items
-//! defined in the source code of that crate. It will also contain monomorphic
-//! instantiations of any extern generic functions and of functions marked with
-//! `#[inline]`.
-//! The collection algorithm handles this more or less mono. If it is
-//! about to create a mono item for something with an external `DefId`,
-//! it will take a look if the MIR for that item is available, and if so just
-//! proceed normally. If the MIR is not available, it assumes that the item is
-//! just linked to and no node is created; which is exactly what we want, since
-//! no machine code should be generated in the current crate for such an item.
-//!
-//! Eager and Lazy Collection Strategy
-//! ----------------------------------
-//! Mono item collection can be performed with one of two strategies:
-//!
-//! - Lazy strategy means that items will only be instantiated when actually
-//!   used. The goal is to produce the least amount of machine code
-//!   possible.
-//!
-//! - Eager strategy is meant to be used in conjunction with incremental compilation
-//!   where a stable set of mono items is more important than a minimal
-//!   one. Thus, eager strategy will instantiate drop-glue for every drop-able type
-//!   in the crate, even if no drop call for that type exists (yet). It will
-//!   also instantiate default implementations of trait methods, something that
-//!   otherwise is only done on demand.
-//!
-//! Collection-time const evaluation and "mentioned" items
-//! ------------------------------------------------------
-//!
-//! One important role of collection is to evaluate all constants that are used by all the items
-//! which are being collected. Codegen can then rely on only encountering constants that evaluate
-//! successfully, and if a constant fails to evaluate, the collector has much better context to be
-//! able to show where this constant comes up.
-//!
-//! However, the exact set of "used" items (collected as described above), and therefore the exact
-//! set of used constants, can depend on optimizations. Optimizing away dead code may optimize away
-//! a function call that uses a failing constant, so an unoptimized build may fail where an
-//! optimized build succeeds. This is undesirable.
-//!
-//! To avoid this, the collector has the concept of "mentioned" items. Some time during the MIR
-//! pipeline, before any optimization-level-dependent optimizations, we compute a list of all items
-//! that syntactically appear in the code. These are considered "mentioned", and even if they are in
-//! dead code and get optimized away (which makes them no longer "used"), they are still
-//! "mentioned". For every used item, the collector ensures that all mentioned items, recursively,
-//! do not use a failing constant. This is reflected via the [`CollectionMode`], which determines
-//! whether we are visiting a used item or merely a mentioned item.
-//!
-//! The collector and "mentioned items" gathering (which lives in `rustc_mir_transform::mentioned_items`)
-//! need to stay in sync in the following sense:
-//!
-//! - For every item that the collector gather that could eventually lead to build failure (most
-//!   likely due to containing a constant that fails to evaluate), a corresponding mentioned item
-//!   must be added. This should use the exact same strategy as the ecollector to make sure they are
-//!   in sync. However, while the collector works on monomorphized types, mentioned items are
-//!   collected on generic MIR -- so any time the collector checks for a particular type (such as
-//!   `ty::FnDef`), we have to just onconditionally add this as a mentioned item.
-//! - In `visit_mentioned_item`, we then do with that mentioned item exactly what the collector
-//!   would have done during regular MIR visiting. Basically you can think of the collector having
-//!   two stages, a pre-monomorphization stage and a post-monomorphization stage (usually quite
-//!   literally separated by a call to `self.monomorphize`); the pre-monomorphizationn stage is
-//!   duplicated in mentioned items gathering and the post-monomorphization stage is duplicated in
-//!   `visit_mentioned_item`.
-//! - Finally, as a performance optimization, the collector should fill `used_mentioned_item` during
-//!   its MIR traversal with exactly what mentioned item gathering would have added in the same
-//!   situation. This detects mentioned items that have *not* been optimized away and hence don't
-//!   need a dedicated traversal.
-//!
-//! Open Issues
-//! -----------
-//! Some things are not yet fully implemented in the current version of this
-//! module.
-//!
-//! ### Const Fns
-//! Ideally, no mono item should be generated for const fns unless there
-//! is a call to them that cannot be evaluated at compile time. At the moment
-//! this is not implemented however: a mono item will be produced
-//! regardless of whether it is actually needed or not.
+// ```
+// The MIR of none of these functions will contain an explicit call to
+// `print_val::<i32>`. Nonetheless, in order to mono this program, we need
+// an instance of this function. Thus, whenever we encounter a function or
+// method in operand position, we treat it as a use of the current
+// mono item. Calls are just a special case of that.
+//
+// #### Drop glue
+// Drop glue mono items are introduced by MIR drop-statements. The
+// generated mono item will have additional drop-glue item uses if the
+// type to be dropped contains nested values that also need to be dropped. It
+// might also have a function item use for the explicit `Drop::drop`
+// implementation of its type.
+//
+// #### Unsizing Casts
+// A subtle way of introducing use edges is by casting to a trait object.
+// Since the resulting wide-pointer contains a reference to a vtable, we need to
+// instantiate all dyn-compatible methods of the trait, as we need to store
+// pointers to these functions even if they never get called anywhere. This can
+// be seen as a special case of taking a function reference.
+//
+//
+// Interaction with Cross-Crate Inlining
+// -------------------------------------
+// The binary of a crate will not only contain machine code for the items
+// defined in the source code of that crate. It will also contain monomorphic
+// instantiations of any extern generic functions and of functions marked with
+// `#[inline]`.
+// The collection algorithm handles this more or less mono. If it is
+// about to create a mono item for something with an external `DefId`,
+// it will take a look if the MIR for that item is available, and if so just
+// proceed normally. If the MIR is not available, it assumes that the item is
+// just linked to and no node is created; which is exactly what we want, since
+// no machine code should be generated in the current crate for such an item.
+//
+// Eager and Lazy Collection Strategy
+// ----------------------------------
+// Mono item collection can be performed with one of two strategies:
+//
+// - Lazy strategy means that items will only be instantiated when actually
+//   used. The goal is to produce the least amount of machine code
+//   possible.
+//
+// - Eager strategy is meant to be used in conjunction with incremental compilation
+//   where a stable set of mono items is more important than a minimal
+//   one. Thus, eager strategy will instantiate drop-glue for every drop-able type
+//   in the crate, even if no drop call for that type exists (yet). It will
+//   also instantiate default implementations of trait methods, something that
+//   otherwise is only done on demand.
+//
+// Collection-time const evaluation and "mentioned" items
+// ------------------------------------------------------
+//
+// One important role of collection is to evaluate all constants that are used by all the items
+// which are being collected. Codegen can then rely on only encountering constants that evaluate
+// successfully, and if a constant fails to evaluate, the collector has much better context to be
+// able to show where this constant comes up.
+//
+// However, the exact set of "used" items (collected as described above), and therefore the exact
+// set of used constants, can depend on optimizations. Optimizing away dead code may optimize away
+// a function call that uses a failing constant, so an unoptimized build may fail where an
+// optimized build succeeds. This is undesirable.
+//
+// To avoid this, the collector has the concept of "mentioned" items. Some time during the MIR
+// pipeline, before any optimization-level-dependent optimizations, we compute a list of all items
+// that syntactically appear in the code. These are considered "mentioned", and even if they are in
+// dead code and get optimized away (which makes them no longer "used"), they are still
+// "mentioned". For every used item, the collector ensures that all mentioned items, recursively,
+// do not use a failing constant. This is reflected via the [`CollectionMode`], which determines
+// whether we are visiting a used item or merely a mentioned item.
+//
+// The collector and "mentioned items" gathering (which lives in `rustc_mir_transform::mentioned_items`)
+// need to stay in sync in the following sense:
+//
+// - For every item that the collector gather that could eventually lead to build failure (most
+//   likely due to containing a constant that fails to evaluate), a corresponding mentioned item
+//   must be added. This should use the exact same strategy as the ecollector to make sure they are
+//   in sync. However, while the collector works on monomorphized types, mentioned items are
+//   collected on generic MIR -- so any time the collector checks for a particular type (such as
+//   `ty::FnDef`), we have to just onconditionally add this as a mentioned item.
+// - In `visit_mentioned_item`, we then do with that mentioned item exactly what the collector
+//   would have done during regular MIR visiting. Basically you can think of the collector having
+//   two stages, a pre-monomorphization stage and a post-monomorphization stage (usually quite
+//   literally separated by a call to `self.monomorphize`); the pre-monomorphizationn stage is
+//   duplicated in mentioned items gathering and the post-monomorphization stage is duplicated in
+//   `visit_mentioned_item`.
+// - Finally, as a performance optimization, the collector should fill `used_mentioned_item` during
+//   its MIR traversal with exactly what mentioned item gathering would have added in the same
+//   situation. This detects mentioned items that have *not* been optimized away and hence don't
+//   need a dedicated traversal.
+//
+// Open Issues
+// -----------
+// Some things are not yet fully implemented in the current version of this
+// module.
+//
+// ### Const Fns
+// Ideally, no mono item should be generated for const fns unless there
+// is a call to them that cannot be evaluated at compile time. At the moment
+// this is not implemented however: a mono item will be produced
+// regardless of whether it is actually needed or not.
 
 mod autodiff;
 
 use std::cell::OnceCell;
 
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_data_structures::sync::{MTLock, par_for_each_in};
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_data_structures::sync::{MTLock, par_for_each_in};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::unord::{UnordMap, UnordSet};
+use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
 ```
 
 ## Block 6
@@ -251,50 +251,50 @@ use rustc_data_structures::unord::{UnordMap, UnordSet};
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::attrs::InlineAttr;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, DefIdMap, LocalDefId};
+use crate::rustc_complete::attrs::InlineAttr;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, DefIdMap, LocalDefId};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir::lang_items::LangItem;
-use rustc_hir::limit::Limit;
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use rustc_middle::mir::interpret::{AllocId, ErrorHandled, GlobalAlloc, Scalar};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::mir::interpret::{AllocId, ErrorHandled, GlobalAlloc, Scalar};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::mono::{CollectionMode, InstantiationMode, MonoItem};
+use crate::rustc_complete::mir::mono::{CollectionMode, InstantiationMode, MonoItem};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::visit::Visitor as MirVisitor;
-use rustc_middle::mir::{self, Location, MentionedItem, traversal};
+use crate::rustc_complete::mir::visit::Visitor as MirVisitor;
+use crate::rustc_complete::mir::{self, Location, MentionedItem, traversal};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::query::TyCtxtAt;
-use rustc_middle::ty::adjustment::{CustomCoerceUnsized, PointerCoercion};
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::ty::adjustment::{CustomCoerceUnsized, PointerCoercion};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::ty::layout::ValidityRequirement;
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::layout::ValidityRequirement;
+use crate::rustc_complete::ty::{
     self, GenericArgs, GenericParamDefKind, Instance, InstanceKind, Ty, TyCtxt, TypeFoldable,
     TypeVisitableExt, VtblEntry,
 };
@@ -304,29 +304,29 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::util::Providers;
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::util::Providers;
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 13
 **Metadata**: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::config::{DebugInfo, EntryFnType};
+use crate::rustc_complete::config::{DebugInfo, EntryFnType};
 ```
 
 ## Block 14
 **Metadata**: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::source_map::{Spanned, dummy_spanned, respan};
+use crate::rustc_complete::source_map::{Spanned, dummy_spanned, respan};
 ```
 
 ## Block 15
 **Metadata**: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 16
@@ -626,7 +626,7 @@ fn collect_items_rec<'tcx>(
                 recursion_limit,
             ));
 
-            rustc_data_structures::stack::ensure_sufficient_stack(|| {
+            crate::rustc_data_structures::stack::ensure_sufficient_stack(|| {
                 let (used, mentioned) = tcx.items_of_instance((instance, mode));
                 used_items.extend(used.into_iter().copied());
                 mentioned_items.extend(mentioned.into_iter().copied());
@@ -1444,7 +1444,7 @@ fn collect_alloc<'tcx>(tcx: TyCtxt<'tcx>, alloc_id: AllocId, output: &mut MonoIt
             let ptrs = alloc.inner().provenance().ptrs();
             // avoid `ensure_sufficient_stack` in the common case of "no pointers"
             if !ptrs.is_empty() {
-                rustc_data_structures::stack::ensure_sufficient_stack(move || {
+                crate::rustc_data_structures::stack::ensure_sufficient_stack(move || {
                     for &prov in ptrs.values() {
                         collect_alloc(tcx, prov.alloc_id(), output);
                     }

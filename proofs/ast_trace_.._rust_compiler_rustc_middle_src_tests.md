@@ -13,7 +13,7 @@ Generated 1 AST blocks from source file
 //                so be sure to reference a dummy function.
 #[test]
 fn noop() {
-    rustc_data_structures::__noop_fix_for_windows_dllimport_issue();
+    crate::rustc_data_structures::__noop_fix_for_windows_dllimport_issue();
 }
 ```
 

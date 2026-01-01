@@ -8,9 +8,9 @@ Generated 4 AST blocks from source file
 ```rust
 // Namespace Handling.
 
-use rustc_codegen_ssa::debuginfo::type_names;
-use rustc_hir::def_id::DefId;
-use rustc_middle::ty::{self, Instance};
+use crate::rustc_codegen_ssa::debuginfo::type_names;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::ty::{self, Instance};
 ```
 
 ## Block 2

@@ -6,14 +6,14 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::token::{self, Delimiter, Token};
+use crate::rustc_complete::token::{self, Delimiter, Token};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
+use crate::rustc_complete::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
 ```
 
 ## Block 3
@@ -21,7 +21,7 @@ use rustc_ast::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, Toke
 
 ```rust
 use rustc_ast_pretty::pprust::token_to_string;
-use rustc_errors::Diag;
+use crate::rustc_complete::Diag;
 
 use super::diagnostics::{
     report_missing_open_delim, report_suspicious_mismatch_block, same_indentation_level,

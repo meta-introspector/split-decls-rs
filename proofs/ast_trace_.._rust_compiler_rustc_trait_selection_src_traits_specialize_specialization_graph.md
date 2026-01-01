@@ -6,19 +6,19 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::def_id::DefId;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::extension;
-use rustc_middle::bug;
-pub use rustc_middle::traits::specialization_graph::*;
-use rustc_middle::ty::fast_reject::{self, SimplifiedType, TreatParams};
+use crate::rustc_complete::bug;
+pub use crate::rustc_complete::traits::specialization_graph::*;
+use crate::rustc_complete::ty::fast_reject::{self, SimplifiedType, TreatParams};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 3

@@ -10,17 +10,17 @@ Generated 314 AST blocks from source file
 
 use std::borrow::Cow;
 
-use rustc_ast::token::Token;
-use rustc_ast::util::parser::ExprPrecedence;
-use rustc_ast::{Path, Visibility};
+use crate::rustc_complete::token::Token;
+use crate::rustc_complete::util::parser::ExprPrecedence;
+use crate::rustc_complete::{Path, Visibility};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level, Subdiagnostic,
     SuggestionStyle,
 };
@@ -37,15 +37,15 @@ use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::errors::ExprParenthesesNeeded;
-use rustc_span::edition::{Edition, LATEST_STABLE_EDITION};
+use crate::rustc_complete::errors::ExprParenthesesNeeded;
+use crate::rustc_complete::edition::{Edition, LATEST_STABLE_EDITION};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::{Ident, Span, Symbol};
 ```
 
 ## Block 6
@@ -4322,7 +4322,7 @@ pub(crate) enum HelpUseLatestEdition {
 impl HelpUseLatestEdition {
     pub(crate) fn new() -> Self {
         let edition = LATEST_STABLE_EDITION;
-        if rustc_session::utils::was_invoked_from_cargo() {
+        if crate::rustc_session::utils::was_invoked_from_cargo() {
             Self::Cargo { edition }
         } else {
             Self::Standalone { edition }

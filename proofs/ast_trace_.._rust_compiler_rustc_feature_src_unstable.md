@@ -6,7 +6,7 @@ Generated 18 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-//! List of the unstable feature gates.
+// List of the unstable feature gates.
 
 use std::path::PathBuf;
 use std::time::{SystemTime, UNIX_EPOCH};
@@ -16,8 +16,8 @@ use std::time::{SystemTime, UNIX_EPOCH};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 3
@@ -82,9 +82,9 @@ macro_rules! status_to_enum {
 /// constant, e.g. a parameter, or when the feature is a library feature.
 #[derive(Clone, Default, Debug)]
 pub struct Features {
-    /// `#![feature]` attrs for language features, for error reporting.
+    /// `#[feature]` attrs for language features, for error reporting.
     enabled_lang_features: Vec<EnabledLangFeature>,
-    /// `#![feature]` attrs for non-language (library) features.
+    /// `#[feature]` attrs for non-language (library) features.
     enabled_lib_features: Vec<EnabledLibFeature>,
     /// `enabled_lang_features` + `enabled_lib_features`.
     enabled_features: FxHashSet<Symbol>,
@@ -259,7 +259,7 @@ declare_features! (
 
     /// Allows using the `unadjusted` ABI; perma-unstable.
     (internal, abi_unadjusted, "1.16.0", None),
-    /// Allows using `#![needs_allocator]`, an implementation detail of `#[global_allocator]`.
+    /// Allows using `#[needs_allocator]`, an implementation detail of `#[global_allocator]`.
     (internal, allocator_internals, "1.20.0", None),
     /// Allows using `#[allow_internal_unsafe]`. This is an
     /// attribute on `macro_rules!` and can't use the attribute handling
@@ -349,9 +349,9 @@ declare_features! (
     (internal, link_llvm_intrinsics, "1.0.0", Some(29602)),
     /// Allows using the `#[linkage = ".."]` attribute.
     (unstable, linkage, "1.0.0", Some(29603)),
-    /// Allows declaring with `#![needs_panic_runtime]` that a panic runtime is needed.
+    /// Allows declaring with `#[needs_panic_runtime]` that a panic runtime is needed.
     (internal, needs_panic_runtime, "1.10.0", Some(32837)),
-    /// Allows using the `#![panic_runtime]` attribute.
+    /// Allows using the `#[panic_runtime]` attribute.
     (internal, panic_runtime, "1.10.0", Some(32837)),
     /// Allows using `#[rustc_allow_const_fn_unstable]`.
     /// This is an attribute on `const fn` for the same
@@ -539,7 +539,7 @@ declare_features! (
     (unstable, coverage_attribute, "1.74.0", Some(84605)),
     /// Allows non-builtin attributes in inner attribute position.
     (unstable, custom_inner_attributes, "1.30.0", Some(54726)),
-    /// Allows custom test frameworks with `#![test_runner]` and `#[test_case]`.
+    /// Allows custom test frameworks with `#[test_runner]` and `#[test_case]`.
     (unstable, custom_test_frameworks, "1.30.0", Some(50297)),
     /// Allows declarative macros 2.0 (`macro`).
     (unstable, decl_macro, "1.17.0", Some(39412)),
@@ -679,7 +679,7 @@ declare_features! (
     (unstable, never_type_fallback, "1.41.0", Some(65992)),
     /// Switch `..` syntax to use the new (`Copy + IntoIterator`) range types.
     (unstable, new_range, "1.86.0", Some(123741)),
-    /// Allows `#![no_core]`.
+    /// Allows `#[no_core]`.
     (unstable, no_core, "1.3.0", Some(29639)),
     /// Allows using the `non_exhaustive_omitted_patterns` lint.
     (unstable, non_exhaustive_omitted_patterns_lint, "1.57.0", Some(89554)),

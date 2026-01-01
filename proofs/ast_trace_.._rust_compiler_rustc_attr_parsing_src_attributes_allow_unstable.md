@@ -42,7 +42,7 @@ impl<S: Stage> CombineAttributeParser<S> for AllowInternalUnstableParser {
 ```rust
 pub(crate) struct UnstableFeatureBoundParser;
 impl<S: Stage> CombineAttributeParser<S> for UnstableFeatureBoundParser {
-    const PATH: &'static [rustc_span::Symbol] = &[sym::unstable_feature_bound];
+    const PATH: &'static [crate::rustc_span::Symbol] = &[sym::unstable_feature_bound];
     type Item = (Symbol, Span);
     const CONVERT: ConvertFn<Self::Item> = |items, _| AttributeKind::UnstableFeatureBound(items);
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[

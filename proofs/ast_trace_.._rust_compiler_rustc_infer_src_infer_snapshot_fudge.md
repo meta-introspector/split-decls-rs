@@ -8,14 +8,14 @@ Generated 11 AST blocks from source file
 ```rust
 use std::ops::Range;
 
-use rustc_data_structures::{snapshot_vec as sv, unify as ut};
+use crate::rustc_data_structures::{snapshot_vec as sv, unify as ut};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, ConstVid, FloatVid, IntVid, RegionVid, Ty, TyCtxt, TyVid, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeVisitableExt,
 };
@@ -72,7 +72,7 @@ fn const_vars_since_snapshot<'tcx>(
         range
             .map(|index| match table.probe_value(index) {
                 ConstVariableValue::Known { value: _ } => {
-                    ConstVariableOrigin { param_def_id: None, span: rustc_span::DUMMY_SP }
+                    ConstVariableOrigin { param_def_id: None, span: crate::rustc_span::DUMMY_SP }
                 }
                 ConstVariableValue::Unknown { origin, universe: _ } => origin,
             })

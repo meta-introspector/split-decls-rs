@@ -6,235 +6,235 @@ Generated 36 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=17 | LINES=42
 
 ```rust
-//! Some code that abstracts away much of the boilerplate of writing
-//! `derive` instances for traits. Among other things it manages getting
-//! access to the fields of the 4 different sorts of structs and enum
-//! variants, as well as creating the method and impl ast instances.
-//!
-//! Supported features (fairly exhaustive):
-//!
-//! - Methods taking any number of parameters of any type, and returning
-//!   any type, other than vectors, bottom and closures.
-//! - Generating `impl`s for types with type parameters and lifetimes
-//!   (e.g., `Option<T>`), the parameters are automatically given the
-//!   current trait as a bound. (This includes separate type parameters
-//!   and lifetimes for methods.)
-//! - Additional bounds on the type parameters (`TraitDef.additional_bounds`)
-//!
-//! The most important thing for implementors is the `Substructure` and
-//! `SubstructureFields` objects. The latter groups 5 possibilities of the
-//! arguments:
-//!
-//! - `Struct`, when `Self` is a struct (including tuple structs, e.g
-//!   `struct T(i32, char)`).
-//! - `EnumMatching`, when `Self` is an enum and all the arguments are the
-//!   same variant of the enum (e.g., `Some(1)`, `Some(3)` and `Some(4)`)
-//! - `EnumDiscr` when `Self` is an enum, for comparing the enum discriminants.
-//! - `StaticEnum` and `StaticStruct` for static methods, where the type
-//!   being derived upon is either an enum or struct respectively. (Any
-//!   argument with type Self is just grouped among the non-self
-//!   arguments.)
-//!
-//! In the first two cases, the values from the corresponding fields in
-//! all the arguments are grouped together.
-//!
-//! The non-static cases have `Option<ident>` in several places associated
-//! with field `expr`s. This represents the name of the field it is
-//! associated with. It is only not `None` when the associated field has
-//! an identifier in the source code. For example, the `x`s in the
-//! following snippet
-//!
-//! ```rust
-//! struct A {
-//!     x: i32,
-//! }
+// Some code that abstracts away much of the boilerplate of writing
+// `derive` instances for traits. Among other things it manages getting
+// access to the fields of the 4 different sorts of structs and enum
+// variants, as well as creating the method and impl ast instances.
+//
+// Supported features (fairly exhaustive):
+//
+// - Methods taking any number of parameters of any type, and returning
+//   any type, other than vectors, bottom and closures.
+// - Generating `impl`s for types with type parameters and lifetimes
+//   (e.g., `Option<T>`), the parameters are automatically given the
+//   current trait as a bound. (This includes separate type parameters
+//   and lifetimes for methods.)
+// - Additional bounds on the type parameters (`TraitDef.additional_bounds`)
+//
+// The most important thing for implementors is the `Substructure` and
+// `SubstructureFields` objects. The latter groups 5 possibilities of the
+// arguments:
+//
+// - `Struct`, when `Self` is a struct (including tuple structs, e.g
+//   `struct T(i32, char)`).
+// - `EnumMatching`, when `Self` is an enum and all the arguments are the
+//   same variant of the enum (e.g., `Some(1)`, `Some(3)` and `Some(4)`)
+// - `EnumDiscr` when `Self` is an enum, for comparing the enum discriminants.
+// - `StaticEnum` and `StaticStruct` for static methods, where the type
+//   being derived upon is either an enum or struct respectively. (Any
+//   argument with type Self is just grouped among the non-self
+//   arguments.)
+//
+// In the first two cases, the values from the corresponding fields in
+// all the arguments are grouped together.
+//
+// The non-static cases have `Option<ident>` in several places associated
+// with field `expr`s. This represents the name of the field it is
+// associated with. It is only not `None` when the associated field has
+// an identifier in the source code. For example, the `x`s in the
+// following snippet
+//
+// ```rust
+// struct A {
+//     x: i32,
+// }
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=7
 
 ```rust
-//!
-//! struct B(i32);
-//!
-//! enum C {
-//!     C0(i32),
-//!     C1 { x: i32 }
-//! }
+//
+// struct B(i32);
+//
+// enum C {
+//     C0(i32),
+//     C1 { x: i32 }
+// }
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=28
 
 ```rust
-//! ```
-//!
-//! The `i32`s in `B` and `C0` don't have an identifier, so the
-//! `Option<ident>`s would be `None` for them.
-//!
-//! In the static cases, the structure is summarized, either into the just
-//! spans of the fields or a list of spans and the field idents (for tuple
-//! structs and record structs, respectively), or a list of these, for
-//! enums (one for each variant). For empty struct and empty enum
-//! variants, it is represented as a count of 0.
-//!
-//! # "`cs`" functions
-//!
-//! The `cs_...` functions ("combine substructure") are designed to
-//! make life easier by providing some pre-made recipes for common
-//! threads; mostly calling the function being derived on all the
-//! arguments and then combining them back together in some way (or
-//! letting the user chose that). They are not meant to be the only
-//! way to handle the structures that this code creates.
-//!
-//! # Examples
-//!
-//! The following simplified `PartialEq` is used for in-code examples:
-//!
-//! ```rust
-//! trait PartialEq {
-//!     fn eq(&self, other: &Self) -> bool;
-//! }
+// ```
+//
+// The `i32`s in `B` and `C0` don't have an identifier, so the
+// `Option<ident>`s would be `None` for them.
+//
+// In the static cases, the structure is summarized, either into the just
+// spans of the fields or a list of spans and the field idents (for tuple
+// structs and record structs, respectively), or a list of these, for
+// enums (one for each variant). For empty struct and empty enum
+// variants, it is represented as a count of 0.
+//
+// # "`cs`" functions
+//
+// The `cs_...` functions ("combine substructure") are designed to
+// make life easier by providing some pre-made recipes for common
+// threads; mostly calling the function being derived on all the
+// arguments and then combining them back together in some way (or
+// letting the user chose that). They are not meant to be the only
+// way to handle the structures that this code creates.
+//
+// # Examples
+//
+// The following simplified `PartialEq` is used for in-code examples:
+//
+// ```rust
+// trait PartialEq {
+//     fn eq(&self, other: &Self) -> bool;
+// }
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=6
 
 ```rust
-//!
-//! impl PartialEq for i32 {
-//!     fn eq(&self, other: &i32) -> bool {
-//!         *self == *other
-//!     }
-//! }
+//
+// impl PartialEq for i32 {
+//     fn eq(&self, other: &i32) -> bool {
+//         *self == *other
+//     }
+// }
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=16
 
 ```rust
-//! ```
-//!
-//! Some examples of the values of `SubstructureFields` follow, using the
-//! above `PartialEq`, `A`, `B` and `C`.
-//!
-//! ## Structs
-//!
-//! When generating the `expr` for the `A` impl, the `SubstructureFields` is
-//!
-//! ```text
-//! Struct(vec![FieldInfo {
-//!     span: <span of x>,
-//!     name: Some(<ident of x>),
-//!     self_: <expr for &self.x>,
-//!     other: vec![<expr for &other.x>],
-//! }])
+// ```
+//
+// Some examples of the values of `SubstructureFields` follow, using the
+// above `PartialEq`, `A`, `B` and `C`.
+//
+// ## Structs
+//
+// When generating the `expr` for the `A` impl, the `SubstructureFields` is
+//
+// ```text
+// Struct(vec![FieldInfo {
+//     span: <span of x>,
+//     name: Some(<ident of x>),
+//     self_: <expr for &self.x>,
+//     other: vec![<expr for &other.x>],
+// }])
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=11
 
 ```rust
-//! ```
-//!
-//! For the `B` impl, called with `B(a)` and `B(b)`,
-//!
-//! ```text
-//! Struct(vec![FieldInfo {
-//!     span: <span of i32>,
-//!     name: None,
-//!     self_: <expr for &a>,
-//!     other: vec![<expr for &b>],
-//! }])
+// ```
+//
+// For the `B` impl, called with `B(a)` and `B(b)`,
+//
+// ```text
+// Struct(vec![FieldInfo {
+//     span: <span of i32>,
+//     name: None,
+//     self_: <expr for &a>,
+//     other: vec![<expr for &b>],
+// }])
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=17
 
 ```rust
-//! ```
-//!
-//! ## Enums
-//!
-//! When generating the `expr` for a call with `self == C0(a)` and `other
-//! == C0(b)`, the SubstructureFields is
-//!
-//! ```text
-//! EnumMatching(
-//!     0,
-//!     <ast::Variant for C0>,
-//!     vec![FieldInfo {
-//!         span: <span of i32>,
-//!         name: None,
-//!         self_: <expr for &a>,
-//!         other: vec![<expr for &b>],
-//!     }],
+// ```
+//
+// ## Enums
+//
+// When generating the `expr` for a call with `self == C0(a)` and `other
+// == C0(b)`, the SubstructureFields is
+//
+// ```text
+// EnumMatching(
+//     0,
+//     <ast::Variant for C0>,
+//     vec![FieldInfo {
+//         span: <span of i32>,
+//         name: None,
+//         self_: <expr for &a>,
+//         other: vec![<expr for &b>],
+//     }],
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=4
 
 ```rust
-//! )
-//! ```
-//!
-//! For `C1 {x}` and `C1 {x}`,
+// )
+// ```
+//
+// For `C1 {x}` and `C1 {x}`,
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=11
 
 ```rust
-//!
-//! ```text
-//! EnumMatching(
-//!     1,
-//!     <ast::Variant for C1>,
-//!     vec![FieldInfo {
-//!         span: <span of x>,
-//!         name: Some(<ident of x>),
-//!         self_: <expr for &self.x>,
-//!         other: vec![<expr for &other.x>],
-//!     }],
+//
+// ```text
+// EnumMatching(
+//     1,
+//     <ast::Variant for C1>,
+//     vec![FieldInfo {
+//         span: <span of x>,
+//         name: Some(<ident of x>),
+//         self_: <expr for &self.x>,
+//         other: vec![<expr for &other.x>],
+//     }],
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=37
 
 ```rust
-//! )
-//! ```
-//!
-//! For the discriminants,
-//!
-//! ```text
-//! EnumDiscr(
-//!     &[<ident of self discriminant>, <ident of other discriminant>],
-//!     <expr to combine with>,
-//! )
-//! ```
-//!
-//! Note that this setup doesn't allow for the brute-force "match every variant
-//! against every other variant" approach, which is bad because it produces a
-//! quadratic amount of code (see #15375).
-//!
-//! ## Static
-//!
-//! A static method on the types above would result in,
-//!
-//! ```text
-//! StaticStruct(<ast::VariantData of A>, Named(vec![(<ident of x>, <span of x>)]))
-//!
-//! StaticStruct(<ast::VariantData of B>, Unnamed(vec![<span of x>]))
-//!
-//! StaticEnum(
-//!     <ast::EnumDef of C>,
-//!     vec![
-//!         (<ident of C0>, <span of C0>, Unnamed(vec![<span of i32>])),
-//!         (<ident of C1>, <span of C1>, Named(vec![(<ident of x>, <span of x>)])),
-//!     ],
-//! )
-//! ```
+// )
+// ```
+//
+// For the discriminants,
+//
+// ```text
+// EnumDiscr(
+//     &[<ident of self discriminant>, <ident of other discriminant>],
+//     <expr to combine with>,
+// )
+// ```
+//
+// Note that this setup doesn't allow for the brute-force "match every variant
+// against every other variant" approach, which is bad because it produces a
+// quadratic amount of code (see #15375).
+//
+// ## Static
+//
+// A static method on the types above would result in,
+//
+// ```text
+// StaticStruct(<ast::VariantData of A>, Named(vec![(<ident of x>, <span of x>)]))
+//
+// StaticStruct(<ast::VariantData of B>, Unnamed(vec![<span of x>]))
+//
+// StaticEnum(
+//     <ast::EnumDef of C>,
+//     vec![
+//         (<ident of C0>, <span of C0>, Unnamed(vec![<span of i32>])),
+//         (<ident of C1>, <span of C1>, Named(vec![(<ident of x>, <span of x>)])),
+//     ],
+// )
+// ```
 
 use std::cell::RefCell;
 use std::ops::Not;
@@ -247,21 +247,21 @@ use std::{iter, vec};
 ```rust
 pub(crate) use StaticFields::*;
 pub(crate) use SubstructureFields::*;
-use rustc_ast::token::{IdentIsRaw, LitKind, Token, TokenKind};
+use crate::rustc_complete::token::{IdentIsRaw, LitKind, Token, TokenKind};
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::tokenstream::{DelimSpan, Spacing, TokenTree};
+use crate::rustc_complete::tokenstream::{DelimSpan, Spacing, TokenTree};
 ```
 
 ## Block 13
 **Metadata**: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_ast::{
+use crate::rustc_complete::{
     self as ast, AnonConst, AttrArgs, BindingMode, ByRef, DelimArgs, EnumDef, Expr, GenericArg,
     GenericParamKind, Generics, Mutability, PatKind, Safety, VariantData,
 };
@@ -272,22 +272,22 @@ use rustc_ast::{
 
 ```rust
 use rustc_attr_parsing::AttributeParser;
-use rustc_expand::base::{Annotatable, ExtCtxt};
+use crate::rustc_expand::base::{Annotatable, ExtCtxt};
 ```
 
 ## Block 15
 **Metadata**: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::Attribute;
-use rustc_hir::attrs::{AttributeKind, ReprPacked};
+use crate::rustc_complete::Attribute;
+use crate::rustc_complete::attrs::{AttributeKind, ReprPacked};
 ```
 
 ## Block 16
 **Metadata**: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
 ```
 
 ## Block 17
@@ -579,7 +579,7 @@ fn find_type_parameters(
     ty_param_names: &[Symbol],
     cx: &ExtCtxt<'_>,
 ) -> Vec<TypeParameter> {
-    use rustc_ast::visit;
+    use crate::rustc_complete::visit;
 
     struct Visitor<'a, 'b> {
         cx: &'a ExtCtxt<'b>,
@@ -977,12 +977,12 @@ impl<'a> TraitDef<'a> {
         if self.is_const && self.is_staged_api_crate {
             attrs.push(
                 cx.attr_nested(
-                    rustc_ast::AttrItem {
+                    crate::rustc_ast::AttrItem {
                         unsafety: Safety::Default,
                         path: rustc_const_unstable,
                         args: AttrArgs::Delimited(DelimArgs {
                             dspan: DelimSpan::from_single(self.span),
-                            delim: rustc_ast::token::Delimiter::Parenthesis,
+                            delim: crate::rustc_ast::token::Delimiter::Parenthesis,
                             tokens: [
                                 TokenKind::Ident(sym::feature, IdentIsRaw::No),
                                 TokenKind::Eq,
@@ -1364,7 +1364,7 @@ impl<'a> MethodDef<'a> {
     /// is equivalent to:
     ///
     /// ```
-    /// #![feature(core_intrinsics)]
+    /// #[feature(core_intrinsics)]
     /// enum A {
     ///     A1,
     ///     A2(i32)

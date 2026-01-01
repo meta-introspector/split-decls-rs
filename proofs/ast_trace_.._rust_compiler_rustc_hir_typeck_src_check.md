@@ -8,23 +8,23 @@ Generated 7 AST blocks from source file
 ```rust
 use std::cell::RefCell;
 
-use rustc_abi::ExternAbi;
+use crate::rustc_abi::ExternAbi;
 use rustc_hir as hir;
-use rustc_hir::def::DefKind;
-use rustc_hir::lang_items::LangItem;
-use rustc_hir_analysis::check::check_function_signature;
-use rustc_infer::infer::RegionVariableOrigin;
-use rustc_infer::traits::WellFormedLoc;
-use rustc_middle::ty::{self, Binder, Ty, TyCtxt};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_hir_analysis::check::check_function_signature;
+use crate::rustc_infer::infer::RegionVariableOrigin;
+use crate::rustc_infer::traits::WellFormedLoc;
+use crate::rustc_complete::ty::{self, Binder, Ty, TyCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::def_id::LocalDefId;
-use rustc_span::sym;
-use rustc_trait_selection::traits::{ObligationCause, ObligationCauseCode};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::sym;
+use crate::rustc_trait_selection::traits::{ObligationCause, ObligationCauseCode};
 ```
 
 ## Block 3

@@ -6,31 +6,31 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_abi::FieldIdx;
-use rustc_index::bit_set::MixedBitSet;
-use rustc_middle::mir::{Body, TerminatorKind};
+use crate::rustc_abi::FieldIdx;
+use crate::rustc_index::bit_set::MixedBitSet;
+use crate::rustc_complete::mir::{Body, TerminatorKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, GenericArgsRef, Ty, TyCtxt, VariantDef};
+use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, VariantDef};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_mir_dataflow::impls::MaybeInitializedPlaces;
-use rustc_mir_dataflow::move_paths::{LookupResult, MoveData, MovePathIndex};
+use crate::rustc_mir_dataflow::impls::MaybeInitializedPlaces;
+use crate::rustc_mir_dataflow::move_paths::{LookupResult, MoveData, MovePathIndex};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_mir_dataflow::{Analysis, MaybeReachable, move_path_children_matching};
+use crate::rustc_mir_dataflow::{Analysis, MaybeReachable, move_path_children_matching};
 ```
 
 ## Block 5

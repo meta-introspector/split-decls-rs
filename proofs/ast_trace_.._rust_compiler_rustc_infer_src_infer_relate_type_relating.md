@@ -6,15 +6,15 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::traits::solve::Goal;
-use rustc_middle::ty::relate::combine::{super_combine_consts, super_combine_tys};
+use crate::rustc_complete::traits::solve::Goal;
+use crate::rustc_complete::ty::relate::combine::{super_combine_consts, super_combine_tys};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::relate::{
+use crate::rustc_complete::ty::relate::{
     Relate, RelateResult, TypeRelation, relate_args_invariantly, relate_args_with_variances,
 };
 ```
@@ -23,14 +23,14 @@ use rustc_middle::ty::relate::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, DelayedSet, Ty, TyCtxt, TyVar};
+use crate::rustc_complete::ty::{self, DelayedSet, Ty, TyCtxt, TyVar};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
 ```
 
@@ -139,7 +139,7 @@ impl<'tcx> TypeRelation<TyCtxt<'tcx>> for TypeRelating<'_, 'tcx> {
 
     fn relate_item_args(
         &mut self,
-        item_def_id: rustc_hir::def_id::DefId,
+        item_def_id: crate::rustc_hir::def_id::DefId,
         a_arg: ty::GenericArgsRef<'tcx>,
         b_arg: ty::GenericArgsRef<'tcx>,
     ) -> RelateResult<'tcx, ty::GenericArgsRef<'tcx>> {

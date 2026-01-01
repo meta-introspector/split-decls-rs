@@ -6,13 +6,13 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-//! Intrinsics and other functions that the interpreter executes without
-//! looking at their MIR. Intrinsics/functions supported here are shared by CTFE
-//! and miri.
+// Intrinsics and other functions that the interpreter executes without
+// looking at their MIR. Intrinsics/functions supported here are shared by CTFE
+// and miri.
 
 use std::assert_matches::assert_matches;
 
-use rustc_abi::{FieldIdx, HasDataLayout, Size};
+use crate::rustc_abi::{FieldIdx, HasDataLayout, Size};
 ```
 
 ## Block 2
@@ -26,36 +26,36 @@ use rustc_apfloat::ieee::{Double, Half, Quad, Single};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::interpret::{CTFE_ALLOC_SALT, read_target_uint, write_target_uint};
+use crate::rustc_complete::mir::interpret::{CTFE_ALLOC_SALT, read_target_uint, write_target_uint};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{self, BinOp, ConstValue, NonDivergingIntrinsic};
+use crate::rustc_complete::mir::{self, BinOp, ConstValue, NonDivergingIntrinsic};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::layout::TyAndLayout;
-use rustc_middle::ty::{Ty, TyCtxt};
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::ty::{Ty, TyCtxt};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, ty};
+use crate::rustc_complete::{bug, ty};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Symbol, sym};
+use crate::rustc_complete::{Symbol, sym};
 ```
 
 ## Block 8

@@ -6,21 +6,21 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-//! Miscellaneous type-system utilities that are too small to deserve their own modules.
+// Miscellaneous type-system utilities that are too small to deserve their own modules.
 
 use std::assert_matches::assert_matches;
 
 use hir::LangItem;
-use rustc_ast::Mutability;
+use crate::rustc_complete::Mutability;
 use rustc_hir as hir;
-use rustc_infer::infer::{RegionResolutionError, TyCtxtInferExt};
+use crate::rustc_infer::infer::{RegionResolutionError, TyCtxtInferExt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, AdtDef, Ty, TyCtxt, TypeVisitableExt, TypingMode};
+use crate::rustc_complete::ty::{self, AdtDef, Ty, TyCtxt, TypeVisitableExt, TypingMode};
 ```
 
 ## Block 3

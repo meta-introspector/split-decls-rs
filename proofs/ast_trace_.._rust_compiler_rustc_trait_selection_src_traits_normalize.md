@@ -6,19 +6,19 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-//! Deeply normalize types using the old trait solver.
+// Deeply normalize types using the old trait solver.
 
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_hir::def::DefKind;
-use rustc_infer::infer::at::At;
-use rustc_infer::infer::{InferCtxt, InferOk};
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_infer::infer::at::At;
+use crate::rustc_infer::infer::{InferCtxt, InferOk};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_infer::traits::{
+use crate::rustc_infer::traits::{
     FromSolverError, Normalized, Obligation, PredicateObligations, TraitEngine,
 };
 ```
@@ -28,15 +28,15 @@ use rustc_infer::traits::{
 
 ```rust
 use rustc_macros::extension;
-use rustc_middle::span_bug;
-use rustc_middle::traits::{ObligationCause, ObligationCauseCode};
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::traits::{ObligationCause, ObligationCauseCode};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, AliasTerm, Term, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitable,
     TypeVisitableExt, TypingMode,
 };

@@ -15,8 +15,8 @@ use itertools::{Itertools, Position};
 
 ```rust
 use rustc_ast as ast;
-use rustc_ast::ModKind;
-use rustc_span::Ident;
+use crate::rustc_complete::ModKind;
+use crate::rustc_complete::Ident;
 
 use crate::pp::BoxMarker;
 use crate::pp::Breaks::Inconsistent;
@@ -467,7 +467,7 @@ impl<'a> State<'a> {
         enum_definition: &ast::EnumDef,
         generics: &ast::Generics,
         ident: Ident,
-        span: rustc_span::Span,
+        span: crate::rustc_span::Span,
         visibility: &ast::Visibility,
     ) {
         let (cb, ib) = self.head(visibility_qualified(visibility, "enum"));
@@ -516,7 +516,7 @@ impl<'a> State<'a> {
         struct_def: &ast::VariantData,
         generics: &ast::Generics,
         ident: Ident,
-        span: rustc_span::Span,
+        span: crate::rustc_span::Span,
         print_finalizer: bool,
         cb: BoxMarker,
         ib: BoxMarker,

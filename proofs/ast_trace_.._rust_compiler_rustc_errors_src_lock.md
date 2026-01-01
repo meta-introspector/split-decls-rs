@@ -6,16 +6,16 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=Handle(HANDLE); | COMPLEXITY=53 | LINES=80
 
 ```rust
-//! Bindings to acquire a global named lock.
-//!
-//! This is intended to be used to synchronize multiple compiler processes to
-//! ensure that we can output complete errors without interleaving on Windows.
-//! Note that this is currently only needed for allowing only one 32-bit MSVC
-//! linker to execute at once on MSVC hosts, so this is only implemented for
-//! `cfg(windows)`. Also note that this may not always be used on Windows,
-//! only when targeting 32-bit MSVC.
-//!
-//! For more information about why this is necessary, see where this is called.
+// Bindings to acquire a global named lock.
+//
+// This is intended to be used to synchronize multiple compiler processes to
+// ensure that we can output complete errors without interleaving on Windows.
+// Note that this is currently only needed for allowing only one 32-bit MSVC
+// linker to execute at once on MSVC hosts, so this is only implemented for
+// `cfg(windows)`. Also note that this may not always be used on Windows,
+// only when targeting 32-bit MSVC.
+//
+// For more information about why this is necessary, see where this is called.
 
 use std::any::Any;
 

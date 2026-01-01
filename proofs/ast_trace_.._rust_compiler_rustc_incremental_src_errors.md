@@ -14,7 +14,7 @@ use std::path::{Path, PathBuf};
 
 ```rust
 use rustc_macros::Diagnostic;
-use rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::{Ident, Span, Symbol};
 ```
 
 ## Block 3

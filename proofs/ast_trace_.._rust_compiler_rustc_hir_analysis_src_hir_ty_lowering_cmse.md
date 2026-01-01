@@ -6,24 +6,24 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::ExternAbi;
-use rustc_errors::{DiagCtxtHandle, E0781, struct_span_code_err};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_complete::{DiagCtxtHandle, E0781, struct_span_code_err};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, HirId};
+use crate::rustc_complete::{self as hir, HirId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::layout::LayoutError;
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::LayoutError;
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 4

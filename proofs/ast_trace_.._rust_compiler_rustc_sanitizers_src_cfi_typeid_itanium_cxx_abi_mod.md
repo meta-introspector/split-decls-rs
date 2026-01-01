@@ -3,26 +3,26 @@
 Generated 6 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=10
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=10
 
 ```rust
-//! Type metadata identifiers (using Itanium C++ ABI mangling for encoding) for LLVM Control Flow
-//! Integrity (CFI) and cross-language LLVM CFI support.
-//!
-//! For more information about LLVM CFI and cross-language LLVM CFI support for the Rust compiler,
-//! see design document in the tracking issue #89653.
+// Type metadata identifiers (using Itanium C++ ABI mangling for encoding) for LLVM Control Flow
+// Integrity (CFI) and cross-language LLVM CFI support.
+//
+// For more information about LLVM CFI and cross-language LLVM CFI support for the Rust compiler,
+// see design document in the tracking issue #89653.
 
-use rustc_abi::CanonAbi;
-use rustc_data_structures::fx::FxHashMap;
-use rustc_middle::bug;
-use rustc_middle::ty::{self, Instance, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
+use crate::rustc_abi::CanonAbi;
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_target::callconv::{FnAbi, PassMode};
+use crate::rustc_target::callconv::{FnAbi, PassMode};
 ```
 
 ## Block 3

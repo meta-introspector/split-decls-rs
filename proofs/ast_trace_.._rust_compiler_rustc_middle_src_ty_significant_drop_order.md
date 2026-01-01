@@ -6,10 +6,10 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_data_structures::unord::UnordSet;
-use rustc_hir::def_id::DefId;
-use rustc_span::Span;
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_data_structures::unord::UnordSet;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::Span;
 use smallvec::{SmallVec, smallvec};
 ```
 
@@ -46,10 +46,10 @@ fn true_significant_drop_ty<'tcx>(
             let key = tcx.def_key(did);
 
             match key.disambiguated_data.data {
-                rustc_hir::definitions::DefPathData::CrateRoot => {
+                crate::rustc_hir::definitions::DefPathData::CrateRoot => {
                     name_rev.push(tcx.crate_name(did.krate));
                 }
-                rustc_hir::definitions::DefPathData::TypeNs(symbol) => {
+                crate::rustc_hir::definitions::DefPathData::TypeNs(symbol) => {
                     name_rev.push(symbol);
                 }
                 _ => return None,

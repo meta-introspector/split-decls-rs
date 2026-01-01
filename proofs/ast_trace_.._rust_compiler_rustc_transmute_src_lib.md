@@ -7,11 +7,11 @@ Generated 7 AST blocks from source file
 
 ```rust
 // tidy-alphabetical-start
-#![cfg_attr(test, feature(test))]
-#![feature(never_type)]
+#[cfg_attr(test, feature(test))]
+#[feature(never_type)]
 // tidy-alphabetical-end
 
-pub(crate) use rustc_data_structures::fx::{FxIndexMap as Map, FxIndexSet as Set};
+pub(crate) use crate::rustc_data_structures::fx::{FxIndexMap as Map, FxIndexSet as Set};
 ```
 
 ## Block 2
@@ -121,8 +121,8 @@ pub enum Reason<T> {
 ```rust
 #[cfg(feature = "rustc")]
 mod rustc {
-    use rustc_hir::lang_items::LangItem;
-    use rustc_middle::ty::{Const, Region, Ty, TyCtxt};
+    use crate::rustc_complete::lang_items::LangItem;
+    use crate::rustc_complete::ty::{Const, Region, Ty, TyCtxt};
 
     use super::*;
 
@@ -159,8 +159,8 @@ mod rustc {
     impl Assume {
         /// Constructs an `Assume` from a given const-`Assume`.
         pub fn from_const<'tcx>(tcx: TyCtxt<'tcx>, ct: Const<'tcx>) -> Option<Self> {
-            use rustc_middle::ty::ScalarInt;
-            use rustc_span::sym;
+            use crate::rustc_complete::ty::ScalarInt;
+            use crate::rustc_complete::sym;
 
             let Some(cv) = ct.try_to_value() else {
                 return None;

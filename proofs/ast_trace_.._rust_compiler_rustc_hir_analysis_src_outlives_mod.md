@@ -6,16 +6,16 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::LocalDefId;
-use rustc_middle::ty::{self, CratePredicatesMap, GenericArgKind, TyCtxt, Upcast};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::ty::{self, CratePredicatesMap, GenericArgKind, TyCtxt, Upcast};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=28 | LINES=44
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 pub(crate) mod dump;
 mod explicit;

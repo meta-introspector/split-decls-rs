@@ -6,9 +6,9 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=add_coverage | COMPLEXITY=5 | LINES=11
 
 ```rust
-use rustc_codegen_ssa::traits::CoverageInfoBuilderMethods;
-use rustc_middle::mir::coverage::CoverageKind;
-use rustc_middle::ty::Instance;
+use crate::rustc_codegen_ssa::traits::CoverageInfoBuilderMethods;
+use crate::rustc_complete::mir::coverage::CoverageKind;
+use crate::rustc_complete::ty::Instance;
 
 use crate::builder::Builder;
 

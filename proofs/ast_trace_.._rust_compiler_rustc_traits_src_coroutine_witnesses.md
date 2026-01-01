@@ -6,25 +6,25 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_infer::infer::canonical::query_response::make_query_region_constraints;
-use rustc_infer::infer::resolve::OpportunisticRegionResolver;
-use rustc_infer::traits::{Obligation, ObligationCause};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::infer::canonical::query_response::make_query_region_constraints;
+use crate::rustc_infer::infer::resolve::OpportunisticRegionResolver;
+use crate::rustc_infer::traits::{Obligation, ObligationCause};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty, TyCtxt, TypeFoldable, TypeVisitableExt, fold_regions};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeFoldable, TypeVisitableExt, fold_regions};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::DefId;
-use rustc_trait_selection::traits::{ObligationCtxt, with_replaced_escaping_bound_vars};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_trait_selection::traits::{ObligationCtxt, with_replaced_escaping_bound_vars};
 ```
 
 ## Block 4

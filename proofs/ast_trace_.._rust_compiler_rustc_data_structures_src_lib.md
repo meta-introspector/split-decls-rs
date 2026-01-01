@@ -6,44 +6,44 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=44
 
 ```rust
-//! Various data structures used by the Rust compiler. The intention
-//! is that code in here should not be *specific* to rustc, so that
-//! it can be easily unit tested and so forth.
-//!
-//! # Note
-//!
-//! This API is completely unstable and subject to change.
+// Various data structures used by the Rust compiler. The intention
+// is that code in here should not be *specific* to rustc, so that
+// it can be easily unit tested and so forth.
+//
+// # Note
+//
+// This API is completely unstable and subject to change.
 
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![allow(rustc::default_hash_types)]
-#![allow(rustc::potential_query_instability)]
-#![deny(unsafe_op_in_unsafe_fn)]
-#![doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
-#![doc(rust_logo)]
-#![feature(allocator_api)]
-#![feature(array_windows)]
-#![feature(ascii_char)]
-#![feature(ascii_char_variants)]
-#![feature(assert_matches)]
-#![feature(auto_traits)]
-#![feature(cfg_select)]
-#![feature(core_intrinsics)]
-#![feature(dropck_eyepatch)]
-#![feature(extend_one)]
-#![feature(file_buffered)]
-#![feature(map_try_insert)]
-#![feature(min_specialization)]
-#![feature(negative_impls)]
-#![feature(never_type)]
-#![feature(ptr_alignment_type)]
-#![feature(rustc_attrs)]
-#![feature(rustdoc_internals)]
-#![feature(sized_hierarchy)]
-#![feature(test)]
-#![feature(thread_id_value)]
-#![feature(type_alias_impl_trait)]
-#![feature(unwrap_infallible)]
+#[allow(internal_features)]
+#[allow(rustc::default_hash_types)]
+#[allow(rustc::potential_query_instability)]
+#[deny(unsafe_op_in_unsafe_fn)]
+#[doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
+#[doc(rust_logo)]
+#[feature(allocator_api)]
+#[feature(array_windows)]
+#[feature(ascii_char)]
+#[feature(ascii_char_variants)]
+#[feature(assert_matches)]
+#[feature(auto_traits)]
+#[feature(cfg_select)]
+#[feature(core_intrinsics)]
+#[feature(dropck_eyepatch)]
+#[feature(extend_one)]
+#[feature(file_buffered)]
+#[feature(map_try_insert)]
+#[feature(min_specialization)]
+#[feature(negative_impls)]
+#[feature(never_type)]
+#[feature(ptr_alignment_type)]
+#[feature(rustc_attrs)]
+#[feature(rustdoc_internals)]
+#[feature(sized_hierarchy)]
+#[feature(test)]
+#[feature(thread_id_value)]
+#[feature(type_alias_impl_trait)]
+#[feature(unwrap_infallible)]
 // tidy-alphabetical-end
 
 use std::fmt;
@@ -56,7 +56,7 @@ pub use ena::{snapshot_vec, undo_log, unify};
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=outline | COMPLEXITY=5 | LINES=48
 
 ```rust
-pub use rustc_index::static_assert_size;
+pub use crate::rustc_index::static_assert_size;
 
 pub mod aligned;
 pub mod base_n;

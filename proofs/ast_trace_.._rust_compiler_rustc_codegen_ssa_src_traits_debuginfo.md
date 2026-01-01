@@ -8,23 +8,23 @@ Generated 5 AST blocks from source file
 ```rust
 use std::ops::Range;
 
-use rustc_abi::Size;
-use rustc_middle::mir;
-use rustc_middle::ty::{ExistentialTraitRef, Instance, Ty};
+use crate::rustc_abi::Size;
+use crate::rustc_complete::mir;
+use crate::rustc_complete::ty::{ExistentialTraitRef, Instance, Ty};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{SourceFile, Span, Symbol};
+use crate::rustc_complete::{SourceFile, Span, Symbol};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_target::callconv::FnAbi;
+use crate::rustc_target::callconv::FnAbi;
 
 use super::BackendTypes;
 use crate::mir::debuginfo::{FunctionDebugContext, VariableKind};

@@ -6,26 +6,26 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-//! Computing the size and alignment of a value.
+// Computing the size and alignment of a value.
 
-use rustc_abi::WrappingRange;
-use rustc_hir::LangItem;
-use rustc_middle::bug;
-use rustc_middle::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
+use crate::rustc_abi::WrappingRange;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::print::{with_no_trimmed_paths, with_no_visible_paths};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::DUMMY_SP;
+use crate::rustc_complete::DUMMY_SP;
 use tracing::{debug, trace};
 ```
 

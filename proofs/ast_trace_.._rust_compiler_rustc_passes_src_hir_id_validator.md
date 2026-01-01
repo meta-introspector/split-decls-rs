@@ -6,19 +6,19 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::sync::Lock;
+use crate::rustc_data_structures::sync::Lock;
 use rustc_hir as hir;
-use rustc_hir::def_id::LocalDefId;
-use rustc_hir::{HirId, ItemLocalId, intravisit};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{HirId, ItemLocalId, intravisit};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=check_crate | COMPLEXITY=8 | LINES=21
 
 ```rust
-use rustc_index::bit_set::GrowableBitSet;
-use rustc_middle::hir::nested_filter;
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_index::bit_set::GrowableBitSet;
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::ty::TyCtxt;
 
 pub fn check_crate(tcx: TyCtxt<'_>) {
     let errors = Lock::new(Vec::new());

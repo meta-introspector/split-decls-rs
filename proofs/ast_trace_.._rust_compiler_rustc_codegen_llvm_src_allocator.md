@@ -7,7 +7,7 @@ Generated 7 AST blocks from source file
 
 ```rust
 use libc::c_uint;
-use rustc_ast::expand::allocator::{
+use crate::rustc_complete::expand::allocator::{
     ALLOCATOR_METHODS, AllocatorKind, AllocatorTy, NO_ALLOC_SHIM_IS_UNSTABLE,
     alloc_error_handler_name, default_fn_name, global_fn_name,
 };
@@ -17,10 +17,10 @@ use rustc_ast::expand::allocator::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_codegen_ssa::traits::BaseTypeCodegenMethods as _;
-use rustc_middle::bug;
-use rustc_middle::ty::TyCtxt;
-use rustc_session::config::{DebugInfo, OomStrategy};
+use crate::rustc_codegen_ssa::traits::BaseTypeCodegenMethods as _;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::{DebugInfo, OomStrategy};
 ```
 
 ## Block 3

@@ -6,97 +6,97 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=36
 
 ```rust
-//! Code that handles "type-outlives" constraints like `T: 'a`. This
-//! is based on the `push_outlives_components` function defined in rustc_infer,
-//! but it adds a bit of heuristics on top, in particular to deal with
-//! associated types and projections.
-//!
-//! When we process a given `T: 'a` obligation, we may produce two
-//! kinds of constraints for the region inferencer:
-//!
-//! - Relationships between inference variables and other regions.
-//!   For example, if we have `&'?0 u32: 'a`, then we would produce
-//!   a constraint that `'a <= '?0`.
-//! - "Verifys" that must be checked after inferencing is done.
-//!   For example, if we know that, for some type parameter `T`,
-//!   `T: 'a + 'b`, and we have a requirement that `T: '?1`,
-//!   then we add a "verify" that checks that `'?1 <= 'a || '?1 <= 'b`.
-//!   - Note the difference with the previous case: here, the region
-//!     variable must be less than something else, so this doesn't
-//!     affect how inference works (it finds the smallest region that
-//!     will do); it's just a post-condition that we have to check.
-//!
-//! **The key point is that once this function is done, we have
-//! reduced all of our "type-region outlives" obligations into relationships
-//! between individual regions.**
-//!
-//! One key input to this function is the set of "region-bound pairs".
-//! These are basically the relationships between type parameters and
-//! regions that are in scope at the point where the outlives
-//! obligation was incurred. **When type-checking a function,
-//! particularly in the face of closures, this is not known until
-//! regionck runs!** This is because some of those bounds come
-//! from things we have yet to infer.
-//!
-//! Consider:
-//!
-//! ```
-//! fn bar<T>(a: T, b: impl for<'a> Fn(&'a T)) {}
+// Code that handles "type-outlives" constraints like `T: 'a`. This
+// is based on the `push_outlives_components` function defined in rustc_infer,
+// but it adds a bit of heuristics on top, in particular to deal with
+// associated types and projections.
+//
+// When we process a given `T: 'a` obligation, we may produce two
+// kinds of constraints for the region inferencer:
+//
+// - Relationships between inference variables and other regions.
+//   For example, if we have `&'?0 u32: 'a`, then we would produce
+//   a constraint that `'a <= '?0`.
+// - "Verifys" that must be checked after inferencing is done.
+//   For example, if we know that, for some type parameter `T`,
+//   `T: 'a + 'b`, and we have a requirement that `T: '?1`,
+//   then we add a "verify" that checks that `'?1 <= 'a || '?1 <= 'b`.
+//   - Note the difference with the previous case: here, the region
+//     variable must be less than something else, so this doesn't
+//     affect how inference works (it finds the smallest region that
+//     will do); it's just a post-condition that we have to check.
+//
+// **The key point is that once this function is done, we have
+// reduced all of our "type-region outlives" obligations into relationships
+// between individual regions.**
+//
+// One key input to this function is the set of "region-bound pairs".
+// These are basically the relationships between type parameters and
+// regions that are in scope at the point where the outlives
+// obligation was incurred. **When type-checking a function,
+// particularly in the face of closures, this is not known until
+// regionck runs!** This is because some of those bounds come
+// from things we have yet to infer.
+//
+// Consider:
+//
+// ```
+// fn bar<T>(a: T, b: impl for<'a> Fn(&'a T)) {}
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=4
 
 ```rust
-//! fn foo<T>(x: T) {
-//!     bar(x, |y| { /* ... */})
-//!     //      ^ closure arg
-//! }
+// fn foo<T>(x: T) {
+//     bar(x, |y| { /* ... */})
+//     //      ^ closure arg
+// }
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=15
 
 ```rust
-//! ```
-//!
-//! Here, the type of `y` may involve inference variables and the
-//! like, and it may also contain implied bounds that are needed to
-//! type-check the closure body (e.g., here it informs us that `T`
-//! outlives the late-bound region `'a`).
-//!
-//! Note that by delaying the gathering of implied bounds until all
-//! inference information is known, we may find relationships between
-//! bound regions and other regions in the environment. For example,
-//! when we first check a closure like the one expected as argument
-//! to `foo`:
-//!
-//! ```
-//! fn foo<U, F: for<'a> FnMut(&'a U)>(_f: F) {}
+// ```
+//
+// Here, the type of `y` may involve inference variables and the
+// like, and it may also contain implied bounds that are needed to
+// type-check the closure body (e.g., here it informs us that `T`
+// outlives the late-bound region `'a`).
+//
+// Note that by delaying the gathering of implied bounds until all
+// inference information is known, we may find relationships between
+// bound regions and other regions in the environment. For example,
+// when we first check a closure like the one expected as argument
+// to `foo`:
+//
+// ```
+// fn foo<U, F: for<'a> FnMut(&'a U)>(_f: F) {}
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11
 
 ```rust
-//! ```
-//!
-//! the type of the closure's first argument would be `&'a ?U`. We
-//! might later infer `?U` to something like `&'b u32`, which would
-//! imply that `'b: 'a`.
+// ```
+//
+// the type of the closure's first argument would be `&'a ?U`. We
+// might later infer `?U` to something like `&'b u32`, which would
+// imply that `'b: 'a`.
 
-use rustc_data_structures::undo_log::UndoLogs;
-use rustc_middle::bug;
-use rustc_middle::mir::ConstraintCategory;
-use rustc_middle::traits::query::NoSolution;
-use rustc_middle::ty::outlives::{Component, push_outlives_components};
+use crate::rustc_data_structures::undo_log::UndoLogs;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::ConstraintCategory;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::outlives::{Component, push_outlives_components};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, GenericArgKind, GenericArgsRef, PolyTypeOutlivesPredicate, Region, Ty, TyCtxt,
     TypeFoldable as _, TypeVisitableExt,
 };

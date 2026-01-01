@@ -7,35 +7,35 @@ Generated 10 AST blocks from source file
 
 ```rust
 use lint::BuiltinLintDiag;
-use rustc_ast::tokenstream::TokenStream;
-use rustc_ast::{AsmMacro, token};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{AsmMacro, token};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxHashMap, FxIndexMap};
+use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_errors::PResult;
-use rustc_expand::base::*;
-use rustc_index::bit_set::GrowableBitSet;
-use rustc_parse::parser::asm::*;
-use rustc_session::lint;
-use rustc_session::parse::feature_err;
-use rustc_span::{ErrorGuaranteed, InnerSpan, Span, Symbol, sym};
+use crate::rustc_complete::PResult;
+use crate::rustc_expand::base::*;
+use crate::rustc_index::bit_set::GrowableBitSet;
+use crate::rustc_parse::parser::asm::*;
+use crate::rustc_complete::lint;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{ErrorGuaranteed, InnerSpan, Span, Symbol, sym};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_target::asm::InlineAsmArch;
+use crate::rustc_target::asm::InlineAsmArch;
 use smallvec::smallvec;
 use {rustc_ast as ast, rustc_parse_format as parse};
 ```
@@ -96,7 +96,7 @@ fn validate_asm_args<'a>(
 ) -> PResult<'a, ValidatedAsmArgs> {
     let dcx = ecx.dcx();
 
-    let strip_unconfigured = rustc_expand::config::StripUnconfigured {
+    let strip_unconfigured = crate::rustc_expand::config::StripUnconfigured {
         sess: ecx.sess,
         features: Some(ecx.ecfg.features),
         config_tokens: false,

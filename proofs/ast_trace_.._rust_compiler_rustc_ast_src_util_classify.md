@@ -6,7 +6,7 @@ Generated 22 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-//! Routines the parser and pretty-printer use to classify AST nodes.
+// Routines the parser and pretty-printer use to classify AST nodes.
 
 use crate::ast::ExprKind::*;
 use crate::ast::{self, MatchKind};

@@ -6,32 +6,32 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexSet};
+use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_data_structures::unord::UnordSet;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_data_structures::unord::UnordSet;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::limit::Limit;
-use rustc_middle::mir::TerminatorKind;
-use rustc_middle::ty::{self, GenericArgsRef, InstanceKind, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_complete::mir::TerminatorKind;
+use crate::rustc_complete::ty::{self, GenericArgsRef, InstanceKind, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::sym;
+use crate::rustc_complete::sym;
 use tracing::{instrument, trace};
 ```
 

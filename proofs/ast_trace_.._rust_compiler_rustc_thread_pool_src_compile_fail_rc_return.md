@@ -10,7 +10,7 @@ Generated 2 AST blocks from source file
 
 use std::rc::Rc;
 
-rustc_thread_pool::join(|| Rc::new(22), || ()); //~ ERROR
+crate::rustc_thread_pool::join(|| Rc::new(22), || ()); //~ ERROR
 
 ``` */
 mod left {}
@@ -24,7 +24,7 @@ mod left {}
 
 use std::rc::Rc;
 
-rustc_thread_pool::join(|| (), || Rc::new(23)); //~ ERROR
+crate::rustc_thread_pool::join(|| (), || Rc::new(23)); //~ ERROR
 
 ``` */
 mod right {}

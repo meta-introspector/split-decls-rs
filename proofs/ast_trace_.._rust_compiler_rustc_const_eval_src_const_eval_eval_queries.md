@@ -15,48 +15,48 @@ use either::{Left, Right};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{self as abi, BackendRepr};
+use crate::rustc_abi::{self as abi, BackendRepr};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_errors::E0080;
-use rustc_hir::def::DefKind;
-use rustc_middle::mir::interpret::{AllocId, ErrorHandled, InterpErrorInfo, ReportedErrorInfo};
+use crate::rustc_complete::E0080;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::mir::interpret::{AllocId, ErrorHandled, InterpErrorInfo, ReportedErrorInfo};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{self, ConstAlloc, ConstValue};
+use crate::rustc_complete::mir::{self, ConstAlloc, ConstValue};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::query::TyCtxtAt;
-use rustc_middle::ty::layout::HasTypingEnv;
-use rustc_middle::ty::print::with_no_trimmed_paths;
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::query::TyCtxtAt;
+use crate::rustc_complete::ty::layout::HasTypingEnv;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, throw_inval};
+use crate::rustc_complete::{bug, throw_inval};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::LocalDefId;
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 8
@@ -388,7 +388,7 @@ pub(crate) fn turn_into_const_value<'tcx>(
 pub fn eval_to_const_value_raw_provider<'tcx>(
     tcx: TyCtxt<'tcx>,
     key: ty::PseudoCanonicalInput<'tcx, GlobalId<'tcx>>,
-) -> ::rustc_middle::mir::interpret::EvalToConstValueResult<'tcx> {
+) -> ::crate::rustc_middle::mir::interpret::EvalToConstValueResult<'tcx> {
     tcx.eval_to_allocation_raw(key).map(|val| turn_into_const_value(tcx, val, key))
 }
 ```
@@ -401,11 +401,11 @@ pub fn eval_to_const_value_raw_provider<'tcx>(
 pub fn eval_static_initializer_provider<'tcx>(
     tcx: TyCtxt<'tcx>,
     def_id: LocalDefId,
-) -> ::rustc_middle::mir::interpret::EvalStaticInitializerRawResult<'tcx> {
+) -> ::crate::rustc_middle::mir::interpret::EvalStaticInitializerRawResult<'tcx> {
     assert!(tcx.is_static(def_id.to_def_id()));
 
     let instance = ty::Instance::mono(tcx, def_id.to_def_id());
-    let cid = rustc_middle::mir::interpret::GlobalId { instance, promoted: None };
+    let cid = crate::rustc_middle::mir::interpret::GlobalId { instance, promoted: None };
     eval_in_interpreter(tcx, cid, ty::TypingEnv::fully_monomorphized())
 }
 ```
@@ -447,7 +447,7 @@ impl<'tcx> InterpretationResult<'tcx> for ConstAlloc<'tcx> {
 pub fn eval_to_allocation_raw_provider<'tcx>(
     tcx: TyCtxt<'tcx>,
     key: ty::PseudoCanonicalInput<'tcx, GlobalId<'tcx>>,
-) -> ::rustc_middle::mir::interpret::EvalToAllocationRawResult<'tcx> {
+) -> ::crate::rustc_middle::mir::interpret::EvalToAllocationRawResult<'tcx> {
     // This shouldn't be used for statics, since statics are conceptually places,
     // not values -- so what we do here could break pointer identity.
     assert!(key.value.promoted.is_some() || !tcx.is_static(key.value.instance.def_id()));

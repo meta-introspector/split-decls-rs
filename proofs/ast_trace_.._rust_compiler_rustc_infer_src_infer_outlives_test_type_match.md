@@ -8,9 +8,9 @@ Generated 9 AST blocks from source file
 ```rust
 use std::collections::hash_map::Entry;
 
-use rustc_data_structures::fx::FxHashMap;
-use rustc_middle::ty::error::TypeError;
-use rustc_middle::ty::{self, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::ty::error::TypeError;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 2

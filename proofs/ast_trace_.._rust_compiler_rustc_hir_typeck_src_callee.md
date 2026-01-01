@@ -8,46 +8,46 @@ Generated 18 AST blocks from source file
 ```rust
 use std::iter;
 
-use rustc_abi::{CanonAbi, ExternAbi};
+use crate::rustc_abi::{CanonAbi, ExternAbi};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::util::parser::ExprPrecedence;
-use rustc_errors::{Applicability, Diag, ErrorGuaranteed, StashKey};
+use crate::rustc_complete::util::parser::ExprPrecedence;
+use crate::rustc_complete::{Applicability, Diag, ErrorGuaranteed, StashKey};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def::{self, CtorKind, Namespace, Res};
+use crate::rustc_complete::def::{self, CtorKind, Namespace, Res};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_hir::{self as hir, HirId, LangItem};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{self as hir, HirId, LangItem};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir_analysis::autoderef::Autoderef;
-use rustc_infer::infer::BoundRegionConversionTime;
-use rustc_infer::traits::{Obligation, ObligationCause, ObligationCauseCode};
+use crate::rustc_hir_analysis::autoderef::Autoderef;
+use crate::rustc_infer::infer::BoundRegionConversionTime;
+use crate::rustc_infer::traits::{Obligation, ObligationCause, ObligationCauseCode};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::adjustment::{
+use crate::rustc_complete::ty::adjustment::{
     Adjust, Adjustment, AllowTwoPhase, AutoBorrow, AutoBorrowMutability,
 };
 ```
@@ -56,38 +56,38 @@ use rustc_middle::ty::adjustment::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::LocalDefId;
-use rustc_span::{Span, sym};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{Span, sym};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_target::spec::{AbiMap, AbiMapping};
+use crate::rustc_target::spec::{AbiMap, AbiMapping};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_trait_selection::error_reporting::traits::DefIdOrName;
-use rustc_trait_selection::infer::InferCtxtExt as _;
-use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
+use crate::rustc_trait_selection::error_reporting::traits::DefIdOrName;
+use crate::rustc_trait_selection::infer::InferCtxtExt as _;
+use crate::rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt as _;
 use tracing::{debug, instrument};
 ```
 
@@ -659,7 +659,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             def_id,
         );
 
-        if fn_sig.abi == rustc_abi::ExternAbi::RustCall {
+        if fn_sig.abi == crate::rustc_abi::ExternAbi::RustCall {
             let sp = arg_exprs.last().map_or(call_expr.span, |expr| expr.span);
             if let Some(ty) = fn_sig.inputs().last().copied() {
                 self.register_bound(

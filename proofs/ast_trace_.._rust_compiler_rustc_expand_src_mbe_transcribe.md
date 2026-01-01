@@ -8,7 +8,7 @@ Generated 41 AST blocks from source file
 ```rust
 use std::mem;
 
-use rustc_ast::token::{
+use crate::rustc_complete::token::{
     self, Delimiter, IdentIsRaw, InvisibleOrigin, Lit, LitKind, MetaVarKind, Token, TokenKind,
 };
 ```
@@ -17,39 +17,39 @@ use rustc_ast::token::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
+use crate::rustc_complete::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{ExprKind, StmtKind, TyKind, UnOp};
+use crate::rustc_complete::{ExprKind, StmtKind, TyKind, UnOp};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_errors::{Diag, DiagCtxtHandle, PResult, pluralize};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::{Diag, DiagCtxtHandle, PResult, pluralize};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_parse::lexer::nfc_normalize;
-use rustc_parse::parser::ParseNtResult;
-use rustc_session::parse::ParseSess;
-use rustc_span::hygiene::{LocalExpnId, Transparency};
+use crate::rustc_parse::lexer::nfc_normalize;
+use crate::rustc_parse::parser::ParseNtResult;
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::hygiene::{LocalExpnId, Transparency};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::{
+use crate::rustc_complete::{
     Ident, MacroRulesNormalizedIdent, Span, Symbol, SyntaxContext, sym, with_metavar_spans,
 };
 ```

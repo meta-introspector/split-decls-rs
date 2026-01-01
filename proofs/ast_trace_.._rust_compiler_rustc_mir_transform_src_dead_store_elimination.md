@@ -6,27 +6,27 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=23
 
 ```rust
-//! This module implements a dead store elimination (DSE) routine.
-//!
-//! This transformation was written specifically for the needs of dest prop. Although it is
-//! perfectly sound to use it in any context that might need it, its behavior should not be changed
-//! without analyzing the interaction this will have with dest prop. Specifically, in addition to
-//! the soundness of this pass in general, dest prop needs it to satisfy two additional conditions:
-//!
-//!  1. It's idempotent, meaning that running this pass a second time immediately after running it a
-//!     first time will not cause any further changes.
-//!  2. This idempotence persists across dest prop's main transform, in other words inserting any
-//!     number of iterations of dest prop between the first and second application of this transform
-//!     will still not cause any further changes.
-//!
+// This module implements a dead store elimination (DSE) routine.
+//
+// This transformation was written specifically for the needs of dest prop. Although it is
+// perfectly sound to use it in any context that might need it, its behavior should not be changed
+// without analyzing the interaction this will have with dest prop. Specifically, in addition to
+// the soundness of this pass in general, dest prop needs it to satisfy two additional conditions:
+//
+//  1. It's idempotent, meaning that running this pass a second time immediately after running it a
+//     first time will not cause any further changes.
+//  2. This idempotence persists across dest prop's main transform, in other words inserting any
+//     number of iterations of dest prop between the first and second application of this transform
+//     will still not cause any further changes.
+//
 
-use rustc_middle::bug;
-use rustc_middle::mir::visit::Visitor;
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
-use rustc_mir_dataflow::Analysis;
-use rustc_mir_dataflow::debuginfo::debuginfo_locals;
-use rustc_mir_dataflow::impls::{
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_mir_dataflow::Analysis;
+use crate::rustc_mir_dataflow::debuginfo::debuginfo_locals;
+use crate::rustc_mir_dataflow::impls::{
     LivenessTransferFunction, MaybeTransitiveLiveLocals, borrowed_locals,
 };
 ```
@@ -163,7 +163,7 @@ impl<'tcx> crate::MirPass<'tcx> for DeadStoreElimination {
         }
     }
 
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() >= 2
     }
 

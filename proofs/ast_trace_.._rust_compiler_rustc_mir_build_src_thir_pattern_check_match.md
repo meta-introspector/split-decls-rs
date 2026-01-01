@@ -13,41 +13,41 @@ use rustc_arena::{DroplessArena, TypedArena};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_ast::Mutability;
-use rustc_data_structures::fx::FxIndexSet;
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, ErrorGuaranteed, MultiSpan, struct_span_code_err};
+use crate::rustc_complete::Mutability;
+use crate::rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, ErrorGuaranteed, MultiSpan, struct_span_code_err};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::def::*;
-use rustc_hir::def_id::LocalDefId;
-use rustc_hir::{self as hir, BindingMode, ByRef, HirId, MatchSource};
+use crate::rustc_complete::def::*;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{self as hir, BindingMode, ByRef, HirId, MatchSource};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_lint::Level;
-use rustc_middle::bug;
-use rustc_middle::thir::visit::Visitor;
-use rustc_middle::thir::*;
-use rustc_middle::ty::print::with_no_trimmed_paths;
-use rustc_middle::ty::{self, AdtDef, Ty, TyCtxt};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_lint::Level;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::thir::visit::Visitor;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{self, AdtDef, Ty, TyCtxt};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_pattern_analysis::errors::Uncovered;
-use rustc_pattern_analysis::rustc::{
+use crate::rustc_pattern_analysis::errors::Uncovered;
+use crate::rustc_pattern_analysis::rustc::{
     Constructor, DeconstructedPat, MatchArm, RedundancyExplanation, RevealedTy,
     RustcPatCtxt as PatCtxt, Usefulness, UsefulnessReport, WitnessPat,
 };
@@ -57,7 +57,7 @@ use rustc_pattern_analysis::rustc::{
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::lint::builtin::{
+use crate::rustc_complete::lint::builtin::{
     BINDINGS_WITH_VARIANT_NAME, IRREFUTABLE_LET_PATTERNS, UNREACHABLE_PATTERNS,
 };
 ```
@@ -66,16 +66,16 @@ use rustc_session::lint::builtin::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::edit_distance::find_best_match_for_name;
-use rustc_span::hygiene::DesugaringKind;
-use rustc_span::{Ident, Span};
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_complete::hygiene::DesugaringKind;
+use crate::rustc_complete::{Ident, Span};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=42
 
 ```rust
-use rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
 use tracing::instrument;
 
 use crate::errors::*;
@@ -493,7 +493,7 @@ impl<'p, 'tcx> MatchVisitor<'p, 'tcx> {
         scrut_ty: Ty<'tcx>,
     ) -> Result<UsefulnessReport<'p, 'tcx>, ErrorGuaranteed> {
         let report =
-            rustc_pattern_analysis::rustc::analyze_match(&cx, &arms, scrut_ty).map_err(|err| {
+            crate::rustc_pattern_analysis::rustc::analyze_match(&cx, &arms, scrut_ty).map_err(|err| {
                 self.error = Err(err);
                 err
             })?;
@@ -1324,7 +1324,7 @@ fn report_non_exhaustive_match<'p, 'tcx>(
         sp,
         format!(
             "pattern{} {} not covered",
-            rustc_errors::pluralize!(witnesses.len()),
+            crate::rustc_errors::pluralize!(witnesses.len()),
             joined_patterns
         ),
     );

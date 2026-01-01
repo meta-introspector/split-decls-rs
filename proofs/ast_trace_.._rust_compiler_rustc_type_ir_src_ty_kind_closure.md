@@ -239,7 +239,7 @@ impl<I: Interner> ClosureArgs<I> {
     /// closure.
     // FIXME(eddyb) this should be unnecessary, as the shallowly resolved
     // type is known at the time of the creation of `ClosureArgs`,
-    // see `rustc_hir_analysis::check::closure`.
+    // see `crate::rustc_hir_analysis::check::closure`.
     pub fn sig_as_fn_ptr_ty(self) -> I::Ty {
         self.split().closure_sig_as_fn_ptr_ty
     }

@@ -6,11 +6,11 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_middle::middle::region;
-use rustc_middle::mir::*;
-use rustc_middle::span_bug;
-use rustc_middle::thir::*;
-use rustc_span::source_map::Spanned;
+use crate::rustc_complete::middle::region;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::source_map::Spanned;
 use tracing::debug;
 
 use crate::builder::scope::BreakableTarget;

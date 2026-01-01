@@ -6,32 +6,32 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=12
 
 ```rust
-//! Structural const qualification.
-//!
-//! See the `Qualif` trait for more info.
+// Structural const qualification.
+//
+// See the `Qualif` trait for more info.
 
 // FIXME(const_trait_impl): This API should be really reworked. It's dangerously general for
 // having basically only two use-cases that act in different ways.
 
-use rustc_errors::ErrorGuaranteed;
-use rustc_hir::LangItem;
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_middle::mir::*;
-use rustc_middle::ty::{self, AdtDef, Ty};
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::LangItem;
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, AdtDef, Ty};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, mir};
+use crate::rustc_complete::{bug, mir};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_trait_selection::traits::{Obligation, ObligationCause, ObligationCtxt};
+use crate::rustc_trait_selection::traits::{Obligation, ObligationCause, ObligationCtxt};
 ```
 
 ## Block 4
@@ -237,9 +237,9 @@ impl Qualif for NeedsNonConstDrop {
                 .to_host_effect_clause(
                     cx.tcx,
                     match cx.const_kind() {
-                        rustc_hir::ConstContext::ConstFn => ty::BoundConstness::Maybe,
-                        rustc_hir::ConstContext::Static(_)
-                        | rustc_hir::ConstContext::Const { .. } => ty::BoundConstness::Const,
+                        crate::rustc_hir::ConstContext::ConstFn => ty::BoundConstness::Maybe,
+                        crate::rustc_hir::ConstContext::Static(_)
+                        | crate::rustc_hir::ConstContext::Const { .. } => ty::BoundConstness::Const,
                     },
                 ),
         ));

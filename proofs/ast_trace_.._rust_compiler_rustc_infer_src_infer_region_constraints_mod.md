@@ -6,7 +6,7 @@ Generated 35 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-//! See `README.md`.
+// See `README.md`.
 
 use std::ops::Range;
 use std::{cmp, fmt, mem};
@@ -16,10 +16,10 @@ use std::{cmp, fmt, mem};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_data_structures::undo_log::UndoLogs;
-use rustc_data_structures::unify as ut;
-use rustc_index::IndexVec;
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::undo_log::UndoLogs;
+use crate::rustc_data_structures::unify as ut;
+use crate::rustc_index::IndexVec;
 use rustc_macros::{TypeFoldable, TypeVisitable};
 ```
 
@@ -27,14 +27,14 @@ use rustc_macros::{TypeFoldable, TypeVisitable};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, ReBound, ReStatic, ReVar, Region, RegionVid, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, ReBound, ReStatic, ReVar, Region, RegionVid, Ty, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 5

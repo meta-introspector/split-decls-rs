@@ -6,8 +6,8 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=4
 
 ```rust
-//! Signal handler for rustc
-//! Primarily used to extract a backtrace from stack overflow
+// Signal handler for rustc
+// Primarily used to extract a backtrace from stack overflow
 
 use std::alloc::{Layout, alloc};
 ```

@@ -6,17 +6,17 @@ Generated 32 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=14
 
 ```rust
-//! The move-analysis portion of borrowck needs to work in an abstract domain of lifted `Place`s.
-//! Most of the `Place` variants fall into a one-to-one mapping between the concrete and abstract
-//! (e.g., a field projection on a local variable, `x.field`, has the same meaning in both
-//! domains). In other words, all field projections for the same field on the same local do not
-//! have meaningfully different types if ever. Indexed projections are the exception: `a[x]` needs
-//! to be treated as mapping to the same move path as `a[y]` as well as `a[13]`, etc. So we map
-//! these `x`/`y` values to `()`.
-//!
-//! (In theory, the analysis could be extended to work with sets of paths, so that `a[0]` and
-//! `a[13]` could be kept distinct, while `a[x]` would still overlap them both. But that is not
-//! what this representation does today.)
+// The move-analysis portion of borrowck needs to work in an abstract domain of lifted `Place`s.
+// Most of the `Place` variants fall into a one-to-one mapping between the concrete and abstract
+// (e.g., a field projection on a local variable, `x.field`, has the same meaning in both
+// domains). In other words, all field projections for the same field on the same local do not
+// have meaningfully different types if ever. Indexed projections are the exception: `a[x]` needs
+// to be treated as mapping to the same move path as `a[y]` as well as `a[13]`, etc. So we map
+// these `x`/`y` values to `()`.
+//
+// (In theory, the analysis could be extended to work with sets of paths, so that `a[0]` and
+// `a[13]` could be kept distinct, while `a[x]` would still overlap them both. But that is not
+// what this representation does today.)
 
 use std::fmt;
 use std::ops::{Index, IndexMut};
@@ -26,28 +26,28 @@ use std::ops::{Index, IndexMut};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_index::{IndexSlice, IndexVec};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_index::{IndexSlice, IndexVec};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::{Ty, TyCtxt};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{Ty, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=STRUCT | NAME=MovePathIndex | COMPLEXITY=4 | LINES=10
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use smallvec::SmallVec;
 
 use crate::un_derefer::UnDerefer;
 
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     #[orderable]
     #[debug_format = "mp{}"]
     pub struct MovePathIndex {}
@@ -60,7 +60,7 @@ rustc_index::newtype_index! {
 ```rust
 impl polonius_engine::Atom for MovePathIndex {
     fn index(self) -> usize {
-        rustc_index::Idx::index(self)
+        crate::rustc_index::Idx::index(self)
     }
 }
 ```
@@ -69,7 +69,7 @@ impl polonius_engine::Atom for MovePathIndex {
 **Metadata**: AST_ID=6 | TYPE=STRUCT | NAME=MoveOutIndex | COMPLEXITY=4 | LINES=6
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     #[orderable]
     #[debug_format = "mo{}"]
     pub struct MoveOutIndex {}
@@ -80,7 +80,7 @@ rustc_index::newtype_index! {
 **Metadata**: AST_ID=7 | TYPE=STRUCT | NAME=InitIndex | COMPLEXITY=4 | LINES=5
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     #[debug_format = "in{}"]
     pub struct InitIndex {}
 }

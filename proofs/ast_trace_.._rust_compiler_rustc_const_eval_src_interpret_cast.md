@@ -8,7 +8,7 @@ Generated 10 AST blocks from source file
 ```rust
 use std::assert_matches::assert_matches;
 
-use rustc_abi::{FieldIdx, Integer};
+use crate::rustc_abi::{FieldIdx, Integer};
 ```
 
 ## Block 2
@@ -29,30 +29,30 @@ use rustc_apfloat::{Float, FloatConvert};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::CastKind;
-use rustc_middle::mir::interpret::{InterpResult, PointerArithmetic, Scalar};
+use crate::rustc_complete::mir::CastKind;
+use crate::rustc_complete::mir::interpret::{InterpResult, PointerArithmetic, Scalar};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::adjustment::PointerCoercion;
-use rustc_middle::ty::layout::{IntegerExt, TyAndLayout};
+use crate::rustc_complete::ty::adjustment::PointerCoercion;
+use crate::rustc_complete::ty::layout::{IntegerExt, TyAndLayout};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, FloatTy, Ty};
+use crate::rustc_complete::ty::{self, FloatTy, Ty};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 8

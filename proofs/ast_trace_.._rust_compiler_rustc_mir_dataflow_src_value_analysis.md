@@ -15,32 +15,32 @@ use std::fmt::{Debug, Formatter};
 ```rust
 use std::ops::Range;
 
-use rustc_abi::{FieldIdx, VariantIdx};
+use crate::rustc_abi::{FieldIdx, VariantIdx};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxHashMap, FxIndexSet, StdEntry};
+use crate::rustc_data_structures::fx::{FxHashMap, FxIndexSet, StdEntry};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_index::IndexVec;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::mir::visit::{PlaceContext, Visitor};
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_index::IndexVec;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::mir::visit::{PlaceContext, Visitor};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 6
@@ -57,7 +57,7 @@ use crate::lattice::{HasBottom, HasTop};
 **Metadata**: AST_ID=7 | TYPE=STRUCT | NAME=PlaceIndex | COMPLEXITY=2 | LINES=7
 
 ```rust
-rustc_index::newtype_index!(
+crate::rustc_index::newtype_index!(
     /// This index uniquely identifies a place.
     ///
     /// Not every place has a `PlaceIndex`, and not every `PlaceIndex` corresponds to a tracked
@@ -71,7 +71,7 @@ rustc_index::newtype_index!(
 ```rust
 );
 
-rustc_index::newtype_index!(
+crate::rustc_index::newtype_index!(
     /// This index uniquely identifies a tracked place and therefore a slot in [`State`].
     ///
     /// It is an implementation detail of this module.

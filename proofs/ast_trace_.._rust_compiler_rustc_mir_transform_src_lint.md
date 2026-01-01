@@ -6,31 +6,31 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-//! This pass statically detects code which has undefined behaviour or is likely to be erroneous.
-//! It can be used to locate problems in MIR building or optimizations. It assumes that all code
-//! can be executed, so it has false positives.
+// This pass statically detects code which has undefined behaviour or is likely to be erroneous.
+// It can be used to locate problems in MIR building or optimizations. It assumes that all code
+// can be executed, so it has false positives.
 
 use std::borrow::Cow;
 
-use rustc_data_structures::fx::FxHashSet;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::mir::visit::{PlaceContext, Visitor};
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::mir::visit::{PlaceContext, Visitor};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
-use rustc_mir_dataflow::impls::{MaybeStorageDead, MaybeStorageLive, always_storage_live_locals};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_mir_dataflow::impls::{MaybeStorageDead, MaybeStorageLive, always_storage_live_locals};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_mir_dataflow::{Analysis, ResultsCursor};
+use crate::rustc_mir_dataflow::{Analysis, ResultsCursor};
 ```
 
 ## Block 4

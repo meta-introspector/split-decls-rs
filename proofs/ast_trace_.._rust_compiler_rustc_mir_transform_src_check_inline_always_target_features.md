@@ -6,22 +6,22 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::attrs::InlineAttr;
-use rustc_middle::middle::codegen_fn_attrs::{TargetFeature, TargetFeatureKind};
+use crate::rustc_complete::attrs::InlineAttr;
+use crate::rustc_complete::middle::codegen_fn_attrs::{TargetFeature, TargetFeatureKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{Body, TerminatorKind};
+use crate::rustc_complete::mir::{Body, TerminatorKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 4

@@ -8,8 +8,8 @@ Generated 2 AST blocks from source file
 ```rust
 use std::collections::VecDeque;
 
-use rustc_index::Idx;
-use rustc_index::bit_set::DenseBitSet;
+use crate::rustc_index::Idx;
+use crate::rustc_index::bit_set::DenseBitSet;
 
 /// A work queue is a handy data structure for tracking work left to
 /// do. (For example, basic blocks left to process.) It is basically a

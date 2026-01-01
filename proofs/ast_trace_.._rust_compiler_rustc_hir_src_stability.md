@@ -15,7 +15,7 @@ use rustc_macros::{Decodable, Encodable, HashStable_Generic, PrintAttribute};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ErrorGuaranteed, Symbol, sym};
+use crate::rustc_complete::{ErrorGuaranteed, Symbol, sym};
 ```
 
 ## Block 3

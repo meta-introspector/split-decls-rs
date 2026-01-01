@@ -6,29 +6,29 @@ Generated 23 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=9
 
 ```rust
-//! the rustc crate store interface. This also includes types that
-//! are *mostly* used as a part of that interface, but these should
-//! probably get a better home if someone can find one.
+// the rustc crate store interface. This also includes types that
+// are *mostly* used as a part of that interface, but these should
+// probably get a better home if someone can find one.
 
 use std::any::Any;
 use std::path::PathBuf;
 
-use rustc_abi::ExternAbi;
-use rustc_data_structures::sync::{self, AppendOnlyIndexVec, FreezeLock};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_data_structures::sync::{self, AppendOnlyIndexVec, FreezeLock};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::attrs::{CfgEntry, NativeLibKind, PeImportNameType};
+use crate::rustc_complete::attrs::{CfgEntry, NativeLibKind, PeImportNameType};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::def_id::{
+use crate::rustc_complete::def_id::{
     CrateNum, DefId, LOCAL_CRATE, LocalDefId, StableCrateId, StableCrateIdMap,
 };
 ```
@@ -37,7 +37,7 @@ use rustc_hir::def_id::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::definitions::{DefKey, DefPath, DefPathHash, Definitions};
+use crate::rustc_complete::definitions::{DefKey, DefPath, DefPathHash, Definitions};
 ```
 
 ## Block 5
@@ -51,7 +51,7 @@ use rustc_macros::{Decodable, Encodable, HashStable_Generic};
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 7

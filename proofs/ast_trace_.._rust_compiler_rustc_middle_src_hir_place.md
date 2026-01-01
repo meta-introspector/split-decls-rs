@@ -6,14 +6,14 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{FieldIdx, VariantIdx};
+use crate::rustc_abi::{FieldIdx, VariantIdx};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::HirId;
+use crate::rustc_complete::HirId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
 ```
 
@@ -97,7 +97,7 @@ pub struct Projection<'tcx> {
 /// processing a pattern, a `Place` can be used to refer to the sub-value
 /// currently being inspected.
 ///
-/// This is an HIR version of [`rustc_middle::mir::Place`].
+/// This is an HIR version of [`crate::rustc_middle::mir::Place`].
 #[derive(Clone, Debug, PartialEq, Eq, Hash, TyEncodable, TyDecodable, HashStable)]
 #[derive(TypeFoldable, TypeVisitable)]
 pub struct Place<'tcx> {
@@ -119,7 +119,7 @@ pub struct Place<'tcx> {
 /// processing a pattern, a `Place` can be used to refer to the sub-value
 /// currently being inspected.
 ///
-/// This is an HIR version of [`rustc_middle::mir::Place`].
+/// This is an HIR version of [`crate::rustc_middle::mir::Place`].
 #[derive(Clone, Debug, PartialEq, Eq, Hash, TyEncodable, TyDecodable, HashStable)]
 pub struct PlaceWithHirId<'tcx> {
     /// `HirId` of the expression or pattern producing this value.

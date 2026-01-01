@@ -8,7 +8,7 @@ Generated 2 AST blocks from source file
 ```rust
 use std::borrow::Borrow;
 
-use rustc_data_structures::profiling::EventArgRecorder;
+use crate::rustc_data_structures::profiling::EventArgRecorder;
 
 use crate::source_map::SourceMap;
 

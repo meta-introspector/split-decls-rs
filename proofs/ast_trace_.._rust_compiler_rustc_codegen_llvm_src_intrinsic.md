@@ -9,81 +9,81 @@ Generated 26 AST blocks from source file
 use std::assert_matches::assert_matches;
 use std::cmp::Ordering;
 
-use rustc_abi::{Align, BackendRepr, ExternAbi, Float, HasDataLayout, Primitive, Size};
+use crate::rustc_abi::{Align, BackendRepr, ExternAbi, Float, HasDataLayout, Primitive, Size};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::base::{compare_simd_types, wants_msvc_seh, wants_wasm_eh};
+use crate::rustc_codegen_ssa::base::{compare_simd_types, wants_msvc_seh, wants_wasm_eh};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_codegen_ssa::codegen_attrs::autodiff_attrs;
-use rustc_codegen_ssa::common::{IntPredicate, TypeKind};
+use crate::rustc_codegen_ssa::codegen_attrs::autodiff_attrs;
+use crate::rustc_codegen_ssa::common::{IntPredicate, TypeKind};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::errors::{ExpectedPointerMutability, InvalidMonomorphization};
+use crate::rustc_codegen_ssa::errors::{ExpectedPointerMutability, InvalidMonomorphization};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::mir::operand::{OperandRef, OperandValue};
+use crate::rustc_codegen_ssa::mir::operand::{OperandRef, OperandValue};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_codegen_ssa::mir::place::{PlaceRef, PlaceValue};
+use crate::rustc_codegen_ssa::mir::place::{PlaceRef, PlaceValue};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_codegen_ssa::traits::*;
-use rustc_hir::def_id::LOCAL_CRATE;
-use rustc_hir::{self as hir};
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_complete::def_id::LOCAL_CRATE;
+use crate::rustc_complete::{self as hir};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::BinOp;
-use rustc_middle::ty::layout::{FnAbiOf, HasTyCtxt, HasTypingEnv, LayoutOf};
+use crate::rustc_complete::mir::BinOp;
+use crate::rustc_complete::ty::layout::{FnAbiOf, HasTyCtxt, HasTypingEnv, LayoutOf};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, GenericArgsRef, Instance, Ty, TyCtxt, TypingEnv};
+use crate::rustc_complete::ty::{self, GenericArgsRef, Instance, Ty, TyCtxt, TypingEnv};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 12
@@ -97,8 +97,8 @@ use rustc_symbol_mangling::{mangle_internal_symbol, symbol_name_for_instance_in_
 **Metadata**: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_target::callconv::PassMode;
-use rustc_target::spec::PanicStrategy;
+use crate::rustc_target::callconv::PassMode;
+use crate::rustc_target::spec::PanicStrategy;
 use tracing::debug;
 
 use crate::abi::FnAbiLlvmExt;
@@ -722,13 +722,13 @@ impl<'ll, 'tcx> IntrinsicCallBuilderMethods<'tcx> for Builder<'_, 'll, 'tcx> {
     }
 
     fn assume(&mut self, val: Self::Value) {
-        if self.cx.sess().opts.optimize != rustc_session::config::OptLevel::No {
+        if self.cx.sess().opts.optimize != crate::rustc_session::config::OptLevel::No {
             self.call_intrinsic("llvm.assume", &[], &[val]);
         }
     }
 
     fn expect(&mut self, cond: Self::Value, expected: bool) -> Self::Value {
-        if self.cx.sess().opts.optimize != rustc_session::config::OptLevel::No {
+        if self.cx.sess().opts.optimize != crate::rustc_session::config::OptLevel::No {
             self.call_intrinsic(
                 "llvm.expect",
                 &[self.type_i1()],
@@ -1282,7 +1282,7 @@ fn codegen_autodiff<'ll, 'tcx>(
     args: &[OperandRef<'tcx, &'ll Value>],
     result: PlaceRef<'tcx, &'ll Value>,
 ) {
-    if !tcx.sess.opts.unstable_opts.autodiff.contains(&rustc_session::config::AutoDiff::Enable) {
+    if !tcx.sess.opts.unstable_opts.autodiff.contains(&crate::rustc_session::config::AutoDiff::Enable) {
         let _ = tcx.dcx().emit_almost_fatal(AutoDiffWithoutEnable);
     }
 

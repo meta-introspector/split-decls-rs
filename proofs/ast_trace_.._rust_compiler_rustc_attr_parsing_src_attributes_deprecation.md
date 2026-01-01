@@ -6,7 +6,7 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::attrs::{DeprecatedSince, Deprecation};
+use crate::rustc_complete::attrs::{DeprecatedSince, Deprecation};
 ```
 
 ## Block 2

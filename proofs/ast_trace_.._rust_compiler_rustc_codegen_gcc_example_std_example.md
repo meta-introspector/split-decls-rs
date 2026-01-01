@@ -6,8 +6,8 @@ Generated 17 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=printf | COMPLEXITY=2 | LINES=12
 
 ```rust
-#![allow(internal_features)]
-#![feature(core_intrinsics, coroutines, coroutine_trait, stmt_expr_attributes)]
+#[allow(internal_features)]
+#[feature(core_intrinsics, coroutines, coroutine_trait, stmt_expr_attributes)]
 
 #[cfg(feature="master")]
 #[cfg(target_arch="x86_64")]

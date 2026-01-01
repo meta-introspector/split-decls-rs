@@ -6,20 +6,20 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-//! Orphan checker: every impl either implements a trait defined in this
-//! crate or pertains to a type defined in this crate.
+// Orphan checker: every impl either implements a trait defined in this
+// crate or pertains to a type defined in this crate.
 
-use rustc_data_structures::fx::FxIndexSet;
-use rustc_errors::ErrorGuaranteed;
-use rustc_infer::infer::{DefineOpaqueTypes, InferCtxt, TyCtxtInferExt};
+use crate::rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_infer::infer::{DefineOpaqueTypes, InferCtxt, TyCtxtInferExt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_lint_defs::builtin::UNCOVERED_PARAM_IN_PROJECTION;
-use rustc_middle::ty::{
+use crate::rustc_lint_defs::builtin::UNCOVERED_PARAM_IN_PROJECTION;
+use crate::rustc_complete::ty::{
     self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode,
 };
 ```
@@ -28,21 +28,21 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_trait_selection::traits::{
+use crate::rustc_trait_selection::traits::{
     self, IsFirstInputType, OrphanCheckErr, OrphanCheckMode, UncoveredTyParams,
 };
 ```

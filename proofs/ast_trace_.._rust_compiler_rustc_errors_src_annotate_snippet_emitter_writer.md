@@ -6,12 +6,12 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10
 
 ```rust
-//! Emit diagnostics using the `annotate-snippets` library
-//!
-//! This is the equivalent of `./emitter.rs` but making use of the
-//! [`annotate-snippets`][annotate_snippets] library instead of building the output ourselves.
-//!
-//! [annotate_snippets]: https://docs.rs/crate/annotate-snippets/
+// Emit diagnostics using the `annotate-snippets` library
+//
+// This is the equivalent of `./emitter.rs` but making use of the
+// [`annotate-snippets`][annotate_snippets] library instead of building the output ourselves.
+//
+// [annotate_snippets]: https://docs.rs/crate/annotate-snippets/
 
 use std::sync::Arc;
 
@@ -22,9 +22,9 @@ use annotate_snippets::{Renderer, Snippet};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_error_messages::FluentArgs;
-use rustc_span::SourceFile;
-use rustc_span::source_map::SourceMap;
+use crate::rustc_error_messages::FluentArgs;
+use crate::rustc_complete::SourceFile;
+use crate::rustc_complete::source_map::SourceMap;
 
 use crate::emitter::FileWithAnnotatedLines;
 use crate::registry::Registry;

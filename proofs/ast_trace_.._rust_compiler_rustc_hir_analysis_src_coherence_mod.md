@@ -13,26 +13,26 @@ Generated 9 AST blocks from source file
 // done by the orphan and overlap modules. Then we build up various
 // mappings. That mapping code resides here.
 
-use rustc_errors::codes::*;
-use rustc_errors::struct_span_code_err;
-use rustc_hir::LangItem;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::struct_span_code_err;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::query::Providers;
-use rustc_middle::ty::{self, TyCtxt, TypeVisitableExt, elaborate};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt, elaborate};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::parse::feature_err;
-use rustc_span::{ErrorGuaranteed, sym};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{ErrorGuaranteed, sym};
 ```
 
 ## Block 4
@@ -171,7 +171,7 @@ fn enforce_empty_impls_for_marker_traits(
 **Metadata**: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=23
 
 ```rust
-/// Adds query implementations to the [Providers] vtable, see [`rustc_middle::query`].
+/// Adds query implementations to the [Providers] vtable, see [`crate::rustc_middle::query`].
 pub(crate) fn provide(providers: &mut Providers) {
     use self::builtin::coerce_unsized_info;
     use self::inherent_impls::{

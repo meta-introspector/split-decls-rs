@@ -6,7 +6,7 @@ Generated 33 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=21 | LINES=52
 
 ```rust
-/*!
+/*
 Managing the scope stack. The scopes are tied to lexical scopes, so as
 we descend the THIR, we push a scope on the stack, build its
 contents, and then pop it off. Every scope is named by a
@@ -98,54 +98,54 @@ that contains only loops and breakable blocks. It tracks where a `break`,
 use std::mem;
 
 use interpret::ErrorHandled;
-use rustc_data_structures::fx::FxHashMap;
-use rustc_hir::{self as hir, HirId};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::{self as hir, HirId};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_index::{IndexSlice, IndexVec};
+use crate::rustc_index::{IndexSlice, IndexVec};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::middle::region;
-use rustc_middle::mir::{self, *};
+use crate::rustc_complete::middle::region;
+use crate::rustc_complete::mir::{self, *};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::thir::{AdtExpr, AdtExprBase, ArmId, ExprId, ExprKind, LintLevel};
+use crate::rustc_complete::thir::{AdtExpr, AdtExprBase, ArmId, ExprId, ExprKind, LintLevel};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty, TyCtxt, TypeVisitableExt, ValTree};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeVisitableExt, ValTree};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_pattern_analysis::rustc::RustcPatCtxt;
-use rustc_session::lint::Level;
-use rustc_span::source_map::Spanned;
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_pattern_analysis::rustc::RustcPatCtxt;
+use crate::rustc_complete::lint::Level;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 9
@@ -324,7 +324,7 @@ pub(crate) enum BreakableTarget {
 **Metadata**: AST_ID=20 | TYPE=STRUCT | NAME=DropIdx | COMPLEXITY=3 | LINES=5
 
 ```rust
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     #[orderable]
     struct DropIdx {}
 }
@@ -1031,7 +1031,7 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
         let span = source_info.span;
 
         // A break can only break out of a scope, so the value should be a scope.
-        let rustc_middle::thir::ExprKind::Scope { value, .. } = self.thir[value].kind else {
+        let crate::rustc_middle::thir::ExprKind::Scope { value, .. } = self.thir[value].kind else {
             span_bug!(span, "break value must be a scope")
         };
 
@@ -1109,11 +1109,11 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
             typeck_results,
             module: self.tcx.parent_module(self.hir_id).to_def_id(),
             // FIXME(#132279): We're in a body, should handle opaques.
-            typing_env: rustc_middle::ty::TypingEnv::non_body_analysis(self.tcx, self.def_id),
+            typing_env: crate::rustc_middle::ty::TypingEnv::non_body_analysis(self.tcx, self.def_id),
             dropless_arena: &dropless_arena,
             match_lint_level: self.hir_id,
-            whole_match_span: Some(rustc_span::Span::default()),
-            scrut_span: rustc_span::Span::default(),
+            whole_match_span: Some(crate::rustc_span::Span::default()),
+            scrut_span: crate::rustc_span::Span::default(),
             refutable: true,
             known_valid_scrutinee: true,
             internal_state: Default::default(),

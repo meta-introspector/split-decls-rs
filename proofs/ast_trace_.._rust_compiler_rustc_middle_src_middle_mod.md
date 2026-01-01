@@ -12,9 +12,9 @@ pub mod dependency_format;
 pub mod exported_symbols;
 pub mod lang_items;
 pub mod lib_features {
-    use rustc_data_structures::unord::UnordMap;
+    use crate::rustc_data_structures::unord::UnordMap;
     use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-    use rustc_span::{Span, Symbol};
+    use crate::rustc_complete::{Span, Symbol};
 
     #[derive(Copy, Clone, Debug, PartialEq, Eq)]
     #[derive(HashStable, TyEncodable, TyDecodable)]

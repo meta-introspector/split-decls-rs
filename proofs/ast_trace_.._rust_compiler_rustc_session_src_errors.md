@@ -13,10 +13,10 @@ use std::num::{NonZero, ParseIntError};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_ast::token;
-use rustc_ast::util::literal::LitError;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_complete::token;
+use crate::rustc_complete::util::literal::LitError;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Diag, DiagCtxtHandle, DiagMessage, Diagnostic, EmissionGuarantee, ErrorGuaranteed, Level,
     MultiSpan,
 };
@@ -33,14 +33,14 @@ use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol};
+use crate::rustc_complete::{Span, Symbol};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_target::spec::{SplitDebuginfo, StackProtector, TargetTuple};
+use crate::rustc_target::spec::{SplitDebuginfo, StackProtector, TargetTuple};
 ```
 
 ## Block 6
@@ -139,7 +139,7 @@ pub(crate) struct FeatureDiagnosticHelp {
 #[suggestion(
     session_feature_diagnostic_suggestion,
     applicability = "maybe-incorrect",
-    code = "#![feature({feature})]\n"
+    code = "#[feature({feature})]\n"
 )]
 pub struct FeatureDiagnosticSuggestion {
     pub feature: Symbol,

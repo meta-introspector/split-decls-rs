@@ -6,22 +6,22 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-//! Performs various peephole optimizations.
+// Performs various peephole optimizations.
 
-use rustc_abi::ExternAbi;
-use rustc_ast::attr;
-use rustc_hir::LangItem;
-use rustc_middle::bug;
-use rustc_middle::mir::*;
-use rustc_middle::ty::layout::ValidityRequirement;
-use rustc_middle::ty::{self, GenericArgsRef, Ty, TyCtxt, layout};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_complete::attr;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::layout::ValidityRequirement;
+use crate::rustc_complete::ty::{self, GenericArgsRef, Ty, TyCtxt, layout};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Symbol, sym};
+use crate::rustc_complete::{DUMMY_SP, Symbol, sym};
 ```
 
 ## Block 3
@@ -48,7 +48,7 @@ impl<'tcx> crate::MirPass<'tcx> for InstSimplify {
         }
     }
 
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() > 0
     }
 

@@ -6,7 +6,7 @@ Generated 20 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
+use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 ```
 
 ## Block 2
@@ -14,8 +14,8 @@ use rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 
 ```rust
 use rustc_hir as hir;
-use rustc_infer::traits::util;
-use rustc_middle::ty::{
+use crate::rustc_infer::traits::util;
+use crate::rustc_complete::ty::{
     self, GenericArgs, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt,
     Upcast, shift_vars,
 };
@@ -25,15 +25,15 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::Span;
-use rustc_span::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 5
@@ -494,11 +494,11 @@ pub(super) fn explicit_item_bounds_with_filter(
             // Since RPITITs are lowered as projections in `<dyn HirTyLowerer>::lower_ty`,
             // when we're asking for the item bounds of the *opaques* in a trait's default
             // method signature, we need to map these projections back to opaques.
-            rustc_hir::OpaqueTyOrigin::FnReturn {
+            crate::rustc_hir::OpaqueTyOrigin::FnReturn {
                 parent,
                 in_trait_or_impl: Some(hir::RpitContext::Trait),
             }
-            | rustc_hir::OpaqueTyOrigin::AsyncFn {
+            | crate::rustc_hir::OpaqueTyOrigin::AsyncFn {
                 parent,
                 in_trait_or_impl: Some(hir::RpitContext::Trait),
             } => {
@@ -512,15 +512,15 @@ pub(super) fn explicit_item_bounds_with_filter(
                 assert_only_contains_predicates_from(filter, bounds, item_ty);
                 bounds
             }
-            rustc_hir::OpaqueTyOrigin::FnReturn {
+            crate::rustc_hir::OpaqueTyOrigin::FnReturn {
                 parent: _,
                 in_trait_or_impl: None | Some(hir::RpitContext::TraitImpl),
             }
-            | rustc_hir::OpaqueTyOrigin::AsyncFn {
+            | crate::rustc_hir::OpaqueTyOrigin::AsyncFn {
                 parent: _,
                 in_trait_or_impl: None | Some(hir::RpitContext::TraitImpl),
             }
-            | rustc_hir::OpaqueTyOrigin::TyAlias { parent: _, .. } => {
+            | crate::rustc_hir::OpaqueTyOrigin::TyAlias { parent: _, .. } => {
                 let args = GenericArgs::identity_for_item(tcx, def_id);
                 let item_ty = Ty::new_opaque(tcx, def_id.to_def_id(), args);
                 let bounds = opaque_type_bounds(tcx, def_id, bounds, item_ty, *span, filter);

@@ -6,8 +6,8 @@ Generated 15 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5
 
 ```rust
-//! This module defines parallel operations that are implemented in
-//! one way for the serial compiler, and another way the parallel compiler.
+// This module defines parallel operations that are implemented in
+// one way for the serial compiler, and another way the parallel compiler.
 
 use std::any::Any;
 use std::panic::{AssertUnwindSafe, catch_unwind, resume_unwind};
@@ -137,7 +137,7 @@ macro_rules! parallel {
 pub fn spawn(func: impl FnOnce() + DynSend + 'static) {
     if mode::is_dyn_thread_safe() {
         let func = FromDyn::from(func);
-        rustc_thread_pool::spawn(|| {
+        crate::rustc_thread_pool::spawn(|| {
             (func.into_inner())();
         });
     } else {
@@ -153,11 +153,11 @@ pub fn spawn(func: impl FnOnce() + DynSend + 'static) {
 // This function only works when `mode::is_dyn_thread_safe()`.
 pub fn scope<'scope, OP, R>(op: OP) -> R
 where
-    OP: FnOnce(&rustc_thread_pool::Scope<'scope>) -> R + DynSend,
+    OP: FnOnce(&crate::rustc_thread_pool::Scope<'scope>) -> R + DynSend,
     R: DynSend,
 {
     let op = FromDyn::from(op);
-    rustc_thread_pool::scope(|s| FromDyn::from(op.into_inner()(s))).into_inner()
+    crate::rustc_thread_pool::scope(|s| FromDyn::from(op.into_inner()(s))).into_inner()
 }
 ```
 
@@ -175,7 +175,7 @@ where
         let oper_a = FromDyn::from(oper_a);
         let oper_b = FromDyn::from(oper_b);
         let (a, b) = parallel_guard(|guard| {
-            rustc_thread_pool::join(
+            crate::rustc_thread_pool::join(
                 move || guard.run(move || FromDyn::from(oper_a.into_inner()())),
                 move || guard.run(move || FromDyn::from(oper_b.into_inner()())),
             )
@@ -214,7 +214,7 @@ fn par_slice<I: DynSend>(
             let (left, right) = items.split_at_mut(items.len() / 2);
             let mut left = state.for_each.derive(left);
             let mut right = state.for_each.derive(right);
-            rustc_thread_pool::join(move || par_rec(*left, state), move || par_rec(*right, state));
+            crate::rustc_thread_pool::join(move || par_rec(*left, state), move || par_rec(*right, state));
         }
     }
 
@@ -317,7 +317,7 @@ pub fn par_map<I: DynSend, T: IntoIterator<Item = I>, R: DynSend, C: FromIterato
 pub fn broadcast<R: DynSend>(op: impl Fn(usize) -> R + DynSync) -> Vec<R> {
     if mode::is_dyn_thread_safe() {
         let op = FromDyn::from(op);
-        let results = rustc_thread_pool::broadcast(|context| op.derive(op(context.index())));
+        let results = crate::rustc_thread_pool::broadcast(|context| op.derive(op(context.index())));
         results.into_iter().map(|r| r.into_inner()).collect()
     } else {
         vec![op(0)]

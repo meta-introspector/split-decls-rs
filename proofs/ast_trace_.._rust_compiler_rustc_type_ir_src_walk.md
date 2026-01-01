@@ -6,8 +6,8 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-//! An iterator over the type substructure.
-//! WARNING: this does not keep track of the region depth.
+// An iterator over the type substructure.
+// WARNING: this does not keep track of the region depth.
 
 use smallvec::{SmallVec, smallvec};
 ```

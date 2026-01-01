@@ -8,7 +8,7 @@ Generated 1 AST blocks from source file
 ```rust
 use std::borrow::Cow;
 
-use rustc_session::Session;
+use crate::rustc_complete::Session;
 
 pub mod apple;
 pub mod archive;

@@ -6,35 +6,35 @@ Generated 24 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-//! A pass that annotates every item and method with its stability level,
-//! propagating default levels lexically from parent to children ast nodes.
+// A pass that annotates every item and method with its stability level,
+// propagating default levels lexically from parent to children ast nodes.
 
 use std::num::NonZero;
 
-use rustc_ast::NodeId;
-use rustc_errors::{Applicability, Diag, EmissionGuarantee, LintBuffer};
+use crate::rustc_complete::NodeId;
+use crate::rustc_complete::{Applicability, Diag, EmissionGuarantee, LintBuffer};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_feature::GateIssue;
-use rustc_hir::attrs::{DeprecatedSince, Deprecation};
+use crate::rustc_feature::GateIssue;
+use crate::rustc_complete::attrs::{DeprecatedSince, Deprecation};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, ConstStability, DefaultBodyStability, HirId, Stability};
+use crate::rustc_complete::{self as hir, ConstStability, DefaultBodyStability, HirId, Stability};
 ```
 
 ## Block 5
@@ -48,23 +48,23 @@ use rustc_macros::{Decodable, Encodable, HashStable, Subdiagnostic};
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::Session;
-use rustc_session::lint::builtin::{DEPRECATED, DEPRECATED_IN_FUTURE, SOFT_UNSTABLE};
+use crate::rustc_complete::Session;
+use crate::rustc_complete::lint::builtin::{DEPRECATED, DEPRECATED_IN_FUTURE, SOFT_UNSTABLE};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_session::lint::{BuiltinLintDiag, DeprecatedSinceKind, Level, Lint};
+use crate::rustc_complete::lint::{BuiltinLintDiag, DeprecatedSinceKind, Level, Lint};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::parse::feature_err_issue;
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::parse::feature_err_issue;
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 9
@@ -222,7 +222,7 @@ pub struct Deprecated {
 **Metadata**: AST_ID=17 | TYPE=FUNCTION | NAME=decorate_lint | COMPLEXITY=22 | LINES=26
 
 ```rust
-impl<'a, G: EmissionGuarantee> rustc_errors::LintDiagnostic<'a, G> for Deprecated {
+impl<'a, G: EmissionGuarantee> crate::rustc_errors::LintDiagnostic<'a, G> for Deprecated {
     fn decorate_lint<'b>(self, diag: &'b mut Diag<'a, G>) {
         diag.primary_message(match &self.since_kind {
             DeprecatedSinceKind::InEffect => crate::fluent_generated::middle_deprecated,
@@ -421,7 +421,7 @@ impl<'tcx> TyCtxt<'tcx> {
     /// Evaluates the stability of an item.
     ///
     /// Returns `EvalResult::Allow` if the item is stable, or unstable but the corresponding
-    /// `#![feature]` has been provided. Returns `EvalResult::Deny` which describes the offending
+    /// `#[feature]` has been provided. Returns `EvalResult::Deny` which describes the offending
     /// unstable feature otherwise.
     ///
     /// If `id` is `Some(_)`, this function will also check if the item at `def_id` has been
@@ -440,7 +440,7 @@ impl<'tcx> TyCtxt<'tcx> {
     /// Evaluates the stability of an item.
     ///
     /// Returns `EvalResult::Allow` if the item is stable, or unstable but the corresponding
-    /// `#![feature]` has been provided. Returns `EvalResult::Deny` which describes the offending
+    /// `#[feature]` has been provided. Returns `EvalResult::Deny` which describes the offending
     /// unstable feature otherwise.
     ///
     /// If `id` is `Some(_)`, this function will also check if the item at `def_id` has been
@@ -468,7 +468,7 @@ impl<'tcx> TyCtxt<'tcx> {
                 // topmost deprecation. For example, if a struct is deprecated,
                 // the use of a field won't be linted.
                 //
-                // With #![staged_api], we want to emit down the whole
+                // With #[staged_api], we want to emit down the whole
                 // hierarchy.
                 let depr_attr = &depr_entry.attr;
                 if !skip || depr_attr.is_since_rustc_version() {
@@ -559,7 +559,7 @@ impl<'tcx> TyCtxt<'tcx> {
     /// Evaluates the default-impl stability of an item.
     ///
     /// Returns `EvalResult::Allow` if the item's default implementation is stable, or unstable but the corresponding
-    /// `#![feature]` has been provided. Returns `EvalResult::Deny` which describes the offending
+    /// `#[feature]` has been provided. Returns `EvalResult::Deny` which describes the offending
     /// unstable feature otherwise.
     pub fn eval_default_body_stability(self, def_id: DefId, span: Span) -> EvalResult {
         let is_staged_api = self.lookup_stability(def_id.krate.as_def_id()).is_some();
@@ -609,7 +609,7 @@ impl<'tcx> TyCtxt<'tcx> {
 
     /// Checks if an item is stable or error out.
     ///
-    /// If the item defined by `def_id` is unstable and the corresponding `#![feature]` does not
+    /// If the item defined by `def_id` is unstable and the corresponding `#[feature]` does not
     /// exist, emits an error.
     ///
     /// This function will also check if the item is deprecated.
@@ -628,7 +628,7 @@ impl<'tcx> TyCtxt<'tcx> {
 
     /// Checks if an item is stable or error out.
     ///
-    /// If the item defined by `def_id` is unstable and the corresponding `#![feature]` does not
+    /// If the item defined by `def_id` is unstable and the corresponding `#[feature]` does not
     /// exist, emits an error.
     ///
     /// This function will also check if the item is deprecated.

@@ -6,7 +6,7 @@ Generated 18 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::fx::FxHashMap;
 use rustc_macros::{Decodable, Encodable, Walkable};
 ```
 
@@ -14,7 +14,7 @@ use rustc_macros::{Decodable, Encodable, Walkable};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::{Ident, Span, Symbol};
 ```
 
 ## Block 3

@@ -6,7 +6,7 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use rustc_type_ir::elaborate::Elaboratable;
 
 use crate::ty::{self, TyCtxt};

@@ -6,14 +6,14 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=10
 
 ```rust
-//! Methods for normalizing when you don't care about regions (and
-//! aren't doing type inference). If either of those things don't
-//! apply to you, use `infcx.normalize(...)`.
-//!
-//! The methods in this file use a `TypeFolder` to recursively process
-//! contents, invoking the underlying
-//! `normalize_generic_arg_after_erasing_regions` query for each type
-//! or constant found within. (This underlying query is what is cached.)
+// Methods for normalizing when you don't care about regions (and
+// aren't doing type inference). If either of those things don't
+// apply to you, use `infcx.normalize(...)`.
+//
+// The methods in this file use a `TypeFolder` to recursively process
+// contents, invoking the underlying
+// `normalize_generic_arg_after_erasing_regions` query for each type
+// or constant found within. (This underlying query is what is cached.)
 
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 ```

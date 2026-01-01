@@ -20,7 +20,7 @@ use std::ffi::{CStr, CString};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_codegen_ssa::traits::{
+use crate::rustc_codegen_ssa::traits::{
     ConstCodegenMethods, CoverageInfoBuilderMethods, MiscCodegenMethods,
 };
 ```
@@ -29,9 +29,9 @@ use rustc_codegen_ssa::traits::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_middle::mir::coverage::CoverageKind;
-use rustc_middle::ty::Instance;
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_complete::mir::coverage::CoverageKind;
+use crate::rustc_complete::ty::Instance;
 use tracing::{debug, instrument};
 ```
 

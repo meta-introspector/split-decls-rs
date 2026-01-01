@@ -6,9 +6,9 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_ast::TraitObjectSyntax;
-use rustc_errors::codes::*;
-use rustc_errors::{Diag, EmissionGuarantee, ErrorGuaranteed, StashKey, Suggestions};
+use crate::rustc_complete::TraitObjectSyntax;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Diag, EmissionGuarantee, ErrorGuaranteed, StashKey, Suggestions};
 ```
 
 ## Block 2
@@ -16,19 +16,19 @@ use rustc_errors::{Diag, EmissionGuarantee, ErrorGuaranteed, StashKey, Suggestio
 
 ```rust
 use rustc_hir as hir;
-use rustc_hir::def::{DefKind, Namespace, Res};
+use crate::rustc_complete::def::{DefKind, Namespace, Res};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=FUNCTION | NAME=maybe_suggest_add_generic_impl_trait | COMPLEXITY=283 | LINES=528
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_lint_defs::Applicability;
-use rustc_lint_defs::builtin::BARE_TRAIT_OBJECTS;
-use rustc_span::Span;
-use rustc_span::edit_distance::find_best_match_for_name;
-use rustc_trait_selection::error_reporting::traits::suggestions::NextTypeParamName;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_lint_defs::Applicability;
+use crate::rustc_lint_defs::builtin::BARE_TRAIT_OBJECTS;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::edit_distance::find_best_match_for_name;
+use crate::rustc_trait_selection::error_reporting::traits::suggestions::NextTypeParamName;
 
 use super::HirTyLowerer;
 
@@ -98,7 +98,7 @@ impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
         }
 
         if self_ty.span.edition().at_least_rust_2021() {
-            let mut diag = rustc_errors::struct_span_code_err!(
+            let mut diag = crate::rustc_errors::struct_span_code_err!(
                 self.dcx(),
                 self_ty.span,
                 E0782,

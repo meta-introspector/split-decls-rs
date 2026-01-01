@@ -17,52 +17,52 @@ use hir::def_id::{DefId, DefIdMap, LocalDefId};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
+use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::codes::*;
-use rustc_errors::{Applicability, ErrorGuaranteed, MultiSpan, pluralize, struct_span_code_err};
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Applicability, ErrorGuaranteed, MultiSpan, pluralize, struct_span_code_err};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::intravisit::VisitorExt;
-use rustc_hir::{self as hir, AmbigArg, GenericParamKind, ImplItemKind, intravisit};
+use crate::rustc_complete::intravisit::VisitorExt;
+use crate::rustc_complete::{self as hir, AmbigArg, GenericParamKind, ImplItemKind, intravisit};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_infer::infer::{self, BoundRegionConversionTime, InferCtxt, TyCtxtInferExt};
+use crate::rustc_infer::infer::{self, BoundRegionConversionTime, InferCtxt, TyCtxtInferExt};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_infer::traits::util;
-use rustc_middle::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_infer::traits::util;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, BottomUpFolder, GenericArgs, GenericParamDefKind, Ty, TyCtxt, TypeFoldable, TypeFolder,
     TypeSuperFoldable, TypeVisitable, TypeVisitableExt, TypeVisitor, TypingMode, Upcast,
 };
@@ -72,24 +72,24 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::infer::InferCtxtExt;
-use rustc_trait_selection::regions::InferCtxtRegionExt;
-use rustc_trait_selection::traits::{
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use crate::rustc_trait_selection::regions::InferCtxtRegionExt;
+use crate::rustc_trait_selection::traits::{
     self, FulfillmentError, ObligationCause, ObligationCauseCode, ObligationCtxt,
 };
 ```

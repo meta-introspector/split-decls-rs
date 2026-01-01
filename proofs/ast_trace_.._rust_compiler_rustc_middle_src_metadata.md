@@ -6,7 +6,7 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def::Res;
+use crate::rustc_complete::def::Res;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 ```
 
@@ -14,8 +14,8 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable};
 **Metadata**: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=16
 
 ```rust
-use rustc_span::Ident;
-use rustc_span::def_id::DefId;
+use crate::rustc_complete::Ident;
+use crate::rustc_complete::def_id::DefId;
 use smallvec::SmallVec;
 
 use crate::ty;

@@ -6,13 +6,13 @@ Generated 66 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=11
 
 ```rust
-//! This module contains some shared code for encoding and decoding various
-//! things from the `ty` module, and in particular implements support for
-//! "shorthands" which allow to have pointers back into the already encoded
-//! stream instead of re-encoding the same thing twice.
-//!
-//! The functionality in here is shared between persisting to crate metadata and
-//! persisting to incr. comp. caches.
+// This module contains some shared code for encoding and decoding various
+// things from the `ty` module, and in particular implements support for
+// "shorthands" which allow to have pointers back into the already encoded
+// stream instead of re-encoding the same thing twice.
+//
+// The functionality in here is shared between persisting to crate metadata and
+// persisting to incr. comp. caches.
 
 use std::hash::Hash;
 use std::intrinsics;
@@ -23,24 +23,24 @@ use std::marker::{DiscriminantKind, PointeeSized};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::{FieldIdx, VariantIdx};
+use crate::rustc_abi::{FieldIdx, VariantIdx};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::fx::FxHashMap;
-use rustc_hir::def_id::LocalDefId;
-use rustc_serialize::{Decodable, Encodable};
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_serialize::{Decodable, Encodable};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::source_map::Spanned;
-use rustc_span::{Span, SpanDecoder, SpanEncoder};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{Span, SpanDecoder, SpanEncoder};
 ```
 
 ## Block 5
@@ -877,7 +877,7 @@ macro_rules! impl_arena_allocatable_decoders {
 **Metadata**: AST_ID=64 | TYPE=FUNCTION | NAME=decode | COMPLEXITY=17 | LINES=21
 
 ```rust
-rustc_hir::arena_types!(impl_arena_allocatable_decoders);
+crate::rustc_hir::arena_types!(impl_arena_allocatable_decoders);
 arena_types!(impl_arena_allocatable_decoders);
 
 macro_rules! impl_arena_copy_decoder {
@@ -905,11 +905,11 @@ macro_rules! impl_arena_copy_decoder {
 ```rust
 impl_arena_copy_decoder! {<'tcx>
     Span,
-    rustc_span::Ident,
+    crate::rustc_span::Ident,
     ty::Variance,
-    rustc_span::def_id::DefId,
-    rustc_span::def_id::LocalDefId,
-    (rustc_middle::middle::exported_symbols::ExportedSymbol<'tcx>, rustc_middle::middle::exported_symbols::SymbolExportInfo),
+    crate::rustc_span::def_id::DefId,
+    crate::rustc_span::def_id::LocalDefId,
+    (crate::rustc_middle::middle::exported_symbols::ExportedSymbol<'tcx>, crate::rustc_middle::middle::exported_symbols::SymbolExportInfo),
     ty::DeducedParamAttrs,
 }
 ```
@@ -922,7 +922,7 @@ impl_arena_copy_decoder! {<'tcx>
 macro_rules! implement_ty_decoder {
     ($DecoderName:ident <$($typaram:tt),*>) => {
         mod __ty_decoder_impl {
-            use rustc_serialize::Decoder;
+            use crate::rustc_serialize::Decoder;
 
             use super::$DecoderName;
 

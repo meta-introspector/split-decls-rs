@@ -31,27 +31,27 @@ use std::{fs, io, mem, str, thread};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_abi::Size;
-use rustc_ast::attr;
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_data_structures::jobserver::{self, Acquired};
+use crate::rustc_abi::Size;
+use crate::rustc_complete::attr;
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_data_structures::jobserver::{self, Acquired};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::memmap::Mmap;
-use rustc_data_structures::profiling::{SelfProfilerRef, VerboseTimingGuard};
+use crate::rustc_data_structures::memmap::Mmap;
+use crate::rustc_data_structures::profiling::{SelfProfilerRef, VerboseTimingGuard};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_errors::emitter::Emitter;
-use rustc_errors::translation::Translator;
-use rustc_errors::{
+use crate::rustc_complete::emitter::Emitter;
+use crate::rustc_complete::translation::Translator;
+use crate::rustc_complete::{
     Diag, DiagArgMap, DiagCtxt, DiagMessage, ErrCode, FatalErrorMarker, Level, MultiSpan, Style,
     Suggestions,
 };
@@ -71,18 +71,18 @@ use rustc_incremental::{
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_metadata::fs::copy_to_stdout;
-use rustc_middle::bug;
-use rustc_middle::dep_graph::{WorkProduct, WorkProductId};
+use crate::rustc_metadata::fs::copy_to_stdout;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_session::Session;
-use rustc_session::config::{
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{
     self, CrateType, Lto, OutFileName, OutputFilenames, OutputType, Passes, SwitchWithOptPath,
 };
 ```
@@ -91,15 +91,15 @@ use rustc_session::config::{
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::source_map::SourceMap;
-use rustc_span::{FileName, InnerSpan, Span, SpanData, sym};
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{FileName, InnerSpan, Span, SpanData, sym};
 ```
 
 ## Block 11
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_target::spec::{MergeFunctions, SanitizerSet};
+use crate::rustc_target::spec::{MergeFunctions, SanitizerSet};
 ```
 
 ## Block 12
@@ -253,12 +253,12 @@ impl ModuleConfig {
             // native linker or rustc itself.
             //
             // Note, however, that the linker-plugin-lto requested here is
-            // explicitly ignored for `#![no_builtins]` crates. These crates are
+            // explicitly ignored for `#[no_builtins]` crates. These crates are
             // specifically ignored by rustc's LTO passes and wouldn't work if
             // loaded into the linker. These crates define symbols that LLVM
             // lowers intrinsics to, and these symbol dependencies aren't known
             // until after codegen. As a result any crate marked
-            // `#![no_builtins]` is assumed to not participate in LTO and
+            // `#[no_builtins]` is assumed to not participate in LTO and
             // instead goes on to generate object code.
             EmitObj::Bitcode
         } else if need_bitcode_in_object(tcx) {
@@ -462,8 +462,8 @@ pub struct CodegenContext<B: WriteBackendMethods> {
     pub target_arch: String,
     pub target_is_like_darwin: bool,
     pub target_is_like_aix: bool,
-    pub split_debuginfo: rustc_target::spec::SplitDebuginfo,
-    pub split_dwarf_kind: rustc_session::config::SplitDwarfKind,
+    pub split_debuginfo: crate::rustc_target::spec::SplitDebuginfo,
+    pub split_dwarf_kind: crate::rustc_session::config::SplitDwarfKind,
     pub pointer_size: Size,
 
     /// All commandline args used to invoke the compiler, with @file args fully expanded.
@@ -589,7 +589,7 @@ pub(crate) fn start_async_codegen<B: ExtraBackendMethods>(
 ) -> OngoingCodegen<B> {
     let (coordinator_send, coordinator_receive) = channel();
 
-    let crate_attrs = tcx.hir_attrs(rustc_hir::CRATE_HIR_ID);
+    let crate_attrs = tcx.hir_attrs(crate::rustc_hir::CRATE_HIR_ID);
     let no_builtins = attr::contains_name(crate_attrs, sym::no_builtins);
 
     let crate_info = CrateInfo::new(tcx, target_cpu);
@@ -1265,9 +1265,9 @@ pub(crate) enum Message<B: WriteBackendMethods> {
 /// process another codegen unit.
 pub struct CguMessage;
 
-// A cut-down version of `rustc_errors::DiagInner` that impls `Send`, which
+// A cut-down version of `crate::rustc_errors::DiagInner` that impls `Send`, which
 // can be used to send diagnostics from codegen threads to the main thread.
-// It's missing the following fields from `rustc_errors::DiagInner`.
+// It's missing the following fields from `crate::rustc_errors::DiagInner`.
 // - `span`: it doesn't impl `Send`.
 // - `suggestions`: it doesn't impl `Send`, and isn't used for codegen
 //   diagnostics.
@@ -1287,8 +1287,8 @@ struct Diagnostic {
 **Metadata**: AST_ID=42 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-// A cut-down version of `rustc_errors::Subdiag` that impls `Send`. It's
-// missing the following fields from `rustc_errors::Subdiag`.
+// A cut-down version of `crate::rustc_errors::Subdiag` that impls `Send`. It's
+// missing the following fields from `crate::rustc_errors::Subdiag`.
 // - `span`: it doesn't impl `Send`.
 pub(crate) struct Subdiagnostic {
     level: Level,
@@ -2063,14 +2063,14 @@ impl SharedEmitter {
 impl Emitter for SharedEmitter {
     fn emit_diagnostic(
         &mut self,
-        mut diag: rustc_errors::DiagInner,
-        _registry: &rustc_errors::registry::Registry,
+        mut diag: crate::rustc_errors::DiagInner,
+        _registry: &crate::rustc_errors::registry::Registry,
     ) {
         // Check that we aren't missing anything interesting when converting to
         // the cut-down local `DiagInner`.
         assert_eq!(diag.span, MultiSpan::new());
         assert_eq!(diag.suggestions, Suggestions::Enabled(vec![]));
-        assert_eq!(diag.sort_span, rustc_span::DUMMY_SP);
+        assert_eq!(diag.sort_span, crate::rustc_span::DUMMY_SP);
         assert_eq!(diag.is_lint, None);
         // No sensible check for `diag.emitted_at`.
 
@@ -2101,7 +2101,7 @@ impl Emitter for SharedEmitter {
 ```
 
 ## Block 51
-**Metadata**: AST_ID=51 | TYPE=FUNCTION | NAME=check | COMPLEXITY=41 | LINES=73
+**Metadata**: AST_ID=51 | TYPE=FUNCTION | NAME=check | COMPLEXITY=42 | LINES=73
 
 ```rust
 impl SharedEmitterMain {
@@ -2125,12 +2125,12 @@ impl SharedEmitterMain {
                     // Convert it back to a full `Diagnostic` and emit.
                     let dcx = sess.dcx();
                     let mut d =
-                        rustc_errors::DiagInner::new_with_messages(diag.level, diag.messages);
+                        crate::rustc_errors::DiagInner::new_with_messages(diag.level, diag.messages);
                     d.code = diag.code; // may be `None`, that's ok
                     d.children = diag
                         .children
                         .into_iter()
-                        .map(|sub| rustc_errors::Subdiag {
+                        .map(|sub| crate::rustc_errors::Subdiag {
                             level: sub.level,
                             messages: sub.messages,
                             span: MultiSpan::new(),

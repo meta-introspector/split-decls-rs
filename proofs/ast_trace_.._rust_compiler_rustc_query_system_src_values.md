@@ -6,7 +6,7 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=from_cycle_error | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_span::ErrorGuaranteed;
+use crate::rustc_complete::ErrorGuaranteed;
 
 use crate::dep_graph::DepContext;
 use crate::query::CycleError;

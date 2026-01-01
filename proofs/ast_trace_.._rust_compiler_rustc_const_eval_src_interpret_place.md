@@ -6,9 +6,9 @@ Generated 25 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-//! Computations on places -- field projections, going from mir::Place, and writing
-//! into a place.
-//! All high-level functions to write to memory work on places as destinations.
+// Computations on places -- field projections, going from mir::Place, and writing
+// into a place.
+// All high-level functions to write to memory work on places as destinations.
 
 use std::assert_matches::assert_matches;
 
@@ -19,16 +19,16 @@ use either::{Either, Left, Right};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{BackendRepr, HasDataLayout, Size};
+use crate::rustc_abi::{BackendRepr, HasDataLayout, Size};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::Ty;
-use rustc_middle::ty::layout::TyAndLayout;
-use rustc_middle::{bug, mir, span_bug};
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::{bug, mir, span_bug};
 ```
 
 ## Block 4
@@ -1202,7 +1202,7 @@ where
 // Some nodes are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
 mod size_asserts {
-    use rustc_data_structures::static_assert_size;
+    use crate::rustc_data_structures::static_assert_size;
 
     use super::*;
     // tidy-alphabetical-start

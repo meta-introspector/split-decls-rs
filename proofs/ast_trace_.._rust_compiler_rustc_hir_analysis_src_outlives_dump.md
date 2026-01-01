@@ -6,15 +6,15 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=27
 
 ```rust
-use rustc_span::sym;
+use crate::rustc_complete::sym;
 
 pub(crate) fn inferred_outlives(tcx: TyCtxt<'_>) {
     for id in tcx.hir_free_items() {

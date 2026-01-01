@@ -6,9 +6,9 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=test_block_doc_comment_1 | COMPLEXITY=3 | LINES=14
 
 ```rust
-#![allow(rustc::symbol_intern_string_literal)]
+#[allow(rustc::symbol_intern_string_literal)]
 
-use rustc_span::create_default_session_globals_then;
+use crate::rustc_complete::create_default_session_globals_then;
 
 use super::*;
 

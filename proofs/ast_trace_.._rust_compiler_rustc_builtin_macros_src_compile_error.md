@@ -8,15 +8,15 @@ Generated 2 AST blocks from source file
 ```rust
 // The compiler code necessary to support the compile_error! extension.
 
-use rustc_ast::tokenstream::TokenStream;
-use rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_expand::base::{DummyResult, ExpandResult, ExtCtxt, MacroExpanderResult};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=23
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use crate::util::get_single_str_from_tts;
 

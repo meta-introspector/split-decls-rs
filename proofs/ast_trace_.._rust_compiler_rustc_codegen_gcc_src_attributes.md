@@ -10,13 +10,13 @@ Generated 3 AST blocks from source file
 use gccjit::FnAttribute;
 use gccjit::Function;
 #[cfg(feature = "master")]
-use rustc_hir::attrs::InlineAttr;
-use rustc_hir::attrs::InstructionSetAttr;
+use crate::rustc_complete::attrs::InlineAttr;
+use crate::rustc_complete::attrs::InstructionSetAttr;
 #[cfg(feature = "master")]
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
 #[cfg(feature = "master")]
-use rustc_middle::mir::TerminatorKind;
-use rustc_middle::ty;
+use crate::rustc_complete::mir::TerminatorKind;
+use crate::rustc_complete::ty;
 
 use crate::context::CodegenCx;
 use crate::gcc_util::to_gcc_features;

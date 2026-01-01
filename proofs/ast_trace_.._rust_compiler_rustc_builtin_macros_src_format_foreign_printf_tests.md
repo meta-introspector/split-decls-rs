@@ -60,7 +60,7 @@ fn test_parse() {
                         precision: $prec,
                         length: $len,
                         type_: $type_,
-                        position: rustc_span::InnerSpan::new($pos.0, $pos.1),
+                        position: crate::rustc_span::InnerSpan::new($pos.0, $pos.1),
                     }),
                     "!"
                 ))

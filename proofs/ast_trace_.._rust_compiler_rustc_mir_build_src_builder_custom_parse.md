@@ -6,17 +6,17 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_index::IndexSlice;
-use rustc_middle::mir::*;
-use rustc_middle::thir::*;
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_index::IndexSlice;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 use super::{PResult, ParseCtxt, ParseError};
 ```
@@ -77,7 +77,7 @@ macro_rules! parse_by_kind {
                 ExprKind::Call { ty, fun: _, args: $args, .. } if {
                     match ty.kind() {
                         ty::FnDef(did, _) => {
-                            $self.tcx.is_diagnostic_item(rustc_span::sym::$name, *did)
+                            $self.tcx.is_diagnostic_item(crate::rustc_span::sym::$name, *did)
                         }
                         _ => false,
                     }
@@ -85,8 +85,8 @@ macro_rules! parse_by_kind {
             )*
             $(
                 ExprKind::Adt(box AdtExpr { adt_def, variant_index, .. }) if {
-                    $self.tcx.is_diagnostic_item(rustc_span::sym::$adt, adt_def.did()) &&
-                    adt_def.variants()[*variant_index].name == rustc_span::sym::$variant
+                    $self.tcx.is_diagnostic_item(crate::rustc_span::sym::$adt, adt_def.did()) &&
+                    adt_def.variants()[*variant_index].name == crate::rustc_span::sym::$variant
                 } => $variant_expr,
             )*
             $(

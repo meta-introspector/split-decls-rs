@@ -6,11 +6,11 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=23
 
 ```rust
-//! Data structures for representing parsed attributes in the Rust compiler.
-//! Formerly `rustc_attr_data_structures`.
-//!
-//! For detailed documentation about attribute processing,
-//! see [rustc_attr_parsing](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_attr_parsing/index.html).
+// Data structures for representing parsed attributes in the Rust compiler.
+// Formerly `rustc_attr_data_structures`.
+//
+// For detailed documentation about attribute processing,
+// see [rustc_attr_parsing](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_attr_parsing/index.html).
 
 pub use data_structures::*;
 pub use encode_cross_crate::EncodeCrossCrate;
@@ -59,9 +59,9 @@ macro_rules! find_attr {
     ($attributes_list: expr, $pattern: pat $(if $guard: expr)? => $e: expr) => {{
         'done: {
             for i in $attributes_list {
-                let i: &rustc_hir::Attribute = i;
+                let i: &crate::rustc_hir::Attribute = i;
                 match i {
-                    rustc_hir::Attribute::Parsed($pattern) $(if $guard)? => {
+                    crate::rustc_hir::Attribute::Parsed($pattern) $(if $guard)? => {
                         break 'done Some($e);
                     }
                     _ => {}

@@ -18,20 +18,20 @@ use gccjit::{CType, Context, FunctionType, GlobalKind};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=14
 
 ```rust
-use rustc_codegen_ssa::ModuleCodegen;
-use rustc_codegen_ssa::base::maybe_create_entry_wrapper;
-use rustc_codegen_ssa::mono_item::MonoItemExt;
-use rustc_codegen_ssa::traits::DebugInfoCodegenMethods;
-use rustc_hir::attrs::Linkage;
-use rustc_middle::dep_graph;
+use crate::rustc_codegen_ssa::ModuleCodegen;
+use crate::rustc_codegen_ssa::base::maybe_create_entry_wrapper;
+use crate::rustc_codegen_ssa::mono_item::MonoItemExt;
+use crate::rustc_codegen_ssa::traits::DebugInfoCodegenMethods;
+use crate::rustc_complete::attrs::Linkage;
+use crate::rustc_complete::dep_graph;
 #[cfg(feature = "master")]
-use rustc_middle::mir::mono::Visibility;
-use rustc_middle::ty::TyCtxt;
-use rustc_session::config::DebugInfo;
-use rustc_span::Symbol;
+use crate::rustc_complete::mir::mono::Visibility;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::DebugInfo;
+use crate::rustc_complete::Symbol;
 #[cfg(feature = "master")]
-use rustc_target::spec::SymbolVisibility;
-use rustc_target::spec::{PanicStrategy, RelocModel};
+use crate::rustc_target::spec::SymbolVisibility;
+use crate::rustc_target::spec::{PanicStrategy, RelocModel};
 ```
 
 ## Block 3
@@ -180,7 +180,7 @@ pub fn compile_codegen_unit(
         context.add_command_line_option("-fwrapv");
 
         if let Some(model) = tcx.sess.code_model() {
-            use rustc_target::spec::CodeModel;
+            use crate::rustc_target::spec::CodeModel;
 
             context.add_command_line_option(match model {
                 CodeModel::Tiny => "-mcmodel=tiny",
@@ -307,18 +307,18 @@ pub fn compile_codegen_unit(
 ```rust
 pub fn add_pic_option<'gcc>(context: &Context<'gcc>, relocation_model: RelocModel) {
     match relocation_model {
-        rustc_target::spec::RelocModel::Static => {
+        crate::rustc_target::spec::RelocModel::Static => {
             context.add_command_line_option("-fno-pie");
             context.add_driver_option("-fno-pie");
         }
-        rustc_target::spec::RelocModel::Pic => {
+        crate::rustc_target::spec::RelocModel::Pic => {
             context.add_command_line_option("-fPIC");
             // NOTE: we use both add_command_line_option and add_driver_option because the usage in
             // this module (compile_codegen_unit) requires add_command_line_option while the usage
             // in the back::write module (codegen) requires add_driver_option.
             context.add_driver_option("-fPIC");
         }
-        rustc_target::spec::RelocModel::Pie => {
+        crate::rustc_target::spec::RelocModel::Pie => {
             context.add_command_line_option("-fPIE");
             context.add_driver_option("-fPIE");
         }

@@ -6,8 +6,8 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-//! Computes a normalizes-to (projection) goal for opaque types. This goal
-//! behaves differently depending on the current `TypingMode`.
+// Computes a normalizes-to (projection) goal for opaque types. This goal
+// behaves differently depending on the current `TypingMode`.
 
 use rustc_type_ir::inherent::*;
 use rustc_type_ir::solve::GoalSource;

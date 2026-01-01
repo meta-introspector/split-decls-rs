@@ -6,22 +6,22 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=38
 
 ```rust
-//! Various checks
-//!
-//! # Note
-//!
-//! This API is completely unstable and subject to change.
+// Various checks
+//
+// # Note
+//
+// This API is completely unstable and subject to change.
 
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
-#![doc(rust_logo)]
-#![feature(if_let_guard)]
-#![feature(map_try_insert)]
-#![feature(rustdoc_internals)]
+#[allow(internal_features)]
+#[doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
+#[doc(rust_logo)]
+#[feature(if_let_guard)]
+#[feature(map_try_insert)]
+#[feature(rustdoc_internals)]
 // tidy-alphabetical-end
 
-use rustc_middle::util::Providers;
+use crate::rustc_complete::util::Providers;
 
 pub mod abi_test;
 mod check_attr;

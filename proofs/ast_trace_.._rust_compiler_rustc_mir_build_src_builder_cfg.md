@@ -6,10 +6,10 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=40 | LINES=137
 
 ```rust
-//! Routines for manipulating the control-flow graph.
+// Routines for manipulating the control-flow graph.
 
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
 use tracing::debug;
 
 use crate::builder::CFG;

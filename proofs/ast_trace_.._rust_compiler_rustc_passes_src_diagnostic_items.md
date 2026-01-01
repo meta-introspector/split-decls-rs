@@ -6,41 +6,41 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=13
 
 ```rust
-//! Detecting diagnostic items.
-//!
-//! Diagnostic items are items that are not language-inherent, but can reasonably be expected to
-//! exist for diagnostic purposes. This allows diagnostic authors to refer to specific items
-//! directly, without having to guess module paths and crates.
-//! Examples are:
-//!
-//! * Traits like `Debug`, that have no bearing on language semantics
-//!
-//! * Compiler internal types like `Ty` and `TyCtxt`
+// Detecting diagnostic items.
+//
+// Diagnostic items are items that are not language-inherent, but can reasonably be expected to
+// exist for diagnostic purposes. This allows diagnostic authors to refer to specific items
+// directly, without having to guess module paths and crates.
+// Examples are:
+//
+// * Traits like `Debug`, that have no bearing on language semantics
+//
+// * Compiler internal types like `Ty` and `TyCtxt`
 
-use rustc_hir::diagnostic_items::DiagnosticItems;
-use rustc_hir::{Attribute, CRATE_OWNER_ID, OwnerId};
+use crate::rustc_complete::diagnostic_items::DiagnosticItems;
+use crate::rustc_complete::{Attribute, CRATE_OWNER_ID, OwnerId};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::query::{LocalCrate, Providers};
+use crate::rustc_complete::query::{LocalCrate, Providers};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_span::def_id::{DefId, LOCAL_CRATE};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Symbol, sym};
+use crate::rustc_complete::{Symbol, sym};
 ```
 
 ## Block 5

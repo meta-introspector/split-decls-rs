@@ -3,10 +3,9 @@
 Generated 22 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=Point | COMPLEXITY=2 | LINES=14
+**Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=Point | COMPLEXITY=2 | LINES=13
 
 ```rust
-extern crate test;
 use std::cell::Cell;
 
 use test::Bencher;

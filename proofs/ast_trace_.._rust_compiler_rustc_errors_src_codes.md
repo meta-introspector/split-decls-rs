@@ -6,15 +6,15 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=ErrCode | COMPLEXITY=6 | LINES=15
 
 ```rust
-//! This module defines the following.
-//! - The `ErrCode` type.
-//! - A constant for every error code, with a name like `E0123`.
-//! - A static table `DIAGNOSTICS` pairing every error code constant with its
-//!   long description text.
+// This module defines the following.
+// - The `ErrCode` type.
+// - A constant for every error code, with a name like `E0123`.
+// - A static table `DIAGNOSTICS` pairing every error code constant with its
+//   long description text.
 
 use std::fmt;
 
-rustc_index::newtype_index! {
+crate::rustc_index::newtype_index! {
     #[max = 9999] // Because all error codes have four digits.
     #[orderable]
     #[encodable]
@@ -38,7 +38,7 @@ impl fmt::Display for ErrCode {
 **Metadata**: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=18
 
 ```rust
-rustc_error_messages::into_diag_arg_using_display!(ErrCode);
+crate::rustc_error_messages::into_diag_arg_using_display!(ErrCode);
 
 macro_rules! define_error_code_constants_and_diagnostics_table {
     ($($name:ident: $num:literal,)*) => (

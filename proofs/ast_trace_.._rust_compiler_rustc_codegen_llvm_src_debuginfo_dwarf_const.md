@@ -6,7 +6,7 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=17
 
 ```rust
-//! Definitions of various DWARF-related constants.
+// Definitions of various DWARF-related constants.
 
 use libc::c_uint;
 

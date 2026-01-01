@@ -16,33 +16,33 @@ Generated 9 AST blocks from source file
 use std::cmp::Ordering;
 use std::sync::Arc;
 
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_hir::{LangItem, RangeEnd};
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_complete::{LangItem, RangeEnd};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::util::IntTypeExt;
-use rustc_middle::ty::{self, GenericArg, Ty, TyCtxt};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::util::IntTypeExt;
+use crate::rustc_complete::ty::{self, GenericArg, Ty, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::def_id::DefId;
-use rustc_span::source_map::Spanned;
-use rustc_span::{DUMMY_SP, Span, Symbol, sym};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol, sym};
 ```
 
 ## Block 5

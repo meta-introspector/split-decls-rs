@@ -6,9 +6,9 @@ Generated 30 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=13
 
 ```rust
-//! AST pretty printing.
-//!
-//! Note that HIR pretty printing is layered on top of this crate.
+// AST pretty printing.
+//
+// Note that HIR pretty printing is layered on top of this crate.
 
 mod expr;
 mod fixup;
@@ -17,30 +17,30 @@ mod item;
 use std::borrow::Cow;
 use std::sync::Arc;
 
-use rustc_ast::attr::AttrIdGenerator;
-use rustc_ast::token::{self, CommentKind, Delimiter, Token, TokenKind};
+use crate::rustc_complete::attr::AttrIdGenerator;
+use crate::rustc_complete::token::{self, CommentKind, Delimiter, Token, TokenKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::tokenstream::{Spacing, TokenStream, TokenTree};
+use crate::rustc_complete::tokenstream::{Spacing, TokenStream, TokenTree};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::util::classify;
-use rustc_ast::util::comments::{Comment, CommentStyle};
+use crate::rustc_complete::util::classify;
+use crate::rustc_complete::util::comments::{Comment, CommentStyle};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_ast::{
+use crate::rustc_complete::{
     self as ast, AttrArgs, BindingMode, BlockCheckMode, ByRef, DelimArgs, GenericArg, GenericBound,
     InlineAsmOperand, InlineAsmOptions, InlineAsmRegOrRegClass, InlineAsmTemplatePiece, PatKind,
     RangeEnd, RangeSyntax, Safety, SelfKind, Term, attr,
@@ -51,16 +51,16 @@ use rustc_ast::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::edition::Edition;
-use rustc_span::source_map::{SourceMap, Spanned};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::source_map::{SourceMap, Spanned};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::symbol::IdentPrinter;
-use rustc_span::{BytePos, CharPos, DUMMY_SP, FileName, Ident, Pos, Span, Symbol, kw, sym};
+use crate::rustc_complete::symbol::IdentPrinter;
+use crate::rustc_complete::{BytePos, CharPos, DUMMY_SP, FileName, Ident, Pos, Span, Symbol, kw, sym};
 ```
 
 ## Block 7
@@ -305,7 +305,7 @@ impl<'a> Comments<'a> {
 
     fn trailing_comment(
         &mut self,
-        span: rustc_span::Span,
+        span: crate::rustc_span::Span,
         next_pos: Option<BytePos>,
     ) -> Option<Comment> {
         if let Some(cmnt) = self.peek() {
@@ -401,12 +401,12 @@ fn print_crate_inner<'a>(
     s.maybe_print_shebang();
 
     if is_expanded && !krate.attrs.iter().any(|attr| attr.has_name(sym::no_core)) {
-        // We need to print `#![no_std]` (and its feature gate) so that
+        // We need to print `#[no_std]` (and its feature gate) so that
         // compiling pretty-printed source won't inject libstd again.
         // However, we don't want these attributes in the AST because
         // of the feature gate, so we fake them up here.
 
-        // `#![feature(prelude_import)]`
+        // `#[feature(prelude_import)]`
         let fake_attr = attr::mk_attr_nested_word(
             g,
             ast::AttrStyle::Inner,
@@ -420,7 +420,7 @@ fn print_crate_inner<'a>(
         // Currently, in Rust 2018 we don't have `extern crate std;` at the crate
         // root, so this is not needed, and actually breaks things.
         if edition.is_rust_2015() {
-            // `#![no_std]`
+            // `#[no_std]`
             let fake_attr = attr::mk_attr_word(
                 g,
                 ast::AttrStyle::Inner,
@@ -517,9 +517,9 @@ pub fn doc_comment_to_string(
 ) -> String {
     match (comment_kind, attr_style) {
         (CommentKind::Line, ast::AttrStyle::Outer) => format!("///{data}"),
-        (CommentKind::Line, ast::AttrStyle::Inner) => format!("//!{data}"),
+        (CommentKind::Line, ast::AttrStyle::Inner) => format!("//{data}"),
         (CommentKind::Block, ast::AttrStyle::Outer) => format!("/**{data}*/"),
-        (CommentKind::Block, ast::AttrStyle::Inner) => format!("/*!{data}*/"),
+        (CommentKind::Block, ast::AttrStyle::Inner) => format!("/*{data}*/"),
     }
 }
 ```
@@ -720,7 +720,7 @@ pub trait PrintState<'a>: std::ops::Deref<Target = pp::Printer> + std::ops::Dere
         self.comments_mut().and_then(|c| c.next())
     }
 
-    fn maybe_print_trailing_comment(&mut self, span: rustc_span::Span, next_pos: Option<BytePos>) {
+    fn maybe_print_trailing_comment(&mut self, span: crate::rustc_span::Span, next_pos: Option<BytePos>) {
         if let Some(cmnts) = self.comments_mut()
             && let Some(cmnt) = cmnts.trailing_comment(span, next_pos)
         {
@@ -808,7 +808,7 @@ pub trait PrintState<'a>: std::ops::Deref<Target = pp::Printer> + std::ops::Dere
         match &attr.kind {
             ast::AttrKind::Normal(normal) => {
                 match attr.style {
-                    ast::AttrStyle::Inner => self.word("#!["),
+                    ast::AttrStyle::Inner => self.word("#["),
                     ast::AttrStyle::Outer => self.word("#["),
                 }
                 self.print_attr_item(&normal.item, attr.span);
@@ -1061,7 +1061,7 @@ pub trait PrintState<'a>: std::ops::Deref<Target = pp::Printer> + std::ops::Dere
         self.end(ib);
     }
 
-    fn bclose_maybe_open(&mut self, span: rustc_span::Span, no_space: bool, cb: Option<BoxMarker>) {
+    fn bclose_maybe_open(&mut self, span: crate::rustc_span::Span, no_space: bool, cb: Option<BoxMarker>) {
         let has_comment = self.maybe_print_comment(span.hi());
         if !no_space || has_comment {
             self.break_offset_if_not_bol(1, -INDENT_UNIT);
@@ -1072,7 +1072,7 @@ pub trait PrintState<'a>: std::ops::Deref<Target = pp::Printer> + std::ops::Dere
         }
     }
 
-    fn bclose(&mut self, span: rustc_span::Span, no_space: bool, cb: BoxMarker) {
+    fn bclose(&mut self, span: crate::rustc_span::Span, no_space: bool, cb: BoxMarker) {
         let cb = Some(cb);
         self.bclose_maybe_open(span, no_space, cb)
     }
@@ -1307,7 +1307,7 @@ impl<'a> PrintState<'a> for State<'a> {
 ```
 
 ## Block 30
-**Metadata**: AST_ID=30 | TYPE=FUNCTION | NAME=new | COMPLEXITY=589 | LINES=1039
+**Metadata**: AST_ID=30 | TYPE=FUNCTION | NAME=new | COMPLEXITY=590 | LINES=1039
 
 ```rust
 impl<'a> State<'a> {
@@ -1318,7 +1318,7 @@ impl<'a> State<'a> {
     fn commasep_cmnt<T, F, G>(&mut self, b: Breaks, elts: &[T], mut op: F, mut get_span: G)
     where
         F: FnMut(&mut State<'_>, &T),
-        G: FnMut(&T) -> rustc_span::Span,
+        G: FnMut(&T) -> crate::rustc_span::Span,
     {
         let rb = self.rbox(0, b);
         let len = elts.len();
@@ -1380,7 +1380,7 @@ impl<'a> State<'a> {
 
     pub fn print_ty_pat(&mut self, pat: &ast::TyPat) {
         match &pat.kind {
-            rustc_ast::TyPatKind::Range(start, end, include_end) => {
+            crate::rustc_ast::TyPatKind::Range(start, end, include_end) => {
                 if let Some(start) = start {
                     self.print_expr_anon_const(start, &[]);
                 }
@@ -1392,7 +1392,7 @@ impl<'a> State<'a> {
                     self.print_expr_anon_const(end, &[]);
                 }
             }
-            rustc_ast::TyPatKind::Or(variants) => {
+            crate::rustc_ast::TyPatKind::Or(variants) => {
                 let mut first = true;
                 for pat in variants {
                     if first {
@@ -1403,7 +1403,7 @@ impl<'a> State<'a> {
                     self.print_ty_pat(pat);
                 }
             }
-            rustc_ast::TyPatKind::Err(_) => {
+            crate::rustc_ast::TyPatKind::Err(_) => {
                 self.popen();
                 self.word("/*ERROR*/");
                 self.pclose();

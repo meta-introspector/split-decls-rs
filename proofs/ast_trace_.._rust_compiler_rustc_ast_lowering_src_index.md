@@ -7,21 +7,21 @@ Generated 7 AST blocks from source file
 
 ```rust
 use intravisit::InferKind;
-use rustc_data_structures::sorted_map::SortedMap;
+use crate::rustc_data_structures::sorted_map::SortedMap;
 use rustc_hir as hir;
-use rustc_hir::def_id::{LocalDefId, LocalDefIdMap};
+use crate::rustc_complete::def_id::{LocalDefId, LocalDefIdMap};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_hir::intravisit::Visitor;
-use rustc_hir::*;
-use rustc_index::IndexVec;
-use rustc_middle::span_bug;
-use rustc_middle::ty::TyCtxt;
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::*;
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 3

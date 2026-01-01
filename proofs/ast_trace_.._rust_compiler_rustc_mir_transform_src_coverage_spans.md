@@ -6,17 +6,17 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir;
-use rustc_middle::mir::coverage::{Mapping, MappingKind, START_BCB};
+use crate::rustc_complete::mir;
+use crate::rustc_complete::mir::coverage::{Mapping, MappingKind, START_BCB};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_span::source_map::SourceMap;
-use rustc_span::{BytePos, DesugaringKind, ExpnId, ExpnKind, MacroKind, Span};
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{BytePos, DesugaringKind, ExpnId, ExpnKind, MacroKind, Span};
 ```
 
 ## Block 3

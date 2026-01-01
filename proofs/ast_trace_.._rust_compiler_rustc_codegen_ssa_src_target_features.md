@@ -6,49 +6,49 @@ Generated 16 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexSet};
+use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet, FxIndexSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::unord::{UnordMap, UnordSet};
+use crate::rustc_data_structures::unord::{UnordMap, UnordSet};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::attrs::InstructionSetAttr;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::{DefId, LOCAL_CRATE, LocalDefId};
+use crate::rustc_complete::attrs::InstructionSetAttr;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE, LocalDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::middle::codegen_fn_attrs::{TargetFeature, TargetFeatureKind};
+use crate::rustc_complete::middle::codegen_fn_attrs::{TargetFeature, TargetFeatureKind};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_middle::query::Providers;
-use rustc_middle::ty::TyCtxt;
-use rustc_session::Session;
-use rustc_session::lint::builtin::AARCH64_SOFTFLOAT_NEON;
-use rustc_session::parse::feature_err;
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::lint::builtin::AARCH64_SOFTFLOAT_NEON;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_target::target_features::{RUSTC_SPECIFIC_FEATURES, Stability};
+use crate::rustc_target::target_features::{RUSTC_SPECIFIC_FEATURES, Stability};
 ```
 
 ## Block 7
@@ -520,7 +520,7 @@ pub(crate) fn provide(providers: &mut Providers) {
                 // same target feature name, with the "most stable" taking precedence. And then we
                 // hope that this doesn't cause issues anywhere else in the compiler...
                 let mut result: UnordMap<String, Stability> = Default::default();
-                for (name, stability) in rustc_target::target_features::all_rust_features() {
+                for (name, stability) in crate::rustc_target::target_features::all_rust_features() {
                     use std::collections::hash_map::Entry;
                     match result.entry(name.to_owned()) {
                         Entry::Vacant(vacant_entry) => {

@@ -6,18 +6,18 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! Errors emitted by symbol_mangling.
+// Errors emitted by symbol_mangling.
 
 use std::fmt;
 
-use rustc_errors::{Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level};
+use crate::rustc_complete::{Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=STRUCT | NAME=TestOutput | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 
 pub struct TestOutput {
     pub span: Span,

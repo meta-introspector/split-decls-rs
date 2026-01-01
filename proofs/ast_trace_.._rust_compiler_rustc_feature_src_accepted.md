@@ -6,9 +6,9 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! List of the accepted feature gates.
+// List of the accepted feature gates.
 
-use rustc_span::sym;
+use crate::rustc_complete::sym;
 
 use super::{Feature, to_nonzero};
 ```
@@ -371,7 +371,7 @@ declare_features! (
     (accepted, native_link_modifiers_whole_archive, "1.61.0", Some(81490)),
     /// Allows using non lexical lifetimes (RFC 2094).
     (accepted, nll, "1.63.0", Some(43234)),
-    /// Allows using `#![no_std]`.
+    /// Allows using `#[no_std]`.
     (accepted, no_std, "1.6.0", None),
     /// Allows defining identifiers beyond ASCII.
     (accepted, non_ascii_idents, "1.53.0", Some(55467)),
@@ -520,7 +520,7 @@ declare_features! (
     (accepted, used, "1.30.0", Some(40289)),
     /// Allows the use of `while let` expressions.
     (accepted, while_let, "1.0.0", None),
-    /// Allows `#![windows_subsystem]`.
+    /// Allows `#[windows_subsystem]`.
     (accepted, windows_subsystem, "1.18.0", Some(37499)),
     // !!!!    !!!!    !!!!    !!!!   !!!!    !!!!    !!!!    !!!!    !!!!    !!!!    !!!!
     // Features are listed in alphabetical order. Tidy will fail if you don't keep it this way.

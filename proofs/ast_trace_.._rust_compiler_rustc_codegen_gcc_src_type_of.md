@@ -16,8 +16,8 @@ use gccjit::{Struct, Type};
 
 ```rust
 use rustc_abi as abi;
-use rustc_abi::Primitive::*;
-use rustc_abi::{
+use crate::rustc_abi::Primitive::*;
+use crate::rustc_abi::{
     BackendRepr, FieldsShape, Integer, PointeeInfo, Reg, Size, TyAbiInterface, Variants,
 };
 ```
@@ -26,7 +26,7 @@ use rustc_abi::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_codegen_ssa::traits::{
+use crate::rustc_codegen_ssa::traits::{
     BaseTypeCodegenMethods, DerivedTypeCodegenMethods, LayoutTypeCodegenMethods,
 };
 ```
@@ -35,23 +35,23 @@ use rustc_codegen_ssa::traits::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::layout::{LayoutOf, TyAndLayout};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::print::with_no_trimmed_paths;
-use rustc_middle::ty::{self, CoroutineArgsExt, Ty, TypeVisitableExt};
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::ty::{self, CoroutineArgsExt, Ty, TypeVisitableExt};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_target::callconv::{CastTarget, FnAbi};
+use crate::rustc_target::callconv::{CastTarget, FnAbi};
 ```
 
 ## Block 7
@@ -256,7 +256,7 @@ impl<'tcx> LayoutGccExt<'tcx> for TyAndLayout<'tcx> {
         }
     }
 
-    /// Gets the GCC type corresponding to a Rust type, i.e., `rustc_middle::ty::Ty`.
+    /// Gets the GCC type corresponding to a Rust type, i.e., `crate::rustc_middle::ty::Ty`.
     /// The pointee type of the pointer in `PlaceRef` is always this type.
     /// For sized types, it is also the right LLVM type for an `alloca`
     /// containing a value of that type, and most immediates (except `bool`).
@@ -268,7 +268,7 @@ impl<'tcx> LayoutGccExt<'tcx> for TyAndLayout<'tcx> {
     /// of that field's type - this is useful for taking the address of
     /// that field and ensuring the struct has the right alignment.
     fn gcc_type<'gcc>(&self, cx: &CodegenCx<'gcc, 'tcx>) -> Type<'gcc> {
-        use rustc_middle::ty::layout::FnAbiOf;
+        use crate::rustc_complete::ty::layout::FnAbiOf;
         // This must produce the same result for `repr(transparent)` wrappers as for the inner type!
         // In other words, this should generally not look at the type at all, but only at the
         // layout.

@@ -3,22 +3,22 @@
 Generated 3 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=13
+**Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=13
 
 ```rust
 use std::any::Any;
 use std::sync::Arc;
 
-use rustc_codegen_ssa::CodegenResults;
-use rustc_codegen_ssa::traits::CodegenBackend;
-use rustc_data_structures::svh::Svh;
-use rustc_errors::timings::TimingSection;
-use rustc_hir::def_id::LOCAL_CRATE;
-use rustc_metadata::EncodedMetadata;
-use rustc_middle::dep_graph::DepGraph;
-use rustc_middle::ty::TyCtxt;
-use rustc_session::Session;
-use rustc_session::config::{self, OutputFilenames, OutputType};
+use crate::rustc_codegen_ssa::CodegenResults;
+use crate::rustc_codegen_ssa::traits::CodegenBackend;
+use crate::rustc_data_structures::svh::Svh;
+use crate::rustc_complete::timings::TimingSection;
+use crate::rustc_complete::def_id::LOCAL_CRATE;
+use crate::rustc_metadata::EncodedMetadata;
+use crate::rustc_complete::dep_graph::DepGraph;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{self, OutputFilenames, OutputType};
 ```
 
 ## Block 2

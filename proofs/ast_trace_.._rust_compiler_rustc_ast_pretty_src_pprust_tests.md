@@ -7,7 +7,7 @@ Generated 5 AST blocks from source file
 
 ```rust
 use rustc_ast as ast;
-use rustc_span::{DUMMY_SP, Ident, create_default_session_globals_then};
+use crate::rustc_complete::{DUMMY_SP, Ident, create_default_session_globals_then};
 ```
 
 ## Block 2

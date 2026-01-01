@@ -8,15 +8,15 @@ Generated 20 AST blocks from source file
 ```rust
 use std::borrow::Cow;
 
-use rustc_ast::token::{self, Token};
+use crate::rustc_complete::token::{self, Token};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_ast::tokenstream::TokenStream;
-use rustc_errors::{Applicability, Diag, DiagCtxtHandle, DiagMessage};
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{Applicability, Diag, DiagCtxtHandle, DiagMessage};
 ```
 
 ## Block 3
@@ -24,16 +24,16 @@ use rustc_errors::{Applicability, Diag, DiagCtxtHandle, DiagMessage};
 
 ```rust
 use rustc_macros::Subdiagnostic;
-use rustc_parse::parser::{Parser, Recovery, token_descr};
+use crate::rustc_parse::parser::{Parser, Recovery, token_descr};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::parse::ParseSess;
-use rustc_span::source_map::SourceMap;
-use rustc_span::{DUMMY_SP, ErrorGuaranteed, Ident, Span};
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Ident, Span};
 ```
 
 ## Block 5
@@ -423,7 +423,7 @@ fn annotate_doc_comment(err: &mut Diag<'_>, sm: &SourceMap, span: Span) {
     if let Ok(src) = sm.span_to_snippet(span) {
         if src.starts_with("///") || src.starts_with("/**") {
             err.subdiagnostic(ExplainDocComment::Outer { span });
-        } else if src.starts_with("//!") || src.starts_with("/*!") {
+        } else if src.starts_with("//") || src.starts_with("/*") {
             err.subdiagnostic(ExplainDocComment::Inner { span });
         }
     }

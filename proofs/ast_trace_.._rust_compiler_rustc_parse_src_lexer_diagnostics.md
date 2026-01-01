@@ -6,11 +6,11 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=11 | LINES=26
 
 ```rust
-use rustc_ast::token::Delimiter;
-use rustc_errors::Diag;
-use rustc_session::parse::ParseSess;
-use rustc_span::Span;
-use rustc_span::source_map::SourceMap;
+use crate::rustc_complete::token::Delimiter;
+use crate::rustc_complete::Diag;
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::source_map::SourceMap;
 
 use super::UnmatchedDelim;
 use crate::errors::MismatchedClosingDelimiter;

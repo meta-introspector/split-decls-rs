@@ -6,27 +6,27 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=12 | LINES=47
 
 ```rust
-//! A control-flow graph can be said to have “balanced flow” if the flow
-//! (execution count) of each node is equal to the sum of its in-edge flows,
-//! and also equal to the sum of its out-edge flows.
-//!
-//! Control-flow graphs typically have one or more nodes that don't satisfy the
-//! balanced-flow property, e.g.:
-//! - The start node has out-edges, but no in-edges.
-//! - Return nodes have in-edges, but no out-edges.
-//! - `Yield` nodes can have an out-flow that is less than their in-flow.
-//! - Inescapable loops cause the in-flow/out-flow relationship to break down.
-//!
-//! Balanced-flow graphs are nevertheless useful for analysis, so this module
-//! provides a wrapper type ([`BalancedFlowGraph`]) that imposes balanced flow
-//! on an underlying graph. This is done by non-destructively adding synthetic
-//! nodes and edges as necessary.
+// A control-flow graph can be said to have “balanced flow” if the flow
+// (execution count) of each node is equal to the sum of its in-edge flows,
+// and also equal to the sum of its out-edge flows.
+//
+// Control-flow graphs typically have one or more nodes that don't satisfy the
+// balanced-flow property, e.g.:
+// - The start node has out-edges, but no in-edges.
+// - Return nodes have in-edges, but no out-edges.
+// - `Yield` nodes can have an out-flow that is less than their in-flow.
+// - Inescapable loops cause the in-flow/out-flow relationship to break down.
+//
+// Balanced-flow graphs are nevertheless useful for analysis, so this module
+// provides a wrapper type ([`BalancedFlowGraph`]) that imposes balanced flow
+// on an underlying graph. This is done by non-destructively adding synthetic
+// nodes and edges as necessary.
 
-use rustc_data_structures::graph;
-use rustc_data_structures::graph::iterate::DepthFirstSearch;
-use rustc_data_structures::graph::reversed::ReversedGraph;
-use rustc_index::Idx;
-use rustc_index::bit_set::DenseBitSet;
+use crate::rustc_data_structures::graph;
+use crate::rustc_data_structures::graph::iterate::DepthFirstSearch;
+use crate::rustc_data_structures::graph::reversed::ReversedGraph;
+use crate::rustc_index::Idx;
+use crate::rustc_index::bit_set::DenseBitSet;
 
 /// A view of an underlying graph that has been augmented to have “balanced flow”.
 /// This means that the flow (execution count) of each node is equal to the

@@ -8,7 +8,7 @@ Generated 6 AST blocks from source file
 ```rust
 use std::marker::PhantomData;
 
-use rustc_index::Idx;
+use crate::rustc_index::Idx;
 
 #[derive(Default)]
 pub struct AppendOnlyIndexVec<I: Idx, T: Copy> {

@@ -6,7 +6,7 @@ Generated 30 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-//! Functions dealing with attributes and meta items.
+// Functions dealing with attributes and meta items.
 
 use std::fmt::Debug;
 use std::sync::atomic::{AtomicU32, Ordering};
@@ -16,8 +16,8 @@ use std::sync::atomic::{AtomicU32, Ordering};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_index::bit_set::GrowableBitSet;
-use rustc_span::{Ident, Span, Symbol, sym};
+use crate::rustc_index::bit_set::GrowableBitSet;
+use crate::rustc_complete::{Ident, Span, Symbol, sym};
 ```
 
 ## Block 3
@@ -146,7 +146,7 @@ impl AttributeExt for Attribute {
         }
     }
 
-    /// Returns `true` if it is a sugared doc comment (`///` or `//!` for example).
+    /// Returns `true` if it is a sugared doc comment (`///` or `//` for example).
     /// So `#[doc = "doc"]` (which is a doc comment) and `#[doc(...)]` (which is not
     /// a doc comment) will return `false`.
     fn is_doc_comment(&self) -> bool {
@@ -926,7 +926,7 @@ pub trait AttributeExt: Debug {
     /// Matches one segment of the path to each element in `name`
     fn path_matches(&self, name: &[Symbol]) -> bool;
 
-    /// Returns `true` if it is a sugared doc comment (`///` or `//!` for example).
+    /// Returns `true` if it is a sugared doc comment (`///` or `//` for example).
     /// So `#[doc = "doc"]` (which is a doc comment) and `#[doc(...)]` (which is not
     /// a doc comment) will return `false`.
     fn is_doc_comment(&self) -> bool;

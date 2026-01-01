@@ -6,7 +6,7 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=$name | COMPLEXITY=24 | LINES=19
 
 ```rust
-use rustc_span::def_id::DefIndex;
+use crate::rustc_complete::def_id::DefIndex;
 
 use super::*;
 

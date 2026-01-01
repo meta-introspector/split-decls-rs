@@ -6,7 +6,7 @@ Generated 26 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=75
 
 ```rust
-/*!
+/*
 
 # typeck: check phase
 
@@ -87,49 +87,49 @@ pub use check::{check_abi, check_custom_abi};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::VariantIdx;
-use rustc_data_structures::fx::{FxHashSet, FxIndexMap};
+use crate::rustc_abi::VariantIdx;
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{Diag, ErrorGuaranteed, pluralize, struct_span_code_err};
+use crate::rustc_complete::{Diag, ErrorGuaranteed, pluralize, struct_span_code_err};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::LangItem;
-use rustc_hir::def_id::{DefId, LocalDefId};
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::intravisit::Visitor;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_infer::infer::{self, TyCtxtInferExt as _};
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_infer::infer::{self, TyCtxtInferExt as _};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_infer::traits::ObligationCause;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::error::{ExpectedFound, TypeError};
+use crate::rustc_infer::traits::ObligationCause;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::print::with_types_for_signature;
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::print::with_types_for_signature;
+use crate::rustc_complete::ty::{
     self, GenericArgs, GenericArgsRef, GenericParamDefKind, Ty, TyCtxt, TypingMode,
 };
 ```
@@ -138,26 +138,26 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::parse::feature_err;
-use rustc_span::def_id::CRATE_DEF_ID;
-use rustc_span::{BytePos, DUMMY_SP, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::def_id::CRATE_DEF_ID;
+use crate::rustc_complete::{BytePos, DUMMY_SP, Ident, Span, Symbol, kw, sym};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use rustc_trait_selection::error_reporting::infer::ObligationCauseExt as _;
-use rustc_trait_selection::error_reporting::traits::suggestions::ReturnsVisitor;
-use rustc_trait_selection::traits::ObligationCtxt;
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::error_reporting::infer::ObligationCauseExt as _;
+use crate::rustc_trait_selection::error_reporting::traits::suggestions::ReturnsVisitor;
+use crate::rustc_trait_selection::traits::ObligationCtxt;
 use tracing::debug;
 
 use self::compare_impl_item::collect_return_position_impl_trait_in_trait_tys;
@@ -169,7 +169,7 @@ use crate::{check_c_variadic_abi, errors};
 **Metadata**: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=16
 
 ```rust
-/// Adds query implementations to the [Providers] vtable, see [`rustc_middle::query`]
+/// Adds query implementations to the [Providers] vtable, see [`crate::rustc_middle::query`]
 pub(super) fn provide(providers: &mut Providers) {
     *providers = Providers {
         adt_destructor,
@@ -243,17 +243,17 @@ pub(super) fn maybe_check_static_with_link_section(tcx: TyCtxt<'_>, id: LocalDef
         return;
     }
 
-    // If `#[link_section]` is missing, then nothing to verify
+    // If `#[unsafe(link_section]` is missing, then nothing to verify
     let Some(link_section) = tcx.codegen_fn_attrs(id).link_section else {
         return;
     };
 
-    // For the wasm32 target statics with `#[link_section]` other than `.init_array`
+    // For the wasm32 target statics with `#[unsafe(link_section]` other than `.init_array`
     // are placed into custom sections of the final output file, but this isn't like
     // custom sections of other executable formats. Namely we can only embed a list
     // of bytes, nothing with provenance (pointers to anything else). If any
     // provenance show up, reject it here.
-    // `#[link_section]` may contain arbitrary, or even undefined bytes, but it is
+    // `#[unsafe(link_section]` may contain arbitrary, or even undefined bytes, but it is
     // the consumer's responsibility to ensure all bytes that have been read
     // have defined values.
     //
@@ -263,10 +263,10 @@ pub(super) fn maybe_check_static_with_link_section(tcx: TyCtxt<'_>, id: LocalDef
     //
     //   * The linker fails to merge multiple items in a crate into the .init_array section.
     //     To work around this, a single array can be used placing multiple items in the array.
-    //     #[link_section = ".init_array"]
+    //     #[unsafe(link_section = ".init_array"]
     //     static FOO: [unsafe extern "C" fn(); 2] = [ctor, ctor];
     //   * Even symbols marked used get gc'd from dependant crates unless at least one symbol
-    //     in the crate is marked with an `#[export_name]`
+    //     in the crate is marked with an `#[unsafe(export_name]`
     //
     //  Once `.init_array` support in wasm-ld is complete, the user code workarounds should
     //  continue to work, but would no longer be necessary.
@@ -275,7 +275,7 @@ pub(super) fn maybe_check_static_with_link_section(tcx: TyCtxt<'_>, id: LocalDef
         && !alloc.inner().provenance().ptrs().is_empty()
         && !link_section.as_str().starts_with(".init_array")
     {
-        let msg = "statics with a custom `#[link_section]` must be a \
+        let msg = "statics with a custom `#[unsafe(link_section]` must be a \
                         simple list of bytes on the wasm target with no \
                         extra levels of indirection such as references";
         tcx.dcx().span_err(tcx.def_span(id), msg);
@@ -423,11 +423,11 @@ fn default_body_is_unstable(
     });
 
     let inject_span = item_did.is_local().then(|| tcx.crate_level_attribute_injection_span());
-    rustc_session::parse::add_feature_diagnostics_for_issue(
+    crate::rustc_session::parse::add_feature_diagnostics_for_issue(
         &mut err,
         &tcx.sess,
         feature,
-        rustc_feature::GateIssue::Library(issue),
+        crate::rustc_feature::GateIssue::Library(issue),
         false,
         inject_span,
     );
@@ -752,7 +752,7 @@ pub fn check_function_signature<'tcx>(
         err: TypeError<'_>,
         cause: &ObligationCause<'tcx>,
         fn_id: LocalDefId,
-    ) -> rustc_span::Span {
+    ) -> crate::rustc_span::Span {
         let mut args = {
             let node = tcx.expect_hir_owner_node(fn_id);
             let decl = node.fn_decl().unwrap_or_else(|| bug!("expected fn decl, found {:?}", node));

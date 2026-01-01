@@ -6,10 +6,10 @@ Generated 6 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::DefId;
-use rustc_session::lint;
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::lint;
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 2

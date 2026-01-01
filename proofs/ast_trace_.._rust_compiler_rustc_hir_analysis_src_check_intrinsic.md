@@ -6,33 +6,33 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5
 
 ```rust
-//! Type-checking for the `#[rustc_intrinsic]` intrinsics that the compiler exposes.
+// Type-checking for the `#[rustc_intrinsic]` intrinsics that the compiler exposes.
 
-use rustc_abi::ExternAbi;
-use rustc_errors::DiagMessage;
-use rustc_hir::{self as hir, LangItem};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_complete::DiagMessage;
+use crate::rustc_complete::{self as hir, LangItem};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::traits::{ObligationCause, ObligationCauseCode};
+use crate::rustc_complete::traits::{ObligationCause, ObligationCauseCode};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::def_id::LocalDefId;
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 5

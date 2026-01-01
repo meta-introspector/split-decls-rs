@@ -10,17 +10,17 @@ use std::cmp::Ordering;
 
 use either::Either;
 use itertools::Itertools;
-use rustc_data_structures::fx::{FxHashMap, FxIndexMap};
+use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_data_structures::graph::DirectedGraph;
-use rustc_index::IndexVec;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::mir::coverage::{CounterId, CovTerm, Expression, ExpressionId, Op};
+use crate::rustc_data_structures::graph::DirectedGraph;
+use crate::rustc_index::IndexVec;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::mir::coverage::{CounterId, CovTerm, Expression, ExpressionId, Op};
 ```
 
 ## Block 3

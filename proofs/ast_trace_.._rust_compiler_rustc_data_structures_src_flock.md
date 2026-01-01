@@ -6,11 +6,11 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=10 | LINES=28
 
 ```rust
-//! Simple file-locking apis for each OS.
-//!
-//! This is not meant to be in the standard library, it does nothing with
-//! green/native threading. This is just a bare-bones enough solution for
-//! librustdoc, it is not production quality at all.
+// Simple file-locking apis for each OS.
+//
+// This is not meant to be in the standard library, it does nothing with
+// green/native threading. This is just a bare-bones enough solution for
+// librustdoc, it is not production quality at all.
 
 cfg_select! {
     target_os = "linux" => {

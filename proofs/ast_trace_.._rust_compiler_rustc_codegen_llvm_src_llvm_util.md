@@ -25,28 +25,28 @@ use std::{ptr, slice, str};
 
 ```rust
 use libc::c_int;
-use rustc_codegen_ssa::base::wants_wasm_eh;
-use rustc_codegen_ssa::target_features::cfg_target_feature;
-use rustc_codegen_ssa::{TargetConfig, target_features};
+use crate::rustc_codegen_ssa::base::wants_wasm_eh;
+use crate::rustc_codegen_ssa::target_features::cfg_target_feature;
+use crate::rustc_codegen_ssa::{TargetConfig, target_features};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_data_structures::fx::FxHashSet;
-use rustc_data_structures::small_c_str::SmallCStr;
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_data_structures::small_c_str::SmallCStr;
 use rustc_fs_util::path_to_c_string;
-use rustc_middle::bug;
-use rustc_session::Session;
-use rustc_session::config::{PrintKind, PrintRequest};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{PrintKind, PrintRequest};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_target::spec::{MergeFunctions, PanicStrategy, SmallDataThresholdSupport};
+use crate::rustc_target::spec::{MergeFunctions, PanicStrategy, SmallDataThresholdSupport};
 ```
 
 ## Block 6

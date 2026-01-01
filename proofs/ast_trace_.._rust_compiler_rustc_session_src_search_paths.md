@@ -22,7 +22,7 @@ use rustc_macros::{Decodable, Encodable, HashStable_Generic};
 **Metadata**: AST_ID=3 | TYPE=STRUCT | NAME=SearchPath | COMPLEXITY=2 | LINES=11
 
 ```rust
-use rustc_target::spec::TargetTuple;
+use crate::rustc_target::spec::TargetTuple;
 
 use crate::EarlyDiagCtxt;
 use crate::filesearch::make_target_lib_path;

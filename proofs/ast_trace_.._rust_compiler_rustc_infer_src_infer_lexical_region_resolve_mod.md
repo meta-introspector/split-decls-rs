@@ -6,12 +6,12 @@ Generated 17 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-//! Lexical region resolution.
+// Lexical region resolution.
 
 use std::fmt;
 
-use rustc_data_structures::fx::FxHashSet;
-use rustc_data_structures::graph::linked_graph::{
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_data_structures::graph::linked_graph::{
     Direction, INCOMING, LinkedGraph, NodeIndex, OUTGOING,
 };
 ```
@@ -20,16 +20,16 @@ use rustc_data_structures::graph::linked_graph::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::intern::Interned;
-use rustc_data_structures::unord::UnordSet;
-use rustc_index::{IndexSlice, IndexVec};
+use crate::rustc_data_structures::intern::Interned;
+use crate::rustc_data_structures::unord::UnordSet;
+use crate::rustc_index::{IndexSlice, IndexVec};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, ReBound, ReEarlyParam, ReErased, ReError, ReLateParam, RePlaceholder, ReStatic, ReVar,
     Region, RegionVid, Ty, TyCtxt, TypeFoldable, fold_regions,
 };
@@ -39,14 +39,14 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::{debug, instrument};
 ```
 

@@ -6,15 +6,15 @@ Generated 20 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::token::{self, IdentIsRaw, MetaVarKind, Token, TokenKind};
+use crate::rustc_complete::token::{self, IdentIsRaw, MetaVarKind, Token, TokenKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_ast::util::case::Case;
-use rustc_ast::{
+use crate::rustc_complete::util::case::Case;
+use crate::rustc_complete::{
     self as ast, BoundAsyncness, BoundConstness, BoundPolarity, DUMMY_NODE_ID, FnPtrTy, FnRetTy,
     GenericBound, GenericBounds, GenericParam, Generics, Lifetime, MacCall, MutTy, Mutability,
     Pinnedness, PolyTraitRef, PreciseCapturingArg, TraitBoundModifiers, TraitObjectSyntax, Ty,
@@ -26,15 +26,15 @@ use rustc_ast::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_errors::{Applicability, Diag, PResult};
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_complete::{Applicability, Diag, PResult};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ErrorGuaranteed, Ident, Span, kw, sym};
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, kw, sym};
 ```
 
 ## Block 5
@@ -891,9 +891,9 @@ impl<'a> Parser<'a> {
         param_insertion_point: Option<Span>,
         recover_return_sign: RecoverReturnSign,
     ) -> PResult<'a, TyKind> {
-        let inherited_vis = rustc_ast::Visibility {
-            span: rustc_span::DUMMY_SP,
-            kind: rustc_ast::VisibilityKind::Inherited,
+        let inherited_vis = crate::rustc_ast::Visibility {
+            span: crate::rustc_span::DUMMY_SP,
+            kind: crate::rustc_ast::VisibilityKind::Inherited,
             tokens: None,
         };
         let span_start = self.token.span;

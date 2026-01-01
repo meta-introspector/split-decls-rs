@@ -6,25 +6,25 @@ Generated 35 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12
 
 ```rust
-//! HIR pretty-printing is layered on top of AST pretty-printing. A number of
-//! the definitions in this file have equivalents in `rustc_ast_pretty`.
+// HIR pretty-printing is layered on top of AST pretty-printing. A number of
+// the definitions in this file have equivalents in `rustc_ast_pretty`.
 
 // tidy-alphabetical-start
-#![recursion_limit = "256"]
+#[recursion_limit = "256"]
 // tidy-alphabetical-end
 
 use std::cell::Cell;
 use std::vec;
 
-use rustc_abi::ExternAbi;
-use rustc_ast::util::parser::{self, ExprPrecedence, Fixity};
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_complete::util::parser::{self, ExprPrecedence, Fixity};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_ast::{DUMMY_NODE_ID, DelimArgs};
+use crate::rustc_complete::{DUMMY_NODE_ID, DelimArgs};
 ```
 
 ## Block 3
@@ -53,14 +53,14 @@ use rustc_ast_pretty::pprust::{Comments, PrintState};
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::attrs::{AttributeKind, PrintAttribute};
+use crate::rustc_complete::attrs::{AttributeKind, PrintAttribute};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_hir::{
+use crate::rustc_complete::{
     BindingMode, ByRef, ConstArgKind, GenericArg, GenericBound, GenericParam, GenericParamKind,
     HirId, ImplicitSelfKind, LifetimeParamKind, Node, PatKind, PreciseCapturingArg, RangeEnd, Term,
     TyPatKind,
@@ -71,8 +71,8 @@ use rustc_hir::{
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::source_map::SourceMap;
-use rustc_span::{FileName, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{FileName, Ident, Span, Symbol, kw, sym};
 ```
 
 ## Block 9
@@ -86,7 +86,7 @@ use {rustc_ast as ast, rustc_hir as hir};
 **Metadata**: AST_ID=10 | TYPE=FUNCTION | NAME=id_to_string | COMPLEXITY=2 | LINES=4
 
 ```rust
-pub fn id_to_string(cx: &dyn rustc_hir::intravisit::HirTyCtxt<'_>, hir_id: HirId) -> String {
+pub fn id_to_string(cx: &dyn crate::rustc_hir::intravisit::HirTyCtxt<'_>, hir_id: HirId) -> String {
     to_string(&cx, |s| s.print_node(cx.hir_node(hir_id)))
 }
 ```
@@ -136,7 +136,7 @@ pub trait PpAnn {
 **Metadata**: AST_ID=14 | TYPE=FUNCTION | NAME=nested | COMPLEXITY=10 | LINES=13
 
 ```rust
-impl PpAnn for &dyn rustc_hir::intravisit::HirTyCtxt<'_> {
+impl PpAnn for &dyn crate::rustc_hir::intravisit::HirTyCtxt<'_> {
     fn nested(&self, state: &mut State<'_>, nested: Nested) {
         match nested {
             Nested::Item(id) => state.print_item(self.hir_item(id)),
@@ -194,7 +194,7 @@ impl<'a> State<'a> {
             hir::Attribute::Unparsed(unparsed) => {
                 self.maybe_print_comment(unparsed.span.lo());
                 match style {
-                    ast::AttrStyle::Inner => self.word("#!["),
+                    ast::AttrStyle::Inner => self.word("#["),
                     ast::AttrStyle::Outer => self.word("#["),
                 }
                 self.print_attr_item(&unparsed, unparsed.span);
@@ -209,7 +209,7 @@ impl<'a> State<'a> {
             }
             hir::Attribute::Parsed(pa) => {
                 match style {
-                    ast::AttrStyle::Inner => self.word("#![attr = "),
+                    ast::AttrStyle::Inner => self.word("#[attr = "),
                     ast::AttrStyle::Outer => self.word("#[attr = "),
                 }
                 pa.print_attribute(self);
@@ -476,7 +476,7 @@ pub fn item_to_string(ann: &dyn PpAnn, pat: &hir::Item<'_>) -> String {
 
 ```rust
 impl<'a> State<'a> {
-    fn bclose_maybe_open(&mut self, span: rustc_span::Span, cb: Option<BoxMarker>) {
+    fn bclose_maybe_open(&mut self, span: crate::rustc_span::Span, cb: Option<BoxMarker>) {
         self.maybe_print_comment(span.hi());
         self.break_offset_if_not_bol(1, -INDENT_UNIT);
         self.word("}");
@@ -485,14 +485,14 @@ impl<'a> State<'a> {
         }
     }
 
-    fn bclose(&mut self, span: rustc_span::Span, cb: BoxMarker) {
+    fn bclose(&mut self, span: crate::rustc_span::Span, cb: BoxMarker) {
         self.bclose_maybe_open(span, Some(cb))
     }
 
     fn commasep_cmnt<T, F, G>(&mut self, b: Breaks, elts: &[T], mut op: F, mut get_span: G)
     where
         F: FnMut(&mut State<'_>, &T),
-        G: FnMut(&T) -> rustc_span::Span,
+        G: FnMut(&T) -> crate::rustc_span::Span,
     {
         let rb = self.rbox(0, b);
         let len = elts.len();
@@ -964,7 +964,7 @@ impl<'a> State<'a> {
         name: Symbol,
         generics: &hir::Generics<'_>,
         enum_def: &hir::EnumDef<'_>,
-        span: rustc_span::Span,
+        span: crate::rustc_span::Span,
     ) {
         let (cb, ib) = self.head("enum");
         self.print_name(name);
@@ -977,7 +977,7 @@ impl<'a> State<'a> {
     fn print_variants(
         &mut self,
         variants: &[hir::Variant<'_>],
-        span: rustc_span::Span,
+        span: crate::rustc_span::Span,
         cb: BoxMarker,
         ib: BoxMarker,
     ) {
@@ -1007,7 +1007,7 @@ impl<'a> State<'a> {
         name: Symbol,
         generics: &hir::Generics<'_>,
         struct_def: &hir::VariantData<'_>,
-        span: rustc_span::Span,
+        span: crate::rustc_span::Span,
         print_finalizer: bool,
         cb: BoxMarker,
         ib: BoxMarker,

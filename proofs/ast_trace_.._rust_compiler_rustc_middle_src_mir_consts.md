@@ -13,14 +13,14 @@ use std::fmt::{self, Debug, Display, Formatter};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::{HasDataLayout, Size};
+use crate::rustc_abi::{HasDataLayout, Size};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::def_id::DefId;
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, Lift, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
 ```
 
@@ -28,9 +28,9 @@ use rustc_macros::{HashStable, Lift, TyDecodable, TyEncodable, TypeFoldable, Typ
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::RemapFileNameExt;
-use rustc_session::config::RemapPathScopeComponents;
-use rustc_span::{DUMMY_SP, Span, Symbol};
+use crate::rustc_complete::RemapFileNameExt;
+use crate::rustc_complete::config::RemapPathScopeComponents;
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
 ```
 
 ## Block 5
@@ -137,7 +137,7 @@ pub enum ConstValue {
 
 ```rust
 #[cfg(target_pointer_width = "64")]
-rustc_data_structures::static_assert_size!(ConstValue, 24);
+crate::rustc_data_structures::static_assert_size!(ConstValue, 24);
 
 impl ConstValue {
     #[inline]

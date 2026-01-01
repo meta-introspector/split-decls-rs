@@ -7,27 +7,27 @@ Generated 15 AST blocks from source file
 
 ```rust
 use itertools::Itertools;
-use rustc_abi::{FIRST_VARIANT, FieldIdx};
+use crate::rustc_abi::{FIRST_VARIANT, FieldIdx};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_ast::UnsafeBinderCastKind;
-use rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_complete::UnsafeBinderCastKind;
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
 use rustc_hir as hir;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::{CtorKind, CtorOf, DefKind, Res};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::{CtorKind, CtorOf, DefKind, Res};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_hir::find_attr;
-use rustc_index::Idx;
-use rustc_middle::hir::place::{
+use crate::rustc_complete::find_attr;
+use crate::rustc_index::Idx;
+use crate::rustc_complete::hir::place::{
     Place as HirPlace, PlaceBase as HirPlaceBase, ProjectionKind as HirProjectionKind,
 };
 ```
@@ -36,16 +36,16 @@ use rustc_middle::hir::place::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::middle::region;
-use rustc_middle::mir::{self, AssignOp, BinOp, BorrowKind, UnOp};
+use crate::rustc_complete::middle::region;
+use crate::rustc_complete::mir::{self, AssignOp, BinOp, BorrowKind, UnOp};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::thir::*;
-use rustc_middle::ty::adjustment::{
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::adjustment::{
     Adjust, Adjustment, AutoBorrow, AutoBorrowMutability, PointerCoercion,
 };
 ```
@@ -54,7 +54,7 @@ use rustc_middle::ty::adjustment::{
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, AdtKind, GenericArgs, InlineConstArgs, InlineConstArgsParts, ScalarInt, Ty, UpvarArgs,
 };
 ```
@@ -63,14 +63,14 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, sym};
+use crate::rustc_complete::{Span, sym};
 ```
 
 ## Block 9
@@ -287,7 +287,7 @@ impl<'tcx> ThirBuildCx<'tcx> {
                 });
 
                 // kind = Pin { __pointer: pointer }
-                let pin_did = self.tcx.require_lang_item(rustc_hir::LangItem::Pin, span);
+                let pin_did = self.tcx.require_lang_item(crate::rustc_hir::LangItem::Pin, span);
                 let args = self.tcx.mk_args(&[new_pin_target.into()]);
                 let kind = ExprKind::Adt(Box::new(AdtExpr {
                     adt_def: self.tcx.adt_def(pin_did),
@@ -352,7 +352,7 @@ impl<'tcx> ThirBuildCx<'tcx> {
             let idx = adt_def.variant_index_with_ctor_id(variant_ctor_id);
             let (discr_did, discr_offset) = adt_def.discriminant_def_for_variant(idx);
 
-            use rustc_middle::ty::util::IntTypeExt;
+            use crate::rustc_complete::ty::util::IntTypeExt;
             let ty = adt_def.repr().discr_type();
             let discr_ty = ty.to_ty(tcx);
 
@@ -1004,7 +1004,7 @@ impl<'tcx> ThirBuildCx<'tcx> {
                     // The labeled block should contain one match expression, but defining items is
                     // allowed.
                     for stmt in block_body.stmts {
-                        if !matches!(stmt.kind, rustc_hir::StmtKind::Item(_)) {
+                        if !matches!(stmt.kind, crate::rustc_hir::StmtKind::Item(_)) {
                             dcx.emit_fatal(LoopMatchBadStatements { span: stmt.span })
                         }
                     }
@@ -1020,7 +1020,7 @@ impl<'tcx> ThirBuildCx<'tcx> {
 
                     fn local(
                         cx: &mut ThirBuildCx<'_>,
-                        expr: &rustc_hir::Expr<'_>,
+                        expr: &crate::rustc_hir::Expr<'_>,
                     ) -> Option<hir::HirId> {
                         if let hir::ExprKind::Path(hir::QPath::Resolved(_, path)) = expr.kind
                             && let Res::Local(hir_id) = path.res
@@ -1541,7 +1541,7 @@ trait ToBorrowKind {
 ```rust
 impl ToBorrowKind for AutoBorrowMutability {
     fn to_borrow_kind(&self) -> BorrowKind {
-        use rustc_middle::ty::adjustment::AllowTwoPhase;
+        use crate::rustc_complete::ty::adjustment::AllowTwoPhase;
         match *self {
             AutoBorrowMutability::Mut { allow_two_phase_borrow } => BorrowKind::Mut {
                 kind: match allow_two_phase_borrow {

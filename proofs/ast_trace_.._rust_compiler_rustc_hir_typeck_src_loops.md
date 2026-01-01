@@ -11,28 +11,28 @@ use std::fmt;
 
 use Context::*;
 use rustc_hir as hir;
-use rustc_hir::attrs::AttributeKind;
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::LocalDefId;
-use rustc_hir::intravisit::{self, Visitor};
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::intravisit::{self, Visitor};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{Destination, Node, find_attr};
+use crate::rustc_complete::{Destination, Node, find_attr};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::hir::nested_filter;
-use rustc_middle::span_bug;
-use rustc_middle::ty::TyCtxt;
-use rustc_span::hygiene::DesugaringKind;
-use rustc_span::{BytePos, Span};
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::hygiene::DesugaringKind;
+use crate::rustc_complete::{BytePos, Span};
 ```
 
 ## Block 4

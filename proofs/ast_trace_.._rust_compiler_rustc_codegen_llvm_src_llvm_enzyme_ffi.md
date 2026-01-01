@@ -6,7 +6,7 @@ Generated 8 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-#![expect(dead_code)]
+#[expect(dead_code)]
 
 use libc::{c_char, c_uint};
 ```
@@ -183,7 +183,7 @@ pub(crate) use self::Fallback_AD::*;
 
 #[cfg(not(llvm_enzyme))]
 pub(crate) mod Fallback_AD {
-    #![allow(unused_variables)]
+    #[allow(unused_variables)]
 
     pub(crate) fn set_inline(val: bool) {
         unimplemented!()

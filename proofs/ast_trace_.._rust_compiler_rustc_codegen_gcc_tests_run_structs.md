@@ -3,7 +3,7 @@
 Generated 4 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=Test | COMPLEXITY=2 | LINES=18
+**Metadata**: AST_ID=1 | TYPE=STRUCT | NAME=Test | COMPLEXITY=2 | LINES=17
 
 ```rust
 // Compiler:
@@ -13,12 +13,11 @@ Generated 4 AST blocks from source file
 //   stdout: 1
 //     2
 
-#![feature(no_core)]
-#![no_std]
-#![no_core]
-#![no_main]
+#[feature(no_core)]
+#[no_std]
+#[no_core]
+#[no_main]
 
-extern crate mini_core;
 use mini_core::*;
 
 struct Test {
@@ -48,7 +47,7 @@ fn one() -> isize {
 **Metadata**: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=11
 
 ```rust
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
     let test = Test { field: one() };
     let two = Two { two: 2 };

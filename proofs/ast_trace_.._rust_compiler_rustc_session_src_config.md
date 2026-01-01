@@ -6,10 +6,10 @@ Generated 145 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=8
 
 ```rust
-//! Contains infrastructure for configuring the compiler, including parsing
-//! command-line options.
+// Contains infrastructure for configuring the compiler, including parsing
+// command-line options.
 
-#![allow(rustc::untranslatable_diagnostic)] // FIXME: make this translatable
+#[allow(rustc::untranslatable_diagnostic)] // FIXME: make this translatable
 
 use std::collections::btree_map::{
     Iter as BTreeMapIter, Keys as BTreeMapKeysIter, Values as BTreeMapValuesIter,
@@ -58,29 +58,29 @@ use externs::{ExternOpt, split_extern_opt};
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxHashSet, FxIndexMap};
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::stable_hasher::{StableHasher, StableOrd, ToStableHashKey};
+use crate::rustc_data_structures::stable_hasher::{StableHasher, StableOrd, ToStableHashKey};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_errors::emitter::HumanReadableErrorType;
-use rustc_errors::{ColorConfig, DiagArgValue, DiagCtxtFlags, IntoDiagArg};
+use crate::rustc_complete::emitter::HumanReadableErrorType;
+use crate::rustc_complete::{ColorConfig, DiagArgValue, DiagCtxtFlags, IntoDiagArg};
 ```
 
 ## Block 10
 **Metadata**: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_feature::UnstableFeatures;
+use crate::rustc_feature::UnstableFeatures;
 use rustc_hashes::Hash64;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic};
 ```
@@ -89,15 +89,15 @@ use rustc_macros::{Decodable, Encodable, HashStable_Generic};
 **Metadata**: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::edition::{DEFAULT_EDITION, EDITION_NAME_LIST, Edition, LATEST_STABLE_EDITION};
+use crate::rustc_complete::edition::{DEFAULT_EDITION, EDITION_NAME_LIST, Edition, LATEST_STABLE_EDITION};
 ```
 
 ## Block 12
 **Metadata**: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_span::source_map::FilePathMapping;
-use rustc_span::{
+use crate::rustc_complete::source_map::FilePathMapping;
+use crate::rustc_complete::{
     FileName, FileNameDisplayPreference, FileNameEmbeddablePreference, RealFileName,
     SourceFileHashAlgorithm, Symbol, sym,
 };
@@ -107,7 +107,7 @@ use rustc_span::{
 **Metadata**: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_target::spec::{
+use crate::rustc_target::spec::{
     FramePointer, LinkSelfContainedComponents, LinkerFeatures, SplitDebuginfo, Target, TargetTuple,
 };
 ```
@@ -3639,7 +3639,7 @@ pub fn parse_crate_types_from_list(list_list: Vec<String>) -> Result<Vec<CrateTy
 
 ```rust
 pub mod nightly_options {
-    use rustc_feature::UnstableFeatures;
+    use crate::rustc_feature::UnstableFeatures;
 
     use super::{OptionStability, RustcOptGroup};
     use crate::EarlyDiagCtxt;
@@ -3848,7 +3848,7 @@ pub enum WasiExecModel {
 ```
 
 ## Block 130
-**Metadata**: AST_ID=130 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=87 | LINES=254
+**Metadata**: AST_ID=130 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=88 | LINES=254
 
 ```rust
 /// Command-line arguments passed to the compiler have to be incorporated with
@@ -3875,15 +3875,15 @@ pub(crate) mod dep_tracking {
     use std::num::NonZero;
     use std::path::PathBuf;
 
-    use rustc_abi::Align;
-    use rustc_data_structures::fx::FxIndexMap;
-    use rustc_data_structures::stable_hasher::StableHasher;
-    use rustc_errors::LanguageIdentifier;
-    use rustc_feature::UnstableFeatures;
+    use crate::rustc_abi::Align;
+    use crate::rustc_data_structures::fx::FxIndexMap;
+    use crate::rustc_data_structures::stable_hasher::StableHasher;
+    use crate::rustc_complete::LanguageIdentifier;
+    use crate::rustc_feature::UnstableFeatures;
     use rustc_hashes::Hash64;
-    use rustc_span::RealFileName;
-    use rustc_span::edition::Edition;
-    use rustc_target::spec::{
+    use crate::rustc_complete::RealFileName;
+    use crate::rustc_complete::edition::Edition;
+    use crate::rustc_target::spec::{
         CodeModel, FramePointer, MergeFunctions, OnBrokenPipe, PanicStrategy, RelocModel,
         RelroLevel, SanitizerSet, SplitDebuginfo, StackProtector, SymbolVisibility, TargetTuple,
         TlsModel,

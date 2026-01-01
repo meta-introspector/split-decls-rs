@@ -6,23 +6,23 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_index::IndexVec;
-use rustc_middle::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext};
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::{Ty, TyCtxt};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{Ty, TyCtxt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_session::Session;
+use crate::rustc_complete::Session;
 
 use crate::check_pointers::{BorrowedFieldProjectionMode, PointerCheck, check_pointers};
 ```

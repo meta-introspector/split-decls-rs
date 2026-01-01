@@ -7,11 +7,11 @@ Generated 1 AST blocks from source file
 
 ```rust
 use rustc_hir as hir;
-use rustc_index::Idx;
-use rustc_middle::middle::region;
-use rustc_middle::thir::*;
-use rustc_middle::ty;
-use rustc_middle::ty::CanonicalUserTypeAnnotation;
+use crate::rustc_index::Idx;
+use crate::rustc_complete::middle::region;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty;
+use crate::rustc_complete::ty::CanonicalUserTypeAnnotation;
 use tracing::debug;
 
 use crate::thir::cx::ThirBuildCx;

@@ -6,12 +6,12 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-//! This implements a single query, `check_mono_fn`, that gets fired for each
-//! monomorphization of all functions. This lets us implement monomorphization-time
-//! checks in a way that is friendly to incremental compilation.
+// This implements a single query, `check_mono_fn`, that gets fired for each
+// monomorphization of all functions. This lets us implement monomorphization-time
+// checks in a way that is friendly to incremental compilation.
 
-use rustc_middle::query::Providers;
-use rustc_middle::ty::{Instance, TyCtxt};
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{Instance, TyCtxt};
 ```
 
 ## Block 2

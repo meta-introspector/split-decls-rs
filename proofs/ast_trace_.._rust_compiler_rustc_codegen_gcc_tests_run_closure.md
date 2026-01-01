@@ -3,7 +3,7 @@
 Generated 1 AST blocks from source file
 
 ## Block 1
-**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=29 | LINES=48
+**Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=29 | LINES=47
 
 ```rust
 // Compiler:
@@ -16,15 +16,14 @@ Generated 1 AST blocks from source file
 //     Int argument: 2
 //     Both args: 11
 
-#![feature(no_core)]
-#![no_std]
-#![no_core]
-#![no_main]
+#[feature(no_core)]
+#[no_std]
+#[no_core]
+#[no_main]
 
-extern crate mini_core;
 use mini_core::*;
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(argc: isize, _argv: *const *const u8) -> i32 {
     let string = "Arg: %d\n\0";
     let mut closure = || unsafe {

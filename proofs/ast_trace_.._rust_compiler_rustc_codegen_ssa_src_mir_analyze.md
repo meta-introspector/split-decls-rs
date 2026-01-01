@@ -6,35 +6,35 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-//! An analysis to determine which locals require allocas and
-//! which do not.
+// An analysis to determine which locals require allocas and
+// which do not.
 
 use rustc_abi as abi;
-use rustc_data_structures::graph::dominators::Dominators;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_index::{IndexSlice, IndexVec};
+use crate::rustc_data_structures::graph::dominators::Dominators;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_index::{IndexSlice, IndexVec};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::mir::visit::{MutatingUseContext, NonMutatingUseContext, PlaceContext, Visitor};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{self, DefLocation, Location, TerminatorKind, traversal};
+use crate::rustc_complete::mir::{self, DefLocation, Location, TerminatorKind, traversal};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::layout::LayoutOf;
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::ty::layout::LayoutOf;
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 5

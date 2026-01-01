@@ -20,63 +20,63 @@ use hir::def_id::{LocalDefIdMap, LocalDefIdSet};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_abi::FieldIdx;
-use rustc_data_structures::fx::FxIndexSet;
-use rustc_errors::MultiSpan;
-use rustc_hir::def::{CtorOf, DefKind, Res};
+use crate::rustc_abi::FieldIdx;
+use crate::rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_complete::MultiSpan;
+use crate::rustc_complete::def::{CtorOf, DefKind, Res};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::def_id::{DefId, LocalDefId, LocalModDefId};
+use crate::rustc_complete::def_id::{DefId, LocalDefId, LocalModDefId};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::intravisit::{self, Visitor};
+use crate::rustc_complete::intravisit::{self, Visitor};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::{self as hir, Node, PatKind, QPath};
+use crate::rustc_complete::{self as hir, Node, PatKind, QPath};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use rustc_middle::middle::privacy::Level;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::{self, AssocTag, TyCtxt};
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::middle::privacy::Level;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, AssocTag, TyCtxt};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, span_bug};
+use crate::rustc_complete::{bug, span_bug};
 ```
 
 ## Block 8
 **Metadata**: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::lint::builtin::DEAD_CODE;
-use rustc_session::lint::{self, LintExpectationId};
+use crate::rustc_complete::lint::builtin::DEAD_CODE;
+use crate::rustc_complete::lint::{self, LintExpectationId};
 ```
 
 ## Block 9
 **Metadata**: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Symbol, kw, sym};
+use crate::rustc_complete::{Symbol, kw, sym};
 ```
 
 ## Block 10
@@ -695,9 +695,9 @@ impl<'tcx> Visitor<'tcx> for MarkSymbolVisitor<'tcx> {
         self.in_pat = false;
     }
 
-    fn visit_pat_expr(&mut self, expr: &'tcx rustc_hir::PatExpr<'tcx>) {
+    fn visit_pat_expr(&mut self, expr: &'tcx crate::rustc_hir::PatExpr<'tcx>) {
         match &expr.kind {
-            rustc_hir::PatExprKind::Path(qpath) => {
+            crate::rustc_hir::PatExprKind::Path(qpath) => {
                 // mark the type of variant live when meeting E::V in expr
                 if let ty::Adt(adt, _) = self.typeck_results().node_type(expr.hir_id).kind() {
                     self.check_def_id(adt.did());
@@ -789,7 +789,7 @@ fn has_allow_dead_code_or_lang_attr(
         tcx.def_kind(def_id).has_codegen_attrs() && {
             let cg_attrs = tcx.codegen_fn_attrs(def_id);
 
-            // #[used], #[no_mangle], #[export_name], etc also keeps the item alive
+            // #[used], #[unsafe(no_mangle)], #[unsafe(export_name], etc also keeps the item alive
             // forcefully, e.g., for placing it in a specific section.
             cg_attrs.contains_extern_indicator()
                 || cg_attrs.flags.contains(CodegenFnAttrFlags::USED_COMPILER)

@@ -6,27 +6,27 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7
 
 ```rust
-//! Common logic for borrowck use-after-move errors when moved into a `fn(self)`,
-//! as well as errors when attempting to call a non-const function in a const
-//! context.
+// Common logic for borrowck use-after-move errors when moved into a `fn(self)`,
+// as well as errors when attempting to call a non-const function in a const
+// context.
 
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::DefId;
-use rustc_hir::{LangItem, lang_items};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{LangItem, lang_items};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{AssocContainer, GenericArgsRef, Instance, Ty, TyCtxt, TypingEnv};
+use crate::rustc_complete::ty::{AssocContainer, GenericArgsRef, Instance, Ty, TyCtxt, TypingEnv};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, DesugaringKind, Ident, Span, sym};
+use crate::rustc_complete::{DUMMY_SP, DesugaringKind, Ident, Span, sym};
 ```
 
 ## Block 4

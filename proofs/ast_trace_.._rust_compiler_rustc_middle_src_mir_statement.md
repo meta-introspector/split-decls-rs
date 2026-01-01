@@ -6,7 +6,7 @@ Generated 23 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3
 
 ```rust
-//! Functionality for statements, operands, places, and things that appear in them.
+// Functionality for statements, operands, places, and things that appear in them.
 
 use tracing::{debug, instrument};
 ```
@@ -110,7 +110,7 @@ pub struct PlaceTy<'tcx> {
 ```rust
 // At least on 64 bit systems, `PlaceTy` should not be larger than two or three pointers.
 #[cfg(target_pointer_width = "64")]
-rustc_data_structures::static_assert_size!(PlaceTy<'_>, 16);
+crate::rustc_data_structures::static_assert_size!(PlaceTy<'_>, 16);
 
 impl<'tcx> PlaceTy<'tcx> {
     #[inline]

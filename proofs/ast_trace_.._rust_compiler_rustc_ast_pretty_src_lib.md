@@ -7,11 +7,11 @@ Generated 1 AST blocks from source file
 
 ```rust
 // tidy-alphabetical-start
-#![allow(internal_features)]
-#![doc(rust_logo)]
-#![feature(box_patterns)]
-#![feature(negative_impls)]
-#![feature(rustdoc_internals)]
+#[allow(internal_features)]
+#[doc(rust_logo)]
+#[feature(box_patterns)]
+#[feature(negative_impls)]
+#[feature(rustdoc_internals)]
 // tidy-alphabetical-end
 
 mod helpers;

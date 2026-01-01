@@ -6,18 +6,18 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_middle::query::Providers;
-use rustc_middle::traits::query::NoSolution;
-use rustc_middle::ty::{self, PseudoCanonicalInput, TyCtxt, TypeFoldable, TypeVisitableExt};
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::{self, PseudoCanonicalInput, TyCtxt, TypeFoldable, TypeVisitableExt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_trait_selection::traits::query::normalize::QueryNormalizeExt;
-use rustc_trait_selection::traits::{Normalized, ObligationCause};
+use crate::rustc_trait_selection::traits::query::normalize::QueryNormalizeExt;
+use crate::rustc_trait_selection::traits::{Normalized, ObligationCause};
 ```
 
 ## Block 3

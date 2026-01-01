@@ -6,25 +6,25 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::LocalDefId;
-use rustc_hir::{self as hir, Expr, ImplItem, Item, Node, TraitItem, def, intravisit};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{self as hir, Expr, ImplItem, Item, Node, TraitItem, def, intravisit};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::hir::nested_filter;
-use rustc_middle::ty::{self, DefiningScopeKind, Ty, TyCtxt, TypeVisitableExt};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::ty::{self, DefiningScopeKind, Ty, TyCtxt, TypeVisitableExt};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_trait_selection::opaque_types::report_item_does_not_constrain_error;
+use crate::rustc_trait_selection::opaque_types::report_item_does_not_constrain_error;
 use tracing::{debug, instrument, trace};
 ```
 

@@ -6,13 +6,13 @@ Generated 15 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-//! Custom formatting traits used when outputting Graphviz diagrams with the results of a dataflow
-//! analysis.
+// Custom formatting traits used when outputting Graphviz diagrams with the results of a dataflow
+// analysis.
 
 use std::fmt;
 
-use rustc_index::Idx;
-use rustc_index::bit_set::{ChunkedBitSet, DenseBitSet, MixedBitSet};
+use crate::rustc_index::Idx;
+use crate::rustc_index::bit_set::{ChunkedBitSet, DenseBitSet, MixedBitSet};
 ```
 
 ## Block 2
@@ -307,7 +307,7 @@ where
 **Metadata**: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2
 
 ```rust
-impl<C> DebugWithContext<C> for rustc_middle::mir::Local {}
+impl<C> DebugWithContext<C> for crate::rustc_middle::mir::Local {}
 ```
 
 ## Block 14

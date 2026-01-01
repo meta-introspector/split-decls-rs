@@ -6,23 +6,23 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_abi::FieldIdx;
-use rustc_hir::LangItem;
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_abi::FieldIdx;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, mir};
+use crate::rustc_complete::{bug, mir};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_span::Symbol;
+use crate::rustc_complete::Symbol;
 use tracing::trace;
 
 use crate::const_eval::{CanAccessMutGlobal, CompileTimeInterpCx, mk_eval_cx_to_read_const_val};
@@ -92,7 +92,7 @@ pub(crate) fn const_caller_location_provider(
     trace!("const_caller_location: {}:{}:{}", file, line, col);
     let mut ecx = mk_eval_cx_to_read_const_val(
         tcx,
-        rustc_span::DUMMY_SP, // FIXME: use a proper span here?
+        crate::rustc_span::DUMMY_SP, // FIXME: use a proper span here?
         ty::TypingEnv::fully_monomorphized(),
         CanAccessMutGlobal::No,
     );

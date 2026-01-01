@@ -6,12 +6,12 @@ Generated 3 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=8
 
 ```rust
-//! Computes a normalizes-to (projection) goal for inherent associated types,
-//! `#![feature(inherent_associated_type)]`. Since HIR ty lowering already determines
-//! which impl the IAT is being projected from, we just:
-//! 1. instantiate generic parameters,
-//! 2. equate the self type, and
-//! 3. instantiate and register where clauses.
+// Computes a normalizes-to (projection) goal for inherent associated types,
+// `#[feature(inherent_associated_type)]`. Since HIR ty lowering already determines
+// which impl the IAT is being projected from, we just:
+// 1. instantiate generic parameters,
+// 2. equate the self type, and
+// 3. instantiate and register where clauses.
 
 use rustc_type_ir::{self as ty, Interner};
 ```

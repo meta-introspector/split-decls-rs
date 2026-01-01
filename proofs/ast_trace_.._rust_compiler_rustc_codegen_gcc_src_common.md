@@ -13,15 +13,15 @@ use gccjit::{LValue, RValue, ToRValue, Type};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::Primitive::Pointer;
-use rustc_abi::{self as abi, HasDataLayout};
+use crate::rustc_abi::Primitive::Pointer;
+use crate::rustc_abi::{self as abi, HasDataLayout};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_codegen_ssa::traits::{
+use crate::rustc_codegen_ssa::traits::{
     BaseTypeCodegenMethods, ConstCodegenMethods, MiscCodegenMethods, StaticCodegenMethods,
 };
 ```
@@ -30,15 +30,15 @@ use rustc_codegen_ssa::traits::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::Mutability;
-use rustc_middle::mir::interpret::{ConstAllocation, GlobalAlloc, Scalar};
+use crate::rustc_complete::mir::Mutability;
+use crate::rustc_complete::mir::interpret::{ConstAllocation, GlobalAlloc, Scalar};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=FUNCTION | NAME=const_ptrcast | COMPLEXITY=13 | LINES=36
 
 ```rust
-use rustc_middle::ty::layout::LayoutOf;
+use crate::rustc_complete::ty::layout::LayoutOf;
 
 use crate::context::CodegenCx;
 use crate::type_of::LayoutGccExt;
@@ -102,8 +102,8 @@ pub fn bytes_in_context<'gcc, 'tcx>(cx: &CodegenCx<'gcc, 'tcx>, bytes: &[u8]) ->
                         // Since we are representing arbitrary byte runs as integers, we need to follow the target
                         // endianness.
                         match cx.sess().target.options.endian {
-                            rustc_abi::Endian::Little => u64::from_le_bytes(arr) as i64,
-                            rustc_abi::Endian::Big => u64::from_be_bytes(arr) as i64,
+                            crate::rustc_abi::Endian::Little => u64::from_le_bytes(arr) as i64,
+                            crate::rustc_abi::Endian::Big => u64::from_be_bytes(arr) as i64,
                         },
                     )
                 })
@@ -121,8 +121,8 @@ pub fn bytes_in_context<'gcc, 'tcx>(cx: &CodegenCx<'gcc, 'tcx>, bytes: &[u8]) ->
                     context.new_rvalue_from_int(
                         byte_type,
                         match cx.sess().target.options.endian {
-                            rustc_abi::Endian::Little => u32::from_le_bytes(arr) as i32,
-                            rustc_abi::Endian::Big => u32::from_be_bytes(arr) as i32,
+                            crate::rustc_abi::Endian::Little => u32::from_le_bytes(arr) as i32,
+                            crate::rustc_abi::Endian::Big => u32::from_be_bytes(arr) as i32,
                         },
                     )
                 })
@@ -359,7 +359,7 @@ impl<'gcc, 'tcx> ConstCodegenMethods for CodegenCx<'gcc, 'tcx> {
         // The alignment is not handled / used in any way by `const_alloc_to_gcc`,
         // so it is OK to overwrite it here.
         let mut mock_alloc = alloc.inner().clone();
-        mock_alloc.align = rustc_abi::Align::MAX;
+        mock_alloc.align = crate::rustc_abi::Align::MAX;
         // Check if the rvalue is already in the cache - if so, just return it directly.
         if let Some(res) = self.const_cache.borrow().get(&mock_alloc) {
             return *res;

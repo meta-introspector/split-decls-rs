@@ -6,24 +6,24 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-//! The compiler code necessary to implement the `#[derive]` extensions.
+// The compiler code necessary to implement the `#[derive]` extensions.
 
 use rustc_ast as ast;
-use rustc_ast::{GenericArg, MetaItem};
+use crate::rustc_complete::{GenericArg, MetaItem};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_expand::base::{Annotatable, ExpandResult, ExtCtxt, MultiItemModifier};
+use crate::rustc_expand::base::{Annotatable, ExpandResult, ExtCtxt, MultiItemModifier};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 4

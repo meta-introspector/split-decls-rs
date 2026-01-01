@@ -6,23 +6,23 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_abi::BackendRepr;
-use rustc_middle::mir::interpret::ErrorHandled;
-use rustc_middle::ty::layout::{HasTyCtxt, HasTypingEnv};
+use crate::rustc_abi::BackendRepr;
+use crate::rustc_complete::mir::interpret::ErrorHandled;
+use crate::rustc_complete::ty::layout::{HasTyCtxt, HasTypingEnv};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, Ty};
+use crate::rustc_complete::ty::{self, Ty};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::{bug, mir, span_bug};
+use crate::rustc_complete::{bug, mir, span_bug};
 ```
 
 ## Block 4

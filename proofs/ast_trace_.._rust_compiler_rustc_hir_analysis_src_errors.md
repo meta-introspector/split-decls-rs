@@ -6,11 +6,11 @@ Generated 147 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8
 
 ```rust
-//! Errors emitted by `rustc_hir_analysis`.
+// Errors emitted by `rustc_hir_analysis`.
 
-use rustc_abi::ExternAbi;
-use rustc_errors::codes::*;
-use rustc_errors::{
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
     Applicability, Diag, DiagCtxtHandle, DiagSymbolList, Diagnostic, EmissionGuarantee, Level,
     MultiSpan,
 };
@@ -20,7 +20,7 @@ use rustc_errors::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_hir::limit::Limit;
+use crate::rustc_complete::limit::Limit;
 use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
 ```
 
@@ -28,8 +28,8 @@ use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::Ty;
-use rustc_span::{Ident, Span, Symbol};
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::{Ident, Span, Symbol};
 ```
 
 ## Block 4

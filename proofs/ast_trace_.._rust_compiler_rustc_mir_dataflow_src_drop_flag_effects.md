@@ -6,8 +6,8 @@ Generated 13 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_abi::VariantIdx;
-use rustc_middle::mir::{self, Body, Location, Terminator, TerminatorKind};
+use crate::rustc_abi::VariantIdx;
+use crate::rustc_complete::mir::{self, Body, Location, Terminator, TerminatorKind};
 ```
 
 ## Block 2

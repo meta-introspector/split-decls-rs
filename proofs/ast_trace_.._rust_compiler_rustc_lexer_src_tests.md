@@ -126,7 +126,7 @@ fn test_valid_shebang() {
     let input = "#!/bin/bash";
     assert_eq!(strip_shebang(input), Some(input.len()));
 
-    let input = "#![attribute]";
+    let input = "#[attribute]";
     assert_eq!(strip_shebang(input), None);
 
     let input = "#!    /bin/bash";
@@ -163,7 +163,7 @@ fn test_valid_shebang() {
     let input = "\n#!/bin/bash";
     assert_eq!(strip_shebang(input), None);
 
-    let input = "\n#![attribute]";
+    let input = "\n#[attribute]";
     assert_eq!(strip_shebang(input), None);
 }
 ```
@@ -224,12 +224,12 @@ fn comment_flavors() {
 // line
 //// line as well
 /// outer doc line
-//! inner doc line
+// inner doc line
 /* block */
 /**/
 /*** also block */
 /** outer doc block */
-/*! inner doc block */
+/* inner doc block */
 ",
         FrontmatterAllowed::No,
         expect![[r#"

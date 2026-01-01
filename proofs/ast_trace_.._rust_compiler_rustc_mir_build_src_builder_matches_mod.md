@@ -6,12 +6,12 @@ Generated 42 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=12
 
 ```rust
-//! Code related to match expressions. These are sufficiently complex to
-//! warrant their own module and submodules. :) This main module includes the
-//! high-level algorithm, the submodules contain the details.
-//!
-//! This also includes code for pattern bindings in `let` statements and
-//! function parameters.
+// Code related to match expressions. These are sufficiently complex to
+// warrant their own module and submodules. :) This main module includes the
+// high-level algorithm, the submodules contain the details.
+//
+// This also includes code for pattern bindings in `let` statements and
+// function parameters.
 
 use std::borrow::Borrow;
 use std::mem;
@@ -24,48 +24,48 @@ use itertools::{Itertools, Position};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_abi::VariantIdx;
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_data_structures::stack::ensure_sufficient_stack;
-use rustc_hir::{BindingMode, ByRef, LetStmt, LocalSource, Node};
+use crate::rustc_abi::VariantIdx;
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_complete::{BindingMode, ByRef, LetStmt, LocalSource, Node};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::middle::region::{self, ScopeCompatibility};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::middle::region::{self, ScopeCompatibility};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::thir::{self, *};
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::{self, *};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, CanonicalUserTypeAnnotation, Ty, ValTree, ValTreeKind};
+use crate::rustc_complete::ty::{self, CanonicalUserTypeAnnotation, Ty, ValTree, ValTreeKind};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_pattern_analysis::constructor::RangeEnd;
-use rustc_pattern_analysis::rustc::{DeconstructedPat, RustcPatCtxt};
+use crate::rustc_pattern_analysis::constructor::RangeEnd;
+use crate::rustc_pattern_analysis::rustc::{DeconstructedPat, RustcPatCtxt};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{BytePos, Pos, Span, Symbol, sym};
+use crate::rustc_complete::{BytePos, Pos, Span, Symbol, sym};
 ```
 
 ## Block 8
@@ -2738,7 +2738,7 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
                 self.cfg.push_assign(block, scrutinee_source_info, Place::from(temp), borrow);
             }
 
-            let mut guard_span = rustc_span::DUMMY_SP;
+            let mut guard_span = crate::rustc_span::DUMMY_SP;
 
             let (post_guard_block, otherwise_post_guard_block) =
                 self.in_if_then_scope(match_scope, guard_span, |this| {
@@ -3137,7 +3137,7 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
             let pat = cx.lower_pat(&*self.thir.arms[arm_id].pattern);
 
             // Peel off or-patterns if they exist.
-            if let rustc_pattern_analysis::rustc::Constructor::Or = pat.ctor() {
+            if let crate::rustc_pattern_analysis::rustc::Constructor::Or = pat.ctor() {
                 for pat in pat.iter_fields() {
                     // For top-level or-patterns (the only ones we accept right now), when the
                     // bindings are the same (e.g. there are none), the sub_branch is stored just
@@ -3169,8 +3169,8 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
         valtree: ty::ValTree<'tcx>,
         pat: &DeconstructedPat<'_, 'tcx>,
     ) -> bool {
-        use rustc_pattern_analysis::constructor::{IntRange, MaybeInfiniteInt};
-        use rustc_pattern_analysis::rustc::Constructor;
+        use crate::rustc_pattern_analysis::constructor::{IntRange, MaybeInfiniteInt};
+        use crate::rustc_pattern_analysis::rustc::Constructor;
 
         match pat.ctor() {
             Constructor::Variant(variant_index) => {

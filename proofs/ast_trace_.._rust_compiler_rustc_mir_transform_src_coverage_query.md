@@ -6,39 +6,39 @@ Generated 11 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::attrs::{AttributeKind, CoverageAttrKind};
+use crate::rustc_complete::attrs::{AttributeKind, CoverageAttrKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_hir::find_attr;
-use rustc_index::bit_set::DenseBitSet;
-use rustc_middle::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use rustc_middle::mir::coverage::{BasicCoverageBlock, CoverageIdsInfo, CoverageKind, MappingKind};
+use crate::rustc_complete::find_attr;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::mir::coverage::{BasicCoverageBlock, CoverageIdsInfo, CoverageKind, MappingKind};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::{Body, Statement, StatementKind};
+use crate::rustc_complete::mir::{Body, Statement, StatementKind};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{self, TyCtxt};
+use crate::rustc_complete::ty::{self, TyCtxt};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_middle::util::Providers;
-use rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::util::Providers;
+use crate::rustc_complete::def_id::LocalDefId;
 use tracing::trace;
 
 use crate::coverage::counters::node_flow::make_node_counters;

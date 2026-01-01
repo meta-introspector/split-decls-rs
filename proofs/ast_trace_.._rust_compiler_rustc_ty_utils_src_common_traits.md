@@ -6,20 +6,20 @@ Generated 9 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6
 
 ```rust
-//! Queries for checking whether a type implements one of a few common traits.
+// Queries for checking whether a type implements one of a few common traits.
 
-use rustc_hir::lang_items::LangItem;
-use rustc_infer::infer::TyCtxtInferExt;
-use rustc_middle::query::Providers;
-use rustc_middle::ty::{self, Ty, TyCtxt};
+use crate::rustc_complete::lang_items::LangItem;
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=FUNCTION | NAME=is_copy_raw | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_span::DUMMY_SP;
-use rustc_trait_selection::traits;
+use crate::rustc_complete::DUMMY_SP;
+use crate::rustc_trait_selection::traits;
 
 fn is_copy_raw<'tcx>(tcx: TyCtxt<'tcx>, query: ty::PseudoCanonicalInput<'tcx, Ty<'tcx>>) -> bool {
     is_item_raw(tcx, query, LangItem::Copy)

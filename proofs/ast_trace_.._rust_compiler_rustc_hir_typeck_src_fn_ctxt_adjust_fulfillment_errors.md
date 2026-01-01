@@ -9,30 +9,30 @@ Generated 10 AST blocks from source file
 use std::ops::ControlFlow;
 
 use rustc_hir as hir;
-use rustc_hir::def::{DefKind, Res};
+use crate::rustc_complete::def::{DefKind, Res};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::def_id::DefId;
-use rustc_infer::traits::ObligationCauseCode;
-use rustc_middle::ty::{self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitor};
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_infer::traits::ObligationCauseCode;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitor};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, kw};
+use crate::rustc_complete::{Span, kw};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10
 
 ```rust
-use rustc_trait_selection::traits;
+use crate::rustc_trait_selection::traits;
 
 use crate::FnCtxt;
 

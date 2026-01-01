@@ -14,7 +14,7 @@ use std::{cmp, fmt};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_abi::{
+use crate::rustc_abi::{
     AddressSpace, Align, ExternAbi, FieldIdx, FieldsShape, HasDataLayout, LayoutData, PointeeInfo,
     PointerKind, Primitive, ReprOptions, Scalar, Size, TagEncoding, TargetDataLayout,
     TyAbiInterface, VariantIdx, Variants,
@@ -25,8 +25,8 @@ use rustc_abi::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_error_messages::DiagMessage;
-use rustc_errors::{
+use crate::rustc_error_messages::DiagMessage;
+use crate::rustc_complete::{
     Diag, DiagArgValue, DiagCtxtHandle, Diagnostic, EmissionGuarantee, IntoDiagArg, Level,
 };
 ```
@@ -35,8 +35,8 @@ use rustc_errors::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::LangItem;
-use rustc_hir::def_id::DefId;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::DefId;
 use rustc_macros::{HashStable, TyDecodable, TyEncodable, extension};
 ```
 
@@ -44,16 +44,16 @@ use rustc_macros::{HashStable, TyDecodable, TyEncodable, extension};
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_session::config::OptLevel;
-use rustc_span::{DUMMY_SP, ErrorGuaranteed, Span, Symbol, sym};
+use crate::rustc_complete::config::OptLevel;
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Span, Symbol, sym};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_target::callconv::FnAbi;
-use rustc_target::spec::{HasTargetSpec, HasX86AbiOpt, PanicStrategy, Target, X86Abi};
+use crate::rustc_target::callconv::FnAbi;
+use crate::rustc_target::spec::{HasTargetSpec, HasX86AbiOpt, PanicStrategy, Target, X86Abi};
 ```
 
 ## Block 7
@@ -248,7 +248,7 @@ pub const WIDE_PTR_ADDR: usize = 0;
 /// - For a slice, this is the length.
 pub const WIDE_PTR_EXTRA: usize = 1;
 
-pub const MAX_SIMD_LANES: u64 = rustc_abi::MAX_SIMD_LANES;
+pub const MAX_SIMD_LANES: u64 = crate::rustc_abi::MAX_SIMD_LANES;
 
 /// Used in `check_validity_requirement` to indicate the kind of initialization
 /// that is checked to be valid
@@ -869,7 +869,7 @@ impl<T, E> MaybeResult<T> for Result<T, E> {
 **Metadata**: AST_ID=40 | TYPE=FUNCTION | NAME=layout_tcx_at_span | COMPLEXITY=11 | LINES=31
 
 ```rust
-pub type TyAndLayout<'tcx> = rustc_abi::TyAndLayout<'tcx, Ty<'tcx>>;
+pub type TyAndLayout<'tcx> = crate::rustc_abi::TyAndLayout<'tcx, Ty<'tcx>>;
 
 /// Trait for contexts that want to be able to compute layouts of types.
 /// This automatically gives access to `LayoutOf`, through a blanket `impl`.

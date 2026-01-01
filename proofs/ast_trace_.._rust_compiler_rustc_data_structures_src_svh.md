@@ -6,12 +6,12 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=10
 
 ```rust
-//! Calculation and management of a Strict Version Hash for crates
-//!
-//! The SVH is used for incremental compilation to track when HIR
-//! nodes have changed between compilations, and also to detect
-//! mismatches where we have two versions of the same crate that were
-//! compiled from distinct sources.
+// Calculation and management of a Strict Version Hash for crates
+//
+// The SVH is used for incremental compilation to track when HIR
+// nodes have changed between compilations, and also to detect
+// mismatches where we have two versions of the same crate that were
+// compiled from distinct sources.
 
 use std::fmt;
 

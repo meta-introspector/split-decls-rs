@@ -6,8 +6,8 @@ Generated 2 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=static_addr_of | COMPLEXITY=2 | LINES=9
 
 ```rust
-use rustc_abi::Align;
-use rustc_hir::def_id::DefId;
+use crate::rustc_abi::Align;
+use crate::rustc_complete::def_id::DefId;
 
 use super::BackendTypes;
 

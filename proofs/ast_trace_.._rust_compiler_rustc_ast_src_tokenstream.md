@@ -6,11 +6,11 @@ Generated 40 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10
 
 ```rust
-//! # Token Streams
-//!
-//! `TokenStream`s represent syntactic objects before they are converted into ASTs.
-//! A `TokenStream` is, roughly speaking, a sequence of [`TokenTree`]s,
-//! which are themselves a single [`Token`] or a `Delimited` subsequence of tokens.
+// # Token Streams
+//
+// `TokenStream`s represent syntactic objects before they are converted into ASTs.
+// A `TokenStream` is, roughly speaking, a sequence of [`TokenTree`]s,
+// which are themselves a single [`Token`] or a `Delimited` subsequence of tokens.
 
 use std::borrow::Cow;
 use std::ops::Range;
@@ -22,14 +22,14 @@ use std::{cmp, fmt, iter, mem};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::sync;
+use crate::rustc_data_structures::sync;
 use rustc_macros::{Decodable, Encodable, HashStable_Generic, Walkable};
 ```
 
@@ -37,14 +37,14 @@ use rustc_macros::{Decodable, Encodable, HashStable_Generic, Walkable};
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_serialize::{Decodable, Encodable};
+use crate::rustc_serialize::{Decodable, Encodable};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{DUMMY_SP, Span, SpanDecoder, SpanEncoder, Symbol, sym};
+use crate::rustc_complete::{DUMMY_SP, Span, SpanDecoder, SpanEncoder, Symbol, sym};
 ```
 
 ## Block 6
@@ -499,7 +499,7 @@ fn make_attr_token_stream(
             // Tokens are always ASCII chars, so we can use byte arithmetic here.
             let mut first_span = last_token.span.shrink_to_lo();
             first_span =
-                first_span.with_hi(first_span.lo() + rustc_span::BytePos(break_last_token));
+                first_span.with_hi(first_span.lo() + crate::rustc_span::BytePos(break_last_token));
 
             stack_top.inner.push(AttrTokenTree::Token(Token::new(unglued, first_span), spacing));
         } else {
@@ -575,7 +575,7 @@ impl AttrTokenStream {
 // - Simple if no attributes are present, e.g. "fn f() { blah(); }"
 // - Simple if only outer attribute are present, e.g. "#[outer1] #[outer2] fn f() { blah(); }"
 // - Trickier if inner attributes are present, because they must be moved within the AST node's
-//   tokens, e.g. "#[outer] fn f() { #![inner] blah() }"
+//   tokens, e.g. "#[outer] fn f() { #[inner] blah() }"
 fn attrs_and_tokens_to_token_trees(
     attrs: &[Attribute],
     target_tokens: &LazyAttrTokenStream,
@@ -601,14 +601,14 @@ fn attrs_and_tokens_to_token_trees(
     // Inner attributes are only supported on blocks, functions, impls, and
     // modules. All of these have their inner attributes placed at the
     // beginning of the rightmost outermost braced group:
-    // e.g. `fn foo() { #![my_attr] }`. (Note: the braces may be within
+    // e.g. `fn foo() { #[my_attr] }`. (Note: the braces may be within
     // invisible delimiters.)
     //
     // Therefore, we can insert them back into the right location without
     // needing to do any extra position tracking.
     //
     // Note: Outline modules are an exception - they can have attributes like
-    // `#![my_attr]` at the start of a file. Support for custom attributes in
+    // `#[my_attr]` at the start of a file. Support for custom attributes in
     // this position is not properly implemented - we always synthesize fake
     // tokens, so we never reach this code.
     fn insert_inner_attrs(inner_attrs: &[Attribute], tts: &mut Vec<TokenTree>) -> bool {
@@ -1233,7 +1233,7 @@ impl DelimSpacing {
 // Some types are used a lot. Make sure they don't unintentionally get bigger.
 #[cfg(target_pointer_width = "64")]
 mod size_asserts {
-    use rustc_data_structures::static_assert_size;
+    use crate::rustc_data_structures::static_assert_size;
 
     use super::*;
     // tidy-alphabetical-start

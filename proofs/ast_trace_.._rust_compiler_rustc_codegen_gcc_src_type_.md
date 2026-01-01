@@ -18,15 +18,15 @@ use gccjit::{RValue, Struct, Type};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_abi::{AddressSpace, Align, Integer, Size};
+use crate::rustc_abi::{AddressSpace, Align, Integer, Size};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_codegen_ssa::common::TypeKind;
-use rustc_codegen_ssa::traits::{
+use crate::rustc_codegen_ssa::common::TypeKind;
+use crate::rustc_codegen_ssa::traits::{
     BaseTypeCodegenMethods, DerivedTypeCodegenMethods, TypeMembershipCodegenMethods,
 };
 ```
@@ -35,8 +35,8 @@ use rustc_codegen_ssa::traits::{
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::ty::layout::TyAndLayout;
-use rustc_middle::{bug, ty};
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::{bug, ty};
 ```
 
 ## Block 5

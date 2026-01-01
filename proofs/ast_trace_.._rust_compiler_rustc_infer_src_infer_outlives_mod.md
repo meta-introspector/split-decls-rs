@@ -6,17 +6,17 @@ Generated 5 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-//! Various code related to computing outlives relations.
+// Various code related to computing outlives relations.
 
-use rustc_data_structures::undo_log::UndoLogs;
-use rustc_middle::traits::query::{NoSolution, OutlivesBound};
+use crate::rustc_data_structures::undo_log::UndoLogs;
+use crate::rustc_complete::traits::query::{NoSolution, OutlivesBound};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::ty;
+use crate::rustc_complete::ty;
 use tracing::instrument;
 
 use self::env::OutlivesEnvironment;

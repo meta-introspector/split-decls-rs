@@ -20,7 +20,7 @@ use std::mem::{self, discriminant};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 ```
 
 ## Block 4
@@ -28,29 +28,29 @@ use rustc_data_structures::stable_hasher::{HashStable, StableHasher};
 
 ```rust
 use rustc_hashes::Hash64;
-use rustc_hir::def_id::{CrateNum, DefId};
+use crate::rustc_complete::def_id::{CrateNum, DefId};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_hir::definitions::{DefPathData, DisambiguatedDefPathData};
+use crate::rustc_complete::definitions::{DefPathData, DisambiguatedDefPathData};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_middle::bug;
-use rustc_middle::ty::print::{PrettyPrinter, Print, PrintError, Printer};
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::print::{PrettyPrinter, Print, PrintError, Printer};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, GenericArg, GenericArgKind, Instance, ReifyReason, Ty, TyCtxt, TypeVisitableExt,
 };
 ```

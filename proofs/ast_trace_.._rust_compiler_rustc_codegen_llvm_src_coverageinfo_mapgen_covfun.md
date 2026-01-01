@@ -6,24 +6,24 @@ Generated 12 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=11
 
 ```rust
-//! For each function that was instrumented for coverage, we need to embed its
-//! corresponding coverage mapping metadata inside the `__llvm_covfun`[^win]
-//! linker section of the final binary.
-//!
-//! [^win]: On Windows the section name is `.lcovfun`.
+// For each function that was instrumented for coverage, we need to embed its
+// corresponding coverage mapping metadata inside the `__llvm_covfun`[^win]
+// linker section of the final binary.
+//
+// [^win]: On Windows the section name is `.lcovfun`.
 
 use std::ffi::CString;
 use std::sync::Arc;
 
-use rustc_abi::Align;
-use rustc_codegen_ssa::traits::{BaseTypeCodegenMethods as _, ConstCodegenMethods};
+use crate::rustc_abi::Align;
+use crate::rustc_codegen_ssa::traits::{BaseTypeCodegenMethods as _, ConstCodegenMethods};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::mir::coverage::{
+use crate::rustc_complete::mir::coverage::{
     BasicCoverageBlock, CovTerm, CoverageIdsInfo, Expression, FunctionCoverageInfo, Mapping,
     MappingKind, Op,
 };
@@ -33,21 +33,21 @@ use rustc_middle::mir::coverage::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::ty::{Instance, TyCtxt};
+use crate::rustc_complete::ty::{Instance, TyCtxt};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{SourceFile, Span};
+use crate::rustc_complete::{SourceFile, Span};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_target::spec::HasTargetSpec;
+use crate::rustc_target::spec::HasTargetSpec;
 use tracing::debug;
 
 use crate::common::CodegenCx;

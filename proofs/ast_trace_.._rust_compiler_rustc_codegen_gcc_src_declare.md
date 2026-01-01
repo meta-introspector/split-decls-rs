@@ -21,10 +21,10 @@ use gccjit::{Function, FunctionType, GlobalKind, LValue, RValue, Type};
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6
 
 ```rust
-use rustc_codegen_ssa::traits::BaseTypeCodegenMethods;
-use rustc_middle::ty::Ty;
-use rustc_span::Symbol;
-use rustc_target::callconv::FnAbi;
+use crate::rustc_codegen_ssa::traits::BaseTypeCodegenMethods;
+use crate::rustc_complete::ty::Ty;
+use crate::rustc_complete::Symbol;
+use crate::rustc_target::callconv::FnAbi;
 
 use crate::abi::{FnAbiGcc, FnAbiGccExt};
 ```

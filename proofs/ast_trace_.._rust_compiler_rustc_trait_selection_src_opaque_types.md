@@ -6,18 +6,18 @@ Generated 10 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_data_structures::fx::FxIndexMap;
-use rustc_hir::OpaqueTyOrigin;
-use rustc_hir::def_id::LocalDefId;
-use rustc_infer::infer::outlives::env::OutlivesEnvironment;
-use rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_complete::OpaqueTyOrigin;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_infer::infer::outlives::env::OutlivesEnvironment;
+use crate::rustc_infer::infer::{InferCtxt, TyCtxtInferExt};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_middle::ty::{
+use crate::rustc_complete::ty::{
     self, DefiningScopeKind, GenericArgKind, GenericArgs, OpaqueTypeKey, Ty, TyCtxt,
     TypeVisitableExt, TypingMode, fold_regions,
 };
@@ -27,7 +27,7 @@ use rustc_middle::ty::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{ErrorGuaranteed, Span};
+use crate::rustc_complete::{ErrorGuaranteed, Span};
 ```
 
 ## Block 4

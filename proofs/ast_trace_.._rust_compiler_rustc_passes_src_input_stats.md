@@ -10,32 +10,32 @@ Generated 14 AST blocks from source file
 // pieces of AST and HIR. The resulting numbers are good approximations but not
 // completely accurate (some things might be counted twice, others missed).
 
-use rustc_ast::visit::BoundKind;
-use rustc_ast::{self as ast, NodeId, visit as ast_visit};
+use crate::rustc_complete::visit::BoundKind;
+use crate::rustc_complete::{self as ast, NodeId, visit as ast_visit};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxHashMap, FxHashSet};
+use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_data_structures::thousands::usize_with_underscores;
-use rustc_hir::{self as hir, AmbigArg, HirId, intravisit as hir_visit};
+use crate::rustc_data_structures::thousands::usize_with_underscores;
+use crate::rustc_complete::{self as hir, AmbigArg, HirId, intravisit as hir_visit};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=STRUCT | NAME=NodeStats | COMPLEXITY=2 | LINES=8
 
 ```rust
-use rustc_middle::ty::TyCtxt;
-use rustc_span::Span;
-use rustc_span::def_id::LocalDefId;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::LocalDefId;
 
 struct NodeStats {
     count: usize,
@@ -125,7 +125,7 @@ pub fn print_hir_stats(tcx: TyCtxt<'_>) {
 
 ```rust
 pub fn print_ast_stats(tcx: TyCtxt<'_>, krate: &ast::Crate) {
-    use rustc_ast::visit::Visitor;
+    use crate::rustc_complete::visit::Visitor;
 
     let mut collector =
         StatCollector { tcx: None, nodes: FxHashMap::default(), seen: FxHashSet::default() };

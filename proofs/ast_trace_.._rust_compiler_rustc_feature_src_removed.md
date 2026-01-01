@@ -6,7 +6,7 @@ Generated 7 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! List of the removed feature gates.
+// List of the removed feature gates.
 
 use std::num::{NonZero, NonZeroU32};
 ```
@@ -15,7 +15,7 @@ use std::num::{NonZero, NonZeroU32};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_span::sym;
+use crate::rustc_complete::sym;
 
 use super::{Feature, to_nonzero};
 ```
@@ -89,7 +89,7 @@ declare_features! (
     (removed, abi_amdgpu_kernel, "1.77.0", Some(51575), None, 120495),
     (removed, abi_c_cmse_nonsecure_call, "1.90.0", Some(81391), Some("renamed to abi_cmse_nonsecure_call"), 142146),
     (removed, advanced_slice_patterns, "1.42.0", Some(62254),
-     Some("merged into `#![feature(slice_patterns)]`"), 67712),
+     Some("merged into `#[feature(slice_patterns)]`"), 67712),
     (removed, allocator, "1.0.0", None, None),
     /// Allows a test to fail without failing the whole suite.
     (removed, allow_fail, "1.60.0", Some(46488), Some("removed due to no clear use cases"), 93416),
@@ -111,7 +111,7 @@ declare_features! (
      Some("split into finer-grained feature gates"), 85109),
     /// Allows const generic types (e.g. `struct Foo<const N: usize>(...);`).
     (removed, const_generics, "1.56.0", Some(44580),
-     Some("removed in favor of `#![feature(adt_const_params)]` and `#![feature(generic_const_exprs)]`"), 88369),
+     Some("removed in favor of `#[feature(adt_const_params)]` and `#[feature(generic_const_exprs)]`"), 88369),
     /// Allows `[x; N]` where `x` is a constant (RFC 2203).
     (removed, const_in_array_repeat_expressions,  "1.51.0", Some(49147),
      Some("removed due to causing promotable bugs"), 80404),
@@ -120,15 +120,15 @@ declare_features! (
      Some("at compile-time, pointers do not have an integer value, so these casts cannot be properly supported"), 87020),
     /// Allows `T: ?const Trait` syntax in bounds.
     (removed, const_trait_bound_opt_out, "1.56.0", Some(67794),
-     Some("Removed in favor of `[const]` bound in #![feature(const_trait_impl)]"), 88328),
+     Some("Removed in favor of `[const]` bound in #[feature(const_trait_impl)]"), 88328),
     /// Allows using `crate` as visibility modifier, synonymous with `pub(crate)`.
     (removed, crate_visibility_modifier, "1.63.0", Some(53120), Some("removed in favor of `pub(crate)`"), 97254),
     /// Allows using custom attributes (RFC 572).
     (removed, custom_attribute, "1.0.0", Some(29642),
-     Some("removed in favor of `#![register_tool]` and `#![register_attr]`"), 66070),
+     Some("removed in favor of `#[register_tool]` and `#[register_attr]`"), 66070),
     /// Allows the use of `#[derive(Anything)]` as sugar for `#[derive_Anything]`.
     (removed, custom_derive, "1.32.0", Some(29644),
-     Some("subsumed by `#[proc_macro_derive]`")),
+     Some("subsumed by `// #[proc_macro_derive]`")),
     /// Allows default type parameters to influence type inference.
     (removed, default_type_parameter_fallback, "1.82.0", Some(27336),
      Some("never properly implemented; requires significant design work"), 127655),
@@ -136,10 +136,10 @@ declare_features! (
     (removed, derive_smart_pointer, "1.84.0", Some(123430), Some("replaced by `CoercePointee`"), 131284),
     /// Allows using `#[doc(keyword = "...")]`.
     (removed, doc_keyword, "1.58.0", Some(51315),
-     Some("merged into `#![feature(rustdoc_internals)]`"), 90420),
+     Some("merged into `#[feature(rustdoc_internals)]`"), 90420),
     /// Allows using `doc(primitive)` without a future-incompat warning.
     (removed, doc_primitive, "1.58.0", Some(88070),
-     Some("merged into `#![feature(rustdoc_internals)]`"), 90420),
+     Some("merged into `#[feature(rustdoc_internals)]`"), 90420),
     /// Allows `#[doc(spotlight)]`.
     /// The attribute was renamed to `#[doc(notable_trait)]`
     /// and the feature to `doc_notable_trait`.
@@ -161,10 +161,10 @@ declare_features! (
      Some("removed as it was no longer necessary for AFIDT (async fn in dyn trait) support")),
     /// Uses generic effect parameters for [const] bounds
     (removed, effects, "1.84.0", Some(102090),
-     Some("removed, redundant with `#![feature(const_trait_impl)]`"), 132479),
+     Some("removed, redundant with `#[feature(const_trait_impl)]`"), 132479),
     /// Allows defining `existential type`s.
     (removed, existential_type, "1.38.0", Some(63063),
-     Some("removed in favor of `#![feature(type_alias_impl_trait)]`")),
+     Some("removed in favor of `#[feature(type_alias_impl_trait)]`")),
     /// Paths of the form: `extern::foo::bar`
     (removed, extern_in_paths, "1.33.0", Some(55600),
      Some("subsumed by `::foo::bar` paths"), 57572),
@@ -215,7 +215,7 @@ declare_features! (
     /// Make `mut` not reset the binding mode on edition >= 2024.
     (removed, mut_preserve_binding_mode_2024, "1.80.0", Some(123076), Some("superseded by `ref_pat_eat_one_layer_2024`"), 125168),
     (removed, needs_allocator, "1.4.0", Some(27389),
-     Some("subsumed by `#![feature(allocator_internals)]`")),
+     Some("subsumed by `#[feature(allocator_internals)]`")),
     /// Allows use of unary negate on unsigned integers, e.g., -e for e: u8
     (removed, negate_unsigned, "1.0.0", Some(29645), None),
     /// Allows `#[no_coverage]` on functions.
@@ -248,7 +248,7 @@ declare_features! (
      Some("renamed to `auto_traits`"), 79336),
     /// Allows overlapping impls of marker traits.
     (removed, overlapping_marker_traits, "1.42.0", Some(29864),
-     Some("removed in favor of `#![feature(marker_trait_attr)]`"), 68544),
+     Some("removed in favor of `#[feature(marker_trait_attr)]`"), 68544),
     (removed, panic_implementation, "1.28.0", Some(44489),
      Some("subsumed by `#[panic_handler]`"), 53619),
     /// Allows `extern "platform-intrinsic" { ... }`.
@@ -260,7 +260,7 @@ declare_features! (
 ```rust
 (removed, platform_intrinsics, "1.78.0", Some(27731),
      Some("SIMD intrinsics use the regular intrinsics ABI now"), 121516),
-    /// Allows using `#![plugin(myplugin)]`.
+    /// Allows using `#[plugin(myplugin)]`.
     (removed, plugin, "1.75.0", Some(29597),
      Some("plugins are no longer supported"), 116412),
     /// Allows using `#[plugin_registrar]` on functions.
@@ -272,13 +272,13 @@ declare_features! (
     (removed, pref_align_of, "1.89.0", Some(91971),
      Some("removed due to marginal use and inducing compiler complications")),
     (removed, proc_macro_expr, "1.27.0", Some(54727),
-     Some("subsumed by `#![feature(proc_macro_hygiene)]`"), 52121),
+     Some("subsumed by `#[feature(proc_macro_hygiene)]`"), 52121),
     (removed, proc_macro_gen, "1.27.0", Some(54727),
-     Some("subsumed by `#![feature(proc_macro_hygiene)]`"), 52121),
+     Some("subsumed by `#[feature(proc_macro_hygiene)]`"), 52121),
     (removed, proc_macro_mod, "1.27.0", Some(54727),
-     Some("subsumed by `#![feature(proc_macro_hygiene)]`"), 52121),
+     Some("subsumed by `#[feature(proc_macro_hygiene)]`"), 52121),
     (removed, proc_macro_non_items, "1.27.0", Some(54727),
-     Some("subsumed by `#![feature(proc_macro_hygiene)]`"), 52121),
+     Some("subsumed by `#[feature(proc_macro_hygiene)]`"), 52121),
     (removed, pub_macro_rules, "1.53.0", Some(78855),
      Some("removed due to being incomplete, in particular it does not work across crates")),
     (removed, pushpop_unsafe, "1.2.0", None, None),
@@ -288,7 +288,7 @@ declare_features! (
     (removed, reflect, "1.0.0", Some(27749), None),
     /// Allows using the `#[register_attr]` attribute.
     (removed, register_attr, "1.65.0", Some(66080),
-     Some("removed in favor of `#![register_tool]`"), 66070),
+     Some("removed in favor of `#[register_tool]`"), 66070),
     (removed, rust_2018_preview, "1.76.0", None,
      Some("2018 Edition preview is no longer relevant")),
     /// Allows using the macros:

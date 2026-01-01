@@ -6,37 +6,37 @@ Generated 23 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9
 
 ```rust
-//! Contains `ParseSess` which holds state living beyond what one `Parser` might.
-//! It also serves as an input to the parser itself.
+// Contains `ParseSess` which holds state living beyond what one `Parser` might.
+// It also serves as an input to the parser itself.
 
 use std::str;
 use std::sync::Arc;
 
-use rustc_ast::attr::AttrIdGenerator;
-use rustc_ast::node_id::NodeId;
-use rustc_data_structures::fx::{FxHashMap, FxIndexMap, FxIndexSet};
+use crate::rustc_complete::attr::AttrIdGenerator;
+use crate::rustc_complete::node_id::NodeId;
+use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap, FxIndexSet};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::sync::{AppendOnlyVec, Lock};
+use crate::rustc_data_structures::sync::{AppendOnlyVec, Lock};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::emitter::{FatalOnlyEmitter, HumanEmitter, stderr_destination};
+use crate::rustc_complete::emitter::{FatalOnlyEmitter, HumanEmitter, stderr_destination};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_errors::translation::Translator;
-use rustc_errors::{
+use crate::rustc_complete::translation::Translator;
+use crate::rustc_complete::{
     BufferedEarlyLint, ColorConfig, DecorateDiagCompat, Diag, DiagCtxt, DiagCtxtHandle,
     DiagMessage, EmissionGuarantee, MultiSpan, StashKey,
 };
@@ -46,23 +46,23 @@ use rustc_errors::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_feature::{GateIssue, UnstableFeatures, find_feature_issue};
+use crate::rustc_feature::{GateIssue, UnstableFeatures, find_feature_issue};
 ```
 
 ## Block 6
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_span::edition::Edition;
-use rustc_span::hygiene::ExpnId;
-use rustc_span::source_map::{FilePathMapping, SourceMap};
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::hygiene::ExpnId;
+use crate::rustc_complete::source_map::{FilePathMapping, SourceMap};
 ```
 
 ## Block 7
 **Metadata**: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_span::{Span, Symbol, sym};
+use crate::rustc_complete::{Span, Symbol, sym};
 ```
 
 ## Block 8
@@ -167,7 +167,7 @@ impl SymbolGallery {
 ```rust
 // todo: this function now accepts `Session` instead of `ParseSess` and should be relocated
 /// Construct a diagnostic for a language feature error due to the given `span`.
-/// The `feature`'s `Symbol` is the one you used in `unstable.rs` and `rustc_span::symbol`.
+/// The `feature`'s `Symbol` is the one you used in `unstable.rs` and `crate::rustc_span::symbol`.
 #[track_caller]
 pub fn feature_err(
     sess: &Session,
@@ -246,7 +246,7 @@ pub fn feature_warn_issue(
     let mut err = sess.dcx().struct_span_warn(span, explain);
     add_feature_diagnostics_for_issue(&mut err, sess, feature, issue, false, None);
 
-    // Decorate this as a future-incompatibility lint as in rustc_middle::lint::lint_level
+    // Decorate this as a future-incompatibility lint as in crate::rustc_middle::lint::lint_level
     let lint = UNSTABLE_SYNTAX_PRE_EXPANSION;
     let future_incompatible = lint.future_incompatible.as_ref().unwrap();
     err.is_lint(lint.name_lower(), /* has_future_breakage */ false);
@@ -295,7 +295,7 @@ pub fn add_feature_diagnostics_for_issue<G: EmissionGuarantee>(
         err.subdiagnostic(FeatureDiagnosticForIssue { n });
     }
 
-    // #23973: do not suggest `#![feature(...)]` if we are in beta/stable
+    // #23973: do not suggest `#[feature(...)]` if we are in beta/stable
     if sess.psess.unstable_features.is_nightly_build() {
         if feature_from_cli {
             err.subdiagnostic(CliFeatureDiagnosticHelp { feature });
@@ -344,7 +344,7 @@ pub fn feature_err_unstable_feature_bound(
 
     let mut err = sess.dcx().create_err(FeatureGateError { span, explain: explain.into() });
 
-    // #23973: do not suggest `#![feature(...)]` if we are in beta/stable
+    // #23973: do not suggest `#[feature(...)]` if we are in beta/stable
     if sess.psess.unstable_features.is_nightly_build() {
         err.subdiagnostic(FeatureDiagnosticHelp { feature });
 

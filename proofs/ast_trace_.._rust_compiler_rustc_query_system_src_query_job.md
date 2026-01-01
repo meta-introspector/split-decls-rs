@@ -20,23 +20,23 @@ use parking_lot::{Condvar, Mutex};
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_data_structures::fx::{FxHashMap, FxHashSet};
+use crate::rustc_data_structures::fx::{FxHashMap, FxHashSet};
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_errors::{Diag, DiagCtxtHandle};
+use crate::rustc_complete::{Diag, DiagCtxtHandle};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_hir::def::DefKind;
-use rustc_session::Session;
-use rustc_span::{DUMMY_SP, Span};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::{DUMMY_SP, Span};
 ```
 
 ## Block 5
@@ -332,7 +332,7 @@ impl<I> QueryLatch<I> {
             // If this detects a deadlock and the deadlock handler wants to resume this thread
             // we have to be in the `wait` call. This is ensured by the deadlock handler
             // getting the self.info lock.
-            rustc_thread_pool::mark_blocked();
+            crate::rustc_thread_pool::mark_blocked();
             let proxy = qcx.jobserver_proxy();
             proxy.release_thread();
             waiter.condvar.wait(&mut info);
@@ -347,9 +347,9 @@ impl<I> QueryLatch<I> {
         let mut info = self.info.lock();
         debug_assert!(!info.complete);
         info.complete = true;
-        let registry = rustc_thread_pool::Registry::current();
+        let registry = crate::rustc_thread_pool::Registry::current();
         for waiter in info.waiters.drain(..) {
-            rustc_thread_pool::mark_unblocked(&registry);
+            crate::rustc_thread_pool::mark_unblocked(&registry);
             waiter.condvar.notify_one();
         }
     }
@@ -633,7 +633,7 @@ fn remove_cycle<I: Clone>(
 /// all active queries for cycles before finally resuming all the waiters at once.
 pub fn break_query_cycles<I: Clone + Debug>(
     query_map: QueryMap<I>,
-    registry: &rustc_thread_pool::Registry,
+    registry: &crate::rustc_thread_pool::Registry,
 ) {
     let mut wakelist = Vec::new();
     // It is OK per the comments:
@@ -669,7 +669,7 @@ pub fn break_query_cycles<I: Clone + Debug>(
     // we wake the threads up as otherwise Rayon could detect a deadlock if a thread we
     // resumed fell asleep and this thread had yet to mark the remaining threads as unblocked.
     for _ in 0..wakelist.len() {
-        rustc_thread_pool::mark_unblocked(registry);
+        crate::rustc_thread_pool::mark_unblocked(registry);
     }
 
     for waiter in wakelist.into_iter() {

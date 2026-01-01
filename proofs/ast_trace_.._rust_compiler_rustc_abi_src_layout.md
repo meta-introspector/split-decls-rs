@@ -29,8 +29,8 @@ use std::{cmp, iter};
 
 ```rust
 use rustc_hashes::Hash64;
-use rustc_index::Idx;
-use rustc_index::bit_set::BitMatrix;
+use crate::rustc_index::Idx;
+use crate::rustc_index::bit_set::BitMatrix;
 use tracing::{debug, trace};
 ```
 

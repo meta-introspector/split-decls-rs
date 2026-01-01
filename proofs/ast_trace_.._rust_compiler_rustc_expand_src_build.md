@@ -6,10 +6,10 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7
 
 ```rust
-use rustc_ast::token::Delimiter;
-use rustc_ast::tokenstream::TokenStream;
-use rustc_ast::util::literal;
-use rustc_ast::{
+use crate::rustc_complete::token::Delimiter;
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::util::literal;
+use crate::rustc_complete::{
     self as ast, AnonConst, AttrItem, AttrVec, BlockCheckMode, Expr, LocalKind, MatchKind, PatKind,
     UnOp, attr, token, tokenstream,
 };
@@ -19,8 +19,8 @@ use rustc_ast::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::source_map::Spanned;
-use rustc_span::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
 ```
 
 ## Block 3

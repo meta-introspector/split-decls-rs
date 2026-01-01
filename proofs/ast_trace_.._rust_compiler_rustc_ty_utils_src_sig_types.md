@@ -6,20 +6,20 @@ Generated 4 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=7
 
 ```rust
-//! This module contains helpers for walking all types of
-//! a signature, while preserving spans as much as possible
+// This module contains helpers for walking all types of
+// a signature, while preserving spans as much as possible
 
-use rustc_hir::def::DefKind;
-use rustc_hir::def_id::LocalDefId;
-use rustc_middle::span_bug;
-use rustc_middle::ty::{self, TyCtxt, TypeVisitable, VisitorResult, try_visit};
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitable, VisitorResult, try_visit};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2
 
 ```rust
-use rustc_span::Span;
+use crate::rustc_complete::Span;
 use tracing::{instrument, trace};
 ```
 

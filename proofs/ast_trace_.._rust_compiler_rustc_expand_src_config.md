@@ -6,18 +6,18 @@ Generated 15 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-//! Conditional compilation stripping.
+// Conditional compilation stripping.
 
 use std::iter;
 
-use rustc_ast::token::{Delimiter, Token, TokenKind};
+use crate::rustc_complete::token::{Delimiter, Token, TokenKind};
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_ast::tokenstream::{
+use crate::rustc_complete::tokenstream::{
     AttrTokenStream, AttrTokenTree, LazyAttrTokenStream, Spacing, TokenTree,
 };
 ```
@@ -26,7 +26,7 @@ use rustc_ast::tokenstream::{
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_ast::{
+use crate::rustc_complete::{
     self as ast, AttrKind, AttrStyle, Attribute, HasAttrs, HasTokens, MetaItem, MetaItemInner,
     NodeId, NormalAttr,
 };
@@ -48,8 +48,8 @@ use rustc_attr_parsing::{
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_data_structures::flat_map_in_place::FlatMapInPlace;
-use rustc_feature::{
+use crate::rustc_data_structures::flat_map_in_place::FlatMapInPlace;
+use crate::rustc_feature::{
     ACCEPTED_LANG_FEATURES, AttributeSafety, EnabledLangFeature, EnabledLibFeature, Features,
     REMOVED_LANG_FEATURES, UNSTABLE_LANG_FEATURES,
 };
@@ -59,10 +59,10 @@ use rustc_feature::{
 **Metadata**: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4
 
 ```rust
-use rustc_lint_defs::BuiltinLintDiag;
-use rustc_session::Session;
-use rustc_session::parse::feature_err;
-use rustc_span::{STDLIB_STABLE_CRATES, Span, Symbol, sym};
+use crate::rustc_lint_defs::BuiltinLintDiag;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{STDLIB_STABLE_CRATES, Span, Symbol, sym};
 ```
 
 ## Block 7
@@ -378,7 +378,7 @@ impl<'a> StripUnconfigured<'a> {
         let trace_attr = attr_into_trace(cfg_attr.clone(), sym::cfg_attr_trace);
 
         let Some((cfg_predicate, expanded_attrs)) =
-            rustc_parse::parse_cfg_attr(cfg_attr, &self.sess.psess)
+            crate::rustc_parse::parse_cfg_attr(cfg_attr, &self.sess.psess)
         else {
             return vec![trace_attr];
         };
@@ -386,7 +386,7 @@ impl<'a> StripUnconfigured<'a> {
         // Lint on zero attributes in source.
         if expanded_attrs.is_empty() {
             self.sess.psess.buffer_lint(
-                rustc_lint_defs::builtin::UNUSED_ATTRIBUTES,
+                crate::rustc_lint_defs::builtin::UNUSED_ATTRIBUTES,
                 cfg_attr.span,
                 ast::CRATE_NODE_ID,
                 BuiltinLintDiag::CfgAttrNoAttributes,
@@ -427,7 +427,7 @@ impl<'a> StripUnconfigured<'a> {
             panic!("Bad tokens for attribute {cfg_attr:?}");
         };
 
-        // For inner attributes, we do the same thing for the `!` in `#![attr]`.
+        // For inner attributes, we do the same thing for the `!` in `#[attr]`.
         let mut trees = if cfg_attr.style == AttrStyle::Inner {
             let Some(TokenTree::Token(bang_token @ Token { kind: TokenKind::Bang, .. }, _)) =
                 orig_trees.next()
@@ -493,7 +493,7 @@ impl<'a> StripUnconfigured<'a> {
         deny_builtin_meta_unsafety(
             self.sess.dcx(),
             attr.get_normal_item().unsafety,
-            &rustc_ast::Path::from_ident(attr.ident().unwrap()),
+            &crate::rustc_ast::Path::from_ident(attr.ident().unwrap()),
         );
 
         let Some(cfg) = AttributeParser::parse_single(

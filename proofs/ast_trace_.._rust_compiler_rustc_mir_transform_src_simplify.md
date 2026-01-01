@@ -6,72 +6,72 @@ Generated 23 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=23
 
 ```rust
-//! A number of passes which remove various redundancies in the CFG.
-//!
-//! The `SimplifyCfg` pass gets rid of unnecessary blocks in the CFG, whereas the `SimplifyLocals`
-//! gets rid of all the unnecessary local variable declarations.
-//!
-//! The `SimplifyLocals` pass is kinda expensive and therefore not very suitable to be run often.
-//! Most of the passes should not care or be impacted in meaningful ways due to extra locals
-//! either, so running the pass once, right before codegen, should suffice.
-//!
-//! On the other side of the spectrum, the `SimplifyCfg` pass is considerably cheap to run, thus
-//! one should run it after every pass which may modify CFG in significant ways. This pass must
-//! also be run before any analysis passes because it removes dead blocks, and some of these can be
-//! ill-typed.
-//!
-//! The cause of this typing issue is typeck allowing most blocks whose end is not reachable have
-//! an arbitrary return type, rather than having the usual () return type (as a note, typeck's
-//! notion of reachability is in fact slightly weaker than MIR CFG reachability - see #31617). A
-//! standard example of the situation is:
-//!
-//! ```rust
-//!   fn example() {
-//!       let _a: char = { return; };
-//!   }
+// A number of passes which remove various redundancies in the CFG.
+//
+// The `SimplifyCfg` pass gets rid of unnecessary blocks in the CFG, whereas the `SimplifyLocals`
+// gets rid of all the unnecessary local variable declarations.
+//
+// The `SimplifyLocals` pass is kinda expensive and therefore not very suitable to be run often.
+// Most of the passes should not care or be impacted in meaningful ways due to extra locals
+// either, so running the pass once, right before codegen, should suffice.
+//
+// On the other side of the spectrum, the `SimplifyCfg` pass is considerably cheap to run, thus
+// one should run it after every pass which may modify CFG in significant ways. This pass must
+// also be run before any analysis passes because it removes dead blocks, and some of these can be
+// ill-typed.
+//
+// The cause of this typing issue is typeck allowing most blocks whose end is not reachable have
+// an arbitrary return type, rather than having the usual () return type (as a note, typeck's
+// notion of reachability is in fact slightly weaker than MIR CFG reachability - see #31617). A
+// standard example of the situation is:
+//
+// ```rust
+//   fn example() {
+//       let _a: char = { return; };
+//   }
 ```
 
 ## Block 2
 **Metadata**: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-//! ```
-//!
-//! Here the block (`{ return; }`) has the return type `char`, rather than `()`, but the MIR we
+// ```
+//
+// Here the block (`{ return; }`) has the return type `char`, rather than `()`, but the MIR we
 ```
 
 ## Block 3
 **Metadata**: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=12
 
 ```rust
-//! naively generate still contains the `_a = ()` write in the unreachable block "after" the
-//! return.
-//!
-//! **WARNING**: This is one of the few optimizations that runs on built and analysis MIR, and
-//! so its effects may affect the type-checking, borrow-checking, and other analysis of MIR.
-//! We must be extremely careful to only apply optimizations that preserve UB and all
-//! non-determinism, since changes here can affect which programs compile in an insta-stable way.
-//! The normal logic that a program with UB can be changed to do anything does not apply to
-//! pre-"runtime" MIR!
+// naively generate still contains the `_a = ()` write in the unreachable block "after" the
+// return.
+//
+// **WARNING**: This is one of the few optimizations that runs on built and analysis MIR, and
+// so its effects may affect the type-checking, borrow-checking, and other analysis of MIR.
+// We must be extremely careful to only apply optimizations that preserve UB and all
+// non-determinism, since changes here can affect which programs compile in an insta-stable way.
+// The normal logic that a program with UB can be changed to do anything does not apply to
+// pre-"runtime" MIR!
 
 use itertools::Itertools as _;
-use rustc_index::{Idx, IndexSlice, IndexVec};
+use crate::rustc_index::{Idx, IndexSlice, IndexVec};
 ```
 
 ## Block 4
 **Metadata**: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1
 
 ```rust
-use rustc_middle::mir::visit::{MutVisitor, MutatingUseContext, PlaceContext, Visitor};
+use crate::rustc_complete::mir::visit::{MutVisitor, MutatingUseContext, PlaceContext, Visitor};
 ```
 
 ## Block 5
 **Metadata**: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5
 
 ```rust
-use rustc_middle::mir::*;
-use rustc_middle::ty::TyCtxt;
-use rustc_span::DUMMY_SP;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::DUMMY_SP;
 use smallvec::SmallVec;
 use tracing::{debug, trace};
 ```
@@ -483,7 +483,7 @@ impl<'tcx> crate::MirPass<'tcx> for SimplifyLocals {
         }
     }
 
-    fn is_enabled(&self, sess: &rustc_session::Session) -> bool {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
         sess.mir_opt_level() > 0
     }
 

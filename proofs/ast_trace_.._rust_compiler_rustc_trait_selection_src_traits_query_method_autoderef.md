@@ -6,7 +6,7 @@ Generated 1 AST blocks from source file
 **Metadata**: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-pub use rustc_middle::traits::query::{
+pub use crate::rustc_complete::traits::query::{
     CandidateStep, MethodAutoderefBadTy, MethodAutoderefStepsResult,
 };
 ```

@@ -7,9 +7,9 @@ Generated 23 AST blocks from source file
 
 ```rust
 use ast::HasAttrs;
-use rustc_ast::mut_visit::MutVisitor;
-use rustc_ast::visit::BoundKind;
-use rustc_ast::{
+use crate::rustc_complete::mut_visit::MutVisitor;
+use crate::rustc_complete::visit::BoundKind;
+use crate::rustc_complete::{
     self as ast, GenericArg, GenericBound, GenericParamKind, Generics, ItemKind, MetaItem,
     TraitBoundModifiers, VariantData, WherePredicate,
 };
@@ -19,9 +19,9 @@ use rustc_ast::{
 **Metadata**: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3
 
 ```rust
-use rustc_data_structures::flat_map_in_place::FlatMapInPlace;
-use rustc_errors::E0802;
-use rustc_expand::base::{Annotatable, ExtCtxt};
+use crate::rustc_data_structures::flat_map_in_place::FlatMapInPlace;
+use crate::rustc_complete::E0802;
+use crate::rustc_expand::base::{Annotatable, ExtCtxt};
 ```
 
 ## Block 3
@@ -29,7 +29,7 @@ use rustc_expand::base::{Annotatable, ExtCtxt};
 
 ```rust
 use rustc_macros::Diagnostic;
-use rustc_span::{Ident, Span, Symbol, sym};
+use crate::rustc_complete::{Ident, Span, Symbol, sym};
 ```
 
 ## Block 4
@@ -135,7 +135,7 @@ pub(crate) fn expand_deriving_coerce_pointee(
     // Declare helper function that adds implementation blocks.
     // FIXME(dingxiangfei2009): Investigate the set of attributes on target struct to be propagated to impls
     let attrs = thin_vec![cx.attr_word(sym::automatically_derived, span),];
-    // # Validity assertion which will be checked later in `rustc_hir_analysis::coherence::builtins`.
+    // # Validity assertion which will be checked later in `crate::rustc_hir_analysis::coherence::builtins`.
     {
         let trait_path =
             cx.path_all(span, true, path!(span, core::marker::CoercePointeeValidated), vec![]);
@@ -465,7 +465,7 @@ impl<'a> ast::mut_visit::MutVisitor for TypeSubstitution<'a> {
 
     fn visit_where_predicate_kind(&mut self, kind: &mut ast::WherePredicateKind) {
         match kind {
-            rustc_ast::WherePredicateKind::BoundPredicate(bound) => {
+            crate::rustc_ast::WherePredicateKind::BoundPredicate(bound) => {
                 bound
                     .bound_generic_params
                     .flat_map_in_place(|param| self.flat_map_generic_param(param));
@@ -474,8 +474,8 @@ impl<'a> ast::mut_visit::MutVisitor for TypeSubstitution<'a> {
                     self.visit_param_bound(bound, BoundKind::Bound)
                 }
             }
-            rustc_ast::WherePredicateKind::RegionPredicate(_)
-            | rustc_ast::WherePredicateKind::EqPredicate(_) => {}
+            crate::rustc_ast::WherePredicateKind::RegionPredicate(_)
+            | crate::rustc_ast::WherePredicateKind::EqPredicate(_) => {}
         }
     }
 }
@@ -494,14 +494,14 @@ struct DetectNonGenericPointeeAttr<'a, 'b> {
 **Metadata**: AST_ID=15 | TYPE=FUNCTION | NAME=visit_attribute | COMPLEXITY=27 | LINES=44
 
 ```rust
-impl<'a, 'b> rustc_ast::visit::Visitor<'a> for DetectNonGenericPointeeAttr<'a, 'b> {
-    fn visit_attribute(&mut self, attr: &'a rustc_ast::Attribute) -> Self::Result {
+impl<'a, 'b> crate::rustc_ast::visit::Visitor<'a> for DetectNonGenericPointeeAttr<'a, 'b> {
+    fn visit_attribute(&mut self, attr: &'a crate::rustc_ast::Attribute) -> Self::Result {
         if attr.has_name(sym::pointee) {
             self.cx.dcx().emit_err(errors::NonGenericPointee { span: attr.span });
         }
     }
 
-    fn visit_generic_param(&mut self, param: &'a rustc_ast::GenericParam) -> Self::Result {
+    fn visit_generic_param(&mut self, param: &'a crate::rustc_ast::GenericParam) -> Self::Result {
         let mut error_on_pointee = AlwaysErrorOnGenericParam { cx: self.cx };
 
         match &param.kind {
@@ -523,16 +523,16 @@ impl<'a, 'b> rustc_ast::visit::Visitor<'a> for DetectNonGenericPointeeAttr<'a, '
                 // needs a pointer attribute. Meanwhile, the outer macro would be complaining
                 // that we attached a #[pointee] to a generic type argument while helpfully
                 // informing the user that #[pointee] can only be attached to generic pointer arguments
-                rustc_ast::visit::visit_opt!(error_on_pointee, visit_ty, default);
+                crate::rustc_ast::visit::visit_opt!(error_on_pointee, visit_ty, default);
             }
 
             GenericParamKind::Const { .. } | GenericParamKind::Lifetime => {
-                rustc_ast::visit::walk_generic_param(&mut error_on_pointee, param);
+                crate::rustc_ast::visit::walk_generic_param(&mut error_on_pointee, param);
             }
         }
     }
 
-    fn visit_ty(&mut self, t: &'a rustc_ast::Ty) -> Self::Result {
+    fn visit_ty(&mut self, t: &'a crate::rustc_ast::Ty) -> Self::Result {
         let mut error_on_pointee = AlwaysErrorOnGenericParam { cx: self.cx };
         error_on_pointee.visit_ty(t)
     }
@@ -552,8 +552,8 @@ struct AlwaysErrorOnGenericParam<'a, 'b> {
 **Metadata**: AST_ID=17 | TYPE=FUNCTION | NAME=visit_attribute | COMPLEXITY=9 | LINES=8
 
 ```rust
-impl<'a, 'b> rustc_ast::visit::Visitor<'a> for AlwaysErrorOnGenericParam<'a, 'b> {
-    fn visit_attribute(&mut self, attr: &'a rustc_ast::Attribute) -> Self::Result {
+impl<'a, 'b> crate::rustc_ast::visit::Visitor<'a> for AlwaysErrorOnGenericParam<'a, 'b> {
+    fn visit_attribute(&mut self, attr: &'a crate::rustc_ast::Attribute) -> Self::Result {
         if attr.has_name(sym::pointee) {
             self.cx.dcx().emit_err(errors::NonGenericPointee { span: attr.span });
         }
