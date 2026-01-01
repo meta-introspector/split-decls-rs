@@ -1,9 +1,12 @@
 use std::fs;
 use std::path::Path;
 use std::process::Command;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use anyhow::Result;
 use syn;
+use serde_json::Value;
+use flate2::read::GzDecoder;
+use std::io::Read;
 
 fn preprocess_content(content: &str) -> String {
     content
@@ -16,6 +19,7 @@ pub struct UnifiedDriver {
     base_lib: String,
     files: Vec<String>,
     accumulated_decls: HashMap<String, Vec<String>>,
+    symbol_map: Option<Value>,
 }
 
 impl UnifiedDriver {
@@ -66,6 +70,7 @@ include!("wrap_types.rs");
             base_lib,
             files,
             accumulated_decls: HashMap::new(),
+            symbol_map: Self::load_symbol_map().ok(),
         })
     }
 
@@ -254,6 +259,10 @@ include!("wrap_types.rs");
 
 fn main() -> Result<()> {
     let mut driver = UnifiedDriver::new()?;
-    driver.run_progressive_analysis()?;
+    
+    // Try to resolve rustc_driver::main with all dependencies
+    println!("🎯 Attempting to resolve rustc_driver::main using symbol map...");
+    driver.resolve_target_with_deps("rustc_driver_impl::lib::main")?;
+    
     Ok(())
 }

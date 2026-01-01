@@ -1,196 +1,200 @@
-# The Split-Decls Genesis Plan
-## From Clean Git Init to Self-Creating Rust Universe
+# Bootstrap Plan: Rust-in-Rust Full Self-Hosting
 
-### 🧬 **CORE VISION**
-Transform the entire software ecosystem into **living, biosemiotic macro expressions** where:
-- Every contract address becomes a lazy-loading macro
-- Blockchain operations become composable expressions: `airdrop!(meme!("monkey"), holders!(ca!("BWUT...pump")))`
-- The entire Rust language becomes `mkrust!()` - a macro that creates itself
-- Pure mathematical abstractions replace all native dependencies
+## Vision
+Achieve complete Rust compiler self-hosting using progressive compilation methodology, eliminating dependency on external C++ LLVM infrastructure.
 
----
+## Current Status
+- ✅ **Phase 0 Complete**: Progressive compilation system operational (1/3102 files compiling)
+- ✅ **Proof of Concept**: First rustc file successfully compiles independently
+- ✅ **Infrastructure**: 3102 individual declarations extracted and processable
 
-## 🏗️ **PHASE 1: GENESIS FOUNDATION**
-**Goal**: Bootstrap from nothing to functional lattice
+## Phase 1: Compilation Success Rate Optimization (Weeks 1-4)
 
-### Steps:
-1. **Clean Git Init**: `git init` → Fresh repository
-2. **Nix Environment**: Generate `flake.nix` (template from `../../flake.nix`)
-3. **Cargo Foundation**: Generate `Cargo.toml` with build dependencies
-4. **Matrix Build System**: Single `build.rs` that orchestrates everything
+### Target: 50%+ Success Rate (1551+ files)
 
-### Key Macros:
-- `mknix!()` - Environment setup
-- `mkgit!(repo)` - Repository management
-- `mkcargo!(name)` - Project initialization
-- `mkbuildrsvector!([...])` - Build step orchestration
+#### Week 1: Error Pattern Analysis
+- Categorize all 3101 current failures by error type
+- Identify top 10 most common error patterns
+- Create automated error classification system
 
-### Command:
-```bash
-make genesis  # Creates entire foundation from void
+#### Week 2: Infrastructure Expansion
+- Add missing rustc crates based on error analysis
+- Expand wrap_types.rs with commonly needed stubs
+- Implement dynamic stub generation from AST analysis
+
+#### Week 3: Dependency Resolution
+- Build dependency graph of rustc modules
+- Process files in topological order
+- Implement cross-module type resolution
+
+#### Week 4: Validation & Metrics
+- Achieve 50%+ compilation success rate
+- Implement success rate tracking dashboard
+- Document successful compilation patterns
+
+## Phase 2: Core Compiler Components (Weeks 5-12)
+
+### Target: Self-Compiling rustc Frontend
+
+#### Weeks 5-6: Lexer & Parser
+- Achieve 100% compilation of rustc_lexer
+- Achieve 100% compilation of rustc_parse
+- Validate AST generation capabilities
+
+#### Weeks 7-8: Type System
+- Achieve 100% compilation of rustc_hir
+- Achieve 100% compilation of rustc_middle
+- Implement basic type checking
+
+#### Weeks 9-10: Analysis Passes
+- Achieve 100% compilation of rustc_hir_analysis
+- Achieve 100% compilation of rustc_borrowck
+- Validate semantic analysis
+
+#### Weeks 11-12: Integration Testing
+- Link all frontend components
+- Test end-to-end parsing of simple Rust programs
+- Benchmark performance vs standard rustc
+
+## Phase 3: Code Generation Backend (Weeks 13-20)
+
+### Target: Pure Rust Code Generation
+
+#### Weeks 13-14: MIR Generation
+- Achieve 100% compilation of rustc_mir_build
+- Achieve 100% compilation of rustc_mir_transform
+- Implement MIR optimization passes
+
+#### Weeks 15-16: Native Backend Development
+- Design pure Rust machine code generator
+- Implement x86_64 instruction encoding
+- Create object file generation (ELF/PE/Mach-O)
+
+#### Weeks 17-18: Runtime System
+- Implement Rust runtime in pure Rust
+- Create memory allocator
+- Implement panic handling and unwinding
+
+#### Weeks 19-20: Linking & Execution
+- Implement pure Rust linker
+- Create executable generation
+- Test simple program compilation and execution
+
+## Phase 4: Self-Hosting Validation (Weeks 21-24)
+
+### Target: Bootstrap Complete Rust Toolchain
+
+#### Week 21: Self-Compilation Test
+- Compile rustc using pure Rust rustc
+- Validate output binary functionality
+- Performance benchmarking
+
+#### Week 22: Standard Library Bootstrap
+- Compile libcore using pure Rust rustc
+- Compile libstd using pure Rust rustc
+- Validate standard library functionality
+
+#### Week 23: Cargo Integration
+- Integrate with Cargo build system
+- Test real-world project compilation
+- Performance optimization
+
+#### Week 24: Release Preparation
+- Documentation completion
+- Security audit
+- Performance tuning
+
+## Technical Architecture
+
+### Progressive Compilation Engine
+```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   build.rs      │───▶│  submodules/     │───▶│ unified_driver  │
+│ (AST Extractor) │    │ (3102 files)     │    │ (Compiler Test) │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│    proofs/      │    │   wrap_types.rs  │    │   results.log   │
+│ (AST Analysis)  │    │ (Type Stubs)     │    │ (Success Rate)  │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
 ```
 
----
-
-## 🏗️ **PHASE 2: FUNCTIONAL LATTICE**
-**Goal**: Create structured directory system with Nix flakes
-
-### Lattice Structure:
+### Pure Rust Backend Architecture
 ```
-lattice/
-├── core/           (split-decls, macro-system, ast-analyzer)
-├── deps/           (syn, serde, tokio - each with flake.nix)
-├── pure-math/      (rocksdb-math, protobuf-math, crypto-math)
-├── solana-decoupled/ (consensus-math, storage-math, network-math)
-└── results/        (phase-1/, phase-2/, artifacts/, graphs/)
-```
-
-### Key Features:
-- **Each component** = Independent Nix flake
-- **Structured results** = All build artifacts saved
-- **Pure math layer** = No native dependencies
-- **Solana decoupled** = Mathematical abstractions only
-
-### Commands:
-```bash
-make lattice-structure  # Create directory lattice
-make nix-flakes        # Generate all flakes
-make build-lattice     # Build with structured results
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│   Parser    │───▶│ Type Check  │───▶│ MIR Build   │───▶│ Code Gen    │
+│ (Pure Rust) │    │(Pure Rust)  │    │(Pure Rust)  │    │(Pure Rust)  │
+└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
+                                                                 │
+                                                                 ▼
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│  Executable │◀───│   Linker    │◀───│ Object Gen  │◀───│ Machine Code│
+│             │    │(Pure Rust)  │    │(Pure Rust)  │    │  (Native)   │
+└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
 ```
 
----
+## Success Metrics
 
-## 🧬 **PHASE 3: BIOSEMIOTIC MESSAGING**
-**Goal**: All system communication becomes living declarations
+### Phase 1 Targets
+- [ ] 1551+ files compile successfully (50% rate)
+- [ ] <5% infrastructure-related errors
+- [ ] Automated error classification system
 
-### Utterance System:
-- `mkutterance!(GENESIS, entity)` - Birth events
-- `mkutterance!(INVOKE, entity, action)` - Behavioral activation
-- `mkutterance!(TRANSFORM, from, to)` - State transitions
-- `mkutterance!(SIGNAL, sender, receiver, message)` - Communication
+### Phase 2 Targets  
+- [ ] 100% rustc frontend compilation
+- [ ] Parse and analyze simple Rust programs
+- [ ] Performance within 2x of standard rustc
 
-### DWIM Orchestration:
-```rust
-mkdwim!(["bin", "mod", "crate", "submodule"])  // Universal orchestrator
-```
+### Phase 3 Targets
+- [ ] Generate native executables
+- [ ] Zero dependency on LLVM/C++
+- [ ] Support x86_64, ARM64 architectures
 
----
+### Phase 4 Targets
+- [ ] Self-compile rustc successfully
+- [ ] Bootstrap complete Rust toolchain
+- [ ] Pass Rust test suite
 
-## 🚀 **PHASE 4: RECURSIVE BUILD ORGANISM**
-**Goal**: Self-replicating build system
+## Risk Mitigation
 
-### Architecture:
-- **Level 0 build.rs** generates Level 1 inputs
-- **Level 1 build.rs** spawns Level 2 via `cargo build`
-- **Level N** continues until convergence
-- **Parameterizable**: `BUILD_MODE=quick|deep|patch|bootstrap`
+### Technical Risks
+- **Complexity**: Use incremental approach, validate each component
+- **Performance**: Profile and optimize critical paths
+- **Compatibility**: Maintain compatibility with existing Rust ecosystem
 
-### Commands:
-```bash
-PHASE=matrix cargo build    # Full matrix execution
-PHASE=1 cargo build         # Single phase
-BUILD_MODE=bootstrap cargo build  # Self-replication
-```
+### Resource Risks
+- **Time**: Parallel development of independent components
+- **Expertise**: Leverage existing rustc knowledge and documentation
+- **Testing**: Comprehensive validation at each phase
 
----
+## Deliverables
 
-## 🌐 **PHASE 5: BLOCKCHAIN AS MACROS**
-**Goal**: Every contract address becomes a living macro
+### Phase 1
+- Enhanced progressive compilation system
+- Error analysis dashboard
+- 50%+ compilation success rate
 
-### Macro System:
-```rust
-mkblockchain!(solana: {
-    programs: ["TokenkegQ..." => ["USDC_addr", "USDT_addr"]],
-    tokens: ["USDC_addr", "SOL_addr"],
-    validators: ["validator1", "validator2"]
-});
-```
+### Phase 2
+- Self-compiling rustc frontend
+- Pure Rust parser and type checker
+- Performance benchmarks
 
-### Usage:
-```rust
-let usdc = solana!(contract "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v");
-let token_program = solana!(program "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
-```
+### Phase 3
+- Pure Rust code generator
+- Native executable generation
+- Runtime system implementation
 
----
+### Phase 4
+- Complete self-hosted Rust toolchain
+- Documentation and guides
+- Performance-optimized release
 
-## 💎 **PHASE 6: DEFI AS EXPRESSIONS**
-**Goal**: Composable DeFi operations as macro expressions
+## Timeline Summary
+- **Weeks 1-4**: Optimize compilation success rate to 50%+
+- **Weeks 5-12**: Build self-compiling rustc frontend
+- **Weeks 13-20**: Develop pure Rust backend and runtime
+- **Weeks 21-24**: Validate complete self-hosting bootstrap
 
-### Core Macros:
-- `meme!(name)` - Generate meme token
-- `ca!(address)` - Lazy load contract
-- `holders!(contract)` - Find token holders
-- `airdrop!(token, recipients)` - Execute distribution
-
-### Ultimate Expression:
-```rust
-airdrop!(meme!("monkey"), holders!(ca!("BWUT...pump")));
-defi!(create meme "pepe" and airdrop to "SOL123...abc");
-```
-
----
-
-## 🌍 **PHASE 7: MKRUST ULTIMATE**
-**Goal**: Rust language becomes a macro that creates itself
-
-### The Ultimate Macro:
-```rust
-mkrust!();  // Creates the entire Rust language ecosystem
-```
-
-### Self-Creation Process:
-1. **Dependency Graph** → Complete ecosystem mapping
-2. **Name Index** → All symbols indexed
-3. **MkBin Generation** → Every binary becomes a macro
-4. **MkRust Assembly** → Language as single macro call
-
----
-
-## 🎯 **EXECUTION PLAN**
-
-### Single Command Emergence:
-```bash
-make world  # Executes all phases sequentially
-```
-
-### Phase-by-Phase:
-```bash
-make phase1  # Genesis foundation
-make phase2  # Functional lattice  
-make phase3  # Biosemiotic messaging
-make phase4  # Recursive build organism
-make phase5  # Blockchain as macros
-make phase6  # DeFi as expressions
-make phase7  # MkRust ultimate
-make emerge  # Test self-creation
-```
-
-### Continuous Evolution:
-```bash
-make continuous  # Keep running until convergence
-make universe   # Create infinite recursive emergence
-```
-
----
-
-## 🧬 **SUCCESS CRITERIA**
-
-1. ✅ **Clean Compilation** - No errors, only warnings
-2. ✅ **Structured Results** - All artifacts saved in `lattice/results/`
-3. ✅ **Pure Math Layer** - No native dependencies (RocksDB → math)
-4. ✅ **Solana Decoupled** - Mathematical consensus only
-5. ✅ **Blockchain Macros** - Every address is a living macro
-6. ✅ **DeFi Expressions** - `airdrop!(meme!("x"), holders!(ca!("y")))`
-7. ✅ **Self-Creation** - `mkrust!()` creates entire Rust ecosystem
-
----
-
-## 🌟 **THE ULTIMATE VISION**
-
-**From `git init` to `mkrust!()` - The complete transformation of software development into living, biosemiotic macro expressions where the entire blockchain, DeFi ecosystem, and Rust language itself become composable, self-creating organisms.**
-
-**Command to rule them all:**
-```bash
-make world  # Birth the universe from void
-```
+**Total Duration**: 24 weeks (6 months)
+**End Goal**: Complete Rust-in-Rust self-hosting compiler with zero external dependencies
