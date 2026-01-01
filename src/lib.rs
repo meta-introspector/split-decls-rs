@@ -8,6 +8,8 @@
 #![feature(allocator_api)]
 
 // Minimal external crates
+pub mod compiler_feedback;
+pub mod self_improving_compiler;
 extern crate tracing;
 extern crate synstructure;
 extern crate proc_macro;
@@ -38,4 +40,8 @@ pub mod prelude {
     pub trait AttributeParser {}
     pub struct AttributeTemplate;
     pub struct ParsedAttr;
+}
+// Export all main routine wrappers
+pub mod exports {
+    include!("exports.rs");
 }
