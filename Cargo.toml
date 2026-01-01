@@ -40,6 +40,18 @@ ring = "0.17"
 regex = "1.0"
 chrono = { version = "0.4", features = ["serde"] }
 
+# Missing external crates for extracted rustc code
+scoped-tls = "1.0"
+
+# Rustc compiler crates for extracted code
+rustc_ast = { path = "../rust/compiler/rustc_ast" }
+rustc_middle = { path = "../rust/compiler/rustc_middle" }
+rustc_span = { path = "../rust/compiler/rustc_span" }
+rustc_hir = { path = "../rust/compiler/rustc_hir" }
+rustc_data_structures = { path = "../rust/compiler/rustc_data_structures" }
+rustc_errors = { path = "../rust/compiler/rustc_errors" }
+rustc_session = { path = "../rust/compiler/rustc_session" }
+
 [build-dependencies]
 anyhow = "1.0"
 serde = { version = "1.0", features = ["derive"] }

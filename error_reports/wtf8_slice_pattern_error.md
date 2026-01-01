@@ -1,0 +1,171 @@
+# Compilation Error Report: WTF-8 Slice Pattern Syntax
+
+## Error Summary
+- **Error Type**: `error: expected identifier, found '..`
+- **Source File**: `../rust/library/core/src/wtf8.rs`
+- **Processed File**: `src/processed_.._rust_library_core_src_wtf8.rs`
+- **Error Location**: Line 317
+- **Root Cause**: Rust edition/version compatibility issue with slice pattern syntax
+
+## Exact Error Details
+
+### Compilation Command
+```bash
+rustc --crate-type lib --crate-name test_file --allow warnings --edition 2021 <temp_file>
+```
+
+### Error Output
+```
+error: expected identifier, found `..`
+```
+
+## Source Code Context
+
+### Problematic Line (Line 317)
+```rust
+[.., 0xED, b2 @ 0xA0..=0xAF, b3] => Some(decode_surrogate(b2, b3)),
+```
+
+### Full Function Context
+```rust
+#[inline]
+pub fn final_lead_surrogate(&self) -> Option<u16> {
+    match self.bytes {
+        [.., 0xED, b2 @ 0xA0..=0xAF, b3] => Some(decode_surrogate(b2, b3)),
+        _ => None,
+    }
+}
+
+#[inline]
+pub fn initial_trail_surrogate(&self) -> Option<u16> {
+    match self.bytes {
+        [0xED, b2 @ 0xB0..=0xBF, b3, ..] => Some(decode_surrogate(b2, b3)),
+        _ => None,
+    }
+}
+```
+
+### Surrounding AST Context (Lines 310-330)
+```rust
+        }
+    }
+
+    #[inline]
+    pub fn final_lead_surrogate(&self) -> Option<u16> {
+        match self.bytes {
+            [.., 0xED, b2 @ 0xA0..=0xAF, b3] => Some(decode_surrogate(b2, b3)),  // ← ERROR HERE
+            _ => None,
+        }
+    }
+
+    #[inline]
+    pub fn initial_trail_surrogate(&self) -> Option<u16> {
+        match self.bytes {
+            [0xED, b2 @ 0xB0..=0xBF, b3, ..] => Some(decode_surrogate(b2, b3)),  // ← ALSO PROBLEMATIC
+            _ => None,
+        }
+    }
+
+    #[inline]
+    pub fn make_ascii_lowercase(&mut self) {
+```
+
+## AST Analysis
+
+### Pattern Type
+- **Construct**: Slice pattern matching with rest patterns (`..`)
+- **Feature**: Advanced slice pattern syntax
+- **Rust Version Required**: Rust 1.42+ (stable since 2020)
+
+### All Occurrences of `..` in File
+1. Line 1: `// SRC: ../rust/library/core/src/wtf8.rs` (comment, not syntax)
+2. Line 87: `lead @ 0xD800..=0xDBFF` (range pattern, valid)
+3. Line 96: `trail @ 0xDC00..=0xDFFF` (range pattern, valid)
+4. Line 107: `0xD800..=0xDFFF` (range pattern, valid)
+5. Line 160: `&self.bytes[pos..surrogate_pos]` (slice range, valid)
+6. Line 167: `&self.bytes[pos..]` (slice range, valid)
+7. Line 183: `&wtf8_bytes[pos..surrogate_pos]` (slice range, valid)
+8. Line 190: `&wtf8_bytes[pos..]` (slice range, valid)
+9. Line 246: `ascii_byte @ 0x00..=0x7F` (range pattern, valid)
+10. Line 286: `self.bytes[pos..]` (slice range, valid)
+11. **Line 317**: `[.., 0xED, b2 @ 0xA0..=0xAF, b3]` ← **PROBLEMATIC**
+12. **Line 325**: `[0xED, b2 @ 0xB0..=0xBF, b3, ..]` ← **PROBLEMATIC**
+13. Line 351: Comment about range `[begin..end)` (documentation, not syntax)
+
+## Root Cause Analysis
+
+### Issue Identification
+The error occurs because the Rust compiler being used doesn't recognize the `..` rest pattern in slice pattern matching. This suggests either:
+
+1. **Rust Version Issue**: Using a Rust version older than 1.42
+2. **Edition Issue**: Not properly configured for Rust 2018+ edition
+3. **Feature Gate Issue**: Missing required feature flags
+
+### Technical Details
+- **Slice Pattern Syntax**: `[.., pattern]` and `[pattern, ..]` are valid Rust syntax
+- **Introduced**: Rust 1.42.0 (March 2020)
+- **Edition**: Available in Rust 2018 and 2021 editions
+- **Current Usage**: Standard library code (core::wtf8)
+
+## Test Case Creation
+
+### Minimal Reproduction
+```rust
+fn test_slice_pattern() {
+    let bytes = [0xED, 0xA0, 0x80];
+    match bytes {
+        [.., 0xED, b2 @ 0xA0..=0xAF, b3] => println!("Found: {}, {}", b2, b3),
+        _ => println!("No match"),
+    }
+}
+```
+
+### Expected Behavior
+- Should compile without errors on Rust 1.42+
+- Should match the slice pattern correctly
+
+### Actual Behavior
+- Compilation fails with "expected identifier, found '..'"
+
+## Recommended Solutions
+
+### 1. Rust Version Update
+```bash
+rustup update stable
+rustc --version  # Should be 1.42.0 or later
+```
+
+### 2. Edition Configuration
+Ensure `Cargo.toml` specifies:
+```toml
+[package]
+edition = "2021"  # or "2018"
+```
+
+### 3. Alternative Pattern (Compatibility)
+If version upgrade isn't possible:
+```rust
+// Instead of: [.., 0xED, b2 @ 0xA0..=0xAF, b3]
+// Use traditional approach:
+if self.bytes.len() >= 3 {
+    let len = self.bytes.len();
+    if self.bytes[len-3] == 0xED {
+        let b2 = self.bytes[len-2];
+        let b3 = self.bytes[len-1];
+        if (0xA0..=0xAF).contains(&b2) {
+            return Some(decode_surrogate(b2, b3));
+        }
+    }
+}
+```
+
+## Impact Assessment
+- **Severity**: High (blocks compilation)
+- **Scope**: Affects all files using advanced slice patterns
+- **Workaround**: Available but requires code modification
+- **Fix**: Rust version/edition update (preferred)
+
+---
+*Generated by AST error analysis system*
+*Date: 2025-12-31*
+*File: wtf8_slice_pattern_error.md*
