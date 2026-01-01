@@ -18,7 +18,7 @@ fn wrap_item(item: &Item) -> String {
                 getpath!({});
                 get_deps!({});
                 get_crates!({});
-                include!({});
+                mkinclude!({});
                 {} 
             }}}}", mod_name, mod_name, mod_name, mod_name, mod_name, mod_name, mod_name, content)
         }
@@ -30,14 +30,14 @@ fn wrap_item(item: &Item) -> String {
             format!("
 macro_rules! {}_introspect {{
     () => {{
-        println!(\"📊 INTROSPECT: Function {} in module {{}}\", module_path!());
+        emit_message!(\"📊 INTROSPECT: Function {} in module {{}}\", module_path!());
     }};
 }}
 
-mkitem!{{mkfn!{{
+mkfn!{{
     {}_introspect!();
     {}
-}}}}", fn_name, fn_name, fn_name, quote::ToTokens::to_token_stream(item))
+}}", fn_name, fn_name, fn_name, quote::ToTokens::to_token_stream(item))
         }
         Item::Struct(_) => {
             format!("mkitem!{{mkstruct!{{{}}}}}", quote::ToTokens::to_token_stream(item))
@@ -60,7 +60,13 @@ fn process_file(file_path: &str) -> Result<String, Box<dyn std::error::Error>> {
     let ast = parse_file(&content)?;
     
     let wrapped_items: Vec<_> = ast.items.iter().map(wrap_item).collect();
-    let result = wrapped_items.join("\n");
+    let mut result = wrapped_items.join("\n");
+    
+    // Fix file paths in the generated content
+    result = result.replace("\"../messages.ftl\"", "\"messages.ftl\"");
+    
+    // Fix environment variable references
+    result = result.replace("env ! (\"CFG_RELEASE_CHANNEL\")", "\"dev\"");
     
     Ok(result)
 }
@@ -72,6 +78,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let test_files = [
         "submodules/rust/compiler/rustc/build.rs",
         "submodules/rust/compiler/rustc/src/main.rs",
+        "submodules/rust/compiler/rustc_driver_impl/src/lib.rs",
     ];
     
     for file_path in &test_files {

@@ -1,40 +1,229 @@
 // Macro definitions for wrapping Rust constructs with handlers
 
+// Replace problematic print statements with emit_message
+macro_rules! emit_message {
+    ($($arg:tt)*) => {
+        // Silent message emission for compilation compatibility
+    };
+}
+
 macro_rules! mkfn {
+    // MARKER: pub_trait_bounds_generic
+    ($introspect:expr; $(#[$attr:meta])* pub fn $name:ident < F : FnOnce ( ) -> R , R > ($($param:tt)*) $(-> $ret:ty)? $body:block) => {
+        $(#[$attr])* pub fn $name < F : FnOnce ( ) -> R , R > ($($param)*) $(-> $ret)? {
+            $introspect;
+            emit_message!("🚀 MARKER: pub_trait_bounds_generic - {}", stringify!($name));
+            let result = (|| $body)();
+            emit_message!("🎯 MARKER: pub_trait_bounds_generic - {}", stringify!($name));
+            result
+        }
+    };
+    // MARKER: trait_bounds_generic
+    ($introspect:expr; $(#[$attr:meta])* fn $name:ident < F : FnOnce ( ) -> R , R > ($($param:tt)*) $(-> $ret:ty)? $body:block) => {
+        $(#[$attr])* fn $name < F : FnOnce ( ) -> R , R > ($($param)*) $(-> $ret)? {
+            $introspect;
+            emit_message!("🚀 MARKER: trait_bounds_generic - {}", stringify!($name));
+            let result = (|| $body)();
+            emit_message!("🎯 MARKER: trait_bounds_generic - {}", stringify!($name));
+            result
+        }
+    };
+    // MARKER: catch_fatal_errors_specific
+    ($introspect:expr; $(#[$attr:meta])* fn catch_fatal_errors < F : FnOnce ( ) -> R , R > ($($param:tt)*) $(-> $ret:ty)? $body:block) => {
+        $(#[$attr])* fn catch_fatal_errors < F : FnOnce ( ) -> R , R > ($($param)*) $(-> $ret)? {
+            $introspect;
+            emit_message!("🚀 MARKER: catch_fatal_errors_specific");
+            let result = (|| $body)();
+            emit_message!("🎯 MARKER: catch_fatal_errors_specific");
+            result
+        }
+    };
+    // MARKER: parse_crate_attrs_specific
+    ($introspect:expr; $(#[$attr:meta])* fn parse_crate_attrs < $lifetime:lifetime > ($($param:tt)*) -> PResult < $lifetime2:lifetime , ast :: AttrVec > $body:block) => {
+        $(#[$attr])* fn parse_crate_attrs < $lifetime > ($($param)*) -> PResult < $lifetime2 , ast :: AttrVec > {
+            $introspect;
+            emit_message!("🚀 MARKER: parse_crate_attrs_specific");
+            let result = (|| $body)();
+            emit_message!("🎯 MARKER: parse_crate_attrs_specific");
+            result
+        }
+    };
+    // MARKER: init_logger_specific
+    ($introspect:expr; $(#[$attr:meta])* fn init_logger_with_additional_layer < F , T > ($($param:tt)*) where F : FnOnce ( ) -> T , T : rustc_log :: BuildSubscriberRet , $body:block) => {
+        $(#[$attr])* fn init_logger_with_additional_layer < F , T > ($($param)*) where F : FnOnce ( ) -> T , T : rustc_log :: BuildSubscriberRet , {
+            $introspect;
+            emit_message!("🚀 MARKER: init_logger_specific");
+            let result = (|| $body)();
+            emit_message!("🎯 MARKER: init_logger_specific");
+            result
+        }
+    };
+    ($introspect:expr; $(#[$attr:meta])* fn $name:ident < F , T > ($($param:tt)*) $(-> $ret:ty)? where F : FnOnce ( $($fnonce_args:tt)* ) $($where_rest:tt)* $body:block) => {
+        $(#[$attr])* fn $name < F , T > ($($param)*) $(-> $ret)? where F : FnOnce ( $($fnonce_args)* ) $($where_rest)* {
+            $introspect;
+            emit_message!("🚀 MARKER: two_generics_where_fnonce - {}", stringify!($name));
+            let result = (|| $body)();
+            emit_message!("🎯 MARKER: two_generics_where_fnonce - {}", stringify!($name));
+            result
+        }
+    };
+    ($introspect:expr; $(#[$attr:meta])* fn $name:ident < $gen1:ident , $gen2:ident > ($($param:tt)*) $(-> $ret:ty)? where $($where_clause:tt)* $body:block) => {
+        $(#[$attr])* fn $name < $gen1 , $gen2 > ($($param)*) $(-> $ret)? where $($where_clause)* {
+            $introspect;
+            emit_message!("🚀 MARKER: two_generics_where - {}", stringify!($name));
+            let result = (|| $body)();
+            emit_message!("🎯 MARKER: two_generics_where - {}", stringify!($name));
+            result
+        }
+    };
+    // MARKER: two_generics
+    ($introspect:expr; $(#[$attr:meta])* fn $name:ident < $gen1:ident , $gen2:ident > ($($param:tt)*) $(-> $ret:ty)? $body:block) => {
+        $(#[$attr])* fn $name < $gen1 , $gen2 > ($($param)*) $(-> $ret)? {
+            $introspect;
+            emit_message!("🚀 MARKER: two_generics - {}", stringify!($name));
+            let result = (|| $body)();
+            emit_message!("🎯 MARKER: two_generics - {}", stringify!($name));
+            result
+        }
+    };
+    ($introspect:expr; $(#[$attr:meta])* pub fn $name:ident < $gen1:ident , $gen2:ident > ($($param:tt)*) $(-> $ret:ty)? $body:block) => {
+        $(#[$attr])* pub fn $name < $gen1 , $gen2 > ($($param)*) $(-> $ret)? {
+            $introspect;
+            emit_message!("🚀 MARKER: pub_two_generics - {}", stringify!($name));
+            let result = (|| $body)();
+            emit_message!("🎯 MARKER: pub_two_generics - {}", stringify!($name));
+            result
+        }
+    };
+    ($introspect:expr; $(#[$attr:meta])* pub ($vis:ident) fn $name:ident($($param:tt)*) $(-> $ret:ty)? $body:block) => {
+        $(#[$attr])* pub ($vis) fn $name($($param)*) $(-> $ret)? {
+            $introspect;
+            emit_message!("🚀 MARKER: pub_vis - {}", stringify!($name));
+            let result = (|| $body)();
+            emit_message!("🎯 MARKER: pub_vis - {}", stringify!($name));
+            result
+        }
+    };
+    // MARKER: generic_single
+    ($introspect:expr; $(#[$attr:meta])* fn $name:ident < $gen:ident > ($($param:tt)*) $(-> $ret:ty)? $body:block) => {
+        $(#[$attr])* fn $name < $gen > ($($param)*) $(-> $ret)? {
+            $introspect;
+            emit_message!("🚀 MARKER: generic_single - {}", stringify!($name));
+            let result = (|| $body)();
+            emit_message!("🎯 MARKER: generic_single - {}", stringify!($name));
+            result
+        }
+    };
+    ($introspect:expr; $(#[$attr:meta])* pub fn $name:ident < $gen:ident > ($($param:tt)*) $(-> $ret:ty)? $body:block) => {
+        $(#[$attr])* pub fn $name < $gen > ($($param)*) $(-> $ret)? {
+            $introspect;
+            emit_message!("🚀 MARKER: pub_generic_single - {}", stringify!($name));
+            let result = (|| $body)();
+            emit_message!("🎯 MARKER: pub_generic_single - {}", stringify!($name));
+            result
+        }
+    };
+    // MARKER: lifetime
+    ($introspect:expr; $(#[$attr:meta])* fn $name:ident < $lifetime:lifetime > ($($param:tt)*) $(-> $ret:ty)? $body:block) => {
+        $(#[$attr])* fn $name < $lifetime > ($($param)*) $(-> $ret)? {
+            $introspect;
+            emit_message!("🚀 MARKER: lifetime - {}", stringify!($name));
+            let result = (|| $body)();
+            emit_message!("🎯 MARKER: lifetime - {}", stringify!($name));
+            result
+        }
+    };
+    ($introspect:expr; $(#[$attr:meta])* pub fn $name:ident < $lifetime:lifetime > ($($param:tt)*) $(-> $ret:ty)? $body:block) => {
+        $(#[$attr])* pub fn $name < $lifetime > ($($param)*) $(-> $ret)? {
+            $introspect;
+            emit_message!("🚀 MARKER: pub_lifetime - {}", stringify!($name));
+            let result = (|| $body)();
+            emit_message!("🎯 MARKER: pub_lifetime - {}", stringify!($name));
+            result
+        }
+    };
+    // MARKER: non_generic
+    ($introspect:expr; $(#[$attr:meta])* pub fn $name:ident($($param:tt)*) $(-> $ret:ty)? $body:block) => {
+        $(#[$attr])* pub fn $name($($param)*) $(-> $ret)? {
+            $introspect;
+            emit_message!("🚀 MARKER: pub_non_generic - {}", stringify!($name));
+            let result = (|| $body)();
+            emit_message!("🎯 MARKER: pub_non_generic - {}", stringify!($name));
+            result
+        }
+    };
+    ($introspect:expr; $(#[$attr:meta])* fn $name:ident($($param:tt)*) $(-> $ret:ty)? $body:block) => {
+        $(#[$attr])* fn $name($($param)*) $(-> $ret)? {
+            $introspect;
+            emit_message!("🚀 MARKER: non_generic - {}", stringify!($name));
+            let result = (|| $body)();
+            emit_message!("🎯 MARKER: non_generic - {}", stringify!($name));
+            result
+        }
+    };
     ($introspect:expr; fn $name:ident() $body:block) => {
         fn $name() {
             $introspect;
-            println!("🚀 MACRO INTERCEPTED: {}", stringify!($name));
+            emit_message!("🚀 MARKER: simple - {}", stringify!($name));
             let result = (|| $body)();
-            println!("🎯 MACRO COMPLETED: {}", stringify!($name));
+            emit_message!("🎯 MARKER: simple - {}", stringify!($name));
             result
         }
     };
-    ($introspect:expr; fn $name:ident($($param:ident: $ptype:ty),*) $body:block) => {
-        fn $name($($param: $ptype),*) {
-            $introspect;
-            println!("🚀 MACRO INTERCEPTED: {}", stringify!($name));
-            let result = (|| $body)();
-            println!("🎯 MACRO COMPLETED: {}", stringify!($name));
-            result
-        }
+    // MARKER: catch_all - matches anything not caught above
+    ($introspect:expr; $($anything:tt)*) => {
+        $($anything)*
     };
-    ($introspect:expr; fn $name:ident($($param:ident: $ptype:ty),*) -> $ret:ty $body:block) => {
-        fn $name($($param: $ptype),*) -> $ret {
-            $introspect;
-            println!("🚀 MACRO INTERCEPTED: {} -> {}", stringify!($name), stringify!($ret));
-            let result: $ret = (|| $body)();
-            println!("🎯 MACRO COMPLETED: {} -> {}", stringify!($name), stringify!($ret));
-            result
-        }
+}
+
+// Define missing macros
+macro_rules! safe_println {
+    ($($arg:tt)*) => {
+        ()
+    };
+}
+
+macro_rules! safe_print {
+    ($($arg:tt)*) => {
+        ()
+    };
+}
+
+macro_rules! mkinclude {
+    ($path:ident) => {
+        // Skip include! calls with identifiers - they're problematic
+    };
+    ($path:literal) => {
+        include!($path)
     };
 }
 
 macro_rules! mkitem {
+    // Handle include! with identifier - direct pattern
+    (include ! ($path:ident) ;) => {
+        // Skip include! calls that don't have string literals
+    };
+    // Handle macro calls with string literals
+    ($macro_name:ident :: $macro_sub:ident ! { $string_lit:literal }) => {
+        $macro_name :: $macro_sub ! { $string_lit }
+    };
+    ($macro_name:ident :: $macro_sub:ident ! { $($args:tt)* }) => {
+        $macro_name :: $macro_sub ! { $($args)* }
+    };
+    ($macro_name:ident ! { $($args:tt)* }) => {
+        $macro_name ! { $($args)* }
+    };
     ($item:item) => { $item };
 }
 
 macro_rules! mkmod {
+    // Handle introspection pattern: mkmod!{name, { content }}
+    ($name:ident, { $($content:tt)* }) => {
+        mod $name {
+            $($content)*
+        }
+    };
+    // Handle standard patterns
     (pub mod $name:ident { $($content:tt)* }) => {
         pub mod $name {
             $($content)*

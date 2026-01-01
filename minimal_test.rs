@@ -1,1 +1,3 @@
-#[no_mangle] pub fn test() {}
+fn main() {
+    println!("Hello from rustc bootstrap test!");
+}

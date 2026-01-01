@@ -1,0 +1,1098 @@
+   Compiling split-decls-genesis v0.1.0 (/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis)
+warning: unused import: `std::collections::HashMap`
+ --> src/self_improving_compiler.rs:1:5
+  |
+1 | use std::collections::HashMap;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `Hash`
+ --> src/symbol_resolver.rs:5:17
+  |
+5 | use std::hash::{Hash, Hasher};
+  |                 ^^^^
+
+warning: unused import: `File`
+ --> src/symbol_resolver.rs:6:11
+  |
+6 | use syn::{File, visit::Visit};
+  |           ^^^^
+
+warning: unused import: `std::path::Path`
+ --> src/dependency_extractor.rs:5:5
+  |
+5 | use std::path::Path;
+  |     ^^^^^^^^^^^^^^^
+
+warning: type `assert_only_contains_predicates_from` should have an upper camel case name
+ --> src/wrap_types.rs:1:54
+  |
+1 | ...truct assert_only_contains_predicates_from ; } pub mod sealed { pub struct Sealed ; } pub mod on_unimplemented { } pub mod types { pub...
+  |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `AssertOnlyContainsPredicatesFrom`
+  |
+  = note: `#[warn(non_camel_case_types)]` (part of `#[warn(nonstandard_style)]`) on by default
+
+warning: type `address_for_func` should have an upper camel case name
+ --> src/wrap_types.rs:1:463
+  |
+1 | ...ub mod emit { pub struct address_for_func ; } pub mod fxhash { pub struct FxHashMap ; } pub mod merge_iter { pub struct MergeIterInner...
+  |                             ^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `AddressForFunc`
+
+warning: type `ensure_wf` should have an upper camel case name
+ --> src/wrap_types.rs:1:1090
+  |
+1 | ...ub mod layout_test { pub struct ensure_wf ; } pub mod lattice { pub struct MaybeReachable ; } pub mod generic_graph { pub struct mir_f...
+  |                                    ^^^^^^^^^ help: convert the identifier to upper camel case: `EnsureWf`
+
+warning: type `mir_fn_to_generic_graph` should have an upper camel case name
+ --> src/wrap_types.rs:1:1187
+  |
+1 | ...graph { pub struct mir_fn_to_generic_graph ; } pub mod debuginfo { pub struct DebugInfoBuilderMethods ; } pub mod key { } pub mod user...
+  |                       ^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `MirFnToGenericGraph`
+
+warning: type `allocUserRef` should have an upper camel case name
+ --> src/wrap_types.rs:1:1321
+  |
+1 | ... mod usercalls { pub struct allocUserRef ; } pub mod type_names { } pub mod lto { } pub mod borrow_set { pub struct BorrowData ; } pub...
+  |                                ^^^^^^^^^^^^ help: convert the identifier to upper camel case: `AllocUserRef`
+
+warning: type `placeholder_errorHighlighted` should have an upper camel case name
+ --> src/wrap_types.rs:1:1883
+  |
+1 | ...{ pub struct placeholder_errorHighlighted ; pub struct find_anon_type ; } pub mod memory { pub struct MemoryKind ; } pub mod context {...
+  |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `PlaceholderErrorHighlighted`
+
+warning: type `find_anon_type` should have an upper camel case name
+ --> src/wrap_types.rs:1:1925
+  |
+1 | ...orHighlighted ; pub struct find_anon_type ; } pub mod memory { pub struct MemoryKind ; } pub mod context { pub struct Context ; pub st...
+  |                               ^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `FindAnonType`
+
+warning: type `file_metadata` should have an upper camel case name
+ --> src/wrap_types.rs:1:2425
+  |
+1 | ...b mod metadata { pub struct file_metadata ; } pub mod intrinsic_helpers { pub struct IntrinsicTypeDefinition ; } pub mod command { pub...
+  |                                ^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `FileMetadata`
+
+warning: type `simplify_cfg` should have an upper camel case name
+ --> src/wrap_types.rs:1:2581
+  |
+1 | ...ub mod simplify { pub struct simplify_cfg ; } pub mod alloc { pub struct Star ; } pub mod thread_info { } pub mod item_bounds { pub st...
+  |                                 ^^^^^^^^^^^^ help: convert the identifier to upper camel case: `SimplifyCfg`
+
+warning: type `explicit_item_bounds_with_filter` should have an upper camel case name
+ --> src/wrap_types.rs:1:2691
+  |
+1 | ...ub struct explicit_item_bounds_with_filter ; } pub mod UnsupportedOpInfo { pub struct Star ; } pub mod visitor { pub struct ResultsVis...
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `ExplicitItemBoundsWithFilter`
+
+warning: type `MIN_LEN` should have an upper camel case name
+ --> src/wrap_types.rs:1:3002
+  |
+1 | ...ub struct SsoHashMap ; pub struct MIN_LEN ; } pub mod indentation { pub struct Indentation ; } pub mod corpora { pub struct Star ; } p...
+  |                                      ^^^^^^^ help: convert the identifier to upper camel case: `MinLen`
+
+warning: type `usercalls` should have an upper camel case name
+ --> src/wrap_types.rs:1:3297
+  |
+1 | ...ons ; pub struct usercalls ; } pub mod outlives { pub struct test_type_match ; } pub mod pat { pub struct Expected ; } pub mod misc { ...
+  |                     ^^^^^^^^^ help: convert the identifier to upper camel case (notice the capitalization): `Usercalls`
+
+warning: type `test_type_match` should have an upper camel case name
+ --> src/wrap_types.rs:1:3341
+  |
+1 | ...mod outlives { pub struct test_type_match ; } pub mod pat { pub struct Expected ; } pub mod misc { pub struct MiscCodegenMethods ; } p...
+  |                              ^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `TestTypeMatch`
+
+warning: type `write_mir_fn_graphviz` should have an upper camel case name
+ --> src/wrap_types.rs:1:3501
+  |
+1 | ...raphviz { pub struct write_mir_fn_graphviz ; } pub mod bench { pub struct Bencher ; pub struct fmt_bench_samples ; pub struct BenchSam...
+  |                         ^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `WriteMirFnGraphviz`
+
+warning: type `fmt_bench_samples` should have an upper camel case name
+ --> src/wrap_types.rs:1:3575
+  |
+1 | ...ct Bencher ; pub struct fmt_bench_samples ; pub struct BenchSamples ; } pub mod type_ { } pub mod region_constraints { pub struct Regi...
+  |                            ^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `FmtBenchSamples`
+
+warning: type `sqrtf` should have an upper camel case name
+ --> src/wrap_types.rs:1:3748
+  |
+1 | ...od sqrt { pub struct sqrtf ; pub struct sqrt ; } pub mod operand { pub struct OperandRef ; pub struct OperandValue ; } pub mod place {...
+  |                         ^^^^^ help: convert the identifier to upper camel case (notice the capitalization): `Sqrtf`
+
+warning: type `sqrt` should have an upper camel case name
+ --> src/wrap_types.rs:1:3767
+  |
+1 | ...ct sqrtf ; pub struct sqrt ; } pub mod operand { pub struct OperandRef ; pub struct OperandValue ; } pub mod place { pub struct PlaceR...
+  |                          ^^^^ help: convert the identifier to upper camel case (notice the capitalization): `Sqrt`
+
+warning: type `env` should have an upper camel case name
+ --> src/wrap_types.rs:1:4110
+  |
+1 | ...spect { } pub mod mystd { pub struct env ; pub struct ioRead ; pub struct fsFile ; pub struct fs ; pub struct ffiOsStr ; pub struct os...
+  |                                         ^^^ help: convert the identifier to upper camel case: `Env`
+
+warning: type `ioRead` should have an upper camel case name
+ --> src/wrap_types.rs:1:4127
+  |
+1 | ...ct env ; pub struct ioRead ; pub struct fsFile ; pub struct fs ; pub struct ffiOsStr ; pub struct oswindowspreludeStar ; pub struct pa...
+  |                        ^^^^^^ help: convert the identifier to upper camel case (notice the capitalization): `IoRead`
+
+warning: type `fsFile` should have an upper camel case name
+ --> src/wrap_types.rs:1:4147
+  |
+1 | ...ioRead ; pub struct fsFile ; pub struct fs ; pub struct ffiOsStr ; pub struct oswindowspreludeStar ; pub struct pathPath ; pub struct ...
+  |                        ^^^^^^ help: convert the identifier to upper camel case (notice the capitalization): `FsFile`
+
+warning: type `fs` should have an upper camel case name
+ --> src/wrap_types.rs:1:4167
+  |
+1 | ...uct fsFile ; pub struct fs ; pub struct ffiOsStr ; pub struct oswindowspreludeStar ; pub struct pathPath ; pub struct osunixffiOsStrEx...
+  |                            ^^ help: convert the identifier to upper camel case (notice the capitalization): `Fs`
+
+warning: type `ffiOsStr` should have an upper camel case name
+ --> src/wrap_types.rs:1:4183
+  |
+1 | ...t fs ; pub struct ffiOsStr ; pub struct oswindowspreludeStar ; pub struct pathPath ; pub struct osunixffiOsStrExt ; pub struct ffiOsSt...
+  |                      ^^^^^^^^ help: convert the identifier to upper camel case (notice the capitalization): `FfiOsStr`
+
+warning: type `oswindowspreludeStar` should have an upper camel case name
+ --> src/wrap_types.rs:1:4205
+  |
+1 | ...truct oswindowspreludeStar ; pub struct pathPath ; pub struct osunixffiOsStrExt ; pub struct ffiOsString ; pub struct preludev1Star ; ...
+  |          ^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case (notice the capitalization): `OswindowspreludeStar`
+
+warning: type `pathPath` should have an upper camel case name
+ --> src/wrap_types.rs:1:4239
+  |
+1 | ...windowspreludeStar ; pub struct pathPath ; pub struct osunixffiOsStrExt ; pub struct ffiOsString ; pub struct preludev1Star ; pub stru...
+  |                                    ^^^^^^^^ help: convert the identifier to upper camel case: `PathPath`
+
+warning: type `osunixffiOsStrExt` should have an upper camel case name
+ --> src/wrap_types.rs:1:4261
+  |
+1 | ...b struct osunixffiOsStrExt ; pub struct ffiOsString ; pub struct preludev1Star ; pub struct osunixpreludeStar ; pub struct osunixffiOs...
+  |             ^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case (notice the capitalization): `OsunixffiOsStrExt`
+
+warning: type `ffiOsString` should have an upper camel case name
+ --> src/wrap_types.rs:1:4292
+  |
+1 | ...t ; pub struct ffiOsString ; pub struct preludev1Star ; pub struct osunixpreludeStar ; pub struct osunixffiOsStringExt ; } pub mod aux...
+  |                   ^^^^^^^^^^^ help: convert the identifier to upper camel case (notice the capitalization): `FfiOsString`
+
+warning: type `preludev1Star` should have an upper camel case name
+ --> src/wrap_types.rs:1:4317
+  |
+1 | ...t ffiOsString ; pub struct preludev1Star ; pub struct osunixpreludeStar ; pub struct osunixffiOsStringExt ; } pub mod auxvec { pub str...
+  |                               ^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `Preludev1star`
+
+warning: type `osunixpreludeStar` should have an upper camel case name
+ --> src/wrap_types.rs:1:4344
+  |
+1 | ...b struct osunixpreludeStar ; pub struct osunixffiOsStringExt ; } pub mod auxvec { pub struct auxv_from_file ; } pub mod save { pub str...
+  |             ^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case (notice the capitalization): `OsunixpreludeStar`
+
+warning: type `osunixffiOsStringExt` should have an upper camel case name
+ --> src/wrap_types.rs:1:4375
+  |
+1 | ...truct osunixffiOsStringExt ; } pub mod auxvec { pub struct auxv_from_file ; } pub mod save { pub struct build_dep_graph ; } pub mod ra...
+  |          ^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case (notice the capitalization): `OsunixffiOsStringExt`
+
+warning: type `auxv_from_file` should have an upper camel case name
+ --> src/wrap_types.rs:1:4428
+  |
+1 | ...ub mod auxvec { pub struct auxv_from_file ; } pub mod save { pub struct build_dep_graph ; } pub mod raw { } pub mod errors { pub struc...
+  |                               ^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `AuxvFromFile`
+
+warning: type `build_dep_graph` should have an upper camel case name
+ --> src/wrap_types.rs:1:4473
+  |
+1 | ...pub mod save { pub struct build_dep_graph ; } pub mod raw { } pub mod errors { pub struct GenericsArgsErrExtend ; } pub mod intrinsic ...
+  |                              ^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `BuildDepGraph`
+
+warning: type `mangled_name_of_instance` should have an upper camel case name
+ --> src/wrap_types.rs:1:5301
+  |
+1 | ...pace { pub struct mangled_name_of_instance ; pub struct item_namespace ; } pub mod stability { } pub mod normalize { pub struct normal...
+  |                      ^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `MangledNameOfInstance`
+
+warning: type `item_namespace` should have an upper camel case name
+ --> src/wrap_types.rs:1:5339
+  |
+1 | ...e_of_instance ; pub struct item_namespace ; } pub mod stability { } pub mod normalize { pub struct normalize_with_depth_to ; } pub mod...
+  |                               ^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `ItemNamespace`
+
+warning: type `normalize_with_depth_to` should have an upper camel case name
+ --> src/wrap_types.rs:1:5411
+  |
+1 | ...alize { pub struct normalize_with_depth_to ; } pub mod query { pub struct DepGraphQuery ; } pub mod common { pub struct Star ; } pub m...
+  |                       ^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `NormalizeWithDepthTo`
+
+warning: type `expect_success` should have an upper camel case name
+ --> src/wrap_types.rs:1:5597
+  |
+1 | ...pub mod error { pub struct expect_success ; pub struct invalid_attr ; pub struct Star ; pub struct expect_success_aborting ; } pub mod...
+  |                               ^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `ExpectSuccess`
+
+warning: type `invalid_attr` should have an upper camel case name
+ --> src/wrap_types.rs:1:5625
+  |
+1 | ... expect_success ; pub struct invalid_attr ; pub struct Star ; pub struct expect_success_aborting ; } pub mod SelectionCandidate { pub ...
+  |                                 ^^^^^^^^^^^^ help: convert the identifier to upper camel case: `InvalidAttr`
+
+warning: type `expect_success_aborting` should have an upper camel case name
+ --> src/wrap_types.rs:1:5669
+  |
+1 | ...Star ; pub struct expect_success_aborting ; } pub mod SelectionCandidate { pub struct Star ; } pub mod support { pub struct Round ; pu...
+  |                      ^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `ExpectSuccessAborting`
+
+warning: type `value_for_array` should have an upper camel case name
+ --> src/wrap_types.rs:1:5832
+  |
+1 | ...b mod values { pub struct value_for_array ; } pub mod waker { pub struct current_thread_id ; pub struct Waker ; pub struct SyncWaker ;...
+  |                              ^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `ValueForArray`
+
+warning: type `current_thread_id` should have an upper camel case name
+ --> src/wrap_types.rs:1:5879
+  |
+1 | ... mod waker { pub struct current_thread_id ; pub struct Waker ; pub struct SyncWaker ; } pub mod helpers { pub struct concurrencyget_co...
+  |                            ^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `CurrentThreadId`
+
+warning: type `concurrencyget_concurrency` should have an upper camel case name
+ --> src/wrap_types.rs:1:5972
+  |
+1 | ...s { pub struct concurrencyget_concurrency ; pub struct metricsMetricMap ; } pub mod assembly { } pub mod env_mod { pub struct Outlives...
+  |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `ConcurrencygetConcurrency`
+
+warning: type `metricsMetricMap` should have an upper camel case name
+ --> src/wrap_types.rs:1:6012
+  |
+1 | ...oncurrency ; pub struct metricsMetricMap ; } pub mod assembly { } pub mod env_mod { pub struct OutlivesEnvironment ; } pub mod ops { }...
+  |                            ^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `MetricsMetricMap`
+
+warning: type `check_type_bounds` should have an upper camel case name
+ --> src/wrap_types.rs:1:6227
+  |
+1 | ..._impl_item { pub struct check_type_bounds ; } pub mod detect { } pub mod qualifs { } pub mod time { pub struct Timespec ; pub struct w...
+  |                            ^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `CheckTypeBounds`
+
+warning: type `with_tmos` should have an upper camel case name
+ --> src/wrap_types.rs:1:6336
+  |
+1 | ...ub struct Timespec ; pub struct with_tmos ; pub struct TestTimeOptions ; pub struct TestExecTime ; } pub mod util { pub struct ensure_...
+  |                                    ^^^^^^^^^ help: convert the identifier to upper camel case: `WithTmos`
+
+warning: type `ensure_monomorphic_enough` should have an upper camel case name
+ --> src/wrap_types.rs:1:6431
+  |
+1 | ...il { pub struct ensure_monomorphic_enough ; pub struct closure_trait_ref_and_return_type ; pub struct parse_version ; pub struct parse...
+  |                    ^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `EnsureMonomorphicEnough`
+
+warning: type `closure_trait_ref_and_return_type` should have an upper camel case name
+ --> src/wrap_types.rs:1:6470
+  |
+1 | ...ub struct closure_trait_ref_and_return_type ; pub struct parse_version ; pub struct parse_single_integer ; } pub mod macro_rules { } p...
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `ClosureTraitRefAndReturnType`
+
+warning: type `parse_version` should have an upper camel case name
+ --> src/wrap_types.rs:1:6517
+  |
+1 | ...nd_return_type ; pub struct parse_version ; pub struct parse_single_integer ; } pub mod macro_rules { } pub mod validations { pub stru...
+  |                                ^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `ParseVersion`
+
+warning: type `parse_single_integer` should have an upper camel case name
+ --> src/wrap_types.rs:1:6544
+  |
+1 | ...version ; pub struct parse_single_integer ; } pub mod macro_rules { } pub mod validations { pub struct utf8_char_width ; pub struct ru...
+  |                         ^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `ParseSingleInteger`
+
+warning: type `utf8_char_width` should have an upper camel case name
+ --> src/wrap_types.rs:1:6626
+  |
+1 | ... validations { pub struct utf8_char_width ; pub struct run_utf8_validation ; } pub mod rvalue { pub struct transmute_scalar ; } pub mo...
+  |                              ^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `Utf8CharWidth`
+
+warning: type `run_utf8_validation` should have an upper camel case name
+ --> src/wrap_types.rs:1:6655
+  |
+1 | ...ar_width ; pub struct run_utf8_validation ; } pub mod rvalue { pub struct transmute_scalar ; } pub mod pretty { pub struct dump_mir_de...
+  |                          ^^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `RunUtf8Validation`
+
+warning: type `transmute_scalar` should have an upper camel case name
+ --> src/wrap_types.rs:1:6707
+  |
+1 | ... mod rvalue { pub struct transmute_scalar ; } pub mod pretty { pub struct dump_mir_def_ids ; } pub mod event { pub struct CompletedTes...
+  |                             ^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `TransmuteScalar`
+
+warning: type `dump_mir_def_ids` should have an upper camel case name
+ --> src/wrap_types.rs:1:6756
+  |
+1 | ...b mod pretty { pub struct dump_mir_def_ids ; } pub mod event { pub struct CompletedTest ; } pub mod query_context { } pub mod explicit...
+  |                              ^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `DumpMirDefIds`
+
+warning: type `probeProbeScope` should have an upper camel case name
+ --> src/wrap_types.rs:1:7048
+  |
+1 | ...ethodCallee ; pub struct probeProbeScope ; pub struct probe ; } pub mod ffi { } pub mod compiler_interface { pub struct BridgeTys ; } ...
+  |                             ^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `ProbeProbeScope`
+
+warning: type `probe` should have an upper camel case name
+ --> src/wrap_types.rs:1:7077
+  |
+1 | ...truct probeProbeScope ; pub struct probe ; } pub mod ffi { } pub mod compiler_interface { pub struct BridgeTys ; } pub mod probe { } p...
+  |                                       ^^^^^ help: convert the identifier to upper camel case: `Probe`
+
+warning: type `get_explanation_based_on_obligation` should have an upper camel case name
+ --> src/wrap_types.rs:1:7340
+  |
+1 | ...struct get_explanation_based_on_obligation ; } pub mod interpret { pub struct ReportedErrorInfo ; pub struct GlobalAlloc ; } pub mod m...
+  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `GetExplanationBasedOnObligation`
+
+warning: unused import: `Hasher`
+ --> src/symbol_resolver.rs:5:23
+  |
+5 | use std::hash::{Hash, Hasher};
+  |                       ^^^^^^
+
+warning: unused variable: `rustc_paths`
+  --> src/dependency_extractor.rs:96:9
+   |
+96 |     let rustc_paths = vec![
+   |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_rustc_paths`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: module `Expectation` should have a snake case name
+ --> src/wrap_types.rs:1:2205
+  |
+1 | ... { } pub mod linker { } pub mod Expectation { pub struct Star ; } pub mod region_ctxt { pub struct RegionCtxt ; } pub mod utils { pub ...
+  |                                    ^^^^^^^^^^^ help: convert the identifier to snake case: `expectation`
+  |
+  = note: `#[warn(non_snake_case)]` (part of `#[warn(nonstandard_style)]`) on by default
+
+warning: module `UnsupportedOpInfo` should have a snake case name
+ --> src/wrap_types.rs:1:2736
+  |
+1 | ..._with_filter ; } pub mod UnsupportedOpInfo { pub struct Star ; } pub mod visitor { pub struct ResultsVisitor ; } pub mod neon { pub st...
+  |                             ^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `unsupported_op_info`
+
+warning: module `InterpErrorKind` should have a snake case name
+ --> src/wrap_types.rs:1:2933
+  |
+1 | ... pub mod graph { } pub mod InterpErrorKind { } pub mod map { pub struct SsoHashMap ; pub struct MIN_LEN ; } pub mod indentation { pub ...
+  |                               ^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `interp_error_kind`
+
+warning: module `LabelText` should have a snake case name
+ --> src/wrap_types.rs:1:3708
+  |
+1 | ...struct RegionSnapshot ; } pub mod LabelText { } pub mod sqrt { pub struct sqrtf ; pub struct sqrt ; } pub mod operand { pub struct Ope...
+  |                                      ^^^^^^^^^ help: convert the identifier to snake case: `label_text`
+
+warning: module `ErrorKind` should have a snake case name
+ --> src/wrap_types.rs:1:5152
+  |
+1 | ... pub struct BenchMode ; } pub mod ErrorKind { pub struct Star ; } pub mod select { pub struct Selected ; pub struct SelectionContext ;...
+  |                                      ^^^^^^^^^ help: convert the identifier to snake case: `error_kind`
+
+warning: module `SelectionCandidate` should have a snake case name
+ --> src/wrap_types.rs:1:5705
+  |
+1 | ...ess_aborting ; } pub mod SelectionCandidate { pub struct Star ; } pub mod support { pub struct Round ; pub struct Float ; } pub mod va...
+  |                             ^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `selection_candidate`
+
+warning: module `Entry` should have a snake case name
+ --> src/wrap_types.rs:1:6984
+  |
+1 | ...t { pub struct Constraint ; } pub mod Entry { } pub mod method { pub struct MethodCallee ; pub struct probeProbeScope ; pub struct pro...
+  |                                          ^^^^^ help: convert the identifier to snake case: `entry`
+
+warning: module `UndefinedBehaviorInfo` should have a snake case name
+ --> src/wrap_types.rs:1:7263
+  |
+1 | ...rialized { } pub mod UndefinedBehaviorInfo { pub struct Star ; } pub mod suggestions { pub struct get_explanation_based_on_obligation ...
+  |                         ^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `undefined_behavior_info`
+
+warning: function `export_use_object___read___archive_____ArchiveFile___ArchiveMember___3` should have a snake case name
+ --> src/exports.rs:4:8
+  |
+4 | pub fn export_use_object___read___archive_____ArchiveFile___ArchiveMember___3() { /* compiler_builtins__main__use_object___read___archive...
+  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_object_read_archive_archive_file_archive_member_3`
+
+warning: function `export_use_std___process_____Command___Stdio___7` should have a snake case name
+ --> src/exports.rs:8:8
+  |
+8 | pub fn export_use_std___process_____Command___Stdio___7() { /* stdarch__main__use_std___process_____Command___Stdio__ */ }
+  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_process_command_stdio_7`
+
+warning: function `export_use_std_____env___process___8` should have a snake case name
+ --> src/exports.rs:9:8
+  |
+9 | pub fn export_use_std_____env___process___8() { /* rustc_codegen_gcc__main__use_std_____env___process__ */ }
+  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_env_process_8`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___13` should have a snake case name
+  --> src/exports.rs:14:8
+   |
+14 | pub fn export_use_criterion_____Criterion___criterion_main___13() { /* compiler_builtins__float_pow__use_criterion_____Criterion___criter...
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_13`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___17` should have a snake case name
+  --> src/exports.rs:18:8
+   |
+18 | pub fn export_use_criterion_____Criterion___criterion_main___17() { /* compiler_builtins__float_conv__use_criterion_____Criterion___crite...
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_17`
+
+warning: function `export_use_rustc_middle___ty_____AssocTag___GenericArg___18` should have a snake case name
+  --> src/exports.rs:19:8
+   |
+19 | pub fn export_use_rustc_middle___ty_____AssocTag___GenericArg___18() { /* rustc_codegen_cranelift__main_shim__use_rustc_middle___ty_____A...
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_rustc_middle_ty_assoc_tag_generic_arg_18`
+
+warning: function `export___aeabi_unwind_cpp_pr0_26` should have a snake case name
+  --> src/exports.rs:27:8
+   |
+27 | pub fn export___aeabi_unwind_cpp_pr0_26() { /* compiler_builtins__main____aeabi_unwind_cpp_pr0 */ }
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_aeabi_unwind_cpp_pr0_26`
+
+warning: function `export_BUILD_DIR_27` should have a snake case name
+  --> src/exports.rs:28:8
+   |
+28 | pub fn export_BUILD_DIR_27() { /* rustc_codegen_gcc__main__BUILD_DIR */ }
+   |        ^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_build_dir_27`
+
+warning: function `export_use_crate___dataflow_____BorrowIndex___Borrowck___BorrowckDomain___Borrows___38` should have a snake case name
+  --> src/exports.rs:39:8
+   |
+39 | pub fn export_use_crate___dataflow_____BorrowIndex___Borrowck___BorrowckDomain___Borrows___38() { /* rustc_borrowck__lib__use_crate___dat...
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_dataflow_borrow_index_borrowck_borrowck_domain_borrows_38`
+
+warning: function `export_use_std___path___PathBuf_47` should have a snake case name
+  --> src/exports.rs:48:8
+   |
+48 | pub fn export_use_std___path___PathBuf_47() { /* stdarch__main__use_std___path___PathBuf */ }
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_path_path_buf_47`
+
+warning: function `export_use_cranelift_frontend_____FunctionBuilder___FunctionBuilderContext___63` should have a snake case name
+  --> src/exports.rs:64:8
+   |
+64 | pub fn export_use_cranelift_frontend_____FunctionBuilder___FunctionBuilderContext___63() { /* rustc_codegen_cranelift__main_shim__use_cra...
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_cranelift_frontend_function_builder_function_builder_context_63`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___64` should have a snake case name
+  --> src/exports.rs:65:8
+   |
+65 | pub fn export_use_criterion_____Criterion___criterion_main___64() { /* compiler_builtins__float_cmp__use_criterion_____Criterion___criter...
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_64`
+
+warning: function `export_use_crate___domain___get_domain_69` should have a snake case name
+  --> src/exports.rs:70:8
+   |
+70 | pub fn export_use_crate___domain___get_domain_69() { /* compiler_builtins__edge_cases__use_crate___domain___get_domain */ }
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_domain_get_domain_69`
+
+warning: function `export_use_std___fmt___Write_as___73` should have a snake case name
+  --> src/exports.rs:74:8
+   |
+74 | pub fn export_use_std___fmt___Write_as___73() { /* compiler_builtins__plot_domains__use_std___fmt___Write_as__ */ }
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_fmt_write_as_73`
+
+warning: function `export_use_std___io___Write_74` should have a snake case name
+  --> src/exports.rs:75:8
+   |
+75 | pub fn export_use_std___io___Write_74() { /* stdarch__main__use_std___io___Write */ }
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_io_write_74`
+
+warning: function `export_use_self___initialized_____EverInitializedPlaces___EverInitializedPlacesDomain___MaybeInitializedPlaces___MaybeUninitializedPlaces___MaybeUninitializedPlacesDomain_____75` should have a snake case name
+  --> src/exports.rs:76:8
+   |
+76 | ...fn export_use_self___initialized_____EverInitializedPlaces___EverInitializedPlacesDomain___MaybeInitializedPlaces___MaybeUninitializedPlaces___MaybeUninitializedPlacesDomain_____75() ...
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_self_initialized_ever_initialized_places_ever_initialized_places_domain_maybe_initialized_places_maybe_uninitialized_places_maybe_uninitialized_places_domain_75`
+
+warning: function `export_EverInitializedPlacesDomain_83` should have a snake case name
+  --> src/exports.rs:84:8
+   |
+84 | pub fn export_EverInitializedPlacesDomain_83() { /* rustc_mir_dataflow__initialized__EverInitializedPlacesDomain */ }
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_ever_initialized_places_domain_83`
+
+warning: function `export_Archive_86` should have a snake case name
+  --> src/exports.rs:87:8
+   |
+87 | pub fn export_Archive_86() { /* compiler_builtins__main__Archive */ }
+   |        ^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_archive_86`
+
+warning: function `export_use_std___io_____BufWriter___Write___88` should have a snake case name
+  --> src/exports.rs:89:8
+   |
+89 | pub fn export_use_std___io_____BufWriter___Write___88() { /* compiler_builtins__plot_domains__use_std___io_____BufWriter___Write__ */ }
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_io_buf_writer_write_88`
+
+warning: function `export_use_std___process___Command_91` should have a snake case name
+  --> src/exports.rs:92:8
+   |
+92 | pub fn export_use_std___process___Command_91() { /* compiler_builtins__plot_domains__use_std___process___Command */ }
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_process_command_91`
+
+warning: function `export_use_rustc_session___config___EntryFnType_93` should have a snake case name
+  --> src/exports.rs:94:8
+   |
+94 | pub fn export_use_rustc_session___config___EntryFnType_93() { /* rustc_codegen_cranelift__main_shim__use_rustc_session___config___EntryFn...
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_rustc_session_config_entry_fn_type_93`
+
+warning: function `export__start_110` should have a snake case name
+   --> src/exports.rs:111:8
+    |
+111 | pub fn export__start_110() { /* compiler_builtins__main___start */ }
+    |        ^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_start_110`
+
+warning: function `export_CHECK_LIBRARIES_114` should have a snake case name
+   --> src/exports.rs:115:8
+    |
+115 | pub fn export_CHECK_LIBRARIES_114() { /* compiler_builtins__main__CHECK_LIBRARIES */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_check_libraries_114`
+
+warning: function `export_use_std___any___type_name_126` should have a snake case name
+   --> src/exports.rs:127:8
+    |
+127 | pub fn export_use_std___any___type_name_126() { /* compiler_builtins__main__use_std___any___type_name */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_any_type_name_126`
+
+warning: function `export_use_itertools___Itertools_130` should have a snake case name
+   --> src/exports.rs:131:8
+    |
+131 | pub fn export_use_itertools___Itertools_130() { /* stdarch__main__use_itertools___Itertools */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_itertools_itertools_130`
+
+warning: function `export_use_libm_test_____CheckBasis___CheckCtx___GeneratorKind___MathOp___op___142` should have a snake case name
+   --> src/exports.rs:143:8
+    |
+143 | pub fn export_use_libm_test_____CheckBasis___CheckCtx___GeneratorKind___MathOp___op___142() { /* compiler_builtins__plot_domains__use_lib...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_libm_test_check_basis_check_ctx_generator_kind_math_op_op_142`
+
+warning: function `export_use_std___fmt_143` should have a snake case name
+   --> src/exports.rs:144:8
+    |
+144 | pub fn export_use_std___fmt_143() { /* compiler_builtins__domain__use_std___fmt */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_fmt_143`
+
+warning: function `export_DotDotDotForRemainingFields_150` should have a snake case name
+   --> src/exports.rs:151:8
+    |
+151 | pub fn export_DotDotDotForRemainingFields_150() { /* rustc_parse__errors__DotDotDotForRemainingFields */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_dot_dot_dot_for_remaining_fields_150`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___153` should have a snake case name
+   --> src/exports.rs:154:8
+    |
+154 | pub fn export_use_criterion_____Criterion___criterion_main___153() { /* compiler_builtins__float_trunc__use_criterion_____Criterion___cri...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_153`
+
+warning: function `export_Command_155` should have a snake case name
+   --> src/exports.rs:156:8
+    |
+156 | pub fn export_Command_155() { /* rustc_codegen_cranelift__main__Command */ }
+    |        ^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case (notice the capitalization): `export_command_155`
+
+warning: function `export_BorrowsDomain_157` should have a snake case name
+   --> src/exports.rs:158:8
+    |
+158 | pub fn export_BorrowsDomain_157() { /* rustc_borrowck__dataflow__BorrowsDomain */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_borrows_domain_157`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___165` should have a snake case name
+   --> src/exports.rs:166:8
+    |
+166 | pub fn export_use_criterion_____Criterion___criterion_main___165() { /* compiler_builtins__float_extend__use_criterion_____Criterion___cr...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_165`
+
+warning: function `export_use_crate___prelude_____175` should have a snake case name
+   --> src/exports.rs:176:8
+    |
+176 | pub fn export_use_crate___prelude_____175() { /* rustc_codegen_cranelift__main_shim__use_crate___prelude____ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_prelude_175`
+
+warning: function `export_SymInfo_176` should have a snake case name
+   --> src/exports.rs:177:8
+    |
+177 | pub fn export_SymInfo_176() { /* compiler_builtins__main__SymInfo */ }
+    |        ^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_sym_info_176`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___184` should have a snake case name
+   --> src/exports.rs:185:8
+    |
+185 | pub fn export_use_criterion_____Criterion___criterion_main___184() { /* compiler_builtins__random__use_criterion_____Criterion___criterio...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_184`
+
+warning: function `export_SysrootKind_190` should have a snake case name
+   --> src/exports.rs:191:8
+    |
+191 | pub fn export_SysrootKind_190() { /* rustc_codegen_cranelift__main__SysrootKind */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_sysroot_kind_190`
+
+warning: function `export_use_libm___support___Int_191` should have a snake case name
+   --> src/exports.rs:192:8
+    |
+192 | pub fn export_use_libm___support___Int_191() { /* compiler_builtins__domain__use_libm___support___Int */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_libm_support_int_191`
+
+warning: function `export_use_std___path___Path_197` should have a snake case name
+   --> src/exports.rs:198:8
+    |
+198 | pub fn export_use_std___path___Path_197() { /* compiler_builtins__plot_domains__use_std___path___Path */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_path_path_197`
+
+warning: function `export_use_libm_test___generate_____edge_cases___spaced___199` should have a snake case name
+   --> src/exports.rs:200:8
+    |
+200 | pub fn export_use_libm_test___generate_____edge_cases___spaced___199() { /* compiler_builtins__plot_domains__use_libm_test___generate____...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_libm_test_generate_edge_cases_spaced_199`
+
+warning: function `export_USAGE_208` should have a snake case name
+   --> src/exports.rs:209:8
+    |
+209 | pub fn export_USAGE_208() { /* compiler_builtins__main__USAGE */ }
+    |        ^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_usage_208`
+
+warning: function `export_use_std___env_211` should have a snake case name
+   --> src/exports.rs:212:8
+    |
+212 | pub fn export_use_std___env_211() { /* stdarch__main__use_std___env */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_env_211`
+
+warning: function `export_use_crate___thread_____self___main_thread___216` should have a snake case name
+   --> src/exports.rs:217:8
+    |
+217 | pub fn export_use_crate___thread_____self___main_thread___216() { /* std__rt__use_crate___thread_____self___main_thread__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_thread_self_main_thread_216`
+
+warning: function `export_use_rug___az_____self___Az___218` should have a snake case name
+   --> src/exports.rs:219:8
+    |
+219 | pub fn export_use_rug___az_____self___Az___218() { /* compiler_builtins__main__use_rug___az_____self___Az__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_rug_az_self_az_218`
+
+warning: function `export_use_walkdir___WalkDir_227` should have a snake case name
+   --> src/exports.rs:228:8
+    |
+228 | pub fn export_use_walkdir___WalkDir_227() { /* stdarch__main__use_walkdir___WalkDir */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_walkdir_walk_dir_227`
+
+warning: function `export_use_rustc_mir_dataflow___impls_____EverInitializedPlaces___EverInitializedPlacesDomain___MaybeUninitializedPlaces___MaybeUninitializedPlacesDomain_____228` should have a snake case name
+   --> src/exports.rs:229:8
+    |
+229 | ...fn export_use_rustc_mir_dataflow___impls_____EverInitializedPlaces___EverInitializedPlacesDomain___MaybeUninitializedPlaces___MaybeUninitializedPlacesDomain_____228() ...
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_rustc_mir_dataflow_impls_ever_initialized_places_ever_initialized_places_domain_maybe_uninitialized_places_maybe_uninitialized_places_domain_228`
+
+warning: function `export_use_iai_callgrind_____library_benchmark___library_benchmark_group___main___229` should have a snake case name
+   --> src/exports.rs:230:8
+    |
+230 | pub fn export_use_iai_callgrind_____library_benchmark___library_benchmark_group___main___229() { /* compiler_builtins__mem_icount__use_ia...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_iai_callgrind_library_benchmark_library_benchmark_group_main_229`
+
+warning: function `export_use_self___remainderf___remainderf_230` should have a snake case name
+   --> src/exports.rs:231:8
+    |
+231 | pub fn export_use_self___remainderf___remainderf_230() { /* compiler_builtins__mod__use_self___remainderf___remainderf */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_self_remainderf_remainderf_230`
+
+warning: function `export_Pos_249` should have a snake case name
+   --> src/exports.rs:250:8
+    |
+250 | pub fn export_Pos_249() { /* backtrace__main__Pos */ }
+    |        ^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_pos_249`
+
+warning: function `export_use_mini_core_____253` should have a snake case name
+   --> src/exports.rs:254:8
+    |
+254 | pub fn export_use_mini_core_____253() { /* rustc_codegen_gcc__empty_main__use_mini_core____ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_mini_core_253`
+
+warning: function `export_use_rustc_hir___LangItem_270` should have a snake case name
+   --> src/exports.rs:271:8
+    |
+271 | pub fn export_use_rustc_hir___LangItem_270() { /* rustc_codegen_cranelift__main_shim__use_rustc_hir___LangItem */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_rustc_hir_lang_item_270`
+
+warning: function `export_use_std___collections_____BTreeMap___BTreeSet___275` should have a snake case name
+   --> src/exports.rs:276:8
+    |
+276 | pub fn export_use_std___collections_____BTreeMap___BTreeSet___275() { /* compiler_builtins__main__use_std___collections_____BTreeMap___BT...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_collections_btree_map_btree_set_275`
+
+warning: function `export_FromStrRadix_290` should have a snake case name
+   --> src/exports.rs:291:8
+    |
+291 | pub fn export_FromStrRadix_290() { /* compiler_builtins__main__FromStrRadix */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_from_str_radix_290`
+
+warning: function `export_MaybeUninitializedPlacesDomain_292` should have a snake case name
+   --> src/exports.rs:293:8
+    |
+293 | pub fn export_MaybeUninitializedPlacesDomain_292() { /* rustc_mir_dataflow__initialized__MaybeUninitializedPlacesDomain */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_maybe_uninitialized_places_domain_292`
+
+warning: function `export_use_libm_test_____MathOp___TupleCall___295` should have a snake case name
+   --> src/exports.rs:296:8
+    |
+296 | pub fn export_use_libm_test_____MathOp___TupleCall___295() { /* compiler_builtins__main__use_libm_test_____MathOp___TupleCall__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_libm_test_math_op_tuple_call_295`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___296` should have a snake case name
+   --> src/exports.rs:297:8
+    |
+297 | pub fn export_use_criterion_____Criterion___criterion_main___296() { /* compiler_builtins__float_mul__use_criterion_____Criterion___crite...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_296`
+
+warning: function `export_use_std_____env___process___299` should have a snake case name
+   --> src/exports.rs:300:8
+    |
+300 | pub fn export_use_std_____env___process___299() { /* rustc_codegen_cranelift__main__use_std_____env___process__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_env_process_299`
+
+warning: function `export_use_libm_test___mpfloat___MpOp_301` should have a snake case name
+   --> src/exports.rs:302:8
+    |
+302 | pub fn export_use_libm_test___mpfloat___MpOp_301() { /* compiler_builtins__main__use_libm_test___mpfloat___MpOp */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_libm_test_mpfloat_mp_op_301`
+
+warning: function `export_use_std___path_____Path___PathBuf___302` should have a snake case name
+   --> src/exports.rs:303:8
+    |
+303 | pub fn export_use_std___path_____Path___PathBuf___302() { /* compiler_builtins__main__use_std___path_____Path___PathBuf__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_path_path_path_buf_302`
+
+warning: function `export_use_super_____303` should have a snake case name
+   --> src/exports.rs:304:8
+    |
+304 | pub fn export_use_super_____303() { /* stdarch__main__use_super____ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_super_303`
+
+warning: function `export_use_self___utils___Compiler_311` should have a snake case name
+   --> src/exports.rs:312:8
+    |
+312 | pub fn export_use_self___utils___Compiler_311() { /* rustc_codegen_cranelift__main__use_self___utils___Compiler */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_self_utils_compiler_311`
+
+warning: function `export_use_rustc_span_____DUMMY_SP___Ident___315` should have a snake case name
+   --> src/exports.rs:316:8
+    |
+316 | pub fn export_use_rustc_span_____DUMMY_SP___Ident___315() { /* rustc_codegen_cranelift__main_shim__use_rustc_span_____DUMMY_SP___Ident__ ...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_rustc_span_dummy_sp_ident_315`
+
+warning: function `export_use_mylib___my_func_318` should have a snake case name
+   --> src/exports.rs:319:8
+    |
+319 | pub fn export_use_mylib___my_func_318() { /* rustc_codegen_gcc__main__use_mylib___my_func */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_mylib_my_func_318`
+
+warning: function `export_use_std___str___FromStr_327` should have a snake case name
+   --> src/exports.rs:328:8
+    |
+328 | pub fn export_use_std___str___FromStr_327() { /* compiler_builtins__main__use_std___str___FromStr */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_str_from_str_327`
+
+warning: function `export__Unwind_Resume_337` should have a snake case name
+   --> src/exports.rs:338:8
+    |
+338 | pub fn export__Unwind_Resume_337() { /* compiler_builtins__main___Unwind_Resume */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_unwind_resume_337`
+
+warning: function `export_use_std___process_____Command___Stdio___340` should have a snake case name
+   --> src/exports.rs:341:8
+    |
+341 | pub fn export_use_std___process_____Command___Stdio___340() { /* compiler_builtins__main__use_std___process_____Command___Stdio__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_process_command_stdio_340`
+
+warning: function `export_use_std___io_____BufRead___BufReader___345` should have a snake case name
+   --> src/exports.rs:346:8
+    |
+346 | pub fn export_use_std___io_____BufRead___BufReader___345() { /* compiler_builtins__main__use_std___io_____BufRead___BufReader__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_io_buf_read_buf_reader_345`
+
+warning: function `export_use_std_____env___fs___351` should have a snake case name
+   --> src/exports.rs:352:8
+    |
+352 | pub fn export_use_std_____env___fs___351() { /* compiler_builtins__plot_domains__use_std_____env___fs__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_env_fs_351`
+
+warning: function `export_use_libm___support_____Hexf___hf32___hf64___353` should have a snake case name
+   --> src/exports.rs:354:8
+    |
+354 | pub fn export_use_libm___support_____Hexf___hf32___hf64___353() { /* compiler_builtins__main__use_libm___support_____Hexf___hf32___hf64__...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_libm_support_hexf_hf32_hf64_353`
+
+warning: function `export_JL_PLOT_374` should have a snake case name
+   --> src/exports.rs:375:8
+    |
+375 | pub fn export_JL_PLOT_374() { /* compiler_builtins__plot_domains__JL_PLOT */ }
+    |        ^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_jl_plot_374`
+
+warning: function `export_use_crate_____assert_test_result___filter_tests___run_test___test_main___test_main_static___377` should have a snake case name
+   --> src/exports.rs:378:8
+    |
+378 | pub fn export_use_crate_____assert_test_result___filter_tests___run_test___test_main___test_main_static___377() { /* test__lib__use_crate...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_assert_test_result_filter_tests_run_test_test_main_test_main_static_377`
+
+warning: function `export_use_std___num___ParseIntError_378` should have a snake case name
+   --> src/exports.rs:379:8
+    |
+379 | pub fn export_use_std___num___ParseIntError_378() { /* compiler_builtins__main__use_std___num___ParseIntError */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_num_parse_int_error_378`
+
+warning: function `export_use_self___remainder___remainder_379` should have a snake case name
+   --> src/exports.rs:380:8
+    |
+380 | pub fn export_use_self___remainder___remainder_379() { /* compiler_builtins__mod__use_self___remainder___remainder */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_self_remainder_remainder_379`
+
+warning: function `export_CodegenBackend_382` should have a snake case name
+   --> src/exports.rs:383:8
+    |
+383 | pub fn export_CodegenBackend_382() { /* rustc_codegen_cranelift__main__CodegenBackend */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_codegen_backend_382`
+
+warning: function `export_use_serde_json___Value_387` should have a snake case name
+   --> src/exports.rs:388:8
+    |
+388 | pub fn export_use_serde_json___Value_387() { /* compiler_builtins__main__use_serde_json___Value */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_serde_json_value_387`
+
+warning: function `export_TargetFeature_389` should have a snake case name
+   --> src/exports.rs:390:8
+    |
+390 | pub fn export_TargetFeature_389() { /* stdarch__main__TargetFeature */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_target_feature_389`
+
+warning: function `export_use_intrinsic___Test_396` should have a snake case name
+   --> src/exports.rs:397:8
+    |
+397 | pub fn export_use_intrinsic___Test_396() { /* stdarch__main__use_intrinsic___Test */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_intrinsic_test_396`
+
+warning: function `export_use_std___fs_400` should have a snake case name
+   --> src/exports.rs:401:8
+    |
+401 | pub fn export_use_std___fs_400() { /* compiler_builtins__main__use_std___fs */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_fs_400`
+
+warning: function `export_BoxIter_404` should have a snake case name
+   --> src/exports.rs:405:8
+    |
+405 | pub fn export_BoxIter_404() { /* compiler_builtins__domain__BoxIter */ }
+    |        ^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_box_iter_404`
+
+warning: function `export_use_std___ops___Bound_410` should have a snake case name
+   --> src/exports.rs:411:8
+    |
+411 | pub fn export_use_std___ops___Bound_410() { /* compiler_builtins__domain__use_std___ops___Bound */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_ops_bound_410`
+
+warning: function `export_Command_411` should have a snake case name
+   --> src/exports.rs:412:8
+    |
+412 | pub fn export_Command_411() { /* rustc_codegen_gcc__main__Command */ }
+    |        ^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case (notice the capitalization): `export_command_411`
+
+warning: function `export_ParseTuple_413` should have a snake case name
+   --> src/exports.rs:414:8
+    |
+414 | pub fn export_ParseTuple_413() { /* compiler_builtins__main__ParseTuple */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_parse_tuple_413`
+
+warning: function `export_use_crate___errors_____self___AmbiguousRangePattern___AtDotDotInStructPattern___AtInStructPattern___DotDotDotForRemainingFields___DotDotDotRangeToPatternNotAllowed___DotDotDotRestPattern___EnumPatternInsteadOfIdentifier___ExpectedBindingLeftOfAt___ExpectedCommaAfterPatternField___GenericArgsInPatRequireTurbofishSyntax___InclusiveRangeExtraEquals___InclusiveRangeMatchArrow___InclusiveRangeNoEnd___InvalidMutInPattern___ParenRangeSuggestion___PatternOnWrongSideOfAt___RemoveLet___RepeatedMutInPattern___SwitchRefBoxOrder___TopLevelOrPatternNotAllowed___TopLevelOrPatternNotAllowedSugg___TrailingVertNotAllowed___TrailingVertSuggestion___UnexpectedExpressionInPattern___UnexpectedExpressionInPatternSugg___UnexpectedLifetimeInPattern___UnexpectedParenInRangePat___UnexpectedParenInRangePatSugg___UnexpectedVertVertBeforeFunctionParam___UnexpectedVertVertInPattern___WrapInParens_____421` should have a snake case name
+   --> src/exports.rs:422:8
+    |
+422 | ...fn export_use_crate___errors_____self___Ambi..._UnexpectedVertVertInPattern___WrapInParens_____421() ...
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^...^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_errors_self_ambiguous_range_pattern_at_dot_dot_in_struct_pattern_at_in_struct_pattern_dot_dot_dot_for_remaining_fields_dot_dot_dot_range_to_pattern_not_allowed_dot_dot_dot_rest_pattern_enum_pattern_instead_of_identifier_expected_binding_left_of_at_expected_comma_after_pattern_field_generic_args_in_pat_require_turbofish_syntax_inclusive_range_extra_equals_inclusive_range_match_arrow_inclusive_range_no_end_invalid_mut_in_pattern_paren_range_suggestion_pattern_on_wrong_side_of_at_remove_let_repeated_mut_in_pattern_switch_ref_box_order_top_level_or_pattern_not_allowed_top_level_or_pattern_not_allowed_sugg_trailing_vert_not_allowed_trailing_vert_suggestion_unexpected_expression_in_pattern_unexpected_expression_in_pattern_sugg_unexpected_lifetime_in_pattern_unexpected_paren_in_range_pat_unexpected_paren_in_range_pat_sugg_unexpected_vert_vert_before_function_param_unexpected_vert_vert_in_pattern_wrap_in_parens_421`
+
+warning: function `export_Lines_429` should have a snake case name
+   --> src/exports.rs:430:8
+    |
+430 | pub fn export_Lines_429() { /* stdarch__main__Lines */ }
+    |        ^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_lines_429`
+
+warning: function `export___aeabi_unwind_cpp_pr1_437` should have a snake case name
+   --> src/exports.rs:438:8
+    |
+438 | pub fn export___aeabi_unwind_cpp_pr1_437() { /* compiler_builtins__main____aeabi_unwind_cpp_pr1 */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_aeabi_unwind_cpp_pr1_437`
+
+warning: function `export_use_std___fmt_438` should have a snake case name
+   --> src/exports.rs:439:8
+    |
+439 | pub fn export_use_std___fmt_438() { /* stdarch__main__use_std___fmt */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_fmt_438`
+
+warning: function `export_use_crate___common___gen_c_____write_main_cpp___write_mod_cpp___442` should have a snake case name
+   --> src/exports.rs:443:8
+    |
+443 | pub fn export_use_crate___common___gen_c_____write_main_cpp___write_mod_cpp___442() { /* stdarch__mod__use_crate___common___gen_c_____wri...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_common_gen_c_write_main_cpp_write_mod_cpp_442`
+
+warning: function `export_EitherPrim_449` should have a snake case name
+   --> src/exports.rs:450:8
+    |
+450 | pub fn export_EitherPrim_449() { /* compiler_builtins__domain__EitherPrim */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_either_prim_449`
+
+warning: function `export_use_std___path___PathBuf_456` should have a snake case name
+   --> src/exports.rs:457:8
+    |
+457 | pub fn export_use_std___path___PathBuf_456() { /* rustc_codegen_cranelift__main__use_std___path___PathBuf */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_path_path_buf_456`
+
+warning: function `export_use_std___fs___File_457` should have a snake case name
+   --> src/exports.rs:458:8
+    |
+458 | pub fn export_use_std___fs___File_457() { /* stdarch__main__use_std___fs___File */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_fs_file_457`
+
+warning: function `export_Domain_458` should have a snake case name
+   --> src/exports.rs:459:8
+    |
+459 | pub fn export_Domain_458() { /* compiler_builtins__domain__Domain */ }
+    |        ^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_domain_458`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___460` should have a snake case name
+   --> src/exports.rs:461:8
+    |
+461 | pub fn export_use_criterion_____Criterion___criterion_main___460() { /* compiler_builtins__float_sub__use_criterion_____Criterion___crite...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_460`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___463` should have a snake case name
+   --> src/exports.rs:464:8
+    |
+464 | pub fn export_use_criterion_____Criterion___criterion_main___463() { /* compiler_builtins__float_add__use_criterion_____Criterion___crite...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_463`
+
+warning: function `export_use_crate___domain___get_domain_464` should have a snake case name
+   --> src/exports.rs:465:8
+    |
+465 | pub fn export_use_crate___domain___get_domain_464() { /* compiler_builtins__spaced__use_crate___domain___get_domain */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_domain_get_domain_464`
+
+warning: function `export_CHECK_EXTENSIONS_468` should have a snake case name
+   --> src/exports.rs:469:8
+    |
+469 | pub fn export_CHECK_EXTENSIONS_468() { /* compiler_builtins__main__CHECK_EXTENSIONS */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_check_extensions_468`
+
+warning: function `export_use_crate_____BaseName___Float___FloatExt___Identifier___472` should have a snake case name
+   --> src/exports.rs:473:8
+    |
+473 | pub fn export_use_crate_____BaseName___Float___FloatExt___Identifier___472() { /* compiler_builtins__domain__use_crate_____BaseName___Flo...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_base_name_float_float_ext_identifier_472`
+
+warning: function `export_use_std___path_____Path___PathBuf___476` should have a snake case name
+   --> src/exports.rs:477:8
+    |
+477 | pub fn export_use_std___path_____Path___PathBuf___476() { /* stdarch__main__use_std___path_____Path___PathBuf__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_path_path_path_buf_476`
+
+warning: function `export_use_std___env_489` should have a snake case name
+   --> src/exports.rs:490:8
+    |
+490 | pub fn export_use_std___env_489() { /* compiler_builtins__main__use_std___env */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_env_489`
+
+warning: function `export_use_iai_callgrind_____library_benchmark___library_benchmark_group___main___492` should have a snake case name
+   --> src/exports.rs:493:8
+    |
+493 | pub fn export_use_iai_callgrind_____library_benchmark___library_benchmark_group___main___492() { /* compiler_builtins__icount__use_iai_ca...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_iai_callgrind_library_benchmark_library_benchmark_group_main_492`
+
+warning: function `export_use_crate___common___gen_rust_____compile_rust_programs___write_bin_cargo_toml___write_lib_cargo_toml___write_lib_rs___write_main_rs_____494` should have a snake case name
+   --> src/exports.rs:495:8
+    |
+495 | ...fn export_use_crate___common___gen_rust_____compile_rust_programs___write_bin_cargo_toml___write_lib_cargo_toml___write_lib_rs___write_main_rs_____494() ...
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_crate_common_gen_rust_compile_rust_programs_write_bin_cargo_toml_write_lib_cargo_toml_write_lib_rs_write_main_rs_494`
+
+warning: function `export_use_std___io___prelude_____495` should have a snake case name
+   --> src/exports.rs:496:8
+    |
+496 | pub fn export_use_std___io___prelude_____495() { /* stdarch__main__use_std___io___prelude____ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_io_prelude_495`
+
+warning: function `export_use_libm_test___generate___spaced___SpacedInput_496` should have a snake case name
+   --> src/exports.rs:497:8
+    |
+497 | pub fn export_use_libm_test___generate___spaced___SpacedInput_496() { /* compiler_builtins__plot_domains__use_libm_test___generate___spac...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_libm_test_generate_spaced_spaced_input_496`
+
+warning: function `export_use_arm___ArmArchitectureTest_503` should have a snake case name
+   --> src/exports.rs:504:8
+    |
+504 | pub fn export_use_arm___ArmArchitectureTest_503() { /* stdarch__main__use_arm___ArmArchitectureTest */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_arm_arm_architecture_test_503`
+
+warning: function `export_use_object_____File_as_ObjFile___Object___ObjectSection___ObjectSymbol___Symbol___SymbolKind___SymbolScope_____504` should have a snake case name
+   --> src/exports.rs:505:8
+    |
+505 | pub fn export_use_object_____File_as_ObjFile___Object___ObjectSection___ObjectSymbol___Symbol___SymbolKind___SymbolScope_____504() { /* c...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_object_file_as_obj_file_object_object_section_object_symbol_symbol_symbol_kind_symbol_scope_504`
+
+warning: function `export_use_common___SupportedArchitectureTest_508` should have a snake case name
+   --> src/exports.rs:509:8
+    |
+509 | pub fn export_use_common___SupportedArchitectureTest_508() { /* stdarch__main__use_common___SupportedArchitectureTest */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_common_supported_architecture_test_508`
+
+warning: function `export_use_quote___quote_510` should have a snake case name
+   --> src/exports.rs:511:8
+    |
+511 | pub fn export_use_quote___quote_510() { /* stdarch__main__use_quote___quote */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_quote_quote_510`
+
+warning: function `export_use_criterion_____Criterion___criterion_main___519` should have a snake case name
+   --> src/exports.rs:520:8
+    |
+520 | pub fn export_use_criterion_____Criterion___criterion_main___519() { /* compiler_builtins__float_div__use_criterion_____Criterion___crite...
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_criterion_criterion_criterion_main_519`
+
+warning: function `export_BorrowckDomain_520` should have a snake case name
+   --> src/exports.rs:521:8
+    |
+521 | pub fn export_BorrowckDomain_520() { /* rustc_borrowck__dataflow__BorrowckDomain */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_borrowck_domain_520`
+
+warning: function `export_use_common___cli_____Cli___ProcessedCli___522` should have a snake case name
+   --> src/exports.rs:523:8
+    |
+523 | pub fn export_use_common___cli_____Cli___ProcessedCli___522() { /* stdarch__main__use_common___cli_____Cli___ProcessedCli__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_common_cli_cli_processed_cli_522`
+
+warning: function `export_use_std___io_____self___BufReader___523` should have a snake case name
+   --> src/exports.rs:524:8
+    |
+524 | pub fn export_use_std___io_____self___BufReader___523() { /* stdarch__main__use_std___io_____self___BufReader__ */ }
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `export_use_std_io_self_buf_reader_523`
+
+warning: `split-decls-genesis` (lib) generated 177 warnings (run `cargo fix --lib -p split-decls-genesis` to apply 4 suggestions)
+error: no rules expected keyword `where`
+   --> processed_submodules_rust_compiler_rustc_driver_impl_src_lib.rs:447:623
+    |
+447 | ... :: LoggerConfig , build_subscriber : F ,) where F : FnOnce () -> T , T : rustc_log :: BuildSubscriberRet , { if let Err (error) = rus...
+    |                                               ^^^^^ no rules expected this token in macro call
+    |
+   ::: src/macro_wrappers.rs:10:1
+    |
+ 10 | macro_rules! mkfn {
+    | ----------------- when calling this macro
+    |
+note: while trying to match meta-variable `$body:block`
+   --> src/macro_wrappers.rs:80:122
+    |
+ 80 |     ($introspect:expr; $(#[$attr:meta])* pub fn $name:ident < $gen1:ident , $gen2:ident > ($($param:tt)*) $(-> $ret:ty)? $body:block) => {
+    |                                                                                                                          ^^^^^^^^^^^
+
+error: environment variable `CFG_RELEASE_CHANNEL` not defined at compile time
+   --> processed_submodules_rust_compiler_rustc_driver_impl_src_lib.rs:400:898
+    |
+400 | ... args () . any (| arg | arg == "-Zui-testing") ; if env ! ("CFG_RELEASE_CHANNEL") == "dev" && ! ui_testing { panic :: set_backtrace_st...
+    |                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: use `std::env::var("CFG_RELEASE_CHANNEL")` to read the variable at run time
+
+error: could not compile `split-decls-genesis` (bin "unified_rustc_wrapped") due to 2 previous errors

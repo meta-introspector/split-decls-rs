@@ -4,10 +4,6 @@
 #![feature(rustc_private)]
 #![feature(core_intrinsics)]
 
-// Include our rustc_complete module
-#[path = "src/rustc_complete.rs"]
-mod rustc_complete;
-
 // Add extern crate declarations needed for rustc_driver
 extern crate rustc_driver;
 extern crate rustc_driver_impl;
@@ -58,15 +54,11 @@ extern crate rustc_abi;
 extern crate rustc_pattern_analysis;
 extern crate rustc_next_trait_solver;
 
-// Define missing environment variable
-const CFG_RELEASE_CHANNEL: &str = "dev";
-
 // Include macro wrappers
 include!("src/macro_wrappers.rs");
 
 // Include processed rustc_driver_impl to see function call cascade
-include!("processed_submodules_rust_compiler_rustc_driver_impl_src_lib.rs");
+include!("submodules/rust/compiler/rustc_driver_impl/src/lib.rs");
 
 // Include the actual processed rustc main file with macro wrappers
-// Commented out to avoid duplicate main function - using rustc_driver_impl::main instead
-// include!("processed_submodules_rust_compiler_rustc_src_main.rs");
+include!("processed_submodules_rust_compiler_rustc_src_main.rs");
