@@ -3450,7 +3450,7 @@
 /* FP:context.rs-3452 */ 
 /* FP:context.rs-3453 */     /// Named module children from all kinds of items, including imports.
 /* FP:context.rs-3454 */     /// In addition to regular items this list also includes struct and variant constructors, and
-/* FP:context.rs-3455 */     /// items inside `unsafe extern {}` blocks because all of them introduce names into parent module.
+/* FP:context.rs-3455 */     /// items inside `extern {}` blocks because all of them introduce names into parent module.
 /* FP:context.rs-3456 */     ///
 /* FP:context.rs-3457 */     /// Module here is understood in name resolution sense - it can be a `mod` item,
 /* FP:context.rs-3458 */     /// or a crate root, or an enum, or a trait.
