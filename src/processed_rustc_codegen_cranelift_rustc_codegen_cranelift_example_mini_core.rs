@@ -226,7 +226,7 @@
 /* FP:mini_core.rs-0227 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_example_mini_core_FN_0114
 /* FP:mini_core.rs-0228 */ # [lang = "panic_in_cleanup"] fn panic_in_cleanup () -> ! { loop { } }
 /* FP:mini_core.rs-0229 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_example_mini_core_OTHER_0115
-/* FP:mini_core.rs-0230 */ # [cfg (all (unix , not (target_vendor = "apple")))] # [link (name = "gcc_s")] unsafe extern "C" { fn _Unwind_Resume (exc : * mut ()) -> ! ; }
+/* FP:mini_core.rs-0230 */ # [cfg (all (unix , not (target_vendor = "apple")))] # [link (name = "gcc_s")] extern "C" { fn _Unwind_Resume (exc : * mut ()) -> ! ; }
 /* FP:mini_core.rs-0231 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_example_mini_core_FN_0116
 /* FP:mini_core.rs-0232 */ # [lang = "drop_in_place"] # [allow (unconditional_recursion)] pub unsafe fn drop_in_place < T : ? Sized > (to_drop : * mut T) { drop_in_place (to_drop) ; }
 /* FP:mini_core.rs-0233 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_example_mini_core_TRAIT_0117
@@ -274,7 +274,7 @@
 /* FP:mini_core.rs-0277 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_example_mini_core_IMPL_0139
 /* FP:mini_core.rs-0278 */ impl < T > Index < usize > for [T] { type Output = T ; fn index (& self , index : usize) -> & Self :: Output { & self [index] } }
 /* FP:mini_core.rs-0279 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_example_mini_core_OTHER_0140
-/* FP:mini_core.rs-0280 */ unsafe extern "C" { type VaListImpl ; }
+/* FP:mini_core.rs-0280 */ extern "C" { type VaListImpl ; }
 /* FP:mini_core.rs-0281 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_example_mini_core_STRUCT_0141
 /* FP:mini_core.rs-0282 */ # [lang = "va_list"] # [repr (transparent)] pub struct VaList < 'a > (& 'a mut VaListImpl) ;
 /* FP:mini_core.rs-0283 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_example_mini_core_OTHER_0142
