@@ -720,17 +720,93 @@ fn load_symbol_map(symbol_map_path: &str) -> Result<HashMap<String, Value>, Box<
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-changed=error_list.txt");
-    println!("🚀 BUILD.RS - rustc_complete.rs generation moved to gen_rustc_partial.rs");
+    println!("🚀 BUILD.RS - Processing rustc files from symbol_map.json");
     
-    // Just set environment variables, no file generation
+    // Set environment variables
     println!("cargo:rustc-env=CFG_RELEASE_CHANNEL=dev");
     println!("cargo:rustc-env=RUSTC_INSTALL_BINDIR=/usr/local/bin");
     
+    // Process symbol_map.json and generate processed files
+    println!("📋 AUDIT: Starting symbol_map.json processing");
+    
+    // Check if symbol_map.json.gz exists
+    if std::path::Path::new("symbol_map.json.gz").exists() {
+        println!("✅ AUDIT: Found symbol_map.json.gz");
+        process_symbol_map_gz()?;
+    } else if std::path::Path::new("symbol_map.json").exists() {
+        println!("✅ AUDIT: Found symbol_map.json");
+        process_symbol_map_json()?;
+    } else {
+        println!("❌ AUDIT: No symbol_map.json or symbol_map.json.gz found");
+        return Ok(());
+    }
+    
+    println!("✅ AUDIT: Completed file processing");
+    Ok(())
+}
+
+fn process_symbol_map_gz() -> Result<(), Box<dyn std::error::Error>> {
+    use flate2::read::GzDecoder;
+    use std::io::Read;
+    
+    println!("🔍 AUDIT: Reading symbol_map.json.gz");
+    let file = fs::File::open("symbol_map.json.gz")?;
+    let mut decoder = GzDecoder::new(file);
+    let mut content = String::new();
+    decoder.read_to_string(&mut content)?;
+    
+    println!("📊 AUDIT: Decompressed {} bytes", content.len());
+    process_symbol_map_content(&content)
+}
+
+fn process_symbol_map_json() -> Result<(), Box<dyn std::error::Error>> {
+    println!("🔍 AUDIT: Reading symbol_map.json");
+    let content = fs::read_to_string("symbol_map.json")?;
+    println!("📊 AUDIT: Read {} bytes", content.len());
+    process_symbol_map_content(&content)
+}
+
+fn process_symbol_map_content(content: &str) -> Result<(), Box<dyn std::error::Error>> {
+    println!("🔍 AUDIT: Parsing JSON content");
+    let symbol_map: HashMap<String, Value> = serde_json::from_str(content)?;
+    println!("📊 AUDIT: Found {} entries in symbol_map", symbol_map.len());
+    
+    // Extract unique file paths
+    let mut file_paths = std::collections::HashSet::new();
+    for (_, symbol_info) in &symbol_map {
+        if let Some(file_path) = symbol_info.get("file_path").and_then(|v| v.as_str()) {
+            file_paths.insert(file_path.to_string());
+        }
+    }
+    
+    println!("📊 AUDIT: Found {} unique file paths", file_paths.len());
+    
+    // Process each file
+    let mut processed_count = 0;
+    let mut error_count = 0;
+    let total_files = file_paths.len();
+    
+    for file_path in file_paths {
+        println!("🔄 AUDIT: Processing file {}/{}: {}", processed_count + 1, total_files, file_path);
+        
+        match process_single_file(&file_path) {
+            Ok(_) => {
+                processed_count += 1;
+                println!("✅ AUDIT: Successfully processed: {}", file_path);
+            }
+            Err(e) => {
+                error_count += 1;
+                println!("❌ AUDIT: Failed to process {}: {}", file_path, e);
+            }
+        }
+    }
+    
+    println!("📊 AUDIT: Final results - Processed: {}, Errors: {}", processed_count, error_count);
     Ok(())
 }
 
 fn process_single_file(file_path: &str) -> Result<(), Box<dyn std::error::Error>> {
-    let full_path = Path::new("../rust").join(file_path);
+    let full_path = Path::new("submodules/rust").join(file_path);
     
     if !full_path.exists() {
         return Err(format!("File not found: {}", full_path.display()).into());
@@ -740,6 +816,7 @@ fn process_single_file(file_path: &str) -> Result<(), Box<dyn std::error::Error>
     
     // Skip transformations for files containing cfg(test)
     if content.contains("#[cfg(test)]") || content.contains("#[cfg(all(unix, test))]") {
+        println!("⏭️  AUDIT: Skipping test file: {}", file_path);
         return Ok(());
     }
     
@@ -749,19 +826,33 @@ fn process_single_file(file_path: &str) -> Result<(), Box<dyn std::error::Error>
     // Apply targeted AST patches
     let patched_content = apply_ast_patches(&patched_content, file_path)?;
     
-    // Fix super::prelude imports
-    let patched_content = patched_content.replace("super::prelude", "crate::prelude");
+    // Mirror the original structure under submodules/
+    let output_path = Path::new("submodules/rust").join(file_path);
     
-    // Generate output filename
-    let output_filename = format!("processed_{}", 
-        file_path.replace("/", "_").replace(".rs", ".rs"));
-    let output_path = Path::new("src").join(output_filename);
+    // Create parent directories if they don't exist
+    if let Some(parent) = output_path.parent() {
+        std::fs::create_dir_all(parent)?;
+    }
     
-    // Write the processed file
-    fs::write(&output_path, patched_content)?;
+    println!("💾 AUDIT: Writing to: {}", output_path.display());
+    fs::write(&output_path, &patched_content)?;
     
     Ok(())
 }
+    
+//     // Fix super::prelude imports
+//     let patched_content = patched_content.replace("super::prelude", "crate::prelude");
+    
+//     // Generate output filename
+//     let output_filename = format!("processed_{}", 
+//         file_path.replace("/", "_").replace(".rs", ".rs"));
+//     let output_path = Path::new("src").join(output_filename);
+    
+//     // Write the processed file
+//     fs::write(&output_path, patched_content)?;
+    
+//     Ok(())
+// }
 
 fn build_rustc_from_symbol_map() -> Result<(), Box<dyn std::error::Error>> {
     println!("🔧 build_rustc_from_symbol_map() starting...");
@@ -1343,6 +1434,7 @@ fn generate_complete_includes(crate_files: &HashMap<String, Vec<String>>) -> Res
     println!("✅ Generated src/rustc_complete.rs with {} patched crates", ordered_crates.len());
     Ok(())
 }
+
 fn generate_stub_modules_from_symbols() -> Result<(), Box<dyn std::error::Error>> {
     use std::collections::BTreeMap;
     

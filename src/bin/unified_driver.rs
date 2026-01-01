@@ -141,7 +141,10 @@ include!("wrap_types.rs");
         match tree {
             syn::UseTree::Path(path) => {
                 let path_str = path.ident.to_string();
-                self.process_use_tree(&path.tree);
+                if path_str == "crate" {
+                    // This is a crate:: import, process the tree part
+                    self.process_use_tree(&path.tree);
+                }
             }
             syn::UseTree::Name(name) => {
                 // Extract the name being imported
@@ -154,6 +157,7 @@ include!("wrap_types.rs");
                 }
             }
             syn::UseTree::Group(group) => {
+                // Handle grouped imports like {Align, HasDataLayout, Size}
                 for tree in &group.items {
                     self.process_use_tree(tree);
                 }
