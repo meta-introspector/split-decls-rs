@@ -3,7 +3,13 @@ use std::process::Command;
 use std::collections::HashMap;
 use anyhow::Result;
 use syn;
-use split_decls_genesis::preprocessing::preprocess_content;
+
+fn preprocess_content(content: &str) -> String {
+    content
+        .replace("//!", "//")  // Fix inner doc comments
+        .replace("/*!", "/*")  // Fix inner block doc comments
+        .replace("#![", "#[")  // Fix inner attributes
+}
 
 pub struct UnifiedDriver {
     base_lib: String,
@@ -92,6 +98,15 @@ include!("wrap_types.rs");
             } else {
                 println!("❌ Compilation failed at step {}", i + 1);
                 let stderr = String::from_utf8_lossy(&result.stderr);
+                
+                // Print actual errors
+                println!("🔍 ERROR DETAILS:");
+                for line in stderr.lines() {
+                    if line.contains("error[E") || line.contains("error:") {
+                        println!("  🚨 {}", line);
+                    }
+                }
+                
                 if stderr.contains("error[E") {
                     println!("🔍 Errors found - stopping progressive analysis");
                     break;
@@ -107,13 +122,7 @@ include!("wrap_types.rs");
             for item in &ast.items {
                 match item {
                     syn::Item::Use(use_item) => {
-                        let (module, types) = self.extract_use_info(&use_item.tree);
-                        if !module.is_empty() && !types.is_empty() && 
-                           module != "crate" && module != "std" && module != "core" {
-                            self.accumulated_decls.entry(module)
-                                .or_insert_with(Vec::new)
-                                .extend(types);
-                        }
+                        self.process_use_tree(&use_item.tree);
                     }
                     syn::Item::Mod(mod_item) => {
                         if mod_item.content.is_none() {
@@ -126,6 +135,31 @@ include!("wrap_types.rs");
             }
         }
         Ok(())
+    }
+
+    fn process_use_tree(&mut self, tree: &syn::UseTree) {
+        match tree {
+            syn::UseTree::Path(path) => {
+                let path_str = path.ident.to_string();
+                self.process_use_tree(&path.tree);
+            }
+            syn::UseTree::Name(name) => {
+                // Extract the name being imported
+                let name_str = name.ident.to_string();
+                if name_str.chars().next().unwrap().is_uppercase() {
+                    // This looks like a type - add it to root crate
+                    self.accumulated_decls.entry("crate".to_string())
+                        .or_insert_with(Vec::new)
+                        .push(name_str);
+                }
+            }
+            syn::UseTree::Group(group) => {
+                for tree in &group.items {
+                    self.process_use_tree(tree);
+                }
+            }
+            _ => {}
+        }
     }
 
     fn generate_module_stub(&self, mod_name: &str) -> Result<()> {
@@ -164,12 +198,24 @@ include!("wrap_types.rs");
 
     fn generate_stubs(&self) -> String {
         let mut stubs = String::new();
-        for (module, types) in &self.accumulated_decls {
-            stubs.push_str(&format!("pub mod {} {{\n", module));
+        
+        // Add crate-level types first
+        if let Some(types) = self.accumulated_decls.get("crate") {
             for type_name in types {
-                stubs.push_str(&format!("    pub struct {};\n", type_name));
+                stubs.push_str(&format!("pub struct {};\n", type_name));
             }
-            stubs.push_str("}\n\n");
+            stubs.push_str("\n");
+        }
+        
+        // Add module stubs
+        for (module, types) in &self.accumulated_decls {
+            if module != "crate" {
+                stubs.push_str(&format!("pub mod {} {{\n", module));
+                for type_name in types {
+                    stubs.push_str(&format!("    pub struct {};\n", type_name));
+                }
+                stubs.push_str("}\n\n");
+            }
         }
         stubs
     }

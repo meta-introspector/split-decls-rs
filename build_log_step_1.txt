@@ -1,8 +1,6 @@
 === BUILD STEP 1 ===
-Command: cargo build --lib --verbose
+File: processed_.._rust_compiler_rustc_abi_src_callconv_reg.rs
 Status: exit status: 101
-Stdout:
-
 Stderr:
        Fresh unicode-ident v1.0.22
        Fresh proc-macro2 v1.0.104
@@ -12,105 +10,104 @@ Stderr:
        Fresh serde_derive v1.0.228
        Fresh version_check v0.9.5
        Fresh shlex v1.3.0
-       Fresh find-msvc-tools v0.1.6
-       Fresh equivalent v1.0.2
        Fresh hashbrown v0.16.1
+       Fresh equivalent v1.0.2
+       Fresh find-msvc-tools v0.1.6
        Fresh memchr v2.7.6
-       Fresh indexmap v2.12.1
-       Fresh cc v1.2.51
        Fresh winnow v0.7.14
        Fresh toml_write v0.1.2
        Fresh getrandom v0.2.16
        Fresh itoa v1.0.17
        Fresh once_cell v1.21.3
-       Fresh adler2 v2.0.1
        Fresh simd-adler32 v0.3.8
+       Fresh adler2 v2.0.1
        Fresh autocfg v1.5.0
-       Fresh same-file v1.0.6
+       Fresh cc v1.2.51
+       Fresh indexmap v2.12.1
+       Fresh rand_core v0.6.4
+       Fresh miniz_oxide v0.8.9
        Fresh smallvec v1.15.1
+       Fresh same-file v1.0.6
+       Fresh scopeguard v1.2.0
+       Fresh aho-corasick v1.1.4
        Fresh serde_core v1.0.228
        Fresh typenum v1.19.0
        Fresh zerocopy v0.8.31
-       Fresh miniz_oxide v0.8.9
-       Fresh rand_core v0.6.4
-       Fresh scopeguard v1.2.0
-       Fresh walkdir v2.5.0
-       Fresh aho-corasick v1.1.4
-       Fresh log v0.4.29
-       Fresh serde v1.0.228
-       Fresh crossbeam-utils v0.8.21
        Fresh zmij v1.0.6
-       Fresh generic-array v0.14.7
+       Fresh crossbeam-utils v0.8.21
        Fresh crc32fast v1.5.0
-       Fresh ppv-lite86 v0.2.21
        Fresh anyhow v1.0.100
+       Fresh parking_lot_core v0.9.12
+       Fresh walkdir v2.5.0
        Fresh lock_api v0.4.14
+       Fresh bitflags v2.10.0
+       Fresh log v0.4.29
+       Fresh linux-raw-sys v0.11.0
+       Fresh regex-syntax v0.8.8
+       Fresh either v1.15.0
+       Fresh serde v1.0.228
+       Fresh crossbeam-epoch v0.9.18
+       Fresh generic-array v0.14.7
+       Fresh ppv-lite86 v0.2.21
        Dirty ring v0.17.14: the env variable CARGO_MANIFEST_DIR changed
    Compiling ring v0.17.14
-       Fresh parking_lot_core v0.9.12
-       Fresh either v1.15.0
-       Fresh regex-syntax v0.8.8
-       Fresh linux-raw-sys v0.11.0
-       Fresh bitflags v2.10.0
-       Fresh hybrid-array v0.4.5
-       Fresh ahash v0.8.12
-       Fresh tracing-core v0.1.36
-       Fresh memmap2 v0.2.3
-       Fresh crossbeam-epoch v0.9.18
        Fresh flate2 v1.1.5
-       Fresh toml_datetime v0.6.11
-       Fresh serde_spanned v0.6.9
-       Fresh crypto-common v0.1.7
+       Fresh getrandom v0.3.4
        Fresh rustix v1.1.3
-       Fresh block-buffer v0.10.4
+       Fresh ahash v0.8.12
        Fresh regex-automata v0.4.13
        Fresh parking_lot v0.12.5
-       Fresh getrandom v0.3.4
        Fresh num-traits v0.2.19
-       Fresh rand_chacha v0.3.1
+       Fresh hybrid-array v0.4.5
+       Fresh tracing-core v0.1.36
        Fresh perf-event-open-sys v3.0.0
+       Fresh memmap2 v0.2.3
        Fresh tracing-attributes v0.1.31
        Fresh syn v2.0.112
-       Fresh stable_deref_trait v1.2.1
-       Fresh fastrand v2.3.0
-       Fresh constant_time_eq v0.3.1
-       Fresh arrayref v0.3.9
-       Fresh allocator-api2 v0.2.21
-     Running `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/build/ring-98d1180f9b6a90d2/build-script-build`
-       Fresh crossbeam-deque v0.8.6
-       Fresh toml_edit v0.22.27
-       Fresh iana-time-zone v0.1.64
-       Fresh arrayvec v0.7.6
-       Fresh pin-project-lite v0.2.16
        Fresh rustc-hash v1.1.0
        Fresh fixedbitset v0.4.2
+       Fresh crossbeam-deque v0.8.6
+       Fresh serde_spanned v0.6.9
+       Fresh toml_datetime v0.6.11
+       Fresh rand_chacha v0.3.1
+       Fresh block-buffer v0.10.4
+       Fresh crypto-common v0.1.7
+       Fresh constant_time_eq v0.3.1
        Fresh untrusted v0.9.0
+       Fresh arrayvec v0.7.6
+       Fresh pin-project-lite v0.2.16
+       Fresh fastrand v2.3.0
+       Fresh arrayref v0.3.9
+       Fresh stable_deref_trait v1.2.1
+       Fresh allocator-api2 v0.2.21
+       Fresh iana-time-zone v0.1.64
        Fresh regex v1.12.2
-       Fresh rand v0.8.5
+       Fresh measureme v11.0.1
+       Fresh petgraph v0.6.5
        Fresh synstructure v0.13.2
-       Fresh elsa v1.11.2
-       Fresh digest v0.10.7
-       Fresh hashbrown v0.14.5
-       Fresh tempfile v3.24.0
-       Fresh serde_json v1.0.148
        Fresh block-buffer v0.11.0
        Fresh itertools v0.12.1
-       Fresh rand_xorshift v0.3.0
-       Fresh serde_path_to_error v0.1.20
        Fresh ena v0.14.3
-       Fresh jobserver v0.1.34
+     Running `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/build/ring-98d1180f9b6a90d2/build-script-build`
        Fresh rayon-core v1.13.0
-       Fresh measureme v11.0.1
+       Fresh toml_edit v0.22.27
        Fresh blake3 v1.8.2
-       Fresh toml v0.8.23
-       Fresh petgraph v0.6.5
+       Fresh rand v0.8.5
+       Fresh digest v0.10.7
+       Fresh hashbrown v0.14.5
        Fresh chrono v0.4.42
+       Fresh elsa v1.11.2
        Fresh tracing v0.1.44
-       Fresh thin-vec v0.2.14
-       Fresh cpufeatures v0.2.17
+       Fresh tempfile v3.24.0
+       Fresh serde_path_to_error v0.1.20
+       Fresh serde_json v1.0.148
+       Fresh rand_xorshift v0.3.0
+       Fresh jobserver v0.1.34
+       Fresh constant_time_eq v0.4.2
        Fresh dyn-clone v1.0.20
        Fresh scoped-tls v1.0.1
-       Fresh constant_time_eq v0.4.2
+       Fresh thin-vec v0.2.14
+       Fresh cpufeatures v0.2.17
 warning: unused imports: `Attribute`, `ItemMod`, `Meta`, `parse_file`, `parse_str`, and `visit::Visit`
  --> build.rs:7:11
   |
@@ -132,28 +129,28 @@ warning: unused import: `flate2::read::GzDecoder`
   |     ^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: unused import: `visit::Visit`
-   --> build.rs:372:27
+   --> build.rs:397:27
     |
-372 |     use syn::{parse_file, visit::Visit};
+397 |     use syn::{parse_file, visit::Visit};
     |                           ^^^^^^^^^^^^
 
 warning: unnecessary parentheses around `if` condition
-    --> build.rs:1203:28
+    --> build.rs:1228:28
      |
-1203 |                         if (trimmed.contains("mod ") && trimmed.contains(";")) {
+1228 |                         if (trimmed.contains("mod ") && trimmed.contains(";")) {
      |                            ^                                                 ^
      |
      = note: `#[warn(unused_parens)]` (part of `#[warn(unused)]`) on by default
 help: remove these parentheses
      |
-1203 -                         if (trimmed.contains("mod ") && trimmed.contains(";")) {
-1203 +                         if trimmed.contains("mod ") && trimmed.contains(";") {
+1228 -                         if (trimmed.contains("mod ") && trimmed.contains(";")) {
+1228 +                         if trimmed.contains("mod ") && trimmed.contains(";") {
      |
 
 warning: variable does not need to be mutable
-   --> build.rs:234:9
+   --> build.rs:259:9
     |
-234 |     let mut patched_content = content.to_string();
+259 |     let mut patched_content = content.to_string();
     |         ----^^^^^^^^^^^^^^^
     |         |
     |         help: remove this `mut`
@@ -161,17 +158,17 @@ warning: variable does not need to be mutable
     = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
 
 warning: unused variable: `replacement`
-   --> build.rs:408:48
+   --> build.rs:433:48
     |
-408 | fn identify_affected_constructs(pattern: &str, replacement: &str) -> Vec<String> {
+433 | fn identify_affected_constructs(pattern: &str, replacement: &str) -> Vec<String> {
     |                                                ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_replacement`
     |
     = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
 
 warning: unused variable: `fixed_lines`
-    --> build.rs:1054:25
+    --> build.rs:1079:25
      |
-1054 |                     let fixed_lines: Vec<String> = lines.into_iter()
+1079 |                     let fixed_lines: Vec<String> = lines.into_iter()
      |                         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_fixed_lines`
 
 warning: function `load_error_exclusions` is never used
@@ -195,210 +192,204 @@ warning: function `semantic_patch_content` is never used
    |    ^^^^^^^^^^^^^^^^^^^^^^
 
 warning: function `get_block_type` is never used
-   --> build.rs:128:4
+   --> build.rs:131:4
     |
-128 | fn get_block_type(block: &str) -> &str {
+131 | fn get_block_type(block: &str) -> &str {
     |    ^^^^^^^^^^^^^^
 
 warning: function `get_block_name` is never used
-   --> build.rs:139:4
+   --> build.rs:142:4
     |
-139 | fn get_block_name(block: &str) -> String {
+142 | fn get_block_name(block: &str) -> String {
     |    ^^^^^^^^^^^^^^
 
 warning: function `extract_name_from_line` is never used
-   --> build.rs:150:4
+   --> build.rs:153:4
     |
-150 | fn extract_name_from_line(line: &str) -> Option<String> {
+153 | fn extract_name_from_line(line: &str) -> Option<String> {
     |    ^^^^^^^^^^^^^^^^^^^^^^
 
 warning: function `calculate_ast_complexity` is never used
-   --> build.rs:169:4
+   --> build.rs:172:4
     |
-169 | fn calculate_ast_complexity(content: &str) -> u32 {
+172 | fn calculate_ast_complexity(content: &str) -> u32 {
+    |    ^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `process_mod_declarations` is never used
+   --> build.rs:193:4
+    |
+193 | fn process_mod_declarations(content: &str, file_name: &str) -> Result<String, Box<dyn std::error::Error>> {
     |    ^^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: function `write_ast_trace_proof` is never used
-   --> build.rs:190:4
+   --> build.rs:215:4
     |
-190 | fn write_ast_trace_proof(file_name: &str, ast_trace_data: &[(u32, String, String)]) -> Result<(), Box<dyn std::error::Error>> {
+215 | fn write_ast_trace_proof(file_name: &str, ast_trace_data: &[(u32, String, String)]) -> Result<(), Box<dyn std::error::Error>> {
     |    ^^^^^^^^^^^^^^^^^^^^^
 
 warning: function `record_ast_patch` is never used
-   --> build.rs:222:4
+   --> build.rs:247:4
     |
-222 | fn record_ast_patch(ast_id: &str, patch_type: &str, original: &str, replacement: &str) -> Result<(), Box<dyn std::error::Error>> {
+247 | fn record_ast_patch(ast_id: &str, patch_type: &str, original: &str, replacement: &str) -> Result<(), Box<dyn std::error::Error>> {
     |    ^^^^^^^^^^^^^^^^
 
 warning: function `apply_ast_patches` is never used
-   --> build.rs:233:4
+   --> build.rs:258:4
     |
-233 | fn apply_ast_patches(content: &str, file_name: &str) -> Result<String, Box<dyn std::error::Error>> {
+258 | fn apply_ast_patches(content: &str, file_name: &str) -> Result<String, Box<dyn std::error::Error>> {
     |    ^^^^^^^^^^^^^^^^^
 
 warning: function `audited_replace` is never used
-   --> build.rs:287:4
+   --> build.rs:312:4
     |
-287 | fn audited_replace(content: &str, pattern: &str, replacement: &str, operation_name: &str, file_name: &str) -> Result<String, Box<dyn std:...
+312 | fn audited_replace(content: &str, pattern: &str, replacement: &str, operation_name: &str, file_name: &str) -> Result<String, Box<dyn std:...
     |    ^^^^^^^^^^^^^^^
 
 warning: struct `ReplacementAudit` is never constructed
-   --> build.rs:318:8
+   --> build.rs:343:8
     |
-318 | struct ReplacementAudit {
+343 | struct ReplacementAudit {
     |        ^^^^^^^^^^^^^^^^
 
 warning: struct `AstAnalysis` is never constructed
-   --> build.rs:329:8
+   --> build.rs:354:8
     |
-329 | struct AstAnalysis {
+354 | struct AstAnalysis {
     |        ^^^^^^^^^^^
 
 warning: function `collect_replacement_samples` is never used
-   --> build.rs:338:4
+   --> build.rs:363:4
     |
-338 | fn collect_replacement_samples(content: &str, pattern: &str, max_samples: usize) -> Vec<String> {
+363 | fn collect_replacement_samples(content: &str, pattern: &str, max_samples: usize) -> Vec<String> {
     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: function `analyze_ast_changes` is never used
-   --> build.rs:371:4
+   --> build.rs:396:4
     |
-371 | fn analyze_ast_changes(before: &str, after: &str, pattern: &str, replacement: &str) -> AstAnalysis {
+396 | fn analyze_ast_changes(before: &str, after: &str, pattern: &str, replacement: &str) -> AstAnalysis {
     |    ^^^^^^^^^^^^^^^^^^^
 
 warning: function `classify_replacement_pattern` is never used
-   --> build.rs:392:4
+   --> build.rs:417:4
     |
-392 | fn classify_replacement_pattern(pattern: &str, replacement: &str) -> String {
+417 | fn classify_replacement_pattern(pattern: &str, replacement: &str) -> String {
     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: function `identify_affected_constructs` is never used
-   --> build.rs:408:4
+   --> build.rs:433:4
     |
-408 | fn identify_affected_constructs(pattern: &str, replacement: &str) -> Vec<String> {
+433 | fn identify_affected_constructs(pattern: &str, replacement: &str) -> Vec<String> {
     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: function `assess_safety_impact` is never used
-   --> build.rs:430:4
+   --> build.rs:455:4
     |
-430 | fn assess_safety_impact(pattern: &str, replacement: &str) -> String {
+455 | fn assess_safety_impact(pattern: &str, replacement: &str) -> String {
     |    ^^^^^^^^^^^^^^^^^^^^
 
 warning: function `detect_semantic_changes` is never used
-   --> build.rs:442:4
+   --> build.rs:467:4
     |
-442 | fn detect_semantic_changes(pattern: &str, replacement: &str) -> Vec<String> {
+467 | fn detect_semantic_changes(pattern: &str, replacement: &str) -> Vec<String> {
     |    ^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: function `generate_replacement_audit` is never used
-   --> build.rs:461:4
+   --> build.rs:486:4
     |
-461 | fn generate_replacement_audit(audit: ReplacementAudit) -> Result<(), Box<dyn std::error::Error>> {
+486 | fn generate_replacement_audit(audit: ReplacementAudit) -> Result<(), Box<dyn std::error::Error>> {
     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: function `generate_patch_proof` is never used
-   --> build.rs:524:4
+   --> build.rs:549:4
     |
-524 | fn generate_patch_proof(ast_id: &str, file_name: &str, start_line: usize, end_line: usize, 
+549 | fn generate_patch_proof(ast_id: &str, file_name: &str, start_line: usize, end_line: usize, 
     |    ^^^^^^^^^^^^^^^^^^^^
 
 warning: function `extract_decl_info` is never used
-   --> build.rs:585:4
+   --> build.rs:610:4
     |
-585 | fn extract_decl_info(code: &str, decl_type: &str) -> (String, String) {
+610 | fn extract_decl_info(code: &str, decl_type: &str) -> (String, String) {
     |    ^^^^^^^^^^^^^^^^^
 
 warning: function `analyze_ast_id_security` is never used
-   --> build.rs:639:4
+   --> build.rs:664:4
     |
-639 | fn analyze_ast_id_security(ast_id: &str) -> String {
+664 | fn analyze_ast_id_security(ast_id: &str) -> String {
     |    ^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: function `detect_patch_pattern` is never used
-   --> build.rs:652:4
+   --> build.rs:677:4
     |
-652 | fn detect_patch_pattern(original: &str, patched: &str) -> String {
+677 | fn detect_patch_pattern(original: &str, patched: &str) -> String {
     |    ^^^^^^^^^^^^^^^^^^^^
 
 warning: function `get_item_type` is never used
-   --> build.rs:668:4
+   --> build.rs:693:4
     |
-668 | fn get_item_type(item: &Item) -> &'static str {
+693 | fn get_item_type(item: &Item) -> &'static str {
     |    ^^^^^^^^^^^^^
 
 warning: function `load_symbol_map` is never used
-   --> build.rs:685:4
+   --> build.rs:710:4
     |
-685 | fn load_symbol_map(symbol_map_path: &str) -> Result<HashMap<String, Value>, Box<dyn std::error::Error>> {
+710 | fn load_symbol_map(symbol_map_path: &str) -> Result<HashMap<String, Value>, Box<dyn std::error::Error>> {
     |    ^^^^^^^^^^^^^^^
 
 warning: function `process_single_file` is never used
-   --> build.rs:707:4
+   --> build.rs:732:4
     |
-707 | fn process_single_file(file_path: &str) -> Result<(), Box<dyn std::error::Error>> {
+732 | fn process_single_file(file_path: &str) -> Result<(), Box<dyn std::error::Error>> {
     |    ^^^^^^^^^^^^^^^^^^^
 
 warning: function `build_rustc_from_symbol_map` is never used
-   --> build.rs:741:4
+   --> build.rs:766:4
     |
-741 | fn build_rustc_from_symbol_map() -> Result<(), Box<dyn std::error::Error>> {
+766 | fn build_rustc_from_symbol_map() -> Result<(), Box<dyn std::error::Error>> {
     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: function `extract_crate_name_from_extern` is never used
-   --> build.rs:818:4
+   --> build.rs:843:4
     |
-818 | fn extract_crate_name_from_extern(extern_decl: &str) -> Option<String> {
+843 | fn extract_crate_name_from_extern(extern_decl: &str) -> Option<String> {
     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: function `extract_crate_name` is never used
-   --> build.rs:838:4
+   --> build.rs:863:4
     |
-838 | fn extract_crate_name(file_path: &str) -> Option<String> {
+863 | fn extract_crate_name(file_path: &str) -> Option<String> {
     |    ^^^^^^^^^^^^^^^^^^
 
 warning: function `generate_complete_includes` is never used
-   --> build.rs:848:4
+   --> build.rs:873:4
     |
-848 | fn generate_complete_includes(crate_files: &HashMap<String, Vec<String>>) -> Result<(), Box<dyn std::error::Error>> {
+873 | fn generate_complete_includes(crate_files: &HashMap<String, Vec<String>>) -> Result<(), Box<dyn std::error::Error>> {
     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: function `generate_stub_modules_from_symbols` is never used
-    --> build.rs:1321:4
+    --> build.rs:1346:4
      |
-1321 | fn generate_stub_modules_from_symbols() -> Result<(), Box<dyn std::error::Error>> {
+1346 | fn generate_stub_modules_from_symbols() -> Result<(), Box<dyn std::error::Error>> {
      |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
        Fresh rayon v1.11.0
-warning: `split-decls-genesis` (build script) generated 40 warnings
+       Fresh toml v0.8.23
+warning: `split-decls-genesis` (build script) generated 41 warnings
        Dirty split-decls-genesis v0.1.0 (/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis): dependency info changed
    Compiling split-decls-genesis v0.1.0 (/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis)
      Running `/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/build/split-decls-genesis-d9cf19b56df86006/build-script-build`
      Running `rustc --crate-name ring --edition=2021 /home/mdupont/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ring-0.17.14/src/lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type lib --emit=dep-info,metadata,link -C embed-bitcode=no -C debuginfo=2 --cfg 'feature="alloc"' --cfg 'feature="default"' --cfg 'feature="dev_urandom_fallback"' --check-cfg 'cfg(docsrs,test)' --check-cfg 'cfg(feature, values("alloc", "default", "dev_urandom_fallback", "less-safe-getrandom-custom-or-rdrand", "less-safe-getrandom-espidf", "slow_tests", "std", "test_logging", "unstable-testing-arm-no-hw", "unstable-testing-arm-no-neon", "wasm32_unknown_unknown_js"))' -C metadata=03b7189471659cb1 -C extra-filename=-d374c70fba74bdff --out-dir /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps -L dependency=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps --extern cfg_if=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libcfg_if-5f2e8bf47a777037.rmeta --extern getrandom=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libgetrandom-2ddcc0b156c90db6.rmeta --extern untrusted=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libuntrusted-9c122e7e9f2cdedc.rmeta --cap-lints allow -L native=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/build/ring-c1ea7ff9e6e1ad7d/out -l static=ring_core_0_17_14_ -l static=ring_core_0_17_14__test`
      Running `rustc --crate-name split_decls_genesis --edition=2024 src/current.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type lib --emit=dep-info,metadata,link -C embed-bitcode=no -C debuginfo=2 --check-cfg 'cfg(docsrs,test)' --check-cfg 'cfg(feature, values())' -C metadata=dc449c5cf64f1018 -C extra-filename=-5c7a5f71617262d4 --out-dir /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps -C incremental=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/incremental -L dependency=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps --extern aho_corasick=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libaho_corasick-b34db7304821b886.rmeta --extern anyhow=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libanyhow-f711802563e6b638.rmeta --extern arrayref=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libarrayref-e95ae80511c2e21e.rmeta --extern arrayvec=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libarrayvec-ed1b1be8ed866f99.rmeta --extern bitflags=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libbitflags-56146a5f1712337b.rmeta --extern blake3=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libblake3-24c51ff4fa6b688a.rmeta --extern block_buffer=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libblock_buffer-274c7dcec92ccde7.rmeta --extern cfg_if=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libcfg_if-5f2e8bf47a777037.rmeta --extern chrono=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libchrono-22c178d828b6a1bc.rmeta --extern constant_time_eq=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libconstant_time_eq-081548274c8561e0.rmeta --extern cpufeatures=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libcpufeatures-b278ebdb66b03ed9.rmeta --extern crc32fast=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libcrc32fast-9160f81a38cbcf3e.rmeta --extern crossbeam_deque=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libcrossbeam_deque-170607b7beb14fcc.rmeta --extern crossbeam_epoch=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libcrossbeam_epoch-07e31f0221639069.rmeta --extern crossbeam_utils=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libcrossbeam_utils-f79e027db76d9e80.rmeta --extern crypto_common=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libcrypto_common-90952d00c31c59ac.rmeta --extern digest=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libdigest-5622418afc40be81.rmeta --extern dyn_clone=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libdyn_clone-25f46eb376daf8b5.rmeta --extern either=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libeither-80e22dfc3e1c5c46.rmeta --extern elsa=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libelsa-53f23f390de761f9.rmeta --extern ena=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libena-bc1bc17a9ef06b9c.rmeta --extern equivalent=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libequivalent-1518ed3a3334f958.rmeta --extern flate2=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libflate2-be09c2ff53db3b12.rmeta --extern hashbrown=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libhashbrown-a4605afb125cab49.rmeta --extern indexmap=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libindexmap-66ebc7fee9cc3992.rmeta --extern itertools=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libitertools-3faae31013a6d569.rmeta --extern jobserver=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libjobserver-dc11175d12864037.rmeta --extern libc=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/liblibc-c4315cbea07f7651.rmeta --extern measureme=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libmeasureme-883be06614100153.rmeta --extern parking_lot=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libparking_lot-ac2a039b75570a38.rmeta --extern petgraph=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libpetgraph-4e8227debb445cfa.rmeta --extern proc_macro2=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libproc_macro2-eb2b91527e5c2089.rmeta --extern quote=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libquote-dc2ba270ed85e33d.rmeta --extern rand=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/librand-07d07bfd7f2e4321.rmeta --extern rand_xorshift=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/librand_xorshift-ec152f312353855b.rmeta --extern rayon=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/librayon-e34651527c07c48e.rmeta --extern regex=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libregex-9318000599e183c8.rmeta --extern ring=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libring-d374c70fba74bdff.rmeta --extern scoped_tls=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libscoped_tls-1263fbaeec8a7d02.rmeta --extern serde=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libserde-9fc88236cccd0e96.rmeta --extern serde_json=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libserde_json-71dc168e88c9d49e.rmeta --extern serde_path_to_error=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libserde_path_to_error-5b36e74688852215.rmeta --extern smallvec=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libsmallvec-e99cf34c602d54c3.rmeta --extern syn=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libsyn-4aed02b0a58c4fdb.rmeta --extern synstructure=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libsynstructure-8151ad8362c64510.rmeta --extern tempfile=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libtempfile-210e4d4a574aee20.rmeta --extern thin_vec=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libthin_vec-c5a2b73fca668a41.rmeta --extern toml=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libtoml-36d54bcb8d657119.rmeta --extern tracing=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libtracing-14cdbdaac78b7b6b.rmeta --extern walkdir=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libwalkdir-f8e837ea36881ef7.rmeta -L native=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/build/blake3-f0654ee1dd779804/out -L native=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/build/blake3-f0654ee1dd779804/out -L native=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/build/ring-c1ea7ff9e6e1ad7d/out`
-error[E0583]: file not found for module `reg`
- --> src/processed_.._rust_compiler_rustc_abi_src_callconv.rs:5:1
+error[E0432]: unresolved imports `crate::Align`, `crate::HasDataLayout`, `crate::Size`
+ --> src/processed_.._rust_compiler_rustc_abi_src_callconv_reg.rs:5:13
   |
-5 | mod reg;
-  | ^^^^^^^^
-  |
-  = help: to create the module `reg`, create file "src/reg.rs" or "src/reg/mod.rs"
-  = note: if there is a `mod reg` elsewhere in the crate already, import it with `use crate::...` instead
-
-error[E0428]: the name `reg` is defined multiple times
-  --> src/processed_.._rust_compiler_rustc_abi_src_callconv.rs:5:1
-   |
- 5 | mod reg;
-   | ^^^^^^^^ `reg` redefined here
-   |
-  ::: src/current.rs:13:1
-   |
-13 | pub mod reg {
-   | ----------- previous definition of the module `reg` here
-   |
-   = note: `reg` must be defined only once in the type namespace of this module
+5 | use crate::{Align, HasDataLayout, Size};
+  |             ^^^^^  ^^^^^^^^^^^^^  ^^^^ no `Size` in the root
+  |             |      |
+  |             |      no `HasDataLayout` in the root
+  |             no `Align` in the root
 
 warning: unexpected `cfg` condition value: `nightly`
- --> src/processed_.._rust_compiler_rustc_abi_src_callconv.rs:2:7
+ --> src/processed_.._rust_compiler_rustc_abi_src_callconv_reg.rs:2:7
   |
 2 | #[cfg(feature = "nightly")]
   |       ^^^^^^^^^^^^^^^^^^^ help: remove the condition
@@ -409,10 +400,20 @@ warning: unexpected `cfg` condition value: `nightly`
   = note: `#[warn(unexpected_cfgs)]` on by default
 
 warning: unexpected `cfg` condition value: `nightly`
-  --> src/processed_.._rust_compiler_rustc_abi_src_callconv.rs:53:7
+ --> src/processed_.._rust_compiler_rustc_abi_src_callconv_reg.rs:7:12
+  |
+7 | #[cfg_attr(feature = "nightly", derive(HashStable_Generic))]
+  |            ^^^^^^^^^^^^^^^^^^^ help: remove the condition
+  |
+  = note: no expected values for `feature`
+  = help: consider adding `nightly` as a feature in `Cargo.toml`
+  = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+
+warning: unexpected `cfg` condition value: `nightly`
+  --> src/processed_.._rust_compiler_rustc_abi_src_callconv_reg.rs:15:12
    |
-53 | #[cfg(feature = "nightly")]
-   |       ^^^^^^^^^^^^^^^^^^^ help: remove the condition
+15 | #[cfg_attr(feature = "nightly", derive(HashStable_Generic))]
+   |            ^^^^^^^^^^^^^^^^^^^ help: remove the condition
    |
    = note: no expected values for `feature`
    = help: consider adding `nightly` as a feature in `Cargo.toml`
@@ -744,10 +745,15 @@ warning: type `get_explanation_based_on_obligation` should have an upper camel c
 1 | ...struct get_explanation_based_on_obligation ; } pub mod interpret { pub struct ReportedErrorInfo ; pub struct GlobalAlloc ; } pub mod m...
   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `GetExplanationBasedOnObligation`
 
-Some errors have detailed explanations: E0428, E0583.
-For more information about an error, try `rustc --explain E0428`.
-warning: `split-decls-genesis` (lib) generated 56 warnings
-error: could not compile `split-decls-genesis` (lib) due to 2 previous errors; 56 warnings emitted
+warning: type `HashStable_Generic` should have an upper camel case name
+  --> src/current.rs:14:16
+   |
+14 |     pub struct HashStable_Generic;
+   |                ^^^^^^^^^^^^^^^^^^ help: convert the identifier to upper camel case: `HashStableGeneric`
+
+For more information about this error, try `rustc --explain E0432`.
+warning: `split-decls-genesis` (lib) generated 58 warnings
+error: could not compile `split-decls-genesis` (lib) due to 1 previous error; 58 warnings emitted
 
 Caused by:
   process didn't exit successfully: `rustc --crate-name split_decls_genesis --edition=2024 src/current.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type lib --emit=dep-info,metadata,link -C embed-bitcode=no -C debuginfo=2 --check-cfg 'cfg(docsrs,test)' --check-cfg 'cfg(feature, values())' -C metadata=dc449c5cf64f1018 -C extra-filename=-5c7a5f71617262d4 --out-dir /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps -C incremental=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/incremental -L dependency=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps --extern aho_corasick=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libaho_corasick-b34db7304821b886.rmeta --extern anyhow=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libanyhow-f711802563e6b638.rmeta --extern arrayref=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libarrayref-e95ae80511c2e21e.rmeta --extern arrayvec=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libarrayvec-ed1b1be8ed866f99.rmeta --extern bitflags=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libbitflags-56146a5f1712337b.rmeta --extern blake3=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libblake3-24c51ff4fa6b688a.rmeta --extern block_buffer=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libblock_buffer-274c7dcec92ccde7.rmeta --extern cfg_if=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libcfg_if-5f2e8bf47a777037.rmeta --extern chrono=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libchrono-22c178d828b6a1bc.rmeta --extern constant_time_eq=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libconstant_time_eq-081548274c8561e0.rmeta --extern cpufeatures=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libcpufeatures-b278ebdb66b03ed9.rmeta --extern crc32fast=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libcrc32fast-9160f81a38cbcf3e.rmeta --extern crossbeam_deque=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libcrossbeam_deque-170607b7beb14fcc.rmeta --extern crossbeam_epoch=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libcrossbeam_epoch-07e31f0221639069.rmeta --extern crossbeam_utils=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libcrossbeam_utils-f79e027db76d9e80.rmeta --extern crypto_common=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libcrypto_common-90952d00c31c59ac.rmeta --extern digest=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libdigest-5622418afc40be81.rmeta --extern dyn_clone=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libdyn_clone-25f46eb376daf8b5.rmeta --extern either=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libeither-80e22dfc3e1c5c46.rmeta --extern elsa=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libelsa-53f23f390de761f9.rmeta --extern ena=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libena-bc1bc17a9ef06b9c.rmeta --extern equivalent=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libequivalent-1518ed3a3334f958.rmeta --extern flate2=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libflate2-be09c2ff53db3b12.rmeta --extern hashbrown=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libhashbrown-a4605afb125cab49.rmeta --extern indexmap=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libindexmap-66ebc7fee9cc3992.rmeta --extern itertools=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libitertools-3faae31013a6d569.rmeta --extern jobserver=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libjobserver-dc11175d12864037.rmeta --extern libc=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/liblibc-c4315cbea07f7651.rmeta --extern measureme=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libmeasureme-883be06614100153.rmeta --extern parking_lot=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libparking_lot-ac2a039b75570a38.rmeta --extern petgraph=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libpetgraph-4e8227debb445cfa.rmeta --extern proc_macro2=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libproc_macro2-eb2b91527e5c2089.rmeta --extern quote=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libquote-dc2ba270ed85e33d.rmeta --extern rand=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/librand-07d07bfd7f2e4321.rmeta --extern rand_xorshift=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/librand_xorshift-ec152f312353855b.rmeta --extern rayon=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/librayon-e34651527c07c48e.rmeta --extern regex=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libregex-9318000599e183c8.rmeta --extern ring=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libring-d374c70fba74bdff.rmeta --extern scoped_tls=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libscoped_tls-1263fbaeec8a7d02.rmeta --extern serde=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libserde-9fc88236cccd0e96.rmeta --extern serde_json=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libserde_json-71dc168e88c9d49e.rmeta --extern serde_path_to_error=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libserde_path_to_error-5b36e74688852215.rmeta --extern smallvec=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libsmallvec-e99cf34c602d54c3.rmeta --extern syn=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libsyn-4aed02b0a58c4fdb.rmeta --extern synstructure=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libsynstructure-8151ad8362c64510.rmeta --extern tempfile=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libtempfile-210e4d4a574aee20.rmeta --extern thin_vec=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libthin_vec-c5a2b73fca668a41.rmeta --extern toml=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libtoml-36d54bcb8d657119.rmeta --extern tracing=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libtracing-14cdbdaac78b7b6b.rmeta --extern walkdir=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/deps/libwalkdir-f8e837ea36881ef7.rmeta -L native=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/build/blake3-f0654ee1dd779804/out -L native=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/build/blake3-f0654ee1dd779804/out -L native=/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/target/debug/build/ring-c1ea7ff9e6e1ad7d/out` (exit status: 1)

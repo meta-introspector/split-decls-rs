@@ -10,12 +10,9 @@
 
 include!("wrap_types.rs");
 
-pub mod reg {
-    #[derive(Copy, Clone, Debug, PartialEq)]
-    pub struct Reg;
-    #[derive(Copy, Clone, Debug, PartialEq)]
-    pub struct RegKind;
+pub mod rustc_macros {
+    pub struct HashStable_Generic;
 }
 
 
-//include!("processed_.._rust_compiler_rustc_abi_src_callconv.rs");
+include!("processed_.._rust_compiler_rustc_abi_src_callconv_reg.rs");
