@@ -6,9 +6,29 @@ use std::process::Command;
 use std::os::unix::process::ExitStatusExt;
 use serde_json::Value;
 
+const AUTO_FIX_CACHE_FILE: &str = "autofix_cache.json";
+
+fn load_autofix_cache() -> HashMap<String, String> {
+    if let Ok(cache_data) = fs::read_to_string(AUTO_FIX_CACHE_FILE) {
+        if let Ok(cache) = serde_json::from_str::<HashMap<String, String>>(&cache_data) {
+            println!("📂 Loaded {} cached auto-fixes", cache.len());
+            return cache;
+        }
+    }
+    HashMap::new()
+}
+
+fn save_autofix_cache(cache: &HashMap<String, String>) {
+    if let Ok(cache_data) = serde_json::to_string_pretty(cache) {
+        let _ = fs::write(AUTO_FIX_CACHE_FILE, cache_data);
+        println!("💾 Saved {} auto-fixes to cache", cache.len());
+    }
+}
+
 fn resolve_all_dependencies(symbol_map: &HashMap<String, Value>, target: &str) -> HashSet<String> {
     let mut resolved = HashSet::new();
     let mut to_process = vec![target.to_string()];
+    let mut autofix_cache = load_autofix_cache();
     
     println!("🔍 Starting recursive resolution from: {}", target);
     
@@ -40,7 +60,7 @@ fn resolve_all_dependencies(symbol_map: &HashMap<String, Value>, target: &str) -
             }
         } else {
             // Try auto-fix before giving up
-            if let Some(found_symbol) = auto_fix_missing_symbol(&current, symbol_map) {
+            if let Some(found_symbol) = auto_fix_missing_symbol(&current, symbol_map, &mut autofix_cache) {
                 println!("🔧 AUTO-FIX: Found {} -> {}", current, found_symbol);
                 to_process.push(found_symbol);
                 continue;
@@ -52,6 +72,8 @@ fn resolve_all_dependencies(symbol_map: &HashMap<String, Value>, target: &str) -
         
         if resolved.len() % 100 == 0 {
             println!("📊 Progress: {} symbols resolved so far...", resolved.len());
+            // Save cache every 100 symbols
+            save_autofix_cache(&autofix_cache);
         }
         
         // Safety check - if we get too many, something is wrong
@@ -59,6 +81,9 @@ fn resolve_all_dependencies(symbol_map: &HashMap<String, Value>, target: &str) -
             panic!("💥 TOO MANY DEPENDENCIES: Resolved {} symbols, expected ~12k. Infinite loop detected!", resolved.len());
         }
     }
+    
+    // Save cache after processing
+    save_autofix_cache(&autofix_cache);
     
     resolved
 }
@@ -160,7 +185,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-fn auto_fix_missing_symbol(missing_symbol: &str, symbol_map: &HashMap<String, Value>) -> Option<String> {
+fn auto_fix_missing_symbol(missing_symbol: &str, symbol_map: &HashMap<String, Value>, cache: &mut HashMap<String, String>) -> Option<String> {
+    // Check cache first
+    if let Some(cached_result) = cache.get(missing_symbol) {
+        println!("💨 CACHE HIT: {} -> {}", missing_symbol, cached_result);
+        return Some(cached_result.clone());
+    }
+    
     println!("🔍 AUTO-FIX: Searching for missing symbol: {}", missing_symbol);
     
     // Clean up the symbol (remove extra spaces)
@@ -169,10 +200,11 @@ fn auto_fix_missing_symbol(missing_symbol: &str, symbol_map: &HashMap<String, Va
     // 1. Search in symbol map for exact matches first
     if symbol_map.contains_key(&cleaned_symbol) {
         println!("🔍 Found exact match after cleanup: {} -> {}", missing_symbol, cleaned_symbol);
+        cache.insert(missing_symbol.to_string(), cleaned_symbol.clone());
         return Some(cleaned_symbol);
     }
     
-    // 2. Search in symbol map for partial matches
+    // 2. Fast partial matching - limit to first 100 matches to avoid CPU overload
     let partial_matches: Vec<_> = symbol_map.keys()
         .filter(|key| {
             key.contains(missing_symbol) || 
@@ -180,82 +212,35 @@ fn auto_fix_missing_symbol(missing_symbol: &str, symbol_map: &HashMap<String, Va
             key.contains(&cleaned_symbol) ||
             cleaned_symbol.contains(*key)
         })
+        .take(100)  // Limit to first 100 matches
         .collect();
     
     if !partial_matches.is_empty() {
-        println!("🔍 Found {} partial matches in symbol map:", partial_matches.len());
+        println!("🔍 Found {} partial matches (showing first 3):", partial_matches.len().min(3));
         for m in partial_matches.iter().take(3) {
             println!("  - {}", m);
         }
-        return Some(partial_matches[0].clone());
+        let result = partial_matches[0].clone();
+        cache.insert(missing_symbol.to_string(), result.clone());
+        return Some(result);
     }
     
-    // 3. Search filesystem for source files containing the symbol
-    if let Ok(grep_results) = std::process::Command::new("grep")
-        .args(&["-r", "--include=*.rs", missing_symbol, "submodules/"])
-        .output() {
-        
-        let output = String::from_utf8_lossy(&grep_results.stdout);
-        if !output.is_empty() {
-            println!("🔍 Found in filesystem:");
-            for line in output.lines().take(3) {
-                println!("  - {}", line);
-            }
-            
-            // Extract potential symbol names from grep results
-            for line in output.lines() {
-                if let Some(file_path) = line.split(':').next() {
-                    // Try to find a symbol that matches this file
-                    let file_stem = std::path::Path::new(file_path)
-                        .file_stem()
-                        .and_then(|s| s.to_str())
-                        .unwrap_or("");
-                    
-                    for key in symbol_map.keys() {
-                        if key.contains(file_stem) || key.contains(missing_symbol) {
-                            return Some(key.clone());
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    // 4. Search for similar function/module names
+    // 3. Fast ending match - only check last component
     let parts: Vec<&str> = cleaned_symbol.split("::").collect();
     if let Some(last_part) = parts.last() {
-        for key in symbol_map.keys() {
-            if key.ends_with(last_part) {
-                println!("🔍 Found similar ending: {} -> {}", missing_symbol, key);
-                return Some(key.clone());
-            }
+        if let Some(key) = symbol_map.keys().find(|key| key.ends_with(last_part)) {
+            println!("🔍 Found similar ending: {} -> {}", missing_symbol, key);
+            cache.insert(missing_symbol.to_string(), key.clone());
+            return Some(key.clone());
         }
     }
     
-    // 5. Search for module-level matches
+    // 4. Fast module match - only check first component  
     if let Some(first_part) = parts.first() {
-        for key in symbol_map.keys() {
-            if key.starts_with(first_part) {
-                println!("🔍 Found similar module: {} -> {}", missing_symbol, key);
-                return Some(key.clone());
-            }
-        }
-    }
-    
-    // 6. Try fuzzy matching - look for keys that contain most of the words
-    let words: Vec<&str> = cleaned_symbol.split("::").collect();
-    if words.len() > 1 {
-        for key in symbol_map.keys() {
-            let mut matches = 0;
-            for word in &words {
-                if key.contains(word) {
-                    matches += 1;
-                }
-            }
-            if matches >= words.len() / 2 {  // At least half the words match
-                println!("🔍 Found fuzzy match: {} -> {}", missing_symbol, key);
-                return Some(key.clone());
-            }
+        if let Some(key) = symbol_map.keys().find(|key| key.starts_with(first_part)) {
+            println!("🔍 Found similar module: {} -> {}", missing_symbol, key);
+            cache.insert(missing_symbol.to_string(), key.clone());
+            return Some(key.clone());
         }
     }
     
