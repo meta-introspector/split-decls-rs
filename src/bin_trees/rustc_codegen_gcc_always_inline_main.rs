@@ -77,12 +77,12 @@ extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
 }
 }};
 
+pub mod intrinsics {
+}
+
 pub mod rustc_codegen_gcc {
     // rustc_codegen_gcc::always_inline::main
     include_dep_0!();
-}
-
-pub mod intrinsics {
 }
 
 pub fn main() {

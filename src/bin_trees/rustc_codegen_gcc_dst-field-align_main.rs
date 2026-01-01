@@ -91,12 +91,12 @@ fn main() {
 }
 }};
 
+pub mod Box {
+}
+
 pub mod rustc_codegen_gcc {
     // rustc_codegen_gcc::dst-field-align::main
     include_dep_0!();
-}
-
-pub mod Box {
 }
 
 pub fn main() {

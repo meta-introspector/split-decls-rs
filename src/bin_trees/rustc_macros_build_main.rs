@@ -1225,14 +1225,14 @@ pub mod consts {
 }
 }};
 
-pub mod rustc_macros {
-    // rustc_macros::build::main
-    include_dep_0!();
-}
-
 pub mod std {
     // std::env::var
     include_dep_1!();
+}
+
+pub mod rustc_macros {
+    // rustc_macros::build::main
+    include_dep_0!();
 }
 
 pub fn main() {

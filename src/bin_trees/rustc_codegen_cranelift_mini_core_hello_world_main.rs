@@ -647,10 +647,10 @@ pub mod rustc_codegen_cranelift {
 pub mod intrinsics {
 }
 
-pub mod Box {
+pub mod Ordering {
 }
 
-pub mod Ordering {
+pub mod Box {
 }
 
 pub fn main() {

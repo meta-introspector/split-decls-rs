@@ -1143,15 +1143,15 @@ impl XorShift64Star {
 pub mod std {
 }
 
-pub mod WorkerThread {
-}
-
 pub mod rustc_thread_pool {
     // rustc_thread_pool::registry::main_loop
     include_dep_0!();
 }
 
 pub mod crate {
+}
+
+pub mod WorkerThread {
 }
 
 pub fn main() {

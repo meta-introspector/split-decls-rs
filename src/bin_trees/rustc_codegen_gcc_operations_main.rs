@@ -47,12 +47,12 @@ extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
 }
 }};
 
+pub mod libc {
+}
+
 pub mod rustc_codegen_gcc {
     // rustc_codegen_gcc::operations::main
     include_dep_0!();
-}
-
-pub mod libc {
 }
 
 pub fn main() {

@@ -1262,12 +1262,12 @@ fn main() {
 pub mod Color {
 }
 
+pub mod std {
+}
+
 pub mod stdarch {
     // stdarch::connect5::main
     include_dep_0!();
-}
-
-pub mod std {
 }
 
 pub fn main() {

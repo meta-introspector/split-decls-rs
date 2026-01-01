@@ -90,12 +90,12 @@ fn main() {
 }
 }};
 
+pub mod Box {
+}
+
 pub mod rustc_codegen_cranelift {
     // rustc_codegen_cranelift::dst-field-align::main
     include_dep_0!();
-}
-
-pub mod Box {
 }
 
 pub fn main() {

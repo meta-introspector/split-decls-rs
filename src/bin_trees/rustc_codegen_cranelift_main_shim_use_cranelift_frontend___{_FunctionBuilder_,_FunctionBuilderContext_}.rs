@@ -190,12 +190,12 @@ pub(crate) fn maybe_create_entry_wrapper(
 }
 }};
 
+pub mod cranelift_frontend  {
+}
+
 pub mod rustc_codegen_cranelift {
     // rustc_codegen_cranelift::main_shim::use_cranelift_frontend___{_FunctionBuilder_,_FunctionBuilderContext_}
     include_dep_0!();
-}
-
-pub mod cranelift_frontend  {
 }
 
 pub fn main() {

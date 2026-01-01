@@ -55,10 +55,10 @@ fn main() {
 }
 }};
 
-pub mod std {
+pub mod core {
 }
 
-pub mod core {
+pub mod std {
 }
 
 pub mod rustc_codegen_cranelift {

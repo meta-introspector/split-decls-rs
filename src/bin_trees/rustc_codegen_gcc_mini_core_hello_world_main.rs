@@ -474,18 +474,18 @@ fn check_niche_behavior () {
 }
 }};
 
-pub mod Ordering {
-}
-
 pub mod rustc_codegen_gcc {
     // rustc_codegen_gcc::mini_core_hello_world::main
     include_dep_0!();
 }
 
-pub mod intrinsics {
+pub mod Ordering {
 }
 
 pub mod Box {
+}
+
+pub mod intrinsics {
 }
 
 pub fn main() {

@@ -1350,9 +1350,6 @@ pub mod consts {
 }
 }};
 
-pub mod EarlyExit {
-}
-
 pub mod backtrace {
     // backtrace::current-exe-mismatch::main
     include_dep_0!();
@@ -1361,6 +1358,9 @@ pub mod backtrace {
 pub mod std {
     // std::env::var
     include_dep_1!();
+}
+
+pub mod EarlyExit {
 }
 
 pub fn main() {

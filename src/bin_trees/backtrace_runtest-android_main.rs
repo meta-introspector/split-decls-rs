@@ -1259,9 +1259,6 @@ fn main() {
 }
 }};
 
-pub mod crate {
-}
-
 pub mod backtrace {
     // backtrace::runtest-android::main
     include_dep_1!();
@@ -1273,6 +1270,9 @@ pub mod std {
 }
 
 pub mod String {
+}
+
+pub mod crate {
 }
 
 pub fn main() {

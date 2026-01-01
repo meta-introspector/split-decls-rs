@@ -64,12 +64,12 @@ fn main() {
 }
 }};
 
-pub mod std {
-}
-
 pub mod rustc_codegen_cranelift {
     // rustc_codegen_cranelift::track-caller-attribute::main
     include_dep_0!();
+}
+
+pub mod std {
 }
 
 pub fn main() {

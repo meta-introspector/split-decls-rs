@@ -2509,14 +2509,14 @@ fn tracked_env_var_or_fallback(key: &str, fallback: &str) -> String {
 }
 }};
 
-pub mod cc {
+pub mod std {
+    // std::env::var_os
+    include_dep_0!();
+    // std::env::var
+    include_dep_1!();
 }
 
-pub mod std {
-    // std::env::var
-    include_dep_0!();
-    // std::env::var_os
-    include_dep_1!();
+pub mod cc {
 }
 
 pub mod profiler_builtins {

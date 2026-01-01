@@ -1890,16 +1890,7 @@ pub mod consts {
 }
 }};
 
-pub mod os_imp {
-}
-
-pub mod c {
-}
-
 pub mod configure {
-}
-
-pub mod crate {
 }
 
 pub mod compiler_builtins {
@@ -1907,9 +1898,18 @@ pub mod compiler_builtins {
     include_dep_0!();
 }
 
+pub mod c {
+}
+
 pub mod std {
     // std::env::current_dir
     include_dep_1!();
+}
+
+pub mod crate {
+}
+
+pub mod os_imp {
 }
 
 pub fn main() {

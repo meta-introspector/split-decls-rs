@@ -190,28 +190,25 @@ pub(crate) fn maybe_create_entry_wrapper(
 }
 }};
 
+pub mod ty {
+}
+
 pub mod types {
 }
 
-pub mod crate {
-}
-
-pub mod cranelift_frontend {
-}
-
-pub mod Linkage {
+pub mod rustc_middle {
 }
 
 pub mod Context {
 }
 
+pub mod rustc_session {
+}
+
+pub mod Linkage {
+}
+
 pub mod Instance {
-}
-
-pub mod rustc_span {
-}
-
-pub mod ty {
 }
 
 pub mod rustc_codegen_cranelift {
@@ -219,10 +216,13 @@ pub mod rustc_codegen_cranelift {
     include_dep_0!();
 }
 
-pub mod rustc_session {
+pub mod cranelift_frontend {
 }
 
-pub mod rustc_middle {
+pub mod crate {
+}
+
+pub mod rustc_span {
 }
 
 pub mod rustc_hir {

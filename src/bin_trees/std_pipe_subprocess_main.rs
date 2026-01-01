@@ -62,15 +62,15 @@ fn main() {
 }
 }};
 
-pub mod String {
-}
-
 pub mod env {
 }
 
 pub mod std {
     // std::pipe_subprocess::main
     include_dep_0!();
+}
+
+pub mod String {
 }
 
 pub fn main() {

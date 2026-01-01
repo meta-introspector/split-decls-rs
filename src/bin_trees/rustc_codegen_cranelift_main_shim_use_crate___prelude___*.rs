@@ -190,12 +190,12 @@ pub(crate) fn maybe_create_entry_wrapper(
 }
 }};
 
-pub mod crate  {
-}
-
 pub mod rustc_codegen_cranelift {
     // rustc_codegen_cranelift::main_shim::use_crate___prelude___*
     include_dep_0!();
+}
+
+pub mod crate  {
 }
 
 pub fn main() {

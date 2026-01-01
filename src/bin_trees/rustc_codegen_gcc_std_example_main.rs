@@ -326,18 +326,18 @@ fn map(a: Option<(u8, Box<Instruction>)>) -> Option<Box<Instruction>> {
 }
 }};
 
-pub mod std {
+pub mod rustc_codegen_gcc {
+    // rustc_codegen_gcc::std_example::main
+    include_dep_0!();
 }
 
 pub mod LoopState {
 }
 
-pub mod Box {
+pub mod std {
 }
 
-pub mod rustc_codegen_gcc {
-    // rustc_codegen_gcc::std_example::main
-    include_dep_0!();
+pub mod Box {
 }
 
 pub fn main() {
