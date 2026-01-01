@@ -38,7 +38,16 @@ fn semantic_patch_content(content: &str, file_name: &str) -> Result<String, Box<
     }
 }
 
-fn apply_ast_patches(content: &str, file_name: &str) -> Result<String, Box<dyn std::error::Error>> {
+fn record_ast_patch(ast_id: &str, patch_type: &str, original: &str, replacement: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let patch_record = format!(
+        "# AST Patch Record: {}\n\n## Patch Type: {}\n\n## Original:\n```rust\n{}\n```\n\n## Replacement:\n```rust\n{}\n```\n\n## Applied: {}\n",
+        ast_id, patch_type, original, replacement, chrono::Utc::now().format("%Y-%m-%d %H:%M:%S UTC")
+    );
+    
+    let patch_file = format!("proofs/ast_patch_{}.md", ast_id.replace("::", "_"));
+    fs::write(patch_file, patch_record)?;
+    Ok(())
+}
     let mut patched_content = content.to_string();
     
     // Check for AST patch files and replace specific nodes

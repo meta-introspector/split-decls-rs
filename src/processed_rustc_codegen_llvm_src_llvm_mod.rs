@@ -127,3 +127,6 @@
 /* FP:mod.rs-0133 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_llvm_mod_FN_0067
 /* FP:mod.rs-0134 */ pub (crate) fn set_dso_local < 'll > (v : & 'll Value) { unsafe { LLVMRustSetDSOLocal (v , true) ; } }
 /* FP:mod.rs-0135 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_llvm_mod_FN_0068
+pub fn placeholder_mod_fn_0068() {
+    // Generated placeholder for missing AST node FN_0068
+}

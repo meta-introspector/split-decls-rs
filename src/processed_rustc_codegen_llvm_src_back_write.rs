@@ -122,3 +122,6 @@
 /* FP:write.rs-0127 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_back_write_FN_0064
 /* FP:write.rs-0128 */ fn record_artifact_size (self_profiler_ref : & SelfProfilerRef , artifact_kind : & 'static str , path : & Path ,) { if ! self_profiler_ref . enabled () { return ; } if let Some (artifact_name) = path . file_name () { let file_size = std :: fs :: metadata (path) . map (| m | m . len ()) . unwrap_or (0) ; self_profiler_ref . artifact_size (artifact_kind , artifact_name . to_string_lossy () , file_size) ; } }
 /* FP:write.rs-0129 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_back_write_FN_0065
+pub fn placeholder_write_fn_0065() {
+    // Generated placeholder for missing AST node FN_0065
+}
