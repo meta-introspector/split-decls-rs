@@ -2,6 +2,7 @@ use std::fs;
 use std::path::Path;
 use std::process::Command;
 use anyhow::Result;
+use split_decls_genesis::preprocessing::preprocess_content;
 
 /// Incremental compilation driver - adds files one by one until errors occur
 pub struct IncrementalDriver {
@@ -40,8 +41,9 @@ impl IncrementalDriver {
         for (i, file) in self.files.iter().enumerate() {
             println!("\n📁 Adding file {}/{}: {}", i + 1, self.files.len(), file);
             
-            // Read the file content
-            let file_content = fs::read_to_string(format!("src/{}", file))?;
+            // Read and preprocess the file content
+            let raw_content = fs::read_to_string(format!("src/{}", file))?;
+            let _file_content = preprocess_content(&raw_content);
             
             // Add include to current content
             self.current_content.push_str(&format!("\ninclude!(\"{}\");\n", file));
