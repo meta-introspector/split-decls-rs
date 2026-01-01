@@ -114,8 +114,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Increase recursion limit for complex macros
     println!("cargo:rustc-cfg=feature=\"recursion_limit_256\"");
     
-    // Read symbol map
-    let symbol_data = fs::read_to_string("symbol_map.json")?;
+    // Read symbol map from compressed file
+    let symbol_data = {
+        use std::io::Read;
+        let file = fs::File::open("symbol_map.json.gz")?;
+        let mut decoder = flate2::read::GzDecoder::new(file);
+        let mut content = String::new();
+        decoder.read_to_string(&mut content)?;
+        content
+    };
     let symbol_map: HashMap<String, Value> = serde_json::from_str(&symbol_data)?;
     
     // Extract all unique source files
