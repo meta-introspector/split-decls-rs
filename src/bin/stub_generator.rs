@@ -51,7 +51,7 @@ impl StubGenerator {
     fn process_use_tree(&mut self, tree: &UseTree) {
         match tree {
             UseTree::Path(path) => {
-                let path_str = self.path_to_string(&path.path);
+                let path_str = path.ident.to_string();
                 if path_str.starts_with("crate::") {
                     self.missing_imports.insert(path_str);
                 }
@@ -85,7 +85,7 @@ impl StubGenerator {
 
     /// Generate stub modules for all missing imports
     pub fn generate_stubs(&mut self) -> String {
-        let mut stubs = Vec::new();
+        let mut stubs: Vec<String> = Vec::new();
         let mut modules = std::collections::BTreeMap::new();
 
         for import in &self.missing_imports {

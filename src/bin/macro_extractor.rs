@@ -107,7 +107,7 @@ fn extract_macro_defs(content: &str, macros: &mut Vec<String>) {
     }
 }
 
-fn generate_macro_skeleton(macros: &[String]) -> Result<()> {
+fn generate_macro_skeleton_v2(macros: &[String]) -> Result<()> {
     let mut skeleton = String::from("// Macro-based skeleton\n\n");
     
     for macro_def in macros {

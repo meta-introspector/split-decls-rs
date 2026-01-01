@@ -9,8 +9,6 @@
 
 // Minimal external crates
 extern crate tracing;
-extern crate rustc_target;
-extern crate rustc_fs_util;
 extern crate synstructure;
 extern crate proc_macro;
 

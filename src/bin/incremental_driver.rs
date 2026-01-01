@@ -28,7 +28,7 @@ impl IncrementalDriver {
         files.sort();
         
         Ok(Self {
-            base_lib,
+            base_lib: base_lib.clone(),
             files,
             current_content: base_lib,
         })

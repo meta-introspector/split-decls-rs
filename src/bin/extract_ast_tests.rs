@@ -62,7 +62,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     
     // Generate test case template
-    let test_case = r#"
+    let test_case = r##"
 #[test]
 fn test_ast_compilation() {
     let ast_code = r#"
@@ -75,10 +75,9 @@ fn test_ast_compilation() {
     // Test compilation
     assert!(compile_ast_fragment(ast_code).is_ok());
 }
-"#;
+"##;
     
     fs::write("ast_test_template.rs", test_case)?;
-    println!("\n✅ Generated ast_test_template.rs");
     
     Ok(())
 }
