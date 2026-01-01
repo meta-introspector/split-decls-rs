@@ -6,6 +6,7 @@ use std::path::Path;
 use serde_json::Value;
 use syn::{parse_file, Item, ItemMod, Attribute, Meta, parse_str, visit::Visit};
 use quote::{quote, ToTokens};
+use flate2::read::GzDecoder;
 
 fn load_error_exclusions() -> HashSet<String> {
     let mut exclusions = HashSet::new();
@@ -773,23 +774,37 @@ fn build_rustc_from_symbol_map() -> Result<(), Box<dyn std::error::Error>> {
     }
     println!("📁 Found {} unique source files", source_files.len());
     
+    // Show first few files for debugging
+    for (i, file) in source_files.iter().take(5).enumerate() {
+        println!("  File {}: {}", i + 1, file);
+    }
+    
     // Group files by crate (excluding error-prone files)
     let mut crate_files: HashMap<String, Vec<String>> = HashMap::new();
     let mut excluded_count = 0;
+    let mut stopped_at_first_error = false;
+    
     for file in &source_files {
+        // Stop processing after first exclusion
+        if stopped_at_first_error {
+            println!("🛑 Stopped processing after first excluded file");
+            break;
+        }
+        
         // Check if file should be excluded
         if should_exclude_file(file, &exclusions) {
             println!("⏭️  Skipping {} (in error exclusion list)", file);
             excluded_count += 1;
+            stopped_at_first_error = true;
             continue;
         }
         
         if let Some(crate_name) = extract_crate_name(file) {
-            crate_files.entry(crate_name).or_insert_with(Vec::new).push(file.clone());
+            crate_files.entry(crate_name).or_insert_with(Vec::new).push(file.to_string());
         }
     }
-    println!("📊 Excluded {} files, processing {} files in {} crates", 
-             excluded_count, source_files.len() - excluded_count, crate_files.len());
+    println!("📊 Excluded {} files, processing {} files in {} crates (stopped at first error: {})", 
+             excluded_count, source_files.len() - excluded_count, crate_files.len(), stopped_at_first_error);
     
     // Generate include file with all submodules
     generate_complete_includes(&crate_files)?;
