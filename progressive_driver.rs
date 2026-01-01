@@ -1,26 +1,18 @@
 use std::fs;
 use std::io::{Write, Read};
 use std::process::Command;
+use flate2::read::GzDecoder;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("🔧 Progressive Incremental Compiler Driver");
     println!("Testing progressively larger sets until failure");
     
-    // Load actual files from compressed symbol map
-    let symbol_map_content = match fs::read("symbol_map.json.gz") {
-        Ok(compressed_data) => {
-            println!("📦 Decompressing symbol_map.json.gz in memory...");
-            match decompress_gzip(&compressed_data) {
-                Ok(content) => content,
-                Err(e) => {
-                    println!("⚠️  Failed to decompress: {}, using fallback", e);
-                    return run_fallback_test();
-                }
-            }
-        },
+    // Load actual files from symbol map
+    let symbol_map_content = match fs::read_to_string("symbol_map.json") {
+        Ok(content) => content,
         Err(_) => {
-            println!("⚠️  symbol_map.json.gz not found, using fallback test set");
-            return run_fallback_test();
+            println!("❌ symbol_map.json not found");
+            return Err("symbol_map.json required".into());
         }
     };
     
@@ -69,6 +61,37 @@ fn run_fallback_test() -> Result<(), Box<dyn std::error::Error>> {
         "rustc_metadata/src/lib.rs",
         "rustc_passes/src/lib.rs",
         "rustc_driver/src/lib.rs",
+        // Add more challenging files
+        "rustc_codegen_llvm/src/lib.rs",
+        "rustc_builtin_macros/src/lib.rs",
+        "rustc_parse/src/lib.rs",
+        "rustc_expand/src/lib.rs",
+        "rustc_serialize/src/lib.rs",
+        "rustc_target/src/lib.rs",
+        "rustc_feature/src/lib.rs",
+        "rustc_query_system/src/lib.rs",
+        "rustc_incremental/src/lib.rs",
+        "rustc_symbol_mangling/src/lib.rs",
+        "rustc_privacy/src/lib.rs",
+        "rustc_plugin_impl/src/lib.rs",
+        "rustc_save_analysis/src/lib.rs",
+        "rustc_typeck/src/lib.rs",
+        "rustc_mir/src/lib.rs",
+        "rustc_codegen_utils/src/lib.rs",
+        "rustc_allocator/src/lib.rs",
+        "rustc_apfloat/src/lib.rs",
+        "rustc_arena/src/lib.rs",
+        "rustc_attr/src/lib.rs",
+        "rustc_fs_util/src/lib.rs",
+        "rustc_graphviz/src/lib.rs",
+        "rustc_index/src/lib.rs",
+        "rustc_lexer/src/lib.rs",
+        "rustc_log/src/lib.rs",
+        "rustc_macros/src/lib.rs",
+        "rustc_query_impl/src/lib.rs",
+        "rustc_rayon/src/lib.rs",
+        "rustc_rayon_core/src/lib.rs",
+        "rustc_serialize_derive/src/lib.rs",
     ].into_iter().map(|s| s.to_string()).collect();
     run_progressive_test(test_files)
 }

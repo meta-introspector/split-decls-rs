@@ -1837,6 +1837,7 @@ dependencies = [
  "serde_json",
  "smallvec",
  "syn",
+ "synstructure",
  "tempfile",
  "thin-vec",
  "toml",
