@@ -1,493 +1,82 @@
-use std::fmt::{self, Debug};
-use std::num::NonZero;
-use std::ops::RangeInclusive;
-
-use serde::Serialize;
-
-use crate::compiler_interface::with;
-use crate::mir::FieldIdx;
-use crate::target::{MachineInfo, MachineSize as Size};
-use crate::ty::{Align, Ty, VariantIdx};
-use crate::{Error, Opaque, error};
-
-/// A function ABI definition.
-#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize)]
-pub struct FnAbi {
-    /// The types of each argument.
-    pub args: Vec<ArgAbi>,
-
-    /// The expected return type.
-    pub ret: ArgAbi,
-
-    /// The count of non-variadic arguments.
-    ///
-    /// Should only be different from `args.len()` when a function is a C variadic function.
-    pub fixed_count: u32,
-
-    /// The ABI convention.
-    pub conv: CallConvention,
-
-    /// Whether this is a variadic C function,
-    pub c_variadic: bool,
-}
-
-/// Information about the ABI of a function's argument, or return value.
-#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize)]
-pub struct ArgAbi {
-    pub ty: Ty,
-    pub layout: Layout,
-    pub mode: PassMode,
-}
-
-/// How a function argument should be passed in to the target function.
-#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize)]
-pub enum PassMode {
-    /// Ignore the argument.
-    ///
-    /// The argument is either uninhabited or a ZST.
-    Ignore,
-    /// Pass the argument directly.
-    ///
-    /// The argument has a layout abi of `Scalar` or `Vector`.
-    Direct(Opaque),
-    /// Pass a pair's elements directly in two arguments.
-    ///
-    /// The argument has a layout abi of `ScalarPair`.
-    Pair(Opaque, Opaque),
-    /// Pass the argument after casting it.
-    Cast { pad_i32: bool, cast: Opaque },
-    /// Pass the argument indirectly via a hidden pointer.
-    Indirect { attrs: Opaque, meta_attrs: Opaque, on_stack: bool },
-}
-
-/// The layout of a type, alongside the type itself.
-#[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Serialize)]
-pub struct TyAndLayout {
-    pub ty: Ty,
-    pub layout: Layout,
-}
-
-/// The layout of a type in memory.
-#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize)]
-pub struct LayoutShape {
-    /// The fields location within the layout
-    pub fields: FieldsShape,
-
-    /// Encodes information about multi-variant layouts.
-    /// Even with `Multiple` variants, a layout still has its own fields! Those are then
-    /// shared between all variants.
-    ///
-    /// To access all fields of this layout, both `fields` and the fields of the active variant
-    /// must be taken into account.
-    pub variants: VariantsShape,
-
-    /// The `abi` defines how this data is passed between functions.
-    pub abi: ValueAbi,
-
-    /// The ABI mandated alignment in bytes.
-    pub abi_align: Align,
-
-    /// The size of this layout in bytes.
-    pub size: Size,
-}
-
-impl LayoutShape {
-    /// Returns `true` if the layout corresponds to an unsized type.
-    #[inline]
-    pub fn is_unsized(&self) -> bool {
-        self.abi.is_unsized()
-    }
-
-    #[inline]
-    pub fn is_sized(&self) -> bool {
-        !self.abi.is_unsized()
-    }
-
-    /// Returns `true` if the type is sized and a 1-ZST (meaning it has size 0 and alignment 1).
-    pub fn is_1zst(&self) -> bool {
-        self.is_sized() && self.size.bits() == 0 && self.abi_align == 1
-    }
-}
-
-#[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Serialize)]
-pub struct Layout(usize);
-
-impl Layout {
-    pub fn shape(self) -> LayoutShape {
-        with(|cx| cx.layout_shape(self))
-    }
-}
-
-impl crate::IndexedVal for Layout {
-    fn to_val(index: usize) -> Self {
-        Layout(index)
-    }
-    fn to_index(&self) -> usize {
-        self.0
-    }
-}
-
-/// Describes how the fields of a type are shaped in memory.
-#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize)]
-pub enum FieldsShape {
-    /// Scalar primitives and `!`, which never have fields.
-    Primitive,
-
-    /// All fields start at no offset. The `usize` is the field count.
-    Union(NonZero<usize>),
-
-    /// Array/vector-like placement, with all fields of identical types.
-    Array { stride: Size, count: u64 },
-
-    /// Struct-like placement, with precomputed offsets.
-    ///
-    /// Fields are guaranteed to not overlap, but note that gaps
-    /// before, between and after all the fields are NOT always
-    /// padding, and as such their contents may not be discarded.
-    /// For example, enum variants leave a gap at the start,
-    /// where the discriminant field in the enum layout goes.
-    Arbitrary {
-        /// Offsets for the first byte of each field,
-        /// ordered to match the source definition order.
-        /// I.e.: It follows the same order as [super::ty::VariantDef::fields()].
-        /// This vector does not go in increasing order.
-        offsets: Vec<Size>,
-    },
-}
-
-impl FieldsShape {
-    pub fn fields_by_offset_order(&self) -> Vec<FieldIdx> {
-        match self {
-            FieldsShape::Primitive => vec![],
-            FieldsShape::Union(_) | FieldsShape::Array { .. } => (0..self.count()).collect(),
-            FieldsShape::Arbitrary { offsets, .. } => {
-                let mut indices = (0..offsets.len()).collect::<Vec<_>>();
-                indices.sort_by_key(|idx| offsets[*idx]);
-                indices
-            }
-        }
-    }
-
-    pub fn count(&self) -> usize {
-        match self {
-            FieldsShape::Primitive => 0,
-            FieldsShape::Union(count) => count.get(),
-            FieldsShape::Array { count, .. } => *count as usize,
-            FieldsShape::Arbitrary { offsets, .. } => offsets.len(),
-        }
-    }
-}
-
-#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize)]
-pub enum VariantsShape {
-    /// A type with no valid variants. Must be uninhabited.
-    Empty,
-
-    /// Single enum variants, structs/tuples, unions, and all non-ADTs.
-    Single { index: VariantIdx },
-
-    /// Enum-likes with more than one inhabited variant: each variant comes with
-    /// a *discriminant* (usually the same as the variant index but the user can
-    /// assign explicit discriminant values). That discriminant is encoded
-    /// as a *tag* on the machine. The layout of each variant is
-    /// a struct, and they all have space reserved for the tag.
-    /// For enums, the tag is the sole field of the layout.
-    Multiple {
-        tag: Scalar,
-        tag_encoding: TagEncoding,
-        tag_field: usize,
-        variants: Vec<LayoutShape>,
-    },
-}
-
-#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize)]
-pub enum TagEncoding {
-    /// The tag directly stores the discriminant, but possibly with a smaller layout
-    /// (so converting the tag to the discriminant can require sign extension).
-    Direct,
-
-    /// Niche (values invalid for a type) encoding the discriminant:
-    /// Discriminant and variant index coincide.
-    /// The variant `untagged_variant` contains a niche at an arbitrary
-    /// offset (field `tag_field` of the enum), which for a variant with
-    /// discriminant `d` is set to
-    /// `(d - niche_variants.start).wrapping_add(niche_start)`.
-    ///
-    /// For example, `Option<(usize, &T)>`  is represented such that
-    /// `None` has a null pointer for the second tuple field, and
-    /// `Some` is the identity function (with a non-null reference).
-    Niche {
-        untagged_variant: VariantIdx,
-        niche_variants: RangeInclusive<VariantIdx>,
-        niche_start: u128,
-    },
-}
-
-/// Describes how values of the type are passed by target ABIs,
-/// in terms of categories of C types there are ABI rules for.
-#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize)]
-pub enum ValueAbi {
-    Scalar(Scalar),
-    ScalarPair(Scalar, Scalar),
-    Vector {
-        element: Scalar,
-        count: u64,
-    },
-    Aggregate {
-        /// If true, the size is exact, otherwise it's only a lower bound.
-        sized: bool,
-    },
-}
-
-impl ValueAbi {
-    /// Returns `true` if the layout corresponds to an unsized type.
-    pub fn is_unsized(&self) -> bool {
-        match *self {
-            ValueAbi::Scalar(_) | ValueAbi::ScalarPair(..) | ValueAbi::Vector { .. } => false,
-            ValueAbi::Aggregate { sized } => !sized,
-        }
-    }
-}
-
-/// Information about one scalar component of a Rust type.
-#[derive(Clone, Copy, PartialEq, Eq, Hash, Debug, Serialize)]
-pub enum Scalar {
-    Initialized {
-        /// The primitive type used to represent this value.
-        value: Primitive,
-        /// The range that represents valid values.
-        /// The range must be valid for the `primitive` size.
-        valid_range: WrappingRange,
-    },
-    Union {
-        /// Unions never have niches, so there is no `valid_range`.
-        /// Even for unions, we need to use the correct registers for the kind of
-        /// values inside the union, so we keep the `Primitive` type around.
-        /// It is also used to compute the size of the scalar.
-        value: Primitive,
-    },
-}
-
-impl Scalar {
-    pub fn has_niche(&self, target: &MachineInfo) -> bool {
-        match self {
-            Scalar::Initialized { value, valid_range } => {
-                !valid_range.is_full(value.size(target)).unwrap()
-            }
-            Scalar::Union { .. } => false,
-        }
-    }
-}
-
-/// Fundamental unit of memory access and layout.
-#[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Serialize)]
-pub enum Primitive {
-    /// The `bool` is the signedness of the `Integer` type.
-    ///
-    /// One would think we would not care about such details this low down,
-    /// but some ABIs are described in terms of C types and ISAs where the
-    /// integer arithmetic is done on {sign,zero}-extended registers, e.g.
-    /// a negative integer passed by zero-extension will appear positive in
-    /// the callee, and most operations on it will produce the wrong values.
-    Int {
-        length: IntegerLength,
-        signed: bool,
-    },
-    Float {
-        length: FloatLength,
-    },
-    Pointer(AddressSpace),
-}
-
-impl Primitive {
-    pub fn size(self, target: &MachineInfo) -> Size {
-        match self {
-            Primitive::Int { length, .. } => Size::from_bits(length.bits()),
-            Primitive::Float { length } => Size::from_bits(length.bits()),
-            Primitive::Pointer(_) => target.pointer_width,
-        }
-    }
-}
-
-/// Enum representing the existing integer lengths.
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Serialize)]
-pub enum IntegerLength {
-    I8,
-    I16,
-    I32,
-    I64,
-    I128,
-}
-
-/// Enum representing the existing float lengths.
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Serialize)]
-pub enum FloatLength {
-    F16,
-    F32,
-    F64,
-    F128,
-}
-
-impl IntegerLength {
-    pub fn bits(self) -> usize {
-        match self {
-            IntegerLength::I8 => 8,
-            IntegerLength::I16 => 16,
-            IntegerLength::I32 => 32,
-            IntegerLength::I64 => 64,
-            IntegerLength::I128 => 128,
-        }
-    }
-}
-
-impl FloatLength {
-    pub fn bits(self) -> usize {
-        match self {
-            FloatLength::F16 => 16,
-            FloatLength::F32 => 32,
-            FloatLength::F64 => 64,
-            FloatLength::F128 => 128,
-        }
-    }
-}
-
-/// An identifier that specifies the address space that some operation
-/// should operate on. Special address spaces have an effect on code generation,
-/// depending on the target and the address spaces it implements.
-#[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
-pub struct AddressSpace(pub u32);
-
-impl AddressSpace {
-    /// The default address space, corresponding to data space.
-    pub const DATA: Self = AddressSpace(0);
-}
-
-/// Inclusive wrap-around range of valid values (bitwise representation), that is, if
-/// start > end, it represents `start..=MAX`, followed by `0..=end`.
-///
-/// That is, for an i8 primitive, a range of `254..=2` means following
-/// sequence:
-///
-///    254 (-2), 255 (-1), 0, 1, 2
-#[derive(Clone, Copy, PartialEq, Eq, Hash, Serialize)]
-pub struct WrappingRange {
-    pub start: u128,
-    pub end: u128,
-}
-
-impl WrappingRange {
-    /// Returns `true` if `size` completely fills the range.
-    #[inline]
-    pub fn is_full(&self, size: Size) -> Result<bool, Error> {
-        let Some(max_value) = size.unsigned_int_max() else {
-            return Err(error!("Expected size <= 128 bits, but found {} instead", size.bits()));
-        };
-        if self.start <= max_value && self.end <= max_value {
-            Ok(self.start == (self.end.wrapping_add(1) & max_value))
-        } else {
-            Err(error!("Range `{self:?}` out of bounds for size `{}` bits.", size.bits()))
-        }
-    }
-
-    /// Returns `true` if `v` is contained in the range.
-    #[inline(always)]
-    pub fn contains(&self, v: u128) -> bool {
-        if self.wraps_around() {
-            self.start <= v || v <= self.end
-        } else {
-            self.start <= v && v <= self.end
-        }
-    }
-
-    /// Returns `true` if the range wraps around.
-    /// I.e., the range represents the union of `self.start..=MAX` and `0..=self.end`.
-    /// Returns `false` if this is a non-wrapping range, i.e.: `self.start..=self.end`.
-    #[inline]
-    pub fn wraps_around(&self) -> bool {
-        self.start > self.end
-    }
-}
-
-impl Debug for WrappingRange {
-    fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
-        if self.start > self.end {
-            write!(fmt, "(..={}) | ({}..)", self.end, self.start)?;
-        } else {
-            write!(fmt, "{}..={}", self.start, self.end)?;
-        }
-        Ok(())
-    }
-}
-
-/// General language calling conventions.
-#[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Serialize)]
-pub enum CallConvention {
-    C,
-    Rust,
-
-    Cold,
-    PreserveMost,
-    PreserveAll,
-
-    Custom,
-
-    // Target-specific calling conventions.
-    ArmAapcs,
-    CCmseNonSecureCall,
-    CCmseNonSecureEntry,
-
-    Msp430Intr,
-
-    PtxKernel,
-
-    GpuKernel,
-
-    X86Fastcall,
-    X86Intr,
-    X86Stdcall,
-    X86ThisCall,
-    X86VectorCall,
-
-    X86_64SysV,
-    X86_64Win64,
-
-    AvrInterrupt,
-    AvrNonBlockingInterrupt,
-
-    RiscvInterrupt,
-}
-
-#[non_exhaustive]
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Serialize)]
-pub struct ReprFlags {
-    pub is_simd: bool,
-    pub is_c: bool,
-    pub is_transparent: bool,
-    pub is_linear: bool,
-}
-
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Serialize)]
-pub enum IntegerType {
-    /// Pointer-sized integer type, i.e. `isize` and `usize`.
-    Pointer {
-        /// Signedness. e.g. `true` for `isize`
-        is_signed: bool,
-    },
-    /// Fixed-sized integer type, e.g. `i8`, `u32`, `i128`.
-    Fixed {
-        /// Length of this integer type. e.g. `IntegerLength::I8` for `u8`.
-        length: IntegerLength,
-        /// Signedness. e.g. `false` for `u8`
-        is_signed: bool,
-    },
-}
-
-/// Representation options provided by the user
-#[non_exhaustive]
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Serialize)]
-pub struct ReprOptions {
-    pub int: Option<IntegerType>,
-    pub align: Option<Align>,
-    pub pack: Option<Align>,
-    pub flags: ReprFlags,
-}
+/* FP:abi.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_USE_0001
+/* FP:abi.rs-0002 */ use std :: fmt :: { self , Debug } ;
+/* FP:abi.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_USE_0002
+/* FP:abi.rs-0004 */ use std :: num :: NonZero ;
+/* FP:abi.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_USE_0003
+/* FP:abi.rs-0006 */ use std :: ops :: RangeInclusive ;
+/* FP:abi.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_USE_0004
+/* FP:abi.rs-0008 */ use serde :: Serialize ;
+/* FP:abi.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_USE_0005
+/* FP:abi.rs-0010 */ use crate :: compiler_interface :: with ;
+/* FP:abi.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_USE_0006
+/* FP:abi.rs-0012 */ use crate :: mir :: FieldIdx ;
+/* FP:abi.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_USE_0007
+/* FP:abi.rs-0014 */ use crate :: target :: { MachineInfo , MachineSize as Size } ;
+/* FP:abi.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_USE_0008
+/* FP:abi.rs-0016 */ use crate :: ty :: { Align , Ty , VariantIdx } ;
+/* FP:abi.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_USE_0009
+/* FP:abi.rs-0018 */ use crate :: { Error , Opaque , error } ;
+/* FP:abi.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_STRUCT_0010
+/* FP:abi.rs-0020 */ # [doc = " A function ABI definition."] # [derive (Clone , Debug , PartialEq , Eq , Hash , Serialize)] pub struct FnAbi { # [doc = " The types of each argument."] pub args : Vec < ArgAbi > , # [doc = " The expected return type."] pub ret : ArgAbi , # [doc = " The count of non-variadic arguments."] # [doc = ""] # [doc = " Should only be different from `args.len()` when a function is a C variadic function."] pub fixed_count : u32 , # [doc = " The ABI convention."] pub conv : CallConvention , # [doc = " Whether this is a variadic C function,"] pub c_variadic : bool , }
+/* FP:abi.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_STRUCT_0011
+/* FP:abi.rs-0022 */ # [doc = " Information about the ABI of a function's argument, or return value."] # [derive (Clone , Debug , PartialEq , Eq , Hash , Serialize)] pub struct ArgAbi { pub ty : Ty , pub layout : Layout , pub mode : PassMode , }
+/* FP:abi.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_ENUM_0012
+/* FP:abi.rs-0024 */ # [doc = " How a function argument should be passed in to the target function."] # [derive (Clone , Debug , PartialEq , Eq , Hash , Serialize)] pub enum PassMode { # [doc = " Ignore the argument."] # [doc = ""] # [doc = " The argument is either uninhabited or a ZST."] Ignore , # [doc = " Pass the argument directly."] # [doc = ""] # [doc = " The argument has a layout abi of `Scalar` or `Vector`."] Direct (Opaque) , # [doc = " Pass a pair's elements directly in two arguments."] # [doc = ""] # [doc = " The argument has a layout abi of `ScalarPair`."] Pair (Opaque , Opaque) , # [doc = " Pass the argument after casting it."] Cast { pad_i32 : bool , cast : Opaque } , # [doc = " Pass the argument indirectly via a hidden pointer."] Indirect { attrs : Opaque , meta_attrs : Opaque , on_stack : bool } , }
+/* FP:abi.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_STRUCT_0013
+/* FP:abi.rs-0026 */ # [doc = " The layout of a type, alongside the type itself."] # [derive (Copy , Clone , Debug , PartialEq , Eq , Hash , Serialize)] pub struct TyAndLayout { pub ty : Ty , pub layout : Layout , }
+/* FP:abi.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_STRUCT_0014
+/* FP:abi.rs-0028 */ # [doc = " The layout of a type in memory."] # [derive (Clone , Debug , PartialEq , Eq , Hash , Serialize)] pub struct LayoutShape { # [doc = " The fields location within the layout"] pub fields : FieldsShape , # [doc = " Encodes information about multi-variant layouts."] # [doc = " Even with `Multiple` variants, a layout still has its own fields! Those are then"] # [doc = " shared between all variants."] # [doc = ""] # [doc = " To access all fields of this layout, both `fields` and the fields of the active variant"] # [doc = " must be taken into account."] pub variants : VariantsShape , # [doc = " The `abi` defines how this data is passed between functions."] pub abi : ValueAbi , # [doc = " The ABI mandated alignment in bytes."] pub abi_align : Align , # [doc = " The size of this layout in bytes."] pub size : Size , }
+/* FP:abi.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_IMPL_0015
+/* FP:abi.rs-0030 */ impl LayoutShape { # [doc = " Returns `true` if the layout corresponds to an unsized type."] # [inline] pub fn is_unsized (& self) -> bool { self . abi . is_unsized () } # [inline] pub fn is_sized (& self) -> bool { ! self . abi . is_unsized () } # [doc = " Returns `true` if the type is sized and a 1-ZST (meaning it has size 0 and alignment 1)."] pub fn is_1zst (& self) -> bool { self . is_sized () && self . size . bits () == 0 && self . abi_align == 1 } }
+/* FP:abi.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_STRUCT_0016
+/* FP:abi.rs-0032 */ # [derive (Copy , Clone , Debug , PartialEq , Eq , Hash , Serialize)] pub struct Layout (usize) ;
+/* FP:abi.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_IMPL_0017
+/* FP:abi.rs-0034 */ impl Layout { pub fn shape (self) -> LayoutShape { with (| cx | cx . layout_shape (self)) } }
+/* FP:abi.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_IMPL_0018
+/* FP:abi.rs-0036 */ impl crate :: IndexedVal for Layout { fn to_val (index : usize) -> Self { Layout (index) } fn to_index (& self) -> usize { self . 0 } }
+/* FP:abi.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_ENUM_0019
+/* FP:abi.rs-0038 */ # [doc = " Describes how the fields of a type are shaped in memory."] # [derive (Clone , Debug , PartialEq , Eq , Hash , Serialize)] pub enum FieldsShape { # [doc = " Scalar primitives and `!`, which never have fields."] Primitive , # [doc = " All fields start at no offset. The `usize` is the field count."] Union (NonZero < usize >) , # [doc = " Array/vector-like placement, with all fields of identical types."] Array { stride : Size , count : u64 } , # [doc = " Struct-like placement, with precomputed offsets."] # [doc = ""] # [doc = " Fields are guaranteed to not overlap, but note that gaps"] # [doc = " before, between and after all the fields are NOT always"] # [doc = " padding, and as such their contents may not be discarded."] # [doc = " For example, enum variants leave a gap at the start,"] # [doc = " where the discriminant field in the enum layout goes."] Arbitrary { # [doc = " Offsets for the first byte of each field,"] # [doc = " ordered to match the source definition order."] # [doc = " I.e.: It follows the same order as [super::ty::VariantDef::fields()]."] # [doc = " This vector does not go in increasing order."] offsets : Vec < Size > , } , }
+/* FP:abi.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_IMPL_0020
+/* FP:abi.rs-0040 */ impl FieldsShape { pub fn fields_by_offset_order (& self) -> Vec < FieldIdx > { match self { FieldsShape :: Primitive => vec ! [] , FieldsShape :: Union (_) | FieldsShape :: Array { .. } => (0 .. self . count ()) . collect () , FieldsShape :: Arbitrary { offsets , .. } => { let mut indices = (0 .. offsets . len ()) . collect :: < Vec < _ > > () ; indices . sort_by_key (| idx | offsets [* idx]) ; indices } } } pub fn count (& self) -> usize { match self { FieldsShape :: Primitive => 0 , FieldsShape :: Union (count) => count . get () , FieldsShape :: Array { count , .. } => * count as usize , FieldsShape :: Arbitrary { offsets , .. } => offsets . len () , } } }
+/* FP:abi.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_ENUM_0021
+/* FP:abi.rs-0042 */ # [derive (Clone , Debug , PartialEq , Eq , Hash , Serialize)] pub enum VariantsShape { # [doc = " A type with no valid variants. Must be uninhabited."] Empty , # [doc = " Single enum variants, structs/tuples, unions, and all non-ADTs."] Single { index : VariantIdx } , # [doc = " Enum-likes with more than one inhabited variant: each variant comes with"] # [doc = " a *discriminant* (usually the same as the variant index but the user can"] # [doc = " assign explicit discriminant values). That discriminant is encoded"] # [doc = " as a *tag* on the machine. The layout of each variant is"] # [doc = " a struct, and they all have space reserved for the tag."] # [doc = " For enums, the tag is the sole field of the layout."] Multiple { tag : Scalar , tag_encoding : TagEncoding , tag_field : usize , variants : Vec < LayoutShape > , } , }
+/* FP:abi.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_ENUM_0022
+/* FP:abi.rs-0044 */ # [derive (Clone , Debug , PartialEq , Eq , Hash , Serialize)] pub enum TagEncoding { # [doc = " The tag directly stores the discriminant, but possibly with a smaller layout"] # [doc = " (so converting the tag to the discriminant can require sign extension)."] Direct , # [doc = " Niche (values invalid for a type) encoding the discriminant:"] # [doc = " Discriminant and variant index coincide."] # [doc = " The variant `untagged_variant` contains a niche at an arbitrary"] # [doc = " offset (field `tag_field` of the enum), which for a variant with"] # [doc = " discriminant `d` is set to"] # [doc = " `(d - niche_variants.start).wrapping_add(niche_start)`."] # [doc = ""] # [doc = " For example, `Option<(usize, &T)>`  is represented such that"] # [doc = " `None` has a null pointer for the second tuple field, and"] # [doc = " `Some` is the identity function (with a non-null reference)."] Niche { untagged_variant : VariantIdx , niche_variants : RangeInclusive < VariantIdx > , niche_start : u128 , } , }
+/* FP:abi.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_ENUM_0023
+/* FP:abi.rs-0046 */ # [doc = " Describes how values of the type are passed by target ABIs,"] # [doc = " in terms of categories of C types there are ABI rules for."] # [derive (Clone , Debug , PartialEq , Eq , Hash , Serialize)] pub enum ValueAbi { Scalar (Scalar) , ScalarPair (Scalar , Scalar) , Vector { element : Scalar , count : u64 , } , Aggregate { # [doc = " If true, the size is exact, otherwise it's only a lower bound."] sized : bool , } , }
+/* FP:abi.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_IMPL_0024
+/* FP:abi.rs-0048 */ impl ValueAbi { # [doc = " Returns `true` if the layout corresponds to an unsized type."] pub fn is_unsized (& self) -> bool { match * self { ValueAbi :: Scalar (_) | ValueAbi :: ScalarPair (..) | ValueAbi :: Vector { .. } => false , ValueAbi :: Aggregate { sized } => ! sized , } } }
+/* FP:abi.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_ENUM_0025
+/* FP:abi.rs-0050 */ # [doc = " Information about one scalar component of a Rust type."] # [derive (Clone , Copy , PartialEq , Eq , Hash , Debug , Serialize)] pub enum Scalar { Initialized { # [doc = " The primitive type used to represent this value."] value : Primitive , # [doc = " The range that represents valid values."] # [doc = " The range must be valid for the `primitive` size."] valid_range : WrappingRange , } , Union { # [doc = " Unions never have niches, so there is no `valid_range`."] # [doc = " Even for unions, we need to use the correct registers for the kind of"] # [doc = " values inside the union, so we keep the `Primitive` type around."] # [doc = " It is also used to compute the size of the scalar."] value : Primitive , } , }
+/* FP:abi.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_IMPL_0026
+/* FP:abi.rs-0052 */ impl Scalar { pub fn has_niche (& self , target : & MachineInfo) -> bool { match self { Scalar :: Initialized { value , valid_range } => { ! valid_range . is_full (value . size (target)) . unwrap () } Scalar :: Union { .. } => false , } } }
+/* FP:abi.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_ENUM_0027
+/* FP:abi.rs-0054 */ # [doc = " Fundamental unit of memory access and layout."] # [derive (Copy , Clone , PartialEq , Eq , Hash , Debug , Serialize)] pub enum Primitive { # [doc = " The `bool` is the signedness of the `Integer` type."] # [doc = ""] # [doc = " One would think we would not care about such details this low down,"] # [doc = " but some ABIs are described in terms of C types and ISAs where the"] # [doc = " integer arithmetic is done on {sign,zero}-extended registers, e.g."] # [doc = " a negative integer passed by zero-extension will appear positive in"] # [doc = " the callee, and most operations on it will produce the wrong values."] Int { length : IntegerLength , signed : bool , } , Float { length : FloatLength , } , Pointer (AddressSpace) , }
+/* FP:abi.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_IMPL_0028
+/* FP:abi.rs-0056 */ impl Primitive { pub fn size (self , target : & MachineInfo) -> Size { match self { Primitive :: Int { length , .. } => Size :: from_bits (length . bits ()) , Primitive :: Float { length } => Size :: from_bits (length . bits ()) , Primitive :: Pointer (_) => target . pointer_width , } } }
+/* FP:abi.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_ENUM_0029
+/* FP:abi.rs-0058 */ # [doc = " Enum representing the existing integer lengths."] # [derive (Copy , Clone , PartialEq , Eq , PartialOrd , Ord , Hash , Debug , Serialize)] pub enum IntegerLength { I8 , I16 , I32 , I64 , I128 , }
+/* FP:abi.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_ENUM_0030
+/* FP:abi.rs-0060 */ # [doc = " Enum representing the existing float lengths."] # [derive (Copy , Clone , PartialEq , Eq , PartialOrd , Ord , Hash , Debug , Serialize)] pub enum FloatLength { F16 , F32 , F64 , F128 , }
+/* FP:abi.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_IMPL_0031
+/* FP:abi.rs-0062 */ impl IntegerLength { pub fn bits (self) -> usize { match self { IntegerLength :: I8 => 8 , IntegerLength :: I16 => 16 , IntegerLength :: I32 => 32 , IntegerLength :: I64 => 64 , IntegerLength :: I128 => 128 , } } }
+/* FP:abi.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_IMPL_0032
+/* FP:abi.rs-0064 */ impl FloatLength { pub fn bits (self) -> usize { match self { FloatLength :: F16 => 16 , FloatLength :: F32 => 32 , FloatLength :: F64 => 64 , FloatLength :: F128 => 128 , } } }
+/* FP:abi.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_STRUCT_0033
+/* FP:abi.rs-0066 */ # [doc = " An identifier that specifies the address space that some operation"] # [doc = " should operate on. Special address spaces have an effect on code generation,"] # [doc = " depending on the target and the address spaces it implements."] # [derive (Copy , Clone , Debug , PartialEq , Eq , PartialOrd , Ord , Hash , Serialize)] pub struct AddressSpace (pub u32) ;
+/* FP:abi.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_IMPL_0034
+/* FP:abi.rs-0068 */ impl AddressSpace { # [doc = " The default address space, corresponding to data space."] pub const DATA : Self = AddressSpace (0) ; }
+/* FP:abi.rs-0069 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_STRUCT_0035
+/* FP:abi.rs-0070 */ # [doc = " Inclusive wrap-around range of valid values (bitwise representation), that is, if"] # [doc = " start > end, it represents `start..=MAX`, followed by `0..=end`."] # [doc = ""] # [doc = " That is, for an i8 primitive, a range of `254..=2` means following"] # [doc = " sequence:"] # [doc = ""] # [doc = "    254 (-2), 255 (-1), 0, 1, 2"] # [derive (Clone , Copy , PartialEq , Eq , Hash , Serialize)] pub struct WrappingRange { pub start : u128 , pub end : u128 , }
+/* FP:abi.rs-0071 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_IMPL_0036
+/* FP:abi.rs-0072 */ impl WrappingRange { # [doc = " Returns `true` if `size` completely fills the range."] # [inline] pub fn is_full (& self , size : Size) -> Result < bool , Error > { let Some (max_value) = size . unsigned_int_max () else { return Err (error ! ("Expected size <= 128 bits, but found {} instead" , size . bits ())) ; } ; if self . start <= max_value && self . end <= max_value { Ok (self . start == (self . end . wrapping_add (1) & max_value)) } else { Err (error ! ("Range `{self:?}` out of bounds for size `{}` bits." , size . bits ())) } } # [doc = " Returns `true` if `v` is contained in the range."] # [inline (always)] pub fn contains (& self , v : u128) -> bool { if self . wraps_around () { self . start <= v || v <= self . end } else { self . start <= v && v <= self . end } } # [doc = " Returns `true` if the range wraps around."] # [doc = " I.e., the range represents the union of `self.start..=MAX` and `0..=self.end`."] # [doc = " Returns `false` if this is a non-wrapping range, i.e.: `self.start..=self.end`."] # [inline] pub fn wraps_around (& self) -> bool { self . start > self . end } }
+/* FP:abi.rs-0073 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_IMPL_0037
+/* FP:abi.rs-0074 */ impl Debug for WrappingRange { fn fmt (& self , fmt : & mut fmt :: Formatter < '_ >) -> fmt :: Result { if self . start > self . end { write ! (fmt , "(..={}) | ({}..)" , self . end , self . start) ? ; } else { write ! (fmt , "{}..={}" , self . start , self . end) ? ; } Ok (()) } }
+/* FP:abi.rs-0075 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_ENUM_0038
+/* FP:abi.rs-0076 */ # [doc = " General language calling conventions."] # [derive (Copy , Clone , Debug , PartialEq , Eq , Hash , Serialize)] pub enum CallConvention { C , Rust , Cold , PreserveMost , PreserveAll , Custom , ArmAapcs , CCmseNonSecureCall , CCmseNonSecureEntry , Msp430Intr , PtxKernel , GpuKernel , X86Fastcall , X86Intr , X86Stdcall , X86ThisCall , X86VectorCall , X86_64SysV , X86_64Win64 , AvrInterrupt , AvrNonBlockingInterrupt , RiscvInterrupt , }
+/* FP:abi.rs-0077 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_STRUCT_0039
+/* FP:abi.rs-0078 */ # [non_exhaustive] # [derive (Copy , Clone , PartialEq , Eq , PartialOrd , Ord , Hash , Debug , Serialize)] pub struct ReprFlags { pub is_simd : bool , pub is_c : bool , pub is_transparent : bool , pub is_linear : bool , }
+/* FP:abi.rs-0079 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_ENUM_0040
+/* FP:abi.rs-0080 */ # [derive (Copy , Clone , PartialEq , Eq , PartialOrd , Ord , Hash , Debug , Serialize)] pub enum IntegerType { # [doc = " Pointer-sized integer type, i.e. `isize` and `usize`."] Pointer { # [doc = " Signedness. e.g. `true` for `isize`"] is_signed : bool , } , # [doc = " Fixed-sized integer type, e.g. `i8`, `u32`, `i128`."] Fixed { # [doc = " Length of this integer type. e.g. `IntegerLength::I8` for `u8`."] length : IntegerLength , # [doc = " Signedness. e.g. `false` for `u8`"] is_signed : bool , } , }
+/* FP:abi.rs-0081 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_abi_STRUCT_0041
+/* FP:abi.rs-0082 */ # [doc = " Representation options provided by the user"] # [non_exhaustive] # [derive (Copy , Clone , PartialEq , Eq , PartialOrd , Ord , Hash , Debug , Serialize)] pub struct ReprOptions { pub int : Option < IntegerType > , pub align : Option < Align > , pub pack : Option < Align > , pub flags : ReprFlags , }

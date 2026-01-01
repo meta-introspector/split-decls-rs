@@ -1,6 +1,2 @@
-/// Whatever to ignore case (`fn` vs `Fn` vs `FN`) or not. Used for recovering.
-#[derive(Copy, Clone, Debug, Eq, PartialEq)]
-pub enum Case {
-    Sensitive,
-    Insensitive,
-}
+/* FP:case.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_util_case_ENUM_0001
+/* FP:case.rs-0002 */ # [doc = " Whatever to ignore case (`fn` vs `Fn` vs `FN`) or not. Used for recovering."] # [derive (Copy , Clone , Debug , Eq , PartialEq)] pub enum Case { Sensitive , Insensitive , }

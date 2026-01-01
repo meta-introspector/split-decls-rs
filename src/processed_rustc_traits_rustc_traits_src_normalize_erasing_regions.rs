@@ -1,71 +1,20 @@
-use crate::rustc_infer::infer::TyCtxtInferExt;
-use crate::rustc_complete::query::Providers;
-use crate::rustc_complete::traits::query::NoSolution;
-use crate::rustc_complete::ty::{self, PseudoCanonicalInput, TyCtxt, TypeFoldable, TypeVisitableExt};
-use crate::rustc_trait_selection::traits::query::normalize::QueryNormalizeExt;
-use crate::rustc_trait_selection::traits::{Normalized, ObligationCause};
-use tracing::debug;
-
-pub(crate) fn provide(p: &mut Providers) {
-    *p = Providers {
-        try_normalize_generic_arg_after_erasing_regions: |tcx, goal| {
-            debug!("try_normalize_generic_arg_after_erasing_regions(goal={:#?}", goal);
-
-            try_normalize_after_erasing_regions(tcx, goal)
-        },
-        ..*p
-    };
-}
-
-fn try_normalize_after_erasing_regions<'tcx, T: TypeFoldable<TyCtxt<'tcx>> + PartialEq + Copy>(
-    tcx: TyCtxt<'tcx>,
-    goal: PseudoCanonicalInput<'tcx, T>,
-) -> Result<T, NoSolution> {
-    let PseudoCanonicalInput { typing_env, value } = goal;
-    let (infcx, param_env) = tcx.infer_ctxt().build_with_typing_env(typing_env);
-    let cause = ObligationCause::dummy();
-    match infcx.at(&cause, param_env).query_normalize(value) {
-        Ok(Normalized { value: normalized_value, obligations: normalized_obligations }) => {
-            // We don't care about the `obligations`; they are
-            // always only region relations, and we are about to
-            // erase those anyway:
-            // This has been seen to fail in RL, so making it a non-debug assertion to better catch
-            // those cases.
-            assert_eq!(
-                normalized_obligations.iter().find(|p| not_outlives_predicate(p.predicate)),
-                None,
-            );
-
-            let resolved_value = infcx.resolve_vars_if_possible(normalized_value);
-            // It's unclear when `resolve_vars` would have an effect in a
-            // fresh `InferCtxt`. If this assert does trigger, it will give
-            // us a test case.
-            debug_assert_eq!(normalized_value, resolved_value);
-            let erased = infcx.tcx.erase_and_anonymize_regions(resolved_value);
-            debug_assert!(!erased.has_infer(), "{erased:?}");
-            Ok(erased)
-        }
-        Err(NoSolution) => Err(NoSolution),
-    }
-}
-
-fn not_outlives_predicate(p: ty::Predicate<'_>) -> bool {
-    match p.kind().skip_binder() {
-        ty::PredicateKind::Clause(ty::ClauseKind::RegionOutlives(..))
-        | ty::PredicateKind::Clause(ty::ClauseKind::TypeOutlives(..)) => false,
-        ty::PredicateKind::Clause(ty::ClauseKind::Trait(..))
-        | ty::PredicateKind::Clause(ty::ClauseKind::Projection(..))
-        | ty::PredicateKind::Clause(ty::ClauseKind::HostEffect(..))
-        | ty::PredicateKind::Clause(ty::ClauseKind::ConstArgHasType(..))
-        | ty::PredicateKind::Clause(ty::ClauseKind::UnstableFeature(_))
-        | ty::PredicateKind::NormalizesTo(..)
-        | ty::PredicateKind::AliasRelate(..)
-        | ty::PredicateKind::Clause(ty::ClauseKind::WellFormed(..))
-        | ty::PredicateKind::DynCompatible(..)
-        | ty::PredicateKind::Subtype(..)
-        | ty::PredicateKind::Coerce(..)
-        | ty::PredicateKind::Clause(ty::ClauseKind::ConstEvaluatable(..))
-        | ty::PredicateKind::ConstEquate(..)
-        | ty::PredicateKind::Ambiguous => true,
-    }
-}
+/* FP:normalize_erasing_regions.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_erasing_regions_USE_0001
+/* FP:normalize_erasing_regions.rs-0002 */ use crate :: rustc_infer :: infer :: TyCtxtInferExt ;
+/* FP:normalize_erasing_regions.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_erasing_regions_USE_0002
+/* FP:normalize_erasing_regions.rs-0004 */ use crate :: rustc_complete :: query :: Providers ;
+/* FP:normalize_erasing_regions.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_erasing_regions_USE_0003
+/* FP:normalize_erasing_regions.rs-0006 */ use crate :: rustc_complete :: traits :: query :: NoSolution ;
+/* FP:normalize_erasing_regions.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_erasing_regions_USE_0004
+/* FP:normalize_erasing_regions.rs-0008 */ use crate :: rustc_complete :: ty :: { self , PseudoCanonicalInput , TyCtxt , TypeFoldable , TypeVisitableExt } ;
+/* FP:normalize_erasing_regions.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_erasing_regions_USE_0005
+/* FP:normalize_erasing_regions.rs-0010 */ use crate :: rustc_trait_selection :: traits :: query :: normalize :: QueryNormalizeExt ;
+/* FP:normalize_erasing_regions.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_erasing_regions_USE_0006
+/* FP:normalize_erasing_regions.rs-0012 */ use crate :: rustc_trait_selection :: traits :: { Normalized , ObligationCause } ;
+/* FP:normalize_erasing_regions.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_erasing_regions_USE_0007
+/* FP:normalize_erasing_regions.rs-0014 */ use tracing :: debug ;
+/* FP:normalize_erasing_regions.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_erasing_regions_FN_0008
+/* FP:normalize_erasing_regions.rs-0016 */ pub (crate) fn provide (p : & mut Providers) { * p = Providers { try_normalize_generic_arg_after_erasing_regions : | tcx , goal | { debug ! ("try_normalize_generic_arg_after_erasing_regions(goal={:#?}" , goal) ; try_normalize_after_erasing_regions (tcx , goal) } , .. * p } ; }
+/* FP:normalize_erasing_regions.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_erasing_regions_FN_0009
+/* FP:normalize_erasing_regions.rs-0018 */ fn try_normalize_after_erasing_regions < 'tcx , T : TypeFoldable < TyCtxt < 'tcx > > + PartialEq + Copy > (tcx : TyCtxt < 'tcx > , goal : PseudoCanonicalInput < 'tcx , T > ,) -> Result < T , NoSolution > { let PseudoCanonicalInput { typing_env , value } = goal ; let (infcx , param_env) = tcx . infer_ctxt () . build_with_typing_env (typing_env) ; let cause = ObligationCause :: dummy () ; match infcx . at (& cause , param_env) . query_normalize (value) { Ok (Normalized { value : normalized_value , obligations : normalized_obligations }) => { assert_eq ! (normalized_obligations . iter () . find (| p | not_outlives_predicate (p . predicate)) , None ,) ; let resolved_value = infcx . resolve_vars_if_possible (normalized_value) ; debug_assert_eq ! (normalized_value , resolved_value) ; let erased = infcx . tcx . erase_and_anonymize_regions (resolved_value) ; debug_assert ! (! erased . has_infer () , "{erased:?}") ; Ok (erased) } Err (NoSolution) => Err (NoSolution) , } }
+/* FP:normalize_erasing_regions.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_erasing_regions_FN_0010
+/* FP:normalize_erasing_regions.rs-0020 */ fn not_outlives_predicate (p : ty :: Predicate < '_ >) -> bool { match p . kind () . skip_binder () { ty :: PredicateKind :: Clause (ty :: ClauseKind :: RegionOutlives (..)) | ty :: PredicateKind :: Clause (ty :: ClauseKind :: TypeOutlives (..)) => false , ty :: PredicateKind :: Clause (ty :: ClauseKind :: Trait (..)) | ty :: PredicateKind :: Clause (ty :: ClauseKind :: Projection (..)) | ty :: PredicateKind :: Clause (ty :: ClauseKind :: HostEffect (..)) | ty :: PredicateKind :: Clause (ty :: ClauseKind :: ConstArgHasType (..)) | ty :: PredicateKind :: Clause (ty :: ClauseKind :: UnstableFeature (_)) | ty :: PredicateKind :: NormalizesTo (..) | ty :: PredicateKind :: AliasRelate (..) | ty :: PredicateKind :: Clause (ty :: ClauseKind :: WellFormed (..)) | ty :: PredicateKind :: DynCompatible (..) | ty :: PredicateKind :: Subtype (..) | ty :: PredicateKind :: Coerce (..) | ty :: PredicateKind :: Clause (ty :: ClauseKind :: ConstEvaluatable (..)) | ty :: PredicateKind :: ConstEquate (..) | ty :: PredicateKind :: Ambiguous => true , } }

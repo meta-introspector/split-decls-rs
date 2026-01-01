@@ -1,64 +1,14 @@
-#[allow(rustc::symbol_intern_string_literal)]
-
-use crate::rustc_complete::create_default_session_globals_then;
-
-use super::*;
-
-#[test]
-fn test_block_doc_comment_1() {
-    create_default_session_globals_then(|| {
-        let comment = "\n * Test \n **  Test\n *   Test\n";
-        let stripped = beautify_doc_string(Symbol::intern(comment), CommentKind::Block);
-        assert_eq!(stripped.as_str(), " Test \n*  Test\n   Test");
-    })
-}
-
-#[test]
-fn test_block_doc_comment_2() {
-    create_default_session_globals_then(|| {
-        let comment = "\n * Test\n *  Test\n";
-        let stripped = beautify_doc_string(Symbol::intern(comment), CommentKind::Block);
-        assert_eq!(stripped.as_str(), " Test\n  Test");
-    })
-}
-
-#[test]
-fn test_block_doc_comment_3() {
-    create_default_session_globals_then(|| {
-        let comment = "\n let a: *i32;\n *a = 5;\n";
-        let stripped = beautify_doc_string(Symbol::intern(comment), CommentKind::Block);
-        assert_eq!(stripped.as_str(), "let a: *i32;\n*a = 5;");
-    })
-}
-
-#[test]
-fn test_line_doc_comment() {
-    create_default_session_globals_then(|| {
-        let stripped = beautify_doc_string(Symbol::intern(" test"), CommentKind::Line);
-        assert_eq!(stripped.as_str(), " test");
-        let stripped = beautify_doc_string(Symbol::intern("! test"), CommentKind::Line);
-        assert_eq!(stripped.as_str(), "! test");
-        let stripped = beautify_doc_string(Symbol::intern("test"), CommentKind::Line);
-        assert_eq!(stripped.as_str(), "test");
-        let stripped = beautify_doc_string(Symbol::intern("!test"), CommentKind::Line);
-        assert_eq!(stripped.as_str(), "!test");
-    })
-}
-
-#[test]
-fn test_doc_blocks() {
-    create_default_session_globals_then(|| {
-        let stripped =
-            beautify_doc_string(Symbol::intern(" # Returns\n     *\n     "), CommentKind::Block);
-        assert_eq!(stripped.as_str(), " # Returns\n\n");
-
-        let stripped = beautify_doc_string(
-            Symbol::intern("\n     * # Returns\n     *\n     "),
-            CommentKind::Block,
-        );
-        assert_eq!(stripped.as_str(), " # Returns\n\n");
-
-        let stripped = beautify_doc_string(Symbol::intern("\n *     a\n "), CommentKind::Block);
-        assert_eq!(stripped.as_str(), "     a\n");
-    })
-}
+/* FP:tests.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_util_comments_tests_USE_0001
+/* FP:tests.rs-0002 */ # [allow (rustc :: symbol_intern_string_literal)] use crate :: rustc_complete :: create_default_session_globals_then ;
+/* FP:tests.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_util_comments_tests_USE_0002
+/* FP:tests.rs-0004 */ use super :: * ;
+/* FP:tests.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_util_comments_tests_FN_0003
+/* FP:tests.rs-0006 */ # [test] fn test_block_doc_comment_1 () { create_default_session_globals_then (| | { let comment = "\n * Test \n **  Test\n *   Test\n" ; let stripped = beautify_doc_string (Symbol :: intern (comment) , CommentKind :: Block) ; assert_eq ! (stripped . as_str () , " Test \n*  Test\n   Test") ; }) }
+/* FP:tests.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_util_comments_tests_FN_0004
+/* FP:tests.rs-0008 */ # [test] fn test_block_doc_comment_2 () { create_default_session_globals_then (| | { let comment = "\n * Test\n *  Test\n" ; let stripped = beautify_doc_string (Symbol :: intern (comment) , CommentKind :: Block) ; assert_eq ! (stripped . as_str () , " Test\n  Test") ; }) }
+/* FP:tests.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_util_comments_tests_FN_0005
+/* FP:tests.rs-0010 */ # [test] fn test_block_doc_comment_3 () { create_default_session_globals_then (| | { let comment = "\n let a: *i32;\n *a = 5;\n" ; let stripped = beautify_doc_string (Symbol :: intern (comment) , CommentKind :: Block) ; assert_eq ! (stripped . as_str () , "let a: *i32;\n*a = 5;") ; }) }
+/* FP:tests.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_util_comments_tests_FN_0006
+/* FP:tests.rs-0012 */ # [test] fn test_line_doc_comment () { create_default_session_globals_then (| | { let stripped = beautify_doc_string (Symbol :: intern (" test") , CommentKind :: Line) ; assert_eq ! (stripped . as_str () , " test") ; let stripped = beautify_doc_string (Symbol :: intern ("! test") , CommentKind :: Line) ; assert_eq ! (stripped . as_str () , "! test") ; let stripped = beautify_doc_string (Symbol :: intern ("test") , CommentKind :: Line) ; assert_eq ! (stripped . as_str () , "test") ; let stripped = beautify_doc_string (Symbol :: intern ("!test") , CommentKind :: Line) ; assert_eq ! (stripped . as_str () , "!test") ; }) }
+/* FP:tests.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_util_comments_tests_FN_0007
+/* FP:tests.rs-0014 */ # [test] fn test_doc_blocks () { create_default_session_globals_then (| | { let stripped = beautify_doc_string (Symbol :: intern (" # Returns\n     *\n     ") , CommentKind :: Block) ; assert_eq ! (stripped . as_str () , " # Returns\n\n") ; let stripped = beautify_doc_string (Symbol :: intern ("\n     * # Returns\n     *\n     ") , CommentKind :: Block ,) ; assert_eq ! (stripped . as_str () , " # Returns\n\n") ; let stripped = beautify_doc_string (Symbol :: intern ("\n *     a\n ") , CommentKind :: Block) ; assert_eq ! (stripped . as_str () , "     a\n") ; }) }

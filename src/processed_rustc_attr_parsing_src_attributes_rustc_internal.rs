@@ -1,51 +1,16 @@
-use crate::prelude::*;
-use super::util::parse_single_integer;
-
-pub(crate) struct RustcLayoutScalarValidRangeStart;
-
-impl<S: Stage> SingleAttributeParser<S> for RustcLayoutScalarValidRangeStart {
-    const PATH: &'static [Symbol] = &[sym::rustc_layout_scalar_valid_range_start];
-    const ATTRIBUTE_ORDER: AttributeOrder = AttributeOrder::KeepInnermost;
-    const ON_DUPLICATE: OnDuplicate<S> = OnDuplicate::Error;
-    const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Struct)]);
-    const TEMPLATE: AttributeTemplate = template!(List: &["start"]);
-
-    fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser<'_>) -> Option<AttributeKind> {
-        parse_single_integer(cx, args)
-            .map(|n| AttributeKind::RustcLayoutScalarValidRangeStart(Box::new(n), cx.attr_span))
-    }
-}
-
-pub(crate) struct RustcLayoutScalarValidRangeEnd;
-
-impl<S: Stage> SingleAttributeParser<S> for RustcLayoutScalarValidRangeEnd {
-    const PATH: &'static [Symbol] = &[sym::rustc_layout_scalar_valid_range_end];
-    const ATTRIBUTE_ORDER: AttributeOrder = AttributeOrder::KeepInnermost;
-    const ON_DUPLICATE: OnDuplicate<S> = OnDuplicate::Error;
-    const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Struct)]);
-    const TEMPLATE: AttributeTemplate = template!(List: &["end"]);
-
-    fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser<'_>) -> Option<AttributeKind> {
-        parse_single_integer(cx, args)
-            .map(|n| AttributeKind::RustcLayoutScalarValidRangeEnd(Box::new(n), cx.attr_span))
-    }
-}
-
-pub(crate) struct RustcObjectLifetimeDefaultParser;
-
-impl<S: Stage> SingleAttributeParser<S> for RustcObjectLifetimeDefaultParser {
-    const PATH: &[crate::rustc_span::Symbol] = &[sym::rustc_object_lifetime_default];
-    const ATTRIBUTE_ORDER: AttributeOrder = AttributeOrder::KeepInnermost;
-    const ON_DUPLICATE: OnDuplicate<S> = OnDuplicate::Error;
-    const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Struct)]);
-    const TEMPLATE: AttributeTemplate = template!(Word);
-
-    fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser<'_>) -> Option<AttributeKind> {
-        if let Err(span) = args.no_args() {
-            cx.expected_no_args(span);
-            return None;
-        }
-
-        Some(AttributeKind::RustcObjectLifetimeDefault)
-    }
-}
+/* FP:rustc_internal.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_rustc_internal_USE_0001
+/* FP:rustc_internal.rs-0002 */ use super :: prelude :: * ;
+/* FP:rustc_internal.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_rustc_internal_USE_0002
+/* FP:rustc_internal.rs-0004 */ use super :: util :: parse_single_integer ;
+/* FP:rustc_internal.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_rustc_internal_STRUCT_0003
+/* FP:rustc_internal.rs-0006 */ pub (crate) struct RustcLayoutScalarValidRangeStart ;
+/* FP:rustc_internal.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_rustc_internal_IMPL_0004
+/* FP:rustc_internal.rs-0008 */ impl < S : Stage > SingleAttributeParser < S > for RustcLayoutScalarValidRangeStart { const PATH : & 'static [Symbol] = & [sym :: rustc_layout_scalar_valid_range_start] ; const ATTRIBUTE_ORDER : AttributeOrder = AttributeOrder :: KeepInnermost ; const ON_DUPLICATE : OnDuplicate < S > = OnDuplicate :: Error ; const ALLOWED_TARGETS : AllowedTargets = AllowedTargets :: AllowList (& [Allow (Target :: Struct)]) ; const TEMPLATE : AttributeTemplate = template ! (List : & ["start"]) ; fn convert (cx : & mut AcceptContext < '_ , '_ , S > , args : & ArgParser < '_ >) -> Option < AttributeKind > { parse_single_integer (cx , args) . map (| n | AttributeKind :: RustcLayoutScalarValidRangeStart (Box :: new (n) , cx . attr_span)) } }
+/* FP:rustc_internal.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_rustc_internal_STRUCT_0005
+/* FP:rustc_internal.rs-0010 */ pub (crate) struct RustcLayoutScalarValidRangeEnd ;
+/* FP:rustc_internal.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_rustc_internal_IMPL_0006
+/* FP:rustc_internal.rs-0012 */ impl < S : Stage > SingleAttributeParser < S > for RustcLayoutScalarValidRangeEnd { const PATH : & 'static [Symbol] = & [sym :: rustc_layout_scalar_valid_range_end] ; const ATTRIBUTE_ORDER : AttributeOrder = AttributeOrder :: KeepInnermost ; const ON_DUPLICATE : OnDuplicate < S > = OnDuplicate :: Error ; const ALLOWED_TARGETS : AllowedTargets = AllowedTargets :: AllowList (& [Allow (Target :: Struct)]) ; const TEMPLATE : AttributeTemplate = template ! (List : & ["end"]) ; fn convert (cx : & mut AcceptContext < '_ , '_ , S > , args : & ArgParser < '_ >) -> Option < AttributeKind > { parse_single_integer (cx , args) . map (| n | AttributeKind :: RustcLayoutScalarValidRangeEnd (Box :: new (n) , cx . attr_span)) } }
+/* FP:rustc_internal.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_rustc_internal_STRUCT_0007
+/* FP:rustc_internal.rs-0014 */ pub (crate) struct RustcObjectLifetimeDefaultParser ;
+/* FP:rustc_internal.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_rustc_internal_IMPL_0008
+/* FP:rustc_internal.rs-0016 */ impl < S : Stage > SingleAttributeParser < S > for RustcObjectLifetimeDefaultParser { const PATH : & [crate :: rustc_span :: Symbol] = & [sym :: rustc_object_lifetime_default] ; const ATTRIBUTE_ORDER : AttributeOrder = AttributeOrder :: KeepInnermost ; const ON_DUPLICATE : OnDuplicate < S > = OnDuplicate :: Error ; const ALLOWED_TARGETS : AllowedTargets = AllowedTargets :: AllowList (& [Allow (Target :: Struct)]) ; const TEMPLATE : AttributeTemplate = template ! (Word) ; fn convert (cx : & mut AcceptContext < '_ , '_ , S > , args : & ArgParser < '_ >) -> Option < AttributeKind > { if let Err (span) = args . no_args () { cx . expected_no_args (span) ; return None ; } Some (AttributeKind :: RustcObjectLifetimeDefault) } }

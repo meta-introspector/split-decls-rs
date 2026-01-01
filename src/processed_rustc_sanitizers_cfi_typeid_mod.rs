@@ -1,54 +1,13 @@
-// Type metadata identifiers for LLVM Control Flow Integrity (CFI) and cross-language LLVM CFI
-// support for the Rust compiler.
-//
-// For more information about LLVM CFI and cross-language LLVM CFI support for the Rust compiler,
-// see design document in the tracking issue #89653.
-
-use bitflags::bitflags;
-use crate::rustc_complete::ty::{Instance, Ty, TyCtxt};
-use rustc_target::callconv::FnAbi;
-
-bitflags! {
-    /// Options for typeid_for_fnabi.
-    #[derive(Clone, Copy, Debug)]
-    pub struct TypeIdOptions: u32 {
-        /// Generalizes pointers for compatibility with Clang
-        /// `-fsanitize-cfi-icall-generalize-pointers` option for cross-language LLVM CFI and KCFI
-        /// support.
-        const GENERALIZE_POINTERS = 1;
-        /// Generalizes repr(C) user-defined type for extern function types with the "C" calling
-        /// convention (or extern types) for cross-language LLVM CFI and  KCFI support.
-        const GENERALIZE_REPR_C = 2;
-        /// Normalizes integers for compatibility with Clang
-        /// `-fsanitize-cfi-icall-experimental-normalize-integers` option for cross-language LLVM
-        /// CFI and  KCFI support.
-        const NORMALIZE_INTEGERS = 4;
-        /// Do not perform self type erasure for attaching a secondary type id to methods with their
-        /// concrete self so they can be used as function pointers.
-        ///
-        /// (This applies to typeid_for_instance only and should be used to attach a secondary type
-        /// id to methods during their declaration/definition so they match the type ids returned by
-        /// either typeid_for_instance or typeid_for_fnabi at call sites during code generation for
-        /// type membership tests when methods are used as function pointers.)
-        const USE_CONCRETE_SELF = 8;
-    }
-}
-
-
-/// Returns a type metadata identifier for the specified FnAbi.
-pub fn typeid_for_fnabi<'tcx>(
-    tcx: TyCtxt<'tcx>,
-    fn_abi: &FnAbi<'tcx, Ty<'tcx>>,
-    options: TypeIdOptions,
-) -> String {
-    itanium_cxx_abi::typeid_for_fnabi(tcx, fn_abi, options)
-}
-
-/// Returns a type metadata identifier for the specified Instance.
-pub fn typeid_for_instance<'tcx>(
-    tcx: TyCtxt<'tcx>,
-    instance: Instance<'tcx>,
-    options: TypeIdOptions,
-) -> String {
-    itanium_cxx_abi::typeid_for_instance(tcx, instance, options)
-}
+/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_mod_USE_0001
+/* FP:mod.rs-0002 */ use bitflags :: bitflags ;
+/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_mod_USE_0002
+/* FP:mod.rs-0004 */ use crate :: rustc_complete :: ty :: { Instance , Ty , TyCtxt } ;
+/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_mod_USE_0003
+/* FP:mod.rs-0006 */ use crate :: rustc_target :: callconv :: FnAbi ;
+/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_mod_MACRO_0004
+/* FP:mod.rs-0008 */ bitflags ! { # [doc = " Options for typeid_for_fnabi."] # [derive (Clone , Copy , Debug)] pub struct TypeIdOptions : u32 { # [doc = " Generalizes pointers for compatibility with Clang"] # [doc = " `-fsanitize-cfi-icall-generalize-pointers` option for cross-language LLVM CFI and KCFI"] # [doc = " support."] const GENERALIZE_POINTERS = 1 ; # [doc = " Generalizes repr(C) user-defined type for extern function types with the \"C\" calling"] # [doc = " convention (or extern types) for cross-language LLVM CFI and  KCFI support."] const GENERALIZE_REPR_C = 2 ; # [doc = " Normalizes integers for compatibility with Clang"] # [doc = " `-fsanitize-cfi-icall-experimental-normalize-integers` option for cross-language LLVM"] # [doc = " CFI and  KCFI support."] const NORMALIZE_INTEGERS = 4 ; # [doc = " Do not perform self type erasure for attaching a secondary type id to methods with their"] # [doc = " concrete self so they can be used as function pointers."] # [doc = ""] # [doc = " (This applies to typeid_for_instance only and should be used to attach a secondary type"] # [doc = " id to methods during their declaration/definition so they match the type ids returned by"] # [doc = " either typeid_for_instance or typeid_for_fnabi at call sites during code generation for"] # [doc = " type membership tests when methods are used as function pointers.)"] const USE_CONCRETE_SELF = 8 ; } }
+/* FP:mod.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_mod_MOD_0005
+/* FP:mod.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_mod_FN_0006
+/* FP:mod.rs-0012 */ # [doc = " Returns a type metadata identifier for the specified FnAbi."] pub fn typeid_for_fnabi < 'tcx > (tcx : TyCtxt < 'tcx > , fn_abi : & FnAbi < 'tcx , Ty < 'tcx > > , options : TypeIdOptions ,) -> String { itanium_cxx_abi :: typeid_for_fnabi (tcx , fn_abi , options) }
+/* FP:mod.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_mod_FN_0007
+/* FP:mod.rs-0014 */ # [doc = " Returns a type metadata identifier for the specified Instance."] pub fn typeid_for_instance < 'tcx > (tcx : TyCtxt < 'tcx > , instance : Instance < 'tcx > , options : TypeIdOptions ,) -> String { itanium_cxx_abi :: typeid_for_instance (tcx , instance , options) }

@@ -1,133 +1,22 @@
-use rustc_ast as ast;
-use crate::rustc_complete::{ItemKind, VariantData};
-use crate::rustc_complete::MultiSpan;
-use rustc_expand::base::{Annotatable, DummyResult, ExtCtxt};
-use crate::rustc_complete::{Ident, Span, kw, sym};
-use thin_vec::thin_vec;
-
-use crate::deriving::generic::ty::{Bounds, Path, PathKind, Ty};
-use crate::deriving::generic::{
-    BlockOrExpr, FieldlessVariantsStrategy, MethodDef, SubstructureFields, TraitDef,
-    combine_substructure,
-};
-use crate::deriving::pathvec_std;
-use crate::errors;
-
-/// Generate an implementation of the `From` trait, provided that `item`
-/// is a struct or a tuple struct with exactly one field.
-pub(crate) fn expand_deriving_from(
-    cx: &ExtCtxt<'_>,
-    span: Span,
-    mitem: &ast::MetaItem,
-    annotatable: &Annotatable,
-    push: &mut dyn FnMut(Annotatable),
-    is_const: bool,
-) {
-    let Annotatable::Item(item) = &annotatable else {
-        cx.dcx().bug("derive(From) used on something else than an item");
-    };
-
-    let err_span = || {
-        let item_span = item.kind.ident().map(|ident| ident.span).unwrap_or(item.span);
-        MultiSpan::from_spans(vec![span, item_span])
-    };
-
-    // `#[derive(From)]` is currently usable only on structs with exactly one field.
-    let field = match &item.kind {
-        ItemKind::Struct(_, _, data) => {
-            if let [field] = data.fields() {
-                Ok(field.clone())
-            } else {
-                let guar = cx.dcx().emit_err(errors::DeriveFromWrongFieldCount {
-                    span: err_span(),
-                    multiple_fields: data.fields().len() > 1,
-                });
-                Err(guar)
-            }
-        }
-        ItemKind::Enum(_, _, _) | ItemKind::Union(_, _, _) => {
-            let guar = cx.dcx().emit_err(errors::DeriveFromWrongTarget {
-                span: err_span(),
-                kind: &format!("{} {}", item.kind.article(), item.kind.descr()),
-            });
-            Err(guar)
-        }
-        _ => cx.dcx().bug("Invalid derive(From) ADT input"),
-    };
-
-    let from_type = Ty::AstTy(match field {
-        Ok(ref field) => field.ty.clone(),
-        Err(guar) => cx.ty(span, ast::TyKind::Err(guar)),
-    });
-
-    let path =
-        Path::new_(pathvec_std!(convert::From), vec![Box::new(from_type.clone())], PathKind::Std);
-
-    // Generate code like this:
-    //
-    // struct S(u32);
-    // #[automatically_derived]
-    // impl ::core::convert::From<u32> for S {
-    //     #[inline]
-    //     fn from(value: u32) -> S {
-    //         Self(value)
-    //     }
-    // }
-    let from_trait_def = TraitDef {
-        span,
-        path,
-        skip_path_as_bound: true,
-        needs_copy_as_bound_if_packed: false,
-        additional_bounds: Vec::new(),
-        supports_unions: false,
-        methods: vec![MethodDef {
-            name: sym::from,
-            generics: Bounds { bounds: vec![] },
-            explicit_self: false,
-            nonself_args: vec![(from_type, sym::value)],
-            ret_ty: Ty::Self_,
-            attributes: thin_vec![cx.attr_word(sym::inline, span)],
-            fieldless_variants_strategy: FieldlessVariantsStrategy::Default,
-            combine_substructure: combine_substructure(Box::new(|cx, span, substructure| {
-                let field = match field {
-                    Ok(ref field) => field,
-                    Err(guar) => {
-                        return BlockOrExpr::new_expr(DummyResult::raw_expr(span, Some(guar)));
-                    }
-                };
-
-                let self_kw = Ident::new(kw::SelfUpper, span);
-                let expr: Box<ast::Expr> = match substructure.fields {
-                    SubstructureFields::StaticStruct(variant, _) => match variant {
-                        // Self { field: value }
-                        VariantData::Struct { .. } => cx.expr_struct_ident(
-                            span,
-                            self_kw,
-                            thin_vec![cx.field_imm(
-                                span,
-                                field.ident.unwrap(),
-                                cx.expr_ident(span, Ident::new(sym::value, span))
-                            )],
-                        ),
-                        // Self(value)
-                        VariantData::Tuple(_, _) => cx.expr_call_ident(
-                            span,
-                            self_kw,
-                            thin_vec![cx.expr_ident(span, Ident::new(sym::value, span))],
-                        ),
-                        variant => {
-                            cx.dcx().bug(format!("Invalid derive(From) ADT variant: {variant:?}"));
-                        }
-                    },
-                    _ => cx.dcx().bug("Invalid derive(From) ADT input"),
-                };
-                BlockOrExpr::new_expr(expr)
-            })),
-        }],
-        associated_types: Vec::new(),
-        is_const,
-        is_staged_api_crate: cx.ecfg.features.staged_api(),
-    };
-
-    from_trait_def.expand(cx, mitem, annotatable, push);
-}
+/* FP:from.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_from_USE_0001
+/* FP:from.rs-0002 */ use rustc_ast as ast ;
+/* FP:from.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_from_USE_0002
+/* FP:from.rs-0004 */ use crate :: rustc_complete :: { ItemKind , VariantData } ;
+/* FP:from.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_from_USE_0003
+/* FP:from.rs-0006 */ use crate :: rustc_complete :: MultiSpan ;
+/* FP:from.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_from_USE_0004
+/* FP:from.rs-0008 */ use crate :: rustc_expand :: base :: { Annotatable , DummyResult , ExtCtxt } ;
+/* FP:from.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_from_USE_0005
+/* FP:from.rs-0010 */ use crate :: rustc_complete :: { Ident , Span , kw , sym } ;
+/* FP:from.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_from_USE_0006
+/* FP:from.rs-0012 */ use thin_vec :: thin_vec ;
+/* FP:from.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_from_USE_0007
+/* FP:from.rs-0014 */ use crate :: deriving :: generic :: ty :: { Bounds , Path , PathKind , Ty } ;
+/* FP:from.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_from_USE_0008
+/* FP:from.rs-0016 */ use crate :: deriving :: generic :: { BlockOrExpr , FieldlessVariantsStrategy , MethodDef , SubstructureFields , TraitDef , combine_substructure , } ;
+/* FP:from.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_from_USE_0009
+/* FP:from.rs-0018 */ use crate :: deriving :: pathvec_std ;
+/* FP:from.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_from_USE_0010
+/* FP:from.rs-0020 */ use crate :: errors ;
+/* FP:from.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_from_FN_0011
+/* FP:from.rs-0022 */ # [doc = " Generate an implementation of the `From` trait, provided that `item`"] # [doc = " is a struct or a tuple struct with exactly one field."] pub (crate) fn expand_deriving_from (cx : & ExtCtxt < '_ > , span : Span , mitem : & ast :: MetaItem , annotatable : & Annotatable , push : & mut dyn FnMut (Annotatable) , is_const : bool ,) { let Annotatable :: Item (item) = & annotatable else { cx . dcx () . bug ("derive(From) used on something else than an item") ; } ; let err_span = | | { let item_span = item . kind . ident () . map (| ident | ident . span) . unwrap_or (item . span) ; MultiSpan :: from_spans (vec ! [span , item_span]) } ; let field = match & item . kind { ItemKind :: Struct (_ , _ , data) => { if let [field] = data . fields () { Ok (field . clone ()) } else { let guar = cx . dcx () . emit_err (errors :: DeriveFromWrongFieldCount { span : err_span () , multiple_fields : data . fields () . len () > 1 , }) ; Err (guar) } } ItemKind :: Enum (_ , _ , _) | ItemKind :: Union (_ , _ , _) => { let guar = cx . dcx () . emit_err (errors :: DeriveFromWrongTarget { span : err_span () , kind : & format ! ("{} {}" , item . kind . article () , item . kind . descr ()) , }) ; Err (guar) } _ => cx . dcx () . bug ("Invalid derive(From) ADT input") , } ; let from_type = Ty :: AstTy (match field { Ok (ref field) => field . ty . clone () , Err (guar) => cx . ty (span , ast :: TyKind :: Err (guar)) , }) ; let path = Path :: new_ (pathvec_std ! (convert :: From) , vec ! [Box :: new (from_type . clone ())] , PathKind :: Std) ; let from_trait_def = TraitDef { span , path , skip_path_as_bound : true , needs_copy_as_bound_if_packed : false , additional_bounds : Vec :: new () , supports_unions : false , methods : vec ! [MethodDef { name : sym :: from , generics : Bounds { bounds : vec ! [] } , explicit_self : false , nonself_args : vec ! [(from_type , sym :: value)] , ret_ty : Ty :: Self_ , attributes : thin_vec ! [cx . attr_word (sym :: inline , span)] , fieldless_variants_strategy : FieldlessVariantsStrategy :: Default , combine_substructure : combine_substructure (Box :: new (| cx , span , substructure | { let field = match field { Ok (ref field) => field , Err (guar) => { return BlockOrExpr :: new_expr (DummyResult :: raw_expr (span , Some (guar))) ; } } ; let self_kw = Ident :: new (kw :: SelfUpper , span) ; let expr : Box < ast :: Expr > = match substructure . fields { SubstructureFields :: StaticStruct (variant , _) => match variant { VariantData :: Struct { .. } => cx . expr_struct_ident (span , self_kw , thin_vec ! [cx . field_imm (span , field . ident . unwrap () , cx . expr_ident (span , Ident :: new (sym :: value , span)))] ,) , VariantData :: Tuple (_ , _) => cx . expr_call_ident (span , self_kw , thin_vec ! [cx . expr_ident (span , Ident :: new (sym :: value , span))] ,) , variant => { cx . dcx () . bug (format ! ("Invalid derive(From) ADT variant: {variant:?}")) ; } } , _ => cx . dcx () . bug ("Invalid derive(From) ADT input") , } ; BlockOrExpr :: new_expr (expr) })) , }] , associated_types : Vec :: new () , is_const , is_staged_api_crate : cx . ecfg . features . staged_api () , } ; from_trait_def . expand (cx , mitem , annotatable , push) ; }

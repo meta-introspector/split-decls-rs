@@ -1,84 +1,14 @@
-use crate::rustc_complete::Span;
-use rustc_type_ir::elaborate::Elaboratable;
-
-use crate::ty::{self, TyCtxt};
-
-impl<'tcx> Elaboratable<TyCtxt<'tcx>> for ty::Clause<'tcx> {
-    fn predicate(&self) -> ty::Predicate<'tcx> {
-        self.as_predicate()
-    }
-
-    fn child(&self, clause: ty::Clause<'tcx>) -> Self {
-        clause
-    }
-
-    fn child_with_derived_cause(
-        &self,
-        clause: ty::Clause<'tcx>,
-        _span: Span,
-        _parent_trait_pred: ty::PolyTraitPredicate<'tcx>,
-        _index: usize,
-    ) -> Self {
-        clause
-    }
-}
-
-impl<'tcx> Elaboratable<TyCtxt<'tcx>> for ty::Predicate<'tcx> {
-    fn predicate(&self) -> ty::Predicate<'tcx> {
-        *self
-    }
-
-    fn child(&self, clause: ty::Clause<'tcx>) -> Self {
-        clause.as_predicate()
-    }
-
-    fn child_with_derived_cause(
-        &self,
-        clause: ty::Clause<'tcx>,
-        _span: Span,
-        _parent_trait_pred: ty::PolyTraitPredicate<'tcx>,
-        _index: usize,
-    ) -> Self {
-        clause.as_predicate()
-    }
-}
-
-impl<'tcx> Elaboratable<TyCtxt<'tcx>> for (ty::Predicate<'tcx>, Span) {
-    fn predicate(&self) -> ty::Predicate<'tcx> {
-        self.0
-    }
-
-    fn child(&self, clause: ty::Clause<'tcx>) -> Self {
-        (clause.as_predicate(), self.1)
-    }
-
-    fn child_with_derived_cause(
-        &self,
-        clause: ty::Clause<'tcx>,
-        _span: Span,
-        _parent_trait_pred: ty::PolyTraitPredicate<'tcx>,
-        _index: usize,
-    ) -> Self {
-        (clause.as_predicate(), self.1)
-    }
-}
-
-impl<'tcx> Elaboratable<TyCtxt<'tcx>> for (ty::Clause<'tcx>, Span) {
-    fn predicate(&self) -> ty::Predicate<'tcx> {
-        self.0.as_predicate()
-    }
-
-    fn child(&self, clause: ty::Clause<'tcx>) -> Self {
-        (clause, self.1)
-    }
-
-    fn child_with_derived_cause(
-        &self,
-        clause: ty::Clause<'tcx>,
-        _span: Span,
-        _parent_trait_pred: ty::PolyTraitPredicate<'tcx>,
-        _index: usize,
-    ) -> Self {
-        (clause, self.1)
-    }
-}
+/* FP:elaborate_impl.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_elaborate_impl_USE_0001
+/* FP:elaborate_impl.rs-0002 */ use crate :: rustc_complete :: Span ;
+/* FP:elaborate_impl.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_elaborate_impl_USE_0002
+/* FP:elaborate_impl.rs-0004 */ use rustc_type_ir :: elaborate :: Elaboratable ;
+/* FP:elaborate_impl.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_elaborate_impl_USE_0003
+/* FP:elaborate_impl.rs-0006 */ use crate :: ty :: { self , TyCtxt } ;
+/* FP:elaborate_impl.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_elaborate_impl_IMPL_0004
+/* FP:elaborate_impl.rs-0008 */ impl < 'tcx > Elaboratable < TyCtxt < 'tcx > > for ty :: Clause < 'tcx > { fn predicate (& self) -> ty :: Predicate < 'tcx > { self . as_predicate () } fn child (& self , clause : ty :: Clause < 'tcx >) -> Self { clause } fn child_with_derived_cause (& self , clause : ty :: Clause < 'tcx > , _span : Span , _parent_trait_pred : ty :: PolyTraitPredicate < 'tcx > , _index : usize ,) -> Self { clause } }
+/* FP:elaborate_impl.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_elaborate_impl_IMPL_0005
+/* FP:elaborate_impl.rs-0010 */ impl < 'tcx > Elaboratable < TyCtxt < 'tcx > > for ty :: Predicate < 'tcx > { fn predicate (& self) -> ty :: Predicate < 'tcx > { * self } fn child (& self , clause : ty :: Clause < 'tcx >) -> Self { clause . as_predicate () } fn child_with_derived_cause (& self , clause : ty :: Clause < 'tcx > , _span : Span , _parent_trait_pred : ty :: PolyTraitPredicate < 'tcx > , _index : usize ,) -> Self { clause . as_predicate () } }
+/* FP:elaborate_impl.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_elaborate_impl_IMPL_0006
+/* FP:elaborate_impl.rs-0012 */ impl < 'tcx > Elaboratable < TyCtxt < 'tcx > > for (ty :: Predicate < 'tcx > , Span) { fn predicate (& self) -> ty :: Predicate < 'tcx > { self . 0 } fn child (& self , clause : ty :: Clause < 'tcx >) -> Self { (clause . as_predicate () , self . 1) } fn child_with_derived_cause (& self , clause : ty :: Clause < 'tcx > , _span : Span , _parent_trait_pred : ty :: PolyTraitPredicate < 'tcx > , _index : usize ,) -> Self { (clause . as_predicate () , self . 1) } }
+/* FP:elaborate_impl.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_elaborate_impl_IMPL_0007
+/* FP:elaborate_impl.rs-0014 */ impl < 'tcx > Elaboratable < TyCtxt < 'tcx > > for (ty :: Clause < 'tcx > , Span) { fn predicate (& self) -> ty :: Predicate < 'tcx > { self . 0 . as_predicate () } fn child (& self , clause : ty :: Clause < 'tcx >) -> Self { (clause , self . 1) } fn child_with_derived_cause (& self , clause : ty :: Clause < 'tcx > , _span : Span , _parent_trait_pred : ty :: PolyTraitPredicate < 'tcx > , _index : usize ,) -> Self { (clause , self . 1) } }

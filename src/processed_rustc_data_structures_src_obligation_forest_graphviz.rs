@@ -1,90 +1,18 @@
-use std::env::var_os;
-use std::fs::File;
-use std::path::Path;
-use std::sync::atomic::{AtomicUsize, Ordering};
-
-use rustc_graphviz as dot;
-
-use crate::obligation_forest::{ForestObligation, ObligationForest};
-
-impl<O: ForestObligation> ObligationForest<O> {
-    /// Creates a graphviz representation of the obligation forest. Given a directory this will
-    /// create files with name of the format `<counter>_<description>.gv`. The counter is
-    /// global and is maintained internally.
-    ///
-    /// Calling this will do nothing unless the environment variable
-    /// `DUMP_OBLIGATION_FOREST_GRAPHVIZ` is defined.
-    ///
-    /// A few post-processing that you might want to do make the forest easier to visualize:
-    ///
-    ///  * `sed 's,std::[a-z]*::,,g'` — Deletes the `std::<package>::` prefix of paths.
-    ///  * `sed 's,"Binder(TraitPredicate(<\(.*\)>)) (\([^)]*\))","\1 (\2)",'` — Transforms
-    ///    `Binder(TraitPredicate(<predicate>))` into just `<predicate>`.
-    #[allow(dead_code)]
-    pub fn dump_graphviz<P: AsRef<Path>>(&self, dir: P, description: &str) {
-        static COUNTER: AtomicUsize = AtomicUsize::new(0);
-
-        if var_os("DUMP_OBLIGATION_FOREST_GRAPHVIZ").is_none() {
-            return;
-        }
-
-        let counter = COUNTER.fetch_add(1, Ordering::AcqRel);
-
-        let file_path = dir.as_ref().join(format!("{counter:010}_{description}.gv"));
-
-        let mut gv_file = File::create_buffered(file_path).unwrap();
-
-        dot::render(&self, &mut gv_file).unwrap();
-    }
-}
-
-impl<'a, O: ForestObligation + 'a> dot::Labeller<'a> for &'a ObligationForest<O> {
-    type Node = usize;
-    type Edge = (usize, usize);
-
-    fn graph_id(&self) -> dot::Id<'_> {
-        dot::Id::new("trait_obligation_forest").unwrap()
-    }
-
-    fn node_id(&self, index: &Self::Node) -> dot::Id<'_> {
-        dot::Id::new(format!("obligation_{index}")).unwrap()
-    }
-
-    fn node_label(&self, index: &Self::Node) -> dot::LabelText<'_> {
-        let node = &self.nodes[*index];
-        let label = format!("{:?} ({:?})", node.obligation.as_cache_key(), node.state.get());
-
-        dot::LabelText::LabelStr(label.into())
-    }
-
-    fn edge_label(&self, (_index_source, _index_target): &Self::Edge) -> dot::LabelText<'_> {
-        dot::LabelText::LabelStr("".into())
-    }
-}
-
-impl<'a, O: ForestObligation + 'a> dot::GraphWalk<'a> for &'a ObligationForest<O> {
-    type Node = usize;
-    type Edge = (usize, usize);
-
-    fn nodes(&self) -> dot::Nodes<'_, Self::Node> {
-        (0..self.nodes.len()).collect()
-    }
-
-    fn edges(&self) -> dot::Edges<'_, Self::Edge> {
-        (0..self.nodes.len())
-            .flat_map(|i| {
-                let node = &self.nodes[i];
-
-                node.dependents.iter().map(move |&d| (d, i))
-            })
-            .collect()
-    }
-
-    fn source(&self, (s, _): &Self::Edge) -> Self::Node {
-        *s
-    }
-
-    fn target(&self, (_, t): &Self::Edge) -> Self::Node {
-        *t
-    }
-}
+/* FP:graphviz.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_obligation_forest_graphviz_USE_0001
+/* FP:graphviz.rs-0002 */ use std :: env :: var_os ;
+/* FP:graphviz.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_obligation_forest_graphviz_USE_0002
+/* FP:graphviz.rs-0004 */ use std :: fs :: File ;
+/* FP:graphviz.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_obligation_forest_graphviz_USE_0003
+/* FP:graphviz.rs-0006 */ use std :: path :: Path ;
+/* FP:graphviz.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_obligation_forest_graphviz_USE_0004
+/* FP:graphviz.rs-0008 */ use std :: sync :: atomic :: { AtomicUsize , Ordering } ;
+/* FP:graphviz.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_obligation_forest_graphviz_USE_0005
+/* FP:graphviz.rs-0010 */ use rustc_graphviz as dot ;
+/* FP:graphviz.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_obligation_forest_graphviz_USE_0006
+/* FP:graphviz.rs-0012 */ use crate :: obligation_forest :: { ForestObligation , ObligationForest } ;
+/* FP:graphviz.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_obligation_forest_graphviz_IMPL_0007
+/* FP:graphviz.rs-0014 */ impl < O : ForestObligation > ObligationForest < O > { # [doc = " Creates a graphviz representation of the obligation forest. Given a directory this will"] # [doc = " create files with name of the format `<counter>_<description>.gv`. The counter is"] # [doc = " global and is maintained internally."] # [doc = ""] # [doc = " Calling this will do nothing unless the environment variable"] # [doc = " `DUMP_OBLIGATION_FOREST_GRAPHVIZ` is defined."] # [doc = ""] # [doc = " A few post-processing that you might want to do make the forest easier to visualize:"] # [doc = ""] # [doc = "  * `sed 's,std::[a-z]*::,,g'` — Deletes the `std::<package>::` prefix of paths."] # [doc = "  * `sed 's,\"Binder(TraitPredicate(<\\(.*\\)>)) (\\([^)]*\\))\",\"\\1 (\\2)\",'` — Transforms"] # [doc = "    `Binder(TraitPredicate(<predicate>))` into just `<predicate>`."] # [allow (dead_code)] pub fn dump_graphviz < P : AsRef < Path > > (& self , dir : P , description : & str) { static COUNTER : AtomicUsize = AtomicUsize :: new (0) ; if var_os ("DUMP_OBLIGATION_FOREST_GRAPHVIZ") . is_none () { return ; } let counter = COUNTER . fetch_add (1 , Ordering :: AcqRel) ; let file_path = dir . as_ref () . join (format ! ("{counter:010}_{description}.gv")) ; let mut gv_file = File :: create_buffered (file_path) . unwrap () ; dot :: render (& self , & mut gv_file) . unwrap () ; } }
+/* FP:graphviz.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_obligation_forest_graphviz_IMPL_0008
+/* FP:graphviz.rs-0016 */ impl < 'a , O : ForestObligation + 'a > dot :: Labeller < 'a > for & 'a ObligationForest < O > { type Node = usize ; type Edge = (usize , usize) ; fn graph_id (& self) -> dot :: Id < '_ > { dot :: Id :: new ("trait_obligation_forest") . unwrap () } fn node_id (& self , index : & Self :: Node) -> dot :: Id < '_ > { dot :: Id :: new (format ! ("obligation_{index}")) . unwrap () } fn node_label (& self , index : & Self :: Node) -> dot :: LabelText < '_ > { let node = & self . nodes [* index] ; let label = format ! ("{:?} ({:?})" , node . obligation . as_cache_key () , node . state . get ()) ; dot :: LabelText :: LabelStr (label . into ()) } fn edge_label (& self , (_index_source , _index_target) : & Self :: Edge) -> dot :: LabelText < '_ > { dot :: LabelText :: LabelStr ("" . into ()) } }
+/* FP:graphviz.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_obligation_forest_graphviz_IMPL_0009
+/* FP:graphviz.rs-0018 */ impl < 'a , O : ForestObligation + 'a > dot :: GraphWalk < 'a > for & 'a ObligationForest < O > { type Node = usize ; type Edge = (usize , usize) ; fn nodes (& self) -> dot :: Nodes < '_ , Self :: Node > { (0 .. self . nodes . len ()) . collect () } fn edges (& self) -> dot :: Edges < '_ , Self :: Edge > { (0 .. self . nodes . len ()) . flat_map (| i | { let node = & self . nodes [i] ; node . dependents . iter () . map (move | & d | (d , i)) }) . collect () } fn source (& self , (s , _) : & Self :: Edge) -> Self :: Node { * s } fn target (& self , (_ , t) : & Self :: Edge) -> Self :: Node { * t } }

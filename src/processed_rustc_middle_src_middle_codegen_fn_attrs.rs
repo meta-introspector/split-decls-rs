@@ -1,213 +1,34 @@
-use std::borrow::Cow;
-
-use rustc_abi::Align;
-use crate::rustc_complete::attrs::{InlineAttr, InstructionSetAttr, Linkage, OptimizeAttr};
-use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-use crate::rustc_complete::Symbol;
-use rustc_target::spec::SanitizerSet;
-
-use crate::ty::{InstanceKind, TyCtxt};
-
-impl<'tcx> TyCtxt<'tcx> {
-    pub fn codegen_instance_attrs(
-        self,
-        instance_kind: InstanceKind<'_>,
-    ) -> Cow<'tcx, CodegenFnAttrs> {
-        let mut attrs = Cow::Borrowed(self.codegen_fn_attrs(instance_kind.def_id()));
-
-        // Drop the `#[naked]` attribute on non-item `InstanceKind`s, like the shims that
-        // are generated for indirect function calls.
-        if !matches!(instance_kind, InstanceKind::Item(_)) {
-            if attrs.flags.contains(CodegenFnAttrFlags::NAKED) {
-                attrs.to_mut().flags.remove(CodegenFnAttrFlags::NAKED);
-            }
-        }
-
-        attrs
-    }
-}
-
-#[derive(Clone, TyEncodable, TyDecodable, HashStable, Debug)]
-pub struct CodegenFnAttrs {
-    pub flags: CodegenFnAttrFlags,
-    /// Parsed representation of the `#[inline]` attribute
-    pub inline: InlineAttr,
-    /// Parsed representation of the `#[optimize]` attribute
-    pub optimize: OptimizeAttr,
-    /// The name this function will be imported/exported under. This can be set
-    /// using the `#[unsafe(export_name = "..."]` or `#[link_name = "..."]` attribute
-    /// depending on if this is a function definition or foreign function.
-    pub symbol_name: Option<Symbol>,
-    /// The `#[link_ordinal = "..."]` attribute, indicating an ordinal an
-    /// imported function has in the dynamic library. Note that this must not
-    /// be set when `link_name` is set. This is for foreign items with the
-    /// "raw-dylib" kind.
-    pub link_ordinal: Option<u16>,
-    /// The `#[target_feature(enable = "...")]` attribute and the enabled
-    /// features (only enabled features are supported right now).
-    /// Implied target features have already been applied.
-    pub target_features: Vec<TargetFeature>,
-    /// Whether the function was declared safe, but has target features
-    pub safe_target_features: bool,
-    /// The `#[linkage = "..."]` attribute on Rust-defined items and the value we found.
-    pub linkage: Option<Linkage>,
-    /// The `#[linkage = "..."]` attribute on foreign items and the value we found.
-    pub import_linkage: Option<Linkage>,
-    /// The `#[unsafe(link_section = "..."]` attribute, or what executable section this
-    /// should be placed in.
-    pub link_section: Option<Symbol>,
-    /// The `#[sanitize(xyz = "off")]` attribute. Indicates sanitizers for which
-    /// instrumentation should be disabled inside the function.
-    pub no_sanitize: SanitizerSet,
-    /// The `#[instruction_set(set)]` attribute. Indicates if the generated code should
-    /// be generated against a specific instruction set. Only usable on architectures which allow
-    /// switching between multiple instruction sets.
-    pub instruction_set: Option<InstructionSetAttr>,
-    /// The `#[align(...)]` attribute. Determines the alignment of the function body.
-    // FIXME(#82232, #143834): temporarily renamed to mitigate `#[align]` nameres ambiguity
-    pub alignment: Option<Align>,
-    /// The `#[patchable_function_entry(...)]` attribute. Indicates how many nops should be around
-    /// the function entry.
-    pub patchable_function_entry: Option<PatchableFunctionEntry>,
-}
-
-#[derive(Copy, Clone, Debug, TyEncodable, TyDecodable, HashStable, PartialEq, Eq)]
-pub enum TargetFeatureKind {
-    /// The feature is implied by another feature, rather than explicitly added by the
-    /// `#[target_feature]` attribute
-    Implied,
-    /// The feature is added by the regular `target_feature` attribute.
-    Enabled,
-    /// The feature is added by the unsafe `force_target_feature` attribute.
-    Forced,
-}
-
-#[derive(Copy, Clone, Debug, Eq, PartialEq, TyEncodable, TyDecodable, HashStable)]
-pub struct TargetFeature {
-    /// The name of the target feature (e.g. "avx")
-    pub name: Symbol,
-    /// The way this feature was enabled.
-    pub kind: TargetFeatureKind,
-}
-
-#[derive(Copy, Clone, Debug, TyEncodable, TyDecodable, HashStable)]
-pub struct PatchableFunctionEntry {
-    /// Nops to prepend to the function
-    prefix: u8,
-    /// Nops after entry, but before body
-    entry: u8,
-}
-
-impl PatchableFunctionEntry {
-    pub fn from_config(config: crate::rustc_session::config::PatchableFunctionEntry) -> Self {
-        Self { prefix: config.prefix(), entry: config.entry() }
-    }
-    pub fn from_prefix_and_entry(prefix: u8, entry: u8) -> Self {
-        Self { prefix, entry }
-    }
-    pub fn prefix(&self) -> u8 {
-        self.prefix
-    }
-    pub fn entry(&self) -> u8 {
-        self.entry
-    }
-}
-
-#[derive(Clone, Copy, PartialEq, Eq, TyEncodable, TyDecodable, HashStable)]
-pub struct CodegenFnAttrFlags(u32);
-bitflags::bitflags! {
-    impl CodegenFnAttrFlags: u32 {
-        /// `#[cold]`: a hint to LLVM that this function, when called, is never on
-        /// the hot path.
-        const COLD                      = 1 << 0;
-        /// `#[rustc_nounwind]`: An indicator that function will never unwind.
-        const NEVER_UNWIND              = 1 << 1;
-        /// `#[naked]`: an indicator to LLVM that no function prologue/epilogue
-        /// should be generated.
-        const NAKED                     = 1 << 2;
-        /// `#[unsafe(no_mangle)]`: an indicator that the function's name should be the same
-        /// as its symbol.
-        const NO_MANGLE                 = 1 << 3;
-        /// `#[rustc_std_internal_symbol]`: an indicator that this symbol is a
-        /// "weird symbol" for the standard library in that it has slightly
-        /// different linkage, visibility, and reachability rules.
-        const RUSTC_STD_INTERNAL_SYMBOL = 1 << 4;
-        /// `#[thread_local]`: indicates a static is actually a thread local
-        /// piece of memory
-        const THREAD_LOCAL              = 1 << 5;
-        /// `#[used(compiler)]`: indicates that LLVM can't eliminate this function (but the
-        /// linker can!).
-        const USED_COMPILER             = 1 << 6;
-        /// `#[used(linker)]`:
-        /// indicates that neither LLVM nor the linker will eliminate this function.
-        const USED_LINKER               = 1 << 7;
-        /// `#[track_caller]`: allow access to the caller location
-        const TRACK_CALLER              = 1 << 8;
-        /// #[ffi_pure]: applies clang's `pure` attribute to a foreign function
-        /// declaration.
-        const FFI_PURE                  = 1 << 9;
-        /// #[ffi_const]: applies clang's `const` attribute to a foreign function
-        /// declaration.
-        const FFI_CONST                 = 1 << 10;
-        /// `#[rustc_allocator]`: a hint to LLVM that the pointer returned from this
-        /// function is never null and the function has no side effects other than allocating.
-        const ALLOCATOR                 = 1 << 11;
-        /// `#[rustc_deallocator]`: a hint to LLVM that the function only deallocates memory.
-        const DEALLOCATOR               = 1 << 12;
-        /// `#[rustc_reallocator]`: a hint to LLVM that the function only reallocates memory.
-        const REALLOCATOR               = 1 << 13;
-        /// `#[rustc_allocator_zeroed]`: a hint to LLVM that the function only allocates zeroed memory.
-        const ALLOCATOR_ZEROED          = 1 << 14;
-        /// `#[no_builtins]`: indicates that disable implicit builtin knowledge of functions for the function.
-        const NO_BUILTINS               = 1 << 15;
-        /// Marks foreign items, to make `contains_extern_indicator` cheaper.
-        const FOREIGN_ITEM              = 1 << 16;
-    }
-}
-crate::rustc_data_structures::external_bitflags_debug! { CodegenFnAttrFlags }
-
-impl CodegenFnAttrs {
-    pub const EMPTY: &'static Self = &Self::new();
-
-    pub const fn new() -> CodegenFnAttrs {
-        CodegenFnAttrs {
-            flags: CodegenFnAttrFlags::empty(),
-            inline: InlineAttr::None,
-            optimize: OptimizeAttr::Default,
-            symbol_name: None,
-            link_ordinal: None,
-            target_features: vec![],
-            safe_target_features: false,
-            linkage: None,
-            import_linkage: None,
-            link_section: None,
-            no_sanitize: SanitizerSet::empty(),
-            instruction_set: None,
-            alignment: None,
-            patchable_function_entry: None,
-        }
-    }
-
-    /// Returns `true` if it looks like this symbol needs to be exported, for example:
-    ///
-    /// * `#[unsafe(no_mangle)]` is present
-    /// * `#[unsafe(export_name(...)]` is present
-    /// * `#[linkage]` is present
-    ///
-    /// Keep this in sync with the logic for the unused_attributes for `#[inline]` lint.
-    pub fn contains_extern_indicator(&self) -> bool {
-        if self.flags.contains(CodegenFnAttrFlags::FOREIGN_ITEM) {
-            return false;
-        }
-
-        self.flags.contains(CodegenFnAttrFlags::NO_MANGLE)
-            || self.flags.contains(CodegenFnAttrFlags::RUSTC_STD_INTERNAL_SYMBOL)
-            || self.symbol_name.is_some()
-            || match self.linkage {
-                // These are private, so make sure we don't try to consider
-                // them external.
-                None | Some(Linkage::Internal) => false,
-                Some(_) => true,
-            }
-    }
-}
+/* FP:codegen_fn_attrs.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_codegen_fn_attrs_USE_0001
+/* FP:codegen_fn_attrs.rs-0002 */ use std :: borrow :: Cow ;
+/* FP:codegen_fn_attrs.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_codegen_fn_attrs_USE_0002
+/* FP:codegen_fn_attrs.rs-0004 */ use crate :: rustc_abi :: Align ;
+/* FP:codegen_fn_attrs.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_codegen_fn_attrs_USE_0003
+/* FP:codegen_fn_attrs.rs-0006 */ use crate :: rustc_complete :: attrs :: { InlineAttr , InstructionSetAttr , Linkage , OptimizeAttr } ;
+/* FP:codegen_fn_attrs.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_codegen_fn_attrs_USE_0004
+/* FP:codegen_fn_attrs.rs-0008 */ use rustc_macros :: { HashStable , TyDecodable , TyEncodable } ;
+/* FP:codegen_fn_attrs.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_codegen_fn_attrs_USE_0005
+/* FP:codegen_fn_attrs.rs-0010 */ use crate :: rustc_complete :: Symbol ;
+/* FP:codegen_fn_attrs.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_codegen_fn_attrs_USE_0006
+/* FP:codegen_fn_attrs.rs-0012 */ use crate :: rustc_target :: spec :: SanitizerSet ;
+/* FP:codegen_fn_attrs.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_codegen_fn_attrs_USE_0007
+/* FP:codegen_fn_attrs.rs-0014 */ use crate :: ty :: { InstanceKind , TyCtxt } ;
+/* FP:codegen_fn_attrs.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_codegen_fn_attrs_IMPL_0008
+/* FP:codegen_fn_attrs.rs-0016 */ impl < 'tcx > TyCtxt < 'tcx > { pub fn codegen_instance_attrs (self , instance_kind : InstanceKind < '_ > ,) -> Cow < 'tcx , CodegenFnAttrs > { let mut attrs = Cow :: Borrowed (self . codegen_fn_attrs (instance_kind . def_id ())) ; if ! matches ! (instance_kind , InstanceKind :: Item (_)) { if attrs . flags . contains (CodegenFnAttrFlags :: NAKED) { attrs . to_mut () . flags . remove (CodegenFnAttrFlags :: NAKED) ; } } attrs } }
+/* FP:codegen_fn_attrs.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_codegen_fn_attrs_STRUCT_0009
+/* FP:codegen_fn_attrs.rs-0018 */ # [derive (Clone , TyEncodable , TyDecodable , HashStable , Debug)] pub struct CodegenFnAttrs { pub flags : CodegenFnAttrFlags , # [doc = " Parsed representation of the `#[inline]` attribute"] pub inline : InlineAttr , # [doc = " Parsed representation of the `#[optimize]` attribute"] pub optimize : OptimizeAttr , # [doc = " The name this function will be imported/exported under. This can be set"] # [doc = " using the `#[unsafe(export_name = \"...\"]` or `#[link_name = \"...\"]` attribute"] # [doc = " depending on if this is a function definition or foreign function."] pub symbol_name : Option < Symbol > , # [doc = " The `#[link_ordinal = \"...\"]` attribute, indicating an ordinal an"] # [doc = " imported function has in the dynamic library. Note that this must not"] # [doc = " be set when `link_name` is set. This is for foreign items with the"] # [doc = " \"raw-dylib\" kind."] pub link_ordinal : Option < u16 > , # [doc = " The `#[target_feature(enable = \"...\")]` attribute and the enabled"] # [doc = " features (only enabled features are supported right now)."] # [doc = " Implied target features have already been applied."] pub target_features : Vec < TargetFeature > , # [doc = " Whether the function was declared safe, but has target features"] pub safe_target_features : bool , # [doc = " The `#[linkage = \"...\"]` attribute on Rust-defined items and the value we found."] pub linkage : Option < Linkage > , # [doc = " The `#[linkage = \"...\"]` attribute on foreign items and the value we found."] pub import_linkage : Option < Linkage > , # [doc = " The `#[unsafe(link_section = \"...\"]` attribute, or what executable section this"] # [doc = " should be placed in."] pub link_section : Option < Symbol > , # [doc = " The `#[sanitize(xyz = \"off\")]` attribute. Indicates sanitizers for which"] # [doc = " instrumentation should be disabled inside the function."] pub no_sanitize : SanitizerSet , # [doc = " The `#[instruction_set(set)]` attribute. Indicates if the generated code should"] # [doc = " be generated against a specific instruction set. Only usable on architectures which allow"] # [doc = " switching between multiple instruction sets."] pub instruction_set : Option < InstructionSetAttr > , # [doc = " The `#[align(...)]` attribute. Determines the alignment of the function body."] pub alignment : Option < Align > , # [doc = " The `#[patchable_function_entry(...)]` attribute. Indicates how many nops should be around"] # [doc = " the function entry."] pub patchable_function_entry : Option < PatchableFunctionEntry > , }
+/* FP:codegen_fn_attrs.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_codegen_fn_attrs_ENUM_0010
+/* FP:codegen_fn_attrs.rs-0020 */ # [derive (Copy , Clone , Debug , TyEncodable , TyDecodable , HashStable , PartialEq , Eq)] pub enum TargetFeatureKind { # [doc = " The feature is implied by another feature, rather than explicitly added by the"] # [doc = " `#[target_feature]` attribute"] Implied , # [doc = " The feature is added by the regular `target_feature` attribute."] Enabled , # [doc = " The feature is added by the unsafe `force_target_feature` attribute."] Forced , }
+/* FP:codegen_fn_attrs.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_codegen_fn_attrs_STRUCT_0011
+/* FP:codegen_fn_attrs.rs-0022 */ # [derive (Copy , Clone , Debug , Eq , PartialEq , TyEncodable , TyDecodable , HashStable)] pub struct TargetFeature { # [doc = " The name of the target feature (e.g. \"avx\")"] pub name : Symbol , # [doc = " The way this feature was enabled."] pub kind : TargetFeatureKind , }
+/* FP:codegen_fn_attrs.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_codegen_fn_attrs_STRUCT_0012
+/* FP:codegen_fn_attrs.rs-0024 */ # [derive (Copy , Clone , Debug , TyEncodable , TyDecodable , HashStable)] pub struct PatchableFunctionEntry { # [doc = " Nops to prepend to the function"] prefix : u8 , # [doc = " Nops after entry, but before body"] entry : u8 , }
+/* FP:codegen_fn_attrs.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_codegen_fn_attrs_IMPL_0013
+/* FP:codegen_fn_attrs.rs-0026 */ impl PatchableFunctionEntry { pub fn from_config (config : crate :: rustc_session :: config :: PatchableFunctionEntry) -> Self { Self { prefix : config . prefix () , entry : config . entry () } } pub fn from_prefix_and_entry (prefix : u8 , entry : u8) -> Self { Self { prefix , entry } } pub fn prefix (& self) -> u8 { self . prefix } pub fn entry (& self) -> u8 { self . entry } }
+/* FP:codegen_fn_attrs.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_codegen_fn_attrs_STRUCT_0014
+/* FP:codegen_fn_attrs.rs-0028 */ # [derive (Clone , Copy , PartialEq , Eq , TyEncodable , TyDecodable , HashStable)] pub struct CodegenFnAttrFlags (u32) ;
+/* FP:codegen_fn_attrs.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_codegen_fn_attrs_MACRO_0015
+/* FP:codegen_fn_attrs.rs-0030 */ bitflags :: bitflags ! { impl CodegenFnAttrFlags : u32 { # [doc = " `#[cold]`: a hint to LLVM that this function, when called, is never on"] # [doc = " the hot path."] const COLD = 1 << 0 ; # [doc = " `#[rustc_nounwind]`: An indicator that function will never unwind."] const NEVER_UNWIND = 1 << 1 ; # [doc = " `#[naked]`: an indicator to LLVM that no function prologue/epilogue"] # [doc = " should be generated."] const NAKED = 1 << 2 ; # [doc = " `#[unsafe(no_mangle)]`: an indicator that the function's name should be the same"] # [doc = " as its symbol."] const NO_MANGLE = 1 << 3 ; # [doc = " `#[rustc_std_internal_symbol]`: an indicator that this symbol is a"] # [doc = " \"weird symbol\" for the standard library in that it has slightly"] # [doc = " different linkage, visibility, and reachability rules."] const RUSTC_STD_INTERNAL_SYMBOL = 1 << 4 ; # [doc = " `#[thread_local]`: indicates a static is actually a thread local"] # [doc = " piece of memory"] const THREAD_LOCAL = 1 << 5 ; # [doc = " `#[used(compiler)]`: indicates that LLVM can't eliminate this function (but the"] # [doc = " linker can!)."] const USED_COMPILER = 1 << 6 ; # [doc = " `#[used(linker)]`:"] # [doc = " indicates that neither LLVM nor the linker will eliminate this function."] const USED_LINKER = 1 << 7 ; # [doc = " `#[track_caller]`: allow access to the caller location"] const TRACK_CALLER = 1 << 8 ; # [doc = " #[ffi_pure]: applies clang's `pure` attribute to a foreign function"] # [doc = " declaration."] const FFI_PURE = 1 << 9 ; # [doc = " #[ffi_const]: applies clang's `const` attribute to a foreign function"] # [doc = " declaration."] const FFI_CONST = 1 << 10 ; # [doc = " `#[rustc_allocator]`: a hint to LLVM that the pointer returned from this"] # [doc = " function is never null and the function has no side effects other than allocating."] const ALLOCATOR = 1 << 11 ; # [doc = " `#[rustc_deallocator]`: a hint to LLVM that the function only deallocates memory."] const DEALLOCATOR = 1 << 12 ; # [doc = " `#[rustc_reallocator]`: a hint to LLVM that the function only reallocates memory."] const REALLOCATOR = 1 << 13 ; # [doc = " `#[rustc_allocator_zeroed]`: a hint to LLVM that the function only allocates zeroed memory."] const ALLOCATOR_ZEROED = 1 << 14 ; # [doc = " `#[no_builtins]`: indicates that disable implicit builtin knowledge of functions for the function."] const NO_BUILTINS = 1 << 15 ; # [doc = " Marks foreign items, to make `contains_extern_indicator` cheaper."] const FOREIGN_ITEM = 1 << 16 ; } }
+/* FP:codegen_fn_attrs.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_codegen_fn_attrs_MACRO_0016
+/* FP:codegen_fn_attrs.rs-0032 */ crate :: rustc_data_structures :: external_bitflags_debug ! { CodegenFnAttrFlags }
+/* FP:codegen_fn_attrs.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_codegen_fn_attrs_IMPL_0017
+/* FP:codegen_fn_attrs.rs-0034 */ impl CodegenFnAttrs { pub const EMPTY : & 'static Self = & Self :: new () ; pub const fn new () -> CodegenFnAttrs { CodegenFnAttrs { flags : CodegenFnAttrFlags :: empty () , inline : InlineAttr :: None , optimize : OptimizeAttr :: Default , symbol_name : None , link_ordinal : None , target_features : vec ! [] , safe_target_features : false , linkage : None , import_linkage : None , link_section : None , no_sanitize : SanitizerSet :: empty () , instruction_set : None , alignment : None , patchable_function_entry : None , } } # [doc = " Returns `true` if it looks like this symbol needs to be exported, for example:"] # [doc = ""] # [doc = " * `#[unsafe(no_mangle)]` is present"] # [doc = " * `#[unsafe(export_name(...)]` is present"] # [doc = " * `#[linkage]` is present"] # [doc = ""] # [doc = " Keep this in sync with the logic for the unused_attributes for `#[inline]` lint."] pub fn contains_extern_indicator (& self) -> bool { if self . flags . contains (CodegenFnAttrFlags :: FOREIGN_ITEM) { return false ; } self . flags . contains (CodegenFnAttrFlags :: NO_MANGLE) || self . flags . contains (CodegenFnAttrFlags :: RUSTC_STD_INTERNAL_SYMBOL) || self . symbol_name . is_some () || match self . linkage { None | Some (Linkage :: Internal) => false , Some (_) => true , } } }

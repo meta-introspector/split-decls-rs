@@ -3,6 +3,106 @@ use std::collections::{HashMap, HashSet};
 use std::fs;
 use std::io::Write;
 use serde_json::Value;
+use syn::{parse_file, Item, ItemMod, Attribute, Meta, parse_str, visit::Visit};
+use quote::quote;
+
+fn semantic_patch_content(content: &str, file_name: &str) -> Result<String, Box<dyn std::error::Error>> {
+    // Try to parse as Rust code
+    match parse_file(content) {
+        Ok(mut file) => {
+            let mut ast_id_counter = 1u32;
+            let mut modified_content = String::new();
+            
+            // Add AST ID tracking to each item
+            for (item_idx, item) in file.items.iter().enumerate() {
+                let ast_id = format!("AST_{}_{}_{:04}", 
+                    file_name.replace(".rs", "").replace("/", "_"), 
+                    get_item_type(item), 
+                    ast_id_counter);
+                
+                // Add warning attribute with AST ID
+                modified_content.push_str(&format!("#[warn(unused_variables)] // {}\n", ast_id));
+                modified_content.push_str(&format!("{}\n", quote::quote!(#item)));
+                
+                ast_id_counter += 1;
+            }
+            
+            Ok(modified_content)
+        }
+        Err(_) => {
+            // If parsing fails, fall back to original content with file-level AST ID
+            let ast_id = format!("AST_{}_UNPARSEABLE_0001", 
+                file_name.replace(".rs", "").replace("/", "_"));
+            Ok(format!("#[warn(unused_variables)] // {}\n{}", ast_id, content))
+        }
+    }
+}
+
+fn apply_ast_patches(content: &str, file_name: &str) -> Result<String, Box<dyn std::error::Error>> {
+    let mut patched_content = content.to_string();
+    
+    // Check for AST patch files and replace specific nodes
+    let lines: Vec<&str> = content.lines().collect();
+    for (i, line) in lines.iter().enumerate() {
+        if line.contains("#[warn(unused_variables)] // AST_") {
+            // Extract AST ID from the comment
+            if let Some(ast_id_start) = line.find("AST_") {
+                let ast_id_part = &line[ast_id_start..];
+                if let Some(ast_id_end) = ast_id_part.find(' ').or_else(|| ast_id_part.find('\n')) {
+                    let ast_id = &ast_id_part[..ast_id_end];
+                    
+                    // Check if we have a patch file for this AST ID
+                    let patch_file = format!("src/ast_patch_{}.rs", 
+                        ast_id.split('_').last().unwrap_or("unknown"));
+                    
+                    if std::path::Path::new(&patch_file).exists() {
+                        println!("🔧 Applying AST patch: {} -> {}", ast_id, patch_file);
+                        
+                        // Read the patch content
+                        if let Ok(patch_content) = std::fs::read_to_string(&patch_file) {
+                            // Replace the problematic AST node with the patch
+                            // Find the next AST node or end of file to determine replacement range
+                            let mut end_line = lines.len();
+                            for j in (i + 1)..lines.len() {
+                                if lines[j].contains("#[warn(unused_variables)] // AST_") {
+                                    end_line = j;
+                                    break;
+                                }
+                            }
+                            
+                            // Reconstruct content with patch
+                            let mut new_lines = Vec::new();
+                            new_lines.extend_from_slice(&lines[..i]);
+                            new_lines.push(&patch_content);
+                            new_lines.extend_from_slice(&lines[end_line..]);
+                            
+                            return Ok(new_lines.join("\n"));
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    Ok(patched_content)
+}
+
+fn get_item_type(item: &Item) -> &'static str {
+    match item {
+        Item::Fn(_) => "FN",
+        Item::Struct(_) => "STRUCT", 
+        Item::Enum(_) => "ENUM",
+        Item::Trait(_) => "TRAIT",
+        Item::Impl(_) => "IMPL",
+        Item::Mod(_) => "MOD",
+        Item::Use(_) => "USE",
+        Item::Static(_) => "STATIC",
+        Item::Const(_) => "CONST",
+        Item::Type(_) => "TYPE",
+        Item::Macro(_) => "MACRO",
+        _ => "OTHER",
+    }
+}
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("🔧 Building rustc from symbol_map.json...");
@@ -38,6 +138,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     // Generate include file with all submodules
     generate_complete_includes(&crate_files)?;
+    
+    // Generate stub modules from symbol_map.json
+    // Re-enable stub generation for missing items
+    generate_stub_modules_from_symbols()?;
     
     println!("✅ Generated complete rustc includes from {} files in {} crates", 
              source_files.len(), crate_files.len());
@@ -85,6 +189,93 @@ fn generate_complete_includes(crate_files: &HashMap<String, Vec<String>>) -> Res
     // Create root-level modules that some code expects
     writeln!(include_file, "pub mod rustc_infer {{ pub use crate::*; }}")?;
     writeln!(include_file, "pub mod rustc_trait_selection {{ pub use crate::*; }}")?;
+    writeln!(include_file)?;
+    
+    // Add core rustc modules that are heavily imported
+    writeln!(include_file, "pub mod ty {{")?;
+    writeln!(include_file, "    pub struct Ty<T>(pub T);")?;
+    writeln!(include_file, "    pub struct TyCtxt<T>(pub T);")?;
+    writeln!(include_file, "    pub struct TypeAndMut<T> {{ pub ty: T, pub mutbl: bool }}")?;
+    writeln!(include_file, "    pub struct Region;")?;
+    writeln!(include_file, "    pub struct Predicate;")?;
+    writeln!(include_file, "    pub struct TyKind;")?;
+    writeln!(include_file, "    pub struct GenericArg;")?;
+    writeln!(include_file, "    pub struct GenericArgs;")?;
+    writeln!(include_file, "    pub struct ParamTy;")?;
+    writeln!(include_file, "    pub struct EarlyBinder<T>(pub T);")?;
+    writeln!(include_file, "    pub struct Binder<T>(pub T);")?;
+    writeln!(include_file, "    pub struct TraitRef;")?;
+    writeln!(include_file, "    pub struct PolyTraitRef;")?;
+    writeln!(include_file, "    pub struct ExistentialTraitRef;")?;
+    writeln!(include_file, "    pub struct TypeFoldable;")?;
+    writeln!(include_file, "    pub struct TypeVisitable;")?;
+    writeln!(include_file, "    pub mod layout {{")?;
+    writeln!(include_file, "        pub struct Layout;")?;
+    writeln!(include_file, "        pub struct LayoutError;")?;
+    writeln!(include_file, "        pub struct TyAndLayout<T> {{ pub ty: T, pub layout: Layout }}")?;
+    writeln!(include_file, "    }}")?;
+    writeln!(include_file, "}}")?;
+    writeln!(include_file)?;
+    
+    writeln!(include_file, "pub mod def_id {{")?;
+    writeln!(include_file, "    pub struct DefId;")?;
+    writeln!(include_file, "    pub struct LocalDefId;")?;
+    writeln!(include_file, "    pub struct DefIndex;")?;
+    writeln!(include_file, "    pub struct CrateNum;")?;
+    writeln!(include_file, "    pub struct DefPathHash;")?;
+    writeln!(include_file, "}}")?;
+    writeln!(include_file)?;
+    
+    writeln!(include_file, "pub mod def {{")?;
+    writeln!(include_file, "    pub struct Def;")?;
+    writeln!(include_file, "    pub struct DefKind;")?;
+    writeln!(include_file, "}}")?;
+    writeln!(include_file)?;
+    
+    writeln!(include_file, "pub mod mir {{")?;
+    writeln!(include_file, "    pub struct Body<T>(pub T);")?;
+    writeln!(include_file, "    pub struct BasicBlock;")?;
+    writeln!(include_file, "    pub struct Local;")?;
+    writeln!(include_file, "    pub struct Place<T>(pub T);")?;
+    writeln!(include_file, "    pub struct Operand<T>(pub T);")?;
+    writeln!(include_file, "    pub struct Rvalue<T>(pub T);")?;
+    writeln!(include_file, "}}")?;
+    writeln!(include_file)?;
+    
+    // Common functions
+    writeln!(include_file, "pub fn bug() -> ! {{ panic!(\"bug\") }}")?;
+    writeln!(include_file, "pub fn span_bug() -> ! {{ panic!(\"span_bug\") }}")?;
+    writeln!(include_file)?;
+    
+    // Common items
+    writeln!(include_file, "pub struct Span;")?;
+    writeln!(include_file, "pub struct Symbol;")?;
+    writeln!(include_file, "pub struct Session;")?;
+    writeln!(include_file, "pub struct ErrorGuaranteed;")?;
+    writeln!(include_file, "pub struct LangItem;")?;
+    writeln!(include_file, "pub const DUMMY_SP: Span = Span;")?;
+    writeln!(include_file)?;
+    
+    // Modules
+    writeln!(include_file, "pub mod middle {{ pub struct Middle; }}")?;
+    writeln!(include_file, "pub mod query {{ pub struct Query; }}")?;
+    writeln!(include_file, "pub mod config {{ pub struct Config; }}")?;
+    writeln!(include_file, "pub mod attrs {{ pub struct Attrs; }}")?;
+    writeln!(include_file, "pub mod codes {{ pub struct Codes; }}")?;
+    writeln!(include_file, "pub mod source_map {{ pub struct SourceMap; }}")?;
+    writeln!(include_file, "pub mod sym {{ pub struct Sym; }}")?;
+    writeln!(include_file, "pub mod util {{ pub struct Util; }}")?;
+    writeln!(include_file, "pub mod token {{ pub struct Token; pub struct TokenKind; }}")?;
+    writeln!(include_file, "pub mod tokenstream {{ pub struct TokenStream; pub struct TokenTree; }}")?;
+    writeln!(include_file)?;
+    
+    // Missing root modules
+    writeln!(include_file, "pub mod tests {{ pub struct Tests; }}")?;
+    writeln!(include_file, "pub mod undo_log {{ pub struct UndoLog; }}")?;
+    writeln!(include_file, "pub mod rustc_hash {{ pub struct RustcHash; }}")?;
+    writeln!(include_file, "pub mod fingerprint {{ pub struct Fingerprint; }}")?;
+    writeln!(include_file, "pub mod outline {{ pub struct Outline; }}")?;
+    writeln!(include_file, "pub mod errors {{ pub struct Errors; }}")?;
     writeln!(include_file, "pub mod error_reporting {{ pub use crate::*; }}")?;
     writeln!(include_file, "pub mod traits {{ pub use crate::*; }}")?;
     writeln!(include_file, "pub mod stable_hasher {{ pub use crate::*; }}")?;
@@ -211,6 +402,26 @@ fn generate_complete_includes(crate_files: &HashMap<String, Vec<String>>) -> Res
                     patched_content = patched_content.replace("rustc_errors::", "crate::rustc_errors::");
                     patched_content = patched_content.replace("rustc_infer::", "crate::rustc_infer::");
                     patched_content = patched_content.replace("rustc_trait_selection::", "crate::rustc_trait_selection::");
+                    patched_content = patched_content.replace("rustc_index::", "crate::rustc_index::");
+                    patched_content = patched_content.replace("rustc_mir_dataflow::", "crate::rustc_mir_dataflow::");
+                    patched_content = patched_content.replace("rustc_codegen_ssa::", "crate::rustc_codegen_ssa::");
+                    patched_content = patched_content.replace("rustc_target::", "crate::rustc_target::");
+                    patched_content = patched_content.replace("rustc_public_bridge::", "crate::rustc_public_bridge::");
+                    patched_content = patched_content.replace("rustc_metadata::", "crate::rustc_metadata::");
+                    patched_content = patched_content.replace("rustc_hir_analysis::", "crate::rustc_hir_analysis::");
+                    patched_content = patched_content.replace("rustc_pattern_analysis::", "crate::rustc_pattern_analysis::");
+                    patched_content = patched_content.replace("rustc_lint::", "crate::rustc_lint::");
+                    patched_content = patched_content.replace("rustc_error_messages::", "crate::rustc_error_messages::");
+                    patched_content = patched_content.replace("rustc_parse::", "crate::rustc_parse::");
+                    patched_content = patched_content.replace("rustc_serialize::", "crate::rustc_serialize::");
+                    patched_content = patched_content.replace("rustc_proc_macro::", "crate::rustc_proc_macro::");
+                    patched_content = patched_content.replace("rustc_index_macros::", "crate::rustc_index_macros::");
+                    patched_content = patched_content.replace("rustc_expand::", "crate::rustc_expand::");
+                    patched_content = patched_content.replace("rustc_lint_defs::", "crate::rustc_lint_defs::");
+                    patched_content = patched_content.replace("rustc_hash::", "crate::rustc_hash::");
+                    patched_content = patched_content.replace("rustc_thread_pool::", "crate::rustc_thread_pool::");
+                    patched_content = patched_content.replace("rustc_abi::", "crate::rustc_abi::");
+                    patched_content = patched_content.replace("rustc_feature::", "crate::rustc_feature::");
                     
                     // Fix specific import patterns that are problematic
                     patched_content = patched_content.replace("use crate::rustc_span::", "use crate::rustc_complete::");
@@ -233,9 +444,68 @@ fn generate_complete_includes(crate_files: &HashMap<String, Vec<String>>) -> Res
                     patched_content = patched_content.replace("extern \"C\" {", "unsafe extern \"C\" {");
                     patched_content = patched_content.replace("extern \"system\" {", "unsafe extern \"system\" {");
                     patched_content = patched_content.replace("extern {", "unsafe extern {");
+                    // Clean up any duplicates created
+                    patched_content = patched_content.replace("unsafe unsafe extern", "unsafe extern");
+                    // Fix broken macro definitions with extern
+                    patched_content = patched_content.replace("_unsafe extern {", " {");
+                    patched_content = patched_content.replace("macro_rules! local_key_if_separate_unsafe extern {", "macro_rules! local_key_if_separate {");
+                    
+                    // Skip transformations for files containing cfg(test), but still create the file
+                    if patched_content.contains("#[cfg(test)]") || patched_content.contains("#[cfg(all(unix, test))]") {
+                        // For test-related files, write as-is without any transformations
+                        continue;
+                    }
+                    
+                    // Apply semantic patches first (only for non-test files)
+                    patched_content = semantic_patch_content(&patched_content, &file)?;
+                    
+                    // Apply targeted AST patches
+                    patched_content = apply_ast_patches(&patched_content, &file)?;
+                    
+                    // Add fingerprint comments for auditing (skip cfg(test) lines)
+                    let mut fingerprinted_content = String::new();
+                    for (line_num, line) in patched_content.lines().enumerate() {
+                        // Skip any lines with cfg(test) - leave them untouched
+                        if line.contains("#[cfg(test)]") || line.contains("#[cfg(all(unix, test))]") {
+                            fingerprinted_content.push_str(line);
+                            fingerprinted_content.push('\n');
+                            continue;
+                        }
+                        
+                        let fingerprint = format!("/* FP:{}-{:04} */ {}", 
+                            file.split('/').last().unwrap_or("unknown"), 
+                            line_num + 1, 
+                            line);
+                        fingerprinted_content.push_str(&fingerprint);
+                        fingerprinted_content.push('\n');
+                    }
+                    patched_content = fingerprinted_content;
                     
                     // Fix super::prelude imports
                     patched_content = patched_content.replace("super::prelude", "crate::prelude");
+                    
+                    // Fix orphaned test path attributes - remove broken path attributes
+                   // patched_content = patched_content.replace("#[path = \"tests/", "// #[path = \"tests/");
+                    // Fix specific orphaned cfg attributes
+                    //patched_content = patched_content.replace("#[cfg(test)]\n// #[path = \"tests/term.rs\"]", "#[cfg(test)]\nmod tests { pub struct TestMod; }");
+                    //patched_content = patched_content.replace("#[cfg(test)]\n// #[path = \"tests/parse.rs\"]", "#[cfg(test)]\nmod tests { pub struct TestMod; }");
+                    // Fix invalid #[default] on non-unit enum variants
+                    patched_content = patched_content.replace("#[default]\n    HumanReadable {", "HumanReadable {");
+                    //if patched_content.ends_with("#[cfg(test)]") {
+                    //    patched_content = patched_content + "\nmod tests { pub struct TestMod; }";
+                    //}
+                    //if patched_content.ends_with("#[cfg(all(unix, test))]") {
+                    //    patched_content = patched_content + "\nmod unix_tests { pub struct UnixTest; }";
+                    //}
+                    // Fix orphaned cfg attributes (comprehensive)
+                    //patched_content = patched_content.replace("#[cfg(test)]\n// Original #[path =", "#[cfg(test)]\nmod tests { pub struct TestMod; }\n// Original #[path =");
+                    //patched_content = patched_content.replace("#[cfg(all(unix, test))]\n", "#[cfg(all(unix, test))]\nmod unix_tests { pub struct UnixTest; }\n");
+                    // Fix invalid struct names with special characters
+                    patched_content = patched_content.replace("___*;", "___Star;");
+                    patched_content = patched_content.replace("___{", "___Brace");
+                    // Fix broken macro repetitions
+                    patched_content = patched_content.replace("$(\n        )*", "// Empty macro repetition removed");
+                    patched_content = patched_content.replace("        $(\n        )*", "        // Empty macro repetition removed");
                     
                     // Fix macro name conflicts by making them crate-specific
                     if crate_name == "rustc_hir" && patched_content.contains("macro_rules! arena_types") {
@@ -402,5 +672,64 @@ fn generate_complete_includes(crate_files: &HashMap<String, Vec<String>>) -> Res
     }
     
     println!("✅ Generated src/rustc_complete.rs with {} patched crates", ordered_crates.len());
+    Ok(())
+}
+fn generate_stub_modules_from_symbols() -> Result<(), Box<dyn std::error::Error>> {
+    use std::collections::BTreeMap;
+    
+    // Read symbol map if it exists
+    let symbol_data = match fs::read_to_string("symbol_map.json") {
+        Ok(data) => data,
+        Err(_) => return Ok(()), // Skip if no symbol_map.json
+    };
+    
+    let symbol_map: HashMap<String, Value> = serde_json::from_str(&symbol_data)?;
+    let mut modules: BTreeMap<String, std::collections::BTreeSet<String>> = BTreeMap::new();
+    
+    for (_, symbol_info) in &symbol_map {
+        let name = symbol_info.get("name").and_then(|v| v.as_str()).unwrap_or("");
+        let symbol_type = symbol_info.get("symbol_type").and_then(|v| v.as_str()).unwrap_or("");
+        let crate_name = symbol_info.get("crate_name").and_then(|v| v.as_str()).unwrap_or("");
+        
+        if name.is_empty() || crate_name.is_empty() || !crate_name.starts_with("rustc_") {
+            continue;
+        }
+        
+        // Skip crates we already have as real dependencies or explicit modules
+        if crate_name == "rustc_abi" || crate_name == "rustc_data_structures" || crate_name == "rustc_index" || 
+           crate_name == "rustc_index_macros" || crate_name == "rustc_infer" || crate_name == "rustc_serialize" {
+            continue;
+        }
+        
+        let clean_name = name.replace("::", "_").replace(".", "_").replace("*", "Star").replace("{", "Brace").replace("}", "Brace").replace(",", "Comma").replace(" ", "");
+        let clean_name = if clean_name == "_" { "Underscore".to_string() } else { clean_name };
+        
+        let item = match symbol_type {
+            "enum" => format!("pub enum {} {{}}", clean_name),
+            "trait" => format!("pub trait {} {{}}", clean_name),
+            "function" => format!("pub fn {}() {{}}", clean_name),
+            _ => format!("pub struct {};", clean_name),
+        };
+        
+        modules.entry(crate_name.to_string()).or_insert_with(std::collections::BTreeSet::new).insert(item);
+    }
+    
+    // Generate Rust code with deduplication
+    let mut stub_content = String::new();
+    stub_content.push_str("// Auto-generated stub modules from symbol_map.json\n\n");
+    
+    for (crate_name, items) in &modules {
+        stub_content.push_str(&format!("pub mod {} {{\n", crate_name));
+        // Use BTreeSet to automatically deduplicate items
+        for item in items {
+            stub_content.push_str(&format!("    {}\n", item));
+        }
+        stub_content.push_str("}\n\n");
+    }
+    
+    // Write to generated_stubs.rs
+    fs::write("src/generated_stubs.rs", stub_content)?;
+    println!("✅ Generated {} stub modules from symbol_map.json", modules.len());
+    
     Ok(())
 }

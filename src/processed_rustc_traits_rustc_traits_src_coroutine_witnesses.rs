@@ -1,90 +1,18 @@
-use crate::rustc_infer::infer::TyCtxtInferExt;
-use crate::rustc_infer::infer::canonical::query_response::make_query_region_constraints;
-use crate::rustc_infer::infer::resolve::OpportunisticRegionResolver;
-use crate::rustc_infer::traits::{Obligation, ObligationCause};
-use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeFoldable, TypeVisitableExt, fold_regions};
-use crate::rustc_complete::def_id::DefId;
-use crate::rustc_trait_selection::traits::{ObligationCtxt, with_replaced_escaping_bound_vars};
-
-/// Return the set of types that should be taken into account when checking
-/// trait bounds on a coroutine's internal state. This properly replaces
-/// `ReErased` with new existential bound lifetimes.
-pub(crate) fn coroutine_hidden_types<'tcx>(
-    tcx: TyCtxt<'tcx>,
-    def_id: DefId,
-) -> ty::EarlyBinder<'tcx, ty::Binder<'tcx, ty::CoroutineWitnessTypes<TyCtxt<'tcx>>>> {
-    let coroutine_layout = tcx.mir_coroutine_witnesses(def_id);
-    let mut vars = vec![];
-    let bound_tys = tcx.mk_type_list_from_iter(
-        coroutine_layout
-            .as_ref()
-            .map_or_else(|| [].iter(), |l| l.field_tys.iter())
-            .filter(|decl| !decl.ignore_for_traits)
-            .map(|decl| {
-                let ty = fold_regions(tcx, decl.ty, |re, debruijn| {
-                    assert_eq!(re, tcx.lifetimes.re_erased);
-                    let var = ty::BoundVar::from_usize(vars.len());
-                    vars.push(ty::BoundVariableKind::Region(ty::BoundRegionKind::Anon));
-                    ty::Region::new_bound(
-                        tcx,
-                        debruijn,
-                        ty::BoundRegion { var, kind: ty::BoundRegionKind::Anon },
-                    )
-                });
-                ty
-            }),
-    );
-
-    let assumptions = compute_assumptions(tcx, def_id, bound_tys);
-
-    ty::EarlyBinder::bind(ty::Binder::bind_with_vars(
-        ty::CoroutineWitnessTypes { types: bound_tys, assumptions },
-        tcx.mk_bound_variable_kinds(&vars),
-    ))
-}
-
-fn compute_assumptions<'tcx>(
-    tcx: TyCtxt<'tcx>,
-    def_id: DefId,
-    bound_tys: &'tcx ty::List<Ty<'tcx>>,
-) -> &'tcx ty::List<ty::ArgOutlivesPredicate<'tcx>> {
-    let infcx = tcx.infer_ctxt().build(ty::TypingMode::Analysis {
-        defining_opaque_types_and_generators: ty::List::empty(),
-    });
-    with_replaced_escaping_bound_vars(&infcx, &mut vec![None], bound_tys, |bound_tys| {
-        let param_env = tcx.param_env(def_id);
-        let ocx = ObligationCtxt::new(&infcx);
-
-        ocx.register_obligations(bound_tys.iter().map(|ty| {
-            Obligation::new(
-                tcx,
-                ObligationCause::dummy(),
-                param_env,
-                ty::ClauseKind::WellFormed(ty.into()),
-            )
-        }));
-        let _errors = ocx.select_all_or_error();
-
-        let region_obligations = infcx.take_registered_region_obligations();
-        let region_assumptions = infcx.take_registered_region_assumptions();
-        let region_constraints = infcx.take_and_reset_region_constraints();
-
-        let outlives = make_query_region_constraints(
-            region_obligations,
-            &region_constraints,
-            region_assumptions,
-        )
-        .outlives
-        .fold_with(&mut OpportunisticRegionResolver::new(&infcx));
-
-        tcx.mk_outlives_from_iter(
-            outlives
-                .into_iter()
-                .map(|(o, _)| o)
-                // FIXME(higher_ranked_auto): We probably should deeply resolve these before
-                // filtering out infers which only correspond to unconstrained infer regions
-                // which we can sometimes get.
-                .filter(|o| !o.has_infer()),
-        )
-    })
-}
+/* FP:coroutine_witnesses.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_coroutine_witnesses_USE_0001
+/* FP:coroutine_witnesses.rs-0002 */ use crate :: rustc_infer :: infer :: TyCtxtInferExt ;
+/* FP:coroutine_witnesses.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_coroutine_witnesses_USE_0002
+/* FP:coroutine_witnesses.rs-0004 */ use crate :: rustc_infer :: infer :: canonical :: query_response :: make_query_region_constraints ;
+/* FP:coroutine_witnesses.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_coroutine_witnesses_USE_0003
+/* FP:coroutine_witnesses.rs-0006 */ use crate :: rustc_infer :: infer :: resolve :: OpportunisticRegionResolver ;
+/* FP:coroutine_witnesses.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_coroutine_witnesses_USE_0004
+/* FP:coroutine_witnesses.rs-0008 */ use crate :: rustc_infer :: traits :: { Obligation , ObligationCause } ;
+/* FP:coroutine_witnesses.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_coroutine_witnesses_USE_0005
+/* FP:coroutine_witnesses.rs-0010 */ use crate :: rustc_complete :: ty :: { self , Ty , TyCtxt , TypeFoldable , TypeVisitableExt , fold_regions } ;
+/* FP:coroutine_witnesses.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_coroutine_witnesses_USE_0006
+/* FP:coroutine_witnesses.rs-0012 */ use crate :: rustc_complete :: def_id :: DefId ;
+/* FP:coroutine_witnesses.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_coroutine_witnesses_USE_0007
+/* FP:coroutine_witnesses.rs-0014 */ use crate :: rustc_trait_selection :: traits :: { ObligationCtxt , with_replaced_escaping_bound_vars } ;
+/* FP:coroutine_witnesses.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_coroutine_witnesses_FN_0008
+/* FP:coroutine_witnesses.rs-0016 */ # [doc = " Return the set of types that should be taken into account when checking"] # [doc = " trait bounds on a coroutine's internal state. This properly replaces"] # [doc = " `ReErased` with new existential bound lifetimes."] pub (crate) fn coroutine_hidden_types < 'tcx > (tcx : TyCtxt < 'tcx > , def_id : DefId ,) -> ty :: EarlyBinder < 'tcx , ty :: Binder < 'tcx , ty :: CoroutineWitnessTypes < TyCtxt < 'tcx > > > > { let coroutine_layout = tcx . mir_coroutine_witnesses (def_id) ; let mut vars = vec ! [] ; let bound_tys = tcx . mk_type_list_from_iter (coroutine_layout . as_ref () . map_or_else (| | [] . iter () , | l | l . field_tys . iter ()) . filter (| decl | ! decl . ignore_for_traits) . map (| decl | { let ty = fold_regions (tcx , decl . ty , | re , debruijn | { assert_eq ! (re , tcx . lifetimes . re_erased) ; let var = ty :: BoundVar :: from_usize (vars . len ()) ; vars . push (ty :: BoundVariableKind :: Region (ty :: BoundRegionKind :: Anon)) ; ty :: Region :: new_bound (tcx , debruijn , ty :: BoundRegion { var , kind : ty :: BoundRegionKind :: Anon } ,) }) ; ty }) ,) ; let assumptions = compute_assumptions (tcx , def_id , bound_tys) ; ty :: EarlyBinder :: bind (ty :: Binder :: bind_with_vars (ty :: CoroutineWitnessTypes { types : bound_tys , assumptions } , tcx . mk_bound_variable_kinds (& vars) ,)) }
+/* FP:coroutine_witnesses.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_coroutine_witnesses_FN_0009
+/* FP:coroutine_witnesses.rs-0018 */ fn compute_assumptions < 'tcx > (tcx : TyCtxt < 'tcx > , def_id : DefId , bound_tys : & 'tcx ty :: List < Ty < 'tcx > > ,) -> & 'tcx ty :: List < ty :: ArgOutlivesPredicate < 'tcx > > { let infcx = tcx . infer_ctxt () . build (ty :: TypingMode :: Analysis { defining_opaque_types_and_generators : ty :: List :: empty () , }) ; with_replaced_escaping_bound_vars (& infcx , & mut vec ! [None] , bound_tys , | bound_tys | { let param_env = tcx . param_env (def_id) ; let ocx = ObligationCtxt :: new (& infcx) ; ocx . register_obligations (bound_tys . iter () . map (| ty | { Obligation :: new (tcx , ObligationCause :: dummy () , param_env , ty :: ClauseKind :: WellFormed (ty . into ()) ,) })) ; let _errors = ocx . select_all_or_error () ; let region_obligations = infcx . take_registered_region_obligations () ; let region_assumptions = infcx . take_registered_region_assumptions () ; let region_constraints = infcx . take_and_reset_region_constraints () ; let outlives = make_query_region_constraints (region_obligations , & region_constraints , region_assumptions ,) . outlives . fold_with (& mut OpportunisticRegionResolver :: new (& infcx)) ; tcx . mk_outlives_from_iter (outlives . into_iter () . map (| (o , _) | o) . filter (| o | ! o . has_infer ()) ,) }) }

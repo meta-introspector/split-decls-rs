@@ -1,234 +1,34 @@
-// See the docs for [`RenameReturnPlace`].
-
-use crate::rustc_complete::Mutability;
-use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_complete::bug;
-use crate::rustc_complete::mir::visit::{MutVisitor, NonUseContext, PlaceContext, Visitor};
-use crate::rustc_complete::mir::{self, BasicBlock, Local, Location};
-use crate::rustc_complete::ty::TyCtxt;
-use tracing::{debug, trace};
-
-/// This pass looks for MIR that always copies the same local into the return place and eliminates
-/// the copy by renaming all uses of that local to `_0`.
-///
-/// This allows LLVM to perform an optimization similar to the named return value optimization
-/// (NRVO) that is guaranteed in C++. This avoids a stack allocation and `memcpy` for the
-/// relatively common pattern of allocating a buffer on the stack, mutating it, and returning it by
-/// value like so:
-///
-/// ```rust
-/// fn foo(init: fn(&mut [u8; 1024])) -> [u8; 1024] {
-///     let mut buf = [0; 1024];
-///     init(&mut buf);
-///     buf
-/// }
-/// ```
-///
-/// For now, this pass is very simple and only capable of eliminating a single copy. A more general
-/// version of copy propagation, such as the one based on non-overlapping live ranges in [#47954] and
-/// [#71003], could yield even more benefits.
-///
-/// [#47954]: https://github.com/rust-lang/rust/pull/47954
-/// [#71003]: https://github.com/rust-lang/rust/pull/71003
-pub(super) struct RenameReturnPlace;
-
-impl<'tcx> crate::MirPass<'tcx> for RenameReturnPlace {
-    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
-        // unsound: #111005
-        sess.mir_opt_level() > 0 && sess.opts.unstable_opts.unsound_mir_opts
-    }
-
-    fn run_pass(&self, tcx: TyCtxt<'tcx>, body: &mut mir::Body<'tcx>) {
-        let def_id = body.source.def_id();
-        let Some(returned_local) = local_eligible_for_nrvo(body) else {
-            debug!("`{:?}` was ineligible for NRVO", def_id);
-            return;
-        };
-
-        debug!(
-            "`{:?}` was eligible for NRVO, making {:?} the return place",
-            def_id, returned_local
-        );
-
-        RenameToReturnPlace { tcx, to_rename: returned_local }.visit_body_preserves_cfg(body);
-
-        // Clean up the `NOP`s we inserted for statements made useless by our renaming.
-        for block_data in body.basic_blocks.as_mut_preserves_cfg() {
-            block_data.statements.retain(|stmt| stmt.kind != mir::StatementKind::Nop);
-        }
-
-        // Overwrite the debuginfo of `_0` with that of the renamed local.
-        let (renamed_decl, ret_decl) =
-            body.local_decls.pick2_mut(returned_local, mir::RETURN_PLACE);
-
-        // Sometimes, the return place is assigned a local of a different but coercible type, for
-        // example `&mut T` instead of `&T`. Overwriting the `LocalInfo` for the return place means
-        // its type may no longer match the return type of its function. This doesn't cause a
-        // problem in codegen because these two types are layout-compatible, but may be unexpected.
-        debug!("_0: {:?} = {:?}: {:?}", ret_decl.ty, returned_local, renamed_decl.ty);
-        ret_decl.clone_from(renamed_decl);
-
-        // The return place is always mutable.
-        ret_decl.mutability = Mutability::Mut;
-    }
-
-    fn is_required(&self) -> bool {
-        false
-    }
-}
-
-/// MIR that is eligible for the NRVO must fulfill two conditions:
-///   1. The return place must not be read prior to the `Return` terminator.
-///   2. A simple assignment of a whole local to the return place (e.g., `_0 = _1`) must be the
-///      only definition of the return place reaching the `Return` terminator.
-///
-/// If the MIR fulfills both these conditions, this function returns the `Local` that is assigned
-/// to the return place along all possible paths through the control-flow graph.
-fn local_eligible_for_nrvo(body: &mir::Body<'_>) -> Option<Local> {
-    if IsReturnPlaceRead::run(body) {
-        return None;
-    }
-
-    let mut copied_to_return_place = None;
-    for block in body.basic_blocks.indices() {
-        // Look for blocks with a `Return` terminator.
-        if !matches!(body[block].terminator().kind, mir::TerminatorKind::Return) {
-            continue;
-        }
-
-        // Look for an assignment of a single local to the return place prior to the `Return`.
-        let returned_local = find_local_assigned_to_return_place(block, body)?;
-        match body.local_kind(returned_local) {
-            // FIXME: Can we do this for arguments as well?
-            mir::LocalKind::Arg => return None,
-
-            mir::LocalKind::ReturnPointer => bug!("Return place was assigned to itself?"),
-            mir::LocalKind::Temp => {}
-        }
-
-        // If multiple different locals are copied to the return place. We can't pick a
-        // single one to rename.
-        if copied_to_return_place.is_some_and(|old| old != returned_local) {
-            return None;
-        }
-
-        copied_to_return_place = Some(returned_local);
-    }
-
-    copied_to_return_place
-}
-
-fn find_local_assigned_to_return_place(start: BasicBlock, body: &mir::Body<'_>) -> Option<Local> {
-    let mut block = start;
-    let mut seen = DenseBitSet::new_empty(body.basic_blocks.len());
-
-    // Iterate as long as `block` has exactly one predecessor that we have not yet visited.
-    while seen.insert(block) {
-        trace!("Looking for assignments to `_0` in {:?}", block);
-
-        let local = body[block].statements.iter().rev().find_map(as_local_assigned_to_return_place);
-        if local.is_some() {
-            return local;
-        }
-
-        match body.basic_blocks.predecessors()[block].as_slice() {
-            &[pred] => block = pred,
-            _ => return None,
-        }
-    }
-
-    None
-}
-
-// If this statement is an assignment of an unprojected local to the return place,
-// return that local.
-fn as_local_assigned_to_return_place(stmt: &mir::Statement<'_>) -> Option<Local> {
-    if let mir::StatementKind::Assign(box (lhs, rhs)) = &stmt.kind {
-        if lhs.as_local() == Some(mir::RETURN_PLACE) {
-            if let mir::Rvalue::Use(mir::Operand::Copy(rhs) | mir::Operand::Move(rhs)) = rhs {
-                return rhs.as_local();
-            }
-        }
-    }
-
-    None
-}
-
-struct RenameToReturnPlace<'tcx> {
-    to_rename: Local,
-    tcx: TyCtxt<'tcx>,
-}
-
-/// Replaces all uses of `self.to_rename` with `_0`.
-impl<'tcx> MutVisitor<'tcx> for RenameToReturnPlace<'tcx> {
-    fn tcx(&self) -> TyCtxt<'tcx> {
-        self.tcx
-    }
-
-    fn visit_statement(&mut self, stmt: &mut mir::Statement<'tcx>, loc: Location) {
-        // Remove assignments of the local being replaced to the return place, since it is now the
-        // return place:
-        //     _0 = _1
-        if as_local_assigned_to_return_place(stmt) == Some(self.to_rename) {
-            stmt.kind = mir::StatementKind::Nop;
-            return;
-        }
-
-        // Remove storage annotations for the local being replaced:
-        //     StorageLive(_1)
-        if let mir::StatementKind::StorageLive(local) | mir::StatementKind::StorageDead(local) =
-            stmt.kind
-        {
-            if local == self.to_rename {
-                stmt.kind = mir::StatementKind::Nop;
-                return;
-            }
-        }
-
-        self.super_statement(stmt, loc)
-    }
-
-    fn visit_terminator(&mut self, terminator: &mut mir::Terminator<'tcx>, loc: Location) {
-        // Ignore the implicit "use" of the return place in a `Return` statement.
-        if let mir::TerminatorKind::Return = terminator.kind {
-            return;
-        }
-
-        self.super_terminator(terminator, loc);
-    }
-
-    fn visit_local(&mut self, l: &mut Local, ctxt: PlaceContext, _: Location) {
-        if *l == mir::RETURN_PLACE {
-            assert_eq!(ctxt, PlaceContext::NonUse(NonUseContext::VarDebugInfo));
-        } else if *l == self.to_rename {
-            *l = mir::RETURN_PLACE;
-        }
-    }
-}
-
-struct IsReturnPlaceRead(bool);
-
-impl IsReturnPlaceRead {
-    fn run(body: &mir::Body<'_>) -> bool {
-        let mut vis = IsReturnPlaceRead(false);
-        vis.visit_body(body);
-        vis.0
-    }
-}
-
-impl<'tcx> Visitor<'tcx> for IsReturnPlaceRead {
-    fn visit_local(&mut self, l: Local, ctxt: PlaceContext, _: Location) {
-        if l == mir::RETURN_PLACE && ctxt.is_use() && !ctxt.is_place_assignment() {
-            self.0 = true;
-        }
-    }
-
-    fn visit_terminator(&mut self, terminator: &mir::Terminator<'tcx>, loc: Location) {
-        // Ignore the implicit "use" of the return place in a `Return` statement.
-        if let mir::TerminatorKind::Return = terminator.kind {
-            return;
-        }
-
-        self.super_terminator(terminator, loc);
-    }
-}
+/* FP:nrvo.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_nrvo_USE_0001
+/* FP:nrvo.rs-0002 */ use crate :: rustc_complete :: Mutability ;
+/* FP:nrvo.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_nrvo_USE_0002
+/* FP:nrvo.rs-0004 */ use crate :: rustc_index :: bit_set :: DenseBitSet ;
+/* FP:nrvo.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_nrvo_USE_0003
+/* FP:nrvo.rs-0006 */ use crate :: rustc_complete :: bug ;
+/* FP:nrvo.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_nrvo_USE_0004
+/* FP:nrvo.rs-0008 */ use crate :: rustc_complete :: mir :: visit :: { MutVisitor , NonUseContext , PlaceContext , Visitor } ;
+/* FP:nrvo.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_nrvo_USE_0005
+/* FP:nrvo.rs-0010 */ use crate :: rustc_complete :: mir :: { self , BasicBlock , Local , Location } ;
+/* FP:nrvo.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_nrvo_USE_0006
+/* FP:nrvo.rs-0012 */ use crate :: rustc_complete :: ty :: TyCtxt ;
+/* FP:nrvo.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_nrvo_USE_0007
+/* FP:nrvo.rs-0014 */ use tracing :: { debug , trace } ;
+/* FP:nrvo.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_nrvo_STRUCT_0008
+/* FP:nrvo.rs-0016 */ # [doc = " This pass looks for MIR that always copies the same local into the return place and eliminates"] # [doc = " the copy by renaming all uses of that local to `_0`."] # [doc = ""] # [doc = " This allows LLVM to perform an optimization similar to the named return value optimization"] # [doc = " (NRVO) that is guaranteed in C++. This avoids a stack allocation and `memcpy` for the"] # [doc = " relatively common pattern of allocating a buffer on the stack, mutating it, and returning it by"] # [doc = " value like so:"] # [doc = ""] # [doc = " ```rust"] # [doc = " fn foo(init: fn(&mut [u8; 1024])) -> [u8; 1024] {"] # [doc = "     let mut buf = [0; 1024];"] # [doc = "     init(&mut buf);"] # [doc = "     buf"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " For now, this pass is very simple and only capable of eliminating a single copy. A more general"] # [doc = " version of copy propagation, such as the one based on non-overlapping live ranges in [#47954] and"] # [doc = " [#71003], could yield even more benefits."] # [doc = ""] # [doc = " [#47954]: https://github.com/rust-lang/rust/pull/47954"] # [doc = " [#71003]: https://github.com/rust-lang/rust/pull/71003"] pub (super) struct RenameReturnPlace ;
+/* FP:nrvo.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_nrvo_IMPL_0009
+/* FP:nrvo.rs-0018 */ impl < 'tcx > crate :: MirPass < 'tcx > for RenameReturnPlace { fn is_enabled (& self , sess : & crate :: rustc_session :: Session) -> bool { sess . mir_opt_level () > 0 && sess . opts . unstable_opts . unsound_mir_opts } fn run_pass (& self , tcx : TyCtxt < 'tcx > , body : & mut mir :: Body < 'tcx >) { let def_id = body . source . def_id () ; let Some (returned_local) = local_eligible_for_nrvo (body) else { debug ! ("`{:?}` was ineligible for NRVO" , def_id) ; return ; } ; debug ! ("`{:?}` was eligible for NRVO, making {:?} the return place" , def_id , returned_local) ; RenameToReturnPlace { tcx , to_rename : returned_local } . visit_body_preserves_cfg (body) ; for block_data in body . basic_blocks . as_mut_preserves_cfg () { block_data . statements . retain (| stmt | stmt . kind != mir :: StatementKind :: Nop) ; } let (renamed_decl , ret_decl) = body . local_decls . pick2_mut (returned_local , mir :: RETURN_PLACE) ; debug ! ("_0: {:?} = {:?}: {:?}" , ret_decl . ty , returned_local , renamed_decl . ty) ; ret_decl . clone_from (renamed_decl) ; ret_decl . mutability = Mutability :: Mut ; } fn is_required (& self) -> bool { false } }
+/* FP:nrvo.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_nrvo_FN_0010
+/* FP:nrvo.rs-0020 */ # [doc = " MIR that is eligible for the NRVO must fulfill two conditions:"] # [doc = "   1. The return place must not be read prior to the `Return` terminator."] # [doc = "   2. A simple assignment of a whole local to the return place (e.g., `_0 = _1`) must be the"] # [doc = "      only definition of the return place reaching the `Return` terminator."] # [doc = ""] # [doc = " If the MIR fulfills both these conditions, this function returns the `Local` that is assigned"] # [doc = " to the return place along all possible paths through the control-flow graph."] fn local_eligible_for_nrvo (body : & mir :: Body < '_ >) -> Option < Local > { if IsReturnPlaceRead :: run (body) { return None ; } let mut copied_to_return_place = None ; for block in body . basic_blocks . indices () { if ! matches ! (body [block] . terminator () . kind , mir :: TerminatorKind :: Return) { continue ; } let returned_local = find_local_assigned_to_return_place (block , body) ? ; match body . local_kind (returned_local) { mir :: LocalKind :: Arg => return None , mir :: LocalKind :: ReturnPointer => bug ! ("Return place was assigned to itself?") , mir :: LocalKind :: Temp => { } } if copied_to_return_place . is_some_and (| old | old != returned_local) { return None ; } copied_to_return_place = Some (returned_local) ; } copied_to_return_place }
+/* FP:nrvo.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_nrvo_FN_0011
+/* FP:nrvo.rs-0022 */ fn find_local_assigned_to_return_place (start : BasicBlock , body : & mir :: Body < '_ >) -> Option < Local > { let mut block = start ; let mut seen = DenseBitSet :: new_empty (body . basic_blocks . len ()) ; while seen . insert (block) { trace ! ("Looking for assignments to `_0` in {:?}" , block) ; let local = body [block] . statements . iter () . rev () . find_map (as_local_assigned_to_return_place) ; if local . is_some () { return local ; } match body . basic_blocks . predecessors () [block] . as_slice () { & [pred] => block = pred , _ => return None , } } None }
+/* FP:nrvo.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_nrvo_FN_0012
+/* FP:nrvo.rs-0024 */ fn as_local_assigned_to_return_place (stmt : & mir :: Statement < '_ >) -> Option < Local > { if let mir :: StatementKind :: Assign (box (lhs , rhs)) = & stmt . kind { if lhs . as_local () == Some (mir :: RETURN_PLACE) { if let mir :: Rvalue :: Use (mir :: Operand :: Copy (rhs) | mir :: Operand :: Move (rhs)) = rhs { return rhs . as_local () ; } } } None }
+/* FP:nrvo.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_nrvo_STRUCT_0013
+/* FP:nrvo.rs-0026 */ struct RenameToReturnPlace < 'tcx > { to_rename : Local , tcx : TyCtxt < 'tcx > , }
+/* FP:nrvo.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_nrvo_IMPL_0014
+/* FP:nrvo.rs-0028 */ # [doc = " Replaces all uses of `self.to_rename` with `_0`."] impl < 'tcx > MutVisitor < 'tcx > for RenameToReturnPlace < 'tcx > { fn tcx (& self) -> TyCtxt < 'tcx > { self . tcx } fn visit_statement (& mut self , stmt : & mut mir :: Statement < 'tcx > , loc : Location) { if as_local_assigned_to_return_place (stmt) == Some (self . to_rename) { stmt . kind = mir :: StatementKind :: Nop ; return ; } if let mir :: StatementKind :: StorageLive (local) | mir :: StatementKind :: StorageDead (local) = stmt . kind { if local == self . to_rename { stmt . kind = mir :: StatementKind :: Nop ; return ; } } self . super_statement (stmt , loc) } fn visit_terminator (& mut self , terminator : & mut mir :: Terminator < 'tcx > , loc : Location) { if let mir :: TerminatorKind :: Return = terminator . kind { return ; } self . super_terminator (terminator , loc) ; } fn visit_local (& mut self , l : & mut Local , ctxt : PlaceContext , _ : Location) { if * l == mir :: RETURN_PLACE { assert_eq ! (ctxt , PlaceContext :: NonUse (NonUseContext :: VarDebugInfo)) ; } else if * l == self . to_rename { * l = mir :: RETURN_PLACE ; } } }
+/* FP:nrvo.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_nrvo_STRUCT_0015
+/* FP:nrvo.rs-0030 */ struct IsReturnPlaceRead (bool) ;
+/* FP:nrvo.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_nrvo_IMPL_0016
+/* FP:nrvo.rs-0032 */ impl IsReturnPlaceRead { fn run (body : & mir :: Body < '_ >) -> bool { let mut vis = IsReturnPlaceRead (false) ; vis . visit_body (body) ; vis . 0 } }
+/* FP:nrvo.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_nrvo_IMPL_0017
+/* FP:nrvo.rs-0034 */ impl < 'tcx > Visitor < 'tcx > for IsReturnPlaceRead { fn visit_local (& mut self , l : Local , ctxt : PlaceContext , _ : Location) { if l == mir :: RETURN_PLACE && ctxt . is_use () && ! ctxt . is_place_assignment () { self . 0 = true ; } } fn visit_terminator (& mut self , terminator : & mir :: Terminator < 'tcx > , loc : Location) { if let mir :: TerminatorKind :: Return = terminator . kind { return ; } self . super_terminator (terminator , loc) ; } }

@@ -1,40 +1,8 @@
-// @generated
-include!("list_and_v1.rs.data");
-/// Marks a type as a data provider. You can then use macros like
-/// `impl_core_helloworld_v1` to add implementations.
-///
-/// ```ignore
-/// struct MyProvider;
-/// const _: () = {
-///     include!("path/to/generated/macros.rs");
-///     make_provider!(MyProvider);
-///     impl_core_helloworld_v1!(MyProvider);
-/// }
-/// ```
-#[doc(hidden)]
-#[macro_export]
-macro_rules! __make_provider {
-    ($ name : ty) => {
-        #[clippy::msrv = "1.82"]
-        impl $name {
-            #[allow(dead_code)]
-            pub(crate) const MUST_USE_MAKE_PROVIDER_MACRO: () = ();
-        }
-        icu_provider::marker::impl_data_provider_never_marker!($name);
-    };
-}
-#[doc(inline)]
-pub use __make_provider as make_provider;
-/// This macro requires the following crates:
-/// * `icu_list`
-/// * `icu_locale/compiled_data`
-/// * `icu_provider`
-/// * `icu_provider/baked`
-/// * `zerovec`
-#[allow(unused_macros)]
-macro_rules! impl_data_provider {
-    ($ provider : ty) => {
-        make_provider!($provider);
-        impl_list_and_v1!($provider);
-    };
-}
+/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_baked_icu_data_src_data_mod_MACRO_0001
+/* FP:mod.rs-0002 */ include ! ("list_and_v1.rs.data") ;
+/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_baked_icu_data_src_data_mod_MACRO_0002
+/* FP:mod.rs-0004 */ # [doc = " Marks a type as a data provider. You can then use macros like"] # [doc = " `impl_core_helloworld_v1` to add implementations."] # [doc = ""] # [doc = " ```ignore"] # [doc = " struct MyProvider;"] # [doc = " const _: () = {"] # [doc = "     include!(\"path/to/generated/macros.rs\");"] # [doc = "     make_provider!(MyProvider);"] # [doc = "     impl_core_helloworld_v1!(MyProvider);"] # [doc = " }"] # [doc = " ```"] # [doc (hidden)] # [macro_export] macro_rules ! __make_provider { ($ name : ty) => { # [clippy :: msrv = "1.82"] impl $ name { # [allow (dead_code)] pub (crate) const MUST_USE_MAKE_PROVIDER_MACRO : () = () ; } icu_provider :: marker :: impl_data_provider_never_marker ! ($ name) ; } ; }
+/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_baked_icu_data_src_data_mod_USE_0003
+/* FP:mod.rs-0006 */ # [doc (inline)] pub use __make_provider as make_provider ;
+/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_baked_icu_data_src_data_mod_MACRO_0004
+/* FP:mod.rs-0008 */ # [doc = " This macro requires the following crates:"] # [doc = " * `icu_list`"] # [doc = " * `icu_locale/compiled_data`"] # [doc = " * `icu_provider`"] # [doc = " * `icu_provider/baked`"] # [doc = " * `zerovec`"] # [allow (unused_macros)] macro_rules ! impl_data_provider { ($ provider : ty) => { make_provider ! ($ provider) ; impl_list_and_v1 ! ($ provider) ; } ; }

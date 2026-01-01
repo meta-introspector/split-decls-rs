@@ -1,17 +1,2 @@
-/** ```compile_fail,E0277
-
-use std::rc::Rc;
-
-rustc_thread_pool::join(|| Rc::new(22), || ()); //~ ERROR
-
-``` */
-mod left {}
-
-/** ```compile_fail,E0277
-
-use std::rc::Rc;
-
-rustc_thread_pool::join(|| (), || Rc::new(23)); //~ ERROR
-
-``` */
-mod right {}
+/* FP:rc_return.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_compile_fail_rc_return_MOD_0001
+/* FP:rc_return.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_compile_fail_rc_return_MOD_0002

@@ -1,37 +1,10 @@
-use crate::rustc_complete::attrs::Linkage as RLinkage;
-use crate::rustc_complete::mir::mono::{MonoItem, Visibility};
-
-use crate::prelude::*;
-
-pub(crate) fn get_clif_linkage(
-    mono_item: MonoItem<'_>,
-    linkage: RLinkage,
-    visibility: Visibility,
-    is_compiler_builtins: bool,
-) -> Linkage {
-    match (linkage, visibility) {
-        (RLinkage::External, Visibility::Default) if is_compiler_builtins => Linkage::Hidden,
-        (RLinkage::External, Visibility::Default) => Linkage::Export,
-        (RLinkage::Internal, Visibility::Default) => Linkage::Local,
-        (RLinkage::External, Visibility::Hidden) => Linkage::Hidden,
-        (RLinkage::WeakAny, Visibility::Default) => Linkage::Preemptible,
-        _ => panic!("{:?} = {:?} {:?}", mono_item, linkage, visibility),
-    }
-}
-
-pub(crate) fn get_static_linkage(tcx: TyCtxt<'_>, def_id: DefId) -> Linkage {
-    let fn_attrs = tcx.codegen_fn_attrs(def_id);
-
-    if let Some(linkage) = fn_attrs.linkage {
-        match linkage {
-            RLinkage::External => Linkage::Export,
-            RLinkage::Internal => Linkage::Local,
-            RLinkage::ExternalWeak | RLinkage::WeakAny => Linkage::Preemptible,
-            _ => panic!("{:?}", linkage),
-        }
-    } else if tcx.is_reachable_non_generic(def_id) {
-        Linkage::Export
-    } else {
-        Linkage::Hidden
-    }
-}
+/* FP:linkage.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_linkage_USE_0001
+/* FP:linkage.rs-0002 */ use crate :: rustc_complete :: attrs :: Linkage as RLinkage ;
+/* FP:linkage.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_linkage_USE_0002
+/* FP:linkage.rs-0004 */ use crate :: rustc_complete :: mir :: mono :: { MonoItem , Visibility } ;
+/* FP:linkage.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_linkage_USE_0003
+/* FP:linkage.rs-0006 */ use crate :: prelude :: * ;
+/* FP:linkage.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_linkage_FN_0004
+/* FP:linkage.rs-0008 */ pub (crate) fn get_clif_linkage (mono_item : MonoItem < '_ > , linkage : RLinkage , visibility : Visibility , is_compiler_builtins : bool ,) -> Linkage { match (linkage , visibility) { (RLinkage :: External , Visibility :: Default) if is_compiler_builtins => Linkage :: Hidden , (RLinkage :: External , Visibility :: Default) => Linkage :: Export , (RLinkage :: Internal , Visibility :: Default) => Linkage :: Local , (RLinkage :: External , Visibility :: Hidden) => Linkage :: Hidden , (RLinkage :: WeakAny , Visibility :: Default) => Linkage :: Preemptible , _ => panic ! ("{:?} = {:?} {:?}" , mono_item , linkage , visibility) , } }
+/* FP:linkage.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_linkage_FN_0005
+/* FP:linkage.rs-0010 */ pub (crate) fn get_static_linkage (tcx : TyCtxt < '_ > , def_id : DefId) -> Linkage { let fn_attrs = tcx . codegen_fn_attrs (def_id) ; if let Some (linkage) = fn_attrs . linkage { match linkage { RLinkage :: External => Linkage :: Export , RLinkage :: Internal => Linkage :: Local , RLinkage :: ExternalWeak | RLinkage :: WeakAny => Linkage :: Preemptible , _ => panic ! ("{:?}" , linkage) , } } else if tcx . is_reachable_non_generic (def_id) { Linkage :: Export } else { Linkage :: Hidden } }

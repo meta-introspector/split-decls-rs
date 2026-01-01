@@ -1,356 +1,68 @@
-// A set of traits implemented for various AST nodes,
-// typically those used in AST fragments during macro expansion.
-// The traits are not implemented exhaustively, only when actually necessary.
-
-use std::fmt;
-use std::marker::PhantomData;
-
-use crate::tokenstream::LazyAttrTokenStream;
-use crate::{
-    Arm, AssocItem, AttrItem, AttrKind, AttrVec, Attribute, Block, Crate, Expr, ExprField,
-    FieldDef, ForeignItem, GenericParam, Item, NodeId, Param, Pat, PatField, Path, Stmt, StmtKind,
-    Ty, Variant, Visibility, WherePredicate,
-};
-
-/// A trait for AST nodes having an ID.
-pub trait HasNodeId {
-    fn node_id(&self) -> NodeId;
-    fn node_id_mut(&mut self) -> &mut NodeId;
-}
-
-macro_rules! impl_has_node_id {
-    ($($T:ty),+ $(,)?) => {
-        $(
-            impl HasNodeId for $T {
-                fn node_id(&self) -> NodeId {
-                    self.id
-                }
-                fn node_id_mut(&mut self) -> &mut NodeId {
-                    &mut self.id
-                }
-            }
-        )+
-    };
-}
-
-impl_has_node_id!(
-    Arm,
-    AssocItem,
-    Crate,
-    Expr,
-    ExprField,
-    FieldDef,
-    ForeignItem,
-    GenericParam,
-    Item,
-    Param,
-    Pat,
-    PatField,
-    Stmt,
-    Ty,
-    Variant,
-    WherePredicate,
-);
-
-impl<T: HasNodeId> HasNodeId for Box<T> {
-    fn node_id(&self) -> NodeId {
-        (**self).node_id()
-    }
-    fn node_id_mut(&mut self) -> &mut NodeId {
-        (**self).node_id_mut()
-    }
-}
-
-/// A trait for AST nodes having (or not having) collected tokens.
-pub trait HasTokens {
-    fn tokens(&self) -> Option<&LazyAttrTokenStream>;
-    fn tokens_mut(&mut self) -> Option<&mut Option<LazyAttrTokenStream>>;
-}
-
-macro_rules! impl_has_tokens {
-    ($($T:ty),+ $(,)?) => {
-        $(
-            impl HasTokens for $T {
-                fn tokens(&self) -> Option<&LazyAttrTokenStream> {
-                    self.tokens.as_ref()
-                }
-                fn tokens_mut(&mut self) -> Option<&mut Option<LazyAttrTokenStream>> {
-                    Some(&mut self.tokens)
-                }
-            }
-        )+
-    };
-}
-
-macro_rules! impl_has_tokens_none {
-    ($($T:ty),+ $(,)?) => {
-        $(
-            impl HasTokens for $T {
-                fn tokens(&self) -> Option<&LazyAttrTokenStream> {
-                    None
-                }
-                fn tokens_mut(&mut self) -> Option<&mut Option<LazyAttrTokenStream>> {
-                    None
-                }
-            }
-        )+
-    };
-}
-
-impl_has_tokens!(AssocItem, AttrItem, Block, Expr, ForeignItem, Item, Pat, Path, Ty, Visibility);
-impl_has_tokens_none!(
-    Arm,
-    ExprField,
-    FieldDef,
-    GenericParam,
-    Param,
-    PatField,
-    Variant,
-    WherePredicate
-);
-
-impl<T: HasTokens> HasTokens for Option<T> {
-    fn tokens(&self) -> Option<&LazyAttrTokenStream> {
-        self.as_ref().and_then(|inner| inner.tokens())
-    }
-    fn tokens_mut(&mut self) -> Option<&mut Option<LazyAttrTokenStream>> {
-        self.as_mut().and_then(|inner| inner.tokens_mut())
-    }
-}
-
-impl<T: HasTokens> HasTokens for Box<T> {
-    fn tokens(&self) -> Option<&LazyAttrTokenStream> {
-        (**self).tokens()
-    }
-    fn tokens_mut(&mut self) -> Option<&mut Option<LazyAttrTokenStream>> {
-        (**self).tokens_mut()
-    }
-}
-
-impl HasTokens for StmtKind {
-    fn tokens(&self) -> Option<&LazyAttrTokenStream> {
-        match self {
-            StmtKind::Let(local) => local.tokens.as_ref(),
-            StmtKind::Item(item) => item.tokens(),
-            StmtKind::Expr(expr) | StmtKind::Semi(expr) => expr.tokens(),
-            StmtKind::Empty => None,
-            StmtKind::MacCall(mac) => mac.tokens.as_ref(),
-        }
-    }
-    fn tokens_mut(&mut self) -> Option<&mut Option<LazyAttrTokenStream>> {
-        match self {
-            StmtKind::Let(local) => Some(&mut local.tokens),
-            StmtKind::Item(item) => item.tokens_mut(),
-            StmtKind::Expr(expr) | StmtKind::Semi(expr) => expr.tokens_mut(),
-            StmtKind::Empty => None,
-            StmtKind::MacCall(mac) => Some(&mut mac.tokens),
-        }
-    }
-}
-
-impl HasTokens for Stmt {
-    fn tokens(&self) -> Option<&LazyAttrTokenStream> {
-        self.kind.tokens()
-    }
-    fn tokens_mut(&mut self) -> Option<&mut Option<LazyAttrTokenStream>> {
-        self.kind.tokens_mut()
-    }
-}
-
-impl HasTokens for Attribute {
-    fn tokens(&self) -> Option<&LazyAttrTokenStream> {
-        match &self.kind {
-            AttrKind::Normal(normal) => normal.tokens.as_ref(),
-            kind @ AttrKind::DocComment(..) => {
-                panic!("Called tokens on doc comment attr {kind:?}")
-            }
-        }
-    }
-    fn tokens_mut(&mut self) -> Option<&mut Option<LazyAttrTokenStream>> {
-        Some(match &mut self.kind {
-            AttrKind::Normal(normal) => &mut normal.tokens,
-            kind @ AttrKind::DocComment(..) => {
-                panic!("Called tokens_mut on doc comment attr {kind:?}")
-            }
-        })
-    }
-}
-
-/// A trait for AST nodes having (or not having) attributes.
-pub trait HasAttrs {
-    /// This is `true` if this `HasAttrs` might support 'custom' (proc-macro) inner
-    /// attributes. Attributes like `#[cfg]` and `#[cfg_attr]` are not
-    /// considered 'custom' attributes.
-    ///
-    /// If this is `false`, then this `HasAttrs` definitely does
-    /// not support 'custom' inner attributes, which enables some optimizations
-    /// during token collection.
-    const SUPPORTS_CUSTOM_INNER_ATTRS: bool;
-    fn attrs(&self) -> &[Attribute];
-    fn visit_attrs(&mut self, f: impl FnOnce(&mut AttrVec));
-}
-
-macro_rules! impl_has_attrs {
-    (const SUPPORTS_CUSTOM_INNER_ATTRS: bool = $inner:literal, $($T:ty),+ $(,)?) => {
-        $(
-            impl HasAttrs for $T {
-                const SUPPORTS_CUSTOM_INNER_ATTRS: bool = $inner;
-
-                #[inline]
-                fn attrs(&self) -> &[Attribute] {
-                    &self.attrs
-                }
-
-                fn visit_attrs(&mut self, f: impl FnOnce(&mut AttrVec)) {
-                    f(&mut self.attrs)
-                }
-            }
-        )+
-    };
-}
-
-macro_rules! impl_has_attrs_none {
-    ($($T:ty),+ $(,)?) => {
-        $(
-            impl HasAttrs for $T {
-                const SUPPORTS_CUSTOM_INNER_ATTRS: bool = false;
-                fn attrs(&self) -> &[Attribute] {
-                    &[]
-                }
-                fn visit_attrs(&mut self, _f: impl FnOnce(&mut AttrVec)) {}
-            }
-        )+
-    };
-}
-
-impl_has_attrs!(
-    const SUPPORTS_CUSTOM_INNER_ATTRS: bool = true,
-    AssocItem,
-    ForeignItem,
-    Item,
-);
-impl_has_attrs!(
-    const SUPPORTS_CUSTOM_INNER_ATTRS: bool = false,
-    Arm,
-    Crate,
-    Expr,
-    ExprField,
-    FieldDef,
-    GenericParam,
-    Param,
-    PatField,
-    Variant,
-    WherePredicate,
-);
-impl_has_attrs_none!(Attribute, AttrItem, Block, Pat, Path, Ty, Visibility);
-
-impl<T: HasAttrs> HasAttrs for Box<T> {
-    const SUPPORTS_CUSTOM_INNER_ATTRS: bool = T::SUPPORTS_CUSTOM_INNER_ATTRS;
-    fn attrs(&self) -> &[Attribute] {
-        (**self).attrs()
-    }
-    fn visit_attrs(&mut self, f: impl FnOnce(&mut AttrVec)) {
-        (**self).visit_attrs(f);
-    }
-}
-
-impl<T: HasAttrs> HasAttrs for Option<T> {
-    const SUPPORTS_CUSTOM_INNER_ATTRS: bool = T::SUPPORTS_CUSTOM_INNER_ATTRS;
-    fn attrs(&self) -> &[Attribute] {
-        self.as_ref().map(|inner| inner.attrs()).unwrap_or(&[])
-    }
-    fn visit_attrs(&mut self, f: impl FnOnce(&mut AttrVec)) {
-        if let Some(inner) = self.as_mut() {
-            inner.visit_attrs(f);
-        }
-    }
-}
-
-impl HasAttrs for StmtKind {
-    // This might be a `StmtKind::Item`, which contains
-    // an item that supports inner attrs.
-    const SUPPORTS_CUSTOM_INNER_ATTRS: bool = true;
-
-    fn attrs(&self) -> &[Attribute] {
-        match self {
-            StmtKind::Let(local) => &local.attrs,
-            StmtKind::Expr(expr) | StmtKind::Semi(expr) => expr.attrs(),
-            StmtKind::Item(item) => item.attrs(),
-            StmtKind::Empty => &[],
-            StmtKind::MacCall(mac) => &mac.attrs,
-        }
-    }
-
-    fn visit_attrs(&mut self, f: impl FnOnce(&mut AttrVec)) {
-        match self {
-            StmtKind::Let(local) => f(&mut local.attrs),
-            StmtKind::Expr(expr) | StmtKind::Semi(expr) => expr.visit_attrs(f),
-            StmtKind::Item(item) => item.visit_attrs(f),
-            StmtKind::Empty => {}
-            StmtKind::MacCall(mac) => f(&mut mac.attrs),
-        }
-    }
-}
-
-impl HasAttrs for Stmt {
-    const SUPPORTS_CUSTOM_INNER_ATTRS: bool = StmtKind::SUPPORTS_CUSTOM_INNER_ATTRS;
-    fn attrs(&self) -> &[Attribute] {
-        self.kind.attrs()
-    }
-    fn visit_attrs(&mut self, f: impl FnOnce(&mut AttrVec)) {
-        self.kind.visit_attrs(f);
-    }
-}
-
-/// A newtype around an AST node that implements the traits above if the node implements them.
-#[repr(transparent)]
-pub struct AstNodeWrapper<Wrapped, Tag> {
-    pub wrapped: Wrapped,
-    pub tag: PhantomData<Tag>,
-}
-
-impl<Wrapped, Tag> AstNodeWrapper<Wrapped, Tag> {
-    pub fn new(wrapped: Wrapped, _tag: Tag) -> AstNodeWrapper<Wrapped, Tag> {
-        AstNodeWrapper { wrapped, tag: Default::default() }
-    }
-
-    pub fn from_mut(wrapped: &mut Wrapped, _tag: Tag) -> &mut AstNodeWrapper<Wrapped, Tag> {
-        // SAFETY: `AstNodeWrapper` is `repr(transparent)` w.r.t `Wrapped`
-        unsafe { &mut *<*mut Wrapped>::cast(wrapped) }
-    }
-}
-
-// FIXME: remove after `stmt_expr_attributes` is stabilized.
-impl<T, Tag> From<AstNodeWrapper<Box<T>, Tag>> for AstNodeWrapper<T, Tag> {
-    fn from(value: AstNodeWrapper<Box<T>, Tag>) -> Self {
-        AstNodeWrapper { wrapped: *value.wrapped, tag: value.tag }
-    }
-}
-
-impl<Wrapped: HasNodeId, Tag> HasNodeId for AstNodeWrapper<Wrapped, Tag> {
-    fn node_id(&self) -> NodeId {
-        self.wrapped.node_id()
-    }
-    fn node_id_mut(&mut self) -> &mut NodeId {
-        self.wrapped.node_id_mut()
-    }
-}
-
-impl<Wrapped: HasAttrs, Tag> HasAttrs for AstNodeWrapper<Wrapped, Tag> {
-    const SUPPORTS_CUSTOM_INNER_ATTRS: bool = Wrapped::SUPPORTS_CUSTOM_INNER_ATTRS;
-    fn attrs(&self) -> &[Attribute] {
-        self.wrapped.attrs()
-    }
-    fn visit_attrs(&mut self, f: impl FnOnce(&mut AttrVec)) {
-        self.wrapped.visit_attrs(f);
-    }
-}
-
-impl<Wrapped: fmt::Debug, Tag> fmt::Debug for AstNodeWrapper<Wrapped, Tag> {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.debug_struct("AstNodeWrapper")
-            .field("wrapped", &self.wrapped)
-            .field("tag", &self.tag)
-            .finish()
-    }
-}
+/* FP:ast_traits.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_USE_0001
+/* FP:ast_traits.rs-0002 */ use std :: fmt ;
+/* FP:ast_traits.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_USE_0002
+/* FP:ast_traits.rs-0004 */ use std :: marker :: PhantomData ;
+/* FP:ast_traits.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_USE_0003
+/* FP:ast_traits.rs-0006 */ use crate :: tokenstream :: LazyAttrTokenStream ;
+/* FP:ast_traits.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_USE_0004
+/* FP:ast_traits.rs-0008 */ use crate :: { Arm , AssocItem , AttrItem , AttrKind , AttrVec , Attribute , Block , Crate , Expr , ExprField , FieldDef , ForeignItem , GenericParam , Item , NodeId , Param , Pat , PatField , Path , Stmt , StmtKind , Ty , Variant , Visibility , WherePredicate , } ;
+/* FP:ast_traits.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_TRAIT_0005
+/* FP:ast_traits.rs-0010 */ # [doc = " A trait for AST nodes having an ID."] pub trait HasNodeId { fn node_id (& self) -> NodeId ; fn node_id_mut (& mut self) -> & mut NodeId ; }
+/* FP:ast_traits.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_MACRO_0006
+/* FP:ast_traits.rs-0012 */ macro_rules ! impl_has_node_id { ($ ($ T : ty) ,+ $ (,) ?) => { $ (impl HasNodeId for $ T { fn node_id (& self) -> NodeId { self . id } fn node_id_mut (& mut self) -> & mut NodeId { & mut self . id } }) + } ; }
+/* FP:ast_traits.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_MACRO_0007
+/* FP:ast_traits.rs-0014 */ impl_has_node_id ! (Arm , AssocItem , Crate , Expr , ExprField , FieldDef , ForeignItem , GenericParam , Item , Param , Pat , PatField , Stmt , Ty , Variant , WherePredicate ,) ;
+/* FP:ast_traits.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_IMPL_0008
+/* FP:ast_traits.rs-0016 */ impl < T : HasNodeId > HasNodeId for Box < T > { fn node_id (& self) -> NodeId { (* * self) . node_id () } fn node_id_mut (& mut self) -> & mut NodeId { (* * self) . node_id_mut () } }
+/* FP:ast_traits.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_TRAIT_0009
+/* FP:ast_traits.rs-0018 */ # [doc = " A trait for AST nodes having (or not having) collected tokens."] pub trait HasTokens { fn tokens (& self) -> Option < & LazyAttrTokenStream > ; fn tokens_mut (& mut self) -> Option < & mut Option < LazyAttrTokenStream > > ; }
+/* FP:ast_traits.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_MACRO_0010
+/* FP:ast_traits.rs-0020 */ macro_rules ! impl_has_tokens { ($ ($ T : ty) ,+ $ (,) ?) => { $ (impl HasTokens for $ T { fn tokens (& self) -> Option <& LazyAttrTokenStream > { self . tokens . as_ref () } fn tokens_mut (& mut self) -> Option <& mut Option < LazyAttrTokenStream >> { Some (& mut self . tokens) } }) + } ; }
+/* FP:ast_traits.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_MACRO_0011
+/* FP:ast_traits.rs-0022 */ macro_rules ! impl_has_tokens_none { ($ ($ T : ty) ,+ $ (,) ?) => { $ (impl HasTokens for $ T { fn tokens (& self) -> Option <& LazyAttrTokenStream > { None } fn tokens_mut (& mut self) -> Option <& mut Option < LazyAttrTokenStream >> { None } }) + } ; }
+/* FP:ast_traits.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_MACRO_0012
+/* FP:ast_traits.rs-0024 */ impl_has_tokens ! (AssocItem , AttrItem , Block , Expr , ForeignItem , Item , Pat , Path , Ty , Visibility) ;
+/* FP:ast_traits.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_MACRO_0013
+/* FP:ast_traits.rs-0026 */ impl_has_tokens_none ! (Arm , ExprField , FieldDef , GenericParam , Param , PatField , Variant , WherePredicate) ;
+/* FP:ast_traits.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_IMPL_0014
+/* FP:ast_traits.rs-0028 */ impl < T : HasTokens > HasTokens for Option < T > { fn tokens (& self) -> Option < & LazyAttrTokenStream > { self . as_ref () . and_then (| inner | inner . tokens ()) } fn tokens_mut (& mut self) -> Option < & mut Option < LazyAttrTokenStream > > { self . as_mut () . and_then (| inner | inner . tokens_mut ()) } }
+/* FP:ast_traits.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_IMPL_0015
+/* FP:ast_traits.rs-0030 */ impl < T : HasTokens > HasTokens for Box < T > { fn tokens (& self) -> Option < & LazyAttrTokenStream > { (* * self) . tokens () } fn tokens_mut (& mut self) -> Option < & mut Option < LazyAttrTokenStream > > { (* * self) . tokens_mut () } }
+/* FP:ast_traits.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_IMPL_0016
+/* FP:ast_traits.rs-0032 */ impl HasTokens for StmtKind { fn tokens (& self) -> Option < & LazyAttrTokenStream > { match self { StmtKind :: Let (local) => local . tokens . as_ref () , StmtKind :: Item (item) => item . tokens () , StmtKind :: Expr (expr) | StmtKind :: Semi (expr) => expr . tokens () , StmtKind :: Empty => None , StmtKind :: MacCall (mac) => mac . tokens . as_ref () , } } fn tokens_mut (& mut self) -> Option < & mut Option < LazyAttrTokenStream > > { match self { StmtKind :: Let (local) => Some (& mut local . tokens) , StmtKind :: Item (item) => item . tokens_mut () , StmtKind :: Expr (expr) | StmtKind :: Semi (expr) => expr . tokens_mut () , StmtKind :: Empty => None , StmtKind :: MacCall (mac) => Some (& mut mac . tokens) , } } }
+/* FP:ast_traits.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_IMPL_0017
+/* FP:ast_traits.rs-0034 */ impl HasTokens for Stmt { fn tokens (& self) -> Option < & LazyAttrTokenStream > { self . kind . tokens () } fn tokens_mut (& mut self) -> Option < & mut Option < LazyAttrTokenStream > > { self . kind . tokens_mut () } }
+/* FP:ast_traits.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_IMPL_0018
+/* FP:ast_traits.rs-0036 */ impl HasTokens for Attribute { fn tokens (& self) -> Option < & LazyAttrTokenStream > { match & self . kind { AttrKind :: Normal (normal) => normal . tokens . as_ref () , kind @ AttrKind :: DocComment (..) => { panic ! ("Called tokens on doc comment attr {kind:?}") } } } fn tokens_mut (& mut self) -> Option < & mut Option < LazyAttrTokenStream > > { Some (match & mut self . kind { AttrKind :: Normal (normal) => & mut normal . tokens , kind @ AttrKind :: DocComment (..) => { panic ! ("Called tokens_mut on doc comment attr {kind:?}") } }) } }
+/* FP:ast_traits.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_TRAIT_0019
+/* FP:ast_traits.rs-0038 */ # [doc = " A trait for AST nodes having (or not having) attributes."] pub trait HasAttrs { # [doc = " This is `true` if this `HasAttrs` might support 'custom' (proc-macro) inner"] # [doc = " attributes. Attributes like `#[cfg]` and `#[cfg_attr]` are not"] # [doc = " considered 'custom' attributes."] # [doc = ""] # [doc = " If this is `false`, then this `HasAttrs` definitely does"] # [doc = " not support 'custom' inner attributes, which enables some optimizations"] # [doc = " during token collection."] const SUPPORTS_CUSTOM_INNER_ATTRS : bool ; fn attrs (& self) -> & [Attribute] ; fn visit_attrs (& mut self , f : impl FnOnce (& mut AttrVec)) ; }
+/* FP:ast_traits.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_MACRO_0020
+/* FP:ast_traits.rs-0040 */ macro_rules ! impl_has_attrs { (const SUPPORTS_CUSTOM_INNER_ATTRS : bool = $ inner : literal , $ ($ T : ty) ,+ $ (,) ?) => { $ (impl HasAttrs for $ T { const SUPPORTS_CUSTOM_INNER_ATTRS : bool = $ inner ; # [inline] fn attrs (& self) -> & [Attribute] { & self . attrs } fn visit_attrs (& mut self , f : impl FnOnce (& mut AttrVec)) { f (& mut self . attrs) } }) + } ; }
+/* FP:ast_traits.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_MACRO_0021
+/* FP:ast_traits.rs-0042 */ macro_rules ! impl_has_attrs_none { ($ ($ T : ty) ,+ $ (,) ?) => { $ (impl HasAttrs for $ T { const SUPPORTS_CUSTOM_INNER_ATTRS : bool = false ; fn attrs (& self) -> & [Attribute] { & [] } fn visit_attrs (& mut self , _f : impl FnOnce (& mut AttrVec)) { } }) + } ; }
+/* FP:ast_traits.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_MACRO_0022
+/* FP:ast_traits.rs-0044 */ impl_has_attrs ! (const SUPPORTS_CUSTOM_INNER_ATTRS : bool = true , AssocItem , ForeignItem , Item ,) ;
+/* FP:ast_traits.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_MACRO_0023
+/* FP:ast_traits.rs-0046 */ impl_has_attrs ! (const SUPPORTS_CUSTOM_INNER_ATTRS : bool = false , Arm , Crate , Expr , ExprField , FieldDef , GenericParam , Param , PatField , Variant , WherePredicate ,) ;
+/* FP:ast_traits.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_MACRO_0024
+/* FP:ast_traits.rs-0048 */ impl_has_attrs_none ! (Attribute , AttrItem , Block , Pat , Path , Ty , Visibility) ;
+/* FP:ast_traits.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_IMPL_0025
+/* FP:ast_traits.rs-0050 */ impl < T : HasAttrs > HasAttrs for Box < T > { const SUPPORTS_CUSTOM_INNER_ATTRS : bool = T :: SUPPORTS_CUSTOM_INNER_ATTRS ; fn attrs (& self) -> & [Attribute] { (* * self) . attrs () } fn visit_attrs (& mut self , f : impl FnOnce (& mut AttrVec)) { (* * self) . visit_attrs (f) ; } }
+/* FP:ast_traits.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_IMPL_0026
+/* FP:ast_traits.rs-0052 */ impl < T : HasAttrs > HasAttrs for Option < T > { const SUPPORTS_CUSTOM_INNER_ATTRS : bool = T :: SUPPORTS_CUSTOM_INNER_ATTRS ; fn attrs (& self) -> & [Attribute] { self . as_ref () . map (| inner | inner . attrs ()) . unwrap_or (& []) } fn visit_attrs (& mut self , f : impl FnOnce (& mut AttrVec)) { if let Some (inner) = self . as_mut () { inner . visit_attrs (f) ; } } }
+/* FP:ast_traits.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_IMPL_0027
+/* FP:ast_traits.rs-0054 */ impl HasAttrs for StmtKind { const SUPPORTS_CUSTOM_INNER_ATTRS : bool = true ; fn attrs (& self) -> & [Attribute] { match self { StmtKind :: Let (local) => & local . attrs , StmtKind :: Expr (expr) | StmtKind :: Semi (expr) => expr . attrs () , StmtKind :: Item (item) => item . attrs () , StmtKind :: Empty => & [] , StmtKind :: MacCall (mac) => & mac . attrs , } } fn visit_attrs (& mut self , f : impl FnOnce (& mut AttrVec)) { match self { StmtKind :: Let (local) => f (& mut local . attrs) , StmtKind :: Expr (expr) | StmtKind :: Semi (expr) => expr . visit_attrs (f) , StmtKind :: Item (item) => item . visit_attrs (f) , StmtKind :: Empty => { } StmtKind :: MacCall (mac) => f (& mut mac . attrs) , } } }
+/* FP:ast_traits.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_IMPL_0028
+/* FP:ast_traits.rs-0056 */ impl HasAttrs for Stmt { const SUPPORTS_CUSTOM_INNER_ATTRS : bool = StmtKind :: SUPPORTS_CUSTOM_INNER_ATTRS ; fn attrs (& self) -> & [Attribute] { self . kind . attrs () } fn visit_attrs (& mut self , f : impl FnOnce (& mut AttrVec)) { self . kind . visit_attrs (f) ; } }
+/* FP:ast_traits.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_STRUCT_0029
+/* FP:ast_traits.rs-0058 */ # [doc = " A newtype around an AST node that implements the traits above if the node implements them."] # [repr (transparent)] pub struct AstNodeWrapper < Wrapped , Tag > { pub wrapped : Wrapped , pub tag : PhantomData < Tag > , }
+/* FP:ast_traits.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_IMPL_0030
+/* FP:ast_traits.rs-0060 */ impl < Wrapped , Tag > AstNodeWrapper < Wrapped , Tag > { pub fn new (wrapped : Wrapped , _tag : Tag) -> AstNodeWrapper < Wrapped , Tag > { AstNodeWrapper { wrapped , tag : Default :: default () } } pub fn from_mut (wrapped : & mut Wrapped , _tag : Tag) -> & mut AstNodeWrapper < Wrapped , Tag > { unsafe { & mut * < * mut Wrapped > :: cast (wrapped) } } }
+/* FP:ast_traits.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_IMPL_0031
+/* FP:ast_traits.rs-0062 */ impl < T , Tag > From < AstNodeWrapper < Box < T > , Tag > > for AstNodeWrapper < T , Tag > { fn from (value : AstNodeWrapper < Box < T > , Tag >) -> Self { AstNodeWrapper { wrapped : * value . wrapped , tag : value . tag } } }
+/* FP:ast_traits.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_IMPL_0032
+/* FP:ast_traits.rs-0064 */ impl < Wrapped : HasNodeId , Tag > HasNodeId for AstNodeWrapper < Wrapped , Tag > { fn node_id (& self) -> NodeId { self . wrapped . node_id () } fn node_id_mut (& mut self) -> & mut NodeId { self . wrapped . node_id_mut () } }
+/* FP:ast_traits.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_IMPL_0033
+/* FP:ast_traits.rs-0066 */ impl < Wrapped : HasAttrs , Tag > HasAttrs for AstNodeWrapper < Wrapped , Tag > { const SUPPORTS_CUSTOM_INNER_ATTRS : bool = Wrapped :: SUPPORTS_CUSTOM_INNER_ATTRS ; fn attrs (& self) -> & [Attribute] { self . wrapped . attrs () } fn visit_attrs (& mut self , f : impl FnOnce (& mut AttrVec)) { self . wrapped . visit_attrs (f) ; } }
+/* FP:ast_traits.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_ast_traits_IMPL_0034
+/* FP:ast_traits.rs-0068 */ impl < Wrapped : fmt :: Debug , Tag > fmt :: Debug for AstNodeWrapper < Wrapped , Tag > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . debug_struct ("AstNodeWrapper") . field ("wrapped" , & self . wrapped) . field ("tag" , & self . tag) . finish () } }

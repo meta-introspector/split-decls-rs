@@ -1,82 +1,22 @@
-use hir::Node;
-use hir::def_id::DefId;
-use rustc_hir as hir;
-use crate::rustc_complete::bug;
-use crate::rustc_complete::middle::region::{
-    ScopeCompatibility, RvalueCandidate, Scope, ScopeTree,
-};
-use crate::rustc_complete::ty::RvalueScopes;
-use tracing::debug;
-
-use super::FnCtxt;
-
-/// Applied to an expression `expr` if `expr` -- or something owned or partially owned by
-/// `expr` -- is going to be indirectly referenced by a variable in a let statement. In that
-/// case, the "temporary lifetime" or `expr` is extended to be the block enclosing the `let`
-/// statement.
-///
-/// More formally, if `expr` matches the grammar `ET`, record the rvalue scope of the matching
-/// `<rvalue>` as `blk_id`:
-///
-/// ```text
-///     ET = *ET
-///        | ET[...]
-///        | ET.f
-///        | (ET)
-///        | <rvalue>
-/// ```
-///
-/// Note: ET is intended to match "rvalues or places based on rvalues".
-fn record_rvalue_scope_rec(
-    rvalue_scopes: &mut RvalueScopes,
-    mut expr: &hir::Expr<'_>,
-    lifetime: Option<Scope>,
-    compat: ScopeCompatibility,
-) {
-    loop {
-        // Note: give all the expressions matching `ET` with the
-        // extended temporary lifetime, not just the innermost rvalue,
-        // because in codegen if we must compile e.g., `*rvalue()`
-        // into a temporary, we request the temporary scope of the
-        // outer expression.
-
-        rvalue_scopes.record_rvalue_scope(expr.hir_id.local_id, lifetime, compat);
-
-        match expr.kind {
-            hir::ExprKind::AddrOf(_, _, subexpr)
-            | hir::ExprKind::Unary(hir::UnOp::Deref, subexpr)
-            | hir::ExprKind::Field(subexpr, _)
-            | hir::ExprKind::Index(subexpr, _, _) => {
-                expr = subexpr;
-            }
-            _ => {
-                return;
-            }
-        }
-    }
-}
-fn record_rvalue_scope(
-    rvalue_scopes: &mut RvalueScopes,
-    expr: &hir::Expr<'_>,
-    candidate: &RvalueCandidate,
-) {
-    debug!("resolve_rvalue_scope(expr={expr:?}, candidate={candidate:?})");
-    record_rvalue_scope_rec(rvalue_scopes, expr, candidate.lifetime, candidate.compat)
-    // FIXME(@dingxiangfei2009): handle the candidates in the function call arguments
-}
-
-pub(crate) fn resolve_rvalue_scopes<'a, 'tcx>(
-    fcx: &'a FnCtxt<'a, 'tcx>,
-    scope_tree: &'a ScopeTree,
-    def_id: DefId,
-) -> RvalueScopes {
-    let tcx = &fcx.tcx;
-    let mut rvalue_scopes = RvalueScopes::new();
-    debug!("start resolving rvalue scopes, def_id={def_id:?}");
-    debug!("rvalue_scope: rvalue_candidates={:?}", scope_tree.rvalue_candidates);
-    for (&hir_id, candidate) in &scope_tree.rvalue_candidates {
-        let Node::Expr(expr) = tcx.hir_node(hir_id) else { bug!("hir node does not exist") };
-        record_rvalue_scope(&mut rvalue_scopes, expr, candidate);
-    }
-    rvalue_scopes
-}
+/* FP:rvalue_scopes.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_rvalue_scopes_USE_0001
+/* FP:rvalue_scopes.rs-0002 */ use hir :: Node ;
+/* FP:rvalue_scopes.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_rvalue_scopes_USE_0002
+/* FP:rvalue_scopes.rs-0004 */ use hir :: def_id :: DefId ;
+/* FP:rvalue_scopes.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_rvalue_scopes_USE_0003
+/* FP:rvalue_scopes.rs-0006 */ use rustc_hir as hir ;
+/* FP:rvalue_scopes.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_rvalue_scopes_USE_0004
+/* FP:rvalue_scopes.rs-0008 */ use crate :: rustc_complete :: bug ;
+/* FP:rvalue_scopes.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_rvalue_scopes_USE_0005
+/* FP:rvalue_scopes.rs-0010 */ use crate :: rustc_complete :: middle :: region :: { ScopeCompatibility , RvalueCandidate , Scope , ScopeTree , } ;
+/* FP:rvalue_scopes.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_rvalue_scopes_USE_0006
+/* FP:rvalue_scopes.rs-0012 */ use crate :: rustc_complete :: ty :: RvalueScopes ;
+/* FP:rvalue_scopes.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_rvalue_scopes_USE_0007
+/* FP:rvalue_scopes.rs-0014 */ use tracing :: debug ;
+/* FP:rvalue_scopes.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_rvalue_scopes_USE_0008
+/* FP:rvalue_scopes.rs-0016 */ use super :: FnCtxt ;
+/* FP:rvalue_scopes.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_rvalue_scopes_FN_0009
+/* FP:rvalue_scopes.rs-0018 */ # [doc = " Applied to an expression `expr` if `expr` -- or something owned or partially owned by"] # [doc = " `expr` -- is going to be indirectly referenced by a variable in a let statement. In that"] # [doc = " case, the \"temporary lifetime\" or `expr` is extended to be the block enclosing the `let`"] # [doc = " statement."] # [doc = ""] # [doc = " More formally, if `expr` matches the grammar `ET`, record the rvalue scope of the matching"] # [doc = " `<rvalue>` as `blk_id`:"] # [doc = ""] # [doc = " ```text"] # [doc = "     ET = *ET"] # [doc = "        | ET[...]"] # [doc = "        | ET.f"] # [doc = "        | (ET)"] # [doc = "        | <rvalue>"] # [doc = " ```"] # [doc = ""] # [doc = " Note: ET is intended to match \"rvalues or places based on rvalues\"."] fn record_rvalue_scope_rec (rvalue_scopes : & mut RvalueScopes , mut expr : & hir :: Expr < '_ > , lifetime : Option < Scope > , compat : ScopeCompatibility ,) { loop { rvalue_scopes . record_rvalue_scope (expr . hir_id . local_id , lifetime , compat) ; match expr . kind { hir :: ExprKind :: AddrOf (_ , _ , subexpr) | hir :: ExprKind :: Unary (hir :: UnOp :: Deref , subexpr) | hir :: ExprKind :: Field (subexpr , _) | hir :: ExprKind :: Index (subexpr , _ , _) => { expr = subexpr ; } _ => { return ; } } } }
+/* FP:rvalue_scopes.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_rvalue_scopes_FN_0010
+/* FP:rvalue_scopes.rs-0020 */ fn record_rvalue_scope (rvalue_scopes : & mut RvalueScopes , expr : & hir :: Expr < '_ > , candidate : & RvalueCandidate ,) { debug ! ("resolve_rvalue_scope(expr={expr:?}, candidate={candidate:?})") ; record_rvalue_scope_rec (rvalue_scopes , expr , candidate . lifetime , candidate . compat) }
+/* FP:rvalue_scopes.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_rvalue_scopes_FN_0011
+/* FP:rvalue_scopes.rs-0022 */ pub (crate) fn resolve_rvalue_scopes < 'a , 'tcx > (fcx : & 'a FnCtxt < 'a , 'tcx > , scope_tree : & 'a ScopeTree , def_id : DefId ,) -> RvalueScopes { let tcx = & fcx . tcx ; let mut rvalue_scopes = RvalueScopes :: new () ; debug ! ("start resolving rvalue scopes, def_id={def_id:?}") ; debug ! ("rvalue_scope: rvalue_candidates={:?}" , scope_tree . rvalue_candidates) ; for (& hir_id , candidate) in & scope_tree . rvalue_candidates { let Node :: Expr (expr) = tcx . hir_node (hir_id) else { bug ! ("hir node does not exist") } ; record_rvalue_scope (& mut rvalue_scopes , expr , candidate) ; } rvalue_scopes }

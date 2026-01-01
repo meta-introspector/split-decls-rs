@@ -1,107 +1,20 @@
-use crate::rustc_complete::{self as hir, LangItem};
-use crate::rustc_complete::ty;
-use crate::rustc_complete::{declare_lint, declare_lint_pass};
-use crate::rustc_complete::{Ident, sym};
-use crate::rustc_trait_selection::traits::supertraits;
-
-use crate::lints::{SupertraitAsDerefTarget, SupertraitAsDerefTargetLabel};
-use crate::{LateContext, LateLintPass, LintContext};
-
-declare_lint! {
-    /// The `deref_into_dyn_supertrait` lint is emitted whenever there is a `Deref` implementation
-    /// for `dyn SubTrait` with a `dyn SuperTrait` type as the `Output` type.
-    ///
-    /// These implementations are "shadowed" by trait upcasting (stabilized since
-    /// 1.86.0). The `deref` functions is no longer called implicitly, which might
-    /// change behavior compared to previous rustc versions.
-    ///
-    /// ### Example
-    ///
-    /// ```rust,compile_fail
-    /// #[deny(deref_into_dyn_supertrait)]
-    /// #[allow(dead_code)]
-    ///
-    /// use core::ops::Deref;
-    ///
-    /// trait A {}
-    /// trait B: A {}
-    /// impl<'a> Deref for dyn 'a + B {
-    ///     type Target = dyn A;
-    ///     fn deref(&self) -> &Self::Target {
-    ///         todo!()
-    ///     }
-    /// }
-    ///
-    /// fn take_a(_: &dyn A) { }
-    ///
-    /// fn take_b(b: &dyn B) {
-    ///     take_a(b);
-    /// }
-    /// ```
-    ///
-    /// {{produces}}
-    ///
-    /// ### Explanation
-    ///
-    /// The trait upcasting coercion added a new coercion rule, taking priority over certain other
-    /// coercion rules, which causes some behavior change compared to older `rustc` versions.
-    ///
-    /// `deref` can be still called explicitly, it just isn't called as part of a deref coercion
-    /// (since trait upcasting coercion takes priority).
-    pub DEREF_INTO_DYN_SUPERTRAIT,
-    Allow,
-    "`Deref` implementation with a supertrait trait object for output is shadowed by trait upcasting",
-}
-
-declare_lint_pass!(DerefIntoDynSupertrait => [DEREF_INTO_DYN_SUPERTRAIT]);
-
-impl<'tcx> LateLintPass<'tcx> for DerefIntoDynSupertrait {
-    fn check_item(&mut self, cx: &LateContext<'tcx>, item: &'tcx hir::Item<'tcx>) {
-        let tcx = cx.tcx;
-        // `Deref` is being implemented for `t`
-        if let hir::ItemKind::Impl(impl_) = item.kind
-            // the trait is a `Deref` implementation
-            && let Some(of_trait) = &impl_.of_trait
-            && let Some(did) = of_trait.trait_ref.trait_def_id()
-            && tcx.is_lang_item(did, LangItem::Deref)
-            // the self type is `dyn t_principal`
-            && let self_ty = tcx.type_of(item.owner_id).instantiate_identity()
-            && let ty::Dynamic(data, _, ty::Dyn) = self_ty.kind()
-            && let Some(self_principal) = data.principal()
-            // `<T as Deref>::Target` is `dyn target_principal`
-            && let Some(target) = cx.get_associated_type(self_ty, did, sym::Target)
-            && let ty::Dynamic(data, _, ty::Dyn) = target.kind()
-            && let Some(target_principal) = data.principal()
-            // `target_principal` is a supertrait of `t_principal`
-            && let Some(supertrait_principal) = supertraits(tcx, self_principal.with_self_ty(tcx, self_ty))
-                .find(|supertrait| supertrait.def_id() == target_principal.def_id())
-        {
-            // erase regions in self type for better diagnostic presentation
-            let (self_ty, target_principal, supertrait_principal) =
-                tcx.erase_and_anonymize_regions((self_ty, target_principal, supertrait_principal));
-            let label2 = tcx
-                .associated_items(item.owner_id)
-                .find_by_ident_and_kind(
-                    tcx,
-                    Ident::with_dummy_span(sym::Target),
-                    ty::AssocTag::Type,
-                    item.owner_id.to_def_id(),
-                )
-                .map(|label| SupertraitAsDerefTargetLabel { label: tcx.def_span(label.def_id) });
-            let span = tcx.def_span(item.owner_id.def_id);
-            cx.emit_span_lint(
-                DEREF_INTO_DYN_SUPERTRAIT,
-                span,
-                SupertraitAsDerefTarget {
-                    self_ty,
-                    supertrait_principal: supertrait_principal.map_bound(|trait_ref| {
-                        ty::ExistentialTraitRef::erase_self_ty(tcx, trait_ref)
-                    }),
-                    target_principal,
-                    label: span,
-                    label2,
-                },
-            );
-        }
-    }
-}
+/* FP:deref_into_dyn_supertrait.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_deref_into_dyn_supertrait_USE_0001
+/* FP:deref_into_dyn_supertrait.rs-0002 */ use crate :: rustc_complete :: { self as hir , LangItem } ;
+/* FP:deref_into_dyn_supertrait.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_deref_into_dyn_supertrait_USE_0002
+/* FP:deref_into_dyn_supertrait.rs-0004 */ use crate :: rustc_complete :: ty ;
+/* FP:deref_into_dyn_supertrait.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_deref_into_dyn_supertrait_USE_0003
+/* FP:deref_into_dyn_supertrait.rs-0006 */ use crate :: rustc_complete :: { declare_lint , declare_lint_pass } ;
+/* FP:deref_into_dyn_supertrait.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_deref_into_dyn_supertrait_USE_0004
+/* FP:deref_into_dyn_supertrait.rs-0008 */ use crate :: rustc_complete :: { Ident , sym } ;
+/* FP:deref_into_dyn_supertrait.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_deref_into_dyn_supertrait_USE_0005
+/* FP:deref_into_dyn_supertrait.rs-0010 */ use crate :: rustc_trait_selection :: traits :: supertraits ;
+/* FP:deref_into_dyn_supertrait.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_deref_into_dyn_supertrait_USE_0006
+/* FP:deref_into_dyn_supertrait.rs-0012 */ use crate :: lints :: { SupertraitAsDerefTarget , SupertraitAsDerefTargetLabel } ;
+/* FP:deref_into_dyn_supertrait.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_deref_into_dyn_supertrait_USE_0007
+/* FP:deref_into_dyn_supertrait.rs-0014 */ use crate :: { LateContext , LateLintPass , LintContext } ;
+/* FP:deref_into_dyn_supertrait.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_deref_into_dyn_supertrait_MACRO_0008
+/* FP:deref_into_dyn_supertrait.rs-0016 */ declare_lint ! { # [doc = " The `deref_into_dyn_supertrait` lint is emitted whenever there is a `Deref` implementation"] # [doc = " for `dyn SubTrait` with a `dyn SuperTrait` type as the `Output` type."] # [doc = ""] # [doc = " These implementations are \"shadowed\" by trait upcasting (stabilized since"] # [doc = " 1.86.0). The `deref` functions is no longer called implicitly, which might"] # [doc = " change behavior compared to previous rustc versions."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " #[deny(deref_into_dyn_supertrait)]"] # [doc = " #[allow(dead_code)]"] # [doc = ""] # [doc = " use core::ops::Deref;"] # [doc = ""] # [doc = " trait A {}"] # [doc = " trait B: A {}"] # [doc = " impl<'a> Deref for dyn 'a + B {"] # [doc = "     type Target = dyn A;"] # [doc = "     fn deref(&self) -> &Self::Target {"] # [doc = "         todo!()"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " fn take_a(_: &dyn A) { }"] # [doc = ""] # [doc = " fn take_b(b: &dyn B) {"] # [doc = "     take_a(b);"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " The trait upcasting coercion added a new coercion rule, taking priority over certain other"] # [doc = " coercion rules, which causes some behavior change compared to older `rustc` versions."] # [doc = ""] # [doc = " `deref` can be still called explicitly, it just isn't called as part of a deref coercion"] # [doc = " (since trait upcasting coercion takes priority)."] pub DEREF_INTO_DYN_SUPERTRAIT , Allow , "`Deref` implementation with a supertrait trait object for output is shadowed by trait upcasting" , }
+/* FP:deref_into_dyn_supertrait.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_deref_into_dyn_supertrait_MACRO_0009
+/* FP:deref_into_dyn_supertrait.rs-0018 */ declare_lint_pass ! (DerefIntoDynSupertrait => [DEREF_INTO_DYN_SUPERTRAIT]) ;
+/* FP:deref_into_dyn_supertrait.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_deref_into_dyn_supertrait_IMPL_0010
+/* FP:deref_into_dyn_supertrait.rs-0020 */ impl < 'tcx > LateLintPass < 'tcx > for DerefIntoDynSupertrait { fn check_item (& mut self , cx : & LateContext < 'tcx > , item : & 'tcx hir :: Item < 'tcx >) { let tcx = cx . tcx ; if let hir :: ItemKind :: Impl (impl_) = item . kind && let Some (of_trait) = & impl_ . of_trait && let Some (did) = of_trait . trait_ref . trait_def_id () && tcx . is_lang_item (did , LangItem :: Deref) && let self_ty = tcx . type_of (item . owner_id) . instantiate_identity () && let ty :: Dynamic (data , _ , ty :: Dyn) = self_ty . kind () && let Some (self_principal) = data . principal () && let Some (target) = cx . get_associated_type (self_ty , did , sym :: Target) && let ty :: Dynamic (data , _ , ty :: Dyn) = target . kind () && let Some (target_principal) = data . principal () && let Some (supertrait_principal) = supertraits (tcx , self_principal . with_self_ty (tcx , self_ty)) . find (| supertrait | supertrait . def_id () == target_principal . def_id ()) { let (self_ty , target_principal , supertrait_principal) = tcx . erase_and_anonymize_regions ((self_ty , target_principal , supertrait_principal)) ; let label2 = tcx . associated_items (item . owner_id) . find_by_ident_and_kind (tcx , Ident :: with_dummy_span (sym :: Target) , ty :: AssocTag :: Type , item . owner_id . to_def_id () ,) . map (| label | SupertraitAsDerefTargetLabel { label : tcx . def_span (label . def_id) }) ; let span = tcx . def_span (item . owner_id . def_id) ; cx . emit_span_lint (DEREF_INTO_DYN_SUPERTRAIT , span , SupertraitAsDerefTarget { self_ty , supertrait_principal : supertrait_principal . map_bound (| trait_ref | { ty :: ExistentialTraitRef :: erase_self_ty (tcx , trait_ref) }) , target_principal , label : span , label2 , } ,) ; } } }

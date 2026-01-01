@@ -1,182 +1,36 @@
-use crate::rustc_complete::tokenstream::TokenStream;
-use crate::rustc_complete::ErrorGuaranteed;
-use rustc_parse::parser::{ForceCollect, Parser};
-use crate::rustc_complete::config::ProcMacroExecutionStrategy;
-use crate::rustc_complete::Span;
-use crate::rustc_complete::profiling::SpannedEventArgRecorder;
-use {rustc_ast as ast, rustc_proc_macro as pm};
-
-use crate::base::{self, *};
-use crate::{errors, proc_macro_server};
-
-struct MessagePipe<T> {
-    tx: std::sync::mpsc::SyncSender<T>,
-    rx: std::sync::mpsc::Receiver<T>,
-}
-
-impl<T> pm::bridge::server::MessagePipe<T> for MessagePipe<T> {
-    fn new() -> (Self, Self) {
-        let (tx1, rx1) = std::sync::mpsc::sync_channel(1);
-        let (tx2, rx2) = std::sync::mpsc::sync_channel(1);
-        (MessagePipe { tx: tx1, rx: rx2 }, MessagePipe { tx: tx2, rx: rx1 })
-    }
-
-    fn send(&mut self, value: T) {
-        self.tx.send(value).unwrap();
-    }
-
-    fn recv(&mut self) -> Option<T> {
-        self.rx.recv().ok()
-    }
-}
-
-fn exec_strategy(ecx: &ExtCtxt<'_>) -> impl pm::bridge::server::ExecutionStrategy + 'static {
-    pm::bridge::server::MaybeCrossThread::<MessagePipe<_>>::new(
-        ecx.sess.opts.unstable_opts.proc_macro_execution_strategy
-            == ProcMacroExecutionStrategy::CrossThread,
-    )
-}
-
-pub struct BangProcMacro {
-    pub client: pm::bridge::client::Client<pm::TokenStream, pm::TokenStream>,
-}
-
-impl base::BangProcMacro for BangProcMacro {
-    fn expand(
-        &self,
-        ecx: &mut ExtCtxt<'_>,
-        span: Span,
-        input: TokenStream,
-    ) -> Result<TokenStream, ErrorGuaranteed> {
-        let _timer =
-            ecx.sess.prof.generic_activity_with_arg_recorder("expand_proc_macro", |recorder| {
-                recorder.record_arg_with_span(ecx.sess.source_map(), ecx.expansion_descr(), span);
-            });
-
-        let proc_macro_backtrace = ecx.ecfg.proc_macro_backtrace;
-        let strategy = exec_strategy(ecx);
-        let server = proc_macro_server::Rustc::new(ecx);
-        self.client.run(&strategy, server, input, proc_macro_backtrace).map_err(|e| {
-            ecx.dcx().emit_err(errors::ProcMacroPanicked {
-                span,
-                message: e
-                    .as_str()
-                    .map(|message| errors::ProcMacroPanickedHelp { message: message.into() }),
-            })
-        })
-    }
-}
-
-pub struct AttrProcMacro {
-    pub client: pm::bridge::client::Client<(pm::TokenStream, pm::TokenStream), pm::TokenStream>,
-}
-
-impl base::AttrProcMacro for AttrProcMacro {
-    fn expand(
-        &self,
-        ecx: &mut ExtCtxt<'_>,
-        span: Span,
-        annotation: TokenStream,
-        annotated: TokenStream,
-    ) -> Result<TokenStream, ErrorGuaranteed> {
-        let _timer =
-            ecx.sess.prof.generic_activity_with_arg_recorder("expand_proc_macro", |recorder| {
-                recorder.record_arg_with_span(ecx.sess.source_map(), ecx.expansion_descr(), span);
-            });
-
-        let proc_macro_backtrace = ecx.ecfg.proc_macro_backtrace;
-        let strategy = exec_strategy(ecx);
-        let server = proc_macro_server::Rustc::new(ecx);
-        self.client.run(&strategy, server, annotation, annotated, proc_macro_backtrace).map_err(
-            |e| {
-                ecx.dcx().emit_err(errors::CustomAttributePanicked {
-                    span,
-                    message: e.as_str().map(|message| errors::CustomAttributePanickedHelp {
-                        message: message.into(),
-                    }),
-                })
-            },
-        )
-    }
-}
-
-pub struct DeriveProcMacro {
-    pub client: pm::bridge::client::Client<pm::TokenStream, pm::TokenStream>,
-}
-
-impl MultiItemModifier for DeriveProcMacro {
-    fn expand(
-        &self,
-        ecx: &mut ExtCtxt<'_>,
-        span: Span,
-        _meta_item: &ast::MetaItem,
-        item: Annotatable,
-        _is_derive_const: bool,
-    ) -> ExpandResult<Vec<Annotatable>, Annotatable> {
-        // We need special handling for statement items
-        // (e.g. `fn foo() { #[derive(Debug)] struct Bar; }`)
-        let is_stmt = matches!(item, Annotatable::Stmt(..));
-
-        // We used to have an alternative behaviour for crates that needed it.
-        // We had a lint for a long time, but now we just emit a hard error.
-        // Eventually we might remove the special case hard error check
-        // altogether. See #73345.
-        crate::base::ann_pretty_printing_compatibility_hack(&item, &ecx.sess.psess);
-        let input = item.to_tokens();
-        let stream = {
-            let _timer =
-                ecx.sess.prof.generic_activity_with_arg_recorder("expand_proc_macro", |recorder| {
-                    recorder.record_arg_with_span(
-                        ecx.sess.source_map(),
-                        ecx.expansion_descr(),
-                        span,
-                    );
-                });
-            let proc_macro_backtrace = ecx.ecfg.proc_macro_backtrace;
-            let strategy = exec_strategy(ecx);
-            let server = proc_macro_server::Rustc::new(ecx);
-            match self.client.run(&strategy, server, input, proc_macro_backtrace) {
-                Ok(stream) => stream,
-                Err(e) => {
-                    ecx.dcx().emit_err({
-                        errors::ProcMacroDerivePanicked {
-                            span,
-                            message: e.as_str().map(|message| {
-                                errors::ProcMacroDerivePanickedHelp { message: message.into() }
-                            }),
-                        }
-                    });
-                    return ExpandResult::Ready(vec![]);
-                }
-            }
-        };
-
-        let error_count_before = ecx.dcx().err_count();
-        let mut parser = Parser::new(&ecx.sess.psess, stream, Some("proc-macro derive"));
-        let mut items = vec![];
-
-        loop {
-            match parser.parse_item(ForceCollect::No) {
-                Ok(None) => break,
-                Ok(Some(item)) => {
-                    if is_stmt {
-                        items.push(Annotatable::Stmt(Box::new(ecx.stmt_item(span, item))));
-                    } else {
-                        items.push(Annotatable::Item(item));
-                    }
-                }
-                Err(err) => {
-                    err.emit();
-                    break;
-                }
-            }
-        }
-
-        // fail if there have been errors emitted
-        if ecx.dcx().err_count() > error_count_before {
-            ecx.dcx().emit_err(errors::ProcMacroDeriveTokens { span });
-        }
-
-        ExpandResult::Ready(items)
-    }
-}
+/* FP:proc_macro.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_USE_0001
+/* FP:proc_macro.rs-0002 */ use crate :: rustc_complete :: tokenstream :: TokenStream ;
+/* FP:proc_macro.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_USE_0002
+/* FP:proc_macro.rs-0004 */ use crate :: rustc_complete :: ErrorGuaranteed ;
+/* FP:proc_macro.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_USE_0003
+/* FP:proc_macro.rs-0006 */ use crate :: rustc_parse :: parser :: { ForceCollect , Parser } ;
+/* FP:proc_macro.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_USE_0004
+/* FP:proc_macro.rs-0008 */ use crate :: rustc_complete :: config :: ProcMacroExecutionStrategy ;
+/* FP:proc_macro.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_USE_0005
+/* FP:proc_macro.rs-0010 */ use crate :: rustc_complete :: Span ;
+/* FP:proc_macro.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_USE_0006
+/* FP:proc_macro.rs-0012 */ use crate :: rustc_complete :: profiling :: SpannedEventArgRecorder ;
+/* FP:proc_macro.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_USE_0007
+/* FP:proc_macro.rs-0014 */ use { rustc_ast as ast , rustc_proc_macro as pm } ;
+/* FP:proc_macro.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_USE_0008
+/* FP:proc_macro.rs-0016 */ use crate :: base :: { self , * } ;
+/* FP:proc_macro.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_USE_0009
+/* FP:proc_macro.rs-0018 */ use crate :: { errors , proc_macro_server } ;
+/* FP:proc_macro.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_STRUCT_0010
+/* FP:proc_macro.rs-0020 */ struct MessagePipe < T > { tx : std :: sync :: mpsc :: SyncSender < T > , rx : std :: sync :: mpsc :: Receiver < T > , }
+/* FP:proc_macro.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_IMPL_0011
+/* FP:proc_macro.rs-0022 */ impl < T > pm :: bridge :: server :: MessagePipe < T > for MessagePipe < T > { fn new () -> (Self , Self) { let (tx1 , rx1) = std :: sync :: mpsc :: sync_channel (1) ; let (tx2 , rx2) = std :: sync :: mpsc :: sync_channel (1) ; (MessagePipe { tx : tx1 , rx : rx2 } , MessagePipe { tx : tx2 , rx : rx1 }) } fn send (& mut self , value : T) { self . tx . send (value) . unwrap () ; } fn recv (& mut self) -> Option < T > { self . rx . recv () . ok () } }
+/* FP:proc_macro.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_FN_0012
+/* FP:proc_macro.rs-0024 */ fn exec_strategy (ecx : & ExtCtxt < '_ >) -> impl pm :: bridge :: server :: ExecutionStrategy + 'static { pm :: bridge :: server :: MaybeCrossThread :: < MessagePipe < _ > > :: new (ecx . sess . opts . unstable_opts . proc_macro_execution_strategy == ProcMacroExecutionStrategy :: CrossThread ,) }
+/* FP:proc_macro.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_STRUCT_0013
+/* FP:proc_macro.rs-0026 */ pub struct BangProcMacro { pub client : pm :: bridge :: client :: Client < pm :: TokenStream , pm :: TokenStream > , }
+/* FP:proc_macro.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_IMPL_0014
+/* FP:proc_macro.rs-0028 */ impl base :: BangProcMacro for BangProcMacro { fn expand (& self , ecx : & mut ExtCtxt < '_ > , span : Span , input : TokenStream ,) -> Result < TokenStream , ErrorGuaranteed > { let _timer = ecx . sess . prof . generic_activity_with_arg_recorder ("expand_proc_macro" , | recorder | { recorder . record_arg_with_span (ecx . sess . source_map () , ecx . expansion_descr () , span) ; }) ; let proc_macro_backtrace = ecx . ecfg . proc_macro_backtrace ; let strategy = exec_strategy (ecx) ; let server = proc_macro_server :: Rustc :: new (ecx) ; self . client . run (& strategy , server , input , proc_macro_backtrace) . map_err (| e | { ecx . dcx () . emit_err (errors :: ProcMacroPanicked { span , message : e . as_str () . map (| message | errors :: ProcMacroPanickedHelp { message : message . into () }) , }) }) } }
+/* FP:proc_macro.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_STRUCT_0015
+/* FP:proc_macro.rs-0030 */ pub struct AttrProcMacro { pub client : pm :: bridge :: client :: Client < (pm :: TokenStream , pm :: TokenStream) , pm :: TokenStream > , }
+/* FP:proc_macro.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_IMPL_0016
+/* FP:proc_macro.rs-0032 */ impl base :: AttrProcMacro for AttrProcMacro { fn expand (& self , ecx : & mut ExtCtxt < '_ > , span : Span , annotation : TokenStream , annotated : TokenStream ,) -> Result < TokenStream , ErrorGuaranteed > { let _timer = ecx . sess . prof . generic_activity_with_arg_recorder ("expand_proc_macro" , | recorder | { recorder . record_arg_with_span (ecx . sess . source_map () , ecx . expansion_descr () , span) ; }) ; let proc_macro_backtrace = ecx . ecfg . proc_macro_backtrace ; let strategy = exec_strategy (ecx) ; let server = proc_macro_server :: Rustc :: new (ecx) ; self . client . run (& strategy , server , annotation , annotated , proc_macro_backtrace) . map_err (| e | { ecx . dcx () . emit_err (errors :: CustomAttributePanicked { span , message : e . as_str () . map (| message | errors :: CustomAttributePanickedHelp { message : message . into () , }) , }) } ,) } }
+/* FP:proc_macro.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_STRUCT_0017
+/* FP:proc_macro.rs-0034 */ pub struct DeriveProcMacro { pub client : pm :: bridge :: client :: Client < pm :: TokenStream , pm :: TokenStream > , }
+/* FP:proc_macro.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_proc_macro_IMPL_0018
+/* FP:proc_macro.rs-0036 */ impl MultiItemModifier for DeriveProcMacro { fn expand (& self , ecx : & mut ExtCtxt < '_ > , span : Span , _meta_item : & ast :: MetaItem , item : Annotatable , _is_derive_const : bool ,) -> ExpandResult < Vec < Annotatable > , Annotatable > { let is_stmt = matches ! (item , Annotatable :: Stmt (..)) ; crate :: base :: ann_pretty_printing_compatibility_hack (& item , & ecx . sess . psess) ; let input = item . to_tokens () ; let stream = { let _timer = ecx . sess . prof . generic_activity_with_arg_recorder ("expand_proc_macro" , | recorder | { recorder . record_arg_with_span (ecx . sess . source_map () , ecx . expansion_descr () , span ,) ; }) ; let proc_macro_backtrace = ecx . ecfg . proc_macro_backtrace ; let strategy = exec_strategy (ecx) ; let server = proc_macro_server :: Rustc :: new (ecx) ; match self . client . run (& strategy , server , input , proc_macro_backtrace) { Ok (stream) => stream , Err (e) => { ecx . dcx () . emit_err ({ errors :: ProcMacroDerivePanicked { span , message : e . as_str () . map (| message | { errors :: ProcMacroDerivePanickedHelp { message : message . into () } }) , } }) ; return ExpandResult :: Ready (vec ! []) ; } } } ; let error_count_before = ecx . dcx () . err_count () ; let mut parser = Parser :: new (& ecx . sess . psess , stream , Some ("proc-macro derive")) ; let mut items = vec ! [] ; loop { match parser . parse_item (ForceCollect :: No) { Ok (None) => break , Ok (Some (item)) => { if is_stmt { items . push (Annotatable :: Stmt (Box :: new (ecx . stmt_item (span , item)))) ; } else { items . push (Annotatable :: Item (item)) ; } } Err (err) => { err . emit () ; break ; } } } if ecx . dcx () . err_count () > error_count_before { ecx . dcx () . emit_err (errors :: ProcMacroDeriveTokens { span }) ; } ExpandResult :: Ready (items) } }

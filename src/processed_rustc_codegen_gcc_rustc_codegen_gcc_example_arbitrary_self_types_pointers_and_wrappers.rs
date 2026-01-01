@@ -1,66 +1,24 @@
-// Adapted from rustc run-pass test suite
-
-#[feature(arbitrary_self_types, unsize, coerce_unsized, dispatch_from_dyn)]
-#[feature(rustc_attrs)]
-#[allow(internal_features)]
-
-use std::{
-    ops::{Deref, CoerceUnsized, DispatchFromDyn},
-    marker::Unsize,
-};
-
-struct Ptr<T: ?Sized>(Box<T>);
-
-impl<T: ?Sized> Deref for Ptr<T> {
-    type Target = T;
-
-    fn deref(&self) -> &T {
-        &*self.0
-    }
-}
-
-impl<T: Unsize<U> + ?Sized, U: ?Sized> CoerceUnsized<Ptr<U>> for Ptr<T> {}
-impl<T: Unsize<U> + ?Sized, U: ?Sized> DispatchFromDyn<Ptr<U>> for Ptr<T> {}
-
-struct Wrapper<T: ?Sized>(T);
-
-impl<T: ?Sized> Deref for Wrapper<T> {
-    type Target = T;
-
-    fn deref(&self) -> &T {
-        &self.0
-    }
-}
-
-impl<T: CoerceUnsized<U>, U> CoerceUnsized<Wrapper<U>> for Wrapper<T> {}
-impl<T: DispatchFromDyn<U>, U> DispatchFromDyn<Wrapper<U>> for Wrapper<T> {}
-
-
-trait Trait {
-    fn ptr_wrapper(self: Ptr<Wrapper<Self>>) -> i32;
-    fn wrapper_ptr(self: Wrapper<Ptr<Self>>) -> i32;
-    fn wrapper_ptr_wrapper(self: Wrapper<Ptr<Wrapper<Self>>>) -> i32;
-}
-
-impl Trait for i32 {
-    fn ptr_wrapper(self: Ptr<Wrapper<Self>>) -> i32 {
-        **self
-    }
-    fn wrapper_ptr(self: Wrapper<Ptr<Self>>) -> i32 {
-        **self
-    }
-    fn wrapper_ptr_wrapper(self: Wrapper<Ptr<Wrapper<Self>>>) -> i32 {
-        ***self
-    }
-}
-
-fn main() {
-    let pw = Ptr(Box::new(Wrapper(5))) as Ptr<Wrapper<dyn Trait>>;
-    assert_eq!(pw.ptr_wrapper(), 5);
-
-    let wp = Wrapper(Ptr(Box::new(6))) as Wrapper<Ptr<dyn Trait>>;
-    assert_eq!(wp.wrapper_ptr(), 6);
-
-    let wpw = Wrapper(Ptr(Box::new(Wrapper(7)))) as Wrapper<Ptr<Wrapper<dyn Trait>>>;
-    assert_eq!(wpw.wrapper_ptr_wrapper(), 7);
-}
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_arbitrary_self_types_pointers_and_wrappers_USE_0001
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0002 */ # [feature (arbitrary_self_types , unsize , coerce_unsized , dispatch_from_dyn)] # [feature (rustc_attrs)] # [allow (internal_features)] use std :: { ops :: { Deref , CoerceUnsized , DispatchFromDyn } , marker :: Unsize , } ;
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_arbitrary_self_types_pointers_and_wrappers_STRUCT_0002
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0004 */ struct Ptr < T : ? Sized > (Box < T >) ;
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_arbitrary_self_types_pointers_and_wrappers_IMPL_0003
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0006 */ impl < T : ? Sized > Deref for Ptr < T > { type Target = T ; fn deref (& self) -> & T { & * self . 0 } }
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_arbitrary_self_types_pointers_and_wrappers_IMPL_0004
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0008 */ impl < T : Unsize < U > + ? Sized , U : ? Sized > CoerceUnsized < Ptr < U > > for Ptr < T > { }
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_arbitrary_self_types_pointers_and_wrappers_IMPL_0005
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0010 */ impl < T : Unsize < U > + ? Sized , U : ? Sized > DispatchFromDyn < Ptr < U > > for Ptr < T > { }
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_arbitrary_self_types_pointers_and_wrappers_STRUCT_0006
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0012 */ struct Wrapper < T : ? Sized > (T) ;
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_arbitrary_self_types_pointers_and_wrappers_IMPL_0007
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0014 */ impl < T : ? Sized > Deref for Wrapper < T > { type Target = T ; fn deref (& self) -> & T { & self . 0 } }
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_arbitrary_self_types_pointers_and_wrappers_IMPL_0008
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0016 */ impl < T : CoerceUnsized < U > , U > CoerceUnsized < Wrapper < U > > for Wrapper < T > { }
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_arbitrary_self_types_pointers_and_wrappers_IMPL_0009
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0018 */ impl < T : DispatchFromDyn < U > , U > DispatchFromDyn < Wrapper < U > > for Wrapper < T > { }
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_arbitrary_self_types_pointers_and_wrappers_TRAIT_0010
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0020 */ trait Trait { fn ptr_wrapper (self : Ptr < Wrapper < Self > >) -> i32 ; fn wrapper_ptr (self : Wrapper < Ptr < Self > >) -> i32 ; fn wrapper_ptr_wrapper (self : Wrapper < Ptr < Wrapper < Self > > >) -> i32 ; }
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_arbitrary_self_types_pointers_and_wrappers_IMPL_0011
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0022 */ impl Trait for i32 { fn ptr_wrapper (self : Ptr < Wrapper < Self > >) -> i32 { * * self } fn wrapper_ptr (self : Wrapper < Ptr < Self > >) -> i32 { * * self } fn wrapper_ptr_wrapper (self : Wrapper < Ptr < Wrapper < Self > > >) -> i32 { * * * self } }
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_example_arbitrary_self_types_pointers_and_wrappers_FN_0012
+/* FP:arbitrary_self_types_pointers_and_wrappers.rs-0024 */ fn main () { let pw = Ptr (Box :: new (Wrapper (5))) as Ptr < Wrapper < dyn Trait > > ; assert_eq ! (pw . ptr_wrapper () , 5) ; let wp = Wrapper (Ptr (Box :: new (6))) as Wrapper < Ptr < dyn Trait > > ; assert_eq ! (wp . wrapper_ptr () , 6) ; let wpw = Wrapper (Ptr (Box :: new (Wrapper (7)))) as Wrapper < Ptr < Wrapper < dyn Trait > > > ; assert_eq ! (wpw . wrapper_ptr_wrapper () , 7) ; }

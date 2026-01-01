@@ -1,26 +1,2 @@
-// Compiler:
-//
-// Run-time:
-//   status: 0
-
-fn main() {
-    use std::hint::black_box;
-
-    macro_rules! check {
-        ($ty:ty, $expr:expr) => {{
-            const EXPECTED: $ty = $expr;
-            assert_eq!($expr, EXPECTED);
-        }};
-    }
-
-    check!(i32, black_box(0.0f32) as i32);
-
-    check!(u64, black_box(f32::NAN) as u64);
-    check!(u128, black_box(f32::NAN) as u128);
-
-    check!(i64, black_box(f64::NAN) as i64);
-    check!(u64, black_box(f64::NAN) as u64);
-
-    check!(i16, black_box(f32::MIN) as i16);
-    check!(i16, black_box(f32::MAX) as i16);
-}
+/* FP:float.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_run_float_FN_0001
+/* FP:float.rs-0002 */ fn main () { use std :: hint :: black_box ; macro_rules ! check { ($ ty : ty , $ expr : expr) => { { const EXPECTED : $ ty = $ expr ; assert_eq ! ($ expr , EXPECTED) ; } } ; } check ! (i32 , black_box (0.0f32) as i32) ; check ! (u64 , black_box (f32 :: NAN) as u64) ; check ! (u128 , black_box (f32 :: NAN) as u128) ; check ! (i64 , black_box (f64 :: NAN) as i64) ; check ! (u64 , black_box (f64 :: NAN) as u64) ; check ! (i16 , black_box (f32 :: MIN) as i16) ; check ! (i16 , black_box (f32 :: MAX) as i16) ; }

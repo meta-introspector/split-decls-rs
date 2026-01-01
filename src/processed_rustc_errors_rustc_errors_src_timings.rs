@@ -1,121 +1,24 @@
-use std::time::Instant;
-
-use crate::rustc_data_structures::fx::FxHashSet;
-use crate::rustc_data_structures::sync::Lock;
-
-use crate::DiagCtxtHandle;
-
-/// A high-level section of the compilation process.
-#[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
-pub enum TimingSection {
-    /// Time spent doing codegen.
-    Codegen,
-    /// Time spent linking.
-    Linking,
-}
-
-/// Section with attached timestamp
-#[derive(Copy, Clone, Debug)]
-pub struct TimingRecord {
-    pub section: TimingSection,
-    /// Microseconds elapsed since some predetermined point in time (~start of the rustc process).
-    pub timestamp: u128,
-}
-
-impl TimingRecord {
-    fn from_origin(origin: Instant, section: TimingSection) -> Self {
-        Self { section, timestamp: Instant::now().duration_since(origin).as_micros() }
-    }
-
-    pub fn section(&self) -> TimingSection {
-        self.section
-    }
-
-    pub fn timestamp(&self) -> u128 {
-        self.timestamp
-    }
-}
-
-/// Manages emission of start/end section timings, enabled through `--json=timings`.
-pub struct TimingSectionHandler {
-    /// Time when the compilation session started.
-    /// If `None`, timing is disabled.
-    origin: Option<Instant>,
-    /// Sanity check to ensure that we open and close sections correctly.
-    opened_sections: Lock<FxHashSet<TimingSection>>,
-}
-
-impl TimingSectionHandler {
-    pub fn new(enabled: bool) -> Self {
-        let origin = if enabled { Some(Instant::now()) } else { None };
-        Self { origin, opened_sections: Lock::new(FxHashSet::default()) }
-    }
-
-    /// Returns a RAII guard that will immediately emit a start the provided section, and then emit
-    /// its end when it is dropped.
-    pub fn section_guard<'a>(
-        &self,
-        diag_ctxt: DiagCtxtHandle<'a>,
-        section: TimingSection,
-    ) -> TimingSectionGuard<'a> {
-        if self.is_enabled() && self.opened_sections.borrow().contains(&section) {
-            diag_ctxt
-                .bug(format!("Section `{section:?}` was started again before it was finished"));
-        }
-
-        TimingSectionGuard::create(diag_ctxt, section, self.origin)
-    }
-
-    /// Start the provided section.
-    pub fn start_section(&self, diag_ctxt: DiagCtxtHandle<'_>, section: TimingSection) {
-        if let Some(origin) = self.origin {
-            let mut opened = self.opened_sections.borrow_mut();
-            if !opened.insert(section) {
-                diag_ctxt
-                    .bug(format!("Section `{section:?}` was started again before it was finished"));
-            }
-
-            diag_ctxt.emit_timing_section_start(TimingRecord::from_origin(origin, section));
-        }
-    }
-
-    /// End the provided section.
-    pub fn end_section(&self, diag_ctxt: DiagCtxtHandle<'_>, section: TimingSection) {
-        if let Some(origin) = self.origin {
-            let mut opened = self.opened_sections.borrow_mut();
-            if !opened.remove(&section) {
-                diag_ctxt.bug(format!("Section `{section:?}` was ended before being started"));
-            }
-
-            diag_ctxt.emit_timing_section_end(TimingRecord::from_origin(origin, section));
-        }
-    }
-
-    fn is_enabled(&self) -> bool {
-        self.origin.is_some()
-    }
-}
-
-/// RAII wrapper for starting and ending section timings.
-pub struct TimingSectionGuard<'a> {
-    dcx: DiagCtxtHandle<'a>,
-    section: TimingSection,
-    origin: Option<Instant>,
-}
-
-impl<'a> TimingSectionGuard<'a> {
-    fn create(dcx: DiagCtxtHandle<'a>, section: TimingSection, origin: Option<Instant>) -> Self {
-        if let Some(origin) = origin {
-            dcx.emit_timing_section_start(TimingRecord::from_origin(origin, section));
-        }
-        Self { dcx, section, origin }
-    }
-}
-
-impl<'a> Drop for TimingSectionGuard<'a> {
-    fn drop(&mut self) {
-        if let Some(origin) = self.origin {
-            self.dcx.emit_timing_section_end(TimingRecord::from_origin(origin, self.section));
-        }
-    }
-}
+/* FP:timings.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_timings_USE_0001
+/* FP:timings.rs-0002 */ use std :: time :: Instant ;
+/* FP:timings.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_timings_USE_0002
+/* FP:timings.rs-0004 */ use crate :: rustc_data_structures :: fx :: FxHashSet ;
+/* FP:timings.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_timings_USE_0003
+/* FP:timings.rs-0006 */ use crate :: rustc_data_structures :: sync :: Lock ;
+/* FP:timings.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_timings_USE_0004
+/* FP:timings.rs-0008 */ use crate :: DiagCtxtHandle ;
+/* FP:timings.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_timings_ENUM_0005
+/* FP:timings.rs-0010 */ # [doc = " A high-level section of the compilation process."] # [derive (Copy , Clone , Debug , PartialEq , Eq , Hash)] pub enum TimingSection { # [doc = " Time spent doing codegen."] Codegen , # [doc = " Time spent linking."] Linking , }
+/* FP:timings.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_timings_STRUCT_0006
+/* FP:timings.rs-0012 */ # [doc = " Section with attached timestamp"] # [derive (Copy , Clone , Debug)] pub struct TimingRecord { pub section : TimingSection , # [doc = " Microseconds elapsed since some predetermined point in time (~start of the rustc process)."] pub timestamp : u128 , }
+/* FP:timings.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_timings_IMPL_0007
+/* FP:timings.rs-0014 */ impl TimingRecord { fn from_origin (origin : Instant , section : TimingSection) -> Self { Self { section , timestamp : Instant :: now () . duration_since (origin) . as_micros () } } pub fn section (& self) -> TimingSection { self . section } pub fn timestamp (& self) -> u128 { self . timestamp } }
+/* FP:timings.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_timings_STRUCT_0008
+/* FP:timings.rs-0016 */ # [doc = " Manages emission of start/end section timings, enabled through `--json=timings`."] pub struct TimingSectionHandler { # [doc = " Time when the compilation session started."] # [doc = " If `None`, timing is disabled."] origin : Option < Instant > , # [doc = " Sanity check to ensure that we open and close sections correctly."] opened_sections : Lock < FxHashSet < TimingSection > > , }
+/* FP:timings.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_timings_IMPL_0009
+/* FP:timings.rs-0018 */ impl TimingSectionHandler { pub fn new (enabled : bool) -> Self { let origin = if enabled { Some (Instant :: now ()) } else { None } ; Self { origin , opened_sections : Lock :: new (FxHashSet :: default ()) } } # [doc = " Returns a RAII guard that will immediately emit a start the provided section, and then emit"] # [doc = " its end when it is dropped."] pub fn section_guard < 'a > (& self , diag_ctxt : DiagCtxtHandle < 'a > , section : TimingSection ,) -> TimingSectionGuard < 'a > { if self . is_enabled () && self . opened_sections . borrow () . contains (& section) { diag_ctxt . bug (format ! ("Section `{section:?}` was started again before it was finished")) ; } TimingSectionGuard :: create (diag_ctxt , section , self . origin) } # [doc = " Start the provided section."] pub fn start_section (& self , diag_ctxt : DiagCtxtHandle < '_ > , section : TimingSection) { if let Some (origin) = self . origin { let mut opened = self . opened_sections . borrow_mut () ; if ! opened . insert (section) { diag_ctxt . bug (format ! ("Section `{section:?}` was started again before it was finished")) ; } diag_ctxt . emit_timing_section_start (TimingRecord :: from_origin (origin , section)) ; } } # [doc = " End the provided section."] pub fn end_section (& self , diag_ctxt : DiagCtxtHandle < '_ > , section : TimingSection) { if let Some (origin) = self . origin { let mut opened = self . opened_sections . borrow_mut () ; if ! opened . remove (& section) { diag_ctxt . bug (format ! ("Section `{section:?}` was ended before being started")) ; } diag_ctxt . emit_timing_section_end (TimingRecord :: from_origin (origin , section)) ; } } fn is_enabled (& self) -> bool { self . origin . is_some () } }
+/* FP:timings.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_timings_STRUCT_0010
+/* FP:timings.rs-0020 */ # [doc = " RAII wrapper for starting and ending section timings."] pub struct TimingSectionGuard < 'a > { dcx : DiagCtxtHandle < 'a > , section : TimingSection , origin : Option < Instant > , }
+/* FP:timings.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_timings_IMPL_0011
+/* FP:timings.rs-0022 */ impl < 'a > TimingSectionGuard < 'a > { fn create (dcx : DiagCtxtHandle < 'a > , section : TimingSection , origin : Option < Instant >) -> Self { if let Some (origin) = origin { dcx . emit_timing_section_start (TimingRecord :: from_origin (origin , section)) ; } Self { dcx , section , origin } } }
+/* FP:timings.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_timings_IMPL_0012
+/* FP:timings.rs-0024 */ impl < 'a > Drop for TimingSectionGuard < 'a > { fn drop (& mut self) { if let Some (origin) = self . origin { self . dcx . emit_timing_section_end (TimingRecord :: from_origin (origin , self . section)) ; } } }

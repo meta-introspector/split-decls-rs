@@ -1,201 +1,22 @@
-use rustc_abi::{BackendRepr, FieldsShape, Scalar, Variants};
-use crate::rustc_complete::ty::layout::{
-    HasTyCtxt, LayoutCx, LayoutError, LayoutOf, TyAndLayout, ValidityRequirement,
-};
-use crate::rustc_complete::ty::{PseudoCanonicalInput, ScalarInt, Ty, TyCtxt};
-use crate::rustc_complete::{bug, ty};
-use crate::rustc_complete::DUMMY_SP;
-
-use crate::const_eval::{CanAccessMutGlobal, CheckAlignment, CompileTimeMachine};
-use crate::interpret::{InterpCx, MemoryKind};
-
-/// Determines if this type permits "raw" initialization by just transmuting some memory into an
-/// instance of `T`.
-///
-/// `init_kind` indicates if the memory is zero-initialized or left uninitialized. We assume
-/// uninitialized memory is mitigated by filling it with 0x01, which reduces the chance of causing
-/// LLVM UB.
-///
-/// By default we check whether that operation would cause *LLVM UB*, i.e., whether the LLVM IR we
-/// generate has UB or not. This is a mitigation strategy, which is why we are okay with accepting
-/// Rust UB as long as there is no risk of miscompilations. The `strict_init_checks` can be set to
-/// do a full check against Rust UB instead (in which case we will also ignore the 0x01-filling and
-/// to the full uninit check).
-pub fn check_validity_requirement<'tcx>(
-    tcx: TyCtxt<'tcx>,
-    kind: ValidityRequirement,
-    input: PseudoCanonicalInput<'tcx, Ty<'tcx>>,
-) -> Result<bool, &'tcx LayoutError<'tcx>> {
-    let layout = tcx.layout_of(input)?;
-
-    // There is nothing strict or lax about inhabitedness.
-    if kind == ValidityRequirement::Inhabited {
-        return Ok(!layout.is_uninhabited());
-    }
-
-    let layout_cx = LayoutCx::new(tcx, input.typing_env);
-    if kind == ValidityRequirement::Uninit || tcx.sess.opts.unstable_opts.strict_init_checks {
-        Ok(check_validity_requirement_strict(layout, &layout_cx, kind))
-    } else {
-        check_validity_requirement_lax(layout, &layout_cx, kind)
-    }
-}
-
-/// Implements the 'strict' version of the [`check_validity_requirement`] checks; see that function
-/// for details.
-fn check_validity_requirement_strict<'tcx>(
-    ty: TyAndLayout<'tcx>,
-    cx: &LayoutCx<'tcx>,
-    kind: ValidityRequirement,
-) -> bool {
-    let machine = CompileTimeMachine::new(CanAccessMutGlobal::No, CheckAlignment::Error);
-
-    let mut cx = InterpCx::new(cx.tcx(), DUMMY_SP, cx.typing_env, machine);
-
-    // It doesn't really matter which `MemoryKind` we use here, `Stack` is the least wrong.
-    let allocated =
-        cx.allocate(ty, MemoryKind::Stack).expect("OOM: failed to allocate for uninit check");
-
-    if kind == ValidityRequirement::Zero {
-        cx.write_bytes_ptr(
-            allocated.ptr(),
-            std::iter::repeat(0_u8).take(ty.layout.size().bytes_usize()),
-        )
-        .expect("failed to write bytes for zero valid check");
-    }
-
-    // Assume that if it failed, it's a validation failure.
-    // This does *not* actually check that references are dereferenceable, but since all types that
-    // require dereferenceability also require non-null, we don't actually get any false negatives
-    // due to this.
-    // The value we are validating is temporary and discarded at the end of this function, so
-    // there is no point in resetting provenance and padding.
-    cx.validate_operand(
-        &allocated.into(),
-        /*recursive*/ false,
-        /*reset_provenance_and_padding*/ false,
-    )
-    .discard_err()
-    .is_some()
-}
-
-/// Implements the 'lax' (default) version of the [`check_validity_requirement`] checks; see that
-/// function for details.
-fn check_validity_requirement_lax<'tcx>(
-    this: TyAndLayout<'tcx>,
-    cx: &LayoutCx<'tcx>,
-    init_kind: ValidityRequirement,
-) -> Result<bool, &'tcx LayoutError<'tcx>> {
-    let scalar_allows_raw_init = move |s: Scalar| -> bool {
-        match init_kind {
-            ValidityRequirement::Inhabited => {
-                bug!("ValidityRequirement::Inhabited should have been handled above")
-            }
-            ValidityRequirement::Zero => {
-                // The range must contain 0.
-                s.valid_range(cx).contains(0)
-            }
-            ValidityRequirement::UninitMitigated0x01Fill => {
-                // The range must include an 0x01-filled buffer.
-                let mut val: u128 = 0x01;
-                for _ in 1..s.size(cx).bytes() {
-                    // For sizes >1, repeat the 0x01.
-                    val = (val << 8) | 0x01;
-                }
-                s.valid_range(cx).contains(val)
-            }
-            ValidityRequirement::Uninit => {
-                bug!("ValidityRequirement::Uninit should have been handled above")
-            }
-        }
-    };
-
-    // Check the ABI.
-    let valid = !this.is_uninhabited() // definitely UB if uninhabited
-        && match this.backend_repr {
-            BackendRepr::Scalar(s) => scalar_allows_raw_init(s),
-            BackendRepr::ScalarPair(s1, s2) => {
-                scalar_allows_raw_init(s1) && scalar_allows_raw_init(s2)
-            }
-            BackendRepr::SimdVector { element: s, count } => count == 0 || scalar_allows_raw_init(s),
-            BackendRepr::Memory { .. } => true, // Fields are checked below.
-        };
-    if !valid {
-        // This is definitely not okay.
-        return Ok(false);
-    }
-
-    // Special magic check for references and boxes (i.e., special pointer types).
-    if let Some(pointee) = this.ty.builtin_deref(false) {
-        let pointee = cx.layout_of(pointee)?;
-        // We need to ensure that the LLVM attributes `aligned` and `dereferenceable(size)` are satisfied.
-        if pointee.align.abi.bytes() > 1 {
-            // 0x01-filling is not aligned.
-            return Ok(false);
-        }
-        if pointee.size.bytes() > 0 {
-            // A 'fake' integer pointer is not sufficiently dereferenceable.
-            return Ok(false);
-        }
-    }
-
-    // If we have not found an error yet, we need to recursively descend into fields.
-    match &this.fields {
-        FieldsShape::Primitive | FieldsShape::Union { .. } => {}
-        FieldsShape::Array { .. } => {
-            // Arrays never have scalar layout in LLVM, so if the array is not actually
-            // accessed, there is no LLVM UB -- therefore we can skip this.
-        }
-        FieldsShape::Arbitrary { offsets, .. } => {
-            for idx in 0..offsets.len() {
-                if !check_validity_requirement_lax(this.field(cx, idx), cx, init_kind)? {
-                    // We found a field that is unhappy with this kind of initialization.
-                    return Ok(false);
-                }
-            }
-        }
-    }
-
-    match &this.variants {
-        Variants::Empty => return Ok(false),
-        Variants::Single { .. } => {
-            // All fields of this single variant have already been checked above, there is nothing
-            // else to do.
-        }
-        Variants::Multiple { .. } => {
-            // We cannot tell LLVM anything about the details of this multi-variant layout, so
-            // invalid values "hidden" inside the variant cannot cause LLVM trouble.
-        }
-    }
-
-    Ok(true)
-}
-
-pub(crate) fn validate_scalar_in_layout<'tcx>(
-    tcx: TyCtxt<'tcx>,
-    scalar: ScalarInt,
-    ty: Ty<'tcx>,
-) -> bool {
-    let machine = CompileTimeMachine::new(CanAccessMutGlobal::No, CheckAlignment::Error);
-
-    let typing_env = ty::TypingEnv::fully_monomorphized();
-    let mut cx = InterpCx::new(tcx, DUMMY_SP, typing_env, machine);
-
-    let Ok(layout) = cx.layout_of(ty) else {
-        bug!("could not compute layout of {scalar:?}:{ty:?}")
-    };
-
-    // It doesn't really matter which `MemoryKind` we use here, `Stack` is the least wrong.
-    let allocated =
-        cx.allocate(layout, MemoryKind::Stack).expect("OOM: failed to allocate for uninit check");
-
-    cx.write_scalar(scalar, &allocated).unwrap();
-
-    cx.validate_operand(
-        &allocated.into(),
-        /*recursive*/ false,
-        /*reset_provenance_and_padding*/ false,
-    )
-    .discard_err()
-    .is_some()
-}
+/* FP:check_validity_requirement.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_check_validity_requirement_USE_0001
+/* FP:check_validity_requirement.rs-0002 */ use crate :: rustc_abi :: { BackendRepr , FieldsShape , Scalar , Variants } ;
+/* FP:check_validity_requirement.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_check_validity_requirement_USE_0002
+/* FP:check_validity_requirement.rs-0004 */ use crate :: rustc_complete :: ty :: layout :: { HasTyCtxt , LayoutCx , LayoutError , LayoutOf , TyAndLayout , ValidityRequirement , } ;
+/* FP:check_validity_requirement.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_check_validity_requirement_USE_0003
+/* FP:check_validity_requirement.rs-0006 */ use crate :: rustc_complete :: ty :: { PseudoCanonicalInput , ScalarInt , Ty , TyCtxt } ;
+/* FP:check_validity_requirement.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_check_validity_requirement_USE_0004
+/* FP:check_validity_requirement.rs-0008 */ use crate :: rustc_complete :: { bug , ty } ;
+/* FP:check_validity_requirement.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_check_validity_requirement_USE_0005
+/* FP:check_validity_requirement.rs-0010 */ use crate :: rustc_complete :: DUMMY_SP ;
+/* FP:check_validity_requirement.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_check_validity_requirement_USE_0006
+/* FP:check_validity_requirement.rs-0012 */ use crate :: const_eval :: { CanAccessMutGlobal , CheckAlignment , CompileTimeMachine } ;
+/* FP:check_validity_requirement.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_check_validity_requirement_USE_0007
+/* FP:check_validity_requirement.rs-0014 */ use crate :: interpret :: { InterpCx , MemoryKind } ;
+/* FP:check_validity_requirement.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_check_validity_requirement_FN_0008
+/* FP:check_validity_requirement.rs-0016 */ # [doc = " Determines if this type permits \"raw\" initialization by just transmuting some memory into an"] # [doc = " instance of `T`."] # [doc = ""] # [doc = " `init_kind` indicates if the memory is zero-initialized or left uninitialized. We assume"] # [doc = " uninitialized memory is mitigated by filling it with 0x01, which reduces the chance of causing"] # [doc = " LLVM UB."] # [doc = ""] # [doc = " By default we check whether that operation would cause *LLVM UB*, i.e., whether the LLVM IR we"] # [doc = " generate has UB or not. This is a mitigation strategy, which is why we are okay with accepting"] # [doc = " Rust UB as long as there is no risk of miscompilations. The `strict_init_checks` can be set to"] # [doc = " do a full check against Rust UB instead (in which case we will also ignore the 0x01-filling and"] # [doc = " to the full uninit check)."] pub fn check_validity_requirement < 'tcx > (tcx : TyCtxt < 'tcx > , kind : ValidityRequirement , input : PseudoCanonicalInput < 'tcx , Ty < 'tcx > > ,) -> Result < bool , & 'tcx LayoutError < 'tcx > > { let layout = tcx . layout_of (input) ? ; if kind == ValidityRequirement :: Inhabited { return Ok (! layout . is_uninhabited ()) ; } let layout_cx = LayoutCx :: new (tcx , input . typing_env) ; if kind == ValidityRequirement :: Uninit || tcx . sess . opts . unstable_opts . strict_init_checks { Ok (check_validity_requirement_strict (layout , & layout_cx , kind)) } else { check_validity_requirement_lax (layout , & layout_cx , kind) } }
+/* FP:check_validity_requirement.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_check_validity_requirement_FN_0009
+/* FP:check_validity_requirement.rs-0018 */ # [doc = " Implements the 'strict' version of the [`check_validity_requirement`] checks; see that function"] # [doc = " for details."] fn check_validity_requirement_strict < 'tcx > (ty : TyAndLayout < 'tcx > , cx : & LayoutCx < 'tcx > , kind : ValidityRequirement ,) -> bool { let machine = CompileTimeMachine :: new (CanAccessMutGlobal :: No , CheckAlignment :: Error) ; let mut cx = InterpCx :: new (cx . tcx () , DUMMY_SP , cx . typing_env , machine) ; let allocated = cx . allocate (ty , MemoryKind :: Stack) . expect ("OOM: failed to allocate for uninit check") ; if kind == ValidityRequirement :: Zero { cx . write_bytes_ptr (allocated . ptr () , std :: iter :: repeat (0_u8) . take (ty . layout . size () . bytes_usize ()) ,) . expect ("failed to write bytes for zero valid check") ; } cx . validate_operand (& allocated . into () , false , false ,) . discard_err () . is_some () }
+/* FP:check_validity_requirement.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_check_validity_requirement_FN_0010
+/* FP:check_validity_requirement.rs-0020 */ # [doc = " Implements the 'lax' (default) version of the [`check_validity_requirement`] checks; see that"] # [doc = " function for details."] fn check_validity_requirement_lax < 'tcx > (this : TyAndLayout < 'tcx > , cx : & LayoutCx < 'tcx > , init_kind : ValidityRequirement ,) -> Result < bool , & 'tcx LayoutError < 'tcx > > { let scalar_allows_raw_init = move | s : Scalar | -> bool { match init_kind { ValidityRequirement :: Inhabited => { bug ! ("ValidityRequirement::Inhabited should have been handled above") } ValidityRequirement :: Zero => { s . valid_range (cx) . contains (0) } ValidityRequirement :: UninitMitigated0x01Fill => { let mut val : u128 = 0x01 ; for _ in 1 .. s . size (cx) . bytes () { val = (val << 8) | 0x01 ; } s . valid_range (cx) . contains (val) } ValidityRequirement :: Uninit => { bug ! ("ValidityRequirement::Uninit should have been handled above") } } } ; let valid = ! this . is_uninhabited () && match this . backend_repr { BackendRepr :: Scalar (s) => scalar_allows_raw_init (s) , BackendRepr :: ScalarPair (s1 , s2) => { scalar_allows_raw_init (s1) && scalar_allows_raw_init (s2) } BackendRepr :: SimdVector { element : s , count } => count == 0 || scalar_allows_raw_init (s) , BackendRepr :: Memory { .. } => true , } ; if ! valid { return Ok (false) ; } if let Some (pointee) = this . ty . builtin_deref (false) { let pointee = cx . layout_of (pointee) ? ; if pointee . align . abi . bytes () > 1 { return Ok (false) ; } if pointee . size . bytes () > 0 { return Ok (false) ; } } match & this . fields { FieldsShape :: Primitive | FieldsShape :: Union { .. } => { } FieldsShape :: Array { .. } => { } FieldsShape :: Arbitrary { offsets , .. } => { for idx in 0 .. offsets . len () { if ! check_validity_requirement_lax (this . field (cx , idx) , cx , init_kind) ? { return Ok (false) ; } } } } match & this . variants { Variants :: Empty => return Ok (false) , Variants :: Single { .. } => { } Variants :: Multiple { .. } => { } } Ok (true) }
+/* FP:check_validity_requirement.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_check_validity_requirement_FN_0011
+/* FP:check_validity_requirement.rs-0022 */ pub (crate) fn validate_scalar_in_layout < 'tcx > (tcx : TyCtxt < 'tcx > , scalar : ScalarInt , ty : Ty < 'tcx > ,) -> bool { let machine = CompileTimeMachine :: new (CanAccessMutGlobal :: No , CheckAlignment :: Error) ; let typing_env = ty :: TypingEnv :: fully_monomorphized () ; let mut cx = InterpCx :: new (tcx , DUMMY_SP , typing_env , machine) ; let Ok (layout) = cx . layout_of (ty) else { bug ! ("could not compute layout of {scalar:?}:{ty:?}") } ; let allocated = cx . allocate (layout , MemoryKind :: Stack) . expect ("OOM: failed to allocate for uninit check") ; cx . write_scalar (scalar , & allocated) . unwrap () ; cx . validate_operand (& allocated . into () , false , false ,) . discard_err () . is_some () }

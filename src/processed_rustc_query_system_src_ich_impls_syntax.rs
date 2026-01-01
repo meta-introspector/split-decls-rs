@@ -1,117 +1,26 @@
-// This module contains `HashStable` implementations for various data types
-// from various crates in no particular order.
-
-use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
-use crate::rustc_complete::{self as hir, HashIgnoredAttrId};
-use crate::rustc_complete::SourceFile;
-use smallvec::SmallVec;
-
-use crate::ich::StableHashingContext;
-
-impl<'ctx> rustc_abi::HashStableContext for StableHashingContext<'ctx> {}
-impl<'ctx> crate::rustc_ast::HashStableContext for StableHashingContext<'ctx> {}
-
-impl<'a> HashStable<StableHashingContext<'a>> for [hir::Attribute] {
-    fn hash_stable(&self, hcx: &mut StableHashingContext<'a>, hasher: &mut StableHasher) {
-        if self.is_empty() {
-            self.len().hash_stable(hcx, hasher);
-            return;
-        }
-
-        // Some attributes are always ignored during hashing.
-        let filtered: SmallVec<[&hir::Attribute; 8]> = self
-            .iter()
-            .filter(|attr| {
-                !attr.is_doc_comment()
-                    // FIXME(jdonszelmann) have a better way to handle ignored attrs
-                    && !attr.ident().is_some_and(|ident| hcx.is_ignored_attr(ident.name))
-            })
-            .collect();
-
-        filtered.len().hash_stable(hcx, hasher);
-        for attr in filtered {
-            attr.hash_stable(hcx, hasher);
-        }
-    }
-}
-
-impl<'ctx> crate::rustc_hir::HashStableContext for StableHashingContext<'ctx> {
-    fn hash_attr_id(&mut self, _id: &HashIgnoredAttrId, _hasher: &mut StableHasher) {
-        /* we don't hash HashIgnoredAttrId, we ignore them */
-    }
-}
-
-impl<'a> HashStable<StableHashingContext<'a>> for SourceFile {
-    fn hash_stable(&self, hcx: &mut StableHashingContext<'a>, hasher: &mut StableHasher) {
-        let SourceFile {
-            name: _, // We hash the smaller stable_id instead of this
-            stable_id,
-            cnum,
-            // Do not hash the source as it is not encoded
-            src: _,
-            ref src_hash,
-            // Already includes src_hash, this is redundant
-            checksum_hash: _,
-            external_src: _,
-            start_pos: _,
-            source_len: _,
-            lines: _,
-            ref multibyte_chars,
-            ref normalized_pos,
-        } = *self;
-
-        stable_id.hash_stable(hcx, hasher);
-
-        src_hash.hash_stable(hcx, hasher);
-
-        {
-            // We are always in `Lines` form by the time we reach here.
-            assert!(self.lines.read().is_lines());
-            let lines = self.lines();
-            // We only hash the relative position within this source_file
-            lines.len().hash_stable(hcx, hasher);
-            for &line in lines.iter() {
-                line.hash_stable(hcx, hasher);
-            }
-        }
-
-        // We only hash the relative position within this source_file
-        multibyte_chars.len().hash_stable(hcx, hasher);
-        for &char_pos in multibyte_chars.iter() {
-            char_pos.hash_stable(hcx, hasher);
-        }
-
-        normalized_pos.len().hash_stable(hcx, hasher);
-        for &char_pos in normalized_pos.iter() {
-            char_pos.hash_stable(hcx, hasher);
-        }
-
-        cnum.hash_stable(hcx, hasher);
-    }
-}
-
-impl<'tcx> HashStable<StableHashingContext<'tcx>> for rustc_feature::Features {
-    fn hash_stable(&self, hcx: &mut StableHashingContext<'tcx>, hasher: &mut StableHasher) {
-        // Unfortunately we cannot exhaustively list fields here, since the
-        // struct has private fields (to ensure its invariant is maintained)
-        self.enabled_lang_features().hash_stable(hcx, hasher);
-        self.enabled_lib_features().hash_stable(hcx, hasher);
-    }
-}
-
-impl<'tcx> HashStable<StableHashingContext<'tcx>> for rustc_feature::EnabledLangFeature {
-    fn hash_stable(&self, hcx: &mut StableHashingContext<'tcx>, hasher: &mut StableHasher) {
-        let rustc_feature::EnabledLangFeature { gate_name, attr_sp, stable_since } = self;
-        gate_name.hash_stable(hcx, hasher);
-        attr_sp.hash_stable(hcx, hasher);
-        stable_since.hash_stable(hcx, hasher);
-    }
-}
-
-impl<'tcx> HashStable<StableHashingContext<'tcx>> for rustc_feature::EnabledLibFeature {
-    fn hash_stable(&self, hcx: &mut StableHashingContext<'tcx>, hasher: &mut StableHasher) {
-        let rustc_feature::EnabledLibFeature { gate_name, attr_sp } = self;
-        gate_name.hash_stable(hcx, hasher);
-        attr_sp.hash_stable(hcx, hasher);
-    }
-}
+/* FP:impls_syntax.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_ich_impls_syntax_USE_0001
+/* FP:impls_syntax.rs-0002 */ use crate :: rustc_data_structures :: stable_hasher :: { HashStable , StableHasher } ;
+/* FP:impls_syntax.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_ich_impls_syntax_USE_0002
+/* FP:impls_syntax.rs-0004 */ use crate :: rustc_complete :: { self as hir , HashIgnoredAttrId } ;
+/* FP:impls_syntax.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_ich_impls_syntax_USE_0003
+/* FP:impls_syntax.rs-0006 */ use crate :: rustc_complete :: SourceFile ;
+/* FP:impls_syntax.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_ich_impls_syntax_USE_0004
+/* FP:impls_syntax.rs-0008 */ use smallvec :: SmallVec ;
+/* FP:impls_syntax.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_ich_impls_syntax_USE_0005
+/* FP:impls_syntax.rs-0010 */ use crate :: ich :: StableHashingContext ;
+/* FP:impls_syntax.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_ich_impls_syntax_IMPL_0006
+/* FP:impls_syntax.rs-0012 */ impl < 'ctx > crate :: rustc_abi :: HashStableContext for StableHashingContext < 'ctx > { }
+/* FP:impls_syntax.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_ich_impls_syntax_IMPL_0007
+/* FP:impls_syntax.rs-0014 */ impl < 'ctx > crate :: rustc_ast :: HashStableContext for StableHashingContext < 'ctx > { }
+/* FP:impls_syntax.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_ich_impls_syntax_IMPL_0008
+/* FP:impls_syntax.rs-0016 */ impl < 'a > HashStable < StableHashingContext < 'a > > for [hir :: Attribute] { fn hash_stable (& self , hcx : & mut StableHashingContext < 'a > , hasher : & mut StableHasher) { if self . is_empty () { self . len () . hash_stable (hcx , hasher) ; return ; } let filtered : SmallVec < [& hir :: Attribute ; 8] > = self . iter () . filter (| attr | { ! attr . is_doc_comment () && ! attr . ident () . is_some_and (| ident | hcx . is_ignored_attr (ident . name)) }) . collect () ; filtered . len () . hash_stable (hcx , hasher) ; for attr in filtered { attr . hash_stable (hcx , hasher) ; } } }
+/* FP:impls_syntax.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_ich_impls_syntax_IMPL_0009
+/* FP:impls_syntax.rs-0018 */ impl < 'ctx > crate :: rustc_hir :: HashStableContext for StableHashingContext < 'ctx > { fn hash_attr_id (& mut self , _id : & HashIgnoredAttrId , _hasher : & mut StableHasher) { } }
+/* FP:impls_syntax.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_ich_impls_syntax_IMPL_0010
+/* FP:impls_syntax.rs-0020 */ impl < 'a > HashStable < StableHashingContext < 'a > > for SourceFile { fn hash_stable (& self , hcx : & mut StableHashingContext < 'a > , hasher : & mut StableHasher) { let SourceFile { name : _ , stable_id , cnum , src : _ , ref src_hash , checksum_hash : _ , external_src : _ , start_pos : _ , source_len : _ , lines : _ , ref multibyte_chars , ref normalized_pos , } = * self ; stable_id . hash_stable (hcx , hasher) ; src_hash . hash_stable (hcx , hasher) ; { assert ! (self . lines . read () . is_lines ()) ; let lines = self . lines () ; lines . len () . hash_stable (hcx , hasher) ; for & line in lines . iter () { line . hash_stable (hcx , hasher) ; } } multibyte_chars . len () . hash_stable (hcx , hasher) ; for & char_pos in multibyte_chars . iter () { char_pos . hash_stable (hcx , hasher) ; } normalized_pos . len () . hash_stable (hcx , hasher) ; for & char_pos in normalized_pos . iter () { char_pos . hash_stable (hcx , hasher) ; } cnum . hash_stable (hcx , hasher) ; } }
+/* FP:impls_syntax.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_ich_impls_syntax_IMPL_0011
+/* FP:impls_syntax.rs-0022 */ impl < 'tcx > HashStable < StableHashingContext < 'tcx > > for crate :: rustc_feature :: Features { fn hash_stable (& self , hcx : & mut StableHashingContext < 'tcx > , hasher : & mut StableHasher) { self . enabled_lang_features () . hash_stable (hcx , hasher) ; self . enabled_lib_features () . hash_stable (hcx , hasher) ; } }
+/* FP:impls_syntax.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_ich_impls_syntax_IMPL_0012
+/* FP:impls_syntax.rs-0024 */ impl < 'tcx > HashStable < StableHashingContext < 'tcx > > for crate :: rustc_feature :: EnabledLangFeature { fn hash_stable (& self , hcx : & mut StableHashingContext < 'tcx > , hasher : & mut StableHasher) { let crate :: rustc_feature :: EnabledLangFeature { gate_name , attr_sp , stable_since } = self ; gate_name . hash_stable (hcx , hasher) ; attr_sp . hash_stable (hcx , hasher) ; stable_since . hash_stable (hcx , hasher) ; } }
+/* FP:impls_syntax.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_ich_impls_syntax_IMPL_0013
+/* FP:impls_syntax.rs-0026 */ impl < 'tcx > HashStable < StableHashingContext < 'tcx > > for crate :: rustc_feature :: EnabledLibFeature { fn hash_stable (& self , hcx : & mut StableHashingContext < 'tcx > , hasher : & mut StableHasher) { let crate :: rustc_feature :: EnabledLibFeature { gate_name , attr_sp } = self ; gate_name . hash_stable (hcx , hasher) ; attr_sp . hash_stable (hcx , hasher) ; } }

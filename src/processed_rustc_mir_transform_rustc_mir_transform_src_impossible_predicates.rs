@@ -1,69 +1,14 @@
-// Check if it's even possible to satisfy the 'where' clauses
-// for this item.
-//
-// It's possible to `#!feature(trivial_bounds)]` to write
-// a function with impossible to satisfy clauses, e.g.:
-// `fn foo() where String: Copy {}`.
-//
-// We don't usually need to worry about this kind of case,
-// since we would get a compilation error if the user tried
-// to call it. However, since we optimize even without any
-// calls to the function, we need to make sure that it even
-// makes sense to try to evaluate the body.
-//
-// If there are unsatisfiable where clauses, then all bets are
-// off, and we just give up.
-//
-// We manually filter the predicates, skipping anything that's not
-// "global". We are in a potentially generic context
-// (e.g. we are evaluating a function without instantiating generic
-// parameters, so this filtering serves two purposes:
-//
-// 1. We skip evaluating any predicates that we would
-// never be able prove are unsatisfiable (e.g. `<T as Foo>`
-// 2. We avoid trying to normalize predicates involving generic
-// parameters (e.g. `<T as Foo>::MyItem`). This can confuse
-// the normalization code (leading to cycle errors), since
-// it's usually never invoked in this way.
-
-use crate::rustc_complete::mir::{Body, START_BLOCK, TerminatorKind};
-use crate::rustc_complete::ty::{TyCtxt, TypeFlags, TypeVisitableExt};
-use crate::rustc_trait_selection::traits;
-use tracing::trace;
-
-use crate::pass_manager::MirPass;
-
-pub(crate) struct ImpossiblePredicates;
-
-impl<'tcx> MirPass<'tcx> for ImpossiblePredicates {
-    #[tracing::instrument(level = "trace", skip(self, tcx, body))]
-    fn run_pass(&self, tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
-        tracing::trace!(def_id = ?body.source.def_id());
-        let predicates = tcx.predicates_of(body.source.def_id()).instantiate_identity(tcx);
-        tracing::trace!(?predicates);
-        let predicates = predicates.predicates.into_iter().filter(|p| {
-            !p.has_type_flags(
-                // Only consider global clauses to simplify.
-                TypeFlags::HAS_FREE_LOCAL_NAMES
-                // Clauses that refer to unevaluated constants as they cause cycles.
-                | TypeFlags::HAS_CT_PROJECTION,
-            )
-        });
-        let predicates: Vec<_> = traits::elaborate(tcx, predicates).collect();
-        tracing::trace!(?predicates);
-        if predicates.references_error() || traits::impossible_predicates(tcx, predicates) {
-            trace!("found unsatisfiable predicates");
-            // Clear the body to only contain a single `unreachable` statement.
-            let bbs = body.basic_blocks.as_mut();
-            bbs.raw.truncate(1);
-            bbs[START_BLOCK].statements.clear();
-            bbs[START_BLOCK].terminator_mut().kind = TerminatorKind::Unreachable;
-            body.var_debug_info.clear();
-            body.local_decls.raw.truncate(body.arg_count + 1);
-        }
-    }
-
-    fn is_required(&self) -> bool {
-        true
-    }
-}
+/* FP:impossible_predicates.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_impossible_predicates_USE_0001
+/* FP:impossible_predicates.rs-0002 */ use crate :: rustc_complete :: mir :: { Body , START_BLOCK , TerminatorKind } ;
+/* FP:impossible_predicates.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_impossible_predicates_USE_0002
+/* FP:impossible_predicates.rs-0004 */ use crate :: rustc_complete :: ty :: { TyCtxt , TypeFlags , TypeVisitableExt } ;
+/* FP:impossible_predicates.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_impossible_predicates_USE_0003
+/* FP:impossible_predicates.rs-0006 */ use crate :: rustc_trait_selection :: traits ;
+/* FP:impossible_predicates.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_impossible_predicates_USE_0004
+/* FP:impossible_predicates.rs-0008 */ use tracing :: trace ;
+/* FP:impossible_predicates.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_impossible_predicates_USE_0005
+/* FP:impossible_predicates.rs-0010 */ use crate :: pass_manager :: MirPass ;
+/* FP:impossible_predicates.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_impossible_predicates_STRUCT_0006
+/* FP:impossible_predicates.rs-0012 */ pub (crate) struct ImpossiblePredicates ;
+/* FP:impossible_predicates.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_impossible_predicates_IMPL_0007
+/* FP:impossible_predicates.rs-0014 */ impl < 'tcx > MirPass < 'tcx > for ImpossiblePredicates { # [tracing :: instrument (level = "trace" , skip (self , tcx , body))] fn run_pass (& self , tcx : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) { tracing :: trace ! (def_id = ? body . source . def_id ()) ; let predicates = tcx . predicates_of (body . source . def_id ()) . instantiate_identity (tcx) ; tracing :: trace ! (? predicates) ; let predicates = predicates . predicates . into_iter () . filter (| p | { ! p . has_type_flags (TypeFlags :: HAS_FREE_LOCAL_NAMES | TypeFlags :: HAS_CT_PROJECTION ,) }) ; let predicates : Vec < _ > = traits :: elaborate (tcx , predicates) . collect () ; tracing :: trace ! (? predicates) ; if predicates . references_error () || traits :: impossible_predicates (tcx , predicates) { trace ! ("found unsatisfiable predicates") ; let bbs = body . basic_blocks . as_mut () ; bbs . raw . truncate (1) ; bbs [START_BLOCK] . statements . clear () ; bbs [START_BLOCK] . terminator_mut () . kind = TerminatorKind :: Unreachable ; body . var_debug_info . clear () ; body . local_decls . raw . truncate (body . arg_count + 1) ; } } fn is_required (& self) -> bool { true } }

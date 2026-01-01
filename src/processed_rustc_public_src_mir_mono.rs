@@ -1,305 +1,54 @@
-use std::fmt::{Debug, Formatter};
-use std::io;
-
-use rustc_public_bridge::bridge;
-use serde::Serialize;
-
-use crate::abi::FnAbi;
-use crate::crate_def::CrateDef;
-use crate::mir::Body;
-use crate::ty::{Allocation, ClosureDef, ClosureKind, FnDef, GenericArgs, Ty};
-use crate::{CrateItem, DefId, Error, IndexedVal, ItemKind, Opaque, Symbol, with};
-
-#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize)]
-pub enum MonoItem {
-    Fn(Instance),
-    Static(StaticDef),
-    GlobalAsm(Opaque),
-}
-
-#[derive(Copy, Clone, PartialEq, Eq, Hash, Serialize)]
-pub struct Instance {
-    /// The type of instance.
-    pub kind: InstanceKind,
-    /// An ID used to get the instance definition from the compiler.
-    /// Do not use this field directly.
-    pub def: InstanceDef,
-}
-
-#[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Serialize)]
-pub enum InstanceKind {
-    /// A user defined item.
-    Item,
-    /// A compiler intrinsic function.
-    Intrinsic,
-    /// A virtual function definition stored in a VTable.
-    /// The `idx` field indicates the position in the VTable for this instance.
-    Virtual { idx: usize },
-    /// A compiler generated shim.
-    Shim,
-}
-
-impl Instance {
-    /// Get the arguments this instance was instantiated with.
-    pub fn args(&self) -> GenericArgs {
-        with(|cx| cx.instance_args(self.def))
-    }
-
-    /// Get the body of an Instance.
-    ///
-    /// The body will be eagerly monomorphized and all constants will already be evaluated.
-    ///
-    /// This method will return the intrinsic fallback body if one was defined.
-    pub fn body(&self) -> Option<Body> {
-        with(|context| context.instance_body(self.def))
-    }
-
-    /// Check whether this instance has a body available.
-    ///
-    /// For intrinsics with fallback body, this will return `true`. It is up to the user to decide
-    /// whether to specialize the intrinsic or to use its fallback body.
-    ///
-    /// For more information on fallback body, see <https://github.com/rust-lang/rust/issues/93145>.
-    ///
-    /// This call is much cheaper than `instance.body().is_some()`, since it doesn't try to build
-    /// the rustc_public's IR body.
-    pub fn has_body(&self) -> bool {
-        with(|cx| cx.has_body(self.def.def_id()))
-    }
-
-    pub fn is_foreign_item(&self) -> bool {
-        with(|cx| cx.is_foreign_item(self.def.def_id()))
-    }
-
-    /// Get the instance type with generic instantiations applied and lifetimes erased.
-    pub fn ty(&self) -> Ty {
-        with(|context| context.instance_ty(self.def))
-    }
-
-    /// Retrieve information about this instance binary interface.
-    pub fn fn_abi(&self) -> Result<FnAbi, Error> {
-        with(|cx| cx.instance_abi(self.def))
-    }
-
-    /// Retrieve the instance's mangled name used for calling the given instance.
-    ///
-    /// This will also look up the correct name of instances from upstream crates.
-    pub fn mangled_name(&self) -> Symbol {
-        with(|context| context.instance_mangled_name(self.def))
-    }
-
-    /// Retrieve the instance name for diagnostic messages.
-    ///
-    /// This will return the specialized name, e.g., `std::vec::Vec<u8>::new`.
-    pub fn name(&self) -> Symbol {
-        with(|context| context.instance_name(self.def, false))
-    }
-
-    /// Return a trimmed name of the given instance including its args.
-    ///
-    /// If a symbol name can only be imported from one place for a type, and as
-    /// long as it was not glob-imported anywhere in the current crate, we trim its
-    /// path and print only the name.
-    pub fn trimmed_name(&self) -> Symbol {
-        with(|context| context.instance_name(self.def, true))
-    }
-
-    /// Retrieve the plain intrinsic name of an instance if it's an intrinsic.
-    ///
-    /// The plain name does not include type arguments (as `trimmed_name` does),
-    /// which is more convenient to match with intrinsic symbols.
-    pub fn intrinsic_name(&self) -> Option<Symbol> {
-        match self.kind {
-            InstanceKind::Intrinsic => {
-                Some(with(|context| context.intrinsic(self.def.def_id()).unwrap().fn_name()))
-            }
-            InstanceKind::Item | InstanceKind::Virtual { .. } | InstanceKind::Shim => None,
-        }
-    }
-
-    /// Resolve an instance starting from a function definition and generic arguments.
-    pub fn resolve(def: FnDef, args: &GenericArgs) -> Result<Instance, Error> {
-        with(|context| {
-            context.resolve_instance(def, args).ok_or_else(|| {
-                bridge::Error::new(format!("Failed to resolve `{def:?}` with `{args:?}`"))
-            })
-        })
-    }
-
-    /// Resolve the drop in place for a given type.
-    pub fn resolve_drop_in_place(ty: Ty) -> Instance {
-        with(|cx| cx.resolve_drop_in_place(ty))
-    }
-
-    /// Resolve an instance for a given function pointer.
-    pub fn resolve_for_fn_ptr(def: FnDef, args: &GenericArgs) -> Result<Instance, Error> {
-        with(|context| {
-            context.resolve_for_fn_ptr(def, args).ok_or_else(|| {
-                bridge::Error::new(format!("Failed to resolve `{def:?}` with `{args:?}`"))
-            })
-        })
-    }
-
-    /// Resolve a closure with the expected kind.
-    pub fn resolve_closure(
-        def: ClosureDef,
-        args: &GenericArgs,
-        kind: ClosureKind,
-    ) -> Result<Instance, Error> {
-        with(|context| {
-            context.resolve_closure(def, args, kind).ok_or_else(|| {
-                bridge::Error::new(format!("Failed to resolve `{def:?}` with `{args:?}`"))
-            })
-        })
-    }
-
-    /// Check whether this instance is an empty shim.
-    ///
-    /// Allow users to check if this shim can be ignored when called directly.
-    ///
-    /// We have decided not to export different types of Shims to rustc_public users, however, this
-    /// is a query that can be very helpful for users when processing DropGlue.
-    ///
-    /// When generating code for a Drop terminator, users can ignore an empty drop glue.
-    /// These shims are only needed to generate a valid Drop call done via VTable.
-    pub fn is_empty_shim(&self) -> bool {
-        self.kind == InstanceKind::Shim && with(|cx| cx.is_empty_drop_shim(self.def))
-    }
-
-    /// Try to constant evaluate the instance into a constant with the given type.
-    ///
-    /// This can be used to retrieve a constant that represents an intrinsic return such as
-    /// `type_id`.
-    pub fn try_const_eval(&self, const_ty: Ty) -> Result<Allocation, Error> {
-        with(|cx| cx.eval_instance(self.def, const_ty))
-    }
-
-    /// Emit the body of this instance if it has one.
-    pub fn emit_mir<W: io::Write>(&self, w: &mut W) -> io::Result<()> {
-        if let Some(body) = self.body() { body.dump(w, &self.name()) } else { Ok(()) }
-    }
-}
-
-impl Debug for Instance {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        f.debug_struct("Instance")
-            .field("kind", &self.kind)
-            .field("def", &self.mangled_name())
-            .field("args", &self.args())
-            .finish()
-    }
-}
-
-/// Try to convert a crate item into an instance.
-/// The item cannot be generic in order to be converted into an instance.
-impl TryFrom<CrateItem> for Instance {
-    type Error = crate::Error;
-
-    fn try_from(item: CrateItem) -> Result<Self, Self::Error> {
-        with(|context| {
-            let def_id = item.def_id();
-            if !context.requires_monomorphization(def_id) {
-                Ok(context.mono_instance(def_id))
-            } else {
-                Err(bridge::Error::new("Item requires monomorphization".to_string()))
-            }
-        })
-    }
-}
-
-/// Try to convert an instance into a crate item.
-/// Only user defined instances can be converted.
-impl TryFrom<Instance> for CrateItem {
-    type Error = crate::Error;
-
-    fn try_from(value: Instance) -> Result<Self, Self::Error> {
-        with(|context| {
-            if value.kind == InstanceKind::Item && context.has_body(value.def.def_id()) {
-                Ok(CrateItem(context.instance_def_id(value.def)))
-            } else {
-                Err(bridge::Error::new(format!("Item kind `{:?}` cannot be converted", value.kind)))
-            }
-        })
-    }
-}
-
-impl From<Instance> for MonoItem {
-    fn from(value: Instance) -> Self {
-        MonoItem::Fn(value)
-    }
-}
-
-impl From<StaticDef> for MonoItem {
-    fn from(value: StaticDef) -> Self {
-        MonoItem::Static(value)
-    }
-}
-
-impl From<StaticDef> for CrateItem {
-    fn from(value: StaticDef) -> Self {
-        CrateItem(value.0)
-    }
-}
-
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize)]
-pub struct InstanceDef(usize);
-
-impl CrateDef for InstanceDef {
-    fn def_id(&self) -> DefId {
-        with(|context| context.instance_def_id(*self))
-    }
-}
-
-crate_def! {
-    /// Holds information about a static variable definition.
-    #[derive(Serialize)]
-    pub StaticDef;
-}
-
-impl TryFrom<CrateItem> for StaticDef {
-    type Error = crate::Error;
-
-    fn try_from(value: CrateItem) -> Result<Self, Self::Error> {
-        if matches!(value.kind(), ItemKind::Static) {
-            Ok(StaticDef(value.0))
-        } else {
-            Err(bridge::Error::new(format!("Expected a static item, but found: {value:?}")))
-        }
-    }
-}
-
-impl TryFrom<Instance> for StaticDef {
-    type Error = crate::Error;
-
-    fn try_from(value: Instance) -> Result<Self, Self::Error> {
-        StaticDef::try_from(CrateItem::try_from(value)?)
-    }
-}
-
-impl From<StaticDef> for Instance {
-    fn from(value: StaticDef) -> Self {
-        // A static definition should always be convertible to an instance.
-        with(|cx| cx.mono_instance(value.def_id()))
-    }
-}
-
-impl StaticDef {
-    /// Return the type of this static definition.
-    pub fn ty(&self) -> Ty {
-        with(|cx| cx.def_ty(self.0))
-    }
-
-    /// Evaluate a static's initializer, returning the allocation of the initializer's memory.
-    pub fn eval_initializer(&self) -> Result<Allocation, Error> {
-        with(|cx| cx.eval_static_initializer(*self))
-    }
-}
-
-impl IndexedVal for InstanceDef {
-    fn to_val(index: usize) -> Self {
-        InstanceDef(index)
-    }
-    fn to_index(&self) -> usize {
-        self.0
-    }
-}
+/* FP:mono.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_USE_0001
+/* FP:mono.rs-0002 */ use std :: fmt :: { Debug , Formatter } ;
+/* FP:mono.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_USE_0002
+/* FP:mono.rs-0004 */ use std :: io ;
+/* FP:mono.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_USE_0003
+/* FP:mono.rs-0006 */ use crate :: rustc_public_bridge :: bridge ;
+/* FP:mono.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_USE_0004
+/* FP:mono.rs-0008 */ use serde :: Serialize ;
+/* FP:mono.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_USE_0005
+/* FP:mono.rs-0010 */ use crate :: abi :: FnAbi ;
+/* FP:mono.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_USE_0006
+/* FP:mono.rs-0012 */ use crate :: crate_def :: CrateDef ;
+/* FP:mono.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_USE_0007
+/* FP:mono.rs-0014 */ use crate :: mir :: Body ;
+/* FP:mono.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_USE_0008
+/* FP:mono.rs-0016 */ use crate :: ty :: { Allocation , ClosureDef , ClosureKind , FnDef , GenericArgs , Ty } ;
+/* FP:mono.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_USE_0009
+/* FP:mono.rs-0018 */ use crate :: { CrateItem , DefId , Error , IndexedVal , ItemKind , Opaque , Symbol , with } ;
+/* FP:mono.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_ENUM_0010
+/* FP:mono.rs-0020 */ # [derive (Clone , Debug , PartialEq , Eq , Hash , Serialize)] pub enum MonoItem { Fn (Instance) , Static (StaticDef) , GlobalAsm (Opaque) , }
+/* FP:mono.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_STRUCT_0011
+/* FP:mono.rs-0022 */ # [derive (Copy , Clone , PartialEq , Eq , Hash , Serialize)] pub struct Instance { # [doc = " The type of instance."] pub kind : InstanceKind , # [doc = " An ID used to get the instance definition from the compiler."] # [doc = " Do not use this field directly."] pub def : InstanceDef , }
+/* FP:mono.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_ENUM_0012
+/* FP:mono.rs-0024 */ # [derive (Copy , Clone , Debug , PartialEq , Eq , Hash , Serialize)] pub enum InstanceKind { # [doc = " A user defined item."] Item , # [doc = " A compiler intrinsic function."] Intrinsic , # [doc = " A virtual function definition stored in a VTable."] # [doc = " The `idx` field indicates the position in the VTable for this instance."] Virtual { idx : usize } , # [doc = " A compiler generated shim."] Shim , }
+/* FP:mono.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_IMPL_0013
+/* FP:mono.rs-0026 */ impl Instance { # [doc = " Get the arguments this instance was instantiated with."] pub fn args (& self) -> GenericArgs { with (| cx | cx . instance_args (self . def)) } # [doc = " Get the body of an Instance."] # [doc = ""] # [doc = " The body will be eagerly monomorphized and all constants will already be evaluated."] # [doc = ""] # [doc = " This method will return the intrinsic fallback body if one was defined."] pub fn body (& self) -> Option < Body > { with (| context | context . instance_body (self . def)) } # [doc = " Check whether this instance has a body available."] # [doc = ""] # [doc = " For intrinsics with fallback body, this will return `true`. It is up to the user to decide"] # [doc = " whether to specialize the intrinsic or to use its fallback body."] # [doc = ""] # [doc = " For more information on fallback body, see <https://github.com/rust-lang/rust/issues/93145>."] # [doc = ""] # [doc = " This call is much cheaper than `instance.body().is_some()`, since it doesn't try to build"] # [doc = " the rustc_public's IR body."] pub fn has_body (& self) -> bool { with (| cx | cx . has_body (self . def . def_id ())) } pub fn is_foreign_item (& self) -> bool { with (| cx | cx . is_foreign_item (self . def . def_id ())) } # [doc = " Get the instance type with generic instantiations applied and lifetimes erased."] pub fn ty (& self) -> Ty { with (| context | context . instance_ty (self . def)) } # [doc = " Retrieve information about this instance binary interface."] pub fn fn_abi (& self) -> Result < FnAbi , Error > { with (| cx | cx . instance_abi (self . def)) } # [doc = " Retrieve the instance's mangled name used for calling the given instance."] # [doc = ""] # [doc = " This will also look up the correct name of instances from upstream crates."] pub fn mangled_name (& self) -> Symbol { with (| context | context . instance_mangled_name (self . def)) } # [doc = " Retrieve the instance name for diagnostic messages."] # [doc = ""] # [doc = " This will return the specialized name, e.g., `std::vec::Vec<u8>::new`."] pub fn name (& self) -> Symbol { with (| context | context . instance_name (self . def , false)) } # [doc = " Return a trimmed name of the given instance including its args."] # [doc = ""] # [doc = " If a symbol name can only be imported from one place for a type, and as"] # [doc = " long as it was not glob-imported anywhere in the current crate, we trim its"] # [doc = " path and print only the name."] pub fn trimmed_name (& self) -> Symbol { with (| context | context . instance_name (self . def , true)) } # [doc = " Retrieve the plain intrinsic name of an instance if it's an intrinsic."] # [doc = ""] # [doc = " The plain name does not include type arguments (as `trimmed_name` does),"] # [doc = " which is more convenient to match with intrinsic symbols."] pub fn intrinsic_name (& self) -> Option < Symbol > { match self . kind { InstanceKind :: Intrinsic => { Some (with (| context | context . intrinsic (self . def . def_id ()) . unwrap () . fn_name ())) } InstanceKind :: Item | InstanceKind :: Virtual { .. } | InstanceKind :: Shim => None , } } # [doc = " Resolve an instance starting from a function definition and generic arguments."] pub fn resolve (def : FnDef , args : & GenericArgs) -> Result < Instance , Error > { with (| context | { context . resolve_instance (def , args) . ok_or_else (| | { bridge :: Error :: new (format ! ("Failed to resolve `{def:?}` with `{args:?}`")) }) }) } # [doc = " Resolve the drop in place for a given type."] pub fn resolve_drop_in_place (ty : Ty) -> Instance { with (| cx | cx . resolve_drop_in_place (ty)) } # [doc = " Resolve an instance for a given function pointer."] pub fn resolve_for_fn_ptr (def : FnDef , args : & GenericArgs) -> Result < Instance , Error > { with (| context | { context . resolve_for_fn_ptr (def , args) . ok_or_else (| | { bridge :: Error :: new (format ! ("Failed to resolve `{def:?}` with `{args:?}`")) }) }) } # [doc = " Resolve a closure with the expected kind."] pub fn resolve_closure (def : ClosureDef , args : & GenericArgs , kind : ClosureKind ,) -> Result < Instance , Error > { with (| context | { context . resolve_closure (def , args , kind) . ok_or_else (| | { bridge :: Error :: new (format ! ("Failed to resolve `{def:?}` with `{args:?}`")) }) }) } # [doc = " Check whether this instance is an empty shim."] # [doc = ""] # [doc = " Allow users to check if this shim can be ignored when called directly."] # [doc = ""] # [doc = " We have decided not to export different types of Shims to rustc_public users, however, this"] # [doc = " is a query that can be very helpful for users when processing DropGlue."] # [doc = ""] # [doc = " When generating code for a Drop terminator, users can ignore an empty drop glue."] # [doc = " These shims are only needed to generate a valid Drop call done via VTable."] pub fn is_empty_shim (& self) -> bool { self . kind == InstanceKind :: Shim && with (| cx | cx . is_empty_drop_shim (self . def)) } # [doc = " Try to constant evaluate the instance into a constant with the given type."] # [doc = ""] # [doc = " This can be used to retrieve a constant that represents an intrinsic return such as"] # [doc = " `type_id`."] pub fn try_const_eval (& self , const_ty : Ty) -> Result < Allocation , Error > { with (| cx | cx . eval_instance (self . def , const_ty)) } # [doc = " Emit the body of this instance if it has one."] pub fn emit_mir < W : io :: Write > (& self , w : & mut W) -> io :: Result < () > { if let Some (body) = self . body () { body . dump (w , & self . name ()) } else { Ok (()) } } }
+/* FP:mono.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_IMPL_0014
+/* FP:mono.rs-0028 */ impl Debug for Instance { fn fmt (& self , f : & mut Formatter < '_ >) -> std :: fmt :: Result { f . debug_struct ("Instance") . field ("kind" , & self . kind) . field ("def" , & self . mangled_name ()) . field ("args" , & self . args ()) . finish () } }
+/* FP:mono.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_IMPL_0015
+/* FP:mono.rs-0030 */ # [doc = " Try to convert a crate item into an instance."] # [doc = " The item cannot be generic in order to be converted into an instance."] impl TryFrom < CrateItem > for Instance { type Error = crate :: Error ; fn try_from (item : CrateItem) -> Result < Self , Self :: Error > { with (| context | { let def_id = item . def_id () ; if ! context . requires_monomorphization (def_id) { Ok (context . mono_instance (def_id)) } else { Err (bridge :: Error :: new ("Item requires monomorphization" . to_string ())) } }) } }
+/* FP:mono.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_IMPL_0016
+/* FP:mono.rs-0032 */ # [doc = " Try to convert an instance into a crate item."] # [doc = " Only user defined instances can be converted."] impl TryFrom < Instance > for CrateItem { type Error = crate :: Error ; fn try_from (value : Instance) -> Result < Self , Self :: Error > { with (| context | { if value . kind == InstanceKind :: Item && context . has_body (value . def . def_id ()) { Ok (CrateItem (context . instance_def_id (value . def))) } else { Err (bridge :: Error :: new (format ! ("Item kind `{:?}` cannot be converted" , value . kind))) } }) } }
+/* FP:mono.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_IMPL_0017
+/* FP:mono.rs-0034 */ impl From < Instance > for MonoItem { fn from (value : Instance) -> Self { MonoItem :: Fn (value) } }
+/* FP:mono.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_IMPL_0018
+/* FP:mono.rs-0036 */ impl From < StaticDef > for MonoItem { fn from (value : StaticDef) -> Self { MonoItem :: Static (value) } }
+/* FP:mono.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_IMPL_0019
+/* FP:mono.rs-0038 */ impl From < StaticDef > for CrateItem { fn from (value : StaticDef) -> Self { CrateItem (value . 0) } }
+/* FP:mono.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_STRUCT_0020
+/* FP:mono.rs-0040 */ # [derive (Clone , Copy , Debug , PartialEq , Eq , Hash , Serialize)] pub struct InstanceDef (usize) ;
+/* FP:mono.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_IMPL_0021
+/* FP:mono.rs-0042 */ impl CrateDef for InstanceDef { fn def_id (& self) -> DefId { with (| context | context . instance_def_id (* self)) } }
+/* FP:mono.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_MACRO_0022
+/* FP:mono.rs-0044 */ crate_def ! { # [doc = " Holds information about a static variable definition."] # [derive (Serialize)] pub StaticDef ; }
+/* FP:mono.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_IMPL_0023
+/* FP:mono.rs-0046 */ impl TryFrom < CrateItem > for StaticDef { type Error = crate :: Error ; fn try_from (value : CrateItem) -> Result < Self , Self :: Error > { if matches ! (value . kind () , ItemKind :: Static) { Ok (StaticDef (value . 0)) } else { Err (bridge :: Error :: new (format ! ("Expected a static item, but found: {value:?}"))) } } }
+/* FP:mono.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_IMPL_0024
+/* FP:mono.rs-0048 */ impl TryFrom < Instance > for StaticDef { type Error = crate :: Error ; fn try_from (value : Instance) -> Result < Self , Self :: Error > { StaticDef :: try_from (CrateItem :: try_from (value) ?) } }
+/* FP:mono.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_IMPL_0025
+/* FP:mono.rs-0050 */ impl From < StaticDef > for Instance { fn from (value : StaticDef) -> Self { with (| cx | cx . mono_instance (value . def_id ())) } }
+/* FP:mono.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_IMPL_0026
+/* FP:mono.rs-0052 */ impl StaticDef { # [doc = " Return the type of this static definition."] pub fn ty (& self) -> Ty { with (| cx | cx . def_ty (self . 0)) } # [doc = " Evaluate a static's initializer, returning the allocation of the initializer's memory."] pub fn eval_initializer (& self) -> Result < Allocation , Error > { with (| cx | cx . eval_static_initializer (* self)) } }
+/* FP:mono.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_mono_IMPL_0027
+/* FP:mono.rs-0054 */ impl IndexedVal for InstanceDef { fn to_val (index : usize) -> Self { InstanceDef (index) } fn to_index (& self) -> usize { self . 0 } }

@@ -1,213 +1,40 @@
-use std::assert_matches::assert_matches;
-use std::marker::PhantomData;
-
-use crate::rustc_data_structures::undo_log::{Rollback, UndoLogs};
-use crate::rustc_data_structures::{snapshot_vec as sv, unify as ut};
-use crate::rustc_complete::ty::{self, OpaqueHiddenType, OpaqueTypeKey};
-use tracing::debug;
-
-use crate::infer::unify_key::{ConstVidKey, RegionVidKey};
-use crate::infer::{InferCtxtInner, region_constraints, type_variable};
-use crate::traits;
-
-pub struct Snapshot<'tcx> {
-    pub(crate) undo_len: usize,
-    _marker: PhantomData<&'tcx ()>,
-}
-
-/// Records the "undo" data for a single operation that affects some form of inference variable.
-#[derive(Clone)]
-pub(crate) enum UndoLog<'tcx> {
-    DuplicateOpaqueType,
-    OpaqueTypes(OpaqueTypeKey<'tcx>, Option<OpaqueHiddenType<'tcx>>),
-    TypeVariables(type_variable::UndoLog<'tcx>),
-    ConstUnificationTable(sv::UndoLog<ut::Delegate<ConstVidKey<'tcx>>>),
-    IntUnificationTable(sv::UndoLog<ut::Delegate<ty::IntVid>>),
-    FloatUnificationTable(sv::UndoLog<ut::Delegate<ty::FloatVid>>),
-    RegionConstraintCollector(region_constraints::UndoLog<'tcx>),
-    RegionUnificationTable(sv::UndoLog<ut::Delegate<RegionVidKey<'tcx>>>),
-    ProjectionCache(traits::UndoLog<'tcx>),
-    PushTypeOutlivesConstraint,
-    PushRegionAssumption,
-    PushHirTypeckPotentiallyRegionDependentGoal,
-}
-
-macro_rules! impl_from {
-    ($($ctor:ident ($ty:ty),)*) => {
-        $(
-        impl<'tcx> From<$ty> for UndoLog<'tcx> {
-            fn from(x: $ty) -> Self {
-                UndoLog::$ctor(x.into())
-            }
-        }
-        )*
-    }
-}
-
-// Upcast from a single kind of "undoable action" to the general enum
-impl_from! {
-    RegionConstraintCollector(region_constraints::UndoLog<'tcx>),
-
-    TypeVariables(sv::UndoLog<ut::Delegate<type_variable::TyVidEqKey<'tcx>>>),
-    TypeVariables(sv::UndoLog<ut::Delegate<type_variable::TyVidSubKey>>),
-    TypeVariables(type_variable::UndoLog<'tcx>),
-    IntUnificationTable(sv::UndoLog<ut::Delegate<ty::IntVid>>),
-    FloatUnificationTable(sv::UndoLog<ut::Delegate<ty::FloatVid>>),
-
-    ConstUnificationTable(sv::UndoLog<ut::Delegate<ConstVidKey<'tcx>>>),
-
-    RegionUnificationTable(sv::UndoLog<ut::Delegate<RegionVidKey<'tcx>>>),
-    ProjectionCache(traits::UndoLog<'tcx>),
-}
-
-/// The Rollback trait defines how to rollback a particular action.
-impl<'tcx> Rollback<UndoLog<'tcx>> for InferCtxtInner<'tcx> {
-    fn reverse(&mut self, undo: UndoLog<'tcx>) {
-        match undo {
-            UndoLog::DuplicateOpaqueType => self.opaque_type_storage.pop_duplicate_entry(),
-            UndoLog::OpaqueTypes(key, idx) => self.opaque_type_storage.remove(key, idx),
-            UndoLog::TypeVariables(undo) => self.type_variable_storage.reverse(undo),
-            UndoLog::ConstUnificationTable(undo) => self.const_unification_storage.reverse(undo),
-            UndoLog::IntUnificationTable(undo) => self.int_unification_storage.reverse(undo),
-            UndoLog::FloatUnificationTable(undo) => self.float_unification_storage.reverse(undo),
-            UndoLog::RegionConstraintCollector(undo) => {
-                self.region_constraint_storage.as_mut().unwrap().reverse(undo)
-            }
-            UndoLog::RegionUnificationTable(undo) => {
-                self.region_constraint_storage.as_mut().unwrap().unification_table.reverse(undo)
-            }
-            UndoLog::ProjectionCache(undo) => self.projection_cache.reverse(undo),
-            UndoLog::PushTypeOutlivesConstraint => {
-                let popped = self.region_obligations.pop();
-                assert_matches!(popped, Some(_), "pushed region constraint but could not pop it");
-            }
-            UndoLog::PushRegionAssumption => {
-                let popped = self.region_assumptions.pop();
-                assert_matches!(popped, Some(_), "pushed region assumption but could not pop it");
-            }
-            UndoLog::PushHirTypeckPotentiallyRegionDependentGoal => {
-                let popped = self.hir_typeck_potentially_region_dependent_goals.pop();
-                assert_matches!(popped, Some(_), "pushed goal but could not pop it");
-            }
-        }
-    }
-}
-
-/// The combined undo log for all the various unification tables. For each change to the storage
-/// for any kind of inference variable, we record an UndoLog entry in the vector here.
-#[derive(Clone, Default)]
-pub(crate) struct InferCtxtUndoLogs<'tcx> {
-    logs: Vec<UndoLog<'tcx>>,
-    num_open_snapshots: usize,
-}
-
-/// The UndoLogs trait defines how we undo a particular kind of action (of type T). We can undo any
-/// action that is convertible into an UndoLog (per the From impls above).
-impl<'tcx, T> UndoLogs<T> for InferCtxtUndoLogs<'tcx>
-where
-    UndoLog<'tcx>: From<T>,
-{
-    #[inline]
-    fn num_open_snapshots(&self) -> usize {
-        self.num_open_snapshots
-    }
-
-    #[inline]
-    fn push(&mut self, undo: T) {
-        if self.in_snapshot() {
-            self.logs.push(undo.into())
-        }
-    }
-
-    fn clear(&mut self) {
-        self.logs.clear();
-        self.num_open_snapshots = 0;
-    }
-
-    fn extend<J>(&mut self, undos: J)
-    where
-        Self: Sized,
-        J: IntoIterator<Item = T>,
-    {
-        if self.in_snapshot() {
-            self.logs.extend(undos.into_iter().map(UndoLog::from))
-        }
-    }
-}
-
-impl<'tcx> InferCtxtInner<'tcx> {
-    pub fn rollback_to(&mut self, snapshot: Snapshot<'tcx>) {
-        debug!("rollback_to({})", snapshot.undo_len);
-        self.undo_log.assert_open_snapshot(&snapshot);
-
-        while self.undo_log.logs.len() > snapshot.undo_len {
-            let undo = self.undo_log.logs.pop().unwrap();
-            self.reverse(undo);
-        }
-
-        self.type_variable_storage.finalize_rollback();
-
-        if self.undo_log.num_open_snapshots == 1 {
-            // After the root snapshot the undo log should be empty.
-            assert!(snapshot.undo_len == 0);
-            assert!(self.undo_log.logs.is_empty());
-        }
-
-        self.undo_log.num_open_snapshots -= 1;
-    }
-
-    pub fn commit(&mut self, snapshot: Snapshot<'tcx>) {
-        debug!("commit({})", snapshot.undo_len);
-
-        if self.undo_log.num_open_snapshots == 1 {
-            // The root snapshot. It's safe to clear the undo log because
-            // there's no snapshot further out that we might need to roll back
-            // to.
-            assert!(snapshot.undo_len == 0);
-            self.undo_log.logs.clear();
-        }
-
-        self.undo_log.num_open_snapshots -= 1;
-    }
-}
-
-impl<'tcx> InferCtxtUndoLogs<'tcx> {
-    pub(crate) fn start_snapshot(&mut self) -> Snapshot<'tcx> {
-        self.num_open_snapshots += 1;
-        Snapshot { undo_len: self.logs.len(), _marker: PhantomData }
-    }
-
-    pub(crate) fn region_constraints_in_snapshot(
-        &self,
-        s: &Snapshot<'tcx>,
-    ) -> impl Iterator<Item = &'_ region_constraints::UndoLog<'tcx>> + Clone {
-        self.logs[s.undo_len..].iter().filter_map(|log| match log {
-            UndoLog::RegionConstraintCollector(log) => Some(log),
-            _ => None,
-        })
-    }
-
-    pub(crate) fn opaque_types_in_snapshot(&self, s: &Snapshot<'tcx>) -> bool {
-        self.logs[s.undo_len..].iter().any(|log| matches!(log, UndoLog::OpaqueTypes(..)))
-    }
-
-    fn assert_open_snapshot(&self, snapshot: &Snapshot<'tcx>) {
-        // Failures here may indicate a failure to follow a stack discipline.
-        assert!(self.logs.len() >= snapshot.undo_len);
-        assert!(self.num_open_snapshots > 0);
-    }
-}
-
-impl<'tcx> std::ops::Index<usize> for InferCtxtUndoLogs<'tcx> {
-    type Output = UndoLog<'tcx>;
-
-    fn index(&self, key: usize) -> &Self::Output {
-        &self.logs[key]
-    }
-}
-
-impl<'tcx> std::ops::IndexMut<usize> for InferCtxtUndoLogs<'tcx> {
-    fn index_mut(&mut self, key: usize) -> &mut Self::Output {
-        &mut self.logs[key]
-    }
-}
+/* FP:undo_log.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_USE_0001
+/* FP:undo_log.rs-0002 */ use std :: assert_matches :: assert_matches ;
+/* FP:undo_log.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_USE_0002
+/* FP:undo_log.rs-0004 */ use std :: marker :: PhantomData ;
+/* FP:undo_log.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_USE_0003
+/* FP:undo_log.rs-0006 */ use crate :: rustc_data_structures :: undo_log :: { Rollback , UndoLogs } ;
+/* FP:undo_log.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_USE_0004
+/* FP:undo_log.rs-0008 */ use crate :: rustc_data_structures :: { snapshot_vec as sv , unify as ut } ;
+/* FP:undo_log.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_USE_0005
+/* FP:undo_log.rs-0010 */ use crate :: rustc_complete :: ty :: { self , OpaqueHiddenType , OpaqueTypeKey } ;
+/* FP:undo_log.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_USE_0006
+/* FP:undo_log.rs-0012 */ use tracing :: debug ;
+/* FP:undo_log.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_USE_0007
+/* FP:undo_log.rs-0014 */ use crate :: infer :: unify_key :: { ConstVidKey , RegionVidKey } ;
+/* FP:undo_log.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_USE_0008
+/* FP:undo_log.rs-0016 */ use crate :: infer :: { InferCtxtInner , region_constraints , type_variable } ;
+/* FP:undo_log.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_USE_0009
+/* FP:undo_log.rs-0018 */ use crate :: traits ;
+/* FP:undo_log.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_STRUCT_0010
+/* FP:undo_log.rs-0020 */ pub struct Snapshot < 'tcx > { pub (crate) undo_len : usize , _marker : PhantomData < & 'tcx () > , }
+/* FP:undo_log.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_ENUM_0011
+/* FP:undo_log.rs-0022 */ # [doc = " Records the \"undo\" data for a single operation that affects some form of inference variable."] # [derive (Clone)] pub (crate) enum UndoLog < 'tcx > { DuplicateOpaqueType , OpaqueTypes (OpaqueTypeKey < 'tcx > , Option < OpaqueHiddenType < 'tcx > >) , TypeVariables (type_variable :: UndoLog < 'tcx >) , ConstUnificationTable (sv :: UndoLog < ut :: Delegate < ConstVidKey < 'tcx > > >) , IntUnificationTable (sv :: UndoLog < ut :: Delegate < ty :: IntVid > >) , FloatUnificationTable (sv :: UndoLog < ut :: Delegate < ty :: FloatVid > >) , RegionConstraintCollector (region_constraints :: UndoLog < 'tcx >) , RegionUnificationTable (sv :: UndoLog < ut :: Delegate < RegionVidKey < 'tcx > > >) , ProjectionCache (traits :: UndoLog < 'tcx >) , PushTypeOutlivesConstraint , PushRegionAssumption , PushHirTypeckPotentiallyRegionDependentGoal , }
+/* FP:undo_log.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_MACRO_0012
+/* FP:undo_log.rs-0024 */ macro_rules ! impl_from { ($ ($ ctor : ident ($ ty : ty) ,) *) => { $ (impl <'tcx > From <$ ty > for UndoLog <'tcx > { fn from (x : $ ty) -> Self { UndoLog ::$ ctor (x . into ()) } }) * } }
+/* FP:undo_log.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_MACRO_0013
+/* FP:undo_log.rs-0026 */ impl_from ! { RegionConstraintCollector (region_constraints :: UndoLog <'tcx >) , TypeVariables (sv :: UndoLog < ut :: Delegate < type_variable :: TyVidEqKey <'tcx >>>) , TypeVariables (sv :: UndoLog < ut :: Delegate < type_variable :: TyVidSubKey >>) , TypeVariables (type_variable :: UndoLog <'tcx >) , IntUnificationTable (sv :: UndoLog < ut :: Delegate < ty :: IntVid >>) , FloatUnificationTable (sv :: UndoLog < ut :: Delegate < ty :: FloatVid >>) , ConstUnificationTable (sv :: UndoLog < ut :: Delegate < ConstVidKey <'tcx >>>) , RegionUnificationTable (sv :: UndoLog < ut :: Delegate < RegionVidKey <'tcx >>>) , ProjectionCache (traits :: UndoLog <'tcx >) , }
+/* FP:undo_log.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_IMPL_0014
+/* FP:undo_log.rs-0028 */ # [doc = " The Rollback trait defines how to rollback a particular action."] impl < 'tcx > Rollback < UndoLog < 'tcx > > for InferCtxtInner < 'tcx > { fn reverse (& mut self , undo : UndoLog < 'tcx >) { match undo { UndoLog :: DuplicateOpaqueType => self . opaque_type_storage . pop_duplicate_entry () , UndoLog :: OpaqueTypes (key , idx) => self . opaque_type_storage . remove (key , idx) , UndoLog :: TypeVariables (undo) => self . type_variable_storage . reverse (undo) , UndoLog :: ConstUnificationTable (undo) => self . const_unification_storage . reverse (undo) , UndoLog :: IntUnificationTable (undo) => self . int_unification_storage . reverse (undo) , UndoLog :: FloatUnificationTable (undo) => self . float_unification_storage . reverse (undo) , UndoLog :: RegionConstraintCollector (undo) => { self . region_constraint_storage . as_mut () . unwrap () . reverse (undo) } UndoLog :: RegionUnificationTable (undo) => { self . region_constraint_storage . as_mut () . unwrap () . unification_table . reverse (undo) } UndoLog :: ProjectionCache (undo) => self . projection_cache . reverse (undo) , UndoLog :: PushTypeOutlivesConstraint => { let popped = self . region_obligations . pop () ; assert_matches ! (popped , Some (_) , "pushed region constraint but could not pop it") ; } UndoLog :: PushRegionAssumption => { let popped = self . region_assumptions . pop () ; assert_matches ! (popped , Some (_) , "pushed region assumption but could not pop it") ; } UndoLog :: PushHirTypeckPotentiallyRegionDependentGoal => { let popped = self . hir_typeck_potentially_region_dependent_goals . pop () ; assert_matches ! (popped , Some (_) , "pushed goal but could not pop it") ; } } } }
+/* FP:undo_log.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_STRUCT_0015
+/* FP:undo_log.rs-0030 */ # [doc = " The combined undo log for all the various unification tables. For each change to the storage"] # [doc = " for any kind of inference variable, we record an UndoLog entry in the vector here."] # [derive (Clone , Default)] pub (crate) struct InferCtxtUndoLogs < 'tcx > { logs : Vec < UndoLog < 'tcx > > , num_open_snapshots : usize , }
+/* FP:undo_log.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_IMPL_0016
+/* FP:undo_log.rs-0032 */ # [doc = " The UndoLogs trait defines how we undo a particular kind of action (of type T). We can undo any"] # [doc = " action that is convertible into an UndoLog (per the From impls above)."] impl < 'tcx , T > UndoLogs < T > for InferCtxtUndoLogs < 'tcx > where UndoLog < 'tcx > : From < T > , { # [inline] fn num_open_snapshots (& self) -> usize { self . num_open_snapshots } # [inline] fn push (& mut self , undo : T) { if self . in_snapshot () { self . logs . push (undo . into ()) } } fn clear (& mut self) { self . logs . clear () ; self . num_open_snapshots = 0 ; } fn extend < J > (& mut self , undos : J) where Self : Sized , J : IntoIterator < Item = T > , { if self . in_snapshot () { self . logs . extend (undos . into_iter () . map (UndoLog :: from)) } } }
+/* FP:undo_log.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_IMPL_0017
+/* FP:undo_log.rs-0034 */ impl < 'tcx > InferCtxtInner < 'tcx > { pub fn rollback_to (& mut self , snapshot : Snapshot < 'tcx >) { debug ! ("rollback_to({})" , snapshot . undo_len) ; self . undo_log . assert_open_snapshot (& snapshot) ; while self . undo_log . logs . len () > snapshot . undo_len { let undo = self . undo_log . logs . pop () . unwrap () ; self . reverse (undo) ; } self . type_variable_storage . finalize_rollback () ; if self . undo_log . num_open_snapshots == 1 { assert ! (snapshot . undo_len == 0) ; assert ! (self . undo_log . logs . is_empty ()) ; } self . undo_log . num_open_snapshots -= 1 ; } pub fn commit (& mut self , snapshot : Snapshot < 'tcx >) { debug ! ("commit({})" , snapshot . undo_len) ; if self . undo_log . num_open_snapshots == 1 { assert ! (snapshot . undo_len == 0) ; self . undo_log . logs . clear () ; } self . undo_log . num_open_snapshots -= 1 ; } }
+/* FP:undo_log.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_IMPL_0018
+/* FP:undo_log.rs-0036 */ impl < 'tcx > InferCtxtUndoLogs < 'tcx > { pub (crate) fn start_snapshot (& mut self) -> Snapshot < 'tcx > { self . num_open_snapshots += 1 ; Snapshot { undo_len : self . logs . len () , _marker : PhantomData } } pub (crate) fn region_constraints_in_snapshot (& self , s : & Snapshot < 'tcx > ,) -> impl Iterator < Item = & '_ region_constraints :: UndoLog < 'tcx > > + Clone { self . logs [s . undo_len ..] . iter () . filter_map (| log | match log { UndoLog :: RegionConstraintCollector (log) => Some (log) , _ => None , }) } pub (crate) fn opaque_types_in_snapshot (& self , s : & Snapshot < 'tcx >) -> bool { self . logs [s . undo_len ..] . iter () . any (| log | matches ! (log , UndoLog :: OpaqueTypes (..))) } fn assert_open_snapshot (& self , snapshot : & Snapshot < 'tcx >) { assert ! (self . logs . len () >= snapshot . undo_len) ; assert ! (self . num_open_snapshots > 0) ; } }
+/* FP:undo_log.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_IMPL_0019
+/* FP:undo_log.rs-0038 */ impl < 'tcx > std :: ops :: Index < usize > for InferCtxtUndoLogs < 'tcx > { type Output = UndoLog < 'tcx > ; fn index (& self , key : usize) -> & Self :: Output { & self . logs [key] } }
+/* FP:undo_log.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_undo_log_IMPL_0020
+/* FP:undo_log.rs-0040 */ impl < 'tcx > std :: ops :: IndexMut < usize > for InferCtxtUndoLogs < 'tcx > { fn index_mut (& mut self , key : usize) -> & mut Self :: Output { & mut self . logs [key] } }

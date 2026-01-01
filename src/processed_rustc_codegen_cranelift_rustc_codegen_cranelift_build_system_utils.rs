@@ -1,252 +1,38 @@
-use std::ffi::OsStr;
-use std::path::{Path, PathBuf};
-use std::process::{self, Command};
-use std::sync::atomic::{AtomicBool, Ordering};
-use std::{env, fs, io};
-
-use crate::path::{Dirs, RelPath};
-use crate::shared_utils::rustflags_to_cmd_env;
-
-#[derive(Clone, Debug)]
-pub(crate) struct Compiler {
-    pub(crate) cargo: PathBuf,
-    pub(crate) rustc: PathBuf,
-    pub(crate) rustdoc: PathBuf,
-    pub(crate) rustflags: Vec<String>,
-    pub(crate) rustdocflags: Vec<String>,
-    pub(crate) triple: String,
-    pub(crate) runner: Vec<String>,
-}
-
-impl Compiler {
-    pub(crate) fn set_cross_linker_and_runner(&mut self) {
-        match self.triple.as_str() {
-            "aarch64-unknown-linux-gnu" => {
-                // We are cross-compiling for aarch64. Use the correct linker and run tests in qemu.
-                self.rustflags.push("-Clinker=aarch64-linux-gnu-gcc".to_owned());
-                self.rustdocflags.push("-Clinker=aarch64-linux-gnu-gcc".to_owned());
-                self.runner = vec![
-                    "qemu-aarch64".to_owned(),
-                    "-L".to_owned(),
-                    "/usr/aarch64-linux-gnu".to_owned(),
-                ];
-            }
-            "s390x-unknown-linux-gnu" => {
-                // We are cross-compiling for s390x. Use the correct linker and run tests in qemu.
-                self.rustflags.push("-Clinker=s390x-linux-gnu-gcc".to_owned());
-                self.rustdocflags.push("-Clinker=s390x-linux-gnu-gcc".to_owned());
-                self.runner = vec![
-                    "qemu-s390x".to_owned(),
-                    "-L".to_owned(),
-                    "/usr/s390x-linux-gnu".to_owned(),
-                ];
-            }
-            "riscv64gc-unknown-linux-gnu" => {
-                // We are cross-compiling for riscv64. Use the correct linker and run tests in qemu.
-                self.rustflags.push("-Clinker=riscv64-linux-gnu-gcc".to_owned());
-                self.rustdocflags.push("-Clinker=riscv64-linux-gnu-gcc".to_owned());
-                self.runner = vec![
-                    "qemu-riscv64".to_owned(),
-                    "-L".to_owned(),
-                    "/usr/riscv64-linux-gnu".to_owned(),
-                ];
-            }
-            "x86_64-pc-windows-gnu" => {
-                // We are cross-compiling for Windows. Run tests in wine.
-                self.runner = vec!["wine".to_owned()];
-            }
-            _ => {
-                eprintln!("Unknown non-native platform");
-            }
-        }
-    }
-
-    pub(crate) fn run_with_runner(&self, program: impl AsRef<OsStr>) -> Command {
-        if self.runner.is_empty() {
-            Command::new(program)
-        } else {
-            let mut runner_iter = self.runner.iter();
-            let mut cmd = Command::new(runner_iter.next().unwrap());
-            cmd.args(runner_iter);
-            cmd.arg(program);
-            cmd
-        }
-    }
-}
-
-pub(crate) struct CargoProject {
-    source: &'static RelPath,
-    target: &'static str,
-}
-
-impl CargoProject {
-    pub(crate) const fn new(path: &'static RelPath, target: &'static str) -> CargoProject {
-        CargoProject { source: path, target }
-    }
-
-    pub(crate) fn source_dir(&self, dirs: &Dirs) -> PathBuf {
-        self.source.to_path(dirs)
-    }
-
-    pub(crate) fn manifest_path(&self, dirs: &Dirs) -> PathBuf {
-        self.source_dir(dirs).join("Cargo.toml")
-    }
-
-    pub(crate) fn target_dir(&self, dirs: &Dirs) -> PathBuf {
-        dirs.build_dir.join(self.target)
-    }
-
-    #[must_use]
-    fn base_cmd(&self, command: &str, cargo: &Path, dirs: &Dirs) -> Command {
-        let mut cmd = Command::new(cargo);
-
-        cmd.arg(command)
-            .arg("--manifest-path")
-            .arg(self.manifest_path(dirs))
-            .arg("--target-dir")
-            .arg(self.target_dir(dirs))
-            .arg("--locked")
-            // bootstrap sets both RUSTC and RUSTC_WRAPPER to the same wrapper. RUSTC is already
-            // respected by the rustc-clif wrapper, but RUSTC_WRAPPER will misinterpret rustc-clif
-            // as filename, so we need to unset it.
-            .env_remove("RUSTC_WRAPPER");
-
-        if dirs.frozen {
-            cmd.arg("--frozen");
-        }
-
-        cmd
-    }
-
-    #[must_use]
-    fn build_cmd(&self, command: &str, compiler: &Compiler, dirs: &Dirs) -> Command {
-        let mut cmd = self.base_cmd(command, &compiler.cargo, dirs);
-
-        cmd.arg("--target").arg(&compiler.triple);
-
-        cmd.env("RUSTC", &compiler.rustc);
-        cmd.env("RUSTDOC", &compiler.rustdoc);
-        rustflags_to_cmd_env(&mut cmd, "RUSTFLAGS", &compiler.rustflags);
-        rustflags_to_cmd_env(&mut cmd, "RUSTDOCFLAGS", &compiler.rustdocflags);
-        if !compiler.runner.is_empty() {
-            cmd.env(
-                format!("CARGO_TARGET_{}_RUNNER", compiler.triple.to_uppercase().replace('-', "_")),
-                compiler.runner.join(" "),
-            );
-        }
-
-        cmd
-    }
-
-    pub(crate) fn clean(&self, dirs: &Dirs) {
-        let _ = fs::remove_dir_all(self.target_dir(dirs));
-    }
-
-    #[must_use]
-    pub(crate) fn build(&self, compiler: &Compiler, dirs: &Dirs) -> Command {
-        self.build_cmd("build", compiler, dirs)
-    }
-
-    #[must_use]
-    pub(crate) fn test(&self, compiler: &Compiler, dirs: &Dirs) -> Command {
-        self.build_cmd("test", compiler, dirs)
-    }
-
-    #[must_use]
-    pub(crate) fn run(&self, compiler: &Compiler, dirs: &Dirs) -> Command {
-        self.build_cmd("run", compiler, dirs)
-    }
-}
-
-#[track_caller]
-pub(crate) fn try_hard_link(src: impl AsRef<Path>, dst: impl AsRef<Path>) {
-    let src = src.as_ref();
-    let dst = dst.as_ref();
-    if let Err(_) = fs::hard_link(src, dst) {
-        fs::copy(src, dst).unwrap(); // Fallback to copying if hardlinking failed
-    }
-}
-
-#[track_caller]
-pub(crate) fn spawn_and_wait(mut cmd: Command) {
-    let status = cmd.spawn().unwrap().wait().unwrap();
-    if !status.success() {
-        eprintln!("{cmd:?} exited with status {:?}", status);
-        process::exit(1);
-    }
-}
-
-/// Create the specified directory if it doesn't exist yet and delete all contents.
-pub(crate) fn ensure_empty_dir(path: &Path) {
-    fs::create_dir_all(path).unwrap();
-    let read_dir = match fs::read_dir(&path) {
-        Ok(read_dir) => read_dir,
-        Err(err) if err.kind() == io::ErrorKind::NotFound => {
-            return;
-        }
-        Err(err) => {
-            panic!("Failed to read contents of {path}: {err}", path = path.display())
-        }
-    };
-    for entry in read_dir {
-        let entry = entry.unwrap();
-        if entry.file_type().unwrap().is_dir() {
-            match fs::remove_dir_all(entry.path()) {
-                Ok(()) => {}
-                Err(err) if err.kind() == io::ErrorKind::NotFound => {}
-                Err(err) => panic!("Failed to remove {path}: {err}", path = entry.path().display()),
-            }
-        } else {
-            match fs::remove_file(entry.path()) {
-                Ok(()) => {}
-                Err(err) if err.kind() == io::ErrorKind::NotFound => {}
-                Err(err) => panic!("Failed to remove {path}: {err}", path = entry.path().display()),
-            }
-        }
-    }
-}
-
-pub(crate) fn copy_dir_recursively(from: &Path, to: &Path) {
-    for entry in fs::read_dir(from).unwrap() {
-        let entry = entry.unwrap();
-        let filename = entry.file_name();
-        if filename == "." || filename == ".." {
-            continue;
-        }
-        let src = from.join(&filename);
-        let dst = to.join(&filename);
-        if entry.metadata().unwrap().is_dir() {
-            fs::create_dir(&dst).unwrap_or_else(|e| panic!("failed to create {dst:?}: {e}"));
-            copy_dir_recursively(&src, &dst);
-        } else {
-            fs::copy(&src, &dst).unwrap_or_else(|e| panic!("failed to copy {src:?}->{dst:?}: {e}"));
-        }
-    }
-}
-
-static IN_GROUP: AtomicBool = AtomicBool::new(false);
-pub(crate) struct LogGroup {
-    is_gha: bool,
-}
-
-impl LogGroup {
-    pub(crate) fn guard(name: &str) -> LogGroup {
-        let is_gha = env::var("GITHUB_ACTIONS").is_ok();
-
-        assert!(!IN_GROUP.swap(true, Ordering::SeqCst));
-        if is_gha {
-            eprintln!("::group::{name}");
-        }
-
-        LogGroup { is_gha }
-    }
-}
-
-impl Drop for LogGroup {
-    fn drop(&mut self) {
-        if self.is_gha {
-            eprintln!("::endgroup::");
-        }
-        IN_GROUP.store(false, Ordering::SeqCst);
-    }
-}
+/* FP:utils.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_USE_0001
+/* FP:utils.rs-0002 */ use std :: ffi :: OsStr ;
+/* FP:utils.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_USE_0002
+/* FP:utils.rs-0004 */ use std :: path :: { Path , PathBuf } ;
+/* FP:utils.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_USE_0003
+/* FP:utils.rs-0006 */ use std :: process :: { self , Command } ;
+/* FP:utils.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_USE_0004
+/* FP:utils.rs-0008 */ use std :: sync :: atomic :: { AtomicBool , Ordering } ;
+/* FP:utils.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_USE_0005
+/* FP:utils.rs-0010 */ use std :: { env , fs , io } ;
+/* FP:utils.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_USE_0006
+/* FP:utils.rs-0012 */ use crate :: path :: { Dirs , RelPath } ;
+/* FP:utils.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_USE_0007
+/* FP:utils.rs-0014 */ use crate :: shared_utils :: rustflags_to_cmd_env ;
+/* FP:utils.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_STRUCT_0008
+/* FP:utils.rs-0016 */ # [derive (Clone , Debug)] pub (crate) struct Compiler { pub (crate) cargo : PathBuf , pub (crate) rustc : PathBuf , pub (crate) rustdoc : PathBuf , pub (crate) rustflags : Vec < String > , pub (crate) rustdocflags : Vec < String > , pub (crate) triple : String , pub (crate) runner : Vec < String > , }
+/* FP:utils.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_IMPL_0009
+/* FP:utils.rs-0018 */ impl Compiler { pub (crate) fn set_cross_linker_and_runner (& mut self) { match self . triple . as_str () { "aarch64-unknown-linux-gnu" => { self . rustflags . push ("-Clinker=aarch64-linux-gnu-gcc" . to_owned ()) ; self . rustdocflags . push ("-Clinker=aarch64-linux-gnu-gcc" . to_owned ()) ; self . runner = vec ! ["qemu-aarch64" . to_owned () , "-L" . to_owned () , "/usr/aarch64-linux-gnu" . to_owned () ,] ; } "s390x-unknown-linux-gnu" => { self . rustflags . push ("-Clinker=s390x-linux-gnu-gcc" . to_owned ()) ; self . rustdocflags . push ("-Clinker=s390x-linux-gnu-gcc" . to_owned ()) ; self . runner = vec ! ["qemu-s390x" . to_owned () , "-L" . to_owned () , "/usr/s390x-linux-gnu" . to_owned () ,] ; } "riscv64gc-unknown-linux-gnu" => { self . rustflags . push ("-Clinker=riscv64-linux-gnu-gcc" . to_owned ()) ; self . rustdocflags . push ("-Clinker=riscv64-linux-gnu-gcc" . to_owned ()) ; self . runner = vec ! ["qemu-riscv64" . to_owned () , "-L" . to_owned () , "/usr/riscv64-linux-gnu" . to_owned () ,] ; } "x86_64-pc-windows-gnu" => { self . runner = vec ! ["wine" . to_owned ()] ; } _ => { eprintln ! ("Unknown non-native platform") ; } } } pub (crate) fn run_with_runner (& self , program : impl AsRef < OsStr >) -> Command { if self . runner . is_empty () { Command :: new (program) } else { let mut runner_iter = self . runner . iter () ; let mut cmd = Command :: new (runner_iter . next () . unwrap ()) ; cmd . args (runner_iter) ; cmd . arg (program) ; cmd } } }
+/* FP:utils.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_STRUCT_0010
+/* FP:utils.rs-0020 */ pub (crate) struct CargoProject { source : & 'static RelPath , target : & 'static str , }
+/* FP:utils.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_IMPL_0011
+/* FP:utils.rs-0022 */ impl CargoProject { pub (crate) const fn new (path : & 'static RelPath , target : & 'static str) -> CargoProject { CargoProject { source : path , target } } pub (crate) fn source_dir (& self , dirs : & Dirs) -> PathBuf { self . source . to_path (dirs) } pub (crate) fn manifest_path (& self , dirs : & Dirs) -> PathBuf { self . source_dir (dirs) . join ("Cargo.toml") } pub (crate) fn target_dir (& self , dirs : & Dirs) -> PathBuf { dirs . build_dir . join (self . target) } # [must_use] fn base_cmd (& self , command : & str , cargo : & Path , dirs : & Dirs) -> Command { let mut cmd = Command :: new (cargo) ; cmd . arg (command) . arg ("--manifest-path") . arg (self . manifest_path (dirs)) . arg ("--target-dir") . arg (self . target_dir (dirs)) . arg ("--locked") . env_remove ("RUSTC_WRAPPER") ; if dirs . frozen { cmd . arg ("--frozen") ; } cmd } # [must_use] fn build_cmd (& self , command : & str , compiler : & Compiler , dirs : & Dirs) -> Command { let mut cmd = self . base_cmd (command , & compiler . cargo , dirs) ; cmd . arg ("--target") . arg (& compiler . triple) ; cmd . env ("RUSTC" , & compiler . rustc) ; cmd . env ("RUSTDOC" , & compiler . rustdoc) ; rustflags_to_cmd_env (& mut cmd , "RUSTFLAGS" , & compiler . rustflags) ; rustflags_to_cmd_env (& mut cmd , "RUSTDOCFLAGS" , & compiler . rustdocflags) ; if ! compiler . runner . is_empty () { cmd . env (format ! ("CARGO_TARGET_{}_RUNNER" , compiler . triple . to_uppercase () . replace ('-' , "_")) , compiler . runner . join (" ") ,) ; } cmd } pub (crate) fn clean (& self , dirs : & Dirs) { let _ = fs :: remove_dir_all (self . target_dir (dirs)) ; } # [must_use] pub (crate) fn build (& self , compiler : & Compiler , dirs : & Dirs) -> Command { self . build_cmd ("build" , compiler , dirs) } # [must_use] pub (crate) fn test (& self , compiler : & Compiler , dirs : & Dirs) -> Command { self . build_cmd ("test" , compiler , dirs) } # [must_use] pub (crate) fn run (& self , compiler : & Compiler , dirs : & Dirs) -> Command { self . build_cmd ("run" , compiler , dirs) } }
+/* FP:utils.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_FN_0012
+/* FP:utils.rs-0024 */ # [track_caller] pub (crate) fn try_hard_link (src : impl AsRef < Path > , dst : impl AsRef < Path >) { let src = src . as_ref () ; let dst = dst . as_ref () ; if let Err (_) = fs :: hard_link (src , dst) { fs :: copy (src , dst) . unwrap () ; } }
+/* FP:utils.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_FN_0013
+/* FP:utils.rs-0026 */ # [track_caller] pub (crate) fn spawn_and_wait (mut cmd : Command) { let status = cmd . spawn () . unwrap () . wait () . unwrap () ; if ! status . success () { eprintln ! ("{cmd:?} exited with status {:?}" , status) ; process :: exit (1) ; } }
+/* FP:utils.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_FN_0014
+/* FP:utils.rs-0028 */ # [doc = " Create the specified directory if it doesn't exist yet and delete all contents."] pub (crate) fn ensure_empty_dir (path : & Path) { fs :: create_dir_all (path) . unwrap () ; let read_dir = match fs :: read_dir (& path) { Ok (read_dir) => read_dir , Err (err) if err . kind () == io :: ErrorKind :: NotFound => { return ; } Err (err) => { panic ! ("Failed to read contents of {path}: {err}" , path = path . display ()) } } ; for entry in read_dir { let entry = entry . unwrap () ; if entry . file_type () . unwrap () . is_dir () { match fs :: remove_dir_all (entry . path ()) { Ok (()) => { } Err (err) if err . kind () == io :: ErrorKind :: NotFound => { } Err (err) => panic ! ("Failed to remove {path}: {err}" , path = entry . path () . display ()) , } } else { match fs :: remove_file (entry . path ()) { Ok (()) => { } Err (err) if err . kind () == io :: ErrorKind :: NotFound => { } Err (err) => panic ! ("Failed to remove {path}: {err}" , path = entry . path () . display ()) , } } } }
+/* FP:utils.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_FN_0015
+/* FP:utils.rs-0030 */ pub (crate) fn copy_dir_recursively (from : & Path , to : & Path) { for entry in fs :: read_dir (from) . unwrap () { let entry = entry . unwrap () ; let filename = entry . file_name () ; if filename == "." || filename == ".." { continue ; } let src = from . join (& filename) ; let dst = to . join (& filename) ; if entry . metadata () . unwrap () . is_dir () { fs :: create_dir (& dst) . unwrap_or_else (| e | panic ! ("failed to create {dst:?}: {e}")) ; copy_dir_recursively (& src , & dst) ; } else { fs :: copy (& src , & dst) . unwrap_or_else (| e | panic ! ("failed to copy {src:?}->{dst:?}: {e}")) ; } } }
+/* FP:utils.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_STATIC_0016
+/* FP:utils.rs-0032 */ static IN_GROUP : AtomicBool = AtomicBool :: new (false) ;
+/* FP:utils.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_STRUCT_0017
+/* FP:utils.rs-0034 */ pub (crate) struct LogGroup { is_gha : bool , }
+/* FP:utils.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_IMPL_0018
+/* FP:utils.rs-0036 */ impl LogGroup { pub (crate) fn guard (name : & str) -> LogGroup { let is_gha = env :: var ("GITHUB_ACTIONS") . is_ok () ; assert ! (! IN_GROUP . swap (true , Ordering :: SeqCst)) ; if is_gha { eprintln ! ("::group::{name}") ; } LogGroup { is_gha } } }
+/* FP:utils.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_utils_IMPL_0019
+/* FP:utils.rs-0038 */ impl Drop for LogGroup { fn drop (& mut self) { if self . is_gha { eprintln ! ("::endgroup::") ; } IN_GROUP . store (false , Ordering :: SeqCst) ; } }

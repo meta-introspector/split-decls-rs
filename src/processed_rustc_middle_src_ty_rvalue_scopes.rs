@@ -1,63 +1,16 @@
-use rustc_hir as hir;
-use crate::rustc_complete::ItemLocalMap;
-use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-use tracing::debug;
-
-use crate::middle::region::{ScopeCompatibility, Scope, ScopeData, ScopeTree};
-use crate::mir::BackwardIncompatibleDropReason;
-
-/// `RvalueScopes` is a mapping from sub-expressions to _extended_ lifetime as determined by
-/// rules laid out in `rustc_hir_analysis::check::rvalue_scopes`.
-#[derive(TyEncodable, TyDecodable, Clone, Debug, Default, Eq, PartialEq, HashStable)]
-pub struct RvalueScopes {
-    map: ItemLocalMap<(Option<Scope>, Option<(Scope, BackwardIncompatibleDropReason)>)>,
-}
-
-impl RvalueScopes {
-    pub fn new() -> Self {
-        Self { map: <_>::default() }
-    }
-
-    /// Returns the scope when the temp created by `expr_id` will be cleaned up.
-    /// It also emits a lint on potential backwards incompatible change to the temporary scope
-    /// which is *for now* always shortening.
-    pub fn temporary_scope(
-        &self,
-        region_scope_tree: &ScopeTree,
-        expr_id: hir::ItemLocalId,
-    ) -> (Option<Scope>, Option<(Scope, BackwardIncompatibleDropReason)>) {
-        // Check for a designated rvalue scope.
-        if let Some(&(s, future_scope)) = self.map.get(&expr_id) {
-            debug!("temporary_scope({expr_id:?}) = {s:?} [custom]");
-            return (s, future_scope);
-        }
-
-        // Otherwise, locate the innermost terminating scope
-        // if there's one. Static items, for instance, won't
-        // have an enclosing scope, hence no scope will be
-        // returned.
-        region_scope_tree
-            .default_temporary_scope(Scope { local_id: expr_id, data: ScopeData::Node })
-    }
-
-    /// Make an association between a sub-expression and an extended lifetime
-    pub fn record_rvalue_scope(
-        &mut self,
-        var: hir::ItemLocalId,
-        lifetime: Option<Scope>,
-        compat: ScopeCompatibility,
-    ) {
-        debug!("record_rvalue_scope(var={var:?}, lifetime={lifetime:?})");
-        if let Some(lifetime) = lifetime {
-            assert!(var != lifetime.local_id);
-        }
-        let future_scope =
-            if let ScopeCompatibility::FutureIncompatible { shortens_to } = compat
-            {
-                Some((shortens_to, BackwardIncompatibleDropReason::MacroExtendedScope))
-            } else {
-                None
-            };
-        self.map.insert(var, (lifetime, future_scope));
-    }
-}
+/* FP:rvalue_scopes.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_rvalue_scopes_USE_0001
+/* FP:rvalue_scopes.rs-0002 */ use rustc_hir as hir ;
+/* FP:rvalue_scopes.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_rvalue_scopes_USE_0002
+/* FP:rvalue_scopes.rs-0004 */ use crate :: rustc_complete :: ItemLocalMap ;
+/* FP:rvalue_scopes.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_rvalue_scopes_USE_0003
+/* FP:rvalue_scopes.rs-0006 */ use rustc_macros :: { HashStable , TyDecodable , TyEncodable } ;
+/* FP:rvalue_scopes.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_rvalue_scopes_USE_0004
+/* FP:rvalue_scopes.rs-0008 */ use tracing :: debug ;
+/* FP:rvalue_scopes.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_rvalue_scopes_USE_0005
+/* FP:rvalue_scopes.rs-0010 */ use crate :: middle :: region :: { ScopeCompatibility , Scope , ScopeData , ScopeTree } ;
+/* FP:rvalue_scopes.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_rvalue_scopes_USE_0006
+/* FP:rvalue_scopes.rs-0012 */ use crate :: mir :: BackwardIncompatibleDropReason ;
+/* FP:rvalue_scopes.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_rvalue_scopes_STRUCT_0007
+/* FP:rvalue_scopes.rs-0014 */ # [doc = " `RvalueScopes` is a mapping from sub-expressions to _extended_ lifetime as determined by"] # [doc = " rules laid out in `crate::rustc_hir_analysis::check::rvalue_scopes`."] # [derive (TyEncodable , TyDecodable , Clone , Debug , Default , Eq , PartialEq , HashStable)] pub struct RvalueScopes { map : ItemLocalMap < (Option < Scope > , Option < (Scope , BackwardIncompatibleDropReason) >) > , }
+/* FP:rvalue_scopes.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_rvalue_scopes_IMPL_0008
+/* FP:rvalue_scopes.rs-0016 */ impl RvalueScopes { pub fn new () -> Self { Self { map : < _ > :: default () } } # [doc = " Returns the scope when the temp created by `expr_id` will be cleaned up."] # [doc = " It also emits a lint on potential backwards incompatible change to the temporary scope"] # [doc = " which is *for now* always shortening."] pub fn temporary_scope (& self , region_scope_tree : & ScopeTree , expr_id : hir :: ItemLocalId ,) -> (Option < Scope > , Option < (Scope , BackwardIncompatibleDropReason) >) { if let Some (& (s , future_scope)) = self . map . get (& expr_id) { debug ! ("temporary_scope({expr_id:?}) = {s:?} [custom]") ; return (s , future_scope) ; } region_scope_tree . default_temporary_scope (Scope { local_id : expr_id , data : ScopeData :: Node }) } # [doc = " Make an association between a sub-expression and an extended lifetime"] pub fn record_rvalue_scope (& mut self , var : hir :: ItemLocalId , lifetime : Option < Scope > , compat : ScopeCompatibility ,) { debug ! ("record_rvalue_scope(var={var:?}, lifetime={lifetime:?})") ; if let Some (lifetime) = lifetime { assert ! (var != lifetime . local_id) ; } let future_scope = if let ScopeCompatibility :: FutureIncompatible { shortens_to } = compat { Some ((shortens_to , BackwardIncompatibleDropReason :: MacroExtendedScope)) } else { None } ; self . map . insert (var , (lifetime , future_scope)) ; } }

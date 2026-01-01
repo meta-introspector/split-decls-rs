@@ -1,519 +1,118 @@
-// tidy-alphabetical-start
-#[allow(rustc::diagnostic_outside_of_impl)]
-#[allow(rustc::untranslatable_diagnostic)]
-#[feature(assert_matches)]
-#[feature(box_patterns)]
-#[feature(if_let_guard)]
-#[feature(iter_intersperse)]
-#[feature(never_type)]
-// tidy-alphabetical-end
-
-// Used by clippy;
-// Used by clippy;
-
-pub use coercion::can_coerce;
-use fn_ctxt::FnCtxt;
-use crate::rustc_data_structures::unord::UnordSet;
-use crate::rustc_complete::codes::*;
-use crate::rustc_complete::{Applicability, ErrorGuaranteed, pluralize, struct_span_code_err};
-use rustc_hir as hir;
-use crate::rustc_complete::def::{DefKind, Res};
-use crate::rustc_complete::{HirId, HirIdMap, Node};
-use rustc_hir_analysis::check::{check_abi, check_custom_abi};
-use rustc_hir_analysis::hir_ty_lowering::HirTyLowerer;
-use crate::rustc_infer::traits::{ObligationCauseCode, ObligationInspector, WellFormedLoc};
-use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use crate::rustc_complete::query::Providers;
-use crate::rustc_complete::ty::{self, Ty, TyCtxt};
-use crate::rustc_complete::{bug, span_bug};
-use crate::rustc_complete::config;
-use crate::rustc_complete::Span;
-use crate::rustc_complete::def_id::LocalDefId;
-use tracing::{debug, instrument};
-use typeck_root_ctxt::TypeckRootCtxt;
-
-use crate::check::check_fn;
-use crate::coercion::DynamicCoerceMany;
-use crate::diverges::Diverges;
-use crate::expectation::Expectation;
-use crate::fn_ctxt::LoweredTy;
-use crate::gather_locals::GatherLocalsVisitor;
-
-rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-
-#[macro_export]
-macro_rules! type_error_struct {
-    ($dcx:expr, $span:expr, $typ:expr, $code:expr, $($message:tt)*) => ({
-        let mut err = crate::rustc_errors::struct_span_code_err!($dcx, $span, $code, $($message)*);
-
-        if $typ.references_error() {
-            err.downgrade_to_delayed_bug();
-        }
-
-        err
-    })
-}
-
-fn used_trait_imports(tcx: TyCtxt<'_>, def_id: LocalDefId) -> &UnordSet<LocalDefId> {
-    &tcx.typeck(def_id).used_trait_imports
-}
-
-fn typeck<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId) -> &'tcx ty::TypeckResults<'tcx> {
-    typeck_with_inspect(tcx, def_id, None)
-}
-
-/// Same as `typeck` but `inspect` is invoked on evaluation of each root obligation.
-/// Inspecting obligations only works with the new trait solver.
-/// This function is *only to be used* by external tools, it should not be
-/// called from within rustc. Note, this is not a query, and thus is not cached.
-pub fn inspect_typeck<'tcx>(
-    tcx: TyCtxt<'tcx>,
-    def_id: LocalDefId,
-    inspect: ObligationInspector<'tcx>,
-) -> &'tcx ty::TypeckResults<'tcx> {
-    typeck_with_inspect(tcx, def_id, Some(inspect))
-}
-
-#[instrument(level = "debug", skip(tcx, inspector), ret)]
-fn typeck_with_inspect<'tcx>(
-    tcx: TyCtxt<'tcx>,
-    def_id: LocalDefId,
-    inspector: Option<ObligationInspector<'tcx>>,
-) -> &'tcx ty::TypeckResults<'tcx> {
-    // Closures' typeck results come from their outermost function,
-    // as they are part of the same "inference environment".
-    let typeck_root_def_id = tcx.typeck_root_def_id(def_id.to_def_id()).expect_local();
-    if typeck_root_def_id != def_id {
-        return tcx.typeck(typeck_root_def_id);
-    }
-
-    let id = tcx.local_def_id_to_hir_id(def_id);
-    let node = tcx.hir_node(id);
-    let span = tcx.def_span(def_id);
-
-    // Figure out what primary body this item has.
-    let body_id = node.body_id().unwrap_or_else(|| {
-        span_bug!(span, "can't type-check body of {:?}", def_id);
-    });
-    let body = tcx.hir_body(body_id);
-
-    let param_env = tcx.param_env(def_id);
-
-    let root_ctxt = TypeckRootCtxt::new(tcx, def_id);
-    if let Some(inspector) = inspector {
-        root_ctxt.infcx.attach_obligation_inspector(inspector);
-    }
-    let mut fcx = FnCtxt::new(&root_ctxt, param_env, def_id);
-
-    if let hir::Node::Item(hir::Item { kind: hir::ItemKind::GlobalAsm { .. }, .. }) = node {
-        // Check the fake body of a global ASM. There's not much to do here except
-        // for visit the asm expr of the body.
-        let ty = fcx.check_expr(body.value);
-        fcx.write_ty(id, ty);
-    } else if let Some(hir::FnSig { header, decl, span: fn_sig_span }) = node.fn_sig() {
-        let fn_sig = if decl.output.is_suggestable_infer_ty().is_some() {
-            // In the case that we're recovering `fn() -> W<_>` or some other return
-            // type that has an infer in it, lower the type directly so that it'll
-            // be correctly filled with infer. We'll use this inference to provide
-            // a suggestion later on.
-            fcx.lowerer().lower_fn_ty(id, header.safety(), header.abi, decl, None, None)
-        } else {
-            tcx.fn_sig(def_id).instantiate_identity()
-        };
-
-        check_abi(tcx, id, span, fn_sig.abi());
-        check_custom_abi(tcx, def_id, fn_sig.skip_binder(), *fn_sig_span);
-
-        loops::check(tcx, def_id, body);
-
-        // Compute the function signature from point of view of inside the fn.
-        let mut fn_sig = tcx.liberate_late_bound_regions(def_id.to_def_id(), fn_sig);
-
-        // Normalize the input and output types one at a time, using a different
-        // `WellFormedLoc` for each. We cannot call `normalize_associated_types`
-        // on the entire `FnSig`, since this would use the same `WellFormedLoc`
-        // for each type, preventing the HIR wf check from generating
-        // a nice error message.
-        let arg_span =
-            |idx| decl.inputs.get(idx).map_or(decl.output.span(), |arg: &hir::Ty<'_>| arg.span);
-
-        fn_sig.inputs_and_output = tcx.mk_type_list_from_iter(
-            fn_sig
-                .inputs_and_output
-                .iter()
-                .enumerate()
-                .map(|(idx, ty)| fcx.normalize(arg_span(idx), ty)),
-        );
-
-        if tcx.codegen_fn_attrs(def_id).flags.contains(CodegenFnAttrFlags::NAKED) {
-            naked_functions::typeck_naked_fn(tcx, def_id, body);
-        }
-
-        check_fn(&mut fcx, fn_sig, None, decl, def_id, body, tcx.features().unsized_fn_params());
-    } else {
-        let expected_type = if let Some(infer_ty) = infer_type_if_missing(&fcx, node) {
-            infer_ty
-        } else if let Some(ty) = node.ty()
-            && ty.is_suggestable_infer_ty()
-        {
-            // In the case that we're recovering `const X: [T; _]` or some other
-            // type that has an infer in it, lower the type directly so that it'll
-            // be correctly filled with infer. We'll use this inference to provide
-            // a suggestion later on.
-            fcx.lowerer().lower_ty(ty)
-        } else {
-            tcx.type_of(def_id).instantiate_identity()
-        };
-
-        loops::check(tcx, def_id, body);
-
-        let expected_type = fcx.normalize(body.value.span, expected_type);
-
-        let wf_code = ObligationCauseCode::WellFormed(Some(WellFormedLoc::Ty(def_id)));
-        fcx.register_wf_obligation(expected_type.into(), body.value.span, wf_code);
-
-        fcx.check_expr_coercible_to_type(body.value, expected_type, None);
-
-        fcx.write_ty(id, expected_type);
-    };
-
-    // Whether to check repeat exprs before/after inference fallback is somewhat
-    // arbitrary of a decision as neither option is strictly more permissive than
-    // the other. However, we opt to check repeat exprs first as errors from not
-    // having inferred array lengths yet seem less confusing than errors from inference
-    // fallback arbitrarily inferring something incompatible with `Copy` inference
-    // side effects.
-    //
-    // FIXME(#140855): This should also be forwards compatible with moving
-    // repeat expr checks to a custom goal kind or using marker traits in
-    // the future.
-    fcx.check_repeat_exprs();
-
-    fcx.type_inference_fallback();
-
-    // Even though coercion casts provide type hints, we check casts after fallback for
-    // backwards compatibility. This makes fallback a stronger type hint than a cast coercion.
-    fcx.check_casts();
-    fcx.select_obligations_where_possible(|_| {});
-
-    // Closure and coroutine analysis may run after fallback
-    // because they don't constrain other type variables.
-    fcx.closure_analyze(body);
-    assert!(fcx.deferred_call_resolutions.borrow().is_empty());
-    // Before the coroutine analysis, temporary scopes shall be marked to provide more
-    // precise information on types to be captured.
-    fcx.resolve_rvalue_scopes(def_id.to_def_id());
-
-    for (ty, span, code) in fcx.deferred_sized_obligations.borrow_mut().drain(..) {
-        let ty = fcx.normalize(span, ty);
-        fcx.require_type_is_sized(ty, span, code);
-    }
-
-    fcx.select_obligations_where_possible(|_| {});
-
-    debug!(pending_obligations = ?fcx.fulfillment_cx.borrow().pending_obligations());
-
-    // This must be the last thing before `report_ambiguity_errors`.
-    fcx.resolve_coroutine_interiors();
-
-    debug!(pending_obligations = ?fcx.fulfillment_cx.borrow().pending_obligations());
-
-    // We need to handle opaque types before emitting ambiguity errors as applying
-    // defining uses may guide type inference.
-    if fcx.next_trait_solver() {
-        fcx.handle_opaque_type_uses_next();
-    }
-
-    fcx.select_obligations_where_possible(|_| {});
-    if let None = fcx.infcx.tainted_by_errors() {
-        fcx.report_ambiguity_errors();
-    }
-
-    fcx.check_asms();
-
-    let typeck_results = fcx.resolve_type_vars_in_body(body);
-
-    fcx.detect_opaque_types_added_during_writeback();
-
-    // Consistency check our TypeckResults instance can hold all ItemLocalIds
-    // it will need to hold.
-    assert_eq!(typeck_results.hir_owner, id.owner);
-
-    typeck_results
-}
-
-fn infer_type_if_missing<'tcx>(fcx: &FnCtxt<'_, 'tcx>, node: Node<'tcx>) -> Option<Ty<'tcx>> {
-    let tcx = fcx.tcx;
-    let def_id = fcx.body_id;
-    let expected_type = if let Some(&hir::Ty { kind: hir::TyKind::Infer(()), span, .. }) = node.ty()
-    {
-        if let Some(item) = tcx.opt_associated_item(def_id.into())
-            && let ty::AssocKind::Const { .. } = item.kind
-            && let ty::AssocContainer::TraitImpl(Ok(trait_item_def_id)) = item.container
-        {
-            let impl_def_id = item.container_id(tcx);
-            let impl_trait_ref = tcx.impl_trait_ref(impl_def_id).unwrap().instantiate_identity();
-            let args = ty::GenericArgs::identity_for_item(tcx, def_id).rebase_onto(
-                tcx,
-                impl_def_id,
-                impl_trait_ref.args,
-            );
-            tcx.check_args_compatible(trait_item_def_id, args)
-                .then(|| tcx.type_of(trait_item_def_id).instantiate(tcx, args))
-        } else {
-            Some(fcx.next_ty_var(span))
-        }
-    } else if let Node::AnonConst(_) = node {
-        let id = tcx.local_def_id_to_hir_id(def_id);
-        match tcx.parent_hir_node(id) {
-            Node::Ty(&hir::Ty { kind: hir::TyKind::Typeof(ref anon_const), span, .. })
-                if anon_const.hir_id == id =>
-            {
-                Some(fcx.next_ty_var(span))
-            }
-            Node::Expr(&hir::Expr { kind: hir::ExprKind::InlineAsm(asm), span, .. })
-            | Node::Item(&hir::Item { kind: hir::ItemKind::GlobalAsm { asm, .. }, span, .. }) => {
-                asm.operands.iter().find_map(|(op, _op_sp)| match op {
-                    hir::InlineAsmOperand::Const { anon_const } if anon_const.hir_id == id => {
-                        Some(fcx.next_ty_var(span))
-                    }
-                    _ => None,
-                })
-            }
-            _ => None,
-        }
-    } else {
-        None
-    };
-    expected_type
-}
-
-/// When `check_fn` is invoked on a coroutine (i.e., a body that
-/// includes yield), it returns back some information about the yield
-/// points.
-#[derive(Debug, PartialEq, Copy, Clone)]
-struct CoroutineTypes<'tcx> {
-    /// Type of coroutine argument / values returned by `yield`.
-    resume_ty: Ty<'tcx>,
-
-    /// Type of value that is yielded.
-    yield_ty: Ty<'tcx>,
-}
-
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
-pub enum Needs {
-    MutPlace,
-    None,
-}
-
-impl Needs {
-    fn maybe_mut_place(m: hir::Mutability) -> Self {
-        match m {
-            hir::Mutability::Mut => Needs::MutPlace,
-            hir::Mutability::Not => Needs::None,
-        }
-    }
-}
-
-#[derive(Debug, Copy, Clone)]
-pub enum PlaceOp {
-    Deref,
-    Index,
-}
-
-pub struct BreakableCtxt<'tcx> {
-    may_break: bool,
-
-    // this is `null` for loops where break with a value is illegal,
-    // such as `while`, `for`, and `while let`
-    coerce: Option<DynamicCoerceMany<'tcx>>,
-}
-
-pub struct EnclosingBreakables<'tcx> {
-    stack: Vec<BreakableCtxt<'tcx>>,
-    by_id: HirIdMap<usize>,
-}
-
-impl<'tcx> EnclosingBreakables<'tcx> {
-    fn find_breakable(&mut self, target_id: HirId) -> &mut BreakableCtxt<'tcx> {
-        self.opt_find_breakable(target_id).unwrap_or_else(|| {
-            bug!("could not find enclosing breakable with id {}", target_id);
-        })
-    }
-
-    fn opt_find_breakable(&mut self, target_id: HirId) -> Option<&mut BreakableCtxt<'tcx>> {
-        match self.by_id.get(&target_id) {
-            Some(ix) => Some(&mut self.stack[*ix]),
-            None => None,
-        }
-    }
-}
-
-fn report_unexpected_variant_res(
-    tcx: TyCtxt<'_>,
-    res: Res,
-    expr: Option<&hir::Expr<'_>>,
-    qpath: &hir::QPath<'_>,
-    span: Span,
-    err_code: ErrCode,
-    expected: &str,
-) -> ErrorGuaranteed {
-    let res_descr = match res {
-        Res::Def(DefKind::Variant, _) => "struct variant",
-        _ => res.descr(),
-    };
-    let path_str = rustc_hir_pretty::qpath_to_string(&tcx, qpath);
-    let mut err = tcx
-        .dcx()
-        .struct_span_err(span, format!("expected {expected}, found {res_descr} `{path_str}`"))
-        .with_code(err_code);
-    match res {
-        Res::Def(DefKind::Fn | DefKind::AssocFn, _) if err_code == E0164 => {
-            let patterns_url = "https://doc.rust-lang.org/book/ch19-00-patterns.html";
-            err.with_span_label(span, "`fn` calls are not allowed in patterns")
-                .with_help(format!("for more information, visit {patterns_url}"))
-        }
-        Res::Def(DefKind::Variant, _) if let Some(expr) = expr => {
-            err.span_label(span, format!("not a {expected}"));
-            let variant = tcx.expect_variant_res(res);
-            let sugg = if variant.fields.is_empty() {
-                " {}".to_string()
-            } else {
-                format!(
-                    " {{ {} }}",
-                    variant
-                        .fields
-                        .iter()
-                        .map(|f| format!("{}: /* value */", f.name))
-                        .collect::<Vec<_>>()
-                        .join(", ")
-                )
-            };
-            let descr = "you might have meant to create a new value of the struct";
-            let mut suggestion = vec![];
-            match tcx.parent_hir_node(expr.hir_id) {
-                hir::Node::Expr(hir::Expr {
-                    kind: hir::ExprKind::Call(..),
-                    span: call_span,
-                    ..
-                }) => {
-                    suggestion.push((span.shrink_to_hi().with_hi(call_span.hi()), sugg));
-                }
-                hir::Node::Expr(hir::Expr { kind: hir::ExprKind::Binary(..), hir_id, .. }) => {
-                    suggestion.push((expr.span.shrink_to_lo(), "(".to_string()));
-                    if let hir::Node::Expr(parent) = tcx.parent_hir_node(*hir_id)
-                        && let hir::ExprKind::If(condition, block, None) = parent.kind
-                        && condition.hir_id == *hir_id
-                        && let hir::ExprKind::Block(block, _) = block.kind
-                        && block.stmts.is_empty()
-                        && let Some(expr) = block.expr
-                        && let hir::ExprKind::Path(..) = expr.kind
-                    {
-                        // Special case: you can incorrectly write an equality condition:
-                        // if foo == Struct { field } { /* if body */ }
-                        // which should have been written
-                        // if foo == (Struct { field }) { /* if body */ }
-                        suggestion.push((block.span.shrink_to_hi(), ")".to_string()));
-                    } else {
-                        suggestion.push((span.shrink_to_hi().with_hi(expr.span.hi()), sugg));
-                    }
-                }
-                _ => {
-                    suggestion.push((span.shrink_to_hi(), sugg));
-                }
-            }
-
-            err.multipart_suggestion_verbose(descr, suggestion, Applicability::HasPlaceholders);
-            err
-        }
-        Res::Def(DefKind::Variant, _) if expr.is_none() => {
-            err.span_label(span, format!("not a {expected}"));
-
-            let fields = &tcx.expect_variant_res(res).fields.raw;
-            let span = qpath.span().shrink_to_hi().to(span.shrink_to_hi());
-            let (msg, sugg) = if fields.is_empty() {
-                ("use the struct variant pattern syntax".to_string(), " {}".to_string())
-            } else {
-                let msg = format!(
-                    "the struct variant's field{s} {are} being ignored",
-                    s = pluralize!(fields.len()),
-                    are = pluralize!("is", fields.len())
-                );
-                let fields = fields
-                    .iter()
-                    .map(|field| format!("{}: _", field.ident(tcx)))
-                    .collect::<Vec<_>>()
-                    .join(", ");
-                let sugg = format!(" {{ {} }}", fields);
-                (msg, sugg)
-            };
-
-            err.span_suggestion_verbose(
-                qpath.span().shrink_to_hi().to(span.shrink_to_hi()),
-                msg,
-                sugg,
-                Applicability::HasPlaceholders,
-            );
-            err
-        }
-        _ => err.with_span_label(span, format!("not a {expected}")),
-    }
-    .emit()
-}
-
-/// Controls whether the arguments are tupled. This is used for the call
-/// operator.
-///
-/// Tupling means that all call-side arguments are packed into a tuple and
-/// passed as a single parameter. For example, if tupling is enabled, this
-/// function:
-/// ```
-/// fn f(x: (isize, isize)) {}
-/// ```
-/// Can be called as:
-/// ```ignore UNSOLVED (can this be done in user code?)
-/// # fn f(x: (isize, isize)) {}
-/// f(1, 2);
-/// ```
-/// Instead of:
-/// ```
-/// # fn f(x: (isize, isize)) {}
-/// f((1, 2));
-/// ```
-#[derive(Copy, Clone, Eq, PartialEq)]
-enum TupleArgumentsFlag {
-    DontTupleArguments,
-    TupleArguments,
-}
-
-fn fatally_break_rust(tcx: TyCtxt<'_>, span: Span) -> ! {
-    let dcx = tcx.dcx();
-    let mut diag = dcx.struct_span_bug(
-        span,
-        "It looks like you're trying to break rust; would you like some ICE?",
-    );
-    diag.note("the compiler expectedly panicked. this is a feature.");
-    diag.note(
-        "we would appreciate a joke overview: \
-         https://github.com/rust-lang/rust/issues/43162#issuecomment-320764675",
-    );
-    diag.note(format!("rustc {} running on {}", tcx.sess.cfg_version, config::host_tuple(),));
-    if let Some((flags, excluded_cargo_defaults)) = crate::rustc_session::utils::extra_compiler_flags() {
-        diag.note(format!("compiler flags: {}", flags.join(" ")));
-        if excluded_cargo_defaults {
-            diag.note("some of the compiler flags provided by cargo are hidden");
-        }
-    }
-    diag.emit()
-}
-
-/// Adds query implementations to the [Providers] vtable, see [`crate::rustc_middle::query`]
-pub fn provide(providers: &mut Providers) {
-    *providers = Providers {
-        method_autoderef_steps: method::probe::method_autoderef_steps,
-        typeck,
-        used_trait_imports,
-        check_transmutes: intrinsicck::check_transmutes,
-        ..*providers
-    };
-}
+/* FP:lib.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0001
+/* FP:lib.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0002
+/* FP:lib.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0003
+/* FP:lib.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0004
+/* FP:lib.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0005
+/* FP:lib.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0006
+/* FP:lib.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0007
+/* FP:lib.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0008
+/* FP:lib.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0009
+/* FP:lib.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0010
+/* FP:lib.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0011
+/* FP:lib.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0012
+/* FP:lib.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0013
+/* FP:lib.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0014
+/* FP:lib.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0015
+/* FP:lib.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0016
+/* FP:lib.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0017
+/* FP:lib.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0018
+/* FP:lib.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0019
+/* FP:lib.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0020
+/* FP:lib.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0021
+/* FP:lib.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0022
+/* FP:lib.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0023
+/* FP:lib.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0024
+/* FP:lib.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0025
+/* FP:lib.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0026
+/* FP:lib.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0027
+/* FP:lib.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0028
+/* FP:lib.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MOD_0029
+/* FP:lib.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0030
+/* FP:lib.rs-0060 */ pub use coercion :: can_coerce ;
+/* FP:lib.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0031
+/* FP:lib.rs-0062 */ use fn_ctxt :: FnCtxt ;
+/* FP:lib.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0032
+/* FP:lib.rs-0064 */ use crate :: rustc_data_structures :: unord :: UnordSet ;
+/* FP:lib.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0033
+/* FP:lib.rs-0066 */ use crate :: rustc_complete :: codes :: * ;
+/* FP:lib.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0034
+/* FP:lib.rs-0068 */ use crate :: rustc_complete :: { Applicability , ErrorGuaranteed , pluralize , struct_span_code_err } ;
+/* FP:lib.rs-0069 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0035
+/* FP:lib.rs-0070 */ use rustc_hir as hir ;
+/* FP:lib.rs-0071 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0036
+/* FP:lib.rs-0072 */ use crate :: rustc_complete :: def :: { DefKind , Res } ;
+/* FP:lib.rs-0073 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0037
+/* FP:lib.rs-0074 */ use crate :: rustc_complete :: { HirId , HirIdMap , Node } ;
+/* FP:lib.rs-0075 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0038
+/* FP:lib.rs-0076 */ use crate :: rustc_hir_analysis :: check :: { check_abi , check_custom_abi } ;
+/* FP:lib.rs-0077 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0039
+/* FP:lib.rs-0078 */ use crate :: rustc_hir_analysis :: hir_ty_lowering :: HirTyLowerer ;
+/* FP:lib.rs-0079 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0040
+/* FP:lib.rs-0080 */ use crate :: rustc_infer :: traits :: { ObligationCauseCode , ObligationInspector , WellFormedLoc } ;
+/* FP:lib.rs-0081 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0041
+/* FP:lib.rs-0082 */ use crate :: rustc_complete :: middle :: codegen_fn_attrs :: CodegenFnAttrFlags ;
+/* FP:lib.rs-0083 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0042
+/* FP:lib.rs-0084 */ use crate :: rustc_complete :: query :: Providers ;
+/* FP:lib.rs-0085 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0043
+/* FP:lib.rs-0086 */ use crate :: rustc_complete :: ty :: { self , Ty , TyCtxt } ;
+/* FP:lib.rs-0087 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0044
+/* FP:lib.rs-0088 */ use crate :: rustc_complete :: { bug , span_bug } ;
+/* FP:lib.rs-0089 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0045
+/* FP:lib.rs-0090 */ use crate :: rustc_complete :: config ;
+/* FP:lib.rs-0091 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0046
+/* FP:lib.rs-0092 */ use crate :: rustc_complete :: Span ;
+/* FP:lib.rs-0093 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0047
+/* FP:lib.rs-0094 */ use crate :: rustc_complete :: def_id :: LocalDefId ;
+/* FP:lib.rs-0095 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0048
+/* FP:lib.rs-0096 */ use tracing :: { debug , instrument } ;
+/* FP:lib.rs-0097 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0049
+/* FP:lib.rs-0098 */ use typeck_root_ctxt :: TypeckRootCtxt ;
+/* FP:lib.rs-0099 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0050
+/* FP:lib.rs-0100 */ use crate :: check :: check_fn ;
+/* FP:lib.rs-0101 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0051
+/* FP:lib.rs-0102 */ use crate :: coercion :: DynamicCoerceMany ;
+/* FP:lib.rs-0103 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0052
+/* FP:lib.rs-0104 */ use crate :: diverges :: Diverges ;
+/* FP:lib.rs-0105 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0053
+/* FP:lib.rs-0106 */ use crate :: expectation :: Expectation ;
+/* FP:lib.rs-0107 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0054
+/* FP:lib.rs-0108 */ use crate :: fn_ctxt :: LoweredTy ;
+/* FP:lib.rs-0109 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_USE_0055
+/* FP:lib.rs-0110 */ use crate :: gather_locals :: GatherLocalsVisitor ;
+/* FP:lib.rs-0111 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MACRO_0056
+/* FP:lib.rs-0112 */ rustc_fluent_macro :: fluent_messages ! { "../messages.ftl" }
+/* FP:lib.rs-0113 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_MACRO_0057
+/* FP:lib.rs-0114 */ # [macro_export] macro_rules ! type_error_struct { ($ dcx : expr , $ span : expr , $ typ : expr , $ code : expr , $ ($ message : tt) *) => ({ let mut err = crate :: rustc_errors :: struct_span_code_err ! ($ dcx , $ span , $ code , $ ($ message) *) ; if $ typ . references_error () { err . downgrade_to_delayed_bug () ; } err }) }
+/* FP:lib.rs-0115 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_FN_0058
+/* FP:lib.rs-0116 */ fn used_trait_imports (tcx : TyCtxt < '_ > , def_id : LocalDefId) -> & UnordSet < LocalDefId > { & tcx . typeck (def_id) . used_trait_imports }
+/* FP:lib.rs-0117 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_FN_0059
+/* FP:lib.rs-0118 */ fn typeck < 'tcx > (tcx : TyCtxt < 'tcx > , def_id : LocalDefId) -> & 'tcx ty :: TypeckResults < 'tcx > { typeck_with_inspect (tcx , def_id , None) }
+/* FP:lib.rs-0119 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_FN_0060
+/* FP:lib.rs-0120 */ # [doc = " Same as `typeck` but `inspect` is invoked on evaluation of each root obligation."] # [doc = " Inspecting obligations only works with the new trait solver."] # [doc = " This function is *only to be used* by external tools, it should not be"] # [doc = " called from within rustc. Note, this is not a query, and thus is not cached."] pub fn inspect_typeck < 'tcx > (tcx : TyCtxt < 'tcx > , def_id : LocalDefId , inspect : ObligationInspector < 'tcx > ,) -> & 'tcx ty :: TypeckResults < 'tcx > { typeck_with_inspect (tcx , def_id , Some (inspect)) }
+/* FP:lib.rs-0121 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_FN_0061
+/* FP:lib.rs-0122 */ # [instrument (level = "debug" , skip (tcx , inspector) , ret)] fn typeck_with_inspect < 'tcx > (tcx : TyCtxt < 'tcx > , def_id : LocalDefId , inspector : Option < ObligationInspector < 'tcx > > ,) -> & 'tcx ty :: TypeckResults < 'tcx > { let typeck_root_def_id = tcx . typeck_root_def_id (def_id . to_def_id ()) . expect_local () ; if typeck_root_def_id != def_id { return tcx . typeck (typeck_root_def_id) ; } let id = tcx . local_def_id_to_hir_id (def_id) ; let node = tcx . hir_node (id) ; let span = tcx . def_span (def_id) ; let body_id = node . body_id () . unwrap_or_else (| | { span_bug ! (span , "can't type-check body of {:?}" , def_id) ; }) ; let body = tcx . hir_body (body_id) ; let param_env = tcx . param_env (def_id) ; let root_ctxt = TypeckRootCtxt :: new (tcx , def_id) ; if let Some (inspector) = inspector { root_ctxt . infcx . attach_obligation_inspector (inspector) ; } let mut fcx = FnCtxt :: new (& root_ctxt , param_env , def_id) ; if let hir :: Node :: Item (hir :: Item { kind : hir :: ItemKind :: GlobalAsm { .. } , .. }) = node { let ty = fcx . check_expr (body . value) ; fcx . write_ty (id , ty) ; } else if let Some (hir :: FnSig { header , decl , span : fn_sig_span }) = node . fn_sig () { let fn_sig = if decl . output . is_suggestable_infer_ty () . is_some () { fcx . lowerer () . lower_fn_ty (id , header . safety () , header . abi , decl , None , None) } else { tcx . fn_sig (def_id) . instantiate_identity () } ; check_abi (tcx , id , span , fn_sig . abi ()) ; check_custom_abi (tcx , def_id , fn_sig . skip_binder () , * fn_sig_span) ; loops :: check (tcx , def_id , body) ; let mut fn_sig = tcx . liberate_late_bound_regions (def_id . to_def_id () , fn_sig) ; let arg_span = | idx | decl . inputs . get (idx) . map_or (decl . output . span () , | arg : & hir :: Ty < '_ > | arg . span) ; fn_sig . inputs_and_output = tcx . mk_type_list_from_iter (fn_sig . inputs_and_output . iter () . enumerate () . map (| (idx , ty) | fcx . normalize (arg_span (idx) , ty)) ,) ; if tcx . codegen_fn_attrs (def_id) . flags . contains (CodegenFnAttrFlags :: NAKED) { naked_functions :: typeck_naked_fn (tcx , def_id , body) ; } check_fn (& mut fcx , fn_sig , None , decl , def_id , body , tcx . features () . unsized_fn_params ()) ; } else { let expected_type = if let Some (infer_ty) = infer_type_if_missing (& fcx , node) { infer_ty } else if let Some (ty) = node . ty () && ty . is_suggestable_infer_ty () { fcx . lowerer () . lower_ty (ty) } else { tcx . type_of (def_id) . instantiate_identity () } ; loops :: check (tcx , def_id , body) ; let expected_type = fcx . normalize (body . value . span , expected_type) ; let wf_code = ObligationCauseCode :: WellFormed (Some (WellFormedLoc :: Ty (def_id))) ; fcx . register_wf_obligation (expected_type . into () , body . value . span , wf_code) ; fcx . check_expr_coercible_to_type (body . value , expected_type , None) ; fcx . write_ty (id , expected_type) ; } ; fcx . check_repeat_exprs () ; fcx . type_inference_fallback () ; fcx . check_casts () ; fcx . select_obligations_where_possible (| _ | { }) ; fcx . closure_analyze (body) ; assert ! (fcx . deferred_call_resolutions . borrow () . is_empty ()) ; fcx . resolve_rvalue_scopes (def_id . to_def_id ()) ; for (ty , span , code) in fcx . deferred_sized_obligations . borrow_mut () . drain (..) { let ty = fcx . normalize (span , ty) ; fcx . require_type_is_sized (ty , span , code) ; } fcx . select_obligations_where_possible (| _ | { }) ; debug ! (pending_obligations = ? fcx . fulfillment_cx . borrow () . pending_obligations ()) ; fcx . resolve_coroutine_interiors () ; debug ! (pending_obligations = ? fcx . fulfillment_cx . borrow () . pending_obligations ()) ; if fcx . next_trait_solver () { fcx . handle_opaque_type_uses_next () ; } fcx . select_obligations_where_possible (| _ | { }) ; if let None = fcx . infcx . tainted_by_errors () { fcx . report_ambiguity_errors () ; } fcx . check_asms () ; let typeck_results = fcx . resolve_type_vars_in_body (body) ; fcx . detect_opaque_types_added_during_writeback () ; assert_eq ! (typeck_results . hir_owner , id . owner) ; typeck_results }
+/* FP:lib.rs-0123 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_FN_0062
+/* FP:lib.rs-0124 */ fn infer_type_if_missing < 'tcx > (fcx : & FnCtxt < '_ , 'tcx > , node : Node < 'tcx >) -> Option < Ty < 'tcx > > { let tcx = fcx . tcx ; let def_id = fcx . body_id ; let expected_type = if let Some (& hir :: Ty { kind : hir :: TyKind :: Infer (()) , span , .. }) = node . ty () { if let Some (item) = tcx . opt_associated_item (def_id . into ()) && let ty :: AssocKind :: Const { .. } = item . kind && let ty :: AssocContainer :: TraitImpl (Ok (trait_item_def_id)) = item . container { let impl_def_id = item . container_id (tcx) ; let impl_trait_ref = tcx . impl_trait_ref (impl_def_id) . unwrap () . instantiate_identity () ; let args = ty :: GenericArgs :: identity_for_item (tcx , def_id) . rebase_onto (tcx , impl_def_id , impl_trait_ref . args ,) ; tcx . check_args_compatible (trait_item_def_id , args) . then (| | tcx . type_of (trait_item_def_id) . instantiate (tcx , args)) } else { Some (fcx . next_ty_var (span)) } } else if let Node :: AnonConst (_) = node { let id = tcx . local_def_id_to_hir_id (def_id) ; match tcx . parent_hir_node (id) { Node :: Ty (& hir :: Ty { kind : hir :: TyKind :: Typeof (ref anon_const) , span , .. }) if anon_const . hir_id == id => { Some (fcx . next_ty_var (span)) } Node :: Expr (& hir :: Expr { kind : hir :: ExprKind :: InlineAsm (asm) , span , .. }) | Node :: Item (& hir :: Item { kind : hir :: ItemKind :: GlobalAsm { asm , .. } , span , .. }) => { asm . operands . iter () . find_map (| (op , _op_sp) | match op { hir :: InlineAsmOperand :: Const { anon_const } if anon_const . hir_id == id => { Some (fcx . next_ty_var (span)) } _ => None , }) } _ => None , } } else { None } ; expected_type }
+/* FP:lib.rs-0125 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_STRUCT_0063
+/* FP:lib.rs-0126 */ # [doc = " When `check_fn` is invoked on a coroutine (i.e., a body that"] # [doc = " includes yield), it returns back some information about the yield"] # [doc = " points."] # [derive (Debug , PartialEq , Copy , Clone)] struct CoroutineTypes < 'tcx > { # [doc = " Type of coroutine argument / values returned by `yield`."] resume_ty : Ty < 'tcx > , # [doc = " Type of value that is yielded."] yield_ty : Ty < 'tcx > , }
+/* FP:lib.rs-0127 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_ENUM_0064
+/* FP:lib.rs-0128 */ # [derive (Copy , Clone , Debug , PartialEq , Eq)] pub enum Needs { MutPlace , None , }
+/* FP:lib.rs-0129 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_IMPL_0065
+/* FP:lib.rs-0130 */ impl Needs { fn maybe_mut_place (m : hir :: Mutability) -> Self { match m { hir :: Mutability :: Mut => Needs :: MutPlace , hir :: Mutability :: Not => Needs :: None , } } }
+/* FP:lib.rs-0131 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_ENUM_0066
+/* FP:lib.rs-0132 */ # [derive (Debug , Copy , Clone)] pub enum PlaceOp { Deref , Index , }
+/* FP:lib.rs-0133 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_STRUCT_0067
+/* FP:lib.rs-0134 */ pub struct BreakableCtxt < 'tcx > { may_break : bool , coerce : Option < DynamicCoerceMany < 'tcx > > , }
+/* FP:lib.rs-0135 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_STRUCT_0068
+/* FP:lib.rs-0136 */ pub struct EnclosingBreakables < 'tcx > { stack : Vec < BreakableCtxt < 'tcx > > , by_id : HirIdMap < usize > , }
+/* FP:lib.rs-0137 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_IMPL_0069
+/* FP:lib.rs-0138 */ impl < 'tcx > EnclosingBreakables < 'tcx > { fn find_breakable (& mut self , target_id : HirId) -> & mut BreakableCtxt < 'tcx > { self . opt_find_breakable (target_id) . unwrap_or_else (| | { bug ! ("could not find enclosing breakable with id {}" , target_id) ; }) } fn opt_find_breakable (& mut self , target_id : HirId) -> Option < & mut BreakableCtxt < 'tcx > > { match self . by_id . get (& target_id) { Some (ix) => Some (& mut self . stack [* ix]) , None => None , } } }
+/* FP:lib.rs-0139 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_FN_0070
+/* FP:lib.rs-0140 */ fn report_unexpected_variant_res (tcx : TyCtxt < '_ > , res : Res , expr : Option < & hir :: Expr < '_ > > , qpath : & hir :: QPath < '_ > , span : Span , err_code : ErrCode , expected : & str ,) -> ErrorGuaranteed { let res_descr = match res { Res :: Def (DefKind :: Variant , _) => "struct variant" , _ => res . descr () , } ; let path_str = rustc_hir_pretty :: qpath_to_string (& tcx , qpath) ; let mut err = tcx . dcx () . struct_span_err (span , format ! ("expected {expected}, found {res_descr} `{path_str}`")) . with_code (err_code) ; match res { Res :: Def (DefKind :: Fn | DefKind :: AssocFn , _) if err_code == E0164 => { let patterns_url = "https://doc.rust-lang.org/book/ch19-00-patterns.html" ; err . with_span_label (span , "`fn` calls are not allowed in patterns") . with_help (format ! ("for more information, visit {patterns_url}")) } Res :: Def (DefKind :: Variant , _) if let Some (expr) = expr => { err . span_label (span , format ! ("not a {expected}")) ; let variant = tcx . expect_variant_res (res) ; let sugg = if variant . fields . is_empty () { " {}" . to_string () } else { format ! (" {{ {} }}" , variant . fields . iter () . map (| f | format ! ("{}: /* value */" , f . name)) . collect ::< Vec < _ >> () . join (", ")) } ; let descr = "you might have meant to create a new value of the struct" ; let mut suggestion = vec ! [] ; match tcx . parent_hir_node (expr . hir_id) { hir :: Node :: Expr (hir :: Expr { kind : hir :: ExprKind :: Call (..) , span : call_span , .. }) => { suggestion . push ((span . shrink_to_hi () . with_hi (call_span . hi ()) , sugg)) ; } hir :: Node :: Expr (hir :: Expr { kind : hir :: ExprKind :: Binary (..) , hir_id , .. }) => { suggestion . push ((expr . span . shrink_to_lo () , "(" . to_string ())) ; if let hir :: Node :: Expr (parent) = tcx . parent_hir_node (* hir_id) && let hir :: ExprKind :: If (condition , block , None) = parent . kind && condition . hir_id == * hir_id && let hir :: ExprKind :: Block (block , _) = block . kind && block . stmts . is_empty () && let Some (expr) = block . expr && let hir :: ExprKind :: Path (..) = expr . kind { suggestion . push ((block . span . shrink_to_hi () , ")" . to_string ())) ; } else { suggestion . push ((span . shrink_to_hi () . with_hi (expr . span . hi ()) , sugg)) ; } } _ => { suggestion . push ((span . shrink_to_hi () , sugg)) ; } } err . multipart_suggestion_verbose (descr , suggestion , Applicability :: HasPlaceholders) ; err } Res :: Def (DefKind :: Variant , _) if expr . is_none () => { err . span_label (span , format ! ("not a {expected}")) ; let fields = & tcx . expect_variant_res (res) . fields . raw ; let span = qpath . span () . shrink_to_hi () . to (span . shrink_to_hi ()) ; let (msg , sugg) = if fields . is_empty () { ("use the struct variant pattern syntax" . to_string () , " {}" . to_string ()) } else { let msg = format ! ("the struct variant's field{s} {are} being ignored" , s = pluralize ! (fields . len ()) , are = pluralize ! ("is" , fields . len ())) ; let fields = fields . iter () . map (| field | format ! ("{}: _" , field . ident (tcx))) . collect :: < Vec < _ > > () . join (", ") ; let sugg = format ! (" {{ {} }}" , fields) ; (msg , sugg) } ; err . span_suggestion_verbose (qpath . span () . shrink_to_hi () . to (span . shrink_to_hi ()) , msg , sugg , Applicability :: HasPlaceholders ,) ; err } _ => err . with_span_label (span , format ! ("not a {expected}")) , } . emit () }
+/* FP:lib.rs-0141 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_ENUM_0071
+/* FP:lib.rs-0142 */ # [doc = " Controls whether the arguments are tupled. This is used for the call"] # [doc = " operator."] # [doc = ""] # [doc = " Tupling means that all call-side arguments are packed into a tuple and"] # [doc = " passed as a single parameter. For example, if tupling is enabled, this"] # [doc = " function:"] # [doc = " ```"] # [doc = " fn f(x: (isize, isize)) {}"] # [doc = " ```"] # [doc = " Can be called as:"] # [doc = " ```ignore UNSOLVED (can this be done in user code?)"] # [doc = " # fn f(x: (isize, isize)) {}"] # [doc = " f(1, 2);"] # [doc = " ```"] # [doc = " Instead of:"] # [doc = " ```"] # [doc = " # fn f(x: (isize, isize)) {}"] # [doc = " f((1, 2));"] # [doc = " ```"] # [derive (Copy , Clone , Eq , PartialEq)] enum TupleArgumentsFlag { DontTupleArguments , TupleArguments , }
+/* FP:lib.rs-0143 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_FN_0072
+/* FP:lib.rs-0144 */ fn fatally_break_rust (tcx : TyCtxt < '_ > , span : Span) -> ! { let dcx = tcx . dcx () ; let mut diag = dcx . struct_span_bug (span , "It looks like you're trying to break rust; would you like some ICE?" ,) ; diag . note ("the compiler expectedly panicked. this is a feature.") ; diag . note ("we would appreciate a joke overview: \
+/* FP:lib.rs-0145 */          https://github.com/rust-lang/rust/issues/43162#issuecomment-320764675" ,) ; diag . note (format ! ("rustc {} running on {}" , tcx . sess . cfg_version , config :: host_tuple () ,)) ; if let Some ((flags , excluded_cargo_defaults)) = crate :: rustc_session :: utils :: extra_compiler_flags () { diag . note (format ! ("compiler flags: {}" , flags . join (" "))) ; if excluded_cargo_defaults { diag . note ("some of the compiler flags provided by cargo are hidden") ; } } diag . emit () }
+/* FP:lib.rs-0146 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_lib_FN_0073
+/* FP:lib.rs-0147 */ # [doc = " Adds query implementations to the [Providers] vtable, see [`crate::rustc_middle::query`]"] pub fn provide (providers : & mut Providers) { * providers = Providers { method_autoderef_steps : method :: probe :: method_autoderef_steps , typeck , used_trait_imports , check_transmutes : intrinsicck :: check_transmutes , .. * providers } ; }

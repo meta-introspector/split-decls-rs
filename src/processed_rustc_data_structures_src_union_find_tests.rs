@@ -1,32 +1,6 @@
-use super::UnionFind;
-
-#[test]
-fn empty() {
-    let mut sets = UnionFind::<u32>::new(10);
-
-    for i in 1..10 {
-        assert_eq!(sets.find(i), i);
-    }
-}
-
-#[test]
-fn transitive() {
-    let mut sets = UnionFind::<u32>::new(10);
-
-    sets.unify(3, 7);
-    sets.unify(4, 2);
-
-    assert_eq!(sets.find(7), sets.find(3));
-    assert_eq!(sets.find(2), sets.find(4));
-    assert_ne!(sets.find(3), sets.find(4));
-
-    sets.unify(7, 4);
-
-    assert_eq!(sets.find(7), sets.find(3));
-    assert_eq!(sets.find(2), sets.find(4));
-    assert_eq!(sets.find(3), sets.find(4));
-
-    for i in [0, 1, 5, 6, 8, 9] {
-        assert_eq!(sets.find(i), i);
-    }
-}
+/* FP:tests.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_union_find_tests_USE_0001
+/* FP:tests.rs-0002 */ use super :: UnionFind ;
+/* FP:tests.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_union_find_tests_FN_0002
+/* FP:tests.rs-0004 */ # [test] fn empty () { let mut sets = UnionFind :: < u32 > :: new (10) ; for i in 1 .. 10 { assert_eq ! (sets . find (i) , i) ; } }
+/* FP:tests.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_union_find_tests_FN_0003
+/* FP:tests.rs-0006 */ # [test] fn transitive () { let mut sets = UnionFind :: < u32 > :: new (10) ; sets . unify (3 , 7) ; sets . unify (4 , 2) ; assert_eq ! (sets . find (7) , sets . find (3)) ; assert_eq ! (sets . find (2) , sets . find (4)) ; assert_ne ! (sets . find (3) , sets . find (4)) ; sets . unify (7 , 4) ; assert_eq ! (sets . find (7) , sets . find (3)) ; assert_eq ! (sets . find (2) , sets . find (4)) ; assert_eq ! (sets . find (3) , sets . find (4)) ; for i in [0 , 1 , 5 , 6 , 8 , 9] { assert_eq ! (sets . find (i) , i) ; } }

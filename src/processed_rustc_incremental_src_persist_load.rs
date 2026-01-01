@@ -1,234 +1,52 @@
-// Code to load the dep-graph from files.
-
-use std::path::{Path, PathBuf};
-use std::sync::Arc;
-
-use crate::rustc_data_structures::memmap::Mmap;
-use crate::rustc_data_structures::unord::UnordMap;
-use rustc_hashes::Hash64;
-use crate::rustc_complete::dep_graph::{DepGraph, DepsType, SerializedDepGraph, WorkProductMap};
-use crate::rustc_complete::query::on_disk_cache::OnDiskCache;
-use rustc_serialize::Decodable;
-use rustc_serialize::opaque::MemDecoder;
-use crate::rustc_complete::Session;
-use crate::rustc_complete::config::IncrementalStateAssertion;
-use crate::rustc_complete::Symbol;
-use tracing::{debug, warn};
-
-use super::data::*;
-use super::fs::*;
-use super::save::build_dep_graph;
-use super::{file_format, work_product};
-use crate::errors;
-
-#[derive(Debug)]
-/// Represents the result of an attempt to load incremental compilation data.
-pub enum LoadResult<T> {
-    /// Loading was successful.
-    Ok {
-        #[allow(missing_docs)]
-        data: T,
-    },
-    /// The file either didn't exist or was produced by an incompatible compiler version.
-    DataOutOfDate,
-    /// Loading the dep graph failed.
-    LoadDepGraph(PathBuf, std::io::Error),
-}
-
-impl<T: Default> LoadResult<T> {
-    /// Accesses the data returned in [`LoadResult::Ok`].
-    pub fn open(self, sess: &Session) -> T {
-        // Check for errors when using `-Zassert-incremental-state`
-        match (sess.opts.assert_incr_state, &self) {
-            (Some(IncrementalStateAssertion::NotLoaded), LoadResult::Ok { .. }) => {
-                sess.dcx().emit_fatal(errors::AssertNotLoaded);
-            }
-            (
-                Some(IncrementalStateAssertion::Loaded),
-                LoadResult::LoadDepGraph(..) | LoadResult::DataOutOfDate,
-            ) => {
-                sess.dcx().emit_fatal(errors::AssertLoaded);
-            }
-            _ => {}
-        };
-
-        match self {
-            LoadResult::LoadDepGraph(path, err) => {
-                sess.dcx().emit_warn(errors::LoadDepGraph { path, err });
-                Default::default()
-            }
-            LoadResult::DataOutOfDate => {
-                if let Err(err) = delete_all_session_dir_contents(sess) {
-                    sess.dcx()
-                        .emit_err(errors::DeleteIncompatible { path: dep_graph_path(sess), err });
-                }
-                Default::default()
-            }
-            LoadResult::Ok { data } => data,
-        }
-    }
-}
-
-fn load_data(path: &Path, sess: &Session) -> LoadResult<(Mmap, usize)> {
-    match file_format::read_file(
-        path,
-        sess.opts.unstable_opts.incremental_info,
-        sess.is_nightly_build(),
-        sess.cfg_version,
-    ) {
-        Ok(Some(data_and_pos)) => LoadResult::Ok { data: data_and_pos },
-        Ok(None) => {
-            // The file either didn't exist or was produced by an incompatible
-            // compiler version. Neither is an error.
-            LoadResult::DataOutOfDate
-        }
-        Err(err) => LoadResult::LoadDepGraph(path.to_path_buf(), err),
-    }
-}
-
-fn delete_dirty_work_product(sess: &Session, swp: SerializedWorkProduct) {
-    debug!("delete_dirty_work_product({:?})", swp);
-    work_product::delete_workproduct_files(sess, &swp.work_product);
-}
-
-fn load_dep_graph(
-    sess: &Session,
-    deps: &DepsType,
-) -> LoadResult<(Arc<SerializedDepGraph>, WorkProductMap)> {
-    let prof = sess.prof.clone();
-
-    if sess.opts.incremental.is_none() {
-        // No incremental compilation.
-        return LoadResult::Ok { data: Default::default() };
-    }
-
-    let _timer = sess.prof.generic_activity("incr_comp_prepare_load_dep_graph");
-
-    // Calling `sess.incr_comp_session_dir()` will panic if `sess.opts.incremental.is_none()`.
-    // Fortunately, we just checked that this isn't the case.
-    let path = dep_graph_path(sess);
-    let expected_hash = sess.opts.dep_tracking_hash(false);
-
-    let mut prev_work_products = UnordMap::default();
-
-    // If we are only building with -Zquery-dep-graph but without an actual
-    // incr. comp. session directory, we skip this. Otherwise we'd fail
-    // when trying to load work products.
-    if sess.incr_comp_session_dir_opt().is_some() {
-        let work_products_path = work_products_path(sess);
-        let load_result = load_data(&work_products_path, sess);
-
-        if let LoadResult::Ok { data: (work_products_data, start_pos) } = load_result {
-            // Decode the list of work_products
-            let Ok(mut work_product_decoder) = MemDecoder::new(&work_products_data[..], start_pos)
-            else {
-                sess.dcx().emit_warn(errors::CorruptFile { path: &work_products_path });
-                return LoadResult::DataOutOfDate;
-            };
-            let work_products: Vec<SerializedWorkProduct> =
-                Decodable::decode(&mut work_product_decoder);
-
-            for swp in work_products {
-                let all_files_exist = swp.work_product.saved_files.items().all(|(_, path)| {
-                    let exists = in_incr_comp_dir_sess(sess, path).exists();
-                    if !exists && sess.opts.unstable_opts.incremental_info {
-                        eprintln!("incremental: could not find file for work product: {path}",);
-                    }
-                    exists
-                });
-
-                if all_files_exist {
-                    debug!("reconcile_work_products: all files for {:?} exist", swp);
-                    prev_work_products.insert(swp.id, swp.work_product);
-                } else {
-                    debug!("reconcile_work_products: some file for {:?} does not exist", swp);
-                    delete_dirty_work_product(sess, swp);
-                }
-            }
-        }
-    }
-
-    let _prof_timer = prof.generic_activity("incr_comp_load_dep_graph");
-
-    match load_data(&path, sess) {
-        LoadResult::DataOutOfDate => LoadResult::DataOutOfDate,
-        LoadResult::LoadDepGraph(path, err) => LoadResult::LoadDepGraph(path, err),
-        LoadResult::Ok { data: (bytes, start_pos) } => {
-            let Ok(mut decoder) = MemDecoder::new(&bytes, start_pos) else {
-                sess.dcx().emit_warn(errors::CorruptFile { path: &path });
-                return LoadResult::DataOutOfDate;
-            };
-            let prev_commandline_args_hash = Hash64::decode(&mut decoder);
-
-            if prev_commandline_args_hash != expected_hash {
-                if sess.opts.unstable_opts.incremental_info {
-                    eprintln!(
-                        "[incremental] completely ignoring cache because of \
-                                    differing commandline arguments"
-                    );
-                }
-                // We can't reuse the cache, purge it.
-                debug!("load_dep_graph_new: differing commandline arg hashes");
-
-                // No need to do any further work
-                return LoadResult::DataOutOfDate;
-            }
-
-            let dep_graph = SerializedDepGraph::decode::<DepsType>(&mut decoder, deps);
-
-            LoadResult::Ok { data: (dep_graph, prev_work_products) }
-        }
-    }
-}
-
-/// Attempts to load the query result cache from disk
-///
-/// If we are not in incremental compilation mode, returns `None`.
-/// Otherwise, tries to load the query result cache from disk,
-/// creating an empty cache if it could not be loaded.
-pub fn load_query_result_cache(sess: &Session) -> Option<OnDiskCache> {
-    if sess.opts.incremental.is_none() {
-        return None;
-    }
-
-    let _prof_timer = sess.prof.generic_activity("incr_comp_load_query_result_cache");
-
-    let path = query_cache_path(sess);
-    match load_data(&path, sess) {
-        LoadResult::Ok { data: (bytes, start_pos) } => {
-            let cache = OnDiskCache::new(sess, bytes, start_pos).unwrap_or_else(|()| {
-                sess.dcx().emit_warn(errors::CorruptFile { path: &path });
-                OnDiskCache::new_empty()
-            });
-            Some(cache)
-        }
-        _ => Some(OnDiskCache::new_empty()),
-    }
-}
-
-/// Setups the dependency graph by loading an existing graph from disk and set up streaming of a
-/// new graph to an incremental session directory.
-pub fn setup_dep_graph(sess: &Session, crate_name: Symbol, deps: &DepsType) -> DepGraph {
-    // `load_dep_graph` can only be called after `prepare_session_directory`.
-    prepare_session_directory(sess, crate_name);
-
-    let res = sess.opts.build_dep_graph().then(|| load_dep_graph(sess, deps));
-
-    if sess.opts.incremental.is_some() {
-        sess.time("incr_comp_garbage_collect_session_directories", || {
-            if let Err(e) = garbage_collect_session_directories(sess) {
-                warn!(
-                    "Error while trying to garbage collect incremental \
-                     compilation cache directory: {}",
-                    e
-                );
-            }
-        });
-    }
-
-    res.and_then(|result| {
-        let (prev_graph, prev_work_products) = result.open(sess);
-        build_dep_graph(sess, prev_graph, prev_work_products)
-    })
-    .unwrap_or_else(DepGraph::new_disabled)
-}
+/* FP:load.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0001
+/* FP:load.rs-0002 */ use std :: path :: { Path , PathBuf } ;
+/* FP:load.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0002
+/* FP:load.rs-0004 */ use std :: sync :: Arc ;
+/* FP:load.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0003
+/* FP:load.rs-0006 */ use crate :: rustc_data_structures :: memmap :: Mmap ;
+/* FP:load.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0004
+/* FP:load.rs-0008 */ use crate :: rustc_data_structures :: unord :: UnordMap ;
+/* FP:load.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0005
+/* FP:load.rs-0010 */ use rustc_hashes :: Hash64 ;
+/* FP:load.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0006
+/* FP:load.rs-0012 */ use crate :: rustc_complete :: dep_graph :: { DepGraph , DepsType , SerializedDepGraph , WorkProductMap } ;
+/* FP:load.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0007
+/* FP:load.rs-0014 */ use crate :: rustc_complete :: query :: on_disk_cache :: OnDiskCache ;
+/* FP:load.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0008
+/* FP:load.rs-0016 */ use crate :: rustc_serialize :: Decodable ;
+/* FP:load.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0009
+/* FP:load.rs-0018 */ use crate :: rustc_serialize :: opaque :: MemDecoder ;
+/* FP:load.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0010
+/* FP:load.rs-0020 */ use crate :: rustc_complete :: Session ;
+/* FP:load.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0011
+/* FP:load.rs-0022 */ use crate :: rustc_complete :: config :: IncrementalStateAssertion ;
+/* FP:load.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0012
+/* FP:load.rs-0024 */ use crate :: rustc_complete :: Symbol ;
+/* FP:load.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0013
+/* FP:load.rs-0026 */ use tracing :: { debug , warn } ;
+/* FP:load.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0014
+/* FP:load.rs-0028 */ use super :: data :: * ;
+/* FP:load.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0015
+/* FP:load.rs-0030 */ use super :: fs :: * ;
+/* FP:load.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0016
+/* FP:load.rs-0032 */ use super :: save :: build_dep_graph ;
+/* FP:load.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0017
+/* FP:load.rs-0034 */ use super :: { file_format , work_product } ;
+/* FP:load.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_USE_0018
+/* FP:load.rs-0036 */ use crate :: errors ;
+/* FP:load.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_ENUM_0019
+/* FP:load.rs-0038 */ # [derive (Debug)] # [doc = " Represents the result of an attempt to load incremental compilation data."] pub enum LoadResult < T > { # [doc = " Loading was successful."] Ok { # [allow (missing_docs)] data : T , } , # [doc = " The file either didn't exist or was produced by an incompatible compiler version."] DataOutOfDate , # [doc = " Loading the dep graph failed."] LoadDepGraph (PathBuf , std :: io :: Error) , }
+/* FP:load.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_IMPL_0020
+/* FP:load.rs-0040 */ impl < T : Default > LoadResult < T > { # [doc = " Accesses the data returned in [`LoadResult::Ok`]."] pub fn open (self , sess : & Session) -> T { match (sess . opts . assert_incr_state , & self) { (Some (IncrementalStateAssertion :: NotLoaded) , LoadResult :: Ok { .. }) => { sess . dcx () . emit_fatal (errors :: AssertNotLoaded) ; } (Some (IncrementalStateAssertion :: Loaded) , LoadResult :: LoadDepGraph (..) | LoadResult :: DataOutOfDate ,) => { sess . dcx () . emit_fatal (errors :: AssertLoaded) ; } _ => { } } ; match self { LoadResult :: LoadDepGraph (path , err) => { sess . dcx () . emit_warn (errors :: LoadDepGraph { path , err }) ; Default :: default () } LoadResult :: DataOutOfDate => { if let Err (err) = delete_all_session_dir_contents (sess) { sess . dcx () . emit_err (errors :: DeleteIncompatible { path : dep_graph_path (sess) , err }) ; } Default :: default () } LoadResult :: Ok { data } => data , } } }
+/* FP:load.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_FN_0021
+/* FP:load.rs-0042 */ fn load_data (path : & Path , sess : & Session) -> LoadResult < (Mmap , usize) > { match file_format :: read_file (path , sess . opts . unstable_opts . incremental_info , sess . is_nightly_build () , sess . cfg_version ,) { Ok (Some (data_and_pos)) => LoadResult :: Ok { data : data_and_pos } , Ok (None) => { LoadResult :: DataOutOfDate } Err (err) => LoadResult :: LoadDepGraph (path . to_path_buf () , err) , } }
+/* FP:load.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_FN_0022
+/* FP:load.rs-0044 */ fn delete_dirty_work_product (sess : & Session , swp : SerializedWorkProduct) { debug ! ("delete_dirty_work_product({:?})" , swp) ; work_product :: delete_workproduct_files (sess , & swp . work_product) ; }
+/* FP:load.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_FN_0023
+/* FP:load.rs-0046 */ fn load_dep_graph (sess : & Session , deps : & DepsType ,) -> LoadResult < (Arc < SerializedDepGraph > , WorkProductMap) > { let prof = sess . prof . clone () ; if sess . opts . incremental . is_none () { return LoadResult :: Ok { data : Default :: default () } ; } let _timer = sess . prof . generic_activity ("incr_comp_prepare_load_dep_graph") ; let path = dep_graph_path (sess) ; let expected_hash = sess . opts . dep_tracking_hash (false) ; let mut prev_work_products = UnordMap :: default () ; if sess . incr_comp_session_dir_opt () . is_some () { let work_products_path = work_products_path (sess) ; let load_result = load_data (& work_products_path , sess) ; if let LoadResult :: Ok { data : (work_products_data , start_pos) } = load_result { let Ok (mut work_product_decoder) = MemDecoder :: new (& work_products_data [..] , start_pos) else { sess . dcx () . emit_warn (errors :: CorruptFile { path : & work_products_path }) ; return LoadResult :: DataOutOfDate ; } ; let work_products : Vec < SerializedWorkProduct > = Decodable :: decode (& mut work_product_decoder) ; for swp in work_products { let all_files_exist = swp . work_product . saved_files . items () . all (| (_ , path) | { let exists = in_incr_comp_dir_sess (sess , path) . exists () ; if ! exists && sess . opts . unstable_opts . incremental_info { eprintln ! ("incremental: could not find file for work product: {path}" ,) ; } exists }) ; if all_files_exist { debug ! ("reconcile_work_products: all files for {:?} exist" , swp) ; prev_work_products . insert (swp . id , swp . work_product) ; } else { debug ! ("reconcile_work_products: some file for {:?} does not exist" , swp) ; delete_dirty_work_product (sess , swp) ; } } } } let _prof_timer = prof . generic_activity ("incr_comp_load_dep_graph") ; match load_data (& path , sess) { LoadResult :: DataOutOfDate => LoadResult :: DataOutOfDate , LoadResult :: LoadDepGraph (path , err) => LoadResult :: LoadDepGraph (path , err) , LoadResult :: Ok { data : (bytes , start_pos) } => { let Ok (mut decoder) = MemDecoder :: new (& bytes , start_pos) else { sess . dcx () . emit_warn (errors :: CorruptFile { path : & path }) ; return LoadResult :: DataOutOfDate ; } ; let prev_commandline_args_hash = Hash64 :: decode (& mut decoder) ; if prev_commandline_args_hash != expected_hash { if sess . opts . unstable_opts . incremental_info { eprintln ! ("[incremental] completely ignoring cache because of \
+/* FP:load.rs-0047 */                                     differing commandline arguments") ; } debug ! ("load_dep_graph_new: differing commandline arg hashes") ; return LoadResult :: DataOutOfDate ; } let dep_graph = SerializedDepGraph :: decode :: < DepsType > (& mut decoder , deps) ; LoadResult :: Ok { data : (dep_graph , prev_work_products) } } } }
+/* FP:load.rs-0048 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_FN_0024
+/* FP:load.rs-0049 */ # [doc = " Attempts to load the query result cache from disk"] # [doc = ""] # [doc = " If we are not in incremental compilation mode, returns `None`."] # [doc = " Otherwise, tries to load the query result cache from disk,"] # [doc = " creating an empty cache if it could not be loaded."] pub fn load_query_result_cache (sess : & Session) -> Option < OnDiskCache > { if sess . opts . incremental . is_none () { return None ; } let _prof_timer = sess . prof . generic_activity ("incr_comp_load_query_result_cache") ; let path = query_cache_path (sess) ; match load_data (& path , sess) { LoadResult :: Ok { data : (bytes , start_pos) } => { let cache = OnDiskCache :: new (sess , bytes , start_pos) . unwrap_or_else (| () | { sess . dcx () . emit_warn (errors :: CorruptFile { path : & path }) ; OnDiskCache :: new_empty () }) ; Some (cache) } _ => Some (OnDiskCache :: new_empty ()) , } }
+/* FP:load.rs-0050 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_incremental_src_persist_load_FN_0025
+/* FP:load.rs-0051 */ # [doc = " Setups the dependency graph by loading an existing graph from disk and set up streaming of a"] # [doc = " new graph to an incremental session directory."] pub fn setup_dep_graph (sess : & Session , crate_name : Symbol , deps : & DepsType) -> DepGraph { prepare_session_directory (sess , crate_name) ; let res = sess . opts . build_dep_graph () . then (| | load_dep_graph (sess , deps)) ; if sess . opts . incremental . is_some () { sess . time ("incr_comp_garbage_collect_session_directories" , | | { if let Err (e) = garbage_collect_session_directories (sess) { warn ! ("Error while trying to garbage collect incremental \
+/* FP:load.rs-0052 */                      compilation cache directory: {}" , e) ; } }) ; } res . and_then (| result | { let (prev_graph , prev_work_products) = result . open (sess) ; build_dep_graph (sess , prev_graph , prev_work_products) }) . unwrap_or_else (DepGraph :: new_disabled) }

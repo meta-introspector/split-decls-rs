@@ -1,110 +1,20 @@
-use derive_where::derive_where;
-
-use super::{AvailableDepth, Cx, NestedGoals};
-use crate::data_structures::HashMap;
-use crate::search_graph::EvaluationResult;
-
-struct Success<X: Cx> {
-    required_depth: usize,
-    nested_goals: NestedGoals<X>,
-    result: X::Tracked<X::Result>,
-}
-
-struct WithOverflow<X: Cx> {
-    nested_goals: NestedGoals<X>,
-    result: X::Tracked<X::Result>,
-}
-
-/// The cache entry for a given input.
-///
-/// This contains results whose computation never hit the
-/// recursion limit in `success`, and all results which hit
-/// the recursion limit in `with_overflow`.
-#[derive_where(Default; X: Cx)]
-struct CacheEntry<X: Cx> {
-    success: Option<Success<X>>,
-    with_overflow: HashMap<usize, WithOverflow<X>>,
-}
-
-#[derive_where(Debug; X: Cx)]
-pub(super) struct CacheData<'a, X: Cx> {
-    pub(super) result: X::Result,
-    pub(super) required_depth: usize,
-    pub(super) encountered_overflow: bool,
-    pub(super) nested_goals: &'a NestedGoals<X>,
-}
-#[derive_where(Default; X: Cx)]
-pub struct GlobalCache<X: Cx> {
-    map: HashMap<X::Input, CacheEntry<X>>,
-}
-
-impl<X: Cx> GlobalCache<X> {
-    /// Insert a final result into the global cache.
-    pub(super) fn insert(
-        &mut self,
-        cx: X,
-        input: X::Input,
-        evaluation_result: EvaluationResult<X>,
-        dep_node: X::DepNodeIndex,
-    ) {
-        let EvaluationResult { encountered_overflow, required_depth, heads, nested_goals, result } =
-            evaluation_result;
-        debug_assert!(heads.is_empty());
-        let result = cx.mk_tracked(result, dep_node);
-        let entry = self.map.entry(input).or_default();
-        if encountered_overflow {
-            let with_overflow = WithOverflow { nested_goals, result };
-            let prev = entry.with_overflow.insert(required_depth, with_overflow);
-            if let Some(prev) = &prev {
-                assert!(cx.evaluation_is_concurrent());
-                assert_eq!(cx.get_tracked(&prev.result), evaluation_result.result);
-            }
-        } else {
-            let prev = entry.success.replace(Success { required_depth, nested_goals, result });
-            if let Some(prev) = &prev {
-                assert!(cx.evaluation_is_concurrent());
-                assert_eq!(cx.get_tracked(&prev.result), evaluation_result.result);
-            }
-        }
-    }
-
-    /// Try to fetch a cached result, checking the recursion limit
-    /// and handling root goals of coinductive cycles.
-    ///
-    /// If this returns `Some` the cache result can be used.
-    pub(super) fn get<'a>(
-        &'a self,
-        cx: X,
-        input: X::Input,
-        available_depth: AvailableDepth,
-        mut candidate_is_applicable: impl FnMut(&NestedGoals<X>) -> bool,
-    ) -> Option<CacheData<'a, X>> {
-        let entry = self.map.get(&input)?;
-        if let Some(Success { required_depth, ref nested_goals, ref result }) = entry.success
-            && available_depth.cache_entry_is_applicable(required_depth)
-            && candidate_is_applicable(nested_goals)
-        {
-            return Some(CacheData {
-                result: cx.get_tracked(&result),
-                required_depth,
-                encountered_overflow: false,
-                nested_goals,
-            });
-        }
-
-        let additional_depth = available_depth.0;
-        if let Some(WithOverflow { nested_goals, result }) =
-            entry.with_overflow.get(&additional_depth)
-            && candidate_is_applicable(nested_goals)
-        {
-            return Some(CacheData {
-                result: cx.get_tracked(result),
-                required_depth: additional_depth,
-                encountered_overflow: true,
-                nested_goals,
-            });
-        }
-
-        None
-    }
-}
+/* FP:global_cache.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_search_graph_global_cache_USE_0001
+/* FP:global_cache.rs-0002 */ use derive_where :: derive_where ;
+/* FP:global_cache.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_search_graph_global_cache_USE_0002
+/* FP:global_cache.rs-0004 */ use super :: { AvailableDepth , Cx , NestedGoals } ;
+/* FP:global_cache.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_search_graph_global_cache_USE_0003
+/* FP:global_cache.rs-0006 */ use crate :: data_structures :: HashMap ;
+/* FP:global_cache.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_search_graph_global_cache_USE_0004
+/* FP:global_cache.rs-0008 */ use crate :: search_graph :: EvaluationResult ;
+/* FP:global_cache.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_search_graph_global_cache_STRUCT_0005
+/* FP:global_cache.rs-0010 */ struct Success < X : Cx > { required_depth : usize , nested_goals : NestedGoals < X > , result : X :: Tracked < X :: Result > , }
+/* FP:global_cache.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_search_graph_global_cache_STRUCT_0006
+/* FP:global_cache.rs-0012 */ struct WithOverflow < X : Cx > { nested_goals : NestedGoals < X > , result : X :: Tracked < X :: Result > , }
+/* FP:global_cache.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_search_graph_global_cache_STRUCT_0007
+/* FP:global_cache.rs-0014 */ # [doc = " The cache entry for a given input."] # [doc = ""] # [doc = " This contains results whose computation never hit the"] # [doc = " recursion limit in `success`, and all results which hit"] # [doc = " the recursion limit in `with_overflow`."] # [derive_where (Default ; X : Cx)] struct CacheEntry < X : Cx > { success : Option < Success < X > > , with_overflow : HashMap < usize , WithOverflow < X > > , }
+/* FP:global_cache.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_search_graph_global_cache_STRUCT_0008
+/* FP:global_cache.rs-0016 */ # [derive_where (Debug ; X : Cx)] pub (super) struct CacheData < 'a , X : Cx > { pub (super) result : X :: Result , pub (super) required_depth : usize , pub (super) encountered_overflow : bool , pub (super) nested_goals : & 'a NestedGoals < X > , }
+/* FP:global_cache.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_search_graph_global_cache_STRUCT_0009
+/* FP:global_cache.rs-0018 */ # [derive_where (Default ; X : Cx)] pub struct GlobalCache < X : Cx > { map : HashMap < X :: Input , CacheEntry < X > > , }
+/* FP:global_cache.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_search_graph_global_cache_IMPL_0010
+/* FP:global_cache.rs-0020 */ impl < X : Cx > GlobalCache < X > { # [doc = " Insert a final result into the global cache."] pub (super) fn insert (& mut self , cx : X , input : X :: Input , evaluation_result : EvaluationResult < X > , dep_node : X :: DepNodeIndex ,) { let EvaluationResult { encountered_overflow , required_depth , heads , nested_goals , result } = evaluation_result ; debug_assert ! (heads . is_empty ()) ; let result = cx . mk_tracked (result , dep_node) ; let entry = self . map . entry (input) . or_default () ; if encountered_overflow { let with_overflow = WithOverflow { nested_goals , result } ; let prev = entry . with_overflow . insert (required_depth , with_overflow) ; if let Some (prev) = & prev { assert ! (cx . evaluation_is_concurrent ()) ; assert_eq ! (cx . get_tracked (& prev . result) , evaluation_result . result) ; } } else { let prev = entry . success . replace (Success { required_depth , nested_goals , result }) ; if let Some (prev) = & prev { assert ! (cx . evaluation_is_concurrent ()) ; assert_eq ! (cx . get_tracked (& prev . result) , evaluation_result . result) ; } } } # [doc = " Try to fetch a cached result, checking the recursion limit"] # [doc = " and handling root goals of coinductive cycles."] # [doc = ""] # [doc = " If this returns `Some` the cache result can be used."] pub (super) fn get < 'a > (& 'a self , cx : X , input : X :: Input , available_depth : AvailableDepth , mut candidate_is_applicable : impl FnMut (& NestedGoals < X >) -> bool ,) -> Option < CacheData < 'a , X > > { let entry = self . map . get (& input) ? ; if let Some (Success { required_depth , ref nested_goals , ref result }) = entry . success && available_depth . cache_entry_is_applicable (required_depth) && candidate_is_applicable (nested_goals) { return Some (CacheData { result : cx . get_tracked (& result) , required_depth , encountered_overflow : false , nested_goals , }) ; } let additional_depth = available_depth . 0 ; if let Some (WithOverflow { nested_goals , result }) = entry . with_overflow . get (& additional_depth) && candidate_is_applicable (nested_goals) { return Some (CacheData { result : cx . get_tracked (result) , required_depth : additional_depth , encountered_overflow : true , nested_goals , }) ; } None } }

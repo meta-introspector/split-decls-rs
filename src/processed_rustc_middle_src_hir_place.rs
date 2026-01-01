@@ -1,132 +1,24 @@
-use rustc_abi::{FieldIdx, VariantIdx};
-use crate::rustc_complete::HirId;
-use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-
-use crate::ty;
-use crate::ty::Ty;
-
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, TyEncodable, TyDecodable, HashStable)]
-#[derive(TypeFoldable, TypeVisitable)]
-pub enum PlaceBase {
-    /// A temporary variable.
-    Rvalue,
-    /// A named `static` item.
-    StaticItem,
-    /// A named local variable.
-    Local(HirId),
-    /// An upvar referenced by closure env.
-    Upvar(ty::UpvarId),
-}
-
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, TyEncodable, TyDecodable, HashStable)]
-#[derive(TypeFoldable, TypeVisitable)]
-pub enum ProjectionKind {
-    /// A dereference of a pointer, reference or `Box<T>` of the given type.
-    Deref,
-
-    /// `B.F` where `B` is the base expression and `F` is
-    /// the field. The field is identified by which variant
-    /// it appears in along with a field index. The variant
-    /// is used for enums.
-    Field(FieldIdx, VariantIdx),
-
-    /// Some index like `B[x]`, where `B` is the base
-    /// expression. We don't preserve the index `x` because
-    /// we won't need it.
-    Index,
-
-    /// A subslice covering a range of values like `B[x..y]`.
-    Subslice,
-
-    /// A conversion from an opaque type to its hidden type so we can
-    /// do further projections on it.
-    ///
-    /// This is unused if `-Znext-solver` is enabled.
-    OpaqueCast,
-
-    /// `unwrap_binder!(expr)`
-    UnwrapUnsafeBinder,
-}
-
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, TyEncodable, TyDecodable, HashStable)]
-#[derive(TypeFoldable, TypeVisitable)]
-pub struct Projection<'tcx> {
-    /// Type after the projection is applied.
-    pub ty: Ty<'tcx>,
-
-    /// Defines the kind of access made by the projection.
-    pub kind: ProjectionKind,
-}
-
-/// A `Place` represents how a value is located in memory. This does not
-/// always correspond to a syntactic place expression. For example, when
-/// processing a pattern, a `Place` can be used to refer to the sub-value
-/// currently being inspected.
-///
-/// This is an HIR version of [`crate::rustc_middle::mir::Place`].
-#[derive(Clone, Debug, PartialEq, Eq, Hash, TyEncodable, TyDecodable, HashStable)]
-#[derive(TypeFoldable, TypeVisitable)]
-pub struct Place<'tcx> {
-    /// The type of the `PlaceBase`
-    pub base_ty: Ty<'tcx>,
-    /// The "outermost" place that holds this value.
-    pub base: PlaceBase,
-    /// How this place is derived from the base place.
-    pub projections: Vec<Projection<'tcx>>,
-}
-
-/// A `PlaceWithHirId` represents how a value is located in memory. This does not
-/// always correspond to a syntactic place expression. For example, when
-/// processing a pattern, a `Place` can be used to refer to the sub-value
-/// currently being inspected.
-///
-/// This is an HIR version of [`crate::rustc_middle::mir::Place`].
-#[derive(Clone, Debug, PartialEq, Eq, Hash, TyEncodable, TyDecodable, HashStable)]
-pub struct PlaceWithHirId<'tcx> {
-    /// `HirId` of the expression or pattern producing this value.
-    pub hir_id: HirId,
-
-    /// Information about the `Place`.
-    pub place: Place<'tcx>,
-}
-
-impl<'tcx> PlaceWithHirId<'tcx> {
-    pub fn new(
-        hir_id: HirId,
-        base_ty: Ty<'tcx>,
-        base: PlaceBase,
-        projections: Vec<Projection<'tcx>>,
-    ) -> PlaceWithHirId<'tcx> {
-        PlaceWithHirId { hir_id, place: Place { base_ty, base, projections } }
-    }
-}
-
-impl<'tcx> Place<'tcx> {
-    /// Returns an iterator of the types that have to be dereferenced to access
-    /// the `Place`.
-    ///
-    /// The types are in the reverse order that they are applied. So if
-    /// `x: &*const u32` and the `Place` is `**x`, then the types returned are
-    ///`*const u32` then `&*const u32`.
-    pub fn deref_tys(&self) -> impl Iterator<Item = Ty<'tcx>> {
-        self.projections.iter().enumerate().rev().filter_map(move |(index, proj)| {
-            if ProjectionKind::Deref == proj.kind {
-                Some(self.ty_before_projection(index))
-            } else {
-                None
-            }
-        })
-    }
-
-    /// Returns the type of this `Place` after all projections have been applied.
-    pub fn ty(&self) -> Ty<'tcx> {
-        self.projections.last().map_or(self.base_ty, |proj| proj.ty)
-    }
-
-    /// Returns the type of this `Place` immediately before `projection_index`th projection
-    /// is applied.
-    pub fn ty_before_projection(&self, projection_index: usize) -> Ty<'tcx> {
-        assert!(projection_index < self.projections.len());
-        if projection_index == 0 { self.base_ty } else { self.projections[projection_index - 1].ty }
-    }
-}
+/* FP:place.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_place_USE_0001
+/* FP:place.rs-0002 */ use crate :: rustc_abi :: { FieldIdx , VariantIdx } ;
+/* FP:place.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_place_USE_0002
+/* FP:place.rs-0004 */ use crate :: rustc_complete :: HirId ;
+/* FP:place.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_place_USE_0003
+/* FP:place.rs-0006 */ use rustc_macros :: { HashStable , TyDecodable , TyEncodable , TypeFoldable , TypeVisitable } ;
+/* FP:place.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_place_USE_0004
+/* FP:place.rs-0008 */ use crate :: ty ;
+/* FP:place.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_place_USE_0005
+/* FP:place.rs-0010 */ use crate :: ty :: Ty ;
+/* FP:place.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_place_ENUM_0006
+/* FP:place.rs-0012 */ # [derive (Clone , Copy , Debug , PartialEq , Eq , Hash , TyEncodable , TyDecodable , HashStable)] # [derive (TypeFoldable , TypeVisitable)] pub enum PlaceBase { # [doc = " A temporary variable."] Rvalue , # [doc = " A named `static` item."] StaticItem , # [doc = " A named local variable."] Local (HirId) , # [doc = " An upvar referenced by closure env."] Upvar (ty :: UpvarId) , }
+/* FP:place.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_place_ENUM_0007
+/* FP:place.rs-0014 */ # [derive (Clone , Copy , Debug , PartialEq , Eq , Hash , TyEncodable , TyDecodable , HashStable)] # [derive (TypeFoldable , TypeVisitable)] pub enum ProjectionKind { # [doc = " A dereference of a pointer, reference or `Box<T>` of the given type."] Deref , # [doc = " `B.F` where `B` is the base expression and `F` is"] # [doc = " the field. The field is identified by which variant"] # [doc = " it appears in along with a field index. The variant"] # [doc = " is used for enums."] Field (FieldIdx , VariantIdx) , # [doc = " Some index like `B[x]`, where `B` is the base"] # [doc = " expression. We don't preserve the index `x` because"] # [doc = " we won't need it."] Index , # [doc = " A subslice covering a range of values like `B[x..y]`."] Subslice , # [doc = " A conversion from an opaque type to its hidden type so we can"] # [doc = " do further projections on it."] # [doc = ""] # [doc = " This is unused if `-Znext-solver` is enabled."] OpaqueCast , # [doc = " `unwrap_binder!(expr)`"] UnwrapUnsafeBinder , }
+/* FP:place.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_place_STRUCT_0008
+/* FP:place.rs-0016 */ # [derive (Clone , Copy , Debug , PartialEq , Eq , Hash , TyEncodable , TyDecodable , HashStable)] # [derive (TypeFoldable , TypeVisitable)] pub struct Projection < 'tcx > { # [doc = " Type after the projection is applied."] pub ty : Ty < 'tcx > , # [doc = " Defines the kind of access made by the projection."] pub kind : ProjectionKind , }
+/* FP:place.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_place_STRUCT_0009
+/* FP:place.rs-0018 */ # [doc = " A `Place` represents how a value is located in memory. This does not"] # [doc = " always correspond to a syntactic place expression. For example, when"] # [doc = " processing a pattern, a `Place` can be used to refer to the sub-value"] # [doc = " currently being inspected."] # [doc = ""] # [doc = " This is an HIR version of [`crate::rustc_middle::mir::Place`]."] # [derive (Clone , Debug , PartialEq , Eq , Hash , TyEncodable , TyDecodable , HashStable)] # [derive (TypeFoldable , TypeVisitable)] pub struct Place < 'tcx > { # [doc = " The type of the `PlaceBase`"] pub base_ty : Ty < 'tcx > , # [doc = " The \"outermost\" place that holds this value."] pub base : PlaceBase , # [doc = " How this place is derived from the base place."] pub projections : Vec < Projection < 'tcx > > , }
+/* FP:place.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_place_STRUCT_0010
+/* FP:place.rs-0020 */ # [doc = " A `PlaceWithHirId` represents how a value is located in memory. This does not"] # [doc = " always correspond to a syntactic place expression. For example, when"] # [doc = " processing a pattern, a `Place` can be used to refer to the sub-value"] # [doc = " currently being inspected."] # [doc = ""] # [doc = " This is an HIR version of [`crate::rustc_middle::mir::Place`]."] # [derive (Clone , Debug , PartialEq , Eq , Hash , TyEncodable , TyDecodable , HashStable)] pub struct PlaceWithHirId < 'tcx > { # [doc = " `HirId` of the expression or pattern producing this value."] pub hir_id : HirId , # [doc = " Information about the `Place`."] pub place : Place < 'tcx > , }
+/* FP:place.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_place_IMPL_0011
+/* FP:place.rs-0022 */ impl < 'tcx > PlaceWithHirId < 'tcx > { pub fn new (hir_id : HirId , base_ty : Ty < 'tcx > , base : PlaceBase , projections : Vec < Projection < 'tcx > > ,) -> PlaceWithHirId < 'tcx > { PlaceWithHirId { hir_id , place : Place { base_ty , base , projections } } } }
+/* FP:place.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_place_IMPL_0012
+/* FP:place.rs-0024 */ impl < 'tcx > Place < 'tcx > { # [doc = " Returns an iterator of the types that have to be dereferenced to access"] # [doc = " the `Place`."] # [doc = ""] # [doc = " The types are in the reverse order that they are applied. So if"] # [doc = " `x: &*const u32` and the `Place` is `**x`, then the types returned are"] # [doc = "`*const u32` then `&*const u32`."] pub fn deref_tys (& self) -> impl Iterator < Item = Ty < 'tcx > > { self . projections . iter () . enumerate () . rev () . filter_map (move | (index , proj) | { if ProjectionKind :: Deref == proj . kind { Some (self . ty_before_projection (index)) } else { None } }) } # [doc = " Returns the type of this `Place` after all projections have been applied."] pub fn ty (& self) -> Ty < 'tcx > { self . projections . last () . map_or (self . base_ty , | proj | proj . ty) } # [doc = " Returns the type of this `Place` immediately before `projection_index`th projection"] # [doc = " is applied."] pub fn ty_before_projection (& self , projection_index : usize) -> Ty < 'tcx > { assert ! (projection_index < self . projections . len ()) ; if projection_index == 0 { self . base_ty } else { self . projections [projection_index - 1] . ty } } }

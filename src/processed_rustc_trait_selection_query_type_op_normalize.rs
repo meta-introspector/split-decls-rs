@@ -1,134 +1,32 @@
-use std::fmt;
-
-use crate::rustc_complete::traits::ObligationCause;
-use crate::rustc_complete::traits::query::NoSolution;
-pub use crate::rustc_complete::traits::query::type_op::{DeeplyNormalize, Normalize};
-use crate::rustc_complete::ty::{self, Lift, ParamEnvAnd, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
-use crate::rustc_complete::Span;
-
-use crate::infer::canonical::{CanonicalQueryInput, CanonicalQueryResponse};
-use crate::traits::ObligationCtxt;
-
-impl<'tcx, T> super::QueryTypeOp<'tcx> for Normalize<T>
-where
-    T: Normalizable<'tcx> + 'tcx,
-{
-    type QueryResponse = T;
-
-    fn try_fast_path(_tcx: TyCtxt<'tcx>, key: &ParamEnvAnd<'tcx, Self>) -> Option<T> {
-        if !key.value.value.has_aliases() { Some(key.value.value) } else { None }
-    }
-
-    fn perform_query(
-        tcx: TyCtxt<'tcx>,
-        canonicalized: CanonicalQueryInput<'tcx, ParamEnvAnd<'tcx, Self>>,
-    ) -> Result<CanonicalQueryResponse<'tcx, Self::QueryResponse>, NoSolution> {
-        T::type_op_method(tcx, canonicalized)
-    }
-
-    fn perform_locally_with_next_solver(
-        _ocx: &ObligationCtxt<'_, 'tcx>,
-        key: ParamEnvAnd<'tcx, Self>,
-        _span: Span,
-    ) -> Result<Self::QueryResponse, NoSolution> {
-        Ok(key.value.value)
-    }
-}
-
-impl<'tcx, T> super::QueryTypeOp<'tcx> for DeeplyNormalize<T>
-where
-    T: Normalizable<'tcx> + 'tcx,
-{
-    type QueryResponse = T;
-
-    fn try_fast_path(_tcx: TyCtxt<'tcx>, key: &ParamEnvAnd<'tcx, Self>) -> Option<T> {
-        if !key.value.value.has_aliases() { Some(key.value.value) } else { None }
-    }
-
-    fn perform_query(
-        tcx: TyCtxt<'tcx>,
-        canonicalized: CanonicalQueryInput<'tcx, ParamEnvAnd<'tcx, Self>>,
-    ) -> Result<CanonicalQueryResponse<'tcx, Self::QueryResponse>, NoSolution> {
-        T::type_op_method(
-            tcx,
-            CanonicalQueryInput {
-                typing_mode: canonicalized.typing_mode,
-                canonical: canonicalized.canonical.unchecked_map(
-                    |ty::ParamEnvAnd { param_env, value }| ty::ParamEnvAnd {
-                        param_env,
-                        value: Normalize { value: value.value },
-                    },
-                ),
-            },
-        )
-    }
-
-    fn perform_locally_with_next_solver(
-        ocx: &ObligationCtxt<'_, 'tcx>,
-        key: ParamEnvAnd<'tcx, Self>,
-        span: Span,
-    ) -> Result<Self::QueryResponse, NoSolution> {
-        ocx.deeply_normalize(
-            &ObligationCause::dummy_with_span(span),
-            key.param_env,
-            key.value.value,
-        )
-        .map_err(|_| NoSolution)
-    }
-}
-
-pub trait Normalizable<'tcx>:
-    fmt::Debug + TypeFoldable<TyCtxt<'tcx>> + Lift<TyCtxt<'tcx>> + Copy
-{
-    fn type_op_method(
-        tcx: TyCtxt<'tcx>,
-        canonicalized: CanonicalQueryInput<'tcx, ParamEnvAnd<'tcx, Normalize<Self>>>,
-    ) -> Result<CanonicalQueryResponse<'tcx, Self>, NoSolution>;
-}
-
-impl<'tcx> Normalizable<'tcx> for Ty<'tcx> {
-    fn type_op_method(
-        tcx: TyCtxt<'tcx>,
-        canonicalized: CanonicalQueryInput<'tcx, ParamEnvAnd<'tcx, Normalize<Self>>>,
-    ) -> Result<CanonicalQueryResponse<'tcx, Self>, NoSolution> {
-        tcx.type_op_normalize_ty(canonicalized)
-    }
-}
-
-impl<'tcx> Normalizable<'tcx> for ty::Clause<'tcx> {
-    fn type_op_method(
-        tcx: TyCtxt<'tcx>,
-        canonicalized: CanonicalQueryInput<'tcx, ParamEnvAnd<'tcx, Normalize<Self>>>,
-    ) -> Result<CanonicalQueryResponse<'tcx, Self>, NoSolution> {
-        tcx.type_op_normalize_clause(canonicalized)
-    }
-}
-
-impl<'tcx> Normalizable<'tcx> for ty::PolyFnSig<'tcx> {
-    fn type_op_method(
-        tcx: TyCtxt<'tcx>,
-        canonicalized: CanonicalQueryInput<'tcx, ParamEnvAnd<'tcx, Normalize<Self>>>,
-    ) -> Result<CanonicalQueryResponse<'tcx, Self>, NoSolution> {
-        tcx.type_op_normalize_poly_fn_sig(canonicalized)
-    }
-}
-
-impl<'tcx> Normalizable<'tcx> for ty::FnSig<'tcx> {
-    fn type_op_method(
-        tcx: TyCtxt<'tcx>,
-        canonicalized: CanonicalQueryInput<'tcx, ParamEnvAnd<'tcx, Normalize<Self>>>,
-    ) -> Result<CanonicalQueryResponse<'tcx, Self>, NoSolution> {
-        tcx.type_op_normalize_fn_sig(canonicalized)
-    }
-}
-
-/// This impl is not needed, since we never normalize type outlives predicates
-/// in the old solver, but is required by trait bounds to be happy.
-impl<'tcx> Normalizable<'tcx> for ty::PolyTypeOutlivesPredicate<'tcx> {
-    fn type_op_method(
-        _tcx: TyCtxt<'tcx>,
-        _canonicalized: CanonicalQueryInput<'tcx, ParamEnvAnd<'tcx, Normalize<Self>>>,
-    ) -> Result<CanonicalQueryResponse<'tcx, Self>, NoSolution> {
-        unreachable!("we never normalize PolyTypeOutlivesPredicate")
-    }
-}
+/* FP:normalize.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_normalize_USE_0001
+/* FP:normalize.rs-0002 */ use std :: fmt ;
+/* FP:normalize.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_normalize_USE_0002
+/* FP:normalize.rs-0004 */ use crate :: rustc_complete :: traits :: ObligationCause ;
+/* FP:normalize.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_normalize_USE_0003
+/* FP:normalize.rs-0006 */ use crate :: rustc_complete :: traits :: query :: NoSolution ;
+/* FP:normalize.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_normalize_USE_0004
+/* FP:normalize.rs-0008 */ pub use crate :: rustc_complete :: traits :: query :: type_op :: { DeeplyNormalize , Normalize } ;
+/* FP:normalize.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_normalize_USE_0005
+/* FP:normalize.rs-0010 */ use crate :: rustc_complete :: ty :: { self , Lift , ParamEnvAnd , Ty , TyCtxt , TypeFoldable , TypeVisitableExt } ;
+/* FP:normalize.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_normalize_USE_0006
+/* FP:normalize.rs-0012 */ use crate :: rustc_complete :: Span ;
+/* FP:normalize.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_normalize_USE_0007
+/* FP:normalize.rs-0014 */ use crate :: infer :: canonical :: { CanonicalQueryInput , CanonicalQueryResponse } ;
+/* FP:normalize.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_normalize_USE_0008
+/* FP:normalize.rs-0016 */ use crate :: traits :: ObligationCtxt ;
+/* FP:normalize.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_normalize_IMPL_0009
+/* FP:normalize.rs-0018 */ impl < 'tcx , T > super :: QueryTypeOp < 'tcx > for Normalize < T > where T : Normalizable < 'tcx > + 'tcx , { type QueryResponse = T ; fn try_fast_path (_tcx : TyCtxt < 'tcx > , key : & ParamEnvAnd < 'tcx , Self >) -> Option < T > { if ! key . value . value . has_aliases () { Some (key . value . value) } else { None } } fn perform_query (tcx : TyCtxt < 'tcx > , canonicalized : CanonicalQueryInput < 'tcx , ParamEnvAnd < 'tcx , Self > > ,) -> Result < CanonicalQueryResponse < 'tcx , Self :: QueryResponse > , NoSolution > { T :: type_op_method (tcx , canonicalized) } fn perform_locally_with_next_solver (_ocx : & ObligationCtxt < '_ , 'tcx > , key : ParamEnvAnd < 'tcx , Self > , _span : Span ,) -> Result < Self :: QueryResponse , NoSolution > { Ok (key . value . value) } }
+/* FP:normalize.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_normalize_IMPL_0010
+/* FP:normalize.rs-0020 */ impl < 'tcx , T > super :: QueryTypeOp < 'tcx > for DeeplyNormalize < T > where T : Normalizable < 'tcx > + 'tcx , { type QueryResponse = T ; fn try_fast_path (_tcx : TyCtxt < 'tcx > , key : & ParamEnvAnd < 'tcx , Self >) -> Option < T > { if ! key . value . value . has_aliases () { Some (key . value . value) } else { None } } fn perform_query (tcx : TyCtxt < 'tcx > , canonicalized : CanonicalQueryInput < 'tcx , ParamEnvAnd < 'tcx , Self > > ,) -> Result < CanonicalQueryResponse < 'tcx , Self :: QueryResponse > , NoSolution > { T :: type_op_method (tcx , CanonicalQueryInput { typing_mode : canonicalized . typing_mode , canonical : canonicalized . canonical . unchecked_map (| ty :: ParamEnvAnd { param_env , value } | ty :: ParamEnvAnd { param_env , value : Normalize { value : value . value } , } ,) , } ,) } fn perform_locally_with_next_solver (ocx : & ObligationCtxt < '_ , 'tcx > , key : ParamEnvAnd < 'tcx , Self > , span : Span ,) -> Result < Self :: QueryResponse , NoSolution > { ocx . deeply_normalize (& ObligationCause :: dummy_with_span (span) , key . param_env , key . value . value ,) . map_err (| _ | NoSolution) } }
+/* FP:normalize.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_normalize_TRAIT_0011
+/* FP:normalize.rs-0022 */ pub trait Normalizable < 'tcx > : fmt :: Debug + TypeFoldable < TyCtxt < 'tcx > > + Lift < TyCtxt < 'tcx > > + Copy { fn type_op_method (tcx : TyCtxt < 'tcx > , canonicalized : CanonicalQueryInput < 'tcx , ParamEnvAnd < 'tcx , Normalize < Self > > > ,) -> Result < CanonicalQueryResponse < 'tcx , Self > , NoSolution > ; }
+/* FP:normalize.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_normalize_IMPL_0012
+/* FP:normalize.rs-0024 */ impl < 'tcx > Normalizable < 'tcx > for Ty < 'tcx > { fn type_op_method (tcx : TyCtxt < 'tcx > , canonicalized : CanonicalQueryInput < 'tcx , ParamEnvAnd < 'tcx , Normalize < Self > > > ,) -> Result < CanonicalQueryResponse < 'tcx , Self > , NoSolution > { tcx . type_op_normalize_ty (canonicalized) } }
+/* FP:normalize.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_normalize_IMPL_0013
+/* FP:normalize.rs-0026 */ impl < 'tcx > Normalizable < 'tcx > for ty :: Clause < 'tcx > { fn type_op_method (tcx : TyCtxt < 'tcx > , canonicalized : CanonicalQueryInput < 'tcx , ParamEnvAnd < 'tcx , Normalize < Self > > > ,) -> Result < CanonicalQueryResponse < 'tcx , Self > , NoSolution > { tcx . type_op_normalize_clause (canonicalized) } }
+/* FP:normalize.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_normalize_IMPL_0014
+/* FP:normalize.rs-0028 */ impl < 'tcx > Normalizable < 'tcx > for ty :: PolyFnSig < 'tcx > { fn type_op_method (tcx : TyCtxt < 'tcx > , canonicalized : CanonicalQueryInput < 'tcx , ParamEnvAnd < 'tcx , Normalize < Self > > > ,) -> Result < CanonicalQueryResponse < 'tcx , Self > , NoSolution > { tcx . type_op_normalize_poly_fn_sig (canonicalized) } }
+/* FP:normalize.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_normalize_IMPL_0015
+/* FP:normalize.rs-0030 */ impl < 'tcx > Normalizable < 'tcx > for ty :: FnSig < 'tcx > { fn type_op_method (tcx : TyCtxt < 'tcx > , canonicalized : CanonicalQueryInput < 'tcx , ParamEnvAnd < 'tcx , Normalize < Self > > > ,) -> Result < CanonicalQueryResponse < 'tcx , Self > , NoSolution > { tcx . type_op_normalize_fn_sig (canonicalized) } }
+/* FP:normalize.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_normalize_IMPL_0016
+/* FP:normalize.rs-0032 */ # [doc = " This impl is not needed, since we never normalize type outlives predicates"] # [doc = " in the old solver, but is required by trait bounds to be happy."] impl < 'tcx > Normalizable < 'tcx > for ty :: PolyTypeOutlivesPredicate < 'tcx > { fn type_op_method (_tcx : TyCtxt < 'tcx > , _canonicalized : CanonicalQueryInput < 'tcx , ParamEnvAnd < 'tcx , Normalize < Self > > > ,) -> Result < CanonicalQueryResponse < 'tcx , Self > , NoSolution > { unreachable ! ("we never normalize PolyTypeOutlivesPredicate") } }

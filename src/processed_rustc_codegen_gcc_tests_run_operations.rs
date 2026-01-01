@@ -1,23 +1,4 @@
-// Compiler:
-//
-// Run-time:
-//   stdout: 41
-//     39
-//     10
-
-#[feature(no_core)]
-#[no_std]
-#[no_core]
-#[no_main]
-
-use mini_core::*;
-
-#[unsafe(no_mangle)]
-extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
-    unsafe {
-        libc::printf(b"%ld\n\0" as *const u8 as *const i8, 40 + argc);
-        libc::printf(b"%ld\n\0" as *const u8 as *const i8, 40 - argc);
-        libc::printf(b"%ld\n\0" as *const u8 as *const i8, 10 * argc);
-    }
-    0
-}
+/* FP:operations.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_run_operations_USE_0001
+/* FP:operations.rs-0002 */ # [feature (no_core)] # [no_std] # [no_core] # [no_main] use mini_core :: * ;
+/* FP:operations.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_run_operations_FN_0002
+/* FP:operations.rs-0004 */ # [unsafe (no_mangle)] extern "C" fn main (argc : i32 , _argv : * const * const u8) -> i32 { unsafe { libc :: printf (b"%ld\n\0" as * const u8 as * const i8 , 40 + argc) ; libc :: printf (b"%ld\n\0" as * const u8 as * const i8 , 40 - argc) ; libc :: printf (b"%ld\n\0" as * const u8 as * const i8 , 10 * argc) ; } 0 }

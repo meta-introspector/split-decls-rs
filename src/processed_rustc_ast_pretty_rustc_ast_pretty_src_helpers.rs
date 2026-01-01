@@ -1,49 +1,6 @@
-use std::borrow::Cow;
-
-use crate::pp::Printer;
-
-impl Printer {
-    pub fn word_space<W: Into<Cow<'static, str>>>(&mut self, w: W) {
-        self.word(w);
-        self.space();
-    }
-
-    pub fn popen(&mut self) {
-        self.word("(");
-    }
-
-    pub fn pclose(&mut self) {
-        self.word(")");
-    }
-
-    pub fn hardbreak_if_not_bol(&mut self) {
-        if !self.is_beginning_of_line() {
-            self.hardbreak()
-        }
-    }
-
-    pub fn space_if_not_bol(&mut self) {
-        if !self.is_beginning_of_line() {
-            self.space();
-        }
-    }
-
-    pub fn nbsp(&mut self) {
-        self.word(" ")
-    }
-
-    pub fn word_nbsp<S: Into<Cow<'static, str>>>(&mut self, w: S) {
-        self.word(w);
-        self.nbsp()
-    }
-
-    /// Synthesizes a comment that was not textually present in the original
-    /// source file.
-    pub fn synth_comment(&mut self, text: impl Into<Cow<'static, str>>) {
-        self.word("/*");
-        self.space();
-        self.word(text);
-        self.space();
-        self.word("*/")
-    }
-}
+/* FP:helpers.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_pretty_src_helpers_USE_0001
+/* FP:helpers.rs-0002 */ use std :: borrow :: Cow ;
+/* FP:helpers.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_pretty_src_helpers_USE_0002
+/* FP:helpers.rs-0004 */ use crate :: pp :: Printer ;
+/* FP:helpers.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_pretty_src_helpers_IMPL_0003
+/* FP:helpers.rs-0006 */ impl Printer { pub fn word_space < W : Into < Cow < 'static , str > > > (& mut self , w : W) { self . word (w) ; self . space () ; } pub fn popen (& mut self) { self . word ("(") ; } pub fn pclose (& mut self) { self . word (")") ; } pub fn hardbreak_if_not_bol (& mut self) { if ! self . is_beginning_of_line () { self . hardbreak () } } pub fn space_if_not_bol (& mut self) { if ! self . is_beginning_of_line () { self . space () ; } } pub fn nbsp (& mut self) { self . word (" ") } pub fn word_nbsp < S : Into < Cow < 'static , str > > > (& mut self , w : S) { self . word (w) ; self . nbsp () } # [doc = " Synthesizes a comment that was not textually present in the original"] # [doc = " source file."] pub fn synth_comment (& mut self , text : impl Into < Cow < 'static , str > >) { self . word ("/*") ; self . space () ; self . word (text) ; self . space () ; self . word ("*/") } }

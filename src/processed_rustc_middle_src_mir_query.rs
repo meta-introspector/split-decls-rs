@@ -1,184 +1,42 @@
-// Values computed by queries that use MIR.
-
-use std::fmt::{self, Debug};
-
-use rustc_abi::{FieldIdx, VariantIdx};
-use crate::rustc_data_structures::fx::FxIndexMap;
-use crate::rustc_complete::ErrorGuaranteed;
-use crate::rustc_complete::def_id::LocalDefId;
-use rustc_index::IndexVec;
-use rustc_index::bit_set::BitMatrix;
-use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeFoldable, TypeVisitable};
-use crate::rustc_complete::{Span, Symbol};
-
-use super::{ConstValue, SourceInfo};
-use crate::ty::{self, CoroutineArgsExt, OpaqueHiddenType, Ty};
-
-rustc_index::newtype_index! {
-    #[derive(HashStable)]
-    #[encodable]
-    #[debug_format = "_{}"]
-    pub struct CoroutineSavedLocal {}
-}
-
-#[derive(Clone, Debug, PartialEq, Eq)]
-#[derive(TyEncodable, TyDecodable, HashStable, TypeFoldable, TypeVisitable)]
-pub struct CoroutineSavedTy<'tcx> {
-    pub ty: Ty<'tcx>,
-    /// Source info corresponding to the local in the original MIR body.
-    pub source_info: SourceInfo,
-    /// Whether the local should be ignored for trait bound computations.
-    pub ignore_for_traits: bool,
-}
-
-/// The layout of coroutine state.
-#[derive(Clone, PartialEq, Eq)]
-#[derive(TyEncodable, TyDecodable, HashStable, TypeFoldable, TypeVisitable)]
-pub struct CoroutineLayout<'tcx> {
-    /// The type of every local stored inside the coroutine.
-    pub field_tys: IndexVec<CoroutineSavedLocal, CoroutineSavedTy<'tcx>>,
-
-    /// The name for debuginfo.
-    pub field_names: IndexVec<CoroutineSavedLocal, Option<Symbol>>,
-
-    /// Which of the above fields are in each variant. Note that one field may
-    /// be stored in multiple variants.
-    pub variant_fields: IndexVec<VariantIdx, IndexVec<FieldIdx, CoroutineSavedLocal>>,
-
-    /// The source that led to each variant being created (usually, a yield or
-    /// await).
-    pub variant_source_info: IndexVec<VariantIdx, SourceInfo>,
-
-    /// Which saved locals are storage-live at the same time. Locals that do not
-    /// have conflicts with each other are allowed to overlap in the computed
-    /// layout.
-    #[type_foldable(identity)]
-    #[type_visitable(ignore)]
-    pub storage_conflicts: BitMatrix<CoroutineSavedLocal, CoroutineSavedLocal>,
-}
-
-impl Debug for CoroutineLayout<'_> {
-    fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
-        fmt.debug_struct("CoroutineLayout")
-            .field_with("field_tys", |fmt| {
-                fmt.debug_map().entries(self.field_tys.iter_enumerated()).finish()
-            })
-            .field_with("variant_fields", |fmt| {
-                let mut map = fmt.debug_map();
-                for (idx, fields) in self.variant_fields.iter_enumerated() {
-                    map.key_with(|fmt| {
-                        let variant_name = ty::CoroutineArgs::variant_name(idx);
-                        if fmt.alternate() {
-                            write!(fmt, "{variant_name:9}({idx:?})")
-                        } else {
-                            write!(fmt, "{variant_name}")
-                        }
-                    });
-                    // Force variant fields to print in regular mode instead of alternate mode.
-                    map.value_with(|fmt| write!(fmt, "{fields:?}"));
-                }
-                map.finish()
-            })
-            .field("storage_conflicts", &self.storage_conflicts)
-            .finish()
-    }
-}
-
-/// All the opaque types that are restricted to concrete types
-/// by this function. Unlike the value in `TypeckResults`, this has
-/// unerased regions.
-#[derive(Default, Debug, TyEncodable, TyDecodable, HashStable)]
-pub struct ConcreteOpaqueTypes<'tcx>(pub FxIndexMap<LocalDefId, OpaqueHiddenType<'tcx>>);
-
-/// The result of the `mir_const_qualif` query.
-///
-/// Each field (except `tainted_by_errors`) corresponds to an implementer of the `Qualif` trait in
-/// `rustc_const_eval/src/transform/check_consts/qualifs.rs`. See that file for more information on each
-/// `Qualif`.
-#[derive(Clone, Copy, Debug, Default, TyEncodable, TyDecodable, HashStable)]
-pub struct ConstQualifs {
-    pub has_mut_interior: bool,
-    pub needs_drop: bool,
-    pub needs_non_const_drop: bool,
-    pub tainted_by_errors: Option<ErrorGuaranteed>,
-}
-/// Outlives-constraints can be categorized to determine whether and why they
-/// are interesting (for error reporting). Order of variants indicates sort
-/// order of the category, thereby influencing diagnostic output.
-///
-/// See also `rustc_const_eval::borrow_check::constraints`.
-#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
-#[derive(TyEncodable, TyDecodable, HashStable, TypeVisitable, TypeFoldable)]
-pub enum ConstraintCategory<'tcx> {
-    Return(ReturnConstraint),
-    Yield,
-    UseAsConst,
-    UseAsStatic,
-    TypeAnnotation(AnnotationSource),
-    Cast {
-        /// Whether this cast is a coercion that was automatically inserted by the compiler.
-        is_implicit_coercion: bool,
-        /// Whether this is an unsizing coercion and if yes, this contains the target type.
-        /// Region variables are erased to ReErased.
-        unsize_to: Option<Ty<'tcx>>,
-    },
-
-    /// Contains the function type if available.
-    CallArgument(Option<Ty<'tcx>>),
-    CopyBound,
-    SizedBound,
-    Assignment,
-    /// A constraint that came from a usage of a variable (e.g. in an ADT expression
-    /// like `Foo { field: my_val }`)
-    Usage,
-    OpaqueType,
-    ClosureUpvar(FieldIdx),
-
-    /// A constraint from a user-written predicate
-    /// with the provided span, written on the item
-    /// with the given `DefId`
-    Predicate(Span),
-
-    /// A "boring" constraint (caused by the given location) is one that
-    /// the user probably doesn't want to see described in diagnostics,
-    /// because it is kind of an artifact of the type system setup.
-    Boring,
-    // Boring and applicable everywhere.
-    BoringNoLocation,
-
-    /// A constraint that doesn't correspond to anything the user sees.
-    Internal,
-
-    /// An internal constraint added when a region outlives a placeholder
-    /// it cannot name and therefore has to outlive `'static`. The argument
-    /// is the unnameable placeholder and the constraint is always between
-    /// an SCC representative and `'static`.
-    OutlivesUnnameablePlaceholder(
-        #[type_foldable(identity)]
-        #[type_visitable(ignore)]
-        ty::RegionVid,
-    ),
-}
-
-#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
-#[derive(TyEncodable, TyDecodable, HashStable, TypeVisitable, TypeFoldable)]
-pub enum ReturnConstraint {
-    Normal,
-    ClosureUpvar(FieldIdx),
-}
-
-#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
-#[derive(TyEncodable, TyDecodable, HashStable, TypeVisitable, TypeFoldable)]
-pub enum AnnotationSource {
-    Ascription,
-    Declaration,
-    OpaqueCast,
-    GenericArg,
-}
-
-/// The constituent parts of a mir constant of kind ADT or array.
-#[derive(Copy, Clone, Debug, HashStable)]
-pub struct DestructuredConstant<'tcx> {
-    pub variant: Option<VariantIdx>,
-    pub fields: &'tcx [(ConstValue, Ty<'tcx>)],
-}
+/* FP:query.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_USE_0001
+/* FP:query.rs-0002 */ use std :: fmt :: { self , Debug } ;
+/* FP:query.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_USE_0002
+/* FP:query.rs-0004 */ use crate :: rustc_abi :: { FieldIdx , VariantIdx } ;
+/* FP:query.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_USE_0003
+/* FP:query.rs-0006 */ use crate :: rustc_data_structures :: fx :: FxIndexMap ;
+/* FP:query.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_USE_0004
+/* FP:query.rs-0008 */ use crate :: rustc_complete :: ErrorGuaranteed ;
+/* FP:query.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_USE_0005
+/* FP:query.rs-0010 */ use crate :: rustc_complete :: def_id :: LocalDefId ;
+/* FP:query.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_USE_0006
+/* FP:query.rs-0012 */ use crate :: rustc_index :: IndexVec ;
+/* FP:query.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_USE_0007
+/* FP:query.rs-0014 */ use crate :: rustc_index :: bit_set :: BitMatrix ;
+/* FP:query.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_USE_0008
+/* FP:query.rs-0016 */ use rustc_macros :: { HashStable , TyDecodable , TyEncodable , TypeFoldable , TypeVisitable } ;
+/* FP:query.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_USE_0009
+/* FP:query.rs-0018 */ use crate :: rustc_complete :: { Span , Symbol } ;
+/* FP:query.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_USE_0010
+/* FP:query.rs-0020 */ use super :: { ConstValue , SourceInfo } ;
+/* FP:query.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_USE_0011
+/* FP:query.rs-0022 */ use crate :: ty :: { self , CoroutineArgsExt , OpaqueHiddenType , Ty } ;
+/* FP:query.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_MACRO_0012
+/* FP:query.rs-0024 */ crate :: rustc_index :: newtype_index ! { # [derive (HashStable)] # [encodable] # [debug_format = "_{}"] pub struct CoroutineSavedLocal { } }
+/* FP:query.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_STRUCT_0013
+/* FP:query.rs-0026 */ # [derive (Clone , Debug , PartialEq , Eq)] # [derive (TyEncodable , TyDecodable , HashStable , TypeFoldable , TypeVisitable)] pub struct CoroutineSavedTy < 'tcx > { pub ty : Ty < 'tcx > , # [doc = " Source info corresponding to the local in the original MIR body."] pub source_info : SourceInfo , # [doc = " Whether the local should be ignored for trait bound computations."] pub ignore_for_traits : bool , }
+/* FP:query.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_STRUCT_0014
+/* FP:query.rs-0028 */ # [doc = " The layout of coroutine state."] # [derive (Clone , PartialEq , Eq)] # [derive (TyEncodable , TyDecodable , HashStable , TypeFoldable , TypeVisitable)] pub struct CoroutineLayout < 'tcx > { # [doc = " The type of every local stored inside the coroutine."] pub field_tys : IndexVec < CoroutineSavedLocal , CoroutineSavedTy < 'tcx > > , # [doc = " The name for debuginfo."] pub field_names : IndexVec < CoroutineSavedLocal , Option < Symbol > > , # [doc = " Which of the above fields are in each variant. Note that one field may"] # [doc = " be stored in multiple variants."] pub variant_fields : IndexVec < VariantIdx , IndexVec < FieldIdx , CoroutineSavedLocal > > , # [doc = " The source that led to each variant being created (usually, a yield or"] # [doc = " await)."] pub variant_source_info : IndexVec < VariantIdx , SourceInfo > , # [doc = " Which saved locals are storage-live at the same time. Locals that do not"] # [doc = " have conflicts with each other are allowed to overlap in the computed"] # [doc = " layout."] # [type_foldable (identity)] # [type_visitable (ignore)] pub storage_conflicts : BitMatrix < CoroutineSavedLocal , CoroutineSavedLocal > , }
+/* FP:query.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_IMPL_0015
+/* FP:query.rs-0030 */ impl Debug for CoroutineLayout < '_ > { fn fmt (& self , fmt : & mut fmt :: Formatter < '_ >) -> fmt :: Result { fmt . debug_struct ("CoroutineLayout") . field_with ("field_tys" , | fmt | { fmt . debug_map () . entries (self . field_tys . iter_enumerated ()) . finish () }) . field_with ("variant_fields" , | fmt | { let mut map = fmt . debug_map () ; for (idx , fields) in self . variant_fields . iter_enumerated () { map . key_with (| fmt | { let variant_name = ty :: CoroutineArgs :: variant_name (idx) ; if fmt . alternate () { write ! (fmt , "{variant_name:9}({idx:?})") } else { write ! (fmt , "{variant_name}") } }) ; map . value_with (| fmt | write ! (fmt , "{fields:?}")) ; } map . finish () }) . field ("storage_conflicts" , & self . storage_conflicts) . finish () } }
+/* FP:query.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_STRUCT_0016
+/* FP:query.rs-0032 */ # [doc = " All the opaque types that are restricted to concrete types"] # [doc = " by this function. Unlike the value in `TypeckResults`, this has"] # [doc = " unerased regions."] # [derive (Default , Debug , TyEncodable , TyDecodable , HashStable)] pub struct ConcreteOpaqueTypes < 'tcx > (pub FxIndexMap < LocalDefId , OpaqueHiddenType < 'tcx > >) ;
+/* FP:query.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_STRUCT_0017
+/* FP:query.rs-0034 */ # [doc = " The result of the `mir_const_qualif` query."] # [doc = ""] # [doc = " Each field (except `tainted_by_errors`) corresponds to an implementer of the `Qualif` trait in"] # [doc = " `rustc_const_eval/src/transform/check_consts/qualifs.rs`. See that file for more information on each"] # [doc = " `Qualif`."] # [derive (Clone , Copy , Debug , Default , TyEncodable , TyDecodable , HashStable)] pub struct ConstQualifs { pub has_mut_interior : bool , pub needs_drop : bool , pub needs_non_const_drop : bool , pub tainted_by_errors : Option < ErrorGuaranteed > , }
+/* FP:query.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_ENUM_0018
+/* FP:query.rs-0036 */ # [doc = " Outlives-constraints can be categorized to determine whether and why they"] # [doc = " are interesting (for error reporting). Order of variants indicates sort"] # [doc = " order of the category, thereby influencing diagnostic output."] # [doc = ""] # [doc = " See also `rustc_const_eval::borrow_check::constraints`."] # [derive (Copy , Clone , Debug , Eq , PartialEq , Hash)] # [derive (TyEncodable , TyDecodable , HashStable , TypeVisitable , TypeFoldable)] pub enum ConstraintCategory < 'tcx > { Return (ReturnConstraint) , Yield , UseAsConst , UseAsStatic , TypeAnnotation (AnnotationSource) , Cast { # [doc = " Whether this cast is a coercion that was automatically inserted by the compiler."] is_implicit_coercion : bool , # [doc = " Whether this is an unsizing coercion and if yes, this contains the target type."] # [doc = " Region variables are erased to ReErased."] unsize_to : Option < Ty < 'tcx > > , } , # [doc = " Contains the function type if available."] CallArgument (Option < Ty < 'tcx > >) , CopyBound , SizedBound , Assignment , # [doc = " A constraint that came from a usage of a variable (e.g. in an ADT expression"] # [doc = " like `Foo { field: my_val }`)"] Usage , OpaqueType , ClosureUpvar (FieldIdx) , # [doc = " A constraint from a user-written predicate"] # [doc = " with the provided span, written on the item"] # [doc = " with the given `DefId`"] Predicate (Span) , # [doc = " A \"boring\" constraint (caused by the given location) is one that"] # [doc = " the user probably doesn't want to see described in diagnostics,"] # [doc = " because it is kind of an artifact of the type system setup."] Boring , BoringNoLocation , # [doc = " A constraint that doesn't correspond to anything the user sees."] Internal , # [doc = " An internal constraint added when a region outlives a placeholder"] # [doc = " it cannot name and therefore has to outlive `'static`. The argument"] # [doc = " is the unnameable placeholder and the constraint is always between"] # [doc = " an SCC representative and `'static`."] OutlivesUnnameablePlaceholder (# [type_foldable (identity)] # [type_visitable (ignore)] ty :: RegionVid ,) , }
+/* FP:query.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_ENUM_0019
+/* FP:query.rs-0038 */ # [derive (Copy , Clone , Debug , Eq , PartialEq , Hash)] # [derive (TyEncodable , TyDecodable , HashStable , TypeVisitable , TypeFoldable)] pub enum ReturnConstraint { Normal , ClosureUpvar (FieldIdx) , }
+/* FP:query.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_ENUM_0020
+/* FP:query.rs-0040 */ # [derive (Copy , Clone , Debug , Eq , PartialEq , Hash)] # [derive (TyEncodable , TyDecodable , HashStable , TypeVisitable , TypeFoldable)] pub enum AnnotationSource { Ascription , Declaration , OpaqueCast , GenericArg , }
+/* FP:query.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_query_STRUCT_0021
+/* FP:query.rs-0042 */ # [doc = " The constituent parts of a mir constant of kind ADT or array."] # [derive (Copy , Clone , Debug , HashStable)] pub struct DestructuredConstant < 'tcx > { pub variant : Option < VariantIdx > , pub fields : & 'tcx [(ConstValue , Ty < 'tcx >)] , }

@@ -1,36 +1,6 @@
-// Compiler:
-//
-// Run-time:
-//   status: 0
-
-#[feature(no_core)]
-#[no_std]
-#[no_core]
-#[no_main]
-
-use intrinsics::black_box;
-use mini_core::*;
-
-#[unsafe(no_mangle)]
-extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
-    // 1st. Check that small 128 bit values work.
-    let val = black_box(64_u128);
-    match val {
-        0 => return 1,
-        1 => return 2,
-        64 => (),
-        _ => return 3,
-    }
-    // 2nd check that *large* values work.
-    const BIG: u128 = 0xDEAD_C0FE_BEEF_DECAF_BADD_DECAF_BEEF_u128;
-    let val = black_box(BIG);
-    match val {
-        0 => return 4,
-        1 => return 5,
-        // Check that we will not match on the lower u64, if the upper qword is different!
-        0xcafbadddecafbeef => return 6,
-        0xDEAD_C0FE_BEEF_DECAF_BADD_DECAF_BEEF_u128 => (),
-        _ => return 7,
-    }
-    0
-}
+/* FP:switchint_128bit.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_run_switchint_128bit_USE_0001
+/* FP:switchint_128bit.rs-0002 */ # [feature (no_core)] # [no_std] # [no_core] # [no_main] use intrinsics :: black_box ;
+/* FP:switchint_128bit.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_run_switchint_128bit_USE_0002
+/* FP:switchint_128bit.rs-0004 */ use mini_core :: * ;
+/* FP:switchint_128bit.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_run_switchint_128bit_FN_0003
+/* FP:switchint_128bit.rs-0006 */ # [unsafe (no_mangle)] extern "C" fn main (argc : i32 , _argv : * const * const u8) -> i32 { let val = black_box (64_u128) ; match val { 0 => return 1 , 1 => return 2 , 64 => () , _ => return 3 , } const BIG : u128 = 0xDEAD_C0FE_BEEF_DECAF_BADD_DECAF_BEEF_u128 ; let val = black_box (BIG) ; match val { 0 => return 4 , 1 => return 5 , 0xcafbadddecafbeef => return 6 , 0xDEAD_C0FE_BEEF_DECAF_BADD_DECAF_BEEF_u128 => () , _ => return 7 , } 0 }

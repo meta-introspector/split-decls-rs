@@ -1,65 +1,12 @@
-use crate::rustc_data_structures::fx::FxHashMap;
-use crate::rustc_data_structures::graph::linked_graph::{Direction, INCOMING, LinkedGraph, NodeIndex};
-use rustc_index::IndexVec;
-
-use super::{DepNode, DepNodeIndex};
-
-pub struct DepGraphQuery {
-    pub graph: LinkedGraph<DepNode, ()>,
-    pub indices: FxHashMap<DepNode, NodeIndex>,
-    pub dep_index_to_index: IndexVec<DepNodeIndex, Option<NodeIndex>>,
-}
-
-impl DepGraphQuery {
-    pub fn new(prev_node_count: usize) -> DepGraphQuery {
-        let node_count = prev_node_count + prev_node_count / 4;
-        let edge_count = 6 * node_count;
-
-        let graph = LinkedGraph::with_capacity(node_count, edge_count);
-        let indices = FxHashMap::default();
-        let dep_index_to_index = IndexVec::new();
-
-        DepGraphQuery { graph, indices, dep_index_to_index }
-    }
-
-    pub fn push(&mut self, index: DepNodeIndex, node: DepNode, edges: &[DepNodeIndex]) {
-        let source = self.graph.add_node(node);
-        self.dep_index_to_index.insert(index, source);
-        self.indices.insert(node, source);
-
-        for &target in edges.iter() {
-            let target = self.dep_index_to_index[target];
-            // We may miss the edges that are pushed while the `DepGraphQuery` is being accessed.
-            // Skip them to issues.
-            if let Some(target) = target {
-                self.graph.add_edge(source, target, ());
-            }
-        }
-    }
-
-    pub fn nodes(&self) -> Vec<&DepNode> {
-        self.graph.all_nodes().iter().map(|n| &n.data).collect()
-    }
-
-    pub fn edges(&self) -> Vec<(&DepNode, &DepNode)> {
-        self.graph
-            .all_edges()
-            .iter()
-            .map(|edge| (edge.source(), edge.target()))
-            .map(|(s, t)| (self.graph.node_data(s), self.graph.node_data(t)))
-            .collect()
-    }
-
-    fn reachable_nodes(&self, node: &DepNode, direction: Direction) -> Vec<&DepNode> {
-        if let Some(&index) = self.indices.get(node) {
-            self.graph.depth_traverse(index, direction).map(|s| self.graph.node_data(s)).collect()
-        } else {
-            vec![]
-        }
-    }
-
-    /// All nodes that can reach `node`.
-    pub fn transitive_predecessors(&self, node: &DepNode) -> Vec<&DepNode> {
-        self.reachable_nodes(node, INCOMING)
-    }
-}
+/* FP:query.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_dep_graph_query_USE_0001
+/* FP:query.rs-0002 */ use crate :: rustc_data_structures :: fx :: FxHashMap ;
+/* FP:query.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_dep_graph_query_USE_0002
+/* FP:query.rs-0004 */ use crate :: rustc_data_structures :: graph :: linked_graph :: { Direction , INCOMING , LinkedGraph , NodeIndex } ;
+/* FP:query.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_dep_graph_query_USE_0003
+/* FP:query.rs-0006 */ use crate :: rustc_index :: IndexVec ;
+/* FP:query.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_dep_graph_query_USE_0004
+/* FP:query.rs-0008 */ use super :: { DepNode , DepNodeIndex } ;
+/* FP:query.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_dep_graph_query_STRUCT_0005
+/* FP:query.rs-0010 */ pub struct DepGraphQuery { pub graph : LinkedGraph < DepNode , () > , pub indices : FxHashMap < DepNode , NodeIndex > , pub dep_index_to_index : IndexVec < DepNodeIndex , Option < NodeIndex > > , }
+/* FP:query.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_dep_graph_query_IMPL_0006
+/* FP:query.rs-0012 */ impl DepGraphQuery { pub fn new (prev_node_count : usize) -> DepGraphQuery { let node_count = prev_node_count + prev_node_count / 4 ; let edge_count = 6 * node_count ; let graph = LinkedGraph :: with_capacity (node_count , edge_count) ; let indices = FxHashMap :: default () ; let dep_index_to_index = IndexVec :: new () ; DepGraphQuery { graph , indices , dep_index_to_index } } pub fn push (& mut self , index : DepNodeIndex , node : DepNode , edges : & [DepNodeIndex]) { let source = self . graph . add_node (node) ; self . dep_index_to_index . insert (index , source) ; self . indices . insert (node , source) ; for & target in edges . iter () { let target = self . dep_index_to_index [target] ; if let Some (target) = target { self . graph . add_edge (source , target , ()) ; } } } pub fn nodes (& self) -> Vec < & DepNode > { self . graph . all_nodes () . iter () . map (| n | & n . data) . collect () } pub fn edges (& self) -> Vec < (& DepNode , & DepNode) > { self . graph . all_edges () . iter () . map (| edge | (edge . source () , edge . target ())) . map (| (s , t) | (self . graph . node_data (s) , self . graph . node_data (t))) . collect () } fn reachable_nodes (& self , node : & DepNode , direction : Direction) -> Vec < & DepNode > { if let Some (& index) = self . indices . get (node) { self . graph . depth_traverse (index , direction) . map (| s | self . graph . node_data (s)) . collect () } else { vec ! [] } } # [doc = " All nodes that can reach `node`."] pub fn transitive_predecessors (& self , node : & DepNode) -> Vec < & DepNode > { self . reachable_nodes (node , INCOMING) } }

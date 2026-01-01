@@ -1,166 +1,22 @@
-// A variant of `SortedMap` that preserves insertion order.
-
-use std::hash::{Hash, Hasher};
-
-use rustc_index::{Idx, IndexVec};
-
-use crate::stable_hasher::{HashStable, StableHasher};
-
-/// An indexed multi-map that preserves insertion order while permitting both *O*(log *n*) lookup of
-/// an item by key and *O*(1) lookup by index.
-///
-/// This data structure is a hybrid of an [`IndexVec`] and a [`SortedMap`]. Like `IndexVec`,
-/// `SortedIndexMultiMap` assigns a typed index to each item while preserving insertion order.
-/// Like `SortedMap`, `SortedIndexMultiMap` has efficient lookup of items by key. However, this
-/// is accomplished by sorting an array of item indices instead of the items themselves.
-///
-/// Unlike `SortedMap`, this data structure can hold multiple equivalent items at once, so the
-/// `get_by_key` method and its variants return an iterator instead of an `Option`. Equivalent
-/// items will be yielded in insertion order.
-///
-/// Unlike a general-purpose map like `BTreeSet` or `HashSet`, `SortedMap` and
-/// `SortedIndexMultiMap` require *O*(*n*) time to insert a single item. This is because we may need
-/// to insert into the middle of the sorted array. Users should avoid mutating this data structure
-/// in-place.
-///
-/// [`SortedMap`]: super::SortedMap
-#[derive(Clone, Debug)]
-pub struct SortedIndexMultiMap<I: Idx, K, V> {
-    /// The elements of the map in insertion order.
-    items: IndexVec<I, (K, V)>,
-
-    /// Indices of the items in the set, sorted by the item's key.
-    idx_sorted_by_item_key: Vec<I>,
-}
-
-impl<I: Idx, K: Ord, V> SortedIndexMultiMap<I, K, V> {
-    #[inline]
-    pub fn new() -> Self {
-        SortedIndexMultiMap { items: IndexVec::new(), idx_sorted_by_item_key: Vec::new() }
-    }
-
-    #[inline]
-    pub fn len(&self) -> usize {
-        self.items.len()
-    }
-
-    #[inline]
-    pub fn is_empty(&self) -> bool {
-        self.items.is_empty()
-    }
-
-    /// Returns an iterator over the items in the map in insertion order.
-    #[inline]
-    pub fn into_iter(self) -> impl DoubleEndedIterator<Item = (K, V)> {
-        self.items.into_iter()
-    }
-
-    /// Returns an iterator over the items in the map in insertion order along with their indices.
-    #[inline]
-    pub fn into_iter_enumerated(self) -> impl DoubleEndedIterator<Item = (I, (K, V))> {
-        self.items.into_iter_enumerated()
-    }
-
-    /// Returns an iterator over the items in the map in insertion order.
-    #[inline]
-    pub fn iter(&self) -> impl '_ + DoubleEndedIterator<Item = (&K, &V)> {
-        self.items.iter().map(|(k, v)| (k, v))
-    }
-
-    /// Returns an iterator over the items in the map in insertion order along with their indices.
-    #[inline]
-    pub fn iter_enumerated(&self) -> impl '_ + DoubleEndedIterator<Item = (I, (&K, &V))> {
-        self.items.iter_enumerated().map(|(i, (k, v))| (i, (k, v)))
-    }
-
-    /// Returns the item in the map with the given index.
-    #[inline]
-    pub fn get(&self, idx: I) -> Option<&(K, V)> {
-        self.items.get(idx)
-    }
-
-    /// Returns an iterator over the items in the map that are equal to `key`.
-    ///
-    /// If there are multiple items that are equivalent to `key`, they will be yielded in
-    /// insertion order.
-    #[inline]
-    pub fn get_by_key(&self, key: K) -> impl Iterator<Item = &V> {
-        self.get_by_key_enumerated(key).map(|(_, v)| v)
-    }
-
-    /// Returns an iterator over the items in the map that are equal to `key` along with their
-    /// indices.
-    ///
-    /// If there are multiple items that are equivalent to `key`, they will be yielded in
-    /// insertion order.
-    #[inline]
-    pub fn get_by_key_enumerated(&self, key: K) -> impl Iterator<Item = (I, &V)> {
-        let lower_bound = self.idx_sorted_by_item_key.partition_point(|&i| self.items[i].0 < key);
-        self.idx_sorted_by_item_key[lower_bound..].iter().map_while(move |&i| {
-            let (k, v) = &self.items[i];
-            (k == &key).then_some((i, v))
-        })
-    }
-
-    #[inline]
-    pub fn contains_key(&self, key: K) -> bool {
-        self.get_by_key(key).next().is_some()
-    }
-}
-
-impl<I: Idx, K: Eq, V: Eq> Eq for SortedIndexMultiMap<I, K, V> {}
-impl<I: Idx, K: PartialEq, V: PartialEq> PartialEq for SortedIndexMultiMap<I, K, V> {
-    fn eq(&self, other: &Self) -> bool {
-        // No need to compare the sorted index. If the items are the same, the index will be too.
-        self.items == other.items
-    }
-}
-
-impl<I: Idx, K, V> Hash for SortedIndexMultiMap<I, K, V>
-where
-    K: Hash,
-    V: Hash,
-{
-    fn hash<H: Hasher>(&self, hasher: &mut H) {
-        self.items.hash(hasher)
-    }
-}
-
-impl<I: Idx, K, V, C> HashStable<C> for SortedIndexMultiMap<I, K, V>
-where
-    K: HashStable<C>,
-    V: HashStable<C>,
-{
-    fn hash_stable(&self, ctx: &mut C, hasher: &mut StableHasher) {
-        let SortedIndexMultiMap {
-            items,
-            // We can ignore this field because it is not observable from the outside.
-            idx_sorted_by_item_key: _,
-        } = self;
-
-        items.hash_stable(ctx, hasher)
-    }
-}
-
-impl<I: Idx, K: Ord, V> FromIterator<(K, V)> for SortedIndexMultiMap<I, K, V> {
-    fn from_iter<J>(iter: J) -> Self
-    where
-        J: IntoIterator<Item = (K, V)>,
-    {
-        let items = IndexVec::<I, _>::from_iter(iter);
-        let mut idx_sorted_by_item_key: Vec<_> = items.indices().collect();
-
-        // `sort_by_key` is stable, so insertion order is preserved for duplicate items.
-        idx_sorted_by_item_key.sort_by_key(|&idx| &items[idx].0);
-
-        SortedIndexMultiMap { items, idx_sorted_by_item_key }
-    }
-}
-
-impl<I: Idx, K, V> std::ops::Index<I> for SortedIndexMultiMap<I, K, V> {
-    type Output = V;
-
-    fn index(&self, idx: I) -> &Self::Output {
-        &self.items[idx].1
-    }
-}
+/* FP:index_map.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sorted_map_index_map_USE_0001
+/* FP:index_map.rs-0002 */ use std :: hash :: { Hash , Hasher } ;
+/* FP:index_map.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sorted_map_index_map_USE_0002
+/* FP:index_map.rs-0004 */ use crate :: rustc_index :: { Idx , IndexVec } ;
+/* FP:index_map.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sorted_map_index_map_USE_0003
+/* FP:index_map.rs-0006 */ use crate :: stable_hasher :: { HashStable , StableHasher } ;
+/* FP:index_map.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sorted_map_index_map_STRUCT_0004
+/* FP:index_map.rs-0008 */ # [doc = " An indexed multi-map that preserves insertion order while permitting both *O*(log *n*) lookup of"] # [doc = " an item by key and *O*(1) lookup by index."] # [doc = ""] # [doc = " This data structure is a hybrid of an [`IndexVec`] and a [`SortedMap`]. Like `IndexVec`,"] # [doc = " `SortedIndexMultiMap` assigns a typed index to each item while preserving insertion order."] # [doc = " Like `SortedMap`, `SortedIndexMultiMap` has efficient lookup of items by key. However, this"] # [doc = " is accomplished by sorting an array of item indices instead of the items themselves."] # [doc = ""] # [doc = " Unlike `SortedMap`, this data structure can hold multiple equivalent items at once, so the"] # [doc = " `get_by_key` method and its variants return an iterator instead of an `Option`. Equivalent"] # [doc = " items will be yielded in insertion order."] # [doc = ""] # [doc = " Unlike a general-purpose map like `BTreeSet` or `HashSet`, `SortedMap` and"] # [doc = " `SortedIndexMultiMap` require *O*(*n*) time to insert a single item. This is because we may need"] # [doc = " to insert into the middle of the sorted array. Users should avoid mutating this data structure"] # [doc = " in-place."] # [doc = ""] # [doc = " [`SortedMap`]: super::SortedMap"] # [derive (Clone , Debug)] pub struct SortedIndexMultiMap < I : Idx , K , V > { # [doc = " The elements of the map in insertion order."] items : IndexVec < I , (K , V) > , # [doc = " Indices of the items in the set, sorted by the item's key."] idx_sorted_by_item_key : Vec < I > , }
+/* FP:index_map.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sorted_map_index_map_IMPL_0005
+/* FP:index_map.rs-0010 */ impl < I : Idx , K : Ord , V > SortedIndexMultiMap < I , K , V > { # [inline] pub fn new () -> Self { SortedIndexMultiMap { items : IndexVec :: new () , idx_sorted_by_item_key : Vec :: new () } } # [inline] pub fn len (& self) -> usize { self . items . len () } # [inline] pub fn is_empty (& self) -> bool { self . items . is_empty () } # [doc = " Returns an iterator over the items in the map in insertion order."] # [inline] pub fn into_iter (self) -> impl DoubleEndedIterator < Item = (K , V) > { self . items . into_iter () } # [doc = " Returns an iterator over the items in the map in insertion order along with their indices."] # [inline] pub fn into_iter_enumerated (self) -> impl DoubleEndedIterator < Item = (I , (K , V)) > { self . items . into_iter_enumerated () } # [doc = " Returns an iterator over the items in the map in insertion order."] # [inline] pub fn iter (& self) -> impl '_ + DoubleEndedIterator < Item = (& K , & V) > { self . items . iter () . map (| (k , v) | (k , v)) } # [doc = " Returns an iterator over the items in the map in insertion order along with their indices."] # [inline] pub fn iter_enumerated (& self) -> impl '_ + DoubleEndedIterator < Item = (I , (& K , & V)) > { self . items . iter_enumerated () . map (| (i , (k , v)) | (i , (k , v))) } # [doc = " Returns the item in the map with the given index."] # [inline] pub fn get (& self , idx : I) -> Option < & (K , V) > { self . items . get (idx) } # [doc = " Returns an iterator over the items in the map that are equal to `key`."] # [doc = ""] # [doc = " If there are multiple items that are equivalent to `key`, they will be yielded in"] # [doc = " insertion order."] # [inline] pub fn get_by_key (& self , key : K) -> impl Iterator < Item = & V > { self . get_by_key_enumerated (key) . map (| (_ , v) | v) } # [doc = " Returns an iterator over the items in the map that are equal to `key` along with their"] # [doc = " indices."] # [doc = ""] # [doc = " If there are multiple items that are equivalent to `key`, they will be yielded in"] # [doc = " insertion order."] # [inline] pub fn get_by_key_enumerated (& self , key : K) -> impl Iterator < Item = (I , & V) > { let lower_bound = self . idx_sorted_by_item_key . partition_point (| & i | self . items [i] . 0 < key) ; self . idx_sorted_by_item_key [lower_bound ..] . iter () . map_while (move | & i | { let (k , v) = & self . items [i] ; (k == & key) . then_some ((i , v)) }) } # [inline] pub fn contains_key (& self , key : K) -> bool { self . get_by_key (key) . next () . is_some () } }
+/* FP:index_map.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sorted_map_index_map_IMPL_0006
+/* FP:index_map.rs-0012 */ impl < I : Idx , K : Eq , V : Eq > Eq for SortedIndexMultiMap < I , K , V > { }
+/* FP:index_map.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sorted_map_index_map_IMPL_0007
+/* FP:index_map.rs-0014 */ impl < I : Idx , K : PartialEq , V : PartialEq > PartialEq for SortedIndexMultiMap < I , K , V > { fn eq (& self , other : & Self) -> bool { self . items == other . items } }
+/* FP:index_map.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sorted_map_index_map_IMPL_0008
+/* FP:index_map.rs-0016 */ impl < I : Idx , K , V > Hash for SortedIndexMultiMap < I , K , V > where K : Hash , V : Hash , { fn hash < H : Hasher > (& self , hasher : & mut H) { self . items . hash (hasher) } }
+/* FP:index_map.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sorted_map_index_map_IMPL_0009
+/* FP:index_map.rs-0018 */ impl < I : Idx , K , V , C > HashStable < C > for SortedIndexMultiMap < I , K , V > where K : HashStable < C > , V : HashStable < C > , { fn hash_stable (& self , ctx : & mut C , hasher : & mut StableHasher) { let SortedIndexMultiMap { items , idx_sorted_by_item_key : _ , } = self ; items . hash_stable (ctx , hasher) } }
+/* FP:index_map.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sorted_map_index_map_IMPL_0010
+/* FP:index_map.rs-0020 */ impl < I : Idx , K : Ord , V > FromIterator < (K , V) > for SortedIndexMultiMap < I , K , V > { fn from_iter < J > (iter : J) -> Self where J : IntoIterator < Item = (K , V) > , { let items = IndexVec :: < I , _ > :: from_iter (iter) ; let mut idx_sorted_by_item_key : Vec < _ > = items . indices () . collect () ; idx_sorted_by_item_key . sort_by_key (| & idx | & items [idx] . 0) ; SortedIndexMultiMap { items , idx_sorted_by_item_key } } }
+/* FP:index_map.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sorted_map_index_map_IMPL_0011
+/* FP:index_map.rs-0022 */ impl < I : Idx , K , V > std :: ops :: Index < I > for SortedIndexMultiMap < I , K , V > { type Output = V ; fn index (& self , idx : I) -> & Self :: Output { & self . items [idx] . 1 } }

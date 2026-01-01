@@ -1,26 +1,6 @@
-// The public parts of this private module are used to create traits
-// that cannot be implemented outside of our own crate. This way we
-// can feel free to extend those traits without worrying about it
-// being a breaking change for other implementations.
-
-/// If this type is pub but not publicly reachable, third parties
-/// can't name it and can't implement traits using it.
-#[allow(missing_debug_implementations)]
-pub struct PrivateMarker;
-
-macro_rules! private_decl {
-    () => {
-        /// This trait is private; this method exists to make it
-        /// impossible to implement outside the crate.
-        #[doc(hidden)]
-        fn __rayon_private__(&self) -> crate::private::PrivateMarker;
-    };
-}
-
-macro_rules! private_impl {
-    () => {
-        fn __rayon_private__(&self) -> crate::private::PrivateMarker {
-            crate::private::PrivateMarker
-        }
-    };
-}
+/* FP:private.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_private_STRUCT_0001
+/* FP:private.rs-0002 */ # [doc = " If this type is pub but not publicly reachable, third parties"] # [doc = " can't name it and can't implement traits using it."] # [allow (missing_debug_implementations)] pub struct PrivateMarker ;
+/* FP:private.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_private_MACRO_0002
+/* FP:private.rs-0004 */ macro_rules ! private_decl { () => { # [doc = " This trait is private; this method exists to make it"] # [doc = " impossible to implement outside the crate."] # [doc (hidden)] fn __rayon_private__ (& self) -> crate :: private :: PrivateMarker ; } ; }
+/* FP:private.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_private_MACRO_0003
+/* FP:private.rs-0006 */ macro_rules ! private_impl { () => { fn __rayon_private__ (& self) -> crate :: private :: PrivateMarker { crate :: private :: PrivateMarker } } ; }

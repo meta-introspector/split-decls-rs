@@ -1,391 +1,75 @@
-// The move-analysis portion of borrowck needs to work in an abstract domain of lifted `Place`s.
-// Most of the `Place` variants fall into a one-to-one mapping between the concrete and abstract
-// (e.g., a field projection on a local variable, `x.field`, has the same meaning in both
-// domains). In other words, all field projections for the same field on the same local do not
-// have meaningfully different types if ever. Indexed projections are the exception: `a[x]` needs
-// to be treated as mapping to the same move path as `a[y]` as well as `a[13]`, etc. So we map
-// these `x`/`y` values to `()`.
-//
-// (In theory, the analysis could be extended to work with sets of paths, so that `a[0]` and
-// `a[13]` could be kept distinct, while `a[x]` would still overlap them both. But that is not
-// what this representation does today.)
-
-use std::fmt;
-use std::ops::{Index, IndexMut};
-
-use crate::rustc_data_structures::fx::FxHashMap;
-use rustc_index::{IndexSlice, IndexVec};
-use crate::rustc_complete::mir::*;
-use crate::rustc_complete::ty::{Ty, TyCtxt};
-use crate::rustc_complete::Span;
-use smallvec::SmallVec;
-
-use crate::un_derefer::UnDerefer;
-
-rustc_index::newtype_index! {
-    #[orderable]
-    #[debug_format = "mp{}"]
-    pub struct MovePathIndex {}
-}
-
-impl polonius_engine::Atom for MovePathIndex {
-    fn index(self) -> usize {
-        rustc_index::Idx::index(self)
-    }
-}
-
-rustc_index::newtype_index! {
-    #[orderable]
-    #[debug_format = "mo{}"]
-    pub struct MoveOutIndex {}
-}
-
-rustc_index::newtype_index! {
-    #[debug_format = "in{}"]
-    pub struct InitIndex {}
-}
-
-impl MoveOutIndex {
-    pub fn move_path_index(self, move_data: &MoveData<'_>) -> MovePathIndex {
-        move_data.moves[self].path
-    }
-}
-
-/// `MovePath` is a canonicalized representation of a path that is
-/// moved or assigned to.
-///
-/// It follows a tree structure.
-///
-/// Given `struct X { m: M, n: N }` and `x: X`, moves like `drop x.m;`
-/// move *out* of the place `x.m`.
-///
-/// The MovePaths representing `x.m` and `x.n` are siblings (that is,
-/// one of them will link to the other via the `next_sibling` field,
-/// and the other will have no entry in its `next_sibling` field), and
-/// they both have the MovePath representing `x` as their parent.
-#[derive(Clone)]
-pub struct MovePath<'tcx> {
-    pub next_sibling: Option<MovePathIndex>,
-    pub first_child: Option<MovePathIndex>,
-    pub parent: Option<MovePathIndex>,
-    pub place: Place<'tcx>,
-}
-
-impl<'tcx> MovePath<'tcx> {
-    /// Returns an iterator over the parents of `self`.
-    pub fn parents<'a>(
-        &self,
-        move_paths: &'a IndexSlice<MovePathIndex, MovePath<'tcx>>,
-    ) -> impl 'a + Iterator<Item = (MovePathIndex, &'a MovePath<'tcx>)> {
-        let first = self.parent.map(|mpi| (mpi, &move_paths[mpi]));
-        MovePathLinearIter {
-            next: first,
-            fetch_next: move |_, parent: &MovePath<'_>| {
-                parent.parent.map(|mpi| (mpi, &move_paths[mpi]))
-            },
-        }
-    }
-
-    /// Returns an iterator over the immediate children of `self`.
-    pub fn children<'a>(
-        &self,
-        move_paths: &'a IndexSlice<MovePathIndex, MovePath<'tcx>>,
-    ) -> impl 'a + Iterator<Item = (MovePathIndex, &'a MovePath<'tcx>)> {
-        let first = self.first_child.map(|mpi| (mpi, &move_paths[mpi]));
-        MovePathLinearIter {
-            next: first,
-            fetch_next: move |_, child: &MovePath<'_>| {
-                child.next_sibling.map(|mpi| (mpi, &move_paths[mpi]))
-            },
-        }
-    }
-
-    /// Finds the closest descendant of `self` for which `f` returns `true` using a breadth-first
-    /// search.
-    ///
-    /// `f` will **not** be called on `self`.
-    pub fn find_descendant(
-        &self,
-        move_paths: &IndexSlice<MovePathIndex, MovePath<'_>>,
-        f: impl Fn(MovePathIndex) -> bool,
-    ) -> Option<MovePathIndex> {
-        let mut todo = if let Some(child) = self.first_child {
-            vec![child]
-        } else {
-            return None;
-        };
-
-        while let Some(mpi) = todo.pop() {
-            if f(mpi) {
-                return Some(mpi);
-            }
-
-            let move_path = &move_paths[mpi];
-            if let Some(child) = move_path.first_child {
-                todo.push(child);
-            }
-
-            // After we've processed the original `mpi`, we should always
-            // traverse the siblings of any of its children.
-            if let Some(sibling) = move_path.next_sibling {
-                todo.push(sibling);
-            }
-        }
-
-        None
-    }
-}
-
-impl<'tcx> fmt::Debug for MovePath<'tcx> {
-    fn fmt(&self, w: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(w, "MovePath {{")?;
-        if let Some(parent) = self.parent {
-            write!(w, " parent: {parent:?},")?;
-        }
-        if let Some(first_child) = self.first_child {
-            write!(w, " first_child: {first_child:?},")?;
-        }
-        if let Some(next_sibling) = self.next_sibling {
-            write!(w, " next_sibling: {next_sibling:?}")?;
-        }
-        write!(w, " place: {:?} }}", self.place)
-    }
-}
-
-impl<'tcx> fmt::Display for MovePath<'tcx> {
-    fn fmt(&self, w: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(w, "{:?}", self.place)
-    }
-}
-
-struct MovePathLinearIter<'a, 'tcx, F> {
-    next: Option<(MovePathIndex, &'a MovePath<'tcx>)>,
-    fetch_next: F,
-}
-
-impl<'a, 'tcx, F> Iterator for MovePathLinearIter<'a, 'tcx, F>
-where
-    F: FnMut(MovePathIndex, &'a MovePath<'tcx>) -> Option<(MovePathIndex, &'a MovePath<'tcx>)>,
-{
-    type Item = (MovePathIndex, &'a MovePath<'tcx>);
-
-    fn next(&mut self) -> Option<Self::Item> {
-        let ret = self.next.take()?;
-        self.next = (self.fetch_next)(ret.0, ret.1);
-        Some(ret)
-    }
-}
-
-#[derive(Debug)]
-pub struct MoveData<'tcx> {
-    pub move_paths: IndexVec<MovePathIndex, MovePath<'tcx>>,
-    pub moves: IndexVec<MoveOutIndex, MoveOut>,
-    /// Each Location `l` is mapped to the MoveOut's that are effects
-    /// of executing the code at `l`. (There can be multiple MoveOut's
-    /// for a given `l` because each MoveOut is associated with one
-    /// particular path being moved.)
-    pub loc_map: LocationMap<SmallVec<[MoveOutIndex; 4]>>,
-    pub path_map: IndexVec<MovePathIndex, SmallVec<[MoveOutIndex; 4]>>,
-    pub rev_lookup: MovePathLookup<'tcx>,
-    pub inits: IndexVec<InitIndex, Init>,
-    /// Each Location `l` is mapped to the Inits that are effects
-    /// of executing the code at `l`.
-    pub init_loc_map: LocationMap<SmallVec<[InitIndex; 4]>>,
-    pub init_path_map: IndexVec<MovePathIndex, SmallVec<[InitIndex; 4]>>,
-}
-
-pub trait HasMoveData<'tcx> {
-    fn move_data(&self) -> &MoveData<'tcx>;
-}
-
-#[derive(Debug)]
-pub struct LocationMap<T> {
-    /// Location-indexed (BasicBlock for outer index, index within BB
-    /// for inner index) map.
-    pub(crate) map: IndexVec<BasicBlock, Vec<T>>,
-}
-
-impl<T> Index<Location> for LocationMap<T> {
-    type Output = T;
-    fn index(&self, index: Location) -> &Self::Output {
-        &self.map[index.block][index.statement_index]
-    }
-}
-
-impl<T> IndexMut<Location> for LocationMap<T> {
-    fn index_mut(&mut self, index: Location) -> &mut Self::Output {
-        &mut self.map[index.block][index.statement_index]
-    }
-}
-
-impl<T> LocationMap<T>
-where
-    T: Default + Clone,
-{
-    fn new(body: &Body<'_>) -> Self {
-        LocationMap {
-            map: body
-                .basic_blocks
-                .iter()
-                .map(|block| vec![T::default(); block.statements.len() + 1])
-                .collect(),
-        }
-    }
-}
-
-/// `MoveOut` represents a point in a program that moves out of some
-/// L-value; i.e., "creates" uninitialized memory.
-///
-/// With respect to dataflow analysis:
-/// - Generated by moves and declaration of uninitialized variables.
-/// - Killed by assignments to the memory.
-#[derive(Copy, Clone)]
-pub struct MoveOut {
-    /// path being moved
-    pub path: MovePathIndex,
-    /// location of move
-    pub source: Location,
-}
-
-impl fmt::Debug for MoveOut {
-    fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(fmt, "{:?}@{:?}", self.path, self.source)
-    }
-}
-
-/// `Init` represents a point in a program that initializes some L-value;
-#[derive(Copy, Clone)]
-pub struct Init {
-    /// path being initialized
-    pub path: MovePathIndex,
-    /// location of initialization
-    pub location: InitLocation,
-    /// Extra information about this initialization
-    pub kind: InitKind,
-}
-
-/// Initializations can be from an argument or from a statement. Arguments
-/// do not have locations, in those cases the `Local` is kept..
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
-pub enum InitLocation {
-    Argument(Local),
-    Statement(Location),
-}
-
-/// Additional information about the initialization.
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
-pub enum InitKind {
-    /// Deep init, even on panic
-    Deep,
-    /// Only does a shallow init
-    Shallow,
-    /// This doesn't initialize the variable on panic (and a panic is possible).
-    NonPanicPathOnly,
-}
-
-impl fmt::Debug for Init {
-    fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(fmt, "{:?}@{:?} ({:?})", self.path, self.location, self.kind)
-    }
-}
-
-impl Init {
-    pub fn span<'tcx>(&self, body: &Body<'tcx>) -> Span {
-        match self.location {
-            InitLocation::Argument(local) => body.local_decls[local].source_info.span,
-            InitLocation::Statement(location) => body.source_info(location).span,
-        }
-    }
-}
-
-/// Tables mapping from a place to its MovePathIndex.
-#[derive(Debug)]
-pub struct MovePathLookup<'tcx> {
-    locals: IndexVec<Local, Option<MovePathIndex>>,
-
-    /// projections are made from a base-place and a projection
-    /// elem. The base-place will have a unique MovePathIndex; we use
-    /// the latter as the index into the outer vector (narrowing
-    /// subsequent search so that it is solely relative to that
-    /// base-place). For the remaining lookup, we map the projection
-    /// elem to the associated MovePathIndex.
-    projections: FxHashMap<(MovePathIndex, ProjectionKind), MovePathIndex>,
-
-    un_derefer: UnDerefer<'tcx>,
-}
-
-
-#[derive(Copy, Clone, Debug)]
-pub enum LookupResult {
-    Exact(MovePathIndex),
-    Parent(Option<MovePathIndex>),
-}
-
-impl<'tcx> MovePathLookup<'tcx> {
-    // Unlike the builder `fn move_path_for` below, this lookup
-    // alternative will *not* create a MovePath on the fly for an
-    // unknown place, but will rather return the nearest available
-    // parent.
-    pub fn find(&self, place: PlaceRef<'tcx>) -> LookupResult {
-        let Some(mut result) = self.find_local(place.local) else {
-            return LookupResult::Parent(None);
-        };
-
-        for (_, elem) in self.un_derefer.iter_projections(place) {
-            if let Some(&subpath) = self.projections.get(&(result, elem.kind())) {
-                result = subpath;
-            } else {
-                return LookupResult::Parent(Some(result));
-            }
-        }
-
-        LookupResult::Exact(result)
-    }
-
-    #[inline]
-    pub fn find_local(&self, local: Local) -> Option<MovePathIndex> {
-        self.locals[local]
-    }
-
-    /// An enumerated iterator of `local`s and their associated
-    /// `MovePathIndex`es.
-    pub fn iter_locals_enumerated(
-        &self,
-    ) -> impl DoubleEndedIterator<Item = (Local, MovePathIndex)> {
-        self.locals.iter_enumerated().filter_map(|(l, &idx)| Some((l, idx?)))
-    }
-}
-
-impl<'tcx> MoveData<'tcx> {
-    pub fn gather_moves(
-        body: &Body<'tcx>,
-        tcx: TyCtxt<'tcx>,
-        filter: impl Fn(Ty<'tcx>) -> bool,
-    ) -> MoveData<'tcx> {
-        builder::gather_moves(body, tcx, filter)
-    }
-
-    /// For the move path `mpi`, returns the root local variable that starts the path.
-    /// (e.g., for a path like `a.b.c` returns `a`)
-    pub fn base_local(&self, mut mpi: MovePathIndex) -> Local {
-        loop {
-            let path = &self.move_paths[mpi];
-            if let Some(l) = path.place.as_local() {
-                return l;
-            }
-            mpi = path.parent.expect("root move paths should be locals");
-        }
-    }
-
-    pub fn find_in_move_path_or_its_descendants(
-        &self,
-        root: MovePathIndex,
-        pred: impl Fn(MovePathIndex) -> bool,
-    ) -> Option<MovePathIndex> {
-        if pred(root) {
-            return Some(root);
-        }
-
-        self.move_paths[root].find_descendant(&self.move_paths, pred)
-    }
-}
+/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_USE_0001
+/* FP:mod.rs-0002 */ use std :: fmt ;
+/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_USE_0002
+/* FP:mod.rs-0004 */ use std :: ops :: { Index , IndexMut } ;
+/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_USE_0003
+/* FP:mod.rs-0006 */ use crate :: rustc_data_structures :: fx :: FxHashMap ;
+/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_USE_0004
+/* FP:mod.rs-0008 */ use crate :: rustc_index :: { IndexSlice , IndexVec } ;
+/* FP:mod.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_USE_0005
+/* FP:mod.rs-0010 */ use crate :: rustc_complete :: mir :: * ;
+/* FP:mod.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_USE_0006
+/* FP:mod.rs-0012 */ use crate :: rustc_complete :: ty :: { Ty , TyCtxt } ;
+/* FP:mod.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_USE_0007
+/* FP:mod.rs-0014 */ use crate :: rustc_complete :: Span ;
+/* FP:mod.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_USE_0008
+/* FP:mod.rs-0016 */ use smallvec :: SmallVec ;
+/* FP:mod.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_USE_0009
+/* FP:mod.rs-0018 */ use crate :: un_derefer :: UnDerefer ;
+/* FP:mod.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_MACRO_0010
+/* FP:mod.rs-0020 */ crate :: rustc_index :: newtype_index ! { # [orderable] # [debug_format = "mp{}"] pub struct MovePathIndex { } }
+/* FP:mod.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_IMPL_0011
+/* FP:mod.rs-0022 */ impl polonius_engine :: Atom for MovePathIndex { fn index (self) -> usize { crate :: rustc_index :: Idx :: index (self) } }
+/* FP:mod.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_MACRO_0012
+/* FP:mod.rs-0024 */ crate :: rustc_index :: newtype_index ! { # [orderable] # [debug_format = "mo{}"] pub struct MoveOutIndex { } }
+/* FP:mod.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_MACRO_0013
+/* FP:mod.rs-0026 */ crate :: rustc_index :: newtype_index ! { # [debug_format = "in{}"] pub struct InitIndex { } }
+/* FP:mod.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_IMPL_0014
+/* FP:mod.rs-0028 */ impl MoveOutIndex { pub fn move_path_index (self , move_data : & MoveData < '_ >) -> MovePathIndex { move_data . moves [self] . path } }
+/* FP:mod.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_STRUCT_0015
+/* FP:mod.rs-0030 */ # [doc = " `MovePath` is a canonicalized representation of a path that is"] # [doc = " moved or assigned to."] # [doc = ""] # [doc = " It follows a tree structure."] # [doc = ""] # [doc = " Given `struct X { m: M, n: N }` and `x: X`, moves like `drop x.m;`"] # [doc = " move *out* of the place `x.m`."] # [doc = ""] # [doc = " The MovePaths representing `x.m` and `x.n` are siblings (that is,"] # [doc = " one of them will link to the other via the `next_sibling` field,"] # [doc = " and the other will have no entry in its `next_sibling` field), and"] # [doc = " they both have the MovePath representing `x` as their parent."] # [derive (Clone)] pub struct MovePath < 'tcx > { pub next_sibling : Option < MovePathIndex > , pub first_child : Option < MovePathIndex > , pub parent : Option < MovePathIndex > , pub place : Place < 'tcx > , }
+/* FP:mod.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_IMPL_0016
+/* FP:mod.rs-0032 */ impl < 'tcx > MovePath < 'tcx > { # [doc = " Returns an iterator over the parents of `self`."] pub fn parents < 'a > (& self , move_paths : & 'a IndexSlice < MovePathIndex , MovePath < 'tcx > > ,) -> impl 'a + Iterator < Item = (MovePathIndex , & 'a MovePath < 'tcx >) > { let first = self . parent . map (| mpi | (mpi , & move_paths [mpi])) ; MovePathLinearIter { next : first , fetch_next : move | _ , parent : & MovePath < '_ > | { parent . parent . map (| mpi | (mpi , & move_paths [mpi])) } , } } # [doc = " Returns an iterator over the immediate children of `self`."] pub fn children < 'a > (& self , move_paths : & 'a IndexSlice < MovePathIndex , MovePath < 'tcx > > ,) -> impl 'a + Iterator < Item = (MovePathIndex , & 'a MovePath < 'tcx >) > { let first = self . first_child . map (| mpi | (mpi , & move_paths [mpi])) ; MovePathLinearIter { next : first , fetch_next : move | _ , child : & MovePath < '_ > | { child . next_sibling . map (| mpi | (mpi , & move_paths [mpi])) } , } } # [doc = " Finds the closest descendant of `self` for which `f` returns `true` using a breadth-first"] # [doc = " search."] # [doc = ""] # [doc = " `f` will **not** be called on `self`."] pub fn find_descendant (& self , move_paths : & IndexSlice < MovePathIndex , MovePath < '_ > > , f : impl Fn (MovePathIndex) -> bool ,) -> Option < MovePathIndex > { let mut todo = if let Some (child) = self . first_child { vec ! [child] } else { return None ; } ; while let Some (mpi) = todo . pop () { if f (mpi) { return Some (mpi) ; } let move_path = & move_paths [mpi] ; if let Some (child) = move_path . first_child { todo . push (child) ; } if let Some (sibling) = move_path . next_sibling { todo . push (sibling) ; } } None } }
+/* FP:mod.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_IMPL_0017
+/* FP:mod.rs-0034 */ impl < 'tcx > fmt :: Debug for MovePath < 'tcx > { fn fmt (& self , w : & mut fmt :: Formatter < '_ >) -> fmt :: Result { write ! (w , "MovePath {{") ? ; if let Some (parent) = self . parent { write ! (w , " parent: {parent:?},") ? ; } if let Some (first_child) = self . first_child { write ! (w , " first_child: {first_child:?},") ? ; } if let Some (next_sibling) = self . next_sibling { write ! (w , " next_sibling: {next_sibling:?}") ? ; } write ! (w , " place: {:?} }}" , self . place) } }
+/* FP:mod.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_IMPL_0018
+/* FP:mod.rs-0036 */ impl < 'tcx > fmt :: Display for MovePath < 'tcx > { fn fmt (& self , w : & mut fmt :: Formatter < '_ >) -> fmt :: Result { write ! (w , "{:?}" , self . place) } }
+/* FP:mod.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_STRUCT_0019
+/* FP:mod.rs-0038 */ struct MovePathLinearIter < 'a , 'tcx , F > { next : Option < (MovePathIndex , & 'a MovePath < 'tcx >) > , fetch_next : F , }
+/* FP:mod.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_IMPL_0020
+/* FP:mod.rs-0040 */ impl < 'a , 'tcx , F > Iterator for MovePathLinearIter < 'a , 'tcx , F > where F : FnMut (MovePathIndex , & 'a MovePath < 'tcx >) -> Option < (MovePathIndex , & 'a MovePath < 'tcx >) > , { type Item = (MovePathIndex , & 'a MovePath < 'tcx >) ; fn next (& mut self) -> Option < Self :: Item > { let ret = self . next . take () ? ; self . next = (self . fetch_next) (ret . 0 , ret . 1) ; Some (ret) } }
+/* FP:mod.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_STRUCT_0021
+/* FP:mod.rs-0042 */ # [derive (Debug)] pub struct MoveData < 'tcx > { pub move_paths : IndexVec < MovePathIndex , MovePath < 'tcx > > , pub moves : IndexVec < MoveOutIndex , MoveOut > , # [doc = " Each Location `l` is mapped to the MoveOut's that are effects"] # [doc = " of executing the code at `l`. (There can be multiple MoveOut's"] # [doc = " for a given `l` because each MoveOut is associated with one"] # [doc = " particular path being moved.)"] pub loc_map : LocationMap < SmallVec < [MoveOutIndex ; 4] > > , pub path_map : IndexVec < MovePathIndex , SmallVec < [MoveOutIndex ; 4] > > , pub rev_lookup : MovePathLookup < 'tcx > , pub inits : IndexVec < InitIndex , Init > , # [doc = " Each Location `l` is mapped to the Inits that are effects"] # [doc = " of executing the code at `l`."] pub init_loc_map : LocationMap < SmallVec < [InitIndex ; 4] > > , pub init_path_map : IndexVec < MovePathIndex , SmallVec < [InitIndex ; 4] > > , }
+/* FP:mod.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_TRAIT_0022
+/* FP:mod.rs-0044 */ pub trait HasMoveData < 'tcx > { fn move_data (& self) -> & MoveData < 'tcx > ; }
+/* FP:mod.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_STRUCT_0023
+/* FP:mod.rs-0046 */ # [derive (Debug)] pub struct LocationMap < T > { # [doc = " Location-indexed (BasicBlock for outer index, index within BB"] # [doc = " for inner index) map."] pub (crate) map : IndexVec < BasicBlock , Vec < T > > , }
+/* FP:mod.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_IMPL_0024
+/* FP:mod.rs-0048 */ impl < T > Index < Location > for LocationMap < T > { type Output = T ; fn index (& self , index : Location) -> & Self :: Output { & self . map [index . block] [index . statement_index] } }
+/* FP:mod.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_IMPL_0025
+/* FP:mod.rs-0050 */ impl < T > IndexMut < Location > for LocationMap < T > { fn index_mut (& mut self , index : Location) -> & mut Self :: Output { & mut self . map [index . block] [index . statement_index] } }
+/* FP:mod.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_IMPL_0026
+/* FP:mod.rs-0052 */ impl < T > LocationMap < T > where T : Default + Clone , { fn new (body : & Body < '_ >) -> Self { LocationMap { map : body . basic_blocks . iter () . map (| block | vec ! [T :: default () ; block . statements . len () + 1]) . collect () , } } }
+/* FP:mod.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_STRUCT_0027
+/* FP:mod.rs-0054 */ # [doc = " `MoveOut` represents a point in a program that moves out of some"] # [doc = " L-value; i.e., \"creates\" uninitialized memory."] # [doc = ""] # [doc = " With respect to dataflow analysis:"] # [doc = " - Generated by moves and declaration of uninitialized variables."] # [doc = " - Killed by assignments to the memory."] # [derive (Copy , Clone)] pub struct MoveOut { # [doc = " path being moved"] pub path : MovePathIndex , # [doc = " location of move"] pub source : Location , }
+/* FP:mod.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_IMPL_0028
+/* FP:mod.rs-0056 */ impl fmt :: Debug for MoveOut { fn fmt (& self , fmt : & mut fmt :: Formatter < '_ >) -> fmt :: Result { write ! (fmt , "{:?}@{:?}" , self . path , self . source) } }
+/* FP:mod.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_STRUCT_0029
+/* FP:mod.rs-0058 */ # [doc = " `Init` represents a point in a program that initializes some L-value;"] # [derive (Copy , Clone)] pub struct Init { # [doc = " path being initialized"] pub path : MovePathIndex , # [doc = " location of initialization"] pub location : InitLocation , # [doc = " Extra information about this initialization"] pub kind : InitKind , }
+/* FP:mod.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_ENUM_0030
+/* FP:mod.rs-0060 */ # [doc = " Initializations can be from an argument or from a statement. Arguments"] # [doc = " do not have locations, in those cases the `Local` is kept.."] # [derive (Copy , Clone , Debug , PartialEq , Eq)] pub enum InitLocation { Argument (Local) , Statement (Location) , }
+/* FP:mod.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_ENUM_0031
+/* FP:mod.rs-0062 */ # [doc = " Additional information about the initialization."] # [derive (Copy , Clone , Debug , PartialEq , Eq)] pub enum InitKind { # [doc = " Deep init, even on panic"] Deep , # [doc = " Only does a shallow init"] Shallow , # [doc = " This doesn't initialize the variable on panic (and a panic is possible)."] NonPanicPathOnly , }
+/* FP:mod.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_IMPL_0032
+/* FP:mod.rs-0064 */ impl fmt :: Debug for Init { fn fmt (& self , fmt : & mut fmt :: Formatter < '_ >) -> fmt :: Result { write ! (fmt , "{:?}@{:?} ({:?})" , self . path , self . location , self . kind) } }
+/* FP:mod.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_IMPL_0033
+/* FP:mod.rs-0066 */ impl Init { pub fn span < 'tcx > (& self , body : & Body < 'tcx >) -> Span { match self . location { InitLocation :: Argument (local) => body . local_decls [local] . source_info . span , InitLocation :: Statement (location) => body . source_info (location) . span , } } }
+/* FP:mod.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_STRUCT_0034
+/* FP:mod.rs-0068 */ # [doc = " Tables mapping from a place to its MovePathIndex."] # [derive (Debug)] pub struct MovePathLookup < 'tcx > { locals : IndexVec < Local , Option < MovePathIndex > > , # [doc = " projections are made from a base-place and a projection"] # [doc = " elem. The base-place will have a unique MovePathIndex; we use"] # [doc = " the latter as the index into the outer vector (narrowing"] # [doc = " subsequent search so that it is solely relative to that"] # [doc = " base-place). For the remaining lookup, we map the projection"] # [doc = " elem to the associated MovePathIndex."] projections : FxHashMap < (MovePathIndex , ProjectionKind) , MovePathIndex > , un_derefer : UnDerefer < 'tcx > , }
+/* FP:mod.rs-0069 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_MOD_0035
+/* FP:mod.rs-0071 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_ENUM_0036
+/* FP:mod.rs-0072 */ # [derive (Copy , Clone , Debug)] pub enum LookupResult { Exact (MovePathIndex) , Parent (Option < MovePathIndex >) , }
+/* FP:mod.rs-0073 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_IMPL_0037
+/* FP:mod.rs-0074 */ impl < 'tcx > MovePathLookup < 'tcx > { pub fn find (& self , place : PlaceRef < 'tcx >) -> LookupResult { let Some (mut result) = self . find_local (place . local) else { return LookupResult :: Parent (None) ; } ; for (_ , elem) in self . un_derefer . iter_projections (place) { if let Some (& subpath) = self . projections . get (& (result , elem . kind ())) { result = subpath ; } else { return LookupResult :: Parent (Some (result)) ; } } LookupResult :: Exact (result) } # [inline] pub fn find_local (& self , local : Local) -> Option < MovePathIndex > { self . locals [local] } # [doc = " An enumerated iterator of `local`s and their associated"] # [doc = " `MovePathIndex`es."] pub fn iter_locals_enumerated (& self ,) -> impl DoubleEndedIterator < Item = (Local , MovePathIndex) > { self . locals . iter_enumerated () . filter_map (| (l , & idx) | Some ((l , idx ?))) } }
+/* FP:mod.rs-0075 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_move_paths_mod_IMPL_0038
+/* FP:mod.rs-0076 */ impl < 'tcx > MoveData < 'tcx > { pub fn gather_moves (body : & Body < 'tcx > , tcx : TyCtxt < 'tcx > , filter : impl Fn (Ty < 'tcx >) -> bool ,) -> MoveData < 'tcx > { builder :: gather_moves (body , tcx , filter) } # [doc = " For the move path `mpi`, returns the root local variable that starts the path."] # [doc = " (e.g., for a path like `a.b.c` returns `a`)"] pub fn base_local (& self , mut mpi : MovePathIndex) -> Local { loop { let path = & self . move_paths [mpi] ; if let Some (l) = path . place . as_local () { return l ; } mpi = path . parent . expect ("root move paths should be locals") ; } } pub fn find_in_move_path_or_its_descendants (& self , root : MovePathIndex , pred : impl Fn (MovePathIndex) -> bool ,) -> Option < MovePathIndex > { if pred (root) { return Some (root) ; } self . move_paths [root] . find_descendant (& self . move_paths , pred) } }

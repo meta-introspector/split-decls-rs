@@ -1,218 +1,38 @@
-use std::ops::ControlFlow;
-
-use crate::rustc_infer::infer::TypeOutlivesConstraint;
-use crate::rustc_infer::infer::canonical::CanonicalQueryInput;
-use crate::rustc_infer::traits::query::OutlivesBound;
-use crate::rustc_infer::traits::query::type_op::ImpliedOutlivesBounds;
-use crate::rustc_complete::infer::canonical::CanonicalQueryResponse;
-use crate::rustc_complete::traits::ObligationCause;
-use crate::rustc_complete::ty::outlives::{Component, push_outlives_components};
-use crate::rustc_complete::ty::{self, ParamEnvAnd, Ty, TyCtxt, TypeVisitable, TypeVisitor};
-use crate::rustc_complete::def_id::CRATE_DEF_ID;
-use crate::rustc_complete::{DUMMY_SP, Span, sym};
-use smallvec::{SmallVec, smallvec};
-
-use crate::traits::query::NoSolution;
-use crate::traits::{ObligationCtxt, wf};
-
-impl<'tcx> super::QueryTypeOp<'tcx> for ImpliedOutlivesBounds<'tcx> {
-    type QueryResponse = Vec<OutlivesBound<'tcx>>;
-
-    fn try_fast_path(
-        _tcx: TyCtxt<'tcx>,
-        key: &ParamEnvAnd<'tcx, Self>,
-    ) -> Option<Self::QueryResponse> {
-        // Don't go into the query for things that can't possibly have lifetimes.
-        match key.value.ty.kind() {
-            ty::Tuple(elems) if elems.is_empty() => Some(vec![]),
-            ty::Never | ty::Str | ty::Bool | ty::Char | ty::Int(_) | ty::Uint(_) | ty::Float(_) => {
-                Some(vec![])
-            }
-            _ => None,
-        }
-    }
-
-    fn perform_query(
-        tcx: TyCtxt<'tcx>,
-        canonicalized: CanonicalQueryInput<'tcx, ParamEnvAnd<'tcx, Self>>,
-    ) -> Result<CanonicalQueryResponse<'tcx, Self::QueryResponse>, NoSolution> {
-        tcx.implied_outlives_bounds((canonicalized, false))
-    }
-
-    fn perform_locally_with_next_solver(
-        ocx: &ObligationCtxt<'_, 'tcx>,
-        key: ParamEnvAnd<'tcx, Self>,
-        span: Span,
-    ) -> Result<Self::QueryResponse, NoSolution> {
-        compute_implied_outlives_bounds_inner(ocx, key.param_env, key.value.ty, span, false)
-    }
-}
-
-pub fn compute_implied_outlives_bounds_inner<'tcx>(
-    ocx: &ObligationCtxt<'_, 'tcx>,
-    param_env: ty::ParamEnv<'tcx>,
-    ty: Ty<'tcx>,
-    span: Span,
-    disable_implied_bounds_hack: bool,
-) -> Result<Vec<OutlivesBound<'tcx>>, NoSolution> {
-    let normalize_ty = |ty| -> Result<_, NoSolution> {
-        // We must normalize the type so we can compute the right outlives components.
-        // for example, if we have some constrained param type like `T: Trait<Out = U>`,
-        // and we know that `&'a T::Out` is WF, then we want to imply `U: 'a`.
-        let ty = ocx
-            .deeply_normalize(&ObligationCause::dummy_with_span(span), param_env, ty)
-            .map_err(|_| NoSolution)?;
-        Ok(ty)
-    };
-
-    // Sometimes when we ask what it takes for T: WF, we get back that
-    // U: WF is required; in that case, we push U onto this stack and
-    // process it next. Because the resulting predicates aren't always
-    // guaranteed to be a subset of the original type, so we need to store the
-    // WF args we've computed in a set.
-    let mut checked_wf_args = crate::rustc_data_structures::fx::FxHashSet::default();
-    let mut wf_args = vec![ty.into(), normalize_ty(ty)?.into()];
-
-    let mut outlives_bounds: Vec<OutlivesBound<'tcx>> = vec![];
-
-    while let Some(arg) = wf_args.pop() {
-        if !checked_wf_args.insert(arg) {
-            continue;
-        }
-
-        // From the full set of obligations, just filter down to the region relationships.
-        for obligation in
-            wf::unnormalized_obligations(ocx.infcx, param_env, arg, DUMMY_SP, CRATE_DEF_ID)
-                .into_iter()
-                .flatten()
-        {
-            let pred = ocx
-                .deeply_normalize(
-                    &ObligationCause::dummy_with_span(span),
-                    param_env,
-                    obligation.predicate,
-                )
-                .map_err(|_| NoSolution)?;
-            let Some(pred) = pred.kind().no_bound_vars() else {
-                continue;
-            };
-            match pred {
-                // FIXME(const_generics): Make sure that `<'a, 'b, const N: &'a &'b u32>` is sound
-                // if we ever support that
-                ty::PredicateKind::Clause(ty::ClauseKind::Trait(..))
-                | ty::PredicateKind::Clause(ty::ClauseKind::HostEffect(..))
-                | ty::PredicateKind::Clause(ty::ClauseKind::ConstArgHasType(..))
-                | ty::PredicateKind::Subtype(..)
-                | ty::PredicateKind::Coerce(..)
-                | ty::PredicateKind::Clause(ty::ClauseKind::Projection(..))
-                | ty::PredicateKind::DynCompatible(..)
-                | ty::PredicateKind::Clause(ty::ClauseKind::ConstEvaluatable(..))
-                | ty::PredicateKind::ConstEquate(..)
-                | ty::PredicateKind::Ambiguous
-                | ty::PredicateKind::NormalizesTo(..)
-                | ty::PredicateKind::Clause(ty::ClauseKind::UnstableFeature(_))
-                | ty::PredicateKind::AliasRelate(..) => {}
-
-                // We need to search through *all* WellFormed predicates
-                ty::PredicateKind::Clause(ty::ClauseKind::WellFormed(term)) => {
-                    wf_args.push(term);
-                }
-
-                // We need to register region relationships
-                ty::PredicateKind::Clause(ty::ClauseKind::RegionOutlives(
-                    ty::OutlivesPredicate(r_a, r_b),
-                )) => outlives_bounds.push(OutlivesBound::RegionSubRegion(r_b, r_a)),
-
-                ty::PredicateKind::Clause(ty::ClauseKind::TypeOutlives(ty::OutlivesPredicate(
-                    ty_a,
-                    r_b,
-                ))) => {
-                    let mut components = smallvec![];
-                    push_outlives_components(ocx.infcx.tcx, ty_a, &mut components);
-                    outlives_bounds.extend(implied_bounds_from_components(r_b, components))
-                }
-            }
-        }
-    }
-
-    // If we detect `bevy_ecs::*::ParamSet` in the WF args list (and `disable_implied_bounds_hack`
-    // or `-Zno-implied-bounds-compat` are not set), then use the registered outlives obligations
-    // as implied bounds.
-    if !disable_implied_bounds_hack
-        && !ocx.infcx.tcx.sess.opts.unstable_opts.no_implied_bounds_compat
-        && ty.visit_with(&mut ContainsBevyParamSet { tcx: ocx.infcx.tcx }).is_break()
-    {
-        for TypeOutlivesConstraint { sup_type, sub_region, .. } in
-            ocx.infcx.take_registered_region_obligations()
-        {
-            let mut components = smallvec![];
-            push_outlives_components(ocx.infcx.tcx, sup_type, &mut components);
-            outlives_bounds.extend(implied_bounds_from_components(sub_region, components));
-        }
-    }
-
-    Ok(outlives_bounds)
-}
-
-struct ContainsBevyParamSet<'tcx> {
-    tcx: TyCtxt<'tcx>,
-}
-
-impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for ContainsBevyParamSet<'tcx> {
-    type Result = ControlFlow<()>;
-
-    fn visit_ty(&mut self, t: Ty<'tcx>) -> Self::Result {
-        // We only care to match `ParamSet<T>` or `&ParamSet<T>`.
-        match t.kind() {
-            ty::Adt(def, _) => {
-                if self.tcx.item_name(def.did()) == sym::ParamSet
-                    && self.tcx.crate_name(def.did().krate) == sym::bevy_ecs
-                {
-                    return ControlFlow::Break(());
-                }
-            }
-            ty::Ref(_, ty, _) => ty.visit_with(self)?,
-            _ => {}
-        }
-
-        ControlFlow::Continue(())
-    }
-}
-
-/// When we have an implied bound that `T: 'a`, we can further break
-/// this down to determine what relationships would have to hold for
-/// `T: 'a` to hold. We get to assume that the caller has validated
-/// those relationships.
-fn implied_bounds_from_components<'tcx>(
-    sub_region: ty::Region<'tcx>,
-    sup_components: SmallVec<[Component<TyCtxt<'tcx>>; 4]>,
-) -> Vec<OutlivesBound<'tcx>> {
-    sup_components
-        .into_iter()
-        .filter_map(|component| {
-            match component {
-                Component::Region(r) => Some(OutlivesBound::RegionSubRegion(sub_region, r)),
-                Component::Param(p) => Some(OutlivesBound::RegionSubParam(sub_region, p)),
-                Component::Alias(p) => Some(OutlivesBound::RegionSubAlias(sub_region, p)),
-                Component::Placeholder(_p) => {
-                    // FIXME(non_lifetime_binders): Placeholders don't currently
-                    // imply anything for outlives, though they could easily.
-                    None
-                }
-                Component::EscapingAlias(_) =>
-                // If the projection has escaping regions, don't
-                // try to infer any implied bounds even for its
-                // free components. This is conservative, because
-                // the caller will still have to prove that those
-                // free components outlive `sub_region`. But the
-                // idea is that the WAY that the caller proves
-                // that may change in the future and we want to
-                // give ourselves room to get smarter here.
-                {
-                    None
-                }
-                Component::UnresolvedInferenceVariable(..) => None,
-            }
-        })
-        .collect()
-}
+/* FP:implied_outlives_bounds.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_USE_0001
+/* FP:implied_outlives_bounds.rs-0002 */ use std :: ops :: ControlFlow ;
+/* FP:implied_outlives_bounds.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_USE_0002
+/* FP:implied_outlives_bounds.rs-0004 */ use crate :: rustc_infer :: infer :: TypeOutlivesConstraint ;
+/* FP:implied_outlives_bounds.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_USE_0003
+/* FP:implied_outlives_bounds.rs-0006 */ use crate :: rustc_infer :: infer :: canonical :: CanonicalQueryInput ;
+/* FP:implied_outlives_bounds.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_USE_0004
+/* FP:implied_outlives_bounds.rs-0008 */ use crate :: rustc_infer :: traits :: query :: OutlivesBound ;
+/* FP:implied_outlives_bounds.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_USE_0005
+/* FP:implied_outlives_bounds.rs-0010 */ use crate :: rustc_infer :: traits :: query :: type_op :: ImpliedOutlivesBounds ;
+/* FP:implied_outlives_bounds.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_USE_0006
+/* FP:implied_outlives_bounds.rs-0012 */ use crate :: rustc_complete :: infer :: canonical :: CanonicalQueryResponse ;
+/* FP:implied_outlives_bounds.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_USE_0007
+/* FP:implied_outlives_bounds.rs-0014 */ use crate :: rustc_complete :: traits :: ObligationCause ;
+/* FP:implied_outlives_bounds.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_USE_0008
+/* FP:implied_outlives_bounds.rs-0016 */ use crate :: rustc_complete :: ty :: outlives :: { Component , push_outlives_components } ;
+/* FP:implied_outlives_bounds.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_USE_0009
+/* FP:implied_outlives_bounds.rs-0018 */ use crate :: rustc_complete :: ty :: { self , ParamEnvAnd , Ty , TyCtxt , TypeVisitable , TypeVisitor } ;
+/* FP:implied_outlives_bounds.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_USE_0010
+/* FP:implied_outlives_bounds.rs-0020 */ use crate :: rustc_complete :: def_id :: CRATE_DEF_ID ;
+/* FP:implied_outlives_bounds.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_USE_0011
+/* FP:implied_outlives_bounds.rs-0022 */ use crate :: rustc_complete :: { DUMMY_SP , Span , sym } ;
+/* FP:implied_outlives_bounds.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_USE_0012
+/* FP:implied_outlives_bounds.rs-0024 */ use smallvec :: { SmallVec , smallvec } ;
+/* FP:implied_outlives_bounds.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_USE_0013
+/* FP:implied_outlives_bounds.rs-0026 */ use crate :: traits :: query :: NoSolution ;
+/* FP:implied_outlives_bounds.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_USE_0014
+/* FP:implied_outlives_bounds.rs-0028 */ use crate :: traits :: { ObligationCtxt , wf } ;
+/* FP:implied_outlives_bounds.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_IMPL_0015
+/* FP:implied_outlives_bounds.rs-0030 */ impl < 'tcx > super :: QueryTypeOp < 'tcx > for ImpliedOutlivesBounds < 'tcx > { type QueryResponse = Vec < OutlivesBound < 'tcx > > ; fn try_fast_path (_tcx : TyCtxt < 'tcx > , key : & ParamEnvAnd < 'tcx , Self > ,) -> Option < Self :: QueryResponse > { match key . value . ty . kind () { ty :: Tuple (elems) if elems . is_empty () => Some (vec ! []) , ty :: Never | ty :: Str | ty :: Bool | ty :: Char | ty :: Int (_) | ty :: Uint (_) | ty :: Float (_) => { Some (vec ! []) } _ => None , } } fn perform_query (tcx : TyCtxt < 'tcx > , canonicalized : CanonicalQueryInput < 'tcx , ParamEnvAnd < 'tcx , Self > > ,) -> Result < CanonicalQueryResponse < 'tcx , Self :: QueryResponse > , NoSolution > { tcx . implied_outlives_bounds ((canonicalized , false)) } fn perform_locally_with_next_solver (ocx : & ObligationCtxt < '_ , 'tcx > , key : ParamEnvAnd < 'tcx , Self > , span : Span ,) -> Result < Self :: QueryResponse , NoSolution > { compute_implied_outlives_bounds_inner (ocx , key . param_env , key . value . ty , span , false) } }
+/* FP:implied_outlives_bounds.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_FN_0016
+/* FP:implied_outlives_bounds.rs-0032 */ pub fn compute_implied_outlives_bounds_inner < 'tcx > (ocx : & ObligationCtxt < '_ , 'tcx > , param_env : ty :: ParamEnv < 'tcx > , ty : Ty < 'tcx > , span : Span , disable_implied_bounds_hack : bool ,) -> Result < Vec < OutlivesBound < 'tcx > > , NoSolution > { let normalize_ty = | ty | -> Result < _ , NoSolution > { let ty = ocx . deeply_normalize (& ObligationCause :: dummy_with_span (span) , param_env , ty) . map_err (| _ | NoSolution) ? ; Ok (ty) } ; let mut checked_wf_args = crate :: rustc_data_structures :: fx :: FxHashSet :: default () ; let mut wf_args = vec ! [ty . into () , normalize_ty (ty) ?. into ()] ; let mut outlives_bounds : Vec < OutlivesBound < 'tcx > > = vec ! [] ; while let Some (arg) = wf_args . pop () { if ! checked_wf_args . insert (arg) { continue ; } for obligation in wf :: unnormalized_obligations (ocx . infcx , param_env , arg , DUMMY_SP , CRATE_DEF_ID) . into_iter () . flatten () { let pred = ocx . deeply_normalize (& ObligationCause :: dummy_with_span (span) , param_env , obligation . predicate ,) . map_err (| _ | NoSolution) ? ; let Some (pred) = pred . kind () . no_bound_vars () else { continue ; } ; match pred { ty :: PredicateKind :: Clause (ty :: ClauseKind :: Trait (..)) | ty :: PredicateKind :: Clause (ty :: ClauseKind :: HostEffect (..)) | ty :: PredicateKind :: Clause (ty :: ClauseKind :: ConstArgHasType (..)) | ty :: PredicateKind :: Subtype (..) | ty :: PredicateKind :: Coerce (..) | ty :: PredicateKind :: Clause (ty :: ClauseKind :: Projection (..)) | ty :: PredicateKind :: DynCompatible (..) | ty :: PredicateKind :: Clause (ty :: ClauseKind :: ConstEvaluatable (..)) | ty :: PredicateKind :: ConstEquate (..) | ty :: PredicateKind :: Ambiguous | ty :: PredicateKind :: NormalizesTo (..) | ty :: PredicateKind :: Clause (ty :: ClauseKind :: UnstableFeature (_)) | ty :: PredicateKind :: AliasRelate (..) => { } ty :: PredicateKind :: Clause (ty :: ClauseKind :: WellFormed (term)) => { wf_args . push (term) ; } ty :: PredicateKind :: Clause (ty :: ClauseKind :: RegionOutlives (ty :: OutlivesPredicate (r_a , r_b) ,)) => outlives_bounds . push (OutlivesBound :: RegionSubRegion (r_b , r_a)) , ty :: PredicateKind :: Clause (ty :: ClauseKind :: TypeOutlives (ty :: OutlivesPredicate (ty_a , r_b ,))) => { let mut components = smallvec ! [] ; push_outlives_components (ocx . infcx . tcx , ty_a , & mut components) ; outlives_bounds . extend (implied_bounds_from_components (r_b , components)) } } } } if ! disable_implied_bounds_hack && ! ocx . infcx . tcx . sess . opts . unstable_opts . no_implied_bounds_compat && ty . visit_with (& mut ContainsBevyParamSet { tcx : ocx . infcx . tcx }) . is_break () { for TypeOutlivesConstraint { sup_type , sub_region , .. } in ocx . infcx . take_registered_region_obligations () { let mut components = smallvec ! [] ; push_outlives_components (ocx . infcx . tcx , sup_type , & mut components) ; outlives_bounds . extend (implied_bounds_from_components (sub_region , components)) ; } } Ok (outlives_bounds) }
+/* FP:implied_outlives_bounds.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_STRUCT_0017
+/* FP:implied_outlives_bounds.rs-0034 */ struct ContainsBevyParamSet < 'tcx > { tcx : TyCtxt < 'tcx > , }
+/* FP:implied_outlives_bounds.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_IMPL_0018
+/* FP:implied_outlives_bounds.rs-0036 */ impl < 'tcx > TypeVisitor < TyCtxt < 'tcx > > for ContainsBevyParamSet < 'tcx > { type Result = ControlFlow < () > ; fn visit_ty (& mut self , t : Ty < 'tcx >) -> Self :: Result { match t . kind () { ty :: Adt (def , _) => { if self . tcx . item_name (def . did ()) == sym :: ParamSet && self . tcx . crate_name (def . did () . krate) == sym :: bevy_ecs { return ControlFlow :: Break (()) ; } } ty :: Ref (_ , ty , _) => ty . visit_with (self) ? , _ => { } } ControlFlow :: Continue (()) } }
+/* FP:implied_outlives_bounds.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_type_op_implied_outlives_bounds_FN_0019
+/* FP:implied_outlives_bounds.rs-0038 */ # [doc = " When we have an implied bound that `T: 'a`, we can further break"] # [doc = " this down to determine what relationships would have to hold for"] # [doc = " `T: 'a` to hold. We get to assume that the caller has validated"] # [doc = " those relationships."] fn implied_bounds_from_components < 'tcx > (sub_region : ty :: Region < 'tcx > , sup_components : SmallVec < [Component < TyCtxt < 'tcx > > ; 4] > ,) -> Vec < OutlivesBound < 'tcx > > { sup_components . into_iter () . filter_map (| component | { match component { Component :: Region (r) => Some (OutlivesBound :: RegionSubRegion (sub_region , r)) , Component :: Param (p) => Some (OutlivesBound :: RegionSubParam (sub_region , p)) , Component :: Alias (p) => Some (OutlivesBound :: RegionSubAlias (sub_region , p)) , Component :: Placeholder (_p) => { None } Component :: EscapingAlias (_) => { None } Component :: UnresolvedInferenceVariable (..) => None , } }) . collect () }

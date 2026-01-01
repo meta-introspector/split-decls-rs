@@ -1,65 +1,12 @@
-use crate::rustc_data_structures::fx::FxIndexMap;
-use crate::rustc_complete::def_id::DefId;
-use crate::rustc_complete::ty::{self, OutlivesPredicate, TyCtxt};
-
-use super::utils::*;
-
-#[derive(Debug)]
-pub(crate) struct ExplicitPredicatesMap<'tcx> {
-    map: FxIndexMap<DefId, ty::EarlyBinder<'tcx, RequiredPredicates<'tcx>>>,
-}
-
-impl<'tcx> ExplicitPredicatesMap<'tcx> {
-    pub(crate) fn new() -> ExplicitPredicatesMap<'tcx> {
-        ExplicitPredicatesMap { map: FxIndexMap::default() }
-    }
-
-    pub(crate) fn explicit_predicates_of(
-        &mut self,
-        tcx: TyCtxt<'tcx>,
-        def_id: DefId,
-    ) -> &ty::EarlyBinder<'tcx, RequiredPredicates<'tcx>> {
-        self.map.entry(def_id).or_insert_with(|| {
-            let predicates = if def_id.is_local() {
-                tcx.explicit_predicates_of(def_id)
-            } else {
-                tcx.predicates_of(def_id)
-            };
-            let mut required_predicates = RequiredPredicates::default();
-
-            // process predicates and convert to `RequiredPredicates` entry, see below
-            for &(predicate, span) in predicates.predicates {
-                match predicate.kind().skip_binder() {
-                    ty::ClauseKind::TypeOutlives(OutlivesPredicate(ty, reg)) => {
-                        insert_outlives_predicate(
-                            tcx,
-                            ty.into(),
-                            reg,
-                            span,
-                            &mut required_predicates,
-                        )
-                    }
-
-                    ty::ClauseKind::RegionOutlives(OutlivesPredicate(reg1, reg2)) => {
-                        insert_outlives_predicate(
-                            tcx,
-                            reg1.into(),
-                            reg2,
-                            span,
-                            &mut required_predicates,
-                        )
-                    }
-                    ty::ClauseKind::Trait(_)
-                    | ty::ClauseKind::Projection(_)
-                    | ty::ClauseKind::ConstArgHasType(_, _)
-                    | ty::ClauseKind::WellFormed(_)
-                    | ty::ClauseKind::ConstEvaluatable(_)
-                    | ty::ClauseKind::UnstableFeature(_)
-                    | ty::ClauseKind::HostEffect(..) => {}
-                }
-            }
-
-            ty::EarlyBinder::bind(required_predicates)
-        })
-    }
-}
+/* FP:explicit.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_outlives_explicit_USE_0001
+/* FP:explicit.rs-0002 */ use crate :: rustc_data_structures :: fx :: FxIndexMap ;
+/* FP:explicit.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_outlives_explicit_USE_0002
+/* FP:explicit.rs-0004 */ use crate :: rustc_complete :: def_id :: DefId ;
+/* FP:explicit.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_outlives_explicit_USE_0003
+/* FP:explicit.rs-0006 */ use crate :: rustc_complete :: ty :: { self , OutlivesPredicate , TyCtxt } ;
+/* FP:explicit.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_outlives_explicit_USE_0004
+/* FP:explicit.rs-0008 */ use super :: utils :: * ;
+/* FP:explicit.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_outlives_explicit_STRUCT_0005
+/* FP:explicit.rs-0010 */ # [derive (Debug)] pub (crate) struct ExplicitPredicatesMap < 'tcx > { map : FxIndexMap < DefId , ty :: EarlyBinder < 'tcx , RequiredPredicates < 'tcx > > > , }
+/* FP:explicit.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_outlives_explicit_IMPL_0006
+/* FP:explicit.rs-0012 */ impl < 'tcx > ExplicitPredicatesMap < 'tcx > { pub (crate) fn new () -> ExplicitPredicatesMap < 'tcx > { ExplicitPredicatesMap { map : FxIndexMap :: default () } } pub (crate) fn explicit_predicates_of (& mut self , tcx : TyCtxt < 'tcx > , def_id : DefId ,) -> & ty :: EarlyBinder < 'tcx , RequiredPredicates < 'tcx > > { self . map . entry (def_id) . or_insert_with (| | { let predicates = if def_id . is_local () { tcx . explicit_predicates_of (def_id) } else { tcx . predicates_of (def_id) } ; let mut required_predicates = RequiredPredicates :: default () ; for & (predicate , span) in predicates . predicates { match predicate . kind () . skip_binder () { ty :: ClauseKind :: TypeOutlives (OutlivesPredicate (ty , reg)) => { insert_outlives_predicate (tcx , ty . into () , reg , span , & mut required_predicates ,) } ty :: ClauseKind :: RegionOutlives (OutlivesPredicate (reg1 , reg2)) => { insert_outlives_predicate (tcx , reg1 . into () , reg2 , span , & mut required_predicates ,) } ty :: ClauseKind :: Trait (_) | ty :: ClauseKind :: Projection (_) | ty :: ClauseKind :: ConstArgHasType (_ , _) | ty :: ClauseKind :: WellFormed (_) | ty :: ClauseKind :: ConstEvaluatable (_) | ty :: ClauseKind :: UnstableFeature (_) | ty :: ClauseKind :: HostEffect (..) => { } } } ty :: EarlyBinder :: bind (required_predicates) }) } }

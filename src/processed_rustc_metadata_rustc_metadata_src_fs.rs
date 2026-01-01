@@ -1,137 +1,32 @@
-use std::path::{Path, PathBuf};
-use std::{fs, io};
-
-use crate::rustc_data_structures::temp_dir::MaybeTempDir;
-use rustc_fs_util::TempDirBuilder;
-use crate::rustc_complete::ty::TyCtxt;
-use crate::rustc_complete::Session;
-use crate::rustc_complete::config::{CrateType, OutFileName, OutputType};
-use crate::rustc_complete::output::filename_for_metadata;
-
-use crate::errors::{
-    BinaryOutputToTty, FailedCopyToStdout, FailedCreateEncodedMetadata, FailedCreateFile,
-    FailedCreateTempdir, FailedWriteError,
-};
-use crate::{EncodedMetadata, encode_metadata};
-
-// FIXME(eddyb) maybe include the crate name in this?
-pub const METADATA_FILENAME: &str = "lib.rmeta";
-
-/// We use a temp directory here to avoid races between concurrent rustc processes,
-/// such as builds in the same directory using the same filename for metadata while
-/// building an `.rlib` (stomping over one another), or writing an `.rmeta` into a
-/// directory being searched for `extern crate` (observing an incomplete file).
-/// The returned path is the temporary file containing the complete metadata.
-pub fn emit_wrapper_file(sess: &Session, data: &[u8], tmpdir: &Path, name: &str) -> PathBuf {
-    let out_filename = tmpdir.join(name);
-    let result = fs::write(&out_filename, data);
-
-    if let Err(err) = result {
-        sess.dcx().emit_fatal(FailedWriteError { filename: out_filename, err });
-    }
-
-    out_filename
-}
-
-pub fn encode_and_write_metadata(tcx: TyCtxt<'_>) -> EncodedMetadata {
-    let out_filename = filename_for_metadata(tcx.sess, tcx.output_filenames(()));
-    // To avoid races with another rustc process scanning the output directory,
-    // we need to write the file somewhere else and atomically move it to its
-    // final destination, with an `fs::rename` call. In order for the rename to
-    // always succeed, the temporary file needs to be on the same filesystem,
-    // which is why we create it inside the output directory specifically.
-    let metadata_tmpdir = TempDirBuilder::new()
-        .prefix("rmeta")
-        .tempdir_in(out_filename.parent().unwrap_or_else(|| Path::new("")))
-        .unwrap_or_else(|err| tcx.dcx().emit_fatal(FailedCreateTempdir { err }));
-    let metadata_tmpdir = MaybeTempDir::new(metadata_tmpdir, tcx.sess.opts.cg.save_temps);
-    let metadata_filename = metadata_tmpdir.as_ref().join("full.rmeta");
-    let metadata_stub_filename = if !tcx.sess.opts.unstable_opts.embed_metadata
-        && !tcx.crate_types().contains(&CrateType::ProcMacro)
-    {
-        Some(metadata_tmpdir.as_ref().join("stub.rmeta"))
-    } else {
-        None
-    };
-
-    if tcx.needs_metadata() {
-        encode_metadata(tcx, &metadata_filename, metadata_stub_filename.as_deref());
-    } else {
-        // Always create a file at `metadata_filename`, even if we have nothing to write to it.
-        // This simplifies the creation of the output `out_filename` when requested.
-        std::fs::File::create(&metadata_filename).unwrap_or_else(|err| {
-            tcx.dcx().emit_fatal(FailedCreateFile { filename: &metadata_filename, err });
-        });
-        if let Some(metadata_stub_filename) = &metadata_stub_filename {
-            std::fs::File::create(metadata_stub_filename).unwrap_or_else(|err| {
-                tcx.dcx().emit_fatal(FailedCreateFile { filename: &metadata_stub_filename, err });
-            });
-        }
-    }
-
-    let _prof_timer = tcx.sess.prof.generic_activity("write_crate_metadata");
-
-    // If the user requests metadata as output, rename `metadata_filename`
-    // to the expected output `out_filename`. The match above should ensure
-    // this file always exists.
-    let need_metadata_file = tcx.sess.opts.output_types.contains_key(&OutputType::Metadata);
-    let (metadata_filename, metadata_tmpdir) = if need_metadata_file {
-        let filename = match out_filename {
-            OutFileName::Real(ref path) => {
-                if let Err(err) = non_durable_rename(&metadata_filename, path) {
-                    tcx.dcx().emit_fatal(FailedWriteError { filename: path.to_path_buf(), err });
-                }
-                path.clone()
-            }
-            OutFileName::Stdout => {
-                if out_filename.is_tty() {
-                    tcx.dcx().emit_err(BinaryOutputToTty);
-                } else if let Err(err) = copy_to_stdout(&metadata_filename) {
-                    tcx.dcx()
-                        .emit_err(FailedCopyToStdout { filename: metadata_filename.clone(), err });
-                }
-                metadata_filename
-            }
-        };
-        if tcx.sess.opts.json_artifact_notifications {
-            tcx.dcx().emit_artifact_notification(out_filename.as_path(), "metadata");
-        }
-        (filename, None)
-    } else {
-        (metadata_filename, Some(metadata_tmpdir))
-    };
-
-    // Load metadata back to memory: codegen may need to include it in object files.
-    let metadata =
-        EncodedMetadata::from_path(metadata_filename, metadata_stub_filename, metadata_tmpdir)
-            .unwrap_or_else(|err| {
-                tcx.dcx().emit_fatal(FailedCreateEncodedMetadata { err });
-            });
-
-    metadata
-}
-
-#[cfg(not(target_os = "linux"))]
-pub fn non_durable_rename(src: &Path, dst: &Path) -> std::io::Result<()> {
-    std::fs::rename(src, dst)
-}
-
-/// This function attempts to bypass the auto_da_alloc heuristic implemented by some filesystems
-/// such as btrfs and ext4. When renaming over a file that already exists then they will "helpfully"
-/// write back the source file before committing the rename in case a developer forgot some of
-/// the fsyncs in the open/write/fsync(file)/rename/fsync(dir) dance for atomic file updates.
-///
-/// To avoid triggering this heuristic we delete the destination first, if it exists.
-/// The cost of an extra syscall is much lower than getting descheduled for the sync IO.
-#[cfg(target_os = "linux")]
-pub fn non_durable_rename(src: &Path, dst: &Path) -> std::io::Result<()> {
-    let _ = std::fs::remove_file(dst);
-    std::fs::rename(src, dst)
-}
-
-pub fn copy_to_stdout(from: &Path) -> io::Result<()> {
-    let mut reader = fs::File::open_buffered(from)?;
-    let mut stdout = io::stdout();
-    io::copy(&mut reader, &mut stdout)?;
-    Ok(())
-}
+/* FP:fs.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_fs_USE_0001
+/* FP:fs.rs-0002 */ use std :: path :: { Path , PathBuf } ;
+/* FP:fs.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_fs_USE_0002
+/* FP:fs.rs-0004 */ use std :: { fs , io } ;
+/* FP:fs.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_fs_USE_0003
+/* FP:fs.rs-0006 */ use crate :: rustc_data_structures :: temp_dir :: MaybeTempDir ;
+/* FP:fs.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_fs_USE_0004
+/* FP:fs.rs-0008 */ use rustc_fs_util :: TempDirBuilder ;
+/* FP:fs.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_fs_USE_0005
+/* FP:fs.rs-0010 */ use crate :: rustc_complete :: ty :: TyCtxt ;
+/* FP:fs.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_fs_USE_0006
+/* FP:fs.rs-0012 */ use crate :: rustc_complete :: Session ;
+/* FP:fs.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_fs_USE_0007
+/* FP:fs.rs-0014 */ use crate :: rustc_complete :: config :: { CrateType , OutFileName , OutputType } ;
+/* FP:fs.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_fs_USE_0008
+/* FP:fs.rs-0016 */ use crate :: rustc_complete :: output :: filename_for_metadata ;
+/* FP:fs.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_fs_USE_0009
+/* FP:fs.rs-0018 */ use crate :: errors :: { BinaryOutputToTty , FailedCopyToStdout , FailedCreateEncodedMetadata , FailedCreateFile , FailedCreateTempdir , FailedWriteError , } ;
+/* FP:fs.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_fs_USE_0010
+/* FP:fs.rs-0020 */ use crate :: { EncodedMetadata , encode_metadata } ;
+/* FP:fs.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_fs_CONST_0011
+/* FP:fs.rs-0022 */ pub const METADATA_FILENAME : & str = "lib.rmeta" ;
+/* FP:fs.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_fs_FN_0012
+/* FP:fs.rs-0024 */ # [doc = " We use a temp directory here to avoid races between concurrent rustc processes,"] # [doc = " such as builds in the same directory using the same filename for metadata while"] # [doc = " building an `.rlib` (stomping over one another), or writing an `.rmeta` into a"] # [doc = " directory being searched for `extern crate` (observing an incomplete file)."] # [doc = " The returned path is the temporary file containing the complete metadata."] pub fn emit_wrapper_file (sess : & Session , data : & [u8] , tmpdir : & Path , name : & str) -> PathBuf { let out_filename = tmpdir . join (name) ; let result = fs :: write (& out_filename , data) ; if let Err (err) = result { sess . dcx () . emit_fatal (FailedWriteError { filename : out_filename , err }) ; } out_filename }
+/* FP:fs.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_fs_FN_0013
+/* FP:fs.rs-0026 */ pub fn encode_and_write_metadata (tcx : TyCtxt < '_ >) -> EncodedMetadata { let out_filename = filename_for_metadata (tcx . sess , tcx . output_filenames (())) ; let metadata_tmpdir = TempDirBuilder :: new () . prefix ("rmeta") . tempdir_in (out_filename . parent () . unwrap_or_else (| | Path :: new (""))) . unwrap_or_else (| err | tcx . dcx () . emit_fatal (FailedCreateTempdir { err })) ; let metadata_tmpdir = MaybeTempDir :: new (metadata_tmpdir , tcx . sess . opts . cg . save_temps) ; let metadata_filename = metadata_tmpdir . as_ref () . join ("full.rmeta") ; let metadata_stub_filename = if ! tcx . sess . opts . unstable_opts . embed_metadata && ! tcx . crate_types () . contains (& CrateType :: ProcMacro) { Some (metadata_tmpdir . as_ref () . join ("stub.rmeta")) } else { None } ; if tcx . needs_metadata () { encode_metadata (tcx , & metadata_filename , metadata_stub_filename . as_deref ()) ; } else { std :: fs :: File :: create (& metadata_filename) . unwrap_or_else (| err | { tcx . dcx () . emit_fatal (FailedCreateFile { filename : & metadata_filename , err }) ; }) ; if let Some (metadata_stub_filename) = & metadata_stub_filename { std :: fs :: File :: create (metadata_stub_filename) . unwrap_or_else (| err | { tcx . dcx () . emit_fatal (FailedCreateFile { filename : & metadata_stub_filename , err }) ; }) ; } } let _prof_timer = tcx . sess . prof . generic_activity ("write_crate_metadata") ; let need_metadata_file = tcx . sess . opts . output_types . contains_key (& OutputType :: Metadata) ; let (metadata_filename , metadata_tmpdir) = if need_metadata_file { let filename = match out_filename { OutFileName :: Real (ref path) => { if let Err (err) = non_durable_rename (& metadata_filename , path) { tcx . dcx () . emit_fatal (FailedWriteError { filename : path . to_path_buf () , err }) ; } path . clone () } OutFileName :: Stdout => { if out_filename . is_tty () { tcx . dcx () . emit_err (BinaryOutputToTty) ; } else if let Err (err) = copy_to_stdout (& metadata_filename) { tcx . dcx () . emit_err (FailedCopyToStdout { filename : metadata_filename . clone () , err }) ; } metadata_filename } } ; if tcx . sess . opts . json_artifact_notifications { tcx . dcx () . emit_artifact_notification (out_filename . as_path () , "metadata") ; } (filename , None) } else { (metadata_filename , Some (metadata_tmpdir)) } ; let metadata = EncodedMetadata :: from_path (metadata_filename , metadata_stub_filename , metadata_tmpdir) . unwrap_or_else (| err | { tcx . dcx () . emit_fatal (FailedCreateEncodedMetadata { err }) ; }) ; metadata }
+/* FP:fs.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_fs_FN_0014
+/* FP:fs.rs-0028 */ # [cfg (not (target_os = "linux"))] pub fn non_durable_rename (src : & Path , dst : & Path) -> std :: io :: Result < () > { std :: fs :: rename (src , dst) }
+/* FP:fs.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_fs_FN_0015
+/* FP:fs.rs-0030 */ # [doc = " This function attempts to bypass the auto_da_alloc heuristic implemented by some filesystems"] # [doc = " such as btrfs and ext4. When renaming over a file that already exists then they will \"helpfully\""] # [doc = " write back the source file before committing the rename in case a developer forgot some of"] # [doc = " the fsyncs in the open/write/fsync(file)/rename/fsync(dir) dance for atomic file updates."] # [doc = ""] # [doc = " To avoid triggering this heuristic we delete the destination first, if it exists."] # [doc = " The cost of an extra syscall is much lower than getting descheduled for the sync IO."] # [cfg (target_os = "linux")] pub fn non_durable_rename (src : & Path , dst : & Path) -> std :: io :: Result < () > { let _ = std :: fs :: remove_file (dst) ; std :: fs :: rename (src , dst) }
+/* FP:fs.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_fs_FN_0016
+/* FP:fs.rs-0032 */ pub fn copy_to_stdout (from : & Path) -> io :: Result < () > { let mut reader = fs :: File :: open_buffered (from) ? ; let mut stdout = io :: stdout () ; io :: copy (& mut reader , & mut stdout) ? ; Ok (()) }

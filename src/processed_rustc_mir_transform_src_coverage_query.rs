@@ -1,159 +1,36 @@
-use crate::rustc_complete::attrs::{AttributeKind, CoverageAttrKind};
-use crate::rustc_complete::find_attr;
-use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use crate::rustc_complete::mir::coverage::{BasicCoverageBlock, CoverageIdsInfo, CoverageKind, MappingKind};
-use crate::rustc_complete::mir::{Body, Statement, StatementKind};
-use crate::rustc_complete::ty::{self, TyCtxt};
-use crate::rustc_complete::util::Providers;
-use crate::rustc_complete::def_id::LocalDefId;
-use tracing::trace;
-
-use crate::coverage::counters::node_flow::make_node_counters;
-use crate::coverage::counters::{CoverageCounters, transcribe_counters};
-
-/// Registers query/hook implementations related to coverage.
-pub(crate) fn provide(providers: &mut Providers) {
-    providers.hooks.is_eligible_for_coverage = is_eligible_for_coverage;
-    providers.queries.coverage_attr_on = coverage_attr_on;
-    providers.queries.coverage_ids_info = coverage_ids_info;
-}
-
-/// Hook implementation for [`TyCtxt::is_eligible_for_coverage`].
-fn is_eligible_for_coverage(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
-    // Only instrument functions, methods, and closures (not constants since they are evaluated
-    // at compile time by Miri).
-    // FIXME(#73156): Handle source code coverage in const eval, but note, if and when const
-    // expressions get coverage spans, we will probably have to "carve out" space for const
-    // expressions from coverage spans in enclosing MIR's, like we do for closures. (That might
-    // be tricky if const expressions have no corresponding statements in the enclosing MIR.
-    // Closures are carved out by their initial `Assign` statement.)
-    if !tcx.def_kind(def_id).is_fn_like() {
-        trace!("InstrumentCoverage skipped for {def_id:?} (not an fn-like)");
-        return false;
-    }
-
-    if tcx.codegen_fn_attrs(def_id).flags.contains(CodegenFnAttrFlags::NAKED) {
-        trace!("InstrumentCoverage skipped for {def_id:?} (`#[naked]`)");
-        return false;
-    }
-
-    if !tcx.coverage_attr_on(def_id) {
-        trace!("InstrumentCoverage skipped for {def_id:?} (`#[coverage(off)]`)");
-        return false;
-    }
-
-    true
-}
-
-/// Query implementation for `coverage_attr_on`.
-fn coverage_attr_on(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
-    // Check for a `#[coverage(..)]` attribute on this def.
-    if let Some(kind) =
-        find_attr!(tcx.get_all_attrs(def_id), AttributeKind::Coverage(_sp, kind) => kind)
-    {
-        match kind {
-            CoverageAttrKind::On => return true,
-            CoverageAttrKind::Off => return false,
-        }
-    };
-
-    // Treat `#[automatically_derived]` as an implied `#[coverage(off)]`, on
-    // the assumption that most users won't want coverage for derived impls.
-    //
-    // This affects not just the associated items of an impl block, but also
-    // any closures and other nested functions within those associated items.
-    if tcx.is_automatically_derived(def_id.to_def_id()) {
-        return false;
-    }
-
-    // Check the parent def (and so on recursively) until we find an
-    // enclosing attribute or reach the crate root.
-    match tcx.opt_local_parent(def_id) {
-        Some(parent) => tcx.coverage_attr_on(parent),
-        // We reached the crate root without seeing a coverage attribute, so
-        // allow coverage instrumentation by default.
-        None => true,
-    }
-}
-
-/// Query implementation for `coverage_ids_info`.
-fn coverage_ids_info<'tcx>(
-    tcx: TyCtxt<'tcx>,
-    instance_def: ty::InstanceKind<'tcx>,
-) -> Option<CoverageIdsInfo> {
-    let mir_body = tcx.instance_mir(instance_def);
-    let fn_cov_info = mir_body.function_coverage_info.as_deref()?;
-
-    // Scan through the final MIR to see which BCBs survived MIR opts.
-    // Any BCB not in this set was optimized away.
-    let mut bcbs_seen = DenseBitSet::new_empty(fn_cov_info.priority_list.len());
-    for kind in all_coverage_in_mir_body(mir_body) {
-        match *kind {
-            CoverageKind::VirtualCounter { bcb } => {
-                bcbs_seen.insert(bcb);
-            }
-            _ => {}
-        }
-    }
-
-    // Determine the set of BCBs that are referred to by mappings, and therefore
-    // need a counter. Any node not in this set will only get a counter if it
-    // is part of the counter expression for a node that is in the set.
-    let mut bcb_needs_counter =
-        DenseBitSet::<BasicCoverageBlock>::new_empty(fn_cov_info.priority_list.len());
-    for mapping in &fn_cov_info.mappings {
-        match mapping.kind {
-            MappingKind::Code { bcb } => {
-                bcb_needs_counter.insert(bcb);
-            }
-            MappingKind::Branch { true_bcb, false_bcb } => {
-                bcb_needs_counter.insert(true_bcb);
-                bcb_needs_counter.insert(false_bcb);
-            }
-        }
-    }
-
-    // Clone the priority list so that we can re-sort it.
-    let mut priority_list = fn_cov_info.priority_list.clone();
-    // The first ID in the priority list represents the synthetic "sink" node,
-    // and must remain first so that it _never_ gets a physical counter.
-    debug_assert_eq!(priority_list[0], priority_list.iter().copied().max().unwrap());
-    assert!(!bcbs_seen.contains(priority_list[0]));
-    // Partition the priority list, so that unreachable nodes (removed by MIR opts)
-    // are sorted later and therefore are _more_ likely to get a physical counter.
-    // This is counter-intuitive, but it means that `transcribe_counters` can
-    // easily skip those unused physical counters and replace them with zero.
-    // (The original ordering remains in effect within both partitions.)
-    priority_list[1..].sort_by_key(|&bcb| !bcbs_seen.contains(bcb));
-
-    let node_counters = make_node_counters(&fn_cov_info.node_flow_data, &priority_list);
-    let coverage_counters = transcribe_counters(&node_counters, &bcb_needs_counter, &bcbs_seen);
-
-    let CoverageCounters {
-        phys_counter_for_node, next_counter_id, node_counters, expressions, ..
-    } = coverage_counters;
-
-    Some(CoverageIdsInfo {
-        num_counters: next_counter_id.as_u32(),
-        phys_counter_for_node,
-        term_for_bcb: node_counters,
-        expressions,
-    })
-}
-
-fn all_coverage_in_mir_body<'a, 'tcx>(
-    body: &'a Body<'tcx>,
-) -> impl Iterator<Item = &'a CoverageKind> {
-    body.basic_blocks.iter().flat_map(|bb_data| &bb_data.statements).filter_map(|statement| {
-        match statement.kind {
-            StatementKind::Coverage(ref kind) if !is_inlined(body, statement) => Some(kind),
-            _ => None,
-        }
-    })
-}
-
-fn is_inlined(body: &Body<'_>, statement: &Statement<'_>) -> bool {
-    let scope_data = &body.source_scopes[statement.source_info.scope];
-    scope_data.inlined.is_some() || scope_data.inlined_parent_scope.is_some()
-}
+/* FP:query.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_USE_0001
+/* FP:query.rs-0002 */ use crate :: rustc_complete :: attrs :: { AttributeKind , CoverageAttrKind } ;
+/* FP:query.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_USE_0002
+/* FP:query.rs-0004 */ use crate :: rustc_complete :: find_attr ;
+/* FP:query.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_USE_0003
+/* FP:query.rs-0006 */ use crate :: rustc_index :: bit_set :: DenseBitSet ;
+/* FP:query.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_USE_0004
+/* FP:query.rs-0008 */ use crate :: rustc_complete :: middle :: codegen_fn_attrs :: CodegenFnAttrFlags ;
+/* FP:query.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_USE_0005
+/* FP:query.rs-0010 */ use crate :: rustc_complete :: mir :: coverage :: { BasicCoverageBlock , CoverageIdsInfo , CoverageKind , MappingKind } ;
+/* FP:query.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_USE_0006
+/* FP:query.rs-0012 */ use crate :: rustc_complete :: mir :: { Body , Statement , StatementKind } ;
+/* FP:query.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_USE_0007
+/* FP:query.rs-0014 */ use crate :: rustc_complete :: ty :: { self , TyCtxt } ;
+/* FP:query.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_USE_0008
+/* FP:query.rs-0016 */ use crate :: rustc_complete :: util :: Providers ;
+/* FP:query.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_USE_0009
+/* FP:query.rs-0018 */ use crate :: rustc_complete :: def_id :: LocalDefId ;
+/* FP:query.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_USE_0010
+/* FP:query.rs-0020 */ use tracing :: trace ;
+/* FP:query.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_USE_0011
+/* FP:query.rs-0022 */ use crate :: coverage :: counters :: node_flow :: make_node_counters ;
+/* FP:query.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_USE_0012
+/* FP:query.rs-0024 */ use crate :: coverage :: counters :: { CoverageCounters , transcribe_counters } ;
+/* FP:query.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_FN_0013
+/* FP:query.rs-0026 */ # [doc = " Registers query/hook implementations related to coverage."] pub (crate) fn provide (providers : & mut Providers) { providers . hooks . is_eligible_for_coverage = is_eligible_for_coverage ; providers . queries . coverage_attr_on = coverage_attr_on ; providers . queries . coverage_ids_info = coverage_ids_info ; }
+/* FP:query.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_FN_0014
+/* FP:query.rs-0028 */ # [doc = " Hook implementation for [`TyCtxt::is_eligible_for_coverage`]."] fn is_eligible_for_coverage (tcx : TyCtxt < '_ > , def_id : LocalDefId) -> bool { if ! tcx . def_kind (def_id) . is_fn_like () { trace ! ("InstrumentCoverage skipped for {def_id:?} (not an fn-like)") ; return false ; } if tcx . codegen_fn_attrs (def_id) . flags . contains (CodegenFnAttrFlags :: NAKED) { trace ! ("InstrumentCoverage skipped for {def_id:?} (`#[naked]`)") ; return false ; } if ! tcx . coverage_attr_on (def_id) { trace ! ("InstrumentCoverage skipped for {def_id:?} (`#[coverage(off)]`)") ; return false ; } true }
+/* FP:query.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_FN_0015
+/* FP:query.rs-0030 */ # [doc = " Query implementation for `coverage_attr_on`."] fn coverage_attr_on (tcx : TyCtxt < '_ > , def_id : LocalDefId) -> bool { if let Some (kind) = find_attr ! (tcx . get_all_attrs (def_id) , AttributeKind :: Coverage (_sp , kind) => kind) { match kind { CoverageAttrKind :: On => return true , CoverageAttrKind :: Off => return false , } } ; if tcx . is_automatically_derived (def_id . to_def_id ()) { return false ; } match tcx . opt_local_parent (def_id) { Some (parent) => tcx . coverage_attr_on (parent) , None => true , } }
+/* FP:query.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_FN_0016
+/* FP:query.rs-0032 */ # [doc = " Query implementation for `coverage_ids_info`."] fn coverage_ids_info < 'tcx > (tcx : TyCtxt < 'tcx > , instance_def : ty :: InstanceKind < 'tcx > ,) -> Option < CoverageIdsInfo > { let mir_body = tcx . instance_mir (instance_def) ; let fn_cov_info = mir_body . function_coverage_info . as_deref () ? ; let mut bcbs_seen = DenseBitSet :: new_empty (fn_cov_info . priority_list . len ()) ; for kind in all_coverage_in_mir_body (mir_body) { match * kind { CoverageKind :: VirtualCounter { bcb } => { bcbs_seen . insert (bcb) ; } _ => { } } } let mut bcb_needs_counter = DenseBitSet :: < BasicCoverageBlock > :: new_empty (fn_cov_info . priority_list . len ()) ; for mapping in & fn_cov_info . mappings { match mapping . kind { MappingKind :: Code { bcb } => { bcb_needs_counter . insert (bcb) ; } MappingKind :: Branch { true_bcb , false_bcb } => { bcb_needs_counter . insert (true_bcb) ; bcb_needs_counter . insert (false_bcb) ; } } } let mut priority_list = fn_cov_info . priority_list . clone () ; debug_assert_eq ! (priority_list [0] , priority_list . iter () . copied () . max () . unwrap ()) ; assert ! (! bcbs_seen . contains (priority_list [0])) ; priority_list [1 ..] . sort_by_key (| & bcb | ! bcbs_seen . contains (bcb)) ; let node_counters = make_node_counters (& fn_cov_info . node_flow_data , & priority_list) ; let coverage_counters = transcribe_counters (& node_counters , & bcb_needs_counter , & bcbs_seen) ; let CoverageCounters { phys_counter_for_node , next_counter_id , node_counters , expressions , .. } = coverage_counters ; Some (CoverageIdsInfo { num_counters : next_counter_id . as_u32 () , phys_counter_for_node , term_for_bcb : node_counters , expressions , }) }
+/* FP:query.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_FN_0017
+/* FP:query.rs-0034 */ fn all_coverage_in_mir_body < 'a , 'tcx > (body : & 'a Body < 'tcx > ,) -> impl Iterator < Item = & 'a CoverageKind > { body . basic_blocks . iter () . flat_map (| bb_data | & bb_data . statements) . filter_map (| statement | { match statement . kind { StatementKind :: Coverage (ref kind) if ! is_inlined (body , statement) => Some (kind) , _ => None , } }) }
+/* FP:query.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_query_FN_0018
+/* FP:query.rs-0036 */ fn is_inlined (body : & Body < '_ > , statement : & Statement < '_ >) -> bool { let scope_data = & body . source_scopes [statement . source_info . scope] ; scope_data . inlined . is_some () || scope_data . inlined_parent_scope . is_some () }

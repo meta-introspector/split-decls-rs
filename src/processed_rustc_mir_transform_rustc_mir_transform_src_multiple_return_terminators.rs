@@ -1,41 +1,12 @@
-// This pass removes jumps to basic blocks containing only a return, and replaces them with a
-// return instead.
-
-use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_complete::mir::*;
-use crate::rustc_complete::ty::TyCtxt;
-
-use crate::simplify;
-
-pub(super) struct MultipleReturnTerminators;
-
-impl<'tcx> crate::MirPass<'tcx> for MultipleReturnTerminators {
-    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
-        sess.mir_opt_level() >= 4
-    }
-
-    fn run_pass(&self, _: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
-        // find basic blocks with no statement and a return terminator
-        let mut bbs_simple_returns = DenseBitSet::new_empty(body.basic_blocks.len());
-        let bbs = body.basic_blocks_mut();
-        for (idx, bb) in bbs.iter_enumerated() {
-            if bb.statements.is_empty() && bb.terminator().kind == TerminatorKind::Return {
-                bbs_simple_returns.insert(idx);
-            }
-        }
-
-        for bb in bbs {
-            if let TerminatorKind::Goto { target } = bb.terminator().kind
-                && bbs_simple_returns.contains(target)
-            {
-                bb.terminator_mut().kind = TerminatorKind::Return;
-            }
-        }
-
-        simplify::remove_dead_blocks(body)
-    }
-
-    fn is_required(&self) -> bool {
-        false
-    }
-}
+/* FP:multiple_return_terminators.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_multiple_return_terminators_USE_0001
+/* FP:multiple_return_terminators.rs-0002 */ use crate :: rustc_index :: bit_set :: DenseBitSet ;
+/* FP:multiple_return_terminators.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_multiple_return_terminators_USE_0002
+/* FP:multiple_return_terminators.rs-0004 */ use crate :: rustc_complete :: mir :: * ;
+/* FP:multiple_return_terminators.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_multiple_return_terminators_USE_0003
+/* FP:multiple_return_terminators.rs-0006 */ use crate :: rustc_complete :: ty :: TyCtxt ;
+/* FP:multiple_return_terminators.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_multiple_return_terminators_USE_0004
+/* FP:multiple_return_terminators.rs-0008 */ use crate :: simplify ;
+/* FP:multiple_return_terminators.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_multiple_return_terminators_STRUCT_0005
+/* FP:multiple_return_terminators.rs-0010 */ pub (super) struct MultipleReturnTerminators ;
+/* FP:multiple_return_terminators.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_multiple_return_terminators_IMPL_0006
+/* FP:multiple_return_terminators.rs-0012 */ impl < 'tcx > crate :: MirPass < 'tcx > for MultipleReturnTerminators { fn is_enabled (& self , sess : & crate :: rustc_session :: Session) -> bool { sess . mir_opt_level () >= 4 } fn run_pass (& self , _ : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) { let mut bbs_simple_returns = DenseBitSet :: new_empty (body . basic_blocks . len ()) ; let bbs = body . basic_blocks_mut () ; for (idx , bb) in bbs . iter_enumerated () { if bb . statements . is_empty () && bb . terminator () . kind == TerminatorKind :: Return { bbs_simple_returns . insert (idx) ; } } for bb in bbs { if let TerminatorKind :: Goto { target } = bb . terminator () . kind && bbs_simple_returns . contains (target) { bb . terminator_mut () . kind = TerminatorKind :: Return ; } } simplify :: remove_dead_blocks (body) } fn is_required (& self) -> bool { false } }

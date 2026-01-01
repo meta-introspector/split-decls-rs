@@ -1,123 +1,26 @@
-// Module that collects the things that have no stability guarantees.
-//
-// We want to keep rustc_public's IR definitions and logic separate from
-// any sort of conversion and usage of internal rustc code. So we
-// restrict the usage of internal items to be inside this module.
-
-use std::marker::PointeeSized;
-
-use crate::rustc_complete::def::DefKind;
-use crate::rustc_complete::ty::{List, Ty, TyCtxt};
-use crate::rustc_complete::{mir, ty};
-use rustc_public_bridge::Tables;
-use rustc_public_bridge::context::CompilerCtxt;
-
-use super::compiler_interface::BridgeTys;
-use crate::{CtorKind, ItemKind};
-
-
-/// Trait that defines the methods that are fine to call from [`RustcInternal`].
-///
-/// This trait is only for [`RustcInternal`]. Any other other access to rustc's internals
-/// should go through [`rustc_public_bridge::context::CompilerCtxt`].
-pub trait InternalCx<'tcx>: Copy + Clone {
-    fn tcx(self) -> TyCtxt<'tcx>;
-
-    fn lift<T: ty::Lift<TyCtxt<'tcx>>>(self, value: T) -> Option<T::Lifted>;
-
-    fn mk_args_from_iter<I, T>(self, iter: I) -> T::Output
-    where
-        I: Iterator<Item = T>,
-        T: ty::CollectAndApply<ty::GenericArg<'tcx>, ty::GenericArgsRef<'tcx>>;
-
-    fn mk_pat(self, v: ty::PatternKind<'tcx>) -> ty::Pattern<'tcx>;
-
-    fn mk_poly_existential_predicates(
-        self,
-        eps: &[ty::PolyExistentialPredicate<'tcx>],
-    ) -> &'tcx List<ty::PolyExistentialPredicate<'tcx>>;
-
-    fn mk_type_list(self, v: &[Ty<'tcx>]) -> &'tcx List<Ty<'tcx>>;
-
-    fn lifetimes_re_erased(self) -> ty::Region<'tcx>;
-
-    fn mk_bound_variable_kinds_from_iter<I, T>(self, iter: I) -> T::Output
-    where
-        I: Iterator<Item = T>,
-        T: ty::CollectAndApply<ty::BoundVariableKind, &'tcx List<ty::BoundVariableKind>>;
-
-    fn mk_place_elems(self, v: &[mir::PlaceElem<'tcx>]) -> &'tcx List<mir::PlaceElem<'tcx>>;
-
-    fn adt_def(self, def_id: crate::rustc_hir::def_id::DefId) -> ty::AdtDef<'tcx>;
-}
-
-/// Trait used to convert between an internal MIR type to a rustc_public's IR type.
-///
-/// This trait is currently exposed to users so they can have interoperability
-/// between internal MIR and rustc_public's IR constructs.
-/// However, they should be used seldom and they have no influence in this crate semver.
-#[doc(hidden)]
-pub trait Stable<'tcx>: PointeeSized {
-    /// The stable representation of the type implementing Stable.
-    type T;
-    /// Converts an object to the equivalent rustc_public's IR representation.
-    fn stable<'cx>(
-        &self,
-        tables: &mut Tables<'cx, BridgeTys>,
-        cx: &CompilerCtxt<'cx, BridgeTys>,
-    ) -> Self::T;
-}
-
-/// Trait used to translate a rustc_public's IR construct to its rustc counterpart.
-///
-/// This is basically a mirror of [Stable].
-///
-/// This trait is currently exposed to users so they can have interoperability
-/// between internal MIR and rustc_public's IR constructs.
-/// They should be used seldom as they have no stability guarantees.
-#[doc(hidden)]
-pub trait RustcInternal {
-    type T<'tcx>;
-    fn internal<'tcx>(
-        &self,
-        tables: &mut Tables<'_, BridgeTys>,
-        tcx: impl InternalCx<'tcx>,
-    ) -> Self::T<'tcx>;
-}
-
-pub(crate) fn new_item_kind(kind: DefKind) -> ItemKind {
-    match kind {
-        DefKind::Mod
-        | DefKind::Struct
-        | DefKind::Union
-        | DefKind::Enum
-        | DefKind::Variant
-        | DefKind::Trait
-        | DefKind::TyAlias
-        | DefKind::ForeignTy
-        | DefKind::TraitAlias
-        | DefKind::AssocTy
-        | DefKind::TyParam
-        | DefKind::ConstParam
-        | DefKind::Macro(_)
-        | DefKind::ExternCrate
-        | DefKind::Use
-        | DefKind::ForeignMod
-        | DefKind::OpaqueTy
-        | DefKind::Field
-        | DefKind::LifetimeParam
-        | DefKind::Impl { .. }
-        | DefKind::GlobalAsm => {
-            unreachable!("Not a valid item kind: {kind:?}");
-        }
-        DefKind::Closure | DefKind::AssocFn | DefKind::Fn | DefKind::SyntheticCoroutineBody => {
-            ItemKind::Fn
-        }
-        DefKind::Const | DefKind::InlineConst | DefKind::AssocConst | DefKind::AnonConst => {
-            ItemKind::Const
-        }
-        DefKind::Static { .. } => ItemKind::Static,
-        DefKind::Ctor(_, crate::rustc_hir::def::CtorKind::Const) => ItemKind::Ctor(CtorKind::Const),
-        DefKind::Ctor(_, crate::rustc_hir::def::CtorKind::Fn) => ItemKind::Ctor(CtorKind::Fn),
-    }
-}
+/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_unstable_mod_USE_0001
+/* FP:mod.rs-0002 */ use std :: marker :: PointeeSized ;
+/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_unstable_mod_USE_0002
+/* FP:mod.rs-0004 */ use crate :: rustc_complete :: def :: DefKind ;
+/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_unstable_mod_USE_0003
+/* FP:mod.rs-0006 */ use crate :: rustc_complete :: ty :: { List , Ty , TyCtxt } ;
+/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_unstable_mod_USE_0004
+/* FP:mod.rs-0008 */ use crate :: rustc_complete :: { mir , ty } ;
+/* FP:mod.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_unstable_mod_USE_0005
+/* FP:mod.rs-0010 */ use crate :: rustc_public_bridge :: Tables ;
+/* FP:mod.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_unstable_mod_USE_0006
+/* FP:mod.rs-0012 */ use crate :: rustc_public_bridge :: context :: CompilerCtxt ;
+/* FP:mod.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_unstable_mod_USE_0007
+/* FP:mod.rs-0014 */ use super :: compiler_interface :: BridgeTys ;
+/* FP:mod.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_unstable_mod_USE_0008
+/* FP:mod.rs-0016 */ use crate :: { CtorKind , ItemKind } ;
+/* FP:mod.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_unstable_mod_MOD_0009
+/* FP:mod.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_unstable_mod_MOD_0010
+/* FP:mod.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_unstable_mod_TRAIT_0011
+/* FP:mod.rs-0022 */ # [doc = " Trait that defines the methods that are fine to call from [`RustcInternal`]."] # [doc = ""] # [doc = " This trait is only for [`RustcInternal`]. Any other other access to rustc's internals"] # [doc = " should go through [`crate::rustc_public_bridge::context::CompilerCtxt`]."] pub trait InternalCx < 'tcx > : Copy + Clone { fn tcx (self) -> TyCtxt < 'tcx > ; fn lift < T : ty :: Lift < TyCtxt < 'tcx > > > (self , value : T) -> Option < T :: Lifted > ; fn mk_args_from_iter < I , T > (self , iter : I) -> T :: Output where I : Iterator < Item = T > , T : ty :: CollectAndApply < ty :: GenericArg < 'tcx > , ty :: GenericArgsRef < 'tcx > > ; fn mk_pat (self , v : ty :: PatternKind < 'tcx >) -> ty :: Pattern < 'tcx > ; fn mk_poly_existential_predicates (self , eps : & [ty :: PolyExistentialPredicate < 'tcx >] ,) -> & 'tcx List < ty :: PolyExistentialPredicate < 'tcx > > ; fn mk_type_list (self , v : & [Ty < 'tcx >]) -> & 'tcx List < Ty < 'tcx > > ; fn lifetimes_re_erased (self) -> ty :: Region < 'tcx > ; fn mk_bound_variable_kinds_from_iter < I , T > (self , iter : I) -> T :: Output where I : Iterator < Item = T > , T : ty :: CollectAndApply < ty :: BoundVariableKind , & 'tcx List < ty :: BoundVariableKind > > ; fn mk_place_elems (self , v : & [mir :: PlaceElem < 'tcx >]) -> & 'tcx List < mir :: PlaceElem < 'tcx > > ; fn adt_def (self , def_id : crate :: rustc_hir :: def_id :: DefId) -> ty :: AdtDef < 'tcx > ; }
+/* FP:mod.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_unstable_mod_TRAIT_0012
+/* FP:mod.rs-0024 */ # [doc = " Trait used to convert between an internal MIR type to a rustc_public's IR type."] # [doc = ""] # [doc = " This trait is currently exposed to users so they can have interoperability"] # [doc = " between internal MIR and rustc_public's IR constructs."] # [doc = " However, they should be used seldom and they have no influence in this crate semver."] # [doc (hidden)] pub trait Stable < 'tcx > : PointeeSized { # [doc = " The stable representation of the type implementing Stable."] type T ; # [doc = " Converts an object to the equivalent rustc_public's IR representation."] fn stable < 'cx > (& self , tables : & mut Tables < 'cx , BridgeTys > , cx : & CompilerCtxt < 'cx , BridgeTys > ,) -> Self :: T ; }
+/* FP:mod.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_unstable_mod_TRAIT_0013
+/* FP:mod.rs-0026 */ # [doc = " Trait used to translate a rustc_public's IR construct to its rustc counterpart."] # [doc = ""] # [doc = " This is basically a mirror of [Stable]."] # [doc = ""] # [doc = " This trait is currently exposed to users so they can have interoperability"] # [doc = " between internal MIR and rustc_public's IR constructs."] # [doc = " They should be used seldom as they have no stability guarantees."] # [doc (hidden)] pub trait RustcInternal { type T < 'tcx > ; fn internal < 'tcx > (& self , tables : & mut Tables < '_ , BridgeTys > , tcx : impl InternalCx < 'tcx > ,) -> Self :: T < 'tcx > ; }
+/* FP:mod.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_unstable_mod_FN_0014
+/* FP:mod.rs-0028 */ pub (crate) fn new_item_kind (kind : DefKind) -> ItemKind { match kind { DefKind :: Mod | DefKind :: Struct | DefKind :: Union | DefKind :: Enum | DefKind :: Variant | DefKind :: Trait | DefKind :: TyAlias | DefKind :: ForeignTy | DefKind :: TraitAlias | DefKind :: AssocTy | DefKind :: TyParam | DefKind :: ConstParam | DefKind :: Macro (_) | DefKind :: ExternCrate | DefKind :: Use | DefKind :: ForeignMod | DefKind :: OpaqueTy | DefKind :: Field | DefKind :: LifetimeParam | DefKind :: Impl { .. } | DefKind :: GlobalAsm => { unreachable ! ("Not a valid item kind: {kind:?}") ; } DefKind :: Closure | DefKind :: AssocFn | DefKind :: Fn | DefKind :: SyntheticCoroutineBody => { ItemKind :: Fn } DefKind :: Const | DefKind :: InlineConst | DefKind :: AssocConst | DefKind :: AnonConst => { ItemKind :: Const } DefKind :: Static { .. } => ItemKind :: Static , DefKind :: Ctor (_ , crate :: rustc_hir :: def :: CtorKind :: Const) => ItemKind :: Ctor (CtorKind :: Const) , DefKind :: Ctor (_ , crate :: rustc_hir :: def :: CtorKind :: Fn) => ItemKind :: Ctor (CtorKind :: Fn) , } }

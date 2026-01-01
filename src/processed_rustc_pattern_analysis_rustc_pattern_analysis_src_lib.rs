@@ -1,140 +1,32 @@
-// Analysis of patterns, notably match exhaustiveness checking. The main entrypoint for this crate
-// is [`usefulness::compute_match_usefulness`]. For rustc-specific types and entrypoints, see the
-// [`rustc`] module.
-
-// tidy-alphabetical-start
-#[allow(rustc::diagnostic_outside_of_impl)]
-#[allow(rustc::untranslatable_diagnostic)]
-#[allow(unused_crate_dependencies)]
-// tidy-alphabetical-end
-
-#[cfg(feature = "rustc")]
-#[cfg(feature = "rustc")]
-#[cfg(feature = "rustc")]
-
-#[cfg(feature = "rustc")]
-rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
-
-use std::fmt;
-
-pub use rustc_index::{Idx, IndexVec}; // re-exported to avoid rustc_index version issues
-
-use crate::constructor::{Constructor, ConstructorSet, IntRange};
-use crate::pat::DeconstructedPat;
-
-pub trait Captures<'a> {}
-impl<'a, T: ?Sized> Captures<'a> for T {}
-
-/// `bool` newtype that indicates whether this is a privately uninhabited field that we should skip
-/// during analysis.
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
-pub struct PrivateUninhabitedField(pub bool);
-
-/// Context that provides type information about constructors.
-///
-/// Most of the crate is parameterized on a type that implements this trait.
-pub trait PatCx: Sized + fmt::Debug {
-    /// The type of a pattern.
-    type Ty: Clone + fmt::Debug;
-    /// Errors that can abort analysis.
-    type Error: fmt::Debug;
-    /// The index of an enum variant.
-    type VariantIdx: Clone + Idx + fmt::Debug;
-    /// A string literal
-    type StrLit: Clone + PartialEq + fmt::Debug;
-    /// Extra data to store in a match arm.
-    type ArmData: Copy + Clone + fmt::Debug;
-    /// Extra data to store in a pattern.
-    type PatData: Clone;
-
-    fn is_exhaustive_patterns_feature_on(&self) -> bool;
-
-    /// Whether to ensure the non-exhaustiveness witnesses we report for a complete set. This is
-    /// `false` by default to avoid some exponential blowup cases such as
-    /// <https://github.com/rust-lang/rust/issues/118437>.
-    fn exhaustive_witnesses(&self) -> bool {
-        false
-    }
-
-    /// The number of fields for this constructor.
-    fn ctor_arity(&self, ctor: &Constructor<Self>, ty: &Self::Ty) -> usize;
-
-    /// The types of the fields for this constructor. The result must contain `ctor_arity()` fields.
-    fn ctor_sub_tys(
-        &self,
-        ctor: &Constructor<Self>,
-        ty: &Self::Ty,
-    ) -> impl Iterator<Item = (Self::Ty, PrivateUninhabitedField)> + ExactSizeIterator;
-
-    /// The set of all the constructors for `ty`.
-    ///
-    /// This must follow the invariants of `ConstructorSet`
-    fn ctors_for_ty(&self, ty: &Self::Ty) -> Result<ConstructorSet<Self>, Self::Error>;
-
-    /// Write the name of the variant represented by `pat`. Used for the best-effort `Debug` impl of
-    /// `DeconstructedPat`. Only invoqued when `pat.ctor()` is `Struct | Variant(_) | UnionField`.
-    fn write_variant_name(
-        f: &mut fmt::Formatter<'_>,
-        ctor: &crate::constructor::Constructor<Self>,
-        ty: &Self::Ty,
-    ) -> fmt::Result;
-
-    /// Raise a bug.
-    fn bug(&self, fmt: fmt::Arguments<'_>) -> Self::Error;
-
-    /// Lint that the range `pat` overlapped with all the ranges in `overlaps_with`, where the range
-    /// they overlapped over is `overlaps_on`. We only detect singleton overlaps.
-    /// The default implementation does nothing.
-    fn lint_overlapping_range_endpoints(
-        &self,
-        _pat: &DeconstructedPat<Self>,
-        _overlaps_on: IntRange,
-        _overlaps_with: &[&DeconstructedPat<Self>],
-    ) {
-    }
-
-    /// The maximum pattern complexity limit was reached.
-    fn complexity_exceeded(&self) -> Result<(), Self::Error>;
-
-    /// Lint that there is a gap `gap` between `pat` and all of `gapped_with` such that the gap is
-    /// not matched by another range. If `gapped_with` is empty, then `gap` is `T::MAX`. We only
-    /// detect singleton gaps.
-    /// The default implementation does nothing.
-    fn lint_non_contiguous_range_endpoints(
-        &self,
-        _pat: &DeconstructedPat<Self>,
-        _gap: IntRange,
-        _gapped_with: &[&DeconstructedPat<Self>],
-    ) {
-    }
-
-    /// Check if we may need to perform additional deref-pattern-specific validation.
-    fn match_may_contain_deref_pats(&self) -> bool {
-        true
-    }
-
-    /// The current implementation of deref patterns requires that they can't match on the same
-    /// place as a normal constructor. Since this isn't caught by type-checking, we check it in the
-    /// `PatCx` before running the analysis. This reports an error if the check fails.
-    fn report_mixed_deref_pat_ctors(
-        &self,
-        deref_pat: &DeconstructedPat<Self>,
-        normal_pat: &DeconstructedPat<Self>,
-    ) -> Self::Error;
-}
-
-/// The arm of a match expression.
-#[derive(Debug)]
-pub struct MatchArm<'p, Cx: PatCx> {
-    pub pat: &'p DeconstructedPat<Cx>,
-    pub has_guard: bool,
-    pub arm_data: Cx::ArmData,
-}
-
-impl<'p, Cx: PatCx> Clone for MatchArm<'p, Cx> {
-    fn clone(&self) -> Self {
-        Self { pat: self.pat, has_guard: self.has_guard, arm_data: self.arm_data }
-    }
-}
-
-impl<'p, Cx: PatCx> Copy for MatchArm<'p, Cx> {}
+/* FP:lib.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_MOD_0001
+/* FP:lib.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_MOD_0002
+/* FP:lib.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_MOD_0003
+/* FP:lib.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_MOD_0004
+/* FP:lib.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_MOD_0005
+/* FP:lib.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_MOD_0006
+/* FP:lib.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_MOD_0007
+/* FP:lib.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_MOD_0008
+/* FP:lib.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_MACRO_0009
+/* FP:lib.rs-0018 */ # [cfg (feature = "rustc")] rustc_fluent_macro :: fluent_messages ! { "../messages.ftl" }
+/* FP:lib.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_USE_0010
+/* FP:lib.rs-0020 */ use std :: fmt ;
+/* FP:lib.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_USE_0011
+/* FP:lib.rs-0022 */ pub use crate :: rustc_index :: { Idx , IndexVec } ;
+/* FP:lib.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_USE_0012
+/* FP:lib.rs-0024 */ use crate :: constructor :: { Constructor , ConstructorSet , IntRange } ;
+/* FP:lib.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_USE_0013
+/* FP:lib.rs-0026 */ use crate :: pat :: DeconstructedPat ;
+/* FP:lib.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_TRAIT_0014
+/* FP:lib.rs-0028 */ pub trait Captures < 'a > { }
+/* FP:lib.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_IMPL_0015
+/* FP:lib.rs-0030 */ impl < 'a , T : ? Sized > Captures < 'a > for T { }
+/* FP:lib.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_STRUCT_0016
+/* FP:lib.rs-0032 */ # [doc = " `bool` newtype that indicates whether this is a privately uninhabited field that we should skip"] # [doc = " during analysis."] # [derive (Copy , Clone , Debug , PartialEq , Eq)] pub struct PrivateUninhabitedField (pub bool) ;
+/* FP:lib.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_TRAIT_0017
+/* FP:lib.rs-0034 */ # [doc = " Context that provides type information about constructors."] # [doc = ""] # [doc = " Most of the crate is parameterized on a type that implements this trait."] pub trait PatCx : Sized + fmt :: Debug { # [doc = " The type of a pattern."] type Ty : Clone + fmt :: Debug ; # [doc = " Errors that can abort analysis."] type Error : fmt :: Debug ; # [doc = " The index of an enum variant."] type VariantIdx : Clone + Idx + fmt :: Debug ; # [doc = " A string literal"] type StrLit : Clone + PartialEq + fmt :: Debug ; # [doc = " Extra data to store in a match arm."] type ArmData : Copy + Clone + fmt :: Debug ; # [doc = " Extra data to store in a pattern."] type PatData : Clone ; fn is_exhaustive_patterns_feature_on (& self) -> bool ; # [doc = " Whether to ensure the non-exhaustiveness witnesses we report for a complete set. This is"] # [doc = " `false` by default to avoid some exponential blowup cases such as"] # [doc = " <https://github.com/rust-lang/rust/issues/118437>."] fn exhaustive_witnesses (& self) -> bool { false } # [doc = " The number of fields for this constructor."] fn ctor_arity (& self , ctor : & Constructor < Self > , ty : & Self :: Ty) -> usize ; # [doc = " The types of the fields for this constructor. The result must contain `ctor_arity()` fields."] fn ctor_sub_tys (& self , ctor : & Constructor < Self > , ty : & Self :: Ty ,) -> impl Iterator < Item = (Self :: Ty , PrivateUninhabitedField) > + ExactSizeIterator ; # [doc = " The set of all the constructors for `ty`."] # [doc = ""] # [doc = " This must follow the invariants of `ConstructorSet`"] fn ctors_for_ty (& self , ty : & Self :: Ty) -> Result < ConstructorSet < Self > , Self :: Error > ; # [doc = " Write the name of the variant represented by `pat`. Used for the best-effort `Debug` impl of"] # [doc = " `DeconstructedPat`. Only invoqued when `pat.ctor()` is `Struct | Variant(_) | UnionField`."] fn write_variant_name (f : & mut fmt :: Formatter < '_ > , ctor : & crate :: constructor :: Constructor < Self > , ty : & Self :: Ty ,) -> fmt :: Result ; # [doc = " Raise a bug."] fn bug (& self , fmt : fmt :: Arguments < '_ >) -> Self :: Error ; # [doc = " Lint that the range `pat` overlapped with all the ranges in `overlaps_with`, where the range"] # [doc = " they overlapped over is `overlaps_on`. We only detect singleton overlaps."] # [doc = " The default implementation does nothing."] fn lint_overlapping_range_endpoints (& self , _pat : & DeconstructedPat < Self > , _overlaps_on : IntRange , _overlaps_with : & [& DeconstructedPat < Self >] ,) { } # [doc = " The maximum pattern complexity limit was reached."] fn complexity_exceeded (& self) -> Result < () , Self :: Error > ; # [doc = " Lint that there is a gap `gap` between `pat` and all of `gapped_with` such that the gap is"] # [doc = " not matched by another range. If `gapped_with` is empty, then `gap` is `T::MAX`. We only"] # [doc = " detect singleton gaps."] # [doc = " The default implementation does nothing."] fn lint_non_contiguous_range_endpoints (& self , _pat : & DeconstructedPat < Self > , _gap : IntRange , _gapped_with : & [& DeconstructedPat < Self >] ,) { } # [doc = " Check if we may need to perform additional deref-pattern-specific validation."] fn match_may_contain_deref_pats (& self) -> bool { true } # [doc = " The current implementation of deref patterns requires that they can't match on the same"] # [doc = " place as a normal constructor. Since this isn't caught by type-checking, we check it in the"] # [doc = " `PatCx` before running the analysis. This reports an error if the check fails."] fn report_mixed_deref_pat_ctors (& self , deref_pat : & DeconstructedPat < Self > , normal_pat : & DeconstructedPat < Self > ,) -> Self :: Error ; }
+/* FP:lib.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_STRUCT_0018
+/* FP:lib.rs-0036 */ # [doc = " The arm of a match expression."] # [derive (Debug)] pub struct MatchArm < 'p , Cx : PatCx > { pub pat : & 'p DeconstructedPat < Cx > , pub has_guard : bool , pub arm_data : Cx :: ArmData , }
+/* FP:lib.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_IMPL_0019
+/* FP:lib.rs-0038 */ impl < 'p , Cx : PatCx > Clone for MatchArm < 'p , Cx > { fn clone (& self) -> Self { Self { pat : self . pat , has_guard : self . has_guard , arm_data : self . arm_data } } }
+/* FP:lib.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_lib_IMPL_0020
+/* FP:lib.rs-0040 */ impl < 'p , Cx : PatCx > Copy for MatchArm < 'p , Cx > { }

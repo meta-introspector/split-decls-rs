@@ -1,183 +1,40 @@
-use std::fmt::Debug;
-use std::hash::Hash;
-use std::sync::OnceLock;
-
-use crate::rustc_data_structures::sharded::ShardedHashMap;
-pub use crate::rustc_data_structures::vec_cache::VecCache;
-use crate::rustc_complete::def_id::LOCAL_CRATE;
-use rustc_index::Idx;
-use crate::rustc_complete::def_id::{DefId, DefIndex};
-
-use crate::dep_graph::DepNodeIndex;
-
-/// Trait for types that serve as an in-memory cache for query results,
-/// for a given key (argument) type and value (return) type.
-///
-/// Types implementing this trait are associated with actual key/value types
-/// by the `Cache` associated type of the `crate::rustc_middle::query::Key` trait.
-pub trait QueryCache: Sized {
-    type Key: Hash + Eq + Copy + Debug;
-    type Value: Copy;
-
-    /// Returns the cached value (and other information) associated with the
-    /// given key, if it is present in the cache.
-    fn lookup(&self, key: &Self::Key) -> Option<(Self::Value, DepNodeIndex)>;
-
-    /// Adds a key/value entry to this cache.
-    ///
-    /// Called by some part of the query system, after having obtained the
-    /// value by executing the query or loading a cached value from disk.
-    fn complete(&self, key: Self::Key, value: Self::Value, index: DepNodeIndex);
-
-    fn iter(&self, f: &mut dyn FnMut(&Self::Key, &Self::Value, DepNodeIndex));
-}
-
-/// In-memory cache for queries whose keys aren't suitable for any of the
-/// more specialized kinds of cache. Backed by a sharded hashmap.
-pub struct DefaultCache<K, V> {
-    cache: ShardedHashMap<K, (V, DepNodeIndex)>,
-}
-
-impl<K, V> Default for DefaultCache<K, V> {
-    fn default() -> Self {
-        DefaultCache { cache: Default::default() }
-    }
-}
-
-impl<K, V> QueryCache for DefaultCache<K, V>
-where
-    K: Eq + Hash + Copy + Debug,
-    V: Copy,
-{
-    type Key = K;
-    type Value = V;
-
-    #[inline(always)]
-    fn lookup(&self, key: &K) -> Option<(V, DepNodeIndex)> {
-        self.cache.get(key)
-    }
-
-    #[inline]
-    fn complete(&self, key: K, value: V, index: DepNodeIndex) {
-        // We may be overwriting another value. This is all right, since the dep-graph
-        // will check that the fingerprint matches.
-        self.cache.insert(key, (value, index));
-    }
-
-    fn iter(&self, f: &mut dyn FnMut(&Self::Key, &Self::Value, DepNodeIndex)) {
-        for shard in self.cache.lock_shards() {
-            for (k, v) in shard.iter() {
-                f(k, &v.0, v.1);
-            }
-        }
-    }
-}
-
-/// In-memory cache for queries whose key type only has one value (e.g. `()`).
-/// The cache therefore only needs to store one query return value.
-pub struct SingleCache<V> {
-    cache: OnceLock<(V, DepNodeIndex)>,
-}
-
-impl<V> Default for SingleCache<V> {
-    fn default() -> Self {
-        SingleCache { cache: OnceLock::new() }
-    }
-}
-
-impl<V> QueryCache for SingleCache<V>
-where
-    V: Copy,
-{
-    type Key = ();
-    type Value = V;
-
-    #[inline(always)]
-    fn lookup(&self, _key: &()) -> Option<(V, DepNodeIndex)> {
-        self.cache.get().copied()
-    }
-
-    #[inline]
-    fn complete(&self, _key: (), value: V, index: DepNodeIndex) {
-        self.cache.set((value, index)).ok();
-    }
-
-    fn iter(&self, f: &mut dyn FnMut(&Self::Key, &Self::Value, DepNodeIndex)) {
-        if let Some(value) = self.cache.get() {
-            f(&(), &value.0, value.1)
-        }
-    }
-}
-
-/// In-memory cache for queries whose key is a [`DefId`].
-///
-/// Selects between one of two internal caches, depending on whether the key
-/// is a local ID or foreign-crate ID.
-pub struct DefIdCache<V> {
-    /// Stores the local DefIds in a dense map. Local queries are much more often dense, so this is
-    /// a win over hashing query keys at marginal memory cost (~5% at most) compared to FxHashMap.
-    local: VecCache<DefIndex, V, DepNodeIndex>,
-    foreign: DefaultCache<DefId, V>,
-}
-
-impl<V> Default for DefIdCache<V> {
-    fn default() -> Self {
-        DefIdCache { local: Default::default(), foreign: Default::default() }
-    }
-}
-
-impl<V> QueryCache for DefIdCache<V>
-where
-    V: Copy,
-{
-    type Key = DefId;
-    type Value = V;
-
-    #[inline(always)]
-    fn lookup(&self, key: &DefId) -> Option<(V, DepNodeIndex)> {
-        if key.krate == LOCAL_CRATE {
-            self.local.lookup(&key.index)
-        } else {
-            self.foreign.lookup(key)
-        }
-    }
-
-    #[inline]
-    fn complete(&self, key: DefId, value: V, index: DepNodeIndex) {
-        if key.krate == LOCAL_CRATE {
-            self.local.complete(key.index, value, index)
-        } else {
-            self.foreign.complete(key, value, index)
-        }
-    }
-
-    fn iter(&self, f: &mut dyn FnMut(&Self::Key, &Self::Value, DepNodeIndex)) {
-        self.local.iter(&mut |key, value, index| {
-            f(&DefId { krate: LOCAL_CRATE, index: *key }, value, index);
-        });
-        self.foreign.iter(f);
-    }
-}
-
-impl<K, V> QueryCache for VecCache<K, V, DepNodeIndex>
-where
-    K: Idx + Eq + Hash + Copy + Debug,
-    V: Copy,
-{
-    type Key = K;
-    type Value = V;
-
-    #[inline(always)]
-    fn lookup(&self, key: &K) -> Option<(V, DepNodeIndex)> {
-        self.lookup(key)
-    }
-
-    #[inline]
-    fn complete(&self, key: K, value: V, index: DepNodeIndex) {
-        self.complete(key, value, index)
-    }
-
-    fn iter(&self, f: &mut dyn FnMut(&Self::Key, &Self::Value, DepNodeIndex)) {
-        self.iter(f)
-    }
-}
+/* FP:caches.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_USE_0001
+/* FP:caches.rs-0002 */ use std :: fmt :: Debug ;
+/* FP:caches.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_USE_0002
+/* FP:caches.rs-0004 */ use std :: hash :: Hash ;
+/* FP:caches.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_USE_0003
+/* FP:caches.rs-0006 */ use std :: sync :: OnceLock ;
+/* FP:caches.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_USE_0004
+/* FP:caches.rs-0008 */ use crate :: rustc_data_structures :: sharded :: ShardedHashMap ;
+/* FP:caches.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_USE_0005
+/* FP:caches.rs-0010 */ pub use crate :: rustc_data_structures :: vec_cache :: VecCache ;
+/* FP:caches.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_USE_0006
+/* FP:caches.rs-0012 */ use crate :: rustc_complete :: def_id :: LOCAL_CRATE ;
+/* FP:caches.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_USE_0007
+/* FP:caches.rs-0014 */ use crate :: rustc_index :: Idx ;
+/* FP:caches.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_USE_0008
+/* FP:caches.rs-0016 */ use crate :: rustc_complete :: def_id :: { DefId , DefIndex } ;
+/* FP:caches.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_USE_0009
+/* FP:caches.rs-0018 */ use crate :: dep_graph :: DepNodeIndex ;
+/* FP:caches.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_TRAIT_0010
+/* FP:caches.rs-0020 */ # [doc = " Trait for types that serve as an in-memory cache for query results,"] # [doc = " for a given key (argument) type and value (return) type."] # [doc = ""] # [doc = " Types implementing this trait are associated with actual key/value types"] # [doc = " by the `Cache` associated type of the `crate::rustc_middle::query::Key` trait."] pub trait QueryCache : Sized { type Key : Hash + Eq + Copy + Debug ; type Value : Copy ; # [doc = " Returns the cached value (and other information) associated with the"] # [doc = " given key, if it is present in the cache."] fn lookup (& self , key : & Self :: Key) -> Option < (Self :: Value , DepNodeIndex) > ; # [doc = " Adds a key/value entry to this cache."] # [doc = ""] # [doc = " Called by some part of the query system, after having obtained the"] # [doc = " value by executing the query or loading a cached value from disk."] fn complete (& self , key : Self :: Key , value : Self :: Value , index : DepNodeIndex) ; fn iter (& self , f : & mut dyn FnMut (& Self :: Key , & Self :: Value , DepNodeIndex)) ; }
+/* FP:caches.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_STRUCT_0011
+/* FP:caches.rs-0022 */ # [doc = " In-memory cache for queries whose keys aren't suitable for any of the"] # [doc = " more specialized kinds of cache. Backed by a sharded hashmap."] pub struct DefaultCache < K , V > { cache : ShardedHashMap < K , (V , DepNodeIndex) > , }
+/* FP:caches.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_IMPL_0012
+/* FP:caches.rs-0024 */ impl < K , V > Default for DefaultCache < K , V > { fn default () -> Self { DefaultCache { cache : Default :: default () } } }
+/* FP:caches.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_IMPL_0013
+/* FP:caches.rs-0026 */ impl < K , V > QueryCache for DefaultCache < K , V > where K : Eq + Hash + Copy + Debug , V : Copy , { type Key = K ; type Value = V ; # [inline (always)] fn lookup (& self , key : & K) -> Option < (V , DepNodeIndex) > { self . cache . get (key) } # [inline] fn complete (& self , key : K , value : V , index : DepNodeIndex) { self . cache . insert (key , (value , index)) ; } fn iter (& self , f : & mut dyn FnMut (& Self :: Key , & Self :: Value , DepNodeIndex)) { for shard in self . cache . lock_shards () { for (k , v) in shard . iter () { f (k , & v . 0 , v . 1) ; } } } }
+/* FP:caches.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_STRUCT_0014
+/* FP:caches.rs-0028 */ # [doc = " In-memory cache for queries whose key type only has one value (e.g. `()`)."] # [doc = " The cache therefore only needs to store one query return value."] pub struct SingleCache < V > { cache : OnceLock < (V , DepNodeIndex) > , }
+/* FP:caches.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_IMPL_0015
+/* FP:caches.rs-0030 */ impl < V > Default for SingleCache < V > { fn default () -> Self { SingleCache { cache : OnceLock :: new () } } }
+/* FP:caches.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_IMPL_0016
+/* FP:caches.rs-0032 */ impl < V > QueryCache for SingleCache < V > where V : Copy , { type Key = () ; type Value = V ; # [inline (always)] fn lookup (& self , _key : & ()) -> Option < (V , DepNodeIndex) > { self . cache . get () . copied () } # [inline] fn complete (& self , _key : () , value : V , index : DepNodeIndex) { self . cache . set ((value , index)) . ok () ; } fn iter (& self , f : & mut dyn FnMut (& Self :: Key , & Self :: Value , DepNodeIndex)) { if let Some (value) = self . cache . get () { f (& () , & value . 0 , value . 1) } } }
+/* FP:caches.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_STRUCT_0017
+/* FP:caches.rs-0034 */ # [doc = " In-memory cache for queries whose key is a [`DefId`]."] # [doc = ""] # [doc = " Selects between one of two internal caches, depending on whether the key"] # [doc = " is a local ID or foreign-crate ID."] pub struct DefIdCache < V > { # [doc = " Stores the local DefIds in a dense map. Local queries are much more often dense, so this is"] # [doc = " a win over hashing query keys at marginal memory cost (~5% at most) compared to FxHashMap."] local : VecCache < DefIndex , V , DepNodeIndex > , foreign : DefaultCache < DefId , V > , }
+/* FP:caches.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_IMPL_0018
+/* FP:caches.rs-0036 */ impl < V > Default for DefIdCache < V > { fn default () -> Self { DefIdCache { local : Default :: default () , foreign : Default :: default () } } }
+/* FP:caches.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_IMPL_0019
+/* FP:caches.rs-0038 */ impl < V > QueryCache for DefIdCache < V > where V : Copy , { type Key = DefId ; type Value = V ; # [inline (always)] fn lookup (& self , key : & DefId) -> Option < (V , DepNodeIndex) > { if key . krate == LOCAL_CRATE { self . local . lookup (& key . index) } else { self . foreign . lookup (key) } } # [inline] fn complete (& self , key : DefId , value : V , index : DepNodeIndex) { if key . krate == LOCAL_CRATE { self . local . complete (key . index , value , index) } else { self . foreign . complete (key , value , index) } } fn iter (& self , f : & mut dyn FnMut (& Self :: Key , & Self :: Value , DepNodeIndex)) { self . local . iter (& mut | key , value , index | { f (& DefId { krate : LOCAL_CRATE , index : * key } , value , index) ; }) ; self . foreign . iter (f) ; } }
+/* FP:caches.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_query_caches_IMPL_0020
+/* FP:caches.rs-0040 */ impl < K , V > QueryCache for VecCache < K , V , DepNodeIndex > where K : Idx + Eq + Hash + Copy + Debug , V : Copy , { type Key = K ; type Value = V ; # [inline (always)] fn lookup (& self , key : & K) -> Option < (V , DepNodeIndex) > { self . lookup (key) } # [inline] fn complete (& self , key : K , value : V , index : DepNodeIndex) { self . complete (key , value , index) } fn iter (& self , f : & mut dyn FnMut (& Self :: Key , & Self :: Value , DepNodeIndex)) { self . iter (f) } }

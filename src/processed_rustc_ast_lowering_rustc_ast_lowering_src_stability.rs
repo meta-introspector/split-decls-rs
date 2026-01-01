@@ -1,144 +1,28 @@
-use std::fmt;
-
-use rustc_abi::ExternAbi;
-use rustc_feature::Features;
-use crate::rustc_complete::Session;
-use crate::rustc_complete::parse::feature_err;
-use crate::rustc_complete::symbol::sym;
-use crate::rustc_complete::{Span, Symbol};
-
-pub(crate) fn enabled_names(features: &rustc_feature::Features, span: Span) -> Vec<&'static str> {
-    ExternAbi::ALL_VARIANTS
-        .into_iter()
-        .filter(|abi| extern_abi_enabled(features, span, **abi).is_ok())
-        .map(|abi| abi.as_str())
-        .collect()
-}
-
-pub(crate) fn extern_abi_enabled(
-    features: &rustc_feature::Features,
-    span: Span,
-    abi: ExternAbi,
-) -> Result<(), UnstableAbi> {
-    extern_abi_stability(abi).or_else(|unstable @ UnstableAbi { feature, .. }| {
-        if features.enabled(feature) || span.allows_unstable(feature) {
-            Ok(())
-        } else {
-            Err(unstable)
-        }
-    })
-}
-
-#[allow(rustc::untranslatable_diagnostic)]
-pub(crate) fn gate_unstable_abi(sess: &Session, features: &Features, span: Span, abi: ExternAbi) {
-    match extern_abi_enabled(features, span, abi) {
-        Ok(_) => (),
-        Err(unstable_abi) => {
-            let explain = unstable_abi.to_string();
-            feature_err(sess, unstable_abi.feature, span, explain).emit();
-        }
-    }
-}
-
-pub struct UnstableAbi {
-    abi: ExternAbi,
-    feature: Symbol,
-    explain: GateReason,
-}
-
-enum GateReason {
-    Experimental,
-    ImplDetail,
-}
-
-impl fmt::Display for UnstableAbi {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let Self { abi, .. } = self;
-        match self.explain {
-            GateReason::Experimental => {
-                write!(f, "the unsafe extern {abi} ABI is experimental and subject to change")
-            }
-            GateReason::ImplDetail => {
-                write!(f, "the unsafe extern {abi} ABI is an implementation detail and perma-unstable")
-            }
-        }
-    }
-}
-
-pub fn extern_abi_stability(abi: ExternAbi) -> Result<(), UnstableAbi> {
-    match abi {
-        // stable ABIs
-        ExternAbi::Rust
-        | ExternAbi::C { .. }
-        | ExternAbi::Cdecl { .. }
-        | ExternAbi::Stdcall { .. }
-        | ExternAbi::Fastcall { .. }
-        | ExternAbi::Thiscall { .. }
-        | ExternAbi::Aapcs { .. }
-        | ExternAbi::Win64 { .. }
-        | ExternAbi::SysV64 { .. }
-        | ExternAbi::System { .. }
-        | ExternAbi::EfiApi => Ok(()),
-        ExternAbi::Unadjusted => {
-            Err(UnstableAbi { abi, feature: sym::abi_unadjusted, explain: GateReason::ImplDetail })
-        }
-        // experimental
-        ExternAbi::Vectorcall { .. } => Err(UnstableAbi {
-            abi,
-            feature: sym::abi_vectorcall,
-            explain: GateReason::Experimental,
-        }),
-        ExternAbi::RustCall => Err(UnstableAbi {
-            abi,
-            feature: sym::unboxed_closures,
-            explain: GateReason::Experimental,
-        }),
-        ExternAbi::RustCold => {
-            Err(UnstableAbi { abi, feature: sym::rust_cold_cc, explain: GateReason::Experimental })
-        }
-        ExternAbi::RustInvalid => {
-            Err(UnstableAbi { abi, feature: sym::rustc_attrs, explain: GateReason::ImplDetail })
-        }
-        ExternAbi::GpuKernel => Err(UnstableAbi {
-            abi,
-            feature: sym::abi_gpu_kernel,
-            explain: GateReason::Experimental,
-        }),
-        ExternAbi::PtxKernel => {
-            Err(UnstableAbi { abi, feature: sym::abi_ptx, explain: GateReason::Experimental })
-        }
-        ExternAbi::Msp430Interrupt => Err(UnstableAbi {
-            abi,
-            feature: sym::abi_msp430_interrupt,
-            explain: GateReason::Experimental,
-        }),
-        ExternAbi::X86Interrupt => Err(UnstableAbi {
-            abi,
-            feature: sym::abi_x86_interrupt,
-            explain: GateReason::Experimental,
-        }),
-        ExternAbi::AvrInterrupt | ExternAbi::AvrNonBlockingInterrupt => Err(UnstableAbi {
-            abi,
-            feature: sym::abi_avr_interrupt,
-            explain: GateReason::Experimental,
-        }),
-        ExternAbi::RiscvInterruptM | ExternAbi::RiscvInterruptS => Err(UnstableAbi {
-            abi,
-            feature: sym::abi_riscv_interrupt,
-            explain: GateReason::Experimental,
-        }),
-        ExternAbi::CmseNonSecureCall => Err(UnstableAbi {
-            abi,
-            feature: sym::abi_cmse_nonsecure_call,
-            explain: GateReason::Experimental,
-        }),
-        ExternAbi::CmseNonSecureEntry => Err(UnstableAbi {
-            abi,
-            feature: sym::cmse_nonsecure_entry,
-            explain: GateReason::Experimental,
-        }),
-        ExternAbi::Custom => {
-            Err(UnstableAbi { abi, feature: sym::abi_custom, explain: GateReason::Experimental })
-        }
-    }
-}
+/* FP:stability.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_lowering_src_stability_USE_0001
+/* FP:stability.rs-0002 */ use std :: fmt ;
+/* FP:stability.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_lowering_src_stability_USE_0002
+/* FP:stability.rs-0004 */ use crate :: rustc_abi :: ExternAbi ;
+/* FP:stability.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_lowering_src_stability_USE_0003
+/* FP:stability.rs-0006 */ use crate :: rustc_feature :: Features ;
+/* FP:stability.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_lowering_src_stability_USE_0004
+/* FP:stability.rs-0008 */ use crate :: rustc_complete :: Session ;
+/* FP:stability.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_lowering_src_stability_USE_0005
+/* FP:stability.rs-0010 */ use crate :: rustc_complete :: parse :: feature_err ;
+/* FP:stability.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_lowering_src_stability_USE_0006
+/* FP:stability.rs-0012 */ use crate :: rustc_complete :: symbol :: sym ;
+/* FP:stability.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_lowering_src_stability_USE_0007
+/* FP:stability.rs-0014 */ use crate :: rustc_complete :: { Span , Symbol } ;
+/* FP:stability.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_lowering_src_stability_FN_0008
+/* FP:stability.rs-0016 */ pub (crate) fn enabled_names (features : & crate :: rustc_feature :: Features , span : Span) -> Vec < & 'static str > { ExternAbi :: ALL_VARIANTS . into_iter () . filter (| abi | extern_abi_enabled (features , span , * * abi) . is_ok ()) . map (| abi | abi . as_str ()) . collect () }
+/* FP:stability.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_lowering_src_stability_FN_0009
+/* FP:stability.rs-0018 */ pub (crate) fn extern_abi_enabled (features : & crate :: rustc_feature :: Features , span : Span , abi : ExternAbi ,) -> Result < () , UnstableAbi > { extern_abi_stability (abi) . or_else (| unstable @ UnstableAbi { feature , .. } | { if features . enabled (feature) || span . allows_unstable (feature) { Ok (()) } else { Err (unstable) } }) }
+/* FP:stability.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_lowering_src_stability_FN_0010
+/* FP:stability.rs-0020 */ # [allow (rustc :: untranslatable_diagnostic)] pub (crate) fn gate_unstable_abi (sess : & Session , features : & Features , span : Span , abi : ExternAbi) { match extern_abi_enabled (features , span , abi) { Ok (_) => () , Err (unstable_abi) => { let explain = unstable_abi . to_string () ; feature_err (sess , unstable_abi . feature , span , explain) . emit () ; } } }
+/* FP:stability.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_lowering_src_stability_STRUCT_0011
+/* FP:stability.rs-0022 */ pub struct UnstableAbi { abi : ExternAbi , feature : Symbol , explain : GateReason , }
+/* FP:stability.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_lowering_src_stability_ENUM_0012
+/* FP:stability.rs-0024 */ enum GateReason { Experimental , ImplDetail , }
+/* FP:stability.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_lowering_src_stability_IMPL_0013
+/* FP:stability.rs-0026 */ impl fmt :: Display for UnstableAbi { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let Self { abi , .. } = self ; match self . explain { GateReason :: Experimental => { write ! (f , "the unsafe extern {abi} ABI is experimental and subject to change") } GateReason :: ImplDetail => { write ! (f , "the unsafe extern {abi} ABI is an implementation detail and perma-unstable") } } } }
+/* FP:stability.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_lowering_src_stability_FN_0014
+/* FP:stability.rs-0028 */ pub fn extern_abi_stability (abi : ExternAbi) -> Result < () , UnstableAbi > { match abi { ExternAbi :: Rust | ExternAbi :: C { .. } | ExternAbi :: Cdecl { .. } | ExternAbi :: Stdcall { .. } | ExternAbi :: Fastcall { .. } | ExternAbi :: Thiscall { .. } | ExternAbi :: Aapcs { .. } | ExternAbi :: Win64 { .. } | ExternAbi :: SysV64 { .. } | ExternAbi :: System { .. } | ExternAbi :: EfiApi => Ok (()) , ExternAbi :: Unadjusted => { Err (UnstableAbi { abi , feature : sym :: abi_unadjusted , explain : GateReason :: ImplDetail }) } ExternAbi :: Vectorcall { .. } => Err (UnstableAbi { abi , feature : sym :: abi_vectorcall , explain : GateReason :: Experimental , }) , ExternAbi :: RustCall => Err (UnstableAbi { abi , feature : sym :: unboxed_closures , explain : GateReason :: Experimental , }) , ExternAbi :: RustCold => { Err (UnstableAbi { abi , feature : sym :: rust_cold_cc , explain : GateReason :: Experimental }) } ExternAbi :: RustInvalid => { Err (UnstableAbi { abi , feature : sym :: rustc_attrs , explain : GateReason :: ImplDetail }) } ExternAbi :: GpuKernel => Err (UnstableAbi { abi , feature : sym :: abi_gpu_kernel , explain : GateReason :: Experimental , }) , ExternAbi :: PtxKernel => { Err (UnstableAbi { abi , feature : sym :: abi_ptx , explain : GateReason :: Experimental }) } ExternAbi :: Msp430Interrupt => Err (UnstableAbi { abi , feature : sym :: abi_msp430_interrupt , explain : GateReason :: Experimental , }) , ExternAbi :: X86Interrupt => Err (UnstableAbi { abi , feature : sym :: abi_x86_interrupt , explain : GateReason :: Experimental , }) , ExternAbi :: AvrInterrupt | ExternAbi :: AvrNonBlockingInterrupt => Err (UnstableAbi { abi , feature : sym :: abi_avr_interrupt , explain : GateReason :: Experimental , }) , ExternAbi :: RiscvInterruptM | ExternAbi :: RiscvInterruptS => Err (UnstableAbi { abi , feature : sym :: abi_riscv_interrupt , explain : GateReason :: Experimental , }) , ExternAbi :: CmseNonSecureCall => Err (UnstableAbi { abi , feature : sym :: abi_cmse_nonsecure_call , explain : GateReason :: Experimental , }) , ExternAbi :: CmseNonSecureEntry => Err (UnstableAbi { abi , feature : sym :: cmse_nonsecure_entry , explain : GateReason :: Experimental , }) , ExternAbi :: Custom => { Err (UnstableAbi { abi , feature : sym :: abi_custom , explain : GateReason :: Experimental }) } } }

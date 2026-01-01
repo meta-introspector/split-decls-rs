@@ -1,40 +1,12 @@
-use std::path::PathBuf;
-use std::sync::Arc;
-
-use rustc_macros::{Decodable, Encodable, HashStable};
-
-#[derive(HashStable)]
-#[derive(Copy, PartialEq, PartialOrd, Clone, Ord, Eq, Hash, Debug, Encodable, Decodable)]
-pub enum DebuggerVisualizerType {
-    Natvis,
-    GdbPrettyPrinter,
-}
-
-/// A single debugger visualizer file.
-#[derive(HashStable)]
-#[derive(Clone, Debug, Hash, PartialEq, Eq, PartialOrd, Ord, Encodable, Decodable)]
-pub struct DebuggerVisualizerFile {
-    /// The complete debugger visualizer source.
-    pub src: Arc<[u8]>,
-    /// Indicates which visualizer type this targets.
-    pub visualizer_type: DebuggerVisualizerType,
-    /// The file path to the visualizer file. This is used for reporting
-    /// visualizer files in dep-info. Before it is written to crate metadata,
-    /// the path is erased to `None`, so as not to emit potentially privacy
-    /// sensitive data.
-    pub path: Option<PathBuf>,
-}
-
-impl DebuggerVisualizerFile {
-    pub fn new(src: Arc<[u8]>, visualizer_type: DebuggerVisualizerType, path: PathBuf) -> Self {
-        DebuggerVisualizerFile { src, visualizer_type, path: Some(path) }
-    }
-
-    pub fn path_erased(&self) -> Self {
-        DebuggerVisualizerFile {
-            src: Arc::clone(&self.src),
-            visualizer_type: self.visualizer_type,
-            path: None,
-        }
-    }
-}
+/* FP:debugger_visualizer.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_debugger_visualizer_USE_0001
+/* FP:debugger_visualizer.rs-0002 */ use std :: path :: PathBuf ;
+/* FP:debugger_visualizer.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_debugger_visualizer_USE_0002
+/* FP:debugger_visualizer.rs-0004 */ use std :: sync :: Arc ;
+/* FP:debugger_visualizer.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_debugger_visualizer_USE_0003
+/* FP:debugger_visualizer.rs-0006 */ use rustc_macros :: { Decodable , Encodable , HashStable } ;
+/* FP:debugger_visualizer.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_debugger_visualizer_ENUM_0004
+/* FP:debugger_visualizer.rs-0008 */ # [derive (HashStable)] # [derive (Copy , PartialEq , PartialOrd , Clone , Ord , Eq , Hash , Debug , Encodable , Decodable)] pub enum DebuggerVisualizerType { Natvis , GdbPrettyPrinter , }
+/* FP:debugger_visualizer.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_debugger_visualizer_STRUCT_0005
+/* FP:debugger_visualizer.rs-0010 */ # [doc = " A single debugger visualizer file."] # [derive (HashStable)] # [derive (Clone , Debug , Hash , PartialEq , Eq , PartialOrd , Ord , Encodable , Decodable)] pub struct DebuggerVisualizerFile { # [doc = " The complete debugger visualizer source."] pub src : Arc < [u8] > , # [doc = " Indicates which visualizer type this targets."] pub visualizer_type : DebuggerVisualizerType , # [doc = " The file path to the visualizer file. This is used for reporting"] # [doc = " visualizer files in dep-info. Before it is written to crate metadata,"] # [doc = " the path is erased to `None`, so as not to emit potentially privacy"] # [doc = " sensitive data."] pub path : Option < PathBuf > , }
+/* FP:debugger_visualizer.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_debugger_visualizer_IMPL_0006
+/* FP:debugger_visualizer.rs-0012 */ impl DebuggerVisualizerFile { pub fn new (src : Arc < [u8] > , visualizer_type : DebuggerVisualizerType , path : PathBuf) -> Self { DebuggerVisualizerFile { src , visualizer_type , path : Some (path) } } pub fn path_erased (& self) -> Self { DebuggerVisualizerFile { src : Arc :: clone (& self . src) , visualizer_type : self . visualizer_type , path : None , } } }

@@ -1,29 +1,10 @@
-use std::borrow::Borrow;
-
-use crate::rustc_data_structures::profiling::EventArgRecorder;
-
-use crate::source_map::SourceMap;
-
-/// Extension trait for self-profiling purposes: allows to record spans within a generic activity's
-/// event arguments.
-pub trait SpannedEventArgRecorder {
-    /// Records the following event arguments within the current generic activity being profiled:
-    /// - the provided `event_arg`
-    /// - a string representation of the provided `span`
-    ///
-    /// Note: when self-profiling with costly event arguments, at least one argument
-    /// needs to be recorded. A panic will be triggered if that doesn't happen.
-    fn record_arg_with_span<A>(&mut self, source_map: &SourceMap, event_arg: A, span: crate::Span)
-    where
-        A: Borrow<str> + Into<String>;
-}
-
-impl SpannedEventArgRecorder for EventArgRecorder<'_> {
-    fn record_arg_with_span<A>(&mut self, source_map: &SourceMap, event_arg: A, span: crate::Span)
-    where
-        A: Borrow<str> + Into<String>,
-    {
-        self.record_arg(event_arg);
-        self.record_arg(source_map.span_to_embeddable_string(span));
-    }
-}
+/* FP:profiling.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_profiling_USE_0001
+/* FP:profiling.rs-0002 */ use std :: borrow :: Borrow ;
+/* FP:profiling.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_profiling_USE_0002
+/* FP:profiling.rs-0004 */ use crate :: rustc_data_structures :: profiling :: EventArgRecorder ;
+/* FP:profiling.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_profiling_USE_0003
+/* FP:profiling.rs-0006 */ use crate :: source_map :: SourceMap ;
+/* FP:profiling.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_profiling_TRAIT_0004
+/* FP:profiling.rs-0008 */ # [doc = " Extension trait for self-profiling purposes: allows to record spans within a generic activity's"] # [doc = " event arguments."] pub trait SpannedEventArgRecorder { # [doc = " Records the following event arguments within the current generic activity being profiled:"] # [doc = " - the provided `event_arg`"] # [doc = " - a string representation of the provided `span`"] # [doc = ""] # [doc = " Note: when self-profiling with costly event arguments, at least one argument"] # [doc = " needs to be recorded. A panic will be triggered if that doesn't happen."] fn record_arg_with_span < A > (& mut self , source_map : & SourceMap , event_arg : A , span : crate :: Span) where A : Borrow < str > + Into < String > ; }
+/* FP:profiling.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_profiling_IMPL_0005
+/* FP:profiling.rs-0010 */ impl SpannedEventArgRecorder for EventArgRecorder < '_ > { fn record_arg_with_span < A > (& mut self , source_map : & SourceMap , event_arg : A , span : crate :: Span) where A : Borrow < str > + Into < String > , { self . record_arg (event_arg) ; self . record_arg (source_map . span_to_embeddable_string (span)) ; } }

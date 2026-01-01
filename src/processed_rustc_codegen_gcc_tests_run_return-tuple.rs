@@ -1,32 +1,6 @@
-// Compiler:
-//
-// Run-time:
-//   status: 0
-//   stdout: 10
-//     10
-//     42
-
-#[feature(no_core)]
-#[no_std]
-#[no_core]
-#[no_main]
-
-use mini_core::*;
-
-fn int_cast(a: u16, b: i16) -> (u8, u16, u32, usize, i8, i16, i32, isize, u8, u32) {
-    (
-        a as u8, a as u16, a as u32, a as usize, a as i8, a as i16, a as i32, a as isize, b as u8,
-        b as u32,
-    )
-}
-
-#[unsafe(no_mangle)]
-extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
-    let (a, b, c, d, e, f, g, h, i, j) = int_cast(10, 42);
-    unsafe {
-        libc::printf(b"%d\n\0" as *const u8 as *const i8, c);
-        libc::printf(b"%ld\n\0" as *const u8 as *const i8, d);
-        libc::printf(b"%ld\n\0" as *const u8 as *const i8, j);
-    }
-    0
-}
+/* FP:return-tuple.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_run_return-tuple_USE_0001
+/* FP:return-tuple.rs-0002 */ # [feature (no_core)] # [no_std] # [no_core] # [no_main] use mini_core :: * ;
+/* FP:return-tuple.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_run_return-tuple_FN_0002
+/* FP:return-tuple.rs-0004 */ fn int_cast (a : u16 , b : i16) -> (u8 , u16 , u32 , usize , i8 , i16 , i32 , isize , u8 , u32) { (a as u8 , a as u16 , a as u32 , a as usize , a as i8 , a as i16 , a as i32 , a as isize , b as u8 , b as u32 ,) }
+/* FP:return-tuple.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_run_return-tuple_FN_0003
+/* FP:return-tuple.rs-0006 */ # [unsafe (no_mangle)] extern "C" fn main (argc : i32 , _argv : * const * const u8) -> i32 { let (a , b , c , d , e , f , g , h , i , j) = int_cast (10 , 42) ; unsafe { libc :: printf (b"%d\n\0" as * const u8 as * const i8 , c) ; libc :: printf (b"%ld\n\0" as * const u8 as * const i8 , d) ; libc :: printf (b"%ld\n\0" as * const u8 as * const i8 , j) ; } 0 }

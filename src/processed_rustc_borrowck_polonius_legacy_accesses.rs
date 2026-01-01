@@ -1,84 +1,24 @@
-use crate::rustc_complete::mir::visit::{MutatingUseContext, PlaceContext, Visitor};
-use crate::rustc_complete::mir::{Body, Local, Location, Place};
-use crate::rustc_complete::ty::TyCtxt;
-use rustc_mir_dataflow::move_paths::{LookupResult, MoveData};
-use tracing::debug;
-
-use super::{LocationIndex, PoloniusFacts, PoloniusLocationTable};
-use crate::def_use::{self, DefUse};
-use crate::universal_regions::UniversalRegions;
-
-/// Emit polonius facts for variable defs, uses, drops, and path accesses.
-pub(crate) fn emit_access_facts<'tcx>(
-    tcx: TyCtxt<'tcx>,
-    facts: &mut PoloniusFacts,
-    body: &Body<'tcx>,
-    location_table: &PoloniusLocationTable,
-    move_data: &MoveData<'tcx>,
-    universal_regions: &UniversalRegions<'tcx>,
-) {
-    let mut extractor = AccessFactsExtractor { facts, move_data, location_table };
-    extractor.visit_body(body);
-
-    for (local, local_decl) in body.local_decls.iter_enumerated() {
-        debug!("add use_of_var_derefs_origin facts - local={:?}, type={:?}", local, local_decl.ty);
-        tcx.for_each_free_region(&local_decl.ty, |region| {
-            let region_vid = universal_regions.to_region_vid(region);
-            facts.use_of_var_derefs_origin.push((local, region_vid.into()));
-        });
-    }
-}
-
-/// MIR visitor extracting point-wise facts about accesses.
-struct AccessFactsExtractor<'a, 'tcx> {
-    facts: &'a mut PoloniusFacts,
-    move_data: &'a MoveData<'tcx>,
-    location_table: &'a PoloniusLocationTable,
-}
-
-impl<'tcx> AccessFactsExtractor<'_, 'tcx> {
-    fn location_to_index(&self, location: Location) -> LocationIndex {
-        self.location_table.mid_index(location)
-    }
-}
-
-impl<'a, 'tcx> Visitor<'tcx> for AccessFactsExtractor<'a, 'tcx> {
-    fn visit_local(&mut self, local: Local, context: PlaceContext, location: Location) {
-        match def_use::categorize(context) {
-            Some(DefUse::Def) => {
-                debug!("AccessFactsExtractor - emit def");
-                self.facts.var_defined_at.push((local, self.location_to_index(location)));
-            }
-            Some(DefUse::Use) => {
-                debug!("AccessFactsExtractor - emit use");
-                self.facts.var_used_at.push((local, self.location_to_index(location)));
-            }
-            Some(DefUse::Drop) => {
-                debug!("AccessFactsExtractor - emit drop");
-                self.facts.var_dropped_at.push((local, self.location_to_index(location)));
-            }
-            _ => (),
-        }
-    }
-
-    fn visit_place(&mut self, place: &Place<'tcx>, context: PlaceContext, location: Location) {
-        self.super_place(place, context, location);
-
-        match context {
-            PlaceContext::NonMutatingUse(_)
-            | PlaceContext::MutatingUse(MutatingUseContext::Borrow) => {
-                let path = match self.move_data.rev_lookup.find(place.as_ref()) {
-                    LookupResult::Exact(path) | LookupResult::Parent(Some(path)) => path,
-                    _ => {
-                        // There's no path access to emit.
-                        return;
-                    }
-                };
-                debug!("AccessFactsExtractor - emit path access ({path:?}, {location:?})");
-                self.facts.path_accessed_at_base.push((path, self.location_to_index(location)));
-            }
-
-            _ => {}
-        }
-    }
-}
+/* FP:accesses.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_polonius_legacy_accesses_USE_0001
+/* FP:accesses.rs-0002 */ use crate :: rustc_complete :: mir :: visit :: { MutatingUseContext , PlaceContext , Visitor } ;
+/* FP:accesses.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_polonius_legacy_accesses_USE_0002
+/* FP:accesses.rs-0004 */ use crate :: rustc_complete :: mir :: { Body , Local , Location , Place } ;
+/* FP:accesses.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_polonius_legacy_accesses_USE_0003
+/* FP:accesses.rs-0006 */ use crate :: rustc_complete :: ty :: TyCtxt ;
+/* FP:accesses.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_polonius_legacy_accesses_USE_0004
+/* FP:accesses.rs-0008 */ use crate :: rustc_mir_dataflow :: move_paths :: { LookupResult , MoveData } ;
+/* FP:accesses.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_polonius_legacy_accesses_USE_0005
+/* FP:accesses.rs-0010 */ use tracing :: debug ;
+/* FP:accesses.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_polonius_legacy_accesses_USE_0006
+/* FP:accesses.rs-0012 */ use super :: { LocationIndex , PoloniusFacts , PoloniusLocationTable } ;
+/* FP:accesses.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_polonius_legacy_accesses_USE_0007
+/* FP:accesses.rs-0014 */ use crate :: def_use :: { self , DefUse } ;
+/* FP:accesses.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_polonius_legacy_accesses_USE_0008
+/* FP:accesses.rs-0016 */ use crate :: universal_regions :: UniversalRegions ;
+/* FP:accesses.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_polonius_legacy_accesses_FN_0009
+/* FP:accesses.rs-0018 */ # [doc = " Emit polonius facts for variable defs, uses, drops, and path accesses."] pub (crate) fn emit_access_facts < 'tcx > (tcx : TyCtxt < 'tcx > , facts : & mut PoloniusFacts , body : & Body < 'tcx > , location_table : & PoloniusLocationTable , move_data : & MoveData < 'tcx > , universal_regions : & UniversalRegions < 'tcx > ,) { let mut extractor = AccessFactsExtractor { facts , move_data , location_table } ; extractor . visit_body (body) ; for (local , local_decl) in body . local_decls . iter_enumerated () { debug ! ("add use_of_var_derefs_origin facts - local={:?}, type={:?}" , local , local_decl . ty) ; tcx . for_each_free_region (& local_decl . ty , | region | { let region_vid = universal_regions . to_region_vid (region) ; facts . use_of_var_derefs_origin . push ((local , region_vid . into ())) ; }) ; } }
+/* FP:accesses.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_polonius_legacy_accesses_STRUCT_0010
+/* FP:accesses.rs-0020 */ # [doc = " MIR visitor extracting point-wise facts about accesses."] struct AccessFactsExtractor < 'a , 'tcx > { facts : & 'a mut PoloniusFacts , move_data : & 'a MoveData < 'tcx > , location_table : & 'a PoloniusLocationTable , }
+/* FP:accesses.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_polonius_legacy_accesses_IMPL_0011
+/* FP:accesses.rs-0022 */ impl < 'tcx > AccessFactsExtractor < '_ , 'tcx > { fn location_to_index (& self , location : Location) -> LocationIndex { self . location_table . mid_index (location) } }
+/* FP:accesses.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_polonius_legacy_accesses_IMPL_0012
+/* FP:accesses.rs-0024 */ impl < 'a , 'tcx > Visitor < 'tcx > for AccessFactsExtractor < 'a , 'tcx > { fn visit_local (& mut self , local : Local , context : PlaceContext , location : Location) { match def_use :: categorize (context) { Some (DefUse :: Def) => { debug ! ("AccessFactsExtractor - emit def") ; self . facts . var_defined_at . push ((local , self . location_to_index (location))) ; } Some (DefUse :: Use) => { debug ! ("AccessFactsExtractor - emit use") ; self . facts . var_used_at . push ((local , self . location_to_index (location))) ; } Some (DefUse :: Drop) => { debug ! ("AccessFactsExtractor - emit drop") ; self . facts . var_dropped_at . push ((local , self . location_to_index (location))) ; } _ => () , } } fn visit_place (& mut self , place : & Place < 'tcx > , context : PlaceContext , location : Location) { self . super_place (place , context , location) ; match context { PlaceContext :: NonMutatingUse (_) | PlaceContext :: MutatingUse (MutatingUseContext :: Borrow) => { let path = match self . move_data . rev_lookup . find (place . as_ref ()) { LookupResult :: Exact (path) | LookupResult :: Parent (Some (path)) => path , _ => { return ; } } ; debug ! ("AccessFactsExtractor - emit path access ({path:?}, {location:?})") ; self . facts . path_accessed_at_base . push ((path , self . location_to_index (location))) ; } _ => { } } } }

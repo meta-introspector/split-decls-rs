@@ -1,15 +1,6 @@
-#[allow(unused_crate_dependencies)]
-
-use std::error::Error;
-
-use rustc_thread_pool::ThreadPoolBuilder;
-
-#[test]
-#[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
-fn double_init_fail() {
-    let result1 = ThreadPoolBuilder::new().build_global();
-    assert!(result1.is_ok());
-    let err = ThreadPoolBuilder::new().build_global().unwrap_err();
-    assert!(err.source().is_none());
-    assert_eq!(err.to_string(), "The global thread pool has already been initialized.",);
-}
+/* FP:double_init_fail.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_tests_double_init_fail_USE_0001
+/* FP:double_init_fail.rs-0002 */ # [allow (unused_crate_dependencies)] use std :: error :: Error ;
+/* FP:double_init_fail.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_tests_double_init_fail_USE_0002
+/* FP:double_init_fail.rs-0004 */ use crate :: rustc_thread_pool :: ThreadPoolBuilder ;
+/* FP:double_init_fail.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_tests_double_init_fail_FN_0003
+/* FP:double_init_fail.rs-0006 */ # [test] # [cfg_attr (any (target_os = "emscripten" , target_family = "wasm") , ignore)] fn double_init_fail () { let result1 = ThreadPoolBuilder :: new () . build_global () ; assert ! (result1 . is_ok ()) ; let err = ThreadPoolBuilder :: new () . build_global () . unwrap_err () ; assert ! (err . source () . is_none ()) ; assert_eq ! (err . to_string () , "The global thread pool has already been initialized." ,) ; }

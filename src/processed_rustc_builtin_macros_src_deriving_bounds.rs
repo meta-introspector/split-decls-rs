@@ -1,93 +1,16 @@
-use crate::rustc_complete::MetaItem;
-use rustc_expand::base::{Annotatable, ExtCtxt};
-use crate::rustc_complete::Span;
-
-use crate::deriving::generic::*;
-use crate::deriving::path_std;
-
-pub(crate) fn expand_deriving_copy(
-    cx: &ExtCtxt<'_>,
-    span: Span,
-    mitem: &MetaItem,
-    item: &Annotatable,
-    push: &mut dyn FnMut(Annotatable),
-    is_const: bool,
-) {
-    let trait_def = TraitDef {
-        span,
-        path: path_std!(marker::Copy),
-        skip_path_as_bound: false,
-        needs_copy_as_bound_if_packed: false,
-        additional_bounds: Vec::new(),
-        supports_unions: true,
-        methods: Vec::new(),
-        associated_types: Vec::new(),
-        is_const,
-        is_staged_api_crate: cx.ecfg.features.staged_api(),
-    };
-
-    trait_def.expand(cx, mitem, item, push);
-}
-
-pub(crate) fn expand_deriving_const_param_ty(
-    cx: &ExtCtxt<'_>,
-    span: Span,
-    mitem: &MetaItem,
-    item: &Annotatable,
-    push: &mut dyn FnMut(Annotatable),
-    is_const: bool,
-) {
-    let trait_def = TraitDef {
-        span,
-        path: path_std!(marker::ConstParamTy_),
-        skip_path_as_bound: false,
-        needs_copy_as_bound_if_packed: false,
-        additional_bounds: vec![ty::Ty::Path(path_std!(cmp::Eq))],
-        supports_unions: false,
-        methods: Vec::new(),
-        associated_types: Vec::new(),
-        is_const,
-        is_staged_api_crate: cx.ecfg.features.staged_api(),
-    };
-
-    trait_def.expand(cx, mitem, item, push);
-
-    let trait_def = TraitDef {
-        span,
-        path: path_std!(marker::UnsizedConstParamTy),
-        skip_path_as_bound: false,
-        needs_copy_as_bound_if_packed: false,
-        additional_bounds: vec![ty::Ty::Path(path_std!(cmp::Eq))],
-        supports_unions: false,
-        methods: Vec::new(),
-        associated_types: Vec::new(),
-        is_const,
-        is_staged_api_crate: cx.ecfg.features.staged_api(),
-    };
-
-    trait_def.expand(cx, mitem, item, push);
-}
-
-pub(crate) fn expand_deriving_unsized_const_param_ty(
-    cx: &ExtCtxt<'_>,
-    span: Span,
-    mitem: &MetaItem,
-    item: &Annotatable,
-    push: &mut dyn FnMut(Annotatable),
-    is_const: bool,
-) {
-    let trait_def = TraitDef {
-        span,
-        path: path_std!(marker::UnsizedConstParamTy),
-        skip_path_as_bound: false,
-        needs_copy_as_bound_if_packed: false,
-        additional_bounds: vec![ty::Ty::Path(path_std!(cmp::Eq))],
-        supports_unions: false,
-        methods: Vec::new(),
-        associated_types: Vec::new(),
-        is_const,
-        is_staged_api_crate: cx.ecfg.features.staged_api(),
-    };
-
-    trait_def.expand(cx, mitem, item, push);
-}
+/* FP:bounds.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_bounds_USE_0001
+/* FP:bounds.rs-0002 */ use crate :: rustc_complete :: MetaItem ;
+/* FP:bounds.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_bounds_USE_0002
+/* FP:bounds.rs-0004 */ use crate :: rustc_expand :: base :: { Annotatable , ExtCtxt } ;
+/* FP:bounds.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_bounds_USE_0003
+/* FP:bounds.rs-0006 */ use crate :: rustc_complete :: Span ;
+/* FP:bounds.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_bounds_USE_0004
+/* FP:bounds.rs-0008 */ use crate :: deriving :: generic :: * ;
+/* FP:bounds.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_bounds_USE_0005
+/* FP:bounds.rs-0010 */ use crate :: deriving :: path_std ;
+/* FP:bounds.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_bounds_FN_0006
+/* FP:bounds.rs-0012 */ pub (crate) fn expand_deriving_copy (cx : & ExtCtxt < '_ > , span : Span , mitem : & MetaItem , item : & Annotatable , push : & mut dyn FnMut (Annotatable) , is_const : bool ,) { let trait_def = TraitDef { span , path : path_std ! (marker :: Copy) , skip_path_as_bound : false , needs_copy_as_bound_if_packed : false , additional_bounds : Vec :: new () , supports_unions : true , methods : Vec :: new () , associated_types : Vec :: new () , is_const , is_staged_api_crate : cx . ecfg . features . staged_api () , } ; trait_def . expand (cx , mitem , item , push) ; }
+/* FP:bounds.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_bounds_FN_0007
+/* FP:bounds.rs-0014 */ pub (crate) fn expand_deriving_const_param_ty (cx : & ExtCtxt < '_ > , span : Span , mitem : & MetaItem , item : & Annotatable , push : & mut dyn FnMut (Annotatable) , is_const : bool ,) { let trait_def = TraitDef { span , path : path_std ! (marker :: ConstParamTy_) , skip_path_as_bound : false , needs_copy_as_bound_if_packed : false , additional_bounds : vec ! [ty :: Ty :: Path (path_std ! (cmp :: Eq))] , supports_unions : false , methods : Vec :: new () , associated_types : Vec :: new () , is_const , is_staged_api_crate : cx . ecfg . features . staged_api () , } ; trait_def . expand (cx , mitem , item , push) ; let trait_def = TraitDef { span , path : path_std ! (marker :: UnsizedConstParamTy) , skip_path_as_bound : false , needs_copy_as_bound_if_packed : false , additional_bounds : vec ! [ty :: Ty :: Path (path_std ! (cmp :: Eq))] , supports_unions : false , methods : Vec :: new () , associated_types : Vec :: new () , is_const , is_staged_api_crate : cx . ecfg . features . staged_api () , } ; trait_def . expand (cx , mitem , item , push) ; }
+/* FP:bounds.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_bounds_FN_0008
+/* FP:bounds.rs-0016 */ pub (crate) fn expand_deriving_unsized_const_param_ty (cx : & ExtCtxt < '_ > , span : Span , mitem : & MetaItem , item : & Annotatable , push : & mut dyn FnMut (Annotatable) , is_const : bool ,) { let trait_def = TraitDef { span , path : path_std ! (marker :: UnsizedConstParamTy) , skip_path_as_bound : false , needs_copy_as_bound_if_packed : false , additional_bounds : vec ! [ty :: Ty :: Path (path_std ! (cmp :: Eq))] , supports_unions : false , methods : Vec :: new () , associated_types : Vec :: new () , is_const , is_staged_api_crate : cx . ecfg . features . staged_api () , } ; trait_def . expand (cx , mitem , item , push) ; }

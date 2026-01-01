@@ -1,171 +1,26 @@
-use crate::rustc_complete::token;
-use crate::rustc_complete::tokenstream::{DelimSpacing, DelimSpan, Spacing, TokenStream, TokenTree};
-use crate::rustc_complete::ErrorGuaranteed;
-use rustc_expand::base::{AttrProcMacro, ExtCtxt};
-use crate::rustc_complete::Span;
-use crate::rustc_complete::symbol::{Ident, Symbol, kw};
-
-pub(crate) struct ExpandRequires;
-
-pub(crate) struct ExpandEnsures;
-
-impl AttrProcMacro for ExpandRequires {
-    fn expand<'cx>(
-        &self,
-        ecx: &'cx mut ExtCtxt<'_>,
-        span: Span,
-        annotation: TokenStream,
-        annotated: TokenStream,
-    ) -> Result<TokenStream, ErrorGuaranteed> {
-        expand_requires_tts(ecx, span, annotation, annotated)
-    }
-}
-
-impl AttrProcMacro for ExpandEnsures {
-    fn expand<'cx>(
-        &self,
-        ecx: &'cx mut ExtCtxt<'_>,
-        span: Span,
-        annotation: TokenStream,
-        annotated: TokenStream,
-    ) -> Result<TokenStream, ErrorGuaranteed> {
-        expand_ensures_tts(ecx, span, annotation, annotated)
-    }
-}
-
-/// Expand the function signature to include the contract clause.
-///
-/// The contracts clause will be injected before the function body and the optional where clause.
-/// For that, we search for the body / where token, and invoke the `inject` callback to generate the
-/// contract clause in the right place.
-///
-// FIXME: this kind of manual token tree munging does not have significant precedent among
-// rustc builtin macros, probably because most builtin macros use direct AST manipulation to
-// accomplish similar goals. But since our attributes need to take arbitrary expressions, and
-// our attribute infrastructure does not yet support mixing a token-tree annotation with an AST
-// annotated, we end up doing token tree manipulation.
-fn expand_contract_clause(
-    ecx: &mut ExtCtxt<'_>,
-    attr_span: Span,
-    annotated: TokenStream,
-    inject: impl FnOnce(&mut TokenStream) -> Result<(), ErrorGuaranteed>,
-) -> Result<TokenStream, ErrorGuaranteed> {
-    let mut new_tts = TokenStream::default();
-    let mut cursor = annotated.iter();
-
-    let is_kw = |tt: &TokenTree, sym: Symbol| {
-        if let TokenTree::Token(token, _) = tt { token.is_ident_named(sym) } else { false }
-    };
-
-    // Find the `fn` keyword to check if this is a function.
-    if cursor
-        .find(|tt| {
-            new_tts.push_tree((*tt).clone());
-            is_kw(tt, kw::Fn)
-        })
-        .is_none()
-    {
-        return Err(ecx
-            .sess
-            .dcx()
-            .span_err(attr_span, "contract annotations can only be used on functions"));
-    }
-
-    // Found the `fn` keyword, now find either the `where` token or the function body.
-    let next_tt = loop {
-        let Some(tt) = cursor.next() else {
-            return Err(ecx.sess.dcx().span_err(
-                attr_span,
-                "contract annotations is only supported in functions with bodies",
-            ));
-        };
-        // If `tt` is the last element. Check if it is the function body.
-        if cursor.peek().is_none() {
-            if let TokenTree::Delimited(_, _, token::Delimiter::Brace, _) = tt {
-                break tt;
-            } else {
-                return Err(ecx.sess.dcx().span_err(
-                    attr_span,
-                    "contract annotations is only supported in functions with bodies",
-                ));
-            }
-        }
-
-        if is_kw(tt, kw::Where) {
-            break tt;
-        }
-        new_tts.push_tree(tt.clone());
-    };
-
-    // At this point, we've transcribed everything from the `fn` through the formal parameter list
-    // and return type declaration, (if any), but `tt` itself has *not* been transcribed.
-    //
-    // Now inject the AST contract form.
-    //
-    inject(&mut new_tts)?;
-
-    // Above we injected the internal AST requires/ensures construct. Now copy over all the other
-    // token trees.
-    new_tts.push_tree(next_tt.clone());
-    while let Some(tt) = cursor.next() {
-        new_tts.push_tree(tt.clone());
-        if cursor.peek().is_none()
-            && !matches!(tt, TokenTree::Delimited(_, _, token::Delimiter::Brace, _))
-        {
-            return Err(ecx.sess.dcx().span_err(
-                attr_span,
-                "contract annotations is only supported in functions with bodies",
-            ));
-        }
-    }
-
-    Ok(new_tts)
-}
-
-fn expand_requires_tts(
-    ecx: &mut ExtCtxt<'_>,
-    attr_span: Span,
-    annotation: TokenStream,
-    annotated: TokenStream,
-) -> Result<TokenStream, ErrorGuaranteed> {
-    let feature_span = ecx.with_def_site_ctxt(attr_span);
-    expand_contract_clause(ecx, attr_span, annotated, |new_tts| {
-        new_tts.push_tree(TokenTree::Token(
-            token::Token::from_ast_ident(Ident::new(kw::ContractRequires, feature_span)),
-            Spacing::Joint,
-        ));
-        new_tts.push_tree(TokenTree::Token(
-            token::Token::new(token::TokenKind::OrOr, attr_span),
-            Spacing::Alone,
-        ));
-        new_tts.push_tree(TokenTree::Delimited(
-            DelimSpan::from_single(attr_span),
-            DelimSpacing::new(Spacing::JointHidden, Spacing::JointHidden),
-            token::Delimiter::Parenthesis,
-            annotation,
-        ));
-        Ok(())
-    })
-}
-
-fn expand_ensures_tts(
-    ecx: &mut ExtCtxt<'_>,
-    attr_span: Span,
-    annotation: TokenStream,
-    annotated: TokenStream,
-) -> Result<TokenStream, ErrorGuaranteed> {
-    let feature_span = ecx.with_def_site_ctxt(attr_span);
-    expand_contract_clause(ecx, attr_span, annotated, |new_tts| {
-        new_tts.push_tree(TokenTree::Token(
-            token::Token::from_ast_ident(Ident::new(kw::ContractEnsures, feature_span)),
-            Spacing::Joint,
-        ));
-        new_tts.push_tree(TokenTree::Delimited(
-            DelimSpan::from_single(attr_span),
-            DelimSpacing::new(Spacing::JointHidden, Spacing::JointHidden),
-            token::Delimiter::Parenthesis,
-            annotation,
-        ));
-        Ok(())
-    })
-}
+/* FP:contracts.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_contracts_USE_0001
+/* FP:contracts.rs-0002 */ use crate :: rustc_complete :: token ;
+/* FP:contracts.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_contracts_USE_0002
+/* FP:contracts.rs-0004 */ use crate :: rustc_complete :: tokenstream :: { DelimSpacing , DelimSpan , Spacing , TokenStream , TokenTree } ;
+/* FP:contracts.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_contracts_USE_0003
+/* FP:contracts.rs-0006 */ use crate :: rustc_complete :: ErrorGuaranteed ;
+/* FP:contracts.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_contracts_USE_0004
+/* FP:contracts.rs-0008 */ use crate :: rustc_expand :: base :: { AttrProcMacro , ExtCtxt } ;
+/* FP:contracts.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_contracts_USE_0005
+/* FP:contracts.rs-0010 */ use crate :: rustc_complete :: Span ;
+/* FP:contracts.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_contracts_USE_0006
+/* FP:contracts.rs-0012 */ use crate :: rustc_complete :: symbol :: { Ident , Symbol , kw } ;
+/* FP:contracts.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_contracts_STRUCT_0007
+/* FP:contracts.rs-0014 */ pub (crate) struct ExpandRequires ;
+/* FP:contracts.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_contracts_STRUCT_0008
+/* FP:contracts.rs-0016 */ pub (crate) struct ExpandEnsures ;
+/* FP:contracts.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_contracts_IMPL_0009
+/* FP:contracts.rs-0018 */ impl AttrProcMacro for ExpandRequires { fn expand < 'cx > (& self , ecx : & 'cx mut ExtCtxt < '_ > , span : Span , annotation : TokenStream , annotated : TokenStream ,) -> Result < TokenStream , ErrorGuaranteed > { expand_requires_tts (ecx , span , annotation , annotated) } }
+/* FP:contracts.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_contracts_IMPL_0010
+/* FP:contracts.rs-0020 */ impl AttrProcMacro for ExpandEnsures { fn expand < 'cx > (& self , ecx : & 'cx mut ExtCtxt < '_ > , span : Span , annotation : TokenStream , annotated : TokenStream ,) -> Result < TokenStream , ErrorGuaranteed > { expand_ensures_tts (ecx , span , annotation , annotated) } }
+/* FP:contracts.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_contracts_FN_0011
+/* FP:contracts.rs-0022 */ # [doc = " Expand the function signature to include the contract clause."] # [doc = ""] # [doc = " The contracts clause will be injected before the function body and the optional where clause."] # [doc = " For that, we search for the body / where token, and invoke the `inject` callback to generate the"] # [doc = " contract clause in the right place."] # [doc = ""] fn expand_contract_clause (ecx : & mut ExtCtxt < '_ > , attr_span : Span , annotated : TokenStream , inject : impl FnOnce (& mut TokenStream) -> Result < () , ErrorGuaranteed > ,) -> Result < TokenStream , ErrorGuaranteed > { let mut new_tts = TokenStream :: default () ; let mut cursor = annotated . iter () ; let is_kw = | tt : & TokenTree , sym : Symbol | { if let TokenTree :: Token (token , _) = tt { token . is_ident_named (sym) } else { false } } ; if cursor . find (| tt | { new_tts . push_tree ((* tt) . clone ()) ; is_kw (tt , kw :: Fn) }) . is_none () { return Err (ecx . sess . dcx () . span_err (attr_span , "contract annotations can only be used on functions")) ; } let next_tt = loop { let Some (tt) = cursor . next () else { return Err (ecx . sess . dcx () . span_err (attr_span , "contract annotations is only supported in functions with bodies" ,)) ; } ; if cursor . peek () . is_none () { if let TokenTree :: Delimited (_ , _ , token :: Delimiter :: Brace , _) = tt { break tt ; } else { return Err (ecx . sess . dcx () . span_err (attr_span , "contract annotations is only supported in functions with bodies" ,)) ; } } if is_kw (tt , kw :: Where) { break tt ; } new_tts . push_tree (tt . clone ()) ; } ; inject (& mut new_tts) ? ; new_tts . push_tree (next_tt . clone ()) ; while let Some (tt) = cursor . next () { new_tts . push_tree (tt . clone ()) ; if cursor . peek () . is_none () && ! matches ! (tt , TokenTree :: Delimited (_ , _ , token :: Delimiter :: Brace , _)) { return Err (ecx . sess . dcx () . span_err (attr_span , "contract annotations is only supported in functions with bodies" ,)) ; } } Ok (new_tts) }
+/* FP:contracts.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_contracts_FN_0012
+/* FP:contracts.rs-0024 */ fn expand_requires_tts (ecx : & mut ExtCtxt < '_ > , attr_span : Span , annotation : TokenStream , annotated : TokenStream ,) -> Result < TokenStream , ErrorGuaranteed > { let feature_span = ecx . with_def_site_ctxt (attr_span) ; expand_contract_clause (ecx , attr_span , annotated , | new_tts | { new_tts . push_tree (TokenTree :: Token (token :: Token :: from_ast_ident (Ident :: new (kw :: ContractRequires , feature_span)) , Spacing :: Joint ,)) ; new_tts . push_tree (TokenTree :: Token (token :: Token :: new (token :: TokenKind :: OrOr , attr_span) , Spacing :: Alone ,)) ; new_tts . push_tree (TokenTree :: Delimited (DelimSpan :: from_single (attr_span) , DelimSpacing :: new (Spacing :: JointHidden , Spacing :: JointHidden) , token :: Delimiter :: Parenthesis , annotation ,)) ; Ok (()) }) }
+/* FP:contracts.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_contracts_FN_0013
+/* FP:contracts.rs-0026 */ fn expand_ensures_tts (ecx : & mut ExtCtxt < '_ > , attr_span : Span , annotation : TokenStream , annotated : TokenStream ,) -> Result < TokenStream , ErrorGuaranteed > { let feature_span = ecx . with_def_site_ctxt (attr_span) ; expand_contract_clause (ecx , attr_span , annotated , | new_tts | { new_tts . push_tree (TokenTree :: Token (token :: Token :: from_ast_ident (Ident :: new (kw :: ContractEnsures , feature_span)) , Spacing :: Joint ,)) ; new_tts . push_tree (TokenTree :: Delimited (DelimSpan :: from_single (attr_span) , DelimSpacing :: new (Spacing :: JointHidden , Spacing :: JointHidden) , token :: Delimiter :: Parenthesis , annotation ,)) ; Ok (()) }) }

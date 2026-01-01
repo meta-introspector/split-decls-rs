@@ -1,84 +1,20 @@
-use crate::rustc_complete::token::Delimiter;
-use crate::rustc_complete::tokenstream::{DelimSpan, TokenStream};
-use crate::rustc_complete::*;
-use rustc_expand::base::*;
-use crate::rustc_complete::edition::Edition;
-use crate::rustc_complete::{Span, sym};
-
-/// This expands to either
-/// - `$crate::panic::panic_2015!(...)` or
-/// - `$crate::panic::panic_2021!(...)`
-/// depending on the edition.
-///
-/// This is used for both std::panic!() and core::panic!().
-///
-/// `$crate` will refer to either the `std` or `core` crate depending on which
-/// one we're expanding from.
-pub(crate) fn expand_panic<'cx>(
-    cx: &'cx mut ExtCtxt<'_>,
-    sp: Span,
-    tts: TokenStream,
-) -> MacroExpanderResult<'cx> {
-    let mac = if use_panic_2021(sp) { sym::panic_2021 } else { sym::panic_2015 };
-    expand(mac, cx, sp, tts)
-}
-
-/// This expands to either
-/// - `$crate::panic::unreachable_2015!(...)` or
-/// - `$crate::panic::unreachable_2021!(...)`
-/// depending on the edition.
-pub(crate) fn expand_unreachable<'cx>(
-    cx: &'cx mut ExtCtxt<'_>,
-    sp: Span,
-    tts: TokenStream,
-) -> MacroExpanderResult<'cx> {
-    let mac = if use_panic_2021(sp) { sym::unreachable_2021 } else { sym::unreachable_2015 };
-    expand(mac, cx, sp, tts)
-}
-
-fn expand<'cx>(
-    mac: crate::rustc_span::Symbol,
-    cx: &'cx ExtCtxt<'_>,
-    sp: Span,
-    tts: TokenStream,
-) -> MacroExpanderResult<'cx> {
-    let sp = cx.with_call_site_ctxt(sp);
-
-    ExpandResult::Ready(MacEager::expr(
-        cx.expr(
-            sp,
-            ExprKind::MacCall(Box::new(MacCall {
-                path: Path {
-                    span: sp,
-                    segments: cx
-                        .std_path(&[sym::panic, mac])
-                        .into_iter()
-                        .map(|ident| PathSegment::from_ident(ident))
-                        .collect(),
-                    tokens: None,
-                },
-                args: Box::new(DelimArgs {
-                    dspan: DelimSpan::from_single(sp),
-                    delim: Delimiter::Parenthesis,
-                    tokens: tts,
-                }),
-            })),
-        ),
-    ))
-}
-
-pub(crate) fn use_panic_2021(mut span: Span) -> bool {
-    // To determine the edition, we check the first span up the expansion
-    // stack that does not have #[allow_internal_unstable(edition_panic)].
-    // (To avoid using the edition of e.g. the assert!() or debug_assert!() definition.)
-    loop {
-        let expn = span.ctxt().outer_expn_data();
-        if let Some(features) = expn.allow_internal_unstable
-            && features.contains(&sym::edition_panic)
-        {
-            span = expn.call_site;
-            continue;
-        }
-        break expn.edition >= Edition::Edition2021;
-    }
-}
+/* FP:edition_panic.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_edition_panic_USE_0001
+/* FP:edition_panic.rs-0002 */ use crate :: rustc_complete :: token :: Delimiter ;
+/* FP:edition_panic.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_edition_panic_USE_0002
+/* FP:edition_panic.rs-0004 */ use crate :: rustc_complete :: tokenstream :: { DelimSpan , TokenStream } ;
+/* FP:edition_panic.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_edition_panic_USE_0003
+/* FP:edition_panic.rs-0006 */ use crate :: rustc_complete :: * ;
+/* FP:edition_panic.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_edition_panic_USE_0004
+/* FP:edition_panic.rs-0008 */ use crate :: rustc_expand :: base :: * ;
+/* FP:edition_panic.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_edition_panic_USE_0005
+/* FP:edition_panic.rs-0010 */ use crate :: rustc_complete :: edition :: Edition ;
+/* FP:edition_panic.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_edition_panic_USE_0006
+/* FP:edition_panic.rs-0012 */ use crate :: rustc_complete :: { Span , sym } ;
+/* FP:edition_panic.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_edition_panic_FN_0007
+/* FP:edition_panic.rs-0014 */ # [doc = " This expands to either"] # [doc = " - `$crate::panic::panic_2015!(...)` or"] # [doc = " - `$crate::panic::panic_2021!(...)`"] # [doc = " depending on the edition."] # [doc = ""] # [doc = " This is used for both std::panic!() and core::panic!()."] # [doc = ""] # [doc = " `$crate` will refer to either the `std` or `core` crate depending on which"] # [doc = " one we're expanding from."] pub (crate) fn expand_panic < 'cx > (cx : & 'cx mut ExtCtxt < '_ > , sp : Span , tts : TokenStream ,) -> MacroExpanderResult < 'cx > { let mac = if use_panic_2021 (sp) { sym :: panic_2021 } else { sym :: panic_2015 } ; expand (mac , cx , sp , tts) }
+/* FP:edition_panic.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_edition_panic_FN_0008
+/* FP:edition_panic.rs-0016 */ # [doc = " This expands to either"] # [doc = " - `$crate::panic::unreachable_2015!(...)` or"] # [doc = " - `$crate::panic::unreachable_2021!(...)`"] # [doc = " depending on the edition."] pub (crate) fn expand_unreachable < 'cx > (cx : & 'cx mut ExtCtxt < '_ > , sp : Span , tts : TokenStream ,) -> MacroExpanderResult < 'cx > { let mac = if use_panic_2021 (sp) { sym :: unreachable_2021 } else { sym :: unreachable_2015 } ; expand (mac , cx , sp , tts) }
+/* FP:edition_panic.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_edition_panic_FN_0009
+/* FP:edition_panic.rs-0018 */ fn expand < 'cx > (mac : crate :: rustc_span :: Symbol , cx : & 'cx ExtCtxt < '_ > , sp : Span , tts : TokenStream ,) -> MacroExpanderResult < 'cx > { let sp = cx . with_call_site_ctxt (sp) ; ExpandResult :: Ready (MacEager :: expr (cx . expr (sp , ExprKind :: MacCall (Box :: new (MacCall { path : Path { span : sp , segments : cx . std_path (& [sym :: panic , mac]) . into_iter () . map (| ident | PathSegment :: from_ident (ident)) . collect () , tokens : None , } , args : Box :: new (DelimArgs { dspan : DelimSpan :: from_single (sp) , delim : Delimiter :: Parenthesis , tokens : tts , }) , })) ,) ,)) }
+/* FP:edition_panic.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_edition_panic_FN_0010
+/* FP:edition_panic.rs-0020 */ pub (crate) fn use_panic_2021 (mut span : Span) -> bool { loop { let expn = span . ctxt () . outer_expn_data () ; if let Some (features) = expn . allow_internal_unstable && features . contains (& sym :: edition_panic) { span = expn . call_site ; continue ; } break expn . edition >= Edition :: Edition2021 ; } }

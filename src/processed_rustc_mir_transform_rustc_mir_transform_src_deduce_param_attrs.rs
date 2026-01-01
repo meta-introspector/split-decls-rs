@@ -1,196 +1,22 @@
-// Deduces supplementary parameter attributes from MIR.
-//
-// Deduced parameter attributes are those that can only be soundly determined by examining the
-// body of the function instead of just the signature. These can be useful for optimization
-// purposes on a best-effort basis. We compute them here and store them into the crate metadata so
-// dependent crates can use them.
-
-use crate::rustc_complete::def_id::LocalDefId;
-use rustc_index::bit_set::DenseBitSet;
-use crate::rustc_complete::mir::visit::{NonMutatingUseContext, PlaceContext, Visitor};
-use crate::rustc_complete::mir::{Body, Location, Operand, Place, RETURN_PLACE, Terminator, TerminatorKind};
-use crate::rustc_complete::ty::{self, DeducedParamAttrs, Ty, TyCtxt};
-use crate::rustc_complete::config::OptLevel;
-
-/// A visitor that determines which arguments have been mutated. We can't use the mutability field
-/// on LocalDecl for this because it has no meaning post-optimization.
-struct DeduceReadOnly {
-    /// Each bit is indexed by argument number, starting at zero (so 0 corresponds to local decl
-    /// 1). The bit is true if the argument may have been mutated or false if we know it hasn't
-    /// been up to the point we're at.
-    mutable_args: DenseBitSet<usize>,
-}
-
-impl DeduceReadOnly {
-    /// Returns a new DeduceReadOnly instance.
-    fn new(arg_count: usize) -> Self {
-        Self { mutable_args: DenseBitSet::new_empty(arg_count) }
-    }
-}
-
-impl<'tcx> Visitor<'tcx> for DeduceReadOnly {
-    fn visit_place(&mut self, place: &Place<'tcx>, context: PlaceContext, _location: Location) {
-        // We're only interested in arguments.
-        if place.local == RETURN_PLACE || place.local.index() > self.mutable_args.domain_size() {
-            return;
-        }
-
-        let mark_as_mutable = match context {
-            PlaceContext::MutatingUse(..) => {
-                // This is a mutation, so mark it as such.
-                true
-            }
-            PlaceContext::NonMutatingUse(NonMutatingUseContext::RawBorrow) => {
-                // Whether mutating though a `&raw const` is allowed is still undecided, so we
-                // disable any sketchy `readonly` optimizations for now. But we only need to do
-                // this if the pointer would point into the argument. IOW: for indirect places,
-                // like `&raw (*local).field`, this surely cannot mutate `local`.
-                !place.is_indirect()
-            }
-            PlaceContext::NonMutatingUse(..) | PlaceContext::NonUse(..) => {
-                // Not mutating, so it's fine.
-                false
-            }
-        };
-
-        if mark_as_mutable {
-            self.mutable_args.insert(place.local.index() - 1);
-        }
-    }
-
-    fn visit_terminator(&mut self, terminator: &Terminator<'tcx>, location: Location) {
-        // OK, this is subtle. Suppose that we're trying to deduce whether `x` in `f` is read-only
-        // and we have the following:
-        //
-        //     fn f(x: BigStruct) { g(x) }
-        //     fn g(mut y: BigStruct) { y.foo = 1 }
-        //
-        // If, at the generated MIR level, `f` turned into something like:
-        //
-        //      fn f(_1: BigStruct) -> () {
-        //          let mut _0: ();
-        //          bb0: {
-        //              _0 = g(move _1) -> bb1;
-        //          }
-        //          ...
-        //      }
-        //
-        // then it would be incorrect to mark `x` (i.e. `_1`) as `readonly`, because `g`'s write to
-        // its copy of the indirect parameter would actually be a write directly to the pointer that
-        // `f` passes. Note that function arguments are the only situation in which this problem can
-        // arise: every other use of `move` in MIR doesn't actually write to the value it moves
-        // from.
-        if let TerminatorKind::Call { ref args, .. } = terminator.kind {
-            for arg in args {
-                if let Operand::Move(place) = arg.node {
-                    let local = place.local;
-                    if place.is_indirect()
-                        || local == RETURN_PLACE
-                        || local.index() > self.mutable_args.domain_size()
-                    {
-                        continue;
-                    }
-
-                    self.mutable_args.insert(local.index() - 1);
-                }
-            }
-        };
-
-        self.super_terminator(terminator, location);
-    }
-}
-
-/// Returns true if values of a given type will never be passed indirectly, regardless of ABI.
-fn type_will_always_be_passed_directly(ty: Ty<'_>) -> bool {
-    matches!(
-        ty.kind(),
-        ty::Bool
-            | ty::Char
-            | ty::Float(..)
-            | ty::Int(..)
-            | ty::RawPtr(..)
-            | ty::Ref(..)
-            | ty::Slice(..)
-            | ty::Uint(..)
-    )
-}
-
-/// Returns the deduced parameter attributes for a function.
-///
-/// Deduced parameter attributes are those that can only be soundly determined by examining the
-/// body of the function instead of just the signature. These can be useful for optimization
-/// purposes on a best-effort basis. We compute them here and store them into the crate metadata so
-/// dependent crates can use them.
-pub(super) fn deduced_param_attrs<'tcx>(
-    tcx: TyCtxt<'tcx>,
-    def_id: LocalDefId,
-) -> &'tcx [DeducedParamAttrs] {
-    // This computation is unfortunately rather expensive, so don't do it unless we're optimizing.
-    // Also skip it in incremental mode.
-    if tcx.sess.opts.optimize == OptLevel::No || tcx.sess.opts.incremental.is_some() {
-        return &[];
-    }
-
-    // If the Freeze lang item isn't present, then don't bother.
-    if tcx.lang_items().freeze_trait().is_none() {
-        return &[];
-    }
-
-    // Codegen won't use this information for anything if all the function parameters are passed
-    // directly. Detect that and bail, for compilation speed.
-    let fn_ty = tcx.type_of(def_id).instantiate_identity();
-    if matches!(fn_ty.kind(), ty::FnDef(..))
-        && fn_ty
-            .fn_sig(tcx)
-            .inputs()
-            .skip_binder()
-            .iter()
-            .cloned()
-            .all(type_will_always_be_passed_directly)
-    {
-        return &[];
-    }
-
-    // Don't deduce any attributes for functions that have no MIR.
-    if !tcx.is_mir_available(def_id) {
-        return &[];
-    }
-
-    // Grab the optimized MIR. Analyze it to determine which arguments have been mutated.
-    let body: &Body<'tcx> = tcx.optimized_mir(def_id);
-    let mut deduce_read_only = DeduceReadOnly::new(body.arg_count);
-    deduce_read_only.visit_body(body);
-
-    // Set the `readonly` attribute for every argument that we concluded is immutable and that
-    // contains no UnsafeCells.
-    //
-    // FIXME: This is overly conservative around generic parameters: `is_freeze()` will always
-    // return false for them. For a description of alternatives that could do a better job here,
-    // see [1].
-    //
-    // [1]: https://github.com/rust-lang/rust/pull/103172#discussion_r999139997
-    let typing_env = body.typing_env(tcx);
-    let mut deduced_param_attrs = tcx.arena.alloc_from_iter(
-        body.local_decls.iter().skip(1).take(body.arg_count).enumerate().map(
-            |(arg_index, local_decl)| DeducedParamAttrs {
-                read_only: !deduce_read_only.mutable_args.contains(arg_index)
-                    // We must normalize here to reveal opaques and normalize
-                    // their generic parameters, otherwise we'll see exponential
-                    // blow-up in compile times: #113372
-                    && tcx
-                        .normalize_erasing_regions(typing_env, local_decl.ty)
-                        .is_freeze(tcx, typing_env),
-            },
-        ),
-    );
-
-    // Trailing parameters past the size of the `deduced_param_attrs` array are assumed to have the
-    // default set of attributes, so we don't have to store them explicitly. Pop them off to save a
-    // few bytes in metadata.
-    while deduced_param_attrs.last() == Some(&DeducedParamAttrs::default()) {
-        let last_index = deduced_param_attrs.len() - 1;
-        deduced_param_attrs = &mut deduced_param_attrs[0..last_index];
-    }
-
-    deduced_param_attrs
-}
+/* FP:deduce_param_attrs.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deduce_param_attrs_USE_0001
+/* FP:deduce_param_attrs.rs-0002 */ use crate :: rustc_complete :: def_id :: LocalDefId ;
+/* FP:deduce_param_attrs.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deduce_param_attrs_USE_0002
+/* FP:deduce_param_attrs.rs-0004 */ use crate :: rustc_index :: bit_set :: DenseBitSet ;
+/* FP:deduce_param_attrs.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deduce_param_attrs_USE_0003
+/* FP:deduce_param_attrs.rs-0006 */ use crate :: rustc_complete :: mir :: visit :: { NonMutatingUseContext , PlaceContext , Visitor } ;
+/* FP:deduce_param_attrs.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deduce_param_attrs_USE_0004
+/* FP:deduce_param_attrs.rs-0008 */ use crate :: rustc_complete :: mir :: { Body , Location , Operand , Place , RETURN_PLACE , Terminator , TerminatorKind } ;
+/* FP:deduce_param_attrs.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deduce_param_attrs_USE_0005
+/* FP:deduce_param_attrs.rs-0010 */ use crate :: rustc_complete :: ty :: { self , DeducedParamAttrs , Ty , TyCtxt } ;
+/* FP:deduce_param_attrs.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deduce_param_attrs_USE_0006
+/* FP:deduce_param_attrs.rs-0012 */ use crate :: rustc_complete :: config :: OptLevel ;
+/* FP:deduce_param_attrs.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deduce_param_attrs_STRUCT_0007
+/* FP:deduce_param_attrs.rs-0014 */ # [doc = " A visitor that determines which arguments have been mutated. We can't use the mutability field"] # [doc = " on LocalDecl for this because it has no meaning post-optimization."] struct DeduceReadOnly { # [doc = " Each bit is indexed by argument number, starting at zero (so 0 corresponds to local decl"] # [doc = " 1). The bit is true if the argument may have been mutated or false if we know it hasn't"] # [doc = " been up to the point we're at."] mutable_args : DenseBitSet < usize > , }
+/* FP:deduce_param_attrs.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deduce_param_attrs_IMPL_0008
+/* FP:deduce_param_attrs.rs-0016 */ impl DeduceReadOnly { # [doc = " Returns a new DeduceReadOnly instance."] fn new (arg_count : usize) -> Self { Self { mutable_args : DenseBitSet :: new_empty (arg_count) } } }
+/* FP:deduce_param_attrs.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deduce_param_attrs_IMPL_0009
+/* FP:deduce_param_attrs.rs-0018 */ impl < 'tcx > Visitor < 'tcx > for DeduceReadOnly { fn visit_place (& mut self , place : & Place < 'tcx > , context : PlaceContext , _location : Location) { if place . local == RETURN_PLACE || place . local . index () > self . mutable_args . domain_size () { return ; } let mark_as_mutable = match context { PlaceContext :: MutatingUse (..) => { true } PlaceContext :: NonMutatingUse (NonMutatingUseContext :: RawBorrow) => { ! place . is_indirect () } PlaceContext :: NonMutatingUse (..) | PlaceContext :: NonUse (..) => { false } } ; if mark_as_mutable { self . mutable_args . insert (place . local . index () - 1) ; } } fn visit_terminator (& mut self , terminator : & Terminator < 'tcx > , location : Location) { if let TerminatorKind :: Call { ref args , .. } = terminator . kind { for arg in args { if let Operand :: Move (place) = arg . node { let local = place . local ; if place . is_indirect () || local == RETURN_PLACE || local . index () > self . mutable_args . domain_size () { continue ; } self . mutable_args . insert (local . index () - 1) ; } } } ; self . super_terminator (terminator , location) ; } }
+/* FP:deduce_param_attrs.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deduce_param_attrs_FN_0010
+/* FP:deduce_param_attrs.rs-0020 */ # [doc = " Returns true if values of a given type will never be passed indirectly, regardless of ABI."] fn type_will_always_be_passed_directly (ty : Ty < '_ >) -> bool { matches ! (ty . kind () , ty :: Bool | ty :: Char | ty :: Float (..) | ty :: Int (..) | ty :: RawPtr (..) | ty :: Ref (..) | ty :: Slice (..) | ty :: Uint (..)) }
+/* FP:deduce_param_attrs.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deduce_param_attrs_FN_0011
+/* FP:deduce_param_attrs.rs-0022 */ # [doc = " Returns the deduced parameter attributes for a function."] # [doc = ""] # [doc = " Deduced parameter attributes are those that can only be soundly determined by examining the"] # [doc = " body of the function instead of just the signature. These can be useful for optimization"] # [doc = " purposes on a best-effort basis. We compute them here and store them into the crate metadata so"] # [doc = " dependent crates can use them."] pub (super) fn deduced_param_attrs < 'tcx > (tcx : TyCtxt < 'tcx > , def_id : LocalDefId ,) -> & 'tcx [DeducedParamAttrs] { if tcx . sess . opts . optimize == OptLevel :: No || tcx . sess . opts . incremental . is_some () { return & [] ; } if tcx . lang_items () . freeze_trait () . is_none () { return & [] ; } let fn_ty = tcx . type_of (def_id) . instantiate_identity () ; if matches ! (fn_ty . kind () , ty :: FnDef (..)) && fn_ty . fn_sig (tcx) . inputs () . skip_binder () . iter () . cloned () . all (type_will_always_be_passed_directly) { return & [] ; } if ! tcx . is_mir_available (def_id) { return & [] ; } let body : & Body < 'tcx > = tcx . optimized_mir (def_id) ; let mut deduce_read_only = DeduceReadOnly :: new (body . arg_count) ; deduce_read_only . visit_body (body) ; let typing_env = body . typing_env (tcx) ; let mut deduced_param_attrs = tcx . arena . alloc_from_iter (body . local_decls . iter () . skip (1) . take (body . arg_count) . enumerate () . map (| (arg_index , local_decl) | DeducedParamAttrs { read_only : ! deduce_read_only . mutable_args . contains (arg_index) && tcx . normalize_erasing_regions (typing_env , local_decl . ty) . is_freeze (tcx , typing_env) , } ,) ,) ; while deduced_param_attrs . last () == Some (& DeducedParamAttrs :: default ()) { let last_index = deduced_param_attrs . len () - 1 ; deduced_param_attrs = & mut deduced_param_attrs [0 .. last_index] ; } deduced_param_attrs }

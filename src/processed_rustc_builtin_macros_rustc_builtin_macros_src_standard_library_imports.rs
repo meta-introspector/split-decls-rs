@@ -1,78 +1,20 @@
-use crate::rustc_complete::{self as ast, attr};
-use rustc_expand::base::{ExtCtxt, ResolverExpand};
-use rustc_expand::expand::ExpansionConfig;
-use rustc_feature::Features;
-use crate::rustc_complete::Session;
-use crate::rustc_complete::edition::Edition::*;
-use crate::rustc_complete::hygiene::AstPass;
-use crate::rustc_complete::{DUMMY_SP, Ident, Symbol, kw, sym};
-use thin_vec::thin_vec;
-
-pub fn inject(
-    krate: &mut ast::Crate,
-    pre_configured_attrs: &[ast::Attribute],
-    resolver: &mut dyn ResolverExpand,
-    sess: &Session,
-    features: &Features,
-) -> usize {
-    let orig_num_items = krate.items.len();
-    let edition = sess.psess.edition;
-
-    // the first name in this list is the crate name of the crate with the prelude
-    let name: Symbol = if attr::contains_name(pre_configured_attrs, sym::no_core) {
-        return 0;
-    } else if attr::contains_name(pre_configured_attrs, sym::no_std) {
-        sym::core
-    } else {
-        sym::std
-    };
-
-    let expn_id = resolver.expansion_for_ast_pass(
-        DUMMY_SP,
-        AstPass::StdImports,
-        &[sym::prelude_import],
-        None,
-    );
-    let span = DUMMY_SP.with_def_site_ctxt(expn_id.to_expn_id());
-    let call_site = DUMMY_SP.with_call_site_ctxt(expn_id.to_expn_id());
-
-    let ecfg = ExpansionConfig::default(sym::std_lib_injection, features);
-    let cx = ExtCtxt::new(sess, ecfg, resolver, None);
-
-    let ident_span = if edition >= Edition2018 { span } else { call_site };
-
-    let item = cx.item(
-        span,
-        thin_vec![cx.attr_word(sym::macro_use, span)],
-        ast::ItemKind::ExternCrate(None, Ident::new(name, ident_span)),
-    );
-
-    let root = (edition == Edition2015).then_some(kw::PathRoot);
-
-    let import_path = root
-        .iter()
-        .chain(&[name, sym::prelude])
-        .chain(&[match edition {
-            Edition2015 => sym::rust_2015,
-            Edition2018 => sym::rust_2018,
-            Edition2021 => sym::rust_2021,
-            Edition2024 => sym::rust_2024,
-            EditionFuture => sym::rust_future,
-        }])
-        .map(|&symbol| Ident::new(symbol, span))
-        .collect();
-
-    // Inject the relevant crate's prelude.
-    let use_item = cx.item(
-        span,
-        thin_vec![cx.attr_word(sym::prelude_import, span)],
-        ast::ItemKind::Use(ast::UseTree {
-            prefix: cx.path(span, import_path),
-            kind: ast::UseTreeKind::Glob,
-            span,
-        }),
-    );
-
-    krate.items.splice(0..0, [item, use_item]);
-    krate.items.len() - orig_num_items
-}
+/* FP:standard_library_imports.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_standard_library_imports_USE_0001
+/* FP:standard_library_imports.rs-0002 */ use crate :: rustc_complete :: { self as ast , attr } ;
+/* FP:standard_library_imports.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_standard_library_imports_USE_0002
+/* FP:standard_library_imports.rs-0004 */ use crate :: rustc_expand :: base :: { ExtCtxt , ResolverExpand } ;
+/* FP:standard_library_imports.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_standard_library_imports_USE_0003
+/* FP:standard_library_imports.rs-0006 */ use crate :: rustc_expand :: expand :: ExpansionConfig ;
+/* FP:standard_library_imports.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_standard_library_imports_USE_0004
+/* FP:standard_library_imports.rs-0008 */ use crate :: rustc_feature :: Features ;
+/* FP:standard_library_imports.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_standard_library_imports_USE_0005
+/* FP:standard_library_imports.rs-0010 */ use crate :: rustc_complete :: Session ;
+/* FP:standard_library_imports.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_standard_library_imports_USE_0006
+/* FP:standard_library_imports.rs-0012 */ use crate :: rustc_complete :: edition :: Edition :: * ;
+/* FP:standard_library_imports.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_standard_library_imports_USE_0007
+/* FP:standard_library_imports.rs-0014 */ use crate :: rustc_complete :: hygiene :: AstPass ;
+/* FP:standard_library_imports.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_standard_library_imports_USE_0008
+/* FP:standard_library_imports.rs-0016 */ use crate :: rustc_complete :: { DUMMY_SP , Ident , Symbol , kw , sym } ;
+/* FP:standard_library_imports.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_standard_library_imports_USE_0009
+/* FP:standard_library_imports.rs-0018 */ use thin_vec :: thin_vec ;
+/* FP:standard_library_imports.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_standard_library_imports_FN_0010
+/* FP:standard_library_imports.rs-0020 */ pub fn inject (krate : & mut ast :: Crate , pre_configured_attrs : & [ast :: Attribute] , resolver : & mut dyn ResolverExpand , sess : & Session , features : & Features ,) -> usize { let orig_num_items = krate . items . len () ; let edition = sess . psess . edition ; let name : Symbol = if attr :: contains_name (pre_configured_attrs , sym :: no_core) { return 0 ; } else if attr :: contains_name (pre_configured_attrs , sym :: no_std) { sym :: core } else { sym :: std } ; let expn_id = resolver . expansion_for_ast_pass (DUMMY_SP , AstPass :: StdImports , & [sym :: prelude_import] , None ,) ; let span = DUMMY_SP . with_def_site_ctxt (expn_id . to_expn_id ()) ; let call_site = DUMMY_SP . with_call_site_ctxt (expn_id . to_expn_id ()) ; let ecfg = ExpansionConfig :: default (sym :: std_lib_injection , features) ; let cx = ExtCtxt :: new (sess , ecfg , resolver , None) ; let ident_span = if edition >= Edition2018 { span } else { call_site } ; let item = cx . item (span , thin_vec ! [cx . attr_word (sym :: macro_use , span)] , ast :: ItemKind :: ExternCrate (None , Ident :: new (name , ident_span)) ,) ; let root = (edition == Edition2015) . then_some (kw :: PathRoot) ; let import_path = root . iter () . chain (& [name , sym :: prelude]) . chain (& [match edition { Edition2015 => sym :: rust_2015 , Edition2018 => sym :: rust_2018 , Edition2021 => sym :: rust_2021 , Edition2024 => sym :: rust_2024 , EditionFuture => sym :: rust_future , }]) . map (| & symbol | Ident :: new (symbol , span)) . collect () ; let use_item = cx . item (span , thin_vec ! [cx . attr_word (sym :: prelude_import , span)] , ast :: ItemKind :: Use (ast :: UseTree { prefix : cx . path (span , import_path) , kind : ast :: UseTreeKind :: Glob , span , }) ,) ; krate . items . splice (0 .. 0 , [item , use_item]) ; krate . items . len () - orig_num_items }

@@ -1,181 +1,32 @@
-use crate::rustc_complete::{Diag, EmissionGuarantee, IntoDiagArg, Subdiagnostic};
-use crate::rustc_complete::def_id::LocalDefId;
-use crate::rustc_complete::bug;
-use crate::rustc_complete::ty::{self, TyCtxt};
-use crate::rustc_complete::{Span, kw};
-
-use crate::error_reporting::infer::nice_region_error::find_anon_type;
-use crate::fluent_generated as fluent;
-
-struct DescriptionCtx<'a> {
-    span: Option<Span>,
-    kind: &'a str,
-    arg: String,
-}
-
-impl<'a> DescriptionCtx<'a> {
-    fn new<'tcx>(
-        tcx: TyCtxt<'tcx>,
-        generic_param_scope: LocalDefId,
-        region: ty::Region<'tcx>,
-        alt_span: Option<Span>,
-    ) -> Option<Self> {
-        let (span, kind, arg) = match region.kind() {
-            ty::ReEarlyParam(br) => {
-                let scope = tcx
-                    .parent(tcx.generics_of(generic_param_scope).region_param(br, tcx).def_id)
-                    .expect_local();
-                let span = if let Some(param) =
-                    tcx.hir_get_generics(scope).and_then(|generics| generics.get_named(br.name))
-                {
-                    param.span
-                } else {
-                    tcx.def_span(scope)
-                };
-                if br.is_named() {
-                    (Some(span), "as_defined", br.name.to_string())
-                } else {
-                    (Some(span), "as_defined_anon", String::new())
-                }
-            }
-            ty::ReLateParam(ref fr) => {
-                if !fr.kind.is_named(tcx)
-                    && let Some((ty, _)) = find_anon_type(tcx, generic_param_scope, region)
-                {
-                    (Some(ty.span), "defined_here", String::new())
-                } else {
-                    let scope = fr.scope.expect_local();
-                    match fr.kind {
-                        ty::LateParamRegionKind::Named(def_id) => {
-                            let name = tcx.item_name(def_id);
-                            let span = if let Some(param) = tcx
-                                .hir_get_generics(scope)
-                                .and_then(|generics| generics.get_named(name))
-                            {
-                                param.span
-                            } else {
-                                tcx.def_span(scope)
-                            };
-                            if name == kw::UnderscoreLifetime {
-                                (Some(span), "as_defined_anon", String::new())
-                            } else {
-                                (Some(span), "as_defined", name.to_string())
-                            }
-                        }
-                        ty::LateParamRegionKind::Anon(_) => {
-                            let span = Some(tcx.def_span(scope));
-                            (span, "defined_here", String::new())
-                        }
-                        _ => (Some(tcx.def_span(scope)), "defined_here_reg", region.to_string()),
-                    }
-                }
-            }
-
-            ty::ReStatic => (alt_span, "restatic", String::new()),
-
-            ty::RePlaceholder(_) | ty::ReError(_) => return None,
-
-            ty::ReVar(_) | ty::ReBound(..) | ty::ReErased => {
-                bug!("unexpected region for DescriptionCtx: {:?}", region);
-            }
-        };
-        Some(DescriptionCtx { span, kind, arg })
-    }
-}
-
-pub enum PrefixKind {
-    Empty,
-    RefValidFor,
-    ContentValidFor,
-    TypeObjValidFor,
-    SourcePointerValidFor,
-    TypeSatisfy,
-    TypeOutlive,
-    LfParamInstantiatedWith,
-    LfParamMustOutlive,
-    LfInstantiatedWith,
-    LfMustOutlive,
-    PointerValidFor,
-    DataValidFor,
-}
-
-pub enum SuffixKind {
-    Empty,
-    Continues,
-    ReqByBinding,
-}
-
-impl IntoDiagArg for PrefixKind {
-    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
-        let kind = match self {
-            Self::Empty => "empty",
-            Self::RefValidFor => "ref_valid_for",
-            Self::ContentValidFor => "content_valid_for",
-            Self::TypeObjValidFor => "type_obj_valid_for",
-            Self::SourcePointerValidFor => "source_pointer_valid_for",
-            Self::TypeSatisfy => "type_satisfy",
-            Self::TypeOutlive => "type_outlive",
-            Self::LfParamInstantiatedWith => "lf_param_instantiated_with",
-            Self::LfParamMustOutlive => "lf_param_must_outlive",
-            Self::LfInstantiatedWith => "lf_instantiated_with",
-            Self::LfMustOutlive => "lf_must_outlive",
-            Self::PointerValidFor => "pointer_valid_for",
-            Self::DataValidFor => "data_valid_for",
-        }
-        .into();
-        crate::rustc_errors::DiagArgValue::Str(kind)
-    }
-}
-
-impl IntoDiagArg for SuffixKind {
-    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
-        let kind = match self {
-            Self::Empty => "empty",
-            Self::Continues => "continues",
-            Self::ReqByBinding => "req_by_binding",
-        }
-        .into();
-        crate::rustc_errors::DiagArgValue::Str(kind)
-    }
-}
-
-pub struct RegionExplanation<'a> {
-    desc: DescriptionCtx<'a>,
-    prefix: PrefixKind,
-    suffix: SuffixKind,
-}
-
-impl RegionExplanation<'_> {
-    pub fn new<'tcx>(
-        tcx: TyCtxt<'tcx>,
-        generic_param_scope: LocalDefId,
-        region: ty::Region<'tcx>,
-        alt_span: Option<Span>,
-        prefix: PrefixKind,
-        suffix: SuffixKind,
-    ) -> Option<Self> {
-        Some(Self {
-            desc: DescriptionCtx::new(tcx, generic_param_scope, region, alt_span)?,
-            prefix,
-            suffix,
-        })
-    }
-}
-
-impl Subdiagnostic for RegionExplanation<'_> {
-    fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
-        diag.store_args();
-        diag.arg("pref_kind", self.prefix);
-        diag.arg("suff_kind", self.suffix);
-        diag.arg("desc_kind", self.desc.kind);
-        diag.arg("desc_arg", self.desc.arg);
-
-        let msg = diag.eagerly_translate(fluent::trait_selection_region_explanation);
-        diag.restore_args();
-        if let Some(span) = self.desc.span {
-            diag.span_note(span, msg);
-        } else {
-            diag.note(msg);
-        }
-    }
-}
+/* FP:note_and_explain.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_errors_note_and_explain_USE_0001
+/* FP:note_and_explain.rs-0002 */ use crate :: rustc_complete :: { Diag , EmissionGuarantee , IntoDiagArg , Subdiagnostic } ;
+/* FP:note_and_explain.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_errors_note_and_explain_USE_0002
+/* FP:note_and_explain.rs-0004 */ use crate :: rustc_complete :: def_id :: LocalDefId ;
+/* FP:note_and_explain.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_errors_note_and_explain_USE_0003
+/* FP:note_and_explain.rs-0006 */ use crate :: rustc_complete :: bug ;
+/* FP:note_and_explain.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_errors_note_and_explain_USE_0004
+/* FP:note_and_explain.rs-0008 */ use crate :: rustc_complete :: ty :: { self , TyCtxt } ;
+/* FP:note_and_explain.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_errors_note_and_explain_USE_0005
+/* FP:note_and_explain.rs-0010 */ use crate :: rustc_complete :: { Span , kw } ;
+/* FP:note_and_explain.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_errors_note_and_explain_USE_0006
+/* FP:note_and_explain.rs-0012 */ use crate :: error_reporting :: infer :: nice_region_error :: find_anon_type ;
+/* FP:note_and_explain.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_errors_note_and_explain_USE_0007
+/* FP:note_and_explain.rs-0014 */ use crate :: fluent_generated as fluent ;
+/* FP:note_and_explain.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_errors_note_and_explain_STRUCT_0008
+/* FP:note_and_explain.rs-0016 */ struct DescriptionCtx < 'a > { span : Option < Span > , kind : & 'a str , arg : String , }
+/* FP:note_and_explain.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_errors_note_and_explain_IMPL_0009
+/* FP:note_and_explain.rs-0018 */ impl < 'a > DescriptionCtx < 'a > { fn new < 'tcx > (tcx : TyCtxt < 'tcx > , generic_param_scope : LocalDefId , region : ty :: Region < 'tcx > , alt_span : Option < Span > ,) -> Option < Self > { let (span , kind , arg) = match region . kind () { ty :: ReEarlyParam (br) => { let scope = tcx . parent (tcx . generics_of (generic_param_scope) . region_param (br , tcx) . def_id) . expect_local () ; let span = if let Some (param) = tcx . hir_get_generics (scope) . and_then (| generics | generics . get_named (br . name)) { param . span } else { tcx . def_span (scope) } ; if br . is_named () { (Some (span) , "as_defined" , br . name . to_string ()) } else { (Some (span) , "as_defined_anon" , String :: new ()) } } ty :: ReLateParam (ref fr) => { if ! fr . kind . is_named (tcx) && let Some ((ty , _)) = find_anon_type (tcx , generic_param_scope , region) { (Some (ty . span) , "defined_here" , String :: new ()) } else { let scope = fr . scope . expect_local () ; match fr . kind { ty :: LateParamRegionKind :: Named (def_id) => { let name = tcx . item_name (def_id) ; let span = if let Some (param) = tcx . hir_get_generics (scope) . and_then (| generics | generics . get_named (name)) { param . span } else { tcx . def_span (scope) } ; if name == kw :: UnderscoreLifetime { (Some (span) , "as_defined_anon" , String :: new ()) } else { (Some (span) , "as_defined" , name . to_string ()) } } ty :: LateParamRegionKind :: Anon (_) => { let span = Some (tcx . def_span (scope)) ; (span , "defined_here" , String :: new ()) } _ => (Some (tcx . def_span (scope)) , "defined_here_reg" , region . to_string ()) , } } } ty :: ReStatic => (alt_span , "restatic" , String :: new ()) , ty :: RePlaceholder (_) | ty :: ReError (_) => return None , ty :: ReVar (_) | ty :: ReBound (..) | ty :: ReErased => { bug ! ("unexpected region for DescriptionCtx: {:?}" , region) ; } } ; Some (DescriptionCtx { span , kind , arg }) } }
+/* FP:note_and_explain.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_errors_note_and_explain_ENUM_0010
+/* FP:note_and_explain.rs-0020 */ pub enum PrefixKind { Empty , RefValidFor , ContentValidFor , TypeObjValidFor , SourcePointerValidFor , TypeSatisfy , TypeOutlive , LfParamInstantiatedWith , LfParamMustOutlive , LfInstantiatedWith , LfMustOutlive , PointerValidFor , DataValidFor , }
+/* FP:note_and_explain.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_errors_note_and_explain_ENUM_0011
+/* FP:note_and_explain.rs-0022 */ pub enum SuffixKind { Empty , Continues , ReqByBinding , }
+/* FP:note_and_explain.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_errors_note_and_explain_IMPL_0012
+/* FP:note_and_explain.rs-0024 */ impl IntoDiagArg for PrefixKind { fn into_diag_arg (self , _ : & mut Option < std :: path :: PathBuf >) -> crate :: rustc_errors :: DiagArgValue { let kind = match self { Self :: Empty => "empty" , Self :: RefValidFor => "ref_valid_for" , Self :: ContentValidFor => "content_valid_for" , Self :: TypeObjValidFor => "type_obj_valid_for" , Self :: SourcePointerValidFor => "source_pointer_valid_for" , Self :: TypeSatisfy => "type_satisfy" , Self :: TypeOutlive => "type_outlive" , Self :: LfParamInstantiatedWith => "lf_param_instantiated_with" , Self :: LfParamMustOutlive => "lf_param_must_outlive" , Self :: LfInstantiatedWith => "lf_instantiated_with" , Self :: LfMustOutlive => "lf_must_outlive" , Self :: PointerValidFor => "pointer_valid_for" , Self :: DataValidFor => "data_valid_for" , } . into () ; crate :: rustc_errors :: DiagArgValue :: Str (kind) } }
+/* FP:note_and_explain.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_errors_note_and_explain_IMPL_0013
+/* FP:note_and_explain.rs-0026 */ impl IntoDiagArg for SuffixKind { fn into_diag_arg (self , _ : & mut Option < std :: path :: PathBuf >) -> crate :: rustc_errors :: DiagArgValue { let kind = match self { Self :: Empty => "empty" , Self :: Continues => "continues" , Self :: ReqByBinding => "req_by_binding" , } . into () ; crate :: rustc_errors :: DiagArgValue :: Str (kind) } }
+/* FP:note_and_explain.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_errors_note_and_explain_STRUCT_0014
+/* FP:note_and_explain.rs-0028 */ pub struct RegionExplanation < 'a > { desc : DescriptionCtx < 'a > , prefix : PrefixKind , suffix : SuffixKind , }
+/* FP:note_and_explain.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_errors_note_and_explain_IMPL_0015
+/* FP:note_and_explain.rs-0030 */ impl RegionExplanation < '_ > { pub fn new < 'tcx > (tcx : TyCtxt < 'tcx > , generic_param_scope : LocalDefId , region : ty :: Region < 'tcx > , alt_span : Option < Span > , prefix : PrefixKind , suffix : SuffixKind ,) -> Option < Self > { Some (Self { desc : DescriptionCtx :: new (tcx , generic_param_scope , region , alt_span) ? , prefix , suffix , }) } }
+/* FP:note_and_explain.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_errors_note_and_explain_IMPL_0016
+/* FP:note_and_explain.rs-0032 */ impl Subdiagnostic for RegionExplanation < '_ > { fn add_to_diag < G : EmissionGuarantee > (self , diag : & mut Diag < '_ , G >) { diag . store_args () ; diag . arg ("pref_kind" , self . prefix) ; diag . arg ("suff_kind" , self . suffix) ; diag . arg ("desc_kind" , self . desc . kind) ; diag . arg ("desc_arg" , self . desc . arg) ; let msg = diag . eagerly_translate (fluent :: trait_selection_region_explanation) ; diag . restore_args () ; if let Some (span) = self . desc . span { diag . span_note (span , msg) ; } else { diag . note (msg) ; } } }

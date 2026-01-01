@@ -1,78 +1,16 @@
-use std::{cmp, ops};
-
-use crate::rustc_complete::{DUMMY_SP, Span};
-
-/// Tracks whether executing a node may exit normally (versus
-/// return/break/panic, which "diverge", leaving dead code in their
-/// wake). Tracked semi-automatically (through type variables marked
-/// as diverging), with some manual adjustments for control-flow
-/// primitives (approximating a CFG).
-#[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
-pub(crate) enum Diverges {
-    /// Potentially unknown, some cases converge,
-    /// others require a CFG to determine them.
-    Maybe,
-
-    /// Definitely known to diverge and therefore
-    /// not reach the next sibling or its parent.
-    Always {
-        /// The `Span` points to the expression
-        /// that caused us to diverge
-        /// (e.g. `return`, `break`, etc).
-        span: Span,
-        /// In some cases (e.g. a `match` expression
-        /// where all arms diverge), we may be
-        /// able to provide a more informative
-        /// message to the user.
-        /// If this is `None`, a default message
-        /// will be generated, which is suitable
-        /// for most cases.
-        custom_note: Option<&'static str>,
-    },
-
-    /// Same as `Always` but with a reachability
-    /// warning already emitted.
-    WarnedAlways,
-}
-
-// Convenience impls for combining `Diverges`.
-
-impl ops::BitAnd for Diverges {
-    type Output = Self;
-    fn bitand(self, other: Self) -> Self {
-        cmp::min(self, other)
-    }
-}
-
-impl ops::BitOr for Diverges {
-    type Output = Self;
-    fn bitor(self, other: Self) -> Self {
-        cmp::max(self, other)
-    }
-}
-
-impl ops::BitAndAssign for Diverges {
-    fn bitand_assign(&mut self, other: Self) {
-        *self = *self & other;
-    }
-}
-
-impl ops::BitOrAssign for Diverges {
-    fn bitor_assign(&mut self, other: Self) {
-        *self = *self | other;
-    }
-}
-
-impl Diverges {
-    /// Creates a `Diverges::Always` with the provided `span` and the default note message.
-    pub(super) fn always(span: Span) -> Diverges {
-        Diverges::Always { span, custom_note: None }
-    }
-
-    pub(super) fn is_always(self) -> bool {
-        // Enum comparison ignores the
-        // contents of fields, so we just
-        // fill them in with garbage here.
-        self >= Diverges::Always { span: DUMMY_SP, custom_note: None }
-    }
-}
+/* FP:diverges.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_diverges_USE_0001
+/* FP:diverges.rs-0002 */ use std :: { cmp , ops } ;
+/* FP:diverges.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_diverges_USE_0002
+/* FP:diverges.rs-0004 */ use crate :: rustc_complete :: { DUMMY_SP , Span } ;
+/* FP:diverges.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_diverges_ENUM_0003
+/* FP:diverges.rs-0006 */ # [doc = " Tracks whether executing a node may exit normally (versus"] # [doc = " return/break/panic, which \"diverge\", leaving dead code in their"] # [doc = " wake). Tracked semi-automatically (through type variables marked"] # [doc = " as diverging), with some manual adjustments for control-flow"] # [doc = " primitives (approximating a CFG)."] # [derive (Copy , Clone , Debug , PartialEq , Eq , PartialOrd , Ord)] pub (crate) enum Diverges { # [doc = " Potentially unknown, some cases converge,"] # [doc = " others require a CFG to determine them."] Maybe , # [doc = " Definitely known to diverge and therefore"] # [doc = " not reach the next sibling or its parent."] Always { # [doc = " The `Span` points to the expression"] # [doc = " that caused us to diverge"] # [doc = " (e.g. `return`, `break`, etc)."] span : Span , # [doc = " In some cases (e.g. a `match` expression"] # [doc = " where all arms diverge), we may be"] # [doc = " able to provide a more informative"] # [doc = " message to the user."] # [doc = " If this is `None`, a default message"] # [doc = " will be generated, which is suitable"] # [doc = " for most cases."] custom_note : Option < & 'static str > , } , # [doc = " Same as `Always` but with a reachability"] # [doc = " warning already emitted."] WarnedAlways , }
+/* FP:diverges.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_diverges_IMPL_0004
+/* FP:diverges.rs-0008 */ impl ops :: BitAnd for Diverges { type Output = Self ; fn bitand (self , other : Self) -> Self { cmp :: min (self , other) } }
+/* FP:diverges.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_diverges_IMPL_0005
+/* FP:diverges.rs-0010 */ impl ops :: BitOr for Diverges { type Output = Self ; fn bitor (self , other : Self) -> Self { cmp :: max (self , other) } }
+/* FP:diverges.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_diverges_IMPL_0006
+/* FP:diverges.rs-0012 */ impl ops :: BitAndAssign for Diverges { fn bitand_assign (& mut self , other : Self) { * self = * self & other ; } }
+/* FP:diverges.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_diverges_IMPL_0007
+/* FP:diverges.rs-0014 */ impl ops :: BitOrAssign for Diverges { fn bitor_assign (& mut self , other : Self) { * self = * self | other ; } }
+/* FP:diverges.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_diverges_IMPL_0008
+/* FP:diverges.rs-0016 */ impl Diverges { # [doc = " Creates a `Diverges::Always` with the provided `span` and the default note message."] pub (super) fn always (span : Span) -> Diverges { Diverges :: Always { span , custom_note : None } } pub (super) fn is_always (self) -> bool { self >= Diverges :: Always { span : DUMMY_SP , custom_note : None } } }

@@ -1,278 +1,52 @@
-use std::collections::HashSet;
-use std::env;
-use std::sync::Arc;
-use std::time::Instant;
-
-use gccjit::{CType, Context, FunctionType, GlobalKind};
-use rustc_codegen_ssa::ModuleCodegen;
-use rustc_codegen_ssa::base::maybe_create_entry_wrapper;
-use rustc_codegen_ssa::mono_item::MonoItemExt;
-use rustc_codegen_ssa::traits::DebugInfoCodegenMethods;
-use crate::rustc_complete::attrs::Linkage;
-use crate::rustc_complete::dep_graph;
-#[cfg(feature = "master")]
-use crate::rustc_complete::mir::mono::Visibility;
-use crate::rustc_complete::ty::TyCtxt;
-use crate::rustc_complete::config::DebugInfo;
-use crate::rustc_complete::Symbol;
-#[cfg(feature = "master")]
-use rustc_target::spec::SymbolVisibility;
-use rustc_target::spec::{PanicStrategy, RelocModel};
-
-use crate::builder::Builder;
-use crate::context::CodegenCx;
-use crate::{GccContext, LockedTargetInfo, SyncContext, gcc_util, new_context};
-
-#[cfg(feature = "master")]
-pub fn visibility_to_gcc(visibility: Visibility) -> gccjit::Visibility {
-    match visibility {
-        Visibility::Default => gccjit::Visibility::Default,
-        Visibility::Hidden => gccjit::Visibility::Hidden,
-        Visibility::Protected => gccjit::Visibility::Protected,
-    }
-}
-
-#[cfg(feature = "master")]
-pub fn symbol_visibility_to_gcc(visibility: SymbolVisibility) -> gccjit::Visibility {
-    match visibility {
-        SymbolVisibility::Hidden => gccjit::Visibility::Hidden,
-        SymbolVisibility::Protected => gccjit::Visibility::Protected,
-        SymbolVisibility::Interposable => gccjit::Visibility::Default,
-    }
-}
-
-pub fn global_linkage_to_gcc(linkage: Linkage) -> GlobalKind {
-    match linkage {
-        Linkage::External => GlobalKind::Imported,
-        Linkage::AvailableExternally => GlobalKind::Imported,
-        Linkage::LinkOnceAny => unimplemented!(),
-        Linkage::LinkOnceODR => unimplemented!(),
-        Linkage::WeakAny => unimplemented!(),
-        Linkage::WeakODR => unimplemented!(),
-        Linkage::Internal => GlobalKind::Internal,
-        Linkage::ExternalWeak => GlobalKind::Imported, // TODO(antoyo): should be weak linkage.
-        Linkage::Common => unimplemented!(),
-    }
-}
-
-pub fn linkage_to_gcc(linkage: Linkage) -> FunctionType {
-    match linkage {
-        Linkage::External => FunctionType::Exported,
-        // TODO(antoyo): set the attribute externally_visible.
-        Linkage::AvailableExternally => FunctionType::Extern,
-        Linkage::LinkOnceAny => unimplemented!(),
-        Linkage::LinkOnceODR => unimplemented!(),
-        Linkage::WeakAny => FunctionType::Exported, // FIXME(antoyo): should be similar to linkonce.
-        Linkage::WeakODR => unimplemented!(),
-        Linkage::Internal => FunctionType::Internal,
-        Linkage::ExternalWeak => unimplemented!(),
-        Linkage::Common => unimplemented!(),
-    }
-}
-
-pub fn compile_codegen_unit(
-    tcx: TyCtxt<'_>,
-    cgu_name: Symbol,
-    target_info: LockedTargetInfo,
-) -> (ModuleCodegen<GccContext>, u64) {
-    let prof_timer = tcx.prof.generic_activity("codegen_module");
-    let start_time = Instant::now();
-
-    let dep_node = tcx.codegen_unit(cgu_name).codegen_dep_node(tcx);
-    let (module, _) = tcx.dep_graph.with_task(
-        dep_node,
-        tcx,
-        (cgu_name, target_info),
-        module_codegen,
-        Some(dep_graph::hash_result),
-    );
-    let time_to_codegen = start_time.elapsed();
-    drop(prof_timer);
-
-    // We assume that the cost to run GCC on a CGU is proportional to
-    // the time we needed for codegenning it.
-    let cost = time_to_codegen.as_secs() * 1_000_000_000 + time_to_codegen.subsec_nanos() as u64;
-
-    fn module_codegen(
-        tcx: TyCtxt<'_>,
-        (cgu_name, target_info): (Symbol, LockedTargetInfo),
-    ) -> ModuleCodegen<GccContext> {
-        let cgu = tcx.codegen_unit(cgu_name);
-        // Instantiate monomorphizations without filling out definitions yet...
-        let context = new_context(tcx);
-
-        if tcx.sess.panic_strategy() == PanicStrategy::Unwind {
-            context.add_command_line_option("-fexceptions");
-            context.add_driver_option("-fexceptions");
-        }
-
-        let disabled_features: HashSet<_> = tcx
-            .sess
-            .opts
-            .cg
-            .target_feature
-            .split(',')
-            .filter(|feature| feature.starts_with('-'))
-            .map(|string| &string[1..])
-            .collect();
-
-        if !disabled_features.contains("avx") && tcx.sess.target.arch == "x86_64" {
-            // NOTE: we always enable AVX because the equivalent of llvm.x86.sse2.cmp.pd in GCC for
-            // SSE2 is multiple builtins, so we use the AVX __builtin_ia32_cmppd instead.
-            // FIXME(antoyo): use the proper builtins for llvm.x86.sse2.cmp.pd and similar.
-            context.add_command_line_option("-mavx");
-        }
-
-        for arg in &tcx.sess.opts.cg.llvm_args {
-            context.add_command_line_option(arg);
-        }
-        // NOTE: This is needed to compile the file src/intrinsic/archs.rs during a bootstrap of rustc.
-        context.add_command_line_option("-fno-var-tracking-assignments");
-        // NOTE: an optimization (https://github.com/rust-lang/rustc_codegen_gcc/issues/53).
-        context.add_command_line_option("-fno-semantic-interposition");
-        // NOTE: Rust relies on LLVM not doing TBAA (https://github.com/rust-lang/unsafe-code-guidelines/issues/292).
-        context.add_command_line_option("-fno-strict-aliasing");
-        // NOTE: Rust relies on LLVM doing wrapping on overflow.
-        context.add_command_line_option("-fwrapv");
-
-        if let Some(model) = tcx.sess.code_model() {
-            use rustc_target::spec::CodeModel;
-
-            context.add_command_line_option(match model {
-                CodeModel::Tiny => "-mcmodel=tiny",
-                CodeModel::Small => "-mcmodel=small",
-                CodeModel::Kernel => "-mcmodel=kernel",
-                CodeModel::Medium => "-mcmodel=medium",
-                CodeModel::Large => "-mcmodel=large",
-            });
-        }
-
-        add_pic_option(&context, tcx.sess.relocation_model());
-
-        let target_cpu = gcc_util::target_cpu(tcx.sess);
-        if target_cpu != "generic" {
-            context.add_command_line_option(format!("-march={}", target_cpu));
-        }
-
-        if tcx
-            .sess
-            .opts
-            .unstable_opts
-            .function_sections
-            .unwrap_or(tcx.sess.target.function_sections)
-        {
-            context.add_command_line_option("-ffunction-sections");
-            context.add_command_line_option("-fdata-sections");
-        }
-
-        if env::var("CG_GCCJIT_DUMP_RTL").as_deref() == Ok("1") {
-            context.add_command_line_option("-fdump-rtl-vregs");
-        }
-        if env::var("CG_GCCJIT_DUMP_RTL_ALL").as_deref() == Ok("1") {
-            context.add_command_line_option("-fdump-rtl-all");
-        }
-        if env::var("CG_GCCJIT_DUMP_TREE_ALL").as_deref() == Ok("1") {
-            context.add_command_line_option("-fdump-tree-all-eh");
-        }
-        if env::var("CG_GCCJIT_DUMP_IPA_ALL").as_deref() == Ok("1") {
-            context.add_command_line_option("-fdump-ipa-all-eh");
-        }
-        if env::var("CG_GCCJIT_DUMP_CODE").as_deref() == Ok("1") {
-            context.set_dump_code_on_compile(true);
-        }
-        if env::var("CG_GCCJIT_DUMP_GIMPLE").as_deref() == Ok("1") {
-            context.set_dump_initial_gimple(true);
-        }
-        if env::var("CG_GCCJIT_DUMP_EVERYTHING").as_deref() == Ok("1") {
-            context.set_dump_everything(true);
-        }
-        if env::var("CG_GCCJIT_KEEP_INTERMEDIATES").as_deref() == Ok("1") {
-            context.set_keep_intermediates(true);
-        }
-        if env::var("CG_GCCJIT_VERBOSE").as_deref() == Ok("1") {
-            context.add_driver_option("-v");
-        }
-
-        // NOTE: The codegen generates unreachable blocks.
-        context.set_allow_unreachable_blocks(true);
-
-        {
-            // TODO: to make it less error-prone (calling get_target_info() will add the flag
-            // -fsyntax-only), forbid the compilation when get_target_info() is called on a
-            // context.
-            let f16_type_supported = target_info.supports_target_dependent_type(CType::Float16);
-            let f32_type_supported = target_info.supports_target_dependent_type(CType::Float32);
-            let f64_type_supported = target_info.supports_target_dependent_type(CType::Float64);
-            let f128_type_supported = target_info.supports_target_dependent_type(CType::Float128);
-            let u128_type_supported = target_info.supports_target_dependent_type(CType::UInt128t);
-            // TODO: improve this to avoid passing that many arguments.
-            let mut cx = CodegenCx::new(
-                &context,
-                cgu,
-                tcx,
-                u128_type_supported,
-                f16_type_supported,
-                f32_type_supported,
-                f64_type_supported,
-                f128_type_supported,
-            );
-
-            let mono_items = cgu.items_in_deterministic_order(tcx);
-            for &(mono_item, data) in &mono_items {
-                mono_item.predefine::<Builder<'_, '_, '_>>(
-                    &mut cx,
-                    cgu_name.as_str(),
-                    data.linkage,
-                    data.visibility,
-                );
-            }
-
-            // ... and now that we have everything pre-defined, fill out those definitions.
-            for &(mono_item, item_data) in &mono_items {
-                mono_item.define::<Builder<'_, '_, '_>>(&mut cx, cgu_name.as_str(), item_data);
-            }
-
-            // If this codegen unit contains the main function, also create the
-            // wrapper here
-            maybe_create_entry_wrapper::<Builder<'_, '_, '_>>(&cx, cx.codegen_unit);
-
-            // Finalize debuginfo
-            if cx.sess().opts.debuginfo != DebugInfo::None {
-                cx.debuginfo_finalize();
-            }
-        }
-
-        ModuleCodegen::new_regular(
-            cgu_name.to_string(),
-            GccContext {
-                context: Arc::new(SyncContext::new(context)),
-                relocation_model: tcx.sess.relocation_model(),
-                should_combine_object_files: false,
-                temp_dir: None,
-            },
-        )
-    }
-
-    (module, cost)
-}
-
-pub fn add_pic_option<'gcc>(context: &Context<'gcc>, relocation_model: RelocModel) {
-    match relocation_model {
-        rustc_target::spec::RelocModel::Static => {
-            context.add_command_line_option("-fno-pie");
-            context.add_driver_option("-fno-pie");
-        }
-        rustc_target::spec::RelocModel::Pic => {
-            context.add_command_line_option("-fPIC");
-            // NOTE: we use both add_command_line_option and add_driver_option because the usage in
-            // this module (compile_codegen_unit) requires add_command_line_option while the usage
-            // in the back::write module (codegen) requires add_driver_option.
-            context.add_driver_option("-fPIC");
-        }
-        rustc_target::spec::RelocModel::Pie => {
-            context.add_command_line_option("-fPIE");
-            context.add_driver_option("-fPIE");
-        }
-        model => eprintln!("Unsupported relocation model: {:?}", model),
-    }
-}
+/* FP:base.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0001
+/* FP:base.rs-0002 */ use std :: collections :: HashSet ;
+/* FP:base.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0002
+/* FP:base.rs-0004 */ use std :: env ;
+/* FP:base.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0003
+/* FP:base.rs-0006 */ use std :: sync :: Arc ;
+/* FP:base.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0004
+/* FP:base.rs-0008 */ use std :: time :: Instant ;
+/* FP:base.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0005
+/* FP:base.rs-0010 */ use gccjit :: { CType , Context , FunctionType , GlobalKind } ;
+/* FP:base.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0006
+/* FP:base.rs-0012 */ use crate :: rustc_codegen_ssa :: ModuleCodegen ;
+/* FP:base.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0007
+/* FP:base.rs-0014 */ use crate :: rustc_codegen_ssa :: base :: maybe_create_entry_wrapper ;
+/* FP:base.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0008
+/* FP:base.rs-0016 */ use crate :: rustc_codegen_ssa :: mono_item :: MonoItemExt ;
+/* FP:base.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0009
+/* FP:base.rs-0018 */ use crate :: rustc_codegen_ssa :: traits :: DebugInfoCodegenMethods ;
+/* FP:base.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0010
+/* FP:base.rs-0020 */ use crate :: rustc_complete :: attrs :: Linkage ;
+/* FP:base.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0011
+/* FP:base.rs-0022 */ use crate :: rustc_complete :: dep_graph ;
+/* FP:base.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0012
+/* FP:base.rs-0024 */ # [cfg (feature = "master")] use crate :: rustc_complete :: mir :: mono :: Visibility ;
+/* FP:base.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0013
+/* FP:base.rs-0026 */ use crate :: rustc_complete :: ty :: TyCtxt ;
+/* FP:base.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0014
+/* FP:base.rs-0028 */ use crate :: rustc_complete :: config :: DebugInfo ;
+/* FP:base.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0015
+/* FP:base.rs-0030 */ use crate :: rustc_complete :: Symbol ;
+/* FP:base.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0016
+/* FP:base.rs-0032 */ # [cfg (feature = "master")] use crate :: rustc_target :: spec :: SymbolVisibility ;
+/* FP:base.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0017
+/* FP:base.rs-0034 */ use crate :: rustc_target :: spec :: { PanicStrategy , RelocModel } ;
+/* FP:base.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0018
+/* FP:base.rs-0036 */ use crate :: builder :: Builder ;
+/* FP:base.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0019
+/* FP:base.rs-0038 */ use crate :: context :: CodegenCx ;
+/* FP:base.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_USE_0020
+/* FP:base.rs-0040 */ use crate :: { GccContext , LockedTargetInfo , SyncContext , gcc_util , new_context } ;
+/* FP:base.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_FN_0021
+/* FP:base.rs-0042 */ # [cfg (feature = "master")] pub fn visibility_to_gcc (visibility : Visibility) -> gccjit :: Visibility { match visibility { Visibility :: Default => gccjit :: Visibility :: Default , Visibility :: Hidden => gccjit :: Visibility :: Hidden , Visibility :: Protected => gccjit :: Visibility :: Protected , } }
+/* FP:base.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_FN_0022
+/* FP:base.rs-0044 */ # [cfg (feature = "master")] pub fn symbol_visibility_to_gcc (visibility : SymbolVisibility) -> gccjit :: Visibility { match visibility { SymbolVisibility :: Hidden => gccjit :: Visibility :: Hidden , SymbolVisibility :: Protected => gccjit :: Visibility :: Protected , SymbolVisibility :: Interposable => gccjit :: Visibility :: Default , } }
+/* FP:base.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_FN_0023
+/* FP:base.rs-0046 */ pub fn global_linkage_to_gcc (linkage : Linkage) -> GlobalKind { match linkage { Linkage :: External => GlobalKind :: Imported , Linkage :: AvailableExternally => GlobalKind :: Imported , Linkage :: LinkOnceAny => unimplemented ! () , Linkage :: LinkOnceODR => unimplemented ! () , Linkage :: WeakAny => unimplemented ! () , Linkage :: WeakODR => unimplemented ! () , Linkage :: Internal => GlobalKind :: Internal , Linkage :: ExternalWeak => GlobalKind :: Imported , Linkage :: Common => unimplemented ! () , } }
+/* FP:base.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_FN_0024
+/* FP:base.rs-0048 */ pub fn linkage_to_gcc (linkage : Linkage) -> FunctionType { match linkage { Linkage :: External => FunctionType :: Exported , Linkage :: AvailableExternally => FunctionType :: Extern , Linkage :: LinkOnceAny => unimplemented ! () , Linkage :: LinkOnceODR => unimplemented ! () , Linkage :: WeakAny => FunctionType :: Exported , Linkage :: WeakODR => unimplemented ! () , Linkage :: Internal => FunctionType :: Internal , Linkage :: ExternalWeak => unimplemented ! () , Linkage :: Common => unimplemented ! () , } }
+/* FP:base.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_FN_0025
+/* FP:base.rs-0050 */ pub fn compile_codegen_unit (tcx : TyCtxt < '_ > , cgu_name : Symbol , target_info : LockedTargetInfo ,) -> (ModuleCodegen < GccContext > , u64) { let prof_timer = tcx . prof . generic_activity ("codegen_module") ; let start_time = Instant :: now () ; let dep_node = tcx . codegen_unit (cgu_name) . codegen_dep_node (tcx) ; let (module , _) = tcx . dep_graph . with_task (dep_node , tcx , (cgu_name , target_info) , module_codegen , Some (dep_graph :: hash_result) ,) ; let time_to_codegen = start_time . elapsed () ; drop (prof_timer) ; let cost = time_to_codegen . as_secs () * 1_000_000_000 + time_to_codegen . subsec_nanos () as u64 ; fn module_codegen (tcx : TyCtxt < '_ > , (cgu_name , target_info) : (Symbol , LockedTargetInfo) ,) -> ModuleCodegen < GccContext > { let cgu = tcx . codegen_unit (cgu_name) ; let context = new_context (tcx) ; if tcx . sess . panic_strategy () == PanicStrategy :: Unwind { context . add_command_line_option ("-fexceptions") ; context . add_driver_option ("-fexceptions") ; } let disabled_features : HashSet < _ > = tcx . sess . opts . cg . target_feature . split (',') . filter (| feature | feature . starts_with ('-')) . map (| string | & string [1 ..]) . collect () ; if ! disabled_features . contains ("avx") && tcx . sess . target . arch == "x86_64" { context . add_command_line_option ("-mavx") ; } for arg in & tcx . sess . opts . cg . llvm_args { context . add_command_line_option (arg) ; } context . add_command_line_option ("-fno-var-tracking-assignments") ; context . add_command_line_option ("-fno-semantic-interposition") ; context . add_command_line_option ("-fno-strict-aliasing") ; context . add_command_line_option ("-fwrapv") ; if let Some (model) = tcx . sess . code_model () { use crate :: rustc_target :: spec :: CodeModel ; context . add_command_line_option (match model { CodeModel :: Tiny => "-mcmodel=tiny" , CodeModel :: Small => "-mcmodel=small" , CodeModel :: Kernel => "-mcmodel=kernel" , CodeModel :: Medium => "-mcmodel=medium" , CodeModel :: Large => "-mcmodel=large" , }) ; } add_pic_option (& context , tcx . sess . relocation_model ()) ; let target_cpu = gcc_util :: target_cpu (tcx . sess) ; if target_cpu != "generic" { context . add_command_line_option (format ! ("-march={}" , target_cpu)) ; } if tcx . sess . opts . unstable_opts . function_sections . unwrap_or (tcx . sess . target . function_sections) { context . add_command_line_option ("-ffunction-sections") ; context . add_command_line_option ("-fdata-sections") ; } if env :: var ("CG_GCCJIT_DUMP_RTL") . as_deref () == Ok ("1") { context . add_command_line_option ("-fdump-rtl-vregs") ; } if env :: var ("CG_GCCJIT_DUMP_RTL_ALL") . as_deref () == Ok ("1") { context . add_command_line_option ("-fdump-rtl-all") ; } if env :: var ("CG_GCCJIT_DUMP_TREE_ALL") . as_deref () == Ok ("1") { context . add_command_line_option ("-fdump-tree-all-eh") ; } if env :: var ("CG_GCCJIT_DUMP_IPA_ALL") . as_deref () == Ok ("1") { context . add_command_line_option ("-fdump-ipa-all-eh") ; } if env :: var ("CG_GCCJIT_DUMP_CODE") . as_deref () == Ok ("1") { context . set_dump_code_on_compile (true) ; } if env :: var ("CG_GCCJIT_DUMP_GIMPLE") . as_deref () == Ok ("1") { context . set_dump_initial_gimple (true) ; } if env :: var ("CG_GCCJIT_DUMP_EVERYTHING") . as_deref () == Ok ("1") { context . set_dump_everything (true) ; } if env :: var ("CG_GCCJIT_KEEP_INTERMEDIATES") . as_deref () == Ok ("1") { context . set_keep_intermediates (true) ; } if env :: var ("CG_GCCJIT_VERBOSE") . as_deref () == Ok ("1") { context . add_driver_option ("-v") ; } context . set_allow_unreachable_blocks (true) ; { let f16_type_supported = target_info . supports_target_dependent_type (CType :: Float16) ; let f32_type_supported = target_info . supports_target_dependent_type (CType :: Float32) ; let f64_type_supported = target_info . supports_target_dependent_type (CType :: Float64) ; let f128_type_supported = target_info . supports_target_dependent_type (CType :: Float128) ; let u128_type_supported = target_info . supports_target_dependent_type (CType :: UInt128t) ; let mut cx = CodegenCx :: new (& context , cgu , tcx , u128_type_supported , f16_type_supported , f32_type_supported , f64_type_supported , f128_type_supported ,) ; let mono_items = cgu . items_in_deterministic_order (tcx) ; for & (mono_item , data) in & mono_items { mono_item . predefine :: < Builder < '_ , '_ , '_ > > (& mut cx , cgu_name . as_str () , data . linkage , data . visibility ,) ; } for & (mono_item , item_data) in & mono_items { mono_item . define :: < Builder < '_ , '_ , '_ > > (& mut cx , cgu_name . as_str () , item_data) ; } maybe_create_entry_wrapper :: < Builder < '_ , '_ , '_ > > (& cx , cx . codegen_unit) ; if cx . sess () . opts . debuginfo != DebugInfo :: None { cx . debuginfo_finalize () ; } } ModuleCodegen :: new_regular (cgu_name . to_string () , GccContext { context : Arc :: new (SyncContext :: new (context)) , relocation_model : tcx . sess . relocation_model () , should_combine_object_files : false , temp_dir : None , } ,) } (module , cost) }
+/* FP:base.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_src_base_FN_0026
+/* FP:base.rs-0052 */ pub fn add_pic_option < 'gcc > (context : & Context < 'gcc > , relocation_model : RelocModel) { match relocation_model { crate :: rustc_target :: spec :: RelocModel :: Static => { context . add_command_line_option ("-fno-pie") ; context . add_driver_option ("-fno-pie") ; } crate :: rustc_target :: spec :: RelocModel :: Pic => { context . add_command_line_option ("-fPIC") ; context . add_driver_option ("-fPIC") ; } crate :: rustc_target :: spec :: RelocModel :: Pie => { context . add_command_line_option ("-fPIE") ; context . add_driver_option ("-fPIE") ; } model => eprintln ! ("Unsupported relocation model: {:?}" , model) , } }

@@ -1,31 +1,8 @@
-use std::fmt;
-
-use crate::traits;
-
-// Structural impls for the structs in `traits`.
-
-impl<'tcx, N: fmt::Debug> fmt::Debug for traits::ImplSource<'tcx, N> {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            super::ImplSource::UserDefined(v) => write!(f, "{v:?}"),
-
-            super::ImplSource::Builtin(source, d) => {
-                write!(f, "Builtin({source:?}, {d:?})")
-            }
-
-            super::ImplSource::Param(n) => {
-                write!(f, "ImplSourceParamData({n:?})")
-            }
-        }
-    }
-}
-
-impl<'tcx, N: fmt::Debug> fmt::Debug for traits::ImplSourceUserDefinedData<'tcx, N> {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(
-            f,
-            "ImplSourceUserDefinedData(impl_def_id={:?}, args={:?}, nested={:?})",
-            self.impl_def_id, self.args, self.nested
-        )
-    }
-}
+/* FP:structural_impls.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_traits_structural_impls_USE_0001
+/* FP:structural_impls.rs-0002 */ use std :: fmt ;
+/* FP:structural_impls.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_traits_structural_impls_USE_0002
+/* FP:structural_impls.rs-0004 */ use crate :: traits ;
+/* FP:structural_impls.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_traits_structural_impls_IMPL_0003
+/* FP:structural_impls.rs-0006 */ impl < 'tcx , N : fmt :: Debug > fmt :: Debug for traits :: ImplSource < 'tcx , N > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { super :: ImplSource :: UserDefined (v) => write ! (f , "{v:?}") , super :: ImplSource :: Builtin (source , d) => { write ! (f , "Builtin({source:?}, {d:?})") } super :: ImplSource :: Param (n) => { write ! (f , "ImplSourceParamData({n:?})") } } } }
+/* FP:structural_impls.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_traits_structural_impls_IMPL_0004
+/* FP:structural_impls.rs-0008 */ impl < 'tcx , N : fmt :: Debug > fmt :: Debug for traits :: ImplSourceUserDefinedData < 'tcx , N > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { write ! (f , "ImplSourceUserDefinedData(impl_def_id={:?}, args={:?}, nested={:?})" , self . impl_def_id , self . args , self . nested) } }

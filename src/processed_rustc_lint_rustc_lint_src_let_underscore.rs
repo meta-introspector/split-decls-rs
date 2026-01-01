@@ -1,170 +1,24 @@
-use crate::rustc_complete::MultiSpan;
-use rustc_hir as hir;
-use crate::rustc_complete::ty;
-use crate::rustc_complete::{declare_lint, declare_lint_pass};
-use crate::rustc_complete::{Symbol, sym};
-
-use crate::lints::{NonBindingLet, NonBindingLetSub};
-use crate::{LateContext, LateLintPass, LintContext};
-
-declare_lint! {
-    /// The `let_underscore_drop` lint checks for statements which don't bind
-    /// an expression which has a non-trivial Drop implementation to anything,
-    /// causing the expression to be dropped immediately instead of at end of
-    /// scope.
-    ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// struct SomeStruct;
-    /// impl Drop for SomeStruct {
-    ///     fn drop(&mut self) {
-    ///         println!("Dropping SomeStruct");
-    ///     }
-    /// }
-    ///
-    /// fn main() {
-    ///    #[warn(let_underscore_drop)]
-    ///     // SomeStruct is dropped immediately instead of at end of scope,
-    ///     // so "Dropping SomeStruct" is printed before "end of main".
-    ///     // The order of prints would be reversed if SomeStruct was bound to
-    ///     // a name (such as "_foo").
-    ///     let _ = SomeStruct;
-    ///     println!("end of main");
-    /// }
-    /// ```
-    ///
-    /// {{produces}}
-    ///
-    /// ### Explanation
-    ///
-    /// Statements which assign an expression to an underscore causes the
-    /// expression to immediately drop instead of extending the expression's
-    /// lifetime to the end of the scope. This is usually unintended,
-    /// especially for types like `MutexGuard`, which are typically used to
-    /// lock a mutex for the duration of an entire scope.
-    ///
-    /// If you want to extend the expression's lifetime to the end of the scope,
-    /// assign an underscore-prefixed name (such as `_foo`) to the expression.
-    /// If you do actually want to drop the expression immediately, then
-    /// calling `std::mem::drop` on the expression is clearer and helps convey
-    /// intent.
-    pub LET_UNDERSCORE_DROP,
-    Allow,
-    "non-binding let on a type that has a destructor"
-}
-
-declare_lint! {
-    /// The `let_underscore_lock` lint checks for statements which don't bind
-    /// a mutex to anything, causing the lock to be released immediately instead
-    /// of at end of scope, which is typically incorrect.
-    ///
-    /// ### Example
-    /// ```rust,compile_fail
-    /// use std::sync::{Arc, Mutex};
-    /// use std::thread;
-    /// let data = Arc::new(Mutex::new(0));
-    ///
-    /// thread::spawn(move || {
-    ///     // The lock is immediately released instead of at the end of the
-    ///     // scope, which is probably not intended.
-    ///     let _ = data.lock().unwrap();
-    ///     println!("doing some work");
-    ///     let mut lock = data.lock().unwrap();
-    ///     *lock += 1;
-    /// });
-    /// ```
-    ///
-    /// {{produces}}
-    ///
-    /// ### Explanation
-    ///
-    /// Statements which assign an expression to an underscore causes the
-    /// expression to immediately drop instead of extending the expression's
-    /// lifetime to the end of the scope. This is usually unintended,
-    /// especially for types like `MutexGuard`, which are typically used to
-    /// lock a mutex for the duration of an entire scope.
-    ///
-    /// If you want to extend the expression's lifetime to the end of the scope,
-    /// assign an underscore-prefixed name (such as `_foo`) to the expression.
-    /// If you do actually want to drop the expression immediately, then
-    /// calling `std::mem::drop` on the expression is clearer and helps convey
-    /// intent.
-    pub LET_UNDERSCORE_LOCK,
-    Deny,
-    "non-binding let on a synchronization lock"
-}
-
-declare_lint_pass!(LetUnderscore => [LET_UNDERSCORE_DROP, LET_UNDERSCORE_LOCK]);
-
-const SYNC_GUARD_SYMBOLS: [Symbol; 3] = [
-    crate::rustc_span::sym::MutexGuard,
-    crate::rustc_span::sym::RwLockReadGuard,
-    crate::rustc_span::sym::RwLockWriteGuard,
-];
-
-impl<'tcx> LateLintPass<'tcx> for LetUnderscore {
-    fn check_local(&mut self, cx: &LateContext<'_>, local: &hir::LetStmt<'_>) {
-        if matches!(local.source, crate::rustc_hir::LocalSource::AsyncFn) {
-            return;
-        }
-
-        let mut top_level = true;
-
-        // We recursively walk through all patterns, so that we can catch cases where the lock is
-        // nested in a pattern. For the basic `let_underscore_drop` lint, we only look at the top
-        // level, since there are many legitimate reasons to bind a sub-pattern to an `_`, if we're
-        // only interested in the rest. But with locks, we prefer having the chance of "false
-        // positives" over missing cases, since the effects can be quite catastrophic.
-        local.pat.walk_always(|pat| {
-            let is_top_level = top_level;
-            top_level = false;
-
-            if !matches!(pat.kind, hir::PatKind::Wild) {
-                return;
-            }
-
-            let ty = cx.typeck_results().pat_ty(pat);
-
-            // If the type has a trivial Drop implementation, then it doesn't
-            // matter that we drop the value immediately.
-            if !ty.needs_drop(cx.tcx, cx.typing_env()) {
-                return;
-            }
-            // Lint for patterns like `mutex.lock()`, which returns `Result<MutexGuard, _>` as well.
-            let potential_lock_type = match ty.kind() {
-                ty::Adt(adt, args) if cx.tcx.is_diagnostic_item(sym::Result, adt.did()) => {
-                    args.type_at(0)
-                }
-                _ => ty,
-            };
-            let is_sync_lock = match potential_lock_type.kind() {
-                ty::Adt(adt, _) => SYNC_GUARD_SYMBOLS
-                    .iter()
-                    .any(|guard_symbol| cx.tcx.is_diagnostic_item(*guard_symbol, adt.did())),
-                _ => false,
-            };
-
-            let can_use_init = is_top_level.then_some(local.init).flatten();
-
-            let sub = NonBindingLetSub {
-                suggestion: pat.span,
-                // We can't suggest `drop()` when we're on the top level.
-                drop_fn_start_end: can_use_init
-                    .map(|init| (local.span.until(init.span), init.span.shrink_to_hi())),
-                is_assign_desugar: matches!(local.source, crate::rustc_hir::LocalSource::AssignDesugar(_)),
-            };
-            if is_sync_lock {
-                let span = MultiSpan::from_span(pat.span);
-                cx.emit_span_lint(
-                    LET_UNDERSCORE_LOCK,
-                    span,
-                    NonBindingLet::SyncLock { sub, pat: pat.span },
-                );
-            // Only emit let_underscore_drop for top-level `_` patterns.
-            } else if can_use_init.is_some() {
-                cx.emit_span_lint(LET_UNDERSCORE_DROP, local.span, NonBindingLet::DropType { sub });
-            }
-        });
-    }
-}
+/* FP:let_underscore.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_let_underscore_USE_0001
+/* FP:let_underscore.rs-0002 */ use crate :: rustc_complete :: MultiSpan ;
+/* FP:let_underscore.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_let_underscore_USE_0002
+/* FP:let_underscore.rs-0004 */ use rustc_hir as hir ;
+/* FP:let_underscore.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_let_underscore_USE_0003
+/* FP:let_underscore.rs-0006 */ use crate :: rustc_complete :: ty ;
+/* FP:let_underscore.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_let_underscore_USE_0004
+/* FP:let_underscore.rs-0008 */ use crate :: rustc_complete :: { declare_lint , declare_lint_pass } ;
+/* FP:let_underscore.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_let_underscore_USE_0005
+/* FP:let_underscore.rs-0010 */ use crate :: rustc_complete :: { Symbol , sym } ;
+/* FP:let_underscore.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_let_underscore_USE_0006
+/* FP:let_underscore.rs-0012 */ use crate :: lints :: { NonBindingLet , NonBindingLetSub } ;
+/* FP:let_underscore.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_let_underscore_USE_0007
+/* FP:let_underscore.rs-0014 */ use crate :: { LateContext , LateLintPass , LintContext } ;
+/* FP:let_underscore.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_let_underscore_MACRO_0008
+/* FP:let_underscore.rs-0016 */ declare_lint ! { # [doc = " The `let_underscore_drop` lint checks for statements which don't bind"] # [doc = " an expression which has a non-trivial Drop implementation to anything,"] # [doc = " causing the expression to be dropped immediately instead of at end of"] # [doc = " scope."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " struct SomeStruct;"] # [doc = " impl Drop for SomeStruct {"] # [doc = "     fn drop(&mut self) {"] # [doc = "         println!(\"Dropping SomeStruct\");"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " fn main() {"] # [doc = "    #[warn(let_underscore_drop)]"] # [doc = "     // SomeStruct is dropped immediately instead of at end of scope,"] # [doc = "     // so \"Dropping SomeStruct\" is printed before \"end of main\"."] # [doc = "     // The order of prints would be reversed if SomeStruct was bound to"] # [doc = "     // a name (such as \"_foo\")."] # [doc = "     let _ = SomeStruct;"] # [doc = "     println!(\"end of main\");"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Statements which assign an expression to an underscore causes the"] # [doc = " expression to immediately drop instead of extending the expression's"] # [doc = " lifetime to the end of the scope. This is usually unintended,"] # [doc = " especially for types like `MutexGuard`, which are typically used to"] # [doc = " lock a mutex for the duration of an entire scope."] # [doc = ""] # [doc = " If you want to extend the expression's lifetime to the end of the scope,"] # [doc = " assign an underscore-prefixed name (such as `_foo`) to the expression."] # [doc = " If you do actually want to drop the expression immediately, then"] # [doc = " calling `std::mem::drop` on the expression is clearer and helps convey"] # [doc = " intent."] pub LET_UNDERSCORE_DROP , Allow , "non-binding let on a type that has a destructor" }
+/* FP:let_underscore.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_let_underscore_MACRO_0009
+/* FP:let_underscore.rs-0018 */ declare_lint ! { # [doc = " The `let_underscore_lock` lint checks for statements which don't bind"] # [doc = " a mutex to anything, causing the lock to be released immediately instead"] # [doc = " of at end of scope, which is typically incorrect."] # [doc = ""] # [doc = " ### Example"] # [doc = " ```rust,compile_fail"] # [doc = " use std::sync::{Arc, Mutex};"] # [doc = " use std::thread;"] # [doc = " let data = Arc::new(Mutex::new(0));"] # [doc = ""] # [doc = " thread::spawn(move || {"] # [doc = "     // The lock is immediately released instead of at the end of the"] # [doc = "     // scope, which is probably not intended."] # [doc = "     let _ = data.lock().unwrap();"] # [doc = "     println!(\"doing some work\");"] # [doc = "     let mut lock = data.lock().unwrap();"] # [doc = "     *lock += 1;"] # [doc = " });"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Statements which assign an expression to an underscore causes the"] # [doc = " expression to immediately drop instead of extending the expression's"] # [doc = " lifetime to the end of the scope. This is usually unintended,"] # [doc = " especially for types like `MutexGuard`, which are typically used to"] # [doc = " lock a mutex for the duration of an entire scope."] # [doc = ""] # [doc = " If you want to extend the expression's lifetime to the end of the scope,"] # [doc = " assign an underscore-prefixed name (such as `_foo`) to the expression."] # [doc = " If you do actually want to drop the expression immediately, then"] # [doc = " calling `std::mem::drop` on the expression is clearer and helps convey"] # [doc = " intent."] pub LET_UNDERSCORE_LOCK , Deny , "non-binding let on a synchronization lock" }
+/* FP:let_underscore.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_let_underscore_MACRO_0010
+/* FP:let_underscore.rs-0020 */ declare_lint_pass ! (LetUnderscore => [LET_UNDERSCORE_DROP , LET_UNDERSCORE_LOCK]) ;
+/* FP:let_underscore.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_let_underscore_CONST_0011
+/* FP:let_underscore.rs-0022 */ const SYNC_GUARD_SYMBOLS : [Symbol ; 3] = [crate :: rustc_span :: sym :: MutexGuard , crate :: rustc_span :: sym :: RwLockReadGuard , crate :: rustc_span :: sym :: RwLockWriteGuard ,] ;
+/* FP:let_underscore.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_let_underscore_IMPL_0012
+/* FP:let_underscore.rs-0024 */ impl < 'tcx > LateLintPass < 'tcx > for LetUnderscore { fn check_local (& mut self , cx : & LateContext < '_ > , local : & hir :: LetStmt < '_ >) { if matches ! (local . source , crate :: rustc_hir :: LocalSource :: AsyncFn) { return ; } let mut top_level = true ; local . pat . walk_always (| pat | { let is_top_level = top_level ; top_level = false ; if ! matches ! (pat . kind , hir :: PatKind :: Wild) { return ; } let ty = cx . typeck_results () . pat_ty (pat) ; if ! ty . needs_drop (cx . tcx , cx . typing_env ()) { return ; } let potential_lock_type = match ty . kind () { ty :: Adt (adt , args) if cx . tcx . is_diagnostic_item (sym :: Result , adt . did ()) => { args . type_at (0) } _ => ty , } ; let is_sync_lock = match potential_lock_type . kind () { ty :: Adt (adt , _) => SYNC_GUARD_SYMBOLS . iter () . any (| guard_symbol | cx . tcx . is_diagnostic_item (* guard_symbol , adt . did ())) , _ => false , } ; let can_use_init = is_top_level . then_some (local . init) . flatten () ; let sub = NonBindingLetSub { suggestion : pat . span , drop_fn_start_end : can_use_init . map (| init | (local . span . until (init . span) , init . span . shrink_to_hi ())) , is_assign_desugar : matches ! (local . source , crate :: rustc_hir :: LocalSource :: AssignDesugar (_)) , } ; if is_sync_lock { let span = MultiSpan :: from_span (pat . span) ; cx . emit_span_lint (LET_UNDERSCORE_LOCK , span , NonBindingLet :: SyncLock { sub , pat : pat . span } ,) ; } else if can_use_init . is_some () { cx . emit_span_lint (LET_UNDERSCORE_DROP , local . span , NonBindingLet :: DropType { sub }) ; } }) ; } }

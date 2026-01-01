@@ -1,65 +1,12 @@
-use std::ffi::OsStr;
-use std::path::Path;
-
-use crate::utils::run_command_with_output;
-
-fn show_usage() {
-    println!(
-        r#"
-`abi-test` command help:
-    --help                 : Show this help"#
-    );
-}
-
-pub fn run() -> Result<(), String> {
-    let mut args = std::env::args().skip(2);
-    // FractalFir: In the future, I'd like to add some more subcommands / options.
-    // So, this loop ought to stay for that purpose. It should also stay as a while loop(to parse args)
-    #[allow(clippy::never_loop, clippy::while_let_on_iterator)]
-    while let Some(arg) = args.next() {
-        match arg.as_str() {
-            "--help" => {
-                show_usage();
-                return Ok(());
-            }
-            _ => return Err(format!("Unknown option {arg:?}")),
-        }
-    }
-    // Ensure that we have a cloned version of abi-cafe on hand.
-    crate::utils::git_clone(
-        "https://github.com/Gankra/abi-cafe.git",
-        Some("clones/abi-cafe".as_ref()),
-        true,
-    )
-    .map_err(|err| format!("Git clone failed with message: {err:?}!"))?;
-    // Configure abi-cafe to use the exact same rustc version we use - this is crucial.
-    // Otherwise, the concept of ABI compatibility becomes meanignless.
-    std::fs::copy("rust-toolchain", "clones/abi-cafe/rust-toolchain")
-        .expect("Could not copy toolchain configs!");
-    // Get the backend path.
-    // We will use the *debug* build of the backend - it has more checks enabled.
-    let backend_path = std::path::absolute("target/debug/librustc_codegen_gcc.so").unwrap();
-    let backend_arg = format!("--add-rustc-codegen-backend=cg_gcc:{}", backend_path.display());
-    // Run ABI cafe using cargo.
-    let cmd: &[&dyn AsRef<OsStr>] = &[
-        &"cargo",
-        &"run",
-        &"--release",
-        &"--",
-        &backend_arg,
-        // Test rust-LLVM to Rust-GCC calls
-        &"--pairs",
-        &"rustc_calls_cg_gcc",
-        &"--pairs",
-        &"cg_gcc_calls_rustc",
-        // Test Rust-GCC to C calls
-        &"--pairs",
-        &"cg_gcc_calls_c",
-        &"--pairs",
-        &"c_calls_cg_gcc",
-    ];
-    // Run ABI cafe.
-    run_command_with_output(cmd, Some(Path::new("clones/abi-cafe")))?;
-
-    Ok(())
-}
+/* FP:abi_test.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_build_system_src_abi_test_USE_0001
+/* FP:abi_test.rs-0002 */ use std :: ffi :: OsStr ;
+/* FP:abi_test.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_build_system_src_abi_test_USE_0002
+/* FP:abi_test.rs-0004 */ use std :: path :: Path ;
+/* FP:abi_test.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_build_system_src_abi_test_USE_0003
+/* FP:abi_test.rs-0006 */ use crate :: utils :: run_command_with_output ;
+/* FP:abi_test.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_build_system_src_abi_test_FN_0004
+/* FP:abi_test.rs-0008 */ fn show_usage () { println ! (r#"
+/* FP:abi_test.rs-0009 */ `abi-test` command help:
+/* FP:abi_test.rs-0010 */     --help                 : Show this help"#) ; }
+/* FP:abi_test.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_build_system_src_abi_test_FN_0005
+/* FP:abi_test.rs-0012 */ pub fn run () -> Result < () , String > { let mut args = std :: env :: args () . skip (2) ; # [allow (clippy :: never_loop , clippy :: while_let_on_iterator)] while let Some (arg) = args . next () { match arg . as_str () { "--help" => { show_usage () ; return Ok (()) ; } _ => return Err (format ! ("Unknown option {arg:?}")) , } } crate :: utils :: git_clone ("https://github.com/Gankra/abi-cafe.git" , Some ("clones/abi-cafe" . as_ref ()) , true ,) . map_err (| err | format ! ("Git clone failed with message: {err:?}!")) ? ; std :: fs :: copy ("rust-toolchain" , "clones/abi-cafe/rust-toolchain") . expect ("Could not copy toolchain configs!") ; let backend_path = std :: path :: absolute ("target/debug/librustc_codegen_gcc.so") . unwrap () ; let backend_arg = format ! ("--add-rustc-codegen-backend=cg_gcc:{}" , backend_path . display ()) ; let cmd : & [& dyn AsRef < OsStr >] = & [& "cargo" , & "run" , & "--release" , & "--" , & backend_arg , & "--pairs" , & "rustc_calls_cg_gcc" , & "--pairs" , & "cg_gcc_calls_rustc" , & "--pairs" , & "cg_gcc_calls_c" , & "--pairs" , & "c_calls_cg_gcc" ,] ; run_command_with_output (cmd , Some (Path :: new ("clones/abi-cafe"))) ? ; Ok (()) }

@@ -1,71 +1,16 @@
-use crate::rustc_complete::token::LitKind;
-use crate::rustc_complete::{Expr, ExprKind, MethodCall, UnOp};
-use crate::rustc_complete::{declare_lint, declare_lint_pass};
-
-use crate::lints::{
-    AmbiguousNegativeLiteralsCurrentBehaviorSuggestion, AmbiguousNegativeLiteralsDiag,
-    AmbiguousNegativeLiteralsNegativeLiteralSuggestion,
-};
-use crate::{EarlyContext, EarlyLintPass, LintContext};
-
-declare_lint! {
-    /// The `ambiguous_negative_literals` lint checks for cases that are
-    /// confusing between a negative literal and a negation that's not part
-    /// of the literal.
-    ///
-    /// ### Example
-    ///
-    /// ```rust,compile_fail
-    /// # #[deny(ambiguous_negative_literals)]
-    /// # #[allow(unused)]
-    /// -1i32.abs(); // equals -1, while `(-1i32).abs()` equals 1
-    /// ```
-    ///
-    /// {{produces}}
-    ///
-    /// ### Explanation
-    ///
-    /// Method calls take precedence over unary precedence. Setting the
-    /// precedence explicitly makes the code clearer and avoid potential bugs.
-    pub AMBIGUOUS_NEGATIVE_LITERALS,
-    Allow,
-    "ambiguous negative literals operations",
-    report_in_external_macro
-}
-
-declare_lint_pass!(Precedence => [AMBIGUOUS_NEGATIVE_LITERALS]);
-
-impl EarlyLintPass for Precedence {
-    fn check_expr(&mut self, cx: &EarlyContext<'_>, expr: &Expr) {
-        let ExprKind::Unary(UnOp::Neg, operand) = &expr.kind else {
-            return;
-        };
-
-        let mut arg = operand;
-        let mut at_least_one = false;
-        while let ExprKind::MethodCall(box MethodCall { receiver, .. }) = &arg.kind {
-            at_least_one = true;
-            arg = receiver;
-        }
-
-        if at_least_one
-            && let ExprKind::Lit(lit) = &arg.kind
-            && let LitKind::Integer | LitKind::Float = &lit.kind
-        {
-            cx.emit_span_lint(
-                AMBIGUOUS_NEGATIVE_LITERALS,
-                expr.span,
-                AmbiguousNegativeLiteralsDiag {
-                    negative_literal: AmbiguousNegativeLiteralsNegativeLiteralSuggestion {
-                        start_span: expr.span.shrink_to_lo(),
-                        end_span: arg.span.shrink_to_hi(),
-                    },
-                    current_behavior: AmbiguousNegativeLiteralsCurrentBehaviorSuggestion {
-                        start_span: operand.span.shrink_to_lo(),
-                        end_span: operand.span.shrink_to_hi(),
-                    },
-                },
-            );
-        }
-    }
-}
+/* FP:precedence.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_precedence_USE_0001
+/* FP:precedence.rs-0002 */ use crate :: rustc_complete :: token :: LitKind ;
+/* FP:precedence.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_precedence_USE_0002
+/* FP:precedence.rs-0004 */ use crate :: rustc_complete :: { Expr , ExprKind , MethodCall , UnOp } ;
+/* FP:precedence.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_precedence_USE_0003
+/* FP:precedence.rs-0006 */ use crate :: rustc_complete :: { declare_lint , declare_lint_pass } ;
+/* FP:precedence.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_precedence_USE_0004
+/* FP:precedence.rs-0008 */ use crate :: lints :: { AmbiguousNegativeLiteralsCurrentBehaviorSuggestion , AmbiguousNegativeLiteralsDiag , AmbiguousNegativeLiteralsNegativeLiteralSuggestion , } ;
+/* FP:precedence.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_precedence_USE_0005
+/* FP:precedence.rs-0010 */ use crate :: { EarlyContext , EarlyLintPass , LintContext } ;
+/* FP:precedence.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_precedence_MACRO_0006
+/* FP:precedence.rs-0012 */ declare_lint ! { # [doc = " The `ambiguous_negative_literals` lint checks for cases that are"] # [doc = " confusing between a negative literal and a negation that's not part"] # [doc = " of the literal."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " # #[deny(ambiguous_negative_literals)]"] # [doc = " # #[allow(unused)]"] # [doc = " -1i32.abs(); // equals -1, while `(-1i32).abs()` equals 1"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Method calls take precedence over unary precedence. Setting the"] # [doc = " precedence explicitly makes the code clearer and avoid potential bugs."] pub AMBIGUOUS_NEGATIVE_LITERALS , Allow , "ambiguous negative literals operations" , report_in_external_macro }
+/* FP:precedence.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_precedence_MACRO_0007
+/* FP:precedence.rs-0014 */ declare_lint_pass ! (Precedence => [AMBIGUOUS_NEGATIVE_LITERALS]) ;
+/* FP:precedence.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_precedence_IMPL_0008
+/* FP:precedence.rs-0016 */ impl EarlyLintPass for Precedence { fn check_expr (& mut self , cx : & EarlyContext < '_ > , expr : & Expr) { let ExprKind :: Unary (UnOp :: Neg , operand) = & expr . kind else { return ; } ; let mut arg = operand ; let mut at_least_one = false ; while let ExprKind :: MethodCall (box MethodCall { receiver , .. }) = & arg . kind { at_least_one = true ; arg = receiver ; } if at_least_one && let ExprKind :: Lit (lit) = & arg . kind && let LitKind :: Integer | LitKind :: Float = & lit . kind { cx . emit_span_lint (AMBIGUOUS_NEGATIVE_LITERALS , expr . span , AmbiguousNegativeLiteralsDiag { negative_literal : AmbiguousNegativeLiteralsNegativeLiteralSuggestion { start_span : expr . span . shrink_to_lo () , end_span : arg . span . shrink_to_hi () , } , current_behavior : AmbiguousNegativeLiteralsCurrentBehaviorSuggestion { start_span : operand . span . shrink_to_lo () , end_span : operand . span . shrink_to_hi () , } , } ,) ; } } }

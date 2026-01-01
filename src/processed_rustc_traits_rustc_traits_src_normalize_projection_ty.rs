@@ -1,123 +1,30 @@
-use crate::rustc_infer::infer::TyCtxtInferExt;
-use crate::rustc_infer::infer::canonical::{Canonical, QueryResponse};
-use crate::rustc_infer::traits::PredicateObligations;
-use crate::rustc_complete::query::Providers;
-use crate::rustc_complete::ty::{ParamEnvAnd, TyCtxt};
-use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
-use crate::rustc_trait_selection::infer::InferCtxtBuilderExt;
-use crate::rustc_trait_selection::traits::query::normalize::NormalizationResult;
-use crate::rustc_trait_selection::traits::query::{CanonicalAliasGoal, NoSolution};
-use crate::rustc_trait_selection::traits::{self, ObligationCause, ScrubbedTraitError, SelectionContext};
-use tracing::debug;
-
-pub(crate) fn provide(p: &mut Providers) {
-    *p = Providers {
-        normalize_canonicalized_projection_ty,
-        normalize_canonicalized_free_alias,
-        normalize_canonicalized_inherent_projection_ty,
-        ..*p
-    };
-}
-
-fn normalize_canonicalized_projection_ty<'tcx>(
-    tcx: TyCtxt<'tcx>,
-    goal: CanonicalAliasGoal<'tcx>,
-) -> Result<&'tcx Canonical<'tcx, QueryResponse<'tcx, NormalizationResult<'tcx>>>, NoSolution> {
-    debug!("normalize_canonicalized_projection_ty(goal={:#?})", goal);
-
-    tcx.infer_ctxt().enter_canonical_trait_query(
-        &goal,
-        |ocx, ParamEnvAnd { param_env, value: goal }| {
-            debug_assert!(!ocx.infcx.next_trait_solver());
-            let selcx = &mut SelectionContext::new(ocx.infcx);
-            let cause = ObligationCause::dummy();
-            let mut obligations = PredicateObligations::new();
-            let answer = traits::normalize_projection_term(
-                selcx,
-                param_env,
-                goal.into(),
-                cause,
-                0,
-                &mut obligations,
-            );
-            ocx.register_obligations(obligations);
-            // #112047: With projections and opaques, we are able to create opaques that
-            // are recursive (given some generic parameters of the opaque's type variables).
-            // In that case, we may only realize a cycle error when calling
-            // `normalize_erasing_regions` in mono.
-            let errors = ocx.select_where_possible();
-            if !errors.is_empty() {
-                // Rustdoc may attempt to normalize type alias types which are not
-                // well-formed. Rustdoc also normalizes types that are just not
-                // well-formed, since we don't do as much HIR analysis (checking
-                // that impl vars are constrained by the signature, for example).
-                if !tcx.sess.opts.actually_rustdoc {
-                    for error in &errors {
-                        if let ScrubbedTraitError::Cycle(cycle) = &error {
-                            ocx.infcx.err_ctxt().report_overflow_obligation_cycle(cycle);
-                        }
-                    }
-                }
-                return Err(NoSolution);
-            }
-
-            // FIXME(associated_const_equality): All users of normalize_canonicalized_projection_ty
-            // expected a type, but there is the possibility it could've been a const now.
-            // Maybe change it to a Term later?
-            Ok(NormalizationResult { normalized_ty: answer.expect_type() })
-        },
-    )
-}
-
-fn normalize_canonicalized_free_alias<'tcx>(
-    tcx: TyCtxt<'tcx>,
-    goal: CanonicalAliasGoal<'tcx>,
-) -> Result<&'tcx Canonical<'tcx, QueryResponse<'tcx, NormalizationResult<'tcx>>>, NoSolution> {
-    debug!("normalize_canonicalized_free_alias(goal={:#?})", goal);
-
-    tcx.infer_ctxt().enter_canonical_trait_query(
-        &goal,
-        |ocx, ParamEnvAnd { param_env, value: goal }| {
-            let obligations = tcx.predicates_of(goal.def_id).instantiate_own(tcx, goal.args).map(
-                |(predicate, span)| {
-                    traits::Obligation::new(
-                        tcx,
-                        ObligationCause::dummy_with_span(span),
-                        param_env,
-                        predicate,
-                    )
-                },
-            );
-            ocx.register_obligations(obligations);
-            let normalized_ty = tcx.type_of(goal.def_id).instantiate(tcx, goal.args);
-            Ok(NormalizationResult { normalized_ty })
-        },
-    )
-}
-
-fn normalize_canonicalized_inherent_projection_ty<'tcx>(
-    tcx: TyCtxt<'tcx>,
-    goal: CanonicalAliasGoal<'tcx>,
-) -> Result<&'tcx Canonical<'tcx, QueryResponse<'tcx, NormalizationResult<'tcx>>>, NoSolution> {
-    debug!("normalize_canonicalized_inherent_projection_ty(goal={:#?})", goal);
-
-    tcx.infer_ctxt().enter_canonical_trait_query(
-        &goal,
-        |ocx, ParamEnvAnd { param_env, value: goal }| {
-            let selcx = &mut SelectionContext::new(ocx.infcx);
-            let cause = ObligationCause::dummy();
-            let mut obligations = PredicateObligations::new();
-            let answer = traits::normalize_inherent_projection(
-                selcx,
-                param_env,
-                goal.into(),
-                cause,
-                0,
-                &mut obligations,
-            );
-            ocx.register_obligations(obligations);
-
-            Ok(NormalizationResult { normalized_ty: answer.expect_type() })
-        },
-    )
-}
+/* FP:normalize_projection_ty.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_projection_ty_USE_0001
+/* FP:normalize_projection_ty.rs-0002 */ use crate :: rustc_infer :: infer :: TyCtxtInferExt ;
+/* FP:normalize_projection_ty.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_projection_ty_USE_0002
+/* FP:normalize_projection_ty.rs-0004 */ use crate :: rustc_infer :: infer :: canonical :: { Canonical , QueryResponse } ;
+/* FP:normalize_projection_ty.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_projection_ty_USE_0003
+/* FP:normalize_projection_ty.rs-0006 */ use crate :: rustc_infer :: traits :: PredicateObligations ;
+/* FP:normalize_projection_ty.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_projection_ty_USE_0004
+/* FP:normalize_projection_ty.rs-0008 */ use crate :: rustc_complete :: query :: Providers ;
+/* FP:normalize_projection_ty.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_projection_ty_USE_0005
+/* FP:normalize_projection_ty.rs-0010 */ use crate :: rustc_complete :: ty :: { ParamEnvAnd , TyCtxt } ;
+/* FP:normalize_projection_ty.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_projection_ty_USE_0006
+/* FP:normalize_projection_ty.rs-0012 */ use crate :: rustc_trait_selection :: error_reporting :: InferCtxtErrorExt ;
+/* FP:normalize_projection_ty.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_projection_ty_USE_0007
+/* FP:normalize_projection_ty.rs-0014 */ use crate :: rustc_trait_selection :: infer :: InferCtxtBuilderExt ;
+/* FP:normalize_projection_ty.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_projection_ty_USE_0008
+/* FP:normalize_projection_ty.rs-0016 */ use crate :: rustc_trait_selection :: traits :: query :: normalize :: NormalizationResult ;
+/* FP:normalize_projection_ty.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_projection_ty_USE_0009
+/* FP:normalize_projection_ty.rs-0018 */ use crate :: rustc_trait_selection :: traits :: query :: { CanonicalAliasGoal , NoSolution } ;
+/* FP:normalize_projection_ty.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_projection_ty_USE_0010
+/* FP:normalize_projection_ty.rs-0020 */ use crate :: rustc_trait_selection :: traits :: { self , ObligationCause , ScrubbedTraitError , SelectionContext } ;
+/* FP:normalize_projection_ty.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_projection_ty_USE_0011
+/* FP:normalize_projection_ty.rs-0022 */ use tracing :: debug ;
+/* FP:normalize_projection_ty.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_projection_ty_FN_0012
+/* FP:normalize_projection_ty.rs-0024 */ pub (crate) fn provide (p : & mut Providers) { * p = Providers { normalize_canonicalized_projection_ty , normalize_canonicalized_free_alias , normalize_canonicalized_inherent_projection_ty , .. * p } ; }
+/* FP:normalize_projection_ty.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_projection_ty_FN_0013
+/* FP:normalize_projection_ty.rs-0026 */ fn normalize_canonicalized_projection_ty < 'tcx > (tcx : TyCtxt < 'tcx > , goal : CanonicalAliasGoal < 'tcx > ,) -> Result < & 'tcx Canonical < 'tcx , QueryResponse < 'tcx , NormalizationResult < 'tcx > > > , NoSolution > { debug ! ("normalize_canonicalized_projection_ty(goal={:#?})" , goal) ; tcx . infer_ctxt () . enter_canonical_trait_query (& goal , | ocx , ParamEnvAnd { param_env , value : goal } | { debug_assert ! (! ocx . infcx . next_trait_solver ()) ; let selcx = & mut SelectionContext :: new (ocx . infcx) ; let cause = ObligationCause :: dummy () ; let mut obligations = PredicateObligations :: new () ; let answer = traits :: normalize_projection_term (selcx , param_env , goal . into () , cause , 0 , & mut obligations ,) ; ocx . register_obligations (obligations) ; let errors = ocx . select_where_possible () ; if ! errors . is_empty () { if ! tcx . sess . opts . actually_rustdoc { for error in & errors { if let ScrubbedTraitError :: Cycle (cycle) = & error { ocx . infcx . err_ctxt () . report_overflow_obligation_cycle (cycle) ; } } } return Err (NoSolution) ; } Ok (NormalizationResult { normalized_ty : answer . expect_type () }) } ,) }
+/* FP:normalize_projection_ty.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_projection_ty_FN_0014
+/* FP:normalize_projection_ty.rs-0028 */ fn normalize_canonicalized_free_alias < 'tcx > (tcx : TyCtxt < 'tcx > , goal : CanonicalAliasGoal < 'tcx > ,) -> Result < & 'tcx Canonical < 'tcx , QueryResponse < 'tcx , NormalizationResult < 'tcx > > > , NoSolution > { debug ! ("normalize_canonicalized_free_alias(goal={:#?})" , goal) ; tcx . infer_ctxt () . enter_canonical_trait_query (& goal , | ocx , ParamEnvAnd { param_env , value : goal } | { let obligations = tcx . predicates_of (goal . def_id) . instantiate_own (tcx , goal . args) . map (| (predicate , span) | { traits :: Obligation :: new (tcx , ObligationCause :: dummy_with_span (span) , param_env , predicate ,) } ,) ; ocx . register_obligations (obligations) ; let normalized_ty = tcx . type_of (goal . def_id) . instantiate (tcx , goal . args) ; Ok (NormalizationResult { normalized_ty }) } ,) }
+/* FP:normalize_projection_ty.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_normalize_projection_ty_FN_0015
+/* FP:normalize_projection_ty.rs-0030 */ fn normalize_canonicalized_inherent_projection_ty < 'tcx > (tcx : TyCtxt < 'tcx > , goal : CanonicalAliasGoal < 'tcx > ,) -> Result < & 'tcx Canonical < 'tcx , QueryResponse < 'tcx , NormalizationResult < 'tcx > > > , NoSolution > { debug ! ("normalize_canonicalized_inherent_projection_ty(goal={:#?})" , goal) ; tcx . infer_ctxt () . enter_canonical_trait_query (& goal , | ocx , ParamEnvAnd { param_env , value : goal } | { let selcx = & mut SelectionContext :: new (ocx . infcx) ; let cause = ObligationCause :: dummy () ; let mut obligations = PredicateObligations :: new () ; let answer = traits :: normalize_inherent_projection (selcx , param_env , goal . into () , cause , 0 , & mut obligations ,) ; ocx . register_obligations (obligations) ; Ok (NormalizationResult { normalized_ty : answer . expect_type () }) } ,) }

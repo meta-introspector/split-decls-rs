@@ -1,106 +1,20 @@
-use std::iter;
-
-use crate::prelude::*;
-use crate::session_diagnostics;
-
-pub(crate) struct AllowInternalUnstableParser;
-impl<S: Stage> CombineAttributeParser<S> for AllowInternalUnstableParser {
-    const PATH: &[Symbol] = &[sym::allow_internal_unstable];
-    type Item = (Symbol, Span);
-    const CONVERT: ConvertFn<Self::Item> =
-        |items, span| AttributeKind::AllowInternalUnstable(items, span);
-    const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[
-        Allow(Target::MacroDef),
-        Allow(Target::Fn),
-        Warn(Target::Field),
-        Warn(Target::Arm),
-    ]);
-    const TEMPLATE: AttributeTemplate = template!(Word, List: &["feat1, feat2, ..."]);
-
-    fn extend<'c>(
-        cx: &'c mut AcceptContext<'_, '_, S>,
-        args: &'c ArgParser<'_>,
-    ) -> impl IntoIterator<Item = Self::Item> {
-        parse_unstable(cx, args, <Self as CombineAttributeParser<S>>::PATH[0])
-            .into_iter()
-            .zip(iter::repeat(cx.attr_span))
-    }
-}
-
-pub(crate) struct UnstableFeatureBoundParser;
-impl<S: Stage> CombineAttributeParser<S> for UnstableFeatureBoundParser {
-    const PATH: &'static [crate::rustc_span::Symbol] = &[sym::unstable_feature_bound];
-    type Item = (Symbol, Span);
-    const CONVERT: ConvertFn<Self::Item> = |items, _| AttributeKind::UnstableFeatureBound(items);
-    const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[
-        Allow(Target::Fn),
-        Allow(Target::Impl { of_trait: true }),
-        Allow(Target::Trait),
-    ]);
-    const TEMPLATE: AttributeTemplate = template!(Word, List: &["feat1, feat2, ..."]);
-
-    fn extend<'c>(
-        cx: &'c mut AcceptContext<'_, '_, S>,
-        args: &'c ArgParser<'_>,
-    ) -> impl IntoIterator<Item = Self::Item> {
-        if !cx.features().staged_api() {
-            cx.emit_err(session_diagnostics::StabilityOutsideStd { span: cx.attr_span });
-        }
-        parse_unstable(cx, args, <Self as CombineAttributeParser<S>>::PATH[0])
-            .into_iter()
-            .zip(iter::repeat(cx.attr_span))
-    }
-}
-
-pub(crate) struct AllowConstFnUnstableParser;
-impl<S: Stage> CombineAttributeParser<S> for AllowConstFnUnstableParser {
-    const PATH: &[Symbol] = &[sym::rustc_allow_const_fn_unstable];
-    type Item = Symbol;
-    const CONVERT: ConvertFn<Self::Item> =
-        |items, first_span| AttributeKind::AllowConstFnUnstable(items, first_span);
-    const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[
-        Allow(Target::Fn),
-        Allow(Target::Method(MethodKind::Inherent)),
-        Allow(Target::Method(MethodKind::Trait { body: false })),
-        Allow(Target::Method(MethodKind::Trait { body: true })),
-        Allow(Target::Method(MethodKind::TraitImpl)),
-    ]);
-    const TEMPLATE: AttributeTemplate = template!(Word, List: &["feat1, feat2, ..."]);
-
-    fn extend<'c>(
-        cx: &'c mut AcceptContext<'_, '_, S>,
-        args: &'c ArgParser<'_>,
-    ) -> impl IntoIterator<Item = Self::Item> + 'c {
-        parse_unstable(cx, args, <Self as CombineAttributeParser<S>>::PATH[0])
-    }
-}
-
-fn parse_unstable<S: Stage>(
-    cx: &AcceptContext<'_, '_, S>,
-    args: &ArgParser<'_>,
-    symbol: Symbol,
-) -> impl IntoIterator<Item = Symbol> {
-    let mut res = Vec::new();
-
-    let Some(list) = args.list() else {
-        cx.emit_err(session_diagnostics::ExpectsFeatureList {
-            span: cx.attr_span,
-            name: symbol.to_ident_string(),
-        });
-        return res;
-    };
-
-    for param in list.mixed() {
-        let param_span = param.span();
-        if let Some(ident) = param.meta_item().and_then(|i| i.path().word()) {
-            res.push(ident.name);
-        } else {
-            cx.emit_err(session_diagnostics::ExpectsFeatures {
-                span: param_span,
-                name: symbol.to_ident_string(),
-            });
-        }
-    }
-
-    res
-}
+/* FP:allow_unstable.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_allow_unstable_USE_0001
+/* FP:allow_unstable.rs-0002 */ use std :: iter ;
+/* FP:allow_unstable.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_allow_unstable_USE_0002
+/* FP:allow_unstable.rs-0004 */ use super :: prelude :: * ;
+/* FP:allow_unstable.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_allow_unstable_USE_0003
+/* FP:allow_unstable.rs-0006 */ use crate :: session_diagnostics ;
+/* FP:allow_unstable.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_allow_unstable_STRUCT_0004
+/* FP:allow_unstable.rs-0008 */ pub (crate) struct AllowInternalUnstableParser ;
+/* FP:allow_unstable.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_allow_unstable_IMPL_0005
+/* FP:allow_unstable.rs-0010 */ impl < S : Stage > CombineAttributeParser < S > for AllowInternalUnstableParser { const PATH : & [Symbol] = & [sym :: allow_internal_unstable] ; type Item = (Symbol , Span) ; const CONVERT : ConvertFn < Self :: Item > = | items , span | AttributeKind :: AllowInternalUnstable (items , span) ; const ALLOWED_TARGETS : AllowedTargets = AllowedTargets :: AllowList (& [Allow (Target :: MacroDef) , Allow (Target :: Fn) , Warn (Target :: Field) , Warn (Target :: Arm) ,]) ; const TEMPLATE : AttributeTemplate = template ! (Word , List : & ["feat1, feat2, ..."]) ; fn extend < 'c > (cx : & 'c mut AcceptContext < '_ , '_ , S > , args : & 'c ArgParser < '_ > ,) -> impl IntoIterator < Item = Self :: Item > { parse_unstable (cx , args , < Self as CombineAttributeParser < S > > :: PATH [0]) . into_iter () . zip (iter :: repeat (cx . attr_span)) } }
+/* FP:allow_unstable.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_allow_unstable_STRUCT_0006
+/* FP:allow_unstable.rs-0012 */ pub (crate) struct UnstableFeatureBoundParser ;
+/* FP:allow_unstable.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_allow_unstable_IMPL_0007
+/* FP:allow_unstable.rs-0014 */ impl < S : Stage > CombineAttributeParser < S > for UnstableFeatureBoundParser { const PATH : & 'static [crate :: rustc_span :: Symbol] = & [sym :: unstable_feature_bound] ; type Item = (Symbol , Span) ; const CONVERT : ConvertFn < Self :: Item > = | items , _ | AttributeKind :: UnstableFeatureBound (items) ; const ALLOWED_TARGETS : AllowedTargets = AllowedTargets :: AllowList (& [Allow (Target :: Fn) , Allow (Target :: Impl { of_trait : true }) , Allow (Target :: Trait) ,]) ; const TEMPLATE : AttributeTemplate = template ! (Word , List : & ["feat1, feat2, ..."]) ; fn extend < 'c > (cx : & 'c mut AcceptContext < '_ , '_ , S > , args : & 'c ArgParser < '_ > ,) -> impl IntoIterator < Item = Self :: Item > { if ! cx . features () . staged_api () { cx . emit_err (session_diagnostics :: StabilityOutsideStd { span : cx . attr_span }) ; } parse_unstable (cx , args , < Self as CombineAttributeParser < S > > :: PATH [0]) . into_iter () . zip (iter :: repeat (cx . attr_span)) } }
+/* FP:allow_unstable.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_allow_unstable_STRUCT_0008
+/* FP:allow_unstable.rs-0016 */ pub (crate) struct AllowConstFnUnstableParser ;
+/* FP:allow_unstable.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_allow_unstable_IMPL_0009
+/* FP:allow_unstable.rs-0018 */ impl < S : Stage > CombineAttributeParser < S > for AllowConstFnUnstableParser { const PATH : & [Symbol] = & [sym :: rustc_allow_const_fn_unstable] ; type Item = Symbol ; const CONVERT : ConvertFn < Self :: Item > = | items , first_span | AttributeKind :: AllowConstFnUnstable (items , first_span) ; const ALLOWED_TARGETS : AllowedTargets = AllowedTargets :: AllowList (& [Allow (Target :: Fn) , Allow (Target :: Method (MethodKind :: Inherent)) , Allow (Target :: Method (MethodKind :: Trait { body : false })) , Allow (Target :: Method (MethodKind :: Trait { body : true })) , Allow (Target :: Method (MethodKind :: TraitImpl)) ,]) ; const TEMPLATE : AttributeTemplate = template ! (Word , List : & ["feat1, feat2, ..."]) ; fn extend < 'c > (cx : & 'c mut AcceptContext < '_ , '_ , S > , args : & 'c ArgParser < '_ > ,) -> impl IntoIterator < Item = Self :: Item > + 'c { parse_unstable (cx , args , < Self as CombineAttributeParser < S > > :: PATH [0]) } }
+/* FP:allow_unstable.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_allow_unstable_FN_0010
+/* FP:allow_unstable.rs-0020 */ fn parse_unstable < S : Stage > (cx : & AcceptContext < '_ , '_ , S > , args : & ArgParser < '_ > , symbol : Symbol ,) -> impl IntoIterator < Item = Symbol > { let mut res = Vec :: new () ; let Some (list) = args . list () else { cx . emit_err (session_diagnostics :: ExpectsFeatureList { span : cx . attr_span , name : symbol . to_ident_string () , }) ; return res ; } ; for param in list . mixed () { let param_span = param . span () ; if let Some (ident) = param . meta_item () . and_then (| i | i . path () . word ()) { res . push (ident . name) ; } else { cx . emit_err (session_diagnostics :: ExpectsFeatures { span : param_span , name : symbol . to_ident_string () , }) ; } } res }

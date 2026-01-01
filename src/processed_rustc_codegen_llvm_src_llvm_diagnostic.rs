@@ -1,219 +1,30 @@
-// LLVM diagnostic reports.
-
-use libc::c_uint;
-use crate::rustc_complete::InnerSpan;
-
-pub(crate) use self::Diagnostic::*;
-use self::OptimizationDiagnosticKind::*;
-use super::{DiagnosticInfo, SMDiagnostic};
-use crate::value::Value;
-
-#[derive(Copy, Clone, Debug)]
-pub(crate) enum OptimizationDiagnosticKind {
-    OptimizationRemark,
-    OptimizationMissed,
-    OptimizationAnalysis,
-    OptimizationAnalysisFPCommute,
-    OptimizationAnalysisAliasing,
-    OptimizationFailure,
-    OptimizationRemarkOther,
-}
-
-pub(crate) struct OptimizationDiagnostic<'ll> {
-    pub kind: OptimizationDiagnosticKind,
-    pub pass_name: String,
-    #[expect(dead_code)]
-    pub function: &'ll Value,
-    pub line: c_uint,
-    pub column: c_uint,
-    pub filename: String,
-    pub message: String,
-}
-
-impl<'ll> OptimizationDiagnostic<'ll> {
-    unsafe fn unpack(kind: OptimizationDiagnosticKind, di: &'ll DiagnosticInfo) -> Self {
-        let mut function = None;
-        let mut line = 0;
-        let mut column = 0;
-
-        let mut message = None;
-        let mut filename = None;
-        let pass_name = super::build_string(|pass_name| {
-            message = super::build_string(|message| {
-                filename = super::build_string(|filename| unsafe {
-                    super::LLVMRustUnpackOptimizationDiagnostic(
-                        di,
-                        pass_name,
-                        &mut function,
-                        &mut line,
-                        &mut column,
-                        filename,
-                        message,
-                    )
-                })
-                .ok()
-            })
-            .ok()
-        })
-        .ok();
-
-        let mut filename = filename.unwrap_or_default();
-        if filename.is_empty() {
-            filename.push_str("<unknown file>");
-        }
-
-        OptimizationDiagnostic {
-            kind,
-            pass_name: pass_name.expect("got a non-UTF8 pass name from LLVM"),
-            function: function.unwrap(),
-            line,
-            column,
-            filename,
-            message: message.expect("got a non-UTF8 OptimizationDiagnostic message from LLVM"),
-        }
-    }
-}
-
-pub(crate) struct SrcMgrDiagnostic {
-    pub level: super::DiagnosticLevel,
-    pub message: String,
-    pub source: Option<(String, Vec<InnerSpan>)>,
-}
-
-impl SrcMgrDiagnostic {
-    pub(crate) unsafe fn unpack(diag: &SMDiagnostic) -> SrcMgrDiagnostic {
-        // Recover the post-substitution assembly code from LLVM for better
-        // diagnostics.
-        let mut have_source = false;
-        let mut buffer = String::new();
-        let mut level = super::DiagnosticLevel::Error;
-        let mut loc = 0;
-        let mut ranges = [0; 8];
-        let mut num_ranges = ranges.len() / 2;
-        let message = super::build_string(|message| {
-            buffer = super::build_string(|buffer| unsafe {
-                have_source = super::LLVMRustUnpackSMDiagnostic(
-                    diag,
-                    message,
-                    buffer,
-                    &mut level,
-                    &mut loc,
-                    ranges.as_mut_ptr(),
-                    &mut num_ranges,
-                );
-            })
-            .expect("non-UTF8 inline asm");
-        })
-        .expect("non-UTF8 SMDiagnostic");
-
-        SrcMgrDiagnostic {
-            message,
-            level,
-            source: have_source.then(|| {
-                let mut spans = vec![InnerSpan::new(loc as usize, loc as usize)];
-                for i in 0..num_ranges {
-                    spans.push(InnerSpan::new(ranges[i * 2] as usize, ranges[i * 2 + 1] as usize));
-                }
-                (buffer, spans)
-            }),
-        }
-    }
-}
-
-#[derive(Clone)]
-pub(crate) struct InlineAsmDiagnostic {
-    pub level: super::DiagnosticLevel,
-    pub cookie: u64,
-    pub message: String,
-    pub source: Option<(String, Vec<InnerSpan>)>,
-}
-
-impl InlineAsmDiagnostic {
-    unsafe fn unpackInlineAsm(di: &DiagnosticInfo) -> Self {
-        let mut cookie = 0;
-        let mut message = None;
-        let mut level = super::DiagnosticLevel::Error;
-
-        unsafe {
-            super::LLVMRustUnpackInlineAsmDiagnostic(di, &mut level, &mut cookie, &mut message);
-        }
-
-        InlineAsmDiagnostic {
-            level,
-            cookie,
-            message: super::twine_to_string(message.unwrap()),
-            source: None,
-        }
-    }
-
-    unsafe fn unpackSrcMgr(di: &DiagnosticInfo) -> Self {
-        let mut cookie = 0;
-        let smdiag =
-            unsafe { SrcMgrDiagnostic::unpack(super::LLVMRustGetSMDiagnostic(di, &mut cookie)) };
-        InlineAsmDiagnostic {
-            level: smdiag.level,
-            cookie,
-            message: smdiag.message,
-            source: smdiag.source,
-        }
-    }
-}
-
-pub(crate) enum Diagnostic<'ll> {
-    Optimization(OptimizationDiagnostic<'ll>),
-    InlineAsm(InlineAsmDiagnostic),
-    PGO(&'ll DiagnosticInfo),
-    Linker(&'ll DiagnosticInfo),
-    Unsupported(&'ll DiagnosticInfo),
-
-    /// LLVM has other types that we do not wrap here.
-    #[expect(dead_code)]
-    UnknownDiagnostic(&'ll DiagnosticInfo),
-}
-
-impl<'ll> Diagnostic<'ll> {
-    pub(crate) unsafe fn unpack(di: &'ll DiagnosticInfo) -> Self {
-        use super::DiagnosticKind as Dk;
-
-        unsafe {
-            let kind = super::LLVMRustGetDiagInfoKind(di);
-            match kind {
-                Dk::InlineAsm => InlineAsm(InlineAsmDiagnostic::unpackInlineAsm(di)),
-
-                Dk::OptimizationRemark => {
-                    Optimization(OptimizationDiagnostic::unpack(OptimizationRemark, di))
-                }
-                Dk::OptimizationRemarkOther => {
-                    Optimization(OptimizationDiagnostic::unpack(OptimizationRemarkOther, di))
-                }
-                Dk::OptimizationRemarkMissed => {
-                    Optimization(OptimizationDiagnostic::unpack(OptimizationMissed, di))
-                }
-
-                Dk::OptimizationRemarkAnalysis => {
-                    Optimization(OptimizationDiagnostic::unpack(OptimizationAnalysis, di))
-                }
-
-                Dk::OptimizationRemarkAnalysisFPCommute => {
-                    Optimization(OptimizationDiagnostic::unpack(OptimizationAnalysisFPCommute, di))
-                }
-
-                Dk::OptimizationRemarkAnalysisAliasing => {
-                    Optimization(OptimizationDiagnostic::unpack(OptimizationAnalysisAliasing, di))
-                }
-
-                Dk::OptimizationFailure => {
-                    Optimization(OptimizationDiagnostic::unpack(OptimizationFailure, di))
-                }
-
-                Dk::PGOProfile => PGO(di),
-                Dk::Linker => Linker(di),
-                Dk::Unsupported => Unsupported(di),
-
-                Dk::SrcMgr => InlineAsm(InlineAsmDiagnostic::unpackSrcMgr(di)),
-
-                _ => UnknownDiagnostic(di),
-            }
-        }
-    }
-}
+/* FP:diagnostic.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_llvm_diagnostic_USE_0001
+/* FP:diagnostic.rs-0002 */ use libc :: c_uint ;
+/* FP:diagnostic.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_llvm_diagnostic_USE_0002
+/* FP:diagnostic.rs-0004 */ use crate :: rustc_complete :: InnerSpan ;
+/* FP:diagnostic.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_llvm_diagnostic_USE_0003
+/* FP:diagnostic.rs-0006 */ pub (crate) use self :: Diagnostic :: * ;
+/* FP:diagnostic.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_llvm_diagnostic_USE_0004
+/* FP:diagnostic.rs-0008 */ use self :: OptimizationDiagnosticKind :: * ;
+/* FP:diagnostic.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_llvm_diagnostic_USE_0005
+/* FP:diagnostic.rs-0010 */ use super :: { DiagnosticInfo , SMDiagnostic } ;
+/* FP:diagnostic.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_llvm_diagnostic_USE_0006
+/* FP:diagnostic.rs-0012 */ use crate :: value :: Value ;
+/* FP:diagnostic.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_llvm_diagnostic_ENUM_0007
+/* FP:diagnostic.rs-0014 */ # [derive (Copy , Clone , Debug)] pub (crate) enum OptimizationDiagnosticKind { OptimizationRemark , OptimizationMissed , OptimizationAnalysis , OptimizationAnalysisFPCommute , OptimizationAnalysisAliasing , OptimizationFailure , OptimizationRemarkOther , }
+/* FP:diagnostic.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_llvm_diagnostic_STRUCT_0008
+/* FP:diagnostic.rs-0016 */ pub (crate) struct OptimizationDiagnostic < 'll > { pub kind : OptimizationDiagnosticKind , pub pass_name : String , # [expect (dead_code)] pub function : & 'll Value , pub line : c_uint , pub column : c_uint , pub filename : String , pub message : String , }
+/* FP:diagnostic.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_llvm_diagnostic_IMPL_0009
+/* FP:diagnostic.rs-0018 */ impl < 'll > OptimizationDiagnostic < 'll > { unsafe fn unpack (kind : OptimizationDiagnosticKind , di : & 'll DiagnosticInfo) -> Self { let mut function = None ; let mut line = 0 ; let mut column = 0 ; let mut message = None ; let mut filename = None ; let pass_name = super :: build_string (| pass_name | { message = super :: build_string (| message | { filename = super :: build_string (| filename | unsafe { super :: LLVMRustUnpackOptimizationDiagnostic (di , pass_name , & mut function , & mut line , & mut column , filename , message ,) }) . ok () }) . ok () }) . ok () ; let mut filename = filename . unwrap_or_default () ; if filename . is_empty () { filename . push_str ("<unknown file>") ; } OptimizationDiagnostic { kind , pass_name : pass_name . expect ("got a non-UTF8 pass name from LLVM") , function : function . unwrap () , line , column , filename , message : message . expect ("got a non-UTF8 OptimizationDiagnostic message from LLVM") , } } }
+/* FP:diagnostic.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_llvm_diagnostic_STRUCT_0010
+/* FP:diagnostic.rs-0020 */ pub (crate) struct SrcMgrDiagnostic { pub level : super :: DiagnosticLevel , pub message : String , pub source : Option < (String , Vec < InnerSpan >) > , }
+/* FP:diagnostic.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_llvm_diagnostic_IMPL_0011
+/* FP:diagnostic.rs-0022 */ impl SrcMgrDiagnostic { pub (crate) unsafe fn unpack (diag : & SMDiagnostic) -> SrcMgrDiagnostic { let mut have_source = false ; let mut buffer = String :: new () ; let mut level = super :: DiagnosticLevel :: Error ; let mut loc = 0 ; let mut ranges = [0 ; 8] ; let mut num_ranges = ranges . len () / 2 ; let message = super :: build_string (| message | { buffer = super :: build_string (| buffer | unsafe { have_source = super :: LLVMRustUnpackSMDiagnostic (diag , message , buffer , & mut level , & mut loc , ranges . as_mut_ptr () , & mut num_ranges ,) ; }) . expect ("non-UTF8 inline asm") ; }) . expect ("non-UTF8 SMDiagnostic") ; SrcMgrDiagnostic { message , level , source : have_source . then (| | { let mut spans = vec ! [InnerSpan :: new (loc as usize , loc as usize)] ; for i in 0 .. num_ranges { spans . push (InnerSpan :: new (ranges [i * 2] as usize , ranges [i * 2 + 1] as usize)) ; } (buffer , spans) }) , } } }
+/* FP:diagnostic.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_llvm_diagnostic_STRUCT_0012
+/* FP:diagnostic.rs-0024 */ # [derive (Clone)] pub (crate) struct InlineAsmDiagnostic { pub level : super :: DiagnosticLevel , pub cookie : u64 , pub message : String , pub source : Option < (String , Vec < InnerSpan >) > , }
+/* FP:diagnostic.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_llvm_diagnostic_IMPL_0013
+/* FP:diagnostic.rs-0026 */ impl InlineAsmDiagnostic { unsafe fn unpackInlineAsm (di : & DiagnosticInfo) -> Self { let mut cookie = 0 ; let mut message = None ; let mut level = super :: DiagnosticLevel :: Error ; unsafe { super :: LLVMRustUnpackInlineAsmDiagnostic (di , & mut level , & mut cookie , & mut message) ; } InlineAsmDiagnostic { level , cookie , message : super :: twine_to_string (message . unwrap ()) , source : None , } } unsafe fn unpackSrcMgr (di : & DiagnosticInfo) -> Self { let mut cookie = 0 ; let smdiag = unsafe { SrcMgrDiagnostic :: unpack (super :: LLVMRustGetSMDiagnostic (di , & mut cookie)) } ; InlineAsmDiagnostic { level : smdiag . level , cookie , message : smdiag . message , source : smdiag . source , } } }
+/* FP:diagnostic.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_llvm_diagnostic_ENUM_0014
+/* FP:diagnostic.rs-0028 */ pub (crate) enum Diagnostic < 'll > { Optimization (OptimizationDiagnostic < 'll >) , InlineAsm (InlineAsmDiagnostic) , PGO (& 'll DiagnosticInfo) , Linker (& 'll DiagnosticInfo) , Unsupported (& 'll DiagnosticInfo) , # [doc = " LLVM has other types that we do not wrap here."] # [expect (dead_code)] UnknownDiagnostic (& 'll DiagnosticInfo) , }
+/* FP:diagnostic.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_llvm_diagnostic_IMPL_0015
+/* FP:diagnostic.rs-0030 */ impl < 'll > Diagnostic < 'll > { pub (crate) unsafe fn unpack (di : & 'll DiagnosticInfo) -> Self { use super :: DiagnosticKind as Dk ; unsafe { let kind = super :: LLVMRustGetDiagInfoKind (di) ; match kind { Dk :: InlineAsm => InlineAsm (InlineAsmDiagnostic :: unpackInlineAsm (di)) , Dk :: OptimizationRemark => { Optimization (OptimizationDiagnostic :: unpack (OptimizationRemark , di)) } Dk :: OptimizationRemarkOther => { Optimization (OptimizationDiagnostic :: unpack (OptimizationRemarkOther , di)) } Dk :: OptimizationRemarkMissed => { Optimization (OptimizationDiagnostic :: unpack (OptimizationMissed , di)) } Dk :: OptimizationRemarkAnalysis => { Optimization (OptimizationDiagnostic :: unpack (OptimizationAnalysis , di)) } Dk :: OptimizationRemarkAnalysisFPCommute => { Optimization (OptimizationDiagnostic :: unpack (OptimizationAnalysisFPCommute , di)) } Dk :: OptimizationRemarkAnalysisAliasing => { Optimization (OptimizationDiagnostic :: unpack (OptimizationAnalysisAliasing , di)) } Dk :: OptimizationFailure => { Optimization (OptimizationDiagnostic :: unpack (OptimizationFailure , di)) } Dk :: PGOProfile => PGO (di) , Dk :: Linker => Linker (di) , Dk :: Unsupported => Unsupported (di) , Dk :: SrcMgr => InlineAsm (InlineAsmDiagnostic :: unpackSrcMgr (di)) , _ => UnknownDiagnostic (di) , } } } }

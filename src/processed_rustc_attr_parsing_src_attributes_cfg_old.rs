@@ -1,247 +1,38 @@
-use crate::rustc_complete::{LitKind, MetaItem, MetaItemInner, MetaItemKind, MetaItemLit, NodeId};
-use rustc_ast_pretty::pprust;
-use rustc_feature::{Features, GatedCfg, find_gated_cfg};
-use crate::rustc_complete::RustcVersion;
-use crate::rustc_complete::Session;
-use crate::rustc_complete::config::ExpectedValues;
-use crate::rustc_complete::lint::builtin::UNEXPECTED_CFGS;
-use crate::rustc_complete::lint::{BuiltinLintDiag, Lint};
-use crate::rustc_complete::parse::feature_err;
-use crate::rustc_complete::{Span, Symbol, sym};
-
-use crate::session_diagnostics::{self, UnsupportedLiteralReason};
-use crate::{fluent_generated, parse_version};
-
-/// Emitter of a builtin lint from `cfg_matches`.
-///
-/// Used to support emitting a lint (currently on check-cfg), either:
-///  - as an early buffered lint (in `rustc`)
-///  - or has a "normal" lint from HIR (in `rustdoc`)
-pub trait CfgMatchesLintEmitter {
-    fn emit_span_lint(&self, sess: &Session, lint: &'static Lint, sp: Span, diag: BuiltinLintDiag);
-}
-
-impl CfgMatchesLintEmitter for NodeId {
-    fn emit_span_lint(&self, sess: &Session, lint: &'static Lint, sp: Span, diag: BuiltinLintDiag) {
-        sess.psess.buffer_lint(lint, sp, *self, diag);
-    }
-}
-
-#[derive(Clone, Debug)]
-pub struct Condition {
-    pub name: Symbol,
-    pub name_span: Span,
-    pub value: Option<Symbol>,
-    pub value_span: Option<Span>,
-    pub span: Span,
-}
-
-/// Tests if a cfg-pattern matches the cfg set
-pub fn cfg_matches(
-    cfg: &MetaItemInner,
-    sess: &Session,
-    lint_emitter: impl CfgMatchesLintEmitter,
-    features: Option<&Features>,
-) -> bool {
-    eval_condition(cfg, sess, features, &mut |cfg| {
-        try_gate_cfg(cfg.name, cfg.span, sess, features);
-        match sess.psess.check_config.expecteds.get(&cfg.name) {
-            Some(ExpectedValues::Some(values)) if !values.contains(&cfg.value) => {
-                lint_emitter.emit_span_lint(
-                    sess,
-                    UNEXPECTED_CFGS,
-                    cfg.span,
-                    BuiltinLintDiag::UnexpectedCfgValue(
-                        (cfg.name, cfg.name_span),
-                        cfg.value.map(|v| (v, cfg.value_span.unwrap())),
-                    ),
-                );
-            }
-            None if sess.psess.check_config.exhaustive_names => {
-                lint_emitter.emit_span_lint(
-                    sess,
-                    UNEXPECTED_CFGS,
-                    cfg.span,
-                    BuiltinLintDiag::UnexpectedCfgName(
-                        (cfg.name, cfg.name_span),
-                        cfg.value.map(|v| (v, cfg.value_span.unwrap())),
-                    ),
-                );
-            }
-            _ => { /* not unexpected */ }
-        }
-        sess.psess.config.contains(&(cfg.name, cfg.value))
-    })
-}
-
-pub fn try_gate_cfg(name: Symbol, span: Span, sess: &Session, features: Option<&Features>) {
-    let gate = find_gated_cfg(|sym| sym == name);
-    if let (Some(feats), Some(gated_cfg)) = (features, gate) {
-        gate_cfg(gated_cfg, span, sess, feats);
-    }
-}
-
-#[allow(rustc::untranslatable_diagnostic)] // FIXME: make this translatable
-fn gate_cfg(gated_cfg: &GatedCfg, cfg_span: Span, sess: &Session, features: &Features) {
-    let (cfg, feature, has_feature) = gated_cfg;
-    if !has_feature(features) && !cfg_span.allows_unstable(*feature) {
-        let explain = format!("`cfg({cfg})` is experimental and subject to change");
-        feature_err(sess, *feature, cfg_span, explain).emit();
-    }
-}
-
-/// Evaluate a cfg-like condition (with `any` and `all`), using `eval` to
-/// evaluate individual items.
-pub fn eval_condition(
-    cfg: &MetaItemInner,
-    sess: &Session,
-    features: Option<&Features>,
-    eval: &mut impl FnMut(Condition) -> bool,
-) -> bool {
-    let dcx = sess.dcx();
-
-    let cfg = match cfg {
-        MetaItemInner::MetaItem(meta_item) => meta_item,
-        MetaItemInner::Lit(MetaItemLit { kind: LitKind::Bool(b), .. }) => {
-            return *b;
-        }
-        _ => {
-            dcx.emit_err(session_diagnostics::UnsupportedLiteral {
-                span: cfg.span(),
-                reason: UnsupportedLiteralReason::CfgBoolean,
-                is_bytestr: false,
-                start_point_span: sess.source_map().start_point(cfg.span()),
-            });
-            return false;
-        }
-    };
-
-    match &cfg.kind {
-        MetaItemKind::List(mis) if cfg.has_name(sym::version) => {
-            try_gate_cfg(sym::version, cfg.span, sess, features);
-            let (min_version, span) = match &mis[..] {
-                [MetaItemInner::Lit(MetaItemLit { kind: LitKind::Str(sym, ..), span, .. })] => {
-                    (sym, span)
-                }
-                [
-                    MetaItemInner::Lit(MetaItemLit { span, .. })
-                    | MetaItemInner::MetaItem(MetaItem { span, .. }),
-                ] => {
-                    dcx.emit_err(session_diagnostics::ExpectedVersionLiteral { span: *span });
-                    return false;
-                }
-                [..] => {
-                    dcx.emit_err(session_diagnostics::ExpectedSingleVersionLiteral {
-                        span: cfg.span,
-                    });
-                    return false;
-                }
-            };
-            let Some(min_version) = parse_version(*min_version) else {
-                dcx.emit_warn(session_diagnostics::UnknownVersionLiteral { span: *span });
-                return false;
-            };
-
-            // See https://github.com/rust-lang/rust/issues/64796#issuecomment-640851454 for details
-            if sess.psess.assume_incomplete_release {
-                RustcVersion::current_overridable() > min_version
-            } else {
-                RustcVersion::current_overridable() >= min_version
-            }
-        }
-        MetaItemKind::List(mis) => {
-            for mi in mis.iter() {
-                if mi.meta_item_or_bool().is_none() {
-                    dcx.emit_err(session_diagnostics::UnsupportedLiteral {
-                        span: mi.span(),
-                        reason: UnsupportedLiteralReason::Generic,
-                        is_bytestr: false,
-                        start_point_span: sess.source_map().start_point(mi.span()),
-                    });
-                    return false;
-                }
-            }
-
-            // The unwraps below may look dangerous, but we've already asserted
-            // that they won't fail with the loop above.
-            match cfg.name() {
-                Some(sym::any) => mis
-                    .iter()
-                    // We don't use any() here, because we want to evaluate all cfg condition
-                    // as eval_condition can (and does) extra checks
-                    .fold(false, |res, mi| res | eval_condition(mi, sess, features, eval)),
-                Some(sym::all) => mis
-                    .iter()
-                    // We don't use all() here, because we want to evaluate all cfg condition
-                    // as eval_condition can (and does) extra checks
-                    .fold(true, |res, mi| res & eval_condition(mi, sess, features, eval)),
-                Some(sym::not) => {
-                    let [mi] = mis.as_slice() else {
-                        dcx.emit_err(session_diagnostics::ExpectedOneCfgPattern { span: cfg.span });
-                        return false;
-                    };
-
-                    !eval_condition(mi, sess, features, eval)
-                }
-                Some(sym::target) => {
-                    if let Some(features) = features
-                        && !features.cfg_target_compact()
-                    {
-                        feature_err(
-                            sess,
-                            sym::cfg_target_compact,
-                            cfg.span,
-                            fluent_generated::attr_parsing_unstable_cfg_target_compact,
-                        )
-                        .emit();
-                    }
-
-                    mis.iter().fold(true, |res, mi| {
-                        let Some(mut mi) = mi.meta_item().cloned() else {
-                            dcx.emit_err(session_diagnostics::CfgPredicateIdentifier {
-                                span: mi.span(),
-                            });
-                            return false;
-                        };
-
-                        if let [seg, ..] = &mut mi.path.segments[..] {
-                            seg.ident.name = Symbol::intern(&format!("target_{}", seg.ident.name));
-                        }
-
-                        res & eval_condition(&MetaItemInner::MetaItem(mi), sess, features, eval)
-                    })
-                }
-                _ => {
-                    dcx.emit_err(session_diagnostics::InvalidPredicate {
-                        span: cfg.span,
-                        predicate: pprust::path_to_string(&cfg.path),
-                    });
-                    false
-                }
-            }
-        }
-        MetaItemKind::Word | MetaItemKind::NameValue(..) if cfg.path.segments.len() != 1 => {
-            dcx.emit_err(session_diagnostics::CfgPredicateIdentifier { span: cfg.path.span });
-            true
-        }
-        MetaItemKind::NameValue(lit) if !lit.kind.is_str() => {
-            dcx.emit_err(session_diagnostics::UnsupportedLiteral {
-                span: lit.span,
-                reason: UnsupportedLiteralReason::CfgString,
-                is_bytestr: lit.kind.is_bytestr(),
-                start_point_span: sess.source_map().start_point(lit.span),
-            });
-            true
-        }
-        MetaItemKind::Word | MetaItemKind::NameValue(..) => {
-            let ident = cfg.ident().expect("multi-segment cfg predicate");
-            eval(Condition {
-                name: ident.name,
-                name_span: ident.span,
-                value: cfg.value_str(),
-                value_span: cfg.name_value_literal_span(),
-                span: cfg.span,
-            })
-        }
-    }
-}
+/* FP:cfg_old.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_USE_0001
+/* FP:cfg_old.rs-0002 */ use crate :: rustc_complete :: { LitKind , MetaItem , MetaItemInner , MetaItemKind , MetaItemLit , NodeId } ;
+/* FP:cfg_old.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_USE_0002
+/* FP:cfg_old.rs-0004 */ use rustc_ast_pretty :: pprust ;
+/* FP:cfg_old.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_USE_0003
+/* FP:cfg_old.rs-0006 */ use crate :: rustc_feature :: { Features , GatedCfg , find_gated_cfg } ;
+/* FP:cfg_old.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_USE_0004
+/* FP:cfg_old.rs-0008 */ use crate :: rustc_complete :: RustcVersion ;
+/* FP:cfg_old.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_USE_0005
+/* FP:cfg_old.rs-0010 */ use crate :: rustc_complete :: Session ;
+/* FP:cfg_old.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_USE_0006
+/* FP:cfg_old.rs-0012 */ use crate :: rustc_complete :: config :: ExpectedValues ;
+/* FP:cfg_old.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_USE_0007
+/* FP:cfg_old.rs-0014 */ use crate :: rustc_complete :: lint :: builtin :: UNEXPECTED_CFGS ;
+/* FP:cfg_old.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_USE_0008
+/* FP:cfg_old.rs-0016 */ use crate :: rustc_complete :: lint :: { BuiltinLintDiag , Lint } ;
+/* FP:cfg_old.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_USE_0009
+/* FP:cfg_old.rs-0018 */ use crate :: rustc_complete :: parse :: feature_err ;
+/* FP:cfg_old.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_USE_0010
+/* FP:cfg_old.rs-0020 */ use crate :: rustc_complete :: { Span , Symbol , sym } ;
+/* FP:cfg_old.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_USE_0011
+/* FP:cfg_old.rs-0022 */ use crate :: session_diagnostics :: { self , UnsupportedLiteralReason } ;
+/* FP:cfg_old.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_USE_0012
+/* FP:cfg_old.rs-0024 */ use crate :: { fluent_generated , parse_version } ;
+/* FP:cfg_old.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_TRAIT_0013
+/* FP:cfg_old.rs-0026 */ # [doc = " Emitter of a builtin lint from `cfg_matches`."] # [doc = ""] # [doc = " Used to support emitting a lint (currently on check-cfg), either:"] # [doc = "  - as an early buffered lint (in `rustc`)"] # [doc = "  - or has a \"normal\" lint from HIR (in `rustdoc`)"] pub trait CfgMatchesLintEmitter { fn emit_span_lint (& self , sess : & Session , lint : & 'static Lint , sp : Span , diag : BuiltinLintDiag) ; }
+/* FP:cfg_old.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_IMPL_0014
+/* FP:cfg_old.rs-0028 */ impl CfgMatchesLintEmitter for NodeId { fn emit_span_lint (& self , sess : & Session , lint : & 'static Lint , sp : Span , diag : BuiltinLintDiag) { sess . psess . buffer_lint (lint , sp , * self , diag) ; } }
+/* FP:cfg_old.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_STRUCT_0015
+/* FP:cfg_old.rs-0030 */ # [derive (Clone , Debug)] pub struct Condition { pub name : Symbol , pub name_span : Span , pub value : Option < Symbol > , pub value_span : Option < Span > , pub span : Span , }
+/* FP:cfg_old.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_FN_0016
+/* FP:cfg_old.rs-0032 */ # [doc = " Tests if a cfg-pattern matches the cfg set"] pub fn cfg_matches (cfg : & MetaItemInner , sess : & Session , lint_emitter : impl CfgMatchesLintEmitter , features : Option < & Features > ,) -> bool { eval_condition (cfg , sess , features , & mut | cfg | { try_gate_cfg (cfg . name , cfg . span , sess , features) ; match sess . psess . check_config . expecteds . get (& cfg . name) { Some (ExpectedValues :: Some (values)) if ! values . contains (& cfg . value) => { lint_emitter . emit_span_lint (sess , UNEXPECTED_CFGS , cfg . span , BuiltinLintDiag :: UnexpectedCfgValue ((cfg . name , cfg . name_span) , cfg . value . map (| v | (v , cfg . value_span . unwrap ())) ,) ,) ; } None if sess . psess . check_config . exhaustive_names => { lint_emitter . emit_span_lint (sess , UNEXPECTED_CFGS , cfg . span , BuiltinLintDiag :: UnexpectedCfgName ((cfg . name , cfg . name_span) , cfg . value . map (| v | (v , cfg . value_span . unwrap ())) ,) ,) ; } _ => { } } sess . psess . config . contains (& (cfg . name , cfg . value)) }) }
+/* FP:cfg_old.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_FN_0017
+/* FP:cfg_old.rs-0034 */ pub fn try_gate_cfg (name : Symbol , span : Span , sess : & Session , features : Option < & Features >) { let gate = find_gated_cfg (| sym | sym == name) ; if let (Some (feats) , Some (gated_cfg)) = (features , gate) { gate_cfg (gated_cfg , span , sess , feats) ; } }
+/* FP:cfg_old.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_FN_0018
+/* FP:cfg_old.rs-0036 */ # [allow (rustc :: untranslatable_diagnostic)] fn gate_cfg (gated_cfg : & GatedCfg , cfg_span : Span , sess : & Session , features : & Features) { let (cfg , feature , has_feature) = gated_cfg ; if ! has_feature (features) && ! cfg_span . allows_unstable (* feature) { let explain = format ! ("`cfg({cfg})` is experimental and subject to change") ; feature_err (sess , * feature , cfg_span , explain) . emit () ; } }
+/* FP:cfg_old.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_cfg_old_FN_0019
+/* FP:cfg_old.rs-0038 */ # [doc = " Evaluate a cfg-like condition (with `any` and `all`), using `eval` to"] # [doc = " evaluate individual items."] pub fn eval_condition (cfg : & MetaItemInner , sess : & Session , features : Option < & Features > , eval : & mut impl FnMut (Condition) -> bool ,) -> bool { let dcx = sess . dcx () ; let cfg = match cfg { MetaItemInner :: MetaItem (meta_item) => meta_item , MetaItemInner :: Lit (MetaItemLit { kind : LitKind :: Bool (b) , .. }) => { return * b ; } _ => { dcx . emit_err (session_diagnostics :: UnsupportedLiteral { span : cfg . span () , reason : UnsupportedLiteralReason :: CfgBoolean , is_bytestr : false , start_point_span : sess . source_map () . start_point (cfg . span ()) , }) ; return false ; } } ; match & cfg . kind { MetaItemKind :: List (mis) if cfg . has_name (sym :: version) => { try_gate_cfg (sym :: version , cfg . span , sess , features) ; let (min_version , span) = match & mis [..] { [MetaItemInner :: Lit (MetaItemLit { kind : LitKind :: Str (sym , ..) , span , .. })] => { (sym , span) } [MetaItemInner :: Lit (MetaItemLit { span , .. }) | MetaItemInner :: MetaItem (MetaItem { span , .. }) ,] => { dcx . emit_err (session_diagnostics :: ExpectedVersionLiteral { span : * span }) ; return false ; } [..] => { dcx . emit_err (session_diagnostics :: ExpectedSingleVersionLiteral { span : cfg . span , }) ; return false ; } } ; let Some (min_version) = parse_version (* min_version) else { dcx . emit_warn (session_diagnostics :: UnknownVersionLiteral { span : * span }) ; return false ; } ; if sess . psess . assume_incomplete_release { RustcVersion :: current_overridable () > min_version } else { RustcVersion :: current_overridable () >= min_version } } MetaItemKind :: List (mis) => { for mi in mis . iter () { if mi . meta_item_or_bool () . is_none () { dcx . emit_err (session_diagnostics :: UnsupportedLiteral { span : mi . span () , reason : UnsupportedLiteralReason :: Generic , is_bytestr : false , start_point_span : sess . source_map () . start_point (mi . span ()) , }) ; return false ; } } match cfg . name () { Some (sym :: any) => mis . iter () . fold (false , | res , mi | res | eval_condition (mi , sess , features , eval)) , Some (sym :: all) => mis . iter () . fold (true , | res , mi | res & eval_condition (mi , sess , features , eval)) , Some (sym :: not) => { let [mi] = mis . as_slice () else { dcx . emit_err (session_diagnostics :: ExpectedOneCfgPattern { span : cfg . span }) ; return false ; } ; ! eval_condition (mi , sess , features , eval) } Some (sym :: target) => { if let Some (features) = features && ! features . cfg_target_compact () { feature_err (sess , sym :: cfg_target_compact , cfg . span , fluent_generated :: attr_parsing_unstable_cfg_target_compact ,) . emit () ; } mis . iter () . fold (true , | res , mi | { let Some (mut mi) = mi . meta_item () . cloned () else { dcx . emit_err (session_diagnostics :: CfgPredicateIdentifier { span : mi . span () , }) ; return false ; } ; if let [seg , ..] = & mut mi . path . segments [..] { seg . ident . name = Symbol :: intern (& format ! ("target_{}" , seg . ident . name)) ; } res & eval_condition (& MetaItemInner :: MetaItem (mi) , sess , features , eval) }) } _ => { dcx . emit_err (session_diagnostics :: InvalidPredicate { span : cfg . span , predicate : pprust :: path_to_string (& cfg . path) , }) ; false } } } MetaItemKind :: Word | MetaItemKind :: NameValue (..) if cfg . path . segments . len () != 1 => { dcx . emit_err (session_diagnostics :: CfgPredicateIdentifier { span : cfg . path . span }) ; true } MetaItemKind :: NameValue (lit) if ! lit . kind . is_str () => { dcx . emit_err (session_diagnostics :: UnsupportedLiteral { span : lit . span , reason : UnsupportedLiteralReason :: CfgString , is_bytestr : lit . kind . is_bytestr () , start_point_span : sess . source_map () . start_point (lit . span) , }) ; true } MetaItemKind :: Word | MetaItemKind :: NameValue (..) => { let ident = cfg . ident () . expect ("multi-segment cfg predicate") ; eval (Condition { name : ident . name , name_span : ident . span , value : cfg . value_str () , value_span : cfg . name_value_literal_span () , span : cfg . span , }) } } }

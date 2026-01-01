@@ -1,114 +1,22 @@
-use crate::rustc_data_structures::fx::{FxHashSet, FxIndexSet};
-use crate::rustc_data_structures::transitive_relation::TransitiveRelationBuilder;
-use crate::rustc_complete::{bug, ty};
-use tracing::debug;
-
-use super::explicit_outlives_bounds;
-use crate::infer::GenericKind;
-use crate::infer::free_regions::FreeRegionMap;
-use crate::traits::query::OutlivesBound;
-
-/// The `OutlivesEnvironment` collects information about what outlives
-/// what in a given type-checking setting. For example, if we have a
-/// where-clause like `where T: 'a` in scope, then the
-/// `OutlivesEnvironment` would record that (in its
-/// `region_bound_pairs` field). Similarly, it contains methods for
-/// processing and adding implied bounds into the outlives
-/// environment.
-///
-/// Other code at present does not typically take a
-/// `&OutlivesEnvironment`, but rather takes some of its fields (e.g.,
-/// `process_registered_region_obligations` wants the
-/// region-bound-pairs). There is no mistaking it: the current setup
-/// of tracking region information is quite scattered! The
-/// `OutlivesEnvironment`, for example, needs to sometimes be combined
-/// with the `middle::RegionRelations`, to yield a full picture of how
-/// (lexical) lifetimes interact. However, I'm reluctant to do more
-/// refactoring here, since the setup with NLL is quite different.
-/// For example, NLL has no need of `RegionRelations`, and is solely
-/// interested in the `OutlivesEnvironment`. -nmatsakis
-#[derive(Clone)]
-pub struct OutlivesEnvironment<'tcx> {
-    pub param_env: ty::ParamEnv<'tcx>,
-    free_region_map: FreeRegionMap<'tcx>,
-    /// FIXME: Your first reaction may be that this is a bit strange. `RegionBoundPairs`
-    /// does not contain lifetimes, which are instead in the `FreeRegionMap`, and other
-    /// known type outlives are stored in the `known_type_outlives` set. So why do we
-    /// have these at all? It turns out that removing these and using `known_type_outlives`
-    /// everywhere is just enough of a perf regression to matter. This can/should be
-    /// optimized in the future, though.
-    region_bound_pairs: RegionBoundPairs<'tcx>,
-    known_type_outlives: Vec<ty::PolyTypeOutlivesPredicate<'tcx>>,
-    /// Assumptions that come from the well-formedness of coroutines that we prove
-    /// auto trait bounds for during the type checking of this body.
-    higher_ranked_assumptions: FxHashSet<ty::ArgOutlivesPredicate<'tcx>>,
-}
-
-/// "Region-bound pairs" tracks outlives relations that are known to
-/// be true, either because of explicit where-clauses like `T: 'a` or
-/// because of implied bounds.
-pub type RegionBoundPairs<'tcx> = FxIndexSet<ty::OutlivesPredicate<'tcx, GenericKind<'tcx>>>;
-
-impl<'tcx> OutlivesEnvironment<'tcx> {
-    /// Create a new `OutlivesEnvironment` from normalized outlives bounds.
-    pub fn from_normalized_bounds(
-        param_env: ty::ParamEnv<'tcx>,
-        known_type_outlives: Vec<ty::PolyTypeOutlivesPredicate<'tcx>>,
-        extra_bounds: impl IntoIterator<Item = OutlivesBound<'tcx>>,
-        higher_ranked_assumptions: FxHashSet<ty::ArgOutlivesPredicate<'tcx>>,
-    ) -> Self {
-        let mut region_relation = TransitiveRelationBuilder::default();
-        let mut region_bound_pairs = RegionBoundPairs::default();
-
-        // Record relationships such as `T:'x` that don't go into the
-        // free-region-map but which we use here.
-        for outlives_bound in explicit_outlives_bounds(param_env).chain(extra_bounds) {
-            debug!("add_outlives_bounds: outlives_bound={:?}", outlives_bound);
-            match outlives_bound {
-                OutlivesBound::RegionSubParam(r_a, param_b) => {
-                    region_bound_pairs
-                        .insert(ty::OutlivesPredicate(GenericKind::Param(param_b), r_a));
-                }
-                OutlivesBound::RegionSubAlias(r_a, alias_b) => {
-                    region_bound_pairs
-                        .insert(ty::OutlivesPredicate(GenericKind::Alias(alias_b), r_a));
-                }
-                OutlivesBound::RegionSubRegion(r_a, r_b) => match (r_a.kind(), r_b.kind()) {
-                    (
-                        ty::ReStatic | ty::ReEarlyParam(_) | ty::ReLateParam(_),
-                        ty::ReStatic | ty::ReEarlyParam(_) | ty::ReLateParam(_),
-                    ) => region_relation.add(r_a, r_b),
-                    (ty::ReError(_), _) | (_, ty::ReError(_)) => {}
-                    // FIXME(#109628): We shouldn't have existential variables in implied bounds.
-                    // Panic here once the linked issue is resolved!
-                    (ty::ReVar(_), _) | (_, ty::ReVar(_)) => {}
-                    _ => bug!("add_outlives_bounds: unexpected regions: ({r_a:?}, {r_b:?})"),
-                },
-            }
-        }
-
-        OutlivesEnvironment {
-            param_env,
-            known_type_outlives,
-            free_region_map: FreeRegionMap { relation: region_relation.freeze() },
-            region_bound_pairs,
-            higher_ranked_assumptions,
-        }
-    }
-
-    pub fn free_region_map(&self) -> &FreeRegionMap<'tcx> {
-        &self.free_region_map
-    }
-
-    pub fn region_bound_pairs(&self) -> &RegionBoundPairs<'tcx> {
-        &self.region_bound_pairs
-    }
-
-    pub fn known_type_outlives(&self) -> &[ty::PolyTypeOutlivesPredicate<'tcx>] {
-        &self.known_type_outlives
-    }
-
-    pub fn higher_ranked_assumptions(&self) -> &FxHashSet<ty::ArgOutlivesPredicate<'tcx>> {
-        &self.higher_ranked_assumptions
-    }
-}
+/* FP:env.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_env_USE_0001
+/* FP:env.rs-0002 */ use crate :: rustc_data_structures :: fx :: { FxHashSet , FxIndexSet } ;
+/* FP:env.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_env_USE_0002
+/* FP:env.rs-0004 */ use crate :: rustc_data_structures :: transitive_relation :: TransitiveRelationBuilder ;
+/* FP:env.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_env_USE_0003
+/* FP:env.rs-0006 */ use crate :: rustc_complete :: { bug , ty } ;
+/* FP:env.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_env_USE_0004
+/* FP:env.rs-0008 */ use tracing :: debug ;
+/* FP:env.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_env_USE_0005
+/* FP:env.rs-0010 */ use super :: explicit_outlives_bounds ;
+/* FP:env.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_env_USE_0006
+/* FP:env.rs-0012 */ use crate :: infer :: GenericKind ;
+/* FP:env.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_env_USE_0007
+/* FP:env.rs-0014 */ use crate :: infer :: free_regions :: FreeRegionMap ;
+/* FP:env.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_env_USE_0008
+/* FP:env.rs-0016 */ use crate :: traits :: query :: OutlivesBound ;
+/* FP:env.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_env_STRUCT_0009
+/* FP:env.rs-0018 */ # [doc = " The `OutlivesEnvironment` collects information about what outlives"] # [doc = " what in a given type-checking setting. For example, if we have a"] # [doc = " where-clause like `where T: 'a` in scope, then the"] # [doc = " `OutlivesEnvironment` would record that (in its"] # [doc = " `region_bound_pairs` field). Similarly, it contains methods for"] # [doc = " processing and adding implied bounds into the outlives"] # [doc = " environment."] # [doc = ""] # [doc = " Other code at present does not typically take a"] # [doc = " `&OutlivesEnvironment`, but rather takes some of its fields (e.g.,"] # [doc = " `process_registered_region_obligations` wants the"] # [doc = " region-bound-pairs). There is no mistaking it: the current setup"] # [doc = " of tracking region information is quite scattered! The"] # [doc = " `OutlivesEnvironment`, for example, needs to sometimes be combined"] # [doc = " with the `middle::RegionRelations`, to yield a full picture of how"] # [doc = " (lexical) lifetimes interact. However, I'm reluctant to do more"] # [doc = " refactoring here, since the setup with NLL is quite different."] # [doc = " For example, NLL has no need of `RegionRelations`, and is solely"] # [doc = " interested in the `OutlivesEnvironment`. -nmatsakis"] # [derive (Clone)] pub struct OutlivesEnvironment < 'tcx > { pub param_env : ty :: ParamEnv < 'tcx > , free_region_map : FreeRegionMap < 'tcx > , # [doc = " FIXME: Your first reaction may be that this is a bit strange. `RegionBoundPairs`"] # [doc = " does not contain lifetimes, which are instead in the `FreeRegionMap`, and other"] # [doc = " known type outlives are stored in the `known_type_outlives` set. So why do we"] # [doc = " have these at all? It turns out that removing these and using `known_type_outlives`"] # [doc = " everywhere is just enough of a perf regression to matter. This can/should be"] # [doc = " optimized in the future, though."] region_bound_pairs : RegionBoundPairs < 'tcx > , known_type_outlives : Vec < ty :: PolyTypeOutlivesPredicate < 'tcx > > , # [doc = " Assumptions that come from the well-formedness of coroutines that we prove"] # [doc = " auto trait bounds for during the type checking of this body."] higher_ranked_assumptions : FxHashSet < ty :: ArgOutlivesPredicate < 'tcx > > , }
+/* FP:env.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_env_TYPE_0010
+/* FP:env.rs-0020 */ # [doc = " \"Region-bound pairs\" tracks outlives relations that are known to"] # [doc = " be true, either because of explicit where-clauses like `T: 'a` or"] # [doc = " because of implied bounds."] pub type RegionBoundPairs < 'tcx > = FxIndexSet < ty :: OutlivesPredicate < 'tcx , GenericKind < 'tcx > > > ;
+/* FP:env.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_env_IMPL_0011
+/* FP:env.rs-0022 */ impl < 'tcx > OutlivesEnvironment < 'tcx > { # [doc = " Create a new `OutlivesEnvironment` from normalized outlives bounds."] pub fn from_normalized_bounds (param_env : ty :: ParamEnv < 'tcx > , known_type_outlives : Vec < ty :: PolyTypeOutlivesPredicate < 'tcx > > , extra_bounds : impl IntoIterator < Item = OutlivesBound < 'tcx > > , higher_ranked_assumptions : FxHashSet < ty :: ArgOutlivesPredicate < 'tcx > > ,) -> Self { let mut region_relation = TransitiveRelationBuilder :: default () ; let mut region_bound_pairs = RegionBoundPairs :: default () ; for outlives_bound in explicit_outlives_bounds (param_env) . chain (extra_bounds) { debug ! ("add_outlives_bounds: outlives_bound={:?}" , outlives_bound) ; match outlives_bound { OutlivesBound :: RegionSubParam (r_a , param_b) => { region_bound_pairs . insert (ty :: OutlivesPredicate (GenericKind :: Param (param_b) , r_a)) ; } OutlivesBound :: RegionSubAlias (r_a , alias_b) => { region_bound_pairs . insert (ty :: OutlivesPredicate (GenericKind :: Alias (alias_b) , r_a)) ; } OutlivesBound :: RegionSubRegion (r_a , r_b) => match (r_a . kind () , r_b . kind ()) { (ty :: ReStatic | ty :: ReEarlyParam (_) | ty :: ReLateParam (_) , ty :: ReStatic | ty :: ReEarlyParam (_) | ty :: ReLateParam (_) ,) => region_relation . add (r_a , r_b) , (ty :: ReError (_) , _) | (_ , ty :: ReError (_)) => { } (ty :: ReVar (_) , _) | (_ , ty :: ReVar (_)) => { } _ => bug ! ("add_outlives_bounds: unexpected regions: ({r_a:?}, {r_b:?})") , } , } } OutlivesEnvironment { param_env , known_type_outlives , free_region_map : FreeRegionMap { relation : region_relation . freeze () } , region_bound_pairs , higher_ranked_assumptions , } } pub fn free_region_map (& self) -> & FreeRegionMap < 'tcx > { & self . free_region_map } pub fn region_bound_pairs (& self) -> & RegionBoundPairs < 'tcx > { & self . region_bound_pairs } pub fn known_type_outlives (& self) -> & [ty :: PolyTypeOutlivesPredicate < 'tcx >] { & self . known_type_outlives } pub fn higher_ranked_assumptions (& self) -> & FxHashSet < ty :: ArgOutlivesPredicate < 'tcx > > { & self . higher_ranked_assumptions } }

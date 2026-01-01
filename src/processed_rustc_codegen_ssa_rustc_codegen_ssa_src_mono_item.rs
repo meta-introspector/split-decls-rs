@@ -1,98 +1,20 @@
-use crate::rustc_complete::attrs::Linkage;
-use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
-use crate::rustc_complete::mir::mono::{MonoItem, MonoItemData, Visibility};
-use crate::rustc_complete::ty::layout::HasTyCtxt;
-use tracing::debug;
-
-use crate::base;
-use crate::mir::naked_asm;
-use crate::traits::*;
-
-pub trait MonoItemExt<'a, 'tcx> {
-    fn define<Bx: BuilderMethods<'a, 'tcx>>(
-        &self,
-        cx: &'a mut Bx::CodegenCx,
-        cgu_name: &str,
-        item_data: MonoItemData,
-    );
-    fn predefine<Bx: BuilderMethods<'a, 'tcx>>(
-        &self,
-        cx: &'a mut Bx::CodegenCx,
-        cgu_name: &str,
-        linkage: Linkage,
-        visibility: Visibility,
-    );
-    fn to_raw_string(&self) -> String;
-}
-
-impl<'a, 'tcx: 'a> MonoItemExt<'a, 'tcx> for MonoItem<'tcx> {
-    fn define<Bx: BuilderMethods<'a, 'tcx>>(
-        &self,
-        cx: &'a mut Bx::CodegenCx,
-        cgu_name: &str,
-        item_data: MonoItemData,
-    ) {
-        debug!("BEGIN IMPLEMENTING '{} ({})' in cgu {}", self, self.to_raw_string(), cgu_name);
-
-        match *self {
-            MonoItem::Static(def_id) => {
-                cx.codegen_static(def_id);
-            }
-            MonoItem::GlobalAsm(item_id) => {
-                base::codegen_global_asm(cx, item_id);
-            }
-            MonoItem::Fn(instance) => {
-                let flags = cx.tcx().codegen_instance_attrs(instance.def).flags;
-                if flags.contains(CodegenFnAttrFlags::NAKED) {
-                    naked_asm::codegen_naked_asm::<Bx::CodegenCx>(cx, instance, item_data);
-                } else {
-                    base::codegen_instance::<Bx>(cx, instance);
-                }
-            }
-        }
-
-        debug!("END IMPLEMENTING '{} ({})' in cgu {}", self, self.to_raw_string(), cgu_name);
-    }
-
-    fn predefine<Bx: BuilderMethods<'a, 'tcx>>(
-        &self,
-        cx: &'a mut Bx::CodegenCx,
-        cgu_name: &str,
-        linkage: Linkage,
-        visibility: Visibility,
-    ) {
-        debug!("BEGIN PREDEFINING '{} ({})' in cgu {}", self, self.to_raw_string(), cgu_name);
-
-        let symbol_name = self.symbol_name(cx.tcx()).name;
-
-        debug!("symbol {symbol_name}");
-
-        match *self {
-            MonoItem::Static(def_id) => {
-                cx.predefine_static(def_id, linkage, visibility, symbol_name);
-            }
-            MonoItem::Fn(instance) => {
-                let attrs = cx.tcx().codegen_instance_attrs(instance.def);
-
-                if attrs.flags.contains(CodegenFnAttrFlags::NAKED) {
-                    // do not define this function; it will become a global assembly block
-                } else {
-                    cx.predefine_fn(instance, linkage, visibility, symbol_name);
-                };
-            }
-            MonoItem::GlobalAsm(..) => {}
-        }
-
-        debug!("END PREDEFINING '{} ({})' in cgu {}", self, self.to_raw_string(), cgu_name);
-    }
-
-    fn to_raw_string(&self) -> String {
-        match *self {
-            MonoItem::Fn(instance) => {
-                format!("Fn({:?}, {})", instance.def, instance.args.as_ptr().addr())
-            }
-            MonoItem::Static(id) => format!("Static({id:?})"),
-            MonoItem::GlobalAsm(id) => format!("GlobalAsm({id:?})"),
-        }
-    }
-}
+/* FP:mono_item.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_mono_item_USE_0001
+/* FP:mono_item.rs-0002 */ use crate :: rustc_complete :: attrs :: Linkage ;
+/* FP:mono_item.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_mono_item_USE_0002
+/* FP:mono_item.rs-0004 */ use crate :: rustc_complete :: middle :: codegen_fn_attrs :: CodegenFnAttrFlags ;
+/* FP:mono_item.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_mono_item_USE_0003
+/* FP:mono_item.rs-0006 */ use crate :: rustc_complete :: mir :: mono :: { MonoItem , MonoItemData , Visibility } ;
+/* FP:mono_item.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_mono_item_USE_0004
+/* FP:mono_item.rs-0008 */ use crate :: rustc_complete :: ty :: layout :: HasTyCtxt ;
+/* FP:mono_item.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_mono_item_USE_0005
+/* FP:mono_item.rs-0010 */ use tracing :: debug ;
+/* FP:mono_item.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_mono_item_USE_0006
+/* FP:mono_item.rs-0012 */ use crate :: base ;
+/* FP:mono_item.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_mono_item_USE_0007
+/* FP:mono_item.rs-0014 */ use crate :: mir :: naked_asm ;
+/* FP:mono_item.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_mono_item_USE_0008
+/* FP:mono_item.rs-0016 */ use crate :: traits :: * ;
+/* FP:mono_item.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_mono_item_TRAIT_0009
+/* FP:mono_item.rs-0018 */ pub trait MonoItemExt < 'a , 'tcx > { fn define < Bx : BuilderMethods < 'a , 'tcx > > (& self , cx : & 'a mut Bx :: CodegenCx , cgu_name : & str , item_data : MonoItemData ,) ; fn predefine < Bx : BuilderMethods < 'a , 'tcx > > (& self , cx : & 'a mut Bx :: CodegenCx , cgu_name : & str , linkage : Linkage , visibility : Visibility ,) ; fn to_raw_string (& self) -> String ; }
+/* FP:mono_item.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_mono_item_IMPL_0010
+/* FP:mono_item.rs-0020 */ impl < 'a , 'tcx : 'a > MonoItemExt < 'a , 'tcx > for MonoItem < 'tcx > { fn define < Bx : BuilderMethods < 'a , 'tcx > > (& self , cx : & 'a mut Bx :: CodegenCx , cgu_name : & str , item_data : MonoItemData ,) { debug ! ("BEGIN IMPLEMENTING '{} ({})' in cgu {}" , self , self . to_raw_string () , cgu_name) ; match * self { MonoItem :: Static (def_id) => { cx . codegen_static (def_id) ; } MonoItem :: GlobalAsm (item_id) => { base :: codegen_global_asm (cx , item_id) ; } MonoItem :: Fn (instance) => { let flags = cx . tcx () . codegen_instance_attrs (instance . def) . flags ; if flags . contains (CodegenFnAttrFlags :: NAKED) { naked_asm :: codegen_naked_asm :: < Bx :: CodegenCx > (cx , instance , item_data) ; } else { base :: codegen_instance :: < Bx > (cx , instance) ; } } } debug ! ("END IMPLEMENTING '{} ({})' in cgu {}" , self , self . to_raw_string () , cgu_name) ; } fn predefine < Bx : BuilderMethods < 'a , 'tcx > > (& self , cx : & 'a mut Bx :: CodegenCx , cgu_name : & str , linkage : Linkage , visibility : Visibility ,) { debug ! ("BEGIN PREDEFINING '{} ({})' in cgu {}" , self , self . to_raw_string () , cgu_name) ; let symbol_name = self . symbol_name (cx . tcx ()) . name ; debug ! ("symbol {symbol_name}") ; match * self { MonoItem :: Static (def_id) => { cx . predefine_static (def_id , linkage , visibility , symbol_name) ; } MonoItem :: Fn (instance) => { let attrs = cx . tcx () . codegen_instance_attrs (instance . def) ; if attrs . flags . contains (CodegenFnAttrFlags :: NAKED) { } else { cx . predefine_fn (instance , linkage , visibility , symbol_name) ; } ; } MonoItem :: GlobalAsm (..) => { } } debug ! ("END PREDEFINING '{} ({})' in cgu {}" , self , self . to_raw_string () , cgu_name) ; } fn to_raw_string (& self) -> String { match * self { MonoItem :: Fn (instance) => { format ! ("Fn({:?}, {})" , instance . def , instance . args . as_ptr () . addr ()) } MonoItem :: Static (id) => format ! ("Static({id:?})") , MonoItem :: GlobalAsm (id) => format ! ("GlobalAsm({id:?})") , } } }

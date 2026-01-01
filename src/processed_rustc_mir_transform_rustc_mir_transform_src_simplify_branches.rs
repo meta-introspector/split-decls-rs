@@ -1,67 +1,10 @@
-use crate::rustc_complete::mir::*;
-use crate::rustc_complete::ty::TyCtxt;
-use tracing::trace;
-
-pub(super) enum SimplifyConstCondition {
-    AfterConstProp,
-    Final,
-}
-
-/// A pass that replaces a branch with a goto when its condition is known.
-impl<'tcx> crate::MirPass<'tcx> for SimplifyConstCondition {
-    fn name(&self) -> &'static str {
-        match self {
-            SimplifyConstCondition::AfterConstProp => "SimplifyConstCondition-after-const-prop",
-            SimplifyConstCondition::Final => "SimplifyConstCondition-final",
-        }
-    }
-
-    fn run_pass(&self, tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
-        trace!("Running SimplifyConstCondition on {:?}", body.source);
-        let typing_env = body.typing_env(tcx);
-        'blocks: for block in body.basic_blocks_mut() {
-            for stmt in block.statements.iter_mut() {
-                // Simplify `assume` of a known value: either a NOP or unreachable.
-                if let StatementKind::Intrinsic(box ref intrinsic) = stmt.kind
-                    && let NonDivergingIntrinsic::Assume(discr) = intrinsic
-                    && let Operand::Constant(c) = discr
-                    && let Some(constant) = c.const_.try_eval_bool(tcx, typing_env)
-                {
-                    if constant {
-                        stmt.make_nop();
-                    } else {
-                        block.statements.clear();
-                        block.terminator_mut().kind = TerminatorKind::Unreachable;
-                        continue 'blocks;
-                    }
-                }
-            }
-
-            let terminator = block.terminator_mut();
-            terminator.kind = match terminator.kind {
-                TerminatorKind::SwitchInt {
-                    discr: Operand::Constant(ref c), ref targets, ..
-                } => {
-                    let constant = c.const_.try_eval_bits(tcx, typing_env);
-                    if let Some(constant) = constant {
-                        let target = targets.target_for_value(constant);
-                        TerminatorKind::Goto { target }
-                    } else {
-                        continue;
-                    }
-                }
-                TerminatorKind::Assert {
-                    target, cond: Operand::Constant(ref c), expected, ..
-                } => match c.const_.try_eval_bool(tcx, typing_env) {
-                    Some(v) if v == expected => TerminatorKind::Goto { target },
-                    _ => continue,
-                },
-                _ => continue,
-            };
-        }
-    }
-
-    fn is_required(&self) -> bool {
-        false
-    }
-}
+/* FP:simplify_branches.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_simplify_branches_USE_0001
+/* FP:simplify_branches.rs-0002 */ use crate :: rustc_complete :: mir :: * ;
+/* FP:simplify_branches.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_simplify_branches_USE_0002
+/* FP:simplify_branches.rs-0004 */ use crate :: rustc_complete :: ty :: TyCtxt ;
+/* FP:simplify_branches.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_simplify_branches_USE_0003
+/* FP:simplify_branches.rs-0006 */ use tracing :: trace ;
+/* FP:simplify_branches.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_simplify_branches_ENUM_0004
+/* FP:simplify_branches.rs-0008 */ pub (super) enum SimplifyConstCondition { AfterConstProp , Final , }
+/* FP:simplify_branches.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_simplify_branches_IMPL_0005
+/* FP:simplify_branches.rs-0010 */ # [doc = " A pass that replaces a branch with a goto when its condition is known."] impl < 'tcx > crate :: MirPass < 'tcx > for SimplifyConstCondition { fn name (& self) -> & 'static str { match self { SimplifyConstCondition :: AfterConstProp => "SimplifyConstCondition-after-const-prop" , SimplifyConstCondition :: Final => "SimplifyConstCondition-final" , } } fn run_pass (& self , tcx : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) { trace ! ("Running SimplifyConstCondition on {:?}" , body . source) ; let typing_env = body . typing_env (tcx) ; 'blocks : for block in body . basic_blocks_mut () { for stmt in block . statements . iter_mut () { if let StatementKind :: Intrinsic (box ref intrinsic) = stmt . kind && let NonDivergingIntrinsic :: Assume (discr) = intrinsic && let Operand :: Constant (c) = discr && let Some (constant) = c . const_ . try_eval_bool (tcx , typing_env) { if constant { stmt . make_nop () ; } else { block . statements . clear () ; block . terminator_mut () . kind = TerminatorKind :: Unreachable ; continue 'blocks ; } } } let terminator = block . terminator_mut () ; terminator . kind = match terminator . kind { TerminatorKind :: SwitchInt { discr : Operand :: Constant (ref c) , ref targets , .. } => { let constant = c . const_ . try_eval_bits (tcx , typing_env) ; if let Some (constant) = constant { let target = targets . target_for_value (constant) ; TerminatorKind :: Goto { target } } else { continue ; } } TerminatorKind :: Assert { target , cond : Operand :: Constant (ref c) , expected , .. } => match c . const_ . try_eval_bool (tcx , typing_env) { Some (v) if v == expected => TerminatorKind :: Goto { target } , _ => continue , } , _ => continue , } ; } } fn is_required (& self) -> bool { false } }

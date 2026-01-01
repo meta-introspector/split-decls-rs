@@ -1,373 +1,59 @@
-// The implementation of built-in macros which relate to the file system.
-
-use std::path::{Path, PathBuf};
-use std::rc::Rc;
-use std::sync::Arc;
-
-use rustc_ast as ast;
-use crate::rustc_complete::tokenstream::TokenStream;
-use crate::rustc_complete::{join_path_idents, token};
-use rustc_ast_pretty::pprust;
-use rustc_expand::base::{
-    DummyResult, ExpandResult, ExtCtxt, MacEager, MacResult, MacroExpanderResult, resolve_path,
-};
-use rustc_expand::module::DirOwnership;
-use rustc_lint_defs::BuiltinLintDiag;
-use rustc_parse::lexer::StripTokens;
-use rustc_parse::parser::ForceCollect;
-use rustc_parse::{new_parser_from_file, unwrap_or_emit_fatal, utf8_error};
-use crate::rustc_complete::lint::builtin::INCOMPLETE_INCLUDE;
-use crate::rustc_complete::parse::ParseSess;
-use crate::rustc_complete::source_map::SourceMap;
-use crate::rustc_complete::{ByteSymbol, Pos, Span, Symbol};
-use smallvec::SmallVec;
-
-use crate::errors;
-use crate::util::{
-    check_zero_tts, get_single_str_from_tts, get_single_str_spanned_from_tts, parse_expr,
-};
-
-/// Expand `line!()` to the current line number.
-pub(crate) fn expand_line(
-    cx: &mut ExtCtxt<'_>,
-    sp: Span,
-    tts: TokenStream,
-) -> MacroExpanderResult<'static> {
-    let sp = cx.with_def_site_ctxt(sp);
-    check_zero_tts(cx, sp, tts, "line!");
-
-    let topmost = cx.expansion_cause().unwrap_or(sp);
-    let loc = cx.source_map().lookup_char_pos(topmost.lo());
-
-    ExpandResult::Ready(MacEager::expr(cx.expr_u32(topmost, loc.line as u32)))
-}
-
-/// Expand `column!()` to the current column number.
-pub(crate) fn expand_column(
-    cx: &mut ExtCtxt<'_>,
-    sp: Span,
-    tts: TokenStream,
-) -> MacroExpanderResult<'static> {
-    let sp = cx.with_def_site_ctxt(sp);
-    check_zero_tts(cx, sp, tts, "column!");
-
-    let topmost = cx.expansion_cause().unwrap_or(sp);
-    let loc = cx.source_map().lookup_char_pos(topmost.lo());
-
-    ExpandResult::Ready(MacEager::expr(cx.expr_u32(topmost, loc.col.to_usize() as u32 + 1)))
-}
-
-/// Expand `file!()` to the current filename.
-pub(crate) fn expand_file(
-    cx: &mut ExtCtxt<'_>,
-    sp: Span,
-    tts: TokenStream,
-) -> MacroExpanderResult<'static> {
-    let sp = cx.with_def_site_ctxt(sp);
-    check_zero_tts(cx, sp, tts, "file!");
-
-    let topmost = cx.expansion_cause().unwrap_or(sp);
-    let loc = cx.source_map().lookup_char_pos(topmost.lo());
-
-    use crate::rustc_complete::RemapFileNameExt;
-    use crate::rustc_complete::config::RemapPathScopeComponents;
-    ExpandResult::Ready(MacEager::expr(cx.expr_str(
-        topmost,
-        Symbol::intern(
-            &loc.file.name.for_scope(cx.sess, RemapPathScopeComponents::MACRO).to_string_lossy(),
-        ),
-    )))
-}
-
-/// Expand `stringify!($input)`.
-pub(crate) fn expand_stringify(
-    cx: &mut ExtCtxt<'_>,
-    sp: Span,
-    tts: TokenStream,
-) -> MacroExpanderResult<'static> {
-    let sp = cx.with_def_site_ctxt(sp);
-    let s = pprust::tts_to_string(&tts);
-    ExpandResult::Ready(MacEager::expr(cx.expr_str(sp, Symbol::intern(&s))))
-}
-
-/// Expand `module_path!()` to (a textual representation of) the current module path.
-pub(crate) fn expand_mod(
-    cx: &mut ExtCtxt<'_>,
-    sp: Span,
-    tts: TokenStream,
-) -> MacroExpanderResult<'static> {
-    let sp = cx.with_def_site_ctxt(sp);
-    check_zero_tts(cx, sp, tts, "module_path!");
-    let mod_path = &cx.current_expansion.module.mod_path;
-    let string = join_path_idents(mod_path);
-
-    ExpandResult::Ready(MacEager::expr(cx.expr_str(sp, Symbol::intern(&string))))
-}
-
-/// Expand `include!($input)`.
-///
-/// This works in item and expression position. Notably, it doesn't work in pattern position.
-pub(crate) fn expand_include<'cx>(
-    cx: &'cx mut ExtCtxt<'_>,
-    sp: Span,
-    tts: TokenStream,
-) -> MacroExpanderResult<'cx> {
-    let sp = cx.with_def_site_ctxt(sp);
-    let ExpandResult::Ready(mac) = get_single_str_from_tts(cx, sp, tts, "include!") else {
-        return ExpandResult::Retry(());
-    };
-    let path = match mac {
-        Ok(path) => path,
-        Err(guar) => return ExpandResult::Ready(DummyResult::any(sp, guar)),
-    };
-    // The file will be added to the code map by the parser
-    let path = match resolve_path(&cx.sess, path.as_str(), sp) {
-        Ok(path) => path,
-        Err(err) => {
-            let guar = err.emit();
-            return ExpandResult::Ready(DummyResult::any(sp, guar));
-        }
-    };
-
-    // then the path of `bar.rs` should be relative to the directory of `path`.
-    // See https://github.com/rust-lang/rust/pull/69838/files#r395217057 for a discussion.
-    // `MacroExpander::fully_expand_fragment` later restores, so "stack discipline" is maintained.
-    let dir_path = path.parent().unwrap_or(&path).to_owned();
-    cx.current_expansion.module = Rc::new(cx.current_expansion.module.with_dir_path(dir_path));
-    cx.current_expansion.dir_ownership = DirOwnership::Owned { relative: None };
-
-    struct ExpandInclude<'a> {
-        psess: &'a ParseSess,
-        path: PathBuf,
-        node_id: ast::NodeId,
-        span: Span,
-    }
-    impl<'a> MacResult for ExpandInclude<'a> {
-        fn make_expr(self: Box<ExpandInclude<'a>>) -> Option<Box<ast::Expr>> {
-            let mut p = unwrap_or_emit_fatal(new_parser_from_file(
-                self.psess,
-                &self.path,
-                // Don't strip frontmatter for backward compatibility, `---` may be the start of a
-                // manifold negation. FIXME: Ideally, we wouldn't strip shebangs here either.
-                StripTokens::Shebang,
-                Some(self.span),
-            ));
-            let expr = parse_expr(&mut p).ok()?;
-            if p.token != token::Eof {
-                p.psess.buffer_lint(
-                    INCOMPLETE_INCLUDE,
-                    p.token.span,
-                    self.node_id,
-                    BuiltinLintDiag::IncompleteInclude,
-                );
-            }
-            Some(expr)
-        }
-
-        fn make_items(self: Box<ExpandInclude<'a>>) -> Option<SmallVec<[Box<ast::Item>; 1]>> {
-            let mut p = unwrap_or_emit_fatal(new_parser_from_file(
-                self.psess,
-                &self.path,
-                StripTokens::ShebangAndFrontmatter,
-                Some(self.span),
-            ));
-            let mut ret = SmallVec::new();
-            loop {
-                match p.parse_item(ForceCollect::No) {
-                    Err(err) => {
-                        err.emit();
-                        break;
-                    }
-                    Ok(Some(item)) => ret.push(item),
-                    Ok(None) => {
-                        if p.token != token::Eof {
-                            p.dcx().emit_err(errors::ExpectedItem {
-                                span: p.token.span,
-                                token: &pprust::token_to_string(&p.token),
-                            });
-                        }
-
-                        break;
-                    }
-                }
-            }
-            Some(ret)
-        }
-    }
-
-    ExpandResult::Ready(Box::new(ExpandInclude {
-        psess: cx.psess(),
-        path,
-        node_id: cx.current_expansion.lint_node_id,
-        span: sp,
-    }))
-}
-
-/// Expand `include_str!($input)` to the content of the UTF-8-encoded file given by path `$input` as a string literal.
-///
-/// This works in expression, pattern and statement position.
-pub(crate) fn expand_include_str(
-    cx: &mut ExtCtxt<'_>,
-    sp: Span,
-    tts: TokenStream,
-) -> MacroExpanderResult<'static> {
-    let sp = cx.with_def_site_ctxt(sp);
-    let ExpandResult::Ready(mac) = get_single_str_spanned_from_tts(cx, sp, tts, "include_str!")
-    else {
-        return ExpandResult::Retry(());
-    };
-    let (path, path_span) = match mac {
-        Ok(res) => res,
-        Err(guar) => return ExpandResult::Ready(DummyResult::any(sp, guar)),
-    };
-    ExpandResult::Ready(match load_binary_file(cx, path.as_str().as_ref(), sp, path_span) {
-        Ok((bytes, bsp)) => match std::str::from_utf8(&bytes) {
-            Ok(src) => {
-                let interned_src = Symbol::intern(src);
-                // MacEager converts the expr into a pat if need be.
-                MacEager::expr(cx.expr_str(cx.with_def_site_ctxt(bsp), interned_src))
-            }
-            Err(utf8err) => {
-                let mut err = cx.dcx().struct_span_err(sp, format!("`{path}` wasn't a utf-8 file"));
-                utf8_error(cx.source_map(), path.as_str(), None, &mut err, utf8err, &bytes[..]);
-                DummyResult::any(sp, err.emit())
-            }
-        },
-        Err(dummy) => dummy,
-    })
-}
-
-/// Expand `include_bytes!($input)` to the content of the file given by path `$input`.
-///
-/// This works in expression, pattern and statement position.
-pub(crate) fn expand_include_bytes(
-    cx: &mut ExtCtxt<'_>,
-    sp: Span,
-    tts: TokenStream,
-) -> MacroExpanderResult<'static> {
-    let sp = cx.with_def_site_ctxt(sp);
-    let ExpandResult::Ready(mac) = get_single_str_spanned_from_tts(cx, sp, tts, "include_bytes!")
-    else {
-        return ExpandResult::Retry(());
-    };
-    let (path, path_span) = match mac {
-        Ok(res) => res,
-        Err(guar) => return ExpandResult::Ready(DummyResult::any(sp, guar)),
-    };
-    ExpandResult::Ready(match load_binary_file(cx, path.as_str().as_ref(), sp, path_span) {
-        Ok((bytes, _bsp)) => {
-            // Don't care about getting the span for the raw bytes,
-            // because the console can't really show them anyway.
-            let expr = cx.expr(sp, ast::ExprKind::IncludedBytes(ByteSymbol::intern(&bytes)));
-            // MacEager converts the expr into a pat if need be.
-            MacEager::expr(expr)
-        }
-        Err(dummy) => dummy,
-    })
-}
-
-fn load_binary_file(
-    cx: &ExtCtxt<'_>,
-    original_path: &Path,
-    macro_span: Span,
-    path_span: Span,
-) -> Result<(Arc<[u8]>, Span), Box<dyn MacResult>> {
-    let resolved_path = match resolve_path(&cx.sess, original_path, macro_span) {
-        Ok(path) => path,
-        Err(err) => {
-            let guar = err.emit();
-            return Err(DummyResult::any(macro_span, guar));
-        }
-    };
-    match cx.source_map().load_binary_file(&resolved_path) {
-        Ok(data) => Ok(data),
-        Err(io_err) => {
-            let mut err = cx.dcx().struct_span_err(
-                macro_span,
-                format!("couldn't read `{}`: {io_err}", resolved_path.display()),
-            );
-
-            if original_path.is_relative() {
-                let source_map = cx.sess.source_map();
-                let new_path = source_map
-                    .span_to_filename(macro_span.source_callsite())
-                    .into_local_path()
-                    .and_then(|src| find_path_suggestion(source_map, src.parent()?, original_path))
-                    .and_then(|path| path.into_os_string().into_string().ok());
-
-                if let Some(new_path) = new_path {
-                    err.span_suggestion_verbose(
-                        path_span,
-                        "there is a file with the same name in a different directory",
-                        format!("\"{}\"", new_path.replace('\\', "/").escape_debug()),
-                        rustc_lint_defs::Applicability::MachineApplicable,
-                    );
-                }
-            }
-            let guar = err.emit();
-            Err(DummyResult::any(macro_span, guar))
-        }
-    }
-}
-
-fn find_path_suggestion(
-    source_map: &SourceMap,
-    base_dir: &Path,
-    wanted_path: &Path,
-) -> Option<PathBuf> {
-    // Fix paths that assume they're relative to cargo manifest dir
-    let mut base_c = base_dir.components();
-    let mut wanted_c = wanted_path.components();
-    let mut without_base = None;
-    while let Some(wanted_next) = wanted_c.next() {
-        if wanted_c.as_path().file_name().is_none() {
-            break;
-        }
-        // base_dir may be absolute
-        while let Some(base_next) = base_c.next() {
-            if base_next == wanted_next {
-                without_base = Some(wanted_c.as_path());
-                break;
-            }
-        }
-    }
-    let root_absolute = without_base.into_iter().map(PathBuf::from);
-
-    let base_dir_components = base_dir.components().count();
-    // Avoid going all the way to the root dir
-    let max_parent_components = if base_dir.is_relative() {
-        base_dir_components + 1
-    } else {
-        base_dir_components.saturating_sub(1)
-    };
-
-    // Try with additional leading ../
-    let mut prefix = PathBuf::new();
-    let add = std::iter::from_fn(|| {
-        prefix.push("..");
-        Some(prefix.join(wanted_path))
-    })
-    .take(max_parent_components.min(3));
-
-    // Try without leading directories
-    let mut trimmed_path = wanted_path;
-    let remove = std::iter::from_fn(|| {
-        let mut components = trimmed_path.components();
-        let removed = components.next()?;
-        trimmed_path = components.as_path();
-        let _ = trimmed_path.file_name()?; // ensure there is a file name left
-        Some([
-            Some(trimmed_path.to_path_buf()),
-            (removed != std::path::Component::ParentDir)
-                .then(|| Path::new("..").join(trimmed_path)),
-        ])
-    })
-    .flatten()
-    .flatten()
-    .take(4);
-
-    root_absolute
-        .chain(add)
-        .chain(remove)
-        .find(|new_path| source_map.file_exists(&base_dir.join(&new_path)))
-}
+/* FP:source_util.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0001
+/* FP:source_util.rs-0002 */ use std :: path :: { Path , PathBuf } ;
+/* FP:source_util.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0002
+/* FP:source_util.rs-0004 */ use std :: rc :: Rc ;
+/* FP:source_util.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0003
+/* FP:source_util.rs-0006 */ use std :: sync :: Arc ;
+/* FP:source_util.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0004
+/* FP:source_util.rs-0008 */ use rustc_ast as ast ;
+/* FP:source_util.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0005
+/* FP:source_util.rs-0010 */ use crate :: rustc_complete :: tokenstream :: TokenStream ;
+/* FP:source_util.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0006
+/* FP:source_util.rs-0012 */ use crate :: rustc_complete :: { join_path_idents , token } ;
+/* FP:source_util.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0007
+/* FP:source_util.rs-0014 */ use rustc_ast_pretty :: pprust ;
+/* FP:source_util.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0008
+/* FP:source_util.rs-0016 */ use crate :: rustc_expand :: base :: { DummyResult , ExpandResult , ExtCtxt , MacEager , MacResult , MacroExpanderResult , resolve_path , } ;
+/* FP:source_util.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0009
+/* FP:source_util.rs-0018 */ use crate :: rustc_expand :: module :: DirOwnership ;
+/* FP:source_util.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0010
+/* FP:source_util.rs-0020 */ use crate :: rustc_lint_defs :: BuiltinLintDiag ;
+/* FP:source_util.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0011
+/* FP:source_util.rs-0022 */ use crate :: rustc_parse :: lexer :: StripTokens ;
+/* FP:source_util.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0012
+/* FP:source_util.rs-0024 */ use crate :: rustc_parse :: parser :: ForceCollect ;
+/* FP:source_util.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0013
+/* FP:source_util.rs-0026 */ use crate :: rustc_parse :: { new_parser_from_file , unwrap_or_emit_fatal , utf8_error } ;
+/* FP:source_util.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0014
+/* FP:source_util.rs-0028 */ use crate :: rustc_complete :: lint :: builtin :: INCOMPLETE_INCLUDE ;
+/* FP:source_util.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0015
+/* FP:source_util.rs-0030 */ use crate :: rustc_complete :: parse :: ParseSess ;
+/* FP:source_util.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0016
+/* FP:source_util.rs-0032 */ use crate :: rustc_complete :: source_map :: SourceMap ;
+/* FP:source_util.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0017
+/* FP:source_util.rs-0034 */ use crate :: rustc_complete :: { ByteSymbol , Pos , Span , Symbol } ;
+/* FP:source_util.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0018
+/* FP:source_util.rs-0036 */ use smallvec :: SmallVec ;
+/* FP:source_util.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0019
+/* FP:source_util.rs-0038 */ use crate :: errors ;
+/* FP:source_util.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_USE_0020
+/* FP:source_util.rs-0040 */ use crate :: util :: { check_zero_tts , get_single_str_from_tts , get_single_str_spanned_from_tts , parse_expr , } ;
+/* FP:source_util.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_FN_0021
+/* FP:source_util.rs-0042 */ # [doc = " Expand `line!()` to the current line number."] pub (crate) fn expand_line (cx : & mut ExtCtxt < '_ > , sp : Span , tts : TokenStream ,) -> MacroExpanderResult < 'static > { let sp = cx . with_def_site_ctxt (sp) ; check_zero_tts (cx , sp , tts , "line!") ; let topmost = cx . expansion_cause () . unwrap_or (sp) ; let loc = cx . source_map () . lookup_char_pos (topmost . lo ()) ; ExpandResult :: Ready (MacEager :: expr (cx . expr_u32 (topmost , loc . line as u32))) }
+/* FP:source_util.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_FN_0022
+/* FP:source_util.rs-0044 */ # [doc = " Expand `column!()` to the current column number."] pub (crate) fn expand_column (cx : & mut ExtCtxt < '_ > , sp : Span , tts : TokenStream ,) -> MacroExpanderResult < 'static > { let sp = cx . with_def_site_ctxt (sp) ; check_zero_tts (cx , sp , tts , "column!") ; let topmost = cx . expansion_cause () . unwrap_or (sp) ; let loc = cx . source_map () . lookup_char_pos (topmost . lo ()) ; ExpandResult :: Ready (MacEager :: expr (cx . expr_u32 (topmost , loc . col . to_usize () as u32 + 1))) }
+/* FP:source_util.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_FN_0023
+/* FP:source_util.rs-0046 */ # [doc = " Expand `file!()` to the current filename."] pub (crate) fn expand_file (cx : & mut ExtCtxt < '_ > , sp : Span , tts : TokenStream ,) -> MacroExpanderResult < 'static > { let sp = cx . with_def_site_ctxt (sp) ; check_zero_tts (cx , sp , tts , "file!") ; let topmost = cx . expansion_cause () . unwrap_or (sp) ; let loc = cx . source_map () . lookup_char_pos (topmost . lo ()) ; use crate :: rustc_complete :: RemapFileNameExt ; use crate :: rustc_complete :: config :: RemapPathScopeComponents ; ExpandResult :: Ready (MacEager :: expr (cx . expr_str (topmost , Symbol :: intern (& loc . file . name . for_scope (cx . sess , RemapPathScopeComponents :: MACRO) . to_string_lossy () ,) ,))) }
+/* FP:source_util.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_FN_0024
+/* FP:source_util.rs-0048 */ # [doc = " Expand `stringify!($input)`."] pub (crate) fn expand_stringify (cx : & mut ExtCtxt < '_ > , sp : Span , tts : TokenStream ,) -> MacroExpanderResult < 'static > { let sp = cx . with_def_site_ctxt (sp) ; let s = pprust :: tts_to_string (& tts) ; ExpandResult :: Ready (MacEager :: expr (cx . expr_str (sp , Symbol :: intern (& s)))) }
+/* FP:source_util.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_FN_0025
+/* FP:source_util.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_FN_0026
+/* FP:source_util.rs-0052 */ # [doc = " Expand `include!($input)`."] # [doc = ""] # [doc = " This works in item and expression position. Notably, it doesn't work in pattern position."] pub (crate) fn expand_include < 'cx > (cx : & 'cx mut ExtCtxt < '_ > , sp : Span , tts : TokenStream ,) -> MacroExpanderResult < 'cx > { let sp = cx . with_def_site_ctxt (sp) ; let ExpandResult :: Ready (mac) = get_single_str_from_tts (cx , sp , tts , "include!") else { return ExpandResult :: Retry (()) ; } ; let path = match mac { Ok (path) => path , Err (guar) => return ExpandResult :: Ready (DummyResult :: any (sp , guar)) , } ; let path = match resolve_path (& cx . sess , path . as_str () , sp) { Ok (path) => path , Err (err) => { let guar = err . emit () ; return ExpandResult :: Ready (DummyResult :: any (sp , guar)) ; } } ; let dir_path = path . parent () . unwrap_or (& path) . to_owned () ; cx . current_expansion . module = Rc :: new (cx . current_expansion . module . with_dir_path (dir_path)) ; cx . current_expansion . dir_ownership = DirOwnership :: Owned { relative : None } ; struct ExpandInclude < 'a > { psess : & 'a ParseSess , path : PathBuf , node_id : ast :: NodeId , span : Span , } impl < 'a > MacResult for ExpandInclude < 'a > { fn make_expr (self : Box < ExpandInclude < 'a > >) -> Option < Box < ast :: Expr > > { let mut p = unwrap_or_emit_fatal (new_parser_from_file (self . psess , & self . path , StripTokens :: Shebang , Some (self . span) ,)) ; let expr = parse_expr (& mut p) . ok () ? ; if p . token != token :: Eof { p . psess . buffer_lint (INCOMPLETE_INCLUDE , p . token . span , self . node_id , BuiltinLintDiag :: IncompleteInclude ,) ; } Some (expr) } fn make_items (self : Box < ExpandInclude < 'a > >) -> Option < SmallVec < [Box < ast :: Item > ; 1] > > { let mut p = unwrap_or_emit_fatal (new_parser_from_file (self . psess , & self . path , StripTokens :: ShebangAndFrontmatter , Some (self . span) ,)) ; let mut ret = SmallVec :: new () ; loop { match p . parse_item (ForceCollect :: No) { Err (err) => { err . emit () ; break ; } Ok (Some (item)) => ret . push (item) , Ok (None) => { if p . token != token :: Eof { p . dcx () . emit_err (errors :: ExpectedItem { span : p . token . span , token : & pprust :: token_to_string (& p . token) , }) ; } break ; } } } Some (ret) } } ExpandResult :: Ready (Box :: new (ExpandInclude { psess : cx . psess () , path , node_id : cx . current_expansion . lint_node_id , span : sp , })) }
+/* FP:source_util.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_FN_0027
+/* FP:source_util.rs-0054 */ # [doc = " Expand `include_str!($input)` to the content of the UTF-8-encoded file given by path `$input` as a string literal."] # [doc = ""] # [doc = " This works in expression, pattern and statement position."] pub (crate) fn expand_include_str (cx : & mut ExtCtxt < '_ > , sp : Span , tts : TokenStream ,) -> MacroExpanderResult < 'static > { let sp = cx . with_def_site_ctxt (sp) ; let ExpandResult :: Ready (mac) = get_single_str_spanned_from_tts (cx , sp , tts , "include_str!") else { return ExpandResult :: Retry (()) ; } ; let (path , path_span) = match mac { Ok (res) => res , Err (guar) => return ExpandResult :: Ready (DummyResult :: any (sp , guar)) , } ; ExpandResult :: Ready (match load_binary_file (cx , path . as_str () . as_ref () , sp , path_span) { Ok ((bytes , bsp)) => match std :: str :: from_utf8 (& bytes) { Ok (src) => { let interned_src = Symbol :: intern (src) ; MacEager :: expr (cx . expr_str (cx . with_def_site_ctxt (bsp) , interned_src)) } Err (utf8err) => { let mut err = cx . dcx () . struct_span_err (sp , format ! ("`{path}` wasn't a utf-8 file")) ; utf8_error (cx . source_map () , path . as_str () , None , & mut err , utf8err , & bytes [..]) ; DummyResult :: any (sp , err . emit ()) } } , Err (dummy) => dummy , }) }
+/* FP:source_util.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_FN_0028
+/* FP:source_util.rs-0056 */ # [doc = " Expand `include_bytes!($input)` to the content of the file given by path `$input`."] # [doc = ""] # [doc = " This works in expression, pattern and statement position."] pub (crate) fn expand_include_bytes (cx : & mut ExtCtxt < '_ > , sp : Span , tts : TokenStream ,) -> MacroExpanderResult < 'static > { let sp = cx . with_def_site_ctxt (sp) ; let ExpandResult :: Ready (mac) = get_single_str_spanned_from_tts (cx , sp , tts , "include_bytes!") else { return ExpandResult :: Retry (()) ; } ; let (path , path_span) = match mac { Ok (res) => res , Err (guar) => return ExpandResult :: Ready (DummyResult :: any (sp , guar)) , } ; ExpandResult :: Ready (match load_binary_file (cx , path . as_str () . as_ref () , sp , path_span) { Ok ((bytes , _bsp)) => { let expr = cx . expr (sp , ast :: ExprKind :: IncludedBytes (ByteSymbol :: intern (& bytes))) ; MacEager :: expr (expr) } Err (dummy) => dummy , }) }
+/* FP:source_util.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_FN_0029
+/* FP:source_util.rs-0058 */ fn load_binary_file (cx : & ExtCtxt < '_ > , original_path : & Path , macro_span : Span , path_span : Span ,) -> Result < (Arc < [u8] > , Span) , Box < dyn MacResult > > { let resolved_path = match resolve_path (& cx . sess , original_path , macro_span) { Ok (path) => path , Err (err) => { let guar = err . emit () ; return Err (DummyResult :: any (macro_span , guar)) ; } } ; match cx . source_map () . load_binary_file (& resolved_path) { Ok (data) => Ok (data) , Err (io_err) => { let mut err = cx . dcx () . struct_span_err (macro_span , format ! ("couldn't read `{}`: {io_err}" , resolved_path . display ()) ,) ; if original_path . is_relative () { let source_map = cx . sess . source_map () ; let new_path = source_map . span_to_filename (macro_span . source_callsite ()) . into_local_path () . and_then (| src | find_path_suggestion (source_map , src . parent () ? , original_path)) . and_then (| path | path . into_os_string () . into_string () . ok ()) ; if let Some (new_path) = new_path { err . span_suggestion_verbose (path_span , "there is a file with the same name in a different directory" , format ! ("\"{}\"" , new_path . replace ('\\' , "/") . escape_debug ()) , crate :: rustc_lint_defs :: Applicability :: MachineApplicable ,) ; } } let guar = err . emit () ; Err (DummyResult :: any (macro_span , guar)) } } }
+/* FP:source_util.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_source_util_FN_0030
+/* FP:source_util.rs-0060 */ fn find_path_suggestion (source_map : & SourceMap , base_dir : & Path , wanted_path : & Path ,) -> Option < PathBuf > { let mut base_c = base_dir . components () ; let mut wanted_c = wanted_path . components () ; let mut without_base = None ; while let Some (wanted_next) = wanted_c . next () { if wanted_c . as_path () . file_name () . is_none () { break ; } while let Some (base_next) = base_c . next () { if base_next == wanted_next { without_base = Some (wanted_c . as_path ()) ; break ; } } } let root_absolute = without_base . into_iter () . map (PathBuf :: from) ; let base_dir_components = base_dir . components () . count () ; let max_parent_components = if base_dir . is_relative () { base_dir_components + 1 } else { base_dir_components . saturating_sub (1) } ; let mut prefix = PathBuf :: new () ; let add = std :: iter :: from_fn (| | { prefix . push ("..") ; Some (prefix . join (wanted_path)) }) . take (max_parent_components . min (3)) ; let mut trimmed_path = wanted_path ; let remove = std :: iter :: from_fn (| | { let mut components = trimmed_path . components () ; let removed = components . next () ? ; trimmed_path = components . as_path () ; let _ = trimmed_path . file_name () ? ; Some ([Some (trimmed_path . to_path_buf ()) , (removed != std :: path :: Component :: ParentDir) . then (| | Path :: new ("..") . join (trimmed_path)) ,]) }) . flatten () . flatten () . take (4) ; root_absolute . chain (add) . chain (remove) . find (| new_path | source_map . file_exists (& base_dir . join (& new_path))) }

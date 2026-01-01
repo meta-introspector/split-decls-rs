@@ -1,55 +1,6 @@
-/// Lang items used by the new trait solver. This can be mapped to whatever internal
-/// representation of `LangItem`s used in the underlying compiler implementation.
-pub enum SolverLangItem {
-    // tidy-alphabetical-start
-    AsyncFnKindUpvars,
-    AsyncFnOnceOutput,
-    CallOnceFuture,
-    CallRefFuture,
-    CoroutineReturn,
-    CoroutineYield,
-    DynMetadata,
-    FutureOutput,
-    Metadata,
-    // tidy-alphabetical-end
-}
-
-pub enum SolverAdtLangItem {
-    // tidy-alphabetical-start
-    Option,
-    Poll,
-    // tidy-alphabetical-end
-}
-
-pub enum SolverTraitLangItem {
-    // tidy-alphabetical-start
-    AsyncFn,
-    AsyncFnKindHelper,
-    AsyncFnMut,
-    AsyncFnOnce,
-    AsyncFnOnceOutput,
-    AsyncIterator,
-    BikeshedGuaranteedNoDrop,
-    Clone,
-    Copy,
-    Coroutine,
-    Destruct,
-    DiscriminantKind,
-    Drop,
-    Fn,
-    FnMut,
-    FnOnce,
-    FnPtrTrait,
-    FusedIterator,
-    Future,
-    Iterator,
-    MetaSized,
-    PointeeSized,
-    PointeeTrait,
-    Sized,
-    TransmuteTrait,
-    Tuple,
-    Unpin,
-    Unsize,
-    // tidy-alphabetical-end
-}
+/* FP:lang_items.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_lang_items_ENUM_0001
+/* FP:lang_items.rs-0002 */ # [doc = " Lang items used by the new trait solver. This can be mapped to whatever internal"] # [doc = " representation of `LangItem`s used in the underlying compiler implementation."] pub enum SolverLangItem { AsyncFnKindUpvars , AsyncFnOnceOutput , CallOnceFuture , CallRefFuture , CoroutineReturn , CoroutineYield , DynMetadata , FutureOutput , Metadata , }
+/* FP:lang_items.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_lang_items_ENUM_0002
+/* FP:lang_items.rs-0004 */ pub enum SolverAdtLangItem { Option , Poll , }
+/* FP:lang_items.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_lang_items_ENUM_0003
+/* FP:lang_items.rs-0006 */ pub enum SolverTraitLangItem { AsyncFn , AsyncFnKindHelper , AsyncFnMut , AsyncFnOnce , AsyncFnOnceOutput , AsyncIterator , BikeshedGuaranteedNoDrop , Clone , Copy , Coroutine , Destruct , DiscriminantKind , Drop , Fn , FnMut , FnOnce , FnPtrTrait , FusedIterator , Future , Iterator , MetaSized , PointeeSized , PointeeTrait , Sized , TransmuteTrait , Tuple , Unpin , Unsize , }

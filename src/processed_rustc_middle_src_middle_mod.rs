@@ -1,27 +1,10 @@
-pub mod lib_features {
-    use crate::rustc_data_structures::unord::UnordMap;
-    use rustc_macros::{HashStable, TyDecodable, TyEncodable};
-    use crate::rustc_complete::{Span, Symbol};
-
-    #[derive(Copy, Clone, Debug, PartialEq, Eq)]
-    #[derive(HashStable, TyEncodable, TyDecodable)]
-    pub enum FeatureStability {
-        AcceptedSince(Symbol),
-        Unstable { old_name: Option<Symbol> },
-    }
-
-    #[derive(HashStable, Debug, Default)]
-    pub struct LibFeatures {
-        pub stability: UnordMap<Symbol, (FeatureStability, Span)>,
-    }
-
-    impl LibFeatures {
-        pub fn to_sorted_vec(&self) -> Vec<(Symbol, FeatureStability)> {
-            self.stability
-                .to_sorted_stable_ord()
-                .iter()
-                .map(|&(&sym, &(stab, _))| (sym, stab))
-                .collect()
-        }
-    }
-}
+/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_mod_MOD_0001
+/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_mod_MOD_0002
+/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_mod_MOD_0003
+/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_mod_MOD_0004
+/* FP:mod.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_mod_MOD_0005
+/* FP:mod.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_mod_MOD_0006
+/* FP:mod.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_mod_MOD_0007
+/* FP:mod.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_mod_MOD_0008
+/* FP:mod.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_mod_MOD_0009
+/* FP:mod.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_middle_mod_MOD_0010

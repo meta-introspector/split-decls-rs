@@ -1,83 +1,24 @@
-use crate::rustc_complete::token::Token;
-use crate::rustc_complete::tokenstream::{TokenStream, TokenTree};
-use crate::rustc_complete::util::classify;
-use crate::rustc_complete::{MetaItemInner, token};
-use crate::rustc_complete::PResult;
-use crate::rustc_complete::Span;
-
-use crate::exp;
-use crate::parser::{AttrWrapper, ForceCollect, Parser, Restrictions, Trailing, UsePreAttrPos};
-
-pub enum CfgSelectPredicate {
-    Cfg(MetaItemInner),
-    Wildcard(Token),
-}
-
-#[derive(Default)]
-pub struct CfgSelectBranches {
-    /// All the conditional branches.
-    pub reachable: Vec<(MetaItemInner, TokenStream, Span)>,
-    /// The first wildcard `_ => { ... }` branch.
-    pub wildcard: Option<(Token, TokenStream, Span)>,
-    /// All branches after the first wildcard, including further wildcards.
-    /// These branches are kept for formatting.
-    pub unreachable: Vec<(CfgSelectPredicate, TokenStream, Span)>,
-}
-
-/// Parses a `TokenTree` consisting either of `{ /* ... */ }` (and strip the braces) or an
-/// expression followed by a comma (and strip the comma).
-fn parse_token_tree<'a>(p: &mut Parser<'a>) -> PResult<'a, TokenStream> {
-    if p.token == token::OpenBrace {
-        // Strip the outer '{' and '}'.
-        match p.parse_token_tree() {
-            TokenTree::Token(..) => unreachable!("because of the expect above"),
-            TokenTree::Delimited(.., tts) => return Ok(tts),
-        }
-    }
-    let expr = p.collect_tokens(None, AttrWrapper::empty(), ForceCollect::Yes, |p, _| {
-        p.parse_expr_res(Restrictions::STMT_EXPR, AttrWrapper::empty())
-            .map(|(expr, _)| (expr, Trailing::No, UsePreAttrPos::No))
-    })?;
-    if !classify::expr_is_complete(&expr) && p.token != token::CloseBrace && p.token != token::Eof {
-        p.expect(exp!(Comma))?;
-    } else {
-        let _ = p.eat(exp!(Comma));
-    }
-    Ok(TokenStream::from_ast(&expr))
-}
-
-pub fn parse_cfg_select<'a>(p: &mut Parser<'a>) -> PResult<'a, CfgSelectBranches> {
-    let mut branches = CfgSelectBranches::default();
-
-    while p.token != token::Eof {
-        if p.eat_keyword(exp!(Underscore)) {
-            let underscore = p.prev_token;
-            p.expect(exp!(FatArrow))?;
-
-            let tts = parse_token_tree(p)?;
-            let span = underscore.span.to(p.token.span);
-
-            match branches.wildcard {
-                None => branches.wildcard = Some((underscore, tts, span)),
-                Some(_) => {
-                    branches.unreachable.push((CfgSelectPredicate::Wildcard(underscore), tts, span))
-                }
-            }
-        } else {
-            let meta_item = p.parse_meta_item_inner()?;
-            p.expect(exp!(FatArrow))?;
-
-            let tts = parse_token_tree(p)?;
-            let span = meta_item.span().to(p.token.span);
-
-            match branches.wildcard {
-                None => branches.reachable.push((meta_item, tts, span)),
-                Some(_) => {
-                    branches.unreachable.push((CfgSelectPredicate::Cfg(meta_item), tts, span))
-                }
-            }
-        }
-    }
-
-    Ok(branches)
-}
+/* FP:cfg_select.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_src_parser_cfg_select_USE_0001
+/* FP:cfg_select.rs-0002 */ use crate :: rustc_complete :: token :: Token ;
+/* FP:cfg_select.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_src_parser_cfg_select_USE_0002
+/* FP:cfg_select.rs-0004 */ use crate :: rustc_complete :: tokenstream :: { TokenStream , TokenTree } ;
+/* FP:cfg_select.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_src_parser_cfg_select_USE_0003
+/* FP:cfg_select.rs-0006 */ use crate :: rustc_complete :: util :: classify ;
+/* FP:cfg_select.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_src_parser_cfg_select_USE_0004
+/* FP:cfg_select.rs-0008 */ use crate :: rustc_complete :: { MetaItemInner , token } ;
+/* FP:cfg_select.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_src_parser_cfg_select_USE_0005
+/* FP:cfg_select.rs-0010 */ use crate :: rustc_complete :: PResult ;
+/* FP:cfg_select.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_src_parser_cfg_select_USE_0006
+/* FP:cfg_select.rs-0012 */ use crate :: rustc_complete :: Span ;
+/* FP:cfg_select.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_src_parser_cfg_select_USE_0007
+/* FP:cfg_select.rs-0014 */ use crate :: exp ;
+/* FP:cfg_select.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_src_parser_cfg_select_USE_0008
+/* FP:cfg_select.rs-0016 */ use crate :: parser :: { AttrWrapper , ForceCollect , Parser , Restrictions , Trailing , UsePreAttrPos } ;
+/* FP:cfg_select.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_src_parser_cfg_select_ENUM_0009
+/* FP:cfg_select.rs-0018 */ pub enum CfgSelectPredicate { Cfg (MetaItemInner) , Wildcard (Token) , }
+/* FP:cfg_select.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_src_parser_cfg_select_STRUCT_0010
+/* FP:cfg_select.rs-0020 */ # [derive (Default)] pub struct CfgSelectBranches { # [doc = " All the conditional branches."] pub reachable : Vec < (MetaItemInner , TokenStream , Span) > , # [doc = " The first wildcard `_ => { ... }` branch."] pub wildcard : Option < (Token , TokenStream , Span) > , # [doc = " All branches after the first wildcard, including further wildcards."] # [doc = " These branches are kept for formatting."] pub unreachable : Vec < (CfgSelectPredicate , TokenStream , Span) > , }
+/* FP:cfg_select.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_src_parser_cfg_select_FN_0011
+/* FP:cfg_select.rs-0022 */ # [doc = " Parses a `TokenTree` consisting either of `{ /* ... */ }` (and strip the braces) or an"] # [doc = " expression followed by a comma (and strip the comma)."] fn parse_token_tree < 'a > (p : & mut Parser < 'a >) -> PResult < 'a , TokenStream > { if p . token == token :: OpenBrace { match p . parse_token_tree () { TokenTree :: Token (..) => unreachable ! ("because of the expect above") , TokenTree :: Delimited (.. , tts) => return Ok (tts) , } } let expr = p . collect_tokens (None , AttrWrapper :: empty () , ForceCollect :: Yes , | p , _ | { p . parse_expr_res (Restrictions :: STMT_EXPR , AttrWrapper :: empty ()) . map (| (expr , _) | (expr , Trailing :: No , UsePreAttrPos :: No)) }) ? ; if ! classify :: expr_is_complete (& expr) && p . token != token :: CloseBrace && p . token != token :: Eof { p . expect (exp ! (Comma)) ? ; } else { let _ = p . eat (exp ! (Comma)) ; } Ok (TokenStream :: from_ast (& expr)) }
+/* FP:cfg_select.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_src_parser_cfg_select_FN_0012
+/* FP:cfg_select.rs-0024 */ pub fn parse_cfg_select < 'a > (p : & mut Parser < 'a >) -> PResult < 'a , CfgSelectBranches > { let mut branches = CfgSelectBranches :: default () ; while p . token != token :: Eof { if p . eat_keyword (exp ! (Underscore)) { let underscore = p . prev_token ; p . expect (exp ! (FatArrow)) ? ; let tts = parse_token_tree (p) ? ; let span = underscore . span . to (p . token . span) ; match branches . wildcard { None => branches . wildcard = Some ((underscore , tts , span)) , Some (_) => { branches . unreachable . push ((CfgSelectPredicate :: Wildcard (underscore) , tts , span)) } } } else { let meta_item = p . parse_meta_item_inner () ? ; p . expect (exp ! (FatArrow)) ? ; let tts = parse_token_tree (p) ? ; let span = meta_item . span () . to (p . token . span) ; match branches . wildcard { None => branches . reachable . push ((meta_item , tts , span)) , Some (_) => { branches . unreachable . push ((CfgSelectPredicate :: Cfg (meta_item) , tts , span)) } } } } Ok (branches) }
