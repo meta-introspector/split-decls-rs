@@ -81,3 +81,11 @@ syn = { version = "2.0", features = ["full", "visit"] }
 quote = "1.0"
 walkdir = "2.0"
 flate2 = "1.0"
+
+[[bin]]
+name = "unified_rustc_wrapped"
+path = "unified_rustc_wrapped.rs"
+
+[[bin]]
+name = "test_dependency_tracking"
+path = "test_dependency_tracking.rs"
