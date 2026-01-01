@@ -62,7 +62,7 @@ fn main() {
     assert_eq!(contained.line(), 17);
     assert_eq!(contained.column(), 5);
 }
-}}}
+}};
 
 pub mod std {
 }

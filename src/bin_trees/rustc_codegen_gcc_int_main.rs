@@ -344,7 +344,7 @@ fn main() {
         check_ops128!();
     }
 }
-}}}
+}};
 
 pub mod rustc_codegen_gcc {
     // rustc_codegen_gcc::int::main

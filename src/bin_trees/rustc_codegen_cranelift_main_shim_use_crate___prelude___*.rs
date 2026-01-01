@@ -188,7 +188,7 @@ pub(crate) fn maybe_create_entry_wrapper(
         }
     }
 }
-}}}
+}};
 
 pub mod crate  {
 }

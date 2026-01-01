@@ -88,7 +88,7 @@ fn main() {
     let wpw = Wrapper(Ptr(Box::new(Wrapper(7)))) as Wrapper<Ptr<Wrapper<dyn Trait>>>;
     assert_eq!(wpw.wrapper_ptr_wrapper(), 7);
 }
-}}}
+}};
 
 pub mod Box {
 }

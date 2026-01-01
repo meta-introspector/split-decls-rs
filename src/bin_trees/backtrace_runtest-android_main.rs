@@ -1184,7 +1184,7 @@ pub mod consts {
     #[stable(feature = "env", since = "1.0.0")]
     pub const EXE_EXTENSION: &str = os::EXE_EXTENSION;
 }
-}}}
+}};
 
 macro_rules! include_dep_1 { () => {
 // SRC: ../rust/library/backtrace/ci/runtest-android.rs
@@ -1257,22 +1257,22 @@ fn main() {
         panic!("failed to find successful test run");
     });
 }
-}}}
+}};
+
+pub mod crate {
+}
+
+pub mod backtrace {
+    // backtrace::runtest-android::main
+    include_dep_1!();
+}
 
 pub mod std {
     // std::env::args_os
     include_dep_0!();
 }
 
-pub mod crate {
-}
-
 pub mod String {
-}
-
-pub mod backtrace {
-    // backtrace::runtest-android::main
-    include_dep_1!();
 }
 
 pub fn main() {

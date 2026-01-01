@@ -637,20 +637,20 @@ fn take_multiplier_ref(_multiplier: &u128) {}
 fn unreachable() -> ! {
     panic("unreachable")
 }
-}}}
+}};
 
-pub mod Box {
+pub mod rustc_codegen_cranelift {
+    // rustc_codegen_cranelift::mini_core_hello_world::main
+    include_dep_0!();
 }
 
 pub mod intrinsics {
 }
 
-pub mod Ordering {
+pub mod Box {
 }
 
-pub mod rustc_codegen_cranelift {
-    // rustc_codegen_cranelift::mini_core_hello_world::main
-    include_dep_0!();
+pub mod Ordering {
 }
 
 pub fn main() {

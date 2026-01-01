@@ -188,35 +188,18 @@ pub(crate) fn maybe_create_entry_wrapper(
         }
     }
 }
-}}}
+}};
 
-pub mod rustc_hir {
+pub mod types {
 }
 
-pub mod rustc_session {
+pub mod crate {
 }
 
 pub mod cranelift_frontend {
 }
 
-pub mod ty {
-}
-
-pub mod rustc_middle {
-}
-
-pub mod rustc_codegen_cranelift {
-    // rustc_codegen_cranelift::main_shim::maybe_create_entry_wrapper
-    include_dep_0!();
-}
-
-pub mod rustc_span {
-}
-
 pub mod Linkage {
-}
-
-pub mod types {
 }
 
 pub mod Context {
@@ -225,7 +208,24 @@ pub mod Context {
 pub mod Instance {
 }
 
-pub mod crate {
+pub mod rustc_span {
+}
+
+pub mod ty {
+}
+
+pub mod rustc_codegen_cranelift {
+    // rustc_codegen_cranelift::main_shim::maybe_create_entry_wrapper
+    include_dep_0!();
+}
+
+pub mod rustc_session {
+}
+
+pub mod rustc_middle {
+}
+
+pub mod rustc_hir {
 }
 
 pub fn main() {

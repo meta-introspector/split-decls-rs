@@ -1138,7 +1138,13 @@ impl XorShift64Star {
         (self.next() % n as u64) as usize
     }
 }
-}}}
+}};
+
+pub mod std {
+}
+
+pub mod WorkerThread {
+}
 
 pub mod rustc_thread_pool {
     // rustc_thread_pool::registry::main_loop
@@ -1146,12 +1152,6 @@ pub mod rustc_thread_pool {
 }
 
 pub mod crate {
-}
-
-pub mod std {
-}
-
-pub mod WorkerThread {
 }
 
 pub fn main() {

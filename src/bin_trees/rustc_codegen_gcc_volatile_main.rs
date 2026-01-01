@@ -45,14 +45,14 @@ fn main() {
     let value = unsafe { (x as *const Struct).read_volatile() };
     println!("{:?}", value);
 }
-}}}
+}};
+
+pub mod std {
+}
 
 pub mod rustc_codegen_gcc {
     // rustc_codegen_gcc::volatile::main
     include_dep_0!();
-}
-
-pub mod std {
 }
 
 pub fn main() {

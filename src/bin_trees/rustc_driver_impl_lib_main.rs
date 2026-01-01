@@ -1651,21 +1651,15 @@ pub fn main() -> ! {
 
     process::exit(exit_code)
 }
-}}}
+}};
 
-pub mod TimePassesCallbacks {
+pub mod TimePassesFormat {
 }
 
 pub mod rustc_data_structures {
 }
 
-pub mod String {
-}
-
-pub mod signal_handler {
-}
-
-pub mod args {
+pub mod std {
 }
 
 pub mod rustc_driver_impl {
@@ -1673,10 +1667,16 @@ pub mod rustc_driver_impl {
     include_dep_0!();
 }
 
-pub mod std {
+pub mod signal_handler {
 }
 
-pub mod TimePassesFormat {
+pub mod String {
+}
+
+pub mod args {
+}
+
+pub mod TimePassesCallbacks {
 }
 
 pub mod process {

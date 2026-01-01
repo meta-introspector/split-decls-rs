@@ -26,7 +26,7 @@ macro_rules! include_dep_0 { () => {
 fn main() {
     lang_tests_common::main_inner(lang_tests_common::Profile::Debug);
 }
-}}}
+}};
 
 pub mod rustc_codegen_gcc {
     // rustc_codegen_gcc::lang_tests_debug::main

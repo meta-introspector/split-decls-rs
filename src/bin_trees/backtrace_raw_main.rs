@@ -74,7 +74,7 @@ fn print() {
         true // keep going
     });
 }
-}}}
+}};
 
 pub mod backtrace {
     // backtrace::raw::main

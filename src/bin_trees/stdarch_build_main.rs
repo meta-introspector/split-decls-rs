@@ -50,14 +50,14 @@ fn walk(root: &Path) {
         println!("cargo:rerun-if-changed={}", path.display());
     }
 }
-}}}
+}};
+
+pub mod std {
+}
 
 pub mod stdarch {
     // stdarch::build::main
     include_dep_0!();
-}
-
-pub mod std {
 }
 
 pub fn main() {

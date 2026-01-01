@@ -69,7 +69,7 @@ extern "C" fn main(_argc: core::ffi::c_int, _argv: *const *const u8) -> core::ff
 
     0
 }
-}}}
+}};
 
 macro_rules! include_dep_1 { () => {
 // SRC: ../rust/library/alloc/src/boxed.rs
@@ -2241,14 +2241,14 @@ impl<E: Error> Error for Box<E> {
         Error::provide(&**self, request);
     }
 }
-}}}
-
-pub mod core {
-}
+}};
 
 pub mod rustc_codegen_gcc {
     // rustc_codegen_gcc::alloc_example::main
     include_dep_0!();
+}
+
+pub mod core {
 }
 
 pub mod alloc {

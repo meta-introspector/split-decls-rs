@@ -48,7 +48,7 @@ fn main() {
     check!(i16, black_box(f32::MIN) as i16);
     check!(i16, black_box(f32::MAX) as i16);
 }
-}}}
+}};
 
 pub mod rustc_codegen_gcc {
     // rustc_codegen_gcc::float::main

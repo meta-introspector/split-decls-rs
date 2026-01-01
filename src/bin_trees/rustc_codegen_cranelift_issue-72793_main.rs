@@ -49,7 +49,7 @@ fn with_positive(fun: impl Fn(Alias<'_>)) {
 fn main() {
     with_positive(|_| ());
 }
-}}}
+}};
 
 pub mod rustc_codegen_cranelift {
     // rustc_codegen_cranelift::issue-72793::main

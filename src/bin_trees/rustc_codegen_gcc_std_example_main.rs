@@ -324,12 +324,12 @@ fn map(a: Option<(u8, Box<Instruction>)>) -> Option<Box<Instruction>> {
         Some((_, instr)) => Some(instr),
     }
 }
-}}}
-
-pub mod LoopState {
-}
+}};
 
 pub mod std {
+}
+
+pub mod LoopState {
 }
 
 pub mod Box {

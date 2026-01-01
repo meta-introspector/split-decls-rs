@@ -60,7 +60,7 @@ fn main() {
         }
     }
 }
-}}}
+}};
 
 pub mod String {
 }

@@ -38,7 +38,7 @@ fn main() {
         panic!("wrong command used for building");
     }
 }
-}}}
+}};
 
 macro_rules! include_dep_1 { () => {
 // SRC: ../rust/library/std/src/env.rs
@@ -1223,7 +1223,7 @@ pub mod consts {
     #[stable(feature = "env", since = "1.0.0")]
     pub const EXE_EXTENSION: &str = os::EXE_EXTENSION;
 }
-}}}
+}};
 
 pub mod rustc_macros {
     // rustc_macros::build::main

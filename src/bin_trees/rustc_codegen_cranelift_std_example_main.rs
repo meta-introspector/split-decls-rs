@@ -606,7 +606,13 @@ fn map(a: Option<(u8, Box<Instruction>)>) -> Option<Box<Instruction>> {
         Some((_, instr)) => Some(instr),
     }
 }
-}}}
+}};
+
+pub mod LoopState {
+}
+
+pub mod Box {
+}
 
 pub mod rustc_codegen_cranelift {
     // rustc_codegen_cranelift::std_example::main
@@ -616,19 +622,13 @@ pub mod rustc_codegen_cranelift {
 pub mod std {
 }
 
-pub mod Foo {
-}
-
-pub mod Box {
-}
-
 pub mod usize {
 }
 
 pub mod Nums {
 }
 
-pub mod LoopState {
+pub mod Foo {
 }
 
 pub fn main() {

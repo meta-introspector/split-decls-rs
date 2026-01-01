@@ -62,17 +62,17 @@ fn main() {
     let median = (durations[(l / 2) - 1] + durations[l / 2]) / 2;
     println!("\ncustom-bench vec_deque_append {:?} ns/iter\n", median.as_nanos());
 }
-}}}
+}};
 
 pub mod std {
+}
+
+pub mod Vec {
 }
 
 pub mod alloctests {
     // alloctests::vec_deque_append::main
     include_dep_0!();
-}
-
-pub mod Vec {
 }
 
 pub fn main() {

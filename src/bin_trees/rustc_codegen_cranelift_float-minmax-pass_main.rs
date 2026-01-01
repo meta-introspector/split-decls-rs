@@ -78,14 +78,14 @@ fn main() {
         assert_eq!(maxn.into_array(), y.into_array());
     }
 }
-}}}
+}};
+
+pub mod f32 {
+}
 
 pub mod rustc_codegen_cranelift {
     // rustc_codegen_cranelift::float-minmax-pass::main
     include_dep_0!();
-}
-
-pub mod f32 {
 }
 
 pub fn main() {

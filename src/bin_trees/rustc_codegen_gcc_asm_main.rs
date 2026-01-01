@@ -260,7 +260,7 @@ fn asm() {}
 fn main() {
     asm();
 }
-}}}
+}};
 
 pub mod rustc_codegen_gcc {
     // rustc_codegen_gcc::asm::main

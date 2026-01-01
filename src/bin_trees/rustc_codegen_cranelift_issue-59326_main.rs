@@ -49,7 +49,7 @@ fn make_server<F: Framing>() -> Box<dyn HttpService<F, S = F::F>> {
 fn main() {
     build_server(|| make_server())
 }
-}}}
+}};
 
 pub mod rustc_codegen_cranelift {
     // rustc_codegen_cranelift::issue-59326::main

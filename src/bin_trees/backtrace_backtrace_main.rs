@@ -27,7 +27,7 @@ use backtrace::Backtrace;
 fn main() {
     println!("{:?}", Backtrace::new());
 }
-}}}
+}};
 
 pub mod backtrace {
     // backtrace::backtrace::main

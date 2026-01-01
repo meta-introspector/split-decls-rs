@@ -38,7 +38,7 @@ use mini_core::*;
 extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
     1
 }
-}}}
+}};
 
 pub mod rustc_codegen_gcc {
     // rustc_codegen_gcc::exit_code::main

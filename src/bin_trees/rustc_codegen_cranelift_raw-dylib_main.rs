@@ -53,12 +53,12 @@ fn main() {
         }
     }
 }
-}}}
-
-pub mod core {
-}
+}};
 
 pub mod std {
+}
+
+pub mod core {
 }
 
 pub mod rustc_codegen_cranelift {

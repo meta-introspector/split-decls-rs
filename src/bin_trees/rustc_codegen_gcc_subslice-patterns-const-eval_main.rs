@@ -119,7 +119,7 @@ fn main() {
     compare_evaluation!({ let [N(ref x), .., _] = n!(1, 2, 3, 4); x }, &'static u8);
     compare_evaluation!({ let [N(x), .., _] = &n!(1, 2, 3, 4); x }, &'static u8);
 }
-}}}
+}};
 
 pub mod rustc_codegen_gcc {
     // rustc_codegen_gcc::subslice-patterns-const-eval::main

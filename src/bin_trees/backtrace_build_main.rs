@@ -1184,7 +1184,7 @@ pub mod consts {
     #[stable(feature = "env", since = "1.0.0")]
     pub const EXE_EXTENSION: &str = os::EXE_EXTENSION;
 }
-}}}
+}};
 
 macro_rules! include_dep_1 { () => {
 // SRC: ../rust/library/std/src/env.rs
@@ -2369,7 +2369,7 @@ pub mod consts {
     #[stable(feature = "env", since = "1.0.0")]
     pub const EXE_EXTENSION: &str = os::EXE_EXTENSION;
 }
-}}}
+}};
 
 macro_rules! include_dep_2 { () => {
 // SRC: ../rust/library/std/src/env.rs
@@ -3554,7 +3554,7 @@ pub mod consts {
     #[stable(feature = "env", since = "1.0.0")]
     pub const EXE_EXTENSION: &str = os::EXE_EXTENSION;
 }
-}}}
+}};
 
 macro_rules! include_dep_3 { () => {
 // SRC: ../rust/library/backtrace/build.rs
@@ -3613,7 +3613,18 @@ fn run(cmd: &mut Command) {
         panic!("failed with: {}", status);
     }
 }
-}}}
+}};
+
+pub mod os_imp {
+}
+
+pub mod crate {
+}
+
+pub mod backtrace {
+    // backtrace::build::main
+    include_dep_3!();
+}
 
 pub mod std {
     // std::env::var
@@ -3622,17 +3633,6 @@ pub mod std {
     include_dep_1!();
     // std::env::current_dir
     include_dep_2!();
-}
-
-pub mod crate {
-}
-
-pub mod os_imp {
-}
-
-pub mod backtrace {
-    // backtrace::build::main
-    include_dep_3!();
 }
 
 pub fn main() {

@@ -1184,7 +1184,7 @@ pub mod consts {
     #[stable(feature = "env", since = "1.0.0")]
     pub const EXE_EXTENSION: &str = os::EXE_EXTENSION;
 }
-}}}
+}};
 
 macro_rules! include_dep_1 { () => {
 // SRC: ../rust/library/std/build.rs
@@ -1284,7 +1284,7 @@ fn main() {
 
     println!("cargo:rustc-env=STD_ENV_ARCH={}", env::var("CARGO_CFG_TARGET_ARCH").unwrap());
 }
-}}}
+}};
 
 pub mod std {
     // std::env::var

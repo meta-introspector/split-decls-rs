@@ -141,7 +141,7 @@ unsafe extern "C" fn segv_handler(_: i32, _: *mut (), _: *mut ()) {
         if count % 2 == 0 { libc::PROT_READ | libc::PROT_WRITE } else { 0 },
     );
 }
-}}}
+}};
 
 pub mod libc {
 }

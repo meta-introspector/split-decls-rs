@@ -70,7 +70,7 @@ extern "C" fn main(argc: isize, _argv: *const *const u8) -> i32 {
 
     0
 }
-}}}
+}};
 
 pub mod libc {
 }

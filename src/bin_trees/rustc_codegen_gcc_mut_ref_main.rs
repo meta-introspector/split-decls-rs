@@ -73,14 +73,14 @@ extern "C" fn main(mut argc: isize, _argv: *const *const u8) -> i32 {
 
     0
 }
-}}}
-
-pub mod libc {
-}
+}};
 
 pub mod rustc_codegen_gcc {
     // rustc_codegen_gcc::mut_ref::main
     include_dep_0!();
+}
+
+pub mod libc {
 }
 
 pub fn main() {

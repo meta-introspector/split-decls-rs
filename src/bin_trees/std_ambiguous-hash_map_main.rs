@@ -39,7 +39,7 @@ use module::*;
 fn main() {
     hash_map! {}
 }
-}}}
+}};
 
 pub mod std {
     // std::ambiguous-hash_map::main

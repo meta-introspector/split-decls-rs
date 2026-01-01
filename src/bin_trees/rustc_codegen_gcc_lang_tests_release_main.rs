@@ -29,7 +29,7 @@ use crate::lang_tests_common::*;
 fn main() {
     lang_tests_common::main_inner(lang_tests_common::Profile::Release);
 }
-}}}
+}};
 
 pub mod rustc_codegen_gcc {
     // rustc_codegen_gcc::lang_tests_release::main

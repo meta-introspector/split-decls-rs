@@ -89,14 +89,14 @@ fn main() {
     let d : &HasDrop<Baz<[i32]>> = &d;
     assert_eq!(&[1,2,3,4], &d.data.a);
 }
-}}}
-
-pub mod Box {
-}
+}};
 
 pub mod rustc_codegen_gcc {
     // rustc_codegen_gcc::dst-field-align::main
     include_dep_0!();
+}
+
+pub mod Box {
 }
 
 pub fn main() {

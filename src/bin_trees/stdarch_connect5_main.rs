@@ -1257,7 +1257,7 @@ fn main() {
         );
     }
 }
-}}}
+}};
 
 pub mod Color {
 }

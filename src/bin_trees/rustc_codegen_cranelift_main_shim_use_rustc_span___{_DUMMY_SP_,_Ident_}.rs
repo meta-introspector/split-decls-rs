@@ -188,14 +188,14 @@ pub(crate) fn maybe_create_entry_wrapper(
         }
     }
 }
-}}}
+}};
+
+pub mod rustc_span  {
+}
 
 pub mod rustc_codegen_cranelift {
     // rustc_codegen_cranelift::main_shim::use_rustc_span___{_DUMMY_SP_,_Ident_}
     include_dep_0!();
-}
-
-pub mod rustc_span  {
 }
 
 pub fn main() {

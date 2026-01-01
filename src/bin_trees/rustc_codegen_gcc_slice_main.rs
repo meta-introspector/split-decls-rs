@@ -49,7 +49,7 @@ extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
     }
     0
 }
-}}}
+}};
 
 pub mod libc {
 }

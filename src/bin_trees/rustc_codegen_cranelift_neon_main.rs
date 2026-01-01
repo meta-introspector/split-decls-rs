@@ -301,7 +301,7 @@ fn main() {
 
 #[cfg(not(target_arch = "aarch64"))]
 fn main() {}
-}}}
+}};
 
 pub mod rustc_codegen_cranelift {
     // rustc_codegen_cranelift::neon::main

@@ -1717,7 +1717,7 @@ fn generate_module_tree(binary: &str, deps: &HashSet<String>, symbol_map: &HashM
                         tree_content.push_str(&format!("macro_rules! {} {{ () => {{\n", macro_name));
                         tree_content.push_str(&format!("// SRC: {}\n", source_file));
                         tree_content.push_str(&file_content);
-                        tree_content.push_str("\n}}}\n\n");
+                        tree_content.push_str("\n}};\n\n");
                         
                         dep_macros.insert(dep.clone(), macro_name);
                         macro_id += 1;

@@ -63,7 +63,7 @@ extern "C" fn main(mut argc: isize, _argv: *const *const u8) -> i32 {
     }
     0
 }
-}}}
+}};
 
 pub mod rustc_codegen_gcc {
     // rustc_codegen_gcc::assign::main

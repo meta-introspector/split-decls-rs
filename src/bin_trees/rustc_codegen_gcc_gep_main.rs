@@ -32,7 +32,7 @@ fn main() {
     let ptr = &mut value as *mut (i32, i32);
     println!("{:?}", ptr.wrapping_offset(10));
 }
-}}}
+}};
 
 pub mod rustc_codegen_gcc {
     // rustc_codegen_gcc::gep::main

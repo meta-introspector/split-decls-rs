@@ -188,7 +188,7 @@ pub(crate) fn maybe_create_entry_wrapper(
         }
     }
 }
-}}}
+}};
 
 pub mod rustc_codegen_cranelift {
     // rustc_codegen_cranelift::main_shim::use_cranelift_frontend___{_FunctionBuilder_,_FunctionBuilderContext_}
