@@ -22,3 +22,7 @@ Thumbs.db
 result
 result-*
 symbol_map.json
+y
+/perf.data.old
+/strace1.txt
+/perf.data
