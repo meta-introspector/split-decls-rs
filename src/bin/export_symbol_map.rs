@@ -7,6 +7,9 @@ use split_decls_genesis::{
 };
 use std::collections::{HashMap, BTreeMap};
 use serde_json;
+use flate2::write::GzEncoder;
+use flate2::Compression;
+use std::io::Write;
 
 fn main() {
     println!("🗺️  Exporting complete symbol map to JSON with dependency ordering...");
@@ -44,6 +47,7 @@ fn main() {
     
     println!("✅ Grouped symbols from {} files", file_symbols.len());
     
+    println!("📊 Calculating dependencies per file...");
     // Calculate total dependencies per file
     let mut file_deps: Vec<(String, usize)> = file_symbols.iter()
         .map(|(file, symbols)| {
@@ -52,6 +56,7 @@ fn main() {
         })
         .collect();
     
+    println!("🔄 Sorting files by dependency count...");
     // Sort by dependency count (0 first, then ascending)
     file_deps.sort_by_key(|(_, deps)| *deps);
     
@@ -62,8 +67,11 @@ fn main() {
         println!("  - Max dependencies: {}", max_deps);
     }
     
+    println!("🏗️  Creating ordered symbol map...");
     // Create ordered symbol map
     let mut ordered_symbols = BTreeMap::new();
+    let mut processed_files = 0;
+    
     for (file, _) in &file_deps {
         if let Some(symbols) = file_symbols.get(file) {
             for symbol in symbols {
@@ -75,11 +83,28 @@ fn main() {
                 ordered_symbols.insert(qualified_name, symbol);
             }
         }
+        processed_files += 1;
+        if processed_files % 100 == 0 {
+            println!("  📊 Processed {}/{} files for symbol ordering", processed_files, file_deps.len());
+        }
     }
     
+    println!("💾 Exporting to JSON...");
     // Export to JSON
     let json_output = serde_json::to_string_pretty(&ordered_symbols).expect("Failed to serialize symbols");
     std::fs::write("symbol_map.json", json_output).expect("Failed to write symbol_map.json");
+    
+    println!("🗜️  Compressing to .gz format...");
+    // Also create compressed version
+    use flate2::write::GzEncoder;
+    use flate2::Compression;
+    use std::io::Write;
+    
+    let json_output_gz = serde_json::to_string(&ordered_symbols).expect("Failed to serialize symbols for gz");
+    let file = std::fs::File::create("symbol_map.json.gz").expect("Failed to create gz file");
+    let mut encoder = GzEncoder::new(file, Compression::default());
+    encoder.write_all(json_output_gz.as_bytes()).expect("Failed to write gz data");
+    encoder.finish().expect("Failed to finish gz compression");
     
     // Export summary stats
     let mut stats = HashMap::new();
@@ -105,6 +130,7 @@ fn main() {
     std::fs::write("symbol_summary.json", summary_json).expect("Failed to write symbol_summary.json");
     
     println!("📄 Exported symbol_map.json ({} symbols)", ordered_symbols.len());
+    println!("📦 Exported symbol_map.json.gz (compressed)");
     println!("📊 Exported symbol_summary.json (stats)");
     
     // Show first few files (should be 0 dependency files)

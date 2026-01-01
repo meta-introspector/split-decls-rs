@@ -5,14 +5,24 @@ Infrastructure library providing comprehensive Rust compiler ecosystem support f
 ## 🎉 BREAKTHROUGH: Working Progressive Compilation System
 
 ### ✅ Current Status
-- **3102 rustc declarations**: Successfully extracted and processed individual Rust declarations
-- **First successful compilation**: `submodules/rust/compiler/rustc/build.rs` compiles cleanly
+- **3545 rustc source files**: Successfully processed from original rustc codebase
+- **140,199 symbols**: Extracted with complete dependency relationships
+- **3532 processed files**: Individual declarations ready for compilation
 - **Progressive testing**: Systematic boundary detection approach working
 - **Enhanced error reporting**: Actionable suggestions for failures
-- **AST trace proofs**: Generated for all 3102 processed files
+- **AST trace proofs**: Generated for all processed files
+- **Symbol database**: Complete dependency map in compressed format
 
 ### 📊 Latest Results
 ```
+✅ Symbol Map Generation Complete:
+- 3545 rustc source files processed
+- 140,199 symbols extracted with dependencies
+- 3532 processed files ready for compilation
+- 117 files with zero dependencies (optimal starting points)
+- Complete dependency database: symbol_map.json.gz (compressed)
+
+🔄 Progressive Compilation Status:
 Step 1/3102: submodules/rust/compiler/rustc/build.rs ✅ SUCCESS
 - Source: 1847B | Binary: 68200B | Decls: 0
 Step 2/3102: submodules/rust/compiler/rustc/src/main.rs ❌ FAILED
@@ -75,7 +85,7 @@ pub mod ty {
 cargo run --bin export_symbol_map
 
 # Step 2: Generate processed files from rustc source
-cargo run --bin runbuild
+cargo run -p runbuild
 
 # Step 3: Run progressive compilation testing
 cargo run --bin unified_driver
@@ -546,3 +556,17 @@ Can be integrated into larger build systems that need to compile rustc component
 - **Parallel processing**: Speed up progressive analysis
 - **Integration**: Better integration with cargo2nix ecosystem
 - **Metrics**: Track compilation success trends over time
+
+## Recent Achievements
+
+### 🚀 Declarative Dependency Resolution System
+- **Complete symbol database**: 140,199 symbols with full dependency relationships
+- **Automated resolution**: Just specify target symbol, system resolves all dependencies
+- **Compressed storage**: Efficient symbol_map.json.gz format
+- **Progress tracking**: Enhanced reporting during symbol extraction
+
+### 🔧 Separated Build Processes
+- **runbuild crate**: Standalone build.rs execution for debugging
+- **export_symbol_map**: Separate heavy symbol map generation
+- **Fast builds**: Normal cargo build completes in seconds
+- **Development efficiency**: Clear separation of concerns

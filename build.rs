@@ -1,4 +1,4 @@
-// Auto-generated build.rs using symbol_map.json for complete rustc inclusion
+// Auto-generated build.rs using symbol_map.json.gz for complete rustc inclusion
 use std::collections::{HashMap, HashSet, BTreeMap};
 use std::fs;
 use std::io::Write;
@@ -720,7 +720,7 @@ fn load_symbol_map(symbol_map_path: &str) -> Result<HashMap<String, Value>, Box<
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-changed=error_list.txt");
-    println!("🚀 BUILD.RS - Processing rustc files from symbol_map.json");
+    println!("🚀 BUILD.RS - Processing rustc files from symbol_map.json.gz");
     
     // Set environment variables
     println!("📋 Step 1: Setting environment variables...");
@@ -728,25 +728,22 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("cargo:rustc-env=RUSTC_INSTALL_BINDIR=/usr/local/bin");
     println!("✅ Step 1 complete");
     
-    // Generate symbol_map.json if it doesn't exist or is outdated
-    println!("📋 Step 2: Auditing symbol_map.json...");
-    println!("📋 AUDIT: Checking symbol_map.json");
-    if !std::path::Path::new("symbol_map.json").exists() {
-        println!("🔄 AUDIT: Generating symbol_map.json from rustc source files");
+    // Generate symbol_map.json.gz if it doesn't exist or is outdated
+    println!("📋 Step 2: Auditing symbol_map.json.gz...");
+    println!("📋 AUDIT: Checking symbol_map.json.gz");
     if !Path::new("symbol_map.json.gz").exists() {
         println!("⚠️  symbol_map.json.gz not found - run 'cargo run --bin export_symbol_map' first");
         println!("📋 Continuing without symbol map generation...");
     }
-    }
     
-    // Process symbol_map.json and generate processed files
-    println!("📋 AUDIT: Starting symbol_map.json processing");
+    // Process symbol_map.json.gz and generate processed files
+    println!("📋 AUDIT: Starting symbol_map.json.gz processing");
     
-    if std::path::Path::new("symbol_map.json").exists() {
-        println!("✅ AUDIT: Found symbol_map.json");
+    if std::path::Path::new("symbol_map.json.gz").exists() {
+        println!("✅ AUDIT: Found symbol_map.json.gz");
         process_symbol_map_json()?;
     } else {
-        println!("❌ AUDIT: No symbol_map.json found after generation");
+        println!("❌ AUDIT: No symbol_map.json.gz found after generation");
         return Ok(());
     }
     
