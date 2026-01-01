@@ -255,6 +255,76 @@ include!("wrap_types.rs");
     fn total_declarations(&self) -> usize {
         self.accumulated_decls.values().map(|v| v.len()).sum()
     }
+
+    pub fn resolve_target_with_deps(&mut self, target: &str) -> Result<()> {
+        println!("🎯 Resolving dependencies for: {}", target);
+        
+        if let Some(ref symbol_map) = self.symbol_map {
+            println!("✅ Symbol map loaded successfully");
+            let all_deps = self.resolve_all_dependencies(target, symbol_map)?;
+            println!("📦 Found {} total dependencies", all_deps.len());
+            
+            // Add rustc_driver module
+            let mut complete_code = self.base_lib.clone();
+            complete_code.push_str("\npub mod rustc_driver { pub use crate::rustc_driver_impl::*; }\n");
+            
+            println!("📝 Generated {} lines of code", complete_code.lines().count());
+            fs::write("src/current.rs", &complete_code)?;
+            
+            let output = Command::new("cargo").args(&["check", "--lib"]).output()?;
+            if output.status.success() {
+                println!("✅ SUCCESS!");
+            } else {
+                println!("❌ FAILED");
+            }
+        } else {
+            println!("❌ Symbol map failed to load");
+        }
+        Ok(())
+    }
+
+    fn resolve_all_dependencies(&self, target: &str, symbol_map: &Value) -> Result<Vec<String>> {
+        println!("🔍 Looking for target: {}", target);
+        let mut resolved = HashSet::new();
+        let mut to_process = vec![target.to_string()];
+        
+        while let Some(current) = to_process.pop() {
+            if resolved.contains(&current) {
+                continue;
+            }
+            
+            resolved.insert(current.clone());
+            
+            if let Some(entry) = symbol_map.get(&current) {
+                println!("  Found entry for: {}", current);
+                if let Some(deps) = entry.get("dependencies").and_then(|d| d.as_array()) {
+                    for dep in deps {
+                        if let Some(dep_str) = dep.as_str() {
+                            to_process.push(dep_str.to_string());
+                        }
+                    }
+                }
+            } else {
+                println!("  No entry found for: {}", current);
+            }
+        }
+        
+        Ok(resolved.into_iter().collect())
+    }
+
+    fn generate_code_for_symbol(&self, symbol: &str, symbol_map: &Value) -> Result<Option<String>> {
+        if let Some(entry) = symbol_map.get(symbol) {
+            if let Some(source_file) = entry.get("source_file").and_then(|s| s.as_str()) {
+                let processed_path = format!("submodules/rust/{}", source_file);
+                
+                if Path::new(&processed_path).exists() {
+                    let content = fs::read_to_string(&processed_path)?;
+                    return Ok(Some(content));
+                }
+            }
+        }
+        Ok(None)
+    }
 }
 
 fn main() -> Result<()> {

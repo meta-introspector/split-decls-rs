@@ -14,6 +14,14 @@ fn main() {
     let rustc_deps = get_rustc_dependencies().unwrap_or_default();
     let mut file_symbols: HashMap<String, Vec<Symbol>> = HashMap::new();
     let mut file_count = 0;
+    let mut total_files = 0;
+    
+    // Count total files first
+    for dep in &rustc_deps {
+        let rust_files = find_rust_files_in_dependency_fast(&dep.path);
+        total_files += rust_files.len();
+    }
+    println!("📊 Found {} total files to process", total_files);
     
     // Group symbols by source file
     for dep in &rustc_deps {
@@ -28,8 +36,8 @@ fn main() {
                 }
             }
             
-            if file_count % 100 == 0 {
-                println!("  📊 Processed {} files", file_count);
+            if file_count % 50 == 0 {
+                println!("  📊 Processed {}/{} files ({:.1}%)", file_count, total_files, (file_count as f32 / total_files as f32) * 100.0);
             }
         }
     }

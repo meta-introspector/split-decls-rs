@@ -718,19 +718,14 @@ fn load_symbol_map(symbol_map_path: &str) -> Result<HashMap<String, Value>, Box<
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    println!("cargo:rerun-if-changed=build.rs");
-    println!("cargo:rerun-if-changed=error_list.txt");
-    println!("🚀 BUILD.RS - Processing rustc files from symbol_map.json");
+    println!("🚀 RUNBUILD - Processing rustc files standalone");
     
-    // Set environment variables
-    println!("📋 Step 1: Setting environment variables...");
-    println!("cargo:rustc-env=CFG_RELEASE_CHANNEL=dev");
-    println!("cargo:rustc-env=RUSTC_INSTALL_BINDIR=/usr/local/bin");
-    println!("✅ Step 1 complete");
+    // Set environment variables (but don't use cargo: prefix since we're not in build script)
+    std::env::set_var("CFG_RELEASE_CHANNEL", "dev");
+    std::env::set_var("RUSTC_INSTALL_BINDIR", "/usr/local/bin");
     
-    // Generate symbol_map.json if it doesn't exist or is outdated
-    println!("📋 Step 2: Auditing symbol_map.json...");
-    println!("📋 AUDIT: Checking symbol_map.json");
+    // Skip symbol map generation - just process files
+    println!("📋 Processing rustc files without symbol map generation...");
     if !std::path::Path::new("symbol_map.json").exists() {
         println!("🔄 AUDIT: Generating symbol_map.json from rustc source files");
     if !Path::new("symbol_map.json.gz").exists() {

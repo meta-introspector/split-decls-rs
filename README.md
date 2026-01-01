@@ -71,14 +71,29 @@ pub mod ty {
 
 ### Running Progressive Analysis
 ```bash
-# Generate processed files from rustc source
+# Step 1: Generate symbol map (run separately for debugging)
+cargo run --bin export_symbol_map
+
+# Step 2: Generate processed files from rustc source
 cargo run --bin runbuild
 
-# Run progressive compilation testing
+# Step 3: Run progressive compilation testing
 cargo run --bin unified_driver
 
 # Check specific compilation results
 grep -E "(✅|❌)" output.log
+```
+
+### Development Workflow
+```bash
+# For debugging: Run build.rs standalone (separate crate)
+cargo run -p runbuild
+
+# For symbol map generation: Run export separately  
+cargo run --bin export_symbol_map
+
+# Normal build (without symbol map generation)
+cargo build
 ```
 
 ### As Dependency
@@ -99,11 +114,299 @@ let def_id: def_id::DefId = def_id::DefId;
 
 ## Architecture
 
+### System Overview
+
+```plantuml
+@startuml
+!theme plain
+
+package "Original Source" {
+  [../../rustc/] as original
+}
+
+package "Build System" {
+  [build.rs] as build
+  [unified_driver] as driver
+  [runbuild] as runbuild
+}
+
+package "Generated Files" {
+  [submodules/rust/] as processed
+  [symbol_map_original.json.gz] as symbolmap
+  [src/current.rs] as current
+}
+
+package "Infrastructure" {
+  [src/wrap_types.rs] as wraptypes
+  [src/lib.rs] as lib
+  [Cargo.toml] as cargo
+}
+
+original --> build : "Parse AST"
+build --> processed : "3102 files"
+build --> symbolmap : "Dependencies"
+
+runbuild --> build : "Execute"
+
+driver --> symbolmap : "Load deps"
+driver --> processed : "Read files"
+driver --> current : "Generate"
+
+current --> wraptypes : "include!"
+current --> lib : "compile with"
+
+@enduml
+```
+
+### Complete Data Flow Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           SPLIT DECLARATIONS GENESIS                        │
+│                         Complete Rust-in-Rust Pipeline                     │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────────────────┐
+│ Original rustc  │───▶│    build.rs      │───▶│     Processed Files         │
+│ Source Code     │    │ (AST Extractor)  │    │   submodules/rust/          │
+│ ../../rustc/    │    │                  │    │   ├── rustc_driver/         │
+└─────────────────┘    │ • Parse AST      │    │   ├── rustc_driver_impl/    │
+                       │ • Extract decls  │    │   ├── rustc_middle/         │
+                       │ • Generate stubs │    │   └── 3102 total files     │
+                       └──────────────────┘    └─────────────────────────────┘
+                                │                              │
+                                ▼                              │
+                       ┌──────────────────┐                   │
+                       │   Symbol Map     │                   │
+                       │symbol_map_orig.. │                   │
+                       │                  │                   │
+                       │ • All symbols    │                   │
+                       │ • Dependencies   │                   │
+                       │ • Source files   │                   │
+                       │ • 3102 entries   │                   │
+                       └──────────────────┘                   │
+                                │                              │
+                                ▼                              │
+┌─────────────────────────────────────────────────────────────▼─────────────────┐
+│                        UNIFIED DRIVER                                         │
+│                    Declarative Dependency Resolution                          │
+└────────────────────────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+                    ┌──────────────────────────┐
+                    │ Target: rustc_driver::   │
+                    │         main()           │
+                    └──────────────────────────┘
+                                │
+                                ▼
+                    ┌──────────────────────────┐
+                    │ 1. Load Symbol Map       │
+                    │    symbol_map_orig.gz    │
+                    └──────────────────────────┘
+                                │
+                                ▼
+                    ┌──────────────────────────┐
+                    │ 2. Resolve Dependencies  │
+                    │    rustc_driver_impl::   │
+                    │    lib::main + ALL deps  │
+                    └──────────────────────────┘
+                                │
+                                ▼
+                    ┌──────────────────────────┐
+                    │ 3. Generate Modules      │
+                    │    mod rustc_driver {    │
+                    │    mod rustc_driver_impl │
+                    │    mod rustc_middle {    │
+                    │    ... (all deps)        │
+                    └──────────────────────────┘
+                                │
+                                ▼
+                    ┌──────────────────────────┐
+                    │ 4. Write src/current.rs  │
+                    │    Complete dependency   │
+                    │    tree + target code    │
+                    └──────────────────────────┘
+                                │
+                                ▼
+                    ┌──────────────────────────┐
+                    │ 5. Test Compilation      │
+                    │    cargo check --lib     │
+                    │    SUCCESS/FAILURE       │
+                    └──────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              KEY INSIGHT                                   │
+│                                                                             │
+│  We have COMPLETE KNOWLEDGE:                                               │
+│  • Symbol Map = Every dependency relationship                              │
+│  • Processed Files = Every source file ready to include                   │
+│  • Unified Driver = Declarative resolution engine                         │
+│                                                                             │
+│  JUST SAY: "I want rustc_driver::main()"                                  │
+│  SYSTEM DOES: Everything else automatically                               │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+## Code Transformation Pipeline
+
+### Step 1: Original Source → Processed Files (`build.rs`)
+
+**Input**: `../../submodules/rust/compiler/rustc_driver/src/lib.rs`
+```rust
+// Original rustc source
+pub use rustc_driver_impl::*;
+
+fn main() {
+    rustc_driver_impl::main()
+}
+```
+
+**Program**: `build.rs` (AST Extractor)
+- Parses AST using `syn`
+- Extracts individual declarations
+- Adds source tracking comments
+- Generates module stubs
+
+**Output**: `submodules/rust/compiler/rustc_driver/src/lib.rs`
+```rust
+// SRC: compiler/rustc_driver/src/lib.rs
+// GENERATED BY: build.rs (split-decls-genesis)
+// ... (repeated headers)
+// SRC: ../rust/compiler/rustc_driver/src/lib.rs
+
+pub use rustc_driver_impl::*;
+```
+
+### Step 2: Symbol Map Generation (`build.rs`)
+
+**Input**: All processed files + AST analysis
+
+**Program**: `build.rs` dependency analyzer
+- Scans all declarations
+- Maps symbol → dependencies
+- Records source file locations
+- Compresses to JSON
+
+**Output**: `symbol_map_original.json.gz`
+```json
+{
+  "rustc_driver_impl::lib::main": {
+    "name": "main",
+    "symbol_type": "11stmts[let,let,let,call_init_rustc_env_logger,...]",
+    "source_file": "../rust/compiler/rustc_driver_impl/src/lib.rs",
+    "crate_name": "rustc_driver_impl",
+    "dependencies": [
+      "std::time::Instant::now",
+      "rustc_data_structures::profiling::get_resident_set_size",
+      "rustc_session::EarlyDiagCtxt::new",
+      // ... hundreds more
+    ]
+  }
+}
+```
+
+### Step 3: Dependency Resolution (`unified_driver`)
+
+**Input**: Target symbol `"rustc_driver_impl::lib::main"`
+
+**Program**: `unified_driver.rs`
+```rust
+pub fn resolve_target_with_deps(&mut self, target: &str) -> Result<()> {
+    // 1. Load symbol map
+    let symbol_map = self.load_symbol_map()?;
+    
+    // 2. Recursive dependency resolution
+    let all_deps = self.resolve_all_dependencies(target, &symbol_map)?;
+    
+    // 3. Generate code for each dependency
+    let mut complete_code = self.base_lib.clone();
+    for dep in &all_deps {
+        if let Some(code) = self.generate_code_for_symbol(dep, &symbol_map)? {
+            complete_code.push_str(&format!("mod {} {{\n{}\n}}\n", dep, code));
+        }
+    }
+}
+```
+
+**Output**: Complete dependency tree resolved
+
+### Step 4: Code Generation (`unified_driver`)
+
+**Input**: All resolved dependencies + processed files
+
+**Program**: Module generator
+- Maps each dependency to its processed file
+- Wraps in proper module declarations
+- Combines with base library setup
+
+**Output**: `src/current.rs`
+```rust
+#![recursion_limit = "256"]
+#![allow(internal_features)]
+#![feature(rustc_private)]
+// ... all features
+
+include!("wrap_types.rs");
+
+// === rustc_driver ===
+pub mod rustc_driver {
+    pub use rustc_driver_impl::*;
+}
+
+// === rustc_driver_impl ===  
+pub mod rustc_driver_impl {
+    // ... complete rustc_driver_impl code
+    pub fn main() -> ! {
+        // ... actual implementation
+    }
+}
+
+// === rustc_session ===
+pub mod rustc_session {
+    // ... all session code
+}
+
+// ... hundreds more modules
+
+// Final target code
+fn main() {
+    rustc_driver::main()
+}
+```
+
+### Step 5: Compilation Test (`cargo check`)
+
+**Input**: `src/current.rs` with complete dependency tree
+
+**Program**: `cargo check --lib`
+- Rust compiler validates all dependencies
+- Reports missing symbols or type errors
+- Success = all dependencies resolved correctly
+
+**Output**: 
+- ✅ **SUCCESS**: Complete compilation with all dependencies
+- ❌ **FAILURE**: Missing dependencies identified for next iteration
+
+## Key Programs and Their Roles
+
+| Program | Input | Transformation | Output |
+|---------|-------|----------------|--------|
+| `build.rs` | Original rustc source | AST parsing + extraction | Processed files + Symbol map |
+| `unified_driver` | Target symbol + Symbol map | Dependency resolution | Complete code tree |
+| `cargo check` | Generated code | Compilation validation | Success/failure report |
+
+## The Declarative Revolution
+
+**Before**: Manual dependency hunting, trial-and-error compilation
+**After**: `driver.resolve_target_with_deps("rustc_driver::main")` → Complete automatic resolution
+
 ### Progressive Compilation Workflow
 1. **build.rs** → Extracts individual declarations from rustc source files
 2. **submodules/** → Stores processed files mirroring rustc structure  
-3. **unified_driver** → Tests each declaration independently
-4. **proofs/** → Documents AST analysis for each file
+3. **symbol_map_original.json.gz** → Complete dependency database
+4. **unified_driver** → Declarative dependency resolution engine
+5. **src/current.rs** → Generated complete dependency tree
+6. **cargo check** → Validates compilation success
 
 ### File Structure
 ```

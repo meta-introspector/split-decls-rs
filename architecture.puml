@@ -1,0 +1,39 @@
+@startuml
+!theme plain
+
+package "Original Source" {
+  [../../rustc/] as original
+}
+
+package "Build System" {
+  [build.rs] as build
+  [unified_driver] as driver
+  [runbuild] as runbuild
+}
+
+package "Generated Files" {
+  [submodules/rust/] as processed
+  [symbol_map_original.json.gz] as symbolmap
+  [src/current.rs] as current
+}
+
+package "Infrastructure" {
+  [src/wrap_types.rs] as wraptypes
+  [src/lib.rs] as lib
+  [Cargo.toml] as cargo
+}
+
+original --> build : "Parse AST"
+build --> processed : "3102 files"
+build --> symbolmap : "Dependencies"
+
+runbuild --> build : "Execute"
+
+driver --> symbolmap : "Load deps"
+driver --> processed : "Read files"
+driver --> current : "Generate"
+
+current --> wraptypes : "include!"
+current --> lib : "compile with"
+
+@enduml

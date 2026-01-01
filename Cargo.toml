@@ -5,10 +5,8 @@ edition = "2024"
 description = "Self-creating Rust system through macro emergence"
 default-run = "split-decls-genesis"
 
-[lib]
-path = "src/current.rs"
-
 [workspace]
+members = ["runbuild"]
 
 [dependencies]
 anyhow = "1.0"
