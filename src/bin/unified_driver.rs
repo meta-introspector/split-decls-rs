@@ -1,4 +1,5 @@
 use std::fs;
+use std::path::Path;
 use std::process::Command;
 use std::collections::HashMap;
 use anyhow::Result;
@@ -32,14 +33,30 @@ impl UnifiedDriver {
 include!("wrap_types.rs");
 "#.to_string();
 
-        // Get all processed files
+        // Get all processed files from submodules directory
         let mut files = Vec::new();
-        for entry in fs::read_dir("src")? {
-            let entry = entry?;
-            let name = entry.file_name().to_string_lossy().to_string();
-            if name.starts_with("processed_") && name.ends_with(".rs") {
-                files.push(name);
+        
+        // Recursively find all .rs files in submodules directory
+        fn collect_rs_files(dir: &Path, files: &mut Vec<String>) -> Result<()> {
+            for entry in fs::read_dir(dir)? {
+                let entry = entry?;
+                let path = entry.path();
+                if path.is_dir() {
+                    collect_rs_files(&path, files)?;
+                } else if let Some(ext) = path.extension() {
+                    if ext == "rs" {
+                        if let Some(path_str) = path.to_str() {
+                            files.push(path_str.to_string());
+                        }
+                    }
+                }
             }
+            Ok(())
+        }
+        
+        let submodules_path = Path::new("submodules");
+        if submodules_path.exists() {
+            collect_rs_files(&submodules_path, &mut files)?;
         }
 
         files.sort();
@@ -59,7 +76,7 @@ include!("wrap_types.rs");
             println!("\n🔄 Step {}/{}: Processing {}", i + 1, self.files.len(), file);
             
             // Read and preprocess file
-            let content = fs::read_to_string(format!("src/{}", file))?;
+            let content = fs::read_to_string(file)?;
             let processed = preprocess_content(&content);
             
             // Extract declarations
@@ -69,13 +86,19 @@ include!("wrap_types.rs");
             let stubs = self.generate_stubs();
             
             // Create complete library
-            let complete_lib = format!("{}\n{}\ninclude!(\"{}\");\n", self.base_lib, stubs, file);
+            let complete_lib = format!("{}\n{}\n{}\n", self.base_lib, stubs, processed);
+            
+            // Debug: print what we're writing
+            println!("🔍 DEBUG: Writing to current.rs:");
+            println!("--- START ---");
+            println!("{}", complete_lib);
+            println!("--- END ---");
             
             // Write and test compilation
             fs::write("src/current.rs", &complete_lib)?;
             
             let result = Command::new("cargo")
-                .args(&["build", "--lib", "--verbose"])
+                .args(&["build", "--lib", "--verbose", "-vv"])
                 .output()?;
             
             // Log build results

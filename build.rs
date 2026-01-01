@@ -726,22 +726,78 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("cargo:rustc-env=CFG_RELEASE_CHANNEL=dev");
     println!("cargo:rustc-env=RUSTC_INSTALL_BINDIR=/usr/local/bin");
     
+    // Generate symbol_map.json if it doesn't exist or is outdated
+    println!("📋 AUDIT: Checking symbol_map.json");
+    if !std::path::Path::new("symbol_map.json").exists() {
+        println!("🔄 AUDIT: Generating symbol_map.json from rustc source files");
+        generate_symbol_map()?;
+    }
+    
     // Process symbol_map.json and generate processed files
     println!("📋 AUDIT: Starting symbol_map.json processing");
     
-    // Check if symbol_map.json.gz exists
-    if std::path::Path::new("symbol_map.json.gz").exists() {
-        println!("✅ AUDIT: Found symbol_map.json.gz");
-        process_symbol_map_gz()?;
-    } else if std::path::Path::new("symbol_map.json").exists() {
+    if std::path::Path::new("symbol_map.json").exists() {
         println!("✅ AUDIT: Found symbol_map.json");
         process_symbol_map_json()?;
     } else {
-        println!("❌ AUDIT: No symbol_map.json or symbol_map.json.gz found");
+        println!("❌ AUDIT: No symbol_map.json found after generation");
         return Ok(());
     }
     
     println!("✅ AUDIT: Completed file processing");
+    Ok(())
+}
+
+fn generate_symbol_map() -> Result<(), Box<dyn std::error::Error>> {
+    use std::collections::HashMap;
+    
+    println!("🔍 AUDIT: Scanning submodules/rust directory for .rs files");
+    
+    let mut symbol_map = HashMap::new();
+    let rust_dir = std::path::Path::new("submodules/rust");
+    
+    if !rust_dir.exists() {
+        println!("❌ AUDIT: submodules/rust directory not found");
+        return Ok(());
+    }
+    
+    // Walk through all .rs files in submodules/rust
+    fn walk_dir(dir: &std::path::Path, symbol_map: &mut HashMap<String, serde_json::Value>) -> Result<(), Box<dyn std::error::Error>> {
+        for entry in std::fs::read_dir(dir)? {
+            let entry = entry?;
+            let path = entry.path();
+            
+            if path.is_dir() {
+                walk_dir(&path, symbol_map)?;
+            } else if path.extension().map_or(false, |ext| ext == "rs") {
+                // Get relative path from submodules/rust
+                if let Ok(rel_path) = path.strip_prefix("submodules/rust") {
+                    let file_path = rel_path.to_string_lossy().to_string();
+                    
+                    // Create a simple symbol entry with file_path
+                    let symbol_entry = serde_json::json!({
+                        "file_path": file_path,
+                        "crate_name": "rustc",
+                        "name": path.file_stem().unwrap_or_default().to_string_lossy(),
+                        "dependencies": []
+                    });
+                    
+                    symbol_map.insert(format!("rustc::{}", file_path), symbol_entry);
+                }
+            }
+        }
+        Ok(())
+    }
+    
+    walk_dir(rust_dir, &mut symbol_map)?;
+    
+    println!("📊 AUDIT: Found {} .rs files", symbol_map.len());
+    
+    // Write symbol_map.json
+    let json_content = serde_json::to_string_pretty(&symbol_map)?;
+    std::fs::write("symbol_map.json", json_content)?;
+    
+    println!("✅ AUDIT: Generated symbol_map.json");
     Ok(())
 }
 
