@@ -1,24 +1,160 @@
-/* FP:lint.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_lint_USE_0001
-/* FP:lint.rs-0002 */ use std :: borrow :: Cow ;
-/* FP:lint.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_lint_USE_0002
-/* FP:lint.rs-0004 */ use crate :: rustc_data_structures :: fx :: FxHashSet ;
-/* FP:lint.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_lint_USE_0003
-/* FP:lint.rs-0006 */ use crate :: rustc_index :: bit_set :: DenseBitSet ;
-/* FP:lint.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_lint_USE_0004
-/* FP:lint.rs-0008 */ use crate :: rustc_complete :: mir :: visit :: { PlaceContext , Visitor } ;
-/* FP:lint.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_lint_USE_0005
-/* FP:lint.rs-0010 */ use crate :: rustc_complete :: mir :: * ;
-/* FP:lint.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_lint_USE_0006
-/* FP:lint.rs-0012 */ use crate :: rustc_complete :: ty :: TyCtxt ;
-/* FP:lint.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_lint_USE_0007
-/* FP:lint.rs-0014 */ use crate :: rustc_mir_dataflow :: impls :: { MaybeStorageDead , MaybeStorageLive , always_storage_live_locals } ;
-/* FP:lint.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_lint_USE_0008
-/* FP:lint.rs-0016 */ use crate :: rustc_mir_dataflow :: { Analysis , ResultsCursor } ;
-/* FP:lint.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_lint_FN_0009
-/* FP:lint.rs-0018 */ pub (super) fn lint_body < 'tcx > (tcx : TyCtxt < 'tcx > , body : & Body < 'tcx > , when : String) { let always_live_locals = & always_storage_live_locals (body) ; let maybe_storage_live = MaybeStorageLive :: new (Cow :: Borrowed (always_live_locals)) . iterate_to_fixpoint (tcx , body , None) . into_results_cursor (body) ; let maybe_storage_dead = MaybeStorageDead :: new (Cow :: Borrowed (always_live_locals)) . iterate_to_fixpoint (tcx , body , None) . into_results_cursor (body) ; let mut lint = Lint { tcx , when , body , is_fn_like : tcx . def_kind (body . source . def_id ()) . is_fn_like () , always_live_locals , maybe_storage_live , maybe_storage_dead , places : Default :: default () , } ; for (bb , data) in traversal :: reachable (body) { lint . visit_basic_block_data (bb , data) ; } }
-/* FP:lint.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_lint_STRUCT_0010
-/* FP:lint.rs-0020 */ struct Lint < 'a , 'tcx > { tcx : TyCtxt < 'tcx > , when : String , body : & 'a Body < 'tcx > , is_fn_like : bool , always_live_locals : & 'a DenseBitSet < Local > , maybe_storage_live : ResultsCursor < 'a , 'tcx , MaybeStorageLive < 'a > > , maybe_storage_dead : ResultsCursor < 'a , 'tcx , MaybeStorageDead < 'a > > , places : FxHashSet < PlaceRef < 'tcx > > , }
-/* FP:lint.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_lint_IMPL_0011
-/* FP:lint.rs-0022 */ impl < 'a , 'tcx > Lint < 'a , 'tcx > { # [track_caller] fn fail (& self , location : Location , msg : impl AsRef < str >) { let span = self . body . source_info (location) . span ; self . tcx . sess . dcx () . span_delayed_bug (span , format ! ("broken MIR in {:?} ({}) at {:?}:\n{}" , self . body . source . instance , self . when , location , msg . as_ref ()) ,) ; } }
-/* FP:lint.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_lint_IMPL_0012
-/* FP:lint.rs-0024 */ impl < 'a , 'tcx > Visitor < 'tcx > for Lint < 'a , 'tcx > { fn visit_local (& mut self , local : Local , context : PlaceContext , location : Location) { if context . is_use () { self . maybe_storage_dead . seek_after_primary_effect (location) ; if self . maybe_storage_dead . get () . contains (local) { self . fail (location , format ! ("use of local {local:?}, which has no storage here")) ; } } } fn visit_statement (& mut self , statement : & Statement < 'tcx > , location : Location) { match & statement . kind { StatementKind :: Assign (box (dest , rvalue)) => { if let Rvalue :: Use (Operand :: Copy (src) | Operand :: Move (src)) = rvalue { if dest == src { self . fail (location , "encountered `Assign` statement with overlapping memory" ,) ; } } } StatementKind :: StorageLive (local) => { self . maybe_storage_live . seek_before_primary_effect (location) ; if self . maybe_storage_live . get () . contains (* local) { self . fail (location , format ! ("StorageLive({local:?}) which already has storage here") ,) ; } } _ => { } } self . super_statement (statement , location) ; } fn visit_terminator (& mut self , terminator : & Terminator < 'tcx > , location : Location) { match & terminator . kind { TerminatorKind :: Return => { if self . is_fn_like { self . maybe_storage_live . seek_after_primary_effect (location) ; for local in self . maybe_storage_live . get () . iter () { if ! self . always_live_locals . contains (local) { self . fail (location , format ! ("local {local:?} still has storage when returning from function") ,) ; } } } } TerminatorKind :: Call { args , destination , .. } => { self . places . clear () ; self . places . insert (destination . as_ref ()) ; let mut has_duplicates = false ; for arg in args { if let Operand :: Move (place) = & arg . node { has_duplicates |= ! self . places . insert (place . as_ref ()) ; } } if has_duplicates { self . fail (location , format ! ("encountered overlapping memory in `Move` arguments to `Call` terminator: {:?}" , terminator . kind ,) ,) ; } } _ => { } } self . super_terminator (terminator , location) ; } }
+// SRC: ../rust/compiler/rustc_mir_transform/src/lint.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+// This pass statically detects code which has undefined behaviour or is likely to be erroneous.
+// It can be used to locate problems in MIR building or optimizations. It assumes that all code
+// can be executed, so it has false positives.
+
+use std::borrow::Cow;
+
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::mir::visit::{PlaceContext, Visitor};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_mir_dataflow::impls::{MaybeStorageDead, MaybeStorageLive, always_storage_live_locals};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_mir_dataflow::{Analysis, ResultsCursor};
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=26 */
+
+pub(super) fn lint_body<'tcx>(tcx: TyCtxt<'tcx>, body: &Body<'tcx>, when: String) {
+    let always_live_locals = &always_storage_live_locals(body);
+
+    let maybe_storage_live = MaybeStorageLive::new(Cow::Borrowed(always_live_locals))
+        .iterate_to_fixpoint(tcx, body, None)
+        .into_results_cursor(body);
+
+    let maybe_storage_dead = MaybeStorageDead::new(Cow::Borrowed(always_live_locals))
+        .iterate_to_fixpoint(tcx, body, None)
+        .into_results_cursor(body);
+
+    let mut lint = Lint {
+        tcx,
+        when,
+        body,
+        is_fn_like: tcx.def_kind(body.source.def_id()).is_fn_like(),
+        always_live_locals,
+        maybe_storage_live,
+        maybe_storage_dead,
+        places: Default::default(),
+    };
+    for (bb, data) in traversal::reachable(body) {
+        lint.visit_basic_block_data(bb, data);
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=Lint | COMPLEXITY=2 | LINES=11 */
+
+struct Lint<'a, 'tcx> {
+    tcx: TyCtxt<'tcx>,
+    when: String,
+    body: &'a Body<'tcx>,
+    is_fn_like: bool,
+    always_live_locals: &'a DenseBitSet<Local>,
+    maybe_storage_live: ResultsCursor<'a, 'tcx, MaybeStorageLive<'a>>,
+    maybe_storage_dead: ResultsCursor<'a, 'tcx, MaybeStorageDead<'a>>,
+    places: FxHashSet<PlaceRef<'tcx>>,
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=fail | COMPLEXITY=7 | LINES=17 */
+
+impl<'a, 'tcx> Lint<'a, 'tcx> {
+    #[track_caller]
+    fn fail(&self, location: Location, msg: impl AsRef<str>) {
+        let span = self.body.source_info(location).span;
+        self.tcx.sess.dcx().span_delayed_bug(
+            span,
+            format!(
+                "broken MIR in {:?} ({}) at {:?}:\n{}",
+                self.body.source.instance,
+                self.when,
+                location,
+                msg.as_ref()
+            ),
+        );
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=visit_local | COMPLEXITY=68 | LINES=85 */
+
+impl<'a, 'tcx> Visitor<'tcx> for Lint<'a, 'tcx> {
+    fn visit_local(&mut self, local: Local, context: PlaceContext, location: Location) {
+        if context.is_use() {
+            self.maybe_storage_dead.seek_after_primary_effect(location);
+            if self.maybe_storage_dead.get().contains(local) {
+                self.fail(location, format!("use of local {local:?}, which has no storage here"));
+            }
+        }
+    }
+
+    fn visit_statement(&mut self, statement: &Statement<'tcx>, location: Location) {
+        match &statement.kind {
+            StatementKind::Assign(box (dest, rvalue)) => {
+                if let Rvalue::Use(Operand::Copy(src) | Operand::Move(src)) = rvalue {
+                    // The sides of an assignment must not alias. Currently this just checks whether
+                    // the places are identical.
+                    if dest == src {
+                        self.fail(
+                            location,
+                            "encountered `Assign` statement with overlapping memory",
+                        );
+                    }
+                }
+            }
+            StatementKind::StorageLive(local) => {
+                self.maybe_storage_live.seek_before_primary_effect(location);
+                if self.maybe_storage_live.get().contains(*local) {
+                    self.fail(
+                        location,
+                        format!("StorageLive({local:?}) which already has storage here"),
+                    );
+                }
+            }
+            _ => {}
+        }
+
+        self.super_statement(statement, location);
+    }
+
+    fn visit_terminator(&mut self, terminator: &Terminator<'tcx>, location: Location) {
+        match &terminator.kind {
+            TerminatorKind::Return => {
+                if self.is_fn_like {
+                    self.maybe_storage_live.seek_after_primary_effect(location);
+                    for local in self.maybe_storage_live.get().iter() {
+                        if !self.always_live_locals.contains(local) {
+                            self.fail(
+                                location,
+                                format!(
+                                    "local {local:?} still has storage when returning from function"
+                                ),
+                            );
+                        }
+                    }
+                }
+            }
+            TerminatorKind::Call { args, destination, .. } => {
+                // The call destination place and Operand::Move place used as an argument might be
+                // passed by a reference to the callee. Consequently they must be non-overlapping.
+                // Currently this simply checks for duplicate places.
+                self.places.clear();
+                self.places.insert(destination.as_ref());
+                let mut has_duplicates = false;
+                for arg in args {
+                    if let Operand::Move(place) = &arg.node {
+                        has_duplicates |= !self.places.insert(place.as_ref());
+                    }
+                }
+                if has_duplicates {
+                    self.fail(
+                        location,
+                        format!(
+                            "encountered overlapping memory in `Move` arguments to `Call` terminator: {:?}",
+                            terminator.kind,
+                        ),
+                    );
+                }
+            }
+            _ => {}
+        }
+
+        self.super_terminator(terminator, location);
+    }
+}

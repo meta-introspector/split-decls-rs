@@ -1,14 +1,110 @@
-/* FP:free_regions.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_free_regions_USE_0001
-/* FP:free_regions.rs-0002 */ use crate :: rustc_data_structures :: transitive_relation :: TransitiveRelation ;
-/* FP:free_regions.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_free_regions_USE_0002
-/* FP:free_regions.rs-0004 */ use crate :: rustc_complete :: ty :: { Region , TyCtxt } ;
-/* FP:free_regions.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_free_regions_USE_0003
-/* FP:free_regions.rs-0006 */ use tracing :: debug ;
-/* FP:free_regions.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_free_regions_STRUCT_0004
-/* FP:free_regions.rs-0008 */ # [doc = " Combines a `FreeRegionMap` and a `TyCtxt`."] # [doc = ""] # [doc = " This stuff is a bit convoluted and should be refactored, but as we"] # [doc = " transition to NLL, it'll all go away anyhow."] pub (crate) struct RegionRelations < 'a , 'tcx > { pub tcx : TyCtxt < 'tcx > , # [doc = " Free-region relationships."] pub free_regions : & 'a FreeRegionMap < 'tcx > , }
-/* FP:free_regions.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_free_regions_IMPL_0005
-/* FP:free_regions.rs-0010 */ impl < 'a , 'tcx > RegionRelations < 'a , 'tcx > { pub (crate) fn new (tcx : TyCtxt < 'tcx > , free_regions : & 'a FreeRegionMap < 'tcx >) -> Self { Self { tcx , free_regions } } pub (crate) fn lub_param_regions (& self , r_a : Region < 'tcx > , r_b : Region < 'tcx >) -> Region < 'tcx > { self . free_regions . lub_param_regions (self . tcx , r_a , r_b) } }
-/* FP:free_regions.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_free_regions_STRUCT_0006
-/* FP:free_regions.rs-0012 */ # [derive (Clone , Debug)] pub struct FreeRegionMap < 'tcx > { # [doc = " Stores the relation `a < b`, where `a` and `b` are regions."] # [doc = ""] # [doc = " Invariant: only free regions like `'x` or `'static` are stored"] # [doc = " in this relation, not scopes."] pub (crate) relation : TransitiveRelation < Region < 'tcx > > , }
-/* FP:free_regions.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_free_regions_IMPL_0007
-/* FP:free_regions.rs-0014 */ impl < 'tcx > FreeRegionMap < 'tcx > { pub fn elements (& self) -> impl Iterator < Item = Region < 'tcx > > { self . relation . elements () . copied () } pub fn is_empty (& self) -> bool { self . relation . is_empty () } # [doc = " Tests whether `r_a <= r_b`."] # [doc = ""] # [doc = " Both regions must meet `is_free_or_static`."] # [doc = ""] # [doc = " Subtle: one tricky case that this code gets correct is as"] # [doc = " follows. If we know that `r_b: 'static`, then this function"] # [doc = " will return true, even though we don't know anything that"] # [doc = " directly relates `r_a` and `r_b`."] pub fn sub_free_regions (& self , tcx : TyCtxt < 'tcx > , r_a : Region < 'tcx > , r_b : Region < 'tcx > ,) -> bool { assert ! (r_a . is_free () && r_b . is_free ()) ; let re_static = tcx . lifetimes . re_static ; if self . check_relation (re_static , r_b) { true } else { self . check_relation (r_a , r_b) } } # [doc = " Check whether `r_a <= r_b` is found in the relation."] fn check_relation (& self , r_a : Region < 'tcx > , r_b : Region < 'tcx >) -> bool { r_a == r_b || self . relation . contains (r_a , r_b) } # [doc = " Computes the least-upper-bound of two free regions. In some"] # [doc = " cases, this is more conservative than necessary, in order to"] # [doc = " avoid making arbitrary choices. See"] # [doc = " `TransitiveRelation::postdom_upper_bound` for more details."] pub (crate) fn lub_param_regions (& self , tcx : TyCtxt < 'tcx > , r_a : Region < 'tcx > , r_b : Region < 'tcx > ,) -> Region < 'tcx > { debug ! ("lub_param_regions(r_a={:?}, r_b={:?})" , r_a , r_b) ; assert ! (r_a . is_param ()) ; assert ! (r_b . is_param ()) ; let result = if r_a == r_b { r_a } else { match self . relation . postdom_upper_bound (r_a , r_b) { None => tcx . lifetimes . re_static , Some (r) => r , } } ; debug ! ("lub_param_regions(r_a={:?}, r_b={:?}) = {:?}" , r_a , r_b , result) ; result } }
+// SRC: ../rust/compiler/rustc_infer/src/infer/free_regions.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+// This module handles the relationships between "free regions", i.e., lifetime parameters.
+// Ordinarily, free regions are unrelated to one another, but they can be related via implied
+// or explicit bounds. In that case, we track the bounds using the `TransitiveRelation` type,
+// and use that to decide when one free region outlives another, and so forth.
+
+use crate::rustc_data_structures::transitive_relation::TransitiveRelation;
+use crate::rustc_complete::ty::{Region, TyCtxt};
+/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
+use tracing::debug;
+
+/// Combines a `FreeRegionMap` and a `TyCtxt`.
+///
+/// This stuff is a bit convoluted and should be refactored, but as we
+/// transition to NLL, it'll all go away anyhow.
+pub(crate) struct RegionRelations<'a, 'tcx> {
+    pub tcx: TyCtxt<'tcx>,
+
+    /// Free-region relationships.
+    pub free_regions: &'a FreeRegionMap<'tcx>,
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=10 */
+
+impl<'a, 'tcx> RegionRelations<'a, 'tcx> {
+    pub(crate) fn new(tcx: TyCtxt<'tcx>, free_regions: &'a FreeRegionMap<'tcx>) -> Self {
+        Self { tcx, free_regions }
+    }
+
+    pub(crate) fn lub_param_regions(&self, r_a: Region<'tcx>, r_b: Region<'tcx>) -> Region<'tcx> {
+        self.free_regions.lub_param_regions(self.tcx, r_a, r_b)
+    }
+}
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=FreeRegionMap | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Clone, Debug)]
+pub struct FreeRegionMap<'tcx> {
+    /// Stores the relation `a < b`, where `a` and `b` are regions.
+    ///
+    /// Invariant: only free regions like `'x` or `'static` are stored
+    /// in this relation, not scopes.
+    pub(crate) relation: TransitiveRelation<Region<'tcx>>,
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=elements | COMPLEXITY=32 | LINES=66 */
+
+impl<'tcx> FreeRegionMap<'tcx> {
+    pub fn elements(&self) -> impl Iterator<Item = Region<'tcx>> {
+        self.relation.elements().copied()
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.relation.is_empty()
+    }
+
+    /// Tests whether `r_a <= r_b`.
+    ///
+    /// Both regions must meet `is_free_or_static`.
+    ///
+    /// Subtle: one tricky case that this code gets correct is as
+    /// follows. If we know that `r_b: 'static`, then this function
+    /// will return true, even though we don't know anything that
+    /// directly relates `r_a` and `r_b`.
+    pub fn sub_free_regions(
+        &self,
+        tcx: TyCtxt<'tcx>,
+        r_a: Region<'tcx>,
+        r_b: Region<'tcx>,
+    ) -> bool {
+        assert!(r_a.is_free() && r_b.is_free());
+        let re_static = tcx.lifetimes.re_static;
+        if self.check_relation(re_static, r_b) {
+            // `'a <= 'static` is always true, and not stored in the
+            // relation explicitly, so check if `'b` is `'static` (or
+            // equivalent to it)
+            true
+        } else {
+            self.check_relation(r_a, r_b)
+        }
+    }
+
+    /// Check whether `r_a <= r_b` is found in the relation.
+    fn check_relation(&self, r_a: Region<'tcx>, r_b: Region<'tcx>) -> bool {
+        r_a == r_b || self.relation.contains(r_a, r_b)
+    }
+
+    /// Computes the least-upper-bound of two free regions. In some
+    /// cases, this is more conservative than necessary, in order to
+    /// avoid making arbitrary choices. See
+    /// `TransitiveRelation::postdom_upper_bound` for more details.
+    pub(crate) fn lub_param_regions(
+        &self,
+        tcx: TyCtxt<'tcx>,
+        r_a: Region<'tcx>,
+        r_b: Region<'tcx>,
+    ) -> Region<'tcx> {
+        debug!("lub_param_regions(r_a={:?}, r_b={:?})", r_a, r_b);
+        assert!(r_a.is_param());
+        assert!(r_b.is_param());
+        let result = if r_a == r_b {
+            r_a
+        } else {
+            match self.relation.postdom_upper_bound(r_a, r_b) {
+                None => tcx.lifetimes.re_static,
+                Some(r) => r,
+            }
+        };
+        debug!("lub_param_regions(r_a={:?}, r_b={:?}) = {:?}", r_a, r_b, result);
+        result
+    }
+}

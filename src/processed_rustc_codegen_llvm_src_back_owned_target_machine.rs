@@ -1,20 +1,108 @@
-/* FP:owned_target_machine.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_back_owned_target_machine_USE_0001
-/* FP:owned_target_machine.rs-0002 */ use std :: assert_matches :: assert_matches ;
-/* FP:owned_target_machine.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_back_owned_target_machine_USE_0002
-/* FP:owned_target_machine.rs-0004 */ use std :: ffi :: CStr ;
-/* FP:owned_target_machine.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_back_owned_target_machine_USE_0003
-/* FP:owned_target_machine.rs-0006 */ use std :: marker :: PhantomData ;
-/* FP:owned_target_machine.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_back_owned_target_machine_USE_0004
-/* FP:owned_target_machine.rs-0008 */ use std :: ptr :: NonNull ;
-/* FP:owned_target_machine.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_back_owned_target_machine_USE_0005
-/* FP:owned_target_machine.rs-0010 */ use crate :: rustc_data_structures :: small_c_str :: SmallCStr ;
-/* FP:owned_target_machine.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_back_owned_target_machine_USE_0006
-/* FP:owned_target_machine.rs-0012 */ use crate :: errors :: LlvmError ;
-/* FP:owned_target_machine.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_back_owned_target_machine_USE_0007
-/* FP:owned_target_machine.rs-0014 */ use crate :: llvm ;
-/* FP:owned_target_machine.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_back_owned_target_machine_STRUCT_0008
-/* FP:owned_target_machine.rs-0016 */ # [doc = " Responsible for safely creating and disposing llvm::TargetMachine via ffi functions."] # [doc = " Not cloneable as there is no clone function for llvm::TargetMachine."] # [repr (transparent)] pub struct OwnedTargetMachine { tm_unique : NonNull < llvm :: TargetMachine > , phantom : PhantomData < llvm :: TargetMachine > , }
-/* FP:owned_target_machine.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_back_owned_target_machine_IMPL_0009
-/* FP:owned_target_machine.rs-0018 */ impl OwnedTargetMachine { pub (crate) fn new (triple : & CStr , cpu : & CStr , features : & CStr , abi : & CStr , model : llvm :: CodeModel , reloc : llvm :: RelocModel , level : llvm :: CodeGenOptLevel , float_abi : llvm :: FloatAbi , function_sections : bool , data_sections : bool , unique_section_names : bool , trap_unreachable : bool , singlethread : bool , verbose_asm : bool , emit_stack_size_section : bool , relax_elf_relocations : bool , use_init_array : bool , split_dwarf_file : & CStr , output_obj_file : & CStr , debug_info_compression : & CStr , use_emulated_tls : bool , args_cstr_buff : & [u8] , use_wasm_eh : bool ,) -> Result < Self , LlvmError < 'static > > { assert_matches ! (args_cstr_buff , [.., b'\0'] , "the last byte must be a NUL terminator") ; let tm_ptr = unsafe { llvm :: LLVMRustCreateTargetMachine (triple . as_ptr () , cpu . as_ptr () , features . as_ptr () , abi . as_ptr () , model , reloc , level , float_abi , function_sections , data_sections , unique_section_names , trap_unreachable , singlethread , verbose_asm , emit_stack_size_section , relax_elf_relocations , use_init_array , split_dwarf_file . as_ptr () , output_obj_file . as_ptr () , debug_info_compression . as_ptr () , use_emulated_tls , args_cstr_buff . as_ptr () , args_cstr_buff . len () , use_wasm_eh ,) } ; NonNull :: new (tm_ptr) . map (| tm_unique | Self { tm_unique , phantom : PhantomData }) . ok_or_else (| | LlvmError :: CreateTargetMachine { triple : SmallCStr :: from (triple) }) } # [doc = " Returns inner `llvm::TargetMachine` type."] # [doc = ""] # [doc = " This could be a `Deref` implementation, but `llvm::TargetMachine` is an extern type and"] # [doc = " `Deref::Target: ?Sized`."] pub fn raw (& self) -> & llvm :: TargetMachine { unsafe { self . tm_unique . as_ref () } } }
-/* FP:owned_target_machine.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_back_owned_target_machine_IMPL_0010
-/* FP:owned_target_machine.rs-0020 */ impl Drop for OwnedTargetMachine { fn drop (& mut self) { unsafe { llvm :: LLVMRustDisposeTargetMachine (self . tm_unique . as_ptr ()) ; } } }
+// SRC: ../rust/compiler/rustc_codegen_llvm/src/back/owned_target_machine.rs
+/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=OwnedTargetMachine | COMPLEXITY=7 | LINES=17 */
+use std::assert_matches::assert_matches;
+use std::ffi::CStr;
+use std::marker::PhantomData;
+use std::ptr::NonNull;
+
+use crate::rustc_data_structures::small_c_str::SmallCStr;
+
+use crate::errors::LlvmError;
+use crate::llvm;
+
+/// Responsible for safely creating and disposing llvm::TargetMachine via ffi functions.
+/// Not cloneable as there is no clone function for llvm::TargetMachine.
+#[repr(transparent)]
+pub struct OwnedTargetMachine {
+    tm_unique: NonNull<llvm::TargetMachine>,
+    phantom: PhantomData<llvm::TargetMachine>,
+}
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=raw | COMPLEXITY=21 | LINES=76 */
+
+impl OwnedTargetMachine {
+    pub(crate) fn new(
+        triple: &CStr,
+        cpu: &CStr,
+        features: &CStr,
+        abi: &CStr,
+        model: llvm::CodeModel,
+        reloc: llvm::RelocModel,
+        level: llvm::CodeGenOptLevel,
+        float_abi: llvm::FloatAbi,
+        function_sections: bool,
+        data_sections: bool,
+        unique_section_names: bool,
+        trap_unreachable: bool,
+        singlethread: bool,
+        verbose_asm: bool,
+        emit_stack_size_section: bool,
+        relax_elf_relocations: bool,
+        use_init_array: bool,
+        split_dwarf_file: &CStr,
+        output_obj_file: &CStr,
+        debug_info_compression: &CStr,
+        use_emulated_tls: bool,
+        args_cstr_buff: &[u8],
+        use_wasm_eh: bool,
+    ) -> Result<Self, LlvmError<'static>> {
+        // The argument list is passed as the concatenation of one or more C strings.
+        // This implies that there must be a last byte, and it must be 0.
+        assert_matches!(args_cstr_buff, [.., b'\0'], "the last byte must be a NUL terminator");
+
+        // SAFETY: llvm::LLVMRustCreateTargetMachine copies pointed to data
+        let tm_ptr = unsafe {
+            llvm::LLVMRustCreateTargetMachine(
+                triple.as_ptr(),
+                cpu.as_ptr(),
+                features.as_ptr(),
+                abi.as_ptr(),
+                model,
+                reloc,
+                level,
+                float_abi,
+                function_sections,
+                data_sections,
+                unique_section_names,
+                trap_unreachable,
+                singlethread,
+                verbose_asm,
+                emit_stack_size_section,
+                relax_elf_relocations,
+                use_init_array,
+                split_dwarf_file.as_ptr(),
+                output_obj_file.as_ptr(),
+                debug_info_compression.as_ptr(),
+                use_emulated_tls,
+                args_cstr_buff.as_ptr(),
+                args_cstr_buff.len(),
+                use_wasm_eh,
+            )
+        };
+
+        NonNull::new(tm_ptr)
+            .map(|tm_unique| Self { tm_unique, phantom: PhantomData })
+            .ok_or_else(|| LlvmError::CreateTargetMachine { triple: SmallCStr::from(triple) })
+    }
+
+    /// Returns inner `llvm::TargetMachine` type.
+    ///
+    /// This could be a `Deref` implementation, but `llvm::TargetMachine` is an extern type and
+    /// `Deref::Target: ?Sized`.
+    pub fn raw(&self) -> &llvm::TargetMachine {
+        // SAFETY: constructing ensures we have a valid pointer created by
+        // llvm::LLVMRustCreateTargetMachine.
+        unsafe { self.tm_unique.as_ref() }
+    }
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=10 | LINES=11 */
+
+impl Drop for OwnedTargetMachine {
+    fn drop(&mut self) {
+        // SAFETY: constructing ensures we have a valid pointer created by
+        // llvm::LLVMRustCreateTargetMachine OwnedTargetMachine is not copyable so there is no
+        // double free or use after free.
+        unsafe {
+            llvm::LLVMRustDisposeTargetMachine(self.tm_unique.as_ptr());
+        }
+    }
+}

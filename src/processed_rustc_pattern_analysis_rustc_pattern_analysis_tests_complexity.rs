@@ -1,23 +1,124 @@
-/* FP:complexity.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_complexity_USE_0001
-/* FP:complexity.rs-0002 */ # [allow (unused_crate_dependencies)] use common :: * ;
-/* FP:complexity.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_complexity_USE_0002
-/* FP:complexity.rs-0004 */ use crate :: rustc_pattern_analysis :: MatchArm ;
-/* FP:complexity.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_complexity_USE_0003
-/* FP:complexity.rs-0006 */ use crate :: rustc_pattern_analysis :: pat :: DeconstructedPat ;
-/* FP:complexity.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_complexity_USE_0004
-/* FP:complexity.rs-0008 */ use crate :: rustc_pattern_analysis :: usefulness :: PlaceValidity ;
-/* FP:complexity.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_complexity_MOD_0005
-/* FP:complexity.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_complexity_FN_0006
-/* FP:complexity.rs-0012 */ # [doc = " Analyze a match made of these patterns. Ignore the report; we only care whether we exceeded the"] # [doc = " limit or not."] fn check (patterns : & [DeconstructedPat < Cx >] , complexity_limit : usize) -> Result < () , () > { let ty = * patterns [0] . ty () ; let arms : Vec < _ > = patterns . iter () . map (| pat | MatchArm { pat , has_guard : false , arm_data : () }) . collect () ; compute_match_usefulness (arms . as_slice () , ty , PlaceValidity :: ValidOnly , complexity_limit , false) . map (| _report | ()) }
-/* FP:complexity.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_complexity_FN_0007
-/* FP:complexity.rs-0014 */ # [doc = " Asserts that analyzing this match takes exactly `complexity` steps."] # [track_caller] fn assert_complexity (patterns : Vec < DeconstructedPat < Cx > > , complexity : usize) { assert ! (check (& patterns , complexity) . is_ok ()) ; assert ! (check (& patterns , complexity - 1) . is_err ()) ; }
-/* FP:complexity.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_complexity_FN_0008
-/* FP:complexity.rs-0016 */ # [doc = " Construct a match like:"] # [doc = " ```ignore(illustrative)"] # [doc = " match ... {"] # [doc = "     BigStruct { field01: true, .. } => {}"] # [doc = "     BigStruct { field02: true, .. } => {}"] # [doc = "     BigStruct { field03: true, .. } => {}"] # [doc = "     BigStruct { field04: true, .. } => {}"] # [doc = "     ..."] # [doc = "     _ => {}"] # [doc = " }"] # [doc = " ```"] fn diagonal_match (arity : usize) -> Vec < DeconstructedPat < Cx > > { let struct_ty = Ty :: BigStruct { arity , ty : & Ty :: Bool } ; let mut patterns = vec ! [] ; for i in 0 .. arity { patterns . push (pat ! (struct_ty ; Struct { . i : true })) ; } patterns . push (pat ! (struct_ty ; _)) ; patterns }
-/* FP:complexity.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_complexity_FN_0009
-/* FP:complexity.rs-0018 */ # [doc = " Construct a match like:"] # [doc = " ```ignore(illustrative)"] # [doc = " match ... {"] # [doc = "     BigStruct { field01: true, .. } => {}"] # [doc = "     BigStruct { field02: true, .. } => {}"] # [doc = "     BigStruct { field03: true, .. } => {}"] # [doc = "     BigStruct { field04: true, .. } => {}"] # [doc = "     ..."] # [doc = "     BigStruct { field01: false, .. } => {}"] # [doc = "     BigStruct { field02: false, .. } => {}"] # [doc = "     BigStruct { field03: false, .. } => {}"] # [doc = "     BigStruct { field04: false, .. } => {}"] # [doc = "     ..."] # [doc = "     _ => {}"] # [doc = " }"] # [doc = " ```"] fn diagonal_exponential_match (arity : usize) -> Vec < DeconstructedPat < Cx > > { let struct_ty = Ty :: BigStruct { arity , ty : & Ty :: Bool } ; let mut patterns = vec ! [] ; for i in 0 .. arity { patterns . push (pat ! (struct_ty ; Struct { . i : true })) ; } for i in 0 .. arity { patterns . push (pat ! (struct_ty ; Struct { . i : false })) ; } patterns . push (pat ! (struct_ty ; _)) ; patterns }
-/* FP:complexity.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_complexity_FN_0010
-/* FP:complexity.rs-0020 */ # [test] fn test_diagonal_struct_match () { assert_complexity (diagonal_match (20) , 41) ; assert_complexity (diagonal_match (30) , 61) ; assert ! (check (& diagonal_exponential_match (10) , 10000) . is_err ()) ; }
-/* FP:complexity.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_complexity_FN_0011
-/* FP:complexity.rs-0022 */ # [doc = " Construct a match like:"] # [doc = " ```ignore(illustrative)"] # [doc = " match ... {"] # [doc = "     BigEnum::Variant1(_) => {}"] # [doc = "     BigEnum::Variant2(_) => {}"] # [doc = "     BigEnum::Variant3(_) => {}"] # [doc = "     ..."] # [doc = "     _ => {}"] # [doc = " }"] # [doc = " ```"] fn big_enum (arity : usize) -> Vec < DeconstructedPat < Cx > > { let enum_ty = Ty :: BigEnum { arity , ty : & Ty :: Bool } ; let mut patterns = vec ! [] ; for i in 0 .. arity { patterns . push (pat ! (enum_ty ; Variant . i)) ; } patterns . push (pat ! (enum_ty ; _)) ; patterns }
-/* FP:complexity.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_complexity_FN_0012
-/* FP:complexity.rs-0024 */ # [test] fn test_big_enum () { assert_complexity (big_enum (20) , 40) ; }
+// SRC: ../rust/compiler/rustc_pattern_analysis/tests/complexity.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=check | COMPLEXITY=7 | LINES=21 */
+// Test the pattern complexity limit.
+
+#[allow(unused_crate_dependencies)]
+
+use common::*;
+use crate::rustc_pattern_analysis::MatchArm;
+use crate::rustc_pattern_analysis::pat::DeconstructedPat;
+use crate::rustc_pattern_analysis::usefulness::PlaceValidity;
+
+#[macro_use]
+
+/// Analyze a match made of these patterns. Ignore the report; we only care whether we exceeded the
+/// limit or not.
+fn check(patterns: &[DeconstructedPat<Cx>], complexity_limit: usize) -> Result<(), ()> {
+    let ty = *patterns[0].ty();
+    let arms: Vec<_> =
+        patterns.iter().map(|pat| MatchArm { pat, has_guard: false, arm_data: () }).collect();
+    compute_match_usefulness(arms.as_slice(), ty, PlaceValidity::ValidOnly, complexity_limit, false)
+        .map(|_report| ())
+}
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=assert_complexity | COMPLEXITY=5 | LINES=7 */
+
+/// Asserts that analyzing this match takes exactly `complexity` steps.
+#[track_caller]
+fn assert_complexity(patterns: Vec<DeconstructedPat<Cx>>, complexity: usize) {
+    assert!(check(&patterns, complexity).is_ok());
+    assert!(check(&patterns, complexity - 1).is_err());
+}
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=17 | LINES=11 */
+
+/// Construct a match like:
+/// ```ignore(illustrative)
+/// match ... {
+///     BigStruct { field01: true, .. } => {}
+///     BigStruct { field02: true, .. } => {}
+///     BigStruct { field03: true, .. } => {}
+///     BigStruct { field04: true, .. } => {}
+///     ...
+///     _ => {}
+/// }
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=diagonal_match | COMPLEXITY=7 | LINES=10 */
+/// ```
+fn diagonal_match(arity: usize) -> Vec<DeconstructedPat<Cx>> {
+    let struct_ty = Ty::BigStruct { arity, ty: &Ty::Bool };
+    let mut patterns = vec![];
+    for i in 0..arity {
+        patterns.push(pat!(struct_ty; Struct { .i: true }));
+    }
+    patterns.push(pat!(struct_ty; _));
+    patterns
+}
+/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=25 | LINES=16 */
+
+/// Construct a match like:
+/// ```ignore(illustrative)
+/// match ... {
+///     BigStruct { field01: true, .. } => {}
+///     BigStruct { field02: true, .. } => {}
+///     BigStruct { field03: true, .. } => {}
+///     BigStruct { field04: true, .. } => {}
+///     ...
+///     BigStruct { field01: false, .. } => {}
+///     BigStruct { field02: false, .. } => {}
+///     BigStruct { field03: false, .. } => {}
+///     BigStruct { field04: false, .. } => {}
+///     ...
+///     _ => {}
+/// }
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=diagonal_exponential_match | COMPLEXITY=11 | LINES=13 */
+/// ```
+fn diagonal_exponential_match(arity: usize) -> Vec<DeconstructedPat<Cx>> {
+    let struct_ty = Ty::BigStruct { arity, ty: &Ty::Bool };
+    let mut patterns = vec![];
+    for i in 0..arity {
+        patterns.push(pat!(struct_ty; Struct { .i: true }));
+    }
+    for i in 0..arity {
+        patterns.push(pat!(struct_ty; Struct { .i: false }));
+    }
+    patterns.push(pat!(struct_ty; _));
+    patterns
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=test_diagonal_struct_match | COMPLEXITY=2 | LINES=10 */
+
+#[test]
+fn test_diagonal_struct_match() {
+    // These cases are nicely linear: we check `arity` patterns with exactly one `true`, matching
+    // in 2 branches each, and a final pattern with all `false`, matching only the `_` branch.
+    assert_complexity(diagonal_match(20), 41);
+    assert_complexity(diagonal_match(30), 61);
+    // This case goes exponential.
+    assert!(check(&diagonal_exponential_match(10), 10000).is_err());
+}
+/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=12 | LINES=10 */
+
+/// Construct a match like:
+/// ```ignore(illustrative)
+/// match ... {
+///     BigEnum::Variant1(_) => {}
+///     BigEnum::Variant2(_) => {}
+///     BigEnum::Variant3(_) => {}
+///     ...
+///     _ => {}
+/// }
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=big_enum | COMPLEXITY=6 | LINES=10 */
+/// ```
+fn big_enum(arity: usize) -> Vec<DeconstructedPat<Cx>> {
+    let enum_ty = Ty::BigEnum { arity, ty: &Ty::Bool };
+    let mut patterns = vec![];
+    for i in 0..arity {
+        patterns.push(pat!(enum_ty; Variant.i));
+    }
+    patterns.push(pat!(enum_ty; _));
+    patterns
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=test_big_enum | COMPLEXITY=2 | LINES=6 */
+
+#[test]
+fn test_big_enum() {
+    // We try 2 branches per variant.
+    assert_complexity(big_enum(20), 40);
+}

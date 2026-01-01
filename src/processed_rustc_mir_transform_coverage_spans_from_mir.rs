@@ -1,24 +1,170 @@
-/* FP:from_mir.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_spans_from_mir_USE_0001
-/* FP:from_mir.rs-0002 */ use std :: iter ;
-/* FP:from_mir.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_spans_from_mir_USE_0002
-/* FP:from_mir.rs-0004 */ use crate :: rustc_complete :: bug ;
-/* FP:from_mir.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_spans_from_mir_USE_0003
-/* FP:from_mir.rs-0006 */ use crate :: rustc_complete :: mir :: coverage :: CoverageKind ;
-/* FP:from_mir.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_spans_from_mir_USE_0004
-/* FP:from_mir.rs-0008 */ use crate :: rustc_complete :: mir :: { self , FakeReadCause , Statement , StatementKind , Terminator , TerminatorKind , } ;
-/* FP:from_mir.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_spans_from_mir_USE_0005
-/* FP:from_mir.rs-0010 */ use crate :: rustc_complete :: Span ;
-/* FP:from_mir.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_spans_from_mir_USE_0006
-/* FP:from_mir.rs-0012 */ use crate :: coverage :: graph :: { BasicCoverageBlock , CoverageGraph } ;
-/* FP:from_mir.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_spans_from_mir_STRUCT_0007
-/* FP:from_mir.rs-0014 */ # [derive (Debug)] pub (crate) struct RawSpanFromMir { # [doc = " A span that has been extracted from a MIR statement/terminator, but"] # [doc = " hasn't been \"unexpanded\", so it might not lie within the function body"] # [doc = " span and might be part of an expansion with a different context."] pub (crate) raw_span : Span , pub (crate) bcb : BasicCoverageBlock , }
-/* FP:from_mir.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_spans_from_mir_FN_0008
-/* FP:from_mir.rs-0016 */ # [doc = " Generates an initial set of coverage spans from the statements and"] # [doc = " terminators in the function's MIR body, each associated with its"] # [doc = " corresponding node in the coverage graph."] # [doc = ""] # [doc = " This is necessarily an inexact process, because MIR isn't designed to"] # [doc = " capture source spans at the level of detail we would want for coverage,"] # [doc = " but it's good enough to be better than nothing."] pub (crate) fn extract_raw_spans_from_mir < 'tcx > (mir_body : & mir :: Body < 'tcx > , graph : & CoverageGraph ,) -> Vec < RawSpanFromMir > { let mut raw_spans = vec ! [] ; for (bcb , bcb_data) in graph . iter_enumerated () { let make_raw_span = | raw_span : Span | RawSpanFromMir { raw_span , bcb } ; for & bb in & bcb_data . basic_blocks { let bb_data = & mir_body [bb] ; let statements = bb_data . statements . iter () ; raw_spans . extend (statements . filter_map (filtered_statement_span) . map (make_raw_span)) ; let terminator = iter :: once (bb_data . terminator ()) ; raw_spans . extend (terminator . filter_map (filtered_terminator_span) . map (make_raw_span)) ; } } raw_spans }
-/* FP:from_mir.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_spans_from_mir_FN_0009
-/* FP:from_mir.rs-0018 */ # [doc = " If the MIR `Statement` has a span contributive to computing coverage spans,"] # [doc = " return it; otherwise return `None`."] fn filtered_statement_span (statement : & Statement < '_ >) -> Option < Span > { match statement . kind { StatementKind :: StorageLive (_) | StatementKind :: StorageDead (_) | StatementKind :: ConstEvalCounter | StatementKind :: BackwardIncompatibleDropHint { .. } | StatementKind :: Nop => None , StatementKind :: FakeRead (box (FakeReadCause :: ForGuardBinding , _)) => None , StatementKind :: FakeRead (_) | StatementKind :: Intrinsic (..) | StatementKind :: Coverage (CoverageKind :: SpanMarker ,) | StatementKind :: Assign (_) | StatementKind :: SetDiscriminant { .. } | StatementKind :: Deinit (..) | StatementKind :: Retag (_ , _) | StatementKind :: PlaceMention (..) | StatementKind :: AscribeUserType (_ , _) => Some (statement . source_info . span) , StatementKind :: Coverage (CoverageKind :: BlockMarker { .. }) => None , StatementKind :: Coverage (CoverageKind :: VirtualCounter { .. }) => bug ! ("Unexpected coverage statement found during coverage instrumentation: {statement:?}") , } }
-/* FP:from_mir.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_spans_from_mir_FN_0010
-/* FP:from_mir.rs-0020 */ # [doc = " If the MIR `Terminator` has a span contributive to computing coverage spans,"] # [doc = " return it; otherwise return `None`."] fn filtered_terminator_span (terminator : & Terminator < '_ >) -> Option < Span > { match terminator . kind { TerminatorKind :: Unreachable | TerminatorKind :: Assert { .. } | TerminatorKind :: Drop { .. } | TerminatorKind :: SwitchInt { .. } | TerminatorKind :: FalseEdge { .. } | TerminatorKind :: Goto { .. } => None , TerminatorKind :: Call { ref func , .. } | TerminatorKind :: TailCall { ref func , .. } => { let mut span = terminator . source_info . span ; if let mir :: Operand :: Constant (constant) = func && span . contains (constant . span) { span = constant . span ; } Some (span) } TerminatorKind :: UnwindResume | TerminatorKind :: UnwindTerminate (_) | TerminatorKind :: Return | TerminatorKind :: Yield { .. } | TerminatorKind :: CoroutineDrop | TerminatorKind :: FalseUnwind { .. } | TerminatorKind :: InlineAsm { .. } => Some (terminator . source_info . span) , } }
-/* FP:from_mir.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_spans_from_mir_STRUCT_0011
-/* FP:from_mir.rs-0022 */ # [derive (Debug)] pub (crate) struct Hole { pub (crate) span : Span , }
-/* FP:from_mir.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_coverage_spans_from_mir_IMPL_0012
-/* FP:from_mir.rs-0024 */ impl Hole { pub (crate) fn merge_if_overlapping_or_adjacent (& mut self , other : & mut Self) -> bool { if ! self . span . overlaps_or_adjacent (other . span) { return false ; } self . span = self . span . to (other . span) ; true } }
+// SRC: ../rust/compiler/rustc_mir_transform/src/coverage/spans/from_mir.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+use std::iter;
+
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::coverage::CoverageKind;
+use crate::rustc_complete::mir::{
+    self, FakeReadCause, Statement, StatementKind, Terminator, TerminatorKind,
+};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_complete::Span;
+
+use crate::coverage::graph::{BasicCoverageBlock, CoverageGraph};
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Debug)]
+pub(crate) struct RawSpanFromMir {
+    /// A span that has been extracted from a MIR statement/terminator, but
+    /// hasn't been "unexpanded", so it might not lie within the function body
+    /// span and might be part of an expansion with a different context.
+    pub(crate) raw_span: Span,
+    pub(crate) bcb: BasicCoverageBlock,
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=34 */
+
+/// Generates an initial set of coverage spans from the statements and
+/// terminators in the function's MIR body, each associated with its
+/// corresponding node in the coverage graph.
+///
+/// This is necessarily an inexact process, because MIR isn't designed to
+/// capture source spans at the level of detail we would want for coverage,
+/// but it's good enough to be better than nothing.
+pub(crate) fn extract_raw_spans_from_mir<'tcx>(
+    mir_body: &mir::Body<'tcx>,
+    graph: &CoverageGraph,
+) -> Vec<RawSpanFromMir> {
+    let mut raw_spans = vec![];
+
+    // We only care about blocks that are part of the coverage graph.
+    for (bcb, bcb_data) in graph.iter_enumerated() {
+        let make_raw_span = |raw_span: Span| RawSpanFromMir { raw_span, bcb };
+
+        // A coverage graph node can consist of multiple basic blocks.
+        for &bb in &bcb_data.basic_blocks {
+            let bb_data = &mir_body[bb];
+
+            let statements = bb_data.statements.iter();
+            raw_spans.extend(statements.filter_map(filtered_statement_span).map(make_raw_span));
+
+            // There's only one terminator, but wrap it in an iterator to
+            // mirror the handling of statements.
+            let terminator = iter::once(bb_data.terminator());
+            raw_spans.extend(terminator.filter_map(filtered_terminator_span).map(make_raw_span));
+        }
+    }
+
+    raw_spans
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=filtered_statement_span | COMPLEXITY=40 | LINES=54 */
+
+/// If the MIR `Statement` has a span contributive to computing coverage spans,
+/// return it; otherwise return `None`.
+fn filtered_statement_span(statement: &Statement<'_>) -> Option<Span> {
+    match statement.kind {
+        // These statements have spans that are often outside the scope of the executed source code
+        // for their parent `BasicBlock`.
+        StatementKind::StorageLive(_)
+        | StatementKind::StorageDead(_)
+        | StatementKind::ConstEvalCounter
+        | StatementKind::BackwardIncompatibleDropHint { .. }
+        | StatementKind::Nop => None,
+
+        // FIXME(#78546): MIR InstrumentCoverage - Can the source_info.span for `FakeRead`
+        // statements be more consistent?
+        //
+        // FakeReadCause::ForGuardBinding, in this example:
+        //     match somenum {
+        //         x if x < 1 => { ... }
+        //     }...
+        // The BasicBlock within the match arm code included one of these statements, but the span
+        // for it covered the `1` in this source. The actual statements have nothing to do with that
+        // source span:
+        //     FakeRead(ForGuardBinding, _4);
+        // where `_4` is:
+        //     _4 = &_1; (at the span for the first `x`)
+        // and `_1` is the `Place` for `somenum`.
+        //
+        // If and when the Issue is resolved, remove this special case match pattern:
+        StatementKind::FakeRead(box (FakeReadCause::ForGuardBinding, _)) => None,
+
+        // Retain spans from most other statements.
+        StatementKind::FakeRead(_)
+        | StatementKind::Intrinsic(..)
+        | StatementKind::Coverage(
+            // The purpose of `SpanMarker` is to be matched and accepted here.
+            CoverageKind::SpanMarker,
+        )
+        | StatementKind::Assign(_)
+        | StatementKind::SetDiscriminant { .. }
+        | StatementKind::Deinit(..)
+        | StatementKind::Retag(_, _)
+        | StatementKind::PlaceMention(..)
+        | StatementKind::AscribeUserType(_, _) => Some(statement.source_info.span),
+
+        // Block markers are used for branch coverage, so ignore them here.
+        StatementKind::Coverage(CoverageKind::BlockMarker { .. }) => None,
+
+        // These coverage statements should not exist prior to coverage instrumentation.
+        StatementKind::Coverage(CoverageKind::VirtualCounter { .. }) => bug!(
+            "Unexpected coverage statement found during coverage instrumentation: {statement:?}"
+        ),
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=filtered_terminator_span | COMPLEXITY=30 | LINES=38 */
+
+/// If the MIR `Terminator` has a span contributive to computing coverage spans,
+/// return it; otherwise return `None`.
+fn filtered_terminator_span(terminator: &Terminator<'_>) -> Option<Span> {
+    match terminator.kind {
+        // These terminators have spans that don't positively contribute to computing a reasonable
+        // span of actually executed source code. (For example, SwitchInt terminators extracted from
+        // an `if condition { block }` has a span that includes the executed block, if true,
+        // but for coverage, the code region executed, up to *and* through the SwitchInt,
+        // actually stops before the if's block.)
+        TerminatorKind::Unreachable
+        | TerminatorKind::Assert { .. }
+        | TerminatorKind::Drop { .. }
+        | TerminatorKind::SwitchInt { .. }
+        | TerminatorKind::FalseEdge { .. }
+        | TerminatorKind::Goto { .. } => None,
+
+        // Call `func` operand can have a more specific span when part of a chain of calls
+        TerminatorKind::Call { ref func, .. } | TerminatorKind::TailCall { ref func, .. } => {
+            let mut span = terminator.source_info.span;
+            if let mir::Operand::Constant(constant) = func
+                && span.contains(constant.span)
+            {
+                span = constant.span;
+            }
+            Some(span)
+        }
+
+        // Retain spans from all other terminators
+        TerminatorKind::UnwindResume
+        | TerminatorKind::UnwindTerminate(_)
+        | TerminatorKind::Return
+        | TerminatorKind::Yield { .. }
+        | TerminatorKind::CoroutineDrop
+        | TerminatorKind::FalseUnwind { .. }
+        | TerminatorKind::InlineAsm { .. } => Some(terminator.source_info.span),
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+
+#[derive(Debug)]
+pub(crate) struct Hole {
+    pub(crate) span: Span,
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
+
+impl Hole {
+    pub(crate) fn merge_if_overlapping_or_adjacent(&mut self, other: &mut Self) -> bool {
+        if !self.span.overlaps_or_adjacent(other.span) {
+            return false;
+        }
+
+        self.span = self.span.to(other.span);
+        true
+    }
+}

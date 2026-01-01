@@ -1,38 +1,143 @@
-/* FP:consumers.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_USE_0001
-/* FP:consumers.rs-0002 */ use crate :: rustc_data_structures :: fx :: FxHashMap ;
-/* FP:consumers.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_USE_0002
-/* FP:consumers.rs-0004 */ use crate :: rustc_complete :: def_id :: LocalDefId ;
-/* FP:consumers.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_USE_0003
-/* FP:consumers.rs-0006 */ use crate :: rustc_index :: IndexVec ;
-/* FP:consumers.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_USE_0004
-/* FP:consumers.rs-0008 */ use crate :: rustc_complete :: bug ;
-/* FP:consumers.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_USE_0005
-/* FP:consumers.rs-0010 */ use crate :: rustc_complete :: mir :: { Body , Promoted } ;
-/* FP:consumers.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_USE_0006
-/* FP:consumers.rs-0012 */ use crate :: rustc_complete :: ty :: TyCtxt ;
-/* FP:consumers.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_USE_0007
-/* FP:consumers.rs-0014 */ pub use super :: borrow_set :: { BorrowData , BorrowSet , TwoPhaseActivation } ;
-/* FP:consumers.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_USE_0008
-/* FP:consumers.rs-0016 */ pub use super :: constraints :: OutlivesConstraint ;
-/* FP:consumers.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_USE_0009
-/* FP:consumers.rs-0018 */ pub use super :: dataflow :: { BorrowIndex , Borrows , calculate_borrows_out_of_scope_at_location } ;
-/* FP:consumers.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_USE_0010
-/* FP:consumers.rs-0020 */ pub use super :: place_ext :: PlaceExt ;
-/* FP:consumers.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_USE_0011
-/* FP:consumers.rs-0022 */ pub use super :: places_conflict :: { PlaceConflictBias , places_conflict } ;
-/* FP:consumers.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_USE_0012
-/* FP:consumers.rs-0024 */ pub use super :: polonius :: legacy :: { PoloniusFacts as PoloniusInput , PoloniusLocationTable , PoloniusOutput , PoloniusRegionVid , RichLocation , RustcFacts , } ;
-/* FP:consumers.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_USE_0013
-/* FP:consumers.rs-0026 */ pub use super :: region_infer :: RegionInferenceContext ;
-/* FP:consumers.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_USE_0014
-/* FP:consumers.rs-0028 */ use crate :: BorrowCheckRootCtxt ;
-/* FP:consumers.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_STRUCT_0015
-/* FP:consumers.rs-0030 */ # [doc = " Struct used during mir borrowck to collect bodies with facts for a typeck root and all"] # [doc = " its nested bodies."] pub (crate) struct BorrowckConsumer < 'tcx > { options : ConsumerOptions , bodies : FxHashMap < LocalDefId , BodyWithBorrowckFacts < 'tcx > > , }
-/* FP:consumers.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_IMPL_0016
-/* FP:consumers.rs-0032 */ impl < 'tcx > BorrowckConsumer < 'tcx > { pub (crate) fn new (options : ConsumerOptions) -> Self { Self { options , bodies : Default :: default () } } pub (crate) fn insert_body (& mut self , def_id : LocalDefId , body : BodyWithBorrowckFacts < 'tcx >) { if self . bodies . insert (def_id , body) . is_some () { bug ! ("unexpected previous body for {def_id:?}") ; } } # [doc = " Should the Polonius input facts be computed?"] pub (crate) fn polonius_input (& self) -> bool { matches ! (self . options , ConsumerOptions :: PoloniusInputFacts | ConsumerOptions :: PoloniusOutputFacts) } # [doc = " Should we run Polonius and collect the output facts?"] pub (crate) fn polonius_output (& self) -> bool { matches ! (self . options , ConsumerOptions :: PoloniusOutputFacts) } }
-/* FP:consumers.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_ENUM_0017
-/* FP:consumers.rs-0034 */ # [doc = " Options determining the output behavior of [`get_bodies_with_borrowck_facts`]."] # [doc = ""] # [doc = " If executing under `-Z polonius` the choice here has no effect, and everything as if"] # [doc = " [`PoloniusOutputFacts`](ConsumerOptions::PoloniusOutputFacts) had been selected"] # [doc = " will be retrieved."] # [derive (Debug , Copy , Clone)] pub enum ConsumerOptions { # [doc = " Retrieve the [`Body`] along with the [`BorrowSet`]"] # [doc = " and [`RegionInferenceContext`]. If you would like the body only, use"] # [doc = " [`TyCtxt::mir_promoted`]."] # [doc = ""] # [doc = " These can be used in conjunction with [`calculate_borrows_out_of_scope_at_location`]."] RegionInferenceContext , # [doc = " The recommended option. Retrieves the maximal amount of information"] # [doc = " without significant slowdowns."] # [doc = ""] # [doc = " Implies [`RegionInferenceContext`](ConsumerOptions::RegionInferenceContext),"] # [doc = " and additionally retrieve the [`PoloniusLocationTable`] and [`PoloniusInput`] that"] # [doc = " would be given to Polonius. Critically, this does not run Polonius, which"] # [doc = " one may want to avoid due to performance issues on large bodies."] PoloniusInputFacts , # [doc = " Implies [`PoloniusInputFacts`](ConsumerOptions::PoloniusInputFacts),"] # [doc = " and additionally runs Polonius to calculate the [`PoloniusOutput`]."] PoloniusOutputFacts , }
-/* FP:consumers.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_STRUCT_0018
-/* FP:consumers.rs-0036 */ # [doc = " A `Body` with information computed by the borrow checker. This struct is"] # [doc = " intended to be consumed by compiler consumers."] # [doc = ""] # [doc = " We need to include the MIR body here because the region identifiers must"] # [doc = " match the ones in the Polonius facts."] pub struct BodyWithBorrowckFacts < 'tcx > { # [doc = " A mir body that contains region identifiers."] pub body : Body < 'tcx > , # [doc = " The mir bodies of promoteds."] pub promoted : IndexVec < Promoted , Body < 'tcx > > , # [doc = " The set of borrows occurring in `body` with data about them."] pub borrow_set : BorrowSet < 'tcx > , # [doc = " Context generated during borrowck, intended to be passed to"] # [doc = " [`calculate_borrows_out_of_scope_at_location`]."] pub region_inference_context : RegionInferenceContext < 'tcx > , # [doc = " The table that maps Polonius points to locations in the table."] # [doc = " Populated when using [`ConsumerOptions::PoloniusInputFacts`]"] # [doc = " or [`ConsumerOptions::PoloniusOutputFacts`]."] pub location_table : Option < PoloniusLocationTable > , # [doc = " Polonius input facts."] # [doc = " Populated when using [`ConsumerOptions::PoloniusInputFacts`]"] # [doc = " or [`ConsumerOptions::PoloniusOutputFacts`]."] pub input_facts : Option < Box < PoloniusInput > > , # [doc = " Polonius output facts. Populated when using"] # [doc = " [`ConsumerOptions::PoloniusOutputFacts`]."] pub output_facts : Option < Box < PoloniusOutput > > , }
-/* FP:consumers.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_consumers_FN_0019
-/* FP:consumers.rs-0038 */ # [doc = " This function computes borrowck facts for the given def id and all its nested bodies."] # [doc = " It must be called with a typeck root which will then borrowck all nested bodies as well."] # [doc = " The [`ConsumerOptions`] determine which facts are returned. This function makes a copy"] # [doc = " of the bodies because it needs to regenerate the region identifiers. It should never be"] # [doc = " invoked during a typical compilation session due to the unnecessary overhead of"] # [doc = " returning [`BodyWithBorrowckFacts`]."] # [doc = ""] # [doc = " Note:"] # [doc = " *   This function will panic if the required bodies were already stolen. This"] # [doc = "     can, for example, happen when requesting a body of a `const` function"] # [doc = "     because they are evaluated during typechecking. The panic can be avoided"] # [doc = "     by overriding the `mir_borrowck` query. You can find a complete example"] # [doc = "     that shows how to do this at `tests/ui-fulldeps/obtain-borrowck.rs`."] # [doc = ""] # [doc = " *   Polonius is highly unstable, so expect regular changes in its signature or other details."] pub fn get_bodies_with_borrowck_facts (tcx : TyCtxt < '_ > , root_def_id : LocalDefId , options : ConsumerOptions ,) -> FxHashMap < LocalDefId , BodyWithBorrowckFacts < '_ > > { let mut root_cx = BorrowCheckRootCtxt :: new (tcx , root_def_id , Some (BorrowckConsumer :: new (options))) ; root_cx . do_mir_borrowck () ; root_cx . consumer . unwrap () . bodies }
+// SRC: ../rust/compiler/rustc_borrowck/src/consumers.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
+// This file provides API for compiler consumers.
+
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_index::IndexVec;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::{Body, Promoted};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_complete::ty::TyCtxt;
+
+pub use super::borrow_set::{BorrowData, BorrowSet, TwoPhaseActivation};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+pub use super::constraints::OutlivesConstraint;
+pub use super::dataflow::{BorrowIndex, Borrows, calculate_borrows_out_of_scope_at_location};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+pub use super::place_ext::PlaceExt;
+pub use super::places_conflict::{PlaceConflictBias, places_conflict};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+pub use super::polonius::legacy::{
+    PoloniusFacts as PoloniusInput, PoloniusLocationTable, PoloniusOutput, PoloniusRegionVid,
+    RichLocation, RustcFacts,
+};
+/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=9 */
+pub use super::region_infer::RegionInferenceContext;
+use crate::BorrowCheckRootCtxt;
+
+/// Struct used during mir borrowck to collect bodies with facts for a typeck root and all
+/// its nested bodies.
+pub(crate) struct BorrowckConsumer<'tcx> {
+    options: ConsumerOptions,
+    bodies: FxHashMap<LocalDefId, BodyWithBorrowckFacts<'tcx>>,
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=25 */
+
+impl<'tcx> BorrowckConsumer<'tcx> {
+    pub(crate) fn new(options: ConsumerOptions) -> Self {
+        Self { options, bodies: Default::default() }
+    }
+
+    pub(crate) fn insert_body(&mut self, def_id: LocalDefId, body: BodyWithBorrowckFacts<'tcx>) {
+        if self.bodies.insert(def_id, body).is_some() {
+            bug!("unexpected previous body for {def_id:?}");
+        }
+    }
+
+    /// Should the Polonius input facts be computed?
+    pub(crate) fn polonius_input(&self) -> bool {
+        matches!(
+            self.options,
+            ConsumerOptions::PoloniusInputFacts | ConsumerOptions::PoloniusOutputFacts
+        )
+    }
+
+    /// Should we run Polonius and collect the output facts?
+    pub(crate) fn polonius_output(&self) -> bool {
+        matches!(self.options, ConsumerOptions::PoloniusOutputFacts)
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=26 */
+
+/// Options determining the output behavior of [`get_bodies_with_borrowck_facts`].
+///
+/// If executing under `-Z polonius` the choice here has no effect, and everything as if
+/// [`PoloniusOutputFacts`](ConsumerOptions::PoloniusOutputFacts) had been selected
+/// will be retrieved.
+#[derive(Debug, Copy, Clone)]
+pub enum ConsumerOptions {
+    /// Retrieve the [`Body`] along with the [`BorrowSet`]
+    /// and [`RegionInferenceContext`]. If you would like the body only, use
+    /// [`TyCtxt::mir_promoted`].
+    ///
+    /// These can be used in conjunction with [`calculate_borrows_out_of_scope_at_location`].
+    RegionInferenceContext,
+    /// The recommended option. Retrieves the maximal amount of information
+    /// without significant slowdowns.
+    ///
+    /// Implies [`RegionInferenceContext`](ConsumerOptions::RegionInferenceContext),
+    /// and additionally retrieve the [`PoloniusLocationTable`] and [`PoloniusInput`] that
+    /// would be given to Polonius. Critically, this does not run Polonius, which
+    /// one may want to avoid due to performance issues on large bodies.
+    PoloniusInputFacts,
+    /// Implies [`PoloniusInputFacts`](ConsumerOptions::PoloniusInputFacts),
+    /// and additionally runs Polonius to calculate the [`PoloniusOutput`].
+    PoloniusOutputFacts,
+}
+/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=BodyWithBorrowckFacts | COMPLEXITY=7 | LINES=28 */
+
+/// A `Body` with information computed by the borrow checker. This struct is
+/// intended to be consumed by compiler consumers.
+///
+/// We need to include the MIR body here because the region identifiers must
+/// match the ones in the Polonius facts.
+pub struct BodyWithBorrowckFacts<'tcx> {
+    /// A mir body that contains region identifiers.
+    pub body: Body<'tcx>,
+    /// The mir bodies of promoteds.
+    pub promoted: IndexVec<Promoted, Body<'tcx>>,
+    /// The set of borrows occurring in `body` with data about them.
+    pub borrow_set: BorrowSet<'tcx>,
+    /// Context generated during borrowck, intended to be passed to
+    /// [`calculate_borrows_out_of_scope_at_location`].
+    pub region_inference_context: RegionInferenceContext<'tcx>,
+    /// The table that maps Polonius points to locations in the table.
+    /// Populated when using [`ConsumerOptions::PoloniusInputFacts`]
+    /// or [`ConsumerOptions::PoloniusOutputFacts`].
+    pub location_table: Option<PoloniusLocationTable>,
+    /// Polonius input facts.
+    /// Populated when using [`ConsumerOptions::PoloniusInputFacts`]
+    /// or [`ConsumerOptions::PoloniusOutputFacts`].
+    pub input_facts: Option<Box<PoloniusInput>>,
+    /// Polonius output facts. Populated when using
+    /// [`ConsumerOptions::PoloniusOutputFacts`].
+    pub output_facts: Option<Box<PoloniusOutput>>,
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=get_bodies_with_borrowck_facts | COMPLEXITY=10 | LINES=26 */
+
+/// This function computes borrowck facts for the given def id and all its nested bodies.
+/// It must be called with a typeck root which will then borrowck all nested bodies as well.
+/// The [`ConsumerOptions`] determine which facts are returned. This function makes a copy
+/// of the bodies because it needs to regenerate the region identifiers. It should never be
+/// invoked during a typical compilation session due to the unnecessary overhead of
+/// returning [`BodyWithBorrowckFacts`].
+///
+/// Note:
+/// *   This function will panic if the required bodies were already stolen. This
+///     can, for example, happen when requesting a body of a `const` function
+///     because they are evaluated during typechecking. The panic can be avoided
+///     by overriding the `mir_borrowck` query. You can find a complete example
+///     that shows how to do this at `tests/ui-fulldeps/obtain-borrowck.rs`.
+///
+/// *   Polonius is highly unstable, so expect regular changes in its signature or other details.
+pub fn get_bodies_with_borrowck_facts(
+    tcx: TyCtxt<'_>,
+    root_def_id: LocalDefId,
+    options: ConsumerOptions,
+) -> FxHashMap<LocalDefId, BodyWithBorrowckFacts<'_>> {
+    let mut root_cx =
+        BorrowCheckRootCtxt::new(tcx, root_def_id, Some(BorrowckConsumer::new(options)));
+    root_cx.do_mir_borrowck();
+    root_cx.consumer.unwrap().bodies
+}

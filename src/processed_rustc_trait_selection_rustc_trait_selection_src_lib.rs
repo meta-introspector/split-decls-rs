@@ -1,9 +1,37 @@
-/* FP:lib.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_lib_MOD_0001
-/* FP:lib.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_lib_MOD_0002
-/* FP:lib.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_lib_MOD_0003
-/* FP:lib.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_lib_MOD_0004
-/* FP:lib.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_lib_MOD_0005
-/* FP:lib.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_lib_MOD_0006
-/* FP:lib.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_lib_MOD_0007
-/* FP:lib.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_lib_MACRO_0008
-/* FP:lib.rs-0016 */ rustc_fluent_macro :: fluent_messages ! { "../messages.ftl" }
+// SRC: ../rust/compiler/rustc_trait_selection/src/lib.rs
+/* AST_META: AST_ID=1 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=4 | LINES=42 */
+// This crate defines the trait resolution method.
+//
+// - **Traits.** Trait resolution is implemented in the `traits` module.
+//
+// For more information about how rustc works, see the [rustc-dev-guide].
+//
+// [rustc-dev-guide]: https://rustc-dev-guide.rust-lang.org/
+//
+// # Note
+//
+// This API is completely unstable and subject to change.
+
+// tidy-alphabetical-start
+#[allow(internal_features)]
+#[allow(rustc::diagnostic_outside_of_impl)]
+#[allow(rustc::untranslatable_diagnostic)]
+#[doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
+#[doc(rust_logo)]
+#[feature(assert_matches)]
+#[feature(associated_type_defaults)]
+#[feature(box_patterns)]
+#[feature(default_field_values)]
+#[feature(if_let_guard)]
+#[feature(iter_intersperse)]
+#[feature(iterator_try_reduce)]
+#[feature(never_type)]
+#[feature(rustdoc_internals)]
+#[feature(try_blocks)]
+#[feature(unwrap_infallible)]
+#[feature(yeet_expr)]
+#[recursion_limit = "512"] // For rustdoc
+// tidy-alphabetical-end
+
+
+rustc_fluent_macro::fluent_messages! { "../messages.ftl" }

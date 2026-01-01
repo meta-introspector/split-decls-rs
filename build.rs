@@ -4,50 +4,154 @@ use std::fs;
 use std::io::Write;
 use serde_json::Value;
 use syn::{parse_file, Item, ItemMod, Attribute, Meta, parse_str, visit::Visit};
-use quote::quote;
+use quote::{quote, ToTokens};
 
 fn semantic_patch_content(content: &str, file_name: &str) -> Result<String, Box<dyn std::error::Error>> {
-    // Try to parse as Rust code
-    match parse_file(content) {
-        Ok(mut file) => {
-            let mut ast_id_counter = 1u32;
-            let mut modified_content = String::new();
-            
-            // Add AST ID tracking to each item
-            for (item_idx, item) in file.items.iter().enumerate() {
-                let ast_id = format!("AST_{}_{}_{:04}", 
-                    file_name.replace(".rs", "").replace("/", "_"), 
-                    get_item_type(item), 
-                    ast_id_counter);
-                
-                // Add warning attribute with AST ID
-                modified_content.push_str(&format!("#[warn(unused_variables)] // {}\n", ast_id));
-                modified_content.push_str(&format!("{}\n", quote::quote!(#item)));
-                
-                ast_id_counter += 1;
+    // For now, use a simpler approach that preserves original formatting
+    // and just adds AST metadata without re-parsing
+    let mut modified_content = format!("// SRC: {}\n", file_name);
+    let mut ast_id_counter = 1u32;
+    
+    // Split content into logical blocks (functions, structs, etc.)
+    let mut current_block = String::new();
+    let mut brace_count = 0;
+    let mut in_string = false;
+    let mut escape_next = false;
+    
+    for line in content.lines() {
+        current_block.push_str(line);
+        current_block.push('\n');
+        
+        // Track braces and strings to find block boundaries
+        for ch in line.chars() {
+            if escape_next {
+                escape_next = false;
+                continue;
             }
             
-            Ok(modified_content)
+            match ch {
+                '\\' if in_string => escape_next = true,
+                '"' => in_string = !in_string,
+                '{' if !in_string => brace_count += 1,
+                '}' if !in_string => {
+                    brace_count -= 1;
+                    if brace_count == 0 && !current_block.trim().is_empty() {
+                        // End of a top-level block
+                        let ast_metadata = format!(
+                            "/* AST_META: AST_ID={} | TYPE={} | NAME={} | COMPLEXITY={} | LINES={} */",
+                            ast_id_counter,
+                            get_block_type(&current_block),
+                            get_block_name(&current_block),
+                            calculate_ast_complexity(&current_block),
+                            current_block.lines().count()
+                        );
+                        
+                        modified_content.push_str(&ast_metadata);
+                        modified_content.push('\n');
+                        modified_content.push_str(&current_block);
+                        
+                        current_block.clear();
+                        ast_id_counter += 1;
+                    }
+                },
+                _ => {}
+            }
         }
-        Err(_) => {
-            // If parsing fails, fall back to original content with file-level AST ID
-            let ast_id = format!("AST_{}_UNPARSEABLE_0001", 
-                file_name.replace(".rs", "").replace("/", "_"));
-            Ok(format!("#[warn(unused_variables)] // {}\n{}", ast_id, content))
+    }
+    
+    // Handle any remaining content
+    if !current_block.trim().is_empty() {
+        let ast_metadata = format!(
+            "/* AST_META: AST_ID={} | TYPE={} | NAME={} | COMPLEXITY={} | LINES={} */",
+            ast_id_counter,
+            get_block_type(&current_block),
+            get_block_name(&current_block),
+            calculate_ast_complexity(&current_block),
+            current_block.lines().count()
+        );
+        
+        modified_content.push_str(&ast_metadata);
+        modified_content.push('\n');
+        modified_content.push_str(&current_block);
+    }
+    
+    Ok(modified_content)
+}
+
+fn get_block_type(block: &str) -> &str {
+    let trimmed = block.trim();
+    if trimmed.contains("fn ") { "FUNCTION" }
+    else if trimmed.contains("struct ") { "STRUCT" }
+    else if trimmed.contains("enum ") { "ENUM" }
+    else if trimmed.contains("impl ") { "IMPL" }
+    else if trimmed.contains("use ") { "USE" }
+    else if trimmed.contains("mod ") { "MODULE" }
+    else { "BLOCK" }
+}
+
+fn get_block_name(block: &str) -> String {
+    // Simple name extraction
+    for line in block.lines() {
+        let trimmed = line.trim();
+        if let Some(name) = extract_name_from_line(trimmed) {
+            return name;
         }
+    }
+    "UNNAMED".to_string()
+}
+
+fn extract_name_from_line(line: &str) -> Option<String> {
+    if line.starts_with("pub fn ") || line.starts_with("fn ") {
+        let start = if line.starts_with("pub fn ") { 7 } else { 3 };
+        let name = line[start..].split_whitespace().next()?
+            .split('(').next()?
+            .split('<').next()?;
+        Some(name.to_string())
+    } else if line.starts_with("pub struct ") || line.starts_with("struct ") {
+        let start = if line.starts_with("pub struct ") { 11 } else { 7 };
+        let name = line[start..].split_whitespace().next()?
+            .split('<').next()?;
+        Some(name.to_string())
+    } else {
+        None
     }
 }
 
+
+
+fn calculate_ast_complexity(content: &str) -> u32 {
+    let mut score = 1;
+    
+    // Count complexity indicators
+    score += content.matches('{').count() as u32;
+    score += content.matches("if ").count() as u32 * 2;
+    score += content.matches("match ").count() as u32 * 3;
+    score += content.matches("for ").count() as u32 * 2;
+    score += content.matches("while ").count() as u32 * 2;
+    score += content.matches("loop ").count() as u32 * 2;
+    score += content.matches("unsafe ").count() as u32 * 4;
+    score += content.matches("macro_rules!").count() as u32 * 5;
+    
+    // Length complexity
+    score += (content.len() / 500) as u32;
+    
+    score.max(1)
+}
+
+
+
 fn record_ast_patch(ast_id: &str, patch_type: &str, original: &str, replacement: &str) -> Result<(), Box<dyn std::error::Error>> {
     let patch_record = format!(
-        "# AST Patch Record: {}\n\n## Patch Type: {}\n\n## Original:\n```rust\n{}\n```\n\n## Replacement:\n```rust\n{}\n```\n\n## Applied: {}\n",
-        ast_id, patch_type, original, replacement, chrono::Utc::now().format("%Y-%m-%d %H:%M:%S UTC")
+        "# AST Patch Record: {}\n\n## Patch Type: {}\n\n## Original:\n```rust\n{}\n```\n\n## Replacement:\n```rust\n{}\n```\n\n## Applied: timestamp\n",
+        ast_id, patch_type, original, replacement
     );
     
     let patch_file = format!("proofs/ast_patch_{}.md", ast_id.replace("::", "_"));
     fs::write(patch_file, patch_record)?;
     Ok(())
 }
+
+fn apply_ast_patches(content: &str, file_name: &str) -> Result<String, Box<dyn std::error::Error>> {
     let mut patched_content = content.to_string();
     
     // Check for AST patch files and replace specific nodes
@@ -500,6 +604,95 @@ fn get_item_type(item: &Item) -> &'static str {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    println!("🔧 Incremental Build.rs - Processing files one by one");
+    
+    // Check for incremental mode flag
+    let incremental = std::env::var("INCREMENTAL").is_ok();
+    let max_files = if incremental {
+        std::env::var("MAX_FILES")
+            .unwrap_or("10".to_string())
+            .parse::<usize>()
+            .unwrap_or(10)
+    } else {
+        usize::MAX
+    };
+    
+    println!("📊 Mode: {} (max {} files)", 
+        if incremental { "INCREMENTAL" } else { "FULL" }, 
+        if max_files == usize::MAX { "ALL".to_string() } else { max_files.to_string() }
+    );
+    
+    let symbol_map_path = "symbol_map.json.gz";
+    if !Path::new(symbol_map_path).exists() {
+        eprintln!("❌ Symbol map not found: {}", symbol_map_path);
+        return Ok(());
+    }
+    
+    let symbol_map = load_symbol_map(symbol_map_path)?;
+    let mut processed_count = 0;
+    
+    for (file_path, _) in symbol_map.iter() {
+        if processed_count >= max_files {
+            println!("🛑 Reached max files limit ({})", max_files);
+            break;
+        }
+        
+        print!("[{:3}] Processing {} ... ", processed_count + 1, file_path);
+        
+        match process_single_file(file_path) {
+            Ok(_) => {
+                println!("✅");
+                processed_count += 1;
+            }
+            Err(e) => {
+                println!("❌ {}", e);
+                if incremental {
+                    println!("    Skipping due to error in incremental mode");
+                    continue;
+                } else {
+                    return Err(e);
+                }
+            }
+        }
+    }
+    
+    println!("🎯 Processed {} files successfully", processed_count);
+    Ok(())
+}
+
+fn process_single_file(file_path: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let full_path = Path::new("../rust").join(file_path);
+    
+    if !full_path.exists() {
+        return Err(format!("File not found: {}", full_path.display()).into());
+    }
+    
+    let content = fs::read_to_string(&full_path)?;
+    
+    // Skip transformations for files containing cfg(test)
+    if content.contains("#[cfg(test)]") || content.contains("#[cfg(all(unix, test))]") {
+        return Ok(());
+    }
+    
+    // Apply semantic patches with comprehensive AST metadata
+    let patched_content = semantic_patch_content(&content, file_path)?;
+    
+    // Apply targeted AST patches
+    let patched_content = apply_ast_patches(&patched_content, file_path)?;
+    
+    // Fix super::prelude imports
+    let patched_content = patched_content.replace("super::prelude", "crate::prelude");
+    
+    // Generate output filename
+    let output_filename = format!("processed_{}", 
+        file_path.replace("/", "_").replace(".rs", ".rs"));
+    let output_path = Path::new("src").join(output_filename);
+    
+    // Write the processed file
+    fs::write(&output_path, patched_content)?;
+    
+    Ok(())
+}
     println!("🔧 Building rustc from symbol_map.json...");
     
     // Set required rustc environment variables
@@ -852,30 +1045,11 @@ fn generate_complete_includes(crate_files: &HashMap<String, Vec<String>>) -> Res
                         continue;
                     }
                     
-                    // Apply semantic patches first (only for non-test files)
+                    // Apply semantic patches with comprehensive AST metadata
                     patched_content = semantic_patch_content(&patched_content, &file)?;
                     
                     // Apply targeted AST patches
                     patched_content = apply_ast_patches(&patched_content, &file)?;
-                    
-                    // Add fingerprint comments for auditing (skip cfg(test) lines)
-                    let mut fingerprinted_content = String::new();
-                    for (line_num, line) in patched_content.lines().enumerate() {
-                        // Skip any lines with cfg(test) - leave them untouched
-                        if line.contains("#[cfg(test)]") || line.contains("#[cfg(all(unix, test))]") {
-                            fingerprinted_content.push_str(line);
-                            fingerprinted_content.push('\n');
-                            continue;
-                        }
-                        
-                        let fingerprint = format!("/* FP:{}-{:04} */ {}", 
-                            file.split('/').last().unwrap_or("unknown"), 
-                            line_num + 1, 
-                            line);
-                        fingerprinted_content.push_str(&fingerprint);
-                        fingerprinted_content.push('\n');
-                    }
-                    patched_content = fingerprinted_content;
                     
                     // Fix super::prelude imports
                     patched_content = patched_content.replace("super::prelude", "crate::prelude");

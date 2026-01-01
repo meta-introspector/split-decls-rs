@@ -1,24 +1,146 @@
-/* FP:probe.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_eval_ctxt_probe_USE_0001
-/* FP:probe.rs-0002 */ use std :: marker :: PhantomData ;
-/* FP:probe.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_eval_ctxt_probe_USE_0002
-/* FP:probe.rs-0004 */ use rustc_type_ir :: search_graph :: CandidateHeadUsages ;
-/* FP:probe.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_eval_ctxt_probe_USE_0003
-/* FP:probe.rs-0006 */ use rustc_type_ir :: { InferCtxtLike , Interner } ;
-/* FP:probe.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_eval_ctxt_probe_USE_0004
-/* FP:probe.rs-0008 */ use tracing :: instrument ;
-/* FP:probe.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_eval_ctxt_probe_USE_0005
-/* FP:probe.rs-0010 */ use crate :: delegate :: SolverDelegate ;
-/* FP:probe.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_eval_ctxt_probe_USE_0006
-/* FP:probe.rs-0012 */ use crate :: solve :: assembly :: Candidate ;
-/* FP:probe.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_eval_ctxt_probe_USE_0007
-/* FP:probe.rs-0014 */ use crate :: solve :: { BuiltinImplSource , CandidateSource , EvalCtxt , NoSolution , QueryResult , inspect , } ;
-/* FP:probe.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_eval_ctxt_probe_STRUCT_0008
-/* FP:probe.rs-0016 */ pub (in crate :: solve) struct ProbeCtxt < 'me , 'a , D , I , F , T > where D : SolverDelegate < Interner = I > , I : Interner , { ecx : & 'me mut EvalCtxt < 'a , D , I > , probe_kind : F , _result : PhantomData < T > , }
-/* FP:probe.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_eval_ctxt_probe_IMPL_0009
-/* FP:probe.rs-0018 */ impl < D , I , F , T > ProbeCtxt < '_ , '_ , D , I , F , T > where F : FnOnce (& T) -> inspect :: ProbeKind < I > , D : SolverDelegate < Interner = I > , I : Interner , { pub (in crate :: solve) fn enter_single_candidate (self , f : impl FnOnce (& mut EvalCtxt < '_ , D >) -> T ,) -> (T , CandidateHeadUsages) { self . ecx . search_graph . enter_single_candidate () ; let mut candidate_usages = CandidateHeadUsages :: default () ; let result = self . enter (| ecx | { let result = f (ecx) ; candidate_usages = ecx . search_graph . finish_single_candidate () ; result }) ; (result , candidate_usages) } pub (in crate :: solve) fn enter (self , f : impl FnOnce (& mut EvalCtxt < '_ , D >) -> T) -> T { let ProbeCtxt { ecx : outer , probe_kind , _result } = self ; let delegate = outer . delegate ; let max_input_universe = outer . max_input_universe ; let mut nested = EvalCtxt { delegate , variables : outer . variables , var_values : outer . var_values , current_goal_kind : outer . current_goal_kind , max_input_universe , initial_opaque_types_storage_num_entries : outer . initial_opaque_types_storage_num_entries , search_graph : outer . search_graph , nested_goals : outer . nested_goals . clone () , origin_span : outer . origin_span , tainted : outer . tainted , inspect : outer . inspect . take_and_enter_probe () , } ; let r = nested . delegate . probe (| | { let r = f (& mut nested) ; nested . inspect . probe_final_state (delegate , max_input_universe) ; r }) ; if ! nested . inspect . is_noop () { let probe_kind = probe_kind (& r) ; nested . inspect . probe_kind (probe_kind) ; outer . inspect = nested . inspect . finish_probe () ; } r } }
-/* FP:probe.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_eval_ctxt_probe_STRUCT_0010
-/* FP:probe.rs-0020 */ pub (in crate :: solve) struct TraitProbeCtxt < 'me , 'a , D , I , F > where D : SolverDelegate < Interner = I > , I : Interner , { cx : ProbeCtxt < 'me , 'a , D , I , F , QueryResult < I > > , source : CandidateSource < I > , }
-/* FP:probe.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_eval_ctxt_probe_IMPL_0011
-/* FP:probe.rs-0022 */ impl < D , I , F > TraitProbeCtxt < '_ , '_ , D , I , F > where D : SolverDelegate < Interner = I > , I : Interner , F : FnOnce (& QueryResult < I >) -> inspect :: ProbeKind < I > , { # [instrument (level = "debug" , skip_all , fields (source = ? self . source))] pub (in crate :: solve) fn enter (self , f : impl FnOnce (& mut EvalCtxt < '_ , D >) -> QueryResult < I > ,) -> Result < Candidate < I > , NoSolution > { let (result , head_usages) = self . cx . enter_single_candidate (f) ; result . map (| result | Candidate { source : self . source , result , head_usages }) } }
-/* FP:probe.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_eval_ctxt_probe_IMPL_0012
-/* FP:probe.rs-0024 */ impl < 'a , D , I > EvalCtxt < 'a , D , I > where D : SolverDelegate < Interner = I > , I : Interner , { # [doc = " `probe_kind` is only called when proof tree building is enabled so it can be"] # [doc = " as expensive as necessary to output the desired information."] pub (in crate :: solve) fn probe < F , T > (& mut self , probe_kind : F) -> ProbeCtxt < '_ , 'a , D , I , F , T > where F : FnOnce (& T) -> inspect :: ProbeKind < I > , { ProbeCtxt { ecx : self , probe_kind , _result : PhantomData } } pub (in crate :: solve) fn probe_builtin_trait_candidate (& mut self , source : BuiltinImplSource ,) -> TraitProbeCtxt < '_ , 'a , D , I , impl FnOnce (& QueryResult < I >) -> inspect :: ProbeKind < I > > { self . probe_trait_candidate (CandidateSource :: BuiltinImpl (source)) } pub (in crate :: solve) fn probe_trait_candidate (& mut self , source : CandidateSource < I > ,) -> TraitProbeCtxt < '_ , 'a , D , I , impl FnOnce (& QueryResult < I >) -> inspect :: ProbeKind < I > > { TraitProbeCtxt { cx : ProbeCtxt { ecx : self , probe_kind : move | result : & QueryResult < I > | inspect :: ProbeKind :: TraitCandidate { source , result : * result , } , _result : PhantomData , } , source , } } }
+// SRC: ../rust/compiler/rustc_next_trait_solver/src/solve/eval_ctxt/probe.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use std::marker::PhantomData;
+
+use rustc_type_ir::search_graph::CandidateHeadUsages;
+use rustc_type_ir::{InferCtxtLike, Interner};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+use tracing::instrument;
+
+use crate::delegate::SolverDelegate;
+use crate::solve::assembly::Candidate;
+use crate::solve::{
+    BuiltinImplSource, CandidateSource, EvalCtxt, NoSolution, QueryResult, inspect,
+};
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
+
+pub struct ProbeCtxt<'me, 'a, D, I, F, T>
+where
+    D: SolverDelegate<Interner = I>,
+    I: Interner,
+{
+    ecx: &'me mut EvalCtxt<'a, D, I>,
+    probe_kind: F,
+    _result: PhantomData<T>,
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=53 */
+
+impl<D, I, F, T> ProbeCtxt<'_, '_, D, I, F, T>
+where
+    F: FnOnce(&T) -> inspect::ProbeKind<I>,
+    D: SolverDelegate<Interner = I>,
+    I: Interner,
+{
+    pub fn enter_single_candidate(
+        self,
+        f: impl FnOnce(&mut EvalCtxt<'_, D>) -> T,
+    ) -> (T, CandidateHeadUsages) {
+        self.ecx.search_graph.enter_single_candidate();
+        let mut candidate_usages = CandidateHeadUsages::default();
+        let result = self.enter(|ecx| {
+            let result = f(ecx);
+            candidate_usages = ecx.search_graph.finish_single_candidate();
+            result
+        });
+        (result, candidate_usages)
+    }
+
+    pub fn enter(self, f: impl FnOnce(&mut EvalCtxt<'_, D>) -> T) -> T {
+        let ProbeCtxt { ecx: outer, probe_kind, _result } = self;
+
+        let delegate = outer.delegate;
+        let max_input_universe = outer.max_input_universe;
+        let mut nested = EvalCtxt {
+            delegate,
+            variables: outer.variables,
+            var_values: outer.var_values,
+            current_goal_kind: outer.current_goal_kind,
+            max_input_universe,
+            initial_opaque_types_storage_num_entries: outer
+                .initial_opaque_types_storage_num_entries,
+            search_graph: outer.search_graph,
+            nested_goals: outer.nested_goals.clone(),
+            origin_span: outer.origin_span,
+            tainted: outer.tainted,
+            inspect: outer.inspect.take_and_enter_probe(),
+        };
+        let r = nested.delegate.probe(|| {
+            let r = f(&mut nested);
+            nested.inspect.probe_final_state(delegate, max_input_universe);
+            r
+        });
+        if !nested.inspect.is_noop() {
+            let probe_kind = probe_kind(&r);
+            nested.inspect.probe_kind(probe_kind);
+            outer.inspect = nested.inspect.finish_probe();
+        }
+        r
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+
+pub struct TraitProbeCtxt<'me, 'a, D, I, F>
+where
+    D: SolverDelegate<Interner = I>,
+    I: Interner,
+{
+    cx: ProbeCtxt<'me, 'a, D, I, F, QueryResult<I>>,
+    source: CandidateSource<I>,
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=16 */
+
+impl<D, I, F> TraitProbeCtxt<'_, '_, D, I, F>
+where
+    D: SolverDelegate<Interner = I>,
+    I: Interner,
+    F: FnOnce(&QueryResult<I>) -> inspect::ProbeKind<I>,
+{
+    #[instrument(level = "debug", skip_all, fields(source = ?self.source))]
+    pub fn enter(
+        self,
+        f: impl FnOnce(&mut EvalCtxt<'_, D>) -> QueryResult<I>,
+    ) -> Result<Candidate<I>, NoSolution> {
+        let (result, head_usages) = self.cx.enter_single_candidate(f);
+        result.map(|result| Candidate { source: self.source, result, head_usages })
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=39 */
+
+impl<'a, D, I> EvalCtxt<'a, D, I>
+where
+    D: SolverDelegate<Interner = I>,
+    I: Interner,
+{
+    /// `probe_kind` is only called when proof tree building is enabled so it can be
+    /// as expensive as necessary to output the desired information.
+    pub fn probe<F, T>(&mut self, probe_kind: F) -> ProbeCtxt<'_, 'a, D, I, F, T>
+    where
+        F: FnOnce(&T) -> inspect::ProbeKind<I>,
+    {
+        ProbeCtxt { ecx: self, probe_kind, _result: PhantomData }
+    }
+
+    pub fn probe_builtin_trait_candidate(
+        &mut self,
+        source: BuiltinImplSource,
+    ) -> TraitProbeCtxt<'_, 'a, D, I, impl FnOnce(&QueryResult<I>) -> inspect::ProbeKind<I>> {
+        self.probe_trait_candidate(CandidateSource::BuiltinImpl(source))
+    }
+
+    pub fn probe_trait_candidate(
+        &mut self,
+        source: CandidateSource<I>,
+    ) -> TraitProbeCtxt<'_, 'a, D, I, impl FnOnce(&QueryResult<I>) -> inspect::ProbeKind<I>> {
+        TraitProbeCtxt {
+            cx: ProbeCtxt {
+                ecx: self,
+                probe_kind: move |result: &QueryResult<I>| inspect::ProbeKind::TraitCandidate {
+                    source,
+                    result: *result,
+                },
+                _result: PhantomData,
+            },
+            source,
+        }
+    }
+}

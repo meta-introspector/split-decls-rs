@@ -1,58 +1,472 @@
-/* FP:util.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_USE_0001
-/* FP:util.rs-0002 */ use std :: collections :: VecDeque ;
-/* FP:util.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_USE_0002
-/* FP:util.rs-0004 */ use crate :: rustc_data_structures :: fx :: { FxHashSet , FxIndexMap } ;
-/* FP:util.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_USE_0003
-/* FP:util.rs-0006 */ use crate :: rustc_complete :: LangItem ;
-/* FP:util.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_USE_0004
-/* FP:util.rs-0008 */ use crate :: rustc_complete :: def_id :: DefId ;
-/* FP:util.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_USE_0005
-/* FP:util.rs-0010 */ use crate :: rustc_infer :: infer :: InferCtxt ;
-/* FP:util.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_USE_0006
-/* FP:util.rs-0012 */ use crate :: rustc_infer :: traits :: PolyTraitObligation ;
-/* FP:util.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_USE_0007
-/* FP:util.rs-0014 */ pub use crate :: rustc_infer :: traits :: util :: * ;
-/* FP:util.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_USE_0008
-/* FP:util.rs-0016 */ use crate :: rustc_complete :: bug ;
-/* FP:util.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_USE_0009
-/* FP:util.rs-0018 */ use crate :: rustc_complete :: ty :: fast_reject :: DeepRejectCtxt ;
-/* FP:util.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_USE_0010
-/* FP:util.rs-0020 */ use crate :: rustc_complete :: ty :: { self , PolyTraitPredicate , PredicatePolarity , SizedTraitKind , TraitPredicate , TraitRef , Ty , TyCtxt , TypeFoldable , TypeFolder , TypeSuperFoldable , TypeVisitableExt , } ;
-/* FP:util.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_USE_0011
-/* FP:util.rs-0022 */ pub use rustc_next_trait_solver :: placeholder :: BoundVarReplacer ;
-/* FP:util.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_USE_0012
-/* FP:util.rs-0024 */ use crate :: rustc_complete :: Span ;
-/* FP:util.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_USE_0013
-/* FP:util.rs-0026 */ use smallvec :: { SmallVec , smallvec } ;
-/* FP:util.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_USE_0014
-/* FP:util.rs-0028 */ use tracing :: debug ;
-/* FP:util.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_FN_0015
-/* FP:util.rs-0030 */ # [doc = " Return the trait and projection predicates that come from eagerly expanding the"] # [doc = " trait aliases in the list of clauses. For each trait predicate, record a stack"] # [doc = " of spans that trace from the user-written trait alias bound. For projection predicates,"] # [doc = " just record the span of the projection itself."] # [doc = ""] # [doc = " For trait aliases, we don't deduplicte the predicates, since we currently do not"] # [doc = " consider duplicated traits as a single trait for the purposes of our \"one trait principal\""] # [doc = " restriction; however, for projections we do deduplicate them."] # [doc = ""] # [doc = " ```rust,ignore (fails)"] # [doc = " trait Bar {}"] # [doc = " trait Foo = Bar + Bar;"] # [doc = ""] # [doc = " let dyn_incompatible: dyn Foo; // bad, two `Bar` principals."] # [doc = " ```"] pub fn expand_trait_aliases < 'tcx > (tcx : TyCtxt < 'tcx > , clauses : impl IntoIterator < Item = (ty :: Clause < 'tcx > , Span) > ,) -> (Vec < (ty :: PolyTraitPredicate < 'tcx > , SmallVec < [Span ; 1] >) > , Vec < (ty :: PolyProjectionPredicate < 'tcx > , Span) > ,) { let mut trait_preds = vec ! [] ; let mut projection_preds = vec ! [] ; let mut seen_projection_preds = FxHashSet :: default () ; let mut queue : VecDeque < _ > = clauses . into_iter () . map (| (p , s) | (p , smallvec ! [s])) . collect () ; while let Some ((clause , spans)) = queue . pop_front () { match clause . kind () . skip_binder () { ty :: ClauseKind :: Trait (trait_pred) => { if tcx . is_trait_alias (trait_pred . def_id ()) { queue . extend (tcx . explicit_super_predicates_of (trait_pred . def_id ()) . iter_identity_copied () . map (| (super_clause , span) | { let mut spans = spans . clone () ; spans . push (span) ; (super_clause . instantiate_supertrait (tcx , clause . kind () . rebind (trait_pred . trait_ref) ,) , spans ,) }) ,) ; } else { trait_preds . push ((clause . kind () . rebind (trait_pred) , spans)) ; } } ty :: ClauseKind :: Projection (projection_pred) => { let projection_pred = clause . kind () . rebind (projection_pred) ; if ! seen_projection_preds . insert (tcx . anonymize_bound_vars (projection_pred)) { continue ; } projection_preds . push ((projection_pred , * spans . last () . unwrap ())) ; } ty :: ClauseKind :: RegionOutlives (..) | ty :: ClauseKind :: TypeOutlives (..) | ty :: ClauseKind :: ConstArgHasType (_ , _) | ty :: ClauseKind :: WellFormed (_) | ty :: ClauseKind :: ConstEvaluatable (_) | ty :: ClauseKind :: UnstableFeature (_) | ty :: ClauseKind :: HostEffect (..) => { } } } (trait_preds , projection_preds) }
-/* FP:util.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_FN_0016
-/* FP:util.rs-0032 */ # [doc = " Casts a trait reference into a reference to one of its super"] # [doc = " traits; returns `None` if `target_trait_def_id` is not a"] # [doc = " supertrait."] pub fn upcast_choices < 'tcx > (tcx : TyCtxt < 'tcx > , source_trait_ref : ty :: PolyTraitRef < 'tcx > , target_trait_def_id : DefId ,) -> Vec < ty :: PolyTraitRef < 'tcx > > { if source_trait_ref . def_id () == target_trait_def_id { return vec ! [source_trait_ref] ; } supertraits (tcx , source_trait_ref) . filter (| r | r . def_id () == target_trait_def_id) . collect () }
-/* FP:util.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_FN_0017
-/* FP:util.rs-0034 */ pub (crate) fn closure_trait_ref_and_return_type < 'tcx > (tcx : TyCtxt < 'tcx > , fn_trait_def_id : DefId , self_ty : Ty < 'tcx > , sig : ty :: PolyFnSig < 'tcx > , tuple_arguments : TupleArgumentsFlag ,) -> ty :: Binder < 'tcx , (ty :: TraitRef < 'tcx > , Ty < 'tcx >) > { assert ! (! self_ty . has_escaping_bound_vars ()) ; let arguments_tuple = match tuple_arguments { TupleArgumentsFlag :: No => sig . skip_binder () . inputs () [0] , TupleArgumentsFlag :: Yes => Ty :: new_tup (tcx , sig . skip_binder () . inputs ()) , } ; let trait_ref = ty :: TraitRef :: new (tcx , fn_trait_def_id , [self_ty , arguments_tuple]) ; sig . map_bound (| sig | (trait_ref , sig . output ())) }
-/* FP:util.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_FN_0018
-/* FP:util.rs-0036 */ pub (crate) fn coroutine_trait_ref_and_outputs < 'tcx > (tcx : TyCtxt < 'tcx > , fn_trait_def_id : DefId , self_ty : Ty < 'tcx > , sig : ty :: GenSig < TyCtxt < 'tcx > > ,) -> (ty :: TraitRef < 'tcx > , Ty < 'tcx > , Ty < 'tcx >) { assert ! (! self_ty . has_escaping_bound_vars ()) ; let trait_ref = ty :: TraitRef :: new (tcx , fn_trait_def_id , [self_ty , sig . resume_ty]) ; (trait_ref , sig . yield_ty , sig . return_ty) }
-/* FP:util.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_FN_0019
-/* FP:util.rs-0038 */ pub (crate) fn future_trait_ref_and_outputs < 'tcx > (tcx : TyCtxt < 'tcx > , fn_trait_def_id : DefId , self_ty : Ty < 'tcx > , sig : ty :: GenSig < TyCtxt < 'tcx > > ,) -> (ty :: TraitRef < 'tcx > , Ty < 'tcx >) { assert ! (! self_ty . has_escaping_bound_vars ()) ; let trait_ref = ty :: TraitRef :: new (tcx , fn_trait_def_id , [self_ty]) ; (trait_ref , sig . return_ty) }
-/* FP:util.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_FN_0020
-/* FP:util.rs-0040 */ pub (crate) fn iterator_trait_ref_and_outputs < 'tcx > (tcx : TyCtxt < 'tcx > , iterator_def_id : DefId , self_ty : Ty < 'tcx > , sig : ty :: GenSig < TyCtxt < 'tcx > > ,) -> (ty :: TraitRef < 'tcx > , Ty < 'tcx >) { assert ! (! self_ty . has_escaping_bound_vars ()) ; let trait_ref = ty :: TraitRef :: new (tcx , iterator_def_id , [self_ty]) ; (trait_ref , sig . yield_ty) }
-/* FP:util.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_FN_0021
-/* FP:util.rs-0042 */ pub (crate) fn async_iterator_trait_ref_and_outputs < 'tcx > (tcx : TyCtxt < 'tcx > , async_iterator_def_id : DefId , self_ty : Ty < 'tcx > , sig : ty :: GenSig < TyCtxt < 'tcx > > ,) -> (ty :: TraitRef < 'tcx > , Ty < 'tcx >) { assert ! (! self_ty . has_escaping_bound_vars ()) ; let trait_ref = ty :: TraitRef :: new (tcx , async_iterator_def_id , [self_ty]) ; (trait_ref , sig . yield_ty) }
-/* FP:util.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_FN_0022
-/* FP:util.rs-0044 */ pub fn impl_item_is_final (tcx : TyCtxt < '_ > , assoc_item : & ty :: AssocItem) -> bool { assoc_item . defaultness (tcx) . is_final () && tcx . defaultness (assoc_item . container_id (tcx)) . is_final () }
-/* FP:util.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_ENUM_0023
-/* FP:util.rs-0046 */ pub (crate) enum TupleArgumentsFlag { Yes , No , }
-/* FP:util.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_FN_0024
-/* FP:util.rs-0048 */ # [doc = " Executes `f` on `value` after replacing all escaping bound variables with placeholders"] # [doc = " and then replaces these placeholders with the original bound variables in the result."] # [doc = ""] # [doc = " In most places, bound variables should be replaced right when entering a binder, making"] # [doc = " this function unnecessary. However, normalization currently does not do that, so we have"] # [doc = " to do this lazily."] # [doc = ""] # [doc = " You should not add any additional uses of this function, at least not without first"] # [doc = " discussing it with t-types."] # [doc = ""] # [doc = " FIXME(@lcnr): We may even consider experimenting with eagerly replacing bound vars during"] # [doc = " normalization as well, at which point this function will be unnecessary and can be removed."] pub fn with_replaced_escaping_bound_vars < 'a , 'tcx , T : TypeFoldable < TyCtxt < 'tcx > > , R : TypeFoldable < TyCtxt < 'tcx > > , > (infcx : & 'a InferCtxt < 'tcx > , universe_indices : & 'a mut Vec < Option < ty :: UniverseIndex > > , value : T , f : impl FnOnce (T) -> R ,) -> R { if value . has_escaping_bound_vars () { let (value , mapped_regions , mapped_types , mapped_consts) = BoundVarReplacer :: replace_bound_vars (infcx , universe_indices , value) ; let result = f (value) ; PlaceholderReplacer :: replace_placeholders (infcx , mapped_regions , mapped_types , mapped_consts , universe_indices , result ,) } else { f (value) } }
-/* FP:util.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_STRUCT_0025
-/* FP:util.rs-0050 */ # [doc = " The inverse of [`BoundVarReplacer`]: replaces placeholders with the bound vars from which they came."] pub struct PlaceholderReplacer < 'a , 'tcx > { infcx : & 'a InferCtxt < 'tcx > , mapped_regions : FxIndexMap < ty :: PlaceholderRegion , ty :: BoundRegion > , mapped_types : FxIndexMap < ty :: PlaceholderType , ty :: BoundTy > , mapped_consts : FxIndexMap < ty :: PlaceholderConst , ty :: BoundConst > , universe_indices : & 'a [Option < ty :: UniverseIndex >] , current_index : ty :: DebruijnIndex , }
-/* FP:util.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_IMPL_0026
-/* FP:util.rs-0052 */ impl < 'a , 'tcx > PlaceholderReplacer < 'a , 'tcx > { pub fn replace_placeholders < T : TypeFoldable < TyCtxt < 'tcx > > > (infcx : & 'a InferCtxt < 'tcx > , mapped_regions : FxIndexMap < ty :: PlaceholderRegion , ty :: BoundRegion > , mapped_types : FxIndexMap < ty :: PlaceholderType , ty :: BoundTy > , mapped_consts : FxIndexMap < ty :: PlaceholderConst , ty :: BoundConst > , universe_indices : & 'a [Option < ty :: UniverseIndex >] , value : T ,) -> T { let mut replacer = PlaceholderReplacer { infcx , mapped_regions , mapped_types , mapped_consts , universe_indices , current_index : ty :: INNERMOST , } ; value . fold_with (& mut replacer) } }
-/* FP:util.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_IMPL_0027
-/* FP:util.rs-0054 */ impl < 'tcx > TypeFolder < TyCtxt < 'tcx > > for PlaceholderReplacer < '_ , 'tcx > { fn cx (& self) -> TyCtxt < 'tcx > { self . infcx . tcx } fn fold_binder < T : TypeFoldable < TyCtxt < 'tcx > > > (& mut self , t : ty :: Binder < 'tcx , T > ,) -> ty :: Binder < 'tcx , T > { if ! t . has_placeholders () && ! t . has_infer () { return t ; } self . current_index . shift_in (1) ; let t = t . super_fold_with (self) ; self . current_index . shift_out (1) ; t } fn fold_region (& mut self , r0 : ty :: Region < 'tcx >) -> ty :: Region < 'tcx > { let r1 = match r0 . kind () { ty :: ReVar (vid) => self . infcx . inner . borrow_mut () . unwrap_region_constraints () . opportunistic_resolve_var (self . infcx . tcx , vid) , _ => r0 , } ; let r2 = match r1 . kind () { ty :: RePlaceholder (p) => { let replace_var = self . mapped_regions . get (& p) ; match replace_var { Some (replace_var) => { let index = self . universe_indices . iter () . position (| u | matches ! (u , Some (pu) if * pu == p . universe)) . unwrap_or_else (| | bug ! ("Unexpected placeholder universe.")) ; let db = ty :: DebruijnIndex :: from_usize (self . universe_indices . len () - index + self . current_index . as_usize () - 1 ,) ; ty :: Region :: new_bound (self . cx () , db , * replace_var) } None => r1 , } } _ => r1 , } ; debug ! (? r0 , ? r1 , ? r2 , "fold_region") ; r2 } fn fold_ty (& mut self , ty : Ty < 'tcx >) -> Ty < 'tcx > { let ty = self . infcx . shallow_resolve (ty) ; match * ty . kind () { ty :: Placeholder (p) => { let replace_var = self . mapped_types . get (& p) ; match replace_var { Some (replace_var) => { let index = self . universe_indices . iter () . position (| u | matches ! (u , Some (pu) if * pu == p . universe)) . unwrap_or_else (| | bug ! ("Unexpected placeholder universe.")) ; let db = ty :: DebruijnIndex :: from_usize (self . universe_indices . len () - index + self . current_index . as_usize () - 1 ,) ; Ty :: new_bound (self . infcx . tcx , db , * replace_var) } None => { if ty . has_infer () { ty . super_fold_with (self) } else { ty } } } } _ if ty . has_placeholders () || ty . has_infer () => ty . super_fold_with (self) , _ => ty , } } fn fold_const (& mut self , ct : ty :: Const < 'tcx >) -> ty :: Const < 'tcx > { let ct = self . infcx . shallow_resolve_const (ct) ; if let ty :: ConstKind :: Placeholder (p) = ct . kind () { let replace_var = self . mapped_consts . get (& p) ; match replace_var { Some (replace_var) => { let index = self . universe_indices . iter () . position (| u | matches ! (u , Some (pu) if * pu == p . universe)) . unwrap_or_else (| | bug ! ("Unexpected placeholder universe.")) ; let db = ty :: DebruijnIndex :: from_usize (self . universe_indices . len () - index + self . current_index . as_usize () - 1 ,) ; ty :: Const :: new_bound (self . infcx . tcx , db , * replace_var) } None => { if ct . has_infer () { ct . super_fold_with (self) } else { ct } } } } else { ct . super_fold_with (self) } } }
-/* FP:util.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_FN_0028
-/* FP:util.rs-0056 */ pub fn sizedness_fast_path < 'tcx > (tcx : TyCtxt < 'tcx > , predicate : ty :: Predicate < 'tcx > , param_env : ty :: ParamEnv < 'tcx > ,) -> bool { if let ty :: PredicateKind :: Clause (ty :: ClauseKind :: Trait (trait_pred)) = predicate . kind () . skip_binder () && trait_pred . polarity == ty :: PredicatePolarity :: Positive { let sizedness = match tcx . as_lang_item (trait_pred . def_id ()) { Some (LangItem :: Sized) => SizedTraitKind :: Sized , Some (LangItem :: MetaSized) => SizedTraitKind :: MetaSized , _ => return false , } ; if ! tcx . features () . sized_hierarchy () && matches ! (sizedness , SizedTraitKind :: MetaSized) { return true ; } if trait_pred . self_ty () . has_trivial_sizedness (tcx , sizedness) { debug ! ("fast path -- trivial sizedness") ; return true ; } if matches ! (trait_pred . self_ty () . kind () , ty :: Param (_) | ty :: Placeholder (_)) { for clause in param_env . caller_bounds () { if let ty :: ClauseKind :: Trait (clause_pred) = clause . kind () . skip_binder () && clause_pred . polarity == ty :: PredicatePolarity :: Positive && clause_pred . self_ty () == trait_pred . self_ty () && (clause_pred . def_id () == trait_pred . def_id () || (sizedness == SizedTraitKind :: MetaSized && tcx . is_lang_item (clause_pred . def_id () , LangItem :: Sized))) { return true ; } } } } false }
-/* FP:util.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_util_FN_0029
-/* FP:util.rs-0058 */ # [doc = " To improve performance, sizedness traits are not elaborated and so special-casing is required"] # [doc = " in the trait solver to find a `Sized` candidate for a `MetaSized` obligation. Returns the"] # [doc = " predicate to used in the candidate for such a `obligation`, given a `candidate`."] pub (crate) fn lazily_elaborate_sizedness_candidate < 'tcx > (infcx : & InferCtxt < 'tcx > , obligation : & PolyTraitObligation < 'tcx > , candidate : PolyTraitPredicate < 'tcx > ,) -> PolyTraitPredicate < 'tcx > { if ! infcx . tcx . is_lang_item (obligation . predicate . def_id () , LangItem :: MetaSized) || ! infcx . tcx . is_lang_item (candidate . def_id () , LangItem :: Sized) { return candidate ; } if obligation . predicate . polarity () != PredicatePolarity :: Positive || candidate . polarity () != PredicatePolarity :: Positive { return candidate ; } let drcx = DeepRejectCtxt :: relate_rigid_rigid (infcx . tcx) ; if ! drcx . args_may_unify (obligation . predicate . skip_binder () . trait_ref . args , candidate . skip_binder () . trait_ref . args ,) { return candidate ; } candidate . map_bound (| c | TraitPredicate { trait_ref : TraitRef :: new_from_args (infcx . tcx , obligation . predicate . def_id () , c . trait_ref . args ,) , polarity : c . polarity , }) }
+// SRC: ../rust/compiler/rustc_trait_selection/src/traits/util.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use std::collections::VecDeque;
+
+use crate::rustc_data_structures::fx::{FxHashSet, FxIndexMap};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_infer::infer::InferCtxt;
+use crate::rustc_infer::traits::PolyTraitObligation;
+pub use crate::rustc_infer::traits::util::*;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::fast_reject::DeepRejectCtxt;
+use crate::rustc_complete::ty::{
+    self, PolyTraitPredicate, PredicatePolarity, SizedTraitKind, TraitPredicate, TraitRef, Ty,
+    TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable, TypeVisitableExt,
+};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+pub use rustc_next_trait_solver::placeholder::BoundVarReplacer;
+use crate::rustc_complete::Span;
+use smallvec::{SmallVec, smallvec};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=13 */
+use tracing::debug;
+
+/// Return the trait and projection predicates that come from eagerly expanding the
+/// trait aliases in the list of clauses. For each trait predicate, record a stack
+/// of spans that trace from the user-written trait alias bound. For projection predicates,
+/// just record the span of the projection itself.
+///
+/// For trait aliases, we don't deduplicte the predicates, since we currently do not
+/// consider duplicated traits as a single trait for the purposes of our "one trait principal"
+/// restriction; however, for projections we do deduplicate them.
+///
+/// ```rust,ignore (fails)
+/// trait Bar {}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=expand_trait_aliases | COMPLEXITY=24 | LINES=59 */
+/// trait Foo = Bar + Bar;
+///
+/// let dyn_incompatible: dyn Foo; // bad, two `Bar` principals.
+/// ```
+pub fn expand_trait_aliases<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    clauses: impl IntoIterator<Item = (ty::Clause<'tcx>, Span)>,
+) -> (
+    Vec<(ty::PolyTraitPredicate<'tcx>, SmallVec<[Span; 1]>)>,
+    Vec<(ty::PolyProjectionPredicate<'tcx>, Span)>,
+) {
+    let mut trait_preds = vec![];
+    let mut projection_preds = vec![];
+    let mut seen_projection_preds = FxHashSet::default();
+
+    let mut queue: VecDeque<_> = clauses.into_iter().map(|(p, s)| (p, smallvec![s])).collect();
+
+    while let Some((clause, spans)) = queue.pop_front() {
+        match clause.kind().skip_binder() {
+            ty::ClauseKind::Trait(trait_pred) => {
+                if tcx.is_trait_alias(trait_pred.def_id()) {
+                    queue.extend(
+                        tcx.explicit_super_predicates_of(trait_pred.def_id())
+                            .iter_identity_copied()
+                            .map(|(super_clause, span)| {
+                                let mut spans = spans.clone();
+                                spans.push(span);
+                                (
+                                    super_clause.instantiate_supertrait(
+                                        tcx,
+                                        clause.kind().rebind(trait_pred.trait_ref),
+                                    ),
+                                    spans,
+                                )
+                            }),
+                    );
+                } else {
+                    trait_preds.push((clause.kind().rebind(trait_pred), spans));
+                }
+            }
+            ty::ClauseKind::Projection(projection_pred) => {
+                let projection_pred = clause.kind().rebind(projection_pred);
+                if !seen_projection_preds.insert(tcx.anonymize_bound_vars(projection_pred)) {
+                    continue;
+                }
+                projection_preds.push((projection_pred, *spans.last().unwrap()));
+            }
+            ty::ClauseKind::RegionOutlives(..)
+            | ty::ClauseKind::TypeOutlives(..)
+            | ty::ClauseKind::ConstArgHasType(_, _)
+            | ty::ClauseKind::WellFormed(_)
+            | ty::ClauseKind::ConstEvaluatable(_)
+            | ty::ClauseKind::UnstableFeature(_)
+            | ty::ClauseKind::HostEffect(..) => {}
+        }
+    }
+
+    (trait_preds, projection_preds)
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=upcast_choices | COMPLEXITY=8 | LINES=19 */
+
+///////////////////////////////////////////////////////////////////////////
+// Other
+///////////////////////////////////////////////////////////////////////////
+
+/// Casts a trait reference into a reference to one of its super
+/// traits; returns `None` if `target_trait_def_id` is not a
+/// supertrait.
+pub fn upcast_choices<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    source_trait_ref: ty::PolyTraitRef<'tcx>,
+    target_trait_def_id: DefId,
+) -> Vec<ty::PolyTraitRef<'tcx>> {
+    if source_trait_ref.def_id() == target_trait_def_id {
+        return vec![source_trait_ref]; // Shortcut the most common case.
+    }
+
+    supertraits(tcx, source_trait_ref).filter(|r| r.def_id() == target_trait_def_id).collect()
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=16 */
+
+pub(crate) fn closure_trait_ref_and_return_type<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    fn_trait_def_id: DefId,
+    self_ty: Ty<'tcx>,
+    sig: ty::PolyFnSig<'tcx>,
+    tuple_arguments: TupleArgumentsFlag,
+) -> ty::Binder<'tcx, (ty::TraitRef<'tcx>, Ty<'tcx>)> {
+    assert!(!self_ty.has_escaping_bound_vars());
+    let arguments_tuple = match tuple_arguments {
+        TupleArgumentsFlag::No => sig.skip_binder().inputs()[0],
+        TupleArgumentsFlag::Yes => Ty::new_tup(tcx, sig.skip_binder().inputs()),
+    };
+    let trait_ref = ty::TraitRef::new(tcx, fn_trait_def_id, [self_ty, arguments_tuple]);
+    sig.map_bound(|sig| (trait_ref, sig.output()))
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+
+pub(crate) fn coroutine_trait_ref_and_outputs<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    fn_trait_def_id: DefId,
+    self_ty: Ty<'tcx>,
+    sig: ty::GenSig<TyCtxt<'tcx>>,
+) -> (ty::TraitRef<'tcx>, Ty<'tcx>, Ty<'tcx>) {
+    assert!(!self_ty.has_escaping_bound_vars());
+    let trait_ref = ty::TraitRef::new(tcx, fn_trait_def_id, [self_ty, sig.resume_ty]);
+    (trait_ref, sig.yield_ty, sig.return_ty)
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+
+pub(crate) fn future_trait_ref_and_outputs<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    fn_trait_def_id: DefId,
+    self_ty: Ty<'tcx>,
+    sig: ty::GenSig<TyCtxt<'tcx>>,
+) -> (ty::TraitRef<'tcx>, Ty<'tcx>) {
+    assert!(!self_ty.has_escaping_bound_vars());
+    let trait_ref = ty::TraitRef::new(tcx, fn_trait_def_id, [self_ty]);
+    (trait_ref, sig.return_ty)
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+
+pub(crate) fn iterator_trait_ref_and_outputs<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    iterator_def_id: DefId,
+    self_ty: Ty<'tcx>,
+    sig: ty::GenSig<TyCtxt<'tcx>>,
+) -> (ty::TraitRef<'tcx>, Ty<'tcx>) {
+    assert!(!self_ty.has_escaping_bound_vars());
+    let trait_ref = ty::TraitRef::new(tcx, iterator_def_id, [self_ty]);
+    (trait_ref, sig.yield_ty)
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+
+pub(crate) fn async_iterator_trait_ref_and_outputs<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    async_iterator_def_id: DefId,
+    self_ty: Ty<'tcx>,
+    sig: ty::GenSig<TyCtxt<'tcx>>,
+) -> (ty::TraitRef<'tcx>, Ty<'tcx>) {
+    assert!(!self_ty.has_escaping_bound_vars());
+    let trait_ref = ty::TraitRef::new(tcx, async_iterator_def_id, [self_ty]);
+    (trait_ref, sig.yield_ty)
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=impl_item_is_final | COMPLEXITY=2 | LINES=5 */
+
+pub fn impl_item_is_final(tcx: TyCtxt<'_>, assoc_item: &ty::AssocItem) -> bool {
+    assoc_item.defaultness(tcx).is_final()
+        && tcx.defaultness(assoc_item.container_id(tcx)).is_final()
+}
+/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+
+pub(crate) enum TupleArgumentsFlag {
+    Yes,
+    No,
+}
+/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=with_replaced_escaping_bound_vars | COMPLEXITY=8 | LINES=40 */
+
+/// Executes `f` on `value` after replacing all escaping bound variables with placeholders
+/// and then replaces these placeholders with the original bound variables in the result.
+///
+/// In most places, bound variables should be replaced right when entering a binder, making
+/// this function unnecessary. However, normalization currently does not do that, so we have
+/// to do this lazily.
+///
+/// You should not add any additional uses of this function, at least not without first
+/// discussing it with t-types.
+///
+/// FIXME(@lcnr): We may even consider experimenting with eagerly replacing bound vars during
+/// normalization as well, at which point this function will be unnecessary and can be removed.
+pub fn with_replaced_escaping_bound_vars<
+    'a,
+    'tcx,
+    T: TypeFoldable<TyCtxt<'tcx>>,
+    R: TypeFoldable<TyCtxt<'tcx>>,
+>(
+    infcx: &'a InferCtxt<'tcx>,
+    universe_indices: &'a mut Vec<Option<ty::UniverseIndex>>,
+    value: T,
+    f: impl FnOnce(T) -> R,
+) -> R {
+    if value.has_escaping_bound_vars() {
+        let (value, mapped_regions, mapped_types, mapped_consts) =
+            BoundVarReplacer::replace_bound_vars(infcx, universe_indices, value);
+        let result = f(value);
+        PlaceholderReplacer::replace_placeholders(
+            infcx,
+            mapped_regions,
+            mapped_types,
+            mapped_consts,
+            universe_indices,
+            result,
+        )
+    } else {
+        f(value)
+    }
+}
+/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=PlaceholderReplacer | COMPLEXITY=2 | LINES=10 */
+
+/// The inverse of [`BoundVarReplacer`]: replaces placeholders with the bound vars from which they came.
+pub struct PlaceholderReplacer<'a, 'tcx> {
+    infcx: &'a InferCtxt<'tcx>,
+    mapped_regions: FxIndexMap<ty::PlaceholderRegion, ty::BoundRegion>,
+    mapped_types: FxIndexMap<ty::PlaceholderType, ty::BoundTy>,
+    mapped_consts: FxIndexMap<ty::PlaceholderConst, ty::BoundConst>,
+    universe_indices: &'a [Option<ty::UniverseIndex>],
+    current_index: ty::DebruijnIndex,
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=replace_placeholders | COMPLEXITY=5 | LINES=21 */
+
+impl<'a, 'tcx> PlaceholderReplacer<'a, 'tcx> {
+    pub fn replace_placeholders<T: TypeFoldable<TyCtxt<'tcx>>>(
+        infcx: &'a InferCtxt<'tcx>,
+        mapped_regions: FxIndexMap<ty::PlaceholderRegion, ty::BoundRegion>,
+        mapped_types: FxIndexMap<ty::PlaceholderType, ty::BoundTy>,
+        mapped_consts: FxIndexMap<ty::PlaceholderConst, ty::BoundConst>,
+        universe_indices: &'a [Option<ty::UniverseIndex>],
+        value: T,
+    ) -> T {
+        let mut replacer = PlaceholderReplacer {
+            infcx,
+            mapped_regions,
+            mapped_types,
+            mapped_consts,
+            universe_indices,
+            current_index: ty::INNERMOST,
+        };
+        value.fold_with(&mut replacer)
+    }
+}
+/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=71 | LINES=117 */
+
+impl<'tcx> TypeFolder<TyCtxt<'tcx>> for PlaceholderReplacer<'_, 'tcx> {
+    fn cx(&self) -> TyCtxt<'tcx> {
+        self.infcx.tcx
+    }
+
+    fn fold_binder<T: TypeFoldable<TyCtxt<'tcx>>>(
+        &mut self,
+        t: ty::Binder<'tcx, T>,
+    ) -> ty::Binder<'tcx, T> {
+        if !t.has_placeholders() && !t.has_infer() {
+            return t;
+        }
+        self.current_index.shift_in(1);
+        let t = t.super_fold_with(self);
+        self.current_index.shift_out(1);
+        t
+    }
+
+    fn fold_region(&mut self, r0: ty::Region<'tcx>) -> ty::Region<'tcx> {
+        let r1 = match r0.kind() {
+            ty::ReVar(vid) => self
+                .infcx
+                .inner
+                .borrow_mut()
+                .unwrap_region_constraints()
+                .opportunistic_resolve_var(self.infcx.tcx, vid),
+            _ => r0,
+        };
+
+        let r2 = match r1.kind() {
+            ty::RePlaceholder(p) => {
+                let replace_var = self.mapped_regions.get(&p);
+                match replace_var {
+                    Some(replace_var) => {
+                        let index = self
+                            .universe_indices
+                            .iter()
+                            .position(|u| matches!(u, Some(pu) if *pu == p.universe))
+                            .unwrap_or_else(|| bug!("Unexpected placeholder universe."));
+                        let db = ty::DebruijnIndex::from_usize(
+                            self.universe_indices.len() - index + self.current_index.as_usize() - 1,
+                        );
+                        ty::Region::new_bound(self.cx(), db, *replace_var)
+                    }
+                    None => r1,
+                }
+            }
+            _ => r1,
+        };
+
+        debug!(?r0, ?r1, ?r2, "fold_region");
+
+        r2
+    }
+
+    fn fold_ty(&mut self, ty: Ty<'tcx>) -> Ty<'tcx> {
+        let ty = self.infcx.shallow_resolve(ty);
+        match *ty.kind() {
+            ty::Placeholder(p) => {
+                let replace_var = self.mapped_types.get(&p);
+                match replace_var {
+                    Some(replace_var) => {
+                        let index = self
+                            .universe_indices
+                            .iter()
+                            .position(|u| matches!(u, Some(pu) if *pu == p.universe))
+                            .unwrap_or_else(|| bug!("Unexpected placeholder universe."));
+                        let db = ty::DebruijnIndex::from_usize(
+                            self.universe_indices.len() - index + self.current_index.as_usize() - 1,
+                        );
+                        Ty::new_bound(self.infcx.tcx, db, *replace_var)
+                    }
+                    None => {
+                        if ty.has_infer() {
+                            ty.super_fold_with(self)
+                        } else {
+                            ty
+                        }
+                    }
+                }
+            }
+
+            _ if ty.has_placeholders() || ty.has_infer() => ty.super_fold_with(self),
+            _ => ty,
+        }
+    }
+
+    fn fold_const(&mut self, ct: ty::Const<'tcx>) -> ty::Const<'tcx> {
+        let ct = self.infcx.shallow_resolve_const(ct);
+        if let ty::ConstKind::Placeholder(p) = ct.kind() {
+            let replace_var = self.mapped_consts.get(&p);
+            match replace_var {
+                Some(replace_var) => {
+                    let index = self
+                        .universe_indices
+                        .iter()
+                        .position(|u| matches!(u, Some(pu) if *pu == p.universe))
+                        .unwrap_or_else(|| bug!("Unexpected placeholder universe."));
+                    let db = ty::DebruijnIndex::from_usize(
+                        self.universe_indices.len() - index + self.current_index.as_usize() - 1,
+                    );
+                    ty::Const::new_bound(self.infcx.tcx, db, *replace_var)
+                }
+                None => {
+                    if ct.has_infer() {
+                        ct.super_fold_with(self)
+                    } else {
+                        ct
+                    }
+                }
+            }
+        } else {
+            ct.super_fold_with(self)
+        }
+    }
+}
+/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=sizedness_fast_path | COMPLEXITY=36 | LINES=48 */
+
+pub fn sizedness_fast_path<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    predicate: ty::Predicate<'tcx>,
+    param_env: ty::ParamEnv<'tcx>,
+) -> bool {
+    // Proving `Sized`/`MetaSized`, very often on "obviously sized" types like
+    // `&T`, accounts for about 60% percentage of the predicates we have to prove. No need to
+    // canonicalize and all that for such cases.
+    if let ty::PredicateKind::Clause(ty::ClauseKind::Trait(trait_pred)) =
+        predicate.kind().skip_binder()
+        && trait_pred.polarity == ty::PredicatePolarity::Positive
+    {
+        let sizedness = match tcx.as_lang_item(trait_pred.def_id()) {
+            Some(LangItem::Sized) => SizedTraitKind::Sized,
+            Some(LangItem::MetaSized) => SizedTraitKind::MetaSized,
+            _ => return false,
+        };
+
+        // FIXME(sized_hierarchy): this temporarily reverts the `sized_hierarchy` feature
+        // while a proper fix for `tests/ui/sized-hierarchy/incomplete-inference-issue-143992.rs`
+        // is pending a proper fix
+        if !tcx.features().sized_hierarchy() && matches!(sizedness, SizedTraitKind::MetaSized) {
+            return true;
+        }
+
+        if trait_pred.self_ty().has_trivial_sizedness(tcx, sizedness) {
+            debug!("fast path -- trivial sizedness");
+            return true;
+        }
+
+        if matches!(trait_pred.self_ty().kind(), ty::Param(_) | ty::Placeholder(_)) {
+            for clause in param_env.caller_bounds() {
+                if let ty::ClauseKind::Trait(clause_pred) = clause.kind().skip_binder()
+                    && clause_pred.polarity == ty::PredicatePolarity::Positive
+                    && clause_pred.self_ty() == trait_pred.self_ty()
+                    && (clause_pred.def_id() == trait_pred.def_id()
+                        || (sizedness == SizedTraitKind::MetaSized
+                            && tcx.is_lang_item(clause_pred.def_id(), LangItem::Sized)))
+                {
+                    return true;
+                }
+            }
+        }
+    }
+
+    false
+}
+/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=38 */
+
+/// To improve performance, sizedness traits are not elaborated and so special-casing is required
+/// in the trait solver to find a `Sized` candidate for a `MetaSized` obligation. Returns the
+/// predicate to used in the candidate for such a `obligation`, given a `candidate`.
+pub(crate) fn lazily_elaborate_sizedness_candidate<'tcx>(
+    infcx: &InferCtxt<'tcx>,
+    obligation: &PolyTraitObligation<'tcx>,
+    candidate: PolyTraitPredicate<'tcx>,
+) -> PolyTraitPredicate<'tcx> {
+    if !infcx.tcx.is_lang_item(obligation.predicate.def_id(), LangItem::MetaSized)
+        || !infcx.tcx.is_lang_item(candidate.def_id(), LangItem::Sized)
+    {
+        return candidate;
+    }
+
+    if obligation.predicate.polarity() != PredicatePolarity::Positive
+        || candidate.polarity() != PredicatePolarity::Positive
+    {
+        return candidate;
+    }
+
+    let drcx = DeepRejectCtxt::relate_rigid_rigid(infcx.tcx);
+    if !drcx.args_may_unify(
+        obligation.predicate.skip_binder().trait_ref.args,
+        candidate.skip_binder().trait_ref.args,
+    ) {
+        return candidate;
+    }
+
+    candidate.map_bound(|c| TraitPredicate {
+        trait_ref: TraitRef::new_from_args(
+            infcx.tcx,
+            obligation.predicate.def_id(),
+            c.trait_ref.args,
+        ),
+        polarity: c.polarity,
+    })
+}

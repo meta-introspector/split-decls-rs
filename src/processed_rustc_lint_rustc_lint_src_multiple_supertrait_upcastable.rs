@@ -1,12 +1,66 @@
-/* FP:multiple_supertrait_upcastable.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_multiple_supertrait_upcastable_USE_0001
-/* FP:multiple_supertrait_upcastable.rs-0002 */ use rustc_hir as hir ;
-/* FP:multiple_supertrait_upcastable.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_multiple_supertrait_upcastable_USE_0002
-/* FP:multiple_supertrait_upcastable.rs-0004 */ use crate :: rustc_complete :: { declare_lint , declare_lint_pass } ;
-/* FP:multiple_supertrait_upcastable.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_multiple_supertrait_upcastable_USE_0003
-/* FP:multiple_supertrait_upcastable.rs-0006 */ use crate :: { LateContext , LateLintPass , LintContext } ;
-/* FP:multiple_supertrait_upcastable.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_multiple_supertrait_upcastable_MACRO_0004
-/* FP:multiple_supertrait_upcastable.rs-0008 */ declare_lint ! { # [doc = " The `multiple_supertrait_upcastable` lint detects when a dyn-compatible trait has multiple"] # [doc = " supertraits."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " #[feature(multiple_supertrait_upcastable)]"] # [doc = " trait A {}"] # [doc = " trait B {}"] # [doc = ""] # [doc = " #[warn(multiple_supertrait_upcastable)]"] # [doc = " trait C: A + B {}"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " To support upcasting with multiple supertraits, we need to store multiple vtables and this"] # [doc = " can result in extra space overhead, even if no code actually uses upcasting."] # [doc = " This lint allows users to identify when such scenarios occur and to decide whether the"] # [doc = " additional overhead is justified."] pub MULTIPLE_SUPERTRAIT_UPCASTABLE , Allow , "detect when a dyn-compatible trait has multiple supertraits" , @ feature_gate = multiple_supertrait_upcastable ; }
-/* FP:multiple_supertrait_upcastable.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_multiple_supertrait_upcastable_MACRO_0005
-/* FP:multiple_supertrait_upcastable.rs-0010 */ declare_lint_pass ! (MultipleSupertraitUpcastable => [MULTIPLE_SUPERTRAIT_UPCASTABLE]) ;
-/* FP:multiple_supertrait_upcastable.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_multiple_supertrait_upcastable_IMPL_0006
-/* FP:multiple_supertrait_upcastable.rs-0012 */ impl < 'tcx > LateLintPass < 'tcx > for MultipleSupertraitUpcastable { fn check_item (& mut self , cx : & LateContext < 'tcx > , item : & 'tcx hir :: Item < 'tcx >) { let def_id = item . owner_id . to_def_id () ; if let hir :: ItemKind :: Trait (_ , _ , _ , ident , ..) = item . kind && cx . tcx . is_dyn_compatible (def_id) { let direct_super_traits_iter = cx . tcx . explicit_super_predicates_of (def_id) . iter_identity_copied () . filter_map (| (pred , _) | pred . as_trait_clause ()) . filter (| pred | ! cx . tcx . is_lang_item (pred . def_id () , hir :: LangItem :: MetaSized)) . filter (| pred | ! cx . tcx . is_default_trait (pred . def_id ())) ; if direct_super_traits_iter . count () > 1 { cx . emit_span_lint (MULTIPLE_SUPERTRAIT_UPCASTABLE , cx . tcx . def_span (def_id) , crate :: lints :: MultipleSupertraitUpcastable { ident } ,) ; } } } }
+// SRC: ../rust/compiler/rustc_lint/src/multiple_supertrait_upcastable.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use rustc_hir as hir;
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+use crate::{LateContext, LateLintPass, LintContext};
+/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=29 */
+
+declare_lint! {
+    /// The `multiple_supertrait_upcastable` lint detects when a dyn-compatible trait has multiple
+    /// supertraits.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// #[feature(multiple_supertrait_upcastable)]
+    /// trait A {}
+    /// trait B {}
+    ///
+    /// #[warn(multiple_supertrait_upcastable)]
+    /// trait C: A + B {}
+    /// ```
+    ///
+    /// {{produces}}
+    ///
+    /// ### Explanation
+    ///
+    /// To support upcasting with multiple supertraits, we need to store multiple vtables and this
+    /// can result in extra space overhead, even if no code actually uses upcasting.
+    /// This lint allows users to identify when such scenarios occur and to decide whether the
+    /// additional overhead is justified.
+    pub MULTIPLE_SUPERTRAIT_UPCASTABLE,
+    Allow,
+    "detect when a dyn-compatible trait has multiple supertraits",
+    @feature_gate = multiple_supertrait_upcastable;
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=check_item | COMPLEXITY=14 | LINES=28 */
+
+declare_lint_pass!(MultipleSupertraitUpcastable => [MULTIPLE_SUPERTRAIT_UPCASTABLE]);
+
+impl<'tcx> LateLintPass<'tcx> for MultipleSupertraitUpcastable {
+    fn check_item(&mut self, cx: &LateContext<'tcx>, item: &'tcx hir::Item<'tcx>) {
+        let def_id = item.owner_id.to_def_id();
+        // NOTE(nbdd0121): use `dyn_compatibility_violations` instead of `is_dyn_compatible` because
+        // the latter will report `where_clause_object_safety` lint.
+        if let hir::ItemKind::Trait(_, _, _, ident, ..) = item.kind
+            && cx.tcx.is_dyn_compatible(def_id)
+        {
+            let direct_super_traits_iter = cx
+                .tcx
+                .explicit_super_predicates_of(def_id)
+                .iter_identity_copied()
+                .filter_map(|(pred, _)| pred.as_trait_clause())
+                .filter(|pred| !cx.tcx.is_lang_item(pred.def_id(), hir::LangItem::MetaSized))
+                .filter(|pred| !cx.tcx.is_default_trait(pred.def_id()));
+            if direct_super_traits_iter.count() > 1 {
+                cx.emit_span_lint(
+                    MULTIPLE_SUPERTRAIT_UPCASTABLE,
+                    cx.tcx.def_span(def_id),
+                    crate::lints::MultipleSupertraitUpcastable { ident },
+                );
+            }
+        }
+    }
+}

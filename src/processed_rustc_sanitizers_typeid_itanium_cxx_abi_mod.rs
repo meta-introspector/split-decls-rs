@@ -1,24 +1,133 @@
-/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_itanium_cxx_abi_mod_USE_0001
-/* FP:mod.rs-0002 */ use crate :: rustc_abi :: CanonAbi ;
-/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_itanium_cxx_abi_mod_USE_0002
-/* FP:mod.rs-0004 */ use crate :: rustc_data_structures :: fx :: FxHashMap ;
-/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_itanium_cxx_abi_mod_USE_0003
-/* FP:mod.rs-0006 */ use crate :: rustc_complete :: bug ;
-/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_itanium_cxx_abi_mod_USE_0004
-/* FP:mod.rs-0008 */ use crate :: rustc_complete :: ty :: { self , Instance , Ty , TyCtxt , TypeFoldable , TypeVisitableExt } ;
-/* FP:mod.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_itanium_cxx_abi_mod_USE_0005
-/* FP:mod.rs-0010 */ use crate :: rustc_target :: callconv :: { FnAbi , PassMode } ;
-/* FP:mod.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_itanium_cxx_abi_mod_USE_0006
-/* FP:mod.rs-0012 */ use tracing :: instrument ;
-/* FP:mod.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_itanium_cxx_abi_mod_MOD_0007
-/* FP:mod.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_itanium_cxx_abi_mod_MOD_0008
-/* FP:mod.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_itanium_cxx_abi_mod_USE_0009
-/* FP:mod.rs-0018 */ use crate :: cfi :: typeid :: TypeIdOptions ;
-/* FP:mod.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_itanium_cxx_abi_mod_USE_0010
-/* FP:mod.rs-0020 */ use crate :: cfi :: typeid :: itanium_cxx_abi :: encode :: { DictKey , EncodeTyOptions , encode_ty } ;
-/* FP:mod.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_itanium_cxx_abi_mod_USE_0011
-/* FP:mod.rs-0022 */ use crate :: cfi :: typeid :: itanium_cxx_abi :: transform :: { TransformTy , TransformTyOptions , transform_instance , } ;
-/* FP:mod.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_itanium_cxx_abi_mod_FN_0012
-/* FP:mod.rs-0024 */ # [doc = " Returns a type metadata identifier for the specified FnAbi using the Itanium C++ ABI with vendor"] # [doc = " extended type qualifiers and types for Rust types that are not used at the FFI boundary."] # [instrument (level = "trace" , skip (tcx))] pub fn typeid_for_fnabi < 'tcx > (tcx : TyCtxt < 'tcx > , fn_abi : & FnAbi < 'tcx , Ty < 'tcx > > , options : TypeIdOptions ,) -> String { let mut typeid = String :: from ("_Z") ; typeid . push_str ("TS") ; typeid . push ('F') ; let mut dict : FxHashMap < DictKey < 'tcx > , usize > = FxHashMap :: default () ; let mut encode_ty_options = EncodeTyOptions :: from_bits (options . bits ()) . unwrap_or_else (| | bug ! ("typeid_for_fnabi: invalid option(s) `{:?}`" , options . bits ())) ; match fn_abi . conv { CanonAbi :: C => { encode_ty_options . insert (EncodeTyOptions :: GENERALIZE_REPR_C) ; } _ => { encode_ty_options . remove (EncodeTyOptions :: GENERALIZE_REPR_C) ; } } let transform_ty_options = TransformTyOptions :: from_bits (options . bits ()) . unwrap_or_else (| | bug ! ("typeid_for_fnabi: invalid option(s) `{:?}`" , options . bits ())) ; let mut type_folder = TransformTy :: new (tcx , transform_ty_options) ; let ty = fn_abi . ret . layout . ty . fold_with (& mut type_folder) ; typeid . push_str (& encode_ty (tcx , ty , & mut dict , encode_ty_options)) ; if ! fn_abi . c_variadic { let mut pushed_arg = false ; for arg in fn_abi . args . iter () . filter (| arg | arg . mode != PassMode :: Ignore) { pushed_arg = true ; let ty = arg . layout . ty . fold_with (& mut type_folder) ; typeid . push_str (& encode_ty (tcx , ty , & mut dict , encode_ty_options)) ; } if ! pushed_arg { typeid . push ('v') ; } } else { for n in 0 .. fn_abi . fixed_count as usize { if fn_abi . args [n] . mode == PassMode :: Ignore { continue ; } let ty = fn_abi . args [n] . layout . ty . fold_with (& mut type_folder) ; typeid . push_str (& encode_ty (tcx , ty , & mut dict , encode_ty_options)) ; } typeid . push ('z') ; } typeid . push ('E') ; if options . contains (EncodeTyOptions :: NORMALIZE_INTEGERS) { typeid . push_str (".normalized") ; } if options . contains (EncodeTyOptions :: GENERALIZE_POINTERS) { typeid . push_str (".generalized") ; } typeid }
-/* FP:mod.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_sanitizers_src_cfi_typeid_itanium_cxx_abi_mod_FN_0013
-/* FP:mod.rs-0026 */ # [doc = " Returns a type metadata identifier for the specified Instance using the Itanium C++ ABI with"] # [doc = " vendor extended type qualifiers and types for Rust types that are not used at the FFI boundary."] # [instrument (level = "trace" , skip (tcx))] pub fn typeid_for_instance < 'tcx > (tcx : TyCtxt < 'tcx > , instance : Instance < 'tcx > , options : TypeIdOptions ,) -> String { assert ! (! instance . has_non_region_param () , "{instance:#?} must be fully monomorphic") ; let transform_ty_options = TransformTyOptions :: from_bits (options . bits ()) . unwrap_or_else (| | bug ! ("typeid_for_instance: invalid option(s) `{:?}`" , options . bits ())) ; let instance = transform_instance (tcx , instance , transform_ty_options) ; let fn_abi = tcx . fn_abi_of_instance (ty :: TypingEnv :: fully_monomorphized () . as_query_input ((instance , ty :: List :: empty ())) ,) . unwrap_or_else (| error | { bug ! ("typeid_for_instance: couldn't get fn_abi of instance {instance:?}: {error:?}") }) ; typeid_for_fnabi (tcx , fn_abi , options) }
+// SRC: ../rust/compiler/rustc_sanitizers/src/cfi/typeid/itanium_cxx_abi/mod.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=10 */
+// Type metadata identifiers (using Itanium C++ ABI mangling for encoding) for LLVM Control Flow
+// Integrity (CFI) and cross-language LLVM CFI support.
+//
+// For more information about LLVM CFI and cross-language LLVM CFI support for the Rust compiler,
+// see design document in the tracking issue #89653.
+
+use crate::rustc_abi::CanonAbi;
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, Instance, Ty, TyCtxt, TypeFoldable, TypeVisitableExt};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_target::callconv::{FnAbi, PassMode};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+use tracing::instrument;
+
+use crate::cfi::typeid::TypeIdOptions;
+use crate::cfi::typeid::itanium_cxx_abi::encode::{DictKey, EncodeTyOptions, encode_ty};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::cfi::typeid::itanium_cxx_abi::transform::{
+    TransformTy, TransformTyOptions, transform_instance,
+};
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=typeid_for_fnabi | COMPLEXITY=51 | LINES=86 */
+
+/// Returns a type metadata identifier for the specified FnAbi using the Itanium C++ ABI with vendor
+/// extended type qualifiers and types for Rust types that are not used at the FFI boundary.
+#[instrument(level = "trace", skip(tcx))]
+pub fn typeid_for_fnabi<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    fn_abi: &FnAbi<'tcx, Ty<'tcx>>,
+    options: TypeIdOptions,
+) -> String {
+    // A name is mangled by prefixing "_Z" to an encoding of its name, and in the case of functions
+    // its type.
+    let mut typeid = String::from("_Z");
+
+    // Clang uses the Itanium C++ ABI's virtual tables and RTTI typeinfo structure name as type
+    // metadata identifiers for function pointers. The typeinfo name encoding is a two-character
+    // code (i.e., 'TS') prefixed to the type encoding for the function.
+    typeid.push_str("TS");
+
+    // Function types are delimited by an "F..E" pair
+    typeid.push('F');
+
+    // A dictionary of substitution candidates used for compression (see
+    // https://itanium-cxx-abi.github.io/cxx-abi/abi.html#mangling-compression).
+    let mut dict: FxHashMap<DictKey<'tcx>, usize> = FxHashMap::default();
+
+    let mut encode_ty_options = EncodeTyOptions::from_bits(options.bits())
+        .unwrap_or_else(|| bug!("typeid_for_fnabi: invalid option(s) `{:?}`", options.bits()));
+    match fn_abi.conv {
+        CanonAbi::C => {
+            encode_ty_options.insert(EncodeTyOptions::GENERALIZE_REPR_C);
+        }
+        _ => {
+            encode_ty_options.remove(EncodeTyOptions::GENERALIZE_REPR_C);
+        }
+    }
+
+    // Encode the return type
+    let transform_ty_options = TransformTyOptions::from_bits(options.bits())
+        .unwrap_or_else(|| bug!("typeid_for_fnabi: invalid option(s) `{:?}`", options.bits()));
+    let mut type_folder = TransformTy::new(tcx, transform_ty_options);
+    let ty = fn_abi.ret.layout.ty.fold_with(&mut type_folder);
+    typeid.push_str(&encode_ty(tcx, ty, &mut dict, encode_ty_options));
+
+    // Encode the parameter types
+
+    // We erase ZSTs as we go if the argument is skipped. This is an implementation detail of how
+    // MIR is currently treated by rustc, and subject to change in the future. Specifically, MIR
+    // interpretation today will allow skipped arguments to simply not be passed at a call-site.
+    if !fn_abi.c_variadic {
+        let mut pushed_arg = false;
+        for arg in fn_abi.args.iter().filter(|arg| arg.mode != PassMode::Ignore) {
+            pushed_arg = true;
+            let ty = arg.layout.ty.fold_with(&mut type_folder);
+            typeid.push_str(&encode_ty(tcx, ty, &mut dict, encode_ty_options));
+        }
+        if !pushed_arg {
+            // Empty parameter lists, whether declared as () or conventionally as (void), are
+            // encoded with a void parameter specifier "v".
+            typeid.push('v');
+        }
+    } else {
+        for n in 0..fn_abi.fixed_count as usize {
+            if fn_abi.args[n].mode == PassMode::Ignore {
+                continue;
+            }
+            let ty = fn_abi.args[n].layout.ty.fold_with(&mut type_folder);
+            typeid.push_str(&encode_ty(tcx, ty, &mut dict, encode_ty_options));
+        }
+
+        typeid.push('z');
+    }
+
+    // Close the "F..E" pair
+    typeid.push('E');
+
+    // Add encoding suffixes
+    if options.contains(EncodeTyOptions::NORMALIZE_INTEGERS) {
+        typeid.push_str(".normalized");
+    }
+
+    if options.contains(EncodeTyOptions::GENERALIZE_POINTERS) {
+        typeid.push_str(".generalized");
+    }
+
+    typeid
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=typeid_for_instance | COMPLEXITY=13 | LINES=22 */
+
+/// Returns a type metadata identifier for the specified Instance using the Itanium C++ ABI with
+/// vendor extended type qualifiers and types for Rust types that are not used at the FFI boundary.
+#[instrument(level = "trace", skip(tcx))]
+pub fn typeid_for_instance<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    instance: Instance<'tcx>,
+    options: TypeIdOptions,
+) -> String {
+    assert!(!instance.has_non_region_param(), "{instance:#?} must be fully monomorphic");
+    let transform_ty_options = TransformTyOptions::from_bits(options.bits())
+        .unwrap_or_else(|| bug!("typeid_for_instance: invalid option(s) `{:?}`", options.bits()));
+    let instance = transform_instance(tcx, instance, transform_ty_options);
+    let fn_abi = tcx
+        .fn_abi_of_instance(
+            ty::TypingEnv::fully_monomorphized().as_query_input((instance, ty::List::empty())),
+        )
+        .unwrap_or_else(|error| {
+            bug!("typeid_for_instance: couldn't get fn_abi of instance {instance:?}: {error:?}")
+        });
+    typeid_for_fnabi(tcx, fn_abi, options)
+}

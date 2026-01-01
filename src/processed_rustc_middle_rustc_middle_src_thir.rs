@@ -1,114 +1,1178 @@
-/* FP:thir.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0001
-/* FP:thir.rs-0002 */ use std :: cmp :: Ordering ;
-/* FP:thir.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0002
-/* FP:thir.rs-0004 */ use std :: fmt ;
-/* FP:thir.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0003
-/* FP:thir.rs-0006 */ use std :: ops :: Index ;
-/* FP:thir.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0004
-/* FP:thir.rs-0008 */ use std :: sync :: Arc ;
-/* FP:thir.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0005
-/* FP:thir.rs-0010 */ use crate :: rustc_abi :: { FieldIdx , Integer , Size , VariantIdx } ;
-/* FP:thir.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0006
-/* FP:thir.rs-0012 */ use crate :: rustc_complete :: { AsmMacro , InlineAsmOptions , InlineAsmTemplatePiece } ;
-/* FP:thir.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0007
-/* FP:thir.rs-0014 */ use rustc_hir as hir ;
-/* FP:thir.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0008
-/* FP:thir.rs-0016 */ use crate :: rustc_complete :: def_id :: DefId ;
-/* FP:thir.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0009
-/* FP:thir.rs-0018 */ use crate :: rustc_complete :: { BindingMode , ByRef , HirId , MatchSource , RangeEnd } ;
-/* FP:thir.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0010
-/* FP:thir.rs-0020 */ use crate :: rustc_index :: { IndexVec , newtype_index } ;
-/* FP:thir.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0011
-/* FP:thir.rs-0022 */ use rustc_macros :: { HashStable , TyDecodable , TyEncodable , TypeVisitable } ;
-/* FP:thir.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0012
-/* FP:thir.rs-0024 */ use crate :: rustc_complete :: def_id :: LocalDefId ;
-/* FP:thir.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0013
-/* FP:thir.rs-0026 */ use crate :: rustc_complete :: { ErrorGuaranteed , Span , Symbol } ;
-/* FP:thir.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0014
-/* FP:thir.rs-0028 */ use crate :: rustc_target :: asm :: InlineAsmRegOrRegClass ;
-/* FP:thir.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0015
-/* FP:thir.rs-0030 */ use tracing :: instrument ;
-/* FP:thir.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0016
-/* FP:thir.rs-0032 */ use crate :: middle :: region ;
-/* FP:thir.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0017
-/* FP:thir.rs-0034 */ use crate :: mir :: interpret :: AllocId ;
-/* FP:thir.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0018
-/* FP:thir.rs-0036 */ use crate :: mir :: { self , AssignOp , BackwardIncompatibleDropReason , BinOp , BorrowKind , FakeReadCause , UnOp , } ;
-/* FP:thir.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0019
-/* FP:thir.rs-0038 */ use crate :: thir :: visit :: for_each_immediate_subpat ;
-/* FP:thir.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0020
-/* FP:thir.rs-0040 */ use crate :: ty :: adjustment :: PointerCoercion ;
-/* FP:thir.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0021
-/* FP:thir.rs-0042 */ use crate :: ty :: layout :: IntegerExt ;
-/* FP:thir.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_USE_0022
-/* FP:thir.rs-0044 */ use crate :: ty :: { self , AdtDef , CanonicalUserType , CanonicalUserTypeAnnotation , FnSig , GenericArgsRef , List , Ty , TyCtxt , UpvarArgs , } ;
-/* FP:thir.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_MOD_0023
-/* FP:thir.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_MACRO_0024
-/* FP:thir.rs-0048 */ macro_rules ! thir_with_elements { ($ ($ name : ident : $ id : ty => $ value : ty => $ format : literal ,) *) => { $ (newtype_index ! { # [derive (HashStable)] # [debug_format = $ format] pub struct $ id { } }) * # [doc = " A container for a THIR body."] # [doc = ""] # [doc = " This can be indexed directly by any THIR index (e.g. [`ExprId`])."] # [derive (Debug , HashStable , Clone)] pub struct Thir <'tcx > { pub body_type : BodyTy <'tcx >, $ (pub $ name : IndexVec <$ id , $ value >,) * } impl <'tcx > Thir <'tcx > { pub fn new (body_type : BodyTy <'tcx >) -> Thir <'tcx > { Thir { body_type , $ ($ name : IndexVec :: new () ,) * } } } $ (impl <'tcx > Index <$ id > for Thir <'tcx > { type Output = $ value ; fn index (& self , index : $ id) -> & Self :: Output { & self .$ name [index] } }) * } }
-/* FP:thir.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_MACRO_0025
-/* FP:thir.rs-0050 */ thir_with_elements ! { arms : ArmId => Arm <'tcx > => "a{}" , blocks : BlockId => Block => "b{}" , exprs : ExprId => Expr <'tcx > => "e{}" , stmts : StmtId => Stmt <'tcx > => "s{}" , params : ParamId => Param <'tcx > => "p{}" , }
-/* FP:thir.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_ENUM_0026
-/* FP:thir.rs-0052 */ # [derive (Debug , HashStable , Clone)] pub enum BodyTy < 'tcx > { Const (Ty < 'tcx >) , Fn (FnSig < 'tcx >) , GlobalAsm (Ty < 'tcx >) , }
-/* FP:thir.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_STRUCT_0027
-/* FP:thir.rs-0054 */ # [doc = " Description of a type-checked function parameter."] # [derive (Clone , Debug , HashStable)] pub struct Param < 'tcx > { # [doc = " The pattern that appears in the parameter list, or None for implicit parameters."] pub pat : Option < Box < Pat < 'tcx > > > , # [doc = " The possibly inferred type."] pub ty : Ty < 'tcx > , # [doc = " Span of the explicitly provided type, or None if inferred for closures."] pub ty_span : Option < Span > , # [doc = " Whether this param is `self`, and how it is bound."] pub self_kind : Option < hir :: ImplicitSelfKind > , # [doc = " HirId for lints."] pub hir_id : Option < HirId > , }
-/* FP:thir.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_ENUM_0028
-/* FP:thir.rs-0056 */ # [derive (Copy , Clone , Debug , HashStable)] pub enum LintLevel { Inherited , Explicit (HirId) , }
-/* FP:thir.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_STRUCT_0029
-/* FP:thir.rs-0058 */ # [derive (Clone , Debug , HashStable)] pub struct Block { # [doc = " Whether the block itself has a label. Used by `label: {}`"] # [doc = " and `try` blocks."] # [doc = ""] # [doc = " This does *not* include labels on loops, e.g. `'label: loop {}`."] pub targeted_by_break : bool , pub region_scope : region :: Scope , # [doc = " The span of the block, including the opening braces,"] # [doc = " the label, and the `unsafe` keyword, if present."] pub span : Span , # [doc = " The statements in the blocK."] pub stmts : Box < [StmtId] > , # [doc = " The trailing expression of the block, if any."] pub expr : Option < ExprId > , pub safety_mode : BlockSafety , }
-/* FP:thir.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_TYPE_0030
-/* FP:thir.rs-0060 */ type UserTy < 'tcx > = Option < Box < CanonicalUserType < 'tcx > > > ;
-/* FP:thir.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_STRUCT_0031
-/* FP:thir.rs-0062 */ # [derive (Clone , Debug , HashStable)] pub struct AdtExpr < 'tcx > { # [doc = " The ADT we're constructing."] pub adt_def : AdtDef < 'tcx > , # [doc = " The variant of the ADT."] pub variant_index : VariantIdx , pub args : GenericArgsRef < 'tcx > , # [doc = " Optional user-given args: for something like `let x ="] # [doc = " Bar::<T> { ... }`."] pub user_ty : UserTy < 'tcx > , pub fields : Box < [FieldExpr] > , # [doc = " The base, e.g. `Foo {x: 1, ..base}`."] pub base : AdtExprBase < 'tcx > , }
-/* FP:thir.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_ENUM_0032
-/* FP:thir.rs-0064 */ # [derive (Clone , Debug , HashStable)] pub enum AdtExprBase < 'tcx > { # [doc = " A struct expression where all the fields are explicitly enumerated: `Foo { a, b }`."] None , # [doc = " A struct expression with a \"base\", an expression of the same type as the outer struct that"] # [doc = " will be used to populate any fields not explicitly mentioned: `Foo { ..base }`"] Base (FruInfo < 'tcx >) , # [doc = " A struct expression with a `..` tail but no \"base\" expression. The values from the struct"] # [doc = " fields' default values will be used to populate any fields not explicitly mentioned:"] # [doc = " `Foo { .. }`."] DefaultFields (Box < [Ty < 'tcx >] >) , }
-/* FP:thir.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_STRUCT_0033
-/* FP:thir.rs-0066 */ # [derive (Clone , Debug , HashStable)] pub struct ClosureExpr < 'tcx > { pub closure_id : LocalDefId , pub args : UpvarArgs < 'tcx > , pub upvars : Box < [ExprId] > , pub movability : Option < hir :: Movability > , pub fake_reads : Vec < (ExprId , FakeReadCause , HirId) > , }
-/* FP:thir.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_STRUCT_0034
-/* FP:thir.rs-0068 */ # [derive (Clone , Debug , HashStable)] pub struct InlineAsmExpr < 'tcx > { pub asm_macro : AsmMacro , pub template : & 'tcx [InlineAsmTemplatePiece] , pub operands : Box < [InlineAsmOperand < 'tcx >] > , pub options : InlineAsmOptions , pub line_spans : & 'tcx [Span] , }
-/* FP:thir.rs-0069 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_ENUM_0035
-/* FP:thir.rs-0070 */ # [derive (Copy , Clone , Debug , HashStable)] pub enum BlockSafety { Safe , # [doc = " A compiler-generated unsafe block"] BuiltinUnsafe , # [doc = " An `unsafe` block. The `HirId` is the ID of the block."] ExplicitUnsafe (HirId) , }
-/* FP:thir.rs-0071 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_STRUCT_0036
-/* FP:thir.rs-0072 */ # [derive (Clone , Debug , HashStable)] pub struct Stmt < 'tcx > { pub kind : StmtKind < 'tcx > , }
-/* FP:thir.rs-0073 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_ENUM_0037
-/* FP:thir.rs-0074 */ # [derive (Clone , Debug , HashStable)] pub enum StmtKind < 'tcx > { # [doc = " An expression with a trailing semicolon."] Expr { # [doc = " The scope for this statement; may be used as lifetime of temporaries."] scope : region :: Scope , # [doc = " The expression being evaluated in this statement."] expr : ExprId , } , # [doc = " A `let` binding."] Let { # [doc = " The scope for variables bound in this `let`; it covers this and"] # [doc = " all the remaining statements in the block."] remainder_scope : region :: Scope , # [doc = " The scope for the initialization itself; might be used as"] # [doc = " lifetime of temporaries."] init_scope : region :: Scope , # [doc = " `let <PAT> = ...`"] # [doc = ""] # [doc = " If a type annotation is included, it is added as an ascription pattern."] pattern : Box < Pat < 'tcx > > , # [doc = " `let pat: ty = <INIT>`"] initializer : Option < ExprId > , # [doc = " `let pat: ty = <INIT> else { <ELSE> }`"] else_block : Option < BlockId > , # [doc = " The lint level for this `let` statement."] lint_level : LintLevel , # [doc = " Span of the `let <PAT> = <INIT>` part."] span : Span , } , }
-/* FP:thir.rs-0075 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_STRUCT_0038
-/* FP:thir.rs-0076 */ # [derive (Clone , Debug , Copy , PartialEq , Eq , Hash , HashStable , TyEncodable , TyDecodable)] pub struct LocalVarId (pub HirId) ;
-/* FP:thir.rs-0077 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_STRUCT_0039
-/* FP:thir.rs-0078 */ # [doc = " A THIR expression."] # [derive (Clone , Debug , HashStable)] pub struct Expr < 'tcx > { # [doc = " kind of expression"] pub kind : ExprKind < 'tcx > , # [doc = " The type of this expression"] pub ty : Ty < 'tcx > , # [doc = " The lifetime of this expression if it should be spilled into a"] # [doc = " temporary"] pub temp_lifetime : TempLifetime , # [doc = " span of the expression in the source"] pub span : Span , }
-/* FP:thir.rs-0079 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_STRUCT_0040
-/* FP:thir.rs-0080 */ # [doc = " Temporary lifetime information for THIR expressions"] # [derive (Clone , Copy , Debug , HashStable)] pub struct TempLifetime { # [doc = " Lifetime for temporaries as expected."] # [doc = " This should be `None` in a constant context."] pub temp_lifetime : Option < region :: Scope > , # [doc = " If `Some(lt)`, indicates that the lifetime of this temporary will change to `lt` in a future edition."] # [doc = " If `None`, then no changes are expected, or lints are disabled."] pub backwards_incompatible : Option < (region :: Scope , BackwardIncompatibleDropReason) > , }
-/* FP:thir.rs-0081 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_ENUM_0041
-/* FP:thir.rs-0082 */ # [derive (Clone , Debug , HashStable)] pub enum ExprKind < 'tcx > { # [doc = " `Scope`s are used to explicitly mark destruction scopes,"] # [doc = " and to track the `HirId` of the expressions within the scope."] Scope { region_scope : region :: Scope , lint_level : LintLevel , value : ExprId , } , # [doc = " A `box <value>` expression."] Box { value : ExprId , } , # [doc = " An `if` expression."] If { if_then_scope : region :: Scope , cond : ExprId , # [doc = " `then` is always `ExprKind::Block`."] then : ExprId , # [doc = " If present, the `else_opt` expr is always `ExprKind::Block` (for"] # [doc = " `else`) or `ExprKind::If` (for `else if`)."] else_opt : Option < ExprId > , } , # [doc = " A function call. Method calls and overloaded operators are converted to plain function calls."] Call { # [doc = " The type of the function. This is often a [`FnDef`] or a [`FnPtr`]."] # [doc = ""] # [doc = " [`FnDef`]: ty::TyKind::FnDef"] # [doc = " [`FnPtr`]: ty::TyKind::FnPtr"] ty : Ty < 'tcx > , # [doc = " The function itself."] fun : ExprId , # [doc = " The arguments passed to the function."] # [doc = ""] # [doc = " Note: in some cases (like calling a closure), the function call `f(...args)` gets"] # [doc = " rewritten as a call to a function trait method (e.g. `FnOnce::call_once(f, (...args))`)."] args : Box < [ExprId] > , # [doc = " Whether this is from an overloaded operator rather than a"] # [doc = " function call from HIR. `true` for overloaded function call."] from_hir_call : bool , # [doc = " The span of the function, without the dot and receiver"] # [doc = " (e.g. `foo(a, b)` in `x.foo(a, b)`)."] fn_span : Span , } , # [doc = " A use expression `x.use`."] ByUse { # [doc = " The expression on which use is applied."] expr : ExprId , # [doc = " The span of use, without the dot and receiver"] # [doc = " (e.g. `use` in `x.use`)."] span : Span , } , # [doc = " A *non-overloaded* dereference."] Deref { arg : ExprId , } , # [doc = " A *non-overloaded* binary operation."] Binary { op : BinOp , lhs : ExprId , rhs : ExprId , } , # [doc = " A logical operation. This is distinct from `BinaryOp` because"] # [doc = " the operands need to be lazily evaluated."] LogicalOp { op : LogicalOp , lhs : ExprId , rhs : ExprId , } , # [doc = " A *non-overloaded* unary operation. Note that here the deref (`*`)"] # [doc = " operator is represented by `ExprKind::Deref`."] Unary { op : UnOp , arg : ExprId , } , # [doc = " A cast: `<source> as <type>`. The type we cast to is the type of"] # [doc = " the parent expression."] Cast { source : ExprId , } , # [doc = " Forces its contents to be treated as a value expression, not a place"] # [doc = " expression. This is inserted in some places where an operation would"] # [doc = " otherwise be erased completely (e.g. some no-op casts), but we still"] # [doc = " need to ensure that its operand is treated as a value and not a place."] Use { source : ExprId , } , # [doc = " A coercion from `!` to any type."] NeverToAny { source : ExprId , } , # [doc = " A pointer coercion. More information can be found in [`PointerCoercion`]."] # [doc = " Pointer casts that cannot be done by coercions are represented by [`ExprKind::Cast`]."] PointerCoercion { cast : PointerCoercion , source : ExprId , # [doc = " Whether this coercion is written with an `as` cast in the source code."] is_from_as_cast : bool , } , # [doc = " A `loop` expression."] Loop { body : ExprId , } , # [doc = " A `#[loop_match] loop { state = 'blk: { match state { ... } } }` expression."] LoopMatch { # [doc = " The state variable that is updated."] # [doc = " The `match_data.scrutinee` is the same variable, but with a different span."] state : ExprId , region_scope : region :: Scope , match_data : Box < LoopMatchMatchData > , } , # [doc = " Special expression representing the `let` part of an `if let` or similar construct"] # [doc = " (including `if let` guards in match arms, and let-chains formed by `&&`)."] # [doc = ""] # [doc = " This isn't considered a real expression in surface Rust syntax, so it can"] # [doc = " only appear in specific situations, such as within the condition of an `if`."] # [doc = ""] # [doc = " (Not to be confused with [`StmtKind::Let`], which is a normal `let` statement.)"] Let { expr : ExprId , pat : Box < Pat < 'tcx > > , } , # [doc = " A `match` expression."] Match { scrutinee : ExprId , arms : Box < [ArmId] > , match_source : MatchSource , } , # [doc = " A block."] Block { block : BlockId , } , # [doc = " An assignment: `lhs = rhs`."] Assign { lhs : ExprId , rhs : ExprId , } , # [doc = " A *non-overloaded* operation assignment, e.g. `lhs += rhs`."] AssignOp { op : AssignOp , lhs : ExprId , rhs : ExprId , } , # [doc = " Access to a field of a struct, a tuple, an union, or an enum."] Field { lhs : ExprId , # [doc = " Variant containing the field."] variant_index : VariantIdx , # [doc = " This can be a named (`.foo`) or unnamed (`.0`) field."] name : FieldIdx , } , # [doc = " A *non-overloaded* indexing operation."] Index { lhs : ExprId , index : ExprId , } , # [doc = " A local variable."] VarRef { id : LocalVarId , } , # [doc = " Used to represent upvars mentioned in a closure/coroutine"] UpvarRef { # [doc = " DefId of the closure/coroutine"] closure_def_id : DefId , # [doc = " HirId of the root variable"] var_hir_id : LocalVarId , } , # [doc = " A borrow, e.g. `&arg`."] Borrow { borrow_kind : BorrowKind , arg : ExprId , } , # [doc = " A `&raw [const|mut] $place_expr` raw borrow resulting in type `*[const|mut] T`."] RawBorrow { mutability : hir :: Mutability , arg : ExprId , } , # [doc = " A `break` expression."] Break { label : region :: Scope , value : Option < ExprId > , } , # [doc = " A `continue` expression."] Continue { label : region :: Scope , } , # [doc = " A `#[const_continue] break` expression."] ConstContinue { label : region :: Scope , value : ExprId , } , # [doc = " A `return` expression."] Return { value : Option < ExprId > , } , # [doc = " A `become` expression."] Become { value : ExprId , } , # [doc = " An inline `const` block, e.g. `const {}`."] ConstBlock { did : DefId , args : GenericArgsRef < 'tcx > , } , # [doc = " An array literal constructed from one repeated element, e.g. `[1; 5]`."] Repeat { value : ExprId , count : ty :: Const < 'tcx > , } , # [doc = " An array, e.g. `[a, b, c, d]`."] Array { fields : Box < [ExprId] > , } , # [doc = " A tuple, e.g. `(a, b, c, d)`."] Tuple { fields : Box < [ExprId] > , } , # [doc = " An ADT constructor, e.g. `Foo {x: 1, y: 2}`."] Adt (Box < AdtExpr < 'tcx > >) , # [doc = " A type ascription on a place."] PlaceTypeAscription { source : ExprId , # [doc = " Type that the user gave to this expression"] user_ty : UserTy < 'tcx > , user_ty_span : Span , } , # [doc = " A type ascription on a value, e.g. `type_ascribe!(42, i32)` or `42 as i32`."] ValueTypeAscription { source : ExprId , # [doc = " Type that the user gave to this expression"] user_ty : UserTy < 'tcx > , user_ty_span : Span , } , # [doc = " An unsafe binder cast on a place, e.g. `unwrap_binder!(*ptr)`."] PlaceUnwrapUnsafeBinder { source : ExprId , } , # [doc = " An unsafe binder cast on a value, e.g. `unwrap_binder!(rvalue())`,"] # [doc = " which makes a temporary."] ValueUnwrapUnsafeBinder { source : ExprId , } , # [doc = " Construct an unsafe binder, e.g. `wrap_binder(&ref)`."] WrapUnsafeBinder { source : ExprId , } , # [doc = " A closure definition."] Closure (Box < ClosureExpr < 'tcx > >) , # [doc = " A literal."] Literal { lit : hir :: Lit , neg : bool , } , # [doc = " For literals that don't correspond to anything in the HIR"] NonHirLiteral { lit : ty :: ScalarInt , user_ty : UserTy < 'tcx > , } , # [doc = " A literal of a ZST type."] ZstLiteral { user_ty : UserTy < 'tcx > , } , # [doc = " Associated constants and named constants"] NamedConst { def_id : DefId , args : GenericArgsRef < 'tcx > , user_ty : UserTy < 'tcx > , } , ConstParam { param : ty :: ParamConst , def_id : DefId , } , # [doc = " A literal containing the address of a `static`."] # [doc = ""] # [doc = " This is only distinguished from `Literal` so that we can register some"] # [doc = " info for diagnostics."] StaticRef { alloc_id : AllocId , ty : Ty < 'tcx > , def_id : DefId , } , # [doc = " Inline assembly, i.e. `asm!()`."] InlineAsm (Box < InlineAsmExpr < 'tcx > >) , # [doc = " Field offset (`offset_of!`)"] OffsetOf { container : Ty < 'tcx > , fields : & 'tcx List < (VariantIdx , FieldIdx) > , } , # [doc = " An expression taking a reference to a thread local."] ThreadLocalRef (DefId) , # [doc = " A `yield` expression."] Yield { value : ExprId , } , }
-/* FP:thir.rs-0083 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_STRUCT_0042
-/* FP:thir.rs-0084 */ # [doc = " Represents the association of a field identifier and an expression."] # [doc = ""] # [doc = " This is used in struct constructors."] # [derive (Clone , Debug , HashStable)] pub struct FieldExpr { pub name : FieldIdx , pub expr : ExprId , }
-/* FP:thir.rs-0085 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_STRUCT_0043
-/* FP:thir.rs-0086 */ # [derive (Clone , Debug , HashStable)] pub struct FruInfo < 'tcx > { pub base : ExprId , pub field_types : Box < [Ty < 'tcx >] > , }
-/* FP:thir.rs-0087 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_STRUCT_0044
-/* FP:thir.rs-0088 */ # [doc = " A `match` arm."] # [derive (Clone , Debug , HashStable)] pub struct Arm < 'tcx > { pub pattern : Box < Pat < 'tcx > > , pub guard : Option < ExprId > , pub body : ExprId , pub lint_level : LintLevel , pub scope : region :: Scope , pub span : Span , }
-/* FP:thir.rs-0089 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_STRUCT_0045
-/* FP:thir.rs-0090 */ # [doc = " The `match` part of a `#[loop_match]`"] # [derive (Clone , Debug , HashStable)] pub struct LoopMatchMatchData { pub scrutinee : ExprId , pub arms : Box < [ArmId] > , pub span : Span , }
-/* FP:thir.rs-0091 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_ENUM_0046
-/* FP:thir.rs-0092 */ # [derive (Copy , Clone , Debug , HashStable)] pub enum LogicalOp { # [doc = " The `&&` operator."] And , # [doc = " The `||` operator."] Or , }
-/* FP:thir.rs-0093 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_ENUM_0047
-/* FP:thir.rs-0094 */ # [derive (Clone , Debug , HashStable)] pub enum InlineAsmOperand < 'tcx > { In { reg : InlineAsmRegOrRegClass , expr : ExprId , } , Out { reg : InlineAsmRegOrRegClass , late : bool , expr : Option < ExprId > , } , InOut { reg : InlineAsmRegOrRegClass , late : bool , expr : ExprId , } , SplitInOut { reg : InlineAsmRegOrRegClass , late : bool , in_expr : ExprId , out_expr : Option < ExprId > , } , Const { value : mir :: Const < 'tcx > , span : Span , } , SymFn { value : ExprId , } , SymStatic { def_id : DefId , } , Label { block : BlockId , } , }
-/* FP:thir.rs-0095 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_STRUCT_0048
-/* FP:thir.rs-0096 */ # [derive (Clone , Debug , HashStable , TypeVisitable)] pub struct FieldPat < 'tcx > { pub field : FieldIdx , pub pattern : Pat < 'tcx > , }
-/* FP:thir.rs-0097 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_STRUCT_0049
-/* FP:thir.rs-0098 */ # [derive (Clone , Debug , HashStable , TypeVisitable)] pub struct Pat < 'tcx > { pub ty : Ty < 'tcx > , pub span : Span , pub kind : PatKind < 'tcx > , }
-/* FP:thir.rs-0099 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_IMPL_0050
-/* FP:thir.rs-0100 */ impl < 'tcx > Pat < 'tcx > { pub fn simple_ident (& self) -> Option < Symbol > { match self . kind { PatKind :: Binding { name , mode : BindingMode (ByRef :: No , _) , subpattern : None , .. } => Some (name) , _ => None , } } # [doc = " Call `f` on every \"binding\" in a pattern, e.g., on `a` in"] # [doc = " `match foo() { Some(a) => (), None => () }`"] pub fn each_binding (& self , mut f : impl FnMut (Symbol , ByRef , Ty < 'tcx > , Span)) { self . walk_always (| p | { if let PatKind :: Binding { name , mode , ty , .. } = p . kind { f (name , mode . 0 , ty , p . span) ; } }) ; } # [doc = " Walk the pattern in left-to-right order."] # [doc = ""] # [doc = " If `it(pat)` returns `false`, the children are not visited."] pub fn walk (& self , mut it : impl FnMut (& Pat < 'tcx >) -> bool) { self . walk_ (& mut it) } fn walk_ (& self , it : & mut impl FnMut (& Pat < 'tcx >) -> bool) { if ! it (self) { return ; } for_each_immediate_subpat (self , | p | p . walk_ (it)) ; } # [doc = " Whether the pattern has a `PatKind::Error` nested within."] pub fn pat_error_reported (& self) -> Result < () , ErrorGuaranteed > { let mut error = None ; self . walk (| pat | { if let PatKind :: Error (e) = pat . kind && error . is_none () { error = Some (e) ; } error . is_none () }) ; match error { None => Ok (()) , Some (e) => Err (e) , } } # [doc = " Walk the pattern in left-to-right order."] # [doc = ""] # [doc = " If you always want to recurse, prefer this method over `walk`."] pub fn walk_always (& self , mut it : impl FnMut (& Pat < 'tcx >)) { self . walk (| p | { it (p) ; true }) } # [doc = " Whether this a never pattern."] pub fn is_never_pattern (& self) -> bool { let mut is_never_pattern = false ; self . walk (| pat | match & pat . kind { PatKind :: Never => { is_never_pattern = true ; false } PatKind :: Or { pats } => { is_never_pattern = pats . iter () . all (| p | p . is_never_pattern ()) ; false } _ => true , }) ; is_never_pattern } }
-/* FP:thir.rs-0101 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_STRUCT_0051
-/* FP:thir.rs-0102 */ # [derive (Clone , Debug , HashStable , TypeVisitable)] pub struct Ascription < 'tcx > { pub annotation : CanonicalUserTypeAnnotation < 'tcx > , # [doc = " Variance to use when relating the `user_ty` to the **type of the value being"] # [doc = " matched**. Typically, this is `Variance::Covariant`, since the value being matched must"] # [doc = " have a type that is some subtype of the ascribed type."] # [doc = ""] # [doc = " Note that this variance does not apply for any bindings within subpatterns. The type"] # [doc = " assigned to those bindings must be exactly equal to the `user_ty` given here."] # [doc = ""] # [doc = " The only place where this field is not `Covariant` is when matching constants, where"] # [doc = " we currently use `Contravariant` -- this is because the constant type just needs to"] # [doc = " be \"comparable\" to the type of the input value. So, for example:"] # [doc = ""] # [doc = " ```text"] # [doc = " match x { \"foo\" => .. }"] # [doc = " ```"] # [doc = ""] # [doc = " requires that `&'static str <: T_x`, where `T_x` is the type of `x`. Really, we should"] # [doc = " probably be checking for a `PartialEq` impl instead, but this preserves the behavior"] # [doc = " of the old type-check for now. See #57280 for details."] pub variance : ty :: Variance , }
-/* FP:thir.rs-0103 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_ENUM_0052
-/* FP:thir.rs-0104 */ # [derive (Clone , Debug , HashStable , TypeVisitable)] pub enum PatKind < 'tcx > { # [doc = " A missing pattern, e.g. for an anonymous param in a bare fn like `fn f(u32)`."] Missing , # [doc = " A wildcard pattern: `_`."] Wild , AscribeUserType { ascription : Ascription < 'tcx > , subpattern : Box < Pat < 'tcx > > , } , # [doc = " `x`, `ref x`, `x @ P`, etc."] Binding { name : Symbol , # [type_visitable (ignore)] mode : BindingMode , # [type_visitable (ignore)] var : LocalVarId , ty : Ty < 'tcx > , subpattern : Option < Box < Pat < 'tcx > > > , # [doc = " Is this the leftmost occurrence of the binding, i.e., is `var` the"] # [doc = " `HirId` of this pattern?"] # [doc = ""] # [doc = " (The same binding can occur multiple times in different branches of"] # [doc = " an or-pattern, but only one of them will be primary.)"] is_primary : bool , } , # [doc = " `Foo(...)` or `Foo{...}` or `Foo`, where `Foo` is a variant name from an ADT with"] # [doc = " multiple variants."] Variant { adt_def : AdtDef < 'tcx > , args : GenericArgsRef < 'tcx > , variant_index : VariantIdx , subpatterns : Vec < FieldPat < 'tcx > > , } , # [doc = " `(...)`, `Foo(...)`, `Foo{...}`, or `Foo`, where `Foo` is a variant name from an ADT with"] # [doc = " a single variant."] Leaf { subpatterns : Vec < FieldPat < 'tcx > > , } , # [doc = " `box P`, `&P`, `&mut P`, etc."] Deref { subpattern : Box < Pat < 'tcx > > , } , # [doc = " Deref pattern, written `box P` for now."] DerefPattern { subpattern : Box < Pat < 'tcx > > , # [doc = " Whether the pattern scrutinee needs to be borrowed in order to call `Deref::deref` or"] # [doc = " `DerefMut::deref_mut`, and if so, which. This is `ByRef::No` for deref patterns on"] # [doc = " boxes; they are lowered using a built-in deref rather than a method call, thus they"] # [doc = " don't borrow the scrutinee."] # [type_visitable (ignore)] borrow : ByRef , } , # [doc = " One of the following:"] # [doc = " * `&str`, which will be handled as a string pattern and thus"] # [doc = "   exhaustiveness checking will detect if you use the same string twice in different"] # [doc = "   patterns."] # [doc = " * integer, bool, char or float, which will be handled by"] # [doc = "   exhaustiveness to cover exactly its own value, similar to `&str`, but these values are"] # [doc = "   much simpler."] # [doc = " * raw pointers derived from integers, other raw pointers will have already resulted in an"] # [doc = " * `String`, if `string_deref_patterns` is enabled."] Constant { value : ty :: Value < 'tcx > , } , # [doc = " Pattern obtained by converting a constant (inline or named) to its pattern"] # [doc = " representation using `const_to_pat`. This is used for unsafety checking."] ExpandedConstant { # [doc = " [DefId] of the constant item."] def_id : DefId , # [doc = " The pattern that the constant lowered to."] # [doc = ""] # [doc = " HACK: we need to keep the `DefId` of inline constants around for unsafety checking;"] # [doc = " therefore when a range pattern contains inline constants, we re-wrap the range pattern"] # [doc = " with the `ExpandedConstant` nodes that correspond to the range endpoints. Hence"] # [doc = " `subpattern` may actually be a range pattern, and `def_id` be the constant for one of"] # [doc = " its endpoints."] subpattern : Box < Pat < 'tcx > > , } , Range (Arc < PatRange < 'tcx > >) , # [doc = " Matches against a slice, checking the length and extracting elements."] # [doc = " irrefutable when there is a slice pattern and both `prefix` and `suffix` are empty."] # [doc = " e.g., `&[ref xs @ ..]`."] Slice { prefix : Box < [Pat < 'tcx >] > , slice : Option < Box < Pat < 'tcx > > > , suffix : Box < [Pat < 'tcx >] > , } , # [doc = " Fixed match against an array; irrefutable."] Array { prefix : Box < [Pat < 'tcx >] > , slice : Option < Box < Pat < 'tcx > > > , suffix : Box < [Pat < 'tcx >] > , } , # [doc = " An or-pattern, e.g. `p | q`."] # [doc = " Invariant: `pats.len() >= 2`."] Or { pats : Box < [Pat < 'tcx >] > , } , # [doc = " A never pattern `!`."] Never , # [doc = " An error has been encountered during lowering. We probably shouldn't report more lints"] # [doc = " related to this pattern."] Error (ErrorGuaranteed) , }
-/* FP:thir.rs-0105 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_STRUCT_0053
-/* FP:thir.rs-0106 */ # [doc = " A range pattern."] # [doc = " The boundaries must be of the same type and that type must be numeric."] # [derive (Clone , Debug , PartialEq , HashStable , TypeVisitable)] pub struct PatRange < 'tcx > { # [doc = " Must not be `PosInfinity`."] pub lo : PatRangeBoundary < 'tcx > , # [doc = " Must not be `NegInfinity`."] pub hi : PatRangeBoundary < 'tcx > , # [type_visitable (ignore)] pub end : RangeEnd , pub ty : Ty < 'tcx > , }
-/* FP:thir.rs-0107 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_IMPL_0054
-/* FP:thir.rs-0108 */ impl < 'tcx > PatRange < 'tcx > { # [doc = " Whether this range covers the full extent of possible values (best-effort, we ignore floats)."] # [inline] pub fn is_full_range (& self , tcx : TyCtxt < 'tcx >) -> Option < bool > { let (min , max , size , bias) = match * self . ty . kind () { ty :: Char => (0 , std :: char :: MAX as u128 , Size :: from_bits (32) , 0) , ty :: Int (ity) => { let size = Integer :: from_int_ty (& tcx , ity) . size () ; let max = size . truncate (u128 :: MAX) ; let bias = 1u128 << (size . bits () - 1) ; (0 , max , size , bias) } ty :: Uint (uty) => { let size = Integer :: from_uint_ty (& tcx , uty) . size () ; let max = size . unsigned_int_max () ; (0 , max , size , 0) } _ => return None , } ; let lo_is_min = match self . lo { PatRangeBoundary :: NegInfinity => true , PatRangeBoundary :: Finite (value) => { let lo = value . try_to_scalar_int () . unwrap () . to_bits (size) ^ bias ; lo <= min } PatRangeBoundary :: PosInfinity => false , } ; if lo_is_min { let hi_is_max = match self . hi { PatRangeBoundary :: NegInfinity => false , PatRangeBoundary :: Finite (value) => { let hi = value . try_to_scalar_int () . unwrap () . to_bits (size) ^ bias ; hi > max || hi == max && self . end == RangeEnd :: Included } PatRangeBoundary :: PosInfinity => true , } ; if hi_is_max { return Some (true) ; } } Some (false) } # [inline] pub fn contains (& self , value : ty :: Value < 'tcx > , tcx : TyCtxt < 'tcx >) -> Option < bool > { use Ordering :: * ; debug_assert_eq ! (value . ty , self . ty) ; let ty = self . ty ; let value = PatRangeBoundary :: Finite (value . valtree) ; Some (match self . lo . compare_with (value , ty , tcx) ? { Less | Equal => true , Greater => false , } && match value . compare_with (self . hi , ty , tcx) ? { Less => true , Equal => self . end == RangeEnd :: Included , Greater => false , } ,) } # [inline] pub fn overlaps (& self , other : & Self , tcx : TyCtxt < 'tcx >) -> Option < bool > { use Ordering :: * ; debug_assert_eq ! (self . ty , other . ty) ; Some (match other . lo . compare_with (self . hi , self . ty , tcx) ? { Less => true , Equal => self . end == RangeEnd :: Included , Greater => false , } && match self . lo . compare_with (other . hi , self . ty , tcx) ? { Less => true , Equal => other . end == RangeEnd :: Included , Greater => false , } ,) } }
-/* FP:thir.rs-0109 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_IMPL_0055
-/* FP:thir.rs-0110 */ impl < 'tcx > fmt :: Display for PatRange < 'tcx > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { if let & PatRangeBoundary :: Finite (valtree) = & self . lo { let value = ty :: Value { ty : self . ty , valtree } ; write ! (f , "{value}") ? ; } if let & PatRangeBoundary :: Finite (valtree) = & self . hi { write ! (f , "{}" , self . end) ? ; let value = ty :: Value { ty : self . ty , valtree } ; write ! (f , "{value}") ? ; } else { write ! (f , "..") ? ; } Ok (()) } }
-/* FP:thir.rs-0111 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_ENUM_0056
-/* FP:thir.rs-0112 */ # [doc = " A (possibly open) boundary of a range pattern."] # [doc = " If present, the const must be of a numeric type."] # [derive (Copy , Clone , Debug , PartialEq , HashStable , TypeVisitable)] pub enum PatRangeBoundary < 'tcx > { # [doc = " The type of this valtree is stored in the surrounding `PatRange`."] Finite (ty :: ValTree < 'tcx >) , NegInfinity , PosInfinity , }
-/* FP:thir.rs-0113 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_IMPL_0057
-/* FP:thir.rs-0114 */ impl < 'tcx > PatRangeBoundary < 'tcx > { # [inline] pub fn is_finite (self) -> bool { matches ! (self , Self :: Finite (..)) } # [inline] pub fn as_finite (self) -> Option < ty :: ValTree < 'tcx > > { match self { Self :: Finite (value) => Some (value) , Self :: NegInfinity | Self :: PosInfinity => None , } } pub fn to_bits (self , ty : Ty < 'tcx > , tcx : TyCtxt < 'tcx >) -> u128 { match self { Self :: Finite (value) => value . try_to_scalar_int () . unwrap () . to_bits_unchecked () , Self :: NegInfinity => { ty . numeric_min_and_max_as_bits (tcx) . unwrap () . 0 } Self :: PosInfinity => { ty . numeric_min_and_max_as_bits (tcx) . unwrap () . 1 } } } # [instrument (skip (tcx) , level = "debug" , ret)] pub fn compare_with (self , other : Self , ty : Ty < 'tcx > , tcx : TyCtxt < 'tcx >) -> Option < Ordering > { use PatRangeBoundary :: * ; match (self , other) { (PosInfinity , PosInfinity) => return Some (Ordering :: Equal) , (NegInfinity , NegInfinity) => return Some (Ordering :: Equal) , (Finite (a) , Finite (b)) if matches ! (ty . kind () , ty :: Int (_) | ty :: Uint (_) | ty :: Char) => { if let (Some (a) , Some (b)) = (a . try_to_scalar_int () , b . try_to_scalar_int ()) { let sz = ty . primitive_size (tcx) ; let cmp = match ty . kind () { ty :: Uint (_) | ty :: Char => a . to_uint (sz) . cmp (& b . to_uint (sz)) , ty :: Int (_) => a . to_int (sz) . cmp (& b . to_int (sz)) , _ => unreachable ! () , } ; return Some (cmp) ; } } _ => { } } let a = self . to_bits (ty , tcx) ; let b = other . to_bits (ty , tcx) ; match ty . kind () { ty :: Float (ty :: FloatTy :: F16) => { use rustc_apfloat :: Float ; let a = rustc_apfloat :: ieee :: Half :: from_bits (a) ; let b = rustc_apfloat :: ieee :: Half :: from_bits (b) ; a . partial_cmp (& b) } ty :: Float (ty :: FloatTy :: F32) => { use rustc_apfloat :: Float ; let a = rustc_apfloat :: ieee :: Single :: from_bits (a) ; let b = rustc_apfloat :: ieee :: Single :: from_bits (b) ; a . partial_cmp (& b) } ty :: Float (ty :: FloatTy :: F64) => { use rustc_apfloat :: Float ; let a = rustc_apfloat :: ieee :: Double :: from_bits (a) ; let b = rustc_apfloat :: ieee :: Double :: from_bits (b) ; a . partial_cmp (& b) } ty :: Float (ty :: FloatTy :: F128) => { use rustc_apfloat :: Float ; let a = rustc_apfloat :: ieee :: Quad :: from_bits (a) ; let b = rustc_apfloat :: ieee :: Quad :: from_bits (b) ; a . partial_cmp (& b) } ty :: Int (ity) => { let size = crate :: rustc_abi :: Integer :: from_int_ty (& tcx , * ity) . size () ; let a = size . sign_extend (a) as i128 ; let b = size . sign_extend (b) as i128 ; Some (a . cmp (& b)) } ty :: Uint (_) | ty :: Char => Some (a . cmp (& b)) , _ => bug ! () , } } }
-/* FP:thir.rs-0115 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_thir_MOD_0058
+// SRC: ../rust/compiler/rustc_middle/src/thir.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=16 */
+// THIR datatypes and definitions. See the [rustc dev guide] for more info.
+//
+// If you compare the THIR [`ExprKind`] to [`hir::ExprKind`], you will see it is
+// a good bit simpler. In fact, a number of the more straight-forward
+// MIR simplifications are already done in the lowering to THIR. For
+// example, method calls and overloaded operators are absent: they are
+// expected to be converted into [`ExprKind::Call`] instances.
+//
+// [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/thir.html
+
+use std::cmp::Ordering;
+use std::fmt;
+use std::ops::Index;
+use std::sync::Arc;
+
+use crate::rustc_abi::{FieldIdx, Integer, Size, VariantIdx};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{AsmMacro, InlineAsmOptions, InlineAsmTemplatePiece};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use rustc_hir as hir;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{BindingMode, ByRef, HirId, MatchSource, RangeEnd};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_index::{IndexVec, newtype_index};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeVisitable};
+/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::{ErrorGuaranteed, Span, Symbol};
+/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+use crate::rustc_target::asm::InlineAsmRegOrRegClass;
+use tracing::instrument;
+
+use crate::middle::region;
+use crate::mir::interpret::AllocId;
+use crate::mir::{
+    self, AssignOp, BackwardIncompatibleDropReason, BinOp, BorrowKind, FakeReadCause, UnOp,
+};
+/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+use crate::thir::visit::for_each_immediate_subpat;
+use crate::ty::adjustment::PointerCoercion;
+use crate::ty::layout::IntegerExt;
+use crate::ty::{
+    self, AdtDef, CanonicalUserType, CanonicalUserTypeAnnotation, FnSig, GenericArgsRef, List, Ty,
+    TyCtxt, UpvarArgs,
+};
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=$id | COMPLEXITY=24 | LINES=50 */
+
+
+macro_rules! thir_with_elements {
+    (
+        $($name:ident: $id:ty => $value:ty => $format:literal,)*
+    ) => {
+        $(
+            newtype_index! {
+                #[derive(HashStable)]
+                #[debug_format = $format]
+                pub struct $id {}
+            }
+        )*
+
+        // Note: Making `Thir` implement `Clone` is useful for external tools that need access to
+        // THIR bodies even after the `Steal` query result has been stolen.
+        // One such tool is https://github.com/rust-corpus/qrates/.
+        /// A container for a THIR body.
+        ///
+        /// This can be indexed directly by any THIR index (e.g. [`ExprId`]).
+        #[derive(Debug, HashStable, Clone)]
+        pub struct Thir<'tcx> {
+            pub body_type: BodyTy<'tcx>,
+            $(
+                pub $name: IndexVec<$id, $value>,
+            )*
+        }
+
+        impl<'tcx> Thir<'tcx> {
+            pub fn new(body_type: BodyTy<'tcx>) -> Thir<'tcx> {
+                Thir {
+                    body_type,
+                    $(
+                        $name: IndexVec::new(),
+                    )*
+                }
+            }
+        }
+
+        $(
+            impl<'tcx> Index<$id> for Thir<'tcx> {
+                type Output = $value;
+                fn index(&self, index: $id) -> &Self::Output {
+                    &self.$name[index]
+                }
+            }
+        )*
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=8 */
+
+thir_with_elements! {
+    arms: ArmId => Arm<'tcx> => "a{}",
+    blocks: BlockId => Block => "b{}",
+    exprs: ExprId => Expr<'tcx> => "e{}",
+    stmts: StmtId => Stmt<'tcx> => "s{}",
+    params: ParamId => Param<'tcx> => "p{}",
+}
+/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Debug, HashStable, Clone)]
+pub enum BodyTy<'tcx> {
+    Const(Ty<'tcx>),
+    Fn(FnSig<'tcx>),
+    GlobalAsm(Ty<'tcx>),
+}
+/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=Param | COMPLEXITY=11 | LINES=15 */
+
+/// Description of a type-checked function parameter.
+#[derive(Clone, Debug, HashStable)]
+pub struct Param<'tcx> {
+    /// The pattern that appears in the parameter list, or None for implicit parameters.
+    pub pat: Option<Box<Pat<'tcx>>>,
+    /// The possibly inferred type.
+    pub ty: Ty<'tcx>,
+    /// Span of the explicitly provided type, or None if inferred for closures.
+    pub ty_span: Option<Span>,
+    /// Whether this param is `self`, and how it is bound.
+    pub self_kind: Option<hir::ImplicitSelfKind>,
+    /// HirId for lints.
+    pub hir_id: Option<HirId>,
+}
+/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Copy, Clone, Debug, HashStable)]
+pub enum LintLevel {
+    Inherited,
+    Explicit(HirId),
+}
+/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=Block | COMPLEXITY=11 | LINES=18 */
+
+#[derive(Clone, Debug, HashStable)]
+pub struct Block {
+    /// Whether the block itself has a label. Used by `label: {}`
+    /// and `try` blocks.
+    ///
+    /// This does *not* include labels on loops, e.g. `'label: loop {}`.
+    pub targeted_by_break: bool,
+    pub region_scope: region::Scope,
+    /// The span of the block, including the opening braces,
+    /// the label, and the `unsafe` keyword, if present.
+    pub span: Span,
+    /// The statements in the blocK.
+    pub stmts: Box<[StmtId]>,
+    /// The trailing expression of the block, if any.
+    pub expr: Option<ExprId>,
+    pub safety_mode: BlockSafety,
+}
+/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=AdtExpr | COMPLEXITY=7 | LINES=19 */
+
+type UserTy<'tcx> = Option<Box<CanonicalUserType<'tcx>>>;
+
+#[derive(Clone, Debug, HashStable)]
+pub struct AdtExpr<'tcx> {
+    /// The ADT we're constructing.
+    pub adt_def: AdtDef<'tcx>,
+    /// The variant of the ADT.
+    pub variant_index: VariantIdx,
+    pub args: GenericArgsRef<'tcx>,
+
+    /// Optional user-given args: for something like `let x =
+    /// Bar::<T> { ... }`.
+    pub user_ty: UserTy<'tcx>,
+
+    pub fields: Box<[FieldExpr]>,
+    /// The base, e.g. `Foo {x: 1, ..base}`.
+    pub base: AdtExprBase<'tcx>,
+}
+/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=13 */
+
+#[derive(Clone, Debug, HashStable)]
+pub enum AdtExprBase<'tcx> {
+    /// A struct expression where all the fields are explicitly enumerated: `Foo { a, b }`.
+    None,
+    /// A struct expression with a "base", an expression of the same type as the outer struct that
+    /// will be used to populate any fields not explicitly mentioned: `Foo { ..base }`
+    Base(FruInfo<'tcx>),
+    /// A struct expression with a `..` tail but no "base" expression. The values from the struct
+    /// fields' default values will be used to populate any fields not explicitly mentioned:
+    /// `Foo { .. }`.
+    DefaultFields(Box<[Ty<'tcx>]>),
+}
+/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=ClosureExpr | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Clone, Debug, HashStable)]
+pub struct ClosureExpr<'tcx> {
+    pub closure_id: LocalDefId,
+    pub args: UpvarArgs<'tcx>,
+    pub upvars: Box<[ExprId]>,
+    pub movability: Option<hir::Movability>,
+    pub fake_reads: Vec<(ExprId, FakeReadCause, HirId)>,
+}
+/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=InlineAsmExpr | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Clone, Debug, HashStable)]
+pub struct InlineAsmExpr<'tcx> {
+    pub asm_macro: AsmMacro,
+    pub template: &'tcx [InlineAsmTemplatePiece],
+    pub operands: Box<[InlineAsmOperand<'tcx>]>,
+    pub options: InlineAsmOptions,
+    pub line_spans: &'tcx [Span],
+}
+/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
+
+#[derive(Copy, Clone, Debug, HashStable)]
+pub enum BlockSafety {
+    Safe,
+    /// A compiler-generated unsafe block
+    BuiltinUnsafe,
+    /// An `unsafe` block. The `HirId` is the ID of the block.
+    ExplicitUnsafe(HirId),
+}
+/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=Stmt | COMPLEXITY=2 | LINES=5 */
+
+#[derive(Clone, Debug, HashStable)]
+pub struct Stmt<'tcx> {
+    pub kind: StmtKind<'tcx>,
+}
+/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=15 | LINES=40 */
+
+#[derive(Clone, Debug, HashStable)]
+pub enum StmtKind<'tcx> {
+    /// An expression with a trailing semicolon.
+    Expr {
+        /// The scope for this statement; may be used as lifetime of temporaries.
+        scope: region::Scope,
+
+        /// The expression being evaluated in this statement.
+        expr: ExprId,
+    },
+
+    /// A `let` binding.
+    Let {
+        /// The scope for variables bound in this `let`; it covers this and
+        /// all the remaining statements in the block.
+        remainder_scope: region::Scope,
+
+        /// The scope for the initialization itself; might be used as
+        /// lifetime of temporaries.
+        init_scope: region::Scope,
+
+        /// `let <PAT> = ...`
+        ///
+        /// If a type annotation is included, it is added as an ascription pattern.
+        pattern: Box<Pat<'tcx>>,
+
+        /// `let pat: ty = <INIT>`
+        initializer: Option<ExprId>,
+
+        /// `let pat: ty = <INIT> else { <ELSE> }`
+        else_block: Option<BlockId>,
+
+        /// The lint level for this `let` statement.
+        lint_level: LintLevel,
+
+        /// Span of the `let <PAT> = <INIT>` part.
+        span: Span,
+    },
+}
+/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=LocalVarId(pub | COMPLEXITY=5 | LINES=20 */
+
+#[derive(Clone, Debug, Copy, PartialEq, Eq, Hash, HashStable, TyEncodable, TyDecodable)]
+pub struct LocalVarId(pub HirId);
+
+/// A THIR expression.
+#[derive(Clone, Debug, HashStable)]
+pub struct Expr<'tcx> {
+    /// kind of expression
+    pub kind: ExprKind<'tcx>,
+
+    /// The type of this expression
+    pub ty: Ty<'tcx>,
+
+    /// The lifetime of this expression if it should be spilled into a
+    /// temporary
+    pub temp_lifetime: TempLifetime,
+
+    /// span of the expression in the source
+    pub span: Span,
+}
+/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=TempLifetime | COMPLEXITY=7 | LINES=11 */
+
+/// Temporary lifetime information for THIR expressions
+#[derive(Clone, Copy, Debug, HashStable)]
+pub struct TempLifetime {
+    /// Lifetime for temporaries as expected.
+    /// This should be `None` in a constant context.
+    pub temp_lifetime: Option<region::Scope>,
+    /// If `Some(lt)`, indicates that the lifetime of this temporary will change to `lt` in a future edition.
+    /// If `None`, then no changes are expected, or lints are disabled.
+    pub backwards_incompatible: Option<(region::Scope, BackwardIncompatibleDropReason)>,
+}
+/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=105 | LINES=298 */
+
+#[derive(Clone, Debug, HashStable)]
+pub enum ExprKind<'tcx> {
+    /// `Scope`s are used to explicitly mark destruction scopes,
+    /// and to track the `HirId` of the expressions within the scope.
+    Scope {
+        region_scope: region::Scope,
+        lint_level: LintLevel,
+        value: ExprId,
+    },
+    /// A `box <value>` expression.
+    Box {
+        value: ExprId,
+    },
+    /// An `if` expression.
+    If {
+        if_then_scope: region::Scope,
+        cond: ExprId,
+        /// `then` is always `ExprKind::Block`.
+        then: ExprId,
+        /// If present, the `else_opt` expr is always `ExprKind::Block` (for
+        /// `else`) or `ExprKind::If` (for `else if`).
+        else_opt: Option<ExprId>,
+    },
+    /// A function call. Method calls and overloaded operators are converted to plain function calls.
+    Call {
+        /// The type of the function. This is often a [`FnDef`] or a [`FnPtr`].
+        ///
+        /// [`FnDef`]: ty::TyKind::FnDef
+        /// [`FnPtr`]: ty::TyKind::FnPtr
+        ty: Ty<'tcx>,
+        /// The function itself.
+        fun: ExprId,
+        /// The arguments passed to the function.
+        ///
+        /// Note: in some cases (like calling a closure), the function call `f(...args)` gets
+        /// rewritten as a call to a function trait method (e.g. `FnOnce::call_once(f, (...args))`).
+        args: Box<[ExprId]>,
+        /// Whether this is from an overloaded operator rather than a
+        /// function call from HIR. `true` for overloaded function call.
+        from_hir_call: bool,
+        /// The span of the function, without the dot and receiver
+        /// (e.g. `foo(a, b)` in `x.foo(a, b)`).
+        fn_span: Span,
+    },
+    /// A use expression `x.use`.
+    ByUse {
+        /// The expression on which use is applied.
+        expr: ExprId,
+        /// The span of use, without the dot and receiver
+        /// (e.g. `use` in `x.use`).
+        span: Span,
+    },
+    /// A *non-overloaded* dereference.
+    Deref {
+        arg: ExprId,
+    },
+    /// A *non-overloaded* binary operation.
+    Binary {
+        op: BinOp,
+        lhs: ExprId,
+        rhs: ExprId,
+    },
+    /// A logical operation. This is distinct from `BinaryOp` because
+    /// the operands need to be lazily evaluated.
+    LogicalOp {
+        op: LogicalOp,
+        lhs: ExprId,
+        rhs: ExprId,
+    },
+    /// A *non-overloaded* unary operation. Note that here the deref (`*`)
+    /// operator is represented by `ExprKind::Deref`.
+    Unary {
+        op: UnOp,
+        arg: ExprId,
+    },
+    /// A cast: `<source> as <type>`. The type we cast to is the type of
+    /// the parent expression.
+    Cast {
+        source: ExprId,
+    },
+    /// Forces its contents to be treated as a value expression, not a place
+    /// expression. This is inserted in some places where an operation would
+    /// otherwise be erased completely (e.g. some no-op casts), but we still
+    /// need to ensure that its operand is treated as a value and not a place.
+    Use {
+        source: ExprId,
+    },
+    /// A coercion from `!` to any type.
+    NeverToAny {
+        source: ExprId,
+    },
+    /// A pointer coercion. More information can be found in [`PointerCoercion`].
+    /// Pointer casts that cannot be done by coercions are represented by [`ExprKind::Cast`].
+    PointerCoercion {
+        cast: PointerCoercion,
+        source: ExprId,
+        /// Whether this coercion is written with an `as` cast in the source code.
+        is_from_as_cast: bool,
+    },
+    /// A `loop` expression.
+    Loop {
+        body: ExprId,
+    },
+    /// A `#[loop_match] loop { state = 'blk: { match state { ... } } }` expression.
+    LoopMatch {
+        /// The state variable that is updated.
+        /// The `match_data.scrutinee` is the same variable, but with a different span.
+        state: ExprId,
+        region_scope: region::Scope,
+        match_data: Box<LoopMatchMatchData>,
+    },
+    /// Special expression representing the `let` part of an `if let` or similar construct
+    /// (including `if let` guards in match arms, and let-chains formed by `&&`).
+    ///
+    /// This isn't considered a real expression in surface Rust syntax, so it can
+    /// only appear in specific situations, such as within the condition of an `if`.
+    ///
+    /// (Not to be confused with [`StmtKind::Let`], which is a normal `let` statement.)
+    Let {
+        expr: ExprId,
+        pat: Box<Pat<'tcx>>,
+    },
+    /// A `match` expression.
+    Match {
+        scrutinee: ExprId,
+        arms: Box<[ArmId]>,
+        match_source: MatchSource,
+    },
+    /// A block.
+    Block {
+        block: BlockId,
+    },
+    /// An assignment: `lhs = rhs`.
+    Assign {
+        lhs: ExprId,
+        rhs: ExprId,
+    },
+    /// A *non-overloaded* operation assignment, e.g. `lhs += rhs`.
+    AssignOp {
+        op: AssignOp,
+        lhs: ExprId,
+        rhs: ExprId,
+    },
+    /// Access to a field of a struct, a tuple, an union, or an enum.
+    Field {
+        lhs: ExprId,
+        /// Variant containing the field.
+        variant_index: VariantIdx,
+        /// This can be a named (`.foo`) or unnamed (`.0`) field.
+        name: FieldIdx,
+    },
+    /// A *non-overloaded* indexing operation.
+    Index {
+        lhs: ExprId,
+        index: ExprId,
+    },
+    /// A local variable.
+    VarRef {
+        id: LocalVarId,
+    },
+    /// Used to represent upvars mentioned in a closure/coroutine
+    UpvarRef {
+        /// DefId of the closure/coroutine
+        closure_def_id: DefId,
+
+        /// HirId of the root variable
+        var_hir_id: LocalVarId,
+    },
+    /// A borrow, e.g. `&arg`.
+    Borrow {
+        borrow_kind: BorrowKind,
+        arg: ExprId,
+    },
+    /// A `&raw [const|mut] $place_expr` raw borrow resulting in type `*[const|mut] T`.
+    RawBorrow {
+        mutability: hir::Mutability,
+        arg: ExprId,
+    },
+    /// A `break` expression.
+    Break {
+        label: region::Scope,
+        value: Option<ExprId>,
+    },
+    /// A `continue` expression.
+    Continue {
+        label: region::Scope,
+    },
+    /// A `#[const_continue] break` expression.
+    ConstContinue {
+        label: region::Scope,
+        value: ExprId,
+    },
+    /// A `return` expression.
+    Return {
+        value: Option<ExprId>,
+    },
+    /// A `become` expression.
+    Become {
+        value: ExprId,
+    },
+    /// An inline `const` block, e.g. `const {}`.
+    ConstBlock {
+        did: DefId,
+        args: GenericArgsRef<'tcx>,
+    },
+    /// An array literal constructed from one repeated element, e.g. `[1; 5]`.
+    Repeat {
+        value: ExprId,
+        count: ty::Const<'tcx>,
+    },
+    /// An array, e.g. `[a, b, c, d]`.
+    Array {
+        fields: Box<[ExprId]>,
+    },
+    /// A tuple, e.g. `(a, b, c, d)`.
+    Tuple {
+        fields: Box<[ExprId]>,
+    },
+    /// An ADT constructor, e.g. `Foo {x: 1, y: 2}`.
+    Adt(Box<AdtExpr<'tcx>>),
+    /// A type ascription on a place.
+    PlaceTypeAscription {
+        source: ExprId,
+        /// Type that the user gave to this expression
+        user_ty: UserTy<'tcx>,
+        user_ty_span: Span,
+    },
+    /// A type ascription on a value, e.g. `type_ascribe!(42, i32)` or `42 as i32`.
+    ValueTypeAscription {
+        source: ExprId,
+        /// Type that the user gave to this expression
+        user_ty: UserTy<'tcx>,
+        user_ty_span: Span,
+    },
+    /// An unsafe binder cast on a place, e.g. `unwrap_binder!(*ptr)`.
+    PlaceUnwrapUnsafeBinder {
+        source: ExprId,
+    },
+    /// An unsafe binder cast on a value, e.g. `unwrap_binder!(rvalue())`,
+    /// which makes a temporary.
+    ValueUnwrapUnsafeBinder {
+        source: ExprId,
+    },
+    /// Construct an unsafe binder, e.g. `wrap_binder(&ref)`.
+    WrapUnsafeBinder {
+        source: ExprId,
+    },
+    /// A closure definition.
+    Closure(Box<ClosureExpr<'tcx>>),
+    /// A literal.
+    Literal {
+        lit: hir::Lit,
+        neg: bool,
+    },
+    /// For literals that don't correspond to anything in the HIR
+    NonHirLiteral {
+        lit: ty::ScalarInt,
+        user_ty: UserTy<'tcx>,
+    },
+    /// A literal of a ZST type.
+    ZstLiteral {
+        user_ty: UserTy<'tcx>,
+    },
+    /// Associated constants and named constants
+    NamedConst {
+        def_id: DefId,
+        args: GenericArgsRef<'tcx>,
+        user_ty: UserTy<'tcx>,
+    },
+    ConstParam {
+        param: ty::ParamConst,
+        def_id: DefId,
+    },
+    // FIXME improve docs for `StaticRef` by distinguishing it from `NamedConst`
+    /// A literal containing the address of a `static`.
+    ///
+    /// This is only distinguished from `Literal` so that we can register some
+    /// info for diagnostics.
+    StaticRef {
+        alloc_id: AllocId,
+        ty: Ty<'tcx>,
+        def_id: DefId,
+    },
+    /// Inline assembly, i.e. `asm!()`.
+    InlineAsm(Box<InlineAsmExpr<'tcx>>),
+    /// Field offset (`offset_of!`)
+    OffsetOf {
+        container: Ty<'tcx>,
+        fields: &'tcx List<(VariantIdx, FieldIdx)>,
+    },
+    /// An expression taking a reference to a thread local.
+    ThreadLocalRef(DefId),
+    /// A `yield` expression.
+    Yield {
+        value: ExprId,
+    },
+}
+/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=FieldExpr | COMPLEXITY=2 | LINES=9 */
+
+/// Represents the association of a field identifier and an expression.
+///
+/// This is used in struct constructors.
+#[derive(Clone, Debug, HashStable)]
+pub struct FieldExpr {
+    pub name: FieldIdx,
+    pub expr: ExprId,
+}
+/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=FruInfo | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Clone, Debug, HashStable)]
+pub struct FruInfo<'tcx> {
+    pub base: ExprId,
+    pub field_types: Box<[Ty<'tcx>]>,
+}
+/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=Arm | COMPLEXITY=2 | LINES=11 */
+
+/// A `match` arm.
+#[derive(Clone, Debug, HashStable)]
+pub struct Arm<'tcx> {
+    pub pattern: Box<Pat<'tcx>>,
+    pub guard: Option<ExprId>,
+    pub body: ExprId,
+    pub lint_level: LintLevel,
+    pub scope: region::Scope,
+    pub span: Span,
+}
+/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=LoopMatchMatchData | COMPLEXITY=2 | LINES=8 */
+
+/// The `match` part of a `#[loop_match]`
+#[derive(Clone, Debug, HashStable)]
+pub struct LoopMatchMatchData {
+    pub scrutinee: ExprId,
+    pub arms: Box<[ArmId]>,
+    pub span: Span,
+}
+/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Copy, Clone, Debug, HashStable)]
+pub enum LogicalOp {
+    /// The `&&` operator.
+    And,
+    /// The `||` operator.
+    Or,
+}
+/* AST_META: AST_ID=30 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=11 | LINES=37 */
+
+#[derive(Clone, Debug, HashStable)]
+pub enum InlineAsmOperand<'tcx> {
+    In {
+        reg: InlineAsmRegOrRegClass,
+        expr: ExprId,
+    },
+    Out {
+        reg: InlineAsmRegOrRegClass,
+        late: bool,
+        expr: Option<ExprId>,
+    },
+    InOut {
+        reg: InlineAsmRegOrRegClass,
+        late: bool,
+        expr: ExprId,
+    },
+    SplitInOut {
+        reg: InlineAsmRegOrRegClass,
+        late: bool,
+        in_expr: ExprId,
+        out_expr: Option<ExprId>,
+    },
+    Const {
+        value: mir::Const<'tcx>,
+        span: Span,
+    },
+    SymFn {
+        value: ExprId,
+    },
+    SymStatic {
+        def_id: DefId,
+    },
+    Label {
+        block: BlockId,
+    },
+}
+/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=FieldPat | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Clone, Debug, HashStable, TypeVisitable)]
+pub struct FieldPat<'tcx> {
+    pub field: FieldIdx,
+    pub pattern: Pat<'tcx>,
+}
+/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=Pat | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Clone, Debug, HashStable, TypeVisitable)]
+pub struct Pat<'tcx> {
+    pub ty: Ty<'tcx>,
+    pub span: Span,
+    pub kind: PatKind<'tcx>,
+}
+/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=simple_ident | COMPLEXITY=46 | LINES=80 */
+
+impl<'tcx> Pat<'tcx> {
+    pub fn simple_ident(&self) -> Option<Symbol> {
+        match self.kind {
+            PatKind::Binding {
+                name, mode: BindingMode(ByRef::No, _), subpattern: None, ..
+            } => Some(name),
+            _ => None,
+        }
+    }
+
+    /// Call `f` on every "binding" in a pattern, e.g., on `a` in
+    /// `match foo() { Some(a) => (), None => () }`
+    pub fn each_binding(&self, mut f: impl FnMut(Symbol, ByRef, Ty<'tcx>, Span)) {
+        self.walk_always(|p| {
+            if let PatKind::Binding { name, mode, ty, .. } = p.kind {
+                f(name, mode.0, ty, p.span);
+            }
+        });
+    }
+
+    /// Walk the pattern in left-to-right order.
+    ///
+    /// If `it(pat)` returns `false`, the children are not visited.
+    pub fn walk(&self, mut it: impl FnMut(&Pat<'tcx>) -> bool) {
+        self.walk_(&mut it)
+    }
+
+    fn walk_(&self, it: &mut impl FnMut(&Pat<'tcx>) -> bool) {
+        if !it(self) {
+            return;
+        }
+
+        for_each_immediate_subpat(self, |p| p.walk_(it));
+    }
+
+    /// Whether the pattern has a `PatKind::Error` nested within.
+    pub fn pat_error_reported(&self) -> Result<(), ErrorGuaranteed> {
+        let mut error = None;
+        self.walk(|pat| {
+            if let PatKind::Error(e) = pat.kind
+                && error.is_none()
+            {
+                error = Some(e);
+            }
+            error.is_none()
+        });
+        match error {
+            None => Ok(()),
+            Some(e) => Err(e),
+        }
+    }
+
+    /// Walk the pattern in left-to-right order.
+    ///
+    /// If you always want to recurse, prefer this method over `walk`.
+    pub fn walk_always(&self, mut it: impl FnMut(&Pat<'tcx>)) {
+        self.walk(|p| {
+            it(p);
+            true
+        })
+    }
+
+    /// Whether this a never pattern.
+    pub fn is_never_pattern(&self) -> bool {
+        let mut is_never_pattern = false;
+        self.walk(|pat| match &pat.kind {
+            PatKind::Never => {
+                is_never_pattern = true;
+                false
+            }
+            PatKind::Or { pats } => {
+                is_never_pattern = pats.iter().all(|p| p.is_never_pattern());
+                false
+            }
+            _ => true,
+        });
+        is_never_pattern
+    }
+}
+/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=Ascription | COMPLEXITY=18 | LINES=24 */
+
+#[derive(Clone, Debug, HashStable, TypeVisitable)]
+pub struct Ascription<'tcx> {
+    pub annotation: CanonicalUserTypeAnnotation<'tcx>,
+    /// Variance to use when relating the `user_ty` to the **type of the value being
+    /// matched**. Typically, this is `Variance::Covariant`, since the value being matched must
+    /// have a type that is some subtype of the ascribed type.
+    ///
+    /// Note that this variance does not apply for any bindings within subpatterns. The type
+    /// assigned to those bindings must be exactly equal to the `user_ty` given here.
+    ///
+    /// The only place where this field is not `Covariant` is when matching constants, where
+    /// we currently use `Contravariant` -- this is because the constant type just needs to
+    /// be "comparable" to the type of the input value. So, for example:
+    ///
+    /// ```text
+    /// match x { "foo" => .. }
+    /// ```
+    ///
+    /// requires that `&'static str <: T_x`, where `T_x` is the type of `x`. Really, we should
+    /// probably be checking for a `PartialEq` impl instead, but this preserves the behavior
+    /// of the old type-check for now. See #57280 for details.
+    pub variance: ty::Variance,
+}
+/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=44 | LINES=123 */
+
+#[derive(Clone, Debug, HashStable, TypeVisitable)]
+pub enum PatKind<'tcx> {
+    /// A missing pattern, e.g. for an anonymous param in a bare fn like `fn f(u32)`.
+    Missing,
+
+    /// A wildcard pattern: `_`.
+    Wild,
+
+    AscribeUserType {
+        ascription: Ascription<'tcx>,
+        subpattern: Box<Pat<'tcx>>,
+    },
+
+    /// `x`, `ref x`, `x @ P`, etc.
+    Binding {
+        name: Symbol,
+        #[type_visitable(ignore)]
+        mode: BindingMode,
+        #[type_visitable(ignore)]
+        var: LocalVarId,
+        ty: Ty<'tcx>,
+        subpattern: Option<Box<Pat<'tcx>>>,
+
+        /// Is this the leftmost occurrence of the binding, i.e., is `var` the
+        /// `HirId` of this pattern?
+        ///
+        /// (The same binding can occur multiple times in different branches of
+        /// an or-pattern, but only one of them will be primary.)
+        is_primary: bool,
+    },
+
+    /// `Foo(...)` or `Foo{...}` or `Foo`, where `Foo` is a variant name from an ADT with
+    /// multiple variants.
+    Variant {
+        adt_def: AdtDef<'tcx>,
+        args: GenericArgsRef<'tcx>,
+        variant_index: VariantIdx,
+        subpatterns: Vec<FieldPat<'tcx>>,
+    },
+
+    /// `(...)`, `Foo(...)`, `Foo{...}`, or `Foo`, where `Foo` is a variant name from an ADT with
+    /// a single variant.
+    Leaf {
+        subpatterns: Vec<FieldPat<'tcx>>,
+    },
+
+    /// `box P`, `&P`, `&mut P`, etc.
+    Deref {
+        subpattern: Box<Pat<'tcx>>,
+    },
+
+    /// Deref pattern, written `box P` for now.
+    DerefPattern {
+        subpattern: Box<Pat<'tcx>>,
+        /// Whether the pattern scrutinee needs to be borrowed in order to call `Deref::deref` or
+        /// `DerefMut::deref_mut`, and if so, which. This is `ByRef::No` for deref patterns on
+        /// boxes; they are lowered using a built-in deref rather than a method call, thus they
+        /// don't borrow the scrutinee.
+        #[type_visitable(ignore)]
+        borrow: ByRef,
+    },
+
+    /// One of the following:
+    /// * `&str`, which will be handled as a string pattern and thus
+    ///   exhaustiveness checking will detect if you use the same string twice in different
+    ///   patterns.
+    /// * integer, bool, char or float, which will be handled by
+    ///   exhaustiveness to cover exactly its own value, similar to `&str`, but these values are
+    ///   much simpler.
+    /// * raw pointers derived from integers, other raw pointers will have already resulted in an
+    //    error.
+    /// * `String`, if `string_deref_patterns` is enabled.
+    Constant {
+        value: ty::Value<'tcx>,
+    },
+
+    /// Pattern obtained by converting a constant (inline or named) to its pattern
+    /// representation using `const_to_pat`. This is used for unsafety checking.
+    ExpandedConstant {
+        /// [DefId] of the constant item.
+        def_id: DefId,
+        /// The pattern that the constant lowered to.
+        ///
+        /// HACK: we need to keep the `DefId` of inline constants around for unsafety checking;
+        /// therefore when a range pattern contains inline constants, we re-wrap the range pattern
+        /// with the `ExpandedConstant` nodes that correspond to the range endpoints. Hence
+        /// `subpattern` may actually be a range pattern, and `def_id` be the constant for one of
+        /// its endpoints.
+        subpattern: Box<Pat<'tcx>>,
+    },
+
+    Range(Arc<PatRange<'tcx>>),
+
+    /// Matches against a slice, checking the length and extracting elements.
+    /// irrefutable when there is a slice pattern and both `prefix` and `suffix` are empty.
+    /// e.g., `&[ref xs @ ..]`.
+    Slice {
+        prefix: Box<[Pat<'tcx>]>,
+        slice: Option<Box<Pat<'tcx>>>,
+        suffix: Box<[Pat<'tcx>]>,
+    },
+
+    /// Fixed match against an array; irrefutable.
+    Array {
+        prefix: Box<[Pat<'tcx>]>,
+        slice: Option<Box<Pat<'tcx>>>,
+        suffix: Box<[Pat<'tcx>]>,
+    },
+
+    /// An or-pattern, e.g. `p | q`.
+    /// Invariant: `pats.len() >= 2`.
+    Or {
+        pats: Box<[Pat<'tcx>]>,
+    },
+
+    /// A never pattern `!`.
+    Never,
+
+    /// An error has been encountered during lowering. We probably shouldn't report more lints
+    /// related to this pattern.
+    Error(ErrorGuaranteed),
+}
+/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=PatRange | COMPLEXITY=2 | LINES=13 */
+
+/// A range pattern.
+/// The boundaries must be of the same type and that type must be numeric.
+#[derive(Clone, Debug, PartialEq, HashStable, TypeVisitable)]
+pub struct PatRange<'tcx> {
+    /// Must not be `PosInfinity`.
+    pub lo: PatRangeBoundary<'tcx>,
+    /// Must not be `NegInfinity`.
+    pub hi: PatRangeBoundary<'tcx>,
+    #[type_visitable(ignore)]
+    pub end: RangeEnd,
+    pub ty: Ty<'tcx>,
+}
+/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=is_full_range | COMPLEXITY=63 | LINES=89 */
+
+impl<'tcx> PatRange<'tcx> {
+    /// Whether this range covers the full extent of possible values (best-effort, we ignore floats).
+    #[inline]
+    pub fn is_full_range(&self, tcx: TyCtxt<'tcx>) -> Option<bool> {
+        let (min, max, size, bias) = match *self.ty.kind() {
+            ty::Char => (0, std::char::MAX as u128, Size::from_bits(32), 0),
+            ty::Int(ity) => {
+                let size = Integer::from_int_ty(&tcx, ity).size();
+                let max = size.truncate(u128::MAX);
+                let bias = 1u128 << (size.bits() - 1);
+                (0, max, size, bias)
+            }
+            ty::Uint(uty) => {
+                let size = Integer::from_uint_ty(&tcx, uty).size();
+                let max = size.unsigned_int_max();
+                (0, max, size, 0)
+            }
+            _ => return None,
+        };
+
+        // We want to compare ranges numerically, but the order of the bitwise representation of
+        // signed integers does not match their numeric order. Thus, to correct the ordering, we
+        // need to shift the range of signed integers to correct the comparison. This is achieved by
+        // XORing with a bias (see pattern/deconstruct_pat.rs for another pertinent example of this
+        // pattern).
+        //
+        // Also, for performance, it's important to only do the second `try_to_bits` if necessary.
+        let lo_is_min = match self.lo {
+            PatRangeBoundary::NegInfinity => true,
+            PatRangeBoundary::Finite(value) => {
+                let lo = value.try_to_scalar_int().unwrap().to_bits(size) ^ bias;
+                lo <= min
+            }
+            PatRangeBoundary::PosInfinity => false,
+        };
+        if lo_is_min {
+            let hi_is_max = match self.hi {
+                PatRangeBoundary::NegInfinity => false,
+                PatRangeBoundary::Finite(value) => {
+                    let hi = value.try_to_scalar_int().unwrap().to_bits(size) ^ bias;
+                    hi > max || hi == max && self.end == RangeEnd::Included
+                }
+                PatRangeBoundary::PosInfinity => true,
+            };
+            if hi_is_max {
+                return Some(true);
+            }
+        }
+        Some(false)
+    }
+
+    #[inline]
+    pub fn contains(&self, value: ty::Value<'tcx>, tcx: TyCtxt<'tcx>) -> Option<bool> {
+        use Ordering::*;
+        debug_assert_eq!(value.ty, self.ty);
+        let ty = self.ty;
+        let value = PatRangeBoundary::Finite(value.valtree);
+        // For performance, it's important to only do the second comparison if necessary.
+        Some(
+            match self.lo.compare_with(value, ty, tcx)? {
+                Less | Equal => true,
+                Greater => false,
+            } && match value.compare_with(self.hi, ty, tcx)? {
+                Less => true,
+                Equal => self.end == RangeEnd::Included,
+                Greater => false,
+            },
+        )
+    }
+
+    #[inline]
+    pub fn overlaps(&self, other: &Self, tcx: TyCtxt<'tcx>) -> Option<bool> {
+        use Ordering::*;
+        debug_assert_eq!(self.ty, other.ty);
+        // For performance, it's important to only do the second comparison if necessary.
+        Some(
+            match other.lo.compare_with(self.hi, self.ty, tcx)? {
+                Less => true,
+                Equal => self.end == RangeEnd::Included,
+                Greater => false,
+            } && match self.lo.compare_with(other.hi, self.ty, tcx)? {
+                Less => true,
+                Equal => other.end == RangeEnd::Included,
+                Greater => false,
+            },
+        )
+    }
+}
+/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=18 | LINES=18 */
+
+impl<'tcx> fmt::Display for PatRange<'tcx> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        if let &PatRangeBoundary::Finite(valtree) = &self.lo {
+            let value = ty::Value { ty: self.ty, valtree };
+            write!(f, "{value}")?;
+        }
+        if let &PatRangeBoundary::Finite(valtree) = &self.hi {
+            write!(f, "{}", self.end)?;
+            let value = ty::Value { ty: self.ty, valtree };
+            write!(f, "{value}")?;
+        } else {
+            // `0..` is parsed as an inclusive range, we must display it correctly.
+            write!(f, "..")?;
+        }
+        Ok(())
+    }
+}
+/* AST_META: AST_ID=39 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
+
+/// A (possibly open) boundary of a range pattern.
+/// If present, the const must be of a numeric type.
+#[derive(Copy, Clone, Debug, PartialEq, HashStable, TypeVisitable)]
+pub enum PatRangeBoundary<'tcx> {
+    /// The type of this valtree is stored in the surrounding `PatRange`.
+    Finite(ty::ValTree<'tcx>),
+    NegInfinity,
+    PosInfinity,
+}
+/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=is_finite | COMPLEXITY=56 | LINES=95 */
+
+impl<'tcx> PatRangeBoundary<'tcx> {
+    #[inline]
+    pub fn is_finite(self) -> bool {
+        matches!(self, Self::Finite(..))
+    }
+    #[inline]
+    pub fn as_finite(self) -> Option<ty::ValTree<'tcx>> {
+        match self {
+            Self::Finite(value) => Some(value),
+            Self::NegInfinity | Self::PosInfinity => None,
+        }
+    }
+    pub fn to_bits(self, ty: Ty<'tcx>, tcx: TyCtxt<'tcx>) -> u128 {
+        match self {
+            Self::Finite(value) => value.try_to_scalar_int().unwrap().to_bits_unchecked(),
+            Self::NegInfinity => {
+                // Unwrap is ok because the type is known to be numeric.
+                ty.numeric_min_and_max_as_bits(tcx).unwrap().0
+            }
+            Self::PosInfinity => {
+                // Unwrap is ok because the type is known to be numeric.
+                ty.numeric_min_and_max_as_bits(tcx).unwrap().1
+            }
+        }
+    }
+
+    #[instrument(skip(tcx), level = "debug", ret)]
+    pub fn compare_with(self, other: Self, ty: Ty<'tcx>, tcx: TyCtxt<'tcx>) -> Option<Ordering> {
+        use PatRangeBoundary::*;
+        match (self, other) {
+            // When comparing with infinities, we must remember that `0u8..` and `0u8..=255`
+            // describe the same range. These two shortcuts are ok, but for the rest we must check
+            // bit values.
+            (PosInfinity, PosInfinity) => return Some(Ordering::Equal),
+            (NegInfinity, NegInfinity) => return Some(Ordering::Equal),
+
+            // This code is hot when compiling matches with many ranges. So we
+            // special-case extraction of evaluated scalars for speed, for types where
+            // we can do scalar comparisons. E.g. `unicode-normalization` has
+            // many ranges such as '\u{037A}'..='\u{037F}', and chars can be compared
+            // in this way.
+            (Finite(a), Finite(b)) if matches!(ty.kind(), ty::Int(_) | ty::Uint(_) | ty::Char) => {
+                if let (Some(a), Some(b)) = (a.try_to_scalar_int(), b.try_to_scalar_int()) {
+                    let sz = ty.primitive_size(tcx);
+                    let cmp = match ty.kind() {
+                        ty::Uint(_) | ty::Char => a.to_uint(sz).cmp(&b.to_uint(sz)),
+                        ty::Int(_) => a.to_int(sz).cmp(&b.to_int(sz)),
+                        _ => unreachable!(),
+                    };
+                    return Some(cmp);
+                }
+            }
+            _ => {}
+        }
+
+        let a = self.to_bits(ty, tcx);
+        let b = other.to_bits(ty, tcx);
+
+        match ty.kind() {
+            ty::Float(ty::FloatTy::F16) => {
+                use rustc_apfloat::Float;
+                let a = rustc_apfloat::ieee::Half::from_bits(a);
+                let b = rustc_apfloat::ieee::Half::from_bits(b);
+                a.partial_cmp(&b)
+            }
+            ty::Float(ty::FloatTy::F32) => {
+                use rustc_apfloat::Float;
+                let a = rustc_apfloat::ieee::Single::from_bits(a);
+                let b = rustc_apfloat::ieee::Single::from_bits(b);
+                a.partial_cmp(&b)
+            }
+            ty::Float(ty::FloatTy::F64) => {
+                use rustc_apfloat::Float;
+                let a = rustc_apfloat::ieee::Double::from_bits(a);
+                let b = rustc_apfloat::ieee::Double::from_bits(b);
+                a.partial_cmp(&b)
+            }
+            ty::Float(ty::FloatTy::F128) => {
+                use rustc_apfloat::Float;
+                let a = rustc_apfloat::ieee::Quad::from_bits(a);
+                let b = rustc_apfloat::ieee::Quad::from_bits(b);
+                a.partial_cmp(&b)
+            }
+            ty::Int(ity) => {
+                let size = crate::rustc_abi::Integer::from_int_ty(&tcx, *ity).size();
+                let a = size.sign_extend(a) as i128;
+                let b = size.sign_extend(b) as i128;
+                Some(a.cmp(&b))
+            }
+            ty::Uint(_) | ty::Char => Some(a.cmp(&b)),
+            _ => bug!(),
+        }
+    }
+}
+/* AST_META: AST_ID=41 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=17 */
+
+// Some nodes are used a lot. Make sure they don't unintentionally get bigger.
+#[cfg(target_pointer_width = "64")]
+mod size_asserts {
+    use crate::rustc_data_structures::static_assert_size;
+
+    use super::*;
+    // tidy-alphabetical-start
+    static_assert_size!(Block, 48);
+    static_assert_size!(Expr<'_>, 80);
+    static_assert_size!(ExprKind<'_>, 40);
+    static_assert_size!(Pat<'_>, 64);
+    static_assert_size!(PatKind<'_>, 48);
+    static_assert_size!(Stmt<'_>, 48);
+    static_assert_size!(StmtKind<'_>, 48);
+    // tidy-alphabetical-end
+}

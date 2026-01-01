@@ -1,146 +1,673 @@
-/* FP:errors.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_USE_0001
-/* FP:errors.rs-0002 */ use std :: io :: Error ;
-/* FP:errors.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_USE_0002
-/* FP:errors.rs-0004 */ use std :: path :: { Path , PathBuf } ;
-/* FP:errors.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_USE_0003
-/* FP:errors.rs-0006 */ use crate :: rustc_complete :: codes :: * ;
-/* FP:errors.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_USE_0004
-/* FP:errors.rs-0008 */ use crate :: rustc_complete :: { Diag , DiagCtxtHandle , Diagnostic , EmissionGuarantee , Level } ;
-/* FP:errors.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_USE_0005
-/* FP:errors.rs-0010 */ use rustc_macros :: { Diagnostic , Subdiagnostic } ;
-/* FP:errors.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_USE_0006
-/* FP:errors.rs-0012 */ use crate :: rustc_complete :: { Span , Symbol , sym } ;
-/* FP:errors.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_USE_0007
-/* FP:errors.rs-0014 */ use crate :: rustc_target :: spec :: { PanicStrategy , TargetTuple } ;
-/* FP:errors.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_USE_0008
-/* FP:errors.rs-0016 */ use crate :: fluent_generated as fluent ;
-/* FP:errors.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_USE_0009
-/* FP:errors.rs-0018 */ use crate :: locator :: CrateFlavor ;
-/* FP:errors.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0010
-/* FP:errors.rs-0020 */ # [derive (Diagnostic)] # [diag (metadata_rlib_required)] pub struct RlibRequired { pub crate_name : Symbol , }
-/* FP:errors.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0011
-/* FP:errors.rs-0022 */ # [derive (Diagnostic)] # [diag (metadata_lib_required)] pub struct LibRequired < 'a > { pub crate_name : Symbol , pub kind : & 'a str , }
-/* FP:errors.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0012
-/* FP:errors.rs-0024 */ # [derive (Diagnostic)] # [diag (metadata_rustc_lib_required)] # [help] pub struct RustcLibRequired < 'a > { pub crate_name : Symbol , pub kind : & 'a str , }
-/* FP:errors.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0013
-/* FP:errors.rs-0026 */ # [derive (Diagnostic)] # [diag (metadata_crate_dep_multiple)] # [help] pub struct CrateDepMultiple { pub crate_name : Symbol , # [subdiagnostic] pub non_static_deps : Vec < NonStaticCrateDep > , # [subdiagnostic] pub rustc_driver_help : Option < RustcDriverHelp > , }
-/* FP:errors.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0014
-/* FP:errors.rs-0028 */ # [derive (Subdiagnostic)] # [note (metadata_crate_dep_not_static)] pub struct NonStaticCrateDep { # [doc = " It's different from `crate_name` in main Diagnostic."] pub crate_name_ : Symbol , }
-/* FP:errors.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0015
-/* FP:errors.rs-0030 */ # [derive (Subdiagnostic)] # [help (metadata_crate_dep_rustc_driver)] pub struct RustcDriverHelp ;
-/* FP:errors.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0016
-/* FP:errors.rs-0032 */ # [derive (Diagnostic)] # [diag (metadata_two_panic_runtimes)] pub struct TwoPanicRuntimes { pub prev_name : Symbol , pub cur_name : Symbol , }
-/* FP:errors.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0017
-/* FP:errors.rs-0034 */ # [derive (Diagnostic)] # [diag (metadata_bad_panic_strategy)] pub struct BadPanicStrategy { pub runtime : Symbol , pub strategy : PanicStrategy , }
-/* FP:errors.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0018
-/* FP:errors.rs-0036 */ # [derive (Diagnostic)] # [diag (metadata_required_panic_strategy)] pub struct RequiredPanicStrategy { pub crate_name : Symbol , pub found_strategy : PanicStrategy , pub desired_strategy : PanicStrategy , }
-/* FP:errors.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0019
-/* FP:errors.rs-0038 */ # [derive (Diagnostic)] # [diag (metadata_incompatible_panic_in_drop_strategy)] pub struct IncompatiblePanicInDropStrategy { pub crate_name : Symbol , pub found_strategy : PanicStrategy , pub desired_strategy : PanicStrategy , }
-/* FP:errors.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0020
-/* FP:errors.rs-0040 */ # [derive (Diagnostic)] # [diag (metadata_link_ordinal_raw_dylib)] pub struct LinkOrdinalRawDylib { # [primary_span] pub span : Span , }
-/* FP:errors.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0021
-/* FP:errors.rs-0042 */ # [derive (Diagnostic)] # [diag (metadata_lib_framework_apple)] pub struct LibFrameworkApple ;
-/* FP:errors.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0022
-/* FP:errors.rs-0044 */ # [derive (Diagnostic)] # [diag (metadata_empty_renaming_target)] pub struct EmptyRenamingTarget < 'a > { pub lib_name : & 'a str , }
-/* FP:errors.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0023
-/* FP:errors.rs-0046 */ # [derive (Diagnostic)] # [diag (metadata_renaming_no_link)] pub struct RenamingNoLink < 'a > { pub lib_name : & 'a str , }
-/* FP:errors.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0024
-/* FP:errors.rs-0048 */ # [derive (Diagnostic)] # [diag (metadata_multiple_renamings)] pub struct MultipleRenamings < 'a > { pub lib_name : & 'a str , }
-/* FP:errors.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0025
-/* FP:errors.rs-0050 */ # [derive (Diagnostic)] # [diag (metadata_no_link_mod_override)] pub struct NoLinkModOverride { # [primary_span] pub span : Option < Span > , }
-/* FP:errors.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0026
-/* FP:errors.rs-0052 */ # [derive (Diagnostic)] # [diag (metadata_raw_dylib_unsupported_abi)] pub struct RawDylibUnsupportedAbi { # [primary_span] pub span : Span , }
-/* FP:errors.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0027
-/* FP:errors.rs-0054 */ # [derive (Diagnostic)] # [diag (metadata_fail_create_file_encoder)] pub struct FailCreateFileEncoder { pub err : Error , }
-/* FP:errors.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0028
-/* FP:errors.rs-0056 */ # [derive (Diagnostic)] # [diag (metadata_fail_write_file)] pub struct FailWriteFile < 'a > { pub path : & 'a Path , pub err : Error , }
-/* FP:errors.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0029
-/* FP:errors.rs-0058 */ # [derive (Diagnostic)] # [diag (metadata_crate_not_panic_runtime)] pub struct CrateNotPanicRuntime { pub crate_name : Symbol , }
-/* FP:errors.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0030
-/* FP:errors.rs-0060 */ # [derive (Diagnostic)] # [diag (metadata_crate_not_compiler_builtins)] pub struct CrateNotCompilerBuiltins { pub crate_name : Symbol , }
-/* FP:errors.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0031
-/* FP:errors.rs-0062 */ # [derive (Diagnostic)] # [diag (metadata_no_panic_strategy)] pub struct NoPanicStrategy { pub crate_name : Symbol , pub strategy : PanicStrategy , }
-/* FP:errors.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0032
-/* FP:errors.rs-0064 */ # [derive (Diagnostic)] # [diag (metadata_not_profiler_runtime)] pub struct NotProfilerRuntime { pub crate_name : Symbol , }
-/* FP:errors.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0033
-/* FP:errors.rs-0066 */ # [derive (Diagnostic)] # [diag (metadata_no_multiple_global_alloc)] pub struct NoMultipleGlobalAlloc { # [primary_span] # [label] pub span2 : Span , # [label (metadata_prev_global_alloc)] pub span1 : Span , }
-/* FP:errors.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0034
-/* FP:errors.rs-0068 */ # [derive (Diagnostic)] # [diag (metadata_no_multiple_alloc_error_handler)] pub struct NoMultipleAllocErrorHandler { # [primary_span] # [label] pub span2 : Span , # [label (metadata_prev_alloc_error_handler)] pub span1 : Span , }
-/* FP:errors.rs-0069 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0035
-/* FP:errors.rs-0070 */ # [derive (Diagnostic)] # [diag (metadata_conflicting_global_alloc)] pub struct ConflictingGlobalAlloc { pub crate_name : Symbol , pub other_crate_name : Symbol , }
-/* FP:errors.rs-0071 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0036
-/* FP:errors.rs-0072 */ # [derive (Diagnostic)] # [diag (metadata_conflicting_alloc_error_handler)] pub struct ConflictingAllocErrorHandler { pub crate_name : Symbol , pub other_crate_name : Symbol , }
-/* FP:errors.rs-0073 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0037
-/* FP:errors.rs-0074 */ # [derive (Diagnostic)] # [diag (metadata_global_alloc_required)] pub struct GlobalAllocRequired ;
-/* FP:errors.rs-0075 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0038
-/* FP:errors.rs-0076 */ # [derive (Diagnostic)] # [diag (metadata_no_transitive_needs_dep)] pub struct NoTransitiveNeedsDep < 'a > { pub crate_name : Symbol , pub needs_crate_name : & 'a str , pub deps_crate_name : Symbol , }
-/* FP:errors.rs-0077 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0039
-/* FP:errors.rs-0078 */ # [derive (Diagnostic)] # [diag (metadata_failed_write_error)] pub struct FailedWriteError { pub filename : PathBuf , pub err : Error , }
-/* FP:errors.rs-0079 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0040
-/* FP:errors.rs-0080 */ # [derive (Diagnostic)] # [diag (metadata_failed_copy_to_stdout)] pub struct FailedCopyToStdout { pub filename : PathBuf , pub err : Error , }
-/* FP:errors.rs-0081 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0041
-/* FP:errors.rs-0082 */ # [derive (Diagnostic)] # [diag (metadata_binary_output_to_tty)] pub struct BinaryOutputToTty ;
-/* FP:errors.rs-0083 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0042
-/* FP:errors.rs-0084 */ # [derive (Diagnostic)] # [diag (metadata_missing_native_library)] pub struct MissingNativeLibrary < 'a > { libname : & 'a str , # [subdiagnostic] suggest_name : Option < SuggestLibraryName < 'a > > , }
-/* FP:errors.rs-0085 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_IMPL_0043
-/* FP:errors.rs-0086 */ impl < 'a > MissingNativeLibrary < 'a > { pub fn new (libname : & 'a str , verbatim : bool) -> Self { let suggested_name = if ! verbatim { if let Some (libname) = libname . strip_prefix ("lib") && let Some (libname) = libname . strip_suffix (".a") { Some (libname) } else if let Some (libname) = libname . strip_suffix (".lib") { Some (libname) } else { None } } else { None } ; Self { libname , suggest_name : suggested_name . map (| suggested_name | SuggestLibraryName { suggested_name }) , } } }
-/* FP:errors.rs-0087 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0044
-/* FP:errors.rs-0088 */ # [derive (Subdiagnostic)] # [help (metadata_only_provide_library_name)] pub struct SuggestLibraryName < 'a > { suggested_name : & 'a str , }
-/* FP:errors.rs-0089 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0045
-/* FP:errors.rs-0090 */ # [derive (Diagnostic)] # [diag (metadata_failed_create_tempdir)] pub struct FailedCreateTempdir { pub err : Error , }
-/* FP:errors.rs-0091 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0046
-/* FP:errors.rs-0092 */ # [derive (Diagnostic)] # [diag (metadata_failed_create_file)] pub struct FailedCreateFile < 'a > { pub filename : & 'a Path , pub err : Error , }
-/* FP:errors.rs-0093 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0047
-/* FP:errors.rs-0094 */ # [derive (Diagnostic)] # [diag (metadata_failed_create_encoded_metadata)] pub struct FailedCreateEncodedMetadata { pub err : Error , }
-/* FP:errors.rs-0095 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0048
-/* FP:errors.rs-0096 */ # [derive (Diagnostic)] # [diag (metadata_non_ascii_name)] pub struct NonAsciiName { # [primary_span] pub span : Span , pub crate_name : Symbol , }
-/* FP:errors.rs-0097 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0049
-/* FP:errors.rs-0098 */ # [derive (Diagnostic)] # [diag (metadata_extern_location_not_exist)] pub struct ExternLocationNotExist < 'a > { # [primary_span] pub span : Span , pub crate_name : Symbol , pub location : & 'a Path , }
-/* FP:errors.rs-0099 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0050
-/* FP:errors.rs-0100 */ # [derive (Diagnostic)] # [diag (metadata_extern_location_not_file)] pub struct ExternLocationNotFile < 'a > { # [primary_span] pub span : Span , pub crate_name : Symbol , pub location : & 'a Path , }
-/* FP:errors.rs-0101 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0051
-/* FP:errors.rs-0102 */ pub (crate) struct MultipleCandidates { pub span : Span , pub flavor : CrateFlavor , pub crate_name : Symbol , pub candidates : Vec < PathBuf > , }
-/* FP:errors.rs-0103 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_IMPL_0052
-/* FP:errors.rs-0104 */ impl < G : EmissionGuarantee > Diagnostic < '_ , G > for MultipleCandidates { fn into_diag (self , dcx : DiagCtxtHandle < '_ > , level : Level) -> Diag < '_ , G > { let mut diag = Diag :: new (dcx , level , fluent :: metadata_multiple_candidates) ; diag . arg ("crate_name" , self . crate_name) ; diag . arg ("flavor" , self . flavor) ; diag . code (E0464) ; diag . span (self . span) ; for (i , candidate) in self . candidates . iter () . enumerate () { # [allow (rustc :: untranslatable_diagnostic)] diag . note (format ! ("candidate #{}: {}" , i + 1 , candidate . display ())) ; } diag } }
-/* FP:errors.rs-0105 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0053
-/* FP:errors.rs-0106 */ # [derive (Diagnostic)] # [diag (metadata_full_metadata_not_found)] pub (crate) struct FullMetadataNotFound { # [primary_span] pub span : Span , pub flavor : CrateFlavor , pub crate_name : Symbol , }
-/* FP:errors.rs-0107 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0054
-/* FP:errors.rs-0108 */ # [derive (Diagnostic)] # [diag (metadata_symbol_conflicts_current , code = E0519)] pub struct SymbolConflictsCurrent { # [primary_span] pub span : Span , pub crate_name : Symbol , }
-/* FP:errors.rs-0109 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0055
-/* FP:errors.rs-0110 */ # [derive (Diagnostic)] # [diag (metadata_stable_crate_id_collision)] pub struct StableCrateIdCollision { # [primary_span] pub span : Span , pub crate_name0 : Symbol , pub crate_name1 : Symbol , }
-/* FP:errors.rs-0111 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0056
-/* FP:errors.rs-0112 */ # [derive (Diagnostic)] # [diag (metadata_dl_error)] pub struct DlError { # [primary_span] pub span : Span , pub path : String , pub err : String , }
-/* FP:errors.rs-0113 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0057
-/* FP:errors.rs-0114 */ # [derive (Diagnostic)] # [diag (metadata_newer_crate_version , code = E0460)] # [note] # [note (metadata_found_crate_versions)] pub struct NewerCrateVersion { # [primary_span] pub span : Span , pub crate_name : Symbol , pub add_info : String , pub found_crates : String , }
-/* FP:errors.rs-0115 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0058
-/* FP:errors.rs-0116 */ # [derive (Diagnostic)] # [diag (metadata_no_crate_with_triple , code = E0461)] # [note (metadata_found_crate_versions)] pub struct NoCrateWithTriple < 'a > { # [primary_span] pub span : Span , pub crate_name : Symbol , pub locator_triple : & 'a str , pub add_info : String , pub found_crates : String , }
-/* FP:errors.rs-0117 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0059
-/* FP:errors.rs-0118 */ # [derive (Diagnostic)] # [diag (metadata_found_staticlib , code = E0462)] # [note (metadata_found_crate_versions)] # [help] pub struct FoundStaticlib { # [primary_span] pub span : Span , pub crate_name : Symbol , pub add_info : String , pub found_crates : String , }
-/* FP:errors.rs-0119 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0060
-/* FP:errors.rs-0120 */ # [derive (Diagnostic)] # [diag (metadata_incompatible_rustc , code = E0514)] # [note (metadata_found_crate_versions)] # [help] pub struct IncompatibleRustc { # [primary_span] pub span : Span , pub crate_name : Symbol , pub add_info : String , pub found_crates : String , pub rustc_version : String , }
-/* FP:errors.rs-0121 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0061
-/* FP:errors.rs-0122 */ pub struct InvalidMetadataFiles { pub span : Span , pub crate_name : Symbol , pub add_info : String , pub crate_rejections : Vec < String > , }
-/* FP:errors.rs-0123 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_IMPL_0062
-/* FP:errors.rs-0124 */ impl < G : EmissionGuarantee > Diagnostic < '_ , G > for InvalidMetadataFiles { # [track_caller] fn into_diag (self , dcx : DiagCtxtHandle < '_ > , level : Level) -> Diag < '_ , G > { let mut diag = Diag :: new (dcx , level , fluent :: metadata_invalid_meta_files) ; diag . arg ("crate_name" , self . crate_name) ; diag . arg ("add_info" , self . add_info) ; diag . code (E0786) ; diag . span (self . span) ; for crate_rejection in self . crate_rejections { # [allow (rustc :: untranslatable_diagnostic)] diag . note (crate_rejection) ; } diag } }
-/* FP:errors.rs-0125 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0063
-/* FP:errors.rs-0126 */ pub struct CannotFindCrate { pub span : Span , pub crate_name : Symbol , pub add_info : String , pub missing_core : bool , pub current_crate : String , pub is_nightly_build : bool , pub profiler_runtime : Symbol , pub locator_triple : TargetTuple , pub is_ui_testing : bool , }
-/* FP:errors.rs-0127 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_IMPL_0064
-/* FP:errors.rs-0128 */ impl < G : EmissionGuarantee > Diagnostic < '_ , G > for CannotFindCrate { # [track_caller] fn into_diag (self , dcx : DiagCtxtHandle < '_ > , level : Level) -> Diag < '_ , G > { let mut diag = Diag :: new (dcx , level , fluent :: metadata_cannot_find_crate) ; diag . arg ("crate_name" , self . crate_name) ; diag . arg ("current_crate" , self . current_crate) ; diag . arg ("add_info" , self . add_info) ; diag . arg ("locator_triple" , self . locator_triple . tuple ()) ; diag . code (E0463) ; diag . span (self . span) ; if self . crate_name == sym :: std || self . crate_name == sym :: core { if self . missing_core { diag . note (fluent :: metadata_target_not_installed) ; } else { diag . note (fluent :: metadata_target_no_std_support) ; } if self . missing_core { if env ! ("CFG_RELEASE_CHANNEL") == "dev" && ! self . is_ui_testing { diag . help (fluent :: metadata_consider_adding_std) ; } else { diag . help (fluent :: metadata_consider_downloading_target) ; } } if ! self . missing_core && self . span . is_dummy () { diag . note (fluent :: metadata_std_required) ; } if self . is_nightly_build { diag . help (fluent :: metadata_consider_building_std) ; } } else if self . crate_name == self . profiler_runtime { diag . note (fluent :: metadata_compiler_missing_profiler) ; } else if self . crate_name . as_str () . starts_with ("rustc_") { diag . help (fluent :: metadata_install_missing_components) ; } diag . span_label (self . span , fluent :: metadata_cant_find_crate) ; diag } }
-/* FP:errors.rs-0129 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0065
-/* FP:errors.rs-0130 */ # [derive (Diagnostic)] # [diag (metadata_crate_location_unknown_type)] pub struct CrateLocationUnknownType < 'a > { # [primary_span] pub span : Span , pub path : & 'a Path , pub crate_name : Symbol , }
-/* FP:errors.rs-0131 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0066
-/* FP:errors.rs-0132 */ # [derive (Diagnostic)] # [diag (metadata_lib_filename_form)] pub struct LibFilenameForm < 'a > { # [primary_span] pub span : Span , pub dll_prefix : & 'a str , pub dll_suffix : & 'a str , }
-/* FP:errors.rs-0133 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0067
-/* FP:errors.rs-0134 */ # [derive (Diagnostic)] # [diag (metadata_wasm_c_abi)] pub (crate) struct WasmCAbi { # [primary_span] pub span : Span , }
-/* FP:errors.rs-0135 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0068
-/* FP:errors.rs-0136 */ # [derive (Diagnostic)] # [diag (metadata_incompatible_target_modifiers)] # [help] # [note] # [help (metadata_incompatible_target_modifiers_help_fix)] # [help (metadata_incompatible_target_modifiers_help_allow)] pub struct IncompatibleTargetModifiers { # [primary_span] pub span : Span , pub extern_crate : Symbol , pub local_crate : Symbol , pub flag_name : String , pub flag_name_prefixed : String , pub local_value : String , pub extern_value : String , }
-/* FP:errors.rs-0137 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0069
-/* FP:errors.rs-0138 */ # [derive (Diagnostic)] # [diag (metadata_incompatible_target_modifiers_l_missed)] # [help] # [note] # [help (metadata_incompatible_target_modifiers_help_fix_l_missed)] # [help (metadata_incompatible_target_modifiers_help_allow)] pub struct IncompatibleTargetModifiersLMissed { # [primary_span] pub span : Span , pub extern_crate : Symbol , pub local_crate : Symbol , pub flag_name : String , pub flag_name_prefixed : String , pub extern_value : String , }
-/* FP:errors.rs-0139 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0070
-/* FP:errors.rs-0140 */ # [derive (Diagnostic)] # [diag (metadata_incompatible_target_modifiers_r_missed)] # [help] # [note] # [help (metadata_incompatible_target_modifiers_help_fix_r_missed)] # [help (metadata_incompatible_target_modifiers_help_allow)] pub struct IncompatibleTargetModifiersRMissed { # [primary_span] pub span : Span , pub extern_crate : Symbol , pub local_crate : Symbol , pub flag_name : String , pub flag_name_prefixed : String , pub local_value : String , }
-/* FP:errors.rs-0141 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0071
-/* FP:errors.rs-0142 */ # [derive (Diagnostic)] # [diag (metadata_unknown_target_modifier_unsafe_allowed)] pub struct UnknownTargetModifierUnsafeAllowed { # [primary_span] pub span : Span , pub flag_name : String , }
-/* FP:errors.rs-0143 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0072
-/* FP:errors.rs-0144 */ # [derive (Diagnostic)] # [diag (metadata_async_drop_types_in_dependency)] # [help] pub struct AsyncDropTypesInDependency { # [primary_span] pub span : Span , pub extern_crate : Symbol , pub local_crate : Symbol , }
-/* FP:errors.rs-0145 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_metadata_src_errors_STRUCT_0073
-/* FP:errors.rs-0146 */ # [derive (Diagnostic)] # [diag (metadata_raw_dylib_malformed)] pub struct RawDylibMalformed { # [primary_span] pub span : Span , }
+// SRC: ../rust/compiler/rustc_metadata/src/errors.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use std::io::Error;
+use std::path::{Path, PathBuf};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use rustc_macros::{Diagnostic, Subdiagnostic};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{Span, Symbol, sym};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_target::spec::{PanicStrategy, TargetTuple};
+/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=RlibRequired | COMPLEXITY=2 | LINES=9 */
+
+use crate::fluent_generated as fluent;
+use crate::locator::CrateFlavor;
+
+#[derive(Diagnostic)]
+#[diag(metadata_rlib_required)]
+pub struct RlibRequired {
+    pub crate_name: Symbol,
+}
+/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=LibRequired | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_lib_required)]
+pub struct LibRequired<'a> {
+    pub crate_name: Symbol,
+    pub kind: &'a str,
+}
+/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=RustcLibRequired | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_rustc_lib_required)]
+#[help]
+pub struct RustcLibRequired<'a> {
+    pub crate_name: Symbol,
+    pub kind: &'a str,
+}
+/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=CrateDepMultiple | COMPLEXITY=2 | LINES=11 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_crate_dep_multiple)]
+#[help]
+pub struct CrateDepMultiple {
+    pub crate_name: Symbol,
+    #[subdiagnostic]
+    pub non_static_deps: Vec<NonStaticCrateDep>,
+    #[subdiagnostic]
+    pub rustc_driver_help: Option<RustcDriverHelp>,
+}
+/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=NonStaticCrateDep | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Subdiagnostic)]
+#[note(metadata_crate_dep_not_static)]
+pub struct NonStaticCrateDep {
+    /// It's different from `crate_name` in main Diagnostic.
+    pub crate_name_: Symbol,
+}
+/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=RustcDriverHelp; | COMPLEXITY=2 | LINES=11 */
+
+#[derive(Subdiagnostic)]
+#[help(metadata_crate_dep_rustc_driver)]
+pub struct RustcDriverHelp;
+
+#[derive(Diagnostic)]
+#[diag(metadata_two_panic_runtimes)]
+pub struct TwoPanicRuntimes {
+    pub prev_name: Symbol,
+    pub cur_name: Symbol,
+}
+/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=BadPanicStrategy | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_bad_panic_strategy)]
+pub struct BadPanicStrategy {
+    pub runtime: Symbol,
+    pub strategy: PanicStrategy,
+}
+/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=RequiredPanicStrategy | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_required_panic_strategy)]
+pub struct RequiredPanicStrategy {
+    pub crate_name: Symbol,
+    pub found_strategy: PanicStrategy,
+    pub desired_strategy: PanicStrategy,
+}
+/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=IncompatiblePanicInDropStrategy | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_incompatible_panic_in_drop_strategy)]
+pub struct IncompatiblePanicInDropStrategy {
+    pub crate_name: Symbol,
+    pub found_strategy: PanicStrategy,
+    pub desired_strategy: PanicStrategy,
+}
+/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=LinkOrdinalRawDylib | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_link_ordinal_raw_dylib)]
+pub struct LinkOrdinalRawDylib {
+    #[primary_span]
+    pub span: Span,
+}
+/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=LibFrameworkApple; | COMPLEXITY=2 | LINES=10 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_lib_framework_apple)]
+pub struct LibFrameworkApple;
+
+#[derive(Diagnostic)]
+#[diag(metadata_empty_renaming_target)]
+pub struct EmptyRenamingTarget<'a> {
+    pub lib_name: &'a str,
+}
+/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=RenamingNoLink | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_renaming_no_link)]
+pub struct RenamingNoLink<'a> {
+    pub lib_name: &'a str,
+}
+/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=MultipleRenamings | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_multiple_renamings)]
+pub struct MultipleRenamings<'a> {
+    pub lib_name: &'a str,
+}
+/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=NoLinkModOverride | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_no_link_mod_override)]
+pub struct NoLinkModOverride {
+    #[primary_span]
+    pub span: Option<Span>,
+}
+/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=RawDylibUnsupportedAbi | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_raw_dylib_unsupported_abi)]
+pub struct RawDylibUnsupportedAbi {
+    #[primary_span]
+    pub span: Span,
+}
+/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=FailCreateFileEncoder | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_fail_create_file_encoder)]
+pub struct FailCreateFileEncoder {
+    pub err: Error,
+}
+/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=FailWriteFile | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_fail_write_file)]
+pub struct FailWriteFile<'a> {
+    pub path: &'a Path,
+    pub err: Error,
+}
+/* AST_META: AST_ID=23 | TYPE=STRUCT | NAME=CrateNotPanicRuntime | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_crate_not_panic_runtime)]
+pub struct CrateNotPanicRuntime {
+    pub crate_name: Symbol,
+}
+/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=CrateNotCompilerBuiltins | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_crate_not_compiler_builtins)]
+pub struct CrateNotCompilerBuiltins {
+    pub crate_name: Symbol,
+}
+/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=NoPanicStrategy | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_no_panic_strategy)]
+pub struct NoPanicStrategy {
+    pub crate_name: Symbol,
+    pub strategy: PanicStrategy,
+}
+/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=NotProfilerRuntime | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_not_profiler_runtime)]
+pub struct NotProfilerRuntime {
+    pub crate_name: Symbol,
+}
+/* AST_META: AST_ID=27 | TYPE=STRUCT | NAME=NoMultipleGlobalAlloc | COMPLEXITY=2 | LINES=10 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_no_multiple_global_alloc)]
+pub struct NoMultipleGlobalAlloc {
+    #[primary_span]
+    #[label]
+    pub span2: Span,
+    #[label(metadata_prev_global_alloc)]
+    pub span1: Span,
+}
+/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=NoMultipleAllocErrorHandler | COMPLEXITY=2 | LINES=10 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_no_multiple_alloc_error_handler)]
+pub struct NoMultipleAllocErrorHandler {
+    #[primary_span]
+    #[label]
+    pub span2: Span,
+    #[label(metadata_prev_alloc_error_handler)]
+    pub span1: Span,
+}
+/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=ConflictingGlobalAlloc | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_conflicting_global_alloc)]
+pub struct ConflictingGlobalAlloc {
+    pub crate_name: Symbol,
+    pub other_crate_name: Symbol,
+}
+/* AST_META: AST_ID=30 | TYPE=STRUCT | NAME=ConflictingAllocErrorHandler | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_conflicting_alloc_error_handler)]
+pub struct ConflictingAllocErrorHandler {
+    pub crate_name: Symbol,
+    pub other_crate_name: Symbol,
+}
+/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=GlobalAllocRequired; | COMPLEXITY=2 | LINES=12 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_global_alloc_required)]
+pub struct GlobalAllocRequired;
+
+#[derive(Diagnostic)]
+#[diag(metadata_no_transitive_needs_dep)]
+pub struct NoTransitiveNeedsDep<'a> {
+    pub crate_name: Symbol,
+    pub needs_crate_name: &'a str,
+    pub deps_crate_name: Symbol,
+}
+/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=FailedWriteError | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_failed_write_error)]
+pub struct FailedWriteError {
+    pub filename: PathBuf,
+    pub err: Error,
+}
+/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=FailedCopyToStdout | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_failed_copy_to_stdout)]
+pub struct FailedCopyToStdout {
+    pub filename: PathBuf,
+    pub err: Error,
+}
+/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=BinaryOutputToTty; | COMPLEXITY=2 | LINES=12 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_binary_output_to_tty)]
+pub struct BinaryOutputToTty;
+
+#[derive(Diagnostic)]
+#[diag(metadata_missing_native_library)]
+pub struct MissingNativeLibrary<'a> {
+    libname: &'a str,
+    #[subdiagnostic]
+    suggest_name: Option<SuggestLibraryName<'a>>,
+}
+/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=new | COMPLEXITY=20 | LINES=28 */
+
+impl<'a> MissingNativeLibrary<'a> {
+    pub fn new(libname: &'a str, verbatim: bool) -> Self {
+        // if it looks like the user has provided a complete filename rather just the bare lib name,
+        // then provide a note that they might want to try trimming the name
+        let suggested_name = if !verbatim {
+            if let Some(libname) = libname.strip_prefix("lib")
+                && let Some(libname) = libname.strip_suffix(".a")
+            {
+                // this is a unix style filename so trim prefix & suffix
+                Some(libname)
+            } else if let Some(libname) = libname.strip_suffix(".lib") {
+                // this is a Windows style filename so just trim the suffix
+                Some(libname)
+            } else {
+                None
+            }
+        } else {
+            None
+        };
+
+        Self {
+            libname,
+            suggest_name: suggested_name
+                .map(|suggested_name| SuggestLibraryName { suggested_name }),
+        }
+    }
+}
+/* AST_META: AST_ID=36 | TYPE=STRUCT | NAME=SuggestLibraryName | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Subdiagnostic)]
+#[help(metadata_only_provide_library_name)]
+pub struct SuggestLibraryName<'a> {
+    suggested_name: &'a str,
+}
+/* AST_META: AST_ID=37 | TYPE=STRUCT | NAME=FailedCreateTempdir | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_failed_create_tempdir)]
+pub struct FailedCreateTempdir {
+    pub err: Error,
+}
+/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=FailedCreateFile | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_failed_create_file)]
+pub struct FailedCreateFile<'a> {
+    pub filename: &'a Path,
+    pub err: Error,
+}
+/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=FailedCreateEncodedMetadata | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_failed_create_encoded_metadata)]
+pub struct FailedCreateEncodedMetadata {
+    pub err: Error,
+}
+/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=NonAsciiName | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_non_ascii_name)]
+pub struct NonAsciiName {
+    #[primary_span]
+    pub span: Span,
+    pub crate_name: Symbol,
+}
+/* AST_META: AST_ID=41 | TYPE=STRUCT | NAME=ExternLocationNotExist | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_extern_location_not_exist)]
+pub struct ExternLocationNotExist<'a> {
+    #[primary_span]
+    pub span: Span,
+    pub crate_name: Symbol,
+    pub location: &'a Path,
+}
+/* AST_META: AST_ID=42 | TYPE=STRUCT | NAME=ExternLocationNotFile | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_extern_location_not_file)]
+pub struct ExternLocationNotFile<'a> {
+    #[primary_span]
+    pub span: Span,
+    pub crate_name: Symbol,
+    pub location: &'a Path,
+}
+/* AST_META: AST_ID=43 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+pub(crate) struct MultipleCandidates {
+    pub span: Span,
+    pub flavor: CrateFlavor,
+    pub crate_name: Symbol,
+    pub candidates: Vec<PathBuf>,
+}
+/* AST_META: AST_ID=44 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=11 | LINES=16 */
+
+impl<G: EmissionGuarantee> Diagnostic<'_, G> for MultipleCandidates {
+    fn into_diag(self, dcx: DiagCtxtHandle<'_>, level: Level) -> Diag<'_, G> {
+        let mut diag = Diag::new(dcx, level, fluent::metadata_multiple_candidates);
+        diag.arg("crate_name", self.crate_name);
+        diag.arg("flavor", self.flavor);
+        diag.code(E0464);
+        diag.span(self.span);
+        for (i, candidate) in self.candidates.iter().enumerate() {
+            // FIXME: make this translatable
+            #[allow(rustc::untranslatable_diagnostic)]
+            diag.note(format!("candidate #{}: {}", i + 1, candidate.display()));
+        }
+        diag
+    }
+}
+/* AST_META: AST_ID=45 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_full_metadata_not_found)]
+pub(crate) struct FullMetadataNotFound {
+    #[primary_span]
+    pub span: Span,
+    pub flavor: CrateFlavor,
+    pub crate_name: Symbol,
+}
+/* AST_META: AST_ID=46 | TYPE=STRUCT | NAME=SymbolConflictsCurrent | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_symbol_conflicts_current, code = E0519)]
+pub struct SymbolConflictsCurrent {
+    #[primary_span]
+    pub span: Span,
+    pub crate_name: Symbol,
+}
+/* AST_META: AST_ID=47 | TYPE=STRUCT | NAME=StableCrateIdCollision | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_stable_crate_id_collision)]
+pub struct StableCrateIdCollision {
+    #[primary_span]
+    pub span: Span,
+    pub crate_name0: Symbol,
+    pub crate_name1: Symbol,
+}
+/* AST_META: AST_ID=48 | TYPE=STRUCT | NAME=DlError | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_dl_error)]
+pub struct DlError {
+    #[primary_span]
+    pub span: Span,
+    pub path: String,
+    pub err: String,
+}
+/* AST_META: AST_ID=49 | TYPE=STRUCT | NAME=NewerCrateVersion | COMPLEXITY=2 | LINES=12 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_newer_crate_version, code = E0460)]
+#[note]
+#[note(metadata_found_crate_versions)]
+pub struct NewerCrateVersion {
+    #[primary_span]
+    pub span: Span,
+    pub crate_name: Symbol,
+    pub add_info: String,
+    pub found_crates: String,
+}
+/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=NoCrateWithTriple | COMPLEXITY=2 | LINES=12 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_no_crate_with_triple, code = E0461)]
+#[note(metadata_found_crate_versions)]
+pub struct NoCrateWithTriple<'a> {
+    #[primary_span]
+    pub span: Span,
+    pub crate_name: Symbol,
+    pub locator_triple: &'a str,
+    pub add_info: String,
+    pub found_crates: String,
+}
+/* AST_META: AST_ID=51 | TYPE=STRUCT | NAME=FoundStaticlib | COMPLEXITY=2 | LINES=12 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_found_staticlib, code = E0462)]
+#[note(metadata_found_crate_versions)]
+#[help]
+pub struct FoundStaticlib {
+    #[primary_span]
+    pub span: Span,
+    pub crate_name: Symbol,
+    pub add_info: String,
+    pub found_crates: String,
+}
+/* AST_META: AST_ID=52 | TYPE=STRUCT | NAME=IncompatibleRustc | COMPLEXITY=2 | LINES=13 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_incompatible_rustc, code = E0514)]
+#[note(metadata_found_crate_versions)]
+#[help]
+pub struct IncompatibleRustc {
+    #[primary_span]
+    pub span: Span,
+    pub crate_name: Symbol,
+    pub add_info: String,
+    pub found_crates: String,
+    pub rustc_version: String,
+}
+/* AST_META: AST_ID=53 | TYPE=STRUCT | NAME=InvalidMetadataFiles | COMPLEXITY=2 | LINES=7 */
+
+pub struct InvalidMetadataFiles {
+    pub span: Span,
+    pub crate_name: Symbol,
+    pub add_info: String,
+    pub crate_rejections: Vec<String>,
+}
+/* AST_META: AST_ID=54 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=9 | LINES=17 */
+
+impl<G: EmissionGuarantee> Diagnostic<'_, G> for InvalidMetadataFiles {
+    #[track_caller]
+    fn into_diag(self, dcx: DiagCtxtHandle<'_>, level: Level) -> Diag<'_, G> {
+        let mut diag = Diag::new(dcx, level, fluent::metadata_invalid_meta_files);
+        diag.arg("crate_name", self.crate_name);
+        diag.arg("add_info", self.add_info);
+        diag.code(E0786);
+        diag.span(self.span);
+        for crate_rejection in self.crate_rejections {
+            // FIXME: make this translatable
+            #[allow(rustc::untranslatable_diagnostic)]
+            diag.note(crate_rejection);
+        }
+        diag
+    }
+}
+/* AST_META: AST_ID=55 | TYPE=STRUCT | NAME=CannotFindCrate | COMPLEXITY=2 | LINES=12 */
+
+pub struct CannotFindCrate {
+    pub span: Span,
+    pub crate_name: Symbol,
+    pub add_info: String,
+    pub missing_core: bool,
+    pub current_crate: String,
+    pub is_nightly_build: bool,
+    pub profiler_runtime: Symbol,
+    pub locator_triple: TargetTuple,
+    pub is_ui_testing: bool,
+}
+/* AST_META: AST_ID=56 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=39 | LINES=49 */
+
+impl<G: EmissionGuarantee> Diagnostic<'_, G> for CannotFindCrate {
+    #[track_caller]
+    fn into_diag(self, dcx: DiagCtxtHandle<'_>, level: Level) -> Diag<'_, G> {
+        let mut diag = Diag::new(dcx, level, fluent::metadata_cannot_find_crate);
+        diag.arg("crate_name", self.crate_name);
+        diag.arg("current_crate", self.current_crate);
+        diag.arg("add_info", self.add_info);
+        diag.arg("locator_triple", self.locator_triple.tuple());
+        diag.code(E0463);
+        diag.span(self.span);
+        if self.crate_name == sym::std || self.crate_name == sym::core {
+            if self.missing_core {
+                diag.note(fluent::metadata_target_not_installed);
+            } else {
+                diag.note(fluent::metadata_target_no_std_support);
+            }
+
+            if self.missing_core {
+                if env!("CFG_RELEASE_CHANNEL") == "dev" && !self.is_ui_testing {
+                    // Note: Emits the nicer suggestion only for the dev channel.
+                    diag.help(fluent::metadata_consider_adding_std);
+                } else {
+                    // NOTE: this suggests using rustup, even though the user may not have it installed.
+                    // That's because they could choose to install it; or this may give them a hint which
+                    // target they need to install from their distro.
+                    diag.help(fluent::metadata_consider_downloading_target);
+                }
+            }
+
+            // Suggest using #[no_std]. #[no_core] is unstable and not really supported anyway.
+            // NOTE: this is a dummy span if `extern crate std` was injected by the compiler.
+            // If it's not a dummy, that means someone added `extern crate std` explicitly and
+            // `#[no_std]` won't help.
+            if !self.missing_core && self.span.is_dummy() {
+                diag.note(fluent::metadata_std_required);
+            }
+            if self.is_nightly_build {
+                diag.help(fluent::metadata_consider_building_std);
+            }
+        } else if self.crate_name == self.profiler_runtime {
+            diag.note(fluent::metadata_compiler_missing_profiler);
+        } else if self.crate_name.as_str().starts_with("rustc_") {
+            diag.help(fluent::metadata_install_missing_components);
+        }
+        diag.span_label(self.span, fluent::metadata_cant_find_crate);
+        diag
+    }
+}
+/* AST_META: AST_ID=57 | TYPE=STRUCT | NAME=CrateLocationUnknownType | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_crate_location_unknown_type)]
+pub struct CrateLocationUnknownType<'a> {
+    #[primary_span]
+    pub span: Span,
+    pub path: &'a Path,
+    pub crate_name: Symbol,
+}
+/* AST_META: AST_ID=58 | TYPE=STRUCT | NAME=LibFilenameForm | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_lib_filename_form)]
+pub struct LibFilenameForm<'a> {
+    #[primary_span]
+    pub span: Span,
+    pub dll_prefix: &'a str,
+    pub dll_suffix: &'a str,
+}
+/* AST_META: AST_ID=59 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_wasm_c_abi)]
+pub(crate) struct WasmCAbi {
+    #[primary_span]
+    pub span: Span,
+}
+/* AST_META: AST_ID=60 | TYPE=STRUCT | NAME=IncompatibleTargetModifiers | COMPLEXITY=2 | LINES=17 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_incompatible_target_modifiers)]
+#[help]
+#[note]
+#[help(metadata_incompatible_target_modifiers_help_fix)]
+#[help(metadata_incompatible_target_modifiers_help_allow)]
+pub struct IncompatibleTargetModifiers {
+    #[primary_span]
+    pub span: Span,
+    pub extern_crate: Symbol,
+    pub local_crate: Symbol,
+    pub flag_name: String,
+    pub flag_name_prefixed: String,
+    pub local_value: String,
+    pub extern_value: String,
+}
+/* AST_META: AST_ID=61 | TYPE=STRUCT | NAME=IncompatibleTargetModifiersLMissed | COMPLEXITY=2 | LINES=16 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_incompatible_target_modifiers_l_missed)]
+#[help]
+#[note]
+#[help(metadata_incompatible_target_modifiers_help_fix_l_missed)]
+#[help(metadata_incompatible_target_modifiers_help_allow)]
+pub struct IncompatibleTargetModifiersLMissed {
+    #[primary_span]
+    pub span: Span,
+    pub extern_crate: Symbol,
+    pub local_crate: Symbol,
+    pub flag_name: String,
+    pub flag_name_prefixed: String,
+    pub extern_value: String,
+}
+/* AST_META: AST_ID=62 | TYPE=STRUCT | NAME=IncompatibleTargetModifiersRMissed | COMPLEXITY=2 | LINES=16 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_incompatible_target_modifiers_r_missed)]
+#[help]
+#[note]
+#[help(metadata_incompatible_target_modifiers_help_fix_r_missed)]
+#[help(metadata_incompatible_target_modifiers_help_allow)]
+pub struct IncompatibleTargetModifiersRMissed {
+    #[primary_span]
+    pub span: Span,
+    pub extern_crate: Symbol,
+    pub local_crate: Symbol,
+    pub flag_name: String,
+    pub flag_name_prefixed: String,
+    pub local_value: String,
+}
+/* AST_META: AST_ID=63 | TYPE=STRUCT | NAME=UnknownTargetModifierUnsafeAllowed | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_unknown_target_modifier_unsafe_allowed)]
+pub struct UnknownTargetModifierUnsafeAllowed {
+    #[primary_span]
+    pub span: Span,
+    pub flag_name: String,
+}
+/* AST_META: AST_ID=64 | TYPE=STRUCT | NAME=AsyncDropTypesInDependency | COMPLEXITY=2 | LINES=10 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_async_drop_types_in_dependency)]
+#[help]
+pub struct AsyncDropTypesInDependency {
+    #[primary_span]
+    pub span: Span,
+    pub extern_crate: Symbol,
+    pub local_crate: Symbol,
+}
+/* AST_META: AST_ID=65 | TYPE=STRUCT | NAME=RawDylibMalformed | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(metadata_raw_dylib_malformed)]
+pub struct RawDylibMalformed {
+    #[primary_span]
+    pub span: Span,
+}

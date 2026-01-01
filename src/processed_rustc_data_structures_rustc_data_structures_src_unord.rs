@@ -1,96 +1,815 @@
-/* FP:unord.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_USE_0001
-/* FP:unord.rs-0002 */ use std :: borrow :: { Borrow , BorrowMut } ;
-/* FP:unord.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_USE_0002
-/* FP:unord.rs-0004 */ use std :: collections :: hash_map :: { Entry , OccupiedError } ;
-/* FP:unord.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_USE_0003
-/* FP:unord.rs-0006 */ use std :: hash :: Hash ;
-/* FP:unord.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_USE_0004
-/* FP:unord.rs-0008 */ use std :: iter :: { Product , Sum } ;
-/* FP:unord.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_USE_0005
-/* FP:unord.rs-0010 */ use std :: ops :: Index ;
-/* FP:unord.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_USE_0006
-/* FP:unord.rs-0012 */ use crate :: rustc_hash :: { FxHashMap , FxHashSet } ;
-/* FP:unord.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_USE_0007
-/* FP:unord.rs-0014 */ use rustc_macros :: { Decodable_NoContext , Encodable_NoContext } ;
-/* FP:unord.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_USE_0008
-/* FP:unord.rs-0016 */ use crate :: fingerprint :: Fingerprint ;
-/* FP:unord.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_USE_0009
-/* FP:unord.rs-0018 */ use crate :: stable_hasher :: { HashStable , StableCompare , StableHasher , ToStableHashKey } ;
-/* FP:unord.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_STRUCT_0010
-/* FP:unord.rs-0020 */ # [doc = " `UnordItems` is the order-less version of `Iterator`. It only contains methods"] # [doc = " that don't (easily) expose an ordering of the underlying items."] # [doc = ""] # [doc = " Most methods take an `Fn` where the `Iterator`-version takes an `FnMut`. This"] # [doc = " is to reduce the risk of accidentally leaking the internal order via the closure"] # [doc = " environment. Otherwise one could easily do something like"] # [doc = ""] # [doc = " ```rust,ignore (pseudo code)"] # [doc = " let mut ordered = vec![];"] # [doc = " unordered_items.all(|x| ordered.push(x));"] # [doc = " ```"] # [doc = ""] # [doc = " It's still possible to do the same thing with an `Fn` by using interior mutability,"] # [doc = " but the chance of doing it accidentally is reduced."] # [derive (Clone)] pub struct UnordItems < T , I : Iterator < Item = T > > (I) ;
-/* FP:unord.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0011
-/* FP:unord.rs-0022 */ impl < T , I : Iterator < Item = T > > UnordItems < T , I > { # [inline] pub fn map < U , F : Fn (T) -> U > (self , f : F) -> UnordItems < U , impl Iterator < Item = U > > { UnordItems (self . 0 . map (f)) } # [inline] pub fn all < F : Fn (T) -> bool > (mut self , f : F) -> bool { self . 0 . all (f) } # [inline] pub fn any < F : Fn (T) -> bool > (mut self , f : F) -> bool { self . 0 . any (f) } # [inline] pub fn filter < F : Fn (& T) -> bool > (self , f : F) -> UnordItems < T , impl Iterator < Item = T > > { UnordItems (self . 0 . filter (f)) } # [inline] pub fn filter_map < U , F : Fn (T) -> Option < U > > (self , f : F ,) -> UnordItems < U , impl Iterator < Item = U > > { UnordItems (self . 0 . filter_map (f)) } # [inline] pub fn max (self) -> Option < T > where T : Ord , { self . 0 . max () } # [inline] pub fn min (self) -> Option < T > where T : Ord , { self . 0 . min () } # [inline] pub fn sum < S > (self) -> S where S : Sum < T > , { self . 0 . sum () } # [inline] pub fn product < S > (self) -> S where S : Product < T > , { self . 0 . product () } # [inline] pub fn count (self) -> usize { self . 0 . count () } # [inline] pub fn flat_map < U , F , O > (self , f : F) -> UnordItems < O , impl Iterator < Item = O > > where U : IntoIterator < Item = O > , F : Fn (T) -> U , { UnordItems (self . 0 . flat_map (f)) } pub fn collect < C : From < UnordItems < T , I > > > (self) -> C { self . into () } # [doc = " If the iterator has only one element, returns it, otherwise returns `None`."] # [track_caller] pub fn get_only (mut self) -> Option < T > { let item = self . 0 . next () ; if self . 0 . next () . is_some () { return None ; } item } }
-/* FP:unord.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0012
-/* FP:unord.rs-0024 */ impl < T > UnordItems < T , std :: iter :: Empty < T > > { pub fn empty () -> Self { UnordItems (std :: iter :: empty ()) } }
-/* FP:unord.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0013
-/* FP:unord.rs-0026 */ impl < 'a , T : Clone + 'a , I : Iterator < Item = & 'a T > > UnordItems < & 'a T , I > { # [inline] pub fn cloned (self) -> UnordItems < T , impl Iterator < Item = T > > { UnordItems (self . 0 . cloned ()) } }
-/* FP:unord.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0014
-/* FP:unord.rs-0028 */ impl < 'a , T : Copy + 'a , I : Iterator < Item = & 'a T > > UnordItems < & 'a T , I > { # [inline] pub fn copied (self) -> UnordItems < T , impl Iterator < Item = T > > { UnordItems (self . 0 . copied ()) } }
-/* FP:unord.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0015
-/* FP:unord.rs-0030 */ impl < T , I : Iterator < Item = T > > UnordItems < T , I > { # [inline] pub fn into_sorted < HCX > (self , hcx : & HCX) -> Vec < T > where T : ToStableHashKey < HCX > , { self . collect_sorted (hcx , true) } # [inline] pub fn into_sorted_stable_ord (self) -> Vec < T > where T : StableCompare , { self . collect_stable_ord_by_key (| x | x) } # [inline] pub fn into_sorted_stable_ord_by_key < K , C > (self , project_to_key : C) -> Vec < T > where K : StableCompare , C : for < 'a > Fn (& 'a T) -> & 'a K , { self . collect_stable_ord_by_key (project_to_key) } # [inline] pub fn collect_sorted < HCX , C > (self , hcx : & HCX , cache_sort_key : bool) -> C where T : ToStableHashKey < HCX > , C : FromIterator < T > + BorrowMut < [T] > , { let mut items : C = self . 0 . collect () ; let slice = items . borrow_mut () ; if slice . len () > 1 { if cache_sort_key { slice . sort_by_cached_key (| x | x . to_stable_hash_key (hcx)) ; } else { slice . sort_by_key (| x | x . to_stable_hash_key (hcx)) ; } } items } # [inline] pub fn collect_stable_ord_by_key < K , C , P > (self , project_to_key : P) -> C where K : StableCompare , P : for < 'a > Fn (& 'a T) -> & 'a K , C : FromIterator < T > + BorrowMut < [T] > , { let mut items : C = self . 0 . collect () ; let slice = items . borrow_mut () ; if slice . len () > 1 { if ! K :: CAN_USE_UNSTABLE_SORT { slice . sort_by (| a , b | { let a_key = project_to_key (a) ; let b_key = project_to_key (b) ; a_key . stable_cmp (b_key) }) ; } else { slice . sort_unstable_by (| a , b | { let a_key = project_to_key (a) ; let b_key = project_to_key (b) ; a_key . stable_cmp (b_key) }) ; } } items } }
-/* FP:unord.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_TRAIT_0016
-/* FP:unord.rs-0032 */ # [doc = " A marker trait specifying that `Self` can consume `UnordItems<_>` without"] # [doc = " exposing any internal ordering."] # [doc = ""] # [doc = " Note: right now this is just a marker trait. It could be extended to contain"] # [doc = " some useful, common methods though, like `len`, `clear`, or the various"] # [doc = " kinds of `to_sorted`."] trait UnordCollection { }
-/* FP:unord.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_STRUCT_0017
-/* FP:unord.rs-0034 */ # [doc = " This is a set collection type that tries very hard to not expose"] # [doc = " any internal iteration. This is a useful property when trying to"] # [doc = " uphold the determinism invariants imposed by the query system."] # [doc = ""] # [doc = " This collection type is a good choice for set-like collections the"] # [doc = " keys of which don't have a semantic ordering."] # [doc = ""] # [doc = " See [MCP 533](https://github.com/rust-lang/compiler-team/issues/533)"] # [doc = " for more information."] # [derive (Debug , Eq , PartialEq , Clone , Encodable_NoContext , Decodable_NoContext)] pub struct UnordSet < V : Eq + Hash > { inner : FxHashSet < V > , }
-/* FP:unord.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0018
-/* FP:unord.rs-0036 */ impl < V : Eq + Hash > UnordCollection for UnordSet < V > { }
-/* FP:unord.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0019
-/* FP:unord.rs-0038 */ impl < V : Eq + Hash > Default for UnordSet < V > { # [inline] fn default () -> Self { Self { inner : FxHashSet :: default () } } }
-/* FP:unord.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0020
-/* FP:unord.rs-0040 */ impl < V : Eq + Hash > UnordSet < V > { # [inline] pub fn new () -> Self { Self { inner : Default :: default () } } # [inline] pub fn with_capacity (capacity : usize) -> Self { Self { inner : FxHashSet :: with_capacity_and_hasher (capacity , Default :: default ()) } } # [inline] pub fn len (& self) -> usize { self . inner . len () } # [inline] pub fn is_empty (& self) -> bool { self . inner . is_empty () } # [doc = " If the set has only one element, returns it, otherwise returns `None`."] # [inline] pub fn get_only (& self) -> Option < & V > { if self . inner . len () == 1 { self . inner . iter () . next () } else { None } } # [inline] pub fn insert (& mut self , v : V) -> bool { self . inner . insert (v) } # [inline] pub fn contains < Q : ? Sized > (& self , v : & Q) -> bool where V : Borrow < Q > , Q : Hash + Eq , { self . inner . contains (v) } # [inline] pub fn remove < Q : ? Sized > (& mut self , k : & Q) -> bool where V : Borrow < Q > , Q : Hash + Eq , { self . inner . remove (k) } # [inline] pub fn items (& self) -> UnordItems < & V , impl Iterator < Item = & V > > { UnordItems (self . inner . iter ()) } # [inline] pub fn into_items (self) -> UnordItems < V , impl Iterator < Item = V > > { UnordItems (self . inner . into_iter ()) } # [doc = " Returns the items of this set in stable sort order (as defined by `ToStableHashKey`)."] # [doc = ""] # [doc = " The `cache_sort_key` parameter controls if [slice::sort_by_cached_key] or"] # [doc = " [slice::sort_unstable_by_key] will be used for sorting the vec. Use"] # [doc = " `cache_sort_key` when the [ToStableHashKey::to_stable_hash_key] implementation"] # [doc = " for `V` is expensive (e.g. a `DefId -> DefPathHash` lookup)."] # [inline] pub fn to_sorted < HCX > (& self , hcx : & HCX , cache_sort_key : bool) -> Vec < & V > where V : ToStableHashKey < HCX > , { to_sorted_vec (hcx , self . inner . iter () , cache_sort_key , | & x | x) } # [doc = " Returns the items of this set in stable sort order (as defined by"] # [doc = " `StableCompare`). This method is much more efficient than"] # [doc = " `into_sorted` because it does not need to transform keys to their"] # [doc = " `ToStableHashKey` equivalent."] # [inline] pub fn to_sorted_stable_ord (& self) -> Vec < & V > where V : StableCompare , { let mut items : Vec < & V > = self . inner . iter () . collect () ; items . sort_unstable_by (| a , b | a . stable_cmp (* b)) ; items } # [doc = " Returns the items of this set in stable sort order (as defined by"] # [doc = " `StableCompare`). This method is much more efficient than"] # [doc = " `into_sorted` because it does not need to transform keys to their"] # [doc = " `ToStableHashKey` equivalent."] # [inline] pub fn into_sorted_stable_ord (self) -> Vec < V > where V : StableCompare , { let mut items : Vec < V > = self . inner . into_iter () . collect () ; items . sort_unstable_by (V :: stable_cmp) ; items } # [doc = " Returns the items of this set in stable sort order (as defined by `ToStableHashKey`)."] # [doc = ""] # [doc = " The `cache_sort_key` parameter controls if [slice::sort_by_cached_key] or"] # [doc = " [slice::sort_unstable_by_key] will be used for sorting the vec. Use"] # [doc = " `cache_sort_key` when the [ToStableHashKey::to_stable_hash_key] implementation"] # [doc = " for `V` is expensive (e.g. a `DefId -> DefPathHash` lookup)."] # [inline] pub fn into_sorted < HCX > (self , hcx : & HCX , cache_sort_key : bool) -> Vec < V > where V : ToStableHashKey < HCX > , { to_sorted_vec (hcx , self . inner . into_iter () , cache_sort_key , | x | x) } # [inline] pub fn clear (& mut self) { self . inner . clear () ; } }
-/* FP:unord.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_TRAIT_0021
-/* FP:unord.rs-0042 */ pub trait ExtendUnord < T > { # [doc = " Extend this unord collection with the given `UnordItems`."] # [doc = " This method is called `extend_unord` instead of just `extend` so it"] # [doc = " does not conflict with `Extend::extend`. Otherwise there would be many"] # [doc = " places where the two methods would have to be explicitly disambiguated"] # [doc = " via UFCS."] fn extend_unord < I : Iterator < Item = T > > (& mut self , items : UnordItems < T , I >) ; }
-/* FP:unord.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0022
-/* FP:unord.rs-0044 */ impl < C : Extend < T > + UnordCollection , T > ExtendUnord < T > for C { # [inline] fn extend_unord < I : Iterator < Item = T > > (& mut self , items : UnordItems < T , I >) { self . extend (items . 0) } }
-/* FP:unord.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0023
-/* FP:unord.rs-0046 */ impl < V : Hash + Eq > Extend < V > for UnordSet < V > { # [inline] fn extend < T : IntoIterator < Item = V > > (& mut self , iter : T) { self . inner . extend (iter) } }
-/* FP:unord.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0024
-/* FP:unord.rs-0048 */ impl < V : Hash + Eq > FromIterator < V > for UnordSet < V > { # [inline] fn from_iter < T : IntoIterator < Item = V > > (iter : T) -> Self { UnordSet { inner : FxHashSet :: from_iter (iter) } } }
-/* FP:unord.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0025
-/* FP:unord.rs-0050 */ impl < V : Hash + Eq > From < FxHashSet < V > > for UnordSet < V > { fn from (value : FxHashSet < V >) -> Self { UnordSet { inner : value } } }
-/* FP:unord.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0026
-/* FP:unord.rs-0052 */ impl < V : Hash + Eq , I : Iterator < Item = V > > From < UnordItems < V , I > > for UnordSet < V > { fn from (value : UnordItems < V , I >) -> Self { UnordSet { inner : FxHashSet :: from_iter (value . 0) } } }
-/* FP:unord.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0027
-/* FP:unord.rs-0054 */ impl < HCX , V : Hash + Eq + HashStable < HCX > > HashStable < HCX > for UnordSet < V > { # [inline] fn hash_stable (& self , hcx : & mut HCX , hasher : & mut StableHasher) { hash_iter_order_independent (self . inner . iter () , hcx , hasher) ; } }
-/* FP:unord.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_STRUCT_0028
-/* FP:unord.rs-0056 */ # [doc = " This is a map collection type that tries very hard to not expose"] # [doc = " any internal iteration. This is a useful property when trying to"] # [doc = " uphold the determinism invariants imposed by the query system."] # [doc = ""] # [doc = " This collection type is a good choice for map-like collections the"] # [doc = " keys of which don't have a semantic ordering."] # [doc = ""] # [doc = " See [MCP 533](https://github.com/rust-lang/compiler-team/issues/533)"] # [doc = " for more information."] # [derive (Debug , Eq , PartialEq , Clone , Encodable_NoContext , Decodable_NoContext)] pub struct UnordMap < K : Eq + Hash , V > { inner : FxHashMap < K , V > , }
-/* FP:unord.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0029
-/* FP:unord.rs-0058 */ impl < K : Eq + Hash , V > UnordCollection for UnordMap < K , V > { }
-/* FP:unord.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0030
-/* FP:unord.rs-0060 */ impl < K : Eq + Hash , V > Default for UnordMap < K , V > { # [inline] fn default () -> Self { Self { inner : FxHashMap :: default () } } }
-/* FP:unord.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0031
-/* FP:unord.rs-0062 */ impl < K : Hash + Eq , V > Extend < (K , V) > for UnordMap < K , V > { # [inline] fn extend < T : IntoIterator < Item = (K , V) > > (& mut self , iter : T) { self . inner . extend (iter) } }
-/* FP:unord.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0032
-/* FP:unord.rs-0064 */ impl < K : Hash + Eq , V > FromIterator < (K , V) > for UnordMap < K , V > { # [inline] fn from_iter < T : IntoIterator < Item = (K , V) > > (iter : T) -> Self { UnordMap { inner : FxHashMap :: from_iter (iter) } } }
-/* FP:unord.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0033
-/* FP:unord.rs-0066 */ impl < K : Hash + Eq , V , I : Iterator < Item = (K , V) > > From < UnordItems < (K , V) , I > > for UnordMap < K , V > { # [inline] fn from (items : UnordItems < (K , V) , I >) -> Self { UnordMap { inner : FxHashMap :: from_iter (items . 0) } } }
-/* FP:unord.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0034
-/* FP:unord.rs-0068 */ impl < K : Eq + Hash , V > UnordMap < K , V > { # [inline] pub fn with_capacity (capacity : usize) -> Self { Self { inner : FxHashMap :: with_capacity_and_hasher (capacity , Default :: default ()) } } # [inline] pub fn len (& self) -> usize { self . inner . len () } # [inline] pub fn insert (& mut self , k : K , v : V) -> Option < V > { self . inner . insert (k , v) } # [inline] pub fn try_insert (& mut self , k : K , v : V) -> Result < & mut V , OccupiedError < '_ , K , V > > { self . inner . try_insert (k , v) } # [inline] pub fn contains_key < Q : ? Sized > (& self , k : & Q) -> bool where K : Borrow < Q > , Q : Hash + Eq , { self . inner . contains_key (k) } # [inline] pub fn is_empty (& self) -> bool { self . inner . is_empty () } # [inline] pub fn entry (& mut self , key : K) -> Entry < '_ , K , V > { self . inner . entry (key) } # [inline] pub fn get < Q : ? Sized > (& self , k : & Q) -> Option < & V > where K : Borrow < Q > , Q : Hash + Eq , { self . inner . get (k) } # [inline] pub fn get_mut < Q : ? Sized > (& mut self , k : & Q) -> Option < & mut V > where K : Borrow < Q > , Q : Hash + Eq , { self . inner . get_mut (k) } # [inline] pub fn remove < Q : ? Sized > (& mut self , k : & Q) -> Option < V > where K : Borrow < Q > , Q : Hash + Eq , { self . inner . remove (k) } # [inline] pub fn items (& self) -> UnordItems < (& K , & V) , impl Iterator < Item = (& K , & V) > > { UnordItems (self . inner . iter ()) } # [inline] pub fn into_items (self) -> UnordItems < (K , V) , impl Iterator < Item = (K , V) > > { UnordItems (self . inner . into_iter ()) } # [inline] pub fn keys (& self) -> UnordItems < & K , impl Iterator < Item = & K > > { UnordItems (self . inner . keys ()) } # [doc = " Returns the entries of this map in stable sort order (as defined by `ToStableHashKey`)."] # [doc = ""] # [doc = " The `cache_sort_key` parameter controls if [slice::sort_by_cached_key] or"] # [doc = " [slice::sort_unstable_by_key] will be used for sorting the vec. Use"] # [doc = " `cache_sort_key` when the [ToStableHashKey::to_stable_hash_key] implementation"] # [doc = " for `K` is expensive (e.g. a `DefId -> DefPathHash` lookup)."] # [inline] pub fn to_sorted < HCX > (& self , hcx : & HCX , cache_sort_key : bool) -> Vec < (& K , & V) > where K : ToStableHashKey < HCX > , { to_sorted_vec (hcx , self . inner . iter () , cache_sort_key , | & (k , _) | k) } # [doc = " Returns the entries of this map in stable sort order (as defined by `StableCompare`)."] # [doc = " This method can be much more efficient than `into_sorted` because it does not need"] # [doc = " to transform keys to their `ToStableHashKey` equivalent."] # [inline] pub fn to_sorted_stable_ord (& self) -> Vec < (& K , & V) > where K : StableCompare , { let mut items : Vec < _ > = self . inner . iter () . collect () ; items . sort_unstable_by (| (a , _) , (b , _) | a . stable_cmp (* b)) ; items } # [doc = " Returns the entries of this map in stable sort order (as defined by `ToStableHashKey`)."] # [doc = ""] # [doc = " The `cache_sort_key` parameter controls if [slice::sort_by_cached_key] or"] # [doc = " [slice::sort_unstable_by_key] will be used for sorting the vec. Use"] # [doc = " `cache_sort_key` when the [ToStableHashKey::to_stable_hash_key] implementation"] # [doc = " for `K` is expensive (e.g. a `DefId -> DefPathHash` lookup)."] # [inline] pub fn into_sorted < HCX > (self , hcx : & HCX , cache_sort_key : bool) -> Vec < (K , V) > where K : ToStableHashKey < HCX > , { to_sorted_vec (hcx , self . inner . into_iter () , cache_sort_key , | (k , _) | k) } # [doc = " Returns the entries of this map in stable sort order (as defined by `StableCompare`)."] # [doc = " This method can be much more efficient than `into_sorted` because it does not need"] # [doc = " to transform keys to their `ToStableHashKey` equivalent."] # [inline] pub fn into_sorted_stable_ord (self) -> Vec < (K , V) > where K : StableCompare , { let mut items : Vec < (K , V) > = self . inner . into_iter () . collect () ; items . sort_unstable_by (| a , b | a . 0 . stable_cmp (& b . 0)) ; items } # [doc = " Returns the values of this map in stable sort order (as defined by K's"] # [doc = " `ToStableHashKey` implementation)."] # [doc = ""] # [doc = " The `cache_sort_key` parameter controls if [slice::sort_by_cached_key] or"] # [doc = " [slice::sort_unstable_by_key] will be used for sorting the vec. Use"] # [doc = " `cache_sort_key` when the [ToStableHashKey::to_stable_hash_key] implementation"] # [doc = " for `K` is expensive (e.g. a `DefId -> DefPathHash` lookup)."] # [inline] pub fn values_sorted < HCX > (& self , hcx : & HCX , cache_sort_key : bool) -> impl Iterator < Item = & V > where K : ToStableHashKey < HCX > , { to_sorted_vec (hcx , self . inner . iter () , cache_sort_key , | & (k , _) | k) . into_iter () . map (| (_ , v) | v) } # [inline] pub fn clear (& mut self) { self . inner . clear () } }
-/* FP:unord.rs-0069 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0035
-/* FP:unord.rs-0070 */ impl < K , Q : ? Sized , V > Index < & Q > for UnordMap < K , V > where K : Eq + Hash + Borrow < Q > , Q : Eq + Hash , { type Output = V ; # [inline] fn index (& self , key : & Q) -> & V { & self . inner [key] } }
-/* FP:unord.rs-0071 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0036
-/* FP:unord.rs-0072 */ impl < HCX , K : Hash + Eq + HashStable < HCX > , V : HashStable < HCX > > HashStable < HCX > for UnordMap < K , V > { # [inline] fn hash_stable (& self , hcx : & mut HCX , hasher : & mut StableHasher) { hash_iter_order_independent (self . inner . iter () , hcx , hasher) ; } }
-/* FP:unord.rs-0073 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_STRUCT_0037
-/* FP:unord.rs-0074 */ # [doc = " This is a collection type that tries very hard to not expose"] # [doc = " any internal iteration. This is a useful property when trying to"] # [doc = " uphold the determinism invariants imposed by the query system."] # [doc = ""] # [doc = " This collection type is a good choice for collections the"] # [doc = " keys of which don't have a semantic ordering and don't implement"] # [doc = " `Hash` or `Eq`."] # [doc = ""] # [doc = " See [MCP 533](https://github.com/rust-lang/compiler-team/issues/533)"] # [doc = " for more information."] # [derive (Default , Debug , Eq , PartialEq , Clone , Encodable_NoContext , Decodable_NoContext)] pub struct UnordBag < V > { inner : Vec < V > , }
-/* FP:unord.rs-0075 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0038
-/* FP:unord.rs-0076 */ impl < V > UnordBag < V > { # [inline] pub fn new () -> Self { Self { inner : Default :: default () } } # [inline] pub fn len (& self) -> usize { self . inner . len () } # [inline] pub fn push (& mut self , v : V) { self . inner . push (v) ; } # [inline] pub fn items (& self) -> UnordItems < & V , impl Iterator < Item = & V > > { UnordItems (self . inner . iter ()) } # [inline] pub fn into_items (self) -> UnordItems < V , impl Iterator < Item = V > > { UnordItems (self . inner . into_iter ()) } }
-/* FP:unord.rs-0077 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0039
-/* FP:unord.rs-0078 */ impl < T > UnordCollection for UnordBag < T > { }
-/* FP:unord.rs-0079 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0040
-/* FP:unord.rs-0080 */ impl < T > Extend < T > for UnordBag < T > { fn extend < I : IntoIterator < Item = T > > (& mut self , iter : I) { self . inner . extend (iter) } }
-/* FP:unord.rs-0081 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0041
-/* FP:unord.rs-0082 */ impl < T , I : Iterator < Item = T > > From < UnordItems < T , I > > for UnordBag < T > { fn from (value : UnordItems < T , I >) -> Self { UnordBag { inner : Vec :: from_iter (value . 0) } } }
-/* FP:unord.rs-0083 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0042
-/* FP:unord.rs-0084 */ impl < HCX , V : Hash + Eq + HashStable < HCX > > HashStable < HCX > for UnordBag < V > { # [inline] fn hash_stable (& self , hcx : & mut HCX , hasher : & mut StableHasher) { hash_iter_order_independent (self . inner . iter () , hcx , hasher) ; } }
-/* FP:unord.rs-0085 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_FN_0043
-/* FP:unord.rs-0086 */ # [inline] fn to_sorted_vec < HCX , T , K , I > (hcx : & HCX , iter : I , cache_sort_key : bool , extract_key : fn (& T) -> & K ,) -> Vec < T > where I : Iterator < Item = T > , K : ToStableHashKey < HCX > , { let mut items : Vec < T > = iter . collect () ; if cache_sort_key { items . sort_by_cached_key (| x | extract_key (x) . to_stable_hash_key (hcx)) ; } else { items . sort_unstable_by_key (| x | extract_key (x) . to_stable_hash_key (hcx)) ; } items }
-/* FP:unord.rs-0087 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_FN_0044
-/* FP:unord.rs-0088 */ fn hash_iter_order_independent < HCX , T : HashStable < HCX > , I : Iterator < Item = T > + ExactSizeIterator , > (mut it : I , hcx : & mut HCX , hasher : & mut StableHasher ,) { let len = it . len () ; len . hash_stable (hcx , hasher) ; match len { 0 => { } 1 => { it . next () . unwrap () . hash_stable (hcx , hasher) ; } _ => { let mut accumulator = Fingerprint :: ZERO ; for item in it { let mut item_hasher = StableHasher :: new () ; item . hash_stable (hcx , & mut item_hasher) ; let item_fingerprint : Fingerprint = item_hasher . finish () ; accumulator = accumulator . combine_commutative (item_fingerprint) ; } accumulator . hash_stable (hcx , hasher) ; } } }
-/* FP:unord.rs-0089 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0045
-/* FP:unord.rs-0090 */ impl < T > ! IntoIterator for UnordBag < T > { }
-/* FP:unord.rs-0091 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0046
-/* FP:unord.rs-0092 */ impl < V > ! IntoIterator for UnordSet < V > { }
-/* FP:unord.rs-0093 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0047
-/* FP:unord.rs-0094 */ impl < K , V > ! IntoIterator for UnordMap < K , V > { }
-/* FP:unord.rs-0095 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_unord_IMPL_0048
-/* FP:unord.rs-0096 */ impl < T , I > ! IntoIterator for UnordItems < T , I > { }
+// SRC: ../rust/compiler/rustc_data_structures/src/unord.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
+// This module contains collection types that don't expose their internal
+// ordering. This is a useful property for deterministic computations, such
+// as required by the query system.
+
+use std::borrow::{Borrow, BorrowMut};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use std::collections::hash_map::{Entry, OccupiedError};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use std::hash::Hash;
+use std::iter::{Product, Sum};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use std::ops::Index;
+
+use crate::rustc_hash::{FxHashMap, FxHashSet};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use rustc_macros::{Decodable_NoContext, Encodable_NoContext};
+/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+
+use crate::fingerprint::Fingerprint;
+use crate::stable_hasher::{HashStable, StableCompare, StableHasher, ToStableHashKey};
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UnordItems | COMPLEXITY=23 | LINES=107 */
+
+/// `UnordItems` is the order-less version of `Iterator`. It only contains methods
+/// that don't (easily) expose an ordering of the underlying items.
+///
+/// Most methods take an `Fn` where the `Iterator`-version takes an `FnMut`. This
+/// is to reduce the risk of accidentally leaking the internal order via the closure
+/// environment. Otherwise one could easily do something like
+///
+/// ```rust,ignore (pseudo code)
+/// let mut ordered = vec![];
+/// unordered_items.all(|x| ordered.push(x));
+/// ```
+///
+/// It's still possible to do the same thing with an `Fn` by using interior mutability,
+/// but the chance of doing it accidentally is reduced.
+#[derive(Clone)]
+pub struct UnordItems<T, I: Iterator<Item = T>>(I);
+
+impl<T, I: Iterator<Item = T>> UnordItems<T, I> {
+    #[inline]
+    pub fn map<U, F: Fn(T) -> U>(self, f: F) -> UnordItems<U, impl Iterator<Item = U>> {
+        UnordItems(self.0.map(f))
+    }
+
+    #[inline]
+    pub fn all<F: Fn(T) -> bool>(mut self, f: F) -> bool {
+        self.0.all(f)
+    }
+
+    #[inline]
+    pub fn any<F: Fn(T) -> bool>(mut self, f: F) -> bool {
+        self.0.any(f)
+    }
+
+    #[inline]
+    pub fn filter<F: Fn(&T) -> bool>(self, f: F) -> UnordItems<T, impl Iterator<Item = T>> {
+        UnordItems(self.0.filter(f))
+    }
+
+    #[inline]
+    pub fn filter_map<U, F: Fn(T) -> Option<U>>(
+        self,
+        f: F,
+    ) -> UnordItems<U, impl Iterator<Item = U>> {
+        UnordItems(self.0.filter_map(f))
+    }
+
+    #[inline]
+    pub fn max(self) -> Option<T>
+    where
+        T: Ord,
+    {
+        self.0.max()
+    }
+
+    #[inline]
+    pub fn min(self) -> Option<T>
+    where
+        T: Ord,
+    {
+        self.0.min()
+    }
+
+    #[inline]
+    pub fn sum<S>(self) -> S
+    where
+        S: Sum<T>,
+    {
+        self.0.sum()
+    }
+
+    #[inline]
+    pub fn product<S>(self) -> S
+    where
+        S: Product<T>,
+    {
+        self.0.product()
+    }
+
+    #[inline]
+    pub fn count(self) -> usize {
+        self.0.count()
+    }
+
+    #[inline]
+    pub fn flat_map<U, F, O>(self, f: F) -> UnordItems<O, impl Iterator<Item = O>>
+    where
+        U: IntoIterator<Item = O>,
+        F: Fn(T) -> U,
+    {
+        UnordItems(self.0.flat_map(f))
+    }
+
+    pub fn collect<C: From<UnordItems<T, I>>>(self) -> C {
+        self.into()
+    }
+
+    /// If the iterator has only one element, returns it, otherwise returns `None`.
+    #[track_caller]
+    pub fn get_only(mut self) -> Option<T> {
+        let item = self.0.next();
+        if self.0.next().is_some() {
+            return None;
+        }
+        item
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=empty | COMPLEXITY=3 | LINES=6 */
+
+impl<T> UnordItems<T, std::iter::Empty<T>> {
+    pub fn empty() -> Self {
+        UnordItems(std::iter::empty())
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=cloned | COMPLEXITY=3 | LINES=7 */
+
+impl<'a, T: Clone + 'a, I: Iterator<Item = &'a T>> UnordItems<&'a T, I> {
+    #[inline]
+    pub fn cloned(self) -> UnordItems<T, impl Iterator<Item = T>> {
+        UnordItems(self.0.cloned())
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=copied | COMPLEXITY=3 | LINES=7 */
+
+impl<'a, T: Copy + 'a, I: Iterator<Item = &'a T>> UnordItems<&'a T, I> {
+    #[inline]
+    pub fn copied(self) -> UnordItems<T, impl Iterator<Item = T>> {
+        UnordItems(self.0.copied())
+    }
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=into_sorted | COMPLEXITY=27 | LINES=76 */
+
+impl<T, I: Iterator<Item = T>> UnordItems<T, I> {
+    #[inline]
+    pub fn into_sorted<HCX>(self, hcx: &HCX) -> Vec<T>
+    where
+        T: ToStableHashKey<HCX>,
+    {
+        self.collect_sorted(hcx, true)
+    }
+
+    #[inline]
+    pub fn into_sorted_stable_ord(self) -> Vec<T>
+    where
+        T: StableCompare,
+    {
+        self.collect_stable_ord_by_key(|x| x)
+    }
+
+    #[inline]
+    pub fn into_sorted_stable_ord_by_key<K, C>(self, project_to_key: C) -> Vec<T>
+    where
+        K: StableCompare,
+        C: for<'a> Fn(&'a T) -> &'a K,
+    {
+        self.collect_stable_ord_by_key(project_to_key)
+    }
+
+    #[inline]
+    pub fn collect_sorted<HCX, C>(self, hcx: &HCX, cache_sort_key: bool) -> C
+    where
+        T: ToStableHashKey<HCX>,
+        C: FromIterator<T> + BorrowMut<[T]>,
+    {
+        let mut items: C = self.0.collect();
+
+        let slice = items.borrow_mut();
+        if slice.len() > 1 {
+            if cache_sort_key {
+                slice.sort_by_cached_key(|x| x.to_stable_hash_key(hcx));
+            } else {
+                slice.sort_by_key(|x| x.to_stable_hash_key(hcx));
+            }
+        }
+
+        items
+    }
+
+    #[inline]
+    pub fn collect_stable_ord_by_key<K, C, P>(self, project_to_key: P) -> C
+    where
+        K: StableCompare,
+        P: for<'a> Fn(&'a T) -> &'a K,
+        C: FromIterator<T> + BorrowMut<[T]>,
+    {
+        let mut items: C = self.0.collect();
+
+        let slice = items.borrow_mut();
+        if slice.len() > 1 {
+            if !K::CAN_USE_UNSTABLE_SORT {
+                slice.sort_by(|a, b| {
+                    let a_key = project_to_key(a);
+                    let b_key = project_to_key(b);
+                    a_key.stable_cmp(b_key)
+                });
+            } else {
+                slice.sort_unstable_by(|a, b| {
+                    let a_key = project_to_key(a);
+                    let b_key = project_to_key(b);
+                    a_key.stable_cmp(b_key)
+                });
+            }
+        }
+
+        items
+    }
+}
+/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+
+/// A marker trait specifying that `Self` can consume `UnordItems<_>` without
+/// exposing any internal ordering.
+///
+/// Note: right now this is just a marker trait. It could be extended to contain
+/// some useful, common methods though, like `len`, `clear`, or the various
+/// kinds of `to_sorted`.
+trait UnordCollection {}
+/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UnordSet | COMPLEXITY=7 | LINES=14 */
+
+/// This is a set collection type that tries very hard to not expose
+/// any internal iteration. This is a useful property when trying to
+/// uphold the determinism invariants imposed by the query system.
+///
+/// This collection type is a good choice for set-like collections the
+/// keys of which don't have a semantic ordering.
+///
+/// See [MCP 533](https://github.com/rust-lang/compiler-team/issues/533)
+/// for more information.
+#[derive(Debug, Eq, PartialEq, Clone, Encodable_NoContext, Decodable_NoContext)]
+pub struct UnordSet<V: Eq + Hash> {
+    inner: FxHashSet<V>,
+}
+/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<V: Eq + Hash> UnordCollection for UnordSet<V> {}
+/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=7 */
+
+impl<V: Eq + Hash> Default for UnordSet<V> {
+    #[inline]
+    fn default() -> Self {
+        Self { inner: FxHashSet::default() }
+    }
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=new | COMPLEXITY=42 | LINES=122 */
+
+impl<V: Eq + Hash> UnordSet<V> {
+    #[inline]
+    pub fn new() -> Self {
+        Self { inner: Default::default() }
+    }
+
+    #[inline]
+    pub fn with_capacity(capacity: usize) -> Self {
+        Self { inner: FxHashSet::with_capacity_and_hasher(capacity, Default::default()) }
+    }
+
+    #[inline]
+    pub fn len(&self) -> usize {
+        self.inner.len()
+    }
+
+    #[inline]
+    pub fn is_empty(&self) -> bool {
+        self.inner.is_empty()
+    }
+
+    /// If the set has only one element, returns it, otherwise returns `None`.
+    #[inline]
+    pub fn get_only(&self) -> Option<&V> {
+        if self.inner.len() == 1 { self.inner.iter().next() } else { None }
+    }
+
+    #[inline]
+    pub fn insert(&mut self, v: V) -> bool {
+        self.inner.insert(v)
+    }
+
+    #[inline]
+    pub fn contains<Q: ?Sized>(&self, v: &Q) -> bool
+    where
+        V: Borrow<Q>,
+        Q: Hash + Eq,
+    {
+        self.inner.contains(v)
+    }
+
+    #[inline]
+    pub fn remove<Q: ?Sized>(&mut self, k: &Q) -> bool
+    where
+        V: Borrow<Q>,
+        Q: Hash + Eq,
+    {
+        self.inner.remove(k)
+    }
+
+    #[inline]
+    pub fn items(&self) -> UnordItems<&V, impl Iterator<Item = &V>> {
+        UnordItems(self.inner.iter())
+    }
+
+    #[inline]
+    pub fn into_items(self) -> UnordItems<V, impl Iterator<Item = V>> {
+        UnordItems(self.inner.into_iter())
+    }
+
+    /// Returns the items of this set in stable sort order (as defined by `ToStableHashKey`).
+    ///
+    /// The `cache_sort_key` parameter controls if [slice::sort_by_cached_key] or
+    /// [slice::sort_unstable_by_key] will be used for sorting the vec. Use
+    /// `cache_sort_key` when the [ToStableHashKey::to_stable_hash_key] implementation
+    /// for `V` is expensive (e.g. a `DefId -> DefPathHash` lookup).
+    #[inline]
+    pub fn to_sorted<HCX>(&self, hcx: &HCX, cache_sort_key: bool) -> Vec<&V>
+    where
+        V: ToStableHashKey<HCX>,
+    {
+        to_sorted_vec(hcx, self.inner.iter(), cache_sort_key, |&x| x)
+    }
+
+    /// Returns the items of this set in stable sort order (as defined by
+    /// `StableCompare`). This method is much more efficient than
+    /// `into_sorted` because it does not need to transform keys to their
+    /// `ToStableHashKey` equivalent.
+    #[inline]
+    pub fn to_sorted_stable_ord(&self) -> Vec<&V>
+    where
+        V: StableCompare,
+    {
+        let mut items: Vec<&V> = self.inner.iter().collect();
+        items.sort_unstable_by(|a, b| a.stable_cmp(*b));
+        items
+    }
+
+    /// Returns the items of this set in stable sort order (as defined by
+    /// `StableCompare`). This method is much more efficient than
+    /// `into_sorted` because it does not need to transform keys to their
+    /// `ToStableHashKey` equivalent.
+    #[inline]
+    pub fn into_sorted_stable_ord(self) -> Vec<V>
+    where
+        V: StableCompare,
+    {
+        let mut items: Vec<V> = self.inner.into_iter().collect();
+        items.sort_unstable_by(V::stable_cmp);
+        items
+    }
+
+    /// Returns the items of this set in stable sort order (as defined by `ToStableHashKey`).
+    ///
+    /// The `cache_sort_key` parameter controls if [slice::sort_by_cached_key] or
+    /// [slice::sort_unstable_by_key] will be used for sorting the vec. Use
+    /// `cache_sort_key` when the [ToStableHashKey::to_stable_hash_key] implementation
+    /// for `V` is expensive (e.g. a `DefId -> DefPathHash` lookup).
+    #[inline]
+    pub fn into_sorted<HCX>(self, hcx: &HCX, cache_sort_key: bool) -> Vec<V>
+    where
+        V: ToStableHashKey<HCX>,
+    {
+        to_sorted_vec(hcx, self.inner.into_iter(), cache_sort_key, |x| x)
+    }
+
+    #[inline]
+    pub fn clear(&mut self) {
+        self.inner.clear();
+    }
+}
+/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=extend_unord | COMPLEXITY=2 | LINES=9 */
+
+pub trait ExtendUnord<T> {
+    /// Extend this unord collection with the given `UnordItems`.
+    /// This method is called `extend_unord` instead of just `extend` so it
+    /// does not conflict with `Extend::extend`. Otherwise there would be many
+    /// places where the two methods would have to be explicitly disambiguated
+    /// via UFCS.
+    fn extend_unord<I: Iterator<Item = T>>(&mut self, items: UnordItems<T, I>);
+}
+/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=extend_unord | COMPLEXITY=5 | LINES=10 */
+
+// Note: it is important that `C` implements `UnordCollection` in addition to
+// `Extend`, otherwise this impl would leak the internal iteration order of
+// `items`, e.g. when calling `some_vec.extend_unord(some_unord_items)`.
+impl<C: Extend<T> + UnordCollection, T> ExtendUnord<T> for C {
+    #[inline]
+    fn extend_unord<I: Iterator<Item = T>>(&mut self, items: UnordItems<T, I>) {
+        self.extend(items.0)
+    }
+}
+/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=5 | LINES=7 */
+
+impl<V: Hash + Eq> Extend<V> for UnordSet<V> {
+    #[inline]
+    fn extend<T: IntoIterator<Item = V>>(&mut self, iter: T) {
+        self.inner.extend(iter)
+    }
+}
+/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=from_iter | COMPLEXITY=6 | LINES=7 */
+
+impl<V: Hash + Eq> FromIterator<V> for UnordSet<V> {
+    #[inline]
+    fn from_iter<T: IntoIterator<Item = V>>(iter: T) -> Self {
+        UnordSet { inner: FxHashSet::from_iter(iter) }
+    }
+}
+/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=6 */
+
+impl<V: Hash + Eq> From<FxHashSet<V>> for UnordSet<V> {
+    fn from(value: FxHashSet<V>) -> Self {
+        UnordSet { inner: value }
+    }
+}
+/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=6 */
+
+impl<V: Hash + Eq, I: Iterator<Item = V>> From<UnordItems<V, I>> for UnordSet<V> {
+    fn from(value: UnordItems<V, I>) -> Self {
+        UnordSet { inner: FxHashSet::from_iter(value.0) }
+    }
+}
+/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=7 */
+
+impl<HCX, V: Hash + Eq + HashStable<HCX>> HashStable<HCX> for UnordSet<V> {
+    #[inline]
+    fn hash_stable(&self, hcx: &mut HCX, hasher: &mut StableHasher) {
+        hash_iter_order_independent(self.inner.iter(), hcx, hasher);
+    }
+}
+/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UnordMap | COMPLEXITY=7 | LINES=14 */
+
+/// This is a map collection type that tries very hard to not expose
+/// any internal iteration. This is a useful property when trying to
+/// uphold the determinism invariants imposed by the query system.
+///
+/// This collection type is a good choice for map-like collections the
+/// keys of which don't have a semantic ordering.
+///
+/// See [MCP 533](https://github.com/rust-lang/compiler-team/issues/533)
+/// for more information.
+#[derive(Debug, Eq, PartialEq, Clone, Encodable_NoContext, Decodable_NoContext)]
+pub struct UnordMap<K: Eq + Hash, V> {
+    inner: FxHashMap<K, V>,
+}
+/* AST_META: AST_ID=25 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<K: Eq + Hash, V> UnordCollection for UnordMap<K, V> {}
+/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=7 */
+
+impl<K: Eq + Hash, V> Default for UnordMap<K, V> {
+    #[inline]
+    fn default() -> Self {
+        Self { inner: FxHashMap::default() }
+    }
+}
+/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=5 | LINES=7 */
+
+impl<K: Hash + Eq, V> Extend<(K, V)> for UnordMap<K, V> {
+    #[inline]
+    fn extend<T: IntoIterator<Item = (K, V)>>(&mut self, iter: T) {
+        self.inner.extend(iter)
+    }
+}
+/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=from_iter | COMPLEXITY=6 | LINES=7 */
+
+impl<K: Hash + Eq, V> FromIterator<(K, V)> for UnordMap<K, V> {
+    #[inline]
+    fn from_iter<T: IntoIterator<Item = (K, V)>>(iter: T) -> Self {
+        UnordMap { inner: FxHashMap::from_iter(iter) }
+    }
+}
+/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=7 */
+
+impl<K: Hash + Eq, V, I: Iterator<Item = (K, V)>> From<UnordItems<(K, V), I>> for UnordMap<K, V> {
+    #[inline]
+    fn from(items: UnordItems<(K, V), I>) -> Self {
+        UnordMap { inner: FxHashMap::from_iter(items.0) }
+    }
+}
+/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=with_capacity | COMPLEXITY=49 | LINES=159 */
+
+impl<K: Eq + Hash, V> UnordMap<K, V> {
+    #[inline]
+    pub fn with_capacity(capacity: usize) -> Self {
+        Self { inner: FxHashMap::with_capacity_and_hasher(capacity, Default::default()) }
+    }
+
+    #[inline]
+    pub fn len(&self) -> usize {
+        self.inner.len()
+    }
+
+    #[inline]
+    pub fn insert(&mut self, k: K, v: V) -> Option<V> {
+        self.inner.insert(k, v)
+    }
+
+    #[inline]
+    pub fn try_insert(&mut self, k: K, v: V) -> Result<&mut V, OccupiedError<'_, K, V>> {
+        self.inner.try_insert(k, v)
+    }
+
+    #[inline]
+    pub fn contains_key<Q: ?Sized>(&self, k: &Q) -> bool
+    where
+        K: Borrow<Q>,
+        Q: Hash + Eq,
+    {
+        self.inner.contains_key(k)
+    }
+
+    #[inline]
+    pub fn is_empty(&self) -> bool {
+        self.inner.is_empty()
+    }
+
+    #[inline]
+    pub fn entry(&mut self, key: K) -> Entry<'_, K, V> {
+        self.inner.entry(key)
+    }
+
+    #[inline]
+    pub fn get<Q: ?Sized>(&self, k: &Q) -> Option<&V>
+    where
+        K: Borrow<Q>,
+        Q: Hash + Eq,
+    {
+        self.inner.get(k)
+    }
+
+    #[inline]
+    pub fn get_mut<Q: ?Sized>(&mut self, k: &Q) -> Option<&mut V>
+    where
+        K: Borrow<Q>,
+        Q: Hash + Eq,
+    {
+        self.inner.get_mut(k)
+    }
+
+    #[inline]
+    pub fn remove<Q: ?Sized>(&mut self, k: &Q) -> Option<V>
+    where
+        K: Borrow<Q>,
+        Q: Hash + Eq,
+    {
+        self.inner.remove(k)
+    }
+
+    #[inline]
+    pub fn items(&self) -> UnordItems<(&K, &V), impl Iterator<Item = (&K, &V)>> {
+        UnordItems(self.inner.iter())
+    }
+
+    #[inline]
+    pub fn into_items(self) -> UnordItems<(K, V), impl Iterator<Item = (K, V)>> {
+        UnordItems(self.inner.into_iter())
+    }
+
+    #[inline]
+    pub fn keys(&self) -> UnordItems<&K, impl Iterator<Item = &K>> {
+        UnordItems(self.inner.keys())
+    }
+
+    /// Returns the entries of this map in stable sort order (as defined by `ToStableHashKey`).
+    ///
+    /// The `cache_sort_key` parameter controls if [slice::sort_by_cached_key] or
+    /// [slice::sort_unstable_by_key] will be used for sorting the vec. Use
+    /// `cache_sort_key` when the [ToStableHashKey::to_stable_hash_key] implementation
+    /// for `K` is expensive (e.g. a `DefId -> DefPathHash` lookup).
+    #[inline]
+    pub fn to_sorted<HCX>(&self, hcx: &HCX, cache_sort_key: bool) -> Vec<(&K, &V)>
+    where
+        K: ToStableHashKey<HCX>,
+    {
+        to_sorted_vec(hcx, self.inner.iter(), cache_sort_key, |&(k, _)| k)
+    }
+
+    /// Returns the entries of this map in stable sort order (as defined by `StableCompare`).
+    /// This method can be much more efficient than `into_sorted` because it does not need
+    /// to transform keys to their `ToStableHashKey` equivalent.
+    #[inline]
+    pub fn to_sorted_stable_ord(&self) -> Vec<(&K, &V)>
+    where
+        K: StableCompare,
+    {
+        let mut items: Vec<_> = self.inner.iter().collect();
+        items.sort_unstable_by(|(a, _), (b, _)| a.stable_cmp(*b));
+        items
+    }
+
+    /// Returns the entries of this map in stable sort order (as defined by `ToStableHashKey`).
+    ///
+    /// The `cache_sort_key` parameter controls if [slice::sort_by_cached_key] or
+    /// [slice::sort_unstable_by_key] will be used for sorting the vec. Use
+    /// `cache_sort_key` when the [ToStableHashKey::to_stable_hash_key] implementation
+    /// for `K` is expensive (e.g. a `DefId -> DefPathHash` lookup).
+    #[inline]
+    pub fn into_sorted<HCX>(self, hcx: &HCX, cache_sort_key: bool) -> Vec<(K, V)>
+    where
+        K: ToStableHashKey<HCX>,
+    {
+        to_sorted_vec(hcx, self.inner.into_iter(), cache_sort_key, |(k, _)| k)
+    }
+
+    /// Returns the entries of this map in stable sort order (as defined by `StableCompare`).
+    /// This method can be much more efficient than `into_sorted` because it does not need
+    /// to transform keys to their `ToStableHashKey` equivalent.
+    #[inline]
+    pub fn into_sorted_stable_ord(self) -> Vec<(K, V)>
+    where
+        K: StableCompare,
+    {
+        let mut items: Vec<(K, V)> = self.inner.into_iter().collect();
+        items.sort_unstable_by(|a, b| a.0.stable_cmp(&b.0));
+        items
+    }
+
+    /// Returns the values of this map in stable sort order (as defined by K's
+    /// `ToStableHashKey` implementation).
+    ///
+    /// The `cache_sort_key` parameter controls if [slice::sort_by_cached_key] or
+    /// [slice::sort_unstable_by_key] will be used for sorting the vec. Use
+    /// `cache_sort_key` when the [ToStableHashKey::to_stable_hash_key] implementation
+    /// for `K` is expensive (e.g. a `DefId -> DefPathHash` lookup).
+    #[inline]
+    pub fn values_sorted<HCX>(&self, hcx: &HCX, cache_sort_key: bool) -> impl Iterator<Item = &V>
+    where
+        K: ToStableHashKey<HCX>,
+    {
+        to_sorted_vec(hcx, self.inner.iter(), cache_sort_key, |&(k, _)| k)
+            .into_iter()
+            .map(|(_, v)| v)
+    }
+
+    #[inline]
+    pub fn clear(&mut self) {
+        self.inner.clear()
+    }
+}
+/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=13 */
+
+impl<K, Q: ?Sized, V> Index<&Q> for UnordMap<K, V>
+where
+    K: Eq + Hash + Borrow<Q>,
+    Q: Eq + Hash,
+{
+    type Output = V;
+
+    #[inline]
+    fn index(&self, key: &Q) -> &V {
+        &self.inner[key]
+    }
+}
+/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=7 */
+
+impl<HCX, K: Hash + Eq + HashStable<HCX>, V: HashStable<HCX>> HashStable<HCX> for UnordMap<K, V> {
+    #[inline]
+    fn hash_stable(&self, hcx: &mut HCX, hasher: &mut StableHasher) {
+        hash_iter_order_independent(self.inner.iter(), hcx, hasher);
+    }
+}
+/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=UnordBag | COMPLEXITY=7 | LINES=15 */
+
+/// This is a collection type that tries very hard to not expose
+/// any internal iteration. This is a useful property when trying to
+/// uphold the determinism invariants imposed by the query system.
+///
+/// This collection type is a good choice for collections the
+/// keys of which don't have a semantic ordering and don't implement
+/// `Hash` or `Eq`.
+///
+/// See [MCP 533](https://github.com/rust-lang/compiler-team/issues/533)
+/// for more information.
+#[derive(Default, Debug, Eq, PartialEq, Clone, Encodable_NoContext, Decodable_NoContext)]
+pub struct UnordBag<V> {
+    inner: Vec<V>,
+}
+/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=new | COMPLEXITY=9 | LINES=27 */
+
+impl<V> UnordBag<V> {
+    #[inline]
+    pub fn new() -> Self {
+        Self { inner: Default::default() }
+    }
+
+    #[inline]
+    pub fn len(&self) -> usize {
+        self.inner.len()
+    }
+
+    #[inline]
+    pub fn push(&mut self, v: V) {
+        self.inner.push(v);
+    }
+
+    #[inline]
+    pub fn items(&self) -> UnordItems<&V, impl Iterator<Item = &V>> {
+        UnordItems(self.inner.iter())
+    }
+
+    #[inline]
+    pub fn into_items(self) -> UnordItems<V, impl Iterator<Item = V>> {
+        UnordItems(self.inner.into_iter())
+    }
+}
+/* AST_META: AST_ID=35 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<T> UnordCollection for UnordBag<T> {}
+/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=5 | LINES=6 */
+
+impl<T> Extend<T> for UnordBag<T> {
+    fn extend<I: IntoIterator<Item = T>>(&mut self, iter: I) {
+        self.inner.extend(iter)
+    }
+}
+/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=6 */
+
+impl<T, I: Iterator<Item = T>> From<UnordItems<T, I>> for UnordBag<T> {
+    fn from(value: UnordItems<T, I>) -> Self {
+        UnordBag { inner: Vec::from_iter(value.0) }
+    }
+}
+/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=7 */
+
+impl<HCX, V: Hash + Eq + HashStable<HCX>> HashStable<HCX> for UnordBag<V> {
+    #[inline]
+    fn hash_stable(&self, hcx: &mut HCX, hasher: &mut StableHasher) {
+        hash_iter_order_independent(self.inner.iter(), hcx, hasher);
+    }
+}
+/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=to_sorted_vec | COMPLEXITY=6 | LINES=21 */
+
+#[inline]
+fn to_sorted_vec<HCX, T, K, I>(
+    hcx: &HCX,
+    iter: I,
+    cache_sort_key: bool,
+    extract_key: fn(&T) -> &K,
+) -> Vec<T>
+where
+    I: Iterator<Item = T>,
+    K: ToStableHashKey<HCX>,
+{
+    let mut items: Vec<T> = iter.collect();
+    if cache_sort_key {
+        items.sort_by_cached_key(|x| extract_key(x).to_stable_hash_key(hcx));
+    } else {
+        items.sort_unstable_by_key(|x| extract_key(x).to_stable_hash_key(hcx));
+    }
+
+    items
+}
+/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=hash_iter_order_independent | COMPLEXITY=13 | LINES=33 */
+
+fn hash_iter_order_independent<
+    HCX,
+    T: HashStable<HCX>,
+    I: Iterator<Item = T> + ExactSizeIterator,
+>(
+    mut it: I,
+    hcx: &mut HCX,
+    hasher: &mut StableHasher,
+) {
+    let len = it.len();
+    len.hash_stable(hcx, hasher);
+
+    match len {
+        0 => {
+            // We're done
+        }
+        1 => {
+            // No need to instantiate a hasher
+            it.next().unwrap().hash_stable(hcx, hasher);
+        }
+        _ => {
+            let mut accumulator = Fingerprint::ZERO;
+            for item in it {
+                let mut item_hasher = StableHasher::new();
+                item.hash_stable(hcx, &mut item_hasher);
+                let item_fingerprint: Fingerprint = item_hasher.finish();
+                accumulator = accumulator.combine_commutative(item_fingerprint);
+            }
+            accumulator.hash_stable(hcx, hasher);
+        }
+    }
+}
+/* AST_META: AST_ID=41 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=4 */
+
+// Do not implement IntoIterator for the collections in this module.
+// They only exist to hide iteration order in the first place.
+impl<T> !IntoIterator for UnordBag<T> {}
+/* AST_META: AST_ID=42 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
+impl<V> !IntoIterator for UnordSet<V> {}
+/* AST_META: AST_ID=43 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
+impl<K, V> !IntoIterator for UnordMap<K, V> {}
+/* AST_META: AST_ID=44 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
+impl<T, I> !IntoIterator for UnordItems<T, I> {}

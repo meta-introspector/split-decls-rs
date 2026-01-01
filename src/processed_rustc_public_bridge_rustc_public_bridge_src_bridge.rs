@@ -1,54 +1,66 @@
-/* FP:bridge.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_USE_0001
-/* FP:bridge.rs-0002 */ use std :: fmt :: Debug ;
-/* FP:bridge.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_USE_0002
-/* FP:bridge.rs-0004 */ use super :: context :: CompilerCtxt ;
-/* FP:bridge.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_USE_0003
-/* FP:bridge.rs-0006 */ use super :: { Bridge , Tables } ;
-/* FP:bridge.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_TRAIT_0004
-/* FP:bridge.rs-0008 */ pub trait Error { fn new (msg : String) -> Self ; fn from_internal < T : Debug > (err : T) -> Self ; }
-/* FP:bridge.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_TRAIT_0005
-/* FP:bridge.rs-0010 */ pub trait Prov < B : Bridge > { fn new (aid : B :: AllocId) -> Self ; }
-/* FP:bridge.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_TRAIT_0006
-/* FP:bridge.rs-0012 */ pub trait Allocation < B : Bridge > { fn new < 'tcx > (bytes : Vec < Option < u8 > > , ptrs : Vec < (usize , crate :: rustc_middle :: mir :: interpret :: AllocId) > , align : u64 , mutability : crate :: rustc_middle :: mir :: Mutability , tables : & mut Tables < 'tcx , B > , cx : & CompilerCtxt < 'tcx , B > ,) -> Self ; }
-/* FP:bridge.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0007
-/* FP:bridge.rs-0014 */ macro_rules ! make_bridge_trait { ($ name : ident) => { pub trait $ name < B : Bridge > { fn new (did : B :: DefId) -> Self ; } } ; }
-/* FP:bridge.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0008
-/* FP:bridge.rs-0016 */ make_bridge_trait ! (CrateItem) ;
-/* FP:bridge.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0009
-/* FP:bridge.rs-0018 */ make_bridge_trait ! (AdtDef) ;
-/* FP:bridge.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0010
-/* FP:bridge.rs-0020 */ make_bridge_trait ! (ForeignModuleDef) ;
-/* FP:bridge.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0011
-/* FP:bridge.rs-0022 */ make_bridge_trait ! (ForeignDef) ;
-/* FP:bridge.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0012
-/* FP:bridge.rs-0024 */ make_bridge_trait ! (FnDef) ;
-/* FP:bridge.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0013
-/* FP:bridge.rs-0026 */ make_bridge_trait ! (ClosureDef) ;
-/* FP:bridge.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0014
-/* FP:bridge.rs-0028 */ make_bridge_trait ! (CoroutineDef) ;
-/* FP:bridge.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0015
-/* FP:bridge.rs-0030 */ make_bridge_trait ! (CoroutineClosureDef) ;
-/* FP:bridge.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0016
-/* FP:bridge.rs-0032 */ make_bridge_trait ! (AliasDef) ;
-/* FP:bridge.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0017
-/* FP:bridge.rs-0034 */ make_bridge_trait ! (ParamDef) ;
-/* FP:bridge.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0018
-/* FP:bridge.rs-0036 */ make_bridge_trait ! (BrNamedDef) ;
-/* FP:bridge.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0019
-/* FP:bridge.rs-0038 */ make_bridge_trait ! (TraitDef) ;
-/* FP:bridge.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0020
-/* FP:bridge.rs-0040 */ make_bridge_trait ! (GenericDef) ;
-/* FP:bridge.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0021
-/* FP:bridge.rs-0042 */ make_bridge_trait ! (ConstDef) ;
-/* FP:bridge.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0022
-/* FP:bridge.rs-0044 */ make_bridge_trait ! (ImplDef) ;
-/* FP:bridge.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0023
-/* FP:bridge.rs-0046 */ make_bridge_trait ! (RegionDef) ;
-/* FP:bridge.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0024
-/* FP:bridge.rs-0048 */ make_bridge_trait ! (CoroutineWitnessDef) ;
-/* FP:bridge.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0025
-/* FP:bridge.rs-0050 */ make_bridge_trait ! (AssocDef) ;
-/* FP:bridge.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0026
-/* FP:bridge.rs-0052 */ make_bridge_trait ! (OpaqueDef) ;
-/* FP:bridge.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_bridge_src_bridge_MACRO_0027
-/* FP:bridge.rs-0054 */ make_bridge_trait ! (StaticDef) ;
+// SRC: ../rust/compiler/rustc_public_bridge/src/bridge.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
+// Defines a set of traits that is used for abstracting
+// rustc_public's components that are needed in rustc_public_bridge.
+//
+// These traits are really useful when programming
+// in rustc_public-agnostic settings.
+
+use std::fmt::Debug;
+
+use super::context::CompilerCtxt;
+use super::{Bridge, Tables};
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=new | COMPLEXITY=2 | LINES=5 */
+
+pub trait Error {
+    fn new(msg: String) -> Self;
+    fn from_internal<T: Debug>(err: T) -> Self;
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=2 | LINES=4 */
+
+pub trait Prov<B: Bridge> {
+    fn new(aid: B::AllocId) -> Self;
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=2 | LINES=11 */
+
+pub trait Allocation<B: Bridge> {
+    fn new<'tcx>(
+        bytes: Vec<Option<u8>>,
+        ptrs: Vec<(usize, crate::rustc_middle::mir::interpret::AllocId)>,
+        align: u64,
+        mutability: crate::rustc_middle::mir::Mutability,
+        tables: &mut Tables<'tcx, B>,
+        cx: &CompilerCtxt<'tcx, B>,
+    ) -> Self;
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=9 | LINES=8 */
+
+macro_rules! make_bridge_trait {
+    ($name:ident) => {
+        pub trait $name<B: Bridge> {
+            fn new(did: B::DefId) -> Self;
+        }
+    };
+}
+/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=21 */
+
+make_bridge_trait!(CrateItem);
+make_bridge_trait!(AdtDef);
+make_bridge_trait!(ForeignModuleDef);
+make_bridge_trait!(ForeignDef);
+make_bridge_trait!(FnDef);
+make_bridge_trait!(ClosureDef);
+make_bridge_trait!(CoroutineDef);
+make_bridge_trait!(CoroutineClosureDef);
+make_bridge_trait!(AliasDef);
+make_bridge_trait!(ParamDef);
+make_bridge_trait!(BrNamedDef);
+make_bridge_trait!(TraitDef);
+make_bridge_trait!(GenericDef);
+make_bridge_trait!(ConstDef);
+make_bridge_trait!(ImplDef);
+make_bridge_trait!(RegionDef);
+make_bridge_trait!(CoroutineWitnessDef);
+make_bridge_trait!(AssocDef);
+make_bridge_trait!(OpaqueDef);
+make_bridge_trait!(StaticDef);

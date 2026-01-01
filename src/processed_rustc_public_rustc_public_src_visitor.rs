@@ -1,48 +1,246 @@
-/* FP:visitor.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_USE_0001
-/* FP:visitor.rs-0002 */ use std :: ops :: ControlFlow ;
-/* FP:visitor.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_USE_0002
-/* FP:visitor.rs-0004 */ use super :: ty :: { Allocation , Binder , ConstDef , ExistentialPredicate , FnSig , GenericArgKind , GenericArgs , MirConst , Promoted , Region , RigidTy , TermKind , Ty , UnevaluatedConst , } ;
-/* FP:visitor.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_USE_0003
-/* FP:visitor.rs-0006 */ use crate :: Opaque ;
-/* FP:visitor.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_USE_0004
-/* FP:visitor.rs-0008 */ use crate :: ty :: TyConst ;
-/* FP:visitor.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_TRAIT_0005
-/* FP:visitor.rs-0010 */ pub trait Visitor : Sized { type Break ; fn visit_ty (& mut self , ty : & Ty) -> ControlFlow < Self :: Break > { ty . super_visit (self) } fn visit_const (& mut self , c : & TyConst) -> ControlFlow < Self :: Break > { c . super_visit (self) } fn visit_reg (& mut self , reg : & Region) -> ControlFlow < Self :: Break > { reg . super_visit (self) } }
-/* FP:visitor.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_TRAIT_0006
-/* FP:visitor.rs-0012 */ pub trait Visitable { fn visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { self . super_visit (visitor) } fn super_visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > ; }
-/* FP:visitor.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0007
-/* FP:visitor.rs-0014 */ impl Visitable for Ty { fn visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { visitor . visit_ty (self) } fn super_visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { match self . kind () { super :: ty :: TyKind :: RigidTy (ty) => ty . visit (visitor) ? , super :: ty :: TyKind :: Alias (_ , alias) => alias . args . visit (visitor) ? , super :: ty :: TyKind :: Param (_) | super :: ty :: TyKind :: Bound (_ , _) => { } } ControlFlow :: Continue (()) } }
-/* FP:visitor.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0008
-/* FP:visitor.rs-0016 */ impl Visitable for TyConst { fn visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { visitor . visit_const (self) } fn super_visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { match & self . kind { super :: ty :: TyConstKind :: Param (_) | super :: ty :: TyConstKind :: Bound (_ , _) => { } super :: ty :: TyConstKind :: Unevaluated (_ , args) => args . visit (visitor) ? , super :: ty :: TyConstKind :: Value (ty , alloc) => { alloc . visit (visitor) ? ; ty . visit (visitor) ? ; } super :: ty :: TyConstKind :: ZSTValue (ty) => ty . visit (visitor) ? , } ControlFlow :: Continue (()) } }
-/* FP:visitor.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0009
-/* FP:visitor.rs-0018 */ impl Visitable for MirConst { fn visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { self . super_visit (visitor) } fn super_visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { match & self . kind () { super :: ty :: ConstantKind :: Ty (ct) => ct . visit (visitor) ? , super :: ty :: ConstantKind :: Allocated (alloc) => alloc . visit (visitor) ? , super :: ty :: ConstantKind :: Unevaluated (uv) => uv . visit (visitor) ? , super :: ty :: ConstantKind :: Param (_) | super :: ty :: ConstantKind :: ZeroSized => { } } self . ty () . visit (visitor) } }
-/* FP:visitor.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0010
-/* FP:visitor.rs-0020 */ impl Visitable for Opaque { fn super_visit < V : Visitor > (& self , _visitor : & mut V) -> ControlFlow < V :: Break > { ControlFlow :: Continue (()) } }
-/* FP:visitor.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0011
-/* FP:visitor.rs-0022 */ impl Visitable for Allocation { fn super_visit < V : Visitor > (& self , _visitor : & mut V) -> ControlFlow < V :: Break > { ControlFlow :: Continue (()) } }
-/* FP:visitor.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0012
-/* FP:visitor.rs-0024 */ impl Visitable for UnevaluatedConst { fn super_visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { let UnevaluatedConst { def , args , promoted } = self ; def . visit (visitor) ? ; args . visit (visitor) ? ; promoted . visit (visitor) } }
-/* FP:visitor.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0013
-/* FP:visitor.rs-0026 */ impl Visitable for ConstDef { fn super_visit < V : Visitor > (& self , _visitor : & mut V) -> ControlFlow < V :: Break > { ControlFlow :: Continue (()) } }
-/* FP:visitor.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0014
-/* FP:visitor.rs-0028 */ impl < T : Visitable > Visitable for Option < T > { fn super_visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { match self { Some (val) => val . visit (visitor) , None => ControlFlow :: Continue (()) , } } }
-/* FP:visitor.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0015
-/* FP:visitor.rs-0030 */ impl Visitable for Promoted { fn super_visit < V : Visitor > (& self , _visitor : & mut V) -> ControlFlow < V :: Break > { ControlFlow :: Continue (()) } }
-/* FP:visitor.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0016
-/* FP:visitor.rs-0032 */ impl Visitable for GenericArgs { fn super_visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { self . 0 . visit (visitor) } }
-/* FP:visitor.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0017
-/* FP:visitor.rs-0034 */ impl Visitable for Region { fn visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { visitor . visit_reg (self) } fn super_visit < V : Visitor > (& self , _ : & mut V) -> ControlFlow < V :: Break > { ControlFlow :: Continue (()) } }
-/* FP:visitor.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0018
-/* FP:visitor.rs-0036 */ impl Visitable for GenericArgKind { fn super_visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { match self { GenericArgKind :: Lifetime (lt) => lt . visit (visitor) , GenericArgKind :: Type (t) => t . visit (visitor) , GenericArgKind :: Const (c) => c . visit (visitor) , } } }
-/* FP:visitor.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0019
-/* FP:visitor.rs-0038 */ impl Visitable for RigidTy { fn super_visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { match self { RigidTy :: Bool | RigidTy :: Char | RigidTy :: Int (_) | RigidTy :: Uint (_) | RigidTy :: Float (_) | RigidTy :: Never | RigidTy :: Foreign (_) | RigidTy :: Str => ControlFlow :: Continue (()) , RigidTy :: Array (t , c) => { t . visit (visitor) ? ; c . visit (visitor) } RigidTy :: Pat (t , _p) => t . visit (visitor) , RigidTy :: Slice (inner) => inner . visit (visitor) , RigidTy :: RawPtr (ty , _) => ty . visit (visitor) , RigidTy :: Ref (reg , ty , _) => { reg . visit (visitor) ? ; ty . visit (visitor) } RigidTy :: Adt (_ , args) | RigidTy :: Closure (_ , args) | RigidTy :: Coroutine (_ , args) | RigidTy :: CoroutineWitness (_ , args) | RigidTy :: CoroutineClosure (_ , args) | RigidTy :: FnDef (_ , args) => args . visit (visitor) , RigidTy :: FnPtr (sig) => sig . visit (visitor) , RigidTy :: Dynamic (pred , r , _) => { pred . visit (visitor) ? ; r . visit (visitor) } RigidTy :: Tuple (fields) => fields . visit (visitor) , } } }
-/* FP:visitor.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0020
-/* FP:visitor.rs-0040 */ impl < T : Visitable > Visitable for Vec < T > { fn super_visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { for arg in self { arg . visit (visitor) ? ; } ControlFlow :: Continue (()) } }
-/* FP:visitor.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0021
-/* FP:visitor.rs-0042 */ impl < T : Visitable > Visitable for Binder < T > { fn super_visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { self . value . visit (visitor) } }
-/* FP:visitor.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0022
-/* FP:visitor.rs-0044 */ impl Visitable for ExistentialPredicate { fn super_visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { match self { ExistentialPredicate :: Trait (tr) => tr . generic_args . visit (visitor) , ExistentialPredicate :: Projection (p) => { p . term . visit (visitor) ? ; p . generic_args . visit (visitor) } ExistentialPredicate :: AutoTrait (_) => ControlFlow :: Continue (()) , } } }
-/* FP:visitor.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0023
-/* FP:visitor.rs-0046 */ impl Visitable for TermKind { fn super_visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { match self { TermKind :: Type (t) => t . visit (visitor) , TermKind :: Const (c) => c . visit (visitor) , } } }
-/* FP:visitor.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_visitor_IMPL_0024
-/* FP:visitor.rs-0048 */ impl Visitable for FnSig { fn super_visit < V : Visitor > (& self , visitor : & mut V) -> ControlFlow < V :: Break > { self . inputs_and_output . visit (visitor) } }
+// SRC: ../rust/compiler/rustc_public/src/visitor.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+use std::ops::ControlFlow;
+
+use super::ty::{
+    Allocation, Binder, ConstDef, ExistentialPredicate, FnSig, GenericArgKind, GenericArgs,
+    MirConst, Promoted, Region, RigidTy, TermKind, Ty, UnevaluatedConst,
+};
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=5 | LINES=15 */
+use crate::Opaque;
+use crate::ty::TyConst;
+
+pub trait Visitor: Sized {
+    type Break;
+    fn visit_ty(&mut self, ty: &Ty) -> ControlFlow<Self::Break> {
+        ty.super_visit(self)
+    }
+    fn visit_const(&mut self, c: &TyConst) -> ControlFlow<Self::Break> {
+        c.super_visit(self)
+    }
+    fn visit_reg(&mut self, reg: &Region) -> ControlFlow<Self::Break> {
+        reg.super_visit(self)
+    }
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=3 | LINES=7 */
+
+pub trait Visitable {
+    fn visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        self.super_visit(visitor)
+    }
+    fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break>;
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=12 | LINES=14 */
+
+impl Visitable for Ty {
+    fn visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        visitor.visit_ty(self)
+    }
+    fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        match self.kind() {
+            super::ty::TyKind::RigidTy(ty) => ty.visit(visitor)?,
+            super::ty::TyKind::Alias(_, alias) => alias.args.visit(visitor)?,
+            super::ty::TyKind::Param(_) | super::ty::TyKind::Bound(_, _) => {}
+        }
+        ControlFlow::Continue(())
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=13 | LINES=18 */
+
+impl Visitable for TyConst {
+    fn visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        visitor.visit_const(self)
+    }
+    fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        match &self.kind {
+            super::ty::TyConstKind::Param(_) | super::ty::TyConstKind::Bound(_, _) => {}
+            super::ty::TyConstKind::Unevaluated(_, args) => args.visit(visitor)?,
+            super::ty::TyConstKind::Value(ty, alloc) => {
+                alloc.visit(visitor)?;
+                ty.visit(visitor)?;
+            }
+            super::ty::TyConstKind::ZSTValue(ty) => ty.visit(visitor)?,
+        }
+        ControlFlow::Continue(())
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=12 | LINES=15 */
+
+impl Visitable for MirConst {
+    fn visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        self.super_visit(visitor)
+    }
+    fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        match &self.kind() {
+            super::ty::ConstantKind::Ty(ct) => ct.visit(visitor)?,
+            super::ty::ConstantKind::Allocated(alloc) => alloc.visit(visitor)?,
+            super::ty::ConstantKind::Unevaluated(uv) => uv.visit(visitor)?,
+            super::ty::ConstantKind::Param(_) | super::ty::ConstantKind::ZeroSized => {}
+        }
+        self.ty().visit(visitor)
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=5 | LINES=6 */
+
+impl Visitable for Opaque {
+    fn super_visit<V: Visitor>(&self, _visitor: &mut V) -> ControlFlow<V::Break> {
+        ControlFlow::Continue(())
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=5 | LINES=6 */
+
+impl Visitable for Allocation {
+    fn super_visit<V: Visitor>(&self, _visitor: &mut V) -> ControlFlow<V::Break> {
+        ControlFlow::Continue(())
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=6 | LINES=9 */
+
+impl Visitable for UnevaluatedConst {
+    fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        let UnevaluatedConst { def, args, promoted } = self;
+        def.visit(visitor)?;
+        args.visit(visitor)?;
+        promoted.visit(visitor)
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=5 | LINES=6 */
+
+impl Visitable for ConstDef {
+    fn super_visit<V: Visitor>(&self, _visitor: &mut V) -> ControlFlow<V::Break> {
+        ControlFlow::Continue(())
+    }
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=9 | LINES=9 */
+
+impl<T: Visitable> Visitable for Option<T> {
+    fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        match self {
+            Some(val) => val.visit(visitor),
+            None => ControlFlow::Continue(()),
+        }
+    }
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=5 | LINES=6 */
+
+impl Visitable for Promoted {
+    fn super_visit<V: Visitor>(&self, _visitor: &mut V) -> ControlFlow<V::Break> {
+        ControlFlow::Continue(())
+    }
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=5 | LINES=6 */
+
+impl Visitable for GenericArgs {
+    fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        self.0.visit(visitor)
+    }
+}
+/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=visit | COMPLEXITY=6 | LINES=10 */
+
+impl Visitable for Region {
+    fn visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        visitor.visit_reg(self)
+    }
+
+    fn super_visit<V: Visitor>(&self, _: &mut V) -> ControlFlow<V::Break> {
+        ControlFlow::Continue(())
+    }
+}
+/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=9 | LINES=10 */
+
+impl Visitable for GenericArgKind {
+    fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        match self {
+            GenericArgKind::Lifetime(lt) => lt.visit(visitor),
+            GenericArgKind::Type(t) => t.visit(visitor),
+            GenericArgKind::Const(c) => c.visit(visitor),
+        }
+    }
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=14 | LINES=38 */
+
+impl Visitable for RigidTy {
+    fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        match self {
+            RigidTy::Bool
+            | RigidTy::Char
+            | RigidTy::Int(_)
+            | RigidTy::Uint(_)
+            | RigidTy::Float(_)
+            | RigidTy::Never
+            | RigidTy::Foreign(_)
+            | RigidTy::Str => ControlFlow::Continue(()),
+            RigidTy::Array(t, c) => {
+                t.visit(visitor)?;
+                c.visit(visitor)
+            }
+            RigidTy::Pat(t, _p) => t.visit(visitor),
+            RigidTy::Slice(inner) => inner.visit(visitor),
+            RigidTy::RawPtr(ty, _) => ty.visit(visitor),
+            RigidTy::Ref(reg, ty, _) => {
+                reg.visit(visitor)?;
+                ty.visit(visitor)
+            }
+            RigidTy::Adt(_, args)
+            | RigidTy::Closure(_, args)
+            | RigidTy::Coroutine(_, args)
+            | RigidTy::CoroutineWitness(_, args)
+            | RigidTy::CoroutineClosure(_, args)
+            | RigidTy::FnDef(_, args) => args.visit(visitor),
+            RigidTy::FnPtr(sig) => sig.visit(visitor),
+            RigidTy::Dynamic(pred, r, _) => {
+                pred.visit(visitor)?;
+                r.visit(visitor)
+            }
+            RigidTy::Tuple(fields) => fields.visit(visitor),
+        }
+    }
+}
+/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=8 | LINES=9 */
+
+impl<T: Visitable> Visitable for Vec<T> {
+    fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        for arg in self {
+            arg.visit(visitor)?;
+        }
+        ControlFlow::Continue(())
+    }
+}
+/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=5 | LINES=6 */
+
+impl<T: Visitable> Visitable for Binder<T> {
+    fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        self.value.visit(visitor)
+    }
+}
+/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=10 | LINES=13 */
+
+impl Visitable for ExistentialPredicate {
+    fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        match self {
+            ExistentialPredicate::Trait(tr) => tr.generic_args.visit(visitor),
+            ExistentialPredicate::Projection(p) => {
+                p.term.visit(visitor)?;
+                p.generic_args.visit(visitor)
+            }
+            ExistentialPredicate::AutoTrait(_) => ControlFlow::Continue(()),
+        }
+    }
+}
+/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=9 | LINES=9 */
+
+impl Visitable for TermKind {
+    fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        match self {
+            TermKind::Type(t) => t.visit(visitor),
+            TermKind::Const(c) => c.visit(visitor),
+        }
+    }
+}
+/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=super_visit | COMPLEXITY=5 | LINES=6 */
+
+impl Visitable for FnSig {
+    fn super_visit<V: Visitor>(&self, visitor: &mut V) -> ControlFlow<V::Break> {
+        self.inputs_and_output.visit(visitor)
+    }
+}

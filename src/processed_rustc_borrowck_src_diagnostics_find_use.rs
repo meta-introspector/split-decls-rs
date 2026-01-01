@@ -1,26 +1,142 @@
-/* FP:find_use.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_diagnostics_find_use_USE_0001
-/* FP:find_use.rs-0002 */ use std :: collections :: VecDeque ;
-/* FP:find_use.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_diagnostics_find_use_USE_0002
-/* FP:find_use.rs-0004 */ use crate :: rustc_data_structures :: fx :: FxIndexSet ;
-/* FP:find_use.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_diagnostics_find_use_USE_0003
-/* FP:find_use.rs-0006 */ use crate :: rustc_complete :: mir :: visit :: { PlaceContext , Visitor } ;
-/* FP:find_use.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_diagnostics_find_use_USE_0004
-/* FP:find_use.rs-0008 */ use crate :: rustc_complete :: mir :: { self , Body , Local , Location } ;
-/* FP:find_use.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_diagnostics_find_use_USE_0005
-/* FP:find_use.rs-0010 */ use crate :: rustc_complete :: ty :: { RegionVid , TyCtxt } ;
-/* FP:find_use.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_diagnostics_find_use_USE_0006
-/* FP:find_use.rs-0012 */ use crate :: def_use :: { self , DefUse } ;
-/* FP:find_use.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_diagnostics_find_use_USE_0007
-/* FP:find_use.rs-0014 */ use crate :: region_infer :: { Cause , RegionInferenceContext } ;
-/* FP:find_use.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_diagnostics_find_use_FN_0008
-/* FP:find_use.rs-0016 */ pub (crate) fn find < 'tcx > (body : & Body < 'tcx > , regioncx : & RegionInferenceContext < 'tcx > , tcx : TyCtxt < 'tcx > , region_vid : RegionVid , start_point : Location ,) -> Option < Cause > { let mut uf = UseFinder { body , regioncx , tcx , region_vid , start_point } ; uf . find () }
-/* FP:find_use.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_diagnostics_find_use_STRUCT_0009
-/* FP:find_use.rs-0018 */ struct UseFinder < 'a , 'tcx > { body : & 'a Body < 'tcx > , regioncx : & 'a RegionInferenceContext < 'tcx > , tcx : TyCtxt < 'tcx > , region_vid : RegionVid , start_point : Location , }
-/* FP:find_use.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_diagnostics_find_use_IMPL_0010
-/* FP:find_use.rs-0020 */ impl < 'a , 'tcx > UseFinder < 'a , 'tcx > { fn find (& mut self) -> Option < Cause > { let mut queue = VecDeque :: new () ; let mut visited = FxIndexSet :: default () ; queue . push_back (self . start_point) ; while let Some (p) = queue . pop_front () { if ! self . regioncx . region_contains (self . region_vid , p) { continue ; } if ! visited . insert (p) { continue ; } let block_data = & self . body [p . block] ; let mut visitor = DefUseVisitor { body : self . body , tcx : self . tcx , region_vid : self . region_vid , def_use_result : None , } ; let is_statement = p . statement_index < block_data . statements . len () ; if is_statement { visitor . visit_statement (& block_data . statements [p . statement_index] , p) ; } else { visitor . visit_terminator (block_data . terminator . as_ref () . unwrap () , p) ; } match visitor . def_use_result { Some (DefUseResult :: Def) => { } Some (DefUseResult :: UseLive { local }) => { return Some (Cause :: LiveVar (local , p)) ; } Some (DefUseResult :: UseDrop { local }) => { return Some (Cause :: DropVar (local , p)) ; } None => { if is_statement { queue . push_back (p . successor_within_block ()) ; } else { queue . extend (block_data . terminator () . successors () . filter (| & bb | { Some (& mir :: UnwindAction :: Cleanup (bb)) != block_data . terminator () . unwind () }) . map (| bb | Location { statement_index : 0 , block : bb }) ,) ; } } } } None } }
-/* FP:find_use.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_diagnostics_find_use_STRUCT_0011
-/* FP:find_use.rs-0022 */ struct DefUseVisitor < 'a , 'tcx > { body : & 'a Body < 'tcx > , tcx : TyCtxt < 'tcx > , region_vid : RegionVid , def_use_result : Option < DefUseResult > , }
-/* FP:find_use.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_diagnostics_find_use_ENUM_0012
-/* FP:find_use.rs-0024 */ enum DefUseResult { Def , UseLive { local : Local } , UseDrop { local : Local } , }
-/* FP:find_use.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_diagnostics_find_use_IMPL_0013
-/* FP:find_use.rs-0026 */ impl < 'a , 'tcx > Visitor < 'tcx > for DefUseVisitor < 'a , 'tcx > { fn visit_local (& mut self , local : Local , context : PlaceContext , _ : Location) { let local_ty = self . body . local_decls [local] . ty ; let mut found_it = false ; self . tcx . for_each_free_region (& local_ty , | r | { if r . as_var () == self . region_vid { found_it = true ; } }) ; if found_it { self . def_use_result = match def_use :: categorize (context) { Some (DefUse :: Def) => Some (DefUseResult :: Def) , Some (DefUse :: Use) => Some (DefUseResult :: UseLive { local }) , Some (DefUse :: Drop) => Some (DefUseResult :: UseDrop { local }) , None => None , } ; } } }
+// SRC: ../rust/compiler/rustc_borrowck/src/diagnostics/find_use.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use std::collections::VecDeque;
+
+use crate::rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_complete::mir::visit::{PlaceContext, Visitor};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::mir::{self, Body, Local, Location};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::ty::{RegionVid, TyCtxt};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+use crate::def_use::{self, DefUse};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::region_infer::{Cause, RegionInferenceContext};
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
+
+pub(crate) fn find<'tcx>(
+    body: &Body<'tcx>,
+    regioncx: &RegionInferenceContext<'tcx>,
+    tcx: TyCtxt<'tcx>,
+    region_vid: RegionVid,
+    start_point: Location,
+) -> Option<Cause> {
+    let mut uf = UseFinder { body, regioncx, tcx, region_vid, start_point };
+
+    uf.find()
+}
+/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UseFinder | COMPLEXITY=2 | LINES=8 */
+
+struct UseFinder<'a, 'tcx> {
+    body: &'a Body<'tcx>,
+    regioncx: &'a RegionInferenceContext<'tcx>,
+    tcx: TyCtxt<'tcx>,
+    region_vid: RegionVid,
+    start_point: Location,
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=find | COMPLEXITY=37 | LINES=66 */
+
+impl<'a, 'tcx> UseFinder<'a, 'tcx> {
+    fn find(&mut self) -> Option<Cause> {
+        let mut queue = VecDeque::new();
+        let mut visited = FxIndexSet::default();
+
+        queue.push_back(self.start_point);
+        while let Some(p) = queue.pop_front() {
+            if !self.regioncx.region_contains(self.region_vid, p) {
+                continue;
+            }
+
+            if !visited.insert(p) {
+                continue;
+            }
+
+            let block_data = &self.body[p.block];
+
+            let mut visitor = DefUseVisitor {
+                body: self.body,
+                tcx: self.tcx,
+                region_vid: self.region_vid,
+                def_use_result: None,
+            };
+
+            let is_statement = p.statement_index < block_data.statements.len();
+
+            if is_statement {
+                visitor.visit_statement(&block_data.statements[p.statement_index], p);
+            } else {
+                visitor.visit_terminator(block_data.terminator.as_ref().unwrap(), p);
+            }
+
+            match visitor.def_use_result {
+                Some(DefUseResult::Def) => {}
+
+                Some(DefUseResult::UseLive { local }) => {
+                    return Some(Cause::LiveVar(local, p));
+                }
+
+                Some(DefUseResult::UseDrop { local }) => {
+                    return Some(Cause::DropVar(local, p));
+                }
+
+                None => {
+                    if is_statement {
+                        queue.push_back(p.successor_within_block());
+                    } else {
+                        queue.extend(
+                            block_data
+                                .terminator()
+                                .successors()
+                                .filter(|&bb| {
+                                    Some(&mir::UnwindAction::Cleanup(bb))
+                                        != block_data.terminator().unwind()
+                                })
+                                .map(|bb| Location { statement_index: 0, block: bb }),
+                        );
+                    }
+                }
+            }
+        }
+
+        None
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=DefUseVisitor | COMPLEXITY=2 | LINES=7 */
+
+struct DefUseVisitor<'a, 'tcx> {
+    body: &'a Body<'tcx>,
+    tcx: TyCtxt<'tcx>,
+    region_vid: RegionVid,
+    def_use_result: Option<DefUseResult>,
+}
+/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
+
+enum DefUseResult {
+    Def,
+    UseLive { local: Local },
+    UseDrop { local: Local },
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=visit_local | COMPLEXITY=19 | LINES=22 */
+
+impl<'a, 'tcx> Visitor<'tcx> for DefUseVisitor<'a, 'tcx> {
+    fn visit_local(&mut self, local: Local, context: PlaceContext, _: Location) {
+        let local_ty = self.body.local_decls[local].ty;
+
+        let mut found_it = false;
+        self.tcx.for_each_free_region(&local_ty, |r| {
+            if r.as_var() == self.region_vid {
+                found_it = true;
+            }
+        });
+
+        if found_it {
+            self.def_use_result = match def_use::categorize(context) {
+                Some(DefUse::Def) => Some(DefUseResult::Def),
+                Some(DefUse::Use) => Some(DefUseResult::UseLive { local }),
+                Some(DefUse::Drop) => Some(DefUseResult::UseDrop { local }),
+                None => None,
+            };
+        }
+    }
+}

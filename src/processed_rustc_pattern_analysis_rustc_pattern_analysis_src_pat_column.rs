@@ -1,10 +1,96 @@
-/* FP:pat_column.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_column_USE_0001
-/* FP:pat_column.rs-0002 */ use crate :: constructor :: { Constructor , SplitConstructorSet } ;
-/* FP:pat_column.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_column_USE_0002
-/* FP:pat_column.rs-0004 */ use crate :: pat :: { DeconstructedPat , PatOrWild } ;
-/* FP:pat_column.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_column_USE_0003
-/* FP:pat_column.rs-0006 */ use crate :: { MatchArm , PatCx } ;
-/* FP:pat_column.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_column_STRUCT_0004
-/* FP:pat_column.rs-0008 */ # [doc = " A column of patterns in a match, where a column is the intuitive notion of \"subpatterns that"] # [doc = " inspect the same subvalue/place\"."] # [doc = " This is used to traverse patterns column-by-column for lints. Despite similarities with the"] # [doc = " algorithm in [`crate::usefulness`], this does a different traversal. Notably this is linear in"] # [doc = " the depth of patterns, whereas `compute_exhaustiveness_and_usefulness` is worst-case exponential"] # [doc = " (exhaustiveness is NP-complete). The core difference is that we treat sub-columns separately."] # [doc = ""] # [doc = " This is not used in the usefulness algorithm; only in lints."] # [derive (Debug)] pub struct PatternColumn < 'p , Cx : PatCx > { # [doc = " This must not contain an or-pattern. `expand_and_push` takes care to expand them."] patterns : Vec < & 'p DeconstructedPat < Cx > > , }
-/* FP:pat_column.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_column_IMPL_0005
-/* FP:pat_column.rs-0010 */ impl < 'p , Cx : PatCx > PatternColumn < 'p , Cx > { pub fn new (arms : & [MatchArm < 'p , Cx >]) -> Self { let patterns = Vec :: with_capacity (arms . len ()) ; let mut column = PatternColumn { patterns } ; for arm in arms { column . expand_and_push (PatOrWild :: Pat (arm . pat)) ; } column } # [doc = " Pushes a pattern onto the column, expanding any or-patterns into its subpatterns."] # [doc = " Internal method, prefer [`PatternColumn::new`]."] fn expand_and_push (& mut self , pat : PatOrWild < 'p , Cx >) { if pat . is_or_pat () { self . patterns . extend (pat . flatten_or_pat () . into_iter () . filter_map (| pat_or_wild | pat_or_wild . as_pat ()) ,) } else if let Some (pat) = pat . as_pat () { self . patterns . push (pat) } } pub fn head_ty (& self) -> Option < & Cx :: Ty > { self . patterns . first () . map (| pat | pat . ty ()) } pub fn iter (& self) -> impl Iterator < Item = & 'p DeconstructedPat < Cx > > { self . patterns . iter () . copied () } # [doc = " Do constructor splitting on the constructors of the column."] pub fn analyze_ctors (& self , cx : & Cx , ty : & Cx :: Ty ,) -> Result < SplitConstructorSet < Cx > , Cx :: Error > { let column_ctors = self . patterns . iter () . map (| p | p . ctor ()) ; let ctors_for_ty = cx . ctors_for_ty (ty) ? ; Ok (ctors_for_ty . split (column_ctors)) } # [doc = " Does specialization: given a constructor, this takes the patterns from the column that match"] # [doc = " the constructor, and outputs their fields."] # [doc = " This returns one column per field of the constructor. They usually all have the same length"] # [doc = " (the number of patterns in `self` that matched `ctor`), except that we expand or-patterns"] # [doc = " which may change the lengths."] pub fn specialize (& self , cx : & Cx , ty : & Cx :: Ty , ctor : & Constructor < Cx > ,) -> Vec < PatternColumn < 'p , Cx > > { let arity = ctor . arity (cx , ty) ; if arity == 0 { return Vec :: new () ; } let mut specialized_columns : Vec < _ > = (0 .. arity) . map (| _ | Self { patterns : Vec :: new () }) . collect () ; let relevant_patterns = self . patterns . iter () . filter (| pat | ctor . is_covered_by (cx , pat . ctor ()) . unwrap_or (false)) ; for pat in relevant_patterns { let specialized = pat . specialize (ctor , arity) ; for (subpat , column) in specialized . into_iter () . zip (& mut specialized_columns) { column . expand_and_push (subpat) ; } } specialized_columns } }
+// SRC: ../rust/compiler/rustc_pattern_analysis/src/pat_column.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::constructor::{Constructor, SplitConstructorSet};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::pat::{DeconstructedPat, PatOrWild};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::{MatchArm, PatCx};
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=PatternColumn | COMPLEXITY=5 | LINES=14 */
+
+/// A column of patterns in a match, where a column is the intuitive notion of "subpatterns that
+/// inspect the same subvalue/place".
+/// This is used to traverse patterns column-by-column for lints. Despite similarities with the
+/// algorithm in [`crate::usefulness`], this does a different traversal. Notably this is linear in
+/// the depth of patterns, whereas `compute_exhaustiveness_and_usefulness` is worst-case exponential
+/// (exhaustiveness is NP-complete). The core difference is that we treat sub-columns separately.
+///
+/// This is not used in the usefulness algorithm; only in lints.
+#[derive(Debug)]
+pub struct PatternColumn<'p, Cx: PatCx> {
+    /// This must not contain an or-pattern. `expand_and_push` takes care to expand them.
+    patterns: Vec<&'p DeconstructedPat<Cx>>,
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=33 | LINES=73 */
+
+impl<'p, Cx: PatCx> PatternColumn<'p, Cx> {
+    pub fn new(arms: &[MatchArm<'p, Cx>]) -> Self {
+        let patterns = Vec::with_capacity(arms.len());
+        let mut column = PatternColumn { patterns };
+        for arm in arms {
+            column.expand_and_push(PatOrWild::Pat(arm.pat));
+        }
+        column
+    }
+    /// Pushes a pattern onto the column, expanding any or-patterns into its subpatterns.
+    /// Internal method, prefer [`PatternColumn::new`].
+    fn expand_and_push(&mut self, pat: PatOrWild<'p, Cx>) {
+        // We flatten or-patterns and skip algorithm-generated wildcards.
+        if pat.is_or_pat() {
+            self.patterns.extend(
+                pat.flatten_or_pat().into_iter().filter_map(|pat_or_wild| pat_or_wild.as_pat()),
+            )
+        } else if let Some(pat) = pat.as_pat() {
+            self.patterns.push(pat)
+        }
+    }
+
+    pub fn head_ty(&self) -> Option<&Cx::Ty> {
+        self.patterns.first().map(|pat| pat.ty())
+    }
+    pub fn iter(&self) -> impl Iterator<Item = &'p DeconstructedPat<Cx>> {
+        self.patterns.iter().copied()
+    }
+
+    /// Do constructor splitting on the constructors of the column.
+    pub fn analyze_ctors(
+        &self,
+        cx: &Cx,
+        ty: &Cx::Ty,
+    ) -> Result<SplitConstructorSet<Cx>, Cx::Error> {
+        let column_ctors = self.patterns.iter().map(|p| p.ctor());
+        let ctors_for_ty = cx.ctors_for_ty(ty)?;
+        Ok(ctors_for_ty.split(column_ctors))
+    }
+
+    /// Does specialization: given a constructor, this takes the patterns from the column that match
+    /// the constructor, and outputs their fields.
+    /// This returns one column per field of the constructor. They usually all have the same length
+    /// (the number of patterns in `self` that matched `ctor`), except that we expand or-patterns
+    /// which may change the lengths.
+    pub fn specialize(
+        &self,
+        cx: &Cx,
+        ty: &Cx::Ty,
+        ctor: &Constructor<Cx>,
+    ) -> Vec<PatternColumn<'p, Cx>> {
+        let arity = ctor.arity(cx, ty);
+        if arity == 0 {
+            return Vec::new();
+        }
+
+        // We specialize the column by `ctor`. This gives us `arity`-many columns of patterns. These
+        // columns may have different lengths in the presence of or-patterns (this is why we can't
+        // reuse `Matrix`).
+        let mut specialized_columns: Vec<_> =
+            (0..arity).map(|_| Self { patterns: Vec::new() }).collect();
+        let relevant_patterns =
+            self.patterns.iter().filter(|pat| ctor.is_covered_by(cx, pat.ctor()).unwrap_or(false));
+        for pat in relevant_patterns {
+            let specialized = pat.specialize(ctor, arity);
+            for (subpat, column) in specialized.into_iter().zip(&mut specialized_columns) {
+                column.expand_and_push(subpat);
+            }
+        }
+        specialized_columns
+    }
+}

@@ -1,48 +1,492 @@
-/* FP:pretty.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_USE_0001
-/* FP:pretty.rs-0002 */ use std :: fmt :: Debug ;
-/* FP:pretty.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_USE_0002
-/* FP:pretty.rs-0004 */ use std :: io :: Write ;
-/* FP:pretty.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_USE_0003
-/* FP:pretty.rs-0006 */ use std :: { fmt , io , iter } ;
-/* FP:pretty.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_USE_0004
-/* FP:pretty.rs-0008 */ use fmt :: { Display , Formatter } ;
-/* FP:pretty.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_USE_0005
-/* FP:pretty.rs-0010 */ use super :: { AggregateKind , AssertMessage , BinOp , BorrowKind , FakeBorrowKind , TerminatorKind } ;
-/* FP:pretty.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_USE_0006
-/* FP:pretty.rs-0012 */ use crate :: mir :: { Operand , Place , RawPtrKind , Rvalue , StatementKind , UnwindAction , VarDebugInfoContents , } ;
-/* FP:pretty.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_USE_0007
-/* FP:pretty.rs-0014 */ use crate :: ty :: { AdtKind , AssocKind , MirConst , Ty , TyConst } ;
-/* FP:pretty.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_USE_0008
-/* FP:pretty.rs-0016 */ use crate :: { Body , CrateDef , IndexedVal , Mutability , with } ;
-/* FP:pretty.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_IMPL_0009
-/* FP:pretty.rs-0018 */ impl Display for Ty { fn fmt (& self , f : & mut Formatter < '_ >) -> fmt :: Result { with (| ctx | write ! (f , "{}" , ctx . ty_pretty (* self))) } }
-/* FP:pretty.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_IMPL_0010
-/* FP:pretty.rs-0020 */ impl Display for AssocKind { fn fmt (& self , f : & mut Formatter < '_ >) -> fmt :: Result { match self { AssocKind :: Fn { has_self : true , .. } => write ! (f , "method") , AssocKind :: Fn { has_self : false , .. } => write ! (f , "associated function") , AssocKind :: Const { .. } => write ! (f , "associated const") , AssocKind :: Type { .. } => write ! (f , "associated type") , } } }
-/* FP:pretty.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_IMPL_0011
-/* FP:pretty.rs-0022 */ impl Debug for Place { fn fmt (& self , f : & mut Formatter < '_ >) -> fmt :: Result { with (| ctx | write ! (f , "{}" , ctx . place_pretty (self))) } }
-/* FP:pretty.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_FN_0012
-/* FP:pretty.rs-0024 */ pub (crate) fn function_body < W : Write > (writer : & mut W , body : & Body , name : & str) -> io :: Result < () > { write ! (writer , "fn {name}(") ? ; let mut sep = "" ; for (index , local) in body . arg_locals () . iter () . enumerate () { write ! (writer , "{}_{}: {}" , sep , index + 1 , local . ty) ? ; sep = ", " ; } write ! (writer , ")") ? ; let return_local = body . ret_local () ; writeln ! (writer , " -> {} {{" , return_local . ty) ? ; body . locals () . iter () . enumerate () . try_for_each (| (index , local) | -> io :: Result < () > { if index == 0 || index > body . arg_count { writeln ! (writer , "    let {}_{}: {};" , pretty_mut (local . mutability) , index , local . ty) } else { Ok (()) } }) ? ; body . var_debug_info . iter () . try_for_each (| info | { let content = match & info . value { VarDebugInfoContents :: Place (place) => { format ! ("{place:?}") } VarDebugInfoContents :: Const (constant) => pretty_mir_const (& constant . const_) , } ; writeln ! (writer , "    debug {} => {};" , info . name , content) }) ? ; body . blocks . iter () . enumerate () . map (| (index , block) | -> io :: Result < () > { writeln ! (writer , "    bb{index}: {{") ? ; let _ = block . statements . iter () . map (| statement | -> io :: Result < () > { pretty_statement (writer , & statement . kind) ? ; Ok (()) }) . collect :: < Vec < _ > > () ; pretty_terminator (writer , & block . terminator . kind) ? ; writeln ! (writer , "    }}") . unwrap () ; Ok (()) }) . collect :: < Result < Vec < _ > , _ > > () ? ; writeln ! (writer , "}}") ? ; Ok (()) }
-/* FP:pretty.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_FN_0013
-/* FP:pretty.rs-0026 */ fn pretty_statement < W : Write > (writer : & mut W , statement : & StatementKind) -> io :: Result < () > { const INDENT : & str = "        " ; match statement { StatementKind :: Assign (place , rval) => { write ! (writer , "{INDENT}{place:?} = ") ? ; pretty_rvalue (writer , rval) ? ; writeln ! (writer , ";") } StatementKind :: FakeRead (cause , place) => { writeln ! (writer , "{INDENT}FakeRead({cause:?}, {place:?});") } StatementKind :: SetDiscriminant { place , variant_index } => { writeln ! (writer , "{INDENT}discriminant({place:?}) = {};" , variant_index . to_index ()) } StatementKind :: Deinit (place) => writeln ! (writer , "Deinit({place:?};") , StatementKind :: StorageLive (local) => { writeln ! (writer , "{INDENT}StorageLive(_{local});") } StatementKind :: StorageDead (local) => { writeln ! (writer , "{INDENT}StorageDead(_{local});") } StatementKind :: Retag (kind , place) => writeln ! (writer , "Retag({kind:?}, {place:?});") , StatementKind :: PlaceMention (place) => { writeln ! (writer , "{INDENT}PlaceMention({place:?};") } StatementKind :: ConstEvalCounter => { writeln ! (writer , "{INDENT}ConstEvalCounter;") } StatementKind :: Nop => writeln ! (writer , "{INDENT}nop;") , StatementKind :: AscribeUserType { .. } | StatementKind :: Coverage (_) | StatementKind :: Intrinsic (_) => { writeln ! (writer , "{INDENT}{statement:?};") } } }
-/* FP:pretty.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_FN_0014
-/* FP:pretty.rs-0028 */ fn pretty_terminator < W : Write > (writer : & mut W , terminator : & TerminatorKind) -> io :: Result < () > { pretty_terminator_head (writer , terminator) ? ; let successors = terminator . successors () ; let successor_count = successors . len () ; let labels = pretty_successor_labels (terminator) ; let show_unwind = ! matches ! (terminator . unwind () , None | Some (UnwindAction :: Cleanup (_))) ; let fmt_unwind = | w : & mut W | -> io :: Result < () > { write ! (w , "unwind ") ? ; match terminator . unwind () { None | Some (UnwindAction :: Cleanup (_)) => unreachable ! () , Some (UnwindAction :: Continue) => write ! (w , "continue") , Some (UnwindAction :: Unreachable) => write ! (w , "unreachable") , Some (UnwindAction :: Terminate) => write ! (w , "terminate") , } } ; match (successor_count , show_unwind) { (0 , false) => { } (0 , true) => { write ! (writer , " -> ") ? ; fmt_unwind (writer) ? ; } (1 , false) => write ! (writer , " -> bb{:?}" , successors [0]) ? , _ => { write ! (writer , " -> [") ? ; for (i , target) in successors . iter () . enumerate () { if i > 0 { write ! (writer , ", ") ? ; } write ! (writer , "{}: bb{:?}" , labels [i] , target) ? ; } if show_unwind { write ! (writer , ", ") ? ; fmt_unwind (writer) ? ; } write ! (writer , "]") ? ; } } ; writeln ! (writer , ";") }
-/* FP:pretty.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_FN_0015
-/* FP:pretty.rs-0030 */ fn pretty_terminator_head < W : Write > (writer : & mut W , terminator : & TerminatorKind) -> io :: Result < () > { use self :: TerminatorKind :: * ; const INDENT : & str = "        " ; match terminator { Goto { .. } => write ! (writer , "{INDENT}goto") , SwitchInt { discr , .. } => { write ! (writer , "{INDENT}switchInt({})" , pretty_operand (discr)) } Resume => write ! (writer , "{INDENT}resume") , Abort => write ! (writer , "{INDENT}abort") , Return => write ! (writer , "{INDENT}return") , Unreachable => write ! (writer , "{INDENT}unreachable") , Drop { place , .. } => write ! (writer , "{INDENT}drop({place:?})") , Call { func , args , destination , .. } => { write ! (writer , "{INDENT}{:?} = {}(" , destination , pretty_operand (func)) ? ; let mut args_iter = args . iter () ; args_iter . next () . map_or (Ok (()) , | arg | write ! (writer , "{}" , pretty_operand (arg))) ? ; args_iter . try_for_each (| arg | write ! (writer , ", {}" , pretty_operand (arg))) ? ; write ! (writer , ")") } Assert { cond , expected , msg , target : _ , unwind : _ } => { write ! (writer , "{INDENT}assert(") ? ; if ! expected { write ! (writer , "!") ? ; } write ! (writer , "{}, " , pretty_operand (cond)) ? ; pretty_assert_message (writer , msg) ? ; write ! (writer , ")") } InlineAsm { .. } => write ! (writer , "{INDENT}InlineAsm") , } }
-/* FP:pretty.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_FN_0016
-/* FP:pretty.rs-0032 */ fn pretty_successor_labels (terminator : & TerminatorKind) -> Vec < String > { use self :: TerminatorKind :: * ; match terminator { Call { target : None , unwind : UnwindAction :: Cleanup (_) , .. } | InlineAsm { destination : None , .. } => vec ! ["unwind" . into ()] , Resume | Abort | Return | Unreachable | Call { target : None , unwind : _ , .. } => vec ! [] , Goto { .. } => vec ! ["" . to_string ()] , SwitchInt { targets , .. } => targets . branches () . map (| (val , _target) | format ! ("{val}")) . chain (iter :: once ("otherwise" . into ())) . collect () , Drop { unwind : UnwindAction :: Cleanup (_) , .. } => vec ! ["return" . into () , "unwind" . into ()] , Call { target : Some (_) , unwind : UnwindAction :: Cleanup (_) , .. } => { vec ! ["return" . into () , "unwind" . into ()] } Drop { unwind : _ , .. } | Call { target : Some (_) , unwind : _ , .. } => vec ! ["return" . into ()] , Assert { unwind : UnwindAction :: Cleanup (_) , .. } => { vec ! ["success" . into () , "unwind" . into ()] } Assert { unwind : _ , .. } => vec ! ["success" . into ()] , InlineAsm { destination : Some (_) , .. } => vec ! ["goto" . into () , "unwind" . into ()] , } }
-/* FP:pretty.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_FN_0017
-/* FP:pretty.rs-0034 */ fn pretty_assert_message < W : Write > (writer : & mut W , msg : & AssertMessage) -> io :: Result < () > { match msg { AssertMessage :: BoundsCheck { len , index } => { let pretty_len = pretty_operand (len) ; let pretty_index = pretty_operand (index) ; write ! (writer , "\"index out of bounds: the length is {{}} but the index is {{}}\", {pretty_len}, {pretty_index}") } AssertMessage :: Overflow (BinOp :: Add , l , r) => { let pretty_l = pretty_operand (l) ; let pretty_r = pretty_operand (r) ; write ! (writer , "\"attempt to compute `{{}} + {{}}`, which would overflow\", {pretty_l}, {pretty_r}") } AssertMessage :: Overflow (BinOp :: Sub , l , r) => { let pretty_l = pretty_operand (l) ; let pretty_r = pretty_operand (r) ; write ! (writer , "\"attempt to compute `{{}} - {{}}`, which would overflow\", {pretty_l}, {pretty_r}") } AssertMessage :: Overflow (BinOp :: Mul , l , r) => { let pretty_l = pretty_operand (l) ; let pretty_r = pretty_operand (r) ; write ! (writer , "\"attempt to compute `{{}} * {{}}`, which would overflow\", {pretty_l}, {pretty_r}") } AssertMessage :: Overflow (BinOp :: Div , l , r) => { let pretty_l = pretty_operand (l) ; let pretty_r = pretty_operand (r) ; write ! (writer , "\"attempt to compute `{{}} / {{}}`, which would overflow\", {pretty_l}, {pretty_r}") } AssertMessage :: Overflow (BinOp :: Rem , l , r) => { let pretty_l = pretty_operand (l) ; let pretty_r = pretty_operand (r) ; write ! (writer , "\"attempt to compute `{{}} % {{}}`, which would overflow\", {pretty_l}, {pretty_r}") } AssertMessage :: Overflow (BinOp :: Shr , _ , r) => { let pretty_r = pretty_operand (r) ; write ! (writer , "\"attempt to shift right by `{{}}`, which would overflow\", {pretty_r}") } AssertMessage :: Overflow (BinOp :: Shl , _ , r) => { let pretty_r = pretty_operand (r) ; write ! (writer , "\"attempt to shift left by `{{}}`, which would overflow\", {pretty_r}") } AssertMessage :: Overflow (op , _ , _) => unreachable ! ("`{:?}` cannot overflow" , op) , AssertMessage :: OverflowNeg (op) => { let pretty_op = pretty_operand (op) ; write ! (writer , "\"attempt to negate `{{}}`, which would overflow\", {pretty_op}") } AssertMessage :: DivisionByZero (op) => { let pretty_op = pretty_operand (op) ; write ! (writer , "\"attempt to divide `{{}}` by zero\", {pretty_op}") } AssertMessage :: RemainderByZero (op) => { let pretty_op = pretty_operand (op) ; write ! (writer , "\"attempt to calculate the remainder of `{{}}` with a divisor of zero\", {pretty_op}") } AssertMessage :: MisalignedPointerDereference { required , found } => { let pretty_required = pretty_operand (required) ; let pretty_found = pretty_operand (found) ; write ! (writer , "\"misaligned pointer dereference: address must be a multiple of {{}} but is {{}}\",{pretty_required}, {pretty_found}") } AssertMessage :: NullPointerDereference => { write ! (writer , "\"null pointer dereference occurred\"") } AssertMessage :: InvalidEnumConstruction (op) => { let pretty_op = pretty_operand (op) ; write ! (writer , "\"trying to construct an enum from an invalid value {{}}\",{pretty_op}") } AssertMessage :: ResumedAfterReturn (_) | AssertMessage :: ResumedAfterPanic (_) | AssertMessage :: ResumedAfterDrop (_) => { write ! (writer , "{}" , msg . description () . unwrap ()) } } }
-/* FP:pretty.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_FN_0018
-/* FP:pretty.rs-0036 */ fn pretty_operand (operand : & Operand) -> String { match operand { Operand :: Copy (copy) => { format ! ("{copy:?}") } Operand :: Move (mv) => { format ! ("move {mv:?}") } Operand :: Constant (cnst) => pretty_mir_const (& cnst . const_) , } }
-/* FP:pretty.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_FN_0019
-/* FP:pretty.rs-0038 */ fn pretty_mir_const (literal : & MirConst) -> String { with (| cx | cx . mir_const_pretty (literal)) }
-/* FP:pretty.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_FN_0020
-/* FP:pretty.rs-0040 */ fn pretty_ty_const (ct : & TyConst) -> String { with (| cx | cx . ty_const_pretty (ct . id)) }
-/* FP:pretty.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_FN_0021
-/* FP:pretty.rs-0042 */ fn pretty_rvalue < W : Write > (writer : & mut W , rval : & Rvalue) -> io :: Result < () > { match rval { Rvalue :: AddressOf (mutability , place) => { write ! (writer , "&raw {} {:?}" , pretty_raw_ptr_kind (* mutability) , place) } Rvalue :: Aggregate (aggregate_kind , operands) => { pretty_aggregate (writer , aggregate_kind , operands) } Rvalue :: BinaryOp (bin , op1 , op2) => { write ! (writer , "{:?}({}, {})" , bin , pretty_operand (op1) , pretty_operand (op2)) } Rvalue :: Cast (_ , op , ty) => { write ! (writer , "{} as {}" , pretty_operand (op) , ty) } Rvalue :: CheckedBinaryOp (bin , op1 , op2) => { write ! (writer , "Checked{:?}({}, {})" , bin , pretty_operand (op1) , pretty_operand (op2)) } Rvalue :: CopyForDeref (deref) => { write ! (writer , "CopyForDeref({deref:?})") } Rvalue :: Discriminant (place) => { write ! (writer , "discriminant({place:?})") } Rvalue :: Len (len) => { write ! (writer , "len({len:?})") } Rvalue :: Ref (_ , borrowkind , place) => { let kind = match borrowkind { BorrowKind :: Shared => "&" , BorrowKind :: Fake (FakeBorrowKind :: Deep) => "&fake " , BorrowKind :: Fake (FakeBorrowKind :: Shallow) => "&fake shallow " , BorrowKind :: Mut { .. } => "&mut " , } ; write ! (writer , "{kind}{place:?}") } Rvalue :: Repeat (op , cnst) => { write ! (writer , "[{}; {}]" , pretty_operand (op) , pretty_ty_const (cnst)) } Rvalue :: ShallowInitBox (_ , _) => Ok (()) , Rvalue :: ThreadLocalRef (item) => { write ! (writer , "thread_local_ref{item:?}") } Rvalue :: NullaryOp (nul , ty) => { write ! (writer , "{nul:?}::<{ty}>() \" \"") } Rvalue :: UnaryOp (un , op) => { write ! (writer , "{:?}({})" , un , pretty_operand (op)) } Rvalue :: Use (op) => write ! (writer , "{}" , pretty_operand (op)) , } }
-/* FP:pretty.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_FN_0022
-/* FP:pretty.rs-0044 */ fn pretty_aggregate < W : Write > (writer : & mut W , aggregate_kind : & AggregateKind , operands : & Vec < Operand > ,) -> io :: Result < () > { let suffix = match aggregate_kind { AggregateKind :: Array (_) => { write ! (writer , "[") ? ; "]" } AggregateKind :: Tuple => { write ! (writer , "(") ? ; ")" } AggregateKind :: Adt (def , var , _ , _ , _) => { if def . kind () == AdtKind :: Enum { write ! (writer , "{}::{}" , def . name () , def . variant (* var) . unwrap () . name ()) ? ; } else { write ! (writer , "{}" , def . variant (* var) . unwrap () . name ()) ? ; } if operands . is_empty () { return Ok (()) ; } write ! (writer , "(") ? ; ")" } AggregateKind :: Closure (def , _) => { write ! (writer , "{{closure@{}}}(" , def . span () . diagnostic ()) ? ; ")" } AggregateKind :: Coroutine (def , _) => { write ! (writer , "{{coroutine@{}}}(" , def . span () . diagnostic ()) ? ; ")" } AggregateKind :: CoroutineClosure (def , _) => { write ! (writer , "{{coroutine-closure@{}}}(" , def . span () . diagnostic ()) ? ; ")" } AggregateKind :: RawPtr (ty , mutability) => { write ! (writer , "*{} {ty} from (" , if * mutability == Mutability :: Mut { "mut" } else { "const" }) ? ; ")" } } ; let mut separator = "" ; for op in operands { write ! (writer , "{}{}" , separator , pretty_operand (op)) ? ; separator = ", " ; } write ! (writer , "{suffix}") }
-/* FP:pretty.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_FN_0023
-/* FP:pretty.rs-0046 */ fn pretty_mut (mutability : Mutability) -> & 'static str { match mutability { Mutability :: Not => " " , Mutability :: Mut => "mut " , } }
-/* FP:pretty.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_mir_pretty_FN_0024
-/* FP:pretty.rs-0048 */ fn pretty_raw_ptr_kind (kind : RawPtrKind) -> & 'static str { match kind { RawPtrKind :: Const => "const" , RawPtrKind :: Mut => "mut" , RawPtrKind :: FakeForPtrMetadata => "const (fake)" , } }
+// SRC: ../rust/compiler/rustc_public/src/mir/pretty.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+// Implement methods to pretty print rustc_public's IR body.
+use std::fmt::Debug;
+use std::io::Write;
+use std::{fmt, io, iter};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+use fmt::{Display, Formatter};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+use super::{AggregateKind, AssertMessage, BinOp, BorrowKind, FakeBorrowKind, TerminatorKind};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::mir::{
+    Operand, Place, RawPtrKind, Rvalue, StatementKind, UnwindAction, VarDebugInfoContents,
+};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::ty::{AdtKind, AssocKind, MirConst, Ty, TyConst};
+/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::{Body, CrateDef, IndexedVal, Mutability, with};
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
+
+impl Display for Ty {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        with(|ctx| write!(f, "{}", ctx.ty_pretty(*self)))
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=13 | LINES=11 */
+
+impl Display for AssocKind {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        match self {
+            AssocKind::Fn { has_self: true, .. } => write!(f, "method"),
+            AssocKind::Fn { has_self: false, .. } => write!(f, "associated function"),
+            AssocKind::Const { .. } => write!(f, "associated const"),
+            AssocKind::Type { .. } => write!(f, "associated type"),
+        }
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=6 */
+
+impl Debug for Place {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        with(|ctx| write!(f, "{}", ctx.place_pretty(self)))
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=37 | LINES=52 */
+
+pub(crate) fn function_body<W: Write>(writer: &mut W, body: &Body, name: &str) -> io::Result<()> {
+    write!(writer, "fn {name}(")?;
+    let mut sep = "";
+    for (index, local) in body.arg_locals().iter().enumerate() {
+        write!(writer, "{}_{}: {}", sep, index + 1, local.ty)?;
+        sep = ", ";
+    }
+    write!(writer, ")")?;
+
+    let return_local = body.ret_local();
+    writeln!(writer, " -> {} {{", return_local.ty)?;
+
+    body.locals().iter().enumerate().try_for_each(|(index, local)| -> io::Result<()> {
+        if index == 0 || index > body.arg_count {
+            writeln!(writer, "    let {}_{}: {};", pretty_mut(local.mutability), index, local.ty)
+        } else {
+            Ok(())
+        }
+    })?;
+
+    body.var_debug_info.iter().try_for_each(|info| {
+        let content = match &info.value {
+            VarDebugInfoContents::Place(place) => {
+                format!("{place:?}")
+            }
+            VarDebugInfoContents::Const(constant) => pretty_mir_const(&constant.const_),
+        };
+        writeln!(writer, "    debug {} => {};", info.name, content)
+    })?;
+
+    body.blocks
+        .iter()
+        .enumerate()
+        .map(|(index, block)| -> io::Result<()> {
+            writeln!(writer, "    bb{index}: {{")?;
+            let _ = block
+                .statements
+                .iter()
+                .map(|statement| -> io::Result<()> {
+                    pretty_statement(writer, &statement.kind)?;
+                    Ok(())
+                })
+                .collect::<Vec<_>>();
+            pretty_terminator(writer, &block.terminator.kind)?;
+            writeln!(writer, "    }}").unwrap();
+            Ok(())
+        })
+        .collect::<Result<Vec<_>, _>>()?;
+    writeln!(writer, "}}")?;
+    Ok(())
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=pretty_statement | COMPLEXITY=40 | LINES=39 */
+
+fn pretty_statement<W: Write>(writer: &mut W, statement: &StatementKind) -> io::Result<()> {
+    const INDENT: &str = "        ";
+    match statement {
+        StatementKind::Assign(place, rval) => {
+            write!(writer, "{INDENT}{place:?} = ")?;
+            pretty_rvalue(writer, rval)?;
+            writeln!(writer, ";")
+        }
+        // FIXME: Add rest of the statements
+        StatementKind::FakeRead(cause, place) => {
+            writeln!(writer, "{INDENT}FakeRead({cause:?}, {place:?});")
+        }
+        StatementKind::SetDiscriminant { place, variant_index } => {
+            writeln!(writer, "{INDENT}discriminant({place:?}) = {};", variant_index.to_index())
+        }
+        StatementKind::Deinit(place) => writeln!(writer, "Deinit({place:?};"),
+        StatementKind::StorageLive(local) => {
+            writeln!(writer, "{INDENT}StorageLive(_{local});")
+        }
+        StatementKind::StorageDead(local) => {
+            writeln!(writer, "{INDENT}StorageDead(_{local});")
+        }
+        StatementKind::Retag(kind, place) => writeln!(writer, "Retag({kind:?}, {place:?});"),
+        StatementKind::PlaceMention(place) => {
+            writeln!(writer, "{INDENT}PlaceMention({place:?};")
+        }
+        StatementKind::ConstEvalCounter => {
+            writeln!(writer, "{INDENT}ConstEvalCounter;")
+        }
+        StatementKind::Nop => writeln!(writer, "{INDENT}nop;"),
+        StatementKind::AscribeUserType { .. }
+        | StatementKind::Coverage(_)
+        | StatementKind::Intrinsic(_) => {
+            // FIX-ME: Make them pretty.
+            writeln!(writer, "{INDENT}{statement:?};")
+        }
+    }
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=pretty_terminator | COMPLEXITY=29 | LINES=43 */
+
+fn pretty_terminator<W: Write>(writer: &mut W, terminator: &TerminatorKind) -> io::Result<()> {
+    pretty_terminator_head(writer, terminator)?;
+    let successors = terminator.successors();
+    let successor_count = successors.len();
+    let labels = pretty_successor_labels(terminator);
+
+    let show_unwind = !matches!(terminator.unwind(), None | Some(UnwindAction::Cleanup(_)));
+    let fmt_unwind = |w: &mut W| -> io::Result<()> {
+        write!(w, "unwind ")?;
+        match terminator.unwind() {
+            None | Some(UnwindAction::Cleanup(_)) => unreachable!(),
+            Some(UnwindAction::Continue) => write!(w, "continue"),
+            Some(UnwindAction::Unreachable) => write!(w, "unreachable"),
+            Some(UnwindAction::Terminate) => write!(w, "terminate"),
+        }
+    };
+
+    match (successor_count, show_unwind) {
+        (0, false) => {}
+        (0, true) => {
+            write!(writer, " -> ")?;
+            fmt_unwind(writer)?;
+        }
+        (1, false) => write!(writer, " -> bb{:?}", successors[0])?,
+        _ => {
+            write!(writer, " -> [")?;
+            for (i, target) in successors.iter().enumerate() {
+                if i > 0 {
+                    write!(writer, ", ")?;
+                }
+                write!(writer, "{}: bb{:?}", labels[i], target)?;
+            }
+            if show_unwind {
+                write!(writer, ", ")?;
+                fmt_unwind(writer)?;
+            }
+            write!(writer, "]")?;
+        }
+    };
+
+    writeln!(writer, ";")
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=pretty_terminator_head | COMPLEXITY=37 | LINES=33 */
+
+fn pretty_terminator_head<W: Write>(writer: &mut W, terminator: &TerminatorKind) -> io::Result<()> {
+    use self::TerminatorKind::*;
+    const INDENT: &str = "        ";
+    match terminator {
+        Goto { .. } => write!(writer, "{INDENT}goto"),
+        SwitchInt { discr, .. } => {
+            write!(writer, "{INDENT}switchInt({})", pretty_operand(discr))
+        }
+        Resume => write!(writer, "{INDENT}resume"),
+        Abort => write!(writer, "{INDENT}abort"),
+        Return => write!(writer, "{INDENT}return"),
+        Unreachable => write!(writer, "{INDENT}unreachable"),
+        Drop { place, .. } => write!(writer, "{INDENT}drop({place:?})"),
+        Call { func, args, destination, .. } => {
+            write!(writer, "{INDENT}{:?} = {}(", destination, pretty_operand(func))?;
+            let mut args_iter = args.iter();
+            args_iter.next().map_or(Ok(()), |arg| write!(writer, "{}", pretty_operand(arg)))?;
+            args_iter.try_for_each(|arg| write!(writer, ", {}", pretty_operand(arg)))?;
+            write!(writer, ")")
+        }
+        Assert { cond, expected, msg, target: _, unwind: _ } => {
+            write!(writer, "{INDENT}assert(")?;
+            if !expected {
+                write!(writer, "!")?;
+            }
+            write!(writer, "{}, ", pretty_operand(cond))?;
+            pretty_assert_message(writer, msg)?;
+            write!(writer, ")")
+        }
+        InlineAsm { .. } => write!(writer, "{INDENT}InlineAsm"),
+    }
+}
+/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=pretty_successor_labels | COMPLEXITY=23 | LINES=25 */
+
+fn pretty_successor_labels(terminator: &TerminatorKind) -> Vec<String> {
+    use self::TerminatorKind::*;
+    match terminator {
+        Call { target: None, unwind: UnwindAction::Cleanup(_), .. }
+        | InlineAsm { destination: None, .. } => vec!["unwind".into()],
+        Resume | Abort | Return | Unreachable | Call { target: None, unwind: _, .. } => vec![],
+        Goto { .. } => vec!["".to_string()],
+        SwitchInt { targets, .. } => targets
+            .branches()
+            .map(|(val, _target)| format!("{val}"))
+            .chain(iter::once("otherwise".into()))
+            .collect(),
+        Drop { unwind: UnwindAction::Cleanup(_), .. } => vec!["return".into(), "unwind".into()],
+        Call { target: Some(_), unwind: UnwindAction::Cleanup(_), .. } => {
+            vec!["return".into(), "unwind".into()]
+        }
+        Drop { unwind: _, .. } | Call { target: Some(_), unwind: _, .. } => vec!["return".into()],
+        Assert { unwind: UnwindAction::Cleanup(_), .. } => {
+            vec!["success".into(), "unwind".into()]
+        }
+        Assert { unwind: _, .. } => vec!["success".into()],
+        InlineAsm { destination: Some(_), .. } => vec!["goto".into(), "unwind".into()],
+    }
+}
+/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=pretty_assert_message | COMPLEXITY=93 | LINES=97 */
+
+fn pretty_assert_message<W: Write>(writer: &mut W, msg: &AssertMessage) -> io::Result<()> {
+    match msg {
+        AssertMessage::BoundsCheck { len, index } => {
+            let pretty_len = pretty_operand(len);
+            let pretty_index = pretty_operand(index);
+            write!(
+                writer,
+                "\"index out of bounds: the length is {{}} but the index is {{}}\", {pretty_len}, {pretty_index}"
+            )
+        }
+        AssertMessage::Overflow(BinOp::Add, l, r) => {
+            let pretty_l = pretty_operand(l);
+            let pretty_r = pretty_operand(r);
+            write!(
+                writer,
+                "\"attempt to compute `{{}} + {{}}`, which would overflow\", {pretty_l}, {pretty_r}"
+            )
+        }
+        AssertMessage::Overflow(BinOp::Sub, l, r) => {
+            let pretty_l = pretty_operand(l);
+            let pretty_r = pretty_operand(r);
+            write!(
+                writer,
+                "\"attempt to compute `{{}} - {{}}`, which would overflow\", {pretty_l}, {pretty_r}"
+            )
+        }
+        AssertMessage::Overflow(BinOp::Mul, l, r) => {
+            let pretty_l = pretty_operand(l);
+            let pretty_r = pretty_operand(r);
+            write!(
+                writer,
+                "\"attempt to compute `{{}} * {{}}`, which would overflow\", {pretty_l}, {pretty_r}"
+            )
+        }
+        AssertMessage::Overflow(BinOp::Div, l, r) => {
+            let pretty_l = pretty_operand(l);
+            let pretty_r = pretty_operand(r);
+            write!(
+                writer,
+                "\"attempt to compute `{{}} / {{}}`, which would overflow\", {pretty_l}, {pretty_r}"
+            )
+        }
+        AssertMessage::Overflow(BinOp::Rem, l, r) => {
+            let pretty_l = pretty_operand(l);
+            let pretty_r = pretty_operand(r);
+            write!(
+                writer,
+                "\"attempt to compute `{{}} % {{}}`, which would overflow\", {pretty_l}, {pretty_r}"
+            )
+        }
+        AssertMessage::Overflow(BinOp::Shr, _, r) => {
+            let pretty_r = pretty_operand(r);
+            write!(writer, "\"attempt to shift right by `{{}}`, which would overflow\", {pretty_r}")
+        }
+        AssertMessage::Overflow(BinOp::Shl, _, r) => {
+            let pretty_r = pretty_operand(r);
+            write!(writer, "\"attempt to shift left by `{{}}`, which would overflow\", {pretty_r}")
+        }
+        AssertMessage::Overflow(op, _, _) => unreachable!("`{:?}` cannot overflow", op),
+        AssertMessage::OverflowNeg(op) => {
+            let pretty_op = pretty_operand(op);
+            write!(writer, "\"attempt to negate `{{}}`, which would overflow\", {pretty_op}")
+        }
+        AssertMessage::DivisionByZero(op) => {
+            let pretty_op = pretty_operand(op);
+            write!(writer, "\"attempt to divide `{{}}` by zero\", {pretty_op}")
+        }
+        AssertMessage::RemainderByZero(op) => {
+            let pretty_op = pretty_operand(op);
+            write!(
+                writer,
+                "\"attempt to calculate the remainder of `{{}}` with a divisor of zero\", {pretty_op}"
+            )
+        }
+        AssertMessage::MisalignedPointerDereference { required, found } => {
+            let pretty_required = pretty_operand(required);
+            let pretty_found = pretty_operand(found);
+            write!(
+                writer,
+                "\"misaligned pointer dereference: address must be a multiple of {{}} but is {{}}\",{pretty_required}, {pretty_found}"
+            )
+        }
+        AssertMessage::NullPointerDereference => {
+            write!(writer, "\"null pointer dereference occurred\"")
+        }
+        AssertMessage::InvalidEnumConstruction(op) => {
+            let pretty_op = pretty_operand(op);
+            write!(writer, "\"trying to construct an enum from an invalid value {{}}\",{pretty_op}")
+        }
+        AssertMessage::ResumedAfterReturn(_)
+        | AssertMessage::ResumedAfterPanic(_)
+        | AssertMessage::ResumedAfterDrop(_) => {
+            write!(writer, "{}", msg.description().unwrap())
+        }
+    }
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=pretty_operand | COMPLEXITY=10 | LINES=12 */
+
+fn pretty_operand(operand: &Operand) -> String {
+    match operand {
+        Operand::Copy(copy) => {
+            format!("{copy:?}")
+        }
+        Operand::Move(mv) => {
+            format!("move {mv:?}")
+        }
+        Operand::Constant(cnst) => pretty_mir_const(&cnst.const_),
+    }
+}
+/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=pretty_mir_const | COMPLEXITY=2 | LINES=4 */
+
+fn pretty_mir_const(literal: &MirConst) -> String {
+    with(|cx| cx.mir_const_pretty(literal))
+}
+/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=pretty_ty_const | COMPLEXITY=2 | LINES=4 */
+
+fn pretty_ty_const(ct: &TyConst) -> String {
+    with(|cx| cx.ty_const_pretty(ct.id))
+}
+/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=pretty_rvalue | COMPLEXITY=51 | LINES=53 */
+
+fn pretty_rvalue<W: Write>(writer: &mut W, rval: &Rvalue) -> io::Result<()> {
+    match rval {
+        Rvalue::AddressOf(mutability, place) => {
+            write!(writer, "&raw {} {:?}", pretty_raw_ptr_kind(*mutability), place)
+        }
+        Rvalue::Aggregate(aggregate_kind, operands) => {
+            // FIXME: Add pretty_aggregate function that returns a pretty string
+            pretty_aggregate(writer, aggregate_kind, operands)
+        }
+        Rvalue::BinaryOp(bin, op1, op2) => {
+            write!(writer, "{:?}({}, {})", bin, pretty_operand(op1), pretty_operand(op2))
+        }
+        Rvalue::Cast(_, op, ty) => {
+            write!(writer, "{} as {}", pretty_operand(op), ty)
+        }
+        Rvalue::CheckedBinaryOp(bin, op1, op2) => {
+            write!(writer, "Checked{:?}({}, {})", bin, pretty_operand(op1), pretty_operand(op2))
+        }
+        Rvalue::CopyForDeref(deref) => {
+            write!(writer, "CopyForDeref({deref:?})")
+        }
+        Rvalue::Discriminant(place) => {
+            write!(writer, "discriminant({place:?})")
+        }
+        Rvalue::Len(len) => {
+            write!(writer, "len({len:?})")
+        }
+        Rvalue::Ref(_, borrowkind, place) => {
+            let kind = match borrowkind {
+                BorrowKind::Shared => "&",
+                BorrowKind::Fake(FakeBorrowKind::Deep) => "&fake ",
+                BorrowKind::Fake(FakeBorrowKind::Shallow) => "&fake shallow ",
+                BorrowKind::Mut { .. } => "&mut ",
+            };
+            write!(writer, "{kind}{place:?}")
+        }
+        Rvalue::Repeat(op, cnst) => {
+            write!(writer, "[{}; {}]", pretty_operand(op), pretty_ty_const(cnst))
+        }
+        Rvalue::ShallowInitBox(_, _) => Ok(()),
+        Rvalue::ThreadLocalRef(item) => {
+            write!(writer, "thread_local_ref{item:?}")
+        }
+        Rvalue::NullaryOp(nul, ty) => {
+            write!(writer, "{nul:?}::<{ty}>() \" \"")
+        }
+        Rvalue::UnaryOp(un, op) => {
+            write!(writer, "{:?}({})", un, pretty_operand(op))
+        }
+        Rvalue::Use(op) => write!(writer, "{}", pretty_operand(op)),
+    }
+}
+/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=pretty_aggregate | COMPLEXITY=47 | LINES=56 */
+
+fn pretty_aggregate<W: Write>(
+    writer: &mut W,
+    aggregate_kind: &AggregateKind,
+    operands: &Vec<Operand>,
+) -> io::Result<()> {
+    let suffix = match aggregate_kind {
+        AggregateKind::Array(_) => {
+            write!(writer, "[")?;
+            "]"
+        }
+        AggregateKind::Tuple => {
+            write!(writer, "(")?;
+            ")"
+        }
+        AggregateKind::Adt(def, var, _, _, _) => {
+            if def.kind() == AdtKind::Enum {
+                write!(writer, "{}::{}", def.name(), def.variant(*var).unwrap().name())?;
+            } else {
+                write!(writer, "{}", def.variant(*var).unwrap().name())?;
+            }
+            if operands.is_empty() {
+                return Ok(());
+            }
+            // FIXME: Change this once we have CtorKind in StableMIR.
+            write!(writer, "(")?;
+            ")"
+        }
+        AggregateKind::Closure(def, _) => {
+            write!(writer, "{{closure@{}}}(", def.span().diagnostic())?;
+            ")"
+        }
+        AggregateKind::Coroutine(def, _) => {
+            write!(writer, "{{coroutine@{}}}(", def.span().diagnostic())?;
+            ")"
+        }
+        AggregateKind::CoroutineClosure(def, _) => {
+            write!(writer, "{{coroutine-closure@{}}}(", def.span().diagnostic())?;
+            ")"
+        }
+        AggregateKind::RawPtr(ty, mutability) => {
+            write!(
+                writer,
+                "*{} {ty} from (",
+                if *mutability == Mutability::Mut { "mut" } else { "const" }
+            )?;
+            ")"
+        }
+    };
+    let mut separator = "";
+    for op in operands {
+        write!(writer, "{}{}", separator, pretty_operand(op))?;
+        separator = ", ";
+    }
+    write!(writer, "{suffix}")
+}
+/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=pretty_mut | COMPLEXITY=6 | LINES=7 */
+
+fn pretty_mut(mutability: Mutability) -> &'static str {
+    match mutability {
+        Mutability::Not => " ",
+        Mutability::Mut => "mut ",
+    }
+}
+/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=pretty_raw_ptr_kind | COMPLEXITY=6 | LINES=8 */
+
+fn pretty_raw_ptr_kind(kind: RawPtrKind) -> &'static str {
+    match kind {
+        RawPtrKind::Const => "const",
+        RawPtrKind::Mut => "mut",
+        RawPtrKind::FakeForPtrMetadata => "const (fake)",
+    }
+}

@@ -1,2 +1,9 @@
-/* FP:lib.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_hello-world_mylib_src_lib_FN_0001
-/* FP:lib.rs-0002 */ pub fn my_func (a : i32 , b : i32) -> i32 { let mut res = a ; for i in a .. b { res += i ; } res }
+// SRC: ../rust/compiler/rustc_codegen_gcc/tests/hello-world/mylib/src/lib.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=my_func | COMPLEXITY=5 | LINES=7 */
+pub fn my_func(a: i32, b: i32) -> i32 {
+    let mut res = a;
+    for i in a..b {
+        res += i;
+    }
+    res
+}

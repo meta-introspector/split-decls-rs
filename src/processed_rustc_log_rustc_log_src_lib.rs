@@ -1,48 +1,269 @@
-/* FP:lib.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_USE_0001
-/* FP:lib.rs-0002 */ use std :: env :: { self , VarError } ;
-/* FP:lib.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_USE_0002
-/* FP:lib.rs-0004 */ use std :: fmt :: { self , Display } ;
-/* FP:lib.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_USE_0003
-/* FP:lib.rs-0006 */ use std :: io :: { self , IsTerminal } ;
-/* FP:lib.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_USE_0004
-/* FP:lib.rs-0008 */ use tracing :: dispatcher :: SetGlobalDefaultError ;
-/* FP:lib.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_USE_0005
-/* FP:lib.rs-0010 */ use tracing :: { Event , Subscriber } ;
-/* FP:lib.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_USE_0006
-/* FP:lib.rs-0012 */ use tracing_subscriber :: filter :: { Directive , EnvFilter , LevelFilter } ;
-/* FP:lib.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_USE_0007
-/* FP:lib.rs-0014 */ use tracing_subscriber :: fmt :: FmtContext ;
-/* FP:lib.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_USE_0008
-/* FP:lib.rs-0016 */ use tracing_subscriber :: fmt :: format :: { self , FormatEvent , FormatFields } ;
-/* FP:lib.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_USE_0009
-/* FP:lib.rs-0018 */ use tracing_subscriber :: layer :: SubscriberExt ;
-/* FP:lib.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_USE_0010
-/* FP:lib.rs-0020 */ use tracing_subscriber :: { Layer , Registry } ;
-/* FP:lib.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_STRUCT_0011
-/* FP:lib.rs-0022 */ # [doc = " The values of all the environment variables that matter for configuring a logger."] # [doc = " Errors are explicitly preserved so that we can share error handling."] pub struct LoggerConfig { pub filter : Result < String , VarError > , pub color_logs : Result < String , VarError > , pub verbose_entry_exit : Result < String , VarError > , pub verbose_thread_ids : Result < String , VarError > , pub backtrace : Result < String , VarError > , pub wraptree : Result < String , VarError > , pub lines : Result < String , VarError > , }
-/* FP:lib.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_IMPL_0012
-/* FP:lib.rs-0024 */ impl LoggerConfig { pub fn from_env (env : & str) -> Self { LoggerConfig { filter : env :: var (env) , color_logs : env :: var (format ! ("{env}_COLOR")) , verbose_entry_exit : env :: var (format ! ("{env}_ENTRY_EXIT")) , verbose_thread_ids : env :: var (format ! ("{env}_THREAD_IDS")) , backtrace : env :: var (format ! ("{env}_BACKTRACE")) , wraptree : env :: var (format ! ("{env}_WRAPTREE")) , lines : env :: var (format ! ("{env}_LINES")) , } } }
-/* FP:lib.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_FN_0013
-/* FP:lib.rs-0026 */ # [doc = " Initialize the logger with the given values for the filter, coloring, and other options env variables."] pub fn init_logger (cfg : LoggerConfig) -> Result < () , Error > { init_logger_with_additional_layer (cfg , | | Registry :: default ()) }
-/* FP:lib.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_TRAIT_0014
-/* FP:lib.rs-0028 */ # [doc = " Trait alias for the complex return type of `build_subscriber` in"] # [doc = " [init_logger_with_additional_layer]. A [Registry] with any composition of [tracing::Subscriber]s"] # [doc = " (e.g. `Registry::default().with(custom_layer)`) should be compatible with this type."] # [doc = " Having an alias is also useful so rustc_driver_impl does not need to explicitly depend on"] # [doc = " `tracing_subscriber`."] pub trait BuildSubscriberRet : tracing :: Subscriber + for < 'span > tracing_subscriber :: registry :: LookupSpan < 'span > + Send + Sync { }
-/* FP:lib.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_IMPL_0015
-/* FP:lib.rs-0030 */ impl < T : tracing :: Subscriber + for < 'span > tracing_subscriber :: registry :: LookupSpan < 'span > + Send + Sync , > BuildSubscriberRet for T { }
-/* FP:lib.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_FN_0016
-/* FP:lib.rs-0032 */ # [doc = " Initialize the logger with the given values for the filter, coloring, and other options env variables."] # [doc = " Additionally add a custom layer to collect logging and tracing events via `build_subscriber`,"] # [doc = " for example: `|| Registry::default().with(custom_layer)`."] pub fn init_logger_with_additional_layer < F , T > (cfg : LoggerConfig , build_subscriber : F ,) -> Result < () , Error > where F : FnOnce () -> T , T : BuildSubscriberRet , { let filter = match cfg . filter { Ok (env) => EnvFilter :: new (env) , _ => EnvFilter :: default () . add_directive (Directive :: from (LevelFilter :: WARN)) , } ; let color_logs = match cfg . color_logs { Ok (value) => match value . as_ref () { "always" => true , "never" => false , "auto" => stderr_isatty () , _ => return Err (Error :: InvalidColorValue (value)) , } , Err (VarError :: NotPresent) => stderr_isatty () , Err (VarError :: NotUnicode (_value)) => return Err (Error :: NonUnicodeColorValue) , } ; let verbose_entry_exit = match cfg . verbose_entry_exit { Ok (v) => & v != "0" , Err (_) => false , } ; let verbose_thread_ids = match cfg . verbose_thread_ids { Ok (v) => & v == "1" , Err (_) => false , } ; let lines = match cfg . lines { Ok (v) => & v == "1" , Err (_) => false , } ; let mut layer = tracing_tree :: HierarchicalLayer :: default () . with_writer (io :: stderr) . with_ansi (color_logs) . with_targets (true) . with_verbose_exit (verbose_entry_exit) . with_verbose_entry (verbose_entry_exit) . with_indent_amount (2) . with_indent_lines (lines) . with_thread_ids (verbose_thread_ids) . with_thread_names (verbose_thread_ids) ; match cfg . wraptree { Ok (v) => match v . parse :: < usize > () { Ok (v) => { layer = layer . with_wraparound (v) ; } Err (_) => return Err (Error :: InvalidWraptree (v)) , } , Err (_) => { } } let subscriber = build_subscriber () . with (layer . with_filter (filter)) ; match cfg . backtrace { Ok (backtrace_target) => { let fmt_layer = tracing_subscriber :: fmt :: layer () . with_writer (io :: stderr) . without_time () . event_format (BacktraceFormatter { backtrace_target }) ; let subscriber = subscriber . with (fmt_layer) ; tracing :: subscriber :: set_global_default (subscriber) ? ; } Err (_) => { tracing :: subscriber :: set_global_default (subscriber) ? ; } } ; Ok (()) }
-/* FP:lib.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_STRUCT_0017
-/* FP:lib.rs-0034 */ struct BacktraceFormatter { backtrace_target : String , }
-/* FP:lib.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_IMPL_0018
-/* FP:lib.rs-0036 */ impl < S , N > FormatEvent < S , N > for BacktraceFormatter where S : Subscriber + for < 'a > tracing_subscriber :: registry :: LookupSpan < 'a > , N : for < 'a > FormatFields < 'a > + 'static , { fn format_event (& self , _ctx : & FmtContext < '_ , S , N > , mut writer : format :: Writer < '_ > , event : & Event < '_ > ,) -> fmt :: Result { let target = event . metadata () . target () ; if ! target . contains (& self . backtrace_target) { return Ok (()) ; } let backtrace = std :: backtrace :: Backtrace :: force_capture () ; writeln ! (writer , "stack backtrace: \n{backtrace:?}") } }
-/* FP:lib.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_FN_0019
-/* FP:lib.rs-0038 */ pub fn stdout_isatty () -> bool { io :: stdout () . is_terminal () }
-/* FP:lib.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_FN_0020
-/* FP:lib.rs-0040 */ pub fn stderr_isatty () -> bool { io :: stderr () . is_terminal () }
-/* FP:lib.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_ENUM_0021
-/* FP:lib.rs-0042 */ # [derive (Debug)] pub enum Error { InvalidColorValue (String) , NonUnicodeColorValue , InvalidWraptree (String) , AlreadyInit (SetGlobalDefaultError) , }
-/* FP:lib.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_IMPL_0022
-/* FP:lib.rs-0044 */ impl std :: error :: Error for Error { }
-/* FP:lib.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_IMPL_0023
-/* FP:lib.rs-0046 */ impl Display for Error { fn fmt (& self , formatter : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { Error :: InvalidColorValue (value) => write ! (formatter , "invalid log color value '{value}': expected one of always, never, or auto" ,) , Error :: NonUnicodeColorValue => write ! (formatter , "non-Unicode log color value: expected one of always, never, or auto" ,) , Error :: InvalidWraptree (value) => write ! (formatter , "invalid log WRAPTREE value '{value}': expected a non-negative integer" ,) , Error :: AlreadyInit (tracing_error) => Display :: fmt (tracing_error , formatter) , } } }
-/* FP:lib.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_log_src_lib_IMPL_0024
-/* FP:lib.rs-0048 */ impl From < SetGlobalDefaultError > for Error { fn from (tracing_error : SetGlobalDefaultError) -> Self { Error :: AlreadyInit (tracing_error) } }
+// SRC: ../rust/compiler/rustc_log/src/lib.rs
+/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=7 | LINES=10 */
+// This crate allows tools to enable rust logging without having to magically
+// match rustc's tracing crate version.
+//
+// For example if someone is working on rustc_ast and wants to write some
+// minimal code against it to run in a debugger, with access to the `debug!`
+// logs emitted by rustc_ast, that can be done by writing:
+//
+// ```toml
+// [dependencies]
+// rustc_ast = { path = "../rust/compiler/rustc_ast" }
+/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+// rustc_log = { path = "../rust/compiler/rustc_log" }
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+// ```
+//
+// ```
+// fn main() {
+//     rustc_log::init_logger(rustc_log::LoggerConfig::from_env("LOG")).unwrap();
+//     /* ... */
+// }
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=18 */
+// ```
+//
+// Now `LOG=debug cargo +nightly run` will run your minimal main.rs and show
+// rustc's debug logging. In a workflow like this, one might also add
+// `std::env::set_var("LOG", "debug")` to the top of main so that `cargo
+// +nightly run` by itself is sufficient to get logs.
+//
+// The reason rustc_log is a tiny separate crate, as opposed to exposing the
+// same things in rustc_driver only, is to enable the above workflow. If you
+// had to depend on rustc_driver in order to turn on rustc's debug logs, that's
+// an enormously bigger dependency tree; every change you make to rustc_ast (or
+// whichever piece of the compiler you are interested in) would involve
+// rebuilding all the rest of rustc up to rustc_driver in order to run your
+// main.rs. Whereas by depending only on rustc_log and the few crates you are
+// debugging, you can make changes inside those crates and quickly run main.rs
+// to read the debug logs.
+
+use std::env::{self, VarError};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use std::fmt::{self, Display};
+/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use std::io::{self, IsTerminal};
+/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+
+use tracing::dispatcher::SetGlobalDefaultError;
+use tracing::{Event, Subscriber};
+/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use tracing_subscriber::filter::{Directive, EnvFilter, LevelFilter};
+/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use tracing_subscriber::fmt::FmtContext;
+use tracing_subscriber::fmt::format::{self, FormatEvent, FormatFields};
+/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use tracing_subscriber::layer::SubscriberExt;
+use tracing_subscriber::{Layer, Registry};
+/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=LoggerConfig | COMPLEXITY=5 | LINES=12 */
+
+/// The values of all the environment variables that matter for configuring a logger.
+/// Errors are explicitly preserved so that we can share error handling.
+pub struct LoggerConfig {
+    pub filter: Result<String, VarError>,
+    pub color_logs: Result<String, VarError>,
+    pub verbose_entry_exit: Result<String, VarError>,
+    pub verbose_thread_ids: Result<String, VarError>,
+    pub backtrace: Result<String, VarError>,
+    pub wraptree: Result<String, VarError>,
+    pub lines: Result<String, VarError>,
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=from_env | COMPLEXITY=11 | LINES=14 */
+
+impl LoggerConfig {
+    pub fn from_env(env: &str) -> Self {
+        LoggerConfig {
+            filter: env::var(env),
+            color_logs: env::var(format!("{env}_COLOR")),
+            verbose_entry_exit: env::var(format!("{env}_ENTRY_EXIT")),
+            verbose_thread_ids: env::var(format!("{env}_THREAD_IDS")),
+            backtrace: env::var(format!("{env}_BACKTRACE")),
+            wraptree: env::var(format!("{env}_WRAPTREE")),
+            lines: env::var(format!("{env}_LINES")),
+        }
+    }
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=init_logger | COMPLEXITY=4 | LINES=5 */
+
+/// Initialize the logger with the given values for the filter, coloring, and other options env variables.
+pub fn init_logger(cfg: LoggerConfig) -> Result<(), Error> {
+    init_logger_with_additional_layer(cfg, || Registry::default())
+}
+/* AST_META: AST_ID=14 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=5 | LINES=10 */
+
+/// Trait alias for the complex return type of `build_subscriber` in
+/// [init_logger_with_additional_layer]. A [Registry] with any composition of [tracing::Subscriber]s
+/// (e.g. `Registry::default().with(custom_layer)`) should be compatible with this type.
+/// Having an alias is also useful so rustc_driver_impl does not need to explicitly depend on
+/// `tracing_subscriber`.
+pub trait BuildSubscriberRet:
+    tracing::Subscriber + for<'span> tracing_subscriber::registry::LookupSpan<'span> + Send + Sync
+{
+}
+/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
+
+impl<
+    T: tracing::Subscriber + for<'span> tracing_subscriber::registry::LookupSpan<'span> + Send + Sync,
+> BuildSubscriberRet for T
+{
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=init_logger_with_additional_layer | COMPLEXITY=52 | LINES=81 */
+
+/// Initialize the logger with the given values for the filter, coloring, and other options env variables.
+/// Additionally add a custom layer to collect logging and tracing events via `build_subscriber`,
+/// for example: `|| Registry::default().with(custom_layer)`.
+pub fn init_logger_with_additional_layer<F, T>(
+    cfg: LoggerConfig,
+    build_subscriber: F,
+) -> Result<(), Error>
+where
+    F: FnOnce() -> T,
+    T: BuildSubscriberRet,
+{
+    let filter = match cfg.filter {
+        Ok(env) => EnvFilter::new(env),
+        _ => EnvFilter::default().add_directive(Directive::from(LevelFilter::WARN)),
+    };
+
+    let color_logs = match cfg.color_logs {
+        Ok(value) => match value.as_ref() {
+            "always" => true,
+            "never" => false,
+            "auto" => stderr_isatty(),
+            _ => return Err(Error::InvalidColorValue(value)),
+        },
+        Err(VarError::NotPresent) => stderr_isatty(),
+        Err(VarError::NotUnicode(_value)) => return Err(Error::NonUnicodeColorValue),
+    };
+
+    let verbose_entry_exit = match cfg.verbose_entry_exit {
+        Ok(v) => &v != "0",
+        Err(_) => false,
+    };
+
+    let verbose_thread_ids = match cfg.verbose_thread_ids {
+        Ok(v) => &v == "1",
+        Err(_) => false,
+    };
+
+    let lines = match cfg.lines {
+        Ok(v) => &v == "1",
+        Err(_) => false,
+    };
+
+    let mut layer = tracing_tree::HierarchicalLayer::default()
+        .with_writer(io::stderr)
+        .with_ansi(color_logs)
+        .with_targets(true)
+        .with_verbose_exit(verbose_entry_exit)
+        .with_verbose_entry(verbose_entry_exit)
+        .with_indent_amount(2)
+        .with_indent_lines(lines)
+        .with_thread_ids(verbose_thread_ids)
+        .with_thread_names(verbose_thread_ids);
+
+    match cfg.wraptree {
+        Ok(v) => match v.parse::<usize>() {
+            Ok(v) => {
+                layer = layer.with_wraparound(v);
+            }
+            Err(_) => return Err(Error::InvalidWraptree(v)),
+        },
+        Err(_) => {} // no wraptree
+    }
+
+    let subscriber = build_subscriber().with(layer.with_filter(filter));
+    match cfg.backtrace {
+        Ok(backtrace_target) => {
+            let fmt_layer = tracing_subscriber::fmt::layer()
+                .with_writer(io::stderr)
+                .without_time()
+                .event_format(BacktraceFormatter { backtrace_target });
+            let subscriber = subscriber.with(fmt_layer);
+            tracing::subscriber::set_global_default(subscriber)?;
+        }
+        Err(_) => {
+            tracing::subscriber::set_global_default(subscriber)?;
+        }
+    };
+
+    Ok(())
+}
+/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=BacktraceFormatter | COMPLEXITY=2 | LINES=4 */
+
+struct BacktraceFormatter {
+    backtrace_target: String,
+}
+/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=format_event | COMPLEXITY=10 | LINES=22 */
+
+impl<S, N> FormatEvent<S, N> for BacktraceFormatter
+where
+    S: Subscriber + for<'a> tracing_subscriber::registry::LookupSpan<'a>,
+    N: for<'a> FormatFields<'a> + 'static,
+{
+    fn format_event(
+        &self,
+        _ctx: &FmtContext<'_, S, N>,
+        mut writer: format::Writer<'_>,
+        event: &Event<'_>,
+    ) -> fmt::Result {
+        let target = event.metadata().target();
+        if !target.contains(&self.backtrace_target) {
+            return Ok(());
+        }
+        // Use Backtrace::force_capture because we don't want to depend on the
+        // RUST_BACKTRACE environment variable being set.
+        let backtrace = std::backtrace::Backtrace::force_capture();
+        writeln!(writer, "stack backtrace: \n{backtrace:?}")
+    }
+}
+/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=stdout_isatty | COMPLEXITY=2 | LINES=4 */
+
+pub fn stdout_isatty() -> bool {
+    io::stdout().is_terminal()
+}
+/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=stderr_isatty | COMPLEXITY=2 | LINES=4 */
+
+pub fn stderr_isatty() -> bool {
+    io::stderr().is_terminal()
+}
+/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Debug)]
+pub enum Error {
+    InvalidColorValue(String),
+    NonUnicodeColorValue,
+    InvalidWraptree(String),
+    AlreadyInit(SetGlobalDefaultError),
+}
+/* AST_META: AST_ID=22 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl std::error::Error for Error {}
+/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=12 | LINES=20 */
+
+impl Display for Error {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Error::InvalidColorValue(value) => write!(
+                formatter,
+                "invalid log color value '{value}': expected one of always, never, or auto",
+            ),
+            Error::NonUnicodeColorValue => write!(
+                formatter,
+                "non-Unicode log color value: expected one of always, never, or auto",
+            ),
+            Error::InvalidWraptree(value) => write!(
+                formatter,
+                "invalid log WRAPTREE value '{value}': expected a non-negative integer",
+            ),
+            Error::AlreadyInit(tracing_error) => Display::fmt(tracing_error, formatter),
+        }
+    }
+}
+/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
+
+impl From<SetGlobalDefaultError> for Error {
+    fn from(tracing_error: SetGlobalDefaultError) -> Self {
+        Error::AlreadyInit(tracing_error)
+    }
+}

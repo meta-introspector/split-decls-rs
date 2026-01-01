@@ -1,18 +1,101 @@
-/* FP:typetree.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_expand_typetree_USE_0001
-/* FP:typetree.rs-0002 */ use std :: fmt ;
-/* FP:typetree.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_expand_typetree_USE_0002
-/* FP:typetree.rs-0004 */ use crate :: expand :: { Decodable , Encodable , HashStable_Generic } ;
-/* FP:typetree.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_expand_typetree_ENUM_0003
-/* FP:typetree.rs-0006 */ # [derive (Clone , Copy , Eq , PartialEq , Encodable , Decodable , Debug , HashStable_Generic)] pub enum Kind { Anything , Integer , Pointer , Half , Float , Double , Unknown , }
-/* FP:typetree.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_expand_typetree_STRUCT_0004
-/* FP:typetree.rs-0008 */ # [derive (Clone , Eq , PartialEq , Encodable , Decodable , Debug , HashStable_Generic)] pub struct TypeTree (pub Vec < Type >) ;
-/* FP:typetree.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_expand_typetree_IMPL_0005
-/* FP:typetree.rs-0010 */ impl TypeTree { pub fn new () -> Self { Self (Vec :: new ()) } pub fn all_ints () -> Self { Self (vec ! [Type { offset : - 1 , size : 1 , kind : Kind :: Integer , child : TypeTree :: new () }]) } pub fn int (size : usize) -> Self { let mut ints = Vec :: with_capacity (size) ; for i in 0 .. size { ints . push (Type { offset : i as isize , size : 1 , kind : Kind :: Integer , child : TypeTree :: new () , }) ; } Self (ints) } }
-/* FP:typetree.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_expand_typetree_STRUCT_0006
-/* FP:typetree.rs-0012 */ # [derive (Clone , Eq , PartialEq , Encodable , Decodable , Debug , HashStable_Generic)] pub struct FncTree { pub args : Vec < TypeTree > , pub ret : TypeTree , }
-/* FP:typetree.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_expand_typetree_STRUCT_0007
-/* FP:typetree.rs-0014 */ # [derive (Clone , Eq , PartialEq , Encodable , Decodable , Debug , HashStable_Generic)] pub struct Type { pub offset : isize , pub size : usize , pub kind : Kind , pub child : TypeTree , }
-/* FP:typetree.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_expand_typetree_IMPL_0008
-/* FP:typetree.rs-0016 */ impl Type { pub fn add_offset (self , add : isize) -> Self { let offset = match self . offset { - 1 => add , x => add + x , } ; Self { size : self . size , kind : self . kind , child : self . child , offset } } }
-/* FP:typetree.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_expand_typetree_IMPL_0009
-/* FP:typetree.rs-0018 */ impl fmt :: Display for Type { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { < Self as fmt :: Debug > :: fmt (self , f) } }
+// SRC: ../rust/compiler/rustc_ast/src/expand/typetree.rs
+/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=9 */
+// This module contains the definition of the `TypeTree` and `Type` structs.
+// They are thin Rust wrappers around the TypeTrees used by Enzyme as the LLVM based autodiff
+// backend. The Enzyme TypeTrees currently have various limitations and should be rewritten, so the
+// Rust frontend obviously has the same limitations. The main motivation of TypeTrees is to
+// represent how a type looks like "in memory". Enzyme can deduce this based on usage patterns in
+// the user code, but this is extremely slow and not even always sufficient. As such we lower some
+// information from rustc to help Enzyme. For a full explanation of their design it is necessary to
+// analyze the implementation in Enzyme core itself. As a rough summary, `-1` in Enzyme speech means
+// everywhere. That is `{0:-1: Float}` means at index 0 you have a ptr, if you dereference it it
+/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+// will be floats everywhere. Thus `* f32`. If you have `{-1:int}` it means int's everywhere,
+/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
+// e.g. [i32; N]. `{0:-1:-1 float}` then means one pointer at offset 0, if you dereference it there
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=13 */
+// will be only pointers, if you dereference these new pointers they will point to array of floats.
+// Generally, it allows byte-specific descriptions.
+// FIXME: This description might be partly inaccurate and should be extended, along with
+// adding documentation to the corresponding Enzyme core code.
+// FIXME: Rewrite the TypeTree logic in Enzyme core to reduce the need for the rustc frontend to
+// provide typetree information.
+// FIXME: We should also re-evaluate where we create TypeTrees from Rust types, since MIR
+// representations of some types might not be accurate. For example a vector of floats might be
+// represented as a vector of u8s in MIR in some cases.
+
+use std::fmt;
+
+use crate::expand::{Decodable, Encodable, HashStable_Generic};
+/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+
+#[derive(Clone, Copy, Eq, PartialEq, Encodable, Decodable, Debug, HashStable_Generic)]
+pub enum Kind {
+    Anything,
+    Integer,
+    Pointer,
+    Half,
+    Float,
+    Double,
+    Unknown,
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=TypeTree(pub | COMPLEXITY=11 | LINES=24 */
+
+#[derive(Clone, Eq, PartialEq, Encodable, Decodable, Debug, HashStable_Generic)]
+pub struct TypeTree(pub Vec<Type>);
+
+impl TypeTree {
+    pub fn new() -> Self {
+        Self(Vec::new())
+    }
+    pub fn all_ints() -> Self {
+        Self(vec![Type { offset: -1, size: 1, kind: Kind::Integer, child: TypeTree::new() }])
+    }
+    pub fn int(size: usize) -> Self {
+        let mut ints = Vec::with_capacity(size);
+        for i in 0..size {
+            ints.push(Type {
+                offset: i as isize,
+                size: 1,
+                kind: Kind::Integer,
+                child: TypeTree::new(),
+            });
+        }
+        Self(ints)
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=FncTree | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Clone, Eq, PartialEq, Encodable, Decodable, Debug, HashStable_Generic)]
+pub struct FncTree {
+    pub args: Vec<TypeTree>,
+    pub ret: TypeTree,
+}
+/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=Type | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Clone, Eq, PartialEq, Encodable, Decodable, Debug, HashStable_Generic)]
+pub struct Type {
+    pub offset: isize,
+    pub size: usize,
+    pub kind: Kind,
+    pub child: TypeTree,
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=add_offset | COMPLEXITY=8 | LINES=11 */
+
+impl Type {
+    pub fn add_offset(self, add: isize) -> Self {
+        let offset = match self.offset {
+            -1 => add,
+            x => add + x,
+        };
+
+        Self { size: self.size, kind: self.kind, child: self.child, offset }
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=6 */
+
+impl fmt::Display for Type {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        <Self as fmt::Debug>::fmt(self, f)
+    }
+}

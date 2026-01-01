@@ -1,36 +1,211 @@
-/* FP:freeze.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_USE_0001
-/* FP:freeze.rs-0002 */ use std :: cell :: UnsafeCell ;
-/* FP:freeze.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_USE_0002
-/* FP:freeze.rs-0004 */ use std :: intrinsics :: likely ;
-/* FP:freeze.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_USE_0003
-/* FP:freeze.rs-0006 */ use std :: marker :: PhantomData ;
-/* FP:freeze.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_USE_0004
-/* FP:freeze.rs-0008 */ use std :: ops :: { Deref , DerefMut } ;
-/* FP:freeze.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_USE_0005
-/* FP:freeze.rs-0010 */ use std :: ptr :: NonNull ;
-/* FP:freeze.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_USE_0006
-/* FP:freeze.rs-0012 */ use std :: sync :: atomic :: { AtomicBool , Ordering } ;
-/* FP:freeze.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_USE_0007
-/* FP:freeze.rs-0014 */ use crate :: sync :: { DynSend , DynSync , ReadGuard , RwLock , WriteGuard } ;
-/* FP:freeze.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_STRUCT_0008
-/* FP:freeze.rs-0016 */ # [doc = " A type which allows mutation using a lock until"] # [doc = " the value is frozen and can be accessed lock-free."] # [doc = ""] # [doc = " Unlike `RwLock`, it can be used to prevent mutation past a point."] # [derive (Default)] pub struct FreezeLock < T > { data : UnsafeCell < T > , frozen : AtomicBool , # [doc = " This lock protects writes to the `data` and `frozen` fields."] lock : RwLock < () > , }
-/* FP:freeze.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_IMPL_0009
-/* FP:freeze.rs-0018 */ unsafe impl < T : DynSync + DynSend > DynSync for FreezeLock < T > { }
-/* FP:freeze.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_IMPL_0010
-/* FP:freeze.rs-0020 */ impl < T > FreezeLock < T > { # [inline] pub fn new (value : T) -> Self { Self :: with (value , false) } # [inline] pub fn frozen (value : T) -> Self { Self :: with (value , true) } # [inline] pub fn with (value : T , frozen : bool) -> Self { Self { data : UnsafeCell :: new (value) , frozen : AtomicBool :: new (frozen) , lock : RwLock :: new (()) , } } # [doc = " Clones the inner value along with the frozen state."] # [inline] pub fn clone (& self) -> Self where T : Clone , { let lock = self . read () ; Self :: with (lock . clone () , self . is_frozen ()) } # [inline] pub fn is_frozen (& self) -> bool { self . frozen . load (Ordering :: Acquire) } # [doc = " Get the inner value if frozen."] # [inline] pub fn get (& self) -> Option < & T > { if likely (self . frozen . load (Ordering :: Acquire)) { unsafe { Some (& * self . data . get ()) } } else { None } } # [inline] pub fn read (& self) -> FreezeReadGuard < '_ , T > { FreezeReadGuard { _lock_guard : if self . frozen . load (Ordering :: Acquire) { None } else { Some (self . lock . read ()) } , data : unsafe { NonNull :: new_unchecked (self . data . get ()) } , } } # [inline] pub fn borrow (& self) -> FreezeReadGuard < '_ , T > { self . read () } # [inline] # [track_caller] pub fn write (& self) -> FreezeWriteGuard < '_ , T > { self . try_write () . expect ("data should not be frozen if we're still attempting to mutate it") } # [inline] pub fn try_write (& self) -> Option < FreezeWriteGuard < '_ , T > > { let _lock_guard = self . lock . write () ; if self . frozen . load (Ordering :: Relaxed) { None } else { Some (FreezeWriteGuard { _lock_guard , data : unsafe { NonNull :: new_unchecked (self . data . get ()) } , frozen : & self . frozen , marker : PhantomData , }) } } # [inline] pub fn freeze (& self) -> & T { if ! self . frozen . load (Ordering :: Acquire) { let _lock = self . lock . write () ; self . frozen . store (true , Ordering :: Release) ; } unsafe { & * self . data . get () } } }
-/* FP:freeze.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_STRUCT_0011
-/* FP:freeze.rs-0022 */ # [doc = " A guard holding shared access to a `FreezeLock` which is in a locked state or frozen."] # [must_use = "if unused the FreezeLock may immediately unlock"] pub struct FreezeReadGuard < 'a , T : ? Sized > { _lock_guard : Option < ReadGuard < 'a , () > > , data : NonNull < T > , }
-/* FP:freeze.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_IMPL_0012
-/* FP:freeze.rs-0024 */ impl < 'a , T : ? Sized + 'a > Deref for FreezeReadGuard < 'a , T > { type Target = T ; # [inline] fn deref (& self) -> & T { unsafe { & * self . data . as_ptr () } } }
-/* FP:freeze.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_IMPL_0013
-/* FP:freeze.rs-0026 */ impl < 'a , T : ? Sized > FreezeReadGuard < 'a , T > { # [inline] pub fn map < U : ? Sized > (this : Self , f : impl FnOnce (& T) -> & U) -> FreezeReadGuard < 'a , U > { FreezeReadGuard { data : NonNull :: from (f (& * this)) , _lock_guard : this . _lock_guard } } }
-/* FP:freeze.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_STRUCT_0014
-/* FP:freeze.rs-0028 */ # [doc = " A guard holding mutable access to a `FreezeLock` which is in a locked state or frozen."] # [must_use = "if unused the FreezeLock may immediately unlock"] pub struct FreezeWriteGuard < 'a , T : ? Sized > { _lock_guard : WriteGuard < 'a , () > , frozen : & 'a AtomicBool , data : NonNull < T > , marker : PhantomData < & 'a mut T > , }
-/* FP:freeze.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_IMPL_0015
-/* FP:freeze.rs-0030 */ impl < 'a , T > FreezeWriteGuard < 'a , T > { pub fn freeze (self) -> & 'a T { self . frozen . store (true , Ordering :: Release) ; unsafe { & * self . data . as_ptr () } } }
-/* FP:freeze.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_IMPL_0016
-/* FP:freeze.rs-0032 */ impl < 'a , T : ? Sized > FreezeWriteGuard < 'a , T > { # [inline] pub fn map < U : ? Sized > (mut this : Self , f : impl FnOnce (& mut T) -> & mut U ,) -> FreezeWriteGuard < 'a , U > { FreezeWriteGuard { data : NonNull :: from (f (& mut * this)) , _lock_guard : this . _lock_guard , frozen : this . frozen , marker : PhantomData , } } }
-/* FP:freeze.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_IMPL_0017
-/* FP:freeze.rs-0034 */ impl < 'a , T : ? Sized + 'a > Deref for FreezeWriteGuard < 'a , T > { type Target = T ; # [inline] fn deref (& self) -> & T { unsafe { & * self . data . as_ptr () } } }
-/* FP:freeze.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_freeze_IMPL_0018
-/* FP:freeze.rs-0036 */ impl < 'a , T : ? Sized + 'a > DerefMut for FreezeWriteGuard < 'a , T > { # [inline] fn deref_mut (& mut self) -> & mut T { unsafe { & mut * self . data . as_ptr () } } }
+// SRC: ../rust/compiler/rustc_data_structures/src/sync/freeze.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use std::cell::UnsafeCell;
+use std::intrinsics::likely;
+use std::marker::PhantomData;
+use std::ops::{Deref, DerefMut};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use std::ptr::NonNull;
+use std::sync::atomic::{AtomicBool, Ordering};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+use crate::sync::{DynSend, DynSync, ReadGuard, RwLock, WriteGuard};
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=FreezeLock | COMPLEXITY=2 | LINES=13 */
+
+/// A type which allows mutation using a lock until
+/// the value is frozen and can be accessed lock-free.
+///
+/// Unlike `RwLock`, it can be used to prevent mutation past a point.
+#[derive(Default)]
+pub struct FreezeLock<T> {
+    data: UnsafeCell<T>,
+    frozen: AtomicBool,
+
+    /// This lock protects writes to the `data` and `frozen` fields.
+    lock: RwLock<()>,
+}
+/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=2 */
+
+unsafe impl<T: DynSync + DynSend> DynSync for FreezeLock<T> {}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new | COMPLEXITY=60 | LINES=98 */
+
+impl<T> FreezeLock<T> {
+    #[inline]
+    pub fn new(value: T) -> Self {
+        Self::with(value, false)
+    }
+
+    #[inline]
+    pub fn frozen(value: T) -> Self {
+        Self::with(value, true)
+    }
+
+    #[inline]
+    pub fn with(value: T, frozen: bool) -> Self {
+        Self {
+            data: UnsafeCell::new(value),
+            frozen: AtomicBool::new(frozen),
+            lock: RwLock::new(()),
+        }
+    }
+
+    /// Clones the inner value along with the frozen state.
+    #[inline]
+    pub fn clone(&self) -> Self
+    where
+        T: Clone,
+    {
+        let lock = self.read();
+        Self::with(lock.clone(), self.is_frozen())
+    }
+
+    #[inline]
+    pub fn is_frozen(&self) -> bool {
+        self.frozen.load(Ordering::Acquire)
+    }
+
+    /// Get the inner value if frozen.
+    #[inline]
+    pub fn get(&self) -> Option<&T> {
+        if likely(self.frozen.load(Ordering::Acquire)) {
+            // SAFETY: This is frozen so the data cannot be modified.
+            unsafe { Some(&*self.data.get()) }
+        } else {
+            None
+        }
+    }
+
+    #[inline]
+    pub fn read(&self) -> FreezeReadGuard<'_, T> {
+        FreezeReadGuard {
+            _lock_guard: if self.frozen.load(Ordering::Acquire) {
+                None
+            } else {
+                Some(self.lock.read())
+            },
+            data: unsafe { NonNull::new_unchecked(self.data.get()) },
+        }
+    }
+
+    #[inline]
+    pub fn borrow(&self) -> FreezeReadGuard<'_, T> {
+        self.read()
+    }
+
+    #[inline]
+    #[track_caller]
+    pub fn write(&self) -> FreezeWriteGuard<'_, T> {
+        self.try_write().expect("data should not be frozen if we're still attempting to mutate it")
+    }
+
+    #[inline]
+    pub fn try_write(&self) -> Option<FreezeWriteGuard<'_, T>> {
+        let _lock_guard = self.lock.write();
+        // Use relaxed ordering since we're in the write lock.
+        if self.frozen.load(Ordering::Relaxed) {
+            None
+        } else {
+            Some(FreezeWriteGuard {
+                _lock_guard,
+                data: unsafe { NonNull::new_unchecked(self.data.get()) },
+                frozen: &self.frozen,
+                marker: PhantomData,
+            })
+        }
+    }
+
+    #[inline]
+    pub fn freeze(&self) -> &T {
+        if !self.frozen.load(Ordering::Acquire) {
+            // Get the lock to ensure no concurrent writes and that we release the latest write.
+            let _lock = self.lock.write();
+            self.frozen.store(true, Ordering::Release);
+        }
+
+        // SAFETY: This is frozen so the data cannot be modified and shared access is sound.
+        unsafe { &*self.data.get() }
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=FreezeReadGuard | COMPLEXITY=4 | LINES=7 */
+
+/// A guard holding shared access to a `FreezeLock` which is in a locked state or frozen.
+#[must_use = "if unused the FreezeLock may immediately unlock"]
+pub struct FreezeReadGuard<'a, T: ?Sized> {
+    _lock_guard: Option<ReadGuard<'a, ()>>,
+    data: NonNull<T>,
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=10 | LINES=11 */
+
+impl<'a, T: ?Sized + 'a> Deref for FreezeReadGuard<'a, T> {
+    type Target = T;
+    #[inline]
+    fn deref(&self) -> &T {
+        // SAFETY: If the lock is not frozen, `_lock_guard` holds the lock to the `UnsafeCell` so
+        // this has shared access until the `FreezeReadGuard` is dropped. If the lock is frozen,
+        // the data cannot be modified and shared access is sound.
+        unsafe { &*self.data.as_ptr() }
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=map | COMPLEXITY=4 | LINES=7 */
+
+impl<'a, T: ?Sized> FreezeReadGuard<'a, T> {
+    #[inline]
+    pub fn map<U: ?Sized>(this: Self, f: impl FnOnce(&T) -> &U) -> FreezeReadGuard<'a, U> {
+        FreezeReadGuard { data: NonNull::from(f(&*this)), _lock_guard: this._lock_guard }
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=FreezeWriteGuard | COMPLEXITY=4 | LINES=9 */
+
+/// A guard holding mutable access to a `FreezeLock` which is in a locked state or frozen.
+#[must_use = "if unused the FreezeLock may immediately unlock"]
+pub struct FreezeWriteGuard<'a, T: ?Sized> {
+    _lock_guard: WriteGuard<'a, ()>,
+    frozen: &'a AtomicBool,
+    data: NonNull<T>,
+    marker: PhantomData<&'a mut T>,
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=freeze | COMPLEXITY=8 | LINES=9 */
+
+impl<'a, T> FreezeWriteGuard<'a, T> {
+    pub fn freeze(self) -> &'a T {
+        self.frozen.store(true, Ordering::Release);
+
+        // SAFETY: This is frozen so the data cannot be modified and shared access is sound.
+        unsafe { &*self.data.as_ptr() }
+    }
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=map | COMPLEXITY=4 | LINES=15 */
+
+impl<'a, T: ?Sized> FreezeWriteGuard<'a, T> {
+    #[inline]
+    pub fn map<U: ?Sized>(
+        mut this: Self,
+        f: impl FnOnce(&mut T) -> &mut U,
+    ) -> FreezeWriteGuard<'a, U> {
+        FreezeWriteGuard {
+            data: NonNull::from(f(&mut *this)),
+            _lock_guard: this._lock_guard,
+            frozen: this.frozen,
+            marker: PhantomData,
+        }
+    }
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=10 | LINES=9 */
+
+impl<'a, T: ?Sized + 'a> Deref for FreezeWriteGuard<'a, T> {
+    type Target = T;
+    #[inline]
+    fn deref(&self) -> &T {
+        // SAFETY: `self._lock_guard` holds the lock to the `UnsafeCell` so this has shared access.
+        unsafe { &*self.data.as_ptr() }
+    }
+}
+/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=10 | LINES=8 */
+
+impl<'a, T: ?Sized + 'a> DerefMut for FreezeWriteGuard<'a, T> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut T {
+        // SAFETY: `self._lock_guard` holds the lock to the `UnsafeCell` so this has mutable access.
+        unsafe { &mut *self.data.as_ptr() }
+    }
+}

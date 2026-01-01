@@ -1,2 +1,5 @@
-/* FP:method_autoderef.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_method_autoderef_USE_0001
-/* FP:method_autoderef.rs-0002 */ pub use crate :: rustc_complete :: traits :: query :: { CandidateStep , MethodAutoderefBadTy , MethodAutoderefStepsResult , } ;
+// SRC: ../rust/compiler/rustc_trait_selection/src/traits/query/method_autoderef.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+pub use crate::rustc_complete::traits::query::{
+    CandidateStep, MethodAutoderefBadTy, MethodAutoderefStepsResult,
+};

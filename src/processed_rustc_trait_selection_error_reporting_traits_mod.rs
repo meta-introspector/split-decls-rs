@@ -1,74 +1,655 @@
-/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_MOD_0001
-/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_MOD_0002
-/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_MOD_0003
-/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_MOD_0004
-/* FP:mod.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_MOD_0005
-/* FP:mod.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_MOD_0006
-/* FP:mod.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_MOD_0007
-/* FP:mod.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_MOD_0008
-/* FP:mod.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_USE_0009
-/* FP:mod.rs-0018 */ use std :: { fmt , iter } ;
-/* FP:mod.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_USE_0010
-/* FP:mod.rs-0020 */ use crate :: rustc_data_structures :: fx :: { FxIndexMap , FxIndexSet } ;
-/* FP:mod.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_USE_0011
-/* FP:mod.rs-0022 */ use crate :: rustc_complete :: { Applicability , Diag , E0038 , E0276 , MultiSpan , struct_span_code_err } ;
-/* FP:mod.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_USE_0012
-/* FP:mod.rs-0024 */ use crate :: rustc_complete :: def_id :: { DefId , LocalDefId } ;
-/* FP:mod.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_USE_0013
-/* FP:mod.rs-0026 */ use crate :: rustc_complete :: intravisit :: Visitor ;
-/* FP:mod.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_USE_0014
-/* FP:mod.rs-0028 */ use crate :: rustc_complete :: { self as hir , AmbigArg } ;
-/* FP:mod.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_USE_0015
-/* FP:mod.rs-0030 */ use crate :: rustc_infer :: traits :: solve :: Goal ;
-/* FP:mod.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_USE_0016
-/* FP:mod.rs-0032 */ use crate :: rustc_infer :: traits :: { DynCompatibilityViolation , Obligation , ObligationCause , ObligationCauseCode , PredicateObligation , SelectionError , } ;
-/* FP:mod.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_USE_0017
-/* FP:mod.rs-0034 */ use crate :: rustc_complete :: ty :: print :: { PrintTraitRefExt as _ , with_no_trimmed_paths } ;
-/* FP:mod.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_USE_0018
-/* FP:mod.rs-0036 */ use crate :: rustc_complete :: ty :: { self , Ty , TyCtxt } ;
-/* FP:mod.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_USE_0019
-/* FP:mod.rs-0038 */ use crate :: rustc_complete :: { ErrorGuaranteed , ExpnKind , Span } ;
-/* FP:mod.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_USE_0020
-/* FP:mod.rs-0040 */ use tracing :: { info , instrument } ;
-/* FP:mod.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_USE_0021
-/* FP:mod.rs-0042 */ pub use self :: overflow :: * ;
-/* FP:mod.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_USE_0022
-/* FP:mod.rs-0044 */ use crate :: error_reporting :: TypeErrCtxt ;
-/* FP:mod.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_USE_0023
-/* FP:mod.rs-0046 */ use crate :: traits :: { FulfillmentError , FulfillmentErrorCode } ;
-/* FP:mod.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_ENUM_0024
-/* FP:mod.rs-0048 */ # [derive (Debug , Copy , Clone , PartialEq , Eq , PartialOrd , Ord)] pub enum CandidateSimilarity { Exact { ignoring_lifetimes : bool } , Fuzzy { ignoring_lifetimes : bool } , }
-/* FP:mod.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_STRUCT_0025
-/* FP:mod.rs-0050 */ # [derive (Debug , Clone , Copy , PartialEq , Eq)] pub struct ImplCandidate < 'tcx > { pub trait_ref : ty :: TraitRef < 'tcx > , pub similarity : CandidateSimilarity , impl_def_id : DefId , }
-/* FP:mod.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_ENUM_0026
-/* FP:mod.rs-0052 */ enum GetSafeTransmuteErrorAndReason { Silent , Default , Error { err_msg : String , safe_transmute_explanation : Option < String > } , }
-/* FP:mod.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_STRUCT_0027
-/* FP:mod.rs-0054 */ # [doc = " Crude way of getting back an `Expr` from a `Span`."] pub struct FindExprBySpan < 'hir > { pub span : Span , pub result : Option < & 'hir hir :: Expr < 'hir > > , pub ty_result : Option < & 'hir hir :: Ty < 'hir > > , pub include_closures : bool , pub tcx : TyCtxt < 'hir > , }
-/* FP:mod.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_IMPL_0028
-/* FP:mod.rs-0056 */ impl < 'hir > FindExprBySpan < 'hir > { pub fn new (span : Span , tcx : TyCtxt < 'hir >) -> Self { Self { span , result : None , ty_result : None , tcx , include_closures : false } } }
-/* FP:mod.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_IMPL_0029
-/* FP:mod.rs-0058 */ impl < 'v > Visitor < 'v > for FindExprBySpan < 'v > { type NestedFilter = crate :: rustc_middle :: hir :: nested_filter :: OnlyBodies ; fn maybe_tcx (& mut self) -> Self :: MaybeTyCtxt { self . tcx } fn visit_expr (& mut self , ex : & 'v hir :: Expr < 'v >) { if self . span == ex . span { self . result = Some (ex) ; } else { if let hir :: ExprKind :: Closure (..) = ex . kind && self . include_closures && let closure_header_sp = self . span . with_hi (ex . span . hi ()) && closure_header_sp == ex . span { self . result = Some (ex) ; } hir :: intravisit :: walk_expr (self , ex) ; } } fn visit_ty (& mut self , ty : & 'v hir :: Ty < 'v , AmbigArg >) { if self . span == ty . span { self . ty_result = Some (ty . as_unambig_ty ()) ; } else { hir :: intravisit :: walk_ty (self , ty) ; } } }
-/* FP:mod.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_ENUM_0030
-/* FP:mod.rs-0060 */ # [doc = " Summarizes information"] # [derive (Clone)] pub enum ArgKind { # [doc = " An argument of non-tuple type. Parameters are (name, ty)"] Arg (String , String) , # [doc = " An argument of tuple type. For a \"found\" argument, the span is"] # [doc = " the location in the source of the pattern. For an \"expected\""] # [doc = " argument, it will be None. The vector is a list of (name, ty)"] # [doc = " strings for the components of the tuple."] Tuple (Option < Span > , Vec < (String , String) >) , }
-/* FP:mod.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_IMPL_0031
-/* FP:mod.rs-0062 */ impl ArgKind { fn empty () -> ArgKind { ArgKind :: Arg ("_" . to_owned () , "_" . to_owned ()) } # [doc = " Creates an `ArgKind` from the expected type of an"] # [doc = " argument. It has no name (`_`) and an optional source span."] pub fn from_expected_ty (t : Ty < '_ > , span : Option < Span >) -> ArgKind { match t . kind () { ty :: Tuple (tys) => ArgKind :: Tuple (span , tys . iter () . map (| ty | ("_" . to_owned () , ty . to_string ())) . collect :: < Vec < _ > > () ,) , _ => ArgKind :: Arg ("_" . to_owned () , t . to_string ()) , } } }
-/* FP:mod.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_ENUM_0032
-/* FP:mod.rs-0064 */ # [derive (Copy , Clone)] pub enum DefIdOrName { DefId (DefId) , Name (& 'static str) , }
-/* FP:mod.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_IMPL_0033
-/* FP:mod.rs-0066 */ impl < 'a , 'tcx > TypeErrCtxt < 'a , 'tcx > { pub fn report_fulfillment_errors (& self , mut errors : Vec < FulfillmentError < 'tcx > > ,) -> ErrorGuaranteed { # [derive (Debug)] struct ErrorDescriptor < 'tcx > { goal : Goal < 'tcx , ty :: Predicate < 'tcx > > , index : Option < usize > , } let mut error_map : FxIndexMap < _ , Vec < _ > > = self . reported_trait_errors . borrow () . iter () . map (| (& span , goals) | { (span , goals . 0 . iter () . map (| & goal | ErrorDescriptor { goal , index : None }) . collect ()) }) . collect () ; errors . sort_by_key (| e | { let maybe_sizedness_did = match e . obligation . predicate . kind () . skip_binder () { ty :: PredicateKind :: Clause (ty :: ClauseKind :: Trait (pred)) => Some (pred . def_id ()) , ty :: PredicateKind :: Clause (ty :: ClauseKind :: HostEffect (pred)) => Some (pred . def_id ()) , _ => None , } ; match e . obligation . predicate . kind () . skip_binder () { _ if maybe_sizedness_did == self . tcx . lang_items () . sized_trait () => 1 , _ if maybe_sizedness_did == self . tcx . lang_items () . meta_sized_trait () => 2 , _ if maybe_sizedness_did == self . tcx . lang_items () . pointee_sized_trait () => 3 , ty :: PredicateKind :: Coerce (_) => 4 , ty :: PredicateKind :: Clause (ty :: ClauseKind :: WellFormed (_)) => 5 , _ => 0 , } }) ; for (index , error) in errors . iter () . enumerate () { let mut span = error . obligation . cause . span ; let expn_data = span . ctxt () . outer_expn_data () ; if let ExpnKind :: Desugaring (_) = expn_data . kind { span = expn_data . call_site ; } error_map . entry (span) . or_default () . push (ErrorDescriptor { goal : error . obligation . as_goal () , index : Some (index) }) ; } let mut is_suppressed = vec ! [false ; errors . len ()] ; for (_ , error_set) in error_map . iter () { for error in error_set { if let Some (index) = error . index { for error2 in error_set { if error2 . index . is_some_and (| index2 | is_suppressed [index2]) { continue ; } if self . error_implies (error2 . goal , error . goal) && ! (error2 . index >= error . index && self . error_implies (error . goal , error2 . goal)) { info ! ("skipping {:?} (implied by {:?})" , error , error2) ; is_suppressed [index] = true ; break ; } } } } } let mut reported = None ; for from_expansion in [false , true] { for (error , suppressed) in iter :: zip (& errors , & is_suppressed) { if ! suppressed && error . obligation . cause . span . from_expansion () == from_expansion { let guar = self . report_fulfillment_error (error) ; self . infcx . set_tainted_by_errors (guar) ; reported = Some (guar) ; let mut span = error . obligation . cause . span ; let expn_data = span . ctxt () . outer_expn_data () ; if let ExpnKind :: Desugaring (_) = expn_data . kind { span = expn_data . call_site ; } self . reported_trait_errors . borrow_mut () . entry (span) . or_insert_with (| | (vec ! [] , guar)) . 0 . push (error . obligation . as_goal ()) ; } } } reported . unwrap_or_else (| | self . dcx () . delayed_bug ("failed to report fulfillment errors")) } # [instrument (skip (self) , level = "debug")] fn report_fulfillment_error (& self , error : & FulfillmentError < 'tcx >) -> ErrorGuaranteed { let mut error = FulfillmentError { obligation : error . obligation . clone () , code : error . code . clone () , root_obligation : error . root_obligation . clone () , } ; if matches ! (error . code , FulfillmentErrorCode :: Select (crate :: traits :: SelectionError :: Unimplemented) | FulfillmentErrorCode :: Project (_)) && self . apply_do_not_recommend (& mut error . obligation) { error . code = FulfillmentErrorCode :: Select (SelectionError :: Unimplemented) ; } match error . code { FulfillmentErrorCode :: Select (ref selection_error) => self . report_selection_error (error . obligation . clone () , & error . root_obligation , selection_error ,) , FulfillmentErrorCode :: Project (ref e) => { self . report_projection_error (& error . obligation , e) } FulfillmentErrorCode :: Ambiguity { overflow : None } => { self . maybe_report_ambiguity (& error . obligation) } FulfillmentErrorCode :: Ambiguity { overflow : Some (suggest_increasing_limit) } => { self . report_overflow_no_abort (error . obligation . clone () , suggest_increasing_limit) } FulfillmentErrorCode :: Subtype (ref expected_found , ref err) => self . report_mismatched_types (& error . obligation . cause , error . obligation . param_env , expected_found . expected , expected_found . found , * err ,) . emit () , FulfillmentErrorCode :: ConstEquate (ref expected_found , ref err) => { let mut diag = self . report_mismatched_consts (& error . obligation . cause , error . obligation . param_env , expected_found . expected , expected_found . found , * err ,) ; let code = error . obligation . cause . code () . peel_derives () . peel_match_impls () ; if let ObligationCauseCode :: WhereClause (..) | ObligationCauseCode :: WhereClauseInExpr (..) = code { self . note_obligation_cause_code (error . obligation . cause . body_id , & mut diag , error . obligation . predicate , error . obligation . param_env , code , & mut vec ! [] , & mut Default :: default () ,) ; } diag . emit () } FulfillmentErrorCode :: Cycle (ref cycle) => self . report_overflow_obligation_cycle (cycle) , } } }
-/* FP:mod.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_FN_0034
-/* FP:mod.rs-0068 */ # [doc = " Recovers the \"impl X for Y\" signature from `impl_def_id` and returns it as a"] # [doc = " string."] pub (crate) fn to_pretty_impl_header (tcx : TyCtxt < '_ > , impl_def_id : DefId) -> Option < String > { use std :: fmt :: Write ; let trait_ref = tcx . impl_trait_ref (impl_def_id) ? . instantiate_identity () ; let mut w = "impl" . to_owned () ; # [derive (Debug , Default)] struct SizednessFound { sized : bool , meta_sized : bool , } let mut types_with_sizedness_bounds = FxIndexMap :: < _ , SizednessFound > :: default () ; let args = ty :: GenericArgs :: identity_for_item (tcx , impl_def_id) ; let arg_names = args . iter () . map (| k | k . to_string ()) . filter (| k | k != "'_") . collect :: < Vec < _ > > () ; if ! arg_names . is_empty () { w . push ('<') ; w . push_str (& arg_names . join (", ")) ; w . push ('>') ; for ty in args . types () { types_with_sizedness_bounds . insert (ty , SizednessFound :: default ()) ; } } write ! (w , " {}{} for {}" , tcx . impl_polarity (impl_def_id) . as_str () , trait_ref . print_only_trait_path () , tcx . type_of (impl_def_id) . instantiate_identity ()) . unwrap () ; let predicates = tcx . predicates_of (impl_def_id) . predicates ; let mut pretty_predicates = Vec :: with_capacity (predicates . len ()) ; let sized_trait = tcx . lang_items () . sized_trait () ; let meta_sized_trait = tcx . lang_items () . meta_sized_trait () ; for (p , _) in predicates { if let Some (trait_clause) = p . as_trait_clause () { let self_ty = trait_clause . self_ty () . skip_binder () ; let sizedness_of = types_with_sizedness_bounds . entry (self_ty) . or_default () ; if Some (trait_clause . def_id ()) == sized_trait { sizedness_of . sized = true ; continue ; } else if Some (trait_clause . def_id ()) == meta_sized_trait { sizedness_of . meta_sized = true ; continue ; } } pretty_predicates . push (p . to_string ()) ; } for (ty , sizedness) in types_with_sizedness_bounds { if ! tcx . features () . sized_hierarchy () { if sizedness . sized { } else { pretty_predicates . push (format ! ("{ty}: ?Sized")) ; } } else { if sizedness . sized { pretty_predicates . push (format ! ("{ty}: Sized")) ; } else if sizedness . meta_sized { pretty_predicates . push (format ! ("{ty}: MetaSized")) ; } else { pretty_predicates . push (format ! ("{ty}: PointeeSized")) ; } } } if ! pretty_predicates . is_empty () { write ! (w , "\n  where {}" , pretty_predicates . join (", ")) . unwrap () ; } w . push (';') ; Some (w) }
-/* FP:mod.rs-0069 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_IMPL_0035
-/* FP:mod.rs-0070 */ impl < 'a , 'tcx > TypeErrCtxt < 'a , 'tcx > { pub fn report_extra_impl_obligation (& self , error_span : Span , impl_item_def_id : LocalDefId , trait_item_def_id : DefId , requirement : & dyn fmt :: Display ,) -> Diag < 'a > { let mut err = struct_span_code_err ! (self . dcx () , error_span , E0276 , "impl has stricter requirements than trait") ; if ! self . tcx . is_impl_trait_in_trait (trait_item_def_id) { if let Some (span) = self . tcx . hir_span_if_local (trait_item_def_id) { let item_name = self . tcx . item_name (impl_item_def_id . to_def_id ()) ; err . span_label (span , format ! ("definition of `{item_name}` from trait")) ; } } err . span_label (error_span , format ! ("impl has extra requirement {requirement}")) ; err } }
-/* FP:mod.rs-0071 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_FN_0036
-/* FP:mod.rs-0072 */ pub fn report_dyn_incompatibility < 'tcx > (tcx : TyCtxt < 'tcx > , span : Span , hir_id : Option < hir :: HirId > , trait_def_id : DefId , violations : & [DynCompatibilityViolation] ,) -> Diag < 'tcx > { let trait_str = tcx . def_path_str (trait_def_id) ; let trait_span = tcx . hir_get_if_local (trait_def_id) . and_then (| node | match node { hir :: Node :: Item (item) => match item . kind { hir :: ItemKind :: Trait (_ , _ , _ , ident , ..) | hir :: ItemKind :: TraitAlias (ident , _ , _) => { Some (ident . span) } _ => unreachable ! () , } , _ => None , }) ; let mut err = struct_span_code_err ! (tcx . dcx () , span , E0038 , "the {} `{}` is not dyn compatible" , tcx . def_descr (trait_def_id) , trait_str) ; err . span_label (span , format ! ("`{trait_str}` is not dyn compatible")) ; attempt_dyn_to_impl_suggestion (tcx , hir_id , & mut err) ; let mut reported_violations = FxIndexSet :: default () ; let mut multi_span = vec ! [] ; let mut messages = vec ! [] ; for violation in violations { if let DynCompatibilityViolation :: SizedSelf (sp) = & violation && ! sp . is_empty () { reported_violations . insert (DynCompatibilityViolation :: SizedSelf (vec ! [] . into ())) ; } if reported_violations . insert (violation . clone ()) { let spans = violation . spans () ; let msg = if trait_span . is_none () || spans . is_empty () { format ! ("the trait is not dyn compatible because {}" , violation . error_msg ()) } else { format ! ("...because {}" , violation . error_msg ()) } ; if spans . is_empty () { err . note (msg) ; } else { for span in spans { multi_span . push (span) ; messages . push (msg . clone ()) ; } } } } let has_multi_span = ! multi_span . is_empty () ; let mut note_span = MultiSpan :: from_spans (multi_span . clone ()) ; if let (Some (trait_span) , true) = (trait_span , has_multi_span) { note_span . push_span_label (trait_span , "this trait is not dyn compatible...") ; } for (span , msg) in iter :: zip (multi_span , messages) { note_span . push_span_label (span , msg) ; } err . span_note (note_span , "for a trait to be dyn compatible it needs to allow building a vtable\n\
-/* FP:mod.rs-0073 */         for more information, visit <https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility>" ,) ; if trait_span . is_some () { let mut potential_solutions : Vec < _ > = reported_violations . into_iter () . map (| violation | violation . solution ()) . collect () ; potential_solutions . sort () ; potential_solutions . dedup () ; for solution in potential_solutions { solution . add_to (& mut err) ; } } attempt_dyn_to_enum_suggestion (tcx , trait_def_id , & * trait_str , & mut err) ; err }
-/* FP:mod.rs-0074 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_FN_0037
-/* FP:mod.rs-0075 */ # [doc = " Attempt to suggest converting the `dyn Trait` argument to an enumeration"] # [doc = " over the types that implement `Trait`."] fn attempt_dyn_to_enum_suggestion (tcx : TyCtxt < '_ > , trait_def_id : DefId , trait_str : & str , err : & mut Diag < '_ > ,) { let impls_of = tcx . trait_impls_of (trait_def_id) ; if ! impls_of . blanket_impls () . is_empty () { return ; } let concrete_impls : Option < Vec < Ty < '_ > > > = impls_of . non_blanket_impls () . values () . flatten () . map (| impl_id | { let Some (impl_type) = tcx . type_of (* impl_id) . no_bound_vars () else { return None } ; match impl_type . kind () { ty :: Str | ty :: Slice (_) | ty :: Dynamic (_ , _ , ty :: DynKind :: Dyn) => { return None ; } _ => { } } Some (impl_type) }) . collect () ; let Some (concrete_impls) = concrete_impls else { return } ; const MAX_IMPLS_TO_SUGGEST_CONVERTING_TO_ENUM : usize = 9 ; if concrete_impls . is_empty () || concrete_impls . len () > MAX_IMPLS_TO_SUGGEST_CONVERTING_TO_ENUM { return ; } let externally_visible = if let Some (def_id) = trait_def_id . as_local () { tcx . resolutions (()) . effective_visibilities . is_exported (def_id) } else { false } ; if let [only_impl] = & concrete_impls [..] { let within = if externally_visible { " within this crate" } else { "" } ; err . help (with_no_trimmed_paths ! (format ! ("only type `{only_impl}` implements `{trait_str}`{within}; \
-/* FP:mod.rs-0076 */             consider using it directly instead."))) ; } else { let types = concrete_impls . iter () . map (| t | with_no_trimmed_paths ! (format ! ("  {}" , t))) . collect :: < Vec < String > > () . join ("\n") ; err . help (format ! ("the following types implement `{trait_str}`:\n\
-/* FP:mod.rs-0077 */              {types}\n\
-/* FP:mod.rs-0078 */              consider defining an enum where each variant holds one of these types,\n\
-/* FP:mod.rs-0079 */              implementing `{trait_str}` for this new enum and using it instead" ,)) ; } if externally_visible { err . note (format ! ("`{trait_str}` may be implemented in other crates; if you want to support your users \
-/* FP:mod.rs-0080 */              passing their own types here, you can't refer to a specific type" ,)) ; } }
-/* FP:mod.rs-0081 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_mod_FN_0038
-/* FP:mod.rs-0082 */ # [doc = " Attempt to suggest that a `dyn Trait` argument or return type be converted"] # [doc = " to use `impl Trait`."] fn attempt_dyn_to_impl_suggestion (tcx : TyCtxt < '_ > , hir_id : Option < hir :: HirId > , err : & mut Diag < '_ >) { let Some (hir_id) = hir_id else { return } ; let hir :: Node :: Ty (ty) = tcx . hir_node (hir_id) else { return } ; let hir :: TyKind :: TraitObject ([trait_ref , ..] , ..) = ty . kind else { return } ; let Some ((_id , first_non_type_parent_node)) = tcx . hir_parent_iter (hir_id) . find (| (_id , node) | ! matches ! (node , hir :: Node :: Ty (_))) else { return ; } ; if first_non_type_parent_node . fn_sig () . is_none () { return ; } err . span_suggestion_verbose (ty . span . until (trait_ref . span) , "consider using an opaque type instead" , "impl " , Applicability :: MaybeIncorrect ,) ; }
+// SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/traits/mod.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
+
+use std::{fmt, iter};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+use crate::rustc_data_structures::fx::{FxIndexMap, FxIndexSet};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{Applicability, Diag, E0038, E0276, MultiSpan, struct_span_code_err};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::{self as hir, AmbigArg};
+/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use crate::rustc_infer::traits::solve::Goal;
+use crate::rustc_infer::traits::{
+    DynCompatibilityViolation, Obligation, ObligationCause, ObligationCauseCode,
+    PredicateObligation, SelectionError,
+};
+/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::ty::print::{PrintTraitRefExt as _, with_no_trimmed_paths};
+/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{ErrorGuaranteed, ExpnKind, Span};
+/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use tracing::{info, instrument};
+/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+
+pub use self::overflow::*;
+use crate::error_reporting::TypeErrCtxt;
+use crate::traits::{FulfillmentError, FulfillmentErrorCode};
+/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
+
+// When outputting impl candidates, prefer showing those that are more similar.
+//
+// We also compare candidates after skipping lifetimes, which has a lower
+// priority than exact matches.
+#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
+pub enum CandidateSimilarity {
+    Exact { ignoring_lifetimes: bool },
+    Fuzzy { ignoring_lifetimes: bool },
+}
+/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=ImplCandidate | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct ImplCandidate<'tcx> {
+    pub trait_ref: ty::TraitRef<'tcx>,
+    pub similarity: CandidateSimilarity,
+    impl_def_id: DefId,
+}
+/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
+
+enum GetSafeTransmuteErrorAndReason {
+    Silent,
+    Default,
+    Error { err_msg: String, safe_transmute_explanation: Option<String> },
+}
+/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=FindExprBySpan | COMPLEXITY=2 | LINES=9 */
+
+/// Crude way of getting back an `Expr` from a `Span`.
+pub struct FindExprBySpan<'hir> {
+    pub span: Span,
+    pub result: Option<&'hir hir::Expr<'hir>>,
+    pub ty_result: Option<&'hir hir::Ty<'hir>>,
+    pub include_closures: bool,
+    pub tcx: TyCtxt<'hir>,
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
+
+impl<'hir> FindExprBySpan<'hir> {
+    pub fn new(span: Span, tcx: TyCtxt<'hir>) -> Self {
+        Self { span, result: None, ty_result: None, tcx, include_closures: false }
+    }
+}
+/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=19 | LINES=31 */
+
+impl<'v> Visitor<'v> for FindExprBySpan<'v> {
+    type NestedFilter = crate::rustc_middle::hir::nested_filter::OnlyBodies;
+
+    fn maybe_tcx(&mut self) -> Self::MaybeTyCtxt {
+        self.tcx
+    }
+
+    fn visit_expr(&mut self, ex: &'v hir::Expr<'v>) {
+        if self.span == ex.span {
+            self.result = Some(ex);
+        } else {
+            if let hir::ExprKind::Closure(..) = ex.kind
+                && self.include_closures
+                && let closure_header_sp = self.span.with_hi(ex.span.hi())
+                && closure_header_sp == ex.span
+            {
+                self.result = Some(ex);
+            }
+            hir::intravisit::walk_expr(self, ex);
+        }
+    }
+
+    fn visit_ty(&mut self, ty: &'v hir::Ty<'v, AmbigArg>) {
+        if self.span == ty.span {
+            self.ty_result = Some(ty.as_unambig_ty());
+        } else {
+            hir::intravisit::walk_ty(self, ty);
+        }
+    }
+}
+/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=13 */
+
+/// Summarizes information
+#[derive(Clone)]
+pub enum ArgKind {
+    /// An argument of non-tuple type. Parameters are (name, ty)
+    Arg(String, String),
+
+    /// An argument of tuple type. For a "found" argument, the span is
+    /// the location in the source of the pattern. For an "expected"
+    /// argument, it will be None. The vector is a list of (name, ty)
+    /// strings for the components of the tuple.
+    Tuple(Option<Span>, Vec<(String, String)>),
+}
+/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=empty | COMPLEXITY=9 | LINES=18 */
+
+impl ArgKind {
+    fn empty() -> ArgKind {
+        ArgKind::Arg("_".to_owned(), "_".to_owned())
+    }
+
+    /// Creates an `ArgKind` from the expected type of an
+    /// argument. It has no name (`_`) and an optional source span.
+    pub fn from_expected_ty(t: Ty<'_>, span: Option<Span>) -> ArgKind {
+        match t.kind() {
+            ty::Tuple(tys) => ArgKind::Tuple(
+                span,
+                tys.iter().map(|ty| ("_".to_owned(), ty.to_string())).collect::<Vec<_>>(),
+            ),
+            _ => ArgKind::Arg("_".to_owned(), t.to_string()),
+        }
+    }
+}
+/* AST_META: AST_ID=20 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Copy, Clone)]
+pub enum DefIdOrName {
+    DefId(DefId),
+    Name(&'static str),
+}
+/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=report_fulfillment_errors | COMPLEXITY=100 | LINES=186 */
+
+impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
+    pub fn report_fulfillment_errors(
+        &self,
+        mut errors: Vec<FulfillmentError<'tcx>>,
+    ) -> ErrorGuaranteed {
+        #[derive(Debug)]
+        struct ErrorDescriptor<'tcx> {
+            goal: Goal<'tcx, ty::Predicate<'tcx>>,
+            index: Option<usize>, // None if this is an old error
+        }
+
+        let mut error_map: FxIndexMap<_, Vec<_>> = self
+            .reported_trait_errors
+            .borrow()
+            .iter()
+            .map(|(&span, goals)| {
+                (span, goals.0.iter().map(|&goal| ErrorDescriptor { goal, index: None }).collect())
+            })
+            .collect();
+
+        // Ensure `T: Sized`, `T: MetaSized`, `T: PointeeSized` and `T: WF` obligations come last.
+        // This lets us display diagnostics with more relevant type information and hide redundant
+        // E0282 errors.
+        errors.sort_by_key(|e| {
+            let maybe_sizedness_did = match e.obligation.predicate.kind().skip_binder() {
+                ty::PredicateKind::Clause(ty::ClauseKind::Trait(pred)) => Some(pred.def_id()),
+                ty::PredicateKind::Clause(ty::ClauseKind::HostEffect(pred)) => Some(pred.def_id()),
+                _ => None,
+            };
+
+            match e.obligation.predicate.kind().skip_binder() {
+                _ if maybe_sizedness_did == self.tcx.lang_items().sized_trait() => 1,
+                _ if maybe_sizedness_did == self.tcx.lang_items().meta_sized_trait() => 2,
+                _ if maybe_sizedness_did == self.tcx.lang_items().pointee_sized_trait() => 3,
+                ty::PredicateKind::Coerce(_) => 4,
+                ty::PredicateKind::Clause(ty::ClauseKind::WellFormed(_)) => 5,
+                _ => 0,
+            }
+        });
+
+        for (index, error) in errors.iter().enumerate() {
+            // We want to ignore desugarings here: spans are equivalent even
+            // if one is the result of a desugaring and the other is not.
+            let mut span = error.obligation.cause.span;
+            let expn_data = span.ctxt().outer_expn_data();
+            if let ExpnKind::Desugaring(_) = expn_data.kind {
+                span = expn_data.call_site;
+            }
+
+            error_map
+                .entry(span)
+                .or_default()
+                .push(ErrorDescriptor { goal: error.obligation.as_goal(), index: Some(index) });
+        }
+
+        // We do this in 2 passes because we want to display errors in order, though
+        // maybe it *is* better to sort errors by span or something.
+        let mut is_suppressed = vec![false; errors.len()];
+        for (_, error_set) in error_map.iter() {
+            // We want to suppress "duplicate" errors with the same span.
+            for error in error_set {
+                if let Some(index) = error.index {
+                    // Suppress errors that are either:
+                    // 1) strictly implied by another error.
+                    // 2) implied by an error with a smaller index.
+                    for error2 in error_set {
+                        if error2.index.is_some_and(|index2| is_suppressed[index2]) {
+                            // Avoid errors being suppressed by already-suppressed
+                            // errors, to prevent all errors from being suppressed
+                            // at once.
+                            continue;
+                        }
+
+                        if self.error_implies(error2.goal, error.goal)
+                            && !(error2.index >= error.index
+                                && self.error_implies(error.goal, error2.goal))
+                        {
+                            info!("skipping {:?} (implied by {:?})", error, error2);
+                            is_suppressed[index] = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        let mut reported = None;
+
+        for from_expansion in [false, true] {
+            for (error, suppressed) in iter::zip(&errors, &is_suppressed) {
+                if !suppressed && error.obligation.cause.span.from_expansion() == from_expansion {
+                    let guar = self.report_fulfillment_error(error);
+                    self.infcx.set_tainted_by_errors(guar);
+                    reported = Some(guar);
+                    // We want to ignore desugarings here: spans are equivalent even
+                    // if one is the result of a desugaring and the other is not.
+                    let mut span = error.obligation.cause.span;
+                    let expn_data = span.ctxt().outer_expn_data();
+                    if let ExpnKind::Desugaring(_) = expn_data.kind {
+                        span = expn_data.call_site;
+                    }
+                    self.reported_trait_errors
+                        .borrow_mut()
+                        .entry(span)
+                        .or_insert_with(|| (vec![], guar))
+                        .0
+                        .push(error.obligation.as_goal());
+                }
+            }
+        }
+
+        // It could be that we don't report an error because we have seen an `ErrorReported` from
+        // another source. We should probably be able to fix most of these, but some are delayed
+        // bugs that get a proper error after this function.
+        reported.unwrap_or_else(|| self.dcx().delayed_bug("failed to report fulfillment errors"))
+    }
+
+    #[instrument(skip(self), level = "debug")]
+    fn report_fulfillment_error(&self, error: &FulfillmentError<'tcx>) -> ErrorGuaranteed {
+        let mut error = FulfillmentError {
+            obligation: error.obligation.clone(),
+            code: error.code.clone(),
+            root_obligation: error.root_obligation.clone(),
+        };
+        if matches!(
+            error.code,
+            FulfillmentErrorCode::Select(crate::traits::SelectionError::Unimplemented)
+                | FulfillmentErrorCode::Project(_)
+        ) && self.apply_do_not_recommend(&mut error.obligation)
+        {
+            error.code = FulfillmentErrorCode::Select(SelectionError::Unimplemented);
+        }
+
+        match error.code {
+            FulfillmentErrorCode::Select(ref selection_error) => self.report_selection_error(
+                error.obligation.clone(),
+                &error.root_obligation,
+                selection_error,
+            ),
+            FulfillmentErrorCode::Project(ref e) => {
+                self.report_projection_error(&error.obligation, e)
+            }
+            FulfillmentErrorCode::Ambiguity { overflow: None } => {
+                self.maybe_report_ambiguity(&error.obligation)
+            }
+            FulfillmentErrorCode::Ambiguity { overflow: Some(suggest_increasing_limit) } => {
+                self.report_overflow_no_abort(error.obligation.clone(), suggest_increasing_limit)
+            }
+            FulfillmentErrorCode::Subtype(ref expected_found, ref err) => self
+                .report_mismatched_types(
+                    &error.obligation.cause,
+                    error.obligation.param_env,
+                    expected_found.expected,
+                    expected_found.found,
+                    *err,
+                )
+                .emit(),
+            FulfillmentErrorCode::ConstEquate(ref expected_found, ref err) => {
+                let mut diag = self.report_mismatched_consts(
+                    &error.obligation.cause,
+                    error.obligation.param_env,
+                    expected_found.expected,
+                    expected_found.found,
+                    *err,
+                );
+                let code = error.obligation.cause.code().peel_derives().peel_match_impls();
+                if let ObligationCauseCode::WhereClause(..)
+                | ObligationCauseCode::WhereClauseInExpr(..) = code
+                {
+                    self.note_obligation_cause_code(
+                        error.obligation.cause.body_id,
+                        &mut diag,
+                        error.obligation.predicate,
+                        error.obligation.param_env,
+                        code,
+                        &mut vec![],
+                        &mut Default::default(),
+                    );
+                }
+                diag.emit()
+            }
+            FulfillmentErrorCode::Cycle(ref cycle) => self.report_overflow_obligation_cycle(cycle),
+        }
+    }
+}
+/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=SizednessFound | COMPLEXITY=61 | LINES=89 */
+
+/// Recovers the "impl X for Y" signature from `impl_def_id` and returns it as a
+/// string.
+pub(crate) fn to_pretty_impl_header(tcx: TyCtxt<'_>, impl_def_id: DefId) -> Option<String> {
+    use std::fmt::Write;
+
+    let trait_ref = tcx.impl_trait_ref(impl_def_id)?.instantiate_identity();
+    let mut w = "impl".to_owned();
+
+    #[derive(Debug, Default)]
+    struct SizednessFound {
+        sized: bool,
+        meta_sized: bool,
+    }
+
+    let mut types_with_sizedness_bounds = FxIndexMap::<_, SizednessFound>::default();
+
+    let args = ty::GenericArgs::identity_for_item(tcx, impl_def_id);
+
+    let arg_names = args.iter().map(|k| k.to_string()).filter(|k| k != "'_").collect::<Vec<_>>();
+    if !arg_names.is_empty() {
+        w.push('<');
+        w.push_str(&arg_names.join(", "));
+        w.push('>');
+
+        for ty in args.types() {
+            // `PointeeSized` params might have no predicates.
+            types_with_sizedness_bounds.insert(ty, SizednessFound::default());
+        }
+    }
+
+    write!(
+        w,
+        " {}{} for {}",
+        tcx.impl_polarity(impl_def_id).as_str(),
+        trait_ref.print_only_trait_path(),
+        tcx.type_of(impl_def_id).instantiate_identity()
+    )
+    .unwrap();
+
+    let predicates = tcx.predicates_of(impl_def_id).predicates;
+    let mut pretty_predicates = Vec::with_capacity(predicates.len());
+
+    let sized_trait = tcx.lang_items().sized_trait();
+    let meta_sized_trait = tcx.lang_items().meta_sized_trait();
+
+    for (p, _) in predicates {
+        // Accumulate the sizedness bounds for each self ty.
+        if let Some(trait_clause) = p.as_trait_clause() {
+            let self_ty = trait_clause.self_ty().skip_binder();
+            let sizedness_of = types_with_sizedness_bounds.entry(self_ty).or_default();
+            if Some(trait_clause.def_id()) == sized_trait {
+                sizedness_of.sized = true;
+                continue;
+            } else if Some(trait_clause.def_id()) == meta_sized_trait {
+                sizedness_of.meta_sized = true;
+                continue;
+            }
+        }
+
+        pretty_predicates.push(p.to_string());
+    }
+
+    for (ty, sizedness) in types_with_sizedness_bounds {
+        if !tcx.features().sized_hierarchy() {
+            if sizedness.sized {
+                // Maybe a default bound, don't write anything.
+            } else {
+                pretty_predicates.push(format!("{ty}: ?Sized"));
+            }
+        } else {
+            if sizedness.sized {
+                // Maybe a default bound, don't write anything.
+                pretty_predicates.push(format!("{ty}: Sized"));
+            } else if sizedness.meta_sized {
+                pretty_predicates.push(format!("{ty}: MetaSized"));
+            } else {
+                pretty_predicates.push(format!("{ty}: PointeeSized"));
+            }
+        }
+    }
+
+    if !pretty_predicates.is_empty() {
+        write!(w, "\n  where {}", pretty_predicates.join(", ")).unwrap();
+    }
+
+    w.push(';');
+    Some(w)
+}
+/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=report_extra_impl_obligation | COMPLEXITY=12 | LINES=28 */
+
+impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
+    pub fn report_extra_impl_obligation(
+        &self,
+        error_span: Span,
+        impl_item_def_id: LocalDefId,
+        trait_item_def_id: DefId,
+        requirement: &dyn fmt::Display,
+    ) -> Diag<'a> {
+        let mut err = struct_span_code_err!(
+            self.dcx(),
+            error_span,
+            E0276,
+            "impl has stricter requirements than trait"
+        );
+
+        if !self.tcx.is_impl_trait_in_trait(trait_item_def_id) {
+            if let Some(span) = self.tcx.hir_span_if_local(trait_item_def_id) {
+                let item_name = self.tcx.item_name(impl_item_def_id.to_def_id());
+                err.span_label(span, format!("definition of `{item_name}` from trait"));
+            }
+        }
+
+        err.span_label(error_span, format!("impl has extra requirement {requirement}"));
+
+        err
+    }
+}
+/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=report_dyn_incompatibility | COMPLEXITY=60 | LINES=89 */
+
+pub fn report_dyn_incompatibility<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    span: Span,
+    hir_id: Option<hir::HirId>,
+    trait_def_id: DefId,
+    violations: &[DynCompatibilityViolation],
+) -> Diag<'tcx> {
+    let trait_str = tcx.def_path_str(trait_def_id);
+    let trait_span = tcx.hir_get_if_local(trait_def_id).and_then(|node| match node {
+        hir::Node::Item(item) => match item.kind {
+            hir::ItemKind::Trait(_, _, _, ident, ..) | hir::ItemKind::TraitAlias(ident, _, _) => {
+                Some(ident.span)
+            }
+            _ => unreachable!(),
+        },
+        _ => None,
+    });
+
+    let mut err = struct_span_code_err!(
+        tcx.dcx(),
+        span,
+        E0038,
+        "the {} `{}` is not dyn compatible",
+        tcx.def_descr(trait_def_id),
+        trait_str
+    );
+    err.span_label(span, format!("`{trait_str}` is not dyn compatible"));
+
+    attempt_dyn_to_impl_suggestion(tcx, hir_id, &mut err);
+
+    let mut reported_violations = FxIndexSet::default();
+    let mut multi_span = vec![];
+    let mut messages = vec![];
+    for violation in violations {
+        if let DynCompatibilityViolation::SizedSelf(sp) = &violation
+            && !sp.is_empty()
+        {
+            // Do not report `SizedSelf` without spans pointing at `SizedSelf` obligations
+            // with a `Span`.
+            reported_violations.insert(DynCompatibilityViolation::SizedSelf(vec![].into()));
+        }
+        if reported_violations.insert(violation.clone()) {
+            let spans = violation.spans();
+            let msg = if trait_span.is_none() || spans.is_empty() {
+                format!("the trait is not dyn compatible because {}", violation.error_msg())
+            } else {
+                format!("...because {}", violation.error_msg())
+            };
+            if spans.is_empty() {
+                err.note(msg);
+            } else {
+                for span in spans {
+                    multi_span.push(span);
+                    messages.push(msg.clone());
+                }
+            }
+        }
+    }
+    let has_multi_span = !multi_span.is_empty();
+    let mut note_span = MultiSpan::from_spans(multi_span.clone());
+    if let (Some(trait_span), true) = (trait_span, has_multi_span) {
+        note_span.push_span_label(trait_span, "this trait is not dyn compatible...");
+    }
+    for (span, msg) in iter::zip(multi_span, messages) {
+        note_span.push_span_label(span, msg);
+    }
+    err.span_note(
+        note_span,
+        "for a trait to be dyn compatible it needs to allow building a vtable\n\
+        for more information, visit <https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility>",
+    );
+
+    // Only provide the help if its a local trait, otherwise it's not actionable.
+    if trait_span.is_some() {
+        let mut potential_solutions: Vec<_> =
+            reported_violations.into_iter().map(|violation| violation.solution()).collect();
+        potential_solutions.sort();
+        // Allows us to skip suggesting that the same item should be moved to another trait multiple times.
+        potential_solutions.dedup();
+        for solution in potential_solutions {
+            solution.add_to(&mut err);
+        }
+    }
+
+    attempt_dyn_to_enum_suggestion(tcx, trait_def_id, &*trait_str, &mut err);
+
+    err
+}
+/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=attempt_dyn_to_enum_suggestion | COMPLEXITY=54 | LINES=81 */
+
+/// Attempt to suggest converting the `dyn Trait` argument to an enumeration
+/// over the types that implement `Trait`.
+fn attempt_dyn_to_enum_suggestion(
+    tcx: TyCtxt<'_>,
+    trait_def_id: DefId,
+    trait_str: &str,
+    err: &mut Diag<'_>,
+) {
+    let impls_of = tcx.trait_impls_of(trait_def_id);
+
+    if !impls_of.blanket_impls().is_empty() {
+        return;
+    }
+
+    let concrete_impls: Option<Vec<Ty<'_>>> = impls_of
+        .non_blanket_impls()
+        .values()
+        .flatten()
+        .map(|impl_id| {
+            // Don't suggest conversion to enum if the impl types have type parameters.
+            // It's unlikely the user wants to define a generic enum.
+            let Some(impl_type) = tcx.type_of(*impl_id).no_bound_vars() else { return None };
+
+            // Obviously unsized impl types won't be usable in an enum.
+            // Note: this doesn't use `Ty::has_trivial_sizedness` because that function
+            // defaults to assuming that things are *not* sized, whereas we want to
+            // fall back to assuming that things may be sized.
+            match impl_type.kind() {
+                ty::Str | ty::Slice(_) | ty::Dynamic(_, _, ty::DynKind::Dyn) => {
+                    return None;
+                }
+                _ => {}
+            }
+            Some(impl_type)
+        })
+        .collect();
+    let Some(concrete_impls) = concrete_impls else { return };
+
+    const MAX_IMPLS_TO_SUGGEST_CONVERTING_TO_ENUM: usize = 9;
+    if concrete_impls.is_empty() || concrete_impls.len() > MAX_IMPLS_TO_SUGGEST_CONVERTING_TO_ENUM {
+        return;
+    }
+
+    let externally_visible = if let Some(def_id) = trait_def_id.as_local() {
+        // We may be executing this during typeck, which would result in cycle
+        // if we used effective_visibilities query, which looks into opaque types
+        // (and therefore calls typeck).
+        tcx.resolutions(()).effective_visibilities.is_exported(def_id)
+    } else {
+        false
+    };
+
+    if let [only_impl] = &concrete_impls[..] {
+        let within = if externally_visible { " within this crate" } else { "" };
+        err.help(with_no_trimmed_paths!(format!(
+            "only type `{only_impl}` implements `{trait_str}`{within}; \
+            consider using it directly instead."
+        )));
+    } else {
+        let types = concrete_impls
+            .iter()
+            .map(|t| with_no_trimmed_paths!(format!("  {}", t)))
+            .collect::<Vec<String>>()
+            .join("\n");
+
+        err.help(format!(
+            "the following types implement `{trait_str}`:\n\
+             {types}\n\
+             consider defining an enum where each variant holds one of these types,\n\
+             implementing `{trait_str}` for this new enum and using it instead",
+        ));
+    }
+
+    if externally_visible {
+        err.note(format!(
+            "`{trait_str}` may be implemented in other crates; if you want to support your users \
+             passing their own types here, you can't refer to a specific type",
+        ));
+    }
+}
+/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=attempt_dyn_to_impl_suggestion | COMPLEXITY=13 | LINES=28 */
+
+/// Attempt to suggest that a `dyn Trait` argument or return type be converted
+/// to use `impl Trait`.
+fn attempt_dyn_to_impl_suggestion(tcx: TyCtxt<'_>, hir_id: Option<hir::HirId>, err: &mut Diag<'_>) {
+    let Some(hir_id) = hir_id else { return };
+    let hir::Node::Ty(ty) = tcx.hir_node(hir_id) else { return };
+    let hir::TyKind::TraitObject([trait_ref, ..], ..) = ty.kind else { return };
+
+    // Only suggest converting `dyn` to `impl` if we're in a function signature.
+    // This ensures that we don't suggest converting e.g.
+    //   `type Alias = Box<dyn DynIncompatibleTrait>;` to
+    //   `type Alias = Box<impl DynIncompatibleTrait>;`
+    let Some((_id, first_non_type_parent_node)) =
+        tcx.hir_parent_iter(hir_id).find(|(_id, node)| !matches!(node, hir::Node::Ty(_)))
+    else {
+        return;
+    };
+    if first_non_type_parent_node.fn_sig().is_none() {
+        return;
+    }
+
+    err.span_suggestion_verbose(
+        ty.span.until(trait_ref.span),
+        "consider using an opaque type instead",
+        "impl ",
+        Applicability::MaybeIncorrect,
+    );
+}

@@ -1,28 +1,177 @@
-/* FP:cross_crate_inline.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cross_crate_inline_USE_0001
-/* FP:cross_crate_inline.rs-0002 */ use crate :: rustc_complete :: attrs :: InlineAttr ;
-/* FP:cross_crate_inline.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cross_crate_inline_USE_0002
-/* FP:cross_crate_inline.rs-0004 */ use crate :: rustc_complete :: def :: DefKind ;
-/* FP:cross_crate_inline.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cross_crate_inline_USE_0003
-/* FP:cross_crate_inline.rs-0006 */ use crate :: rustc_complete :: def_id :: LocalDefId ;
-/* FP:cross_crate_inline.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cross_crate_inline_USE_0004
-/* FP:cross_crate_inline.rs-0008 */ use crate :: rustc_complete :: mir :: visit :: Visitor ;
-/* FP:cross_crate_inline.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cross_crate_inline_USE_0005
-/* FP:cross_crate_inline.rs-0010 */ use crate :: rustc_complete :: mir :: * ;
-/* FP:cross_crate_inline.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cross_crate_inline_USE_0006
-/* FP:cross_crate_inline.rs-0012 */ use crate :: rustc_complete :: query :: Providers ;
-/* FP:cross_crate_inline.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cross_crate_inline_USE_0007
-/* FP:cross_crate_inline.rs-0014 */ use crate :: rustc_complete :: ty :: TyCtxt ;
-/* FP:cross_crate_inline.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cross_crate_inline_USE_0008
-/* FP:cross_crate_inline.rs-0016 */ use crate :: rustc_complete :: config :: { InliningThreshold , OptLevel } ;
-/* FP:cross_crate_inline.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cross_crate_inline_USE_0009
-/* FP:cross_crate_inline.rs-0018 */ use crate :: rustc_complete :: sym ;
-/* FP:cross_crate_inline.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cross_crate_inline_USE_0010
-/* FP:cross_crate_inline.rs-0020 */ use crate :: { inline , pass_manager as pm } ;
-/* FP:cross_crate_inline.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cross_crate_inline_FN_0011
-/* FP:cross_crate_inline.rs-0022 */ pub (super) fn provide (providers : & mut Providers) { providers . cross_crate_inlinable = cross_crate_inlinable ; }
-/* FP:cross_crate_inline.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cross_crate_inline_FN_0012
-/* FP:cross_crate_inline.rs-0024 */ fn cross_crate_inlinable (tcx : TyCtxt < '_ > , def_id : LocalDefId) -> bool { let codegen_fn_attrs = tcx . codegen_fn_attrs (def_id) ; if codegen_fn_attrs . contains_extern_indicator () { return false ; } match tcx . def_kind (def_id) { DefKind :: Ctor (..) | DefKind :: Closure | DefKind :: SyntheticCoroutineBody => return true , DefKind :: Fn | DefKind :: AssocFn => { } _ => return false , } if tcx . sess . opts . unstable_opts . cross_crate_inline_threshold == InliningThreshold :: Always { return true ; } if tcx . has_attr (def_id , sym :: rustc_intrinsic) { return true ; } match codegen_fn_attrs . inline { InlineAttr :: Never => return false , InlineAttr :: Hint | InlineAttr :: Always | InlineAttr :: Force { .. } => return true , _ => { } } if tcx . sess . opts . unstable_opts . hint_mostly_unused { return true ; } let sig = tcx . fn_sig (def_id) . instantiate_identity () ; for ty in sig . inputs () . skip_binder () . iter () . chain (std :: iter :: once (& sig . output () . skip_binder ())) { if ty == & tcx . types . f16 || ty == & tcx . types . f128 { return true ; } } if tcx . sess . opts . incremental . is_some () { return false ; } let inliner_will_run = pm :: should_run_pass (tcx , & inline :: Inline , pm :: Optimizations :: Allowed) || inline :: ForceInline :: should_run_pass_for_callee (tcx , def_id . to_def_id ()) ; if matches ! (tcx . sess . opts . optimize , OptLevel :: No) && ! inliner_will_run { return false ; } if ! tcx . is_mir_available (def_id) { return false ; } let threshold = match tcx . sess . opts . unstable_opts . cross_crate_inline_threshold { InliningThreshold :: Always => return true , InliningThreshold :: Sometimes (threshold) => threshold , InliningThreshold :: Never => return false , } ; let mir = tcx . optimized_mir (def_id) ; let mut checker = CostChecker { tcx , callee_body : mir , calls : 0 , statements : 0 , landing_pads : 0 , resumes : 0 } ; checker . visit_body (mir) ; checker . calls == 0 && checker . resumes == 0 && checker . landing_pads == 0 && checker . statements <= threshold }
-/* FP:cross_crate_inline.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cross_crate_inline_STRUCT_0013
-/* FP:cross_crate_inline.rs-0026 */ struct CostChecker < 'b , 'tcx > { tcx : TyCtxt < 'tcx > , callee_body : & 'b Body < 'tcx > , calls : usize , statements : usize , landing_pads : usize , resumes : usize , }
-/* FP:cross_crate_inline.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cross_crate_inline_IMPL_0014
-/* FP:cross_crate_inline.rs-0028 */ impl < 'tcx > Visitor < 'tcx > for CostChecker < '_ , 'tcx > { fn visit_statement (& mut self , statement : & Statement < 'tcx > , _ : Location) { match statement . kind { StatementKind :: StorageLive (_) | StatementKind :: StorageDead (_) | StatementKind :: Deinit (_) | StatementKind :: Nop => { } _ => self . statements += 1 , } } fn visit_terminator (& mut self , terminator : & Terminator < 'tcx > , _ : Location) { let tcx = self . tcx ; match terminator . kind { TerminatorKind :: Drop { ref place , unwind , .. } => { let ty = place . ty (self . callee_body , tcx) . ty ; if ! ty . is_trivially_pure_clone_copy () { self . calls += 1 ; if let UnwindAction :: Cleanup (_) = unwind { self . landing_pads += 1 ; } } } TerminatorKind :: Call { ref func , unwind , .. } => { if let Some ((fn_def_id , _)) = func . const_fn_def () && self . tcx . has_attr (fn_def_id , sym :: rustc_intrinsic) { return ; } self . calls += 1 ; if let UnwindAction :: Cleanup (_) = unwind { self . landing_pads += 1 ; } } TerminatorKind :: Assert { unwind , .. } => { self . calls += 1 ; if let UnwindAction :: Cleanup (_) = unwind { self . landing_pads += 1 ; } } TerminatorKind :: UnwindResume => self . resumes += 1 , TerminatorKind :: InlineAsm { unwind , .. } => { self . statements += 1 ; if let UnwindAction :: Cleanup (_) = unwind { self . landing_pads += 1 ; } } TerminatorKind :: Return => { } _ => self . statements += 1 , } } }
+// SRC: ../rust/compiler/rustc_mir_transform/src/cross_crate_inline.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+use crate::rustc_complete::attrs::InlineAttr;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::{InliningThreshold, OptLevel};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_complete::sym;
+
+use crate::{inline, pass_manager as pm};
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+
+pub(super) fn provide(providers: &mut Providers) {
+    providers.cross_crate_inlinable = cross_crate_inlinable;
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=cross_crate_inlinable | COMPLEXITY=64 | LINES=88 */
+
+fn cross_crate_inlinable(tcx: TyCtxt<'_>, def_id: LocalDefId) -> bool {
+    let codegen_fn_attrs = tcx.codegen_fn_attrs(def_id);
+    // If this has an extern indicator, then this function is globally shared and thus will not
+    // generate cgu-internal copies which would make it cross-crate inlinable.
+    if codegen_fn_attrs.contains_extern_indicator() {
+        return false;
+    }
+
+    // This just reproduces the logic from Instance::requires_inline.
+    match tcx.def_kind(def_id) {
+        DefKind::Ctor(..) | DefKind::Closure | DefKind::SyntheticCoroutineBody => return true,
+        DefKind::Fn | DefKind::AssocFn => {}
+        _ => return false,
+    }
+
+    // From this point on, it is valid to return true or false.
+    if tcx.sess.opts.unstable_opts.cross_crate_inline_threshold == InliningThreshold::Always {
+        return true;
+    }
+
+    if tcx.has_attr(def_id, sym::rustc_intrinsic) {
+        // Intrinsic fallback bodies are always cross-crate inlineable.
+        // To ensure that the MIR inliner doesn't cluelessly try to inline fallback
+        // bodies even when the backend would implement something better, we stop
+        // the MIR inliner from ever inlining an intrinsic.
+        return true;
+    }
+
+    // Obey source annotations first; this is important because it means we can use
+    // #[inline(never)] to force code generation.
+    match codegen_fn_attrs.inline {
+        InlineAttr::Never => return false,
+        InlineAttr::Hint | InlineAttr::Always | InlineAttr::Force { .. } => return true,
+        _ => {}
+    }
+
+    // If the crate is likely to be mostly unused, use cross-crate inlining to defer codegen until
+    // the function is referenced, in order to skip codegen for unused functions. This is
+    // intentionally after the check for `inline(never)`, so that `inline(never)` wins.
+    if tcx.sess.opts.unstable_opts.hint_mostly_unused {
+        return true;
+    }
+
+    let sig = tcx.fn_sig(def_id).instantiate_identity();
+    for ty in sig.inputs().skip_binder().iter().chain(std::iter::once(&sig.output().skip_binder()))
+    {
+        // FIXME(f16_f128): in order to avoid crashes building `core`, always inline to skip
+        // codegen if the function is not used.
+        if ty == &tcx.types.f16 || ty == &tcx.types.f128 {
+            return true;
+        }
+    }
+
+    // Don't do any inference when incremental compilation is enabled; the additional inlining that
+    // inference permits also creates more work for small edits.
+    if tcx.sess.opts.incremental.is_some() {
+        return false;
+    }
+
+    // Don't do any inference if codegen optimizations are disabled and also MIR inlining is not
+    // enabled. This ensures that we do inference even if someone only passes -Zinline-mir,
+    // which is less confusing than having to also enable -Copt-level=1.
+    let inliner_will_run = pm::should_run_pass(tcx, &inline::Inline, pm::Optimizations::Allowed)
+        || inline::ForceInline::should_run_pass_for_callee(tcx, def_id.to_def_id());
+    if matches!(tcx.sess.opts.optimize, OptLevel::No) && !inliner_will_run {
+        return false;
+    }
+
+    if !tcx.is_mir_available(def_id) {
+        return false;
+    }
+
+    let threshold = match tcx.sess.opts.unstable_opts.cross_crate_inline_threshold {
+        InliningThreshold::Always => return true,
+        InliningThreshold::Sometimes(threshold) => threshold,
+        InliningThreshold::Never => return false,
+    };
+
+    let mir = tcx.optimized_mir(def_id);
+    let mut checker =
+        CostChecker { tcx, callee_body: mir, calls: 0, statements: 0, landing_pads: 0, resumes: 0 };
+    checker.visit_body(mir);
+    checker.calls == 0
+        && checker.resumes == 0
+        && checker.landing_pads == 0
+        && checker.statements <= threshold
+}
+/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=CostChecker | COMPLEXITY=2 | LINES=9 */
+
+struct CostChecker<'b, 'tcx> {
+    tcx: TyCtxt<'tcx>,
+    callee_body: &'b Body<'tcx>,
+    calls: usize,
+    statements: usize,
+    landing_pads: usize,
+    resumes: usize,
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=visit_statement | COMPLEXITY=46 | LINES=58 */
+
+impl<'tcx> Visitor<'tcx> for CostChecker<'_, 'tcx> {
+    fn visit_statement(&mut self, statement: &Statement<'tcx>, _: Location) {
+        // Don't count StorageLive/StorageDead in the inlining cost.
+        match statement.kind {
+            StatementKind::StorageLive(_)
+            | StatementKind::StorageDead(_)
+            | StatementKind::Deinit(_)
+            | StatementKind::Nop => {}
+            _ => self.statements += 1,
+        }
+    }
+
+    fn visit_terminator(&mut self, terminator: &Terminator<'tcx>, _: Location) {
+        let tcx = self.tcx;
+        match terminator.kind {
+            TerminatorKind::Drop { ref place, unwind, .. } => {
+                let ty = place.ty(self.callee_body, tcx).ty;
+                if !ty.is_trivially_pure_clone_copy() {
+                    self.calls += 1;
+                    if let UnwindAction::Cleanup(_) = unwind {
+                        self.landing_pads += 1;
+                    }
+                }
+            }
+            TerminatorKind::Call { ref func, unwind, .. } => {
+                // We track calls because they make our function not a leaf (and in theory, the
+                // number of calls indicates how likely this function is to perturb other CGUs).
+                // But intrinsics don't have a body that gets assigned to a CGU, so they are
+                // ignored.
+                if let Some((fn_def_id, _)) = func.const_fn_def()
+                    && self.tcx.has_attr(fn_def_id, sym::rustc_intrinsic)
+                {
+                    return;
+                }
+                self.calls += 1;
+                if let UnwindAction::Cleanup(_) = unwind {
+                    self.landing_pads += 1;
+                }
+            }
+            TerminatorKind::Assert { unwind, .. } => {
+                self.calls += 1;
+                if let UnwindAction::Cleanup(_) = unwind {
+                    self.landing_pads += 1;
+                }
+            }
+            TerminatorKind::UnwindResume => self.resumes += 1,
+            TerminatorKind::InlineAsm { unwind, .. } => {
+                self.statements += 1;
+                if let UnwindAction::Cleanup(_) = unwind {
+                    self.landing_pads += 1;
+                }
+            }
+            TerminatorKind::Return => {}
+            _ => self.statements += 1,
+        }
+    }
+}

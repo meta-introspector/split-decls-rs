@@ -1,32 +1,209 @@
-/* FP:jit.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_driver_jit_USE_0001
-/* FP:jit.rs-0002 */ use std :: ffi :: CString ;
-/* FP:jit.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_driver_jit_USE_0002
-/* FP:jit.rs-0004 */ use std :: os :: raw :: { c_char , c_int } ;
-/* FP:jit.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_driver_jit_USE_0003
-/* FP:jit.rs-0006 */ use cranelift_jit :: { JITBuilder , JITModule } ;
-/* FP:jit.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_driver_jit_USE_0004
-/* FP:jit.rs-0008 */ use crate :: rustc_codegen_ssa :: CrateInfo ;
-/* FP:jit.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_driver_jit_USE_0005
-/* FP:jit.rs-0010 */ use crate :: rustc_complete :: middle :: codegen_fn_attrs :: CodegenFnAttrFlags ;
-/* FP:jit.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_driver_jit_USE_0006
-/* FP:jit.rs-0012 */ use crate :: rustc_complete :: mir :: mono :: MonoItem ;
-/* FP:jit.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_driver_jit_USE_0007
-/* FP:jit.rs-0014 */ use crate :: rustc_complete :: Session ;
-/* FP:jit.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_driver_jit_USE_0008
-/* FP:jit.rs-0016 */ use crate :: rustc_complete :: sym ;
-/* FP:jit.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_driver_jit_USE_0009
-/* FP:jit.rs-0018 */ use crate :: CodegenCx ;
-/* FP:jit.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_driver_jit_USE_0010
-/* FP:jit.rs-0020 */ use crate :: debuginfo :: TypeDebugContext ;
-/* FP:jit.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_driver_jit_USE_0011
-/* FP:jit.rs-0022 */ use crate :: prelude :: * ;
-/* FP:jit.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_driver_jit_USE_0012
-/* FP:jit.rs-0024 */ use crate :: unwind_module :: UnwindModule ;
-/* FP:jit.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_driver_jit_FN_0013
-/* FP:jit.rs-0026 */ fn create_jit_module (tcx : TyCtxt < '_ >) -> (UnwindModule < JITModule > , CodegenCx) { let crate_info = CrateInfo :: new (tcx , "dummy_target_cpu" . to_string ()) ; let isa = crate :: build_isa (tcx . sess , true) ; let mut jit_builder = JITBuilder :: with_isa (isa , cranelift_module :: default_libcall_names ()) ; crate :: compiler_builtins :: register_functions_for_jit (& mut jit_builder) ; jit_builder . symbol_lookup_fn (dep_symbol_lookup_fn (tcx . sess , crate_info)) ; let mut jit_module = UnwindModule :: new (JITModule :: new (jit_builder) , false) ; let cx = crate :: CodegenCx :: new (tcx , jit_module . isa () , false , sym :: dummy_cgu_name) ; crate :: allocator :: codegen (tcx , & mut jit_module) ; (jit_module , cx) }
-/* FP:jit.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_driver_jit_FN_0014
-/* FP:jit.rs-0028 */ pub (crate) fn run_jit (tcx : TyCtxt < '_ > , jit_args : Vec < String >) -> ! { if ! tcx . sess . opts . output_types . should_codegen () { tcx . dcx () . fatal ("JIT mode doesn't work with `cargo check`") ; } if ! tcx . crate_types () . contains (& crate :: rustc_session :: config :: CrateType :: Executable) { tcx . dcx () . fatal ("can't jit non-executable crate") ; } let (mut jit_module , mut cx) = create_jit_module (tcx) ; let mut cached_context = Context :: new () ; let cgus = tcx . collect_and_partition_mono_items (()) . codegen_units ; let mono_items = cgus . iter () . map (| cgu | cgu . items_in_deterministic_order (tcx) . into_iter ()) . flatten () . collect :: < FxHashMap < _ , _ > > () . into_iter () . collect :: < Vec < (_ , _) > > () ; tcx . sess . time ("codegen mono items" , | | { super :: predefine_mono_items (tcx , & mut jit_module , & mono_items) ; for (mono_item , _) in mono_items { match mono_item { MonoItem :: Fn (inst) => { codegen_and_compile_fn (tcx , & mut cx , & mut cached_context , & mut jit_module , inst ,) ; } MonoItem :: Static (def_id) => { crate :: constant :: codegen_static (tcx , & mut jit_module , def_id) ; } MonoItem :: GlobalAsm (item_id) => { let item = tcx . hir_item (item_id) ; tcx . dcx () . span_fatal (item . span , "Global asm is not supported in JIT mode") ; } } } }) ; if ! cx . global_asm . is_empty () { tcx . dcx () . fatal ("Inline asm is not supported in JIT mode") ; } crate :: main_shim :: maybe_create_entry_wrapper (tcx , & mut jit_module , true , true) ; tcx . dcx () . abort_if_errors () ; let mut jit_module = jit_module . finalize_definitions () ; println ! ("Rustc codegen cranelift will JIT run the executable, because -Cllvm-args=mode=jit was passed") ; let args = std :: iter :: once (& * tcx . crate_name (LOCAL_CRATE) . as_str () . to_string ()) . chain (jit_args . iter () . map (| arg | & * * arg)) . map (| arg | CString :: new (arg) . unwrap ()) . collect :: < Vec < _ > > () ; let start_sig = Signature { params : vec ! [AbiParam :: new (jit_module . target_config () . pointer_type ()) , AbiParam :: new (jit_module . target_config () . pointer_type ()) ,] , returns : vec ! [AbiParam :: new (jit_module . target_config () . pointer_type ())] , call_conv : jit_module . target_config () . default_call_conv , } ; let start_func_id = jit_module . declare_function ("main" , Linkage :: Import , & start_sig) . unwrap () ; let finalized_start : * const u8 = jit_module . get_finalized_function (start_func_id) ; let f : extern "C" fn (c_int , * const * const c_char) -> c_int = unsafe { :: std :: mem :: transmute (finalized_start) } ; let mut argv = args . iter () . map (| arg | arg . as_ptr ()) . collect :: < Vec < _ > > () ; argv . push (std :: ptr :: null ()) ; let ret = f (args . len () as c_int , argv . as_ptr ()) ; std :: process :: exit (ret) ; }
-/* FP:jit.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_driver_jit_FN_0015
-/* FP:jit.rs-0030 */ fn codegen_and_compile_fn < 'tcx > (tcx : TyCtxt < 'tcx > , cx : & mut crate :: CodegenCx , cached_context : & mut Context , module : & mut dyn Module , instance : Instance < 'tcx > ,) { if tcx . codegen_instance_attrs (instance . def) . flags . contains (CodegenFnAttrFlags :: NAKED) { tcx . dcx () . span_fatal (tcx . def_span (instance . def_id ()) , "Naked asm is not supported in JIT mode") ; } cranelift_codegen :: timing :: set_thread_profiler (Box :: new (super :: MeasuremeProfiler (tcx . prof . clone () ,))) ; tcx . prof . generic_activity ("codegen and compile fn") . run (| | { let _inst_guard = crate :: PrintOnPanic (| | format ! ("{:?} {}" , instance , tcx . symbol_name (instance) . name)) ; let cached_func = std :: mem :: replace (& mut cached_context . func , Function :: new ()) ; let codegened_func = crate :: base :: codegen_fn (tcx , cx , & mut TypeDebugContext :: default () , cached_func , module , instance ,) ; crate :: base :: compile_fn (cx , & tcx . prof , cached_context , module , codegened_func) ; }) ; }
-/* FP:jit.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_driver_jit_FN_0016
-/* FP:jit.rs-0032 */ fn dep_symbol_lookup_fn (sess : & Session , crate_info : CrateInfo ,) -> Box < dyn Fn (& str) -> Option < * const u8 > + Send > { use crate :: rustc_complete :: middle :: dependency_format :: Linkage ; let mut dylib_paths = Vec :: new () ; let data = & crate_info . dependency_formats [& crate :: rustc_session :: config :: CrateType :: Executable] ; for & cnum in crate_info . used_crates . iter () . rev () { let src = & crate_info . used_crate_source [& cnum] ; match data [cnum] { Linkage :: NotLinked | Linkage :: IncludedFromDylib => { } Linkage :: Static => { let name = crate_info . crate_name [& cnum] ; let mut diag = sess . dcx () . struct_err (format ! ("Can't load static lib {}" , name)) ; diag . note ("rustc_codegen_cranelift can only load dylibs in JIT mode.") ; diag . emit () ; } Linkage :: Dynamic => { dylib_paths . push (src . dylib . as_ref () . unwrap () . 0 . clone ()) ; } } } let imported_dylibs = Box :: leak (dylib_paths . into_iter () . map (| path | unsafe { libloading :: Library :: new (& path) . unwrap () }) . collect :: < Box < [_] > > () ,) ; sess . dcx () . abort_if_errors () ; Box :: new (move | sym_name | { for dylib in & * imported_dylibs { if let Ok (sym) = unsafe { dylib . get :: < * const u8 > (sym_name . as_bytes ()) } { return Some (* sym) ; } } None }) }
+// SRC: ../rust/compiler/rustc_codegen_cranelift/src/driver/jit.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+// The JIT driver uses [`cranelift_jit`] to JIT execute programs without writing any object
+// files.
+
+use std::ffi::CString;
+use std::os::raw::{c_char, c_int};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+use cranelift_jit::{JITBuilder, JITModule};
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=create_jit_module | COMPLEXITY=4 | LINES=26 */
+use crate::rustc_codegen_ssa::CrateInfo;
+use crate::rustc_complete::middle::codegen_fn_attrs::CodegenFnAttrFlags;
+use crate::rustc_complete::mir::mono::MonoItem;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::sym;
+
+use crate::CodegenCx;
+use crate::debuginfo::TypeDebugContext;
+use crate::prelude::*;
+use crate::unwind_module::UnwindModule;
+
+fn create_jit_module(tcx: TyCtxt<'_>) -> (UnwindModule<JITModule>, CodegenCx) {
+    let crate_info = CrateInfo::new(tcx, "dummy_target_cpu".to_string());
+
+    let isa = crate::build_isa(tcx.sess, true);
+    let mut jit_builder = JITBuilder::with_isa(isa, cranelift_module::default_libcall_names());
+    crate::compiler_builtins::register_functions_for_jit(&mut jit_builder);
+    jit_builder.symbol_lookup_fn(dep_symbol_lookup_fn(tcx.sess, crate_info));
+    let mut jit_module = UnwindModule::new(JITModule::new(jit_builder), false);
+
+    let cx = crate::CodegenCx::new(tcx, jit_module.isa(), false, sym::dummy_cgu_name);
+
+    crate::allocator::codegen(tcx, &mut jit_module);
+
+    (jit_module, cx)
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=88 */
+
+pub(crate) fn run_jit(tcx: TyCtxt<'_>, jit_args: Vec<String>) -> ! {
+    if !tcx.sess.opts.output_types.should_codegen() {
+        tcx.dcx().fatal("JIT mode doesn't work with `cargo check`");
+    }
+
+    if !tcx.crate_types().contains(&crate::rustc_session::config::CrateType::Executable) {
+        tcx.dcx().fatal("can't jit non-executable crate");
+    }
+
+    let (mut jit_module, mut cx) = create_jit_module(tcx);
+    let mut cached_context = Context::new();
+
+    let cgus = tcx.collect_and_partition_mono_items(()).codegen_units;
+    let mono_items = cgus
+        .iter()
+        .map(|cgu| cgu.items_in_deterministic_order(tcx).into_iter())
+        .flatten()
+        .collect::<FxHashMap<_, _>>()
+        .into_iter()
+        .collect::<Vec<(_, _)>>();
+
+    tcx.sess.time("codegen mono items", || {
+        super::predefine_mono_items(tcx, &mut jit_module, &mono_items);
+        for (mono_item, _) in mono_items {
+            match mono_item {
+                MonoItem::Fn(inst) => {
+                    codegen_and_compile_fn(
+                        tcx,
+                        &mut cx,
+                        &mut cached_context,
+                        &mut jit_module,
+                        inst,
+                    );
+                }
+                MonoItem::Static(def_id) => {
+                    crate::constant::codegen_static(tcx, &mut jit_module, def_id);
+                }
+                MonoItem::GlobalAsm(item_id) => {
+                    let item = tcx.hir_item(item_id);
+                    tcx.dcx().span_fatal(item.span, "Global asm is not supported in JIT mode");
+                }
+            }
+        }
+    });
+
+    if !cx.global_asm.is_empty() {
+        tcx.dcx().fatal("Inline asm is not supported in JIT mode");
+    }
+
+    crate::main_shim::maybe_create_entry_wrapper(tcx, &mut jit_module, true, true);
+
+    tcx.dcx().abort_if_errors();
+
+    let mut jit_module = jit_module.finalize_definitions();
+
+    println!(
+        "Rustc codegen cranelift will JIT run the executable, because -Cllvm-args=mode=jit was passed"
+    );
+
+    let args = std::iter::once(&*tcx.crate_name(LOCAL_CRATE).as_str().to_string())
+        .chain(jit_args.iter().map(|arg| &**arg))
+        .map(|arg| CString::new(arg).unwrap())
+        .collect::<Vec<_>>();
+
+    let start_sig = Signature {
+        params: vec![
+            AbiParam::new(jit_module.target_config().pointer_type()),
+            AbiParam::new(jit_module.target_config().pointer_type()),
+        ],
+        returns: vec![AbiParam::new(jit_module.target_config().pointer_type() /*isize*/)],
+        call_conv: jit_module.target_config().default_call_conv,
+    };
+    let start_func_id = jit_module.declare_function("main", Linkage::Import, &start_sig).unwrap();
+    let finalized_start: *const u8 = jit_module.get_finalized_function(start_func_id);
+
+    let f: extern "C" fn(c_int, *const *const c_char) -> c_int =
+        unsafe { ::std::mem::transmute(finalized_start) };
+
+    let mut argv = args.iter().map(|arg| arg.as_ptr()).collect::<Vec<_>>();
+
+    // Push a null pointer as a terminating argument. This is required by POSIX and
+    // useful as some dynamic linkers use it as a marker to jump over.
+    argv.push(std::ptr::null());
+
+    let ret = f(args.len() as c_int, argv.as_ptr());
+    std::process::exit(ret);
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=codegen_and_compile_fn | COMPLEXITY=10 | LINES=33 */
+
+fn codegen_and_compile_fn<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    cx: &mut crate::CodegenCx,
+    cached_context: &mut Context,
+    module: &mut dyn Module,
+    instance: Instance<'tcx>,
+) {
+    if tcx.codegen_instance_attrs(instance.def).flags.contains(CodegenFnAttrFlags::NAKED) {
+        tcx.dcx()
+            .span_fatal(tcx.def_span(instance.def_id()), "Naked asm is not supported in JIT mode");
+    }
+
+    cranelift_codegen::timing::set_thread_profiler(Box::new(super::MeasuremeProfiler(
+        tcx.prof.clone(),
+    )));
+
+    tcx.prof.generic_activity("codegen and compile fn").run(|| {
+        let _inst_guard =
+            crate::PrintOnPanic(|| format!("{:?} {}", instance, tcx.symbol_name(instance).name));
+
+        let cached_func = std::mem::replace(&mut cached_context.func, Function::new());
+        let codegened_func = crate::base::codegen_fn(
+            tcx,
+            cx,
+            &mut TypeDebugContext::default(),
+            cached_func,
+            module,
+            instance,
+        );
+        crate::base::compile_fn(cx, &tcx.prof, cached_context, module, codegened_func);
+    });
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=dep_symbol_lookup_fn | COMPLEXITY=33 | LINES=48 */
+
+fn dep_symbol_lookup_fn(
+    sess: &Session,
+    crate_info: CrateInfo,
+) -> Box<dyn Fn(&str) -> Option<*const u8> + Send> {
+    use crate::rustc_complete::middle::dependency_format::Linkage;
+
+    let mut dylib_paths = Vec::new();
+
+    let data = &crate_info.dependency_formats[&crate::rustc_session::config::CrateType::Executable];
+    // `used_crates` is in reverse postorder in terms of dependencies. Reverse the order here to
+    // get a postorder which ensures that all dependencies of a dylib are loaded before the dylib
+    // itself. This helps the dynamic linker to find dylibs not in the regular dynamic library
+    // search path.
+    for &cnum in crate_info.used_crates.iter().rev() {
+        let src = &crate_info.used_crate_source[&cnum];
+        match data[cnum] {
+            Linkage::NotLinked | Linkage::IncludedFromDylib => {}
+            Linkage::Static => {
+                let name = crate_info.crate_name[&cnum];
+                let mut diag = sess.dcx().struct_err(format!("Can't load static lib {}", name));
+                diag.note("rustc_codegen_cranelift can only load dylibs in JIT mode.");
+                diag.emit();
+            }
+            Linkage::Dynamic => {
+                dylib_paths.push(src.dylib.as_ref().unwrap().0.clone());
+            }
+        }
+    }
+
+    let imported_dylibs = Box::leak(
+        dylib_paths
+            .into_iter()
+            .map(|path| unsafe { libloading::Library::new(&path).unwrap() })
+            .collect::<Box<[_]>>(),
+    );
+
+    sess.dcx().abort_if_errors();
+
+    Box::new(move |sym_name| {
+        for dylib in &*imported_dylibs {
+            if let Ok(sym) = unsafe { dylib.get::<*const u8>(sym_name.as_bytes()) } {
+                return Some(*sym);
+            }
+        }
+        None
+    })
+}

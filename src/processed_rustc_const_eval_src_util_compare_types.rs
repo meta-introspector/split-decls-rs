@@ -1,12 +1,51 @@
-/* FP:compare_types.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_compare_types_USE_0001
-/* FP:compare_types.rs-0002 */ use crate :: rustc_infer :: infer :: TyCtxtInferExt ;
-/* FP:compare_types.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_compare_types_USE_0002
-/* FP:compare_types.rs-0004 */ use crate :: rustc_complete :: traits :: ObligationCause ;
-/* FP:compare_types.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_compare_types_USE_0003
-/* FP:compare_types.rs-0006 */ use crate :: rustc_complete :: ty :: { Ty , TyCtxt , TypingEnv , Variance } ;
-/* FP:compare_types.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_compare_types_USE_0004
-/* FP:compare_types.rs-0008 */ use crate :: rustc_trait_selection :: traits :: ObligationCtxt ;
-/* FP:compare_types.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_compare_types_FN_0005
-/* FP:compare_types.rs-0010 */ # [doc = " Returns whether `src` is a subtype of `dest`, i.e. `src <: dest`."] pub fn sub_types < 'tcx > (tcx : TyCtxt < 'tcx > , typing_env : TypingEnv < 'tcx > , src : Ty < 'tcx > , dest : Ty < 'tcx > ,) -> bool { relate_types (tcx , typing_env , Variance :: Covariant , src , dest) }
-/* FP:compare_types.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_compare_types_FN_0006
-/* FP:compare_types.rs-0012 */ # [doc = " Returns whether `src` is a subtype of `dest`, i.e. `src <: dest`."] # [doc = ""] # [doc = " When validating assignments, the variance should be `Covariant`. When checking"] # [doc = " during `MirPhase` >= `MirPhase::Runtime(RuntimePhase::Initial)` variance should be `Invariant`"] # [doc = " because we want to check for type equality."] pub fn relate_types < 'tcx > (tcx : TyCtxt < 'tcx > , typing_env : TypingEnv < 'tcx > , variance : Variance , src : Ty < 'tcx > , dest : Ty < 'tcx > ,) -> bool { if src == dest { return true ; } let (infcx , param_env) = tcx . infer_ctxt () . ignoring_regions () . build_with_typing_env (typing_env) ; let ocx = ObligationCtxt :: new (& infcx) ; let cause = ObligationCause :: dummy () ; let src = ocx . normalize (& cause , param_env , src) ; let dest = ocx . normalize (& cause , param_env , dest) ; match ocx . relate (& cause , param_env , variance , src , dest) { Ok (()) => { } Err (_) => return false , } ; ocx . select_all_or_error () . is_empty () }
+// SRC: ../rust/compiler/rustc_const_eval/src/util/compare_types.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
+// Routines to check for relations between fully inferred types.
+//
+// FIXME: Move this to a more general place. The utility of this extends to
+// other areas of the compiler as well.
+
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty::{Ty, TyCtxt, TypingEnv, Variance};
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=sub_types | COMPLEXITY=2 | LINES=11 */
+use crate::rustc_trait_selection::traits::ObligationCtxt;
+
+/// Returns whether `src` is a subtype of `dest`, i.e. `src <: dest`.
+pub fn sub_types<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    typing_env: TypingEnv<'tcx>,
+    src: Ty<'tcx>,
+    dest: Ty<'tcx>,
+) -> bool {
+    relate_types(tcx, typing_env, Variance::Covariant, src, dest)
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=relate_types | COMPLEXITY=13 | LINES=28 */
+
+/// Returns whether `src` is a subtype of `dest`, i.e. `src <: dest`.
+///
+/// When validating assignments, the variance should be `Covariant`. When checking
+/// during `MirPhase` >= `MirPhase::Runtime(RuntimePhase::Initial)` variance should be `Invariant`
+/// because we want to check for type equality.
+pub fn relate_types<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    typing_env: TypingEnv<'tcx>,
+    variance: Variance,
+    src: Ty<'tcx>,
+    dest: Ty<'tcx>,
+) -> bool {
+    if src == dest {
+        return true;
+    }
+
+    let (infcx, param_env) = tcx.infer_ctxt().ignoring_regions().build_with_typing_env(typing_env);
+    let ocx = ObligationCtxt::new(&infcx);
+    let cause = ObligationCause::dummy();
+    let src = ocx.normalize(&cause, param_env, src);
+    let dest = ocx.normalize(&cause, param_env, dest);
+    match ocx.relate(&cause, param_env, variance, src, dest) {
+        Ok(()) => {}
+        Err(_) => return false,
+    };
+    ocx.select_all_or_error().is_empty()
+}

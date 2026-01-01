@@ -1,39 +1,285 @@
-/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_USE_0001
-/* FP:mod.rs-0002 */ use std :: cell :: { Cell , RefCell } ;
-/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_USE_0002
-/* FP:mod.rs-0004 */ use crate :: rustc_complete :: ty :: TyCtxt ;
-/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_USE_0003
-/* FP:mod.rs-0006 */ use crate :: rustc_public_bridge :: context :: CompilerCtxt ;
-/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_USE_0004
-/* FP:mod.rs-0008 */ use crate :: rustc_public_bridge :: { Bridge , Container , Tables } ;
-/* FP:mod.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_USE_0005
-/* FP:mod.rs-0010 */ use crate :: rustc_complete :: def_id :: CrateNum ;
-/* FP:mod.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_USE_0006
-/* FP:mod.rs-0012 */ use scoped_tls :: scoped_thread_local ;
-/* FP:mod.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_USE_0007
-/* FP:mod.rs-0014 */ use crate :: Error ;
-/* FP:mod.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_USE_0008
-/* FP:mod.rs-0016 */ use crate :: unstable :: { RustcInternal , Stable } ;
-/* FP:mod.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_MOD_0009
-/* FP:mod.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_FN_0010
-/* FP:mod.rs-0020 */ # [doc = " Convert an internal Rust compiler item into its stable counterpart, if one exists."] # [doc = ""] # [doc = " # Warning"] # [doc = ""] # [doc = " This function is unstable, and its behavior may change at any point."] # [doc = " E.g.: Items that were previously supported, may no longer be supported, or its translation may"] # [doc = " change."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " This function will panic if rustc_public has not been properly initialized."] pub fn stable < 'tcx , S : Stable < 'tcx > > (item : S) -> S :: T { with_container (| tables , cx | item . stable (tables , cx)) }
-/* FP:mod.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_FN_0011
-/* FP:mod.rs-0022 */ # [doc = " Convert a stable item into its internal Rust compiler counterpart, if one exists."] # [doc = ""] # [doc = " # Warning"] # [doc = ""] # [doc = " This function is unstable, and it's behavior may change at any point."] # [doc = " Not every stable item can be converted to an internal one."] # [doc = " Furthermore, items that were previously supported, may no longer be supported in newer versions."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " This function will panic if rustc_public has not been properly initialized."] pub fn internal < 'tcx , S > (tcx : TyCtxt < 'tcx > , item : S) -> S :: T < 'tcx > where S : RustcInternal , { with_container (| tables , _ | item . internal (tables , tcx)) }
-/* FP:mod.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_FN_0012
-/* FP:mod.rs-0024 */ pub fn crate_num (item : & crate :: Crate) -> CrateNum { item . id . into () }
-/* FP:mod.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_MACRO_0013
-/* FP:mod.rs-0026 */ scoped_thread_local ! (static TLV : Cell <* const () >) ;
-/* FP:mod.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_FN_0014
-/* FP:mod.rs-0028 */ pub (crate) fn init < 'tcx , F , T , B : Bridge > (container : & Container < 'tcx , B > , f : F) -> T where F : FnOnce () -> T , { assert ! (! TLV . is_set ()) ; let ptr = container as * const _ as * const () ; TLV . set (& Cell :: new (ptr) , | | f ()) }
-/* FP:mod.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_FN_0015
-/* FP:mod.rs-0030 */ # [doc = " Loads the current context and calls a function with it."] # [doc = " Do not nest these, as that will ICE."] pub (crate) fn with_container < R , B : Bridge > (f : impl for < 'tcx > FnOnce (& mut Tables < 'tcx , B > , & CompilerCtxt < 'tcx , B >) -> R ,) -> R { assert ! (TLV . is_set ()) ; TLV . with (| tlv | { let ptr = tlv . get () ; assert ! (! ptr . is_null ()) ; let container = ptr as * const Container < '_ , B > ; let mut tables = unsafe { (* container) . tables . borrow_mut () } ; let cx = unsafe { (* container) . cx . borrow () } ; f (& mut * tables , & * cx) }) }
-/* FP:mod.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_FN_0016
-/* FP:mod.rs-0032 */ pub fn run < F , T > (tcx : TyCtxt < '_ > , f : F) -> Result < T , Error > where F : FnOnce () -> T , { let compiler_cx = RefCell :: new (CompilerCtxt :: new (tcx)) ; let container = Container { tables : RefCell :: new (Tables :: default ()) , cx : compiler_cx } ; crate :: compiler_interface :: run (& container , | | init (& container , f)) }
-/* FP:mod.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_MACRO_0017
-/* FP:mod.rs-0034 */ # [doc = " Instantiate and run the compiler with the provided arguments and callback."] # [doc = ""] # [doc = " The callback will be invoked after the compiler ran all its analyses, but before code generation."] # [doc = " Note that this macro accepts two different formats for the callback:"] # [doc = " 1. An ident that resolves to a function that accepts no argument and returns `ControlFlow<B, C>`"] # [doc = " ```ignore(needs-extern-crate)"] # [doc = " # extern crate rustc_driver;"] # [doc = " # extern crate rustc_interface;"] # [doc = " # extern crate rustc_middle;"] # [doc = " # #[macro_use]"] # [doc = " # extern crate rustc_public;"] # [doc = " #"] # [doc = " # fn main() {"] # [doc = " #   use std::ops::ControlFlow;"] # [doc = " #   use rustc_public::CompilerError;"] # [doc = "     fn analyze_code() -> ControlFlow<(), ()> {"] # [doc = "         // Your code goes in here."] # [doc = " #       ControlFlow::Continue(())"] # [doc = "     }"] # [doc = " #   let args = &[\"--verbose\".to_string()];"] # [doc = "     let result = run!(args, analyze_code);"] # [doc = " #   assert_eq!(result, Err(CompilerError::Skipped))"] # [doc = " # }"] # [doc = " ```"] # [doc = " 2. A closure expression:"] # [doc = " ```ignore(needs-extern-crate)"] # [doc = " # extern crate rustc_driver;"] # [doc = " # extern crate rustc_interface;"] # [doc = " # extern crate rustc_middle;"] # [doc = " # #[macro_use]"] # [doc = " # extern crate rustc_public;"] # [doc = " #"] # [doc = " # fn main() {"] # [doc = " #   use std::ops::ControlFlow;"] # [doc = " #   use rustc_public::CompilerError;"] # [doc = "     fn analyze_code(extra_args: Vec<String>) -> ControlFlow<(), ()> {"] # [doc = " #       let _ = extra_args;"] # [doc = "         // Your code goes in here."] # [doc = " #       ControlFlow::Continue(())"] # [doc = "     }"] # [doc = " #   let args = &[\"--verbose\".to_string()];"] # [doc = " #   let extra_args = vec![];"] # [doc = "     let result = run!(args, || analyze_code(extra_args));"] # [doc = " #   assert_eq!(result, Err(CompilerError::Skipped))"] # [doc = " # }"] # [doc = " ```"] # [macro_export] macro_rules ! run { ($ args : expr , $ callback_fn : ident) => { $ crate :: run_driver ! ($ args , || $ callback_fn ()) } ; ($ args : expr , $ callback : expr) => { $ crate :: run_driver ! ($ args , $ callback) } ; }
-/* FP:mod.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_MACRO_0018
-/* FP:mod.rs-0036 */ # [doc = " Instantiate and run the compiler with the provided arguments and callback."] # [doc = ""] # [doc = " This is similar to `run` but it invokes the callback with the compiler's `TyCtxt`,"] # [doc = " which can be used to invoke internal APIs."] # [macro_export] macro_rules ! run_with_tcx { ($ args : expr , $ callback_fn : ident) => { $ crate :: run_driver ! ($ args , | tcx | $ callback_fn (tcx) , with_tcx) } ; ($ args : expr , $ callback : expr) => { $ crate :: run_driver ! ($ args , $ callback , with_tcx) } ; }
-/* FP:mod.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_MACRO_0019
-/* FP:mod.rs-0038 */ # [doc = " Optionally include an ident. This is needed due to macro hygiene."] # [macro_export] # [doc (hidden)] macro_rules ! optional { (with_tcx $ ident : ident) => { $ ident } ; }
-/* FP:mod.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_public_src_rustc_internal_mod_MACRO_0020
-/* FP:mod.rs-0040 */ # [doc = " Prefer using [run!] and [run_with_tcx] instead."] # [doc = ""] # [doc = " This macro implements the instantiation of a rustc_public driver, and it will invoke"] # [doc = " the given callback after the compiler analyses."] # [doc = ""] # [doc = " The third argument determines whether the callback requires `tcx` as an argument."] # [macro_export] # [doc (hidden)] macro_rules ! run_driver { ($ args : expr , $ callback : expr $ (, $ with_tcx : ident) ?) => { { use rustc_driver :: { Callbacks , Compilation , run_compiler } ; use crate :: rustc_complete :: ty :: TyCtxt ; use rustc_interface :: interface ; use rustc_public :: rustc_internal ; use rustc_public :: CompilerError ; use std :: ops :: ControlFlow ; pub struct RustcPublic < B = () , C = () , F = fn ($ ($ crate :: optional ! ($ with_tcx TyCtxt)) ?) -> ControlFlow < B , C >> where B : Send , C : Send , F : FnOnce ($ ($ crate :: optional ! ($ with_tcx TyCtxt)) ?) -> ControlFlow < B , C > + Send , { callback : Option < F >, result : Option < ControlFlow < B , C >>, } impl < B , C , F > RustcPublic < B , C , F > where B : Send , C : Send , F : FnOnce ($ ($ crate :: optional ! ($ with_tcx TyCtxt)) ?) -> ControlFlow < B , C > + Send , { # [doc = " Creates a new `RustcPublic` instance, with given test_function and arguments."] pub fn new (callback : F) -> Self { RustcPublic { callback : Some (callback) , result : None } } # [doc = " Runs the compiler against given target and tests it with `test_function`"] pub fn run (& mut self , args : & [String]) -> Result < C , CompilerError < B >> { let compiler_result = rustc_driver :: catch_fatal_errors (|| -> interface :: Result ::< () > { run_compiler (& args , self) ; Ok (()) }) ; match (compiler_result , self . result . take ()) { (Ok (Ok (())) , Some (ControlFlow :: Continue (value))) => Ok (value) , (Ok (Ok (())) , Some (ControlFlow :: Break (value))) => { Err (CompilerError :: Interrupted (value)) } (Ok (Ok (_)) , None) => Err (CompilerError :: Skipped) , (Ok (Err (_)) , _) | (Err (_) , _) => Err (CompilerError :: Failed) , } } } impl < B , C , F > Callbacks for RustcPublic < B , C , F > where B : Send , C : Send , F : FnOnce ($ ($ crate :: optional ! ($ with_tcx TyCtxt)) ?) -> ControlFlow < B , C > + Send , { # [doc = " Called after analysis. Return value instructs the compiler whether to"] # [doc = " continue the compilation afterwards (defaults to `Compilation::Continue`)"] fn after_analysis <'tcx > (& mut self , _compiler : & interface :: Compiler , tcx : TyCtxt <'tcx >,) -> Compilation { if let Some (callback) = self . callback . take () { rustc_internal :: run (tcx , || { self . result = Some (callback ($ ($ crate :: optional ! ($ with_tcx tcx)) ?)) ; }) . unwrap () ; if self . result . as_ref () . is_some_and (| val | val . is_continue ()) { Compilation :: Continue } else { Compilation :: Stop } } else { Compilation :: Continue } } } RustcPublic :: new ($ callback) . run ($ args) } } ; }
+// SRC: ../rust/compiler/rustc_public/src/rustc_internal/mod.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+// Module that implements the bridge between rustc_public's IR and internal compiler MIR.
+//
+// For that, we define APIs that will temporarily be public to 3P that exposes rustc internal APIs
+// until rustc_public's IR is complete.
+
+use std::cell::{Cell, RefCell};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_public_bridge::context::CompilerCtxt;
+use crate::rustc_public_bridge::{Bridge, Container, Tables};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use crate::rustc_complete::def_id::CrateNum;
+use scoped_tls::scoped_thread_local;
+
+use crate::Error;
+use crate::unstable::{RustcInternal, Stable};
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=stable | COMPLEXITY=7 | LINES=17 */
+
+
+/// Convert an internal Rust compiler item into its stable counterpart, if one exists.
+///
+/// # Warning
+///
+/// This function is unstable, and its behavior may change at any point.
+/// E.g.: Items that were previously supported, may no longer be supported, or its translation may
+/// change.
+///
+/// # Panics
+///
+/// This function will panic if rustc_public has not been properly initialized.
+pub fn stable<'tcx, S: Stable<'tcx>>(item: S) -> S::T {
+    with_container(|tables, cx| item.stable(tables, cx))
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=internal | COMPLEXITY=9 | LINES=21 */
+
+/// Convert a stable item into its internal Rust compiler counterpart, if one exists.
+///
+/// # Warning
+///
+/// This function is unstable, and it's behavior may change at any point.
+/// Not every stable item can be converted to an internal one.
+/// Furthermore, items that were previously supported, may no longer be supported in newer versions.
+///
+/// # Panics
+///
+/// This function will panic if rustc_public has not been properly initialized.
+pub fn internal<'tcx, S>(tcx: TyCtxt<'tcx>, item: S) -> S::T<'tcx>
+where
+    S: RustcInternal,
+{
+    // The tcx argument ensures that the item won't outlive the type context.
+    // See https://github.com/rust-lang/rust/pull/120128/commits/9aace6723572438a94378451793ca37deb768e72
+    // for more details.
+    with_container(|tables, _| item.internal(tables, tcx))
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=crate_num | COMPLEXITY=2 | LINES=4 */
+
+pub fn crate_num(item: &crate::Crate) -> CrateNum {
+    item.id.into()
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
+
+// A thread local variable that stores a pointer to the tables mapping between TyCtxt
+// datastructures and rustc_public's IR datastructures
+scoped_thread_local! (static TLV: Cell<*const ()>);
+
+pub(crate) fn init<'tcx, F, T, B: Bridge>(container: &Container<'tcx, B>, f: F) -> T
+where
+    F: FnOnce() -> T,
+{
+    assert!(!TLV.is_set());
+    let ptr = container as *const _ as *const ();
+    TLV.set(&Cell::new(ptr), || f())
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=16 */
+
+/// Loads the current context and calls a function with it.
+/// Do not nest these, as that will ICE.
+pub(crate) fn with_container<R, B: Bridge>(
+    f: impl for<'tcx> FnOnce(&mut Tables<'tcx, B>, &CompilerCtxt<'tcx, B>) -> R,
+) -> R {
+    assert!(TLV.is_set());
+    TLV.with(|tlv| {
+        let ptr = tlv.get();
+        assert!(!ptr.is_null());
+        let container = ptr as *const Container<'_, B>;
+        let mut tables = unsafe { (*container).tables.borrow_mut() };
+        let cx = unsafe { (*container).cx.borrow() };
+        f(&mut *tables, &*cx)
+    })
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=run | COMPLEXITY=3 | LINES=10 */
+
+pub fn run<F, T>(tcx: TyCtxt<'_>, f: F) -> Result<T, Error>
+where
+    F: FnOnce() -> T,
+{
+    let compiler_cx = RefCell::new(CompilerCtxt::new(tcx));
+    let container = Container { tables: RefCell::new(Tables::default()), cx: compiler_cx };
+
+    crate::compiler_interface::run(&container, || init(&container, f))
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=24 */
+
+/// Instantiate and run the compiler with the provided arguments and callback.
+///
+/// The callback will be invoked after the compiler ran all its analyses, but before code generation.
+/// Note that this macro accepts two different formats for the callback:
+/// 1. An ident that resolves to a function that accepts no argument and returns `ControlFlow<B, C>`
+/// ```ignore(needs-extern-crate)
+/// # extern crate rustc_driver;
+/// # extern crate rustc_interface;
+/// # extern crate rustc_middle;
+/// # #[macro_use]
+/// # extern crate rustc_public;
+/// #
+/// # fn main() {
+/// #   use std::ops::ControlFlow;
+/// #   use rustc_public::CompilerError;
+///     fn analyze_code() -> ControlFlow<(), ()> {
+///         // Your code goes in here.
+/// #       ControlFlow::Continue(())
+///     }
+/// #   let args = &["--verbose".to_string()];
+///     let result = run!(args, analyze_code);
+/// #   assert_eq!(result, Err(CompilerError::Skipped))
+/// # }
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=22 */
+/// ```
+/// 2. A closure expression:
+/// ```ignore(needs-extern-crate)
+/// # extern crate rustc_driver;
+/// # extern crate rustc_interface;
+/// # extern crate rustc_middle;
+/// # #[macro_use]
+/// # extern crate rustc_public;
+/// #
+/// # fn main() {
+/// #   use std::ops::ControlFlow;
+/// #   use rustc_public::CompilerError;
+///     fn analyze_code(extra_args: Vec<String>) -> ControlFlow<(), ()> {
+/// #       let _ = extra_args;
+///         // Your code goes in here.
+/// #       ControlFlow::Continue(())
+///     }
+/// #   let args = &["--verbose".to_string()];
+/// #   let extra_args = vec![];
+///     let result = run!(args, || analyze_code(extra_args));
+/// #   assert_eq!(result, Err(CompilerError::Skipped))
+/// # }
+/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=10 */
+/// ```
+#[macro_export]
+macro_rules! run {
+    ($args:expr, $callback_fn:ident) => {
+        $crate::run_driver!($args, || $callback_fn())
+    };
+    ($args:expr, $callback:expr) => {
+        $crate::run_driver!($args, $callback)
+    };
+}
+/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=14 */
+
+/// Instantiate and run the compiler with the provided arguments and callback.
+///
+/// This is similar to `run` but it invokes the callback with the compiler's `TyCtxt`,
+/// which can be used to invoke internal APIs.
+#[macro_export]
+macro_rules! run_with_tcx {
+    ($args:expr, $callback_fn:ident) => {
+        $crate::run_driver!($args, |tcx| $callback_fn(tcx), with_tcx)
+    };
+    ($args:expr, $callback:expr) => {
+        $crate::run_driver!($args, $callback, with_tcx)
+    };
+}
+/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
+
+/// Optionally include an ident. This is needed due to macro hygiene.
+#[macro_export]
+#[doc(hidden)]
+macro_rules! optional {
+    (with_tcx $ident:ident) => {
+        $ident
+    };
+}
+/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=RustcPublic | COMPLEXITY=42 | LINES=95 */
+
+/// Prefer using [run!] and [run_with_tcx] instead.
+///
+/// This macro implements the instantiation of a rustc_public driver, and it will invoke
+/// the given callback after the compiler analyses.
+///
+/// The third argument determines whether the callback requires `tcx` as an argument.
+#[macro_export]
+#[doc(hidden)]
+macro_rules! run_driver {
+    ($args:expr, $callback:expr $(, $with_tcx:ident)?) => {{
+        use rustc_driver::{Callbacks, Compilation, run_compiler};
+        use crate::rustc_complete::ty::TyCtxt;
+        use rustc_interface::interface;
+        use rustc_public::rustc_internal;
+        use rustc_public::CompilerError;
+        use std::ops::ControlFlow;
+
+        pub struct RustcPublic<B = (), C = (), F = fn($($crate::optional!($with_tcx TyCtxt))?) -> ControlFlow<B, C>>
+        where
+            B: Send,
+            C: Send,
+            F: FnOnce($($crate::optional!($with_tcx TyCtxt))?) -> ControlFlow<B, C> + Send,
+        {
+            callback: Option<F>,
+            result: Option<ControlFlow<B, C>>,
+        }
+
+        impl<B, C, F> RustcPublic<B, C, F>
+        where
+            B: Send,
+            C: Send,
+            F: FnOnce($($crate::optional!($with_tcx TyCtxt))?) -> ControlFlow<B, C> + Send,
+        {
+            /// Creates a new `RustcPublic` instance, with given test_function and arguments.
+            pub fn new(callback: F) -> Self {
+                RustcPublic { callback: Some(callback), result: None }
+            }
+
+            /// Runs the compiler against given target and tests it with `test_function`
+            pub fn run(&mut self, args: &[String]) -> Result<C, CompilerError<B>> {
+                let compiler_result = rustc_driver::catch_fatal_errors(|| -> interface::Result::<()> {
+                    run_compiler(&args, self);
+                    Ok(())
+                });
+                match (compiler_result, self.result.take()) {
+                    (Ok(Ok(())), Some(ControlFlow::Continue(value))) => Ok(value),
+                    (Ok(Ok(())), Some(ControlFlow::Break(value))) => {
+                        Err(CompilerError::Interrupted(value))
+                    }
+                    (Ok(Ok(_)), None) => Err(CompilerError::Skipped),
+                    // Two cases here:
+                    // - `run` finished normally and returned `Err`
+                    // - `run` panicked with `FatalErr`
+                    // You might think that normal compile errors cause the former, and
+                    // ICEs cause the latter. But some normal compiler errors also cause
+                    // the latter. So we can't meaningfully distinguish them, and group
+                    // them together.
+                    (Ok(Err(_)), _) | (Err(_), _) => Err(CompilerError::Failed),
+                }
+            }
+        }
+
+        impl<B, C, F> Callbacks for RustcPublic<B, C, F>
+        where
+            B: Send,
+            C: Send,
+            F: FnOnce($($crate::optional!($with_tcx TyCtxt))?) -> ControlFlow<B, C> + Send,
+        {
+            /// Called after analysis. Return value instructs the compiler whether to
+            /// continue the compilation afterwards (defaults to `Compilation::Continue`)
+            fn after_analysis<'tcx>(
+                &mut self,
+                _compiler: &interface::Compiler,
+                tcx: TyCtxt<'tcx>,
+            ) -> Compilation {
+                if let Some(callback) = self.callback.take() {
+                    rustc_internal::run(tcx, || {
+                        self.result = Some(callback($($crate::optional!($with_tcx tcx))?));
+                    })
+                    .unwrap();
+                    if self.result.as_ref().is_some_and(|val| val.is_continue()) {
+                        Compilation::Continue
+                    } else {
+                        Compilation::Stop
+                    }
+                } else {
+                    Compilation::Continue
+                }
+            }
+        }
+
+        RustcPublic::new($callback).run($args)
+    }};
+}

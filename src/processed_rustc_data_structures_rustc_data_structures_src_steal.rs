@@ -1,10 +1,76 @@
-/* FP:steal.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_steal_USE_0001
-/* FP:steal.rs-0002 */ use crate :: stable_hasher :: { HashStable , StableHasher } ;
-/* FP:steal.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_steal_USE_0002
-/* FP:steal.rs-0004 */ use crate :: sync :: { MappedReadGuard , ReadGuard , RwLock } ;
-/* FP:steal.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_steal_STRUCT_0003
-/* FP:steal.rs-0006 */ # [doc = " The `Steal` struct is intended to used as the value for a query."] # [doc = " Specifically, we sometimes have queries (*cough* MIR *cough*)"] # [doc = " where we create a large, complex value that we want to iteratively"] # [doc = " update (e.g., optimize). We could clone the value for each"] # [doc = " optimization, but that'd be expensive. And yet we don't just want"] # [doc = " to mutate it in place, because that would spoil the idea that"] # [doc = " queries are these pure functions that produce an immutable value"] # [doc = " (since if you did the query twice, you could observe the mutations)."] # [doc = " So instead we have the query produce a `&'tcx Steal<mir::Body<'tcx>>`"] # [doc = " (to be very specific). Now we can read from this"] # [doc = " as much as we want (using `borrow()`), but you can also"] # [doc = " `steal()`. Once you steal, any further attempt to read will panic."] # [doc = " Therefore, we know that -- assuming no ICE -- nobody is observing"] # [doc = " the fact that the MIR was updated."] # [doc = ""] # [doc = " Obviously, whenever you have a query that yields a `Steal` value,"] # [doc = " you must treat it with caution, and make sure that you know that"] # [doc = " -- once the value is stolen -- it will never be read from again."] # [derive (Debug)] pub struct Steal < T > { value : RwLock < Option < T > > , }
-/* FP:steal.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_steal_IMPL_0004
-/* FP:steal.rs-0008 */ impl < T > Steal < T > { pub fn new (value : T) -> Self { Steal { value : RwLock :: new (Some (value)) } } # [track_caller] pub fn borrow (& self) -> MappedReadGuard < '_ , T > { let borrow = self . value . borrow () ; if borrow . is_none () { panic ! ("attempted to read from stolen value: {}" , std :: any :: type_name ::< T > ()) ; } ReadGuard :: map (borrow , | opt | opt . as_ref () . unwrap ()) } # [track_caller] pub fn get_mut (& mut self) -> & mut T { self . value . get_mut () . as_mut () . expect ("attempt to read from stolen value") } # [track_caller] pub fn steal (& self) -> T { let value_ref = & mut * self . value . try_write () . expect ("stealing value which is locked") ; let value = value_ref . take () ; value . expect ("attempt to steal from stolen value") } # [doc = " Writers of rustc drivers often encounter stealing issues. This function makes it possible to"] # [doc = " handle these errors gracefully."] # [doc = ""] # [doc = " This should not be used within rustc as it leaks information not tracked"] # [doc = " by the query system, breaking incremental compilation."] # [rustc_lint_untracked_query_information] pub fn is_stolen (& self) -> bool { self . value . borrow () . is_none () } }
-/* FP:steal.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_steal_IMPL_0005
-/* FP:steal.rs-0010 */ impl < CTX , T : HashStable < CTX > > HashStable < CTX > for Steal < T > { fn hash_stable (& self , hcx : & mut CTX , hasher : & mut StableHasher) { self . borrow () . hash_stable (hcx , hasher) ; } }
+// SRC: ../rust/compiler/rustc_data_structures/src/steal.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::stable_hasher::{HashStable, StableHasher};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::sync::{MappedReadGuard, ReadGuard, RwLock};
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=Steal | COMPLEXITY=10 | LINES=25 */
+
+/// The `Steal` struct is intended to used as the value for a query.
+/// Specifically, we sometimes have queries (*cough* MIR *cough*)
+/// where we create a large, complex value that we want to iteratively
+/// update (e.g., optimize). We could clone the value for each
+/// optimization, but that'd be expensive. And yet we don't just want
+/// to mutate it in place, because that would spoil the idea that
+/// queries are these pure functions that produce an immutable value
+/// (since if you did the query twice, you could observe the mutations).
+/// So instead we have the query produce a `&'tcx Steal<mir::Body<'tcx>>`
+/// (to be very specific). Now we can read from this
+/// as much as we want (using `borrow()`), but you can also
+/// `steal()`. Once you steal, any further attempt to read will panic.
+/// Therefore, we know that -- assuming no ICE -- nobody is observing
+/// the fact that the MIR was updated.
+///
+/// Obviously, whenever you have a query that yields a `Steal` value,
+/// you must treat it with caution, and make sure that you know that
+/// -- once the value is stolen -- it will never be read from again.
+//
+// FIXME(#41710): what is the best way to model linear queries?
+#[derive(Debug)]
+pub struct Steal<T> {
+    value: RwLock<Option<T>>,
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=14 | LINES=37 */
+
+impl<T> Steal<T> {
+    pub fn new(value: T) -> Self {
+        Steal { value: RwLock::new(Some(value)) }
+    }
+
+    #[track_caller]
+    pub fn borrow(&self) -> MappedReadGuard<'_, T> {
+        let borrow = self.value.borrow();
+        if borrow.is_none() {
+            panic!("attempted to read from stolen value: {}", std::any::type_name::<T>());
+        }
+        ReadGuard::map(borrow, |opt| opt.as_ref().unwrap())
+    }
+
+    #[track_caller]
+    pub fn get_mut(&mut self) -> &mut T {
+        self.value.get_mut().as_mut().expect("attempt to read from stolen value")
+    }
+
+    #[track_caller]
+    pub fn steal(&self) -> T {
+        let value_ref = &mut *self.value.try_write().expect("stealing value which is locked");
+        let value = value_ref.take();
+        value.expect("attempt to steal from stolen value")
+    }
+
+    /// Writers of rustc drivers often encounter stealing issues. This function makes it possible to
+    /// handle these errors gracefully.
+    ///
+    /// This should not be used within rustc as it leaks information not tracked
+    /// by the query system, breaking incremental compilation.
+    #[rustc_lint_untracked_query_information]
+    pub fn is_stolen(&self) -> bool {
+        self.value.borrow().is_none()
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=6 */
+
+impl<CTX, T: HashStable<CTX>> HashStable<CTX> for Steal<T> {
+    fn hash_stable(&self, hcx: &mut CTX, hasher: &mut StableHasher) {
+        self.borrow().hash_stable(hcx, hasher);
+    }
+}

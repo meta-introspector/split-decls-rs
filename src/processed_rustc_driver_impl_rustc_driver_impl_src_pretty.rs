@@ -1,60 +1,361 @@
-/* FP:pretty.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_USE_0001
-/* FP:pretty.rs-0002 */ use std :: cell :: Cell ;
-/* FP:pretty.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_USE_0002
-/* FP:pretty.rs-0004 */ use std :: fmt :: Write ;
-/* FP:pretty.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_USE_0003
-/* FP:pretty.rs-0006 */ use rustc_ast_pretty :: pprust as pprust_ast ;
-/* FP:pretty.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_USE_0004
-/* FP:pretty.rs-0008 */ use crate :: rustc_complete :: bug ;
-/* FP:pretty.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_USE_0005
-/* FP:pretty.rs-0010 */ use crate :: rustc_complete :: mir :: { write_mir_graphviz , write_mir_pretty } ;
-/* FP:pretty.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_USE_0006
-/* FP:pretty.rs-0012 */ use crate :: rustc_complete :: ty :: { self , TyCtxt } ;
-/* FP:pretty.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_USE_0007
-/* FP:pretty.rs-0014 */ use rustc_mir_build :: thir :: print :: { thir_flat , thir_tree } ;
-/* FP:pretty.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_USE_0008
-/* FP:pretty.rs-0016 */ use rustc_public :: rustc_internal :: pretty :: write_smir_pretty ;
-/* FP:pretty.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_USE_0009
-/* FP:pretty.rs-0018 */ use crate :: rustc_complete :: Session ;
-/* FP:pretty.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_USE_0010
-/* FP:pretty.rs-0020 */ use crate :: rustc_complete :: config :: { OutFileName , PpHirMode , PpMode , PpSourceMode } ;
-/* FP:pretty.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_USE_0011
-/* FP:pretty.rs-0022 */ use crate :: rustc_complete :: { FileName , Ident } ;
-/* FP:pretty.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_USE_0012
-/* FP:pretty.rs-0024 */ use tracing :: debug ;
-/* FP:pretty.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_USE_0013
-/* FP:pretty.rs-0026 */ use { rustc_ast as ast , rustc_hir_pretty as pprust_hir } ;
-/* FP:pretty.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_USE_0014
-/* FP:pretty.rs-0028 */ pub use self :: PpMode :: * ;
-/* FP:pretty.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_USE_0015
-/* FP:pretty.rs-0030 */ pub use self :: PpSourceMode :: * ;
-/* FP:pretty.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_STRUCT_0016
-/* FP:pretty.rs-0032 */ struct AstNoAnn ;
-/* FP:pretty.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_IMPL_0017
-/* FP:pretty.rs-0034 */ impl pprust_ast :: PpAnn for AstNoAnn { }
-/* FP:pretty.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_STRUCT_0018
-/* FP:pretty.rs-0036 */ struct AstIdentifiedAnn ;
-/* FP:pretty.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_IMPL_0019
-/* FP:pretty.rs-0038 */ impl pprust_ast :: PpAnn for AstIdentifiedAnn { fn pre (& self , s : & mut pprust_ast :: State < '_ > , node : pprust_ast :: AnnNode < '_ >) { if let pprust_ast :: AnnNode :: Expr (_) = node { s . popen () ; } } fn post (& self , s : & mut pprust_ast :: State < '_ > , node : pprust_ast :: AnnNode < '_ >) { match node { pprust_ast :: AnnNode :: Crate (_) | pprust_ast :: AnnNode :: Ident (_) | pprust_ast :: AnnNode :: Name (_) => { } pprust_ast :: AnnNode :: Item (item) => { s . s . space () ; s . synth_comment (item . id . to_string ()) } pprust_ast :: AnnNode :: SubItem (id) => { s . s . space () ; s . synth_comment (id . to_string ()) } pprust_ast :: AnnNode :: Block (blk) => { s . s . space () ; s . synth_comment (format ! ("block {}" , blk . id)) } pprust_ast :: AnnNode :: Expr (expr) => { s . s . space () ; s . synth_comment (expr . id . to_string ()) ; s . pclose () } pprust_ast :: AnnNode :: Pat (pat) => { s . s . space () ; s . synth_comment (format ! ("pat {}" , pat . id)) ; } } } }
-/* FP:pretty.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_STRUCT_0020
-/* FP:pretty.rs-0040 */ struct HirIdentifiedAnn < 'tcx > { tcx : TyCtxt < 'tcx > , }
-/* FP:pretty.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_IMPL_0021
-/* FP:pretty.rs-0042 */ impl < 'tcx > pprust_hir :: PpAnn for HirIdentifiedAnn < 'tcx > { fn nested (& self , state : & mut pprust_hir :: State < '_ > , nested : pprust_hir :: Nested) { self . tcx . nested (state , nested) } fn pre (& self , s : & mut pprust_hir :: State < '_ > , node : pprust_hir :: AnnNode < '_ >) { if let pprust_hir :: AnnNode :: Expr (_) = node { s . popen () ; } } fn post (& self , s : & mut pprust_hir :: State < '_ > , node : pprust_hir :: AnnNode < '_ >) { match node { pprust_hir :: AnnNode :: Name (_) => { } pprust_hir :: AnnNode :: Item (item) => { s . s . space () ; s . synth_comment (format ! ("hir_id: {}" , item . hir_id ())) ; } pprust_hir :: AnnNode :: SubItem (id) => { s . s . space () ; s . synth_comment (id . to_string ()) ; } pprust_hir :: AnnNode :: Block (blk) => { s . s . space () ; s . synth_comment (format ! ("block hir_id: {}" , blk . hir_id)) ; } pprust_hir :: AnnNode :: Expr (expr) => { s . s . space () ; s . synth_comment (format ! ("expr hir_id: {}" , expr . hir_id)) ; s . pclose () ; } pprust_hir :: AnnNode :: Pat (pat) => { s . s . space () ; s . synth_comment (format ! ("pat hir_id: {}" , pat . hir_id)) ; } pprust_hir :: AnnNode :: TyPat (pat) => { s . s . space () ; s . synth_comment (format ! ("ty pat hir_id: {}" , pat . hir_id)) ; } pprust_hir :: AnnNode :: Arm (arm) => { s . s . space () ; s . synth_comment (format ! ("arm hir_id: {}" , arm . hir_id)) ; } } } }
-/* FP:pretty.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_STRUCT_0022
-/* FP:pretty.rs-0044 */ struct AstHygieneAnn < 'a > { sess : & 'a Session , }
-/* FP:pretty.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_IMPL_0023
-/* FP:pretty.rs-0046 */ impl < 'a > pprust_ast :: PpAnn for AstHygieneAnn < 'a > { fn post (& self , s : & mut pprust_ast :: State < '_ > , node : pprust_ast :: AnnNode < '_ >) { match node { pprust_ast :: AnnNode :: Ident (& Ident { name , span }) => { s . s . space () ; s . synth_comment (format ! ("{}{:?}" , name . as_u32 () , span . ctxt ())) } pprust_ast :: AnnNode :: Name (& name) => { s . s . space () ; s . synth_comment (name . as_u32 () . to_string ()) } pprust_ast :: AnnNode :: Crate (_) => { s . s . hardbreak () ; let verbose = self . sess . verbose_internals () ; s . synth_comment (crate :: rustc_span :: hygiene :: debug_hygiene_data (verbose)) ; s . s . hardbreak_if_not_bol () ; } _ => { } } } }
-/* FP:pretty.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_STRUCT_0024
-/* FP:pretty.rs-0048 */ struct HirTypedAnn < 'tcx > { tcx : TyCtxt < 'tcx > , maybe_typeck_results : Cell < Option < & 'tcx ty :: TypeckResults < 'tcx > > > , }
-/* FP:pretty.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_IMPL_0025
-/* FP:pretty.rs-0050 */ impl < 'tcx > pprust_hir :: PpAnn for HirTypedAnn < 'tcx > { fn nested (& self , state : & mut pprust_hir :: State < '_ > , nested : pprust_hir :: Nested) { let old_maybe_typeck_results = self . maybe_typeck_results . get () ; if let pprust_hir :: Nested :: Body (id) = nested { self . maybe_typeck_results . set (Some (self . tcx . typeck_body (id))) ; } self . tcx . nested (state , nested) ; self . maybe_typeck_results . set (old_maybe_typeck_results) ; } fn pre (& self , s : & mut pprust_hir :: State < '_ > , node : pprust_hir :: AnnNode < '_ >) { if let pprust_hir :: AnnNode :: Expr (_) = node { s . popen () ; } } fn post (& self , s : & mut pprust_hir :: State < '_ > , node : pprust_hir :: AnnNode < '_ >) { if let pprust_hir :: AnnNode :: Expr (expr) = node { let typeck_results = self . maybe_typeck_results . get () . or_else (| | { self . tcx . hir_maybe_body_owned_by (expr . hir_id . owner . def_id) . map (| body_id | self . tcx . typeck_body (body_id . id ())) }) ; if let Some (typeck_results) = typeck_results { s . s . space () ; s . s . word ("as") ; s . s . space () ; s . s . word (typeck_results . expr_ty (expr) . to_string ()) ; } s . pclose () ; } } }
-/* FP:pretty.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_FN_0026
-/* FP:pretty.rs-0052 */ fn get_source (sess : & Session) -> (String , FileName) { let src_name = sess . io . input . source_name () ; let src = String :: clone (sess . source_map () . get_source_file (& src_name) . expect ("get_source_file") . src . as_ref () . expect ("src") ,) ; (src , src_name) }
-/* FP:pretty.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_FN_0027
-/* FP:pretty.rs-0054 */ fn write_or_print (out : & str , sess : & Session) { sess . io . output_file . as_ref () . unwrap_or (& OutFileName :: Stdout) . overwrite (out , sess) ; }
-/* FP:pretty.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_ENUM_0028
-/* FP:pretty.rs-0056 */ pub enum PrintExtra < 'tcx > { AfterParsing { krate : & 'tcx ast :: Crate } , NeedsAstMap { tcx : TyCtxt < 'tcx > } , }
-/* FP:pretty.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_IMPL_0029
-/* FP:pretty.rs-0058 */ impl < 'tcx > PrintExtra < 'tcx > { fn with_krate < F , R > (& self , f : F) -> R where F : FnOnce (& ast :: Crate) -> R , { match self { PrintExtra :: AfterParsing { krate , .. } => f (krate) , PrintExtra :: NeedsAstMap { tcx } => f (& tcx . resolver_for_lowering () . borrow () . 1) , } } fn tcx (& self) -> TyCtxt < 'tcx > { match self { PrintExtra :: AfterParsing { .. } => bug ! ("PrintExtra::tcx") , PrintExtra :: NeedsAstMap { tcx } => * tcx , } } }
-/* FP:pretty.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_pretty_FN_0030
-/* FP:pretty.rs-0060 */ pub fn print < 'tcx > (sess : & Session , ppm : PpMode , ex : PrintExtra < 'tcx >) { if ppm . needs_analysis () { ex . tcx () . ensure_ok () . analysis (()) ; } let (src , src_name) = get_source (sess) ; let out = match ppm { Source (s) => { debug ! ("pretty printing source code {:?}" , s) ; let annotation : Box < dyn pprust_ast :: PpAnn > = match s { Normal => Box :: new (AstNoAnn) , Expanded => Box :: new (AstNoAnn) , Identified => Box :: new (AstIdentifiedAnn) , ExpandedIdentified => Box :: new (AstIdentifiedAnn) , ExpandedHygiene => Box :: new (AstHygieneAnn { sess }) , } ; let psess = & sess . psess ; let is_expanded = ppm . needs_ast_map () ; ex . with_krate (| krate | { pprust_ast :: print_crate (sess . source_map () , krate , src_name , src , & * annotation , is_expanded , psess . edition , & sess . psess . attr_id_generator ,) }) } AstTree => { debug ! ("pretty printing AST tree") ; ex . with_krate (| krate | format ! ("{krate:#?}")) } AstTreeExpanded => { debug ! ("pretty-printing expanded AST") ; format ! ("{:#?}" , ex . tcx () . resolver_for_lowering () . borrow () . 1) } Hir (s) => { debug ! ("pretty printing HIR {:?}" , s) ; let tcx = ex . tcx () ; let f = | annotation : & dyn pprust_hir :: PpAnn | { let sm = sess . source_map () ; let attrs = | id | tcx . hir_attrs (id) ; pprust_hir :: print_crate (sm , tcx . hir_root_module () , src_name , src , & attrs , annotation ,) } ; match s { PpHirMode :: Normal => f (& tcx) , PpHirMode :: Identified => { let annotation = HirIdentifiedAnn { tcx } ; f (& annotation) } PpHirMode :: Typed => { let annotation = HirTypedAnn { tcx , maybe_typeck_results : Cell :: new (None) } ; tcx . dep_graph . with_ignore (| | f (& annotation)) } } } HirTree => { debug ! ("pretty printing HIR tree") ; ex . tcx () . hir_crate_items (()) . owners () . map (| owner | format ! ("{:#?} => {:#?}\n" , owner , ex . tcx () . hir_owner_nodes (owner))) . collect () } Mir => { let mut out = Vec :: new () ; write_mir_pretty (ex . tcx () , None , & mut out) . unwrap () ; String :: from_utf8 (out) . unwrap () } MirCFG => { let mut out = Vec :: new () ; write_mir_graphviz (ex . tcx () , None , & mut out) . unwrap () ; String :: from_utf8 (out) . unwrap () } StableMir => { let mut out = Vec :: new () ; write_smir_pretty (ex . tcx () , & mut out) . unwrap () ; String :: from_utf8 (out) . unwrap () } ThirTree => { let tcx = ex . tcx () ; let mut out = String :: new () ; crate :: rustc_hir_analysis :: check_crate (tcx) ; tcx . dcx () . abort_if_errors () ; debug ! ("pretty printing THIR tree") ; for did in tcx . hir_body_owners () { let _ = writeln ! (out , "{:?}:\n{}\n" , did , thir_tree (tcx , did)) ; } out } ThirFlat => { let tcx = ex . tcx () ; let mut out = String :: new () ; crate :: rustc_hir_analysis :: check_crate (tcx) ; tcx . dcx () . abort_if_errors () ; debug ! ("pretty printing THIR flat") ; for did in tcx . hir_body_owners () { let _ = writeln ! (out , "{:?}:\n{}\n" , did , thir_flat (tcx , did)) ; } out } } ; write_or_print (& out , sess) ; }
+// SRC: ../rust/compiler/rustc_driver_impl/src/pretty.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+// The various pretty-printing routines.
+
+use std::cell::Cell;
+use std::fmt::Write;
+
+use rustc_ast_pretty::pprust as pprust_ast;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::{write_mir_graphviz, write_mir_pretty};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::ty::{self, TyCtxt};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use rustc_mir_build::thir::print::{thir_flat, thir_tree};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use rustc_public::rustc_internal::pretty::write_smir_pretty;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::{OutFileName, PpHirMode, PpMode, PpSourceMode};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{FileName, Ident};
+/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use tracing::debug;
+use {rustc_ast as ast, rustc_hir_pretty as pprust_hir};
+/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=AstNoAnn; | COMPLEXITY=4 | LINES=7 */
+
+pub use self::PpMode::*;
+pub use self::PpSourceMode::*;
+
+struct AstNoAnn;
+
+impl pprust_ast::PpAnn for AstNoAnn {}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=AstIdentifiedAnn; | COMPLEXITY=23 | LINES=40 */
+
+struct AstIdentifiedAnn;
+
+impl pprust_ast::PpAnn for AstIdentifiedAnn {
+    fn pre(&self, s: &mut pprust_ast::State<'_>, node: pprust_ast::AnnNode<'_>) {
+        if let pprust_ast::AnnNode::Expr(_) = node {
+            s.popen();
+        }
+    }
+
+    fn post(&self, s: &mut pprust_ast::State<'_>, node: pprust_ast::AnnNode<'_>) {
+        match node {
+            pprust_ast::AnnNode::Crate(_)
+            | pprust_ast::AnnNode::Ident(_)
+            | pprust_ast::AnnNode::Name(_) => {}
+
+            pprust_ast::AnnNode::Item(item) => {
+                s.s.space();
+                s.synth_comment(item.id.to_string())
+            }
+            pprust_ast::AnnNode::SubItem(id) => {
+                s.s.space();
+                s.synth_comment(id.to_string())
+            }
+            pprust_ast::AnnNode::Block(blk) => {
+                s.s.space();
+                s.synth_comment(format!("block {}", blk.id))
+            }
+            pprust_ast::AnnNode::Expr(expr) => {
+                s.s.space();
+                s.synth_comment(expr.id.to_string());
+                s.pclose()
+            }
+            pprust_ast::AnnNode::Pat(pat) => {
+                s.s.space();
+                s.synth_comment(format!("pat {}", pat.id));
+            }
+        }
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=HirIdentifiedAnn | COMPLEXITY=2 | LINES=4 */
+
+struct HirIdentifiedAnn<'tcx> {
+    tcx: TyCtxt<'tcx>,
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=nested | COMPLEXITY=31 | LINES=47 */
+
+impl<'tcx> pprust_hir::PpAnn for HirIdentifiedAnn<'tcx> {
+    fn nested(&self, state: &mut pprust_hir::State<'_>, nested: pprust_hir::Nested) {
+        self.tcx.nested(state, nested)
+    }
+
+    fn pre(&self, s: &mut pprust_hir::State<'_>, node: pprust_hir::AnnNode<'_>) {
+        if let pprust_hir::AnnNode::Expr(_) = node {
+            s.popen();
+        }
+    }
+
+    fn post(&self, s: &mut pprust_hir::State<'_>, node: pprust_hir::AnnNode<'_>) {
+        match node {
+            pprust_hir::AnnNode::Name(_) => {}
+            pprust_hir::AnnNode::Item(item) => {
+                s.s.space();
+                s.synth_comment(format!("hir_id: {}", item.hir_id()));
+            }
+            pprust_hir::AnnNode::SubItem(id) => {
+                s.s.space();
+                s.synth_comment(id.to_string());
+            }
+            pprust_hir::AnnNode::Block(blk) => {
+                s.s.space();
+                s.synth_comment(format!("block hir_id: {}", blk.hir_id));
+            }
+            pprust_hir::AnnNode::Expr(expr) => {
+                s.s.space();
+                s.synth_comment(format!("expr hir_id: {}", expr.hir_id));
+                s.pclose();
+            }
+            pprust_hir::AnnNode::Pat(pat) => {
+                s.s.space();
+                s.synth_comment(format!("pat hir_id: {}", pat.hir_id));
+            }
+            pprust_hir::AnnNode::TyPat(pat) => {
+                s.s.space();
+                s.synth_comment(format!("ty pat hir_id: {}", pat.hir_id));
+            }
+            pprust_hir::AnnNode::Arm(arm) => {
+                s.s.space();
+                s.synth_comment(format!("arm hir_id: {}", arm.hir_id));
+            }
+        }
+    }
+}
+/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=AstHygieneAnn | COMPLEXITY=2 | LINES=4 */
+
+struct AstHygieneAnn<'a> {
+    sess: &'a Session,
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=post | COMPLEXITY=17 | LINES=22 */
+
+impl<'a> pprust_ast::PpAnn for AstHygieneAnn<'a> {
+    fn post(&self, s: &mut pprust_ast::State<'_>, node: pprust_ast::AnnNode<'_>) {
+        match node {
+            pprust_ast::AnnNode::Ident(&Ident { name, span }) => {
+                s.s.space();
+                s.synth_comment(format!("{}{:?}", name.as_u32(), span.ctxt()))
+            }
+            pprust_ast::AnnNode::Name(&name) => {
+                s.s.space();
+                s.synth_comment(name.as_u32().to_string())
+            }
+            pprust_ast::AnnNode::Crate(_) => {
+                s.s.hardbreak();
+                let verbose = self.sess.verbose_internals();
+                s.synth_comment(crate::rustc_span::hygiene::debug_hygiene_data(verbose));
+                s.s.hardbreak_if_not_bol();
+            }
+            _ => {}
+        }
+    }
+}
+/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=HirTypedAnn | COMPLEXITY=2 | LINES=5 */
+
+struct HirTypedAnn<'tcx> {
+    tcx: TyCtxt<'tcx>,
+    maybe_typeck_results: Cell<Option<&'tcx ty::TypeckResults<'tcx>>>,
+}
+/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=nested | COMPLEXITY=22 | LINES=36 */
+
+impl<'tcx> pprust_hir::PpAnn for HirTypedAnn<'tcx> {
+    fn nested(&self, state: &mut pprust_hir::State<'_>, nested: pprust_hir::Nested) {
+        let old_maybe_typeck_results = self.maybe_typeck_results.get();
+        if let pprust_hir::Nested::Body(id) = nested {
+            self.maybe_typeck_results.set(Some(self.tcx.typeck_body(id)));
+        }
+        self.tcx.nested(state, nested);
+        self.maybe_typeck_results.set(old_maybe_typeck_results);
+    }
+
+    fn pre(&self, s: &mut pprust_hir::State<'_>, node: pprust_hir::AnnNode<'_>) {
+        if let pprust_hir::AnnNode::Expr(_) = node {
+            s.popen();
+        }
+    }
+
+    fn post(&self, s: &mut pprust_hir::State<'_>, node: pprust_hir::AnnNode<'_>) {
+        if let pprust_hir::AnnNode::Expr(expr) = node {
+            let typeck_results = self.maybe_typeck_results.get().or_else(|| {
+                self.tcx
+                    .hir_maybe_body_owned_by(expr.hir_id.owner.def_id)
+                    .map(|body_id| self.tcx.typeck_body(body_id.id()))
+            });
+
+            if let Some(typeck_results) = typeck_results {
+                s.s.space();
+                s.s.word("as");
+                s.s.space();
+                s.s.word(typeck_results.expr_ty(expr).to_string());
+            }
+
+            s.pclose();
+        }
+    }
+}
+/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=get_source | COMPLEXITY=2 | LINES=13 */
+
+fn get_source(sess: &Session) -> (String, FileName) {
+    let src_name = sess.io.input.source_name();
+    let src = String::clone(
+        sess.source_map()
+            .get_source_file(&src_name)
+            .expect("get_source_file")
+            .src
+            .as_ref()
+            .expect("src"),
+    );
+    (src, src_name)
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=write_or_print | COMPLEXITY=2 | LINES=4 */
+
+fn write_or_print(out: &str, sess: &Session) {
+    sess.io.output_file.as_ref().unwrap_or(&OutFileName::Stdout).overwrite(out, sess);
+}
+/* AST_META: AST_ID=17 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=7 */
+
+// Extra data for pretty-printing, the form of which depends on what kind of
+// pretty-printing we are doing.
+pub enum PrintExtra<'tcx> {
+    AfterParsing { krate: &'tcx ast::Crate },
+    NeedsAstMap { tcx: TyCtxt<'tcx> },
+}
+/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=with_krate | COMPLEXITY=17 | LINES=19 */
+
+impl<'tcx> PrintExtra<'tcx> {
+    fn with_krate<F, R>(&self, f: F) -> R
+    where
+        F: FnOnce(&ast::Crate) -> R,
+    {
+        match self {
+            PrintExtra::AfterParsing { krate, .. } => f(krate),
+            PrintExtra::NeedsAstMap { tcx } => f(&tcx.resolver_for_lowering().borrow().1),
+        }
+    }
+
+    fn tcx(&self) -> TyCtxt<'tcx> {
+        match self {
+            PrintExtra::AfterParsing { .. } => bug!("PrintExtra::tcx"),
+            PrintExtra::NeedsAstMap { tcx } => *tcx,
+        }
+    }
+}
+/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=print | COMPLEXITY=58 | LINES=117 */
+
+pub fn print<'tcx>(sess: &Session, ppm: PpMode, ex: PrintExtra<'tcx>) {
+    if ppm.needs_analysis() {
+        ex.tcx().ensure_ok().analysis(());
+    }
+
+    let (src, src_name) = get_source(sess);
+
+    let out = match ppm {
+        Source(s) => {
+            debug!("pretty printing source code {:?}", s);
+            let annotation: Box<dyn pprust_ast::PpAnn> = match s {
+                Normal => Box::new(AstNoAnn),
+                Expanded => Box::new(AstNoAnn),
+                Identified => Box::new(AstIdentifiedAnn),
+                ExpandedIdentified => Box::new(AstIdentifiedAnn),
+                ExpandedHygiene => Box::new(AstHygieneAnn { sess }),
+            };
+            let psess = &sess.psess;
+            let is_expanded = ppm.needs_ast_map();
+            ex.with_krate(|krate| {
+                pprust_ast::print_crate(
+                    sess.source_map(),
+                    krate,
+                    src_name,
+                    src,
+                    &*annotation,
+                    is_expanded,
+                    psess.edition,
+                    &sess.psess.attr_id_generator,
+                )
+            })
+        }
+        AstTree => {
+            debug!("pretty printing AST tree");
+            ex.with_krate(|krate| format!("{krate:#?}"))
+        }
+        AstTreeExpanded => {
+            debug!("pretty-printing expanded AST");
+            format!("{:#?}", ex.tcx().resolver_for_lowering().borrow().1)
+        }
+        Hir(s) => {
+            debug!("pretty printing HIR {:?}", s);
+            let tcx = ex.tcx();
+            let f = |annotation: &dyn pprust_hir::PpAnn| {
+                let sm = sess.source_map();
+                let attrs = |id| tcx.hir_attrs(id);
+                pprust_hir::print_crate(
+                    sm,
+                    tcx.hir_root_module(),
+                    src_name,
+                    src,
+                    &attrs,
+                    annotation,
+                )
+            };
+            match s {
+                PpHirMode::Normal => f(&tcx),
+                PpHirMode::Identified => {
+                    let annotation = HirIdentifiedAnn { tcx };
+                    f(&annotation)
+                }
+                PpHirMode::Typed => {
+                    let annotation = HirTypedAnn { tcx, maybe_typeck_results: Cell::new(None) };
+                    tcx.dep_graph.with_ignore(|| f(&annotation))
+                }
+            }
+        }
+        HirTree => {
+            debug!("pretty printing HIR tree");
+            ex.tcx()
+                .hir_crate_items(())
+                .owners()
+                .map(|owner| format!("{:#?} => {:#?}\n", owner, ex.tcx().hir_owner_nodes(owner)))
+                .collect()
+        }
+        Mir => {
+            let mut out = Vec::new();
+            write_mir_pretty(ex.tcx(), None, &mut out).unwrap();
+            String::from_utf8(out).unwrap()
+        }
+        MirCFG => {
+            let mut out = Vec::new();
+            write_mir_graphviz(ex.tcx(), None, &mut out).unwrap();
+            String::from_utf8(out).unwrap()
+        }
+        StableMir => {
+            let mut out = Vec::new();
+            write_smir_pretty(ex.tcx(), &mut out).unwrap();
+            String::from_utf8(out).unwrap()
+        }
+        ThirTree => {
+            let tcx = ex.tcx();
+            let mut out = String::new();
+            crate::rustc_hir_analysis::check_crate(tcx);
+            tcx.dcx().abort_if_errors();
+            debug!("pretty printing THIR tree");
+            for did in tcx.hir_body_owners() {
+                let _ = writeln!(out, "{:?}:\n{}\n", did, thir_tree(tcx, did));
+            }
+            out
+        }
+        ThirFlat => {
+            let tcx = ex.tcx();
+            let mut out = String::new();
+            crate::rustc_hir_analysis::check_crate(tcx);
+            tcx.dcx().abort_if_errors();
+            debug!("pretty printing THIR flat");
+            for did in tcx.hir_body_owners() {
+                let _ = writeln!(out, "{:?}:\n{}\n", did, thir_flat(tcx, did));
+            }
+            out
+        }
+    };
+
+    write_or_print(&out, sess);
+}

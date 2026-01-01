@@ -1,36 +1,306 @@
-/* FP:ty.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_USE_0001
-/* FP:ty.rs-0002 */ use std :: fmt ;
-/* FP:ty.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_USE_0002
-/* FP:ty.rs-0004 */ use std :: ops :: Deref ;
-/* FP:ty.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_USE_0003
-/* FP:ty.rs-0006 */ use crate :: rustc_data_structures :: intern :: Interned ;
-/* FP:ty.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_USE_0004
-/* FP:ty.rs-0008 */ use rustc_macros :: HashStable_Generic ;
-/* FP:ty.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_USE_0005
-/* FP:ty.rs-0010 */ use crate :: { AbiAlign , Align , BackendRepr , FieldsShape , Float , HasDataLayout , LayoutData , Niche , PointeeInfo , Primitive , Size , Variants , } ;
-/* FP:ty.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_MACRO_0006
-/* FP:ty.rs-0012 */ crate :: rustc_index :: newtype_index ! { # [doc = " The *source-order* index of a field in a variant."] # [doc = ""] # [doc = " This is how most code after type checking refers to fields, rather than"] # [doc = " using names (as names have hygiene complications and more complex lookup)."] # [doc = ""] # [doc = " Particularly for `repr(Rust)` types, this may not be the same as *layout* order."] # [doc = " (It is for `repr(C)` `struct`s, however.)"] # [doc = ""] # [doc = " For example, in the following types,"] # [doc = " ```rust"] # [doc = " # enum Never {}"] # [doc = " # #[repr(u16)]"] # [doc = " enum Demo1 {"] # [doc = "    Variant0 { a: Never, b: i32 } = 100,"] # [doc = "    Variant1 { c: u8, d: u64 } = 10,"] # [doc = " }"] # [doc = " struct Demo2 { e: u8, f: u16, g: u8 }"] # [doc = " ```"] # [doc = " `b` is `FieldIdx(1)` in `VariantIdx(0)`,"] # [doc = " `d` is `FieldIdx(1)` in `VariantIdx(1)`, and"] # [doc = " `f` is `FieldIdx(1)` in `VariantIdx(0)`."] # [derive (HashStable_Generic)] # [encodable] # [orderable] pub struct FieldIdx { } }
-/* FP:ty.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_IMPL_0007
-/* FP:ty.rs-0014 */ impl FieldIdx { # [doc = " The second field, at index 1."] # [doc = ""] # [doc = " For use alongside [`FieldIdx::ZERO`], particularly with scalar pairs."] pub const ONE : FieldIdx = FieldIdx :: from_u32 (1) ; }
-/* FP:ty.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_MACRO_0008
-/* FP:ty.rs-0016 */ crate :: rustc_index :: newtype_index ! { # [doc = " The *source-order* index of a variant in a type."] # [doc = ""] # [doc = " For enums, these are always `0..variant_count`, regardless of any"] # [doc = " custom discriminants that may have been defined, and including any"] # [doc = " variants that may end up uninhabited due to field types.  (Some of the"] # [doc = " variants may not be present in a monomorphized ABI [`Variants`], but"] # [doc = " those skipped variants are always counted when determining the *index*.)"] # [doc = ""] # [doc = " `struct`s, `tuples`, and `unions`s are considered to have a single variant"] # [doc = " with variant index zero, aka [`FIRST_VARIANT`]."] # [derive (HashStable_Generic)] # [encodable] # [orderable] pub struct VariantIdx { # [doc = " Equivalent to `VariantIdx(0)`."] const FIRST_VARIANT = 0 ; } }
-/* FP:ty.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_STRUCT_0009
-/* FP:ty.rs-0018 */ # [derive (Copy , Clone , PartialEq , Eq , Hash , HashStable_Generic)] # [rustc_pass_by_value] pub struct Layout < 'a > (pub Interned < 'a , LayoutData < FieldIdx , VariantIdx > >) ;
-/* FP:ty.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_IMPL_0010
-/* FP:ty.rs-0020 */ impl < 'a > fmt :: Debug for Layout < 'a > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { self . 0 . 0 . fmt (f) } }
-/* FP:ty.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_IMPL_0011
-/* FP:ty.rs-0022 */ impl < 'a > Deref for Layout < 'a > { type Target = & 'a LayoutData < FieldIdx , VariantIdx > ; fn deref (& self) -> & & 'a LayoutData < FieldIdx , VariantIdx > { & self . 0 . 0 } }
-/* FP:ty.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_IMPL_0012
-/* FP:ty.rs-0024 */ impl < 'a > Layout < 'a > { pub fn fields (self) -> & 'a FieldsShape < FieldIdx > { & self . 0 . 0 . fields } pub fn variants (self) -> & 'a Variants < FieldIdx , VariantIdx > { & self . 0 . 0 . variants } pub fn backend_repr (self) -> BackendRepr { self . 0 . 0 . backend_repr } pub fn largest_niche (self) -> Option < Niche > { self . 0 . 0 . largest_niche } pub fn align (self) -> AbiAlign { self . 0 . 0 . align } pub fn size (self) -> Size { self . 0 . 0 . size } pub fn max_repr_align (self) -> Option < Align > { self . 0 . 0 . max_repr_align } pub fn unadjusted_abi_align (self) -> Align { self . 0 . 0 . unadjusted_abi_align } }
-/* FP:ty.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_STRUCT_0013
-/* FP:ty.rs-0026 */ # [doc = " The layout of a type, alongside the type itself."] # [doc = " Provides various type traversal APIs (e.g., recursing into fields)."] # [doc = ""] # [doc = " Note that the layout is NOT guaranteed to always be identical"] # [doc = " to that obtained from `layout_of(ty)`, as we need to produce"] # [doc = " layouts for which Rust types do not exist, such as enum variants"] # [doc = " or synthetic fields of enums (i.e., discriminants) and wide pointers."] # [derive (Copy , Clone , PartialEq , Eq , Hash , HashStable_Generic)] pub struct TyAndLayout < 'a , Ty > { pub ty : Ty , pub layout : Layout < 'a > , }
-/* FP:ty.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_IMPL_0014
-/* FP:ty.rs-0028 */ impl < 'a , Ty : fmt :: Display > fmt :: Debug for TyAndLayout < 'a , Ty > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . debug_struct ("TyAndLayout") . field ("ty" , & format_args ! ("{}" , self . ty)) . field ("layout" , & self . layout) . finish () } }
-/* FP:ty.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_IMPL_0015
-/* FP:ty.rs-0030 */ impl < 'a , Ty > Deref for TyAndLayout < 'a , Ty > { type Target = & 'a LayoutData < FieldIdx , VariantIdx > ; fn deref (& self) -> & & 'a LayoutData < FieldIdx , VariantIdx > { & self . layout . 0 . 0 } }
-/* FP:ty.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_IMPL_0016
-/* FP:ty.rs-0032 */ impl < 'a , Ty > AsRef < LayoutData < FieldIdx , VariantIdx > > for TyAndLayout < 'a , Ty > { fn as_ref (& self) -> & LayoutData < FieldIdx , VariantIdx > { & * self . layout . 0 . 0 } }
-/* FP:ty.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_TRAIT_0017
-/* FP:ty.rs-0034 */ # [doc = " Trait that needs to be implemented by the higher-level type representation"] # [doc = " (e.g. `crate::rustc_middle::ty::Ty`), to provide `crate::rustc_target::abi` functionality."] pub trait TyAbiInterface < 'a , C > : Sized + std :: fmt :: Debug { fn ty_and_layout_for_variant (this : TyAndLayout < 'a , Self > , cx : & C , variant_index : VariantIdx ,) -> TyAndLayout < 'a , Self > ; fn ty_and_layout_field (this : TyAndLayout < 'a , Self > , cx : & C , i : usize) -> TyAndLayout < 'a , Self > ; fn ty_and_layout_pointee_info_at (this : TyAndLayout < 'a , Self > , cx : & C , offset : Size ,) -> Option < PointeeInfo > ; fn is_adt (this : TyAndLayout < 'a , Self >) -> bool ; fn is_never (this : TyAndLayout < 'a , Self >) -> bool ; fn is_tuple (this : TyAndLayout < 'a , Self >) -> bool ; fn is_unit (this : TyAndLayout < 'a , Self >) -> bool ; fn is_transparent (this : TyAndLayout < 'a , Self >) -> bool ; }
-/* FP:ty.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_abi_src_layout_ty_IMPL_0018
-/* FP:ty.rs-0036 */ impl < 'a , Ty > TyAndLayout < 'a , Ty > { pub fn for_variant < C > (self , cx : & C , variant_index : VariantIdx) -> Self where Ty : TyAbiInterface < 'a , C > , { Ty :: ty_and_layout_for_variant (self , cx , variant_index) } pub fn field < C > (self , cx : & C , i : usize) -> Self where Ty : TyAbiInterface < 'a , C > , { Ty :: ty_and_layout_field (self , cx , i) } pub fn pointee_info_at < C > (self , cx : & C , offset : Size) -> Option < PointeeInfo > where Ty : TyAbiInterface < 'a , C > , { Ty :: ty_and_layout_pointee_info_at (self , cx , offset) } pub fn is_single_fp_element < C > (self , cx : & C) -> bool where Ty : TyAbiInterface < 'a , C > , C : HasDataLayout , { match self . backend_repr { BackendRepr :: Scalar (scalar) => { matches ! (scalar . primitive () , Primitive :: Float (Float :: F32 | Float :: F64)) } BackendRepr :: Memory { .. } => { if self . fields . count () == 1 && self . fields . offset (0) . bytes () == 0 { self . field (cx , 0) . is_single_fp_element (cx) } else { false } } _ => false , } } pub fn is_single_vector_element < C > (self , cx : & C , expected_size : Size) -> bool where Ty : TyAbiInterface < 'a , C > , C : HasDataLayout , { match self . backend_repr { BackendRepr :: SimdVector { .. } => self . size == expected_size , BackendRepr :: Memory { .. } => { if self . fields . count () == 1 && self . fields . offset (0) . bytes () == 0 { self . field (cx , 0) . is_single_vector_element (cx , expected_size) } else { false } } _ => false , } } pub fn is_adt < C > (self) -> bool where Ty : TyAbiInterface < 'a , C > , { Ty :: is_adt (self) } pub fn is_never < C > (self) -> bool where Ty : TyAbiInterface < 'a , C > , { Ty :: is_never (self) } pub fn is_tuple < C > (self) -> bool where Ty : TyAbiInterface < 'a , C > , { Ty :: is_tuple (self) } pub fn is_unit < C > (self) -> bool where Ty : TyAbiInterface < 'a , C > , { Ty :: is_unit (self) } pub fn is_transparent < C > (self) -> bool where Ty : TyAbiInterface < 'a , C > , { Ty :: is_transparent (self) } # [doc = " Finds the one field that is not a 1-ZST."] # [doc = " Returns `None` if there are multiple non-1-ZST fields or only 1-ZST-fields."] pub fn non_1zst_field < C > (& self , cx : & C) -> Option < (FieldIdx , Self) > where Ty : TyAbiInterface < 'a , C > + Copy , { let mut found = None ; for field_idx in 0 .. self . fields . count () { let field = self . field (cx , field_idx) ; if field . is_1zst () { continue ; } if found . is_some () { return None ; } found = Some ((FieldIdx :: from_usize (field_idx) , field)) ; } found } }
+// SRC: ../rust/compiler/rustc_abi/src/layout/ty.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
+use std::fmt;
+use std::ops::Deref;
+
+use crate::rustc_data_structures::intern::Interned;
+use rustc_macros::HashStable_Generic;
+
+use crate::{
+    AbiAlign, Align, BackendRepr, FieldsShape, Float, HasDataLayout, LayoutData, Niche,
+    PointeeInfo, Primitive, Size, Variants,
+};
+/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=FieldIdx | COMPLEXITY=14 | LINES=30 */
+
+// Explicitly import `Float` to avoid ambiguity with `Primitive::Float`.
+
+crate::rustc_index::newtype_index! {
+    /// The *source-order* index of a field in a variant.
+    ///
+    /// This is how most code after type checking refers to fields, rather than
+    /// using names (as names have hygiene complications and more complex lookup).
+    ///
+    /// Particularly for `repr(Rust)` types, this may not be the same as *layout* order.
+    /// (It is for `repr(C)` `struct`s, however.)
+    ///
+    /// For example, in the following types,
+    /// ```rust
+    /// # enum Never {}
+    /// # #[repr(u16)]
+    /// enum Demo1 {
+    ///    Variant0 { a: Never, b: i32 } = 100,
+    ///    Variant1 { c: u8, d: u64 } = 10,
+    /// }
+    /// struct Demo2 { e: u8, f: u16, g: u8 }
+    /// ```
+    /// `b` is `FieldIdx(1)` in `VariantIdx(0)`,
+    /// `d` is `FieldIdx(1)` in `VariantIdx(1)`, and
+    /// `f` is `FieldIdx(1)` in `VariantIdx(0)`.
+    #[derive(HashStable_Generic)]
+    #[encodable]
+    #[orderable]
+    pub struct FieldIdx {}
+}
+/* AST_META: AST_ID=3 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+impl FieldIdx {
+    /// The second field, at index 1.
+    ///
+    /// For use alongside [`FieldIdx::ZERO`], particularly with scalar pairs.
+    pub const ONE: FieldIdx = FieldIdx::from_u32(1);
+}
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=VariantIdx | COMPLEXITY=4 | LINES=20 */
+
+crate::rustc_index::newtype_index! {
+    /// The *source-order* index of a variant in a type.
+    ///
+    /// For enums, these are always `0..variant_count`, regardless of any
+    /// custom discriminants that may have been defined, and including any
+    /// variants that may end up uninhabited due to field types.  (Some of the
+    /// variants may not be present in a monomorphized ABI [`Variants`], but
+    /// those skipped variants are always counted when determining the *index*.)
+    ///
+    /// `struct`s, `tuples`, and `unions`s are considered to have a single variant
+    /// with variant index zero, aka [`FIRST_VARIANT`].
+    #[derive(HashStable_Generic)]
+    #[encodable]
+    #[orderable]
+    pub struct VariantIdx {
+        /// Equivalent to `VariantIdx(0)`.
+        const FIRST_VARIANT = 0;
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=Layout | COMPLEXITY=5 | LINES=10 */
+#[derive(Copy, Clone, PartialEq, Eq, Hash, HashStable_Generic)]
+#[rustc_pass_by_value]
+pub struct Layout<'a>(pub Interned<'a, LayoutData<FieldIdx, VariantIdx>>);
+
+impl<'a> fmt::Debug for Layout<'a> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        // See comment on `<LayoutData as Debug>::fmt` above.
+        self.0.0.fmt(f)
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=7 */
+
+impl<'a> Deref for Layout<'a> {
+    type Target = &'a LayoutData<FieldIdx, VariantIdx>;
+    fn deref(&self) -> &&'a LayoutData<FieldIdx, VariantIdx> {
+        &self.0.0
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fields | COMPLEXITY=11 | LINES=34 */
+
+impl<'a> Layout<'a> {
+    pub fn fields(self) -> &'a FieldsShape<FieldIdx> {
+        &self.0.0.fields
+    }
+
+    pub fn variants(self) -> &'a Variants<FieldIdx, VariantIdx> {
+        &self.0.0.variants
+    }
+
+    pub fn backend_repr(self) -> BackendRepr {
+        self.0.0.backend_repr
+    }
+
+    pub fn largest_niche(self) -> Option<Niche> {
+        self.0.0.largest_niche
+    }
+
+    pub fn align(self) -> AbiAlign {
+        self.0.0.align
+    }
+
+    pub fn size(self) -> Size {
+        self.0.0.size
+    }
+
+    pub fn max_repr_align(self) -> Option<Align> {
+        self.0.0.max_repr_align
+    }
+
+    pub fn unadjusted_abi_align(self) -> Align {
+        self.0.0.unadjusted_abi_align
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=TyAndLayout | COMPLEXITY=5 | LINES=13 */
+
+/// The layout of a type, alongside the type itself.
+/// Provides various type traversal APIs (e.g., recursing into fields).
+///
+/// Note that the layout is NOT guaranteed to always be identical
+/// to that obtained from `layout_of(ty)`, as we need to produce
+/// layouts for which Rust types do not exist, such as enum variants
+/// or synthetic fields of enums (i.e., discriminants) and wide pointers.
+#[derive(Copy, Clone, PartialEq, Eq, Hash, HashStable_Generic)]
+pub struct TyAndLayout<'a, Ty> {
+    pub ty: Ty,
+    pub layout: Layout<'a>,
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=6 | LINES=10 */
+
+impl<'a, Ty: fmt::Display> fmt::Debug for TyAndLayout<'a, Ty> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        // Print the type in a readable way, not its debug representation.
+        f.debug_struct("TyAndLayout")
+            .field("ty", &format_args!("{}", self.ty))
+            .field("layout", &self.layout)
+            .finish()
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=7 */
+
+impl<'a, Ty> Deref for TyAndLayout<'a, Ty> {
+    type Target = &'a LayoutData<FieldIdx, VariantIdx>;
+    fn deref(&self) -> &&'a LayoutData<FieldIdx, VariantIdx> {
+        &self.layout.0.0
+    }
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=as_ref | COMPLEXITY=5 | LINES=6 */
+
+impl<'a, Ty> AsRef<LayoutData<FieldIdx, VariantIdx>> for TyAndLayout<'a, Ty> {
+    fn as_ref(&self) -> &LayoutData<FieldIdx, VariantIdx> {
+        &*self.layout.0.0
+    }
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=ty_and_layout_for_variant | COMPLEXITY=3 | LINES=21 */
+
+/// Trait that needs to be implemented by the higher-level type representation
+/// (e.g. `crate::rustc_middle::ty::Ty`), to provide `crate::rustc_target::abi` functionality.
+pub trait TyAbiInterface<'a, C>: Sized + std::fmt::Debug {
+    fn ty_and_layout_for_variant(
+        this: TyAndLayout<'a, Self>,
+        cx: &C,
+        variant_index: VariantIdx,
+    ) -> TyAndLayout<'a, Self>;
+    fn ty_and_layout_field(this: TyAndLayout<'a, Self>, cx: &C, i: usize) -> TyAndLayout<'a, Self>;
+    fn ty_and_layout_pointee_info_at(
+        this: TyAndLayout<'a, Self>,
+        cx: &C,
+        offset: Size,
+    ) -> Option<PointeeInfo>;
+    fn is_adt(this: TyAndLayout<'a, Self>) -> bool;
+    fn is_never(this: TyAndLayout<'a, Self>) -> bool;
+    fn is_tuple(this: TyAndLayout<'a, Self>) -> bool;
+    fn is_unit(this: TyAndLayout<'a, Self>) -> bool;
+    fn is_transparent(this: TyAndLayout<'a, Self>) -> bool;
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=for_variant | COMPLEXITY=52 | LINES=117 */
+
+impl<'a, Ty> TyAndLayout<'a, Ty> {
+    pub fn for_variant<C>(self, cx: &C, variant_index: VariantIdx) -> Self
+    where
+        Ty: TyAbiInterface<'a, C>,
+    {
+        Ty::ty_and_layout_for_variant(self, cx, variant_index)
+    }
+
+    pub fn field<C>(self, cx: &C, i: usize) -> Self
+    where
+        Ty: TyAbiInterface<'a, C>,
+    {
+        Ty::ty_and_layout_field(self, cx, i)
+    }
+
+    pub fn pointee_info_at<C>(self, cx: &C, offset: Size) -> Option<PointeeInfo>
+    where
+        Ty: TyAbiInterface<'a, C>,
+    {
+        Ty::ty_and_layout_pointee_info_at(self, cx, offset)
+    }
+
+    pub fn is_single_fp_element<C>(self, cx: &C) -> bool
+    where
+        Ty: TyAbiInterface<'a, C>,
+        C: HasDataLayout,
+    {
+        match self.backend_repr {
+            BackendRepr::Scalar(scalar) => {
+                matches!(scalar.primitive(), Primitive::Float(Float::F32 | Float::F64))
+            }
+            BackendRepr::Memory { .. } => {
+                if self.fields.count() == 1 && self.fields.offset(0).bytes() == 0 {
+                    self.field(cx, 0).is_single_fp_element(cx)
+                } else {
+                    false
+                }
+            }
+            _ => false,
+        }
+    }
+
+    pub fn is_single_vector_element<C>(self, cx: &C, expected_size: Size) -> bool
+    where
+        Ty: TyAbiInterface<'a, C>,
+        C: HasDataLayout,
+    {
+        match self.backend_repr {
+            BackendRepr::SimdVector { .. } => self.size == expected_size,
+            BackendRepr::Memory { .. } => {
+                if self.fields.count() == 1 && self.fields.offset(0).bytes() == 0 {
+                    self.field(cx, 0).is_single_vector_element(cx, expected_size)
+                } else {
+                    false
+                }
+            }
+            _ => false,
+        }
+    }
+
+    pub fn is_adt<C>(self) -> bool
+    where
+        Ty: TyAbiInterface<'a, C>,
+    {
+        Ty::is_adt(self)
+    }
+
+    pub fn is_never<C>(self) -> bool
+    where
+        Ty: TyAbiInterface<'a, C>,
+    {
+        Ty::is_never(self)
+    }
+
+    pub fn is_tuple<C>(self) -> bool
+    where
+        Ty: TyAbiInterface<'a, C>,
+    {
+        Ty::is_tuple(self)
+    }
+
+    pub fn is_unit<C>(self) -> bool
+    where
+        Ty: TyAbiInterface<'a, C>,
+    {
+        Ty::is_unit(self)
+    }
+
+    pub fn is_transparent<C>(self) -> bool
+    where
+        Ty: TyAbiInterface<'a, C>,
+    {
+        Ty::is_transparent(self)
+    }
+
+    /// Finds the one field that is not a 1-ZST.
+    /// Returns `None` if there are multiple non-1-ZST fields or only 1-ZST-fields.
+    pub fn non_1zst_field<C>(&self, cx: &C) -> Option<(FieldIdx, Self)>
+    where
+        Ty: TyAbiInterface<'a, C> + Copy,
+    {
+        let mut found = None;
+        for field_idx in 0..self.fields.count() {
+            let field = self.field(cx, field_idx);
+            if field.is_1zst() {
+                continue;
+            }
+            if found.is_some() {
+                // More than one non-1-ZST field.
+                return None;
+            }
+            found = Some((FieldIdx::from_usize(field_idx), field));
+        }
+        found
+    }
+}

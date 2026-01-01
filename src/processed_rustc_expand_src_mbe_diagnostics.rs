@@ -1,54 +1,359 @@
-/* FP:diagnostics.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_USE_0001
-/* FP:diagnostics.rs-0002 */ use std :: borrow :: Cow ;
-/* FP:diagnostics.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_USE_0002
-/* FP:diagnostics.rs-0004 */ use crate :: rustc_complete :: token :: { self , Token } ;
-/* FP:diagnostics.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_USE_0003
-/* FP:diagnostics.rs-0006 */ use crate :: rustc_complete :: tokenstream :: TokenStream ;
-/* FP:diagnostics.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_USE_0004
-/* FP:diagnostics.rs-0008 */ use crate :: rustc_complete :: { Applicability , Diag , DiagCtxtHandle , DiagMessage } ;
-/* FP:diagnostics.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_USE_0005
-/* FP:diagnostics.rs-0010 */ use rustc_macros :: Subdiagnostic ;
-/* FP:diagnostics.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_USE_0006
-/* FP:diagnostics.rs-0012 */ use crate :: rustc_parse :: parser :: { Parser , Recovery , token_descr } ;
-/* FP:diagnostics.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_USE_0007
-/* FP:diagnostics.rs-0014 */ use crate :: rustc_complete :: parse :: ParseSess ;
-/* FP:diagnostics.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_USE_0008
-/* FP:diagnostics.rs-0016 */ use crate :: rustc_complete :: source_map :: SourceMap ;
-/* FP:diagnostics.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_USE_0009
-/* FP:diagnostics.rs-0018 */ use crate :: rustc_complete :: { DUMMY_SP , ErrorGuaranteed , Ident , Span } ;
-/* FP:diagnostics.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_USE_0010
-/* FP:diagnostics.rs-0020 */ use tracing :: debug ;
-/* FP:diagnostics.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_USE_0011
-/* FP:diagnostics.rs-0022 */ use super :: macro_rules :: { MacroRule , NoopTracker , parser_from_cx } ;
-/* FP:diagnostics.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_USE_0012
-/* FP:diagnostics.rs-0024 */ use crate :: expand :: { AstFragmentKind , parse_ast_fragment } ;
-/* FP:diagnostics.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_USE_0013
-/* FP:diagnostics.rs-0026 */ use crate :: mbe :: macro_parser :: ParseResult :: * ;
-/* FP:diagnostics.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_USE_0014
-/* FP:diagnostics.rs-0028 */ use crate :: mbe :: macro_parser :: { MatcherLoc , NamedParseResult , TtParser } ;
-/* FP:diagnostics.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_USE_0015
-/* FP:diagnostics.rs-0030 */ use crate :: mbe :: macro_rules :: { Tracker , try_match_macro , try_match_macro_attr , try_match_macro_derive , } ;
-/* FP:diagnostics.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_ENUM_0016
-/* FP:diagnostics.rs-0032 */ pub (super) enum FailedMacro < 'a > { Func , Attr (& 'a TokenStream) , Derive , }
-/* FP:diagnostics.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_FN_0017
-/* FP:diagnostics.rs-0034 */ pub (super) fn failed_to_match_macro (psess : & ParseSess , sp : Span , def_span : Span , name : Ident , args : FailedMacro < '_ > , body : & TokenStream , rules : & [MacroRule] ,) -> (Span , ErrorGuaranteed) { debug ! ("failed to match macro") ; let def_head_span = if ! def_span . is_dummy () && ! psess . source_map () . is_imported (def_span) { psess . source_map () . guess_head_span (def_span) } else { DUMMY_SP } ; let mut tracker = CollectTrackerAndEmitter :: new (psess . dcx () , sp) ; let try_success_result = match args { FailedMacro :: Func => try_match_macro (psess , name , body , rules , & mut tracker) , FailedMacro :: Attr (attr_args) => { try_match_macro_attr (psess , name , attr_args , body , rules , & mut tracker) } FailedMacro :: Derive => try_match_macro_derive (psess , name , body , rules , & mut tracker) , } ; if try_success_result . is_ok () { assert ! (tracker . dcx . has_errors () . is_some () , "Macro matching returned a success on the second try") ; } if let Some (result) = tracker . result { return result ; } let Some (BestFailure { token , msg : label , remaining_matcher , .. }) = tracker . best_failure else { return (sp , psess . dcx () . span_delayed_bug (sp , "failed to match a macro")) ; } ; let span = token . span . substitute_dummy (sp) ; let mut err = psess . dcx () . struct_span_err (span , parse_failure_msg (& token , None)) ; err . span_label (span , label) ; if ! def_head_span . is_dummy () { err . span_label (def_head_span , "when calling this macro") ; } annotate_doc_comment (& mut err , psess . source_map () , span) ; if let Some (span) = remaining_matcher . span () { err . span_note (span , format ! ("while trying to match {remaining_matcher}")) ; } else { err . note (format ! ("while trying to match {remaining_matcher}")) ; } if let MatcherLoc :: Token { token : expected_token } = & remaining_matcher && (matches ! (expected_token . kind , token :: OpenInvisible (_)) || matches ! (token . kind , token :: OpenInvisible (_))) { err . note ("captured metavariables except for `:tt`, `:ident` and `:lifetime` cannot be compared to other tokens") ; err . note ("see <https://doc.rust-lang.org/nightly/reference/macros-by-example.html#forwarding-a-matched-fragment> for more information") ; if ! def_span . is_dummy () && ! psess . source_map () . is_imported (def_span) { err . help ("try using `:tt` instead in the macro definition") ; } } if let FailedMacro :: Func = args && let Some ((body , comma_span)) = body . add_comma () { for rule in rules { let MacroRule :: Func { lhs , .. } = rule else { continue } ; let parser = parser_from_cx (psess , body . clone () , Recovery :: Allowed) ; let mut tt_parser = TtParser :: new (name) ; if let Success (_) = tt_parser . parse_tt (& mut Cow :: Borrowed (& parser) , lhs , & mut NoopTracker) { if comma_span . is_dummy () { err . note ("you might be missing a comma") ; } else { err . span_suggestion_short (comma_span , "missing comma here" , ", " , Applicability :: MachineApplicable ,) ; } } } } let guar = err . emit () ; (sp , guar) }
-/* FP:diagnostics.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_STRUCT_0018
-/* FP:diagnostics.rs-0036 */ # [doc = " The tracker used for the slow error path that collects useful info for diagnostics."] struct CollectTrackerAndEmitter < 'dcx , 'matcher > { dcx : DiagCtxtHandle < 'dcx > , remaining_matcher : Option < & 'matcher MatcherLoc > , # [doc = " Which arm's failure should we report? (the one furthest along)"] best_failure : Option < BestFailure > , root_span : Span , result : Option < (Span , ErrorGuaranteed) > , }
-/* FP:diagnostics.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_STRUCT_0019
-/* FP:diagnostics.rs-0038 */ struct BestFailure { token : Token , position_in_tokenstream : (bool , u32) , msg : & 'static str , remaining_matcher : MatcherLoc , }
-/* FP:diagnostics.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_IMPL_0020
-/* FP:diagnostics.rs-0040 */ impl BestFailure { fn is_better_position (& self , position : (bool , u32)) -> bool { position > self . position_in_tokenstream } }
-/* FP:diagnostics.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_IMPL_0021
-/* FP:diagnostics.rs-0042 */ impl < 'dcx , 'matcher > Tracker < 'matcher > for CollectTrackerAndEmitter < 'dcx , 'matcher > { type Failure = (Token , u32 , & 'static str) ; fn build_failure (tok : Token , position : u32 , msg : & 'static str) -> Self :: Failure { (tok , position , msg) } fn before_match_loc (& mut self , parser : & TtParser , matcher : & 'matcher MatcherLoc) { if self . remaining_matcher . is_none () || (parser . has_no_remaining_items_for_step () && * matcher != MatcherLoc :: Eof) { self . remaining_matcher = Some (matcher) ; } } fn after_arm (& mut self , in_body : bool , result : & NamedParseResult < Self :: Failure >) { match result { Success (_) => { self . dcx . span_delayed_bug (self . root_span , "should not collect detailed info for successful macro match" ,) ; } Failure ((token , approx_position , msg)) => { debug ! (? token , ? msg , "a new failure of an arm") ; let position_in_tokenstream = (in_body , * approx_position) ; if self . best_failure . as_ref () . is_none_or (| failure | failure . is_better_position (position_in_tokenstream)) { self . best_failure = Some (BestFailure { token : * token , position_in_tokenstream , msg , remaining_matcher : self . remaining_matcher . expect ("must have collected matcher already") . clone () , }) } } Error (err_sp , msg) => { let span = err_sp . substitute_dummy (self . root_span) ; let guar = self . dcx . span_err (span , msg . clone ()) ; self . result = Some ((span , guar)) ; } ErrorReported (guar) => self . result = Some ((self . root_span , * guar)) , } } fn description () -> & 'static str { "detailed" } fn recovery () -> Recovery { Recovery :: Allowed } }
-/* FP:diagnostics.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_IMPL_0022
-/* FP:diagnostics.rs-0044 */ impl < 'dcx > CollectTrackerAndEmitter < 'dcx , '_ > { fn new (dcx : DiagCtxtHandle < 'dcx > , root_span : Span) -> Self { Self { dcx , remaining_matcher : None , best_failure : None , root_span , result : None } } }
-/* FP:diagnostics.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_FN_0023
-/* FP:diagnostics.rs-0046 */ pub (super) fn emit_frag_parse_err (mut e : Diag < '_ > , parser : & Parser < '_ > , orig_parser : & mut Parser < '_ > , site_span : Span , arm_span : Span , kind : AstFragmentKind ,) -> ErrorGuaranteed { if parser . token == token :: Eof && let DiagMessage :: Str (message) = & e . messages [0] . 0 && message . ends_with (", found `<eof>`") { let msg = & e . messages [0] ; e . messages [0] = (DiagMessage :: from (format ! ("macro expansion ends with an incomplete expression: {}" , message . replace (", found `<eof>`" , "") ,)) , msg . 1 ,) ; if ! e . span . is_dummy () { e . replace_span_with (parser . token . span . shrink_to_hi () , true) ; } } if e . span . is_dummy () { e . replace_span_with (site_span , true) ; if ! parser . psess . source_map () . is_imported (arm_span) { e . span_label (arm_span , "in this macro arm") ; } } else if parser . psess . source_map () . is_imported (parser . token . span) { e . span_label (site_span , "in this macro invocation") ; } match kind { AstFragmentKind :: Expr => match parse_ast_fragment (orig_parser , AstFragmentKind :: Stmts) { Err (err) => err . cancel () , Ok (_) => { e . note ("the macro call doesn't expand to an expression, but it can expand to a statement" ,) ; if parser . token == token :: Semi { if let Ok (snippet) = parser . psess . source_map () . span_to_snippet (site_span) { e . span_suggestion_verbose (site_span , "surround the macro invocation with `{}` to interpret the expansion as a statement" , format ! ("{{ {snippet}; }}") , Applicability :: MaybeIncorrect ,) ; } } else { e . span_suggestion_verbose (site_span . shrink_to_hi () , "add `;` to interpret the expansion as a statement" , ";" , Applicability :: MaybeIncorrect ,) ; } } } , _ => annotate_err_with_kind (& mut e , kind , site_span) , } ; e . emit () }
-/* FP:diagnostics.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_FN_0024
-/* FP:diagnostics.rs-0048 */ pub (crate) fn annotate_err_with_kind (err : & mut Diag < '_ > , kind : AstFragmentKind , span : Span) { match kind { AstFragmentKind :: Ty => { err . span_label (span , "this macro call doesn't expand to a type") ; } AstFragmentKind :: Pat => { err . span_label (span , "this macro call doesn't expand to a pattern") ; } _ => { } } ; }
-/* FP:diagnostics.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_ENUM_0025
-/* FP:diagnostics.rs-0050 */ # [derive (Subdiagnostic)] enum ExplainDocComment { # [label (expand_explain_doc_comment_inner)] Inner { # [primary_span] span : Span , } , # [label (expand_explain_doc_comment_outer)] Outer { # [primary_span] span : Span , } , }
-/* FP:diagnostics.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_FN_0026
-/* FP:diagnostics.rs-0052 */ fn annotate_doc_comment (err : & mut Diag < '_ > , sm : & SourceMap , span : Span) { if let Ok (src) = sm . span_to_snippet (span) { if src . starts_with ("///") || src . starts_with ("/**") { err . subdiagnostic (ExplainDocComment :: Outer { span }) ; } else if src . starts_with ("//") || src . starts_with ("/*") { err . subdiagnostic (ExplainDocComment :: Inner { span }) ; } } }
-/* FP:diagnostics.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_expand_src_mbe_diagnostics_FN_0027
-/* FP:diagnostics.rs-0054 */ # [doc = " Generates an appropriate parsing failure message. For EOF, this is \"unexpected end...\". For"] # [doc = " other tokens, this is \"unexpected token...\"."] fn parse_failure_msg (tok : & Token , expected_token : Option < & Token >) -> Cow < 'static , str > { if let Some (expected_token) = expected_token { Cow :: from (format ! ("expected {}, found {}" , token_descr (expected_token) , token_descr (tok))) } else { match tok . kind { token :: Eof => Cow :: from ("unexpected end of macro invocation") , _ => Cow :: from (format ! ("no rules expected {}" , token_descr (tok))) , } } }
+// SRC: ../rust/compiler/rustc_expand/src/mbe/diagnostics.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use std::borrow::Cow;
+
+use crate::rustc_complete::token::{self, Token};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::tokenstream::TokenStream;
+use crate::rustc_complete::{Applicability, Diag, DiagCtxtHandle, DiagMessage};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use rustc_macros::Subdiagnostic;
+use crate::rustc_parse::parser::{Parser, Recovery, token_descr};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_complete::parse::ParseSess;
+use crate::rustc_complete::source_map::SourceMap;
+use crate::rustc_complete::{DUMMY_SP, ErrorGuaranteed, Ident, Span};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use tracing::debug;
+
+use super::macro_rules::{MacroRule, NoopTracker, parser_from_cx};
+/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::expand::{AstFragmentKind, parse_ast_fragment};
+/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::mbe::macro_parser::ParseResult::*;
+use crate::mbe::macro_parser::{MatcherLoc, NamedParseResult, TtParser};
+/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::mbe::macro_rules::{
+    Tracker, try_match_macro, try_match_macro_attr, try_match_macro_derive,
+};
+/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+
+pub(super) enum FailedMacro<'a> {
+    Func,
+    Attr(&'a TokenStream),
+    Derive,
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=82 | LINES=104 */
+
+pub(super) fn failed_to_match_macro(
+    psess: &ParseSess,
+    sp: Span,
+    def_span: Span,
+    name: Ident,
+    args: FailedMacro<'_>,
+    body: &TokenStream,
+    rules: &[MacroRule],
+) -> (Span, ErrorGuaranteed) {
+    debug!("failed to match macro");
+    let def_head_span = if !def_span.is_dummy() && !psess.source_map().is_imported(def_span) {
+        psess.source_map().guess_head_span(def_span)
+    } else {
+        DUMMY_SP
+    };
+
+    // An error occurred, try the expansion again, tracking the expansion closely for better
+    // diagnostics.
+    let mut tracker = CollectTrackerAndEmitter::new(psess.dcx(), sp);
+
+    let try_success_result = match args {
+        FailedMacro::Func => try_match_macro(psess, name, body, rules, &mut tracker),
+        FailedMacro::Attr(attr_args) => {
+            try_match_macro_attr(psess, name, attr_args, body, rules, &mut tracker)
+        }
+        FailedMacro::Derive => try_match_macro_derive(psess, name, body, rules, &mut tracker),
+    };
+
+    if try_success_result.is_ok() {
+        // Nonterminal parser recovery might turn failed matches into successful ones,
+        // but for that it must have emitted an error already
+        assert!(
+            tracker.dcx.has_errors().is_some(),
+            "Macro matching returned a success on the second try"
+        );
+    }
+
+    if let Some(result) = tracker.result {
+        // An irrecoverable error occurred and has been emitted.
+        return result;
+    }
+
+    let Some(BestFailure { token, msg: label, remaining_matcher, .. }) = tracker.best_failure
+    else {
+        return (sp, psess.dcx().span_delayed_bug(sp, "failed to match a macro"));
+    };
+
+    let span = token.span.substitute_dummy(sp);
+
+    let mut err = psess.dcx().struct_span_err(span, parse_failure_msg(&token, None));
+    err.span_label(span, label);
+    if !def_head_span.is_dummy() {
+        err.span_label(def_head_span, "when calling this macro");
+    }
+
+    annotate_doc_comment(&mut err, psess.source_map(), span);
+
+    if let Some(span) = remaining_matcher.span() {
+        err.span_note(span, format!("while trying to match {remaining_matcher}"));
+    } else {
+        err.note(format!("while trying to match {remaining_matcher}"));
+    }
+
+    if let MatcherLoc::Token { token: expected_token } = &remaining_matcher
+        && (matches!(expected_token.kind, token::OpenInvisible(_))
+            || matches!(token.kind, token::OpenInvisible(_)))
+    {
+        err.note("captured metavariables except for `:tt`, `:ident` and `:lifetime` cannot be compared to other tokens");
+        err.note("see <https://doc.rust-lang.org/nightly/reference/macros-by-example.html#forwarding-a-matched-fragment> for more information");
+
+        if !def_span.is_dummy() && !psess.source_map().is_imported(def_span) {
+            err.help("try using `:tt` instead in the macro definition");
+        }
+    }
+
+    // Check whether there's a missing comma in this macro call, like `println!("{}" a);`
+    if let FailedMacro::Func = args
+        && let Some((body, comma_span)) = body.add_comma()
+    {
+        for rule in rules {
+            let MacroRule::Func { lhs, .. } = rule else { continue };
+            let parser = parser_from_cx(psess, body.clone(), Recovery::Allowed);
+            let mut tt_parser = TtParser::new(name);
+
+            if let Success(_) =
+                tt_parser.parse_tt(&mut Cow::Borrowed(&parser), lhs, &mut NoopTracker)
+            {
+                if comma_span.is_dummy() {
+                    err.note("you might be missing a comma");
+                } else {
+                    err.span_suggestion_short(
+                        comma_span,
+                        "missing comma here",
+                        ", ",
+                        Applicability::MachineApplicable,
+                    );
+                }
+            }
+        }
+    }
+    let guar = err.emit();
+    (sp, guar)
+}
+/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=CollectTrackerAndEmitter | COMPLEXITY=6 | LINES=10 */
+
+/// The tracker used for the slow error path that collects useful info for diagnostics.
+struct CollectTrackerAndEmitter<'dcx, 'matcher> {
+    dcx: DiagCtxtHandle<'dcx>,
+    remaining_matcher: Option<&'matcher MatcherLoc>,
+    /// Which arm's failure should we report? (the one furthest along)
+    best_failure: Option<BestFailure>,
+    root_span: Span,
+    result: Option<(Span, ErrorGuaranteed)>,
+}
+/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=BestFailure | COMPLEXITY=2 | LINES=7 */
+
+struct BestFailure {
+    token: Token,
+    position_in_tokenstream: (bool, u32),
+    msg: &'static str,
+    remaining_matcher: MatcherLoc,
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=is_better_position | COMPLEXITY=3 | LINES=6 */
+
+impl BestFailure {
+    fn is_better_position(&self, position: (bool, u32)) -> bool {
+        position > self.position_in_tokenstream
+    }
+}
+/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=build_failure | COMPLEXITY=31 | LINES=63 */
+
+impl<'dcx, 'matcher> Tracker<'matcher> for CollectTrackerAndEmitter<'dcx, 'matcher> {
+    type Failure = (Token, u32, &'static str);
+
+    fn build_failure(tok: Token, position: u32, msg: &'static str) -> Self::Failure {
+        (tok, position, msg)
+    }
+
+    fn before_match_loc(&mut self, parser: &TtParser, matcher: &'matcher MatcherLoc) {
+        if self.remaining_matcher.is_none()
+            || (parser.has_no_remaining_items_for_step() && *matcher != MatcherLoc::Eof)
+        {
+            self.remaining_matcher = Some(matcher);
+        }
+    }
+
+    fn after_arm(&mut self, in_body: bool, result: &NamedParseResult<Self::Failure>) {
+        match result {
+            Success(_) => {
+                // Nonterminal parser recovery might turn failed matches into successful ones,
+                // but for that it must have emitted an error already
+                self.dcx.span_delayed_bug(
+                    self.root_span,
+                    "should not collect detailed info for successful macro match",
+                );
+            }
+            Failure((token, approx_position, msg)) => {
+                debug!(?token, ?msg, "a new failure of an arm");
+
+                let position_in_tokenstream = (in_body, *approx_position);
+                if self
+                    .best_failure
+                    .as_ref()
+                    .is_none_or(|failure| failure.is_better_position(position_in_tokenstream))
+                {
+                    self.best_failure = Some(BestFailure {
+                        token: *token,
+                        position_in_tokenstream,
+                        msg,
+                        remaining_matcher: self
+                            .remaining_matcher
+                            .expect("must have collected matcher already")
+                            .clone(),
+                    })
+                }
+            }
+            Error(err_sp, msg) => {
+                let span = err_sp.substitute_dummy(self.root_span);
+                let guar = self.dcx.span_err(span, msg.clone());
+                self.result = Some((span, guar));
+            }
+            ErrorReported(guar) => self.result = Some((self.root_span, *guar)),
+        }
+    }
+
+    fn description() -> &'static str {
+        "detailed"
+    }
+
+    fn recovery() -> Recovery {
+        Recovery::Allowed
+    }
+}
+/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
+
+impl<'dcx> CollectTrackerAndEmitter<'dcx, '_> {
+    fn new(dcx: DiagCtxtHandle<'dcx>, root_span: Span) -> Self {
+        Self { dcx, remaining_matcher: None, best_failure: None, root_span, result: None }
+    }
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=45 | LINES=68 */
+
+pub(super) fn emit_frag_parse_err(
+    mut e: Diag<'_>,
+    parser: &Parser<'_>,
+    orig_parser: &mut Parser<'_>,
+    site_span: Span,
+    arm_span: Span,
+    kind: AstFragmentKind,
+) -> ErrorGuaranteed {
+    // FIXME(davidtwco): avoid depending on the error message text
+    if parser.token == token::Eof
+        && let DiagMessage::Str(message) = &e.messages[0].0
+        && message.ends_with(", found `<eof>`")
+    {
+        let msg = &e.messages[0];
+        e.messages[0] = (
+            DiagMessage::from(format!(
+                "macro expansion ends with an incomplete expression: {}",
+                message.replace(", found `<eof>`", ""),
+            )),
+            msg.1,
+        );
+        if !e.span.is_dummy() {
+            // early end of macro arm (#52866)
+            e.replace_span_with(parser.token.span.shrink_to_hi(), true);
+        }
+    }
+    if e.span.is_dummy() {
+        // Get around lack of span in error (#30128)
+        e.replace_span_with(site_span, true);
+        if !parser.psess.source_map().is_imported(arm_span) {
+            e.span_label(arm_span, "in this macro arm");
+        }
+    } else if parser.psess.source_map().is_imported(parser.token.span) {
+        e.span_label(site_span, "in this macro invocation");
+    }
+    match kind {
+        // Try a statement if an expression is wanted but failed and suggest adding `;` to call.
+        AstFragmentKind::Expr => match parse_ast_fragment(orig_parser, AstFragmentKind::Stmts) {
+            Err(err) => err.cancel(),
+            Ok(_) => {
+                e.note(
+                    "the macro call doesn't expand to an expression, but it can expand to a statement",
+                );
+
+                if parser.token == token::Semi {
+                    if let Ok(snippet) = parser.psess.source_map().span_to_snippet(site_span) {
+                        e.span_suggestion_verbose(
+                            site_span,
+                            "surround the macro invocation with `{}` to interpret the expansion as a statement",
+                            format!("{{ {snippet}; }}"),
+                            Applicability::MaybeIncorrect,
+                        );
+                    }
+                } else {
+                    e.span_suggestion_verbose(
+                        site_span.shrink_to_hi(),
+                        "add `;` to interpret the expansion as a statement",
+                        ";",
+                        Applicability::MaybeIncorrect,
+                    );
+                }
+            }
+        },
+        _ => annotate_err_with_kind(&mut e, kind, site_span),
+    };
+    e.emit()
+}
+/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=12 */
+
+pub(crate) fn annotate_err_with_kind(err: &mut Diag<'_>, kind: AstFragmentKind, span: Span) {
+    match kind {
+        AstFragmentKind::Ty => {
+            err.span_label(span, "this macro call doesn't expand to a type");
+        }
+        AstFragmentKind::Pat => {
+            err.span_label(span, "this macro call doesn't expand to a pattern");
+        }
+        _ => {}
+    };
+}
+/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=14 */
+
+#[derive(Subdiagnostic)]
+enum ExplainDocComment {
+    #[label(expand_explain_doc_comment_inner)]
+    Inner {
+        #[primary_span]
+        span: Span,
+    },
+    #[label(expand_explain_doc_comment_outer)]
+    Outer {
+        #[primary_span]
+        span: Span,
+    },
+}
+/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=annotate_doc_comment | COMPLEXITY=13 | LINES=10 */
+
+fn annotate_doc_comment(err: &mut Diag<'_>, sm: &SourceMap, span: Span) {
+    if let Ok(src) = sm.span_to_snippet(span) {
+        if src.starts_with("///") || src.starts_with("/**") {
+            err.subdiagnostic(ExplainDocComment::Outer { span });
+        } else if src.starts_with("//") || src.starts_with("/*") {
+            err.subdiagnostic(ExplainDocComment::Inner { span });
+        }
+    }
+}
+/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=parse_failure_msg | COMPLEXITY=14 | LINES=13 */
+
+/// Generates an appropriate parsing failure message. For EOF, this is "unexpected end...". For
+/// other tokens, this is "unexpected token...".
+fn parse_failure_msg(tok: &Token, expected_token: Option<&Token>) -> Cow<'static, str> {
+    if let Some(expected_token) = expected_token {
+        Cow::from(format!("expected {}, found {}", token_descr(expected_token), token_descr(tok)))
+    } else {
+        match tok.kind {
+            token::Eof => Cow::from("unexpected end of macro invocation"),
+            _ => Cow::from(format!("no rules expected {}", token_descr(tok))),
+        }
+    }
+}

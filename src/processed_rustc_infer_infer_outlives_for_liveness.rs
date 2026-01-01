@@ -1,10 +1,113 @@
-/* FP:for_liveness.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_for_liveness_USE_0001
-/* FP:for_liveness.rs-0002 */ use crate :: rustc_complete :: ty :: { self , Ty , TyCtxt , TypeSuperVisitable , TypeVisitable , TypeVisitableExt , TypeVisitor , } ;
-/* FP:for_liveness.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_for_liveness_USE_0002
-/* FP:for_liveness.rs-0004 */ use crate :: infer :: outlives :: test_type_match ;
-/* FP:for_liveness.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_for_liveness_USE_0003
-/* FP:for_liveness.rs-0006 */ use crate :: infer :: region_constraints :: VerifyIfEq ;
-/* FP:for_liveness.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_for_liveness_STRUCT_0004
-/* FP:for_liveness.rs-0008 */ # [doc = " Visits free regions in the type that are relevant for liveness computation."] # [doc = " These regions are passed to `OP`."] # [doc = ""] # [doc = " Specifically, we visit all of the regions of types recursively, except if"] # [doc = " the type is an alias, we look at the outlives bounds in the param-env"] # [doc = " and alias's item bounds. If there is a unique outlives bound, then visit"] # [doc = " that instead. If there is not a unique but there is a `'static` outlives"] # [doc = " bound, then don't visit anything. Otherwise, walk through the opaque's"] # [doc = " regions structurally."] pub struct FreeRegionsVisitor < 'tcx , OP : FnMut (ty :: Region < 'tcx >) > { pub tcx : TyCtxt < 'tcx > , pub param_env : ty :: ParamEnv < 'tcx > , pub op : OP , }
-/* FP:for_liveness.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_for_liveness_IMPL_0005
-/* FP:for_liveness.rs-0010 */ impl < 'tcx , OP > TypeVisitor < TyCtxt < 'tcx > > for FreeRegionsVisitor < 'tcx , OP > where OP : FnMut (ty :: Region < 'tcx >) , { fn visit_region (& mut self , r : ty :: Region < 'tcx >) { match r . kind () { ty :: ReBound (_ , _) => { } _ => (self . op) (r) , } } fn visit_ty (& mut self , ty : Ty < 'tcx >) { if ! ty . flags () . intersects (ty :: TypeFlags :: HAS_FREE_REGIONS) { return ; } if ty . has_escaping_bound_vars () { return ty . super_visit_with (self) ; } match * ty . kind () { ty :: Alias (kind , ty :: AliasTy { def_id , args , .. }) => { let tcx = self . tcx ; let param_env = self . param_env ; let outlives_bounds : Vec < _ > = tcx . item_bounds (def_id) . iter_instantiated (tcx , args) . chain (param_env . caller_bounds ()) . filter_map (| clause | { let outlives = clause . as_type_outlives_clause () ? ; if let Some (outlives) = outlives . no_bound_vars () && outlives . 0 == ty { Some (outlives . 1) } else { test_type_match :: extract_verify_if_eq (tcx , & outlives . map_bound (| ty :: OutlivesPredicate (ty , bound) | { VerifyIfEq { ty , bound } }) , ty ,) } }) . collect () ; if outlives_bounds . contains (& tcx . lifetimes . re_static) { } else if let Some (r) = outlives_bounds . first () && outlives_bounds [1 ..] . iter () . all (| other_r | other_r == r) { assert ! (r . type_flags () . intersects (ty :: TypeFlags :: HAS_FREE_REGIONS)) ; r . visit_with (self) ; } else { let variances = tcx . opt_alias_variances (kind , def_id) ; for (idx , s) in args . iter () . enumerate () { if variances . map (| variances | variances [idx]) != Some (ty :: Bivariant) { s . visit_with (self) ; } } } } _ => ty . super_visit_with (self) , } } }
+// SRC: ../rust/compiler/rustc_infer/src/infer/outlives/for_liveness.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_complete::ty::{
+    self, Ty, TyCtxt, TypeSuperVisitable, TypeVisitable, TypeVisitableExt, TypeVisitor,
+};
+/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=FreeRegionsVisitor | COMPLEXITY=5 | LINES=18 */
+
+use crate::infer::outlives::test_type_match;
+use crate::infer::region_constraints::VerifyIfEq;
+
+/// Visits free regions in the type that are relevant for liveness computation.
+/// These regions are passed to `OP`.
+///
+/// Specifically, we visit all of the regions of types recursively, except if
+/// the type is an alias, we look at the outlives bounds in the param-env
+/// and alias's item bounds. If there is a unique outlives bound, then visit
+/// that instead. If there is not a unique but there is a `'static` outlives
+/// bound, then don't visit anything. Otherwise, walk through the opaque's
+/// regions structurally.
+pub struct FreeRegionsVisitor<'tcx, OP: FnMut(ty::Region<'tcx>)> {
+    pub tcx: TyCtxt<'tcx>,
+    pub param_env: ty::ParamEnv<'tcx>,
+    pub op: OP,
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=visit_region | COMPLEXITY=54 | LINES=88 */
+
+impl<'tcx, OP> TypeVisitor<TyCtxt<'tcx>> for FreeRegionsVisitor<'tcx, OP>
+where
+    OP: FnMut(ty::Region<'tcx>),
+{
+    fn visit_region(&mut self, r: ty::Region<'tcx>) {
+        match r.kind() {
+            // ignore bound regions, keep visiting
+            ty::ReBound(_, _) => {}
+            _ => (self.op)(r),
+        }
+    }
+
+    fn visit_ty(&mut self, ty: Ty<'tcx>) {
+        // We're only interested in types involving regions
+        if !ty.flags().intersects(ty::TypeFlags::HAS_FREE_REGIONS) {
+            return;
+        }
+
+        // FIXME: Don't consider alias bounds on types that have escaping bound
+        // vars. See #117455.
+        if ty.has_escaping_bound_vars() {
+            return ty.super_visit_with(self);
+        }
+
+        match *ty.kind() {
+            // We can prove that an alias is live two ways:
+            // 1. All the components are live.
+            //
+            // 2. There is a known outlives bound or where-clause, and that
+            //    region is live.
+            //
+            // We search through the item bounds and where clauses for
+            // either `'static` or a unique outlives region, and if one is
+            // found, we just need to prove that that region is still live.
+            // If one is not found, then we continue to walk through the alias.
+            ty::Alias(kind, ty::AliasTy { def_id, args, .. }) => {
+                let tcx = self.tcx;
+                let param_env = self.param_env;
+                let outlives_bounds: Vec<_> = tcx
+                    .item_bounds(def_id)
+                    .iter_instantiated(tcx, args)
+                    .chain(param_env.caller_bounds())
+                    .filter_map(|clause| {
+                        let outlives = clause.as_type_outlives_clause()?;
+                        if let Some(outlives) = outlives.no_bound_vars()
+                            && outlives.0 == ty
+                        {
+                            Some(outlives.1)
+                        } else {
+                            test_type_match::extract_verify_if_eq(
+                                tcx,
+                                &outlives.map_bound(|ty::OutlivesPredicate(ty, bound)| {
+                                    VerifyIfEq { ty, bound }
+                                }),
+                                ty,
+                            )
+                        }
+                    })
+                    .collect();
+                // If we find `'static`, then we know the alias doesn't capture *any* regions.
+                // Otherwise, all of the outlives regions should be equal -- if they're not,
+                // we don't really know how to proceed, so we continue recursing through the
+                // alias.
+                if outlives_bounds.contains(&tcx.lifetimes.re_static) {
+                    // no
+                } else if let Some(r) = outlives_bounds.first()
+                    && outlives_bounds[1..].iter().all(|other_r| other_r == r)
+                {
+                    assert!(r.type_flags().intersects(ty::TypeFlags::HAS_FREE_REGIONS));
+                    r.visit_with(self);
+                } else {
+                    // Skip lifetime parameters that are not captured, since they do
+                    // not need to be live.
+                    let variances = tcx.opt_alias_variances(kind, def_id);
+
+                    for (idx, s) in args.iter().enumerate() {
+                        if variances.map(|variances| variances[idx]) != Some(ty::Bivariant) {
+                            s.visit_with(self);
+                        }
+                    }
+                }
+            }
+
+            _ => ty.super_visit_with(self),
+        }
+    }
+}

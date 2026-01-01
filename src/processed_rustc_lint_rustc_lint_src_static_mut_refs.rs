@@ -1,28 +1,176 @@
-/* FP:static_mut_refs.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_static_mut_refs_USE_0001
-/* FP:static_mut_refs.rs-0002 */ use rustc_hir as hir ;
-/* FP:static_mut_refs.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_static_mut_refs_USE_0002
-/* FP:static_mut_refs.rs-0004 */ use crate :: rustc_complete :: { Expr , Stmt } ;
-/* FP:static_mut_refs.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_static_mut_refs_USE_0003
-/* FP:static_mut_refs.rs-0006 */ use crate :: rustc_complete :: ty :: { Mutability , TyKind } ;
-/* FP:static_mut_refs.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_static_mut_refs_USE_0004
-/* FP:static_mut_refs.rs-0008 */ use crate :: rustc_complete :: lint :: FutureIncompatibilityReason ;
-/* FP:static_mut_refs.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_static_mut_refs_USE_0005
-/* FP:static_mut_refs.rs-0010 */ use crate :: rustc_complete :: { declare_lint , declare_lint_pass } ;
-/* FP:static_mut_refs.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_static_mut_refs_USE_0006
-/* FP:static_mut_refs.rs-0012 */ use crate :: rustc_complete :: edition :: Edition ;
-/* FP:static_mut_refs.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_static_mut_refs_USE_0007
-/* FP:static_mut_refs.rs-0014 */ use crate :: rustc_complete :: { BytePos , Span } ;
-/* FP:static_mut_refs.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_static_mut_refs_USE_0008
-/* FP:static_mut_refs.rs-0016 */ use crate :: lints :: { MutRefSugg , RefOfMutStatic } ;
-/* FP:static_mut_refs.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_static_mut_refs_USE_0009
-/* FP:static_mut_refs.rs-0018 */ use crate :: { LateContext , LateLintPass , LintContext } ;
-/* FP:static_mut_refs.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_static_mut_refs_MACRO_0010
-/* FP:static_mut_refs.rs-0020 */ declare_lint ! { # [doc = " The `static_mut_refs` lint checks for shared or mutable references"] # [doc = " of mutable static inside `unsafe` blocks and `unsafe` functions."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,edition2021"] # [doc = " fn main() {"] # [doc = "     static mut X: i32 = 23;"] # [doc = "     static mut Y: i32 = 24;"] # [doc = ""] # [doc = "     unsafe {"] # [doc = "         let y = &X;"] # [doc = "         let ref x = X;"] # [doc = "         let (x, y) = (&X, &Y);"] # [doc = "         foo(&X);"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " unsafe fn _foo() {"] # [doc = "     static mut X: i32 = 23;"] # [doc = "     static mut Y: i32 = 24;"] # [doc = ""] # [doc = "     let y = &X;"] # [doc = "     let ref x = X;"] # [doc = "     let (x, y) = (&X, &Y);"] # [doc = "     foo(&X);"] # [doc = " }"] # [doc = ""] # [doc = " fn foo<'a>(_x: &'a i32) {}"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Shared or mutable references of mutable static are almost always a mistake and"] # [doc = " can lead to undefined behavior and various other problems in your code."] # [doc = ""] # [doc = " This lint is \"warn\" by default on editions up to 2021, in 2024 is \"deny\"."] pub STATIC_MUT_REFS , Warn , "creating a shared reference to mutable static" , @ future_incompatible = FutureIncompatibleInfo { reason : FutureIncompatibilityReason :: EditionError (Edition :: Edition2024) , reference : "<https://doc.rust-lang.org/edition-guide/rust-2024/static-mut-references.html>" , explain_reason : false , } ; @ edition Edition2024 => Deny ; }
-/* FP:static_mut_refs.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_static_mut_refs_MACRO_0011
-/* FP:static_mut_refs.rs-0022 */ declare_lint_pass ! (StaticMutRefs => [STATIC_MUT_REFS]) ;
-/* FP:static_mut_refs.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_static_mut_refs_IMPL_0012
-/* FP:static_mut_refs.rs-0024 */ impl < 'tcx > LateLintPass < 'tcx > for StaticMutRefs { # [allow (rustc :: usage_of_ty_tykind)] fn check_expr (& mut self , cx : & LateContext < 'tcx > , expr : & Expr < '_ >) { let err_span = expr . span ; match expr . kind { hir :: ExprKind :: AddrOf (borrow_kind , m , ex) if matches ! (borrow_kind , hir :: BorrowKind :: Ref) && let Some (err_span) = path_is_static_mut (ex , err_span) => { let source_map = cx . sess () . source_map () ; let snippet = source_map . span_to_snippet (err_span) ; let sugg_span = if let Ok (snippet) = snippet { let exclude_n_bytes : u32 = snippet . chars () . take_while (| ch | ch . is_whitespace () || * ch == '(') . map (| ch | ch . len_utf8 () as u32) . sum () ; err_span . with_lo (err_span . lo () + BytePos (exclude_n_bytes)) . with_hi (ex . span . lo ()) } else { err_span . with_hi (ex . span . lo ()) } ; emit_static_mut_refs (cx , err_span , sugg_span , m , ! expr . span . from_expansion ()) ; } hir :: ExprKind :: MethodCall (_ , e , _ , _) if let Some (err_span) = path_is_static_mut (e , expr . span) && let typeck = cx . typeck_results () && let Some (method_def_id) = typeck . type_dependent_def_id (expr . hir_id) && let inputs = cx . tcx . fn_sig (method_def_id) . skip_binder () . inputs () . skip_binder () && let Some (receiver) = inputs . get (0) && let TyKind :: Ref (_ , _ , m) = receiver . kind () => { emit_static_mut_refs (cx , err_span , err_span . shrink_to_lo () , * m , false) ; } _ => { } } } fn check_stmt (& mut self , cx : & LateContext < 'tcx > , stmt : & Stmt < '_ >) { if let hir :: StmtKind :: Let (loc) = stmt . kind && let hir :: PatKind :: Binding (ba , _ , _ , _) = loc . pat . kind && let hir :: ByRef :: Yes (m) = ba . 0 && let Some (init) = loc . init && let Some (err_span) = path_is_static_mut (init , init . span) { emit_static_mut_refs (cx , err_span , err_span . shrink_to_lo () , m , false) ; } } }
-/* FP:static_mut_refs.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_static_mut_refs_FN_0013
-/* FP:static_mut_refs.rs-0026 */ fn path_is_static_mut (mut expr : & hir :: Expr < '_ > , mut err_span : Span) -> Option < Span > { if err_span . from_expansion () { err_span = expr . span ; } while let hir :: ExprKind :: Field (e , _) = expr . kind { expr = e ; } if let hir :: ExprKind :: Path (qpath) = expr . kind && let hir :: QPath :: Resolved (_ , path) = qpath && let hir :: def :: Res :: Def (def_kind , _) = path . res && let hir :: def :: DefKind :: Static { safety : _ , mutability : Mutability :: Mut , nested : false } = def_kind { return Some (err_span) ; } None }
-/* FP:static_mut_refs.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_static_mut_refs_FN_0014
-/* FP:static_mut_refs.rs-0028 */ fn emit_static_mut_refs (cx : & LateContext < '_ > , span : Span , sugg_span : Span , mutable : Mutability , suggest_addr_of : bool ,) { let (shared_label , shared_note , mut_note , sugg) = match mutable { Mutability :: Mut => { let sugg = if suggest_addr_of { Some (MutRefSugg :: Mut { span : sugg_span }) } else { None } ; ("mutable " , false , true , sugg) } Mutability :: Not => { let sugg = if suggest_addr_of { Some (MutRefSugg :: Shared { span : sugg_span }) } else { None } ; ("shared " , true , false , sugg) } } ; cx . emit_span_lint (STATIC_MUT_REFS , span , RefOfMutStatic { span , sugg , shared_label , shared_note , mut_note } ,) ; }
+// SRC: ../rust/compiler/rustc_lint/src/static_mut_refs.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use rustc_hir as hir;
+use crate::rustc_complete::{Expr, Stmt};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::ty::{Mutability, TyKind};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::lint::FutureIncompatibilityReason;
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::{BytePos, Span};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+use crate::lints::{MutRefSugg, RefOfMutStatic};
+/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::{LateContext, LateLintPass, LintContext};
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=51 */
+
+declare_lint! {
+    /// The `static_mut_refs` lint checks for shared or mutable references
+    /// of mutable static inside `unsafe` blocks and `unsafe` functions.
+    ///
+    /// ### Example
+    ///
+    /// ```rust,edition2021
+    /// fn main() {
+    ///     static mut X: i32 = 23;
+    ///     static mut Y: i32 = 24;
+    ///
+    ///     unsafe {
+    ///         let y = &X;
+    ///         let ref x = X;
+    ///         let (x, y) = (&X, &Y);
+    ///         foo(&X);
+    ///     }
+    /// }
+    ///
+    /// unsafe fn _foo() {
+    ///     static mut X: i32 = 23;
+    ///     static mut Y: i32 = 24;
+    ///
+    ///     let y = &X;
+    ///     let ref x = X;
+    ///     let (x, y) = (&X, &Y);
+    ///     foo(&X);
+    /// }
+    ///
+    /// fn foo<'a>(_x: &'a i32) {}
+    /// ```
+    ///
+    /// {{produces}}
+    ///
+    /// ### Explanation
+    ///
+    /// Shared or mutable references of mutable static are almost always a mistake and
+    /// can lead to undefined behavior and various other problems in your code.
+    ///
+    /// This lint is "warn" by default on editions up to 2021, in 2024 is "deny".
+    pub STATIC_MUT_REFS,
+    Warn,
+    "creating a shared reference to mutable static",
+    @future_incompatible = FutureIncompatibleInfo {
+        reason: FutureIncompatibilityReason::EditionError(Edition::Edition2024),
+        reference: "<https://doc.rust-lang.org/edition-guide/rust-2024/static-mut-references.html>",
+        explain_reason: false,
+    };
+    @edition Edition2024 => Deny;
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=check_expr | COMPLEXITY=29 | LINES=57 */
+
+declare_lint_pass!(StaticMutRefs => [STATIC_MUT_REFS]);
+
+impl<'tcx> LateLintPass<'tcx> for StaticMutRefs {
+    #[allow(rustc::usage_of_ty_tykind)]
+    fn check_expr(&mut self, cx: &LateContext<'tcx>, expr: &Expr<'_>) {
+        let err_span = expr.span;
+        match expr.kind {
+            hir::ExprKind::AddrOf(borrow_kind, m, ex)
+                if matches!(borrow_kind, hir::BorrowKind::Ref)
+                    && let Some(err_span) = path_is_static_mut(ex, err_span) =>
+            {
+                let source_map = cx.sess().source_map();
+                let snippet = source_map.span_to_snippet(err_span);
+
+                let sugg_span = if let Ok(snippet) = snippet {
+                    // ( ( &IDENT ) )
+                    // ~~~~ exclude these from the suggestion span to avoid unmatching parens
+                    let exclude_n_bytes: u32 = snippet
+                        .chars()
+                        .take_while(|ch| ch.is_whitespace() || *ch == '(')
+                        .map(|ch| ch.len_utf8() as u32)
+                        .sum();
+
+                    err_span.with_lo(err_span.lo() + BytePos(exclude_n_bytes)).with_hi(ex.span.lo())
+                } else {
+                    err_span.with_hi(ex.span.lo())
+                };
+
+                emit_static_mut_refs(cx, err_span, sugg_span, m, !expr.span.from_expansion());
+            }
+            hir::ExprKind::MethodCall(_, e, _, _)
+                if let Some(err_span) = path_is_static_mut(e, expr.span)
+                    && let typeck = cx.typeck_results()
+                    && let Some(method_def_id) = typeck.type_dependent_def_id(expr.hir_id)
+                    && let inputs =
+                        cx.tcx.fn_sig(method_def_id).skip_binder().inputs().skip_binder()
+                    && let Some(receiver) = inputs.get(0)
+                    && let TyKind::Ref(_, _, m) = receiver.kind() =>
+            {
+                emit_static_mut_refs(cx, err_span, err_span.shrink_to_lo(), *m, false);
+            }
+            _ => {}
+        }
+    }
+
+    fn check_stmt(&mut self, cx: &LateContext<'tcx>, stmt: &Stmt<'_>) {
+        if let hir::StmtKind::Let(loc) = stmt.kind
+            && let hir::PatKind::Binding(ba, _, _, _) = loc.pat.kind
+            && let hir::ByRef::Yes(m) = ba.0
+            && let Some(init) = loc.init
+            && let Some(err_span) = path_is_static_mut(init, init.span)
+        {
+            emit_static_mut_refs(cx, err_span, err_span.shrink_to_lo(), m, false);
+        }
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=path_is_static_mut | COMPLEXITY=13 | LINES=20 */
+
+fn path_is_static_mut(mut expr: &hir::Expr<'_>, mut err_span: Span) -> Option<Span> {
+    if err_span.from_expansion() {
+        err_span = expr.span;
+    }
+
+    while let hir::ExprKind::Field(e, _) = expr.kind {
+        expr = e;
+    }
+
+    if let hir::ExprKind::Path(qpath) = expr.kind
+        && let hir::QPath::Resolved(_, path) = qpath
+        && let hir::def::Res::Def(def_kind, _) = path.res
+        && let hir::def::DefKind::Static { safety: _, mutability: Mutability::Mut, nested: false } =
+            def_kind
+    {
+        return Some(err_span);
+    }
+    None
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=emit_static_mut_refs | COMPLEXITY=20 | LINES=27 */
+
+fn emit_static_mut_refs(
+    cx: &LateContext<'_>,
+    span: Span,
+    sugg_span: Span,
+    mutable: Mutability,
+    suggest_addr_of: bool,
+) {
+    let (shared_label, shared_note, mut_note, sugg) = match mutable {
+        Mutability::Mut => {
+            let sugg =
+                if suggest_addr_of { Some(MutRefSugg::Mut { span: sugg_span }) } else { None };
+            ("mutable ", false, true, sugg)
+        }
+        Mutability::Not => {
+            let sugg =
+                if suggest_addr_of { Some(MutRefSugg::Shared { span: sugg_span }) } else { None };
+            ("shared ", true, false, sugg)
+        }
+    };
+
+    cx.emit_span_lint(
+        STATIC_MUT_REFS,
+        span,
+        RefOfMutStatic { span, sugg, shared_label, shared_note, mut_note },
+    );
+}

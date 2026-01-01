@@ -1,17 +1,99 @@
-/* FP:intersection.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_intersection_USE_0001
-/* FP:intersection.rs-0002 */ # [allow (unused_crate_dependencies)] use common :: * ;
-/* FP:intersection.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_intersection_USE_0002
-/* FP:intersection.rs-0004 */ use crate :: rustc_pattern_analysis :: MatchArm ;
-/* FP:intersection.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_intersection_USE_0003
-/* FP:intersection.rs-0006 */ use crate :: rustc_pattern_analysis :: pat :: DeconstructedPat ;
-/* FP:intersection.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_intersection_USE_0004
-/* FP:intersection.rs-0008 */ use crate :: rustc_pattern_analysis :: usefulness :: PlaceValidity ;
-/* FP:intersection.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_intersection_MOD_0005
-/* FP:intersection.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_intersection_FN_0006
-/* FP:intersection.rs-0012 */ # [doc = " Analyze a match made of these patterns and returns the computed arm intersections."] fn check (patterns : Vec < DeconstructedPat < Cx > >) -> Vec < Vec < usize > > { let ty = * patterns [0] . ty () ; let arms : Vec < _ > = patterns . iter () . map (| pat | MatchArm { pat , has_guard : false , arm_data : () }) . collect () ; let report = compute_match_usefulness (arms . as_slice () , ty , PlaceValidity :: ValidOnly , usize :: MAX , false) . unwrap () ; report . arm_intersections . into_iter () . map (| bitset | bitset . iter () . collect ()) . collect () }
-/* FP:intersection.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_intersection_FN_0007
-/* FP:intersection.rs-0014 */ # [track_caller] fn assert_intersects (patterns : Vec < DeconstructedPat < Cx > > , intersects : & [& [usize]]) { let computed_intersects = check (patterns) ; assert_eq ! (computed_intersects , intersects) ; }
-/* FP:intersection.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_intersection_FN_0008
-/* FP:intersection.rs-0016 */ # [test] fn test_int_ranges () { let ty = Ty :: U8 ; assert_intersects (pats ! (ty ; 0 ..= 100 , 100 ..,) , & [& [] , & [0]] ,) ; assert_intersects (pats ! (ty ; 0 ..= 101 , 100 ..,) , & [& [] , & [0]] ,) ; assert_intersects (pats ! (ty ; 0 .. 100 , 100 ..,) , & [& [] , & []] ,) ; }
-/* FP:intersection.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_tests_intersection_FN_0009
-/* FP:intersection.rs-0018 */ # [test] fn test_nested () { let ty = Ty :: Tuple (& [Ty :: Bool ; 2]) ; assert_intersects (pats ! (ty ; (true , true) , (true , _) , (_ , true) ,) , & [& [] , & [0] , & [0 , 1]] ,) ; assert_intersects (pats ! (ty ; (true , _) , (_ , true) ,) , & [& [] , & []] ,) ; let ty = Ty :: Tuple (& [Ty :: Bool ; 3]) ; assert_intersects (pats ! (ty ; (true , true , _) , (true , _ , true) , (false , _ , _) ,) , & [& [] , & [] , & []] ,) ; let ty = Ty :: Tuple (& [Ty :: Bool , Ty :: Bool , Ty :: U8]) ; assert_intersects (pats ! (ty ; (true , _ , _) , (_ , true , 0 .. 10) , (_ , true , 10 ..) , (_ , true , 3) , _ ,) , & [& [] , & [] , & [] , & [1] , & [0 , 1 , 2 , 3]] ,) ; }
+// SRC: ../rust/compiler/rustc_pattern_analysis/tests/intersection.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=check | COMPLEXITY=7 | LINES=22 */
+// Test the computation of arm intersections.
+
+#[allow(unused_crate_dependencies)]
+
+use common::*;
+use crate::rustc_pattern_analysis::MatchArm;
+use crate::rustc_pattern_analysis::pat::DeconstructedPat;
+use crate::rustc_pattern_analysis::usefulness::PlaceValidity;
+
+#[macro_use]
+
+/// Analyze a match made of these patterns and returns the computed arm intersections.
+fn check(patterns: Vec<DeconstructedPat<Cx>>) -> Vec<Vec<usize>> {
+    let ty = *patterns[0].ty();
+    let arms: Vec<_> =
+        patterns.iter().map(|pat| MatchArm { pat, has_guard: false, arm_data: () }).collect();
+    let report =
+        compute_match_usefulness(arms.as_slice(), ty, PlaceValidity::ValidOnly, usize::MAX, false)
+            .unwrap();
+    report.arm_intersections.into_iter().map(|bitset| bitset.iter().collect()).collect()
+}
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=assert_intersects | COMPLEXITY=2 | LINES=6 */
+
+#[track_caller]
+fn assert_intersects(patterns: Vec<DeconstructedPat<Cx>>, intersects: &[&[usize]]) {
+    let computed_intersects = check(patterns);
+    assert_eq!(computed_intersects, intersects);
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_int_ranges | COMPLEXITY=2 | LINES=26 */
+
+#[test]
+fn test_int_ranges() {
+    let ty = Ty::U8;
+    assert_intersects(
+        pats!(ty;
+            0..=100,
+            100..,
+        ),
+        &[&[], &[0]],
+    );
+    assert_intersects(
+        pats!(ty;
+            0..=101,
+            100..,
+        ),
+        &[&[], &[0]],
+    );
+    assert_intersects(
+        pats!(ty;
+            0..100,
+            100..,
+        ),
+        &[&[], &[]],
+    );
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=test_nested | COMPLEXITY=3 | LINES=41 */
+
+#[test]
+fn test_nested() {
+    let ty = Ty::Tuple(&[Ty::Bool; 2]);
+    assert_intersects(
+        pats!(ty;
+            (true, true),
+            (true, _),
+            (_, true),
+        ),
+        &[&[], &[0], &[0, 1]],
+    );
+    // Here we shortcut because `(true, true)` is irrelevant, so we fail to detect the intersection.
+    assert_intersects(
+        pats!(ty;
+            (true, _),
+            (_, true),
+        ),
+        &[&[], &[]],
+    );
+    let ty = Ty::Tuple(&[Ty::Bool; 3]);
+    assert_intersects(
+        pats!(ty;
+            (true, true, _),
+            (true, _, true),
+            (false, _, _),
+        ),
+        &[&[], &[], &[]],
+    );
+    let ty = Ty::Tuple(&[Ty::Bool, Ty::Bool, Ty::U8]);
+    assert_intersects(
+        pats!(ty;
+            (true, _, _),
+            (_, true, 0..10),
+            (_, true, 10..),
+            (_, true, 3),
+            _,
+        ),
+        &[&[], &[], &[], &[1], &[0, 1, 2, 3]],
+    );
+}

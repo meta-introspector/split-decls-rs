@@ -1,34 +1,142 @@
-/* FP:region_ctxt.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_region_infer_opaque_types_region_ctxt_USE_0001
-/* FP:region_ctxt.rs-0002 */ use std :: rc :: Rc ;
-/* FP:region_ctxt.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_region_infer_opaque_types_region_ctxt_USE_0002
-/* FP:region_ctxt.rs-0004 */ use crate :: rustc_data_structures :: frozen :: Frozen ;
-/* FP:region_ctxt.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_region_infer_opaque_types_region_ctxt_USE_0003
-/* FP:region_ctxt.rs-0006 */ use crate :: rustc_index :: IndexVec ;
-/* FP:region_ctxt.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_region_infer_opaque_types_region_ctxt_USE_0004
-/* FP:region_ctxt.rs-0008 */ use crate :: rustc_infer :: infer :: NllRegionVariableOrigin ;
-/* FP:region_ctxt.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_region_infer_opaque_types_region_ctxt_USE_0005
-/* FP:region_ctxt.rs-0010 */ use crate :: rustc_complete :: ty :: { RegionVid , UniverseIndex } ;
-/* FP:region_ctxt.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_region_infer_opaque_types_region_ctxt_USE_0006
-/* FP:region_ctxt.rs-0012 */ use crate :: rustc_mir_dataflow :: points :: DenseLocationMap ;
-/* FP:region_ctxt.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_region_infer_opaque_types_region_ctxt_USE_0007
-/* FP:region_ctxt.rs-0014 */ use crate :: BorrowckInferCtxt ;
-/* FP:region_ctxt.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_region_infer_opaque_types_region_ctxt_USE_0008
-/* FP:region_ctxt.rs-0016 */ use crate :: constraints :: ConstraintSccIndex ;
-/* FP:region_ctxt.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_region_infer_opaque_types_region_ctxt_USE_0009
-/* FP:region_ctxt.rs-0018 */ use crate :: handle_placeholders :: { SccAnnotations , region_definitions } ;
-/* FP:region_ctxt.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_region_infer_opaque_types_region_ctxt_USE_0010
-/* FP:region_ctxt.rs-0020 */ use crate :: region_infer :: reverse_sccs :: ReverseSccGraph ;
-/* FP:region_ctxt.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_region_infer_opaque_types_region_ctxt_USE_0011
-/* FP:region_ctxt.rs-0022 */ use crate :: region_infer :: values :: RegionValues ;
-/* FP:region_ctxt.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_region_infer_opaque_types_region_ctxt_USE_0012
-/* FP:region_ctxt.rs-0024 */ use crate :: region_infer :: { ConstraintSccs , OutlivesConstraintSet , RegionDefinition , RegionTracker , Representative , } ;
-/* FP:region_ctxt.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_region_infer_opaque_types_region_ctxt_USE_0013
-/* FP:region_ctxt.rs-0026 */ use crate :: type_check :: MirTypeckRegionConstraints ;
-/* FP:region_ctxt.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_region_infer_opaque_types_region_ctxt_USE_0014
-/* FP:region_ctxt.rs-0028 */ use crate :: type_check :: free_region_relations :: UniversalRegionRelations ;
-/* FP:region_ctxt.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_region_infer_opaque_types_region_ctxt_USE_0015
-/* FP:region_ctxt.rs-0030 */ use crate :: universal_regions :: UniversalRegions ;
-/* FP:region_ctxt.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_region_infer_opaque_types_region_ctxt_STRUCT_0016
-/* FP:region_ctxt.rs-0032 */ # [doc = " A slimmed down version of [crate::region_infer::RegionInferenceContext] used"] # [doc = " only by opaque type handling."] pub (super) struct RegionCtxt < 'a , 'tcx > { pub (super) infcx : & 'a BorrowckInferCtxt < 'tcx > , pub (super) definitions : Frozen < IndexVec < RegionVid , RegionDefinition < 'tcx > > > , pub (super) universal_region_relations : & 'a UniversalRegionRelations < 'tcx > , pub (super) constraint_sccs : ConstraintSccs , pub (super) scc_annotations : IndexVec < ConstraintSccIndex , RegionTracker > , pub (super) rev_scc_graph : ReverseSccGraph , pub (super) scc_values : RegionValues < ConstraintSccIndex > , }
-/* FP:region_ctxt.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_borrowck_src_region_infer_opaque_types_region_ctxt_IMPL_0017
-/* FP:region_ctxt.rs-0034 */ impl < 'a , 'tcx > RegionCtxt < 'a , 'tcx > { # [doc = " Creates a new `RegionCtxt` used to compute defining opaque type uses."] # [doc = ""] # [doc = " This does not yet propagate region values. This is instead done lazily"] # [doc = " when applying member constraints."] pub (super) fn new (infcx : & 'a BorrowckInferCtxt < 'tcx > , universal_region_relations : & 'a Frozen < UniversalRegionRelations < 'tcx > > , location_map : Rc < DenseLocationMap > , constraints : & MirTypeckRegionConstraints < 'tcx > ,) -> RegionCtxt < 'a , 'tcx > { let mut outlives_constraints = constraints . outlives_constraints . clone () ; let universal_regions = & universal_region_relations . universal_regions ; let (definitions , _has_placeholders) = region_definitions (infcx , universal_regions) ; let compute_sccs = | outlives_constraints : & OutlivesConstraintSet < 'tcx > , annotations : & mut SccAnnotations < '_ , 'tcx , RegionTracker > | { ConstraintSccs :: new_with_annotation (& outlives_constraints . graph (definitions . len ()) . region_graph (outlives_constraints , universal_regions . fr_static) , annotations ,) } ; let mut scc_annotations = SccAnnotations :: init (& definitions) ; let mut constraint_sccs = compute_sccs (& outlives_constraints , & mut scc_annotations) ; let added_constraints = crate :: handle_placeholders :: rewrite_placeholder_outlives (& constraint_sccs , & scc_annotations , universal_regions . fr_static , & mut outlives_constraints ,) ; if added_constraints { scc_annotations = SccAnnotations :: init (& definitions) ; constraint_sccs = compute_sccs (& outlives_constraints , & mut scc_annotations) ; } let scc_annotations = scc_annotations . scc_to_annotation ; let placeholder_indices = Default :: default () ; let mut scc_values = RegionValues :: new (location_map , universal_regions . len () , placeholder_indices) ; for variable in definitions . indices () { let scc = constraint_sccs . scc (variable) ; match definitions [variable] . origin { NllRegionVariableOrigin :: FreeRegion => { scc_values . add_element (scc , variable) ; } _ => { } } } let rev_scc_graph = ReverseSccGraph :: compute (& constraint_sccs , universal_regions) ; RegionCtxt { infcx , definitions , universal_region_relations , constraint_sccs , scc_annotations , rev_scc_graph , scc_values , } } pub (super) fn representative (& self , vid : RegionVid) -> Representative { let scc = self . constraint_sccs . scc (vid) ; self . scc_annotations [scc] . representative } pub (crate) fn max_placeholder_universe_reached (& self , scc : ConstraintSccIndex ,) -> UniverseIndex { self . scc_annotations [scc] . max_placeholder_universe_reached () } pub (super) fn universal_regions (& self) -> & UniversalRegions < 'tcx > { & self . universal_region_relations . universal_regions } pub (super) fn eval_equal (& self , r1_vid : RegionVid , r2_vid : RegionVid) -> bool { let r1 = self . constraint_sccs . scc (r1_vid) ; let r2 = self . constraint_sccs . scc (r2_vid) ; if r1 == r2 { return true ; } let universal_outlives = | sub , sup | { self . scc_values . universal_regions_outlived_by (sub) . all (| r1 | { self . scc_values . universal_regions_outlived_by (sup) . any (| r2 | self . universal_region_relations . outlives (r2 , r1)) }) } ; universal_outlives (r1 , r2) && universal_outlives (r2 , r1) } }
+// SRC: ../rust/compiler/rustc_borrowck/src/region_infer/opaque_types/region_ctxt.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+use std::rc::Rc;
+
+use crate::rustc_data_structures::frozen::Frozen;
+use crate::rustc_index::IndexVec;
+use crate::rustc_infer::infer::NllRegionVariableOrigin;
+use crate::rustc_complete::ty::{RegionVid, UniverseIndex};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use crate::rustc_mir_dataflow::points::DenseLocationMap;
+
+use crate::BorrowckInferCtxt;
+use crate::constraints::ConstraintSccIndex;
+use crate::handle_placeholders::{SccAnnotations, region_definitions};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use crate::region_infer::reverse_sccs::ReverseSccGraph;
+use crate::region_infer::values::RegionValues;
+use crate::region_infer::{
+    ConstraintSccs, OutlivesConstraintSet, RegionDefinition, RegionTracker, Representative,
+};
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
+use crate::type_check::MirTypeckRegionConstraints;
+use crate::type_check::free_region_relations::UniversalRegionRelations;
+use crate::universal_regions::UniversalRegions;
+
+/// A slimmed down version of [crate::region_infer::RegionInferenceContext] used
+/// only by opaque type handling.
+pub(super) struct RegionCtxt<'a, 'tcx> {
+    pub(super) infcx: &'a BorrowckInferCtxt<'tcx>,
+    pub(super) definitions: Frozen<IndexVec<RegionVid, RegionDefinition<'tcx>>>,
+    pub(super) universal_region_relations: &'a UniversalRegionRelations<'tcx>,
+    pub(super) constraint_sccs: ConstraintSccs,
+    pub(super) scc_annotations: IndexVec<ConstraintSccIndex, RegionTracker>,
+    pub(super) rev_scc_graph: ReverseSccGraph,
+    pub(super) scc_values: RegionValues<ConstraintSccIndex>,
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=105 */
+
+impl<'a, 'tcx> RegionCtxt<'a, 'tcx> {
+    /// Creates a new `RegionCtxt` used to compute defining opaque type uses.
+    ///
+    /// This does not yet propagate region values. This is instead done lazily
+    /// when applying member constraints.
+    pub(super) fn new(
+        infcx: &'a BorrowckInferCtxt<'tcx>,
+        universal_region_relations: &'a Frozen<UniversalRegionRelations<'tcx>>,
+        location_map: Rc<DenseLocationMap>,
+        constraints: &MirTypeckRegionConstraints<'tcx>,
+    ) -> RegionCtxt<'a, 'tcx> {
+        let mut outlives_constraints = constraints.outlives_constraints.clone();
+        let universal_regions = &universal_region_relations.universal_regions;
+        let (definitions, _has_placeholders) = region_definitions(infcx, universal_regions);
+
+        let compute_sccs =
+            |outlives_constraints: &OutlivesConstraintSet<'tcx>,
+             annotations: &mut SccAnnotations<'_, 'tcx, RegionTracker>| {
+                ConstraintSccs::new_with_annotation(
+                    &outlives_constraints
+                        .graph(definitions.len())
+                        .region_graph(outlives_constraints, universal_regions.fr_static),
+                    annotations,
+                )
+            };
+
+        let mut scc_annotations = SccAnnotations::init(&definitions);
+        let mut constraint_sccs = compute_sccs(&outlives_constraints, &mut scc_annotations);
+
+        let added_constraints = crate::handle_placeholders::rewrite_placeholder_outlives(
+            &constraint_sccs,
+            &scc_annotations,
+            universal_regions.fr_static,
+            &mut outlives_constraints,
+        );
+
+        if added_constraints {
+            scc_annotations = SccAnnotations::init(&definitions);
+            constraint_sccs = compute_sccs(&outlives_constraints, &mut scc_annotations);
+        }
+
+        let scc_annotations = scc_annotations.scc_to_annotation;
+
+        // Unlike the `RegionInferenceContext`, we only care about free regions
+        // and fully ignore liveness and placeholders.
+        let placeholder_indices = Default::default();
+        let mut scc_values =
+            RegionValues::new(location_map, universal_regions.len(), placeholder_indices);
+        for variable in definitions.indices() {
+            let scc = constraint_sccs.scc(variable);
+            match definitions[variable].origin {
+                NllRegionVariableOrigin::FreeRegion => {
+                    scc_values.add_element(scc, variable);
+                }
+                _ => {}
+            }
+        }
+
+        let rev_scc_graph = ReverseSccGraph::compute(&constraint_sccs, universal_regions);
+        RegionCtxt {
+            infcx,
+            definitions,
+            universal_region_relations,
+            constraint_sccs,
+            scc_annotations,
+            rev_scc_graph,
+            scc_values,
+        }
+    }
+
+    pub(super) fn representative(&self, vid: RegionVid) -> Representative {
+        let scc = self.constraint_sccs.scc(vid);
+        self.scc_annotations[scc].representative
+    }
+
+    pub(crate) fn max_placeholder_universe_reached(
+        &self,
+        scc: ConstraintSccIndex,
+    ) -> UniverseIndex {
+        self.scc_annotations[scc].max_placeholder_universe_reached()
+    }
+
+    pub(super) fn universal_regions(&self) -> &UniversalRegions<'tcx> {
+        &self.universal_region_relations.universal_regions
+    }
+
+    pub(super) fn eval_equal(&self, r1_vid: RegionVid, r2_vid: RegionVid) -> bool {
+        let r1 = self.constraint_sccs.scc(r1_vid);
+        let r2 = self.constraint_sccs.scc(r2_vid);
+
+        if r1 == r2 {
+            return true;
+        }
+
+        let universal_outlives = |sub, sup| {
+            self.scc_values.universal_regions_outlived_by(sub).all(|r1| {
+                self.scc_values
+                    .universal_regions_outlived_by(sup)
+                    .any(|r2| self.universal_region_relations.outlives(r2, r1))
+            })
+        };
+        universal_outlives(r1, r2) && universal_outlives(r2, r1)
+    }
+}

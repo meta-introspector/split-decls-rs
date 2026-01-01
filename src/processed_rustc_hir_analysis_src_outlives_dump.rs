@@ -1,8 +1,32 @@
-/* FP:dump.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_outlives_dump_USE_0001
-/* FP:dump.rs-0002 */ use crate :: rustc_complete :: bug ;
-/* FP:dump.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_outlives_dump_USE_0002
-/* FP:dump.rs-0004 */ use crate :: rustc_complete :: ty :: { self , TyCtxt } ;
-/* FP:dump.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_outlives_dump_USE_0003
-/* FP:dump.rs-0006 */ use crate :: rustc_complete :: sym ;
-/* FP:dump.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_outlives_dump_FN_0004
-/* FP:dump.rs-0008 */ pub (crate) fn inferred_outlives (tcx : TyCtxt < '_ >) { for id in tcx . hir_free_items () { if ! tcx . has_attr (id . owner_id , sym :: rustc_outlives) { continue ; } let preds = tcx . inferred_outlives_of (id . owner_id) ; let mut preds : Vec < _ > = preds . iter () . map (| (pred , _) | match pred . kind () . skip_binder () { ty :: ClauseKind :: RegionOutlives (p) => p . to_string () , ty :: ClauseKind :: TypeOutlives (p) => p . to_string () , err => bug ! ("unexpected clause {:?}" , err) , }) . collect () ; preds . sort () ; let span = tcx . def_span (id . owner_id) ; let mut err = tcx . dcx () . struct_span_err (span , sym :: rustc_outlives . as_str ()) ; for pred in preds { err . note (pred) ; } err . emit () ; } }
+// SRC: ../rust/compiler/rustc_hir_analysis/src/outlives/dump.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, TyCtxt};
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=27 */
+use crate::rustc_complete::sym;
+
+pub(crate) fn inferred_outlives(tcx: TyCtxt<'_>) {
+    for id in tcx.hir_free_items() {
+        if !tcx.has_attr(id.owner_id, sym::rustc_outlives) {
+            continue;
+        }
+
+        let preds = tcx.inferred_outlives_of(id.owner_id);
+        let mut preds: Vec<_> = preds
+            .iter()
+            .map(|(pred, _)| match pred.kind().skip_binder() {
+                ty::ClauseKind::RegionOutlives(p) => p.to_string(),
+                ty::ClauseKind::TypeOutlives(p) => p.to_string(),
+                err => bug!("unexpected clause {:?}", err),
+            })
+            .collect();
+        preds.sort();
+
+        let span = tcx.def_span(id.owner_id);
+        let mut err = tcx.dcx().struct_span_err(span, sym::rustc_outlives.as_str());
+        for pred in preds {
+            err.note(pred);
+        }
+        err.emit();
+    }
+}

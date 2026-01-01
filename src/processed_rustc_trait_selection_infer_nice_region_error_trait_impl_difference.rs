@@ -1,40 +1,177 @@
-/* FP:trait_impl_difference.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_USE_0001
-/* FP:trait_impl_difference.rs-0002 */ use crate :: rustc_complete :: ErrorGuaranteed ;
-/* FP:trait_impl_difference.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_USE_0002
-/* FP:trait_impl_difference.rs-0004 */ use crate :: rustc_complete :: def :: { Namespace , Res } ;
-/* FP:trait_impl_difference.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_USE_0003
-/* FP:trait_impl_difference.rs-0006 */ use crate :: rustc_complete :: def_id :: DefId ;
-/* FP:trait_impl_difference.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_USE_0004
-/* FP:trait_impl_difference.rs-0008 */ use crate :: rustc_complete :: intravisit :: { Visitor , walk_ty } ;
-/* FP:trait_impl_difference.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_USE_0005
-/* FP:trait_impl_difference.rs-0010 */ use crate :: rustc_complete :: { self as hir , AmbigArg } ;
-/* FP:trait_impl_difference.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_USE_0006
-/* FP:trait_impl_difference.rs-0012 */ use crate :: rustc_infer :: infer :: SubregionOrigin ;
-/* FP:trait_impl_difference.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_USE_0007
-/* FP:trait_impl_difference.rs-0014 */ use crate :: rustc_complete :: hir :: nested_filter ;
-/* FP:trait_impl_difference.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_USE_0008
-/* FP:trait_impl_difference.rs-0016 */ use crate :: rustc_complete :: traits :: ObligationCauseCode ;
-/* FP:trait_impl_difference.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_USE_0009
-/* FP:trait_impl_difference.rs-0018 */ use crate :: rustc_complete :: ty :: error :: ExpectedFound ;
-/* FP:trait_impl_difference.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_USE_0010
-/* FP:trait_impl_difference.rs-0020 */ use crate :: rustc_complete :: ty :: print :: RegionHighlightMode ;
-/* FP:trait_impl_difference.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_USE_0011
-/* FP:trait_impl_difference.rs-0022 */ use crate :: rustc_complete :: ty :: { self , TyCtxt , TypeVisitable } ;
-/* FP:trait_impl_difference.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_USE_0012
-/* FP:trait_impl_difference.rs-0024 */ use crate :: rustc_complete :: Span ;
-/* FP:trait_impl_difference.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_USE_0013
-/* FP:trait_impl_difference.rs-0026 */ use tracing :: debug ;
-/* FP:trait_impl_difference.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_USE_0014
-/* FP:trait_impl_difference.rs-0028 */ use crate :: error_reporting :: infer :: nice_region_error :: NiceRegionError ;
-/* FP:trait_impl_difference.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_USE_0015
-/* FP:trait_impl_difference.rs-0030 */ use crate :: error_reporting :: infer :: nice_region_error :: placeholder_error :: Highlighted ;
-/* FP:trait_impl_difference.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_USE_0016
-/* FP:trait_impl_difference.rs-0032 */ use crate :: errors :: { ConsiderBorrowingParamHelp , RelationshipHelp , TraitImplDiff } ;
-/* FP:trait_impl_difference.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_USE_0017
-/* FP:trait_impl_difference.rs-0034 */ use crate :: infer :: { RegionResolutionError , ValuePairs } ;
-/* FP:trait_impl_difference.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_IMPL_0018
-/* FP:trait_impl_difference.rs-0036 */ impl < 'a , 'tcx > NiceRegionError < 'a , 'tcx > { # [doc = " Print the error message for lifetime errors when the `impl` doesn't conform to the `trait`."] pub (super) fn try_report_impl_not_conforming_to_trait (& self) -> Option < ErrorGuaranteed > { let error = self . error . as_ref () ? ; debug ! ("try_report_impl_not_conforming_to_trait {:?}" , error) ; if let RegionResolutionError :: SubSupConflict (_ , var_origin , sub_origin , _sub , sup_origin , _sup , _ ,) = error . clone () && let (SubregionOrigin :: Subtype (sup_trace) , SubregionOrigin :: Subtype (sub_trace)) = (& sup_origin , & sub_origin) && let & ObligationCauseCode :: CompareImplItem { trait_item_def_id , .. } = sub_trace . cause . code () && sub_trace . values == sup_trace . values && let ValuePairs :: PolySigs (ExpectedFound { expected , found }) = sub_trace . values { let guar = self . emit_err (var_origin . span () , expected , found , trait_item_def_id) ; return Some (guar) ; } None } fn emit_err (& self , sp : Span , expected : ty :: PolyFnSig < 'tcx > , found : ty :: PolyFnSig < 'tcx > , trait_item_def_id : DefId ,) -> ErrorGuaranteed { let trait_sp = self . tcx () . def_span (trait_item_def_id) ; struct HighlightBuilder < 'tcx > { tcx : TyCtxt < 'tcx > , highlight : RegionHighlightMode < 'tcx > , counter : usize , } impl < 'tcx > HighlightBuilder < 'tcx > { fn build (tcx : TyCtxt < 'tcx > , sig : ty :: PolyFnSig < 'tcx >) -> RegionHighlightMode < 'tcx > { let mut builder = HighlightBuilder { tcx , highlight : RegionHighlightMode :: default () , counter : 1 } ; sig . visit_with (& mut builder) ; builder . highlight } } impl < 'tcx > ty :: TypeVisitor < TyCtxt < 'tcx > > for HighlightBuilder < 'tcx > { fn visit_region (& mut self , r : ty :: Region < 'tcx >) { if ! r . is_named (self . tcx) && self . counter <= 3 { self . highlight . highlighting_region (r , self . counter) ; self . counter += 1 ; } } } let tcx = self . cx . tcx ; let expected_highlight = HighlightBuilder :: build (tcx , expected) ; let expected = Highlighted { highlight : expected_highlight , ns : Namespace :: TypeNS , tcx , value : expected , } . to_string () ; let found_highlight = HighlightBuilder :: build (tcx , found) ; let found = Highlighted { highlight : found_highlight , ns : Namespace :: TypeNS , tcx , value : found } . to_string () ; let assoc_item = self . tcx () . associated_item (trait_item_def_id) ; let mut visitor = TypeParamSpanVisitor { tcx : self . tcx () , types : vec ! [] } ; match assoc_item . kind { ty :: AssocKind :: Fn { .. } => { if let Some (hir_id) = assoc_item . def_id . as_local () . map (| id | self . tcx () . local_def_id_to_hir_id (id)) && let Some (decl) = self . tcx () . hir_fn_decl_by_hir_id (hir_id) { visitor . visit_fn_decl (decl) ; } } _ => { } } let diag = TraitImplDiff { sp , trait_sp , note : () , param_help : ConsiderBorrowingParamHelp { spans : visitor . types . to_vec () } , rel_help : visitor . types . is_empty () . then_some (RelationshipHelp) , expected , found , } ; self . tcx () . dcx () . emit_err (diag) } }
-/* FP:trait_impl_difference.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_STRUCT_0019
-/* FP:trait_impl_difference.rs-0038 */ struct TypeParamSpanVisitor < 'tcx > { tcx : TyCtxt < 'tcx > , types : Vec < Span > , }
-/* FP:trait_impl_difference.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_trait_impl_difference_IMPL_0020
-/* FP:trait_impl_difference.rs-0040 */ impl < 'tcx > Visitor < 'tcx > for TypeParamSpanVisitor < 'tcx > { type NestedFilter = nested_filter :: OnlyBodies ; fn maybe_tcx (& mut self) -> Self :: MaybeTyCtxt { self . tcx } fn visit_ty (& mut self , arg : & 'tcx hir :: Ty < 'tcx , AmbigArg >) { match arg . kind { hir :: TyKind :: Ref (_ , ref mut_ty) => { if let Some (ambig_ty) = mut_ty . ty . try_as_ambig_ty () { walk_ty (self , ambig_ty) ; } return ; } hir :: TyKind :: Path (hir :: QPath :: Resolved (None , path)) => match & path . segments { [segment] if matches ! (segment . res , Res :: SelfTyParam { .. } | Res :: SelfTyAlias { .. } | Res :: Def (hir :: def :: DefKind :: TyParam , _)) => { self . types . push (path . span) ; } _ => { } } , _ => { } } hir :: intravisit :: walk_ty (self , arg) ; } }
+// SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/nice_region_error/trait_impl_difference.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=4 */
+// Error Reporting for `impl` items that do not match the obligations from their `trait`.
+
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def::{Namespace, Res};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::intravisit::{Visitor, walk_ty};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{self as hir, AmbigArg};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+use crate::rustc_infer::infer::SubregionOrigin;
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::traits::ObligationCauseCode;
+use crate::rustc_complete::ty::error::ExpectedFound;
+use crate::rustc_complete::ty::print::RegionHighlightMode;
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitable};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+use crate::rustc_complete::Span;
+use tracing::debug;
+
+use crate::error_reporting::infer::nice_region_error::NiceRegionError;
+use crate::error_reporting::infer::nice_region_error::placeholder_error::Highlighted;
+use crate::errors::{ConsiderBorrowingParamHelp, RelationshipHelp, TraitImplDiff};
+/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::infer::{RegionResolutionError, ValuePairs};
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=emit_err | COMPLEXITY=46 | LINES=107 */
+
+impl<'a, 'tcx> NiceRegionError<'a, 'tcx> {
+    /// Print the error message for lifetime errors when the `impl` doesn't conform to the `trait`.
+    pub(super) fn try_report_impl_not_conforming_to_trait(&self) -> Option<ErrorGuaranteed> {
+        let error = self.error.as_ref()?;
+        debug!("try_report_impl_not_conforming_to_trait {:?}", error);
+        if let RegionResolutionError::SubSupConflict(
+            _,
+            var_origin,
+            sub_origin,
+            _sub,
+            sup_origin,
+            _sup,
+            _,
+        ) = error.clone()
+            && let (SubregionOrigin::Subtype(sup_trace), SubregionOrigin::Subtype(sub_trace)) =
+                (&sup_origin, &sub_origin)
+            && let &ObligationCauseCode::CompareImplItem { trait_item_def_id, .. } =
+                sub_trace.cause.code()
+            && sub_trace.values == sup_trace.values
+            && let ValuePairs::PolySigs(ExpectedFound { expected, found }) = sub_trace.values
+        {
+            // FIXME(compiler-errors): Don't like that this needs `Ty`s, but
+            // all of the region highlighting machinery only deals with those.
+            let guar = self.emit_err(var_origin.span(), expected, found, trait_item_def_id);
+            return Some(guar);
+        }
+        None
+    }
+
+    fn emit_err(
+        &self,
+        sp: Span,
+        expected: ty::PolyFnSig<'tcx>,
+        found: ty::PolyFnSig<'tcx>,
+        trait_item_def_id: DefId,
+    ) -> ErrorGuaranteed {
+        let trait_sp = self.tcx().def_span(trait_item_def_id);
+
+        // Mark all unnamed regions in the type with a number.
+        // This diagnostic is called in response to lifetime errors, so be informative.
+        struct HighlightBuilder<'tcx> {
+            tcx: TyCtxt<'tcx>,
+            highlight: RegionHighlightMode<'tcx>,
+            counter: usize,
+        }
+
+        impl<'tcx> HighlightBuilder<'tcx> {
+            fn build(tcx: TyCtxt<'tcx>, sig: ty::PolyFnSig<'tcx>) -> RegionHighlightMode<'tcx> {
+                let mut builder =
+                    HighlightBuilder { tcx, highlight: RegionHighlightMode::default(), counter: 1 };
+                sig.visit_with(&mut builder);
+                builder.highlight
+            }
+        }
+
+        impl<'tcx> ty::TypeVisitor<TyCtxt<'tcx>> for HighlightBuilder<'tcx> {
+            fn visit_region(&mut self, r: ty::Region<'tcx>) {
+                if !r.is_named(self.tcx) && self.counter <= 3 {
+                    self.highlight.highlighting_region(r, self.counter);
+                    self.counter += 1;
+                }
+            }
+        }
+
+        let tcx = self.cx.tcx;
+        let expected_highlight = HighlightBuilder::build(tcx, expected);
+        let expected = Highlighted {
+            highlight: expected_highlight,
+            ns: Namespace::TypeNS,
+            tcx,
+            value: expected,
+        }
+        .to_string();
+        let found_highlight = HighlightBuilder::build(tcx, found);
+        let found =
+            Highlighted { highlight: found_highlight, ns: Namespace::TypeNS, tcx, value: found }
+                .to_string();
+
+        // Get the span of all the used type parameters in the method.
+        let assoc_item = self.tcx().associated_item(trait_item_def_id);
+        let mut visitor = TypeParamSpanVisitor { tcx: self.tcx(), types: vec![] };
+        match assoc_item.kind {
+            ty::AssocKind::Fn { .. } => {
+                if let Some(hir_id) =
+                    assoc_item.def_id.as_local().map(|id| self.tcx().local_def_id_to_hir_id(id))
+                    && let Some(decl) = self.tcx().hir_fn_decl_by_hir_id(hir_id)
+                {
+                    visitor.visit_fn_decl(decl);
+                }
+            }
+            _ => {}
+        }
+
+        let diag = TraitImplDiff {
+            sp,
+            trait_sp,
+            note: (),
+            param_help: ConsiderBorrowingParamHelp { spans: visitor.types.to_vec() },
+            rel_help: visitor.types.is_empty().then_some(RelationshipHelp),
+            expected,
+            found,
+        };
+
+        self.tcx().dcx().emit_err(diag)
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=TypeParamSpanVisitor | COMPLEXITY=2 | LINES=5 */
+
+struct TypeParamSpanVisitor<'tcx> {
+    tcx: TyCtxt<'tcx>,
+    types: Vec<Span>,
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=27 | LINES=35 */
+
+impl<'tcx> Visitor<'tcx> for TypeParamSpanVisitor<'tcx> {
+    type NestedFilter = nested_filter::OnlyBodies;
+
+    fn maybe_tcx(&mut self) -> Self::MaybeTyCtxt {
+        self.tcx
+    }
+
+    fn visit_ty(&mut self, arg: &'tcx hir::Ty<'tcx, AmbigArg>) {
+        match arg.kind {
+            hir::TyKind::Ref(_, ref mut_ty) => {
+                // We don't want to suggest looking into borrowing `&T` or `&Self`.
+                if let Some(ambig_ty) = mut_ty.ty.try_as_ambig_ty() {
+                    walk_ty(self, ambig_ty);
+                }
+                return;
+            }
+            hir::TyKind::Path(hir::QPath::Resolved(None, path)) => match &path.segments {
+                [segment]
+                    if matches!(
+                        segment.res,
+                        Res::SelfTyParam { .. }
+                            | Res::SelfTyAlias { .. }
+                            | Res::Def(hir::def::DefKind::TyParam, _)
+                    ) =>
+                {
+                    self.types.push(path.span);
+                }
+                _ => {}
+            },
+            _ => {}
+        }
+        hir::intravisit::walk_ty(self, arg);
+    }
+}

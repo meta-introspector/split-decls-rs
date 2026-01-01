@@ -1,12 +1,37 @@
-/* FP:nested_filter.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_nested_filter_USE_0001
-/* FP:nested_filter.rs-0002 */ use crate :: rustc_complete :: intravisit :: nested_filter :: NestedFilter ;
-/* FP:nested_filter.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_nested_filter_USE_0002
-/* FP:nested_filter.rs-0004 */ use crate :: ty :: TyCtxt ;
-/* FP:nested_filter.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_nested_filter_STRUCT_0003
-/* FP:nested_filter.rs-0006 */ # [doc = " Do not visit nested item-like things, but visit nested things"] # [doc = " that are inside of an item-like."] # [doc = ""] # [doc = " Notably, possible occurrences of bodies in non-item-like things"] # [doc = " include: closures/coroutines, inline `const {}` blocks, and"] # [doc = " constant arguments of types, e.g. in `let _: [(); /* HERE */];`."] # [doc = ""] # [doc = " **This is the most common choice.** A very common pattern is"] # [doc = " to use `visit_all_item_likes_in_crate()` as an outer loop,"] # [doc = " and to have the visitor that visits the contents of each item"] # [doc = " using this setting."] pub struct OnlyBodies (()) ;
-/* FP:nested_filter.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_nested_filter_IMPL_0004
-/* FP:nested_filter.rs-0008 */ impl < 'tcx > NestedFilter < 'tcx > for OnlyBodies { type MaybeTyCtxt = TyCtxt < 'tcx > ; const INTER : bool = false ; const INTRA : bool = true ; }
-/* FP:nested_filter.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_nested_filter_STRUCT_0005
-/* FP:nested_filter.rs-0010 */ # [doc = " Visits all nested things, including item-likes."] # [doc = ""] # [doc = " **This is an unusual choice.** It is used when you want to"] # [doc = " process everything within their lexical context. Typically you"] # [doc = " kick off the visit by doing `walk_krate()`."] pub struct All (()) ;
-/* FP:nested_filter.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_nested_filter_IMPL_0006
-/* FP:nested_filter.rs-0012 */ impl < 'tcx > NestedFilter < 'tcx > for All { type MaybeTyCtxt = TyCtxt < 'tcx > ; const INTER : bool = true ; const INTRA : bool = true ; }
+// SRC: ../rust/compiler/rustc_middle/src/hir/nested_filter.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+use crate::rustc_complete::intravisit::nested_filter::NestedFilter;
+
+use crate::ty::TyCtxt;
+
+/// Do not visit nested item-like things, but visit nested things
+/// that are inside of an item-like.
+///
+/// Notably, possible occurrences of bodies in non-item-like things
+/// include: closures/coroutines, inline `const {}` blocks, and
+/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=OnlyBodies(()); | COMPLEXITY=4 | LINES=12 */
+/// constant arguments of types, e.g. in `let _: [(); /* HERE */];`.
+///
+/// **This is the most common choice.** A very common pattern is
+/// to use `visit_all_item_likes_in_crate()` as an outer loop,
+/// and to have the visitor that visits the contents of each item
+/// using this setting.
+pub struct OnlyBodies(());
+impl<'tcx> NestedFilter<'tcx> for OnlyBodies {
+    type MaybeTyCtxt = TyCtxt<'tcx>;
+    const INTER: bool = false;
+    const INTRA: bool = true;
+}
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=All(()); | COMPLEXITY=4 | LINES=12 */
+
+/// Visits all nested things, including item-likes.
+///
+/// **This is an unusual choice.** It is used when you want to
+/// process everything within their lexical context. Typically you
+/// kick off the visit by doing `walk_krate()`.
+pub struct All(());
+impl<'tcx> NestedFilter<'tcx> for All {
+    type MaybeTyCtxt = TyCtxt<'tcx>;
+    const INTER: bool = true;
+    const INTRA: bool = true;
+}

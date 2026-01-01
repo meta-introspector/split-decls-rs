@@ -1,6 +1,8 @@
 use std::env;
 use std::path::Path;
 
+mod ast_patch_FN_0052;
+
 fn main() {
     println!("🎯 Split Declarations Genesis - Rust Compiler Integration");
     println!("✅ Build successful with {} audit proofs generated", 1251);
@@ -11,10 +13,21 @@ fn main() {
         match args[1].as_str() {
             "test" => run_test(),
             "audit" => show_audit_stats(),
+            "patch" => apply_patches(),
             _ => show_help(),
         }
     } else {
         show_help();
+    }
+}
+
+fn apply_patches() {
+    println!("🔧 Applying AST patches for compilation errors...");
+    
+    if let Err(e) = ast_patch_FN_0052::apply_patch() {
+        eprintln!("❌ Failed to apply patch FN_0052: {}", e);
+    } else {
+        println!("✅ Applied patch FN_0052 successfully");
     }
 }
 

@@ -1,4 +1,18 @@
-/* FP:empty_main.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_run_empty_main_USE_0001
-/* FP:empty_main.rs-0002 */ # [feature (no_core)] # [no_std] # [no_core] # [no_main] use mini_core :: * ;
-/* FP:empty_main.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_run_empty_main_FN_0002
-/* FP:empty_main.rs-0004 */ # [unsafe (no_mangle)] extern "C" fn main (argc : i32 , _argv : * const * const u8) -> i32 { 0 }
+// SRC: ../rust/compiler/rustc_codegen_gcc/tests/run/empty_main.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=16 */
+// Compiler:
+//
+// Run-time:
+//   status: 0
+
+#[feature(no_core)]
+#[no_std]
+#[no_core]
+#[no_main]
+
+use mini_core::*;
+
+#[unsafe(no_mangle)]
+extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
+    0
+}

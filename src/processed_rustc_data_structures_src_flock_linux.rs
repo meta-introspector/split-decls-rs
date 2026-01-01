@@ -1,12 +1,40 @@
-/* FP:linux.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_flock_linux_USE_0001
-/* FP:linux.rs-0002 */ use std :: fs :: { File , OpenOptions } ;
-/* FP:linux.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_flock_linux_USE_0002
-/* FP:linux.rs-0004 */ use std :: io ;
-/* FP:linux.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_flock_linux_USE_0003
-/* FP:linux.rs-0006 */ use std :: os :: unix :: prelude :: * ;
-/* FP:linux.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_flock_linux_USE_0004
-/* FP:linux.rs-0008 */ use std :: path :: Path ;
-/* FP:linux.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_flock_linux_STRUCT_0005
-/* FP:linux.rs-0010 */ # [derive (Debug)] pub struct Lock { _file : File , }
-/* FP:linux.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_flock_linux_IMPL_0006
-/* FP:linux.rs-0012 */ impl Lock { pub fn new (p : & Path , wait : bool , create : bool , exclusive : bool) -> io :: Result < Lock > { let file = OpenOptions :: new () . read (true) . write (true) . create (create) . mode (0o600) . open (p) ? ; let mut operation = if exclusive { libc :: LOCK_EX } else { libc :: LOCK_SH } ; if ! wait { operation |= libc :: LOCK_NB } let ret = unsafe { libc :: flock (file . as_raw_fd () , operation) } ; if ret == - 1 { Err (io :: Error :: last_os_error ()) } else { Ok (Lock { _file : file }) } } pub fn error_unsupported (err : & io :: Error) -> bool { matches ! (err . raw_os_error () , Some (libc :: ENOTSUP) | Some (libc :: ENOSYS)) } }
+// SRC: ../rust/compiler/rustc_data_structures/src/flock/linux.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+// We use `flock` rather than `fcntl` on Linux, because WSL1 does not support
+// `fcntl`-style advisory locks properly (rust-lang/rust#72157). For other Unix
+// targets we still use `fcntl` because it's more portable than `flock`.
+
+use std::fs::{File, OpenOptions};
+/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=Lock | COMPLEXITY=2 | LINES=8 */
+use std::io;
+use std::os::unix::prelude::*;
+use std::path::Path;
+
+#[derive(Debug)]
+pub struct Lock {
+    _file: File,
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=22 | LINES=18 */
+
+impl Lock {
+    pub fn new(p: &Path, wait: bool, create: bool, exclusive: bool) -> io::Result<Lock> {
+        let file = OpenOptions::new().read(true).write(true).create(create).mode(0o600).open(p)?;
+
+        let mut operation = if exclusive { libc::LOCK_EX } else { libc::LOCK_SH };
+        if !wait {
+            operation |= libc::LOCK_NB
+        }
+
+        let ret = unsafe { libc::flock(file.as_raw_fd(), operation) };
+        if ret == -1 { Err(io::Error::last_os_error()) } else { Ok(Lock { _file: file }) }
+    }
+
+    pub fn error_unsupported(err: &io::Error) -> bool {
+        matches!(err.raw_os_error(), Some(libc::ENOTSUP) | Some(libc::ENOSYS))
+    }
+}
+/* AST_META: AST_ID=4 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=1 | LINES=4 */
+
+// Note that we don't need a Drop impl to execute `flock(fd, LOCK_UN)`. A lock acquired by
+// `flock` is associated with the file descriptor and closing the file releases it
+// automatically.

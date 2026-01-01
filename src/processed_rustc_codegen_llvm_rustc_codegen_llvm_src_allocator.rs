@@ -1,30 +1,222 @@
-/* FP:allocator.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_allocator_USE_0001
-/* FP:allocator.rs-0002 */ use libc :: c_uint ;
-/* FP:allocator.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_allocator_USE_0002
-/* FP:allocator.rs-0004 */ use crate :: rustc_complete :: expand :: allocator :: { ALLOCATOR_METHODS , AllocatorKind , AllocatorTy , NO_ALLOC_SHIM_IS_UNSTABLE , alloc_error_handler_name , default_fn_name , global_fn_name , } ;
-/* FP:allocator.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_allocator_USE_0003
-/* FP:allocator.rs-0006 */ use crate :: rustc_codegen_ssa :: traits :: BaseTypeCodegenMethods as _ ;
-/* FP:allocator.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_allocator_USE_0004
-/* FP:allocator.rs-0008 */ use crate :: rustc_complete :: bug ;
-/* FP:allocator.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_allocator_USE_0005
-/* FP:allocator.rs-0010 */ use crate :: rustc_complete :: ty :: TyCtxt ;
-/* FP:allocator.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_allocator_USE_0006
-/* FP:allocator.rs-0012 */ use crate :: rustc_complete :: config :: { DebugInfo , OomStrategy } ;
-/* FP:allocator.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_allocator_USE_0007
-/* FP:allocator.rs-0014 */ use rustc_symbol_mangling :: mangle_internal_symbol ;
-/* FP:allocator.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_allocator_USE_0008
-/* FP:allocator.rs-0016 */ use smallvec :: SmallVec ;
-/* FP:allocator.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_allocator_USE_0009
-/* FP:allocator.rs-0018 */ use crate :: builder :: SBuilder ;
-/* FP:allocator.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_allocator_USE_0010
-/* FP:allocator.rs-0020 */ use crate :: declare :: declare_simple_fn ;
-/* FP:allocator.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_allocator_USE_0011
-/* FP:allocator.rs-0022 */ use crate :: llvm :: { self , FALSE , TRUE , Type , Value } ;
-/* FP:allocator.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_allocator_USE_0012
-/* FP:allocator.rs-0024 */ use crate :: { SimpleCx , attributes , debuginfo , llvm_util } ;
-/* FP:allocator.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_allocator_FN_0013
-/* FP:allocator.rs-0026 */ pub (crate) unsafe fn codegen (tcx : TyCtxt < '_ > , cx : SimpleCx < '_ > , module_name : & str , kind : AllocatorKind , alloc_error_handler_kind : AllocatorKind ,) { let usize = match tcx . sess . target . pointer_width { 16 => cx . type_i16 () , 32 => cx . type_i32 () , 64 => cx . type_i64 () , tws => bug ! ("Unsupported target word size for int: {}" , tws) , } ; let i8 = cx . type_i8 () ; let i8p = cx . type_ptr () ; if kind == AllocatorKind :: Default { for method in ALLOCATOR_METHODS { let mut args = Vec :: with_capacity (method . inputs . len ()) ; for input in method . inputs . iter () { match input . ty { AllocatorTy :: Layout => { args . push (usize) ; args . push (usize) ; } AllocatorTy :: Ptr => args . push (i8p) , AllocatorTy :: Usize => args . push (usize) , AllocatorTy :: ResultPtr | AllocatorTy :: Unit => panic ! ("invalid allocator arg") , } } let output = match method . output { AllocatorTy :: ResultPtr => Some (i8p) , AllocatorTy :: Unit => None , AllocatorTy :: Layout | AllocatorTy :: Usize | AllocatorTy :: Ptr => { panic ! ("invalid allocator output") } } ; let from_name = mangle_internal_symbol (tcx , & global_fn_name (method . name)) ; let to_name = mangle_internal_symbol (tcx , & default_fn_name (method . name)) ; create_wrapper_function (tcx , & cx , & from_name , Some (& to_name) , & args , output , false) ; } } create_wrapper_function (tcx , & cx , & mangle_internal_symbol (tcx , "__rust_alloc_error_handler") , Some (& mangle_internal_symbol (tcx , alloc_error_handler_name (alloc_error_handler_kind))) , & [usize , usize] , None , true ,) ; unsafe { create_const_value_function (tcx , & cx , & mangle_internal_symbol (tcx , OomStrategy :: SYMBOL) , & i8 , & llvm :: LLVMConstInt (i8 , tcx . sess . opts . unstable_opts . oom . should_panic () as u64 , FALSE) ,) ; create_wrapper_function (tcx , & cx , & mangle_internal_symbol (tcx , NO_ALLOC_SHIM_IS_UNSTABLE) , None , & [] , None , false ,) ; } if tcx . sess . opts . debuginfo != DebugInfo :: None { let dbg_cx = debuginfo :: CodegenUnitDebugContext :: new (cx . llmod) ; debuginfo :: metadata :: build_compile_unit_di_node (tcx , module_name , & dbg_cx) ; dbg_cx . finalize (tcx . sess) ; } }
-/* FP:allocator.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_allocator_FN_0014
-/* FP:allocator.rs-0028 */ fn create_const_value_function (tcx : TyCtxt < '_ > , cx : & SimpleCx < '_ > , name : & str , output : & Type , value : & Value ,) { let ty = cx . type_func (& [] , output) ; let llfn = declare_simple_fn (& cx , name , llvm :: CallConv :: CCallConv , llvm :: UnnamedAddr :: Global , llvm :: Visibility :: from_generic (tcx . sess . default_visibility ()) , ty ,) ; attributes :: apply_to_llfn (llfn , llvm :: AttributePlace :: Function , & [llvm :: AttributeKind :: AlwaysInline . create_attr (cx . llcx)] ,) ; let llbb = unsafe { llvm :: LLVMAppendBasicBlockInContext (cx . llcx , llfn , c"entry" . as_ptr ()) } ; let mut bx = SBuilder :: build (& cx , llbb) ; bx . ret (value) ; }
-/* FP:allocator.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_allocator_FN_0015
-/* FP:allocator.rs-0030 */ fn create_wrapper_function (tcx : TyCtxt < '_ > , cx : & SimpleCx < '_ > , from_name : & str , to_name : Option < & str > , args : & [& Type] , output : Option < & Type > , no_return : bool ,) { let ty = cx . type_func (args , output . unwrap_or_else (| | cx . type_void ())) ; let llfn = declare_simple_fn (& cx , from_name , llvm :: CallConv :: CCallConv , llvm :: UnnamedAddr :: Global , llvm :: Visibility :: from_generic (tcx . sess . default_visibility ()) , ty ,) ; let mut attrs = SmallVec :: < [_ ; 2] > :: new () ; let target_cpu = llvm_util :: target_cpu (tcx . sess) ; let target_cpu_attr = llvm :: CreateAttrStringValue (cx . llcx , "target-cpu" , target_cpu) ; let tune_cpu_attr = llvm_util :: tune_cpu (tcx . sess) . map (| tune_cpu | llvm :: CreateAttrStringValue (cx . llcx , "tune-cpu" , tune_cpu)) ; attrs . push (target_cpu_attr) ; attrs . extend (tune_cpu_attr) ; attributes :: apply_to_llfn (llfn , llvm :: AttributePlace :: Function , & attrs) ; let no_return = if no_return { let no_return = llvm :: AttributeKind :: NoReturn . create_attr (cx . llcx) ; attributes :: apply_to_llfn (llfn , llvm :: AttributePlace :: Function , & [no_return]) ; Some (no_return) } else { None } ; if tcx . sess . must_emit_unwind_tables () { let uwtable = attributes :: uwtable_attr (cx . llcx , tcx . sess . opts . unstable_opts . use_sync_unwind) ; attributes :: apply_to_llfn (llfn , llvm :: AttributePlace :: Function , & [uwtable]) ; } let llbb = unsafe { llvm :: LLVMAppendBasicBlockInContext (cx . llcx , llfn , c"entry" . as_ptr ()) } ; let mut bx = SBuilder :: build (& cx , llbb) ; if let Some (to_name) = to_name { let callee = declare_simple_fn (& cx , to_name , llvm :: CallConv :: CCallConv , llvm :: UnnamedAddr :: Global , llvm :: Visibility :: Hidden , ty ,) ; if let Some (no_return) = no_return { attributes :: apply_to_llfn (callee , llvm :: AttributePlace :: Function , & [no_return]) ; } llvm :: set_visibility (callee , llvm :: Visibility :: Hidden) ; let args = args . iter () . enumerate () . map (| (i , _) | llvm :: get_param (llfn , i as c_uint)) . collect :: < Vec < _ > > () ; let ret = bx . call (ty , callee , & args , None) ; llvm :: LLVMSetTailCall (ret , TRUE) ; if output . is_some () { bx . ret (ret) ; } else { bx . ret_void () } } else { assert ! (output . is_none ()) ; bx . ret_void () } }
+// SRC: ../rust/compiler/rustc_codegen_llvm/src/allocator.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use libc::c_uint;
+use crate::rustc_complete::expand::allocator::{
+    ALLOCATOR_METHODS, AllocatorKind, AllocatorTy, NO_ALLOC_SHIM_IS_UNSTABLE,
+    alloc_error_handler_name, default_fn_name, global_fn_name,
+};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use crate::rustc_codegen_ssa::traits::BaseTypeCodegenMethods as _;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::{DebugInfo, OomStrategy};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+use rustc_symbol_mangling::mangle_internal_symbol;
+use smallvec::SmallVec;
+
+use crate::builder::SBuilder;
+use crate::declare::declare_simple_fn;
+use crate::llvm::{self, FALSE, TRUE, Type, Value};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::{SimpleCx, attributes, debuginfo, llvm_util};
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=45 | LINES=87 */
+
+pub(crate) unsafe fn codegen(
+    tcx: TyCtxt<'_>,
+    cx: SimpleCx<'_>,
+    module_name: &str,
+    kind: AllocatorKind,
+    alloc_error_handler_kind: AllocatorKind,
+) {
+    let usize = match tcx.sess.target.pointer_width {
+        16 => cx.type_i16(),
+        32 => cx.type_i32(),
+        64 => cx.type_i64(),
+        tws => bug!("Unsupported target word size for int: {}", tws),
+    };
+    let i8 = cx.type_i8();
+    let i8p = cx.type_ptr();
+
+    if kind == AllocatorKind::Default {
+        for method in ALLOCATOR_METHODS {
+            let mut args = Vec::with_capacity(method.inputs.len());
+            for input in method.inputs.iter() {
+                match input.ty {
+                    AllocatorTy::Layout => {
+                        args.push(usize); // size
+                        args.push(usize); // align
+                    }
+                    AllocatorTy::Ptr => args.push(i8p),
+                    AllocatorTy::Usize => args.push(usize),
+
+                    AllocatorTy::ResultPtr | AllocatorTy::Unit => panic!("invalid allocator arg"),
+                }
+            }
+            let output = match method.output {
+                AllocatorTy::ResultPtr => Some(i8p),
+                AllocatorTy::Unit => None,
+
+                AllocatorTy::Layout | AllocatorTy::Usize | AllocatorTy::Ptr => {
+                    panic!("invalid allocator output")
+                }
+            };
+
+            let from_name = mangle_internal_symbol(tcx, &global_fn_name(method.name));
+            let to_name = mangle_internal_symbol(tcx, &default_fn_name(method.name));
+
+            create_wrapper_function(tcx, &cx, &from_name, Some(&to_name), &args, output, false);
+        }
+    }
+
+    // rust alloc error handler
+    create_wrapper_function(
+        tcx,
+        &cx,
+        &mangle_internal_symbol(tcx, "__rust_alloc_error_handler"),
+        Some(&mangle_internal_symbol(tcx, alloc_error_handler_name(alloc_error_handler_kind))),
+        &[usize, usize], // size, align
+        None,
+        true,
+    );
+
+    unsafe {
+        // __rust_alloc_error_handler_should_panic_v2
+        create_const_value_function(
+            tcx,
+            &cx,
+            &mangle_internal_symbol(tcx, OomStrategy::SYMBOL),
+            &i8,
+            &llvm::LLVMConstInt(i8, tcx.sess.opts.unstable_opts.oom.should_panic() as u64, FALSE),
+        );
+
+        // __rust_no_alloc_shim_is_unstable_v2
+        create_wrapper_function(
+            tcx,
+            &cx,
+            &mangle_internal_symbol(tcx, NO_ALLOC_SHIM_IS_UNSTABLE),
+            None,
+            &[],
+            None,
+            false,
+        );
+    }
+
+    if tcx.sess.opts.debuginfo != DebugInfo::None {
+        let dbg_cx = debuginfo::CodegenUnitDebugContext::new(cx.llmod);
+        debuginfo::metadata::build_compile_unit_di_node(tcx, module_name, &dbg_cx);
+        dbg_cx.finalize(tcx.sess);
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=create_const_value_function | COMPLEXITY=8 | LINES=28 */
+
+fn create_const_value_function(
+    tcx: TyCtxt<'_>,
+    cx: &SimpleCx<'_>,
+    name: &str,
+    output: &Type,
+    value: &Value,
+) {
+    let ty = cx.type_func(&[], output);
+    let llfn = declare_simple_fn(
+        &cx,
+        name,
+        llvm::CallConv::CCallConv,
+        llvm::UnnamedAddr::Global,
+        llvm::Visibility::from_generic(tcx.sess.default_visibility()),
+        ty,
+    );
+
+    attributes::apply_to_llfn(
+        llfn,
+        llvm::AttributePlace::Function,
+        &[llvm::AttributeKind::AlwaysInline.create_attr(cx.llcx)],
+    );
+
+    let llbb = unsafe { llvm::LLVMAppendBasicBlockInContext(cx.llcx, llfn, c"entry".as_ptr()) };
+    let mut bx = SBuilder::build(&cx, llbb);
+    bx.ret(value);
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=create_wrapper_function | COMPLEXITY=30 | LINES=83 */
+
+fn create_wrapper_function(
+    tcx: TyCtxt<'_>,
+    cx: &SimpleCx<'_>,
+    from_name: &str,
+    to_name: Option<&str>,
+    args: &[&Type],
+    output: Option<&Type>,
+    no_return: bool,
+) {
+    let ty = cx.type_func(args, output.unwrap_or_else(|| cx.type_void()));
+    let llfn = declare_simple_fn(
+        &cx,
+        from_name,
+        llvm::CallConv::CCallConv,
+        llvm::UnnamedAddr::Global,
+        llvm::Visibility::from_generic(tcx.sess.default_visibility()),
+        ty,
+    );
+
+    let mut attrs = SmallVec::<[_; 2]>::new();
+
+    let target_cpu = llvm_util::target_cpu(tcx.sess);
+    let target_cpu_attr = llvm::CreateAttrStringValue(cx.llcx, "target-cpu", target_cpu);
+
+    let tune_cpu_attr = llvm_util::tune_cpu(tcx.sess)
+        .map(|tune_cpu| llvm::CreateAttrStringValue(cx.llcx, "tune-cpu", tune_cpu));
+
+    attrs.push(target_cpu_attr);
+    attrs.extend(tune_cpu_attr);
+
+    attributes::apply_to_llfn(llfn, llvm::AttributePlace::Function, &attrs);
+
+    let no_return = if no_return {
+        // -> ! DIFlagNoReturn
+        let no_return = llvm::AttributeKind::NoReturn.create_attr(cx.llcx);
+        attributes::apply_to_llfn(llfn, llvm::AttributePlace::Function, &[no_return]);
+        Some(no_return)
+    } else {
+        None
+    };
+
+    if tcx.sess.must_emit_unwind_tables() {
+        let uwtable =
+            attributes::uwtable_attr(cx.llcx, tcx.sess.opts.unstable_opts.use_sync_unwind);
+        attributes::apply_to_llfn(llfn, llvm::AttributePlace::Function, &[uwtable]);
+    }
+
+    let llbb = unsafe { llvm::LLVMAppendBasicBlockInContext(cx.llcx, llfn, c"entry".as_ptr()) };
+    let mut bx = SBuilder::build(&cx, llbb);
+
+    if let Some(to_name) = to_name {
+        let callee = declare_simple_fn(
+            &cx,
+            to_name,
+            llvm::CallConv::CCallConv,
+            llvm::UnnamedAddr::Global,
+            llvm::Visibility::Hidden,
+            ty,
+        );
+        if let Some(no_return) = no_return {
+            // -> ! DIFlagNoReturn
+            attributes::apply_to_llfn(callee, llvm::AttributePlace::Function, &[no_return]);
+        }
+        llvm::set_visibility(callee, llvm::Visibility::Hidden);
+
+        let args = args
+            .iter()
+            .enumerate()
+            .map(|(i, _)| llvm::get_param(llfn, i as c_uint))
+            .collect::<Vec<_>>();
+        let ret = bx.call(ty, callee, &args, None);
+        llvm::LLVMSetTailCall(ret, TRUE);
+        if output.is_some() {
+            bx.ret(ret);
+        } else {
+            bx.ret_void()
+        }
+    } else {
+        assert!(output.is_none());
+        bx.ret_void()
+    }
+}

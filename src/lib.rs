@@ -1,4 +1,6 @@
 #![recursion_limit = "256"]
+#![allow(internal_features)]
+#![feature(lang_items)]
 #![feature(yeet_expr)]
 #![feature(negative_impls)]
 #![feature(box_patterns)]

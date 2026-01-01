@@ -1,4 +1,11 @@
-/* FP:init_zero_threads.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_tests_init_zero_threads_USE_0001
-/* FP:init_zero_threads.rs-0002 */ # [allow (unused_crate_dependencies)] use crate :: rustc_thread_pool :: ThreadPoolBuilder ;
-/* FP:init_zero_threads.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_tests_init_zero_threads_FN_0002
-/* FP:init_zero_threads.rs-0004 */ # [test] # [cfg_attr (any (target_os = "emscripten" , target_family = "wasm") , ignore)] fn init_zero_threads () { ThreadPoolBuilder :: new () . num_threads (0) . build_global () . unwrap () ; }
+// SRC: ../rust/compiler/rustc_thread_pool/tests/init_zero_threads.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=init_zero_threads | COMPLEXITY=2 | LINES=9 */
+#[allow(unused_crate_dependencies)]
+
+use crate::rustc_thread_pool::ThreadPoolBuilder;
+
+#[test]
+#[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
+fn init_zero_threads() {
+    ThreadPoolBuilder::new().num_threads(0).build_global().unwrap();
+}

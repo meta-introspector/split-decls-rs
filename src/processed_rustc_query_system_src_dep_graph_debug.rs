@@ -1,16 +1,70 @@
-/* FP:debug.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_dep_graph_debug_USE_0001
-/* FP:debug.rs-0002 */ use std :: error :: Error ;
-/* FP:debug.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_dep_graph_debug_USE_0002
-/* FP:debug.rs-0004 */ use crate :: rustc_data_structures :: fx :: FxHashMap ;
-/* FP:debug.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_dep_graph_debug_USE_0003
-/* FP:debug.rs-0006 */ use crate :: rustc_data_structures :: sync :: Lock ;
-/* FP:debug.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_dep_graph_debug_USE_0004
-/* FP:debug.rs-0008 */ use super :: { DepNode , DepNodeIndex } ;
-/* FP:debug.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_dep_graph_debug_STRUCT_0005
-/* FP:debug.rs-0010 */ # [doc = " A dep-node filter goes from a user-defined string to a query over"] # [doc = " nodes. Right now the format is like this:"] # [doc = " ```ignore (illustrative)"] # [doc = " x & y & z"] # [doc = " ```"] # [doc = " where the format-string of the dep-node must contain `x`, `y`, and"] # [doc = " `z`."] # [derive (Debug)] pub struct DepNodeFilter { text : String , }
-/* FP:debug.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_dep_graph_debug_IMPL_0006
-/* FP:debug.rs-0012 */ impl DepNodeFilter { pub fn new (text : & str) -> Self { DepNodeFilter { text : text . trim () . to_string () } } # [doc = " Returns `true` if all nodes always pass the filter."] pub fn accepts_all (& self) -> bool { self . text . is_empty () } # [doc = " Tests whether `node` meets the filter, returning true if so."] pub fn test (& self , node : & DepNode) -> bool { let debug_str = format ! ("{node:?}") ; self . text . split ('&') . map (| s | s . trim ()) . all (| f | debug_str . contains (f)) } }
-/* FP:debug.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_dep_graph_debug_STRUCT_0007
-/* FP:debug.rs-0014 */ # [doc = " A filter like `F -> G` where `F` and `G` are valid dep-node"] # [doc = " filters. This can be used to test the source/target independently."] pub struct EdgeFilter { pub source : DepNodeFilter , pub target : DepNodeFilter , pub index_to_node : Lock < FxHashMap < DepNodeIndex , DepNode > > , }
-/* FP:debug.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_query_system_src_dep_graph_debug_IMPL_0008
-/* FP:debug.rs-0016 */ impl EdgeFilter { pub fn new (test : & str) -> Result < EdgeFilter , Box < dyn Error > > { if let [source , target] = * test . split ("->") . collect :: < Vec < _ > > () { Ok (EdgeFilter { source : DepNodeFilter :: new (source) , target : DepNodeFilter :: new (target) , index_to_node : Lock :: new (FxHashMap :: default ()) , }) } else { Err (format ! ("expected a filter like `a&b -> c&d`, not `{test}`") . into ()) } } # [cfg (debug_assertions)] pub fn test (& self , source : & DepNode , target : & DepNode) -> bool { self . source . test (source) && self . target . test (target) } }
+// SRC: ../rust/compiler/rustc_query_system/src/dep_graph/debug.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
+// Code for debugging the dep-graph.
+
+use std::error::Error;
+
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_data_structures::sync::Lock;
+
+use super::{DepNode, DepNodeIndex};
+/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=DepNodeFilter | COMPLEXITY=2 | LINES=12 */
+
+/// A dep-node filter goes from a user-defined string to a query over
+/// nodes. Right now the format is like this:
+/// ```ignore (illustrative)
+/// x & y & z
+/// ```
+/// where the format-string of the dep-node must contain `x`, `y`, and
+/// `z`.
+#[derive(Debug)]
+pub struct DepNodeFilter {
+    text: String,
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=12 | LINES=17 */
+
+impl DepNodeFilter {
+    pub fn new(text: &str) -> Self {
+        DepNodeFilter { text: text.trim().to_string() }
+    }
+
+    /// Returns `true` if all nodes always pass the filter.
+    pub fn accepts_all(&self) -> bool {
+        self.text.is_empty()
+    }
+
+    /// Tests whether `node` meets the filter, returning true if so.
+    pub fn test(&self, node: &DepNode) -> bool {
+        let debug_str = format!("{node:?}");
+        self.text.split('&').map(|s| s.trim()).all(|f| debug_str.contains(f))
+    }
+}
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=EdgeFilter | COMPLEXITY=2 | LINES=8 */
+
+/// A filter like `F -> G` where `F` and `G` are valid dep-node
+/// filters. This can be used to test the source/target independently.
+pub struct EdgeFilter {
+    pub source: DepNodeFilter,
+    pub target: DepNodeFilter,
+    pub index_to_node: Lock<FxHashMap<DepNodeIndex, DepNode>>,
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=new | COMPLEXITY=11 | LINES=19 */
+
+impl EdgeFilter {
+    pub fn new(test: &str) -> Result<EdgeFilter, Box<dyn Error>> {
+        if let [source, target] = *test.split("->").collect::<Vec<_>>() {
+            Ok(EdgeFilter {
+                source: DepNodeFilter::new(source),
+                target: DepNodeFilter::new(target),
+                index_to_node: Lock::new(FxHashMap::default()),
+            })
+        } else {
+            Err(format!("expected a filter like `a&b -> c&d`, not `{test}`").into())
+        }
+    }
+
+    #[cfg(debug_assertions)]
+    pub fn test(&self, source: &DepNode, target: &DepNode) -> bool {
+        self.source.test(source) && self.target.test(target)
+    }
+}

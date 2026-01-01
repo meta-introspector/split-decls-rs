@@ -1,3 +1,9 @@
-/* FP:lib.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_pretty_src_lib_MOD_0001
-/* FP:lib.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_pretty_src_lib_MOD_0002
-/* FP:lib.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_pretty_src_lib_MOD_0003
+// SRC: ../rust/compiler/rustc_ast_pretty/src/lib.rs
+/* AST_META: AST_ID=1 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=1 | LINES=11 */
+// tidy-alphabetical-start
+#[allow(internal_features)]
+#[doc(rust_logo)]
+#[feature(box_patterns)]
+#[feature(negative_impls)]
+#[feature(rustdoc_internals)]
+// tidy-alphabetical-end

@@ -1,18 +1,120 @@
-/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hooks_mod_USE_0001
-/* FP:mod.rs-0002 */ use crate :: rustc_complete :: def_id :: { DefId , DefPathHash } ;
-/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hooks_mod_USE_0002
-/* FP:mod.rs-0004 */ use crate :: rustc_complete :: StableCrateId ;
-/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hooks_mod_USE_0003
-/* FP:mod.rs-0006 */ use crate :: rustc_complete :: def_id :: { CrateNum , LocalDefId } ;
-/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hooks_mod_USE_0004
-/* FP:mod.rs-0008 */ use crate :: rustc_complete :: { ExpnHash , ExpnId } ;
-/* FP:mod.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hooks_mod_USE_0005
-/* FP:mod.rs-0010 */ use crate :: mir ;
-/* FP:mod.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hooks_mod_USE_0006
-/* FP:mod.rs-0012 */ use crate :: ty :: { Ty , TyCtxt } ;
-/* FP:mod.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hooks_mod_MACRO_0007
-/* FP:mod.rs-0014 */ macro_rules ! declare_hooks { ($ ($ (# [$ attr : meta]) * hook $ name : ident ($ ($ arg : ident : $ K : ty) ,*) -> $ V : ty ;) *) => { impl <'tcx > TyCtxt <'tcx > { $ ($ (# [$ attr]) * # [inline (always)] pub fn $ name (self , $ ($ arg : $ K ,) *) -> $ V { (self . hooks .$ name) (self , $ ($ arg ,) *) }) * } pub struct Providers { $ (pub $ name : for <'tcx > fn (TyCtxt <'tcx >, $ ($ arg : $ K ,) *) -> $ V ,) * } impl Default for Providers { fn default () -> Self { Providers { $ ($ name : | _ , $ ($ arg ,) *| default_hook (stringify ! ($ name) , & ($ ($ arg ,) *))) ,* } } } impl Copy for Providers { } impl Clone for Providers { fn clone (& self) -> Self { * self } } } ; }
-/* FP:mod.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hooks_mod_MACRO_0008
-/* FP:mod.rs-0016 */ declare_hooks ! { # [doc = " Tries to destructure an `mir::Const` ADT or array into its variant index"] # [doc = " and its field values. This should only be used for pretty printing."] hook try_destructure_mir_constant_for_user_output (val : mir :: ConstValue , ty : Ty <'tcx >) -> Option < mir :: DestructuredConstant <'tcx >>; # [doc = " Getting a &core::panic::Location referring to a span."] hook const_caller_location (file : crate :: rustc_span :: Symbol , line : u32 , col : u32) -> mir :: ConstValue ; # [doc = " Returns `true` if this def is a function-like thing that is eligible for"] # [doc = " coverage instrumentation under `-Cinstrument-coverage`."] # [doc = ""] # [doc = " (Eligible functions might nevertheless be skipped for other reasons.)"] hook is_eligible_for_coverage (key : LocalDefId) -> bool ; # [doc = " Imports all `SourceFile`s from the given crate into the current session."] # [doc = " This normally happens automatically when we decode a `Span` from"] # [doc = " that crate's metadata - however, the incr comp cache needs"] # [doc = " to trigger this manually when decoding a foreign `Span`"] hook import_source_files (key : CrateNum) -> () ; hook expn_hash_to_expn_id (cnum : CrateNum , index_guess : u32 , hash : ExpnHash) -> ExpnId ; # [doc = " Converts a `DefPathHash` to its corresponding `DefId` in the current compilation"] # [doc = " session, if it still exists. This is used during incremental compilation to"] # [doc = " turn a deserialized `DefPathHash` into its current `DefId`."] # [doc = " Will fetch a DefId from a DefPathHash for a foreign crate."] hook def_path_hash_to_def_id_extern (hash : DefPathHash , stable_crate_id : StableCrateId) -> DefId ; # [doc = " Returns `true` if we should codegen an instance in the local crate, or returns `false` if we"] # [doc = " can just link to the upstream crate and therefore don't need a mono item."] # [doc = ""] # [doc = " Note: this hook isn't called within `rustc_middle` but #127779 suggests it's a hook instead"] # [doc = " of a normal function because external tools might want to override it."] hook should_codegen_locally (instance : crate :: ty :: Instance <'tcx >) -> bool ; hook alloc_self_profile_query_strings () -> () ; # [doc = " Saves and writes the DepGraph to the file system."] # [doc = ""] # [doc = " This function saves both the dep-graph and the query result cache,"] # [doc = " and drops the result cache."] # [doc = ""] # [doc = " This function should only run after all queries have completed."] # [doc = " Trying to execute a query afterwards would attempt to read the result cache we just dropped."] hook save_dep_graph () -> () ; hook query_key_hash_verify_all () -> () ; # [doc = " Ensure the given scalar is valid for the given type."] # [doc = " This checks non-recursive runtime validity."] hook validate_scalar_in_layout (scalar : crate :: ty :: ScalarInt , ty : Ty <'tcx >) -> bool ; }
-/* FP:mod.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hooks_mod_FN_0009
-/* FP:mod.rs-0018 */ # [cold] fn default_hook (name : & str , args : & dyn std :: fmt :: Debug) -> ! { bug ! ("`tcx.{name}{args:?}` cannot be called as `{name}` was never assigned to a provider function") }
+// SRC: ../rust/compiler/rustc_middle/src/hooks/mod.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
+// "Hooks" let you write `tcx` methods in downstream crates and call them in this crate, reducing
+// the amount of code that needs to be in this crate (which is already very big). This is somewhat
+// similar to queries, but queries come with a lot of machinery for caching and incremental
+// compilation, whereas hooks are just plain function pointers without any of the query magic.
+
+use crate::rustc_complete::def_id::{DefId, DefPathHash};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::StableCrateId;
+use crate::rustc_complete::def_id::{CrateNum, LocalDefId};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{ExpnHash, ExpnId};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+
+use crate::mir;
+use crate::ty::{Ty, TyCtxt};
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=$name | COMPLEXITY=24 | LINES=36 */
+
+macro_rules! declare_hooks {
+    ($($(#[$attr:meta])*hook $name:ident($($arg:ident: $K:ty),*) -> $V:ty;)*) => {
+
+        impl<'tcx> TyCtxt<'tcx> {
+            $(
+            $(#[$attr])*
+            #[inline(always)]
+            pub fn $name(self, $($arg: $K,)*) -> $V
+            {
+                (self.hooks.$name)(self, $($arg,)*)
+            }
+            )*
+        }
+
+        pub struct Providers {
+            $(pub $name: for<'tcx> fn(
+                TyCtxt<'tcx>,
+                $($arg: $K,)*
+            ) -> $V,)*
+        }
+
+        impl Default for Providers {
+            fn default() -> Self {
+                Providers {
+                    $($name: |_, $($arg,)*| default_hook(stringify!($name), &($($arg,)*))),*
+                }
+            }
+        }
+
+        impl Copy for Providers {}
+        impl Clone for Providers {
+            fn clone(&self) -> Self { *self }
+        }
+    };
+}
+/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=23 | LINES=57 */
+
+declare_hooks! {
+    /// Tries to destructure an `mir::Const` ADT or array into its variant index
+    /// and its field values. This should only be used for pretty printing.
+    hook try_destructure_mir_constant_for_user_output(val: mir::ConstValue, ty: Ty<'tcx>) -> Option<mir::DestructuredConstant<'tcx>>;
+
+    /// Getting a &core::panic::Location referring to a span.
+    hook const_caller_location(file: crate::rustc_span::Symbol, line: u32, col: u32) -> mir::ConstValue;
+
+    /// Returns `true` if this def is a function-like thing that is eligible for
+    /// coverage instrumentation under `-Cinstrument-coverage`.
+    ///
+    /// (Eligible functions might nevertheless be skipped for other reasons.)
+    hook is_eligible_for_coverage(key: LocalDefId) -> bool;
+
+    /// Imports all `SourceFile`s from the given crate into the current session.
+    /// This normally happens automatically when we decode a `Span` from
+    /// that crate's metadata - however, the incr comp cache needs
+    /// to trigger this manually when decoding a foreign `Span`
+    hook import_source_files(key: CrateNum) -> ();
+
+    hook expn_hash_to_expn_id(
+        cnum: CrateNum,
+        index_guess: u32,
+        hash: ExpnHash
+    ) -> ExpnId;
+
+    /// Converts a `DefPathHash` to its corresponding `DefId` in the current compilation
+    /// session, if it still exists. This is used during incremental compilation to
+    /// turn a deserialized `DefPathHash` into its current `DefId`.
+    /// Will fetch a DefId from a DefPathHash for a foreign crate.
+    hook def_path_hash_to_def_id_extern(hash: DefPathHash, stable_crate_id: StableCrateId) -> DefId;
+
+    /// Returns `true` if we should codegen an instance in the local crate, or returns `false` if we
+    /// can just link to the upstream crate and therefore don't need a mono item.
+    ///
+    /// Note: this hook isn't called within `rustc_middle` but #127779 suggests it's a hook instead
+    /// of a normal function because external tools might want to override it.
+    hook should_codegen_locally(instance: crate::ty::Instance<'tcx>) -> bool;
+
+    hook alloc_self_profile_query_strings() -> ();
+
+    /// Saves and writes the DepGraph to the file system.
+    ///
+    /// This function saves both the dep-graph and the query result cache,
+    /// and drops the result cache.
+    ///
+    /// This function should only run after all queries have completed.
+    /// Trying to execute a query afterwards would attempt to read the result cache we just dropped.
+    hook save_dep_graph() -> ();
+
+    hook query_key_hash_verify_all() -> ();
+
+    /// Ensure the given scalar is valid for the given type.
+    /// This checks non-recursive runtime validity.
+    hook validate_scalar_in_layout(scalar: crate::ty::ScalarInt, ty: Ty<'tcx>) -> bool;
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=default_hook | COMPLEXITY=5 | LINES=7 */
+
+#[cold]
+fn default_hook(name: &str, args: &dyn std::fmt::Debug) -> ! {
+    bug!(
+        "`tcx.{name}{args:?}` cannot be called as `{name}` was never assigned to a provider function"
+    )
+}

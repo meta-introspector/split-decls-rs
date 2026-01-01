@@ -1,8 +1,74 @@
-/* FP:util.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_monomorphize_src_util_USE_0001
-/* FP:util.rs-0002 */ use std :: fs :: OpenOptions ;
-/* FP:util.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_monomorphize_src_util_USE_0002
-/* FP:util.rs-0004 */ use std :: io :: prelude :: * ;
-/* FP:util.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_monomorphize_src_util_USE_0003
-/* FP:util.rs-0006 */ use crate :: rustc_complete :: ty :: { self , ClosureSizeProfileData , Instance , TyCtxt } ;
-/* FP:util.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_monomorphize_src_util_FN_0004
-/* FP:util.rs-0008 */ # [doc = " For a given closure, writes out the data for the profiling the impact of RFC 2229 on"] # [doc = " closure size into a CSV."] # [doc = ""] # [doc = " During the same compile all closures dump the information in the same file"] # [doc = " \"closure_profile_XXXXX.csv\", which is created in the directory where the compiler is invoked."] pub (crate) fn dump_closure_profile < 'tcx > (tcx : TyCtxt < 'tcx > , closure_instance : Instance < 'tcx >) { let Ok (mut file) = OpenOptions :: new () . create (true) . append (true) . open (& format ! ("closure_profile_{}.csv" , std :: process :: id ())) else { eprintln ! ("Couldn't open file for writing closure profile") ; return ; } ; let closure_def_id = closure_instance . def_id () . expect_local () ; let typeck_results = tcx . typeck (closure_def_id) ; if typeck_results . closure_size_eval . contains_key (& closure_def_id) { let typing_env = ty :: TypingEnv :: fully_monomorphized () ; let ClosureSizeProfileData { before_feature_tys , after_feature_tys } = typeck_results . closure_size_eval [& closure_def_id] ; let before_feature_tys = tcx . instantiate_and_normalize_erasing_regions (closure_instance . args , typing_env , ty :: EarlyBinder :: bind (before_feature_tys) ,) ; let after_feature_tys = tcx . instantiate_and_normalize_erasing_regions (closure_instance . args , typing_env , ty :: EarlyBinder :: bind (after_feature_tys) ,) ; let new_size = tcx . layout_of (typing_env . as_query_input (after_feature_tys)) . map (| l | format ! ("{:?}" , l . size . bytes ())) . unwrap_or_else (| e | format ! ("Failed {e:?}")) ; let old_size = tcx . layout_of (typing_env . as_query_input (before_feature_tys)) . map (| l | format ! ("{:?}" , l . size . bytes ())) . unwrap_or_else (| e | format ! ("Failed {e:?}")) ; let closure_span = tcx . def_span (closure_def_id) ; let src_file = tcx . sess . source_map () . span_to_filename (closure_span) ; let line_nos = tcx . sess . source_map () . span_to_lines (closure_span) . map (| l | format ! ("{:?} {:?}" , l . lines . first () , l . lines . last ())) . unwrap_or_else (| e | format ! ("{e:?}")) ; if let Err (e) = writeln ! (file , "{}, {}, {}, {:?}" , old_size , new_size , src_file . prefer_local () , line_nos) { eprintln ! ("Error writing to file {e}") } } }
+// SRC: ../rust/compiler/rustc_monomorphize/src/util.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use std::fs::OpenOptions;
+use std::io::prelude::*;
+
+use crate::rustc_complete::ty::{self, ClosureSizeProfileData, Instance, TyCtxt};
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=32 | LINES=67 */
+
+/// For a given closure, writes out the data for the profiling the impact of RFC 2229 on
+/// closure size into a CSV.
+///
+/// During the same compile all closures dump the information in the same file
+/// "closure_profile_XXXXX.csv", which is created in the directory where the compiler is invoked.
+pub(crate) fn dump_closure_profile<'tcx>(tcx: TyCtxt<'tcx>, closure_instance: Instance<'tcx>) {
+    let Ok(mut file) = OpenOptions::new()
+        .create(true)
+        .append(true)
+        .open(&format!("closure_profile_{}.csv", std::process::id()))
+    else {
+        eprintln!("Couldn't open file for writing closure profile");
+        return;
+    };
+
+    let closure_def_id = closure_instance.def_id().expect_local();
+    let typeck_results = tcx.typeck(closure_def_id);
+
+    if typeck_results.closure_size_eval.contains_key(&closure_def_id) {
+        let typing_env = ty::TypingEnv::fully_monomorphized();
+
+        let ClosureSizeProfileData { before_feature_tys, after_feature_tys } =
+            typeck_results.closure_size_eval[&closure_def_id];
+
+        let before_feature_tys = tcx.instantiate_and_normalize_erasing_regions(
+            closure_instance.args,
+            typing_env,
+            ty::EarlyBinder::bind(before_feature_tys),
+        );
+        let after_feature_tys = tcx.instantiate_and_normalize_erasing_regions(
+            closure_instance.args,
+            typing_env,
+            ty::EarlyBinder::bind(after_feature_tys),
+        );
+
+        let new_size = tcx
+            .layout_of(typing_env.as_query_input(after_feature_tys))
+            .map(|l| format!("{:?}", l.size.bytes()))
+            .unwrap_or_else(|e| format!("Failed {e:?}"));
+
+        let old_size = tcx
+            .layout_of(typing_env.as_query_input(before_feature_tys))
+            .map(|l| format!("{:?}", l.size.bytes()))
+            .unwrap_or_else(|e| format!("Failed {e:?}"));
+
+        let closure_span = tcx.def_span(closure_def_id);
+        let src_file = tcx.sess.source_map().span_to_filename(closure_span);
+        let line_nos = tcx
+            .sess
+            .source_map()
+            .span_to_lines(closure_span)
+            .map(|l| format!("{:?} {:?}", l.lines.first(), l.lines.last()))
+            .unwrap_or_else(|e| format!("{e:?}"));
+
+        if let Err(e) = writeln!(
+            file,
+            "{}, {}, {}, {:?}",
+            old_size,
+            new_size,
+            src_file.prefer_local(),
+            line_nos
+        ) {
+            eprintln!("Error writing to file {e}")
+        }
+    }
+}

@@ -1,32 +1,241 @@
-/* FP:constrained_generic_params.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_constrained_generic_params_USE_0001
-/* FP:constrained_generic_params.rs-0002 */ use crate :: rustc_data_structures :: fx :: FxHashSet ;
-/* FP:constrained_generic_params.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_constrained_generic_params_USE_0002
-/* FP:constrained_generic_params.rs-0004 */ use crate :: rustc_complete :: bug ;
-/* FP:constrained_generic_params.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_constrained_generic_params_USE_0003
-/* FP:constrained_generic_params.rs-0006 */ use crate :: rustc_complete :: ty :: { self , Ty , TyCtxt , TypeFoldable , TypeSuperVisitable , TypeVisitor } ;
-/* FP:constrained_generic_params.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_constrained_generic_params_USE_0004
-/* FP:constrained_generic_params.rs-0008 */ use crate :: rustc_complete :: Span ;
-/* FP:constrained_generic_params.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_constrained_generic_params_USE_0005
-/* FP:constrained_generic_params.rs-0010 */ use tracing :: debug ;
-/* FP:constrained_generic_params.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_constrained_generic_params_STRUCT_0006
-/* FP:constrained_generic_params.rs-0012 */ # [derive (Clone , PartialEq , Eq , Hash , Debug)] pub (crate) struct Parameter (pub u32) ;
-/* FP:constrained_generic_params.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_constrained_generic_params_IMPL_0007
-/* FP:constrained_generic_params.rs-0014 */ impl From < ty :: ParamTy > for Parameter { fn from (param : ty :: ParamTy) -> Self { Parameter (param . index) } }
-/* FP:constrained_generic_params.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_constrained_generic_params_IMPL_0008
-/* FP:constrained_generic_params.rs-0016 */ impl From < ty :: EarlyParamRegion > for Parameter { fn from (param : ty :: EarlyParamRegion) -> Self { Parameter (param . index) } }
-/* FP:constrained_generic_params.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_constrained_generic_params_IMPL_0009
-/* FP:constrained_generic_params.rs-0018 */ impl From < ty :: ParamConst > for Parameter { fn from (param : ty :: ParamConst) -> Self { Parameter (param . index) } }
-/* FP:constrained_generic_params.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_constrained_generic_params_FN_0010
-/* FP:constrained_generic_params.rs-0020 */ # [doc = " Returns the set of parameters constrained by the impl header."] pub (crate) fn parameters_for_impl < 'tcx > (tcx : TyCtxt < 'tcx > , impl_self_ty : Ty < 'tcx > , impl_trait_ref : Option < ty :: TraitRef < 'tcx > > ,) -> FxHashSet < Parameter > { let vec = match impl_trait_ref { Some (tr) => parameters_for (tcx , tr , false) , None => parameters_for (tcx , impl_self_ty , false) , } ; vec . into_iter () . collect () }
-/* FP:constrained_generic_params.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_constrained_generic_params_FN_0011
-/* FP:constrained_generic_params.rs-0022 */ # [doc = " If `include_nonconstraining` is false, returns the list of parameters that are"] # [doc = " constrained by `value` - i.e., the value of each parameter in the list is"] # [doc = " uniquely determined by `value` (see RFC 447). If it is true, return the list"] # [doc = " of parameters whose values are needed in order to constrain `value` - these"] # [doc = " differ, with the latter being a superset, in the presence of projections."] pub (crate) fn parameters_for < 'tcx > (tcx : TyCtxt < 'tcx > , value : impl TypeFoldable < TyCtxt < 'tcx > > , include_nonconstraining : bool ,) -> Vec < Parameter > { let mut collector = ParameterCollector { parameters : vec ! [] , include_nonconstraining } ; let value = if ! include_nonconstraining { tcx . expand_free_alias_tys (value) } else { value } ; value . visit_with (& mut collector) ; collector . parameters }
-/* FP:constrained_generic_params.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_constrained_generic_params_STRUCT_0012
-/* FP:constrained_generic_params.rs-0024 */ struct ParameterCollector { parameters : Vec < Parameter > , include_nonconstraining : bool , }
-/* FP:constrained_generic_params.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_constrained_generic_params_IMPL_0013
-/* FP:constrained_generic_params.rs-0026 */ impl < 'tcx > TypeVisitor < TyCtxt < 'tcx > > for ParameterCollector { fn visit_ty (& mut self , t : Ty < 'tcx >) { match * t . kind () { ty :: Alias (ty :: Projection | ty :: Inherent | ty :: Opaque , _) if ! self . include_nonconstraining => { return ; } ty :: Alias (ty :: Free , _) if ! self . include_nonconstraining => { bug ! ("unexpected free alias type") } ty :: Param (param) => self . parameters . push (Parameter :: from (param)) , _ => { } } t . super_visit_with (self) } fn visit_region (& mut self , r : ty :: Region < 'tcx >) { if let ty :: ReEarlyParam (data) = r . kind () { self . parameters . push (Parameter :: from (data)) ; } } fn visit_const (& mut self , c : ty :: Const < 'tcx >) { match c . kind () { ty :: ConstKind :: Unevaluated (..) if ! self . include_nonconstraining => { return ; } ty :: ConstKind :: Param (data) => { self . parameters . push (Parameter :: from (data)) ; } _ => { } } c . super_visit_with (self) } }
-/* FP:constrained_generic_params.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_constrained_generic_params_FN_0014
-/* FP:constrained_generic_params.rs-0028 */ pub (crate) fn identify_constrained_generic_params < 'tcx > (tcx : TyCtxt < 'tcx > , predicates : ty :: GenericPredicates < 'tcx > , impl_trait_ref : Option < ty :: TraitRef < 'tcx > > , input_parameters : & mut FxHashSet < Parameter > ,) { let mut predicates = predicates . predicates . to_vec () ; setup_constraining_predicates (tcx , & mut predicates , impl_trait_ref , input_parameters) ; }
-/* FP:constrained_generic_params.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_constrained_generic_params_FN_0015
-/* FP:constrained_generic_params.rs-0030 */ # [doc = " Order the predicates in `predicates` such that each parameter is"] # [doc = " constrained before it is used, if that is possible, and add the"] # [doc = " parameters so constrained to `input_parameters`. For example,"] # [doc = " imagine the following impl:"] # [doc = " ```ignore (illustrative)"] # [doc = " impl<T: Debug, U: Iterator<Item = T>> Trait for U"] # [doc = " ```"] # [doc = " The impl's predicates are collected from left to right. Ignoring"] # [doc = " the implicit `Sized` bounds, these are"] # [doc = "   * `T: Debug`"] # [doc = "   * `U: Iterator`"] # [doc = "   * `<U as Iterator>::Item = T` -- a desugared ProjectionPredicate"] # [doc = ""] # [doc = " When we, for example, try to go over the trait-reference"] # [doc = " `IntoIter<u32> as Trait`, we instantiate the impl parameters with fresh"] # [doc = " variables and match them with the impl trait-ref, so we know that"] # [doc = " `$U = IntoIter<u32>`."] # [doc = ""] # [doc = " However, in order to process the `$T: Debug` predicate, we must first"] # [doc = " know the value of `$T` - which is only given by processing the"] # [doc = " projection. As we occasionally want to process predicates in a single"] # [doc = " pass, we want the projection to come first. In fact, as projections"] # [doc = " can (acyclically) depend on one another - see RFC447 for details - we"] # [doc = " need to topologically sort them."] # [doc = ""] # [doc = " We *do* have to be somewhat careful when projection targets contain"] # [doc = " projections themselves, for example in"] # [doc = ""] # [doc = " ```ignore (illustrative)"] # [doc = "     impl<S,U,V,W> Trait for U where"] # [doc = " /* 0 */   S: Iterator<Item = U>,"] # [doc = " /* - */   U: Iterator,"] # [doc = " /* 1 */   <U as Iterator>::Item: ToOwned<Owned=(W,<V as Iterator>::Item)>"] # [doc = " /* 2 */   W: Iterator<Item = V>"] # [doc = " /* 3 */   V: Debug"] # [doc = " ```"] # [doc = ""] # [doc = " we have to evaluate the projections in the order I wrote them:"] # [doc = " `V: Debug` requires `V` to be evaluated. The only projection that"] # [doc = " *determines* `V` is 2 (1 contains it, but *does not determine it*,"] # [doc = " as it is only contained within a projection), but that requires `W`"] # [doc = " which is determined by 1, which requires `U`, that is determined"] # [doc = " by 0. I should probably pick a less tangled example, but I can't"] # [doc = " think of any."] pub (crate) fn setup_constraining_predicates < 'tcx > (tcx : TyCtxt < 'tcx > , predicates : & mut [(ty :: Clause < 'tcx > , Span)] , impl_trait_ref : Option < ty :: TraitRef < 'tcx > > , input_parameters : & mut FxHashSet < Parameter > ,) { debug ! ("setup_constraining_predicates: predicates={:?} \
-/* FP:constrained_generic_params.rs-0031 */             impl_trait_ref={:?} input_parameters={:?}" , predicates , impl_trait_ref , input_parameters) ; let mut i = 0 ; let mut changed = true ; while changed { changed = false ; for j in i .. predicates . len () { if let ty :: ClauseKind :: Projection (projection) = predicates [j] . 0 . kind () . skip_binder () { let unbound_trait_ref = projection . projection_term . trait_ref (tcx) ; if Some (unbound_trait_ref) == impl_trait_ref { continue ; } let inputs = parameters_for (tcx , projection . projection_term , true) ; let relies_only_on_inputs = inputs . iter () . all (| p | input_parameters . contains (p)) ; if ! relies_only_on_inputs { continue ; } input_parameters . extend (parameters_for (tcx , projection . term , false)) ; } else { continue ; } predicates . swap (i , j) ; i += 1 ; changed = true ; } debug ! ("setup_constraining_predicates: predicates={:?} \
-/* FP:constrained_generic_params.rs-0032 */                 i={} impl_trait_ref={:?} input_parameters={:?}" , predicates , i , impl_trait_ref , input_parameters) ; } }
+// SRC: ../rust/compiler/rustc_hir_analysis/src/constrained_generic_params.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt, TypeFoldable, TypeSuperVisitable, TypeVisitor};
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=11 */
+use crate::rustc_complete::Span;
+use tracing::debug;
+
+#[derive(Clone, PartialEq, Eq, Hash, Debug)]
+pub(crate) struct Parameter(pub u32);
+
+impl From<ty::ParamTy> for Parameter {
+    fn from(param: ty::ParamTy) -> Self {
+        Parameter(param.index)
+    }
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
+
+impl From<ty::EarlyParamRegion> for Parameter {
+    fn from(param: ty::EarlyParamRegion) -> Self {
+        Parameter(param.index)
+    }
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
+
+impl From<ty::ParamConst> for Parameter {
+    fn from(param: ty::ParamConst) -> Self {
+        Parameter(param.index)
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=13 */
+
+/// Returns the set of parameters constrained by the impl header.
+pub(crate) fn parameters_for_impl<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    impl_self_ty: Ty<'tcx>,
+    impl_trait_ref: Option<ty::TraitRef<'tcx>>,
+) -> FxHashSet<Parameter> {
+    let vec = match impl_trait_ref {
+        Some(tr) => parameters_for(tcx, tr, false),
+        None => parameters_for(tcx, impl_self_ty, false),
+    };
+    vec.into_iter().collect()
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=16 */
+
+/// If `include_nonconstraining` is false, returns the list of parameters that are
+/// constrained by `value` - i.e., the value of each parameter in the list is
+/// uniquely determined by `value` (see RFC 447). If it is true, return the list
+/// of parameters whose values are needed in order to constrain `value` - these
+/// differ, with the latter being a superset, in the presence of projections.
+pub(crate) fn parameters_for<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    value: impl TypeFoldable<TyCtxt<'tcx>>,
+    include_nonconstraining: bool,
+) -> Vec<Parameter> {
+    let mut collector = ParameterCollector { parameters: vec![], include_nonconstraining };
+    let value = if !include_nonconstraining { tcx.expand_free_alias_tys(value) } else { value };
+    value.visit_with(&mut collector);
+    collector.parameters
+}
+/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ParameterCollector | COMPLEXITY=2 | LINES=5 */
+
+struct ParameterCollector {
+    parameters: Vec<Parameter>,
+    include_nonconstraining: bool,
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=visit_ty | COMPLEXITY=32 | LINES=42 */
+
+impl<'tcx> TypeVisitor<TyCtxt<'tcx>> for ParameterCollector {
+    fn visit_ty(&mut self, t: Ty<'tcx>) {
+        match *t.kind() {
+            // Projections are not injective in general.
+            ty::Alias(ty::Projection | ty::Inherent | ty::Opaque, _)
+                if !self.include_nonconstraining =>
+            {
+                return;
+            }
+            // All free alias types should've been expanded beforehand.
+            ty::Alias(ty::Free, _) if !self.include_nonconstraining => {
+                bug!("unexpected free alias type")
+            }
+            ty::Param(param) => self.parameters.push(Parameter::from(param)),
+            _ => {}
+        }
+
+        t.super_visit_with(self)
+    }
+
+    fn visit_region(&mut self, r: ty::Region<'tcx>) {
+        if let ty::ReEarlyParam(data) = r.kind() {
+            self.parameters.push(Parameter::from(data));
+        }
+    }
+
+    fn visit_const(&mut self, c: ty::Const<'tcx>) {
+        match c.kind() {
+            ty::ConstKind::Unevaluated(..) if !self.include_nonconstraining => {
+                // Constant expressions are not injective in general.
+                return;
+            }
+            ty::ConstKind::Param(data) => {
+                self.parameters.push(Parameter::from(data));
+            }
+            _ => {}
+        }
+
+        c.super_visit_with(self)
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
+
+pub(crate) fn identify_constrained_generic_params<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    predicates: ty::GenericPredicates<'tcx>,
+    impl_trait_ref: Option<ty::TraitRef<'tcx>>,
+    input_parameters: &mut FxHashSet<Parameter>,
+) {
+    let mut predicates = predicates.predicates.to_vec();
+    setup_constraining_predicates(tcx, &mut predicates, impl_trait_ref, input_parameters);
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=56 | LINES=118 */
+
+/// Order the predicates in `predicates` such that each parameter is
+/// constrained before it is used, if that is possible, and add the
+/// parameters so constrained to `input_parameters`. For example,
+/// imagine the following impl:
+/// ```ignore (illustrative)
+/// impl<T: Debug, U: Iterator<Item = T>> Trait for U
+/// ```
+/// The impl's predicates are collected from left to right. Ignoring
+/// the implicit `Sized` bounds, these are
+///   * `T: Debug`
+///   * `U: Iterator`
+///   * `<U as Iterator>::Item = T` -- a desugared ProjectionPredicate
+///
+/// When we, for example, try to go over the trait-reference
+/// `IntoIter<u32> as Trait`, we instantiate the impl parameters with fresh
+/// variables and match them with the impl trait-ref, so we know that
+/// `$U = IntoIter<u32>`.
+///
+/// However, in order to process the `$T: Debug` predicate, we must first
+/// know the value of `$T` - which is only given by processing the
+/// projection. As we occasionally want to process predicates in a single
+/// pass, we want the projection to come first. In fact, as projections
+/// can (acyclically) depend on one another - see RFC447 for details - we
+/// need to topologically sort them.
+///
+/// We *do* have to be somewhat careful when projection targets contain
+/// projections themselves, for example in
+///
+/// ```ignore (illustrative)
+///     impl<S,U,V,W> Trait for U where
+/// /* 0 */   S: Iterator<Item = U>,
+/// /* - */   U: Iterator,
+/// /* 1 */   <U as Iterator>::Item: ToOwned<Owned=(W,<V as Iterator>::Item)>
+/// /* 2 */   W: Iterator<Item = V>
+/// /* 3 */   V: Debug
+/// ```
+///
+/// we have to evaluate the projections in the order I wrote them:
+/// `V: Debug` requires `V` to be evaluated. The only projection that
+/// *determines* `V` is 2 (1 contains it, but *does not determine it*,
+/// as it is only contained within a projection), but that requires `W`
+/// which is determined by 1, which requires `U`, that is determined
+/// by 0. I should probably pick a less tangled example, but I can't
+/// think of any.
+pub(crate) fn setup_constraining_predicates<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    predicates: &mut [(ty::Clause<'tcx>, Span)],
+    impl_trait_ref: Option<ty::TraitRef<'tcx>>,
+    input_parameters: &mut FxHashSet<Parameter>,
+) {
+    // The canonical way of doing the needed topological sort
+    // would be a DFS, but getting the graph and its ownership
+    // right is annoying, so I am using an in-place fixed-point iteration,
+    // which is `O(nt)` where `t` is the depth of type-parameter constraints,
+    // remembering that `t` should be less than 7 in practice.
+    //
+    // Basically, I iterate over all projections and swap every
+    // "ready" projection to the start of the list, such that
+    // all of the projections before `i` are topologically sorted
+    // and constrain all the parameters in `input_parameters`.
+    //
+    // In the example, `input_parameters` starts by containing `U` - which
+    // is constrained by the trait-ref - and so on the first pass we
+    // observe that `<U as Iterator>::Item = T` is a "ready" projection that
+    // constrains `T` and swap it to front. As it is the sole projection,
+    // no more swaps can take place afterwards, with the result being
+    //   * <U as Iterator>::Item = T
+    //   * T: Debug
+    //   * U: Iterator
+    debug!(
+        "setup_constraining_predicates: predicates={:?} \
+            impl_trait_ref={:?} input_parameters={:?}",
+        predicates, impl_trait_ref, input_parameters
+    );
+    let mut i = 0;
+    let mut changed = true;
+    while changed {
+        changed = false;
+
+        for j in i..predicates.len() {
+            // Note that we don't have to care about binders here,
+            // as the impl trait ref never contains any late-bound regions.
+            if let ty::ClauseKind::Projection(projection) = predicates[j].0.kind().skip_binder() {
+                // Special case: watch out for some kind of sneaky attempt
+                // to project out an associated type defined by this very
+                // trait.
+                let unbound_trait_ref = projection.projection_term.trait_ref(tcx);
+                if Some(unbound_trait_ref) == impl_trait_ref {
+                    continue;
+                }
+
+                // A projection depends on its input types and determines its output
+                // type. For example, if we have
+                //     `<<T as Bar>::Baz as Iterator>::Output = <U as Iterator>::Output`
+                // Then the projection only applies if `T` is known, but it still
+                // does not determine `U`.
+                let inputs = parameters_for(tcx, projection.projection_term, true);
+                let relies_only_on_inputs = inputs.iter().all(|p| input_parameters.contains(p));
+                if !relies_only_on_inputs {
+                    continue;
+                }
+                input_parameters.extend(parameters_for(tcx, projection.term, false));
+            } else {
+                continue;
+            }
+            // fancy control flow to bypass borrow checker
+            predicates.swap(i, j);
+            i += 1;
+            changed = true;
+        }
+        debug!(
+            "setup_constraining_predicates: predicates={:?} \
+                i={} impl_trait_ref={:?} input_parameters={:?}",
+            predicates, i, impl_trait_ref, input_parameters
+        );
+    }
+}

@@ -1,76 +1,364 @@
-/* FP:lib.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_USE_0001
-/* FP:lib.rs-0002 */ # [allow (rustc :: diagnostic_outside_of_impl)] # [allow (rustc :: untranslatable_diagnostic)] # [cfg_attr (doc , allow (internal_features))] # [cfg_attr (doc , doc (rust_logo))] # [cfg_attr (doc , feature (rustdoc_internals))] # [feature (rustc_private)] # [feature (f16)] # [feature (f128)] # [warn (rust_2018_idioms)] # [warn (unreachable_pub)] # [warn (unused_lifetimes)] # [macro_use] # [macro_use] # [allow (unused_extern_crates)] use std :: any :: Any ;
-/* FP:lib.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_USE_0002
-/* FP:lib.rs-0004 */ use std :: env ;
-/* FP:lib.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_USE_0003
-/* FP:lib.rs-0006 */ use std :: sync :: Arc ;
-/* FP:lib.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_USE_0004
-/* FP:lib.rs-0008 */ use cranelift_codegen :: isa :: TargetIsa ;
-/* FP:lib.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_USE_0005
-/* FP:lib.rs-0010 */ use cranelift_codegen :: settings :: { self , Configurable } ;
-/* FP:lib.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_USE_0006
-/* FP:lib.rs-0012 */ use crate :: rustc_codegen_ssa :: traits :: CodegenBackend ;
-/* FP:lib.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_USE_0007
-/* FP:lib.rs-0014 */ use crate :: rustc_codegen_ssa :: { CodegenResults , TargetConfig } ;
-/* FP:lib.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_USE_0008
-/* FP:lib.rs-0016 */ use crate :: rustc_complete :: dep_graph :: { WorkProduct , WorkProductId } ;
-/* FP:lib.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_USE_0009
-/* FP:lib.rs-0018 */ use crate :: rustc_complete :: Session ;
-/* FP:lib.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_USE_0010
-/* FP:lib.rs-0020 */ use crate :: rustc_complete :: config :: OutputFilenames ;
-/* FP:lib.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_USE_0011
-/* FP:lib.rs-0022 */ use crate :: rustc_complete :: { Symbol , sym } ;
-/* FP:lib.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_USE_0012
-/* FP:lib.rs-0024 */ pub use crate :: config :: * ;
-/* FP:lib.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_USE_0013
-/* FP:lib.rs-0026 */ use crate :: prelude :: * ;
-/* FP:lib.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0014
-/* FP:lib.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0015
-/* FP:lib.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0016
-/* FP:lib.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0017
-/* FP:lib.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0018
-/* FP:lib.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0019
-/* FP:lib.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0020
-/* FP:lib.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0021
-/* FP:lib.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0022
-/* FP:lib.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0023
-/* FP:lib.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0024
-/* FP:lib.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0025
-/* FP:lib.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0026
-/* FP:lib.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0027
-/* FP:lib.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0028
-/* FP:lib.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0029
-/* FP:lib.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0030
-/* FP:lib.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0031
-/* FP:lib.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0032
-/* FP:lib.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0033
-/* FP:lib.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0034
-/* FP:lib.rs-0069 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0035
-/* FP:lib.rs-0071 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0036
-/* FP:lib.rs-0073 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0037
-/* FP:lib.rs-0075 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0038
-/* FP:lib.rs-0077 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0039
-/* FP:lib.rs-0079 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0040
-/* FP:lib.rs-0081 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0041
-/* FP:lib.rs-0083 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0042
-/* FP:lib.rs-0085 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_MOD_0043
-/* FP:lib.rs-0087 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_STRUCT_0044
-/* FP:lib.rs-0088 */ struct PrintOnPanic < F : Fn () -> String > (F) ;
-/* FP:lib.rs-0089 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_IMPL_0045
-/* FP:lib.rs-0090 */ impl < F : Fn () -> String > Drop for PrintOnPanic < F > { fn drop (& mut self) { if :: std :: thread :: panicking () { println ! ("{}" , (self . 0) ()) ; } } }
-/* FP:lib.rs-0091 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_STRUCT_0046
-/* FP:lib.rs-0092 */ # [doc = " The codegen context holds any information shared between the codegen of individual functions"] # [doc = " inside a single codegen unit with the exception of the Cranelift [`Module`](cranelift_module::Module)."] struct CodegenCx { output_filenames : Arc < OutputFilenames > , invocation_temp : Option < String > , should_write_ir : bool , global_asm : String , inline_asm_index : usize , debug_context : Option < DebugContext > , cgu_name : Symbol , }
-/* FP:lib.rs-0093 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_IMPL_0047
-/* FP:lib.rs-0094 */ impl CodegenCx { fn new (tcx : TyCtxt < '_ > , isa : & dyn TargetIsa , debug_info : bool , cgu_name : Symbol) -> Self { assert_eq ! (pointer_ty (tcx) , isa . pointer_type ()) ; let debug_context = if debug_info && ! tcx . sess . target . options . is_like_windows { Some (DebugContext :: new (tcx , isa , cgu_name . as_str ())) } else { None } ; CodegenCx { output_filenames : tcx . output_filenames (()) . clone () , invocation_temp : tcx . sess . invocation_temp . clone () , should_write_ir : crate :: pretty_clif :: should_write_ir (tcx) , global_asm : String :: new () , inline_asm_index : 0 , debug_context , cgu_name , } } }
-/* FP:lib.rs-0095 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_STRUCT_0048
-/* FP:lib.rs-0096 */ pub struct CraneliftCodegenBackend { pub config : Option < BackendConfig > , }
-/* FP:lib.rs-0097 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_IMPL_0049
-/* FP:lib.rs-0098 */ impl CodegenBackend for CraneliftCodegenBackend { fn locale_resource (& self) -> & 'static str { "" } fn init (& self , sess : & Session) { use crate :: rustc_complete :: config :: { InstrumentCoverage , Lto } ; match sess . lto () { Lto :: No | Lto :: ThinLocal => { } Lto :: Thin | Lto :: Fat => { sess . dcx () . warn ("LTO is not supported. You may get a linker error.") } } if sess . opts . cg . instrument_coverage () != InstrumentCoverage :: No { sess . dcx () . fatal ("`-Cinstrument-coverage` is LLVM specific and not supported by Cranelift") ; } } fn target_config (& self , sess : & Session) -> TargetConfig { let target_features = if sess . target . arch == "x86_64" && sess . target . os != "none" { vec ! [sym :: fxsr , sym :: sse , sym :: sse2 , Symbol :: intern ("x87")] } else if sess . target . arch == "aarch64" { match & * sess . target . os { "none" => vec ! [] , "macos" => vec ! [sym :: neon , sym :: aes , sym :: sha2 , sym :: sha3] , _ => vec ! [sym :: neon] , } } else { vec ! [] } ; let unstable_target_features = target_features . clone () ; let has_reliable_f128 = ! sess . target . is_like_windows ; let has_reliable_f16 = match & * sess . target . arch { "s390x" => false , "x86_64" if sess . target . os == "windows" && sess . target . env == "gnu" && sess . target . abi != "llvm" => { false } _ => true , } ; TargetConfig { target_features , unstable_target_features , has_reliable_f16 , has_reliable_f16_math : has_reliable_f16 , has_reliable_f128 , has_reliable_f128_math : has_reliable_f128 , } } fn print_version (& self) { println ! ("Cranelift version: {}" , cranelift_codegen :: VERSION) ; } fn codegen_crate (& self , tcx : TyCtxt < '_ >) -> Box < dyn Any > { info ! ("codegen crate {}" , tcx . crate_name (LOCAL_CRATE)) ; let config = self . config . clone () . unwrap_or_else (| | { BackendConfig :: from_opts (& tcx . sess . opts . cg . llvm_args) . unwrap_or_else (| err | tcx . sess . dcx () . fatal (err)) }) ; if config . jit_mode { # [cfg (feature = "jit")] driver :: jit :: run_jit (tcx , config . jit_args) ; # [cfg (not (feature = "jit"))] tcx . dcx () . fatal ("jit support was disabled when compiling rustc_codegen_cranelift") ; } else { driver :: aot :: run_aot (tcx) } } fn join_codegen (& self , ongoing_codegen : Box < dyn Any > , sess : & Session , outputs : & OutputFilenames ,) -> (CodegenResults , FxIndexMap < WorkProductId , WorkProduct >) { ongoing_codegen . downcast :: < driver :: aot :: OngoingCodegen > () . unwrap () . join (sess , outputs) } }
-/* FP:lib.rs-0099 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_FN_0050
-/* FP:lib.rs-0100 */ # [doc = " Determine if the Cranelift ir verifier should run."] # [doc = ""] # [doc = " Returns true when `-Zverify-llvm-ir` is passed, the `CG_CLIF_ENABLE_VERIFIER` env var is set to"] # [doc = " 1 or when cg_clif is compiled with debug assertions enabled or false otherwise."] fn enable_verifier (sess : & Session) -> bool { sess . verify_llvm_ir () || cfg ! (debug_assertions) || env :: var ("CG_CLIF_ENABLE_VERIFIER") . as_deref () == Ok ("1") }
-/* FP:lib.rs-0101 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_FN_0051
-/* FP:lib.rs-0102 */ fn target_triple (sess : & Session) -> target_lexicon :: Triple { match sess . target . llvm_target . parse () { Ok (triple) => triple , Err (err) => sess . dcx () . fatal (format ! ("target not recognized: {}" , err)) , } }
-/* FP:lib.rs-0103 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_FN_0052
-/* FP:lib.rs-0104 */ fn build_isa (sess : & Session , jit : bool) -> Arc < dyn TargetIsa + 'static > { use target_lexicon :: BinaryFormat ; let target_triple = crate :: target_triple (sess) ; let mut flags_builder = settings :: builder () ; flags_builder . set ("is_pic" , if jit { "false" } else { "true" }) . unwrap () ; let enable_verifier = if enable_verifier (sess) { "true" } else { "false" } ; flags_builder . set ("enable_verifier" , enable_verifier) . unwrap () ; flags_builder . set ("regalloc_checker" , enable_verifier) . unwrap () ; let mut frame_ptr = sess . target . options . frame_pointer . clone () ; frame_ptr . ratchet (sess . opts . cg . force_frame_pointers) ; let preserve_frame_pointer = frame_ptr != crate :: rustc_target :: spec :: FramePointer :: MayOmit ; flags_builder . set ("preserve_frame_pointers" , if preserve_frame_pointer { "true" } else { "false" }) . unwrap () ; let tls_model = match target_triple . binary_format { BinaryFormat :: Elf => "elf_gd" , BinaryFormat :: Macho => "macho" , BinaryFormat :: Coff => "coff" , _ => "none" , } ; flags_builder . set ("tls_model" , tls_model) . unwrap () ; flags_builder . set ("enable_llvm_abi_extensions" , "true") . unwrap () ; if let Some (align) = sess . opts . unstable_opts . min_function_alignment { flags_builder . set ("log2_min_function_alignment" , & align . bytes () . ilog2 () . to_string ()) . unwrap () ; } use crate :: rustc_complete :: config :: OptLevel ; match sess . opts . optimize { OptLevel :: No => { flags_builder . set ("opt_level" , "none") . unwrap () ; } OptLevel :: Less | OptLevel :: More | OptLevel :: Size | OptLevel :: SizeMin | OptLevel :: Aggressive => { flags_builder . set ("opt_level" , "speed_and_size") . unwrap () ; } } if let target_lexicon :: OperatingSystem :: Windows = target_triple . operating_system { flags_builder . enable ("enable_multi_ret_implicit_sret") . unwrap () ; } if let target_lexicon :: Architecture :: S390x = target_triple . architecture { flags_builder . enable ("enable_multi_ret_implicit_sret") . unwrap () ; } if let target_lexicon :: Architecture :: Aarch64 (_) | target_lexicon :: Architecture :: Riscv64 (_) | target_lexicon :: Architecture :: X86_64 = target_triple . architecture { flags_builder . enable ("enable_probestack") . unwrap () ; flags_builder . set ("probestack_strategy" , "inline") . unwrap () ; } else { flags_builder . set ("enable_probestack" , "false") . unwrap () ; } let flags = settings :: Flags :: new (flags_builder) ; let isa_builder = match sess . opts . cg . target_cpu . as_deref () { Some ("native") => cranelift_native :: builder_with_options (true) . unwrap () , Some (value) => { let mut builder = cranelift_codegen :: isa :: lookup (target_triple . clone ()) . unwrap_or_else (| err | { sess . dcx () . fatal (format ! ("can't compile for {}: {}" , target_triple , err)) ; }) ; if builder . enable (value) . is_err () { sess . dcx () . fatal ("the specified target cpu isn't currently supported by Cranelift.") ; } builder } None => { let mut builder = cranelift_codegen :: isa :: lookup (target_triple . clone ()) . unwrap_or_else (| err | { sess . dcx () . fatal (format ! ("can't compile for {}: {}" , target_triple , err)) ; }) ; if target_triple . architecture == target_lexicon :: Architecture :: X86_64 { builder . enable (sess . target . cpu . as_ref ()) . unwrap () ; } builder } } ; match isa_builder . finish (flags) { Ok (target_isa) => target_isa , Err (err) => sess . dcx () . fatal (format ! ("failed to build TargetIsa: {}" , err)) , } }
-/* FP:lib.rs-0105 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_lib_FN_0053
-/* FP:lib.rs-0106 */ # [doc = " This is the entrypoint for a hot plugged rustc_codegen_cranelift"] # [unsafe (no_mangle)] pub fn __rustc_codegen_backend () -> Box < dyn CodegenBackend > { Box :: new (CraneliftCodegenBackend { config : None }) }
+// SRC: ../rust/compiler/rustc_codegen_cranelift/src/lib.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=29 */
+// tidy-alphabetical-start
+#[allow(rustc::diagnostic_outside_of_impl)]
+#[allow(rustc::untranslatable_diagnostic)]
+#[cfg_attr(doc, allow(internal_features))]
+#[cfg_attr(doc, doc(rust_logo))]
+#[cfg_attr(doc, feature(rustdoc_internals))]
+// Note: please avoid adding other feature gates where possible
+#[feature(rustc_private)]
+// Only used to define intrinsics in `compiler_builtins.rs`.
+#[feature(f16)]
+#[feature(f128)]
+// Note: please avoid adding other feature gates where possible
+#[warn(rust_2018_idioms)]
+#[warn(unreachable_pub)]
+#[warn(unused_lifetimes)]
+// tidy-alphabetical-end
+
+#[macro_use]
+#[macro_use]
+
+// This prevents duplicating functions and statics that are already part of the host rustc process.
+#[allow(unused_extern_crates)]
+
+use std::any::Any;
+use std::env;
+use std::sync::Arc;
+
+use cranelift_codegen::isa::TargetIsa;
+use cranelift_codegen::settings::{self, Configurable};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_codegen_ssa::traits::CodegenBackend;
+use crate::rustc_codegen_ssa::{CodegenResults, TargetConfig};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::dep_graph::{WorkProduct, WorkProductId};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_complete::Session;
+use crate::rustc_complete::config::OutputFilenames;
+use crate::rustc_complete::{Symbol, sym};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=17 | LINES=62 */
+
+pub use crate::config::*;
+use crate::prelude::*;
+
+
+mod prelude {
+    pub(crate) use cranelift_codegen::Context;
+    pub(crate) use cranelift_codegen::ir::condcodes::{FloatCC, IntCC};
+    pub(crate) use cranelift_codegen::ir::function::Function;
+    pub(crate) use cranelift_codegen::ir::{
+        AbiParam, Block, FuncRef, Inst, InstBuilder, MemFlags, Signature, SourceLoc, StackSlot,
+        StackSlotData, StackSlotKind, TrapCode, Type, Value, types,
+    };
+    pub(crate) use cranelift_module::{self, DataDescription, FuncId, Linkage, Module};
+    pub(crate) use crate::rustc_abi::{BackendRepr, FIRST_VARIANT, FieldIdx, Scalar, Size, VariantIdx};
+    pub(crate) use crate::rustc_data_structures::fx::{FxHashMap, FxIndexMap};
+    pub(crate) use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
+    pub(crate) use crate::rustc_index::Idx;
+    pub(crate) use crate::rustc_complete::mir::{self, *};
+    pub(crate) use crate::rustc_complete::ty::layout::{LayoutOf, TyAndLayout};
+    pub(crate) use crate::rustc_complete::ty::{
+        self, FloatTy, Instance, InstanceKind, IntTy, Ty, TyCtxt, UintTy,
+    };
+    pub(crate) use crate::rustc_complete::Span;
+
+    pub(crate) use crate::abi::*;
+    pub(crate) use crate::base::{codegen_operand, codegen_place};
+    pub(crate) use crate::cast::*;
+    pub(crate) use crate::common::*;
+    pub(crate) use crate::debuginfo::{DebugContext, UnwindContext};
+    pub(crate) use crate::pointer::Pointer;
+    pub(crate) use crate::value_and_place::{CPlace, CValue};
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=PrintOnPanic | COMPLEXITY=9 | LINES=9 */
+
+struct PrintOnPanic<F: Fn() -> String>(F);
+impl<F: Fn() -> String> Drop for PrintOnPanic<F> {
+    fn drop(&mut self) {
+        if ::std::thread::panicking() {
+            println!("{}", (self.0)());
+        }
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=CodegenCx | COMPLEXITY=2 | LINES=12 */
+
+/// The codegen context holds any information shared between the codegen of individual functions
+/// inside a single codegen unit with the exception of the Cranelift [`Module`](cranelift_module::Module).
+struct CodegenCx {
+    output_filenames: Arc<OutputFilenames>,
+    invocation_temp: Option<String>,
+    should_write_ir: bool,
+    global_asm: String,
+    inline_asm_index: usize,
+    debug_context: Option<DebugContext>,
+    cgu_name: Symbol,
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=new | COMPLEXITY=9 | LINES=21 */
+
+impl CodegenCx {
+    fn new(tcx: TyCtxt<'_>, isa: &dyn TargetIsa, debug_info: bool, cgu_name: Symbol) -> Self {
+        assert_eq!(pointer_ty(tcx), isa.pointer_type());
+
+        let debug_context = if debug_info && !tcx.sess.target.options.is_like_windows {
+            Some(DebugContext::new(tcx, isa, cgu_name.as_str()))
+        } else {
+            None
+        };
+        CodegenCx {
+            output_filenames: tcx.output_filenames(()).clone(),
+            invocation_temp: tcx.sess.invocation_temp.clone(),
+            should_write_ir: crate::pretty_clif::should_write_ir(tcx),
+            global_asm: String::new(),
+            inline_asm_index: 0,
+            debug_context,
+            cgu_name,
+        }
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=CraneliftCodegenBackend | COMPLEXITY=2 | LINES=4 */
+
+pub struct CraneliftCodegenBackend {
+    pub config: Option<BackendConfig>,
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=locale_resource | COMPLEXITY=56 | LINES=105 */
+
+impl CodegenBackend for CraneliftCodegenBackend {
+    fn locale_resource(&self) -> &'static str {
+        // FIXME(rust-lang/rust#100717) - cranelift codegen backend is not yet translated
+        ""
+    }
+
+    fn init(&self, sess: &Session) {
+        use crate::rustc_complete::config::{InstrumentCoverage, Lto};
+        match sess.lto() {
+            Lto::No | Lto::ThinLocal => {}
+            Lto::Thin | Lto::Fat => {
+                sess.dcx().warn("LTO is not supported. You may get a linker error.")
+            }
+        }
+
+        if sess.opts.cg.instrument_coverage() != InstrumentCoverage::No {
+            sess.dcx()
+                .fatal("`-Cinstrument-coverage` is LLVM specific and not supported by Cranelift");
+        }
+    }
+
+    fn target_config(&self, sess: &Session) -> TargetConfig {
+        // FIXME return the actually used target features. this is necessary for #[cfg(target_feature)]
+        let target_features = if sess.target.arch == "x86_64" && sess.target.os != "none" {
+            // x86_64 mandates SSE2 support and rustc requires the x87 feature to be enabled
+            vec![sym::fxsr, sym::sse, sym::sse2, Symbol::intern("x87")]
+        } else if sess.target.arch == "aarch64" {
+            match &*sess.target.os {
+                "none" => vec![],
+                // On macOS the aes, sha2 and sha3 features are enabled by default and ring
+                // fails to compile on macOS when they are not present.
+                "macos" => vec![sym::neon, sym::aes, sym::sha2, sym::sha3],
+                // AArch64 mandates Neon support
+                _ => vec![sym::neon],
+            }
+        } else {
+            vec![]
+        };
+        // FIXME do `unstable_target_features` properly
+        let unstable_target_features = target_features.clone();
+
+        // FIXME(f16_f128): LLVM 20 (currently used by `rustc`) passes `f128` in XMM registers on
+        // Windows, whereas LLVM 21+ and Cranelift pass it indirectly. This means that `f128` won't
+        // work when linking against a LLVM-built sysroot.
+        let has_reliable_f128 = !sess.target.is_like_windows;
+        let has_reliable_f16 = match &*sess.target.arch {
+            // FIXME(f16_f128): LLVM 20 does not support `f16` on s390x, meaning the required
+            // builtins are not available in `compiler-builtins`.
+            "s390x" => false,
+            // FIXME(f16_f128): `rustc_codegen_llvm` currently disables support on Windows GNU
+            // targets due to GCC using a different ABI than LLVM. Therefore `f16` won't be
+            // available when using a LLVM-built sysroot.
+            "x86_64"
+                if sess.target.os == "windows"
+                    && sess.target.env == "gnu"
+                    && sess.target.abi != "llvm" =>
+            {
+                false
+            }
+            _ => true,
+        };
+
+        TargetConfig {
+            target_features,
+            unstable_target_features,
+            // `rustc_codegen_cranelift` polyfills functionality not yet
+            // available in Cranelift.
+            has_reliable_f16,
+            has_reliable_f16_math: has_reliable_f16,
+            has_reliable_f128,
+            has_reliable_f128_math: has_reliable_f128,
+        }
+    }
+
+    fn print_version(&self) {
+        println!("Cranelift version: {}", cranelift_codegen::VERSION);
+    }
+
+    fn codegen_crate(&self, tcx: TyCtxt<'_>) -> Box<dyn Any> {
+        info!("codegen crate {}", tcx.crate_name(LOCAL_CRATE));
+        let config = self.config.clone().unwrap_or_else(|| {
+            BackendConfig::from_opts(&tcx.sess.opts.cg.llvm_args)
+                .unwrap_or_else(|err| tcx.sess.dcx().fatal(err))
+        });
+        if config.jit_mode {
+            #[cfg(feature = "jit")]
+            driver::jit::run_jit(tcx, config.jit_args);
+
+            #[cfg(not(feature = "jit"))]
+            tcx.dcx().fatal("jit support was disabled when compiling rustc_codegen_cranelift");
+        } else {
+            driver::aot::run_aot(tcx)
+        }
+    }
+
+    fn join_codegen(
+        &self,
+        ongoing_codegen: Box<dyn Any>,
+        sess: &Session,
+        outputs: &OutputFilenames,
+    ) -> (CodegenResults, FxIndexMap<WorkProductId, WorkProduct>) {
+        ongoing_codegen.downcast::<driver::aot::OngoingCodegen>().unwrap().join(sess, outputs)
+    }
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=enable_verifier | COMPLEXITY=6 | LINES=10 */
+
+/// Determine if the Cranelift ir verifier should run.
+///
+/// Returns true when `-Zverify-llvm-ir` is passed, the `CG_CLIF_ENABLE_VERIFIER` env var is set to
+/// 1 or when cg_clif is compiled with debug assertions enabled or false otherwise.
+fn enable_verifier(sess: &Session) -> bool {
+    sess.verify_llvm_ir()
+        || cfg!(debug_assertions)
+        || env::var("CG_CLIF_ENABLE_VERIFIER").as_deref() == Ok("1")
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=target_triple | COMPLEXITY=7 | LINES=7 */
+
+fn target_triple(sess: &Session) -> target_lexicon::Triple {
+    match sess.target.llvm_target.parse() {
+        Ok(triple) => triple,
+        Err(err) => sess.dcx().fatal(format!("target not recognized: {}", err)),
+    }
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=build_isa | COMPLEXITY=74 | LINES=107 */
+
+fn build_isa(sess: &Session, jit: bool) -> Arc<dyn TargetIsa + 'static> {
+    use target_lexicon::BinaryFormat;
+
+    let target_triple = crate::target_triple(sess);
+
+    let mut flags_builder = settings::builder();
+    flags_builder.set("is_pic", if jit { "false" } else { "true" }).unwrap();
+    let enable_verifier = if enable_verifier(sess) { "true" } else { "false" };
+    flags_builder.set("enable_verifier", enable_verifier).unwrap();
+    flags_builder.set("regalloc_checker", enable_verifier).unwrap();
+
+    let mut frame_ptr = sess.target.options.frame_pointer.clone();
+    frame_ptr.ratchet(sess.opts.cg.force_frame_pointers);
+    let preserve_frame_pointer = frame_ptr != crate::rustc_target::spec::FramePointer::MayOmit;
+    flags_builder
+        .set("preserve_frame_pointers", if preserve_frame_pointer { "true" } else { "false" })
+        .unwrap();
+
+    let tls_model = match target_triple.binary_format {
+        BinaryFormat::Elf => "elf_gd",
+        BinaryFormat::Macho => "macho",
+        BinaryFormat::Coff => "coff",
+        _ => "none",
+    };
+    flags_builder.set("tls_model", tls_model).unwrap();
+
+    flags_builder.set("enable_llvm_abi_extensions", "true").unwrap();
+
+    if let Some(align) = sess.opts.unstable_opts.min_function_alignment {
+        flags_builder
+            .set("log2_min_function_alignment", &align.bytes().ilog2().to_string())
+            .unwrap();
+    }
+
+    use crate::rustc_complete::config::OptLevel;
+    match sess.opts.optimize {
+        OptLevel::No => {
+            flags_builder.set("opt_level", "none").unwrap();
+        }
+        OptLevel::Less
+        | OptLevel::More
+        | OptLevel::Size
+        | OptLevel::SizeMin
+        | OptLevel::Aggressive => {
+            flags_builder.set("opt_level", "speed_and_size").unwrap();
+        }
+    }
+
+    if let target_lexicon::OperatingSystem::Windows = target_triple.operating_system {
+        // FIXME remove dependency on this from the Rust ABI. cc bytecodealliance/wasmtime#9510
+        flags_builder.enable("enable_multi_ret_implicit_sret").unwrap();
+    }
+
+    if let target_lexicon::Architecture::S390x = target_triple.architecture {
+        // FIXME remove dependency on this from the Rust ABI. cc bytecodealliance/wasmtime#9510
+        flags_builder.enable("enable_multi_ret_implicit_sret").unwrap();
+    }
+
+    if let target_lexicon::Architecture::Aarch64(_)
+    | target_lexicon::Architecture::Riscv64(_)
+    | target_lexicon::Architecture::X86_64 = target_triple.architecture
+    {
+        // Windows depends on stack probes to grow the committed part of the stack.
+        // On other platforms it helps prevents stack smashing.
+        flags_builder.enable("enable_probestack").unwrap();
+        flags_builder.set("probestack_strategy", "inline").unwrap();
+    } else {
+        // __cranelift_probestack is not provided and inline stack probes are only supported on
+        // AArch64, Riscv64 and x86_64.
+        flags_builder.set("enable_probestack", "false").unwrap();
+    }
+
+    let flags = settings::Flags::new(flags_builder);
+
+    let isa_builder = match sess.opts.cg.target_cpu.as_deref() {
+        Some("native") => cranelift_native::builder_with_options(true).unwrap(),
+        Some(value) => {
+            let mut builder =
+                cranelift_codegen::isa::lookup(target_triple.clone()).unwrap_or_else(|err| {
+                    sess.dcx().fatal(format!("can't compile for {}: {}", target_triple, err));
+                });
+            if builder.enable(value).is_err() {
+                sess.dcx()
+                    .fatal("the specified target cpu isn't currently supported by Cranelift.");
+            }
+            builder
+        }
+        None => {
+            let mut builder =
+                cranelift_codegen::isa::lookup(target_triple.clone()).unwrap_or_else(|err| {
+                    sess.dcx().fatal(format!("can't compile for {}: {}", target_triple, err));
+                });
+            if target_triple.architecture == target_lexicon::Architecture::X86_64 {
+                // Only set the target cpu on x86_64 as Cranelift is missing
+                // the target cpu list for most other targets.
+                builder.enable(sess.target.cpu.as_ref()).unwrap();
+            }
+            builder
+        }
+    };
+
+    match isa_builder.finish(flags) {
+        Ok(target_isa) => target_isa,
+        Err(err) => sess.dcx().fatal(format!("failed to build TargetIsa: {}", err)),
+    }
+}
+/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=__rustc_codegen_backend | COMPLEXITY=5 | LINES=6 */
+
+/// This is the entrypoint for a hot plugged rustc_codegen_cranelift
+#[unsafe(no_mangle)]
+pub fn __rustc_codegen_backend() -> Box<dyn CodegenBackend> {
+    Box::new(CraneliftCodegenBackend { config: None })
+}

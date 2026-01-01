@@ -1,29 +1,126 @@
-/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_mod_USE_0001
-/* FP:mod.rs-0002 */ use crate :: rustc_data_structures :: undo_log :: UndoLogs ;
-/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_mod_USE_0002
-/* FP:mod.rs-0004 */ use crate :: rustc_complete :: traits :: query :: { NoSolution , OutlivesBound } ;
-/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_mod_USE_0003
-/* FP:mod.rs-0006 */ use crate :: rustc_complete :: ty ;
-/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_mod_USE_0004
-/* FP:mod.rs-0008 */ use tracing :: instrument ;
-/* FP:mod.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_mod_USE_0005
-/* FP:mod.rs-0010 */ use self :: env :: OutlivesEnvironment ;
-/* FP:mod.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_mod_USE_0006
-/* FP:mod.rs-0012 */ use super :: region_constraints :: { RegionConstraintData , UndoLog } ;
-/* FP:mod.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_mod_USE_0007
-/* FP:mod.rs-0014 */ use super :: { InferCtxt , RegionResolutionError , SubregionOrigin } ;
-/* FP:mod.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_mod_USE_0008
-/* FP:mod.rs-0016 */ use crate :: infer :: free_regions :: RegionRelations ;
-/* FP:mod.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_mod_USE_0009
-/* FP:mod.rs-0018 */ use crate :: infer :: lexical_region_resolve ;
-/* FP:mod.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_mod_USE_0010
-/* FP:mod.rs-0020 */ use crate :: infer :: region_constraints :: ConstraintKind ;
-/* FP:mod.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_mod_MOD_0011
-/* FP:mod.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_mod_MOD_0012
-/* FP:mod.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_mod_MOD_0013
-/* FP:mod.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_mod_MOD_0014
-/* FP:mod.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_mod_MOD_0015
-/* FP:mod.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_mod_FN_0016
-/* FP:mod.rs-0032 */ # [instrument (level = "debug" , skip (param_env) , ret)] pub fn explicit_outlives_bounds < 'tcx > (param_env : ty :: ParamEnv < 'tcx > ,) -> impl Iterator < Item = OutlivesBound < 'tcx > > { param_env . caller_bounds () . into_iter () . filter_map (ty :: Clause :: as_region_outlives_clause) . filter_map (ty :: Binder :: no_bound_vars) . map (| ty :: OutlivesPredicate (r_a , r_b) | OutlivesBound :: RegionSubRegion (r_b , r_a)) }
-/* FP:mod.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_outlives_mod_IMPL_0017
-/* FP:mod.rs-0034 */ impl < 'tcx > InferCtxt < 'tcx > { # [doc = " Process the region constraints and return any errors that"] # [doc = " result. After this, no more unification operations should be"] # [doc = " done -- or the compiler will panic -- but it is legal to use"] # [doc = " `resolve_vars_if_possible` as well as `fully_resolve`."] # [doc = ""] # [doc = " If you are in a crate that has access to `rustc_trait_selection`,"] # [doc = " then it's probably better to use `resolve_regions`,"] # [doc = " which knows how to normalize registered region obligations."] # [must_use] pub fn resolve_regions_with_normalize (& self , outlives_env : & OutlivesEnvironment < 'tcx > , deeply_normalize_ty : impl Fn (ty :: PolyTypeOutlivesPredicate < 'tcx > , SubregionOrigin < 'tcx > ,) -> Result < ty :: PolyTypeOutlivesPredicate < 'tcx > , NoSolution > ,) -> Vec < RegionResolutionError < 'tcx > > { match self . process_registered_region_obligations (outlives_env , deeply_normalize_ty) { Ok (()) => { } Err ((clause , origin)) => { return vec ! [RegionResolutionError :: CannotNormalize (clause , origin)] ; } } ; let mut storage = { let mut inner = self . inner . borrow_mut () ; let inner = & mut * inner ; assert ! (self . tainted_by_errors () . is_some () || inner . region_obligations . is_empty () , "region_obligations not empty: {:#?}" , inner . region_obligations ,) ; assert ! (! UndoLogs ::< UndoLog <'_ >>:: in_snapshot (& inner . undo_log)) ; inner . region_constraint_storage . take () . expect ("regions already resolved") } ; if self . tcx . sess . opts . unstable_opts . higher_ranked_assumptions { storage . data . constraints . retain (| (c , _) | match c . kind { ConstraintKind :: RegSubReg => ! outlives_env . higher_ranked_assumptions () . contains (& ty :: OutlivesPredicate (c . sup . into () , c . sub)) , _ => true , }) ; } let region_rels = & RegionRelations :: new (self . tcx , outlives_env . free_region_map ()) ; let (lexical_region_resolutions , errors) = lexical_region_resolve :: resolve (region_rels , storage . var_infos , storage . data) ; let old_value = self . lexical_region_resolutions . replace (Some (lexical_region_resolutions)) ; assert ! (old_value . is_none ()) ; errors } # [doc = " Obtains (and clears) the current set of region"] # [doc = " constraints. The inference context is still usable: further"] # [doc = " unifications will simply add new constraints."] # [doc = ""] # [doc = " This method is not meant to be used with normal lexical region"] # [doc = " resolution. Rather, it is used in the NLL mode as a kind of"] # [doc = " interim hack: basically we run normal type-check and generate"] # [doc = " region constraints as normal, but then we take them and"] # [doc = " translate them into the form that the NLL solver"] # [doc = " understands. See the NLL module for mode details."] pub fn take_and_reset_region_constraints (& self) -> RegionConstraintData < 'tcx > { assert ! (self . inner . borrow () . region_obligations . is_empty () , "region_obligations not empty: {:#?}" , self . inner . borrow () . region_obligations) ; assert ! (self . inner . borrow () . region_assumptions . is_empty () , "region_assumptions not empty: {:#?}" , self . inner . borrow () . region_assumptions) ; self . inner . borrow_mut () . unwrap_region_constraints () . take_and_reset_data () } # [doc = " Gives temporary access to the region constraint data."] pub fn with_region_constraints < R > (& self , op : impl FnOnce (& RegionConstraintData < 'tcx >) -> R ,) -> R { let mut inner = self . inner . borrow_mut () ; op (inner . unwrap_region_constraints () . data ()) } }
+// SRC: ../rust/compiler/rustc_infer/src/infer/outlives/mod.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+// Various code related to computing outlives relations.
+
+use crate::rustc_data_structures::undo_log::UndoLogs;
+use crate::rustc_complete::traits::query::{NoSolution, OutlivesBound};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use crate::rustc_complete::ty;
+use tracing::instrument;
+
+use self::env::OutlivesEnvironment;
+use super::region_constraints::{RegionConstraintData, UndoLog};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use super::{InferCtxt, RegionResolutionError, SubregionOrigin};
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=explicit_outlives_bounds | COMPLEXITY=3 | LINES=21 */
+use crate::infer::free_regions::RegionRelations;
+use crate::infer::lexical_region_resolve;
+use crate::infer::region_constraints::ConstraintKind;
+
+
+#[instrument(level = "debug", skip(param_env), ret)]
+pub fn explicit_outlives_bounds<'tcx>(
+    param_env: ty::ParamEnv<'tcx>,
+) -> impl Iterator<Item = OutlivesBound<'tcx>> {
+    param_env
+        .caller_bounds()
+        .into_iter()
+        .filter_map(ty::Clause::as_region_outlives_clause)
+        .filter_map(ty::Binder::no_bound_vars)
+        .map(|ty::OutlivesPredicate(r_a, r_b)| OutlivesBound::RegionSubRegion(r_b, r_a))
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=resolve_regions_with_normalize | COMPLEXITY=31 | LINES=94 */
+
+impl<'tcx> InferCtxt<'tcx> {
+    /// Process the region constraints and return any errors that
+    /// result. After this, no more unification operations should be
+    /// done -- or the compiler will panic -- but it is legal to use
+    /// `resolve_vars_if_possible` as well as `fully_resolve`.
+    ///
+    /// If you are in a crate that has access to `rustc_trait_selection`,
+    /// then it's probably better to use `resolve_regions`,
+    /// which knows how to normalize registered region obligations.
+    #[must_use]
+    pub fn resolve_regions_with_normalize(
+        &self,
+        outlives_env: &OutlivesEnvironment<'tcx>,
+        deeply_normalize_ty: impl Fn(
+            ty::PolyTypeOutlivesPredicate<'tcx>,
+            SubregionOrigin<'tcx>,
+        ) -> Result<ty::PolyTypeOutlivesPredicate<'tcx>, NoSolution>,
+    ) -> Vec<RegionResolutionError<'tcx>> {
+        match self.process_registered_region_obligations(outlives_env, deeply_normalize_ty) {
+            Ok(()) => {}
+            Err((clause, origin)) => {
+                return vec![RegionResolutionError::CannotNormalize(clause, origin)];
+            }
+        };
+
+        let mut storage = {
+            let mut inner = self.inner.borrow_mut();
+            let inner = &mut *inner;
+            assert!(
+                self.tainted_by_errors().is_some() || inner.region_obligations.is_empty(),
+                "region_obligations not empty: {:#?}",
+                inner.region_obligations,
+            );
+            assert!(!UndoLogs::<UndoLog<'_>>::in_snapshot(&inner.undo_log));
+            inner.region_constraint_storage.take().expect("regions already resolved")
+        };
+
+        // Filter out any region-region outlives assumptions that are implied by
+        // coroutine well-formedness.
+        if self.tcx.sess.opts.unstable_opts.higher_ranked_assumptions {
+            storage.data.constraints.retain(|(c, _)| match c.kind {
+                ConstraintKind::RegSubReg => !outlives_env
+                    .higher_ranked_assumptions()
+                    .contains(&ty::OutlivesPredicate(c.sup.into(), c.sub)),
+                _ => true,
+            });
+        }
+
+        let region_rels = &RegionRelations::new(self.tcx, outlives_env.free_region_map());
+
+        let (lexical_region_resolutions, errors) =
+            lexical_region_resolve::resolve(region_rels, storage.var_infos, storage.data);
+
+        let old_value = self.lexical_region_resolutions.replace(Some(lexical_region_resolutions));
+        assert!(old_value.is_none());
+
+        errors
+    }
+
+    /// Obtains (and clears) the current set of region
+    /// constraints. The inference context is still usable: further
+    /// unifications will simply add new constraints.
+    ///
+    /// This method is not meant to be used with normal lexical region
+    /// resolution. Rather, it is used in the NLL mode as a kind of
+    /// interim hack: basically we run normal type-check and generate
+    /// region constraints as normal, but then we take them and
+    /// translate them into the form that the NLL solver
+    /// understands. See the NLL module for mode details.
+    pub fn take_and_reset_region_constraints(&self) -> RegionConstraintData<'tcx> {
+        assert!(
+            self.inner.borrow().region_obligations.is_empty(),
+            "region_obligations not empty: {:#?}",
+            self.inner.borrow().region_obligations
+        );
+        assert!(
+            self.inner.borrow().region_assumptions.is_empty(),
+            "region_assumptions not empty: {:#?}",
+            self.inner.borrow().region_assumptions
+        );
+
+        self.inner.borrow_mut().unwrap_region_constraints().take_and_reset_data()
+    }
+
+    /// Gives temporary access to the region constraint data.
+    pub fn with_region_constraints<R>(
+        &self,
+        op: impl FnOnce(&RegionConstraintData<'tcx>) -> R,
+    ) -> R {
+        let mut inner = self.inner.borrow_mut();
+        op(inner.unwrap_region_constraints().data())
+    }
+}

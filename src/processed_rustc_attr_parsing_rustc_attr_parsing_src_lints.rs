@@ -1,14 +1,88 @@
-/* FP:lints.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_lints_USE_0001
-/* FP:lints.rs-0002 */ use std :: borrow :: Cow ;
-/* FP:lints.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_lints_USE_0002
-/* FP:lints.rs-0004 */ use crate :: rustc_complete :: { DiagArgValue , LintEmitter } ;
-/* FP:lints.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_lints_USE_0003
-/* FP:lints.rs-0006 */ use crate :: rustc_complete :: Target ;
-/* FP:lints.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_lints_USE_0004
-/* FP:lints.rs-0008 */ use crate :: rustc_complete :: lints :: { AttributeLint , AttributeLintKind } ;
-/* FP:lints.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_lints_USE_0005
-/* FP:lints.rs-0010 */ use crate :: rustc_complete :: sym ;
-/* FP:lints.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_lints_USE_0006
-/* FP:lints.rs-0012 */ use crate :: session_diagnostics ;
-/* FP:lints.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_lints_FN_0007
-/* FP:lints.rs-0014 */ pub fn emit_attribute_lint < L : LintEmitter > (lint : & AttributeLint < L :: Id > , lint_emitter : L) { let AttributeLint { id , span , kind } = lint ; match kind { & AttributeLintKind :: UnusedDuplicate { this , other , warning } => lint_emitter . emit_node_span_lint (crate :: rustc_session :: lint :: builtin :: UNUSED_ATTRIBUTES , * id , * span , session_diagnostics :: UnusedDuplicate { this , other , warning } ,) , AttributeLintKind :: IllFormedAttributeInput { suggestions } => { lint_emitter . emit_node_span_lint (crate :: rustc_session :: lint :: builtin :: ILL_FORMED_ATTRIBUTE_INPUT , * id , * span , session_diagnostics :: IllFormedAttributeInput { num_suggestions : suggestions . len () , suggestions : DiagArgValue :: StrListSepByAnd (suggestions . into_iter () . map (| s | format ! ("`{s}`") . into ()) . collect () ,) , } ,) ; } AttributeLintKind :: EmptyAttribute { first_span } => lint_emitter . emit_node_span_lint (crate :: rustc_session :: lint :: builtin :: UNUSED_ATTRIBUTES , * id , * first_span , session_diagnostics :: EmptyAttributeList { attr_span : * first_span } ,) , AttributeLintKind :: InvalidTarget { name , target , applied , only } => lint_emitter . emit_node_span_lint (if name . segments [0] . name == sym :: deprecated && ! [Target :: Closure , Target :: Expression , Target :: Statement , Target :: Arm , Target :: MacroCall ,] . contains (target) { crate :: rustc_session :: lint :: builtin :: USELESS_DEPRECATED } else { crate :: rustc_session :: lint :: builtin :: UNUSED_ATTRIBUTES } , * id , * span , session_diagnostics :: InvalidTargetLint { name : name . clone () , target : target . plural_name () , applied : DiagArgValue :: StrListSepByAnd (applied . into_iter () . map (| i | Cow :: Owned (i . to_string ())) . collect () ,) , only , attr_span : * span , } ,) , & AttributeLintKind :: InvalidStyle { ref name , is_used_as_inner , target , target_span } => { lint_emitter . emit_node_span_lint (crate :: rustc_session :: lint :: builtin :: UNUSED_ATTRIBUTES , * id , * span , session_diagnostics :: InvalidAttrStyle { name : name . clone () , is_used_as_inner , target_span : (! is_used_as_inner) . then_some (target_span) , target , } ,) } } }
+// SRC: ../rust/compiler/rustc_attr_parsing/src/lints.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use std::borrow::Cow;
+
+use crate::rustc_complete::{DiagArgValue, LintEmitter};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::Target;
+use crate::rustc_complete::lints::{AttributeLint, AttributeLintKind};
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=emit_attribute_lint | COMPLEXITY=30 | LINES=79 */
+use crate::rustc_complete::sym;
+
+use crate::session_diagnostics;
+
+pub fn emit_attribute_lint<L: LintEmitter>(lint: &AttributeLint<L::Id>, lint_emitter: L) {
+    let AttributeLint { id, span, kind } = lint;
+
+    match kind {
+        &AttributeLintKind::UnusedDuplicate { this, other, warning } => lint_emitter
+            .emit_node_span_lint(
+                crate::rustc_session::lint::builtin::UNUSED_ATTRIBUTES,
+                *id,
+                *span,
+                session_diagnostics::UnusedDuplicate { this, other, warning },
+            ),
+        AttributeLintKind::IllFormedAttributeInput { suggestions } => {
+            lint_emitter.emit_node_span_lint(
+                crate::rustc_session::lint::builtin::ILL_FORMED_ATTRIBUTE_INPUT,
+                *id,
+                *span,
+                session_diagnostics::IllFormedAttributeInput {
+                    num_suggestions: suggestions.len(),
+                    suggestions: DiagArgValue::StrListSepByAnd(
+                        suggestions.into_iter().map(|s| format!("`{s}`").into()).collect(),
+                    ),
+                },
+            );
+        }
+        AttributeLintKind::EmptyAttribute { first_span } => lint_emitter.emit_node_span_lint(
+            crate::rustc_session::lint::builtin::UNUSED_ATTRIBUTES,
+            *id,
+            *first_span,
+            session_diagnostics::EmptyAttributeList { attr_span: *first_span },
+        ),
+        AttributeLintKind::InvalidTarget { name, target, applied, only } => lint_emitter
+            .emit_node_span_lint(
+                // This check is here because `deprecated` had its own lint group and removing this would be a breaking change
+                if name.segments[0].name == sym::deprecated
+                    && ![
+                        Target::Closure,
+                        Target::Expression,
+                        Target::Statement,
+                        Target::Arm,
+                        Target::MacroCall,
+                    ]
+                    .contains(target)
+                {
+                    crate::rustc_session::lint::builtin::USELESS_DEPRECATED
+                } else {
+                    crate::rustc_session::lint::builtin::UNUSED_ATTRIBUTES
+                },
+                *id,
+                *span,
+                session_diagnostics::InvalidTargetLint {
+                    name: name.clone(),
+                    target: target.plural_name(),
+                    applied: DiagArgValue::StrListSepByAnd(
+                        applied.into_iter().map(|i| Cow::Owned(i.to_string())).collect(),
+                    ),
+                    only,
+                    attr_span: *span,
+                },
+            ),
+
+        &AttributeLintKind::InvalidStyle { ref name, is_used_as_inner, target, target_span } => {
+            lint_emitter.emit_node_span_lint(
+                crate::rustc_session::lint::builtin::UNUSED_ATTRIBUTES,
+                *id,
+                *span,
+                session_diagnostics::InvalidAttrStyle {
+                    name: name.clone(),
+                    is_used_as_inner,
+                    target_span: (!is_used_as_inner).then_some(target_span),
+                    target,
+                },
+            )
+        }
+    }
+}

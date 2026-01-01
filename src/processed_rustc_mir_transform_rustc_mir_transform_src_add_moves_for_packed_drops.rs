@@ -1,16 +1,120 @@
-/* FP:add_moves_for_packed_drops.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_add_moves_for_packed_drops_USE_0001
-/* FP:add_moves_for_packed_drops.rs-0002 */ use crate :: rustc_complete :: mir :: * ;
-/* FP:add_moves_for_packed_drops.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_add_moves_for_packed_drops_USE_0002
-/* FP:add_moves_for_packed_drops.rs-0004 */ use crate :: rustc_complete :: ty :: { self , TyCtxt } ;
-/* FP:add_moves_for_packed_drops.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_add_moves_for_packed_drops_USE_0003
-/* FP:add_moves_for_packed_drops.rs-0006 */ use tracing :: debug ;
-/* FP:add_moves_for_packed_drops.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_add_moves_for_packed_drops_USE_0004
-/* FP:add_moves_for_packed_drops.rs-0008 */ use crate :: patch :: MirPatch ;
-/* FP:add_moves_for_packed_drops.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_add_moves_for_packed_drops_USE_0005
-/* FP:add_moves_for_packed_drops.rs-0010 */ use crate :: util ;
-/* FP:add_moves_for_packed_drops.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_add_moves_for_packed_drops_STRUCT_0006
-/* FP:add_moves_for_packed_drops.rs-0012 */ # [doc = " This pass moves values being dropped that are within a packed"] # [doc = " struct to a separate local before dropping them, to ensure that"] # [doc = " they are dropped from an aligned address."] # [doc = ""] # [doc = " For example, if we have something like"] # [doc = " ```ignore (illustrative)"] # [doc = " #[repr(packed)]"] # [doc = " struct Foo {"] # [doc = "     dealign: u8,"] # [doc = "     data: Vec<u8>"] # [doc = " }"] # [doc = ""] # [doc = " let foo = ...;"] # [doc = " ```"] # [doc = ""] # [doc = " We want to call `drop_in_place::<Vec<u8>>` on `data` from an aligned"] # [doc = " address. This means we can't simply drop `foo.data` directly, because"] # [doc = " its address is not aligned."] # [doc = ""] # [doc = " Instead, we move `foo.data` to a local and drop that:"] # [doc = " ```ignore (illustrative)"] # [doc = "     storage.live(drop_temp)"] # [doc = "     drop_temp = foo.data;"] # [doc = "     drop(drop_temp) -> next"] # [doc = " next:"] # [doc = "     storage.dead(drop_temp)"] # [doc = " ```"] # [doc = ""] # [doc = " The storage instructions are required to avoid stack space"] # [doc = " blowup."] pub (super) struct AddMovesForPackedDrops ;
-/* FP:add_moves_for_packed_drops.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_add_moves_for_packed_drops_IMPL_0007
-/* FP:add_moves_for_packed_drops.rs-0014 */ impl < 'tcx > crate :: MirPass < 'tcx > for AddMovesForPackedDrops { fn run_pass (& self , tcx : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) { debug ! ("add_moves_for_packed_drops({:?} @ {:?})" , body . source , body . span) ; let mut patch = MirPatch :: new (body) ; let typing_env = ty :: TypingEnv :: post_analysis (tcx , body . source . def_id ()) ; for (bb , data) in body . basic_blocks . iter_enumerated () { let loc = Location { block : bb , statement_index : data . statements . len () } ; let terminator = data . terminator () ; match terminator . kind { TerminatorKind :: Drop { place , .. } if util :: is_disaligned (tcx , body , typing_env , place) => { add_move_for_packed_drop (tcx , body , & mut patch , terminator , loc , data . is_cleanup ,) ; } _ => { } } } patch . apply (body) ; } fn is_required (& self) -> bool { true } }
-/* FP:add_moves_for_packed_drops.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_add_moves_for_packed_drops_FN_0008
-/* FP:add_moves_for_packed_drops.rs-0016 */ fn add_move_for_packed_drop < 'tcx > (tcx : TyCtxt < 'tcx > , body : & Body < 'tcx > , patch : & mut MirPatch < 'tcx > , terminator : & Terminator < 'tcx > , loc : Location , is_cleanup : bool ,) { debug ! ("add_move_for_packed_drop({:?} @ {:?})" , terminator , loc) ; let TerminatorKind :: Drop { ref place , target , unwind , replace , drop , async_fut } = terminator . kind else { unreachable ! () ; } ; let source_info = terminator . source_info ; let ty = place . ty (body , tcx) . ty ; let temp = patch . new_temp (ty , source_info . span) ; let storage_dead_block = patch . new_block (BasicBlockData :: new_stmts (vec ! [Statement :: new (source_info , StatementKind :: StorageDead (temp))] , Some (Terminator { source_info , kind : TerminatorKind :: Goto { target } }) , is_cleanup ,)) ; patch . add_statement (loc , StatementKind :: StorageLive (temp)) ; patch . add_assign (loc , Place :: from (temp) , Rvalue :: Use (Operand :: Move (* place))) ; patch . patch_terminator (loc . block , TerminatorKind :: Drop { place : Place :: from (temp) , target : storage_dead_block , unwind , replace , drop , async_fut , } ,) ; }
+// SRC: ../rust/compiler/rustc_mir_transform/src/add_moves_for_packed_drops.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, TyCtxt};
+/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
+use tracing::debug;
+
+use crate::patch::MirPatch;
+use crate::util;
+
+/// This pass moves values being dropped that are within a packed
+/// struct to a separate local before dropping them, to ensure that
+/// they are dropped from an aligned address.
+///
+/// For example, if we have something like
+/// ```ignore (illustrative)
+/// #[repr(packed)]
+/// struct Foo {
+///     dealign: u8,
+///     data: Vec<u8>
+/// }
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=24 | LINES=57 */
+///
+/// let foo = ...;
+/// ```
+///
+/// We want to call `drop_in_place::<Vec<u8>>` on `data` from an aligned
+/// address. This means we can't simply drop `foo.data` directly, because
+/// its address is not aligned.
+///
+/// Instead, we move `foo.data` to a local and drop that:
+/// ```ignore (illustrative)
+///     storage.live(drop_temp)
+///     drop_temp = foo.data;
+///     drop(drop_temp) -> next
+/// next:
+///     storage.dead(drop_temp)
+/// ```
+///
+/// The storage instructions are required to avoid stack space
+/// blowup.
+pub(super) struct AddMovesForPackedDrops;
+
+impl<'tcx> crate::MirPass<'tcx> for AddMovesForPackedDrops {
+    fn run_pass(&self, tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
+        debug!("add_moves_for_packed_drops({:?} @ {:?})", body.source, body.span);
+        let mut patch = MirPatch::new(body);
+        // FIXME(#132279): This is used during the phase transition from analysis
+        // to runtime, so we have to manually specify the correct typing mode.
+        let typing_env = ty::TypingEnv::post_analysis(tcx, body.source.def_id());
+
+        for (bb, data) in body.basic_blocks.iter_enumerated() {
+            let loc = Location { block: bb, statement_index: data.statements.len() };
+            let terminator = data.terminator();
+
+            match terminator.kind {
+                TerminatorKind::Drop { place, .. }
+                    if util::is_disaligned(tcx, body, typing_env, place) =>
+                {
+                    add_move_for_packed_drop(
+                        tcx,
+                        body,
+                        &mut patch,
+                        terminator,
+                        loc,
+                        data.is_cleanup,
+                    );
+                }
+                _ => {}
+            }
+        }
+
+        patch.apply(body);
+    }
+
+    fn is_required(&self) -> bool {
+        true
+    }
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=add_move_for_packed_drop | COMPLEXITY=11 | LINES=40 */
+
+fn add_move_for_packed_drop<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    body: &Body<'tcx>,
+    patch: &mut MirPatch<'tcx>,
+    terminator: &Terminator<'tcx>,
+    loc: Location,
+    is_cleanup: bool,
+) {
+    debug!("add_move_for_packed_drop({:?} @ {:?})", terminator, loc);
+    let TerminatorKind::Drop { ref place, target, unwind, replace, drop, async_fut } =
+        terminator.kind
+    else {
+        unreachable!();
+    };
+
+    let source_info = terminator.source_info;
+    let ty = place.ty(body, tcx).ty;
+    let temp = patch.new_temp(ty, source_info.span);
+
+    let storage_dead_block = patch.new_block(BasicBlockData::new_stmts(
+        vec![Statement::new(source_info, StatementKind::StorageDead(temp))],
+        Some(Terminator { source_info, kind: TerminatorKind::Goto { target } }),
+        is_cleanup,
+    ));
+
+    patch.add_statement(loc, StatementKind::StorageLive(temp));
+    patch.add_assign(loc, Place::from(temp), Rvalue::Use(Operand::Move(*place)));
+    patch.patch_terminator(
+        loc.block,
+        TerminatorKind::Drop {
+            place: Place::from(temp),
+            target: storage_dead_block,
+            unwind,
+            replace,
+            drop,
+            async_fut,
+        },
+    );
+}

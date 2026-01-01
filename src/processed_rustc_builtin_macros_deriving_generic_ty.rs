@@ -1,32 +1,219 @@
-/* FP:ty.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_generic_ty_USE_0001
-/* FP:ty.rs-0002 */ pub (crate) use Ty :: * ;
-/* FP:ty.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_generic_ty_USE_0002
-/* FP:ty.rs-0004 */ use crate :: rustc_complete :: { self as ast , Expr , GenericArg , GenericParamKind , Generics , SelfKind , TyKind } ;
-/* FP:ty.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_generic_ty_USE_0003
-/* FP:ty.rs-0006 */ use crate :: rustc_expand :: base :: ExtCtxt ;
-/* FP:ty.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_generic_ty_USE_0004
-/* FP:ty.rs-0008 */ use crate :: rustc_complete :: source_map :: respan ;
-/* FP:ty.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_generic_ty_USE_0005
-/* FP:ty.rs-0010 */ use crate :: rustc_complete :: { DUMMY_SP , Ident , Span , Symbol , kw } ;
-/* FP:ty.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_generic_ty_USE_0006
-/* FP:ty.rs-0012 */ use thin_vec :: ThinVec ;
-/* FP:ty.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_generic_ty_STRUCT_0007
-/* FP:ty.rs-0014 */ # [doc = " A path, e.g., `::std::option::Option::<i32>` (global). Has support"] # [doc = " for type parameters."] # [derive (Clone)] pub (crate) struct Path { path : Vec < Symbol > , params : Vec < Box < Ty > > , kind : PathKind , }
-/* FP:ty.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_generic_ty_ENUM_0008
-/* FP:ty.rs-0016 */ # [derive (Clone)] pub (crate) enum PathKind { Local , Std , }
-/* FP:ty.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_generic_ty_IMPL_0009
-/* FP:ty.rs-0018 */ impl Path { pub (crate) fn new (path : Vec < Symbol >) -> Path { Path :: new_ (path , Vec :: new () , PathKind :: Std) } pub (crate) fn new_local (path : Symbol) -> Path { Path :: new_ (vec ! [path] , Vec :: new () , PathKind :: Local) } pub (crate) fn new_ (path : Vec < Symbol > , params : Vec < Box < Ty > > , kind : PathKind) -> Path { Path { path , params , kind } } pub (crate) fn to_ty (& self , cx : & ExtCtxt < '_ > , span : Span , self_ty : Ident , self_generics : & Generics ,) -> Box < ast :: Ty > { cx . ty_path (self . to_path (cx , span , self_ty , self_generics)) } pub (crate) fn to_path (& self , cx : & ExtCtxt < '_ > , span : Span , self_ty : Ident , self_generics : & Generics ,) -> ast :: Path { let mut idents = self . path . iter () . map (| s | Ident :: new (* s , span)) . collect () ; let tys = self . params . iter () . map (| t | t . to_ty (cx , span , self_ty , self_generics)) ; let params = tys . map (GenericArg :: Type) . collect () ; match self . kind { PathKind :: Local => cx . path_all (span , false , idents , params) , PathKind :: Std => { let def_site = cx . with_def_site_ctxt (DUMMY_SP) ; idents . insert (0 , Ident :: new (kw :: DollarCrate , def_site)) ; cx . path_all (span , false , idents , params) } } } }
-/* FP:ty.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_generic_ty_ENUM_0010
-/* FP:ty.rs-0020 */ # [doc = " A type. Supports pointers, Self, literals, unit or an arbitrary AST path."] # [derive (Clone)] pub (crate) enum Ty { Self_ , # [doc = " A reference."] Ref (Box < Ty > , ast :: Mutability) , # [doc = " `mod::mod::Type<[lifetime], [Params...]>`, including a plain type"] # [doc = " parameter, and things like `i32`"] Path (Path) , # [doc = " For () return types."] Unit , # [doc = " An arbitrary type."] AstTy (Box < ast :: Ty >) , }
-/* FP:ty.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_generic_ty_FN_0011
-/* FP:ty.rs-0022 */ pub (crate) fn self_ref () -> Ty { Ref (Box :: new (Self_) , ast :: Mutability :: Not) }
-/* FP:ty.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_generic_ty_IMPL_0012
-/* FP:ty.rs-0024 */ impl Ty { pub (crate) fn to_ty (& self , cx : & ExtCtxt < '_ > , span : Span , self_ty : Ident , self_generics : & Generics ,) -> Box < ast :: Ty > { match self { Ref (ty , mutbl) => { let raw_ty = ty . to_ty (cx , span , self_ty , self_generics) ; cx . ty_ref (span , raw_ty , None , * mutbl) } Path (p) => p . to_ty (cx , span , self_ty , self_generics) , Self_ => cx . ty_path (self . to_path (cx , span , self_ty , self_generics)) , Unit => { let ty = ast :: TyKind :: Tup (ThinVec :: new ()) ; cx . ty (span , ty) } AstTy (ty) => ty . clone () , } } pub (crate) fn to_path (& self , cx : & ExtCtxt < '_ > , span : Span , self_ty : Ident , generics : & Generics ,) -> ast :: Path { match self { Self_ => { let params : Vec < _ > = generics . params . iter () . map (| param | match param . kind { GenericParamKind :: Lifetime { .. } => { GenericArg :: Lifetime (ast :: Lifetime { id : param . id , ident : param . ident }) } GenericParamKind :: Type { .. } => { GenericArg :: Type (cx . ty_ident (span , param . ident)) } GenericParamKind :: Const { .. } => { GenericArg :: Const (cx . const_ident (span , param . ident)) } }) . collect () ; cx . path_all (span , false , vec ! [self_ty] , params) } Path (p) => p . to_path (cx , span , self_ty , generics) , AstTy (ty) => match & ty . kind { TyKind :: Path (_ , path) => path . clone () , _ => cx . dcx () . span_bug (span , "non-path in a path in generic `derive`") , } , Ref (..) => cx . dcx () . span_bug (span , "ref in a path in generic `derive`") , Unit => cx . dcx () . span_bug (span , "unit in a path in generic `derive`") , } } }
-/* FP:ty.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_generic_ty_FN_0013
-/* FP:ty.rs-0026 */ fn mk_ty_param (cx : & ExtCtxt < '_ > , span : Span , name : Symbol , bounds : & [Path] , self_ident : Ident , self_generics : & Generics ,) -> ast :: GenericParam { let bounds = bounds . iter () . map (| b | { let path = b . to_path (cx , span , self_ident , self_generics) ; cx . trait_bound (path , false) }) . collect () ; cx . typaram (span , Ident :: new (name , span) , bounds , None) }
-/* FP:ty.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_generic_ty_STRUCT_0014
-/* FP:ty.rs-0028 */ # [doc = " Bounds on type parameters."] # [derive (Clone)] pub (crate) struct Bounds { pub bounds : Vec < (Symbol , Vec < Path >) > , }
-/* FP:ty.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_generic_ty_IMPL_0015
-/* FP:ty.rs-0030 */ impl Bounds { pub (crate) fn empty () -> Bounds { Bounds { bounds : Vec :: new () } } pub (crate) fn to_generics (& self , cx : & ExtCtxt < '_ > , span : Span , self_ty : Ident , self_generics : & Generics ,) -> Generics { let params = self . bounds . iter () . map (| & (name , ref bounds) | mk_ty_param (cx , span , name , bounds , self_ty , self_generics)) . collect () ; Generics { params , where_clause : ast :: WhereClause { has_where_token : false , predicates : ThinVec :: new () , span , } , span , } } }
-/* FP:ty.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_generic_ty_FN_0016
-/* FP:ty.rs-0032 */ pub (crate) fn get_explicit_self (cx : & ExtCtxt < '_ > , span : Span) -> (Box < Expr > , ast :: ExplicitSelf) { let self_path = cx . expr_self (span) ; let self_ty = respan (span , SelfKind :: Region (None , ast :: Mutability :: Not)) ; (self_path , self_ty) }
+// SRC: ../rust/compiler/rustc_builtin_macros/src/deriving/generic/ty.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+// A mini version of ast::Ty, which is easier to use, and features an explicit `Self` type to use
+// when specifying impls to be derived.
+
+pub(crate) use Ty::*;
+use crate::rustc_complete::{self as ast, Expr, GenericArg, GenericParamKind, Generics, SelfKind, TyKind};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_expand::base::ExtCtxt;
+use crate::rustc_complete::source_map::respan;
+use crate::rustc_complete::{DUMMY_SP, Ident, Span, Symbol, kw};
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
+use thin_vec::ThinVec;
+
+/// A path, e.g., `::std::option::Option::<i32>` (global). Has support
+/// for type parameters.
+#[derive(Clone)]
+pub(crate) struct Path {
+    path: Vec<Symbol>,
+    params: Vec<Box<Ty>>,
+    kind: PathKind,
+}
+/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Clone)]
+pub(crate) enum PathKind {
+    Local,
+    Std,
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=42 */
+
+impl Path {
+    pub(crate) fn new(path: Vec<Symbol>) -> Path {
+        Path::new_(path, Vec::new(), PathKind::Std)
+    }
+    pub(crate) fn new_local(path: Symbol) -> Path {
+        Path::new_(vec![path], Vec::new(), PathKind::Local)
+    }
+    pub(crate) fn new_(path: Vec<Symbol>, params: Vec<Box<Ty>>, kind: PathKind) -> Path {
+        Path { path, params, kind }
+    }
+
+    pub(crate) fn to_ty(
+        &self,
+        cx: &ExtCtxt<'_>,
+        span: Span,
+        self_ty: Ident,
+        self_generics: &Generics,
+    ) -> Box<ast::Ty> {
+        cx.ty_path(self.to_path(cx, span, self_ty, self_generics))
+    }
+    pub(crate) fn to_path(
+        &self,
+        cx: &ExtCtxt<'_>,
+        span: Span,
+        self_ty: Ident,
+        self_generics: &Generics,
+    ) -> ast::Path {
+        let mut idents = self.path.iter().map(|s| Ident::new(*s, span)).collect();
+        let tys = self.params.iter().map(|t| t.to_ty(cx, span, self_ty, self_generics));
+        let params = tys.map(GenericArg::Type).collect();
+
+        match self.kind {
+            PathKind::Local => cx.path_all(span, false, idents, params),
+            PathKind::Std => {
+                let def_site = cx.with_def_site_ctxt(DUMMY_SP);
+                idents.insert(0, Ident::new(kw::DollarCrate, def_site));
+                cx.path_all(span, false, idents, params)
+            }
+        }
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
+
+/// A type. Supports pointers, Self, literals, unit or an arbitrary AST path.
+#[derive(Clone)]
+pub(crate) enum Ty {
+    Self_,
+    /// A reference.
+    Ref(Box<Ty>, ast::Mutability),
+    /// `mod::mod::Type<[lifetime], [Params...]>`, including a plain type
+    /// parameter, and things like `i32`
+    Path(Path),
+    /// For () return types.
+    Unit,
+    /// An arbitrary type.
+    AstTy(Box<ast::Ty>),
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+
+pub(crate) fn self_ref() -> Ty {
+    Ref(Box::new(Self_), ast::Mutability::Not)
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=34 | LINES=61 */
+
+impl Ty {
+    pub(crate) fn to_ty(
+        &self,
+        cx: &ExtCtxt<'_>,
+        span: Span,
+        self_ty: Ident,
+        self_generics: &Generics,
+    ) -> Box<ast::Ty> {
+        match self {
+            Ref(ty, mutbl) => {
+                let raw_ty = ty.to_ty(cx, span, self_ty, self_generics);
+                cx.ty_ref(span, raw_ty, None, *mutbl)
+            }
+            Path(p) => p.to_ty(cx, span, self_ty, self_generics),
+            Self_ => cx.ty_path(self.to_path(cx, span, self_ty, self_generics)),
+            Unit => {
+                let ty = ast::TyKind::Tup(ThinVec::new());
+                cx.ty(span, ty)
+            }
+            AstTy(ty) => ty.clone(),
+        }
+    }
+
+    pub(crate) fn to_path(
+        &self,
+        cx: &ExtCtxt<'_>,
+        span: Span,
+        self_ty: Ident,
+        generics: &Generics,
+    ) -> ast::Path {
+        match self {
+            Self_ => {
+                let params: Vec<_> = generics
+                    .params
+                    .iter()
+                    .map(|param| match param.kind {
+                        GenericParamKind::Lifetime { .. } => {
+                            GenericArg::Lifetime(ast::Lifetime { id: param.id, ident: param.ident })
+                        }
+                        GenericParamKind::Type { .. } => {
+                            GenericArg::Type(cx.ty_ident(span, param.ident))
+                        }
+                        GenericParamKind::Const { .. } => {
+                            GenericArg::Const(cx.const_ident(span, param.ident))
+                        }
+                    })
+                    .collect();
+
+                cx.path_all(span, false, vec![self_ty], params)
+            }
+            Path(p) => p.to_path(cx, span, self_ty, generics),
+            AstTy(ty) => match &ty.kind {
+                TyKind::Path(_, path) => path.clone(),
+                _ => cx.dcx().span_bug(span, "non-path in a path in generic `derive`"),
+            },
+            Ref(..) => cx.dcx().span_bug(span, "ref in a path in generic `derive`"),
+            Unit => cx.dcx().span_bug(span, "unit in a path in generic `derive`"),
+        }
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=mk_ty_param | COMPLEXITY=3 | LINES=18 */
+
+fn mk_ty_param(
+    cx: &ExtCtxt<'_>,
+    span: Span,
+    name: Symbol,
+    bounds: &[Path],
+    self_ident: Ident,
+    self_generics: &Generics,
+) -> ast::GenericParam {
+    let bounds = bounds
+        .iter()
+        .map(|b| {
+            let path = b.to_path(cx, span, self_ident, self_generics);
+            cx.trait_bound(path, false)
+        })
+        .collect();
+    cx.typaram(span, Ident::new(name, span), bounds, None)
+}
+/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+
+/// Bounds on type parameters.
+#[derive(Clone)]
+pub(crate) struct Bounds {
+    pub bounds: Vec<(Symbol, Vec<Path>)>,
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=29 */
+
+impl Bounds {
+    pub(crate) fn empty() -> Bounds {
+        Bounds { bounds: Vec::new() }
+    }
+    pub(crate) fn to_generics(
+        &self,
+        cx: &ExtCtxt<'_>,
+        span: Span,
+        self_ty: Ident,
+        self_generics: &Generics,
+    ) -> Generics {
+        let params = self
+            .bounds
+            .iter()
+            .map(|&(name, ref bounds)| mk_ty_param(cx, span, name, bounds, self_ty, self_generics))
+            .collect();
+
+        Generics {
+            params,
+            where_clause: ast::WhereClause {
+                has_where_token: false,
+                predicates: ThinVec::new(),
+                span,
+            },
+            span,
+        }
+    }
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+pub(crate) fn get_explicit_self(cx: &ExtCtxt<'_>, span: Span) -> (Box<Expr>, ast::ExplicitSelf) {
+    // This constructs a fresh `self` path.
+    let self_path = cx.expr_self(span);
+    let self_ty = respan(span, SelfKind::Region(None, ast::Mutability::Not));
+    (self_path, self_ty)
+}

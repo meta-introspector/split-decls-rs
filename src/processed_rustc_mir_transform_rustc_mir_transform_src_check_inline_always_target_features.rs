@@ -1,16 +1,94 @@
-/* FP:check_inline_always_target_features.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_inline_always_target_features_USE_0001
-/* FP:check_inline_always_target_features.rs-0002 */ use crate :: rustc_complete :: attrs :: InlineAttr ;
-/* FP:check_inline_always_target_features.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_inline_always_target_features_USE_0002
-/* FP:check_inline_always_target_features.rs-0004 */ use crate :: rustc_complete :: middle :: codegen_fn_attrs :: { TargetFeature , TargetFeatureKind } ;
-/* FP:check_inline_always_target_features.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_inline_always_target_features_USE_0003
-/* FP:check_inline_always_target_features.rs-0006 */ use crate :: rustc_complete :: mir :: { Body , TerminatorKind } ;
-/* FP:check_inline_always_target_features.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_inline_always_target_features_USE_0004
-/* FP:check_inline_always_target_features.rs-0008 */ use crate :: rustc_complete :: ty :: { self , TyCtxt } ;
-/* FP:check_inline_always_target_features.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_inline_always_target_features_USE_0005
-/* FP:check_inline_always_target_features.rs-0010 */ use crate :: pass_manager :: MirLint ;
-/* FP:check_inline_always_target_features.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_inline_always_target_features_STRUCT_0006
-/* FP:check_inline_always_target_features.rs-0012 */ pub (super) struct CheckInlineAlwaysTargetFeature ;
-/* FP:check_inline_always_target_features.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_inline_always_target_features_IMPL_0007
-/* FP:check_inline_always_target_features.rs-0014 */ impl < 'tcx > MirLint < 'tcx > for CheckInlineAlwaysTargetFeature { fn run_lint (& self , tcx : TyCtxt < 'tcx > , body : & Body < 'tcx >) { check_inline_always_target_features (tcx , body) } }
-/* FP:check_inline_always_target_features.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_inline_always_target_features_FN_0008
-/* FP:check_inline_always_target_features.rs-0016 */ # [doc = " `#[target_feature]`-annotated functions can be marked `#[inline]` and will only be inlined if"] # [doc = " the target features match (as well as all of the other inlining heuristics). `#[inline(always)]`"] # [doc = " will always inline regardless of matching target features, which can result in errors from LLVM."] # [doc = " However, it is desirable to be able to always annotate certain functions (e.g. SIMD intrinsics)"] # [doc = " as `#[inline(always)]` but check the target features match in Rust to avoid the LLVM errors."] # [doc = ""] # [doc = " We check the caller and callee target features to ensure that this can"] # [doc = " be done or emit a lint."] # [inline] fn check_inline_always_target_features < 'tcx > (tcx : TyCtxt < 'tcx > , body : & Body < 'tcx >) { let caller_def_id = body . source . def_id () . expect_local () ; if ! tcx . def_kind (caller_def_id) . has_codegen_attrs () { return ; } let caller_codegen_fn_attrs = tcx . codegen_fn_attrs (caller_def_id) ; for bb in body . basic_blocks . iter () { let terminator = bb . terminator () ; match & terminator . kind { TerminatorKind :: Call { func , .. } | TerminatorKind :: TailCall { func , .. } => { let fn_ty = func . ty (body , tcx) ; let ty :: FnDef (callee_def_id , _) = * fn_ty . kind () else { continue ; } ; if ! tcx . def_kind (callee_def_id) . has_codegen_attrs () { continue ; } let callee_codegen_fn_attrs = tcx . codegen_fn_attrs (callee_def_id) ; if callee_codegen_fn_attrs . inline != InlineAttr :: Always || callee_codegen_fn_attrs . target_features . is_empty () { continue ; } if tcx . is_target_feature_call_safe (& callee_codegen_fn_attrs . target_features , & caller_codegen_fn_attrs . target_features . iter () . cloned () . chain (tcx . sess . target_features . iter () . map (| feat | TargetFeature { name : * feat , kind : TargetFeatureKind :: Implied , })) . collect :: < Vec < _ > > () ,) { continue ; } let callee_only : Vec < _ > = callee_codegen_fn_attrs . target_features . iter () . filter (| it | ! caller_codegen_fn_attrs . target_features . contains (it)) . filter (| it | ! matches ! (it . kind , TargetFeatureKind :: Implied)) . map (| it | it . name . as_str ()) . collect () ; crate :: errors :: emit_inline_always_target_feature_diagnostic (tcx , terminator . source_info . span , callee_def_id , caller_def_id . into () , & callee_only ,) ; } _ => () , } } }
+// SRC: ../rust/compiler/rustc_mir_transform/src/check_inline_always_target_features.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::attrs::InlineAttr;
+use crate::rustc_complete::middle::codegen_fn_attrs::{TargetFeature, TargetFeatureKind};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::mir::{Body, TerminatorKind};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::ty::{self, TyCtxt};
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=run_lint | COMPLEXITY=5 | LINES=10 */
+
+use crate::pass_manager::MirLint;
+
+pub(super) struct CheckInlineAlwaysTargetFeature;
+
+impl<'tcx> MirLint<'tcx> for CheckInlineAlwaysTargetFeature {
+    fn run_lint(&self, tcx: TyCtxt<'tcx>, body: &Body<'tcx>) {
+        check_inline_always_target_features(tcx, body)
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=check_inline_always_target_features | COMPLEXITY=41 | LINES=74 */
+
+/// `#[target_feature]`-annotated functions can be marked `#[inline]` and will only be inlined if
+/// the target features match (as well as all of the other inlining heuristics). `#[inline(always)]`
+/// will always inline regardless of matching target features, which can result in errors from LLVM.
+/// However, it is desirable to be able to always annotate certain functions (e.g. SIMD intrinsics)
+/// as `#[inline(always)]` but check the target features match in Rust to avoid the LLVM errors.
+///
+/// We check the caller and callee target features to ensure that this can
+/// be done or emit a lint.
+#[inline]
+fn check_inline_always_target_features<'tcx>(tcx: TyCtxt<'tcx>, body: &Body<'tcx>) {
+    let caller_def_id = body.source.def_id().expect_local();
+    if !tcx.def_kind(caller_def_id).has_codegen_attrs() {
+        return;
+    }
+
+    let caller_codegen_fn_attrs = tcx.codegen_fn_attrs(caller_def_id);
+
+    for bb in body.basic_blocks.iter() {
+        let terminator = bb.terminator();
+        match &terminator.kind {
+            TerminatorKind::Call { func, .. } | TerminatorKind::TailCall { func, .. } => {
+                let fn_ty = func.ty(body, tcx);
+                let ty::FnDef(callee_def_id, _) = *fn_ty.kind() else {
+                    continue;
+                };
+
+                if !tcx.def_kind(callee_def_id).has_codegen_attrs() {
+                    continue;
+                }
+                let callee_codegen_fn_attrs = tcx.codegen_fn_attrs(callee_def_id);
+                if callee_codegen_fn_attrs.inline != InlineAttr::Always
+                    || callee_codegen_fn_attrs.target_features.is_empty()
+                {
+                    continue;
+                }
+
+                // Scan the users defined target features and ensure they
+                // match the caller.
+                if tcx.is_target_feature_call_safe(
+                    &callee_codegen_fn_attrs.target_features,
+                    &caller_codegen_fn_attrs
+                        .target_features
+                        .iter()
+                        .cloned()
+                        .chain(tcx.sess.target_features.iter().map(|feat| TargetFeature {
+                            name: *feat,
+                            kind: TargetFeatureKind::Implied,
+                        }))
+                        .collect::<Vec<_>>(),
+                ) {
+                    continue;
+                }
+
+                let callee_only: Vec<_> = callee_codegen_fn_attrs
+                    .target_features
+                    .iter()
+                    .filter(|it| !caller_codegen_fn_attrs.target_features.contains(it))
+                    .filter(|it| !matches!(it.kind, TargetFeatureKind::Implied))
+                    .map(|it| it.name.as_str())
+                    .collect();
+
+                crate::errors::emit_inline_always_target_feature_diagnostic(
+                    tcx,
+                    terminator.source_info.span,
+                    callee_def_id,
+                    caller_def_id.into(),
+                    &callee_only,
+                );
+            }
+            _ => (),
+        }
+    }
+}

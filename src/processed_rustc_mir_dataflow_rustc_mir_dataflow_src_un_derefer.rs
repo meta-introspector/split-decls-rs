@@ -1,18 +1,108 @@
-/* FP:un_derefer.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_un_derefer_USE_0001
-/* FP:un_derefer.rs-0002 */ use crate :: rustc_data_structures :: fx :: FxHashMap ;
-/* FP:un_derefer.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_un_derefer_USE_0002
-/* FP:un_derefer.rs-0004 */ use crate :: rustc_complete :: mir :: * ;
-/* FP:un_derefer.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_un_derefer_STRUCT_0003
-/* FP:un_derefer.rs-0006 */ # [doc = " Used for reverting changes made by `DerefSeparator`"] # [derive (Default , Debug)] pub (crate) struct UnDerefer < 'tcx > { deref_chains : FxHashMap < Local , Vec < PlaceRef < 'tcx > > > , }
-/* FP:un_derefer.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_un_derefer_IMPL_0004
-/* FP:un_derefer.rs-0008 */ impl < 'tcx > UnDerefer < 'tcx > { # [inline] pub (crate) fn insert (& mut self , local : Local , reffed : PlaceRef < 'tcx >) { let mut chain = self . deref_chains . remove (& reffed . local) . unwrap_or_default () ; chain . push (reffed) ; self . deref_chains . insert (local , chain) ; } # [doc = " Returns the chain of places behind `DerefTemp` locals"] # [inline] pub (crate) fn deref_chain (& self , local : Local) -> & [PlaceRef < 'tcx >] { self . deref_chains . get (& local) . map (Vec :: as_slice) . unwrap_or_default () } # [doc = " Iterates over the projections of a place and its deref chain."] # [doc = ""] # [doc = " See [`PlaceRef::iter_projections`]"] # [inline] pub (crate) fn iter_projections (& self , place : PlaceRef < 'tcx > ,) -> impl Iterator < Item = (PlaceRef < 'tcx > , PlaceElem < 'tcx >) > { ProjectionIter :: new (self . deref_chain (place . local) , place) } }
-/* FP:un_derefer.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_un_derefer_STRUCT_0005
-/* FP:un_derefer.rs-0010 */ # [doc = " The iterator returned by [`UnDerefer::iter_projections`]."] struct ProjectionIter < 'a , 'tcx > { places : SlicePlusOne < 'a , PlaceRef < 'tcx > > , proj_idx : usize , }
-/* FP:un_derefer.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_un_derefer_IMPL_0006
-/* FP:un_derefer.rs-0012 */ impl < 'a , 'tcx > ProjectionIter < 'a , 'tcx > { # [inline] fn new (deref_chain : & 'a [PlaceRef < 'tcx >] , place : PlaceRef < 'tcx >) -> Self { let last = if place . as_local () . is_none () { Some (place) } else { debug_assert ! (deref_chain . is_empty ()) ; None } ; ProjectionIter { places : SlicePlusOne { slice : deref_chain , last } , proj_idx : 0 } } }
-/* FP:un_derefer.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_un_derefer_IMPL_0007
-/* FP:un_derefer.rs-0014 */ impl < 'tcx > Iterator for ProjectionIter < '_ , 'tcx > { type Item = (PlaceRef < 'tcx > , PlaceElem < 'tcx >) ; # [inline] fn next (& mut self) -> Option < (PlaceRef < 'tcx > , PlaceElem < 'tcx >) > { let place = self . places . read () ? ; let partial_place = PlaceRef { local : place . local , projection : & place . projection [.. self . proj_idx] } ; let elem = place . projection [self . proj_idx] ; if self . proj_idx == place . projection . len () - 1 { self . proj_idx = 0 ; self . places . advance () ; } else { self . proj_idx += 1 ; } Some ((partial_place , elem)) } }
-/* FP:un_derefer.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_un_derefer_STRUCT_0008
-/* FP:un_derefer.rs-0016 */ struct SlicePlusOne < 'a , T > { slice : & 'a [T] , last : Option < T > , }
-/* FP:un_derefer.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_un_derefer_IMPL_0009
-/* FP:un_derefer.rs-0018 */ impl < T : Copy > SlicePlusOne < '_ , T > { # [inline] fn read (& self) -> Option < T > { self . slice . first () . copied () . or (self . last) } # [inline] fn advance (& mut self) { match self . slice { [_ , remainder @ ..] => { self . slice = remainder ; } [] => self . last = None , } } }
+// SRC: ../rust/compiler/rustc_mir_dataflow/src/un_derefer.rs
+/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=8 */
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::mir::*;
+
+/// Used for reverting changes made by `DerefSeparator`
+#[derive(Default, Debug)]
+pub(crate) struct UnDerefer<'tcx> {
+    deref_chains: FxHashMap<Local, Vec<PlaceRef<'tcx>>>,
+}
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=26 */
+
+impl<'tcx> UnDerefer<'tcx> {
+    #[inline]
+    pub(crate) fn insert(&mut self, local: Local, reffed: PlaceRef<'tcx>) {
+        let mut chain = self.deref_chains.remove(&reffed.local).unwrap_or_default();
+        chain.push(reffed);
+        self.deref_chains.insert(local, chain);
+    }
+
+    /// Returns the chain of places behind `DerefTemp` locals
+    #[inline]
+    pub(crate) fn deref_chain(&self, local: Local) -> &[PlaceRef<'tcx>] {
+        self.deref_chains.get(&local).map(Vec::as_slice).unwrap_or_default()
+    }
+
+    /// Iterates over the projections of a place and its deref chain.
+    ///
+    /// See [`PlaceRef::iter_projections`]
+    #[inline]
+    pub(crate) fn iter_projections(
+        &self,
+        place: PlaceRef<'tcx>,
+    ) -> impl Iterator<Item = (PlaceRef<'tcx>, PlaceElem<'tcx>)> {
+        ProjectionIter::new(self.deref_chain(place.local), place)
+    }
+}
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=ProjectionIter | COMPLEXITY=2 | LINES=6 */
+
+/// The iterator returned by [`UnDerefer::iter_projections`].
+struct ProjectionIter<'a, 'tcx> {
+    places: SlicePlusOne<'a, PlaceRef<'tcx>>,
+    proj_idx: usize,
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=11 | LINES=15 */
+
+impl<'a, 'tcx> ProjectionIter<'a, 'tcx> {
+    #[inline]
+    fn new(deref_chain: &'a [PlaceRef<'tcx>], place: PlaceRef<'tcx>) -> Self {
+        // just return an empty iterator for a bare local
+        let last = if place.as_local().is_none() {
+            Some(place)
+        } else {
+            debug_assert!(deref_chain.is_empty());
+            None
+        };
+
+        ProjectionIter { places: SlicePlusOne { slice: deref_chain, last }, proj_idx: 0 }
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=next | COMPLEXITY=13 | LINES=23 */
+
+impl<'tcx> Iterator for ProjectionIter<'_, 'tcx> {
+    type Item = (PlaceRef<'tcx>, PlaceElem<'tcx>);
+
+    #[inline]
+    fn next(&mut self) -> Option<(PlaceRef<'tcx>, PlaceElem<'tcx>)> {
+        let place = self.places.read()?;
+
+        // the projection should never be empty except for a bare local which is handled in new
+        let partial_place =
+            PlaceRef { local: place.local, projection: &place.projection[..self.proj_idx] };
+        let elem = place.projection[self.proj_idx];
+
+        if self.proj_idx == place.projection.len() - 1 {
+            self.proj_idx = 0;
+            self.places.advance();
+        } else {
+            self.proj_idx += 1;
+        }
+
+        Some((partial_place, elem))
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=SlicePlusOne | COMPLEXITY=2 | LINES=5 */
+
+struct SlicePlusOne<'a, T> {
+    slice: &'a [T],
+    last: Option<T>,
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=read | COMPLEXITY=9 | LINES=17 */
+
+impl<T: Copy> SlicePlusOne<'_, T> {
+    #[inline]
+    fn read(&self) -> Option<T> {
+        self.slice.first().copied().or(self.last)
+    }
+
+    #[inline]
+    fn advance(&mut self) {
+        match self.slice {
+            [_, remainder @ ..] => {
+                self.slice = remainder;
+            }
+            [] => self.last = None,
+        }
+    }
+}

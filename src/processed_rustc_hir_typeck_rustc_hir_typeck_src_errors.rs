@@ -1,206 +1,1255 @@
-/* FP:errors.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_USE_0001
-/* FP:errors.rs-0002 */ use std :: borrow :: Cow ;
-/* FP:errors.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_USE_0002
-/* FP:errors.rs-0004 */ use crate :: rustc_abi :: ExternAbi ;
-/* FP:errors.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_USE_0003
-/* FP:errors.rs-0006 */ use crate :: rustc_complete :: Label ;
-/* FP:errors.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_USE_0004
-/* FP:errors.rs-0008 */ use crate :: rustc_complete :: codes :: * ;
-/* FP:errors.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_USE_0005
-/* FP:errors.rs-0010 */ use crate :: rustc_complete :: { Applicability , Diag , DiagArgValue , DiagCtxtHandle , DiagSymbolList , Diagnostic , EmissionGuarantee , IntoDiagArg , Level , MultiSpan , Subdiagnostic , } ;
-/* FP:errors.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_USE_0006
-/* FP:errors.rs-0012 */ use rustc_hir as hir ;
-/* FP:errors.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_USE_0007
-/* FP:errors.rs-0014 */ use crate :: rustc_complete :: ExprKind ;
-/* FP:errors.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_USE_0008
-/* FP:errors.rs-0016 */ use rustc_macros :: { Diagnostic , LintDiagnostic , Subdiagnostic } ;
-/* FP:errors.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_USE_0009
-/* FP:errors.rs-0018 */ use crate :: rustc_complete :: ty :: { self , Ty } ;
-/* FP:errors.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_USE_0010
-/* FP:errors.rs-0020 */ use crate :: rustc_complete :: edition :: { Edition , LATEST_STABLE_EDITION } ;
-/* FP:errors.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_USE_0011
-/* FP:errors.rs-0022 */ use crate :: rustc_complete :: { Ident , Span , Symbol } ;
-/* FP:errors.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_USE_0012
-/* FP:errors.rs-0024 */ use crate :: fluent_generated as fluent ;
-/* FP:errors.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0013
-/* FP:errors.rs-0026 */ # [derive (Diagnostic)] # [diag (hir_typeck_base_expression_double_dot , code = E0797)] pub (crate) struct BaseExpressionDoubleDot { # [primary_span] pub span : Span , # [suggestion (hir_typeck_base_expression_double_dot_enable_default_field_values , code = "#[feature(default_field_values)]\n" , applicability = "machine-applicable" , style = "verbose")] pub default_field_values_suggestion : Option < Span > , # [subdiagnostic] pub add_expr : Option < BaseExpressionDoubleDotAddExpr > , # [subdiagnostic] pub remove_dots : Option < BaseExpressionDoubleDotRemove > , }
-/* FP:errors.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0014
-/* FP:errors.rs-0028 */ # [derive (Subdiagnostic)] # [suggestion (hir_typeck_base_expression_double_dot_remove , code = "" , applicability = "machine-applicable" , style = "verbose")] pub (crate) struct BaseExpressionDoubleDotRemove { # [primary_span] pub span : Span , }
-/* FP:errors.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0015
-/* FP:errors.rs-0030 */ # [derive (Subdiagnostic)] # [suggestion (hir_typeck_base_expression_double_dot_add_expr , code = "/* expr */" , applicability = "has-placeholders" , style = "verbose")] pub (crate) struct BaseExpressionDoubleDotAddExpr { # [primary_span] pub span : Span , }
-/* FP:errors.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0016
-/* FP:errors.rs-0032 */ # [derive (Diagnostic)] # [diag (hir_typeck_field_multiply_specified_in_initializer , code = E0062)] pub (crate) struct FieldMultiplySpecifiedInInitializer { # [primary_span] # [label] pub span : Span , # [label (hir_typeck_previous_use_label)] pub prev_span : Span , pub ident : Ident , }
-/* FP:errors.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0017
-/* FP:errors.rs-0034 */ # [derive (Diagnostic)] # [diag (hir_typeck_return_stmt_outside_of_fn_body , code = E0572)] pub (crate) struct ReturnStmtOutsideOfFnBody { # [primary_span] pub span : Span , # [label (hir_typeck_encl_body_label)] pub encl_body_span : Option < Span > , # [label (hir_typeck_encl_fn_label)] pub encl_fn_span : Option < Span > , pub statement_kind : ReturnLikeStatementKind , }
-/* FP:errors.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_ENUM_0018
-/* FP:errors.rs-0036 */ pub (crate) enum ReturnLikeStatementKind { Return , Become , }
-/* FP:errors.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_IMPL_0019
-/* FP:errors.rs-0038 */ impl IntoDiagArg for ReturnLikeStatementKind { fn into_diag_arg (self , _ : & mut Option < std :: path :: PathBuf >) -> DiagArgValue { let kind = match self { Self :: Return => "return" , Self :: Become => "become" , } . into () ; DiagArgValue :: Str (kind) } }
-/* FP:errors.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0020
-/* FP:errors.rs-0040 */ # [derive (Diagnostic)] # [diag (hir_typeck_rustcall_incorrect_args)] pub (crate) struct RustCallIncorrectArgs { # [primary_span] pub span : Span , }
-/* FP:errors.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0021
-/* FP:errors.rs-0042 */ # [derive (Diagnostic)] # [diag (hir_typeck_yield_expr_outside_of_coroutine , code = E0627)] pub (crate) struct YieldExprOutsideOfCoroutine { # [primary_span] pub span : Span , }
-/* FP:errors.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0022
-/* FP:errors.rs-0044 */ # [derive (Diagnostic)] # [diag (hir_typeck_struct_expr_non_exhaustive , code = E0639)] pub (crate) struct StructExprNonExhaustive { # [primary_span] pub span : Span , pub what : & 'static str , }
-/* FP:errors.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0023
-/* FP:errors.rs-0046 */ # [derive (Diagnostic)] # [diag (hir_typeck_functional_record_update_on_non_struct , code = E0436)] pub (crate) struct FunctionalRecordUpdateOnNonStruct { # [primary_span] pub span : Span , }
-/* FP:errors.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0024
-/* FP:errors.rs-0048 */ # [derive (Diagnostic)] # [diag (hir_typeck_address_of_temporary_taken , code = E0745)] pub (crate) struct AddressOfTemporaryTaken { # [primary_span] # [label] pub span : Span , }
-/* FP:errors.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_ENUM_0025
-/* FP:errors.rs-0050 */ # [derive (Subdiagnostic)] pub (crate) enum AddReturnTypeSuggestion { # [suggestion (hir_typeck_add_return_type_add , code = " -> {found}" , applicability = "machine-applicable")] Add { # [primary_span] span : Span , found : String , } , # [suggestion (hir_typeck_add_return_type_missing_here , code = " -> _" , applicability = "has-placeholders")] MissingHere { # [primary_span] span : Span , } , }
-/* FP:errors.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_ENUM_0026
-/* FP:errors.rs-0052 */ # [derive (Subdiagnostic)] pub (crate) enum ExpectedReturnTypeLabel < 'tcx > { # [label (hir_typeck_expected_default_return_type)] Unit { # [primary_span] span : Span , } , # [label (hir_typeck_expected_return_type)] Other { # [primary_span] span : Span , expected : Ty < 'tcx > , } , }
-/* FP:errors.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0027
-/* FP:errors.rs-0054 */ # [derive (Diagnostic)] # [diag (hir_typeck_explicit_destructor , code = E0040)] pub (crate) struct ExplicitDestructorCall { # [primary_span] # [label] pub span : Span , # [subdiagnostic] pub sugg : ExplicitDestructorCallSugg , }
-/* FP:errors.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_ENUM_0028
-/* FP:errors.rs-0056 */ # [derive (Subdiagnostic)] pub (crate) enum ExplicitDestructorCallSugg { # [suggestion (hir_typeck_suggestion , code = "drop" , applicability = "maybe-incorrect")] Empty (# [primary_span] Span) , # [multipart_suggestion (hir_typeck_suggestion , style = "short")] Snippet { # [suggestion_part (code = "drop(")] lo : Span , # [suggestion_part (code = ")")] hi : Span , } , }
-/* FP:errors.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0029
-/* FP:errors.rs-0058 */ # [derive (Diagnostic)] # [diag (hir_typeck_missing_parentheses_in_range , code = E0689)] pub (crate) struct MissingParenthesesInRange < 'tcx > { # [primary_span] # [label (hir_typeck_missing_parentheses_in_range)] pub span : Span , pub ty : Ty < 'tcx > , pub method_name : String , # [subdiagnostic] pub add_missing_parentheses : Option < AddMissingParenthesesInRange > , }
-/* FP:errors.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_ENUM_0030
-/* FP:errors.rs-0060 */ # [derive (LintDiagnostic)] pub (crate) enum NeverTypeFallbackFlowingIntoUnsafe { # [help] # [diag (hir_typeck_never_type_fallback_flowing_into_unsafe_call)] Call { # [subdiagnostic] sugg : SuggestAnnotations , } , # [help] # [diag (hir_typeck_never_type_fallback_flowing_into_unsafe_method)] Method { # [subdiagnostic] sugg : SuggestAnnotations , } , # [help] # [diag (hir_typeck_never_type_fallback_flowing_into_unsafe_path)] Path { # [subdiagnostic] sugg : SuggestAnnotations , } , # [help] # [diag (hir_typeck_never_type_fallback_flowing_into_unsafe_union_field)] UnionField { # [subdiagnostic] sugg : SuggestAnnotations , } , # [help] # [diag (hir_typeck_never_type_fallback_flowing_into_unsafe_deref)] Deref { # [subdiagnostic] sugg : SuggestAnnotations , } , }
-/* FP:errors.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0031
-/* FP:errors.rs-0062 */ # [derive (LintDiagnostic)] # [help] # [diag (hir_typeck_dependency_on_unit_never_type_fallback)] pub (crate) struct DependencyOnUnitNeverTypeFallback < 'tcx > { # [note] pub obligation_span : Span , pub obligation : ty :: Predicate < 'tcx > , # [subdiagnostic] pub sugg : SuggestAnnotations , }
-/* FP:errors.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_ENUM_0032
-/* FP:errors.rs-0064 */ # [derive (Clone)] pub (crate) enum SuggestAnnotation { Unit (Span) , Path (Span) , Local (Span) , Turbo (Span , usize , usize) , }
-/* FP:errors.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0033
-/* FP:errors.rs-0066 */ # [derive (Clone)] pub (crate) struct SuggestAnnotations { pub suggestions : Vec < SuggestAnnotation > , }
-/* FP:errors.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_IMPL_0034
-/* FP:errors.rs-0068 */ impl Subdiagnostic for SuggestAnnotations { fn add_to_diag < G : EmissionGuarantee > (self , diag : & mut Diag < '_ , G >) { if self . suggestions . is_empty () { return ; } let mut suggestions = vec ! [] ; for suggestion in self . suggestions { match suggestion { SuggestAnnotation :: Unit (span) => { suggestions . push ((span , "()" . to_string ())) ; } SuggestAnnotation :: Path (span) => { suggestions . push ((span . shrink_to_lo () , "<() as " . to_string ())) ; suggestions . push ((span . shrink_to_hi () , ">" . to_string ())) ; } SuggestAnnotation :: Local (span) => { suggestions . push ((span , ": ()" . to_string ())) ; } SuggestAnnotation :: Turbo (span , n_args , idx) => suggestions . push ((span , format ! ("::<{}>" , (0 .. n_args) . map (| i | if i == idx { "()" } else { "_" }) . collect ::< Vec < _ >> () . join (", ") ,) ,)) , } } diag . multipart_suggestion_verbose ("use `()` annotations to avoid fallback changes" , suggestions , Applicability :: MachineApplicable ,) ; } }
-/* FP:errors.rs-0069 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0035
-/* FP:errors.rs-0070 */ # [derive (Subdiagnostic)] # [multipart_suggestion (hir_typeck_add_missing_parentheses_in_range , style = "verbose" , applicability = "maybe-incorrect")] pub (crate) struct AddMissingParenthesesInRange { pub func_name : String , # [suggestion_part (code = "(")] pub left : Span , # [suggestion_part (code = ")")] pub right : Span , }
-/* FP:errors.rs-0071 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0036
-/* FP:errors.rs-0072 */ pub (crate) struct TypeMismatchFruTypo { # [doc = " Span of the LHS of the range"] pub expr_span : Span , # [doc = " Span of the `..RHS` part of the range"] pub fru_span : Span , # [doc = " Rendered expression of the RHS of the range"] pub expr : Option < String > , }
-/* FP:errors.rs-0073 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_IMPL_0037
-/* FP:errors.rs-0074 */ impl Subdiagnostic for TypeMismatchFruTypo { fn add_to_diag < G : EmissionGuarantee > (self , diag : & mut Diag < '_ , G >) { diag . arg ("expr" , self . expr . as_deref () . unwrap_or ("NONE")) ; if self . expr_span . between (self . fru_span) . is_empty () { diag . span_note (self . expr_span . to (self . fru_span) , fluent :: hir_typeck_fru_note) ; } else { let mut multispan : MultiSpan = vec ! [self . expr_span , self . fru_span] . into () ; multispan . push_span_label (self . expr_span , fluent :: hir_typeck_fru_expr) ; multispan . push_span_label (self . fru_span , fluent :: hir_typeck_fru_expr2) ; diag . span_note (multispan , fluent :: hir_typeck_fru_note) ; } diag . span_suggestion (self . expr_span . shrink_to_hi () , fluent :: hir_typeck_fru_suggestion , ", " , Applicability :: MaybeIncorrect ,) ; } }
-/* FP:errors.rs-0075 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0038
-/* FP:errors.rs-0076 */ # [derive (LintDiagnostic)] # [diag (hir_typeck_lossy_provenance_int2ptr)] # [help] pub (crate) struct LossyProvenanceInt2Ptr < 'tcx > { pub expr_ty : Ty < 'tcx > , pub cast_ty : Ty < 'tcx > , # [subdiagnostic] pub sugg : LossyProvenanceInt2PtrSuggestion , }
-/* FP:errors.rs-0077 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0039
-/* FP:errors.rs-0078 */ # [derive (Diagnostic)] # [diag (hir_typeck_ptr_cast_add_auto_to_object , code = E0804)] # [note] # [help] pub (crate) struct PtrCastAddAutoToObject { # [primary_span] # [label] pub span : Span , pub traits_len : usize , pub traits : DiagSymbolList < String > , }
-/* FP:errors.rs-0079 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0040
-/* FP:errors.rs-0080 */ # [derive (Subdiagnostic)] # [multipart_suggestion (hir_typeck_suggestion , applicability = "has-placeholders")] pub (crate) struct LossyProvenanceInt2PtrSuggestion { # [suggestion_part (code = "(...).with_addr(")] pub lo : Span , # [suggestion_part (code = ")")] pub hi : Span , }
-/* FP:errors.rs-0081 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0041
-/* FP:errors.rs-0082 */ # [derive (LintDiagnostic)] # [diag (hir_typeck_lossy_provenance_ptr2int)] # [help] pub (crate) struct LossyProvenancePtr2Int < 'tcx > { pub expr_ty : Ty < 'tcx > , pub cast_ty : Ty < 'tcx > , # [subdiagnostic] pub sugg : LossyProvenancePtr2IntSuggestion < 'tcx > , }
-/* FP:errors.rs-0083 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_ENUM_0042
-/* FP:errors.rs-0084 */ # [derive (Subdiagnostic)] pub (crate) enum LossyProvenancePtr2IntSuggestion < 'tcx > { # [multipart_suggestion (hir_typeck_suggestion , applicability = "maybe-incorrect")] NeedsParensCast { # [suggestion_part (code = "(")] expr_span : Span , # [suggestion_part (code = ").addr() as {cast_ty}")] cast_span : Span , cast_ty : Ty < 'tcx > , } , # [multipart_suggestion (hir_typeck_suggestion , applicability = "maybe-incorrect")] NeedsParens { # [suggestion_part (code = "(")] expr_span : Span , # [suggestion_part (code = ").addr()")] cast_span : Span , } , # [suggestion (hir_typeck_suggestion , code = ".addr() as {cast_ty}" , applicability = "maybe-incorrect")] NeedsCast { # [primary_span] cast_span : Span , cast_ty : Ty < 'tcx > , } , # [suggestion (hir_typeck_suggestion , code = ".addr()" , applicability = "maybe-incorrect")] Other { # [primary_span] cast_span : Span , } , }
-/* FP:errors.rs-0085 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_ENUM_0043
-/* FP:errors.rs-0086 */ # [derive (Subdiagnostic)] pub (crate) enum HelpUseLatestEdition { # [help (hir_typeck_help_set_edition_cargo)] # [note (hir_typeck_note_edition_guide)] Cargo { edition : Edition } , # [help (hir_typeck_help_set_edition_standalone)] # [note (hir_typeck_note_edition_guide)] Standalone { edition : Edition } , }
-/* FP:errors.rs-0087 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_IMPL_0044
-/* FP:errors.rs-0088 */ impl HelpUseLatestEdition { pub (crate) fn new () -> Self { let edition = LATEST_STABLE_EDITION ; if crate :: rustc_session :: utils :: was_invoked_from_cargo () { Self :: Cargo { edition } } else { Self :: Standalone { edition } } } }
-/* FP:errors.rs-0089 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0045
-/* FP:errors.rs-0090 */ # [derive (Diagnostic)] # [diag (hir_typeck_no_field_on_type , code = E0609)] pub (crate) struct NoFieldOnType < 'tcx > { # [primary_span] pub (crate) span : Span , pub (crate) ty : Ty < 'tcx > , pub (crate) field : Ident , }
-/* FP:errors.rs-0091 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0046
-/* FP:errors.rs-0092 */ # [derive (Diagnostic)] # [diag (hir_typeck_no_field_on_variant , code = E0609)] pub (crate) struct NoFieldOnVariant < 'tcx > { # [primary_span] pub (crate) span : Span , pub (crate) container : Ty < 'tcx > , pub (crate) ident : Ident , pub (crate) field : Ident , # [label (hir_typeck_no_field_on_variant_enum)] pub (crate) enum_span : Span , # [label (hir_typeck_no_field_on_variant_field)] pub (crate) field_span : Span , }
-/* FP:errors.rs-0093 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0047
-/* FP:errors.rs-0094 */ # [derive (Diagnostic)] # [diag (hir_typeck_cant_dereference , code = E0614)] pub (crate) struct CantDereference < 'tcx > { # [primary_span] # [label (hir_typeck_cant_dereference_label)] pub (crate) span : Span , pub (crate) ty : Ty < 'tcx > , }
-/* FP:errors.rs-0095 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0048
-/* FP:errors.rs-0096 */ # [derive (Diagnostic)] # [diag (hir_typeck_expected_array_or_slice , code = E0529)] pub (crate) struct ExpectedArrayOrSlice < 'tcx > { # [primary_span] # [label (hir_typeck_expected_array_or_slice_label)] pub (crate) span : Span , pub (crate) ty : Ty < 'tcx > , pub (crate) slice_pat_semantics : bool , # [subdiagnostic] pub (crate) as_deref : Option < AsDerefSuggestion > , # [subdiagnostic] pub (crate) slicing : Option < SlicingSuggestion > , }
-/* FP:errors.rs-0097 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0049
-/* FP:errors.rs-0098 */ # [derive (Subdiagnostic)] # [suggestion (hir_typeck_as_deref_suggestion , code = ".as_deref()" , style = "verbose" , applicability = "maybe-incorrect")] pub (crate) struct AsDerefSuggestion { # [primary_span] pub (crate) span : Span , }
-/* FP:errors.rs-0099 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0050
-/* FP:errors.rs-0100 */ # [derive (Subdiagnostic)] # [suggestion (hir_typeck_slicing_suggestion , code = "[..]" , style = "verbose" , applicability = "maybe-incorrect")] pub (crate) struct SlicingSuggestion { # [primary_span] pub (crate) span : Span , }
-/* FP:errors.rs-0101 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0051
-/* FP:errors.rs-0102 */ # [derive (Diagnostic)] # [diag (hir_typeck_invalid_callee , code = E0618)] pub (crate) struct InvalidCallee < 'tcx > { # [primary_span] pub span : Span , pub ty : Ty < 'tcx > , pub found : String , }
-/* FP:errors.rs-0103 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0052
-/* FP:errors.rs-0104 */ # [derive (Diagnostic)] # [diag (hir_typeck_int_to_fat , code = E0606)] pub (crate) struct IntToWide < 'tcx > { # [primary_span] # [label (hir_typeck_int_to_fat_label)] pub span : Span , pub metadata : & 'tcx str , pub expr_ty : Ty < 'tcx > , pub cast_ty : Ty < 'tcx > , # [label (hir_typeck_int_to_fat_label_nightly)] pub expr_if_nightly : Option < Span > , pub known_wide : bool , }
-/* FP:errors.rs-0105 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_ENUM_0053
-/* FP:errors.rs-0106 */ # [derive (Subdiagnostic)] pub (crate) enum OptionResultRefMismatch { # [suggestion (hir_typeck_option_result_copied , code = ".copied()" , style = "verbose" , applicability = "machine-applicable")] Copied { # [primary_span] span : Span , def_path : String , } , # [suggestion (hir_typeck_option_result_cloned , code = ".cloned()" , style = "verbose" , applicability = "machine-applicable")] Cloned { # [primary_span] span : Span , def_path : String , } , }
-/* FP:errors.rs-0107 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0054
-/* FP:errors.rs-0108 */ pub (crate) struct RemoveSemiForCoerce { pub expr : Span , pub ret : Span , pub semi : Span , }
-/* FP:errors.rs-0109 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_IMPL_0055
-/* FP:errors.rs-0110 */ impl Subdiagnostic for RemoveSemiForCoerce { fn add_to_diag < G : EmissionGuarantee > (self , diag : & mut Diag < '_ , G >) { let mut multispan : MultiSpan = self . semi . into () ; multispan . push_span_label (self . expr , fluent :: hir_typeck_remove_semi_for_coerce_expr) ; multispan . push_span_label (self . ret , fluent :: hir_typeck_remove_semi_for_coerce_ret) ; multispan . push_span_label (self . semi , fluent :: hir_typeck_remove_semi_for_coerce_semi) ; diag . span_note (multispan , fluent :: hir_typeck_remove_semi_for_coerce) ; diag . tool_only_span_suggestion (self . semi , fluent :: hir_typeck_remove_semi_for_coerce_suggestion , "" , Applicability :: MaybeIncorrect ,) ; } }
-/* FP:errors.rs-0111 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0056
-/* FP:errors.rs-0112 */ # [derive (Diagnostic)] # [diag (hir_typeck_union_pat_multiple_fields)] pub (crate) struct UnionPatMultipleFields { # [primary_span] pub span : Span , }
-/* FP:errors.rs-0113 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0057
-/* FP:errors.rs-0114 */ # [derive (Diagnostic)] # [diag (hir_typeck_union_pat_dotdot)] pub (crate) struct UnionPatDotDot { # [primary_span] pub span : Span , }
-/* FP:errors.rs-0115 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0058
-/* FP:errors.rs-0116 */ # [derive (Subdiagnostic)] # [multipart_suggestion (hir_typeck_use_is_empty , applicability = "maybe-incorrect" , style = "verbose")] pub (crate) struct UseIsEmpty < 'tcx > { # [suggestion_part (code = "!")] pub lo : Span , # [suggestion_part (code = ".is_empty()")] pub hi : Span , pub expr_ty : Ty < 'tcx > , }
-/* FP:errors.rs-0117 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0059
-/* FP:errors.rs-0118 */ # [derive (Diagnostic)] # [diag (hir_typeck_arg_mismatch_indeterminate)] pub (crate) struct ArgMismatchIndeterminate { # [primary_span] pub span : Span , }
-/* FP:errors.rs-0119 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_ENUM_0060
-/* FP:errors.rs-0120 */ # [derive (Subdiagnostic)] pub (crate) enum SuggestBoxing { # [note (hir_typeck_suggest_boxing_note)] # [multipart_suggestion (hir_typeck_suggest_boxing_when_appropriate , applicability = "machine-applicable")] Unit { # [suggestion_part (code = "Box::new(())")] start : Span , # [suggestion_part (code = "")] end : Span , } , # [note (hir_typeck_suggest_boxing_note)] AsyncBody , # [note (hir_typeck_suggest_boxing_note)] # [multipart_suggestion (hir_typeck_suggest_boxing_when_appropriate , applicability = "machine-applicable")] ExprFieldShorthand { # [suggestion_part (code = "{ident}: Box::new(")] start : Span , # [suggestion_part (code = ")")] end : Span , ident : Ident , } , # [note (hir_typeck_suggest_boxing_note)] # [multipart_suggestion (hir_typeck_suggest_boxing_when_appropriate , applicability = "machine-applicable")] Other { # [suggestion_part (code = "Box::new(")] start : Span , # [suggestion_part (code = ")")] end : Span , } , }
-/* FP:errors.rs-0121 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0061
-/* FP:errors.rs-0122 */ # [derive (Subdiagnostic)] # [suggestion (hir_typeck_suggest_ptr_null_mut , applicability = "maybe-incorrect" , style = "verbose" , code = "core::ptr::null_mut()")] pub (crate) struct SuggestPtrNullMut { # [primary_span] pub span : Span , }
-/* FP:errors.rs-0123 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0062
-/* FP:errors.rs-0124 */ # [derive (LintDiagnostic)] # [diag (hir_typeck_trivial_cast)] # [help] pub (crate) struct TrivialCast < 'tcx > { pub numeric : bool , pub expr_ty : Ty < 'tcx > , pub cast_ty : Ty < 'tcx > , }
-/* FP:errors.rs-0125 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0063
-/* FP:errors.rs-0126 */ pub (crate) struct BreakNonLoop < 'a > { pub span : Span , pub head : Option < Span > , pub kind : & 'a str , pub suggestion : String , pub loop_label : Option < Label > , pub break_label : Option < Label > , pub break_expr_kind : & 'a ExprKind < 'a > , pub break_expr_span : Span , }
-/* FP:errors.rs-0127 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_IMPL_0064
-/* FP:errors.rs-0128 */ impl < 'a , G : EmissionGuarantee > Diagnostic < '_ , G > for BreakNonLoop < 'a > { # [track_caller] fn into_diag (self , dcx : DiagCtxtHandle < '_ > , level : Level) -> Diag < '_ , G > { let mut diag = Diag :: new (dcx , level , fluent :: hir_typeck_break_non_loop) ; diag . span (self . span) ; diag . code (E0571) ; diag . arg ("kind" , self . kind) ; diag . span_label (self . span , fluent :: hir_typeck_label) ; if let Some (head) = self . head { diag . span_label (head , fluent :: hir_typeck_label2) ; } diag . span_suggestion (self . span , fluent :: hir_typeck_suggestion , self . suggestion , Applicability :: MaybeIncorrect ,) ; if let (Some (label) , None) = (self . loop_label , self . break_label) { match self . break_expr_kind { ExprKind :: Path (hir :: QPath :: Resolved (None , hir :: Path { segments : [segment] , res : hir :: def :: Res :: Err , .. } ,)) if label . ident . to_string () == format ! ("'{}" , segment . ident) => { diag . downgrade_to_delayed_bug () ; } _ => { diag . span_suggestion (self . break_expr_span , fluent :: hir_typeck_break_expr_suggestion , label . ident , Applicability :: MaybeIncorrect ,) ; } } } diag } }
-/* FP:errors.rs-0129 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0065
-/* FP:errors.rs-0130 */ # [derive (Diagnostic)] # [diag (hir_typeck_continue_labeled_block , code = E0696)] pub (crate) struct ContinueLabeledBlock { # [primary_span] # [label] pub span : Span , # [label (hir_typeck_block_label)] pub block_span : Span , }
-/* FP:errors.rs-0131 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0066
-/* FP:errors.rs-0132 */ # [derive (Diagnostic)] # [diag (hir_typeck_break_inside_closure , code = E0267)] pub (crate) struct BreakInsideClosure < 'a > { # [primary_span] # [label] pub span : Span , # [label (hir_typeck_closure_label)] pub closure_span : Span , pub name : & 'a str , }
-/* FP:errors.rs-0133 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0067
-/* FP:errors.rs-0134 */ # [derive (Diagnostic)] # [diag (hir_typeck_break_inside_coroutine , code = E0267)] pub (crate) struct BreakInsideCoroutine < 'a > { # [primary_span] # [label] pub span : Span , # [label (hir_typeck_coroutine_label)] pub coroutine_span : Span , pub name : & 'a str , pub kind : & 'a str , pub source : & 'a str , }
-/* FP:errors.rs-0135 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0068
-/* FP:errors.rs-0136 */ # [derive (Diagnostic)] # [diag (hir_typeck_outside_loop , code = E0268)] pub (crate) struct OutsideLoop < 'a > { # [primary_span] # [label] pub spans : Vec < Span > , pub name : & 'a str , pub is_break : bool , # [subdiagnostic] pub suggestion : Option < OutsideLoopSuggestion > , }
-/* FP:errors.rs-0137 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0069
-/* FP:errors.rs-0138 */ # [derive (Subdiagnostic)] # [multipart_suggestion (hir_typeck_outside_loop_suggestion , applicability = "maybe-incorrect")] pub (crate) struct OutsideLoopSuggestion { # [suggestion_part (code = "'block: ")] pub block_span : Span , # [suggestion_part (code = " 'block")] pub break_spans : Vec < Span > , }
-/* FP:errors.rs-0139 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0070
-/* FP:errors.rs-0140 */ # [derive (Diagnostic)] # [diag (hir_typeck_unlabeled_in_labeled_block , code = E0695)] pub (crate) struct UnlabeledInLabeledBlock < 'a > { # [primary_span] # [label] pub span : Span , pub cf_type : & 'a str , }
-/* FP:errors.rs-0141 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0071
-/* FP:errors.rs-0142 */ # [derive (Diagnostic)] # [diag (hir_typeck_unlabeled_cf_in_while_condition , code = E0590)] pub (crate) struct UnlabeledCfInWhileCondition < 'a > { # [primary_span] # [label] pub span : Span , pub cf_type : & 'a str , }
-/* FP:errors.rs-0143 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0072
-/* FP:errors.rs-0144 */ # [derive (Diagnostic)] # [diag (hir_typeck_no_associated_item , code = E0599)] pub (crate) struct NoAssociatedItem < 'tcx > { # [primary_span] pub span : Span , pub item_kind : & 'static str , pub item_ident : Ident , pub ty_prefix : Cow < 'static , str > , pub ty : Ty < 'tcx > , pub trait_missing_method : bool , }
-/* FP:errors.rs-0145 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0073
-/* FP:errors.rs-0146 */ # [derive (Subdiagnostic)] # [note (hir_typeck_candidate_trait_note)] pub (crate) struct CandidateTraitNote { # [primary_span] pub span : Span , pub trait_name : String , pub item_name : Ident , pub action_or_ty : String , }
-/* FP:errors.rs-0147 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0074
-/* FP:errors.rs-0148 */ # [derive (Diagnostic)] # [diag (hir_typeck_cannot_cast_to_bool , code = E0054)] pub (crate) struct CannotCastToBool < 'tcx > { # [primary_span] pub span : Span , pub expr_ty : Ty < 'tcx > , # [subdiagnostic] pub help : CannotCastToBoolHelp , }
-/* FP:errors.rs-0149 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0075
-/* FP:errors.rs-0150 */ # [derive (Diagnostic)] # [diag (hir_typeck_cast_enum_drop)] pub (crate) struct CastEnumDrop < 'tcx > { # [primary_span] pub span : Span , pub expr_ty : Ty < 'tcx > , pub cast_ty : Ty < 'tcx > , }
-/* FP:errors.rs-0151 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0076
-/* FP:errors.rs-0152 */ # [derive (Diagnostic)] # [diag (hir_typeck_cast_unknown_pointer , code = E0641)] pub (crate) struct CastUnknownPointer { # [primary_span] pub span : Span , pub to : bool , # [subdiagnostic] pub sub : CastUnknownPointerSub , }
-/* FP:errors.rs-0153 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_ENUM_0077
-/* FP:errors.rs-0154 */ pub (crate) enum CastUnknownPointerSub { To (Span) , From (Span) , }
-/* FP:errors.rs-0155 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_IMPL_0078
-/* FP:errors.rs-0156 */ impl crate :: rustc_errors :: Subdiagnostic for CastUnknownPointerSub { fn add_to_diag < G : EmissionGuarantee > (self , diag : & mut Diag < '_ , G >) { match self { CastUnknownPointerSub :: To (span) => { let msg = diag . eagerly_translate (fluent :: hir_typeck_label_to) ; diag . span_label (span , msg) ; let msg = diag . eagerly_translate (fluent :: hir_typeck_note) ; diag . note (msg) ; } CastUnknownPointerSub :: From (span) => { let msg = diag . eagerly_translate (fluent :: hir_typeck_label_from) ; diag . span_label (span , msg) ; } } } }
-/* FP:errors.rs-0157 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_ENUM_0079
-/* FP:errors.rs-0158 */ # [derive (Subdiagnostic)] pub (crate) enum CannotCastToBoolHelp { # [suggestion (hir_typeck_suggestion , applicability = "machine-applicable" , code = " != 0" , style = "verbose")] Numeric (# [primary_span] Span) , # [label (hir_typeck_label)] Unsupported (# [primary_span] Span) , }
-/* FP:errors.rs-0159 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0080
-/* FP:errors.rs-0160 */ # [derive (Diagnostic)] # [diag (hir_typeck_ctor_is_private , code = E0603)] pub (crate) struct CtorIsPrivate { # [primary_span] pub span : Span , pub def : String , }
-/* FP:errors.rs-0161 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0081
-/* FP:errors.rs-0162 */ # [derive (Subdiagnostic)] # [note (hir_typeck_deref_is_empty)] pub (crate) struct DerefImplsIsEmpty < 'tcx > { # [primary_span] pub span : Span , pub deref_ty : Ty < 'tcx > , }
-/* FP:errors.rs-0163 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0082
-/* FP:errors.rs-0164 */ # [derive (Subdiagnostic)] # [multipart_suggestion (hir_typeck_convert_using_method , applicability = "machine-applicable" , style = "verbose")] pub (crate) struct SuggestConvertViaMethod < 'tcx > { # [suggestion_part (code = "{sugg}")] pub span : Span , # [suggestion_part (code = "")] pub borrow_removal_span : Option < Span > , pub sugg : String , pub expected : Ty < 'tcx > , pub found : Ty < 'tcx > , }
-/* FP:errors.rs-0165 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0083
-/* FP:errors.rs-0166 */ # [derive (Subdiagnostic)] # [note (hir_typeck_note_caller_chooses_ty_for_ty_param)] pub (crate) struct NoteCallerChoosesTyForTyParam < 'tcx > { pub ty_param_name : Symbol , pub found_ty : Ty < 'tcx > , }
-/* FP:errors.rs-0167 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_ENUM_0084
-/* FP:errors.rs-0168 */ # [derive (Subdiagnostic)] pub (crate) enum SuggestBoxingForReturnImplTrait { # [multipart_suggestion (hir_typeck_rpit_change_return_type , applicability = "maybe-incorrect")] ChangeReturnType { # [suggestion_part (code = "Box<dyn")] start_sp : Span , # [suggestion_part (code = ">")] end_sp : Span , } , # [multipart_suggestion (hir_typeck_rpit_box_return_expr , applicability = "maybe-incorrect")] BoxReturnExpr { # [suggestion_part (code = "Box::new(")] starts : Vec < Span > , # [suggestion_part (code = ")")] ends : Vec < Span > , } , }
-/* FP:errors.rs-0169 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0085
-/* FP:errors.rs-0170 */ # [derive (Diagnostic)] # [diag (hir_typeck_self_ctor_from_outer_item , code = E0401)] pub (crate) struct SelfCtorFromOuterItem { # [primary_span] pub span : Span , # [label] pub impl_span : Span , # [subdiagnostic] pub sugg : Option < ReplaceWithName > , }
-/* FP:errors.rs-0171 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0086
-/* FP:errors.rs-0172 */ # [derive (LintDiagnostic)] # [diag (hir_typeck_self_ctor_from_outer_item)] pub (crate) struct SelfCtorFromOuterItemLint { # [label] pub impl_span : Span , # [subdiagnostic] pub sugg : Option < ReplaceWithName > , }
-/* FP:errors.rs-0173 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0087
-/* FP:errors.rs-0174 */ # [derive (Subdiagnostic)] # [suggestion (hir_typeck_suggestion , code = "{name}" , applicability = "machine-applicable")] pub (crate) struct ReplaceWithName { # [primary_span] pub span : Span , pub name : String , }
-/* FP:errors.rs-0175 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0088
-/* FP:errors.rs-0176 */ # [derive (Diagnostic)] # [diag (hir_typeck_cast_thin_pointer_to_wide_pointer , code = E0607)] pub (crate) struct CastThinPointerToWidePointer < 'tcx > { # [primary_span] pub span : Span , pub expr_ty : Ty < 'tcx > , pub cast_ty : Ty < 'tcx > , # [note (hir_typeck_teach_help)] pub (crate) teach : bool , }
-/* FP:errors.rs-0177 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0089
-/* FP:errors.rs-0178 */ # [derive (Diagnostic)] # [diag (hir_typeck_pass_to_variadic_function , code = E0617)] pub (crate) struct PassToVariadicFunction < 'a , 'tcx > { # [primary_span] pub span : Span , pub ty : Ty < 'tcx > , pub cast_ty : & 'a str , # [suggestion (code = " as {cast_ty}" , applicability = "machine-applicable" , style = "verbose")] pub sugg_span : Span , # [note (hir_typeck_teach_help)] pub (crate) teach : bool , }
-/* FP:errors.rs-0179 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0090
-/* FP:errors.rs-0180 */ # [derive (Diagnostic)] # [diag (hir_typeck_fn_item_to_variadic_function , code = E0617)] # [help] # [note] pub (crate) struct PassFnItemToVariadicFunction { # [primary_span] pub span : Span , # [suggestion (code = " as {replace}" , applicability = "machine-applicable" , style = "verbose")] pub sugg_span : Span , pub replace : String , }
-/* FP:errors.rs-0181 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0091
-/* FP:errors.rs-0182 */ # [derive (Subdiagnostic)] # [suggestion (hir_typeck_replace_comma_with_semicolon , applicability = "machine-applicable" , style = "verbose" , code = "; ")] pub (crate) struct ReplaceCommaWithSemicolon { # [primary_span] pub comma_span : Span , pub descr : & 'static str , }
-/* FP:errors.rs-0183 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0092
-/* FP:errors.rs-0184 */ # [derive (LintDiagnostic)] # [diag (hir_typeck_supertrait_item_shadowing)] pub (crate) struct SupertraitItemShadowing { pub item : Symbol , pub subtrait : Symbol , # [subdiagnostic] pub shadower : SupertraitItemShadower , # [subdiagnostic] pub shadowee : SupertraitItemShadowee , }
-/* FP:errors.rs-0185 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0093
-/* FP:errors.rs-0186 */ # [derive (Subdiagnostic)] # [note (hir_typeck_supertrait_item_shadower)] pub (crate) struct SupertraitItemShadower { pub subtrait : Symbol , # [primary_span] pub span : Span , }
-/* FP:errors.rs-0187 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_ENUM_0094
-/* FP:errors.rs-0188 */ # [derive (Subdiagnostic)] pub (crate) enum SupertraitItemShadowee { # [note (hir_typeck_supertrait_item_shadowee)] Labeled { # [primary_span] span : Span , supertrait : Symbol , } , # [note (hir_typeck_supertrait_item_multiple_shadowee)] Several { # [primary_span] spans : MultiSpan , traits : DiagSymbolList , } , }
-/* FP:errors.rs-0189 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0095
-/* FP:errors.rs-0190 */ # [derive (Diagnostic)] # [diag (hir_typeck_register_type_unstable)] pub (crate) struct RegisterTypeUnstable < 'a > { # [primary_span] pub span : Span , pub ty : Ty < 'a > , }
-/* FP:errors.rs-0191 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0096
-/* FP:errors.rs-0192 */ # [derive (Diagnostic)] # [diag (hir_typeck_naked_asm_outside_naked_fn)] pub (crate) struct NakedAsmOutsideNakedFn { # [primary_span] pub span : Span , }
-/* FP:errors.rs-0193 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0097
-/* FP:errors.rs-0194 */ # [derive (Diagnostic)] # [diag (hir_typeck_no_patterns)] pub (crate) struct NoPatterns { # [primary_span] pub span : Span , }
-/* FP:errors.rs-0195 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0098
-/* FP:errors.rs-0196 */ # [derive (Diagnostic)] # [diag (hir_typeck_params_not_allowed)] # [help] pub (crate) struct ParamsNotAllowed { # [primary_span] pub span : Span , }
-/* FP:errors.rs-0197 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0099
-/* FP:errors.rs-0198 */ pub (crate) struct NakedFunctionsAsmBlock { pub span : Span , pub multiple_asms : Vec < Span > , pub non_asms : Vec < Span > , }
-/* FP:errors.rs-0199 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_IMPL_0100
-/* FP:errors.rs-0200 */ impl < G : EmissionGuarantee > Diagnostic < '_ , G > for NakedFunctionsAsmBlock { # [track_caller] fn into_diag (self , dcx : DiagCtxtHandle < '_ > , level : Level) -> Diag < '_ , G > { let mut diag = Diag :: new (dcx , level , fluent :: hir_typeck_naked_functions_asm_block) ; diag . span (self . span) ; diag . code (E0787) ; for span in self . multiple_asms . iter () { diag . span_label (* span , fluent :: hir_typeck_label_multiple_asm) ; } for span in self . non_asms . iter () { diag . span_label (* span , fluent :: hir_typeck_label_non_asm) ; } diag } }
-/* FP:errors.rs-0201 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0101
-/* FP:errors.rs-0202 */ # [derive (Diagnostic)] # [diag (hir_typeck_naked_functions_must_naked_asm , code = E0787)] pub (crate) struct NakedFunctionsMustNakedAsm { # [primary_span] # [label] pub span : Span , }
-/* FP:errors.rs-0203 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0102
-/* FP:errors.rs-0204 */ # [derive (Diagnostic)] # [diag (hir_typeck_abi_cannot_be_called)] pub (crate) struct AbiCannotBeCalled { # [primary_span] # [note] pub span : Span , pub abi : ExternAbi , }
-/* FP:errors.rs-0205 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_errors_STRUCT_0103
-/* FP:errors.rs-0206 */ # [derive (Diagnostic)] # [diag (hir_typeck_const_continue_bad_label)] pub (crate) struct ConstContinueBadLabel { # [primary_span] pub span : Span , }
+// SRC: ../rust/compiler/rustc_hir_typeck/src/errors.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+// Errors emitted by `rustc_hir_typeck`.
+
+use std::borrow::Cow;
+
+use crate::rustc_abi::ExternAbi;
+use crate::rustc_complete::Label;
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::{
+    Applicability, Diag, DiagArgValue, DiagCtxtHandle, DiagSymbolList, Diagnostic,
+    EmissionGuarantee, IntoDiagArg, Level, MultiSpan, Subdiagnostic,
+};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use rustc_hir as hir;
+use crate::rustc_complete::ExprKind;
+use rustc_macros::{Diagnostic, LintDiagnostic, Subdiagnostic};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::ty::{self, Ty};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::edition::{Edition, LATEST_STABLE_EDITION};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{Ident, Span, Symbol};
+/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=20 */
+
+use crate::fluent_generated as fluent;
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_base_expression_double_dot, code = E0797)]
+pub(crate) struct BaseExpressionDoubleDot {
+    #[primary_span]
+    pub span: Span,
+    #[suggestion(
+        hir_typeck_base_expression_double_dot_enable_default_field_values,
+        code = "#[feature(default_field_values)]\n",
+        applicability = "machine-applicable",
+        style = "verbose"
+    )]
+    pub default_field_values_suggestion: Option<Span>,
+    #[subdiagnostic]
+    pub add_expr: Option<BaseExpressionDoubleDotAddExpr>,
+    #[subdiagnostic]
+    pub remove_dots: Option<BaseExpressionDoubleDotRemove>,
+}
+/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
+
+#[derive(Subdiagnostic)]
+#[suggestion(
+    hir_typeck_base_expression_double_dot_remove,
+    code = "",
+    applicability = "machine-applicable",
+    style = "verbose"
+)]
+pub(crate) struct BaseExpressionDoubleDotRemove {
+    #[primary_span]
+    pub span: Span,
+}
+/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
+
+#[derive(Subdiagnostic)]
+#[suggestion(
+    hir_typeck_base_expression_double_dot_add_expr,
+    code = "/* expr */",
+    applicability = "has-placeholders",
+    style = "verbose"
+)]
+pub(crate) struct BaseExpressionDoubleDotAddExpr {
+    #[primary_span]
+    pub span: Span,
+}
+/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_field_multiply_specified_in_initializer, code = E0062)]
+pub(crate) struct FieldMultiplySpecifiedInInitializer {
+    #[primary_span]
+    #[label]
+    pub span: Span,
+    #[label(hir_typeck_previous_use_label)]
+    pub prev_span: Span,
+    pub ident: Ident,
+}
+/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_return_stmt_outside_of_fn_body, code = E0572)]
+pub(crate) struct ReturnStmtOutsideOfFnBody {
+    #[primary_span]
+    pub span: Span,
+    #[label(hir_typeck_encl_body_label)]
+    pub encl_body_span: Option<Span>,
+    #[label(hir_typeck_encl_fn_label)]
+    pub encl_fn_span: Option<Span>,
+    pub statement_kind: ReturnLikeStatementKind,
+}
+/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+
+pub(crate) enum ReturnLikeStatementKind {
+    Return,
+    Become,
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=9 | LINES=12 */
+
+impl IntoDiagArg for ReturnLikeStatementKind {
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
+        let kind = match self {
+            Self::Return => "return",
+            Self::Become => "become",
+        }
+        .into();
+
+        DiagArgValue::Str(kind)
+    }
+}
+/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_rustcall_incorrect_args)]
+pub(crate) struct RustCallIncorrectArgs {
+    #[primary_span]
+    pub span: Span,
+}
+/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_yield_expr_outside_of_coroutine, code = E0627)]
+pub(crate) struct YieldExprOutsideOfCoroutine {
+    #[primary_span]
+    pub span: Span,
+}
+/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_struct_expr_non_exhaustive, code = E0639)]
+pub(crate) struct StructExprNonExhaustive {
+    #[primary_span]
+    pub span: Span,
+    pub what: &'static str,
+}
+/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_functional_record_update_on_non_struct, code = E0436)]
+pub(crate) struct FunctionalRecordUpdateOnNonStruct {
+    #[primary_span]
+    pub span: Span,
+}
+/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_address_of_temporary_taken, code = E0745)]
+pub(crate) struct AddressOfTemporaryTaken {
+    #[primary_span]
+    #[label]
+    pub span: Span,
+}
+/* AST_META: AST_ID=18 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=23 */
+
+#[derive(Subdiagnostic)]
+pub(crate) enum AddReturnTypeSuggestion {
+    #[suggestion(
+        hir_typeck_add_return_type_add,
+        code = " -> {found}",
+        applicability = "machine-applicable"
+    )]
+    Add {
+        #[primary_span]
+        span: Span,
+        found: String,
+    },
+    #[suggestion(
+        hir_typeck_add_return_type_missing_here,
+        code = " -> _",
+        applicability = "has-placeholders"
+    )]
+    MissingHere {
+        #[primary_span]
+        span: Span,
+    },
+}
+/* AST_META: AST_ID=19 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=15 */
+
+#[derive(Subdiagnostic)]
+pub(crate) enum ExpectedReturnTypeLabel<'tcx> {
+    #[label(hir_typeck_expected_default_return_type)]
+    Unit {
+        #[primary_span]
+        span: Span,
+    },
+    #[label(hir_typeck_expected_return_type)]
+    Other {
+        #[primary_span]
+        span: Span,
+        expected: Ty<'tcx>,
+    },
+}
+/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_explicit_destructor, code = E0040)]
+pub(crate) struct ExplicitDestructorCall {
+    #[primary_span]
+    #[label]
+    pub span: Span,
+    #[subdiagnostic]
+    pub sugg: ExplicitDestructorCallSugg,
+}
+/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
+
+#[derive(Subdiagnostic)]
+pub(crate) enum ExplicitDestructorCallSugg {
+    #[suggestion(hir_typeck_suggestion, code = "drop", applicability = "maybe-incorrect")]
+    Empty(#[primary_span] Span),
+    #[multipart_suggestion(hir_typeck_suggestion, style = "short")]
+    Snippet {
+        #[suggestion_part(code = "drop(")]
+        lo: Span,
+        #[suggestion_part(code = ")")]
+        hi: Span,
+    },
+}
+/* AST_META: AST_ID=22 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_missing_parentheses_in_range, code = E0689)]
+pub(crate) struct MissingParenthesesInRange<'tcx> {
+    #[primary_span]
+    #[label(hir_typeck_missing_parentheses_in_range)]
+    pub span: Span,
+    pub ty: Ty<'tcx>,
+    pub method_name: String,
+    #[subdiagnostic]
+    pub add_missing_parentheses: Option<AddMissingParenthesesInRange>,
+}
+/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=34 */
+
+#[derive(LintDiagnostic)]
+pub(crate) enum NeverTypeFallbackFlowingIntoUnsafe {
+    #[help]
+    #[diag(hir_typeck_never_type_fallback_flowing_into_unsafe_call)]
+    Call {
+        #[subdiagnostic]
+        sugg: SuggestAnnotations,
+    },
+    #[help]
+    #[diag(hir_typeck_never_type_fallback_flowing_into_unsafe_method)]
+    Method {
+        #[subdiagnostic]
+        sugg: SuggestAnnotations,
+    },
+    #[help]
+    #[diag(hir_typeck_never_type_fallback_flowing_into_unsafe_path)]
+    Path {
+        #[subdiagnostic]
+        sugg: SuggestAnnotations,
+    },
+    #[help]
+    #[diag(hir_typeck_never_type_fallback_flowing_into_unsafe_union_field)]
+    UnionField {
+        #[subdiagnostic]
+        sugg: SuggestAnnotations,
+    },
+    #[help]
+    #[diag(hir_typeck_never_type_fallback_flowing_into_unsafe_deref)]
+    Deref {
+        #[subdiagnostic]
+        sugg: SuggestAnnotations,
+    },
+}
+/* AST_META: AST_ID=24 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+
+#[derive(LintDiagnostic)]
+#[help]
+#[diag(hir_typeck_dependency_on_unit_never_type_fallback)]
+pub(crate) struct DependencyOnUnitNeverTypeFallback<'tcx> {
+    #[note]
+    pub obligation_span: Span,
+    pub obligation: ty::Predicate<'tcx>,
+    #[subdiagnostic]
+    pub sugg: SuggestAnnotations,
+}
+/* AST_META: AST_ID=25 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Clone)]
+pub(crate) enum SuggestAnnotation {
+    Unit(Span),
+    Path(Span),
+    Local(Span),
+    Turbo(Span, usize, usize),
+}
+/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+
+#[derive(Clone)]
+pub(crate) struct SuggestAnnotations {
+    pub suggestions: Vec<SuggestAnnotation>,
+}
+/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=25 | LINES=39 */
+impl Subdiagnostic for SuggestAnnotations {
+    fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
+        if self.suggestions.is_empty() {
+            return;
+        }
+
+        let mut suggestions = vec![];
+        for suggestion in self.suggestions {
+            match suggestion {
+                SuggestAnnotation::Unit(span) => {
+                    suggestions.push((span, "()".to_string()));
+                }
+                SuggestAnnotation::Path(span) => {
+                    suggestions.push((span.shrink_to_lo(), "<() as ".to_string()));
+                    suggestions.push((span.shrink_to_hi(), ">".to_string()));
+                }
+                SuggestAnnotation::Local(span) => {
+                    suggestions.push((span, ": ()".to_string()));
+                }
+                SuggestAnnotation::Turbo(span, n_args, idx) => suggestions.push((
+                    span,
+                    format!(
+                        "::<{}>",
+                        (0..n_args)
+                            .map(|i| if i == idx { "()" } else { "_" })
+                            .collect::<Vec<_>>()
+                            .join(", "),
+                    ),
+                )),
+            }
+        }
+
+        diag.multipart_suggestion_verbose(
+            "use `()` annotations to avoid fallback changes",
+            suggestions,
+            Applicability::MachineApplicable,
+        );
+    }
+}
+/* AST_META: AST_ID=28 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
+
+#[derive(Subdiagnostic)]
+#[multipart_suggestion(
+    hir_typeck_add_missing_parentheses_in_range,
+    style = "verbose",
+    applicability = "maybe-incorrect"
+)]
+pub(crate) struct AddMissingParenthesesInRange {
+    pub func_name: String,
+    #[suggestion_part(code = "(")]
+    pub left: Span,
+    #[suggestion_part(code = ")")]
+    pub right: Span,
+}
+/* AST_META: AST_ID=29 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+
+pub(crate) struct TypeMismatchFruTypo {
+    /// Span of the LHS of the range
+    pub expr_span: Span,
+    /// Span of the `..RHS` part of the range
+    pub fru_span: Span,
+    /// Rendered expression of the RHS of the range
+    pub expr: Option<String>,
+}
+/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=12 | LINES=23 */
+
+impl Subdiagnostic for TypeMismatchFruTypo {
+    fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
+        diag.arg("expr", self.expr.as_deref().unwrap_or("NONE"));
+
+        // Only explain that `a ..b` is a range if it's split up
+        if self.expr_span.between(self.fru_span).is_empty() {
+            diag.span_note(self.expr_span.to(self.fru_span), fluent::hir_typeck_fru_note);
+        } else {
+            let mut multispan: MultiSpan = vec![self.expr_span, self.fru_span].into();
+            multispan.push_span_label(self.expr_span, fluent::hir_typeck_fru_expr);
+            multispan.push_span_label(self.fru_span, fluent::hir_typeck_fru_expr2);
+            diag.span_note(multispan, fluent::hir_typeck_fru_note);
+        }
+
+        diag.span_suggestion(
+            self.expr_span.shrink_to_hi(),
+            fluent::hir_typeck_fru_suggestion,
+            ", ",
+            Applicability::MaybeIncorrect,
+        );
+    }
+}
+/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
+
+#[derive(LintDiagnostic)]
+#[diag(hir_typeck_lossy_provenance_int2ptr)]
+#[help]
+pub(crate) struct LossyProvenanceInt2Ptr<'tcx> {
+    pub expr_ty: Ty<'tcx>,
+    pub cast_ty: Ty<'tcx>,
+    #[subdiagnostic]
+    pub sugg: LossyProvenanceInt2PtrSuggestion,
+}
+/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_ptr_cast_add_auto_to_object, code = E0804)]
+#[note]
+#[help]
+pub(crate) struct PtrCastAddAutoToObject {
+    #[primary_span]
+    #[label]
+    pub span: Span,
+    pub traits_len: usize,
+    pub traits: DiagSymbolList<String>,
+}
+/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Subdiagnostic)]
+#[multipart_suggestion(hir_typeck_suggestion, applicability = "has-placeholders")]
+pub(crate) struct LossyProvenanceInt2PtrSuggestion {
+    #[suggestion_part(code = "(...).with_addr(")]
+    pub lo: Span,
+    #[suggestion_part(code = ")")]
+    pub hi: Span,
+}
+/* AST_META: AST_ID=34 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
+
+#[derive(LintDiagnostic)]
+#[diag(hir_typeck_lossy_provenance_ptr2int)]
+#[help]
+pub(crate) struct LossyProvenancePtr2Int<'tcx> {
+    pub expr_ty: Ty<'tcx>,
+    pub cast_ty: Ty<'tcx>,
+    #[subdiagnostic]
+    pub sugg: LossyProvenancePtr2IntSuggestion<'tcx>,
+}
+/* AST_META: AST_ID=35 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=34 */
+
+#[derive(Subdiagnostic)]
+pub(crate) enum LossyProvenancePtr2IntSuggestion<'tcx> {
+    #[multipart_suggestion(hir_typeck_suggestion, applicability = "maybe-incorrect")]
+    NeedsParensCast {
+        #[suggestion_part(code = "(")]
+        expr_span: Span,
+        #[suggestion_part(code = ").addr() as {cast_ty}")]
+        cast_span: Span,
+        cast_ty: Ty<'tcx>,
+    },
+    #[multipart_suggestion(hir_typeck_suggestion, applicability = "maybe-incorrect")]
+    NeedsParens {
+        #[suggestion_part(code = "(")]
+        expr_span: Span,
+        #[suggestion_part(code = ").addr()")]
+        cast_span: Span,
+    },
+    #[suggestion(
+        hir_typeck_suggestion,
+        code = ".addr() as {cast_ty}",
+        applicability = "maybe-incorrect"
+    )]
+    NeedsCast {
+        #[primary_span]
+        cast_span: Span,
+        cast_ty: Ty<'tcx>,
+    },
+    #[suggestion(hir_typeck_suggestion, code = ".addr()", applicability = "maybe-incorrect")]
+    Other {
+        #[primary_span]
+        cast_span: Span,
+    },
+}
+/* AST_META: AST_ID=36 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
+
+#[derive(Subdiagnostic)]
+pub(crate) enum HelpUseLatestEdition {
+    #[help(hir_typeck_help_set_edition_cargo)]
+    #[note(hir_typeck_note_edition_guide)]
+    Cargo { edition: Edition },
+    #[help(hir_typeck_help_set_edition_standalone)]
+    #[note(hir_typeck_note_edition_guide)]
+    Standalone { edition: Edition },
+}
+/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=11 */
+
+impl HelpUseLatestEdition {
+    pub(crate) fn new() -> Self {
+        let edition = LATEST_STABLE_EDITION;
+        if crate::rustc_session::utils::was_invoked_from_cargo() {
+            Self::Cargo { edition }
+        } else {
+            Self::Standalone { edition }
+        }
+    }
+}
+/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_no_field_on_type, code = E0609)]
+pub(crate) struct NoFieldOnType<'tcx> {
+    #[primary_span]
+    pub(crate) span: Span,
+    pub(crate) ty: Ty<'tcx>,
+    pub(crate) field: Ident,
+}
+/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_no_field_on_variant, code = E0609)]
+pub(crate) struct NoFieldOnVariant<'tcx> {
+    #[primary_span]
+    pub(crate) span: Span,
+    pub(crate) container: Ty<'tcx>,
+    pub(crate) ident: Ident,
+    pub(crate) field: Ident,
+    #[label(hir_typeck_no_field_on_variant_enum)]
+    pub(crate) enum_span: Span,
+    #[label(hir_typeck_no_field_on_variant_field)]
+    pub(crate) field_span: Span,
+}
+/* AST_META: AST_ID=40 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_cant_dereference, code = E0614)]
+pub(crate) struct CantDereference<'tcx> {
+    #[primary_span]
+    #[label(hir_typeck_cant_dereference_label)]
+    pub(crate) span: Span,
+    pub(crate) ty: Ty<'tcx>,
+}
+/* AST_META: AST_ID=41 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_expected_array_or_slice, code = E0529)]
+pub(crate) struct ExpectedArrayOrSlice<'tcx> {
+    #[primary_span]
+    #[label(hir_typeck_expected_array_or_slice_label)]
+    pub(crate) span: Span,
+    pub(crate) ty: Ty<'tcx>,
+    pub(crate) slice_pat_semantics: bool,
+    #[subdiagnostic]
+    pub(crate) as_deref: Option<AsDerefSuggestion>,
+    #[subdiagnostic]
+    pub(crate) slicing: Option<SlicingSuggestion>,
+}
+/* AST_META: AST_ID=42 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
+
+#[derive(Subdiagnostic)]
+#[suggestion(
+    hir_typeck_as_deref_suggestion,
+    code = ".as_deref()",
+    style = "verbose",
+    applicability = "maybe-incorrect"
+)]
+pub(crate) struct AsDerefSuggestion {
+    #[primary_span]
+    pub(crate) span: Span,
+}
+/* AST_META: AST_ID=43 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
+
+#[derive(Subdiagnostic)]
+#[suggestion(
+    hir_typeck_slicing_suggestion,
+    code = "[..]",
+    style = "verbose",
+    applicability = "maybe-incorrect"
+)]
+pub(crate) struct SlicingSuggestion {
+    #[primary_span]
+    pub(crate) span: Span,
+}
+/* AST_META: AST_ID=44 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_invalid_callee, code = E0618)]
+pub(crate) struct InvalidCallee<'tcx> {
+    #[primary_span]
+    pub span: Span,
+    pub ty: Ty<'tcx>,
+    pub found: String,
+}
+/* AST_META: AST_ID=45 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_int_to_fat, code = E0606)]
+pub(crate) struct IntToWide<'tcx> {
+    #[primary_span]
+    #[label(hir_typeck_int_to_fat_label)]
+    pub span: Span,
+    pub metadata: &'tcx str,
+    pub expr_ty: Ty<'tcx>,
+    pub cast_ty: Ty<'tcx>,
+    #[label(hir_typeck_int_to_fat_label_nightly)]
+    pub expr_if_nightly: Option<Span>,
+    pub known_wide: bool,
+}
+/* AST_META: AST_ID=46 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=40 */
+
+#[derive(Subdiagnostic)]
+pub(crate) enum OptionResultRefMismatch {
+    #[suggestion(
+        hir_typeck_option_result_copied,
+        code = ".copied()",
+        style = "verbose",
+        applicability = "machine-applicable"
+    )]
+    Copied {
+        #[primary_span]
+        span: Span,
+        def_path: String,
+    },
+    #[suggestion(
+        hir_typeck_option_result_cloned,
+        code = ".cloned()",
+        style = "verbose",
+        applicability = "machine-applicable"
+    )]
+    Cloned {
+        #[primary_span]
+        span: Span,
+        def_path: String,
+    },
+    // FIXME: #114050
+    // #[suggestion(
+    //     hir_typeck_option_result_asref,
+    //     code = ".as_ref()",
+    //     style = "verbose",
+    //     applicability = "machine-applicable"
+    // )]
+    // AsRef {
+    //     #[primary_span]
+    //     span: Span,
+    //     def_path: String,
+    //     expected_ty: Ty<'tcx>,
+    //     expr_ty: Ty<'tcx>,
+    // },
+}
+/* AST_META: AST_ID=47 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+
+pub(crate) struct RemoveSemiForCoerce {
+    pub expr: Span,
+    pub ret: Span,
+    pub semi: Span,
+}
+/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=6 | LINES=17 */
+
+impl Subdiagnostic for RemoveSemiForCoerce {
+    fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
+        let mut multispan: MultiSpan = self.semi.into();
+        multispan.push_span_label(self.expr, fluent::hir_typeck_remove_semi_for_coerce_expr);
+        multispan.push_span_label(self.ret, fluent::hir_typeck_remove_semi_for_coerce_ret);
+        multispan.push_span_label(self.semi, fluent::hir_typeck_remove_semi_for_coerce_semi);
+        diag.span_note(multispan, fluent::hir_typeck_remove_semi_for_coerce);
+
+        diag.tool_only_span_suggestion(
+            self.semi,
+            fluent::hir_typeck_remove_semi_for_coerce_suggestion,
+            "",
+            Applicability::MaybeIncorrect,
+        );
+    }
+}
+/* AST_META: AST_ID=49 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_union_pat_multiple_fields)]
+pub(crate) struct UnionPatMultipleFields {
+    #[primary_span]
+    pub span: Span,
+}
+/* AST_META: AST_ID=50 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_union_pat_dotdot)]
+pub(crate) struct UnionPatDotDot {
+    #[primary_span]
+    pub span: Span,
+}
+/* AST_META: AST_ID=51 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=14 */
+
+#[derive(Subdiagnostic)]
+#[multipart_suggestion(
+    hir_typeck_use_is_empty,
+    applicability = "maybe-incorrect",
+    style = "verbose"
+)]
+pub(crate) struct UseIsEmpty<'tcx> {
+    #[suggestion_part(code = "!")]
+    pub lo: Span,
+    #[suggestion_part(code = ".is_empty()")]
+    pub hi: Span,
+    pub expr_ty: Ty<'tcx>,
+}
+/* AST_META: AST_ID=52 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_arg_mismatch_indeterminate)]
+pub(crate) struct ArgMismatchIndeterminate {
+    #[primary_span]
+    pub span: Span,
+}
+/* AST_META: AST_ID=53 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=40 */
+
+#[derive(Subdiagnostic)]
+pub(crate) enum SuggestBoxing {
+    #[note(hir_typeck_suggest_boxing_note)]
+    #[multipart_suggestion(
+        hir_typeck_suggest_boxing_when_appropriate,
+        applicability = "machine-applicable"
+    )]
+    Unit {
+        #[suggestion_part(code = "Box::new(())")]
+        start: Span,
+        #[suggestion_part(code = "")]
+        end: Span,
+    },
+    #[note(hir_typeck_suggest_boxing_note)]
+    AsyncBody,
+    #[note(hir_typeck_suggest_boxing_note)]
+    #[multipart_suggestion(
+        hir_typeck_suggest_boxing_when_appropriate,
+        applicability = "machine-applicable"
+    )]
+    ExprFieldShorthand {
+        #[suggestion_part(code = "{ident}: Box::new(")]
+        start: Span,
+        #[suggestion_part(code = ")")]
+        end: Span,
+        ident: Ident,
+    },
+    #[note(hir_typeck_suggest_boxing_note)]
+    #[multipart_suggestion(
+        hir_typeck_suggest_boxing_when_appropriate,
+        applicability = "machine-applicable"
+    )]
+    Other {
+        #[suggestion_part(code = "Box::new(")]
+        start: Span,
+        #[suggestion_part(code = ")")]
+        end: Span,
+    },
+}
+/* AST_META: AST_ID=54 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
+
+#[derive(Subdiagnostic)]
+#[suggestion(
+    hir_typeck_suggest_ptr_null_mut,
+    applicability = "maybe-incorrect",
+    style = "verbose",
+    code = "core::ptr::null_mut()"
+)]
+pub(crate) struct SuggestPtrNullMut {
+    #[primary_span]
+    pub span: Span,
+}
+/* AST_META: AST_ID=55 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+
+#[derive(LintDiagnostic)]
+#[diag(hir_typeck_trivial_cast)]
+#[help]
+pub(crate) struct TrivialCast<'tcx> {
+    pub numeric: bool,
+    pub expr_ty: Ty<'tcx>,
+    pub cast_ty: Ty<'tcx>,
+}
+/* AST_META: AST_ID=56 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+
+pub(crate) struct BreakNonLoop<'a> {
+    pub span: Span,
+    pub head: Option<Span>,
+    pub kind: &'a str,
+    pub suggestion: String,
+    pub loop_label: Option<Label>,
+    pub break_label: Option<Label>,
+    pub break_expr_kind: &'a ExprKind<'a>,
+    pub break_expr_span: Span,
+}
+/* AST_META: AST_ID=57 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=24 | LINES=42 */
+
+impl<'a, G: EmissionGuarantee> Diagnostic<'_, G> for BreakNonLoop<'a> {
+    #[track_caller]
+    fn into_diag(self, dcx: DiagCtxtHandle<'_>, level: Level) -> Diag<'_, G> {
+        let mut diag = Diag::new(dcx, level, fluent::hir_typeck_break_non_loop);
+        diag.span(self.span);
+        diag.code(E0571);
+        diag.arg("kind", self.kind);
+        diag.span_label(self.span, fluent::hir_typeck_label);
+        if let Some(head) = self.head {
+            diag.span_label(head, fluent::hir_typeck_label2);
+        }
+        diag.span_suggestion(
+            self.span,
+            fluent::hir_typeck_suggestion,
+            self.suggestion,
+            Applicability::MaybeIncorrect,
+        );
+        if let (Some(label), None) = (self.loop_label, self.break_label) {
+            match self.break_expr_kind {
+                ExprKind::Path(hir::QPath::Resolved(
+                    None,
+                    hir::Path { segments: [segment], res: hir::def::Res::Err, .. },
+                )) if label.ident.to_string() == format!("'{}", segment.ident) => {
+                    // This error is redundant, we will have already emitted a
+                    // suggestion to use the label when `segment` wasn't found
+                    // (hence the `Res::Err` check).
+                    diag.downgrade_to_delayed_bug();
+                }
+                _ => {
+                    diag.span_suggestion(
+                        self.break_expr_span,
+                        fluent::hir_typeck_break_expr_suggestion,
+                        label.ident,
+                        Applicability::MaybeIncorrect,
+                    );
+                }
+            }
+        }
+        diag
+    }
+}
+/* AST_META: AST_ID=58 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_continue_labeled_block, code = E0696)]
+pub(crate) struct ContinueLabeledBlock {
+    #[primary_span]
+    #[label]
+    pub span: Span,
+    #[label(hir_typeck_block_label)]
+    pub block_span: Span,
+}
+/* AST_META: AST_ID=59 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_break_inside_closure, code = E0267)]
+pub(crate) struct BreakInsideClosure<'a> {
+    #[primary_span]
+    #[label]
+    pub span: Span,
+    #[label(hir_typeck_closure_label)]
+    pub closure_span: Span,
+    pub name: &'a str,
+}
+/* AST_META: AST_ID=60 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_break_inside_coroutine, code = E0267)]
+pub(crate) struct BreakInsideCoroutine<'a> {
+    #[primary_span]
+    #[label]
+    pub span: Span,
+    #[label(hir_typeck_coroutine_label)]
+    pub coroutine_span: Span,
+    pub name: &'a str,
+    pub kind: &'a str,
+    pub source: &'a str,
+}
+/* AST_META: AST_ID=61 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_outside_loop, code = E0268)]
+pub(crate) struct OutsideLoop<'a> {
+    #[primary_span]
+    #[label]
+    pub spans: Vec<Span>,
+    pub name: &'a str,
+    pub is_break: bool,
+    #[subdiagnostic]
+    pub suggestion: Option<OutsideLoopSuggestion>,
+}
+/* AST_META: AST_ID=62 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+#[derive(Subdiagnostic)]
+#[multipart_suggestion(hir_typeck_outside_loop_suggestion, applicability = "maybe-incorrect")]
+pub(crate) struct OutsideLoopSuggestion {
+    #[suggestion_part(code = "'block: ")]
+    pub block_span: Span,
+    #[suggestion_part(code = " 'block")]
+    pub break_spans: Vec<Span>,
+}
+/* AST_META: AST_ID=63 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_unlabeled_in_labeled_block, code = E0695)]
+pub(crate) struct UnlabeledInLabeledBlock<'a> {
+    #[primary_span]
+    #[label]
+    pub span: Span,
+    pub cf_type: &'a str,
+}
+/* AST_META: AST_ID=64 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_unlabeled_cf_in_while_condition, code = E0590)]
+pub(crate) struct UnlabeledCfInWhileCondition<'a> {
+    #[primary_span]
+    #[label]
+    pub span: Span,
+    pub cf_type: &'a str,
+}
+/* AST_META: AST_ID=65 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_no_associated_item, code = E0599)]
+pub(crate) struct NoAssociatedItem<'tcx> {
+    #[primary_span]
+    pub span: Span,
+    pub item_kind: &'static str,
+    pub item_ident: Ident,
+    pub ty_prefix: Cow<'static, str>,
+    pub ty: Ty<'tcx>,
+    pub trait_missing_method: bool,
+}
+/* AST_META: AST_ID=66 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
+
+#[derive(Subdiagnostic)]
+#[note(hir_typeck_candidate_trait_note)]
+pub(crate) struct CandidateTraitNote {
+    #[primary_span]
+    pub span: Span,
+    pub trait_name: String,
+    pub item_name: Ident,
+    pub action_or_ty: String,
+}
+/* AST_META: AST_ID=67 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_cannot_cast_to_bool, code = E0054)]
+pub(crate) struct CannotCastToBool<'tcx> {
+    #[primary_span]
+    pub span: Span,
+    pub expr_ty: Ty<'tcx>,
+    #[subdiagnostic]
+    pub help: CannotCastToBoolHelp,
+}
+/* AST_META: AST_ID=68 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_cast_enum_drop)]
+pub(crate) struct CastEnumDrop<'tcx> {
+    #[primary_span]
+    pub span: Span,
+    pub expr_ty: Ty<'tcx>,
+    pub cast_ty: Ty<'tcx>,
+}
+/* AST_META: AST_ID=69 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_cast_unknown_pointer, code = E0641)]
+pub(crate) struct CastUnknownPointer {
+    #[primary_span]
+    pub span: Span,
+    pub to: bool,
+    #[subdiagnostic]
+    pub sub: CastUnknownPointerSub,
+}
+/* AST_META: AST_ID=70 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+
+pub(crate) enum CastUnknownPointerSub {
+    To(Span),
+    From(Span),
+}
+/* AST_META: AST_ID=71 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=12 | LINES=17 */
+
+impl crate::rustc_errors::Subdiagnostic for CastUnknownPointerSub {
+    fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
+        match self {
+            CastUnknownPointerSub::To(span) => {
+                let msg = diag.eagerly_translate(fluent::hir_typeck_label_to);
+                diag.span_label(span, msg);
+                let msg = diag.eagerly_translate(fluent::hir_typeck_note);
+                diag.note(msg);
+            }
+            CastUnknownPointerSub::From(span) => {
+                let msg = diag.eagerly_translate(fluent::hir_typeck_label_from);
+                diag.span_label(span, msg);
+            }
+        }
+    }
+}
+/* AST_META: AST_ID=72 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
+
+#[derive(Subdiagnostic)]
+pub(crate) enum CannotCastToBoolHelp {
+    #[suggestion(
+        hir_typeck_suggestion,
+        applicability = "machine-applicable",
+        code = " != 0",
+        style = "verbose"
+    )]
+    Numeric(#[primary_span] Span),
+    #[label(hir_typeck_label)]
+    Unsupported(#[primary_span] Span),
+}
+/* AST_META: AST_ID=73 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_ctor_is_private, code = E0603)]
+pub(crate) struct CtorIsPrivate {
+    #[primary_span]
+    pub span: Span,
+    pub def: String,
+}
+/* AST_META: AST_ID=74 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Subdiagnostic)]
+#[note(hir_typeck_deref_is_empty)]
+pub(crate) struct DerefImplsIsEmpty<'tcx> {
+    #[primary_span]
+    pub span: Span,
+    pub deref_ty: Ty<'tcx>,
+}
+/* AST_META: AST_ID=75 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=16 */
+
+#[derive(Subdiagnostic)]
+#[multipart_suggestion(
+    hir_typeck_convert_using_method,
+    applicability = "machine-applicable",
+    style = "verbose"
+)]
+pub(crate) struct SuggestConvertViaMethod<'tcx> {
+    #[suggestion_part(code = "{sugg}")]
+    pub span: Span,
+    #[suggestion_part(code = "")]
+    pub borrow_removal_span: Option<Span>,
+    pub sugg: String,
+    pub expected: Ty<'tcx>,
+    pub found: Ty<'tcx>,
+}
+/* AST_META: AST_ID=76 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Subdiagnostic)]
+#[note(hir_typeck_note_caller_chooses_ty_for_ty_param)]
+pub(crate) struct NoteCallerChoosesTyForTyParam<'tcx> {
+    pub ty_param_name: Symbol,
+    pub found_ty: Ty<'tcx>,
+}
+/* AST_META: AST_ID=77 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=18 */
+
+#[derive(Subdiagnostic)]
+pub(crate) enum SuggestBoxingForReturnImplTrait {
+    #[multipart_suggestion(hir_typeck_rpit_change_return_type, applicability = "maybe-incorrect")]
+    ChangeReturnType {
+        #[suggestion_part(code = "Box<dyn")]
+        start_sp: Span,
+        #[suggestion_part(code = ">")]
+        end_sp: Span,
+    },
+    #[multipart_suggestion(hir_typeck_rpit_box_return_expr, applicability = "maybe-incorrect")]
+    BoxReturnExpr {
+        #[suggestion_part(code = "Box::new(")]
+        starts: Vec<Span>,
+        #[suggestion_part(code = ")")]
+        ends: Vec<Span>,
+    },
+}
+/* AST_META: AST_ID=78 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_self_ctor_from_outer_item, code = E0401)]
+pub(crate) struct SelfCtorFromOuterItem {
+    #[primary_span]
+    pub span: Span,
+    #[label]
+    pub impl_span: Span,
+    #[subdiagnostic]
+    pub sugg: Option<ReplaceWithName>,
+}
+/* AST_META: AST_ID=79 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+
+#[derive(LintDiagnostic)]
+#[diag(hir_typeck_self_ctor_from_outer_item)]
+pub(crate) struct SelfCtorFromOuterItemLint {
+    #[label]
+    pub impl_span: Span,
+    #[subdiagnostic]
+    pub sugg: Option<ReplaceWithName>,
+}
+/* AST_META: AST_ID=80 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
+
+#[derive(Subdiagnostic)]
+#[suggestion(hir_typeck_suggestion, code = "{name}", applicability = "machine-applicable")]
+pub(crate) struct ReplaceWithName {
+    #[primary_span]
+    pub span: Span,
+    pub name: String,
+}
+/* AST_META: AST_ID=81 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_cast_thin_pointer_to_wide_pointer, code = E0607)]
+pub(crate) struct CastThinPointerToWidePointer<'tcx> {
+    #[primary_span]
+    pub span: Span,
+    pub expr_ty: Ty<'tcx>,
+    pub cast_ty: Ty<'tcx>,
+    #[note(hir_typeck_teach_help)]
+    pub(crate) teach: bool,
+}
+/* AST_META: AST_ID=82 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=13 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_pass_to_variadic_function, code = E0617)]
+pub(crate) struct PassToVariadicFunction<'a, 'tcx> {
+    #[primary_span]
+    pub span: Span,
+    pub ty: Ty<'tcx>,
+    pub cast_ty: &'a str,
+    #[suggestion(code = " as {cast_ty}", applicability = "machine-applicable", style = "verbose")]
+    pub sugg_span: Span,
+    #[note(hir_typeck_teach_help)]
+    pub(crate) teach: bool,
+}
+/* AST_META: AST_ID=83 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=12 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_fn_item_to_variadic_function, code = E0617)]
+#[help]
+#[note]
+pub(crate) struct PassFnItemToVariadicFunction {
+    #[primary_span]
+    pub span: Span,
+    #[suggestion(code = " as {replace}", applicability = "machine-applicable", style = "verbose")]
+    pub sugg_span: Span,
+    pub replace: String,
+}
+/* AST_META: AST_ID=84 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=13 */
+
+#[derive(Subdiagnostic)]
+#[suggestion(
+    hir_typeck_replace_comma_with_semicolon,
+    applicability = "machine-applicable",
+    style = "verbose",
+    code = "; "
+)]
+pub(crate) struct ReplaceCommaWithSemicolon {
+    #[primary_span]
+    pub comma_span: Span,
+    pub descr: &'static str,
+}
+/* AST_META: AST_ID=85 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+
+#[derive(LintDiagnostic)]
+#[diag(hir_typeck_supertrait_item_shadowing)]
+pub(crate) struct SupertraitItemShadowing {
+    pub item: Symbol,
+    pub subtrait: Symbol,
+    #[subdiagnostic]
+    pub shadower: SupertraitItemShadower,
+    #[subdiagnostic]
+    pub shadowee: SupertraitItemShadowee,
+}
+/* AST_META: AST_ID=86 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Subdiagnostic)]
+#[note(hir_typeck_supertrait_item_shadower)]
+pub(crate) struct SupertraitItemShadower {
+    pub subtrait: Symbol,
+    #[primary_span]
+    pub span: Span,
+}
+/* AST_META: AST_ID=87 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=16 */
+
+#[derive(Subdiagnostic)]
+pub(crate) enum SupertraitItemShadowee {
+    #[note(hir_typeck_supertrait_item_shadowee)]
+    Labeled {
+        #[primary_span]
+        span: Span,
+        supertrait: Symbol,
+    },
+    #[note(hir_typeck_supertrait_item_multiple_shadowee)]
+    Several {
+        #[primary_span]
+        spans: MultiSpan,
+        traits: DiagSymbolList,
+    },
+}
+/* AST_META: AST_ID=88 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_register_type_unstable)]
+pub(crate) struct RegisterTypeUnstable<'a> {
+    #[primary_span]
+    pub span: Span,
+    pub ty: Ty<'a>,
+}
+/* AST_META: AST_ID=89 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_naked_asm_outside_naked_fn)]
+pub(crate) struct NakedAsmOutsideNakedFn {
+    #[primary_span]
+    pub span: Span,
+}
+/* AST_META: AST_ID=90 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_no_patterns)]
+pub(crate) struct NoPatterns {
+    #[primary_span]
+    pub span: Span,
+}
+/* AST_META: AST_ID=91 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_params_not_allowed)]
+#[help]
+pub(crate) struct ParamsNotAllowed {
+    #[primary_span]
+    pub span: Span,
+}
+/* AST_META: AST_ID=92 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+
+pub(crate) struct NakedFunctionsAsmBlock {
+    pub span: Span,
+    pub multiple_asms: Vec<Span>,
+    pub non_asms: Vec<Span>,
+}
+/* AST_META: AST_ID=93 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=12 | LINES=16 */
+
+impl<G: EmissionGuarantee> Diagnostic<'_, G> for NakedFunctionsAsmBlock {
+    #[track_caller]
+    fn into_diag(self, dcx: DiagCtxtHandle<'_>, level: Level) -> Diag<'_, G> {
+        let mut diag = Diag::new(dcx, level, fluent::hir_typeck_naked_functions_asm_block);
+        diag.span(self.span);
+        diag.code(E0787);
+        for span in self.multiple_asms.iter() {
+            diag.span_label(*span, fluent::hir_typeck_label_multiple_asm);
+        }
+        for span in self.non_asms.iter() {
+            diag.span_label(*span, fluent::hir_typeck_label_non_asm);
+        }
+        diag
+    }
+}
+/* AST_META: AST_ID=94 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_naked_functions_must_naked_asm, code = E0787)]
+pub(crate) struct NakedFunctionsMustNakedAsm {
+    #[primary_span]
+    #[label]
+    pub span: Span,
+}
+/* AST_META: AST_ID=95 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_abi_cannot_be_called)]
+pub(crate) struct AbiCannotBeCalled {
+    #[primary_span]
+    #[note]
+    pub span: Span,
+    pub abi: ExternAbi,
+}
+/* AST_META: AST_ID=96 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(hir_typeck_const_continue_bad_label)]
+pub(crate) struct ConstContinueBadLabel {
+    #[primary_span]
+    pub span: Span,
+}

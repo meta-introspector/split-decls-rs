@@ -1,22 +1,223 @@
-/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_inhabitedness_mod_USE_0001
-/* FP:mod.rs-0002 */ use rustc_type_ir :: TyKind :: * ;
-/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_inhabitedness_mod_USE_0002
-/* FP:mod.rs-0004 */ use tracing :: instrument ;
-/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_inhabitedness_mod_USE_0003
-/* FP:mod.rs-0006 */ use crate :: query :: Providers ;
-/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_inhabitedness_mod_USE_0004
-/* FP:mod.rs-0008 */ use crate :: ty :: context :: TyCtxt ;
-/* FP:mod.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_inhabitedness_mod_USE_0005
-/* FP:mod.rs-0010 */ use crate :: ty :: { self , DefId , Ty , TypeVisitableExt , VariantDef , Visibility } ;
-/* FP:mod.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_inhabitedness_mod_MOD_0006
-/* FP:mod.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_inhabitedness_mod_USE_0007
-/* FP:mod.rs-0014 */ pub use inhabited_predicate :: InhabitedPredicate ;
-/* FP:mod.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_inhabitedness_mod_FN_0008
-/* FP:mod.rs-0016 */ pub (crate) fn provide (providers : & mut Providers) { * providers = Providers { inhabited_predicate_adt , inhabited_predicate_type , .. * providers } ; }
-/* FP:mod.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_inhabitedness_mod_FN_0009
-/* FP:mod.rs-0018 */ # [doc = " Returns an `InhabitedPredicate` that is generic over type parameters and"] # [doc = " requires calling [`InhabitedPredicate::instantiate`]"] fn inhabited_predicate_adt (tcx : TyCtxt < '_ > , def_id : DefId) -> InhabitedPredicate < '_ > { if let Some (def_id) = def_id . as_local () { if matches ! (tcx . representability (def_id) , ty :: Representability :: Infinite (_)) { return InhabitedPredicate :: True ; } } let adt = tcx . adt_def (def_id) ; InhabitedPredicate :: any (tcx , adt . variants () . iter () . map (| variant | variant . inhabited_predicate (tcx , adt)) ,) }
-/* FP:mod.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_inhabitedness_mod_IMPL_0010
-/* FP:mod.rs-0020 */ impl < 'tcx > VariantDef { # [doc = " Calculates the forest of `DefId`s from which this variant is visibly uninhabited."] pub fn inhabited_predicate (& self , tcx : TyCtxt < 'tcx > , adt : ty :: AdtDef < '_ > ,) -> InhabitedPredicate < 'tcx > { debug_assert ! (! adt . is_union ()) ; InhabitedPredicate :: all (tcx , self . fields . iter () . map (| field | { let pred = tcx . type_of (field . did) . instantiate_identity () . inhabited_predicate (tcx) ; if adt . is_enum () { return pred ; } match field . vis { Visibility :: Public => pred , Visibility :: Restricted (from) => { pred . or (tcx , InhabitedPredicate :: NotInModule (from)) } } }) ,) } }
-/* FP:mod.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_inhabitedness_mod_IMPL_0011
-/* FP:mod.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_inhabitedness_mod_FN_0012
-/* FP:mod.rs-0024 */ # [doc = " N.B. this query should only be called through `Ty::inhabited_predicate`"] fn inhabited_predicate_type < 'tcx > (tcx : TyCtxt < 'tcx > , ty : Ty < 'tcx >) -> InhabitedPredicate < 'tcx > { match * ty . kind () { Adt (adt , args) => tcx . inhabited_predicate_adt (adt . did ()) . instantiate (tcx , args) , Tuple (tys) => { InhabitedPredicate :: all (tcx , tys . iter () . map (| ty | ty . inhabited_predicate (tcx))) } Array (ty , len) => match len . try_to_target_usize (tcx) { Some (0) => InhabitedPredicate :: True , Some (1 ..) => ty . inhabited_predicate (tcx) , None => ty . inhabited_predicate (tcx) . or (tcx , InhabitedPredicate :: ConstIsZero (len)) , } , _ => bug ! ("unexpected TyKind, use `Ty::inhabited_predicate`") , } }
+// SRC: ../rust/compiler/rustc_middle/src/ty/inhabitedness/mod.rs
+/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=15 */
+// This module contains logic for determining whether a type is inhabited or
+// uninhabited. The [`InhabitedPredicate`] type captures the minimum
+// information needed to determine whether a type is inhabited given a
+// `ParamEnv` and module ID.
+//
+// # Example
+// ```rust
+// #[feature(never_type)]
+// mod a {
+//     pub mod b {
+//         pub struct SecretlyUninhabited {
+//             _priv: !,
+//         }
+//     }
+// }
+/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=9 */
+//
+// mod c {
+//     enum Void {}
+//     pub struct AlsoSecretlyUninhabited {
+//         _priv: Void,
+//     }
+//     mod d {
+//     }
+// }
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+//
+// struct Foo {
+//     x: a::b::SecretlyUninhabited,
+//     y: c::AlsoSecretlyUninhabited,
+// }
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
+// ```
+// In this code, the type `Foo` will only be visibly uninhabited inside the
+// modules `b`, `c` and `d`. Calling `inhabited_predicate` on `Foo` will
+// return `NotInModule(b) AND NotInModule(c)`.
+//
+// We need this information for pattern-matching on `Foo` or types that contain
+// `Foo`.
+//
+// # Example
+// ```ignore(illustrative)
+// let foo_result: Result<T, Foo> = ... ;
+// let Ok(t) = foo_result;
+// ```
+// This code should only compile in modules where the uninhabitedness of `Foo`
+// is visible.
+
+use rustc_type_ir::TyKind::*;
+use tracing::instrument;
+
+use crate::query::Providers;
+use crate::ty::context::TyCtxt;
+use crate::ty::{self, DefId, Ty, TypeVisitableExt, VariantDef, Visibility};
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=8 */
+
+
+pub use inhabited_predicate::InhabitedPredicate;
+
+pub(crate) fn provide(providers: &mut Providers) {
+    *providers = Providers { inhabited_predicate_adt, inhabited_predicate_type, ..*providers };
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=inhabited_predicate_adt | COMPLEXITY=9 | LINES=15 */
+
+/// Returns an `InhabitedPredicate` that is generic over type parameters and
+/// requires calling [`InhabitedPredicate::instantiate`]
+fn inhabited_predicate_adt(tcx: TyCtxt<'_>, def_id: DefId) -> InhabitedPredicate<'_> {
+    if let Some(def_id) = def_id.as_local() {
+        if matches!(tcx.representability(def_id), ty::Representability::Infinite(_)) {
+            return InhabitedPredicate::True;
+        }
+    }
+    let adt = tcx.adt_def(def_id);
+    InhabitedPredicate::any(
+        tcx,
+        adt.variants().iter().map(|variant| variant.inhabited_predicate(tcx, adt)),
+    )
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=inhabited_predicate | COMPLEXITY=13 | LINES=26 */
+
+impl<'tcx> VariantDef {
+    /// Calculates the forest of `DefId`s from which this variant is visibly uninhabited.
+    pub fn inhabited_predicate(
+        &self,
+        tcx: TyCtxt<'tcx>,
+        adt: ty::AdtDef<'_>,
+    ) -> InhabitedPredicate<'tcx> {
+        debug_assert!(!adt.is_union());
+        InhabitedPredicate::all(
+            tcx,
+            self.fields.iter().map(|field| {
+                let pred = tcx.type_of(field.did).instantiate_identity().inhabited_predicate(tcx);
+                if adt.is_enum() {
+                    return pred;
+                }
+                match field.vis {
+                    Visibility::Public => pred,
+                    Visibility::Restricted(from) => {
+                        pred.or(tcx, InhabitedPredicate::NotInModule(from))
+                    }
+                }
+            }),
+        )
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=inhabited_predicate | COMPLEXITY=43 | LINES=93 */
+
+impl<'tcx> Ty<'tcx> {
+    #[instrument(level = "debug", skip(tcx), ret)]
+    pub fn inhabited_predicate(self, tcx: TyCtxt<'tcx>) -> InhabitedPredicate<'tcx> {
+        debug_assert!(!self.has_infer());
+        match self.kind() {
+            // For now, unions are always considered inhabited
+            Adt(adt, _) if adt.is_union() => InhabitedPredicate::True,
+            // Non-exhaustive ADTs from other crates are always considered inhabited
+            Adt(adt, _) if adt.variant_list_has_applicable_non_exhaustive() => {
+                InhabitedPredicate::True
+            }
+            Never => InhabitedPredicate::False,
+            Param(_) | Alias(ty::Inherent | ty::Projection | ty::Free, _) => {
+                InhabitedPredicate::GenericType(self)
+            }
+            Alias(ty::Opaque, alias_ty) => {
+                match alias_ty.def_id.as_local() {
+                    // Foreign opaque is considered inhabited.
+                    None => InhabitedPredicate::True,
+                    // Local opaque type may possibly be revealed.
+                    Some(local_def_id) => {
+                        let key = ty::OpaqueTypeKey { def_id: local_def_id, args: alias_ty.args };
+                        InhabitedPredicate::OpaqueType(key)
+                    }
+                }
+            }
+            Tuple(tys) if tys.is_empty() => InhabitedPredicate::True,
+            // use a query for more complex cases
+            Adt(..) | Array(..) | Tuple(_) => tcx.inhabited_predicate_type(self),
+            // references and other types are inhabited
+            _ => InhabitedPredicate::True,
+        }
+    }
+
+    /// Checks whether a type is visibly uninhabited from a particular module.
+    ///
+    /// # Example
+    /// ```
+    /// #[feature(never_type)]
+    /// # fn main() {}
+    /// enum Void {}
+    /// mod a {
+    ///     pub mod b {
+    ///         pub struct SecretlyUninhabited {
+    ///             _priv: !,
+    ///         }
+    ///     }
+    /// }
+    ///
+    /// mod c {
+    ///     use super::Void;
+    ///     pub struct AlsoSecretlyUninhabited {
+    ///         _priv: Void,
+    ///     }
+    ///     mod d {
+    ///     }
+    /// }
+    ///
+    /// struct Foo {
+    ///     x: a::b::SecretlyUninhabited,
+    ///     y: c::AlsoSecretlyUninhabited,
+    /// }
+    /// ```
+    /// In this code, the type `Foo` will only be visibly uninhabited inside the
+    /// modules b, c and d. This effects pattern-matching on `Foo` or types that
+    /// contain `Foo`.
+    ///
+    /// # Example
+    /// ```ignore (illustrative)
+    /// let foo_result: Result<T, Foo> = ... ;
+    /// let Ok(t) = foo_result;
+    /// ```
+    /// This code should only compile in modules where the uninhabitedness of Foo is
+    /// visible.
+    pub fn is_inhabited_from(
+        self,
+        tcx: TyCtxt<'tcx>,
+        module: DefId,
+        typing_env: ty::TypingEnv<'tcx>,
+    ) -> bool {
+        self.inhabited_predicate(tcx).apply(tcx, typing_env, module)
+    }
+
+    /// Returns true if the type is uninhabited without regard to visibility
+    pub fn is_privately_uninhabited(
+        self,
+        tcx: TyCtxt<'tcx>,
+        typing_env: ty::TypingEnv<'tcx>,
+    ) -> bool {
+        !self.inhabited_predicate(tcx).apply_ignore_module(tcx, typing_env)
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=inhabited_predicate_type | COMPLEXITY=12 | LINES=21 */
+
+/// N.B. this query should only be called through `Ty::inhabited_predicate`
+fn inhabited_predicate_type<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> InhabitedPredicate<'tcx> {
+    match *ty.kind() {
+        Adt(adt, args) => tcx.inhabited_predicate_adt(adt.did()).instantiate(tcx, args),
+
+        Tuple(tys) => {
+            InhabitedPredicate::all(tcx, tys.iter().map(|ty| ty.inhabited_predicate(tcx)))
+        }
+
+        // If we can evaluate the array length before having a `ParamEnv`, then
+        // we can simplify the predicate. This is an optimization.
+        Array(ty, len) => match len.try_to_target_usize(tcx) {
+            Some(0) => InhabitedPredicate::True,
+            Some(1..) => ty.inhabited_predicate(tcx),
+            None => ty.inhabited_predicate(tcx).or(tcx, InhabitedPredicate::ConstIsZero(len)),
+        },
+
+        _ => bug!("unexpected TyKind, use `Ty::inhabited_predicate`"),
+    }
+}

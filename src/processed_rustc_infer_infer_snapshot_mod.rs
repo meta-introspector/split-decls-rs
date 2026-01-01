@@ -1,20 +1,127 @@
-/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_mod_USE_0001
-/* FP:mod.rs-0002 */ use crate :: rustc_data_structures :: undo_log :: UndoLogs ;
-/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_mod_USE_0002
-/* FP:mod.rs-0004 */ use crate :: rustc_complete :: ty ;
-/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_mod_USE_0003
-/* FP:mod.rs-0006 */ use tracing :: { debug , instrument } ;
-/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_mod_USE_0004
-/* FP:mod.rs-0008 */ use super :: InferCtxt ;
-/* FP:mod.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_mod_USE_0005
-/* FP:mod.rs-0010 */ use super :: region_constraints :: RegionSnapshot ;
-/* FP:mod.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_mod_MOD_0006
-/* FP:mod.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_mod_MOD_0007
-/* FP:mod.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_mod_USE_0008
-/* FP:mod.rs-0016 */ use undo_log :: { Snapshot , UndoLog } ;
-/* FP:mod.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_mod_STRUCT_0009
-/* FP:mod.rs-0018 */ # [must_use = "once you start a snapshot, you should always consume it"] pub struct CombinedSnapshot < 'tcx > { pub (super) undo_snapshot : Snapshot < 'tcx > , region_constraints_snapshot : RegionSnapshot , universe : ty :: UniverseIndex , }
-/* FP:mod.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_mod_STRUCT_0010
-/* FP:mod.rs-0020 */ struct VariableLengths { region_constraints_len : usize , type_var_len : usize , int_var_len : usize , float_var_len : usize , const_var_len : usize , }
-/* FP:mod.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_snapshot_mod_IMPL_0011
-/* FP:mod.rs-0022 */ impl < 'tcx > InferCtxt < 'tcx > { fn variable_lengths (& self) -> VariableLengths { let mut inner = self . inner . borrow_mut () ; VariableLengths { region_constraints_len : inner . unwrap_region_constraints () . num_region_vars () , type_var_len : inner . type_variables () . num_vars () , int_var_len : inner . int_unification_table () . len () , float_var_len : inner . float_unification_table () . len () , const_var_len : inner . const_unification_table () . len () , } } pub fn in_snapshot (& self) -> bool { UndoLogs :: < UndoLog < 'tcx > > :: in_snapshot (& self . inner . borrow_mut () . undo_log) } pub fn num_open_snapshots (& self) -> usize { UndoLogs :: < UndoLog < 'tcx > > :: num_open_snapshots (& self . inner . borrow_mut () . undo_log) } fn start_snapshot (& self) -> CombinedSnapshot < 'tcx > { debug ! ("start_snapshot()") ; let mut inner = self . inner . borrow_mut () ; CombinedSnapshot { undo_snapshot : inner . undo_log . start_snapshot () , region_constraints_snapshot : inner . unwrap_region_constraints () . start_snapshot () , universe : self . universe () , } } # [instrument (skip (self , snapshot) , level = "debug")] fn rollback_to (& self , snapshot : CombinedSnapshot < 'tcx >) { let CombinedSnapshot { undo_snapshot , region_constraints_snapshot , universe } = snapshot ; self . universe . set (universe) ; let mut inner = self . inner . borrow_mut () ; inner . rollback_to (undo_snapshot) ; inner . unwrap_region_constraints () . rollback_to (region_constraints_snapshot) ; } # [instrument (skip (self , snapshot) , level = "debug")] fn commit_from (& self , snapshot : CombinedSnapshot < 'tcx >) { let CombinedSnapshot { undo_snapshot , region_constraints_snapshot : _ , universe : _ } = snapshot ; self . inner . borrow_mut () . commit (undo_snapshot) ; } # [doc = " Execute `f` and commit the bindings if closure `f` returns `Ok(_)`."] # [instrument (skip (self , f) , level = "debug")] pub fn commit_if_ok < T , E , F > (& self , f : F) -> Result < T , E > where F : FnOnce (& CombinedSnapshot < 'tcx >) -> Result < T , E > , { let snapshot = self . start_snapshot () ; let r = f (& snapshot) ; debug ! ("commit_if_ok() -- r.is_ok() = {}" , r . is_ok ()) ; match r { Ok (_) => { self . commit_from (snapshot) ; } Err (_) => { self . rollback_to (snapshot) ; } } r } # [doc = " Execute `f` then unroll any bindings it creates."] # [instrument (skip (self , f) , level = "debug")] pub fn probe < R , F > (& self , f : F) -> R where F : FnOnce (& CombinedSnapshot < 'tcx >) -> R , { let snapshot = self . start_snapshot () ; let r = f (& snapshot) ; self . rollback_to (snapshot) ; r } # [doc = " Scan the constraints produced since `snapshot` and check whether"] # [doc = " we added any region constraints."] pub fn region_constraints_added_in_snapshot (& self , snapshot : & CombinedSnapshot < 'tcx >) -> bool { self . inner . borrow_mut () . unwrap_region_constraints () . region_constraints_added_in_snapshot (& snapshot . undo_snapshot) } pub fn opaque_types_added_in_snapshot (& self , snapshot : & CombinedSnapshot < 'tcx >) -> bool { self . inner . borrow () . undo_log . opaque_types_in_snapshot (& snapshot . undo_snapshot) } }
+// SRC: ../rust/compiler/rustc_infer/src/infer/snapshot/mod.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_data_structures::undo_log::UndoLogs;
+use crate::rustc_complete::ty;
+use tracing::{debug, instrument};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+
+use super::InferCtxt;
+use super::region_constraints::RegionSnapshot;
+
+
+use undo_log::{Snapshot, UndoLog};
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=CombinedSnapshot | COMPLEXITY=2 | LINES=7 */
+
+#[must_use = "once you start a snapshot, you should always consume it"]
+pub struct CombinedSnapshot<'tcx> {
+    pub(super) undo_snapshot: Snapshot<'tcx>,
+    region_constraints_snapshot: RegionSnapshot,
+    universe: ty::UniverseIndex,
+}
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=VariableLengths | COMPLEXITY=2 | LINES=8 */
+
+struct VariableLengths {
+    region_constraints_len: usize,
+    type_var_len: usize,
+    int_var_len: usize,
+    float_var_len: usize,
+    const_var_len: usize,
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=variable_lengths | COMPLEXITY=31 | LINES=97 */
+
+impl<'tcx> InferCtxt<'tcx> {
+    fn variable_lengths(&self) -> VariableLengths {
+        let mut inner = self.inner.borrow_mut();
+        VariableLengths {
+            region_constraints_len: inner.unwrap_region_constraints().num_region_vars(),
+            type_var_len: inner.type_variables().num_vars(),
+            int_var_len: inner.int_unification_table().len(),
+            float_var_len: inner.float_unification_table().len(),
+            const_var_len: inner.const_unification_table().len(),
+        }
+    }
+
+    pub fn in_snapshot(&self) -> bool {
+        UndoLogs::<UndoLog<'tcx>>::in_snapshot(&self.inner.borrow_mut().undo_log)
+    }
+
+    pub fn num_open_snapshots(&self) -> usize {
+        UndoLogs::<UndoLog<'tcx>>::num_open_snapshots(&self.inner.borrow_mut().undo_log)
+    }
+
+    fn start_snapshot(&self) -> CombinedSnapshot<'tcx> {
+        debug!("start_snapshot()");
+
+        let mut inner = self.inner.borrow_mut();
+
+        CombinedSnapshot {
+            undo_snapshot: inner.undo_log.start_snapshot(),
+            region_constraints_snapshot: inner.unwrap_region_constraints().start_snapshot(),
+            universe: self.universe(),
+        }
+    }
+
+    #[instrument(skip(self, snapshot), level = "debug")]
+    fn rollback_to(&self, snapshot: CombinedSnapshot<'tcx>) {
+        let CombinedSnapshot { undo_snapshot, region_constraints_snapshot, universe } = snapshot;
+
+        self.universe.set(universe);
+
+        let mut inner = self.inner.borrow_mut();
+        inner.rollback_to(undo_snapshot);
+        inner.unwrap_region_constraints().rollback_to(region_constraints_snapshot);
+    }
+
+    #[instrument(skip(self, snapshot), level = "debug")]
+    fn commit_from(&self, snapshot: CombinedSnapshot<'tcx>) {
+        let CombinedSnapshot { undo_snapshot, region_constraints_snapshot: _, universe: _ } =
+            snapshot;
+
+        self.inner.borrow_mut().commit(undo_snapshot);
+    }
+
+    /// Execute `f` and commit the bindings if closure `f` returns `Ok(_)`.
+    #[instrument(skip(self, f), level = "debug")]
+    pub fn commit_if_ok<T, E, F>(&self, f: F) -> Result<T, E>
+    where
+        F: FnOnce(&CombinedSnapshot<'tcx>) -> Result<T, E>,
+    {
+        let snapshot = self.start_snapshot();
+        let r = f(&snapshot);
+        debug!("commit_if_ok() -- r.is_ok() = {}", r.is_ok());
+        match r {
+            Ok(_) => {
+                self.commit_from(snapshot);
+            }
+            Err(_) => {
+                self.rollback_to(snapshot);
+            }
+        }
+        r
+    }
+
+    /// Execute `f` then unroll any bindings it creates.
+    #[instrument(skip(self, f), level = "debug")]
+    pub fn probe<R, F>(&self, f: F) -> R
+    where
+        F: FnOnce(&CombinedSnapshot<'tcx>) -> R,
+    {
+        let snapshot = self.start_snapshot();
+        let r = f(&snapshot);
+        self.rollback_to(snapshot);
+        r
+    }
+
+    /// Scan the constraints produced since `snapshot` and check whether
+    /// we added any region constraints.
+    pub fn region_constraints_added_in_snapshot(&self, snapshot: &CombinedSnapshot<'tcx>) -> bool {
+        self.inner
+            .borrow_mut()
+            .unwrap_region_constraints()
+            .region_constraints_added_in_snapshot(&snapshot.undo_snapshot)
+    }
+
+    pub fn opaque_types_added_in_snapshot(&self, snapshot: &CombinedSnapshot<'tcx>) -> bool {
+        self.inner.borrow().undo_log.opaque_types_in_snapshot(&snapshot.undo_snapshot)
+    }
+}

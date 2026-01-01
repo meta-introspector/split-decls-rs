@@ -1,46 +1,338 @@
-/* FP:pat.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_USE_0001
-/* FP:pat.rs-0002 */ use std :: fmt ;
-/* FP:pat.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_USE_0002
-/* FP:pat.rs-0004 */ use smallvec :: { SmallVec , smallvec } ;
-/* FP:pat.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_USE_0003
-/* FP:pat.rs-0006 */ use self :: Constructor :: * ;
-/* FP:pat.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_USE_0004
-/* FP:pat.rs-0008 */ use crate :: constructor :: { Constructor , Slice , SliceKind } ;
-/* FP:pat.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_USE_0005
-/* FP:pat.rs-0010 */ use crate :: { PatCx , PrivateUninhabitedField } ;
-/* FP:pat.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_STRUCT_0006
-/* FP:pat.rs-0012 */ # [doc = " A globally unique id to distinguish patterns."] # [derive (Copy , Clone , Debug , PartialEq , Eq , PartialOrd , Ord , Hash)] pub (crate) struct PatId (u32) ;
-/* FP:pat.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_IMPL_0007
-/* FP:pat.rs-0014 */ impl PatId { fn new () -> Self { use std :: sync :: atomic :: { AtomicU32 , Ordering } ; static PAT_ID : AtomicU32 = AtomicU32 :: new (0) ; PatId (PAT_ID . fetch_add (1 , Ordering :: SeqCst)) } }
-/* FP:pat.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_STRUCT_0008
-/* FP:pat.rs-0016 */ # [doc = " A pattern with an index denoting which field it corresponds to."] pub struct IndexedPat < Cx : PatCx > { pub idx : usize , pub pat : DeconstructedPat < Cx > , }
-/* FP:pat.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_STRUCT_0009
-/* FP:pat.rs-0018 */ # [doc = " Values and patterns can be represented as a constructor applied to some fields. This represents"] # [doc = " a pattern in this form. A `DeconstructedPat` will almost always come from user input; the only"] # [doc = " exception are some `Wildcard`s introduced during pattern lowering."] pub struct DeconstructedPat < Cx : PatCx > { ctor : Constructor < Cx > , fields : Vec < IndexedPat < Cx > > , # [doc = " The number of fields in this pattern. E.g. if the pattern is `SomeStruct { field12: true, .."] # [doc = " }` this would be the total number of fields of the struct."] # [doc = " This is also the same as `self.ctor.arity(self.ty)`."] arity : usize , ty : Cx :: Ty , # [doc = " Extra data to store in a pattern."] data : Cx :: PatData , # [doc = " Globally-unique id used to track usefulness at the level of subpatterns."] pub (crate) uid : PatId , }
-/* FP:pat.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_IMPL_0010
-/* FP:pat.rs-0020 */ impl < Cx : PatCx > DeconstructedPat < Cx > { pub fn new (ctor : Constructor < Cx > , fields : Vec < IndexedPat < Cx > > , arity : usize , ty : Cx :: Ty , data : Cx :: PatData ,) -> Self { DeconstructedPat { ctor , fields , arity , ty , data , uid : PatId :: new () } } pub fn at_index (self , idx : usize) -> IndexedPat < Cx > { IndexedPat { idx , pat : self } } pub (crate) fn is_or_pat (& self) -> bool { matches ! (self . ctor , Or) } pub fn ctor (& self) -> & Constructor < Cx > { & self . ctor } pub fn ty (& self) -> & Cx :: Ty { & self . ty } # [doc = " Returns the extra data stored in a pattern."] pub fn data (& self) -> & Cx :: PatData { & self . data } pub fn arity (& self) -> usize { self . arity } pub fn iter_fields < 'a > (& 'a self) -> impl Iterator < Item = & 'a IndexedPat < Cx > > { self . fields . iter () } # [doc = " Specialize this pattern with a constructor."] # [doc = " `other_ctor` can be different from `self.ctor`, but must be covered by it."] pub (crate) fn specialize < 'a > (& 'a self , other_ctor : & Constructor < Cx > , other_ctor_arity : usize ,) -> SmallVec < [PatOrWild < 'a , Cx > ; 2] > { if matches ! (other_ctor , PrivateUninhabited) { return smallvec ! [] ; } let mut fields : SmallVec < [_ ; 2] > = (0 .. other_ctor_arity) . map (| _ | PatOrWild :: Wild) . collect () ; match self . ctor { Slice (Slice { kind : SliceKind :: VarLen (prefix , _) , .. }) if self . arity != other_ctor_arity => { for ipat in & self . fields { let new_idx = if ipat . idx < prefix { ipat . idx } else { ipat . idx + other_ctor_arity - self . arity } ; fields [new_idx] = PatOrWild :: Pat (& ipat . pat) ; } } _ => { for ipat in & self . fields { fields [ipat . idx] = PatOrWild :: Pat (& ipat . pat) ; } } } fields } # [doc = " Walk top-down and call `it` in each place where a pattern occurs"] # [doc = " starting with the root pattern `walk` is called on. If `it` returns"] # [doc = " false then we will descend no further but siblings will be processed."] pub fn walk < 'a > (& 'a self , it : & mut impl FnMut (& 'a Self) -> bool) { if ! it (self) { return ; } for p in self . iter_fields () { p . pat . walk (it) } } }
-/* FP:pat.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_IMPL_0011
-/* FP:pat.rs-0022 */ # [doc = " This is best effort and not good enough for a `Display` impl."] impl < Cx : PatCx > fmt :: Debug for DeconstructedPat < Cx > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let mut fields : Vec < _ > = (0 .. self . arity) . map (| _ | PatOrWild :: Wild) . collect () ; for ipat in self . iter_fields () { fields [ipat . idx] = PatOrWild :: Pat (& ipat . pat) ; } self . ctor () . fmt_fields (f , self . ty () , fields . into_iter ()) } }
-/* FP:pat.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_IMPL_0012
-/* FP:pat.rs-0024 */ # [doc = " Delegate to `uid`."] impl < Cx : PatCx > PartialEq for DeconstructedPat < Cx > { fn eq (& self , other : & Self) -> bool { self . uid == other . uid } }
-/* FP:pat.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_IMPL_0013
-/* FP:pat.rs-0026 */ # [doc = " Delegate to `uid`."] impl < Cx : PatCx > Eq for DeconstructedPat < Cx > { }
-/* FP:pat.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_IMPL_0014
-/* FP:pat.rs-0028 */ # [doc = " Delegate to `uid`."] impl < Cx : PatCx > std :: hash :: Hash for DeconstructedPat < Cx > { fn hash < H : std :: hash :: Hasher > (& self , state : & mut H) { self . uid . hash (state) ; } }
-/* FP:pat.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_ENUM_0015
-/* FP:pat.rs-0030 */ # [doc = " Represents either a pattern obtained from user input or a wildcard constructed during the"] # [doc = " algorithm. Do not use `Wild` to represent a wildcard pattern comping from user input."] # [doc = ""] # [doc = " This is morally `Option<&'p DeconstructedPat>` where `None` is interpreted as a wildcard."] pub (crate) enum PatOrWild < 'p , Cx : PatCx > { # [doc = " A non-user-provided wildcard, created during specialization."] Wild , # [doc = " A user-provided pattern."] Pat (& 'p DeconstructedPat < Cx >) , }
-/* FP:pat.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_IMPL_0016
-/* FP:pat.rs-0032 */ impl < 'p , Cx : PatCx > Clone for PatOrWild < 'p , Cx > { fn clone (& self) -> Self { match self { PatOrWild :: Wild => PatOrWild :: Wild , PatOrWild :: Pat (pat) => PatOrWild :: Pat (pat) , } } }
-/* FP:pat.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_IMPL_0017
-/* FP:pat.rs-0034 */ impl < 'p , Cx : PatCx > Copy for PatOrWild < 'p , Cx > { }
-/* FP:pat.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_IMPL_0018
-/* FP:pat.rs-0036 */ impl < 'p , Cx : PatCx > PatOrWild < 'p , Cx > { pub (crate) fn as_pat (& self) -> Option < & 'p DeconstructedPat < Cx > > { match self { PatOrWild :: Wild => None , PatOrWild :: Pat (pat) => Some (pat) , } } pub (crate) fn ctor (self) -> & 'p Constructor < Cx > { match self { PatOrWild :: Wild => & Wildcard , PatOrWild :: Pat (pat) => pat . ctor () , } } pub (crate) fn is_or_pat (& self) -> bool { match self { PatOrWild :: Wild => false , PatOrWild :: Pat (pat) => pat . is_or_pat () , } } # [doc = " Expand this or-pattern into its alternatives. This only expands one or-pattern; use"] # [doc = " `flatten_or_pat` to recursively expand nested or-patterns."] pub (crate) fn expand_or_pat (self) -> SmallVec < [Self ; 1] > { match self { PatOrWild :: Pat (pat) if pat . is_or_pat () => { pat . iter_fields () . map (| ipat | PatOrWild :: Pat (& ipat . pat)) . collect () } _ => smallvec ! [self] , } } # [doc = " Recursively expand this (possibly-nested) or-pattern into its alternatives."] pub (crate) fn flatten_or_pat (self) -> SmallVec < [Self ; 1] > { match self { PatOrWild :: Pat (pat) if pat . is_or_pat () => pat . iter_fields () . flat_map (| ipat | PatOrWild :: Pat (& ipat . pat) . flatten_or_pat ()) . collect () , _ => smallvec ! [self] , } } # [doc = " Specialize this pattern with a constructor."] # [doc = " `other_ctor` can be different from `self.ctor`, but must be covered by it."] pub (crate) fn specialize (& self , other_ctor : & Constructor < Cx > , ctor_arity : usize ,) -> SmallVec < [PatOrWild < 'p , Cx > ; 2] > { match self { PatOrWild :: Wild => (0 .. ctor_arity) . map (| _ | PatOrWild :: Wild) . collect () , PatOrWild :: Pat (pat) => pat . specialize (other_ctor , ctor_arity) , } } }
-/* FP:pat.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_IMPL_0019
-/* FP:pat.rs-0038 */ impl < 'p , Cx : PatCx > fmt :: Debug for PatOrWild < 'p , Cx > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { PatOrWild :: Wild => write ! (f , "_") , PatOrWild :: Pat (pat) => pat . fmt (f) , } } }
-/* FP:pat.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_STRUCT_0020
-/* FP:pat.rs-0040 */ # [doc = " Same idea as `DeconstructedPat`, except this is a fictitious pattern built up for diagnostics"] # [doc = " purposes. As such they don't use interning and can be cloned."] pub struct WitnessPat < Cx : PatCx > { ctor : Constructor < Cx > , pub (crate) fields : Vec < WitnessPat < Cx > > , ty : Cx :: Ty , }
-/* FP:pat.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_IMPL_0021
-/* FP:pat.rs-0042 */ impl < Cx : PatCx > Clone for WitnessPat < Cx > { fn clone (& self) -> Self { Self { ctor : self . ctor . clone () , fields : self . fields . clone () , ty : self . ty . clone () } } }
-/* FP:pat.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_IMPL_0022
-/* FP:pat.rs-0044 */ impl < Cx : PatCx > WitnessPat < Cx > { pub (crate) fn new (ctor : Constructor < Cx > , fields : Vec < Self > , ty : Cx :: Ty) -> Self { Self { ctor , fields , ty } } # [doc = " Create a wildcard pattern for this type. If the type is empty, we create a `!` pattern."] pub (crate) fn wildcard (cx : & Cx , ty : Cx :: Ty) -> Self { let is_empty = cx . ctors_for_ty (& ty) . is_ok_and (| ctors | ctors . all_empty ()) ; let ctor = if is_empty { Never } else { Wildcard } ; Self :: new (ctor , Vec :: new () , ty) } # [doc = " Construct a pattern that matches everything that starts with this constructor."] # [doc = " For example, if `ctor` is a `Constructor::Variant` for `Option::Some`, we get the pattern"] # [doc = " `Some(_)`."] pub (crate) fn wild_from_ctor (cx : & Cx , ctor : Constructor < Cx > , ty : Cx :: Ty) -> Self { if matches ! (ctor , Wildcard) { return Self :: wildcard (cx , ty) ; } let fields = cx . ctor_sub_tys (& ctor , & ty) . filter (| (_ , PrivateUninhabitedField (skip)) | ! skip) . map (| (ty , _) | Self :: wildcard (cx , ty)) . collect () ; Self :: new (ctor , fields , ty) } pub fn ctor (& self) -> & Constructor < Cx > { & self . ctor } pub fn ty (& self) -> & Cx :: Ty { & self . ty } pub fn is_never_pattern (& self) -> bool { match self . ctor () { Never => true , Or => self . fields . iter () . all (| p | p . is_never_pattern ()) , _ => self . fields . iter () . any (| p | p . is_never_pattern ()) , } } pub fn iter_fields (& self) -> impl Iterator < Item = & WitnessPat < Cx > > { self . fields . iter () } }
-/* FP:pat.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_pattern_analysis_src_pat_IMPL_0023
-/* FP:pat.rs-0046 */ # [doc = " This is best effort and not good enough for a `Display` impl."] impl < Cx : PatCx > fmt :: Debug for WitnessPat < Cx > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { self . ctor () . fmt_fields (f , self . ty () , self . fields . iter ()) } }
+// SRC: ../rust/compiler/rustc_pattern_analysis/src/pat.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+// As explained in [`crate::usefulness`], values and patterns are made from constructors applied to
+// fields. This file defines types that represent patterns in this way.
+
+use std::fmt;
+
+use smallvec::{SmallVec, smallvec};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+
+use self::Constructor::*;
+use crate::constructor::{Constructor, Slice, SliceKind};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::{PatCx, PrivateUninhabitedField};
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=11 */
+
+/// A globally unique id to distinguish patterns.
+#[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub(crate) struct PatId(u32);
+impl PatId {
+    fn new() -> Self {
+        use std::sync::atomic::{AtomicU32, Ordering};
+        static PAT_ID: AtomicU32 = AtomicU32::new(0);
+        PatId(PAT_ID.fetch_add(1, Ordering::SeqCst))
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=IndexedPat | COMPLEXITY=2 | LINES=6 */
+
+/// A pattern with an index denoting which field it corresponds to.
+pub struct IndexedPat<Cx: PatCx> {
+    pub idx: usize,
+    pub pat: DeconstructedPat<Cx>,
+}
+/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=DeconstructedPat | COMPLEXITY=6 | LINES=17 */
+
+/// Values and patterns can be represented as a constructor applied to some fields. This represents
+/// a pattern in this form. A `DeconstructedPat` will almost always come from user input; the only
+/// exception are some `Wildcard`s introduced during pattern lowering.
+pub struct DeconstructedPat<Cx: PatCx> {
+    ctor: Constructor<Cx>,
+    fields: Vec<IndexedPat<Cx>>,
+    /// The number of fields in this pattern. E.g. if the pattern is `SomeStruct { field12: true, ..
+    /// }` this would be the total number of fields of the struct.
+    /// This is also the same as `self.ctor.arity(self.ty)`.
+    arity: usize,
+    ty: Cx::Ty,
+    /// Extra data to store in a pattern.
+    data: Cx::PatData,
+    /// Globally-unique id used to track usefulness at the level of subpatterns.
+    pub(crate) uid: PatId,
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=48 | LINES=92 */
+
+impl<Cx: PatCx> DeconstructedPat<Cx> {
+    pub fn new(
+        ctor: Constructor<Cx>,
+        fields: Vec<IndexedPat<Cx>>,
+        arity: usize,
+        ty: Cx::Ty,
+        data: Cx::PatData,
+    ) -> Self {
+        DeconstructedPat { ctor, fields, arity, ty, data, uid: PatId::new() }
+    }
+
+    pub fn at_index(self, idx: usize) -> IndexedPat<Cx> {
+        IndexedPat { idx, pat: self }
+    }
+
+    pub(crate) fn is_or_pat(&self) -> bool {
+        matches!(self.ctor, Or)
+    }
+
+    pub fn ctor(&self) -> &Constructor<Cx> {
+        &self.ctor
+    }
+    pub fn ty(&self) -> &Cx::Ty {
+        &self.ty
+    }
+    /// Returns the extra data stored in a pattern.
+    pub fn data(&self) -> &Cx::PatData {
+        &self.data
+    }
+    pub fn arity(&self) -> usize {
+        self.arity
+    }
+
+    pub fn iter_fields<'a>(&'a self) -> impl Iterator<Item = &'a IndexedPat<Cx>> {
+        self.fields.iter()
+    }
+
+    /// Specialize this pattern with a constructor.
+    /// `other_ctor` can be different from `self.ctor`, but must be covered by it.
+    pub(crate) fn specialize<'a>(
+        &'a self,
+        other_ctor: &Constructor<Cx>,
+        other_ctor_arity: usize,
+    ) -> SmallVec<[PatOrWild<'a, Cx>; 2]> {
+        if matches!(other_ctor, PrivateUninhabited) {
+            // Skip this column.
+            return smallvec![];
+        }
+
+        // Start with a slice of wildcards of the appropriate length.
+        let mut fields: SmallVec<[_; 2]> = (0..other_ctor_arity).map(|_| PatOrWild::Wild).collect();
+        // Fill `fields` with our fields. The arities are known to be compatible.
+        match self.ctor {
+            // The only non-trivial case: two slices of different arity. `other_ctor` is guaranteed
+            // to have a larger arity, so we adjust the indices of the patterns in the suffix so
+            // that they are correctly positioned in the larger slice.
+            Slice(Slice { kind: SliceKind::VarLen(prefix, _), .. })
+                if self.arity != other_ctor_arity =>
+            {
+                for ipat in &self.fields {
+                    let new_idx = if ipat.idx < prefix {
+                        ipat.idx
+                    } else {
+                        // Adjust the indices in the suffix.
+                        ipat.idx + other_ctor_arity - self.arity
+                    };
+                    fields[new_idx] = PatOrWild::Pat(&ipat.pat);
+                }
+            }
+            _ => {
+                for ipat in &self.fields {
+                    fields[ipat.idx] = PatOrWild::Pat(&ipat.pat);
+                }
+            }
+        }
+        fields
+    }
+
+    /// Walk top-down and call `it` in each place where a pattern occurs
+    /// starting with the root pattern `walk` is called on. If `it` returns
+    /// false then we will descend no further but siblings will be processed.
+    pub fn walk<'a>(&'a self, it: &mut impl FnMut(&'a Self) -> bool) {
+        if !it(self) {
+            return;
+        }
+
+        for p in self.iter_fields() {
+            p.pat.walk(it)
+        }
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=10 | LINES=11 */
+
+/// This is best effort and not good enough for a `Display` impl.
+impl<Cx: PatCx> fmt::Debug for DeconstructedPat<Cx> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let mut fields: Vec<_> = (0..self.arity).map(|_| PatOrWild::Wild).collect();
+        for ipat in self.iter_fields() {
+            fields[ipat.idx] = PatOrWild::Pat(&ipat.pat);
+        }
+        self.ctor().fmt_fields(f, self.ty(), fields.into_iter())
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=eq | COMPLEXITY=5 | LINES=7 */
+
+/// Delegate to `uid`.
+impl<Cx: PatCx> PartialEq for DeconstructedPat<Cx> {
+    fn eq(&self, other: &Self) -> bool {
+        self.uid == other.uid
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+/// Delegate to `uid`.
+impl<Cx: PatCx> Eq for DeconstructedPat<Cx> {}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=hash | COMPLEXITY=5 | LINES=6 */
+/// Delegate to `uid`.
+impl<Cx: PatCx> std::hash::Hash for DeconstructedPat<Cx> {
+    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+        self.uid.hash(state);
+    }
+}
+/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+
+/// Represents either a pattern obtained from user input or a wildcard constructed during the
+/// algorithm. Do not use `Wild` to represent a wildcard pattern comping from user input.
+///
+/// This is morally `Option<&'p DeconstructedPat>` where `None` is interpreted as a wildcard.
+pub(crate) enum PatOrWild<'p, Cx: PatCx> {
+    /// A non-user-provided wildcard, created during specialization.
+    Wild,
+    /// A user-provided pattern.
+    Pat(&'p DeconstructedPat<Cx>),
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=9 | LINES=9 */
+
+impl<'p, Cx: PatCx> Clone for PatOrWild<'p, Cx> {
+    fn clone(&self) -> Self {
+        match self {
+            PatOrWild::Wild => PatOrWild::Wild,
+            PatOrWild::Pat(pat) => PatOrWild::Pat(pat),
+        }
+    }
+}
+/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<'p, Cx: PatCx> Copy for PatOrWild<'p, Cx> {}
+/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=40 | LINES=57 */
+
+impl<'p, Cx: PatCx> PatOrWild<'p, Cx> {
+    pub(crate) fn as_pat(&self) -> Option<&'p DeconstructedPat<Cx>> {
+        match self {
+            PatOrWild::Wild => None,
+            PatOrWild::Pat(pat) => Some(pat),
+        }
+    }
+    pub(crate) fn ctor(self) -> &'p Constructor<Cx> {
+        match self {
+            PatOrWild::Wild => &Wildcard,
+            PatOrWild::Pat(pat) => pat.ctor(),
+        }
+    }
+
+    pub(crate) fn is_or_pat(&self) -> bool {
+        match self {
+            PatOrWild::Wild => false,
+            PatOrWild::Pat(pat) => pat.is_or_pat(),
+        }
+    }
+
+    /// Expand this or-pattern into its alternatives. This only expands one or-pattern; use
+    /// `flatten_or_pat` to recursively expand nested or-patterns.
+    pub(crate) fn expand_or_pat(self) -> SmallVec<[Self; 1]> {
+        match self {
+            PatOrWild::Pat(pat) if pat.is_or_pat() => {
+                pat.iter_fields().map(|ipat| PatOrWild::Pat(&ipat.pat)).collect()
+            }
+            _ => smallvec![self],
+        }
+    }
+
+    /// Recursively expand this (possibly-nested) or-pattern into its alternatives.
+    pub(crate) fn flatten_or_pat(self) -> SmallVec<[Self; 1]> {
+        match self {
+            PatOrWild::Pat(pat) if pat.is_or_pat() => pat
+                .iter_fields()
+                .flat_map(|ipat| PatOrWild::Pat(&ipat.pat).flatten_or_pat())
+                .collect(),
+            _ => smallvec![self],
+        }
+    }
+
+    /// Specialize this pattern with a constructor.
+    /// `other_ctor` can be different from `self.ctor`, but must be covered by it.
+    pub(crate) fn specialize(
+        &self,
+        other_ctor: &Constructor<Cx>,
+        ctor_arity: usize,
+    ) -> SmallVec<[PatOrWild<'p, Cx>; 2]> {
+        match self {
+            PatOrWild::Wild => (0..ctor_arity).map(|_| PatOrWild::Wild).collect(),
+            PatOrWild::Pat(pat) => pat.specialize(other_ctor, ctor_arity),
+        }
+    }
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=9 */
+
+impl<'p, Cx: PatCx> fmt::Debug for PatOrWild<'p, Cx> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            PatOrWild::Wild => write!(f, "_"),
+            PatOrWild::Pat(pat) => pat.fmt(f),
+        }
+    }
+}
+/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=WitnessPat | COMPLEXITY=4 | LINES=8 */
+
+/// Same idea as `DeconstructedPat`, except this is a fictitious pattern built up for diagnostics
+/// purposes. As such they don't use interning and can be cloned.
+pub struct WitnessPat<Cx: PatCx> {
+    ctor: Constructor<Cx>,
+    pub(crate) fields: Vec<WitnessPat<Cx>>,
+    ty: Cx::Ty,
+}
+/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=6 | LINES=6 */
+
+impl<Cx: PatCx> Clone for WitnessPat<Cx> {
+    fn clone(&self) -> Self {
+        Self { ctor: self.ctor.clone(), fields: self.fields.clone(), ty: self.ty.clone() }
+    }
+}
+/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=ctor | COMPLEXITY=30 | LINES=46 */
+
+impl<Cx: PatCx> WitnessPat<Cx> {
+    pub(crate) fn new(ctor: Constructor<Cx>, fields: Vec<Self>, ty: Cx::Ty) -> Self {
+        Self { ctor, fields, ty }
+    }
+    /// Create a wildcard pattern for this type. If the type is empty, we create a `!` pattern.
+    pub(crate) fn wildcard(cx: &Cx, ty: Cx::Ty) -> Self {
+        let is_empty = cx.ctors_for_ty(&ty).is_ok_and(|ctors| ctors.all_empty());
+        let ctor = if is_empty { Never } else { Wildcard };
+        Self::new(ctor, Vec::new(), ty)
+    }
+
+    /// Construct a pattern that matches everything that starts with this constructor.
+    /// For example, if `ctor` is a `Constructor::Variant` for `Option::Some`, we get the pattern
+    /// `Some(_)`.
+    pub(crate) fn wild_from_ctor(cx: &Cx, ctor: Constructor<Cx>, ty: Cx::Ty) -> Self {
+        if matches!(ctor, Wildcard) {
+            return Self::wildcard(cx, ty);
+        }
+        let fields = cx
+            .ctor_sub_tys(&ctor, &ty)
+            .filter(|(_, PrivateUninhabitedField(skip))| !skip)
+            .map(|(ty, _)| Self::wildcard(cx, ty))
+            .collect();
+        Self::new(ctor, fields, ty)
+    }
+
+    pub fn ctor(&self) -> &Constructor<Cx> {
+        &self.ctor
+    }
+    pub fn ty(&self) -> &Cx::Ty {
+        &self.ty
+    }
+
+    pub fn is_never_pattern(&self) -> bool {
+        match self.ctor() {
+            Never => true,
+            Or => self.fields.iter().all(|p| p.is_never_pattern()),
+            _ => self.fields.iter().any(|p| p.is_never_pattern()),
+        }
+    }
+
+    pub fn iter_fields(&self) -> impl Iterator<Item = &WitnessPat<Cx>> {
+        self.fields.iter()
+    }
+}
+/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=7 | LINES=7 */
+
+/// This is best effort and not good enough for a `Display` impl.
+impl<Cx: PatCx> fmt::Debug for WitnessPat<Cx> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        self.ctor().fmt_fields(f, self.ty(), self.fields.iter())
+    }
+}

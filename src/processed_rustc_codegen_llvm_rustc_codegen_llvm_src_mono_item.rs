@@ -1,33 +1,156 @@
-/* FP:mono_item.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_mono_item_USE_0001
-/* FP:mono_item.rs-0002 */ use crate :: rustc_codegen_ssa :: traits :: * ;
-/* FP:mono_item.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_mono_item_USE_0002
-/* FP:mono_item.rs-0004 */ use crate :: rustc_complete :: attrs :: Linkage ;
-/* FP:mono_item.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_mono_item_USE_0003
-/* FP:mono_item.rs-0006 */ use crate :: rustc_complete :: def :: DefKind ;
-/* FP:mono_item.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_mono_item_USE_0004
-/* FP:mono_item.rs-0008 */ use crate :: rustc_complete :: def_id :: { DefId , LOCAL_CRATE } ;
-/* FP:mono_item.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_mono_item_USE_0005
-/* FP:mono_item.rs-0010 */ use crate :: rustc_complete :: bug ;
-/* FP:mono_item.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_mono_item_USE_0006
-/* FP:mono_item.rs-0012 */ use crate :: rustc_complete :: mir :: mono :: Visibility ;
-/* FP:mono_item.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_mono_item_USE_0007
-/* FP:mono_item.rs-0014 */ use crate :: rustc_complete :: ty :: layout :: { FnAbiOf , HasTypingEnv , LayoutOf } ;
-/* FP:mono_item.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_mono_item_USE_0008
-/* FP:mono_item.rs-0016 */ use crate :: rustc_complete :: ty :: { self , Instance , TypeVisitableExt } ;
-/* FP:mono_item.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_mono_item_USE_0009
-/* FP:mono_item.rs-0018 */ use crate :: rustc_complete :: config :: CrateType ;
-/* FP:mono_item.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_mono_item_USE_0010
-/* FP:mono_item.rs-0020 */ use crate :: rustc_target :: spec :: RelocModel ;
-/* FP:mono_item.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_mono_item_USE_0011
-/* FP:mono_item.rs-0022 */ use tracing :: debug ;
-/* FP:mono_item.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_mono_item_USE_0012
-/* FP:mono_item.rs-0024 */ use crate :: context :: CodegenCx ;
-/* FP:mono_item.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_mono_item_USE_0013
-/* FP:mono_item.rs-0026 */ use crate :: errors :: SymbolAlreadyDefined ;
-/* FP:mono_item.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_mono_item_USE_0014
-/* FP:mono_item.rs-0028 */ use crate :: type_of :: LayoutLlvmExt ;
-/* FP:mono_item.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_mono_item_USE_0015
-/* FP:mono_item.rs-0030 */ use crate :: { base , llvm } ;
-/* FP:mono_item.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_mono_item_IMPL_0016
-/* FP:mono_item.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_mono_item_IMPL_0017
-/* FP:mono_item.rs-0034 */ impl CodegenCx < '_ , '_ > { # [doc = " Whether a definition or declaration can be assumed to be local to a group of"] # [doc = " libraries that form a single DSO or executable."] # [doc = " Marks the local as DSO if so."] pub (crate) fn assume_dso_local (& self , llval : & llvm :: Value , is_declaration : bool) -> bool { let assume = self . should_assume_dso_local (llval , is_declaration) ; if assume { llvm :: set_dso_local (llval) ; } assume } fn should_assume_dso_local (& self , llval : & llvm :: Value , is_declaration : bool) -> bool { let linkage = llvm :: get_linkage (llval) ; let visibility = llvm :: get_visibility (llval) ; if matches ! (linkage , llvm :: Linkage :: InternalLinkage | llvm :: Linkage :: PrivateLinkage) { return true ; } if visibility != llvm :: Visibility :: Default && linkage != llvm :: Linkage :: ExternalWeakLinkage { return true ; } let all_exe = self . tcx . crate_types () . iter () . all (| ty | * ty == CrateType :: Executable) ; let is_declaration_for_linker = is_declaration || linkage == llvm :: Linkage :: AvailableExternallyLinkage ; if all_exe && ! is_declaration_for_linker { return true ; } if matches ! (&* self . tcx . sess . target . arch , "powerpc64" | "powerpc64le") { return false ; } if self . tcx . sess . target . is_like_darwin { return false ; } if self . tcx . sess . relocation_model () == RelocModel :: Pie && ! is_declaration { return true ; } let is_thread_local_var = llvm :: LLVMIsAGlobalVariable (llval) . is_some_and (| v | llvm :: LLVMIsThreadLocal (v) . is_true ()) ; if is_thread_local_var { return false ; } if let Some (direct) = self . tcx . sess . direct_access_external_data () { return direct ; } self . tcx . sess . relocation_model () == RelocModel :: Static } }
+// SRC: ../rust/compiler/rustc_codegen_llvm/src/mono_item.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use crate::rustc_codegen_ssa::traits::*;
+use crate::rustc_complete::attrs::Linkage;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LOCAL_CRATE};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::mono::Visibility;
+use crate::rustc_complete::ty::layout::{FnAbiOf, HasTypingEnv, LayoutOf};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::ty::{self, Instance, TypeVisitableExt};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+use crate::rustc_complete::config::CrateType;
+use crate::rustc_target::spec::RelocModel;
+use tracing::debug;
+
+use crate::context::CodegenCx;
+use crate::errors::SymbolAlreadyDefined;
+use crate::type_of::LayoutLlvmExt;
+use crate::{base, llvm};
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=predefine_static | COMPLEXITY=27 | LINES=67 */
+
+impl<'tcx> PreDefineCodegenMethods<'tcx> for CodegenCx<'_, 'tcx> {
+    fn predefine_static(
+        &mut self,
+        def_id: DefId,
+        linkage: Linkage,
+        visibility: Visibility,
+        symbol_name: &str,
+    ) {
+        let instance = Instance::mono(self.tcx, def_id);
+        let DefKind::Static { nested, .. } = self.tcx.def_kind(def_id) else { bug!() };
+        // Nested statics do not have a type, so pick a dummy type and let `codegen_static` figure
+        // out the llvm type from the actual evaluated initializer.
+        let ty =
+            if nested { self.tcx.types.unit } else { instance.ty(self.tcx, self.typing_env()) };
+        let llty = self.layout_of(ty).llvm_type(self);
+
+        let g = self.define_global(symbol_name, llty).unwrap_or_else(|| {
+            self.sess()
+                .dcx()
+                .emit_fatal(SymbolAlreadyDefined { span: self.tcx.def_span(def_id), symbol_name })
+        });
+
+        llvm::set_linkage(g, base::linkage_to_llvm(linkage));
+        llvm::set_visibility(g, base::visibility_to_llvm(visibility));
+        self.assume_dso_local(g, false);
+
+        self.instances.borrow_mut().insert(instance, g);
+    }
+
+    fn predefine_fn(
+        &mut self,
+        instance: Instance<'tcx>,
+        linkage: Linkage,
+        visibility: Visibility,
+        symbol_name: &str,
+    ) {
+        assert!(!instance.args.has_infer());
+
+        let fn_abi = self.fn_abi_of_instance(instance, ty::List::empty());
+        let lldecl = self.declare_fn(symbol_name, fn_abi, Some(instance));
+        llvm::set_linkage(lldecl, base::linkage_to_llvm(linkage));
+        let attrs = self.tcx.codegen_instance_attrs(instance.def);
+        base::set_link_section(lldecl, &attrs);
+        if (linkage == Linkage::LinkOnceODR || linkage == Linkage::WeakODR)
+            && self.tcx.sess.target.supports_comdat()
+        {
+            llvm::SetUniqueComdat(self.llmod, lldecl);
+        }
+
+        // If we're compiling the compiler-builtins crate, e.g., the equivalent of
+        // compiler-rt, then we want to implicitly compile everything with hidden
+        // visibility as we're going to link this object all over the place but
+        // don't want the symbols to get exported.
+        if linkage != Linkage::Internal && self.tcx.is_compiler_builtins(LOCAL_CRATE) {
+            llvm::set_visibility(lldecl, llvm::Visibility::Hidden);
+        } else {
+            llvm::set_visibility(lldecl, base::visibility_to_llvm(visibility));
+        }
+
+        debug!("predefine_fn: instance = {:?}", instance);
+
+        self.assume_dso_local(lldecl, false);
+
+        self.instances.borrow_mut().insert(instance, lldecl);
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=should_assume_dso_local | COMPLEXITY=42 | LINES=66 */
+
+impl CodegenCx<'_, '_> {
+    /// Whether a definition or declaration can be assumed to be local to a group of
+    /// libraries that form a single DSO or executable.
+    /// Marks the local as DSO if so.
+    pub(crate) fn assume_dso_local(&self, llval: &llvm::Value, is_declaration: bool) -> bool {
+        let assume = self.should_assume_dso_local(llval, is_declaration);
+        if assume {
+            llvm::set_dso_local(llval);
+        }
+        assume
+    }
+
+    fn should_assume_dso_local(&self, llval: &llvm::Value, is_declaration: bool) -> bool {
+        let linkage = llvm::get_linkage(llval);
+        let visibility = llvm::get_visibility(llval);
+
+        if matches!(linkage, llvm::Linkage::InternalLinkage | llvm::Linkage::PrivateLinkage) {
+            return true;
+        }
+
+        if visibility != llvm::Visibility::Default && linkage != llvm::Linkage::ExternalWeakLinkage
+        {
+            return true;
+        }
+
+        // Symbols from executables can't really be imported any further.
+        let all_exe = self.tcx.crate_types().iter().all(|ty| *ty == CrateType::Executable);
+        let is_declaration_for_linker =
+            is_declaration || linkage == llvm::Linkage::AvailableExternallyLinkage;
+        if all_exe && !is_declaration_for_linker {
+            return true;
+        }
+
+        // PowerPC64 prefers TOC indirection to avoid copy relocations.
+        if matches!(&*self.tcx.sess.target.arch, "powerpc64" | "powerpc64le") {
+            return false;
+        }
+
+        // Match clang by only supporting COFF and ELF for now.
+        if self.tcx.sess.target.is_like_darwin {
+            return false;
+        }
+
+        // With pie relocation model calls of functions defined in the translation
+        // unit can use copy relocations.
+        if self.tcx.sess.relocation_model() == RelocModel::Pie && !is_declaration {
+            return true;
+        }
+
+        // Thread-local variables generally don't support copy relocations.
+        let is_thread_local_var = llvm::LLVMIsAGlobalVariable(llval)
+            .is_some_and(|v| llvm::LLVMIsThreadLocal(v).is_true());
+        if is_thread_local_var {
+            return false;
+        }
+
+        // Respect the direct-access-external-data to override default behavior if present.
+        if let Some(direct) = self.tcx.sess.direct_access_external_data() {
+            return direct;
+        }
+
+        // Static relocation model should force copy relocations everywhere.
+        self.tcx.sess.relocation_model() == RelocModel::Static
+    }
+}

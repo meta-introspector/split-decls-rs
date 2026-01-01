@@ -1,3 +1,6 @@
-/* FP:lang_tests_release.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_lang_tests_release_MOD_0001
-/* FP:lang_tests_release.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_lang_tests_release_FN_0002
-/* FP:lang_tests_release.rs-0004 */ fn main () { lang_tests_common :: main_inner (lang_tests_common :: Profile :: Release) ; }
+// SRC: ../rust/compiler/rustc_codegen_gcc/tests/lang_tests_release.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=main | COMPLEXITY=2 | LINES=5 */
+
+fn main() {
+    lang_tests_common::main_inner(lang_tests_common::Profile::Release);
+}

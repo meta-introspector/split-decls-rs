@@ -1,67 +1,613 @@
-/* FP:tests.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_USE_0001
-/* FP:tests.rs-0002 */ use Piece :: * ;
-/* FP:tests.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_USE_0002
-/* FP:tests.rs-0004 */ use super :: * ;
-/* FP:tests.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0003
-/* FP:tests.rs-0006 */ # [track_caller] fn same (fmt : & 'static str , p : & [Piece < 'static >]) { let parser = Parser :: new (fmt , None , None , false , ParseMode :: Format) ; assert_eq ! (parser . collect ::< Vec < Piece <'static >>> () , p) ; }
-/* FP:tests.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0004
-/* FP:tests.rs-0008 */ fn fmtdflt () -> FormatSpec < 'static > { return FormatSpec { fill : None , fill_span : None , align : AlignUnknown , sign : None , alternate : false , zero_pad : false , debug_hex : None , precision : CountImplied , width : CountImplied , precision_span : None , width_span : None , ty : "" , ty_span : None , } ; }
-/* FP:tests.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0005
-/* FP:tests.rs-0010 */ fn musterr (s : & str) { let mut p = Parser :: new (s , None , None , false , ParseMode :: Format) ; p . next () ; assert ! (! p . errors . is_empty ()) ; }
-/* FP:tests.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0006
-/* FP:tests.rs-0012 */ # [test] fn simple () { same ("asdf" , & [Lit ("asdf")]) ; same ("a{{b" , & [Lit ("a") , Lit ("{b")]) ; same ("a}}b" , & [Lit ("a") , Lit ("}b")]) ; same ("a}}" , & [Lit ("a") , Lit ("}")]) ; same ("}}" , & [Lit ("}")]) ; same ("\\}}" , & [Lit ("\\") , Lit ("}")]) ; }
-/* FP:tests.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0007
-/* FP:tests.rs-0014 */ # [test] fn invalid01 () { musterr ("{") }
-/* FP:tests.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0008
-/* FP:tests.rs-0016 */ # [test] fn invalid02 () { musterr ("}") }
-/* FP:tests.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0009
-/* FP:tests.rs-0018 */ # [test] fn invalid04 () { musterr ("{3a}") }
-/* FP:tests.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0010
-/* FP:tests.rs-0020 */ # [test] fn invalid05 () { musterr ("{:|}") }
-/* FP:tests.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0011
-/* FP:tests.rs-0022 */ # [test] fn invalid06 () { musterr ("{:>>>}") }
-/* FP:tests.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0012
-/* FP:tests.rs-0024 */ # [test] fn invalid_position () { musterr ("{18446744073709551616}") ; }
-/* FP:tests.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0013
-/* FP:tests.rs-0026 */ # [test] fn invalid_width () { musterr ("{:18446744073709551616}") ; }
-/* FP:tests.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0014
-/* FP:tests.rs-0028 */ # [test] fn invalid_precision () { musterr ("{:.18446744073709551616}") ; }
-/* FP:tests.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0015
-/* FP:tests.rs-0030 */ # [test] fn format_empty () { same ("{}" , & [NextArgument (Box :: new (Argument { position : ArgumentImplicitlyIs (0) , position_span : 2 .. 2 , format : fmtdflt () , }))] ,) ; }
-/* FP:tests.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0016
-/* FP:tests.rs-0032 */ # [test] fn format_tab_empty () { let fmt_pre = r###""\t{}""### ; let fmt = "\t{}" ; let parser = Parser :: new (fmt , None , Some (fmt_pre . into ()) , false , ParseMode :: Format) ; assert_eq ! (parser . collect ::< Vec < Piece <'static >>> () , & [Lit ("\t") , NextArgument (Box :: new (Argument { position : ArgumentImplicitlyIs (0) , position_span : 4 .. 4 , format : fmtdflt () , }))] ,) ; }
-/* FP:tests.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0017
-/* FP:tests.rs-0034 */ # [test] fn format_open_brace_tab () { let fmt_pre = r###""{\t""### ; let fmt = "{\t" ; let mut parser = Parser :: new (fmt , None , Some (fmt_pre . into ()) , false , ParseMode :: Format) ; let _ = parser . by_ref () . collect :: < Vec < Piece < 'static > > > () ; assert_eq ! (parser . errors [0] . span , 4 .. 4) ; }
-/* FP:tests.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0018
-/* FP:tests.rs-0036 */ # [test] fn format_position () { same ("{3}" , & [NextArgument (Box :: new (Argument { position : ArgumentIs (3) , position_span : 2 .. 3 , format : fmtdflt () , }))] ,) ; }
-/* FP:tests.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0019
-/* FP:tests.rs-0038 */ # [test] fn format_position_nothing_else () { same ("{3:}" , & [NextArgument (Box :: new (Argument { position : ArgumentIs (3) , position_span : 2 .. 3 , format : fmtdflt () , }))] ,) ; }
-/* FP:tests.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0020
-/* FP:tests.rs-0040 */ # [test] fn format_named () { same ("{name}" , & [NextArgument (Box :: new (Argument { position : ArgumentNamed ("name") , position_span : 2 .. 6 , format : fmtdflt () , }))] ,) }
-/* FP:tests.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0021
-/* FP:tests.rs-0042 */ # [test] fn format_named_space_nothing () { same ("{name} {}" , & [NextArgument (Box :: new (Argument { position : ArgumentNamed ("name") , position_span : 2 .. 6 , format : fmtdflt () , })) , Lit (" ") , NextArgument (Box :: new (Argument { position : ArgumentImplicitlyIs (0) , position_span : 9 .. 9 , format : fmtdflt () , })) ,] ,) }
-/* FP:tests.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0022
-/* FP:tests.rs-0044 */ # [test] fn format_raw () { let snippet = r###"r#"assertion `left {op} right` failed"#"### . into () ; let source = r#"assertion `left {op} right` failed"# ; let parser = Parser :: new (source , Some (1) , Some (snippet) , true , ParseMode :: Format) ; let expected = & [Lit ("assertion `left ") , NextArgument (Box :: new (Argument { position : ArgumentNamed ("op") , position_span : 20 .. 22 , format : fmtdflt () , })) , Lit (" right` failed") ,] ; assert_eq ! (parser . collect ::< Vec < Piece <'static >>> () , expected) ; }
-/* FP:tests.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0023
-/* FP:tests.rs-0046 */ # [test] fn format_type () { same ("{3:x}" , & [NextArgument (Box :: new (Argument { position : ArgumentIs (3) , position_span : 2 .. 3 , format : FormatSpec { fill : None , fill_span : None , align : AlignUnknown , sign : None , alternate : false , zero_pad : false , debug_hex : None , precision : CountImplied , width : CountImplied , precision_span : None , width_span : None , ty : "x" , ty_span : None , } , }))] ,) ; }
-/* FP:tests.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0024
-/* FP:tests.rs-0048 */ # [test] fn format_align_fill () { same ("{3:>}" , & [NextArgument (Box :: new (Argument { position : ArgumentIs (3) , position_span : 2 .. 3 , format : FormatSpec { fill : None , fill_span : None , align : AlignRight , sign : None , alternate : false , zero_pad : false , debug_hex : None , precision : CountImplied , width : CountImplied , precision_span : None , width_span : None , ty : "" , ty_span : None , } , }))] ,) ; same ("{3:0<}" , & [NextArgument (Box :: new (Argument { position : ArgumentIs (3) , position_span : 2 .. 3 , format : FormatSpec { fill : Some ('0') , fill_span : Some (4 .. 5) , align : AlignLeft , sign : None , alternate : false , zero_pad : false , debug_hex : None , precision : CountImplied , width : CountImplied , precision_span : None , width_span : None , ty : "" , ty_span : None , } , }))] ,) ; same ("{3:*<abcd}" , & [NextArgument (Box :: new (Argument { position : ArgumentIs (3) , position_span : 2 .. 3 , format : FormatSpec { fill : Some ('*') , fill_span : Some (4 .. 5) , align : AlignLeft , sign : None , alternate : false , zero_pad : false , debug_hex : None , precision : CountImplied , width : CountImplied , precision_span : None , width_span : None , ty : "abcd" , ty_span : Some (6 .. 10) , } , }))] ,) ; }
-/* FP:tests.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0025
-/* FP:tests.rs-0050 */ # [test] fn format_counts () { same ("{:10x}" , & [NextArgument (Box :: new (Argument { position : ArgumentImplicitlyIs (0) , position_span : 2 .. 2 , format : FormatSpec { fill : None , fill_span : None , align : AlignUnknown , sign : None , alternate : false , zero_pad : false , debug_hex : None , precision : CountImplied , precision_span : None , width : CountIs (10) , width_span : Some (3 .. 5) , ty : "x" , ty_span : None , } , }))] ,) ; same ("{:10$.10x}" , & [NextArgument (Box :: new (Argument { position : ArgumentImplicitlyIs (0) , position_span : 2 .. 2 , format : FormatSpec { fill : None , fill_span : None , align : AlignUnknown , sign : None , alternate : false , zero_pad : false , debug_hex : None , precision : CountIs (10) , precision_span : Some (6 .. 9) , width : CountIsParam (10) , width_span : Some (3 .. 6) , ty : "x" , ty_span : None , } , }))] ,) ; same ("{1:0$.10x}" , & [NextArgument (Box :: new (Argument { position : ArgumentIs (1) , position_span : 2 .. 3 , format : FormatSpec { fill : None , fill_span : None , align : AlignUnknown , sign : None , alternate : false , zero_pad : false , debug_hex : None , precision : CountIs (10) , precision_span : Some (6 .. 9) , width : CountIsParam (0) , width_span : Some (4 .. 6) , ty : "x" , ty_span : None , } , }))] ,) ; same ("{:.*x}" , & [NextArgument (Box :: new (Argument { position : ArgumentImplicitlyIs (1) , position_span : 2 .. 2 , format : FormatSpec { fill : None , fill_span : None , align : AlignUnknown , sign : None , alternate : false , zero_pad : false , debug_hex : None , precision : CountIsStar (0) , precision_span : Some (3 .. 5) , width : CountImplied , width_span : None , ty : "x" , ty_span : None , } , }))] ,) ; same ("{:.10$x}" , & [NextArgument (Box :: new (Argument { position : ArgumentImplicitlyIs (0) , position_span : 2 .. 2 , format : FormatSpec { fill : None , fill_span : None , align : AlignUnknown , sign : None , alternate : false , zero_pad : false , debug_hex : None , precision : CountIsParam (10) , width : CountImplied , precision_span : Some (3 .. 7) , width_span : None , ty : "x" , ty_span : None , } , }))] ,) ; same ("{:a$.b$?}" , & [NextArgument (Box :: new (Argument { position : ArgumentImplicitlyIs (0) , position_span : 2 .. 2 , format : FormatSpec { fill : None , fill_span : None , align : AlignUnknown , sign : None , alternate : false , zero_pad : false , debug_hex : None , precision : CountIsName ("b" , 6 .. 7) , precision_span : Some (5 .. 8) , width : CountIsName ("a" , 3 .. 4) , width_span : Some (3 .. 5) , ty : "?" , ty_span : None , } , }))] ,) ; same ("{:.4}" , & [NextArgument (Box :: new (Argument { position : ArgumentImplicitlyIs (0) , position_span : 2 .. 2 , format : FormatSpec { fill : None , fill_span : None , align : AlignUnknown , sign : None , alternate : false , zero_pad : false , debug_hex : None , precision : CountIs (4) , precision_span : Some (3 .. 5) , width : CountImplied , width_span : None , ty : "" , ty_span : None , } , }))] ,) }
-/* FP:tests.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0026
-/* FP:tests.rs-0052 */ # [test] fn format_flags () { same ("{:-}" , & [NextArgument (Box :: new (Argument { position : ArgumentImplicitlyIs (0) , position_span : 2 .. 2 , format : FormatSpec { fill : None , fill_span : None , align : AlignUnknown , sign : Some (Sign :: Minus) , alternate : false , zero_pad : false , debug_hex : None , precision : CountImplied , width : CountImplied , precision_span : None , width_span : None , ty : "" , ty_span : None , } , }))] ,) ; same ("{:+#}" , & [NextArgument (Box :: new (Argument { position : ArgumentImplicitlyIs (0) , position_span : 2 .. 2 , format : FormatSpec { fill : None , fill_span : None , align : AlignUnknown , sign : Some (Sign :: Plus) , alternate : true , zero_pad : false , debug_hex : None , precision : CountImplied , width : CountImplied , precision_span : None , width_span : None , ty : "" , ty_span : None , } , }))] ,) ; }
-/* FP:tests.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0027
-/* FP:tests.rs-0054 */ # [test] fn format_mixture () { same ("abcd {3:x} efg" , & [Lit ("abcd ") , NextArgument (Box :: new (Argument { position : ArgumentIs (3) , position_span : 7 .. 8 , format : FormatSpec { fill : None , fill_span : None , align : AlignUnknown , sign : None , alternate : false , zero_pad : false , debug_hex : None , precision : CountImplied , width : CountImplied , precision_span : None , width_span : None , ty : "x" , ty_span : None , } , })) , Lit (" efg") ,] ,) ; }
-/* FP:tests.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0028
-/* FP:tests.rs-0056 */ # [test] fn format_whitespace () { same ("{ }" , & [NextArgument (Box :: new (Argument { position : ArgumentImplicitlyIs (0) , position_span : 2 .. 3 , format : fmtdflt () , }))] ,) ; same ("{  }" , & [NextArgument (Box :: new (Argument { position : ArgumentImplicitlyIs (0) , position_span : 2 .. 4 , format : fmtdflt () , }))] ,) ; }
-/* FP:tests.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0029
-/* FP:tests.rs-0058 */ # [test] fn asm_linespans () { let asm_pre = r###"r"
-/* FP:tests.rs-0059 */         .intel_syntax noprefix
-/* FP:tests.rs-0060 */         nop""### ; let asm = r"
-/* FP:tests.rs-0061 */         .intel_syntax noprefix
-/* FP:tests.rs-0062 */         nop" ; let mut parser = Parser :: new (asm , Some (0) , Some (asm_pre . into ()) , false , ParseMode :: InlineAsm) ; assert ! (parser . is_source_literal) ; assert_eq ! (parser . by_ref () . collect ::< Vec < Piece <'static >>> () , & [Lit ("\n        .intel_syntax noprefix\n        nop")]) ; assert_eq ! (parser . line_spans , & [2 .. 2 , 11 .. 33 , 42 .. 45]) ; }
-/* FP:tests.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0030
-/* FP:tests.rs-0064 */ # [test] fn asm_concat () { let asm_pre = r###"concat!("invalid", "_", "instruction")"### ; let asm = "invalid_instruction" ; let mut parser = Parser :: new (asm , None , Some (asm_pre . into ()) , false , ParseMode :: InlineAsm) ; assert ! (! parser . is_source_literal) ; assert_eq ! (parser . by_ref () . collect ::< Vec < Piece <'static >>> () , & [Lit (asm)]) ; assert_eq ! (parser . line_spans , & []) ; }
-/* FP:tests.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0031
-/* FP:tests.rs-0066 */ # [test] fn diagnostic_format_flags () { let lit = "{thing:blah}" ; let mut parser = Parser :: new (lit , None , None , false , ParseMode :: Diagnostic) ; assert ! (! parser . is_source_literal) ; let [NextArgument (arg)] = & * parser . by_ref () . collect :: < Vec < Piece < 'static > > > () else { panic ! () } ; assert_eq ! (** arg , Argument { position : ArgumentNamed ("thing") , position_span : 2 .. 7 , format : FormatSpec { ty : ":blah" , ty_span : Some (7 .. 12) , .. Default :: default () } , }) ; assert_eq ! (parser . line_spans , & []) ; assert ! (parser . errors . is_empty ()) ; }
-/* FP:tests.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_parse_format_src_tests_FN_0032
+// SRC: ../rust/compiler/rustc_parse_format/src/tests.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=same | COMPLEXITY=2 | LINES=9 */
+use Piece::*;
+
+use super::*;
+
+#[track_caller]
+fn same(fmt: &'static str, p: &[Piece<'static>]) {
+    let parser = Parser::new(fmt, None, None, false, ParseMode::Format);
+    assert_eq!(parser.collect::<Vec<Piece<'static>>>(), p);
+}
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=fmtdflt | COMPLEXITY=3 | LINES=18 */
+
+fn fmtdflt() -> FormatSpec<'static> {
+    return FormatSpec {
+        fill: None,
+        fill_span: None,
+        align: AlignUnknown,
+        sign: None,
+        alternate: false,
+        zero_pad: false,
+        debug_hex: None,
+        precision: CountImplied,
+        width: CountImplied,
+        precision_span: None,
+        width_span: None,
+        ty: "",
+        ty_span: None,
+    };
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=musterr | COMPLEXITY=2 | LINES=6 */
+
+fn musterr(s: &str) {
+    let mut p = Parser::new(s, None, None, false, ParseMode::Format);
+    p.next();
+    assert!(!p.errors.is_empty());
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=simple | COMPLEXITY=5 | LINES=10 */
+
+#[test]
+fn simple() {
+    same("asdf", &[Lit("asdf")]);
+    same("a{{b", &[Lit("a"), Lit("{b")]);
+    same("a}}b", &[Lit("a"), Lit("}b")]);
+    same("a}}", &[Lit("a"), Lit("}")]);
+    same("}}", &[Lit("}")]);
+    same("\\}}", &[Lit("\\"), Lit("}")]);
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=invalid01 | COMPLEXITY=3 | LINES=4 */
+#[test]
+fn invalid01() {
+    musterr("{")
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=invalid02 | COMPLEXITY=2 | LINES=4 */
+#[test]
+fn invalid02() {
+    musterr("}")
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=invalid04 | COMPLEXITY=3 | LINES=4 */
+#[test]
+fn invalid04() {
+    musterr("{3a}")
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=invalid05 | COMPLEXITY=3 | LINES=4 */
+#[test]
+fn invalid05() {
+    musterr("{:|}")
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=invalid06 | COMPLEXITY=3 | LINES=4 */
+#[test]
+fn invalid06() {
+    musterr("{:>>>}")
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=invalid_position | COMPLEXITY=3 | LINES=5 */
+
+#[test]
+fn invalid_position() {
+    musterr("{18446744073709551616}");
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=invalid_width | COMPLEXITY=3 | LINES=5 */
+
+#[test]
+fn invalid_width() {
+    musterr("{:18446744073709551616}");
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=invalid_precision | COMPLEXITY=3 | LINES=5 */
+
+#[test]
+fn invalid_precision() {
+    musterr("{:.18446744073709551616}");
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=format_empty | COMPLEXITY=4 | LINES=12 */
+
+#[test]
+fn format_empty() {
+    same(
+        "{}",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentImplicitlyIs(0),
+            position_span: 2..2,
+            format: fmtdflt(),
+        }))],
+    );
+}
+/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=format_tab_empty | COMPLEXITY=5 | LINES=17 */
+#[test]
+fn format_tab_empty() {
+    let fmt_pre = r###""\t{}""###;
+    let fmt = "\t{}";
+    let parser = Parser::new(fmt, None, Some(fmt_pre.into()), false, ParseMode::Format);
+    assert_eq!(
+        parser.collect::<Vec<Piece<'static>>>(),
+        &[
+            Lit("\t"),
+            NextArgument(Box::new(Argument {
+                position: ArgumentImplicitlyIs(0),
+                position_span: 4..4,
+                format: fmtdflt(),
+            }))
+        ],
+    );
+}
+/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=format_open_brace_tab | COMPLEXITY=114 | LINES=490 */
+#[test]
+fn format_open_brace_tab() {
+    let fmt_pre = r###""{\t""###;
+    let fmt = "{\t";
+    let mut parser = Parser::new(fmt, None, Some(fmt_pre.into()), false, ParseMode::Format);
+    let _ = parser.by_ref().collect::<Vec<Piece<'static>>>();
+    assert_eq!(parser.errors[0].span, 4..4);
+}
+#[test]
+fn format_position() {
+    same(
+        "{3}",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentIs(3),
+            position_span: 2..3,
+            format: fmtdflt(),
+        }))],
+    );
+}
+#[test]
+fn format_position_nothing_else() {
+    same(
+        "{3:}",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentIs(3),
+            position_span: 2..3,
+            format: fmtdflt(),
+        }))],
+    );
+}
+#[test]
+fn format_named() {
+    same(
+        "{name}",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentNamed("name"),
+            position_span: 2..6,
+            format: fmtdflt(),
+        }))],
+    )
+}
+#[test]
+fn format_named_space_nothing() {
+    same(
+        "{name} {}",
+        &[
+            NextArgument(Box::new(Argument {
+                position: ArgumentNamed("name"),
+                position_span: 2..6,
+                format: fmtdflt(),
+            })),
+            Lit(" "),
+            NextArgument(Box::new(Argument {
+                position: ArgumentImplicitlyIs(0),
+                position_span: 9..9,
+                format: fmtdflt(),
+            })),
+        ],
+    )
+}
+#[test]
+fn format_raw() {
+    let snippet = r###"r#"assertion `left {op} right` failed"#"###.into();
+    let source = r#"assertion `left {op} right` failed"#;
+
+    let parser = Parser::new(source, Some(1), Some(snippet), true, ParseMode::Format);
+    let expected = &[
+        Lit("assertion `left "),
+        NextArgument(Box::new(Argument {
+            position: ArgumentNamed("op"),
+            position_span: 20..22,
+            format: fmtdflt(),
+        })),
+        Lit(" right` failed"),
+    ];
+    assert_eq!(parser.collect::<Vec<Piece<'static>>>(), expected);
+}
+#[test]
+fn format_type() {
+    same(
+        "{3:x}",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentIs(3),
+            position_span: 2..3,
+            format: FormatSpec {
+                fill: None,
+                fill_span: None,
+                align: AlignUnknown,
+                sign: None,
+                alternate: false,
+                zero_pad: false,
+                debug_hex: None,
+                precision: CountImplied,
+                width: CountImplied,
+                precision_span: None,
+                width_span: None,
+                ty: "x",
+                ty_span: None,
+            },
+        }))],
+    );
+}
+#[test]
+fn format_align_fill() {
+    same(
+        "{3:>}",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentIs(3),
+            position_span: 2..3,
+            format: FormatSpec {
+                fill: None,
+                fill_span: None,
+                align: AlignRight,
+                sign: None,
+                alternate: false,
+                zero_pad: false,
+                debug_hex: None,
+                precision: CountImplied,
+                width: CountImplied,
+                precision_span: None,
+                width_span: None,
+                ty: "",
+                ty_span: None,
+            },
+        }))],
+    );
+    same(
+        "{3:0<}",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentIs(3),
+            position_span: 2..3,
+            format: FormatSpec {
+                fill: Some('0'),
+                fill_span: Some(4..5),
+                align: AlignLeft,
+                sign: None,
+                alternate: false,
+                zero_pad: false,
+                debug_hex: None,
+                precision: CountImplied,
+                width: CountImplied,
+                precision_span: None,
+                width_span: None,
+                ty: "",
+                ty_span: None,
+            },
+        }))],
+    );
+    same(
+        "{3:*<abcd}",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentIs(3),
+            position_span: 2..3,
+            format: FormatSpec {
+                fill: Some('*'),
+                fill_span: Some(4..5),
+                align: AlignLeft,
+                sign: None,
+                alternate: false,
+                zero_pad: false,
+                debug_hex: None,
+                precision: CountImplied,
+                width: CountImplied,
+                precision_span: None,
+                width_span: None,
+                ty: "abcd",
+                ty_span: Some(6..10),
+            },
+        }))],
+    );
+}
+#[test]
+fn format_counts() {
+    same(
+        "{:10x}",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentImplicitlyIs(0),
+            position_span: 2..2,
+            format: FormatSpec {
+                fill: None,
+                fill_span: None,
+                align: AlignUnknown,
+                sign: None,
+                alternate: false,
+                zero_pad: false,
+                debug_hex: None,
+                precision: CountImplied,
+                precision_span: None,
+                width: CountIs(10),
+                width_span: Some(3..5),
+                ty: "x",
+                ty_span: None,
+            },
+        }))],
+    );
+    same(
+        "{:10$.10x}",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentImplicitlyIs(0),
+            position_span: 2..2,
+            format: FormatSpec {
+                fill: None,
+                fill_span: None,
+                align: AlignUnknown,
+                sign: None,
+                alternate: false,
+                zero_pad: false,
+                debug_hex: None,
+                precision: CountIs(10),
+                precision_span: Some(6..9),
+                width: CountIsParam(10),
+                width_span: Some(3..6),
+                ty: "x",
+                ty_span: None,
+            },
+        }))],
+    );
+    same(
+        "{1:0$.10x}",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentIs(1),
+            position_span: 2..3,
+            format: FormatSpec {
+                fill: None,
+                fill_span: None,
+                align: AlignUnknown,
+                sign: None,
+                alternate: false,
+                zero_pad: false,
+                debug_hex: None,
+                precision: CountIs(10),
+                precision_span: Some(6..9),
+                width: CountIsParam(0),
+                width_span: Some(4..6),
+                ty: "x",
+                ty_span: None,
+            },
+        }))],
+    );
+    same(
+        "{:.*x}",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentImplicitlyIs(1),
+            position_span: 2..2,
+            format: FormatSpec {
+                fill: None,
+                fill_span: None,
+                align: AlignUnknown,
+                sign: None,
+                alternate: false,
+                zero_pad: false,
+                debug_hex: None,
+                precision: CountIsStar(0),
+                precision_span: Some(3..5),
+                width: CountImplied,
+                width_span: None,
+                ty: "x",
+                ty_span: None,
+            },
+        }))],
+    );
+    same(
+        "{:.10$x}",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentImplicitlyIs(0),
+            position_span: 2..2,
+            format: FormatSpec {
+                fill: None,
+                fill_span: None,
+                align: AlignUnknown,
+                sign: None,
+                alternate: false,
+                zero_pad: false,
+                debug_hex: None,
+                precision: CountIsParam(10),
+                width: CountImplied,
+                precision_span: Some(3..7),
+                width_span: None,
+                ty: "x",
+                ty_span: None,
+            },
+        }))],
+    );
+    same(
+        "{:a$.b$?}",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentImplicitlyIs(0),
+            position_span: 2..2,
+            format: FormatSpec {
+                fill: None,
+                fill_span: None,
+                align: AlignUnknown,
+                sign: None,
+                alternate: false,
+                zero_pad: false,
+                debug_hex: None,
+                precision: CountIsName("b", 6..7),
+                precision_span: Some(5..8),
+                width: CountIsName("a", 3..4),
+                width_span: Some(3..5),
+                ty: "?",
+                ty_span: None,
+            },
+        }))],
+    );
+    same(
+        "{:.4}",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentImplicitlyIs(0),
+            position_span: 2..2,
+            format: FormatSpec {
+                fill: None,
+                fill_span: None,
+                align: AlignUnknown,
+                sign: None,
+                alternate: false,
+                zero_pad: false,
+                debug_hex: None,
+                precision: CountIs(4),
+                precision_span: Some(3..5),
+                width: CountImplied,
+                width_span: None,
+                ty: "",
+                ty_span: None,
+            },
+        }))],
+    )
+}
+#[test]
+fn format_flags() {
+    same(
+        "{:-}",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentImplicitlyIs(0),
+            position_span: 2..2,
+            format: FormatSpec {
+                fill: None,
+                fill_span: None,
+                align: AlignUnknown,
+                sign: Some(Sign::Minus),
+                alternate: false,
+                zero_pad: false,
+                debug_hex: None,
+                precision: CountImplied,
+                width: CountImplied,
+                precision_span: None,
+                width_span: None,
+                ty: "",
+                ty_span: None,
+            },
+        }))],
+    );
+    same(
+        "{:+#}",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentImplicitlyIs(0),
+            position_span: 2..2,
+            format: FormatSpec {
+                fill: None,
+                fill_span: None,
+                align: AlignUnknown,
+                sign: Some(Sign::Plus),
+                alternate: true,
+                zero_pad: false,
+                debug_hex: None,
+                precision: CountImplied,
+                width: CountImplied,
+                precision_span: None,
+                width_span: None,
+                ty: "",
+                ty_span: None,
+            },
+        }))],
+    );
+}
+#[test]
+fn format_mixture() {
+    same(
+        "abcd {3:x} efg",
+        &[
+            Lit("abcd "),
+            NextArgument(Box::new(Argument {
+                position: ArgumentIs(3),
+                position_span: 7..8,
+                format: FormatSpec {
+                    fill: None,
+                    fill_span: None,
+                    align: AlignUnknown,
+                    sign: None,
+                    alternate: false,
+                    zero_pad: false,
+                    debug_hex: None,
+                    precision: CountImplied,
+                    width: CountImplied,
+                    precision_span: None,
+                    width_span: None,
+                    ty: "x",
+                    ty_span: None,
+                },
+            })),
+            Lit(" efg"),
+        ],
+    );
+}
+#[test]
+fn format_whitespace() {
+    same(
+        "{ }",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentImplicitlyIs(0),
+            position_span: 2..3,
+            format: fmtdflt(),
+        }))],
+    );
+    same(
+        "{  }",
+        &[NextArgument(Box::new(Argument {
+            position: ArgumentImplicitlyIs(0),
+            position_span: 2..4,
+            format: fmtdflt(),
+        }))],
+    );
+}
+#[test]
+fn asm_linespans() {
+    let asm_pre = r###"r"
+        .intel_syntax noprefix
+        nop""###;
+    let asm = r"
+        .intel_syntax noprefix
+        nop";
+    let mut parser = Parser::new(asm, Some(0), Some(asm_pre.into()), false, ParseMode::InlineAsm);
+    assert!(parser.is_source_literal);
+    assert_eq!(
+        parser.by_ref().collect::<Vec<Piece<'static>>>(),
+        &[Lit("\n        .intel_syntax noprefix\n        nop")]
+    );
+    assert_eq!(parser.line_spans, &[2..2, 11..33, 42..45]);
+}
+#[test]
+fn asm_concat() {
+    let asm_pre = r###"concat!("invalid", "_", "instruction")"###;
+    let asm = "invalid_instruction";
+    let mut parser = Parser::new(asm, None, Some(asm_pre.into()), false, ParseMode::InlineAsm);
+    assert!(!parser.is_source_literal);
+    assert_eq!(parser.by_ref().collect::<Vec<Piece<'static>>>(), &[Lit(asm)]);
+    assert_eq!(parser.line_spans, &[]);
+}
+
+#[test]
+fn diagnostic_format_flags() {
+    let lit = "{thing:blah}";
+    let mut parser = Parser::new(lit, None, None, false, ParseMode::Diagnostic);
+    assert!(!parser.is_source_literal);
+
+    let [NextArgument(arg)] = &*parser.by_ref().collect::<Vec<Piece<'static>>>() else { panic!() };
+
+    assert_eq!(
+        **arg,
+        Argument {
+            position: ArgumentNamed("thing"),
+            position_span: 2..7,
+            format: FormatSpec { ty: ":blah", ty_span: Some(7..12), ..Default::default() },
+        }
+    );
+
+    assert_eq!(parser.line_spans, &[]);
+    assert!(parser.errors.is_empty());
+}
+
+#[test]
+fn diagnostic_format_mod() {
+    let lit = "{thing:+}";
+    let mut parser = Parser::new(lit, None, None, false, ParseMode::Diagnostic);
+    assert!(!parser.is_source_literal);
+
+    let [NextArgument(arg)] = &*parser.by_ref().collect::<Vec<Piece<'static>>>() else { panic!() };
+
+    assert_eq!(
+        **arg,
+        Argument {
+            position: ArgumentNamed("thing"),
+            position_span: 2..7,
+            format: FormatSpec { ty: ":+", ty_span: Some(7..9), ..Default::default() },
+        }
+    );
+
+    assert_eq!(parser.line_spans, &[]);
+    assert!(parser.errors.is_empty());
+}

@@ -1,30 +1,203 @@
-/* FP:select.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_select_USE_0001
-/* FP:select.rs-0002 */ use std :: ops :: ControlFlow ;
-/* FP:select.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_select_USE_0002
-/* FP:select.rs-0004 */ use crate :: rustc_infer :: infer :: InferCtxt ;
-/* FP:select.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_select_USE_0003
-/* FP:select.rs-0006 */ use crate :: rustc_infer :: traits :: solve :: inspect :: ProbeKind ;
-/* FP:select.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_select_USE_0004
-/* FP:select.rs-0008 */ use crate :: rustc_infer :: traits :: solve :: { CandidateSource , Certainty , Goal } ;
-/* FP:select.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_select_USE_0005
-/* FP:select.rs-0010 */ use crate :: rustc_infer :: traits :: { BuiltinImplSource , ImplSource , ImplSourceUserDefinedData , Obligation , ObligationCause , Selection , SelectionError , SelectionResult , TraitObligation , } ;
-/* FP:select.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_select_USE_0006
-/* FP:select.rs-0012 */ use rustc_macros :: extension ;
-/* FP:select.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_select_USE_0007
-/* FP:select.rs-0014 */ use crate :: rustc_complete :: { bug , span_bug } ;
-/* FP:select.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_select_USE_0008
-/* FP:select.rs-0016 */ use crate :: rustc_complete :: Span ;
-/* FP:select.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_select_USE_0009
-/* FP:select.rs-0018 */ use thin_vec :: thin_vec ;
-/* FP:select.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_select_USE_0010
-/* FP:select.rs-0020 */ use crate :: solve :: inspect :: { self , ProofTreeInferCtxtExt } ;
-/* FP:select.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_select_IMPL_0011
-/* FP:select.rs-0022 */ # [extension (pub trait InferCtxtSelectExt <'tcx >)] impl < 'tcx > InferCtxt < 'tcx > { # [doc = " Do not use this directly. This is called from [`crate::traits::SelectionContext::select`]."] fn select_in_new_trait_solver (& self , obligation : & TraitObligation < 'tcx > ,) -> SelectionResult < 'tcx , Selection < 'tcx > > { assert ! (self . next_trait_solver ()) ; self . visit_proof_tree (Goal :: new (self . tcx , obligation . param_env , obligation . predicate) , & mut Select { span : obligation . cause . span } ,) . break_value () . unwrap () } }
-/* FP:select.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_select_STRUCT_0012
-/* FP:select.rs-0024 */ struct Select { span : Span , }
-/* FP:select.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_select_IMPL_0013
-/* FP:select.rs-0026 */ impl < 'tcx > inspect :: ProofTreeVisitor < 'tcx > for Select { type Result = ControlFlow < SelectionResult < 'tcx , Selection < 'tcx > > > ; fn span (& self) -> Span { self . span } fn visit_goal (& mut self , goal : & inspect :: InspectGoal < '_ , 'tcx >) -> Self :: Result { let mut candidates = goal . candidates () ; candidates . retain (| cand | cand . result () . is_ok ()) ; if candidates . is_empty () { return ControlFlow :: Break (Err (SelectionError :: Unimplemented)) ; } if candidates . len () == 1 { return ControlFlow :: Break (Ok (to_selection (self . span , candidates . into_iter () . next () . unwrap () ,))) ; } if matches ! (goal . result () . unwrap () , Certainty :: Maybe (..)) { return ControlFlow :: Break (Ok (None)) ; } let mut i = 0 ; while i < candidates . len () { let should_drop_i = (0 .. candidates . len ()) . filter (| & j | i != j) . any (| j | candidate_should_be_dropped_in_favor_of (& candidates [i] , & candidates [j])) ; if should_drop_i { candidates . swap_remove (i) ; } else { i += 1 ; if i > 1 { return ControlFlow :: Break (Ok (None)) ; } } } ControlFlow :: Break (Ok (to_selection (self . span , candidates . into_iter () . next () . unwrap ()))) } }
-/* FP:select.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_select_FN_0014
-/* FP:select.rs-0028 */ # [doc = " This is a lot more limited than the old solver's equivalent method. This may lead to more `Ok(None)`"] # [doc = " results when selecting traits in polymorphic contexts, but we should never rely on the lack of ambiguity,"] # [doc = " and should always just gracefully fail here. We shouldn't rely on this incompleteness."] fn candidate_should_be_dropped_in_favor_of < 'tcx > (victim : & inspect :: InspectCandidate < '_ , 'tcx > , other : & inspect :: InspectCandidate < '_ , 'tcx > ,) -> bool { if matches ! (other . result () . unwrap () , Certainty :: Maybe (..)) { return false ; } let inspect :: ProbeKind :: TraitCandidate { source : victim_source , result : _ } = victim . kind () else { return false ; } ; let inspect :: ProbeKind :: TraitCandidate { source : other_source , result : _ } = other . kind () else { return false ; } ; match (victim_source , other_source) { (_ , CandidateSource :: CoherenceUnknowable) | (CandidateSource :: CoherenceUnknowable , _) => { bug ! ("should not have assembled a CoherenceUnknowable candidate") } (CandidateSource :: BuiltinImpl (BuiltinImplSource :: Object (a)) , CandidateSource :: BuiltinImpl (BuiltinImplSource :: Object (b)) ,) => a >= b , (CandidateSource :: BuiltinImpl (BuiltinImplSource :: TraitUpcasting (a)) , CandidateSource :: BuiltinImpl (BuiltinImplSource :: TraitUpcasting (b)) ,) => a >= b , (CandidateSource :: Impl (_) | CandidateSource :: ParamEnv (_) | CandidateSource :: AliasBound , CandidateSource :: BuiltinImpl (BuiltinImplSource :: Object { .. }) ,) => true , (CandidateSource :: Impl (victim_def_id) , CandidateSource :: Impl (other_def_id)) => { victim . goal () . infcx () . tcx . specializes ((other_def_id , victim_def_id)) } _ => false , } }
-/* FP:select.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_select_FN_0015
-/* FP:select.rs-0030 */ fn to_selection < 'tcx > (span : Span , cand : inspect :: InspectCandidate < '_ , 'tcx > ,) -> Option < Selection < 'tcx > > { if let Certainty :: Maybe (..) = cand . shallow_certainty () { return None ; } let nested = match cand . result () . expect ("expected positive result") { Certainty :: Yes => thin_vec ! [] , Certainty :: Maybe (_) => cand . instantiate_nested_goals (span) . into_iter () . map (| nested | { Obligation :: new (nested . infcx () . tcx , ObligationCause :: dummy_with_span (span) , nested . goal () . param_env , nested . goal () . predicate ,) }) . collect () , } ; Some (match cand . kind () { ProbeKind :: TraitCandidate { source , result : _ } => match source { CandidateSource :: Impl (impl_def_id) => { ImplSource :: UserDefined (ImplSourceUserDefinedData { impl_def_id , args : cand . instantiate_impl_args (span) , nested , }) } CandidateSource :: BuiltinImpl (builtin) => ImplSource :: Builtin (builtin , nested) , CandidateSource :: ParamEnv (_) | CandidateSource :: AliasBound => ImplSource :: Param (nested) , CandidateSource :: CoherenceUnknowable => { span_bug ! (span , "didn't expect to select an unknowable candidate") } } , ProbeKind :: NormalizedSelfTyAssembly | ProbeKind :: UnsizeAssembly | ProbeKind :: ProjectionCompatibility | ProbeKind :: OpaqueTypeStorageLookup { result : _ } | ProbeKind :: Root { result : _ } | ProbeKind :: ShadowedEnvProbing | ProbeKind :: RigidAlias { result : _ } => { span_bug ! (span , "didn't expect to assemble trait candidate from {:#?}" , cand . kind ()) } }) }
+// SRC: ../rust/compiler/rustc_trait_selection/src/solve/select.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use std::ops::ControlFlow;
+
+use crate::rustc_infer::infer::InferCtxt;
+use crate::rustc_infer::traits::solve::inspect::ProbeKind;
+use crate::rustc_infer::traits::solve::{CandidateSource, Certainty, Goal};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use crate::rustc_infer::traits::{
+    BuiltinImplSource, ImplSource, ImplSourceUserDefinedData, Obligation, ObligationCause,
+    Selection, SelectionError, SelectionResult, TraitObligation,
+};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use rustc_macros::extension;
+use crate::rustc_complete::{bug, span_bug};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use crate::rustc_complete::Span;
+use thin_vec::thin_vec;
+
+use crate::solve::inspect::{self, ProofTreeInferCtxtExt};
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=select_in_new_trait_solver | COMPLEXITY=5 | LINES=18 */
+
+#[extension(pub trait InferCtxtSelectExt<'tcx>)]
+impl<'tcx> InferCtxt<'tcx> {
+    /// Do not use this directly. This is called from [`crate::traits::SelectionContext::select`].
+    fn select_in_new_trait_solver(
+        &self,
+        obligation: &TraitObligation<'tcx>,
+    ) -> SelectionResult<'tcx, Selection<'tcx>> {
+        assert!(self.next_trait_solver());
+
+        self.visit_proof_tree(
+            Goal::new(self.tcx, obligation.param_env, obligation.predicate),
+            &mut Select { span: obligation.cause.span },
+        )
+        .break_value()
+        .unwrap()
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=Select | COMPLEXITY=2 | LINES=4 */
+
+struct Select {
+    span: Span,
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=span | COMPLEXITY=28 | LINES=50 */
+
+impl<'tcx> inspect::ProofTreeVisitor<'tcx> for Select {
+    type Result = ControlFlow<SelectionResult<'tcx, Selection<'tcx>>>;
+
+    fn span(&self) -> Span {
+        self.span
+    }
+
+    fn visit_goal(&mut self, goal: &inspect::InspectGoal<'_, 'tcx>) -> Self::Result {
+        let mut candidates = goal.candidates();
+        candidates.retain(|cand| cand.result().is_ok());
+
+        // No candidates -- not implemented.
+        if candidates.is_empty() {
+            return ControlFlow::Break(Err(SelectionError::Unimplemented));
+        }
+
+        // One candidate, no need to winnow.
+        if candidates.len() == 1 {
+            return ControlFlow::Break(Ok(to_selection(
+                self.span,
+                candidates.into_iter().next().unwrap(),
+            )));
+        }
+
+        // Don't winnow until `Certainty::Yes` -- we don't need to winnow until
+        // codegen, and only on the good path.
+        if matches!(goal.result().unwrap(), Certainty::Maybe(..)) {
+            return ControlFlow::Break(Ok(None));
+        }
+
+        // We need to winnow. See comments on `candidate_should_be_dropped_in_favor_of`.
+        let mut i = 0;
+        while i < candidates.len() {
+            let should_drop_i = (0..candidates.len())
+                .filter(|&j| i != j)
+                .any(|j| candidate_should_be_dropped_in_favor_of(&candidates[i], &candidates[j]));
+            if should_drop_i {
+                candidates.swap_remove(i);
+            } else {
+                i += 1;
+                if i > 1 {
+                    return ControlFlow::Break(Ok(None));
+                }
+            }
+        }
+
+        ControlFlow::Break(Ok(to_selection(self.span, candidates.into_iter().next().unwrap())))
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=candidate_should_be_dropped_in_favor_of | COMPLEXITY=22 | LINES=53 */
+
+/// This is a lot more limited than the old solver's equivalent method. This may lead to more `Ok(None)`
+/// results when selecting traits in polymorphic contexts, but we should never rely on the lack of ambiguity,
+/// and should always just gracefully fail here. We shouldn't rely on this incompleteness.
+fn candidate_should_be_dropped_in_favor_of<'tcx>(
+    victim: &inspect::InspectCandidate<'_, 'tcx>,
+    other: &inspect::InspectCandidate<'_, 'tcx>,
+) -> bool {
+    // Don't winnow until `Certainty::Yes` -- we don't need to winnow until
+    // codegen, and only on the good path.
+    if matches!(other.result().unwrap(), Certainty::Maybe(..)) {
+        return false;
+    }
+
+    let inspect::ProbeKind::TraitCandidate { source: victim_source, result: _ } = victim.kind()
+    else {
+        return false;
+    };
+    let inspect::ProbeKind::TraitCandidate { source: other_source, result: _ } = other.kind()
+    else {
+        return false;
+    };
+
+    match (victim_source, other_source) {
+        (_, CandidateSource::CoherenceUnknowable) | (CandidateSource::CoherenceUnknowable, _) => {
+            bug!("should not have assembled a CoherenceUnknowable candidate")
+        }
+
+        // In the old trait solver, we arbitrarily choose lower vtable candidates
+        // over higher ones.
+        (
+            CandidateSource::BuiltinImpl(BuiltinImplSource::Object(a)),
+            CandidateSource::BuiltinImpl(BuiltinImplSource::Object(b)),
+        ) => a >= b,
+        (
+            CandidateSource::BuiltinImpl(BuiltinImplSource::TraitUpcasting(a)),
+            CandidateSource::BuiltinImpl(BuiltinImplSource::TraitUpcasting(b)),
+        ) => a >= b,
+        // Prefer dyn candidates over non-dyn candidates. This is necessary to
+        // handle the unsoundness between `impl<T: ?Sized> Any for T` and `dyn Any: Any`.
+        (
+            CandidateSource::Impl(_) | CandidateSource::ParamEnv(_) | CandidateSource::AliasBound,
+            CandidateSource::BuiltinImpl(BuiltinImplSource::Object { .. }),
+        ) => true,
+
+        // Prefer specializing candidates over specialized candidates.
+        (CandidateSource::Impl(victim_def_id), CandidateSource::Impl(other_def_id)) => {
+            victim.goal().infcx().tcx.specializes((other_def_id, victim_def_id))
+        }
+
+        _ => false,
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=to_selection | COMPLEXITY=34 | LINES=53 */
+
+fn to_selection<'tcx>(
+    span: Span,
+    cand: inspect::InspectCandidate<'_, 'tcx>,
+) -> Option<Selection<'tcx>> {
+    if let Certainty::Maybe(..) = cand.shallow_certainty() {
+        return None;
+    }
+
+    let nested = match cand.result().expect("expected positive result") {
+        Certainty::Yes => thin_vec![],
+        Certainty::Maybe(_) => cand
+            .instantiate_nested_goals(span)
+            .into_iter()
+            .map(|nested| {
+                Obligation::new(
+                    nested.infcx().tcx,
+                    ObligationCause::dummy_with_span(span),
+                    nested.goal().param_env,
+                    nested.goal().predicate,
+                )
+            })
+            .collect(),
+    };
+
+    Some(match cand.kind() {
+        ProbeKind::TraitCandidate { source, result: _ } => match source {
+            CandidateSource::Impl(impl_def_id) => {
+                // FIXME: Remove this in favor of storing this in the tree
+                // For impl candidates, we do the rematch manually to compute the args.
+                ImplSource::UserDefined(ImplSourceUserDefinedData {
+                    impl_def_id,
+                    args: cand.instantiate_impl_args(span),
+                    nested,
+                })
+            }
+            CandidateSource::BuiltinImpl(builtin) => ImplSource::Builtin(builtin, nested),
+            CandidateSource::ParamEnv(_) | CandidateSource::AliasBound => ImplSource::Param(nested),
+            CandidateSource::CoherenceUnknowable => {
+                span_bug!(span, "didn't expect to select an unknowable candidate")
+            }
+        },
+        ProbeKind::NormalizedSelfTyAssembly
+        | ProbeKind::UnsizeAssembly
+        | ProbeKind::ProjectionCompatibility
+        | ProbeKind::OpaqueTypeStorageLookup { result: _ }
+        | ProbeKind::Root { result: _ }
+        | ProbeKind::ShadowedEnvProbing
+        | ProbeKind::RigidAlias { result: _ } => {
+            span_bug!(span, "didn't expect to assemble trait candidate from {:#?}", cand.kind())
+        }
+    })
+}

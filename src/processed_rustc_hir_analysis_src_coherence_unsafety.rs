@@ -1,24 +1,126 @@
-/* FP:unsafety.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_coherence_unsafety_USE_0001
-/* FP:unsafety.rs-0002 */ use crate :: rustc_complete :: codes :: * ;
-/* FP:unsafety.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_coherence_unsafety_USE_0002
-/* FP:unsafety.rs-0004 */ use crate :: rustc_complete :: struct_span_code_err ;
-/* FP:unsafety.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_coherence_unsafety_USE_0003
-/* FP:unsafety.rs-0006 */ use crate :: rustc_complete :: { LangItem , Safety } ;
-/* FP:unsafety.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_coherence_unsafety_USE_0004
-/* FP:unsafety.rs-0008 */ use crate :: rustc_complete :: ty :: ImplPolarity :: * ;
-/* FP:unsafety.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_coherence_unsafety_USE_0005
-/* FP:unsafety.rs-0010 */ use crate :: rustc_complete :: ty :: print :: PrintTraitRefExt as _ ;
-/* FP:unsafety.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_coherence_unsafety_USE_0006
-/* FP:unsafety.rs-0012 */ use crate :: rustc_complete :: ty :: { ImplTraitHeader , TraitDef , TyCtxt } ;
-/* FP:unsafety.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_coherence_unsafety_USE_0007
-/* FP:unsafety.rs-0014 */ use crate :: rustc_complete :: ErrorGuaranteed ;
-/* FP:unsafety.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_coherence_unsafety_USE_0008
-/* FP:unsafety.rs-0016 */ use crate :: rustc_complete :: def_id :: LocalDefId ;
-/* FP:unsafety.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_coherence_unsafety_FN_0009
-/* FP:unsafety.rs-0018 */ pub (super) fn check_item (tcx : TyCtxt < '_ > , def_id : LocalDefId , trait_header : ImplTraitHeader < '_ > , trait_def : & TraitDef ,) -> Result < () , ErrorGuaranteed > { let unsafe_attr = tcx . generics_of (def_id) . own_params . iter () . find (| p | p . pure_wrt_drop) . map (| _ | "may_dangle") ; let trait_ref = trait_header . trait_ref . instantiate_identity () ; let is_copy = tcx . is_lang_item (trait_def . def_id , LangItem :: Copy) ; let trait_def_safety = if is_copy { if trait_header . trait_ref . skip_binder () . self_ty () . has_unsafe_fields () { crate :: rustc_hir :: Safety :: Unsafe } else { crate :: rustc_hir :: Safety :: Safe } } else { trait_def . safety } ; match (trait_def_safety , unsafe_attr , trait_header . safety , trait_header . polarity) { (Safety :: Safe , None , Safety :: Unsafe , Positive | Reservation) => { let span = tcx . def_span (def_id) ; return Err (struct_span_code_err ! (tcx . dcx () , tcx . def_span (def_id) , E0199 , "implementing the trait `{}` is not unsafe" , trait_ref . print_trait_sugared ()) . with_span_suggestion_verbose (span . with_hi (span . lo () + crate :: rustc_span :: BytePos (7)) , "remove `unsafe` from this trait implementation" , "" , crate :: rustc_errors :: Applicability :: MachineApplicable ,) . emit ()) ; } (Safety :: Unsafe , _ , Safety :: Safe , Positive | Reservation) => { let span = tcx . def_span (def_id) ; return Err (struct_span_code_err ! (tcx . dcx () , span , E0200 , "the trait `{}` requires an `unsafe impl` declaration" , trait_ref . print_trait_sugared ()) . with_note (if is_copy { format ! ("the trait `{}` cannot be safely implemented for `{}` \
-/* FP:unsafety.rs-0019 */                         because it has unsafe fields. Review the invariants \
-/* FP:unsafety.rs-0020 */                         of those fields before adding an `unsafe impl`" , trait_ref . print_trait_sugared () , trait_ref . self_ty () ,) } else { format ! ("the trait `{}` enforces invariants that the compiler can't check. \
-/* FP:unsafety.rs-0021 */                         Review the trait documentation and make sure this implementation \
-/* FP:unsafety.rs-0022 */                         upholds those invariants before adding the `unsafe` keyword" , trait_ref . print_trait_sugared ()) }) . with_span_suggestion_verbose (span . shrink_to_lo () , "add `unsafe` to this trait implementation" , "unsafe " , crate :: rustc_errors :: Applicability :: MaybeIncorrect ,) . emit ()) ; } (Safety :: Safe , Some (attr_name) , Safety :: Safe , Positive | Reservation) => { let span = tcx . def_span (def_id) ; return Err (struct_span_code_err ! (tcx . dcx () , span , E0569 , "requires an `unsafe impl` declaration due to `#[{}]` attribute" , attr_name) . with_note (format ! ("the trait `{}` enforces invariants that the compiler can't check. \
-/* FP:unsafety.rs-0023 */                     Review the trait documentation and make sure this implementation \
-/* FP:unsafety.rs-0024 */                     upholds those invariants before adding the `unsafe` keyword" , trait_ref . print_trait_sugared ())) . with_span_suggestion_verbose (span . shrink_to_lo () , "add `unsafe` to this trait implementation" , "unsafe " , crate :: rustc_errors :: Applicability :: MaybeIncorrect ,) . emit ()) ; } (_ , _ , Safety :: Unsafe , Negative) => { assert ! (tcx . dcx () . has_errors () . is_some () , "unsafe negative impl") ; Ok (()) } (_ , _ , Safety :: Safe , Negative) | (Safety :: Unsafe , _ , Safety :: Unsafe , Positive | Reservation) | (Safety :: Safe , Some (_) , Safety :: Unsafe , Positive | Reservation) | (Safety :: Safe , None , Safety :: Safe , _) => Ok (()) , } }
+// SRC: ../rust/compiler/rustc_hir_analysis/src/coherence/unsafety.rs
+/* AST_META: AST_ID=1 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+// Unsafety checker: every impl either implements a trait defined in this
+// crate or pertains to a type defined in this crate.
+
+use crate::rustc_complete::codes::*;
+use crate::rustc_complete::struct_span_code_err;
+use crate::rustc_complete::{LangItem, Safety};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_complete::ty::ImplPolarity::*;
+use crate::rustc_complete::ty::print::PrintTraitRefExt as _;
+use crate::rustc_complete::ty::{ImplTraitHeader, TraitDef, TyCtxt};
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=76 | LINES=113 */
+use crate::rustc_complete::ErrorGuaranteed;
+use crate::rustc_complete::def_id::LocalDefId;
+
+pub(super) fn check_item(
+    tcx: TyCtxt<'_>,
+    def_id: LocalDefId,
+    trait_header: ImplTraitHeader<'_>,
+    trait_def: &TraitDef,
+) -> Result<(), ErrorGuaranteed> {
+    let unsafe_attr =
+        tcx.generics_of(def_id).own_params.iter().find(|p| p.pure_wrt_drop).map(|_| "may_dangle");
+    let trait_ref = trait_header.trait_ref.instantiate_identity();
+
+    let is_copy = tcx.is_lang_item(trait_def.def_id, LangItem::Copy);
+    let trait_def_safety = if is_copy {
+        // If `Self` has unsafe fields, `Copy` is unsafe to implement.
+        if trait_header.trait_ref.skip_binder().self_ty().has_unsafe_fields() {
+            crate::rustc_hir::Safety::Unsafe
+        } else {
+            crate::rustc_hir::Safety::Safe
+        }
+    } else {
+        trait_def.safety
+    };
+
+    match (trait_def_safety, unsafe_attr, trait_header.safety, trait_header.polarity) {
+        (Safety::Safe, None, Safety::Unsafe, Positive | Reservation) => {
+            let span = tcx.def_span(def_id);
+            return Err(struct_span_code_err!(
+                tcx.dcx(),
+                tcx.def_span(def_id),
+                E0199,
+                "implementing the trait `{}` is not unsafe",
+                trait_ref.print_trait_sugared()
+            )
+            .with_span_suggestion_verbose(
+                span.with_hi(span.lo() + crate::rustc_span::BytePos(7)),
+                "remove `unsafe` from this trait implementation",
+                "",
+                crate::rustc_errors::Applicability::MachineApplicable,
+            )
+            .emit());
+        }
+
+        (Safety::Unsafe, _, Safety::Safe, Positive | Reservation) => {
+            let span = tcx.def_span(def_id);
+            return Err(struct_span_code_err!(
+                tcx.dcx(),
+                span,
+                E0200,
+                "the trait `{}` requires an `unsafe impl` declaration",
+                trait_ref.print_trait_sugared()
+            )
+            .with_note(if is_copy {
+                format!(
+                    "the trait `{}` cannot be safely implemented for `{}` \
+                        because it has unsafe fields. Review the invariants \
+                        of those fields before adding an `unsafe impl`",
+                    trait_ref.print_trait_sugared(),
+                    trait_ref.self_ty(),
+                )
+            } else {
+                format!(
+                    "the trait `{}` enforces invariants that the compiler can't check. \
+                        Review the trait documentation and make sure this implementation \
+                        upholds those invariants before adding the `unsafe` keyword",
+                    trait_ref.print_trait_sugared()
+                )
+            })
+            .with_span_suggestion_verbose(
+                span.shrink_to_lo(),
+                "add `unsafe` to this trait implementation",
+                "unsafe ",
+                crate::rustc_errors::Applicability::MaybeIncorrect,
+            )
+            .emit());
+        }
+
+        (Safety::Safe, Some(attr_name), Safety::Safe, Positive | Reservation) => {
+            let span = tcx.def_span(def_id);
+            return Err(struct_span_code_err!(
+                tcx.dcx(),
+                span,
+                E0569,
+                "requires an `unsafe impl` declaration due to `#[{}]` attribute",
+                attr_name
+            )
+            .with_note(format!(
+                "the trait `{}` enforces invariants that the compiler can't check. \
+                    Review the trait documentation and make sure this implementation \
+                    upholds those invariants before adding the `unsafe` keyword",
+                trait_ref.print_trait_sugared()
+            ))
+            .with_span_suggestion_verbose(
+                span.shrink_to_lo(),
+                "add `unsafe` to this trait implementation",
+                "unsafe ",
+                crate::rustc_errors::Applicability::MaybeIncorrect,
+            )
+            .emit());
+        }
+
+        (_, _, Safety::Unsafe, Negative) => {
+            // Reported in AST validation
+            assert!(tcx.dcx().has_errors().is_some(), "unsafe negative impl");
+            Ok(())
+        }
+        (_, _, Safety::Safe, Negative)
+        | (Safety::Unsafe, _, Safety::Unsafe, Positive | Reservation)
+        | (Safety::Safe, Some(_), Safety::Unsafe, Positive | Reservation)
+        | (Safety::Safe, None, Safety::Safe, _) => Ok(()),
+    }
+}

@@ -1,18 +1,70 @@
-/* FP:write.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_traits_write_USE_0001
-/* FP:write.rs-0002 */ use std :: path :: PathBuf ;
-/* FP:write.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_traits_write_USE_0002
-/* FP:write.rs-0004 */ use crate :: rustc_complete :: DiagCtxtHandle ;
-/* FP:write.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_traits_write_USE_0003
-/* FP:write.rs-0006 */ use crate :: rustc_complete :: dep_graph :: WorkProduct ;
-/* FP:write.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_traits_write_USE_0004
-/* FP:write.rs-0008 */ use crate :: back :: lto :: { SerializedModule , ThinModule } ;
-/* FP:write.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_traits_write_USE_0005
-/* FP:write.rs-0010 */ use crate :: back :: write :: { CodegenContext , FatLtoInput , ModuleConfig } ;
-/* FP:write.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_traits_write_USE_0006
-/* FP:write.rs-0012 */ use crate :: { CompiledModule , ModuleCodegen } ;
-/* FP:write.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_traits_write_TRAIT_0007
-/* FP:write.rs-0014 */ pub trait WriteBackendMethods : Clone + 'static { type Module : Send + Sync ; type TargetMachine ; type TargetMachineError ; type ModuleBuffer : ModuleBufferMethods ; type ThinData : Send + Sync ; type ThinBuffer : ThinBufferMethods ; # [doc = " Performs fat LTO by merging all modules into a single one, running autodiff"] # [doc = " if necessary and running any further optimizations"] fn run_and_optimize_fat_lto (cgcx : & CodegenContext < Self > , exported_symbols_for_lto : & [String] , each_linked_rlib_for_lto : & [PathBuf] , modules : Vec < FatLtoInput < Self > > ,) -> ModuleCodegen < Self :: Module > ; # [doc = " Performs thin LTO by performing necessary global analysis and returning two"] # [doc = " lists, one of the modules that need optimization and another for modules that"] # [doc = " can simply be copied over from the incr. comp. cache."] fn run_thin_lto (cgcx : & CodegenContext < Self > , exported_symbols_for_lto : & [String] , each_linked_rlib_for_lto : & [PathBuf] , modules : Vec < (String , Self :: ThinBuffer) > , cached_modules : Vec < (SerializedModule < Self :: ModuleBuffer > , WorkProduct) > ,) -> (Vec < ThinModule < Self > > , Vec < WorkProduct >) ; fn print_pass_timings (& self) ; fn print_statistics (& self) ; fn optimize (cgcx : & CodegenContext < Self > , dcx : DiagCtxtHandle < '_ > , module : & mut ModuleCodegen < Self :: Module > , config : & ModuleConfig ,) ; fn optimize_thin (cgcx : & CodegenContext < Self > , thin : ThinModule < Self > ,) -> ModuleCodegen < Self :: Module > ; fn codegen (cgcx : & CodegenContext < Self > , module : ModuleCodegen < Self :: Module > , config : & ModuleConfig ,) -> CompiledModule ; fn prepare_thin (module : ModuleCodegen < Self :: Module >) -> (String , Self :: ThinBuffer) ; fn serialize_module (module : ModuleCodegen < Self :: Module >) -> (String , Self :: ModuleBuffer) ; }
-/* FP:write.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_traits_write_TRAIT_0008
-/* FP:write.rs-0016 */ pub trait ThinBufferMethods : Send + Sync { fn data (& self) -> & [u8] ; }
-/* FP:write.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_traits_write_TRAIT_0009
-/* FP:write.rs-0018 */ pub trait ModuleBufferMethods : Send + Sync { fn data (& self) -> & [u8] ; }
+// SRC: ../rust/compiler/rustc_codegen_ssa/src/traits/write.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+use std::path::PathBuf;
+
+use crate::rustc_complete::DiagCtxtHandle;
+use crate::rustc_complete::dep_graph::WorkProduct;
+
+use crate::back::lto::{SerializedModule, ThinModule};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::back::write::{CodegenContext, FatLtoInput, ModuleConfig};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::{CompiledModule, ModuleCodegen};
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=run_and_optimize_fat_lto | COMPLEXITY=9 | LINES=47 */
+
+pub trait WriteBackendMethods: Clone + 'static {
+    type Module: Send + Sync;
+    type TargetMachine;
+    type TargetMachineError;
+    type ModuleBuffer: ModuleBufferMethods;
+    type ThinData: Send + Sync;
+    type ThinBuffer: ThinBufferMethods;
+
+    /// Performs fat LTO by merging all modules into a single one, running autodiff
+    /// if necessary and running any further optimizations
+    fn run_and_optimize_fat_lto(
+        cgcx: &CodegenContext<Self>,
+        exported_symbols_for_lto: &[String],
+        each_linked_rlib_for_lto: &[PathBuf],
+        modules: Vec<FatLtoInput<Self>>,
+    ) -> ModuleCodegen<Self::Module>;
+    /// Performs thin LTO by performing necessary global analysis and returning two
+    /// lists, one of the modules that need optimization and another for modules that
+    /// can simply be copied over from the incr. comp. cache.
+    fn run_thin_lto(
+        cgcx: &CodegenContext<Self>,
+        exported_symbols_for_lto: &[String],
+        each_linked_rlib_for_lto: &[PathBuf],
+        modules: Vec<(String, Self::ThinBuffer)>,
+        cached_modules: Vec<(SerializedModule<Self::ModuleBuffer>, WorkProduct)>,
+    ) -> (Vec<ThinModule<Self>>, Vec<WorkProduct>);
+    fn print_pass_timings(&self);
+    fn print_statistics(&self);
+    fn optimize(
+        cgcx: &CodegenContext<Self>,
+        dcx: DiagCtxtHandle<'_>,
+        module: &mut ModuleCodegen<Self::Module>,
+        config: &ModuleConfig,
+    );
+    fn optimize_thin(
+        cgcx: &CodegenContext<Self>,
+        thin: ThinModule<Self>,
+    ) -> ModuleCodegen<Self::Module>;
+    fn codegen(
+        cgcx: &CodegenContext<Self>,
+        module: ModuleCodegen<Self::Module>,
+        config: &ModuleConfig,
+    ) -> CompiledModule;
+    fn prepare_thin(module: ModuleCodegen<Self::Module>) -> (String, Self::ThinBuffer);
+    fn serialize_module(module: ModuleCodegen<Self::Module>) -> (String, Self::ModuleBuffer);
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=data | COMPLEXITY=2 | LINES=4 */
+
+pub trait ThinBufferMethods: Send + Sync {
+    fn data(&self) -> &[u8];
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=data | COMPLEXITY=2 | LINES=4 */
+
+pub trait ModuleBufferMethods: Send + Sync {
+    fn data(&self) -> &[u8];
+}

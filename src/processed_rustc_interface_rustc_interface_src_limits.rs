@@ -1,14 +1,43 @@
-/* FP:limits.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_interface_src_limits_USE_0001
-/* FP:limits.rs-0002 */ use crate :: rustc_complete :: attrs :: AttributeKind ;
-/* FP:limits.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_interface_src_limits_USE_0002
-/* FP:limits.rs-0004 */ use crate :: rustc_complete :: limit :: Limit ;
-/* FP:limits.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_interface_src_limits_USE_0003
-/* FP:limits.rs-0006 */ use crate :: rustc_complete :: { Attribute , find_attr } ;
-/* FP:limits.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_interface_src_limits_USE_0004
-/* FP:limits.rs-0008 */ use crate :: rustc_complete :: query :: Providers ;
-/* FP:limits.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_interface_src_limits_USE_0005
-/* FP:limits.rs-0010 */ use crate :: rustc_complete :: Limits ;
-/* FP:limits.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_interface_src_limits_FN_0006
-/* FP:limits.rs-0012 */ pub (crate) fn provide (providers : & mut Providers) { providers . limits = | tcx , () | { let attrs = tcx . hir_krate_attrs () ; Limits { recursion_limit : get_recursion_limit (tcx . hir_krate_attrs ()) , move_size_limit : find_attr ! (attrs , AttributeKind :: MoveSizeLimit { limit , .. } => * limit) . unwrap_or (Limit :: new (tcx . sess . opts . unstable_opts . move_size_limit . unwrap_or (0))) , type_length_limit : find_attr ! (attrs , AttributeKind :: TypeLengthLimit { limit , .. } => * limit) . unwrap_or (Limit :: new (2usize . pow (24))) , pattern_complexity_limit : find_attr ! (attrs , AttributeKind :: PatternComplexityLimit { limit , .. } => * limit) . unwrap_or (Limit :: unlimited ()) , } } }
-/* FP:limits.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_interface_src_limits_FN_0007
-/* FP:limits.rs-0014 */ pub (crate) fn get_recursion_limit (attrs : & [Attribute]) -> Limit { find_attr ! (attrs , AttributeKind :: RecursionLimit { limit , .. } => * limit) . unwrap_or (Limit :: new (128)) }
+// SRC: ../rust/compiler/rustc_interface/src/limits.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=5 | LINES=13 */
+// Registering limits:
+// - recursion_limit: there are various parts of the compiler that must impose arbitrary limits
+//   on how deeply they recurse to prevent stack overflow.
+// - move_size_limit
+// - type_length_limit
+// - pattern_complexity_limit
+//
+// Users can override these limits via an attribute on the crate like
+// `#[recursion_limit="22"]`. This pass just looks for those attributes.
+
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_complete::{Attribute, find_attr};
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=20 */
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::Limits;
+
+pub(crate) fn provide(providers: &mut Providers) {
+    providers.limits = |tcx, ()| {
+        let attrs = tcx.hir_krate_attrs();
+        Limits {
+            recursion_limit: get_recursion_limit(tcx.hir_krate_attrs()),
+            move_size_limit:
+                find_attr!(attrs, AttributeKind::MoveSizeLimit { limit, .. } => *limit)
+                    .unwrap_or(Limit::new(tcx.sess.opts.unstable_opts.move_size_limit.unwrap_or(0))),
+            type_length_limit:
+                find_attr!(attrs, AttributeKind::TypeLengthLimit { limit, .. } => *limit)
+                    .unwrap_or(Limit::new(2usize.pow(24))),
+            pattern_complexity_limit:
+                find_attr!(attrs, AttributeKind::PatternComplexityLimit { limit, .. } => *limit)
+                    .unwrap_or(Limit::unlimited()),
+        }
+    }
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
+
+// This one is separate because it must be read prior to macro expansion.
+pub(crate) fn get_recursion_limit(attrs: &[Attribute]) -> Limit {
+    find_attr!(attrs, AttributeKind::RecursionLimit { limit, .. } => *limit)
+        .unwrap_or(Limit::new(128))
+}

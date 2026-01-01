@@ -1,68 +1,856 @@
-/* FP:jump_threading.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_USE_0001
-/* FP:jump_threading.rs-0002 */ use rustc_arena :: DroplessArena ;
-/* FP:jump_threading.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_USE_0002
-/* FP:jump_threading.rs-0004 */ use rustc_const_eval :: const_eval :: DummyMachine ;
-/* FP:jump_threading.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_USE_0003
-/* FP:jump_threading.rs-0006 */ use rustc_const_eval :: interpret :: { ImmTy , Immediate , InterpCx , OpTy , Projectable } ;
-/* FP:jump_threading.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_USE_0004
-/* FP:jump_threading.rs-0008 */ use crate :: rustc_data_structures :: fx :: FxHashSet ;
-/* FP:jump_threading.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_USE_0005
-/* FP:jump_threading.rs-0010 */ use crate :: rustc_index :: IndexVec ;
-/* FP:jump_threading.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_USE_0006
-/* FP:jump_threading.rs-0012 */ use crate :: rustc_index :: bit_set :: DenseBitSet ;
-/* FP:jump_threading.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_USE_0007
-/* FP:jump_threading.rs-0014 */ use crate :: rustc_complete :: bug ;
-/* FP:jump_threading.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_USE_0008
-/* FP:jump_threading.rs-0016 */ use crate :: rustc_complete :: mir :: interpret :: Scalar ;
-/* FP:jump_threading.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_USE_0009
-/* FP:jump_threading.rs-0018 */ use crate :: rustc_complete :: mir :: visit :: Visitor ;
-/* FP:jump_threading.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_USE_0010
-/* FP:jump_threading.rs-0020 */ use crate :: rustc_complete :: mir :: * ;
-/* FP:jump_threading.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_USE_0011
-/* FP:jump_threading.rs-0022 */ use crate :: rustc_complete :: ty :: { self , ScalarInt , TyCtxt } ;
-/* FP:jump_threading.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_USE_0012
-/* FP:jump_threading.rs-0024 */ use crate :: rustc_mir_dataflow :: lattice :: HasBottom ;
-/* FP:jump_threading.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_USE_0013
-/* FP:jump_threading.rs-0026 */ use crate :: rustc_mir_dataflow :: value_analysis :: { Map , PlaceIndex , State , TrackElem } ;
-/* FP:jump_threading.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_USE_0014
-/* FP:jump_threading.rs-0028 */ use crate :: rustc_complete :: DUMMY_SP ;
-/* FP:jump_threading.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_USE_0015
-/* FP:jump_threading.rs-0030 */ use tracing :: { debug , instrument , trace } ;
-/* FP:jump_threading.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_USE_0016
-/* FP:jump_threading.rs-0032 */ use crate :: cost_checker :: CostChecker ;
-/* FP:jump_threading.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_STRUCT_0017
-/* FP:jump_threading.rs-0034 */ pub (super) struct JumpThreading ;
-/* FP:jump_threading.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_CONST_0018
-/* FP:jump_threading.rs-0036 */ const MAX_BACKTRACK : usize = 5 ;
-/* FP:jump_threading.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_CONST_0019
-/* FP:jump_threading.rs-0038 */ const MAX_COST : usize = 100 ;
-/* FP:jump_threading.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_CONST_0020
-/* FP:jump_threading.rs-0040 */ const MAX_PLACES : usize = 100 ;
-/* FP:jump_threading.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_IMPL_0021
-/* FP:jump_threading.rs-0042 */ impl < 'tcx > crate :: MirPass < 'tcx > for JumpThreading { fn is_enabled (& self , sess : & crate :: rustc_session :: Session) -> bool { sess . mir_opt_level () >= 2 } # [instrument (skip_all level = "debug")] fn run_pass (& self , tcx : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) { let def_id = body . source . def_id () ; debug ! (? def_id) ; if tcx . is_coroutine (def_id) { trace ! ("Skipped for coroutine {:?}" , def_id) ; return ; } let typing_env = body . typing_env (tcx) ; let arena = & DroplessArena :: default () ; let mut finder = TOFinder { tcx , typing_env , ecx : InterpCx :: new (tcx , DUMMY_SP , typing_env , DummyMachine) , body , arena , map : Map :: new (tcx , body , Some (MAX_PLACES)) , loop_headers : loops :: maybe_loop_headers (body) , opportunities : Vec :: new () , } ; for (bb , _) in traversal :: preorder (body) { finder . start_from_switch (bb) ; } let opportunities = finder . opportunities ; debug ! (? opportunities) ; if opportunities . is_empty () { return ; } for to in opportunities . iter () { assert ! (to . chain . iter () . all (|& block | ! finder . loop_headers . contains (block))) ; } OpportunitySet :: new (body , opportunities) . apply (body) ; } fn is_required (& self) -> bool { false } }
-/* FP:jump_threading.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_STRUCT_0022
-/* FP:jump_threading.rs-0044 */ # [derive (Debug)] struct ThreadingOpportunity { # [doc = " The list of `BasicBlock`s from the one that found the opportunity to the `SwitchInt`."] chain : Vec < BasicBlock > , # [doc = " The `SwitchInt` will be replaced by `Goto { target }`."] target : BasicBlock , }
-/* FP:jump_threading.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_STRUCT_0023
-/* FP:jump_threading.rs-0046 */ struct TOFinder < 'a , 'tcx > { tcx : TyCtxt < 'tcx > , typing_env : ty :: TypingEnv < 'tcx > , ecx : InterpCx < 'tcx , DummyMachine > , body : & 'a Body < 'tcx > , map : Map < 'tcx > , loop_headers : DenseBitSet < BasicBlock > , # [doc = " We use an arena to avoid cloning the slices when cloning `state`."] arena : & 'a DroplessArena , opportunities : Vec < ThreadingOpportunity > , }
-/* FP:jump_threading.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_STRUCT_0024
-/* FP:jump_threading.rs-0048 */ # [doc = " Represent the following statement. If we can prove that the current local is equal/not-equal"] # [doc = " to `value`, jump to `target`."] # [derive (Copy , Clone , Debug)] struct Condition { value : ScalarInt , polarity : Polarity , target : BasicBlock , }
-/* FP:jump_threading.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_ENUM_0025
-/* FP:jump_threading.rs-0050 */ # [derive (Copy , Clone , Debug , Eq , PartialEq)] enum Polarity { Ne , Eq , }
-/* FP:jump_threading.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_IMPL_0026
-/* FP:jump_threading.rs-0052 */ impl Condition { fn matches (& self , value : ScalarInt) -> bool { (self . value == value) == (self . polarity == Polarity :: Eq) } }
-/* FP:jump_threading.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_STRUCT_0027
-/* FP:jump_threading.rs-0054 */ # [derive (Copy , Clone , Debug)] struct ConditionSet < 'a > (& 'a [Condition]) ;
-/* FP:jump_threading.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_IMPL_0028
-/* FP:jump_threading.rs-0056 */ impl HasBottom for ConditionSet < '_ > { const BOTTOM : Self = ConditionSet (& []) ; fn is_bottom (& self) -> bool { self . 0 . is_empty () } }
-/* FP:jump_threading.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_IMPL_0029
-/* FP:jump_threading.rs-0058 */ impl < 'a > ConditionSet < 'a > { fn iter (self) -> impl Iterator < Item = Condition > { self . 0 . iter () . copied () } fn iter_matches (self , value : ScalarInt) -> impl Iterator < Item = Condition > { self . iter () . filter (move | c | c . matches (value)) } fn map (self , arena : & 'a DroplessArena , f : impl Fn (Condition) -> Option < Condition > ,) -> Option < ConditionSet < 'a > > { let set = arena . try_alloc_from_iter (self . iter () . map (| c | f (c) . ok_or (()))) . ok () ? ; Some (ConditionSet (set)) } }
-/* FP:jump_threading.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_IMPL_0030
-/* FP:jump_threading.rs-0060 */ impl < 'a , 'tcx > TOFinder < 'a , 'tcx > { fn is_empty (& self , state : & State < ConditionSet < 'a > >) -> bool { state . all_bottom () } # [doc = " Recursion entry point to find threading opportunities."] # [instrument (level = "trace" , skip (self))] fn start_from_switch (& mut self , bb : BasicBlock) { let bbdata = & self . body [bb] ; if bbdata . is_cleanup || self . loop_headers . contains (bb) { return ; } let Some ((discr , targets)) = bbdata . terminator () . kind . as_switch () else { return } ; let Some (discr) = discr . place () else { return } ; debug ! (? discr , ? bb) ; let discr_ty = discr . ty (self . body , self . tcx) . ty ; let Ok (discr_layout) = self . ecx . layout_of (discr_ty) else { return } ; let Some (discr) = self . map . find (discr . as_ref ()) else { return } ; debug ! (? discr) ; let cost = CostChecker :: new (self . tcx , self . typing_env , None , self . body) ; let mut state = State :: new_reachable () ; let conds = if let Some ((value , then , else_)) = targets . as_static_if () { let Some (value) = ScalarInt :: try_from_uint (value , discr_layout . size) else { return } ; self . arena . alloc_from_iter ([Condition { value , polarity : Polarity :: Eq , target : then } , Condition { value , polarity : Polarity :: Ne , target : else_ } ,]) } else { self . arena . alloc_from_iter (targets . iter () . filter_map (| (value , target) | { let value = ScalarInt :: try_from_uint (value , discr_layout . size) ? ; Some (Condition { value , polarity : Polarity :: Eq , target }) })) } ; let conds = ConditionSet (conds) ; state . insert_value_idx (discr , conds , & self . map) ; self . find_opportunity (bb , state , cost , 0) } # [doc = " Recursively walk statements backwards from this bb's terminator to find threading"] # [doc = " opportunities."] # [instrument (level = "trace" , skip (self , cost) , ret)] fn find_opportunity (& mut self , bb : BasicBlock , mut state : State < ConditionSet < 'a > > , mut cost : CostChecker < '_ , 'tcx > , depth : usize ,) { if self . loop_headers . contains (bb) { return ; } debug ! (cost = ? cost . cost ()) ; for (statement_index , stmt) in self . body . basic_blocks [bb] . statements . iter () . enumerate () . rev () { if self . is_empty (& state) { return ; } cost . visit_statement (stmt , Location { block : bb , statement_index }) ; if cost . cost () > MAX_COST { return ; } self . process_statement (bb , stmt , & mut state) ; if let Some ((lhs , tail)) = self . mutated_statement (stmt) { state . flood_with_tail_elem (lhs . as_ref () , tail , & self . map , ConditionSet :: BOTTOM) ; } } if self . is_empty (& state) || depth >= MAX_BACKTRACK { return ; } let last_non_rec = self . opportunities . len () ; let predecessors = & self . body . basic_blocks . predecessors () [bb] ; if let & [pred] = & predecessors [..] && bb != START_BLOCK { let term = self . body . basic_blocks [pred] . terminator () ; match term . kind { TerminatorKind :: SwitchInt { ref discr , ref targets } => { self . process_switch_int (discr , targets , bb , & mut state) ; self . find_opportunity (pred , state , cost , depth + 1) ; } _ => self . recurse_through_terminator (pred , | | state , & cost , depth) , } } else if let & [ref predecessors @ .. , last_pred] = & predecessors [..] { for & pred in predecessors { self . recurse_through_terminator (pred , | | state . clone () , & cost , depth) ; } self . recurse_through_terminator (last_pred , | | state , & cost , depth) ; } let new_tos = & mut self . opportunities [last_non_rec ..] ; debug ! (? new_tos) ; if new_tos . len () > 1 && new_tos . len () == predecessors . len () && predecessors . iter () . zip (new_tos . iter ()) . all (| (& pred , to) | to . chain == & [pred] && to . target == new_tos [0] . target) { debug ! (? new_tos , "dedup") ; let first = & mut new_tos [0] ; * first = ThreadingOpportunity { chain : vec ! [bb] , target : first . target } ; self . opportunities . truncate (last_non_rec + 1) ; return ; } for op in self . opportunities [last_non_rec ..] . iter_mut () { op . chain . push (bb) ; } } # [doc = " Extract the mutated place from a statement."] # [doc = ""] # [doc = " This method returns the `Place` so we can flood the state in case of a partial assignment."] # [doc = "     (_1 as Ok).0 = _5;"] # [doc = "     (_1 as Err).0 = _6;"] # [doc = " We want to ensure that a `SwitchInt((_1 as Ok).0)` does not see the first assignment, as"] # [doc = " the value may have been mangled by the second assignment."] # [doc = ""] # [doc = " In case we assign to a discriminant, we return `Some(TrackElem::Discriminant)`, so we can"] # [doc = " stop at flooding the discriminant, and preserve the variant fields."] # [doc = "     (_1 as Some).0 = _6;"] # [doc = "     SetDiscriminant(_1, 1);"] # [doc = "     switchInt((_1 as Some).0)"] # [instrument (level = "trace" , skip (self) , ret)] fn mutated_statement (& self , stmt : & Statement < 'tcx > ,) -> Option < (Place < 'tcx > , Option < TrackElem >) > { match stmt . kind { StatementKind :: Assign (box (place , _)) | StatementKind :: Deinit (box place) => Some ((place , None)) , StatementKind :: SetDiscriminant { box place , variant_index : _ } => { Some ((place , Some (TrackElem :: Discriminant))) } StatementKind :: StorageLive (local) | StatementKind :: StorageDead (local) => { Some ((Place :: from (local) , None)) } StatementKind :: Retag (..) | StatementKind :: Intrinsic (box NonDivergingIntrinsic :: Assume (..)) | StatementKind :: Intrinsic (box NonDivergingIntrinsic :: CopyNonOverlapping (..)) | StatementKind :: AscribeUserType (..) | StatementKind :: Coverage (..) | StatementKind :: FakeRead (..) | StatementKind :: ConstEvalCounter | StatementKind :: PlaceMention (..) | StatementKind :: BackwardIncompatibleDropHint { .. } | StatementKind :: Nop => None , } } # [instrument (level = "trace" , skip (self))] fn process_immediate (& mut self , bb : BasicBlock , lhs : PlaceIndex , rhs : ImmTy < 'tcx > , state : & mut State < ConditionSet < 'a > > ,) { let register_opportunity = | c : Condition | { debug ! (? bb , ? c . target , "register") ; self . opportunities . push (ThreadingOpportunity { chain : vec ! [bb] , target : c . target }) } ; if let Some (conditions) = state . try_get_idx (lhs , & self . map) && let Immediate :: Scalar (Scalar :: Int (int)) = * rhs { conditions . iter_matches (int) . for_each (register_opportunity) ; } } # [doc = " If we expect `lhs ?= A`, we have an opportunity if we assume `constant == A`."] # [instrument (level = "trace" , skip (self))] fn process_constant (& mut self , bb : BasicBlock , lhs : PlaceIndex , constant : OpTy < 'tcx > , state : & mut State < ConditionSet < 'a > > ,) { self . map . for_each_projection_value (lhs , constant , & mut | elem , op | match elem { TrackElem :: Field (idx) => self . ecx . project_field (op , idx) . discard_err () , TrackElem :: Variant (idx) => self . ecx . project_downcast (op , idx) . discard_err () , TrackElem :: Discriminant => { let variant = self . ecx . read_discriminant (op) . discard_err () ? ; let discr_value = self . ecx . discriminant_for_variant (op . layout . ty , variant) . discard_err () ? ; Some (discr_value . into ()) } TrackElem :: DerefLen => { let op : OpTy < '_ > = self . ecx . deref_pointer (op) . discard_err () ? . into () ; let len_usize = op . len (& self . ecx) . discard_err () ? ; let layout = self . ecx . layout_of (self . tcx . types . usize) . unwrap () ; Some (ImmTy :: from_uint (len_usize , layout) . into ()) } } , & mut | place , op | { if let Some (conditions) = state . try_get_idx (place , & self . map) && let Some (imm) = self . ecx . read_immediate_raw (op) . discard_err () && let Some (imm) = imm . right () && let Immediate :: Scalar (Scalar :: Int (int)) = * imm { conditions . iter_matches (int) . for_each (| c : Condition | { self . opportunities . push (ThreadingOpportunity { chain : vec ! [bb] , target : c . target }) }) } } ,) ; } # [instrument (level = "trace" , skip (self))] fn process_operand (& mut self , bb : BasicBlock , lhs : PlaceIndex , rhs : & Operand < 'tcx > , state : & mut State < ConditionSet < 'a > > ,) { match rhs { Operand :: Constant (constant) => { let Some (constant) = self . ecx . eval_mir_constant (& constant . const_ , constant . span , None) . discard_err () else { return ; } ; self . process_constant (bb , lhs , constant , state) ; } Operand :: Move (rhs) | Operand :: Copy (rhs) => { let Some (rhs) = self . map . find (rhs . as_ref ()) else { return } ; state . insert_place_idx (rhs , lhs , & self . map) ; } } } # [instrument (level = "trace" , skip (self))] fn process_assign (& mut self , bb : BasicBlock , lhs_place : & Place < 'tcx > , rhs : & Rvalue < 'tcx > , state : & mut State < ConditionSet < 'a > > ,) { let Some (lhs) = self . map . find (lhs_place . as_ref ()) else { return } ; match rhs { Rvalue :: Use (operand) => self . process_operand (bb , lhs , operand , state) , Rvalue :: CopyForDeref (rhs) => self . process_operand (bb , lhs , & Operand :: Copy (* rhs) , state) , Rvalue :: Discriminant (rhs) => { let Some (rhs) = self . map . find_discr (rhs . as_ref ()) else { return } ; state . insert_place_idx (rhs , lhs , & self . map) ; } Rvalue :: Aggregate (box kind , operands) => { let agg_ty = lhs_place . ty (self . body , self . tcx) . ty ; let lhs = match kind { AggregateKind :: Adt (.. , Some (_)) => return , AggregateKind :: Adt (_ , variant_index , ..) if agg_ty . is_enum () => { if let Some (discr_target) = self . map . apply (lhs , TrackElem :: Discriminant) && let Some (discr_value) = self . ecx . discriminant_for_variant (agg_ty , * variant_index) . discard_err () { self . process_immediate (bb , discr_target , discr_value , state) ; } if let Some (idx) = self . map . apply (lhs , TrackElem :: Variant (* variant_index)) { idx } else { return ; } } _ => lhs , } ; for (field_index , operand) in operands . iter_enumerated () { if let Some (field) = self . map . apply (lhs , TrackElem :: Field (field_index)) { self . process_operand (bb , field , operand , state) ; } } } Rvalue :: UnaryOp (UnOp :: Not , Operand :: Move (place) | Operand :: Copy (place)) => { let layout = self . ecx . layout_of (place . ty (self . body , self . tcx) . ty) . unwrap () ; let Some (conditions) = state . try_get_idx (lhs , & self . map) else { return } ; let Some (place) = self . map . find (place . as_ref ()) else { return } ; let Some (conds) = conditions . map (self . arena , | mut cond | { cond . value = self . ecx . unary_op (UnOp :: Not , & ImmTy :: from_scalar_int (cond . value , layout)) . discard_err () ? . to_scalar_int () . discard_err () ? ; Some (cond) }) else { return ; } ; state . insert_value_idx (place , conds , & self . map) ; } Rvalue :: BinaryOp (op , box (Operand :: Move (place) | Operand :: Copy (place) , Operand :: Constant (value)) | box (Operand :: Constant (value) , Operand :: Move (place) | Operand :: Copy (place)) ,) => { let Some (conditions) = state . try_get_idx (lhs , & self . map) else { return } ; let Some (place) = self . map . find (place . as_ref ()) else { return } ; let equals = match op { BinOp :: Eq => ScalarInt :: TRUE , BinOp :: Ne => ScalarInt :: FALSE , _ => return , } ; if value . const_ . ty () . is_floating_point () { return ; } let Some (value) = value . const_ . try_eval_scalar_int (self . tcx , self . typing_env) else { return ; } ; let Some (conds) = conditions . map (self . arena , | c | { Some (Condition { value , polarity : if c . matches (equals) { Polarity :: Eq } else { Polarity :: Ne } , .. c }) }) else { return ; } ; state . insert_value_idx (place , conds , & self . map) ; } _ => { } } } # [instrument (level = "trace" , skip (self))] fn process_statement (& mut self , bb : BasicBlock , stmt : & Statement < 'tcx > , state : & mut State < ConditionSet < 'a > > ,) { let register_opportunity = | c : Condition | { debug ! (? bb , ? c . target , "register") ; self . opportunities . push (ThreadingOpportunity { chain : vec ! [bb] , target : c . target }) } ; match & stmt . kind { StatementKind :: SetDiscriminant { box place , variant_index } => { let Some (discr_target) = self . map . find_discr (place . as_ref ()) else { return } ; let enum_ty = place . ty (self . body , self . tcx) . ty ; let Some (discr) = self . ecx . discriminant_for_variant (enum_ty , * variant_index) . discard_err () else { return ; } ; self . process_immediate (bb , discr_target , discr , state) } StatementKind :: Intrinsic (box NonDivergingIntrinsic :: Assume (Operand :: Copy (place) | Operand :: Move (place) ,)) => { let Some (conditions) = state . try_get (place . as_ref () , & self . map) else { return } ; conditions . iter_matches (ScalarInt :: TRUE) . for_each (register_opportunity) } StatementKind :: Assign (box (lhs_place , rhs)) => { self . process_assign (bb , lhs_place , rhs , state) } _ => { } } } # [instrument (level = "trace" , skip (self , state , cost))] fn recurse_through_terminator (& mut self , bb : BasicBlock , state : impl FnOnce () -> State < ConditionSet < 'a > > , cost : & CostChecker < '_ , 'tcx > , depth : usize ,) { let term = self . body . basic_blocks [bb] . terminator () ; let place_to_flood = match term . kind { TerminatorKind :: UnwindResume | TerminatorKind :: UnwindTerminate (_) | TerminatorKind :: Return | TerminatorKind :: TailCall { .. } | TerminatorKind :: Unreachable | TerminatorKind :: CoroutineDrop => bug ! ("{term:?} has no terminators") , TerminatorKind :: FalseEdge { .. } | TerminatorKind :: FalseUnwind { .. } | TerminatorKind :: Yield { .. } => bug ! ("{term:?} invalid") , TerminatorKind :: InlineAsm { .. } => return , TerminatorKind :: SwitchInt { .. } => return , TerminatorKind :: Goto { .. } => None , TerminatorKind :: Drop { place : destination , .. } | TerminatorKind :: Call { destination , .. } => Some (destination) , TerminatorKind :: Assert { .. } => None , } ; let mut state = state () ; if let Some (place_to_flood) = place_to_flood { state . flood_with (place_to_flood . as_ref () , & self . map , ConditionSet :: BOTTOM) ; } self . find_opportunity (bb , state , cost . clone () , depth + 1) } # [instrument (level = "trace" , skip (self))] fn process_switch_int (& mut self , discr : & Operand < 'tcx > , targets : & SwitchTargets , target_bb : BasicBlock , state : & mut State < ConditionSet < 'a > > ,) { debug_assert_ne ! (target_bb , START_BLOCK) ; debug_assert_eq ! (self . body . basic_blocks . predecessors () [target_bb] . len () , 1) ; let Some (discr) = discr . place () else { return } ; let discr_ty = discr . ty (self . body , self . tcx) . ty ; let Ok (discr_layout) = self . ecx . layout_of (discr_ty) else { return ; } ; let Some (conditions) = state . try_get (discr . as_ref () , & self . map) else { return } ; if let Some ((value , _)) = targets . iter () . find (| & (_ , target) | target == target_bb) { let Some (value) = ScalarInt :: try_from_uint (value , discr_layout . size) else { return } ; debug_assert_eq ! (targets . iter () . filter (|& (_ , target) | target == target_bb) . count () , 1) ; for c in conditions . iter_matches (value) { debug ! (? target_bb , ? c . target , "register") ; self . opportunities . push (ThreadingOpportunity { chain : vec ! [] , target : c . target }) ; } } else if let Some ((value , _ , else_bb)) = targets . as_static_if () && target_bb == else_bb { let Some (value) = ScalarInt :: try_from_uint (value , discr_layout . size) else { return } ; for c in conditions . iter () { if c . value == value && c . polarity == Polarity :: Ne { debug ! (? target_bb , ? c . target , "register") ; self . opportunities . push (ThreadingOpportunity { chain : vec ! [] , target : c . target }) ; } } } } }
-/* FP:jump_threading.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_STRUCT_0031
-/* FP:jump_threading.rs-0062 */ struct OpportunitySet { opportunities : Vec < ThreadingOpportunity > , # [doc = " For each bb, give the TOs in which it appears. The pair corresponds to the index"] # [doc = " in `opportunities` and the index in `ThreadingOpportunity::chain`."] involving_tos : IndexVec < BasicBlock , Vec < (usize , usize) > > , # [doc = " Cache the number of predecessors for each block, as we clear the basic block cache.."] predecessors : IndexVec < BasicBlock , usize > , }
-/* FP:jump_threading.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_IMPL_0032
-/* FP:jump_threading.rs-0064 */ impl OpportunitySet { fn new (body : & Body < '_ > , opportunities : Vec < ThreadingOpportunity >) -> OpportunitySet { let mut involving_tos = IndexVec :: from_elem (Vec :: new () , & body . basic_blocks) ; for (index , to) in opportunities . iter () . enumerate () { for (ibb , & bb) in to . chain . iter () . enumerate () { involving_tos [bb] . push ((index , ibb)) ; } involving_tos [to . target] . push ((index , to . chain . len ())) ; } let predecessors = predecessor_count (body) ; OpportunitySet { opportunities , involving_tos , predecessors } } # [doc = " Apply the opportunities on the graph."] fn apply (& mut self , body : & mut Body < '_ >) { for i in 0 .. self . opportunities . len () { self . apply_once (i , body) ; } } # [instrument (level = "trace" , skip (self , body))] fn apply_once (& mut self , index : usize , body : & mut Body < '_ >) { debug ! (? self . predecessors) ; debug ! (? self . involving_tos) ; debug_assert_eq ! (self . predecessors , predecessor_count (body)) ; let op = & mut self . opportunities [index] ; debug ! (? op) ; let op_chain = std :: mem :: take (& mut op . chain) ; let op_target = op . target ; debug_assert_eq ! (op_chain . len () , op_chain . iter () . collect ::< FxHashSet < _ >> () . len ()) ; let Some ((current , chain)) = op_chain . split_first () else { return } ; let basic_blocks = body . basic_blocks . as_mut () ; let mut current = * current ; for & succ in chain { debug ! (? current , ? succ) ; if ! basic_blocks [current] . terminator () . successors () . any (| s | s == succ) { debug ! ("impossible") ; return ; } if self . predecessors [succ] == 1 { debug ! ("single") ; current = succ ; continue ; } let new_succ = basic_blocks . push (basic_blocks [succ] . clone ()) ; debug ! (? new_succ) ; let mut num_edges = 0 ; basic_blocks [current] . terminator_mut () . successors_mut (| s | { if * s == succ { * s = new_succ ; num_edges += 1 ; } }) ; let _new_succ = self . predecessors . push (num_edges) ; debug_assert_eq ! (new_succ , _new_succ) ; self . predecessors [succ] -= num_edges ; self . update_predecessor_count (basic_blocks [new_succ] . terminator () , Update :: Incr) ; let mut new_involved = Vec :: new () ; for & (to_index , in_to_index) in & self . involving_tos [current] { if to_index <= index { continue ; } let other_to = & mut self . opportunities [to_index] ; if other_to . chain . get (in_to_index) != Some (& current) { continue ; } let s = other_to . chain . get_mut (in_to_index + 1) . unwrap_or (& mut other_to . target) ; if * s == succ { * s = new_succ ; new_involved . push ((to_index , in_to_index + 1)) ; } } let _new_succ = self . involving_tos . push (new_involved) ; debug_assert_eq ! (new_succ , _new_succ) ; current = new_succ ; } let current = & mut basic_blocks [current] ; self . update_predecessor_count (current . terminator () , Update :: Decr) ; current . terminator_mut () . kind = TerminatorKind :: Goto { target : op_target } ; self . predecessors [op_target] += 1 ; } fn update_predecessor_count (& mut self , terminator : & Terminator < '_ > , incr : Update) { match incr { Update :: Incr => { for s in terminator . successors () { self . predecessors [s] += 1 ; } } Update :: Decr => { for s in terminator . successors () { self . predecessors [s] -= 1 ; } } } } }
-/* FP:jump_threading.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_FN_0033
-/* FP:jump_threading.rs-0066 */ fn predecessor_count (body : & Body < '_ >) -> IndexVec < BasicBlock , usize > { let mut predecessors : IndexVec < _ , _ > = body . basic_blocks . predecessors () . iter () . map (| ps | ps . len ()) . collect () ; predecessors [START_BLOCK] += 1 ; predecessors }
-/* FP:jump_threading.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_jump_threading_ENUM_0034
-/* FP:jump_threading.rs-0068 */ enum Update { Incr , Decr , }
+// SRC: ../rust/compiler/rustc_mir_transform/src/jump_threading.rs
+/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
+// A jump threading optimization.
+//
+// This optimization seeks to replace join-then-switch control flow patterns by straight jumps
+//    X = 0                                      X = 0
+// ------------\      /--------              ------------
+//    X = 1     X----X SwitchInt(X)     =>       X = 1
+// ------------/      \--------              ------------
+//
+//
+// We proceed by walking the cfg backwards starting from each `SwitchInt` terminator,
+// looking for assignments that will turn the `SwitchInt` into a simple `Goto`.
+//
+// The algorithm maintains a set of replacement conditions:
+// - `conditions[place]` contains `Condition { value, polarity: Eq, target }`
+/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
+//   if assigning `value` to `place` turns the `SwitchInt` into `Goto { target }`.
+/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+// - `conditions[place]` contains `Condition { value, polarity: Ne, target }`
+/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+//   if assigning anything different from `value` to `place` turns the `SwitchInt`
+//   into `Goto { target }`.
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=8 | LINES=22 */
+//
+// In this file, we denote as `place ?= value` the existence of a replacement condition
+// on `place` with given `value`, irrespective of the polarity and target of that
+// replacement condition.
+//
+// We then walk the CFG backwards transforming the set of conditions.
+// When we find a fulfilling assignment, we record a `ThreadingOpportunity`.
+// All `ThreadingOpportunity`s are applied to the body, by duplicating blocks if required.
+//
+// The optimization search can be very heavy, as it performs a DFS on MIR starting from
+// each `SwitchInt` terminator. To manage the complexity, we:
+// - bound the maximum depth by a constant `MAX_BACKTRACK`;
+// - we only traverse `Goto` terminators.
+//
+// We try to avoid creating irreducible control-flow by not threading through a loop header.
+//
+// Likewise, applying the optimisation can create a lot of new MIR, so we bound the instruction
+// cost by `MAX_COST`.
+
+use rustc_arena::DroplessArena;
+use rustc_const_eval::const_eval::DummyMachine;
+use rustc_const_eval::interpret::{ImmTy, Immediate, InterpCx, OpTy, Projectable};
+/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_index::IndexVec;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::interpret::Scalar;
+use crate::rustc_complete::mir::visit::Visitor;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, ScalarInt, TyCtxt};
+/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_mir_dataflow::lattice::HasBottom;
+use crate::rustc_mir_dataflow::value_analysis::{Map, PlaceIndex, State, TrackElem};
+/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::DUMMY_SP;
+use tracing::{debug, instrument, trace};
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=28 | LINES=59 */
+
+use crate::cost_checker::CostChecker;
+
+pub(super) struct JumpThreading;
+
+const MAX_BACKTRACK: usize = 5;
+const MAX_COST: usize = 100;
+const MAX_PLACES: usize = 100;
+
+impl<'tcx> crate::MirPass<'tcx> for JumpThreading {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
+        sess.mir_opt_level() >= 2
+    }
+
+    #[instrument(skip_all level = "debug")]
+    fn run_pass(&self, tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
+        let def_id = body.source.def_id();
+        debug!(?def_id);
+
+        // Optimizing coroutines creates query cycles.
+        if tcx.is_coroutine(def_id) {
+            trace!("Skipped for coroutine {:?}", def_id);
+            return;
+        }
+
+        let typing_env = body.typing_env(tcx);
+        let arena = &DroplessArena::default();
+        let mut finder = TOFinder {
+            tcx,
+            typing_env,
+            ecx: InterpCx::new(tcx, DUMMY_SP, typing_env, DummyMachine),
+            body,
+            arena,
+            map: Map::new(tcx, body, Some(MAX_PLACES)),
+            loop_headers: loops::maybe_loop_headers(body),
+            opportunities: Vec::new(),
+        };
+
+        for (bb, _) in traversal::preorder(body) {
+            finder.start_from_switch(bb);
+        }
+
+        let opportunities = finder.opportunities;
+        debug!(?opportunities);
+        if opportunities.is_empty() {
+            return;
+        }
+
+        // Verify that we do not thread through a loop header.
+        for to in opportunities.iter() {
+            assert!(to.chain.iter().all(|&block| !finder.loop_headers.contains(block)));
+        }
+        OpportunitySet::new(body, opportunities).apply(body);
+    }
+
+    fn is_required(&self) -> bool {
+        false
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=ThreadingOpportunity | COMPLEXITY=3 | LINES=8 */
+
+#[derive(Debug)]
+struct ThreadingOpportunity {
+    /// The list of `BasicBlock`s from the one that found the opportunity to the `SwitchInt`.
+    chain: Vec<BasicBlock>,
+    /// The `SwitchInt` will be replaced by `Goto { target }`.
+    target: BasicBlock,
+}
+/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=TOFinder | COMPLEXITY=2 | LINES=12 */
+
+struct TOFinder<'a, 'tcx> {
+    tcx: TyCtxt<'tcx>,
+    typing_env: ty::TypingEnv<'tcx>,
+    ecx: InterpCx<'tcx, DummyMachine>,
+    body: &'a Body<'tcx>,
+    map: Map<'tcx>,
+    loop_headers: DenseBitSet<BasicBlock>,
+    /// We use an arena to avoid cloning the slices when cloning `state`.
+    arena: &'a DroplessArena,
+    opportunities: Vec<ThreadingOpportunity>,
+}
+/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=Condition | COMPLEXITY=2 | LINES=9 */
+
+/// Represent the following statement. If we can prove that the current local is equal/not-equal
+/// to `value`, jump to `target`.
+#[derive(Copy, Clone, Debug)]
+struct Condition {
+    value: ScalarInt,
+    polarity: Polarity,
+    target: BasicBlock,
+}
+/* AST_META: AST_ID=13 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Copy, Clone, Debug, Eq, PartialEq)]
+enum Polarity {
+    Ne,
+    Eq,
+}
+/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=matches | COMPLEXITY=3 | LINES=6 */
+
+impl Condition {
+    fn matches(&self, value: ScalarInt) -> bool {
+        (self.value == value) == (self.polarity == Polarity::Eq)
+    }
+}
+/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=ConditionSet | COMPLEXITY=5 | LINES=11 */
+
+#[derive(Copy, Clone, Debug)]
+struct ConditionSet<'a>(&'a [Condition]);
+
+impl HasBottom for ConditionSet<'_> {
+    const BOTTOM: Self = ConditionSet(&[]);
+
+    fn is_bottom(&self) -> bool {
+        self.0.is_empty()
+    }
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=iter | COMPLEXITY=6 | LINES=19 */
+
+impl<'a> ConditionSet<'a> {
+    fn iter(self) -> impl Iterator<Item = Condition> {
+        self.0.iter().copied()
+    }
+
+    fn iter_matches(self, value: ScalarInt) -> impl Iterator<Item = Condition> {
+        self.iter().filter(move |c| c.matches(value))
+    }
+
+    fn map(
+        self,
+        arena: &'a DroplessArena,
+        f: impl Fn(Condition) -> Option<Condition>,
+    ) -> Option<ConditionSet<'a>> {
+        let set = arena.try_alloc_from_iter(self.iter().map(|c| f(c).ok_or(()))).ok()?;
+        Some(ConditionSet(set))
+    }
+}
+/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=272 | LINES=504 */
+
+impl<'a, 'tcx> TOFinder<'a, 'tcx> {
+    fn is_empty(&self, state: &State<ConditionSet<'a>>) -> bool {
+        state.all_bottom()
+    }
+
+    /// Recursion entry point to find threading opportunities.
+    #[instrument(level = "trace", skip(self))]
+    fn start_from_switch(&mut self, bb: BasicBlock) {
+        let bbdata = &self.body[bb];
+        if bbdata.is_cleanup || self.loop_headers.contains(bb) {
+            return;
+        }
+        let Some((discr, targets)) = bbdata.terminator().kind.as_switch() else { return };
+        let Some(discr) = discr.place() else { return };
+        debug!(?discr, ?bb);
+
+        let discr_ty = discr.ty(self.body, self.tcx).ty;
+        let Ok(discr_layout) = self.ecx.layout_of(discr_ty) else { return };
+
+        let Some(discr) = self.map.find(discr.as_ref()) else { return };
+        debug!(?discr);
+
+        let cost = CostChecker::new(self.tcx, self.typing_env, None, self.body);
+        let mut state = State::new_reachable();
+
+        let conds = if let Some((value, then, else_)) = targets.as_static_if() {
+            let Some(value) = ScalarInt::try_from_uint(value, discr_layout.size) else { return };
+            self.arena.alloc_from_iter([
+                Condition { value, polarity: Polarity::Eq, target: then },
+                Condition { value, polarity: Polarity::Ne, target: else_ },
+            ])
+        } else {
+            self.arena.alloc_from_iter(targets.iter().filter_map(|(value, target)| {
+                let value = ScalarInt::try_from_uint(value, discr_layout.size)?;
+                Some(Condition { value, polarity: Polarity::Eq, target })
+            }))
+        };
+        let conds = ConditionSet(conds);
+        state.insert_value_idx(discr, conds, &self.map);
+
+        self.find_opportunity(bb, state, cost, 0)
+    }
+
+    /// Recursively walk statements backwards from this bb's terminator to find threading
+    /// opportunities.
+    #[instrument(level = "trace", skip(self, cost), ret)]
+    fn find_opportunity(
+        &mut self,
+        bb: BasicBlock,
+        mut state: State<ConditionSet<'a>>,
+        mut cost: CostChecker<'_, 'tcx>,
+        depth: usize,
+    ) {
+        // Do not thread through loop headers.
+        if self.loop_headers.contains(bb) {
+            return;
+        }
+
+        debug!(cost = ?cost.cost());
+        for (statement_index, stmt) in
+            self.body.basic_blocks[bb].statements.iter().enumerate().rev()
+        {
+            if self.is_empty(&state) {
+                return;
+            }
+
+            cost.visit_statement(stmt, Location { block: bb, statement_index });
+            if cost.cost() > MAX_COST {
+                return;
+            }
+
+            // Attempt to turn the `current_condition` on `lhs` into a condition on another place.
+            self.process_statement(bb, stmt, &mut state);
+
+            // When a statement mutates a place, assignments to that place that happen
+            // above the mutation cannot fulfill a condition.
+            //   _1 = 5 // Whatever happens here, it won't change the result of a `SwitchInt`.
+            //   _1 = 6
+            if let Some((lhs, tail)) = self.mutated_statement(stmt) {
+                state.flood_with_tail_elem(lhs.as_ref(), tail, &self.map, ConditionSet::BOTTOM);
+            }
+        }
+
+        if self.is_empty(&state) || depth >= MAX_BACKTRACK {
+            return;
+        }
+
+        let last_non_rec = self.opportunities.len();
+
+        let predecessors = &self.body.basic_blocks.predecessors()[bb];
+        if let &[pred] = &predecessors[..]
+            && bb != START_BLOCK
+        {
+            let term = self.body.basic_blocks[pred].terminator();
+            match term.kind {
+                TerminatorKind::SwitchInt { ref discr, ref targets } => {
+                    self.process_switch_int(discr, targets, bb, &mut state);
+                    self.find_opportunity(pred, state, cost, depth + 1);
+                }
+                _ => self.recurse_through_terminator(pred, || state, &cost, depth),
+            }
+        } else if let &[ref predecessors @ .., last_pred] = &predecessors[..] {
+            for &pred in predecessors {
+                self.recurse_through_terminator(pred, || state.clone(), &cost, depth);
+            }
+            self.recurse_through_terminator(last_pred, || state, &cost, depth);
+        }
+
+        let new_tos = &mut self.opportunities[last_non_rec..];
+        debug!(?new_tos);
+
+        // Try to deduplicate threading opportunities.
+        if new_tos.len() > 1
+            && new_tos.len() == predecessors.len()
+            && predecessors
+                .iter()
+                .zip(new_tos.iter())
+                .all(|(&pred, to)| to.chain == &[pred] && to.target == new_tos[0].target)
+        {
+            // All predecessors have a threading opportunity, and they all point to the same block.
+            debug!(?new_tos, "dedup");
+            let first = &mut new_tos[0];
+            *first = ThreadingOpportunity { chain: vec![bb], target: first.target };
+            self.opportunities.truncate(last_non_rec + 1);
+            return;
+        }
+
+        for op in self.opportunities[last_non_rec..].iter_mut() {
+            op.chain.push(bb);
+        }
+    }
+
+    /// Extract the mutated place from a statement.
+    ///
+    /// This method returns the `Place` so we can flood the state in case of a partial assignment.
+    ///     (_1 as Ok).0 = _5;
+    ///     (_1 as Err).0 = _6;
+    /// We want to ensure that a `SwitchInt((_1 as Ok).0)` does not see the first assignment, as
+    /// the value may have been mangled by the second assignment.
+    ///
+    /// In case we assign to a discriminant, we return `Some(TrackElem::Discriminant)`, so we can
+    /// stop at flooding the discriminant, and preserve the variant fields.
+    ///     (_1 as Some).0 = _6;
+    ///     SetDiscriminant(_1, 1);
+    ///     switchInt((_1 as Some).0)
+    #[instrument(level = "trace", skip(self), ret)]
+    fn mutated_statement(
+        &self,
+        stmt: &Statement<'tcx>,
+    ) -> Option<(Place<'tcx>, Option<TrackElem>)> {
+        match stmt.kind {
+            StatementKind::Assign(box (place, _))
+            | StatementKind::Deinit(box place) => Some((place, None)),
+            StatementKind::SetDiscriminant { box place, variant_index: _ } => {
+                Some((place, Some(TrackElem::Discriminant)))
+            }
+            StatementKind::StorageLive(local) | StatementKind::StorageDead(local) => {
+                Some((Place::from(local), None))
+            }
+            StatementKind::Retag(..)
+            | StatementKind::Intrinsic(box NonDivergingIntrinsic::Assume(..))
+            // copy_nonoverlapping takes pointers and mutated the pointed-to value.
+            | StatementKind::Intrinsic(box NonDivergingIntrinsic::CopyNonOverlapping(..))
+            | StatementKind::AscribeUserType(..)
+            | StatementKind::Coverage(..)
+            | StatementKind::FakeRead(..)
+            | StatementKind::ConstEvalCounter
+            | StatementKind::PlaceMention(..)
+            | StatementKind::BackwardIncompatibleDropHint { .. }
+            | StatementKind::Nop => None,
+        }
+    }
+
+    #[instrument(level = "trace", skip(self))]
+    fn process_immediate(
+        &mut self,
+        bb: BasicBlock,
+        lhs: PlaceIndex,
+        rhs: ImmTy<'tcx>,
+        state: &mut State<ConditionSet<'a>>,
+    ) {
+        let register_opportunity = |c: Condition| {
+            debug!(?bb, ?c.target, "register");
+            self.opportunities.push(ThreadingOpportunity { chain: vec![bb], target: c.target })
+        };
+
+        if let Some(conditions) = state.try_get_idx(lhs, &self.map)
+            && let Immediate::Scalar(Scalar::Int(int)) = *rhs
+        {
+            conditions.iter_matches(int).for_each(register_opportunity);
+        }
+    }
+
+    /// If we expect `lhs ?= A`, we have an opportunity if we assume `constant == A`.
+    #[instrument(level = "trace", skip(self))]
+    fn process_constant(
+        &mut self,
+        bb: BasicBlock,
+        lhs: PlaceIndex,
+        constant: OpTy<'tcx>,
+        state: &mut State<ConditionSet<'a>>,
+    ) {
+        self.map.for_each_projection_value(
+            lhs,
+            constant,
+            &mut |elem, op| match elem {
+                TrackElem::Field(idx) => self.ecx.project_field(op, idx).discard_err(),
+                TrackElem::Variant(idx) => self.ecx.project_downcast(op, idx).discard_err(),
+                TrackElem::Discriminant => {
+                    let variant = self.ecx.read_discriminant(op).discard_err()?;
+                    let discr_value =
+                        self.ecx.discriminant_for_variant(op.layout.ty, variant).discard_err()?;
+                    Some(discr_value.into())
+                }
+                TrackElem::DerefLen => {
+                    let op: OpTy<'_> = self.ecx.deref_pointer(op).discard_err()?.into();
+                    let len_usize = op.len(&self.ecx).discard_err()?;
+                    let layout = self.ecx.layout_of(self.tcx.types.usize).unwrap();
+                    Some(ImmTy::from_uint(len_usize, layout).into())
+                }
+            },
+            &mut |place, op| {
+                if let Some(conditions) = state.try_get_idx(place, &self.map)
+                    && let Some(imm) = self.ecx.read_immediate_raw(op).discard_err()
+                    && let Some(imm) = imm.right()
+                    && let Immediate::Scalar(Scalar::Int(int)) = *imm
+                {
+                    conditions.iter_matches(int).for_each(|c: Condition| {
+                        self.opportunities
+                            .push(ThreadingOpportunity { chain: vec![bb], target: c.target })
+                    })
+                }
+            },
+        );
+    }
+
+    #[instrument(level = "trace", skip(self))]
+    fn process_operand(
+        &mut self,
+        bb: BasicBlock,
+        lhs: PlaceIndex,
+        rhs: &Operand<'tcx>,
+        state: &mut State<ConditionSet<'a>>,
+    ) {
+        match rhs {
+            // If we expect `lhs ?= A`, we have an opportunity if we assume `constant == A`.
+            Operand::Constant(constant) => {
+                let Some(constant) =
+                    self.ecx.eval_mir_constant(&constant.const_, constant.span, None).discard_err()
+                else {
+                    return;
+                };
+                self.process_constant(bb, lhs, constant, state);
+            }
+            // Transfer the conditions on the copied rhs.
+            Operand::Move(rhs) | Operand::Copy(rhs) => {
+                let Some(rhs) = self.map.find(rhs.as_ref()) else { return };
+                state.insert_place_idx(rhs, lhs, &self.map);
+            }
+        }
+    }
+
+    #[instrument(level = "trace", skip(self))]
+    fn process_assign(
+        &mut self,
+        bb: BasicBlock,
+        lhs_place: &Place<'tcx>,
+        rhs: &Rvalue<'tcx>,
+        state: &mut State<ConditionSet<'a>>,
+    ) {
+        let Some(lhs) = self.map.find(lhs_place.as_ref()) else { return };
+        match rhs {
+            Rvalue::Use(operand) => self.process_operand(bb, lhs, operand, state),
+            // Transfer the conditions on the copy rhs.
+            Rvalue::CopyForDeref(rhs) => self.process_operand(bb, lhs, &Operand::Copy(*rhs), state),
+            Rvalue::Discriminant(rhs) => {
+                let Some(rhs) = self.map.find_discr(rhs.as_ref()) else { return };
+                state.insert_place_idx(rhs, lhs, &self.map);
+            }
+            // If we expect `lhs ?= A`, we have an opportunity if we assume `constant == A`.
+            Rvalue::Aggregate(box kind, operands) => {
+                let agg_ty = lhs_place.ty(self.body, self.tcx).ty;
+                let lhs = match kind {
+                    // Do not support unions.
+                    AggregateKind::Adt(.., Some(_)) => return,
+                    AggregateKind::Adt(_, variant_index, ..) if agg_ty.is_enum() => {
+                        if let Some(discr_target) = self.map.apply(lhs, TrackElem::Discriminant)
+                            && let Some(discr_value) = self
+                                .ecx
+                                .discriminant_for_variant(agg_ty, *variant_index)
+                                .discard_err()
+                        {
+                            self.process_immediate(bb, discr_target, discr_value, state);
+                        }
+                        if let Some(idx) = self.map.apply(lhs, TrackElem::Variant(*variant_index)) {
+                            idx
+                        } else {
+                            return;
+                        }
+                    }
+                    _ => lhs,
+                };
+                for (field_index, operand) in operands.iter_enumerated() {
+                    if let Some(field) = self.map.apply(lhs, TrackElem::Field(field_index)) {
+                        self.process_operand(bb, field, operand, state);
+                    }
+                }
+            }
+            // Transfer the conditions on the copy rhs, after inverting the value of the condition.
+            Rvalue::UnaryOp(UnOp::Not, Operand::Move(place) | Operand::Copy(place)) => {
+                let layout = self.ecx.layout_of(place.ty(self.body, self.tcx).ty).unwrap();
+                let Some(conditions) = state.try_get_idx(lhs, &self.map) else { return };
+                let Some(place) = self.map.find(place.as_ref()) else { return };
+                let Some(conds) = conditions.map(self.arena, |mut cond| {
+                    cond.value = self
+                        .ecx
+                        .unary_op(UnOp::Not, &ImmTy::from_scalar_int(cond.value, layout))
+                        .discard_err()?
+                        .to_scalar_int()
+                        .discard_err()?;
+                    Some(cond)
+                }) else {
+                    return;
+                };
+                state.insert_value_idx(place, conds, &self.map);
+            }
+            // We expect `lhs ?= A`. We found `lhs = Eq(rhs, B)`.
+            // Create a condition on `rhs ?= B`.
+            Rvalue::BinaryOp(
+                op,
+                box (Operand::Move(place) | Operand::Copy(place), Operand::Constant(value))
+                | box (Operand::Constant(value), Operand::Move(place) | Operand::Copy(place)),
+            ) => {
+                let Some(conditions) = state.try_get_idx(lhs, &self.map) else { return };
+                let Some(place) = self.map.find(place.as_ref()) else { return };
+                let equals = match op {
+                    BinOp::Eq => ScalarInt::TRUE,
+                    BinOp::Ne => ScalarInt::FALSE,
+                    _ => return,
+                };
+                if value.const_.ty().is_floating_point() {
+                    // Floating point equality does not follow bit-patterns.
+                    // -0.0 and NaN both have special rules for equality,
+                    // and therefore we cannot use integer comparisons for them.
+                    // Avoid handling them, though this could be extended in the future.
+                    return;
+                }
+                let Some(value) = value.const_.try_eval_scalar_int(self.tcx, self.typing_env)
+                else {
+                    return;
+                };
+                let Some(conds) = conditions.map(self.arena, |c| {
+                    Some(Condition {
+                        value,
+                        polarity: if c.matches(equals) { Polarity::Eq } else { Polarity::Ne },
+                        ..c
+                    })
+                }) else {
+                    return;
+                };
+                state.insert_value_idx(place, conds, &self.map);
+            }
+
+            _ => {}
+        }
+    }
+
+    #[instrument(level = "trace", skip(self))]
+    fn process_statement(
+        &mut self,
+        bb: BasicBlock,
+        stmt: &Statement<'tcx>,
+        state: &mut State<ConditionSet<'a>>,
+    ) {
+        let register_opportunity = |c: Condition| {
+            debug!(?bb, ?c.target, "register");
+            self.opportunities.push(ThreadingOpportunity { chain: vec![bb], target: c.target })
+        };
+
+        // Below, `lhs` is the return value of `mutated_statement`,
+        // the place to which `conditions` apply.
+
+        match &stmt.kind {
+            // If we expect `discriminant(place) ?= A`,
+            // we have an opportunity if `variant_index ?= A`.
+            StatementKind::SetDiscriminant { box place, variant_index } => {
+                let Some(discr_target) = self.map.find_discr(place.as_ref()) else { return };
+                let enum_ty = place.ty(self.body, self.tcx).ty;
+                // `SetDiscriminant` guarantees that the discriminant is now `variant_index`.
+                // Even if the discriminant write does nothing due to niches, it is UB to set the
+                // discriminant when the data does not encode the desired discriminant.
+                let Some(discr) =
+                    self.ecx.discriminant_for_variant(enum_ty, *variant_index).discard_err()
+                else {
+                    return;
+                };
+                self.process_immediate(bb, discr_target, discr, state)
+            }
+            // If we expect `lhs ?= true`, we have an opportunity if we assume `lhs == true`.
+            StatementKind::Intrinsic(box NonDivergingIntrinsic::Assume(
+                Operand::Copy(place) | Operand::Move(place),
+            )) => {
+                let Some(conditions) = state.try_get(place.as_ref(), &self.map) else { return };
+                conditions.iter_matches(ScalarInt::TRUE).for_each(register_opportunity)
+            }
+            StatementKind::Assign(box (lhs_place, rhs)) => {
+                self.process_assign(bb, lhs_place, rhs, state)
+            }
+            _ => {}
+        }
+    }
+
+    #[instrument(level = "trace", skip(self, state, cost))]
+    fn recurse_through_terminator(
+        &mut self,
+        bb: BasicBlock,
+        // Pass a closure that may clone the state, as we don't want to do it each time.
+        state: impl FnOnce() -> State<ConditionSet<'a>>,
+        cost: &CostChecker<'_, 'tcx>,
+        depth: usize,
+    ) {
+        let term = self.body.basic_blocks[bb].terminator();
+        let place_to_flood = match term.kind {
+            // We come from a target, so those are not possible.
+            TerminatorKind::UnwindResume
+            | TerminatorKind::UnwindTerminate(_)
+            | TerminatorKind::Return
+            | TerminatorKind::TailCall { .. }
+            | TerminatorKind::Unreachable
+            | TerminatorKind::CoroutineDrop => bug!("{term:?} has no terminators"),
+            // Disallowed during optimizations.
+            TerminatorKind::FalseEdge { .. }
+            | TerminatorKind::FalseUnwind { .. }
+            | TerminatorKind::Yield { .. } => bug!("{term:?} invalid"),
+            // Cannot reason about inline asm.
+            TerminatorKind::InlineAsm { .. } => return,
+            // `SwitchInt` is handled specially.
+            TerminatorKind::SwitchInt { .. } => return,
+            // We can recurse, no thing particular to do.
+            TerminatorKind::Goto { .. } => None,
+            // Flood the overwritten place, and progress through.
+            TerminatorKind::Drop { place: destination, .. }
+            | TerminatorKind::Call { destination, .. } => Some(destination),
+            // Ignore, as this can be a no-op at codegen time.
+            TerminatorKind::Assert { .. } => None,
+        };
+
+        // We can recurse through this terminator.
+        let mut state = state();
+        if let Some(place_to_flood) = place_to_flood {
+            state.flood_with(place_to_flood.as_ref(), &self.map, ConditionSet::BOTTOM);
+        }
+        self.find_opportunity(bb, state, cost.clone(), depth + 1)
+    }
+
+    #[instrument(level = "trace", skip(self))]
+    fn process_switch_int(
+        &mut self,
+        discr: &Operand<'tcx>,
+        targets: &SwitchTargets,
+        target_bb: BasicBlock,
+        state: &mut State<ConditionSet<'a>>,
+    ) {
+        debug_assert_ne!(target_bb, START_BLOCK);
+        debug_assert_eq!(self.body.basic_blocks.predecessors()[target_bb].len(), 1);
+
+        let Some(discr) = discr.place() else { return };
+        let discr_ty = discr.ty(self.body, self.tcx).ty;
+        let Ok(discr_layout) = self.ecx.layout_of(discr_ty) else {
+            return;
+        };
+        let Some(conditions) = state.try_get(discr.as_ref(), &self.map) else { return };
+
+        if let Some((value, _)) = targets.iter().find(|&(_, target)| target == target_bb) {
+            let Some(value) = ScalarInt::try_from_uint(value, discr_layout.size) else { return };
+            debug_assert_eq!(targets.iter().filter(|&(_, target)| target == target_bb).count(), 1);
+
+            // We are inside `target_bb`. Since we have a single predecessor, we know we passed
+            // through the `SwitchInt` before arriving here. Therefore, we know that
+            // `discr == value`. If one condition can be fulfilled by `discr == value`,
+            // that's an opportunity.
+            for c in conditions.iter_matches(value) {
+                debug!(?target_bb, ?c.target, "register");
+                self.opportunities.push(ThreadingOpportunity { chain: vec![], target: c.target });
+            }
+        } else if let Some((value, _, else_bb)) = targets.as_static_if()
+            && target_bb == else_bb
+        {
+            let Some(value) = ScalarInt::try_from_uint(value, discr_layout.size) else { return };
+
+            // We only know that `discr != value`. That's much weaker information than
+            // the equality we had in the previous arm. All we can conclude is that
+            // the replacement condition `discr != value` can be threaded, and nothing else.
+            for c in conditions.iter() {
+                if c.value == value && c.polarity == Polarity::Ne {
+                    debug!(?target_bb, ?c.target, "register");
+                    self.opportunities
+                        .push(ThreadingOpportunity { chain: vec![], target: c.target });
+                }
+            }
+        }
+    }
+}
+/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=OpportunitySet | COMPLEXITY=4 | LINES=9 */
+
+struct OpportunitySet {
+    opportunities: Vec<ThreadingOpportunity>,
+    /// For each bb, give the TOs in which it appears. The pair corresponds to the index
+    /// in `opportunities` and the index in `ThreadingOpportunity::chain`.
+    involving_tos: IndexVec<BasicBlock, Vec<(usize, usize)>>,
+    /// Cache the number of predecessors for each block, as we clear the basic block cache..
+    predecessors: IndexVec<BasicBlock, usize>,
+}
+/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=new | COMPLEXITY=65 | LINES=127 */
+
+impl OpportunitySet {
+    fn new(body: &Body<'_>, opportunities: Vec<ThreadingOpportunity>) -> OpportunitySet {
+        let mut involving_tos = IndexVec::from_elem(Vec::new(), &body.basic_blocks);
+        for (index, to) in opportunities.iter().enumerate() {
+            for (ibb, &bb) in to.chain.iter().enumerate() {
+                involving_tos[bb].push((index, ibb));
+            }
+            involving_tos[to.target].push((index, to.chain.len()));
+        }
+        let predecessors = predecessor_count(body);
+        OpportunitySet { opportunities, involving_tos, predecessors }
+    }
+
+    /// Apply the opportunities on the graph.
+    fn apply(&mut self, body: &mut Body<'_>) {
+        for i in 0..self.opportunities.len() {
+            self.apply_once(i, body);
+        }
+    }
+
+    #[instrument(level = "trace", skip(self, body))]
+    fn apply_once(&mut self, index: usize, body: &mut Body<'_>) {
+        debug!(?self.predecessors);
+        debug!(?self.involving_tos);
+
+        // Check that `predecessors` satisfies its invariant.
+        debug_assert_eq!(self.predecessors, predecessor_count(body));
+
+        // Remove the TO from the vector to allow modifying the other ones later.
+        let op = &mut self.opportunities[index];
+        debug!(?op);
+        let op_chain = std::mem::take(&mut op.chain);
+        let op_target = op.target;
+        debug_assert_eq!(op_chain.len(), op_chain.iter().collect::<FxHashSet<_>>().len());
+
+        let Some((current, chain)) = op_chain.split_first() else { return };
+        let basic_blocks = body.basic_blocks.as_mut();
+
+        // Invariant: the control-flow is well-formed at the end of each iteration.
+        let mut current = *current;
+        for &succ in chain {
+            debug!(?current, ?succ);
+
+            // `succ` must be a successor of `current`. If it is not, this means this TO is not
+            // satisfiable and a previous TO erased this edge, so we bail out.
+            if !basic_blocks[current].terminator().successors().any(|s| s == succ) {
+                debug!("impossible");
+                return;
+            }
+
+            // Fast path: `succ` is only used once, so we can reuse it directly.
+            if self.predecessors[succ] == 1 {
+                debug!("single");
+                current = succ;
+                continue;
+            }
+
+            let new_succ = basic_blocks.push(basic_blocks[succ].clone());
+            debug!(?new_succ);
+
+            // Replace `succ` by `new_succ` where it appears.
+            let mut num_edges = 0;
+            basic_blocks[current].terminator_mut().successors_mut(|s| {
+                if *s == succ {
+                    *s = new_succ;
+                    num_edges += 1;
+                }
+            });
+
+            // Update predecessors with the new block.
+            let _new_succ = self.predecessors.push(num_edges);
+            debug_assert_eq!(new_succ, _new_succ);
+            self.predecessors[succ] -= num_edges;
+            self.update_predecessor_count(basic_blocks[new_succ].terminator(), Update::Incr);
+
+            // Replace the `current -> succ` edge by `current -> new_succ` in all the following
+            // TOs. This is necessary to avoid trying to thread through a non-existing edge. We
+            // use `involving_tos` here to avoid traversing the full set of TOs on each iteration.
+            let mut new_involved = Vec::new();
+            for &(to_index, in_to_index) in &self.involving_tos[current] {
+                // That TO has already been applied, do nothing.
+                if to_index <= index {
+                    continue;
+                }
+
+                let other_to = &mut self.opportunities[to_index];
+                if other_to.chain.get(in_to_index) != Some(&current) {
+                    continue;
+                }
+                let s = other_to.chain.get_mut(in_to_index + 1).unwrap_or(&mut other_to.target);
+                if *s == succ {
+                    // `other_to` references the `current -> succ` edge, so replace `succ`.
+                    *s = new_succ;
+                    new_involved.push((to_index, in_to_index + 1));
+                }
+            }
+
+            // The TOs that we just updated now reference `new_succ`. Update `involving_tos`
+            // in case we need to duplicate an edge starting at `new_succ` later.
+            let _new_succ = self.involving_tos.push(new_involved);
+            debug_assert_eq!(new_succ, _new_succ);
+
+            current = new_succ;
+        }
+
+        let current = &mut basic_blocks[current];
+        self.update_predecessor_count(current.terminator(), Update::Decr);
+        current.terminator_mut().kind = TerminatorKind::Goto { target: op_target };
+        self.predecessors[op_target] += 1;
+    }
+
+    fn update_predecessor_count(&mut self, terminator: &Terminator<'_>, incr: Update) {
+        match incr {
+            Update::Incr => {
+                for s in terminator.successors() {
+                    self.predecessors[s] += 1;
+                }
+            }
+            Update::Decr => {
+                for s in terminator.successors() {
+                    self.predecessors[s] -= 1;
+                }
+            }
+        }
+    }
+}
+/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=predecessor_count | COMPLEXITY=4 | LINES=7 */
+
+fn predecessor_count(body: &Body<'_>) -> IndexVec<BasicBlock, usize> {
+    let mut predecessors: IndexVec<_, _> =
+        body.basic_blocks.predecessors().iter().map(|ps| ps.len()).collect();
+    predecessors[START_BLOCK] += 1; // Account for the implicit entry edge.
+    predecessors
+}
+/* AST_META: AST_ID=21 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+
+enum Update {
+    Incr,
+    Decr,
+}

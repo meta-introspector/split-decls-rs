@@ -1,29 +1,177 @@
-/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_broadcast_mod_USE_0001
-/* FP:mod.rs-0002 */ use std :: fmt ;
-/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_broadcast_mod_USE_0002
-/* FP:mod.rs-0004 */ use std :: marker :: PhantomData ;
-/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_broadcast_mod_USE_0003
-/* FP:mod.rs-0006 */ use std :: sync :: Arc ;
-/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_broadcast_mod_USE_0004
-/* FP:mod.rs-0008 */ use std :: sync :: atomic :: { AtomicBool , Ordering } ;
-/* FP:mod.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_broadcast_mod_USE_0005
-/* FP:mod.rs-0010 */ use crate :: job :: { ArcJob , StackJob } ;
-/* FP:mod.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_broadcast_mod_USE_0006
-/* FP:mod.rs-0012 */ use crate :: latch :: { CountLatch , LatchRef } ;
-/* FP:mod.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_broadcast_mod_USE_0007
-/* FP:mod.rs-0014 */ use crate :: registry :: { Registry , WorkerThread } ;
-/* FP:mod.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_broadcast_mod_MOD_0008
-/* FP:mod.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_broadcast_mod_FN_0009
-/* FP:mod.rs-0018 */ # [doc = " Executes `op` within every thread in the current threadpool. If this is"] # [doc = " called from a non-Rayon thread, it will execute in the global threadpool."] # [doc = " Any attempts to use `join`, `scope`, or parallel iterators will then operate"] # [doc = " within that threadpool. When the call has completed on each thread, returns"] # [doc = " a vector containing all of their return values."] # [doc = ""] # [doc = " For more information, see the [`ThreadPool::broadcast()`][m] method."] # [doc = ""] # [doc = " [m]: struct.ThreadPool.html#method.broadcast"] pub fn broadcast < OP , R > (op : OP) -> Vec < R > where OP : Fn (BroadcastContext < '_ >) -> R + Sync , R : Send , { unsafe { broadcast_in (op , & Registry :: current ()) } }
-/* FP:mod.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_broadcast_mod_FN_0010
-/* FP:mod.rs-0020 */ # [doc = " Spawns an asynchronous task on every thread in this thread-pool. This task"] # [doc = " will run in the implicit, global scope, which means that it may outlast the"] # [doc = " current stack frame -- therefore, it cannot capture any references onto the"] # [doc = " stack (you will likely need a `move` closure)."] # [doc = ""] # [doc = " For more information, see the [`ThreadPool::spawn_broadcast()`][m] method."] # [doc = ""] # [doc = " [m]: struct.ThreadPool.html#method.spawn_broadcast"] pub fn spawn_broadcast < OP > (op : OP) where OP : Fn (BroadcastContext < '_ >) + Send + Sync + 'static , { unsafe { spawn_broadcast_in (op , & Registry :: current ()) } }
-/* FP:mod.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_broadcast_mod_STRUCT_0011
-/* FP:mod.rs-0022 */ # [doc = " Provides context to a closure called by `broadcast`."] pub struct BroadcastContext < 'a > { worker : & 'a WorkerThread , # [doc = " Make sure to prevent auto-traits like `Send` and `Sync`."] _marker : PhantomData < & 'a mut dyn Fn () > , }
-/* FP:mod.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_broadcast_mod_IMPL_0012
-/* FP:mod.rs-0024 */ impl < 'a > BroadcastContext < 'a > { pub (super) fn with < R > (f : impl FnOnce (BroadcastContext < '_ >) -> R) -> R { let worker_thread = WorkerThread :: current () ; assert ! (! worker_thread . is_null ()) ; f (BroadcastContext { worker : unsafe { & * worker_thread } , _marker : PhantomData }) } # [doc = " Our index amongst the broadcast threads (ranges from `0..self.num_threads()`)."] # [inline] pub fn index (& self) -> usize { self . worker . index () } # [doc = " The number of threads receiving the broadcast in the thread pool."] # [doc = ""] # [doc = " # Future compatibility note"] # [doc = ""] # [doc = " Future versions of Rayon might vary the number of threads over time, but"] # [doc = " this method will always return the number of threads which are actually"] # [doc = " receiving your particular `broadcast` call."] # [inline] pub fn num_threads (& self) -> usize { self . worker . registry () . num_threads () } }
-/* FP:mod.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_broadcast_mod_IMPL_0013
-/* FP:mod.rs-0026 */ impl < 'a > fmt :: Debug for BroadcastContext < 'a > { fn fmt (& self , fmt : & mut fmt :: Formatter < '_ >) -> fmt :: Result { fmt . debug_struct ("BroadcastContext") . field ("index" , & self . index ()) . field ("num_threads" , & self . num_threads ()) . field ("pool_id" , & self . worker . registry () . id ()) . finish () } }
-/* FP:mod.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_broadcast_mod_FN_0014
-/* FP:mod.rs-0028 */ # [doc = " Execute `op` on every thread in the pool. It will be executed on each"] # [doc = " thread when they have nothing else to do locally, before they try to"] # [doc = " steal work from other threads. This function will not return until all"] # [doc = " threads have completed the `op`."] # [doc = ""] # [doc = " Unsafe because `registry` must not yet have terminated."] pub (super) unsafe fn broadcast_in < OP , R > (op : OP , registry : & Arc < Registry >) -> Vec < R > where OP : Fn (BroadcastContext < '_ >) -> R + Sync , R : Send , { let current_thread = WorkerThread :: current () ; let current_thread_addr = current_thread . expose_provenance () ; let started = & AtomicBool :: new (false) ; let f = move | injected : bool | { debug_assert ! (injected) ; if current_thread_addr == WorkerThread :: current () . expose_provenance () { started . store (true , Ordering :: Relaxed) ; } BroadcastContext :: with (& op) } ; let n_threads = registry . num_threads () ; let current_thread = unsafe { current_thread . as_ref () } ; let tlv = crate :: tlv :: get () ; let latch = CountLatch :: with_count (n_threads , current_thread) ; let jobs : Vec < _ > = (0 .. n_threads) . map (| _ | StackJob :: new (tlv , & f , LatchRef :: new (& latch))) . collect () ; let job_refs = jobs . iter () . map (| job | unsafe { job . as_job_ref () }) ; registry . inject_broadcast (job_refs) ; let current_thread_job_id = current_thread . and_then (| worker | (registry . id () == worker . registry . id ()) . then (| | worker)) . map (| worker | unsafe { jobs [worker . index ()] . as_job_ref () } . id ()) ; latch . wait (current_thread , | | started . load (Ordering :: Relaxed) , | job | Some (job . id ()) == current_thread_job_id ,) ; jobs . into_iter () . map (| job | unsafe { job . into_result () }) . collect () }
-/* FP:mod.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_broadcast_mod_FN_0015
-/* FP:mod.rs-0030 */ # [doc = " Execute `op` on every thread in the pool. It will be executed on each"] # [doc = " thread when they have nothing else to do locally, before they try to"] # [doc = " steal work from other threads. This function returns immediately after"] # [doc = " injecting the jobs."] # [doc = ""] # [doc = " Unsafe because `registry` must not yet have terminated."] pub (super) unsafe fn spawn_broadcast_in < OP > (op : OP , registry : & Arc < Registry >) where OP : Fn (BroadcastContext < '_ >) + Send + Sync + 'static , { let job = ArcJob :: new ({ let registry = Arc :: clone (registry) ; move | _ | { registry . catch_unwind (| | BroadcastContext :: with (& op)) ; registry . terminate () ; } }) ; let n_threads = registry . num_threads () ; let job_refs = (0 .. n_threads) . map (| _ | { registry . increment_terminate_count () ; ArcJob :: as_static_job_ref (& job) }) ; registry . inject_broadcast (job_refs) ; }
+// SRC: ../rust/compiler/rustc_thread_pool/src/broadcast/mod.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use std::fmt;
+use std::marker::PhantomData;
+use std::sync::Arc;
+use std::sync::atomic::{AtomicBool, Ordering};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+use crate::job::{ArcJob, StackJob};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::latch::{CountLatch, LatchRef};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::registry::{Registry, WorkerThread};
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=broadcast | COMPLEXITY=8 | LINES=20 */
+
+
+/// Executes `op` within every thread in the current threadpool. If this is
+/// called from a non-Rayon thread, it will execute in the global threadpool.
+/// Any attempts to use `join`, `scope`, or parallel iterators will then operate
+/// within that threadpool. When the call has completed on each thread, returns
+/// a vector containing all of their return values.
+///
+/// For more information, see the [`ThreadPool::broadcast()`][m] method.
+///
+/// [m]: struct.ThreadPool.html#method.broadcast
+pub fn broadcast<OP, R>(op: OP) -> Vec<R>
+where
+    OP: Fn(BroadcastContext<'_>) -> R + Sync,
+    R: Send,
+{
+    // We assert that current registry has not terminated.
+    unsafe { broadcast_in(op, &Registry::current()) }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=spawn_broadcast | COMPLEXITY=8 | LINES=16 */
+
+/// Spawns an asynchronous task on every thread in this thread-pool. This task
+/// will run in the implicit, global scope, which means that it may outlast the
+/// current stack frame -- therefore, it cannot capture any references onto the
+/// stack (you will likely need a `move` closure).
+///
+/// For more information, see the [`ThreadPool::spawn_broadcast()`][m] method.
+///
+/// [m]: struct.ThreadPool.html#method.spawn_broadcast
+pub fn spawn_broadcast<OP>(op: OP)
+where
+    OP: Fn(BroadcastContext<'_>) + Send + Sync + 'static,
+{
+    // We assert that current registry has not terminated.
+    unsafe { spawn_broadcast_in(op, &Registry::current()) }
+}
+/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=BroadcastContext | COMPLEXITY=2 | LINES=8 */
+
+/// Provides context to a closure called by `broadcast`.
+pub struct BroadcastContext<'a> {
+    worker: &'a WorkerThread,
+
+    /// Make sure to prevent auto-traits like `Send` and `Sync`.
+    _marker: PhantomData<&'a mut dyn Fn()>,
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=index | COMPLEXITY=12 | LINES=26 */
+
+impl<'a> BroadcastContext<'a> {
+    pub(super) fn with<R>(f: impl FnOnce(BroadcastContext<'_>) -> R) -> R {
+        let worker_thread = WorkerThread::current();
+        assert!(!worker_thread.is_null());
+        f(BroadcastContext { worker: unsafe { &*worker_thread }, _marker: PhantomData })
+    }
+
+    /// Our index amongst the broadcast threads (ranges from `0..self.num_threads()`).
+    #[inline]
+    pub fn index(&self) -> usize {
+        self.worker.index()
+    }
+
+    /// The number of threads receiving the broadcast in the thread pool.
+    ///
+    /// # Future compatibility note
+    ///
+    /// Future versions of Rayon might vary the number of threads over time, but
+    /// this method will always return the number of threads which are actually
+    /// receiving your particular `broadcast` call.
+    #[inline]
+    pub fn num_threads(&self) -> usize {
+        self.worker.registry().num_threads()
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=10 */
+
+impl<'a> fmt::Debug for BroadcastContext<'a> {
+    fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
+        fmt.debug_struct("BroadcastContext")
+            .field("index", &self.index())
+            .field("num_threads", &self.num_threads())
+            .field("pool_id", &self.worker.registry().id())
+            .finish()
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=37 | LINES=48 */
+
+/// Execute `op` on every thread in the pool. It will be executed on each
+/// thread when they have nothing else to do locally, before they try to
+/// steal work from other threads. This function will not return until all
+/// threads have completed the `op`.
+///
+/// Unsafe because `registry` must not yet have terminated.
+pub(super) unsafe fn broadcast_in<OP, R>(op: OP, registry: &Arc<Registry>) -> Vec<R>
+where
+    OP: Fn(BroadcastContext<'_>) -> R + Sync,
+    R: Send,
+{
+    let current_thread = WorkerThread::current();
+    let current_thread_addr = current_thread.expose_provenance();
+    let started = &AtomicBool::new(false);
+    let f = move |injected: bool| {
+        debug_assert!(injected);
+
+        // Mark as started if we are the thread that initiated that broadcast.
+        if current_thread_addr == WorkerThread::current().expose_provenance() {
+            started.store(true, Ordering::Relaxed);
+        }
+
+        BroadcastContext::with(&op)
+    };
+
+    let n_threads = registry.num_threads();
+    let current_thread = unsafe { current_thread.as_ref() };
+    let tlv = crate::tlv::get();
+    let latch = CountLatch::with_count(n_threads, current_thread);
+    let jobs: Vec<_> =
+        (0..n_threads).map(|_| StackJob::new(tlv, &f, LatchRef::new(&latch))).collect();
+    let job_refs = jobs.iter().map(|job| unsafe { job.as_job_ref() });
+
+    registry.inject_broadcast(job_refs);
+
+    let current_thread_job_id = current_thread
+        .and_then(|worker| (registry.id() == worker.registry.id()).then(|| worker))
+        .map(|worker| unsafe { jobs[worker.index()].as_job_ref() }.id());
+
+    // Wait for all jobs to complete, then collect the results, maybe propagating a panic.
+    latch.wait(
+        current_thread,
+        || started.load(Ordering::Relaxed),
+        |job| Some(job.id()) == current_thread_job_id,
+    );
+    jobs.into_iter().map(|job| unsafe { job.into_result() }).collect()
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=30 */
+
+/// Execute `op` on every thread in the pool. It will be executed on each
+/// thread when they have nothing else to do locally, before they try to
+/// steal work from other threads. This function returns immediately after
+/// injecting the jobs.
+///
+/// Unsafe because `registry` must not yet have terminated.
+pub(super) unsafe fn spawn_broadcast_in<OP>(op: OP, registry: &Arc<Registry>)
+where
+    OP: Fn(BroadcastContext<'_>) + Send + Sync + 'static,
+{
+    let job = ArcJob::new({
+        let registry = Arc::clone(registry);
+        move |_| {
+            registry.catch_unwind(|| BroadcastContext::with(&op));
+            registry.terminate(); // (*) permit registry to terminate now
+        }
+    });
+
+    let n_threads = registry.num_threads();
+    let job_refs = (0..n_threads).map(|_| {
+        // Ensure that registry cannot terminate until this job has executed
+        // on each thread. This ref is decremented at the (*) above.
+        registry.increment_terminate_count();
+
+        ArcJob::as_static_job_ref(&job)
+    });
+
+    registry.inject_broadcast(job_refs);
+}

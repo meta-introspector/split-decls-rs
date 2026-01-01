@@ -1,26 +1,184 @@
-/* FP:predicate_kind.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_predicate_kind_USE_0001
-/* FP:predicate_kind.rs-0002 */ use std :: fmt ;
-/* FP:predicate_kind.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_predicate_kind_USE_0002
-/* FP:predicate_kind.rs-0004 */ use derive_where :: derive_where ;
-/* FP:predicate_kind.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_predicate_kind_USE_0003
-/* FP:predicate_kind.rs-0006 */ # [cfg (feature = "nightly")] use rustc_macros :: { Decodable_NoContext , Encodable_NoContext , HashStable_NoContext } ;
-/* FP:predicate_kind.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_predicate_kind_USE_0004
-/* FP:predicate_kind.rs-0008 */ use rustc_type_ir_macros :: { TypeFoldable_Generic , TypeVisitable_Generic } ;
-/* FP:predicate_kind.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_predicate_kind_USE_0005
-/* FP:predicate_kind.rs-0010 */ use crate :: { self as ty , Interner } ;
-/* FP:predicate_kind.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_predicate_kind_ENUM_0006
-/* FP:predicate_kind.rs-0012 */ # [doc = " A clause is something that can appear in where bounds or be inferred"] # [doc = " by implied bounds."] # [derive_where (Clone , Copy , Hash , PartialEq ; I : Interner)] # [derive (TypeVisitable_Generic , TypeFoldable_Generic)] # [cfg_attr (feature = "nightly" , derive (Encodable_NoContext , Decodable_NoContext , HashStable_NoContext))] pub enum ClauseKind < I : Interner > { # [doc = " Corresponds to `where Foo: Bar<A, B, C>`. `Foo` here would be"] # [doc = " the `Self` type of the trait reference and `A`, `B`, and `C`"] # [doc = " would be the type parameters."] Trait (ty :: TraitPredicate < I >) , # [doc = " `where 'a: 'r`"] RegionOutlives (ty :: OutlivesPredicate < I , I :: Region >) , # [doc = " `where T: 'r`"] TypeOutlives (ty :: OutlivesPredicate < I , I :: Ty >) , # [doc = " `where <T as TraitRef>::Name == X`, approximately."] # [doc = " See the `ProjectionPredicate` struct for details."] Projection (ty :: ProjectionPredicate < I >) , # [doc = " Ensures that a const generic argument to a parameter `const N: u8`"] # [doc = " is of type `u8`."] ConstArgHasType (I :: Const , I :: Ty) , # [doc = " No syntax: `T` well-formed."] WellFormed (I :: Term) , # [doc = " Constant initializer must evaluate successfully."] ConstEvaluatable (I :: Const) , # [doc = " Enforces the constness of the predicate we're calling. Like a projection"] # [doc = " goal from a where clause, it's always going to be paired with a"] # [doc = " corresponding trait clause; this just enforces the *constness* of that"] # [doc = " implementation."] HostEffect (ty :: HostEffectPredicate < I >) , # [doc = " Support marking impl as unstable."] UnstableFeature (# [type_foldable (identity)] # [type_visitable (ignore)] I :: Symbol ,) , }
-/* FP:predicate_kind.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_predicate_kind_IMPL_0007
-/* FP:predicate_kind.rs-0014 */ impl < I : Interner > Eq for ClauseKind < I > { }
-/* FP:predicate_kind.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_predicate_kind_ENUM_0008
-/* FP:predicate_kind.rs-0016 */ # [derive_where (Clone , Copy , Hash , PartialEq ; I : Interner)] # [derive (TypeVisitable_Generic , TypeFoldable_Generic)] # [cfg_attr (feature = "nightly" , derive (Encodable_NoContext , Decodable_NoContext , HashStable_NoContext))] pub enum PredicateKind < I : Interner > { # [doc = " Prove a clause"] Clause (ClauseKind < I >) , # [doc = " Trait must be dyn-compatible."] DynCompatible (I :: TraitId) , # [doc = " `T1 <: T2`"] # [doc = ""] # [doc = " This obligation is created most often when we have two"] # [doc = " unresolved type variables and hence don't have enough"] # [doc = " information to process the subtyping obligation yet."] Subtype (ty :: SubtypePredicate < I >) , # [doc = " `T1` coerced to `T2`"] # [doc = ""] # [doc = " Like a subtyping obligation, this is created most often"] # [doc = " when we have two unresolved type variables and hence"] # [doc = " don't have enough information to process the coercion"] # [doc = " obligation yet. At the moment, we actually process coercions"] # [doc = " very much like subtyping and don't handle the full coercion"] # [doc = " logic."] Coerce (ty :: CoercePredicate < I >) , # [doc = " Constants must be equal. The first component is the const that is expected."] ConstEquate (I :: Const , I :: Const) , # [doc = " A marker predicate that is always ambiguous."] # [doc = " Used for coherence to mark opaque types as possibly equal to each other but ambiguous."] Ambiguous , # [doc = " This should only be used inside of the new solver for `AliasRelate` and expects"] # [doc = " the `term` to be always be an unconstrained inference variable. It is used to"] # [doc = " normalize `alias` as much as possible. In case the alias is rigid - i.e. it cannot"] # [doc = " be normalized in the current environment - this constrains `term` to be equal to"] # [doc = " the alias itself."] # [doc = ""] # [doc = " It is likely more useful to think of this as a function `normalizes_to(alias)`,"] # [doc = " whose return value is written into `term`."] NormalizesTo (ty :: NormalizesTo < I >) , # [doc = " Separate from `ClauseKind::Projection` which is used for normalization in new solver."] # [doc = " This predicate requires two terms to be equal to eachother."] # [doc = ""] # [doc = " Only used for new solver."] AliasRelate (I :: Term , I :: Term , AliasRelationDirection) , }
-/* FP:predicate_kind.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_predicate_kind_IMPL_0009
-/* FP:predicate_kind.rs-0018 */ impl < I : Interner > Eq for PredicateKind < I > { }
-/* FP:predicate_kind.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_predicate_kind_ENUM_0010
-/* FP:predicate_kind.rs-0020 */ # [derive (Clone , PartialEq , Eq , PartialOrd , Ord , Hash , Debug , Copy)] # [cfg_attr (feature = "nightly" , derive (HashStable_NoContext , Encodable_NoContext , Decodable_NoContext))] pub enum AliasRelationDirection { Equate , Subtype , }
-/* FP:predicate_kind.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_predicate_kind_IMPL_0011
-/* FP:predicate_kind.rs-0022 */ impl std :: fmt :: Display for AliasRelationDirection { fn fmt (& self , f : & mut std :: fmt :: Formatter < '_ >) -> std :: fmt :: Result { match self { AliasRelationDirection :: Equate => write ! (f , "==") , AliasRelationDirection :: Subtype => write ! (f , "<:") , } } }
-/* FP:predicate_kind.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_predicate_kind_IMPL_0012
-/* FP:predicate_kind.rs-0024 */ impl < I : Interner > fmt :: Debug for ClauseKind < I > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { ClauseKind :: ConstArgHasType (ct , ty) => write ! (f , "ConstArgHasType({ct:?}, {ty:?})") , ClauseKind :: HostEffect (data) => data . fmt (f) , ClauseKind :: Trait (a) => a . fmt (f) , ClauseKind :: RegionOutlives (pair) => pair . fmt (f) , ClauseKind :: TypeOutlives (pair) => pair . fmt (f) , ClauseKind :: Projection (pair) => pair . fmt (f) , ClauseKind :: WellFormed (data) => write ! (f , "WellFormed({data:?})") , ClauseKind :: ConstEvaluatable (ct) => { write ! (f , "ConstEvaluatable({ct:?})") } ClauseKind :: UnstableFeature (feature_name) => { write ! (f , "UnstableFeature({feature_name:?})") } } } }
-/* FP:predicate_kind.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_predicate_kind_IMPL_0013
-/* FP:predicate_kind.rs-0026 */ impl < I : Interner > fmt :: Debug for PredicateKind < I > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { PredicateKind :: Clause (a) => a . fmt (f) , PredicateKind :: Subtype (pair) => pair . fmt (f) , PredicateKind :: Coerce (pair) => pair . fmt (f) , PredicateKind :: DynCompatible (trait_def_id) => { write ! (f , "DynCompatible({trait_def_id:?})") } PredicateKind :: ConstEquate (c1 , c2) => write ! (f , "ConstEquate({c1:?}, {c2:?})") , PredicateKind :: Ambiguous => write ! (f , "Ambiguous") , PredicateKind :: NormalizesTo (p) => p . fmt (f) , PredicateKind :: AliasRelate (t1 , t2 , dir) => { write ! (f , "AliasRelate({t1:?}, {dir:?}, {t2:?})") } } } }
+// SRC: ../rust/compiler/rustc_type_ir/src/predicate_kind.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use std::fmt;
+
+use derive_where::derive_where;
+#[cfg(feature = "nightly")]
+use rustc_macros::{Decodable_NoContext, Encodable_NoContext, HashStable_NoContext};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use rustc_type_ir_macros::{TypeFoldable_Generic, TypeVisitable_Generic};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+use crate::{self as ty, Interner};
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=48 */
+
+/// A clause is something that can appear in where bounds or be inferred
+/// by implied bounds.
+#[derive_where(Clone, Copy, Hash, PartialEq; I: Interner)]
+#[derive(TypeVisitable_Generic, TypeFoldable_Generic)]
+#[cfg_attr(
+    feature = "nightly",
+    derive(Encodable_NoContext, Decodable_NoContext, HashStable_NoContext)
+)]
+pub enum ClauseKind<I: Interner> {
+    /// Corresponds to `where Foo: Bar<A, B, C>`. `Foo` here would be
+    /// the `Self` type of the trait reference and `A`, `B`, and `C`
+    /// would be the type parameters.
+    Trait(ty::TraitPredicate<I>),
+
+    /// `where 'a: 'r`
+    RegionOutlives(ty::OutlivesPredicate<I, I::Region>),
+
+    /// `where T: 'r`
+    TypeOutlives(ty::OutlivesPredicate<I, I::Ty>),
+
+    /// `where <T as TraitRef>::Name == X`, approximately.
+    /// See the `ProjectionPredicate` struct for details.
+    Projection(ty::ProjectionPredicate<I>),
+
+    /// Ensures that a const generic argument to a parameter `const N: u8`
+    /// is of type `u8`.
+    ConstArgHasType(I::Const, I::Ty),
+
+    /// No syntax: `T` well-formed.
+    WellFormed(I::Term),
+
+    /// Constant initializer must evaluate successfully.
+    ConstEvaluatable(I::Const),
+
+    /// Enforces the constness of the predicate we're calling. Like a projection
+    /// goal from a where clause, it's always going to be paired with a
+    /// corresponding trait clause; this just enforces the *constness* of that
+    /// implementation.
+    HostEffect(ty::HostEffectPredicate<I>),
+
+    /// Support marking impl as unstable.
+    UnstableFeature(
+        #[type_foldable(identity)]
+        #[type_visitable(ignore)]
+        I::Symbol,
+    ),
+}
+/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<I: Interner> Eq for ClauseKind<I> {}
+/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=14 | LINES=54 */
+
+#[derive_where(Clone, Copy, Hash, PartialEq; I: Interner)]
+#[derive(TypeVisitable_Generic, TypeFoldable_Generic)]
+#[cfg_attr(
+    feature = "nightly",
+    derive(Encodable_NoContext, Decodable_NoContext, HashStable_NoContext)
+)]
+pub enum PredicateKind<I: Interner> {
+    /// Prove a clause
+    Clause(ClauseKind<I>),
+
+    /// Trait must be dyn-compatible.
+    DynCompatible(I::TraitId),
+
+    /// `T1 <: T2`
+    ///
+    /// This obligation is created most often when we have two
+    /// unresolved type variables and hence don't have enough
+    /// information to process the subtyping obligation yet.
+    Subtype(ty::SubtypePredicate<I>),
+
+    /// `T1` coerced to `T2`
+    ///
+    /// Like a subtyping obligation, this is created most often
+    /// when we have two unresolved type variables and hence
+    /// don't have enough information to process the coercion
+    /// obligation yet. At the moment, we actually process coercions
+    /// very much like subtyping and don't handle the full coercion
+    /// logic.
+    Coerce(ty::CoercePredicate<I>),
+
+    /// Constants must be equal. The first component is the const that is expected.
+    ConstEquate(I::Const, I::Const),
+
+    /// A marker predicate that is always ambiguous.
+    /// Used for coherence to mark opaque types as possibly equal to each other but ambiguous.
+    Ambiguous,
+
+    /// This should only be used inside of the new solver for `AliasRelate` and expects
+    /// the `term` to be always be an unconstrained inference variable. It is used to
+    /// normalize `alias` as much as possible. In case the alias is rigid - i.e. it cannot
+    /// be normalized in the current environment - this constrains `term` to be equal to
+    /// the alias itself.
+    ///
+    /// It is likely more useful to think of this as a function `normalizes_to(alias)`,
+    /// whose return value is written into `term`.
+    NormalizesTo(ty::NormalizesTo<I>),
+
+    /// Separate from `ClauseKind::Projection` which is used for normalization in new solver.
+    /// This predicate requires two terms to be equal to eachother.
+    ///
+    /// Only used for new solver.
+    AliasRelate(I::Term, I::Term, AliasRelationDirection),
+}
+/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<I: Interner> Eq for PredicateKind<I> {}
+/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
+
+#[derive(Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Copy)]
+#[cfg_attr(
+    feature = "nightly",
+    derive(HashStable_NoContext, Encodable_NoContext, Decodable_NoContext)
+)]
+pub enum AliasRelationDirection {
+    Equate,
+    Subtype,
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=9 */
+
+impl std::fmt::Display for AliasRelationDirection {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            AliasRelationDirection::Equate => write!(f, "=="),
+            AliasRelationDirection::Subtype => write!(f, "<:"),
+        }
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=17 | LINES=20 */
+
+impl<I: Interner> fmt::Debug for ClauseKind<I> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            ClauseKind::ConstArgHasType(ct, ty) => write!(f, "ConstArgHasType({ct:?}, {ty:?})"),
+            ClauseKind::HostEffect(data) => data.fmt(f),
+            ClauseKind::Trait(a) => a.fmt(f),
+            ClauseKind::RegionOutlives(pair) => pair.fmt(f),
+            ClauseKind::TypeOutlives(pair) => pair.fmt(f),
+            ClauseKind::Projection(pair) => pair.fmt(f),
+            ClauseKind::WellFormed(data) => write!(f, "WellFormed({data:?})"),
+            ClauseKind::ConstEvaluatable(ct) => {
+                write!(f, "ConstEvaluatable({ct:?})")
+            }
+            ClauseKind::UnstableFeature(feature_name) => {
+                write!(f, "UnstableFeature({feature_name:?})")
+            }
+        }
+    }
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=18 | LINES=19 */
+
+impl<I: Interner> fmt::Debug for PredicateKind<I> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            PredicateKind::Clause(a) => a.fmt(f),
+            PredicateKind::Subtype(pair) => pair.fmt(f),
+            PredicateKind::Coerce(pair) => pair.fmt(f),
+            PredicateKind::DynCompatible(trait_def_id) => {
+                write!(f, "DynCompatible({trait_def_id:?})")
+            }
+            PredicateKind::ConstEquate(c1, c2) => write!(f, "ConstEquate({c1:?}, {c2:?})"),
+            PredicateKind::Ambiguous => write!(f, "Ambiguous"),
+            PredicateKind::NormalizesTo(p) => p.fmt(f),
+            PredicateKind::AliasRelate(t1, t2, dir) => {
+                write!(f, "AliasRelate({t1:?}, {dir:?}, {t2:?})")
+            }
+        }
+    }
+}

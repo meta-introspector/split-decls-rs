@@ -1,10 +1,25 @@
-/* FP:print.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_print_USE_0001
-/* FP:print.rs-0002 */ use std :: fmt ;
-/* FP:print.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_print_USE_0002
-/* FP:print.rs-0004 */ use std :: io :: { self , Write as _ } ;
-/* FP:print.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_print_MACRO_0003
-/* FP:print.rs-0006 */ macro_rules ! safe_print { ($ ($ arg : tt) *) => { { $ crate :: print :: print (std :: format_args ! ($ ($ arg) *)) ; } } ; }
-/* FP:print.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_print_MACRO_0004
-/* FP:print.rs-0008 */ macro_rules ! safe_println { ($ ($ arg : tt) *) => { safe_print ! ("{}\n" , std :: format_args ! ($ ($ arg) *)) } ; }
-/* FP:print.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_driver_impl_src_print_FN_0005
-/* FP:print.rs-0010 */ pub (crate) fn print (args : fmt :: Arguments < '_ >) { if let Err (_) = io :: stdout () . write_fmt (args) { crate :: rustc_errors :: FatalError . raise () ; } }
+// SRC: ../rust/compiler/rustc_driver_impl/src/print.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use std::fmt;
+use std::io::{self, Write as _};
+/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=6 */
+
+macro_rules! safe_print {
+    ($($arg:tt)*) => {{
+        $crate::print::print(std::format_args!($($arg)*));
+    }};
+}
+/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=6 */
+
+macro_rules! safe_println {
+    ($($arg:tt)*) => {
+        safe_print!("{}\n", std::format_args!($($arg)*))
+    };
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=5 | LINES=6 */
+
+pub(crate) fn print(args: fmt::Arguments<'_>) {
+    if let Err(_) = io::stdout().write_fmt(args) {
+        crate::rustc_errors::FatalError.raise();
+    }
+}

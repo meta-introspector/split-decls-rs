@@ -1,45 +1,122 @@
-/* FP:lib.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_USE_0001
-/* FP:lib.rs-0002 */ # [allow (internal_features)] # [allow (rustc :: diagnostic_outside_of_impl)] # [allow (rustc :: untranslatable_diagnostic)] # [doc (html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")] # [doc (rust_logo)] # [feature (assert_matches)] # [feature (box_patterns)] # [feature (decl_macro)] # [feature (if_let_guard)] # [feature (proc_macro_internals)] # [feature (proc_macro_quote)] # [feature (rustdoc_internals)] # [feature (try_blocks)] # [recursion_limit = "256"] use std :: sync :: Arc ;
-/* FP:lib.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_USE_0002
-/* FP:lib.rs-0004 */ use crate :: rustc_expand :: base :: { MacroExpanderFn , ResolverExpand , SyntaxExtensionKind } ;
-/* FP:lib.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_USE_0003
-/* FP:lib.rs-0006 */ use crate :: rustc_expand :: proc_macro :: BangProcMacro ;
-/* FP:lib.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_USE_0004
-/* FP:lib.rs-0008 */ use crate :: rustc_complete :: sym ;
-/* FP:lib.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_USE_0005
-/* FP:lib.rs-0010 */ use crate :: deriving :: * ;
-/* FP:lib.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0006
-/* FP:lib.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0007
-/* FP:lib.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0008
-/* FP:lib.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0009
-/* FP:lib.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0010
-/* FP:lib.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0011
-/* FP:lib.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0012
-/* FP:lib.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0013
-/* FP:lib.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0014
-/* FP:lib.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0015
-/* FP:lib.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0016
-/* FP:lib.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0017
-/* FP:lib.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0018
-/* FP:lib.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0019
-/* FP:lib.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0020
-/* FP:lib.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0021
-/* FP:lib.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0022
-/* FP:lib.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0023
-/* FP:lib.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0024
-/* FP:lib.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0025
-/* FP:lib.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0026
-/* FP:lib.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0027
-/* FP:lib.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0028
-/* FP:lib.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0029
-/* FP:lib.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0030
-/* FP:lib.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0031
-/* FP:lib.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0032
-/* FP:lib.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0033
-/* FP:lib.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0034
-/* FP:lib.rs-0069 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0035
-/* FP:lib.rs-0071 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0036
-/* FP:lib.rs-0073 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MOD_0037
-/* FP:lib.rs-0075 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_MACRO_0038
-/* FP:lib.rs-0076 */ rustc_fluent_macro :: fluent_messages ! { "../messages.ftl" }
-/* FP:lib.rs-0077 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_lib_FN_0039
+// SRC: ../rust/compiler/rustc_builtin_macros/src/lib.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=23 */
+// This crate contains implementations of built-in macros and other code generating facilities
+// injecting code into the crate before it is lowered to HIR.
+
+// tidy-alphabetical-start
+#[allow(internal_features)]
+#[allow(rustc::diagnostic_outside_of_impl)]
+#[allow(rustc::untranslatable_diagnostic)]
+#[doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
+#[doc(rust_logo)]
+#[feature(assert_matches)]
+#[feature(box_patterns)]
+#[feature(decl_macro)]
+#[feature(if_let_guard)]
+#[feature(proc_macro_internals)]
+#[feature(proc_macro_quote)]
+#[feature(rustdoc_internals)]
+#[feature(try_blocks)]
+#[recursion_limit = "256"]
+// tidy-alphabetical-end
+
+use std::sync::Arc;
+
+use crate::rustc_expand::base::{MacroExpanderFn, ResolverExpand, SyntaxExtensionKind};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=3 | LINES=40 */
+use crate::rustc_expand::proc_macro::BangProcMacro;
+use crate::rustc_complete::sym;
+
+use crate::deriving::*;
+
+
+
+rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=register_builtin_macros | COMPLEXITY=18 | LINES=87 */
+
+pub fn register_builtin_macros(resolver: &mut dyn ResolverExpand) {
+    let mut register = |name, kind| resolver.register_builtin_macro(name, kind);
+    macro register_bang($($name:ident: $f:expr,)*) {
+        $(register(sym::$name, SyntaxExtensionKind::LegacyBang(Arc::new($f as MacroExpanderFn)));)*
+    }
+    macro register_attr($($name:ident: $f:expr,)*) {
+        $(register(sym::$name, SyntaxExtensionKind::LegacyAttr(Arc::new($f)));)*
+    }
+    macro register_derive($($name:ident: $f:expr,)*) {
+        $(register(sym::$name, SyntaxExtensionKind::LegacyDerive(Arc::new(BuiltinDerive($f))));)*
+    }
+
+    register_bang! {
+        // tidy-alphabetical-start
+        asm: asm::expand_asm,
+        assert: assert::expand_assert,
+        cfg: cfg::expand_cfg,
+        cfg_select: cfg_select::expand_cfg_select,
+        column: source_util::expand_column,
+        compile_error: compile_error::expand_compile_error,
+        concat: concat::expand_concat,
+        concat_bytes: concat_bytes::expand_concat_bytes,
+        const_format_args: format::expand_format_args,
+        core_panic: edition_panic::expand_panic,
+        env: env::expand_env,
+        file: source_util::expand_file,
+        format_args: format::expand_format_args,
+        format_args_nl: format::expand_format_args_nl,
+        global_asm: asm::expand_global_asm,
+        include: source_util::expand_include,
+        include_bytes: source_util::expand_include_bytes,
+        include_str: source_util::expand_include_str,
+        iter: iter::expand,
+        line: source_util::expand_line,
+        log_syntax: log_syntax::expand_log_syntax,
+        module_path: source_util::expand_mod,
+        naked_asm: asm::expand_naked_asm,
+        option_env: env::expand_option_env,
+        pattern_type: pattern_type::expand,
+        std_panic: edition_panic::expand_panic,
+        stringify: source_util::expand_stringify,
+        trace_macros: trace_macros::expand_trace_macros,
+        unreachable: edition_panic::expand_unreachable,
+        // tidy-alphabetical-end
+    }
+
+    register_attr! {
+        // tidy-alphabetical-start
+        alloc_error_handler: alloc_error_handler::expand,
+        autodiff_forward: autodiff::expand_forward,
+        autodiff_reverse: autodiff::expand_reverse,
+        bench: test::expand_bench,
+        cfg_accessible: cfg_accessible::Expander,
+        cfg_eval: cfg_eval::expand,
+        define_opaque: define_opaque::expand,
+        derive: derive::Expander { is_const: false },
+        derive_const: derive::Expander { is_const: true },
+        global_allocator: global_allocator::expand,
+        test: test::expand_test,
+        test_case: test::expand_test_case,
+        // tidy-alphabetical-end
+    }
+
+    register_derive! {
+        Clone: clone::expand_deriving_clone,
+        Copy: bounds::expand_deriving_copy,
+        ConstParamTy: bounds::expand_deriving_const_param_ty,
+        UnsizedConstParamTy: bounds::expand_deriving_unsized_const_param_ty,
+        Debug: debug::expand_deriving_debug,
+        Default: default::expand_deriving_default,
+        Eq: eq::expand_deriving_eq,
+        Hash: hash::expand_deriving_hash,
+        Ord: ord::expand_deriving_ord,
+        PartialEq: partial_eq::expand_deriving_partial_eq,
+        PartialOrd: partial_ord::expand_deriving_partial_ord,
+        CoercePointee: coerce_pointee::expand_deriving_coerce_pointee,
+        From: from::expand_deriving_from,
+    }
+
+    let client = crate::rustc_proc_macro::bridge::client::Client::expand1(crate::rustc_proc_macro::quote);
+    register(sym::quote, SyntaxExtensionKind::Bang(Arc::new(BangProcMacro { client })));
+    let requires = SyntaxExtensionKind::Attr(Arc::new(contracts::ExpandRequires));
+    register(sym::contracts_requires, requires);
+    let ensures = SyntaxExtensionKind::Attr(Arc::new(contracts::ExpandEnsures));
+    register(sym::contracts_ensures, ensures);
+}

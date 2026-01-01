@@ -1,28 +1,135 @@
-/* FP:lib_features.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_lib_features_USE_0001
-/* FP:lib_features.rs-0002 */ use crate :: rustc_complete :: attrs :: AttributeKind ;
-/* FP:lib_features.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_lib_features_USE_0002
-/* FP:lib_features.rs-0004 */ use crate :: rustc_complete :: intravisit :: Visitor ;
-/* FP:lib_features.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_lib_features_USE_0003
-/* FP:lib_features.rs-0006 */ use crate :: rustc_complete :: { Attribute , StabilityLevel , StableSince } ;
-/* FP:lib_features.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_lib_features_USE_0004
-/* FP:lib_features.rs-0008 */ use crate :: rustc_complete :: hir :: nested_filter ;
-/* FP:lib_features.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_lib_features_USE_0005
-/* FP:lib_features.rs-0010 */ use crate :: rustc_complete :: middle :: lib_features :: { FeatureStability , LibFeatures } ;
-/* FP:lib_features.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_lib_features_USE_0006
-/* FP:lib_features.rs-0012 */ use crate :: rustc_complete :: query :: { LocalCrate , Providers } ;
-/* FP:lib_features.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_lib_features_USE_0007
-/* FP:lib_features.rs-0014 */ use crate :: rustc_complete :: ty :: TyCtxt ;
-/* FP:lib_features.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_lib_features_USE_0008
-/* FP:lib_features.rs-0016 */ use crate :: rustc_complete :: { Span , Symbol , sym } ;
-/* FP:lib_features.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_lib_features_USE_0009
-/* FP:lib_features.rs-0018 */ use crate :: errors :: { FeaturePreviouslyDeclared , FeatureStableTwice } ;
-/* FP:lib_features.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_lib_features_STRUCT_0010
-/* FP:lib_features.rs-0020 */ struct LibFeatureCollector < 'tcx > { tcx : TyCtxt < 'tcx > , lib_features : LibFeatures , }
-/* FP:lib_features.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_lib_features_IMPL_0011
-/* FP:lib_features.rs-0022 */ impl < 'tcx > LibFeatureCollector < 'tcx > { fn new (tcx : TyCtxt < 'tcx >) -> LibFeatureCollector < 'tcx > { LibFeatureCollector { tcx , lib_features : LibFeatures :: default () } } fn extract (& self , attr : & Attribute) -> Option < (Symbol , FeatureStability , Span) > { let (feature , level , span) = match attr { Attribute :: Parsed (AttributeKind :: Stability { stability , span }) => { (stability . feature , stability . level , * span) } Attribute :: Parsed (AttributeKind :: ConstStability { stability , span }) => { (stability . feature , stability . level , * span) } Attribute :: Parsed (AttributeKind :: BodyStability { stability , span }) => { (stability . feature , stability . level , * span) } _ => return None , } ; let feature_stability = match level { StabilityLevel :: Unstable { old_name , .. } => FeatureStability :: Unstable { old_name } , StabilityLevel :: Stable { since , .. } => FeatureStability :: AcceptedSince (match since { StableSince :: Version (v) => Symbol :: intern (& v . to_string ()) , StableSince :: Current => sym :: env_CFG_RELEASE , StableSince :: Err (_) => return None , }) , } ; Some ((feature , feature_stability , span)) } fn collect_feature (& mut self , feature : Symbol , stability : FeatureStability , span : Span) { let existing_stability = self . lib_features . stability . get (& feature) . cloned () ; match (stability , existing_stability) { (_ , None) => { self . lib_features . stability . insert (feature , (stability , span)) ; } (FeatureStability :: AcceptedSince (since) , Some ((FeatureStability :: AcceptedSince (prev_since) , _)) ,) => { if prev_since != since { self . tcx . dcx () . emit_err (FeatureStableTwice { span , feature , since , prev_since , }) ; } } (FeatureStability :: AcceptedSince (_) , Some ((FeatureStability :: Unstable { .. } , _))) => { self . tcx . dcx () . emit_err (FeaturePreviouslyDeclared { span , feature , declared : "stable" , prev_declared : "unstable" , }) ; } (FeatureStability :: Unstable { .. } , Some ((FeatureStability :: AcceptedSince (_) , _))) => { self . tcx . dcx () . emit_err (FeaturePreviouslyDeclared { span , feature , declared : "unstable" , prev_declared : "stable" , }) ; } (FeatureStability :: Unstable { .. } , Some ((FeatureStability :: Unstable { .. } , _))) => { } } } }
-/* FP:lib_features.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_lib_features_IMPL_0012
-/* FP:lib_features.rs-0024 */ impl < 'tcx > Visitor < 'tcx > for LibFeatureCollector < 'tcx > { type NestedFilter = nested_filter :: All ; fn maybe_tcx (& mut self) -> Self :: MaybeTyCtxt { self . tcx } fn visit_attribute (& mut self , attr : & 'tcx Attribute) { if let Some ((feature , stable , span)) = self . extract (attr) { self . collect_feature (feature , stable , span) ; } } }
-/* FP:lib_features.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_lib_features_FN_0013
-/* FP:lib_features.rs-0026 */ fn lib_features (tcx : TyCtxt < '_ > , LocalCrate : LocalCrate) -> LibFeatures { if ! tcx . features () . staged_api () { return LibFeatures :: default () ; } let mut collector = LibFeatureCollector :: new (tcx) ; tcx . hir_walk_attributes (& mut collector) ; collector . lib_features }
-/* FP:lib_features.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_lib_features_FN_0014
-/* FP:lib_features.rs-0028 */ pub (crate) fn provide (providers : & mut Providers) { providers . lib_features = lib_features ; }
+// SRC: ../rust/compiler/rustc_passes/src/lib_features.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+// Detecting lib features (i.e., features that are not lang features).
+//
+// These are declared using stability attributes (e.g., `#[stable (..)]` and `#[unstable (..)]`),
+// but are not declared in one single location (unlike lang features), which means we need to
+// collect them instead.
+
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::intravisit::Visitor;
+use crate::rustc_complete::{Attribute, StabilityLevel, StableSince};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::middle::lib_features::{FeatureStability, LibFeatures};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::query::{LocalCrate, Providers};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::{Span, Symbol, sym};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+use crate::errors::{FeaturePreviouslyDeclared, FeatureStableTwice};
+/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=LibFeatureCollector | COMPLEXITY=2 | LINES=5 */
+
+struct LibFeatureCollector<'tcx> {
+    tcx: TyCtxt<'tcx>,
+    lib_features: LibFeatures,
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=new | COMPLEXITY=52 | LINES=73 */
+
+impl<'tcx> LibFeatureCollector<'tcx> {
+    fn new(tcx: TyCtxt<'tcx>) -> LibFeatureCollector<'tcx> {
+        LibFeatureCollector { tcx, lib_features: LibFeatures::default() }
+    }
+
+    fn extract(&self, attr: &Attribute) -> Option<(Symbol, FeatureStability, Span)> {
+        let (feature, level, span) = match attr {
+            Attribute::Parsed(AttributeKind::Stability { stability, span }) => {
+                (stability.feature, stability.level, *span)
+            }
+            Attribute::Parsed(AttributeKind::ConstStability { stability, span }) => {
+                (stability.feature, stability.level, *span)
+            }
+            Attribute::Parsed(AttributeKind::BodyStability { stability, span }) => {
+                (stability.feature, stability.level, *span)
+            }
+            _ => return None,
+        };
+
+        let feature_stability = match level {
+            StabilityLevel::Unstable { old_name, .. } => FeatureStability::Unstable { old_name },
+            StabilityLevel::Stable { since, .. } => FeatureStability::AcceptedSince(match since {
+                StableSince::Version(v) => Symbol::intern(&v.to_string()),
+                StableSince::Current => sym::env_CFG_RELEASE,
+                StableSince::Err(_) => return None,
+            }),
+        };
+
+        Some((feature, feature_stability, span))
+    }
+
+    fn collect_feature(&mut self, feature: Symbol, stability: FeatureStability, span: Span) {
+        let existing_stability = self.lib_features.stability.get(&feature).cloned();
+
+        match (stability, existing_stability) {
+            (_, None) => {
+                self.lib_features.stability.insert(feature, (stability, span));
+            }
+            (
+                FeatureStability::AcceptedSince(since),
+                Some((FeatureStability::AcceptedSince(prev_since), _)),
+            ) => {
+                if prev_since != since {
+                    self.tcx.dcx().emit_err(FeatureStableTwice {
+                        span,
+                        feature,
+                        since,
+                        prev_since,
+                    });
+                }
+            }
+            (FeatureStability::AcceptedSince(_), Some((FeatureStability::Unstable { .. }, _))) => {
+                self.tcx.dcx().emit_err(FeaturePreviouslyDeclared {
+                    span,
+                    feature,
+                    declared: "stable",
+                    prev_declared: "unstable",
+                });
+            }
+            (FeatureStability::Unstable { .. }, Some((FeatureStability::AcceptedSince(_), _))) => {
+                self.tcx.dcx().emit_err(FeaturePreviouslyDeclared {
+                    span,
+                    feature,
+                    declared: "unstable",
+                    prev_declared: "stable",
+                });
+            }
+            // duplicate `unstable` feature is ok.
+            (FeatureStability::Unstable { .. }, Some((FeatureStability::Unstable { .. }, _))) => {}
+        }
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=9 | LINES=14 */
+
+impl<'tcx> Visitor<'tcx> for LibFeatureCollector<'tcx> {
+    type NestedFilter = nested_filter::All;
+
+    fn maybe_tcx(&mut self) -> Self::MaybeTyCtxt {
+        self.tcx
+    }
+
+    fn visit_attribute(&mut self, attr: &'tcx Attribute) {
+        if let Some((feature, stable, span)) = self.extract(attr) {
+            self.collect_feature(feature, stable, span);
+        }
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=lib_features | COMPLEXITY=5 | LINES=12 */
+
+fn lib_features(tcx: TyCtxt<'_>, LocalCrate: LocalCrate) -> LibFeatures {
+    // If `staged_api` is not enabled then we aren't allowed to define lib
+    // features; there is no point collecting them.
+    if !tcx.features().staged_api() {
+        return LibFeatures::default();
+    }
+
+    let mut collector = LibFeatureCollector::new(tcx);
+    tcx.hir_walk_attributes(&mut collector);
+    collector.lib_features
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+
+pub(crate) fn provide(providers: &mut Providers) {
+    providers.lib_features = lib_features;
+}

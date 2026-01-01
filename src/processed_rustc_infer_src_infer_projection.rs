@@ -1,12 +1,46 @@
-/* FP:projection.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_projection_USE_0001
-/* FP:projection.rs-0002 */ use crate :: rustc_complete :: traits :: ObligationCause ;
-/* FP:projection.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_projection_USE_0002
-/* FP:projection.rs-0004 */ use crate :: rustc_complete :: ty ;
-/* FP:projection.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_projection_USE_0003
-/* FP:projection.rs-0006 */ use super :: InferCtxt ;
-/* FP:projection.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_projection_USE_0004
-/* FP:projection.rs-0008 */ use crate :: infer :: Term ;
-/* FP:projection.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_projection_USE_0005
-/* FP:projection.rs-0010 */ use crate :: traits :: { Obligation , PredicateObligations } ;
-/* FP:projection.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_infer_projection_IMPL_0006
-/* FP:projection.rs-0012 */ impl < 'tcx > InferCtxt < 'tcx > { # [doc = " Instead of normalizing an associated type projection,"] # [doc = " this function generates an inference variable and registers"] # [doc = " an obligation that this inference variable must be the result"] # [doc = " of the given projection. This allows us to proceed with projections"] # [doc = " while they cannot be resolved yet due to missing information or"] # [doc = " simply due to the lack of access to the trait resolution machinery."] pub fn projection_term_to_infer (& self , param_env : ty :: ParamEnv < 'tcx > , alias_term : ty :: AliasTerm < 'tcx > , cause : ObligationCause < 'tcx > , recursion_depth : usize , obligations : & mut PredicateObligations < 'tcx > ,) -> Term < 'tcx > { debug_assert ! (! self . next_trait_solver ()) ; let span = self . tcx . def_span (alias_term . def_id) ; let infer_var = if alias_term . kind (self . tcx) . is_type () { self . next_ty_var (span) . into () } else { self . next_const_var (span) . into () } ; let projection = ty :: PredicateKind :: Clause (ty :: ClauseKind :: Projection (ty :: ProjectionPredicate { projection_term : alias_term , term : infer_var , })) ; let obligation = Obligation :: with_depth (self . tcx , cause , recursion_depth , param_env , projection) ; obligations . push (obligation) ; infer_var } }
+// SRC: ../rust/compiler/rustc_infer/src/infer/projection.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty;
+
+use super::InferCtxt;
+use crate::infer::Term;
+use crate::traits::{Obligation, PredicateObligations};
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=projection_term_to_infer | COMPLEXITY=12 | LINES=37 */
+
+impl<'tcx> InferCtxt<'tcx> {
+    /// Instead of normalizing an associated type projection,
+    /// this function generates an inference variable and registers
+    /// an obligation that this inference variable must be the result
+    /// of the given projection. This allows us to proceed with projections
+    /// while they cannot be resolved yet due to missing information or
+    /// simply due to the lack of access to the trait resolution machinery.
+    pub fn projection_term_to_infer(
+        &self,
+        param_env: ty::ParamEnv<'tcx>,
+        alias_term: ty::AliasTerm<'tcx>,
+        cause: ObligationCause<'tcx>,
+        recursion_depth: usize,
+        obligations: &mut PredicateObligations<'tcx>,
+    ) -> Term<'tcx> {
+        debug_assert!(!self.next_trait_solver());
+
+        let span = self.tcx.def_span(alias_term.def_id);
+        let infer_var = if alias_term.kind(self.tcx).is_type() {
+            self.next_ty_var(span).into()
+        } else {
+            self.next_const_var(span).into()
+        };
+
+        let projection =
+            ty::PredicateKind::Clause(ty::ClauseKind::Projection(ty::ProjectionPredicate {
+                projection_term: alias_term,
+                term: infer_var,
+            }));
+        let obligation =
+            Obligation::with_depth(self.tcx, cause, recursion_depth, param_env, projection);
+        obligations.push(obligation);
+
+        infer_var
+    }
+}

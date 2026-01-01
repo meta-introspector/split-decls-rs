@@ -1,44 +1,308 @@
-/* FP:normalize.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_USE_0001
-/* FP:normalize.rs-0002 */ use std :: fmt :: Debug ;
-/* FP:normalize.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_USE_0002
-/* FP:normalize.rs-0004 */ use crate :: rustc_data_structures :: stack :: ensure_sufficient_stack ;
-/* FP:normalize.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_USE_0003
-/* FP:normalize.rs-0006 */ use crate :: rustc_infer :: infer :: InferCtxt ;
-/* FP:normalize.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_USE_0004
-/* FP:normalize.rs-0008 */ use crate :: rustc_infer :: infer :: at :: At ;
-/* FP:normalize.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_USE_0005
-/* FP:normalize.rs-0010 */ use crate :: rustc_infer :: traits :: solve :: Goal ;
-/* FP:normalize.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_USE_0006
-/* FP:normalize.rs-0012 */ use crate :: rustc_infer :: traits :: { FromSolverError , Obligation , TraitEngine } ;
-/* FP:normalize.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_USE_0007
-/* FP:normalize.rs-0014 */ use crate :: rustc_complete :: traits :: ObligationCause ;
-/* FP:normalize.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_USE_0008
-/* FP:normalize.rs-0016 */ use crate :: rustc_complete :: ty :: { self , FallibleTypeFolder , Ty , TyCtxt , TypeFoldable , TypeFolder , TypeSuperFoldable , TypeVisitableExt , UniverseIndex , } ;
-/* FP:normalize.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_USE_0009
-/* FP:normalize.rs-0018 */ use tracing :: instrument ;
-/* FP:normalize.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_USE_0010
-/* FP:normalize.rs-0020 */ use super :: { FulfillmentCtxt , NextSolverError } ;
-/* FP:normalize.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_USE_0011
-/* FP:normalize.rs-0022 */ use crate :: error_reporting :: InferCtxtErrorExt ;
-/* FP:normalize.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_USE_0012
-/* FP:normalize.rs-0024 */ use crate :: error_reporting :: traits :: OverflowCause ;
-/* FP:normalize.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_USE_0013
-/* FP:normalize.rs-0026 */ use crate :: traits :: { BoundVarReplacer , PlaceholderReplacer , ScrubbedTraitError } ;
-/* FP:normalize.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_FN_0014
-/* FP:normalize.rs-0028 */ # [doc = " Deeply normalize all aliases in `value`. This does not handle inference and expects"] # [doc = " its input to be already fully resolved."] pub fn deeply_normalize < 'tcx , T , E > (at : At < '_ , 'tcx > , value : T) -> Result < T , Vec < E > > where T : TypeFoldable < TyCtxt < 'tcx > > , E : FromSolverError < 'tcx , NextSolverError < 'tcx > > , { assert ! (! value . has_escaping_bound_vars ()) ; deeply_normalize_with_skipped_universes (at , value , vec ! []) }
-/* FP:normalize.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_FN_0015
-/* FP:normalize.rs-0030 */ # [doc = " Deeply normalize all aliases in `value`. This does not handle inference and expects"] # [doc = " its input to be already fully resolved."] # [doc = ""] # [doc = " Additionally takes a list of universes which represents the binders which have been"] # [doc = " entered before passing `value` to the function. This is currently needed for"] # [doc = " `normalize_erasing_regions`, which skips binders as it walks through a type."] pub fn deeply_normalize_with_skipped_universes < 'tcx , T , E > (at : At < '_ , 'tcx > , value : T , universes : Vec < Option < UniverseIndex > > ,) -> Result < T , Vec < E > > where T : TypeFoldable < TyCtxt < 'tcx > > , E : FromSolverError < 'tcx , NextSolverError < 'tcx > > , { let (value , coroutine_goals) = deeply_normalize_with_skipped_universes_and_ambiguous_coroutine_goals (at , value , universes ,) ? ; assert_eq ! (coroutine_goals , vec ! []) ; Ok (value) }
-/* FP:normalize.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_FN_0016
-/* FP:normalize.rs-0032 */ # [doc = " Deeply normalize all aliases in `value`. This does not handle inference and expects"] # [doc = " its input to be already fully resolved."] # [doc = ""] # [doc = " Additionally takes a list of universes which represents the binders which have been"] # [doc = " entered before passing `value` to the function. This is currently needed for"] # [doc = " `normalize_erasing_regions`, which skips binders as it walks through a type."] # [doc = ""] # [doc = " This returns a set of stalled obligations involving coroutines if the typing mode of"] # [doc = " the underlying infcx has any stalled coroutine def ids."] pub fn deeply_normalize_with_skipped_universes_and_ambiguous_coroutine_goals < 'tcx , T , E > (at : At < '_ , 'tcx > , value : T , universes : Vec < Option < UniverseIndex > > ,) -> Result < (T , Vec < Goal < 'tcx , ty :: Predicate < 'tcx > > >) , Vec < E > > where T : TypeFoldable < TyCtxt < 'tcx > > , E : FromSolverError < 'tcx , NextSolverError < 'tcx > > , { let fulfill_cx = FulfillmentCtxt :: new (at . infcx) ; let mut folder = NormalizationFolder { at , fulfill_cx , depth : 0 , universes , stalled_coroutine_goals : vec ! [] , } ; let value = value . try_fold_with (& mut folder) ? ; let errors = folder . fulfill_cx . select_all_or_error (at . infcx) ; if errors . is_empty () { Ok ((value , folder . stalled_coroutine_goals)) } else { Err (errors) } }
-/* FP:normalize.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_STRUCT_0017
-/* FP:normalize.rs-0034 */ struct NormalizationFolder < 'me , 'tcx , E > { at : At < 'me , 'tcx > , fulfill_cx : FulfillmentCtxt < 'tcx , E > , depth : usize , universes : Vec < Option < UniverseIndex > > , stalled_coroutine_goals : Vec < Goal < 'tcx , ty :: Predicate < 'tcx > > > , }
-/* FP:normalize.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_IMPL_0018
-/* FP:normalize.rs-0036 */ impl < 'tcx , E > NormalizationFolder < '_ , 'tcx , E > where E : FromSolverError < 'tcx , NextSolverError < 'tcx > > , { fn normalize_alias_term (& mut self , alias_term : ty :: Term < 'tcx > ,) -> Result < ty :: Term < 'tcx > , Vec < E > > { let infcx = self . at . infcx ; let tcx = infcx . tcx ; let recursion_limit = tcx . recursion_limit () ; if ! recursion_limit . value_within_limit (self . depth) { let term = alias_term . to_alias_term () . unwrap () ; self . at . infcx . err_ctxt () . report_overflow_error (OverflowCause :: DeeplyNormalize (term) , self . at . cause . span , true , | _ | { } ,) ; } self . depth += 1 ; let infer_term = infcx . next_term_var_of_kind (alias_term , self . at . cause . span) ; let obligation = Obligation :: new (tcx , self . at . cause . clone () , self . at . param_env , ty :: PredicateKind :: AliasRelate (alias_term . into () , infer_term . into () , ty :: AliasRelationDirection :: Equate ,) ,) ; self . fulfill_cx . register_predicate_obligation (infcx , obligation) ; self . select_all_and_stall_coroutine_predicates () ? ; let term = infcx . resolve_vars_if_possible (infer_term) ; let result = match term . kind () { ty :: TermKind :: Ty (ty) => ty . try_super_fold_with (self) ? . into () , ty :: TermKind :: Const (ct) => ct . try_super_fold_with (self) ? . into () , } ; self . depth -= 1 ; Ok (result) } fn select_all_and_stall_coroutine_predicates (& mut self) -> Result < () , Vec < E > > { let errors = self . fulfill_cx . select_where_possible (self . at . infcx) ; if ! errors . is_empty () { return Err (errors) ; } self . stalled_coroutine_goals . extend (self . fulfill_cx . drain_stalled_obligations_for_coroutines (self . at . infcx) . into_iter () . map (| obl | obl . as_goal ()) ,) ; let errors = self . fulfill_cx . collect_remaining_errors (self . at . infcx) ; if ! errors . is_empty () { return Err (errors) ; } Ok (()) } }
-/* FP:normalize.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_IMPL_0019
-/* FP:normalize.rs-0038 */ impl < 'tcx , E > FallibleTypeFolder < TyCtxt < 'tcx > > for NormalizationFolder < '_ , 'tcx , E > where E : FromSolverError < 'tcx , NextSolverError < 'tcx > > + Debug , { type Error = Vec < E > ; fn cx (& self) -> TyCtxt < 'tcx > { self . at . infcx . tcx } fn try_fold_binder < T : TypeFoldable < TyCtxt < 'tcx > > > (& mut self , t : ty :: Binder < 'tcx , T > ,) -> Result < ty :: Binder < 'tcx , T > , Self :: Error > { self . universes . push (None) ; let t = t . try_super_fold_with (self) ? ; self . universes . pop () ; Ok (t) } # [instrument (level = "trace" , skip (self) , ret)] fn try_fold_ty (& mut self , ty : Ty < 'tcx >) -> Result < Ty < 'tcx > , Self :: Error > { let infcx = self . at . infcx ; debug_assert_eq ! (ty , infcx . shallow_resolve (ty)) ; if ! ty . has_aliases () { return Ok (ty) ; } let ty :: Alias (..) = * ty . kind () else { return ty . try_super_fold_with (self) } ; if ty . has_escaping_bound_vars () { let (ty , mapped_regions , mapped_types , mapped_consts) = BoundVarReplacer :: replace_bound_vars (infcx , & mut self . universes , ty) ; let result = ensure_sufficient_stack (| | self . normalize_alias_term (ty . into ())) ? . expect_type () ; Ok (PlaceholderReplacer :: replace_placeholders (infcx , mapped_regions , mapped_types , mapped_consts , & self . universes , result ,)) } else { Ok (ensure_sufficient_stack (| | self . normalize_alias_term (ty . into ())) ? . expect_type ()) } } # [instrument (level = "trace" , skip (self) , ret)] fn try_fold_const (& mut self , ct : ty :: Const < 'tcx >) -> Result < ty :: Const < 'tcx > , Self :: Error > { let infcx = self . at . infcx ; debug_assert_eq ! (ct , infcx . shallow_resolve_const (ct)) ; if ! ct . has_aliases () { return Ok (ct) ; } let ty :: ConstKind :: Unevaluated (..) = ct . kind () else { return ct . try_super_fold_with (self) } ; if ct . has_escaping_bound_vars () { let (ct , mapped_regions , mapped_types , mapped_consts) = BoundVarReplacer :: replace_bound_vars (infcx , & mut self . universes , ct) ; let result = ensure_sufficient_stack (| | self . normalize_alias_term (ct . into ())) ? . expect_const () ; Ok (PlaceholderReplacer :: replace_placeholders (infcx , mapped_regions , mapped_types , mapped_consts , & self . universes , result ,)) } else { Ok (ensure_sufficient_stack (| | self . normalize_alias_term (ct . into ())) ? . expect_const ()) } } }
-/* FP:normalize.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_FN_0020
-/* FP:normalize.rs-0040 */ pub (crate) fn deeply_normalize_for_diagnostics < 'tcx , T : TypeFoldable < TyCtxt < 'tcx > > > (infcx : & InferCtxt < 'tcx > , param_env : ty :: ParamEnv < 'tcx > , t : T ,) -> T { t . fold_with (& mut DeeplyNormalizeForDiagnosticsFolder { at : infcx . at (& ObligationCause :: dummy () , param_env) , }) }
-/* FP:normalize.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_STRUCT_0021
-/* FP:normalize.rs-0042 */ struct DeeplyNormalizeForDiagnosticsFolder < 'a , 'tcx > { at : At < 'a , 'tcx > , }
-/* FP:normalize.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_solve_normalize_IMPL_0022
-/* FP:normalize.rs-0044 */ impl < 'tcx > TypeFolder < TyCtxt < 'tcx > > for DeeplyNormalizeForDiagnosticsFolder < '_ , 'tcx > { fn cx (& self) -> TyCtxt < 'tcx > { self . at . infcx . tcx } fn fold_ty (& mut self , ty : Ty < 'tcx >) -> Ty < 'tcx > { let infcx = self . at . infcx ; let result : Result < _ , Vec < ScrubbedTraitError < 'tcx > > > = infcx . commit_if_ok (| _ | { deeply_normalize_with_skipped_universes_and_ambiguous_coroutine_goals (self . at , ty , vec ! [None ; ty . outer_exclusive_binder () . as_usize ()] ,) }) ; match result { Ok ((ty , _)) => ty , Err (_) => ty . super_fold_with (self) , } } fn fold_const (& mut self , ct : ty :: Const < 'tcx >) -> ty :: Const < 'tcx > { let infcx = self . at . infcx ; let result : Result < _ , Vec < ScrubbedTraitError < 'tcx > > > = infcx . commit_if_ok (| _ | { deeply_normalize_with_skipped_universes_and_ambiguous_coroutine_goals (self . at , ct , vec ! [None ; ct . outer_exclusive_binder () . as_usize ()] ,) }) ; match result { Ok ((ct , _)) => ct , Err (_) => ct . super_fold_with (self) , } } }
+// SRC: ../rust/compiler/rustc_trait_selection/src/solve/normalize.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+use std::fmt::Debug;
+
+use crate::rustc_data_structures::stack::ensure_sufficient_stack;
+use crate::rustc_infer::infer::InferCtxt;
+use crate::rustc_infer::infer::at::At;
+use crate::rustc_infer::traits::solve::Goal;
+use crate::rustc_infer::traits::{FromSolverError, Obligation, TraitEngine};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::ty::{
+    self, FallibleTypeFolder, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable,
+    TypeVisitableExt, UniverseIndex,
+};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use tracing::instrument;
+
+use super::{FulfillmentCtxt, NextSolverError};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::error_reporting::InferCtxtErrorExt;
+use crate::error_reporting::traits::OverflowCause;
+use crate::traits::{BoundVarReplacer, PlaceholderReplacer, ScrubbedTraitError};
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=deeply_normalize | COMPLEXITY=2 | LINES=11 */
+
+/// Deeply normalize all aliases in `value`. This does not handle inference and expects
+/// its input to be already fully resolved.
+pub fn deeply_normalize<'tcx, T, E>(at: At<'_, 'tcx>, value: T) -> Result<T, Vec<E>>
+where
+    T: TypeFoldable<TyCtxt<'tcx>>,
+    E: FromSolverError<'tcx, NextSolverError<'tcx>>,
+{
+    assert!(!value.has_escaping_bound_vars());
+    deeply_normalize_with_skipped_universes(at, value, vec![])
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=deeply_normalize_with_skipped_universes | COMPLEXITY=3 | LINES=24 */
+
+/// Deeply normalize all aliases in `value`. This does not handle inference and expects
+/// its input to be already fully resolved.
+///
+/// Additionally takes a list of universes which represents the binders which have been
+/// entered before passing `value` to the function. This is currently needed for
+/// `normalize_erasing_regions`, which skips binders as it walks through a type.
+pub fn deeply_normalize_with_skipped_universes<'tcx, T, E>(
+    at: At<'_, 'tcx>,
+    value: T,
+    universes: Vec<Option<UniverseIndex>>,
+) -> Result<T, Vec<E>>
+where
+    T: TypeFoldable<TyCtxt<'tcx>>,
+    E: FromSolverError<'tcx, NextSolverError<'tcx>>,
+{
+    let (value, coroutine_goals) =
+        deeply_normalize_with_skipped_universes_and_ambiguous_coroutine_goals(
+            at, value, universes,
+        )?;
+    assert_eq!(coroutine_goals, vec![]);
+
+    Ok(value)
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=deeply_normalize_with_skipped_universes_and_ambiguous_coroutine_goals | COMPLEXITY=11 | LINES=31 */
+
+/// Deeply normalize all aliases in `value`. This does not handle inference and expects
+/// its input to be already fully resolved.
+///
+/// Additionally takes a list of universes which represents the binders which have been
+/// entered before passing `value` to the function. This is currently needed for
+/// `normalize_erasing_regions`, which skips binders as it walks through a type.
+///
+/// This returns a set of stalled obligations involving coroutines if the typing mode of
+/// the underlying infcx has any stalled coroutine def ids.
+pub fn deeply_normalize_with_skipped_universes_and_ambiguous_coroutine_goals<'tcx, T, E>(
+    at: At<'_, 'tcx>,
+    value: T,
+    universes: Vec<Option<UniverseIndex>>,
+) -> Result<(T, Vec<Goal<'tcx, ty::Predicate<'tcx>>>), Vec<E>>
+where
+    T: TypeFoldable<TyCtxt<'tcx>>,
+    E: FromSolverError<'tcx, NextSolverError<'tcx>>,
+{
+    let fulfill_cx = FulfillmentCtxt::new(at.infcx);
+    let mut folder = NormalizationFolder {
+        at,
+        fulfill_cx,
+        depth: 0,
+        universes,
+        stalled_coroutine_goals: vec![],
+    };
+    let value = value.try_fold_with(&mut folder)?;
+    let errors = folder.fulfill_cx.select_all_or_error(at.infcx);
+    if errors.is_empty() { Ok((value, folder.stalled_coroutine_goals)) } else { Err(errors) }
+}
+/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=NormalizationFolder | COMPLEXITY=2 | LINES=8 */
+
+struct NormalizationFolder<'me, 'tcx, E> {
+    at: At<'me, 'tcx>,
+    fulfill_cx: FulfillmentCtxt<'tcx, E>,
+    depth: usize,
+    universes: Vec<Option<UniverseIndex>>,
+    stalled_coroutine_goals: Vec<Goal<'tcx, ty::Predicate<'tcx>>>,
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=normalize_alias_term | COMPLEXITY=25 | LINES=74 */
+
+impl<'tcx, E> NormalizationFolder<'_, 'tcx, E>
+where
+    E: FromSolverError<'tcx, NextSolverError<'tcx>>,
+{
+    fn normalize_alias_term(
+        &mut self,
+        alias_term: ty::Term<'tcx>,
+    ) -> Result<ty::Term<'tcx>, Vec<E>> {
+        let infcx = self.at.infcx;
+        let tcx = infcx.tcx;
+        let recursion_limit = tcx.recursion_limit();
+        if !recursion_limit.value_within_limit(self.depth) {
+            let term = alias_term.to_alias_term().unwrap();
+
+            self.at.infcx.err_ctxt().report_overflow_error(
+                OverflowCause::DeeplyNormalize(term),
+                self.at.cause.span,
+                true,
+                |_| {},
+            );
+        }
+
+        self.depth += 1;
+
+        let infer_term = infcx.next_term_var_of_kind(alias_term, self.at.cause.span);
+        let obligation = Obligation::new(
+            tcx,
+            self.at.cause.clone(),
+            self.at.param_env,
+            ty::PredicateKind::AliasRelate(
+                alias_term.into(),
+                infer_term.into(),
+                ty::AliasRelationDirection::Equate,
+            ),
+        );
+
+        self.fulfill_cx.register_predicate_obligation(infcx, obligation);
+        self.select_all_and_stall_coroutine_predicates()?;
+
+        // Alias is guaranteed to be fully structurally resolved,
+        // so we can super fold here.
+        let term = infcx.resolve_vars_if_possible(infer_term);
+        // super-folding the `term` will directly fold the `Ty` or `Const` so
+        // we have to match on the term and super-fold them manually.
+        let result = match term.kind() {
+            ty::TermKind::Ty(ty) => ty.try_super_fold_with(self)?.into(),
+            ty::TermKind::Const(ct) => ct.try_super_fold_with(self)?.into(),
+        };
+        self.depth -= 1;
+        Ok(result)
+    }
+
+    fn select_all_and_stall_coroutine_predicates(&mut self) -> Result<(), Vec<E>> {
+        let errors = self.fulfill_cx.select_where_possible(self.at.infcx);
+        if !errors.is_empty() {
+            return Err(errors);
+        }
+
+        self.stalled_coroutine_goals.extend(
+            self.fulfill_cx
+                .drain_stalled_obligations_for_coroutines(self.at.infcx)
+                .into_iter()
+                .map(|obl| obl.as_goal()),
+        );
+
+        let errors = self.fulfill_cx.collect_remaining_errors(self.at.infcx);
+        if !errors.is_empty() {
+            return Err(errors);
+        }
+
+        Ok(())
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=29 | LINES=77 */
+
+impl<'tcx, E> FallibleTypeFolder<TyCtxt<'tcx>> for NormalizationFolder<'_, 'tcx, E>
+where
+    E: FromSolverError<'tcx, NextSolverError<'tcx>> + Debug,
+{
+    type Error = Vec<E>;
+
+    fn cx(&self) -> TyCtxt<'tcx> {
+        self.at.infcx.tcx
+    }
+
+    fn try_fold_binder<T: TypeFoldable<TyCtxt<'tcx>>>(
+        &mut self,
+        t: ty::Binder<'tcx, T>,
+    ) -> Result<ty::Binder<'tcx, T>, Self::Error> {
+        self.universes.push(None);
+        let t = t.try_super_fold_with(self)?;
+        self.universes.pop();
+        Ok(t)
+    }
+
+    #[instrument(level = "trace", skip(self), ret)]
+    fn try_fold_ty(&mut self, ty: Ty<'tcx>) -> Result<Ty<'tcx>, Self::Error> {
+        let infcx = self.at.infcx;
+        debug_assert_eq!(ty, infcx.shallow_resolve(ty));
+        if !ty.has_aliases() {
+            return Ok(ty);
+        }
+
+        let ty::Alias(..) = *ty.kind() else { return ty.try_super_fold_with(self) };
+
+        if ty.has_escaping_bound_vars() {
+            let (ty, mapped_regions, mapped_types, mapped_consts) =
+                BoundVarReplacer::replace_bound_vars(infcx, &mut self.universes, ty);
+            let result =
+                ensure_sufficient_stack(|| self.normalize_alias_term(ty.into()))?.expect_type();
+            Ok(PlaceholderReplacer::replace_placeholders(
+                infcx,
+                mapped_regions,
+                mapped_types,
+                mapped_consts,
+                &self.universes,
+                result,
+            ))
+        } else {
+            Ok(ensure_sufficient_stack(|| self.normalize_alias_term(ty.into()))?.expect_type())
+        }
+    }
+
+    #[instrument(level = "trace", skip(self), ret)]
+    fn try_fold_const(&mut self, ct: ty::Const<'tcx>) -> Result<ty::Const<'tcx>, Self::Error> {
+        let infcx = self.at.infcx;
+        debug_assert_eq!(ct, infcx.shallow_resolve_const(ct));
+        if !ct.has_aliases() {
+            return Ok(ct);
+        }
+
+        let ty::ConstKind::Unevaluated(..) = ct.kind() else { return ct.try_super_fold_with(self) };
+
+        if ct.has_escaping_bound_vars() {
+            let (ct, mapped_regions, mapped_types, mapped_consts) =
+                BoundVarReplacer::replace_bound_vars(infcx, &mut self.universes, ct);
+            let result =
+                ensure_sufficient_stack(|| self.normalize_alias_term(ct.into()))?.expect_const();
+            Ok(PlaceholderReplacer::replace_placeholders(
+                infcx,
+                mapped_regions,
+                mapped_types,
+                mapped_consts,
+                &self.universes,
+                result,
+            ))
+        } else {
+            Ok(ensure_sufficient_stack(|| self.normalize_alias_term(ct.into()))?.expect_const())
+        }
+    }
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=11 */
+
+// Deeply normalize a value and return it
+pub(crate) fn deeply_normalize_for_diagnostics<'tcx, T: TypeFoldable<TyCtxt<'tcx>>>(
+    infcx: &InferCtxt<'tcx>,
+    param_env: ty::ParamEnv<'tcx>,
+    t: T,
+) -> T {
+    t.fold_with(&mut DeeplyNormalizeForDiagnosticsFolder {
+        at: infcx.at(&ObligationCause::dummy(), param_env),
+    })
+}
+/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=DeeplyNormalizeForDiagnosticsFolder | COMPLEXITY=2 | LINES=4 */
+
+struct DeeplyNormalizeForDiagnosticsFolder<'a, 'tcx> {
+    at: At<'a, 'tcx>,
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=19 | LINES=36 */
+
+impl<'tcx> TypeFolder<TyCtxt<'tcx>> for DeeplyNormalizeForDiagnosticsFolder<'_, 'tcx> {
+    fn cx(&self) -> TyCtxt<'tcx> {
+        self.at.infcx.tcx
+    }
+
+    fn fold_ty(&mut self, ty: Ty<'tcx>) -> Ty<'tcx> {
+        let infcx = self.at.infcx;
+        let result: Result<_, Vec<ScrubbedTraitError<'tcx>>> = infcx.commit_if_ok(|_| {
+            deeply_normalize_with_skipped_universes_and_ambiguous_coroutine_goals(
+                self.at,
+                ty,
+                vec![None; ty.outer_exclusive_binder().as_usize()],
+            )
+        });
+        match result {
+            Ok((ty, _)) => ty,
+            Err(_) => ty.super_fold_with(self),
+        }
+    }
+
+    fn fold_const(&mut self, ct: ty::Const<'tcx>) -> ty::Const<'tcx> {
+        let infcx = self.at.infcx;
+        let result: Result<_, Vec<ScrubbedTraitError<'tcx>>> = infcx.commit_if_ok(|_| {
+            deeply_normalize_with_skipped_universes_and_ambiguous_coroutine_goals(
+                self.at,
+                ct,
+                vec![None; ct.outer_exclusive_binder().as_usize()],
+            )
+        });
+        match result {
+            Ok((ct, _)) => ct,
+            Err(_) => ct.super_fold_with(self),
+        }
+    }
+}

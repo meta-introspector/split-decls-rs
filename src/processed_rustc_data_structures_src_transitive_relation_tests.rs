@@ -1,40 +1,439 @@
-/* FP:tests.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_USE_0001
-/* FP:tests.rs-0002 */ use super :: * ;
-/* FP:tests.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_IMPL_0002
-/* FP:tests.rs-0004 */ impl < T : Eq + Hash + Copy > TransitiveRelation < T > { # [doc = " A \"best\" parent in some sense. See `parents` and"] # [doc = " `postdom_upper_bound` for more details."] fn postdom_parent (& self , a : T) -> Option < T > { self . mutual_immediate_postdominator (self . parents (a)) } }
-/* FP:tests.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0003
-/* FP:tests.rs-0006 */ # [test] fn test_one_step () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("a" , "b") ; relation . add ("a" , "c") ; let relation = relation . freeze () ; assert ! (relation . contains ("a" , "c")) ; assert ! (relation . contains ("a" , "b")) ; assert ! (! relation . contains ("b" , "a")) ; assert ! (! relation . contains ("a" , "d")) ; }
-/* FP:tests.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0004
-/* FP:tests.rs-0008 */ # [test] fn test_many_steps () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("a" , "b") ; relation . add ("a" , "c") ; relation . add ("a" , "f") ; relation . add ("b" , "c") ; relation . add ("b" , "d") ; relation . add ("b" , "e") ; relation . add ("e" , "g") ; let relation = relation . freeze () ; assert ! (relation . contains ("a" , "b")) ; assert ! (relation . contains ("a" , "c")) ; assert ! (relation . contains ("a" , "d")) ; assert ! (relation . contains ("a" , "e")) ; assert ! (relation . contains ("a" , "f")) ; assert ! (relation . contains ("a" , "g")) ; assert ! (relation . contains ("b" , "g")) ; assert ! (! relation . contains ("a" , "x")) ; assert ! (! relation . contains ("b" , "f")) ; }
-/* FP:tests.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0005
-/* FP:tests.rs-0010 */ # [test] fn mubs_triangle () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("a" , "tcx") ; relation . add ("b" , "tcx") ; let relation = relation . freeze () ; assert_eq ! (relation . minimal_upper_bounds ("a" , "b") , vec ! ["tcx"]) ; assert_eq ! (relation . parents ("a") , vec ! ["tcx"]) ; assert_eq ! (relation . parents ("b") , vec ! ["tcx"]) ; }
-/* FP:tests.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0006
-/* FP:tests.rs-0012 */ # [test] fn mubs_best_choice1 () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("0" , "1") ; relation . add ("0" , "2") ; relation . add ("2" , "1") ; relation . add ("3" , "1") ; relation . add ("3" , "2") ; let relation = relation . freeze () ; assert_eq ! (relation . minimal_upper_bounds ("0" , "3") , vec ! ["2"]) ; assert_eq ! (relation . parents ("0") , vec ! ["2"]) ; assert_eq ! (relation . parents ("2") , vec ! ["1"]) ; assert ! (relation . parents ("1") . is_empty ()) ; }
-/* FP:tests.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0007
-/* FP:tests.rs-0014 */ # [test] fn mubs_best_choice2 () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("0" , "1") ; relation . add ("0" , "2") ; relation . add ("1" , "2") ; relation . add ("3" , "1") ; relation . add ("3" , "2") ; let relation = relation . freeze () ; assert_eq ! (relation . minimal_upper_bounds ("0" , "3") , vec ! ["1"]) ; assert_eq ! (relation . parents ("0") , vec ! ["1"]) ; assert_eq ! (relation . parents ("1") , vec ! ["2"]) ; assert ! (relation . parents ("2") . is_empty ()) ; }
-/* FP:tests.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0008
-/* FP:tests.rs-0016 */ # [test] fn mubs_no_best_choice () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("0" , "1") ; relation . add ("0" , "2") ; relation . add ("3" , "1") ; relation . add ("3" , "2") ; let relation = relation . freeze () ; assert_eq ! (relation . minimal_upper_bounds ("0" , "3") , vec ! ["1" , "2"]) ; assert_eq ! (relation . parents ("0") , vec ! ["1" , "2"]) ; assert_eq ! (relation . parents ("3") , vec ! ["1" , "2"]) ; }
-/* FP:tests.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0009
-/* FP:tests.rs-0018 */ # [test] fn mubs_best_choice_scc () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("0" , "1") ; relation . add ("0" , "2") ; relation . add ("1" , "2") ; relation . add ("2" , "1") ; relation . add ("3" , "1") ; relation . add ("3" , "2") ; let relation = relation . freeze () ; assert_eq ! (relation . minimal_upper_bounds ("0" , "3") , vec ! ["1"]) ; assert_eq ! (relation . parents ("0") , vec ! ["1"]) ; }
-/* FP:tests.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0010
-/* FP:tests.rs-0020 */ # [test] fn pdub_crisscross () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("a" , "a1") ; relation . add ("a" , "b1") ; relation . add ("b" , "a1") ; relation . add ("b" , "b1") ; relation . add ("a1" , "x") ; relation . add ("b1" , "x") ; let relation = relation . freeze () ; assert_eq ! (relation . minimal_upper_bounds ("a" , "b") , vec ! ["a1" , "b1"]) ; assert_eq ! (relation . postdom_upper_bound ("a" , "b") , Some ("x")) ; assert_eq ! (relation . postdom_parent ("a") , Some ("x")) ; assert_eq ! (relation . postdom_parent ("b") , Some ("x")) ; }
-/* FP:tests.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0011
-/* FP:tests.rs-0022 */ # [test] fn pdub_crisscross_more () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("a" , "a1") ; relation . add ("a" , "b1") ; relation . add ("b" , "a1") ; relation . add ("b" , "b1") ; relation . add ("a1" , "a2") ; relation . add ("a1" , "b2") ; relation . add ("b1" , "a2") ; relation . add ("b1" , "b2") ; relation . add ("a2" , "a3") ; relation . add ("a3" , "x") ; relation . add ("b2" , "x") ; let relation = relation . freeze () ; assert_eq ! (relation . minimal_upper_bounds ("a" , "b") , vec ! ["a1" , "b1"]) ; assert_eq ! (relation . minimal_upper_bounds ("a1" , "b1") , vec ! ["a2" , "b2"]) ; assert_eq ! (relation . postdom_upper_bound ("a" , "b") , Some ("x")) ; assert_eq ! (relation . postdom_parent ("a") , Some ("x")) ; assert_eq ! (relation . postdom_parent ("b") , Some ("x")) ; }
-/* FP:tests.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0012
-/* FP:tests.rs-0024 */ # [test] fn pdub_lub () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("a" , "a1") ; relation . add ("b" , "b1") ; relation . add ("a1" , "x") ; relation . add ("b1" , "x") ; let relation = relation . freeze () ; assert_eq ! (relation . minimal_upper_bounds ("a" , "b") , vec ! ["x"]) ; assert_eq ! (relation . postdom_upper_bound ("a" , "b") , Some ("x")) ; assert_eq ! (relation . postdom_parent ("a") , Some ("a1")) ; assert_eq ! (relation . postdom_parent ("b") , Some ("b1")) ; assert_eq ! (relation . postdom_parent ("a1") , Some ("x")) ; assert_eq ! (relation . postdom_parent ("b1") , Some ("x")) ; }
-/* FP:tests.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0013
-/* FP:tests.rs-0026 */ # [test] fn mubs_intermediate_node_on_one_side_only () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("a" , "c") ; relation . add ("c" , "d") ; relation . add ("b" , "d") ; let relation = relation . freeze () ; assert_eq ! (relation . minimal_upper_bounds ("a" , "b") , vec ! ["d"]) ; }
-/* FP:tests.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0014
-/* FP:tests.rs-0028 */ # [test] fn mubs_scc_1 () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("a" , "c") ; relation . add ("c" , "d") ; relation . add ("d" , "c") ; relation . add ("a" , "d") ; relation . add ("b" , "d") ; let relation = relation . freeze () ; assert_eq ! (relation . minimal_upper_bounds ("a" , "b") , vec ! ["c"]) ; }
-/* FP:tests.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0015
-/* FP:tests.rs-0030 */ # [test] fn mubs_scc_2 () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("a" , "c") ; relation . add ("c" , "d") ; relation . add ("d" , "c") ; relation . add ("b" , "d") ; relation . add ("b" , "c") ; let relation = relation . freeze () ; assert_eq ! (relation . minimal_upper_bounds ("a" , "b") , vec ! ["c"]) ; }
-/* FP:tests.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0016
-/* FP:tests.rs-0032 */ # [test] fn mubs_scc_3 () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("a" , "c") ; relation . add ("c" , "d") ; relation . add ("d" , "e") ; relation . add ("e" , "c") ; relation . add ("b" , "d") ; relation . add ("b" , "e") ; let relation = relation . freeze () ; assert_eq ! (relation . minimal_upper_bounds ("a" , "b") , vec ! ["c"]) ; }
-/* FP:tests.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0017
-/* FP:tests.rs-0034 */ # [test] fn mubs_scc_4 () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("a" , "c") ; relation . add ("c" , "d") ; relation . add ("d" , "e") ; relation . add ("e" , "c") ; relation . add ("a" , "d") ; relation . add ("b" , "e") ; let relation = relation . freeze () ; assert_eq ! (relation . minimal_upper_bounds ("a" , "b") , vec ! ["c"]) ; }
-/* FP:tests.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0018
-/* FP:tests.rs-0036 */ # [test] fn parent () { let pairs = vec ! [(2 , 0) , (2 , 2) , (0 , 0) , (0 , 0) , (1 , 0) , (1 , 1) , (3 , 0) , (3 , 3) , (4 , 0) , (4 , 1) , (1 , 3) ,] ; let mut relation = TransitiveRelationBuilder :: default () ; for (a , b) in pairs { relation . add (a , b) ; } let relation = relation . freeze () ; let p = relation . postdom_parent (3) ; assert_eq ! (p , Some (0)) ; }
-/* FP:tests.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0019
-/* FP:tests.rs-0038 */ # [test] fn minimal_scc_representative_1 () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("a" , "c") ; relation . add ("c" , "d") ; relation . add ("d" , "e") ; relation . add ("e" , "c") ; relation . add ("b" , "d") ; relation . add ("b" , "e") ; let relation = relation . freeze () ; assert_eq ! (relation . minimal_scc_representative ("a") , "a") ; assert_eq ! (relation . minimal_scc_representative ("b") , "b") ; assert_eq ! (relation . minimal_scc_representative ("c") , "c") ; assert_eq ! (relation . minimal_scc_representative ("d") , "c") ; assert_eq ! (relation . minimal_scc_representative ("e") , "c") ; }
-/* FP:tests.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_transitive_relation_tests_FN_0020
-/* FP:tests.rs-0040 */ # [test] fn minimal_scc_representative_2 () { let mut relation = TransitiveRelationBuilder :: default () ; relation . add ("a" , "b") ; relation . add ("b" , "a") ; relation . add ("a" , "a") ; relation . add ("c" , "c") ; let relation = relation . freeze () ; assert_eq ! (relation . minimal_scc_representative ("a") , "a") ; assert_eq ! (relation . minimal_scc_representative ("b") , "a") ; assert_eq ! (relation . minimal_scc_representative ("c") , "c") ; }
+// SRC: ../rust/compiler/rustc_data_structures/src/transitive_relation/tests.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=postdom_parent | COMPLEXITY=5 | LINES=9 */
+use super::*;
+
+impl<T: Eq + Hash + Copy> TransitiveRelation<T> {
+    /// A "best" parent in some sense. See `parents` and
+    /// `postdom_upper_bound` for more details.
+    fn postdom_parent(&self, a: T) -> Option<T> {
+        self.mutual_immediate_postdominator(self.parents(a))
+    }
+}
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=test_one_step | COMPLEXITY=2 | LINES=12 */
+
+#[test]
+fn test_one_step() {
+    let mut relation = TransitiveRelationBuilder::default();
+    relation.add("a", "b");
+    relation.add("a", "c");
+    let relation = relation.freeze();
+    assert!(relation.contains("a", "c"));
+    assert!(relation.contains("a", "b"));
+    assert!(!relation.contains("b", "a"));
+    assert!(!relation.contains("a", "d"));
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_many_steps | COMPLEXITY=3 | LINES=27 */
+
+#[test]
+fn test_many_steps() {
+    let mut relation = TransitiveRelationBuilder::default();
+    relation.add("a", "b");
+    relation.add("a", "c");
+    relation.add("a", "f");
+
+    relation.add("b", "c");
+    relation.add("b", "d");
+    relation.add("b", "e");
+
+    relation.add("e", "g");
+    let relation = relation.freeze();
+
+    assert!(relation.contains("a", "b"));
+    assert!(relation.contains("a", "c"));
+    assert!(relation.contains("a", "d"));
+    assert!(relation.contains("a", "e"));
+    assert!(relation.contains("a", "f"));
+    assert!(relation.contains("a", "g"));
+
+    assert!(relation.contains("b", "g"));
+
+    assert!(!relation.contains("a", "x"));
+    assert!(!relation.contains("b", "f"));
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=mubs_triangle | COMPLEXITY=2 | LINES=15 */
+
+#[test]
+fn mubs_triangle() {
+    // a -> tcx
+    //      ^
+    //      |
+    //      b
+    let mut relation = TransitiveRelationBuilder::default();
+    relation.add("a", "tcx");
+    relation.add("b", "tcx");
+    let relation = relation.freeze();
+    assert_eq!(relation.minimal_upper_bounds("a", "b"), vec!["tcx"]);
+    assert_eq!(relation.parents("a"), vec!["tcx"]);
+    assert_eq!(relation.parents("b"), vec!["tcx"]);
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=mubs_best_choice1 | COMPLEXITY=3 | LINES=29 */
+
+#[test]
+fn mubs_best_choice1() {
+    // 0 -> 1 <- 3
+    // |    ^    |
+    // |    |    |
+    // +--> 2 <--+
+    //
+    // mubs(0,3) = [1]
+
+    // This tests a particular state in the algorithm, in which we
+    // need the second pare down call to get the right result (after
+    // intersection, we have [1, 2], but 2 -> 1).
+
+    let mut relation = TransitiveRelationBuilder::default();
+    relation.add("0", "1");
+    relation.add("0", "2");
+
+    relation.add("2", "1");
+
+    relation.add("3", "1");
+    relation.add("3", "2");
+    let relation = relation.freeze();
+
+    assert_eq!(relation.minimal_upper_bounds("0", "3"), vec!["2"]);
+    assert_eq!(relation.parents("0"), vec!["2"]);
+    assert_eq!(relation.parents("2"), vec!["1"]);
+    assert!(relation.parents("1").is_empty());
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=mubs_best_choice2 | COMPLEXITY=3 | LINES=28 */
+
+#[test]
+fn mubs_best_choice2() {
+    // 0 -> 1 <- 3
+    // |    |    |
+    // |    v    |
+    // +--> 2 <--+
+    //
+    // mubs(0,3) = [2]
+
+    // Like the preceding test, but in this case intersection is [2,
+    // 1], and hence we rely on the first pare down call.
+
+    let mut relation = TransitiveRelationBuilder::default();
+    relation.add("0", "1");
+    relation.add("0", "2");
+
+    relation.add("1", "2");
+
+    relation.add("3", "1");
+    relation.add("3", "2");
+    let relation = relation.freeze();
+
+    assert_eq!(relation.minimal_upper_bounds("0", "3"), vec!["1"]);
+    assert_eq!(relation.parents("0"), vec!["1"]);
+    assert_eq!(relation.parents("1"), vec!["2"]);
+    assert!(relation.parents("2").is_empty());
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=mubs_no_best_choice | COMPLEXITY=3 | LINES=17 */
+
+#[test]
+fn mubs_no_best_choice() {
+    // in this case, the intersection yields [1, 2], and the "pare
+    // down" calls find nothing to remove.
+    let mut relation = TransitiveRelationBuilder::default();
+    relation.add("0", "1");
+    relation.add("0", "2");
+
+    relation.add("3", "1");
+    relation.add("3", "2");
+    let relation = relation.freeze();
+
+    assert_eq!(relation.minimal_upper_bounds("0", "3"), vec!["1", "2"]);
+    assert_eq!(relation.parents("0"), vec!["1", "2"]);
+    assert_eq!(relation.parents("3"), vec!["1", "2"]);
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=mubs_best_choice_scc | COMPLEXITY=3 | LINES=20 */
+
+#[test]
+fn mubs_best_choice_scc() {
+    // in this case, 1 and 2 form a cycle; we pick arbitrarily (but
+    // consistently).
+
+    let mut relation = TransitiveRelationBuilder::default();
+    relation.add("0", "1");
+    relation.add("0", "2");
+
+    relation.add("1", "2");
+    relation.add("2", "1");
+
+    relation.add("3", "1");
+    relation.add("3", "2");
+    let relation = relation.freeze();
+
+    assert_eq!(relation.minimal_upper_bounds("0", "3"), vec!["1"]);
+    assert_eq!(relation.parents("0"), vec!["1"]);
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=pdub_crisscross | COMPLEXITY=3 | LINES=23 */
+
+#[test]
+fn pdub_crisscross() {
+    // diagonal edges run left-to-right
+    // a -> a1 -> x
+    //   \/       ^
+    //   /\       |
+    // b -> b1 ---+
+
+    let mut relation = TransitiveRelationBuilder::default();
+    relation.add("a", "a1");
+    relation.add("a", "b1");
+    relation.add("b", "a1");
+    relation.add("b", "b1");
+    relation.add("a1", "x");
+    relation.add("b1", "x");
+    let relation = relation.freeze();
+
+    assert_eq!(relation.minimal_upper_bounds("a", "b"), vec!["a1", "b1"]);
+    assert_eq!(relation.postdom_upper_bound("a", "b"), Some("x"));
+    assert_eq!(relation.postdom_parent("a"), Some("x"));
+    assert_eq!(relation.postdom_parent("b"), Some("x"));
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=pdub_crisscross_more | COMPLEXITY=3 | LINES=33 */
+
+#[test]
+fn pdub_crisscross_more() {
+    // diagonal edges run left-to-right
+    // a -> a1 -> a2 -> a3 -> x
+    //   \/    \/             ^
+    //   /\    /\             |
+    // b -> b1 -> b2 ---------+
+
+    let mut relation = TransitiveRelationBuilder::default();
+    relation.add("a", "a1");
+    relation.add("a", "b1");
+    relation.add("b", "a1");
+    relation.add("b", "b1");
+
+    relation.add("a1", "a2");
+    relation.add("a1", "b2");
+    relation.add("b1", "a2");
+    relation.add("b1", "b2");
+
+    relation.add("a2", "a3");
+
+    relation.add("a3", "x");
+    relation.add("b2", "x");
+    let relation = relation.freeze();
+
+    assert_eq!(relation.minimal_upper_bounds("a", "b"), vec!["a1", "b1"]);
+    assert_eq!(relation.minimal_upper_bounds("a1", "b1"), vec!["a2", "b2"]);
+    assert_eq!(relation.postdom_upper_bound("a", "b"), Some("x"));
+
+    assert_eq!(relation.postdom_parent("a"), Some("x"));
+    assert_eq!(relation.postdom_parent("b"), Some("x"));
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=pdub_lub | COMPLEXITY=3 | LINES=23 */
+
+#[test]
+fn pdub_lub() {
+    // a -> a1 -> x
+    //            ^
+    //            |
+    // b -> b1 ---+
+
+    let mut relation = TransitiveRelationBuilder::default();
+    relation.add("a", "a1");
+    relation.add("b", "b1");
+    relation.add("a1", "x");
+    relation.add("b1", "x");
+    let relation = relation.freeze();
+
+    assert_eq!(relation.minimal_upper_bounds("a", "b"), vec!["x"]);
+    assert_eq!(relation.postdom_upper_bound("a", "b"), Some("x"));
+
+    assert_eq!(relation.postdom_parent("a"), Some("a1"));
+    assert_eq!(relation.postdom_parent("b"), Some("b1"));
+    assert_eq!(relation.postdom_parent("a1"), Some("x"));
+    assert_eq!(relation.postdom_parent("b1"), Some("x"));
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=mubs_intermediate_node_on_one_side_only | COMPLEXITY=3 | LINES=17 */
+
+#[test]
+fn mubs_intermediate_node_on_one_side_only() {
+    // a -> c -> d
+    //           ^
+    //           |
+    //           b
+
+    // "digraph { a -> c -> d; b -> d; }",
+    let mut relation = TransitiveRelationBuilder::default();
+    relation.add("a", "c");
+    relation.add("c", "d");
+    relation.add("b", "d");
+    let relation = relation.freeze();
+
+    assert_eq!(relation.minimal_upper_bounds("a", "b"), vec!["d"]);
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=mubs_scc_1 | COMPLEXITY=4 | LINES=22 */
+
+#[test]
+fn mubs_scc_1() {
+    // +-------------+
+    // |    +----+   |
+    // |    v    |   |
+    // a -> c -> d <-+
+    //           ^
+    //           |
+    //           b
+
+    // "digraph { a -> c -> d; d -> c; a -> d; b -> d; }",
+    let mut relation = TransitiveRelationBuilder::default();
+    relation.add("a", "c");
+    relation.add("c", "d");
+    relation.add("d", "c");
+    relation.add("a", "d");
+    relation.add("b", "d");
+    let relation = relation.freeze();
+
+    assert_eq!(relation.minimal_upper_bounds("a", "b"), vec!["c"]);
+}
+/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=mubs_scc_2 | COMPLEXITY=4 | LINES=21 */
+
+#[test]
+fn mubs_scc_2() {
+    //      +----+
+    //      v    |
+    // a -> c -> d
+    //      ^    ^
+    //      |    |
+    //      +--- b
+
+    // "digraph { a -> c -> d; d -> c; b -> d; b -> c; }",
+    let mut relation = TransitiveRelationBuilder::default();
+    relation.add("a", "c");
+    relation.add("c", "d");
+    relation.add("d", "c");
+    relation.add("b", "d");
+    relation.add("b", "c");
+    let relation = relation.freeze();
+
+    assert_eq!(relation.minimal_upper_bounds("a", "b"), vec!["c"]);
+}
+/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=mubs_scc_3 | COMPLEXITY=4 | LINES=22 */
+
+#[test]
+fn mubs_scc_3() {
+    //      +---------+
+    //      v         |
+    // a -> c -> d -> e
+    //           ^    ^
+    //           |    |
+    //           b ---+
+
+    // "digraph { a -> c -> d -> e -> c; b -> d; b -> e; }",
+    let mut relation = TransitiveRelationBuilder::default();
+    relation.add("a", "c");
+    relation.add("c", "d");
+    relation.add("d", "e");
+    relation.add("e", "c");
+    relation.add("b", "d");
+    relation.add("b", "e");
+    let relation = relation.freeze();
+
+    assert_eq!(relation.minimal_upper_bounds("a", "b"), vec!["c"]);
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=mubs_scc_4 | COMPLEXITY=4 | LINES=23 */
+
+#[test]
+fn mubs_scc_4() {
+    //      +---------+
+    //      v         |
+    // a -> c -> d -> e
+    // |         ^    ^
+    // +---------+    |
+    //                |
+    //           b ---+
+
+    // "digraph { a -> c -> d -> e -> c; a -> d; b -> e; }"
+    let mut relation = TransitiveRelationBuilder::default();
+    relation.add("a", "c");
+    relation.add("c", "d");
+    relation.add("d", "e");
+    relation.add("e", "c");
+    relation.add("a", "d");
+    relation.add("b", "e");
+    let relation = relation.freeze();
+
+    assert_eq!(relation.minimal_upper_bounds("a", "b"), vec!["c"]);
+}
+/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=parent | COMPLEXITY=6 | LINES=37 */
+
+#[test]
+fn parent() {
+    // An example that was misbehaving in the compiler.
+    //
+    // 4 -> 1 -> 3
+    //   \  |   /
+    //    \ v  /
+    // 2 -> 0
+    //
+    // plus a bunch of self-loops
+    //
+    // Here `->` represents `<=` and `0` is `'static`.
+
+    let pairs = vec![
+        (2, /*->*/ 0),
+        (2, /*->*/ 2),
+        (0, /*->*/ 0),
+        (0, /*->*/ 0),
+        (1, /*->*/ 0),
+        (1, /*->*/ 1),
+        (3, /*->*/ 0),
+        (3, /*->*/ 3),
+        (4, /*->*/ 0),
+        (4, /*->*/ 1),
+        (1, /*->*/ 3),
+    ];
+
+    let mut relation = TransitiveRelationBuilder::default();
+    for (a, b) in pairs {
+        relation.add(a, b);
+    }
+    let relation = relation.freeze();
+
+    let p = relation.postdom_parent(3);
+    assert_eq!(p, Some(0));
+}
+/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=minimal_scc_representative_1 | COMPLEXITY=4 | LINES=26 */
+
+#[test]
+fn minimal_scc_representative_1() {
+    //      +---------+
+    //      v         |
+    // a -> c -> d -> e
+    //           ^    ^
+    //           |    |
+    //           b ---+
+
+    // "digraph { a -> c -> d -> e -> c; b -> d; b -> e; }",
+    let mut relation = TransitiveRelationBuilder::default();
+    relation.add("a", "c");
+    relation.add("c", "d");
+    relation.add("d", "e");
+    relation.add("e", "c");
+    relation.add("b", "d");
+    relation.add("b", "e");
+    let relation = relation.freeze();
+
+    assert_eq!(relation.minimal_scc_representative("a"), "a");
+    assert_eq!(relation.minimal_scc_representative("b"), "b");
+    assert_eq!(relation.minimal_scc_representative("c"), "c");
+    assert_eq!(relation.minimal_scc_representative("d"), "c");
+    assert_eq!(relation.minimal_scc_representative("e"), "c");
+}
+/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=minimal_scc_representative_2 | COMPLEXITY=4 | LINES=15 */
+
+#[test]
+fn minimal_scc_representative_2() {
+    // "digraph { a -> b; a -> a; b -> a; c -> c}",
+    let mut relation = TransitiveRelationBuilder::default();
+    relation.add("a", "b");
+    relation.add("b", "a");
+    relation.add("a", "a");
+    relation.add("c", "c");
+    let relation = relation.freeze();
+
+    assert_eq!(relation.minimal_scc_representative("a"), "a");
+    assert_eq!(relation.minimal_scc_representative("b"), "a");
+    assert_eq!(relation.minimal_scc_representative("c"), "c");
+}

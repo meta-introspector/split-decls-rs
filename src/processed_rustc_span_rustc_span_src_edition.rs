@@ -1,22 +1,132 @@
-/* FP:edition.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_edition_USE_0001
-/* FP:edition.rs-0002 */ use std :: fmt ;
-/* FP:edition.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_edition_USE_0002
-/* FP:edition.rs-0004 */ use std :: str :: FromStr ;
-/* FP:edition.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_edition_USE_0003
-/* FP:edition.rs-0006 */ use rustc_macros :: { Decodable , Encodable , HashStable_Generic } ;
-/* FP:edition.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_edition_ENUM_0004
-/* FP:edition.rs-0008 */ # [doc = " The edition of the compiler. (See [RFC 2052](https://github.com/rust-lang/rfcs/blob/master/text/2052-epochs.md).)"] # [derive (Clone , Copy , Hash , PartialEq , PartialOrd , Debug , Encodable , Decodable , Eq)] # [derive (HashStable_Generic)] pub enum Edition { # [doc = " The 2015 edition"] Edition2015 , # [doc = " The 2018 edition"] Edition2018 , # [doc = " The 2021 edition"] Edition2021 , # [doc = " The 2024 edition"] Edition2024 , # [doc = " The future edition - this variant will always exist and features associated with this"] # [doc = " edition can be moved to the next 20XX edition when it is established and it is confirmed"] # [doc = " that those features will be part of that edition."] # [doc = ""] # [doc = " This variant allows edition changes to be implemented before being assigned to a concrete"] # [doc = " edition - primarily when there are two different unstable behaviours that need tested across"] # [doc = " an edition boundary."] # [doc = ""] # [doc = " This edition will be permanently unstable and any features associated with this edition"] # [doc = " must also be behind a feature gate."] EditionFuture , }
-/* FP:edition.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_edition_CONST_0005
-/* FP:edition.rs-0010 */ pub const ALL_EDITIONS : & [Edition] = & [Edition :: Edition2015 , Edition :: Edition2018 , Edition :: Edition2021 , Edition :: Edition2024 , Edition :: EditionFuture ,] ;
-/* FP:edition.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_edition_CONST_0006
-/* FP:edition.rs-0012 */ pub const EDITION_NAME_LIST : & str = "<2015|2018|2021|2024|future>" ;
-/* FP:edition.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_edition_CONST_0007
-/* FP:edition.rs-0014 */ pub const DEFAULT_EDITION : Edition = Edition :: Edition2015 ;
-/* FP:edition.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_edition_CONST_0008
-/* FP:edition.rs-0016 */ pub const LATEST_STABLE_EDITION : Edition = Edition :: Edition2024 ;
-/* FP:edition.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_edition_IMPL_0009
-/* FP:edition.rs-0018 */ impl fmt :: Display for Edition { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let s = match * self { Edition :: Edition2015 => "2015" , Edition :: Edition2018 => "2018" , Edition :: Edition2021 => "2021" , Edition :: Edition2024 => "2024" , Edition :: EditionFuture => "future" , } ; write ! (f , "{s}") } }
-/* FP:edition.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_edition_IMPL_0010
-/* FP:edition.rs-0020 */ impl Edition { pub fn lint_name (self) -> & 'static str { match self { Edition :: Edition2015 => "rust_2015_compatibility" , Edition :: Edition2018 => "rust_2018_compatibility" , Edition :: Edition2021 => "rust_2021_compatibility" , Edition :: Edition2024 => "rust_2024_compatibility" , Edition :: EditionFuture => "edition_future_compatibility" , } } pub fn is_stable (self) -> bool { match self { Edition :: Edition2015 => true , Edition :: Edition2018 => true , Edition :: Edition2021 => true , Edition :: Edition2024 => true , Edition :: EditionFuture => false , } } # [doc = " Is this edition 2015?"] pub fn is_rust_2015 (self) -> bool { self == Edition :: Edition2015 } # [doc = " Are we allowed to use features from the Rust 2018 edition?"] pub fn at_least_rust_2018 (self) -> bool { self >= Edition :: Edition2018 } # [doc = " Are we allowed to use features from the Rust 2021 edition?"] pub fn at_least_rust_2021 (self) -> bool { self >= Edition :: Edition2021 } # [doc = " Are we allowed to use features from the Rust 2024 edition?"] pub fn at_least_rust_2024 (self) -> bool { self >= Edition :: Edition2024 } # [doc = " Are we allowed to use features from the future edition?"] pub fn at_least_edition_future (self) -> bool { self >= Edition :: EditionFuture } }
-/* FP:edition.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_edition_IMPL_0011
-/* FP:edition.rs-0022 */ impl FromStr for Edition { type Err = () ; fn from_str (s : & str) -> Result < Self , () > { match s { "2015" => Ok (Edition :: Edition2015) , "2018" => Ok (Edition :: Edition2018) , "2021" => Ok (Edition :: Edition2021) , "2024" => Ok (Edition :: Edition2024) , "future" => Ok (Edition :: EditionFuture) , _ => Err (()) , } } }
+// SRC: ../rust/compiler/rustc_span/src/edition.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use std::fmt;
+use std::str::FromStr;
+
+use rustc_macros::{Decodable, Encodable, HashStable_Generic};
+/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=33 */
+
+/// The edition of the compiler. (See [RFC 2052](https://github.com/rust-lang/rfcs/blob/master/text/2052-epochs.md).)
+#[derive(Clone, Copy, Hash, PartialEq, PartialOrd, Debug, Encodable, Decodable, Eq)]
+#[derive(HashStable_Generic)]
+pub enum Edition {
+    // When adding new editions, be sure to do the following:
+    //
+    // - update the `ALL_EDITIONS` const
+    // - update the `EDITION_NAME_LIST` const
+    // - add a `rust_####()` function to the session
+    // - update the enum in Cargo's sources as well
+    //
+    // Editions *must* be kept in order, oldest to newest.
+    /// The 2015 edition
+    Edition2015,
+    /// The 2018 edition
+    Edition2018,
+    /// The 2021 edition
+    Edition2021,
+    /// The 2024 edition
+    Edition2024,
+    /// The future edition - this variant will always exist and features associated with this
+    /// edition can be moved to the next 20XX edition when it is established and it is confirmed
+    /// that those features will be part of that edition.
+    ///
+    /// This variant allows edition changes to be implemented before being assigned to a concrete
+    /// edition - primarily when there are two different unstable behaviours that need tested across
+    /// an edition boundary.
+    ///
+    /// This edition will be permanently unstable and any features associated with this edition
+    /// must also be behind a feature gate.
+    EditionFuture,
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=11 | LINES=28 */
+
+// Must be in order from oldest to newest.
+pub const ALL_EDITIONS: &[Edition] = &[
+    Edition::Edition2015,
+    Edition::Edition2018,
+    Edition::Edition2021,
+    Edition::Edition2024,
+    Edition::EditionFuture,
+];
+
+pub const EDITION_NAME_LIST: &str = "<2015|2018|2021|2024|future>";
+
+pub const DEFAULT_EDITION: Edition = Edition::Edition2015;
+
+pub const LATEST_STABLE_EDITION: Edition = Edition::Edition2024;
+
+impl fmt::Display for Edition {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let s = match *self {
+            Edition::Edition2015 => "2015",
+            Edition::Edition2018 => "2018",
+            Edition::Edition2021 => "2021",
+            Edition::Edition2024 => "2024",
+            Edition::EditionFuture => "future",
+        };
+        write!(f, "{s}")
+    }
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=lint_name | COMPLEXITY=19 | LINES=47 */
+
+impl Edition {
+    pub fn lint_name(self) -> &'static str {
+        match self {
+            Edition::Edition2015 => "rust_2015_compatibility",
+            Edition::Edition2018 => "rust_2018_compatibility",
+            Edition::Edition2021 => "rust_2021_compatibility",
+            Edition::Edition2024 => "rust_2024_compatibility",
+            Edition::EditionFuture => "edition_future_compatibility",
+        }
+    }
+
+    pub fn is_stable(self) -> bool {
+        match self {
+            Edition::Edition2015 => true,
+            Edition::Edition2018 => true,
+            Edition::Edition2021 => true,
+            Edition::Edition2024 => true,
+            Edition::EditionFuture => false,
+        }
+    }
+
+    /// Is this edition 2015?
+    pub fn is_rust_2015(self) -> bool {
+        self == Edition::Edition2015
+    }
+
+    /// Are we allowed to use features from the Rust 2018 edition?
+    pub fn at_least_rust_2018(self) -> bool {
+        self >= Edition::Edition2018
+    }
+
+    /// Are we allowed to use features from the Rust 2021 edition?
+    pub fn at_least_rust_2021(self) -> bool {
+        self >= Edition::Edition2021
+    }
+
+    /// Are we allowed to use features from the Rust 2024 edition?
+    pub fn at_least_rust_2024(self) -> bool {
+        self >= Edition::Edition2024
+    }
+
+    /// Are we allowed to use features from the future edition?
+    pub fn at_least_edition_future(self) -> bool {
+        self >= Edition::EditionFuture
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=from_str | COMPLEXITY=9 | LINES=14 */
+
+impl FromStr for Edition {
+    type Err = ();
+    fn from_str(s: &str) -> Result<Self, ()> {
+        match s {
+            "2015" => Ok(Edition::Edition2015),
+            "2018" => Ok(Edition::Edition2018),
+            "2021" => Ok(Edition::Edition2021),
+            "2024" => Ok(Edition::Edition2024),
+            "future" => Ok(Edition::EditionFuture),
+            _ => Err(()),
+        }
+    }
+}

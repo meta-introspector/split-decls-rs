@@ -1,26 +1,133 @@
-/* FP:errors.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_errors_USE_0001
-/* FP:errors.rs-0002 */ use crate :: rustc_complete :: codes :: * ;
-/* FP:errors.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_errors_USE_0002
-/* FP:errors.rs-0004 */ use rustc_macros :: { Diagnostic , Subdiagnostic } ;
-/* FP:errors.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_errors_USE_0003
-/* FP:errors.rs-0006 */ use crate :: rustc_complete :: ty :: { GenericArg , Ty } ;
-/* FP:errors.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_errors_USE_0004
-/* FP:errors.rs-0008 */ use crate :: rustc_complete :: Span ;
-/* FP:errors.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_errors_STRUCT_0005
-/* FP:errors.rs-0010 */ # [derive (Diagnostic)] # [diag (ty_utils_needs_drop_overflow)] pub (crate) struct NeedsDropOverflow < 'tcx > { pub query_ty : Ty < 'tcx > , }
-/* FP:errors.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_errors_STRUCT_0006
-/* FP:errors.rs-0012 */ # [derive (Diagnostic)] # [diag (ty_utils_generic_constant_too_complex)] # [help] pub (crate) struct GenericConstantTooComplex { # [primary_span] pub span : Span , # [note (ty_utils_maybe_supported)] pub maybe_supported : bool , # [subdiagnostic] pub sub : GenericConstantTooComplexSub , }
-/* FP:errors.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_errors_ENUM_0007
-/* FP:errors.rs-0014 */ # [derive (Subdiagnostic)] pub (crate) enum GenericConstantTooComplexSub { # [label (ty_utils_borrow_not_supported)] BorrowNotSupported (# [primary_span] Span) , # [label (ty_utils_address_and_deref_not_supported)] AddressAndDerefNotSupported (# [primary_span] Span) , # [label (ty_utils_array_not_supported)] ArrayNotSupported (# [primary_span] Span) , # [label (ty_utils_block_not_supported)] BlockNotSupported (# [primary_span] Span) , # [label (ty_utils_never_to_any_not_supported)] NeverToAnyNotSupported (# [primary_span] Span) , # [label (ty_utils_tuple_not_supported)] TupleNotSupported (# [primary_span] Span) , # [label (ty_utils_index_not_supported)] IndexNotSupported (# [primary_span] Span) , # [label (ty_utils_field_not_supported)] FieldNotSupported (# [primary_span] Span) , # [label (ty_utils_const_block_not_supported)] ConstBlockNotSupported (# [primary_span] Span) , # [label (ty_utils_adt_not_supported)] AdtNotSupported (# [primary_span] Span) , # [label (ty_utils_pointer_not_supported)] PointerNotSupported (# [primary_span] Span) , # [label (ty_utils_yield_not_supported)] YieldNotSupported (# [primary_span] Span) , # [label (ty_utils_loop_not_supported)] LoopNotSupported (# [primary_span] Span) , # [label (ty_utils_box_not_supported)] BoxNotSupported (# [primary_span] Span) , # [label (ty_utils_binary_not_supported)] BinaryNotSupported (# [primary_span] Span) , # [label (ty_utils_by_use_not_supported)] ByUseNotSupported (# [primary_span] Span) , # [label (ty_utils_logical_op_not_supported)] LogicalOpNotSupported (# [primary_span] Span) , # [label (ty_utils_assign_not_supported)] AssignNotSupported (# [primary_span] Span) , # [label (ty_utils_closure_and_return_not_supported)] ClosureAndReturnNotSupported (# [primary_span] Span) , # [label (ty_utils_control_flow_not_supported)] ControlFlowNotSupported (# [primary_span] Span) , # [label (ty_utils_inline_asm_not_supported)] InlineAsmNotSupported (# [primary_span] Span) , # [label (ty_utils_operation_not_supported)] OperationNotSupported (# [primary_span] Span) , }
-/* FP:errors.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_errors_STRUCT_0008
-/* FP:errors.rs-0016 */ # [derive (Diagnostic)] # [diag (ty_utils_unexpected_fnptr_associated_item)] pub (crate) struct UnexpectedFnPtrAssociatedItem { # [primary_span] pub span : Span , }
-/* FP:errors.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_errors_STRUCT_0009
-/* FP:errors.rs-0018 */ # [derive (Diagnostic)] # [diag (ty_utils_zero_length_simd_type)] pub (crate) struct ZeroLengthSimdType < 'tcx > { pub ty : Ty < 'tcx > , }
-/* FP:errors.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_errors_STRUCT_0010
-/* FP:errors.rs-0020 */ # [derive (Diagnostic)] # [diag (ty_utils_oversized_simd_type)] pub (crate) struct OversizedSimdType < 'tcx > { pub ty : Ty < 'tcx > , pub max_lanes : u64 , }
-/* FP:errors.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_errors_STRUCT_0011
-/* FP:errors.rs-0022 */ # [derive (Diagnostic)] # [diag (ty_utils_non_primitive_simd_type)] pub (crate) struct NonPrimitiveSimdType < 'tcx > { pub ty : Ty < 'tcx > , pub e_ty : Ty < 'tcx > , }
-/* FP:errors.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_errors_STRUCT_0012
-/* FP:errors.rs-0024 */ # [derive (Diagnostic)] # [diag (ty_utils_impl_trait_duplicate_arg)] pub (crate) struct DuplicateArg < 'tcx > { pub arg : GenericArg < 'tcx > , # [primary_span] # [label] pub span : Span , # [note] pub opaque_span : Span , }
-/* FP:errors.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_errors_STRUCT_0013
-/* FP:errors.rs-0026 */ # [derive (Diagnostic)] # [diag (ty_utils_impl_trait_not_param , code = E0792)] pub (crate) struct NotParam < 'tcx > { pub arg : GenericArg < 'tcx > , # [primary_span] # [label] pub span : Span , # [note] pub opaque_span : Span , }
+// SRC: ../rust/compiler/rustc_ty_utils/src/errors.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+// Errors emitted by ty_utils
+
+use crate::rustc_complete::codes::*;
+use rustc_macros::{Diagnostic, Subdiagnostic};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::ty::{GenericArg, Ty};
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+use crate::rustc_complete::Span;
+
+#[derive(Diagnostic)]
+#[diag(ty_utils_needs_drop_overflow)]
+pub(crate) struct NeedsDropOverflow<'tcx> {
+    pub query_ty: Ty<'tcx>,
+}
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
+
+#[derive(Diagnostic)]
+#[diag(ty_utils_generic_constant_too_complex)]
+#[help]
+pub(crate) struct GenericConstantTooComplex {
+    #[primary_span]
+    pub span: Span,
+    #[note(ty_utils_maybe_supported)]
+    pub maybe_supported: bool,
+    #[subdiagnostic]
+    pub sub: GenericConstantTooComplexSub,
+}
+/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=48 */
+
+#[derive(Subdiagnostic)]
+pub(crate) enum GenericConstantTooComplexSub {
+    #[label(ty_utils_borrow_not_supported)]
+    BorrowNotSupported(#[primary_span] Span),
+    #[label(ty_utils_address_and_deref_not_supported)]
+    AddressAndDerefNotSupported(#[primary_span] Span),
+    #[label(ty_utils_array_not_supported)]
+    ArrayNotSupported(#[primary_span] Span),
+    #[label(ty_utils_block_not_supported)]
+    BlockNotSupported(#[primary_span] Span),
+    #[label(ty_utils_never_to_any_not_supported)]
+    NeverToAnyNotSupported(#[primary_span] Span),
+    #[label(ty_utils_tuple_not_supported)]
+    TupleNotSupported(#[primary_span] Span),
+    #[label(ty_utils_index_not_supported)]
+    IndexNotSupported(#[primary_span] Span),
+    #[label(ty_utils_field_not_supported)]
+    FieldNotSupported(#[primary_span] Span),
+    #[label(ty_utils_const_block_not_supported)]
+    ConstBlockNotSupported(#[primary_span] Span),
+    #[label(ty_utils_adt_not_supported)]
+    AdtNotSupported(#[primary_span] Span),
+    #[label(ty_utils_pointer_not_supported)]
+    PointerNotSupported(#[primary_span] Span),
+    #[label(ty_utils_yield_not_supported)]
+    YieldNotSupported(#[primary_span] Span),
+    #[label(ty_utils_loop_not_supported)]
+    LoopNotSupported(#[primary_span] Span),
+    #[label(ty_utils_box_not_supported)]
+    BoxNotSupported(#[primary_span] Span),
+    #[label(ty_utils_binary_not_supported)]
+    BinaryNotSupported(#[primary_span] Span),
+    #[label(ty_utils_by_use_not_supported)]
+    ByUseNotSupported(#[primary_span] Span),
+    #[label(ty_utils_logical_op_not_supported)]
+    LogicalOpNotSupported(#[primary_span] Span),
+    #[label(ty_utils_assign_not_supported)]
+    AssignNotSupported(#[primary_span] Span),
+    #[label(ty_utils_closure_and_return_not_supported)]
+    ClosureAndReturnNotSupported(#[primary_span] Span),
+    #[label(ty_utils_control_flow_not_supported)]
+    ControlFlowNotSupported(#[primary_span] Span),
+    #[label(ty_utils_inline_asm_not_supported)]
+    InlineAsmNotSupported(#[primary_span] Span),
+    #[label(ty_utils_operation_not_supported)]
+    OperationNotSupported(#[primary_span] Span),
+}
+/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(ty_utils_unexpected_fnptr_associated_item)]
+pub(crate) struct UnexpectedFnPtrAssociatedItem {
+    #[primary_span]
+    pub span: Span,
+}
+/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Diagnostic)]
+#[diag(ty_utils_zero_length_simd_type)]
+pub(crate) struct ZeroLengthSimdType<'tcx> {
+    pub ty: Ty<'tcx>,
+}
+/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(ty_utils_oversized_simd_type)]
+pub(crate) struct OversizedSimdType<'tcx> {
+    pub ty: Ty<'tcx>,
+    pub max_lanes: u64,
+}
+/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Diagnostic)]
+#[diag(ty_utils_non_primitive_simd_type)]
+pub(crate) struct NonPrimitiveSimdType<'tcx> {
+    pub ty: Ty<'tcx>,
+    pub e_ty: Ty<'tcx>,
+}
+/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+
+#[derive(Diagnostic)]
+#[diag(ty_utils_impl_trait_duplicate_arg)]
+pub(crate) struct DuplicateArg<'tcx> {
+    pub arg: GenericArg<'tcx>,
+    #[primary_span]
+    #[label]
+    pub span: Span,
+    #[note]
+    pub opaque_span: Span,
+}
+/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+
+#[derive(Diagnostic)]
+#[diag(ty_utils_impl_trait_not_param, code = E0792)]
+pub(crate) struct NotParam<'tcx> {
+    pub arg: GenericArg<'tcx>,
+    #[primary_span]
+    #[label]
+    pub span: Span,
+    #[note]
+    pub opaque_span: Span,
+}

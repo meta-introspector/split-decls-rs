@@ -1,27 +1,158 @@
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_macro_expr_fragment_specifier_2024_migration_USE_0001
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0002 */ use crate :: rustc_complete :: token :: { Token , TokenKind } ;
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_macro_expr_fragment_specifier_2024_migration_USE_0002
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0004 */ use crate :: rustc_complete :: tokenstream :: { TokenStream , TokenTree } ;
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_macro_expr_fragment_specifier_2024_migration_USE_0003
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0006 */ use crate :: rustc_complete :: lint :: FutureIncompatibilityReason ;
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_macro_expr_fragment_specifier_2024_migration_USE_0004
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0008 */ use crate :: rustc_complete :: { declare_lint , declare_lint_pass } ;
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_macro_expr_fragment_specifier_2024_migration_USE_0005
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0010 */ use crate :: rustc_complete :: edition :: Edition ;
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_macro_expr_fragment_specifier_2024_migration_USE_0006
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0012 */ use crate :: rustc_complete :: sym ;
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_macro_expr_fragment_specifier_2024_migration_USE_0007
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0014 */ use tracing :: debug ;
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_macro_expr_fragment_specifier_2024_migration_USE_0008
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0016 */ use crate :: EarlyLintPass ;
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_macro_expr_fragment_specifier_2024_migration_USE_0009
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0018 */ use crate :: lints :: MacroExprFragment2024 ;
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_macro_expr_fragment_specifier_2024_migration_MACRO_0010
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0020 */ declare_lint ! { # [doc = " The `edition_2024_expr_fragment_specifier` lint detects the use of"] # [doc = " `expr` fragments in macros during migration to the 2024 edition."] # [doc = ""] # [doc = " The `expr` fragment specifier will accept more expressions in the 2024"] # [doc = " edition. To maintain the behavior from the 2021 edition and earlier, use"] # [doc = " the `expr_2021` fragment specifier."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,edition2021,compile_fail"] # [doc = " #[deny(edition_2024_expr_fragment_specifier)]"] # [doc = " macro_rules! m {"] # [doc = "   ($e:expr) => {"] # [doc = "       $e"] # [doc = "   }"] # [doc = " }"] # [doc = ""] # [doc = " fn main() {"] # [doc = "    m!(1);"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Rust [editions] allow the language to evolve without breaking backwards"] # [doc = " compatibility. This lint catches code that uses [macro matcher fragment"] # [doc = " specifiers] that have changed meaning in the 2024 edition. If you switch"] # [doc = " to the new edition without updating the code, your macros may behave"] # [doc = " differently."] # [doc = ""] # [doc = " In the 2024 edition, the `expr` fragment specifier `expr` will also"] # [doc = " match `const { ... }` blocks. This means if a macro had a pattern that"] # [doc = " matched `$e:expr` and another that matches `const { $e: expr }`, for"] # [doc = " example, that under the 2024 edition the first pattern would match while"] # [doc = " in the 2021 and earlier editions the second pattern would match. To keep"] # [doc = " the old behavior, use the `expr_2021` fragment specifier."] # [doc = ""] # [doc = " This lint detects macros whose behavior might change due to the changing"] # [doc = " meaning of the `expr` fragment specifier. It is \"allow\" by default"] # [doc = " because the code is perfectly valid in older editions. The [`cargo fix`]"] # [doc = " tool with the `--edition` flag will switch this lint to \"warn\" and"] # [doc = " automatically apply the suggested fix from the compiler. This provides a"] # [doc = " completely automated way to update old code for a new edition."] # [doc = ""] # [doc = " Using `cargo fix --edition` with this lint will ensure that your code"] # [doc = " retains the same behavior. This may not be the desired, as macro authors"] # [doc = " often will want their macros to use the latest grammar for matching"] # [doc = " expressions. Be sure to carefully review changes introduced by this lint"] # [doc = " to ensure the macros implement the desired behavior."] # [doc = ""] # [doc = " [editions]: https://doc.rust-lang.org/edition-guide/"] # [doc = " [macro matcher fragment specifiers]: https://doc.rust-lang.org/edition-guide/rust-2024/macro-fragment-specifiers.html"] # [doc = " [`cargo fix`]: https://doc.rust-lang.org/cargo/commands/cargo-fix.html"] pub EDITION_2024_EXPR_FRAGMENT_SPECIFIER , Allow , "The `expr` fragment specifier will accept more expressions in the 2024 edition. \
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0021 */     To keep the existing behavior, use the `expr_2021` fragment specifier." , @ future_incompatible = FutureIncompatibleInfo { reason : FutureIncompatibilityReason :: EditionSemanticsChange (Edition :: Edition2024) , reference : "Migration Guide <https://doc.rust-lang.org/edition-guide/rust-2024/macro-fragment-specifiers.html>" , } ; }
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0022 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_macro_expr_fragment_specifier_2024_migration_MACRO_0011
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0023 */ declare_lint_pass ! (Expr2024 => [EDITION_2024_EXPR_FRAGMENT_SPECIFIER ,]) ;
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0024 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_macro_expr_fragment_specifier_2024_migration_IMPL_0012
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0025 */ impl Expr2024 { fn check_tokens (& mut self , cx : & crate :: EarlyContext < '_ > , tokens : & TokenStream) { let mut prev_colon = false ; let mut prev_identifier = false ; let mut prev_dollar = false ; for tt in tokens . iter () { debug ! ("check_tokens: {:?} - colon {prev_dollar} - ident {prev_identifier} - colon {prev_colon}" , tt) ; match tt { TokenTree :: Token (token , _) => match token . kind { TokenKind :: Dollar => { prev_dollar = true ; continue ; } TokenKind :: Ident (..) | TokenKind :: NtIdent (..) => { if prev_colon && prev_identifier && prev_dollar { self . check_ident_token (cx , token) ; } else if prev_dollar { prev_identifier = true ; continue ; } } TokenKind :: Colon => { if prev_dollar && prev_identifier { prev_colon = true ; continue ; } } _ => { } } , TokenTree :: Delimited (.. , tts) => self . check_tokens (cx , tts) , } prev_colon = false ; prev_identifier = false ; prev_dollar = false ; } } fn check_ident_token (& mut self , cx : & crate :: EarlyContext < '_ > , token : & Token) { debug ! ("check_ident_token: {:?}" , token) ; let (sym , edition) = match token . kind { TokenKind :: Ident (sym , _) => (sym , Edition :: Edition2024) , _ => return , } ; debug ! ("token.span.edition(): {:?}" , token . span . edition ()) ; if token . span . edition () >= edition { return ; } if sym != sym :: expr { return ; } debug ! ("emitting lint") ; cx . builder . emit_span_lint (& EDITION_2024_EXPR_FRAGMENT_SPECIFIER , token . span . into () , MacroExprFragment2024 { suggestion : token . span } ,) ; } }
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0026 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_macro_expr_fragment_specifier_2024_migration_IMPL_0013
-/* FP:macro_expr_fragment_specifier_2024_migration.rs-0027 */ impl EarlyLintPass for Expr2024 { fn check_mac_def (& mut self , cx : & crate :: EarlyContext < '_ > , mc : & crate :: rustc_ast :: MacroDef) { self . check_tokens (cx , & mc . body . tokens) ; } }
+// SRC: ../rust/compiler/rustc_lint/src/macro_expr_fragment_specifier_2024_migration.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
+// Migration code for the `expr_fragment_specifier_2024` rule.
+
+use crate::rustc_complete::token::{Token, TokenKind};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::tokenstream::{TokenStream, TokenTree};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::lint::FutureIncompatibilityReason;
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=33 | LINES=72 */
+use crate::rustc_complete::edition::Edition;
+use crate::rustc_complete::sym;
+use tracing::debug;
+
+use crate::EarlyLintPass;
+use crate::lints::MacroExprFragment2024;
+
+declare_lint! {
+    /// The `edition_2024_expr_fragment_specifier` lint detects the use of
+    /// `expr` fragments in macros during migration to the 2024 edition.
+    ///
+    /// The `expr` fragment specifier will accept more expressions in the 2024
+    /// edition. To maintain the behavior from the 2021 edition and earlier, use
+    /// the `expr_2021` fragment specifier.
+    ///
+    /// ### Example
+    ///
+    /// ```rust,edition2021,compile_fail
+    /// #[deny(edition_2024_expr_fragment_specifier)]
+    /// macro_rules! m {
+    ///   ($e:expr) => {
+    ///       $e
+    ///   }
+    /// }
+    ///
+    /// fn main() {
+    ///    m!(1);
+    /// }
+    /// ```
+    ///
+    /// {{produces}}
+    ///
+    /// ### Explanation
+    ///
+    /// Rust [editions] allow the language to evolve without breaking backwards
+    /// compatibility. This lint catches code that uses [macro matcher fragment
+    /// specifiers] that have changed meaning in the 2024 edition. If you switch
+    /// to the new edition without updating the code, your macros may behave
+    /// differently.
+    ///
+    /// In the 2024 edition, the `expr` fragment specifier `expr` will also
+    /// match `const { ... }` blocks. This means if a macro had a pattern that
+    /// matched `$e:expr` and another that matches `const { $e: expr }`, for
+    /// example, that under the 2024 edition the first pattern would match while
+    /// in the 2021 and earlier editions the second pattern would match. To keep
+    /// the old behavior, use the `expr_2021` fragment specifier.
+    ///
+    /// This lint detects macros whose behavior might change due to the changing
+    /// meaning of the `expr` fragment specifier. It is "allow" by default
+    /// because the code is perfectly valid in older editions. The [`cargo fix`]
+    /// tool with the `--edition` flag will switch this lint to "warn" and
+    /// automatically apply the suggested fix from the compiler. This provides a
+    /// completely automated way to update old code for a new edition.
+    ///
+    /// Using `cargo fix --edition` with this lint will ensure that your code
+    /// retains the same behavior. This may not be the desired, as macro authors
+    /// often will want their macros to use the latest grammar for matching
+    /// expressions. Be sure to carefully review changes introduced by this lint
+    /// to ensure the macros implement the desired behavior.
+    ///
+    /// [editions]: https://doc.rust-lang.org/edition-guide/
+    /// [macro matcher fragment specifiers]: https://doc.rust-lang.org/edition-guide/rust-2024/macro-fragment-specifiers.html
+    /// [`cargo fix`]: https://doc.rust-lang.org/cargo/commands/cargo-fix.html
+    pub EDITION_2024_EXPR_FRAGMENT_SPECIFIER,
+    Allow,
+    "The `expr` fragment specifier will accept more expressions in the 2024 edition. \
+    To keep the existing behavior, use the `expr_2021` fragment specifier.",
+    @future_incompatible = FutureIncompatibleInfo {
+        reason: FutureIncompatibilityReason::EditionSemanticsChange(Edition::Edition2024),
+        reference: "Migration Guide <https://doc.rust-lang.org/edition-guide/rust-2024/macro-fragment-specifiers.html>",
+    };
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=check_tokens | COMPLEXITY=49 | LINES=67 */
+
+declare_lint_pass!(Expr2024 => [EDITION_2024_EXPR_FRAGMENT_SPECIFIER,]);
+
+impl Expr2024 {
+    fn check_tokens(&mut self, cx: &crate::EarlyContext<'_>, tokens: &TokenStream) {
+        let mut prev_colon = false;
+        let mut prev_identifier = false;
+        let mut prev_dollar = false;
+        for tt in tokens.iter() {
+            debug!(
+                "check_tokens: {:?} - colon {prev_dollar} - ident {prev_identifier} - colon {prev_colon}",
+                tt
+            );
+            match tt {
+                TokenTree::Token(token, _) => match token.kind {
+                    TokenKind::Dollar => {
+                        prev_dollar = true;
+                        continue;
+                    }
+                    TokenKind::Ident(..) | TokenKind::NtIdent(..) => {
+                        if prev_colon && prev_identifier && prev_dollar {
+                            self.check_ident_token(cx, token);
+                        } else if prev_dollar {
+                            prev_identifier = true;
+                            continue;
+                        }
+                    }
+                    TokenKind::Colon => {
+                        if prev_dollar && prev_identifier {
+                            prev_colon = true;
+                            continue;
+                        }
+                    }
+                    _ => {}
+                },
+                TokenTree::Delimited(.., tts) => self.check_tokens(cx, tts),
+            }
+            prev_colon = false;
+            prev_identifier = false;
+            prev_dollar = false;
+        }
+    }
+
+    fn check_ident_token(&mut self, cx: &crate::EarlyContext<'_>, token: &Token) {
+        debug!("check_ident_token: {:?}", token);
+        let (sym, edition) = match token.kind {
+            TokenKind::Ident(sym, _) => (sym, Edition::Edition2024),
+            _ => return,
+        };
+
+        debug!("token.span.edition(): {:?}", token.span.edition());
+        if token.span.edition() >= edition {
+            return;
+        }
+
+        if sym != sym::expr {
+            return;
+        }
+
+        debug!("emitting lint");
+        cx.builder.emit_span_lint(
+            &EDITION_2024_EXPR_FRAGMENT_SPECIFIER,
+            token.span.into(),
+            MacroExprFragment2024 { suggestion: token.span },
+        );
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=check_mac_def | COMPLEXITY=5 | LINES=6 */
+
+impl EarlyLintPass for Expr2024 {
+    fn check_mac_def(&mut self, cx: &crate::EarlyContext<'_>, mc: &crate::rustc_ast::MacroDef) {
+        self.check_tokens(cx, &mc.body.tokens);
+    }
+}

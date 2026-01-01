@@ -1,12 +1,88 @@
-/* FP:tests.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_edit_distance_tests_USE_0001
-/* FP:tests.rs-0002 */ # [allow (rustc :: symbol_intern_string_literal)] use super :: * ;
-/* FP:tests.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_edit_distance_tests_FN_0002
-/* FP:tests.rs-0004 */ # [test] fn test_edit_distance () { for c in (0 .. char :: MAX as u32) . filter_map (char :: from_u32) . map (| i | i . to_string ()) { assert_eq ! (edit_distance (& c [..] , & c [..] , usize :: MAX) , Some (0)) ; } let a = "\nMäry häd ä little lämb\n\nLittle lämb\n" ; let b = "\nMary häd ä little lämb\n\nLittle lämb\n" ; let c = "Mary häd ä little lämb\n\nLittle lämb\n" ; assert_eq ! (edit_distance (a , b , usize :: MAX) , Some (1)) ; assert_eq ! (edit_distance (b , a , usize :: MAX) , Some (1)) ; assert_eq ! (edit_distance (a , c , usize :: MAX) , Some (2)) ; assert_eq ! (edit_distance (c , a , usize :: MAX) , Some (2)) ; assert_eq ! (edit_distance (b , c , usize :: MAX) , Some (1)) ; assert_eq ! (edit_distance (c , b , usize :: MAX) , Some (1)) ; }
-/* FP:tests.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_edit_distance_tests_FN_0003
-/* FP:tests.rs-0006 */ # [test] fn test_edit_distance_limit () { assert_eq ! (edit_distance ("abc" , "abcd" , 1) , Some (1)) ; assert_eq ! (edit_distance ("abc" , "abcd" , 0) , None) ; assert_eq ! (edit_distance ("abc" , "xyz" , 3) , Some (3)) ; assert_eq ! (edit_distance ("abc" , "xyz" , 2) , None) ; }
-/* FP:tests.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_edit_distance_tests_FN_0004
-/* FP:tests.rs-0008 */ # [test] fn test_method_name_similarity_score () { assert_eq ! (edit_distance_with_substrings ("empty" , "is_empty" , 1) , Some (1)) ; assert_eq ! (edit_distance_with_substrings ("shrunk" , "rchunks" , 2) , None) ; assert_eq ! (edit_distance_with_substrings ("abc" , "abcd" , 1) , Some (1)) ; assert_eq ! (edit_distance_with_substrings ("a" , "abcd" , 1) , None) ; assert_eq ! (edit_distance_with_substrings ("edf" , "eq" , 1) , None) ; assert_eq ! (edit_distance_with_substrings ("abc" , "xyz" , 3) , Some (3)) ; assert_eq ! (edit_distance_with_substrings ("abcdef" , "abcdef" , 2) , Some (0)) ; }
-/* FP:tests.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_edit_distance_tests_FN_0005
-/* FP:tests.rs-0010 */ # [test] fn test_find_best_match_for_name () { use crate :: create_default_session_globals_then ; create_default_session_globals_then (| | { let input = vec ! [Symbol :: intern ("aaab") , Symbol :: intern ("aaabc")] ; assert_eq ! (find_best_match_for_name (& input , Symbol :: intern ("aaaa") , None) , Some (Symbol :: intern ("aaab"))) ; assert_eq ! (find_best_match_for_name (& input , Symbol :: intern ("1111111111") , None) , None) ; let input = vec ! [Symbol :: intern ("AAAA")] ; assert_eq ! (find_best_match_for_name (& input , Symbol :: intern ("aaaa") , None) , Some (Symbol :: intern ("AAAA"))) ; let input = vec ! [Symbol :: intern ("AAAA")] ; assert_eq ! (find_best_match_for_name (& input , Symbol :: intern ("aaaa") , Some (4)) , Some (Symbol :: intern ("AAAA"))) ; let input = vec ! [Symbol :: intern ("a_longer_variable_name")] ; assert_eq ! (find_best_match_for_name (& input , Symbol :: intern ("a_variable_longer_name") , None) , Some (Symbol :: intern ("a_longer_variable_name"))) ; }) }
-/* FP:tests.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_span_src_edit_distance_tests_FN_0006
-/* FP:tests.rs-0012 */ # [test] fn test_precise_algorithm () { assert_ne ! (edit_distance ("ab" , "ba" , usize :: MAX) , Some (2)) ; assert_ne ! (edit_distance ("abde" , "bcaed" , usize :: MAX) , Some (3)) ; assert_eq ! (edit_distance ("abde" , "bcaed" , usize :: MAX) , Some (4)) ; }
+// SRC: ../rust/compiler/rustc_span/src/edit_distance/tests.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=test_edit_distance | COMPLEXITY=6 | LINES=21 */
+#[allow(rustc::symbol_intern_string_literal)]
+
+use super::*;
+
+#[test]
+fn test_edit_distance() {
+    // Test bytelength agnosticity
+    for c in (0..char::MAX as u32).filter_map(char::from_u32).map(|i| i.to_string()) {
+        assert_eq!(edit_distance(&c[..], &c[..], usize::MAX), Some(0));
+    }
+
+    let a = "\nMäry häd ä little lämb\n\nLittle lämb\n";
+    let b = "\nMary häd ä little lämb\n\nLittle lämb\n";
+    let c = "Mary häd ä little lämb\n\nLittle lämb\n";
+    assert_eq!(edit_distance(a, b, usize::MAX), Some(1));
+    assert_eq!(edit_distance(b, a, usize::MAX), Some(1));
+    assert_eq!(edit_distance(a, c, usize::MAX), Some(2));
+    assert_eq!(edit_distance(c, a, usize::MAX), Some(2));
+    assert_eq!(edit_distance(b, c, usize::MAX), Some(1));
+    assert_eq!(edit_distance(c, b, usize::MAX), Some(1));
+}
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=test_edit_distance_limit | COMPLEXITY=2 | LINES=8 */
+
+#[test]
+fn test_edit_distance_limit() {
+    assert_eq!(edit_distance("abc", "abcd", 1), Some(1));
+    assert_eq!(edit_distance("abc", "abcd", 0), None);
+    assert_eq!(edit_distance("abc", "xyz", 3), Some(3));
+    assert_eq!(edit_distance("abc", "xyz", 2), None);
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_method_name_similarity_score | COMPLEXITY=3 | LINES=11 */
+
+#[test]
+fn test_method_name_similarity_score() {
+    assert_eq!(edit_distance_with_substrings("empty", "is_empty", 1), Some(1));
+    assert_eq!(edit_distance_with_substrings("shrunk", "rchunks", 2), None);
+    assert_eq!(edit_distance_with_substrings("abc", "abcd", 1), Some(1));
+    assert_eq!(edit_distance_with_substrings("a", "abcd", 1), None);
+    assert_eq!(edit_distance_with_substrings("edf", "eq", 1), None);
+    assert_eq!(edit_distance_with_substrings("abc", "xyz", 3), Some(3));
+    assert_eq!(edit_distance_with_substrings("abcdef", "abcdef", 2), Some(0));
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=test_find_best_match_for_name | COMPLEXITY=5 | LINES=32 */
+
+#[test]
+fn test_find_best_match_for_name() {
+    use crate::create_default_session_globals_then;
+    create_default_session_globals_then(|| {
+        let input = vec![Symbol::intern("aaab"), Symbol::intern("aaabc")];
+        assert_eq!(
+            find_best_match_for_name(&input, Symbol::intern("aaaa"), None),
+            Some(Symbol::intern("aaab"))
+        );
+
+        assert_eq!(find_best_match_for_name(&input, Symbol::intern("1111111111"), None), None);
+
+        let input = vec![Symbol::intern("AAAA")];
+        assert_eq!(
+            find_best_match_for_name(&input, Symbol::intern("aaaa"), None),
+            Some(Symbol::intern("AAAA"))
+        );
+
+        let input = vec![Symbol::intern("AAAA")];
+        assert_eq!(
+            find_best_match_for_name(&input, Symbol::intern("aaaa"), Some(4)),
+            Some(Symbol::intern("AAAA"))
+        );
+
+        let input = vec![Symbol::intern("a_longer_variable_name")];
+        assert_eq!(
+            find_best_match_for_name(&input, Symbol::intern("a_variable_longer_name"), None),
+            Some(Symbol::intern("a_longer_variable_name"))
+        );
+    })
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=test_precise_algorithm | COMPLEXITY=2 | LINES=10 */
+
+#[test]
+fn test_precise_algorithm() {
+    // Not Levenshtein distance.
+    assert_ne!(edit_distance("ab", "ba", usize::MAX), Some(2));
+    // Not unrestricted Damerau-Levenshtein distance.
+    assert_ne!(edit_distance("abde", "bcaed", usize::MAX), Some(3));
+    // The current implementation is a restricted Damerau-Levenshtein distance.
+    assert_eq!(edit_distance("abde", "bcaed", usize::MAX), Some(4));
+}

@@ -1,46 +1,464 @@
-/* FP:loops.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_USE_0001
-/* FP:loops.rs-0002 */ use std :: collections :: BTreeMap ;
-/* FP:loops.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_USE_0002
-/* FP:loops.rs-0004 */ use std :: fmt ;
-/* FP:loops.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_USE_0003
-/* FP:loops.rs-0006 */ use Context :: * ;
-/* FP:loops.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_USE_0004
-/* FP:loops.rs-0008 */ use rustc_hir as hir ;
-/* FP:loops.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_USE_0005
-/* FP:loops.rs-0010 */ use crate :: rustc_complete :: attrs :: AttributeKind ;
-/* FP:loops.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_USE_0006
-/* FP:loops.rs-0012 */ use crate :: rustc_complete :: def :: DefKind ;
-/* FP:loops.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_USE_0007
-/* FP:loops.rs-0014 */ use crate :: rustc_complete :: def_id :: LocalDefId ;
-/* FP:loops.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_USE_0008
-/* FP:loops.rs-0016 */ use crate :: rustc_complete :: intravisit :: { self , Visitor } ;
-/* FP:loops.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_USE_0009
-/* FP:loops.rs-0018 */ use crate :: rustc_complete :: { Destination , Node , find_attr } ;
-/* FP:loops.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_USE_0010
-/* FP:loops.rs-0020 */ use crate :: rustc_complete :: hir :: nested_filter ;
-/* FP:loops.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_USE_0011
-/* FP:loops.rs-0022 */ use crate :: rustc_complete :: span_bug ;
-/* FP:loops.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_USE_0012
-/* FP:loops.rs-0024 */ use crate :: rustc_complete :: ty :: TyCtxt ;
-/* FP:loops.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_USE_0013
-/* FP:loops.rs-0026 */ use crate :: rustc_complete :: hygiene :: DesugaringKind ;
-/* FP:loops.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_USE_0014
-/* FP:loops.rs-0028 */ use crate :: rustc_complete :: { BytePos , Span } ;
-/* FP:loops.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_USE_0015
-/* FP:loops.rs-0030 */ use crate :: errors :: { BreakInsideClosure , BreakInsideCoroutine , BreakNonLoop , ConstContinueBadLabel , ContinueLabeledBlock , OutsideLoop , OutsideLoopSuggestion , UnlabeledCfInWhileCondition , UnlabeledInLabeledBlock , } ;
-/* FP:loops.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_ENUM_0016
-/* FP:loops.rs-0032 */ # [doc = " The context in which a block is encountered."] # [derive (Clone , Copy , Debug , PartialEq)] enum Context { Normal , Fn , Loop (hir :: LoopSource) , Closure (Span) , Coroutine { coroutine_span : Span , kind : hir :: CoroutineDesugaring , source : hir :: CoroutineSource , } , UnlabeledBlock (Span) , UnlabeledIfBlock (Span) , LabeledBlock , # [doc = " E.g. The labeled block inside `['_'; 'block: { break 'block 1 + 2; }]`."] AnonConst , # [doc = " E.g. `const { ... }`."] ConstBlock , # [doc = " E.g. `#[loop_match] loop { state = 'label: { /* ... */ } }`."] LoopMatch { # [doc = " The destination pointing to the labeled block (not to the loop itself)."] labeled_block : Destination , } , }
-/* FP:loops.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_STRUCT_0017
-/* FP:loops.rs-0034 */ # [derive (Clone)] struct BlockInfo { name : String , spans : Vec < Span > , suggs : Vec < Span > , }
-/* FP:loops.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_ENUM_0018
-/* FP:loops.rs-0036 */ # [derive (PartialEq)] enum BreakContextKind { Break , Continue , }
-/* FP:loops.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_IMPL_0019
-/* FP:loops.rs-0038 */ impl fmt :: Display for BreakContextKind { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { BreakContextKind :: Break => "break" , BreakContextKind :: Continue => "continue" , } . fmt (f) } }
-/* FP:loops.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_STRUCT_0020
-/* FP:loops.rs-0040 */ # [derive (Clone)] struct CheckLoopVisitor < 'tcx > { tcx : TyCtxt < 'tcx > , cx_stack : Vec < Context > , block_breaks : BTreeMap < Span , BlockInfo > , }
-/* FP:loops.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_FN_0021
-/* FP:loops.rs-0042 */ pub (crate) fn check < 'tcx > (tcx : TyCtxt < 'tcx > , def_id : LocalDefId , body : & 'tcx hir :: Body < 'tcx >) { let mut check = CheckLoopVisitor { tcx , cx_stack : vec ! [Normal] , block_breaks : Default :: default () } ; let cx = match tcx . def_kind (def_id) { DefKind :: AnonConst => AnonConst , _ => Fn , } ; check . with_context (cx , | v | v . visit_body (body)) ; check . report_outside_loop_error () ; }
-/* FP:loops.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_IMPL_0022
-/* FP:loops.rs-0044 */ impl < 'hir > Visitor < 'hir > for CheckLoopVisitor < 'hir > { type NestedFilter = nested_filter :: OnlyBodies ; fn maybe_tcx (& mut self) -> Self :: MaybeTyCtxt { self . tcx } fn visit_anon_const (& mut self , _ : & 'hir hir :: AnonConst) { } fn visit_inline_const (& mut self , c : & 'hir hir :: ConstBlock) { self . with_context (ConstBlock , | v | intravisit :: walk_inline_const (v , c)) ; } fn visit_expr (& mut self , e : & 'hir hir :: Expr < 'hir >) { match e . kind { hir :: ExprKind :: If (cond , then , else_opt) => { self . visit_expr (cond) ; let get_block = | ck_loop : & CheckLoopVisitor < 'hir > , expr : & hir :: Expr < 'hir > | -> Option < & hir :: Block < 'hir > > { if let hir :: ExprKind :: Block (b , None) = expr . kind && matches ! (ck_loop . cx_stack . last () , Some (& Normal) | Some (& AnonConst) | Some (& UnlabeledBlock (_)) | Some (& UnlabeledIfBlock (_))) { Some (b) } else { None } } ; if let Some (b) = get_block (self , then) { self . with_context (UnlabeledIfBlock (b . span . shrink_to_lo ()) , | v | { v . visit_block (b) }) ; } else { self . visit_expr (then) ; } if let Some (else_expr) = else_opt { if let Some (b) = get_block (self , else_expr) { self . with_context (UnlabeledIfBlock (b . span . shrink_to_lo ()) , | v | { v . visit_block (b) }) ; } else { self . visit_expr (else_expr) ; } } } hir :: ExprKind :: Loop (ref b , _ , source , _) => { let cx = match self . is_loop_match (e , b) { Some (labeled_block) => LoopMatch { labeled_block } , None => Loop (source) , } ; self . with_context (cx , | v | v . visit_block (b)) ; } hir :: ExprKind :: Closure (& hir :: Closure { ref fn_decl , body , fn_decl_span , kind , .. }) => { let cx = match kind { hir :: ClosureKind :: Coroutine (hir :: CoroutineKind :: Desugared (kind , source)) => { Coroutine { coroutine_span : fn_decl_span , kind , source } } _ => Closure (fn_decl_span) , } ; self . visit_fn_decl (fn_decl) ; self . with_context (cx , | v | v . visit_nested_body (body)) ; } hir :: ExprKind :: Block (ref b , Some (_label)) => { self . with_context (LabeledBlock , | v | v . visit_block (b)) ; } hir :: ExprKind :: Block (ref b , None) if matches ! (self . cx_stack . last () , Some (& Fn) | Some (& ConstBlock)) => { self . with_context (Normal , | v | v . visit_block (b)) ; } hir :: ExprKind :: Block (ref b @ hir :: Block { rules : hir :: BlockCheckMode :: DefaultBlock , .. } , None ,) if matches ! (self . cx_stack . last () , Some (& Normal) | Some (& AnonConst) | Some (& UnlabeledBlock (_))) => { self . with_context (UnlabeledBlock (b . span . shrink_to_lo ()) , | v | v . visit_block (b)) ; } hir :: ExprKind :: Break (break_destination , ref opt_expr) => { if let Some (e) = opt_expr { self . visit_expr (e) ; } if self . require_label_in_labeled_block (e . span , & break_destination , "break") { return ; } let loop_id = match break_destination . target_id { Ok (loop_id) => Some (loop_id) , Err (hir :: LoopIdError :: OutsideLoopScope) => None , Err (hir :: LoopIdError :: UnlabeledCfInWhileCondition) => { self . tcx . dcx () . emit_err (UnlabeledCfInWhileCondition { span : e . span , cf_type : "break" , }) ; None } Err (hir :: LoopIdError :: UnresolvedLabel) => None , } ; if find_attr ! (self . tcx . hir_attrs (e . hir_id) , AttributeKind :: ConstContinue (_)) { let Some (label) = break_destination . label else { let span = e . span ; self . tcx . dcx () . emit_fatal (ConstContinueBadLabel { span }) ; } ; let is_target_label = | cx : & Context | match cx { Context :: LoopMatch { labeled_block } => { assert ! (labeled_block . target_id . is_ok ()) ; break_destination . target_id == labeled_block . target_id } _ => false , } ; if ! self . cx_stack . iter () . rev () . any (is_target_label) { let span = label . ident . span ; self . tcx . dcx () . emit_fatal (ConstContinueBadLabel { span }) ; } } if let Some (Node :: Block (_)) = loop_id . map (| id | self . tcx . hir_node (id)) { return ; } if let Some (break_expr) = opt_expr { let (head , loop_label , loop_kind) = if let Some (loop_id) = loop_id { match self . tcx . hir_expect_expr (loop_id) . kind { hir :: ExprKind :: Loop (_ , label , source , sp) => { (Some (sp) , label , Some (source)) } ref r => { span_bug ! (e . span , "break label resolved to a non-loop: {:?}" , r) } } } else { (None , None , None) } ; match loop_kind { None | Some (hir :: LoopSource :: Loop) => () , Some (kind) => { let suggestion = format ! ("break{}" , break_destination . label . map_or_else (String :: new , | l | format ! (" {}" , l . ident))) ; self . tcx . dcx () . emit_err (BreakNonLoop { span : e . span , head , kind : kind . name () , suggestion , loop_label , break_label : break_destination . label , break_expr_kind : & break_expr . kind , break_expr_span : break_expr . span , }) ; } } } let sp_lo = e . span . with_lo (e . span . lo () + BytePos ("break" . len () as u32)) ; let label_sp = match break_destination . label { Some (label) => sp_lo . with_hi (label . ident . span . hi ()) , None => sp_lo . shrink_to_lo () , } ; self . require_break_cx (BreakContextKind :: Break , e . span , label_sp , self . cx_stack . len () - 1 ,) ; } hir :: ExprKind :: Continue (destination) => { self . require_label_in_labeled_block (e . span , & destination , "continue") ; match destination . target_id { Ok (loop_id) => { if let Node :: Block (block) = self . tcx . hir_node (loop_id) { self . tcx . dcx () . emit_err (ContinueLabeledBlock { span : e . span , block_span : block . span , }) ; } } Err (hir :: LoopIdError :: UnlabeledCfInWhileCondition) => { self . tcx . dcx () . emit_err (UnlabeledCfInWhileCondition { span : e . span , cf_type : "continue" , }) ; } Err (_) => { } } self . require_break_cx (BreakContextKind :: Continue , e . span , e . span , self . cx_stack . len () - 1 ,) } _ => intravisit :: walk_expr (self , e) , } } }
-/* FP:loops.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_loops_IMPL_0023
-/* FP:loops.rs-0046 */ impl < 'hir > CheckLoopVisitor < 'hir > { fn with_context < F > (& mut self , cx : Context , f : F) where F : FnOnce (& mut CheckLoopVisitor < 'hir >) , { self . cx_stack . push (cx) ; f (self) ; self . cx_stack . pop () ; } fn require_break_cx (& mut self , br_cx_kind : BreakContextKind , span : Span , break_span : Span , cx_pos : usize ,) { match self . cx_stack [cx_pos] { LabeledBlock | Loop (_) | LoopMatch { .. } => { } Closure (closure_span) => { self . tcx . dcx () . emit_err (BreakInsideClosure { span , closure_span , name : & br_cx_kind . to_string () , }) ; } Coroutine { coroutine_span , kind , source } => { let kind = match kind { hir :: CoroutineDesugaring :: Async => "async" , hir :: CoroutineDesugaring :: Gen => "gen" , hir :: CoroutineDesugaring :: AsyncGen => "async gen" , } ; let source = match source { hir :: CoroutineSource :: Block => "block" , hir :: CoroutineSource :: Closure => "closure" , hir :: CoroutineSource :: Fn => "function" , } ; self . tcx . dcx () . emit_err (BreakInsideCoroutine { span , coroutine_span , name : & br_cx_kind . to_string () , kind , source , }) ; } UnlabeledBlock (block_span) if br_cx_kind == BreakContextKind :: Break && block_span . eq_ctxt (break_span) => { let block = self . block_breaks . entry (block_span) . or_insert_with (| | BlockInfo { name : br_cx_kind . to_string () , spans : vec ! [] , suggs : vec ! [] , }) ; block . spans . push (span) ; block . suggs . push (break_span) ; } UnlabeledIfBlock (_) if br_cx_kind == BreakContextKind :: Break => { self . require_break_cx (br_cx_kind , span , break_span , cx_pos - 1) ; } Normal | AnonConst | Fn | UnlabeledBlock (_) | UnlabeledIfBlock (_) | ConstBlock => { self . tcx . dcx () . emit_err (OutsideLoop { spans : vec ! [span] , name : & br_cx_kind . to_string () , is_break : br_cx_kind == BreakContextKind :: Break , suggestion : None , }) ; } } } fn require_label_in_labeled_block (& self , span : Span , label : & Destination , cf_type : & str ,) -> bool { if ! span . is_desugaring (DesugaringKind :: QuestionMark) && self . cx_stack . last () == Some (& LabeledBlock) && label . label . is_none () { self . tcx . dcx () . emit_err (UnlabeledInLabeledBlock { span , cf_type }) ; return true ; } false } fn report_outside_loop_error (& self) { for (s , block) in & self . block_breaks { self . tcx . dcx () . emit_err (OutsideLoop { spans : block . spans . clone () , name : & block . name , is_break : true , suggestion : Some (OutsideLoopSuggestion { block_span : * s , break_spans : block . suggs . clone () , }) , }) ; } } # [doc = " Is this a loop annotated with `#[loop_match]` that looks syntactically sound?"] fn is_loop_match (& self , e : & 'hir hir :: Expr < 'hir > , body : & 'hir hir :: Block < 'hir > ,) -> Option < Destination > { if ! find_attr ! (self . tcx . hir_attrs (e . hir_id) , AttributeKind :: LoopMatch (_)) { return None ; } let loop_body_expr = match body . stmts { [] => match body . expr { Some (expr) => expr , None => return None , } , [single] if body . expr . is_none () => match single . kind { hir :: StmtKind :: Expr (expr) | hir :: StmtKind :: Semi (expr) => expr , _ => return None , } , [..] => return None , } ; let hir :: ExprKind :: Assign (_ , rhs_expr , _) = loop_body_expr . kind else { return None } ; let hir :: ExprKind :: Block (block , label) = rhs_expr . kind else { return None } ; Some (Destination { label , target_id : Ok (block . hir_id) }) } }
+// SRC: ../rust/compiler/rustc_hir_typeck/src/loops.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+use std::collections::BTreeMap;
+use std::fmt;
+
+use Context::*;
+use rustc_hir as hir;
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::intravisit::{self, Visitor};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{Destination, Node, find_attr};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::hygiene::DesugaringKind;
+use crate::rustc_complete::{BytePos, Span};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+
+use crate::errors::{
+    BreakInsideClosure, BreakInsideCoroutine, BreakNonLoop, ConstContinueBadLabel,
+    ContinueLabeledBlock, OutsideLoop, OutsideLoopSuggestion, UnlabeledCfInWhileCondition,
+    UnlabeledInLabeledBlock,
+};
+/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=13 | LINES=26 */
+
+/// The context in which a block is encountered.
+#[derive(Clone, Copy, Debug, PartialEq)]
+enum Context {
+    Normal,
+    Fn,
+    Loop(hir::LoopSource),
+    Closure(Span),
+    Coroutine {
+        coroutine_span: Span,
+        kind: hir::CoroutineDesugaring,
+        source: hir::CoroutineSource,
+    },
+    UnlabeledBlock(Span),
+    UnlabeledIfBlock(Span),
+    LabeledBlock,
+    /// E.g. The labeled block inside `['_'; 'block: { break 'block 1 + 2; }]`.
+    AnonConst,
+    /// E.g. `const { ... }`.
+    ConstBlock,
+    /// E.g. `#[loop_match] loop { state = 'label: { /* ... */ } }`.
+    LoopMatch {
+        /// The destination pointing to the labeled block (not to the loop itself).
+        labeled_block: Destination,
+    },
+}
+/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=BlockInfo | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Clone)]
+struct BlockInfo {
+    name: String,
+    spans: Vec<Span>,
+    suggs: Vec<Span>,
+}
+/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+
+#[derive(PartialEq)]
+enum BreakContextKind {
+    Break,
+    Continue,
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=10 */
+
+impl fmt::Display for BreakContextKind {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            BreakContextKind::Break => "break",
+            BreakContextKind::Continue => "continue",
+        }
+        .fmt(f)
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=CheckLoopVisitor | COMPLEXITY=9 | LINES=11 */
+
+#[derive(Clone)]
+struct CheckLoopVisitor<'tcx> {
+    tcx: TyCtxt<'tcx>,
+    // Keep track of a stack of contexts, so that suggestions
+    // are not made for contexts where it would be incorrect,
+    // such as adding a label for an `if`.
+    // e.g. `if 'foo: {}` would be incorrect.
+    cx_stack: Vec<Context>,
+    block_breaks: BTreeMap<Span, BlockInfo>,
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=11 */
+
+pub(crate) fn check<'tcx>(tcx: TyCtxt<'tcx>, def_id: LocalDefId, body: &'tcx hir::Body<'tcx>) {
+    let mut check =
+        CheckLoopVisitor { tcx, cx_stack: vec![Normal], block_breaks: Default::default() };
+    let cx = match tcx.def_kind(def_id) {
+        DefKind::AnonConst => AnonConst,
+        _ => Fn,
+    };
+    check.with_context(cx, |v| v.visit_body(body));
+    check.report_outside_loop_error();
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=144 | LINES=226 */
+
+impl<'hir> Visitor<'hir> for CheckLoopVisitor<'hir> {
+    type NestedFilter = nested_filter::OnlyBodies;
+
+    fn maybe_tcx(&mut self) -> Self::MaybeTyCtxt {
+        self.tcx
+    }
+
+    fn visit_anon_const(&mut self, _: &'hir hir::AnonConst) {
+        // Typecked on its own.
+    }
+
+    fn visit_inline_const(&mut self, c: &'hir hir::ConstBlock) {
+        self.with_context(ConstBlock, |v| intravisit::walk_inline_const(v, c));
+    }
+
+    fn visit_expr(&mut self, e: &'hir hir::Expr<'hir>) {
+        match e.kind {
+            hir::ExprKind::If(cond, then, else_opt) => {
+                self.visit_expr(cond);
+
+                let get_block = |ck_loop: &CheckLoopVisitor<'hir>,
+                                 expr: &hir::Expr<'hir>|
+                 -> Option<&hir::Block<'hir>> {
+                    if let hir::ExprKind::Block(b, None) = expr.kind
+                        && matches!(
+                            ck_loop.cx_stack.last(),
+                            Some(&Normal)
+                                | Some(&AnonConst)
+                                | Some(&UnlabeledBlock(_))
+                                | Some(&UnlabeledIfBlock(_))
+                        )
+                    {
+                        Some(b)
+                    } else {
+                        None
+                    }
+                };
+
+                if let Some(b) = get_block(self, then) {
+                    self.with_context(UnlabeledIfBlock(b.span.shrink_to_lo()), |v| {
+                        v.visit_block(b)
+                    });
+                } else {
+                    self.visit_expr(then);
+                }
+
+                if let Some(else_expr) = else_opt {
+                    if let Some(b) = get_block(self, else_expr) {
+                        self.with_context(UnlabeledIfBlock(b.span.shrink_to_lo()), |v| {
+                            v.visit_block(b)
+                        });
+                    } else {
+                        self.visit_expr(else_expr);
+                    }
+                }
+            }
+            hir::ExprKind::Loop(ref b, _, source, _) => {
+                let cx = match self.is_loop_match(e, b) {
+                    Some(labeled_block) => LoopMatch { labeled_block },
+                    None => Loop(source),
+                };
+
+                self.with_context(cx, |v| v.visit_block(b));
+            }
+            hir::ExprKind::Closure(&hir::Closure {
+                ref fn_decl, body, fn_decl_span, kind, ..
+            }) => {
+                let cx = match kind {
+                    hir::ClosureKind::Coroutine(hir::CoroutineKind::Desugared(kind, source)) => {
+                        Coroutine { coroutine_span: fn_decl_span, kind, source }
+                    }
+                    _ => Closure(fn_decl_span),
+                };
+                self.visit_fn_decl(fn_decl);
+                self.with_context(cx, |v| v.visit_nested_body(body));
+            }
+            hir::ExprKind::Block(ref b, Some(_label)) => {
+                self.with_context(LabeledBlock, |v| v.visit_block(b));
+            }
+            hir::ExprKind::Block(ref b, None)
+                if matches!(self.cx_stack.last(), Some(&Fn) | Some(&ConstBlock)) =>
+            {
+                self.with_context(Normal, |v| v.visit_block(b));
+            }
+            hir::ExprKind::Block(
+                ref b @ hir::Block { rules: hir::BlockCheckMode::DefaultBlock, .. },
+                None,
+            ) if matches!(
+                self.cx_stack.last(),
+                Some(&Normal) | Some(&AnonConst) | Some(&UnlabeledBlock(_))
+            ) =>
+            {
+                self.with_context(UnlabeledBlock(b.span.shrink_to_lo()), |v| v.visit_block(b));
+            }
+            hir::ExprKind::Break(break_destination, ref opt_expr) => {
+                if let Some(e) = opt_expr {
+                    self.visit_expr(e);
+                }
+
+                if self.require_label_in_labeled_block(e.span, &break_destination, "break") {
+                    // If we emitted an error about an unlabeled break in a labeled
+                    // block, we don't need any further checking for this break any more
+                    return;
+                }
+
+                let loop_id = match break_destination.target_id {
+                    Ok(loop_id) => Some(loop_id),
+                    Err(hir::LoopIdError::OutsideLoopScope) => None,
+                    Err(hir::LoopIdError::UnlabeledCfInWhileCondition) => {
+                        self.tcx.dcx().emit_err(UnlabeledCfInWhileCondition {
+                            span: e.span,
+                            cf_type: "break",
+                        });
+                        None
+                    }
+                    Err(hir::LoopIdError::UnresolvedLabel) => None,
+                };
+
+                // A `#[const_continue]` must break to a block in a `#[loop_match]`.
+                if find_attr!(self.tcx.hir_attrs(e.hir_id), AttributeKind::ConstContinue(_)) {
+                    let Some(label) = break_destination.label else {
+                        let span = e.span;
+                        self.tcx.dcx().emit_fatal(ConstContinueBadLabel { span });
+                    };
+
+                    let is_target_label = |cx: &Context| match cx {
+                        Context::LoopMatch { labeled_block } => {
+                            // NOTE: with macro expansion, the label's span might be different here
+                            // even though it does still refer to the same HIR node. A block
+                            // can't have two labels, so the hir_id is a unique identifier.
+                            assert!(labeled_block.target_id.is_ok()); // see `is_loop_match`.
+                            break_destination.target_id == labeled_block.target_id
+                        }
+                        _ => false,
+                    };
+
+                    if !self.cx_stack.iter().rev().any(is_target_label) {
+                        let span = label.ident.span;
+                        self.tcx.dcx().emit_fatal(ConstContinueBadLabel { span });
+                    }
+                }
+
+                if let Some(Node::Block(_)) = loop_id.map(|id| self.tcx.hir_node(id)) {
+                    return;
+                }
+
+                if let Some(break_expr) = opt_expr {
+                    let (head, loop_label, loop_kind) = if let Some(loop_id) = loop_id {
+                        match self.tcx.hir_expect_expr(loop_id).kind {
+                            hir::ExprKind::Loop(_, label, source, sp) => {
+                                (Some(sp), label, Some(source))
+                            }
+                            ref r => {
+                                span_bug!(e.span, "break label resolved to a non-loop: {:?}", r)
+                            }
+                        }
+                    } else {
+                        (None, None, None)
+                    };
+                    match loop_kind {
+                        None | Some(hir::LoopSource::Loop) => (),
+                        Some(kind) => {
+                            let suggestion = format!(
+                                "break{}",
+                                break_destination
+                                    .label
+                                    .map_or_else(String::new, |l| format!(" {}", l.ident))
+                            );
+                            self.tcx.dcx().emit_err(BreakNonLoop {
+                                span: e.span,
+                                head,
+                                kind: kind.name(),
+                                suggestion,
+                                loop_label,
+                                break_label: break_destination.label,
+                                break_expr_kind: &break_expr.kind,
+                                break_expr_span: break_expr.span,
+                            });
+                        }
+                    }
+                }
+
+                let sp_lo = e.span.with_lo(e.span.lo() + BytePos("break".len() as u32));
+                let label_sp = match break_destination.label {
+                    Some(label) => sp_lo.with_hi(label.ident.span.hi()),
+                    None => sp_lo.shrink_to_lo(),
+                };
+                self.require_break_cx(
+                    BreakContextKind::Break,
+                    e.span,
+                    label_sp,
+                    self.cx_stack.len() - 1,
+                );
+            }
+            hir::ExprKind::Continue(destination) => {
+                self.require_label_in_labeled_block(e.span, &destination, "continue");
+
+                match destination.target_id {
+                    Ok(loop_id) => {
+                        if let Node::Block(block) = self.tcx.hir_node(loop_id) {
+                            self.tcx.dcx().emit_err(ContinueLabeledBlock {
+                                span: e.span,
+                                block_span: block.span,
+                            });
+                        }
+                    }
+                    Err(hir::LoopIdError::UnlabeledCfInWhileCondition) => {
+                        self.tcx.dcx().emit_err(UnlabeledCfInWhileCondition {
+                            span: e.span,
+                            cf_type: "continue",
+                        });
+                    }
+                    Err(_) => {}
+                }
+                self.require_break_cx(
+                    BreakContextKind::Continue,
+                    e.span,
+                    e.span,
+                    self.cx_stack.len() - 1,
+                )
+            }
+            _ => intravisit::walk_expr(self, e),
+        }
+    }
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=with_context | COMPLEXITY=75 | LINES=133 */
+
+impl<'hir> CheckLoopVisitor<'hir> {
+    fn with_context<F>(&mut self, cx: Context, f: F)
+    where
+        F: FnOnce(&mut CheckLoopVisitor<'hir>),
+    {
+        self.cx_stack.push(cx);
+        f(self);
+        self.cx_stack.pop();
+    }
+
+    fn require_break_cx(
+        &mut self,
+        br_cx_kind: BreakContextKind,
+        span: Span,
+        break_span: Span,
+        cx_pos: usize,
+    ) {
+        match self.cx_stack[cx_pos] {
+            LabeledBlock | Loop(_) | LoopMatch { .. } => {}
+            Closure(closure_span) => {
+                self.tcx.dcx().emit_err(BreakInsideClosure {
+                    span,
+                    closure_span,
+                    name: &br_cx_kind.to_string(),
+                });
+            }
+            Coroutine { coroutine_span, kind, source } => {
+                let kind = match kind {
+                    hir::CoroutineDesugaring::Async => "async",
+                    hir::CoroutineDesugaring::Gen => "gen",
+                    hir::CoroutineDesugaring::AsyncGen => "async gen",
+                };
+                let source = match source {
+                    hir::CoroutineSource::Block => "block",
+                    hir::CoroutineSource::Closure => "closure",
+                    hir::CoroutineSource::Fn => "function",
+                };
+                self.tcx.dcx().emit_err(BreakInsideCoroutine {
+                    span,
+                    coroutine_span,
+                    name: &br_cx_kind.to_string(),
+                    kind,
+                    source,
+                });
+            }
+            UnlabeledBlock(block_span)
+                if br_cx_kind == BreakContextKind::Break && block_span.eq_ctxt(break_span) =>
+            {
+                let block = self.block_breaks.entry(block_span).or_insert_with(|| BlockInfo {
+                    name: br_cx_kind.to_string(),
+                    spans: vec![],
+                    suggs: vec![],
+                });
+                block.spans.push(span);
+                block.suggs.push(break_span);
+            }
+            UnlabeledIfBlock(_) if br_cx_kind == BreakContextKind::Break => {
+                self.require_break_cx(br_cx_kind, span, break_span, cx_pos - 1);
+            }
+            Normal | AnonConst | Fn | UnlabeledBlock(_) | UnlabeledIfBlock(_) | ConstBlock => {
+                self.tcx.dcx().emit_err(OutsideLoop {
+                    spans: vec![span],
+                    name: &br_cx_kind.to_string(),
+                    is_break: br_cx_kind == BreakContextKind::Break,
+                    suggestion: None,
+                });
+            }
+        }
+    }
+
+    fn require_label_in_labeled_block(
+        &self,
+        span: Span,
+        label: &Destination,
+        cf_type: &str,
+    ) -> bool {
+        if !span.is_desugaring(DesugaringKind::QuestionMark)
+            && self.cx_stack.last() == Some(&LabeledBlock)
+            && label.label.is_none()
+        {
+            self.tcx.dcx().emit_err(UnlabeledInLabeledBlock { span, cf_type });
+            return true;
+        }
+        false
+    }
+
+    fn report_outside_loop_error(&self) {
+        for (s, block) in &self.block_breaks {
+            self.tcx.dcx().emit_err(OutsideLoop {
+                spans: block.spans.clone(),
+                name: &block.name,
+                is_break: true,
+                suggestion: Some(OutsideLoopSuggestion {
+                    block_span: *s,
+                    break_spans: block.suggs.clone(),
+                }),
+            });
+        }
+    }
+
+    /// Is this a loop annotated with `#[loop_match]` that looks syntactically sound?
+    fn is_loop_match(
+        &self,
+        e: &'hir hir::Expr<'hir>,
+        body: &'hir hir::Block<'hir>,
+    ) -> Option<Destination> {
+        if !find_attr!(self.tcx.hir_attrs(e.hir_id), AttributeKind::LoopMatch(_)) {
+            return None;
+        }
+
+        // NOTE: Diagnostics are emitted during MIR construction.
+
+        // Accept either `state = expr` or `state = expr;`.
+        let loop_body_expr = match body.stmts {
+            [] => match body.expr {
+                Some(expr) => expr,
+                None => return None,
+            },
+            [single] if body.expr.is_none() => match single.kind {
+                hir::StmtKind::Expr(expr) | hir::StmtKind::Semi(expr) => expr,
+                _ => return None,
+            },
+            [..] => return None,
+        };
+
+        let hir::ExprKind::Assign(_, rhs_expr, _) = loop_body_expr.kind else { return None };
+
+        let hir::ExprKind::Block(block, label) = rhs_expr.kind else { return None };
+
+        Some(Destination { label, target_id: Ok(block.hir_id) })
+    }
+}

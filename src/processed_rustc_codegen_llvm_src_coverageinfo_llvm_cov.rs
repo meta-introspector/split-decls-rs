@@ -1,22 +1,109 @@
-/* FP:llvm_cov.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_llvm_cov_USE_0001
-/* FP:llvm_cov.rs-0002 */ use std :: ffi :: CString ;
-/* FP:llvm_cov.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_llvm_cov_USE_0002
-/* FP:llvm_cov.rs-0004 */ use crate :: common :: AsCCharPtr ;
-/* FP:llvm_cov.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_llvm_cov_USE_0003
-/* FP:llvm_cov.rs-0006 */ use crate :: coverageinfo :: ffi ;
-/* FP:llvm_cov.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_llvm_cov_USE_0004
-/* FP:llvm_cov.rs-0008 */ use crate :: llvm ;
-/* FP:llvm_cov.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_llvm_cov_FN_0005
-/* FP:llvm_cov.rs-0010 */ pub (crate) fn covmap_var_name () -> CString { CString :: new (llvm :: build_byte_buffer (| s | unsafe { llvm :: LLVMRustCoverageWriteCovmapVarNameToString (s) ; })) . expect ("covmap variable name should not contain NUL") }
-/* FP:llvm_cov.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_llvm_cov_FN_0006
-/* FP:llvm_cov.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_llvm_cov_FN_0007
-/* FP:llvm_cov.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_llvm_cov_FN_0008
-/* FP:llvm_cov.rs-0016 */ pub (crate) fn create_pgo_func_name_var < 'll > (llfn : & 'll llvm :: Value , mangled_fn_name : & str ,) -> & 'll llvm :: Value { unsafe { llvm :: LLVMRustCoverageCreatePGOFuncNameVar (llfn , mangled_fn_name . as_c_char_ptr () , mangled_fn_name . len () ,) } }
-/* FP:llvm_cov.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_llvm_cov_FN_0009
-/* FP:llvm_cov.rs-0018 */ pub (crate) fn write_filenames_to_buffer (filenames : & [impl AsRef < str >]) -> Vec < u8 > { let (pointers , lengths) = filenames . into_iter () . map (AsRef :: as_ref) . map (| s : & str | (s . as_c_char_ptr () , s . len ())) . unzip :: < _ , _ , Vec < _ > , Vec < _ > > () ; llvm :: build_byte_buffer (| buffer | unsafe { llvm :: LLVMRustCoverageWriteFilenamesToBuffer (pointers . as_ptr () , pointers . len () , lengths . as_ptr () , lengths . len () , buffer ,) ; }) }
-/* FP:llvm_cov.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_llvm_cov_FN_0010
-/* FP:llvm_cov.rs-0020 */ pub (crate) fn write_function_mappings_to_buffer (virtual_file_mapping : & [u32] , expressions : & [ffi :: CounterExpression] , regions : & ffi :: Regions ,) -> Vec < u8 > { let ffi :: Regions { code_regions , expansion_regions , branch_regions } = regions ; llvm :: build_byte_buffer (| buffer | unsafe { llvm :: LLVMRustCoverageWriteFunctionMappingsToBuffer (virtual_file_mapping . as_ptr () , virtual_file_mapping . len () , expressions . as_ptr () , expressions . len () , code_regions . as_ptr () , code_regions . len () , expansion_regions . as_ptr () , expansion_regions . len () , branch_regions . as_ptr () , branch_regions . len () , buffer ,) }) }
-/* FP:llvm_cov.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_llvm_cov_FN_0011
-/* FP:llvm_cov.rs-0022 */ # [doc = " Hashes some bytes into a 64-bit hash, via LLVM's `IndexedInstrProf::ComputeHash`,"] # [doc = " as required for parts of the LLVM coverage mapping format."] pub (crate) fn hash_bytes (bytes : & [u8]) -> u64 { unsafe { llvm :: LLVMRustCoverageHashBytes (bytes . as_c_char_ptr () , bytes . len ()) } }
-/* FP:llvm_cov.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_llvm_cov_FN_0012
-/* FP:llvm_cov.rs-0024 */ # [doc = " Returns LLVM's `coverage::CovMapVersion::CurrentVersion` (CoverageMapping.h)"] # [doc = " as a raw numeric value. For historical reasons, the numeric value is 1 less"] # [doc = " than the number in the version's name, so `Version7` is actually `6u32`."] pub (crate) fn mapping_version () -> u32 { unsafe { llvm :: LLVMRustCoverageMappingVersion () } }
+// SRC: ../rust/compiler/rustc_codegen_llvm/src/coverageinfo/llvm_cov.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=14 */
+// Safe wrappers for coverage-specific FFI functions.
+
+use std::ffi::CString;
+
+use crate::common::AsCCharPtr;
+use crate::coverageinfo::ffi;
+use crate::llvm;
+
+pub(crate) fn covmap_var_name() -> CString {
+    CString::new(llvm::build_byte_buffer(|s| unsafe {
+        llvm::LLVMRustCoverageWriteCovmapVarNameToString(s);
+    }))
+    .expect("covmap variable name should not contain NUL")
+}
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=7 */
+
+pub(crate) fn covmap_section_name(llmod: &llvm::Module) -> CString {
+    CString::new(llvm::build_byte_buffer(|s| unsafe {
+        llvm::LLVMRustCoverageWriteCovmapSectionNameToString(llmod, s);
+    }))
+    .expect("covmap section name should not contain NUL")
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=7 */
+
+pub(crate) fn covfun_section_name(llmod: &llvm::Module) -> CString {
+    CString::new(llvm::build_byte_buffer(|s| unsafe {
+        llvm::LLVMRustCoverageWriteCovfunSectionNameToString(llmod, s);
+    }))
+    .expect("covfun section name should not contain NUL")
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=13 */
+
+pub(crate) fn create_pgo_func_name_var<'ll>(
+    llfn: &'ll llvm::Value,
+    mangled_fn_name: &str,
+) -> &'ll llvm::Value {
+    unsafe {
+        llvm::LLVMRustCoverageCreatePGOFuncNameVar(
+            llfn,
+            mangled_fn_name.as_c_char_ptr(),
+            mangled_fn_name.len(),
+        )
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=18 */
+
+pub(crate) fn write_filenames_to_buffer(filenames: &[impl AsRef<str>]) -> Vec<u8> {
+    let (pointers, lengths) = filenames
+        .into_iter()
+        .map(AsRef::as_ref)
+        .map(|s: &str| (s.as_c_char_ptr(), s.len()))
+        .unzip::<_, _, Vec<_>, Vec<_>>();
+
+    llvm::build_byte_buffer(|buffer| unsafe {
+        llvm::LLVMRustCoverageWriteFilenamesToBuffer(
+            pointers.as_ptr(),
+            pointers.len(),
+            lengths.as_ptr(),
+            lengths.len(),
+            buffer,
+        );
+    })
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=28 */
+
+pub(crate) fn write_function_mappings_to_buffer(
+    virtual_file_mapping: &[u32],
+    expressions: &[ffi::CounterExpression],
+    regions: &ffi::Regions,
+) -> Vec<u8> {
+    let ffi::Regions { code_regions, expansion_regions, branch_regions } = regions;
+
+    // SAFETY:
+    // - All types are FFI-compatible and have matching representations in Rust/C++.
+    // - For pointer/length pairs, the pointer and length come from the same vector or slice.
+    // - C++ code does not retain any pointers after the call returns.
+    llvm::build_byte_buffer(|buffer| unsafe {
+        llvm::LLVMRustCoverageWriteFunctionMappingsToBuffer(
+            virtual_file_mapping.as_ptr(),
+            virtual_file_mapping.len(),
+            expressions.as_ptr(),
+            expressions.len(),
+            code_regions.as_ptr(),
+            code_regions.len(),
+            expansion_regions.as_ptr(),
+            expansion_regions.len(),
+            branch_regions.as_ptr(),
+            branch_regions.len(),
+            buffer,
+        )
+    })
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=6 */
+
+/// Hashes some bytes into a 64-bit hash, via LLVM's `IndexedInstrProf::ComputeHash`,
+/// as required for parts of the LLVM coverage mapping format.
+pub(crate) fn hash_bytes(bytes: &[u8]) -> u64 {
+    unsafe { llvm::LLVMRustCoverageHashBytes(bytes.as_c_char_ptr(), bytes.len()) }
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=7 */
+
+/// Returns LLVM's `coverage::CovMapVersion::CurrentVersion` (CoverageMapping.h)
+/// as a raw numeric value. For historical reasons, the numeric value is 1 less
+/// than the number in the version's name, so `Version7` is actually `6u32`.
+pub(crate) fn mapping_version() -> u32 {
+    unsafe { llvm::LLVMRustCoverageMappingVersion() }
+}

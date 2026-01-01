@@ -1,180 +1,1039 @@
-/* FP:error.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_USE_0001
-/* FP:error.rs-0002 */ use std :: any :: Any ;
-/* FP:error.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_USE_0002
-/* FP:error.rs-0004 */ use std :: backtrace :: Backtrace ;
-/* FP:error.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_USE_0003
-/* FP:error.rs-0006 */ use std :: borrow :: Cow ;
-/* FP:error.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_USE_0004
-/* FP:error.rs-0008 */ use std :: { convert , fmt , mem , ops } ;
-/* FP:error.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_USE_0005
-/* FP:error.rs-0010 */ use either :: Either ;
-/* FP:error.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_USE_0006
-/* FP:error.rs-0012 */ use crate :: rustc_abi :: { Align , Size , VariantIdx , WrappingRange } ;
-/* FP:error.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_USE_0007
-/* FP:error.rs-0014 */ use crate :: rustc_data_structures :: sync :: Lock ;
-/* FP:error.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_USE_0008
-/* FP:error.rs-0016 */ use crate :: rustc_complete :: { DiagArgName , DiagArgValue , DiagMessage , ErrorGuaranteed , IntoDiagArg } ;
-/* FP:error.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_USE_0009
-/* FP:error.rs-0018 */ use rustc_macros :: { HashStable , TyDecodable , TyEncodable } ;
-/* FP:error.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_USE_0010
-/* FP:error.rs-0020 */ use crate :: rustc_complete :: CtfeBacktrace ;
-/* FP:error.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_USE_0011
-/* FP:error.rs-0022 */ use crate :: rustc_complete :: def_id :: DefId ;
-/* FP:error.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_USE_0012
-/* FP:error.rs-0024 */ use crate :: rustc_complete :: { DUMMY_SP , Span , Symbol } ;
-/* FP:error.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_USE_0013
-/* FP:error.rs-0026 */ use super :: { AllocId , AllocRange , ConstAllocation , Pointer , Scalar } ;
-/* FP:error.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_USE_0014
-/* FP:error.rs-0028 */ use crate :: error ;
-/* FP:error.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_USE_0015
-/* FP:error.rs-0030 */ use crate :: mir :: { ConstAlloc , ConstValue } ;
-/* FP:error.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_USE_0016
-/* FP:error.rs-0032 */ use crate :: ty :: { self , Mutability , Ty , TyCtxt , ValTree , layout , tls } ;
-/* FP:error.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_ENUM_0017
-/* FP:error.rs-0034 */ # [derive (Debug , Copy , Clone , PartialEq , Eq , HashStable , TyEncodable , TyDecodable)] pub enum ErrorHandled { # [doc = " Already reported an error for this evaluation, and the compilation is"] # [doc = " *guaranteed* to fail. Warnings/lints *must not* produce `Reported`."] Reported (ReportedErrorInfo , Span) , # [doc = " Don't emit an error, the evaluation failed because the MIR was generic"] # [doc = " and the args didn't fully monomorphize it."] TooGeneric (Span) , }
-/* FP:error.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0018
-/* FP:error.rs-0036 */ impl From < ReportedErrorInfo > for ErrorHandled { # [inline] fn from (error : ReportedErrorInfo) -> ErrorHandled { ErrorHandled :: Reported (error , DUMMY_SP) } }
-/* FP:error.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0019
-/* FP:error.rs-0038 */ impl ErrorHandled { pub (crate) fn with_span (self , span : Span) -> Self { match self { ErrorHandled :: Reported (err , _span) => ErrorHandled :: Reported (err , span) , ErrorHandled :: TooGeneric (_span) => ErrorHandled :: TooGeneric (span) , } } pub fn emit_note (& self , tcx : TyCtxt < '_ >) { match self { & ErrorHandled :: Reported (err , span) => { if ! err . allowed_in_infallible && ! span . is_dummy () { tcx . dcx () . emit_note (error :: ErroneousConstant { span }) ; } } & ErrorHandled :: TooGeneric (_) => { } } } }
-/* FP:error.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_STRUCT_0020
-/* FP:error.rs-0040 */ # [derive (Debug , Copy , Clone , PartialEq , Eq , HashStable , TyEncodable , TyDecodable)] pub struct ReportedErrorInfo { error : ErrorGuaranteed , # [doc = " Whether this error is allowed to show up even in otherwise \"infallible\" promoteds."] # [doc = " This is for things like overflows during size computation or resource exhaustion."] allowed_in_infallible : bool , }
-/* FP:error.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0021
-/* FP:error.rs-0042 */ impl ReportedErrorInfo { # [inline] pub fn const_eval_error (error : ErrorGuaranteed) -> ReportedErrorInfo { ReportedErrorInfo { allowed_in_infallible : false , error } } # [doc = " Use this when the error that led to this is *not* a const-eval error"] # [doc = " (e.g., a layout or type checking error)."] # [inline] pub fn non_const_eval_error (error : ErrorGuaranteed) -> ReportedErrorInfo { ReportedErrorInfo { allowed_in_infallible : true , error } } # [doc = " Use this when the error that led to this *is* a const-eval error, but"] # [doc = " we do allow it to occur in infallible constants (e.g., resource exhaustion)."] # [inline] pub fn allowed_in_infallible (error : ErrorGuaranteed) -> ReportedErrorInfo { ReportedErrorInfo { allowed_in_infallible : true , error } } pub fn is_allowed_in_infallible (& self) -> bool { self . allowed_in_infallible } }
-/* FP:error.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0022
-/* FP:error.rs-0044 */ impl From < ReportedErrorInfo > for ErrorGuaranteed { # [inline] fn from (val : ReportedErrorInfo) -> Self { val . error } }
-/* FP:error.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_ENUM_0023
-/* FP:error.rs-0046 */ # [doc = " An error type for the `const_to_valtree` query. Some error should be reported with a \"use-site span\","] # [doc = " which means the query cannot emit the error, so those errors are represented as dedicated variants here."] # [derive (Debug , Copy , Clone , PartialEq , Eq , HashStable , TyEncodable , TyDecodable)] pub enum ValTreeCreationError < 'tcx > { # [doc = " The constant is too big to be valtree'd."] NodesOverflow , # [doc = " The constant references mutable or external memory, so it cannot be valtree'd."] InvalidConst , # [doc = " Values of this type, or this particular value, are not supported as valtrees."] NonSupportedType (Ty < 'tcx >) , # [doc = " The error has already been handled by const evaluation."] ErrorHandled (ErrorHandled) , }
-/* FP:error.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0024
-/* FP:error.rs-0048 */ impl < 'tcx > From < ErrorHandled > for ValTreeCreationError < 'tcx > { fn from (err : ErrorHandled) -> Self { ValTreeCreationError :: ErrorHandled (err) } }
-/* FP:error.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0025
-/* FP:error.rs-0050 */ impl < 'tcx > From < InterpErrorInfo < 'tcx > > for ValTreeCreationError < 'tcx > { fn from (err : InterpErrorInfo < 'tcx >) -> Self { let (_kind , backtrace) = err . into_parts () ; backtrace . print_backtrace () ; ValTreeCreationError :: InvalidConst } }
-/* FP:error.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0026
-/* FP:error.rs-0052 */ impl < 'tcx > ValTreeCreationError < 'tcx > { pub (crate) fn with_span (self , span : Span) -> Self { use ValTreeCreationError :: * ; match self { ErrorHandled (handled) => ErrorHandled (handled . with_span (span)) , other => other , } } }
-/* FP:error.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_TYPE_0027
-/* FP:error.rs-0054 */ pub type EvalToAllocationRawResult < 'tcx > = Result < ConstAlloc < 'tcx > , ErrorHandled > ;
-/* FP:error.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_TYPE_0028
-/* FP:error.rs-0056 */ pub type EvalStaticInitializerRawResult < 'tcx > = Result < ConstAllocation < 'tcx > , ErrorHandled > ;
-/* FP:error.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_TYPE_0029
-/* FP:error.rs-0058 */ pub type EvalToConstValueResult < 'tcx > = Result < ConstValue , ErrorHandled > ;
-/* FP:error.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_TYPE_0030
-/* FP:error.rs-0060 */ pub type EvalToValTreeResult < 'tcx > = Result < ValTree < 'tcx > , ValTreeCreationError < 'tcx > > ;
-/* FP:error.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0031
-/* FP:error.rs-0062 */ # [cfg (target_pointer_width = "64")] crate :: rustc_data_structures :: static_assert_size ! (InterpErrorInfo <'_ >, 8) ;
-/* FP:error.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_STRUCT_0032
-/* FP:error.rs-0064 */ # [doc = " Packages the kind of error we got from the const code interpreter"] # [doc = " up with a Rust-level backtrace of where the error occurred."] # [doc = " These should always be constructed by calling `.into()` on"] # [doc = " an `InterpError`. In `rustc_mir::interpret`, we have `throw_err_*`"] # [doc = " macros for this."] # [doc = ""] # [doc = " Interpreter errors must *not* be silently discarded (that will lead to a panic). Instead,"] # [doc = " explicitly call `discard_err` if this is really the right thing to do. Note that if"] # [doc = " this happens during const-eval or in Miri, it could lead to a UB error being lost!"] # [derive (Debug)] pub struct InterpErrorInfo < 'tcx > (Box < InterpErrorInfoInner < 'tcx > >) ;
-/* FP:error.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_STRUCT_0033
-/* FP:error.rs-0066 */ # [derive (Debug)] struct InterpErrorInfoInner < 'tcx > { kind : InterpErrorKind < 'tcx > , backtrace : InterpErrorBacktrace , }
-/* FP:error.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_STRUCT_0034
-/* FP:error.rs-0068 */ # [derive (Debug)] pub struct InterpErrorBacktrace { backtrace : Option < Box < Backtrace > > , }
-/* FP:error.rs-0069 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0035
-/* FP:error.rs-0070 */ impl InterpErrorBacktrace { pub fn new () -> InterpErrorBacktrace { let capture_backtrace = tls :: with_opt (| tcx | { if let Some (tcx) = tcx { * Lock :: borrow (& tcx . sess . ctfe_backtrace) } else { CtfeBacktrace :: Disabled } }) ; let backtrace = match capture_backtrace { CtfeBacktrace :: Disabled => None , CtfeBacktrace :: Capture => Some (Box :: new (Backtrace :: force_capture ())) , CtfeBacktrace :: Immediate => { let backtrace = Backtrace :: force_capture () ; print_backtrace (& backtrace) ; None } } ; InterpErrorBacktrace { backtrace } } pub fn print_backtrace (& self) { if let Some (backtrace) = self . backtrace . as_ref () { print_backtrace (backtrace) ; } } }
-/* FP:error.rs-0071 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0036
-/* FP:error.rs-0072 */ impl < 'tcx > InterpErrorInfo < 'tcx > { pub fn into_parts (self) -> (InterpErrorKind < 'tcx > , InterpErrorBacktrace) { let InterpErrorInfo (box InterpErrorInfoInner { kind , backtrace }) = self ; (kind , backtrace) } pub fn into_kind (self) -> InterpErrorKind < 'tcx > { self . 0 . kind } pub fn from_parts (kind : InterpErrorKind < 'tcx > , backtrace : InterpErrorBacktrace) -> Self { Self (Box :: new (InterpErrorInfoInner { kind , backtrace })) } # [inline] pub fn kind (& self) -> & InterpErrorKind < 'tcx > { & self . 0 . kind } }
-/* FP:error.rs-0073 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_FN_0037
-/* FP:error.rs-0074 */ fn print_backtrace (backtrace : & Backtrace) { eprintln ! ("\n\nAn error occurred in the MIR interpreter:\n{backtrace}") ; }
-/* FP:error.rs-0075 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0038
-/* FP:error.rs-0076 */ impl From < ErrorHandled > for InterpErrorInfo < '_ > { fn from (err : ErrorHandled) -> Self { InterpErrorKind :: InvalidProgram (match err { ErrorHandled :: Reported (r , _span) => InvalidProgramInfo :: AlreadyReported (r) , ErrorHandled :: TooGeneric (_span) => InvalidProgramInfo :: TooGeneric , }) . into () } }
-/* FP:error.rs-0077 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0039
-/* FP:error.rs-0078 */ impl < 'tcx > From < InterpErrorKind < 'tcx > > for InterpErrorInfo < 'tcx > { fn from (kind : InterpErrorKind < 'tcx >) -> Self { InterpErrorInfo (Box :: new (InterpErrorInfoInner { kind , backtrace : InterpErrorBacktrace :: new () , })) } }
-/* FP:error.rs-0079 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_ENUM_0040
-/* FP:error.rs-0080 */ # [doc = " Error information for when the program we executed turned out not to actually be a valid"] # [doc = " program. This cannot happen in stand-alone Miri (except for layout errors that are only detect"] # [doc = " during monomorphization), but it can happen during CTFE/ConstProp where we work on generic code"] # [doc = " or execution does not have all information available."] # [derive (Debug)] pub enum InvalidProgramInfo < 'tcx > { # [doc = " Resolution can fail if we are in a too generic context."] TooGeneric , # [doc = " Abort in case errors are already reported."] AlreadyReported (ReportedErrorInfo) , # [doc = " An error occurred during layout computation."] Layout (layout :: LayoutError < 'tcx >) , }
-/* FP:error.rs-0081 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_ENUM_0041
-/* FP:error.rs-0082 */ # [doc = " Details of why a pointer had to be in-bounds."] # [derive (Debug , Copy , Clone)] pub enum CheckInAllocMsg { # [doc = " We are accessing memory."] MemoryAccess , # [doc = " We are doing pointer arithmetic."] InboundsPointerArithmetic , # [doc = " None of the above -- generic/unspecific inbounds test."] Dereferenceable , }
-/* FP:error.rs-0083 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_ENUM_0042
-/* FP:error.rs-0084 */ # [doc = " Details of which pointer is not aligned."] # [derive (Debug , Copy , Clone)] pub enum CheckAlignMsg { # [doc = " The accessed pointer did not have proper alignment."] AccessedPtr , # [doc = " The access occurred with a place that was based on a misaligned pointer."] BasedOn , }
-/* FP:error.rs-0085 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_ENUM_0043
-/* FP:error.rs-0086 */ # [derive (Debug , Copy , Clone)] pub enum InvalidMetaKind { # [doc = " Size of a `[T]` is too big"] SliceTooBig , # [doc = " Size of a DST is too big"] TooBig , }
-/* FP:error.rs-0087 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0044
-/* FP:error.rs-0088 */ impl IntoDiagArg for InvalidMetaKind { fn into_diag_arg (self , _ : & mut Option < std :: path :: PathBuf >) -> DiagArgValue { DiagArgValue :: Str (Cow :: Borrowed (match self { InvalidMetaKind :: SliceTooBig => "slice_too_big" , InvalidMetaKind :: TooBig => "too_big" , })) } }
-/* FP:error.rs-0089 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_STRUCT_0045
-/* FP:error.rs-0090 */ # [doc = " Details of an access to uninitialized bytes / bad pointer bytes where it is not allowed."] # [derive (Debug , Clone , Copy)] pub struct BadBytesAccess { # [doc = " Range of the original memory access."] pub access : AllocRange , # [doc = " Range of the bad memory that was encountered. (Might not be maximal.)"] pub bad : AllocRange , }
-/* FP:error.rs-0091 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_STRUCT_0046
-/* FP:error.rs-0092 */ # [doc = " Information about a size mismatch."] # [derive (Debug)] pub struct ScalarSizeMismatch { pub target_size : u64 , pub data_size : u64 , }
-/* FP:error.rs-0093 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_STRUCT_0047
-/* FP:error.rs-0094 */ # [doc = " Information about a misaligned pointer."] # [derive (Copy , Clone , Hash , PartialEq , Eq , Debug)] pub struct Misalignment { pub has : Align , pub required : Align , }
-/* FP:error.rs-0095 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0048
-/* FP:error.rs-0096 */ macro_rules ! impl_into_diag_arg_through_debug { ($ ($ ty : ty) ,*$ (,) ?) => { $ (impl IntoDiagArg for $ ty { fn into_diag_arg (self , _ : & mut Option < std :: path :: PathBuf >) -> DiagArgValue { DiagArgValue :: Str (Cow :: Owned (format ! ("{self:?}"))) } }) * } }
-/* FP:error.rs-0097 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0049
-/* FP:error.rs-0098 */ impl_into_diag_arg_through_debug ! { AllocId , Pointer < AllocId >, AllocRange , }
-/* FP:error.rs-0099 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_ENUM_0050
-/* FP:error.rs-0100 */ # [doc = " Error information for when the program caused Undefined Behavior."] # [derive (Debug)] pub enum UndefinedBehaviorInfo < 'tcx > { # [doc = " Free-form case. Only for errors that are never caught! Used by miri"] Ub (String) , # [doc = " A custom (free-form) fluent-translated error, created by `err_ub_custom!`."] Custom (crate :: error :: CustomSubdiagnostic < 'tcx >) , # [doc = " Validation error."] ValidationError (ValidationErrorInfo < 'tcx >) , # [doc = " Unreachable code was executed."] Unreachable , # [doc = " A slice/array index projection went out-of-bounds."] BoundsCheckFailed { len : u64 , index : u64 } , # [doc = " Something was divided by 0 (x / 0)."] DivisionByZero , # [doc = " Something was \"remainded\" by 0 (x % 0)."] RemainderByZero , # [doc = " Signed division overflowed (INT_MIN / -1)."] DivisionOverflow , # [doc = " Signed remainder overflowed (INT_MIN % -1)."] RemainderOverflow , # [doc = " Overflowing inbounds pointer arithmetic."] PointerArithOverflow , # [doc = " Overflow in arithmetic that may not overflow."] ArithOverflow { intrinsic : Symbol } , # [doc = " Shift by too much."] ShiftOverflow { intrinsic : Symbol , shift_amount : Either < u128 , i128 > } , # [doc = " Invalid metadata in a wide pointer"] InvalidMeta (InvalidMetaKind) , # [doc = " Reading a C string that does not end within its allocation."] UnterminatedCString (Pointer < AllocId >) , # [doc = " Using a pointer after it got freed."] PointerUseAfterFree (AllocId , CheckInAllocMsg) , # [doc = " Used a pointer outside the bounds it is valid for."] PointerOutOfBounds { alloc_id : AllocId , alloc_size : Size , ptr_offset : i64 , # [doc = " The size of the memory range that was expected to be in-bounds."] inbounds_size : i64 , msg : CheckInAllocMsg , } , # [doc = " Using an integer as a pointer in the wrong way."] DanglingIntPointer { addr : u64 , # [doc = " The size of the memory range that was expected to be in-bounds (or 0 if we need an"] # [doc = " allocation but not any actual memory there, e.g. for function pointers)."] inbounds_size : i64 , msg : CheckInAllocMsg , } , # [doc = " Used a pointer with bad alignment."] AlignmentCheckFailed (Misalignment , CheckAlignMsg) , # [doc = " Writing to read-only memory."] WriteToReadOnly (AllocId) , # [doc = " Trying to access the data behind a function pointer."] DerefFunctionPointer (AllocId) , # [doc = " Trying to access the data behind a vtable pointer."] DerefVTablePointer (AllocId) , # [doc = " Trying to access the actual type id."] DerefTypeIdPointer (AllocId) , # [doc = " Using a non-boolean `u8` as bool."] InvalidBool (u8) , # [doc = " Using a non-character `u32` as character."] InvalidChar (u32) , # [doc = " The tag of an enum does not encode an actual discriminant."] InvalidTag (Scalar < AllocId >) , # [doc = " Using a pointer-not-to-a-function as function pointer."] InvalidFunctionPointer (Pointer < AllocId >) , # [doc = " Using a pointer-not-to-a-vtable as vtable pointer."] InvalidVTablePointer (Pointer < AllocId >) , # [doc = " Using a vtable for the wrong trait."] InvalidVTableTrait { # [doc = " The vtable that was actually referenced by the wide pointer metadata."] vtable_dyn_type : & 'tcx ty :: List < ty :: PolyExistentialPredicate < 'tcx > > , # [doc = " The vtable that was expected at the point in MIR that it was accessed."] expected_dyn_type : & 'tcx ty :: List < ty :: PolyExistentialPredicate < 'tcx > > , } , # [doc = " Using a string that is not valid UTF-8,"] InvalidStr (std :: str :: Utf8Error) , # [doc = " Using uninitialized data where it is not allowed."] InvalidUninitBytes (Option < (AllocId , BadBytesAccess) >) , # [doc = " Working with a local that is not currently live."] DeadLocal , # [doc = " Data size is not equal to target size."] ScalarSizeMismatch (ScalarSizeMismatch) , # [doc = " A discriminant of an uninhabited enum variant is written."] UninhabitedEnumVariantWritten (VariantIdx) , # [doc = " An uninhabited enum variant is projected."] UninhabitedEnumVariantRead (Option < VariantIdx >) , # [doc = " Trying to set discriminant to the niched variant, but the value does not match."] InvalidNichedEnumVariantWritten { enum_ty : Ty < 'tcx > } , # [doc = " ABI-incompatible argument types."] AbiMismatchArgument { # [doc = " The index of the argument whose type is wrong."] arg_idx : usize , caller_ty : Ty < 'tcx > , callee_ty : Ty < 'tcx > , } , # [doc = " ABI-incompatible return types."] AbiMismatchReturn { caller_ty : Ty < 'tcx > , callee_ty : Ty < 'tcx > } , }
-/* FP:error.rs-0101 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_ENUM_0051
-/* FP:error.rs-0102 */ # [derive (Debug , Clone , Copy)] pub enum PointerKind { Ref (Mutability) , Box , }
-/* FP:error.rs-0103 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0052
-/* FP:error.rs-0104 */ impl IntoDiagArg for PointerKind { fn into_diag_arg (self , _ : & mut Option < std :: path :: PathBuf >) -> DiagArgValue { DiagArgValue :: Str (match self { Self :: Ref (_) => "ref" , Self :: Box => "box" , } . into () ,) } }
-/* FP:error.rs-0105 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_STRUCT_0053
-/* FP:error.rs-0106 */ # [derive (Debug)] pub struct ValidationErrorInfo < 'tcx > { pub path : Option < String > , pub kind : ValidationErrorKind < 'tcx > , }
-/* FP:error.rs-0107 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_ENUM_0054
-/* FP:error.rs-0108 */ # [derive (Debug)] pub enum ExpectedKind { Reference , Box , RawPtr , InitScalar , Bool , Char , Float , Int , FnPtr , EnumTag , Str , }
-/* FP:error.rs-0109 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0055
-/* FP:error.rs-0110 */ impl From < PointerKind > for ExpectedKind { fn from (x : PointerKind) -> ExpectedKind { match x { PointerKind :: Box => ExpectedKind :: Box , PointerKind :: Ref (_) => ExpectedKind :: Reference , } } }
-/* FP:error.rs-0111 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_ENUM_0056
-/* FP:error.rs-0112 */ # [derive (Debug)] pub enum ValidationErrorKind < 'tcx > { PointerAsInt { expected : ExpectedKind , } , PartialPointer , PtrToUninhabited { ptr_kind : PointerKind , ty : Ty < 'tcx > , } , MutableRefToImmutable , UnsafeCellInImmutable , MutableRefInConst , NullFnPtr , NeverVal , NullablePtrOutOfRange { range : WrappingRange , max_value : u128 , } , PtrOutOfRange { range : WrappingRange , max_value : u128 , } , OutOfRange { value : String , range : WrappingRange , max_value : u128 , } , UninhabitedVal { ty : Ty < 'tcx > , } , InvalidEnumTag { value : String , } , UninhabitedEnumVariant , Uninit { expected : ExpectedKind , } , InvalidVTablePtr { value : String , } , InvalidMetaWrongTrait { # [doc = " The vtable that was actually referenced by the wide pointer metadata."] vtable_dyn_type : & 'tcx ty :: List < ty :: PolyExistentialPredicate < 'tcx > > , # [doc = " The vtable that was expected at the point in MIR that it was accessed."] expected_dyn_type : & 'tcx ty :: List < ty :: PolyExistentialPredicate < 'tcx > > , } , InvalidMetaSliceTooLarge { ptr_kind : PointerKind , } , InvalidMetaTooLarge { ptr_kind : PointerKind , } , UnalignedPtr { ptr_kind : PointerKind , required_bytes : u64 , found_bytes : u64 , } , NullPtr { ptr_kind : PointerKind , } , DanglingPtrNoProvenance { ptr_kind : PointerKind , pointer : String , } , DanglingPtrOutOfBounds { ptr_kind : PointerKind , } , DanglingPtrUseAfterFree { ptr_kind : PointerKind , } , InvalidBool { value : String , } , InvalidChar { value : String , } , InvalidFnPtr { value : String , } , }
-/* FP:error.rs-0113 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_ENUM_0057
-/* FP:error.rs-0114 */ # [doc = " Error information for when the program did something that might (or might not) be correct"] # [doc = " to do according to the Rust spec, but due to limitations in the interpreter, the"] # [doc = " operation could not be carried out. These limitations can differ between CTFE and the"] # [doc = " Miri engine, e.g., CTFE does not support dereferencing pointers at integral addresses."] # [derive (Debug)] pub enum UnsupportedOpInfo { # [doc = " Free-form case. Only for errors that are never caught! Used by Miri."] Unsupported (String) , # [doc = " Unsized local variables."] UnsizedLocal , # [doc = " Extern type field with an indeterminate offset."] ExternTypeField , # [doc = " Attempting to read or copy parts of a pointer to somewhere else; without knowing absolute"] # [doc = " addresses, the resulting state cannot be represented by the CTFE interpreter."] ReadPartialPointer (Pointer < AllocId >) , # [doc = " Encountered a pointer where we needed an integer."] ReadPointerAsInt (Option < (AllocId , BadBytesAccess) >) , # [doc = " Accessing thread local statics"] ThreadLocalStatic (DefId) , # [doc = " Accessing an unsupported extern static."] ExternStatic (DefId) , }
-/* FP:error.rs-0115 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_ENUM_0058
-/* FP:error.rs-0116 */ # [doc = " Error information for when the program exhausted the resources granted to it"] # [doc = " by the interpreter."] # [derive (Debug)] pub enum ResourceExhaustionInfo { # [doc = " The stack grew too big."] StackFrameLimitReached , # [doc = " There is not enough memory (on the host) to perform an allocation."] MemoryExhausted , # [doc = " The address space (of the target) is full."] AddressSpaceFull , # [doc = " The compiler got an interrupt signal (a user ran out of patience)."] Interrupted , }
-/* FP:error.rs-0117 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_TRAIT_0059
-/* FP:error.rs-0118 */ # [doc = " A trait for machine-specific errors (or other \"machine stop\" conditions)."] pub trait MachineStopType : Any + fmt :: Debug + Send { # [doc = " The diagnostic message for this error"] fn diagnostic_message (& self) -> DiagMessage ; # [doc = " Add diagnostic arguments by passing name and value pairs to `adder`, which are passed to"] # [doc = " fluent for formatting the translated diagnostic message."] fn add_args (self : Box < Self > , adder : & mut dyn FnMut (DiagArgName , DiagArgValue)) ; }
-/* FP:error.rs-0119 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0060
-/* FP:error.rs-0120 */ impl dyn MachineStopType { # [inline (always)] pub fn downcast_ref < T : Any > (& self) -> Option < & T > { let x : & dyn Any = self ; x . downcast_ref () } }
-/* FP:error.rs-0121 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_ENUM_0061
-/* FP:error.rs-0122 */ # [derive (Debug)] pub enum InterpErrorKind < 'tcx > { # [doc = " The program caused undefined behavior."] UndefinedBehavior (UndefinedBehaviorInfo < 'tcx >) , # [doc = " The program did something the interpreter does not support (some of these *might* be UB"] # [doc = " but the interpreter is not sure)."] Unsupported (UnsupportedOpInfo) , # [doc = " The program was invalid (ill-typed, bad MIR, not sufficiently monomorphized, ...)."] InvalidProgram (InvalidProgramInfo < 'tcx >) , # [doc = " The program exhausted the interpreter's resources (stack/heap too big,"] # [doc = " execution takes too long, ...)."] ResourceExhaustion (ResourceExhaustionInfo) , # [doc = " Stop execution for a machine-controlled reason. This is never raised by"] # [doc = " the core engine itself."] MachineStop (Box < dyn MachineStopType >) , }
-/* FP:error.rs-0123 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0062
-/* FP:error.rs-0124 */ impl InterpErrorKind < '_ > { # [doc = " Some errors do string formatting even if the error is never printed."] # [doc = " To avoid performance issues, there are places where we want to be sure to never raise these formatting errors,"] # [doc = " so this method lets us detect them and `bug!` on unexpected errors."] pub fn formatted_string (& self) -> bool { matches ! (self , InterpErrorKind :: Unsupported (UnsupportedOpInfo :: Unsupported (_)) | InterpErrorKind :: UndefinedBehavior (UndefinedBehaviorInfo :: ValidationError { .. }) | InterpErrorKind :: UndefinedBehavior (UndefinedBehaviorInfo :: Ub (_))) } }
-/* FP:error.rs-0125 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0063
-/* FP:error.rs-0126 */ # [macro_export] macro_rules ! err_unsup { ($ ($ tt : tt) *) => { $ crate :: mir :: interpret :: InterpErrorKind :: Unsupported ($ crate :: mir :: interpret :: UnsupportedOpInfo ::$ ($ tt) *) } ; }
-/* FP:error.rs-0127 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0064
-/* FP:error.rs-0128 */ # [macro_export] macro_rules ! err_unsup_format { ($ ($ tt : tt) *) => { $ crate :: err_unsup ! (Unsupported (format ! ($ ($ tt) *))) } ; }
-/* FP:error.rs-0129 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0065
-/* FP:error.rs-0130 */ # [macro_export] macro_rules ! err_inval { ($ ($ tt : tt) *) => { $ crate :: mir :: interpret :: InterpErrorKind :: InvalidProgram ($ crate :: mir :: interpret :: InvalidProgramInfo ::$ ($ tt) *) } ; }
-/* FP:error.rs-0131 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0066
-/* FP:error.rs-0132 */ # [macro_export] macro_rules ! err_ub { ($ ($ tt : tt) *) => { $ crate :: mir :: interpret :: InterpErrorKind :: UndefinedBehavior ($ crate :: mir :: interpret :: UndefinedBehaviorInfo ::$ ($ tt) *) } ; }
-/* FP:error.rs-0133 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0067
-/* FP:error.rs-0134 */ # [macro_export] macro_rules ! err_ub_format { ($ ($ tt : tt) *) => { $ crate :: err_ub ! (Ub (format ! ($ ($ tt) *))) } ; }
-/* FP:error.rs-0135 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0068
-/* FP:error.rs-0136 */ # [macro_export] macro_rules ! err_ub_custom { ($ msg : expr $ (, $ ($ name : ident = $ value : expr) ,* $ (,) ?) ?) => { { $ (let ($ ($ name ,) *) = ($ ($ value ,) *) ;) ? $ crate :: err_ub ! (Custom ($ crate :: error :: CustomSubdiagnostic { msg : || $ msg , add_args : Box :: new (move | mut set_arg | { $ ($ (set_arg (stringify ! ($ name) . into () , crate :: rustc_errors :: IntoDiagArg :: into_diag_arg ($ name , & mut None)) ;) *) ? }) })) } } ; }
-/* FP:error.rs-0137 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0069
-/* FP:error.rs-0138 */ # [macro_export] macro_rules ! err_exhaust { ($ ($ tt : tt) *) => { $ crate :: mir :: interpret :: InterpErrorKind :: ResourceExhaustion ($ crate :: mir :: interpret :: ResourceExhaustionInfo ::$ ($ tt) *) } ; }
-/* FP:error.rs-0139 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0070
-/* FP:error.rs-0140 */ # [macro_export] macro_rules ! err_machine_stop { ($ ($ tt : tt) *) => { $ crate :: mir :: interpret :: InterpErrorKind :: MachineStop (Box :: new ($ ($ tt) *)) } ; }
-/* FP:error.rs-0141 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0071
-/* FP:error.rs-0142 */ # [macro_export] macro_rules ! throw_unsup { ($ ($ tt : tt) *) => { do yeet $ crate :: err_unsup ! ($ ($ tt) *) } ; }
-/* FP:error.rs-0143 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0072
-/* FP:error.rs-0144 */ # [macro_export] macro_rules ! throw_unsup_format { ($ ($ tt : tt) *) => { do yeet $ crate :: err_unsup_format ! ($ ($ tt) *) } ; }
-/* FP:error.rs-0145 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0073
-/* FP:error.rs-0146 */ # [macro_export] macro_rules ! throw_inval { ($ ($ tt : tt) *) => { do yeet $ crate :: err_inval ! ($ ($ tt) *) } ; }
-/* FP:error.rs-0147 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0074
-/* FP:error.rs-0148 */ # [macro_export] macro_rules ! throw_ub { ($ ($ tt : tt) *) => { do yeet $ crate :: err_ub ! ($ ($ tt) *) } ; }
-/* FP:error.rs-0149 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0075
-/* FP:error.rs-0150 */ # [macro_export] macro_rules ! throw_ub_format { ($ ($ tt : tt) *) => { do yeet $ crate :: err_ub_format ! ($ ($ tt) *) } ; }
-/* FP:error.rs-0151 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0076
-/* FP:error.rs-0152 */ # [macro_export] macro_rules ! throw_ub_custom { ($ ($ tt : tt) *) => { do yeet $ crate :: err_ub_custom ! ($ ($ tt) *) } ; }
-/* FP:error.rs-0153 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0077
-/* FP:error.rs-0154 */ # [macro_export] macro_rules ! throw_exhaust { ($ ($ tt : tt) *) => { do yeet $ crate :: err_exhaust ! ($ ($ tt) *) } ; }
-/* FP:error.rs-0155 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_MACRO_0078
-/* FP:error.rs-0156 */ # [macro_export] macro_rules ! throw_machine_stop { ($ ($ tt : tt) *) => { do yeet $ crate :: err_machine_stop ! ($ ($ tt) *) } ; }
-/* FP:error.rs-0157 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_STRUCT_0079
-/* FP:error.rs-0158 */ # [doc = " Guard type that panics on drop."] # [derive (Debug)] struct Guard ;
-/* FP:error.rs-0159 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0080
-/* FP:error.rs-0160 */ impl Drop for Guard { fn drop (& mut self) { if ! std :: thread :: panicking () { panic ! ("an interpreter error got improperly discarded; use `discard_err()` if this is intentional") ; } } }
-/* FP:error.rs-0161 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_STRUCT_0081
-/* FP:error.rs-0162 */ # [doc = " The result type used by the interpreter. This is a newtype around `Result`"] # [doc = " to block access to operations like `ok()` that discard UB errors."] # [doc = ""] # [doc = " We also make things panic if this type is ever implicitly dropped."] # [derive (Debug)] # [must_use] pub struct InterpResult < 'tcx , T = () > { res : Result < T , InterpErrorInfo < 'tcx > > , guard : Guard , }
-/* FP:error.rs-0163 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0082
-/* FP:error.rs-0164 */ impl < 'tcx , T > ops :: Try for InterpResult < 'tcx , T > { type Output = T ; type Residual = InterpResult < 'tcx , convert :: Infallible > ; # [inline] fn from_output (output : Self :: Output) -> Self { InterpResult :: new (Ok (output)) } # [inline] fn branch (self) -> ops :: ControlFlow < Self :: Residual , Self :: Output > { match self . disarm () { Ok (v) => ops :: ControlFlow :: Continue (v) , Err (e) => ops :: ControlFlow :: Break (InterpResult :: new (Err (e))) , } } }
-/* FP:error.rs-0165 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0083
-/* FP:error.rs-0166 */ impl < 'tcx , T > ops :: Residual < T > for InterpResult < 'tcx , convert :: Infallible > { type TryType = InterpResult < 'tcx , T > ; }
-/* FP:error.rs-0167 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0084
-/* FP:error.rs-0168 */ impl < 'tcx , T > ops :: FromResidual for InterpResult < 'tcx , T > { # [inline] # [track_caller] fn from_residual (residual : InterpResult < 'tcx , convert :: Infallible >) -> Self { match residual . disarm () { Err (e) => Self :: new (Err (e)) , } } }
-/* FP:error.rs-0169 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0085
-/* FP:error.rs-0170 */ impl < 'tcx , T > ops :: FromResidual < ops :: Yeet < InterpErrorKind < 'tcx > > > for InterpResult < 'tcx , T > { # [inline] fn from_residual (ops :: Yeet (e) : ops :: Yeet < InterpErrorKind < 'tcx > >) -> Self { Self :: new (Err (e . into ())) } }
-/* FP:error.rs-0171 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0086
-/* FP:error.rs-0172 */ impl < 'tcx , T , E : Into < InterpErrorInfo < 'tcx > > > ops :: FromResidual < Result < convert :: Infallible , E > > for InterpResult < 'tcx , T > { # [inline] fn from_residual (residual : Result < convert :: Infallible , E >) -> Self { match residual { Err (e) => Self :: new (Err (e . into ())) , } } }
-/* FP:error.rs-0173 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0087
-/* FP:error.rs-0174 */ impl < 'tcx , T , E : Into < InterpErrorInfo < 'tcx > > > From < Result < T , E > > for InterpResult < 'tcx , T > { # [inline] fn from (value : Result < T , E >) -> Self { Self :: new (value . map_err (| e | e . into ())) } }
-/* FP:error.rs-0175 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0088
-/* FP:error.rs-0176 */ impl < 'tcx , T , V : FromIterator < T > > FromIterator < InterpResult < 'tcx , T > > for InterpResult < 'tcx , V > { fn from_iter < I : IntoIterator < Item = InterpResult < 'tcx , T > > > (iter : I) -> Self { Self :: new (iter . into_iter () . map (| x | x . disarm ()) . collect ()) } }
-/* FP:error.rs-0177 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_IMPL_0089
-/* FP:error.rs-0178 */ impl < 'tcx , T > InterpResult < 'tcx , T > { # [inline (always)] fn new (res : Result < T , InterpErrorInfo < 'tcx > >) -> Self { Self { res , guard : Guard } } # [inline (always)] fn disarm (self) -> Result < T , InterpErrorInfo < 'tcx > > { mem :: forget (self . guard) ; self . res } # [doc = " Discard the error information in this result. Only use this if ignoring Undefined Behavior is okay!"] # [inline] pub fn discard_err (self) -> Option < T > { self . disarm () . ok () } # [doc = " Look at the `Result` wrapped inside of this."] # [doc = " Must only be used to report the error!"] # [inline] pub fn report_err (self) -> Result < T , InterpErrorInfo < 'tcx > > { self . disarm () } # [inline] pub fn map < U > (self , f : impl FnOnce (T) -> U) -> InterpResult < 'tcx , U > { InterpResult :: new (self . disarm () . map (f)) } # [inline] pub fn map_err_info (self , f : impl FnOnce (InterpErrorInfo < 'tcx >) -> InterpErrorInfo < 'tcx > ,) -> InterpResult < 'tcx , T > { InterpResult :: new (self . disarm () . map_err (f)) } # [inline] pub fn map_err_kind (self , f : impl FnOnce (InterpErrorKind < 'tcx >) -> InterpErrorKind < 'tcx > ,) -> InterpResult < 'tcx , T > { InterpResult :: new (self . disarm () . map_err (| mut e | { e . 0 . kind = f (e . 0 . kind) ; e })) } # [inline] pub fn inspect_err_kind (self , f : impl FnOnce (& InterpErrorKind < 'tcx >)) -> InterpResult < 'tcx , T > { InterpResult :: new (self . disarm () . inspect_err (| e | f (& e . 0 . kind))) } # [inline] # [track_caller] pub fn unwrap (self) -> T { self . disarm () . unwrap () } # [inline] # [track_caller] pub fn unwrap_or_else (self , f : impl FnOnce (InterpErrorInfo < 'tcx >) -> T) -> T { self . disarm () . unwrap_or_else (f) } # [inline] # [track_caller] pub fn expect (self , msg : & str) -> T { self . disarm () . expect (msg) } # [inline] pub fn and_then < U > (self , f : impl FnOnce (T) -> InterpResult < 'tcx , U >) -> InterpResult < 'tcx , U > { InterpResult :: new (self . disarm () . and_then (| t | f (t) . disarm ())) } # [doc = " Returns success if both `self` and `other` succeed, while ensuring we don't"] # [doc = " accidentally drop an error."] # [doc = ""] # [doc = " If both are an error, `self` will be reported."] # [inline] pub fn and < U > (self , other : InterpResult < 'tcx , U >) -> InterpResult < 'tcx , (T , U) > { match self . disarm () { Ok (t) => interp_ok ((t , other ?)) , Err (e) => { drop (other . disarm ()) ; InterpResult :: new (Err (e)) } } } }
-/* FP:error.rs-0179 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_interpret_error_FN_0090
-/* FP:error.rs-0180 */ # [inline (always)] pub fn interp_ok < 'tcx , T > (x : T) -> InterpResult < 'tcx , T > { InterpResult :: new (Ok (x)) }
+// SRC: ../rust/compiler/rustc_middle/src/mir/interpret/error.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use std::any::Any;
+use std::backtrace::Backtrace;
+use std::borrow::Cow;
+use std::{convert, fmt, mem, ops};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+
+use either::Either;
+use crate::rustc_abi::{Align, Size, VariantIdx, WrappingRange};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_data_structures::sync::Lock;
+use crate::rustc_complete::{DiagArgName, DiagArgValue, DiagMessage, ErrorGuaranteed, IntoDiagArg};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use rustc_macros::{HashStable, TyDecodable, TyEncodable};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_complete::CtfeBacktrace;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{DUMMY_SP, Span, Symbol};
+/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+use super::{AllocId, AllocRange, ConstAllocation, Pointer, Scalar};
+/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::error;
+use crate::mir::{ConstAlloc, ConstValue};
+/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::ty::{self, Mutability, Ty, TyCtxt, ValTree, layout, tls};
+/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq, HashStable, TyEncodable, TyDecodable)]
+pub enum ErrorHandled {
+    /// Already reported an error for this evaluation, and the compilation is
+    /// *guaranteed* to fail. Warnings/lints *must not* produce `Reported`.
+    Reported(ReportedErrorInfo, Span),
+    /// Don't emit an error, the evaluation failed because the MIR was generic
+    /// and the args didn't fully monomorphize it.
+    TooGeneric(Span),
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
+
+impl From<ReportedErrorInfo> for ErrorHandled {
+    #[inline]
+    fn from(error: ReportedErrorInfo) -> ErrorHandled {
+        ErrorHandled::Reported(error, DUMMY_SP)
+    }
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=emit_note | COMPLEXITY=19 | LINES=20 */
+
+impl ErrorHandled {
+    pub(crate) fn with_span(self, span: Span) -> Self {
+        match self {
+            ErrorHandled::Reported(err, _span) => ErrorHandled::Reported(err, span),
+            ErrorHandled::TooGeneric(_span) => ErrorHandled::TooGeneric(span),
+        }
+    }
+
+    pub fn emit_note(&self, tcx: TyCtxt<'_>) {
+        match self {
+            &ErrorHandled::Reported(err, span) => {
+                if !err.allowed_in_infallible && !span.is_dummy() {
+                    tcx.dcx().emit_note(error::ErroneousConstant { span });
+                }
+            }
+            &ErrorHandled::TooGeneric(_) => {}
+        }
+    }
+}
+/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=ReportedErrorInfo | COMPLEXITY=4 | LINES=8 */
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq, HashStable, TyEncodable, TyDecodable)]
+pub struct ReportedErrorInfo {
+    error: ErrorGuaranteed,
+    /// Whether this error is allowed to show up even in otherwise "infallible" promoteds.
+    /// This is for things like overflows during size computation or resource exhaustion.
+    allowed_in_infallible: bool,
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=const_eval_error | COMPLEXITY=10 | LINES=25 */
+
+impl ReportedErrorInfo {
+    #[inline]
+    pub fn const_eval_error(error: ErrorGuaranteed) -> ReportedErrorInfo {
+        ReportedErrorInfo { allowed_in_infallible: false, error }
+    }
+
+    /// Use this when the error that led to this is *not* a const-eval error
+    /// (e.g., a layout or type checking error).
+    #[inline]
+    pub fn non_const_eval_error(error: ErrorGuaranteed) -> ReportedErrorInfo {
+        ReportedErrorInfo { allowed_in_infallible: true, error }
+    }
+
+    /// Use this when the error that led to this *is* a const-eval error, but
+    /// we do allow it to occur in infallible constants (e.g., resource exhaustion).
+    #[inline]
+    pub fn allowed_in_infallible(error: ErrorGuaranteed) -> ReportedErrorInfo {
+        ReportedErrorInfo { allowed_in_infallible: true, error }
+    }
+
+    pub fn is_allowed_in_infallible(&self) -> bool {
+        self.allowed_in_infallible
+    }
+}
+/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
+
+impl From<ReportedErrorInfo> for ErrorGuaranteed {
+    #[inline]
+    fn from(val: ReportedErrorInfo) -> Self {
+        val.error
+    }
+}
+/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
+
+/// An error type for the `const_to_valtree` query. Some error should be reported with a "use-site span",
+/// which means the query cannot emit the error, so those errors are represented as dedicated variants here.
+#[derive(Debug, Copy, Clone, PartialEq, Eq, HashStable, TyEncodable, TyDecodable)]
+pub enum ValTreeCreationError<'tcx> {
+    /// The constant is too big to be valtree'd.
+    NodesOverflow,
+    /// The constant references mutable or external memory, so it cannot be valtree'd.
+    InvalidConst,
+    /// Values of this type, or this particular value, are not supported as valtrees.
+    NonSupportedType(Ty<'tcx>),
+    /// The error has already been handled by const evaluation.
+    ErrorHandled(ErrorHandled),
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> From<ErrorHandled> for ValTreeCreationError<'tcx> {
+    fn from(err: ErrorHandled) -> Self {
+        ValTreeCreationError::ErrorHandled(err)
+    }
+}
+/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=11 */
+
+impl<'tcx> From<InterpErrorInfo<'tcx>> for ValTreeCreationError<'tcx> {
+    fn from(err: InterpErrorInfo<'tcx>) -> Self {
+        // An error occurred outside the const-eval query, as part of constructing the valtree. We
+        // don't currently preserve the details of this error, since `InterpErrorInfo` cannot be put
+        // into a query result and it can only be access of some mutable or external memory.
+        let (_kind, backtrace) = err.into_parts();
+        backtrace.print_backtrace();
+        ValTreeCreationError::InvalidConst
+    }
+}
+/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=7 | LINES=10 */
+
+impl<'tcx> ValTreeCreationError<'tcx> {
+    pub(crate) fn with_span(self, span: Span) -> Self {
+        use ValTreeCreationError::*;
+        match self {
+            ErrorHandled(handled) => ErrorHandled(handled.with_span(span)),
+            other => other,
+        }
+    }
+}
+/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=InterpErrorInfo | COMPLEXITY=8 | LINES=26 */
+
+pub type EvalToAllocationRawResult<'tcx> = Result<ConstAlloc<'tcx>, ErrorHandled>;
+pub type EvalStaticInitializerRawResult<'tcx> = Result<ConstAllocation<'tcx>, ErrorHandled>;
+pub type EvalToConstValueResult<'tcx> = Result<ConstValue, ErrorHandled>;
+pub type EvalToValTreeResult<'tcx> = Result<ValTree<'tcx>, ValTreeCreationError<'tcx>>;
+
+#[cfg(target_pointer_width = "64")]
+crate::rustc_data_structures::static_assert_size!(InterpErrorInfo<'_>, 8);
+
+/// Packages the kind of error we got from the const code interpreter
+/// up with a Rust-level backtrace of where the error occurred.
+/// These should always be constructed by calling `.into()` on
+/// an `InterpError`. In `rustc_mir::interpret`, we have `throw_err_*`
+/// macros for this.
+///
+/// Interpreter errors must *not* be silently discarded (that will lead to a panic). Instead,
+/// explicitly call `discard_err` if this is really the right thing to do. Note that if
+/// this happens during const-eval or in Miri, it could lead to a UB error being lost!
+#[derive(Debug)]
+pub struct InterpErrorInfo<'tcx>(Box<InterpErrorInfoInner<'tcx>>);
+
+#[derive(Debug)]
+struct InterpErrorInfoInner<'tcx> {
+    kind: InterpErrorKind<'tcx>,
+    backtrace: InterpErrorBacktrace,
+}
+/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=InterpErrorBacktrace | COMPLEXITY=2 | LINES=5 */
+
+#[derive(Debug)]
+pub struct InterpErrorBacktrace {
+    backtrace: Option<Box<Backtrace>>,
+}
+/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=new | COMPLEXITY=19 | LINES=31 */
+
+impl InterpErrorBacktrace {
+    pub fn new() -> InterpErrorBacktrace {
+        let capture_backtrace = tls::with_opt(|tcx| {
+            if let Some(tcx) = tcx {
+                *Lock::borrow(&tcx.sess.ctfe_backtrace)
+            } else {
+                CtfeBacktrace::Disabled
+            }
+        });
+
+        let backtrace = match capture_backtrace {
+            CtfeBacktrace::Disabled => None,
+            CtfeBacktrace::Capture => Some(Box::new(Backtrace::force_capture())),
+            CtfeBacktrace::Immediate => {
+                // Print it now.
+                let backtrace = Backtrace::force_capture();
+                print_backtrace(&backtrace);
+                None
+            }
+        };
+
+        InterpErrorBacktrace { backtrace }
+    }
+
+    pub fn print_backtrace(&self) {
+        if let Some(backtrace) = self.backtrace.as_ref() {
+            print_backtrace(backtrace);
+        }
+    }
+}
+/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=into_parts | COMPLEXITY=9 | LINES=20 */
+
+impl<'tcx> InterpErrorInfo<'tcx> {
+    pub fn into_parts(self) -> (InterpErrorKind<'tcx>, InterpErrorBacktrace) {
+        let InterpErrorInfo(box InterpErrorInfoInner { kind, backtrace }) = self;
+        (kind, backtrace)
+    }
+
+    pub fn into_kind(self) -> InterpErrorKind<'tcx> {
+        self.0.kind
+    }
+
+    pub fn from_parts(kind: InterpErrorKind<'tcx>, backtrace: InterpErrorBacktrace) -> Self {
+        Self(Box::new(InterpErrorInfoInner { kind, backtrace }))
+    }
+
+    #[inline]
+    pub fn kind(&self) -> &InterpErrorKind<'tcx> {
+        &self.0.kind
+    }
+}
+/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=print_backtrace | COMPLEXITY=3 | LINES=4 */
+
+fn print_backtrace(backtrace: &Backtrace) {
+    eprintln!("\n\nAn error occurred in the MIR interpreter:\n{backtrace}");
+}
+/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=10 */
+
+impl From<ErrorHandled> for InterpErrorInfo<'_> {
+    fn from(err: ErrorHandled) -> Self {
+        InterpErrorKind::InvalidProgram(match err {
+            ErrorHandled::Reported(r, _span) => InvalidProgramInfo::AlreadyReported(r),
+            ErrorHandled::TooGeneric(_span) => InvalidProgramInfo::TooGeneric,
+        })
+        .into()
+    }
+}
+/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=from | COMPLEXITY=6 | LINES=9 */
+
+impl<'tcx> From<InterpErrorKind<'tcx>> for InterpErrorInfo<'tcx> {
+    fn from(kind: InterpErrorKind<'tcx>) -> Self {
+        InterpErrorInfo(Box::new(InterpErrorInfoInner {
+            kind,
+            backtrace: InterpErrorBacktrace::new(),
+        }))
+    }
+}
+/* AST_META: AST_ID=26 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=14 */
+
+/// Error information for when the program we executed turned out not to actually be a valid
+/// program. This cannot happen in stand-alone Miri (except for layout errors that are only detect
+/// during monomorphization), but it can happen during CTFE/ConstProp where we work on generic code
+/// or execution does not have all information available.
+#[derive(Debug)]
+pub enum InvalidProgramInfo<'tcx> {
+    /// Resolution can fail if we are in a too generic context.
+    TooGeneric,
+    /// Abort in case errors are already reported.
+    AlreadyReported(ReportedErrorInfo),
+    /// An error occurred during layout computation.
+    Layout(layout::LayoutError<'tcx>),
+}
+/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+
+/// Details of why a pointer had to be in-bounds.
+#[derive(Debug, Copy, Clone)]
+pub enum CheckInAllocMsg {
+    /// We are accessing memory.
+    MemoryAccess,
+    /// We are doing pointer arithmetic.
+    InboundsPointerArithmetic,
+    /// None of the above -- generic/unspecific inbounds test.
+    Dereferenceable,
+}
+/* AST_META: AST_ID=28 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+
+/// Details of which pointer is not aligned.
+#[derive(Debug, Copy, Clone)]
+pub enum CheckAlignMsg {
+    /// The accessed pointer did not have proper alignment.
+    AccessedPtr,
+    /// The access occurred with a place that was based on a misaligned pointer.
+    BasedOn,
+}
+/* AST_META: AST_ID=29 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Debug, Copy, Clone)]
+pub enum InvalidMetaKind {
+    /// Size of a `[T]` is too big
+    SliceTooBig,
+    /// Size of a DST is too big
+    TooBig,
+}
+/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=9 | LINES=9 */
+
+impl IntoDiagArg for InvalidMetaKind {
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
+        DiagArgValue::Str(Cow::Borrowed(match self {
+            InvalidMetaKind::SliceTooBig => "slice_too_big",
+            InvalidMetaKind::TooBig => "too_big",
+        }))
+    }
+}
+/* AST_META: AST_ID=31 | TYPE=STRUCT | NAME=BadBytesAccess | COMPLEXITY=2 | LINES=9 */
+
+/// Details of an access to uninitialized bytes / bad pointer bytes where it is not allowed.
+#[derive(Debug, Clone, Copy)]
+pub struct BadBytesAccess {
+    /// Range of the original memory access.
+    pub access: AllocRange,
+    /// Range of the bad memory that was encountered. (Might not be maximal.)
+    pub bad: AllocRange,
+}
+/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=ScalarSizeMismatch | COMPLEXITY=5 | LINES=7 */
+
+/// Information about a size mismatch.
+#[derive(Debug)]
+pub struct ScalarSizeMismatch {
+    pub target_size: u64,
+    pub data_size: u64,
+}
+/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=Misalignment | COMPLEXITY=2 | LINES=7 */
+
+/// Information about a misaligned pointer.
+#[derive(Copy, Clone, Hash, PartialEq, Eq, Debug)]
+pub struct Misalignment {
+    pub has: Align,
+    pub required: Align,
+}
+/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=13 | LINES=10 */
+
+macro_rules! impl_into_diag_arg_through_debug {
+    ($($ty:ty),*$(,)?) => {$(
+        impl IntoDiagArg for $ty {
+            fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
+                DiagArgValue::Str(Cow::Owned(format!("{self:?}")))
+            }
+        }
+    )*}
+}
+/* AST_META: AST_ID=35 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+// These types have nice `Debug` output so we can just use them in diagnostics.
+impl_into_diag_arg_through_debug! {
+    AllocId,
+    Pointer<AllocId>,
+    AllocRange,
+}
+/* AST_META: AST_ID=36 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=30 | LINES=105 */
+
+/// Error information for when the program caused Undefined Behavior.
+#[derive(Debug)]
+pub enum UndefinedBehaviorInfo<'tcx> {
+    /// Free-form case. Only for errors that are never caught! Used by miri
+    Ub(String),
+    // FIXME(fee1-dead) these should all be actual variants of the enum instead of dynamically
+    // dispatched
+    /// A custom (free-form) fluent-translated error, created by `err_ub_custom!`.
+    Custom(crate::error::CustomSubdiagnostic<'tcx>),
+    /// Validation error.
+    ValidationError(ValidationErrorInfo<'tcx>),
+
+    /// Unreachable code was executed.
+    Unreachable,
+    /// A slice/array index projection went out-of-bounds.
+    BoundsCheckFailed { len: u64, index: u64 },
+    /// Something was divided by 0 (x / 0).
+    DivisionByZero,
+    /// Something was "remainded" by 0 (x % 0).
+    RemainderByZero,
+    /// Signed division overflowed (INT_MIN / -1).
+    DivisionOverflow,
+    /// Signed remainder overflowed (INT_MIN % -1).
+    RemainderOverflow,
+    /// Overflowing inbounds pointer arithmetic.
+    PointerArithOverflow,
+    /// Overflow in arithmetic that may not overflow.
+    ArithOverflow { intrinsic: Symbol },
+    /// Shift by too much.
+    ShiftOverflow { intrinsic: Symbol, shift_amount: Either<u128, i128> },
+    /// Invalid metadata in a wide pointer
+    InvalidMeta(InvalidMetaKind),
+    /// Reading a C string that does not end within its allocation.
+    UnterminatedCString(Pointer<AllocId>),
+    /// Using a pointer after it got freed.
+    PointerUseAfterFree(AllocId, CheckInAllocMsg),
+    /// Used a pointer outside the bounds it is valid for.
+    PointerOutOfBounds {
+        alloc_id: AllocId,
+        alloc_size: Size,
+        ptr_offset: i64,
+        /// The size of the memory range that was expected to be in-bounds.
+        inbounds_size: i64,
+        msg: CheckInAllocMsg,
+    },
+    /// Using an integer as a pointer in the wrong way.
+    DanglingIntPointer {
+        addr: u64,
+        /// The size of the memory range that was expected to be in-bounds (or 0 if we need an
+        /// allocation but not any actual memory there, e.g. for function pointers).
+        inbounds_size: i64,
+        msg: CheckInAllocMsg,
+    },
+    /// Used a pointer with bad alignment.
+    AlignmentCheckFailed(Misalignment, CheckAlignMsg),
+    /// Writing to read-only memory.
+    WriteToReadOnly(AllocId),
+    /// Trying to access the data behind a function pointer.
+    DerefFunctionPointer(AllocId),
+    /// Trying to access the data behind a vtable pointer.
+    DerefVTablePointer(AllocId),
+    /// Trying to access the actual type id.
+    DerefTypeIdPointer(AllocId),
+    /// Using a non-boolean `u8` as bool.
+    InvalidBool(u8),
+    /// Using a non-character `u32` as character.
+    InvalidChar(u32),
+    /// The tag of an enum does not encode an actual discriminant.
+    InvalidTag(Scalar<AllocId>),
+    /// Using a pointer-not-to-a-function as function pointer.
+    InvalidFunctionPointer(Pointer<AllocId>),
+    /// Using a pointer-not-to-a-vtable as vtable pointer.
+    InvalidVTablePointer(Pointer<AllocId>),
+    /// Using a vtable for the wrong trait.
+    InvalidVTableTrait {
+        /// The vtable that was actually referenced by the wide pointer metadata.
+        vtable_dyn_type: &'tcx ty::List<ty::PolyExistentialPredicate<'tcx>>,
+        /// The vtable that was expected at the point in MIR that it was accessed.
+        expected_dyn_type: &'tcx ty::List<ty::PolyExistentialPredicate<'tcx>>,
+    },
+    /// Using a string that is not valid UTF-8,
+    InvalidStr(std::str::Utf8Error),
+    /// Using uninitialized data where it is not allowed.
+    InvalidUninitBytes(Option<(AllocId, BadBytesAccess)>),
+    /// Working with a local that is not currently live.
+    DeadLocal,
+    /// Data size is not equal to target size.
+    ScalarSizeMismatch(ScalarSizeMismatch),
+    /// A discriminant of an uninhabited enum variant is written.
+    UninhabitedEnumVariantWritten(VariantIdx),
+    /// An uninhabited enum variant is projected.
+    UninhabitedEnumVariantRead(Option<VariantIdx>),
+    /// Trying to set discriminant to the niched variant, but the value does not match.
+    InvalidNichedEnumVariantWritten { enum_ty: Ty<'tcx> },
+    /// ABI-incompatible argument types.
+    AbiMismatchArgument {
+        /// The index of the argument whose type is wrong.
+        arg_idx: usize,
+        caller_ty: Ty<'tcx>,
+        callee_ty: Ty<'tcx>,
+    },
+    /// ABI-incompatible return types.
+    AbiMismatchReturn { caller_ty: Ty<'tcx>, callee_ty: Ty<'tcx> },
+}
+/* AST_META: AST_ID=37 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Debug, Clone, Copy)]
+pub enum PointerKind {
+    Ref(Mutability),
+    Box,
+}
+/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=9 | LINES=12 */
+
+impl IntoDiagArg for PointerKind {
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
+        DiagArgValue::Str(
+            match self {
+                Self::Ref(_) => "ref",
+                Self::Box => "box",
+            }
+            .into(),
+        )
+    }
+}
+/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=ValidationErrorInfo | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Debug)]
+pub struct ValidationErrorInfo<'tcx> {
+    pub path: Option<String>,
+    pub kind: ValidationErrorKind<'tcx>,
+}
+/* AST_META: AST_ID=40 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=15 */
+
+#[derive(Debug)]
+pub enum ExpectedKind {
+    Reference,
+    Box,
+    RawPtr,
+    InitScalar,
+    Bool,
+    Char,
+    Float,
+    Int,
+    FnPtr,
+    EnumTag,
+    Str,
+}
+/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=from | COMPLEXITY=9 | LINES=9 */
+
+impl From<PointerKind> for ExpectedKind {
+    fn from(x: PointerKind) -> ExpectedKind {
+        match x {
+            PointerKind::Box => ExpectedKind::Box,
+            PointerKind::Ref(_) => ExpectedKind::Reference,
+        }
+    }
+}
+/* AST_META: AST_ID=42 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=25 | LINES=82 */
+
+#[derive(Debug)]
+pub enum ValidationErrorKind<'tcx> {
+    PointerAsInt {
+        expected: ExpectedKind,
+    },
+    PartialPointer,
+    PtrToUninhabited {
+        ptr_kind: PointerKind,
+        ty: Ty<'tcx>,
+    },
+    MutableRefToImmutable,
+    UnsafeCellInImmutable,
+    MutableRefInConst,
+    NullFnPtr,
+    NeverVal,
+    NullablePtrOutOfRange {
+        range: WrappingRange,
+        max_value: u128,
+    },
+    PtrOutOfRange {
+        range: WrappingRange,
+        max_value: u128,
+    },
+    OutOfRange {
+        value: String,
+        range: WrappingRange,
+        max_value: u128,
+    },
+    UninhabitedVal {
+        ty: Ty<'tcx>,
+    },
+    InvalidEnumTag {
+        value: String,
+    },
+    UninhabitedEnumVariant,
+    Uninit {
+        expected: ExpectedKind,
+    },
+    InvalidVTablePtr {
+        value: String,
+    },
+    InvalidMetaWrongTrait {
+        /// The vtable that was actually referenced by the wide pointer metadata.
+        vtable_dyn_type: &'tcx ty::List<ty::PolyExistentialPredicate<'tcx>>,
+        /// The vtable that was expected at the point in MIR that it was accessed.
+        expected_dyn_type: &'tcx ty::List<ty::PolyExistentialPredicate<'tcx>>,
+    },
+    InvalidMetaSliceTooLarge {
+        ptr_kind: PointerKind,
+    },
+    InvalidMetaTooLarge {
+        ptr_kind: PointerKind,
+    },
+    UnalignedPtr {
+        ptr_kind: PointerKind,
+        required_bytes: u64,
+        found_bytes: u64,
+    },
+    NullPtr {
+        ptr_kind: PointerKind,
+    },
+    DanglingPtrNoProvenance {
+        ptr_kind: PointerKind,
+        pointer: String,
+    },
+    DanglingPtrOutOfBounds {
+        ptr_kind: PointerKind,
+    },
+    DanglingPtrUseAfterFree {
+        ptr_kind: PointerKind,
+    },
+    InvalidBool {
+        value: String,
+    },
+    InvalidChar {
+        value: String,
+    },
+    InvalidFnPtr {
+        value: String,
+    },
+}
+/* AST_META: AST_ID=43 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=27 */
+
+/// Error information for when the program did something that might (or might not) be correct
+/// to do according to the Rust spec, but due to limitations in the interpreter, the
+/// operation could not be carried out. These limitations can differ between CTFE and the
+/// Miri engine, e.g., CTFE does not support dereferencing pointers at integral addresses.
+#[derive(Debug)]
+pub enum UnsupportedOpInfo {
+    /// Free-form case. Only for errors that are never caught! Used by Miri.
+    // FIXME still use translatable diagnostics
+    Unsupported(String),
+    /// Unsized local variables.
+    UnsizedLocal,
+    /// Extern type field with an indeterminate offset.
+    ExternTypeField,
+    //
+    // The variants below are only reachable from CTFE/const prop, miri will never emit them.
+    //
+    /// Attempting to read or copy parts of a pointer to somewhere else; without knowing absolute
+    /// addresses, the resulting state cannot be represented by the CTFE interpreter.
+    ReadPartialPointer(Pointer<AllocId>),
+    /// Encountered a pointer where we needed an integer.
+    ReadPointerAsInt(Option<(AllocId, BadBytesAccess)>),
+    /// Accessing thread local statics
+    ThreadLocalStatic(DefId),
+    /// Accessing an unsupported extern static.
+    ExternStatic(DefId),
+}
+/* AST_META: AST_ID=44 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=14 */
+
+/// Error information for when the program exhausted the resources granted to it
+/// by the interpreter.
+#[derive(Debug)]
+pub enum ResourceExhaustionInfo {
+    /// The stack grew too big.
+    StackFrameLimitReached,
+    /// There is not enough memory (on the host) to perform an allocation.
+    MemoryExhausted,
+    /// The address space (of the target) is full.
+    AddressSpaceFull,
+    /// The compiler got an interrupt signal (a user ran out of patience).
+    Interrupted,
+}
+/* AST_META: AST_ID=45 | TYPE=FUNCTION | NAME=diagnostic_message | COMPLEXITY=8 | LINES=9 */
+
+/// A trait for machine-specific errors (or other "machine stop" conditions).
+pub trait MachineStopType: Any + fmt::Debug + Send {
+    /// The diagnostic message for this error
+    fn diagnostic_message(&self) -> DiagMessage;
+    /// Add diagnostic arguments by passing name and value pairs to `adder`, which are passed to
+    /// fluent for formatting the translated diagnostic message.
+    fn add_args(self: Box<Self>, adder: &mut dyn FnMut(DiagArgName, DiagArgValue));
+}
+/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=downcast_ref | COMPLEXITY=3 | LINES=8 */
+
+impl dyn MachineStopType {
+    #[inline(always)]
+    pub fn downcast_ref<T: Any>(&self) -> Option<&T> {
+        let x: &dyn Any = self;
+        x.downcast_ref()
+    }
+}
+/* AST_META: AST_ID=47 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=17 */
+
+#[derive(Debug)]
+pub enum InterpErrorKind<'tcx> {
+    /// The program caused undefined behavior.
+    UndefinedBehavior(UndefinedBehaviorInfo<'tcx>),
+    /// The program did something the interpreter does not support (some of these *might* be UB
+    /// but the interpreter is not sure).
+    Unsupported(UnsupportedOpInfo),
+    /// The program was invalid (ill-typed, bad MIR, not sufficiently monomorphized, ...).
+    InvalidProgram(InvalidProgramInfo<'tcx>),
+    /// The program exhausted the interpreter's resources (stack/heap too big,
+    /// execution takes too long, ...).
+    ResourceExhaustion(ResourceExhaustionInfo),
+    /// Stop execution for a machine-controlled reason. This is never raised by
+    /// the core engine itself.
+    MachineStop(Box<dyn MachineStopType>),
+}
+/* AST_META: AST_ID=48 | TYPE=FUNCTION | NAME=formatted_string | COMPLEXITY=7 | LINES=14 */
+
+impl InterpErrorKind<'_> {
+    /// Some errors do string formatting even if the error is never printed.
+    /// To avoid performance issues, there are places where we want to be sure to never raise these formatting errors,
+    /// so this method lets us detect them and `bug!` on unexpected errors.
+    pub fn formatted_string(&self) -> bool {
+        matches!(
+            self,
+            InterpErrorKind::Unsupported(UnsupportedOpInfo::Unsupported(_))
+                | InterpErrorKind::UndefinedBehavior(UndefinedBehaviorInfo::ValidationError { .. })
+                | InterpErrorKind::UndefinedBehavior(UndefinedBehaviorInfo::Ub(_))
+        )
+    }
+}
+/* AST_META: AST_ID=49 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=10 */
+
+// Macros for constructing / throwing `InterpErrorKind`
+#[macro_export]
+macro_rules! err_unsup {
+    ($($tt:tt)*) => {
+        $crate::mir::interpret::InterpErrorKind::Unsupported(
+            $crate::mir::interpret::UnsupportedOpInfo::$($tt)*
+        )
+    };
+}
+/* AST_META: AST_ID=50 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
+
+#[macro_export]
+macro_rules! err_unsup_format {
+    ($($tt:tt)*) => { $crate::err_unsup!(Unsupported(format!($($tt)*))) };
+}
+/* AST_META: AST_ID=51 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
+
+#[macro_export]
+macro_rules! err_inval {
+    ($($tt:tt)*) => {
+        $crate::mir::interpret::InterpErrorKind::InvalidProgram(
+            $crate::mir::interpret::InvalidProgramInfo::$($tt)*
+        )
+    };
+}
+/* AST_META: AST_ID=52 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
+
+#[macro_export]
+macro_rules! err_ub {
+    ($($tt:tt)*) => {
+        $crate::mir::interpret::InterpErrorKind::UndefinedBehavior(
+            $crate::mir::interpret::UndefinedBehaviorInfo::$($tt)*
+        )
+    };
+}
+/* AST_META: AST_ID=53 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
+
+#[macro_export]
+macro_rules! err_ub_format {
+    ($($tt:tt)*) => { $crate::err_ub!(Ub(format!($($tt)*))) };
+}
+/* AST_META: AST_ID=54 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=12 | LINES=19 */
+
+#[macro_export]
+macro_rules! err_ub_custom {
+    ($msg:expr $(, $($name:ident = $value:expr),* $(,)?)?) => {{
+        $(
+            let ($($name,)*) = ($($value,)*);
+        )?
+        $crate::err_ub!(Custom(
+            $crate::error::CustomSubdiagnostic {
+                msg: || $msg,
+                add_args: Box::new(move |mut set_arg| {
+                    $($(
+                        set_arg(stringify!($name).into(), crate::rustc_errors::IntoDiagArg::into_diag_arg($name, &mut None));
+                    )*)?
+                })
+            }
+        ))
+    }};
+}
+/* AST_META: AST_ID=55 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
+
+#[macro_export]
+macro_rules! err_exhaust {
+    ($($tt:tt)*) => {
+        $crate::mir::interpret::InterpErrorKind::ResourceExhaustion(
+            $crate::mir::interpret::ResourceExhaustionInfo::$($tt)*
+        )
+    };
+}
+/* AST_META: AST_ID=56 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=7 */
+
+#[macro_export]
+macro_rules! err_machine_stop {
+    ($($tt:tt)*) => {
+        $crate::mir::interpret::InterpErrorKind::MachineStop(Box::new($($tt)*))
+    };
+}
+/* AST_META: AST_ID=57 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+// In the `throw_*` macros, avoid `return` to make them work with `try {}`.
+/* AST_META: AST_ID=58 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=4 */
+#[macro_export]
+macro_rules! throw_unsup {
+    ($($tt:tt)*) => { do yeet $crate::err_unsup!($($tt)*) };
+}
+/* AST_META: AST_ID=59 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
+
+#[macro_export]
+macro_rules! throw_unsup_format {
+    ($($tt:tt)*) => { do yeet $crate::err_unsup_format!($($tt)*) };
+}
+/* AST_META: AST_ID=60 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
+
+#[macro_export]
+macro_rules! throw_inval {
+    ($($tt:tt)*) => { do yeet $crate::err_inval!($($tt)*) };
+}
+/* AST_META: AST_ID=61 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
+
+#[macro_export]
+macro_rules! throw_ub {
+    ($($tt:tt)*) => { do yeet $crate::err_ub!($($tt)*) };
+}
+/* AST_META: AST_ID=62 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
+
+#[macro_export]
+macro_rules! throw_ub_format {
+    ($($tt:tt)*) => { do yeet $crate::err_ub_format!($($tt)*) };
+}
+/* AST_META: AST_ID=63 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
+
+#[macro_export]
+macro_rules! throw_ub_custom {
+    ($($tt:tt)*) => { do yeet $crate::err_ub_custom!($($tt)*) };
+}
+/* AST_META: AST_ID=64 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
+
+#[macro_export]
+macro_rules! throw_exhaust {
+    ($($tt:tt)*) => { do yeet $crate::err_exhaust!($($tt)*) };
+}
+/* AST_META: AST_ID=65 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=5 */
+
+#[macro_export]
+macro_rules! throw_machine_stop {
+    ($($tt:tt)*) => { do yeet $crate::err_machine_stop!($($tt)*) };
+}
+/* AST_META: AST_ID=66 | TYPE=FUNCTION | NAME=Guard; | COMPLEXITY=12 | LINES=15 */
+
+/// Guard type that panics on drop.
+#[derive(Debug)]
+struct Guard;
+
+impl Drop for Guard {
+    fn drop(&mut self) {
+        // We silence the guard if we are already panicking, to avoid double-panics.
+        if !std::thread::panicking() {
+            panic!(
+                "an interpreter error got improperly discarded; use `discard_err()` if this is intentional"
+            );
+        }
+    }
+}
+/* AST_META: AST_ID=67 | TYPE=STRUCT | NAME=InterpResult | COMPLEXITY=4 | LINES=11 */
+
+/// The result type used by the interpreter. This is a newtype around `Result`
+/// to block access to operations like `ok()` that discard UB errors.
+///
+/// We also make things panic if this type is ever implicitly dropped.
+#[derive(Debug)]
+#[must_use]
+pub struct InterpResult<'tcx, T = ()> {
+    res: Result<T, InterpErrorInfo<'tcx>>,
+    guard: Guard,
+}
+/* AST_META: AST_ID=68 | TYPE=FUNCTION | NAME=from_output | COMPLEXITY=11 | LINES=18 */
+
+impl<'tcx, T> ops::Try for InterpResult<'tcx, T> {
+    type Output = T;
+    type Residual = InterpResult<'tcx, convert::Infallible>;
+
+    #[inline]
+    fn from_output(output: Self::Output) -> Self {
+        InterpResult::new(Ok(output))
+    }
+
+    #[inline]
+    fn branch(self) -> ops::ControlFlow<Self::Residual, Self::Output> {
+        match self.disarm() {
+            Ok(v) => ops::ControlFlow::Continue(v),
+            Err(e) => ops::ControlFlow::Break(InterpResult::new(Err(e))),
+        }
+    }
+}
+/* AST_META: AST_ID=69 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
+
+impl<'tcx, T> ops::Residual<T> for InterpResult<'tcx, convert::Infallible> {
+    type TryType = InterpResult<'tcx, T>;
+}
+/* AST_META: AST_ID=70 | TYPE=FUNCTION | NAME=from_residual | COMPLEXITY=9 | LINES=10 */
+
+impl<'tcx, T> ops::FromResidual for InterpResult<'tcx, T> {
+    #[inline]
+    #[track_caller]
+    fn from_residual(residual: InterpResult<'tcx, convert::Infallible>) -> Self {
+        match residual.disarm() {
+            Err(e) => Self::new(Err(e)),
+        }
+    }
+}
+/* AST_META: AST_ID=71 | TYPE=FUNCTION | NAME=from_residual | COMPLEXITY=5 | LINES=8 */
+
+// Allow `yeet`ing `InterpError` in functions returning `InterpResult_`.
+impl<'tcx, T> ops::FromResidual<ops::Yeet<InterpErrorKind<'tcx>>> for InterpResult<'tcx, T> {
+    #[inline]
+    fn from_residual(ops::Yeet(e): ops::Yeet<InterpErrorKind<'tcx>>) -> Self {
+        Self::new(Err(e.into()))
+    }
+}
+/* AST_META: AST_ID=72 | TYPE=FUNCTION | NAME=from_residual | COMPLEXITY=11 | LINES=13 */
+
+// Allow `?` on `Result<_, InterpError>` in functions returning `InterpResult_`.
+// This is useful e.g. for `option.ok_or_else(|| err_ub!(...))`.
+impl<'tcx, T, E: Into<InterpErrorInfo<'tcx>>> ops::FromResidual<Result<convert::Infallible, E>>
+    for InterpResult<'tcx, T>
+{
+    #[inline]
+    fn from_residual(residual: Result<convert::Infallible, E>) -> Self {
+        match residual {
+            Err(e) => Self::new(Err(e.into())),
+        }
+    }
+}
+/* AST_META: AST_ID=73 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=7 */
+
+impl<'tcx, T, E: Into<InterpErrorInfo<'tcx>>> From<Result<T, E>> for InterpResult<'tcx, T> {
+    #[inline]
+    fn from(value: Result<T, E>) -> Self {
+        Self::new(value.map_err(|e| e.into()))
+    }
+}
+/* AST_META: AST_ID=74 | TYPE=FUNCTION | NAME=from_iter | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx, T, V: FromIterator<T>> FromIterator<InterpResult<'tcx, T>> for InterpResult<'tcx, V> {
+    fn from_iter<I: IntoIterator<Item = InterpResult<'tcx, T>>>(iter: I) -> Self {
+        Self::new(iter.into_iter().map(|x| x.disarm()).collect())
+    }
+}
+/* AST_META: AST_ID=75 | TYPE=FUNCTION | NAME=new | COMPLEXITY=33 | LINES=95 */
+
+impl<'tcx, T> InterpResult<'tcx, T> {
+    #[inline(always)]
+    fn new(res: Result<T, InterpErrorInfo<'tcx>>) -> Self {
+        Self { res, guard: Guard }
+    }
+
+    #[inline(always)]
+    fn disarm(self) -> Result<T, InterpErrorInfo<'tcx>> {
+        mem::forget(self.guard);
+        self.res
+    }
+
+    /// Discard the error information in this result. Only use this if ignoring Undefined Behavior is okay!
+    #[inline]
+    pub fn discard_err(self) -> Option<T> {
+        self.disarm().ok()
+    }
+
+    /// Look at the `Result` wrapped inside of this.
+    /// Must only be used to report the error!
+    #[inline]
+    pub fn report_err(self) -> Result<T, InterpErrorInfo<'tcx>> {
+        self.disarm()
+    }
+
+    #[inline]
+    pub fn map<U>(self, f: impl FnOnce(T) -> U) -> InterpResult<'tcx, U> {
+        InterpResult::new(self.disarm().map(f))
+    }
+
+    #[inline]
+    pub fn map_err_info(
+        self,
+        f: impl FnOnce(InterpErrorInfo<'tcx>) -> InterpErrorInfo<'tcx>,
+    ) -> InterpResult<'tcx, T> {
+        InterpResult::new(self.disarm().map_err(f))
+    }
+
+    #[inline]
+    pub fn map_err_kind(
+        self,
+        f: impl FnOnce(InterpErrorKind<'tcx>) -> InterpErrorKind<'tcx>,
+    ) -> InterpResult<'tcx, T> {
+        InterpResult::new(self.disarm().map_err(|mut e| {
+            e.0.kind = f(e.0.kind);
+            e
+        }))
+    }
+
+    #[inline]
+    pub fn inspect_err_kind(self, f: impl FnOnce(&InterpErrorKind<'tcx>)) -> InterpResult<'tcx, T> {
+        InterpResult::new(self.disarm().inspect_err(|e| f(&e.0.kind)))
+    }
+
+    #[inline]
+    #[track_caller]
+    pub fn unwrap(self) -> T {
+        self.disarm().unwrap()
+    }
+
+    #[inline]
+    #[track_caller]
+    pub fn unwrap_or_else(self, f: impl FnOnce(InterpErrorInfo<'tcx>) -> T) -> T {
+        self.disarm().unwrap_or_else(f)
+    }
+
+    #[inline]
+    #[track_caller]
+    pub fn expect(self, msg: &str) -> T {
+        self.disarm().expect(msg)
+    }
+
+    #[inline]
+    pub fn and_then<U>(self, f: impl FnOnce(T) -> InterpResult<'tcx, U>) -> InterpResult<'tcx, U> {
+        InterpResult::new(self.disarm().and_then(|t| f(t).disarm()))
+    }
+
+    /// Returns success if both `self` and `other` succeed, while ensuring we don't
+    /// accidentally drop an error.
+    ///
+    /// If both are an error, `self` will be reported.
+    #[inline]
+    pub fn and<U>(self, other: InterpResult<'tcx, U>) -> InterpResult<'tcx, (T, U)> {
+        match self.disarm() {
+            Ok(t) => interp_ok((t, other?)),
+            Err(e) => {
+                // Discard the other error.
+                drop(other.disarm());
+                // Return `self`.
+                InterpResult::new(Err(e))
+            }
+        }
+    }
+}
+/* AST_META: AST_ID=76 | TYPE=FUNCTION | NAME=interp_ok | COMPLEXITY=2 | LINES=5 */
+
+#[inline(always)]
+pub fn interp_ok<'tcx, T>(x: T) -> InterpResult<'tcx, T> {
+    InterpResult::new(Ok(x))
+}

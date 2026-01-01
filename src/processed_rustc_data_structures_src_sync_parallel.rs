@@ -1,36 +1,263 @@
-/* FP:parallel.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_USE_0001
-/* FP:parallel.rs-0002 */ use std :: any :: Any ;
-/* FP:parallel.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_USE_0002
-/* FP:parallel.rs-0004 */ use std :: panic :: { AssertUnwindSafe , catch_unwind , resume_unwind } ;
-/* FP:parallel.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_USE_0003
-/* FP:parallel.rs-0006 */ use parking_lot :: Mutex ;
-/* FP:parallel.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_USE_0004
-/* FP:parallel.rs-0008 */ use crate :: FatalErrorMarker ;
-/* FP:parallel.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_USE_0005
-/* FP:parallel.rs-0010 */ use crate :: sync :: { DynSend , DynSync , FromDyn , IntoDynSyncSend , mode } ;
-/* FP:parallel.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_STRUCT_0006
-/* FP:parallel.rs-0012 */ # [doc = " A guard used to hold panics that occur during a parallel section to later by unwound."] # [doc = " This is used for the parallel compiler to prevent fatal errors from non-deterministically"] # [doc = " hiding errors by ensuring that everything in the section has completed executing before"] # [doc = " continuing with unwinding. It's also used for the non-parallel code to ensure error message"] # [doc = " output match the parallel compiler for testing purposes."] pub struct ParallelGuard { panic : Mutex < Option < IntoDynSyncSend < Box < dyn Any + Send + 'static > > > > , }
-/* FP:parallel.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_IMPL_0007
-/* FP:parallel.rs-0014 */ impl ParallelGuard { pub fn run < R > (& self , f : impl FnOnce () -> R) -> Option < R > { catch_unwind (AssertUnwindSafe (f)) . map_err (| err | { let mut panic = self . panic . lock () ; if panic . is_none () || ! (* err) . is :: < FatalErrorMarker > () { * panic = Some (IntoDynSyncSend (err)) ; } }) . ok () } }
-/* FP:parallel.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_FN_0008
-/* FP:parallel.rs-0016 */ # [doc = " This gives access to a fresh parallel guard in the closure and will unwind any panics"] # [doc = " caught in it after the closure returns."] # [inline] pub fn parallel_guard < R > (f : impl FnOnce (& ParallelGuard) -> R) -> R { let guard = ParallelGuard { panic : Mutex :: new (None) } ; let ret = f (& guard) ; if let Some (IntoDynSyncSend (panic)) = guard . panic . into_inner () { resume_unwind (panic) ; } ret }
-/* FP:parallel.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_FN_0009
-/* FP:parallel.rs-0018 */ fn serial_join < A , B , RA , RB > (oper_a : A , oper_b : B) -> (RA , RB) where A : FnOnce () -> RA , B : FnOnce () -> RB , { let (a , b) = parallel_guard (| guard | { let a = guard . run (oper_a) ; let b = guard . run (oper_b) ; (a , b) }) ; (a . unwrap () , b . unwrap ()) }
-/* FP:parallel.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_MACRO_0010
-/* FP:parallel.rs-0020 */ # [doc = " Runs a list of blocks in parallel. The first block is executed immediately on"] # [doc = " the current thread. Use that for the longest running block."] # [macro_export] macro_rules ! parallel { (impl $ fblock : block [$ ($ c : expr ,) *] [$ block : expr $ (, $ rest : expr) *]) => { parallel ! (impl $ fblock [$ block , $ ($ c ,) *] [$ ($ rest) ,*]) } ; (impl $ fblock : block [$ ($ blocks : expr ,) *] []) => { $ crate :: sync :: parallel_guard (| guard | { $ crate :: sync :: scope (| s | { $ (let block = $ crate :: sync :: FromDyn :: from (|| $ blocks) ; s . spawn (move | _ | { guard . run (move || block . into_inner () ()) ; }) ;) * guard . run (|| $ fblock) ; }) ; }) ; } ; ($ fblock : block , $ ($ blocks : block) ,*) => { if $ crate :: sync :: is_dyn_thread_safe () { parallel ! (impl $ fblock [] [$ ($ blocks) ,*]) ; } else { $ crate :: sync :: parallel_guard (| guard | { guard . run (|| $ fblock) ; $ (guard . run (|| $ blocks) ;) * }) ; } } ; }
-/* FP:parallel.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_FN_0011
-/* FP:parallel.rs-0022 */ pub fn spawn (func : impl FnOnce () + DynSend + 'static) { if mode :: is_dyn_thread_safe () { let func = FromDyn :: from (func) ; crate :: rustc_thread_pool :: spawn (| | { (func . into_inner ()) () ; }) ; } else { func () } }
-/* FP:parallel.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_FN_0012
-/* FP:parallel.rs-0024 */ pub fn scope < 'scope , OP , R > (op : OP) -> R where OP : FnOnce (& crate :: rustc_thread_pool :: Scope < 'scope >) -> R + DynSend , R : DynSend , { let op = FromDyn :: from (op) ; crate :: rustc_thread_pool :: scope (| s | FromDyn :: from (op . into_inner () (s))) . into_inner () }
-/* FP:parallel.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_FN_0013
-/* FP:parallel.rs-0026 */ # [inline] pub fn join < A , B , RA : DynSend , RB : DynSend > (oper_a : A , oper_b : B) -> (RA , RB) where A : FnOnce () -> RA + DynSend , B : FnOnce () -> RB + DynSend , { if mode :: is_dyn_thread_safe () { let oper_a = FromDyn :: from (oper_a) ; let oper_b = FromDyn :: from (oper_b) ; let (a , b) = parallel_guard (| guard | { crate :: rustc_thread_pool :: join (move | | guard . run (move | | FromDyn :: from (oper_a . into_inner () ())) , move | | guard . run (move | | FromDyn :: from (oper_b . into_inner () ())) ,) }) ; (a . unwrap () . into_inner () , b . unwrap () . into_inner ()) } else { serial_join (oper_a , oper_b) } }
-/* FP:parallel.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_FN_0014
-/* FP:parallel.rs-0028 */ fn par_slice < I : DynSend > (items : & mut [I] , guard : & ParallelGuard , for_each : impl Fn (& mut I) + DynSync + DynSend ,) { struct State < 'a , F > { for_each : FromDyn < F > , guard : & 'a ParallelGuard , group : usize , } fn par_rec < I : DynSend , F : Fn (& mut I) + DynSync + DynSend > (items : & mut [I] , state : & State < '_ , F > ,) { if items . len () <= state . group { for item in items { state . guard . run (| | (state . for_each) (item)) ; } } else { let (left , right) = items . split_at_mut (items . len () / 2) ; let mut left = state . for_each . derive (left) ; let mut right = state . for_each . derive (right) ; crate :: rustc_thread_pool :: join (move | | par_rec (* left , state) , move | | par_rec (* right , state)) ; } } let state = State { for_each : FromDyn :: from (for_each) , guard , group : std :: cmp :: max (items . len () / 128 , 1) , } ; par_rec (items , & state) }
-/* FP:parallel.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_FN_0015
-/* FP:parallel.rs-0030 */ pub fn par_for_each_in < I : DynSend , T : IntoIterator < Item = I > > (t : T , for_each : impl Fn (& I) + DynSync + DynSend ,) { parallel_guard (| guard | { if mode :: is_dyn_thread_safe () { let mut items : Vec < _ > = t . into_iter () . collect () ; par_slice (& mut items , guard , | i | for_each (& * i)) } else { t . into_iter () . for_each (| i | { guard . run (| | for_each (& i)) ; }) ; } }) ; }
-/* FP:parallel.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_FN_0016
-/* FP:parallel.rs-0032 */ # [doc = " This runs `for_each` in parallel for each iterator item. If one or more of the"] # [doc = " `for_each` calls returns `Err`, the function will also return `Err`. The error returned"] # [doc = " will be non-deterministic, but this is expected to be used with `ErrorGuaranteed` which"] # [doc = " are all equivalent."] pub fn try_par_for_each_in < T : IntoIterator , E : DynSend > (t : T , for_each : impl Fn (& < T as IntoIterator > :: Item) -> Result < () , E > + DynSync + DynSend ,) -> Result < () , E > where < T as IntoIterator > :: Item : DynSend , { parallel_guard (| guard | { if mode :: is_dyn_thread_safe () { let mut items : Vec < _ > = t . into_iter () . collect () ; let error = Mutex :: new (None) ; par_slice (& mut items , guard , | i | { if let Err (err) = for_each (& * i) { * error . lock () = Some (err) ; } }) ; if let Some (err) = error . into_inner () { Err (err) } else { Ok (()) } } else { t . into_iter () . filter_map (| i | guard . run (| | for_each (& i))) . fold (Ok (()) , Result :: and) } }) }
-/* FP:parallel.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_FN_0017
-/* FP:parallel.rs-0034 */ pub fn par_map < I : DynSend , T : IntoIterator < Item = I > , R : DynSend , C : FromIterator < R > > (t : T , map : impl Fn (I) -> R + DynSync + DynSend ,) -> C { parallel_guard (| guard | { if mode :: is_dyn_thread_safe () { let map = FromDyn :: from (map) ; let mut items : Vec < (Option < I > , Option < R >) > = t . into_iter () . map (| i | (Some (i) , None)) . collect () ; par_slice (& mut items , guard , | i | { i . 1 = Some (map (i . 0 . take () . unwrap ())) ; }) ; items . into_iter () . filter_map (| i | i . 1) . collect () } else { t . into_iter () . filter_map (| i | guard . run (| | map (i))) . collect () } }) }
-/* FP:parallel.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_sync_parallel_FN_0018
-/* FP:parallel.rs-0036 */ pub fn broadcast < R : DynSend > (op : impl Fn (usize) -> R + DynSync) -> Vec < R > { if mode :: is_dyn_thread_safe () { let op = FromDyn :: from (op) ; let results = crate :: rustc_thread_pool :: broadcast (| context | op . derive (op (context . index ()))) ; results . into_iter () . map (| r | r . into_inner ()) . collect () } else { vec ! [op (0)] } }
+// SRC: ../rust/compiler/rustc_data_structures/src/sync/parallel.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=5 */
+// This module defines parallel operations that are implemented in
+// one way for the serial compiler, and another way the parallel compiler.
+
+use std::any::Any;
+use std::panic::{AssertUnwindSafe, catch_unwind, resume_unwind};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+
+use parking_lot::Mutex;
+
+use crate::FatalErrorMarker;
+use crate::sync::{DynSend, DynSync, FromDyn, IntoDynSyncSend, mode};
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=ParallelGuard | COMPLEXITY=12 | LINES=9 */
+
+/// A guard used to hold panics that occur during a parallel section to later by unwound.
+/// This is used for the parallel compiler to prevent fatal errors from non-deterministically
+/// hiding errors by ensuring that everything in the section has completed executing before
+/// continuing with unwinding. It's also used for the non-parallel code to ensure error message
+/// output match the parallel compiler for testing purposes.
+pub struct ParallelGuard {
+    panic: Mutex<Option<IntoDynSyncSend<Box<dyn Any + Send + 'static>>>>,
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=run | COMPLEXITY=7 | LINES=13 */
+
+impl ParallelGuard {
+    pub fn run<R>(&self, f: impl FnOnce() -> R) -> Option<R> {
+        catch_unwind(AssertUnwindSafe(f))
+            .map_err(|err| {
+                let mut panic = self.panic.lock();
+                if panic.is_none() || !(*err).is::<FatalErrorMarker>() {
+                    *panic = Some(IntoDynSyncSend(err));
+                }
+            })
+            .ok()
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=parallel_guard | COMPLEXITY=6 | LINES=12 */
+
+/// This gives access to a fresh parallel guard in the closure and will unwind any panics
+/// caught in it after the closure returns.
+#[inline]
+pub fn parallel_guard<R>(f: impl FnOnce(&ParallelGuard) -> R) -> R {
+    let guard = ParallelGuard { panic: Mutex::new(None) };
+    let ret = f(&guard);
+    if let Some(IntoDynSyncSend(panic)) = guard.panic.into_inner() {
+        resume_unwind(panic);
+    }
+    ret
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=serial_join | COMPLEXITY=3 | LINES=13 */
+
+fn serial_join<A, B, RA, RB>(oper_a: A, oper_b: B) -> (RA, RB)
+where
+    A: FnOnce() -> RA,
+    B: FnOnce() -> RB,
+{
+    let (a, b) = parallel_guard(|guard| {
+        let a = guard.run(oper_a);
+        let b = guard.run(oper_b);
+        (a, b)
+    });
+    (a.unwrap(), b.unwrap())
+}
+/* AST_META: AST_ID=7 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=22 | LINES=35 */
+
+/// Runs a list of blocks in parallel. The first block is executed immediately on
+/// the current thread. Use that for the longest running block.
+#[macro_export]
+macro_rules! parallel {
+        (impl $fblock:block [$($c:expr,)*] [$block:expr $(, $rest:expr)*]) => {
+            parallel!(impl $fblock [$block, $($c,)*] [$($rest),*])
+        };
+        (impl $fblock:block [$($blocks:expr,)*] []) => {
+            $crate::sync::parallel_guard(|guard| {
+                $crate::sync::scope(|s| {
+                    $(
+                        let block = $crate::sync::FromDyn::from(|| $blocks);
+                        s.spawn(move |_| {
+                            guard.run(move || block.into_inner()());
+                        });
+                    )*
+                    guard.run(|| $fblock);
+                });
+            });
+        };
+        ($fblock:block, $($blocks:block),*) => {
+            if $crate::sync::is_dyn_thread_safe() {
+                // Reverse the order of the later blocks since Rayon executes them in reverse order
+                // when using a single thread. This ensures the execution order matches that
+                // of a single threaded rustc.
+                parallel!(impl $fblock [] [$($blocks),*]);
+            } else {
+                $crate::sync::parallel_guard(|guard| {
+                    guard.run(|| $fblock);
+                    $(guard.run(|| $blocks);)*
+                });
+            }
+        };
+    }
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=spawn | COMPLEXITY=7 | LINES=11 */
+
+pub fn spawn(func: impl FnOnce() + DynSend + 'static) {
+    if mode::is_dyn_thread_safe() {
+        let func = FromDyn::from(func);
+        crate::rustc_thread_pool::spawn(|| {
+            (func.into_inner())();
+        });
+    } else {
+        func()
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=scope | COMPLEXITY=2 | LINES=10 */
+
+// This function only works when `mode::is_dyn_thread_safe()`.
+pub fn scope<'scope, OP, R>(op: OP) -> R
+where
+    OP: FnOnce(&crate::rustc_thread_pool::Scope<'scope>) -> R + DynSend,
+    R: DynSend,
+{
+    let op = FromDyn::from(op);
+    crate::rustc_thread_pool::scope(|s| FromDyn::from(op.into_inner()(s))).into_inner()
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=join | COMPLEXITY=8 | LINES=21 */
+
+#[inline]
+pub fn join<A, B, RA: DynSend, RB: DynSend>(oper_a: A, oper_b: B) -> (RA, RB)
+where
+    A: FnOnce() -> RA + DynSend,
+    B: FnOnce() -> RB + DynSend,
+{
+    if mode::is_dyn_thread_safe() {
+        let oper_a = FromDyn::from(oper_a);
+        let oper_b = FromDyn::from(oper_b);
+        let (a, b) = parallel_guard(|guard| {
+            crate::rustc_thread_pool::join(
+                move || guard.run(move || FromDyn::from(oper_a.into_inner()())),
+                move || guard.run(move || FromDyn::from(oper_b.into_inner()())),
+            )
+        });
+        (a.unwrap().into_inner(), b.unwrap().into_inner())
+    } else {
+        serial_join(oper_a, oper_b)
+    }
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=par_slice | COMPLEXITY=14 | LINES=35 */
+
+fn par_slice<I: DynSend>(
+    items: &mut [I],
+    guard: &ParallelGuard,
+    for_each: impl Fn(&mut I) + DynSync + DynSend,
+) {
+    struct State<'a, F> {
+        for_each: FromDyn<F>,
+        guard: &'a ParallelGuard,
+        group: usize,
+    }
+
+    fn par_rec<I: DynSend, F: Fn(&mut I) + DynSync + DynSend>(
+        items: &mut [I],
+        state: &State<'_, F>,
+    ) {
+        if items.len() <= state.group {
+            for item in items {
+                state.guard.run(|| (state.for_each)(item));
+            }
+        } else {
+            let (left, right) = items.split_at_mut(items.len() / 2);
+            let mut left = state.for_each.derive(left);
+            let mut right = state.for_each.derive(right);
+            crate::rustc_thread_pool::join(move || par_rec(*left, state), move || par_rec(*right, state));
+        }
+    }
+
+    let state = State {
+        for_each: FromDyn::from(for_each),
+        guard,
+        group: std::cmp::max(items.len() / 128, 1),
+    };
+    par_rec(items, &state)
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=par_for_each_in | COMPLEXITY=8 | LINES=16 */
+
+pub fn par_for_each_in<I: DynSend, T: IntoIterator<Item = I>>(
+    t: T,
+    for_each: impl Fn(&I) + DynSync + DynSend,
+) {
+    parallel_guard(|guard| {
+        if mode::is_dyn_thread_safe() {
+            let mut items: Vec<_> = t.into_iter().collect();
+            par_slice(&mut items, guard, |i| for_each(&*i))
+        } else {
+            t.into_iter().for_each(|i| {
+                guard.run(|| for_each(&i));
+            });
+        }
+    });
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=try_par_for_each_in | COMPLEXITY=19 | LINES=30 */
+
+/// This runs `for_each` in parallel for each iterator item. If one or more of the
+/// `for_each` calls returns `Err`, the function will also return `Err`. The error returned
+/// will be non-deterministic, but this is expected to be used with `ErrorGuaranteed` which
+/// are all equivalent.
+pub fn try_par_for_each_in<T: IntoIterator, E: DynSend>(
+    t: T,
+    for_each: impl Fn(&<T as IntoIterator>::Item) -> Result<(), E> + DynSync + DynSend,
+) -> Result<(), E>
+where
+    <T as IntoIterator>::Item: DynSend,
+{
+    parallel_guard(|guard| {
+        if mode::is_dyn_thread_safe() {
+            let mut items: Vec<_> = t.into_iter().collect();
+
+            let error = Mutex::new(None);
+
+            par_slice(&mut items, guard, |i| {
+                if let Err(err) = for_each(&*i) {
+                    *error.lock() = Some(err);
+                }
+            });
+
+            if let Some(err) = error.into_inner() { Err(err) } else { Ok(()) }
+        } else {
+            t.into_iter().filter_map(|i| guard.run(|| for_each(&i))).fold(Ok(()), Result::and)
+        }
+    })
+}
+/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=par_map | COMPLEXITY=9 | LINES=22 */
+
+pub fn par_map<I: DynSend, T: IntoIterator<Item = I>, R: DynSend, C: FromIterator<R>>(
+    t: T,
+    map: impl Fn(I) -> R + DynSync + DynSend,
+) -> C {
+    parallel_guard(|guard| {
+        if mode::is_dyn_thread_safe() {
+            let map = FromDyn::from(map);
+
+            let mut items: Vec<(Option<I>, Option<R>)> =
+                t.into_iter().map(|i| (Some(i), None)).collect();
+
+            par_slice(&mut items, guard, |i| {
+                i.1 = Some(map(i.0.take().unwrap()));
+            });
+
+            items.into_iter().filter_map(|i| i.1).collect()
+        } else {
+            t.into_iter().filter_map(|i| guard.run(|| map(i))).collect()
+        }
+    })
+}
+/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=broadcast | COMPLEXITY=6 | LINES=10 */
+
+pub fn broadcast<R: DynSend>(op: impl Fn(usize) -> R + DynSync) -> Vec<R> {
+    if mode::is_dyn_thread_safe() {
+        let op = FromDyn::from(op);
+        let results = crate::rustc_thread_pool::broadcast(|context| op.derive(op(context.index())));
+        results.into_iter().map(|r| r.into_inner()).collect()
+    } else {
+        vec![op(0)]
+    }
+}

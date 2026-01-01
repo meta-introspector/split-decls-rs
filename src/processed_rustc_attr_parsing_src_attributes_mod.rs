@@ -1,85 +1,361 @@
-/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_USE_0001
-/* FP:mod.rs-0002 */ use std :: marker :: PhantomData ;
-/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_USE_0002
-/* FP:mod.rs-0004 */ use crate :: rustc_feature :: { AttributeTemplate , AttributeType , template } ;
-/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_USE_0003
-/* FP:mod.rs-0006 */ use crate :: rustc_complete :: attrs :: AttributeKind ;
-/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_USE_0004
-/* FP:mod.rs-0008 */ use crate :: rustc_complete :: { Span , Symbol } ;
-/* FP:mod.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_USE_0005
-/* FP:mod.rs-0010 */ use thin_vec :: ThinVec ;
-/* FP:mod.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_USE_0006
-/* FP:mod.rs-0012 */ use crate :: context :: { AcceptContext , FinalizeContext , Stage } ;
-/* FP:mod.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_USE_0007
-/* FP:mod.rs-0014 */ use crate :: parser :: ArgParser ;
-/* FP:mod.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_USE_0008
-/* FP:mod.rs-0016 */ use crate :: session_diagnostics :: UnusedMultiple ;
-/* FP:mod.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_USE_0009
-/* FP:mod.rs-0018 */ use crate :: target_checking :: AllowedTargets ;
-/* FP:mod.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0010
-/* FP:mod.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0011
-/* FP:mod.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0012
-/* FP:mod.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0013
-/* FP:mod.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0014
-/* FP:mod.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0015
-/* FP:mod.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0016
-/* FP:mod.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0017
-/* FP:mod.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0018
-/* FP:mod.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0019
-/* FP:mod.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0020
-/* FP:mod.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0021
-/* FP:mod.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0022
-/* FP:mod.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0023
-/* FP:mod.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0024
-/* FP:mod.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0025
-/* FP:mod.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0026
-/* FP:mod.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0027
-/* FP:mod.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0028
-/* FP:mod.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0029
-/* FP:mod.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0030
-/* FP:mod.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0031
-/* FP:mod.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0032
-/* FP:mod.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0033
-/* FP:mod.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0034
-/* FP:mod.rs-0069 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0035
-/* FP:mod.rs-0071 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0036
-/* FP:mod.rs-0073 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0037
-/* FP:mod.rs-0075 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_MOD_0038
-/* FP:mod.rs-0077 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_TYPE_0039
-/* FP:mod.rs-0078 */ type AcceptFn < T , S > = for < 'sess > fn (& mut T , & mut AcceptContext < '_ , 'sess , S > , & ArgParser < '_ >) ;
-/* FP:mod.rs-0079 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_TYPE_0040
-/* FP:mod.rs-0080 */ type AcceptMapping < T , S > = & 'static [(& 'static [Symbol] , AttributeTemplate , AcceptFn < T , S >)] ;
-/* FP:mod.rs-0081 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_TRAIT_0041
-/* FP:mod.rs-0082 */ # [doc = " An [`AttributeParser`] is a type which searches for syntactic attributes."] # [doc = ""] # [doc = " Parsers are often tiny state machines that gets to see all syntactical attributes on an item."] # [doc = " [`Default::default`] creates a fresh instance that sits in some kind of initial state, usually that the"] # [doc = " attribute it is looking for was not yet seen."] # [doc = ""] # [doc = " Then, it defines what paths this group will accept in [`AttributeParser::ATTRIBUTES`]."] # [doc = " These are listed as pairs, of symbols and function pointers. The function pointer will"] # [doc = " be called when that attribute is found on an item, which can influence the state of the little"] # [doc = " state machine."] # [doc = ""] # [doc = " Finally, after all attributes on an item have been seen, and possibly been accepted,"] # [doc = " the [`finalize`](AttributeParser::finalize) functions for all attribute parsers are called. Each can then report"] # [doc = " whether it has seen the attribute it has been looking for."] # [doc = ""] # [doc = " The state machine is automatically reset to parse attributes on the next item."] # [doc = ""] # [doc = " For a simpler attribute parsing interface, consider using [`SingleAttributeParser`]"] # [doc = " or [`CombineAttributeParser`] instead."] pub (crate) trait AttributeParser < S : Stage > : Default + 'static { # [doc = " The symbols for the attributes that this parser is interested in."] # [doc = ""] # [doc = " If an attribute has this symbol, the `accept` function will be called on it."] const ATTRIBUTES : AcceptMapping < Self , S > ; const ALLOWED_TARGETS : AllowedTargets ; const TYPE : AttributeType = AttributeType :: Normal ; # [doc = " The parser has gotten a chance to accept the attributes on an item,"] # [doc = " here it can produce an attribute."] # [doc = ""] # [doc = " All finalize methods of all parsers are unconditionally called."] # [doc = " This means you can't unconditionally return `Some` here,"] # [doc = " that'd be equivalent to unconditionally applying an attribute to"] # [doc = " every single syntax item that could have attributes applied to it."] # [doc = " Your accept mappings should determine whether this returns something."] fn finalize (self , cx : & FinalizeContext < '_ , '_ , S >) -> Option < AttributeKind > ; }
-/* FP:mod.rs-0083 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_TRAIT_0042
-/* FP:mod.rs-0084 */ # [doc = " Alternative to [`AttributeParser`] that automatically handles state management."] # [doc = " A slightly simpler and more restricted way to convert attributes."] # [doc = " Assumes that an attribute can only appear a single time on an item,"] # [doc = " and errors when it sees more."] # [doc = ""] # [doc = " [`Single<T> where T: SingleAttributeParser`](Single) implements [`AttributeParser`]."] # [doc = ""] # [doc = " [`SingleAttributeParser`] can only convert attributes one-to-one, and cannot combine multiple"] # [doc = " attributes together like is necessary for `#[stable()]` and `#[unstable()]` for example."] pub (crate) trait SingleAttributeParser < S : Stage > : 'static { # [doc = " The single path of the attribute this parser accepts."] # [doc = ""] # [doc = " If you need the parser to accept more than one path, use [`AttributeParser`] instead"] const PATH : & [Symbol] ; # [doc = " Configures the precedence of attributes with the same `PATH` on a syntax node."] const ATTRIBUTE_ORDER : AttributeOrder ; # [doc = " Configures what to do when when the same attribute is"] # [doc = " applied more than once on the same syntax node."] # [doc = ""] # [doc = " [`ATTRIBUTE_ORDER`](Self::ATTRIBUTE_ORDER) specified which one is assumed to be correct,"] # [doc = " and this specified whether to, for example, warn or error on the other one."] const ON_DUPLICATE : OnDuplicate < S > ; const ALLOWED_TARGETS : AllowedTargets ; # [doc = " The template this attribute parser should implement. Used for diagnostics."] const TEMPLATE : AttributeTemplate ; const TYPE : AttributeType = AttributeType :: Normal ; # [doc = " Converts a single syntactical attribute to a single semantic attribute, or [`AttributeKind`]"] fn convert (cx : & mut AcceptContext < '_ , '_ , S > , args : & ArgParser < '_ >) -> Option < AttributeKind > ; }
-/* FP:mod.rs-0085 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_STRUCT_0043
-/* FP:mod.rs-0086 */ # [doc = " Use in combination with [`SingleAttributeParser`]."] # [doc = " `Single<T: SingleAttributeParser>` implements [`AttributeParser`]."] pub (crate) struct Single < T : SingleAttributeParser < S > , S : Stage > (PhantomData < (S , T) > , Option < (AttributeKind , Span) > ,) ;
-/* FP:mod.rs-0087 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_IMPL_0044
-/* FP:mod.rs-0088 */ impl < T : SingleAttributeParser < S > , S : Stage > Default for Single < T , S > { fn default () -> Self { Self (Default :: default () , Default :: default ()) } }
-/* FP:mod.rs-0089 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_IMPL_0045
-/* FP:mod.rs-0090 */ impl < T : SingleAttributeParser < S > , S : Stage > AttributeParser < S > for Single < T , S > { const ATTRIBUTES : AcceptMapping < Self , S > = & [(T :: PATH , < T as SingleAttributeParser < S > > :: TEMPLATE , | group : & mut Single < T , S > , cx , args | { if let Some (pa) = T :: convert (cx , args) { match T :: ATTRIBUTE_ORDER { AttributeOrder :: KeepInnermost => { if let Some ((_ , unused)) = group . 1 { T :: ON_DUPLICATE . exec :: < T > (cx , cx . attr_span , unused) ; return ; } } AttributeOrder :: KeepOutermost => { if let Some ((_ , used)) = group . 1 { T :: ON_DUPLICATE . exec :: < T > (cx , used , cx . attr_span) ; } } } group . 1 = Some ((pa , cx . attr_span)) ; } } ,)] ; const ALLOWED_TARGETS : AllowedTargets = T :: ALLOWED_TARGETS ; const TYPE : AttributeType = T :: TYPE ; fn finalize (self , _cx : & FinalizeContext < '_ , '_ , S >) -> Option < AttributeKind > { Some (self . 1 ? . 0) } }
-/* FP:mod.rs-0091 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_ENUM_0046
-/* FP:mod.rs-0092 */ pub (crate) enum OnDuplicate < S : Stage > { # [doc = " Give a default warning"] Warn , # [doc = " Duplicates will be a warning, with a note that this will be an error in the future."] WarnButFutureError , # [doc = " Give a default error"] Error , # [doc = " Ignore duplicates"] Ignore , # [doc = " Custom function called when a duplicate attribute is found."] # [doc = ""] # [doc = " - `unused` is the span of the attribute that was unused or bad because of some"] # [doc = "   duplicate reason (see [`AttributeOrder`])"] # [doc = " - `used` is the span of the attribute that was used in favor of the unused attribute"] Custom (fn (cx : & AcceptContext < '_ , '_ , S > , used : Span , unused : Span)) , }
-/* FP:mod.rs-0093 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_IMPL_0047
-/* FP:mod.rs-0094 */ impl < S : Stage > OnDuplicate < S > { fn exec < P : SingleAttributeParser < S > > (& self , cx : & mut AcceptContext < '_ , '_ , S > , used : Span , unused : Span ,) { match self { OnDuplicate :: Warn => cx . warn_unused_duplicate (used , unused) , OnDuplicate :: WarnButFutureError => cx . warn_unused_duplicate_future_error (used , unused) , OnDuplicate :: Error => { cx . emit_err (UnusedMultiple { this : used , other : unused , name : Symbol :: intern (& P :: PATH . into_iter () . map (| i | i . to_string ()) . collect :: < Vec < _ > > () . join ("..") ,) , }) ; } OnDuplicate :: Ignore => { } OnDuplicate :: Custom (f) => f (cx , used , unused) , } } }
-/* FP:mod.rs-0095 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_ENUM_0048
-/* FP:mod.rs-0096 */ pub (crate) enum AttributeOrder { # [doc = " Duplicates after the innermost instance of the attribute will be an error/warning."] # [doc = " Only keep the lowest attribute."] # [doc = ""] # [doc = " Attributes are processed from bottom to top, so this raises a warning/error on all the attributes"] # [doc = " further above the lowest one:"] # [doc = " ```"] # [doc = " #[stable(since=\"1.0\")] //~ WARNING duplicated attribute"] # [doc = " #[stable(since=\"2.0\")]"] # [doc = " ```"] KeepInnermost , # [doc = " Duplicates before the outermost instance of the attribute will be an error/warning."] # [doc = " Only keep the highest attribute."] # [doc = ""] # [doc = " Attributes are processed from bottom to top, so this raises a warning/error on all the attributes"] # [doc = " below the highest one:"] # [doc = " ```"] # [doc = " #[path=\"foo.rs\"]"] # [doc = " #[path=\"bar.rs\"] //~ WARNING duplicated attribute"] # [doc = " ```"] KeepOutermost , }
-/* FP:mod.rs-0097 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_TRAIT_0049
-/* FP:mod.rs-0098 */ # [doc = " An even simpler version of [`SingleAttributeParser`]:"] # [doc = " now automatically check that there are no arguments provided to the attribute."] # [doc = ""] # [doc = " [`WithoutArgs<T> where T: NoArgsAttributeParser`](WithoutArgs) implements [`SingleAttributeParser`]."] pub (crate) trait NoArgsAttributeParser < S : Stage > : 'static { const PATH : & [Symbol] ; const ON_DUPLICATE : OnDuplicate < S > ; const ALLOWED_TARGETS : AllowedTargets ; const TYPE : AttributeType = AttributeType :: Normal ; # [doc = " Create the [`AttributeKind`] given attribute's [`Span`]."] const CREATE : fn (Span) -> AttributeKind ; }
-/* FP:mod.rs-0099 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_STRUCT_0050
-/* FP:mod.rs-0100 */ pub (crate) struct WithoutArgs < T : NoArgsAttributeParser < S > , S : Stage > (PhantomData < (S , T) >) ;
-/* FP:mod.rs-0101 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_IMPL_0051
-/* FP:mod.rs-0102 */ impl < T : NoArgsAttributeParser < S > , S : Stage > Default for WithoutArgs < T , S > { fn default () -> Self { Self (Default :: default ()) } }
-/* FP:mod.rs-0103 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_IMPL_0052
-/* FP:mod.rs-0104 */ impl < T : NoArgsAttributeParser < S > , S : Stage > SingleAttributeParser < S > for WithoutArgs < T , S > { const PATH : & [Symbol] = T :: PATH ; const ATTRIBUTE_ORDER : AttributeOrder = AttributeOrder :: KeepOutermost ; const ON_DUPLICATE : OnDuplicate < S > = T :: ON_DUPLICATE ; const ALLOWED_TARGETS : AllowedTargets = T :: ALLOWED_TARGETS ; const TEMPLATE : AttributeTemplate = template ! (Word) ; const TYPE : AttributeType = T :: TYPE ; fn convert (cx : & mut AcceptContext < '_ , '_ , S > , args : & ArgParser < '_ >) -> Option < AttributeKind > { if let Err (span) = args . no_args () { cx . expected_no_args (span) ; } Some (T :: CREATE (cx . attr_span)) } }
-/* FP:mod.rs-0105 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_TYPE_0053
-/* FP:mod.rs-0106 */ type ConvertFn < E > = fn (ThinVec < E > , Span) -> AttributeKind ;
-/* FP:mod.rs-0107 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_TRAIT_0054
-/* FP:mod.rs-0108 */ # [doc = " Alternative to [`AttributeParser`] that automatically handles state management."] # [doc = " If multiple attributes appear on an element, combines the values of each into a"] # [doc = " [`ThinVec`]."] # [doc = " [`Combine<T> where T: CombineAttributeParser`](Combine) implements [`AttributeParser`]."] # [doc = ""] # [doc = " [`CombineAttributeParser`] can only convert a single kind of attribute, and cannot combine multiple"] # [doc = " attributes together like is necessary for `#[stable()]` and `#[unstable()]` for example."] pub (crate) trait CombineAttributeParser < S : Stage > : 'static { const PATH : & [crate :: rustc_span :: Symbol] ; type Item ; # [doc = " A function that converts individual items (of type [`Item`](Self::Item)) into the final attribute."] # [doc = ""] # [doc = " For example, individual representations fomr `#[repr(...)]` attributes into an `AttributeKind::Repr(x)`,"] # [doc = "  where `x` is a vec of these individual reprs."] const CONVERT : ConvertFn < Self :: Item > ; const ALLOWED_TARGETS : AllowedTargets ; # [doc = " The template this attribute parser should implement. Used for diagnostics."] const TEMPLATE : AttributeTemplate ; const TYPE : AttributeType = AttributeType :: Normal ; # [doc = " Converts a single syntactical attribute to a number of elements of the semantic attribute, or [`AttributeKind`]"] fn extend < 'c > (cx : & 'c mut AcceptContext < '_ , '_ , S > , args : & 'c ArgParser < '_ > ,) -> impl IntoIterator < Item = Self :: Item > + 'c ; }
-/* FP:mod.rs-0109 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_STRUCT_0055
-/* FP:mod.rs-0110 */ # [doc = " Use in combination with [`CombineAttributeParser`]."] # [doc = " `Combine<T: CombineAttributeParser>` implements [`AttributeParser`]."] pub (crate) struct Combine < T : CombineAttributeParser < S > , S : Stage > { phantom : PhantomData < (S , T) > , # [doc = " A list of all items produced by parsing attributes so far. One attribute can produce any amount of items."] items : ThinVec < < T as CombineAttributeParser < S > > :: Item > , # [doc = " The full span of the first attribute that was encountered."] first_span : Option < Span > , }
-/* FP:mod.rs-0111 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_IMPL_0056
-/* FP:mod.rs-0112 */ impl < T : CombineAttributeParser < S > , S : Stage > Default for Combine < T , S > { fn default () -> Self { Self { phantom : Default :: default () , items : Default :: default () , first_span : Default :: default () , } } }
-/* FP:mod.rs-0113 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_mod_IMPL_0057
-/* FP:mod.rs-0114 */ impl < T : CombineAttributeParser < S > , S : Stage > AttributeParser < S > for Combine < T , S > { const ATTRIBUTES : AcceptMapping < Self , S > = & [(T :: PATH , T :: TEMPLATE , | group : & mut Combine < T , S > , cx , args | { group . first_span . get_or_insert (cx . attr_span) ; group . items . extend (T :: extend (cx , args)) })] ; const ALLOWED_TARGETS : AllowedTargets = T :: ALLOWED_TARGETS ; const TYPE : AttributeType = T :: TYPE ; fn finalize (self , _cx : & FinalizeContext < '_ , '_ , S >) -> Option < AttributeKind > { if let Some (first_span) = self . first_span { Some (T :: CONVERT (self . items , first_span)) } else { None } } }
+// SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/mod.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=14 | LINES=23 */
+// This module defines traits for attribute parsers, little state machines that recognize and parse
+// attributes out of a longer list of attributes. The main trait is called [`AttributeParser`].
+// You can find more docs about [`AttributeParser`]s on the trait itself.
+// However, for many types of attributes, implementing [`AttributeParser`] is not necessary.
+// It allows for a lot of flexibility you might not want.
+//
+// Specifically, you might not care about managing the state of your [`AttributeParser`]
+// state machine yourself. In this case you can choose to implement:
+//
+// - [`SingleAttributeParser`](crate::attributes::SingleAttributeParser): makes it easy to implement an attribute which should error if it
+// appears more than once in a list of attributes
+// - [`CombineAttributeParser`](crate::attributes::CombineAttributeParser): makes it easy to implement an attribute which should combine the
+// contents of attributes, if an attribute appear multiple times in a list
+//
+// By default, attributes are allowed anywhere. When adding an attribute that should only be used
+// at the crate root, consider setting the `TYPE` in the parser trait to
+// [`AttributeType::CrateLevel`](crate::rustc_feature::AttributeType::CrateLevel).
+//
+// Attributes should be added to `crate::context::ATTRIBUTE_PARSERS` to be parsed.
+
+use std::marker::PhantomData;
+
+use crate::rustc_feature::{AttributeTemplate, AttributeType, template};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::{Span, Symbol};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use thin_vec::ThinVec;
+
+use crate::context::{AcceptContext, FinalizeContext, Stage};
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=16 | LINES=78 */
+use crate::parser::ArgParser;
+use crate::session_diagnostics::UnusedMultiple;
+use crate::target_checking::AllowedTargets;
+
+/// All the parsers require roughly the same imports, so this prelude has most of the often-needed ones.
+
+
+type AcceptFn<T, S> = for<'sess> fn(&mut T, &mut AcceptContext<'_, 'sess, S>, &ArgParser<'_>);
+type AcceptMapping<T, S> = &'static [(&'static [Symbol], AttributeTemplate, AcceptFn<T, S>)];
+
+/// An [`AttributeParser`] is a type which searches for syntactic attributes.
+///
+/// Parsers are often tiny state machines that gets to see all syntactical attributes on an item.
+/// [`Default::default`] creates a fresh instance that sits in some kind of initial state, usually that the
+/// attribute it is looking for was not yet seen.
+///
+/// Then, it defines what paths this group will accept in [`AttributeParser::ATTRIBUTES`].
+/// These are listed as pairs, of symbols and function pointers. The function pointer will
+/// be called when that attribute is found on an item, which can influence the state of the little
+/// state machine.
+///
+/// Finally, after all attributes on an item have been seen, and possibly been accepted,
+/// the [`finalize`](AttributeParser::finalize) functions for all attribute parsers are called. Each can then report
+/// whether it has seen the attribute it has been looking for.
+///
+/// The state machine is automatically reset to parse attributes on the next item.
+///
+/// For a simpler attribute parsing interface, consider using [`SingleAttributeParser`]
+/// or [`CombineAttributeParser`] instead.
+pub(crate) trait AttributeParser<S: Stage>: Default + 'static {
+    /// The symbols for the attributes that this parser is interested in.
+    ///
+    /// If an attribute has this symbol, the `accept` function will be called on it.
+    const ATTRIBUTES: AcceptMapping<Self, S>;
+
+    const ALLOWED_TARGETS: AllowedTargets;
+
+    const TYPE: AttributeType = AttributeType::Normal;
+
+    /// The parser has gotten a chance to accept the attributes on an item,
+    /// here it can produce an attribute.
+    ///
+    /// All finalize methods of all parsers are unconditionally called.
+    /// This means you can't unconditionally return `Some` here,
+    /// that'd be equivalent to unconditionally applying an attribute to
+    /// every single syntax item that could have attributes applied to it.
+    /// Your accept mappings should determine whether this returns something.
+    fn finalize(self, cx: &FinalizeContext<'_, '_, S>) -> Option<AttributeKind>;
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=13 | LINES=36 */
+
+/// Alternative to [`AttributeParser`] that automatically handles state management.
+/// A slightly simpler and more restricted way to convert attributes.
+/// Assumes that an attribute can only appear a single time on an item,
+/// and errors when it sees more.
+///
+/// [`Single<T> where T: SingleAttributeParser`](Single) implements [`AttributeParser`].
+///
+/// [`SingleAttributeParser`] can only convert attributes one-to-one, and cannot combine multiple
+/// attributes together like is necessary for `#[stable()]` and `#[unstable()]` for example.
+pub(crate) trait SingleAttributeParser<S: Stage>: 'static {
+    /// The single path of the attribute this parser accepts.
+    ///
+    /// If you need the parser to accept more than one path, use [`AttributeParser`] instead
+    const PATH: &[Symbol];
+
+    /// Configures the precedence of attributes with the same `PATH` on a syntax node.
+    const ATTRIBUTE_ORDER: AttributeOrder;
+
+    /// Configures what to do when when the same attribute is
+    /// applied more than once on the same syntax node.
+    ///
+    /// [`ATTRIBUTE_ORDER`](Self::ATTRIBUTE_ORDER) specified which one is assumed to be correct,
+    /// and this specified whether to, for example, warn or error on the other one.
+    const ON_DUPLICATE: OnDuplicate<S>;
+
+    const ALLOWED_TARGETS: AllowedTargets;
+
+    /// The template this attribute parser should implement. Used for diagnostics.
+    const TEMPLATE: AttributeTemplate;
+
+    const TYPE: AttributeType = AttributeType::Normal;
+
+    /// Converts a single syntactical attribute to a single semantic attribute, or [`AttributeKind`]
+    fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser<'_>) -> Option<AttributeKind>;
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=default | COMPLEXITY=5 | LINES=13 */
+
+/// Use in combination with [`SingleAttributeParser`].
+/// `Single<T: SingleAttributeParser>` implements [`AttributeParser`].
+pub(crate) struct Single<T: SingleAttributeParser<S>, S: Stage>(
+    PhantomData<(S, T)>,
+    Option<(AttributeKind, Span)>,
+);
+
+impl<T: SingleAttributeParser<S>, S: Stage> Default for Single<T, S> {
+    fn default() -> Self {
+        Self(Default::default(), Default::default())
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=23 | LINES=36 */
+
+impl<T: SingleAttributeParser<S>, S: Stage> AttributeParser<S> for Single<T, S> {
+    const ATTRIBUTES: AcceptMapping<Self, S> = &[(
+        T::PATH,
+        <T as SingleAttributeParser<S>>::TEMPLATE,
+        |group: &mut Single<T, S>, cx, args| {
+            if let Some(pa) = T::convert(cx, args) {
+                match T::ATTRIBUTE_ORDER {
+                    // keep the first and report immediately. ignore this attribute
+                    AttributeOrder::KeepInnermost => {
+                        if let Some((_, unused)) = group.1 {
+                            T::ON_DUPLICATE.exec::<T>(cx, cx.attr_span, unused);
+                            return;
+                        }
+                    }
+                    // keep the new one and warn about the previous,
+                    // then replace
+                    AttributeOrder::KeepOutermost => {
+                        if let Some((_, used)) = group.1 {
+                            T::ON_DUPLICATE.exec::<T>(cx, used, cx.attr_span);
+                        }
+                    }
+                }
+
+                group.1 = Some((pa, cx.attr_span));
+            }
+        },
+    )];
+    const ALLOWED_TARGETS: AllowedTargets = T::ALLOWED_TARGETS;
+
+    const TYPE: AttributeType = T::TYPE;
+
+    fn finalize(self, _cx: &FinalizeContext<'_, '_, S>) -> Option<AttributeKind> {
+        Some(self.1?.0)
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=21 */
+
+pub(crate) enum OnDuplicate<S: Stage> {
+    /// Give a default warning
+    Warn,
+
+    /// Duplicates will be a warning, with a note that this will be an error in the future.
+    WarnButFutureError,
+
+    /// Give a default error
+    Error,
+
+    /// Ignore duplicates
+    Ignore,
+
+    /// Custom function called when a duplicate attribute is found.
+    ///
+    /// - `unused` is the span of the attribute that was unused or bad because of some
+    ///   duplicate reason (see [`AttributeOrder`])
+    /// - `used` is the span of the attribute that was used in favor of the unused attribute
+    Custom(fn(cx: &AcceptContext<'_, '_, S>, used: Span, unused: Span)),
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=exec | COMPLEXITY=11 | LINES=25 */
+
+impl<S: Stage> OnDuplicate<S> {
+    fn exec<P: SingleAttributeParser<S>>(
+        &self,
+        cx: &mut AcceptContext<'_, '_, S>,
+        used: Span,
+        unused: Span,
+    ) {
+        match self {
+            OnDuplicate::Warn => cx.warn_unused_duplicate(used, unused),
+            OnDuplicate::WarnButFutureError => cx.warn_unused_duplicate_future_error(used, unused),
+            OnDuplicate::Error => {
+                cx.emit_err(UnusedMultiple {
+                    this: used,
+                    other: unused,
+                    name: Symbol::intern(
+                        &P::PATH.into_iter().map(|i| i.to_string()).collect::<Vec<_>>().join(".."),
+                    ),
+                });
+            }
+            OnDuplicate::Ignore => {}
+            OnDuplicate::Custom(f) => f(cx, used, unused),
+        }
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=24 */
+
+pub(crate) enum AttributeOrder {
+    /// Duplicates after the innermost instance of the attribute will be an error/warning.
+    /// Only keep the lowest attribute.
+    ///
+    /// Attributes are processed from bottom to top, so this raises a warning/error on all the attributes
+    /// further above the lowest one:
+    /// ```
+    /// #[stable(since="1.0")] //~ WARNING duplicated attribute
+    /// #[stable(since="2.0")]
+    /// ```
+    KeepInnermost,
+
+    /// Duplicates before the outermost instance of the attribute will be an error/warning.
+    /// Only keep the highest attribute.
+    ///
+    /// Attributes are processed from bottom to top, so this raises a warning/error on all the attributes
+    /// below the highest one:
+    /// ```
+    /// #[path="foo.rs"]
+    /// #[path="bar.rs"] //~ WARNING duplicated attribute
+    /// ```
+    KeepOutermost,
+}
+/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=15 */
+
+/// An even simpler version of [`SingleAttributeParser`]:
+/// now automatically check that there are no arguments provided to the attribute.
+///
+/// [`WithoutArgs<T> where T: NoArgsAttributeParser`](WithoutArgs) implements [`SingleAttributeParser`].
+//
+pub(crate) trait NoArgsAttributeParser<S: Stage>: 'static {
+    const PATH: &[Symbol];
+    const ON_DUPLICATE: OnDuplicate<S>;
+    const ALLOWED_TARGETS: AllowedTargets;
+    const TYPE: AttributeType = AttributeType::Normal;
+
+    /// Create the [`AttributeKind`] given attribute's [`Span`].
+    const CREATE: fn(Span) -> AttributeKind;
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=default | COMPLEXITY=5 | LINES=8 */
+
+pub(crate) struct WithoutArgs<T: NoArgsAttributeParser<S>, S: Stage>(PhantomData<(S, T)>);
+
+impl<T: NoArgsAttributeParser<S>, S: Stage> Default for WithoutArgs<T, S> {
+    fn default() -> Self {
+        Self(Default::default())
+    }
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=9 | LINES=16 */
+
+impl<T: NoArgsAttributeParser<S>, S: Stage> SingleAttributeParser<S> for WithoutArgs<T, S> {
+    const PATH: &[Symbol] = T::PATH;
+    const ATTRIBUTE_ORDER: AttributeOrder = AttributeOrder::KeepOutermost;
+    const ON_DUPLICATE: OnDuplicate<S> = T::ON_DUPLICATE;
+    const ALLOWED_TARGETS: AllowedTargets = T::ALLOWED_TARGETS;
+    const TEMPLATE: AttributeTemplate = template!(Word);
+    const TYPE: AttributeType = T::TYPE;
+
+    fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser<'_>) -> Option<AttributeKind> {
+        if let Err(span) = args.no_args() {
+            cx.expected_no_args(span);
+        }
+        Some(T::CREATE(cx.attr_span))
+    }
+}
+/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=10 | LINES=33 */
+
+type ConvertFn<E> = fn(ThinVec<E>, Span) -> AttributeKind;
+
+/// Alternative to [`AttributeParser`] that automatically handles state management.
+/// If multiple attributes appear on an element, combines the values of each into a
+/// [`ThinVec`].
+/// [`Combine<T> where T: CombineAttributeParser`](Combine) implements [`AttributeParser`].
+///
+/// [`CombineAttributeParser`] can only convert a single kind of attribute, and cannot combine multiple
+/// attributes together like is necessary for `#[stable()]` and `#[unstable()]` for example.
+pub(crate) trait CombineAttributeParser<S: Stage>: 'static {
+    const PATH: &[crate::rustc_span::Symbol];
+
+    type Item;
+    /// A function that converts individual items (of type [`Item`](Self::Item)) into the final attribute.
+    ///
+    /// For example, individual representations fomr `#[repr(...)]` attributes into an `AttributeKind::Repr(x)`,
+    ///  where `x` is a vec of these individual reprs.
+    const CONVERT: ConvertFn<Self::Item>;
+
+    const ALLOWED_TARGETS: AllowedTargets;
+
+    /// The template this attribute parser should implement. Used for diagnostics.
+    const TEMPLATE: AttributeTemplate;
+
+    const TYPE: AttributeType = AttributeType::Normal;
+
+    /// Converts a single syntactical attribute to a number of elements of the semantic attribute, or [`AttributeKind`]
+    fn extend<'c>(
+        cx: &'c mut AcceptContext<'_, '_, S>,
+        args: &'c ArgParser<'_>,
+    ) -> impl IntoIterator<Item = Self::Item> + 'c;
+}
+/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=3 | LINES=10 */
+
+/// Use in combination with [`CombineAttributeParser`].
+/// `Combine<T: CombineAttributeParser>` implements [`AttributeParser`].
+pub(crate) struct Combine<T: CombineAttributeParser<S>, S: Stage> {
+    phantom: PhantomData<(S, T)>,
+    /// A list of all items produced by parsing attributes so far. One attribute can produce any amount of items.
+    items: ThinVec<<T as CombineAttributeParser<S>>::Item>,
+    /// The full span of the first attribute that was encountered.
+    first_span: Option<Span>,
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=default | COMPLEXITY=6 | LINES=10 */
+
+impl<T: CombineAttributeParser<S>, S: Stage> Default for Combine<T, S> {
+    fn default() -> Self {
+        Self {
+            phantom: Default::default(),
+            items: Default::default(),
+            first_span: Default::default(),
+        }
+    }
+}
+/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=finalize | COMPLEXITY=13 | LINES=19 */
+
+impl<T: CombineAttributeParser<S>, S: Stage> AttributeParser<S> for Combine<T, S> {
+    const ATTRIBUTES: AcceptMapping<Self, S> =
+        &[(T::PATH, T::TEMPLATE, |group: &mut Combine<T, S>, cx, args| {
+            // Keep track of the span of the first attribute, for diagnostics
+            group.first_span.get_or_insert(cx.attr_span);
+            group.items.extend(T::extend(cx, args))
+        })];
+    const ALLOWED_TARGETS: AllowedTargets = T::ALLOWED_TARGETS;
+    const TYPE: AttributeType = T::TYPE;
+
+    fn finalize(self, _cx: &FinalizeContext<'_, '_, S>) -> Option<AttributeKind> {
+        if let Some(first_span) = self.first_span {
+            Some(T::CONVERT(self.items, first_span))
+        } else {
+            None
+        }
+    }
+}

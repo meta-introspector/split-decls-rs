@@ -1,24 +1,144 @@
-/* FP:search_graph.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_search_graph_USE_0001
-/* FP:search_graph.rs-0002 */ use std :: convert :: Infallible ;
-/* FP:search_graph.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_search_graph_USE_0002
-/* FP:search_graph.rs-0004 */ use std :: marker :: PhantomData ;
-/* FP:search_graph.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_search_graph_USE_0003
-/* FP:search_graph.rs-0006 */ use rustc_type_ir :: data_structures :: ensure_sufficient_stack ;
-/* FP:search_graph.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_search_graph_USE_0004
-/* FP:search_graph.rs-0008 */ use rustc_type_ir :: search_graph :: { self , PathKind } ;
-/* FP:search_graph.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_search_graph_USE_0005
-/* FP:search_graph.rs-0010 */ use rustc_type_ir :: solve :: { CanonicalInput , Certainty , NoSolution , QueryResult } ;
-/* FP:search_graph.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_search_graph_USE_0006
-/* FP:search_graph.rs-0012 */ use rustc_type_ir :: { Interner , TypingMode } ;
-/* FP:search_graph.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_search_graph_USE_0007
-/* FP:search_graph.rs-0014 */ use crate :: delegate :: SolverDelegate ;
-/* FP:search_graph.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_search_graph_USE_0008
-/* FP:search_graph.rs-0016 */ use crate :: solve :: { EvalCtxt , FIXPOINT_STEP_LIMIT , has_no_inference_or_external_constraints , inspect , } ;
-/* FP:search_graph.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_search_graph_STRUCT_0009
-/* FP:search_graph.rs-0018 */ # [doc = " This type is never constructed. We only use it to implement `search_graph::Delegate`"] # [doc = " for all types which impl `SolverDelegate` and doing it directly fails in coherence."] pub (super) struct SearchGraphDelegate < D : SolverDelegate > { _marker : PhantomData < D > , }
-/* FP:search_graph.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_search_graph_TYPE_0010
-/* FP:search_graph.rs-0020 */ pub (super) type SearchGraph < D > = search_graph :: SearchGraph < SearchGraphDelegate < D > > ;
-/* FP:search_graph.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_search_graph_IMPL_0011
-/* FP:search_graph.rs-0022 */ impl < D , I > search_graph :: Delegate for SearchGraphDelegate < D > where D : SolverDelegate < Interner = I > , I : Interner , { type Cx = D :: Interner ; const ENABLE_PROVISIONAL_CACHE : bool = true ; type ValidationScope = Infallible ; fn enter_validation_scope (_cx : Self :: Cx , _input : CanonicalInput < I > ,) -> Option < Self :: ValidationScope > { None } const FIXPOINT_STEP_LIMIT : usize = FIXPOINT_STEP_LIMIT ; type ProofTreeBuilder = inspect :: ProofTreeBuilder < D > ; fn inspect_is_noop (inspect : & mut Self :: ProofTreeBuilder) -> bool { inspect . is_noop () } const DIVIDE_AVAILABLE_DEPTH_ON_OVERFLOW : usize = 4 ; fn initial_provisional_result (cx : I , kind : PathKind , input : CanonicalInput < I > ,) -> QueryResult < I > { match kind { PathKind :: Coinductive => response_no_constraints (cx , input , Certainty :: Yes) , PathKind :: Unknown | PathKind :: ForcedAmbiguity => { response_no_constraints (cx , input , Certainty :: overflow (false)) } PathKind :: Inductive => match input . typing_mode { TypingMode :: Coherence => { response_no_constraints (cx , input , Certainty :: overflow (false)) } TypingMode :: Analysis { .. } | TypingMode :: Borrowck { .. } | TypingMode :: PostBorrowckAnalysis { .. } | TypingMode :: PostAnalysis => Err (NoSolution) , } , } } fn is_initial_provisional_result (cx : Self :: Cx , kind : PathKind , input : CanonicalInput < I > , result : QueryResult < I > ,) -> bool { Self :: initial_provisional_result (cx , kind , input) == result } fn on_stack_overflow (cx : I , input : CanonicalInput < I >) -> QueryResult < I > { response_no_constraints (cx , input , Certainty :: overflow (true)) } fn on_fixpoint_overflow (cx : I , input : CanonicalInput < I >) -> QueryResult < I > { response_no_constraints (cx , input , Certainty :: overflow (false)) } fn is_ambiguous_result (result : QueryResult < I >) -> bool { result . is_ok_and (| response | { has_no_inference_or_external_constraints (response) && matches ! (response . value . certainty , Certainty :: Maybe (_)) }) } fn propagate_ambiguity (cx : I , for_input : CanonicalInput < I > , from_result : QueryResult < I > ,) -> QueryResult < I > { let certainty = from_result . unwrap () . value . certainty ; response_no_constraints (cx , for_input , certainty) } fn compute_goal (search_graph : & mut SearchGraph < D > , cx : I , input : CanonicalInput < I > , inspect : & mut Self :: ProofTreeBuilder ,) -> QueryResult < I > { ensure_sufficient_stack (| | { EvalCtxt :: enter_canonical (cx , search_graph , input , inspect , | ecx , goal | { let result = ecx . compute_goal (goal) ; ecx . inspect . query_result (result) ; result }) }) } }
-/* FP:search_graph.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_solve_search_graph_FN_0012
-/* FP:search_graph.rs-0024 */ fn response_no_constraints < I : Interner > (cx : I , input : CanonicalInput < I > , certainty : Certainty ,) -> QueryResult < I > { Ok (super :: response_no_constraints_raw (cx , input . canonical . max_universe , input . canonical . variables , certainty ,)) }
+// SRC: ../rust/compiler/rustc_next_trait_solver/src/solve/search_graph.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use std::convert::Infallible;
+use std::marker::PhantomData;
+
+use rustc_type_ir::data_structures::ensure_sufficient_stack;
+use rustc_type_ir::search_graph::{self, PathKind};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use rustc_type_ir::solve::{CanonicalInput, Certainty, NoSolution, QueryResult};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use rustc_type_ir::{Interner, TypingMode};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+
+use crate::delegate::SolverDelegate;
+use crate::solve::{
+    EvalCtxt, FIXPOINT_STEP_LIMIT, has_no_inference_or_external_constraints, inspect,
+};
+/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
+
+/// This type is never constructed. We only use it to implement `search_graph::Delegate`
+/// for all types which impl `SolverDelegate` and doing it directly fails in coherence.
+pub(super) struct SearchGraphDelegate<D: SolverDelegate> {
+    _marker: PhantomData<D>,
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=enter_validation_scope | COMPLEXITY=40 | LINES=105 */
+pub(super) type SearchGraph<D> = search_graph::SearchGraph<SearchGraphDelegate<D>>;
+impl<D, I> search_graph::Delegate for SearchGraphDelegate<D>
+where
+    D: SolverDelegate<Interner = I>,
+    I: Interner,
+{
+    type Cx = D::Interner;
+
+    const ENABLE_PROVISIONAL_CACHE: bool = true;
+    type ValidationScope = Infallible;
+    fn enter_validation_scope(
+        _cx: Self::Cx,
+        _input: CanonicalInput<I>,
+    ) -> Option<Self::ValidationScope> {
+        None
+    }
+
+    const FIXPOINT_STEP_LIMIT: usize = FIXPOINT_STEP_LIMIT;
+
+    type ProofTreeBuilder = inspect::ProofTreeBuilder<D>;
+    fn inspect_is_noop(inspect: &mut Self::ProofTreeBuilder) -> bool {
+        inspect.is_noop()
+    }
+
+    const DIVIDE_AVAILABLE_DEPTH_ON_OVERFLOW: usize = 4;
+
+    fn initial_provisional_result(
+        cx: I,
+        kind: PathKind,
+        input: CanonicalInput<I>,
+    ) -> QueryResult<I> {
+        match kind {
+            PathKind::Coinductive => response_no_constraints(cx, input, Certainty::Yes),
+            PathKind::Unknown | PathKind::ForcedAmbiguity => {
+                response_no_constraints(cx, input, Certainty::overflow(false))
+            }
+            // Even though we know these cycles to be unproductive, we still return
+            // overflow during coherence. This is both as we are not 100% confident in
+            // the implementation yet and any incorrect errors would be unsound there.
+            // The affected cases are also fairly artificial and not necessarily desirable
+            // so keeping this as ambiguity is fine for now.
+            //
+            // See `tests/ui/traits/next-solver/cycles/unproductive-in-coherence.rs` for an
+            // example where this would matter. We likely should change these cycles to `NoSolution`
+            // even in coherence once this is a bit more settled.
+            PathKind::Inductive => match input.typing_mode {
+                TypingMode::Coherence => {
+                    response_no_constraints(cx, input, Certainty::overflow(false))
+                }
+                TypingMode::Analysis { .. }
+                | TypingMode::Borrowck { .. }
+                | TypingMode::PostBorrowckAnalysis { .. }
+                | TypingMode::PostAnalysis => Err(NoSolution),
+            },
+        }
+    }
+
+    fn is_initial_provisional_result(
+        cx: Self::Cx,
+        kind: PathKind,
+        input: CanonicalInput<I>,
+        result: QueryResult<I>,
+    ) -> bool {
+        Self::initial_provisional_result(cx, kind, input) == result
+    }
+
+    fn on_stack_overflow(cx: I, input: CanonicalInput<I>) -> QueryResult<I> {
+        response_no_constraints(cx, input, Certainty::overflow(true))
+    }
+
+    fn on_fixpoint_overflow(cx: I, input: CanonicalInput<I>) -> QueryResult<I> {
+        response_no_constraints(cx, input, Certainty::overflow(false))
+    }
+
+    fn is_ambiguous_result(result: QueryResult<I>) -> bool {
+        result.is_ok_and(|response| {
+            has_no_inference_or_external_constraints(response)
+                && matches!(response.value.certainty, Certainty::Maybe(_))
+        })
+    }
+
+    fn propagate_ambiguity(
+        cx: I,
+        for_input: CanonicalInput<I>,
+        from_result: QueryResult<I>,
+    ) -> QueryResult<I> {
+        let certainty = from_result.unwrap().value.certainty;
+        response_no_constraints(cx, for_input, certainty)
+    }
+
+    fn compute_goal(
+        search_graph: &mut SearchGraph<D>,
+        cx: I,
+        input: CanonicalInput<I>,
+        inspect: &mut Self::ProofTreeBuilder,
+    ) -> QueryResult<I> {
+        ensure_sufficient_stack(|| {
+            EvalCtxt::enter_canonical(cx, search_graph, input, inspect, |ecx, goal| {
+                let result = ecx.compute_goal(goal);
+                ecx.inspect.query_result(result);
+                result
+            })
+        })
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=response_no_constraints | COMPLEXITY=2 | LINES=13 */
+
+fn response_no_constraints<I: Interner>(
+    cx: I,
+    input: CanonicalInput<I>,
+    certainty: Certainty,
+) -> QueryResult<I> {
+    Ok(super::response_no_constraints_raw(
+        cx,
+        input.canonical.max_universe,
+        input.canonical.variables,
+        certainty,
+    ))
+}

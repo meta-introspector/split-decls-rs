@@ -1,6 +1,13 @@
-/* FP:lib.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_lib_MOD_0001
-/* FP:lib.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_lib_MOD_0002
-/* FP:lib.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_lib_MOD_0003
-/* FP:lib.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_lib_MOD_0004
-/* FP:lib.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_lib_MOD_0005
-/* FP:lib.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_lib_MOD_0006
+// SRC: ../rust/compiler/rustc_next_trait_solver/src/lib.rs
+/* AST_META: AST_ID=1 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=4 | LINES=18 */
+// Crate containing the implementation of the next-generation trait solver.
+//
+// This crate may also contain things that are used by the old trait solver,
+// but were uplifted in the process of making the new trait solver generic.
+// So if you got to this crate from the old solver, it's totally normal.
+
+// tidy-alphabetical-start
+#[allow(rustc::direct_use_of_rustc_type_ir)]
+#[allow(rustc::usage_of_type_ir_inherent)]
+#[allow(rustc::usage_of_type_ir_traits)]
+// tidy-alphabetical-end

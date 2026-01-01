@@ -1,48 +1,389 @@
-/* FP:canonical.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_USE_0001
-/* FP:canonical.rs-0002 */ use std :: fmt ;
-/* FP:canonical.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_USE_0002
-/* FP:canonical.rs-0004 */ use std :: ops :: Index ;
-/* FP:canonical.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_USE_0003
-/* FP:canonical.rs-0006 */ use arrayvec :: ArrayVec ;
-/* FP:canonical.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_USE_0004
-/* FP:canonical.rs-0008 */ use derive_where :: derive_where ;
-/* FP:canonical.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_USE_0005
-/* FP:canonical.rs-0010 */ # [cfg (feature = "nightly")] use rustc_macros :: { Decodable_NoContext , Encodable_NoContext , HashStable_NoContext } ;
-/* FP:canonical.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_USE_0006
-/* FP:canonical.rs-0012 */ use rustc_type_ir_macros :: { Lift_Generic , TypeFoldable_Generic , TypeVisitable_Generic } ;
-/* FP:canonical.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_USE_0007
-/* FP:canonical.rs-0014 */ use crate :: data_structures :: HashMap ;
-/* FP:canonical.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_USE_0008
-/* FP:canonical.rs-0016 */ use crate :: inherent :: * ;
-/* FP:canonical.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_USE_0009
-/* FP:canonical.rs-0018 */ use crate :: { self as ty , Interner , TypingMode , UniverseIndex } ;
-/* FP:canonical.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_STRUCT_0010
-/* FP:canonical.rs-0020 */ # [derive_where (Clone , Hash , PartialEq , Debug ; I : Interner , V)] # [derive_where (Copy ; I : Interner , V : Copy)] # [cfg_attr (feature = "nightly" , derive (Encodable_NoContext , Decodable_NoContext , HashStable_NoContext))] pub struct CanonicalQueryInput < I : Interner , V > { pub canonical : Canonical < I , V > , pub typing_mode : TypingMode < I > , }
-/* FP:canonical.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_IMPL_0011
-/* FP:canonical.rs-0022 */ impl < I : Interner , V : Eq > Eq for CanonicalQueryInput < I , V > { }
-/* FP:canonical.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_STRUCT_0012
-/* FP:canonical.rs-0024 */ # [doc = " A \"canonicalized\" type `V` is one where all free inference"] # [doc = " variables have been rewritten to \"canonical vars\". These are"] # [doc = " numbered starting from 0 in order of first appearance."] # [derive_where (Clone , Hash , PartialEq , Debug ; I : Interner , V)] # [derive_where (Copy ; I : Interner , V : Copy)] # [cfg_attr (feature = "nightly" , derive (Encodable_NoContext , Decodable_NoContext , HashStable_NoContext))] pub struct Canonical < I : Interner , V > { pub value : V , pub max_universe : UniverseIndex , pub variables : I :: CanonicalVarKinds , }
-/* FP:canonical.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_IMPL_0013
-/* FP:canonical.rs-0026 */ impl < I : Interner , V : Eq > Eq for Canonical < I , V > { }
-/* FP:canonical.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_IMPL_0014
-/* FP:canonical.rs-0028 */ impl < I : Interner , V > Canonical < I , V > { # [doc = " Allows you to map the `value` of a canonical while keeping the"] # [doc = " same set of bound variables."] # [doc = ""] # [doc = " **WARNING:** This function is very easy to mis-use, hence the"] # [doc = " name!  In particular, the new value `W` must use all **the"] # [doc = " same type/region variables** in **precisely the same order**"] # [doc = " as the original! (The ordering is defined by the"] # [doc = " `TypeFoldable` implementation of the type in question.)"] # [doc = ""] # [doc = " An example of a **correct** use of this:"] # [doc = ""] # [doc = " ```rust,ignore (not real code)"] # [doc = " let a: Canonical<I, T> = ...;"] # [doc = " let b: Canonical<I, (T,)> = a.unchecked_map(|v| (v, ));"] # [doc = " ```"] # [doc = ""] # [doc = " An example of an **incorrect** use of this:"] # [doc = ""] # [doc = " ```rust,ignore (not real code)"] # [doc = " let a: Canonical<I, T> = ...;"] # [doc = " let ty: Ty<I> = ...;"] # [doc = " let b: Canonical<I, (T, Ty<I>)> = a.unchecked_map(|v| (v, ty));"] # [doc = " ```"] pub fn unchecked_map < W > (self , map_op : impl FnOnce (V) -> W) -> Canonical < I , W > { let Canonical { max_universe , variables , value } = self ; Canonical { max_universe , variables , value : map_op (value) } } }
-/* FP:canonical.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_IMPL_0015
-/* FP:canonical.rs-0030 */ impl < I : Interner , V : fmt :: Display > fmt :: Display for Canonical < I , V > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let Self { value , max_universe , variables } = self ; write ! (f , "Canonical {{ value: {value}, max_universe: {max_universe:?}, variables: {variables:?} }}" ,) } }
-/* FP:canonical.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_ENUM_0016
-/* FP:canonical.rs-0032 */ # [doc = " Information about a canonical variable that is included with the"] # [doc = " canonical value. This is sufficient information for code to create"] # [doc = " a copy of the canonical value in some other inference context,"] # [doc = " with fresh inference variables replacing the canonical values."] # [derive_where (Clone , Copy , Hash , PartialEq , Debug ; I : Interner)] # [cfg_attr (feature = "nightly" , derive (Decodable_NoContext , Encodable_NoContext , HashStable_NoContext))] pub enum CanonicalVarKind < I : Interner > { # [doc = " General type variable `?T` that can be unified with arbitrary types."] # [doc = ""] # [doc = " We also store the index of the first type variable which is sub-unified"] # [doc = " with this one. If there is no inference variable related to this one,"] # [doc = " its `sub_root` just points to itself."] Ty { ui : UniverseIndex , sub_root : ty :: BoundVar } , # [doc = " Integral type variable `?I` (that can only be unified with integral types)."] Int , # [doc = " Floating-point type variable `?F` (that can only be unified with float types)."] Float , # [doc = " A \"placeholder\" that represents \"any type\"."] PlaceholderTy (I :: PlaceholderTy) , # [doc = " Region variable `'?R`."] Region (UniverseIndex) , # [doc = " A \"placeholder\" that represents \"any region\". Created when you"] # [doc = " are solving a goal like `for<'a> T: Foo<'a>` to represent the"] # [doc = " bound region `'a`."] PlaceholderRegion (I :: PlaceholderRegion) , # [doc = " Some kind of const inference variable."] Const (UniverseIndex) , # [doc = " A \"placeholder\" that represents \"any const\"."] PlaceholderConst (I :: PlaceholderConst) , }
-/* FP:canonical.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_IMPL_0017
-/* FP:canonical.rs-0034 */ impl < I : Interner > Eq for CanonicalVarKind < I > { }
-/* FP:canonical.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_IMPL_0018
-/* FP:canonical.rs-0036 */ impl < I : Interner > CanonicalVarKind < I > { pub fn universe (self) -> UniverseIndex { match self { CanonicalVarKind :: Ty { ui , sub_root : _ } => ui , CanonicalVarKind :: Region (ui) => ui , CanonicalVarKind :: Const (ui) => ui , CanonicalVarKind :: PlaceholderTy (placeholder) => placeholder . universe () , CanonicalVarKind :: PlaceholderRegion (placeholder) => placeholder . universe () , CanonicalVarKind :: PlaceholderConst (placeholder) => placeholder . universe () , CanonicalVarKind :: Float | CanonicalVarKind :: Int => UniverseIndex :: ROOT , } } # [doc = " Replaces the universe of this canonical variable with `ui`."] # [doc = ""] # [doc = " In case this is a float or int variable, this causes an ICE if"] # [doc = " the updated universe is not the root."] pub fn with_updated_universe (self , ui : UniverseIndex) -> CanonicalVarKind < I > { match self { CanonicalVarKind :: Ty { ui : _ , sub_root } => CanonicalVarKind :: Ty { ui , sub_root } , CanonicalVarKind :: Region (_) => CanonicalVarKind :: Region (ui) , CanonicalVarKind :: Const (_) => CanonicalVarKind :: Const (ui) , CanonicalVarKind :: PlaceholderTy (placeholder) => { CanonicalVarKind :: PlaceholderTy (placeholder . with_updated_universe (ui)) } CanonicalVarKind :: PlaceholderRegion (placeholder) => { CanonicalVarKind :: PlaceholderRegion (placeholder . with_updated_universe (ui)) } CanonicalVarKind :: PlaceholderConst (placeholder) => { CanonicalVarKind :: PlaceholderConst (placeholder . with_updated_universe (ui)) } CanonicalVarKind :: Int | CanonicalVarKind :: Float => { assert_eq ! (ui , UniverseIndex :: ROOT) ; self } } } pub fn is_existential (self) -> bool { match self { CanonicalVarKind :: Ty { .. } | CanonicalVarKind :: Int | CanonicalVarKind :: Float | CanonicalVarKind :: Region (_) | CanonicalVarKind :: Const (_) => true , CanonicalVarKind :: PlaceholderTy (_) | CanonicalVarKind :: PlaceholderRegion (..) | CanonicalVarKind :: PlaceholderConst (_) => false , } } pub fn is_region (self) -> bool { match self { CanonicalVarKind :: Region (_) | CanonicalVarKind :: PlaceholderRegion (_) => true , CanonicalVarKind :: Ty { .. } | CanonicalVarKind :: Int | CanonicalVarKind :: Float | CanonicalVarKind :: PlaceholderTy (_) | CanonicalVarKind :: Const (_) | CanonicalVarKind :: PlaceholderConst (_) => false , } } pub fn expect_placeholder_index (self) -> usize { match self { CanonicalVarKind :: Ty { .. } | CanonicalVarKind :: Int | CanonicalVarKind :: Float | CanonicalVarKind :: Region (_) | CanonicalVarKind :: Const (_) => { panic ! ("expected placeholder: {self:?}") } CanonicalVarKind :: PlaceholderRegion (placeholder) => placeholder . var () . as_usize () , CanonicalVarKind :: PlaceholderTy (placeholder) => placeholder . var () . as_usize () , CanonicalVarKind :: PlaceholderConst (placeholder) => placeholder . var () . as_usize () , } } }
-/* FP:canonical.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_STRUCT_0019
-/* FP:canonical.rs-0038 */ # [doc = " A set of values corresponding to the canonical variables from some"] # [doc = " `Canonical`. You can give these values to"] # [doc = " `canonical_value.instantiate` to instantiate them into the canonical"] # [doc = " value at the right places."] # [doc = ""] # [doc = " When you canonicalize a value `V`, you get back one of these"] # [doc = " vectors with the original values that were replaced by canonical"] # [doc = " variables. You will need to supply it later to instantiate the"] # [doc = " canonicalized query response."] # [derive_where (Clone , Copy , Hash , PartialEq , Debug ; I : Interner)] # [cfg_attr (feature = "nightly" , derive (Encodable_NoContext , Decodable_NoContext , HashStable_NoContext))] # [derive (TypeVisitable_Generic , TypeFoldable_Generic , Lift_Generic)] pub struct CanonicalVarValues < I : Interner > { pub var_values : I :: GenericArgs , }
-/* FP:canonical.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_IMPL_0020
-/* FP:canonical.rs-0040 */ impl < I : Interner > Eq for CanonicalVarValues < I > { }
-/* FP:canonical.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_IMPL_0021
-/* FP:canonical.rs-0042 */ impl < I : Interner > CanonicalVarValues < I > { pub fn is_identity (& self) -> bool { self . var_values . iter () . enumerate () . all (| (bv , arg) | match arg . kind () { ty :: GenericArgKind :: Lifetime (r) => { matches ! (r . kind () , ty :: ReBound (ty :: INNERMOST , br) if br . var () . as_usize () == bv) } ty :: GenericArgKind :: Type (ty) => { matches ! (ty . kind () , ty :: Bound (ty :: INNERMOST , bt) if bt . var () . as_usize () == bv) } ty :: GenericArgKind :: Const (ct) => { matches ! (ct . kind () , ty :: ConstKind :: Bound (ty :: INNERMOST , bc) if bc . var () . as_usize () == bv) } }) } pub fn is_identity_modulo_regions (& self) -> bool { let mut var = ty :: BoundVar :: ZERO ; for arg in self . var_values . iter () { match arg . kind () { ty :: GenericArgKind :: Lifetime (r) => { if matches ! (r . kind () , ty :: ReBound (ty :: INNERMOST , br) if var == br . var ()) { var = var + 1 ; } else { } } ty :: GenericArgKind :: Type (ty) => { if matches ! (ty . kind () , ty :: Bound (ty :: INNERMOST , bt) if var == bt . var ()) { var = var + 1 ; } else { return false ; } } ty :: GenericArgKind :: Const (ct) => { if matches ! (ct . kind () , ty :: ConstKind :: Bound (ty :: INNERMOST , bc) if var == bc . var ()) { var = var + 1 ; } else { return false ; } } } } true } pub fn make_identity (cx : I , infos : I :: CanonicalVarKinds) -> CanonicalVarValues < I > { CanonicalVarValues { var_values : cx . mk_args_from_iter (infos . iter () . enumerate () . map (| (i , kind) | -> I :: GenericArg { match kind { CanonicalVarKind :: Ty { .. } | CanonicalVarKind :: Int | CanonicalVarKind :: Float | CanonicalVarKind :: PlaceholderTy (_) => { Ty :: new_anon_bound (cx , ty :: INNERMOST , ty :: BoundVar :: from_usize (i)) . into () } CanonicalVarKind :: Region (_) | CanonicalVarKind :: PlaceholderRegion (_) => { Region :: new_anon_bound (cx , ty :: INNERMOST , ty :: BoundVar :: from_usize (i)) . into () } CanonicalVarKind :: Const (_) | CanonicalVarKind :: PlaceholderConst (_) => { Const :: new_anon_bound (cx , ty :: INNERMOST , ty :: BoundVar :: from_usize (i)) . into () } } } ,)) , } } # [doc = " Creates dummy var values which should not be used in a"] # [doc = " canonical response."] pub fn dummy () -> CanonicalVarValues < I > { CanonicalVarValues { var_values : Default :: default () } } pub fn instantiate (cx : I , variables : I :: CanonicalVarKinds , mut f : impl FnMut (& [I :: GenericArg] , CanonicalVarKind < I >) -> I :: GenericArg ,) -> CanonicalVarValues < I > { if variables . len () <= 4 { let mut var_values = ArrayVec :: < _ , 4 > :: new () ; for info in variables . iter () { var_values . push (f (& var_values , info)) ; } CanonicalVarValues { var_values : cx . mk_args (& var_values) } } else { CanonicalVarValues :: instantiate_cold (cx , variables , f) } } # [cold] fn instantiate_cold (cx : I , variables : I :: CanonicalVarKinds , mut f : impl FnMut (& [I :: GenericArg] , CanonicalVarKind < I >) -> I :: GenericArg ,) -> CanonicalVarValues < I > { let mut var_values = Vec :: with_capacity (variables . len ()) ; for info in variables . iter () { var_values . push (f (& var_values , info)) ; } CanonicalVarValues { var_values : cx . mk_args (& var_values) } } # [inline] pub fn len (& self) -> usize { self . var_values . len () } }
-/* FP:canonical.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_IMPL_0022
-/* FP:canonical.rs-0044 */ impl < 'a , I : Interner > IntoIterator for & 'a CanonicalVarValues < I > { type Item = I :: GenericArg ; type IntoIter = < I :: GenericArgs as SliceLike > :: IntoIter ; fn into_iter (self) -> Self :: IntoIter { self . var_values . iter () } }
-/* FP:canonical.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_IMPL_0023
-/* FP:canonical.rs-0046 */ impl < I : Interner > Index < ty :: BoundVar > for CanonicalVarValues < I > { type Output = I :: GenericArg ; fn index (& self , value : ty :: BoundVar) -> & I :: GenericArg { & self . var_values . as_slice () [value . as_usize ()] } }
-/* FP:canonical.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_canonical_STRUCT_0024
-/* FP:canonical.rs-0048 */ # [derive_where (Clone , Debug ; I : Interner)] pub struct CanonicalParamEnvCacheEntry < I : Interner > { pub param_env : I :: ParamEnv , pub variables : Vec < I :: GenericArg > , pub variable_lookup_table : HashMap < I :: GenericArg , usize > , pub var_kinds : Vec < CanonicalVarKind < I > > , }
+// SRC: ../rust/compiler/rustc_type_ir/src/canonical.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+use std::fmt;
+use std::ops::Index;
+
+use arrayvec::ArrayVec;
+use derive_where::derive_where;
+#[cfg(feature = "nightly")]
+use rustc_macros::{Decodable_NoContext, Encodable_NoContext, HashStable_NoContext};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use rustc_type_ir_macros::{Lift_Generic, TypeFoldable_Generic, TypeVisitable_Generic};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+
+use crate::data_structures::HashMap;
+use crate::inherent::*;
+use crate::{self as ty, Interner, TypingMode, UniverseIndex};
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=CanonicalQueryInput | COMPLEXITY=2 | LINES=11 */
+
+#[derive_where(Clone, Hash, PartialEq, Debug; I: Interner, V)]
+#[derive_where(Copy; I: Interner, V: Copy)]
+#[cfg_attr(
+    feature = "nightly",
+    derive(Encodable_NoContext, Decodable_NoContext, HashStable_NoContext)
+)]
+pub struct CanonicalQueryInput<I: Interner, V> {
+    pub canonical: Canonical<I, V>,
+    pub typing_mode: TypingMode<I>,
+}
+/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<I: Interner, V: Eq> Eq for CanonicalQueryInput<I, V> {}
+/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=Canonical | COMPLEXITY=3 | LINES=15 */
+
+/// A "canonicalized" type `V` is one where all free inference
+/// variables have been rewritten to "canonical vars". These are
+/// numbered starting from 0 in order of first appearance.
+#[derive_where(Clone, Hash, PartialEq, Debug; I: Interner, V)]
+#[derive_where(Copy; I: Interner, V: Copy)]
+#[cfg_attr(
+    feature = "nightly",
+    derive(Encodable_NoContext, Decodable_NoContext, HashStable_NoContext)
+)]
+pub struct Canonical<I: Interner, V> {
+    pub value: V,
+    pub max_universe: UniverseIndex,
+    pub variables: I::CanonicalVarKinds,
+}
+/* AST_META: AST_ID=7 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<I: Interner, V: Eq> Eq for Canonical<I, V> {}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=unchecked_map | COMPLEXITY=9 | LINES=30 */
+
+impl<I: Interner, V> Canonical<I, V> {
+    /// Allows you to map the `value` of a canonical while keeping the
+    /// same set of bound variables.
+    ///
+    /// **WARNING:** This function is very easy to mis-use, hence the
+    /// name!  In particular, the new value `W` must use all **the
+    /// same type/region variables** in **precisely the same order**
+    /// as the original! (The ordering is defined by the
+    /// `TypeFoldable` implementation of the type in question.)
+    ///
+    /// An example of a **correct** use of this:
+    ///
+    /// ```rust,ignore (not real code)
+    /// let a: Canonical<I, T> = ...;
+    /// let b: Canonical<I, (T,)> = a.unchecked_map(|v| (v, ));
+    /// ```
+    ///
+    /// An example of an **incorrect** use of this:
+    ///
+    /// ```rust,ignore (not real code)
+    /// let a: Canonical<I, T> = ...;
+    /// let ty: Ty<I> = ...;
+    /// let b: Canonical<I, (T, Ty<I>)> = a.unchecked_map(|v| (v, ty));
+    /// ```
+    pub fn unchecked_map<W>(self, map_op: impl FnOnce(V) -> W) -> Canonical<I, W> {
+        let Canonical { max_universe, variables, value } = self;
+        Canonical { max_universe, variables, value: map_op(value) }
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=11 | LINES=10 */
+
+impl<I: Interner, V: fmt::Display> fmt::Display for Canonical<I, V> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let Self { value, max_universe, variables } = self;
+        write!(
+            f,
+            "Canonical {{ value: {value}, max_universe: {max_universe:?}, variables: {variables:?} }}",
+        )
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=8 | LINES=41 */
+
+/// Information about a canonical variable that is included with the
+/// canonical value. This is sufficient information for code to create
+/// a copy of the canonical value in some other inference context,
+/// with fresh inference variables replacing the canonical values.
+#[derive_where(Clone, Copy, Hash, PartialEq, Debug; I: Interner)]
+#[cfg_attr(
+    feature = "nightly",
+    derive(Decodable_NoContext, Encodable_NoContext, HashStable_NoContext)
+)]
+pub enum CanonicalVarKind<I: Interner> {
+    /// General type variable `?T` that can be unified with arbitrary types.
+    ///
+    /// We also store the index of the first type variable which is sub-unified
+    /// with this one. If there is no inference variable related to this one,
+    /// its `sub_root` just points to itself.
+    Ty { ui: UniverseIndex, sub_root: ty::BoundVar },
+
+    /// Integral type variable `?I` (that can only be unified with integral types).
+    Int,
+
+    /// Floating-point type variable `?F` (that can only be unified with float types).
+    Float,
+
+    /// A "placeholder" that represents "any type".
+    PlaceholderTy(I::PlaceholderTy),
+
+    /// Region variable `'?R`.
+    Region(UniverseIndex),
+
+    /// A "placeholder" that represents "any region". Created when you
+    /// are solving a goal like `for<'a> T: Foo<'a>` to represent the
+    /// bound region `'a`.
+    PlaceholderRegion(I::PlaceholderRegion),
+
+    /// Some kind of const inference variable.
+    Const(UniverseIndex),
+
+    /// A "placeholder" that represents "any const".
+    PlaceholderConst(I::PlaceholderConst),
+}
+/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<I: Interner> Eq for CanonicalVarKind<I> {}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=universe | COMPLEXITY=45 | LINES=81 */
+
+impl<I: Interner> CanonicalVarKind<I> {
+    pub fn universe(self) -> UniverseIndex {
+        match self {
+            CanonicalVarKind::Ty { ui, sub_root: _ } => ui,
+            CanonicalVarKind::Region(ui) => ui,
+            CanonicalVarKind::Const(ui) => ui,
+            CanonicalVarKind::PlaceholderTy(placeholder) => placeholder.universe(),
+            CanonicalVarKind::PlaceholderRegion(placeholder) => placeholder.universe(),
+            CanonicalVarKind::PlaceholderConst(placeholder) => placeholder.universe(),
+            CanonicalVarKind::Float | CanonicalVarKind::Int => UniverseIndex::ROOT,
+        }
+    }
+
+    /// Replaces the universe of this canonical variable with `ui`.
+    ///
+    /// In case this is a float or int variable, this causes an ICE if
+    /// the updated universe is not the root.
+    pub fn with_updated_universe(self, ui: UniverseIndex) -> CanonicalVarKind<I> {
+        match self {
+            CanonicalVarKind::Ty { ui: _, sub_root } => CanonicalVarKind::Ty { ui, sub_root },
+            CanonicalVarKind::Region(_) => CanonicalVarKind::Region(ui),
+            CanonicalVarKind::Const(_) => CanonicalVarKind::Const(ui),
+
+            CanonicalVarKind::PlaceholderTy(placeholder) => {
+                CanonicalVarKind::PlaceholderTy(placeholder.with_updated_universe(ui))
+            }
+            CanonicalVarKind::PlaceholderRegion(placeholder) => {
+                CanonicalVarKind::PlaceholderRegion(placeholder.with_updated_universe(ui))
+            }
+            CanonicalVarKind::PlaceholderConst(placeholder) => {
+                CanonicalVarKind::PlaceholderConst(placeholder.with_updated_universe(ui))
+            }
+            CanonicalVarKind::Int | CanonicalVarKind::Float => {
+                assert_eq!(ui, UniverseIndex::ROOT);
+                self
+            }
+        }
+    }
+
+    pub fn is_existential(self) -> bool {
+        match self {
+            CanonicalVarKind::Ty { .. }
+            | CanonicalVarKind::Int
+            | CanonicalVarKind::Float
+            | CanonicalVarKind::Region(_)
+            | CanonicalVarKind::Const(_) => true,
+            CanonicalVarKind::PlaceholderTy(_)
+            | CanonicalVarKind::PlaceholderRegion(..)
+            | CanonicalVarKind::PlaceholderConst(_) => false,
+        }
+    }
+
+    pub fn is_region(self) -> bool {
+        match self {
+            CanonicalVarKind::Region(_) | CanonicalVarKind::PlaceholderRegion(_) => true,
+            CanonicalVarKind::Ty { .. }
+            | CanonicalVarKind::Int
+            | CanonicalVarKind::Float
+            | CanonicalVarKind::PlaceholderTy(_)
+            | CanonicalVarKind::Const(_)
+            | CanonicalVarKind::PlaceholderConst(_) => false,
+        }
+    }
+
+    pub fn expect_placeholder_index(self) -> usize {
+        match self {
+            CanonicalVarKind::Ty { .. }
+            | CanonicalVarKind::Int
+            | CanonicalVarKind::Float
+            | CanonicalVarKind::Region(_)
+            | CanonicalVarKind::Const(_) => {
+                panic!("expected placeholder: {self:?}")
+            }
+
+            CanonicalVarKind::PlaceholderRegion(placeholder) => placeholder.var().as_usize(),
+            CanonicalVarKind::PlaceholderTy(placeholder) => placeholder.var().as_usize(),
+            CanonicalVarKind::PlaceholderConst(placeholder) => placeholder.var().as_usize(),
+        }
+    }
+}
+/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=CanonicalVarValues | COMPLEXITY=3 | LINES=19 */
+
+/// A set of values corresponding to the canonical variables from some
+/// `Canonical`. You can give these values to
+/// `canonical_value.instantiate` to instantiate them into the canonical
+/// value at the right places.
+///
+/// When you canonicalize a value `V`, you get back one of these
+/// vectors with the original values that were replaced by canonical
+/// variables. You will need to supply it later to instantiate the
+/// canonicalized query response.
+#[derive_where(Clone, Copy, Hash, PartialEq, Debug; I: Interner)]
+#[cfg_attr(
+    feature = "nightly",
+    derive(Encodable_NoContext, Decodable_NoContext, HashStable_NoContext)
+)]
+#[derive(TypeVisitable_Generic, TypeFoldable_Generic, Lift_Generic)]
+pub struct CanonicalVarValues<I: Interner> {
+    pub var_values: I::GenericArgs,
+}
+/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<I: Interner> Eq for CanonicalVarValues<I> {}
+/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=is_identity | COMPLEXITY=84 | LINES=118 */
+
+impl<I: Interner> CanonicalVarValues<I> {
+    pub fn is_identity(&self) -> bool {
+        self.var_values.iter().enumerate().all(|(bv, arg)| match arg.kind() {
+            ty::GenericArgKind::Lifetime(r) => {
+                matches!(r.kind(), ty::ReBound(ty::INNERMOST, br) if br.var().as_usize() == bv)
+            }
+            ty::GenericArgKind::Type(ty) => {
+                matches!(ty.kind(), ty::Bound(ty::INNERMOST, bt) if bt.var().as_usize() == bv)
+            }
+            ty::GenericArgKind::Const(ct) => {
+                matches!(ct.kind(), ty::ConstKind::Bound(ty::INNERMOST, bc) if bc.var().as_usize() == bv)
+            }
+        })
+    }
+
+    pub fn is_identity_modulo_regions(&self) -> bool {
+        let mut var = ty::BoundVar::ZERO;
+        for arg in self.var_values.iter() {
+            match arg.kind() {
+                ty::GenericArgKind::Lifetime(r) => {
+                    if matches!(r.kind(), ty::ReBound(ty::INNERMOST, br) if var == br.var()) {
+                        var = var + 1;
+                    } else {
+                        // It's ok if this region var isn't an identity variable
+                    }
+                }
+                ty::GenericArgKind::Type(ty) => {
+                    if matches!(ty.kind(), ty::Bound(ty::INNERMOST, bt) if var == bt.var()) {
+                        var = var + 1;
+                    } else {
+                        return false;
+                    }
+                }
+                ty::GenericArgKind::Const(ct) => {
+                    if matches!(ct.kind(), ty::ConstKind::Bound(ty::INNERMOST, bc) if var == bc.var())
+                    {
+                        var = var + 1;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        true
+    }
+
+    // Given a list of canonical variables, construct a set of values which are
+    // the identity response.
+    pub fn make_identity(cx: I, infos: I::CanonicalVarKinds) -> CanonicalVarValues<I> {
+        CanonicalVarValues {
+            var_values: cx.mk_args_from_iter(infos.iter().enumerate().map(
+                |(i, kind)| -> I::GenericArg {
+                    match kind {
+                        CanonicalVarKind::Ty { .. }
+                        | CanonicalVarKind::Int
+                        | CanonicalVarKind::Float
+                        | CanonicalVarKind::PlaceholderTy(_) => {
+                            Ty::new_anon_bound(cx, ty::INNERMOST, ty::BoundVar::from_usize(i))
+                                .into()
+                        }
+                        CanonicalVarKind::Region(_) | CanonicalVarKind::PlaceholderRegion(_) => {
+                            Region::new_anon_bound(cx, ty::INNERMOST, ty::BoundVar::from_usize(i))
+                                .into()
+                        }
+                        CanonicalVarKind::Const(_) | CanonicalVarKind::PlaceholderConst(_) => {
+                            Const::new_anon_bound(cx, ty::INNERMOST, ty::BoundVar::from_usize(i))
+                                .into()
+                        }
+                    }
+                },
+            )),
+        }
+    }
+
+    /// Creates dummy var values which should not be used in a
+    /// canonical response.
+    pub fn dummy() -> CanonicalVarValues<I> {
+        CanonicalVarValues { var_values: Default::default() }
+    }
+
+    pub fn instantiate(
+        cx: I,
+        variables: I::CanonicalVarKinds,
+        mut f: impl FnMut(&[I::GenericArg], CanonicalVarKind<I>) -> I::GenericArg,
+    ) -> CanonicalVarValues<I> {
+        // Instantiating `CanonicalVarValues` is really hot, but limited to less than
+        // 4 most of the time. Avoid creating a `Vec` here.
+        if variables.len() <= 4 {
+            let mut var_values = ArrayVec::<_, 4>::new();
+            for info in variables.iter() {
+                var_values.push(f(&var_values, info));
+            }
+            CanonicalVarValues { var_values: cx.mk_args(&var_values) }
+        } else {
+            CanonicalVarValues::instantiate_cold(cx, variables, f)
+        }
+    }
+
+    #[cold]
+    fn instantiate_cold(
+        cx: I,
+        variables: I::CanonicalVarKinds,
+        mut f: impl FnMut(&[I::GenericArg], CanonicalVarKind<I>) -> I::GenericArg,
+    ) -> CanonicalVarValues<I> {
+        let mut var_values = Vec::with_capacity(variables.len());
+        for info in variables.iter() {
+            var_values.push(f(&var_values, info));
+        }
+        CanonicalVarValues { var_values: cx.mk_args(&var_values) }
+    }
+
+    #[inline]
+    pub fn len(&self) -> usize {
+        self.var_values.len()
+    }
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=into_iter | COMPLEXITY=5 | LINES=9 */
+
+impl<'a, I: Interner> IntoIterator for &'a CanonicalVarValues<I> {
+    type Item = I::GenericArg;
+    type IntoIter = <I::GenericArgs as SliceLike>::IntoIter;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.var_values.iter()
+    }
+}
+/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=index | COMPLEXITY=5 | LINES=8 */
+
+impl<I: Interner> Index<ty::BoundVar> for CanonicalVarValues<I> {
+    type Output = I::GenericArg;
+
+    fn index(&self, value: ty::BoundVar) -> &I::GenericArg {
+        &self.var_values.as_slice()[value.as_usize()]
+    }
+}
+/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=CanonicalParamEnvCacheEntry | COMPLEXITY=2 | LINES=8 */
+
+#[derive_where(Clone, Debug; I: Interner)]
+pub struct CanonicalParamEnvCacheEntry<I: Interner> {
+    pub param_env: I::ParamEnv,
+    pub variables: Vec<I::GenericArg>,
+    pub variable_lookup_table: HashMap<I::GenericArg, usize>,
+    pub var_kinds: Vec<CanonicalVarKind<I>>,
+}

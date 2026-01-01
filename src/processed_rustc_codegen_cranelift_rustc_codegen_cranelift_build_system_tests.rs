@@ -1,54 +1,446 @@
-/* FP:tests.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_USE_0001
-/* FP:tests.rs-0002 */ use std :: ffi :: OsStr ;
-/* FP:tests.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_USE_0002
-/* FP:tests.rs-0004 */ use std :: path :: PathBuf ;
-/* FP:tests.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_USE_0003
-/* FP:tests.rs-0006 */ use std :: process :: Command ;
-/* FP:tests.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_USE_0004
-/* FP:tests.rs-0008 */ use crate :: path :: { Dirs , RelPath } ;
-/* FP:tests.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_USE_0005
-/* FP:tests.rs-0010 */ use crate :: prepare :: { GitRepo , apply_patches } ;
-/* FP:tests.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_USE_0006
-/* FP:tests.rs-0012 */ use crate :: rustc_info :: get_default_sysroot ;
-/* FP:tests.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_USE_0007
-/* FP:tests.rs-0014 */ use crate :: shared_utils :: rustflags_from_env ;
-/* FP:tests.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_USE_0008
-/* FP:tests.rs-0016 */ use crate :: utils :: { CargoProject , Compiler , LogGroup , ensure_empty_dir , spawn_and_wait } ;
-/* FP:tests.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_USE_0009
-/* FP:tests.rs-0018 */ use crate :: { CodegenBackend , SysrootKind , build_sysroot , config } ;
-/* FP:tests.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_STATIC_0010
-/* FP:tests.rs-0020 */ static BUILD_EXAMPLE_OUT_DIR : RelPath = RelPath :: build ("example") ;
-/* FP:tests.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_STRUCT_0011
-/* FP:tests.rs-0022 */ struct TestCase { config : & 'static str , cmd : TestCaseCmd , }
-/* FP:tests.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_ENUM_0012
-/* FP:tests.rs-0024 */ enum TestCaseCmd { Custom { func : & 'static dyn Fn (& TestRunner < '_ >) } , BuildLib { source : & 'static str , crate_types : & 'static str } , BuildBin { source : & 'static str } , BuildBinAndRun { source : & 'static str , args : & 'static [& 'static str] } , JitBin { source : & 'static str , args : & 'static str } , }
-/* FP:tests.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_IMPL_0013
-/* FP:tests.rs-0026 */ impl TestCase { const fn custom (config : & 'static str , func : & 'static dyn Fn (& TestRunner < '_ >)) -> Self { Self { config , cmd : TestCaseCmd :: Custom { func } } } const fn build_lib (config : & 'static str , source : & 'static str , crate_types : & 'static str ,) -> Self { Self { config , cmd : TestCaseCmd :: BuildLib { source , crate_types } } } const fn build_bin (config : & 'static str , source : & 'static str) -> Self { Self { config , cmd : TestCaseCmd :: BuildBin { source } } } const fn build_bin_and_run (config : & 'static str , source : & 'static str , args : & 'static [& 'static str] ,) -> Self { Self { config , cmd : TestCaseCmd :: BuildBinAndRun { source , args } } } const fn jit_bin (config : & 'static str , source : & 'static str , args : & 'static str) -> Self { Self { config , cmd : TestCaseCmd :: JitBin { source , args } } } }
-/* FP:tests.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_CONST_0014
-/* FP:tests.rs-0028 */ const NO_SYSROOT_SUITE : & [TestCase] = & [TestCase :: build_lib ("build.mini_core" , "example/mini_core.rs" , "lib,dylib") , TestCase :: build_lib ("build.example" , "example/example.rs" , "lib") , TestCase :: jit_bin ("jit.mini_core_hello_world" , "example/mini_core_hello_world.rs" , "abc bcd") , TestCase :: build_bin_and_run ("aot.mini_core_hello_world" , "example/mini_core_hello_world.rs" , & ["abc" , "bcd"] ,) ,] ;
-/* FP:tests.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_CONST_0015
-/* FP:tests.rs-0030 */ const BASE_SYSROOT_SUITE : & [TestCase] = & [TestCase :: build_bin_and_run ("aot.arbitrary_self_types_pointers_and_wrappers" , "example/arbitrary_self_types_pointers_and_wrappers.rs" , & [] ,) , TestCase :: jit_bin ("jit.std_example" , "example/std_example.rs" , "arg") , TestCase :: build_bin_and_run ("aot.std_example" , "example/std_example.rs" , & ["arg"]) , TestCase :: build_bin_and_run ("aot.dst_field_align" , "example/dst-field-align.rs" , & []) , TestCase :: build_bin_and_run ("aot.subslice-patterns-const-eval" , "example/subslice-patterns-const-eval.rs" , & [] ,) , TestCase :: build_bin_and_run ("aot.track-caller-attribute" , "example/track-caller-attribute.rs" , & [] ,) , TestCase :: build_bin_and_run ("aot.float-minmax-pass" , "example/float-minmax-pass.rs" , & []) , TestCase :: build_bin_and_run ("aot.issue-72793" , "example/issue-72793.rs" , & []) , TestCase :: build_bin ("aot.issue-59326" , "example/issue-59326.rs") , TestCase :: build_bin_and_run ("aot.neon" , "example/neon.rs" , & []) , TestCase :: custom ("aot.gen_block_iterate" , & | runner | { runner . run_rustc (["example/gen_block_iterate.rs" , "--edition" , "2024" , "-Zunstable-options" ,]) ; runner . run_out_command ("gen_block_iterate" , & []) ; }) , TestCase :: build_bin_and_run ("aot.raw-dylib" , "example/raw-dylib.rs" , & []) , TestCase :: custom ("test.sysroot" , & | runner | { apply_patches (& runner . dirs , "sysroot_tests" , & runner . stdlib_source . join ("library") , & SYSROOT_TESTS_SRC . to_path (& runner . dirs) ,) ; SYSROOT_TESTS . clean (& runner . dirs) ; let mut target_compiler = runner . target_compiler . clone () ; target_compiler . rustflags . push ("--cap-lints=allow" . to_owned ()) ; target_compiler . rustflags . extend (["--cfg" . to_owned () , "randomized_layouts" . to_owned ()]) ; if runner . is_native { let mut test_cmd = SYSROOT_TESTS . test (& target_compiler , & runner . dirs) ; test_cmd . args (["-p" , "coretests" , "-p" , "alloctests" , "--tests" , "--" , "-q"]) ; spawn_and_wait (test_cmd) ; } else { eprintln ! ("Cross-Compiling: Not running tests") ; let mut build_cmd = SYSROOT_TESTS . build (& target_compiler , & runner . dirs) ; build_cmd . args (["-p" , "coretests" , "-p" , "alloctests" , "--tests"]) ; spawn_and_wait (build_cmd) ; } }) ,] ;
-/* FP:tests.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_STATIC_0016
-/* FP:tests.rs-0032 */ pub (crate) static RAND_REPO : GitRepo = GitRepo :: github ("rust-random" , "rand" , "1f4507a8e1cf8050e4ceef95eeda8f64645b6719" , "981f8bf489338978" , "rand" ,) ;
-/* FP:tests.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_STATIC_0017
-/* FP:tests.rs-0034 */ static RAND : CargoProject = CargoProject :: new (& RAND_REPO . source_dir () , "rand_target") ;
-/* FP:tests.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_STATIC_0018
-/* FP:tests.rs-0036 */ pub (crate) static REGEX_REPO : GitRepo = GitRepo :: github ("rust-lang" , "regex" , "061ee815ef2c44101dba7b0b124600fcb03c1912" , "dc26aefbeeac03ca" , "regex" ,) ;
-/* FP:tests.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_STATIC_0019
-/* FP:tests.rs-0038 */ static REGEX : CargoProject = CargoProject :: new (& REGEX_REPO . source_dir () , "regex_target") ;
-/* FP:tests.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_STATIC_0020
-/* FP:tests.rs-0040 */ static PORTABLE_SIMD_SRC : RelPath = RelPath :: build ("portable-simd") ;
-/* FP:tests.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_STATIC_0021
-/* FP:tests.rs-0042 */ static PORTABLE_SIMD : CargoProject = CargoProject :: new (& PORTABLE_SIMD_SRC , "portable-simd_target") ;
-/* FP:tests.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_STATIC_0022
-/* FP:tests.rs-0044 */ static SYSROOT_TESTS_SRC : RelPath = RelPath :: build ("sysroot_tests") ;
-/* FP:tests.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_STATIC_0023
-/* FP:tests.rs-0046 */ static SYSROOT_TESTS : CargoProject = CargoProject :: new (& SYSROOT_TESTS_SRC , "sysroot_tests_target") ;
-/* FP:tests.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_CONST_0024
-/* FP:tests.rs-0048 */ const EXTENDED_SYSROOT_SUITE : & [TestCase] = & [TestCase :: custom ("test.rust-random/rand" , & | runner | { RAND_REPO . patch (& runner . dirs) ; RAND . clean (& runner . dirs) ; if runner . is_native { let mut test_cmd = RAND . test (& runner . target_compiler , & runner . dirs) ; test_cmd . arg ("--workspace") . arg ("--") . arg ("-q") ; spawn_and_wait (test_cmd) ; } else { eprintln ! ("Cross-Compiling: Not running tests") ; let mut build_cmd = RAND . build (& runner . target_compiler , & runner . dirs) ; build_cmd . arg ("--workspace") . arg ("--tests") ; spawn_and_wait (build_cmd) ; } }) , TestCase :: custom ("test.regex" , & | runner | { REGEX_REPO . patch (& runner . dirs) ; REGEX . clean (& runner . dirs) ; if runner . is_native { let mut run_cmd = REGEX . test (& runner . target_compiler , & runner . dirs) ; run_cmd . args (["-p" , "regex" , "-p" , "regex-syntax" , "--release" , "--all-targets" , "--" , "-q" ,]) ; spawn_and_wait (run_cmd) ; let mut run_cmd = REGEX . test (& runner . target_compiler , & runner . dirs) ; run_cmd . args (["-p" , "regex-automata" , "--release" , "--lib" , "--" , "-q"]) ; spawn_and_wait (run_cmd) ; } else { eprintln ! ("Cross-Compiling: Not running tests") ; let mut build_cmd = REGEX . build (& runner . target_compiler , & runner . dirs) ; build_cmd . arg ("--tests") ; spawn_and_wait (build_cmd) ; } }) , TestCase :: custom ("test.portable-simd" , & | runner | { apply_patches (& runner . dirs , "portable-simd" , & runner . stdlib_source . join ("library/portable-simd") , & PORTABLE_SIMD_SRC . to_path (& runner . dirs) ,) ; PORTABLE_SIMD . clean (& runner . dirs) ; let mut build_cmd = PORTABLE_SIMD . build (& runner . target_compiler , & runner . dirs) ; build_cmd . arg ("--all-targets") ; spawn_and_wait (build_cmd) ; if runner . is_native { let mut test_cmd = PORTABLE_SIMD . test (& runner . target_compiler , & runner . dirs) ; test_cmd . arg ("-q") ; spawn_and_wait (test_cmd) ; } }) ,] ;
-/* FP:tests.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_FN_0025
-/* FP:tests.rs-0050 */ pub (crate) fn run_tests (dirs : & Dirs , sysroot_kind : SysrootKind , use_unstable_features : bool , skip_tests : & [& str] , cg_clif_dylib : & CodegenBackend , bootstrap_host_compiler : & Compiler , rustup_toolchain_name : Option < & str > , target_triple : String ,) { let stdlib_source = get_default_sysroot (& bootstrap_host_compiler . rustc) . join ("lib/rustlib/src/rust") ; assert ! (stdlib_source . exists ()) ; if config :: get_bool ("testsuite.no_sysroot") && ! skip_tests . contains (& "testsuite.no_sysroot") { let target_compiler = build_sysroot :: build_sysroot (dirs , SysrootKind :: None , cg_clif_dylib , bootstrap_host_compiler , rustup_toolchain_name , target_triple . clone () ,) ; let runner = TestRunner :: new (dirs . clone () , target_compiler , use_unstable_features , skip_tests , bootstrap_host_compiler . triple == target_triple , stdlib_source . clone () ,) ; let path = BUILD_EXAMPLE_OUT_DIR . to_path (dirs) ; ensure_empty_dir (& path) ; runner . run_testsuite (NO_SYSROOT_SUITE) ; } else { eprintln ! ("[SKIP] no_sysroot tests") ; } let run_base_sysroot = config :: get_bool ("testsuite.base_sysroot") && ! skip_tests . contains (& "testsuite.base_sysroot") ; let run_extended_sysroot = config :: get_bool ("testsuite.extended_sysroot") && ! skip_tests . contains (& "testsuite.extended_sysroot") ; if run_base_sysroot || run_extended_sysroot { let target_compiler = build_sysroot :: build_sysroot (dirs , sysroot_kind , cg_clif_dylib , bootstrap_host_compiler , rustup_toolchain_name , target_triple . clone () ,) ; let mut runner = TestRunner :: new (dirs . clone () , target_compiler , use_unstable_features , skip_tests , bootstrap_host_compiler . triple == target_triple , stdlib_source ,) ; if run_base_sysroot { runner . run_testsuite (BASE_SYSROOT_SUITE) ; } else { eprintln ! ("[SKIP] base_sysroot tests") ; } if run_extended_sysroot { runner . target_compiler . rustflags . push ("--cap-lints=allow" . to_owned ()) ; runner . run_testsuite (EXTENDED_SYSROOT_SUITE) ; } else { eprintln ! ("[SKIP] extended_sysroot tests") ; } } }
-/* FP:tests.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_STRUCT_0026
-/* FP:tests.rs-0052 */ struct TestRunner < 'a > { is_native : bool , jit_supported : bool , skip_tests : & 'a [& 'a str] , dirs : Dirs , target_compiler : Compiler , stdlib_source : PathBuf , }
-/* FP:tests.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_build_system_tests_IMPL_0027
-/* FP:tests.rs-0054 */ impl < 'a > TestRunner < 'a > { fn new (dirs : Dirs , mut target_compiler : Compiler , use_unstable_features : bool , skip_tests : & 'a [& 'a str] , is_native : bool , stdlib_source : PathBuf ,) -> Self { target_compiler . rustflags . extend (rustflags_from_env ("RUSTFLAGS")) ; target_compiler . rustdocflags . extend (rustflags_from_env ("RUSTDOCFLAGS")) ; let jit_supported = use_unstable_features && is_native && ! target_compiler . triple . contains ("windows") ; Self { is_native , jit_supported , skip_tests , dirs , target_compiler , stdlib_source } } fn run_testsuite (& self , tests : & [TestCase]) { for TestCase { config , cmd } in tests { let (tag , testname) = config . split_once ('.') . unwrap () ; let tag = tag . to_uppercase () ; let is_jit_test = tag == "JIT" ; let _guard = if ! config :: get_bool (config) || (is_jit_test && ! self . jit_supported) || self . skip_tests . contains (& config) { eprintln ! ("[{tag}] {testname} (skipped)") ; continue ; } else { let guard = LogGroup :: guard (& format ! ("[{tag}] {testname}")) ; eprintln ! ("[{tag}] {testname}") ; guard } ; match * cmd { TestCaseCmd :: Custom { func } => func (self) , TestCaseCmd :: BuildLib { source , crate_types } => { self . run_rustc ([source , "--crate-type" , crate_types]) ; } TestCaseCmd :: BuildBin { source } => { self . run_rustc ([source]) ; } TestCaseCmd :: BuildBinAndRun { source , args } => { self . run_rustc ([source]) ; self . run_out_command (source . split ('/') . last () . unwrap () . split ('.') . next () . unwrap () , args ,) ; } TestCaseCmd :: JitBin { source , args } => { let mut jit_cmd = self . rustc_command (["-Zunstable-options" , "-Cllvm-args=jit-mode" , "-Cprefer-dynamic" , source , "--cfg" , "jit" ,]) ; if ! args . is_empty () { jit_cmd . env ("CG_CLIF_JIT_ARGS" , args) ; } spawn_and_wait (jit_cmd) ; } } } } # [must_use] fn rustc_command < I , S > (& self , args : I) -> Command where I : IntoIterator < Item = S > , S : AsRef < OsStr > , { let mut cmd = Command :: new (& self . target_compiler . rustc) ; cmd . args (& self . target_compiler . rustflags) ; cmd . arg ("-L") ; cmd . arg (format ! ("crate={}" , BUILD_EXAMPLE_OUT_DIR . to_path (& self . dirs) . display ())) ; cmd . arg ("--out-dir") ; cmd . arg (BUILD_EXAMPLE_OUT_DIR . to_path (& self . dirs)) ; cmd . arg ("-Cdebuginfo=2") ; cmd . arg ("--target") ; cmd . arg (& self . target_compiler . triple) ; cmd . arg ("-Cpanic=abort") ; cmd . arg ("--check-cfg=cfg(jit)") ; cmd . args (args) ; cmd } fn run_rustc < I , S > (& self , args : I) where I : IntoIterator < Item = S > , S : AsRef < OsStr > , { spawn_and_wait (self . rustc_command (args)) ; } fn run_out_command (& self , name : & str , args : & [& str]) { let mut cmd = self . target_compiler . run_with_runner (BUILD_EXAMPLE_OUT_DIR . to_path (& self . dirs) . join (name)) ; cmd . args (args) ; spawn_and_wait (cmd) ; } }
+// SRC: ../rust/compiler/rustc_codegen_cranelift/build_system/tests.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use std::ffi::OsStr;
+use std::path::PathBuf;
+use std::process::Command;
+
+use crate::path::{Dirs, RelPath};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::prepare::{GitRepo, apply_patches};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_info::get_default_sysroot;
+use crate::shared_utils::rustflags_from_env;
+use crate::utils::{CargoProject, Compiler, LogGroup, ensure_empty_dir, spawn_and_wait};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::{CodegenBackend, SysrootKind, build_sysroot, config};
+/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=TestCase | COMPLEXITY=2 | LINES=7 */
+
+static BUILD_EXAMPLE_OUT_DIR: RelPath = RelPath::build("example");
+
+struct TestCase {
+    config: &'static str,
+    cmd: TestCaseCmd,
+}
+/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=7 | LINES=8 */
+
+enum TestCaseCmd {
+    Custom { func: &'static dyn Fn(&TestRunner<'_>) },
+    BuildLib { source: &'static str, crate_types: &'static str },
+    BuildBin { source: &'static str },
+    BuildBinAndRun { source: &'static str, args: &'static [&'static str] },
+    JitBin { source: &'static str, args: &'static str },
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=18 | LINES=31 */
+
+impl TestCase {
+    // FIXME reduce usage of custom test case commands
+    const fn custom(config: &'static str, func: &'static dyn Fn(&TestRunner<'_>)) -> Self {
+        Self { config, cmd: TestCaseCmd::Custom { func } }
+    }
+
+    const fn build_lib(
+        config: &'static str,
+        source: &'static str,
+        crate_types: &'static str,
+    ) -> Self {
+        Self { config, cmd: TestCaseCmd::BuildLib { source, crate_types } }
+    }
+
+    const fn build_bin(config: &'static str, source: &'static str) -> Self {
+        Self { config, cmd: TestCaseCmd::BuildBin { source } }
+    }
+
+    const fn build_bin_and_run(
+        config: &'static str,
+        source: &'static str,
+        args: &'static [&'static str],
+    ) -> Self {
+        Self { config, cmd: TestCaseCmd::BuildBinAndRun { source, args } }
+    }
+
+    const fn jit_bin(config: &'static str, source: &'static str, args: &'static str) -> Self {
+        Self { config, cmd: TestCaseCmd::JitBin { source, args } }
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=5 | LINES=44 */
+
+const NO_SYSROOT_SUITE: &[TestCase] = &[
+    TestCase::build_lib("build.mini_core", "example/mini_core.rs", "lib,dylib"),
+    TestCase::build_lib("build.example", "example/example.rs", "lib"),
+    TestCase::jit_bin("jit.mini_core_hello_world", "example/mini_core_hello_world.rs", "abc bcd"),
+    TestCase::build_bin_and_run(
+        "aot.mini_core_hello_world",
+        "example/mini_core_hello_world.rs",
+        &["abc", "bcd"],
+    ),
+];
+
+const BASE_SYSROOT_SUITE: &[TestCase] = &[
+    TestCase::build_bin_and_run(
+        "aot.arbitrary_self_types_pointers_and_wrappers",
+        "example/arbitrary_self_types_pointers_and_wrappers.rs",
+        &[],
+    ),
+    TestCase::jit_bin("jit.std_example", "example/std_example.rs", "arg"),
+    TestCase::build_bin_and_run("aot.std_example", "example/std_example.rs", &["arg"]),
+    TestCase::build_bin_and_run("aot.dst_field_align", "example/dst-field-align.rs", &[]),
+    TestCase::build_bin_and_run(
+        "aot.subslice-patterns-const-eval",
+        "example/subslice-patterns-const-eval.rs",
+        &[],
+    ),
+    TestCase::build_bin_and_run(
+        "aot.track-caller-attribute",
+        "example/track-caller-attribute.rs",
+        &[],
+    ),
+    TestCase::build_bin_and_run("aot.float-minmax-pass", "example/float-minmax-pass.rs", &[]),
+    TestCase::build_bin_and_run("aot.issue-72793", "example/issue-72793.rs", &[]),
+    TestCase::build_bin("aot.issue-59326", "example/issue-59326.rs"),
+    TestCase::build_bin_and_run("aot.neon", "example/neon.rs", &[]),
+    TestCase::custom("aot.gen_block_iterate", &|runner| {
+        runner.run_rustc([
+            "example/gen_block_iterate.rs",
+            "--edition",
+            "2024",
+            "-Zunstable-options",
+        ]);
+        runner.run_out_command("gen_block_iterate", &[]);
+    }),
+/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=8 | LINES=29 */
+    TestCase::build_bin_and_run("aot.raw-dylib", "example/raw-dylib.rs", &[]),
+    TestCase::custom("test.sysroot", &|runner| {
+        apply_patches(
+            &runner.dirs,
+            "sysroot_tests",
+            &runner.stdlib_source.join("library"),
+            &SYSROOT_TESTS_SRC.to_path(&runner.dirs),
+        );
+
+        SYSROOT_TESTS.clean(&runner.dirs);
+
+        let mut target_compiler = runner.target_compiler.clone();
+        // coretests and alloctests produce a bunch of warnings. When running
+        // in rust's CI warnings are denied, so we have to override that here.
+        target_compiler.rustflags.push("--cap-lints=allow".to_owned());
+        // The standard library may have been compiled with -Zrandomize-layout.
+        target_compiler.rustflags.extend(["--cfg".to_owned(), "randomized_layouts".to_owned()]);
+
+        if runner.is_native {
+            let mut test_cmd = SYSROOT_TESTS.test(&target_compiler, &runner.dirs);
+            test_cmd.args(["-p", "coretests", "-p", "alloctests", "--tests", "--", "-q"]);
+            spawn_and_wait(test_cmd);
+        } else {
+            eprintln!("Cross-Compiling: Not running tests");
+            let mut build_cmd = SYSROOT_TESTS.build(&target_compiler, &runner.dirs);
+            build_cmd.args(["-p", "coretests", "-p", "alloctests", "--tests"]);
+            spawn_and_wait(build_cmd);
+        }
+    }),
+/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=47 */
+];
+
+pub(crate) static RAND_REPO: GitRepo = GitRepo::github(
+    "rust-random",
+    "rand",
+    "1f4507a8e1cf8050e4ceef95eeda8f64645b6719",
+    "981f8bf489338978",
+    "rand",
+);
+
+static RAND: CargoProject = CargoProject::new(&RAND_REPO.source_dir(), "rand_target");
+
+pub(crate) static REGEX_REPO: GitRepo = GitRepo::github(
+    "rust-lang",
+    "regex",
+    "061ee815ef2c44101dba7b0b124600fcb03c1912",
+    "dc26aefbeeac03ca",
+    "regex",
+);
+
+static REGEX: CargoProject = CargoProject::new(&REGEX_REPO.source_dir(), "regex_target");
+
+static PORTABLE_SIMD_SRC: RelPath = RelPath::build("portable-simd");
+
+static PORTABLE_SIMD: CargoProject = CargoProject::new(&PORTABLE_SIMD_SRC, "portable-simd_target");
+
+static SYSROOT_TESTS_SRC: RelPath = RelPath::build("sysroot_tests");
+
+static SYSROOT_TESTS: CargoProject = CargoProject::new(&SYSROOT_TESTS_SRC, "sysroot_tests_target");
+
+const EXTENDED_SYSROOT_SUITE: &[TestCase] = &[
+    TestCase::custom("test.rust-random/rand", &|runner| {
+        RAND_REPO.patch(&runner.dirs);
+
+        RAND.clean(&runner.dirs);
+
+        if runner.is_native {
+            let mut test_cmd = RAND.test(&runner.target_compiler, &runner.dirs);
+            test_cmd.arg("--workspace").arg("--").arg("-q");
+            spawn_and_wait(test_cmd);
+        } else {
+            eprintln!("Cross-Compiling: Not running tests");
+            let mut build_cmd = RAND.build(&runner.target_compiler, &runner.dirs);
+            build_cmd.arg("--workspace").arg("--tests");
+            spawn_and_wait(build_cmd);
+        }
+    }),
+/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=10 | LINES=33 */
+    TestCase::custom("test.regex", &|runner| {
+        REGEX_REPO.patch(&runner.dirs);
+
+        REGEX.clean(&runner.dirs);
+
+        if runner.is_native {
+            let mut run_cmd = REGEX.test(&runner.target_compiler, &runner.dirs);
+            // regex-capi and regex-debug don't have any tests. Nor do they contain any code
+            // that is useful to test with cg_clif. Skip building them to reduce test time.
+            run_cmd.args([
+                "-p",
+                "regex",
+                "-p",
+                "regex-syntax",
+                "--release",
+                "--all-targets",
+                "--",
+                "-q",
+            ]);
+            spawn_and_wait(run_cmd);
+
+            let mut run_cmd = REGEX.test(&runner.target_compiler, &runner.dirs);
+            // don't run integration tests for regex-autonata. they take like 2min each without
+            // much extra coverage of simd usage.
+            run_cmd.args(["-p", "regex-automata", "--release", "--lib", "--", "-q"]);
+            spawn_and_wait(run_cmd);
+        } else {
+            eprintln!("Cross-Compiling: Not running tests");
+            let mut build_cmd = REGEX.build(&runner.target_compiler, &runner.dirs);
+            build_cmd.arg("--tests");
+            spawn_and_wait(build_cmd);
+        }
+    }),
+/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=20 */
+    TestCase::custom("test.portable-simd", &|runner| {
+        apply_patches(
+            &runner.dirs,
+            "portable-simd",
+            &runner.stdlib_source.join("library/portable-simd"),
+            &PORTABLE_SIMD_SRC.to_path(&runner.dirs),
+        );
+
+        PORTABLE_SIMD.clean(&runner.dirs);
+
+        let mut build_cmd = PORTABLE_SIMD.build(&runner.target_compiler, &runner.dirs);
+        build_cmd.arg("--all-targets");
+        spawn_and_wait(build_cmd);
+
+        if runner.is_native {
+            let mut test_cmd = PORTABLE_SIMD.test(&runner.target_compiler, &runner.dirs);
+            test_cmd.arg("-q");
+            spawn_and_wait(test_cmd);
+        }
+    }),
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=83 */
+];
+
+pub(crate) fn run_tests(
+    dirs: &Dirs,
+    sysroot_kind: SysrootKind,
+    use_unstable_features: bool,
+    skip_tests: &[&str],
+    cg_clif_dylib: &CodegenBackend,
+    bootstrap_host_compiler: &Compiler,
+    rustup_toolchain_name: Option<&str>,
+    target_triple: String,
+) {
+    let stdlib_source =
+        get_default_sysroot(&bootstrap_host_compiler.rustc).join("lib/rustlib/src/rust");
+    assert!(stdlib_source.exists());
+
+    if config::get_bool("testsuite.no_sysroot") && !skip_tests.contains(&"testsuite.no_sysroot") {
+        let target_compiler = build_sysroot::build_sysroot(
+            dirs,
+            SysrootKind::None,
+            cg_clif_dylib,
+            bootstrap_host_compiler,
+            rustup_toolchain_name,
+            target_triple.clone(),
+        );
+
+        let runner = TestRunner::new(
+            dirs.clone(),
+            target_compiler,
+            use_unstable_features,
+            skip_tests,
+            bootstrap_host_compiler.triple == target_triple,
+            stdlib_source.clone(),
+        );
+
+        let path = BUILD_EXAMPLE_OUT_DIR.to_path(dirs);
+        ensure_empty_dir(&path);
+
+        runner.run_testsuite(NO_SYSROOT_SUITE);
+    } else {
+        eprintln!("[SKIP] no_sysroot tests");
+    }
+
+    let run_base_sysroot = config::get_bool("testsuite.base_sysroot")
+        && !skip_tests.contains(&"testsuite.base_sysroot");
+    let run_extended_sysroot = config::get_bool("testsuite.extended_sysroot")
+        && !skip_tests.contains(&"testsuite.extended_sysroot");
+
+    if run_base_sysroot || run_extended_sysroot {
+        let target_compiler = build_sysroot::build_sysroot(
+            dirs,
+            sysroot_kind,
+            cg_clif_dylib,
+            bootstrap_host_compiler,
+            rustup_toolchain_name,
+            target_triple.clone(),
+        );
+
+        let mut runner = TestRunner::new(
+            dirs.clone(),
+            target_compiler,
+            use_unstable_features,
+            skip_tests,
+            bootstrap_host_compiler.triple == target_triple,
+            stdlib_source,
+        );
+
+        if run_base_sysroot {
+            runner.run_testsuite(BASE_SYSROOT_SUITE);
+        } else {
+            eprintln!("[SKIP] base_sysroot tests");
+        }
+
+        if run_extended_sysroot {
+            // Rust's build system denies a couple of lints that trigger on several of the test
+            // projects. Changing the code to fix them is not worth it, so just silence all lints.
+            runner.target_compiler.rustflags.push("--cap-lints=allow".to_owned());
+            runner.run_testsuite(EXTENDED_SYSROOT_SUITE);
+        } else {
+            eprintln!("[SKIP] extended_sysroot tests");
+        }
+    }
+}
+/* AST_META: AST_ID=14 | TYPE=STRUCT | NAME=TestRunner | COMPLEXITY=2 | LINES=9 */
+
+struct TestRunner<'a> {
+    is_native: bool,
+    jit_supported: bool,
+    skip_tests: &'a [&'a str],
+    dirs: Dirs,
+    target_compiler: Compiler,
+    stdlib_source: PathBuf,
+}
+/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=new | COMPLEXITY=46 | LINES=109 */
+
+impl<'a> TestRunner<'a> {
+    fn new(
+        dirs: Dirs,
+        mut target_compiler: Compiler,
+        use_unstable_features: bool,
+        skip_tests: &'a [&'a str],
+        is_native: bool,
+        stdlib_source: PathBuf,
+    ) -> Self {
+        target_compiler.rustflags.extend(rustflags_from_env("RUSTFLAGS"));
+        target_compiler.rustdocflags.extend(rustflags_from_env("RUSTDOCFLAGS"));
+
+        let jit_supported =
+            use_unstable_features && is_native && !target_compiler.triple.contains("windows");
+
+        Self { is_native, jit_supported, skip_tests, dirs, target_compiler, stdlib_source }
+    }
+
+    fn run_testsuite(&self, tests: &[TestCase]) {
+        for TestCase { config, cmd } in tests {
+            let (tag, testname) = config.split_once('.').unwrap();
+            let tag = tag.to_uppercase();
+            let is_jit_test = tag == "JIT";
+
+            let _guard = if !config::get_bool(config)
+                || (is_jit_test && !self.jit_supported)
+                || self.skip_tests.contains(&config)
+            {
+                eprintln!("[{tag}] {testname} (skipped)");
+                continue;
+            } else {
+                let guard = LogGroup::guard(&format!("[{tag}] {testname}"));
+                eprintln!("[{tag}] {testname}");
+                guard
+            };
+
+            match *cmd {
+                TestCaseCmd::Custom { func } => func(self),
+                TestCaseCmd::BuildLib { source, crate_types } => {
+                    self.run_rustc([source, "--crate-type", crate_types]);
+                }
+                TestCaseCmd::BuildBin { source } => {
+                    self.run_rustc([source]);
+                }
+                TestCaseCmd::BuildBinAndRun { source, args } => {
+                    self.run_rustc([source]);
+                    self.run_out_command(
+                        source.split('/').last().unwrap().split('.').next().unwrap(),
+                        args,
+                    );
+                }
+                TestCaseCmd::JitBin { source, args } => {
+                    let mut jit_cmd = self.rustc_command([
+                        "-Zunstable-options",
+                        "-Cllvm-args=jit-mode",
+                        "-Cprefer-dynamic",
+                        source,
+                        "--cfg",
+                        "jit",
+                    ]);
+                    if !args.is_empty() {
+                        jit_cmd.env("CG_CLIF_JIT_ARGS", args);
+                    }
+                    spawn_and_wait(jit_cmd);
+                }
+            }
+        }
+    }
+
+    #[must_use]
+    fn rustc_command<I, S>(&self, args: I) -> Command
+    where
+        I: IntoIterator<Item = S>,
+        S: AsRef<OsStr>,
+    {
+        let mut cmd = Command::new(&self.target_compiler.rustc);
+        cmd.args(&self.target_compiler.rustflags);
+        cmd.arg("-L");
+        cmd.arg(format!("crate={}", BUILD_EXAMPLE_OUT_DIR.to_path(&self.dirs).display()));
+        cmd.arg("--out-dir");
+        cmd.arg(BUILD_EXAMPLE_OUT_DIR.to_path(&self.dirs));
+        cmd.arg("-Cdebuginfo=2");
+        cmd.arg("--target");
+        cmd.arg(&self.target_compiler.triple);
+        cmd.arg("-Cpanic=abort");
+        cmd.arg("--check-cfg=cfg(jit)");
+        cmd.args(args);
+        cmd
+    }
+
+    fn run_rustc<I, S>(&self, args: I)
+    where
+        I: IntoIterator<Item = S>,
+        S: AsRef<OsStr>,
+    {
+        spawn_and_wait(self.rustc_command(args));
+    }
+
+    fn run_out_command(&self, name: &str, args: &[&str]) {
+        let mut cmd = self
+            .target_compiler
+            .run_with_runner(BUILD_EXAMPLE_OUT_DIR.to_path(&self.dirs).join(name));
+
+        cmd.args(args);
+
+        spawn_and_wait(cmd);
+    }
+}

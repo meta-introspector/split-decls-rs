@@ -1,8 +1,27 @@
-/* FP:sigpipe.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_session_src_config_sigpipe_CONST_0001
-/* FP:sigpipe.rs-0002 */ # [doc = " The default value if `-Zon-broken-pipe=...` is not specified. This resolves"] # [doc = " to `SIG_IGN` in `library/std/src/sys/pal/unix/mod.rs`."] # [doc = ""] # [doc = " Note that `SIG_IGN` has been the Rust default since 2014. See"] # [doc = " <https://github.com/rust-lang/rust/issues/62569>."] # [allow (dead_code)] pub const DEFAULT : u8 = 0 ;
-/* FP:sigpipe.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_session_src_config_sigpipe_CONST_0002
-/* FP:sigpipe.rs-0004 */ # [doc = " Do not touch `SIGPIPE`. Use whatever the parent process uses."] # [allow (dead_code)] pub const INHERIT : u8 = 1 ;
-/* FP:sigpipe.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_session_src_config_sigpipe_CONST_0003
-/* FP:sigpipe.rs-0006 */ # [doc = " Change `SIGPIPE` to `SIG_IGN` so that failed writes results in `EPIPE`"] # [doc = " that are eventually converted to `ErrorKind::BrokenPipe`."] # [allow (dead_code)] pub const SIG_IGN : u8 = 2 ;
-/* FP:sigpipe.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_session_src_config_sigpipe_CONST_0004
-/* FP:sigpipe.rs-0008 */ # [doc = " Change `SIGPIPE` to `SIG_DFL` so that the process is killed when trying"] # [doc = " to write to a closed pipe. This is usually the desired behavior for CLI"] # [doc = " apps that produce textual output that you want to pipe to other programs"] # [doc = " such as `head -n 1`."] # [allow (dead_code)] pub const SIG_DFL : u8 = 3 ;
+// SRC: ../rust/compiler/rustc_session/src/config/sigpipe.rs
+/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=25 */
+// NOTE: Keep these constants in sync with `library/std/src/sys/pal/unix/mod.rs`!
+
+/// The default value if `-Zon-broken-pipe=...` is not specified. This resolves
+/// to `SIG_IGN` in `library/std/src/sys/pal/unix/mod.rs`.
+///
+/// Note that `SIG_IGN` has been the Rust default since 2014. See
+/// <https://github.com/rust-lang/rust/issues/62569>.
+#[allow(dead_code)]
+pub const DEFAULT: u8 = 0;
+
+/// Do not touch `SIGPIPE`. Use whatever the parent process uses.
+#[allow(dead_code)]
+pub const INHERIT: u8 = 1;
+
+/// Change `SIGPIPE` to `SIG_IGN` so that failed writes results in `EPIPE`
+/// that are eventually converted to `ErrorKind::BrokenPipe`.
+#[allow(dead_code)]
+pub const SIG_IGN: u8 = 2;
+
+/// Change `SIGPIPE` to `SIG_DFL` so that the process is killed when trying
+/// to write to a closed pipe. This is usually the desired behavior for CLI
+/// apps that produce textual output that you want to pipe to other programs
+/// such as `head -n 1`.
+#[allow(dead_code)]
+pub const SIG_DFL: u8 = 3;

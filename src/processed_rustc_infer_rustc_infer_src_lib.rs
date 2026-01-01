@@ -1,5 +1,29 @@
-/* FP:lib.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_lib_MOD_0001
-/* FP:lib.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_lib_MOD_0002
-/* FP:lib.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_lib_MOD_0003
-/* FP:lib.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_lib_MACRO_0004
-/* FP:lib.rs-0008 */ rustc_fluent_macro :: fluent_messages ! { "../messages.ftl" }
+// SRC: ../rust/compiler/rustc_infer/src/lib.rs
+/* AST_META: AST_ID=1 | TYPE=MODULE | NAME=UNNAMED | COMPLEXITY=3 | LINES=30 */
+// This crates defines the type inference engine.
+//
+// - **Type inference.** The type inference code can be found in the `infer` module;
+//   this code handles low-level equality and subtyping operations. The
+//   type check pass in the compiler is found in the `rustc_hir_analysis` crate.
+//
+// For more information about how rustc works, see the [rustc dev guide].
+//
+// [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/
+//
+// # Note
+//
+// This API is completely unstable and subject to change.
+
+// tidy-alphabetical-start
+#[allow(internal_features)]
+#[allow(rustc::direct_use_of_rustc_type_ir)]
+#[doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
+#[doc(rust_logo)]
+#[feature(assert_matches)]
+#[feature(extend_one)]
+#[feature(rustdoc_internals)]
+#[recursion_limit = "512"] // For rustdoc
+// tidy-alphabetical-end
+
+
+rustc_fluent_macro::fluent_messages! { "../messages.ftl" }

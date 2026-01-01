@@ -1,14 +1,73 @@
-/* FP:misc.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_misc_USE_0001
-/* FP:misc.rs-0002 */ use crate :: rustc_complete :: mir :: * ;
-/* FP:misc.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_misc_USE_0002
-/* FP:misc.rs-0004 */ use crate :: rustc_complete :: ty :: { self , Ty } ;
-/* FP:misc.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_misc_USE_0003
-/* FP:misc.rs-0006 */ use crate :: rustc_complete :: Span ;
-/* FP:misc.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_misc_USE_0004
-/* FP:misc.rs-0008 */ use crate :: rustc_trait_selection :: infer :: InferCtxtExt ;
-/* FP:misc.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_misc_USE_0005
-/* FP:misc.rs-0010 */ use tracing :: debug ;
-/* FP:misc.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_misc_USE_0006
-/* FP:misc.rs-0012 */ use crate :: builder :: Builder ;
-/* FP:misc.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_misc_IMPL_0007
-/* FP:misc.rs-0014 */ impl < 'a , 'tcx > Builder < 'a , 'tcx > { # [doc = " Adds a new temporary value of type `ty` storing the result of"] # [doc = " evaluating `expr`."] # [doc = ""] # [doc = " N.B., **No cleanup is scheduled for this temporary.** You should"] # [doc = " call `schedule_drop` once the temporary is initialized."] pub (crate) fn temp (& mut self , ty : Ty < 'tcx > , span : Span) -> Place < 'tcx > { let temp = self . local_decls . push (LocalDecl :: new (ty , span)) ; let place = Place :: from (temp) ; debug ! ("temp: created temp {:?} with type {:?}" , place , self . local_decls [temp] . ty) ; place } # [doc = " Convenience function for creating a literal operand, one"] # [doc = " without any user type annotation."] pub (crate) fn literal_operand (& mut self , span : Span , const_ : Const < 'tcx >) -> Operand < 'tcx > { let constant = Box :: new (ConstOperand { span , user_ty : None , const_ }) ; Operand :: Constant (constant) } # [doc = " Returns a zero literal operand for the appropriate type, works for"] # [doc = " bool, char and integers."] pub (crate) fn zero_literal (& mut self , span : Span , ty : Ty < 'tcx >) -> Operand < 'tcx > { let literal = Const :: from_bits (self . tcx , 0 , ty :: TypingEnv :: fully_monomorphized () , ty) ; self . literal_operand (span , literal) } pub (crate) fn push_usize (& mut self , block : BasicBlock , source_info : SourceInfo , value : u64 ,) -> Place < 'tcx > { let usize_ty = self . tcx . types . usize ; let temp = self . temp (usize_ty , source_info . span) ; self . cfg . push_assign_constant (block , source_info , temp , ConstOperand { span : source_info . span , user_ty : None , const_ : Const :: from_usize (self . tcx , value) , } ,) ; temp } pub (crate) fn consume_by_copy_or_move (& self , place : Place < 'tcx >) -> Operand < 'tcx > { let tcx = self . tcx ; let ty = place . ty (& self . local_decls , tcx) . ty ; if self . infcx . type_is_copy_modulo_regions (self . param_env , ty) { Operand :: Copy (place) } else { Operand :: Move (place) } } }
+// SRC: ../rust/compiler/rustc_mir_build/src/builder/misc.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+// Miscellaneous builder routines that are not specific to building any particular
+// kind of thing.
+
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::{self, Ty};
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=25 | LINES=65 */
+use crate::rustc_complete::Span;
+use crate::rustc_trait_selection::infer::InferCtxtExt;
+use tracing::debug;
+
+use crate::builder::Builder;
+
+impl<'a, 'tcx> Builder<'a, 'tcx> {
+    /// Adds a new temporary value of type `ty` storing the result of
+    /// evaluating `expr`.
+    ///
+    /// N.B., **No cleanup is scheduled for this temporary.** You should
+    /// call `schedule_drop` once the temporary is initialized.
+    pub(crate) fn temp(&mut self, ty: Ty<'tcx>, span: Span) -> Place<'tcx> {
+        let temp = self.local_decls.push(LocalDecl::new(ty, span));
+        let place = Place::from(temp);
+        debug!("temp: created temp {:?} with type {:?}", place, self.local_decls[temp].ty);
+        place
+    }
+
+    /// Convenience function for creating a literal operand, one
+    /// without any user type annotation.
+    pub(crate) fn literal_operand(&mut self, span: Span, const_: Const<'tcx>) -> Operand<'tcx> {
+        let constant = Box::new(ConstOperand { span, user_ty: None, const_ });
+        Operand::Constant(constant)
+    }
+
+    /// Returns a zero literal operand for the appropriate type, works for
+    /// bool, char and integers.
+    pub(crate) fn zero_literal(&mut self, span: Span, ty: Ty<'tcx>) -> Operand<'tcx> {
+        let literal = Const::from_bits(self.tcx, 0, ty::TypingEnv::fully_monomorphized(), ty);
+
+        self.literal_operand(span, literal)
+    }
+
+    pub(crate) fn push_usize(
+        &mut self,
+        block: BasicBlock,
+        source_info: SourceInfo,
+        value: u64,
+    ) -> Place<'tcx> {
+        let usize_ty = self.tcx.types.usize;
+        let temp = self.temp(usize_ty, source_info.span);
+        self.cfg.push_assign_constant(
+            block,
+            source_info,
+            temp,
+            ConstOperand {
+                span: source_info.span,
+                user_ty: None,
+                const_: Const::from_usize(self.tcx, value),
+            },
+        );
+        temp
+    }
+
+    pub(crate) fn consume_by_copy_or_move(&self, place: Place<'tcx>) -> Operand<'tcx> {
+        let tcx = self.tcx;
+        let ty = place.ty(&self.local_decls, tcx).ty;
+        if self.infcx.type_is_copy_modulo_regions(self.param_env, ty) {
+            Operand::Copy(place)
+        } else {
+            Operand::Move(place)
+        }
+    }
+}

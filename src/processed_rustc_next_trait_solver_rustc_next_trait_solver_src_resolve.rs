@@ -1,16 +1,115 @@
-/* FP:resolve.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_resolve_USE_0001
-/* FP:resolve.rs-0002 */ use rustc_type_ir :: data_structures :: DelayedMap ;
-/* FP:resolve.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_resolve_USE_0002
-/* FP:resolve.rs-0004 */ use rustc_type_ir :: inherent :: * ;
-/* FP:resolve.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_resolve_USE_0003
-/* FP:resolve.rs-0006 */ use rustc_type_ir :: { self as ty , InferCtxtLike , Interner , TypeFoldable , TypeFolder , TypeSuperFoldable , TypeVisitableExt , } ;
-/* FP:resolve.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_resolve_USE_0004
-/* FP:resolve.rs-0008 */ use crate :: delegate :: SolverDelegate ;
-/* FP:resolve.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_resolve_STRUCT_0005
-/* FP:resolve.rs-0010 */ # [doc = " Resolves ty, region, and const vars to their inferred values or their root vars."] struct EagerResolver < 'a , D , I = < D as SolverDelegate > :: Interner > where D : SolverDelegate < Interner = I > , I : Interner , { delegate : & 'a D , # [doc = " We're able to use a cache here as the folder does not have any"] # [doc = " mutable state."] cache : DelayedMap < I :: Ty , I :: Ty > , }
-/* FP:resolve.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_resolve_FN_0006
-/* FP:resolve.rs-0012 */ pub fn eager_resolve_vars < D : SolverDelegate , T : TypeFoldable < D :: Interner > > (delegate : & D , value : T ,) -> T { if value . has_infer () { let mut folder = EagerResolver :: new (delegate) ; value . fold_with (& mut folder) } else { value } }
-/* FP:resolve.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_resolve_IMPL_0007
-/* FP:resolve.rs-0014 */ impl < 'a , D : SolverDelegate > EagerResolver < 'a , D > { fn new (delegate : & 'a D) -> Self { EagerResolver { delegate , cache : Default :: default () } } }
-/* FP:resolve.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_next_trait_solver_src_resolve_IMPL_0008
-/* FP:resolve.rs-0016 */ impl < D : SolverDelegate < Interner = I > , I : Interner > TypeFolder < I > for EagerResolver < '_ , D > { fn cx (& self) -> I { self . delegate . cx () } fn fold_ty (& mut self , t : I :: Ty) -> I :: Ty { match t . kind () { ty :: Infer (ty :: TyVar (vid)) => { let resolved = self . delegate . opportunistic_resolve_ty_var (vid) ; if t != resolved && resolved . has_infer () { resolved . fold_with (self) } else { resolved } } ty :: Infer (ty :: IntVar (vid)) => self . delegate . opportunistic_resolve_int_var (vid) , ty :: Infer (ty :: FloatVar (vid)) => self . delegate . opportunistic_resolve_float_var (vid) , _ => { if t . has_infer () { if let Some (& ty) = self . cache . get (& t) { return ty ; } let res = t . super_fold_with (self) ; assert ! (self . cache . insert (t , res)) ; res } else { t } } } } fn fold_region (& mut self , r : I :: Region) -> I :: Region { match r . kind () { ty :: ReVar (vid) => self . delegate . opportunistic_resolve_lt_var (vid) , _ => r , } } fn fold_const (& mut self , c : I :: Const) -> I :: Const { match c . kind () { ty :: ConstKind :: Infer (ty :: InferConst :: Var (vid)) => { let resolved = self . delegate . opportunistic_resolve_ct_var (vid) ; if c != resolved && resolved . has_infer () { resolved . fold_with (self) } else { resolved } } _ => { if c . has_infer () { c . super_fold_with (self) } else { c } } } } fn fold_predicate (& mut self , p : I :: Predicate) -> I :: Predicate { if p . has_infer () { p . super_fold_with (self) } else { p } } fn fold_clauses (& mut self , c : I :: Clauses) -> I :: Clauses { if c . has_infer () { c . super_fold_with (self) } else { c } } }
+// SRC: ../rust/compiler/rustc_next_trait_solver/src/resolve.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+use rustc_type_ir::data_structures::DelayedMap;
+use rustc_type_ir::inherent::*;
+use rustc_type_ir::{
+    self as ty, InferCtxtLike, Interner, TypeFoldable, TypeFolder, TypeSuperFoldable,
+    TypeVisitableExt,
+};
+/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=EagerResolver | COMPLEXITY=3 | LINES=17 */
+
+use crate::delegate::SolverDelegate;
+
+///////////////////////////////////////////////////////////////////////////
+// EAGER RESOLUTION
+
+/// Resolves ty, region, and const vars to their inferred values or their root vars.
+struct EagerResolver<'a, D, I = <D as SolverDelegate>::Interner>
+where
+    D: SolverDelegate<Interner = I>,
+    I: Interner,
+{
+    delegate: &'a D,
+    /// We're able to use a cache here as the folder does not have any
+    /// mutable state.
+    cache: DelayedMap<I::Ty, I::Ty>,
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=eager_resolve_vars | COMPLEXITY=6 | LINES=12 */
+
+pub fn eager_resolve_vars<D: SolverDelegate, T: TypeFoldable<D::Interner>>(
+    delegate: &D,
+    value: T,
+) -> T {
+    if value.has_infer() {
+        let mut folder = EagerResolver::new(delegate);
+        value.fold_with(&mut folder)
+    } else {
+        value
+    }
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
+
+impl<'a, D: SolverDelegate> EagerResolver<'a, D> {
+    fn new(delegate: &'a D) -> Self {
+        EagerResolver { delegate, cache: Default::default() }
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=57 | LINES=68 */
+
+impl<D: SolverDelegate<Interner = I>, I: Interner> TypeFolder<I> for EagerResolver<'_, D> {
+    fn cx(&self) -> I {
+        self.delegate.cx()
+    }
+
+    fn fold_ty(&mut self, t: I::Ty) -> I::Ty {
+        match t.kind() {
+            ty::Infer(ty::TyVar(vid)) => {
+                let resolved = self.delegate.opportunistic_resolve_ty_var(vid);
+                if t != resolved && resolved.has_infer() {
+                    resolved.fold_with(self)
+                } else {
+                    resolved
+                }
+            }
+            ty::Infer(ty::IntVar(vid)) => self.delegate.opportunistic_resolve_int_var(vid),
+            ty::Infer(ty::FloatVar(vid)) => self.delegate.opportunistic_resolve_float_var(vid),
+            _ => {
+                if t.has_infer() {
+                    if let Some(&ty) = self.cache.get(&t) {
+                        return ty;
+                    }
+                    let res = t.super_fold_with(self);
+                    assert!(self.cache.insert(t, res));
+                    res
+                } else {
+                    t
+                }
+            }
+        }
+    }
+
+    fn fold_region(&mut self, r: I::Region) -> I::Region {
+        match r.kind() {
+            ty::ReVar(vid) => self.delegate.opportunistic_resolve_lt_var(vid),
+            _ => r,
+        }
+    }
+
+    fn fold_const(&mut self, c: I::Const) -> I::Const {
+        match c.kind() {
+            ty::ConstKind::Infer(ty::InferConst::Var(vid)) => {
+                let resolved = self.delegate.opportunistic_resolve_ct_var(vid);
+                if c != resolved && resolved.has_infer() {
+                    resolved.fold_with(self)
+                } else {
+                    resolved
+                }
+            }
+            _ => {
+                if c.has_infer() {
+                    c.super_fold_with(self)
+                } else {
+                    c
+                }
+            }
+        }
+    }
+
+    fn fold_predicate(&mut self, p: I::Predicate) -> I::Predicate {
+        if p.has_infer() { p.super_fold_with(self) } else { p }
+    }
+
+    fn fold_clauses(&mut self, c: I::Clauses) -> I::Clauses {
+        if c.has_infer() { c.super_fold_with(self) } else { c }
+    }
+}

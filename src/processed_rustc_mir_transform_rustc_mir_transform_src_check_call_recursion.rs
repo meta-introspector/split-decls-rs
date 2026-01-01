@@ -1,46 +1,282 @@
-/* FP:check_call_recursion.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_USE_0001
-/* FP:check_call_recursion.rs-0002 */ use std :: ops :: ControlFlow ;
-/* FP:check_call_recursion.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_USE_0002
-/* FP:check_call_recursion.rs-0004 */ use crate :: rustc_data_structures :: graph :: iterate :: { NodeStatus , TriColorDepthFirstSearch , TriColorVisitor , } ;
-/* FP:check_call_recursion.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_USE_0003
-/* FP:check_call_recursion.rs-0006 */ use crate :: rustc_complete :: LangItem ;
-/* FP:check_call_recursion.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_USE_0004
-/* FP:check_call_recursion.rs-0008 */ use crate :: rustc_complete :: def :: DefKind ;
-/* FP:check_call_recursion.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_USE_0005
-/* FP:check_call_recursion.rs-0010 */ use crate :: rustc_complete :: mir :: { self , BasicBlock , BasicBlocks , Body , Terminator , TerminatorKind } ;
-/* FP:check_call_recursion.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_USE_0006
-/* FP:check_call_recursion.rs-0012 */ use crate :: rustc_complete :: ty :: { self , GenericArg , GenericArgs , Instance , Ty , TyCtxt } ;
-/* FP:check_call_recursion.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_USE_0007
-/* FP:check_call_recursion.rs-0014 */ use crate :: rustc_complete :: lint :: builtin :: UNCONDITIONAL_RECURSION ;
-/* FP:check_call_recursion.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_USE_0008
-/* FP:check_call_recursion.rs-0016 */ use crate :: rustc_complete :: Span ;
-/* FP:check_call_recursion.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_USE_0009
-/* FP:check_call_recursion.rs-0018 */ use crate :: errors :: UnconditionalRecursion ;
-/* FP:check_call_recursion.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_USE_0010
-/* FP:check_call_recursion.rs-0020 */ use crate :: pass_manager :: MirLint ;
-/* FP:check_call_recursion.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_STRUCT_0011
-/* FP:check_call_recursion.rs-0022 */ pub (super) struct CheckCallRecursion ;
-/* FP:check_call_recursion.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_IMPL_0012
-/* FP:check_call_recursion.rs-0024 */ impl < 'tcx > MirLint < 'tcx > for CheckCallRecursion { fn run_lint (& self , tcx : TyCtxt < 'tcx > , body : & Body < 'tcx >) { let def_id = body . source . def_id () . expect_local () ; if let DefKind :: Fn | DefKind :: AssocFn = tcx . def_kind (def_id) { let trait_args = match tcx . trait_of_assoc (def_id . to_def_id ()) { Some (trait_def_id) => { let trait_args_count = tcx . generics_of (trait_def_id) . count () ; & GenericArgs :: identity_for_item (tcx , def_id) [.. trait_args_count] } _ => & [] , } ; check_recursion (tcx , body , CallRecursion { trait_args }) } } }
-/* FP:check_call_recursion.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_STRUCT_0013
-/* FP:check_call_recursion.rs-0026 */ # [doc = " Requires drop elaboration to have been performed."] pub (super) struct CheckDropRecursion ;
-/* FP:check_call_recursion.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_IMPL_0014
-/* FP:check_call_recursion.rs-0028 */ impl < 'tcx > MirLint < 'tcx > for CheckDropRecursion { fn run_lint (& self , tcx : TyCtxt < 'tcx > , body : & Body < 'tcx >) { let def_id = body . source . def_id () . expect_local () ; if let DefKind :: AssocFn = tcx . def_kind (def_id) && let Some (impl_id) = tcx . trait_impl_of_assoc (def_id . to_def_id ()) && let trait_ref = tcx . impl_trait_ref (impl_id) . unwrap () && tcx . is_lang_item (trait_ref . instantiate_identity () . def_id , LangItem :: Drop) && let sig = tcx . fn_sig (def_id) . instantiate_identity () && sig . inputs () . skip_binder () . len () == 1 { if let ty :: Ref (_ , dropped_ty , _) = tcx . liberate_late_bound_regions (def_id . to_def_id () , sig . input (0)) . kind () { check_recursion (tcx , body , RecursiveDrop { drop_for : * dropped_ty }) ; } } } }
-/* FP:check_call_recursion.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_FN_0015
-/* FP:check_call_recursion.rs-0030 */ fn check_recursion < 'tcx > (tcx : TyCtxt < 'tcx > , body : & Body < 'tcx > , classifier : impl TerminatorClassifier < 'tcx > ,) { let def_id = body . source . def_id () . expect_local () ; if let DefKind :: Fn | DefKind :: AssocFn = tcx . def_kind (def_id) { let mut vis = Search { tcx , body , classifier , reachable_recursive_calls : vec ! [] } ; if let Some (NonRecursive) = TriColorDepthFirstSearch :: new (& body . basic_blocks) . run_from_start (& mut vis) { return ; } if vis . reachable_recursive_calls . is_empty () { return ; } vis . reachable_recursive_calls . sort () ; let sp = tcx . def_span (def_id) ; let hir_id = tcx . local_def_id_to_hir_id (def_id) ; tcx . emit_node_span_lint (UNCONDITIONAL_RECURSION , hir_id , sp , UnconditionalRecursion { span : sp , call_sites : vis . reachable_recursive_calls } ,) ; } }
-/* FP:check_call_recursion.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_TRAIT_0016
-/* FP:check_call_recursion.rs-0032 */ trait TerminatorClassifier < 'tcx > { fn is_recursive_terminator (& self , tcx : TyCtxt < 'tcx > , body : & Body < 'tcx > , terminator : & Terminator < 'tcx > ,) -> bool ; }
-/* FP:check_call_recursion.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_STRUCT_0017
-/* FP:check_call_recursion.rs-0034 */ struct NonRecursive ;
-/* FP:check_call_recursion.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_STRUCT_0018
-/* FP:check_call_recursion.rs-0036 */ struct Search < 'mir , 'tcx , C : TerminatorClassifier < 'tcx > > { tcx : TyCtxt < 'tcx > , body : & 'mir Body < 'tcx > , classifier : C , reachable_recursive_calls : Vec < Span > , }
-/* FP:check_call_recursion.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_STRUCT_0019
-/* FP:check_call_recursion.rs-0038 */ struct CallRecursion < 'tcx > { trait_args : & 'tcx [GenericArg < 'tcx >] , }
-/* FP:check_call_recursion.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_STRUCT_0020
-/* FP:check_call_recursion.rs-0040 */ struct RecursiveDrop < 'tcx > { # [doc = " The type that `Drop` is implemented for."] drop_for : Ty < 'tcx > , }
-/* FP:check_call_recursion.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_IMPL_0021
-/* FP:check_call_recursion.rs-0042 */ impl < 'tcx > TerminatorClassifier < 'tcx > for CallRecursion < 'tcx > { # [doc = " Returns `true` if `func` refers to the function we are searching in."] fn is_recursive_terminator (& self , tcx : TyCtxt < 'tcx > , body : & Body < 'tcx > , terminator : & Terminator < 'tcx > ,) -> bool { let TerminatorKind :: Call { func , args , .. } = & terminator . kind else { return false ; } ; if args . len () != body . arg_count { return false ; } let caller = body . source . def_id () ; let typing_env = body . typing_env (tcx) ; let func_ty = func . ty (body , tcx) ; if let ty :: FnDef (callee , args) = * func_ty . kind () { let Ok (normalized_args) = tcx . try_normalize_erasing_regions (typing_env , args) else { return false ; } ; let (callee , call_args) = if let Ok (Some (instance)) = Instance :: try_resolve (tcx , typing_env , callee , normalized_args) { (instance . def_id () , instance . args) } else { (callee , normalized_args) } ; return callee == caller && & call_args [.. self . trait_args . len ()] == self . trait_args ; } false } }
-/* FP:check_call_recursion.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_IMPL_0022
-/* FP:check_call_recursion.rs-0044 */ impl < 'tcx > TerminatorClassifier < 'tcx > for RecursiveDrop < 'tcx > { fn is_recursive_terminator (& self , tcx : TyCtxt < 'tcx > , body : & Body < 'tcx > , terminator : & Terminator < 'tcx > ,) -> bool { let TerminatorKind :: Drop { place , .. } = & terminator . kind else { return false } ; let dropped_ty = place . ty (body , tcx) . ty ; dropped_ty == self . drop_for } }
-/* FP:check_call_recursion.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_check_call_recursion_IMPL_0023
-/* FP:check_call_recursion.rs-0046 */ impl < 'mir , 'tcx , C : TerminatorClassifier < 'tcx > > TriColorVisitor < BasicBlocks < 'tcx > > for Search < 'mir , 'tcx , C > { type BreakVal = NonRecursive ; fn node_examined (& mut self , bb : BasicBlock , prior_status : Option < NodeStatus > ,) -> ControlFlow < Self :: BreakVal > { if let Some (NodeStatus :: Visited) = prior_status { return ControlFlow :: Break (NonRecursive) ; } match self . body [bb] . terminator () . kind { TerminatorKind :: UnwindTerminate (_) | TerminatorKind :: CoroutineDrop | TerminatorKind :: UnwindResume | TerminatorKind :: Return | TerminatorKind :: Unreachable | TerminatorKind :: Yield { .. } => ControlFlow :: Break (NonRecursive) , TerminatorKind :: InlineAsm { ref targets , .. } => { if ! targets . is_empty () { ControlFlow :: Continue (()) } else { ControlFlow :: Break (NonRecursive) } } TerminatorKind :: Assert { .. } | TerminatorKind :: Call { .. } | TerminatorKind :: Drop { .. } | TerminatorKind :: FalseEdge { .. } | TerminatorKind :: FalseUnwind { .. } | TerminatorKind :: Goto { .. } | TerminatorKind :: SwitchInt { .. } => ControlFlow :: Continue (()) , TerminatorKind :: TailCall { .. } => ControlFlow :: Continue (()) , } } fn node_settled (& mut self , bb : BasicBlock) -> ControlFlow < Self :: BreakVal > { let terminator = self . body [bb] . terminator () ; if self . classifier . is_recursive_terminator (self . tcx , self . body , terminator) { self . reachable_recursive_calls . push (terminator . source_info . span) ; } ControlFlow :: Continue (()) } fn ignore_edge (& mut self , bb : BasicBlock , target : BasicBlock) -> bool { let terminator = self . body [bb] . terminator () ; let ignore_unwind = terminator . unwind () == Some (& mir :: UnwindAction :: Cleanup (target)) && terminator . successors () . count () > 1 ; if ignore_unwind || self . classifier . is_recursive_terminator (self . tcx , self . body , terminator) { return true ; } match & terminator . kind { TerminatorKind :: FalseEdge { imaginary_target , .. } => imaginary_target == & target , _ => false , } } }
+// SRC: ../rust/compiler/rustc_mir_transform/src/check_call_recursion.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use std::ops::ControlFlow;
+
+use crate::rustc_data_structures::graph::iterate::{
+    NodeStatus, TriColorDepthFirstSearch, TriColorVisitor,
+};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::mir::{self, BasicBlock, BasicBlocks, Body, Terminator, TerminatorKind};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::ty::{self, GenericArg, GenericArgs, Instance, Ty, TyCtxt};
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=run_lint | COMPLEXITY=15 | LINES=26 */
+use crate::rustc_complete::lint::builtin::UNCONDITIONAL_RECURSION;
+use crate::rustc_complete::Span;
+
+use crate::errors::UnconditionalRecursion;
+use crate::pass_manager::MirLint;
+
+pub(super) struct CheckCallRecursion;
+
+impl<'tcx> MirLint<'tcx> for CheckCallRecursion {
+    fn run_lint(&self, tcx: TyCtxt<'tcx>, body: &Body<'tcx>) {
+        let def_id = body.source.def_id().expect_local();
+
+        if let DefKind::Fn | DefKind::AssocFn = tcx.def_kind(def_id) {
+            // If this is trait/impl method, extract the trait's args.
+            let trait_args = match tcx.trait_of_assoc(def_id.to_def_id()) {
+                Some(trait_def_id) => {
+                    let trait_args_count = tcx.generics_of(trait_def_id).count();
+                    &GenericArgs::identity_for_item(tcx, def_id)[..trait_args_count]
+                }
+                _ => &[],
+            };
+
+            check_recursion(tcx, body, CallRecursion { trait_args })
+        }
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=run_lint | COMPLEXITY=20 | LINES=27 */
+
+/// Requires drop elaboration to have been performed.
+pub(super) struct CheckDropRecursion;
+
+impl<'tcx> MirLint<'tcx> for CheckDropRecursion {
+    fn run_lint(&self, tcx: TyCtxt<'tcx>, body: &Body<'tcx>) {
+        let def_id = body.source.def_id().expect_local();
+
+        // First check if `body` is an `fn drop()` of `Drop`
+        if let DefKind::AssocFn = tcx.def_kind(def_id)
+        && let Some(impl_id) = tcx.trait_impl_of_assoc(def_id.to_def_id())
+        && let trait_ref = tcx.impl_trait_ref(impl_id).unwrap()
+        && tcx.is_lang_item(trait_ref.instantiate_identity().def_id, LangItem::Drop)
+        // avoid erroneous `Drop` impls from causing ICEs below
+        && let sig = tcx.fn_sig(def_id).instantiate_identity()
+        && sig.inputs().skip_binder().len() == 1
+        {
+            // It was. Now figure out for what type `Drop` is implemented and then
+            // check for recursion.
+            if let ty::Ref(_, dropped_ty, _) =
+                tcx.liberate_late_bound_regions(def_id.to_def_id(), sig.input(0)).kind()
+            {
+                check_recursion(tcx, body, RecursiveDrop { drop_for: *dropped_ty });
+            }
+        }
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=check_recursion | COMPLEXITY=14 | LINES=31 */
+
+fn check_recursion<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    body: &Body<'tcx>,
+    classifier: impl TerminatorClassifier<'tcx>,
+) {
+    let def_id = body.source.def_id().expect_local();
+
+    if let DefKind::Fn | DefKind::AssocFn = tcx.def_kind(def_id) {
+        let mut vis = Search { tcx, body, classifier, reachable_recursive_calls: vec![] };
+        if let Some(NonRecursive) =
+            TriColorDepthFirstSearch::new(&body.basic_blocks).run_from_start(&mut vis)
+        {
+            return;
+        }
+        if vis.reachable_recursive_calls.is_empty() {
+            return;
+        }
+
+        vis.reachable_recursive_calls.sort();
+
+        let sp = tcx.def_span(def_id);
+        let hir_id = tcx.local_def_id_to_hir_id(def_id);
+        tcx.emit_node_span_lint(
+            UNCONDITIONAL_RECURSION,
+            hir_id,
+            sp,
+            UnconditionalRecursion { span: sp, call_sites: vis.reachable_recursive_calls },
+        );
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=is_recursive_terminator | COMPLEXITY=2 | LINES=9 */
+
+trait TerminatorClassifier<'tcx> {
+    fn is_recursive_terminator(
+        &self,
+        tcx: TyCtxt<'tcx>,
+        body: &Body<'tcx>,
+        terminator: &Terminator<'tcx>,
+    ) -> bool;
+}
+/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=NonRecursive; | COMPLEXITY=2 | LINES=10 */
+
+struct NonRecursive;
+
+struct Search<'mir, 'tcx, C: TerminatorClassifier<'tcx>> {
+    tcx: TyCtxt<'tcx>,
+    body: &'mir Body<'tcx>,
+    classifier: C,
+
+    reachable_recursive_calls: Vec<Span>,
+}
+/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=CallRecursion | COMPLEXITY=2 | LINES=4 */
+
+struct CallRecursion<'tcx> {
+    trait_args: &'tcx [GenericArg<'tcx>],
+}
+/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=RecursiveDrop | COMPLEXITY=2 | LINES=5 */
+
+struct RecursiveDrop<'tcx> {
+    /// The type that `Drop` is implemented for.
+    drop_for: Ty<'tcx>,
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=is_recursive_terminator | COMPLEXITY=25 | LINES=47 */
+
+impl<'tcx> TerminatorClassifier<'tcx> for CallRecursion<'tcx> {
+    /// Returns `true` if `func` refers to the function we are searching in.
+    fn is_recursive_terminator(
+        &self,
+        tcx: TyCtxt<'tcx>,
+        body: &Body<'tcx>,
+        terminator: &Terminator<'tcx>,
+    ) -> bool {
+        let TerminatorKind::Call { func, args, .. } = &terminator.kind else {
+            return false;
+        };
+
+        // Resolving function type to a specific instance that is being called is expensive. To
+        // avoid the cost we check the number of arguments first, which is sufficient to reject
+        // most of calls as non-recursive.
+        if args.len() != body.arg_count {
+            return false;
+        }
+        let caller = body.source.def_id();
+        let typing_env = body.typing_env(tcx);
+
+        let func_ty = func.ty(body, tcx);
+        if let ty::FnDef(callee, args) = *func_ty.kind() {
+            let Ok(normalized_args) = tcx.try_normalize_erasing_regions(typing_env, args) else {
+                return false;
+            };
+            let (callee, call_args) = if let Ok(Some(instance)) =
+                Instance::try_resolve(tcx, typing_env, callee, normalized_args)
+            {
+                (instance.def_id(), instance.args)
+            } else {
+                (callee, normalized_args)
+            };
+
+            // FIXME(#57965): Make this work across function boundaries
+
+            // If this is a trait fn, the args on the trait have to match, or we might be
+            // calling into an entirely different method (for example, a call from the default
+            // method in the trait to `<A as Trait<B>>::method`, where `A` and/or `B` are
+            // specific types).
+            return callee == caller && &call_args[..self.trait_args.len()] == self.trait_args;
+        }
+
+        false
+    }
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=is_recursive_terminator | COMPLEXITY=7 | LINES=14 */
+
+impl<'tcx> TerminatorClassifier<'tcx> for RecursiveDrop<'tcx> {
+    fn is_recursive_terminator(
+        &self,
+        tcx: TyCtxt<'tcx>,
+        body: &Body<'tcx>,
+        terminator: &Terminator<'tcx>,
+    ) -> bool {
+        let TerminatorKind::Drop { place, .. } = &terminator.kind else { return false };
+
+        let dropped_ty = place.ty(body, tcx).ty;
+        dropped_ty == self.drop_for
+    }
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=node_examined | COMPLEXITY=62 | LINES=86 */
+
+impl<'mir, 'tcx, C: TerminatorClassifier<'tcx>> TriColorVisitor<BasicBlocks<'tcx>>
+    for Search<'mir, 'tcx, C>
+{
+    type BreakVal = NonRecursive;
+
+    fn node_examined(
+        &mut self,
+        bb: BasicBlock,
+        prior_status: Option<NodeStatus>,
+    ) -> ControlFlow<Self::BreakVal> {
+        // Back-edge in the CFG (loop).
+        if let Some(NodeStatus::Visited) = prior_status {
+            return ControlFlow::Break(NonRecursive);
+        }
+
+        match self.body[bb].terminator().kind {
+            // These terminators return control flow to the caller.
+            TerminatorKind::UnwindTerminate(_)
+            | TerminatorKind::CoroutineDrop
+            | TerminatorKind::UnwindResume
+            | TerminatorKind::Return
+            | TerminatorKind::Unreachable
+            | TerminatorKind::Yield { .. } => ControlFlow::Break(NonRecursive),
+
+            // A InlineAsm without targets (diverging and contains no labels)
+            // is treated as non-recursing.
+            TerminatorKind::InlineAsm { ref targets, .. } => {
+                if !targets.is_empty() {
+                    ControlFlow::Continue(())
+                } else {
+                    ControlFlow::Break(NonRecursive)
+                }
+            }
+
+            // These do not.
+            TerminatorKind::Assert { .. }
+            | TerminatorKind::Call { .. }
+            | TerminatorKind::Drop { .. }
+            | TerminatorKind::FalseEdge { .. }
+            | TerminatorKind::FalseUnwind { .. }
+            | TerminatorKind::Goto { .. }
+            | TerminatorKind::SwitchInt { .. } => ControlFlow::Continue(()),
+
+            // Note that tail call terminator technically returns to the caller,
+            // but for purposes of this lint it makes sense to count it as possibly recursive,
+            // since it's still a call.
+            //
+            // If this'll be repurposed for something else, this might need to be changed.
+            TerminatorKind::TailCall { .. } => ControlFlow::Continue(()),
+        }
+    }
+
+    fn node_settled(&mut self, bb: BasicBlock) -> ControlFlow<Self::BreakVal> {
+        // When we examine a node for the last time, remember it if it is a recursive call.
+        let terminator = self.body[bb].terminator();
+
+        // FIXME(explicit_tail_calls): highlight tail calls as "recursive call site"
+        //
+        // We don't want to lint functions that recurse only through tail calls
+        // (such as `fn g() { become () }`), so just adding `| TailCall { ... }`
+        // here won't work.
+        //
+        // But at the same time we would like to highlight both calls in a function like
+        // `fn f() { if false { become f() } else { f() } }`, so we need to figure something out.
+        if self.classifier.is_recursive_terminator(self.tcx, self.body, terminator) {
+            self.reachable_recursive_calls.push(terminator.source_info.span);
+        }
+
+        ControlFlow::Continue(())
+    }
+
+    fn ignore_edge(&mut self, bb: BasicBlock, target: BasicBlock) -> bool {
+        let terminator = self.body[bb].terminator();
+        let ignore_unwind = terminator.unwind() == Some(&mir::UnwindAction::Cleanup(target))
+            && terminator.successors().count() > 1;
+        if ignore_unwind || self.classifier.is_recursive_terminator(self.tcx, self.body, terminator)
+        {
+            return true;
+        }
+        match &terminator.kind {
+            TerminatorKind::FalseEdge { imaginary_target, .. } => imaginary_target == &target,
+            _ => false,
+        }
+    }
+}

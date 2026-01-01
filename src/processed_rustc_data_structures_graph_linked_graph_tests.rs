@@ -1,22 +1,142 @@
-/* FP:tests.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_linked_graph_tests_USE_0001
-/* FP:tests.rs-0002 */ use tracing :: debug ;
-/* FP:tests.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_linked_graph_tests_USE_0002
-/* FP:tests.rs-0004 */ use super :: { Debug , LinkedGraph , NodeIndex } ;
-/* FP:tests.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_linked_graph_tests_TYPE_0003
-/* FP:tests.rs-0006 */ type TestGraph = LinkedGraph < & 'static str , & 'static str > ;
-/* FP:tests.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_linked_graph_tests_FN_0004
-/* FP:tests.rs-0008 */ fn create_graph () -> TestGraph { let mut graph = LinkedGraph :: new () ; let a = graph . add_node ("A") ; let b = graph . add_node ("B") ; let c = graph . add_node ("C") ; let d = graph . add_node ("D") ; let e = graph . add_node ("E") ; let f = graph . add_node ("F") ; graph . add_edge (a , b , "AB") ; graph . add_edge (b , c , "BC") ; graph . add_edge (b , d , "BD") ; graph . add_edge (d , e , "DE") ; graph . add_edge (e , c , "EC") ; graph . add_edge (f , b , "FB") ; return graph ; }
-/* FP:tests.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_linked_graph_tests_FN_0005
-/* FP:tests.rs-0010 */ # [test] fn each_node () { let graph = create_graph () ; let expected = ["A" , "B" , "C" , "D" , "E" , "F"] ; graph . each_node (| idx , node | { assert_eq ! (& expected [idx . 0] , graph . node_data (idx)) ; assert_eq ! (expected [idx . 0] , node . data) ; true }) ; }
-/* FP:tests.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_linked_graph_tests_FN_0006
-/* FP:tests.rs-0012 */ # [test] fn each_edge () { let graph = create_graph () ; let expected = ["AB" , "BC" , "BD" , "DE" , "EC" , "FB"] ; graph . each_edge (| idx , edge | { assert_eq ! (expected [idx . 0] , edge . data) ; true }) ; }
-/* FP:tests.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_linked_graph_tests_FN_0007
-/* FP:tests.rs-0014 */ fn test_adjacent_edges < N : PartialEq + Debug , E : PartialEq + Debug > (graph : & LinkedGraph < N , E > , start_index : NodeIndex , start_data : N , expected_incoming : & [(E , N)] , expected_outgoing : & [(E , N)] ,) { assert ! (graph . node_data (start_index) == & start_data) ; let mut counter = 0 ; for (edge_index , edge) in graph . incoming_edges (start_index) { assert ! (counter < expected_incoming . len ()) ; debug ! ("counter={:?} expected={:?} edge_index={:?} edge={:?}" , counter , expected_incoming [counter] , edge_index , edge) ; match & expected_incoming [counter] { (e , n) => { assert ! (e == & edge . data) ; assert ! (n == graph . node_data (edge . source ())) ; assert ! (start_index == edge . target) ; } } counter += 1 ; } assert_eq ! (counter , expected_incoming . len ()) ; let mut counter = 0 ; for (edge_index , edge) in graph . outgoing_edges (start_index) { assert ! (counter < expected_outgoing . len ()) ; debug ! ("counter={:?} expected={:?} edge_index={:?} edge={:?}" , counter , expected_outgoing [counter] , edge_index , edge) ; match & expected_outgoing [counter] { (e , n) => { assert ! (e == & edge . data) ; assert ! (start_index == edge . source) ; assert ! (n == graph . node_data (edge . target)) ; } } counter += 1 ; } assert_eq ! (counter , expected_outgoing . len ()) ; }
-/* FP:tests.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_linked_graph_tests_FN_0008
-/* FP:tests.rs-0016 */ # [test] fn each_adjacent_from_a () { let graph = create_graph () ; test_adjacent_edges (& graph , NodeIndex (0) , "A" , & [] , & [("AB" , "B")]) ; }
-/* FP:tests.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_linked_graph_tests_FN_0009
-/* FP:tests.rs-0018 */ # [test] fn each_adjacent_from_b () { let graph = create_graph () ; test_adjacent_edges (& graph , NodeIndex (1) , "B" , & [("FB" , "F") , ("AB" , "A")] , & [("BD" , "D") , ("BC" , "C")] ,) ; }
-/* FP:tests.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_linked_graph_tests_FN_0010
-/* FP:tests.rs-0020 */ # [test] fn each_adjacent_from_c () { let graph = create_graph () ; test_adjacent_edges (& graph , NodeIndex (2) , "C" , & [("EC" , "E") , ("BC" , "B")] , & []) ; }
-/* FP:tests.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_linked_graph_tests_FN_0011
-/* FP:tests.rs-0022 */ # [test] fn each_adjacent_from_d () { let graph = create_graph () ; test_adjacent_edges (& graph , NodeIndex (3) , "D" , & [("BD" , "B")] , & [("DE" , "E")]) ; }
+// SRC: ../rust/compiler/rustc_data_structures/src/graph/linked_graph/tests.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use tracing::debug;
+
+use super::{Debug, LinkedGraph, NodeIndex};
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=create_graph | COMPLEXITY=3 | LINES=32 */
+
+type TestGraph = LinkedGraph<&'static str, &'static str>;
+
+fn create_graph() -> TestGraph {
+    let mut graph = LinkedGraph::new();
+
+    // Create a simple graph
+    //
+    //          F
+    //          |
+    //          V
+    //    A --> B --> C
+    //          |     ^
+    //          v     |
+    //          D --> E
+
+    let a = graph.add_node("A");
+    let b = graph.add_node("B");
+    let c = graph.add_node("C");
+    let d = graph.add_node("D");
+    let e = graph.add_node("E");
+    let f = graph.add_node("F");
+
+    graph.add_edge(a, b, "AB");
+    graph.add_edge(b, c, "BC");
+    graph.add_edge(b, d, "BD");
+    graph.add_edge(d, e, "DE");
+    graph.add_edge(e, c, "EC");
+    graph.add_edge(f, b, "FB");
+
+    return graph;
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=each_node | COMPLEXITY=3 | LINES=11 */
+
+#[test]
+fn each_node() {
+    let graph = create_graph();
+    let expected = ["A", "B", "C", "D", "E", "F"];
+    graph.each_node(|idx, node| {
+        assert_eq!(&expected[idx.0], graph.node_data(idx));
+        assert_eq!(expected[idx.0], node.data);
+        true
+    });
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=each_edge | COMPLEXITY=3 | LINES=10 */
+
+#[test]
+fn each_edge() {
+    let graph = create_graph();
+    let expected = ["AB", "BC", "BD", "DE", "EC", "FB"];
+    graph.each_edge(|idx, edge| {
+        assert_eq!(expected[idx.0], edge.data);
+        true
+    });
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=test_adjacent_edges | COMPLEXITY=29 | LINES=46 */
+
+fn test_adjacent_edges<N: PartialEq + Debug, E: PartialEq + Debug>(
+    graph: &LinkedGraph<N, E>,
+    start_index: NodeIndex,
+    start_data: N,
+    expected_incoming: &[(E, N)],
+    expected_outgoing: &[(E, N)],
+) {
+    assert!(graph.node_data(start_index) == &start_data);
+
+    let mut counter = 0;
+    for (edge_index, edge) in graph.incoming_edges(start_index) {
+        assert!(counter < expected_incoming.len());
+        debug!(
+            "counter={:?} expected={:?} edge_index={:?} edge={:?}",
+            counter, expected_incoming[counter], edge_index, edge
+        );
+        match &expected_incoming[counter] {
+            (e, n) => {
+                assert!(e == &edge.data);
+                assert!(n == graph.node_data(edge.source()));
+                assert!(start_index == edge.target);
+            }
+        }
+        counter += 1;
+    }
+    assert_eq!(counter, expected_incoming.len());
+
+    let mut counter = 0;
+    for (edge_index, edge) in graph.outgoing_edges(start_index) {
+        assert!(counter < expected_outgoing.len());
+        debug!(
+            "counter={:?} expected={:?} edge_index={:?} edge={:?}",
+            counter, expected_outgoing[counter], edge_index, edge
+        );
+        match &expected_outgoing[counter] {
+            (e, n) => {
+                assert!(e == &edge.data);
+                assert!(start_index == edge.source);
+                assert!(n == graph.node_data(edge.target));
+            }
+        }
+        counter += 1;
+    }
+    assert_eq!(counter, expected_outgoing.len());
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=each_adjacent_from_a | COMPLEXITY=2 | LINES=6 */
+
+#[test]
+fn each_adjacent_from_a() {
+    let graph = create_graph();
+    test_adjacent_edges(&graph, NodeIndex(0), "A", &[], &[("AB", "B")]);
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=each_adjacent_from_b | COMPLEXITY=2 | LINES=12 */
+
+#[test]
+fn each_adjacent_from_b() {
+    let graph = create_graph();
+    test_adjacent_edges(
+        &graph,
+        NodeIndex(1),
+        "B",
+        &[("FB", "F"), ("AB", "A")],
+        &[("BD", "D"), ("BC", "C")],
+    );
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=each_adjacent_from_c | COMPLEXITY=2 | LINES=6 */
+
+#[test]
+fn each_adjacent_from_c() {
+    let graph = create_graph();
+    test_adjacent_edges(&graph, NodeIndex(2), "C", &[("EC", "E"), ("BC", "B")], &[]);
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=each_adjacent_from_d | COMPLEXITY=2 | LINES=6 */
+
+#[test]
+fn each_adjacent_from_d() {
+    let graph = create_graph();
+    test_adjacent_edges(&graph, NodeIndex(3), "D", &[("BD", "B")], &[("DE", "E")]);
+}

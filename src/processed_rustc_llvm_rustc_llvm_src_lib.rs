@@ -1,18 +1,259 @@
-/* FP:lib.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_llvm_src_lib_USE_0001
-/* FP:lib.rs-0002 */ # [allow (internal_features)] # [doc (html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")] # [doc (rust_logo)] # [feature (extern_types)] # [feature (rustdoc_internals)] use std :: cell :: RefCell ;
-/* FP:lib.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_llvm_src_lib_USE_0002
-/* FP:lib.rs-0004 */ use std :: { ptr , slice } ;
-/* FP:lib.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_llvm_src_lib_USE_0003
-/* FP:lib.rs-0006 */ use libc :: size_t ;
-/* FP:lib.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_llvm_src_lib_OTHER_0004
-/* FP:lib.rs-0008 */ unsafe extern "C" { # [doc = " Opaque type that allows C++ code to write bytes to a Rust-side buffer,"] # [doc = " in conjunction with `RawRustStringOstream`. Use this as `&RustString`"] # [doc = " (Rust) and `RustStringRef` (C++) in FFI signatures."] pub type RustString ; }
-/* FP:lib.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_llvm_src_lib_IMPL_0005
-/* FP:lib.rs-0010 */ impl RustString { pub fn build_byte_buffer (closure : impl FnOnce (& Self)) -> Vec < u8 > { let buf = RustStringInner :: default () ; closure (buf . as_opaque ()) ; buf . into_inner () } }
-/* FP:lib.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_llvm_src_lib_STRUCT_0006
-/* FP:lib.rs-0012 */ # [doc = " Underlying implementation of [`RustString`]."] # [doc = ""] # [doc = " Having two separate types makes it possible to use the opaque [`RustString`]"] # [doc = " in FFI signatures without `improper_ctypes` warnings. This is a workaround"] # [doc = " for the fact that there is no way to opt out of `improper_ctypes` when"] # [doc = " _declaring_ a type (as opposed to using that type)."] # [derive (Default)] struct RustStringInner { bytes : RefCell < Vec < u8 > > , }
-/* FP:lib.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_llvm_src_lib_IMPL_0007
-/* FP:lib.rs-0014 */ impl RustStringInner { fn as_opaque (& self) -> & RustString { let ptr : * const RustStringInner = ptr :: from_ref (self) ; let ptr = ptr as * const RustString ; unsafe { & * ptr } } fn from_opaque (opaque : & RustString) -> & Self { let ptr : * const RustString = ptr :: from_ref (opaque) ; let ptr : * const RustStringInner = ptr . cast () ; unsafe { & * ptr } } fn into_inner (self) -> Vec < u8 > { self . bytes . into_inner () } }
-/* FP:lib.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_llvm_src_lib_FN_0008
-/* FP:lib.rs-0016 */ # [doc = " Appends the contents of a byte slice to a [`RustString`]."] # [doc = ""] # [doc = " This function is implemented in `rustc_llvm` so that the C++ code in this"] # [doc = " crate can link to it directly, without an implied link-time dependency on"] # [doc = " `rustc_codegen_llvm`."] # [unsafe (no_mangle)] pub unsafe extern "C" fn LLVMRustStringWriteImpl (buf : & RustString , slice_ptr : * const u8 , slice_len : size_t ,) { let slice = unsafe { slice :: from_raw_parts (slice_ptr , slice_len) } ; RustStringInner :: from_opaque (buf) . bytes . borrow_mut () . extend_from_slice (slice) ; }
-/* FP:lib.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_llvm_src_lib_FN_0009
-/* FP:lib.rs-0018 */ # [doc = " Initialize targets enabled by the build script via `cfg(llvm_component = \"...\")`."] # [doc = " N.B., this function can't be moved to `rustc_codegen_llvm` because of the `cfg`s."] pub fn initialize_available_targets () { macro_rules ! init_target (($ cfg : meta , $ ($ method : ident) ,*) => { { # [cfg ($ cfg)] fn init () { unsafe extern "C" { $ (fn $ method () ;) * } unsafe { $ ($ method () ;) * } } # [cfg (not ($ cfg))] fn init () { } init () ; } }) ; init_target ! (llvm_component = "x86" , LLVMInitializeX86TargetInfo , LLVMInitializeX86Target , LLVMInitializeX86TargetMC , LLVMInitializeX86AsmPrinter , LLVMInitializeX86AsmParser) ; init_target ! (llvm_component = "arm" , LLVMInitializeARMTargetInfo , LLVMInitializeARMTarget , LLVMInitializeARMTargetMC , LLVMInitializeARMAsmPrinter , LLVMInitializeARMAsmParser) ; init_target ! (llvm_component = "aarch64" , LLVMInitializeAArch64TargetInfo , LLVMInitializeAArch64Target , LLVMInitializeAArch64TargetMC , LLVMInitializeAArch64AsmPrinter , LLVMInitializeAArch64AsmParser) ; init_target ! (llvm_component = "amdgpu" , LLVMInitializeAMDGPUTargetInfo , LLVMInitializeAMDGPUTarget , LLVMInitializeAMDGPUTargetMC , LLVMInitializeAMDGPUAsmPrinter , LLVMInitializeAMDGPUAsmParser) ; init_target ! (llvm_component = "avr" , LLVMInitializeAVRTargetInfo , LLVMInitializeAVRTarget , LLVMInitializeAVRTargetMC , LLVMInitializeAVRAsmPrinter , LLVMInitializeAVRAsmParser) ; init_target ! (llvm_component = "m68k" , LLVMInitializeM68kTargetInfo , LLVMInitializeM68kTarget , LLVMInitializeM68kTargetMC , LLVMInitializeM68kAsmPrinter , LLVMInitializeM68kAsmParser) ; init_target ! (llvm_component = "csky" , LLVMInitializeCSKYTargetInfo , LLVMInitializeCSKYTarget , LLVMInitializeCSKYTargetMC , LLVMInitializeCSKYAsmPrinter , LLVMInitializeCSKYAsmParser) ; init_target ! (llvm_component = "loongarch" , LLVMInitializeLoongArchTargetInfo , LLVMInitializeLoongArchTarget , LLVMInitializeLoongArchTargetMC , LLVMInitializeLoongArchAsmPrinter , LLVMInitializeLoongArchAsmParser) ; init_target ! (llvm_component = "mips" , LLVMInitializeMipsTargetInfo , LLVMInitializeMipsTarget , LLVMInitializeMipsTargetMC , LLVMInitializeMipsAsmPrinter , LLVMInitializeMipsAsmParser) ; init_target ! (llvm_component = "powerpc" , LLVMInitializePowerPCTargetInfo , LLVMInitializePowerPCTarget , LLVMInitializePowerPCTargetMC , LLVMInitializePowerPCAsmPrinter , LLVMInitializePowerPCAsmParser) ; init_target ! (llvm_component = "systemz" , LLVMInitializeSystemZTargetInfo , LLVMInitializeSystemZTarget , LLVMInitializeSystemZTargetMC , LLVMInitializeSystemZAsmPrinter , LLVMInitializeSystemZAsmParser) ; init_target ! (llvm_component = "jsbackend" , LLVMInitializeJSBackendTargetInfo , LLVMInitializeJSBackendTarget , LLVMInitializeJSBackendTargetMC) ; init_target ! (llvm_component = "msp430" , LLVMInitializeMSP430TargetInfo , LLVMInitializeMSP430Target , LLVMInitializeMSP430TargetMC , LLVMInitializeMSP430AsmPrinter , LLVMInitializeMSP430AsmParser) ; init_target ! (llvm_component = "riscv" , LLVMInitializeRISCVTargetInfo , LLVMInitializeRISCVTarget , LLVMInitializeRISCVTargetMC , LLVMInitializeRISCVAsmPrinter , LLVMInitializeRISCVAsmParser) ; init_target ! (llvm_component = "sparc" , LLVMInitializeSparcTargetInfo , LLVMInitializeSparcTarget , LLVMInitializeSparcTargetMC , LLVMInitializeSparcAsmPrinter , LLVMInitializeSparcAsmParser) ; init_target ! (llvm_component = "nvptx" , LLVMInitializeNVPTXTargetInfo , LLVMInitializeNVPTXTarget , LLVMInitializeNVPTXTargetMC , LLVMInitializeNVPTXAsmPrinter) ; init_target ! (llvm_component = "hexagon" , LLVMInitializeHexagonTargetInfo , LLVMInitializeHexagonTarget , LLVMInitializeHexagonTargetMC , LLVMInitializeHexagonAsmPrinter , LLVMInitializeHexagonAsmParser) ; init_target ! (llvm_component = "xtensa" , LLVMInitializeXtensaTargetInfo , LLVMInitializeXtensaTarget , LLVMInitializeXtensaTargetMC , LLVMInitializeXtensaAsmPrinter , LLVMInitializeXtensaAsmParser) ; init_target ! (llvm_component = "webassembly" , LLVMInitializeWebAssemblyTargetInfo , LLVMInitializeWebAssemblyTarget , LLVMInitializeWebAssemblyTargetMC , LLVMInitializeWebAssemblyAsmPrinter , LLVMInitializeWebAssemblyAsmParser) ; init_target ! (llvm_component = "bpf" , LLVMInitializeBPFTargetInfo , LLVMInitializeBPFTarget , LLVMInitializeBPFTargetMC , LLVMInitializeBPFAsmPrinter , LLVMInitializeBPFAsmParser) ; }
+// SRC: ../rust/compiler/rustc_llvm/src/lib.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
+// tidy-alphabetical-start
+#[allow(internal_features)]
+#[doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
+#[doc(rust_logo)]
+#[feature(extern_types)]
+#[feature(rustdoc_internals)]
+// tidy-alphabetical-end
+
+use std::cell::RefCell;
+use std::{ptr, slice};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
+
+use libc::size_t;
+
+unsafe extern "C" {
+    /// Opaque type that allows C++ code to write bytes to a Rust-side buffer,
+    /// in conjunction with `RawRustStringOstream`. Use this as `&RustString`
+    /// (Rust) and `RustStringRef` (C++) in FFI signatures.
+    pub type RustString;
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=build_byte_buffer | COMPLEXITY=3 | LINES=8 */
+
+impl RustString {
+    pub fn build_byte_buffer(closure: impl FnOnce(&Self)) -> Vec<u8> {
+        let buf = RustStringInner::default();
+        closure(buf.as_opaque());
+        buf.into_inner()
+    }
+}
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=RustStringInner | COMPLEXITY=4 | LINES=11 */
+
+/// Underlying implementation of [`RustString`].
+///
+/// Having two separate types makes it possible to use the opaque [`RustString`]
+/// in FFI signatures without `improper_ctypes` warnings. This is a workaround
+/// for the fact that there is no way to opt out of `improper_ctypes` when
+/// _declaring_ a type (as opposed to using that type).
+#[derive(Default)]
+struct RustStringInner {
+    bytes: RefCell<Vec<u8>>,
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=as_opaque | COMPLEXITY=16 | LINES=20 */
+
+impl RustStringInner {
+    fn as_opaque(&self) -> &RustString {
+        let ptr: *const RustStringInner = ptr::from_ref(self);
+        // We can't use `ptr::cast` here because extern types are `!Sized`.
+        let ptr = ptr as *const RustString;
+        unsafe { &*ptr }
+    }
+
+    fn from_opaque(opaque: &RustString) -> &Self {
+        // SAFETY: A valid `&RustString` must have been created via `as_opaque`.
+        let ptr: *const RustString = ptr::from_ref(opaque);
+        let ptr: *const RustStringInner = ptr.cast();
+        unsafe { &*ptr }
+    }
+
+    fn into_inner(self) -> Vec<u8> {
+        self.bytes.into_inner()
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=12 | LINES=15 */
+
+/// Appends the contents of a byte slice to a [`RustString`].
+///
+/// This function is implemented in `rustc_llvm` so that the C++ code in this
+/// crate can link to it directly, without an implied link-time dependency on
+/// `rustc_codegen_llvm`.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn LLVMRustStringWriteImpl(
+    buf: &RustString,
+    slice_ptr: *const u8, // Same ABI as `*const c_char`
+    slice_len: size_t,
+) {
+    let slice = unsafe { slice::from_raw_parts(slice_ptr, slice_len) };
+    RustStringInner::from_opaque(buf).bytes.borrow_mut().extend_from_slice(slice);
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=initialize_available_targets | COMPLEXITY=32 | LINES=178 */
+
+/// Initialize targets enabled by the build script via `cfg(llvm_component = "...")`.
+/// N.B., this function can't be moved to `rustc_codegen_llvm` because of the `cfg`s.
+pub fn initialize_available_targets() {
+    macro_rules! init_target(
+        ($cfg:meta, $($method:ident),*) => { {
+            #[cfg($cfg)]
+            fn init() {
+                unsafe extern "C" {
+                    $(fn $method();)*
+                }
+                unsafe {
+                    $($method();)*
+                }
+            }
+            #[cfg(not($cfg))]
+            fn init() { }
+            init();
+        } }
+    );
+    init_target!(
+        llvm_component = "x86",
+        LLVMInitializeX86TargetInfo,
+        LLVMInitializeX86Target,
+        LLVMInitializeX86TargetMC,
+        LLVMInitializeX86AsmPrinter,
+        LLVMInitializeX86AsmParser
+    );
+    init_target!(
+        llvm_component = "arm",
+        LLVMInitializeARMTargetInfo,
+        LLVMInitializeARMTarget,
+        LLVMInitializeARMTargetMC,
+        LLVMInitializeARMAsmPrinter,
+        LLVMInitializeARMAsmParser
+    );
+    init_target!(
+        llvm_component = "aarch64",
+        LLVMInitializeAArch64TargetInfo,
+        LLVMInitializeAArch64Target,
+        LLVMInitializeAArch64TargetMC,
+        LLVMInitializeAArch64AsmPrinter,
+        LLVMInitializeAArch64AsmParser
+    );
+    init_target!(
+        llvm_component = "amdgpu",
+        LLVMInitializeAMDGPUTargetInfo,
+        LLVMInitializeAMDGPUTarget,
+        LLVMInitializeAMDGPUTargetMC,
+        LLVMInitializeAMDGPUAsmPrinter,
+        LLVMInitializeAMDGPUAsmParser
+    );
+    init_target!(
+        llvm_component = "avr",
+        LLVMInitializeAVRTargetInfo,
+        LLVMInitializeAVRTarget,
+        LLVMInitializeAVRTargetMC,
+        LLVMInitializeAVRAsmPrinter,
+        LLVMInitializeAVRAsmParser
+    );
+    init_target!(
+        llvm_component = "m68k",
+        LLVMInitializeM68kTargetInfo,
+        LLVMInitializeM68kTarget,
+        LLVMInitializeM68kTargetMC,
+        LLVMInitializeM68kAsmPrinter,
+        LLVMInitializeM68kAsmParser
+    );
+    init_target!(
+        llvm_component = "csky",
+        LLVMInitializeCSKYTargetInfo,
+        LLVMInitializeCSKYTarget,
+        LLVMInitializeCSKYTargetMC,
+        LLVMInitializeCSKYAsmPrinter,
+        LLVMInitializeCSKYAsmParser
+    );
+    init_target!(
+        llvm_component = "loongarch",
+        LLVMInitializeLoongArchTargetInfo,
+        LLVMInitializeLoongArchTarget,
+        LLVMInitializeLoongArchTargetMC,
+        LLVMInitializeLoongArchAsmPrinter,
+        LLVMInitializeLoongArchAsmParser
+    );
+    init_target!(
+        llvm_component = "mips",
+        LLVMInitializeMipsTargetInfo,
+        LLVMInitializeMipsTarget,
+        LLVMInitializeMipsTargetMC,
+        LLVMInitializeMipsAsmPrinter,
+        LLVMInitializeMipsAsmParser
+    );
+    init_target!(
+        llvm_component = "powerpc",
+        LLVMInitializePowerPCTargetInfo,
+        LLVMInitializePowerPCTarget,
+        LLVMInitializePowerPCTargetMC,
+        LLVMInitializePowerPCAsmPrinter,
+        LLVMInitializePowerPCAsmParser
+    );
+    init_target!(
+        llvm_component = "systemz",
+        LLVMInitializeSystemZTargetInfo,
+        LLVMInitializeSystemZTarget,
+        LLVMInitializeSystemZTargetMC,
+        LLVMInitializeSystemZAsmPrinter,
+        LLVMInitializeSystemZAsmParser
+    );
+    init_target!(
+        llvm_component = "jsbackend",
+        LLVMInitializeJSBackendTargetInfo,
+        LLVMInitializeJSBackendTarget,
+        LLVMInitializeJSBackendTargetMC
+    );
+    init_target!(
+        llvm_component = "msp430",
+        LLVMInitializeMSP430TargetInfo,
+        LLVMInitializeMSP430Target,
+        LLVMInitializeMSP430TargetMC,
+        LLVMInitializeMSP430AsmPrinter,
+        LLVMInitializeMSP430AsmParser
+    );
+    init_target!(
+        llvm_component = "riscv",
+        LLVMInitializeRISCVTargetInfo,
+        LLVMInitializeRISCVTarget,
+        LLVMInitializeRISCVTargetMC,
+        LLVMInitializeRISCVAsmPrinter,
+        LLVMInitializeRISCVAsmParser
+    );
+    init_target!(
+        llvm_component = "sparc",
+        LLVMInitializeSparcTargetInfo,
+        LLVMInitializeSparcTarget,
+        LLVMInitializeSparcTargetMC,
+        LLVMInitializeSparcAsmPrinter,
+        LLVMInitializeSparcAsmParser
+    );
+    init_target!(
+        llvm_component = "nvptx",
+        LLVMInitializeNVPTXTargetInfo,
+        LLVMInitializeNVPTXTarget,
+        LLVMInitializeNVPTXTargetMC,
+        LLVMInitializeNVPTXAsmPrinter
+    );
+    init_target!(
+        llvm_component = "hexagon",
+        LLVMInitializeHexagonTargetInfo,
+        LLVMInitializeHexagonTarget,
+        LLVMInitializeHexagonTargetMC,
+        LLVMInitializeHexagonAsmPrinter,
+        LLVMInitializeHexagonAsmParser
+    );
+    init_target!(
+        llvm_component = "xtensa",
+        LLVMInitializeXtensaTargetInfo,
+        LLVMInitializeXtensaTarget,
+        LLVMInitializeXtensaTargetMC,
+        LLVMInitializeXtensaAsmPrinter,
+        LLVMInitializeXtensaAsmParser
+    );
+    init_target!(
+        llvm_component = "webassembly",
+        LLVMInitializeWebAssemblyTargetInfo,
+        LLVMInitializeWebAssemblyTarget,
+        LLVMInitializeWebAssemblyTargetMC,
+        LLVMInitializeWebAssemblyAsmPrinter,
+        LLVMInitializeWebAssemblyAsmParser
+    );
+    init_target!(
+        llvm_component = "bpf",
+        LLVMInitializeBPFTargetInfo,
+        LLVMInitializeBPFTarget,
+        LLVMInitializeBPFTargetMC,
+        LLVMInitializeBPFAsmPrinter,
+        LLVMInitializeBPFAsmParser
+    );
+}

@@ -1,10 +1,67 @@
-/* FP:tests.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_back_rpath_tests_USE_0001
-/* FP:tests.rs-0002 */ use super :: * ;
-/* FP:tests.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_back_rpath_tests_FN_0002
-/* FP:tests.rs-0004 */ # [test] fn test_minimize1 () { let res = minimize_rpaths (& ["rpath1" . into () , "rpath2" . into () , "rpath1" . into ()]) ; assert ! (res == ["rpath1" , "rpath2" ,]) ; }
-/* FP:tests.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_back_rpath_tests_FN_0003
-/* FP:tests.rs-0006 */ # [test] fn test_minimize2 () { let res = minimize_rpaths (& ["1a" . into () , "2" . into () , "2" . into () , "1a" . into () , "4a" . into () , "1a" . into () , "2" . into () , "3" . into () , "4a" . into () , "3" . into () ,]) ; assert ! (res == ["1a" , "2" , "4a" , "3" ,]) ; }
-/* FP:tests.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_back_rpath_tests_FN_0004
-/* FP:tests.rs-0008 */ # [test] fn test_rpath_relative () { if cfg ! (target_os = "macos") { let config = & mut RPathConfig { libs : & [] , is_like_darwin : true , linker_is_gnu : false , out_filename : PathBuf :: from ("bin/rustc") , } ; let res = get_rpath_relative_to_output (config , Path :: new ("lib/libstd.so")) ; assert_eq ! (res , "@loader_path/../lib") ; } else { let config = & mut RPathConfig { libs : & [] , out_filename : PathBuf :: from ("bin/rustc") , is_like_darwin : false , linker_is_gnu : true , } ; let res = get_rpath_relative_to_output (config , Path :: new ("lib/libstd.so")) ; assert_eq ! (res , "$ORIGIN/../lib") ; } }
-/* FP:tests.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_ssa_src_back_rpath_tests_FN_0005
-/* FP:tests.rs-0010 */ # [test] fn test_rpath_relative_issue_119571 () { let config = & mut RPathConfig { libs : & [] , out_filename : PathBuf :: from ("rustc") , is_like_darwin : false , linker_is_gnu : true , } ; let _ = get_rpath_relative_to_output (config , Path :: new ("lib/libstd.so")) ; let _ = get_rpath_relative_to_output (config , Path :: new ("libstd.so")) ; }
+// SRC: ../rust/compiler/rustc_codegen_ssa/src/back/rpath/tests.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=test_minimize1 | COMPLEXITY=2 | LINES=7 */
+use super::*;
+
+#[test]
+fn test_minimize1() {
+    let res = minimize_rpaths(&["rpath1".into(), "rpath2".into(), "rpath1".into()]);
+    assert!(res == ["rpath1", "rpath2",]);
+}
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=test_minimize2 | COMPLEXITY=2 | LINES=17 */
+
+#[test]
+fn test_minimize2() {
+    let res = minimize_rpaths(&[
+        "1a".into(),
+        "2".into(),
+        "2".into(),
+        "1a".into(),
+        "4a".into(),
+        "1a".into(),
+        "2".into(),
+        "3".into(),
+        "4a".into(),
+        "3".into(),
+    ]);
+    assert!(res == ["1a", "2", "4a", "3",]);
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_rpath_relative | COMPLEXITY=9 | LINES=23 */
+
+#[test]
+fn test_rpath_relative() {
+    if cfg!(target_os = "macos") {
+        let config = &mut RPathConfig {
+            libs: &[],
+            is_like_darwin: true,
+            linker_is_gnu: false,
+            out_filename: PathBuf::from("bin/rustc"),
+        };
+        let res = get_rpath_relative_to_output(config, Path::new("lib/libstd.so"));
+        assert_eq!(res, "@loader_path/../lib");
+    } else {
+        let config = &mut RPathConfig {
+            libs: &[],
+            out_filename: PathBuf::from("bin/rustc"),
+            is_like_darwin: false,
+            linker_is_gnu: true,
+        };
+        let res = get_rpath_relative_to_output(config, Path::new("lib/libstd.so"));
+        assert_eq!(res, "$ORIGIN/../lib");
+    }
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=test_rpath_relative_issue_119571 | COMPLEXITY=4 | LINES=15 */
+
+#[test]
+fn test_rpath_relative_issue_119571() {
+    let config = &mut RPathConfig {
+        libs: &[],
+        out_filename: PathBuf::from("rustc"),
+        is_like_darwin: false,
+        linker_is_gnu: true,
+    };
+    // Should not panic when out_filename only contains filename.
+    // Issue 119571
+    let _ = get_rpath_relative_to_output(config, Path::new("lib/libstd.so"));
+    // Should not panic when lib only contains filename.
+    let _ = get_rpath_relative_to_output(config, Path::new("libstd.so"));
+}

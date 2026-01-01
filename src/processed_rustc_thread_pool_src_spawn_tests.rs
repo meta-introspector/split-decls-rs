@@ -1,40 +1,276 @@
-/* FP:tests.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_USE_0001
-/* FP:tests.rs-0002 */ use std :: any :: Any ;
-/* FP:tests.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_USE_0002
-/* FP:tests.rs-0004 */ use std :: sync :: Mutex ;
-/* FP:tests.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_USE_0003
-/* FP:tests.rs-0006 */ use std :: sync :: mpsc :: channel ;
-/* FP:tests.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_USE_0004
-/* FP:tests.rs-0008 */ use super :: { spawn , spawn_fifo } ;
-/* FP:tests.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_USE_0005
-/* FP:tests.rs-0010 */ use crate :: { ThreadPoolBuilder , scope } ;
-/* FP:tests.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_FN_0006
-/* FP:tests.rs-0012 */ # [test] # [cfg_attr (any (target_os = "emscripten" , target_family = "wasm") , ignore)] fn spawn_then_join_in_worker () { let (tx , rx) = channel () ; scope (move | _ | { spawn (move | | tx . send (22) . unwrap ()) ; }) ; assert_eq ! (22 , rx . recv () . unwrap ()) ; }
-/* FP:tests.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_FN_0007
-/* FP:tests.rs-0014 */ # [test] # [cfg_attr (any (target_os = "emscripten" , target_family = "wasm") , ignore)] fn spawn_then_join_outside_worker () { let (tx , rx) = channel () ; spawn (move | | tx . send (22) . unwrap ()) ; assert_eq ! (22 , rx . recv () . unwrap ()) ; }
-/* FP:tests.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_FN_0008
-/* FP:tests.rs-0016 */ # [test] # [cfg_attr (not (panic = "unwind") , ignore)] fn panic_fwd () { let (tx , rx) = channel () ; let tx = Mutex :: new (tx) ; let panic_handler = move | err : Box < dyn Any + Send > | { let tx = tx . lock () . unwrap () ; if let Some (& msg) = err . downcast_ref :: < & str > () { if msg == "Hello, world!" { tx . send (1) . unwrap () ; } else { tx . send (2) . unwrap () ; } } else { tx . send (3) . unwrap () ; } } ; let builder = ThreadPoolBuilder :: new () . panic_handler (panic_handler) ; builder . build () . unwrap () . spawn (move | | panic ! ("Hello, world!")) ; assert_eq ! (1 , rx . recv () . unwrap ()) ; }
-/* FP:tests.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_FN_0009
-/* FP:tests.rs-0018 */ # [doc = " Test what happens when the thread-pool is dropped but there are"] # [doc = " still active asynchronous tasks. We expect the thread-pool to stay"] # [doc = " alive and executing until those threads are complete."] # [test] # [cfg_attr (any (target_os = "emscripten" , target_family = "wasm") , ignore)] fn termination_while_things_are_executing () { let (tx0 , rx0) = channel () ; let (tx1 , rx1) = channel () ; { let thread_pool = ThreadPoolBuilder :: new () . build () . unwrap () ; thread_pool . spawn (move | | { let data = rx0 . recv () . unwrap () ; spawn (move | | { tx1 . send (data) . unwrap () ; }) ; }) ; } tx0 . send (22) . unwrap () ; let v = rx1 . recv () . unwrap () ; assert_eq ! (v , 22) ; }
-/* FP:tests.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_FN_0010
-/* FP:tests.rs-0020 */ # [test] # [cfg_attr (not (panic = "unwind") , ignore)] fn custom_panic_handler_and_spawn () { let (tx , rx) = channel () ; let tx = Mutex :: new (tx) ; let panic_handler = move | e : Box < dyn Any + Send > | { tx . lock () . unwrap () . send (e) . unwrap () ; } ; let builder = ThreadPoolBuilder :: new () . panic_handler (panic_handler) ; builder . build () . unwrap () . spawn (move | | { panic ! ("Hello, world!") ; }) ; let error = rx . recv () . unwrap () ; if let Some (& msg) = error . downcast_ref :: < & str > () { assert_eq ! (msg , "Hello, world!") ; } else { panic ! ("did not receive a string from panic handler") ; } }
-/* FP:tests.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_FN_0011
-/* FP:tests.rs-0022 */ # [test] # [cfg_attr (not (panic = "unwind") , ignore)] fn custom_panic_handler_and_nested_spawn () { let (tx , rx) = channel () ; let tx = Mutex :: new (tx) ; let panic_handler = move | e | { tx . lock () . unwrap () . send (e) . unwrap () ; } ; const PANICS : usize = 3 ; let builder = ThreadPoolBuilder :: new () . panic_handler (panic_handler) ; builder . build () . unwrap () . spawn (move | | { for _ in 0 .. PANICS { spawn (move | | { panic ! ("Hello, world!") ; }) ; } }) ; for _ in 0 .. PANICS { let error = rx . recv () . unwrap () ; if let Some (& msg) = error . downcast_ref :: < & str > () { assert_eq ! (msg , "Hello, world!") ; } else { panic ! ("did not receive a string from panic handler") ; } } }
-/* FP:tests.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_MACRO_0012
-/* FP:tests.rs-0024 */ macro_rules ! test_order { ($ outer_spawn : ident , $ inner_spawn : ident) => { { let builder = ThreadPoolBuilder :: new () . num_threads (1) ; let pool = builder . build () . unwrap () ; let (tx , rx) = channel () ; pool . install (move || { for i in 0 .. 10 { let tx = tx . clone () ; $ outer_spawn (move || { for j in 0 .. 10 { let tx = tx . clone () ; $ inner_spawn (move || { tx . send (i * 10 + j) . unwrap () ; }) ; } }) ; } }) ; rx . iter () . collect ::< Vec < i32 >> () } } ; }
-/* FP:tests.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_FN_0013
-/* FP:tests.rs-0026 */ # [test] # [ignore] # [cfg_attr (any (target_os = "emscripten" , target_family = "wasm") , ignore)] fn lifo_order () { let vec = test_order ! (spawn , spawn) ; let expected : Vec < i32 > = (0 .. 100) . rev () . collect () ; assert_eq ! (vec , expected) ; }
-/* FP:tests.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_FN_0014
-/* FP:tests.rs-0028 */ # [test] # [ignore] # [cfg_attr (any (target_os = "emscripten" , target_family = "wasm") , ignore)] fn fifo_order () { let vec = test_order ! (spawn_fifo , spawn_fifo) ; let expected : Vec < i32 > = (0 .. 100) . collect () ; assert_eq ! (vec , expected) ; }
-/* FP:tests.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_FN_0015
-/* FP:tests.rs-0030 */ # [test] # [ignore] # [cfg_attr (any (target_os = "emscripten" , target_family = "wasm") , ignore)] fn lifo_fifo_order () { let vec = test_order ! (spawn , spawn_fifo) ; let expected : Vec < i32 > = (0 .. 10) . rev () . flat_map (| i | (0 .. 10) . map (move | j | i * 10 + j)) . collect () ; assert_eq ! (vec , expected) ; }
-/* FP:tests.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_FN_0016
-/* FP:tests.rs-0032 */ # [test] # [ignore] # [cfg_attr (any (target_os = "emscripten" , target_family = "wasm") , ignore)] fn fifo_lifo_order () { let vec = test_order ! (spawn_fifo , spawn) ; let expected : Vec < i32 > = (0 .. 10) . flat_map (| i | (0 .. 10) . rev () . map (move | j | i * 10 + j)) . collect () ; assert_eq ! (vec , expected) ; }
-/* FP:tests.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_MACRO_0017
-/* FP:tests.rs-0034 */ macro_rules ! spawn_send { ($ spawn : ident , $ tx : ident , $ i : expr) => { { let tx = $ tx . clone () ; $ spawn (move || tx . send ($ i) . unwrap ()) ; } } ; }
-/* FP:tests.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_MACRO_0018
-/* FP:tests.rs-0036 */ # [doc = " Test mixed spawns pushing a series of numbers, interleaved such"] # [doc = " such that negative values are using the second kind of spawn."] macro_rules ! test_mixed_order { ($ pos_spawn : ident , $ neg_spawn : ident) => { { let builder = ThreadPoolBuilder :: new () . num_threads (1) ; let pool = builder . build () . unwrap () ; let (tx , rx) = channel () ; pool . install (move || { spawn_send ! ($ pos_spawn , tx , 0) ; spawn_send ! ($ neg_spawn , tx , - 1) ; spawn_send ! ($ pos_spawn , tx , 1) ; spawn_send ! ($ neg_spawn , tx , - 2) ; spawn_send ! ($ pos_spawn , tx , 2) ; spawn_send ! ($ neg_spawn , tx , - 3) ; spawn_send ! ($ pos_spawn , tx , 3) ; }) ; rx . iter () . collect ::< Vec < i32 >> () } } ; }
-/* FP:tests.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_FN_0019
-/* FP:tests.rs-0038 */ # [test] # [ignore] # [cfg_attr (any (target_os = "emscripten" , target_family = "wasm") , ignore)] fn mixed_lifo_fifo_order () { let vec = test_mixed_order ! (spawn , spawn_fifo) ; let expected = vec ! [3 , - 1 , 2 , - 2 , 1 , - 3 , 0] ; assert_eq ! (vec , expected) ; }
-/* FP:tests.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_thread_pool_src_spawn_tests_FN_0020
-/* FP:tests.rs-0040 */ # [test] # [ignore] # [cfg_attr (any (target_os = "emscripten" , target_family = "wasm") , ignore)] fn mixed_fifo_lifo_order () { let vec = test_mixed_order ! (spawn_fifo , spawn) ; let expected = vec ! [0 , - 3 , 1 , - 2 , 2 , - 1 , 3] ; assert_eq ! (vec , expected) ; }
+// SRC: ../rust/compiler/rustc_thread_pool/src/spawn/tests.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use std::any::Any;
+use std::sync::Mutex;
+use std::sync::mpsc::channel;
+
+use super::{spawn, spawn_fifo};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::{ThreadPoolBuilder, scope};
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=spawn_then_join_in_worker | COMPLEXITY=3 | LINES=10 */
+
+#[test]
+#[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
+fn spawn_then_join_in_worker() {
+    let (tx, rx) = channel();
+    scope(move |_| {
+        spawn(move || tx.send(22).unwrap());
+    });
+    assert_eq!(22, rx.recv().unwrap());
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=spawn_then_join_outside_worker | COMPLEXITY=2 | LINES=8 */
+
+#[test]
+#[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
+fn spawn_then_join_outside_worker() {
+    let (tx, rx) = channel();
+    spawn(move || tx.send(22).unwrap());
+    assert_eq!(22, rx.recv().unwrap());
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=panic_fwd | COMPLEXITY=12 | LINES=26 */
+
+#[test]
+#[cfg_attr(not(panic = "unwind"), ignore)]
+fn panic_fwd() {
+    let (tx, rx) = channel();
+
+    let tx = Mutex::new(tx);
+    let panic_handler = move |err: Box<dyn Any + Send>| {
+        let tx = tx.lock().unwrap();
+        if let Some(&msg) = err.downcast_ref::<&str>() {
+            if msg == "Hello, world!" {
+                tx.send(1).unwrap();
+            } else {
+                tx.send(2).unwrap();
+            }
+        } else {
+            tx.send(3).unwrap();
+        }
+    };
+
+    let builder = ThreadPoolBuilder::new().panic_handler(panic_handler);
+
+    builder.build().unwrap().spawn(move || panic!("Hello, world!"));
+
+    assert_eq!(1, rx.recv().unwrap());
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=termination_while_things_are_executing | COMPLEXITY=7 | LINES=30 */
+
+/// Test what happens when the thread-pool is dropped but there are
+/// still active asynchronous tasks. We expect the thread-pool to stay
+/// alive and executing until those threads are complete.
+#[test]
+#[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
+fn termination_while_things_are_executing() {
+    let (tx0, rx0) = channel();
+    let (tx1, rx1) = channel();
+
+    // Create a thread-pool and spawn some code in it, but then drop
+    // our reference to it.
+    {
+        let thread_pool = ThreadPoolBuilder::new().build().unwrap();
+        thread_pool.spawn(move || {
+            let data = rx0.recv().unwrap();
+
+            // At this point, we know the "main" reference to the
+            // `ThreadPool` has been dropped, but there are still
+            // active threads. Launch one more.
+            spawn(move || {
+                tx1.send(data).unwrap();
+            });
+        });
+    }
+
+    tx0.send(22).unwrap();
+    let v = rx1.recv().unwrap();
+    assert_eq!(v, 22);
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=custom_panic_handler_and_spawn | COMPLEXITY=9 | LINES=28 */
+
+#[test]
+#[cfg_attr(not(panic = "unwind"), ignore)]
+fn custom_panic_handler_and_spawn() {
+    let (tx, rx) = channel();
+
+    // Create a parallel closure that will send panics on the
+    // channel; since the closure is potentially executed in parallel
+    // with itself, we have to wrap `tx` in a mutex.
+    let tx = Mutex::new(tx);
+    let panic_handler = move |e: Box<dyn Any + Send>| {
+        tx.lock().unwrap().send(e).unwrap();
+    };
+
+    // Execute an async that will panic.
+    let builder = ThreadPoolBuilder::new().panic_handler(panic_handler);
+    builder.build().unwrap().spawn(move || {
+        panic!("Hello, world!");
+    });
+
+    // Check that we got back the panic we expected.
+    let error = rx.recv().unwrap();
+    if let Some(&msg) = error.downcast_ref::<&str>() {
+        assert_eq!(msg, "Hello, world!");
+    } else {
+        panic!("did not receive a string from panic handler");
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=custom_panic_handler_and_nested_spawn | COMPLEXITY=17 | LINES=37 */
+
+#[test]
+#[cfg_attr(not(panic = "unwind"), ignore)]
+fn custom_panic_handler_and_nested_spawn() {
+    let (tx, rx) = channel();
+
+    // Create a parallel closure that will send panics on the
+    // channel; since the closure is potentially executed in parallel
+    // with itself, we have to wrap `tx` in a mutex.
+    let tx = Mutex::new(tx);
+    let panic_handler = move |e| {
+        tx.lock().unwrap().send(e).unwrap();
+    };
+
+    // Execute an async that will (eventually) panic.
+    const PANICS: usize = 3;
+    let builder = ThreadPoolBuilder::new().panic_handler(panic_handler);
+    builder.build().unwrap().spawn(move || {
+        // launch 3 nested spawn-asyncs; these should be in the same
+        // thread-pool and hence inherit the same panic handler
+        for _ in 0..PANICS {
+            spawn(move || {
+                panic!("Hello, world!");
+            });
+        }
+    });
+
+    // Check that we get back the panics we expected.
+    for _ in 0..PANICS {
+        let error = rx.recv().unwrap();
+        if let Some(&msg) = error.downcast_ref::<&str>() {
+            assert_eq!(msg, "Hello, world!");
+        } else {
+            panic!("did not receive a string from panic handler");
+        }
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=19 | LINES=22 */
+
+macro_rules! test_order {
+    ($outer_spawn:ident, $inner_spawn:ident) => {{
+        let builder = ThreadPoolBuilder::new().num_threads(1);
+        let pool = builder.build().unwrap();
+        let (tx, rx) = channel();
+        pool.install(move || {
+            for i in 0..10 {
+                let tx = tx.clone();
+                $outer_spawn(move || {
+                    for j in 0..10 {
+                        let tx = tx.clone();
+                        $inner_spawn(move || {
+                            tx.send(i * 10 + j).unwrap();
+                        });
+                    }
+                });
+            }
+        });
+        rx.iter().collect::<Vec<i32>>()
+    }};
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=lifo_order | COMPLEXITY=2 | LINES=11 */
+
+// FIXME: We should fix or remove this ignored test.
+#[test]
+#[ignore]
+#[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
+fn lifo_order() {
+    // In the absence of stealing, `spawn()` jobs on a thread will run in LIFO order.
+    let vec = test_order!(spawn, spawn);
+    let expected: Vec<i32> = (0..100).rev().collect(); // LIFO -> reversed
+    assert_eq!(vec, expected);
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fifo_order | COMPLEXITY=2 | LINES=11 */
+
+// FIXME: We should fix or remove this ignored test.
+#[test]
+#[ignore]
+#[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
+fn fifo_order() {
+    // In the absence of stealing, `spawn_fifo()` jobs on a thread will run in FIFO order.
+    let vec = test_order!(spawn_fifo, spawn_fifo);
+    let expected: Vec<i32> = (0..100).collect(); // FIFO -> natural order
+    assert_eq!(vec, expected);
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=lifo_fifo_order | COMPLEXITY=2 | LINES=11 */
+
+// FIXME: We should fix or remove this ignored test.
+#[test]
+#[ignore]
+#[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
+fn lifo_fifo_order() {
+    // LIFO on the outside, FIFO on the inside
+    let vec = test_order!(spawn, spawn_fifo);
+    let expected: Vec<i32> = (0..10).rev().flat_map(|i| (0..10).map(move |j| i * 10 + j)).collect();
+    assert_eq!(vec, expected);
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=fifo_lifo_order | COMPLEXITY=2 | LINES=11 */
+
+// FIXME: We should fix or remove this ignored test.
+#[test]
+#[ignore]
+#[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
+fn fifo_lifo_order() {
+    // FIFO on the outside, LIFO on the inside
+    let vec = test_order!(spawn_fifo, spawn);
+    let expected: Vec<i32> = (0..10).flat_map(|i| (0..10).rev().map(move |j| i * 10 + j)).collect();
+    assert_eq!(vec, expected);
+}
+/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=7 */
+
+macro_rules! spawn_send {
+    ($spawn:ident, $tx:ident, $i:expr) => {{
+        let tx = $tx.clone();
+        $spawn(move || tx.send($i).unwrap());
+    }};
+}
+/* AST_META: AST_ID=15 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=11 | LINES=20 */
+
+/// Test mixed spawns pushing a series of numbers, interleaved such
+/// such that negative values are using the second kind of spawn.
+macro_rules! test_mixed_order {
+    ($pos_spawn:ident, $neg_spawn:ident) => {{
+        let builder = ThreadPoolBuilder::new().num_threads(1);
+        let pool = builder.build().unwrap();
+        let (tx, rx) = channel();
+        pool.install(move || {
+            spawn_send!($pos_spawn, tx, 0);
+            spawn_send!($neg_spawn, tx, -1);
+            spawn_send!($pos_spawn, tx, 1);
+            spawn_send!($neg_spawn, tx, -2);
+            spawn_send!($pos_spawn, tx, 2);
+            spawn_send!($neg_spawn, tx, -3);
+            spawn_send!($pos_spawn, tx, 3);
+        });
+        rx.iter().collect::<Vec<i32>>()
+    }};
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=mixed_lifo_fifo_order | COMPLEXITY=2 | LINES=10 */
+
+// FIXME: We should fix or remove this ignored test.
+#[test]
+#[ignore]
+#[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
+fn mixed_lifo_fifo_order() {
+    let vec = test_mixed_order!(spawn, spawn_fifo);
+    let expected = vec![3, -1, 2, -2, 1, -3, 0];
+    assert_eq!(vec, expected);
+}
+/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=mixed_fifo_lifo_order | COMPLEXITY=2 | LINES=10 */
+
+// FIXME: We should fix or remove this ignored test.
+#[test]
+#[ignore]
+#[cfg_attr(any(target_os = "emscripten", target_family = "wasm"), ignore)]
+fn mixed_fifo_lifo_order() {
+    let vec = test_mixed_order!(spawn_fifo, spawn);
+    let expected = vec![0, -3, 1, -2, 2, -1, 3];
+    assert_eq!(vec, expected);
+}

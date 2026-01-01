@@ -1,24 +1,156 @@
-/* FP:ffi.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_ffi_USE_0001
-/* FP:ffi.rs-0002 */ use crate :: rustc_complete :: mir :: coverage :: { CounterId , CovTerm , ExpressionId } ;
-/* FP:ffi.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_ffi_ENUM_0002
-/* FP:ffi.rs-0004 */ # [doc = " Must match the layout of `LLVMRustCounterKind`."] # [derive (Copy , Clone , Debug)] # [repr (C)] pub (crate) enum CounterKind { Zero = 0 , CounterValueReference = 1 , Expression = 2 , }
-/* FP:ffi.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_ffi_STRUCT_0003
-/* FP:ffi.rs-0006 */ # [doc = " A reference to an instance of an abstract \"counter\" that will yield a value in a coverage"] # [doc = " report. Note that `id` has different interpretations, depending on the `kind`:"] # [doc = "   * For `CounterKind::Zero`, `id` is assumed to be `0`"] # [doc = "   * For `CounterKind::CounterValueReference`,  `id` matches the `counter_id` of the injected"] # [doc = "     instrumentation counter (the `index` argument to the LLVM intrinsic"] # [doc = "     `instrprof.increment()`)"] # [doc = "   * For `CounterKind::Expression`, `id` is the index into the coverage map's array of"] # [doc = "     counter expressions."] # [doc = ""] # [doc = " Corresponds to struct `llvm::coverage::Counter`."] # [doc = ""] # [doc = " Must match the layout of `LLVMRustCounter`."] # [derive (Copy , Clone , Debug)] # [repr (C)] pub (crate) struct Counter { pub (crate) kind : CounterKind , id : u32 , }
-/* FP:ffi.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_ffi_IMPL_0004
-/* FP:ffi.rs-0008 */ impl Counter { # [doc = " A `Counter` of kind `Zero`. For this counter kind, the `id` is not used."] pub (crate) const ZERO : Self = Self { kind : CounterKind :: Zero , id : 0 } ; # [doc = " Constructs a new `Counter` of kind `CounterValueReference`."] pub (crate) fn counter_value_reference (counter_id : CounterId) -> Self { Self { kind : CounterKind :: CounterValueReference , id : counter_id . as_u32 () } } # [doc = " Constructs a new `Counter` of kind `Expression`."] pub (crate) fn expression (expression_id : ExpressionId) -> Self { Self { kind : CounterKind :: Expression , id : expression_id . as_u32 () } } pub (crate) fn from_term (term : CovTerm) -> Self { match term { CovTerm :: Zero => Self :: ZERO , CovTerm :: Counter (id) => Self :: counter_value_reference (id) , CovTerm :: Expression (id) => Self :: expression (id) , } } }
-/* FP:ffi.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_ffi_ENUM_0005
-/* FP:ffi.rs-0010 */ # [doc = " Corresponds to enum `llvm::coverage::CounterExpression::ExprKind`."] # [doc = ""] # [doc = " Must match the layout of `LLVMRustCounterExprKind`."] # [derive (Copy , Clone , Debug)] # [repr (C)] pub (crate) enum ExprKind { Subtract = 0 , Add = 1 , }
-/* FP:ffi.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_ffi_STRUCT_0006
-/* FP:ffi.rs-0012 */ # [doc = " Corresponds to struct `llvm::coverage::CounterExpression`."] # [doc = ""] # [doc = " Must match the layout of `LLVMRustCounterExpression`."] # [derive (Copy , Clone , Debug)] # [repr (C)] pub (crate) struct CounterExpression { pub (crate) kind : ExprKind , pub (crate) lhs : Counter , pub (crate) rhs : Counter , }
-/* FP:ffi.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_ffi_STRUCT_0007
-/* FP:ffi.rs-0014 */ # [doc = " A span of source code coordinates to be embedded in coverage metadata."] # [doc = ""] # [doc = " Must match the layout of `LLVMRustCoverageSpan`."] # [derive (Clone , Debug)] # [repr (C)] pub (crate) struct CoverageSpan { # [doc = " Local index into the function's local-to-global file ID table."] # [doc = " The value at that index is itself an index into the coverage filename"] # [doc = " table in the CGU's `__llvm_covmap` section."] pub (crate) file_id : u32 , # [doc = " 1-based starting line of the source code span."] pub (crate) start_line : u32 , # [doc = " 1-based starting column of the source code span."] pub (crate) start_col : u32 , # [doc = " 1-based ending line of the source code span."] pub (crate) end_line : u32 , # [doc = " 1-based ending column of the source code span. High bit must be unset."] pub (crate) end_col : u32 , }
-/* FP:ffi.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_ffi_STRUCT_0008
-/* FP:ffi.rs-0016 */ # [doc = " Holds tables of the various region types in one struct."] # [doc = ""] # [doc = " Don't pass this struct across FFI; pass the individual region tables as"] # [doc = " pointer/length pairs instead."] # [doc = ""] # [doc = " Each field name has a `_regions` suffix for improved readability after"] # [doc = " exhaustive destructing, which ensures that all region types are handled."] # [derive (Clone , Debug , Default)] pub (crate) struct Regions { pub (crate) code_regions : Vec < CodeRegion > , pub (crate) expansion_regions : Vec < ExpansionRegion > , pub (crate) branch_regions : Vec < BranchRegion > , }
-/* FP:ffi.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_ffi_IMPL_0009
-/* FP:ffi.rs-0018 */ impl Regions { # [doc = " Returns true if none of this structure's tables contain any regions."] pub (crate) fn has_no_regions (& self) -> bool { let Self { code_regions , expansion_regions , branch_regions } = self ; code_regions . is_empty () && expansion_regions . is_empty () && branch_regions . is_empty () } }
-/* FP:ffi.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_ffi_STRUCT_0010
-/* FP:ffi.rs-0020 */ # [doc = " Must match the layout of `LLVMRustCoverageCodeRegion`."] # [derive (Clone , Debug)] # [repr (C)] pub (crate) struct CodeRegion { pub (crate) cov_span : CoverageSpan , pub (crate) counter : Counter , }
-/* FP:ffi.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_ffi_STRUCT_0011
-/* FP:ffi.rs-0022 */ # [doc = " Must match the layout of `LLVMRustCoverageExpansionRegion`."] # [derive (Clone , Debug)] # [repr (C)] pub (crate) struct ExpansionRegion { pub (crate) cov_span : CoverageSpan , pub (crate) expanded_file_id : u32 , }
-/* FP:ffi.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_llvm_src_coverageinfo_ffi_STRUCT_0012
-/* FP:ffi.rs-0024 */ # [doc = " Must match the layout of `LLVMRustCoverageBranchRegion`."] # [derive (Clone , Debug)] # [repr (C)] pub (crate) struct BranchRegion { pub (crate) cov_span : CoverageSpan , pub (crate) true_counter : Counter , pub (crate) false_counter : Counter , }
+// SRC: ../rust/compiler/rustc_codegen_llvm/src/coverageinfo/ffi.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::mir::coverage::{CounterId, CovTerm, ExpressionId};
+/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=9 */
+
+/// Must match the layout of `LLVMRustCounterKind`.
+#[derive(Copy, Clone, Debug)]
+#[repr(C)]
+pub(crate) enum CounterKind {
+    Zero = 0,
+    CounterValueReference = 1,
+    Expression = 2,
+}
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=20 */
+
+/// A reference to an instance of an abstract "counter" that will yield a value in a coverage
+/// report. Note that `id` has different interpretations, depending on the `kind`:
+///   * For `CounterKind::Zero`, `id` is assumed to be `0`
+///   * For `CounterKind::CounterValueReference`,  `id` matches the `counter_id` of the injected
+///     instrumentation counter (the `index` argument to the LLVM intrinsic
+///     `instrprof.increment()`)
+///   * For `CounterKind::Expression`, `id` is the index into the coverage map's array of
+///     counter expressions.
+///
+/// Corresponds to struct `llvm::coverage::Counter`.
+///
+/// Must match the layout of `LLVMRustCounter`.
+#[derive(Copy, Clone, Debug)]
+#[repr(C)]
+pub(crate) struct Counter {
+    // Important: The layout (order and types of fields) must match its C++ counterpart.
+    pub(crate) kind: CounterKind,
+    id: u32,
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=23 */
+
+impl Counter {
+    /// A `Counter` of kind `Zero`. For this counter kind, the `id` is not used.
+    pub(crate) const ZERO: Self = Self { kind: CounterKind::Zero, id: 0 };
+
+    /// Constructs a new `Counter` of kind `CounterValueReference`.
+    pub(crate) fn counter_value_reference(counter_id: CounterId) -> Self {
+        Self { kind: CounterKind::CounterValueReference, id: counter_id.as_u32() }
+    }
+
+    /// Constructs a new `Counter` of kind `Expression`.
+    pub(crate) fn expression(expression_id: ExpressionId) -> Self {
+        Self { kind: CounterKind::Expression, id: expression_id.as_u32() }
+    }
+
+    pub(crate) fn from_term(term: CovTerm) -> Self {
+        match term {
+            CovTerm::Zero => Self::ZERO,
+            CovTerm::Counter(id) => Self::counter_value_reference(id),
+            CovTerm::Expression(id) => Self::expression(id),
+        }
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=10 */
+
+/// Corresponds to enum `llvm::coverage::CounterExpression::ExprKind`.
+///
+/// Must match the layout of `LLVMRustCounterExprKind`.
+#[derive(Copy, Clone, Debug)]
+#[repr(C)]
+pub(crate) enum ExprKind {
+    Subtract = 0,
+    Add = 1,
+}
+/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=11 */
+
+/// Corresponds to struct `llvm::coverage::CounterExpression`.
+///
+/// Must match the layout of `LLVMRustCounterExpression`.
+#[derive(Copy, Clone, Debug)]
+#[repr(C)]
+pub(crate) struct CounterExpression {
+    pub(crate) kind: ExprKind,
+    pub(crate) lhs: Counter,
+    pub(crate) rhs: Counter,
+}
+/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=21 */
+
+/// A span of source code coordinates to be embedded in coverage metadata.
+///
+/// Must match the layout of `LLVMRustCoverageSpan`.
+#[derive(Clone, Debug)]
+#[repr(C)]
+pub(crate) struct CoverageSpan {
+    /// Local index into the function's local-to-global file ID table.
+    /// The value at that index is itself an index into the coverage filename
+    /// table in the CGU's `__llvm_covmap` section.
+    pub(crate) file_id: u32,
+
+    /// 1-based starting line of the source code span.
+    pub(crate) start_line: u32,
+    /// 1-based starting column of the source code span.
+    pub(crate) start_col: u32,
+    /// 1-based ending line of the source code span.
+    pub(crate) end_line: u32,
+    /// 1-based ending column of the source code span. High bit must be unset.
+    pub(crate) end_col: u32,
+}
+/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=14 */
+
+/// Holds tables of the various region types in one struct.
+///
+/// Don't pass this struct across FFI; pass the individual region tables as
+/// pointer/length pairs instead.
+///
+/// Each field name has a `_regions` suffix for improved readability after
+/// exhaustive destructing, which ensures that all region types are handled.
+#[derive(Clone, Debug, Default)]
+pub(crate) struct Regions {
+    pub(crate) code_regions: Vec<CodeRegion>,
+    pub(crate) expansion_regions: Vec<ExpansionRegion>,
+    pub(crate) branch_regions: Vec<BranchRegion>,
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
+
+impl Regions {
+    /// Returns true if none of this structure's tables contain any regions.
+    pub(crate) fn has_no_regions(&self) -> bool {
+        let Self { code_regions, expansion_regions, branch_regions } = self;
+
+        code_regions.is_empty() && expansion_regions.is_empty() && branch_regions.is_empty()
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=8 */
+
+/// Must match the layout of `LLVMRustCoverageCodeRegion`.
+#[derive(Clone, Debug)]
+#[repr(C)]
+pub(crate) struct CodeRegion {
+    pub(crate) cov_span: CoverageSpan,
+    pub(crate) counter: Counter,
+}
+/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=8 */
+
+/// Must match the layout of `LLVMRustCoverageExpansionRegion`.
+#[derive(Clone, Debug)]
+#[repr(C)]
+pub(crate) struct ExpansionRegion {
+    pub(crate) cov_span: CoverageSpan,
+    pub(crate) expanded_file_id: u32,
+}
+/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=5 | LINES=9 */
+
+/// Must match the layout of `LLVMRustCoverageBranchRegion`.
+#[derive(Clone, Debug)]
+#[repr(C)]
+pub(crate) struct BranchRegion {
+    pub(crate) cov_span: CoverageSpan,
+    pub(crate) true_counter: Counter,
+    pub(crate) false_counter: Counter,
+}

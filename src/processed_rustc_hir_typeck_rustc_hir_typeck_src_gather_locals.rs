@@ -1,34 +1,252 @@
-/* FP:gather_locals.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_gather_locals_USE_0001
-/* FP:gather_locals.rs-0002 */ use rustc_hir as hir ;
-/* FP:gather_locals.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_gather_locals_USE_0002
-/* FP:gather_locals.rs-0004 */ use crate :: rustc_complete :: intravisit :: { self , Visitor } ;
-/* FP:gather_locals.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_gather_locals_USE_0003
-/* FP:gather_locals.rs-0006 */ use crate :: rustc_complete :: { HirId , PatKind } ;
-/* FP:gather_locals.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_gather_locals_USE_0004
-/* FP:gather_locals.rs-0008 */ use crate :: rustc_infer :: traits :: ObligationCauseCode ;
-/* FP:gather_locals.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_gather_locals_USE_0005
-/* FP:gather_locals.rs-0010 */ use crate :: rustc_complete :: ty :: { self , Ty } ;
-/* FP:gather_locals.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_gather_locals_USE_0006
-/* FP:gather_locals.rs-0012 */ use crate :: rustc_complete :: Span ;
-/* FP:gather_locals.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_gather_locals_USE_0007
-/* FP:gather_locals.rs-0014 */ use crate :: rustc_complete :: def_id :: LocalDefId ;
-/* FP:gather_locals.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_gather_locals_USE_0008
-/* FP:gather_locals.rs-0016 */ use tracing :: debug ;
-/* FP:gather_locals.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_gather_locals_USE_0009
-/* FP:gather_locals.rs-0018 */ use crate :: FnCtxt ;
-/* FP:gather_locals.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_gather_locals_ENUM_0010
-/* FP:gather_locals.rs-0020 */ # [doc = " Provides context for checking patterns in declarations. More specifically this"] # [doc = " allows us to infer array types if the pattern is irrefutable and allows us to infer"] # [doc = " the size of the array. See issue #76342."] # [derive (Debug , Copy , Clone)] pub (super) enum DeclOrigin < 'a > { LetExpr , LocalDecl { els : Option < & 'a hir :: Block < 'a > > } , }
-/* FP:gather_locals.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_gather_locals_IMPL_0011
-/* FP:gather_locals.rs-0022 */ impl < 'a > DeclOrigin < 'a > { pub (super) fn try_get_else (& self) -> Option < & 'a hir :: Block < 'a > > { match self { Self :: LocalDecl { els } => * els , Self :: LetExpr => None , } } }
-/* FP:gather_locals.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_gather_locals_STRUCT_0012
-/* FP:gather_locals.rs-0024 */ # [doc = " A declaration is an abstraction of [hir::LetStmt] and [hir::LetExpr]."] # [doc = ""] # [doc = " It must have a hir_id, as this is how we connect gather_locals to the check functions."] pub (super) struct Declaration < 'a > { pub hir_id : HirId , pub pat : & 'a hir :: Pat < 'a > , pub ty : Option < & 'a hir :: Ty < 'a > > , pub span : Span , pub init : Option < & 'a hir :: Expr < 'a > > , pub origin : DeclOrigin < 'a > , }
-/* FP:gather_locals.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_gather_locals_IMPL_0013
-/* FP:gather_locals.rs-0026 */ impl < 'a > From < & 'a hir :: LetStmt < 'a > > for Declaration < 'a > { fn from (local : & 'a hir :: LetStmt < 'a >) -> Self { let hir :: LetStmt { hir_id , super_ : _ , pat , ty , span , init , els , source : _ } = * local ; Declaration { hir_id , pat , ty , span , init , origin : DeclOrigin :: LocalDecl { els } } } }
-/* FP:gather_locals.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_gather_locals_IMPL_0014
-/* FP:gather_locals.rs-0028 */ impl < 'a > From < (& 'a hir :: LetExpr < 'a > , HirId) > for Declaration < 'a > { fn from ((let_expr , hir_id) : (& 'a hir :: LetExpr < 'a > , HirId)) -> Self { let hir :: LetExpr { pat , ty , span , init , recovered : _ } = * let_expr ; Declaration { hir_id , pat , ty , span , init : Some (init) , origin : DeclOrigin :: LetExpr } } }
-/* FP:gather_locals.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_gather_locals_STRUCT_0015
-/* FP:gather_locals.rs-0030 */ # [doc = " The `GatherLocalsVisitor` is responsible for initializing local variable types"] # [doc = " in the [`ty::TypeckResults`] for all subpatterns in statements and expressions"] # [doc = " like `let`, `match`, and params of function bodies. It also adds `Sized` bounds"] # [doc = " for these types (with exceptions for unsized feature gates like `unsized_fn_params`)."] # [doc = ""] # [doc = " Failure to visit locals will cause an ICE in writeback when the local's type is"] # [doc = " resolved. Visiting locals twice will ICE in the `GatherLocalsVisitor`, since it"] # [doc = " will overwrite the type previously stored in the local."] pub (super) struct GatherLocalsVisitor < 'a , 'tcx > { fcx : & 'a FnCtxt < 'a , 'tcx > , outermost_fn_param_pat : Option < (Span , HirId) > , }
-/* FP:gather_locals.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_gather_locals_IMPL_0016
-/* FP:gather_locals.rs-0032 */ impl < 'a , 'tcx > GatherLocalsVisitor < 'a , 'tcx > { pub (crate) fn gather_from_local (fcx : & 'a FnCtxt < 'a , 'tcx > , local : & 'tcx hir :: LetStmt < 'tcx >) { let mut visitor = GatherLocalsVisitor { fcx , outermost_fn_param_pat : None } ; visitor . declare (local . into ()) ; visitor . visit_pat (local . pat) ; } pub (crate) fn gather_from_let_expr (fcx : & 'a FnCtxt < 'a , 'tcx > , let_expr : & 'tcx hir :: LetExpr < 'tcx > , expr_hir_id : hir :: HirId ,) { let mut visitor = GatherLocalsVisitor { fcx , outermost_fn_param_pat : None } ; visitor . declare ((let_expr , expr_hir_id) . into ()) ; visitor . visit_pat (let_expr . pat) ; } pub (crate) fn gather_from_param (fcx : & 'a FnCtxt < 'a , 'tcx > , param : & 'tcx hir :: Param < 'tcx >) { let mut visitor = GatherLocalsVisitor { fcx , outermost_fn_param_pat : Some ((param . ty_span , param . hir_id)) , } ; visitor . visit_pat (param . pat) ; } pub (crate) fn gather_from_arm (fcx : & 'a FnCtxt < 'a , 'tcx > , local : & 'tcx hir :: Arm < 'tcx >) { let mut visitor = GatherLocalsVisitor { fcx , outermost_fn_param_pat : None } ; visitor . visit_pat (local . pat) ; } fn assign (& mut self , span : Span , nid : HirId , ty_opt : Option < Ty < 'tcx > >) -> Ty < 'tcx > { if let Some (& local) = self . fcx . locals . borrow_mut () . get (& nid) { self . fcx . dcx () . span_delayed_bug (span , "evaluated expression more than once") ; return local ; } match ty_opt { None => { let var_ty = self . fcx . next_ty_var (span) ; self . fcx . locals . borrow_mut () . insert (nid , var_ty) ; var_ty } Some (typ) => { self . fcx . locals . borrow_mut () . insert (nid , typ) ; typ } } } # [doc = " Allocates a type for a declaration, which may have a type annotation. If it does have"] # [doc = " a type annotation, then the [`Ty`] stored will be the resolved type. This may be found"] # [doc = " again during type checking by querying [`FnCtxt::local_ty`] for the same hir_id."] fn declare (& mut self , decl : Declaration < 'tcx >) { let local_ty = match decl . ty { Some (ref ty) => { let o_ty = self . fcx . lower_ty (ty) ; let c_ty = self . fcx . infcx . canonicalize_user_type_annotation (ty :: UserType :: new_with_bounds (ty :: UserTypeKind :: Ty (o_ty . raw) , self . fcx . collect_impl_trait_clauses_from_hir_ty (ty) ,) ,) ; debug ! ("visit_local: ty.hir_id={:?} o_ty={:?} c_ty={:?}" , ty . hir_id , o_ty , c_ty) ; self . fcx . typeck_results . borrow_mut () . user_provided_types_mut () . insert (ty . hir_id , c_ty) ; Some (o_ty . normalized) } None => None , } ; self . assign (decl . span , decl . hir_id , local_ty) ; debug ! ("local variable {:?} is assigned type {}" , decl . pat , self . fcx . ty_to_string (* self . fcx . locals . borrow () . get (& decl . hir_id) . unwrap ())) ; } }
-/* FP:gather_locals.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_typeck_src_gather_locals_IMPL_0017
-/* FP:gather_locals.rs-0034 */ impl < 'a , 'tcx > Visitor < 'tcx > for GatherLocalsVisitor < 'a , 'tcx > { fn visit_local (& mut self , local : & 'tcx hir :: LetStmt < 'tcx >) { self . declare (local . into ()) ; intravisit :: walk_local (self , local) } fn visit_expr (& mut self , expr : & 'tcx hir :: Expr < 'tcx >) { if let hir :: ExprKind :: Let (let_expr) = expr . kind { self . declare ((let_expr , expr . hir_id) . into ()) ; } intravisit :: walk_expr (self , expr) } fn visit_pat (& mut self , p : & 'tcx hir :: Pat < 'tcx >) { if let PatKind :: Binding (_ , _ , ident , _) = p . kind { let var_ty = self . assign (p . span , p . hir_id , None) ; if let Some ((ty_span , hir_id)) = self . outermost_fn_param_pat { if ! self . fcx . tcx . features () . unsized_fn_params () { self . fcx . require_type_is_sized (var_ty , ty_span , ObligationCauseCode :: SizedArgumentType (if ty_span == ident . span && self . fcx . tcx . is_closure_like (self . fcx . body_id . into ()) { None } else { Some (hir_id) } ,) ,) ; } } else { self . fcx . require_type_is_sized (var_ty , p . span , ObligationCauseCode :: VariableType (p . hir_id) ,) ; } debug ! ("pattern binding {} is assigned to {} with type {:?}" , ident , self . fcx . ty_to_string (* self . fcx . locals . borrow () . get (& p . hir_id) . unwrap ()) , var_ty) ; } let old_outermost_fn_param_pat = self . outermost_fn_param_pat . take () ; if let PatKind :: Guard (subpat , _) = p . kind { self . visit_pat (subpat) ; } else { intravisit :: walk_pat (self , p) ; } self . outermost_fn_param_pat = old_outermost_fn_param_pat ; } fn visit_fn (& mut self , _ : intravisit :: FnKind < 'tcx > , _ : & 'tcx hir :: FnDecl < 'tcx > , _ : hir :: BodyId , _ : Span , _ : LocalDefId ,) { } }
+// SRC: ../rust/compiler/rustc_hir_typeck/src/gather_locals.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use rustc_hir as hir;
+use crate::rustc_complete::intravisit::{self, Visitor};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{HirId, PatKind};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_infer::traits::ObligationCauseCode;
+use crate::rustc_complete::ty::{self, Ty};
+/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=16 */
+use crate::rustc_complete::Span;
+use crate::rustc_complete::def_id::LocalDefId;
+use tracing::debug;
+
+use crate::FnCtxt;
+
+/// Provides context for checking patterns in declarations. More specifically this
+/// allows us to infer array types if the pattern is irrefutable and allows us to infer
+/// the size of the array. See issue #76342.
+#[derive(Debug, Copy, Clone)]
+pub(super) enum DeclOrigin<'a> {
+    // from an `if let` expression
+    LetExpr,
+    // from `let x = ..`
+    LocalDecl { els: Option<&'a hir::Block<'a>> },
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=9 */
+
+impl<'a> DeclOrigin<'a> {
+    pub(super) fn try_get_else(&self) -> Option<&'a hir::Block<'a>> {
+        match self {
+            Self::LocalDecl { els } => *els,
+            Self::LetExpr => None,
+        }
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
+
+/// A declaration is an abstraction of [hir::LetStmt] and [hir::LetExpr].
+///
+/// It must have a hir_id, as this is how we connect gather_locals to the check functions.
+pub(super) struct Declaration<'a> {
+    pub hir_id: HirId,
+    pub pat: &'a hir::Pat<'a>,
+    pub ty: Option<&'a hir::Ty<'a>>,
+    pub span: Span,
+    pub init: Option<&'a hir::Expr<'a>>,
+    pub origin: DeclOrigin<'a>,
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=from | COMPLEXITY=8 | LINES=7 */
+
+impl<'a> From<&'a hir::LetStmt<'a>> for Declaration<'a> {
+    fn from(local: &'a hir::LetStmt<'a>) -> Self {
+        let hir::LetStmt { hir_id, super_: _, pat, ty, span, init, els, source: _ } = *local;
+        Declaration { hir_id, pat, ty, span, init, origin: DeclOrigin::LocalDecl { els } }
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=from | COMPLEXITY=7 | LINES=7 */
+
+impl<'a> From<(&'a hir::LetExpr<'a>, HirId)> for Declaration<'a> {
+    fn from((let_expr, hir_id): (&'a hir::LetExpr<'a>, HirId)) -> Self {
+        let hir::LetExpr { pat, ty, span, init, recovered: _ } = *let_expr;
+        Declaration { hir_id, pat, ty, span, init: Some(init), origin: DeclOrigin::LetExpr }
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=11 | LINES=16 */
+
+/// The `GatherLocalsVisitor` is responsible for initializing local variable types
+/// in the [`ty::TypeckResults`] for all subpatterns in statements and expressions
+/// like `let`, `match`, and params of function bodies. It also adds `Sized` bounds
+/// for these types (with exceptions for unsized feature gates like `unsized_fn_params`).
+///
+/// Failure to visit locals will cause an ICE in writeback when the local's type is
+/// resolved. Visiting locals twice will ICE in the `GatherLocalsVisitor`, since it
+/// will overwrite the type previously stored in the local.
+pub(super) struct GatherLocalsVisitor<'a, 'tcx> {
+    fcx: &'a FnCtxt<'a, 'tcx>,
+    // parameters are special cases of patterns, but we want to handle them as
+    // *distinct* cases. so track when we are hitting a pattern *within* an fn
+    // parameter.
+    outermost_fn_param_pat: Option<(Span, HirId)>,
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=assign | COMPLEXITY=48 | LINES=94 */
+
+// N.B. additional `gather_*` functions should be careful to only walk the pattern
+// for new expressions, since visiting sub-expressions or nested bodies may initialize
+// locals which are not conceptually owned by the gathered statement or expression.
+impl<'a, 'tcx> GatherLocalsVisitor<'a, 'tcx> {
+    pub(crate) fn gather_from_local(fcx: &'a FnCtxt<'a, 'tcx>, local: &'tcx hir::LetStmt<'tcx>) {
+        let mut visitor = GatherLocalsVisitor { fcx, outermost_fn_param_pat: None };
+        visitor.declare(local.into());
+        visitor.visit_pat(local.pat);
+    }
+
+    pub(crate) fn gather_from_let_expr(
+        fcx: &'a FnCtxt<'a, 'tcx>,
+        let_expr: &'tcx hir::LetExpr<'tcx>,
+        expr_hir_id: hir::HirId,
+    ) {
+        let mut visitor = GatherLocalsVisitor { fcx, outermost_fn_param_pat: None };
+        visitor.declare((let_expr, expr_hir_id).into());
+        visitor.visit_pat(let_expr.pat);
+    }
+
+    pub(crate) fn gather_from_param(fcx: &'a FnCtxt<'a, 'tcx>, param: &'tcx hir::Param<'tcx>) {
+        let mut visitor = GatherLocalsVisitor {
+            fcx,
+            outermost_fn_param_pat: Some((param.ty_span, param.hir_id)),
+        };
+        visitor.visit_pat(param.pat);
+    }
+
+    pub(crate) fn gather_from_arm(fcx: &'a FnCtxt<'a, 'tcx>, local: &'tcx hir::Arm<'tcx>) {
+        let mut visitor = GatherLocalsVisitor { fcx, outermost_fn_param_pat: None };
+        visitor.visit_pat(local.pat);
+    }
+
+    fn assign(&mut self, span: Span, nid: HirId, ty_opt: Option<Ty<'tcx>>) -> Ty<'tcx> {
+        // We evaluate expressions twice occasionally in diagnostics for better
+        // type information or because it needs type information out-of-order.
+        // In order to not ICE and not lead to knock-on ambiguity errors, if we
+        // try to re-assign a type to a local, then just take out the previous
+        // type and delay a bug.
+        if let Some(&local) = self.fcx.locals.borrow_mut().get(&nid) {
+            self.fcx.dcx().span_delayed_bug(span, "evaluated expression more than once");
+            return local;
+        }
+
+        match ty_opt {
+            None => {
+                // Infer the variable's type.
+                let var_ty = self.fcx.next_ty_var(span);
+                self.fcx.locals.borrow_mut().insert(nid, var_ty);
+                var_ty
+            }
+            Some(typ) => {
+                // Take type that the user specified.
+                self.fcx.locals.borrow_mut().insert(nid, typ);
+                typ
+            }
+        }
+    }
+
+    /// Allocates a type for a declaration, which may have a type annotation. If it does have
+    /// a type annotation, then the [`Ty`] stored will be the resolved type. This may be found
+    /// again during type checking by querying [`FnCtxt::local_ty`] for the same hir_id.
+    fn declare(&mut self, decl: Declaration<'tcx>) {
+        let local_ty = match decl.ty {
+            Some(ref ty) => {
+                let o_ty = self.fcx.lower_ty(ty);
+
+                let c_ty = self.fcx.infcx.canonicalize_user_type_annotation(
+                    ty::UserType::new_with_bounds(
+                        ty::UserTypeKind::Ty(o_ty.raw),
+                        self.fcx.collect_impl_trait_clauses_from_hir_ty(ty),
+                    ),
+                );
+                debug!("visit_local: ty.hir_id={:?} o_ty={:?} c_ty={:?}", ty.hir_id, o_ty, c_ty);
+                self.fcx
+                    .typeck_results
+                    .borrow_mut()
+                    .user_provided_types_mut()
+                    .insert(ty.hir_id, c_ty);
+
+                Some(o_ty.normalized)
+            }
+            None => None,
+        };
+        self.assign(decl.span, decl.hir_id, local_ty);
+
+        debug!(
+            "local variable {:?} is assigned type {}",
+            decl.pat,
+            self.fcx.ty_to_string(*self.fcx.locals.borrow().get(&decl.hir_id).unwrap())
+        );
+    }
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=visit_local | COMPLEXITY=39 | LINES=74 */
+
+impl<'a, 'tcx> Visitor<'tcx> for GatherLocalsVisitor<'a, 'tcx> {
+    // Add explicitly-declared locals.
+    fn visit_local(&mut self, local: &'tcx hir::LetStmt<'tcx>) {
+        self.declare(local.into());
+        intravisit::walk_local(self, local)
+    }
+
+    fn visit_expr(&mut self, expr: &'tcx hir::Expr<'tcx>) {
+        if let hir::ExprKind::Let(let_expr) = expr.kind {
+            self.declare((let_expr, expr.hir_id).into());
+        }
+        intravisit::walk_expr(self, expr)
+    }
+
+    // Add pattern bindings.
+    fn visit_pat(&mut self, p: &'tcx hir::Pat<'tcx>) {
+        if let PatKind::Binding(_, _, ident, _) = p.kind {
+            let var_ty = self.assign(p.span, p.hir_id, None);
+
+            if let Some((ty_span, hir_id)) = self.outermost_fn_param_pat {
+                if !self.fcx.tcx.features().unsized_fn_params() {
+                    self.fcx.require_type_is_sized(
+                        var_ty,
+                        ty_span,
+                        // ty_span == ident.span iff this is a closure parameter with no type
+                        // ascription, or if it's an implicit `self` parameter
+                        ObligationCauseCode::SizedArgumentType(
+                            if ty_span == ident.span
+                                && self.fcx.tcx.is_closure_like(self.fcx.body_id.into())
+                            {
+                                None
+                            } else {
+                                Some(hir_id)
+                            },
+                        ),
+                    );
+                }
+            } else {
+                self.fcx.require_type_is_sized(
+                    var_ty,
+                    p.span,
+                    ObligationCauseCode::VariableType(p.hir_id),
+                );
+            }
+
+            debug!(
+                "pattern binding {} is assigned to {} with type {:?}",
+                ident,
+                self.fcx.ty_to_string(*self.fcx.locals.borrow().get(&p.hir_id).unwrap()),
+                var_ty
+            );
+        }
+        let old_outermost_fn_param_pat = self.outermost_fn_param_pat.take();
+        if let PatKind::Guard(subpat, _) = p.kind {
+            // We'll visit the guard when checking it. Don't gather its locals twice.
+            self.visit_pat(subpat);
+        } else {
+            intravisit::walk_pat(self, p);
+        }
+        self.outermost_fn_param_pat = old_outermost_fn_param_pat;
+    }
+
+    // Don't descend into the bodies of nested closures.
+    fn visit_fn(
+        &mut self,
+        _: intravisit::FnKind<'tcx>,
+        _: &'tcx hir::FnDecl<'tcx>,
+        _: hir::BodyId,
+        _: Span,
+        _: LocalDefId,
+    ) {
+    }
+}

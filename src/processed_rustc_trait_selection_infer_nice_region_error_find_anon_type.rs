@@ -1,28 +1,235 @@
-/* FP:find_anon_type.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_find_anon_type_USE_0001
-/* FP:find_anon_type.rs-0002 */ use core :: ops :: ControlFlow ;
-/* FP:find_anon_type.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_find_anon_type_USE_0002
-/* FP:find_anon_type.rs-0004 */ use crate :: rustc_complete :: def_id :: { DefId , LocalDefId } ;
-/* FP:find_anon_type.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_find_anon_type_USE_0003
-/* FP:find_anon_type.rs-0006 */ use crate :: rustc_complete :: intravisit :: { self , Visitor , VisitorExt } ;
-/* FP:find_anon_type.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_find_anon_type_USE_0004
-/* FP:find_anon_type.rs-0008 */ use crate :: rustc_complete :: { self as hir , AmbigArg } ;
-/* FP:find_anon_type.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_find_anon_type_USE_0005
-/* FP:find_anon_type.rs-0010 */ use crate :: rustc_complete :: hir :: nested_filter ;
-/* FP:find_anon_type.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_find_anon_type_USE_0006
-/* FP:find_anon_type.rs-0012 */ use crate :: rustc_complete :: middle :: resolve_bound_vars as rbv ;
-/* FP:find_anon_type.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_find_anon_type_USE_0007
-/* FP:find_anon_type.rs-0014 */ use crate :: rustc_complete :: ty :: { self , Region , TyCtxt } ;
-/* FP:find_anon_type.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_find_anon_type_USE_0008
-/* FP:find_anon_type.rs-0016 */ use tracing :: debug ;
-/* FP:find_anon_type.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_find_anon_type_FN_0009
-/* FP:find_anon_type.rs-0018 */ # [doc = " This function calls the `visit_ty` method for the parameters"] # [doc = " corresponding to the anonymous regions. The `nested_visitor.found_type`"] # [doc = " contains the anonymous type."] # [doc = ""] # [doc = " # Arguments"] # [doc = " region - the anonymous region corresponding to the anon_anon conflict"] # [doc = " br - the bound region corresponding to the above region which is of type `BrAnon(_)`"] # [doc = ""] # [doc = " # Example"] # [doc = " ```compile_fail"] # [doc = " fn foo(x: &mut Vec<&u8>, y: &u8)"] # [doc = "    { x.push(y); }"] # [doc = " ```"] # [doc = " The function returns the nested type corresponding to the anonymous region"] # [doc = " for e.g., `&u8` and `Vec<&u8>`."] pub fn find_anon_type < 'tcx > (tcx : TyCtxt < 'tcx > , generic_param_scope : LocalDefId , region : Region < 'tcx > ,) -> Option < (& 'tcx hir :: Ty < 'tcx > , & 'tcx hir :: FnSig < 'tcx >) > { let anon_reg = tcx . is_suitable_region (generic_param_scope , region) ? ; let fn_sig = tcx . hir_node_by_def_id (anon_reg . scope) . fn_sig () ? ; fn_sig . decl . inputs . iter () . find_map (| arg | find_component_for_bound_region (tcx , arg , anon_reg . region_def_id)) . map (| ty | (ty , fn_sig)) }
-/* FP:find_anon_type.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_find_anon_type_FN_0010
-/* FP:find_anon_type.rs-0020 */ fn find_component_for_bound_region < 'tcx > (tcx : TyCtxt < 'tcx > , arg : & 'tcx hir :: Ty < 'tcx > , region_def_id : DefId ,) -> Option < & 'tcx hir :: Ty < 'tcx > > { FindNestedTypeVisitor { tcx , region_def_id , current_index : ty :: INNERMOST } . visit_ty_unambig (arg) . break_value () }
-/* FP:find_anon_type.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_find_anon_type_STRUCT_0011
-/* FP:find_anon_type.rs-0022 */ struct FindNestedTypeVisitor < 'tcx > { tcx : TyCtxt < 'tcx > , region_def_id : DefId , current_index : ty :: DebruijnIndex , }
-/* FP:find_anon_type.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_find_anon_type_IMPL_0012
-/* FP:find_anon_type.rs-0024 */ impl < 'tcx > Visitor < 'tcx > for FindNestedTypeVisitor < 'tcx > { type Result = ControlFlow < & 'tcx hir :: Ty < 'tcx > > ; type NestedFilter = nested_filter :: OnlyBodies ; fn maybe_tcx (& mut self) -> Self :: MaybeTyCtxt { self . tcx } fn visit_ty (& mut self , arg : & 'tcx hir :: Ty < 'tcx , AmbigArg >) -> Self :: Result { match arg . kind { hir :: TyKind :: FnPtr (_) => { self . current_index . shift_in (1) ; let _ = intravisit :: walk_ty (self , arg) ; self . current_index . shift_out (1) ; return ControlFlow :: Continue (()) ; } hir :: TyKind :: TraitObject (bounds , ..) => { for bound in bounds { self . current_index . shift_in (1) ; let _ = self . visit_poly_trait_ref (bound) ; self . current_index . shift_out (1) ; } } hir :: TyKind :: Ref (lifetime , _) => { let hir_id = lifetime . hir_id ; match self . tcx . named_bound_var (hir_id) { Some (rbv :: ResolvedArg :: EarlyBound (id)) => { debug ! ("EarlyBound id={:?}" , id) ; if id . to_def_id () == self . region_def_id { return ControlFlow :: Break (arg . as_unambig_ty ()) ; } } Some (rbv :: ResolvedArg :: LateBound (debruijn_index , _ , id)) => { debug ! ("FindNestedTypeVisitor::visit_ty: LateBound depth = {:?}" , debruijn_index) ; debug ! ("LateBound id={:?}" , id) ; if debruijn_index == self . current_index && id . to_def_id () == self . region_def_id { return ControlFlow :: Break (arg . as_unambig_ty ()) ; } } Some (rbv :: ResolvedArg :: StaticLifetime | rbv :: ResolvedArg :: Free (_ , _) | rbv :: ResolvedArg :: Error (_) ,) | None => { debug ! ("no arg found") ; } } } hir :: TyKind :: Path (_) => { intravisit :: walk_ty (self , arg) ? ; return if intravisit :: walk_ty (& mut TyPathVisitor { tcx : self . tcx , region_def_id : self . region_def_id , current_index : self . current_index , } , arg ,) . is_break () { ControlFlow :: Break (arg . as_unambig_ty ()) } else { ControlFlow :: Continue (()) } ; } _ => { } } intravisit :: walk_ty (self , arg) } }
-/* FP:find_anon_type.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_find_anon_type_STRUCT_0013
-/* FP:find_anon_type.rs-0026 */ struct TyPathVisitor < 'tcx > { tcx : TyCtxt < 'tcx > , region_def_id : DefId , current_index : ty :: DebruijnIndex , }
-/* FP:find_anon_type.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_find_anon_type_IMPL_0014
-/* FP:find_anon_type.rs-0028 */ impl < 'tcx > Visitor < 'tcx > for TyPathVisitor < 'tcx > { type Result = ControlFlow < () > ; type NestedFilter = nested_filter :: OnlyBodies ; fn maybe_tcx (& mut self) -> Self :: MaybeTyCtxt { self . tcx } fn visit_lifetime (& mut self , lifetime : & hir :: Lifetime) -> Self :: Result { match self . tcx . named_bound_var (lifetime . hir_id) { Some (rbv :: ResolvedArg :: EarlyBound (id)) => { debug ! ("EarlyBound id={:?}" , id) ; if id . to_def_id () == self . region_def_id { return ControlFlow :: Break (()) ; } } Some (rbv :: ResolvedArg :: LateBound (debruijn_index , _ , id)) => { debug ! ("FindNestedTypeVisitor::visit_ty: LateBound depth = {:?}" , debruijn_index ,) ; debug ! ("id={:?}" , id) ; if debruijn_index == self . current_index && id . to_def_id () == self . region_def_id { return ControlFlow :: Break (()) ; } } Some (rbv :: ResolvedArg :: StaticLifetime | rbv :: ResolvedArg :: Free (_ , _) | rbv :: ResolvedArg :: Error (_) ,) | None => { debug ! ("no arg found") ; } } ControlFlow :: Continue (()) } fn visit_ty (& mut self , arg : & 'tcx hir :: Ty < 'tcx , AmbigArg >) -> Self :: Result { debug ! ("`Ty` corresponding to a struct is {:?}" , arg) ; ControlFlow :: Continue (()) } }
+// SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/nice_region_error/find_anon_type.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use core::ops::ControlFlow;
+
+use crate::rustc_complete::def_id::{DefId, LocalDefId};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::intravisit::{self, Visitor, VisitorExt};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{self as hir, AmbigArg};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_complete::hir::nested_filter;
+use crate::rustc_complete::middle::resolve_bound_vars as rbv;
+use crate::rustc_complete::ty::{self, Region, TyCtxt};
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=14 */
+use tracing::debug;
+
+/// This function calls the `visit_ty` method for the parameters
+/// corresponding to the anonymous regions. The `nested_visitor.found_type`
+/// contains the anonymous type.
+///
+/// # Arguments
+/// region - the anonymous region corresponding to the anon_anon conflict
+/// br - the bound region corresponding to the above region which is of type `BrAnon(_)`
+///
+/// # Example
+/// ```compile_fail
+/// fn foo(x: &mut Vec<&u8>, y: &u8)
+///    { x.push(y); }
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=find_anon_type | COMPLEXITY=5 | LINES=18 */
+/// ```
+/// The function returns the nested type corresponding to the anonymous region
+/// for e.g., `&u8` and `Vec<&u8>`.
+pub fn find_anon_type<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    generic_param_scope: LocalDefId,
+    region: Region<'tcx>,
+) -> Option<(&'tcx hir::Ty<'tcx>, &'tcx hir::FnSig<'tcx>)> {
+    let anon_reg = tcx.is_suitable_region(generic_param_scope, region)?;
+    let fn_sig = tcx.hir_node_by_def_id(anon_reg.scope).fn_sig()?;
+
+    fn_sig
+        .decl
+        .inputs
+        .iter()
+        .find_map(|arg| find_component_for_bound_region(tcx, arg, anon_reg.region_def_id))
+        .map(|ty| (ty, fn_sig))
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=find_component_for_bound_region | COMPLEXITY=3 | LINES=12 */
+
+// This method creates a FindNestedTypeVisitor which returns the type corresponding
+// to the anonymous region.
+fn find_component_for_bound_region<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    arg: &'tcx hir::Ty<'tcx>,
+    region_def_id: DefId,
+) -> Option<&'tcx hir::Ty<'tcx>> {
+    FindNestedTypeVisitor { tcx, region_def_id, current_index: ty::INNERMOST }
+        .visit_ty_unambig(arg)
+        .break_value()
+}
+/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=FindNestedTypeVisitor | COMPLEXITY=9 | LINES=14 */
+
+// The FindNestedTypeVisitor captures the corresponding `hir::Ty` of the
+// anonymous region. The example above would lead to a conflict between
+// the two anonymous lifetimes for &u8 in x and y respectively. This visitor
+// would be invoked twice, once for each lifetime, and would
+// walk the types like &mut Vec<&u8> and &u8 looking for the HIR
+// where that lifetime appears. This allows us to highlight the
+// specific part of the type in the error message.
+struct FindNestedTypeVisitor<'tcx> {
+    tcx: TyCtxt<'tcx>,
+    // The `DefId` of the region we're looking for.
+    region_def_id: DefId,
+    current_index: ty::DebruijnIndex,
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=54 | LINES=94 */
+
+impl<'tcx> Visitor<'tcx> for FindNestedTypeVisitor<'tcx> {
+    type Result = ControlFlow<&'tcx hir::Ty<'tcx>>;
+    type NestedFilter = nested_filter::OnlyBodies;
+
+    fn maybe_tcx(&mut self) -> Self::MaybeTyCtxt {
+        self.tcx
+    }
+
+    fn visit_ty(&mut self, arg: &'tcx hir::Ty<'tcx, AmbigArg>) -> Self::Result {
+        match arg.kind {
+            hir::TyKind::FnPtr(_) => {
+                self.current_index.shift_in(1);
+                let _ = intravisit::walk_ty(self, arg);
+                self.current_index.shift_out(1);
+                return ControlFlow::Continue(());
+            }
+
+            hir::TyKind::TraitObject(bounds, ..) => {
+                for bound in bounds {
+                    self.current_index.shift_in(1);
+                    let _ = self.visit_poly_trait_ref(bound);
+                    self.current_index.shift_out(1);
+                }
+            }
+
+            hir::TyKind::Ref(lifetime, _) => {
+                // the lifetime of the Ref
+                let hir_id = lifetime.hir_id;
+                match self.tcx.named_bound_var(hir_id) {
+                    // Find the index of the named region that was part of the
+                    // error. We will then search the function parameters for a bound
+                    // region at the right depth with the same index
+                    Some(rbv::ResolvedArg::EarlyBound(id)) => {
+                        debug!("EarlyBound id={:?}", id);
+                        if id.to_def_id() == self.region_def_id {
+                            return ControlFlow::Break(arg.as_unambig_ty());
+                        }
+                    }
+
+                    // Find the index of the named region that was part of the
+                    // error. We will then search the function parameters for a bound
+                    // region at the right depth with the same index
+                    Some(rbv::ResolvedArg::LateBound(debruijn_index, _, id)) => {
+                        debug!(
+                            "FindNestedTypeVisitor::visit_ty: LateBound depth = {:?}",
+                            debruijn_index
+                        );
+                        debug!("LateBound id={:?}", id);
+                        if debruijn_index == self.current_index
+                            && id.to_def_id() == self.region_def_id
+                        {
+                            return ControlFlow::Break(arg.as_unambig_ty());
+                        }
+                    }
+
+                    Some(
+                        rbv::ResolvedArg::StaticLifetime
+                        | rbv::ResolvedArg::Free(_, _)
+                        | rbv::ResolvedArg::Error(_),
+                    )
+                    | None => {
+                        debug!("no arg found");
+                    }
+                }
+            }
+            // Checks if it is of type `hir::TyKind::Path` which corresponds to a struct.
+            hir::TyKind::Path(_) => {
+                // Prefer using the lifetime in type arguments rather than lifetime arguments.
+                intravisit::walk_ty(self, arg)?;
+
+                // Call `walk_ty` as `visit_ty` is empty.
+                return if intravisit::walk_ty(
+                    &mut TyPathVisitor {
+                        tcx: self.tcx,
+                        region_def_id: self.region_def_id,
+                        current_index: self.current_index,
+                    },
+                    arg,
+                )
+                .is_break()
+                {
+                    ControlFlow::Break(arg.as_unambig_ty())
+                } else {
+                    ControlFlow::Continue(())
+                };
+            }
+            _ => {}
+        }
+        // walk the embedded contents: e.g., if we are visiting `Vec<&Foo>`,
+        // go on to visit `&Foo`
+        intravisit::walk_ty(self, arg)
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=TyPathVisitor | COMPLEXITY=7 | LINES=12 */
+
+// The visitor captures the corresponding `hir::Ty` of the anonymous region
+// in the case of structs ie. `hir::TyKind::Path`.
+// This visitor would be invoked for each lifetime corresponding to a struct,
+// and would walk the types like Vec<Ref> in the above example and Ref looking for the HIR
+// where that lifetime appears. This allows us to highlight the
+// specific part of the type in the error message.
+struct TyPathVisitor<'tcx> {
+    tcx: TyCtxt<'tcx>,
+    region_def_id: DefId,
+    current_index: ty::DebruijnIndex,
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=maybe_tcx | COMPLEXITY=27 | LINES=51 */
+
+impl<'tcx> Visitor<'tcx> for TyPathVisitor<'tcx> {
+    type Result = ControlFlow<()>;
+    type NestedFilter = nested_filter::OnlyBodies;
+
+    fn maybe_tcx(&mut self) -> Self::MaybeTyCtxt {
+        self.tcx
+    }
+
+    fn visit_lifetime(&mut self, lifetime: &hir::Lifetime) -> Self::Result {
+        match self.tcx.named_bound_var(lifetime.hir_id) {
+            // the lifetime of the TyPath!
+            Some(rbv::ResolvedArg::EarlyBound(id)) => {
+                debug!("EarlyBound id={:?}", id);
+                if id.to_def_id() == self.region_def_id {
+                    return ControlFlow::Break(());
+                }
+            }
+
+            Some(rbv::ResolvedArg::LateBound(debruijn_index, _, id)) => {
+                debug!("FindNestedTypeVisitor::visit_ty: LateBound depth = {:?}", debruijn_index,);
+                debug!("id={:?}", id);
+                if debruijn_index == self.current_index && id.to_def_id() == self.region_def_id {
+                    return ControlFlow::Break(());
+                }
+            }
+
+            Some(
+                rbv::ResolvedArg::StaticLifetime
+                | rbv::ResolvedArg::Free(_, _)
+                | rbv::ResolvedArg::Error(_),
+            )
+            | None => {
+                debug!("no arg found");
+            }
+        }
+        ControlFlow::Continue(())
+    }
+
+    fn visit_ty(&mut self, arg: &'tcx hir::Ty<'tcx, AmbigArg>) -> Self::Result {
+        // ignore nested types
+        //
+        // If you have a type like `Foo<'a, &Ty>` we
+        // are only interested in the immediate lifetimes ('a).
+        //
+        // Making `visit_ty` empty will ignore the `&Ty` embedded
+        // inside, it will get reached by the outer visitor.
+        debug!("`Ty` corresponding to a struct is {:?}", arg);
+        ControlFlow::Continue(())
+    }
+}

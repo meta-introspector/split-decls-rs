@@ -1,14 +1,72 @@
-/* FP:unix.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_flock_unix_USE_0001
-/* FP:unix.rs-0002 */ use std :: fs :: { File , OpenOptions } ;
-/* FP:unix.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_flock_unix_USE_0002
-/* FP:unix.rs-0004 */ use std :: os :: unix :: prelude :: * ;
-/* FP:unix.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_flock_unix_USE_0003
-/* FP:unix.rs-0006 */ use std :: path :: Path ;
-/* FP:unix.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_flock_unix_USE_0004
-/* FP:unix.rs-0008 */ use std :: { io , mem } ;
-/* FP:unix.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_flock_unix_STRUCT_0005
-/* FP:unix.rs-0010 */ # [derive (Debug)] pub struct Lock { file : File , }
-/* FP:unix.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_flock_unix_IMPL_0006
-/* FP:unix.rs-0012 */ impl Lock { pub fn new (p : & Path , wait : bool , create : bool , exclusive : bool) -> io :: Result < Lock > { let file = OpenOptions :: new () . read (true) . write (true) . create (create) . mode (libc :: S_IRWXU as u32) . open (p) ? ; let lock_type = if exclusive { libc :: F_WRLCK } else { libc :: F_RDLCK } ; let mut flock : libc :: flock = unsafe { mem :: zeroed () } ; # [cfg (not (all (target_os = "hurd" , target_arch = "x86")))] { flock . l_type = lock_type as libc :: c_short ; flock . l_whence = libc :: SEEK_SET as libc :: c_short ; } # [cfg (all (target_os = "hurd" , target_arch = "x86"))] { flock . l_type = lock_type as libc :: c_int ; flock . l_whence = libc :: SEEK_SET as libc :: c_int ; } flock . l_start = 0 ; flock . l_len = 0 ; let cmd = if wait { libc :: F_SETLKW } else { libc :: F_SETLK } ; let ret = unsafe { libc :: fcntl (file . as_raw_fd () , cmd , & flock) } ; if ret == - 1 { Err (io :: Error :: last_os_error ()) } else { Ok (Lock { file }) } } pub fn error_unsupported (err : & io :: Error) -> bool { matches ! (err . raw_os_error () , Some (libc :: ENOTSUP) | Some (libc :: ENOSYS)) } }
-/* FP:unix.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_flock_unix_IMPL_0007
-/* FP:unix.rs-0014 */ impl Drop for Lock { fn drop (& mut self) { let mut flock : libc :: flock = unsafe { mem :: zeroed () } ; # [cfg (not (all (target_os = "hurd" , target_arch = "x86")))] { flock . l_type = libc :: F_UNLCK as libc :: c_short ; flock . l_whence = libc :: SEEK_SET as libc :: c_short ; } # [cfg (all (target_os = "hurd" , target_arch = "x86"))] { flock . l_type = libc :: F_UNLCK as libc :: c_int ; flock . l_whence = libc :: SEEK_SET as libc :: c_int ; } flock . l_start = 0 ; flock . l_len = 0 ; unsafe { libc :: fcntl (self . file . as_raw_fd () , libc :: F_SETLK , & flock) ; } } }
+// SRC: ../rust/compiler/rustc_data_structures/src/flock/unix.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use std::fs::{File, OpenOptions};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use std::os::unix::prelude::*;
+use std::path::Path;
+use std::{io, mem};
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=Lock | COMPLEXITY=2 | LINES=5 */
+
+#[derive(Debug)]
+pub struct Lock {
+    file: File,
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=31 | LINES=35 */
+
+impl Lock {
+    pub fn new(p: &Path, wait: bool, create: bool, exclusive: bool) -> io::Result<Lock> {
+        let file = OpenOptions::new()
+            .read(true)
+            .write(true)
+            .create(create)
+            .mode(libc::S_IRWXU as u32)
+            .open(p)?;
+
+        let lock_type = if exclusive { libc::F_WRLCK } else { libc::F_RDLCK };
+
+        let mut flock: libc::flock = unsafe { mem::zeroed() };
+        #[cfg(not(all(target_os = "hurd", target_arch = "x86")))]
+        {
+            flock.l_type = lock_type as libc::c_short;
+            flock.l_whence = libc::SEEK_SET as libc::c_short;
+        }
+        #[cfg(all(target_os = "hurd", target_arch = "x86"))]
+        {
+            flock.l_type = lock_type as libc::c_int;
+            flock.l_whence = libc::SEEK_SET as libc::c_int;
+        }
+        flock.l_start = 0;
+        flock.l_len = 0;
+
+        let cmd = if wait { libc::F_SETLKW } else { libc::F_SETLK };
+        let ret = unsafe { libc::fcntl(file.as_raw_fd(), cmd, &flock) };
+        if ret == -1 { Err(io::Error::last_os_error()) } else { Ok(Lock { file }) }
+    }
+
+    pub fn error_unsupported(err: &io::Error) -> bool {
+        matches!(err.raw_os_error(), Some(libc::ENOTSUP) | Some(libc::ENOSYS))
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=drop | COMPLEXITY=18 | LINES=22 */
+
+impl Drop for Lock {
+    fn drop(&mut self) {
+        let mut flock: libc::flock = unsafe { mem::zeroed() };
+        #[cfg(not(all(target_os = "hurd", target_arch = "x86")))]
+        {
+            flock.l_type = libc::F_UNLCK as libc::c_short;
+            flock.l_whence = libc::SEEK_SET as libc::c_short;
+        }
+        #[cfg(all(target_os = "hurd", target_arch = "x86"))]
+        {
+            flock.l_type = libc::F_UNLCK as libc::c_int;
+            flock.l_whence = libc::SEEK_SET as libc::c_int;
+        }
+        flock.l_start = 0;
+        flock.l_len = 0;
+
+        unsafe {
+            libc::fcntl(self.file.as_raw_fd(), libc::F_SETLK, &flock);
+        }
+    }
+}

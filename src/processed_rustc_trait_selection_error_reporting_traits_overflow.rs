@@ -1,29 +1,197 @@
-/* FP:overflow.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_overflow_USE_0001
-/* FP:overflow.rs-0002 */ use std :: fmt ;
-/* FP:overflow.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_overflow_USE_0002
-/* FP:overflow.rs-0004 */ use crate :: rustc_complete :: { Diag , E0275 , EmissionGuarantee , ErrorGuaranteed , struct_span_code_err } ;
-/* FP:overflow.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_overflow_USE_0003
-/* FP:overflow.rs-0006 */ use crate :: rustc_complete :: def :: Namespace ;
-/* FP:overflow.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_overflow_USE_0004
-/* FP:overflow.rs-0008 */ use crate :: rustc_complete :: def_id :: LOCAL_CRATE ;
-/* FP:overflow.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_overflow_USE_0005
-/* FP:overflow.rs-0010 */ use crate :: rustc_complete :: limit :: Limit ;
-/* FP:overflow.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_overflow_USE_0006
-/* FP:overflow.rs-0012 */ use crate :: rustc_infer :: traits :: { Obligation , PredicateObligation } ;
-/* FP:overflow.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_overflow_USE_0007
-/* FP:overflow.rs-0014 */ use crate :: rustc_complete :: ty :: print :: { FmtPrinter , Print } ;
-/* FP:overflow.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_overflow_USE_0008
-/* FP:overflow.rs-0016 */ use crate :: rustc_complete :: ty :: { self , TyCtxt , Upcast } ;
-/* FP:overflow.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_overflow_USE_0009
-/* FP:overflow.rs-0018 */ use crate :: rustc_complete :: Span ;
-/* FP:overflow.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_overflow_USE_0010
-/* FP:overflow.rs-0020 */ use tracing :: debug ;
-/* FP:overflow.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_overflow_USE_0011
-/* FP:overflow.rs-0022 */ use crate :: error_reporting :: TypeErrCtxt ;
-/* FP:overflow.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_overflow_ENUM_0012
-/* FP:overflow.rs-0024 */ pub enum OverflowCause < 'tcx > { DeeplyNormalize (ty :: AliasTerm < 'tcx >) , TraitSolver (ty :: Predicate < 'tcx >) , }
-/* FP:overflow.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_overflow_FN_0013
-/* FP:overflow.rs-0026 */ pub fn suggest_new_overflow_limit < 'tcx , G : EmissionGuarantee > (tcx : TyCtxt < 'tcx > , err : & mut Diag < '_ , G > ,) { let suggested_limit = match tcx . recursion_limit () { Limit (0) => Limit (2) , limit => limit * 2 , } ; err . help (format ! ("consider increasing the recursion limit by adding a \
-/* FP:overflow.rs-0027 */          `#[recursion_limit = \"{}\"]` attribute to your crate (`{}`)" , suggested_limit , tcx . crate_name (LOCAL_CRATE) ,)) ; }
-/* FP:overflow.rs-0028 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_overflow_IMPL_0014
-/* FP:overflow.rs-0029 */ impl < 'a , 'tcx > TypeErrCtxt < 'a , 'tcx > { # [doc = " Reports that an overflow has occurred and halts compilation. We"] # [doc = " halt compilation unconditionally because it is important that"] # [doc = " overflows never be masked -- they basically represent computations"] # [doc = " whose result could not be truly determined and thus we can't say"] # [doc = " if the program type checks or not -- and they are unusual"] # [doc = " occurrences in any case."] pub fn report_overflow_error (& self , cause : OverflowCause < 'tcx > , span : Span , suggest_increasing_limit : bool , mutate : impl FnOnce (& mut Diag < '_ >) ,) -> ! { let mut err = self . build_overflow_error (cause , span , suggest_increasing_limit) ; mutate (& mut err) ; err . emit () . raise_fatal () ; } pub fn build_overflow_error (& self , cause : OverflowCause < 'tcx > , span : Span , suggest_increasing_limit : bool ,) -> Diag < 'a > { fn with_short_path < 'tcx , T > (tcx : TyCtxt < 'tcx > , value : T) -> String where T : fmt :: Display + Print < 'tcx , FmtPrinter < 'tcx , 'tcx > > , { let s = value . to_string () ; if s . len () > 50 { let mut p : FmtPrinter < '_ , '_ > = FmtPrinter :: new_with_limit (tcx , Namespace :: TypeNS , Limit (6)) ; value . print (& mut p) . unwrap () ; p . into_buffer () } else { s } } let mut err = match cause { OverflowCause :: DeeplyNormalize (alias_term) => { let alias_term = self . resolve_vars_if_possible (alias_term) ; let kind = alias_term . kind (self . tcx) . descr () ; let alias_str = with_short_path (self . tcx , alias_term) ; struct_span_code_err ! (self . dcx () , span , E0275 , "overflow normalizing the {kind} `{alias_str}`" ,) } OverflowCause :: TraitSolver (predicate) => { let predicate = self . resolve_vars_if_possible (predicate) ; match predicate . kind () . skip_binder () { ty :: PredicateKind :: Subtype (ty :: SubtypePredicate { a , b , a_is_expected : _ }) | ty :: PredicateKind :: Coerce (ty :: CoercePredicate { a , b }) => { struct_span_code_err ! (self . dcx () , span , E0275 , "overflow assigning `{a}` to `{b}`" ,) } _ => { let pred_str = with_short_path (self . tcx , predicate) ; struct_span_code_err ! (self . dcx () , span , E0275 , "overflow evaluating the requirement `{pred_str}`" ,) } } } } ; if suggest_increasing_limit { suggest_new_overflow_limit (self . tcx , & mut err) ; } err } # [doc = " Reports that an overflow has occurred and halts compilation. We"] # [doc = " halt compilation unconditionally because it is important that"] # [doc = " overflows never be masked -- they basically represent computations"] # [doc = " whose result could not be truly determined and thus we can't say"] # [doc = " if the program type checks or not -- and they are unusual"] # [doc = " occurrences in any case."] pub fn report_overflow_obligation < T > (& self , obligation : & Obligation < 'tcx , T > , suggest_increasing_limit : bool ,) -> ! where T : Upcast < TyCtxt < 'tcx > , ty :: Predicate < 'tcx > > + Clone , { let predicate = obligation . predicate . clone () . upcast (self . tcx) ; let predicate = self . resolve_vars_if_possible (predicate) ; self . report_overflow_error (OverflowCause :: TraitSolver (predicate) , obligation . cause . span , suggest_increasing_limit , | err | { self . note_obligation_cause_code (obligation . cause . body_id , err , predicate , obligation . param_env , obligation . cause . code () , & mut vec ! [] , & mut Default :: default () ,) ; } ,) ; } # [doc = " Reports that a cycle was detected which led to overflow and halts"] # [doc = " compilation. This is equivalent to `report_overflow_obligation` except"] # [doc = " that we can give a more helpful error message (and, in particular,"] # [doc = " we do not suggest increasing the overflow limit, which is not"] # [doc = " going to help)."] pub fn report_overflow_obligation_cycle (& self , cycle : & [PredicateObligation < 'tcx >]) -> ! { let cycle = self . resolve_vars_if_possible (cycle . to_owned ()) ; assert ! (! cycle . is_empty ()) ; debug ! (? cycle , "report_overflow_error_cycle") ; self . report_overflow_obligation (cycle . iter () . max_by_key (| p | p . recursion_depth) . unwrap () , false ,) ; } pub fn report_overflow_no_abort (& self , obligation : PredicateObligation < 'tcx > , suggest_increasing_limit : bool ,) -> ErrorGuaranteed { let obligation = self . resolve_vars_if_possible (obligation) ; let mut err = self . build_overflow_error (OverflowCause :: TraitSolver (obligation . predicate) , obligation . cause . span , suggest_increasing_limit ,) ; self . note_obligation_cause (& mut err , & obligation) ; err . emit () } }
+// SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/traits/overflow.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use std::fmt;
+
+use crate::rustc_complete::{Diag, E0275, EmissionGuarantee, ErrorGuaranteed, struct_span_code_err};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use crate::rustc_complete::def::Namespace;
+use crate::rustc_complete::def_id::LOCAL_CRATE;
+use crate::rustc_complete::limit::Limit;
+use crate::rustc_infer::traits::{Obligation, PredicateObligation};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::ty::print::{FmtPrinter, Print};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::ty::{self, TyCtxt, Upcast};
+/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+use crate::rustc_complete::Span;
+use tracing::debug;
+
+use crate::error_reporting::TypeErrCtxt;
+
+pub enum OverflowCause<'tcx> {
+    DeeplyNormalize(ty::AliasTerm<'tcx>),
+    TraitSolver(ty::Predicate<'tcx>),
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=suggest_new_overflow_limit | COMPLEXITY=8 | LINES=16 */
+
+pub fn suggest_new_overflow_limit<'tcx, G: EmissionGuarantee>(
+    tcx: TyCtxt<'tcx>,
+    err: &mut Diag<'_, G>,
+) {
+    let suggested_limit = match tcx.recursion_limit() {
+        Limit(0) => Limit(2),
+        limit => limit * 2,
+    };
+    err.help(format!(
+        "consider increasing the recursion limit by adding a \
+         `#[recursion_limit = \"{}\"]` attribute to your crate (`{}`)",
+        suggested_limit,
+        tcx.crate_name(LOCAL_CRATE),
+    ));
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=report_overflow_error | COMPLEXITY=51 | LINES=155 */
+
+impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
+    /// Reports that an overflow has occurred and halts compilation. We
+    /// halt compilation unconditionally because it is important that
+    /// overflows never be masked -- they basically represent computations
+    /// whose result could not be truly determined and thus we can't say
+    /// if the program type checks or not -- and they are unusual
+    /// occurrences in any case.
+    pub fn report_overflow_error(
+        &self,
+        cause: OverflowCause<'tcx>,
+        span: Span,
+        suggest_increasing_limit: bool,
+        mutate: impl FnOnce(&mut Diag<'_>),
+    ) -> ! {
+        let mut err = self.build_overflow_error(cause, span, suggest_increasing_limit);
+        mutate(&mut err);
+        err.emit().raise_fatal();
+    }
+
+    pub fn build_overflow_error(
+        &self,
+        cause: OverflowCause<'tcx>,
+        span: Span,
+        suggest_increasing_limit: bool,
+    ) -> Diag<'a> {
+        fn with_short_path<'tcx, T>(tcx: TyCtxt<'tcx>, value: T) -> String
+        where
+            T: fmt::Display + Print<'tcx, FmtPrinter<'tcx, 'tcx>>,
+        {
+            let s = value.to_string();
+            if s.len() > 50 {
+                // We don't need to save the type to a file, we will be talking about this type already
+                // in a separate note when we explain the obligation, so it will be available that way.
+                let mut p: FmtPrinter<'_, '_> =
+                    FmtPrinter::new_with_limit(tcx, Namespace::TypeNS, Limit(6));
+                value.print(&mut p).unwrap();
+                p.into_buffer()
+            } else {
+                s
+            }
+        }
+
+        let mut err = match cause {
+            OverflowCause::DeeplyNormalize(alias_term) => {
+                let alias_term = self.resolve_vars_if_possible(alias_term);
+                let kind = alias_term.kind(self.tcx).descr();
+                let alias_str = with_short_path(self.tcx, alias_term);
+                struct_span_code_err!(
+                    self.dcx(),
+                    span,
+                    E0275,
+                    "overflow normalizing the {kind} `{alias_str}`",
+                )
+            }
+            OverflowCause::TraitSolver(predicate) => {
+                let predicate = self.resolve_vars_if_possible(predicate);
+                match predicate.kind().skip_binder() {
+                    ty::PredicateKind::Subtype(ty::SubtypePredicate { a, b, a_is_expected: _ })
+                    | ty::PredicateKind::Coerce(ty::CoercePredicate { a, b }) => {
+                        struct_span_code_err!(
+                            self.dcx(),
+                            span,
+                            E0275,
+                            "overflow assigning `{a}` to `{b}`",
+                        )
+                    }
+                    _ => {
+                        let pred_str = with_short_path(self.tcx, predicate);
+                        struct_span_code_err!(
+                            self.dcx(),
+                            span,
+                            E0275,
+                            "overflow evaluating the requirement `{pred_str}`",
+                        )
+                    }
+                }
+            }
+        };
+
+        if suggest_increasing_limit {
+            suggest_new_overflow_limit(self.tcx, &mut err);
+        }
+
+        err
+    }
+
+    /// Reports that an overflow has occurred and halts compilation. We
+    /// halt compilation unconditionally because it is important that
+    /// overflows never be masked -- they basically represent computations
+    /// whose result could not be truly determined and thus we can't say
+    /// if the program type checks or not -- and they are unusual
+    /// occurrences in any case.
+    pub fn report_overflow_obligation<T>(
+        &self,
+        obligation: &Obligation<'tcx, T>,
+        suggest_increasing_limit: bool,
+    ) -> !
+    where
+        T: Upcast<TyCtxt<'tcx>, ty::Predicate<'tcx>> + Clone,
+    {
+        let predicate = obligation.predicate.clone().upcast(self.tcx);
+        let predicate = self.resolve_vars_if_possible(predicate);
+        self.report_overflow_error(
+            OverflowCause::TraitSolver(predicate),
+            obligation.cause.span,
+            suggest_increasing_limit,
+            |err| {
+                self.note_obligation_cause_code(
+                    obligation.cause.body_id,
+                    err,
+                    predicate,
+                    obligation.param_env,
+                    obligation.cause.code(),
+                    &mut vec![],
+                    &mut Default::default(),
+                );
+            },
+        );
+    }
+
+    /// Reports that a cycle was detected which led to overflow and halts
+    /// compilation. This is equivalent to `report_overflow_obligation` except
+    /// that we can give a more helpful error message (and, in particular,
+    /// we do not suggest increasing the overflow limit, which is not
+    /// going to help).
+    pub fn report_overflow_obligation_cycle(&self, cycle: &[PredicateObligation<'tcx>]) -> ! {
+        let cycle = self.resolve_vars_if_possible(cycle.to_owned());
+        assert!(!cycle.is_empty());
+
+        debug!(?cycle, "report_overflow_error_cycle");
+
+        // The 'deepest' obligation is most likely to have a useful
+        // cause 'backtrace'
+        self.report_overflow_obligation(
+            cycle.iter().max_by_key(|p| p.recursion_depth).unwrap(),
+            false,
+        );
+    }
+
+    pub fn report_overflow_no_abort(
+        &self,
+        obligation: PredicateObligation<'tcx>,
+        suggest_increasing_limit: bool,
+    ) -> ErrorGuaranteed {
+        let obligation = self.resolve_vars_if_possible(obligation);
+        let mut err = self.build_overflow_error(
+            OverflowCause::TraitSolver(obligation.predicate),
+            obligation.cause.span,
+            suggest_increasing_limit,
+        );
+        self.note_obligation_cause(&mut err, &obligation);
+        err.emit()
+    }
+}

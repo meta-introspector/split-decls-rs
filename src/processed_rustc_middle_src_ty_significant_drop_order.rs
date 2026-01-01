@@ -1,22 +1,168 @@
-/* FP:significant_drop_order.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_significant_drop_order_USE_0001
-/* FP:significant_drop_order.rs-0002 */ use crate :: rustc_data_structures :: fx :: FxHashSet ;
-/* FP:significant_drop_order.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_significant_drop_order_USE_0002
-/* FP:significant_drop_order.rs-0004 */ use crate :: rustc_data_structures :: unord :: UnordSet ;
-/* FP:significant_drop_order.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_significant_drop_order_USE_0003
-/* FP:significant_drop_order.rs-0006 */ use crate :: rustc_complete :: def_id :: DefId ;
-/* FP:significant_drop_order.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_significant_drop_order_USE_0004
-/* FP:significant_drop_order.rs-0008 */ use crate :: rustc_complete :: Span ;
-/* FP:significant_drop_order.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_significant_drop_order_USE_0005
-/* FP:significant_drop_order.rs-0010 */ use smallvec :: { SmallVec , smallvec } ;
-/* FP:significant_drop_order.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_significant_drop_order_USE_0006
-/* FP:significant_drop_order.rs-0012 */ use tracing :: { debug , instrument } ;
-/* FP:significant_drop_order.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_significant_drop_order_USE_0007
-/* FP:significant_drop_order.rs-0014 */ use crate :: ty :: { self , Ty , TyCtxt } ;
-/* FP:significant_drop_order.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_significant_drop_order_FN_0008
-/* FP:significant_drop_order.rs-0016 */ # [doc = " An additional filter to exclude well-known types from the ecosystem"] # [doc = " because their drops are trivial."] # [doc = " This returns additional types to check if the drops are delegated to those."] # [doc = " A typical example is `hashbrown::HashMap<K, V>`, whose drop is delegated to `K` and `V`."] fn true_significant_drop_ty < 'tcx > (tcx : TyCtxt < 'tcx > , ty : Ty < 'tcx > ,) -> Option < SmallVec < [Ty < 'tcx > ; 2] > > { if let ty :: Adt (def , args) = ty . kind () { let mut did = def . did () ; let mut name_rev = vec ! [] ; loop { let key = tcx . def_key (did) ; match key . disambiguated_data . data { crate :: rustc_hir :: definitions :: DefPathData :: CrateRoot => { name_rev . push (tcx . crate_name (did . krate)) ; } crate :: rustc_hir :: definitions :: DefPathData :: TypeNs (symbol) => { name_rev . push (symbol) ; } _ => return None , } if let Some (parent) = key . parent { did = DefId { krate : did . krate , index : parent } ; } else { break ; } } let name_str : Vec < _ > = name_rev . iter () . rev () . map (| x | x . as_str ()) . collect () ; debug ! (? name_str) ; match name_str [..] { ["syn" | "proc_macro2" , ..] | ["core" | "std" , "task" , "LocalWaker" | "Waker"] | ["core" | "std" , "task" , "wake" , "LocalWaker" | "Waker"] => Some (smallvec ! []) , ["tracing" , "instrument" , "Instrumented"] | ["bytes" , "Bytes"] => Some (smallvec ! []) , ["hashbrown" , "raw" , "RawTable" | "RawIntoIter"] => { if let [ty , ..] = & * * * args && let Some (ty) = ty . as_type () { Some (smallvec ! [ty]) } else { None } } ["hashbrown" , "raw" , "RawDrain"] => { if let [_ , ty , ..] = & * * * args && let Some (ty) = ty . as_type () { Some (smallvec ! [ty]) } else { None } } _ => None , } } else { None } }
-/* FP:significant_drop_order.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_significant_drop_order_FN_0009
-/* FP:significant_drop_order.rs-0018 */ # [doc = " Returns the list of types with a \"potentially significant\" that may be dropped"] # [doc = " by dropping a value of type `ty`."] # [instrument (level = "trace" , skip (tcx , typing_env))] pub fn extract_component_raw < 'tcx > (tcx : TyCtxt < 'tcx > , typing_env : ty :: TypingEnv < 'tcx > , ty : Ty < 'tcx > , ty_seen : & mut UnordSet < Ty < 'tcx > > ,) -> SmallVec < [Ty < 'tcx > ; 4] > { let ty = tcx . try_normalize_erasing_regions (typing_env , ty) . unwrap_or (ty) ; let tys = tcx . list_significant_drop_tys (typing_env . as_query_input (ty)) ; debug ! (? ty , "components") ; let mut out_tys = smallvec ! [] ; for ty in tys { if let Some (tys) = true_significant_drop_ty (tcx , ty) { for ty in tys { if ty_seen . insert (ty) { out_tys . extend (extract_component_raw (tcx , typing_env , ty , ty_seen)) ; } } } else { if ty_seen . insert (ty) { out_tys . push (ty) ; } } } out_tys }
-/* FP:significant_drop_order.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_significant_drop_order_FN_0010
-/* FP:significant_drop_order.rs-0020 */ # [instrument (level = "trace" , skip (tcx , typing_env))] pub fn extract_component_with_significant_dtor < 'tcx > (tcx : TyCtxt < 'tcx > , typing_env : ty :: TypingEnv < 'tcx > , ty : Ty < 'tcx > ,) -> SmallVec < [Ty < 'tcx > ; 4] > { let mut tys = extract_component_raw (tcx , typing_env , ty , & mut Default :: default ()) ; let mut deduplicate = FxHashSet :: default () ; tys . retain (| oty | deduplicate . insert (* oty)) ; tys . into_iter () . collect () }
-/* FP:significant_drop_order.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_significant_drop_order_FN_0011
-/* FP:significant_drop_order.rs-0022 */ # [doc = " Extract the span of the custom destructor of a type"] # [doc = " especially the span of the `impl Drop` header or its entire block"] # [doc = " when we are working with current local crate."] # [instrument (level = "trace" , skip (tcx))] pub fn ty_dtor_span < 'tcx > (tcx : TyCtxt < 'tcx > , ty : Ty < 'tcx >) -> Option < Span > { match ty . kind () { ty :: Bool | ty :: Char | ty :: Int (_) | ty :: Uint (_) | ty :: Float (_) | ty :: Error (_) | ty :: Str | ty :: Never | ty :: RawPtr (_ , _) | ty :: Ref (_ , _ , _) | ty :: FnPtr (_ , _) | ty :: Tuple (_) | ty :: Dynamic (_ , _ , _) | ty :: Alias (_ , _) | ty :: Bound (_ , _) | ty :: Pat (_ , _) | ty :: Placeholder (_) | ty :: Infer (_) | ty :: Slice (_) | ty :: Array (_ , _) | ty :: UnsafeBinder (_) => None , ty :: Adt (adt_def , _) => { if let Some (dtor) = tcx . adt_destructor (adt_def . did ()) { Some (tcx . def_span (tcx . parent (dtor . did))) } else { Some (tcx . def_span (adt_def . did ())) } } ty :: Coroutine (did , _) | ty :: CoroutineWitness (did , _) | ty :: CoroutineClosure (did , _) | ty :: Closure (did , _) | ty :: FnDef (did , _) | ty :: Foreign (did) => Some (tcx . def_span (did)) , ty :: Param (_) => None , } }
+// SRC: ../rust/compiler/rustc_middle/src/ty/significant_drop_order.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_data_structures::unord::UnordSet;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::Span;
+use smallvec::{SmallVec, smallvec};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use tracing::{debug, instrument};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+use crate::ty::{self, Ty, TyCtxt};
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=true_significant_drop_ty | COMPLEXITY=40 | LINES=63 */
+
+/// An additional filter to exclude well-known types from the ecosystem
+/// because their drops are trivial.
+/// This returns additional types to check if the drops are delegated to those.
+/// A typical example is `hashbrown::HashMap<K, V>`, whose drop is delegated to `K` and `V`.
+fn true_significant_drop_ty<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    ty: Ty<'tcx>,
+) -> Option<SmallVec<[Ty<'tcx>; 2]>> {
+    if let ty::Adt(def, args) = ty.kind() {
+        let mut did = def.did();
+        let mut name_rev = vec![];
+        loop {
+            let key = tcx.def_key(did);
+
+            match key.disambiguated_data.data {
+                crate::rustc_hir::definitions::DefPathData::CrateRoot => {
+                    name_rev.push(tcx.crate_name(did.krate));
+                }
+                crate::rustc_hir::definitions::DefPathData::TypeNs(symbol) => {
+                    name_rev.push(symbol);
+                }
+                _ => return None,
+            }
+            if let Some(parent) = key.parent {
+                did = DefId { krate: did.krate, index: parent };
+            } else {
+                break;
+            }
+        }
+        let name_str: Vec<_> = name_rev.iter().rev().map(|x| x.as_str()).collect();
+        debug!(?name_str);
+        match name_str[..] {
+            // These are the types from Rust core ecosystem
+            ["syn" | "proc_macro2", ..]
+            | ["core" | "std", "task", "LocalWaker" | "Waker"]
+            | ["core" | "std", "task", "wake", "LocalWaker" | "Waker"] => Some(smallvec![]),
+            // These are important types from Rust ecosystem
+            ["tracing", "instrument", "Instrumented"] | ["bytes", "Bytes"] => Some(smallvec![]),
+            ["hashbrown", "raw", "RawTable" | "RawIntoIter"] => {
+                if let [ty, ..] = &***args
+                    && let Some(ty) = ty.as_type()
+                {
+                    Some(smallvec![ty])
+                } else {
+                    None
+                }
+            }
+            ["hashbrown", "raw", "RawDrain"] => {
+                if let [_, ty, ..] = &***args
+                    && let Some(ty) = ty.as_type()
+                {
+                    Some(smallvec![ty])
+                } else {
+                    None
+                }
+            }
+            _ => None,
+        }
+    } else {
+        None
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=extract_component_raw | COMPLEXITY=20 | LINES=32 */
+
+/// Returns the list of types with a "potentially significant" that may be dropped
+/// by dropping a value of type `ty`.
+#[instrument(level = "trace", skip(tcx, typing_env))]
+pub fn extract_component_raw<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    typing_env: ty::TypingEnv<'tcx>,
+    ty: Ty<'tcx>,
+    ty_seen: &mut UnordSet<Ty<'tcx>>,
+) -> SmallVec<[Ty<'tcx>; 4]> {
+    // Droppiness does not depend on regions, so let us erase them.
+    let ty = tcx.try_normalize_erasing_regions(typing_env, ty).unwrap_or(ty);
+
+    let tys = tcx.list_significant_drop_tys(typing_env.as_query_input(ty));
+    debug!(?ty, "components");
+    let mut out_tys = smallvec![];
+    for ty in tys {
+        if let Some(tys) = true_significant_drop_ty(tcx, ty) {
+            // Some types can be further opened up because the drop is simply delegated
+            for ty in tys {
+                if ty_seen.insert(ty) {
+                    out_tys.extend(extract_component_raw(tcx, typing_env, ty, ty_seen));
+                }
+            }
+        } else {
+            if ty_seen.insert(ty) {
+                out_tys.push(ty);
+            }
+        }
+    }
+    out_tys
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=extract_component_with_significant_dtor | COMPLEXITY=2 | LINES=12 */
+
+#[instrument(level = "trace", skip(tcx, typing_env))]
+pub fn extract_component_with_significant_dtor<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    typing_env: ty::TypingEnv<'tcx>,
+    ty: Ty<'tcx>,
+) -> SmallVec<[Ty<'tcx>; 4]> {
+    let mut tys = extract_component_raw(tcx, typing_env, ty, &mut Default::default());
+    let mut deduplicate = FxHashSet::default();
+    tys.retain(|oty| deduplicate.insert(*oty));
+    tys.into_iter().collect()
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=ty_dtor_span | COMPLEXITY=13 | LINES=45 */
+
+/// Extract the span of the custom destructor of a type
+/// especially the span of the `impl Drop` header or its entire block
+/// when we are working with current local crate.
+#[instrument(level = "trace", skip(tcx))]
+pub fn ty_dtor_span<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> Option<Span> {
+    match ty.kind() {
+        ty::Bool
+        | ty::Char
+        | ty::Int(_)
+        | ty::Uint(_)
+        | ty::Float(_)
+        | ty::Error(_)
+        | ty::Str
+        | ty::Never
+        | ty::RawPtr(_, _)
+        | ty::Ref(_, _, _)
+        | ty::FnPtr(_, _)
+        | ty::Tuple(_)
+        | ty::Dynamic(_, _, _)
+        | ty::Alias(_, _)
+        | ty::Bound(_, _)
+        | ty::Pat(_, _)
+        | ty::Placeholder(_)
+        | ty::Infer(_)
+        | ty::Slice(_)
+        | ty::Array(_, _)
+        | ty::UnsafeBinder(_) => None,
+
+        ty::Adt(adt_def, _) => {
+            if let Some(dtor) = tcx.adt_destructor(adt_def.did()) {
+                Some(tcx.def_span(tcx.parent(dtor.did)))
+            } else {
+                Some(tcx.def_span(adt_def.did()))
+            }
+        }
+        ty::Coroutine(did, _)
+        | ty::CoroutineWitness(did, _)
+        | ty::CoroutineClosure(did, _)
+        | ty::Closure(did, _)
+        | ty::FnDef(did, _)
+        | ty::Foreign(did) => Some(tcx.def_span(did)),
+        ty::Param(_) => None,
+    }
+}

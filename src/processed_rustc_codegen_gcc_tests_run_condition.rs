@@ -1,4 +1,35 @@
-/* FP:condition.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_run_condition_USE_0001
-/* FP:condition.rs-0002 */ # [feature (no_core)] # [no_std] # [no_core] # [no_main] use mini_core :: * ;
-/* FP:condition.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_gcc_tests_run_condition_FN_0002
-/* FP:condition.rs-0004 */ # [unsafe (no_mangle)] extern "C" fn main (argc : i32 , _argv : * const * const u8) -> i32 { unsafe { if argc == 1 { libc :: printf (b"true\n\0" as * const u8 as * const i8) ; } let string = match argc { 1 => b"1\n\0" , 2 => b"2\n\0" , 3 => b"3\n\0" , 4 => b"4\n\0" , 5 => b"5\n\0" , _ => b"_\n\0" , } ; libc :: printf (string as * const u8 as * const i8) ; } 0 }
+// SRC: ../rust/compiler/rustc_codegen_gcc/tests/run/condition.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=33 */
+// Compiler:
+//
+// Run-time:
+//   status: 0
+//   stdout: true
+//     1
+
+#[feature(no_core)]
+#[no_std]
+#[no_core]
+#[no_main]
+
+use mini_core::*;
+
+#[unsafe(no_mangle)]
+extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
+    unsafe {
+        if argc == 1 {
+            libc::printf(b"true\n\0" as *const u8 as *const i8);
+        }
+
+        let string = match argc {
+            1 => b"1\n\0",
+            2 => b"2\n\0",
+            3 => b"3\n\0",
+            4 => b"4\n\0",
+            5 => b"5\n\0",
+            _ => b"_\n\0",
+        };
+        libc::printf(string as *const u8 as *const i8);
+    }
+    0
+}

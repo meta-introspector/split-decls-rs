@@ -1,4 +1,45 @@
-/* FP:tests.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_session_src_config_native_libs_tests_USE_0001
-/* FP:tests.rs-0002 */ use crate :: config :: native_libs :: { NativeLibParts , split_native_lib_value } ;
-/* FP:tests.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_session_src_config_native_libs_tests_FN_0002
-/* FP:tests.rs-0004 */ # [test] fn split () { use NativeLibParts as P ; let examples = & [("" , P { kind : None , modifiers : None , name : "" , new_name : None }) , ("foo" , P { kind : None , modifiers : None , name : "foo" , new_name : None }) , ("foo:" , P { kind : None , modifiers : None , name : "foo" , new_name : Some ("") }) , ("foo:bar" , P { kind : None , modifiers : None , name : "foo" , new_name : Some ("bar") }) , (":bar" , P { kind : None , modifiers : None , name : "" , new_name : Some ("bar") }) , ("kind=foo" , P { kind : Some ("kind") , modifiers : None , name : "foo" , new_name : None }) , (":mods=foo" , P { kind : Some ("") , modifiers : Some ("mods") , name : "foo" , new_name : None }) , (":mods=:bar" , P { kind : Some ("") , modifiers : Some ("mods") , name : "" , new_name : Some ("bar") } ,) , ("kind=foo:bar" , P { kind : Some ("kind") , modifiers : None , name : "foo" , new_name : Some ("bar") } ,) , ("kind:mods=foo" , P { kind : Some ("kind") , modifiers : Some ("mods") , name : "foo" , new_name : None } ,) , ("kind:mods=foo:bar" , P { kind : Some ("kind") , modifiers : Some ("mods") , name : "foo" , new_name : Some ("bar") } ,) , ("::==::" , P { kind : Some ("") , modifiers : Some (":") , name : "=" , new_name : Some (":") }) , ("==::==" , P { kind : Some ("") , modifiers : None , name : "=" , new_name : Some (":==") }) ,] ; for & (value , ref expected) in examples { println ! ("{value:?}") ; let actual = split_native_lib_value (value) ; assert_eq ! (& actual , expected) ; } }
+// SRC: ../rust/compiler/rustc_session/src/config/native_libs/tests.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::config::native_libs::{NativeLibParts, split_native_lib_value};
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=split | COMPLEXITY=26 | LINES=41 */
+
+#[test]
+fn split() {
+    // This is a unit test for some implementation details, so consider deleting
+    // it if it gets in the way.
+    use NativeLibParts as P;
+
+    let examples = &[
+        ("", P { kind: None, modifiers: None, name: "", new_name: None }),
+        ("foo", P { kind: None, modifiers: None, name: "foo", new_name: None }),
+        ("foo:", P { kind: None, modifiers: None, name: "foo", new_name: Some("") }),
+        ("foo:bar", P { kind: None, modifiers: None, name: "foo", new_name: Some("bar") }),
+        (":bar", P { kind: None, modifiers: None, name: "", new_name: Some("bar") }),
+        ("kind=foo", P { kind: Some("kind"), modifiers: None, name: "foo", new_name: None }),
+        (":mods=foo", P { kind: Some(""), modifiers: Some("mods"), name: "foo", new_name: None }),
+        (
+            ":mods=:bar",
+            P { kind: Some(""), modifiers: Some("mods"), name: "", new_name: Some("bar") },
+        ),
+        (
+            "kind=foo:bar",
+            P { kind: Some("kind"), modifiers: None, name: "foo", new_name: Some("bar") },
+        ),
+        (
+            "kind:mods=foo",
+            P { kind: Some("kind"), modifiers: Some("mods"), name: "foo", new_name: None },
+        ),
+        (
+            "kind:mods=foo:bar",
+            P { kind: Some("kind"), modifiers: Some("mods"), name: "foo", new_name: Some("bar") },
+        ),
+        ("::==::", P { kind: Some(""), modifiers: Some(":"), name: "=", new_name: Some(":") }),
+        ("==::==", P { kind: Some(""), modifiers: None, name: "=", new_name: Some(":==") }),
+    ];
+
+    for &(value, ref expected) in examples {
+        println!("{value:?}");
+        let actual = split_native_lib_value(value);
+        assert_eq!(&actual, expected);
+    }
+}

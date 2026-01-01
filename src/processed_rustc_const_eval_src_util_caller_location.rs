@@ -1,20 +1,80 @@
-/* FP:caller_location.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_caller_location_USE_0001
-/* FP:caller_location.rs-0002 */ use crate :: rustc_abi :: FieldIdx ;
-/* FP:caller_location.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_caller_location_USE_0002
-/* FP:caller_location.rs-0004 */ use crate :: rustc_complete :: LangItem ;
-/* FP:caller_location.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_caller_location_USE_0003
-/* FP:caller_location.rs-0006 */ use crate :: rustc_complete :: ty :: { self , TyCtxt } ;
-/* FP:caller_location.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_caller_location_USE_0004
-/* FP:caller_location.rs-0008 */ use crate :: rustc_complete :: { bug , mir } ;
-/* FP:caller_location.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_caller_location_USE_0005
-/* FP:caller_location.rs-0010 */ use crate :: rustc_complete :: Symbol ;
-/* FP:caller_location.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_caller_location_USE_0006
-/* FP:caller_location.rs-0012 */ use tracing :: trace ;
-/* FP:caller_location.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_caller_location_USE_0007
-/* FP:caller_location.rs-0014 */ use crate :: const_eval :: { CanAccessMutGlobal , CompileTimeInterpCx , mk_eval_cx_to_read_const_val } ;
-/* FP:caller_location.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_caller_location_USE_0008
-/* FP:caller_location.rs-0016 */ use crate :: interpret :: * ;
-/* FP:caller_location.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_caller_location_FN_0009
-/* FP:caller_location.rs-0018 */ # [doc = " Allocate a `const core::panic::Location` with the provided filename and line/column numbers."] fn alloc_caller_location < 'tcx > (ecx : & mut CompileTimeInterpCx < 'tcx > , filename : Symbol , line : u32 , col : u32 ,) -> MPlaceTy < 'tcx > { assert ! (! filename . as_str () . as_bytes () . contains (& 0)) ; let loc_details = ecx . tcx . sess . opts . unstable_opts . location_detail ; let filename = { let filename = if loc_details . file { filename . as_str () } else { "<redacted>" } ; let filename_with_nul = filename . to_owned () + "\0" ; let file_ptr = ecx . allocate_bytes_dedup (filename_with_nul . as_bytes ()) . unwrap () ; let file_len = u64 :: try_from (filename . len ()) . unwrap () ; Immediate :: new_slice (file_ptr . into () , file_len , ecx) } ; let line = if loc_details . line { Scalar :: from_u32 (line) } else { Scalar :: from_u32 (0) } ; let col = if loc_details . column { Scalar :: from_u32 (col) } else { Scalar :: from_u32 (0) } ; let loc_ty = ecx . tcx . type_of (ecx . tcx . require_lang_item (LangItem :: PanicLocation , ecx . tcx . span)) . instantiate (* ecx . tcx , ecx . tcx . mk_args (& [ecx . tcx . lifetimes . re_erased . into ()])) ; let loc_layout = ecx . layout_of (loc_ty) . unwrap () ; let location = ecx . allocate (loc_layout , MemoryKind :: CallerLocation) . unwrap () ; let [filename_field , line_field , col_field] = ecx . project_fields (& location , [0 , 1 , 2] . map (FieldIdx :: from_u32)) . unwrap () ; ecx . write_immediate (filename , & filename_field) . expect ("writing to memory we just allocated cannot fail") ; ecx . write_scalar (line , & line_field) . expect ("writing to memory we just allocated cannot fail") ; ecx . write_scalar (col , & col_field) . expect ("writing to memory we just allocated cannot fail") ; location }
-/* FP:caller_location.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_caller_location_FN_0010
-/* FP:caller_location.rs-0020 */ pub (crate) fn const_caller_location_provider (tcx : TyCtxt < '_ > , file : Symbol , line : u32 , col : u32 ,) -> mir :: ConstValue { trace ! ("const_caller_location: {}:{}:{}" , file , line , col) ; let mut ecx = mk_eval_cx_to_read_const_val (tcx , crate :: rustc_span :: DUMMY_SP , ty :: TypingEnv :: fully_monomorphized () , CanAccessMutGlobal :: No ,) ; let loc_place = alloc_caller_location (& mut ecx , file , line , col) ; if intern_const_alloc_recursive (& mut ecx , InternKind :: Constant , & loc_place) . is_err () { bug ! ("intern_const_alloc_recursive should not error in this case") } mir :: ConstValue :: Scalar (Scalar :: from_maybe_pointer (loc_place . ptr () , & tcx)) }
+// SRC: ../rust/compiler/rustc_const_eval/src/util/caller_location.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_abi::FieldIdx;
+use crate::rustc_complete::LangItem;
+use crate::rustc_complete::ty::{self, TyCtxt};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{bug, mir};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use crate::rustc_complete::Symbol;
+use tracing::trace;
+
+use crate::const_eval::{CanAccessMutGlobal, CompileTimeInterpCx, mk_eval_cx_to_read_const_val};
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=alloc_caller_location | COMPLEXITY=23 | LINES=45 */
+use crate::interpret::*;
+
+/// Allocate a `const core::panic::Location` with the provided filename and line/column numbers.
+fn alloc_caller_location<'tcx>(
+    ecx: &mut CompileTimeInterpCx<'tcx>,
+    filename: Symbol,
+    line: u32,
+    col: u32,
+) -> MPlaceTy<'tcx> {
+    // Ensure that the filename itself does not contain nul bytes.
+    // This isn't possible via POSIX or Windows, but we should ensure no one
+    // ever does such a thing.
+    assert!(!filename.as_str().as_bytes().contains(&0));
+
+    let loc_details = ecx.tcx.sess.opts.unstable_opts.location_detail;
+    let filename = {
+        let filename = if loc_details.file { filename.as_str() } else { "<redacted>" };
+        let filename_with_nul = filename.to_owned() + "\0";
+        // This can fail if rustc runs out of memory right here. Trying to emit an error would be
+        // pointless, since that would require allocating more memory than these short strings.
+        let file_ptr = ecx.allocate_bytes_dedup(filename_with_nul.as_bytes()).unwrap();
+        let file_len = u64::try_from(filename.len()).unwrap();
+        Immediate::new_slice(file_ptr.into(), file_len, ecx)
+    };
+    let line = if loc_details.line { Scalar::from_u32(line) } else { Scalar::from_u32(0) };
+    let col = if loc_details.column { Scalar::from_u32(col) } else { Scalar::from_u32(0) };
+
+    // Allocate memory for `CallerLocation` struct.
+    let loc_ty = ecx
+        .tcx
+        .type_of(ecx.tcx.require_lang_item(LangItem::PanicLocation, ecx.tcx.span))
+        .instantiate(*ecx.tcx, ecx.tcx.mk_args(&[ecx.tcx.lifetimes.re_erased.into()]));
+    let loc_layout = ecx.layout_of(loc_ty).unwrap();
+    let location = ecx.allocate(loc_layout, MemoryKind::CallerLocation).unwrap();
+
+    // Initialize fields.
+    let [filename_field, line_field, col_field] =
+        ecx.project_fields(&location, [0, 1, 2].map(FieldIdx::from_u32)).unwrap();
+    ecx.write_immediate(filename, &filename_field)
+        .expect("writing to memory we just allocated cannot fail");
+    ecx.write_scalar(line, &line_field).expect("writing to memory we just allocated cannot fail");
+    ecx.write_scalar(col, &col_field).expect("writing to memory we just allocated cannot fail");
+
+    location
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=21 */
+
+pub(crate) fn const_caller_location_provider(
+    tcx: TyCtxt<'_>,
+    file: Symbol,
+    line: u32,
+    col: u32,
+) -> mir::ConstValue {
+    trace!("const_caller_location: {}:{}:{}", file, line, col);
+    let mut ecx = mk_eval_cx_to_read_const_val(
+        tcx,
+        crate::rustc_span::DUMMY_SP, // FIXME: use a proper span here?
+        ty::TypingEnv::fully_monomorphized(),
+        CanAccessMutGlobal::No,
+    );
+
+    let loc_place = alloc_caller_location(&mut ecx, file, line, col);
+    if intern_const_alloc_recursive(&mut ecx, InternKind::Constant, &loc_place).is_err() {
+        bug!("intern_const_alloc_recursive should not error in this case")
+    }
+    mir::ConstValue::Scalar(Scalar::from_maybe_pointer(loc_place.ptr(), &tcx))
+}

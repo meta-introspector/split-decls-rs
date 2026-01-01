@@ -1,41 +1,354 @@
-/* FP:on_unimplemented_format.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_USE_0001
-/* FP:on_unimplemented_format.rs-0002 */ use std :: fmt ;
-/* FP:on_unimplemented_format.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_USE_0002
-/* FP:on_unimplemented_format.rs-0004 */ use std :: ops :: Range ;
-/* FP:on_unimplemented_format.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_USE_0003
-/* FP:on_unimplemented_format.rs-0006 */ use errors :: * ;
-/* FP:on_unimplemented_format.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_USE_0004
-/* FP:on_unimplemented_format.rs-0008 */ use crate :: rustc_complete :: ty :: print :: TraitRefPrintSugared ;
-/* FP:on_unimplemented_format.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_USE_0005
-/* FP:on_unimplemented_format.rs-0010 */ use crate :: rustc_complete :: ty :: { GenericParamDefKind , TyCtxt } ;
-/* FP:on_unimplemented_format.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_USE_0006
-/* FP:on_unimplemented_format.rs-0012 */ use rustc_parse_format :: { Argument , FormatSpec , ParseError , ParseMode , Parser , Piece as RpfPiece , Position , } ;
-/* FP:on_unimplemented_format.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_USE_0007
-/* FP:on_unimplemented_format.rs-0014 */ use crate :: rustc_complete :: lint :: builtin :: MALFORMED_DIAGNOSTIC_FORMAT_LITERALS ;
-/* FP:on_unimplemented_format.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_USE_0008
-/* FP:on_unimplemented_format.rs-0016 */ use crate :: rustc_complete :: def_id :: DefId ;
-/* FP:on_unimplemented_format.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_USE_0009
-/* FP:on_unimplemented_format.rs-0018 */ use crate :: rustc_complete :: { InnerSpan , Span , Symbol , kw , sym } ;
-/* FP:on_unimplemented_format.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_STRUCT_0010
-/* FP:on_unimplemented_format.rs-0020 */ # [doc = " Like [std::fmt::Arguments] this is a string that has been parsed into \"pieces\","] # [doc = " either as string pieces or dynamic arguments."] # [derive (Debug)] pub struct FormatString { # [allow (dead_code , reason = "Debug impl")] input : Symbol , span : Span , pieces : Vec < Piece > , # [doc = " The formatting string was parsed successfully but with warnings"] pub warnings : Vec < FormatWarning > , }
-/* FP:on_unimplemented_format.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_ENUM_0011
-/* FP:on_unimplemented_format.rs-0022 */ # [derive (Debug)] enum Piece { Lit (String) , Arg (FormatArg) , }
-/* FP:on_unimplemented_format.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_ENUM_0012
-/* FP:on_unimplemented_format.rs-0024 */ # [derive (Debug)] enum FormatArg { GenericParam { generic_param : Symbol , } , SelfUpper , # [doc = " `{This}` or `{TraitName}`"] This , # [doc = " The sugared form of the trait"] Trait , # [doc = " what we're in, like a function, method, closure etc."] ItemContext , # [doc = " What the user typed, if it doesn't match anything we can use."] AsIs (String) , }
-/* FP:on_unimplemented_format.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_ENUM_0013
-/* FP:on_unimplemented_format.rs-0026 */ pub enum Ctx < 'tcx > { RustcOnUnimplemented { tcx : TyCtxt < 'tcx > , trait_def_id : DefId } , DiagnosticOnUnimplemented { tcx : TyCtxt < 'tcx > , trait_def_id : DefId } , }
-/* FP:on_unimplemented_format.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_ENUM_0014
-/* FP:on_unimplemented_format.rs-0028 */ # [derive (Debug)] pub enum FormatWarning { UnknownParam { argument_name : Symbol , span : Span } , PositionalArgument { span : Span , help : String } , InvalidSpecifier { name : String , span : Span } , FutureIncompat { span : Span , help : String } , }
-/* FP:on_unimplemented_format.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_IMPL_0015
-/* FP:on_unimplemented_format.rs-0030 */ impl FormatWarning { pub fn emit_warning < 'tcx > (& self , tcx : TyCtxt < 'tcx > , item_def_id : DefId) { match * self { FormatWarning :: UnknownParam { argument_name , span } => { let this = tcx . item_ident (item_def_id) ; if let Some (item_def_id) = item_def_id . as_local () { tcx . emit_node_span_lint (MALFORMED_DIAGNOSTIC_FORMAT_LITERALS , tcx . local_def_id_to_hir_id (item_def_id) , span , UnknownFormatParameterForOnUnimplementedAttr { argument_name , trait_name : this , } ,) ; } } FormatWarning :: PositionalArgument { span , .. } => { if let Some (item_def_id) = item_def_id . as_local () { tcx . emit_node_span_lint (MALFORMED_DIAGNOSTIC_FORMAT_LITERALS , tcx . local_def_id_to_hir_id (item_def_id) , span , DisallowedPositionalArgument ,) ; } } FormatWarning :: InvalidSpecifier { span , .. } => { if let Some (item_def_id) = item_def_id . as_local () { tcx . emit_node_span_lint (MALFORMED_DIAGNOSTIC_FORMAT_LITERALS , tcx . local_def_id_to_hir_id (item_def_id) , span , InvalidFormatSpecifier ,) ; } } FormatWarning :: FutureIncompat { .. } => { } } } }
-/* FP:on_unimplemented_format.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_STRUCT_0016
-/* FP:on_unimplemented_format.rs-0032 */ # [doc = " Arguments to fill a [FormatString] with."] # [doc = ""] # [doc = " For example, given a"] # [doc = " ```rust,ignore (just an example)"] # [doc = ""] # [doc = " #[rustc_on_unimplemented("] # [doc = "     on(all(from_desugaring = \"QuestionMark\"),"] # [doc = "         message = \"the `?` operator can only be used in {ItemContext} \\"] # [doc = "                     that returns `Result` or `Option` \\"] # [doc = "                     (or another type that implements `{FromResidual}`)\","] # [doc = "         label = \"cannot use the `?` operator in {ItemContext} that returns `{Self}`\","] # [doc = "         parent_label = \"this function should return `Result` or `Option` to accept `?`\""] # [doc = "     ),"] # [doc = " )]"] # [doc = " pub trait FromResidual<R = <Self as Try>::Residual> {"] # [doc = "    ..."] # [doc = " }"] # [doc = ""] # [doc = " async fn an_async_function() -> u32 {"] # [doc = "     let x: Option<u32> = None;"] # [doc = "     x?; //~ ERROR the `?` operator"] # [doc = "     22"] # [doc = " }"] # [doc = "  ```"] # [doc = " it will look like this:"] # [doc = ""] # [doc = " ```rust,ignore (just an example)"] # [doc = " FormatArgs {"] # [doc = "     this: \"FromResidual\","] # [doc = "     trait_sugared: \"FromResidual<Option<Infallible>>\","] # [doc = "     item_context: \"an async function\","] # [doc = "     generic_args: [(\"Self\", \"u32\"), (\"R\", \"Option<Infallible>\")],"] # [doc = " }"] # [doc = " ```"] # [derive (Debug)] pub struct FormatArgs < 'tcx > { pub this : String , pub trait_sugared : TraitRefPrintSugared < 'tcx > , pub item_context : & 'static str , pub generic_args : Vec < (Symbol , String) > , }
-/* FP:on_unimplemented_format.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_IMPL_0017
-/* FP:on_unimplemented_format.rs-0034 */ impl FormatString { pub fn span (& self) -> Span { self . span } pub fn parse < 'tcx > (input : Symbol , snippet : Option < String > , span : Span , ctx : & Ctx < 'tcx > ,) -> Result < Self , ParseError > { let s = input . as_str () ; let mut parser = Parser :: new (s , None , snippet , false , ParseMode :: Diagnostic) ; let pieces : Vec < _ > = parser . by_ref () . collect () ; if let Some (err) = parser . errors . into_iter () . next () { return Err (err) ; } let mut warnings = Vec :: new () ; let pieces = pieces . into_iter () . map (| piece | match piece { RpfPiece :: Lit (lit) => Piece :: Lit (lit . into ()) , RpfPiece :: NextArgument (arg) => { warn_on_format_spec (& arg . format , & mut warnings , span , parser . is_source_literal) ; let arg = parse_arg (& arg , ctx , & mut warnings , span , parser . is_source_literal) ; Piece :: Arg (arg) } }) . collect () ; Ok (FormatString { input , pieces , span , warnings }) } pub fn format (& self , args : & FormatArgs < '_ >) -> String { let mut ret = String :: new () ; for piece in & self . pieces { match piece { Piece :: Lit (s) | Piece :: Arg (FormatArg :: AsIs (s)) => ret . push_str (& s) , Piece :: Arg (FormatArg :: GenericParam { generic_param }) => { let value = match args . generic_args . iter () . find (| (p , _) | p == generic_param) { Some ((_ , val)) => val . to_string () , None => generic_param . to_string () , } ; ret . push_str (& value) ; } Piece :: Arg (FormatArg :: SelfUpper) => { let slf = match args . generic_args . iter () . find (| (p , _) | * p == kw :: SelfUpper) { Some ((_ , val)) => val . to_string () , None => "Self" . to_string () , } ; ret . push_str (& slf) ; } Piece :: Arg (FormatArg :: This) => ret . push_str (& args . this) , Piece :: Arg (FormatArg :: Trait) => { let _ = fmt :: write (& mut ret , format_args ! ("{}" , & args . trait_sugared)) ; } Piece :: Arg (FormatArg :: ItemContext) => ret . push_str (args . item_context) , } } ret } }
-/* FP:on_unimplemented_format.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_FN_0018
-/* FP:on_unimplemented_format.rs-0036 */ fn parse_arg < 'tcx > (arg : & Argument < '_ > , ctx : & Ctx < 'tcx > , warnings : & mut Vec < FormatWarning > , input_span : Span , is_source_literal : bool ,) -> FormatArg { let (Ctx :: RustcOnUnimplemented { tcx , trait_def_id } | Ctx :: DiagnosticOnUnimplemented { tcx , trait_def_id }) = ctx ; let span = slice_span (input_span , arg . position_span . clone () , is_source_literal) ; match arg . position { Position :: ArgumentNamed (name) => match (ctx , Symbol :: intern (name)) { (Ctx :: RustcOnUnimplemented { .. } , sym :: ItemContext) => FormatArg :: ItemContext , (Ctx :: RustcOnUnimplemented { .. } , sym :: This) => FormatArg :: This , (Ctx :: RustcOnUnimplemented { .. } , sym :: Trait) => FormatArg :: Trait , (Ctx :: RustcOnUnimplemented { .. } | Ctx :: DiagnosticOnUnimplemented { .. } , kw :: SelfUpper ,) => FormatArg :: SelfUpper , (Ctx :: RustcOnUnimplemented { .. } | Ctx :: DiagnosticOnUnimplemented { .. } , generic_param ,) if tcx . generics_of (trait_def_id) . own_params . iter () . any (| param | { ! matches ! (param . kind , GenericParamDefKind :: Lifetime) && param . name == generic_param }) => { FormatArg :: GenericParam { generic_param } } (_ , argument_name) => { warnings . push (FormatWarning :: UnknownParam { argument_name , span }) ; FormatArg :: AsIs (format ! ("{{{}}}" , argument_name . as_str ())) } } , Position :: ArgumentIs (idx) => { warnings . push (FormatWarning :: PositionalArgument { span , help : format ! ("use `{{{idx}}}` to print a number in braces") , }) ; FormatArg :: AsIs (format ! ("{{{idx}}}")) } Position :: ArgumentImplicitlyIs (_) => { warnings . push (FormatWarning :: PositionalArgument { span , help : String :: from ("use `{{}}` to print empty braces") , }) ; FormatArg :: AsIs (String :: from ("{}")) } } }
-/* FP:on_unimplemented_format.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_FN_0019
-/* FP:on_unimplemented_format.rs-0038 */ # [doc = " `#[rustc_on_unimplemented]` and `#[diagnostic::...]` don't actually do anything"] # [doc = " with specifiers, so emit a warning if they are used."] fn warn_on_format_spec (spec : & FormatSpec < '_ > , warnings : & mut Vec < FormatWarning > , input_span : Span , is_source_literal : bool ,) { if spec . ty != "" { let span = spec . ty_span . as_ref () . map (| inner | slice_span (input_span , inner . clone () , is_source_literal)) . unwrap_or (input_span) ; warnings . push (FormatWarning :: InvalidSpecifier { span , name : spec . ty . into () }) } }
-/* FP:on_unimplemented_format.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_FN_0020
-/* FP:on_unimplemented_format.rs-0040 */ fn slice_span (input : Span , Range { start , end } : Range < usize > , is_source_literal : bool) -> Span { if is_source_literal { input . from_inner (InnerSpan { start , end }) } else { input } }
-/* FP:on_unimplemented_format.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_traits_on_unimplemented_format_MOD_0021
+// SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/traits/on_unimplemented_format.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+use std::fmt;
+use std::ops::Range;
+
+use errors::*;
+use crate::rustc_complete::ty::print::TraitRefPrintSugared;
+use crate::rustc_complete::ty::{GenericParamDefKind, TyCtxt};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use rustc_parse_format::{
+    Argument, FormatSpec, ParseError, ParseMode, Parser, Piece as RpfPiece, Position,
+};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_complete::lint::builtin::MALFORMED_DIAGNOSTIC_FORMAT_LITERALS;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{InnerSpan, Span, Symbol, kw, sym};
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=FormatString | COMPLEXITY=2 | LINES=12 */
+
+/// Like [std::fmt::Arguments] this is a string that has been parsed into "pieces",
+/// either as string pieces or dynamic arguments.
+#[derive(Debug)]
+pub struct FormatString {
+    #[allow(dead_code, reason = "Debug impl")]
+    input: Symbol,
+    span: Span,
+    pieces: Vec<Piece>,
+    /// The formatting string was parsed successfully but with warnings
+    pub warnings: Vec<FormatWarning>,
+}
+/* AST_META: AST_ID=5 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Debug)]
+enum Piece {
+    Lit(String),
+    Arg(FormatArg),
+}
+/* AST_META: AST_ID=6 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=14 | LINES=18 */
+
+#[derive(Debug)]
+enum FormatArg {
+    // A generic parameter, like `{T}` if we're on the `From<T>` trait.
+    GenericParam {
+        generic_param: Symbol,
+    },
+    // `{Self}`
+    SelfUpper,
+    /// `{This}` or `{TraitName}`
+    This,
+    /// The sugared form of the trait
+    Trait,
+    /// what we're in, like a function, method, closure etc.
+    ItemContext,
+    /// What the user typed, if it doesn't match anything we can use.
+    AsIs(String),
+}
+/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
+
+pub enum Ctx<'tcx> {
+    // `#[rustc_on_unimplemented]`
+    RustcOnUnimplemented { tcx: TyCtxt<'tcx>, trait_def_id: DefId },
+    // `#[diagnostic::...]`
+    DiagnosticOnUnimplemented { tcx: TyCtxt<'tcx>, trait_def_id: DefId },
+}
+/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=8 */
+
+#[derive(Debug)]
+pub enum FormatWarning {
+    UnknownParam { argument_name: Symbol, span: Span },
+    PositionalArgument { span: Span, help: String },
+    InvalidSpecifier { name: String, span: Span },
+    FutureIncompat { span: Span, help: String },
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=emit_warning | COMPLEXITY=31 | LINES=48 */
+
+impl FormatWarning {
+    pub fn emit_warning<'tcx>(&self, tcx: TyCtxt<'tcx>, item_def_id: DefId) {
+        match *self {
+            FormatWarning::UnknownParam { argument_name, span } => {
+                let this = tcx.item_ident(item_def_id);
+                if let Some(item_def_id) = item_def_id.as_local() {
+                    tcx.emit_node_span_lint(
+                        MALFORMED_DIAGNOSTIC_FORMAT_LITERALS,
+                        tcx.local_def_id_to_hir_id(item_def_id),
+                        span,
+                        UnknownFormatParameterForOnUnimplementedAttr {
+                            argument_name,
+                            trait_name: this,
+                        },
+                    );
+                }
+            }
+            FormatWarning::PositionalArgument { span, .. } => {
+                if let Some(item_def_id) = item_def_id.as_local() {
+                    tcx.emit_node_span_lint(
+                        MALFORMED_DIAGNOSTIC_FORMAT_LITERALS,
+                        tcx.local_def_id_to_hir_id(item_def_id),
+                        span,
+                        DisallowedPositionalArgument,
+                    );
+                }
+            }
+            FormatWarning::InvalidSpecifier { span, .. } => {
+                if let Some(item_def_id) = item_def_id.as_local() {
+                    tcx.emit_node_span_lint(
+                        MALFORMED_DIAGNOSTIC_FORMAT_LITERALS,
+                        tcx.local_def_id_to_hir_id(item_def_id),
+                        span,
+                        InvalidFormatSpecifier,
+                    );
+                }
+            }
+            FormatWarning::FutureIncompat { .. } => {
+                // We've never deprecated anything in diagnostic namespace format strings
+                // but if we do we will emit a warning here
+
+                // FIXME(mejrs) in a couple releases, start emitting warnings for
+                // #[rustc_on_unimplemented] deprecated args
+            }
+        }
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=18 */
+
+/// Arguments to fill a [FormatString] with.
+///
+/// For example, given a
+/// ```rust,ignore (just an example)
+///
+/// #[rustc_on_unimplemented(
+///     on(all(from_desugaring = "QuestionMark"),
+///         message = "the `?` operator can only be used in {ItemContext} \
+///                     that returns `Result` or `Option` \
+///                     (or another type that implements `{FromResidual}`)",
+///         label = "cannot use the `?` operator in {ItemContext} that returns `{Self}`",
+///         parent_label = "this function should return `Result` or `Option` to accept `?`"
+///     ),
+/// )]
+/// pub trait FromResidual<R = <Self as Try>::Residual> {
+///    ...
+/// }
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+///
+/// async fn an_async_function() -> u32 {
+///     let x: Option<u32> = None;
+///     x?; //~ ERROR the `?` operator
+///     22
+/// }
+/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
+///  ```
+/// it will look like this:
+///
+/// ```rust,ignore (just an example)
+/// FormatArgs {
+///     this: "FromResidual",
+///     trait_sugared: "FromResidual<Option<Infallible>>",
+///     item_context: "an async function",
+///     generic_args: [("Self", "u32"), ("R", "Option<Infallible>")],
+/// }
+/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=FormatArgs | COMPLEXITY=2 | LINES=8 */
+/// ```
+#[derive(Debug)]
+pub struct FormatArgs<'tcx> {
+    pub this: String,
+    pub trait_sugared: TraitRefPrintSugared<'tcx>,
+    pub item_context: &'static str,
+    pub generic_args: Vec<(Symbol, String)>,
+}
+/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=span | COMPLEXITY=44 | LINES=71 */
+
+impl FormatString {
+    pub fn span(&self) -> Span {
+        self.span
+    }
+
+    pub fn parse<'tcx>(
+        input: Symbol,
+        snippet: Option<String>,
+        span: Span,
+        ctx: &Ctx<'tcx>,
+    ) -> Result<Self, ParseError> {
+        let s = input.as_str();
+        let mut parser = Parser::new(s, None, snippet, false, ParseMode::Diagnostic);
+        let pieces: Vec<_> = parser.by_ref().collect();
+
+        if let Some(err) = parser.errors.into_iter().next() {
+            return Err(err);
+        }
+        let mut warnings = Vec::new();
+
+        let pieces = pieces
+            .into_iter()
+            .map(|piece| match piece {
+                RpfPiece::Lit(lit) => Piece::Lit(lit.into()),
+                RpfPiece::NextArgument(arg) => {
+                    warn_on_format_spec(&arg.format, &mut warnings, span, parser.is_source_literal);
+                    let arg = parse_arg(&arg, ctx, &mut warnings, span, parser.is_source_literal);
+                    Piece::Arg(arg)
+                }
+            })
+            .collect();
+
+        Ok(FormatString { input, pieces, span, warnings })
+    }
+
+    pub fn format(&self, args: &FormatArgs<'_>) -> String {
+        let mut ret = String::new();
+        for piece in &self.pieces {
+            match piece {
+                Piece::Lit(s) | Piece::Arg(FormatArg::AsIs(s)) => ret.push_str(&s),
+
+                // `A` if we have `trait Trait<A> {}` and `note = "i'm the actual type of {A}"`
+                Piece::Arg(FormatArg::GenericParam { generic_param }) => {
+                    // Should always be some but we can't raise errors here
+                    let value = match args.generic_args.iter().find(|(p, _)| p == generic_param) {
+                        Some((_, val)) => val.to_string(),
+                        None => generic_param.to_string(),
+                    };
+                    ret.push_str(&value);
+                }
+                // `{Self}`
+                Piece::Arg(FormatArg::SelfUpper) => {
+                    let slf = match args.generic_args.iter().find(|(p, _)| *p == kw::SelfUpper) {
+                        Some((_, val)) => val.to_string(),
+                        None => "Self".to_string(),
+                    };
+                    ret.push_str(&slf);
+                }
+
+                // It's only `rustc_onunimplemented` from here
+                Piece::Arg(FormatArg::This) => ret.push_str(&args.this),
+                Piece::Arg(FormatArg::Trait) => {
+                    let _ = fmt::write(&mut ret, format_args!("{}", &args.trait_sugared));
+                }
+                Piece::Arg(FormatArg::ItemContext) => ret.push_str(args.item_context),
+            }
+        }
+        ret
+    }
+}
+/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=parse_arg | COMPLEXITY=49 | LINES=58 */
+
+fn parse_arg<'tcx>(
+    arg: &Argument<'_>,
+    ctx: &Ctx<'tcx>,
+    warnings: &mut Vec<FormatWarning>,
+    input_span: Span,
+    is_source_literal: bool,
+) -> FormatArg {
+    let (Ctx::RustcOnUnimplemented { tcx, trait_def_id }
+    | Ctx::DiagnosticOnUnimplemented { tcx, trait_def_id }) = ctx;
+
+    let span = slice_span(input_span, arg.position_span.clone(), is_source_literal);
+
+    match arg.position {
+        // Something like "hello {name}"
+        Position::ArgumentNamed(name) => match (ctx, Symbol::intern(name)) {
+            // Only `#[rustc_on_unimplemented]` can use these
+            (Ctx::RustcOnUnimplemented { .. }, sym::ItemContext) => FormatArg::ItemContext,
+            (Ctx::RustcOnUnimplemented { .. }, sym::This) => FormatArg::This,
+            (Ctx::RustcOnUnimplemented { .. }, sym::Trait) => FormatArg::Trait,
+            // Any attribute can use these
+            (
+                Ctx::RustcOnUnimplemented { .. } | Ctx::DiagnosticOnUnimplemented { .. },
+                kw::SelfUpper,
+            ) => FormatArg::SelfUpper,
+            (
+                Ctx::RustcOnUnimplemented { .. } | Ctx::DiagnosticOnUnimplemented { .. },
+                generic_param,
+            ) if tcx.generics_of(trait_def_id).own_params.iter().any(|param| {
+                !matches!(param.kind, GenericParamDefKind::Lifetime) && param.name == generic_param
+            }) =>
+            {
+                FormatArg::GenericParam { generic_param }
+            }
+
+            (_, argument_name) => {
+                warnings.push(FormatWarning::UnknownParam { argument_name, span });
+                FormatArg::AsIs(format!("{{{}}}", argument_name.as_str()))
+            }
+        },
+
+        // `{:1}` and `{}` are ignored
+        Position::ArgumentIs(idx) => {
+            warnings.push(FormatWarning::PositionalArgument {
+                span,
+                help: format!("use `{{{idx}}}` to print a number in braces"),
+            });
+            FormatArg::AsIs(format!("{{{idx}}}"))
+        }
+        Position::ArgumentImplicitlyIs(_) => {
+            warnings.push(FormatWarning::PositionalArgument {
+                span,
+                help: String::from("use `{{}}` to print empty braces"),
+            });
+            FormatArg::AsIs(String::from("{}"))
+        }
+    }
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=warn_on_format_spec | COMPLEXITY=9 | LINES=18 */
+
+/// `#[rustc_on_unimplemented]` and `#[diagnostic::...]` don't actually do anything
+/// with specifiers, so emit a warning if they are used.
+fn warn_on_format_spec(
+    spec: &FormatSpec<'_>,
+    warnings: &mut Vec<FormatWarning>,
+    input_span: Span,
+    is_source_literal: bool,
+) {
+    if spec.ty != "" {
+        let span = spec
+            .ty_span
+            .as_ref()
+            .map(|inner| slice_span(input_span, inner.clone(), is_source_literal))
+            .unwrap_or(input_span);
+        warnings.push(FormatWarning::InvalidSpecifier { span, name: spec.ty.into() })
+    }
+}
+/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=slice_span | COMPLEXITY=3 | LINES=2 */
+
+fn slice_span(input: Span, Range { start, end }: Range<usize>, is_source_literal: bool) -> Span {
+/* AST_META: AST_ID=18 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=2 */
+    if is_source_literal { input.from_inner(InnerSpan { start, end }) } else { input }
+}
+/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=UnknownFormatParameterForOnUnimplementedAttr | COMPLEXITY=4 | LINES=30 */
+
+pub mod errors {
+    use rustc_macros::LintDiagnostic;
+    use crate::rustc_complete::Ident;
+
+    use super::*;
+
+    #[derive(LintDiagnostic)]
+    #[diag(trait_selection_unknown_format_parameter_for_on_unimplemented_attr)]
+    #[help]
+    pub struct UnknownFormatParameterForOnUnimplementedAttr {
+        pub argument_name: Symbol,
+        pub trait_name: Ident,
+    }
+
+    #[derive(LintDiagnostic)]
+    #[diag(trait_selection_disallowed_positional_argument)]
+    #[help]
+    pub struct DisallowedPositionalArgument;
+
+    #[derive(LintDiagnostic)]
+    #[diag(trait_selection_invalid_format_specifier)]
+    #[help]
+    pub struct InvalidFormatSpecifier;
+
+    #[derive(LintDiagnostic)]
+    #[diag(trait_selection_missing_options_for_on_unimplemented_attr)]
+    #[help]
+    pub struct MissingOptionsForOnUnimplementedAttr;
+}

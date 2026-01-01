@@ -1,22 +1,121 @@
-/* FP:regions.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_regions_USE_0001
-/* FP:regions.rs-0002 */ use crate :: rustc_complete :: def_id :: LocalDefId ;
-/* FP:regions.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_regions_USE_0002
-/* FP:regions.rs-0004 */ use crate :: rustc_infer :: infer :: outlives :: env :: OutlivesEnvironment ;
-/* FP:regions.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_regions_USE_0003
-/* FP:regions.rs-0006 */ use crate :: rustc_infer :: infer :: { InferCtxt , RegionResolutionError } ;
-/* FP:regions.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_regions_USE_0004
-/* FP:regions.rs-0008 */ use rustc_macros :: extension ;
-/* FP:regions.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_regions_USE_0005
-/* FP:regions.rs-0010 */ use crate :: rustc_complete :: traits :: ObligationCause ;
-/* FP:regions.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_regions_USE_0006
-/* FP:regions.rs-0012 */ use crate :: rustc_complete :: traits :: query :: NoSolution ;
-/* FP:regions.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_regions_USE_0007
-/* FP:regions.rs-0014 */ use crate :: rustc_complete :: ty :: { self , Ty , elaborate } ;
-/* FP:regions.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_regions_USE_0008
-/* FP:regions.rs-0016 */ use crate :: traits :: ScrubbedTraitError ;
-/* FP:regions.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_regions_USE_0009
-/* FP:regions.rs-0018 */ use crate :: traits :: outlives_bounds :: InferCtxtExt ;
-/* FP:regions.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_regions_IMPL_0010
-/* FP:regions.rs-0020 */ # [extension (pub trait OutlivesEnvironmentBuildExt <'tcx >)] impl < 'tcx > OutlivesEnvironment < 'tcx > { fn new (infcx : & InferCtxt < 'tcx > , body_id : LocalDefId , param_env : ty :: ParamEnv < 'tcx > , assumed_wf_tys : impl IntoIterator < Item = Ty < 'tcx > > ,) -> Self { Self :: new_with_implied_bounds_compat (infcx , body_id , param_env , assumed_wf_tys , false) } fn new_with_implied_bounds_compat (infcx : & InferCtxt < 'tcx > , body_id : LocalDefId , param_env : ty :: ParamEnv < 'tcx > , assumed_wf_tys : impl IntoIterator < Item = Ty < 'tcx > > , disable_implied_bounds_hack : bool ,) -> Self { let mut bounds = vec ! [] ; for bound in param_env . caller_bounds () { if let Some (mut type_outlives) = bound . as_type_outlives_clause () { if infcx . next_trait_solver () { match crate :: solve :: deeply_normalize :: < _ , ScrubbedTraitError < 'tcx > > (infcx . at (& ObligationCause :: dummy () , param_env) , type_outlives ,) { Ok (new) => type_outlives = new , Err (_) => { infcx . dcx () . delayed_bug (format ! ("could not normalize `{bound}`")) ; } } } bounds . push (type_outlives) ; } } let higher_ranked_assumptions = infcx . take_registered_region_assumptions () ; let higher_ranked_assumptions = elaborate :: elaborate_outlives_assumptions (infcx . tcx , higher_ranked_assumptions) ; OutlivesEnvironment :: from_normalized_bounds (param_env , bounds , infcx . implied_bounds_tys (body_id , param_env , assumed_wf_tys , disable_implied_bounds_hack ,) , higher_ranked_assumptions ,) } }
-/* FP:regions.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_regions_IMPL_0011
-/* FP:regions.rs-0022 */ # [extension (pub trait InferCtxtRegionExt <'tcx >)] impl < 'tcx > InferCtxt < 'tcx > { # [doc = " Resolve regions, using the deep normalizer to normalize any type-outlives"] # [doc = " obligations in the process. This is in `rustc_trait_selection` because"] # [doc = " we need to normalize."] # [doc = ""] # [doc = " Prefer this method over `resolve_regions_with_normalize`, unless you are"] # [doc = " doing something specific for normalization."] fn resolve_regions (& self , body_id : LocalDefId , param_env : ty :: ParamEnv < 'tcx > , assumed_wf_tys : impl IntoIterator < Item = Ty < 'tcx > > ,) -> Vec < RegionResolutionError < 'tcx > > { self . resolve_regions_with_outlives_env (& OutlivesEnvironment :: new (self , body_id , param_env , assumed_wf_tys ,)) } # [doc = " Don't call this directly unless you know what you're doing."] fn resolve_regions_with_outlives_env (& self , outlives_env : & OutlivesEnvironment < 'tcx > ,) -> Vec < RegionResolutionError < 'tcx > > { self . resolve_regions_with_normalize (& outlives_env , | ty , origin | { let ty = self . resolve_vars_if_possible (ty) ; if self . next_trait_solver () { crate :: solve :: deeply_normalize (self . at (& ObligationCause :: dummy_with_span (origin . span ()) , outlives_env . param_env ,) , ty ,) . map_err (| _ : Vec < ScrubbedTraitError < 'tcx > > | NoSolution) } else { Ok (ty) } }) } }
+// SRC: ../rust/compiler/rustc_trait_selection/src/regions.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_infer::infer::outlives::env::OutlivesEnvironment;
+use crate::rustc_infer::infer::{InferCtxt, RegionResolutionError};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use rustc_macros::extension;
+use crate::rustc_complete::traits::ObligationCause;
+use crate::rustc_complete::traits::query::NoSolution;
+use crate::rustc_complete::ty::{self, Ty, elaborate};
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=new | COMPLEXITY=25 | LINES=63 */
+
+use crate::traits::ScrubbedTraitError;
+use crate::traits::outlives_bounds::InferCtxtExt;
+
+#[extension(pub trait OutlivesEnvironmentBuildExt<'tcx>)]
+impl<'tcx> OutlivesEnvironment<'tcx> {
+    fn new(
+        infcx: &InferCtxt<'tcx>,
+        body_id: LocalDefId,
+        param_env: ty::ParamEnv<'tcx>,
+        assumed_wf_tys: impl IntoIterator<Item = Ty<'tcx>>,
+    ) -> Self {
+        Self::new_with_implied_bounds_compat(infcx, body_id, param_env, assumed_wf_tys, false)
+    }
+
+    fn new_with_implied_bounds_compat(
+        infcx: &InferCtxt<'tcx>,
+        body_id: LocalDefId,
+        param_env: ty::ParamEnv<'tcx>,
+        assumed_wf_tys: impl IntoIterator<Item = Ty<'tcx>>,
+        disable_implied_bounds_hack: bool,
+    ) -> Self {
+        let mut bounds = vec![];
+
+        for bound in param_env.caller_bounds() {
+            if let Some(mut type_outlives) = bound.as_type_outlives_clause() {
+                if infcx.next_trait_solver() {
+                    match crate::solve::deeply_normalize::<_, ScrubbedTraitError<'tcx>>(
+                        infcx.at(&ObligationCause::dummy(), param_env),
+                        type_outlives,
+                    ) {
+                        Ok(new) => type_outlives = new,
+                        Err(_) => {
+                            infcx.dcx().delayed_bug(format!("could not normalize `{bound}`"));
+                        }
+                    }
+                }
+                bounds.push(type_outlives);
+            }
+        }
+
+        // FIXME(-Znext-trait-solver): Normalize these.
+        let higher_ranked_assumptions = infcx.take_registered_region_assumptions();
+        let higher_ranked_assumptions =
+            elaborate::elaborate_outlives_assumptions(infcx.tcx, higher_ranked_assumptions);
+
+        // FIXME: This needs to be modified so that we normalize the known type
+        // outlives obligations then elaborate them into their region/type components.
+        // Otherwise, `<W<'a> as Mirror>::Assoc: 'b` will not imply `'a: 'b` even
+        // if we can normalize `'a`.
+        OutlivesEnvironment::from_normalized_bounds(
+            param_env,
+            bounds,
+            infcx.implied_bounds_tys(
+                body_id,
+                param_env,
+                assumed_wf_tys,
+                disable_implied_bounds_hack,
+            ),
+            higher_ranked_assumptions,
+        )
+    }
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=resolve_regions | COMPLEXITY=14 | LINES=46 */
+
+#[extension(pub trait InferCtxtRegionExt<'tcx>)]
+impl<'tcx> InferCtxt<'tcx> {
+    /// Resolve regions, using the deep normalizer to normalize any type-outlives
+    /// obligations in the process. This is in `rustc_trait_selection` because
+    /// we need to normalize.
+    ///
+    /// Prefer this method over `resolve_regions_with_normalize`, unless you are
+    /// doing something specific for normalization.
+    fn resolve_regions(
+        &self,
+        body_id: LocalDefId,
+        param_env: ty::ParamEnv<'tcx>,
+        assumed_wf_tys: impl IntoIterator<Item = Ty<'tcx>>,
+    ) -> Vec<RegionResolutionError<'tcx>> {
+        self.resolve_regions_with_outlives_env(&OutlivesEnvironment::new(
+            self,
+            body_id,
+            param_env,
+            assumed_wf_tys,
+        ))
+    }
+
+    /// Don't call this directly unless you know what you're doing.
+    fn resolve_regions_with_outlives_env(
+        &self,
+        outlives_env: &OutlivesEnvironment<'tcx>,
+    ) -> Vec<RegionResolutionError<'tcx>> {
+        self.resolve_regions_with_normalize(&outlives_env, |ty, origin| {
+            let ty = self.resolve_vars_if_possible(ty);
+
+            if self.next_trait_solver() {
+                crate::solve::deeply_normalize(
+                    self.at(
+                        &ObligationCause::dummy_with_span(origin.span()),
+                        outlives_env.param_env,
+                    ),
+                    ty,
+                )
+                .map_err(|_: Vec<ScrubbedTraitError<'tcx>>| NoSolution)
+            } else {
+                Ok(ty)
+            }
+        })
+    }
+}

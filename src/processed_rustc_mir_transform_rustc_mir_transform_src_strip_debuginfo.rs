@@ -1,10 +1,40 @@
-/* FP:strip_debuginfo.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_strip_debuginfo_USE_0001
-/* FP:strip_debuginfo.rs-0002 */ use crate :: rustc_complete :: mir :: * ;
-/* FP:strip_debuginfo.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_strip_debuginfo_USE_0002
-/* FP:strip_debuginfo.rs-0004 */ use crate :: rustc_complete :: ty :: TyCtxt ;
-/* FP:strip_debuginfo.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_strip_debuginfo_USE_0003
-/* FP:strip_debuginfo.rs-0006 */ use crate :: rustc_complete :: config :: MirStripDebugInfo ;
-/* FP:strip_debuginfo.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_strip_debuginfo_STRUCT_0004
-/* FP:strip_debuginfo.rs-0008 */ # [doc = " Conditionally remove some of the VarDebugInfo in MIR."] # [doc = ""] # [doc = " In particular, stripping non-parameter debug info for tiny, primitive-like"] # [doc = " methods in core saves work later, and nobody ever wanted to use it anyway."] pub (super) struct StripDebugInfo ;
-/* FP:strip_debuginfo.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_strip_debuginfo_IMPL_0005
-/* FP:strip_debuginfo.rs-0010 */ impl < 'tcx > crate :: MirPass < 'tcx > for StripDebugInfo { fn is_enabled (& self , sess : & crate :: rustc_session :: Session) -> bool { sess . opts . unstable_opts . mir_strip_debuginfo != MirStripDebugInfo :: None } fn run_pass (& self , tcx : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) { match tcx . sess . opts . unstable_opts . mir_strip_debuginfo { MirStripDebugInfo :: None => return , MirStripDebugInfo :: AllLocals => { } MirStripDebugInfo :: LocalsInTinyFunctions if let TerminatorKind :: Return { .. } = body . basic_blocks [START_BLOCK] . terminator () . kind => { } MirStripDebugInfo :: LocalsInTinyFunctions => return , } body . var_debug_info . retain (| vdi | { matches ! (vdi . value , VarDebugInfoContents :: Place (place) if place . local . as_usize () <= body . arg_count && place . local != RETURN_PLACE ,) }) ; } fn is_required (& self) -> bool { true } }
+// SRC: ../rust/compiler/rustc_mir_transform/src/strip_debuginfo.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=23 | LINES=38 */
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::config::MirStripDebugInfo;
+
+/// Conditionally remove some of the VarDebugInfo in MIR.
+///
+/// In particular, stripping non-parameter debug info for tiny, primitive-like
+/// methods in core saves work later, and nobody ever wanted to use it anyway.
+pub(super) struct StripDebugInfo;
+
+impl<'tcx> crate::MirPass<'tcx> for StripDebugInfo {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
+        sess.opts.unstable_opts.mir_strip_debuginfo != MirStripDebugInfo::None
+    }
+
+    fn run_pass(&self, tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
+        match tcx.sess.opts.unstable_opts.mir_strip_debuginfo {
+            MirStripDebugInfo::None => return,
+            MirStripDebugInfo::AllLocals => {}
+            MirStripDebugInfo::LocalsInTinyFunctions
+                if let TerminatorKind::Return { .. } =
+                    body.basic_blocks[START_BLOCK].terminator().kind => {}
+            MirStripDebugInfo::LocalsInTinyFunctions => return,
+        }
+
+        body.var_debug_info.retain(|vdi| {
+            matches!(
+                vdi.value,
+                VarDebugInfoContents::Place(place)
+                    if place.local.as_usize() <= body.arg_count && place.local != RETURN_PLACE,
+            )
+        });
+    }
+
+    fn is_required(&self) -> bool {
+        true
+    }
+}

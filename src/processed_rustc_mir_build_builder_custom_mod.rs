@@ -1,31 +1,185 @@
-/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_custom_mod_USE_0001
-/* FP:mod.rs-0002 */ use crate :: rustc_data_structures :: fx :: FxHashMap ;
-/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_custom_mod_USE_0002
-/* FP:mod.rs-0004 */ use crate :: rustc_complete :: def_id :: DefId ;
-/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_custom_mod_USE_0003
-/* FP:mod.rs-0006 */ use crate :: rustc_complete :: { HirId , attrs } ;
-/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_custom_mod_USE_0004
-/* FP:mod.rs-0008 */ use crate :: rustc_index :: { IndexSlice , IndexVec } ;
-/* FP:mod.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_custom_mod_USE_0005
-/* FP:mod.rs-0010 */ use crate :: rustc_complete :: bug ;
-/* FP:mod.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_custom_mod_USE_0006
-/* FP:mod.rs-0012 */ use crate :: rustc_complete :: mir :: * ;
-/* FP:mod.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_custom_mod_USE_0007
-/* FP:mod.rs-0014 */ use crate :: rustc_complete :: thir :: * ;
-/* FP:mod.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_custom_mod_USE_0008
-/* FP:mod.rs-0016 */ use crate :: rustc_complete :: ty :: { self , Ty , TyCtxt } ;
-/* FP:mod.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_custom_mod_USE_0009
-/* FP:mod.rs-0018 */ use crate :: rustc_complete :: Span ;
-/* FP:mod.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_custom_mod_MOD_0010
-/* FP:mod.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_custom_mod_FN_0011
-/* FP:mod.rs-0022 */ pub (super) fn build_custom_mir < 'tcx > (tcx : TyCtxt < 'tcx > , did : DefId , hir_id : HirId , thir : & Thir < 'tcx > , expr : ExprId , params : & IndexSlice < ParamId , Param < 'tcx > > , return_ty : Ty < 'tcx > , return_ty_span : Span , span : Span , dialect : Option < attrs :: MirDialect > , phase : Option < attrs :: MirPhase > ,) -> Body < 'tcx > { let mut body = Body { basic_blocks : BasicBlocks :: new (IndexVec :: new ()) , source : MirSource :: item (did) , phase : MirPhase :: Built , source_scopes : IndexVec :: new () , coroutine : None , local_decls : IndexVec :: new () , user_type_annotations : IndexVec :: new () , arg_count : params . len () , spread_arg : None , var_debug_info : Vec :: new () , span , required_consts : None , mentioned_items : None , is_polymorphic : false , tainted_by_errors : None , injection_phase : None , pass_count : 0 , coverage_info_hi : None , function_coverage_info : None , } ; body . local_decls . push (LocalDecl :: new (return_ty , return_ty_span)) ; body . basic_blocks_mut () . push (BasicBlockData :: new (None , false)) ; body . source_scopes . push (SourceScopeData { span , parent_scope : None , inlined : None , inlined_parent_scope : None , local_data : ClearCrossCrate :: Set (SourceScopeLocalData { lint_root : hir_id }) , }) ; body . injection_phase = Some (parse_attribute (dialect , phase)) ; let mut pctxt = ParseCtxt { tcx , typing_env : body . typing_env (tcx) , thir , source_scope : OUTERMOST_SOURCE_SCOPE , body : & mut body , local_map : FxHashMap :: default () , block_map : FxHashMap :: default () , } ; let res : PResult < _ > = try { pctxt . parse_args (params) ? ; pctxt . parse_body (expr) ? ; } ; if let Err (err) = res { tcx . dcx () . span_fatal (err . span , format ! ("Could not parse {}, found: {:?}" , err . expected , err . item_description) ,) } body }
-/* FP:mod.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_custom_mod_FN_0012
-/* FP:mod.rs-0024 */ # [doc = " Turns the arguments passed to `#[custom_mir(..)]` into a proper"] # [doc = " [`MirPhase`]. Panics if this isn't possible for any reason."] fn parse_attribute (dialect : Option < attrs :: MirDialect > , phase : Option < attrs :: MirPhase >) -> MirPhase { let Some (dialect) = dialect else { assert ! (phase . is_none ()) ; return MirPhase :: Built ; } ; match dialect { attrs :: MirDialect :: Built => { assert ! (phase . is_none () , "Cannot specify a phase for `Built` MIR") ; MirPhase :: Built } attrs :: MirDialect :: Analysis => match phase { None | Some (attrs :: MirPhase :: Initial) => MirPhase :: Analysis (AnalysisPhase :: Initial) , Some (attrs :: MirPhase :: PostCleanup) => MirPhase :: Analysis (AnalysisPhase :: PostCleanup) , Some (attrs :: MirPhase :: Optimized) => { bug ! ("`optimized` dialect is not compatible with the `analysis` dialect") } } , attrs :: MirDialect :: Runtime => match phase { None | Some (attrs :: MirPhase :: Initial) => MirPhase :: Runtime (RuntimePhase :: Initial) , Some (attrs :: MirPhase :: PostCleanup) => MirPhase :: Runtime (RuntimePhase :: PostCleanup) , Some (attrs :: MirPhase :: Optimized) => MirPhase :: Runtime (RuntimePhase :: Optimized) , } , } }
-/* FP:mod.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_custom_mod_STRUCT_0013
-/* FP:mod.rs-0026 */ struct ParseCtxt < 'a , 'tcx > { tcx : TyCtxt < 'tcx > , typing_env : ty :: TypingEnv < 'tcx > , thir : & 'a Thir < 'tcx > , source_scope : SourceScope , body : & 'a mut Body < 'tcx > , local_map : FxHashMap < LocalVarId , Local > , block_map : FxHashMap < LocalVarId , BasicBlock > , }
-/* FP:mod.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_custom_mod_STRUCT_0014
-/* FP:mod.rs-0028 */ struct ParseError { span : Span , item_description : String , expected : String , }
-/* FP:mod.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_custom_mod_IMPL_0015
-/* FP:mod.rs-0030 */ impl < 'a , 'tcx > ParseCtxt < 'a , 'tcx > { fn expr_error (& self , expr : ExprId , expected : & 'static str) -> ParseError { let expr = & self . thir [expr] ; ParseError { span : expr . span , item_description : format ! ("{:?}" , expr . kind) , expected : expected . to_string () , } } fn stmt_error (& self , stmt : StmtId , expected : & 'static str) -> ParseError { let stmt = & self . thir [stmt] ; let span = match stmt . kind { StmtKind :: Expr { expr , .. } => self . thir [expr] . span , StmtKind :: Let { span , .. } => span , } ; ParseError { span , item_description : format ! ("{:?}" , stmt . kind) , expected : expected . to_string () , } } }
-/* FP:mod.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_build_src_builder_custom_mod_TYPE_0016
-/* FP:mod.rs-0032 */ type PResult < T > = Result < T , ParseError > ;
+// SRC: ../rust/compiler/rustc_mir_build/src/builder/custom/mod.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=14 | LINES=22 */
+// Provides the implementation of the `custom_mir` attribute.
+//
+// Up until MIR building, this attribute has absolutely no effect. The `mir!` macro is a normal
+// decl macro that expands like any other, and the code goes through parsing, name resolution and
+// type checking like all other code. In MIR building we finally detect whether this attribute is
+// present, and if so we branch off into this module, which implements the attribute by
+// implementing a custom lowering from THIR to MIR.
+//
+// The result of this lowering is returned "normally" from `build_mir`, with the only
+// notable difference being that the `injected` field in the body is set. Various components of the
+// MIR pipeline, like borrowck and the pass manager will then consult this field (via
+// `body.should_skip()`) to skip the parts of the MIR pipeline that precede the MIR phase the user
+// specified.
+//
+// This file defines the general framework for the custom parsing. The parsing for all the
+// "top-level" constructs can be found in the `parse` submodule, while the parsing for statements,
+// terminators, and everything below can be found in the `parse::instruction` submodule.
+//
+
+use crate::rustc_data_structures::fx::FxHashMap;
+use crate::rustc_complete::def_id::DefId;
+use crate::rustc_complete::{HirId, attrs};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_index::{IndexSlice, IndexVec};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::thir::*;
+use crate::rustc_complete::ty::{self, Ty, TyCtxt};
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=16 | LINES=73 */
+use crate::rustc_complete::Span;
+
+
+pub(super) fn build_custom_mir<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    did: DefId,
+    hir_id: HirId,
+    thir: &Thir<'tcx>,
+    expr: ExprId,
+    params: &IndexSlice<ParamId, Param<'tcx>>,
+    return_ty: Ty<'tcx>,
+    return_ty_span: Span,
+    span: Span,
+    dialect: Option<attrs::MirDialect>,
+    phase: Option<attrs::MirPhase>,
+) -> Body<'tcx> {
+    let mut body = Body {
+        basic_blocks: BasicBlocks::new(IndexVec::new()),
+        source: MirSource::item(did),
+        phase: MirPhase::Built,
+        source_scopes: IndexVec::new(),
+        coroutine: None,
+        local_decls: IndexVec::new(),
+        user_type_annotations: IndexVec::new(),
+        arg_count: params.len(),
+        spread_arg: None,
+        var_debug_info: Vec::new(),
+        span,
+        required_consts: None,
+        mentioned_items: None,
+        is_polymorphic: false,
+        tainted_by_errors: None,
+        injection_phase: None,
+        pass_count: 0,
+        coverage_info_hi: None,
+        function_coverage_info: None,
+    };
+
+    body.local_decls.push(LocalDecl::new(return_ty, return_ty_span));
+    body.basic_blocks_mut().push(BasicBlockData::new(None, false));
+    body.source_scopes.push(SourceScopeData {
+        span,
+        parent_scope: None,
+        inlined: None,
+        inlined_parent_scope: None,
+        local_data: ClearCrossCrate::Set(SourceScopeLocalData { lint_root: hir_id }),
+    });
+    body.injection_phase = Some(parse_attribute(dialect, phase));
+
+    let mut pctxt = ParseCtxt {
+        tcx,
+        typing_env: body.typing_env(tcx),
+        thir,
+        source_scope: OUTERMOST_SOURCE_SCOPE,
+        body: &mut body,
+        local_map: FxHashMap::default(),
+        block_map: FxHashMap::default(),
+    };
+
+    let res: PResult<_> = try {
+        pctxt.parse_args(params)?;
+        pctxt.parse_body(expr)?;
+    };
+    if let Err(err) = res {
+        tcx.dcx().span_fatal(
+            err.span,
+            format!("Could not parse {}, found: {:?}", err.expected, err.item_description),
+        )
+    }
+
+    body
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=parse_attribute | COMPLEXITY=25 | LINES=34 */
+
+/// Turns the arguments passed to `#[custom_mir(..)]` into a proper
+/// [`MirPhase`]. Panics if this isn't possible for any reason.
+fn parse_attribute(dialect: Option<attrs::MirDialect>, phase: Option<attrs::MirPhase>) -> MirPhase {
+    let Some(dialect) = dialect else {
+        // Caught during attribute checking.
+        assert!(phase.is_none());
+        return MirPhase::Built;
+    };
+
+    match dialect {
+        attrs::MirDialect::Built => {
+            // Caught during attribute checking.
+            assert!(phase.is_none(), "Cannot specify a phase for `Built` MIR");
+            MirPhase::Built
+        }
+        attrs::MirDialect::Analysis => match phase {
+            None | Some(attrs::MirPhase::Initial) => MirPhase::Analysis(AnalysisPhase::Initial),
+
+            Some(attrs::MirPhase::PostCleanup) => MirPhase::Analysis(AnalysisPhase::PostCleanup),
+
+            Some(attrs::MirPhase::Optimized) => {
+                // Caught during attribute checking.
+                bug!("`optimized` dialect is not compatible with the `analysis` dialect")
+            }
+        },
+
+        attrs::MirDialect::Runtime => match phase {
+            None | Some(attrs::MirPhase::Initial) => MirPhase::Runtime(RuntimePhase::Initial),
+            Some(attrs::MirPhase::PostCleanup) => MirPhase::Runtime(RuntimePhase::PostCleanup),
+            Some(attrs::MirPhase::Optimized) => MirPhase::Runtime(RuntimePhase::Optimized),
+        },
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=ParseCtxt | COMPLEXITY=2 | LINES=10 */
+
+struct ParseCtxt<'a, 'tcx> {
+    tcx: TyCtxt<'tcx>,
+    typing_env: ty::TypingEnv<'tcx>,
+    thir: &'a Thir<'tcx>,
+    source_scope: SourceScope,
+    body: &'a mut Body<'tcx>,
+    local_map: FxHashMap<LocalVarId, Local>,
+    block_map: FxHashMap<LocalVarId, BasicBlock>,
+}
+/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ParseError | COMPLEXITY=2 | LINES=6 */
+
+struct ParseError {
+    span: Span,
+    item_description: String,
+    expected: String,
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=expr_error | COMPLEXITY=15 | LINES=24 */
+
+impl<'a, 'tcx> ParseCtxt<'a, 'tcx> {
+    fn expr_error(&self, expr: ExprId, expected: &'static str) -> ParseError {
+        let expr = &self.thir[expr];
+        ParseError {
+            span: expr.span,
+            item_description: format!("{:?}", expr.kind),
+            expected: expected.to_string(),
+        }
+    }
+
+    fn stmt_error(&self, stmt: StmtId, expected: &'static str) -> ParseError {
+        let stmt = &self.thir[stmt];
+        let span = match stmt.kind {
+            StmtKind::Expr { expr, .. } => self.thir[expr].span,
+            StmtKind::Let { span, .. } => span,
+        };
+        ParseError {
+            span,
+            item_description: format!("{:?}", stmt.kind),
+            expected: expected.to_string(),
+        }
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=2 */
+
+type PResult<T> = Result<T, ParseError>;

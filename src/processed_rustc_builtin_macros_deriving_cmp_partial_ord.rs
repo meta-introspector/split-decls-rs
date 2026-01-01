@@ -1,18 +1,164 @@
-/* FP:partial_ord.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_cmp_partial_ord_USE_0001
-/* FP:partial_ord.rs-0002 */ use crate :: rustc_complete :: { ExprKind , ItemKind , MetaItem , PatKind } ;
-/* FP:partial_ord.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_cmp_partial_ord_USE_0002
-/* FP:partial_ord.rs-0004 */ use crate :: rustc_expand :: base :: { Annotatable , ExtCtxt } ;
-/* FP:partial_ord.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_cmp_partial_ord_USE_0003
-/* FP:partial_ord.rs-0006 */ use crate :: rustc_complete :: { Ident , Span , sym } ;
-/* FP:partial_ord.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_cmp_partial_ord_USE_0004
-/* FP:partial_ord.rs-0008 */ use thin_vec :: thin_vec ;
-/* FP:partial_ord.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_cmp_partial_ord_USE_0005
-/* FP:partial_ord.rs-0010 */ use crate :: deriving :: generic :: ty :: * ;
-/* FP:partial_ord.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_cmp_partial_ord_USE_0006
-/* FP:partial_ord.rs-0012 */ use crate :: deriving :: generic :: * ;
-/* FP:partial_ord.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_cmp_partial_ord_USE_0007
-/* FP:partial_ord.rs-0014 */ use crate :: deriving :: { path_std , pathvec_std } ;
-/* FP:partial_ord.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_cmp_partial_ord_FN_0008
-/* FP:partial_ord.rs-0016 */ pub (crate) fn expand_deriving_partial_ord (cx : & ExtCtxt < '_ > , span : Span , mitem : & MetaItem , item : & Annotatable , push : & mut dyn FnMut (Annotatable) , is_const : bool ,) { let ordering_ty = Path (path_std ! (cmp :: Ordering)) ; let ret_ty = Path (Path :: new_ (pathvec_std ! (option :: Option) , vec ! [Box :: new (ordering_ty)] , PathKind :: Std)) ; let discr_then_data = if let Annotatable :: Item (item) = item && let ItemKind :: Enum (_ , _ , def) = & item . kind { let dataful : Vec < bool > = def . variants . iter () . map (| v | ! v . data . fields () . is_empty ()) . collect () ; match dataful . iter () . filter (| & & b | b) . count () { 0 => true , 1 ..= 2 => false , _ => (0 .. dataful . len () - 1) . any (| i | { if dataful [i] && let Some (idx) = dataful [i + 1 ..] . iter () . position (| v | * v) { idx >= 2 } else { false } }) , } } else { true } ; let partial_cmp_def = MethodDef { name : sym :: partial_cmp , generics : Bounds :: empty () , explicit_self : true , nonself_args : vec ! [(self_ref () , sym :: other)] , ret_ty , attributes : thin_vec ! [cx . attr_word (sym :: inline , span)] , fieldless_variants_strategy : FieldlessVariantsStrategy :: Unify , combine_substructure : combine_substructure (Box :: new (| cx , span , substr | { cs_partial_cmp (cx , span , substr , discr_then_data) })) , } ; let trait_def = TraitDef { span , path : path_std ! (cmp :: PartialOrd) , skip_path_as_bound : false , needs_copy_as_bound_if_packed : true , additional_bounds : vec ! [] , supports_unions : false , methods : vec ! [partial_cmp_def] , associated_types : Vec :: new () , is_const , is_staged_api_crate : cx . ecfg . features . staged_api () , } ; trait_def . expand (cx , mitem , item , push) }
-/* FP:partial_ord.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_cmp_partial_ord_FN_0009
-/* FP:partial_ord.rs-0018 */ fn cs_partial_cmp (cx : & ExtCtxt < '_ > , span : Span , substr : & Substructure < '_ > , discr_then_data : bool ,) -> BlockOrExpr { let test_id = Ident :: new (sym :: cmp , span) ; let equal_path = cx . path_global (span , cx . std_path (& [sym :: cmp , sym :: Ordering , sym :: Equal])) ; let partial_cmp_path = cx . std_path (& [sym :: cmp , sym :: PartialOrd , sym :: partial_cmp]) ; let expr = cs_fold (false , cx , span , substr , | cx , fold | match fold { CsFold :: Single (field) => { let [other_expr] = & field . other_selflike_exprs [..] else { cx . dcx () . span_bug (field . span , "not exactly 2 arguments in `derive(Ord)`") ; } ; let args = thin_vec ! [field . self_expr . clone () , other_expr . clone ()] ; cx . expr_call_global (field . span , partial_cmp_path . clone () , args) } CsFold :: Combine (span , mut expr1 , expr2) => { if ! discr_then_data && let ExprKind :: Match (_ , arms , _) = & mut expr1 . kind && let Some (last) = arms . last_mut () && let PatKind :: Wild = last . pat . kind { last . body = Some (expr2) ; expr1 } else { let eq_arm = cx . arm (span , cx . pat_some (span , cx . pat_path (span , equal_path . clone ())) , expr1 ,) ; let neq_arm = cx . arm (span , cx . pat_ident (span , test_id) , cx . expr_ident (span , test_id)) ; cx . expr_match (span , expr2 , thin_vec ! [eq_arm , neq_arm]) } } CsFold :: Fieldless => cx . expr_some (span , cx . expr_path (equal_path . clone ())) , } ,) ; BlockOrExpr :: new_expr (expr) }
+// SRC: ../rust/compiler/rustc_builtin_macros/src/deriving/cmp/partial_ord.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{ExprKind, ItemKind, MetaItem, PatKind};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_expand::base::{Annotatable, ExtCtxt};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{Ident, Span, sym};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use thin_vec::thin_vec;
+
+use crate::deriving::generic::ty::*;
+use crate::deriving::generic::*;
+use crate::deriving::{path_std, pathvec_std};
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=22 | LINES=62 */
+
+pub(crate) fn expand_deriving_partial_ord(
+    cx: &ExtCtxt<'_>,
+    span: Span,
+    mitem: &MetaItem,
+    item: &Annotatable,
+    push: &mut dyn FnMut(Annotatable),
+    is_const: bool,
+) {
+    let ordering_ty = Path(path_std!(cmp::Ordering));
+    let ret_ty =
+        Path(Path::new_(pathvec_std!(option::Option), vec![Box::new(ordering_ty)], PathKind::Std));
+
+    // Order in which to perform matching
+    let discr_then_data = if let Annotatable::Item(item) = item
+        && let ItemKind::Enum(_, _, def) = &item.kind
+    {
+        let dataful: Vec<bool> = def.variants.iter().map(|v| !v.data.fields().is_empty()).collect();
+        match dataful.iter().filter(|&&b| b).count() {
+            // No data, placing the discriminant check first makes codegen simpler
+            0 => true,
+            1..=2 => false,
+            _ => (0..dataful.len() - 1).any(|i| {
+                if dataful[i]
+                    && let Some(idx) = dataful[i + 1..].iter().position(|v| *v)
+                {
+                    idx >= 2
+                } else {
+                    false
+                }
+            }),
+        }
+    } else {
+        true
+    };
+    let partial_cmp_def = MethodDef {
+        name: sym::partial_cmp,
+        generics: Bounds::empty(),
+        explicit_self: true,
+        nonself_args: vec![(self_ref(), sym::other)],
+        ret_ty,
+        attributes: thin_vec![cx.attr_word(sym::inline, span)],
+        fieldless_variants_strategy: FieldlessVariantsStrategy::Unify,
+        combine_substructure: combine_substructure(Box::new(|cx, span, substr| {
+            cs_partial_cmp(cx, span, substr, discr_then_data)
+        })),
+    };
+
+    let trait_def = TraitDef {
+        span,
+        path: path_std!(cmp::PartialOrd),
+        skip_path_as_bound: false,
+        needs_copy_as_bound_if_packed: true,
+        additional_bounds: vec![],
+        supports_unions: false,
+        methods: vec![partial_cmp_def],
+        associated_types: Vec::new(),
+        is_const,
+        is_staged_api_crate: cx.ecfg.features.staged_api(),
+    };
+    trait_def.expand(cx, mitem, item, push)
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=cs_partial_cmp | COMPLEXITY=42 | LINES=87 */
+
+fn cs_partial_cmp(
+    cx: &ExtCtxt<'_>,
+    span: Span,
+    substr: &Substructure<'_>,
+    discr_then_data: bool,
+) -> BlockOrExpr {
+    let test_id = Ident::new(sym::cmp, span);
+    let equal_path = cx.path_global(span, cx.std_path(&[sym::cmp, sym::Ordering, sym::Equal]));
+    let partial_cmp_path = cx.std_path(&[sym::cmp, sym::PartialOrd, sym::partial_cmp]);
+
+    // Builds:
+    //
+    // match ::core::cmp::PartialOrd::partial_cmp(&self.x, &other.x) {
+    //     ::core::option::Option::Some(::core::cmp::Ordering::Equal) =>
+    //         ::core::cmp::PartialOrd::partial_cmp(&self.y, &other.y),
+    //     cmp => cmp,
+    // }
+    let expr = cs_fold(
+        // foldr nests the if-elses correctly, leaving the first field
+        // as the outermost one, and the last as the innermost.
+        false,
+        cx,
+        span,
+        substr,
+        |cx, fold| match fold {
+            CsFold::Single(field) => {
+                let [other_expr] = &field.other_selflike_exprs[..] else {
+                    cx.dcx().span_bug(field.span, "not exactly 2 arguments in `derive(Ord)`");
+                };
+                let args = thin_vec![field.self_expr.clone(), other_expr.clone()];
+                cx.expr_call_global(field.span, partial_cmp_path.clone(), args)
+            }
+            CsFold::Combine(span, mut expr1, expr2) => {
+                // When the item is an enum, this expands to
+                // ```
+                // match (expr2) {
+                //     Some(Ordering::Equal) => expr1,
+                //     cmp => cmp
+                // }
+                // ```
+                // where `expr2` is `partial_cmp(self_discr, other_discr)`, and `expr1` is a `match`
+                // against the enum variants. This means that we begin by comparing the enum discriminants,
+                // before either inspecting their contents (if they match), or returning
+                // the `cmp::Ordering` of comparing the enum discriminants.
+                // ```
+                // match partial_cmp(self_discr, other_discr) {
+                //     Some(Ordering::Equal) => match (self, other)  {
+                //         (Self::A(self_0), Self::A(other_0)) => partial_cmp(self_0, other_0),
+                //         (Self::B(self_0), Self::B(other_0)) => partial_cmp(self_0, other_0),
+                //         _ => Some(Ordering::Equal)
+                //     }
+                //     cmp => cmp
+                // }
+                // ```
+                // If we have any certain enum layouts, flipping this results in better codegen
+                // ```
+                // match (self, other) {
+                //     (Self::A(self_0), Self::A(other_0)) => partial_cmp(self_0, other_0),
+                //     _ => partial_cmp(self_discr, other_discr)
+                // }
+                // ```
+                // Reference: https://github.com/rust-lang/rust/pull/103659#issuecomment-1328126354
+
+                if !discr_then_data
+                    && let ExprKind::Match(_, arms, _) = &mut expr1.kind
+                    && let Some(last) = arms.last_mut()
+                    && let PatKind::Wild = last.pat.kind
+                {
+                    last.body = Some(expr2);
+                    expr1
+                } else {
+                    let eq_arm = cx.arm(
+                        span,
+                        cx.pat_some(span, cx.pat_path(span, equal_path.clone())),
+                        expr1,
+                    );
+                    let neq_arm =
+                        cx.arm(span, cx.pat_ident(span, test_id), cx.expr_ident(span, test_id));
+                    cx.expr_match(span, expr2, thin_vec![eq_arm, neq_arm])
+                }
+            }
+            CsFold::Fieldless => cx.expr_some(span, cx.expr_path(equal_path.clone())),
+        },
+    );
+    BlockOrExpr::new_expr(expr)
+}

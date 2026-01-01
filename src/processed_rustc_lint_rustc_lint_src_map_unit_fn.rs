@@ -1,20 +1,98 @@
-/* FP:map_unit_fn.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_map_unit_fn_USE_0001
-/* FP:map_unit_fn.rs-0002 */ use crate :: rustc_complete :: { Expr , ExprKind , Stmt , StmtKind } ;
-/* FP:map_unit_fn.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_map_unit_fn_USE_0002
-/* FP:map_unit_fn.rs-0004 */ use crate :: rustc_complete :: ty :: { self } ;
-/* FP:map_unit_fn.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_map_unit_fn_USE_0003
-/* FP:map_unit_fn.rs-0006 */ use crate :: rustc_complete :: { declare_lint , declare_lint_pass } ;
-/* FP:map_unit_fn.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_map_unit_fn_USE_0004
-/* FP:map_unit_fn.rs-0008 */ use crate :: rustc_complete :: sym ;
-/* FP:map_unit_fn.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_map_unit_fn_USE_0005
-/* FP:map_unit_fn.rs-0010 */ use crate :: lints :: MappingToUnit ;
-/* FP:map_unit_fn.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_map_unit_fn_USE_0006
-/* FP:map_unit_fn.rs-0012 */ use crate :: { LateContext , LateLintPass , LintContext } ;
-/* FP:map_unit_fn.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_map_unit_fn_MACRO_0007
-/* FP:map_unit_fn.rs-0014 */ declare_lint ! { # [doc = " The `map_unit_fn` lint checks for `Iterator::map` receive"] # [doc = " a callable that returns `()`."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " fn foo(items: &mut Vec<u8>) {"] # [doc = "     items.sort();"] # [doc = " }"] # [doc = ""] # [doc = " fn main() {"] # [doc = "     let mut x: Vec<Vec<u8>> = vec!["] # [doc = "         vec![0, 2, 1],"] # [doc = "         vec![5, 4, 3],"] # [doc = "     ];"] # [doc = "     x.iter_mut().map(foo);"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Mapping to `()` is almost always a mistake."] pub MAP_UNIT_FN , Warn , "`Iterator::map` call that discard the iterator's values" }
-/* FP:map_unit_fn.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_map_unit_fn_MACRO_0008
-/* FP:map_unit_fn.rs-0016 */ declare_lint_pass ! (MapUnitFn => [MAP_UNIT_FN]) ;
-/* FP:map_unit_fn.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_map_unit_fn_IMPL_0009
-/* FP:map_unit_fn.rs-0018 */ impl < 'tcx > LateLintPass < 'tcx > for MapUnitFn { fn check_stmt (& mut self , cx : & LateContext < 'tcx > , stmt : & Stmt < '_ >) { let StmtKind :: Semi (expr) = stmt . kind else { return ; } ; let ExprKind :: MethodCall (path , receiver , [arg] , span) = expr . kind else { return ; } ; if path . ident . name != sym :: map || stmt . span . from_expansion () || receiver . span . from_expansion () || arg . span . from_expansion () || ! is_impl_slice (cx , receiver) || ! cx . typeck_results () . type_dependent_def_id (expr . hir_id) . is_some_and (| id | cx . tcx . is_diagnostic_item (sym :: IteratorMap , id)) { return ; } let (id , sig) = match * cx . typeck_results () . expr_ty (arg) . kind () { ty :: Closure (id , subs) => (id , subs . as_closure () . sig ()) , ty :: FnDef (id , _) => (id , cx . tcx . fn_sig (id) . skip_binder ()) , _ => return , } ; let ret_ty = sig . output () . skip_binder () ; if ! (ret_ty . is_unit () || ret_ty . is_never ()) { return ; } cx . emit_span_lint (MAP_UNIT_FN , span , MappingToUnit { function_label : cx . tcx . span_of_impl (id) . unwrap_or (arg . span) , argument_label : arg . span , map_label : span , suggestion : path . ident . span , } ,) ; } }
-/* FP:map_unit_fn.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_lint_src_map_unit_fn_FN_0010
-/* FP:map_unit_fn.rs-0020 */ fn is_impl_slice (cx : & LateContext < '_ > , expr : & Expr < '_ >) -> bool { if let Some (method_id) = cx . typeck_results () . type_dependent_def_id (expr . hir_id) && let Some (impl_id) = cx . tcx . impl_of_assoc (method_id) { return cx . tcx . type_of (impl_id) . skip_binder () . is_slice () ; } false }
+// SRC: ../rust/compiler/rustc_lint/src/map_unit_fn.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{Expr, ExprKind, Stmt, StmtKind};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::ty::{self};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{declare_lint, declare_lint_pass};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use crate::rustc_complete::sym;
+
+use crate::lints::MappingToUnit;
+use crate::{LateContext, LateLintPass, LintContext};
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=30 */
+
+declare_lint! {
+    /// The `map_unit_fn` lint checks for `Iterator::map` receive
+    /// a callable that returns `()`.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// fn foo(items: &mut Vec<u8>) {
+    ///     items.sort();
+    /// }
+    ///
+    /// fn main() {
+    ///     let mut x: Vec<Vec<u8>> = vec![
+    ///         vec![0, 2, 1],
+    ///         vec![5, 4, 3],
+    ///     ];
+    ///     x.iter_mut().map(foo);
+    /// }
+    /// ```
+    ///
+    /// {{produces}}
+    ///
+    /// ### Explanation
+    ///
+    /// Mapping to `()` is almost always a mistake.
+    pub MAP_UNIT_FN,
+    Warn,
+    "`Iterator::map` call that discard the iterator's values"
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=check_stmt | COMPLEXITY=21 | LINES=44 */
+
+declare_lint_pass!(MapUnitFn => [MAP_UNIT_FN]);
+
+impl<'tcx> LateLintPass<'tcx> for MapUnitFn {
+    fn check_stmt(&mut self, cx: &LateContext<'tcx>, stmt: &Stmt<'_>) {
+        let StmtKind::Semi(expr) = stmt.kind else {
+            return;
+        };
+        let ExprKind::MethodCall(path, receiver, [arg], span) = expr.kind else {
+            return;
+        };
+        if path.ident.name != sym::map
+            || stmt.span.from_expansion()
+            || receiver.span.from_expansion()
+            || arg.span.from_expansion()
+            || !is_impl_slice(cx, receiver)
+            || !cx
+                .typeck_results()
+                .type_dependent_def_id(expr.hir_id)
+                .is_some_and(|id| cx.tcx.is_diagnostic_item(sym::IteratorMap, id))
+        {
+            return;
+        }
+        let (id, sig) = match *cx.typeck_results().expr_ty(arg).kind() {
+            ty::Closure(id, subs) => (id, subs.as_closure().sig()),
+            ty::FnDef(id, _) => (id, cx.tcx.fn_sig(id).skip_binder()),
+            _ => return,
+        };
+        let ret_ty = sig.output().skip_binder();
+        if !(ret_ty.is_unit() || ret_ty.is_never()) {
+            return;
+        }
+        cx.emit_span_lint(
+            MAP_UNIT_FN,
+            span,
+            MappingToUnit {
+                function_label: cx.tcx.span_of_impl(id).unwrap_or(arg.span),
+                argument_label: arg.span,
+                map_label: span,
+                suggestion: path.ident.span,
+            },
+        );
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=is_impl_slice | COMPLEXITY=5 | LINES=9 */
+
+fn is_impl_slice(cx: &LateContext<'_>, expr: &Expr<'_>) -> bool {
+    if let Some(method_id) = cx.typeck_results().type_dependent_def_id(expr.hir_id)
+        && let Some(impl_id) = cx.tcx.impl_of_assoc(method_id)
+    {
+        return cx.tcx.type_of(impl_id).skip_binder().is_slice();
+    }
+    false
+}

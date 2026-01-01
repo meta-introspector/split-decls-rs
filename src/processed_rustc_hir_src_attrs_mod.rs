@@ -1,11 +1,55 @@
-/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_attrs_mod_USE_0001
-/* FP:mod.rs-0002 */ pub use data_structures :: * ;
-/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_attrs_mod_USE_0002
-/* FP:mod.rs-0004 */ pub use encode_cross_crate :: EncodeCrossCrate ;
-/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_attrs_mod_USE_0003
-/* FP:mod.rs-0006 */ pub use pretty_printing :: PrintAttribute ;
-/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_attrs_mod_MOD_0004
-/* FP:mod.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_attrs_mod_MOD_0005
-/* FP:mod.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_attrs_mod_MOD_0006
-/* FP:mod.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_attrs_mod_MACRO_0007
-/* FP:mod.rs-0014 */ # [doc = " Finds attributes in sequences of attributes by pattern matching."] # [doc = ""] # [doc = " A little like `matches` but for attributes."] # [doc = ""] # [doc = " ```rust,ignore (illustrative)"] # [doc = " // finds the repr attribute"] # [doc = " if let Some(r) = find_attr!(attrs, AttributeKind::Repr(r) => r) {"] # [doc = ""] # [doc = " }"] # [doc = ""] # [doc = " // checks if one has matched"] # [doc = " if find_attr!(attrs, AttributeKind::Repr(_)) {"] # [doc = ""] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " Often this requires you to first end up with a list of attributes."] # [doc = " A common way to get those is through `tcx.get_all_attrs(did)`"] # [macro_export] macro_rules ! find_attr { ($ attributes_list : expr , $ pattern : pat $ (if $ guard : expr) ?) => { { $ crate :: find_attr ! ($ attributes_list , $ pattern $ (if $ guard) ? => ()) . is_some () } } ; ($ attributes_list : expr , $ pattern : pat $ (if $ guard : expr) ? => $ e : expr) => { { 'done : { for i in $ attributes_list { let i : & crate :: rustc_hir :: Attribute = i ; match i { crate :: rustc_hir :: Attribute :: Parsed ($ pattern) $ (if $ guard) ? => { break 'done Some ($ e) ; } _ => { } } } None } } } ; }
+// SRC: ../rust/compiler/rustc_hir/src/attrs/mod.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=9 | LINES=23 */
+// Data structures for representing parsed attributes in the Rust compiler.
+// Formerly `rustc_attr_data_structures`.
+//
+// For detailed documentation about attribute processing,
+// see [rustc_attr_parsing](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_attr_parsing/index.html).
+
+pub use data_structures::*;
+pub use encode_cross_crate::EncodeCrossCrate;
+pub use pretty_printing::PrintAttribute;
+
+
+/// Finds attributes in sequences of attributes by pattern matching.
+///
+/// A little like `matches` but for attributes.
+///
+/// ```rust,ignore (illustrative)
+/// // finds the repr attribute
+/// if let Some(r) = find_attr!(attrs, AttributeKind::Repr(r) => r) {
+///
+/// }
+/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=6 | LINES=5 */
+///
+/// // checks if one has matched
+/// if find_attr!(attrs, AttributeKind::Repr(_)) {
+///
+/// }
+/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=30 | LINES=26 */
+/// ```
+///
+/// Often this requires you to first end up with a list of attributes.
+/// A common way to get those is through `tcx.get_all_attrs(did)`
+#[macro_export]
+macro_rules! find_attr {
+    ($attributes_list: expr, $pattern: pat $(if $guard: expr)?) => {{
+        $crate::find_attr!($attributes_list, $pattern $(if $guard)? => ()).is_some()
+    }};
+
+    ($attributes_list: expr, $pattern: pat $(if $guard: expr)? => $e: expr) => {{
+        'done: {
+            for i in $attributes_list {
+                let i: &crate::rustc_hir::Attribute = i;
+                match i {
+                    crate::rustc_hir::Attribute::Parsed($pattern) $(if $guard)? => {
+                        break 'done Some($e);
+                    }
+                    _ => {}
+                }
+            }
+
+            None
+        }
+    }};
+}

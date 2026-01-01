@@ -1,22 +1,147 @@
-/* FP:util.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_util_USE_0001
-/* FP:util.rs-0002 */ use crate :: rustc_data_structures :: fx :: FxHashSet ;
-/* FP:util.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_util_USE_0002
-/* FP:util.rs-0004 */ pub use crate :: rustc_complete :: ty :: elaborate :: * ;
-/* FP:util.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_util_USE_0003
-/* FP:util.rs-0006 */ use crate :: rustc_complete :: ty :: { self , TyCtxt } ;
-/* FP:util.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_util_USE_0004
-/* FP:util.rs-0008 */ use crate :: rustc_complete :: { Ident , Span } ;
-/* FP:util.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_util_USE_0005
-/* FP:util.rs-0010 */ use crate :: traits :: { self , Obligation , ObligationCauseCode , PredicateObligation } ;
-/* FP:util.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_util_FN_0006
-/* FP:util.rs-0012 */ pub fn anonymize_predicate < 'tcx > (tcx : TyCtxt < 'tcx > , pred : ty :: Predicate < 'tcx > ,) -> ty :: Predicate < 'tcx > { let new = tcx . anonymize_bound_vars (pred . kind ()) ; tcx . reuse_or_mk_predicate (pred , new) }
-/* FP:util.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_util_STRUCT_0007
-/* FP:util.rs-0014 */ pub struct PredicateSet < 'tcx > { tcx : TyCtxt < 'tcx > , set : FxHashSet < ty :: Predicate < 'tcx > > , }
-/* FP:util.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_util_IMPL_0008
-/* FP:util.rs-0016 */ impl < 'tcx > PredicateSet < 'tcx > { pub fn new (tcx : TyCtxt < 'tcx >) -> Self { Self { tcx , set : Default :: default () } } # [doc = " Adds a predicate to the set."] # [doc = ""] # [doc = " Returns whether the predicate was newly inserted. That is:"] # [doc = " - If the set did not previously contain this predicate, `true` is returned."] # [doc = " - If the set already contained this predicate, `false` is returned,"] # [doc = "   and the set is not modified: original predicate is not replaced,"] # [doc = "   and the predicate passed as argument is dropped."] pub fn insert (& mut self , pred : ty :: Predicate < 'tcx >) -> bool { self . set . insert (anonymize_predicate (self . tcx , pred)) } }
-/* FP:util.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_util_IMPL_0009
-/* FP:util.rs-0018 */ impl < 'tcx > Extend < ty :: Predicate < 'tcx > > for PredicateSet < 'tcx > { fn extend < I : IntoIterator < Item = ty :: Predicate < 'tcx > > > (& mut self , iter : I) { for pred in iter { self . insert (pred) ; } } fn extend_one (& mut self , pred : ty :: Predicate < 'tcx >) { self . insert (pred) ; } fn extend_reserve (& mut self , additional : usize) { Extend :: < ty :: Predicate < 'tcx > > :: extend_reserve (& mut self . set , additional) ; } }
-/* FP:util.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_util_IMPL_0010
-/* FP:util.rs-0020 */ # [doc = " For [`Obligation`], a sub-obligation is combined with the current obligation's"] # [doc = " param-env and cause code."] impl < 'tcx > Elaboratable < TyCtxt < 'tcx > > for PredicateObligation < 'tcx > { fn predicate (& self) -> ty :: Predicate < 'tcx > { self . predicate } fn child (& self , clause : ty :: Clause < 'tcx >) -> Self { Obligation { cause : self . cause . clone () , param_env : self . param_env , recursion_depth : 0 , predicate : clause . as_predicate () , } } fn child_with_derived_cause (& self , clause : ty :: Clause < 'tcx > , span : Span , parent_trait_pred : ty :: PolyTraitPredicate < 'tcx > , index : usize ,) -> Self { let cause = self . cause . clone () . derived_cause (parent_trait_pred , | derived | { ObligationCauseCode :: ImplDerived (Box :: new (traits :: ImplDerivedCause { derived , impl_or_alias_def_id : parent_trait_pred . def_id () , impl_def_predicate_index : Some (index) , span , })) }) ; Obligation { cause , param_env : self . param_env , recursion_depth : 0 , predicate : clause . as_predicate () , } } }
-/* FP:util.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_util_FN_0011
-/* FP:util.rs-0022 */ # [doc = " A specialized variant of `elaborate` that only elaborates trait references that may"] # [doc = " define the given associated item with the name `assoc_name`. It uses the"] # [doc = " `explicit_supertraits_containing_assoc_item` query to avoid enumerating super-predicates that"] # [doc = " aren't related to `assoc_item`. This is used when resolving types like `Self::Item` or"] # [doc = " `T::Item` and helps to avoid cycle errors (see e.g. #35237)."] pub fn transitive_bounds_that_define_assoc_item < 'tcx > (tcx : TyCtxt < 'tcx > , trait_refs : impl Iterator < Item = ty :: PolyTraitRef < 'tcx > > , assoc_name : Ident ,) -> impl Iterator < Item = ty :: PolyTraitRef < 'tcx > > { let mut seen = FxHashSet :: default () ; let mut stack : Vec < _ > = trait_refs . collect () ; std :: iter :: from_fn (move | | { while let Some (trait_ref) = stack . pop () { if ! seen . insert (tcx . anonymize_bound_vars (trait_ref)) { continue ; } stack . extend (tcx . explicit_supertraits_containing_assoc_item ((trait_ref . def_id () , assoc_name)) . iter_identity_copied () . map (| (clause , _) | clause . instantiate_supertrait (tcx , trait_ref)) . filter_map (| clause | clause . as_trait_clause ()) . filter (| clause | clause . polarity () == ty :: PredicatePolarity :: Positive) . map (| clause | clause . map_bound (| clause | clause . trait_ref)) ,) ; return Some (trait_ref) ; } None }) }
+// SRC: ../rust/compiler/rustc_infer/src/traits/util.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_data_structures::fx::FxHashSet;
+pub use crate::rustc_complete::ty::elaborate::*;
+use crate::rustc_complete::ty::{self, TyCtxt};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{Ident, Span};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+use crate::traits::{self, Obligation, ObligationCauseCode, PredicateObligation};
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=anonymize_predicate | COMPLEXITY=2 | LINES=8 */
+
+pub fn anonymize_predicate<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    pred: ty::Predicate<'tcx>,
+) -> ty::Predicate<'tcx> {
+    let new = tcx.anonymize_bound_vars(pred.kind());
+    tcx.reuse_or_mk_predicate(pred, new)
+}
+/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=PredicateSet | COMPLEXITY=2 | LINES=5 */
+
+pub struct PredicateSet<'tcx> {
+    tcx: TyCtxt<'tcx>,
+    set: FxHashSet<ty::Predicate<'tcx>>,
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new | COMPLEXITY=6 | LINES=27 */
+
+impl<'tcx> PredicateSet<'tcx> {
+    pub fn new(tcx: TyCtxt<'tcx>) -> Self {
+        Self { tcx, set: Default::default() }
+    }
+
+    /// Adds a predicate to the set.
+    ///
+    /// Returns whether the predicate was newly inserted. That is:
+    /// - If the set did not previously contain this predicate, `true` is returned.
+    /// - If the set already contained this predicate, `false` is returned,
+    ///   and the set is not modified: original predicate is not replaced,
+    ///   and the predicate passed as argument is dropped.
+    pub fn insert(&mut self, pred: ty::Predicate<'tcx>) -> bool {
+        // We have to be careful here because we want
+        //
+        //    for<'a> Foo<&'a i32>
+        //
+        // and
+        //
+        //    for<'b> Foo<&'b i32>
+        //
+        // to be considered equivalent. So normalize all late-bound
+        // regions before we throw things into the underlying set.
+        self.set.insert(anonymize_predicate(self.tcx, pred))
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=extend | COMPLEXITY=10 | LINES=16 */
+
+impl<'tcx> Extend<ty::Predicate<'tcx>> for PredicateSet<'tcx> {
+    fn extend<I: IntoIterator<Item = ty::Predicate<'tcx>>>(&mut self, iter: I) {
+        for pred in iter {
+            self.insert(pred);
+        }
+    }
+
+    fn extend_one(&mut self, pred: ty::Predicate<'tcx>) {
+        self.insert(pred);
+    }
+
+    fn extend_reserve(&mut self, additional: usize) {
+        Extend::<ty::Predicate<'tcx>>::extend_reserve(&mut self.set, additional);
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=predicate | COMPLEXITY=13 | LINES=40 */
+
+/// For [`Obligation`], a sub-obligation is combined with the current obligation's
+/// param-env and cause code.
+impl<'tcx> Elaboratable<TyCtxt<'tcx>> for PredicateObligation<'tcx> {
+    fn predicate(&self) -> ty::Predicate<'tcx> {
+        self.predicate
+    }
+
+    fn child(&self, clause: ty::Clause<'tcx>) -> Self {
+        Obligation {
+            cause: self.cause.clone(),
+            param_env: self.param_env,
+            recursion_depth: 0,
+            predicate: clause.as_predicate(),
+        }
+    }
+
+    fn child_with_derived_cause(
+        &self,
+        clause: ty::Clause<'tcx>,
+        span: Span,
+        parent_trait_pred: ty::PolyTraitPredicate<'tcx>,
+        index: usize,
+    ) -> Self {
+        let cause = self.cause.clone().derived_cause(parent_trait_pred, |derived| {
+            ObligationCauseCode::ImplDerived(Box::new(traits::ImplDerivedCause {
+                derived,
+                impl_or_alias_def_id: parent_trait_pred.def_id(),
+                impl_def_predicate_index: Some(index),
+                span,
+            }))
+        });
+        Obligation {
+            cause,
+            param_env: self.param_env,
+            recursion_depth: 0,
+            predicate: clause.as_predicate(),
+        }
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=transitive_bounds_that_define_assoc_item | COMPLEXITY=11 | LINES=35 */
+
+/// A specialized variant of `elaborate` that only elaborates trait references that may
+/// define the given associated item with the name `assoc_name`. It uses the
+/// `explicit_supertraits_containing_assoc_item` query to avoid enumerating super-predicates that
+/// aren't related to `assoc_item`. This is used when resolving types like `Self::Item` or
+/// `T::Item` and helps to avoid cycle errors (see e.g. #35237).
+pub fn transitive_bounds_that_define_assoc_item<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    trait_refs: impl Iterator<Item = ty::PolyTraitRef<'tcx>>,
+    assoc_name: Ident,
+) -> impl Iterator<Item = ty::PolyTraitRef<'tcx>> {
+    let mut seen = FxHashSet::default();
+    let mut stack: Vec<_> = trait_refs.collect();
+
+    std::iter::from_fn(move || {
+        while let Some(trait_ref) = stack.pop() {
+            if !seen.insert(tcx.anonymize_bound_vars(trait_ref)) {
+                continue;
+            }
+
+            stack.extend(
+                tcx.explicit_supertraits_containing_assoc_item((trait_ref.def_id(), assoc_name))
+                    .iter_identity_copied()
+                    .map(|(clause, _)| clause.instantiate_supertrait(tcx, trait_ref))
+                    .filter_map(|clause| clause.as_trait_clause())
+                    .filter(|clause| clause.polarity() == ty::PredicatePolarity::Positive)
+                    .map(|clause| clause.map_bound(|clause| clause.trait_ref)),
+            );
+
+            return Some(trait_ref);
+        }
+
+        None
+    })
+}

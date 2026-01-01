@@ -1,30 +1,173 @@
-/* FP:derive.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_derive_USE_0001
-/* FP:derive.rs-0002 */ use rustc_ast as ast ;
-/* FP:derive.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_derive_USE_0002
-/* FP:derive.rs-0004 */ use crate :: rustc_complete :: { GenericParamKind , ItemKind , MetaItemInner , MetaItemKind , StmtKind } ;
-/* FP:derive.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_derive_USE_0003
-/* FP:derive.rs-0006 */ use rustc_attr_parsing :: validate_attr ;
-/* FP:derive.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_derive_USE_0004
-/* FP:derive.rs-0008 */ use crate :: rustc_expand :: base :: { Annotatable , DeriveResolution , ExpandResult , ExtCtxt , Indeterminate , MultiItemModifier , } ;
-/* FP:derive.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_derive_USE_0005
-/* FP:derive.rs-0010 */ use crate :: rustc_feature :: AttributeTemplate ;
-/* FP:derive.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_derive_USE_0006
-/* FP:derive.rs-0012 */ use crate :: rustc_complete :: Session ;
-/* FP:derive.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_derive_USE_0007
-/* FP:derive.rs-0014 */ use crate :: rustc_complete :: { ErrorGuaranteed , Ident , Span , sym } ;
-/* FP:derive.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_derive_USE_0008
-/* FP:derive.rs-0016 */ use crate :: cfg_eval :: cfg_eval ;
-/* FP:derive.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_derive_USE_0009
-/* FP:derive.rs-0018 */ use crate :: errors ;
-/* FP:derive.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_derive_STRUCT_0010
-/* FP:derive.rs-0020 */ pub (crate) struct Expander { pub is_const : bool , }
-/* FP:derive.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_derive_IMPL_0011
-/* FP:derive.rs-0022 */ impl MultiItemModifier for Expander { fn expand (& self , ecx : & mut ExtCtxt < '_ > , span : Span , meta_item : & ast :: MetaItem , item : Annotatable , _ : bool ,) -> ExpandResult < Vec < Annotatable > , Annotatable > { let sess = ecx . sess ; if report_bad_target (sess , & item , span) . is_err () { return ExpandResult :: Ready (vec ! [item]) ; } let (sess , features) = (ecx . sess , ecx . ecfg . features) ; let result = ecx . resolver . resolve_derives (ecx . current_expansion . id , ecx . force_mode , & | | { let template = AttributeTemplate { list : Some (& ["Trait1, Trait2, ..."]) , .. Default :: default () } ; validate_attr :: check_builtin_meta_item (& sess . psess , meta_item , ast :: AttrStyle :: Outer , sym :: derive , template , true ,) ; let mut resolutions = match & meta_item . kind { MetaItemKind :: List (list) => { list . iter () . filter_map (| meta_item_inner | match meta_item_inner { MetaItemInner :: MetaItem (meta) => Some (meta) , MetaItemInner :: Lit (lit) => { report_unexpected_meta_item_lit (sess , lit) ; None } }) . map (| meta | { report_path_args (sess , meta) ; meta . path . clone () }) . map (| path | DeriveResolution { path , item : dummy_annotatable () , exts : None , is_const : self . is_const , }) . collect () } _ => vec ! [] , } ; match & mut resolutions [..] { [] => { } [first , others @ ..] => { first . item = cfg_eval (sess , features , item . clone () , ecx . current_expansion . lint_node_id ,) ; for other in others { other . item = first . item . clone () ; } } } resolutions }) ; match result { Ok (()) => ExpandResult :: Ready (vec ! [item]) , Err (Indeterminate) => ExpandResult :: Retry (item) , } } }
-/* FP:derive.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_derive_FN_0012
-/* FP:derive.rs-0024 */ fn dummy_annotatable () -> Annotatable { Annotatable :: GenericParam (ast :: GenericParam { id : ast :: DUMMY_NODE_ID , ident : Ident :: dummy () , attrs : Default :: default () , bounds : Default :: default () , is_placeholder : false , kind : GenericParamKind :: Lifetime , colon_span : None , }) }
-/* FP:derive.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_derive_FN_0013
-/* FP:derive.rs-0026 */ fn report_bad_target (sess : & Session , item : & Annotatable , span : Span ,) -> Result < () , ErrorGuaranteed > { let item_kind = match item { Annotatable :: Item (item) => Some (& item . kind) , Annotatable :: Stmt (stmt) => match & stmt . kind { StmtKind :: Item (item) => Some (& item . kind) , _ => None , } , _ => None , } ; let bad_target = ! matches ! (item_kind , Some (ItemKind :: Struct (..) | ItemKind :: Enum (..) | ItemKind :: Union (..))) ; if bad_target { return Err (sess . dcx () . emit_err (errors :: BadDeriveTarget { span , item : item . span () })) ; } Ok (()) }
-/* FP:derive.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_derive_FN_0014
-/* FP:derive.rs-0028 */ fn report_unexpected_meta_item_lit (sess : & Session , lit : & ast :: MetaItemLit) { let help = match lit . kind { ast :: LitKind :: Str (_ , ast :: StrStyle :: Cooked) if rustc_lexer :: is_ident (lit . symbol . as_str ()) => { errors :: BadDeriveLitHelp :: StrLit { sym : lit . symbol } } _ => errors :: BadDeriveLitHelp :: Other , } ; sess . dcx () . emit_err (errors :: BadDeriveLit { span : lit . span , help }) ; }
-/* FP:derive.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_derive_FN_0015
-/* FP:derive.rs-0030 */ fn report_path_args (sess : & Session , meta : & ast :: MetaItem) { let span = meta . span . with_lo (meta . path . span . hi ()) ; match meta . kind { MetaItemKind :: Word => { } MetaItemKind :: List (..) => { sess . dcx () . emit_err (errors :: DerivePathArgsList { span }) ; } MetaItemKind :: NameValue (..) => { sess . dcx () . emit_err (errors :: DerivePathArgsValue { span }) ; } } }
+// SRC: ../rust/compiler/rustc_builtin_macros/src/derive.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use rustc_ast as ast;
+use crate::rustc_complete::{GenericParamKind, ItemKind, MetaItemInner, MetaItemKind, StmtKind};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use rustc_attr_parsing::validate_attr;
+use crate::rustc_expand::base::{
+    Annotatable, DeriveResolution, ExpandResult, ExtCtxt, Indeterminate, MultiItemModifier,
+};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_feature::AttributeTemplate;
+use crate::rustc_complete::Session;
+use crate::rustc_complete::{ErrorGuaranteed, Ident, Span, sym};
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+use crate::cfg_eval::cfg_eval;
+use crate::errors;
+
+pub(crate) struct Expander {
+    pub is_const: bool,
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=expand | COMPLEXITY=41 | LINES=86 */
+
+impl MultiItemModifier for Expander {
+    fn expand(
+        &self,
+        ecx: &mut ExtCtxt<'_>,
+        span: Span,
+        meta_item: &ast::MetaItem,
+        item: Annotatable,
+        _: bool,
+    ) -> ExpandResult<Vec<Annotatable>, Annotatable> {
+        let sess = ecx.sess;
+        if report_bad_target(sess, &item, span).is_err() {
+            // We don't want to pass inappropriate targets to derive macros to avoid
+            // follow up errors, all other errors below are recoverable.
+            return ExpandResult::Ready(vec![item]);
+        }
+
+        let (sess, features) = (ecx.sess, ecx.ecfg.features);
+        let result =
+            ecx.resolver.resolve_derives(ecx.current_expansion.id, ecx.force_mode, &|| {
+                let template = AttributeTemplate {
+                    list: Some(&["Trait1, Trait2, ..."]),
+                    ..Default::default()
+                };
+                validate_attr::check_builtin_meta_item(
+                    &sess.psess,
+                    meta_item,
+                    ast::AttrStyle::Outer,
+                    sym::derive,
+                    template,
+                    true,
+                );
+
+                let mut resolutions = match &meta_item.kind {
+                    MetaItemKind::List(list) => {
+                        list.iter()
+                            .filter_map(|meta_item_inner| match meta_item_inner {
+                                MetaItemInner::MetaItem(meta) => Some(meta),
+                                MetaItemInner::Lit(lit) => {
+                                    // Reject `#[derive("Debug")]`.
+                                    report_unexpected_meta_item_lit(sess, lit);
+                                    None
+                                }
+                            })
+                            .map(|meta| {
+                                // Reject `#[derive(Debug = "value", Debug(abc))]`, but recover the
+                                // paths.
+                                report_path_args(sess, meta);
+                                meta.path.clone()
+                            })
+                            .map(|path| DeriveResolution {
+                                path,
+                                item: dummy_annotatable(),
+                                exts: None,
+                                is_const: self.is_const,
+                            })
+                            .collect()
+                    }
+                    _ => vec![],
+                };
+
+                // Do not configure or clone items unless necessary.
+                match &mut resolutions[..] {
+                    [] => {}
+                    [first, others @ ..] => {
+                        first.item = cfg_eval(
+                            sess,
+                            features,
+                            item.clone(),
+                            ecx.current_expansion.lint_node_id,
+                        );
+                        for other in others {
+                            other.item = first.item.clone();
+                        }
+                    }
+                }
+
+                resolutions
+            });
+
+        match result {
+            Ok(()) => ExpandResult::Ready(vec![item]),
+            Err(Indeterminate) => ExpandResult::Retry(item),
+        }
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=dummy_annotatable | COMPLEXITY=3 | LINES=13 */
+
+// The cheapest `Annotatable` to construct.
+fn dummy_annotatable() -> Annotatable {
+    Annotatable::GenericParam(ast::GenericParam {
+        id: ast::DUMMY_NODE_ID,
+        ident: Ident::dummy(),
+        attrs: Default::default(),
+        bounds: Default::default(),
+        is_placeholder: false,
+        kind: GenericParamKind::Lifetime,
+        colon_span: None,
+    })
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=report_bad_target | COMPLEXITY=15 | LINES=22 */
+
+fn report_bad_target(
+    sess: &Session,
+    item: &Annotatable,
+    span: Span,
+) -> Result<(), ErrorGuaranteed> {
+    let item_kind = match item {
+        Annotatable::Item(item) => Some(&item.kind),
+        Annotatable::Stmt(stmt) => match &stmt.kind {
+            StmtKind::Item(item) => Some(&item.kind),
+            _ => None,
+        },
+        _ => None,
+    };
+
+    let bad_target =
+        !matches!(item_kind, Some(ItemKind::Struct(..) | ItemKind::Enum(..) | ItemKind::Union(..)));
+    if bad_target {
+        return Err(sess.dcx().emit_err(errors::BadDeriveTarget { span, item: item.span() }));
+    }
+    Ok(())
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=report_unexpected_meta_item_lit | COMPLEXITY=11 | LINES=12 */
+
+fn report_unexpected_meta_item_lit(sess: &Session, lit: &ast::MetaItemLit) {
+    let help = match lit.kind {
+        ast::LitKind::Str(_, ast::StrStyle::Cooked)
+            if rustc_lexer::is_ident(lit.symbol.as_str()) =>
+        {
+            errors::BadDeriveLitHelp::StrLit { sym: lit.symbol }
+        }
+        _ => errors::BadDeriveLitHelp::Other,
+    };
+    sess.dcx().emit_err(errors::BadDeriveLit { span: lit.span, help });
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=report_path_args | COMPLEXITY=11 | LINES=14 */
+
+fn report_path_args(sess: &Session, meta: &ast::MetaItem) {
+    let span = meta.span.with_lo(meta.path.span.hi());
+
+    match meta.kind {
+        MetaItemKind::Word => {}
+        MetaItemKind::List(..) => {
+            sess.dcx().emit_err(errors::DerivePathArgsList { span });
+        }
+        MetaItemKind::NameValue(..) => {
+            sess.dcx().emit_err(errors::DerivePathArgsValue { span });
+        }
+    }
+}

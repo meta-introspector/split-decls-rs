@@ -1,36 +1,138 @@
-/* FP:diagnostic_impls.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_USE_0001
-/* FP:diagnostic_impls.rs-0002 */ use std :: borrow :: Cow ;
-/* FP:diagnostic_impls.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_USE_0002
-/* FP:diagnostic_impls.rs-0004 */ use crate :: rustc_abi :: TargetDataLayoutErrors ;
-/* FP:diagnostic_impls.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_USE_0003
-/* FP:diagnostic_impls.rs-0006 */ use crate :: rustc_error_messages :: { DiagArgValue , IntoDiagArg } ;
-/* FP:diagnostic_impls.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_USE_0004
-/* FP:diagnostic_impls.rs-0008 */ use rustc_macros :: Subdiagnostic ;
-/* FP:diagnostic_impls.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_USE_0005
-/* FP:diagnostic_impls.rs-0010 */ use crate :: rustc_complete :: { Span , Symbol } ;
-/* FP:diagnostic_impls.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_USE_0006
-/* FP:diagnostic_impls.rs-0012 */ use crate :: diagnostic :: DiagLocation ;
-/* FP:diagnostic_impls.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_USE_0007
-/* FP:diagnostic_impls.rs-0014 */ use crate :: { Diag , DiagCtxtHandle , Diagnostic , EmissionGuarantee , Level , Subdiagnostic , fluent_generated as fluent , } ;
-/* FP:diagnostic_impls.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_IMPL_0008
-/* FP:diagnostic_impls.rs-0016 */ impl IntoDiagArg for DiagLocation { fn into_diag_arg (self , _ : & mut Option < std :: path :: PathBuf >) -> DiagArgValue { DiagArgValue :: Str (Cow :: from (self . to_string ())) } }
-/* FP:diagnostic_impls.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_STRUCT_0009
-/* FP:diagnostic_impls.rs-0018 */ # [derive (Clone)] pub struct DiagSymbolList < S = Symbol > (Vec < S >) ;
-/* FP:diagnostic_impls.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_IMPL_0010
-/* FP:diagnostic_impls.rs-0020 */ impl < S > From < Vec < S > > for DiagSymbolList < S > { fn from (v : Vec < S >) -> Self { DiagSymbolList (v) } }
-/* FP:diagnostic_impls.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_IMPL_0011
-/* FP:diagnostic_impls.rs-0022 */ impl < S > FromIterator < S > for DiagSymbolList < S > { fn from_iter < T : IntoIterator < Item = S > > (iter : T) -> Self { iter . into_iter () . collect :: < Vec < _ > > () . into () } }
-/* FP:diagnostic_impls.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_IMPL_0012
-/* FP:diagnostic_impls.rs-0024 */ impl < S : std :: fmt :: Display > IntoDiagArg for DiagSymbolList < S > { fn into_diag_arg (self , _ : & mut Option < std :: path :: PathBuf >) -> DiagArgValue { DiagArgValue :: StrListSepByAnd (self . 0 . into_iter () . map (| sym | Cow :: Owned (format ! ("`{sym}`"))) . collect () ,) } }
-/* FP:diagnostic_impls.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_IMPL_0013
-/* FP:diagnostic_impls.rs-0026 */ impl < G : EmissionGuarantee > Diagnostic < '_ , G > for TargetDataLayoutErrors < '_ > { fn into_diag (self , dcx : DiagCtxtHandle < '_ > , level : Level) -> Diag < '_ , G > { match self { TargetDataLayoutErrors :: InvalidAddressSpace { addr_space , err , cause } => { Diag :: new (dcx , level , fluent :: errors_target_invalid_address_space) . with_arg ("addr_space" , addr_space) . with_arg ("cause" , cause) . with_arg ("err" , err) } TargetDataLayoutErrors :: InvalidBits { kind , bit , cause , err } => { Diag :: new (dcx , level , fluent :: errors_target_invalid_bits) . with_arg ("kind" , kind) . with_arg ("bit" , bit) . with_arg ("cause" , cause) . with_arg ("err" , err) } TargetDataLayoutErrors :: MissingAlignment { cause } => { Diag :: new (dcx , level , fluent :: errors_target_missing_alignment) . with_arg ("cause" , cause) } TargetDataLayoutErrors :: InvalidAlignment { cause , err } => { Diag :: new (dcx , level , fluent :: errors_target_invalid_alignment) . with_arg ("cause" , cause) . with_arg ("err_kind" , err . diag_ident ()) . with_arg ("align" , err . align ()) } TargetDataLayoutErrors :: InconsistentTargetArchitecture { dl , target } => { Diag :: new (dcx , level , fluent :: errors_target_inconsistent_architecture) . with_arg ("dl" , dl) . with_arg ("target" , target) } TargetDataLayoutErrors :: InconsistentTargetPointerWidth { pointer_size , target } => { Diag :: new (dcx , level , fluent :: errors_target_inconsistent_pointer_width) . with_arg ("pointer_size" , pointer_size) . with_arg ("target" , target) } TargetDataLayoutErrors :: InvalidBitsSize { err } => { Diag :: new (dcx , level , fluent :: errors_target_invalid_bits_size) . with_arg ("err" , err) } TargetDataLayoutErrors :: UnknownPointerSpecification { err } => { Diag :: new (dcx , level , fluent :: errors_target_invalid_datalayout_pointer_spec) . with_arg ("err" , err) } } } }
-/* FP:diagnostic_impls.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_STRUCT_0014
-/* FP:diagnostic_impls.rs-0028 */ # [doc = " Utility struct used to apply a single label while highlighting multiple spans"] pub struct SingleLabelManySpans { pub spans : Vec < Span > , pub label : & 'static str , }
-/* FP:diagnostic_impls.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_IMPL_0015
-/* FP:diagnostic_impls.rs-0030 */ impl Subdiagnostic for SingleLabelManySpans { fn add_to_diag < G : EmissionGuarantee > (self , diag : & mut Diag < '_ , G >) { diag . span_labels (self . spans , self . label) ; } }
-/* FP:diagnostic_impls.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_STRUCT_0016
-/* FP:diagnostic_impls.rs-0032 */ # [derive (Subdiagnostic)] # [label (errors_expected_lifetime_parameter)] pub struct ExpectedLifetimeParameter { # [primary_span] pub span : Span , pub count : usize , }
-/* FP:diagnostic_impls.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_STRUCT_0017
-/* FP:diagnostic_impls.rs-0034 */ # [derive (Subdiagnostic)] # [suggestion (errors_indicate_anonymous_lifetime , code = "{suggestion}" , style = "verbose")] pub struct IndicateAnonymousLifetime { # [primary_span] pub span : Span , pub count : usize , pub suggestion : String , }
-/* FP:diagnostic_impls.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_errors_src_diagnostic_impls_STRUCT_0018
-/* FP:diagnostic_impls.rs-0036 */ # [derive (Subdiagnostic)] pub struct ElidedLifetimeInPathSubdiag { # [subdiagnostic] pub expected : ExpectedLifetimeParameter , # [subdiagnostic] pub indicate : Option < IndicateAnonymousLifetime > , }
+// SRC: ../rust/compiler/rustc_errors/src/diagnostic_impls.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use std::borrow::Cow;
+
+use crate::rustc_abi::TargetDataLayoutErrors;
+use crate::rustc_error_messages::{DiagArgValue, IntoDiagArg};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use rustc_macros::Subdiagnostic;
+use crate::rustc_complete::{Span, Symbol};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+
+use crate::diagnostic::DiagLocation;
+use crate::{
+    Diag, DiagCtxtHandle, Diagnostic, EmissionGuarantee, Level, Subdiagnostic,
+    fluent_generated as fluent,
+};
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=5 | LINES=6 */
+
+impl IntoDiagArg for DiagLocation {
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
+        DiagArgValue::Str(Cow::from(self.to_string()))
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=DiagSymbolList | COMPLEXITY=5 | LINES=9 */
+
+#[derive(Clone)]
+pub struct DiagSymbolList<S = Symbol>(Vec<S>);
+
+impl<S> From<Vec<S>> for DiagSymbolList<S> {
+    fn from(v: Vec<S>) -> Self {
+        DiagSymbolList(v)
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=from_iter | COMPLEXITY=5 | LINES=6 */
+
+impl<S> FromIterator<S> for DiagSymbolList<S> {
+    fn from_iter<T: IntoIterator<Item = S>>(iter: T) -> Self {
+        iter.into_iter().collect::<Vec<_>>().into()
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=6 | LINES=8 */
+
+impl<S: std::fmt::Display> IntoDiagArg for DiagSymbolList<S> {
+    fn into_diag_arg(self, _: &mut Option<std::path::PathBuf>) -> DiagArgValue {
+        DiagArgValue::StrListSepByAnd(
+            self.0.into_iter().map(|sym| Cow::Owned(format!("`{sym}`"))).collect(),
+        )
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=into_diag | COMPLEXITY=29 | LINES=47 */
+
+impl<G: EmissionGuarantee> Diagnostic<'_, G> for TargetDataLayoutErrors<'_> {
+    fn into_diag(self, dcx: DiagCtxtHandle<'_>, level: Level) -> Diag<'_, G> {
+        match self {
+            TargetDataLayoutErrors::InvalidAddressSpace { addr_space, err, cause } => {
+                Diag::new(dcx, level, fluent::errors_target_invalid_address_space)
+                    .with_arg("addr_space", addr_space)
+                    .with_arg("cause", cause)
+                    .with_arg("err", err)
+            }
+            TargetDataLayoutErrors::InvalidBits { kind, bit, cause, err } => {
+                Diag::new(dcx, level, fluent::errors_target_invalid_bits)
+                    .with_arg("kind", kind)
+                    .with_arg("bit", bit)
+                    .with_arg("cause", cause)
+                    .with_arg("err", err)
+            }
+            TargetDataLayoutErrors::MissingAlignment { cause } => {
+                Diag::new(dcx, level, fluent::errors_target_missing_alignment)
+                    .with_arg("cause", cause)
+            }
+            TargetDataLayoutErrors::InvalidAlignment { cause, err } => {
+                Diag::new(dcx, level, fluent::errors_target_invalid_alignment)
+                    .with_arg("cause", cause)
+                    .with_arg("err_kind", err.diag_ident())
+                    .with_arg("align", err.align())
+            }
+            TargetDataLayoutErrors::InconsistentTargetArchitecture { dl, target } => {
+                Diag::new(dcx, level, fluent::errors_target_inconsistent_architecture)
+                    .with_arg("dl", dl)
+                    .with_arg("target", target)
+            }
+            TargetDataLayoutErrors::InconsistentTargetPointerWidth { pointer_size, target } => {
+                Diag::new(dcx, level, fluent::errors_target_inconsistent_pointer_width)
+                    .with_arg("pointer_size", pointer_size)
+                    .with_arg("target", target)
+            }
+            TargetDataLayoutErrors::InvalidBitsSize { err } => {
+                Diag::new(dcx, level, fluent::errors_target_invalid_bits_size).with_arg("err", err)
+            }
+            TargetDataLayoutErrors::UnknownPointerSpecification { err } => {
+                Diag::new(dcx, level, fluent::errors_target_invalid_datalayout_pointer_spec)
+                    .with_arg("err", err)
+            }
+        }
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=STRUCT | NAME=SingleLabelManySpans | COMPLEXITY=4 | LINES=6 */
+
+/// Utility struct used to apply a single label while highlighting multiple spans
+pub struct SingleLabelManySpans {
+    pub spans: Vec<Span>,
+    pub label: &'static str,
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=add_to_diag | COMPLEXITY=5 | LINES=5 */
+impl Subdiagnostic for SingleLabelManySpans {
+    fn add_to_diag<G: EmissionGuarantee>(self, diag: &mut Diag<'_, G>) {
+        diag.span_labels(self.spans, self.label);
+    }
+}
+/* AST_META: AST_ID=11 | TYPE=STRUCT | NAME=ExpectedLifetimeParameter | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Subdiagnostic)]
+#[label(errors_expected_lifetime_parameter)]
+pub struct ExpectedLifetimeParameter {
+    #[primary_span]
+    pub span: Span,
+    pub count: usize,
+}
+/* AST_META: AST_ID=12 | TYPE=STRUCT | NAME=IndicateAnonymousLifetime | COMPLEXITY=3 | LINES=9 */
+
+#[derive(Subdiagnostic)]
+#[suggestion(errors_indicate_anonymous_lifetime, code = "{suggestion}", style = "verbose")]
+pub struct IndicateAnonymousLifetime {
+    #[primary_span]
+    pub span: Span,
+    pub count: usize,
+    pub suggestion: String,
+}
+/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=ElidedLifetimeInPathSubdiag | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Subdiagnostic)]
+pub struct ElidedLifetimeInPathSubdiag {
+    #[subdiagnostic]
+    pub expected: ExpectedLifetimeParameter,
+    #[subdiagnostic]
+    pub indicate: Option<IndicateAnonymousLifetime>,
+}

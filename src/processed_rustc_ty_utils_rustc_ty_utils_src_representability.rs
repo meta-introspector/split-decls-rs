@@ -1,26 +1,130 @@
-/* FP:representability.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_representability_USE_0001
-/* FP:representability.rs-0002 */ use crate :: rustc_complete :: def :: DefKind ;
-/* FP:representability.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_representability_USE_0002
-/* FP:representability.rs-0004 */ use crate :: rustc_index :: bit_set :: DenseBitSet ;
-/* FP:representability.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_representability_USE_0003
-/* FP:representability.rs-0006 */ use crate :: rustc_complete :: bug ;
-/* FP:representability.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_representability_USE_0004
-/* FP:representability.rs-0008 */ use crate :: rustc_complete :: query :: Providers ;
-/* FP:representability.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_representability_USE_0005
-/* FP:representability.rs-0010 */ use crate :: rustc_complete :: ty :: { self , Representability , Ty , TyCtxt } ;
-/* FP:representability.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_representability_USE_0006
-/* FP:representability.rs-0012 */ use crate :: rustc_complete :: def_id :: LocalDefId ;
-/* FP:representability.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_representability_FN_0007
-/* FP:representability.rs-0014 */ pub (crate) fn provide (providers : & mut Providers) { * providers = Providers { representability , representability_adt_ty , params_in_repr , .. * providers } ; }
-/* FP:representability.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_representability_MACRO_0008
-/* FP:representability.rs-0016 */ macro_rules ! rtry { ($ e : expr) => { match $ e { e @ Representability :: Infinite (_) => return e , Representability :: Representable => { } } } ; }
-/* FP:representability.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_representability_FN_0009
-/* FP:representability.rs-0018 */ fn representability (tcx : TyCtxt < '_ > , def_id : LocalDefId) -> Representability { match tcx . def_kind (def_id) { DefKind :: Struct | DefKind :: Union | DefKind :: Enum => { for variant in tcx . adt_def (def_id) . variants () { for field in variant . fields . iter () { rtry ! (tcx . representability (field . did . expect_local ())) ; } } Representability :: Representable } DefKind :: Field => representability_ty (tcx , tcx . type_of (def_id) . instantiate_identity ()) , def_kind => bug ! ("unexpected {def_kind:?}") , } }
-/* FP:representability.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_representability_FN_0010
-/* FP:representability.rs-0020 */ fn representability_ty < 'tcx > (tcx : TyCtxt < 'tcx > , ty : Ty < 'tcx >) -> Representability { match * ty . kind () { ty :: Adt (..) => tcx . representability_adt_ty (ty) , ty :: Array (ty , _) => representability_ty (tcx , ty) , ty :: Tuple (tys) => { for ty in tys { rtry ! (representability_ty (tcx , ty)) ; } Representability :: Representable } _ => Representability :: Representable , } }
-/* FP:representability.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_representability_FN_0011
-/* FP:representability.rs-0022 */ fn representability_adt_ty < 'tcx > (tcx : TyCtxt < 'tcx > , ty : Ty < 'tcx >) -> Representability { let ty :: Adt (adt , args) = ty . kind () else { bug ! ("expected adt") } ; if let Some (def_id) = adt . did () . as_local () { rtry ! (tcx . representability (def_id)) ; } let params_in_repr = tcx . params_in_repr (adt . did ()) ; for (i , arg) in args . iter () . enumerate () { if let ty :: GenericArgKind :: Type (ty) = arg . kind () { if params_in_repr . contains (i as u32) { rtry ! (representability_ty (tcx , ty)) ; } } } Representability :: Representable }
-/* FP:representability.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_representability_FN_0012
-/* FP:representability.rs-0024 */ fn params_in_repr (tcx : TyCtxt < '_ > , def_id : LocalDefId) -> DenseBitSet < u32 > { let adt_def = tcx . adt_def (def_id) ; let generics = tcx . generics_of (def_id) ; let mut params_in_repr = DenseBitSet :: new_empty (generics . own_params . len ()) ; for variant in adt_def . variants () { for field in variant . fields . iter () { params_in_repr_ty (tcx , tcx . type_of (field . did) . instantiate_identity () , & mut params_in_repr ,) ; } } params_in_repr }
-/* FP:representability.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ty_utils_src_representability_FN_0013
-/* FP:representability.rs-0026 */ fn params_in_repr_ty < 'tcx > (tcx : TyCtxt < 'tcx > , ty : Ty < 'tcx > , params_in_repr : & mut DenseBitSet < u32 >) { match * ty . kind () { ty :: Adt (adt , args) => { let inner_params_in_repr = tcx . params_in_repr (adt . did ()) ; for (i , arg) in args . iter () . enumerate () { if let ty :: GenericArgKind :: Type (ty) = arg . kind () { if inner_params_in_repr . contains (i as u32) { params_in_repr_ty (tcx , ty , params_in_repr) ; } } } } ty :: Array (ty , _) => params_in_repr_ty (tcx , ty , params_in_repr) , ty :: Tuple (tys) => tys . iter () . for_each (| ty | params_in_repr_ty (tcx , ty , params_in_repr)) , ty :: Param (param) => { params_in_repr . insert (param . index) ; } _ => { } } }
+// SRC: ../rust/compiler/rustc_ty_utils/src/representability.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_index::bit_set::DenseBitSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, Representability, Ty, TyCtxt};
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
+use crate::rustc_complete::def_id::LocalDefId;
+
+pub(crate) fn provide(providers: &mut Providers) {
+    *providers =
+        Providers { representability, representability_adt_ty, params_in_repr, ..*providers };
+}
+/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=13 | LINES=9 */
+
+macro_rules! rtry {
+    ($e:expr) => {
+        match $e {
+            e @ Representability::Infinite(_) => return e,
+            Representability::Representable => {}
+        }
+    };
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=representability | COMPLEXITY=15 | LINES=15 */
+
+fn representability(tcx: TyCtxt<'_>, def_id: LocalDefId) -> Representability {
+    match tcx.def_kind(def_id) {
+        DefKind::Struct | DefKind::Union | DefKind::Enum => {
+            for variant in tcx.adt_def(def_id).variants() {
+                for field in variant.fields.iter() {
+                    rtry!(tcx.representability(field.did.expect_local()));
+                }
+            }
+            Representability::Representable
+        }
+        DefKind::Field => representability_ty(tcx, tcx.type_of(def_id).instantiate_identity()),
+        def_kind => bug!("unexpected {def_kind:?}"),
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=representability_ty | COMPLEXITY=11 | LINES=15 */
+
+fn representability_ty<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> Representability {
+    match *ty.kind() {
+        ty::Adt(..) => tcx.representability_adt_ty(ty),
+        // FIXME(#11924) allow zero-length arrays?
+        ty::Array(ty, _) => representability_ty(tcx, ty),
+        ty::Tuple(tys) => {
+            for ty in tys {
+                rtry!(representability_ty(tcx, ty));
+            }
+            Representability::Representable
+        }
+        _ => Representability::Representable,
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=representability_adt_ty | COMPLEXITY=22 | LINES=34 */
+
+/*
+The reason for this being a separate query is very subtle:
+Consider this infinitely sized struct: `struct Foo(Box<Foo>, Bar<Foo>)`:
+When calling representability(Foo), a query cycle will occur:
+  representability(Foo)
+    -> representability_adt_ty(Bar<Foo>)
+    -> representability(Foo)
+For the diagnostic output (in `Value::from_cycle_error`), we want to detect that
+the `Foo` in the *second* field of the struct is culpable. This requires
+traversing the HIR of the struct and calling `params_in_repr(Bar)`. But we can't
+call params_in_repr for a given type unless it is known to be representable.
+params_in_repr will cycle/panic on infinitely sized types. Looking at the query
+cycle above, we know that `Bar` is representable because
+representability_adt_ty(Bar<..>) is in the cycle and representability(Bar) is
+*not* in the cycle.
+*/
+fn representability_adt_ty<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> Representability {
+    let ty::Adt(adt, args) = ty.kind() else { bug!("expected adt") };
+    if let Some(def_id) = adt.did().as_local() {
+        rtry!(tcx.representability(def_id));
+    }
+    // At this point, we know that the item of the ADT type is representable;
+    // but the type parameters may cause a cycle with an upstream type
+    let params_in_repr = tcx.params_in_repr(adt.did());
+    for (i, arg) in args.iter().enumerate() {
+        if let ty::GenericArgKind::Type(ty) = arg.kind() {
+            if params_in_repr.contains(i as u32) {
+                rtry!(representability_ty(tcx, ty));
+            }
+        }
+    }
+    Representability::Representable
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=params_in_repr | COMPLEXITY=9 | LINES=16 */
+
+fn params_in_repr(tcx: TyCtxt<'_>, def_id: LocalDefId) -> DenseBitSet<u32> {
+    let adt_def = tcx.adt_def(def_id);
+    let generics = tcx.generics_of(def_id);
+    let mut params_in_repr = DenseBitSet::new_empty(generics.own_params.len());
+    for variant in adt_def.variants() {
+        for field in variant.fields.iter() {
+            params_in_repr_ty(
+                tcx,
+                tcx.type_of(field.did).instantiate_identity(),
+                &mut params_in_repr,
+            );
+        }
+    }
+    params_in_repr
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=params_in_repr_ty | COMPLEXITY=19 | LINES=21 */
+
+fn params_in_repr_ty<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>, params_in_repr: &mut DenseBitSet<u32>) {
+    match *ty.kind() {
+        ty::Adt(adt, args) => {
+            let inner_params_in_repr = tcx.params_in_repr(adt.did());
+            for (i, arg) in args.iter().enumerate() {
+                if let ty::GenericArgKind::Type(ty) = arg.kind() {
+                    if inner_params_in_repr.contains(i as u32) {
+                        params_in_repr_ty(tcx, ty, params_in_repr);
+                    }
+                }
+            }
+        }
+        ty::Array(ty, _) => params_in_repr_ty(tcx, ty, params_in_repr),
+        ty::Tuple(tys) => tys.iter().for_each(|ty| params_in_repr_ty(tcx, ty, params_in_repr)),
+        ty::Param(param) => {
+            params_in_repr.insert(param.index);
+        }
+        _ => {}
+    }
+}

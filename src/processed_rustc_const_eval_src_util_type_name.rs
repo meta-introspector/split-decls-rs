@@ -1,24 +1,218 @@
-/* FP:type_name.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_type_name_USE_0001
-/* FP:type_name.rs-0002 */ use std :: fmt :: Write ;
-/* FP:type_name.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_type_name_USE_0002
-/* FP:type_name.rs-0004 */ use crate :: rustc_data_structures :: intern :: Interned ;
-/* FP:type_name.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_type_name_USE_0003
-/* FP:type_name.rs-0006 */ use crate :: rustc_complete :: def_id :: { CrateNum , DefId } ;
-/* FP:type_name.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_type_name_USE_0004
-/* FP:type_name.rs-0008 */ use crate :: rustc_complete :: definitions :: DisambiguatedDefPathData ;
-/* FP:type_name.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_type_name_USE_0005
-/* FP:type_name.rs-0010 */ use crate :: rustc_complete :: bug ;
-/* FP:type_name.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_type_name_USE_0006
-/* FP:type_name.rs-0012 */ use crate :: rustc_complete :: ty :: print :: { PrettyPrinter , PrintError , Printer } ;
-/* FP:type_name.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_type_name_USE_0007
-/* FP:type_name.rs-0014 */ use crate :: rustc_complete :: ty :: { self , GenericArg , Ty , TyCtxt } ;
-/* FP:type_name.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_type_name_STRUCT_0008
-/* FP:type_name.rs-0016 */ struct TypeNamePrinter < 'tcx > { tcx : TyCtxt < 'tcx > , path : String , }
-/* FP:type_name.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_type_name_IMPL_0009
-/* FP:type_name.rs-0018 */ impl < 'tcx > Printer < 'tcx > for TypeNamePrinter < 'tcx > { fn tcx (& self) -> TyCtxt < 'tcx > { self . tcx } fn print_region (& mut self , _region : ty :: Region < '_ >) -> Result < () , PrintError > { write ! (self , "'_") } fn print_type (& mut self , ty : Ty < 'tcx >) -> Result < () , PrintError > { match * ty . kind () { ty :: Bool | ty :: Char | ty :: Int (_) | ty :: Uint (_) | ty :: Float (_) | ty :: Str | ty :: Pat (_ , _) | ty :: Array (_ , _) | ty :: Slice (_) | ty :: RawPtr (_ , _) | ty :: Ref (_ , _ , _) | ty :: FnPtr (..) | ty :: Never | ty :: Tuple (_) | ty :: Dynamic (_ , _ , _) | ty :: UnsafeBinder (_) => self . pretty_print_type (ty) , ty :: Param (_) | ty :: Bound (..) | ty :: Placeholder (_) | ty :: Infer (_) | ty :: Error (_) => { write ! (self , "_") ? ; Ok (()) } ty :: Adt (ty :: AdtDef (Interned (& ty :: AdtDefData { did : def_id , .. } , _)) , args) | ty :: FnDef (def_id , args) | ty :: Alias (ty :: Projection | ty :: Opaque , ty :: AliasTy { def_id , args , .. }) | ty :: Closure (def_id , args) | ty :: CoroutineClosure (def_id , args) | ty :: Coroutine (def_id , args) => self . print_def_path (def_id , args) , ty :: Foreign (def_id) => self . print_def_path (def_id , & []) , ty :: Alias (ty :: Free , _) => bug ! ("type_name: unexpected free alias") , ty :: Alias (ty :: Inherent , _) => bug ! ("type_name: unexpected inherent projection") , ty :: CoroutineWitness (..) => bug ! ("type_name: unexpected `CoroutineWitness`") , } } fn print_const (& mut self , ct : ty :: Const < 'tcx >) -> Result < () , PrintError > { self . pretty_print_const (ct , false) } fn print_dyn_existential (& mut self , predicates : & 'tcx ty :: List < ty :: PolyExistentialPredicate < 'tcx > > ,) -> Result < () , PrintError > { self . pretty_print_dyn_existential (predicates) } fn print_crate_name (& mut self , cnum : CrateNum) -> Result < () , PrintError > { self . path . push_str (self . tcx . crate_name (cnum) . as_str ()) ; Ok (()) } fn print_path_with_qualified (& mut self , self_ty : Ty < 'tcx > , trait_ref : Option < ty :: TraitRef < 'tcx > > ,) -> Result < () , PrintError > { self . pretty_print_path_with_qualified (self_ty , trait_ref) } fn print_path_with_impl (& mut self , print_prefix : impl FnOnce (& mut Self) -> Result < () , PrintError > , self_ty : Ty < 'tcx > , trait_ref : Option < ty :: TraitRef < 'tcx > > ,) -> Result < () , PrintError > { self . pretty_print_path_with_impl (| cx | { print_prefix (cx) ? ; cx . path . push_str ("::") ; Ok (()) } , self_ty , trait_ref ,) } fn print_path_with_simple (& mut self , print_prefix : impl FnOnce (& mut Self) -> Result < () , PrintError > , disambiguated_data : & DisambiguatedDefPathData ,) -> Result < () , PrintError > { print_prefix (self) ? ; write ! (self . path , "::{}" , disambiguated_data . data) . unwrap () ; Ok (()) } fn print_path_with_generic_args (& mut self , print_prefix : impl FnOnce (& mut Self) -> Result < () , PrintError > , args : & [GenericArg < 'tcx >] ,) -> Result < () , PrintError > { print_prefix (self) ? ; if ! args . is_empty () { self . generic_delimiters (| cx | cx . comma_sep (args . iter () . copied ())) } else { Ok (()) } } fn print_coroutine_with_kind (& mut self , def_id : DefId , parent_args : & 'tcx [GenericArg < 'tcx >] , kind : Ty < 'tcx > ,) -> Result < () , PrintError > { self . print_def_path (def_id , parent_args) ? ; let ty :: Coroutine (_ , args) = self . tcx . type_of (def_id) . instantiate_identity () . kind () else { return Ok (()) ; } ; let default_kind = args . as_coroutine () . kind_ty () ; match kind . to_opt_closure_kind () { _ if kind == default_kind => { } Some (ty :: ClosureKind :: Fn) | None => { } Some (ty :: ClosureKind :: FnMut) => self . path . push_str ("::{{call_mut}}") , Some (ty :: ClosureKind :: FnOnce) => self . path . push_str ("::{{call_once}}") , } Ok (()) } }
-/* FP:type_name.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_type_name_IMPL_0010
-/* FP:type_name.rs-0020 */ impl < 'tcx > PrettyPrinter < 'tcx > for TypeNamePrinter < 'tcx > { fn should_print_optional_region (& self , region : ty :: Region < '_ >) -> bool { let kind = region . kind () ; match region . kind () { ty :: ReErased | ty :: ReEarlyParam (_) | ty :: ReStatic => false , ty :: ReBound (..) => true , _ => panic ! ("type_name unhandled region: {kind:?}") , } } fn generic_delimiters (& mut self , f : impl FnOnce (& mut Self) -> Result < () , PrintError > ,) -> Result < () , PrintError > { write ! (self , "<") ? ; f (self) ? ; write ! (self , ">") ? ; Ok (()) } fn should_print_verbose (& self) -> bool { false } }
-/* FP:type_name.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_type_name_IMPL_0011
-/* FP:type_name.rs-0022 */ impl Write for TypeNamePrinter < '_ > { fn write_str (& mut self , s : & str) -> std :: fmt :: Result { self . path . push_str (s) ; Ok (()) } }
-/* FP:type_name.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_const_eval_src_util_type_name_FN_0012
-/* FP:type_name.rs-0024 */ pub fn type_name < 'tcx > (tcx : TyCtxt < 'tcx > , ty : Ty < 'tcx >) -> String { let mut p = TypeNamePrinter { tcx , path : String :: new () } ; p . print_type (ty) . unwrap () ; p . path }
+// SRC: ../rust/compiler/rustc_const_eval/src/util/type_name.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use std::fmt::Write;
+
+use crate::rustc_data_structures::intern::Interned;
+use crate::rustc_complete::def_id::{CrateNum, DefId};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_complete::definitions::DisambiguatedDefPathData;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::print::{PrettyPrinter, PrintError, Printer};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::ty::{self, GenericArg, Ty, TyCtxt};
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=TypeNamePrinter | COMPLEXITY=2 | LINES=5 */
+
+struct TypeNamePrinter<'tcx> {
+    tcx: TyCtxt<'tcx>,
+    path: String,
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=53 | LINES=151 */
+
+impl<'tcx> Printer<'tcx> for TypeNamePrinter<'tcx> {
+    fn tcx(&self) -> TyCtxt<'tcx> {
+        self.tcx
+    }
+
+    fn print_region(&mut self, _region: ty::Region<'_>) -> Result<(), PrintError> {
+        // FIXME: most regions have been erased by the time this code runs.
+        // Just printing `'_` is a bit hacky but gives mostly good results, and
+        // doing better is difficult. See `should_print_optional_region`.
+        write!(self, "'_")
+    }
+
+    fn print_type(&mut self, ty: Ty<'tcx>) -> Result<(), PrintError> {
+        match *ty.kind() {
+            // Types without identity.
+            ty::Bool
+            | ty::Char
+            | ty::Int(_)
+            | ty::Uint(_)
+            | ty::Float(_)
+            | ty::Str
+            | ty::Pat(_, _)
+            | ty::Array(_, _)
+            | ty::Slice(_)
+            | ty::RawPtr(_, _)
+            | ty::Ref(_, _, _)
+            | ty::FnPtr(..)
+            | ty::Never
+            | ty::Tuple(_)
+            | ty::Dynamic(_, _, _)
+            | ty::UnsafeBinder(_) => self.pretty_print_type(ty),
+
+            // Placeholders (all printed as `_` to uniformize them).
+            ty::Param(_) | ty::Bound(..) | ty::Placeholder(_) | ty::Infer(_) | ty::Error(_) => {
+                write!(self, "_")?;
+                Ok(())
+            }
+
+            // Types with identity (print the module path).
+            ty::Adt(ty::AdtDef(Interned(&ty::AdtDefData { did: def_id, .. }, _)), args)
+            | ty::FnDef(def_id, args)
+            | ty::Alias(ty::Projection | ty::Opaque, ty::AliasTy { def_id, args, .. })
+            | ty::Closure(def_id, args)
+            | ty::CoroutineClosure(def_id, args)
+            | ty::Coroutine(def_id, args) => self.print_def_path(def_id, args),
+            ty::Foreign(def_id) => self.print_def_path(def_id, &[]),
+
+            ty::Alias(ty::Free, _) => bug!("type_name: unexpected free alias"),
+            ty::Alias(ty::Inherent, _) => bug!("type_name: unexpected inherent projection"),
+            ty::CoroutineWitness(..) => bug!("type_name: unexpected `CoroutineWitness`"),
+        }
+    }
+
+    fn print_const(&mut self, ct: ty::Const<'tcx>) -> Result<(), PrintError> {
+        self.pretty_print_const(ct, false)
+    }
+
+    fn print_dyn_existential(
+        &mut self,
+        predicates: &'tcx ty::List<ty::PolyExistentialPredicate<'tcx>>,
+    ) -> Result<(), PrintError> {
+        self.pretty_print_dyn_existential(predicates)
+    }
+
+    fn print_crate_name(&mut self, cnum: CrateNum) -> Result<(), PrintError> {
+        self.path.push_str(self.tcx.crate_name(cnum).as_str());
+        Ok(())
+    }
+
+    fn print_path_with_qualified(
+        &mut self,
+        self_ty: Ty<'tcx>,
+        trait_ref: Option<ty::TraitRef<'tcx>>,
+    ) -> Result<(), PrintError> {
+        self.pretty_print_path_with_qualified(self_ty, trait_ref)
+    }
+
+    fn print_path_with_impl(
+        &mut self,
+        print_prefix: impl FnOnce(&mut Self) -> Result<(), PrintError>,
+        self_ty: Ty<'tcx>,
+        trait_ref: Option<ty::TraitRef<'tcx>>,
+    ) -> Result<(), PrintError> {
+        self.pretty_print_path_with_impl(
+            |cx| {
+                print_prefix(cx)?;
+
+                cx.path.push_str("::");
+
+                Ok(())
+            },
+            self_ty,
+            trait_ref,
+        )
+    }
+
+    fn print_path_with_simple(
+        &mut self,
+        print_prefix: impl FnOnce(&mut Self) -> Result<(), PrintError>,
+        disambiguated_data: &DisambiguatedDefPathData,
+    ) -> Result<(), PrintError> {
+        print_prefix(self)?;
+
+        write!(self.path, "::{}", disambiguated_data.data).unwrap();
+
+        Ok(())
+    }
+
+    fn print_path_with_generic_args(
+        &mut self,
+        print_prefix: impl FnOnce(&mut Self) -> Result<(), PrintError>,
+        args: &[GenericArg<'tcx>],
+    ) -> Result<(), PrintError> {
+        print_prefix(self)?;
+        if !args.is_empty() {
+            self.generic_delimiters(|cx| cx.comma_sep(args.iter().copied()))
+        } else {
+            Ok(())
+        }
+    }
+
+    fn print_coroutine_with_kind(
+        &mut self,
+        def_id: DefId,
+        parent_args: &'tcx [GenericArg<'tcx>],
+        kind: Ty<'tcx>,
+    ) -> Result<(), PrintError> {
+        self.print_def_path(def_id, parent_args)?;
+
+        let ty::Coroutine(_, args) = self.tcx.type_of(def_id).instantiate_identity().kind() else {
+            // Could be `ty::Error`.
+            return Ok(());
+        };
+
+        let default_kind = args.as_coroutine().kind_ty();
+
+        match kind.to_opt_closure_kind() {
+            _ if kind == default_kind => {
+                // No need to mark the closure if it's the deduced coroutine kind.
+            }
+            Some(ty::ClosureKind::Fn) | None => {
+                // Should never happen. Just don't mark anything rather than panicking.
+            }
+            Some(ty::ClosureKind::FnMut) => self.path.push_str("::{{call_mut}}"),
+            Some(ty::ClosureKind::FnOnce) => self.path.push_str("::{{call_once}}"),
+        }
+
+        Ok(())
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=should_print_optional_region | COMPLEXITY=14 | LINES=32 */
+
+impl<'tcx> PrettyPrinter<'tcx> for TypeNamePrinter<'tcx> {
+    fn should_print_optional_region(&self, region: ty::Region<'_>) -> bool {
+        // Bound regions are always printed (as `'_`), which gives some idea that they are special,
+        // even though the `for` is omitted by the pretty printer.
+        // E.g. `for<'a, 'b> fn(&'a u32, &'b u32)` is printed as "fn(&'_ u32, &'_ u32)".
+        let kind = region.kind();
+        match region.kind() {
+            ty::ReErased | ty::ReEarlyParam(_) | ty::ReStatic => false,
+            ty::ReBound(..) => true,
+            _ => panic!("type_name unhandled region: {kind:?}"),
+        }
+    }
+
+    fn generic_delimiters(
+        &mut self,
+        f: impl FnOnce(&mut Self) -> Result<(), PrintError>,
+    ) -> Result<(), PrintError> {
+        write!(self, "<")?;
+
+        f(self)?;
+
+        write!(self, ">")?;
+
+        Ok(())
+    }
+
+    fn should_print_verbose(&self) -> bool {
+        // `std::any::type_name` should never print verbose type names
+        false
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=write_str | COMPLEXITY=5 | LINES=7 */
+
+impl Write for TypeNamePrinter<'_> {
+    fn write_str(&mut self, s: &str) -> std::fmt::Result {
+        self.path.push_str(s);
+        Ok(())
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=type_name | COMPLEXITY=3 | LINES=6 */
+
+pub fn type_name<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> String {
+    let mut p = TypeNamePrinter { tcx, path: String::new() };
+    p.print_type(ty).unwrap();
+    p.path
+}

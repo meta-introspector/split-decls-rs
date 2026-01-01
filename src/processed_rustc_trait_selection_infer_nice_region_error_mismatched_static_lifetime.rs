@@ -1,24 +1,129 @@
-/* FP:mismatched_static_lifetime.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_mismatched_static_lifetime_USE_0001
-/* FP:mismatched_static_lifetime.rs-0002 */ use crate :: rustc_data_structures :: fx :: FxIndexSet ;
-/* FP:mismatched_static_lifetime.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_mismatched_static_lifetime_USE_0002
-/* FP:mismatched_static_lifetime.rs-0004 */ use crate :: rustc_complete :: { ErrorGuaranteed , MultiSpan } ;
-/* FP:mismatched_static_lifetime.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_mismatched_static_lifetime_USE_0003
-/* FP:mismatched_static_lifetime.rs-0006 */ use rustc_hir as hir ;
-/* FP:mismatched_static_lifetime.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_mismatched_static_lifetime_USE_0004
-/* FP:mismatched_static_lifetime.rs-0008 */ use crate :: rustc_complete :: intravisit :: VisitorExt ;
-/* FP:mismatched_static_lifetime.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_mismatched_static_lifetime_USE_0005
-/* FP:mismatched_static_lifetime.rs-0010 */ use crate :: rustc_complete :: bug ;
-/* FP:mismatched_static_lifetime.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_mismatched_static_lifetime_USE_0006
-/* FP:mismatched_static_lifetime.rs-0012 */ use crate :: rustc_complete :: ty :: TypeVisitor ;
-/* FP:mismatched_static_lifetime.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_mismatched_static_lifetime_USE_0007
-/* FP:mismatched_static_lifetime.rs-0014 */ use tracing :: debug ;
-/* FP:mismatched_static_lifetime.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_mismatched_static_lifetime_USE_0008
-/* FP:mismatched_static_lifetime.rs-0016 */ use crate :: error_reporting :: infer :: nice_region_error :: NiceRegionError ;
-/* FP:mismatched_static_lifetime.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_mismatched_static_lifetime_USE_0009
-/* FP:mismatched_static_lifetime.rs-0018 */ use crate :: errors :: { DoesNotOutliveStaticFromImpl , ImplicitStaticLifetimeSubdiag , IntroducesStaticBecauseUnmetLifetimeReq , MismatchedStaticLifetime , note_and_explain , } ;
-/* FP:mismatched_static_lifetime.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_mismatched_static_lifetime_USE_0010
-/* FP:mismatched_static_lifetime.rs-0020 */ use crate :: infer :: { RegionResolutionError , SubregionOrigin , TypeTrace } ;
-/* FP:mismatched_static_lifetime.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_mismatched_static_lifetime_USE_0011
-/* FP:mismatched_static_lifetime.rs-0022 */ use crate :: traits :: ObligationCauseCode ;
-/* FP:mismatched_static_lifetime.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_mismatched_static_lifetime_IMPL_0012
-/* FP:mismatched_static_lifetime.rs-0024 */ impl < 'a , 'tcx > NiceRegionError < 'a , 'tcx > { pub (super) fn try_report_mismatched_static_lifetime (& self) -> Option < ErrorGuaranteed > { let error = self . error . as_ref () ? ; debug ! ("try_report_mismatched_static_lifetime {:?}" , error) ; let RegionResolutionError :: ConcreteFailure (origin , sub , sup) = error . clone () else { return None ; } ; if ! sub . is_static () { return None ; } let SubregionOrigin :: Subtype (box TypeTrace { ref cause , .. }) = origin else { return None ; } ; let ObligationCauseCode :: MatchImpl (parent , impl_def_id) = cause . code () else { return None ; } ; let (ObligationCauseCode :: WhereClause (_ , binding_span) | ObligationCauseCode :: WhereClauseInExpr (_ , binding_span , ..)) = * parent . code () else { return None ; } ; if binding_span . is_dummy () { return None ; } let multi_span : MultiSpan = vec ! [binding_span] . into () ; let multispan_subdiag = IntroducesStaticBecauseUnmetLifetimeReq { unmet_requirements : multi_span , binding_span , } ; let expl = note_and_explain :: RegionExplanation :: new (self . tcx () , self . generic_param_scope , sup , Some (binding_span) , note_and_explain :: PrefixKind :: Empty , note_and_explain :: SuffixKind :: Continues ,) ; let mut impl_span = None ; let mut implicit_static_lifetimes = Vec :: new () ; if let Some (impl_node) = self . tcx () . hir_get_if_local (* impl_def_id) { let hir :: Node :: Item (hir :: Item { kind : hir :: ItemKind :: Impl (hir :: Impl { self_ty : impl_self_ty , .. }) , .. }) = impl_node else { bug ! ("Node not an impl.") ; } ; let ty = self . tcx () . type_of (* impl_def_id) . instantiate_identity () ; let mut v = super :: static_impl_trait :: TraitObjectVisitor (FxIndexSet :: default ()) ; v . visit_ty (ty) ; let mut traits = vec ! [] ; for matching_def_id in v . 0 { let mut hir_v = super :: static_impl_trait :: HirTraitObjectVisitor (& mut traits , matching_def_id) ; hir_v . visit_ty_unambig (impl_self_ty) ; } if traits . is_empty () { impl_span = Some (self . tcx () . def_span (* impl_def_id)) ; } else { for span in & traits { implicit_static_lifetimes . push (ImplicitStaticLifetimeSubdiag :: Note { span : * span }) ; implicit_static_lifetimes . push (ImplicitStaticLifetimeSubdiag :: Sugg { span : span . shrink_to_hi () }) ; } } } else { impl_span = Some (self . tcx () . def_span (* impl_def_id)) ; } let err = MismatchedStaticLifetime { cause_span : cause . span , unmet_lifetime_reqs : multispan_subdiag , expl , does_not_outlive_static_from_impl : impl_span . map (| span | DoesNotOutliveStaticFromImpl :: Spanned { span }) . unwrap_or (DoesNotOutliveStaticFromImpl :: Unspanned) , implicit_static_lifetimes , } ; let reported = self . tcx () . dcx () . emit_err (err) ; Some (reported) } }
+// SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/nice_region_error/mismatched_static_lifetime.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=11 | LINES=5 */
+// Error Reporting for when the lifetime for a type doesn't match the `impl` selected for a predicate
+// to hold.
+
+use crate::rustc_data_structures::fx::FxIndexSet;
+use crate::rustc_complete::{ErrorGuaranteed, MultiSpan};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+use rustc_hir as hir;
+use crate::rustc_complete::intravisit::VisitorExt;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::TypeVisitor;
+use tracing::debug;
+
+use crate::error_reporting::infer::nice_region_error::NiceRegionError;
+use crate::errors::{
+    DoesNotOutliveStaticFromImpl, ImplicitStaticLifetimeSubdiag,
+    IntroducesStaticBecauseUnmetLifetimeReq, MismatchedStaticLifetime, note_and_explain,
+};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::infer::{RegionResolutionError, SubregionOrigin, TypeTrace};
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=45 | LINES=107 */
+use crate::traits::ObligationCauseCode;
+
+impl<'a, 'tcx> NiceRegionError<'a, 'tcx> {
+    pub(super) fn try_report_mismatched_static_lifetime(&self) -> Option<ErrorGuaranteed> {
+        let error = self.error.as_ref()?;
+        debug!("try_report_mismatched_static_lifetime {:?}", error);
+
+        let RegionResolutionError::ConcreteFailure(origin, sub, sup) = error.clone() else {
+            return None;
+        };
+        if !sub.is_static() {
+            return None;
+        }
+        let SubregionOrigin::Subtype(box TypeTrace { ref cause, .. }) = origin else {
+            return None;
+        };
+        // If we added a "points at argument expression" obligation, we remove it here, we care
+        // about the original obligation only.
+        let ObligationCauseCode::MatchImpl(parent, impl_def_id) = cause.code() else {
+            return None;
+        };
+        let (ObligationCauseCode::WhereClause(_, binding_span)
+        | ObligationCauseCode::WhereClauseInExpr(_, binding_span, ..)) = *parent.code()
+        else {
+            return None;
+        };
+        if binding_span.is_dummy() {
+            return None;
+        }
+
+        // FIXME: we should point at the lifetime
+        let multi_span: MultiSpan = vec![binding_span].into();
+        let multispan_subdiag = IntroducesStaticBecauseUnmetLifetimeReq {
+            unmet_requirements: multi_span,
+            binding_span,
+        };
+
+        let expl = note_and_explain::RegionExplanation::new(
+            self.tcx(),
+            self.generic_param_scope,
+            sup,
+            Some(binding_span),
+            note_and_explain::PrefixKind::Empty,
+            note_and_explain::SuffixKind::Continues,
+        );
+        let mut impl_span = None;
+        let mut implicit_static_lifetimes = Vec::new();
+        if let Some(impl_node) = self.tcx().hir_get_if_local(*impl_def_id) {
+            // If an impl is local, then maybe this isn't what they want. Try to
+            // be as helpful as possible with implicit lifetimes.
+
+            // First, let's get the hir self type of the impl
+            let hir::Node::Item(hir::Item {
+                kind: hir::ItemKind::Impl(hir::Impl { self_ty: impl_self_ty, .. }),
+                ..
+            }) = impl_node
+            else {
+                bug!("Node not an impl.");
+            };
+
+            // Next, let's figure out the set of trait objects with implicit static bounds
+            let ty = self.tcx().type_of(*impl_def_id).instantiate_identity();
+            let mut v = super::static_impl_trait::TraitObjectVisitor(FxIndexSet::default());
+            v.visit_ty(ty);
+            let mut traits = vec![];
+            for matching_def_id in v.0 {
+                let mut hir_v =
+                    super::static_impl_trait::HirTraitObjectVisitor(&mut traits, matching_def_id);
+                hir_v.visit_ty_unambig(impl_self_ty);
+            }
+
+            if traits.is_empty() {
+                // If there are no trait object traits to point at, either because
+                // there aren't trait objects or because none are implicit, then just
+                // write a single note on the impl itself.
+
+                impl_span = Some(self.tcx().def_span(*impl_def_id));
+            } else {
+                // Otherwise, point at all implicit static lifetimes
+
+                for span in &traits {
+                    implicit_static_lifetimes
+                        .push(ImplicitStaticLifetimeSubdiag::Note { span: *span });
+                    // It would be nice to put this immediately under the above note, but they get
+                    // pushed to the end.
+                    implicit_static_lifetimes
+                        .push(ImplicitStaticLifetimeSubdiag::Sugg { span: span.shrink_to_hi() });
+                }
+            }
+        } else {
+            // Otherwise just point out the impl.
+
+            impl_span = Some(self.tcx().def_span(*impl_def_id));
+        }
+        let err = MismatchedStaticLifetime {
+            cause_span: cause.span,
+            unmet_lifetime_reqs: multispan_subdiag,
+            expl,
+            does_not_outlive_static_from_impl: impl_span
+                .map(|span| DoesNotOutliveStaticFromImpl::Spanned { span })
+                .unwrap_or(DoesNotOutliveStaticFromImpl::Unspanned),
+            implicit_static_lifetimes,
+        };
+        let reported = self.tcx().dcx().emit_err(err);
+        Some(reported)
+    }
+}

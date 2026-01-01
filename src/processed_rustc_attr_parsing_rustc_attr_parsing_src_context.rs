@@ -1,139 +1,751 @@
-/* FP:context.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0001
-/* FP:context.rs-0002 */ use std :: cell :: RefCell ;
-/* FP:context.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0002
-/* FP:context.rs-0004 */ use std :: collections :: BTreeMap ;
-/* FP:context.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0003
-/* FP:context.rs-0006 */ use std :: ops :: { Deref , DerefMut } ;
-/* FP:context.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0004
-/* FP:context.rs-0008 */ use std :: sync :: LazyLock ;
-/* FP:context.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0005
-/* FP:context.rs-0010 */ use private :: Sealed ;
-/* FP:context.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0006
-/* FP:context.rs-0012 */ use crate :: rustc_complete :: { AttrStyle , CRATE_NODE_ID , MetaItemLit , NodeId } ;
-/* FP:context.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0007
-/* FP:context.rs-0014 */ use crate :: rustc_complete :: { Diag , Diagnostic , Level } ;
-/* FP:context.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0008
-/* FP:context.rs-0016 */ use crate :: rustc_feature :: { AttributeTemplate , AttributeType } ;
-/* FP:context.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0009
-/* FP:context.rs-0018 */ use crate :: rustc_complete :: attrs :: AttributeKind ;
-/* FP:context.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0010
-/* FP:context.rs-0020 */ use crate :: rustc_complete :: lints :: { AttributeLint , AttributeLintKind } ;
-/* FP:context.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0011
-/* FP:context.rs-0022 */ use crate :: rustc_complete :: { AttrPath , CRATE_HIR_ID , HirId } ;
-/* FP:context.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0012
-/* FP:context.rs-0024 */ use crate :: rustc_complete :: Session ;
-/* FP:context.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0013
-/* FP:context.rs-0026 */ use crate :: rustc_complete :: { ErrorGuaranteed , Span , Symbol } ;
-/* FP:context.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0014
-/* FP:context.rs-0028 */ use crate :: AttributeParser ;
-/* FP:context.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0015
-/* FP:context.rs-0030 */ use crate :: attributes :: allow_unstable :: { AllowConstFnUnstableParser , AllowInternalUnstableParser , UnstableFeatureBoundParser , } ;
-/* FP:context.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0016
-/* FP:context.rs-0032 */ use crate :: attributes :: body :: CoroutineParser ;
-/* FP:context.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0017
-/* FP:context.rs-0034 */ use crate :: attributes :: codegen_attrs :: { ColdParser , CoverageParser , ExportNameParser , ForceTargetFeatureParser , NakedParser , NoMangleParser , OptimizeParser , SanitizeParser , TargetFeatureParser , TrackCallerParser , UsedParser , } ;
-/* FP:context.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0018
-/* FP:context.rs-0036 */ use crate :: attributes :: confusables :: ConfusablesParser ;
-/* FP:context.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0019
-/* FP:context.rs-0038 */ use crate :: attributes :: crate_level :: { CrateNameParser , MoveSizeLimitParser , NoCoreParser , NoStdParser , PatternComplexityLimitParser , RecursionLimitParser , TypeLengthLimitParser , } ;
-/* FP:context.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0020
-/* FP:context.rs-0040 */ use crate :: attributes :: deprecation :: DeprecationParser ;
-/* FP:context.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0021
-/* FP:context.rs-0042 */ use crate :: attributes :: dummy :: DummyParser ;
-/* FP:context.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0022
-/* FP:context.rs-0044 */ use crate :: attributes :: inline :: { InlineParser , RustcForceInlineParser } ;
-/* FP:context.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0023
-/* FP:context.rs-0046 */ use crate :: attributes :: link_attrs :: { ExportStableParser , FfiConstParser , FfiPureParser , LinkNameParser , LinkOrdinalParser , LinkParser , LinkSectionParser , LinkageParser , StdInternalSymbolParser , } ;
-/* FP:context.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0024
-/* FP:context.rs-0048 */ use crate :: attributes :: lint_helpers :: { AsPtrParser , AutomaticallyDerivedParser , PassByValueParser , PubTransparentParser , } ;
-/* FP:context.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0025
-/* FP:context.rs-0050 */ use crate :: attributes :: loop_match :: { ConstContinueParser , LoopMatchParser } ;
-/* FP:context.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0026
-/* FP:context.rs-0052 */ use crate :: attributes :: macro_attrs :: { AllowInternalUnsafeParser , MacroEscapeParser , MacroUseParser , } ;
-/* FP:context.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0027
-/* FP:context.rs-0054 */ use crate :: attributes :: must_use :: MustUseParser ;
-/* FP:context.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0028
-/* FP:context.rs-0056 */ use crate :: attributes :: no_implicit_prelude :: NoImplicitPreludeParser ;
-/* FP:context.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0029
-/* FP:context.rs-0058 */ use crate :: attributes :: non_exhaustive :: NonExhaustiveParser ;
-/* FP:context.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0030
-/* FP:context.rs-0060 */ use crate :: attributes :: path :: PathParser as PathAttributeParser ;
-/* FP:context.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0031
-/* FP:context.rs-0062 */ use crate :: attributes :: proc_macro_attrs :: { ProcMacroAttributeParser , ProcMacroDeriveParser , ProcMacroParser , RustcBuiltinMacroParser , } ;
-/* FP:context.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0032
-/* FP:context.rs-0064 */ use crate :: attributes :: prototype :: CustomMirParser ;
-/* FP:context.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0033
-/* FP:context.rs-0066 */ use crate :: attributes :: repr :: { AlignParser , AlignStaticParser , ReprParser } ;
-/* FP:context.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0034
-/* FP:context.rs-0068 */ use crate :: attributes :: rustc_internal :: { RustcLayoutScalarValidRangeEnd , RustcLayoutScalarValidRangeStart , RustcObjectLifetimeDefaultParser , } ;
-/* FP:context.rs-0069 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0035
-/* FP:context.rs-0070 */ use crate :: attributes :: semantics :: MayDangleParser ;
-/* FP:context.rs-0071 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0036
-/* FP:context.rs-0072 */ use crate :: attributes :: stability :: { BodyStabilityParser , ConstStabilityIndirectParser , ConstStabilityParser , StabilityParser , } ;
-/* FP:context.rs-0073 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0037
-/* FP:context.rs-0074 */ use crate :: attributes :: test_attrs :: { IgnoreParser , ShouldPanicParser } ;
-/* FP:context.rs-0075 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0038
-/* FP:context.rs-0076 */ use crate :: attributes :: traits :: { AllowIncoherentImplParser , CoherenceIsCoreParser , CoinductiveParser , ConstTraitParser , DenyExplicitImplParser , DoNotImplementViaObjectParser , FundamentalParser , MarkerParser , ParenSugarParser , PointeeParser , SkipDuringMethodDispatchParser , SpecializationTraitParser , TypeConstParser , UnsafeSpecializationMarkerParser , } ;
-/* FP:context.rs-0077 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0039
-/* FP:context.rs-0078 */ use crate :: attributes :: transparency :: TransparencyParser ;
-/* FP:context.rs-0079 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0040
-/* FP:context.rs-0080 */ use crate :: attributes :: { AttributeParser as _ , Combine , Single , WithoutArgs } ;
-/* FP:context.rs-0081 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0041
-/* FP:context.rs-0082 */ use crate :: parser :: { ArgParser , PathParser } ;
-/* FP:context.rs-0083 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0042
-/* FP:context.rs-0084 */ use crate :: session_diagnostics :: { AttributeParseError , AttributeParseErrorReason , UnknownMetaItem } ;
-/* FP:context.rs-0085 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_USE_0043
-/* FP:context.rs-0086 */ use crate :: target_checking :: AllowedTargets ;
-/* FP:context.rs-0087 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_TYPE_0044
-/* FP:context.rs-0088 */ type GroupType < S > = LazyLock < GroupTypeInner < S > > ;
-/* FP:context.rs-0089 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_STRUCT_0045
-/* FP:context.rs-0090 */ pub (super) struct GroupTypeInner < S : Stage > { pub (super) accepters : BTreeMap < & 'static [Symbol] , Vec < GroupTypeInnerAccept < S > > > , pub (super) finalizers : Vec < FinalizeFn < S > > , }
-/* FP:context.rs-0091 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_STRUCT_0046
-/* FP:context.rs-0092 */ pub (super) struct GroupTypeInnerAccept < S : Stage > { pub (super) template : AttributeTemplate , pub (super) accept_fn : AcceptFn < S > , pub (super) allowed_targets : AllowedTargets , pub (super) attribute_type : AttributeType , }
-/* FP:context.rs-0093 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_TYPE_0047
-/* FP:context.rs-0094 */ type AcceptFn < S > = Box < dyn for < 'sess , 'a > Fn (& mut AcceptContext < '_ , 'sess , S > , & ArgParser < 'a >) + Send + Sync > ;
-/* FP:context.rs-0095 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_TYPE_0048
-/* FP:context.rs-0096 */ type FinalizeFn < S > = Box < dyn Send + Sync + Fn (& mut FinalizeContext < '_ , '_ , S >) -> Option < AttributeKind > > ;
-/* FP:context.rs-0097 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_MACRO_0049
-/* FP:context.rs-0099 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_MACRO_0050
-/* FP:context.rs-0100 */ attribute_parsers ! (pub (crate) static ATTRIBUTE_PARSERS = [AlignParser , AlignStaticParser , BodyStabilityParser , ConfusablesParser , ConstStabilityParser , MacroUseParser , NakedParser , StabilityParser , UsedParser , Combine < AllowConstFnUnstableParser >, Combine < AllowInternalUnstableParser >, Combine < ForceTargetFeatureParser >, Combine < LinkParser >, Combine < ReprParser >, Combine < TargetFeatureParser >, Combine < UnstableFeatureBoundParser >, Single < CoverageParser >, Single < CrateNameParser >, Single < CustomMirParser >, Single < DeprecationParser >, Single < DummyParser >, Single < ExportNameParser >, Single < IgnoreParser >, Single < InlineParser >, Single < LinkNameParser >, Single < LinkOrdinalParser >, Single < LinkSectionParser >, Single < LinkageParser >, Single < MoveSizeLimitParser >, Single < MustUseParser >, Single < OptimizeParser >, Single < PathAttributeParser >, Single < PatternComplexityLimitParser >, Single < ProcMacroDeriveParser >, Single < RecursionLimitParser >, Single < RustcBuiltinMacroParser >, Single < RustcForceInlineParser >, Single < RustcLayoutScalarValidRangeEnd >, Single < RustcLayoutScalarValidRangeStart >, Single < RustcObjectLifetimeDefaultParser >, Single < SanitizeParser >, Single < ShouldPanicParser >, Single < SkipDuringMethodDispatchParser >, Single < TransparencyParser >, Single < TypeLengthLimitParser >, Single < WithoutArgs < AllowIncoherentImplParser >>, Single < WithoutArgs < AllowInternalUnsafeParser >>, Single < WithoutArgs < AsPtrParser >>, Single < WithoutArgs < AutomaticallyDerivedParser >>, Single < WithoutArgs < CoherenceIsCoreParser >>, Single < WithoutArgs < CoinductiveParser >>, Single < WithoutArgs < ColdParser >>, Single < WithoutArgs < ConstContinueParser >>, Single < WithoutArgs < ConstStabilityIndirectParser >>, Single < WithoutArgs < ConstTraitParser >>, Single < WithoutArgs < CoroutineParser >>, Single < WithoutArgs < DenyExplicitImplParser >>, Single < WithoutArgs < DoNotImplementViaObjectParser >>, Single < WithoutArgs < ExportStableParser >>, Single < WithoutArgs < FfiConstParser >>, Single < WithoutArgs < FfiPureParser >>, Single < WithoutArgs < FundamentalParser >>, Single < WithoutArgs < LoopMatchParser >>, Single < WithoutArgs < MacroEscapeParser >>, Single < WithoutArgs < MarkerParser >>, Single < WithoutArgs < MayDangleParser >>, Single < WithoutArgs < NoCoreParser >>, Single < WithoutArgs < NoImplicitPreludeParser >>, Single < WithoutArgs < NoMangleParser >>, Single < WithoutArgs < NoStdParser >>, Single < WithoutArgs < NonExhaustiveParser >>, Single < WithoutArgs < ParenSugarParser >>, Single < WithoutArgs < PassByValueParser >>, Single < WithoutArgs < PointeeParser >>, Single < WithoutArgs < ProcMacroAttributeParser >>, Single < WithoutArgs < ProcMacroParser >>, Single < WithoutArgs < PubTransparentParser >>, Single < WithoutArgs < SpecializationTraitParser >>, Single < WithoutArgs < StdInternalSymbolParser >>, Single < WithoutArgs < TrackCallerParser >>, Single < WithoutArgs < TypeConstParser >>, Single < WithoutArgs < UnsafeSpecializationMarkerParser >>,] ;) ;
-/* FP:context.rs-0101 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_MOD_0051
-/* FP:context.rs-0102 */ mod private { pub trait Sealed { } impl Sealed for super :: Early { } impl Sealed for super :: Late { } }
-/* FP:context.rs-0103 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_TRAIT_0052
-/* FP:context.rs-0104 */ # [allow (private_interfaces)] pub trait Stage : Sized + 'static + Sealed { type Id : Copy ; fn parsers () -> & 'static GroupType < Self > ; fn emit_err < 'sess > (& self , sess : & 'sess Session , diag : impl for < 'x > Diagnostic < 'x > ,) -> ErrorGuaranteed ; fn should_emit (& self) -> ShouldEmit ; fn id_is_crate_root (id : Self :: Id) -> bool ; }
-/* FP:context.rs-0105 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_IMPL_0053
-/* FP:context.rs-0106 */ # [allow (private_interfaces)] impl Stage for Early { type Id = NodeId ; fn parsers () -> & 'static GroupType < Self > { & early :: ATTRIBUTE_PARSERS } fn emit_err < 'sess > (& self , sess : & 'sess Session , diag : impl for < 'x > Diagnostic < 'x > ,) -> ErrorGuaranteed { self . should_emit () . emit_err (sess . dcx () . create_err (diag)) } fn should_emit (& self) -> ShouldEmit { self . emit_errors } fn id_is_crate_root (id : Self :: Id) -> bool { id == CRATE_NODE_ID } }
-/* FP:context.rs-0107 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_IMPL_0054
-/* FP:context.rs-0108 */ # [allow (private_interfaces)] impl Stage for Late { type Id = HirId ; fn parsers () -> & 'static GroupType < Self > { & late :: ATTRIBUTE_PARSERS } fn emit_err < 'sess > (& self , tcx : & 'sess Session , diag : impl for < 'x > Diagnostic < 'x > ,) -> ErrorGuaranteed { tcx . dcx () . emit_err (diag) } fn should_emit (& self) -> ShouldEmit { ShouldEmit :: ErrorsAndLints } fn id_is_crate_root (id : Self :: Id) -> bool { id == CRATE_HIR_ID } }
-/* FP:context.rs-0109 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_STRUCT_0055
-/* FP:context.rs-0110 */ # [doc = " used when parsing attributes for miscellaneous things *before* ast lowering"] pub struct Early { # [doc = " Whether to emit errors or delay them as a bug"] # [doc = " For most attributes, the attribute will be parsed again in the `Late` stage and in this case the errors should be delayed"] # [doc = " But for some, such as `cfg`, the attribute will be removed before the `Late` stage so errors must be emitted"] pub emit_errors : ShouldEmit , }
-/* FP:context.rs-0111 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_STRUCT_0056
-/* FP:context.rs-0112 */ # [doc = " used when parsing attributes during ast lowering"] pub struct Late ;
-/* FP:context.rs-0113 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_STRUCT_0057
-/* FP:context.rs-0114 */ # [doc = " Context given to every attribute parser when accepting"] # [doc = ""] # [doc = " Gives [`AttributeParser`]s enough information to create errors, for example."] pub struct AcceptContext < 'f , 'sess , S : Stage > { pub (crate) shared : SharedContext < 'f , 'sess , S > , # [doc = " The span of the attribute currently being parsed"] pub (crate) attr_span : Span , # [doc = " Whether it is an inner or outer attribute"] pub (crate) attr_style : AttrStyle , # [doc = " The expected structure of the attribute."] # [doc = ""] # [doc = " Used in reporting errors to give a hint to users what the attribute *should* look like."] pub (crate) template : & 'f AttributeTemplate , # [doc = " The name of the attribute we're currently accepting."] pub (crate) attr_path : AttrPath , }
-/* FP:context.rs-0115 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_IMPL_0058
-/* FP:context.rs-0116 */ impl < 'f , 'sess : 'f , S : Stage > SharedContext < 'f , 'sess , S > { pub (crate) fn emit_err (& self , diag : impl for < 'x > Diagnostic < 'x >) -> ErrorGuaranteed { self . stage . emit_err (& self . sess , diag) } # [doc = " Emit a lint. This method is somewhat special, since lints emitted during attribute parsing"] # [doc = " must be delayed until after HIR is built. This method will take care of the details of"] # [doc = " that."] pub (crate) fn emit_lint (& mut self , lint : AttributeLintKind , span : Span) { if ! matches ! (self . stage . should_emit () , ShouldEmit :: ErrorsAndLints | ShouldEmit :: EarlyFatal { also_emit_lints : true }) { return ; } let id = self . target_id ; (self . emit_lint) (AttributeLint { id , span , kind : lint }) ; } pub (crate) fn warn_unused_duplicate (& mut self , used_span : Span , unused_span : Span) { self . emit_lint (AttributeLintKind :: UnusedDuplicate { this : unused_span , other : used_span , warning : false , } , unused_span ,) } pub (crate) fn warn_unused_duplicate_future_error (& mut self , used_span : Span , unused_span : Span ,) { self . emit_lint (AttributeLintKind :: UnusedDuplicate { this : unused_span , other : used_span , warning : true , } , unused_span ,) } }
-/* FP:context.rs-0117 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_IMPL_0059
-/* FP:context.rs-0118 */ impl < 'f , 'sess : 'f , S : Stage > AcceptContext < 'f , 'sess , S > { pub (crate) fn unknown_key (& self , span : Span , found : String , options : & 'static [& 'static str] ,) -> ErrorGuaranteed { self . emit_err (UnknownMetaItem { span , item : found , expected : options }) } # [doc = " error that a string literal was expected."] # [doc = " You can optionally give the literal you did find (which you found not to be a string literal)"] # [doc = " which can make better errors. For example, if the literal was a byte string it will suggest"] # [doc = " removing the `b` prefix."] pub (crate) fn expected_string_literal (& self , span : Span , actual_literal : Option < & MetaItemLit > ,) -> ErrorGuaranteed { self . emit_err (AttributeParseError { span , attr_span : self . attr_span , template : self . template . clone () , attribute : self . attr_path . clone () , reason : AttributeParseErrorReason :: ExpectedStringLiteral { byte_string : actual_literal . and_then (| i | { i . kind . is_bytestr () . then (| | self . sess () . source_map () . start_point (i . span)) }) , } , attr_style : self . attr_style , }) } pub (crate) fn expected_integer_literal (& self , span : Span) -> ErrorGuaranteed { self . emit_err (AttributeParseError { span , attr_span : self . attr_span , template : self . template . clone () , attribute : self . attr_path . clone () , reason : AttributeParseErrorReason :: ExpectedIntegerLiteral , attr_style : self . attr_style , }) } pub (crate) fn expected_list (& self , span : Span) -> ErrorGuaranteed { self . emit_err (AttributeParseError { span , attr_span : self . attr_span , template : self . template . clone () , attribute : self . attr_path . clone () , reason : AttributeParseErrorReason :: ExpectedList , attr_style : self . attr_style , }) } pub (crate) fn expected_no_args (& self , args_span : Span) -> ErrorGuaranteed { self . emit_err (AttributeParseError { span : args_span , attr_span : self . attr_span , template : self . template . clone () , attribute : self . attr_path . clone () , reason : AttributeParseErrorReason :: ExpectedNoArgs , attr_style : self . attr_style , }) } # [doc = " emit an error that a `name` was expected here"] pub (crate) fn expected_identifier (& self , span : Span) -> ErrorGuaranteed { self . emit_err (AttributeParseError { span , attr_span : self . attr_span , template : self . template . clone () , attribute : self . attr_path . clone () , reason : AttributeParseErrorReason :: ExpectedIdentifier , attr_style : self . attr_style , }) } # [doc = " emit an error that a `name = value` pair was expected at this span. The symbol can be given for"] # [doc = " a nicer error message talking about the specific name that was found lacking a value."] pub (crate) fn expected_name_value (& self , span : Span , name : Option < Symbol >) -> ErrorGuaranteed { self . emit_err (AttributeParseError { span , attr_span : self . attr_span , template : self . template . clone () , attribute : self . attr_path . clone () , reason : AttributeParseErrorReason :: ExpectedNameValue (name) , attr_style : self . attr_style , }) } # [doc = " emit an error that a `name = value` pair was found where that name was already seen."] pub (crate) fn duplicate_key (& self , span : Span , key : Symbol) -> ErrorGuaranteed { self . emit_err (AttributeParseError { span , attr_span : self . attr_span , template : self . template . clone () , attribute : self . attr_path . clone () , reason : AttributeParseErrorReason :: DuplicateKey (key) , attr_style : self . attr_style , }) } # [doc = " an error that should be emitted when a [`MetaItemOrLitParser`](crate::parser::MetaItemOrLitParser)"] # [doc = " was expected *not* to be a literal, but instead a meta item."] pub (crate) fn unexpected_literal (& self , span : Span) -> ErrorGuaranteed { self . emit_err (AttributeParseError { span , attr_span : self . attr_span , template : self . template . clone () , attribute : self . attr_path . clone () , reason : AttributeParseErrorReason :: UnexpectedLiteral , attr_style : self . attr_style , }) } pub (crate) fn expected_single_argument (& self , span : Span) -> ErrorGuaranteed { self . emit_err (AttributeParseError { span , attr_span : self . attr_span , template : self . template . clone () , attribute : self . attr_path . clone () , reason : AttributeParseErrorReason :: ExpectedSingleArgument , attr_style : self . attr_style , }) } pub (crate) fn expected_at_least_one_argument (& self , span : Span) -> ErrorGuaranteed { self . emit_err (AttributeParseError { span , attr_span : self . attr_span , template : self . template . clone () , attribute : self . attr_path . clone () , reason : AttributeParseErrorReason :: ExpectedAtLeastOneArgument , attr_style : self . attr_style , }) } # [doc = " produces an error along the lines of `expected one of [foo, meow]`"] pub (crate) fn expected_specific_argument (& self , span : Span , possibilities : & [Symbol] ,) -> ErrorGuaranteed { self . emit_err (AttributeParseError { span , attr_span : self . attr_span , template : self . template . clone () , attribute : self . attr_path . clone () , reason : AttributeParseErrorReason :: ExpectedSpecificArgument { possibilities , strings : false , list : false , } , attr_style : self . attr_style , }) } # [doc = " produces an error along the lines of `expected one of [foo, meow] as an argument`."] # [doc = " i.e. slightly different wording to [`expected_specific_argument`](Self::expected_specific_argument)."] pub (crate) fn expected_specific_argument_and_list (& self , span : Span , possibilities : & [Symbol] ,) -> ErrorGuaranteed { self . emit_err (AttributeParseError { span , attr_span : self . attr_span , template : self . template . clone () , attribute : self . attr_path . clone () , reason : AttributeParseErrorReason :: ExpectedSpecificArgument { possibilities , strings : false , list : true , } , attr_style : self . attr_style , }) } # [doc = " produces an error along the lines of `expected one of [\"foo\", \"meow\"]`"] pub (crate) fn expected_specific_argument_strings (& self , span : Span , possibilities : & [Symbol] ,) -> ErrorGuaranteed { self . emit_err (AttributeParseError { span , attr_span : self . attr_span , template : self . template . clone () , attribute : self . attr_path . clone () , reason : AttributeParseErrorReason :: ExpectedSpecificArgument { possibilities , strings : true , list : false , } , attr_style : self . attr_style , }) } pub (crate) fn warn_empty_attribute (& mut self , span : Span) { self . emit_lint (AttributeLintKind :: EmptyAttribute { first_span : span } , span) ; } }
-/* FP:context.rs-0119 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_IMPL_0060
-/* FP:context.rs-0120 */ impl < 'f , 'sess , S : Stage > Deref for AcceptContext < 'f , 'sess , S > { type Target = SharedContext < 'f , 'sess , S > ; fn deref (& self) -> & Self :: Target { & self . shared } }
-/* FP:context.rs-0121 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_IMPL_0061
-/* FP:context.rs-0122 */ impl < 'f , 'sess , S : Stage > DerefMut for AcceptContext < 'f , 'sess , S > { fn deref_mut (& mut self) -> & mut Self :: Target { & mut self . shared } }
-/* FP:context.rs-0123 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_STRUCT_0062
-/* FP:context.rs-0124 */ # [doc = " Context given to every attribute parser during finalization."] # [doc = ""] # [doc = " Gives [`AttributeParser`](crate::attributes::AttributeParser)s enough information to create"] # [doc = " errors, for example."] pub struct SharedContext < 'p , 'sess , S : Stage > { # [doc = " The parse context, gives access to the session and the"] # [doc = " diagnostics context."] pub (crate) cx : & 'p mut AttributeParser < 'sess , S > , # [doc = " The span of the syntactical component this attribute was applied to"] pub (crate) target_span : Span , # [doc = " The id ([`NodeId`] if `S` is `Early`, [`HirId`] if `S` is `Late`) of the syntactical component this attribute was applied to"] pub (crate) target_id : S :: Id , pub (crate) emit_lint : & 'p mut dyn FnMut (AttributeLint < S :: Id >) , }
-/* FP:context.rs-0125 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_STRUCT_0063
-/* FP:context.rs-0126 */ # [doc = " Context given to every attribute parser during finalization."] # [doc = ""] # [doc = " Gives [`AttributeParser`](crate::attributes::AttributeParser)s enough information to create"] # [doc = " errors, for example."] pub (crate) struct FinalizeContext < 'p , 'sess , S : Stage > { pub (crate) shared : SharedContext < 'p , 'sess , S > , # [doc = " A list of all attribute on this syntax node."] # [doc = ""] # [doc = " Useful for compatibility checks with other attributes in [`finalize`](crate::attributes::AttributeParser::finalize)"] # [doc = ""] # [doc = " Usually, you should use normal attribute parsing logic instead,"] # [doc = " especially when making a *denylist* of other attributes."] pub (crate) all_attrs : & 'p [PathParser < 'p >] , }
-/* FP:context.rs-0127 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_IMPL_0064
-/* FP:context.rs-0128 */ impl < 'p , 'sess : 'p , S : Stage > Deref for FinalizeContext < 'p , 'sess , S > { type Target = SharedContext < 'p , 'sess , S > ; fn deref (& self) -> & Self :: Target { & self . shared } }
-/* FP:context.rs-0129 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_IMPL_0065
-/* FP:context.rs-0130 */ impl < 'p , 'sess : 'p , S : Stage > DerefMut for FinalizeContext < 'p , 'sess , S > { fn deref_mut (& mut self) -> & mut Self :: Target { & mut self . shared } }
-/* FP:context.rs-0131 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_IMPL_0066
-/* FP:context.rs-0132 */ impl < 'p , 'sess : 'p , S : Stage > Deref for SharedContext < 'p , 'sess , S > { type Target = AttributeParser < 'sess , S > ; fn deref (& self) -> & Self :: Target { self . cx } }
-/* FP:context.rs-0133 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_IMPL_0067
-/* FP:context.rs-0134 */ impl < 'p , 'sess : 'p , S : Stage > DerefMut for SharedContext < 'p , 'sess , S > { fn deref_mut (& mut self) -> & mut Self :: Target { self . cx } }
-/* FP:context.rs-0135 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_ENUM_0068
-/* FP:context.rs-0136 */ # [derive (PartialEq , Clone , Copy , Debug)] pub enum OmitDoc { Lower , Skip , }
-/* FP:context.rs-0137 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_ENUM_0069
-/* FP:context.rs-0138 */ # [derive (Copy , Clone , Debug)] pub enum ShouldEmit { # [doc = " The operations will emit errors, and lints, and errors are fatal."] # [doc = ""] # [doc = " Only relevant when early parsing, in late parsing equivalent to `ErrorsAndLints`."] # [doc = " Late parsing is never fatal, and instead tries to emit as many diagnostics as possible."] EarlyFatal { also_emit_lints : bool } , # [doc = " The operation will emit errors and lints."] # [doc = " This is usually what you need."] ErrorsAndLints , # [doc = " The operation will emit *not* errors and lints."] # [doc = " Use this if you are *sure* that this operation will be called at a different time with `ShouldEmit::ErrorsAndLints`."] Nothing , }
-/* FP:context.rs-0139 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_context_IMPL_0070
-/* FP:context.rs-0140 */ impl ShouldEmit { pub (crate) fn emit_err (& self , diag : Diag < '_ >) -> ErrorGuaranteed { match self { ShouldEmit :: EarlyFatal { .. } if diag . level () == Level :: DelayedBug => diag . emit () , ShouldEmit :: EarlyFatal { .. } => diag . upgrade_to_fatal () . emit () , ShouldEmit :: ErrorsAndLints => diag . emit () , ShouldEmit :: Nothing => diag . delay_as_bug () , } } }
+// SRC: ../rust/compiler/rustc_attr_parsing/src/context.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use std::cell::RefCell;
+use std::collections::BTreeMap;
+use std::ops::{Deref, DerefMut};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use std::sync::LazyLock;
+
+use private::Sealed;
+use crate::rustc_complete::{AttrStyle, CRATE_NODE_ID, MetaItemLit, NodeId};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{Diag, Diagnostic, Level};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_feature::{AttributeTemplate, AttributeType};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::attrs::AttributeKind;
+use crate::rustc_complete::lints::{AttributeLint, AttributeLintKind};
+/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{AttrPath, CRATE_HIR_ID, HirId};
+/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::Session;
+use crate::rustc_complete::{ErrorGuaranteed, Span, Symbol};
+/* AST_META: AST_ID=8 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+
+use crate::AttributeParser;
+use crate::attributes::allow_unstable::{
+    AllowConstFnUnstableParser, AllowInternalUnstableParser, UnstableFeatureBoundParser,
+};
+/* AST_META: AST_ID=9 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+use crate::attributes::body::CoroutineParser;
+use crate::attributes::codegen_attrs::{
+    ColdParser, CoverageParser, ExportNameParser, ForceTargetFeatureParser, NakedParser,
+    NoMangleParser, OptimizeParser, SanitizeParser, TargetFeatureParser, TrackCallerParser,
+    UsedParser,
+};
+/* AST_META: AST_ID=10 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use crate::attributes::confusables::ConfusablesParser;
+use crate::attributes::crate_level::{
+    CrateNameParser, MoveSizeLimitParser, NoCoreParser, NoStdParser, PatternComplexityLimitParser,
+    RecursionLimitParser, TypeLengthLimitParser,
+};
+/* AST_META: AST_ID=11 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::attributes::deprecation::DeprecationParser;
+use crate::attributes::dummy::DummyParser;
+use crate::attributes::inline::{InlineParser, RustcForceInlineParser};
+/* AST_META: AST_ID=12 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use crate::attributes::link_attrs::{
+    ExportStableParser, FfiConstParser, FfiPureParser, LinkNameParser, LinkOrdinalParser,
+    LinkParser, LinkSectionParser, LinkageParser, StdInternalSymbolParser,
+};
+/* AST_META: AST_ID=13 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::attributes::lint_helpers::{
+    AsPtrParser, AutomaticallyDerivedParser, PassByValueParser, PubTransparentParser,
+};
+/* AST_META: AST_ID=14 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::attributes::loop_match::{ConstContinueParser, LoopMatchParser};
+/* AST_META: AST_ID=15 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::attributes::macro_attrs::{
+    AllowInternalUnsafeParser, MacroEscapeParser, MacroUseParser,
+};
+/* AST_META: AST_ID=16 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+use crate::attributes::must_use::MustUseParser;
+use crate::attributes::no_implicit_prelude::NoImplicitPreludeParser;
+use crate::attributes::non_exhaustive::NonExhaustiveParser;
+use crate::attributes::path::PathParser as PathAttributeParser;
+use crate::attributes::proc_macro_attrs::{
+    ProcMacroAttributeParser, ProcMacroDeriveParser, ProcMacroParser, RustcBuiltinMacroParser,
+};
+/* AST_META: AST_ID=17 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::attributes::prototype::CustomMirParser;
+use crate::attributes::repr::{AlignParser, AlignStaticParser, ReprParser};
+/* AST_META: AST_ID=18 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use crate::attributes::rustc_internal::{
+    RustcLayoutScalarValidRangeEnd, RustcLayoutScalarValidRangeStart,
+    RustcObjectLifetimeDefaultParser,
+};
+/* AST_META: AST_ID=19 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use crate::attributes::semantics::MayDangleParser;
+use crate::attributes::stability::{
+    BodyStabilityParser, ConstStabilityIndirectParser, ConstStabilityParser, StabilityParser,
+};
+/* AST_META: AST_ID=20 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::attributes::test_attrs::{IgnoreParser, ShouldPanicParser};
+/* AST_META: AST_ID=21 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+use crate::attributes::traits::{
+    AllowIncoherentImplParser, CoherenceIsCoreParser, CoinductiveParser, ConstTraitParser,
+    DenyExplicitImplParser, DoNotImplementViaObjectParser, FundamentalParser, MarkerParser,
+    ParenSugarParser, PointeeParser, SkipDuringMethodDispatchParser, SpecializationTraitParser,
+    TypeConstParser, UnsafeSpecializationMarkerParser,
+};
+/* AST_META: AST_ID=22 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::attributes::transparency::TransparencyParser;
+use crate::attributes::{AttributeParser as _, Combine, Single, WithoutArgs};
+/* AST_META: AST_ID=23 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::parser::{ArgParser, PathParser};
+/* AST_META: AST_ID=24 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::session_diagnostics::{AttributeParseError, AttributeParseErrorReason, UnknownMetaItem};
+/* AST_META: AST_ID=25 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+use crate::target_checking::AllowedTargets;
+
+type GroupType<S> = LazyLock<GroupTypeInner<S>>;
+
+pub(super) struct GroupTypeInner<S: Stage> {
+    pub(super) accepters: BTreeMap<&'static [Symbol], Vec<GroupTypeInnerAccept<S>>>,
+    pub(super) finalizers: Vec<FinalizeFn<S>>,
+}
+/* AST_META: AST_ID=26 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+pub(super) struct GroupTypeInnerAccept<S: Stage> {
+    pub(super) template: AttributeTemplate,
+    pub(super) accept_fn: AcceptFn<S>,
+    pub(super) allowed_targets: AllowedTargets,
+    pub(super) attribute_type: AttributeType,
+}
+/* AST_META: AST_ID=27 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=27 | LINES=63 */
+
+type AcceptFn<S> =
+    Box<dyn for<'sess, 'a> Fn(&mut AcceptContext<'_, 'sess, S>, &ArgParser<'a>) + Send + Sync>;
+type FinalizeFn<S> =
+    Box<dyn Send + Sync + Fn(&mut FinalizeContext<'_, '_, S>) -> Option<AttributeKind>>;
+
+macro_rules! attribute_parsers {
+    (
+        pub(crate) static $name: ident = [$($names: ty),* $(,)?];
+    ) => {
+        mod early {
+            use super::*;
+            type Combine<T> = super::Combine<T, Early>;
+            type Single<T> = super::Single<T, Early>;
+            type WithoutArgs<T> = super::WithoutArgs<T, Early>;
+
+            attribute_parsers!(@[Early] pub(crate) static $name = [$($names),*];);
+        }
+        mod late {
+            use super::*;
+            type Combine<T> = super::Combine<T, Late>;
+            type Single<T> = super::Single<T, Late>;
+            type WithoutArgs<T> = super::WithoutArgs<T, Late>;
+
+            attribute_parsers!(@[Late] pub(crate) static $name = [$($names),*];);
+        }
+    };
+    (
+        @[$stage: ty] pub(crate) static $name: ident = [$($names: ty),* $(,)?];
+    ) => {
+        pub(crate) static $name: GroupType<$stage> = LazyLock::new(|| {
+            let mut accepts = BTreeMap::<_, Vec<GroupTypeInnerAccept<$stage>>>::new();
+            let mut finalizes = Vec::<FinalizeFn<$stage>>::new();
+            $(
+                {
+                    thread_local! {
+                        static STATE_OBJECT: RefCell<$names> = RefCell::new(<$names>::default());
+                    };
+
+                    for (path, template, accept_fn) in <$names>::ATTRIBUTES {
+                        accepts.entry(*path).or_default().push(GroupTypeInnerAccept {
+                            template: *template,
+                            accept_fn: Box::new(|cx, args| {
+                                STATE_OBJECT.with_borrow_mut(|s| {
+                                    accept_fn(s, cx, args)
+                                })
+                            }),
+                            allowed_targets: <$names as crate::attributes::AttributeParser<$stage>>::ALLOWED_TARGETS,
+                            attribute_type: <$names as crate::attributes::AttributeParser<$stage>>::TYPE,
+                        });
+                    }
+
+                    finalizes.push(Box::new(|cx| {
+                        let state = STATE_OBJECT.take();
+                        state.finalize(cx)
+                    }));
+                }
+            )*
+
+            GroupTypeInner { accepters:accepts, finalizers:finalizes }
+        });
+    };
+}
+/* AST_META: AST_ID=28 | TYPE=IMPL | NAME=UNNAMED | COMPLEXITY=16 | LINES=100 */
+attribute_parsers!(
+    pub(crate) static ATTRIBUTE_PARSERS = [
+        // tidy-alphabetical-start
+        AlignParser,
+        AlignStaticParser,
+        BodyStabilityParser,
+        ConfusablesParser,
+        ConstStabilityParser,
+        MacroUseParser,
+        NakedParser,
+        StabilityParser,
+        UsedParser,
+        // tidy-alphabetical-end
+
+        // tidy-alphabetical-start
+        Combine<AllowConstFnUnstableParser>,
+        Combine<AllowInternalUnstableParser>,
+        Combine<ForceTargetFeatureParser>,
+        Combine<LinkParser>,
+        Combine<ReprParser>,
+        Combine<TargetFeatureParser>,
+        Combine<UnstableFeatureBoundParser>,
+        // tidy-alphabetical-end
+
+        // tidy-alphabetical-start
+        Single<CoverageParser>,
+        Single<CrateNameParser>,
+        Single<CustomMirParser>,
+        Single<DeprecationParser>,
+        Single<DummyParser>,
+        Single<ExportNameParser>,
+        Single<IgnoreParser>,
+        Single<InlineParser>,
+        Single<LinkNameParser>,
+        Single<LinkOrdinalParser>,
+        Single<LinkSectionParser>,
+        Single<LinkageParser>,
+        Single<MoveSizeLimitParser>,
+        Single<MustUseParser>,
+        Single<OptimizeParser>,
+        Single<PathAttributeParser>,
+        Single<PatternComplexityLimitParser>,
+        Single<ProcMacroDeriveParser>,
+        Single<RecursionLimitParser>,
+        Single<RustcBuiltinMacroParser>,
+        Single<RustcForceInlineParser>,
+        Single<RustcLayoutScalarValidRangeEnd>,
+        Single<RustcLayoutScalarValidRangeStart>,
+        Single<RustcObjectLifetimeDefaultParser>,
+        Single<SanitizeParser>,
+        Single<ShouldPanicParser>,
+        Single<SkipDuringMethodDispatchParser>,
+        Single<TransparencyParser>,
+        Single<TypeLengthLimitParser>,
+        Single<WithoutArgs<AllowIncoherentImplParser>>,
+        Single<WithoutArgs<AllowInternalUnsafeParser>>,
+        Single<WithoutArgs<AsPtrParser>>,
+        Single<WithoutArgs<AutomaticallyDerivedParser>>,
+        Single<WithoutArgs<CoherenceIsCoreParser>>,
+        Single<WithoutArgs<CoinductiveParser>>,
+        Single<WithoutArgs<ColdParser>>,
+        Single<WithoutArgs<ConstContinueParser>>,
+        Single<WithoutArgs<ConstStabilityIndirectParser>>,
+        Single<WithoutArgs<ConstTraitParser>>,
+        Single<WithoutArgs<CoroutineParser>>,
+        Single<WithoutArgs<DenyExplicitImplParser>>,
+        Single<WithoutArgs<DoNotImplementViaObjectParser>>,
+        Single<WithoutArgs<ExportStableParser>>,
+        Single<WithoutArgs<FfiConstParser>>,
+        Single<WithoutArgs<FfiPureParser>>,
+        Single<WithoutArgs<FundamentalParser>>,
+        Single<WithoutArgs<LoopMatchParser>>,
+        Single<WithoutArgs<MacroEscapeParser>>,
+        Single<WithoutArgs<MarkerParser>>,
+        Single<WithoutArgs<MayDangleParser>>,
+        Single<WithoutArgs<NoCoreParser>>,
+        Single<WithoutArgs<NoImplicitPreludeParser>>,
+        Single<WithoutArgs<NoMangleParser>>,
+        Single<WithoutArgs<NoStdParser>>,
+        Single<WithoutArgs<NonExhaustiveParser>>,
+        Single<WithoutArgs<ParenSugarParser>>,
+        Single<WithoutArgs<PassByValueParser>>,
+        Single<WithoutArgs<PointeeParser>>,
+        Single<WithoutArgs<ProcMacroAttributeParser>>,
+        Single<WithoutArgs<ProcMacroParser>>,
+        Single<WithoutArgs<PubTransparentParser>>,
+        Single<WithoutArgs<SpecializationTraitParser>>,
+        Single<WithoutArgs<StdInternalSymbolParser>>,
+        Single<WithoutArgs<TrackCallerParser>>,
+        Single<WithoutArgs<TypeConstParser>>,
+        Single<WithoutArgs<UnsafeSpecializationMarkerParser>>,
+        // tidy-alphabetical-end
+    ];
+);
+
+mod private {
+    pub trait Sealed {}
+    impl Sealed for super::Early {}
+    impl Sealed for super::Late {}
+}
+/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=parsers | COMPLEXITY=2 | LINES=18 */
+
+// allow because it's a sealed trait
+#[allow(private_interfaces)]
+pub trait Stage: Sized + 'static + Sealed {
+    type Id: Copy;
+
+    fn parsers() -> &'static GroupType<Self>;
+
+    fn emit_err<'sess>(
+        &self,
+        sess: &'sess Session,
+        diag: impl for<'x> Diagnostic<'x>,
+    ) -> ErrorGuaranteed;
+
+    fn should_emit(&self) -> ShouldEmit;
+
+    fn id_is_crate_root(id: Self::Id) -> bool;
+}
+/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=parsers | COMPLEXITY=9 | LINES=25 */
+
+// allow because it's a sealed trait
+#[allow(private_interfaces)]
+impl Stage for Early {
+    type Id = NodeId;
+
+    fn parsers() -> &'static GroupType<Self> {
+        &early::ATTRIBUTE_PARSERS
+    }
+    fn emit_err<'sess>(
+        &self,
+        sess: &'sess Session,
+        diag: impl for<'x> Diagnostic<'x>,
+    ) -> ErrorGuaranteed {
+        self.should_emit().emit_err(sess.dcx().create_err(diag))
+    }
+
+    fn should_emit(&self) -> ShouldEmit {
+        self.emit_errors
+    }
+
+    fn id_is_crate_root(id: Self::Id) -> bool {
+        id == CRATE_NODE_ID
+    }
+}
+/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=parsers | COMPLEXITY=9 | LINES=25 */
+
+// allow because it's a sealed trait
+#[allow(private_interfaces)]
+impl Stage for Late {
+    type Id = HirId;
+
+    fn parsers() -> &'static GroupType<Self> {
+        &late::ATTRIBUTE_PARSERS
+    }
+    fn emit_err<'sess>(
+        &self,
+        tcx: &'sess Session,
+        diag: impl for<'x> Diagnostic<'x>,
+    ) -> ErrorGuaranteed {
+        tcx.dcx().emit_err(diag)
+    }
+
+    fn should_emit(&self) -> ShouldEmit {
+        ShouldEmit::ErrorsAndLints
+    }
+
+    fn id_is_crate_root(id: Self::Id) -> bool {
+        id == CRATE_HIR_ID
+    }
+}
+/* AST_META: AST_ID=32 | TYPE=STRUCT | NAME=Early | COMPLEXITY=6 | LINES=8 */
+
+/// used when parsing attributes for miscellaneous things *before* ast lowering
+pub struct Early {
+    /// Whether to emit errors or delay them as a bug
+    /// For most attributes, the attribute will be parsed again in the `Late` stage and in this case the errors should be delayed
+    /// But for some, such as `cfg`, the attribute will be removed before the `Late` stage so errors must be emitted
+    pub emit_errors: ShouldEmit,
+}
+/* AST_META: AST_ID=33 | TYPE=STRUCT | NAME=Late; | COMPLEXITY=5 | LINES=22 */
+/// used when parsing attributes during ast lowering
+pub struct Late;
+
+/// Context given to every attribute parser when accepting
+///
+/// Gives [`AttributeParser`]s enough information to create errors, for example.
+pub struct AcceptContext<'f, 'sess, S: Stage> {
+    pub(crate) shared: SharedContext<'f, 'sess, S>,
+    /// The span of the attribute currently being parsed
+    pub(crate) attr_span: Span,
+
+    /// Whether it is an inner or outer attribute
+    pub(crate) attr_style: AttrStyle,
+
+    /// The expected structure of the attribute.
+    ///
+    /// Used in reporting errors to give a hint to users what the attribute *should* look like.
+    pub(crate) template: &'f AttributeTemplate,
+
+    /// The name of the attribute we're currently accepting.
+    pub(crate) attr_path: AttrPath,
+}
+/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=46 */
+
+impl<'f, 'sess: 'f, S: Stage> SharedContext<'f, 'sess, S> {
+    pub(crate) fn emit_err(&self, diag: impl for<'x> Diagnostic<'x>) -> ErrorGuaranteed {
+        self.stage.emit_err(&self.sess, diag)
+    }
+
+    /// Emit a lint. This method is somewhat special, since lints emitted during attribute parsing
+    /// must be delayed until after HIR is built. This method will take care of the details of
+    /// that.
+    pub(crate) fn emit_lint(&mut self, lint: AttributeLintKind, span: Span) {
+        if !matches!(
+            self.stage.should_emit(),
+            ShouldEmit::ErrorsAndLints | ShouldEmit::EarlyFatal { also_emit_lints: true }
+        ) {
+            return;
+        }
+        let id = self.target_id;
+        (self.emit_lint)(AttributeLint { id, span, kind: lint });
+    }
+
+    pub(crate) fn warn_unused_duplicate(&mut self, used_span: Span, unused_span: Span) {
+        self.emit_lint(
+            AttributeLintKind::UnusedDuplicate {
+                this: unused_span,
+                other: used_span,
+                warning: false,
+            },
+            unused_span,
+        )
+    }
+
+    pub(crate) fn warn_unused_duplicate_future_error(
+        &mut self,
+        used_span: Span,
+        unused_span: Span,
+    ) {
+        self.emit_lint(
+            AttributeLintKind::UnusedDuplicate {
+                this: unused_span,
+                other: used_span,
+                warning: true,
+            },
+            unused_span,
+        )
+    }
+}
+/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=54 | LINES=204 */
+
+impl<'f, 'sess: 'f, S: Stage> AcceptContext<'f, 'sess, S> {
+    pub(crate) fn unknown_key(
+        &self,
+        span: Span,
+        found: String,
+        options: &'static [&'static str],
+    ) -> ErrorGuaranteed {
+        self.emit_err(UnknownMetaItem { span, item: found, expected: options })
+    }
+
+    /// error that a string literal was expected.
+    /// You can optionally give the literal you did find (which you found not to be a string literal)
+    /// which can make better errors. For example, if the literal was a byte string it will suggest
+    /// removing the `b` prefix.
+    pub(crate) fn expected_string_literal(
+        &self,
+        span: Span,
+        actual_literal: Option<&MetaItemLit>,
+    ) -> ErrorGuaranteed {
+        self.emit_err(AttributeParseError {
+            span,
+            attr_span: self.attr_span,
+            template: self.template.clone(),
+            attribute: self.attr_path.clone(),
+            reason: AttributeParseErrorReason::ExpectedStringLiteral {
+                byte_string: actual_literal.and_then(|i| {
+                    i.kind.is_bytestr().then(|| self.sess().source_map().start_point(i.span))
+                }),
+            },
+            attr_style: self.attr_style,
+        })
+    }
+
+    pub(crate) fn expected_integer_literal(&self, span: Span) -> ErrorGuaranteed {
+        self.emit_err(AttributeParseError {
+            span,
+            attr_span: self.attr_span,
+            template: self.template.clone(),
+            attribute: self.attr_path.clone(),
+            reason: AttributeParseErrorReason::ExpectedIntegerLiteral,
+            attr_style: self.attr_style,
+        })
+    }
+
+    pub(crate) fn expected_list(&self, span: Span) -> ErrorGuaranteed {
+        self.emit_err(AttributeParseError {
+            span,
+            attr_span: self.attr_span,
+            template: self.template.clone(),
+            attribute: self.attr_path.clone(),
+            reason: AttributeParseErrorReason::ExpectedList,
+            attr_style: self.attr_style,
+        })
+    }
+
+    pub(crate) fn expected_no_args(&self, args_span: Span) -> ErrorGuaranteed {
+        self.emit_err(AttributeParseError {
+            span: args_span,
+            attr_span: self.attr_span,
+            template: self.template.clone(),
+            attribute: self.attr_path.clone(),
+            reason: AttributeParseErrorReason::ExpectedNoArgs,
+            attr_style: self.attr_style,
+        })
+    }
+
+    /// emit an error that a `name` was expected here
+    pub(crate) fn expected_identifier(&self, span: Span) -> ErrorGuaranteed {
+        self.emit_err(AttributeParseError {
+            span,
+            attr_span: self.attr_span,
+            template: self.template.clone(),
+            attribute: self.attr_path.clone(),
+            reason: AttributeParseErrorReason::ExpectedIdentifier,
+            attr_style: self.attr_style,
+        })
+    }
+
+    /// emit an error that a `name = value` pair was expected at this span. The symbol can be given for
+    /// a nicer error message talking about the specific name that was found lacking a value.
+    pub(crate) fn expected_name_value(&self, span: Span, name: Option<Symbol>) -> ErrorGuaranteed {
+        self.emit_err(AttributeParseError {
+            span,
+            attr_span: self.attr_span,
+            template: self.template.clone(),
+            attribute: self.attr_path.clone(),
+            reason: AttributeParseErrorReason::ExpectedNameValue(name),
+            attr_style: self.attr_style,
+        })
+    }
+
+    /// emit an error that a `name = value` pair was found where that name was already seen.
+    pub(crate) fn duplicate_key(&self, span: Span, key: Symbol) -> ErrorGuaranteed {
+        self.emit_err(AttributeParseError {
+            span,
+            attr_span: self.attr_span,
+            template: self.template.clone(),
+            attribute: self.attr_path.clone(),
+            reason: AttributeParseErrorReason::DuplicateKey(key),
+            attr_style: self.attr_style,
+        })
+    }
+
+    /// an error that should be emitted when a [`MetaItemOrLitParser`](crate::parser::MetaItemOrLitParser)
+    /// was expected *not* to be a literal, but instead a meta item.
+    pub(crate) fn unexpected_literal(&self, span: Span) -> ErrorGuaranteed {
+        self.emit_err(AttributeParseError {
+            span,
+            attr_span: self.attr_span,
+            template: self.template.clone(),
+            attribute: self.attr_path.clone(),
+            reason: AttributeParseErrorReason::UnexpectedLiteral,
+            attr_style: self.attr_style,
+        })
+    }
+
+    pub(crate) fn expected_single_argument(&self, span: Span) -> ErrorGuaranteed {
+        self.emit_err(AttributeParseError {
+            span,
+            attr_span: self.attr_span,
+            template: self.template.clone(),
+            attribute: self.attr_path.clone(),
+            reason: AttributeParseErrorReason::ExpectedSingleArgument,
+            attr_style: self.attr_style,
+        })
+    }
+
+    pub(crate) fn expected_at_least_one_argument(&self, span: Span) -> ErrorGuaranteed {
+        self.emit_err(AttributeParseError {
+            span,
+            attr_span: self.attr_span,
+            template: self.template.clone(),
+            attribute: self.attr_path.clone(),
+            reason: AttributeParseErrorReason::ExpectedAtLeastOneArgument,
+            attr_style: self.attr_style,
+        })
+    }
+
+    /// produces an error along the lines of `expected one of [foo, meow]`
+    pub(crate) fn expected_specific_argument(
+        &self,
+        span: Span,
+        possibilities: &[Symbol],
+    ) -> ErrorGuaranteed {
+        self.emit_err(AttributeParseError {
+            span,
+            attr_span: self.attr_span,
+            template: self.template.clone(),
+            attribute: self.attr_path.clone(),
+            reason: AttributeParseErrorReason::ExpectedSpecificArgument {
+                possibilities,
+                strings: false,
+                list: false,
+            },
+            attr_style: self.attr_style,
+        })
+    }
+
+    /// produces an error along the lines of `expected one of [foo, meow] as an argument`.
+    /// i.e. slightly different wording to [`expected_specific_argument`](Self::expected_specific_argument).
+    pub(crate) fn expected_specific_argument_and_list(
+        &self,
+        span: Span,
+        possibilities: &[Symbol],
+    ) -> ErrorGuaranteed {
+        self.emit_err(AttributeParseError {
+            span,
+            attr_span: self.attr_span,
+            template: self.template.clone(),
+            attribute: self.attr_path.clone(),
+            reason: AttributeParseErrorReason::ExpectedSpecificArgument {
+                possibilities,
+                strings: false,
+                list: true,
+            },
+            attr_style: self.attr_style,
+        })
+    }
+
+    /// produces an error along the lines of `expected one of ["foo", "meow"]`
+    pub(crate) fn expected_specific_argument_strings(
+        &self,
+        span: Span,
+        possibilities: &[Symbol],
+    ) -> ErrorGuaranteed {
+        self.emit_err(AttributeParseError {
+            span,
+            attr_span: self.attr_span,
+            template: self.template.clone(),
+            attribute: self.attr_path.clone(),
+            reason: AttributeParseErrorReason::ExpectedSpecificArgument {
+                possibilities,
+                strings: true,
+                list: false,
+            },
+            attr_style: self.attr_style,
+        })
+    }
+
+    pub(crate) fn warn_empty_attribute(&mut self, span: Span) {
+        self.emit_lint(AttributeLintKind::EmptyAttribute { first_span: span }, span);
+    }
+}
+/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
+
+impl<'f, 'sess, S: Stage> Deref for AcceptContext<'f, 'sess, S> {
+    type Target = SharedContext<'f, 'sess, S>;
+
+    fn deref(&self) -> &Self::Target {
+        &self.shared
+    }
+}
+/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=5 | LINES=6 */
+
+impl<'f, 'sess, S: Stage> DerefMut for AcceptContext<'f, 'sess, S> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.shared
+    }
+}
+/* AST_META: AST_ID=38 | TYPE=STRUCT | NAME=SharedContext | COMPLEXITY=9 | LINES=16 */
+
+/// Context given to every attribute parser during finalization.
+///
+/// Gives [`AttributeParser`](crate::attributes::AttributeParser)s enough information to create
+/// errors, for example.
+pub struct SharedContext<'p, 'sess, S: Stage> {
+    /// The parse context, gives access to the session and the
+    /// diagnostics context.
+    pub(crate) cx: &'p mut AttributeParser<'sess, S>,
+    /// The span of the syntactical component this attribute was applied to
+    pub(crate) target_span: Span,
+    /// The id ([`NodeId`] if `S` is `Early`, [`HirId`] if `S` is `Late`) of the syntactical component this attribute was applied to
+    pub(crate) target_id: S::Id,
+
+    pub(crate) emit_lint: &'p mut dyn FnMut(AttributeLint<S::Id>),
+}
+/* AST_META: AST_ID=39 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=16 */
+
+/// Context given to every attribute parser during finalization.
+///
+/// Gives [`AttributeParser`](crate::attributes::AttributeParser)s enough information to create
+/// errors, for example.
+pub(crate) struct FinalizeContext<'p, 'sess, S: Stage> {
+    pub(crate) shared: SharedContext<'p, 'sess, S>,
+
+    /// A list of all attribute on this syntax node.
+    ///
+    /// Useful for compatibility checks with other attributes in [`finalize`](crate::attributes::AttributeParser::finalize)
+    ///
+    /// Usually, you should use normal attribute parsing logic instead,
+    /// especially when making a *denylist* of other attributes.
+    pub(crate) all_attrs: &'p [PathParser<'p>],
+}
+/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
+
+impl<'p, 'sess: 'p, S: Stage> Deref for FinalizeContext<'p, 'sess, S> {
+    type Target = SharedContext<'p, 'sess, S>;
+
+    fn deref(&self) -> &Self::Target {
+        &self.shared
+    }
+}
+/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=5 | LINES=6 */
+
+impl<'p, 'sess: 'p, S: Stage> DerefMut for FinalizeContext<'p, 'sess, S> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.shared
+    }
+}
+/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=deref | COMPLEXITY=5 | LINES=8 */
+
+impl<'p, 'sess: 'p, S: Stage> Deref for SharedContext<'p, 'sess, S> {
+    type Target = AttributeParser<'sess, S>;
+
+    fn deref(&self) -> &Self::Target {
+        self.cx
+    }
+}
+/* AST_META: AST_ID=43 | TYPE=FUNCTION | NAME=deref_mut | COMPLEXITY=5 | LINES=6 */
+
+impl<'p, 'sess: 'p, S: Stage> DerefMut for SharedContext<'p, 'sess, S> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        self.cx
+    }
+}
+/* AST_META: AST_ID=44 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+
+#[derive(PartialEq, Clone, Copy, Debug)]
+pub enum OmitDoc {
+    Lower,
+    Skip,
+}
+/* AST_META: AST_ID=45 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=15 */
+
+#[derive(Copy, Clone, Debug)]
+pub enum ShouldEmit {
+    /// The operations will emit errors, and lints, and errors are fatal.
+    ///
+    /// Only relevant when early parsing, in late parsing equivalent to `ErrorsAndLints`.
+    /// Late parsing is never fatal, and instead tries to emit as many diagnostics as possible.
+    EarlyFatal { also_emit_lints: bool },
+    /// The operation will emit errors and lints.
+    /// This is usually what you need.
+    ErrorsAndLints,
+    /// The operation will emit *not* errors and lints.
+    /// Use this if you are *sure* that this operation will be called at a different time with `ShouldEmit::ErrorsAndLints`.
+    Nothing,
+}
+/* AST_META: AST_ID=46 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=11 */
+
+impl ShouldEmit {
+    pub(crate) fn emit_err(&self, diag: Diag<'_>) -> ErrorGuaranteed {
+        match self {
+            ShouldEmit::EarlyFatal { .. } if diag.level() == Level::DelayedBug => diag.emit(),
+            ShouldEmit::EarlyFatal { .. } => diag.upgrade_to_fatal().emit(),
+            ShouldEmit::ErrorsAndLints => diag.emit(),
+            ShouldEmit::Nothing => diag.delay_as_bug(),
+        }
+    }
+}

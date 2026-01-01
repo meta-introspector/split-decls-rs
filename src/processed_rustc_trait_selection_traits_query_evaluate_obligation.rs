@@ -1,12 +1,128 @@
-/* FP:evaluate_obligation.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_evaluate_obligation_USE_0001
-/* FP:evaluate_obligation.rs-0002 */ use rustc_macros :: extension ;
-/* FP:evaluate_obligation.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_evaluate_obligation_USE_0002
-/* FP:evaluate_obligation.rs-0004 */ use crate :: rustc_complete :: span_bug ;
-/* FP:evaluate_obligation.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_evaluate_obligation_USE_0003
-/* FP:evaluate_obligation.rs-0006 */ use crate :: infer :: InferCtxt ;
-/* FP:evaluate_obligation.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_evaluate_obligation_USE_0004
-/* FP:evaluate_obligation.rs-0008 */ use crate :: infer :: canonical :: OriginalQueryValues ;
-/* FP:evaluate_obligation.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_evaluate_obligation_USE_0005
-/* FP:evaluate_obligation.rs-0010 */ use crate :: traits :: { EvaluationResult , ObligationCtxt , OverflowError , PredicateObligation , SelectionContext , } ;
-/* FP:evaluate_obligation.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_query_evaluate_obligation_IMPL_0006
-/* FP:evaluate_obligation.rs-0012 */ # [extension (pub trait InferCtxtExt <'tcx >)] impl < 'tcx > InferCtxt < 'tcx > { # [doc = " Evaluates whether the predicate can be satisfied (by any means)"] # [doc = " in the given `ParamEnv`."] fn predicate_may_hold (& self , obligation : & PredicateObligation < 'tcx >) -> bool { self . evaluate_obligation_no_overflow (obligation) . may_apply () } # [doc = " Evaluates whether the predicate can be satisfied in the given"] # [doc = " `ParamEnv`, and returns `false` if not certain. However, this is"] # [doc = " not entirely accurate if inference variables are involved."] # [doc = ""] # [doc = " This version may conservatively fail when outlives obligations"] # [doc = " are required. Therefore, this version should only be used for"] # [doc = " optimizations or diagnostics and be treated as if it can always"] # [doc = " return `false`."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " # #[allow(dead_code)]"] # [doc = " trait Trait {}"] # [doc = ""] # [doc = " fn check<T: Trait>() {}"] # [doc = ""] # [doc = " fn foo<T: 'static>()"] # [doc = " where"] # [doc = "     &'static T: Trait,"] # [doc = " {"] # [doc = "     // Evaluating `&'?0 T: Trait` adds a `'?0: 'static` outlives obligation,"] # [doc = "     // which means that `predicate_must_hold_considering_regions` will return"] # [doc = "     // `false`."] # [doc = "     check::<&'_ T>();"] # [doc = " }"] # [doc = " ```"] fn predicate_must_hold_considering_regions (& self , obligation : & PredicateObligation < 'tcx > ,) -> bool { self . evaluate_obligation_no_overflow (obligation) . must_apply_considering_regions () } # [doc = " Evaluates whether the predicate can be satisfied in the given"] # [doc = " `ParamEnv`, and returns `false` if not certain. However, this is"] # [doc = " not entirely accurate if inference variables are involved."] # [doc = ""] # [doc = " This version ignores all outlives constraints."] fn predicate_must_hold_modulo_regions (& self , obligation : & PredicateObligation < 'tcx >) -> bool { self . evaluate_obligation_no_overflow (obligation) . must_apply_modulo_regions () } # [doc = " Evaluate a given predicate, capturing overflow and propagating it back."] fn evaluate_obligation (& self , obligation : & PredicateObligation < 'tcx > ,) -> Result < EvaluationResult , OverflowError > { let mut _orig_values = OriginalQueryValues :: default () ; let param_env = obligation . param_env ; if self . next_trait_solver () { self . probe (| snapshot | { let ocx = ObligationCtxt :: new (self) ; ocx . register_obligation (obligation . clone ()) ; let mut result = EvaluationResult :: EvaluatedToOk ; for error in ocx . select_all_or_error () { if error . is_true_error () { return Ok (EvaluationResult :: EvaluatedToErr) ; } else { result = result . max (EvaluationResult :: EvaluatedToAmbig) ; } } if self . opaque_types_added_in_snapshot (snapshot) { result = result . max (EvaluationResult :: EvaluatedToOkModuloOpaqueTypes) ; } else if self . region_constraints_added_in_snapshot (snapshot) { result = result . max (EvaluationResult :: EvaluatedToOkModuloRegions) ; } Ok (result) }) } else { let c_pred = self . canonicalize_query (param_env . and (obligation . predicate) , & mut _orig_values) ; self . tcx . at (obligation . cause . span) . evaluate_obligation (c_pred) } } # [doc = " Helper function that canonicalizes and runs the query. If an"] # [doc = " overflow results, we re-run it in the local context so we can"] # [doc = " report a nice error."] fn evaluate_obligation_no_overflow (& self , obligation : & PredicateObligation < 'tcx > ,) -> EvaluationResult { match self . evaluate_obligation (obligation) { Ok (result) => result , Err (OverflowError :: Canonical) => { let mut selcx = SelectionContext :: new (self) ; selcx . evaluate_root_obligation (obligation) . unwrap_or_else (| r | match r { OverflowError :: Canonical => { span_bug ! (obligation . cause . span , "Overflow should be caught earlier in standard query mode: {:?}, {:?}" , obligation , r ,) } OverflowError :: Error (_) => EvaluationResult :: EvaluatedToErr , }) } Err (OverflowError :: Error (_)) => EvaluationResult :: EvaluatedToErr , } } }
+// SRC: ../rust/compiler/rustc_trait_selection/src/traits/query/evaluate_obligation.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+use rustc_macros::extension;
+use crate::rustc_complete::span_bug;
+
+use crate::infer::InferCtxt;
+use crate::infer::canonical::OriginalQueryValues;
+use crate::traits::{
+    EvaluationResult, ObligationCtxt, OverflowError, PredicateObligation, SelectionContext,
+};
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=predicate_may_hold | COMPLEXITY=59 | LINES=117 */
+
+#[extension(pub trait InferCtxtExt<'tcx>)]
+impl<'tcx> InferCtxt<'tcx> {
+    /// Evaluates whether the predicate can be satisfied (by any means)
+    /// in the given `ParamEnv`.
+    fn predicate_may_hold(&self, obligation: &PredicateObligation<'tcx>) -> bool {
+        self.evaluate_obligation_no_overflow(obligation).may_apply()
+    }
+
+    /// Evaluates whether the predicate can be satisfied in the given
+    /// `ParamEnv`, and returns `false` if not certain. However, this is
+    /// not entirely accurate if inference variables are involved.
+    ///
+    /// This version may conservatively fail when outlives obligations
+    /// are required. Therefore, this version should only be used for
+    /// optimizations or diagnostics and be treated as if it can always
+    /// return `false`.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// # #[allow(dead_code)]
+    /// trait Trait {}
+    ///
+    /// fn check<T: Trait>() {}
+    ///
+    /// fn foo<T: 'static>()
+    /// where
+    ///     &'static T: Trait,
+    /// {
+    ///     // Evaluating `&'?0 T: Trait` adds a `'?0: 'static` outlives obligation,
+    ///     // which means that `predicate_must_hold_considering_regions` will return
+    ///     // `false`.
+    ///     check::<&'_ T>();
+    /// }
+    /// ```
+    fn predicate_must_hold_considering_regions(
+        &self,
+        obligation: &PredicateObligation<'tcx>,
+    ) -> bool {
+        self.evaluate_obligation_no_overflow(obligation).must_apply_considering_regions()
+    }
+
+    /// Evaluates whether the predicate can be satisfied in the given
+    /// `ParamEnv`, and returns `false` if not certain. However, this is
+    /// not entirely accurate if inference variables are involved.
+    ///
+    /// This version ignores all outlives constraints.
+    fn predicate_must_hold_modulo_regions(&self, obligation: &PredicateObligation<'tcx>) -> bool {
+        self.evaluate_obligation_no_overflow(obligation).must_apply_modulo_regions()
+    }
+
+    /// Evaluate a given predicate, capturing overflow and propagating it back.
+    fn evaluate_obligation(
+        &self,
+        obligation: &PredicateObligation<'tcx>,
+    ) -> Result<EvaluationResult, OverflowError> {
+        let mut _orig_values = OriginalQueryValues::default();
+
+        let param_env = obligation.param_env;
+
+        if self.next_trait_solver() {
+            self.probe(|snapshot| {
+                let ocx = ObligationCtxt::new(self);
+                ocx.register_obligation(obligation.clone());
+                let mut result = EvaluationResult::EvaluatedToOk;
+                for error in ocx.select_all_or_error() {
+                    if error.is_true_error() {
+                        return Ok(EvaluationResult::EvaluatedToErr);
+                    } else {
+                        result = result.max(EvaluationResult::EvaluatedToAmbig);
+                    }
+                }
+                if self.opaque_types_added_in_snapshot(snapshot) {
+                    result = result.max(EvaluationResult::EvaluatedToOkModuloOpaqueTypes);
+                } else if self.region_constraints_added_in_snapshot(snapshot) {
+                    result = result.max(EvaluationResult::EvaluatedToOkModuloRegions);
+                }
+                Ok(result)
+            })
+        } else {
+            let c_pred =
+                self.canonicalize_query(param_env.and(obligation.predicate), &mut _orig_values);
+            self.tcx.at(obligation.cause.span).evaluate_obligation(c_pred)
+        }
+    }
+
+    /// Helper function that canonicalizes and runs the query. If an
+    /// overflow results, we re-run it in the local context so we can
+    /// report a nice error.
+    fn evaluate_obligation_no_overflow(
+        &self,
+        obligation: &PredicateObligation<'tcx>,
+    ) -> EvaluationResult {
+        // Run canonical query. If overflow occurs, rerun from scratch but this time
+        // in standard trait query mode so that overflow is handled appropriately
+        // within `SelectionContext`.
+        match self.evaluate_obligation(obligation) {
+            Ok(result) => result,
+            Err(OverflowError::Canonical) => {
+                let mut selcx = SelectionContext::new(self);
+                selcx.evaluate_root_obligation(obligation).unwrap_or_else(|r| match r {
+                    OverflowError::Canonical => {
+                        span_bug!(
+                            obligation.cause.span,
+                            "Overflow should be caught earlier in standard query mode: {:?}, {:?}",
+                            obligation,
+                            r,
+                        )
+                    }
+                    OverflowError::Error(_) => EvaluationResult::EvaluatedToErr,
+                })
+            }
+            Err(OverflowError::Error(_)) => EvaluationResult::EvaluatedToErr,
+        }
+    }
+}

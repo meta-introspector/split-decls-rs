@@ -1,20 +1,117 @@
-/* FP:tests.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_tagged_ptr_tests_USE_0001
-/* FP:tests.rs-0002 */ use std :: ptr ;
-/* FP:tests.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_tagged_ptr_tests_USE_0002
-/* FP:tests.rs-0004 */ use rustc_hashes :: Hash128 ;
-/* FP:tests.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_tagged_ptr_tests_USE_0003
-/* FP:tests.rs-0006 */ use super :: * ;
-/* FP:tests.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_tagged_ptr_tests_USE_0004
-/* FP:tests.rs-0008 */ use crate :: stable_hasher :: { HashStable , StableHasher } ;
-/* FP:tests.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_tagged_ptr_tests_ENUM_0005
-/* FP:tests.rs-0010 */ # [doc = " A tag type used in [`TaggedRef`] tests."] # [derive (Copy , Clone , Debug , PartialEq , Eq)] enum Tag2 { B00 = 0b00 , B01 = 0b01 , B10 = 0b10 , B11 = 0b11 , }
-/* FP:tests.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_tagged_ptr_tests_IMPL_0006
-/* FP:tests.rs-0012 */ unsafe impl Tag for Tag2 { const BITS : u32 = 2 ; fn into_usize (self) -> usize { self as _ } unsafe fn from_usize (tag : usize) -> Self { match tag { 0b00 => Tag2 :: B00 , 0b01 => Tag2 :: B01 , 0b10 => Tag2 :: B10 , 0b11 => Tag2 :: B11 , _ => unreachable ! () , } } }
-/* FP:tests.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_tagged_ptr_tests_IMPL_0007
-/* FP:tests.rs-0014 */ impl < HCX > crate :: stable_hasher :: HashStable < HCX > for Tag2 { fn hash_stable (& self , hcx : & mut HCX , hasher : & mut crate :: stable_hasher :: StableHasher) { (* self as u8) . hash_stable (hcx , hasher) ; } }
-/* FP:tests.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_tagged_ptr_tests_FN_0008
-/* FP:tests.rs-0016 */ # [test] fn smoke () { let value = 12u32 ; let reference = & value ; let tag = Tag2 :: B01 ; let ptr = TaggedRef :: new (reference , tag) ; assert_eq ! (ptr . tag () , tag) ; assert_eq ! (* ptr , 12) ; assert ! (ptr :: eq (ptr . pointer () , reference)) ; let copy = ptr ; let mut ptr = ptr ; ptr . set_tag (Tag2 :: B00) ; assert_eq ! (ptr . tag () , Tag2 :: B00) ; assert_eq ! (copy . tag () , tag) ; assert_eq ! (* copy , 12) ; assert ! (ptr :: eq (copy . pointer () , reference)) ; }
-/* FP:tests.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_tagged_ptr_tests_FN_0009
-/* FP:tests.rs-0018 */ # [test] fn stable_hash_hashes_as_tuple () { let hash_packed = { let mut hasher = StableHasher :: new () ; TaggedRef :: new (& 12 , Tag2 :: B11) . hash_stable (& mut () , & mut hasher) ; hasher . finish :: < Hash128 > () } ; let hash_tupled = { let mut hasher = StableHasher :: new () ; (& 12 , Tag2 :: B11) . hash_stable (& mut () , & mut hasher) ; hasher . finish :: < Hash128 > () } ; assert_eq ! (hash_packed , hash_tupled) ; }
-/* FP:tests.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_tagged_ptr_tests_CONST_0010
-/* FP:tests.rs-0020 */ # [doc = " Test that `new` does not compile if there is not enough alignment for the"] # [doc = " tag in the pointer."] # [doc = ""] # [doc = " ```compile_fail,E0080"] # [doc = " use crate::rustc_data_structures::tagged_ptr::{TaggedRef, Tag};"] # [doc = ""] # [doc = " #[derive(Copy, Clone, Debug, PartialEq, Eq)]"] # [doc = " enum Tag2 { B00 = 0b00, B01 = 0b01, B10 = 0b10, B11 = 0b11 };"] # [doc = ""] # [doc = " unsafe impl Tag for Tag2 {"] # [doc = "     const BITS: u32 = 2;"] # [doc = ""] # [doc = "     fn into_usize(self) -> usize { todo!() }"] # [doc = "     unsafe fn from_usize(tag: usize) -> Self { todo!() }"] # [doc = " }"] # [doc = ""] # [doc = " let value = 12u16;"] # [doc = " let reference = &value;"] # [doc = " let tag = Tag2::B01;"] # [doc = ""] # [doc = " let _ptr = TaggedRef::<_, _, true>::new(reference, tag);"] # [doc = " ```"] # [cfg (not (miri))] const _ : () = () ;
+// SRC: ../rust/compiler/rustc_data_structures/src/tagged_ptr/tests.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+use std::ptr;
+
+use rustc_hashes::Hash128;
+
+use super::*;
+use crate::stable_hasher::{HashStable, StableHasher};
+/* AST_META: AST_ID=2 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+
+/// A tag type used in [`TaggedRef`] tests.
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+enum Tag2 {
+    B00 = 0b00,
+    B01 = 0b01,
+    B10 = 0b10,
+    B11 = 0b11,
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=into_usize | COMPLEXITY=18 | LINES=18 */
+
+unsafe impl Tag for Tag2 {
+    const BITS: u32 = 2;
+
+    fn into_usize(self) -> usize {
+        self as _
+    }
+
+    unsafe fn from_usize(tag: usize) -> Self {
+        match tag {
+            0b00 => Tag2::B00,
+            0b01 => Tag2::B01,
+            0b10 => Tag2::B10,
+            0b11 => Tag2::B11,
+            _ => unreachable!(),
+        }
+    }
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=hash_stable | COMPLEXITY=5 | LINES=6 */
+
+impl<HCX> crate::stable_hasher::HashStable<HCX> for Tag2 {
+    fn hash_stable(&self, hcx: &mut HCX, hasher: &mut crate::stable_hasher::StableHasher) {
+        (*self as u8).hash_stable(hcx, hasher);
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=smoke | COMPLEXITY=2 | LINES=23 */
+
+#[test]
+fn smoke() {
+    let value = 12u32;
+    let reference = &value;
+    let tag = Tag2::B01;
+
+    let ptr = TaggedRef::new(reference, tag);
+
+    assert_eq!(ptr.tag(), tag);
+    assert_eq!(*ptr, 12);
+    assert!(ptr::eq(ptr.pointer(), reference));
+
+    let copy = ptr;
+
+    let mut ptr = ptr;
+    ptr.set_tag(Tag2::B00);
+    assert_eq!(ptr.tag(), Tag2::B00);
+
+    assert_eq!(copy.tag(), tag);
+    assert_eq!(*copy, 12);
+    assert!(ptr::eq(copy.pointer(), reference));
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=stable_hash_hashes_as_tuple | COMPLEXITY=4 | LINES=17 */
+
+#[test]
+fn stable_hash_hashes_as_tuple() {
+    let hash_packed = {
+        let mut hasher = StableHasher::new();
+        TaggedRef::new(&12, Tag2::B11).hash_stable(&mut (), &mut hasher);
+        hasher.finish::<Hash128>()
+    };
+
+    let hash_tupled = {
+        let mut hasher = StableHasher::new();
+        (&12, Tag2::B11).hash_stable(&mut (), &mut hasher);
+        hasher.finish::<Hash128>()
+    };
+
+    assert_eq!(hash_packed, hash_tupled);
+}
+/* AST_META: AST_ID=7 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=6 | LINES=6 */
+
+/// Test that `new` does not compile if there is not enough alignment for the
+/// tag in the pointer.
+///
+/// ```compile_fail,E0080
+/// use crate::rustc_data_structures::tagged_ptr::{TaggedRef, Tag};
+/* AST_META: AST_ID=8 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+///
+/// #[derive(Copy, Clone, Debug, PartialEq, Eq)]
+/// enum Tag2 { B00 = 0b00, B01 = 0b01, B10 = 0b10, B11 = 0b11 };
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=14 | LINES=7 */
+///
+/// unsafe impl Tag for Tag2 {
+///     const BITS: u32 = 2;
+///
+///     fn into_usize(self) -> usize { todo!() }
+///     unsafe fn from_usize(tag: usize) -> Self { todo!() }
+/// }
+/* AST_META: AST_ID=10 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=1 | LINES=11 */
+///
+/// let value = 12u16;
+/// let reference = &value;
+/// let tag = Tag2::B01;
+///
+/// let _ptr = TaggedRef::<_, _, true>::new(reference, tag);
+/// ```
+// For some reason miri does not get the compile error
+// probably it `check`s instead of `build`ing?
+#[cfg(not(miri))]
+const _: () = ();

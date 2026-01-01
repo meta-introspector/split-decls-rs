@@ -1,77 +1,424 @@
-/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_MOD_0001
-/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_USE_0002
-/* FP:mod.rs-0004 */ use std :: hash :: Hash ;
-/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_USE_0003
-/* FP:mod.rs-0006 */ use derive_where :: derive_where ;
-/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_USE_0004
-/* FP:mod.rs-0008 */ # [cfg (feature = "nightly")] use rustc_macros :: { Decodable_NoContext , Encodable_NoContext , HashStable_NoContext } ;
-/* FP:mod.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_USE_0005
-/* FP:mod.rs-0010 */ use rustc_type_ir_macros :: { Lift_Generic , TypeFoldable_Generic , TypeVisitable_Generic } ;
-/* FP:mod.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_USE_0006
-/* FP:mod.rs-0012 */ use crate :: lang_items :: SolverTraitLangItem ;
-/* FP:mod.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_USE_0007
-/* FP:mod.rs-0014 */ use crate :: search_graph :: PathKind ;
-/* FP:mod.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_USE_0008
-/* FP:mod.rs-0016 */ use crate :: { self as ty , Canonical , CanonicalVarValues , Interner , Upcast } ;
-/* FP:mod.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_TYPE_0009
-/* FP:mod.rs-0018 */ pub type CanonicalInput < I , T = < I as Interner > :: Predicate > = ty :: CanonicalQueryInput < I , QueryInput < I , T > > ;
-/* FP:mod.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_TYPE_0010
-/* FP:mod.rs-0020 */ pub type CanonicalResponse < I > = Canonical < I , Response < I > > ;
-/* FP:mod.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_TYPE_0011
-/* FP:mod.rs-0022 */ # [doc = " The result of evaluating a canonical query."] # [doc = ""] # [doc = " FIXME: We use a different type than the existing canonical queries. This is because"] # [doc = " we need to add a `Certainty` for `overflow` and may want to restructure this code without"] # [doc = " having to worry about changes to currently used code. Once we've made progress on this"] # [doc = " solver, merge the two responses again."] pub type QueryResult < I > = Result < CanonicalResponse < I > , NoSolution > ;
-/* FP:mod.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_STRUCT_0012
-/* FP:mod.rs-0024 */ # [derive (Copy , Clone , Debug , Hash , PartialEq , Eq)] # [cfg_attr (feature = "nightly" , derive (HashStable_NoContext))] pub struct NoSolution ;
-/* FP:mod.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_STRUCT_0013
-/* FP:mod.rs-0026 */ # [doc = " A goal is a statement, i.e. `predicate`, we want to prove"] # [doc = " given some assumptions, i.e. `param_env`."] # [doc = ""] # [doc = " Most of the time the `param_env` contains the `where`-bounds of the function"] # [doc = " we're currently typechecking while the `predicate` is some trait bound."] # [derive_where (Clone , Hash , PartialEq , Debug ; I : Interner , P)] # [derive_where (Copy ; I : Interner , P : Copy)] # [derive (TypeVisitable_Generic , TypeFoldable_Generic , Lift_Generic)] # [cfg_attr (feature = "nightly" , derive (Decodable_NoContext , Encodable_NoContext , HashStable_NoContext))] pub struct Goal < I : Interner , P > { pub param_env : I :: ParamEnv , pub predicate : P , }
-/* FP:mod.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_IMPL_0014
-/* FP:mod.rs-0028 */ impl < I : Interner , P : Eq > Eq for Goal < I , P > { }
-/* FP:mod.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_IMPL_0015
-/* FP:mod.rs-0030 */ impl < I : Interner , P > Goal < I , P > { pub fn new (cx : I , param_env : I :: ParamEnv , predicate : impl Upcast < I , P >) -> Goal < I , P > { Goal { param_env , predicate : predicate . upcast (cx) } } # [doc = " Updates the goal to one with a different `predicate` but the same `param_env`."] pub fn with < Q > (self , cx : I , predicate : impl Upcast < I , Q >) -> Goal < I , Q > { Goal { param_env : self . param_env , predicate : predicate . upcast (cx) } } }
-/* FP:mod.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_ENUM_0016
-/* FP:mod.rs-0032 */ # [doc = " Why a specific goal has to be proven."] # [doc = ""] # [doc = " This is necessary as we treat nested goals different depending on"] # [doc = " their source. This is used to decide whether a cycle is coinductive."] # [doc = " See the documentation of `EvalCtxt::step_kind_for_source` for more details"] # [doc = " about this."] # [doc = ""] # [doc = " It is also used by proof tree visitors, e.g. for diagnostics purposes."] # [derive (Copy , Clone , Debug , PartialEq , Eq , Hash)] # [cfg_attr (feature = "nightly" , derive (HashStable_NoContext))] pub enum GoalSource { Misc , # [doc = " A nested goal required to prove that types are equal/subtypes."] # [doc = " This is always an unproductive step."] # [doc = ""] # [doc = " This is also used for all `NormalizesTo` goals as we they are used"] # [doc = " to relate types in `AliasRelate`."] TypeRelating , # [doc = " We're proving a where-bound of an impl."] ImplWhereBound , # [doc = " Const conditions that need to hold for `[const]` alias bounds to hold."] AliasBoundConstCondition , # [doc = " Instantiating a higher-ranked goal and re-proving it."] InstantiateHigherRanked , # [doc = " Predicate required for an alias projection to be well-formed."] # [doc = " This is used in three places:"] # [doc = " 1. projecting to an opaque whose hidden type is already registered in"] # [doc = "    the opaque type storage,"] # [doc = " 2. for rigid projections's trait goal,"] # [doc = " 3. for GAT where clauses."] AliasWellFormed , # [doc = " In case normalizing aliases in nested goals cycles, eagerly normalizing these"] # [doc = " aliases in the context of the parent may incorrectly change the cycle kind."] # [doc = " Normalizing aliases in goals therefore tracks the original path kind for this"] # [doc = " nested goal. See the comment of the `ReplaceAliasWithInfer` visitor for more"] # [doc = " details."] NormalizeGoal (PathKind) , }
-/* FP:mod.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_STRUCT_0017
-/* FP:mod.rs-0034 */ # [derive_where (Clone , Hash , PartialEq , Debug ; I : Interner , Goal < I , P >)] # [derive_where (Copy ; I : Interner , Goal < I , P >: Copy)] # [derive (TypeVisitable_Generic , TypeFoldable_Generic)] # [cfg_attr (feature = "nightly" , derive (Decodable_NoContext , Encodable_NoContext , HashStable_NoContext))] pub struct QueryInput < I : Interner , P > { pub goal : Goal < I , P > , pub predefined_opaques_in_body : I :: PredefinedOpaques , }
-/* FP:mod.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_IMPL_0018
-/* FP:mod.rs-0036 */ impl < I : Interner , P : Eq > Eq for QueryInput < I , P > { }
-/* FP:mod.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_STRUCT_0019
-/* FP:mod.rs-0038 */ # [doc = " Opaques that are defined in the inference context before a query is called."] # [derive_where (Clone , Hash , PartialEq , Debug , Default ; I : Interner)] # [derive (TypeVisitable_Generic , TypeFoldable_Generic)] # [cfg_attr (feature = "nightly" , derive (Decodable_NoContext , Encodable_NoContext , HashStable_NoContext))] pub struct PredefinedOpaquesData < I : Interner > { pub opaque_types : Vec < (ty :: OpaqueTypeKey < I > , I :: Ty) > , }
-/* FP:mod.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_IMPL_0020
-/* FP:mod.rs-0040 */ impl < I : Interner > Eq for PredefinedOpaquesData < I > { }
-/* FP:mod.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_ENUM_0021
-/* FP:mod.rs-0042 */ # [doc = " Possible ways the given goal can be proven."] # [derive_where (Clone , Copy , Hash , PartialEq , Debug ; I : Interner)] pub enum CandidateSource < I : Interner > { # [doc = " A user written impl."] # [doc = ""] # [doc = " ## Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " fn main() {"] # [doc = "     let x: Vec<u32> = Vec::new();"] # [doc = "     // This uses the impl from the standard library to prove `Vec<T>: Clone`."] # [doc = "     let y = x.clone();"] # [doc = " }"] # [doc = " ```"] Impl (I :: ImplId) , # [doc = " A builtin impl generated by the compiler. When adding a new special"] # [doc = " trait, try to use actual impls whenever possible. Builtin impls should"] # [doc = " only be used in cases where the impl cannot be manually be written."] # [doc = ""] # [doc = " Notable examples are auto traits, `Sized`, and `DiscriminantKind`."] # [doc = " For a list of all traits with builtin impls, check out the"] # [doc = " `EvalCtxt::assemble_builtin_impl_candidates` method."] BuiltinImpl (BuiltinImplSource) , # [doc = " An assumption from the environment. Stores a [`ParamEnvSource`], since we"] # [doc = " prefer non-global param-env candidates in candidate assembly."] # [doc = ""] # [doc = " ## Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " fn is_clone<T: Clone>(x: T) -> (T, T) {"] # [doc = "     // This uses the assumption `T: Clone` from the `where`-bounds"] # [doc = "     // to prove `T: Clone`."] # [doc = "     (x.clone(), x)"] # [doc = " }"] # [doc = " ```"] ParamEnv (ParamEnvSource) , # [doc = " If the self type is an alias type, e.g. an opaque type or a projection,"] # [doc = " we know the bounds on that alias to hold even without knowing its concrete"] # [doc = " underlying type."] # [doc = ""] # [doc = " More precisely this candidate is using the `n-th` bound in the `item_bounds` of"] # [doc = " the self type."] # [doc = ""] # [doc = " ## Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " trait Trait {"] # [doc = "     type Assoc: Clone;"] # [doc = " }"] # [doc = ""] # [doc = " fn foo<T: Trait>(x: <T as Trait>::Assoc) {"] # [doc = "     // We prove `<T as Trait>::Assoc` by looking at the bounds on `Assoc` in"] # [doc = "     // in the trait definition."] # [doc = "     let _y = x.clone();"] # [doc = " }"] # [doc = " ```"] AliasBound , # [doc = " A candidate that is registered only during coherence to represent some"] # [doc = " yet-unknown impl that could be produced downstream without violating orphan"] # [doc = " rules."] CoherenceUnknowable , }
-/* FP:mod.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_IMPL_0022
-/* FP:mod.rs-0044 */ impl < I : Interner > Eq for CandidateSource < I > { }
-/* FP:mod.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_ENUM_0023
-/* FP:mod.rs-0046 */ # [derive (Clone , Copy , Hash , PartialEq , Eq , Debug)] pub enum ParamEnvSource { # [doc = " Preferred eagerly."] NonGlobal , Global , }
-/* FP:mod.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_ENUM_0024
-/* FP:mod.rs-0048 */ # [derive (Clone , Copy , Hash , PartialEq , Eq , Debug)] # [cfg_attr (feature = "nightly" , derive (HashStable_NoContext , Encodable_NoContext , Decodable_NoContext))] pub enum BuiltinImplSource { # [doc = " A built-in impl that is considered trivial, without any nested requirements. They"] # [doc = " are preferred over where-clauses, and we want to track them explicitly."] Trivial , # [doc = " Some built-in impl we don't need to differentiate. This should be used"] # [doc = " unless more specific information is necessary."] Misc , # [doc = " A built-in impl for trait objects. The index is only used in winnowing."] Object (usize) , # [doc = " A built-in implementation of `Upcast` for trait objects to other trait objects."] # [doc = ""] # [doc = " The index is only used for winnowing."] TraitUpcasting (usize) , }
-/* FP:mod.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_STRUCT_0025
-/* FP:mod.rs-0050 */ # [derive_where (Clone , Copy , Hash , PartialEq , Debug ; I : Interner)] # [derive (TypeVisitable_Generic , TypeFoldable_Generic)] # [cfg_attr (feature = "nightly" , derive (HashStable_NoContext))] pub struct Response < I : Interner > { pub certainty : Certainty , pub var_values : CanonicalVarValues < I > , # [doc = " Additional constraints returned by this query."] pub external_constraints : I :: ExternalConstraints , }
-/* FP:mod.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_IMPL_0026
-/* FP:mod.rs-0052 */ impl < I : Interner > Eq for Response < I > { }
-/* FP:mod.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_STRUCT_0027
-/* FP:mod.rs-0054 */ # [doc = " Additional constraints returned on success."] # [derive_where (Clone , Hash , PartialEq , Debug , Default ; I : Interner)] # [derive (TypeVisitable_Generic , TypeFoldable_Generic)] # [cfg_attr (feature = "nightly" , derive (HashStable_NoContext))] pub struct ExternalConstraintsData < I : Interner > { pub region_constraints : Vec < ty :: OutlivesPredicate < I , I :: GenericArg > > , pub opaque_types : Vec < (ty :: OpaqueTypeKey < I > , I :: Ty) > , pub normalization_nested_goals : NestedNormalizationGoals < I > , }
-/* FP:mod.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_IMPL_0028
-/* FP:mod.rs-0056 */ impl < I : Interner > Eq for ExternalConstraintsData < I > { }
-/* FP:mod.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_IMPL_0029
-/* FP:mod.rs-0058 */ impl < I : Interner > ExternalConstraintsData < I > { pub fn is_empty (& self) -> bool { self . region_constraints . is_empty () && self . opaque_types . is_empty () && self . normalization_nested_goals . is_empty () } }
-/* FP:mod.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_STRUCT_0030
-/* FP:mod.rs-0060 */ # [derive_where (Clone , Hash , PartialEq , Debug , Default ; I : Interner)] # [derive (TypeVisitable_Generic , TypeFoldable_Generic)] # [cfg_attr (feature = "nightly" , derive (HashStable_NoContext))] pub struct NestedNormalizationGoals < I : Interner > (pub Vec < (GoalSource , Goal < I , I :: Predicate >) >) ;
-/* FP:mod.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_IMPL_0031
-/* FP:mod.rs-0062 */ impl < I : Interner > Eq for NestedNormalizationGoals < I > { }
-/* FP:mod.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_IMPL_0032
-/* FP:mod.rs-0064 */ impl < I : Interner > NestedNormalizationGoals < I > { pub fn empty () -> Self { NestedNormalizationGoals (vec ! []) } pub fn is_empty (& self) -> bool { self . 0 . is_empty () } }
-/* FP:mod.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_ENUM_0033
-/* FP:mod.rs-0066 */ # [derive (Clone , Copy , Hash , PartialEq , Eq , Debug)] # [cfg_attr (feature = "nightly" , derive (HashStable_NoContext))] pub enum Certainty { Yes , Maybe (MaybeCause) , }
-/* FP:mod.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_IMPL_0034
-/* FP:mod.rs-0068 */ impl Certainty { pub const AMBIGUOUS : Certainty = Certainty :: Maybe (MaybeCause :: Ambiguity) ; # [doc = " Use this function to merge the certainty of multiple nested subgoals."] # [doc = ""] # [doc = " Given an impl like `impl<T: Foo + Bar> Baz for T {}`, we have 2 nested"] # [doc = " subgoals whenever we use the impl as a candidate: `T: Foo` and `T: Bar`."] # [doc = " If evaluating `T: Foo` results in ambiguity and `T: Bar` results in"] # [doc = " success, we merge these two responses. This results in ambiguity."] # [doc = ""] # [doc = " If we unify ambiguity with overflow, we return overflow. This doesn't matter"] # [doc = " inside of the solver as we do not distinguish ambiguity from overflow. It does"] # [doc = " however matter for diagnostics. If `T: Foo` resulted in overflow and `T: Bar`"] # [doc = " in ambiguity without changing the inference state, we still want to tell the"] # [doc = " user that `T: Baz` results in overflow."] pub fn and (self , other : Certainty) -> Certainty { match (self , other) { (Certainty :: Yes , Certainty :: Yes) => Certainty :: Yes , (Certainty :: Yes , Certainty :: Maybe (_)) => other , (Certainty :: Maybe (_) , Certainty :: Yes) => self , (Certainty :: Maybe (a) , Certainty :: Maybe (b)) => Certainty :: Maybe (a . and (b)) , } } pub const fn overflow (suggest_increasing_limit : bool) -> Certainty { Certainty :: Maybe (MaybeCause :: Overflow { suggest_increasing_limit , keep_constraints : false }) } }
-/* FP:mod.rs-0069 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_ENUM_0035
-/* FP:mod.rs-0070 */ # [doc = " Why we failed to evaluate a goal."] # [derive (Clone , Copy , Hash , PartialEq , Eq , Debug)] # [cfg_attr (feature = "nightly" , derive (HashStable_NoContext))] pub enum MaybeCause { # [doc = " We failed due to ambiguity. This ambiguity can either"] # [doc = " be a true ambiguity, i.e. there are multiple different answers,"] # [doc = " or we hit a case where we just don't bother, e.g. `?x: Trait` goals."] Ambiguity , # [doc = " We gave up due to an overflow, most often by hitting the recursion limit."] Overflow { suggest_increasing_limit : bool , keep_constraints : bool } , }
-/* FP:mod.rs-0071 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_IMPL_0036
-/* FP:mod.rs-0072 */ impl MaybeCause { fn and (self , other : MaybeCause) -> MaybeCause { match (self , other) { (MaybeCause :: Ambiguity , MaybeCause :: Ambiguity) => MaybeCause :: Ambiguity , (MaybeCause :: Ambiguity , MaybeCause :: Overflow { .. }) => other , (MaybeCause :: Overflow { .. } , MaybeCause :: Ambiguity) => self , (MaybeCause :: Overflow { suggest_increasing_limit : limit_a , keep_constraints : keep_a , } , MaybeCause :: Overflow { suggest_increasing_limit : limit_b , keep_constraints : keep_b , } ,) => MaybeCause :: Overflow { suggest_increasing_limit : limit_a && limit_b , keep_constraints : keep_a && keep_b , } , } } pub fn or (self , other : MaybeCause) -> MaybeCause { match (self , other) { (MaybeCause :: Ambiguity , MaybeCause :: Ambiguity) => MaybeCause :: Ambiguity , (MaybeCause :: Ambiguity , MaybeCause :: Overflow { suggest_increasing_limit , keep_constraints : _ } ,) => MaybeCause :: Overflow { suggest_increasing_limit , keep_constraints : true } , (MaybeCause :: Overflow { suggest_increasing_limit , keep_constraints : _ } , MaybeCause :: Ambiguity ,) => MaybeCause :: Overflow { suggest_increasing_limit , keep_constraints : true } , (MaybeCause :: Overflow { suggest_increasing_limit : limit_a , keep_constraints : keep_a , } , MaybeCause :: Overflow { suggest_increasing_limit : limit_b , keep_constraints : keep_b , } ,) => MaybeCause :: Overflow { suggest_increasing_limit : limit_a || limit_b , keep_constraints : keep_a || keep_b , } , } } }
-/* FP:mod.rs-0073 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_ENUM_0037
-/* FP:mod.rs-0074 */ # [doc = " Indicates that a `impl Drop for Adt` is `const` or not."] # [derive (Debug)] pub enum AdtDestructorKind { NotConst , Const , }
-/* FP:mod.rs-0075 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_ENUM_0038
-/* FP:mod.rs-0076 */ # [doc = " Which sizedness trait - `Sized`, `MetaSized`? `PointeeSized` is omitted as it is removed during"] # [doc = " lowering."] # [derive (Copy , Clone , Debug , Eq , Hash , PartialEq)] # [cfg_attr (feature = "nightly" , derive (HashStable_NoContext))] pub enum SizedTraitKind { # [doc = " `Sized` trait"] Sized , # [doc = " `MetaSized` trait"] MetaSized , }
-/* FP:mod.rs-0077 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_type_ir_src_solve_mod_IMPL_0039
-/* FP:mod.rs-0078 */ impl SizedTraitKind { # [doc = " Returns `DefId` of corresponding language item."] pub fn require_lang_item < I : Interner > (self , cx : I) -> I :: TraitId { cx . require_trait_lang_item (match self { SizedTraitKind :: Sized => SolverTraitLangItem :: Sized , SizedTraitKind :: MetaSized => SolverTraitLangItem :: MetaSized , }) } }
+// SRC: ../rust/compiler/rustc_type_ir/src/solve/mod.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+use std::hash::Hash;
+
+use derive_where::derive_where;
+#[cfg(feature = "nightly")]
+use rustc_macros::{Decodable_NoContext, Encodable_NoContext, HashStable_NoContext};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use rustc_type_ir_macros::{Lift_Generic, TypeFoldable_Generic, TypeVisitable_Generic};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+
+use crate::lang_items::SolverTraitLangItem;
+use crate::search_graph::PathKind;
+use crate::{self as ty, Canonical, CanonicalVarValues, Interner, Upcast};
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=NoSolution; | COMPLEXITY=8 | LINES=32 */
+
+pub type CanonicalInput<I, T = <I as Interner>::Predicate> =
+    ty::CanonicalQueryInput<I, QueryInput<I, T>>;
+pub type CanonicalResponse<I> = Canonical<I, Response<I>>;
+/// The result of evaluating a canonical query.
+///
+/// FIXME: We use a different type than the existing canonical queries. This is because
+/// we need to add a `Certainty` for `overflow` and may want to restructure this code without
+/// having to worry about changes to currently used code. Once we've made progress on this
+/// solver, merge the two responses again.
+pub type QueryResult<I> = Result<CanonicalResponse<I>, NoSolution>;
+
+#[derive(Copy, Clone, Debug, Hash, PartialEq, Eq)]
+#[cfg_attr(feature = "nightly", derive(HashStable_NoContext))]
+pub struct NoSolution;
+
+/// A goal is a statement, i.e. `predicate`, we want to prove
+/// given some assumptions, i.e. `param_env`.
+///
+/// Most of the time the `param_env` contains the `where`-bounds of the function
+/// we're currently typechecking while the `predicate` is some trait bound.
+#[derive_where(Clone, Hash, PartialEq, Debug; I: Interner, P)]
+#[derive_where(Copy; I: Interner, P: Copy)]
+#[derive(TypeVisitable_Generic, TypeFoldable_Generic, Lift_Generic)]
+#[cfg_attr(
+    feature = "nightly",
+    derive(Decodable_NoContext, Encodable_NoContext, HashStable_NoContext)
+)]
+pub struct Goal<I: Interner, P> {
+    pub param_env: I::ParamEnv,
+    pub predicate: P,
+}
+/* AST_META: AST_ID=5 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<I: Interner, P: Eq> Eq for Goal<I, P> {}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=new | COMPLEXITY=6 | LINES=11 */
+
+impl<I: Interner, P> Goal<I, P> {
+    pub fn new(cx: I, param_env: I::ParamEnv, predicate: impl Upcast<I, P>) -> Goal<I, P> {
+        Goal { param_env, predicate: predicate.upcast(cx) }
+    }
+
+    /// Updates the goal to one with a different `predicate` but the same `param_env`.
+    pub fn with<Q>(self, cx: I, predicate: impl Upcast<I, Q>) -> Goal<I, Q> {
+        Goal { param_env: self.param_env, predicate: predicate.upcast(cx) }
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=23 | LINES=39 */
+
+/// Why a specific goal has to be proven.
+///
+/// This is necessary as we treat nested goals different depending on
+/// their source. This is used to decide whether a cycle is coinductive.
+/// See the documentation of `EvalCtxt::step_kind_for_source` for more details
+/// about this.
+///
+/// It is also used by proof tree visitors, e.g. for diagnostics purposes.
+#[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "nightly", derive(HashStable_NoContext))]
+pub enum GoalSource {
+    Misc,
+    /// A nested goal required to prove that types are equal/subtypes.
+    /// This is always an unproductive step.
+    ///
+    /// This is also used for all `NormalizesTo` goals as we they are used
+    /// to relate types in `AliasRelate`.
+    TypeRelating,
+    /// We're proving a where-bound of an impl.
+    ImplWhereBound,
+    /// Const conditions that need to hold for `[const]` alias bounds to hold.
+    AliasBoundConstCondition,
+    /// Instantiating a higher-ranked goal and re-proving it.
+    InstantiateHigherRanked,
+    /// Predicate required for an alias projection to be well-formed.
+    /// This is used in three places:
+    /// 1. projecting to an opaque whose hidden type is already registered in
+    ///    the opaque type storage,
+    /// 2. for rigid projections's trait goal,
+    /// 3. for GAT where clauses.
+    AliasWellFormed,
+    /// In case normalizing aliases in nested goals cycles, eagerly normalizing these
+    /// aliases in the context of the parent may incorrectly change the cycle kind.
+    /// Normalizing aliases in goals therefore tracks the original path kind for this
+    /// nested goal. See the comment of the `ReplaceAliasWithInfer` visitor for more
+    /// details.
+    NormalizeGoal(PathKind),
+}
+/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=QueryInput | COMPLEXITY=2 | LINES=12 */
+
+#[derive_where(Clone, Hash, PartialEq, Debug; I: Interner, Goal<I, P>)]
+#[derive_where(Copy; I: Interner, Goal<I, P>: Copy)]
+#[derive(TypeVisitable_Generic, TypeFoldable_Generic)]
+#[cfg_attr(
+    feature = "nightly",
+    derive(Decodable_NoContext, Encodable_NoContext, HashStable_NoContext)
+)]
+pub struct QueryInput<I: Interner, P> {
+    pub goal: Goal<I, P>,
+    pub predefined_opaques_in_body: I::PredefinedOpaques,
+}
+/* AST_META: AST_ID=9 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<I: Interner, P: Eq> Eq for QueryInput<I, P> {}
+/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=PredefinedOpaquesData | COMPLEXITY=2 | LINES=11 */
+
+/// Opaques that are defined in the inference context before a query is called.
+#[derive_where(Clone, Hash, PartialEq, Debug, Default; I: Interner)]
+#[derive(TypeVisitable_Generic, TypeFoldable_Generic)]
+#[cfg_attr(
+    feature = "nightly",
+    derive(Decodable_NoContext, Encodable_NoContext, HashStable_NoContext)
+)]
+pub struct PredefinedOpaquesData<I: Interner> {
+    pub opaque_types: Vec<(ty::OpaqueTypeKey<I>, I::Ty)>,
+}
+/* AST_META: AST_ID=11 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<I: Interner> Eq for PredefinedOpaquesData<I> {}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=10 | LINES=64 */
+
+/// Possible ways the given goal can be proven.
+#[derive_where(Clone, Copy, Hash, PartialEq, Debug; I: Interner)]
+pub enum CandidateSource<I: Interner> {
+    /// A user written impl.
+    ///
+    /// ## Examples
+    ///
+    /// ```rust
+    /// fn main() {
+    ///     let x: Vec<u32> = Vec::new();
+    ///     // This uses the impl from the standard library to prove `Vec<T>: Clone`.
+    ///     let y = x.clone();
+    /// }
+    /// ```
+    Impl(I::ImplId),
+    /// A builtin impl generated by the compiler. When adding a new special
+    /// trait, try to use actual impls whenever possible. Builtin impls should
+    /// only be used in cases where the impl cannot be manually be written.
+    ///
+    /// Notable examples are auto traits, `Sized`, and `DiscriminantKind`.
+    /// For a list of all traits with builtin impls, check out the
+    /// `EvalCtxt::assemble_builtin_impl_candidates` method.
+    BuiltinImpl(BuiltinImplSource),
+    /// An assumption from the environment. Stores a [`ParamEnvSource`], since we
+    /// prefer non-global param-env candidates in candidate assembly.
+    ///
+    /// ## Examples
+    ///
+    /// ```rust
+    /// fn is_clone<T: Clone>(x: T) -> (T, T) {
+    ///     // This uses the assumption `T: Clone` from the `where`-bounds
+    ///     // to prove `T: Clone`.
+    ///     (x.clone(), x)
+    /// }
+    /// ```
+    ParamEnv(ParamEnvSource),
+    /// If the self type is an alias type, e.g. an opaque type or a projection,
+    /// we know the bounds on that alias to hold even without knowing its concrete
+    /// underlying type.
+    ///
+    /// More precisely this candidate is using the `n-th` bound in the `item_bounds` of
+    /// the self type.
+    ///
+    /// ## Examples
+    ///
+    /// ```rust
+    /// trait Trait {
+    ///     type Assoc: Clone;
+    /// }
+    ///
+    /// fn foo<T: Trait>(x: <T as Trait>::Assoc) {
+    ///     // We prove `<T as Trait>::Assoc` by looking at the bounds on `Assoc` in
+    ///     // in the trait definition.
+    ///     let _y = x.clone();
+    /// }
+    /// ```
+    AliasBound,
+    /// A candidate that is registered only during coherence to represent some
+    /// yet-unknown impl that could be produced downstream without violating orphan
+    /// rules.
+    // FIXME: Merge this with the forced ambiguity candidates, so those don't use `Misc`.
+    CoherenceUnknowable,
+}
+/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<I: Interner> Eq for CandidateSource<I> {}
+/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Clone, Copy, Hash, PartialEq, Eq, Debug)]
+pub enum ParamEnvSource {
+    /// Preferred eagerly.
+    NonGlobal,
+    // Not considered unless there are non-global param-env candidates too.
+    Global,
+}
+/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=9 | LINES=20 */
+
+#[derive(Clone, Copy, Hash, PartialEq, Eq, Debug)]
+#[cfg_attr(
+    feature = "nightly",
+    derive(HashStable_NoContext, Encodable_NoContext, Decodable_NoContext)
+)]
+pub enum BuiltinImplSource {
+    /// A built-in impl that is considered trivial, without any nested requirements. They
+    /// are preferred over where-clauses, and we want to track them explicitly.
+    Trivial,
+    /// Some built-in impl we don't need to differentiate. This should be used
+    /// unless more specific information is necessary.
+    Misc,
+    /// A built-in impl for trait objects. The index is only used in winnowing.
+    Object(usize),
+    /// A built-in implementation of `Upcast` for trait objects to other trait objects.
+    ///
+    /// The index is only used for winnowing.
+    TraitUpcasting(usize),
+}
+/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=Response | COMPLEXITY=2 | LINES=10 */
+
+#[derive_where(Clone, Copy, Hash, PartialEq, Debug; I: Interner)]
+#[derive(TypeVisitable_Generic, TypeFoldable_Generic)]
+#[cfg_attr(feature = "nightly", derive(HashStable_NoContext))]
+pub struct Response<I: Interner> {
+    pub certainty: Certainty,
+    pub var_values: CanonicalVarValues<I>,
+    /// Additional constraints returned by this query.
+    pub external_constraints: I::ExternalConstraints,
+}
+/* AST_META: AST_ID=17 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<I: Interner> Eq for Response<I> {}
+/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=ExternalConstraintsData | COMPLEXITY=2 | LINES=10 */
+
+/// Additional constraints returned on success.
+#[derive_where(Clone, Hash, PartialEq, Debug, Default; I: Interner)]
+#[derive(TypeVisitable_Generic, TypeFoldable_Generic)]
+#[cfg_attr(feature = "nightly", derive(HashStable_NoContext))]
+pub struct ExternalConstraintsData<I: Interner> {
+    pub region_constraints: Vec<ty::OutlivesPredicate<I, I::GenericArg>>,
+    pub opaque_types: Vec<(ty::OpaqueTypeKey<I>, I::Ty)>,
+    pub normalization_nested_goals: NestedNormalizationGoals<I>,
+}
+/* AST_META: AST_ID=19 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<I: Interner> Eq for ExternalConstraintsData<I> {}
+/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=is_empty | COMPLEXITY=3 | LINES=8 */
+
+impl<I: Interner> ExternalConstraintsData<I> {
+    pub fn is_empty(&self) -> bool {
+        self.region_constraints.is_empty()
+            && self.opaque_types.is_empty()
+            && self.normalization_nested_goals.is_empty()
+    }
+}
+/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=NestedNormalizationGoals | COMPLEXITY=4 | LINES=7 */
+
+#[derive_where(Clone, Hash, PartialEq, Debug, Default; I: Interner)]
+#[derive(TypeVisitable_Generic, TypeFoldable_Generic)]
+#[cfg_attr(feature = "nightly", derive(HashStable_NoContext))]
+pub struct NestedNormalizationGoals<I: Interner>(pub Vec<(GoalSource, Goal<I, I::Predicate>)>);
+
+impl<I: Interner> Eq for NestedNormalizationGoals<I> {}
+/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=empty | COMPLEXITY=4 | LINES=10 */
+
+impl<I: Interner> NestedNormalizationGoals<I> {
+    pub fn empty() -> Self {
+        NestedNormalizationGoals(vec![])
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.0.is_empty()
+    }
+}
+/* AST_META: AST_ID=23 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Clone, Copy, Hash, PartialEq, Eq, Debug)]
+#[cfg_attr(feature = "nightly", derive(HashStable_NoContext))]
+pub enum Certainty {
+    Yes,
+    Maybe(MaybeCause),
+}
+/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=and | COMPLEXITY=16 | LINES=29 */
+
+impl Certainty {
+    pub const AMBIGUOUS: Certainty = Certainty::Maybe(MaybeCause::Ambiguity);
+
+    /// Use this function to merge the certainty of multiple nested subgoals.
+    ///
+    /// Given an impl like `impl<T: Foo + Bar> Baz for T {}`, we have 2 nested
+    /// subgoals whenever we use the impl as a candidate: `T: Foo` and `T: Bar`.
+    /// If evaluating `T: Foo` results in ambiguity and `T: Bar` results in
+    /// success, we merge these two responses. This results in ambiguity.
+    ///
+    /// If we unify ambiguity with overflow, we return overflow. This doesn't matter
+    /// inside of the solver as we do not distinguish ambiguity from overflow. It does
+    /// however matter for diagnostics. If `T: Foo` resulted in overflow and `T: Bar`
+    /// in ambiguity without changing the inference state, we still want to tell the
+    /// user that `T: Baz` results in overflow.
+    pub fn and(self, other: Certainty) -> Certainty {
+        match (self, other) {
+            (Certainty::Yes, Certainty::Yes) => Certainty::Yes,
+            (Certainty::Yes, Certainty::Maybe(_)) => other,
+            (Certainty::Maybe(_), Certainty::Yes) => self,
+            (Certainty::Maybe(a), Certainty::Maybe(b)) => Certainty::Maybe(a.and(b)),
+        }
+    }
+
+    pub const fn overflow(suggest_increasing_limit: bool) -> Certainty {
+        Certainty::Maybe(MaybeCause::Overflow { suggest_increasing_limit, keep_constraints: false })
+    }
+}
+/* AST_META: AST_ID=25 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
+
+/// Why we failed to evaluate a goal.
+#[derive(Clone, Copy, Hash, PartialEq, Eq, Debug)]
+#[cfg_attr(feature = "nightly", derive(HashStable_NoContext))]
+pub enum MaybeCause {
+    /// We failed due to ambiguity. This ambiguity can either
+    /// be a true ambiguity, i.e. there are multiple different answers,
+    /// or we hit a case where we just don't bother, e.g. `?x: Trait` goals.
+    Ambiguity,
+    /// We gave up due to an overflow, most often by hitting the recursion limit.
+    Overflow { suggest_increasing_limit: bool, keep_constraints: bool },
+}
+/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=and | COMPLEXITY=28 | LINES=53 */
+
+impl MaybeCause {
+    fn and(self, other: MaybeCause) -> MaybeCause {
+        match (self, other) {
+            (MaybeCause::Ambiguity, MaybeCause::Ambiguity) => MaybeCause::Ambiguity,
+            (MaybeCause::Ambiguity, MaybeCause::Overflow { .. }) => other,
+            (MaybeCause::Overflow { .. }, MaybeCause::Ambiguity) => self,
+            (
+                MaybeCause::Overflow {
+                    suggest_increasing_limit: limit_a,
+                    keep_constraints: keep_a,
+                },
+                MaybeCause::Overflow {
+                    suggest_increasing_limit: limit_b,
+                    keep_constraints: keep_b,
+                },
+            ) => MaybeCause::Overflow {
+                suggest_increasing_limit: limit_a && limit_b,
+                keep_constraints: keep_a && keep_b,
+            },
+        }
+    }
+
+    pub fn or(self, other: MaybeCause) -> MaybeCause {
+        match (self, other) {
+            (MaybeCause::Ambiguity, MaybeCause::Ambiguity) => MaybeCause::Ambiguity,
+
+            // When combining ambiguity + overflow, we can keep constraints.
+            (
+                MaybeCause::Ambiguity,
+                MaybeCause::Overflow { suggest_increasing_limit, keep_constraints: _ },
+            ) => MaybeCause::Overflow { suggest_increasing_limit, keep_constraints: true },
+            (
+                MaybeCause::Overflow { suggest_increasing_limit, keep_constraints: _ },
+                MaybeCause::Ambiguity,
+            ) => MaybeCause::Overflow { suggest_increasing_limit, keep_constraints: true },
+
+            (
+                MaybeCause::Overflow {
+                    suggest_increasing_limit: limit_a,
+                    keep_constraints: keep_a,
+                },
+                MaybeCause::Overflow {
+                    suggest_increasing_limit: limit_b,
+                    keep_constraints: keep_b,
+                },
+            ) => MaybeCause::Overflow {
+                suggest_increasing_limit: limit_a || limit_b,
+                keep_constraints: keep_a || keep_b,
+            },
+        }
+    }
+}
+/* AST_META: AST_ID=27 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=7 */
+
+/// Indicates that a `impl Drop for Adt` is `const` or not.
+#[derive(Debug)]
+pub enum AdtDestructorKind {
+    NotConst,
+    Const,
+}
+/* AST_META: AST_ID=28 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+
+/// Which sizedness trait - `Sized`, `MetaSized`? `PointeeSized` is omitted as it is removed during
+/// lowering.
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+#[cfg_attr(feature = "nightly", derive(HashStable_NoContext))]
+pub enum SizedTraitKind {
+    /// `Sized` trait
+    Sized,
+    /// `MetaSized` trait
+    MetaSized,
+}
+/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=require_lang_item | COMPLEXITY=7 | LINES=10 */
+
+impl SizedTraitKind {
+    /// Returns `DefId` of corresponding language item.
+    pub fn require_lang_item<I: Interner>(self, cx: I) -> I::TraitId {
+        cx.require_trait_lang_item(match self {
+            SizedTraitKind::Sized => SolverTraitLangItem::Sized,
+            SizedTraitKind::MetaSized => SolverTraitLangItem::MetaSized,
+        })
+    }
+}

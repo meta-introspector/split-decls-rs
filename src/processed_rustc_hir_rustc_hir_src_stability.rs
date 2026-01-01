@@ -1,36 +1,222 @@
-/* FP:stability.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_USE_0001
-/* FP:stability.rs-0002 */ use std :: num :: NonZero ;
-/* FP:stability.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_USE_0002
-/* FP:stability.rs-0004 */ use rustc_macros :: { Decodable , Encodable , HashStable_Generic , PrintAttribute } ;
-/* FP:stability.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_USE_0003
-/* FP:stability.rs-0006 */ use crate :: rustc_complete :: { ErrorGuaranteed , Symbol , sym } ;
-/* FP:stability.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_USE_0004
-/* FP:stability.rs-0008 */ use crate :: RustcVersion ;
-/* FP:stability.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_USE_0005
-/* FP:stability.rs-0010 */ use crate :: attrs :: PrintAttribute ;
-/* FP:stability.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_CONST_0006
-/* FP:stability.rs-0012 */ # [doc = " The version placeholder that recently stabilized features contain inside the"] # [doc = " `since` field of the `#[stable]` attribute."] # [doc = ""] # [doc = " For more, see [this pull request](https://github.com/rust-lang/rust/pull/100591)."] pub const VERSION_PLACEHOLDER : & str = concat ! ("CURRENT_RUSTC_VERSIO" , "N") ;
-/* FP:stability.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_STRUCT_0007
-/* FP:stability.rs-0014 */ # [doc = " Represents the following attributes:"] # [doc = ""] # [doc = " - `#[stable]`"] # [doc = " - `#[unstable]`"] # [derive (Encodable , Decodable , Copy , Clone , Debug , PartialEq , Eq , Hash)] # [derive (HashStable_Generic , PrintAttribute)] pub struct Stability { pub level : StabilityLevel , pub feature : Symbol , }
-/* FP:stability.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_IMPL_0008
-/* FP:stability.rs-0016 */ impl Stability { pub fn is_unstable (& self) -> bool { self . level . is_unstable () } pub fn is_stable (& self) -> bool { self . level . is_stable () } pub fn stable_since (& self) -> Option < StableSince > { self . level . stable_since () } }
-/* FP:stability.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_STRUCT_0009
-/* FP:stability.rs-0018 */ # [doc = " Represents the `#[rustc_const_unstable]` and `#[rustc_const_stable]` attributes."] # [derive (Encodable , Decodable , Copy , Clone , Debug , PartialEq , Eq , Hash)] # [derive (HashStable_Generic , PrintAttribute)] pub struct ConstStability { pub level : StabilityLevel , pub feature : Symbol , # [doc = " whether the function has a `#[rustc_promotable]` attribute"] pub promotable : bool , # [doc = " This is true iff the `const_stable_indirect` attribute is present."] pub const_stable_indirect : bool , }
-/* FP:stability.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_IMPL_0010
-/* FP:stability.rs-0020 */ impl ConstStability { pub fn from_partial (PartialConstStability { level , feature , promotable } : PartialConstStability , const_stable_indirect : bool ,) -> Self { Self { const_stable_indirect , level , feature , promotable } } # [doc = " The stability assigned to unmarked items when -Zforce-unstable-if-unmarked is set."] pub fn unmarked (const_stable_indirect : bool , regular_stab : Stability) -> Self { Self { feature : regular_stab . feature , promotable : false , level : regular_stab . level , const_stable_indirect , } } pub fn is_const_unstable (& self) -> bool { self . level . is_unstable () } pub fn is_const_stable (& self) -> bool { self . level . is_stable () } }
-/* FP:stability.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_STRUCT_0011
-/* FP:stability.rs-0022 */ # [doc = " Excludes `const_stable_indirect`. This is necessary because when `-Zforce-unstable-if-unmarked`"] # [doc = " is set, we need to encode standalone `#[rustc_const_stable_indirect]` attributes"] # [derive (Encodable , Decodable , Copy , Clone , Debug , PartialEq , Eq , Hash)] # [derive (HashStable_Generic , PrintAttribute)] pub struct PartialConstStability { pub level : StabilityLevel , pub feature : Symbol , # [doc = " whether the function has a `#[rustc_promotable]` attribute"] pub promotable : bool , }
-/* FP:stability.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_IMPL_0012
-/* FP:stability.rs-0024 */ impl PartialConstStability { pub fn is_const_unstable (& self) -> bool { self . level . is_unstable () } pub fn is_const_stable (& self) -> bool { self . level . is_stable () } }
-/* FP:stability.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_ENUM_0013
-/* FP:stability.rs-0026 */ # [doc = " The available stability levels."] # [derive (Encodable , Decodable , PartialEq , Copy , Clone , Debug , Eq , Hash)] # [derive (HashStable_Generic , PrintAttribute)] pub enum StabilityLevel { # [doc = " `#[unstable]`"] Unstable { # [doc = " Reason for the current stability level."] reason : UnstableReason , # [doc = " Relevant `rust-lang/rust` issue."] issue : Option < NonZero < u32 > > , is_soft : bool , # [doc = " If part of a feature is stabilized and a new feature is added for the remaining parts,"] # [doc = " then the `implied_by` attribute is used to indicate which now-stable feature previously"] # [doc = " contained an item."] # [doc = ""] # [doc = " ```pseudo-Rust"] # [doc = " #[unstable(feature = \"foo\", issue = \"...\")]"] # [doc = " fn foo() {}"] # [doc = " #[unstable(feature = \"foo\", issue = \"...\")]"] # [doc = " fn foobar() {}"] # [doc = " ```"] # [doc = ""] # [doc = " ...becomes..."] # [doc = ""] # [doc = " ```pseudo-Rust"] # [doc = " #[stable(feature = \"foo\", since = \"1.XX.X\")]"] # [doc = " fn foo() {}"] # [doc = " #[unstable(feature = \"foobar\", issue = \"...\", implied_by = \"foo\")]"] # [doc = " fn foobar() {}"] # [doc = " ```"] implied_by : Option < Symbol > , old_name : Option < Symbol > , } , # [doc = " `#[stable]`"] Stable { # [doc = " Rust release which stabilized this feature."] since : StableSince , # [doc = " This is `Some` if this item allowed to be referred to on stable via unstable modules;"] # [doc = " the `Symbol` is the deprecation message printed in that case."] allowed_through_unstable_modules : Option < Symbol > , } , }
-/* FP:stability.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_ENUM_0014
-/* FP:stability.rs-0028 */ # [doc = " Rust release in which a feature is stabilized."] # [derive (Encodable , Decodable , PartialEq , Copy , Clone , Debug , Eq , PartialOrd , Ord , Hash)] # [derive (HashStable_Generic , PrintAttribute)] pub enum StableSince { # [doc = " also stores the original symbol for printing"] Version (RustcVersion) , # [doc = " Stabilized in the upcoming version, whatever number that is."] Current , # [doc = " Failed to parse a stabilization version."] Err (ErrorGuaranteed) , }
-/* FP:stability.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_IMPL_0015
-/* FP:stability.rs-0030 */ impl StabilityLevel { pub fn is_unstable (& self) -> bool { matches ! (self , StabilityLevel :: Unstable { .. }) } pub fn is_stable (& self) -> bool { matches ! (self , StabilityLevel :: Stable { .. }) } pub fn stable_since (& self) -> Option < StableSince > { match * self { StabilityLevel :: Stable { since , .. } => Some (since) , StabilityLevel :: Unstable { .. } => None , } } }
-/* FP:stability.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_ENUM_0016
-/* FP:stability.rs-0032 */ # [derive (Encodable , Decodable , PartialEq , Copy , Clone , Debug , Eq , Hash)] # [derive (HashStable_Generic , PrintAttribute)] pub enum UnstableReason { None , Default , Some (Symbol) , }
-/* FP:stability.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_STRUCT_0017
-/* FP:stability.rs-0034 */ # [doc = " Represents the `#[rustc_default_body_unstable]` attribute."] # [derive (Encodable , Decodable , Copy , Clone , Debug , PartialEq , Eq , Hash)] # [derive (HashStable_Generic , PrintAttribute)] pub struct DefaultBodyStability { pub level : StabilityLevel , pub feature : Symbol , }
-/* FP:stability.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_stability_IMPL_0018
-/* FP:stability.rs-0036 */ impl UnstableReason { pub fn from_opt_reason (reason : Option < Symbol >) -> Self { match reason { Some (r) => Self :: Some (r) , None => Self :: None , } } pub fn to_opt_reason (& self) -> Option < Symbol > { match self { Self :: None => None , Self :: Default => Some (sym :: unstable_location_reason_default) , Self :: Some (r) => Some (* r) , } } }
+// SRC: ../rust/compiler/rustc_hir/src/stability.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use std::num::NonZero;
+
+use rustc_macros::{Decodable, Encodable, HashStable_Generic, PrintAttribute};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{ErrorGuaranteed, Symbol, sym};
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=Stability | COMPLEXITY=3 | LINES=25 */
+
+use crate::RustcVersion;
+use crate::attrs::PrintAttribute;
+
+/// The version placeholder that recently stabilized features contain inside the
+/// `since` field of the `#[stable]` attribute.
+///
+/// For more, see [this pull request](https://github.com/rust-lang/rust/pull/100591).
+pub const VERSION_PLACEHOLDER: &str = concat!("CURRENT_RUSTC_VERSIO", "N");
+// Note that the `concat!` macro above prevents `src/tools/replace-version-placeholder` from
+// replacing the constant with the current version. Hardcoding the tool to skip this file doesn't
+// work as the file can (and at some point will) be moved around.
+//
+// Turning the `concat!` macro into a string literal will make Pietro cry. That'd be sad :(
+
+/// Represents the following attributes:
+///
+/// - `#[stable]`
+/// - `#[unstable]`
+#[derive(Encodable, Decodable, Copy, Clone, Debug, PartialEq, Eq, Hash)]
+#[derive(HashStable_Generic, PrintAttribute)]
+pub struct Stability {
+    pub level: StabilityLevel,
+    pub feature: Symbol,
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=is_unstable | COMPLEXITY=5 | LINES=14 */
+
+impl Stability {
+    pub fn is_unstable(&self) -> bool {
+        self.level.is_unstable()
+    }
+
+    pub fn is_stable(&self) -> bool {
+        self.level.is_stable()
+    }
+
+    pub fn stable_since(&self) -> Option<StableSince> {
+        self.level.stable_since()
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=ConstStability | COMPLEXITY=2 | LINES=12 */
+
+/// Represents the `#[rustc_const_unstable]` and `#[rustc_const_stable]` attributes.
+#[derive(Encodable, Decodable, Copy, Clone, Debug, PartialEq, Eq, Hash)]
+#[derive(HashStable_Generic, PrintAttribute)]
+pub struct ConstStability {
+    pub level: StabilityLevel,
+    pub feature: Symbol,
+    /// whether the function has a `#[rustc_promotable]` attribute
+    pub promotable: bool,
+    /// This is true iff the `const_stable_indirect` attribute is present.
+    pub const_stable_indirect: bool,
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=from_partial | COMPLEXITY=10 | LINES=27 */
+
+impl ConstStability {
+    pub fn from_partial(
+        PartialConstStability { level, feature, promotable }: PartialConstStability,
+        const_stable_indirect: bool,
+    ) -> Self {
+        Self { const_stable_indirect, level, feature, promotable }
+    }
+
+    /// The stability assigned to unmarked items when -Zforce-unstable-if-unmarked is set.
+    pub fn unmarked(const_stable_indirect: bool, regular_stab: Stability) -> Self {
+        Self {
+            feature: regular_stab.feature,
+            promotable: false,
+            level: regular_stab.level,
+            const_stable_indirect,
+        }
+    }
+
+    pub fn is_const_unstable(&self) -> bool {
+        self.level.is_unstable()
+    }
+
+    pub fn is_const_stable(&self) -> bool {
+        self.level.is_stable()
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=PartialConstStability | COMPLEXITY=2 | LINES=11 */
+
+/// Excludes `const_stable_indirect`. This is necessary because when `-Zforce-unstable-if-unmarked`
+/// is set, we need to encode standalone `#[rustc_const_stable_indirect]` attributes
+#[derive(Encodable, Decodable, Copy, Clone, Debug, PartialEq, Eq, Hash)]
+#[derive(HashStable_Generic, PrintAttribute)]
+pub struct PartialConstStability {
+    pub level: StabilityLevel,
+    pub feature: Symbol,
+    /// whether the function has a `#[rustc_promotable]` attribute
+    pub promotable: bool,
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=is_const_unstable | COMPLEXITY=4 | LINES=10 */
+
+impl PartialConstStability {
+    pub fn is_const_unstable(&self) -> bool {
+        self.level.is_unstable()
+    }
+
+    pub fn is_const_stable(&self) -> bool {
+        self.level.is_stable()
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=43 */
+
+/// The available stability levels.
+#[derive(Encodable, Decodable, PartialEq, Copy, Clone, Debug, Eq, Hash)]
+#[derive(HashStable_Generic, PrintAttribute)]
+pub enum StabilityLevel {
+    /// `#[unstable]`
+    Unstable {
+        /// Reason for the current stability level.
+        reason: UnstableReason,
+        /// Relevant `rust-lang/rust` issue.
+        issue: Option<NonZero<u32>>,
+        is_soft: bool,
+        /// If part of a feature is stabilized and a new feature is added for the remaining parts,
+        /// then the `implied_by` attribute is used to indicate which now-stable feature previously
+        /// contained an item.
+        ///
+        /// ```pseudo-Rust
+        /// #[unstable(feature = "foo", issue = "...")]
+        /// fn foo() {}
+        /// #[unstable(feature = "foo", issue = "...")]
+        /// fn foobar() {}
+        /// ```
+        ///
+        /// ...becomes...
+        ///
+        /// ```pseudo-Rust
+        /// #[stable(feature = "foo", since = "1.XX.X")]
+        /// fn foo() {}
+        /// #[unstable(feature = "foobar", issue = "...", implied_by = "foo")]
+        /// fn foobar() {}
+        /// ```
+        implied_by: Option<Symbol>,
+        old_name: Option<Symbol>,
+    },
+    /// `#[stable]`
+    Stable {
+        /// Rust release which stabilized this feature.
+        since: StableSince,
+        /// This is `Some` if this item allowed to be referred to on stable via unstable modules;
+        /// the `Symbol` is the deprecation message printed in that case.
+        allowed_through_unstable_modules: Option<Symbol>,
+    },
+}
+/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
+
+/// Rust release in which a feature is stabilized.
+#[derive(Encodable, Decodable, PartialEq, Copy, Clone, Debug, Eq, PartialOrd, Ord, Hash)]
+#[derive(HashStable_Generic, PrintAttribute)]
+pub enum StableSince {
+    /// also stores the original symbol for printing
+    Version(RustcVersion),
+    /// Stabilized in the upcoming version, whatever number that is.
+    Current,
+    /// Failed to parse a stabilization version.
+    Err(ErrorGuaranteed),
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=is_unstable | COMPLEXITY=13 | LINES=15 */
+
+impl StabilityLevel {
+    pub fn is_unstable(&self) -> bool {
+        matches!(self, StabilityLevel::Unstable { .. })
+    }
+    pub fn is_stable(&self) -> bool {
+        matches!(self, StabilityLevel::Stable { .. })
+    }
+    pub fn stable_since(&self) -> Option<StableSince> {
+        match *self {
+            StabilityLevel::Stable { since, .. } => Some(since),
+            StabilityLevel::Unstable { .. } => None,
+        }
+    }
+}
+/* AST_META: AST_ID=12 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Encodable, Decodable, PartialEq, Copy, Clone, Debug, Eq, Hash)]
+#[derive(HashStable_Generic, PrintAttribute)]
+pub enum UnstableReason {
+    None,
+    Default,
+    Some(Symbol),
+}
+/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=DefaultBodyStability | COMPLEXITY=2 | LINES=8 */
+
+/// Represents the `#[rustc_default_body_unstable]` attribute.
+#[derive(Encodable, Decodable, Copy, Clone, Debug, PartialEq, Eq, Hash)]
+#[derive(HashStable_Generic, PrintAttribute)]
+pub struct DefaultBodyStability {
+    pub level: StabilityLevel,
+    pub feature: Symbol,
+}
+/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=from_opt_reason | COMPLEXITY=12 | LINES=18 */
+
+impl UnstableReason {
+    pub fn from_opt_reason(reason: Option<Symbol>) -> Self {
+        // UnstableReason::Default constructed manually
+        match reason {
+            Some(r) => Self::Some(r),
+            None => Self::None,
+        }
+    }
+
+    pub fn to_opt_reason(&self) -> Option<Symbol> {
+        match self {
+            Self::None => None,
+            Self::Default => Some(sym::unstable_location_reason_default),
+            Self::Some(r) => Some(*r),
+        }
+    }
+}

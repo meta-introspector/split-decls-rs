@@ -1,2 +1,11 @@
-/* FP:tests.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_tests_FN_0001
-/* FP:tests.rs-0002 */ # [test] fn noop () { crate :: rustc_data_structures :: __noop_fix_for_windows_dllimport_issue () ; }
+// SRC: ../rust/compiler/rustc_middle/src/tests.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=noop | COMPLEXITY=3 | LINES=9 */
+// FIXME(#27438): Right now, the unit tests of `rustc_middle` don't refer to any actual functions
+//                generated in `rustc_data_structures` (all references are through generic functions),
+//                but statics are referenced from time to time. Due to this Windows `dllimport` bug
+//                we won't actually correctly link in the statics unless we also reference a function,
+//                so be sure to reference a dummy function.
+#[test]
+fn noop() {
+    crate::rustc_data_structures::__noop_fix_for_windows_dllimport_issue();
+}

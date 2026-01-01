@@ -1,18 +1,98 @@
-/* FP:object.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_debuginfo_object_USE_0001
-/* FP:object.rs-0002 */ use cranelift_module :: { DataId , FuncId } ;
-/* FP:object.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_debuginfo_object_USE_0002
-/* FP:object.rs-0004 */ use cranelift_object :: ObjectProduct ;
-/* FP:object.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_debuginfo_object_USE_0003
-/* FP:object.rs-0006 */ use gimli :: SectionId ;
-/* FP:object.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_debuginfo_object_USE_0004
-/* FP:object.rs-0008 */ use object :: write :: { Relocation , StandardSegment } ;
-/* FP:object.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_debuginfo_object_USE_0005
-/* FP:object.rs-0010 */ use object :: { RelocationEncoding , RelocationFlags , SectionKind } ;
-/* FP:object.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_debuginfo_object_USE_0006
-/* FP:object.rs-0012 */ use crate :: rustc_data_structures :: fx :: FxHashMap ;
-/* FP:object.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_debuginfo_object_USE_0007
-/* FP:object.rs-0014 */ use crate :: debuginfo :: { DebugReloc , DebugRelocName } ;
-/* FP:object.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_debuginfo_object_TRAIT_0008
-/* FP:object.rs-0016 */ pub (super) trait WriteDebugInfo { type SectionId : Copy ; fn add_debug_section (& mut self , name : SectionId , data : Vec < u8 >) -> Self :: SectionId ; fn add_debug_reloc (& mut self , section_map : & FxHashMap < SectionId , Self :: SectionId > , from : & Self :: SectionId , reloc : & DebugReloc ,) ; }
-/* FP:object.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_debuginfo_object_IMPL_0009
-/* FP:object.rs-0018 */ impl WriteDebugInfo for ObjectProduct { type SectionId = (object :: write :: SectionId , object :: write :: SymbolId) ; fn add_debug_section (& mut self , id : SectionId , data : Vec < u8 > ,) -> (object :: write :: SectionId , object :: write :: SymbolId) { let name = if self . object . format () == object :: BinaryFormat :: MachO { id . name () . replace ('.' , "__") } else { id . name () . to_string () } . into_bytes () ; let segment = self . object . segment_name (StandardSegment :: Debug) . to_vec () ; let section_id = self . object . add_section (segment , name , if id == SectionId :: DebugStr || id == SectionId :: DebugLineStr { SectionKind :: DebugString } else if id == SectionId :: EhFrame { SectionKind :: ReadOnlyData } else { SectionKind :: Debug } ,) ; self . object . section_mut (section_id) . set_data (data , if id == SectionId :: EhFrame { 8 } else { 1 }) ; let symbol_id = self . object . section_symbol (section_id) ; (section_id , symbol_id) } fn add_debug_reloc (& mut self , section_map : & FxHashMap < SectionId , Self :: SectionId > , from : & Self :: SectionId , reloc : & DebugReloc ,) { let (symbol , symbol_offset) = match reloc . name { DebugRelocName :: Section (id) => (section_map . get (& id) . unwrap () . 1 , 0) , DebugRelocName :: Symbol (id) => { let id = id . try_into () . unwrap () ; let symbol_id = if id & 1 << 31 == 0 { self . function_symbol (FuncId :: from_u32 (id)) } else { self . data_symbol (DataId :: from_u32 (id & ! (1 << 31))) } ; self . object . symbol_section_and_offset (symbol_id) . unwrap_or ((symbol_id , 0)) } } ; self . object . add_relocation (from . 0 , Relocation { offset : u64 :: from (reloc . offset) , symbol , flags : RelocationFlags :: Generic { kind : reloc . kind , encoding : RelocationEncoding :: Generic , size : reloc . size * 8 , } , addend : i64 :: try_from (symbol_offset) . unwrap () + reloc . addend , } ,) . unwrap () ; } }
+// SRC: ../rust/compiler/rustc_codegen_cranelift/src/debuginfo/object.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use cranelift_module::{DataId, FuncId};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use cranelift_object::ObjectProduct;
+use gimli::SectionId;
+use object::write::{Relocation, StandardSegment};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use object::{RelocationEncoding, RelocationFlags, SectionKind};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_data_structures::fx::FxHashMap;
+
+use crate::debuginfo::{DebugReloc, DebugRelocName};
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=add_debug_section | COMPLEXITY=2 | LINES=12 */
+
+pub(super) trait WriteDebugInfo {
+    type SectionId: Copy;
+
+    fn add_debug_section(&mut self, name: SectionId, data: Vec<u8>) -> Self::SectionId;
+    fn add_debug_reloc(
+        &mut self,
+        section_map: &FxHashMap<SectionId, Self::SectionId>,
+        from: &Self::SectionId,
+        reloc: &DebugReloc,
+    );
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=add_debug_section | COMPLEXITY=39 | LINES=71 */
+
+impl WriteDebugInfo for ObjectProduct {
+    type SectionId = (object::write::SectionId, object::write::SymbolId);
+
+    fn add_debug_section(
+        &mut self,
+        id: SectionId,
+        data: Vec<u8>,
+    ) -> (object::write::SectionId, object::write::SymbolId) {
+        let name = if self.object.format() == object::BinaryFormat::MachO {
+            id.name().replace('.', "__") // machO expects __debug_info instead of .debug_info
+        } else {
+            id.name().to_string()
+        }
+        .into_bytes();
+
+        let segment = self.object.segment_name(StandardSegment::Debug).to_vec();
+        // FIXME use SHT_X86_64_UNWIND for .eh_frame
+        let section_id = self.object.add_section(
+            segment,
+            name,
+            if id == SectionId::DebugStr || id == SectionId::DebugLineStr {
+                SectionKind::DebugString
+            } else if id == SectionId::EhFrame {
+                SectionKind::ReadOnlyData
+            } else {
+                SectionKind::Debug
+            },
+        );
+        self.object
+            .section_mut(section_id)
+            .set_data(data, if id == SectionId::EhFrame { 8 } else { 1 });
+        let symbol_id = self.object.section_symbol(section_id);
+        (section_id, symbol_id)
+    }
+
+    fn add_debug_reloc(
+        &mut self,
+        section_map: &FxHashMap<SectionId, Self::SectionId>,
+        from: &Self::SectionId,
+        reloc: &DebugReloc,
+    ) {
+        let (symbol, symbol_offset) = match reloc.name {
+            DebugRelocName::Section(id) => (section_map.get(&id).unwrap().1, 0),
+            DebugRelocName::Symbol(id) => {
+                let id = id.try_into().unwrap();
+                let symbol_id = if id & 1 << 31 == 0 {
+                    self.function_symbol(FuncId::from_u32(id))
+                } else {
+                    self.data_symbol(DataId::from_u32(id & !(1 << 31)))
+                };
+                self.object.symbol_section_and_offset(symbol_id).unwrap_or((symbol_id, 0))
+            }
+        };
+        self.object
+            .add_relocation(
+                from.0,
+                Relocation {
+                    offset: u64::from(reloc.offset),
+                    symbol,
+                    flags: RelocationFlags::Generic {
+                        kind: reloc.kind,
+                        encoding: RelocationEncoding::Generic,
+                        size: reloc.size * 8,
+                    },
+                    addend: i64::try_from(symbol_offset).unwrap() + reloc.addend,
+                },
+            )
+            .unwrap();
+    }
+}

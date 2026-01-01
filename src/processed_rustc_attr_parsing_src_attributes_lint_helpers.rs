@@ -1,18 +1,56 @@
-/* FP:lint_helpers.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_lint_helpers_USE_0001
-/* FP:lint_helpers.rs-0002 */ use super :: prelude :: * ;
-/* FP:lint_helpers.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_lint_helpers_STRUCT_0002
-/* FP:lint_helpers.rs-0004 */ pub (crate) struct AsPtrParser ;
-/* FP:lint_helpers.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_lint_helpers_IMPL_0003
-/* FP:lint_helpers.rs-0006 */ impl < S : Stage > NoArgsAttributeParser < S > for AsPtrParser { const PATH : & [Symbol] = & [sym :: rustc_as_ptr] ; const ON_DUPLICATE : OnDuplicate < S > = OnDuplicate :: Error ; const ALLOWED_TARGETS : AllowedTargets = AllowedTargets :: AllowList (& [Allow (Target :: Fn) , Allow (Target :: Method (MethodKind :: Inherent)) , Allow (Target :: Method (MethodKind :: Trait { body : false })) , Allow (Target :: Method (MethodKind :: Trait { body : true })) , Allow (Target :: Method (MethodKind :: TraitImpl)) ,]) ; const CREATE : fn (Span) -> AttributeKind = AttributeKind :: AsPtr ; }
-/* FP:lint_helpers.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_lint_helpers_STRUCT_0004
-/* FP:lint_helpers.rs-0008 */ pub (crate) struct PubTransparentParser ;
-/* FP:lint_helpers.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_lint_helpers_IMPL_0005
-/* FP:lint_helpers.rs-0010 */ impl < S : Stage > NoArgsAttributeParser < S > for PubTransparentParser { const PATH : & [Symbol] = & [sym :: rustc_pub_transparent] ; const ON_DUPLICATE : OnDuplicate < S > = OnDuplicate :: Error ; const ALLOWED_TARGETS : AllowedTargets = AllowedTargets :: AllowList (& [Allow (Target :: Struct) , Allow (Target :: Enum) , Allow (Target :: Union) ,]) ; const CREATE : fn (Span) -> AttributeKind = AttributeKind :: PubTransparent ; }
-/* FP:lint_helpers.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_lint_helpers_STRUCT_0006
-/* FP:lint_helpers.rs-0012 */ pub (crate) struct PassByValueParser ;
-/* FP:lint_helpers.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_lint_helpers_IMPL_0007
-/* FP:lint_helpers.rs-0014 */ impl < S : Stage > NoArgsAttributeParser < S > for PassByValueParser { const PATH : & [Symbol] = & [sym :: rustc_pass_by_value] ; const ON_DUPLICATE : OnDuplicate < S > = OnDuplicate :: Error ; const ALLOWED_TARGETS : AllowedTargets = AllowedTargets :: AllowList (& [Allow (Target :: Struct) , Allow (Target :: Enum) , Allow (Target :: TyAlias) ,]) ; const CREATE : fn (Span) -> AttributeKind = AttributeKind :: PassByValue ; }
-/* FP:lint_helpers.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_lint_helpers_STRUCT_0008
-/* FP:lint_helpers.rs-0016 */ pub (crate) struct AutomaticallyDerivedParser ;
-/* FP:lint_helpers.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_lint_helpers_IMPL_0009
-/* FP:lint_helpers.rs-0018 */ impl < S : Stage > NoArgsAttributeParser < S > for AutomaticallyDerivedParser { const PATH : & [Symbol] = & [sym :: automatically_derived] ; const ON_DUPLICATE : OnDuplicate < S > = OnDuplicate :: Warn ; const ALLOWED_TARGETS : AllowedTargets = AllowedTargets :: AllowListWarnRest (& [Allow (Target :: Impl { of_trait : true }) , Error (Target :: Crate) , Error (Target :: WherePredicate) ,]) ; const CREATE : fn (Span) -> AttributeKind = AttributeKind :: AutomaticallyDerived ; }
+// SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/lint_helpers.rs
+/* AST_META: AST_ID=1 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=7 | LINES=15 */
+use crate::prelude::*;
+
+pub(crate) struct AsPtrParser;
+impl<S: Stage> NoArgsAttributeParser<S> for AsPtrParser {
+    const PATH: &[Symbol] = &[sym::rustc_as_ptr];
+    const ON_DUPLICATE: OnDuplicate<S> = OnDuplicate::Error;
+    const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[
+        Allow(Target::Fn),
+        Allow(Target::Method(MethodKind::Inherent)),
+        Allow(Target::Method(MethodKind::Trait { body: false })),
+        Allow(Target::Method(MethodKind::Trait { body: true })),
+        Allow(Target::Method(MethodKind::TraitImpl)),
+    ]);
+    const CREATE: fn(Span) -> AttributeKind = AttributeKind::AsPtr;
+}
+/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
+
+pub(crate) struct PubTransparentParser;
+impl<S: Stage> NoArgsAttributeParser<S> for PubTransparentParser {
+    const PATH: &[Symbol] = &[sym::rustc_pub_transparent];
+    const ON_DUPLICATE: OnDuplicate<S> = OnDuplicate::Error;
+    const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[
+        Allow(Target::Struct),
+        Allow(Target::Enum),
+        Allow(Target::Union),
+    ]);
+    const CREATE: fn(Span) -> AttributeKind = AttributeKind::PubTransparent;
+}
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=4 | LINES=12 */
+
+pub(crate) struct PassByValueParser;
+impl<S: Stage> NoArgsAttributeParser<S> for PassByValueParser {
+    const PATH: &[Symbol] = &[sym::rustc_pass_by_value];
+    const ON_DUPLICATE: OnDuplicate<S> = OnDuplicate::Error;
+    const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[
+        Allow(Target::Struct),
+        Allow(Target::Enum),
+        Allow(Target::TyAlias),
+    ]);
+    const CREATE: fn(Span) -> AttributeKind = AttributeKind::PassByValue;
+}
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=6 | LINES=12 */
+
+pub(crate) struct AutomaticallyDerivedParser;
+impl<S: Stage> NoArgsAttributeParser<S> for AutomaticallyDerivedParser {
+    const PATH: &[Symbol] = &[sym::automatically_derived];
+    const ON_DUPLICATE: OnDuplicate<S> = OnDuplicate::Warn;
+    const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowListWarnRest(&[
+        Allow(Target::Impl { of_trait: true }),
+        Error(Target::Crate),
+        Error(Target::WherePredicate),
+    ]);
+    const CREATE: fn(Span) -> AttributeKind = AttributeKind::AutomaticallyDerived;
+}

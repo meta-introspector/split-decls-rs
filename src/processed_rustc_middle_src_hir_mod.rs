@@ -1,37 +1,304 @@
-/* FP:mod.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_MOD_0001
-/* FP:mod.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_MOD_0002
-/* FP:mod.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_MOD_0003
-/* FP:mod.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_USE_0004
-/* FP:mod.rs-0008 */ use crate :: rustc_data_structures :: fingerprint :: Fingerprint ;
-/* FP:mod.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_USE_0005
-/* FP:mod.rs-0010 */ use crate :: rustc_data_structures :: sorted_map :: SortedMap ;
-/* FP:mod.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_USE_0006
-/* FP:mod.rs-0012 */ use crate :: rustc_data_structures :: stable_hasher :: { HashStable , StableHasher } ;
-/* FP:mod.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_USE_0007
-/* FP:mod.rs-0014 */ use crate :: rustc_data_structures :: sync :: { DynSend , DynSync , try_par_for_each_in } ;
-/* FP:mod.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_USE_0008
-/* FP:mod.rs-0016 */ use crate :: rustc_complete :: def :: DefKind ;
-/* FP:mod.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_USE_0009
-/* FP:mod.rs-0018 */ use crate :: rustc_complete :: def_id :: { DefId , LocalDefId , LocalModDefId } ;
-/* FP:mod.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_USE_0010
-/* FP:mod.rs-0020 */ use crate :: rustc_complete :: lints :: DelayedLint ;
-/* FP:mod.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_USE_0011
-/* FP:mod.rs-0022 */ use crate :: rustc_complete :: * ;
-/* FP:mod.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_USE_0012
-/* FP:mod.rs-0024 */ use rustc_macros :: { Decodable , Encodable , HashStable } ;
-/* FP:mod.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_USE_0013
-/* FP:mod.rs-0026 */ use crate :: rustc_complete :: { ErrorGuaranteed , ExpnId , Span } ;
-/* FP:mod.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_USE_0014
-/* FP:mod.rs-0028 */ use crate :: query :: Providers ;
-/* FP:mod.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_USE_0015
-/* FP:mod.rs-0030 */ use crate :: ty :: { EarlyBinder , ImplSubject , TyCtxt } ;
-/* FP:mod.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_STRUCT_0016
-/* FP:mod.rs-0032 */ # [doc = " Gather the LocalDefId for each item-like within a module, including items contained within"] # [doc = " bodies. The Ids are in visitor order. This is used to partition a pass between modules."] # [derive (Debug , HashStable , Encodable , Decodable)] pub struct ModuleItems { # [doc = " Whether this represents the whole crate, in which case we need to add `CRATE_OWNER_ID` to"] # [doc = " the iterators if we want to account for the crate root."] add_root : bool , submodules : Box < [OwnerId] > , free_items : Box < [ItemId] > , trait_items : Box < [TraitItemId] > , impl_items : Box < [ImplItemId] > , foreign_items : Box < [ForeignItemId] > , opaques : Box < [LocalDefId] > , body_owners : Box < [LocalDefId] > , nested_bodies : Box < [LocalDefId] > , delayed_lint_items : Box < [OwnerId] > , }
-/* FP:mod.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_IMPL_0017
-/* FP:mod.rs-0034 */ impl ModuleItems { # [doc = " Returns all non-associated locally defined items in all modules."] # [doc = ""] # [doc = " Note that this does *not* include associated items of `impl` blocks! It also does not"] # [doc = " include foreign items. If you want to e.g. get all functions, use `definitions()` below."] # [doc = ""] # [doc = " However, this does include the `impl` blocks themselves."] pub fn free_items (& self) -> impl Iterator < Item = ItemId > { self . free_items . iter () . copied () } pub fn trait_items (& self) -> impl Iterator < Item = TraitItemId > { self . trait_items . iter () . copied () } pub fn delayed_lint_items (& self) -> impl Iterator < Item = OwnerId > { self . delayed_lint_items . iter () . copied () } # [doc = " Returns all items that are associated with some `impl` block (both inherent and trait impl"] # [doc = " blocks)."] pub fn impl_items (& self) -> impl Iterator < Item = ImplItemId > { self . impl_items . iter () . copied () } pub fn foreign_items (& self) -> impl Iterator < Item = ForeignItemId > { self . foreign_items . iter () . copied () } pub fn owners (& self) -> impl Iterator < Item = OwnerId > { self . add_root . then_some (CRATE_OWNER_ID) . into_iter () . chain (self . free_items . iter () . map (| id | id . owner_id)) . chain (self . trait_items . iter () . map (| id | id . owner_id)) . chain (self . impl_items . iter () . map (| id | id . owner_id)) . chain (self . foreign_items . iter () . map (| id | id . owner_id)) } pub fn opaques (& self) -> impl Iterator < Item = LocalDefId > { self . opaques . iter () . copied () } # [doc = " Closures and inline consts"] pub fn nested_bodies (& self) -> impl Iterator < Item = LocalDefId > { self . nested_bodies . iter () . copied () } pub fn definitions (& self) -> impl Iterator < Item = LocalDefId > { self . owners () . map (| id | id . def_id) } # [doc = " Closures and inline consts"] pub fn par_nested_bodies (& self , f : impl Fn (LocalDefId) -> Result < () , ErrorGuaranteed > + DynSend + DynSync ,) -> Result < () , ErrorGuaranteed > { try_par_for_each_in (& self . nested_bodies [..] , | & & id | f (id)) } pub fn par_items (& self , f : impl Fn (ItemId) -> Result < () , ErrorGuaranteed > + DynSend + DynSync ,) -> Result < () , ErrorGuaranteed > { try_par_for_each_in (& self . free_items [..] , | & & id | f (id)) } pub fn par_trait_items (& self , f : impl Fn (TraitItemId) -> Result < () , ErrorGuaranteed > + DynSend + DynSync ,) -> Result < () , ErrorGuaranteed > { try_par_for_each_in (& self . trait_items [..] , | & & id | f (id)) } pub fn par_impl_items (& self , f : impl Fn (ImplItemId) -> Result < () , ErrorGuaranteed > + DynSend + DynSync ,) -> Result < () , ErrorGuaranteed > { try_par_for_each_in (& self . impl_items [..] , | & & id | f (id)) } pub fn par_foreign_items (& self , f : impl Fn (ForeignItemId) -> Result < () , ErrorGuaranteed > + DynSend + DynSync ,) -> Result < () , ErrorGuaranteed > { try_par_for_each_in (& self . foreign_items [..] , | & & id | f (id)) } pub fn par_opaques (& self , f : impl Fn (LocalDefId) -> Result < () , ErrorGuaranteed > + DynSend + DynSync ,) -> Result < () , ErrorGuaranteed > { try_par_for_each_in (& self . opaques [..] , | & & id | f (id)) } }
-/* FP:mod.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_IMPL_0018
-/* FP:mod.rs-0036 */ impl < 'tcx > TyCtxt < 'tcx > { pub fn parent_module (self , id : HirId) -> LocalModDefId { if ! id . is_owner () && self . def_kind (id . owner) == DefKind :: Mod { LocalModDefId :: new_unchecked (id . owner . def_id) } else { self . parent_module_from_def_id (id . owner . def_id) } } pub fn parent_module_from_def_id (self , mut id : LocalDefId) -> LocalModDefId { while let Some (parent) = self . opt_local_parent (id) { id = parent ; if self . def_kind (id) == DefKind :: Mod { break ; } } LocalModDefId :: new_unchecked (id) } pub fn impl_subject (self , def_id : DefId) -> EarlyBinder < 'tcx , ImplSubject < 'tcx > > { match self . impl_trait_ref (def_id) { Some (t) => t . map_bound (ImplSubject :: Trait) , None => self . type_of (def_id) . map_bound (ImplSubject :: Inherent) , } } # [doc = " Returns `true` if this is a foreign item (i.e., linked via `extern { ... }`)."] pub fn is_foreign_item (self , def_id : impl Into < DefId >) -> bool { self . opt_parent (def_id . into ()) . is_some_and (| parent | matches ! (self . def_kind (parent) , DefKind :: ForeignMod)) } pub fn hash_owner_nodes (self , node : OwnerNode < '_ > , bodies : & SortedMap < ItemLocalId , & Body < '_ > > , attrs : & SortedMap < ItemLocalId , & [Attribute] > , delayed_lints : & [DelayedLint] , define_opaque : Option < & [(Span , LocalDefId)] > ,) -> Hashes { if ! self . needs_crate_hash () { return Hashes { opt_hash_including_bodies : None , attrs_hash : None , delayed_lints_hash : None , } ; } self . with_stable_hashing_context (| mut hcx | { let mut stable_hasher = StableHasher :: new () ; node . hash_stable (& mut hcx , & mut stable_hasher) ; bodies . hash_stable (& mut hcx , & mut stable_hasher) ; let h1 = stable_hasher . finish () ; let mut stable_hasher = StableHasher :: new () ; attrs . hash_stable (& mut hcx , & mut stable_hasher) ; define_opaque . hash_stable (& mut hcx , & mut stable_hasher) ; let h2 = stable_hasher . finish () ; let mut stable_hasher = StableHasher :: new () ; delayed_lints . hash_stable (& mut hcx , & mut stable_hasher) ; let h3 = stable_hasher . finish () ; Hashes { opt_hash_including_bodies : Some (h1) , attrs_hash : Some (h2) , delayed_lints_hash : Some (h3) , } }) } }
-/* FP:mod.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_STRUCT_0019
-/* FP:mod.rs-0038 */ # [doc = " Hashes computed by [`TyCtxt::hash_owner_nodes`] if necessary."] # [derive (Clone , Copy , Debug)] pub struct Hashes { pub opt_hash_including_bodies : Option < Fingerprint > , pub attrs_hash : Option < Fingerprint > , pub delayed_lints_hash : Option < Fingerprint > , }
-/* FP:mod.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_hir_mod_FN_0020
-/* FP:mod.rs-0040 */ pub fn provide (providers : & mut Providers) { providers . hir_crate_items = map :: hir_crate_items ; providers . crate_hash = map :: crate_hash ; providers . hir_module_items = map :: hir_module_items ; providers . local_def_id_to_hir_id = | tcx , def_id | match tcx . hir_crate (()) . owners [def_id] { MaybeOwner :: Owner (_) => HirId :: make_owner (def_id) , MaybeOwner :: NonOwner (hir_id) => hir_id , MaybeOwner :: Phantom => bug ! ("No HirId for {:?}" , def_id) , } ; providers . opt_hir_owner_nodes = | tcx , id | tcx . hir_crate (()) . owners . get (id) ? . as_owner () . map (| i | & i . nodes) ; providers . hir_owner_parent = | tcx , owner_id | { tcx . opt_local_parent (owner_id . def_id) . map_or (CRATE_HIR_ID , | parent_def_id | { let parent_owner_id = tcx . local_def_id_to_hir_id (parent_def_id) . owner ; HirId { owner : parent_owner_id , local_id : tcx . hir_crate (()) . owners [parent_owner_id . def_id] . unwrap () . parenting . get (& owner_id . def_id) . copied () . unwrap_or (ItemLocalId :: ZERO) , } }) } ; providers . hir_attr_map = | tcx , id | { tcx . hir_crate (()) . owners [id . def_id] . as_owner () . map_or (AttributeMap :: EMPTY , | o | & o . attrs) } ; providers . opt_ast_lowering_delayed_lints = | tcx , id | tcx . hir_crate (()) . owners [id . def_id] . as_owner () . map (| o | & o . delayed_lints) ; providers . def_span = | tcx , def_id | tcx . hir_span (tcx . local_def_id_to_hir_id (def_id)) ; providers . def_ident_span = | tcx , def_id | { let hir_id = tcx . local_def_id_to_hir_id (def_id) ; tcx . hir_opt_ident_span (hir_id) } ; providers . ty_span = | tcx , def_id | { let node = tcx . hir_node_by_def_id (def_id) ; match node . ty () { Some (ty) => ty . span , None => bug ! ("{def_id:?} doesn't have a type: {node:#?}") , } } ; providers . fn_arg_idents = | tcx , def_id | { let node = tcx . hir_node_by_def_id (def_id) ; if let Some (body_id) = node . body_id () { tcx . arena . alloc_from_iter (tcx . hir_body_param_idents (body_id)) } else if let Node :: TraitItem (& TraitItem { kind : TraitItemKind :: Fn (_ , TraitFn :: Required (idents)) , .. }) | Node :: ForeignItem (& ForeignItem { kind : ForeignItemKind :: Fn (_ , idents , _) , .. }) = node { idents } else { span_bug ! (tcx . hir_span (tcx . local_def_id_to_hir_id (def_id)) , "fn_arg_idents: unexpected item {:?}" , def_id) ; } } ; providers . all_local_trait_impls = | tcx , () | & tcx . resolutions (()) . trait_impls ; providers . local_trait_impls = | tcx , trait_id | tcx . resolutions (()) . trait_impls . get (& trait_id) . map_or (& [] , | xs | & xs [..]) ; providers . expn_that_defined = | tcx , id | tcx . resolutions (()) . expn_that_defined . get (& id) . copied () . unwrap_or (ExpnId :: root ()) ; providers . in_scope_traits_map = | tcx , id | { tcx . hir_crate (()) . owners [id . def_id] . as_owner () . map (| owner_info | & owner_info . trait_map) } ; }
+// SRC: ../rust/compiler/rustc_middle/src/hir/mod.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=11 */
+// HIR datatypes. See the [rustc dev guide] for more info.
+//
+// [rustc dev guide]: https://rustc-dev-guide.rust-lang.org/hir.html
+
+
+use crate::rustc_data_structures::fingerprint::Fingerprint;
+use crate::rustc_data_structures::sorted_map::SortedMap;
+use crate::rustc_data_structures::stable_hasher::{HashStable, StableHasher};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_data_structures::sync::{DynSend, DynSync, try_par_for_each_in};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::{DefId, LocalDefId, LocalModDefId};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_complete::lints::DelayedLint;
+use crate::rustc_complete::*;
+use rustc_macros::{Decodable, Encodable, HashStable};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{ErrorGuaranteed, ExpnId, Span};
+/* AST_META: AST_ID=6 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+
+use crate::query::Providers;
+use crate::ty::{EarlyBinder, ImplSubject, TyCtxt};
+/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ModuleItems | COMPLEXITY=9 | LINES=19 */
+
+/// Gather the LocalDefId for each item-like within a module, including items contained within
+/// bodies. The Ids are in visitor order. This is used to partition a pass between modules.
+#[derive(Debug, HashStable, Encodable, Decodable)]
+pub struct ModuleItems {
+    /// Whether this represents the whole crate, in which case we need to add `CRATE_OWNER_ID` to
+    /// the iterators if we want to account for the crate root.
+    add_root: bool,
+    submodules: Box<[OwnerId]>,
+    free_items: Box<[ItemId]>,
+    trait_items: Box<[TraitItemId]>,
+    impl_items: Box<[ImplItemId]>,
+    foreign_items: Box<[ForeignItemId]>,
+    opaques: Box<[LocalDefId]>,
+    body_owners: Box<[LocalDefId]>,
+    nested_bodies: Box<[LocalDefId]>,
+    // only filled with hir_crate_items, not with hir_module_items
+    delayed_lint_items: Box<[OwnerId]>,
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=free_items | COMPLEXITY=23 | LINES=96 */
+
+impl ModuleItems {
+    /// Returns all non-associated locally defined items in all modules.
+    ///
+    /// Note that this does *not* include associated items of `impl` blocks! It also does not
+    /// include foreign items. If you want to e.g. get all functions, use `definitions()` below.
+    ///
+    /// However, this does include the `impl` blocks themselves.
+    pub fn free_items(&self) -> impl Iterator<Item = ItemId> {
+        self.free_items.iter().copied()
+    }
+
+    pub fn trait_items(&self) -> impl Iterator<Item = TraitItemId> {
+        self.trait_items.iter().copied()
+    }
+
+    pub fn delayed_lint_items(&self) -> impl Iterator<Item = OwnerId> {
+        self.delayed_lint_items.iter().copied()
+    }
+
+    /// Returns all items that are associated with some `impl` block (both inherent and trait impl
+    /// blocks).
+    pub fn impl_items(&self) -> impl Iterator<Item = ImplItemId> {
+        self.impl_items.iter().copied()
+    }
+
+    pub fn foreign_items(&self) -> impl Iterator<Item = ForeignItemId> {
+        self.foreign_items.iter().copied()
+    }
+
+    pub fn owners(&self) -> impl Iterator<Item = OwnerId> {
+        self.add_root
+            .then_some(CRATE_OWNER_ID)
+            .into_iter()
+            .chain(self.free_items.iter().map(|id| id.owner_id))
+            .chain(self.trait_items.iter().map(|id| id.owner_id))
+            .chain(self.impl_items.iter().map(|id| id.owner_id))
+            .chain(self.foreign_items.iter().map(|id| id.owner_id))
+    }
+
+    pub fn opaques(&self) -> impl Iterator<Item = LocalDefId> {
+        self.opaques.iter().copied()
+    }
+
+    /// Closures and inline consts
+    pub fn nested_bodies(&self) -> impl Iterator<Item = LocalDefId> {
+        self.nested_bodies.iter().copied()
+    }
+
+    pub fn definitions(&self) -> impl Iterator<Item = LocalDefId> {
+        self.owners().map(|id| id.def_id)
+    }
+
+    /// Closures and inline consts
+    pub fn par_nested_bodies(
+        &self,
+        f: impl Fn(LocalDefId) -> Result<(), ErrorGuaranteed> + DynSend + DynSync,
+    ) -> Result<(), ErrorGuaranteed> {
+        try_par_for_each_in(&self.nested_bodies[..], |&&id| f(id))
+    }
+
+    pub fn par_items(
+        &self,
+        f: impl Fn(ItemId) -> Result<(), ErrorGuaranteed> + DynSend + DynSync,
+    ) -> Result<(), ErrorGuaranteed> {
+        try_par_for_each_in(&self.free_items[..], |&&id| f(id))
+    }
+
+    pub fn par_trait_items(
+        &self,
+        f: impl Fn(TraitItemId) -> Result<(), ErrorGuaranteed> + DynSend + DynSync,
+    ) -> Result<(), ErrorGuaranteed> {
+        try_par_for_each_in(&self.trait_items[..], |&&id| f(id))
+    }
+
+    pub fn par_impl_items(
+        &self,
+        f: impl Fn(ImplItemId) -> Result<(), ErrorGuaranteed> + DynSend + DynSync,
+    ) -> Result<(), ErrorGuaranteed> {
+        try_par_for_each_in(&self.impl_items[..], |&&id| f(id))
+    }
+
+    pub fn par_foreign_items(
+        &self,
+        f: impl Fn(ForeignItemId) -> Result<(), ErrorGuaranteed> + DynSend + DynSync,
+    ) -> Result<(), ErrorGuaranteed> {
+        try_par_for_each_in(&self.foreign_items[..], |&&id| f(id))
+    }
+
+    pub fn par_opaques(
+        &self,
+        f: impl Fn(LocalDefId) -> Result<(), ErrorGuaranteed> + DynSend + DynSync,
+    ) -> Result<(), ErrorGuaranteed> {
+        try_par_for_each_in(&self.opaques[..], |&&id| f(id))
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=parent_module | COMPLEXITY=35 | LINES=77 */
+
+impl<'tcx> TyCtxt<'tcx> {
+    pub fn parent_module(self, id: HirId) -> LocalModDefId {
+        if !id.is_owner() && self.def_kind(id.owner) == DefKind::Mod {
+            LocalModDefId::new_unchecked(id.owner.def_id)
+        } else {
+            self.parent_module_from_def_id(id.owner.def_id)
+        }
+    }
+
+    pub fn parent_module_from_def_id(self, mut id: LocalDefId) -> LocalModDefId {
+        while let Some(parent) = self.opt_local_parent(id) {
+            id = parent;
+            if self.def_kind(id) == DefKind::Mod {
+                break;
+            }
+        }
+        LocalModDefId::new_unchecked(id)
+    }
+
+    pub fn impl_subject(self, def_id: DefId) -> EarlyBinder<'tcx, ImplSubject<'tcx>> {
+        match self.impl_trait_ref(def_id) {
+            Some(t) => t.map_bound(ImplSubject::Trait),
+            None => self.type_of(def_id).map_bound(ImplSubject::Inherent),
+        }
+    }
+
+    /// Returns `true` if this is a foreign item (i.e., linked via `extern { ... }`).
+    pub fn is_foreign_item(self, def_id: impl Into<DefId>) -> bool {
+        self.opt_parent(def_id.into())
+            .is_some_and(|parent| matches!(self.def_kind(parent), DefKind::ForeignMod))
+    }
+
+    pub fn hash_owner_nodes(
+        self,
+        node: OwnerNode<'_>,
+        bodies: &SortedMap<ItemLocalId, &Body<'_>>,
+        attrs: &SortedMap<ItemLocalId, &[Attribute]>,
+        delayed_lints: &[DelayedLint],
+        define_opaque: Option<&[(Span, LocalDefId)]>,
+    ) -> Hashes {
+        if !self.needs_crate_hash() {
+            return Hashes {
+                opt_hash_including_bodies: None,
+                attrs_hash: None,
+                delayed_lints_hash: None,
+            };
+        }
+
+        self.with_stable_hashing_context(|mut hcx| {
+            let mut stable_hasher = StableHasher::new();
+            node.hash_stable(&mut hcx, &mut stable_hasher);
+            // Bodies are stored out of line, so we need to pull them explicitly in the hash.
+            bodies.hash_stable(&mut hcx, &mut stable_hasher);
+            let h1 = stable_hasher.finish();
+
+            let mut stable_hasher = StableHasher::new();
+            attrs.hash_stable(&mut hcx, &mut stable_hasher);
+
+            // Hash the defined opaque types, which are not present in the attrs.
+            define_opaque.hash_stable(&mut hcx, &mut stable_hasher);
+
+            let h2 = stable_hasher.finish();
+
+            // hash lints emitted during ast lowering
+            let mut stable_hasher = StableHasher::new();
+            delayed_lints.hash_stable(&mut hcx, &mut stable_hasher);
+            let h3 = stable_hasher.finish();
+
+            Hashes {
+                opt_hash_including_bodies: Some(h1),
+                attrs_hash: Some(h2),
+                delayed_lints_hash: Some(h3),
+            }
+        })
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=STRUCT | NAME=Hashes | COMPLEXITY=4 | LINES=8 */
+
+/// Hashes computed by [`TyCtxt::hash_owner_nodes`] if necessary.
+#[derive(Clone, Copy, Debug)]
+pub struct Hashes {
+    pub opt_hash_including_bodies: Option<Fingerprint>,
+    pub attrs_hash: Option<Fingerprint>,
+    pub delayed_lints_hash: Option<Fingerprint>,
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=39 | LINES=74 */
+
+pub fn provide(providers: &mut Providers) {
+    providers.hir_crate_items = map::hir_crate_items;
+    providers.crate_hash = map::crate_hash;
+    providers.hir_module_items = map::hir_module_items;
+    providers.local_def_id_to_hir_id = |tcx, def_id| match tcx.hir_crate(()).owners[def_id] {
+        MaybeOwner::Owner(_) => HirId::make_owner(def_id),
+        MaybeOwner::NonOwner(hir_id) => hir_id,
+        MaybeOwner::Phantom => bug!("No HirId for {:?}", def_id),
+    };
+    providers.opt_hir_owner_nodes =
+        |tcx, id| tcx.hir_crate(()).owners.get(id)?.as_owner().map(|i| &i.nodes);
+    providers.hir_owner_parent = |tcx, owner_id| {
+        tcx.opt_local_parent(owner_id.def_id).map_or(CRATE_HIR_ID, |parent_def_id| {
+            let parent_owner_id = tcx.local_def_id_to_hir_id(parent_def_id).owner;
+            HirId {
+                owner: parent_owner_id,
+                local_id: tcx.hir_crate(()).owners[parent_owner_id.def_id]
+                    .unwrap()
+                    .parenting
+                    .get(&owner_id.def_id)
+                    .copied()
+                    .unwrap_or(ItemLocalId::ZERO),
+            }
+        })
+    };
+    providers.hir_attr_map = |tcx, id| {
+        tcx.hir_crate(()).owners[id.def_id].as_owner().map_or(AttributeMap::EMPTY, |o| &o.attrs)
+    };
+    providers.opt_ast_lowering_delayed_lints =
+        |tcx, id| tcx.hir_crate(()).owners[id.def_id].as_owner().map(|o| &o.delayed_lints);
+    providers.def_span = |tcx, def_id| tcx.hir_span(tcx.local_def_id_to_hir_id(def_id));
+    providers.def_ident_span = |tcx, def_id| {
+        let hir_id = tcx.local_def_id_to_hir_id(def_id);
+        tcx.hir_opt_ident_span(hir_id)
+    };
+    providers.ty_span = |tcx, def_id| {
+        let node = tcx.hir_node_by_def_id(def_id);
+        match node.ty() {
+            Some(ty) => ty.span,
+            None => bug!("{def_id:?} doesn't have a type: {node:#?}"),
+        }
+    };
+    providers.fn_arg_idents = |tcx, def_id| {
+        let node = tcx.hir_node_by_def_id(def_id);
+        if let Some(body_id) = node.body_id() {
+            tcx.arena.alloc_from_iter(tcx.hir_body_param_idents(body_id))
+        } else if let Node::TraitItem(&TraitItem {
+            kind: TraitItemKind::Fn(_, TraitFn::Required(idents)),
+            ..
+        })
+        | Node::ForeignItem(&ForeignItem {
+            kind: ForeignItemKind::Fn(_, idents, _),
+            ..
+        }) = node
+        {
+            idents
+        } else {
+            span_bug!(
+                tcx.hir_span(tcx.local_def_id_to_hir_id(def_id)),
+                "fn_arg_idents: unexpected item {:?}",
+                def_id
+            );
+        }
+    };
+    providers.all_local_trait_impls = |tcx, ()| &tcx.resolutions(()).trait_impls;
+    providers.local_trait_impls =
+        |tcx, trait_id| tcx.resolutions(()).trait_impls.get(&trait_id).map_or(&[], |xs| &xs[..]);
+    providers.expn_that_defined =
+        |tcx, id| tcx.resolutions(()).expn_that_defined.get(&id).copied().unwrap_or(ExpnId::root());
+    providers.in_scope_traits_map = |tcx, id| {
+        tcx.hir_crate(()).owners[id.def_id].as_owner().map(|owner_info| &owner_info.trait_map)
+    };
+}

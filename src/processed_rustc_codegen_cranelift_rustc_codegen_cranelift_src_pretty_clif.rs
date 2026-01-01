@@ -1,38 +1,332 @@
-/* FP:pretty_clif.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_USE_0001
-/* FP:pretty_clif.rs-0002 */ use std :: fmt ;
-/* FP:pretty_clif.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_USE_0002
-/* FP:pretty_clif.rs-0004 */ use std :: io :: Write ;
-/* FP:pretty_clif.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_USE_0003
-/* FP:pretty_clif.rs-0006 */ use cranelift_codegen :: entity :: SecondaryMap ;
-/* FP:pretty_clif.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_USE_0004
-/* FP:pretty_clif.rs-0008 */ use cranelift_codegen :: ir :: Fact ;
-/* FP:pretty_clif.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_USE_0005
-/* FP:pretty_clif.rs-0010 */ use cranelift_codegen :: ir :: entities :: AnyEntity ;
-/* FP:pretty_clif.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_USE_0006
-/* FP:pretty_clif.rs-0012 */ use cranelift_codegen :: write :: { FuncWriter , PlainWriter } ;
-/* FP:pretty_clif.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_USE_0007
-/* FP:pretty_clif.rs-0014 */ use crate :: rustc_complete :: ty :: print :: with_no_trimmed_paths ;
-/* FP:pretty_clif.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_USE_0008
-/* FP:pretty_clif.rs-0016 */ use crate :: rustc_complete :: config :: { OutputFilenames , OutputType } ;
-/* FP:pretty_clif.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_USE_0009
-/* FP:pretty_clif.rs-0018 */ use crate :: rustc_target :: callconv :: FnAbi ;
-/* FP:pretty_clif.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_USE_0010
-/* FP:pretty_clif.rs-0020 */ use crate :: prelude :: * ;
-/* FP:pretty_clif.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_STRUCT_0011
-/* FP:pretty_clif.rs-0022 */ # [derive (Clone , Debug)] pub (crate) struct CommentWriter { enabled : bool , global_comments : Vec < String > , entity_comments : FxHashMap < AnyEntity , String > , inst_post_comments : FxHashMap < Inst , String > , }
-/* FP:pretty_clif.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_IMPL_0012
-/* FP:pretty_clif.rs-0024 */ impl CommentWriter { pub (crate) fn new < 'tcx > (tcx : TyCtxt < 'tcx > , instance : Instance < 'tcx > , fn_abi : & 'tcx FnAbi < 'tcx , Ty < 'tcx > > ,) -> Self { let enabled = should_write_ir (tcx) ; let global_comments = if enabled { with_no_trimmed_paths ! ({ vec ! [format ! ("symbol {}" , tcx . symbol_name (instance) . name) , format ! ("instance {:?}" , instance) , format ! ("abi {:?}" , fn_abi) , String :: new () ,] }) } else { vec ! [] } ; CommentWriter { enabled , global_comments , entity_comments : FxHashMap :: default () , inst_post_comments : FxHashMap :: default () , } } }
-/* FP:pretty_clif.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_IMPL_0013
-/* FP:pretty_clif.rs-0026 */ impl CommentWriter { pub (crate) fn enabled (& self) -> bool { self . enabled } pub (crate) fn add_global_comment < S : Into < String > > (& mut self , comment : S) { debug_assert ! (self . enabled) ; self . global_comments . push (comment . into ()) ; } pub (crate) fn add_comment < S : Into < String > + AsRef < str > , E : Into < AnyEntity > > (& mut self , entity : E , comment : S ,) { debug_assert ! (self . enabled) ; use std :: collections :: hash_map :: Entry ; match self . entity_comments . entry (entity . into ()) { Entry :: Occupied (mut occ) => { occ . get_mut () . push ('\n') ; occ . get_mut () . push_str (comment . as_ref ()) ; } Entry :: Vacant (vac) => { vac . insert (comment . into ()) ; } } } pub (crate) fn add_post_comment < S : Into < String > + AsRef < str > > (& mut self , entity : Inst , comment : S ,) { debug_assert ! (self . enabled) ; use std :: collections :: hash_map :: Entry ; match self . inst_post_comments . entry (entity) { Entry :: Occupied (mut occ) => { occ . get_mut () . push ('\n') ; occ . get_mut () . push_str (comment . as_ref ()) ; } Entry :: Vacant (vac) => { vac . insert (comment . into ()) ; } } } }
-/* FP:pretty_clif.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_IMPL_0014
-/* FP:pretty_clif.rs-0028 */ impl FuncWriter for & '_ CommentWriter { fn write_preamble (& mut self , w : & mut dyn fmt :: Write , func : & Function ,) -> Result < bool , fmt :: Error > { for comment in & self . global_comments { if ! comment . is_empty () { writeln ! (w , "; {}" , comment) ? ; } else { writeln ! (w) ? ; } } if ! self . global_comments . is_empty () { writeln ! (w) ? ; } self . super_preamble (w , func) } fn write_entity_definition (& mut self , w : & mut dyn fmt :: Write , _func : & Function , entity : AnyEntity , value : & dyn fmt :: Display , maybe_fact : Option < & Fact > ,) -> fmt :: Result { if let Some (fact) = maybe_fact { write ! (w , "    {} ! {} = {}" , entity , fact , value) ? ; } else { write ! (w , "    {} = {}" , entity , value) ? ; } if let Some (comment) = self . entity_comments . get (& entity) { writeln ! (w , " ; {}" , comment . replace ('\n' , "\n; ")) } else { writeln ! (w) } } fn write_block_header (& mut self , w : & mut dyn fmt :: Write , func : & Function , block : Block , indent : usize ,) -> fmt :: Result { PlainWriter . write_block_header (w , func , block , indent) } fn write_instruction (& mut self , w : & mut dyn fmt :: Write , func : & Function , aliases : & SecondaryMap < Value , Vec < Value > > , inst : Inst , indent : usize ,) -> fmt :: Result { if let Some (comment) = self . entity_comments . get (& inst . into ()) { writeln ! (w , "; {}" , comment . replace ('\n' , "\n; ")) ? ; } PlainWriter . write_instruction (w , func , aliases , inst , indent) ? ; if let Some (comment) = self . inst_post_comments . get (& inst) { writeln ! (w , "; {}" , comment . replace ('\n' , "\n; ")) ? ; } Ok (()) } }
-/* FP:pretty_clif.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_IMPL_0015
-/* FP:pretty_clif.rs-0030 */ impl FunctionCx < '_ , '_ , '_ > { pub (crate) fn add_global_comment < S : Into < String > > (& mut self , comment : S) { self . clif_comments . add_global_comment (comment) ; } pub (crate) fn add_comment < S : Into < String > + AsRef < str > , E : Into < AnyEntity > > (& mut self , entity : E , comment : S ,) { self . clif_comments . add_comment (entity , comment) ; } pub (crate) fn add_post_comment < S : Into < String > + AsRef < str > > (& mut self , entity : Inst , comment : S ,) { self . clif_comments . add_post_comment (entity , comment) ; } }
-/* FP:pretty_clif.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_FN_0016
-/* FP:pretty_clif.rs-0032 */ pub (crate) fn should_write_ir (tcx : TyCtxt < '_ >) -> bool { tcx . sess . opts . output_types . contains_key (& OutputType :: LlvmAssembly) }
-/* FP:pretty_clif.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_FN_0017
-/* FP:pretty_clif.rs-0034 */ pub (crate) fn write_ir_file (output_filenames : & OutputFilenames , name : & str , write : impl FnOnce (& mut dyn Write) -> std :: io :: Result < () > ,) { let clif_output_dir = output_filenames . with_extension ("clif") ; match std :: fs :: create_dir (& clif_output_dir) { Ok (()) => { } Err (err) if err . kind () == std :: io :: ErrorKind :: AlreadyExists => { } res @ Err (_) => res . unwrap () , } let clif_file_name = clif_output_dir . join (name) ; let res = std :: fs :: File :: create (clif_file_name) . and_then (| mut file | write (& mut file)) ; if let Err (err) = res { let handler = crate :: rustc_session :: EarlyDiagCtxt :: new (crate :: rustc_session :: config :: ErrorOutputType :: default ()) ; handler . early_warn (format ! ("error writing ir file: {}" , err)) ; } }
-/* FP:pretty_clif.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_FN_0018
-/* FP:pretty_clif.rs-0036 */ pub (crate) fn write_clif_file (output_filenames : & OutputFilenames , symbol_name : & str , postfix : & str , isa : & dyn cranelift_codegen :: isa :: TargetIsa , func : & cranelift_codegen :: ir :: Function , mut clif_comments : & CommentWriter ,) { write_ir_file (output_filenames , & format ! ("{}.{}.clif" , symbol_name , postfix) , | file | { let mut clif = String :: new () ; cranelift_codegen :: write :: decorate_function (& mut clif_comments , & mut clif , func) . unwrap () ; for flag in isa . flags () . iter () { writeln ! (file , "set {}" , flag) ? ; } write ! (file , "target {}" , isa . triple () . architecture) ? ; for isa_flag in isa . isa_flags () . iter () { write ! (file , " {}" , isa_flag) ? ; } writeln ! (file , "\n") ? ; writeln ! (file) ? ; file . write_all (clif . as_bytes ()) ? ; Ok (()) }) ; }
-/* FP:pretty_clif.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_src_pretty_clif_IMPL_0019
-/* FP:pretty_clif.rs-0038 */ impl fmt :: Debug for FunctionCx < '_ , '_ , '_ > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { writeln ! (f , "{:?}" , self . instance . args) ? ; writeln ! (f , "{:?}" , self . local_map) ? ; let mut clif = String :: new () ; :: cranelift_codegen :: write :: decorate_function (& mut & self . clif_comments , & mut clif , & self . bcx . func ,) . unwrap () ; writeln ! (f , "\n{}" , clif) } }
+// SRC: ../rust/compiler/rustc_codegen_cranelift/src/pretty_clif.rs
+/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=91 | LINES=56 */
+// This module provides the [CommentWriter] which makes it possible
+// to add comments to the written cranelift ir.
+//
+// # Example
+//
+// ```clif
+// test compile
+// target x86_64
+//
+// function u0:22(i64) -> i8, i8 system_v {
+// ; symbol _ZN97_$LT$example..IsNotEmpty$u20$as$u20$mini_core..FnOnce$LT$$LP$$RF$$RF$$u5b$u16$u5d$$C$$RP$$GT$$GT$9call_once17hd361e9f5c3d1c4deE
+// ; instance Instance { def: Item(DefId(0:42 ~ example[3895]::{impl#0}::call_once)), args: ['{erased}, '{erased}] }
+// ; abi FnAbi { args: [ArgAbi { layout: TyAndLayout { ty: IsNotEmpty, layout: Layout { size: Size(0 bytes), align: AbiAndPrefAlign { abi: Align(1 bytes), pref: Align(8 bytes) }, backend_repr: Memory { sized: true }, fields: Arbitrary { offsets: [], memory_index: [] }, largest_niche: None, uninhabited: false, variants: Single { index: 0 }, max_repr_align: None, unadjusted_abi_align: Align(1 bytes), randomization_seed: 12266848898570219025 } }, mode: Ignore }, ArgAbi { layout: TyAndLayout { ty: &&[u16], layout: Layout { size: Size(8 bytes), align: AbiAndPrefAlign { abi: Align(8 bytes), pref: Align(8 bytes) }, backend_repr: Scalar(Initialized { value: Pointer(AddressSpace(0)), valid_range: 1..=18446744073709551615 }), fields: Primitive, largest_niche: Some(Niche { offset: Size(0 bytes), value: Pointer(AddressSpace(0)), valid_range: 1..=18446744073709551615 }), uninhabited: false, variants: Single { index: 0 }, max_repr_align: None, unadjusted_abi_align: Align(8 bytes), randomization_seed: 281492156579847 } }, mode: Direct(ArgAttributes { regular: NonNull | NoUndef, arg_ext: None, pointee_size: Size(0 bytes), pointee_align: Some(Align(8 bytes)) }) }], ret: ArgAbi { layout: TyAndLayout { ty: (u8, u8), layout: Layout { size: Size(2 bytes), align: AbiAndPrefAlign { abi: Align(1 bytes), pref: Align(8 bytes) }, backend_repr: ScalarPair(Initialized { value: Int(I8, false), valid_range: 0..=255 }, Initialized { value: Int(I8, false), valid_range: 0..=255 }), fields: Arbitrary { offsets: [Size(0 bytes), Size(1 bytes)], memory_index: [0, 1] }, largest_niche: None, uninhabited: false, variants: Single { index: 0 }, max_repr_align: None, unadjusted_abi_align: Align(1 bytes), randomization_seed: 71776127651151873 } }, mode: Pair(ArgAttributes { regular: NoUndef, arg_ext: None, pointee_size: Size(0 bytes), pointee_align: None }, ArgAttributes { regular: NoUndef, arg_ext: None, pointee_size: Size(0 bytes), pointee_align: None }) }, c_variadic: false, fixed_count: 1, conv: Rust, can_unwind: false }
+//
+// ; kind  loc.idx   param    pass mode                            ty
+// ; ssa   _0    (u8, u8)                          2b 1                var=(0, 1)
+// ; ret   _0      -          Pair(ArgAttributes { regular: NoUndef, arg_ext: None, pointee_size: Size(0 bytes), pointee_align: None }, ArgAttributes { regular: NoUndef, arg_ext: None, pointee_size: Size(0 bytes), pointee_align: None }) (u8, u8)
+// ; arg   _1      -          Ignore                               IsNotEmpty
+// ; arg   _2.0    = v0       Direct(ArgAttributes { regular: NonNull | NoUndef, arg_ext: None, pointee_size: Size(0 bytes), pointee_align: Some(Align(8 bytes)) }) &'{erased} &'{erased} [u16]
+//
+// ; kind  local ty                              size align (abi)
+// ; zst   _1    IsNotEmpty                        0b 1                align=1,offset=
+// ; stack _2    (&'{erased} &'{erased} [u16],)    8b 8                storage=ss0
+// ; ssa   _3    &'{erased} mut IsNotEmpty         8b 8                var=2
+//
+//     ss0 = explicit_slot 16, align = 16
+//     sig0 = (i64, i64) -> i8, i8 system_v
+//     fn0 = colocated u0:23 sig0 ; Instance { def: Item(DefId(0:46 ~ example[3895]::{impl#1}::call_mut)), args: ['{erased}, '{erased}] }
+//
+// block0(v0: i64):
+//     nop
+// ; write_cvalue: Addr(Pointer { base: Stack(ss0), offset: Offset32(0) }, None): &'{erased} &'{erased} [u16] <- ByVal(v0): &'{erased} &'{erased} [u16]
+//     stack_store v0, ss0
+//     jump block1
+//
+// block1:
+//     nop
+// ; _3 = &mut _1
+//     v1 = iconst.i64 1
+// ; write_cvalue: Var(_3, var2): &'{erased} mut IsNotEmpty <- ByVal(v1): &'{erased} mut IsNotEmpty
+// ;
+// ; _0 = <IsNotEmpty as mini_core::FnMut<(&&[u16],)>>::call_mut(move _3, copy _2)
+//     v2 = stack_load.i64 ss0
+// ; abi: FnAbi { args: [ArgAbi { layout: TyAndLayout { ty: &mut IsNotEmpty, layout: Layout { size: Size(8 bytes), align: AbiAndPrefAlign { abi: Align(8 bytes), pref: Align(8 bytes) }, backend_repr: Scalar(Initialized { value: Pointer(AddressSpace(0)), valid_range: 1..=18446744073709551615 }), fields: Primitive, largest_niche: Some(Niche { offset: Size(0 bytes), value: Pointer(AddressSpace(0)), valid_range: 1..=18446744073709551615 }), uninhabited: false, variants: Single { index: 0 }, max_repr_align: None, unadjusted_abi_align: Align(8 bytes), randomization_seed: 281492156579847 } }, mode: Direct(ArgAttributes { regular: NonNull | NoUndef, arg_ext: None, pointee_size: Size(0 bytes), pointee_align: Some(Align(1 bytes)) }) }, ArgAbi { layout: TyAndLayout { ty: &&[u16], layout: Layout { size: Size(8 bytes), align: AbiAndPrefAlign { abi: Align(8 bytes), pref: Align(8 bytes) }, backend_repr: Scalar(Initialized { value: Pointer(AddressSpace(0)), valid_range: 1..=18446744073709551615 }), fields: Primitive, largest_niche: Some(Niche { offset: Size(0 bytes), value: Pointer(AddressSpace(0)), valid_range: 1..=18446744073709551615 }), uninhabited: false, variants: Single { index: 0 }, max_repr_align: None, unadjusted_abi_align: Align(8 bytes), randomization_seed: 281492156579847 } }, mode: Direct(ArgAttributes { regular: NonNull | NoUndef, arg_ext: None, pointee_size: Size(0 bytes), pointee_align: Some(Align(8 bytes)) }) }], ret: ArgAbi { layout: TyAndLayout { ty: (u8, u8), layout: Layout { size: Size(2 bytes), align: AbiAndPrefAlign { abi: Align(1 bytes), pref: Align(8 bytes) }, backend_repr: ScalarPair(Initialized { value: Int(I8, false), valid_range: 0..=255 }, Initialized { value: Int(I8, false), valid_range: 0..=255 }), fields: Arbitrary { offsets: [Size(0 bytes), Size(1 bytes)], memory_index: [0, 1] }, largest_niche: None, uninhabited: false, variants: Single { index: 0 }, max_repr_align: None, unadjusted_abi_align: Align(1 bytes), randomization_seed: 71776127651151873 } }, mode: Pair(ArgAttributes { regular: NoUndef, arg_ext: None, pointee_size: Size(0 bytes), pointee_align: None }, ArgAttributes { regular: NoUndef, arg_ext: None, pointee_size: Size(0 bytes), pointee_align: None }) }, c_variadic: false, fixed_count: 1, conv: Rust, can_unwind: false }
+//     v3, v4 = call fn0(v1, v2)  ; v1 = 1
+//     v5 -> v3
+//     v6 -> v4
+// ; write_cvalue: VarPair(_0, var0, var1): (u8, u8) <- ByValPair(v3, v4): (u8, u8)
+//     jump block2
+//
+// block2:
+//     nop
+// ;
+// ; return
+//     return v5, v6
+// }
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+// ```
+
+use std::fmt;
+use std::io::Write;
+
+use cranelift_codegen::entity::SecondaryMap;
+use cranelift_codegen::ir::Fact;
+use cranelift_codegen::ir::entities::AnyEntity;
+use cranelift_codegen::write::{FuncWriter, PlainWriter};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::ty::print::with_no_trimmed_paths;
+use crate::rustc_complete::config::{OutputFilenames, OutputType};
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=2 | LINES=11 */
+use crate::rustc_target::callconv::FnAbi;
+
+use crate::prelude::*;
+
+#[derive(Clone, Debug)]
+pub(crate) struct CommentWriter {
+    enabled: bool,
+    global_comments: Vec<String>,
+    entity_comments: FxHashMap<AnyEntity, String>,
+    inst_post_comments: FxHashMap<Inst, String>,
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=13 | LINES=29 */
+
+impl CommentWriter {
+    pub(crate) fn new<'tcx>(
+        tcx: TyCtxt<'tcx>,
+        instance: Instance<'tcx>,
+        fn_abi: &'tcx FnAbi<'tcx, Ty<'tcx>>,
+    ) -> Self {
+        let enabled = should_write_ir(tcx);
+        let global_comments = if enabled {
+            with_no_trimmed_paths!({
+                vec![
+                    format!("symbol {}", tcx.symbol_name(instance).name),
+                    format!("instance {:?}", instance),
+                    format!("abi {:?}", fn_abi),
+                    String::new(),
+                ]
+            })
+        } else {
+            vec![]
+        };
+
+        CommentWriter {
+            enabled,
+            global_comments,
+            entity_comments: FxHashMap::default(),
+            inst_post_comments: FxHashMap::default(),
+        }
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=20 | LINES=49 */
+
+impl CommentWriter {
+    pub(crate) fn enabled(&self) -> bool {
+        self.enabled
+    }
+
+    pub(crate) fn add_global_comment<S: Into<String>>(&mut self, comment: S) {
+        debug_assert!(self.enabled);
+        self.global_comments.push(comment.into());
+    }
+
+    pub(crate) fn add_comment<S: Into<String> + AsRef<str>, E: Into<AnyEntity>>(
+        &mut self,
+        entity: E,
+        comment: S,
+    ) {
+        debug_assert!(self.enabled);
+
+        use std::collections::hash_map::Entry;
+        match self.entity_comments.entry(entity.into()) {
+            Entry::Occupied(mut occ) => {
+                occ.get_mut().push('\n');
+                occ.get_mut().push_str(comment.as_ref());
+            }
+            Entry::Vacant(vac) => {
+                vac.insert(comment.into());
+            }
+        }
+    }
+
+    pub(crate) fn add_post_comment<S: Into<String> + AsRef<str>>(
+        &mut self,
+        entity: Inst,
+        comment: S,
+    ) {
+        debug_assert!(self.enabled);
+
+        use std::collections::hash_map::Entry;
+        match self.inst_post_comments.entry(entity) {
+            Entry::Occupied(mut occ) => {
+                occ.get_mut().push('\n');
+                occ.get_mut().push_str(comment.as_ref());
+            }
+            Entry::Vacant(vac) => {
+                vac.insert(comment.into());
+            }
+        }
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=write_preamble | COMPLEXITY=44 | LINES=70 */
+
+impl FuncWriter for &'_ CommentWriter {
+    fn write_preamble(
+        &mut self,
+        w: &mut dyn fmt::Write,
+        func: &Function,
+    ) -> Result<bool, fmt::Error> {
+        for comment in &self.global_comments {
+            if !comment.is_empty() {
+                writeln!(w, "; {}", comment)?;
+            } else {
+                writeln!(w)?;
+            }
+        }
+        if !self.global_comments.is_empty() {
+            writeln!(w)?;
+        }
+
+        self.super_preamble(w, func)
+    }
+
+    fn write_entity_definition(
+        &mut self,
+        w: &mut dyn fmt::Write,
+        _func: &Function,
+        entity: AnyEntity,
+        value: &dyn fmt::Display,
+        maybe_fact: Option<&Fact>,
+    ) -> fmt::Result {
+        if let Some(fact) = maybe_fact {
+            write!(w, "    {} ! {} = {}", entity, fact, value)?;
+        } else {
+            write!(w, "    {} = {}", entity, value)?;
+        }
+
+        if let Some(comment) = self.entity_comments.get(&entity) {
+            writeln!(w, " ; {}", comment.replace('\n', "\n; "))
+        } else {
+            writeln!(w)
+        }
+    }
+
+    fn write_block_header(
+        &mut self,
+        w: &mut dyn fmt::Write,
+        func: &Function,
+        block: Block,
+        indent: usize,
+    ) -> fmt::Result {
+        PlainWriter.write_block_header(w, func, block, indent)
+    }
+
+    fn write_instruction(
+        &mut self,
+        w: &mut dyn fmt::Write,
+        func: &Function,
+        aliases: &SecondaryMap<Value, Vec<Value>>,
+        inst: Inst,
+        indent: usize,
+    ) -> fmt::Result {
+        if let Some(comment) = self.entity_comments.get(&inst.into()) {
+            writeln!(w, "; {}", comment.replace('\n', "\n; "))?;
+        }
+        PlainWriter.write_instruction(w, func, aliases, inst, indent)?;
+        if let Some(comment) = self.inst_post_comments.get(&inst) {
+            writeln!(w, "; {}", comment.replace('\n', "\n; "))?;
+        }
+        Ok(())
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=22 */
+
+impl FunctionCx<'_, '_, '_> {
+    pub(crate) fn add_global_comment<S: Into<String>>(&mut self, comment: S) {
+        self.clif_comments.add_global_comment(comment);
+    }
+
+    pub(crate) fn add_comment<S: Into<String> + AsRef<str>, E: Into<AnyEntity>>(
+        &mut self,
+        entity: E,
+        comment: S,
+    ) {
+        self.clif_comments.add_comment(entity, comment);
+    }
+
+    pub(crate) fn add_post_comment<S: Into<String> + AsRef<str>>(
+        &mut self,
+        entity: Inst,
+        comment: S,
+    ) {
+        self.clif_comments.add_post_comment(entity, comment);
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+
+pub(crate) fn should_write_ir(tcx: TyCtxt<'_>) -> bool {
+    tcx.sess.opts.output_types.contains_key(&OutputType::LlvmAssembly)
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=15 | LINES=24 */
+
+pub(crate) fn write_ir_file(
+    output_filenames: &OutputFilenames,
+    name: &str,
+    write: impl FnOnce(&mut dyn Write) -> std::io::Result<()>,
+) {
+    let clif_output_dir = output_filenames.with_extension("clif");
+
+    match std::fs::create_dir(&clif_output_dir) {
+        Ok(()) => {}
+        Err(err) if err.kind() == std::io::ErrorKind::AlreadyExists => {}
+        res @ Err(_) => res.unwrap(),
+    }
+
+    let clif_file_name = clif_output_dir.join(name);
+
+    let res = std::fs::File::create(clif_file_name).and_then(|mut file| write(&mut file));
+    if let Err(err) = res {
+        // Using early_warn as no Session is available here
+        let handler =
+            crate::rustc_session::EarlyDiagCtxt::new(crate::rustc_session::config::ErrorOutputType::default());
+        handler.early_warn(format!("error writing ir file: {}", err));
+    }
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=17 | LINES=27 */
+
+pub(crate) fn write_clif_file(
+    output_filenames: &OutputFilenames,
+    symbol_name: &str,
+    postfix: &str,
+    isa: &dyn cranelift_codegen::isa::TargetIsa,
+    func: &cranelift_codegen::ir::Function,
+    mut clif_comments: &CommentWriter,
+) {
+    // FIXME work around filename too long errors
+    write_ir_file(output_filenames, &format!("{}.{}.clif", symbol_name, postfix), |file| {
+        let mut clif = String::new();
+        cranelift_codegen::write::decorate_function(&mut clif_comments, &mut clif, func).unwrap();
+
+        for flag in isa.flags().iter() {
+            writeln!(file, "set {}", flag)?;
+        }
+        write!(file, "target {}", isa.triple().architecture)?;
+        for isa_flag in isa.isa_flags().iter() {
+            write!(file, " {}", isa_flag)?;
+        }
+        writeln!(file, "\n")?;
+        writeln!(file)?;
+        file.write_all(clif.as_bytes())?;
+        Ok(())
+    });
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=10 | LINES=16 */
+
+impl fmt::Debug for FunctionCx<'_, '_, '_> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        writeln!(f, "{:?}", self.instance.args)?;
+        writeln!(f, "{:?}", self.local_map)?;
+
+        let mut clif = String::new();
+        ::cranelift_codegen::write::decorate_function(
+            &mut &self.clif_comments,
+            &mut clif,
+            &self.bcx.func,
+        )
+        .unwrap();
+        writeln!(f, "\n{}", clif)
+    }
+}

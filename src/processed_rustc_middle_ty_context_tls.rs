@@ -1,32 +1,151 @@
-/* FP:tls.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_context_tls_USE_0001
-/* FP:tls.rs-0002 */ use std :: { mem , ptr } ;
-/* FP:tls.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_context_tls_USE_0002
-/* FP:tls.rs-0004 */ use crate :: rustc_data_structures :: sync ;
-/* FP:tls.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_context_tls_USE_0003
-/* FP:tls.rs-0006 */ use super :: { GlobalCtxt , TyCtxt } ;
-/* FP:tls.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_context_tls_USE_0004
-/* FP:tls.rs-0008 */ use crate :: dep_graph :: TaskDepsRef ;
-/* FP:tls.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_context_tls_USE_0005
-/* FP:tls.rs-0010 */ use crate :: query :: plumbing :: QueryJobId ;
-/* FP:tls.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_context_tls_STRUCT_0006
-/* FP:tls.rs-0012 */ # [doc = " This is the implicit state of rustc. It contains the current"] # [doc = " `TyCtxt` and query. It is updated when creating a local interner or"] # [doc = " executing a new query. Whenever there's a `TyCtxt` value available"] # [doc = " you should also have access to an `ImplicitCtxt` through the functions"] # [doc = " in this module."] # [derive (Clone)] pub struct ImplicitCtxt < 'a , 'tcx > { # [doc = " The current `TyCtxt`."] pub tcx : TyCtxt < 'tcx > , # [doc = " The current query job, if any. This is updated by `JobOwner::start` in"] # [doc = " `ty::query::plumbing` when executing a query."] pub query : Option < QueryJobId > , # [doc = " Used to prevent queries from calling too deeply."] pub query_depth : usize , # [doc = " The current dep graph task. This is used to add dependencies to queries"] # [doc = " when executing them."] pub task_deps : TaskDepsRef < 'a > , }
-/* FP:tls.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_context_tls_IMPL_0007
-/* FP:tls.rs-0014 */ impl < 'a , 'tcx > ImplicitCtxt < 'a , 'tcx > { pub fn new (gcx : & 'tcx GlobalCtxt < 'tcx >) -> Self { let tcx = TyCtxt { gcx } ; ImplicitCtxt { tcx , query : None , query_depth : 0 , task_deps : TaskDepsRef :: Ignore } } }
-/* FP:tls.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_context_tls_USE_0008
-/* FP:tls.rs-0016 */ use crate :: rustc_thread_pool :: tlv :: TLV ;
-/* FP:tls.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_context_tls_FN_0009
-/* FP:tls.rs-0018 */ # [inline] fn erase (context : & ImplicitCtxt < '_ , '_ >) -> * const () { context as * const _ as * const () }
-/* FP:tls.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_context_tls_FN_0010
-/* FP:tls.rs-0020 */ # [inline] unsafe fn downcast < 'a , 'tcx > (context : * const ()) -> & 'a ImplicitCtxt < 'a , 'tcx > { unsafe { & * (context as * const ImplicitCtxt < 'a , 'tcx >) } }
-/* FP:tls.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_context_tls_FN_0011
-/* FP:tls.rs-0022 */ # [doc = " Sets `context` as the new current `ImplicitCtxt` for the duration of the function `f`."] # [inline] pub fn enter_context < 'a , 'tcx , F , R > (context : & ImplicitCtxt < 'a , 'tcx > , f : F) -> R where F : FnOnce () -> R , { TLV . with (| tlv | { let old = tlv . replace (erase (context)) ; let _reset = crate :: rustc_data_structures :: defer (move | | tlv . set (old)) ; f () }) }
-/* FP:tls.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_context_tls_FN_0012
-/* FP:tls.rs-0024 */ # [doc = " Allows access to the current `ImplicitCtxt` in a closure if one is available."] # [inline] # [track_caller] pub fn with_context_opt < F , R > (f : F) -> R where F : for < 'a , 'tcx > FnOnce (Option < & ImplicitCtxt < 'a , 'tcx > >) -> R , { let context = TLV . get () ; if context . is_null () { f (None) } else { sync :: assert_dyn_sync :: < ImplicitCtxt < '_ , '_ > > () ; unsafe { f (Some (downcast (context))) } } }
-/* FP:tls.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_context_tls_FN_0013
-/* FP:tls.rs-0026 */ # [doc = " Allows access to the current `ImplicitCtxt`."] # [doc = " Panics if there is no `ImplicitCtxt` available."] # [inline] pub fn with_context < F , R > (f : F) -> R where F : for < 'a , 'tcx > FnOnce (& ImplicitCtxt < 'a , 'tcx >) -> R , { with_context_opt (| opt_context | f (opt_context . expect ("no ImplicitCtxt stored in tls"))) }
-/* FP:tls.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_context_tls_FN_0014
-/* FP:tls.rs-0028 */ # [doc = " Allows access to the current `ImplicitCtxt` whose tcx field is the same as the tcx argument"] # [doc = " passed in. This means the closure is given an `ImplicitCtxt` with the same `'tcx` lifetime"] # [doc = " as the `TyCtxt` passed in."] # [doc = " This will panic if you pass it a `TyCtxt` which is different from the current"] # [doc = " `ImplicitCtxt`'s `tcx` field."] # [inline] pub fn with_related_context < 'tcx , F , R > (tcx : TyCtxt < 'tcx > , f : F) -> R where F : FnOnce (& ImplicitCtxt < '_ , 'tcx >) -> R , { with_context (| context | { assert ! (ptr :: eq (context . tcx . gcx as * const _ as * const () , tcx . gcx as * const _ as * const ())) ; let context : & ImplicitCtxt < '_ , '_ > = unsafe { mem :: transmute (context) } ; f (context) }) }
-/* FP:tls.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_context_tls_FN_0015
-/* FP:tls.rs-0030 */ # [doc = " Allows access to the `TyCtxt` in the current `ImplicitCtxt`."] # [doc = " Panics if there is no `ImplicitCtxt` available."] # [inline] pub fn with < F , R > (f : F) -> R where F : for < 'tcx > FnOnce (TyCtxt < 'tcx >) -> R , { with_context (| context | f (context . tcx)) }
-/* FP:tls.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_context_tls_FN_0016
-/* FP:tls.rs-0032 */ # [doc = " Allows access to the `TyCtxt` in the current `ImplicitCtxt`."] # [doc = " The closure is passed None if there is no `ImplicitCtxt` available."] # [inline] # [track_caller] pub fn with_opt < F , R > (f : F) -> R where F : for < 'tcx > FnOnce (Option < TyCtxt < 'tcx > >) -> R , { with_context_opt (# [track_caller] | opt_context | f (opt_context . map (| context | context . tcx)) ,) }
+// SRC: ../rust/compiler/rustc_middle/src/ty/context/tls.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use std::{mem, ptr};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+
+use crate::rustc_data_structures::sync;
+
+use super::{GlobalCtxt, TyCtxt};
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=ImplicitCtxt | COMPLEXITY=5 | LINES=24 */
+use crate::dep_graph::TaskDepsRef;
+use crate::query::plumbing::QueryJobId;
+
+/// This is the implicit state of rustc. It contains the current
+/// `TyCtxt` and query. It is updated when creating a local interner or
+/// executing a new query. Whenever there's a `TyCtxt` value available
+/// you should also have access to an `ImplicitCtxt` through the functions
+/// in this module.
+#[derive(Clone)]
+pub struct ImplicitCtxt<'a, 'tcx> {
+    /// The current `TyCtxt`.
+    pub tcx: TyCtxt<'tcx>,
+
+    /// The current query job, if any. This is updated by `JobOwner::start` in
+    /// `ty::query::plumbing` when executing a query.
+    pub query: Option<QueryJobId>,
+
+    /// Used to prevent queries from calling too deeply.
+    pub query_depth: usize,
+
+    /// The current dep graph task. This is used to add dependencies to queries
+    /// when executing them.
+    pub task_deps: TaskDepsRef<'a>,
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=new | COMPLEXITY=5 | LINES=7 */
+
+impl<'a, 'tcx> ImplicitCtxt<'a, 'tcx> {
+    pub fn new(gcx: &'tcx GlobalCtxt<'tcx>) -> Self {
+        let tcx = TyCtxt { gcx };
+        ImplicitCtxt { tcx, query: None, query_depth: 0, task_deps: TaskDepsRef::Ignore }
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=erase | COMPLEXITY=4 | LINES=8 */
+
+// Import the thread-local variable from Rayon, which is preserved for Rayon jobs.
+use crate::rustc_thread_pool::tlv::TLV;
+
+#[inline]
+fn erase(context: &ImplicitCtxt<'_, '_>) -> *const () {
+    context as *const _ as *const ()
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=5 */
+
+#[inline]
+unsafe fn downcast<'a, 'tcx>(context: *const ()) -> &'a ImplicitCtxt<'a, 'tcx> {
+    unsafe { &*(context as *const ImplicitCtxt<'a, 'tcx>) }
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=enter_context | COMPLEXITY=5 | LINES=13 */
+
+/// Sets `context` as the new current `ImplicitCtxt` for the duration of the function `f`.
+#[inline]
+pub fn enter_context<'a, 'tcx, F, R>(context: &ImplicitCtxt<'a, 'tcx>, f: F) -> R
+where
+    F: FnOnce() -> R,
+{
+    TLV.with(|tlv| {
+        let old = tlv.replace(erase(context));
+        let _reset = crate::rustc_data_structures::defer(move || tlv.set(old));
+        f()
+    })
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=with_context_opt | COMPLEXITY=14 | LINES=19 */
+
+/// Allows access to the current `ImplicitCtxt` in a closure if one is available.
+#[inline]
+#[track_caller]
+pub fn with_context_opt<F, R>(f: F) -> R
+where
+    F: for<'a, 'tcx> FnOnce(Option<&ImplicitCtxt<'a, 'tcx>>) -> R,
+{
+    let context = TLV.get();
+    if context.is_null() {
+        f(None)
+    } else {
+        // We could get an `ImplicitCtxt` pointer from another thread.
+        // Ensure that `ImplicitCtxt` is `DynSync`.
+        sync::assert_dyn_sync::<ImplicitCtxt<'_, '_>>();
+
+        unsafe { f(Some(downcast(context))) }
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=with_context | COMPLEXITY=4 | LINES=10 */
+
+/// Allows access to the current `ImplicitCtxt`.
+/// Panics if there is no `ImplicitCtxt` available.
+#[inline]
+pub fn with_context<F, R>(f: F) -> R
+where
+    F: for<'a, 'tcx> FnOnce(&ImplicitCtxt<'a, 'tcx>) -> R,
+{
+    with_context_opt(|opt_context| f(opt_context.expect("no ImplicitCtxt stored in tls")))
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=with_related_context | COMPLEXITY=13 | LINES=23 */
+
+/// Allows access to the current `ImplicitCtxt` whose tcx field is the same as the tcx argument
+/// passed in. This means the closure is given an `ImplicitCtxt` with the same `'tcx` lifetime
+/// as the `TyCtxt` passed in.
+/// This will panic if you pass it a `TyCtxt` which is different from the current
+/// `ImplicitCtxt`'s `tcx` field.
+#[inline]
+pub fn with_related_context<'tcx, F, R>(tcx: TyCtxt<'tcx>, f: F) -> R
+where
+    F: FnOnce(&ImplicitCtxt<'_, 'tcx>) -> R,
+{
+    with_context(|context| {
+        // The two gcx have different invariant lifetimes, so we need to erase them for the comparison.
+        assert!(ptr::eq(
+            context.tcx.gcx as *const _ as *const (),
+            tcx.gcx as *const _ as *const ()
+        ));
+
+        let context: &ImplicitCtxt<'_, '_> = unsafe { mem::transmute(context) };
+
+        f(context)
+    })
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=with | COMPLEXITY=4 | LINES=10 */
+
+/// Allows access to the `TyCtxt` in the current `ImplicitCtxt`.
+/// Panics if there is no `ImplicitCtxt` available.
+#[inline]
+pub fn with<F, R>(f: F) -> R
+where
+    F: for<'tcx> FnOnce(TyCtxt<'tcx>) -> R,
+{
+    with_context(|context| f(context.tcx))
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=with_opt | COMPLEXITY=4 | LINES=14 */
+
+/// Allows access to the `TyCtxt` in the current `ImplicitCtxt`.
+/// The closure is passed None if there is no `ImplicitCtxt` available.
+#[inline]
+#[track_caller]
+pub fn with_opt<F, R>(f: F) -> R
+where
+    F: for<'tcx> FnOnce(Option<TyCtxt<'tcx>>) -> R,
+{
+    with_context_opt(
+        #[track_caller]
+        |opt_context| f(opt_context.map(|context| context.tcx)),
+    )
+}

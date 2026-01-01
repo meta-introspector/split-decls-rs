@@ -1,16 +1,97 @@
-/* FP:codegen.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_codegen_USE_0001
-/* FP:codegen.rs-0002 */ use crate :: rustc_infer :: infer :: TyCtxtInferExt ;
-/* FP:codegen.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_codegen_USE_0002
-/* FP:codegen.rs-0004 */ use crate :: rustc_complete :: bug ;
-/* FP:codegen.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_codegen_USE_0003
-/* FP:codegen.rs-0006 */ use crate :: rustc_complete :: traits :: CodegenObligationError ;
-/* FP:codegen.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_codegen_USE_0004
-/* FP:codegen.rs-0008 */ use crate :: rustc_complete :: ty :: { self , PseudoCanonicalInput , TyCtxt , TypeVisitableExt } ;
-/* FP:codegen.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_codegen_USE_0005
-/* FP:codegen.rs-0010 */ use crate :: rustc_trait_selection :: error_reporting :: InferCtxtErrorExt ;
-/* FP:codegen.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_codegen_USE_0006
-/* FP:codegen.rs-0012 */ use crate :: rustc_trait_selection :: traits :: { ImplSource , Obligation , ObligationCause , ObligationCtxt , ScrubbedTraitError , SelectionContext , SelectionError , } ;
-/* FP:codegen.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_codegen_USE_0007
-/* FP:codegen.rs-0014 */ use tracing :: debug ;
-/* FP:codegen.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_traits_src_codegen_FN_0008
-/* FP:codegen.rs-0016 */ # [doc = " Attempts to resolve an obligation to an `ImplSource`. The result is"] # [doc = " a shallow `ImplSource` resolution, meaning that we do not"] # [doc = " (necessarily) resolve all nested obligations on the impl. Note"] # [doc = " that type check should guarantee to us that all nested"] # [doc = " obligations *could be* resolved if we wanted to."] # [doc = ""] # [doc = " This also expects that `trait_ref` is fully normalized."] pub (crate) fn codegen_select_candidate < 'tcx > (tcx : TyCtxt < 'tcx > , key : PseudoCanonicalInput < 'tcx , ty :: TraitRef < 'tcx > > ,) -> Result < & 'tcx ImplSource < 'tcx , () > , CodegenObligationError > { let PseudoCanonicalInput { typing_env , value : trait_ref } = key ; debug_assert_eq ! (trait_ref , tcx . normalize_erasing_regions (typing_env , trait_ref)) ; let (infcx , param_env) = tcx . infer_ctxt () . ignoring_regions () . build_with_typing_env (typing_env) ; let mut selcx = SelectionContext :: new (& infcx) ; let obligation_cause = ObligationCause :: dummy () ; let obligation = Obligation :: new (tcx , obligation_cause , param_env , trait_ref) ; let selection = match selcx . select (& obligation) { Ok (Some (selection)) => selection , Ok (None) => return Err (CodegenObligationError :: Ambiguity) , Err (SelectionError :: Unimplemented) => return Err (CodegenObligationError :: Unimplemented) , Err (e) => { bug ! ("Encountered error `{:?}` selecting `{:?}` during codegen" , e , trait_ref) } } ; debug ! (? selection) ; let ocx = ObligationCtxt :: new (& infcx) ; let impl_source = selection . map (| obligation | { ocx . register_obligation (obligation) ; }) ; let errors = ocx . select_all_or_error () ; if ! errors . is_empty () { for err in errors { if let ScrubbedTraitError :: Cycle (cycle) = err { infcx . err_ctxt () . report_overflow_obligation_cycle (& cycle) ; } } return Err (CodegenObligationError :: Unimplemented) ; } let impl_source = infcx . resolve_vars_if_possible (impl_source) ; let impl_source = tcx . erase_and_anonymize_regions (impl_source) ; if impl_source . has_non_region_infer () { let guar = match impl_source { ImplSource :: UserDefined (impl_) => tcx . dcx () . span_delayed_bug (tcx . def_span (impl_ . impl_def_id) , "this impl has unconstrained generic parameters" ,) , _ => unreachable ! () , } ; return Err (CodegenObligationError :: UnconstrainedParam (guar)) ; } Ok (& * tcx . arena . alloc (impl_source)) }
+// SRC: ../rust/compiler/rustc_traits/src/codegen.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+// This file contains various trait resolution methods used by codegen.
+// They all assume regions can be erased and monomorphic types. It
+// seems likely that they should eventually be merged into more
+// general routines.
+
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::traits::CodegenObligationError;
+use crate::rustc_complete::ty::{self, PseudoCanonicalInput, TyCtxt, TypeVisitableExt};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use crate::rustc_trait_selection::error_reporting::InferCtxtErrorExt;
+use crate::rustc_trait_selection::traits::{
+    ImplSource, Obligation, ObligationCause, ObligationCtxt, ScrubbedTraitError, SelectionContext,
+    SelectionError,
+};
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=42 | LINES=79 */
+use tracing::debug;
+
+/// Attempts to resolve an obligation to an `ImplSource`. The result is
+/// a shallow `ImplSource` resolution, meaning that we do not
+/// (necessarily) resolve all nested obligations on the impl. Note
+/// that type check should guarantee to us that all nested
+/// obligations *could be* resolved if we wanted to.
+///
+/// This also expects that `trait_ref` is fully normalized.
+pub(crate) fn codegen_select_candidate<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    key: PseudoCanonicalInput<'tcx, ty::TraitRef<'tcx>>,
+) -> Result<&'tcx ImplSource<'tcx, ()>, CodegenObligationError> {
+    let PseudoCanonicalInput { typing_env, value: trait_ref } = key;
+    // We expect the input to be fully normalized.
+    debug_assert_eq!(trait_ref, tcx.normalize_erasing_regions(typing_env, trait_ref));
+
+    // Do the initial selection for the obligation. This yields the
+    // shallow result we are looking for -- that is, what specific impl.
+    let (infcx, param_env) = tcx.infer_ctxt().ignoring_regions().build_with_typing_env(typing_env);
+    let mut selcx = SelectionContext::new(&infcx);
+
+    let obligation_cause = ObligationCause::dummy();
+    let obligation = Obligation::new(tcx, obligation_cause, param_env, trait_ref);
+
+    let selection = match selcx.select(&obligation) {
+        Ok(Some(selection)) => selection,
+        Ok(None) => return Err(CodegenObligationError::Ambiguity),
+        Err(SelectionError::Unimplemented) => return Err(CodegenObligationError::Unimplemented),
+        Err(e) => {
+            bug!("Encountered error `{:?}` selecting `{:?}` during codegen", e, trait_ref)
+        }
+    };
+
+    debug!(?selection);
+
+    // Currently, we use a fulfillment context to completely resolve
+    // all nested obligations. This is because they can inform the
+    // inference of the impl's type parameters.
+    let ocx = ObligationCtxt::new(&infcx);
+    let impl_source = selection.map(|obligation| {
+        ocx.register_obligation(obligation);
+    });
+
+    // In principle, we only need to do this so long as `impl_source`
+    // contains unbound type parameters. It could be a slight
+    // optimization to stop iterating early.
+    let errors = ocx.select_all_or_error();
+    if !errors.is_empty() {
+        // `rustc_monomorphize::collector` assumes there are no type errors.
+        // Cycle errors are the only post-monomorphization errors possible; emit them now so
+        // `rustc_ty_utils::resolve_associated_item` doesn't return `None` post-monomorphization.
+        for err in errors {
+            if let ScrubbedTraitError::Cycle(cycle) = err {
+                infcx.err_ctxt().report_overflow_obligation_cycle(&cycle);
+            }
+        }
+        return Err(CodegenObligationError::Unimplemented);
+    }
+
+    let impl_source = infcx.resolve_vars_if_possible(impl_source);
+    let impl_source = tcx.erase_and_anonymize_regions(impl_source);
+    if impl_source.has_non_region_infer() {
+        // Unused generic types or consts on an impl get replaced with inference vars,
+        // but never resolved, causing the return value of a query to contain inference
+        // vars. We do not have a concept for this and will in fact ICE in stable hashing
+        // of the return value. So bail out instead.
+        let guar = match impl_source {
+            ImplSource::UserDefined(impl_) => tcx.dcx().span_delayed_bug(
+                tcx.def_span(impl_.impl_def_id),
+                "this impl has unconstrained generic parameters",
+            ),
+            _ => unreachable!(),
+        };
+        return Err(CodegenObligationError::UnconstrainedParam(guar));
+    }
+
+    Ok(&*tcx.arena.alloc(impl_source))
+}

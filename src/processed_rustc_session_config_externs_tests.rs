@@ -1,16 +1,97 @@
-/* FP:tests.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_session_src_config_externs_tests_USE_0001
-/* FP:tests.rs-0002 */ use std :: path :: PathBuf ;
-/* FP:tests.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_session_src_config_externs_tests_USE_0002
-/* FP:tests.rs-0004 */ use super :: split_extern_opt ;
-/* FP:tests.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_session_src_config_externs_tests_USE_0003
-/* FP:tests.rs-0006 */ use crate :: EarlyDiagCtxt ;
-/* FP:tests.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_session_src_config_externs_tests_USE_0004
-/* FP:tests.rs-0008 */ use crate :: config :: UnstableOptions ;
-/* FP:tests.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_session_src_config_externs_tests_FN_0005
-/* FP:tests.rs-0010 */ # [doc = " Verifies split_extern_opt handles the supported cases."] # [test] fn test_split_extern_opt () { let early_dcx = EarlyDiagCtxt :: new (< _ > :: default ()) ; let unstable_opts = & UnstableOptions :: default () ; let extern_opt = split_extern_opt (& early_dcx , unstable_opts , "priv,noprelude:foo=libbar.rlib") . unwrap () ; assert_eq ! (extern_opt . crate_name , "foo") ; assert_eq ! (extern_opt . path , Some (PathBuf :: from ("libbar.rlib"))) ; assert_eq ! (extern_opt . options , Some ("priv,noprelude" . to_string ())) ; let extern_opt = split_extern_opt (& early_dcx , unstable_opts , "priv,noprelude:foo") . unwrap () ; assert_eq ! (extern_opt . crate_name , "foo") ; assert_eq ! (extern_opt . path , None) ; assert_eq ! (extern_opt . options , Some ("priv,noprelude" . to_string ())) ; let extern_opt = split_extern_opt (& early_dcx , unstable_opts , "foo=libbar.rlib") . unwrap () ; assert_eq ! (extern_opt . crate_name , "foo") ; assert_eq ! (extern_opt . path , Some (PathBuf :: from ("libbar.rlib"))) ; assert_eq ! (extern_opt . options , None) ; let extern_opt = split_extern_opt (& early_dcx , unstable_opts , "foo") . unwrap () ; assert_eq ! (extern_opt . crate_name , "foo") ; assert_eq ! (extern_opt . path , None) ; assert_eq ! (extern_opt . options , None) ; }
-/* FP:tests.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_session_src_config_externs_tests_FN_0006
-/* FP:tests.rs-0012 */ # [doc = " Tests some invalid cases for split_extern_opt."] # [test] fn test_split_extern_opt_invalid () { let early_dcx = EarlyDiagCtxt :: new (< _ > :: default ()) ; let unstable_opts = & UnstableOptions :: default () ; let result = split_extern_opt (& early_dcx , unstable_opts , "priv:noprelude:foo=libbar.rlib") ; assert ! (result . is_err ()) ; let _ = result . map_err (| e | e . cancel ()) ; let result = split_extern_opt (& early_dcx , unstable_opts , "noprelude:foo::bar=libbar.rlib") ; assert ! (result . is_err ()) ; let _ = result . map_err (| e | e . cancel ()) ; }
-/* FP:tests.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_session_src_config_externs_tests_FN_0007
-/* FP:tests.rs-0014 */ # [doc = " Tests some cases for split_extern_opt with nested crates like `foo::bar`."] # [test] fn test_split_extern_opt_nested () { let early_dcx = EarlyDiagCtxt :: new (< _ > :: default ()) ; let unstable_opts = & UnstableOptions { namespaced_crates : true , .. Default :: default () } ; let extern_opt = split_extern_opt (& early_dcx , unstable_opts , "priv,noprelude:foo::bar=libbar.rlib") . unwrap () ; assert_eq ! (extern_opt . crate_name , "foo::bar") ; assert_eq ! (extern_opt . path , Some (PathBuf :: from ("libbar.rlib"))) ; assert_eq ! (extern_opt . options , Some ("priv,noprelude" . to_string ())) ; let extern_opt = split_extern_opt (& early_dcx , unstable_opts , "priv,noprelude:foo::bar") . unwrap () ; assert_eq ! (extern_opt . crate_name , "foo::bar") ; assert_eq ! (extern_opt . path , None) ; assert_eq ! (extern_opt . options , Some ("priv,noprelude" . to_string ())) ; let extern_opt = split_extern_opt (& early_dcx , unstable_opts , "foo::bar=libbar.rlib") . unwrap () ; assert_eq ! (extern_opt . crate_name , "foo::bar") ; assert_eq ! (extern_opt . path , Some (PathBuf :: from ("libbar.rlib"))) ; assert_eq ! (extern_opt . options , None) ; let extern_opt = split_extern_opt (& early_dcx , unstable_opts , "foo::bar") . unwrap () ; assert_eq ! (extern_opt . crate_name , "foo::bar") ; assert_eq ! (extern_opt . path , None) ; assert_eq ! (extern_opt . options , None) ; }
-/* FP:tests.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_session_src_config_externs_tests_FN_0008
-/* FP:tests.rs-0016 */ # [doc = " Tests some invalid cases for split_extern_opt with nested crates like `foo::bar`."] # [test] fn test_split_extern_opt_nested_invalid () { let early_dcx = EarlyDiagCtxt :: new (< _ > :: default ()) ; let unstable_opts = & UnstableOptions { namespaced_crates : true , .. Default :: default () } ; let result = split_extern_opt (& early_dcx , unstable_opts , "priv,noprelude:foo::bar::baz=libbar.rlib") ; assert ! (result . is_err ()) ; let _ = result . map_err (| e | e . cancel ()) ; }
+// SRC: ../rust/compiler/rustc_session/src/config/externs/tests.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=test_split_extern_opt | COMPLEXITY=4 | LINES=33 */
+use std::path::PathBuf;
+
+use super::split_extern_opt;
+use crate::EarlyDiagCtxt;
+use crate::config::UnstableOptions;
+
+/// Verifies split_extern_opt handles the supported cases.
+#[test]
+fn test_split_extern_opt() {
+    let early_dcx = EarlyDiagCtxt::new(<_>::default());
+    let unstable_opts = &UnstableOptions::default();
+
+    let extern_opt =
+        split_extern_opt(&early_dcx, unstable_opts, "priv,noprelude:foo=libbar.rlib").unwrap();
+    assert_eq!(extern_opt.crate_name, "foo");
+    assert_eq!(extern_opt.path, Some(PathBuf::from("libbar.rlib")));
+    assert_eq!(extern_opt.options, Some("priv,noprelude".to_string()));
+
+    let extern_opt = split_extern_opt(&early_dcx, unstable_opts, "priv,noprelude:foo").unwrap();
+    assert_eq!(extern_opt.crate_name, "foo");
+    assert_eq!(extern_opt.path, None);
+    assert_eq!(extern_opt.options, Some("priv,noprelude".to_string()));
+
+    let extern_opt = split_extern_opt(&early_dcx, unstable_opts, "foo=libbar.rlib").unwrap();
+    assert_eq!(extern_opt.crate_name, "foo");
+    assert_eq!(extern_opt.path, Some(PathBuf::from("libbar.rlib")));
+    assert_eq!(extern_opt.options, None);
+
+    let extern_opt = split_extern_opt(&early_dcx, unstable_opts, "foo").unwrap();
+    assert_eq!(extern_opt.crate_name, "foo");
+    assert_eq!(extern_opt.path, None);
+    assert_eq!(extern_opt.options, None);
+}
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=test_split_extern_opt_invalid | COMPLEXITY=5 | LINES=17 */
+
+/// Tests some invalid cases for split_extern_opt.
+#[test]
+fn test_split_extern_opt_invalid() {
+    let early_dcx = EarlyDiagCtxt::new(<_>::default());
+    let unstable_opts = &UnstableOptions::default();
+
+    // too many `:`s
+    let result = split_extern_opt(&early_dcx, unstable_opts, "priv:noprelude:foo=libbar.rlib");
+    assert!(result.is_err());
+    let _ = result.map_err(|e| e.cancel());
+
+    // can't nest externs without the unstable flag
+    let result = split_extern_opt(&early_dcx, unstable_opts, "noprelude:foo::bar=libbar.rlib");
+    assert!(result.is_err());
+    let _ = result.map_err(|e| e.cancel());
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=test_split_extern_opt_nested | COMPLEXITY=7 | LINES=29 */
+
+/// Tests some cases for split_extern_opt with nested crates like `foo::bar`.
+#[test]
+fn test_split_extern_opt_nested() {
+    let early_dcx = EarlyDiagCtxt::new(<_>::default());
+    let unstable_opts = &UnstableOptions { namespaced_crates: true, ..Default::default() };
+
+    let extern_opt =
+        split_extern_opt(&early_dcx, unstable_opts, "priv,noprelude:foo::bar=libbar.rlib").unwrap();
+    assert_eq!(extern_opt.crate_name, "foo::bar");
+    assert_eq!(extern_opt.path, Some(PathBuf::from("libbar.rlib")));
+    assert_eq!(extern_opt.options, Some("priv,noprelude".to_string()));
+
+    let extern_opt =
+        split_extern_opt(&early_dcx, unstable_opts, "priv,noprelude:foo::bar").unwrap();
+    assert_eq!(extern_opt.crate_name, "foo::bar");
+    assert_eq!(extern_opt.path, None);
+    assert_eq!(extern_opt.options, Some("priv,noprelude".to_string()));
+
+    let extern_opt = split_extern_opt(&early_dcx, unstable_opts, "foo::bar=libbar.rlib").unwrap();
+    assert_eq!(extern_opt.crate_name, "foo::bar");
+    assert_eq!(extern_opt.path, Some(PathBuf::from("libbar.rlib")));
+    assert_eq!(extern_opt.options, None);
+
+    let extern_opt = split_extern_opt(&early_dcx, unstable_opts, "foo::bar").unwrap();
+    assert_eq!(extern_opt.crate_name, "foo::bar");
+    assert_eq!(extern_opt.path, None);
+    assert_eq!(extern_opt.options, None);
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=test_split_extern_opt_nested_invalid | COMPLEXITY=6 | LINES=13 */
+
+/// Tests some invalid cases for split_extern_opt with nested crates like `foo::bar`.
+#[test]
+fn test_split_extern_opt_nested_invalid() {
+    let early_dcx = EarlyDiagCtxt::new(<_>::default());
+    let unstable_opts = &UnstableOptions { namespaced_crates: true, ..Default::default() };
+
+    // crates can only be nested one deep.
+    let result =
+        split_extern_opt(&early_dcx, unstable_opts, "priv,noprelude:foo::bar::baz=libbar.rlib");
+    assert!(result.is_err());
+    let _ = result.map_err(|e| e.cancel());
+}

@@ -1,8 +1,101 @@
-/* FP:convenience.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_pretty_src_pp_convenience_USE_0001
-/* FP:convenience.rs-0002 */ use std :: borrow :: Cow ;
-/* FP:convenience.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_pretty_src_pp_convenience_USE_0002
-/* FP:convenience.rs-0004 */ use crate :: pp :: { BeginToken , BoxMarker , BreakToken , Breaks , IndentStyle , Printer , SIZE_INFINITY , Token , } ;
-/* FP:convenience.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_pretty_src_pp_convenience_IMPL_0003
-/* FP:convenience.rs-0006 */ impl Printer { # [doc = " \"raw box\""] pub fn rbox (& mut self , indent : isize , breaks : Breaks) -> BoxMarker { self . scan_begin (BeginToken { indent : IndentStyle :: Block { offset : indent } , breaks }) } # [doc = " Inconsistent breaking box"] pub fn ibox (& mut self , indent : isize) -> BoxMarker { self . rbox (indent , Breaks :: Inconsistent) } # [doc = " Consistent breaking box"] pub fn cbox (& mut self , indent : isize) -> BoxMarker { self . rbox (indent , Breaks :: Consistent) } pub fn visual_align (& mut self) -> BoxMarker { self . scan_begin (BeginToken { indent : IndentStyle :: Visual , breaks : Breaks :: Consistent }) } pub fn break_offset (& mut self , n : usize , off : isize) { self . scan_break (BreakToken { offset : off , blank_space : n as isize , .. BreakToken :: default () }) ; } pub fn end (& mut self , b : BoxMarker) { self . scan_end (b) } pub fn eof (mut self) -> String { self . scan_eof () ; self . out } pub fn word < S : Into < Cow < 'static , str > > > (& mut self , wrd : S) { let string = wrd . into () ; self . scan_string (string) } fn spaces (& mut self , n : usize) { self . break_offset (n , 0) } pub fn zerobreak (& mut self) { self . spaces (0) } pub fn space (& mut self) { self . spaces (1) } pub fn hardbreak (& mut self) { self . spaces (SIZE_INFINITY as usize) } pub fn is_beginning_of_line (& self) -> bool { match self . last_token () { Some (last_token) => last_token . is_hardbreak_tok () , None => true , } } pub (crate) fn hardbreak_tok_offset (off : isize) -> Token { Token :: Break (BreakToken { offset : off , blank_space : SIZE_INFINITY , .. BreakToken :: default () }) } pub fn trailing_comma (& mut self) { self . scan_break (BreakToken { pre_break : Some (',') , .. BreakToken :: default () }) ; } pub fn trailing_comma_or_space (& mut self) { self . scan_break (BreakToken { blank_space : 1 , pre_break : Some (',') , .. BreakToken :: default () }) ; } }
-/* FP:convenience.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_pretty_src_pp_convenience_IMPL_0004
-/* FP:convenience.rs-0008 */ impl Token { pub (crate) fn is_hardbreak_tok (& self) -> bool { * self == Printer :: hardbreak_tok_offset (0) } }
+// SRC: ../rust/compiler/rustc_ast_pretty/src/pp/convenience.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use std::borrow::Cow;
+
+use crate::pp::{
+    BeginToken, BoxMarker, BreakToken, Breaks, IndentStyle, Printer, SIZE_INFINITY, Token,
+};
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=rbox | COMPLEXITY=33 | LINES=86 */
+
+impl Printer {
+    /// "raw box"
+    pub fn rbox(&mut self, indent: isize, breaks: Breaks) -> BoxMarker {
+        self.scan_begin(BeginToken { indent: IndentStyle::Block { offset: indent }, breaks })
+    }
+
+    /// Inconsistent breaking box
+    pub fn ibox(&mut self, indent: isize) -> BoxMarker {
+        self.rbox(indent, Breaks::Inconsistent)
+    }
+
+    /// Consistent breaking box
+    pub fn cbox(&mut self, indent: isize) -> BoxMarker {
+        self.rbox(indent, Breaks::Consistent)
+    }
+
+    pub fn visual_align(&mut self) -> BoxMarker {
+        self.scan_begin(BeginToken { indent: IndentStyle::Visual, breaks: Breaks::Consistent })
+    }
+
+    pub fn break_offset(&mut self, n: usize, off: isize) {
+        self.scan_break(BreakToken {
+            offset: off,
+            blank_space: n as isize,
+            ..BreakToken::default()
+        });
+    }
+
+    pub fn end(&mut self, b: BoxMarker) {
+        self.scan_end(b)
+    }
+
+    pub fn eof(mut self) -> String {
+        self.scan_eof();
+        self.out
+    }
+
+    pub fn word<S: Into<Cow<'static, str>>>(&mut self, wrd: S) {
+        let string = wrd.into();
+        self.scan_string(string)
+    }
+
+    fn spaces(&mut self, n: usize) {
+        self.break_offset(n, 0)
+    }
+
+    pub fn zerobreak(&mut self) {
+        self.spaces(0)
+    }
+
+    pub fn space(&mut self) {
+        self.spaces(1)
+    }
+
+    pub fn hardbreak(&mut self) {
+        self.spaces(SIZE_INFINITY as usize)
+    }
+
+    pub fn is_beginning_of_line(&self) -> bool {
+        match self.last_token() {
+            Some(last_token) => last_token.is_hardbreak_tok(),
+            None => true,
+        }
+    }
+
+    pub(crate) fn hardbreak_tok_offset(off: isize) -> Token {
+        Token::Break(BreakToken {
+            offset: off,
+            blank_space: SIZE_INFINITY,
+            ..BreakToken::default()
+        })
+    }
+
+    pub fn trailing_comma(&mut self) {
+        self.scan_break(BreakToken { pre_break: Some(','), ..BreakToken::default() });
+    }
+
+    pub fn trailing_comma_or_space(&mut self) {
+        self.scan_break(BreakToken {
+            blank_space: 1,
+            pre_break: Some(','),
+            ..BreakToken::default()
+        });
+    }
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=3 | LINES=6 */
+
+impl Token {
+    pub(crate) fn is_hardbreak_tok(&self) -> bool {
+        *self == Printer::hardbreak_tok_offset(0)
+    }
+}

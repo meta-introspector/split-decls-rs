@@ -1,16 +1,94 @@
-/* FP:placeholder_relation.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_placeholder_relation_USE_0001
-/* FP:placeholder_relation.rs-0002 */ use crate :: rustc_data_structures :: intern :: Interned ;
-/* FP:placeholder_relation.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_placeholder_relation_USE_0002
-/* FP:placeholder_relation.rs-0004 */ use crate :: rustc_complete :: Diag ;
-/* FP:placeholder_relation.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_placeholder_relation_USE_0003
-/* FP:placeholder_relation.rs-0006 */ use crate :: rustc_complete :: bug ;
-/* FP:placeholder_relation.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_placeholder_relation_USE_0004
-/* FP:placeholder_relation.rs-0008 */ use crate :: rustc_complete :: ty :: { self , RePlaceholder , Region } ;
-/* FP:placeholder_relation.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_placeholder_relation_USE_0005
-/* FP:placeholder_relation.rs-0010 */ use crate :: error_reporting :: infer :: nice_region_error :: NiceRegionError ;
-/* FP:placeholder_relation.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_placeholder_relation_USE_0006
-/* FP:placeholder_relation.rs-0012 */ use crate :: errors :: PlaceholderRelationLfNotSatisfied ;
-/* FP:placeholder_relation.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_placeholder_relation_USE_0007
-/* FP:placeholder_relation.rs-0014 */ use crate :: infer :: { RegionResolutionError , SubregionOrigin } ;
-/* FP:placeholder_relation.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_error_reporting_infer_nice_region_error_placeholder_relation_IMPL_0008
-/* FP:placeholder_relation.rs-0016 */ impl < 'tcx > NiceRegionError < '_ , 'tcx > { # [doc = " Emitted wwhen given a `ConcreteFailure` when relating two placeholders."] pub (super) fn try_report_placeholder_relation (& self) -> Option < Diag < 'tcx > > { match & self . error { Some (RegionResolutionError :: ConcreteFailure (SubregionOrigin :: RelateRegionParamBound (span , _) , Region (Interned (RePlaceholder (ty :: Placeholder { bound : ty :: BoundRegion { kind : sub_name , .. } , .. }) , _ ,)) , Region (Interned (RePlaceholder (ty :: Placeholder { bound : ty :: BoundRegion { kind : sup_name , .. } , .. }) , _ ,)) ,)) => { let span = * span ; let (sub_span , sub_symbol) = match * sub_name { ty :: BoundRegionKind :: Named (def_id) => { (Some (self . tcx () . def_span (def_id)) , Some (self . tcx () . item_name (def_id))) } ty :: BoundRegionKind :: Anon | ty :: BoundRegionKind :: ClosureEnv => (None , None) , ty :: BoundRegionKind :: NamedAnon (_) => bug ! ("only used for pretty printing") , } ; let (sup_span , sup_symbol) = match * sup_name { ty :: BoundRegionKind :: Named (def_id) => { (Some (self . tcx () . def_span (def_id)) , Some (self . tcx () . item_name (def_id))) } ty :: BoundRegionKind :: Anon | ty :: BoundRegionKind :: ClosureEnv => (None , None) , ty :: BoundRegionKind :: NamedAnon (_) => bug ! ("only used for pretty printing") , } ; let diag = match (sub_span , sup_span , sub_symbol , sup_symbol) { (Some (sub_span) , Some (sup_span) , Some (sub_symbol) , Some (sup_symbol)) => { PlaceholderRelationLfNotSatisfied :: HasBoth { span , sub_span , sup_span , sub_symbol , sup_symbol , note : () , } } (Some (sub_span) , Some (sup_span) , _ , Some (sup_symbol)) => { PlaceholderRelationLfNotSatisfied :: HasSup { span , sub_span , sup_span , sup_symbol , note : () , } } (Some (sub_span) , Some (sup_span) , Some (sub_symbol) , _) => { PlaceholderRelationLfNotSatisfied :: HasSub { span , sub_span , sup_span , sub_symbol , note : () , } } (Some (sub_span) , Some (sup_span) , _ , _) => { PlaceholderRelationLfNotSatisfied :: HasNone { span , sub_span , sup_span , note : () , } } _ => PlaceholderRelationLfNotSatisfied :: OnlyPrimarySpan { span , note : () } , } ; Some (self . tcx () . dcx () . create_err (diag)) } _ => None , } } }
+// SRC: ../rust/compiler/rustc_trait_selection/src/error_reporting/infer/nice_region_error/placeholder_relation.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use crate::rustc_data_structures::intern::Interned;
+use crate::rustc_complete::Diag;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, RePlaceholder, Region};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+
+use crate::error_reporting::infer::nice_region_error::NiceRegionError;
+use crate::errors::PlaceholderRelationLfNotSatisfied;
+use crate::infer::{RegionResolutionError, SubregionOrigin};
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=46 | LINES=82 */
+
+impl<'tcx> NiceRegionError<'_, 'tcx> {
+    /// Emitted wwhen given a `ConcreteFailure` when relating two placeholders.
+    pub(super) fn try_report_placeholder_relation(&self) -> Option<Diag<'tcx>> {
+        match &self.error {
+            Some(RegionResolutionError::ConcreteFailure(
+                SubregionOrigin::RelateRegionParamBound(span, _),
+                Region(Interned(
+                    RePlaceholder(ty::Placeholder {
+                        bound: ty::BoundRegion { kind: sub_name, .. },
+                        ..
+                    }),
+                    _,
+                )),
+                Region(Interned(
+                    RePlaceholder(ty::Placeholder {
+                        bound: ty::BoundRegion { kind: sup_name, .. },
+                        ..
+                    }),
+                    _,
+                )),
+            )) => {
+                let span = *span;
+                let (sub_span, sub_symbol) = match *sub_name {
+                    ty::BoundRegionKind::Named(def_id) => {
+                        (Some(self.tcx().def_span(def_id)), Some(self.tcx().item_name(def_id)))
+                    }
+                    ty::BoundRegionKind::Anon | ty::BoundRegionKind::ClosureEnv => (None, None),
+                    ty::BoundRegionKind::NamedAnon(_) => bug!("only used for pretty printing"),
+                };
+                let (sup_span, sup_symbol) = match *sup_name {
+                    ty::BoundRegionKind::Named(def_id) => {
+                        (Some(self.tcx().def_span(def_id)), Some(self.tcx().item_name(def_id)))
+                    }
+                    ty::BoundRegionKind::Anon | ty::BoundRegionKind::ClosureEnv => (None, None),
+                    ty::BoundRegionKind::NamedAnon(_) => bug!("only used for pretty printing"),
+                };
+                let diag = match (sub_span, sup_span, sub_symbol, sup_symbol) {
+                    (Some(sub_span), Some(sup_span), Some(sub_symbol), Some(sup_symbol)) => {
+                        PlaceholderRelationLfNotSatisfied::HasBoth {
+                            span,
+                            sub_span,
+                            sup_span,
+                            sub_symbol,
+                            sup_symbol,
+                            note: (),
+                        }
+                    }
+                    (Some(sub_span), Some(sup_span), _, Some(sup_symbol)) => {
+                        PlaceholderRelationLfNotSatisfied::HasSup {
+                            span,
+                            sub_span,
+                            sup_span,
+                            sup_symbol,
+                            note: (),
+                        }
+                    }
+                    (Some(sub_span), Some(sup_span), Some(sub_symbol), _) => {
+                        PlaceholderRelationLfNotSatisfied::HasSub {
+                            span,
+                            sub_span,
+                            sup_span,
+                            sub_symbol,
+                            note: (),
+                        }
+                    }
+                    (Some(sub_span), Some(sup_span), _, _) => {
+                        PlaceholderRelationLfNotSatisfied::HasNone {
+                            span,
+                            sub_span,
+                            sup_span,
+                            note: (),
+                        }
+                    }
+                    _ => PlaceholderRelationLfNotSatisfied::OnlyPrimarySpan { span, note: () },
+                };
+                Some(self.tcx().dcx().create_err(diag))
+            }
+            _ => None,
+        }
+    }
+}

@@ -1,12 +1,83 @@
-/* FP:cleanup_post_borrowck.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cleanup_post_borrowck_USE_0001
-/* FP:cleanup_post_borrowck.rs-0002 */ use crate :: rustc_complete :: mir :: coverage :: CoverageKind ;
-/* FP:cleanup_post_borrowck.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cleanup_post_borrowck_USE_0002
-/* FP:cleanup_post_borrowck.rs-0004 */ use crate :: rustc_complete :: mir :: { Body , BorrowKind , CastKind , Rvalue , StatementKind , TerminatorKind } ;
-/* FP:cleanup_post_borrowck.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cleanup_post_borrowck_USE_0003
-/* FP:cleanup_post_borrowck.rs-0006 */ use crate :: rustc_complete :: ty :: TyCtxt ;
-/* FP:cleanup_post_borrowck.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cleanup_post_borrowck_USE_0004
-/* FP:cleanup_post_borrowck.rs-0008 */ use crate :: rustc_complete :: ty :: adjustment :: PointerCoercion ;
-/* FP:cleanup_post_borrowck.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cleanup_post_borrowck_STRUCT_0005
-/* FP:cleanup_post_borrowck.rs-0010 */ pub (super) struct CleanupPostBorrowck ;
-/* FP:cleanup_post_borrowck.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_cleanup_post_borrowck_IMPL_0006
-/* FP:cleanup_post_borrowck.rs-0012 */ impl < 'tcx > crate :: MirPass < 'tcx > for CleanupPostBorrowck { fn run_pass (& self , _tcx : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) { for basic_block in body . basic_blocks . as_mut () { for statement in basic_block . statements . iter_mut () { match statement . kind { StatementKind :: AscribeUserType (..) | StatementKind :: Assign (box (_ , Rvalue :: Ref (_ , BorrowKind :: Fake (_) , _))) | StatementKind :: Coverage (CoverageKind :: BlockMarker { .. } | CoverageKind :: SpanMarker { .. } ,) | StatementKind :: FakeRead (..) | StatementKind :: BackwardIncompatibleDropHint { .. } => statement . make_nop () , StatementKind :: Assign (box (_ , Rvalue :: Cast (ref mut cast_kind @ CastKind :: PointerCoercion (PointerCoercion :: ArrayToPointer | PointerCoercion :: MutToConstPointer , _ ,) , ..,) ,)) => { * cast_kind = CastKind :: PtrToPtr ; } _ => () , } } let terminator = basic_block . terminator_mut () ; match terminator . kind { TerminatorKind :: FalseEdge { real_target , .. } | TerminatorKind :: FalseUnwind { real_target , .. } => { terminator . kind = TerminatorKind :: Goto { target : real_target } ; } _ => { } } } body . user_type_annotations . raw . clear () ; for decl in & mut body . local_decls { decl . user_ty = None ; } } fn is_required (& self) -> bool { true } }
+// SRC: ../rust/compiler/rustc_mir_transform/src/cleanup_post_borrowck.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=20 */
+// This module provides a pass that removes parts of MIR that are no longer relevant after
+// analysis phase and borrowck. In particular, it removes false edges, user type annotations and
+// replaces following statements with [`Nop`]s:
+//
+//   - [`AscribeUserType`]
+//   - [`FakeRead`]
+//   - [`Assign`] statements with a [`Fake`] borrow
+//   - [`Coverage`] statements of kind [`BlockMarker`] or [`SpanMarker`]
+//
+// [`AscribeUserType`]: crate::rustc_middle::mir::StatementKind::AscribeUserType
+// [`Assign`]: crate::rustc_middle::mir::StatementKind::Assign
+// [`FakeRead`]: crate::rustc_middle::mir::StatementKind::FakeRead
+// [`Nop`]: crate::rustc_middle::mir::StatementKind::Nop
+// [`Fake`]: crate::rustc_middle::mir::BorrowKind::Fake
+// [`Coverage`]: crate::rustc_middle::mir::StatementKind::Coverage
+// [`BlockMarker`]: crate::rustc_middle::mir::coverage::CoverageKind::BlockMarker
+// [`SpanMarker`]: crate::rustc_middle::mir::coverage::CoverageKind::SpanMarker
+
+use crate::rustc_complete::mir::coverage::CoverageKind;
+use crate::rustc_complete::mir::{Body, BorrowKind, CastKind, Rvalue, StatementKind, TerminatorKind};
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=37 | LINES=60 */
+use crate::rustc_complete::ty::TyCtxt;
+use crate::rustc_complete::ty::adjustment::PointerCoercion;
+
+pub(super) struct CleanupPostBorrowck;
+
+impl<'tcx> crate::MirPass<'tcx> for CleanupPostBorrowck {
+    fn run_pass(&self, _tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
+        for basic_block in body.basic_blocks.as_mut() {
+            for statement in basic_block.statements.iter_mut() {
+                match statement.kind {
+                    StatementKind::AscribeUserType(..)
+                    | StatementKind::Assign(box (_, Rvalue::Ref(_, BorrowKind::Fake(_), _)))
+                    | StatementKind::Coverage(
+                        // These kinds of coverage statements are markers inserted during
+                        // MIR building, and are not needed after InstrumentCoverage.
+                        CoverageKind::BlockMarker { .. } | CoverageKind::SpanMarker { .. },
+                    )
+                    | StatementKind::FakeRead(..)
+                    | StatementKind::BackwardIncompatibleDropHint { .. } => statement.make_nop(),
+                    StatementKind::Assign(box (
+                        _,
+                        Rvalue::Cast(
+                            ref mut cast_kind @ CastKind::PointerCoercion(
+                                PointerCoercion::ArrayToPointer
+                                | PointerCoercion::MutToConstPointer,
+                                _,
+                            ),
+                            ..,
+                        ),
+                    )) => {
+                        // BorrowCk needed to track whether these cases were coercions or casts,
+                        // to know whether to check lifetimes in their pointees,
+                        // but from now on that distinction doesn't matter,
+                        // so just make them ordinary pointer casts instead.
+                        *cast_kind = CastKind::PtrToPtr;
+                    }
+                    _ => (),
+                }
+            }
+            let terminator = basic_block.terminator_mut();
+            match terminator.kind {
+                TerminatorKind::FalseEdge { real_target, .. }
+                | TerminatorKind::FalseUnwind { real_target, .. } => {
+                    terminator.kind = TerminatorKind::Goto { target: real_target };
+                }
+                _ => {}
+            }
+        }
+
+        body.user_type_annotations.raw.clear();
+
+        for decl in &mut body.local_decls {
+            decl.user_ty = None;
+        }
+    }
+
+    fn is_required(&self) -> bool {
+        true
+    }
+}

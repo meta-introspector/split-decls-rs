@@ -1,36 +1,268 @@
-/* FP:fmt.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_USE_0001
-/* FP:fmt.rs-0002 */ use std :: fmt ;
-/* FP:fmt.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_USE_0002
-/* FP:fmt.rs-0004 */ use crate :: rustc_index :: Idx ;
-/* FP:fmt.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_USE_0003
-/* FP:fmt.rs-0006 */ use crate :: rustc_index :: bit_set :: { ChunkedBitSet , DenseBitSet , MixedBitSet } ;
-/* FP:fmt.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_USE_0004
-/* FP:fmt.rs-0008 */ use super :: lattice :: MaybeReachable ;
-/* FP:fmt.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_TRAIT_0005
-/* FP:fmt.rs-0010 */ # [doc = " An extension to `fmt::Debug` for data that can be better printed with some auxiliary data `C`."] pub trait DebugWithContext < C > : Eq + fmt :: Debug { fn fmt_with (& self , _ctxt : & C , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { fmt :: Debug :: fmt (self , f) } # [doc = " Print the difference between `self` and `old`."] # [doc = ""] # [doc = " This should print nothing if `self == old`."] # [doc = ""] # [doc = " `+` and `-` are typically used to indicate differences. However, these characters are"] # [doc = " fairly common and may be needed to print a types representation. If using them to indicate"] # [doc = " a diff, prefix them with the \"Unit Separator\"  control character (␟  U+001F)."] fn fmt_diff_with (& self , old : & Self , ctxt : & C , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { if self == old { return Ok (()) ; } write ! (f , "\u{001f}+") ? ; self . fmt_with (ctxt , f) ? ; if f . alternate () { write ! (f , "\n") ? ; } else { write ! (f , "\t") ? ; } write ! (f , "\u{001f}-") ? ; old . fmt_with (ctxt , f) } }
-/* FP:fmt.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_STRUCT_0006
-/* FP:fmt.rs-0012 */ # [doc = " Implements `fmt::Debug` by deferring to `<T as DebugWithContext<C>>::fmt_with`."] pub struct DebugWithAdapter < 'a , T , C > { pub this : T , pub ctxt : & 'a C , }
-/* FP:fmt.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_IMPL_0007
-/* FP:fmt.rs-0014 */ impl < T , C > fmt :: Debug for DebugWithAdapter < '_ , T , C > where T : DebugWithContext < C > , { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { self . this . fmt_with (self . ctxt , f) } }
-/* FP:fmt.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_STRUCT_0008
-/* FP:fmt.rs-0016 */ # [doc = " Implements `fmt::Debug` by deferring to `<T as DebugWithContext<C>>::fmt_diff_with`."] pub struct DebugDiffWithAdapter < 'a , T , C > { pub new : T , pub old : T , pub ctxt : & 'a C , }
-/* FP:fmt.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_IMPL_0009
-/* FP:fmt.rs-0018 */ impl < T , C > fmt :: Debug for DebugDiffWithAdapter < '_ , T , C > where T : DebugWithContext < C > , { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { self . new . fmt_diff_with (& self . old , self . ctxt , f) } }
-/* FP:fmt.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_IMPL_0010
-/* FP:fmt.rs-0020 */ impl < T , C > DebugWithContext < C > for DenseBitSet < T > where T : Idx + DebugWithContext < C > , { fn fmt_with (& self , ctxt : & C , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . debug_set () . entries (self . iter () . map (| i | DebugWithAdapter { this : i , ctxt })) . finish () } fn fmt_diff_with (& self , old : & Self , ctxt : & C , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let size = self . domain_size () ; assert_eq ! (size , old . domain_size ()) ; let mut set_in_self = MixedBitSet :: new_empty (size) ; let mut cleared_in_self = MixedBitSet :: new_empty (size) ; for i in (0 .. size) . map (T :: new) { match (self . contains (i) , old . contains (i)) { (true , false) => set_in_self . insert (i) , (false , true) => cleared_in_self . insert (i) , _ => continue , } ; } fmt_diff (& set_in_self , & cleared_in_self , ctxt , f) } }
-/* FP:fmt.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_IMPL_0011
-/* FP:fmt.rs-0022 */ impl < T , C > DebugWithContext < C > for ChunkedBitSet < T > where T : Idx + DebugWithContext < C > , { fn fmt_with (& self , ctxt : & C , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . debug_set () . entries (self . iter () . map (| i | DebugWithAdapter { this : i , ctxt })) . finish () } fn fmt_diff_with (& self , old : & Self , ctxt : & C , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let size = self . domain_size () ; assert_eq ! (size , old . domain_size ()) ; let mut set_in_self = MixedBitSet :: new_empty (size) ; let mut cleared_in_self = MixedBitSet :: new_empty (size) ; for i in (0 .. size) . map (T :: new) { match (self . contains (i) , old . contains (i)) { (true , false) => set_in_self . insert (i) , (false , true) => cleared_in_self . insert (i) , _ => continue , } ; } fmt_diff (& set_in_self , & cleared_in_self , ctxt , f) } }
-/* FP:fmt.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_IMPL_0012
-/* FP:fmt.rs-0024 */ impl < T , C > DebugWithContext < C > for MixedBitSet < T > where T : Idx + DebugWithContext < C > , { fn fmt_with (& self , ctxt : & C , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { MixedBitSet :: Small (set) => set . fmt_with (ctxt , f) , MixedBitSet :: Large (set) => set . fmt_with (ctxt , f) , } } fn fmt_diff_with (& self , old : & Self , ctxt : & C , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match (self , old) { (MixedBitSet :: Small (set) , MixedBitSet :: Small (old)) => set . fmt_diff_with (old , ctxt , f) , (MixedBitSet :: Large (set) , MixedBitSet :: Large (old)) => set . fmt_diff_with (old , ctxt , f) , _ => panic ! ("MixedBitSet size mismatch") , } } }
-/* FP:fmt.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_IMPL_0013
-/* FP:fmt.rs-0026 */ impl < S , C > DebugWithContext < C > for MaybeReachable < S > where S : DebugWithContext < C > , { fn fmt_with (& self , ctxt : & C , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { MaybeReachable :: Unreachable => { write ! (f , "unreachable") } MaybeReachable :: Reachable (set) => set . fmt_with (ctxt , f) , } } fn fmt_diff_with (& self , old : & Self , ctxt : & C , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match (self , old) { (MaybeReachable :: Unreachable , MaybeReachable :: Unreachable) => Ok (()) , (MaybeReachable :: Unreachable , MaybeReachable :: Reachable (set)) => { write ! (f , "\u{001f}+") ? ; set . fmt_with (ctxt , f) } (MaybeReachable :: Reachable (set) , MaybeReachable :: Unreachable) => { write ! (f , "\u{001f}-") ? ; set . fmt_with (ctxt , f) } (MaybeReachable :: Reachable (this) , MaybeReachable :: Reachable (old)) => { this . fmt_diff_with (old , ctxt , f) } } } }
-/* FP:fmt.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_FN_0014
-/* FP:fmt.rs-0028 */ fn fmt_diff < T , C > (inserted : & MixedBitSet < T > , removed : & MixedBitSet < T > , ctxt : & C , f : & mut fmt :: Formatter < '_ > ,) -> fmt :: Result where T : Idx + DebugWithContext < C > , { let mut first = true ; for idx in inserted . iter () { let delim = if first { "\u{001f}+" } else if f . alternate () { "\n\u{001f}+" } else { ", " } ; write ! (f , "{delim}") ? ; idx . fmt_with (ctxt , f) ? ; first = false ; } if ! f . alternate () { first = true ; if ! inserted . is_empty () && ! removed . is_empty () { write ! (f , "\t") ? ; } } for idx in removed . iter () { let delim = if first { "\u{001f}-" } else if f . alternate () { "\n\u{001f}-" } else { ", " } ; write ! (f , "{delim}") ? ; idx . fmt_with (ctxt , f) ? ; first = false ; } Ok (()) }
-/* FP:fmt.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_IMPL_0015
-/* FP:fmt.rs-0030 */ impl < T , C > DebugWithContext < C > for & '_ T where T : DebugWithContext < C > , { fn fmt_with (& self , ctxt : & C , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { (* self) . fmt_with (ctxt , f) } fn fmt_diff_with (& self , old : & Self , ctxt : & C , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { (* self) . fmt_diff_with (* old , ctxt , f) } }
-/* FP:fmt.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_IMPL_0016
-/* FP:fmt.rs-0032 */ impl < C > DebugWithContext < C > for crate :: rustc_middle :: mir :: Local { }
-/* FP:fmt.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_IMPL_0017
-/* FP:fmt.rs-0034 */ impl < C > DebugWithContext < C > for crate :: move_paths :: InitIndex { }
-/* FP:fmt.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_fmt_IMPL_0018
-/* FP:fmt.rs-0036 */ impl < 'tcx , C > DebugWithContext < C > for crate :: move_paths :: MovePathIndex where C : crate :: move_paths :: HasMoveData < 'tcx > , { fn fmt_with (& self , ctxt : & C , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { write ! (f , "{}" , ctxt . move_data () . move_paths [* self]) } }
+// SRC: ../rust/compiler/rustc_mir_dataflow/src/framework/fmt.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+// Custom formatting traits used when outputting Graphviz diagrams with the results of a dataflow
+// analysis.
+
+use std::fmt;
+
+use crate::rustc_index::Idx;
+use crate::rustc_index::bit_set::{ChunkedBitSet, DenseBitSet, MixedBitSet};
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=fmt_with | COMPLEXITY=19 | LINES=34 */
+
+use super::lattice::MaybeReachable;
+
+/// An extension to `fmt::Debug` for data that can be better printed with some auxiliary data `C`.
+pub trait DebugWithContext<C>: Eq + fmt::Debug {
+    fn fmt_with(&self, _ctxt: &C, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        fmt::Debug::fmt(self, f)
+    }
+
+    /// Print the difference between `self` and `old`.
+    ///
+    /// This should print nothing if `self == old`.
+    ///
+    /// `+` and `-` are typically used to indicate differences. However, these characters are
+    /// fairly common and may be needed to print a types representation. If using them to indicate
+    /// a diff, prefix them with the "Unit Separator"  control character (␟  U+001F).
+    fn fmt_diff_with(&self, old: &Self, ctxt: &C, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        if self == old {
+            return Ok(());
+        }
+
+        write!(f, "\u{001f}+")?;
+        self.fmt_with(ctxt, f)?;
+
+        if f.alternate() {
+            write!(f, "\n")?;
+        } else {
+            write!(f, "\t")?;
+        }
+
+        write!(f, "\u{001f}-")?;
+        old.fmt_with(ctxt, f)
+    }
+}
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=DebugWithAdapter | COMPLEXITY=2 | LINES=6 */
+
+/// Implements `fmt::Debug` by deferring to `<T as DebugWithContext<C>>::fmt_with`.
+pub struct DebugWithAdapter<'a, T, C> {
+    pub this: T,
+    pub ctxt: &'a C,
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=9 */
+
+impl<T, C> fmt::Debug for DebugWithAdapter<'_, T, C>
+where
+    T: DebugWithContext<C>,
+{
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        self.this.fmt_with(self.ctxt, f)
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=DebugDiffWithAdapter | COMPLEXITY=2 | LINES=7 */
+
+/// Implements `fmt::Debug` by deferring to `<T as DebugWithContext<C>>::fmt_diff_with`.
+pub struct DebugDiffWithAdapter<'a, T, C> {
+    pub new: T,
+    pub old: T,
+    pub ctxt: &'a C,
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=5 | LINES=9 */
+
+impl<T, C> fmt::Debug for DebugDiffWithAdapter<'_, T, C>
+where
+    T: DebugWithContext<C>,
+{
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        self.new.fmt_diff_with(&self.old, self.ctxt, f)
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=fmt_with | COMPLEXITY=15 | LINES=29 */
+
+// Impls
+
+impl<T, C> DebugWithContext<C> for DenseBitSet<T>
+where
+    T: Idx + DebugWithContext<C>,
+{
+    fn fmt_with(&self, ctxt: &C, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_set().entries(self.iter().map(|i| DebugWithAdapter { this: i, ctxt })).finish()
+    }
+
+    fn fmt_diff_with(&self, old: &Self, ctxt: &C, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let size = self.domain_size();
+        assert_eq!(size, old.domain_size());
+
+        let mut set_in_self = MixedBitSet::new_empty(size);
+        let mut cleared_in_self = MixedBitSet::new_empty(size);
+
+        for i in (0..size).map(T::new) {
+            match (self.contains(i), old.contains(i)) {
+                (true, false) => set_in_self.insert(i),
+                (false, true) => cleared_in_self.insert(i),
+                _ => continue,
+            };
+        }
+
+        fmt_diff(&set_in_self, &cleared_in_self, ctxt, f)
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt_with | COMPLEXITY=15 | LINES=27 */
+
+impl<T, C> DebugWithContext<C> for ChunkedBitSet<T>
+where
+    T: Idx + DebugWithContext<C>,
+{
+    fn fmt_with(&self, ctxt: &C, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_set().entries(self.iter().map(|i| DebugWithAdapter { this: i, ctxt })).finish()
+    }
+
+    fn fmt_diff_with(&self, old: &Self, ctxt: &C, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let size = self.domain_size();
+        assert_eq!(size, old.domain_size());
+
+        let mut set_in_self = MixedBitSet::new_empty(size);
+        let mut cleared_in_self = MixedBitSet::new_empty(size);
+
+        for i in (0..size).map(T::new) {
+            match (self.contains(i), old.contains(i)) {
+                (true, false) => set_in_self.insert(i),
+                (false, true) => cleared_in_self.insert(i),
+                _ => continue,
+            };
+        }
+
+        fmt_diff(&set_in_self, &cleared_in_self, ctxt, f)
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=fmt_with | COMPLEXITY=15 | LINES=20 */
+
+impl<T, C> DebugWithContext<C> for MixedBitSet<T>
+where
+    T: Idx + DebugWithContext<C>,
+{
+    fn fmt_with(&self, ctxt: &C, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            MixedBitSet::Small(set) => set.fmt_with(ctxt, f),
+            MixedBitSet::Large(set) => set.fmt_with(ctxt, f),
+        }
+    }
+
+    fn fmt_diff_with(&self, old: &Self, ctxt: &C, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match (self, old) {
+            (MixedBitSet::Small(set), MixedBitSet::Small(old)) => set.fmt_diff_with(old, ctxt, f),
+            (MixedBitSet::Large(set), MixedBitSet::Large(old)) => set.fmt_diff_with(old, ctxt, f),
+            _ => panic!("MixedBitSet size mismatch"),
+        }
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=fmt_with | COMPLEXITY=22 | LINES=31 */
+
+impl<S, C> DebugWithContext<C> for MaybeReachable<S>
+where
+    S: DebugWithContext<C>,
+{
+    fn fmt_with(&self, ctxt: &C, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            MaybeReachable::Unreachable => {
+                write!(f, "unreachable")
+            }
+            MaybeReachable::Reachable(set) => set.fmt_with(ctxt, f),
+        }
+    }
+
+    fn fmt_diff_with(&self, old: &Self, ctxt: &C, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match (self, old) {
+            (MaybeReachable::Unreachable, MaybeReachable::Unreachable) => Ok(()),
+            (MaybeReachable::Unreachable, MaybeReachable::Reachable(set)) => {
+                write!(f, "\u{001f}+")?;
+                set.fmt_with(ctxt, f)
+            }
+            (MaybeReachable::Reachable(set), MaybeReachable::Unreachable) => {
+                write!(f, "\u{001f}-")?;
+                set.fmt_with(ctxt, f)
+            }
+            (MaybeReachable::Reachable(this), MaybeReachable::Reachable(old)) => {
+                this.fmt_diff_with(old, ctxt, f)
+            }
+        }
+    }
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=fmt_diff | COMPLEXITY=35 | LINES=48 */
+
+fn fmt_diff<T, C>(
+    inserted: &MixedBitSet<T>,
+    removed: &MixedBitSet<T>,
+    ctxt: &C,
+    f: &mut fmt::Formatter<'_>,
+) -> fmt::Result
+where
+    T: Idx + DebugWithContext<C>,
+{
+    let mut first = true;
+    for idx in inserted.iter() {
+        let delim = if first {
+            "\u{001f}+"
+        } else if f.alternate() {
+            "\n\u{001f}+"
+        } else {
+            ", "
+        };
+
+        write!(f, "{delim}")?;
+        idx.fmt_with(ctxt, f)?;
+        first = false;
+    }
+
+    if !f.alternate() {
+        first = true;
+        if !inserted.is_empty() && !removed.is_empty() {
+            write!(f, "\t")?;
+        }
+    }
+
+    for idx in removed.iter() {
+        let delim = if first {
+            "\u{001f}-"
+        } else if f.alternate() {
+            "\n\u{001f}-"
+        } else {
+            ", "
+        };
+
+        write!(f, "{delim}")?;
+        idx.fmt_with(ctxt, f)?;
+        first = false;
+    }
+
+    Ok(())
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=fmt_with | COMPLEXITY=6 | LINES=13 */
+
+impl<T, C> DebugWithContext<C> for &'_ T
+where
+    T: DebugWithContext<C>,
+{
+    fn fmt_with(&self, ctxt: &C, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        (*self).fmt_with(ctxt, f)
+    }
+
+    fn fmt_diff_with(&self, old: &Self, ctxt: &C, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        (*self).fmt_diff_with(*old, ctxt, f)
+    }
+}
+/* AST_META: AST_ID=13 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<C> DebugWithContext<C> for crate::rustc_middle::mir::Local {}
+/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=1 */
+impl<C> DebugWithContext<C> for crate::move_paths::InitIndex {}
+/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=fmt_with | COMPLEXITY=6 | LINES=9 */
+
+impl<'tcx, C> DebugWithContext<C> for crate::move_paths::MovePathIndex
+where
+    C: crate::move_paths::HasMoveData<'tcx>,
+{
+    fn fmt_with(&self, ctxt: &C, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", ctxt.move_data().move_paths[*self])
+    }
+}

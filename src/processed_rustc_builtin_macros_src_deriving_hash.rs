@@ -1,18 +1,86 @@
-/* FP:hash.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_hash_USE_0001
-/* FP:hash.rs-0002 */ use crate :: rustc_complete :: { MetaItem , Mutability } ;
-/* FP:hash.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_hash_USE_0002
-/* FP:hash.rs-0004 */ use crate :: rustc_expand :: base :: { Annotatable , ExtCtxt } ;
-/* FP:hash.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_hash_USE_0003
-/* FP:hash.rs-0006 */ use crate :: rustc_complete :: { Span , sym } ;
-/* FP:hash.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_hash_USE_0004
-/* FP:hash.rs-0008 */ use thin_vec :: thin_vec ;
-/* FP:hash.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_hash_USE_0005
-/* FP:hash.rs-0010 */ use crate :: deriving :: generic :: ty :: * ;
-/* FP:hash.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_hash_USE_0006
-/* FP:hash.rs-0012 */ use crate :: deriving :: generic :: * ;
-/* FP:hash.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_hash_USE_0007
-/* FP:hash.rs-0014 */ use crate :: deriving :: { path_std , pathvec_std } ;
-/* FP:hash.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_hash_FN_0008
-/* FP:hash.rs-0016 */ pub (crate) fn expand_deriving_hash (cx : & ExtCtxt < '_ > , span : Span , mitem : & MetaItem , item : & Annotatable , push : & mut dyn FnMut (Annotatable) , is_const : bool ,) { let path = Path :: new_ (pathvec_std ! (hash :: Hash) , vec ! [] , PathKind :: Std) ; let typaram = sym :: __H ; let arg = Path :: new_local (typaram) ; let hash_trait_def = TraitDef { span , path , skip_path_as_bound : false , needs_copy_as_bound_if_packed : true , additional_bounds : Vec :: new () , supports_unions : false , methods : vec ! [MethodDef { name : sym :: hash , generics : Bounds { bounds : vec ! [(typaram , vec ! [path_std ! (hash :: Hasher)])] } , explicit_self : true , nonself_args : vec ! [(Ref (Box :: new (Path (arg)) , Mutability :: Mut) , sym :: state)] , ret_ty : Unit , attributes : thin_vec ! [cx . attr_word (sym :: inline , span)] , fieldless_variants_strategy : FieldlessVariantsStrategy :: Unify , combine_substructure : combine_substructure (Box :: new (| a , b , c | { hash_substructure (a , b , c) })) , }] , associated_types : Vec :: new () , is_const , is_staged_api_crate : cx . ecfg . features . staged_api () , } ; hash_trait_def . expand (cx , mitem , item , push) ; }
-/* FP:hash.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_builtin_macros_src_deriving_hash_FN_0009
-/* FP:hash.rs-0018 */ fn hash_substructure (cx : & ExtCtxt < '_ > , trait_span : Span , substr : & Substructure < '_ >) -> BlockOrExpr { let [state_expr] = substr . nonselflike_args else { cx . dcx () . span_bug (trait_span , "incorrect number of arguments in `derive(Hash)`") ; } ; let call_hash = | span , expr | { let hash_path = { let strs = cx . std_path (& [sym :: hash , sym :: Hash , sym :: hash]) ; cx . expr_path (cx . path_global (span , strs)) } ; let expr = cx . expr_call (span , hash_path , thin_vec ! [expr , state_expr . clone ()]) ; cx . stmt_expr (expr) } ; let (stmts , match_expr) = match substr . fields { Struct (_ , fields) | EnumMatching (.. , fields) => { let stmts = fields . iter () . map (| field | call_hash (field . span , field . self_expr . clone ())) . collect () ; (stmts , None) } EnumDiscr (discr_field , match_expr) => { assert ! (discr_field . other_selflike_exprs . is_empty ()) ; let stmts = thin_vec ! [call_hash (discr_field . span , discr_field . self_expr . clone ())] ; (stmts , match_expr . clone ()) } _ => cx . dcx () . span_bug (trait_span , "impossible substructure in `derive(Hash)`") , } ; BlockOrExpr :: new_mixed (stmts , match_expr) }
+// SRC: ../rust/compiler/rustc_builtin_macros/src/deriving/hash.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{MetaItem, Mutability};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_expand::base::{Annotatable, ExtCtxt};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{Span, sym};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use thin_vec::thin_vec;
+
+use crate::deriving::generic::ty::*;
+use crate::deriving::generic::*;
+use crate::deriving::{path_std, pathvec_std};
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=8 | LINES=40 */
+
+pub(crate) fn expand_deriving_hash(
+    cx: &ExtCtxt<'_>,
+    span: Span,
+    mitem: &MetaItem,
+    item: &Annotatable,
+    push: &mut dyn FnMut(Annotatable),
+    is_const: bool,
+) {
+    let path = Path::new_(pathvec_std!(hash::Hash), vec![], PathKind::Std);
+
+    let typaram = sym::__H;
+
+    let arg = Path::new_local(typaram);
+    let hash_trait_def = TraitDef {
+        span,
+        path,
+        skip_path_as_bound: false,
+        needs_copy_as_bound_if_packed: true,
+        additional_bounds: Vec::new(),
+        supports_unions: false,
+        methods: vec![MethodDef {
+            name: sym::hash,
+            generics: Bounds { bounds: vec![(typaram, vec![path_std!(hash::Hasher)])] },
+            explicit_self: true,
+            nonself_args: vec![(Ref(Box::new(Path(arg)), Mutability::Mut), sym::state)],
+            ret_ty: Unit,
+            attributes: thin_vec![cx.attr_word(sym::inline, span)],
+            fieldless_variants_strategy: FieldlessVariantsStrategy::Unify,
+            combine_substructure: combine_substructure(Box::new(|a, b, c| {
+                hash_substructure(a, b, c)
+            })),
+        }],
+        associated_types: Vec::new(),
+        is_const,
+        is_staged_api_crate: cx.ecfg.features.staged_api(),
+    };
+
+    hash_trait_def.expand(cx, mitem, item, push);
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=hash_substructure | COMPLEXITY=13 | LINES=31 */
+
+fn hash_substructure(cx: &ExtCtxt<'_>, trait_span: Span, substr: &Substructure<'_>) -> BlockOrExpr {
+    let [state_expr] = substr.nonselflike_args else {
+        cx.dcx().span_bug(trait_span, "incorrect number of arguments in `derive(Hash)`");
+    };
+    let call_hash = |span, expr| {
+        let hash_path = {
+            let strs = cx.std_path(&[sym::hash, sym::Hash, sym::hash]);
+
+            cx.expr_path(cx.path_global(span, strs))
+        };
+        let expr = cx.expr_call(span, hash_path, thin_vec![expr, state_expr.clone()]);
+        cx.stmt_expr(expr)
+    };
+
+    let (stmts, match_expr) = match substr.fields {
+        Struct(_, fields) | EnumMatching(.., fields) => {
+            let stmts =
+                fields.iter().map(|field| call_hash(field.span, field.self_expr.clone())).collect();
+            (stmts, None)
+        }
+        EnumDiscr(discr_field, match_expr) => {
+            assert!(discr_field.other_selflike_exprs.is_empty());
+            let stmts = thin_vec![call_hash(discr_field.span, discr_field.self_expr.clone())];
+            (stmts, match_expr.clone())
+        }
+        _ => cx.dcx().span_bug(trait_span, "impossible substructure in `derive(Hash)`"),
+    };
+
+    BlockOrExpr::new_mixed(stmts, match_expr)
+}

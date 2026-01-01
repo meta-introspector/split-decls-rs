@@ -1,7 +1,101 @@
-/* FP:tests.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_transmute_src_layout_tree_tests_USE_0001
-/* FP:tests.rs-0002 */ use super :: Tree ;
-/* FP:tests.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_transmute_src_layout_tree_tests_ENUM_0002
-/* FP:tests.rs-0004 */ # [derive (Debug , Hash , Eq , PartialEq , Clone , Copy)] enum Def { NoSafetyInvariants , HasSafetyInvariants , }
-/* FP:tests.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_transmute_src_layout_tree_tests_IMPL_0003
-/* FP:tests.rs-0006 */ impl super :: Def for Def { fn has_safety_invariants (& self) -> bool { self == & Self :: HasSafetyInvariants } }
-/* FP:tests.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_transmute_src_layout_tree_tests_MOD_0004
+// SRC: ../rust/compiler/rustc_transmute/src/layout/tree/tests.rs
+/* AST_META: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+use super::Tree;
+
+#[derive(Debug, Hash, Eq, PartialEq, Clone, Copy)]
+enum Def {
+    NoSafetyInvariants,
+    HasSafetyInvariants,
+}
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=has_safety_invariants | COMPLEXITY=5 | LINES=6 */
+
+impl super::Def for Def {
+    fn has_safety_invariants(&self) -> bool {
+        self == &Self::HasSafetyInvariants
+    }
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=seq_1 | COMPLEXITY=18 | LINES=84 */
+
+mod prune {
+    use super::*;
+
+    mod should_simplify {
+        use super::*;
+
+        #[test]
+        fn seq_1() {
+            let layout: Tree<Def, !, !> = Tree::def(Def::NoSafetyInvariants).then(Tree::byte(0x00));
+            assert_eq!(layout.prune(&|d| matches!(d, Def::HasSafetyInvariants)), Tree::byte(0x00));
+        }
+
+        #[test]
+        fn seq_2() {
+            let layout: Tree<Def, !, !> =
+                Tree::byte(0x00).then(Tree::def(Def::NoSafetyInvariants)).then(Tree::byte(0x01));
+
+            assert_eq!(
+                layout.prune(&|d| matches!(d, Def::HasSafetyInvariants)),
+                Tree::byte(0x00).then(Tree::byte(0x01))
+            );
+        }
+    }
+
+    mod should_reject {
+        use super::*;
+
+        #[test]
+        fn invisible_def() {
+            let layout: Tree<Def, !, !> = Tree::def(Def::HasSafetyInvariants);
+            assert_eq!(
+                layout.prune(&|d| matches!(d, Def::HasSafetyInvariants)),
+                Tree::uninhabited()
+            );
+        }
+
+        #[test]
+        fn invisible_def_in_seq_len_2() {
+            let layout: Tree<Def, !, !> =
+                Tree::def(Def::NoSafetyInvariants).then(Tree::def(Def::HasSafetyInvariants));
+            assert_eq!(
+                layout.prune(&|d| matches!(d, Def::HasSafetyInvariants)),
+                Tree::uninhabited()
+            );
+        }
+
+        #[test]
+        fn invisible_def_in_seq_len_3() {
+            let layout: Tree<Def, !, !> = Tree::def(Def::NoSafetyInvariants)
+                .then(Tree::byte(0x00))
+                .then(Tree::def(Def::HasSafetyInvariants));
+            assert_eq!(
+                layout.prune(&|d| matches!(d, Def::HasSafetyInvariants)),
+                Tree::uninhabited()
+            );
+        }
+    }
+
+    mod should_accept {
+        use super::*;
+
+        #[test]
+        fn visible_def() {
+            let layout: Tree<Def, !, !> = Tree::def(Def::NoSafetyInvariants);
+            assert_eq!(layout.prune(&|d| matches!(d, Def::HasSafetyInvariants)), Tree::unit());
+        }
+
+        #[test]
+        fn visible_def_in_seq_len_2() {
+            let layout: Tree<Def, !, !> =
+                Tree::def(Def::NoSafetyInvariants).then(Tree::def(Def::NoSafetyInvariants));
+            assert_eq!(layout.prune(&|d| matches!(d, Def::HasSafetyInvariants)), Tree::unit());
+        }
+
+        #[test]
+        fn visible_def_in_seq_len_3() {
+            let layout: Tree<Def, !, !> = Tree::def(Def::NoSafetyInvariants)
+                .then(Tree::byte(0x00))
+                .then(Tree::def(Def::NoSafetyInvariants));
+            assert_eq!(layout.prune(&|d| matches!(d, Def::HasSafetyInvariants)), Tree::byte(0x00));
+        }
+    }
+}

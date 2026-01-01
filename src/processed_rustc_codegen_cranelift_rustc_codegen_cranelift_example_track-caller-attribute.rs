@@ -1,10 +1,45 @@
-/* FP:track-caller-attribute.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_example_track-caller-attribute_USE_0001
-/* FP:track-caller-attribute.rs-0002 */ use std :: panic :: Location ;
-/* FP:track-caller-attribute.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_example_track-caller-attribute_FN_0002
-/* FP:track-caller-attribute.rs-0004 */ # [track_caller] fn tracked () -> & 'static Location < 'static > { Location :: caller () }
-/* FP:track-caller-attribute.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_example_track-caller-attribute_FN_0003
-/* FP:track-caller-attribute.rs-0006 */ fn nested_intrinsic () -> & 'static Location < 'static > { Location :: caller () }
-/* FP:track-caller-attribute.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_example_track-caller-attribute_FN_0004
-/* FP:track-caller-attribute.rs-0008 */ fn nested_tracked () -> & 'static Location < 'static > { tracked () }
-/* FP:track-caller-attribute.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_codegen_cranelift_example_track-caller-attribute_FN_0005
-/* FP:track-caller-attribute.rs-0010 */ fn main () { let location = Location :: caller () ; assert_eq ! (location . file () , file ! ()) ; assert_eq ! (location . line () , 21) ; assert_eq ! (location . column () , 20) ; let tracked = tracked () ; assert_eq ! (tracked . file () , file ! ()) ; assert_eq ! (tracked . line () , 26) ; assert_eq ! (tracked . column () , 19) ; let nested = nested_intrinsic () ; assert_eq ! (nested . file () , file ! ()) ; assert_eq ! (nested . line () , 13) ; assert_eq ! (nested . column () , 5) ; let contained = nested_tracked () ; assert_eq ! (contained . file () , file ! ()) ; assert_eq ! (contained . line () , 17) ; assert_eq ! (contained . column () , 5) ; }
+// SRC: ../rust/compiler/rustc_codegen_cranelift/example/track-caller-attribute.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=tracked | COMPLEXITY=2 | LINES=10 */
+// Based on https://github.com/anp/rust/blob/175631311716d7dfeceec40d2587cde7142ffa8c/src/test/ui/rfc-2091-track-caller/track-caller-attribute.rs
+
+// run-pass
+
+use std::panic::Location;
+
+#[track_caller]
+fn tracked() -> &'static Location<'static> {
+    Location::caller()
+}
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=nested_intrinsic | COMPLEXITY=2 | LINES=4 */
+
+fn nested_intrinsic() -> &'static Location<'static> {
+    Location::caller()
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=nested_tracked | COMPLEXITY=2 | LINES=4 */
+
+fn nested_tracked() -> &'static Location<'static> {
+    tracked()
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=main | COMPLEXITY=3 | LINES=22 */
+
+fn main() {
+    let location = Location::caller();
+    assert_eq!(location.file(), file!());
+    assert_eq!(location.line(), 21);
+    assert_eq!(location.column(), 20);
+
+    let tracked = tracked();
+    assert_eq!(tracked.file(), file!());
+    assert_eq!(tracked.line(), 26);
+    assert_eq!(tracked.column(), 19);
+
+    let nested = nested_intrinsic();
+    assert_eq!(nested.file(), file!());
+    assert_eq!(nested.line(), 13);
+    assert_eq!(nested.column(), 5);
+
+    let contained = nested_tracked();
+    assert_eq!(contained.file(), file!());
+    assert_eq!(contained.line(), 17);
+    assert_eq!(contained.column(), 5);
+}

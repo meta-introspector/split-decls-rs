@@ -1,20 +1,95 @@
-/* FP:deref_separator.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deref_separator_USE_0001
-/* FP:deref_separator.rs-0002 */ use crate :: rustc_complete :: mir :: visit :: NonUseContext :: VarDebugInfo ;
-/* FP:deref_separator.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deref_separator_USE_0002
-/* FP:deref_separator.rs-0004 */ use crate :: rustc_complete :: mir :: visit :: { MutVisitor , PlaceContext } ;
-/* FP:deref_separator.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deref_separator_USE_0003
-/* FP:deref_separator.rs-0006 */ use crate :: rustc_complete :: mir :: * ;
-/* FP:deref_separator.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deref_separator_USE_0004
-/* FP:deref_separator.rs-0008 */ use crate :: rustc_complete :: ty :: TyCtxt ;
-/* FP:deref_separator.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deref_separator_USE_0005
-/* FP:deref_separator.rs-0010 */ use crate :: patch :: MirPatch ;
-/* FP:deref_separator.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deref_separator_STRUCT_0006
-/* FP:deref_separator.rs-0012 */ pub (super) struct Derefer ;
-/* FP:deref_separator.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deref_separator_STRUCT_0007
-/* FP:deref_separator.rs-0014 */ struct DerefChecker < 'a , 'tcx > { tcx : TyCtxt < 'tcx > , patcher : MirPatch < 'tcx > , local_decls : & 'a LocalDecls < 'tcx > , }
-/* FP:deref_separator.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deref_separator_IMPL_0008
-/* FP:deref_separator.rs-0016 */ impl < 'a , 'tcx > MutVisitor < 'tcx > for DerefChecker < 'a , 'tcx > { fn tcx (& self) -> TyCtxt < 'tcx > { self . tcx } fn visit_place (& mut self , place : & mut Place < 'tcx > , cntxt : PlaceContext , loc : Location) { if ! place . projection . is_empty () && cntxt != PlaceContext :: NonUse (VarDebugInfo) && place . projection [1 ..] . contains (& ProjectionElem :: Deref) { let mut place_local = place . local ; let mut last_len = 0 ; let mut last_deref_idx = 0 ; for (idx , elem) in place . projection [0 ..] . iter () . enumerate () { if * elem == ProjectionElem :: Deref { last_deref_idx = idx ; } } for (idx , (p_ref , p_elem)) in place . iter_projections () . enumerate () { if ! p_ref . projection . is_empty () && p_elem == ProjectionElem :: Deref { let ty = p_ref . ty (self . local_decls , self . tcx) . ty ; let temp = self . patcher . new_local_with_info (ty , self . local_decls [p_ref . local] . source_info . span , LocalInfo :: DerefTemp ,) ; let deref_place = Place :: from (place_local) . project_deeper (& p_ref . projection [last_len ..] , self . tcx) ; self . patcher . add_assign (loc , Place :: from (temp) , Rvalue :: CopyForDeref (deref_place) ,) ; place_local = temp ; last_len = p_ref . projection . len () ; if idx == last_deref_idx { let temp_place = Place :: from (temp) . project_deeper (& place . projection [idx ..] , self . tcx) ; * place = temp_place ; } } } } } }
-/* FP:deref_separator.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deref_separator_FN_0009
-/* FP:deref_separator.rs-0018 */ pub (super) fn deref_finder < 'tcx > (tcx : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) { let patch = MirPatch :: new (body) ; let mut checker = DerefChecker { tcx , patcher : patch , local_decls : & body . local_decls } ; for (bb , data) in body . basic_blocks . as_mut_preserves_cfg () . iter_enumerated_mut () { checker . visit_basic_block_data (bb , data) ; } checker . patcher . apply (body) ; }
-/* FP:deref_separator.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_deref_separator_IMPL_0010
-/* FP:deref_separator.rs-0020 */ impl < 'tcx > crate :: MirPass < 'tcx > for Derefer { fn run_pass (& self , tcx : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) { deref_finder (tcx , body) ; } fn is_required (& self) -> bool { true } }
+// SRC: ../rust/compiler/rustc_mir_transform/src/deref_separator.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::mir::visit::NonUseContext::VarDebugInfo;
+use crate::rustc_complete::mir::visit::{MutVisitor, PlaceContext};
+/* AST_META: AST_ID=2 | TYPE=STRUCT | NAME=DerefChecker | COMPLEXITY=2 | LINES=12 */
+use crate::rustc_complete::mir::*;
+use crate::rustc_complete::ty::TyCtxt;
+
+use crate::patch::MirPatch;
+
+pub(super) struct Derefer;
+
+struct DerefChecker<'a, 'tcx> {
+    tcx: TyCtxt<'tcx>,
+    patcher: MirPatch<'tcx>,
+    local_decls: &'a LocalDecls<'tcx>,
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=tcx | COMPLEXITY=30 | LINES=54 */
+
+impl<'a, 'tcx> MutVisitor<'tcx> for DerefChecker<'a, 'tcx> {
+    fn tcx(&self) -> TyCtxt<'tcx> {
+        self.tcx
+    }
+
+    fn visit_place(&mut self, place: &mut Place<'tcx>, cntxt: PlaceContext, loc: Location) {
+        if !place.projection.is_empty()
+            && cntxt != PlaceContext::NonUse(VarDebugInfo)
+            && place.projection[1..].contains(&ProjectionElem::Deref)
+        {
+            let mut place_local = place.local;
+            let mut last_len = 0;
+            let mut last_deref_idx = 0;
+
+            for (idx, elem) in place.projection[0..].iter().enumerate() {
+                if *elem == ProjectionElem::Deref {
+                    last_deref_idx = idx;
+                }
+            }
+
+            for (idx, (p_ref, p_elem)) in place.iter_projections().enumerate() {
+                if !p_ref.projection.is_empty() && p_elem == ProjectionElem::Deref {
+                    let ty = p_ref.ty(self.local_decls, self.tcx).ty;
+                    let temp = self.patcher.new_local_with_info(
+                        ty,
+                        self.local_decls[p_ref.local].source_info.span,
+                        LocalInfo::DerefTemp,
+                    );
+
+                    // We are adding current p_ref's projections to our
+                    // temp value, excluding projections we already covered.
+                    let deref_place = Place::from(place_local)
+                        .project_deeper(&p_ref.projection[last_len..], self.tcx);
+
+                    self.patcher.add_assign(
+                        loc,
+                        Place::from(temp),
+                        Rvalue::CopyForDeref(deref_place),
+                    );
+                    place_local = temp;
+                    last_len = p_ref.projection.len();
+
+                    // Change `Place` only if we are actually at the Place's last deref
+                    if idx == last_deref_idx {
+                        let temp_place =
+                            Place::from(temp).project_deeper(&place.projection[idx..], self.tcx);
+                        *place = temp_place;
+                    }
+                }
+            }
+        }
+    }
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=6 | LINES=11 */
+
+pub(super) fn deref_finder<'tcx>(tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
+    let patch = MirPatch::new(body);
+    let mut checker = DerefChecker { tcx, patcher: patch, local_decls: &body.local_decls };
+
+    for (bb, data) in body.basic_blocks.as_mut_preserves_cfg().iter_enumerated_mut() {
+        checker.visit_basic_block_data(bb, data);
+    }
+
+    checker.patcher.apply(body);
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=run_pass | COMPLEXITY=6 | LINES=10 */
+
+impl<'tcx> crate::MirPass<'tcx> for Derefer {
+    fn run_pass(&self, tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
+        deref_finder(tcx, body);
+    }
+
+    fn is_required(&self) -> bool {
+        true
+    }
+}

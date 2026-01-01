@@ -1,12 +1,74 @@
-/* FP:generic_graph.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_generic_graph_USE_0001
-/* FP:generic_graph.rs-0002 */ use gsgdt :: { Edge , Graph , Node , NodeStyle } ;
-/* FP:generic_graph.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_generic_graph_USE_0002
-/* FP:generic_graph.rs-0004 */ use crate :: mir :: * ;
-/* FP:generic_graph.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_generic_graph_FN_0003
-/* FP:generic_graph.rs-0006 */ # [doc = " Convert an MIR function into a gsgdt Graph"] pub (crate) fn mir_fn_to_generic_graph < 'tcx > (tcx : TyCtxt < 'tcx > , body : & Body < '_ >) -> Graph { let def_id = body . source . def_id () ; let def_name = graphviz_safe_def_name (def_id) ; let graph_name = format ! ("Mir_{def_name}") ; let dark_mode = tcx . sess . opts . unstable_opts . graphviz_dark_mode ; let nodes : Vec < Node > = body . basic_blocks . iter_enumerated () . map (| (block , _) | bb_to_graph_node (block , body , dark_mode)) . collect () ; let mut edges = Vec :: new () ; for (source , _) in body . basic_blocks . iter_enumerated () { let def_id = body . source . def_id () ; let terminator = body [source] . terminator () ; let labels = terminator . kind . fmt_successor_labels () ; for (target , label) in terminator . successors () . zip (labels) { let src = node (def_id , source) ; let trg = node (def_id , target) ; edges . push (Edge :: new (src , trg , label . to_string ())) ; } } Graph :: new (graph_name , nodes , edges) }
-/* FP:generic_graph.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_generic_graph_FN_0004
-/* FP:generic_graph.rs-0008 */ fn bb_to_graph_node (block : BasicBlock , body : & Body < '_ > , dark_mode : bool) -> Node { let def_id = body . source . def_id () ; let data = & body [block] ; let label = node (def_id , block) ; let (title , bgcolor) = if data . is_cleanup { let color = if dark_mode { "royalblue" } else { "lightblue" } ; (format ! ("{} (cleanup)" , block . index ()) , color) } else { let color = if dark_mode { "dimgray" } else { "gray" } ; (format ! ("{}" , block . index ()) , color) } ; let style = NodeStyle { title_bg : Some (bgcolor . to_owned ()) , .. Default :: default () } ; let mut stmts : Vec < String > = data . statements . iter () . map (| x | format ! ("{x:?}")) . collect () ; let mut terminator_head = String :: new () ; data . terminator () . kind . fmt_head (& mut terminator_head) . unwrap () ; stmts . push (terminator_head) ; Node :: new (stmts , label , title , style) }
-/* FP:generic_graph.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_generic_graph_FN_0005
-/* FP:generic_graph.rs-0010 */ pub fn graphviz_safe_def_name (def_id : DefId) -> String { format ! ("{}_{}" , def_id . krate . index () , def_id . index . index () ,) }
-/* FP:generic_graph.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_generic_graph_FN_0006
-/* FP:generic_graph.rs-0012 */ fn node (def_id : DefId , block : BasicBlock) -> String { format ! ("bb{}__{}" , block . index () , graphviz_safe_def_name (def_id)) }
+// SRC: ../rust/compiler/rustc_middle/src/mir/generic_graph.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use gsgdt::{Edge, Graph, Node, NodeStyle};
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=11 | LINES=33 */
+
+use crate::mir::*;
+
+/// Convert an MIR function into a gsgdt Graph
+pub(crate) fn mir_fn_to_generic_graph<'tcx>(tcx: TyCtxt<'tcx>, body: &Body<'_>) -> Graph {
+    let def_id = body.source.def_id();
+    let def_name = graphviz_safe_def_name(def_id);
+    let graph_name = format!("Mir_{def_name}");
+    let dark_mode = tcx.sess.opts.unstable_opts.graphviz_dark_mode;
+
+    // Nodes
+    let nodes: Vec<Node> = body
+        .basic_blocks
+        .iter_enumerated()
+        .map(|(block, _)| bb_to_graph_node(block, body, dark_mode))
+        .collect();
+
+    // Edges
+    let mut edges = Vec::new();
+    for (source, _) in body.basic_blocks.iter_enumerated() {
+        let def_id = body.source.def_id();
+        let terminator = body[source].terminator();
+        let labels = terminator.kind.fmt_successor_labels();
+
+        for (target, label) in terminator.successors().zip(labels) {
+            let src = node(def_id, source);
+            let trg = node(def_id, target);
+            edges.push(Edge::new(src, trg, label.to_string()));
+        }
+    }
+
+    Graph::new(graph_name, nodes, edges)
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=bb_to_graph_node | COMPLEXITY=19 | LINES=24 */
+
+fn bb_to_graph_node(block: BasicBlock, body: &Body<'_>, dark_mode: bool) -> Node {
+    let def_id = body.source.def_id();
+    let data = &body[block];
+    let label = node(def_id, block);
+
+    let (title, bgcolor) = if data.is_cleanup {
+        let color = if dark_mode { "royalblue" } else { "lightblue" };
+        (format!("{} (cleanup)", block.index()), color)
+    } else {
+        let color = if dark_mode { "dimgray" } else { "gray" };
+        (format!("{}", block.index()), color)
+    };
+
+    let style = NodeStyle { title_bg: Some(bgcolor.to_owned()), ..Default::default() };
+    let mut stmts: Vec<String> = data.statements.iter().map(|x| format!("{x:?}")).collect();
+
+    // add the terminator to the stmts, gsgdt can print it out separately
+    let mut terminator_head = String::new();
+    data.terminator().kind.fmt_head(&mut terminator_head).unwrap();
+    stmts.push(terminator_head);
+
+    Node::new(stmts, label, title, style)
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=graphviz_safe_def_name | COMPLEXITY=7 | LINES=6 */
+
+// Must match `[0-9A-Za-z_]*`. This does not appear in the rendered graph, so
+// it does not have to be user friendly.
+pub fn graphviz_safe_def_name(def_id: DefId) -> String {
+    format!("{}_{}", def_id.krate.index(), def_id.index.index(),)
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=node | COMPLEXITY=4 | LINES=4 */
+
+fn node(def_id: DefId, block: BasicBlock) -> String {
+    format!("bb{}__{}", block.index(), graphviz_safe_def_name(def_id))
+}

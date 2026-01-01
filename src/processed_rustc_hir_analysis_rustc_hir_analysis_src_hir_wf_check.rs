@@ -1,24 +1,227 @@
-/* FP:hir_wf_check.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_hir_wf_check_USE_0001
-/* FP:hir_wf_check.rs-0002 */ use crate :: rustc_complete :: def :: DefKind ;
-/* FP:hir_wf_check.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_hir_wf_check_USE_0002
-/* FP:hir_wf_check.rs-0004 */ use crate :: rustc_complete :: intravisit :: { self , Visitor , VisitorExt } ;
-/* FP:hir_wf_check.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_hir_wf_check_USE_0003
-/* FP:hir_wf_check.rs-0006 */ use crate :: rustc_complete :: { self as hir , AmbigArg , ForeignItem , ForeignItemKind } ;
-/* FP:hir_wf_check.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_hir_wf_check_USE_0004
-/* FP:hir_wf_check.rs-0008 */ use crate :: rustc_infer :: infer :: TyCtxtInferExt ;
-/* FP:hir_wf_check.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_hir_wf_check_USE_0005
-/* FP:hir_wf_check.rs-0010 */ use crate :: rustc_infer :: traits :: { ObligationCause , ObligationCauseCode , WellFormedLoc } ;
-/* FP:hir_wf_check.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_hir_wf_check_USE_0006
-/* FP:hir_wf_check.rs-0012 */ use crate :: rustc_complete :: bug ;
-/* FP:hir_wf_check.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_hir_wf_check_USE_0007
-/* FP:hir_wf_check.rs-0014 */ use crate :: rustc_complete :: ty :: { self , TyCtxt , TypeVisitableExt , TypingMode , fold_regions } ;
-/* FP:hir_wf_check.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_hir_wf_check_USE_0008
-/* FP:hir_wf_check.rs-0016 */ use crate :: rustc_complete :: def_id :: LocalDefId ;
-/* FP:hir_wf_check.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_hir_wf_check_USE_0009
-/* FP:hir_wf_check.rs-0018 */ use crate :: rustc_trait_selection :: traits :: { self , ObligationCtxt } ;
-/* FP:hir_wf_check.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_hir_wf_check_USE_0010
-/* FP:hir_wf_check.rs-0020 */ use tracing :: debug ;
-/* FP:hir_wf_check.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_hir_wf_check_USE_0011
-/* FP:hir_wf_check.rs-0022 */ use crate :: collect :: ItemCtxt ;
-/* FP:hir_wf_check.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_hir_wf_check_FN_0012
-/* FP:hir_wf_check.rs-0024 */ pub (super) fn diagnostic_hir_wf_check < 'tcx > (tcx : TyCtxt < 'tcx > , (predicate , loc) : (ty :: Predicate < 'tcx > , WellFormedLoc) ,) -> Option < ObligationCause < 'tcx > > { let def_id = match loc { WellFormedLoc :: Ty (def_id) => def_id , WellFormedLoc :: Param { function , param_idx : _ } => function , } ; let hir_id = tcx . local_def_id_to_hir_id (def_id) ; tcx . dcx () . span_delayed_bug (tcx . def_span (def_id) , "Performed HIR wfcheck without an existing error!") ; let icx = ItemCtxt :: new (tcx , def_id) ; struct HirWfCheck < 'tcx > { tcx : TyCtxt < 'tcx > , predicate : ty :: Predicate < 'tcx > , cause : Option < ObligationCause < 'tcx > > , cause_depth : usize , icx : ItemCtxt < 'tcx > , def_id : LocalDefId , param_env : ty :: ParamEnv < 'tcx > , depth : usize , } impl < 'tcx > Visitor < 'tcx > for HirWfCheck < 'tcx > { fn visit_ty (& mut self , ty : & 'tcx hir :: Ty < 'tcx , AmbigArg >) { let infcx = self . tcx . infer_ctxt () . build (TypingMode :: non_body_analysis ()) ; let ocx = ObligationCtxt :: new_with_diagnostics (& infcx) ; let tcx_ty = self . icx . lower_ty (ty . as_unambig_ty ()) ; let tcx_ty = fold_regions (self . tcx , tcx_ty , | r , _ | { if r . is_bound () { self . tcx . lifetimes . re_erased } else { r } }) ; if tcx_ty . has_escaping_bound_vars () { return ; } let cause = traits :: ObligationCause :: new (ty . span , self . def_id , traits :: ObligationCauseCode :: WellFormed (None) ,) ; ocx . register_obligation (traits :: Obligation :: new (self . tcx , cause , self . param_env , ty :: PredicateKind :: Clause (ty :: ClauseKind :: WellFormed (tcx_ty . into ())) ,)) ; for error in ocx . select_all_or_error () { debug ! ("Wf-check got error for {:?}: {:?}" , ty , error) ; if error . obligation . predicate == self . predicate { if self . depth >= self . cause_depth { self . cause = Some (error . obligation . cause) ; if let hir :: TyKind :: TraitObject (..) = ty . kind && let DefKind :: AssocTy | DefKind :: AssocConst | DefKind :: AssocFn = self . tcx . def_kind (self . def_id) { self . cause = Some (ObligationCause :: new (ty . span , self . def_id , ObligationCauseCode :: DynCompatible (ty . span) ,)) ; } self . cause_depth = self . depth } } } self . depth += 1 ; intravisit :: walk_ty (self , ty) ; self . depth -= 1 ; } } let mut visitor = HirWfCheck { tcx , predicate , cause : None , cause_depth : 0 , icx , def_id , param_env : tcx . param_env (def_id . to_def_id ()) , depth : 0 , } ; let tys = match loc { WellFormedLoc :: Ty (_) => match tcx . hir_node (hir_id) { hir :: Node :: ImplItem (item) => match item . kind { hir :: ImplItemKind :: Type (ty) => vec ! [ty] , hir :: ImplItemKind :: Const (ty , _) => vec ! [ty] , ref item => bug ! ("Unexpected ImplItem {:?}" , item) , } , hir :: Node :: TraitItem (item) => match item . kind { hir :: TraitItemKind :: Type (_ , ty) => ty . into_iter () . collect () , hir :: TraitItemKind :: Const (ty , _) => vec ! [ty] , ref item => bug ! ("Unexpected TraitItem {:?}" , item) , } , hir :: Node :: Item (item) => match item . kind { hir :: ItemKind :: TyAlias (_ , _ , ty) | hir :: ItemKind :: Static (_ , _ , ty , _) | hir :: ItemKind :: Const (_ , _ , ty , _) => vec ! [ty] , hir :: ItemKind :: Impl (impl_) => match impl_ . of_trait { Some (of_trait) => of_trait . trait_ref . path . segments . last () . iter () . flat_map (| seg | seg . args () . args) . filter_map (| arg | { if let hir :: GenericArg :: Type (ty) = arg { Some (ty . as_unambig_ty ()) } else { None } }) . chain ([impl_ . self_ty]) . collect () , None => { vec ! [impl_ . self_ty] } } , ref item => bug ! ("Unexpected item {:?}" , item) , } , hir :: Node :: Field (field) => vec ! [field . ty] , hir :: Node :: ForeignItem (ForeignItem { kind : ForeignItemKind :: Static (ty , _ , _) , .. }) => vec ! [* ty] , hir :: Node :: GenericParam (hir :: GenericParam { kind : hir :: GenericParamKind :: Type { default : Some (ty) , .. } , .. }) => vec ! [* ty] , hir :: Node :: AnonConst (_) => { if let Some (const_param_id) = tcx . hir_opt_const_param_default_param_def_id (hir_id) && let hir :: Node :: GenericParam (hir :: GenericParam { kind : hir :: GenericParamKind :: Const { ty , .. } , .. }) = tcx . hir_node_by_def_id (const_param_id) { vec ! [* ty] } else { vec ! [] } } ref node => bug ! ("Unexpected node {:?}" , node) , } , WellFormedLoc :: Param { function : _ , param_idx } => { let fn_decl = tcx . hir_fn_decl_by_hir_id (hir_id) . unwrap () ; if param_idx as usize == fn_decl . inputs . len () { match fn_decl . output { hir :: FnRetTy :: Return (ty) => vec ! [ty] , hir :: FnRetTy :: DefaultReturn (_span) => vec ! [] , } } else { vec ! [& fn_decl . inputs [param_idx as usize]] } } } ; for ty in tys { visitor . visit_ty_unambig (ty) ; } visitor . cause }
+// SRC: ../rust/compiler/rustc_hir_analysis/src/hir_wf_check.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::intravisit::{self, Visitor, VisitorExt};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{self as hir, AmbigArg, ForeignItem, ForeignItemKind};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_infer::infer::TyCtxtInferExt;
+use crate::rustc_infer::traits::{ObligationCause, ObligationCauseCode, WellFormedLoc};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::bug;
+use crate::rustc_complete::ty::{self, TyCtxt, TypeVisitableExt, TypingMode, fold_regions};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_trait_selection::traits::{self, ObligationCtxt};
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=HirWfCheck | COMPLEXITY=118 | LINES=211 */
+use tracing::debug;
+
+use crate::collect::ItemCtxt;
+
+// Ideally, this would be in `rustc_trait_selection`, but we
+// need access to `ItemCtxt`
+pub(super) fn diagnostic_hir_wf_check<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    (predicate, loc): (ty::Predicate<'tcx>, WellFormedLoc),
+) -> Option<ObligationCause<'tcx>> {
+    let def_id = match loc {
+        WellFormedLoc::Ty(def_id) => def_id,
+        WellFormedLoc::Param { function, param_idx: _ } => function,
+    };
+    let hir_id = tcx.local_def_id_to_hir_id(def_id);
+
+    // HIR wfcheck should only ever happen as part of improving an existing error
+    tcx.dcx()
+        .span_delayed_bug(tcx.def_span(def_id), "Performed HIR wfcheck without an existing error!");
+
+    let icx = ItemCtxt::new(tcx, def_id);
+
+    // To perform HIR-based WF checking, we iterate over all HIR types
+    // that occur 'inside' the item we're checking. For example,
+    // given the type `Option<MyStruct<u8>>`, we will check
+    // `Option<MyStruct<u8>>`, `MyStruct<u8>`, and `u8`.
+    // For each type, we perform a well-formed check, and see if we get
+    // an error that matches our expected predicate. We save
+    // the `ObligationCause` corresponding to the *innermost* type,
+    // which is the most specific type that we can point to.
+    // In general, the different components of an `hir::Ty` may have
+    // completely different spans due to macro invocations. Pointing
+    // to the most accurate part of the type can be the difference
+    // between a useless span (e.g. the macro invocation site)
+    // and a useful span (e.g. a user-provided type passed into the macro).
+    //
+    // This approach is quite inefficient - we redo a lot of work done
+    // by the normal WF checker. However, this code is run at most once
+    // per reported error - it will have no impact when compilation succeeds,
+    // and should only have an impact if a very large number of errors is
+    // displayed to the user.
+    struct HirWfCheck<'tcx> {
+        tcx: TyCtxt<'tcx>,
+        predicate: ty::Predicate<'tcx>,
+        cause: Option<ObligationCause<'tcx>>,
+        cause_depth: usize,
+        icx: ItemCtxt<'tcx>,
+        def_id: LocalDefId,
+        param_env: ty::ParamEnv<'tcx>,
+        depth: usize,
+    }
+
+    impl<'tcx> Visitor<'tcx> for HirWfCheck<'tcx> {
+        fn visit_ty(&mut self, ty: &'tcx hir::Ty<'tcx, AmbigArg>) {
+            let infcx = self.tcx.infer_ctxt().build(TypingMode::non_body_analysis());
+            let ocx = ObligationCtxt::new_with_diagnostics(&infcx);
+
+            // We don't handle infer vars but we wouldn't handle them anyway as we're creating a
+            // fresh `InferCtxt` in this function.
+            let tcx_ty = self.icx.lower_ty(ty.as_unambig_ty());
+            // This visitor can walk into binders, resulting in the `tcx_ty` to
+            // potentially reference escaping bound variables. We simply erase
+            // those here.
+            let tcx_ty = fold_regions(self.tcx, tcx_ty, |r, _| {
+                if r.is_bound() { self.tcx.lifetimes.re_erased } else { r }
+            });
+
+            // We may be checking the WFness of a type in an opaque with a non-lifetime bound.
+            // Perhaps we could rebind all the escaping bound vars, but they're coming from
+            // arbitrary debruijn indices and aren't particularly important anyways, since they
+            // are only coming from `feature(non_lifetime_binders)` anyways.
+            if tcx_ty.has_escaping_bound_vars() {
+                return;
+            }
+
+            let cause = traits::ObligationCause::new(
+                ty.span,
+                self.def_id,
+                traits::ObligationCauseCode::WellFormed(None),
+            );
+
+            ocx.register_obligation(traits::Obligation::new(
+                self.tcx,
+                cause,
+                self.param_env,
+                ty::PredicateKind::Clause(ty::ClauseKind::WellFormed(tcx_ty.into())),
+            ));
+
+            for error in ocx.select_all_or_error() {
+                debug!("Wf-check got error for {:?}: {:?}", ty, error);
+                if error.obligation.predicate == self.predicate {
+                    // Save the cause from the greatest depth - this corresponds
+                    // to picking more-specific types (e.g. `MyStruct<u8>`)
+                    // over less-specific types (e.g. `Option<MyStruct<u8>>`)
+                    if self.depth >= self.cause_depth {
+                        self.cause = Some(error.obligation.cause);
+                        if let hir::TyKind::TraitObject(..) = ty.kind
+                            && let DefKind::AssocTy | DefKind::AssocConst | DefKind::AssocFn =
+                                self.tcx.def_kind(self.def_id)
+                        {
+                            self.cause = Some(ObligationCause::new(
+                                ty.span,
+                                self.def_id,
+                                ObligationCauseCode::DynCompatible(ty.span),
+                            ));
+                        }
+                        self.cause_depth = self.depth
+                    }
+                }
+            }
+
+            self.depth += 1;
+            intravisit::walk_ty(self, ty);
+            self.depth -= 1;
+        }
+    }
+
+    let mut visitor = HirWfCheck {
+        tcx,
+        predicate,
+        cause: None,
+        cause_depth: 0,
+        icx,
+        def_id,
+        param_env: tcx.param_env(def_id.to_def_id()),
+        depth: 0,
+    };
+
+    // Get the starting `hir::Ty` using our `WellFormedLoc`.
+    // We will walk 'into' this type to try to find
+    // a more precise span for our predicate.
+    let tys = match loc {
+        WellFormedLoc::Ty(_) => match tcx.hir_node(hir_id) {
+            hir::Node::ImplItem(item) => match item.kind {
+                hir::ImplItemKind::Type(ty) => vec![ty],
+                hir::ImplItemKind::Const(ty, _) => vec![ty],
+                ref item => bug!("Unexpected ImplItem {:?}", item),
+            },
+            hir::Node::TraitItem(item) => match item.kind {
+                hir::TraitItemKind::Type(_, ty) => ty.into_iter().collect(),
+                hir::TraitItemKind::Const(ty, _) => vec![ty],
+                ref item => bug!("Unexpected TraitItem {:?}", item),
+            },
+            hir::Node::Item(item) => match item.kind {
+                hir::ItemKind::TyAlias(_, _, ty)
+                | hir::ItemKind::Static(_, _, ty, _)
+                | hir::ItemKind::Const(_, _, ty, _) => vec![ty],
+                hir::ItemKind::Impl(impl_) => match impl_.of_trait {
+                    Some(of_trait) => of_trait
+                        .trait_ref
+                        .path
+                        .segments
+                        .last()
+                        .iter()
+                        .flat_map(|seg| seg.args().args)
+                        .filter_map(|arg| {
+                            if let hir::GenericArg::Type(ty) = arg {
+                                Some(ty.as_unambig_ty())
+                            } else {
+                                None
+                            }
+                        })
+                        .chain([impl_.self_ty])
+                        .collect(),
+                    None => {
+                        vec![impl_.self_ty]
+                    }
+                },
+                ref item => bug!("Unexpected item {:?}", item),
+            },
+            hir::Node::Field(field) => vec![field.ty],
+            hir::Node::ForeignItem(ForeignItem {
+                kind: ForeignItemKind::Static(ty, _, _), ..
+            }) => vec![*ty],
+            hir::Node::GenericParam(hir::GenericParam {
+                kind: hir::GenericParamKind::Type { default: Some(ty), .. },
+                ..
+            }) => vec![*ty],
+            hir::Node::AnonConst(_) => {
+                if let Some(const_param_id) = tcx.hir_opt_const_param_default_param_def_id(hir_id)
+                    && let hir::Node::GenericParam(hir::GenericParam {
+                        kind: hir::GenericParamKind::Const { ty, .. },
+                        ..
+                    }) = tcx.hir_node_by_def_id(const_param_id)
+                {
+                    vec![*ty]
+                } else {
+                    vec![]
+                }
+            }
+            ref node => bug!("Unexpected node {:?}", node),
+        },
+        WellFormedLoc::Param { function: _, param_idx } => {
+            let fn_decl = tcx.hir_fn_decl_by_hir_id(hir_id).unwrap();
+            // Get return type
+            if param_idx as usize == fn_decl.inputs.len() {
+                match fn_decl.output {
+                    hir::FnRetTy::Return(ty) => vec![ty],
+                    // The unit type `()` is always well-formed
+                    hir::FnRetTy::DefaultReturn(_span) => vec![],
+                }
+            } else {
+                vec![&fn_decl.inputs[param_idx as usize]]
+            }
+        }
+    };
+    for ty in tys {
+        visitor.visit_ty_unambig(ty);
+    }
+    visitor.cause
+}

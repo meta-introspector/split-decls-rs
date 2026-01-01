@@ -1,10 +1,64 @@
-/* FP:must_use.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_must_use_USE_0001
-/* FP:must_use.rs-0002 */ use crate :: rustc_complete :: DiagArgValue ;
-/* FP:must_use.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_must_use_USE_0002
-/* FP:must_use.rs-0004 */ use super :: prelude :: * ;
-/* FP:must_use.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_must_use_USE_0003
-/* FP:must_use.rs-0006 */ use crate :: session_diagnostics :: IllFormedAttributeInputLint ;
-/* FP:must_use.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_must_use_STRUCT_0004
-/* FP:must_use.rs-0008 */ pub (crate) struct MustUseParser ;
-/* FP:must_use.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_must_use_IMPL_0005
-/* FP:must_use.rs-0010 */ impl < S : Stage > SingleAttributeParser < S > for MustUseParser { const PATH : & [Symbol] = & [sym :: must_use] ; const ATTRIBUTE_ORDER : AttributeOrder = AttributeOrder :: KeepOutermost ; const ON_DUPLICATE : OnDuplicate < S > = OnDuplicate :: WarnButFutureError ; const ALLOWED_TARGETS : AllowedTargets = AllowedTargets :: AllowListWarnRest (& [Allow (Target :: Fn) , Allow (Target :: Enum) , Allow (Target :: Struct) , Allow (Target :: Union) , Allow (Target :: Method (MethodKind :: Trait { body : false })) , Allow (Target :: Method (MethodKind :: Trait { body : true })) , Allow (Target :: Method (MethodKind :: Inherent)) , Allow (Target :: ForeignFn) , Allow (Target :: Trait) , Error (Target :: WherePredicate) ,]) ; const TEMPLATE : AttributeTemplate = template ! (Word , NameValueStr : "reason" , "https://doc.rust-lang.org/reference/attributes/diagnostics.html#the-must_use-attribute") ; fn convert (cx : & mut AcceptContext < '_ , '_ , S > , args : & ArgParser < '_ >) -> Option < AttributeKind > { Some (AttributeKind :: MustUse { span : cx . attr_span , reason : match args { ArgParser :: NoArgs => None , ArgParser :: NameValue (name_value) => { let Some (value_str) = name_value . value_as_str () else { cx . expected_string_literal (name_value . value_span , Some (& name_value . value_as_lit ()) ,) ; return None ; } ; Some (value_str) } ArgParser :: List (_) => { let suggestions = < Self as SingleAttributeParser < S > > :: TEMPLATE . suggestions (cx . attr_style , "must_use") ; cx . emit_err (IllFormedAttributeInputLint { num_suggestions : suggestions . len () , suggestions : DiagArgValue :: StrListSepByAnd (suggestions . into_iter () . map (| s | format ! ("`{s}`") . into ()) . collect () ,) , span : cx . attr_span , }) ; return None ; } } , }) } }
+// SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/must_use.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=convert | COMPLEXITY=24 | LINES=62 */
+use crate::rustc_complete::DiagArgValue;
+
+use crate::prelude::*;
+use crate::session_diagnostics::IllFormedAttributeInputLint;
+
+pub(crate) struct MustUseParser;
+
+impl<S: Stage> SingleAttributeParser<S> for MustUseParser {
+    const PATH: &[Symbol] = &[sym::must_use];
+    const ATTRIBUTE_ORDER: AttributeOrder = AttributeOrder::KeepOutermost;
+    const ON_DUPLICATE: OnDuplicate<S> = OnDuplicate::WarnButFutureError;
+    const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowListWarnRest(&[
+        Allow(Target::Fn),
+        Allow(Target::Enum),
+        Allow(Target::Struct),
+        Allow(Target::Union),
+        Allow(Target::Method(MethodKind::Trait { body: false })),
+        Allow(Target::Method(MethodKind::Trait { body: true })),
+        Allow(Target::Method(MethodKind::Inherent)),
+        Allow(Target::ForeignFn),
+        // `impl Trait` in return position can trip
+        // `unused_must_use` if `Trait` is marked as
+        // `#[must_use]`
+        Allow(Target::Trait),
+        Error(Target::WherePredicate),
+    ]);
+    const TEMPLATE: AttributeTemplate = template!(
+        Word, NameValueStr: "reason",
+        "https://doc.rust-lang.org/reference/attributes/diagnostics.html#the-must_use-attribute"
+    );
+
+    fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser<'_>) -> Option<AttributeKind> {
+        Some(AttributeKind::MustUse {
+            span: cx.attr_span,
+            reason: match args {
+                ArgParser::NoArgs => None,
+                ArgParser::NameValue(name_value) => {
+                    let Some(value_str) = name_value.value_as_str() else {
+                        cx.expected_string_literal(
+                            name_value.value_span,
+                            Some(&name_value.value_as_lit()),
+                        );
+                        return None;
+                    };
+                    Some(value_str)
+                }
+                ArgParser::List(_) => {
+                    let suggestions = <Self as SingleAttributeParser<S>>::TEMPLATE
+                        .suggestions(cx.attr_style, "must_use");
+                    cx.emit_err(IllFormedAttributeInputLint {
+                        num_suggestions: suggestions.len(),
+                        suggestions: DiagArgValue::StrListSepByAnd(
+                            suggestions.into_iter().map(|s| format!("`{s}`").into()).collect(),
+                        ),
+                        span: cx.attr_span,
+                    });
+                    return None;
+                }
+            },
+        })
+    }
+}

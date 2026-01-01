@@ -1,40 +1,259 @@
-/* FP:project.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_USE_0001
-/* FP:project.rs-0002 */ use crate :: rustc_data_structures :: snapshot_map :: { self , SnapshotMapRef , SnapshotMapStorage } ;
-/* FP:project.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_USE_0002
-/* FP:project.rs-0004 */ use crate :: rustc_data_structures :: undo_log :: Rollback ;
-/* FP:project.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_USE_0003
-/* FP:project.rs-0006 */ use crate :: rustc_complete :: traits :: EvaluationResult ;
-/* FP:project.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_USE_0004
-/* FP:project.rs-0008 */ use crate :: rustc_complete :: ty ;
-/* FP:project.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_USE_0005
-/* FP:project.rs-0010 */ use tracing :: { debug , info } ;
-/* FP:project.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_USE_0006
-/* FP:project.rs-0012 */ use super :: PredicateObligations ;
-/* FP:project.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_USE_0007
-/* FP:project.rs-0014 */ use crate :: infer :: snapshot :: undo_log :: InferCtxtUndoLogs ;
-/* FP:project.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_TYPE_0008
-/* FP:project.rs-0016 */ pub (crate) type UndoLog < 'tcx > = snapshot_map :: UndoLog < ProjectionCacheKey < 'tcx > , ProjectionCacheEntry < 'tcx > > ;
-/* FP:project.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_STRUCT_0009
-/* FP:project.rs-0018 */ # [derive (Clone)] pub struct MismatchedProjectionTypes < 'tcx > { pub err : ty :: error :: TypeError < 'tcx > , }
-/* FP:project.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_STRUCT_0010
-/* FP:project.rs-0020 */ # [derive (Clone)] pub struct Normalized < 'tcx , T > { pub value : T , pub obligations : PredicateObligations < 'tcx > , }
-/* FP:project.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_TYPE_0011
-/* FP:project.rs-0022 */ pub type NormalizedTerm < 'tcx > = Normalized < 'tcx , ty :: Term < 'tcx > > ;
-/* FP:project.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_IMPL_0012
-/* FP:project.rs-0024 */ impl < 'tcx , T > Normalized < 'tcx , T > { pub fn with < U > (self , value : U) -> Normalized < 'tcx , U > { Normalized { value , obligations : self . obligations } } }
-/* FP:project.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_STRUCT_0013
-/* FP:project.rs-0026 */ # [doc = " The projection cache. Unlike the standard caches, this can include"] # [doc = " infcx-dependent type variables, therefore we have to roll the"] # [doc = " cache back each time we roll a snapshot back, to avoid assumptions"] # [doc = " on yet-unresolved inference variables. Types with placeholder"] # [doc = " regions also have to be removed when the respective snapshot ends."] # [doc = ""] # [doc = " Because of that, projection cache entries can be \"stranded\" and left"] # [doc = " inaccessible when type variables inside the key are resolved. We make no"] # [doc = " attempt to recover or remove \"stranded\" entries, but rather let them be"] # [doc = " (for the lifetime of the infcx)."] # [doc = ""] # [doc = " Entries in the projection cache might contain inference variables"] # [doc = " that will be resolved by obligations on the projection cache entry (e.g.,"] # [doc = " when a type parameter in the associated type is constrained through"] # [doc = " an \"RFC 447\" projection on the impl)."] # [doc = ""] # [doc = " When working with a fulfillment context, the derived obligations of each"] # [doc = " projection cache entry will be registered on the fulfillcx, so any users"] # [doc = " that can wait for a fulfillcx fixed point need not care about this. However,"] # [doc = " users that don't wait for a fixed point (e.g., trait evaluation) have to"] # [doc = " resolve the obligations themselves to make sure the projected result is"] # [doc = " ok and avoid issues like #43132."] # [doc = ""] # [doc = " If that is done, after evaluation the obligations, it is a good idea to"] # [doc = " call `ProjectionCache::complete` to make sure the obligations won't be"] # [doc = " re-evaluated and avoid an exponential worst-case."] pub struct ProjectionCache < 'a , 'tcx > { map : & 'a mut SnapshotMapStorage < ProjectionCacheKey < 'tcx > , ProjectionCacheEntry < 'tcx > > , undo_log : & 'a mut InferCtxtUndoLogs < 'tcx > , }
-/* FP:project.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_STRUCT_0014
-/* FP:project.rs-0028 */ # [derive (Clone , Default)] pub struct ProjectionCacheStorage < 'tcx > { map : SnapshotMapStorage < ProjectionCacheKey < 'tcx > , ProjectionCacheEntry < 'tcx > > , }
-/* FP:project.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_STRUCT_0015
-/* FP:project.rs-0030 */ # [derive (Copy , Clone , Debug , Hash , PartialEq , Eq)] pub struct ProjectionCacheKey < 'tcx > { term : ty :: AliasTerm < 'tcx > , param_env : ty :: ParamEnv < 'tcx > , }
-/* FP:project.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_IMPL_0016
-/* FP:project.rs-0032 */ impl < 'tcx > ProjectionCacheKey < 'tcx > { pub fn new (term : ty :: AliasTerm < 'tcx > , param_env : ty :: ParamEnv < 'tcx >) -> Self { Self { term , param_env } } }
-/* FP:project.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_ENUM_0017
-/* FP:project.rs-0034 */ # [derive (Clone , Debug)] pub enum ProjectionCacheEntry < 'tcx > { InProgress , Ambiguous , Recur , Error , NormalizedTerm { ty : NormalizedTerm < 'tcx > , # [doc = " If we were able to successfully evaluate the corresponding cache"] # [doc = " entry key during predicate evaluation, then this field stores the"] # [doc = " final result obtained from evaluating all of the projection"] # [doc = " sub-obligations. During evaluation, we will skip evaluating the"] # [doc = " cached sub-obligations in `ty` if this field is set. Evaluation"] # [doc = " only cares about the final result, so we don't care about any"] # [doc = " region constraint side-effects produced by evaluating the"] # [doc = " sub-obligations."] # [doc = ""] # [doc = " Additionally, we will clear out the sub-obligations entirely if we"] # [doc = " ever evaluate the cache entry (along with all its sub obligations)"] # [doc = " to `EvaluatedToOk`. This affects all users of the cache, not just"] # [doc = " evaluation. Since a result of `EvaluatedToOk` means that there were"] # [doc = " no region obligations that need to be tracked, it's fine to forget"] # [doc = " about the sub-obligations - they don't provide any additional"] # [doc = " information. However, we do *not* discard any obligations when we"] # [doc = " see `EvaluatedToOkModuloRegions` - we don't know which"] # [doc = " sub-obligations may introduce region constraints, so we keep them"] # [doc = " all to be safe."] # [doc = ""] # [doc = " When we are not performing evaluation (e.g. in"] # [doc = " `FulfillmentContext`), we ignore this field, and always re-process"] # [doc = " the cached sub-obligations (which may have been cleared out - see"] # [doc = " the above paragraph). This ensures that we do not lose any regions"] # [doc = " constraints that arise from processing the sub-obligations."] complete : Option < EvaluationResult > , } , }
-/* FP:project.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_IMPL_0018
-/* FP:project.rs-0036 */ impl < 'tcx > ProjectionCacheStorage < 'tcx > { # [inline] pub (crate) fn with_log < 'a > (& 'a mut self , undo_log : & 'a mut InferCtxtUndoLogs < 'tcx > ,) -> ProjectionCache < 'a , 'tcx > { ProjectionCache { map : & mut self . map , undo_log } } }
-/* FP:project.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_IMPL_0019
-/* FP:project.rs-0038 */ impl < 'tcx > ProjectionCache < '_ , 'tcx > { # [inline] fn map (& mut self ,) -> SnapshotMapRef < '_ , ProjectionCacheKey < 'tcx > , ProjectionCacheEntry < 'tcx > , InferCtxtUndoLogs < 'tcx > , > { self . map . with_log (self . undo_log) } pub fn clear (& mut self) { self . map () . clear () ; } # [doc = " Try to start normalize `key`; returns an error if"] # [doc = " normalization already occurred (this error corresponds to a"] # [doc = " cache hit, so it's actually a good thing)."] pub fn try_start (& mut self , key : ProjectionCacheKey < 'tcx > ,) -> Result < () , ProjectionCacheEntry < 'tcx > > { let mut map = self . map () ; if let Some (entry) = map . get (& key) { return Err (entry . clone ()) ; } map . insert (key , ProjectionCacheEntry :: InProgress) ; Ok (()) } # [doc = " Indicates that `key` was normalized to `value`."] pub fn insert_term (& mut self , key : ProjectionCacheKey < 'tcx > , value : NormalizedTerm < 'tcx >) { debug ! ("ProjectionCacheEntry::insert_ty: adding cache entry: key={:?}, value={:?}" , key , value) ; let mut map = self . map () ; if let Some (ProjectionCacheEntry :: Recur) = map . get (& key) { debug ! ("Not overwriting Recur") ; return ; } let fresh_key = map . insert (key , ProjectionCacheEntry :: NormalizedTerm { ty : value , complete : None }) ; assert ! (! fresh_key , "never started projecting `{key:?}`") ; } # [doc = " Mark the relevant projection cache key as having its derived obligations"] # [doc = " complete, so they won't have to be re-computed (this is OK to do in a"] # [doc = " snapshot - if the snapshot is rolled back, the obligations will be"] # [doc = " marked as incomplete again)."] pub fn complete (& mut self , key : ProjectionCacheKey < 'tcx > , result : EvaluationResult) { let mut map = self . map () ; match map . get (& key) { Some (ProjectionCacheEntry :: NormalizedTerm { ty , complete : _ }) => { info ! ("ProjectionCacheEntry::complete({:?}) - completing {:?}" , key , ty) ; let mut ty = ty . clone () ; if result . must_apply_considering_regions () { ty . obligations = PredicateObligations :: new () ; } map . insert (key , ProjectionCacheEntry :: NormalizedTerm { ty , complete : Some (result) } ,) ; } ref value => { info ! ("ProjectionCacheEntry::complete({:?}) - ignoring {:?}" , key , value) ; } } ; } pub fn is_complete (& mut self , key : ProjectionCacheKey < 'tcx >) -> Option < EvaluationResult > { self . map () . get (& key) . and_then (| res | match res { ProjectionCacheEntry :: NormalizedTerm { ty : _ , complete } => * complete , _ => None , }) } # [doc = " Indicates that trying to normalize `key` resulted in"] # [doc = " ambiguity. No point in trying it again then until we gain more"] # [doc = " type information (in which case, the \"fully resolved\" key will"] # [doc = " be different)."] pub fn ambiguous (& mut self , key : ProjectionCacheKey < 'tcx >) { let fresh = self . map () . insert (key , ProjectionCacheEntry :: Ambiguous) ; assert ! (! fresh , "never started projecting `{key:?}`") ; } # [doc = " Indicates that while trying to normalize `key`, `key` was required to"] # [doc = " be normalized again. Selection or evaluation should eventually report"] # [doc = " an error here."] pub fn recur (& mut self , key : ProjectionCacheKey < 'tcx >) { let fresh = self . map () . insert (key , ProjectionCacheEntry :: Recur) ; assert ! (! fresh , "never started projecting `{key:?}`") ; } # [doc = " Indicates that trying to normalize `key` resulted in"] # [doc = " error."] pub fn error (& mut self , key : ProjectionCacheKey < 'tcx >) { let fresh = self . map () . insert (key , ProjectionCacheEntry :: Error) ; assert ! (! fresh , "never started projecting `{key:?}`") ; } }
-/* FP:project.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_infer_src_traits_project_IMPL_0020
-/* FP:project.rs-0040 */ impl < 'tcx > Rollback < UndoLog < 'tcx > > for ProjectionCacheStorage < 'tcx > { fn reverse (& mut self , undo : UndoLog < 'tcx >) { self . map . reverse (undo) ; } }
+// SRC: ../rust/compiler/rustc_infer/src/traits/project.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=3 */
+// Code for projecting associated types out of trait references.
+
+use crate::rustc_data_structures::snapshot_map::{self, SnapshotMapRef, SnapshotMapStorage};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use crate::rustc_data_structures::undo_log::Rollback;
+use crate::rustc_complete::traits::EvaluationResult;
+use crate::rustc_complete::ty;
+use tracing::{debug, info};
+/* AST_META: AST_ID=3 | TYPE=STRUCT | NAME=MismatchedProjectionTypes | COMPLEXITY=2 | LINES=11 */
+
+use super::PredicateObligations;
+use crate::infer::snapshot::undo_log::InferCtxtUndoLogs;
+
+pub(crate) type UndoLog<'tcx> =
+    snapshot_map::UndoLog<ProjectionCacheKey<'tcx>, ProjectionCacheEntry<'tcx>>;
+
+#[derive(Clone)]
+pub struct MismatchedProjectionTypes<'tcx> {
+    pub err: ty::error::TypeError<'tcx>,
+}
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=Normalized | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Clone)]
+pub struct Normalized<'tcx, T> {
+    pub value: T,
+    pub obligations: PredicateObligations<'tcx>,
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=with | COMPLEXITY=4 | LINES=8 */
+
+pub type NormalizedTerm<'tcx> = Normalized<'tcx, ty::Term<'tcx>>;
+
+impl<'tcx, T> Normalized<'tcx, T> {
+    pub fn with<U>(self, value: U) -> Normalized<'tcx, U> {
+        Normalized { value, obligations: self.obligations }
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=ProjectionCache | COMPLEXITY=11 | LINES=36 */
+
+// # Cache
+
+/// The projection cache. Unlike the standard caches, this can include
+/// infcx-dependent type variables, therefore we have to roll the
+/// cache back each time we roll a snapshot back, to avoid assumptions
+/// on yet-unresolved inference variables. Types with placeholder
+/// regions also have to be removed when the respective snapshot ends.
+///
+/// Because of that, projection cache entries can be "stranded" and left
+/// inaccessible when type variables inside the key are resolved. We make no
+/// attempt to recover or remove "stranded" entries, but rather let them be
+/// (for the lifetime of the infcx).
+///
+/// Entries in the projection cache might contain inference variables
+/// that will be resolved by obligations on the projection cache entry (e.g.,
+/// when a type parameter in the associated type is constrained through
+/// an "RFC 447" projection on the impl).
+///
+/// When working with a fulfillment context, the derived obligations of each
+/// projection cache entry will be registered on the fulfillcx, so any users
+/// that can wait for a fulfillcx fixed point need not care about this. However,
+/// users that don't wait for a fixed point (e.g., trait evaluation) have to
+/// resolve the obligations themselves to make sure the projected result is
+/// ok and avoid issues like #43132.
+///
+/// If that is done, after evaluation the obligations, it is a good idea to
+/// call `ProjectionCache::complete` to make sure the obligations won't be
+/// re-evaluated and avoid an exponential worst-case.
+//
+// FIXME: we probably also want some sort of cross-infcx cache here to
+// reduce the amount of duplication. Let's see what we get with the Chalk reforms.
+pub struct ProjectionCache<'a, 'tcx> {
+    map: &'a mut SnapshotMapStorage<ProjectionCacheKey<'tcx>, ProjectionCacheEntry<'tcx>>,
+    undo_log: &'a mut InferCtxtUndoLogs<'tcx>,
+}
+/* AST_META: AST_ID=7 | TYPE=STRUCT | NAME=ProjectionCacheStorage | COMPLEXITY=2 | LINES=5 */
+
+#[derive(Clone, Default)]
+pub struct ProjectionCacheStorage<'tcx> {
+    map: SnapshotMapStorage<ProjectionCacheKey<'tcx>, ProjectionCacheEntry<'tcx>>,
+}
+/* AST_META: AST_ID=8 | TYPE=STRUCT | NAME=ProjectionCacheKey | COMPLEXITY=2 | LINES=6 */
+
+#[derive(Copy, Clone, Debug, Hash, PartialEq, Eq)]
+pub struct ProjectionCacheKey<'tcx> {
+    term: ty::AliasTerm<'tcx>,
+    param_env: ty::ParamEnv<'tcx>,
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=new | COMPLEXITY=4 | LINES=6 */
+
+impl<'tcx> ProjectionCacheKey<'tcx> {
+    pub fn new(term: ty::AliasTerm<'tcx>, param_env: ty::ParamEnv<'tcx>) -> Self {
+        Self { term, param_env }
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=10 | LINES=37 */
+
+#[derive(Clone, Debug)]
+pub enum ProjectionCacheEntry<'tcx> {
+    InProgress,
+    Ambiguous,
+    Recur,
+    Error,
+    NormalizedTerm {
+        ty: NormalizedTerm<'tcx>,
+        /// If we were able to successfully evaluate the corresponding cache
+        /// entry key during predicate evaluation, then this field stores the
+        /// final result obtained from evaluating all of the projection
+        /// sub-obligations. During evaluation, we will skip evaluating the
+        /// cached sub-obligations in `ty` if this field is set. Evaluation
+        /// only cares about the final result, so we don't care about any
+        /// region constraint side-effects produced by evaluating the
+        /// sub-obligations.
+        ///
+        /// Additionally, we will clear out the sub-obligations entirely if we
+        /// ever evaluate the cache entry (along with all its sub obligations)
+        /// to `EvaluatedToOk`. This affects all users of the cache, not just
+        /// evaluation. Since a result of `EvaluatedToOk` means that there were
+        /// no region obligations that need to be tracked, it's fine to forget
+        /// about the sub-obligations - they don't provide any additional
+        /// information. However, we do *not* discard any obligations when we
+        /// see `EvaluatedToOkModuloRegions` - we don't know which
+        /// sub-obligations may introduce region constraints, so we keep them
+        /// all to be safe.
+        ///
+        /// When we are not performing evaluation (e.g. in
+        /// `FulfillmentContext`), we ignore this field, and always re-process
+        /// the cached sub-obligations (which may have been cleared out - see
+        /// the above paragraph). This ensures that we do not lose any regions
+        /// constraints that arise from processing the sub-obligations.
+        complete: Option<EvaluationResult>,
+    },
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
+
+impl<'tcx> ProjectionCacheStorage<'tcx> {
+    #[inline]
+    pub(crate) fn with_log<'a>(
+        &'a mut self,
+        undo_log: &'a mut InferCtxtUndoLogs<'tcx>,
+    ) -> ProjectionCache<'a, 'tcx> {
+        ProjectionCache { map: &mut self.map, undo_log }
+    }
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=map | COMPLEXITY=58 | LINES=107 */
+
+impl<'tcx> ProjectionCache<'_, 'tcx> {
+    #[inline]
+    fn map(
+        &mut self,
+    ) -> SnapshotMapRef<
+        '_,
+        ProjectionCacheKey<'tcx>,
+        ProjectionCacheEntry<'tcx>,
+        InferCtxtUndoLogs<'tcx>,
+    > {
+        self.map.with_log(self.undo_log)
+    }
+
+    pub fn clear(&mut self) {
+        self.map().clear();
+    }
+
+    /// Try to start normalize `key`; returns an error if
+    /// normalization already occurred (this error corresponds to a
+    /// cache hit, so it's actually a good thing).
+    pub fn try_start(
+        &mut self,
+        key: ProjectionCacheKey<'tcx>,
+    ) -> Result<(), ProjectionCacheEntry<'tcx>> {
+        let mut map = self.map();
+        if let Some(entry) = map.get(&key) {
+            return Err(entry.clone());
+        }
+
+        map.insert(key, ProjectionCacheEntry::InProgress);
+        Ok(())
+    }
+
+    /// Indicates that `key` was normalized to `value`.
+    pub fn insert_term(&mut self, key: ProjectionCacheKey<'tcx>, value: NormalizedTerm<'tcx>) {
+        debug!(
+            "ProjectionCacheEntry::insert_ty: adding cache entry: key={:?}, value={:?}",
+            key, value
+        );
+        let mut map = self.map();
+        if let Some(ProjectionCacheEntry::Recur) = map.get(&key) {
+            debug!("Not overwriting Recur");
+            return;
+        }
+        let fresh_key =
+            map.insert(key, ProjectionCacheEntry::NormalizedTerm { ty: value, complete: None });
+        assert!(!fresh_key, "never started projecting `{key:?}`");
+    }
+
+    /// Mark the relevant projection cache key as having its derived obligations
+    /// complete, so they won't have to be re-computed (this is OK to do in a
+    /// snapshot - if the snapshot is rolled back, the obligations will be
+    /// marked as incomplete again).
+    pub fn complete(&mut self, key: ProjectionCacheKey<'tcx>, result: EvaluationResult) {
+        let mut map = self.map();
+        match map.get(&key) {
+            Some(ProjectionCacheEntry::NormalizedTerm { ty, complete: _ }) => {
+                info!("ProjectionCacheEntry::complete({:?}) - completing {:?}", key, ty);
+                let mut ty = ty.clone();
+                if result.must_apply_considering_regions() {
+                    ty.obligations = PredicateObligations::new();
+                }
+                map.insert(
+                    key,
+                    ProjectionCacheEntry::NormalizedTerm { ty, complete: Some(result) },
+                );
+            }
+            ref value => {
+                // Type inference could "strand behind" old cache entries. Leave
+                // them alone for now.
+                info!("ProjectionCacheEntry::complete({:?}) - ignoring {:?}", key, value);
+            }
+        };
+    }
+
+    pub fn is_complete(&mut self, key: ProjectionCacheKey<'tcx>) -> Option<EvaluationResult> {
+        self.map().get(&key).and_then(|res| match res {
+            ProjectionCacheEntry::NormalizedTerm { ty: _, complete } => *complete,
+            _ => None,
+        })
+    }
+
+    /// Indicates that trying to normalize `key` resulted in
+    /// ambiguity. No point in trying it again then until we gain more
+    /// type information (in which case, the "fully resolved" key will
+    /// be different).
+    pub fn ambiguous(&mut self, key: ProjectionCacheKey<'tcx>) {
+        let fresh = self.map().insert(key, ProjectionCacheEntry::Ambiguous);
+        assert!(!fresh, "never started projecting `{key:?}`");
+    }
+
+    /// Indicates that while trying to normalize `key`, `key` was required to
+    /// be normalized again. Selection or evaluation should eventually report
+    /// an error here.
+    pub fn recur(&mut self, key: ProjectionCacheKey<'tcx>) {
+        let fresh = self.map().insert(key, ProjectionCacheEntry::Recur);
+        assert!(!fresh, "never started projecting `{key:?}`");
+    }
+
+    /// Indicates that trying to normalize `key` resulted in
+    /// error.
+    pub fn error(&mut self, key: ProjectionCacheKey<'tcx>) {
+        let fresh = self.map().insert(key, ProjectionCacheEntry::Error);
+        assert!(!fresh, "never started projecting `{key:?}`");
+    }
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=reverse | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> Rollback<UndoLog<'tcx>> for ProjectionCacheStorage<'tcx> {
+    fn reverse(&mut self, undo: UndoLog<'tcx>) {
+        self.map.reverse(undo);
+    }
+}

@@ -1,26 +1,223 @@
-/* FP:unreachable_enum_branching.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_unreachable_enum_branching_USE_0001
-/* FP:unreachable_enum_branching.rs-0002 */ use crate :: rustc_abi :: Variants ;
-/* FP:unreachable_enum_branching.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_unreachable_enum_branching_USE_0002
-/* FP:unreachable_enum_branching.rs-0004 */ use crate :: rustc_data_structures :: fx :: FxHashSet ;
-/* FP:unreachable_enum_branching.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_unreachable_enum_branching_USE_0003
-/* FP:unreachable_enum_branching.rs-0006 */ use crate :: rustc_complete :: bug ;
-/* FP:unreachable_enum_branching.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_unreachable_enum_branching_USE_0004
-/* FP:unreachable_enum_branching.rs-0008 */ use crate :: rustc_complete :: mir :: { BasicBlock , BasicBlockData , BasicBlocks , Body , Local , Operand , Rvalue , StatementKind , TerminatorKind , } ;
-/* FP:unreachable_enum_branching.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_unreachable_enum_branching_USE_0005
-/* FP:unreachable_enum_branching.rs-0010 */ use crate :: rustc_complete :: ty :: layout :: TyAndLayout ;
-/* FP:unreachable_enum_branching.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_unreachable_enum_branching_USE_0006
-/* FP:unreachable_enum_branching.rs-0012 */ use crate :: rustc_complete :: ty :: { Ty , TyCtxt } ;
-/* FP:unreachable_enum_branching.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_unreachable_enum_branching_USE_0007
-/* FP:unreachable_enum_branching.rs-0014 */ use tracing :: trace ;
-/* FP:unreachable_enum_branching.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_unreachable_enum_branching_USE_0008
-/* FP:unreachable_enum_branching.rs-0016 */ use crate :: patch :: MirPatch ;
-/* FP:unreachable_enum_branching.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_unreachable_enum_branching_STRUCT_0009
-/* FP:unreachable_enum_branching.rs-0018 */ pub (super) struct UnreachableEnumBranching ;
-/* FP:unreachable_enum_branching.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_unreachable_enum_branching_FN_0010
-/* FP:unreachable_enum_branching.rs-0020 */ fn get_discriminant_local (terminator : & TerminatorKind < '_ >) -> Option < Local > { if let TerminatorKind :: SwitchInt { discr : Operand :: Move (p) , .. } = terminator { p . as_local () } else { None } }
-/* FP:unreachable_enum_branching.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_unreachable_enum_branching_FN_0011
-/* FP:unreachable_enum_branching.rs-0022 */ # [doc = " If the basic block terminates by switching on a discriminant, this returns the `Ty` the"] # [doc = " discriminant is read from. Otherwise, returns None."] fn get_switched_on_type < 'tcx > (block_data : & BasicBlockData < 'tcx > , tcx : TyCtxt < 'tcx > , body : & Body < 'tcx > ,) -> Option < Ty < 'tcx > > { let terminator = block_data . terminator () ; let local = get_discriminant_local (& terminator . kind) ? ; let stmt_before_term = block_data . statements . last () ? ; if let StatementKind :: Assign (box (l , Rvalue :: Discriminant (place))) = stmt_before_term . kind && l . as_local () == Some (local) { let ty = place . ty (body , tcx) . ty ; if ty . is_enum () { return Some (ty) ; } } None }
-/* FP:unreachable_enum_branching.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_unreachable_enum_branching_FN_0012
-/* FP:unreachable_enum_branching.rs-0024 */ fn variant_discriminants < 'tcx > (layout : & TyAndLayout < 'tcx > , ty : Ty < 'tcx > , tcx : TyCtxt < 'tcx > ,) -> FxHashSet < u128 > { match & layout . variants { Variants :: Empty => { FxHashSet :: default () } Variants :: Single { index } => { let mut res = FxHashSet :: default () ; res . insert (ty . discriminant_for_variant (tcx , * index) . map_or (index . as_u32 () as u128 , | discr | discr . val) ,) ; res } Variants :: Multiple { variants , .. } => variants . iter_enumerated () . filter_map (| (idx , layout) | { (! layout . is_uninhabited ()) . then (| | ty . discriminant_for_variant (tcx , idx) . unwrap () . val) }) . collect () , } }
-/* FP:unreachable_enum_branching.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_transform_src_unreachable_enum_branching_IMPL_0013
-/* FP:unreachable_enum_branching.rs-0026 */ impl < 'tcx > crate :: MirPass < 'tcx > for UnreachableEnumBranching { fn is_enabled (& self , sess : & crate :: rustc_session :: Session) -> bool { sess . mir_opt_level () > 0 } fn run_pass (& self , tcx : TyCtxt < 'tcx > , body : & mut Body < 'tcx >) { trace ! ("UnreachableEnumBranching starting for {:?}" , body . source) ; let mut unreachable_targets = Vec :: new () ; let mut patch = MirPatch :: new (body) ; for (bb , bb_data) in body . basic_blocks . iter_enumerated () { trace ! ("processing block {:?}" , bb) ; if bb_data . is_cleanup { continue ; } let Some (discriminant_ty) = get_switched_on_type (bb_data , tcx , body) else { continue } ; let layout = tcx . layout_of (body . typing_env (tcx) . as_query_input (discriminant_ty)) ; let mut allowed_variants = if let Ok (layout) = layout { variant_discriminants (& layout , discriminant_ty , tcx) } else if let Some (variant_range) = discriminant_ty . variant_range (tcx) { variant_range . map (| variant | { discriminant_ty . discriminant_for_variant (tcx , variant) . unwrap () . val }) . collect () } else { continue ; } ; trace ! ("allowed_variants = {:?}" , allowed_variants) ; unreachable_targets . clear () ; let TerminatorKind :: SwitchInt { targets , discr } = & bb_data . terminator () . kind else { bug ! () } ; for (index , (val , _)) in targets . iter () . enumerate () { if ! allowed_variants . remove (& val) { unreachable_targets . push (index) ; } } let otherwise_is_empty_unreachable = body . basic_blocks [targets . otherwise ()] . is_empty_unreachable () ; fn check_successors (basic_blocks : & BasicBlocks < '_ > , bb : BasicBlock) -> bool { let mut successors = basic_blocks [bb] . terminator () . successors () ; let Some (first_successor) = successors . next () else { return true } ; if successors . next () . is_some () { return true ; } if let TerminatorKind :: SwitchInt { .. } = & basic_blocks [first_successor] . terminator () . kind { return false ; } ; true } let otherwise_is_last_variant = ! otherwise_is_empty_unreachable && allowed_variants . len () == 1 && (targets . all_targets () . len () <= 3 || check_successors (& body . basic_blocks , targets . otherwise ())) ; let replace_otherwise_to_unreachable = otherwise_is_last_variant || (! otherwise_is_empty_unreachable && allowed_variants . is_empty ()) ; if unreachable_targets . is_empty () && ! replace_otherwise_to_unreachable { continue ; } let unreachable_block = patch . unreachable_no_cleanup_block () ; let mut targets = targets . clone () ; if replace_otherwise_to_unreachable { if otherwise_is_last_variant { # [allow (rustc :: potential_query_instability)] let last_variant = * allowed_variants . iter () . next () . unwrap () ; targets . add_target (last_variant , targets . otherwise ()) ; } unreachable_targets . push (targets . iter () . count ()) ; } for index in unreachable_targets . iter () { targets . all_targets_mut () [* index] = unreachable_block ; } patch . patch_terminator (bb , TerminatorKind :: SwitchInt { targets , discr : discr . clone () }) ; } patch . apply (body) ; } fn is_required (& self) -> bool { false } }
+// SRC: ../rust/compiler/rustc_mir_transform/src/unreachable_enum_branching.rs
+/* AST_META: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+// A pass that eliminates branches on uninhabited or unreachable enum variants.
+
+use crate::rustc_abi::Variants;
+use crate::rustc_data_structures::fx::FxHashSet;
+use crate::rustc_complete::bug;
+use crate::rustc_complete::mir::{
+    BasicBlock, BasicBlockData, BasicBlocks, Body, Local, Operand, Rvalue, StatementKind,
+    TerminatorKind,
+};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::ty::layout::TyAndLayout;
+use crate::rustc_complete::ty::{Ty, TyCtxt};
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=get_discriminant_local | COMPLEXITY=7 | LINES=13 */
+use tracing::trace;
+
+use crate::patch::MirPatch;
+
+pub(super) struct UnreachableEnumBranching;
+
+fn get_discriminant_local(terminator: &TerminatorKind<'_>) -> Option<Local> {
+    if let TerminatorKind::SwitchInt { discr: Operand::Move(p), .. } = terminator {
+        p.as_local()
+    } else {
+        None
+    }
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=get_switched_on_type | COMPLEXITY=9 | LINES=26 */
+
+/// If the basic block terminates by switching on a discriminant, this returns the `Ty` the
+/// discriminant is read from. Otherwise, returns None.
+fn get_switched_on_type<'tcx>(
+    block_data: &BasicBlockData<'tcx>,
+    tcx: TyCtxt<'tcx>,
+    body: &Body<'tcx>,
+) -> Option<Ty<'tcx>> {
+    let terminator = block_data.terminator();
+
+    // Only bother checking blocks which terminate by switching on a local.
+    let local = get_discriminant_local(&terminator.kind)?;
+
+    let stmt_before_term = block_data.statements.last()?;
+
+    if let StatementKind::Assign(box (l, Rvalue::Discriminant(place))) = stmt_before_term.kind
+        && l.as_local() == Some(local)
+    {
+        let ty = place.ty(body, tcx).ty;
+        if ty.is_enum() {
+            return Some(ty);
+        }
+    }
+
+    None
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=variant_discriminants | COMPLEXITY=12 | LINES=28 */
+
+fn variant_discriminants<'tcx>(
+    layout: &TyAndLayout<'tcx>,
+    ty: Ty<'tcx>,
+    tcx: TyCtxt<'tcx>,
+) -> FxHashSet<u128> {
+    match &layout.variants {
+        Variants::Empty => {
+            // Uninhabited, no valid discriminant.
+            FxHashSet::default()
+        }
+        Variants::Single { index } => {
+            let mut res = FxHashSet::default();
+            res.insert(
+                ty.discriminant_for_variant(tcx, *index)
+                    .map_or(index.as_u32() as u128, |discr| discr.val),
+            );
+            res
+        }
+        Variants::Multiple { variants, .. } => variants
+            .iter_enumerated()
+            .filter_map(|(idx, layout)| {
+                (!layout.is_uninhabited())
+                    .then(|| ty.discriminant_for_variant(tcx, idx).unwrap().val)
+            })
+            .collect(),
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=is_enabled | COMPLEXITY=99 | LINES=138 */
+
+impl<'tcx> crate::MirPass<'tcx> for UnreachableEnumBranching {
+    fn is_enabled(&self, sess: &crate::rustc_session::Session) -> bool {
+        sess.mir_opt_level() > 0
+    }
+
+    fn run_pass(&self, tcx: TyCtxt<'tcx>, body: &mut Body<'tcx>) {
+        trace!("UnreachableEnumBranching starting for {:?}", body.source);
+
+        let mut unreachable_targets = Vec::new();
+        let mut patch = MirPatch::new(body);
+
+        for (bb, bb_data) in body.basic_blocks.iter_enumerated() {
+            trace!("processing block {:?}", bb);
+
+            if bb_data.is_cleanup {
+                continue;
+            }
+
+            let Some(discriminant_ty) = get_switched_on_type(bb_data, tcx, body) else { continue };
+
+            let layout = tcx.layout_of(body.typing_env(tcx).as_query_input(discriminant_ty));
+
+            let mut allowed_variants = if let Ok(layout) = layout {
+                // Find allowed variants based on uninhabited.
+                variant_discriminants(&layout, discriminant_ty, tcx)
+            } else if let Some(variant_range) = discriminant_ty.variant_range(tcx) {
+                // If there are some generics, we can still get the allowed variants.
+                variant_range
+                    .map(|variant| {
+                        discriminant_ty.discriminant_for_variant(tcx, variant).unwrap().val
+                    })
+                    .collect()
+            } else {
+                continue;
+            };
+
+            trace!("allowed_variants = {:?}", allowed_variants);
+
+            unreachable_targets.clear();
+            let TerminatorKind::SwitchInt { targets, discr } = &bb_data.terminator().kind else {
+                bug!()
+            };
+
+            for (index, (val, _)) in targets.iter().enumerate() {
+                if !allowed_variants.remove(&val) {
+                    unreachable_targets.push(index);
+                }
+            }
+            let otherwise_is_empty_unreachable =
+                body.basic_blocks[targets.otherwise()].is_empty_unreachable();
+            fn check_successors(basic_blocks: &BasicBlocks<'_>, bb: BasicBlock) -> bool {
+                // After resolving https://github.com/llvm/llvm-project/issues/78578,
+                // We can remove this check.
+                // The main issue here is that `early-tailduplication` causes compile time overhead
+                // and potential performance problems.
+                // Simply put, when encounter a switch (indirect branch) statement,
+                // `early-tailduplication` tries to duplicate the switch branch statement with BB
+                // into (each) predecessors. This makes CFG very complex.
+                // We can understand it as it transforms the following code
+                // ```rust
+                // match a { ... many cases };
+                // match b { ... many cases };
+                // ```
+                // into
+                // ```rust
+                // match a { ... many match b { goto BB cases } }
+                // ... BB cases
+                // ```
+                // Abandon this transformation when it is possible (the best effort)
+                // to encounter the problem.
+                let mut successors = basic_blocks[bb].terminator().successors();
+                let Some(first_successor) = successors.next() else { return true };
+                if successors.next().is_some() {
+                    return true;
+                }
+                if let TerminatorKind::SwitchInt { .. } =
+                    &basic_blocks[first_successor].terminator().kind
+                {
+                    return false;
+                };
+                true
+            }
+            // If and only if there is a variant that does not have a branch set, change the
+            // current of otherwise as the variant branch and set otherwise to unreachable. It
+            // transforms following code
+            // ```rust
+            // match c {
+            //     Ordering::Less => 1,
+            //     Ordering::Equal => 2,
+            //     _ => 3,
+            // }
+            // ```
+            // to
+            // ```rust
+            // match c {
+            //     Ordering::Less => 1,
+            //     Ordering::Equal => 2,
+            //     Ordering::Greater => 3,
+            // }
+            // ```
+            let otherwise_is_last_variant = !otherwise_is_empty_unreachable
+                && allowed_variants.len() == 1
+                // Despite the LLVM issue, we hope that small enum can still be transformed.
+                // This is valuable for both `a <= b` and `if let Some/Ok(v)`.
+                && (targets.all_targets().len() <= 3
+                    || check_successors(&body.basic_blocks, targets.otherwise()));
+            let replace_otherwise_to_unreachable = otherwise_is_last_variant
+                || (!otherwise_is_empty_unreachable && allowed_variants.is_empty());
+
+            if unreachable_targets.is_empty() && !replace_otherwise_to_unreachable {
+                continue;
+            }
+
+            let unreachable_block = patch.unreachable_no_cleanup_block();
+            let mut targets = targets.clone();
+            if replace_otherwise_to_unreachable {
+                if otherwise_is_last_variant {
+                    // We have checked that `allowed_variants` has only one element.
+                    #[allow(rustc::potential_query_instability)]
+                    let last_variant = *allowed_variants.iter().next().unwrap();
+                    targets.add_target(last_variant, targets.otherwise());
+                }
+                unreachable_targets.push(targets.iter().count());
+            }
+            for index in unreachable_targets.iter() {
+                targets.all_targets_mut()[*index] = unreachable_block;
+            }
+            patch.patch_terminator(bb, TerminatorKind::SwitchInt { targets, discr: discr.clone() });
+        }
+
+        patch.apply(body);
+    }
+
+    fn is_required(&self) -> bool {
+        false
+    }
+}

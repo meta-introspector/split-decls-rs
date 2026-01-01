@@ -1,36 +1,222 @@
-/* FP:lattice.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_USE_0001
-/* FP:lattice.rs-0002 */ use crate :: rustc_index :: Idx ;
-/* FP:lattice.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_USE_0002
-/* FP:lattice.rs-0004 */ use crate :: rustc_index :: bit_set :: { DenseBitSet , MixedBitSet } ;
-/* FP:lattice.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_USE_0003
-/* FP:lattice.rs-0006 */ use crate :: framework :: BitSetExt ;
-/* FP:lattice.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_TRAIT_0004
-/* FP:lattice.rs-0008 */ # [doc = " A [partially ordered set][poset] that has a [least upper bound][lub] for any pair of elements"] # [doc = " in the set."] # [doc = ""] # [doc = " [lub]: https://en.wikipedia.org/wiki/Infimum_and_supremum"] # [doc = " [poset]: https://en.wikipedia.org/wiki/Partially_ordered_set"] pub trait JoinSemiLattice : Eq { # [doc = " Computes the least upper bound of two elements, storing the result in `self` and returning"] # [doc = " `true` if `self` has changed."] # [doc = ""] # [doc = " The lattice join operator is abbreviated as `∨`."] fn join (& mut self , other : & Self) -> bool ; }
-/* FP:lattice.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_TRAIT_0005
-/* FP:lattice.rs-0010 */ # [doc = " A set that has a \"bottom\" element, which is less than or equal to any other element."] pub trait HasBottom { const BOTTOM : Self ; fn is_bottom (& self) -> bool ; }
-/* FP:lattice.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_TRAIT_0006
-/* FP:lattice.rs-0012 */ # [doc = " A set that has a \"top\" element, which is greater than or equal to any other element."] pub trait HasTop { const TOP : Self ; }
-/* FP:lattice.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_IMPL_0007
-/* FP:lattice.rs-0014 */ # [doc = " A `DenseBitSet` represents the lattice formed by the powerset of all possible values of the"] # [doc = " index type `T` ordered by inclusion. Equivalently, it is a tuple of \"two-point\" lattices, one"] # [doc = " for each possible value of `T`."] impl < T : Idx > JoinSemiLattice for DenseBitSet < T > { fn join (& mut self , other : & Self) -> bool { self . union (other) } }
-/* FP:lattice.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_IMPL_0008
-/* FP:lattice.rs-0016 */ impl < T : Idx > JoinSemiLattice for MixedBitSet < T > { fn join (& mut self , other : & Self) -> bool { self . union (other) } }
-/* FP:lattice.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_ENUM_0009
-/* FP:lattice.rs-0018 */ # [doc = " Extends a type `T` with top and bottom elements to make it a partially ordered set in which no"] # [doc = " value of `T` is comparable with any other."] # [doc = ""] # [doc = " A flat set has the following [Hasse diagram]:"] # [doc = ""] # [doc = " ```text"] # [doc = "          top"] # [doc = "  / ... / /  \\ \\ ... \\"] # [doc = " all possible values of `T`"] # [doc = "  \\ ... \\ \\  / / ... /"] # [doc = "         bottom"] # [doc = " ```"] # [doc = ""] # [doc = " [Hasse diagram]: https://en.wikipedia.org/wiki/Hasse_diagram"] # [derive (Clone , Copy , Debug , PartialEq , Eq)] pub enum FlatSet < T > { Bottom , Elem (T) , Top , }
-/* FP:lattice.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_IMPL_0010
-/* FP:lattice.rs-0020 */ impl < T : Clone + Eq > JoinSemiLattice for FlatSet < T > { fn join (& mut self , other : & Self) -> bool { let result = match (& * self , other) { (Self :: Top , _) | (_ , Self :: Bottom) => return false , (Self :: Elem (a) , Self :: Elem (b)) if a == b => return false , (Self :: Bottom , Self :: Elem (x)) => Self :: Elem (x . clone ()) , _ => Self :: Top , } ; * self = result ; true } }
-/* FP:lattice.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_IMPL_0011
-/* FP:lattice.rs-0022 */ impl < T > HasBottom for FlatSet < T > { const BOTTOM : Self = Self :: Bottom ; fn is_bottom (& self) -> bool { matches ! (self , Self :: Bottom) } }
-/* FP:lattice.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_IMPL_0012
-/* FP:lattice.rs-0024 */ impl < T > HasTop for FlatSet < T > { const TOP : Self = Self :: Top ; }
-/* FP:lattice.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_ENUM_0013
-/* FP:lattice.rs-0026 */ # [doc = " Extend a lattice with a bottom value to represent an unreachable execution."] # [doc = ""] # [doc = " The only useful action on an unreachable state is joining it with a reachable one to make it"] # [doc = " reachable. All other actions, gen/kill for instance, are no-ops."] # [derive (PartialEq , Eq , Debug)] pub enum MaybeReachable < T > { Unreachable , Reachable (T) , }
-/* FP:lattice.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_IMPL_0014
-/* FP:lattice.rs-0028 */ impl < T > MaybeReachable < T > { pub fn is_reachable (& self) -> bool { matches ! (self , MaybeReachable :: Reachable (_)) } }
-/* FP:lattice.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_IMPL_0015
-/* FP:lattice.rs-0030 */ impl < S > MaybeReachable < S > { # [doc = " Return whether the current state contains the given element. If the state is unreachable,"] # [doc = " it does no contain anything."] pub fn contains < T > (& self , elem : T) -> bool where S : BitSetExt < T > , { match self { MaybeReachable :: Unreachable => false , MaybeReachable :: Reachable (set) => set . contains (elem) , } } }
-/* FP:lattice.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_IMPL_0016
-/* FP:lattice.rs-0032 */ impl < T , S : BitSetExt < T > > BitSetExt < T > for MaybeReachable < S > { fn contains (& self , elem : T) -> bool { self . contains (elem) } }
-/* FP:lattice.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_IMPL_0017
-/* FP:lattice.rs-0034 */ impl < V : Clone > Clone for MaybeReachable < V > { fn clone (& self) -> Self { match self { MaybeReachable :: Reachable (x) => MaybeReachable :: Reachable (x . clone ()) , MaybeReachable :: Unreachable => MaybeReachable :: Unreachable , } } fn clone_from (& mut self , source : & Self) { match (& mut * self , source) { (MaybeReachable :: Reachable (x) , MaybeReachable :: Reachable (y)) => { x . clone_from (y) ; } _ => * self = source . clone () , } } }
-/* FP:lattice.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_mir_dataflow_src_framework_lattice_IMPL_0018
-/* FP:lattice.rs-0036 */ impl < T : JoinSemiLattice + Clone > JoinSemiLattice for MaybeReachable < T > { fn join (& mut self , other : & Self) -> bool { match (& mut * self , & other) { (_ , MaybeReachable :: Unreachable) => false , (MaybeReachable :: Unreachable , _) => { * self = other . clone () ; true } (MaybeReachable :: Reachable (this) , MaybeReachable :: Reachable (other)) => this . join (other) , } } }
+// SRC: ../rust/compiler/rustc_mir_dataflow/src/framework/lattice.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=7 */
+// Traits used to represent [lattices] for use as the domain of a dataflow analysis.
+//
+// # Overview
+//
+// The most common lattice is a powerset of some set `S`, ordered by [set inclusion]. The [Hasse
+// diagram] for the powerset of a set with two elements (`X` and `Y`) is shown below. Note that
+// distinct elements at the same height in a Hasse diagram (e.g. `{X}` and `{Y}`) are
+/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+// *incomparable*, not equal.
+//
+// ```text
+//      {X, Y}    <- top
+/* AST_META: AST_ID=3 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=3 | LINES=2 */
+//       /  \
+//    {X}    {Y}
+/* AST_META: AST_ID=4 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+//       \  /
+//        {}      <- bottom
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=7 | LINES=27 */
+//
+// ```
+//
+// The defining characteristic of a lattice—the one that differentiates it from a [partially
+// ordered set][poset]—is the existence of a *unique* least upper and greatest lower bound for
+// every pair of elements. The lattice join operator (`∨`) returns the least upper bound, and the
+// lattice meet operator (`∧`) returns the greatest lower bound. Types that implement one operator
+// but not the other are known as semilattices. Dataflow analysis only uses the join operator and
+// will work with any join-semilattice, but both should be specified when possible.
+//
+// ## `PartialOrd`
+//
+// Given that it represents a partially ordered set, you may be surprised that [`JoinSemiLattice`]
+// does not have [`PartialOrd`] as a supertrait. This
+// is because most standard library types use lexicographic ordering instead of set inclusion for
+// their `PartialOrd` impl. Since we do not actually need to compare lattice elements to run a
+// dataflow analysis, there's no need for a newtype wrapper with a custom `PartialOrd` impl. The
+// only benefit would be the ability to check that the least upper (or greatest lower) bound
+// returned by the lattice join (or meet) operator was in fact greater (or lower) than the inputs.
+//
+// [lattices]: https://en.wikipedia.org/wiki/Lattice_(order)
+// [set inclusion]: https://en.wikipedia.org/wiki/Subset
+// [Hasse diagram]: https://en.wikipedia.org/wiki/Hasse_diagram
+// [poset]: https://en.wikipedia.org/wiki/Partially_ordered_set
+
+use crate::rustc_index::Idx;
+use crate::rustc_index::bit_set::{DenseBitSet, MixedBitSet};
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=join | COMPLEXITY=7 | LINES=15 */
+
+use crate::framework::BitSetExt;
+
+/// A [partially ordered set][poset] that has a [least upper bound][lub] for any pair of elements
+/// in the set.
+///
+/// [lub]: https://en.wikipedia.org/wiki/Infimum_and_supremum
+/// [poset]: https://en.wikipedia.org/wiki/Partially_ordered_set
+pub trait JoinSemiLattice: Eq {
+    /// Computes the least upper bound of two elements, storing the result in `self` and returning
+    /// `true` if `self` has changed.
+    ///
+    /// The lattice join operator is abbreviated as `∨`.
+    fn join(&mut self, other: &Self) -> bool;
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=is_bottom | COMPLEXITY=2 | LINES=7 */
+
+/// A set that has a "bottom" element, which is less than or equal to any other element.
+pub trait HasBottom {
+    const BOTTOM: Self;
+
+    fn is_bottom(&self) -> bool;
+}
+/* AST_META: AST_ID=8 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+
+/// A set that has a "top" element, which is greater than or equal to any other element.
+pub trait HasTop {
+    const TOP: Self;
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=join | COMPLEXITY=7 | LINES=9 */
+
+/// A `DenseBitSet` represents the lattice formed by the powerset of all possible values of the
+/// index type `T` ordered by inclusion. Equivalently, it is a tuple of "two-point" lattices, one
+/// for each possible value of `T`.
+impl<T: Idx> JoinSemiLattice for DenseBitSet<T> {
+    fn join(&mut self, other: &Self) -> bool {
+        self.union(other)
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=join | COMPLEXITY=5 | LINES=6 */
+
+impl<T: Idx> JoinSemiLattice for MixedBitSet<T> {
+    fn join(&mut self, other: &Self) -> bool {
+        self.union(other)
+    }
+}
+/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=3 | LINES=21 */
+
+/// Extends a type `T` with top and bottom elements to make it a partially ordered set in which no
+/// value of `T` is comparable with any other.
+///
+/// A flat set has the following [Hasse diagram]:
+///
+/// ```text
+///          top
+///  / ... / /  \ \ ... \
+/// all possible values of `T`
+///  \ ... \ \  / / ... /
+///         bottom
+/// ```
+///
+/// [Hasse diagram]: https://en.wikipedia.org/wiki/Hasse_diagram
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum FlatSet<T> {
+    Bottom,
+    Elem(T),
+    Top,
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=join | COMPLEXITY=11 | LINES=16 */
+
+impl<T: Clone + Eq> JoinSemiLattice for FlatSet<T> {
+    fn join(&mut self, other: &Self) -> bool {
+        let result = match (&*self, other) {
+            (Self::Top, _) | (_, Self::Bottom) => return false,
+            (Self::Elem(a), Self::Elem(b)) if a == b => return false,
+
+            (Self::Bottom, Self::Elem(x)) => Self::Elem(x.clone()),
+
+            _ => Self::Top,
+        };
+
+        *self = result;
+        true
+    }
+}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=is_bottom | COMPLEXITY=5 | LINES=8 */
+
+impl<T> HasBottom for FlatSet<T> {
+    const BOTTOM: Self = Self::Bottom;
+
+    fn is_bottom(&self) -> bool {
+        matches!(self, Self::Bottom)
+    }
+}
+/* AST_META: AST_ID=14 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
+
+impl<T> HasTop for FlatSet<T> {
+    const TOP: Self = Self::Top;
+}
+/* AST_META: AST_ID=15 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=4 | LINES=10 */
+
+/// Extend a lattice with a bottom value to represent an unreachable execution.
+///
+/// The only useful action on an unreachable state is joining it with a reachable one to make it
+/// reachable. All other actions, gen/kill for instance, are no-ops.
+#[derive(PartialEq, Eq, Debug)]
+pub enum MaybeReachable<T> {
+    Unreachable,
+    Reachable(T),
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=is_reachable | COMPLEXITY=3 | LINES=6 */
+
+impl<T> MaybeReachable<T> {
+    pub fn is_reachable(&self) -> bool {
+        matches!(self, MaybeReachable::Reachable(_))
+    }
+}
+/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=contains | COMPLEXITY=7 | LINES=14 */
+
+impl<S> MaybeReachable<S> {
+    /// Return whether the current state contains the given element. If the state is unreachable,
+    /// it does no contain anything.
+    pub fn contains<T>(&self, elem: T) -> bool
+    where
+        S: BitSetExt<T>,
+    {
+        match self {
+            MaybeReachable::Unreachable => false,
+            MaybeReachable::Reachable(set) => set.contains(elem),
+        }
+    }
+}
+/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=contains | COMPLEXITY=5 | LINES=6 */
+
+impl<T, S: BitSetExt<T>> BitSetExt<T> for MaybeReachable<S> {
+    fn contains(&self, elem: T) -> bool {
+        self.contains(elem)
+    }
+}
+/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=clone | COMPLEXITY=16 | LINES=18 */
+
+impl<V: Clone> Clone for MaybeReachable<V> {
+    fn clone(&self) -> Self {
+        match self {
+            MaybeReachable::Reachable(x) => MaybeReachable::Reachable(x.clone()),
+            MaybeReachable::Unreachable => MaybeReachable::Unreachable,
+        }
+    }
+
+    fn clone_from(&mut self, source: &Self) {
+        match (&mut *self, source) {
+            (MaybeReachable::Reachable(x), MaybeReachable::Reachable(y)) => {
+                x.clone_from(y);
+            }
+            _ => *self = source.clone(),
+        }
+    }
+}
+/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=join | COMPLEXITY=10 | LINES=14 */
+
+impl<T: JoinSemiLattice + Clone> JoinSemiLattice for MaybeReachable<T> {
+    fn join(&mut self, other: &Self) -> bool {
+        // Unreachable acts as a bottom.
+        match (&mut *self, &other) {
+            (_, MaybeReachable::Unreachable) => false,
+            (MaybeReachable::Unreachable, _) => {
+                *self = other.clone();
+                true
+            }
+            (MaybeReachable::Reachable(this), MaybeReachable::Reachable(other)) => this.join(other),
+        }
+    }
+}

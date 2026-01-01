@@ -1,22 +1,94 @@
-/* FP:util.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_util_USE_0001
-/* FP:util.rs-0002 */ use crate :: rustc_complete :: LitKind ;
-/* FP:util.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_util_USE_0002
-/* FP:util.rs-0004 */ use crate :: rustc_complete :: attr :: AttributeExt ;
-/* FP:util.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_util_USE_0003
-/* FP:util.rs-0006 */ use crate :: rustc_feature :: is_builtin_attr_name ;
-/* FP:util.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_util_USE_0004
-/* FP:util.rs-0008 */ use crate :: rustc_complete :: RustcVersion ;
-/* FP:util.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_util_USE_0005
-/* FP:util.rs-0010 */ use crate :: rustc_complete :: { Symbol , sym } ;
-/* FP:util.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_util_USE_0006
-/* FP:util.rs-0012 */ use crate :: context :: { AcceptContext , Stage } ;
-/* FP:util.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_util_USE_0007
-/* FP:util.rs-0014 */ use crate :: parser :: ArgParser ;
-/* FP:util.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_util_FN_0008
-/* FP:util.rs-0016 */ # [doc = " Parse a rustc version number written inside string literal in an attribute,"] # [doc = " like appears in `since = \"1.0.0\"`. Suffixes like \"-dev\" and \"-nightly\" are"] # [doc = " not accepted in this position, unlike when parsing CFG_RELEASE."] pub fn parse_version (s : Symbol) -> Option < RustcVersion > { let mut components = s . as_str () . split ('-') ; let d = components . next () ? ; if components . next () . is_some () { return None ; } let mut digits = d . splitn (3 , '.') ; let major = digits . next () ? . parse () . ok () ? ; let minor = digits . next () ? . parse () . ok () ? ; let patch = digits . next () . unwrap_or ("0") . parse () . ok () ? ; Some (RustcVersion { major , minor , patch }) }
-/* FP:util.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_util_FN_0009
-/* FP:util.rs-0018 */ pub fn is_builtin_attr (attr : & impl AttributeExt) -> bool { attr . is_doc_comment () || attr . ident () . is_some_and (| ident | is_builtin_attr_name (ident . name)) }
-/* FP:util.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_util_FN_0010
-/* FP:util.rs-0020 */ pub fn is_doc_alias_attrs_contain_symbol < 'tcx , T : AttributeExt + 'tcx > (attrs : impl Iterator < Item = & 'tcx T > , symbol : Symbol ,) -> bool { let doc_attrs = attrs . filter (| attr | attr . has_name (sym :: doc)) ; for attr in doc_attrs { let Some (values) = attr . meta_item_list () else { continue ; } ; let alias_values = values . iter () . filter (| v | v . has_name (sym :: alias)) ; for v in alias_values { if let Some (nested) = v . meta_item_list () { let mut iter = nested . iter () . filter_map (| item | item . lit ()) . map (| item | item . symbol) ; if iter . any (| s | s == symbol) { return true ; } } else if let Some (meta) = v . meta_item () && let Some (lit) = meta . name_value_literal () { if lit . symbol == symbol { return true ; } } } } false }
-/* FP:util.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_attr_parsing_src_attributes_util_FN_0011
-/* FP:util.rs-0022 */ # [doc = " Parse a single integer."] # [doc = ""] # [doc = " Used by attributes that take a single integer as argument, such as"] # [doc = " `#[link_ordinal]` and `#[rustc_layout_scalar_valid_range_start]`."] # [doc = " `cx` is the context given to the attribute."] # [doc = " `args` is the parser for the attribute arguments."] pub (crate) fn parse_single_integer < S : Stage > (cx : & mut AcceptContext < '_ , '_ , S > , args : & ArgParser < '_ > ,) -> Option < u128 > { let Some (list) = args . list () else { cx . expected_list (cx . attr_span) ; return None ; } ; let Some (single) = list . single () else { cx . expected_single_argument (list . span) ; return None ; } ; let Some (lit) = single . lit () else { cx . expected_integer_literal (single . span ()) ; return None ; } ; let LitKind :: Int (num , _ty) = lit . kind else { cx . expected_integer_literal (single . span ()) ; return None ; } ; Some (num . 0) }
+// SRC: ../rust/compiler/rustc_attr_parsing/src/attributes/util.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use crate::rustc_complete::LitKind;
+use crate::rustc_complete::attr::AttributeExt;
+use crate::rustc_feature::is_builtin_attr_name;
+use crate::rustc_complete::RustcVersion;
+use crate::rustc_complete::{Symbol, sym};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+use crate::context::{AcceptContext, Stage};
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=parse_version | COMPLEXITY=7 | LINES=17 */
+use crate::parser::ArgParser;
+
+/// Parse a rustc version number written inside string literal in an attribute,
+/// like appears in `since = "1.0.0"`. Suffixes like "-dev" and "-nightly" are
+/// not accepted in this position, unlike when parsing CFG_RELEASE.
+pub fn parse_version(s: Symbol) -> Option<RustcVersion> {
+    let mut components = s.as_str().split('-');
+    let d = components.next()?;
+    if components.next().is_some() {
+        return None;
+    }
+    let mut digits = d.splitn(3, '.');
+    let major = digits.next()?.parse().ok()?;
+    let minor = digits.next()?.parse().ok()?;
+    let patch = digits.next().unwrap_or("0").parse().ok()?;
+    Some(RustcVersion { major, minor, patch })
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=is_builtin_attr | COMPLEXITY=2 | LINES=4 */
+
+pub fn is_builtin_attr(attr: &impl AttributeExt) -> bool {
+    attr.is_doc_comment() || attr.ident().is_some_and(|ident| is_builtin_attr_name(ident.name))
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=is_doc_alias_attrs_contain_symbol | COMPLEXITY=23 | LINES=30 */
+
+pub fn is_doc_alias_attrs_contain_symbol<'tcx, T: AttributeExt + 'tcx>(
+    attrs: impl Iterator<Item = &'tcx T>,
+    symbol: Symbol,
+) -> bool {
+    let doc_attrs = attrs.filter(|attr| attr.has_name(sym::doc));
+    for attr in doc_attrs {
+        let Some(values) = attr.meta_item_list() else {
+            continue;
+        };
+        let alias_values = values.iter().filter(|v| v.has_name(sym::alias));
+        for v in alias_values {
+            if let Some(nested) = v.meta_item_list() {
+                // #[doc(alias("foo", "bar"))]
+                let mut iter = nested.iter().filter_map(|item| item.lit()).map(|item| item.symbol);
+                if iter.any(|s| s == symbol) {
+                    return true;
+                }
+            } else if let Some(meta) = v.meta_item()
+                && let Some(lit) = meta.name_value_literal()
+            {
+                // #[doc(alias = "foo")]
+                if lit.symbol == symbol {
+                    return true;
+                }
+            }
+        }
+    }
+    false
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=29 */
+
+/// Parse a single integer.
+///
+/// Used by attributes that take a single integer as argument, such as
+/// `#[link_ordinal]` and `#[rustc_layout_scalar_valid_range_start]`.
+/// `cx` is the context given to the attribute.
+/// `args` is the parser for the attribute arguments.
+pub(crate) fn parse_single_integer<S: Stage>(
+    cx: &mut AcceptContext<'_, '_, S>,
+    args: &ArgParser<'_>,
+) -> Option<u128> {
+    let Some(list) = args.list() else {
+        cx.expected_list(cx.attr_span);
+        return None;
+    };
+    let Some(single) = list.single() else {
+        cx.expected_single_argument(list.span);
+        return None;
+    };
+    let Some(lit) = single.lit() else {
+        cx.expected_integer_literal(single.span());
+        return None;
+    };
+    let LitKind::Int(num, _ty) = lit.kind else {
+        cx.expected_integer_literal(single.span());
+        return None;
+    };
+    Some(num.0)
+}

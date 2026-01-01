@@ -1,46 +1,260 @@
-/* FP:coverage.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_USE_0001
-/* FP:coverage.rs-0002 */ use std :: fmt :: { self , Debug , Formatter } ;
-/* FP:coverage.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_USE_0002
-/* FP:coverage.rs-0004 */ use crate :: rustc_data_structures :: fx :: FxIndexMap ;
-/* FP:coverage.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_USE_0003
-/* FP:coverage.rs-0006 */ use crate :: rustc_index :: { Idx , IndexVec } ;
-/* FP:coverage.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_USE_0004
-/* FP:coverage.rs-0008 */ use rustc_macros :: { HashStable , TyDecodable , TyEncodable } ;
-/* FP:coverage.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_USE_0005
-/* FP:coverage.rs-0010 */ use crate :: rustc_complete :: Span ;
-/* FP:coverage.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_MACRO_0006
-/* FP:coverage.rs-0012 */ crate :: rustc_index :: newtype_index ! { # [doc = " Used by [`CoverageKind::BlockMarker`] to mark blocks during THIR-to-MIR"] # [doc = " lowering, so that those blocks can be identified later."] # [derive (HashStable)] # [encodable] # [debug_format = "BlockMarkerId({})"] pub struct BlockMarkerId { } }
-/* FP:coverage.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_MACRO_0007
-/* FP:coverage.rs-0014 */ crate :: rustc_index :: newtype_index ! { # [doc = " ID of a coverage counter. Values ascend from 0."] # [doc = ""] # [doc = " Before MIR inlining, counter IDs are local to their enclosing function."] # [doc = " After MIR inlining, coverage statements may have been inlined into"] # [doc = " another function, so use the statement's source-scope to find which"] # [doc = " function/instance its IDs are meaningful for."] # [doc = ""] # [doc = " Note that LLVM handles counter IDs as `uint32_t`, so there is no need"] # [doc = " to use a larger representation on the Rust side."] # [derive (HashStable)] # [encodable] # [orderable] # [debug_format = "CounterId({})"] pub struct CounterId { } }
-/* FP:coverage.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_MACRO_0008
-/* FP:coverage.rs-0016 */ crate :: rustc_index :: newtype_index ! { # [doc = " ID of a coverage-counter expression. Values ascend from 0."] # [doc = ""] # [doc = " Before MIR inlining, expression IDs are local to their enclosing function."] # [doc = " After MIR inlining, coverage statements may have been inlined into"] # [doc = " another function, so use the statement's source-scope to find which"] # [doc = " function/instance its IDs are meaningful for."] # [doc = ""] # [doc = " Note that LLVM handles expression IDs as `uint32_t`, so there is no need"] # [doc = " to use a larger representation on the Rust side."] # [derive (HashStable)] # [encodable] # [orderable] # [debug_format = "ExpressionId({})"] pub struct ExpressionId { } }
-/* FP:coverage.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_ENUM_0009
-/* FP:coverage.rs-0018 */ # [doc = " Enum that can hold a constant zero value, the ID of an physical coverage"] # [doc = " counter, or the ID of a coverage-counter expression."] # [derive (Copy , Clone , PartialEq , Eq , PartialOrd , Ord)] # [derive (TyEncodable , TyDecodable , Hash , HashStable)] pub enum CovTerm { Zero , Counter (CounterId) , Expression (ExpressionId) , }
-/* FP:coverage.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_IMPL_0010
-/* FP:coverage.rs-0020 */ impl Debug for CovTerm { fn fmt (& self , f : & mut Formatter < '_ >) -> fmt :: Result { match self { Self :: Zero => write ! (f , "Zero") , Self :: Counter (id) => f . debug_tuple ("Counter") . field (& id . as_u32 ()) . finish () , Self :: Expression (id) => f . debug_tuple ("Expression") . field (& id . as_u32 ()) . finish () , } } }
-/* FP:coverage.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_ENUM_0011
-/* FP:coverage.rs-0022 */ # [derive (Clone , PartialEq , TyEncodable , TyDecodable , Hash , HashStable)] pub enum CoverageKind { # [doc = " Marks a span that might otherwise not be represented in MIR, so that"] # [doc = " coverage instrumentation can associate it with its enclosing block/BCB."] # [doc = ""] # [doc = " Should be erased before codegen (at some point after `InstrumentCoverage`)."] SpanMarker , # [doc = " Marks its enclosing basic block with an ID that can be referred to by"] # [doc = " side data in [`CoverageInfoHi`]."] # [doc = ""] # [doc = " Should be erased before codegen (at some point after `InstrumentCoverage`)."] BlockMarker { id : BlockMarkerId } , # [doc = " Marks its enclosing basic block with the ID of the coverage graph node"] # [doc = " that it was part of during the `InstrumentCoverage` MIR pass."] # [doc = ""] # [doc = " During codegen, this might be lowered to `llvm.instrprof.increment` or"] # [doc = " to a no-op, depending on the outcome of counter-creation."] VirtualCounter { bcb : BasicCoverageBlock } , }
-/* FP:coverage.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_IMPL_0012
-/* FP:coverage.rs-0024 */ impl Debug for CoverageKind { fn fmt (& self , fmt : & mut Formatter < '_ >) -> fmt :: Result { use CoverageKind :: * ; match self { SpanMarker => write ! (fmt , "SpanMarker") , BlockMarker { id } => write ! (fmt , "BlockMarker({:?})" , id . index ()) , VirtualCounter { bcb } => write ! (fmt , "VirtualCounter({bcb:?})") , } } }
-/* FP:coverage.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_ENUM_0013
-/* FP:coverage.rs-0026 */ # [derive (Copy , Clone , Debug , PartialEq , Eq , Hash , HashStable)] # [derive (TyEncodable , TyDecodable)] pub enum Op { Subtract , Add , }
-/* FP:coverage.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_IMPL_0014
-/* FP:coverage.rs-0028 */ impl Op { pub fn is_add (& self) -> bool { matches ! (self , Self :: Add) } pub fn is_subtract (& self) -> bool { matches ! (self , Self :: Subtract) } }
-/* FP:coverage.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_STRUCT_0015
-/* FP:coverage.rs-0030 */ # [derive (Clone , Debug , PartialEq , Eq)] # [derive (TyEncodable , TyDecodable , Hash , HashStable)] pub struct Expression { pub lhs : CovTerm , pub op : Op , pub rhs : CovTerm , }
-/* FP:coverage.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_ENUM_0016
-/* FP:coverage.rs-0032 */ # [derive (Clone , Debug)] # [derive (TyEncodable , TyDecodable , Hash , HashStable)] pub enum MappingKind { # [doc = " Associates a normal region of code with a counter/expression/zero."] Code { bcb : BasicCoverageBlock } , # [doc = " Associates a branch region with separate counters for true and false."] Branch { true_bcb : BasicCoverageBlock , false_bcb : BasicCoverageBlock } , }
-/* FP:coverage.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_STRUCT_0017
-/* FP:coverage.rs-0034 */ # [derive (Clone , Debug)] # [derive (TyEncodable , TyDecodable , Hash , HashStable)] pub struct Mapping { pub kind : MappingKind , pub span : Span , }
-/* FP:coverage.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_STRUCT_0018
-/* FP:coverage.rs-0036 */ # [doc = " Stores per-function coverage information attached to a `mir::Body`,"] # [doc = " to be used in conjunction with the individual coverage statements injected"] # [doc = " into the function's basic blocks."] # [derive (Clone , Debug)] # [derive (TyEncodable , TyDecodable , Hash , HashStable)] pub struct FunctionCoverageInfo { pub function_source_hash : u64 , # [doc = " Used in conjunction with `priority_list` to create physical counters"] # [doc = " and counter expressions, after MIR optimizations."] pub node_flow_data : NodeFlowData < BasicCoverageBlock > , pub priority_list : Vec < BasicCoverageBlock > , pub mappings : Vec < Mapping > , }
-/* FP:coverage.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_STRUCT_0019
-/* FP:coverage.rs-0038 */ # [doc = " Coverage information for a function, recorded during MIR building and"] # [doc = " attached to the corresponding `mir::Body`. Used by the `InstrumentCoverage`"] # [doc = " MIR pass."] # [doc = ""] # [doc = " (\"Hi\" indicates that this is \"high-level\" information collected at the"] # [doc = " THIR/MIR boundary, before the MIR-based coverage instrumentation pass.)"] # [derive (Clone , Debug)] # [derive (TyEncodable , TyDecodable , Hash , HashStable)] pub struct CoverageInfoHi { # [doc = " 1 more than the highest-numbered [`CoverageKind::BlockMarker`] that was"] # [doc = " injected into the MIR body. This makes it possible to allocate per-ID"] # [doc = " data structures without having to scan the entire body first."] pub num_block_markers : usize , pub branch_spans : Vec < BranchSpan > , }
-/* FP:coverage.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_STRUCT_0020
-/* FP:coverage.rs-0040 */ # [derive (Clone , Debug)] # [derive (TyEncodable , TyDecodable , Hash , HashStable)] pub struct BranchSpan { pub span : Span , pub true_marker : BlockMarkerId , pub false_marker : BlockMarkerId , }
-/* FP:coverage.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_STRUCT_0021
-/* FP:coverage.rs-0042 */ # [doc = " Contains information needed during codegen, obtained by inspecting the"] # [doc = " function's MIR after MIR optimizations."] # [doc = ""] # [doc = " Returned by the `coverage_ids_info` query."] # [derive (Clone , TyEncodable , TyDecodable , Debug , HashStable)] pub struct CoverageIdsInfo { pub num_counters : u32 , pub phys_counter_for_node : FxIndexMap < BasicCoverageBlock , CounterId > , pub term_for_bcb : IndexVec < BasicCoverageBlock , Option < CovTerm > > , pub expressions : IndexVec < ExpressionId , Expression > , }
-/* FP:coverage.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_MACRO_0022
-/* FP:coverage.rs-0044 */ crate :: rustc_index :: newtype_index ! { # [doc = " During the `InstrumentCoverage` MIR pass, a BCB is a node in the"] # [doc = " \"coverage\u{a0}graph\", which is a refinement of the MIR control-flow graph"] # [doc = " that merges or omits some blocks that aren't relevant to coverage."] # [doc = ""] # [doc = " After that pass is complete, the coverage graph no longer exists, so a"] # [doc = " BCB is effectively an opaque ID."] # [derive (HashStable)] # [encodable] # [orderable] # [debug_format = "bcb{}"] pub struct BasicCoverageBlock { const START_BCB = 0 ; } }
-/* FP:coverage.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_mir_coverage_STRUCT_0023
-/* FP:coverage.rs-0046 */ # [doc = " Data representing a view of some underlying graph, in which each node's"] # [doc = " successors have been merged into a single \"supernode\"."] # [doc = ""] # [doc = " The resulting supernodes have no obvious meaning on their own."] # [doc = " However, merging successor nodes means that a node's out-edges can all"] # [doc = " be combined into a single out-edge, whose flow is the same as the flow"] # [doc = " (execution count) of its corresponding node in the original graph."] # [doc = ""] # [doc = " With all node flows now in the original graph now represented as edge flows"] # [doc = " in the merged graph, it becomes possible to analyze the original node flows"] # [doc = " using techniques for analyzing edge flows."] # [derive (Clone , Debug)] # [derive (TyEncodable , TyDecodable , Hash , HashStable)] pub struct NodeFlowData < Node : Idx > { # [doc = " Maps each node to the supernode that contains it, indicated by some"] # [doc = " arbitrary \"root\" node that is part of that supernode."] pub supernodes : IndexVec < Node , Node > , # [doc = " For each node, stores the single supernode that all of its successors"] # [doc = " have been merged into."] # [doc = ""] # [doc = " (Note that each node in a supernode can potentially have a _different_"] # [doc = " successor supernode from its peers.)"] pub succ_supernodes : IndexVec < Node , Node > , }
+// SRC: ../rust/compiler/rustc_middle/src/mir/coverage.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+// Metadata from source code coverage analysis and instrumentation.
+
+use std::fmt::{self, Debug, Formatter};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+
+use crate::rustc_data_structures::fx::FxIndexMap;
+use crate::rustc_index::{Idx, IndexVec};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use rustc_macros::{HashStable, TyDecodable, TyEncodable};
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=BlockMarkerId | COMPLEXITY=4 | LINES=10 */
+use crate::rustc_complete::Span;
+
+crate::rustc_index::newtype_index! {
+    /// Used by [`CoverageKind::BlockMarker`] to mark blocks during THIR-to-MIR
+    /// lowering, so that those blocks can be identified later.
+    #[derive(HashStable)]
+    #[encodable]
+    #[debug_format = "BlockMarkerId({})"]
+    pub struct BlockMarkerId {}
+}
+/* AST_META: AST_ID=5 | TYPE=STRUCT | NAME=CounterId | COMPLEXITY=5 | LINES=17 */
+
+crate::rustc_index::newtype_index! {
+    /// ID of a coverage counter. Values ascend from 0.
+    ///
+    /// Before MIR inlining, counter IDs are local to their enclosing function.
+    /// After MIR inlining, coverage statements may have been inlined into
+    /// another function, so use the statement's source-scope to find which
+    /// function/instance its IDs are meaningful for.
+    ///
+    /// Note that LLVM handles counter IDs as `uint32_t`, so there is no need
+    /// to use a larger representation on the Rust side.
+    #[derive(HashStable)]
+    #[encodable]
+    #[orderable]
+    #[debug_format = "CounterId({})"]
+    pub struct CounterId {}
+}
+/* AST_META: AST_ID=6 | TYPE=STRUCT | NAME=ExpressionId | COMPLEXITY=5 | LINES=17 */
+
+crate::rustc_index::newtype_index! {
+    /// ID of a coverage-counter expression. Values ascend from 0.
+    ///
+    /// Before MIR inlining, expression IDs are local to their enclosing function.
+    /// After MIR inlining, coverage statements may have been inlined into
+    /// another function, so use the statement's source-scope to find which
+    /// function/instance its IDs are meaningful for.
+    ///
+    /// Note that LLVM handles expression IDs as `uint32_t`, so there is no need
+    /// to use a larger representation on the Rust side.
+    #[derive(HashStable)]
+    #[encodable]
+    #[orderable]
+    #[debug_format = "ExpressionId({})"]
+    pub struct ExpressionId {}
+}
+/* AST_META: AST_ID=7 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=10 */
+
+/// Enum that can hold a constant zero value, the ID of an physical coverage
+/// counter, or the ID of a coverage-counter expression.
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(TyEncodable, TyDecodable, Hash, HashStable)]
+pub enum CovTerm {
+    Zero,
+    Counter(CounterId),
+    Expression(ExpressionId),
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=9 | LINES=10 */
+
+impl Debug for CovTerm {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        match self {
+            Self::Zero => write!(f, "Zero"),
+            Self::Counter(id) => f.debug_tuple("Counter").field(&id.as_u32()).finish(),
+            Self::Expression(id) => f.debug_tuple("Expression").field(&id.as_u32()).finish(),
+        }
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=5 | LINES=22 */
+
+#[derive(Clone, PartialEq, TyEncodable, TyDecodable, Hash, HashStable)]
+pub enum CoverageKind {
+    /// Marks a span that might otherwise not be represented in MIR, so that
+    /// coverage instrumentation can associate it with its enclosing block/BCB.
+    ///
+    /// Should be erased before codegen (at some point after `InstrumentCoverage`).
+    SpanMarker,
+
+    /// Marks its enclosing basic block with an ID that can be referred to by
+    /// side data in [`CoverageInfoHi`].
+    ///
+    /// Should be erased before codegen (at some point after `InstrumentCoverage`).
+    BlockMarker { id: BlockMarkerId },
+
+    /// Marks its enclosing basic block with the ID of the coverage graph node
+    /// that it was part of during the `InstrumentCoverage` MIR pass.
+    ///
+    /// During codegen, this might be lowered to `llvm.instrprof.increment` or
+    /// to a no-op, depending on the outcome of counter-creation.
+    VirtualCounter { bcb: BasicCoverageBlock },
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=fmt | COMPLEXITY=13 | LINES=11 */
+
+impl Debug for CoverageKind {
+    fn fmt(&self, fmt: &mut Formatter<'_>) -> fmt::Result {
+        use CoverageKind::*;
+        match self {
+            SpanMarker => write!(fmt, "SpanMarker"),
+            BlockMarker { id } => write!(fmt, "BlockMarker({:?})", id.index()),
+            VirtualCounter { bcb } => write!(fmt, "VirtualCounter({bcb:?})"),
+        }
+    }
+}
+/* AST_META: AST_ID=11 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, HashStable)]
+#[derive(TyEncodable, TyDecodable)]
+pub enum Op {
+    Subtract,
+    Add,
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=is_add | COMPLEXITY=4 | LINES=10 */
+
+impl Op {
+    pub fn is_add(&self) -> bool {
+        matches!(self, Self::Add)
+    }
+
+    pub fn is_subtract(&self) -> bool {
+        matches!(self, Self::Subtract)
+    }
+}
+/* AST_META: AST_ID=13 | TYPE=STRUCT | NAME=Expression | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(TyEncodable, TyDecodable, Hash, HashStable)]
+pub struct Expression {
+    pub lhs: CovTerm,
+    pub op: Op,
+    pub rhs: CovTerm,
+}
+/* AST_META: AST_ID=14 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=6 | LINES=9 */
+
+#[derive(Clone, Debug)]
+#[derive(TyEncodable, TyDecodable, Hash, HashStable)]
+pub enum MappingKind {
+    /// Associates a normal region of code with a counter/expression/zero.
+    Code { bcb: BasicCoverageBlock },
+    /// Associates a branch region with separate counters for true and false.
+    Branch { true_bcb: BasicCoverageBlock, false_bcb: BasicCoverageBlock },
+}
+/* AST_META: AST_ID=15 | TYPE=STRUCT | NAME=Mapping | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Clone, Debug)]
+#[derive(TyEncodable, TyDecodable, Hash, HashStable)]
+pub struct Mapping {
+    pub kind: MappingKind,
+    pub span: Span,
+}
+/* AST_META: AST_ID=16 | TYPE=STRUCT | NAME=FunctionCoverageInfo | COMPLEXITY=3 | LINES=16 */
+
+/// Stores per-function coverage information attached to a `mir::Body`,
+/// to be used in conjunction with the individual coverage statements injected
+/// into the function's basic blocks.
+#[derive(Clone, Debug)]
+#[derive(TyEncodable, TyDecodable, Hash, HashStable)]
+pub struct FunctionCoverageInfo {
+    pub function_source_hash: u64,
+
+    /// Used in conjunction with `priority_list` to create physical counters
+    /// and counter expressions, after MIR optimizations.
+    pub node_flow_data: NodeFlowData<BasicCoverageBlock>,
+    pub priority_list: Vec<BasicCoverageBlock>,
+
+    pub mappings: Vec<Mapping>,
+}
+/* AST_META: AST_ID=17 | TYPE=STRUCT | NAME=CoverageInfoHi | COMPLEXITY=5 | LINES=16 */
+
+/// Coverage information for a function, recorded during MIR building and
+/// attached to the corresponding `mir::Body`. Used by the `InstrumentCoverage`
+/// MIR pass.
+///
+/// ("Hi" indicates that this is "high-level" information collected at the
+/// THIR/MIR boundary, before the MIR-based coverage instrumentation pass.)
+#[derive(Clone, Debug)]
+#[derive(TyEncodable, TyDecodable, Hash, HashStable)]
+pub struct CoverageInfoHi {
+    /// 1 more than the highest-numbered [`CoverageKind::BlockMarker`] that was
+    /// injected into the MIR body. This makes it possible to allocate per-ID
+    /// data structures without having to scan the entire body first.
+    pub num_block_markers: usize,
+    pub branch_spans: Vec<BranchSpan>,
+}
+/* AST_META: AST_ID=18 | TYPE=STRUCT | NAME=BranchSpan | COMPLEXITY=2 | LINES=8 */
+
+#[derive(Clone, Debug)]
+#[derive(TyEncodable, TyDecodable, Hash, HashStable)]
+pub struct BranchSpan {
+    pub span: Span,
+    pub true_marker: BlockMarkerId,
+    pub false_marker: BlockMarkerId,
+}
+/* AST_META: AST_ID=19 | TYPE=STRUCT | NAME=CoverageIdsInfo | COMPLEXITY=2 | LINES=12 */
+
+/// Contains information needed during codegen, obtained by inspecting the
+/// function's MIR after MIR optimizations.
+///
+/// Returned by the `coverage_ids_info` query.
+#[derive(Clone, TyEncodable, TyDecodable, Debug, HashStable)]
+pub struct CoverageIdsInfo {
+    pub num_counters: u32,
+    pub phys_counter_for_node: FxIndexMap<BasicCoverageBlock, CounterId>,
+    pub term_for_bcb: IndexVec<BasicCoverageBlock, Option<CovTerm>>,
+    pub expressions: IndexVec<ExpressionId, Expression>,
+}
+/* AST_META: AST_ID=20 | TYPE=STRUCT | NAME=BasicCoverageBlock | COMPLEXITY=5 | LINES=16 */
+
+crate::rustc_index::newtype_index! {
+    /// During the `InstrumentCoverage` MIR pass, a BCB is a node in the
+    /// "coverage graph", which is a refinement of the MIR control-flow graph
+    /// that merges or omits some blocks that aren't relevant to coverage.
+    ///
+    /// After that pass is complete, the coverage graph no longer exists, so a
+    /// BCB is effectively an opaque ID.
+    #[derive(HashStable)]
+    #[encodable]
+    #[orderable]
+    #[debug_format = "bcb{}"]
+    pub struct BasicCoverageBlock {
+        const START_BCB = 0;
+    }
+}
+/* AST_META: AST_ID=21 | TYPE=STRUCT | NAME=NodeFlowData | COMPLEXITY=6 | LINES=25 */
+
+/// Data representing a view of some underlying graph, in which each node's
+/// successors have been merged into a single "supernode".
+///
+/// The resulting supernodes have no obvious meaning on their own.
+/// However, merging successor nodes means that a node's out-edges can all
+/// be combined into a single out-edge, whose flow is the same as the flow
+/// (execution count) of its corresponding node in the original graph.
+///
+/// With all node flows now in the original graph now represented as edge flows
+/// in the merged graph, it becomes possible to analyze the original node flows
+/// using techniques for analyzing edge flows.
+#[derive(Clone, Debug)]
+#[derive(TyEncodable, TyDecodable, Hash, HashStable)]
+pub struct NodeFlowData<Node: Idx> {
+    /// Maps each node to the supernode that contains it, indicated by some
+    /// arbitrary "root" node that is part of that supernode.
+    pub supernodes: IndexVec<Node, Node>,
+    /// For each node, stores the single supernode that all of its successors
+    /// have been merged into.
+    ///
+    /// (Note that each node in a supernode can potentially have a _different_
+    /// successor supernode from its peers.)
+    pub succ_supernodes: IndexVec<Node, Node>,
+}

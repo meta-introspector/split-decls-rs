@@ -1,55 +1,295 @@
-/* FP:lib.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_MOD_0001
-/* FP:lib.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_MOD_0002
-/* FP:lib.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_MOD_0003
-/* FP:lib.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_MOD_0004
-/* FP:lib.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_MOD_0005
-/* FP:lib.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_MOD_0006
-/* FP:lib.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_MOD_0007
-/* FP:lib.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_MOD_0008
-/* FP:lib.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_MOD_0009
-/* FP:lib.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_MOD_0010
-/* FP:lib.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_MOD_0011
-/* FP:lib.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_MOD_0012
-/* FP:lib.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_MOD_0013
-/* FP:lib.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_USE_0014
-/* FP:lib.rs-0028 */ pub use errors :: NoVariantNamed ;
-/* FP:lib.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_USE_0015
-/* FP:lib.rs-0030 */ use crate :: rustc_abi :: { CVariadicStatus , ExternAbi } ;
-/* FP:lib.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_USE_0016
-/* FP:lib.rs-0032 */ use crate :: rustc_complete :: def :: DefKind ;
-/* FP:lib.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_USE_0017
-/* FP:lib.rs-0034 */ use crate :: rustc_complete :: lints :: DelayedLint ;
-/* FP:lib.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_USE_0018
-/* FP:lib.rs-0036 */ use crate :: rustc_complete :: { self as hir } ;
-/* FP:lib.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_USE_0019
-/* FP:lib.rs-0038 */ use crate :: rustc_complete :: middle ;
-/* FP:lib.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_USE_0020
-/* FP:lib.rs-0040 */ use crate :: rustc_complete :: mir :: interpret :: GlobalId ;
-/* FP:lib.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_USE_0021
-/* FP:lib.rs-0042 */ use crate :: rustc_complete :: query :: Providers ;
-/* FP:lib.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_USE_0022
-/* FP:lib.rs-0044 */ use crate :: rustc_complete :: ty :: { self , Const , Ty , TyCtxt } ;
-/* FP:lib.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_USE_0023
-/* FP:lib.rs-0046 */ use crate :: rustc_complete :: parse :: feature_err ;
-/* FP:lib.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_USE_0024
-/* FP:lib.rs-0048 */ use crate :: rustc_complete :: { ErrorGuaranteed , Span } ;
-/* FP:lib.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_USE_0025
-/* FP:lib.rs-0050 */ use crate :: rustc_trait_selection :: traits ;
-/* FP:lib.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_USE_0026
-/* FP:lib.rs-0052 */ pub use crate :: collect :: suggest_impl_trait ;
-/* FP:lib.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_USE_0027
-/* FP:lib.rs-0054 */ use crate :: hir_ty_lowering :: { FeedConstTy , HirTyLowerer } ;
-/* FP:lib.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_MACRO_0028
-/* FP:lib.rs-0056 */ rustc_fluent_macro :: fluent_messages ! { "../messages.ftl" }
-/* FP:lib.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_FN_0029
-/* FP:lib.rs-0058 */ fn check_c_variadic_abi (tcx : TyCtxt < '_ > , decl : & hir :: FnDecl < '_ > , abi : ExternAbi , span : Span) { if ! decl . c_variadic { return ; } match abi . supports_c_variadic () { CVariadicStatus :: Stable => { } CVariadicStatus :: NotSupported => { tcx . dcx () . create_err (errors :: VariadicFunctionCompatibleConvention { span , convention : & format ! ("{abi}") , }) . emit () ; } CVariadicStatus :: Unstable { feature } => { if ! tcx . features () . enabled (feature) { feature_err (& tcx . sess , feature , span , format ! ("C-variadic functions with the {abi} calling convention are unstable") ,) . emit () ; } } } }
-/* FP:lib.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_FN_0030
-/* FP:lib.rs-0060 */ # [doc = " Adds query implementations to the [Providers] vtable, see [`crate::rustc_middle::query`]"] pub fn provide (providers : & mut Providers) { collect :: provide (providers) ; coherence :: provide (providers) ; check :: provide (providers) ; * providers = Providers { check_unused_traits : check_unused :: check_unused_traits , diagnostic_hir_wf_check : hir_wf_check :: diagnostic_hir_wf_check , inferred_outlives_crate : outlives :: inferred_outlives_crate , inferred_outlives_of : outlives :: inferred_outlives_of , inherit_sig_for_delegation_item : delegation :: inherit_sig_for_delegation_item , enforce_impl_non_lifetime_params_are_constrained : impl_wf_check :: enforce_impl_non_lifetime_params_are_constrained , crate_variances : variance :: crate_variances , variances_of : variance :: variances_of , .. * providers } ; }
-/* FP:lib.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_FN_0031
-/* FP:lib.rs-0062 */ fn emit_delayed_lint (lint : & DelayedLint , tcx : TyCtxt < '_ >) { match lint { DelayedLint :: AttributeParsing (attribute_lint) => { rustc_attr_parsing :: emit_attribute_lint (attribute_lint , tcx) } } }
-/* FP:lib.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_FN_0032
-/* FP:lib.rs-0064 */ pub fn check_crate (tcx : TyCtxt < '_ >) { let _prof_timer = tcx . sess . timer ("type_check_crate") ; tcx . sess . time ("coherence_checking" , | | { type R = Result < () , ErrorGuaranteed > ; let _ : R = tcx . ensure_ok () . check_type_wf (()) ; for & trait_def_id in tcx . all_local_trait_impls (()) . keys () { let _ : R = tcx . ensure_ok () . coherent_trait (trait_def_id) ; } let _ : R = tcx . ensure_ok () . crate_inherent_impls_validity_check (()) ; let _ : R = tcx . ensure_ok () . crate_inherent_impls_overlap_check (()) ; }) ; tcx . sess . time ("emit_ast_lowering_delayed_lints" , | | { # [cfg (debug_assertions)] { for owner_id in tcx . hir_crate_items (()) . owners () { if let Some (delayed_lints) = tcx . opt_ast_lowering_delayed_lints (owner_id) { if ! delayed_lints . lints . is_empty () { assert ! (tcx . hir_crate_items (()) . delayed_lint_items () . any (| i | i == owner_id)) ; } } } } for owner_id in tcx . hir_crate_items (()) . delayed_lint_items () { if let Some (delayed_lints) = tcx . opt_ast_lowering_delayed_lints (owner_id) { for lint in & delayed_lints . lints { emit_delayed_lint (lint , tcx) ; } } } }) ; tcx . par_hir_body_owners (| item_def_id | { let def_kind = tcx . def_kind (item_def_id) ; match def_kind { DefKind :: Static { .. } => { tcx . ensure_ok () . eval_static_initializer (item_def_id) ; check :: maybe_check_static_with_link_section (tcx , item_def_id) ; } DefKind :: Const if ! tcx . generics_of (item_def_id) . own_requires_monomorphization () => { let instance = ty :: Instance :: new_raw (item_def_id . into () , ty :: GenericArgs :: empty ()) ; let cid = GlobalId { instance , promoted : None } ; let typing_env = ty :: TypingEnv :: fully_monomorphized () ; tcx . ensure_ok () . eval_to_const_value_raw (typing_env . as_query_input (cid)) ; } _ => () , } if ! (matches ! (def_kind , DefKind :: AnonConst) || def_kind . is_typeck_child ()) { tcx . ensure_ok () . typeck (item_def_id) ; } if tcx . needs_coroutine_by_move_body_def_id (item_def_id . to_def_id ()) { tcx . ensure_done () . coroutine_by_move_body_def_id (item_def_id) ; } }) ; if tcx . features () . rustc_attrs () { tcx . sess . time ("dumping_rustc_attr_data" , | | { outlives :: dump :: inferred_outlives (tcx) ; variance :: dump :: variances (tcx) ; collect :: dump :: opaque_hidden_types (tcx) ; collect :: dump :: predicates_and_item_bounds (tcx) ; collect :: dump :: def_parents (tcx) ; collect :: dump :: vtables (tcx) ; }) ; } tcx . ensure_ok () . check_unused_traits (()) ; }
-/* FP:lib.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_FN_0033
-/* FP:lib.rs-0066 */ # [doc = " Lower a [`hir::Ty`] to a [`Ty`]."] # [doc = ""] # [doc = " <div class=\"warning\">"] # [doc = ""] # [doc = " This function is **quasi-deprecated**. It can cause ICEs if called inside of a body"] # [doc = " (of a function or constant) and especially if it contains inferred types (`_`)."] # [doc = ""] # [doc = " It's used in rustdoc and Clippy."] # [doc = ""] # [doc = " </div>"] pub fn lower_ty < 'tcx > (tcx : TyCtxt < 'tcx > , hir_ty : & hir :: Ty < 'tcx >) -> Ty < 'tcx > { let env_def_id = tcx . hir_get_parent_item (hir_ty . hir_id) ; collect :: ItemCtxt :: new (tcx , env_def_id . def_id) . lowerer () . lower_ty_maybe_return_type_notation (hir_ty) }
-/* FP:lib.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_analysis_src_lib_FN_0034
-/* FP:lib.rs-0068 */ # [doc = " This is for rustdoc."] pub fn lower_const_arg_for_rustdoc < 'tcx > (tcx : TyCtxt < 'tcx > , hir_ct : & hir :: ConstArg < 'tcx > , feed : FeedConstTy < '_ , 'tcx > ,) -> Const < 'tcx > { let env_def_id = tcx . hir_get_parent_item (hir_ct . hir_id) ; collect :: ItemCtxt :: new (tcx , env_def_id . def_id) . lowerer () . lower_const_arg (hir_ct , feed) }
+// SRC: ../rust/compiler/rustc_hir_analysis/src/lib.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=15 | LINES=93 */
+/*
+
+# typeck
+
+The type checker is responsible for:
+
+1. Determining the type of each expression.
+2. Resolving methods and traits.
+3. Guaranteeing that most type rules are met. ("Most?", you say, "why most?"
+   Well, dear reader, read on.)
+
+The main entry point is [`check_crate()`]. Type checking operates in
+several major phases:
+
+1. The collect phase first passes over all items and determines their
+   type, without examining their "innards".
+
+2. Variance inference then runs to compute the variance of each parameter.
+
+3. Coherence checks for overlapping or orphaned impls.
+
+4. Finally, the check phase then checks function bodies and so forth.
+   Within the check phase, we check each function body one at a time
+   (bodies of function expressions are checked as part of the
+   containing function). Inference is used to supply types wherever
+   they are unknown. The actual checking of a function itself has
+   several phases (check, regionck, writeback), as discussed in the
+   documentation for the [`check`] module.
+
+The type checker is defined into various submodules which are documented
+independently:
+
+- hir_ty_lowering: lowers type-system entities from the [HIR][hir] to the
+  [`crate::rustc_middle::ty`] representation.
+
+- collect: computes the types of each top-level item and enters them into
+  the `tcx.types` table for later use.
+
+- coherence: enforces coherence rules, builds some tables.
+
+- variance: variance inference
+
+- outlives: outlives inference
+
+- check: walks over function bodies and type checks them, inferring types for
+  local variables, type parameters, etc as necessary.
+
+- infer: finds the types to use for each type variable such that
+  all subtyping and assignment constraints are met. In essence, the check
+  module specifies the constraints, and the infer module solves them.
+
+## Note
+
+This API is completely unstable and subject to change.
+
+*/
+
+// tidy-alphabetical-start
+#[allow(internal_features)]
+#[allow(rustc::diagnostic_outside_of_impl)]
+#[allow(rustc::untranslatable_diagnostic)]
+#[doc(html_root_url = "https://doc.rust-lang.org/nightly/nightly-rustc/")]
+#[doc(rust_logo)]
+#[feature(assert_matches)]
+#[feature(debug_closure_helpers)]
+#[feature(gen_blocks)]
+#[feature(if_let_guard)]
+#[feature(iter_intersperse)]
+#[feature(never_type)]
+#[feature(rustdoc_internals)]
+#[feature(slice_partition_dedup)]
+#[feature(try_blocks)]
+#[feature(unwrap_infallible)]
+// tidy-alphabetical-end
+
+// These are used by Clippy.
+
+
+pub use errors::NoVariantNamed;
+use crate::rustc_abi::{CVariadicStatus, ExternAbi};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::lints::DelayedLint;
+use crate::rustc_complete::{self as hir};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use crate::rustc_complete::middle;
+use crate::rustc_complete::mir::interpret::GlobalId;
+use crate::rustc_complete::query::Providers;
+use crate::rustc_complete::ty::{self, Const, Ty, TyCtxt};
+/* AST_META: AST_ID=4 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+use crate::rustc_complete::parse::feature_err;
+use crate::rustc_complete::{ErrorGuaranteed, Span};
+/* AST_META: AST_ID=5 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=4 */
+use crate::rustc_trait_selection::traits;
+
+pub use crate::collect::suggest_impl_trait;
+use crate::hir_ty_lowering::{FeedConstTy, HirTyLowerer};
+/* AST_META: AST_ID=6 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+rustc_fluent_macro::fluent_messages! { "../messages.ftl" }
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=check_c_variadic_abi | COMPLEXITY=20 | LINES=30 */
+
+fn check_c_variadic_abi(tcx: TyCtxt<'_>, decl: &hir::FnDecl<'_>, abi: ExternAbi, span: Span) {
+    if !decl.c_variadic {
+        // Not even a variadic function.
+        return;
+    }
+
+    match abi.supports_c_variadic() {
+        CVariadicStatus::Stable => {}
+        CVariadicStatus::NotSupported => {
+            tcx.dcx()
+                .create_err(errors::VariadicFunctionCompatibleConvention {
+                    span,
+                    convention: &format!("{abi}"),
+                })
+                .emit();
+        }
+        CVariadicStatus::Unstable { feature } => {
+            if !tcx.features().enabled(feature) {
+                feature_err(
+                    &tcx.sess,
+                    feature,
+                    span,
+                    format!("C-variadic functions with the {abi} calling convention are unstable"),
+                )
+                .emit();
+            }
+        }
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=provide | COMPLEXITY=4 | LINES=19 */
+
+/// Adds query implementations to the [Providers] vtable, see [`crate::rustc_middle::query`]
+pub fn provide(providers: &mut Providers) {
+    collect::provide(providers);
+    coherence::provide(providers);
+    check::provide(providers);
+    *providers = Providers {
+        check_unused_traits: check_unused::check_unused_traits,
+        diagnostic_hir_wf_check: hir_wf_check::diagnostic_hir_wf_check,
+        inferred_outlives_crate: outlives::inferred_outlives_crate,
+        inferred_outlives_of: outlives::inferred_outlives_of,
+        inherit_sig_for_delegation_item: delegation::inherit_sig_for_delegation_item,
+        enforce_impl_non_lifetime_params_are_constrained:
+            impl_wf_check::enforce_impl_non_lifetime_params_are_constrained,
+        crate_variances: variance::crate_variances,
+        variances_of: variance::variances_of,
+        ..*providers
+    };
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=emit_delayed_lint | COMPLEXITY=7 | LINES=8 */
+
+fn emit_delayed_lint(lint: &DelayedLint, tcx: TyCtxt<'_>) {
+    match lint {
+        DelayedLint::AttributeParsing(attribute_lint) => {
+            rustc_attr_parsing::emit_attribute_lint(attribute_lint, tcx)
+        }
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=check_crate | COMPLEXITY=68 | LINES=99 */
+
+pub fn check_crate(tcx: TyCtxt<'_>) {
+    let _prof_timer = tcx.sess.timer("type_check_crate");
+
+    tcx.sess.time("coherence_checking", || {
+        // When discarding query call results, use an explicit type to indicate
+        // what we are intending to discard, to help future type-based refactoring.
+        type R = Result<(), ErrorGuaranteed>;
+
+        let _: R = tcx.ensure_ok().check_type_wf(());
+
+        for &trait_def_id in tcx.all_local_trait_impls(()).keys() {
+            let _: R = tcx.ensure_ok().coherent_trait(trait_def_id);
+        }
+        // these queries are executed for side-effects (error reporting):
+        let _: R = tcx.ensure_ok().crate_inherent_impls_validity_check(());
+        let _: R = tcx.ensure_ok().crate_inherent_impls_overlap_check(());
+    });
+
+    tcx.sess.time("emit_ast_lowering_delayed_lints", || {
+        // sanity check in debug mode that all lints are really noticed
+        // and we really will emit them all in the loop right below.
+        //
+        // during ast lowering, when creating items, foreign items, trait items and impl items
+        // we store in them whether they have any lints in their owner node that should be
+        // picked up by `hir_crate_items`. However, theoretically code can run between that
+        // boolean being inserted into the item and the owner node being created.
+        // We don't want any new lints to be emitted there
+        // (though honestly, you have to really try to manage to do that but still),
+        // but this check is there to catch that.
+        #[cfg(debug_assertions)]
+        {
+            // iterate over all owners
+            for owner_id in tcx.hir_crate_items(()).owners() {
+                // if it has delayed lints
+                if let Some(delayed_lints) = tcx.opt_ast_lowering_delayed_lints(owner_id) {
+                    if !delayed_lints.lints.is_empty() {
+                        // assert that delayed_lint_items also picked up this item to have lints
+                        assert!(
+                            tcx.hir_crate_items(()).delayed_lint_items().any(|i| i == owner_id)
+                        );
+                    }
+                }
+            }
+        }
+
+        for owner_id in tcx.hir_crate_items(()).delayed_lint_items() {
+            if let Some(delayed_lints) = tcx.opt_ast_lowering_delayed_lints(owner_id) {
+                for lint in &delayed_lints.lints {
+                    emit_delayed_lint(lint, tcx);
+                }
+            }
+        }
+    });
+
+    tcx.par_hir_body_owners(|item_def_id| {
+        let def_kind = tcx.def_kind(item_def_id);
+        // Make sure we evaluate all static and (non-associated) const items, even if unused.
+        // If any of these fail to evaluate, we do not want this crate to pass compilation.
+        match def_kind {
+            DefKind::Static { .. } => {
+                tcx.ensure_ok().eval_static_initializer(item_def_id);
+                check::maybe_check_static_with_link_section(tcx, item_def_id);
+            }
+            DefKind::Const if !tcx.generics_of(item_def_id).own_requires_monomorphization() => {
+                // FIXME(generic_const_items): Passing empty instead of identity args is fishy but
+                //                             seems to be fine for now. Revisit this!
+                let instance = ty::Instance::new_raw(item_def_id.into(), ty::GenericArgs::empty());
+                let cid = GlobalId { instance, promoted: None };
+                let typing_env = ty::TypingEnv::fully_monomorphized();
+                tcx.ensure_ok().eval_to_const_value_raw(typing_env.as_query_input(cid));
+            }
+            _ => (),
+        }
+        // Skip `AnonConst`s because we feed their `type_of`.
+        // Also skip items for which typeck forwards to parent typeck.
+        if !(matches!(def_kind, DefKind::AnonConst) || def_kind.is_typeck_child()) {
+            tcx.ensure_ok().typeck(item_def_id);
+        }
+        // Ensure we generate the new `DefId` before finishing `check_crate`.
+        // Afterwards we freeze the list of `DefId`s.
+        if tcx.needs_coroutine_by_move_body_def_id(item_def_id.to_def_id()) {
+            tcx.ensure_done().coroutine_by_move_body_def_id(item_def_id);
+        }
+    });
+
+    if tcx.features().rustc_attrs() {
+        tcx.sess.time("dumping_rustc_attr_data", || {
+            outlives::dump::inferred_outlives(tcx);
+            variance::dump::variances(tcx);
+            collect::dump::opaque_hidden_types(tcx);
+            collect::dump::predicates_and_item_bounds(tcx);
+            collect::dump::def_parents(tcx);
+            collect::dump::vtables(tcx);
+        });
+    }
+
+    tcx.ensure_ok().check_unused_traits(());
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=lower_ty | COMPLEXITY=7 | LINES=20 */
+
+/// Lower a [`hir::Ty`] to a [`Ty`].
+///
+/// <div class="warning">
+///
+/// This function is **quasi-deprecated**. It can cause ICEs if called inside of a body
+/// (of a function or constant) and especially if it contains inferred types (`_`).
+///
+/// It's used in rustdoc and Clippy.
+///
+/// </div>
+pub fn lower_ty<'tcx>(tcx: TyCtxt<'tcx>, hir_ty: &hir::Ty<'tcx>) -> Ty<'tcx> {
+    // In case there are any projections, etc., find the "environment"
+    // def-ID that will be used to determine the traits/predicates in
+    // scope. This is derived from the enclosing item-like thing.
+    let env_def_id = tcx.hir_get_parent_item(hir_ty.hir_id);
+    collect::ItemCtxt::new(tcx, env_def_id.def_id)
+        .lowerer()
+        .lower_ty_maybe_return_type_notation(hir_ty)
+}
+/* AST_META: AST_ID=12 | TYPE=FUNCTION | NAME=lower_const_arg_for_rustdoc | COMPLEXITY=6 | LINES=11 */
+
+/// This is for rustdoc.
+// FIXME(const_generics): having special methods for rustdoc in `rustc_hir_analysis` is cursed
+pub fn lower_const_arg_for_rustdoc<'tcx>(
+    tcx: TyCtxt<'tcx>,
+    hir_ct: &hir::ConstArg<'tcx>,
+    feed: FeedConstTy<'_, 'tcx>,
+) -> Const<'tcx> {
+    let env_def_id = tcx.hir_get_parent_item(hir_ct.hir_id);
+    collect::ItemCtxt::new(tcx, env_def_id.def_id).lowerer().lower_const_arg(hir_ct, feed)
+}

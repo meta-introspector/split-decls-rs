@@ -1,14 +1,124 @@
-/* FP:_match.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_select__match_USE_0001
-/* FP:_match.rs-0002 */ use crate :: rustc_infer :: infer :: relate :: { self , Relate , RelateResult , TypeRelation , structurally_relate_tys , } ;
-/* FP:_match.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_select__match_USE_0002
-/* FP:_match.rs-0004 */ use crate :: rustc_complete :: ty :: error :: { ExpectedFound , TypeError } ;
-/* FP:_match.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_select__match_USE_0003
-/* FP:_match.rs-0006 */ use crate :: rustc_complete :: ty :: { self , InferConst , Ty , TyCtxt } ;
-/* FP:_match.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_select__match_USE_0004
-/* FP:_match.rs-0008 */ use tracing :: instrument ;
-/* FP:_match.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_select__match_STRUCT_0005
-/* FP:_match.rs-0010 */ # [doc = " A type \"A\" *matches* \"B\" if the fresh types in B could be"] # [doc = " instantiated with values so as to make it equal to A. Matching is"] # [doc = " intended to be used only on freshened types, and it basically"] # [doc = " indicates if the non-freshened versions of A and B could have been"] # [doc = " unified."] # [doc = ""] # [doc = " It is only an approximation. If it yields false, unification would"] # [doc = " definitely fail, but a true result doesn't mean unification would"] # [doc = " succeed. This is because we don't track the \"side-constraints\" on"] # [doc = " type variables, nor do we track if the same freshened type appears"] # [doc = " more than once. To some extent these approximations could be"] # [doc = " fixed, given effort."] # [doc = ""] # [doc = " Like subtyping, matching is really a binary relation, so the only"] # [doc = " important thing about the result is Ok/Err. Also, matching never"] # [doc = " affects any type variables or unification state."] pub (crate) struct MatchAgainstFreshVars < 'tcx > { tcx : TyCtxt < 'tcx > , }
-/* FP:_match.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_select__match_IMPL_0006
-/* FP:_match.rs-0012 */ impl < 'tcx > MatchAgainstFreshVars < 'tcx > { pub (crate) fn new (tcx : TyCtxt < 'tcx >) -> MatchAgainstFreshVars < 'tcx > { MatchAgainstFreshVars { tcx } } }
-/* FP:_match.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_trait_selection_src_traits_select__match_IMPL_0007
-/* FP:_match.rs-0014 */ impl < 'tcx > TypeRelation < TyCtxt < 'tcx > > for MatchAgainstFreshVars < 'tcx > { fn cx (& self) -> TyCtxt < 'tcx > { self . tcx } fn relate_with_variance < T : Relate < TyCtxt < 'tcx > > > (& mut self , _ : ty :: Variance , _ : ty :: VarianceDiagInfo < TyCtxt < 'tcx > > , a : T , b : T ,) -> RelateResult < 'tcx , T > { self . relate (a , b) } # [instrument (skip (self) , level = "trace")] fn regions (& mut self , a : ty :: Region < 'tcx > , _b : ty :: Region < 'tcx > ,) -> RelateResult < 'tcx , ty :: Region < 'tcx > > { Ok (a) } # [instrument (skip (self) , level = "trace")] fn tys (& mut self , a : Ty < 'tcx > , b : Ty < 'tcx >) -> RelateResult < 'tcx , Ty < 'tcx > > { if a == b { return Ok (a) ; } match (a . kind () , b . kind ()) { (_ , & ty :: Infer (ty :: FreshTy (_)) | & ty :: Infer (ty :: FreshIntTy (_)) | & ty :: Infer (ty :: FreshFloatTy (_)) ,) => Ok (a) , (& ty :: Infer (_) , _) | (_ , & ty :: Infer (_)) => { Err (TypeError :: Sorts (ExpectedFound :: new (a , b))) } (& ty :: Error (guar) , _) | (_ , & ty :: Error (guar)) => Ok (Ty :: new_error (self . cx () , guar)) , _ => structurally_relate_tys (self , a , b) , } } # [instrument (skip (self) , level = "trace")] fn consts (& mut self , a : ty :: Const < 'tcx > , b : ty :: Const < 'tcx > ,) -> RelateResult < 'tcx , ty :: Const < 'tcx > > { if a == b { return Ok (a) ; } match (a . kind () , b . kind ()) { (_ , ty :: ConstKind :: Infer (InferConst :: Fresh (_))) => { return Ok (a) ; } (ty :: ConstKind :: Infer (_) , _) | (_ , ty :: ConstKind :: Infer (_)) => { return Err (TypeError :: ConstMismatch (ExpectedFound :: new (a , b))) ; } _ => { } } relate :: structurally_relate_consts (self , a , b) } fn binders < T > (& mut self , a : ty :: Binder < 'tcx , T > , b : ty :: Binder < 'tcx , T > ,) -> RelateResult < 'tcx , ty :: Binder < 'tcx , T > > where T : Relate < TyCtxt < 'tcx > > , { Ok (a . rebind (self . relate (a . skip_binder () , b . skip_binder ()) ?)) } }
+// SRC: ../rust/compiler/rustc_trait_selection/src/traits/select/_match.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=3 */
+use crate::rustc_infer::infer::relate::{
+    self, Relate, RelateResult, TypeRelation, structurally_relate_tys,
+};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::ty::error::{ExpectedFound, TypeError};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::ty::{self, InferConst, Ty, TyCtxt};
+/* AST_META: AST_ID=4 | TYPE=STRUCT | NAME=UNNAMED | COMPLEXITY=9 | LINES=21 */
+use tracing::instrument;
+
+/// A type "A" *matches* "B" if the fresh types in B could be
+/// instantiated with values so as to make it equal to A. Matching is
+/// intended to be used only on freshened types, and it basically
+/// indicates if the non-freshened versions of A and B could have been
+/// unified.
+///
+/// It is only an approximation. If it yields false, unification would
+/// definitely fail, but a true result doesn't mean unification would
+/// succeed. This is because we don't track the "side-constraints" on
+/// type variables, nor do we track if the same freshened type appears
+/// more than once. To some extent these approximations could be
+/// fixed, given effort.
+///
+/// Like subtyping, matching is really a binary relation, so the only
+/// important thing about the result is Ok/Err. Also, matching never
+/// affects any type variables or unification state.
+pub(crate) struct MatchAgainstFreshVars<'tcx> {
+    tcx: TyCtxt<'tcx>,
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=4 | LINES=6 */
+
+impl<'tcx> MatchAgainstFreshVars<'tcx> {
+    pub(crate) fn new(tcx: TyCtxt<'tcx>) -> MatchAgainstFreshVars<'tcx> {
+        MatchAgainstFreshVars { tcx }
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=cx | COMPLEXITY=32 | LINES=85 */
+
+impl<'tcx> TypeRelation<TyCtxt<'tcx>> for MatchAgainstFreshVars<'tcx> {
+    fn cx(&self) -> TyCtxt<'tcx> {
+        self.tcx
+    }
+
+    fn relate_with_variance<T: Relate<TyCtxt<'tcx>>>(
+        &mut self,
+        _: ty::Variance,
+        _: ty::VarianceDiagInfo<TyCtxt<'tcx>>,
+        a: T,
+        b: T,
+    ) -> RelateResult<'tcx, T> {
+        self.relate(a, b)
+    }
+
+    #[instrument(skip(self), level = "trace")]
+    fn regions(
+        &mut self,
+        a: ty::Region<'tcx>,
+        _b: ty::Region<'tcx>,
+    ) -> RelateResult<'tcx, ty::Region<'tcx>> {
+        Ok(a)
+    }
+
+    #[instrument(skip(self), level = "trace")]
+    fn tys(&mut self, a: Ty<'tcx>, b: Ty<'tcx>) -> RelateResult<'tcx, Ty<'tcx>> {
+        if a == b {
+            return Ok(a);
+        }
+
+        match (a.kind(), b.kind()) {
+            (
+                _,
+                &ty::Infer(ty::FreshTy(_))
+                | &ty::Infer(ty::FreshIntTy(_))
+                | &ty::Infer(ty::FreshFloatTy(_)),
+            ) => Ok(a),
+
+            (&ty::Infer(_), _) | (_, &ty::Infer(_)) => {
+                Err(TypeError::Sorts(ExpectedFound::new(a, b)))
+            }
+
+            (&ty::Error(guar), _) | (_, &ty::Error(guar)) => Ok(Ty::new_error(self.cx(), guar)),
+
+            _ => structurally_relate_tys(self, a, b),
+        }
+    }
+
+    #[instrument(skip(self), level = "trace")]
+    fn consts(
+        &mut self,
+        a: ty::Const<'tcx>,
+        b: ty::Const<'tcx>,
+    ) -> RelateResult<'tcx, ty::Const<'tcx>> {
+        if a == b {
+            return Ok(a);
+        }
+
+        match (a.kind(), b.kind()) {
+            (_, ty::ConstKind::Infer(InferConst::Fresh(_))) => {
+                return Ok(a);
+            }
+
+            (ty::ConstKind::Infer(_), _) | (_, ty::ConstKind::Infer(_)) => {
+                return Err(TypeError::ConstMismatch(ExpectedFound::new(a, b)));
+            }
+
+            _ => {}
+        }
+
+        relate::structurally_relate_consts(self, a, b)
+    }
+
+    fn binders<T>(
+        &mut self,
+        a: ty::Binder<'tcx, T>,
+        b: ty::Binder<'tcx, T>,
+    ) -> RelateResult<'tcx, ty::Binder<'tcx, T>>
+    where
+        T: Relate<TyCtxt<'tcx>>,
+    {
+        Ok(a.rebind(self.relate(a.skip_binder(), b.skip_binder())?))
+    }
+}

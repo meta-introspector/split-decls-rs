@@ -1,14 +1,84 @@
-/* FP:tests.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_dominators_tests_USE_0001
-/* FP:tests.rs-0002 */ use super :: super :: tests :: TestGraph ;
-/* FP:tests.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_dominators_tests_USE_0002
-/* FP:tests.rs-0004 */ use super :: * ;
-/* FP:tests.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_dominators_tests_FN_0003
-/* FP:tests.rs-0006 */ # [test] fn diamond () { let graph = TestGraph :: new (0 , & [(0 , 1) , (0 , 2) , (1 , 3) , (2 , 3)]) ; let d = dominators (& graph) ; assert_eq ! (d . immediate_dominator (0) , None) ; assert_eq ! (d . immediate_dominator (1) , Some (0)) ; assert_eq ! (d . immediate_dominator (2) , Some (0)) ; assert_eq ! (d . immediate_dominator (3) , Some (0)) ; }
-/* FP:tests.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_dominators_tests_FN_0004
-/* FP:tests.rs-0008 */ # [test] fn paper () { let graph = TestGraph :: new (6 , & [(6 , 5) , (6 , 4) , (5 , 1) , (4 , 2) , (4 , 3) , (1 , 2) , (2 , 3) , (3 , 2) , (2 , 1)] ,) ; let d = dominators (& graph) ; assert_eq ! (d . immediate_dominator (0) , None) ; assert_eq ! (d . immediate_dominator (1) , Some (6)) ; assert_eq ! (d . immediate_dominator (2) , Some (6)) ; assert_eq ! (d . immediate_dominator (3) , Some (6)) ; assert_eq ! (d . immediate_dominator (4) , Some (6)) ; assert_eq ! (d . immediate_dominator (5) , Some (6)) ; assert_eq ! (d . immediate_dominator (6) , None) ; }
-/* FP:tests.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_dominators_tests_FN_0005
-/* FP:tests.rs-0010 */ # [test] fn paper_slt () { let graph = TestGraph :: new (1 , & [(1 , 2) , (1 , 3) , (2 , 3) , (2 , 7) , (3 , 4) , (3 , 6) , (4 , 5) , (5 , 4) , (6 , 7) , (7 , 8) , (8 , 5)] ,) ; dominators (& graph) ; }
-/* FP:tests.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_dominators_tests_FN_0006
-/* FP:tests.rs-0012 */ # [test] fn immediate_dominator () { let graph = TestGraph :: new (1 , & [(1 , 2) , (2 , 3)]) ; let d = dominators (& graph) ; assert_eq ! (d . immediate_dominator (0) , None) ; assert_eq ! (d . immediate_dominator (1) , None) ; assert_eq ! (d . immediate_dominator (2) , Some (1)) ; assert_eq ! (d . immediate_dominator (3) , Some (2)) ; }
-/* FP:tests.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_data_structures_src_graph_dominators_tests_FN_0007
-/* FP:tests.rs-0014 */ # [test] fn transitive_dominator () { let graph = TestGraph :: new (0 , & [(0 , 1) , (1 , 2) , (2 , 3) , (3 , 4) , (1 , 5) , (5 , 6) , (0 , 7) , (7 , 2) , (5 , 3) ,] ,) ; let d = dominators (& graph) ; assert_eq ! (d . immediate_dominator (2) , Some (0)) ; assert_eq ! (d . immediate_dominator (3) , Some (0)) ; }
+// SRC: ../rust/compiler/rustc_data_structures/src/graph/dominators/tests.rs
+/* AST_META: AST_ID=1 | TYPE=FUNCTION | NAME=diamond | COMPLEXITY=2 | LINES=13 */
+use super::super::tests::TestGraph;
+use super::*;
+
+#[test]
+fn diamond() {
+    let graph = TestGraph::new(0, &[(0, 1), (0, 2), (1, 3), (2, 3)]);
+
+    let d = dominators(&graph);
+    assert_eq!(d.immediate_dominator(0), None);
+    assert_eq!(d.immediate_dominator(1), Some(0));
+    assert_eq!(d.immediate_dominator(2), Some(0));
+    assert_eq!(d.immediate_dominator(3), Some(0));
+}
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=paper | COMPLEXITY=3 | LINES=18 */
+
+#[test]
+fn paper() {
+    // example from the paper:
+    let graph = TestGraph::new(
+        6,
+        &[(6, 5), (6, 4), (5, 1), (4, 2), (4, 3), (1, 2), (2, 3), (3, 2), (2, 1)],
+    );
+
+    let d = dominators(&graph);
+    assert_eq!(d.immediate_dominator(0), None); // <-- note that 0 is not in graph
+    assert_eq!(d.immediate_dominator(1), Some(6));
+    assert_eq!(d.immediate_dominator(2), Some(6));
+    assert_eq!(d.immediate_dominator(3), Some(6));
+    assert_eq!(d.immediate_dominator(4), Some(6));
+    assert_eq!(d.immediate_dominator(5), Some(6));
+    assert_eq!(d.immediate_dominator(6), None);
+}
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=paper_slt | COMPLEXITY=2 | LINES=11 */
+
+#[test]
+fn paper_slt() {
+    // example from the paper:
+    let graph = TestGraph::new(
+        1,
+        &[(1, 2), (1, 3), (2, 3), (2, 7), (3, 4), (3, 6), (4, 5), (5, 4), (6, 7), (7, 8), (8, 5)],
+    );
+
+    dominators(&graph);
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=immediate_dominator | COMPLEXITY=2 | LINES=10 */
+
+#[test]
+fn immediate_dominator() {
+    let graph = TestGraph::new(1, &[(1, 2), (2, 3)]);
+    let d = dominators(&graph);
+    assert_eq!(d.immediate_dominator(0), None);
+    assert_eq!(d.immediate_dominator(1), None);
+    assert_eq!(d.immediate_dominator(2), Some(1));
+    assert_eq!(d.immediate_dominator(3), Some(2));
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=transitive_dominator | COMPLEXITY=5 | LINES=26 */
+
+#[test]
+fn transitive_dominator() {
+    let graph = TestGraph::new(
+        0,
+        &[
+            // First tree branch.
+            (0, 1),
+            (1, 2),
+            (2, 3),
+            (3, 4),
+            // Second tree branch.
+            (1, 5),
+            (5, 6),
+            // Third tree branch.
+            (0, 7),
+            // These links make 0 the dominator for 2 and 3.
+            (7, 2),
+            (5, 3),
+        ],
+    );
+
+    let d = dominators(&graph);
+    assert_eq!(d.immediate_dominator(2), Some(0));
+    assert_eq!(d.immediate_dominator(3), Some(0)); // This used to return Some(1).
+}

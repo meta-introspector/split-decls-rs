@@ -1,151 +1,724 @@
-/* FP:predicate.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_USE_0001
-/* FP:predicate.rs-0002 */ use std :: cmp :: Ordering ;
-/* FP:predicate.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_USE_0002
-/* FP:predicate.rs-0004 */ use crate :: rustc_data_structures :: intern :: Interned ;
-/* FP:predicate.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_USE_0003
-/* FP:predicate.rs-0006 */ use crate :: rustc_complete :: def_id :: DefId ;
-/* FP:predicate.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_USE_0004
-/* FP:predicate.rs-0008 */ use rustc_macros :: { HashStable , extension } ;
-/* FP:predicate.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_USE_0005
-/* FP:predicate.rs-0010 */ use rustc_type_ir as ir ;
-/* FP:predicate.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_USE_0006
-/* FP:predicate.rs-0012 */ use crate :: ty :: { self , DebruijnIndex , EarlyBinder , Ty , TyCtxt , TypeFlags , Upcast , UpcastFrom , WithCachedTypeInfo , } ;
-/* FP:predicate.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0007
-/* FP:predicate.rs-0014 */ pub type TraitRef < 'tcx > = ir :: TraitRef < TyCtxt < 'tcx > > ;
-/* FP:predicate.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0008
-/* FP:predicate.rs-0016 */ pub type AliasTerm < 'tcx > = ir :: AliasTerm < TyCtxt < 'tcx > > ;
-/* FP:predicate.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0009
-/* FP:predicate.rs-0018 */ pub type ProjectionPredicate < 'tcx > = ir :: ProjectionPredicate < TyCtxt < 'tcx > > ;
-/* FP:predicate.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0010
-/* FP:predicate.rs-0020 */ pub type ExistentialPredicate < 'tcx > = ir :: ExistentialPredicate < TyCtxt < 'tcx > > ;
-/* FP:predicate.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0011
-/* FP:predicate.rs-0022 */ pub type ExistentialTraitRef < 'tcx > = ir :: ExistentialTraitRef < TyCtxt < 'tcx > > ;
-/* FP:predicate.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0012
-/* FP:predicate.rs-0024 */ pub type ExistentialProjection < 'tcx > = ir :: ExistentialProjection < TyCtxt < 'tcx > > ;
-/* FP:predicate.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0013
-/* FP:predicate.rs-0026 */ pub type TraitPredicate < 'tcx > = ir :: TraitPredicate < TyCtxt < 'tcx > > ;
-/* FP:predicate.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0014
-/* FP:predicate.rs-0028 */ pub type HostEffectPredicate < 'tcx > = ir :: HostEffectPredicate < TyCtxt < 'tcx > > ;
-/* FP:predicate.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0015
-/* FP:predicate.rs-0030 */ pub type ClauseKind < 'tcx > = ir :: ClauseKind < TyCtxt < 'tcx > > ;
-/* FP:predicate.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0016
-/* FP:predicate.rs-0032 */ pub type PredicateKind < 'tcx > = ir :: PredicateKind < TyCtxt < 'tcx > > ;
-/* FP:predicate.rs-0033 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0017
-/* FP:predicate.rs-0034 */ pub type NormalizesTo < 'tcx > = ir :: NormalizesTo < TyCtxt < 'tcx > > ;
-/* FP:predicate.rs-0035 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0018
-/* FP:predicate.rs-0036 */ pub type CoercePredicate < 'tcx > = ir :: CoercePredicate < TyCtxt < 'tcx > > ;
-/* FP:predicate.rs-0037 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0019
-/* FP:predicate.rs-0038 */ pub type SubtypePredicate < 'tcx > = ir :: SubtypePredicate < TyCtxt < 'tcx > > ;
-/* FP:predicate.rs-0039 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0020
-/* FP:predicate.rs-0040 */ pub type OutlivesPredicate < 'tcx , T > = ir :: OutlivesPredicate < TyCtxt < 'tcx > , T > ;
-/* FP:predicate.rs-0041 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0021
-/* FP:predicate.rs-0042 */ pub type RegionOutlivesPredicate < 'tcx > = OutlivesPredicate < 'tcx , ty :: Region < 'tcx > > ;
-/* FP:predicate.rs-0043 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0022
-/* FP:predicate.rs-0044 */ pub type TypeOutlivesPredicate < 'tcx > = OutlivesPredicate < 'tcx , Ty < 'tcx > > ;
-/* FP:predicate.rs-0045 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0023
-/* FP:predicate.rs-0046 */ pub type ArgOutlivesPredicate < 'tcx > = OutlivesPredicate < 'tcx , ty :: GenericArg < 'tcx > > ;
-/* FP:predicate.rs-0047 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0024
-/* FP:predicate.rs-0048 */ pub type PolyTraitPredicate < 'tcx > = ty :: Binder < 'tcx , TraitPredicate < 'tcx > > ;
-/* FP:predicate.rs-0049 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0025
-/* FP:predicate.rs-0050 */ pub type PolyRegionOutlivesPredicate < 'tcx > = ty :: Binder < 'tcx , RegionOutlivesPredicate < 'tcx > > ;
-/* FP:predicate.rs-0051 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0026
-/* FP:predicate.rs-0052 */ pub type PolyTypeOutlivesPredicate < 'tcx > = ty :: Binder < 'tcx , TypeOutlivesPredicate < 'tcx > > ;
-/* FP:predicate.rs-0053 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0027
-/* FP:predicate.rs-0054 */ pub type PolySubtypePredicate < 'tcx > = ty :: Binder < 'tcx , SubtypePredicate < 'tcx > > ;
-/* FP:predicate.rs-0055 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0028
-/* FP:predicate.rs-0056 */ pub type PolyCoercePredicate < 'tcx > = ty :: Binder < 'tcx , CoercePredicate < 'tcx > > ;
-/* FP:predicate.rs-0057 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0029
-/* FP:predicate.rs-0058 */ pub type PolyProjectionPredicate < 'tcx > = ty :: Binder < 'tcx , ProjectionPredicate < 'tcx > > ;
-/* FP:predicate.rs-0059 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_STRUCT_0030
-/* FP:predicate.rs-0060 */ # [doc = " A statement that can be proven by a trait solver. This includes things that may"] # [doc = " show up in where clauses, such as trait predicates and projection predicates,"] # [doc = " and also things that are emitted as part of type checking such as `DynCompatible`"] # [doc = " predicate which is emitted when a type is coerced to a trait object."] # [doc = ""] # [doc = " Use this rather than `PredicateKind`, whenever possible."] # [derive (Clone , Copy , PartialEq , Eq , Hash , HashStable)] # [rustc_pass_by_value] pub struct Predicate < 'tcx > (pub (super) Interned < 'tcx , WithCachedTypeInfo < ty :: Binder < 'tcx , PredicateKind < 'tcx > > > > ,) ;
-/* FP:predicate.rs-0061 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0031
-/* FP:predicate.rs-0062 */ impl < 'tcx > rustc_type_ir :: inherent :: Predicate < TyCtxt < 'tcx > > for Predicate < 'tcx > { fn as_clause (self) -> Option < ty :: Clause < 'tcx > > { self . as_clause () } fn allow_normalization (self) -> bool { self . allow_normalization () } }
-/* FP:predicate.rs-0063 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0032
-/* FP:predicate.rs-0064 */ impl < 'tcx > rustc_type_ir :: inherent :: IntoKind for Predicate < 'tcx > { type Kind = ty :: Binder < 'tcx , ty :: PredicateKind < 'tcx > > ; fn kind (self) -> Self :: Kind { self . kind () } }
-/* FP:predicate.rs-0065 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0033
-/* FP:predicate.rs-0066 */ impl < 'tcx > rustc_type_ir :: Flags for Predicate < 'tcx > { fn flags (& self) -> TypeFlags { self . 0 . flags } fn outer_exclusive_binder (& self) -> ty :: DebruijnIndex { self . 0 . outer_exclusive_binder } }
-/* FP:predicate.rs-0067 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0034
-/* FP:predicate.rs-0068 */ impl < 'tcx > Predicate < 'tcx > { # [doc = " Gets the inner `ty::Binder<'tcx, PredicateKind<'tcx>>`."] # [inline] pub fn kind (self) -> ty :: Binder < 'tcx , PredicateKind < 'tcx > > { self . 0 . internee } # [inline (always)] pub fn flags (self) -> TypeFlags { self . 0 . flags } # [inline (always)] pub fn outer_exclusive_binder (self) -> DebruijnIndex { self . 0 . outer_exclusive_binder } # [doc = " Flips the polarity of a Predicate."] # [doc = ""] # [doc = " Given `T: Trait` predicate it returns `T: !Trait` and given `T: !Trait` returns `T: Trait`."] pub fn flip_polarity (self , tcx : TyCtxt < 'tcx >) -> Option < Predicate < 'tcx > > { let kind = self . kind () . map_bound (| kind | match kind { PredicateKind :: Clause (ClauseKind :: Trait (TraitPredicate { trait_ref , polarity , })) => Some (PredicateKind :: Clause (ClauseKind :: Trait (TraitPredicate { trait_ref , polarity : polarity . flip () , }))) , _ => None , }) . transpose () ? ; Some (tcx . mk_predicate (kind)) } # [doc = " Whether this projection can be soundly normalized."] # [doc = ""] # [doc = " Wf predicates must not be normalized, as normalization"] # [doc = " can remove required bounds which would cause us to"] # [doc = " unsoundly accept some programs. See #91068."] # [inline] pub fn allow_normalization (self) -> bool { match self . kind () . skip_binder () { PredicateKind :: Clause (ClauseKind :: WellFormed (_)) | PredicateKind :: AliasRelate (..) => { false } PredicateKind :: Clause (ClauseKind :: Trait (_)) | PredicateKind :: Clause (ClauseKind :: HostEffect (..)) | PredicateKind :: Clause (ClauseKind :: RegionOutlives (_)) | PredicateKind :: Clause (ClauseKind :: TypeOutlives (_)) | PredicateKind :: Clause (ClauseKind :: Projection (_)) | PredicateKind :: Clause (ClauseKind :: ConstArgHasType (..)) | PredicateKind :: Clause (ClauseKind :: UnstableFeature (_)) | PredicateKind :: DynCompatible (_) | PredicateKind :: Subtype (_) | PredicateKind :: Coerce (_) | PredicateKind :: Clause (ClauseKind :: ConstEvaluatable (_)) | PredicateKind :: ConstEquate (_ , _) | PredicateKind :: NormalizesTo (..) | PredicateKind :: Ambiguous => true , } } }
-/* FP:predicate.rs-0069 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0035
-/* FP:predicate.rs-0070 */ impl < 'tcx > crate :: rustc_errors :: IntoDiagArg for Predicate < 'tcx > { fn into_diag_arg (self , path : & mut Option < std :: path :: PathBuf >) -> crate :: rustc_errors :: DiagArgValue { ty :: tls :: with (| tcx | { let pred = tcx . short_string (self , path) ; crate :: rustc_errors :: DiagArgValue :: Str (std :: borrow :: Cow :: Owned (pred)) }) } }
-/* FP:predicate.rs-0071 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0036
-/* FP:predicate.rs-0072 */ impl < 'tcx > crate :: rustc_errors :: IntoDiagArg for Clause < 'tcx > { fn into_diag_arg (self , path : & mut Option < std :: path :: PathBuf >) -> crate :: rustc_errors :: DiagArgValue { ty :: tls :: with (| tcx | { let clause = tcx . short_string (self , path) ; crate :: rustc_errors :: DiagArgValue :: Str (std :: borrow :: Cow :: Owned (clause)) }) } }
-/* FP:predicate.rs-0073 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_STRUCT_0037
-/* FP:predicate.rs-0074 */ # [doc = " A subset of predicates which can be assumed by the trait solver. They show up in"] # [doc = " an item's where clauses, hence the name `Clause`, and may either be user-written"] # [doc = " (such as traits) or may be inserted during lowering."] # [derive (Clone , Copy , PartialEq , Eq , Hash , HashStable)] # [rustc_pass_by_value] pub struct Clause < 'tcx > (pub (super) Interned < 'tcx , WithCachedTypeInfo < ty :: Binder < 'tcx , PredicateKind < 'tcx > > > > ,) ;
-/* FP:predicate.rs-0075 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0038
-/* FP:predicate.rs-0076 */ impl < 'tcx > rustc_type_ir :: inherent :: Clause < TyCtxt < 'tcx > > for Clause < 'tcx > { fn as_predicate (self) -> Predicate < 'tcx > { self . as_predicate () } fn instantiate_supertrait (self , tcx : TyCtxt < 'tcx > , trait_ref : ty :: PolyTraitRef < 'tcx >) -> Self { self . instantiate_supertrait (tcx , trait_ref) } }
-/* FP:predicate.rs-0077 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0039
-/* FP:predicate.rs-0078 */ impl < 'tcx > rustc_type_ir :: inherent :: IntoKind for Clause < 'tcx > { type Kind = ty :: Binder < 'tcx , ClauseKind < 'tcx > > ; fn kind (self) -> Self :: Kind { self . kind () } }
-/* FP:predicate.rs-0079 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0040
-/* FP:predicate.rs-0080 */ impl < 'tcx > Clause < 'tcx > { pub fn as_predicate (self) -> Predicate < 'tcx > { Predicate (self . 0) } pub fn kind (self) -> ty :: Binder < 'tcx , ClauseKind < 'tcx > > { self . 0 . internee . map_bound (| kind | match kind { PredicateKind :: Clause (clause) => clause , _ => unreachable ! () , }) } pub fn as_trait_clause (self) -> Option < ty :: Binder < 'tcx , TraitPredicate < 'tcx > > > { let clause = self . kind () ; if let ty :: ClauseKind :: Trait (trait_clause) = clause . skip_binder () { Some (clause . rebind (trait_clause)) } else { None } } pub fn as_projection_clause (self) -> Option < ty :: Binder < 'tcx , ProjectionPredicate < 'tcx > > > { let clause = self . kind () ; if let ty :: ClauseKind :: Projection (projection_clause) = clause . skip_binder () { Some (clause . rebind (projection_clause)) } else { None } } pub fn as_type_outlives_clause (self) -> Option < ty :: Binder < 'tcx , TypeOutlivesPredicate < 'tcx > > > { let clause = self . kind () ; if let ty :: ClauseKind :: TypeOutlives (o) = clause . skip_binder () { Some (clause . rebind (o)) } else { None } } pub fn as_region_outlives_clause (self ,) -> Option < ty :: Binder < 'tcx , RegionOutlivesPredicate < 'tcx > > > { let clause = self . kind () ; if let ty :: ClauseKind :: RegionOutlives (o) = clause . skip_binder () { Some (clause . rebind (o)) } else { None } } }
-/* FP:predicate.rs-0081 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0041
-/* FP:predicate.rs-0082 */ impl < 'tcx > rustc_type_ir :: inherent :: Clauses < TyCtxt < 'tcx > > for ty :: Clauses < 'tcx > { }
-/* FP:predicate.rs-0083 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0042
-/* FP:predicate.rs-0084 */ # [extension (pub trait ExistentialPredicateStableCmpExt <'tcx >)] impl < 'tcx > ExistentialPredicate < 'tcx > { # [doc = " Compares via an ordering that will not change if modules are reordered or other changes are"] # [doc = " made to the tree. In particular, this ordering is preserved across incremental compilations."] fn stable_cmp (& self , tcx : TyCtxt < 'tcx > , other : & Self) -> Ordering { match (* self , * other) { (ExistentialPredicate :: Trait (_) , ExistentialPredicate :: Trait (_)) => Ordering :: Equal , (ExistentialPredicate :: Projection (ref a) , ExistentialPredicate :: Projection (ref b)) => { tcx . def_path_hash (a . def_id) . cmp (& tcx . def_path_hash (b . def_id)) } (ExistentialPredicate :: AutoTrait (ref a) , ExistentialPredicate :: AutoTrait (ref b)) => { tcx . def_path_hash (* a) . cmp (& tcx . def_path_hash (* b)) } (ExistentialPredicate :: Trait (_) , _) => Ordering :: Less , (ExistentialPredicate :: Projection (_) , ExistentialPredicate :: Trait (_)) => { Ordering :: Greater } (ExistentialPredicate :: Projection (_) , _) => Ordering :: Less , (ExistentialPredicate :: AutoTrait (_) , _) => Ordering :: Greater , } } }
-/* FP:predicate.rs-0085 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0043
-/* FP:predicate.rs-0086 */ pub type PolyExistentialPredicate < 'tcx > = ty :: Binder < 'tcx , ExistentialPredicate < 'tcx > > ;
-/* FP:predicate.rs-0087 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0044
-/* FP:predicate.rs-0088 */ impl < 'tcx > rustc_type_ir :: inherent :: BoundExistentialPredicates < TyCtxt < 'tcx > > for & 'tcx ty :: List < ty :: PolyExistentialPredicate < 'tcx > > { fn principal_def_id (self) -> Option < DefId > { self . principal_def_id () } fn principal (self) -> Option < ty :: PolyExistentialTraitRef < 'tcx > > { self . principal () } fn auto_traits (self) -> impl IntoIterator < Item = DefId > { self . auto_traits () } fn projection_bounds (self ,) -> impl IntoIterator < Item = ty :: Binder < 'tcx , ExistentialProjection < 'tcx > > > { self . projection_bounds () } }
-/* FP:predicate.rs-0089 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0045
-/* FP:predicate.rs-0090 */ impl < 'tcx > ty :: List < ty :: PolyExistentialPredicate < 'tcx > > { # [doc = " Returns the \"principal `DefId`\" of this set of existential predicates."] # [doc = ""] # [doc = " A Rust trait object type consists (in addition to a lifetime bound)"] # [doc = " of a set of trait bounds, which are separated into any number"] # [doc = " of auto-trait bounds, and at most one non-auto-trait bound. The"] # [doc = " non-auto-trait bound is called the \"principal\" of the trait"] # [doc = " object."] # [doc = ""] # [doc = " Only the principal can have methods or type parameters (because"] # [doc = " auto traits can have neither of them). This is important, because"] # [doc = " it means the auto traits can be treated as an unordered set (methods"] # [doc = " would force an order for the vtable, while relating traits with"] # [doc = " type parameters without knowing the order to relate them in is"] # [doc = " a rather non-trivial task)."] # [doc = ""] # [doc = " For example, in the trait object `dyn std::fmt::Debug + Sync`, the"] # [doc = " principal bound is `Some(std::fmt::Debug)`, while the auto-trait bounds"] # [doc = " are the set `{Sync}`."] # [doc = ""] # [doc = " It is also possible to have a \"trivial\" trait object that"] # [doc = " consists only of auto traits, with no principal - for example,"] # [doc = " `dyn Send + Sync`. In that case, the set of auto-trait bounds"] # [doc = " is `{Send, Sync}`, while there is no principal. These trait objects"] # [doc = " have a \"trivial\" vtable consisting of just the size, alignment,"] # [doc = " and destructor."] pub fn principal (& self) -> Option < ty :: Binder < 'tcx , ExistentialTraitRef < 'tcx > > > { self [0] . map_bound (| this | match this { ExistentialPredicate :: Trait (tr) => Some (tr) , _ => None , }) . transpose () } pub fn principal_def_id (& self) -> Option < DefId > { self . principal () . map (| trait_ref | trait_ref . skip_binder () . def_id) } # [inline] pub fn projection_bounds (& self ,) -> impl Iterator < Item = ty :: Binder < 'tcx , ExistentialProjection < 'tcx > > > { self . iter () . filter_map (| predicate | { predicate . map_bound (| pred | match pred { ExistentialPredicate :: Projection (projection) => Some (projection) , _ => None , }) . transpose () }) } # [inline] pub fn auto_traits (& self) -> impl Iterator < Item = DefId > { self . iter () . filter_map (| predicate | match predicate . skip_binder () { ExistentialPredicate :: AutoTrait (did) => Some (did) , _ => None , }) } pub fn without_auto_traits (& self) -> impl Iterator < Item = ty :: PolyExistentialPredicate < 'tcx > > { self . iter () . filter (| predicate | { ! matches ! (predicate . as_ref () . skip_binder () , ExistentialPredicate :: AutoTrait (_)) }) } }
-/* FP:predicate.rs-0091 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0046
-/* FP:predicate.rs-0092 */ pub type PolyTraitRef < 'tcx > = ty :: Binder < 'tcx , TraitRef < 'tcx > > ;
-/* FP:predicate.rs-0093 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0047
-/* FP:predicate.rs-0094 */ pub type PolyExistentialTraitRef < 'tcx > = ty :: Binder < 'tcx , ExistentialTraitRef < 'tcx > > ;
-/* FP:predicate.rs-0095 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_TYPE_0048
-/* FP:predicate.rs-0096 */ pub type PolyExistentialProjection < 'tcx > = ty :: Binder < 'tcx , ExistentialProjection < 'tcx > > ;
-/* FP:predicate.rs-0097 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0049
-/* FP:predicate.rs-0098 */ impl < 'tcx > Clause < 'tcx > { # [doc = " Performs a instantiation suitable for going from a"] # [doc = " poly-trait-ref to supertraits that must hold if that"] # [doc = " poly-trait-ref holds. This is slightly different from a normal"] # [doc = " instantiation in terms of what happens with bound regions. See"] # [doc = " lengthy comment below for details."] pub fn instantiate_supertrait (self , tcx : TyCtxt < 'tcx > , trait_ref : ty :: PolyTraitRef < 'tcx > ,) -> Clause < 'tcx > { let bound_pred = self . kind () ; let pred_bound_vars = bound_pred . bound_vars () ; let trait_bound_vars = trait_ref . bound_vars () ; let shifted_pred = tcx . shift_bound_var_indices (trait_bound_vars . len () , bound_pred . skip_binder ()) ; let new = EarlyBinder :: bind (shifted_pred) . instantiate (tcx , trait_ref . skip_binder () . args) ; let bound_vars = tcx . mk_bound_variable_kinds_from_iter (trait_bound_vars . iter () . chain (pred_bound_vars)) ; tcx . reuse_or_mk_predicate (self . as_predicate () , ty :: Binder :: bind_with_vars (PredicateKind :: Clause (new) , bound_vars) ,) . expect_clause () } }
-/* FP:predicate.rs-0099 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0050
-/* FP:predicate.rs-0100 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , PredicateKind < 'tcx > > for Predicate < 'tcx > { fn upcast_from (from : PredicateKind < 'tcx > , tcx : TyCtxt < 'tcx >) -> Self { ty :: Binder :: dummy (from) . upcast (tcx) } }
-/* FP:predicate.rs-0101 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0051
-/* FP:predicate.rs-0102 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , ty :: Binder < 'tcx , PredicateKind < 'tcx > > > for Predicate < 'tcx > { fn upcast_from (from : ty :: Binder < 'tcx , PredicateKind < 'tcx > > , tcx : TyCtxt < 'tcx >) -> Self { tcx . mk_predicate (from) } }
-/* FP:predicate.rs-0103 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0052
-/* FP:predicate.rs-0104 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , ClauseKind < 'tcx > > for Predicate < 'tcx > { fn upcast_from (from : ClauseKind < 'tcx > , tcx : TyCtxt < 'tcx >) -> Self { tcx . mk_predicate (ty :: Binder :: dummy (PredicateKind :: Clause (from))) } }
-/* FP:predicate.rs-0105 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0053
-/* FP:predicate.rs-0106 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , ty :: Binder < 'tcx , ClauseKind < 'tcx > > > for Predicate < 'tcx > { fn upcast_from (from : ty :: Binder < 'tcx , ClauseKind < 'tcx > > , tcx : TyCtxt < 'tcx >) -> Self { tcx . mk_predicate (from . map_bound (PredicateKind :: Clause)) } }
-/* FP:predicate.rs-0107 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0054
-/* FP:predicate.rs-0108 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , Clause < 'tcx > > for Predicate < 'tcx > { fn upcast_from (from : Clause < 'tcx > , _tcx : TyCtxt < 'tcx >) -> Self { from . as_predicate () } }
-/* FP:predicate.rs-0109 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0055
-/* FP:predicate.rs-0110 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , ClauseKind < 'tcx > > for Clause < 'tcx > { fn upcast_from (from : ClauseKind < 'tcx > , tcx : TyCtxt < 'tcx >) -> Self { tcx . mk_predicate (ty :: Binder :: dummy (PredicateKind :: Clause (from))) . expect_clause () } }
-/* FP:predicate.rs-0111 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0056
-/* FP:predicate.rs-0112 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , ty :: Binder < 'tcx , ClauseKind < 'tcx > > > for Clause < 'tcx > { fn upcast_from (from : ty :: Binder < 'tcx , ClauseKind < 'tcx > > , tcx : TyCtxt < 'tcx >) -> Self { tcx . mk_predicate (from . map_bound (| clause | PredicateKind :: Clause (clause))) . expect_clause () } }
-/* FP:predicate.rs-0113 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0057
-/* FP:predicate.rs-0114 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , TraitRef < 'tcx > > for Predicate < 'tcx > { fn upcast_from (from : TraitRef < 'tcx > , tcx : TyCtxt < 'tcx >) -> Self { ty :: Binder :: dummy (from) . upcast (tcx) } }
-/* FP:predicate.rs-0115 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0058
-/* FP:predicate.rs-0116 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , TraitRef < 'tcx > > for Clause < 'tcx > { fn upcast_from (from : TraitRef < 'tcx > , tcx : TyCtxt < 'tcx >) -> Self { let p : Predicate < 'tcx > = from . upcast (tcx) ; p . expect_clause () } }
-/* FP:predicate.rs-0117 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0059
-/* FP:predicate.rs-0118 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , ty :: Binder < 'tcx , TraitRef < 'tcx > > > for Predicate < 'tcx > { fn upcast_from (from : ty :: Binder < 'tcx , TraitRef < 'tcx > > , tcx : TyCtxt < 'tcx >) -> Self { let pred : PolyTraitPredicate < 'tcx > = from . upcast (tcx) ; pred . upcast (tcx) } }
-/* FP:predicate.rs-0119 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0060
-/* FP:predicate.rs-0120 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , ty :: Binder < 'tcx , TraitRef < 'tcx > > > for Clause < 'tcx > { fn upcast_from (from : ty :: Binder < 'tcx , TraitRef < 'tcx > > , tcx : TyCtxt < 'tcx >) -> Self { let pred : PolyTraitPredicate < 'tcx > = from . upcast (tcx) ; pred . upcast (tcx) } }
-/* FP:predicate.rs-0121 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0061
-/* FP:predicate.rs-0122 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , TraitPredicate < 'tcx > > for Predicate < 'tcx > { fn upcast_from (from : TraitPredicate < 'tcx > , tcx : TyCtxt < 'tcx >) -> Self { PredicateKind :: Clause (ClauseKind :: Trait (from)) . upcast (tcx) } }
-/* FP:predicate.rs-0123 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0062
-/* FP:predicate.rs-0124 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , PolyTraitPredicate < 'tcx > > for Predicate < 'tcx > { fn upcast_from (from : PolyTraitPredicate < 'tcx > , tcx : TyCtxt < 'tcx >) -> Self { from . map_bound (| p | PredicateKind :: Clause (ClauseKind :: Trait (p))) . upcast (tcx) } }
-/* FP:predicate.rs-0125 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0063
-/* FP:predicate.rs-0126 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , TraitPredicate < 'tcx > > for Clause < 'tcx > { fn upcast_from (from : TraitPredicate < 'tcx > , tcx : TyCtxt < 'tcx >) -> Self { let p : Predicate < 'tcx > = from . upcast (tcx) ; p . expect_clause () } }
-/* FP:predicate.rs-0127 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0064
-/* FP:predicate.rs-0128 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , PolyTraitPredicate < 'tcx > > for Clause < 'tcx > { fn upcast_from (from : PolyTraitPredicate < 'tcx > , tcx : TyCtxt < 'tcx >) -> Self { let p : Predicate < 'tcx > = from . upcast (tcx) ; p . expect_clause () } }
-/* FP:predicate.rs-0129 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0065
-/* FP:predicate.rs-0130 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , RegionOutlivesPredicate < 'tcx > > for Predicate < 'tcx > { fn upcast_from (from : RegionOutlivesPredicate < 'tcx > , tcx : TyCtxt < 'tcx >) -> Self { ty :: Binder :: dummy (PredicateKind :: Clause (ClauseKind :: RegionOutlives (from))) . upcast (tcx) } }
-/* FP:predicate.rs-0131 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0066
-/* FP:predicate.rs-0132 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , PolyRegionOutlivesPredicate < 'tcx > > for Predicate < 'tcx > { fn upcast_from (from : PolyRegionOutlivesPredicate < 'tcx > , tcx : TyCtxt < 'tcx >) -> Self { from . map_bound (| p | PredicateKind :: Clause (ClauseKind :: RegionOutlives (p))) . upcast (tcx) } }
-/* FP:predicate.rs-0133 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0067
-/* FP:predicate.rs-0134 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , TypeOutlivesPredicate < 'tcx > > for Predicate < 'tcx > { fn upcast_from (from : TypeOutlivesPredicate < 'tcx > , tcx : TyCtxt < 'tcx >) -> Self { ty :: Binder :: dummy (PredicateKind :: Clause (ClauseKind :: TypeOutlives (from))) . upcast (tcx) } }
-/* FP:predicate.rs-0135 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0068
-/* FP:predicate.rs-0136 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , ProjectionPredicate < 'tcx > > for Predicate < 'tcx > { fn upcast_from (from : ProjectionPredicate < 'tcx > , tcx : TyCtxt < 'tcx >) -> Self { ty :: Binder :: dummy (PredicateKind :: Clause (ClauseKind :: Projection (from))) . upcast (tcx) } }
-/* FP:predicate.rs-0137 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0069
-/* FP:predicate.rs-0138 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , PolyProjectionPredicate < 'tcx > > for Predicate < 'tcx > { fn upcast_from (from : PolyProjectionPredicate < 'tcx > , tcx : TyCtxt < 'tcx >) -> Self { from . map_bound (| p | PredicateKind :: Clause (ClauseKind :: Projection (p))) . upcast (tcx) } }
-/* FP:predicate.rs-0139 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0070
-/* FP:predicate.rs-0140 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , ProjectionPredicate < 'tcx > > for Clause < 'tcx > { fn upcast_from (from : ProjectionPredicate < 'tcx > , tcx : TyCtxt < 'tcx >) -> Self { let p : Predicate < 'tcx > = from . upcast (tcx) ; p . expect_clause () } }
-/* FP:predicate.rs-0141 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0071
-/* FP:predicate.rs-0142 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , PolyProjectionPredicate < 'tcx > > for Clause < 'tcx > { fn upcast_from (from : PolyProjectionPredicate < 'tcx > , tcx : TyCtxt < 'tcx >) -> Self { let p : Predicate < 'tcx > = from . upcast (tcx) ; p . expect_clause () } }
-/* FP:predicate.rs-0143 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0072
-/* FP:predicate.rs-0144 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , ty :: Binder < 'tcx , ty :: HostEffectPredicate < 'tcx > > > for Predicate < 'tcx > { fn upcast_from (from : ty :: Binder < 'tcx , ty :: HostEffectPredicate < 'tcx > > , tcx : TyCtxt < 'tcx > ,) -> Self { from . map_bound (ty :: ClauseKind :: HostEffect) . upcast (tcx) } }
-/* FP:predicate.rs-0145 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0073
-/* FP:predicate.rs-0146 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , ty :: Binder < 'tcx , ty :: HostEffectPredicate < 'tcx > > > for Clause < 'tcx > { fn upcast_from (from : ty :: Binder < 'tcx , ty :: HostEffectPredicate < 'tcx > > , tcx : TyCtxt < 'tcx > ,) -> Self { from . map_bound (ty :: ClauseKind :: HostEffect) . upcast (tcx) } }
-/* FP:predicate.rs-0147 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0074
-/* FP:predicate.rs-0148 */ impl < 'tcx > UpcastFrom < TyCtxt < 'tcx > , NormalizesTo < 'tcx > > for Predicate < 'tcx > { fn upcast_from (from : NormalizesTo < 'tcx > , tcx : TyCtxt < 'tcx >) -> Self { PredicateKind :: NormalizesTo (from) . upcast (tcx) } }
-/* FP:predicate.rs-0149 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_IMPL_0075
-/* FP:predicate.rs-0150 */ impl < 'tcx > Predicate < 'tcx > { pub fn as_trait_clause (self) -> Option < PolyTraitPredicate < 'tcx > > { let predicate = self . kind () ; match predicate . skip_binder () { PredicateKind :: Clause (ClauseKind :: Trait (t)) => Some (predicate . rebind (t)) , _ => None , } } pub fn as_projection_clause (self) -> Option < PolyProjectionPredicate < 'tcx > > { let predicate = self . kind () ; match predicate . skip_binder () { PredicateKind :: Clause (ClauseKind :: Projection (t)) => Some (predicate . rebind (t)) , _ => None , } } # [doc = " Matches a `PredicateKind::Clause` and turns it into a `Clause`, otherwise returns `None`."] pub fn as_clause (self) -> Option < Clause < 'tcx > > { match self . kind () . skip_binder () { PredicateKind :: Clause (..) => Some (self . expect_clause ()) , _ => None , } } # [doc = " Assert that the predicate is a clause."] pub fn expect_clause (self) -> Clause < 'tcx > { match self . kind () . skip_binder () { PredicateKind :: Clause (..) => Clause (self . 0) , _ => bug ! ("{self} is not a clause") , } } }
-/* FP:predicate.rs-0151 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_predicate_MOD_0076
+// SRC: ../rust/compiler/rustc_middle/src/ty/predicate.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use std::cmp::Ordering;
+
+use crate::rustc_data_structures::intern::Interned;
+use crate::rustc_complete::def_id::DefId;
+use rustc_macros::{HashStable, extension};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use rustc_type_ir as ir;
+
+use crate::ty::{
+    self, DebruijnIndex, EarlyBinder, Ty, TyCtxt, TypeFlags, Upcast, UpcastFrom, WithCachedTypeInfo,
+};
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=Predicate | COMPLEXITY=11 | LINES=46 */
+
+pub type TraitRef<'tcx> = ir::TraitRef<TyCtxt<'tcx>>;
+pub type AliasTerm<'tcx> = ir::AliasTerm<TyCtxt<'tcx>>;
+pub type ProjectionPredicate<'tcx> = ir::ProjectionPredicate<TyCtxt<'tcx>>;
+pub type ExistentialPredicate<'tcx> = ir::ExistentialPredicate<TyCtxt<'tcx>>;
+pub type ExistentialTraitRef<'tcx> = ir::ExistentialTraitRef<TyCtxt<'tcx>>;
+pub type ExistentialProjection<'tcx> = ir::ExistentialProjection<TyCtxt<'tcx>>;
+pub type TraitPredicate<'tcx> = ir::TraitPredicate<TyCtxt<'tcx>>;
+pub type HostEffectPredicate<'tcx> = ir::HostEffectPredicate<TyCtxt<'tcx>>;
+pub type ClauseKind<'tcx> = ir::ClauseKind<TyCtxt<'tcx>>;
+pub type PredicateKind<'tcx> = ir::PredicateKind<TyCtxt<'tcx>>;
+pub type NormalizesTo<'tcx> = ir::NormalizesTo<TyCtxt<'tcx>>;
+pub type CoercePredicate<'tcx> = ir::CoercePredicate<TyCtxt<'tcx>>;
+pub type SubtypePredicate<'tcx> = ir::SubtypePredicate<TyCtxt<'tcx>>;
+pub type OutlivesPredicate<'tcx, T> = ir::OutlivesPredicate<TyCtxt<'tcx>, T>;
+pub type RegionOutlivesPredicate<'tcx> = OutlivesPredicate<'tcx, ty::Region<'tcx>>;
+pub type TypeOutlivesPredicate<'tcx> = OutlivesPredicate<'tcx, Ty<'tcx>>;
+pub type ArgOutlivesPredicate<'tcx> = OutlivesPredicate<'tcx, ty::GenericArg<'tcx>>;
+pub type PolyTraitPredicate<'tcx> = ty::Binder<'tcx, TraitPredicate<'tcx>>;
+pub type PolyRegionOutlivesPredicate<'tcx> = ty::Binder<'tcx, RegionOutlivesPredicate<'tcx>>;
+pub type PolyTypeOutlivesPredicate<'tcx> = ty::Binder<'tcx, TypeOutlivesPredicate<'tcx>>;
+pub type PolySubtypePredicate<'tcx> = ty::Binder<'tcx, SubtypePredicate<'tcx>>;
+pub type PolyCoercePredicate<'tcx> = ty::Binder<'tcx, CoercePredicate<'tcx>>;
+pub type PolyProjectionPredicate<'tcx> = ty::Binder<'tcx, ProjectionPredicate<'tcx>>;
+
+/// A statement that can be proven by a trait solver. This includes things that may
+/// show up in where clauses, such as trait predicates and projection predicates,
+/// and also things that are emitted as part of type checking such as `DynCompatible`
+/// predicate which is emitted when a type is coerced to a trait object.
+///
+/// Use this rather than `PredicateKind`, whenever possible.
+#[derive(Clone, Copy, PartialEq, Eq, Hash, HashStable)]
+#[rustc_pass_by_value]
+pub struct Predicate<'tcx>(
+    pub(super) Interned<'tcx, WithCachedTypeInfo<ty::Binder<'tcx, PredicateKind<'tcx>>>>,
+);
+
+impl<'tcx> rustc_type_ir::inherent::Predicate<TyCtxt<'tcx>> for Predicate<'tcx> {
+    fn as_clause(self) -> Option<ty::Clause<'tcx>> {
+        self.as_clause()
+    }
+
+    fn allow_normalization(self) -> bool {
+        self.allow_normalization()
+    }
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=5 | LINES=8 */
+
+impl<'tcx> rustc_type_ir::inherent::IntoKind for Predicate<'tcx> {
+    type Kind = ty::Binder<'tcx, ty::PredicateKind<'tcx>>;
+
+    fn kind(self) -> Self::Kind {
+        self.kind()
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=flags | COMPLEXITY=6 | LINES=10 */
+
+impl<'tcx> rustc_type_ir::Flags for Predicate<'tcx> {
+    fn flags(&self) -> TypeFlags {
+        self.0.flags
+    }
+
+    fn outer_exclusive_binder(&self) -> ty::DebruijnIndex {
+        self.0.outer_exclusive_binder
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=23 | LINES=70 */
+
+impl<'tcx> Predicate<'tcx> {
+    /// Gets the inner `ty::Binder<'tcx, PredicateKind<'tcx>>`.
+    #[inline]
+    pub fn kind(self) -> ty::Binder<'tcx, PredicateKind<'tcx>> {
+        self.0.internee
+    }
+
+    // FIXME(compiler-errors): Think about removing this.
+    #[inline(always)]
+    pub fn flags(self) -> TypeFlags {
+        self.0.flags
+    }
+
+    // FIXME(compiler-errors): Think about removing this.
+    #[inline(always)]
+    pub fn outer_exclusive_binder(self) -> DebruijnIndex {
+        self.0.outer_exclusive_binder
+    }
+
+    /// Flips the polarity of a Predicate.
+    ///
+    /// Given `T: Trait` predicate it returns `T: !Trait` and given `T: !Trait` returns `T: Trait`.
+    pub fn flip_polarity(self, tcx: TyCtxt<'tcx>) -> Option<Predicate<'tcx>> {
+        let kind = self
+            .kind()
+            .map_bound(|kind| match kind {
+                PredicateKind::Clause(ClauseKind::Trait(TraitPredicate {
+                    trait_ref,
+                    polarity,
+                })) => Some(PredicateKind::Clause(ClauseKind::Trait(TraitPredicate {
+                    trait_ref,
+                    polarity: polarity.flip(),
+                }))),
+
+                _ => None,
+            })
+            .transpose()?;
+
+        Some(tcx.mk_predicate(kind))
+    }
+
+    /// Whether this projection can be soundly normalized.
+    ///
+    /// Wf predicates must not be normalized, as normalization
+    /// can remove required bounds which would cause us to
+    /// unsoundly accept some programs. See #91068.
+    #[inline]
+    pub fn allow_normalization(self) -> bool {
+        match self.kind().skip_binder() {
+            PredicateKind::Clause(ClauseKind::WellFormed(_)) | PredicateKind::AliasRelate(..) => {
+                false
+            }
+            PredicateKind::Clause(ClauseKind::Trait(_))
+            | PredicateKind::Clause(ClauseKind::HostEffect(..))
+            | PredicateKind::Clause(ClauseKind::RegionOutlives(_))
+            | PredicateKind::Clause(ClauseKind::TypeOutlives(_))
+            | PredicateKind::Clause(ClauseKind::Projection(_))
+            | PredicateKind::Clause(ClauseKind::ConstArgHasType(..))
+            | PredicateKind::Clause(ClauseKind::UnstableFeature(_))
+            | PredicateKind::DynCompatible(_)
+            | PredicateKind::Subtype(_)
+            | PredicateKind::Coerce(_)
+            | PredicateKind::Clause(ClauseKind::ConstEvaluatable(_))
+            | PredicateKind::ConstEquate(_, _)
+            | PredicateKind::NormalizesTo(..)
+            | PredicateKind::Ambiguous => true,
+        }
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=6 | LINES=9 */
+
+impl<'tcx> crate::rustc_errors::IntoDiagArg for Predicate<'tcx> {
+    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
+        ty::tls::with(|tcx| {
+            let pred = tcx.short_string(self, path);
+            crate::rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(pred))
+        })
+    }
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=into_diag_arg | COMPLEXITY=6 | LINES=9 */
+
+impl<'tcx> crate::rustc_errors::IntoDiagArg for Clause<'tcx> {
+    fn into_diag_arg(self, path: &mut Option<std::path::PathBuf>) -> crate::rustc_errors::DiagArgValue {
+        ty::tls::with(|tcx| {
+            let clause = tcx.short_string(self, path);
+            crate::rustc_errors::DiagArgValue::Str(std::borrow::Cow::Owned(clause))
+        })
+    }
+}
+/* AST_META: AST_ID=9 | TYPE=FUNCTION | NAME=Clause | COMPLEXITY=7 | LINES=19 */
+
+/// A subset of predicates which can be assumed by the trait solver. They show up in
+/// an item's where clauses, hence the name `Clause`, and may either be user-written
+/// (such as traits) or may be inserted during lowering.
+#[derive(Clone, Copy, PartialEq, Eq, Hash, HashStable)]
+#[rustc_pass_by_value]
+pub struct Clause<'tcx>(
+    pub(super) Interned<'tcx, WithCachedTypeInfo<ty::Binder<'tcx, PredicateKind<'tcx>>>>,
+);
+
+impl<'tcx> rustc_type_ir::inherent::Clause<TyCtxt<'tcx>> for Clause<'tcx> {
+    fn as_predicate(self) -> Predicate<'tcx> {
+        self.as_predicate()
+    }
+
+    fn instantiate_supertrait(self, tcx: TyCtxt<'tcx>, trait_ref: ty::PolyTraitRef<'tcx>) -> Self {
+        self.instantiate_supertrait(tcx, trait_ref)
+    }
+}
+/* AST_META: AST_ID=10 | TYPE=FUNCTION | NAME=kind | COMPLEXITY=5 | LINES=8 */
+
+impl<'tcx> rustc_type_ir::inherent::IntoKind for Clause<'tcx> {
+    type Kind = ty::Binder<'tcx, ClauseKind<'tcx>>;
+
+    fn kind(self) -> Self::Kind {
+        self.kind()
+    }
+}
+/* AST_META: AST_ID=11 | TYPE=FUNCTION | NAME=as_predicate | COMPLEXITY=31 | LINES=51 */
+
+impl<'tcx> Clause<'tcx> {
+    pub fn as_predicate(self) -> Predicate<'tcx> {
+        Predicate(self.0)
+    }
+
+    pub fn kind(self) -> ty::Binder<'tcx, ClauseKind<'tcx>> {
+        self.0.internee.map_bound(|kind| match kind {
+            PredicateKind::Clause(clause) => clause,
+            _ => unreachable!(),
+        })
+    }
+
+    pub fn as_trait_clause(self) -> Option<ty::Binder<'tcx, TraitPredicate<'tcx>>> {
+        let clause = self.kind();
+        if let ty::ClauseKind::Trait(trait_clause) = clause.skip_binder() {
+            Some(clause.rebind(trait_clause))
+        } else {
+            None
+        }
+    }
+
+    pub fn as_projection_clause(self) -> Option<ty::Binder<'tcx, ProjectionPredicate<'tcx>>> {
+        let clause = self.kind();
+        if let ty::ClauseKind::Projection(projection_clause) = clause.skip_binder() {
+            Some(clause.rebind(projection_clause))
+        } else {
+            None
+        }
+    }
+
+    pub fn as_type_outlives_clause(self) -> Option<ty::Binder<'tcx, TypeOutlivesPredicate<'tcx>>> {
+        let clause = self.kind();
+        if let ty::ClauseKind::TypeOutlives(o) = clause.skip_binder() {
+            Some(clause.rebind(o))
+        } else {
+            None
+        }
+    }
+
+    pub fn as_region_outlives_clause(
+        self,
+    ) -> Option<ty::Binder<'tcx, RegionOutlivesPredicate<'tcx>>> {
+        let clause = self.kind();
+        if let ty::ClauseKind::RegionOutlives(o) = clause.skip_binder() {
+            Some(clause.rebind(o))
+        } else {
+            None
+        }
+    }
+}
+/* AST_META: AST_ID=12 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=4 | LINES=2 */
+
+impl<'tcx> rustc_type_ir::inherent::Clauses<TyCtxt<'tcx>> for ty::Clauses<'tcx> {}
+/* AST_META: AST_ID=13 | TYPE=FUNCTION | NAME=stable_cmp | COMPLEXITY=14 | LINES=23 */
+
+#[extension(pub trait ExistentialPredicateStableCmpExt<'tcx>)]
+impl<'tcx> ExistentialPredicate<'tcx> {
+    /// Compares via an ordering that will not change if modules are reordered or other changes are
+    /// made to the tree. In particular, this ordering is preserved across incremental compilations.
+    fn stable_cmp(&self, tcx: TyCtxt<'tcx>, other: &Self) -> Ordering {
+        match (*self, *other) {
+            (ExistentialPredicate::Trait(_), ExistentialPredicate::Trait(_)) => Ordering::Equal,
+            (ExistentialPredicate::Projection(ref a), ExistentialPredicate::Projection(ref b)) => {
+                tcx.def_path_hash(a.def_id).cmp(&tcx.def_path_hash(b.def_id))
+            }
+            (ExistentialPredicate::AutoTrait(ref a), ExistentialPredicate::AutoTrait(ref b)) => {
+                tcx.def_path_hash(*a).cmp(&tcx.def_path_hash(*b))
+            }
+            (ExistentialPredicate::Trait(_), _) => Ordering::Less,
+            (ExistentialPredicate::Projection(_), ExistentialPredicate::Trait(_)) => {
+                Ordering::Greater
+            }
+            (ExistentialPredicate::Projection(_), _) => Ordering::Less,
+            (ExistentialPredicate::AutoTrait(_), _) => Ordering::Greater,
+        }
+    }
+}
+/* AST_META: AST_ID=14 | TYPE=FUNCTION | NAME=principal_def_id | COMPLEXITY=9 | LINES=24 */
+
+pub type PolyExistentialPredicate<'tcx> = ty::Binder<'tcx, ExistentialPredicate<'tcx>>;
+
+impl<'tcx> rustc_type_ir::inherent::BoundExistentialPredicates<TyCtxt<'tcx>>
+    for &'tcx ty::List<ty::PolyExistentialPredicate<'tcx>>
+{
+    fn principal_def_id(self) -> Option<DefId> {
+        self.principal_def_id()
+    }
+
+    fn principal(self) -> Option<ty::PolyExistentialTraitRef<'tcx>> {
+        self.principal()
+    }
+
+    fn auto_traits(self) -> impl IntoIterator<Item = DefId> {
+        self.auto_traits()
+    }
+
+    fn projection_bounds(
+        self,
+    ) -> impl IntoIterator<Item = ty::Binder<'tcx, ExistentialProjection<'tcx>>> {
+        self.projection_bounds()
+    }
+}
+/* AST_META: AST_ID=15 | TYPE=FUNCTION | NAME=principal | COMPLEXITY=38 | LINES=68 */
+
+impl<'tcx> ty::List<ty::PolyExistentialPredicate<'tcx>> {
+    /// Returns the "principal `DefId`" of this set of existential predicates.
+    ///
+    /// A Rust trait object type consists (in addition to a lifetime bound)
+    /// of a set of trait bounds, which are separated into any number
+    /// of auto-trait bounds, and at most one non-auto-trait bound. The
+    /// non-auto-trait bound is called the "principal" of the trait
+    /// object.
+    ///
+    /// Only the principal can have methods or type parameters (because
+    /// auto traits can have neither of them). This is important, because
+    /// it means the auto traits can be treated as an unordered set (methods
+    /// would force an order for the vtable, while relating traits with
+    /// type parameters without knowing the order to relate them in is
+    /// a rather non-trivial task).
+    ///
+    /// For example, in the trait object `dyn std::fmt::Debug + Sync`, the
+    /// principal bound is `Some(std::fmt::Debug)`, while the auto-trait bounds
+    /// are the set `{Sync}`.
+    ///
+    /// It is also possible to have a "trivial" trait object that
+    /// consists only of auto traits, with no principal - for example,
+    /// `dyn Send + Sync`. In that case, the set of auto-trait bounds
+    /// is `{Send, Sync}`, while there is no principal. These trait objects
+    /// have a "trivial" vtable consisting of just the size, alignment,
+    /// and destructor.
+    pub fn principal(&self) -> Option<ty::Binder<'tcx, ExistentialTraitRef<'tcx>>> {
+        self[0]
+            .map_bound(|this| match this {
+                ExistentialPredicate::Trait(tr) => Some(tr),
+                _ => None,
+            })
+            .transpose()
+    }
+
+    pub fn principal_def_id(&self) -> Option<DefId> {
+        self.principal().map(|trait_ref| trait_ref.skip_binder().def_id)
+    }
+
+    #[inline]
+    pub fn projection_bounds(
+        &self,
+    ) -> impl Iterator<Item = ty::Binder<'tcx, ExistentialProjection<'tcx>>> {
+        self.iter().filter_map(|predicate| {
+            predicate
+                .map_bound(|pred| match pred {
+                    ExistentialPredicate::Projection(projection) => Some(projection),
+                    _ => None,
+                })
+                .transpose()
+        })
+    }
+
+    #[inline]
+    pub fn auto_traits(&self) -> impl Iterator<Item = DefId> {
+        self.iter().filter_map(|predicate| match predicate.skip_binder() {
+            ExistentialPredicate::AutoTrait(did) => Some(did),
+            _ => None,
+        })
+    }
+
+    pub fn without_auto_traits(&self) -> impl Iterator<Item = ty::PolyExistentialPredicate<'tcx>> {
+        self.iter().filter(|predicate| {
+            !matches!(predicate.as_ref().skip_binder(), ExistentialPredicate::AutoTrait(_))
+        })
+    }
+}
+/* AST_META: AST_ID=16 | TYPE=FUNCTION | NAME=instantiate_supertrait | COMPLEXITY=40 | LINES=110 */
+
+pub type PolyTraitRef<'tcx> = ty::Binder<'tcx, TraitRef<'tcx>>;
+pub type PolyExistentialTraitRef<'tcx> = ty::Binder<'tcx, ExistentialTraitRef<'tcx>>;
+pub type PolyExistentialProjection<'tcx> = ty::Binder<'tcx, ExistentialProjection<'tcx>>;
+
+impl<'tcx> Clause<'tcx> {
+    /// Performs a instantiation suitable for going from a
+    /// poly-trait-ref to supertraits that must hold if that
+    /// poly-trait-ref holds. This is slightly different from a normal
+    /// instantiation in terms of what happens with bound regions. See
+    /// lengthy comment below for details.
+    pub fn instantiate_supertrait(
+        self,
+        tcx: TyCtxt<'tcx>,
+        trait_ref: ty::PolyTraitRef<'tcx>,
+    ) -> Clause<'tcx> {
+        // The interaction between HRTB and supertraits is not entirely
+        // obvious. Let me walk you (and myself) through an example.
+        //
+        // Let's start with an easy case. Consider two traits:
+        //
+        //     trait Foo<'a>: Bar<'a,'a> { }
+        //     trait Bar<'b,'c> { }
+        //
+        // Now, if we have a trait reference `for<'x> T: Foo<'x>`, then
+        // we can deduce that `for<'x> T: Bar<'x,'x>`. Basically, if we
+        // knew that `Foo<'x>` (for any 'x) then we also know that
+        // `Bar<'x,'x>` (for any 'x). This more-or-less falls out from
+        // normal instantiation.
+        //
+        // In terms of why this is sound, the idea is that whenever there
+        // is an impl of `T:Foo<'a>`, it must show that `T:Bar<'a,'a>`
+        // holds. So if there is an impl of `T:Foo<'a>` that applies to
+        // all `'a`, then we must know that `T:Bar<'a,'a>` holds for all
+        // `'a`.
+        //
+        // Another example to be careful of is this:
+        //
+        //     trait Foo1<'a>: for<'b> Bar1<'a,'b> { }
+        //     trait Bar1<'b,'c> { }
+        //
+        // Here, if we have `for<'x> T: Foo1<'x>`, then what do we know?
+        // The answer is that we know `for<'x,'b> T: Bar1<'x,'b>`. The
+        // reason is similar to the previous example: any impl of
+        // `T:Foo1<'x>` must show that `for<'b> T: Bar1<'x, 'b>`. So
+        // basically we would want to collapse the bound lifetimes from
+        // the input (`trait_ref`) and the supertraits.
+        //
+        // To achieve this in practice is fairly straightforward. Let's
+        // consider the more complicated scenario:
+        //
+        // - We start out with `for<'x> T: Foo1<'x>`. In this case, `'x`
+        //   has a De Bruijn index of 1. We want to produce `for<'x,'b> T: Bar1<'x,'b>`,
+        //   where both `'x` and `'b` would have a DB index of 1.
+        //   The instantiation from the input trait-ref is therefore going to be
+        //   `'a => 'x` (where `'x` has a DB index of 1).
+        // - The supertrait-ref is `for<'b> Bar1<'a,'b>`, where `'a` is an
+        //   early-bound parameter and `'b` is a late-bound parameter with a
+        //   DB index of 1.
+        // - If we replace `'a` with `'x` from the input, it too will have
+        //   a DB index of 1, and thus we'll have `for<'x,'b> Bar1<'x,'b>`
+        //   just as we wanted.
+        //
+        // There is only one catch. If we just apply the instantiation `'a
+        // => 'x` to `for<'b> Bar1<'a,'b>`, the instantiation code will
+        // adjust the DB index because we instantiating into a binder (it
+        // tries to be so smart...) resulting in `for<'x> for<'b>
+        // Bar1<'x,'b>` (we have no syntax for this, so use your
+        // imagination). Basically the 'x will have DB index of 2 and 'b
+        // will have DB index of 1. Not quite what we want. So we apply
+        // the instantiation to the *contents* of the trait reference,
+        // rather than the trait reference itself (put another way, the
+        // instantiation code expects equal binding levels in the values
+        // from the instantiation and the value being instantiated into, and
+        // this trick achieves that).
+
+        // Working through the second example:
+        // trait_ref: for<'x> T: Foo1<'^0.0>; args: [T, '^0.0]
+        // predicate: for<'b> Self: Bar1<'a, '^0.0>; args: [Self, 'a, '^0.0]
+        // We want to end up with:
+        //     for<'x, 'b> T: Bar1<'^0.0, '^0.1>
+        // To do this:
+        // 1) We must shift all bound vars in predicate by the length
+        //    of trait ref's bound vars. So, we would end up with predicate like
+        //    Self: Bar1<'a, '^0.1>
+        // 2) We can then apply the trait args to this, ending up with
+        //    T: Bar1<'^0.0, '^0.1>
+        // 3) Finally, to create the final bound vars, we concatenate the bound
+        //    vars of the trait ref with those of the predicate:
+        //    ['x, 'b]
+        let bound_pred = self.kind();
+        let pred_bound_vars = bound_pred.bound_vars();
+        let trait_bound_vars = trait_ref.bound_vars();
+        // 1) Self: Bar1<'a, '^0.0> -> Self: Bar1<'a, '^0.1>
+        let shifted_pred =
+            tcx.shift_bound_var_indices(trait_bound_vars.len(), bound_pred.skip_binder());
+        // 2) Self: Bar1<'a, '^0.1> -> T: Bar1<'^0.0, '^0.1>
+        let new = EarlyBinder::bind(shifted_pred).instantiate(tcx, trait_ref.skip_binder().args);
+        // 3) ['x] + ['b] -> ['x, 'b]
+        let bound_vars =
+            tcx.mk_bound_variable_kinds_from_iter(trait_bound_vars.iter().chain(pred_bound_vars));
+
+        // FIXME: Is it really perf sensitive to use reuse_or_mk_predicate here?
+        tcx.reuse_or_mk_predicate(
+            self.as_predicate(),
+            ty::Binder::bind_with_vars(PredicateKind::Clause(new), bound_vars),
+        )
+        .expect_clause()
+    }
+}
+/* AST_META: AST_ID=17 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, PredicateKind<'tcx>> for Predicate<'tcx> {
+    fn upcast_from(from: PredicateKind<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
+        ty::Binder::dummy(from).upcast(tcx)
+    }
+}
+/* AST_META: AST_ID=18 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, PredicateKind<'tcx>>> for Predicate<'tcx> {
+    fn upcast_from(from: ty::Binder<'tcx, PredicateKind<'tcx>>, tcx: TyCtxt<'tcx>) -> Self {
+        tcx.mk_predicate(from)
+    }
+}
+/* AST_META: AST_ID=19 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ClauseKind<'tcx>> for Predicate<'tcx> {
+    fn upcast_from(from: ClauseKind<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
+        tcx.mk_predicate(ty::Binder::dummy(PredicateKind::Clause(from)))
+    }
+}
+/* AST_META: AST_ID=20 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, ClauseKind<'tcx>>> for Predicate<'tcx> {
+    fn upcast_from(from: ty::Binder<'tcx, ClauseKind<'tcx>>, tcx: TyCtxt<'tcx>) -> Self {
+        tcx.mk_predicate(from.map_bound(PredicateKind::Clause))
+    }
+}
+/* AST_META: AST_ID=21 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, Clause<'tcx>> for Predicate<'tcx> {
+    fn upcast_from(from: Clause<'tcx>, _tcx: TyCtxt<'tcx>) -> Self {
+        from.as_predicate()
+    }
+}
+/* AST_META: AST_ID=22 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ClauseKind<'tcx>> for Clause<'tcx> {
+    fn upcast_from(from: ClauseKind<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
+        tcx.mk_predicate(ty::Binder::dummy(PredicateKind::Clause(from))).expect_clause()
+    }
+}
+/* AST_META: AST_ID=23 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, ClauseKind<'tcx>>> for Clause<'tcx> {
+    fn upcast_from(from: ty::Binder<'tcx, ClauseKind<'tcx>>, tcx: TyCtxt<'tcx>) -> Self {
+        tcx.mk_predicate(from.map_bound(|clause| PredicateKind::Clause(clause))).expect_clause()
+    }
+}
+/* AST_META: AST_ID=24 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, TraitRef<'tcx>> for Predicate<'tcx> {
+    fn upcast_from(from: TraitRef<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
+        ty::Binder::dummy(from).upcast(tcx)
+    }
+}
+/* AST_META: AST_ID=25 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=7 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, TraitRef<'tcx>> for Clause<'tcx> {
+    fn upcast_from(from: TraitRef<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
+        let p: Predicate<'tcx> = from.upcast(tcx);
+        p.expect_clause()
+    }
+}
+/* AST_META: AST_ID=26 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=7 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, TraitRef<'tcx>>> for Predicate<'tcx> {
+    fn upcast_from(from: ty::Binder<'tcx, TraitRef<'tcx>>, tcx: TyCtxt<'tcx>) -> Self {
+        let pred: PolyTraitPredicate<'tcx> = from.upcast(tcx);
+        pred.upcast(tcx)
+    }
+}
+/* AST_META: AST_ID=27 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=7 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, TraitRef<'tcx>>> for Clause<'tcx> {
+    fn upcast_from(from: ty::Binder<'tcx, TraitRef<'tcx>>, tcx: TyCtxt<'tcx>) -> Self {
+        let pred: PolyTraitPredicate<'tcx> = from.upcast(tcx);
+        pred.upcast(tcx)
+    }
+}
+/* AST_META: AST_ID=28 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, TraitPredicate<'tcx>> for Predicate<'tcx> {
+    fn upcast_from(from: TraitPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
+        PredicateKind::Clause(ClauseKind::Trait(from)).upcast(tcx)
+    }
+}
+/* AST_META: AST_ID=29 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, PolyTraitPredicate<'tcx>> for Predicate<'tcx> {
+    fn upcast_from(from: PolyTraitPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
+        from.map_bound(|p| PredicateKind::Clause(ClauseKind::Trait(p))).upcast(tcx)
+    }
+}
+/* AST_META: AST_ID=30 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=7 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, TraitPredicate<'tcx>> for Clause<'tcx> {
+    fn upcast_from(from: TraitPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
+        let p: Predicate<'tcx> = from.upcast(tcx);
+        p.expect_clause()
+    }
+}
+/* AST_META: AST_ID=31 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=7 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, PolyTraitPredicate<'tcx>> for Clause<'tcx> {
+    fn upcast_from(from: PolyTraitPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
+        let p: Predicate<'tcx> = from.upcast(tcx);
+        p.expect_clause()
+    }
+}
+/* AST_META: AST_ID=32 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, RegionOutlivesPredicate<'tcx>> for Predicate<'tcx> {
+    fn upcast_from(from: RegionOutlivesPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
+        ty::Binder::dummy(PredicateKind::Clause(ClauseKind::RegionOutlives(from))).upcast(tcx)
+    }
+}
+/* AST_META: AST_ID=33 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, PolyRegionOutlivesPredicate<'tcx>> for Predicate<'tcx> {
+    fn upcast_from(from: PolyRegionOutlivesPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
+        from.map_bound(|p| PredicateKind::Clause(ClauseKind::RegionOutlives(p))).upcast(tcx)
+    }
+}
+/* AST_META: AST_ID=34 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, TypeOutlivesPredicate<'tcx>> for Predicate<'tcx> {
+    fn upcast_from(from: TypeOutlivesPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
+        ty::Binder::dummy(PredicateKind::Clause(ClauseKind::TypeOutlives(from))).upcast(tcx)
+    }
+}
+/* AST_META: AST_ID=35 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ProjectionPredicate<'tcx>> for Predicate<'tcx> {
+    fn upcast_from(from: ProjectionPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
+        ty::Binder::dummy(PredicateKind::Clause(ClauseKind::Projection(from))).upcast(tcx)
+    }
+}
+/* AST_META: AST_ID=36 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, PolyProjectionPredicate<'tcx>> for Predicate<'tcx> {
+    fn upcast_from(from: PolyProjectionPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
+        from.map_bound(|p| PredicateKind::Clause(ClauseKind::Projection(p))).upcast(tcx)
+    }
+}
+/* AST_META: AST_ID=37 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=7 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ProjectionPredicate<'tcx>> for Clause<'tcx> {
+    fn upcast_from(from: ProjectionPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
+        let p: Predicate<'tcx> = from.upcast(tcx);
+        p.expect_clause()
+    }
+}
+/* AST_META: AST_ID=38 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=7 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, PolyProjectionPredicate<'tcx>> for Clause<'tcx> {
+    fn upcast_from(from: PolyProjectionPredicate<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
+        let p: Predicate<'tcx> = from.upcast(tcx);
+        p.expect_clause()
+    }
+}
+/* AST_META: AST_ID=39 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=11 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, ty::HostEffectPredicate<'tcx>>>
+    for Predicate<'tcx>
+{
+    fn upcast_from(
+        from: ty::Binder<'tcx, ty::HostEffectPredicate<'tcx>>,
+        tcx: TyCtxt<'tcx>,
+    ) -> Self {
+        from.map_bound(ty::ClauseKind::HostEffect).upcast(tcx)
+    }
+}
+/* AST_META: AST_ID=40 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=11 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, ty::Binder<'tcx, ty::HostEffectPredicate<'tcx>>>
+    for Clause<'tcx>
+{
+    fn upcast_from(
+        from: ty::Binder<'tcx, ty::HostEffectPredicate<'tcx>>,
+        tcx: TyCtxt<'tcx>,
+    ) -> Self {
+        from.map_bound(ty::ClauseKind::HostEffect).upcast(tcx)
+    }
+}
+/* AST_META: AST_ID=41 | TYPE=FUNCTION | NAME=upcast_from | COMPLEXITY=5 | LINES=6 */
+
+impl<'tcx> UpcastFrom<TyCtxt<'tcx>, NormalizesTo<'tcx>> for Predicate<'tcx> {
+    fn upcast_from(from: NormalizesTo<'tcx>, tcx: TyCtxt<'tcx>) -> Self {
+        PredicateKind::NormalizesTo(from).upcast(tcx)
+    }
+}
+/* AST_META: AST_ID=42 | TYPE=FUNCTION | NAME=as_trait_clause | COMPLEXITY=25 | LINES=34 */
+
+impl<'tcx> Predicate<'tcx> {
+    pub fn as_trait_clause(self) -> Option<PolyTraitPredicate<'tcx>> {
+        let predicate = self.kind();
+        match predicate.skip_binder() {
+            PredicateKind::Clause(ClauseKind::Trait(t)) => Some(predicate.rebind(t)),
+            _ => None,
+        }
+    }
+
+    pub fn as_projection_clause(self) -> Option<PolyProjectionPredicate<'tcx>> {
+        let predicate = self.kind();
+        match predicate.skip_binder() {
+            PredicateKind::Clause(ClauseKind::Projection(t)) => Some(predicate.rebind(t)),
+            _ => None,
+        }
+    }
+
+    /// Matches a `PredicateKind::Clause` and turns it into a `Clause`, otherwise returns `None`.
+    pub fn as_clause(self) -> Option<Clause<'tcx>> {
+        match self.kind().skip_binder() {
+            PredicateKind::Clause(..) => Some(self.expect_clause()),
+            _ => None,
+        }
+    }
+
+    /// Assert that the predicate is a clause.
+    pub fn expect_clause(self) -> Clause<'tcx> {
+        match self.kind().skip_binder() {
+            PredicateKind::Clause(..) => Clause(self.0),
+            _ => bug!("{self} is not a clause"),
+        }
+    }
+}
+/* AST_META: AST_ID=43 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=12 */
+
+// Some types are used a lot. Make sure they don't unintentionally get bigger.
+#[cfg(target_pointer_width = "64")]
+mod size_asserts {
+    use crate::rustc_data_structures::static_assert_size;
+
+    use super::*;
+    // tidy-alphabetical-start
+    static_assert_size!(PredicateKind<'_>, 32);
+    static_assert_size!(WithCachedTypeInfo<PredicateKind<'_>>, 56);
+    // tidy-alphabetical-end
+}

@@ -1,16 +1,78 @@
-/* FP:abstract_const.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_abstract_const_USE_0001
-/* FP:abstract_const.rs-0002 */ use crate :: rustc_complete :: ErrorGuaranteed ;
-/* FP:abstract_const.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_abstract_const_USE_0002
-/* FP:abstract_const.rs-0004 */ use rustc_macros :: { HashStable , TyDecodable , TyEncodable , TypeVisitable } ;
-/* FP:abstract_const.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_abstract_const_USE_0003
-/* FP:abstract_const.rs-0006 */ use crate :: ty :: { self , Const , EarlyBinder , Ty , TyCtxt , TypeFoldable , TypeFolder , TypeSuperFoldable , TypeVisitableExt , } ;
-/* FP:abstract_const.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_abstract_const_ENUM_0004
-/* FP:abstract_const.rs-0008 */ # [derive (Hash , Debug , Clone , Copy , Ord , PartialOrd , PartialEq , Eq)] # [derive (TyDecodable , TyEncodable , HashStable , TypeVisitable , TypeFoldable)] pub enum CastKind { # [doc = " thir::ExprKind::As"] As , # [doc = " thir::ExprKind::Use"] Use , }
-/* FP:abstract_const.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_abstract_const_ENUM_0005
-/* FP:abstract_const.rs-0010 */ # [derive (Debug , Copy , Clone , PartialEq , Eq , HashStable , TyEncodable , TyDecodable)] pub enum NotConstEvaluatable { Error (ErrorGuaranteed) , MentionsInfer , MentionsParam , }
-/* FP:abstract_const.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_abstract_const_IMPL_0006
-/* FP:abstract_const.rs-0012 */ impl From < ErrorGuaranteed > for NotConstEvaluatable { fn from (e : ErrorGuaranteed) -> NotConstEvaluatable { NotConstEvaluatable :: Error (e) } }
-/* FP:abstract_const.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_abstract_const_TYPE_0007
-/* FP:abstract_const.rs-0014 */ pub type BoundAbstractConst < 'tcx > = Result < Option < EarlyBinder < 'tcx , ty :: Const < 'tcx > > > , ErrorGuaranteed > ;
-/* FP:abstract_const.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_middle_src_ty_abstract_const_IMPL_0008
-/* FP:abstract_const.rs-0016 */ impl < 'tcx > TyCtxt < 'tcx > { pub fn expand_abstract_consts < T : TypeFoldable < TyCtxt < 'tcx > > > (self , ac : T) -> T { struct Expander < 'tcx > { tcx : TyCtxt < 'tcx > , } impl < 'tcx > TypeFolder < TyCtxt < 'tcx > > for Expander < 'tcx > { fn cx (& self) -> TyCtxt < 'tcx > { self . tcx } fn fold_ty (& mut self , ty : Ty < 'tcx >) -> Ty < 'tcx > { if ty . has_type_flags (ty :: TypeFlags :: HAS_CT_PROJECTION) { ty . super_fold_with (self) } else { ty } } fn fold_const (& mut self , c : Const < 'tcx >) -> Const < 'tcx > { let ct = match c . kind () { ty :: ConstKind :: Unevaluated (uv) => match self . tcx . thir_abstract_const (uv . def) { Err (e) => ty :: Const :: new_error (self . tcx , e) , Ok (Some (bac)) => { let args = self . tcx . erase_and_anonymize_regions (uv . args) ; let bac = bac . instantiate (self . tcx , args) ; return bac . fold_with (self) ; } Ok (None) => c , } , _ => c , } ; ct . super_fold_with (self) } } ac . fold_with (& mut Expander { tcx : self }) } }
+// SRC: ../rust/compiler/rustc_middle/src/ty/abstract_const.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=4 | LINES=4 */
+// A subset of a mir body used for const evaluability checking.
+
+use crate::rustc_complete::ErrorGuaranteed;
+use rustc_macros::{HashStable, TyDecodable, TyEncodable, TypeVisitable};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+
+use crate::ty::{
+    self, Const, EarlyBinder, Ty, TyCtxt, TypeFoldable, TypeFolder, TypeSuperFoldable,
+    TypeVisitableExt,
+};
+/* AST_META: AST_ID=3 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=9 */
+
+#[derive(Hash, Debug, Clone, Copy, Ord, PartialOrd, PartialEq, Eq)]
+#[derive(TyDecodable, TyEncodable, HashStable, TypeVisitable, TypeFoldable)]
+pub enum CastKind {
+    /// thir::ExprKind::As
+    As,
+    /// thir::ExprKind::Use
+    Use,
+}
+/* AST_META: AST_ID=4 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq, HashStable, TyEncodable, TyDecodable)]
+pub enum NotConstEvaluatable {
+    Error(ErrorGuaranteed),
+    MentionsInfer,
+    MentionsParam,
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=from | COMPLEXITY=5 | LINES=6 */
+
+impl From<ErrorGuaranteed> for NotConstEvaluatable {
+    fn from(e: ErrorGuaranteed) -> NotConstEvaluatable {
+        NotConstEvaluatable::Error(e)
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=expand_abstract_consts | COMPLEXITY=26 | LINES=40 */
+
+pub type BoundAbstractConst<'tcx> =
+    Result<Option<EarlyBinder<'tcx, ty::Const<'tcx>>>, ErrorGuaranteed>;
+
+impl<'tcx> TyCtxt<'tcx> {
+    pub fn expand_abstract_consts<T: TypeFoldable<TyCtxt<'tcx>>>(self, ac: T) -> T {
+        struct Expander<'tcx> {
+            tcx: TyCtxt<'tcx>,
+        }
+
+        impl<'tcx> TypeFolder<TyCtxt<'tcx>> for Expander<'tcx> {
+            fn cx(&self) -> TyCtxt<'tcx> {
+                self.tcx
+            }
+            fn fold_ty(&mut self, ty: Ty<'tcx>) -> Ty<'tcx> {
+                if ty.has_type_flags(ty::TypeFlags::HAS_CT_PROJECTION) {
+                    ty.super_fold_with(self)
+                } else {
+                    ty
+                }
+            }
+            fn fold_const(&mut self, c: Const<'tcx>) -> Const<'tcx> {
+                let ct = match c.kind() {
+                    ty::ConstKind::Unevaluated(uv) => match self.tcx.thir_abstract_const(uv.def) {
+                        Err(e) => ty::Const::new_error(self.tcx, e),
+                        Ok(Some(bac)) => {
+                            let args = self.tcx.erase_and_anonymize_regions(uv.args);
+                            let bac = bac.instantiate(self.tcx, args);
+                            return bac.fold_with(self);
+                        }
+                        Ok(None) => c,
+                    },
+                    _ => c,
+                };
+                ct.super_fold_with(self)
+            }
+        }
+        ac.fold_with(&mut Expander { tcx: self })
+    }
+}

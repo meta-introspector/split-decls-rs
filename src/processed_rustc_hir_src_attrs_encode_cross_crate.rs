@@ -1,6 +1,107 @@
-/* FP:encode_cross_crate.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_attrs_encode_cross_crate_USE_0001
-/* FP:encode_cross_crate.rs-0002 */ use crate :: attrs :: AttributeKind ;
-/* FP:encode_cross_crate.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_attrs_encode_cross_crate_ENUM_0002
-/* FP:encode_cross_crate.rs-0004 */ # [derive (PartialEq)] pub enum EncodeCrossCrate { Yes , No , }
-/* FP:encode_cross_crate.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_hir_src_attrs_encode_cross_crate_IMPL_0003
-/* FP:encode_cross_crate.rs-0006 */ impl AttributeKind { # [doc = " Whether this attribute should be encoded in metadata files."] # [doc = ""] # [doc = " If this is \"Yes\", then another crate can do `tcx.get_all_attrs(did)` for a did in this crate, and get the attribute."] # [doc = " When this is No, the attribute is filtered out while encoding and other crate won't be able to observe it."] # [doc = " This can be unexpectedly good for performance, so unless necessary for cross-crate compilation, prefer No."] pub fn encode_cross_crate (& self) -> EncodeCrossCrate { use AttributeKind :: * ; use EncodeCrossCrate :: * ; match self { Align { .. } => No , AllowConstFnUnstable (..) => No , AllowIncoherentImpl (..) => No , AllowInternalUnsafe (..) => Yes , AllowInternalUnstable (..) => Yes , AsPtr (..) => Yes , AutomaticallyDerived (..) => Yes , BodyStability { .. } => No , CoherenceIsCore => No , Coinductive (..) => No , Cold (..) => No , Confusables { .. } => Yes , ConstContinue (..) => No , ConstStability { .. } => Yes , ConstStabilityIndirect => No , ConstTrait (..) => No , Coroutine (..) => No , Coverage (..) => No , CrateName { .. } => No , CustomMir (_ , _ , _) => Yes , DenyExplicitImpl (..) => No , Deprecation { .. } => Yes , DoNotImplementViaObject (..) => No , DocComment { .. } => Yes , Dummy => No , ExportName { .. } => Yes , ExportStable => No , FfiConst (..) => No , FfiPure (..) => No , Fundamental { .. } => Yes , Ignore { .. } => No , Inline (..) => No , Link (..) => No , LinkName { .. } => Yes , LinkOrdinal { .. } => No , LinkSection { .. } => Yes , Linkage (..) => No , LoopMatch (..) => No , MacroEscape (..) => No , MacroTransparency (..) => Yes , MacroUse { .. } => No , Marker (..) => No , MayDangle (..) => No , MoveSizeLimit { .. } => No , MustUse { .. } => Yes , Naked (..) => No , NoCore (..) => No , NoImplicitPrelude (..) => No , NoMangle (..) => Yes , NoStd (..) => No , NonExhaustive (..) => Yes , Optimize (..) => No , ParenSugar (..) => No , PassByValue (..) => Yes , Path (..) => No , PatternComplexityLimit { .. } => No , Pointee (..) => No , ProcMacro (..) => No , ProcMacroAttribute (..) => No , ProcMacroDerive { .. } => No , PubTransparent (..) => Yes , RecursionLimit { .. } => No , Repr { .. } => No , RustcBuiltinMacro { .. } => Yes , RustcLayoutScalarValidRangeEnd (..) => Yes , RustcLayoutScalarValidRangeStart (..) => Yes , RustcObjectLifetimeDefault => No , Sanitize { .. } => No , ShouldPanic { .. } => No , SkipDuringMethodDispatch { .. } => No , SpecializationTrait (..) => No , Stability { .. } => Yes , StdInternalSymbol (..) => No , TargetFeature { .. } => No , TrackCaller (..) => Yes , TypeConst (..) => Yes , TypeLengthLimit { .. } => No , UnsafeSpecializationMarker (..) => No , UnstableFeatureBound (..) => No , Used { .. } => No , } } }
+// SRC: ../rust/compiler/rustc_hir/src/attrs/encode_cross_crate.rs
+/* AST_META: AST_ID=1 | TYPE=ENUM | NAME=UNNAMED | COMPLEXITY=2 | LINES=7 */
+use crate::attrs::AttributeKind;
+
+#[derive(PartialEq)]
+pub enum EncodeCrossCrate {
+    Yes,
+    No,
+}
+/* AST_META: AST_ID=2 | TYPE=FUNCTION | NAME=encode_cross_crate | COMPLEXITY=58 | LINES=97 */
+
+impl AttributeKind {
+    /// Whether this attribute should be encoded in metadata files.
+    ///
+    /// If this is "Yes", then another crate can do `tcx.get_all_attrs(did)` for a did in this crate, and get the attribute.
+    /// When this is No, the attribute is filtered out while encoding and other crate won't be able to observe it.
+    /// This can be unexpectedly good for performance, so unless necessary for cross-crate compilation, prefer No.
+    pub fn encode_cross_crate(&self) -> EncodeCrossCrate {
+        use AttributeKind::*;
+        use EncodeCrossCrate::*;
+
+        match self {
+            // tidy-alphabetical-start
+            Align { .. } => No,
+            AllowConstFnUnstable(..) => No,
+            AllowIncoherentImpl(..) => No,
+            AllowInternalUnsafe(..) => Yes,
+            AllowInternalUnstable(..) => Yes,
+            AsPtr(..) => Yes,
+            AutomaticallyDerived(..) => Yes,
+            BodyStability { .. } => No,
+            CoherenceIsCore => No,
+            Coinductive(..) => No,
+            Cold(..) => No,
+            Confusables { .. } => Yes,
+            ConstContinue(..) => No,
+            ConstStability { .. } => Yes,
+            ConstStabilityIndirect => No,
+            ConstTrait(..) => No,
+            Coroutine(..) => No,
+            Coverage(..) => No,
+            CrateName { .. } => No,
+            CustomMir(_, _, _) => Yes,
+            DenyExplicitImpl(..) => No,
+            Deprecation { .. } => Yes,
+            DoNotImplementViaObject(..) => No,
+            DocComment { .. } => Yes,
+            Dummy => No,
+            ExportName { .. } => Yes,
+            ExportStable => No,
+            FfiConst(..) => No,
+            FfiPure(..) => No,
+            Fundamental { .. } => Yes,
+            Ignore { .. } => No,
+            Inline(..) => No,
+            Link(..) => No,
+            LinkName { .. } => Yes, // Needed for rustdoc
+            LinkOrdinal { .. } => No,
+            LinkSection { .. } => Yes, // Needed for rustdoc
+            Linkage(..) => No,
+            LoopMatch(..) => No,
+            MacroEscape(..) => No,
+            MacroTransparency(..) => Yes,
+            MacroUse { .. } => No,
+            Marker(..) => No,
+            MayDangle(..) => No,
+            MoveSizeLimit { .. } => No,
+            MustUse { .. } => Yes,
+            Naked(..) => No,
+            NoCore(..) => No,
+            NoImplicitPrelude(..) => No,
+            NoMangle(..) => Yes, // Needed for rustdoc
+            NoStd(..) => No,
+            NonExhaustive(..) => Yes, // Needed for rustdoc
+            Optimize(..) => No,
+            ParenSugar(..) => No,
+            PassByValue(..) => Yes,
+            Path(..) => No,
+            PatternComplexityLimit { .. } => No,
+            Pointee(..) => No,
+            ProcMacro(..) => No,
+            ProcMacroAttribute(..) => No,
+            ProcMacroDerive { .. } => No,
+            PubTransparent(..) => Yes,
+            RecursionLimit { .. } => No,
+            Repr { .. } => No,
+            RustcBuiltinMacro { .. } => Yes,
+            RustcLayoutScalarValidRangeEnd(..) => Yes,
+            RustcLayoutScalarValidRangeStart(..) => Yes,
+            RustcObjectLifetimeDefault => No,
+            Sanitize { .. } => No,
+            ShouldPanic { .. } => No,
+            SkipDuringMethodDispatch { .. } => No,
+            SpecializationTrait(..) => No,
+            Stability { .. } => Yes,
+            StdInternalSymbol(..) => No,
+            TargetFeature { .. } => No,
+            TrackCaller(..) => Yes,
+            TypeConst(..) => Yes,
+            TypeLengthLimit { .. } => No,
+            UnsafeSpecializationMarker(..) => No,
+            UnstableFeatureBound(..) => No,
+            Used { .. } => No,
+            // tidy-alphabetical-end
+        }
+    }
+}

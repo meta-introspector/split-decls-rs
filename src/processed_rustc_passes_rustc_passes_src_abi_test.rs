@@ -1,32 +1,205 @@
-/* FP:abi_test.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_abi_test_USE_0001
-/* FP:abi_test.rs-0002 */ use crate :: rustc_complete :: Attribute ;
-/* FP:abi_test.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_abi_test_USE_0002
-/* FP:abi_test.rs-0004 */ use crate :: rustc_complete :: def :: DefKind ;
-/* FP:abi_test.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_abi_test_USE_0003
-/* FP:abi_test.rs-0006 */ use crate :: rustc_complete :: def_id :: LocalDefId ;
-/* FP:abi_test.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_abi_test_USE_0004
-/* FP:abi_test.rs-0008 */ use crate :: rustc_complete :: span_bug ;
-/* FP:abi_test.rs-0009 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_abi_test_USE_0005
-/* FP:abi_test.rs-0010 */ use crate :: rustc_complete :: ty :: layout :: { FnAbiError , LayoutError } ;
-/* FP:abi_test.rs-0011 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_abi_test_USE_0006
-/* FP:abi_test.rs-0012 */ use crate :: rustc_complete :: ty :: { self , GenericArgs , Instance , Ty , TyCtxt } ;
-/* FP:abi_test.rs-0013 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_abi_test_USE_0007
-/* FP:abi_test.rs-0014 */ use crate :: rustc_complete :: source_map :: Spanned ;
-/* FP:abi_test.rs-0015 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_abi_test_USE_0008
-/* FP:abi_test.rs-0016 */ use crate :: rustc_complete :: sym ;
-/* FP:abi_test.rs-0017 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_abi_test_USE_0009
-/* FP:abi_test.rs-0018 */ use crate :: rustc_target :: callconv :: FnAbi ;
-/* FP:abi_test.rs-0019 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_abi_test_USE_0010
-/* FP:abi_test.rs-0020 */ use super :: layout_test :: ensure_wf ;
-/* FP:abi_test.rs-0021 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_abi_test_USE_0011
-/* FP:abi_test.rs-0022 */ use crate :: errors :: { AbiInvalidAttribute , AbiNe , AbiOf , UnrecognizedArgument } ;
-/* FP:abi_test.rs-0023 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_abi_test_FN_0012
-/* FP:abi_test.rs-0024 */ pub fn test_abi (tcx : TyCtxt < '_ >) { if ! tcx . features () . rustc_attrs () { return ; } for id in tcx . hir_crate_items (()) . definitions () { for attr in tcx . get_attrs (id , sym :: rustc_abi) { match tcx . def_kind (id) { DefKind :: Fn | DefKind :: AssocFn => { dump_abi_of_fn_item (tcx , id , attr) ; } DefKind :: TyAlias => { dump_abi_of_fn_type (tcx , id , attr) ; } _ => { tcx . dcx () . emit_err (AbiInvalidAttribute { span : tcx . def_span (id) }) ; } } } } }
-/* FP:abi_test.rs-0025 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_abi_test_FN_0013
-/* FP:abi_test.rs-0026 */ fn unwrap_fn_abi < 'tcx > (abi : Result < & 'tcx FnAbi < 'tcx , Ty < 'tcx > > , & 'tcx FnAbiError < 'tcx > > , tcx : TyCtxt < 'tcx > , item_def_id : LocalDefId ,) -> & 'tcx FnAbi < 'tcx , Ty < 'tcx > > { match abi { Ok (abi) => abi , Err (FnAbiError :: Layout (layout_error)) => { tcx . dcx () . emit_fatal (Spanned { node : layout_error . into_diagnostic () , span : tcx . def_span (item_def_id) , }) ; } } }
-/* FP:abi_test.rs-0027 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_abi_test_FN_0014
-/* FP:abi_test.rs-0028 */ fn dump_abi_of_fn_item (tcx : TyCtxt < '_ > , item_def_id : LocalDefId , attr : & Attribute) { let typing_env = ty :: TypingEnv :: post_analysis (tcx , item_def_id) ; let args = GenericArgs :: identity_for_item (tcx , item_def_id) ; let instance = match Instance :: try_resolve (tcx , typing_env , item_def_id . into () , args) { Ok (Some (instance)) => instance , Ok (None) => { let ty = tcx . type_of (item_def_id) . instantiate_identity () ; tcx . dcx () . emit_fatal (Spanned { node : LayoutError :: Unknown (ty) . into_diagnostic () , span : tcx . def_span (item_def_id) , }) ; } Err (_guaranteed) => return , } ; let abi = unwrap_fn_abi (tcx . fn_abi_of_instance (typing_env . as_query_input ((instance , ty :: List :: empty ())) ,) , tcx , item_def_id ,) ; let meta_items = attr . meta_item_list () . unwrap_or_default () ; for meta_item in meta_items { match meta_item . name () { Some (sym :: debug) => { let fn_name = tcx . item_name (item_def_id) ; tcx . dcx () . emit_err (AbiOf { span : tcx . def_span (item_def_id) , fn_name , fn_abi : format ! ("{:#?}" , abi) , }) ; } _ => { tcx . dcx () . emit_err (UnrecognizedArgument { span : meta_item . span () }) ; } } } }
-/* FP:abi_test.rs-0029 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_abi_test_FN_0015
-/* FP:abi_test.rs-0030 */ fn test_abi_eq < 'tcx > (abi1 : & 'tcx FnAbi < 'tcx , Ty < 'tcx > > , abi2 : & 'tcx FnAbi < 'tcx , Ty < 'tcx > >) -> bool { if abi1 . conv != abi2 . conv || abi1 . args . len () != abi2 . args . len () || abi1 . c_variadic != abi2 . c_variadic || abi1 . fixed_count != abi2 . fixed_count || abi1 . can_unwind != abi2 . can_unwind { return false ; } abi1 . ret . eq_abi (& abi2 . ret) && abi1 . args . iter () . zip (abi2 . args . iter ()) . all (| (arg1 , arg2) | arg1 . eq_abi (arg2)) }
-/* FP:abi_test.rs-0031 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_passes_src_abi_test_FN_0016
-/* FP:abi_test.rs-0032 */ fn dump_abi_of_fn_type (tcx : TyCtxt < '_ > , item_def_id : LocalDefId , attr : & Attribute) { let typing_env = ty :: TypingEnv :: post_analysis (tcx , item_def_id) ; let ty = tcx . type_of (item_def_id) . instantiate_identity () ; let span = tcx . def_span (item_def_id) ; if ! ensure_wf (tcx , typing_env , ty , item_def_id , span) { return ; } let meta_items = attr . meta_item_list () . unwrap_or_default () ; for meta_item in meta_items { match meta_item . name () { Some (sym :: debug) => { let ty :: FnPtr (sig_tys , hdr) = ty . kind () else { span_bug ! (meta_item . span () , "`#[rustc_abi(debug)]` on a type alias requires function pointer type") ; } ; let abi = unwrap_fn_abi (tcx . fn_abi_of_fn_ptr (typing_env . as_query_input ((sig_tys . with (* hdr) , ty :: List :: empty () ,))) , tcx , item_def_id ,) ; let fn_name = tcx . item_name (item_def_id) ; tcx . dcx () . emit_err (AbiOf { span , fn_name , fn_abi : format ! ("{:#?}" , abi) }) ; } Some (sym :: assert_eq) => { let ty :: Tuple (fields) = ty . kind () else { span_bug ! (meta_item . span () , "`#[rustc_abi(assert_eq)]` on a type alias requires pair type") ; } ; let [field1 , field2] = * * * fields else { span_bug ! (meta_item . span () , "`#[rustc_abi(assert_eq)]` on a type alias requires pair type") ; } ; let ty :: FnPtr (sig_tys1 , hdr1) = field1 . kind () else { span_bug ! (meta_item . span () , "`#[rustc_abi(assert_eq)]` on a type alias requires pair of function pointer types") ; } ; let abi1 = unwrap_fn_abi (tcx . fn_abi_of_fn_ptr (typing_env . as_query_input ((sig_tys1 . with (* hdr1) , ty :: List :: empty () ,))) , tcx , item_def_id ,) ; let ty :: FnPtr (sig_tys2 , hdr2) = field2 . kind () else { span_bug ! (meta_item . span () , "`#[rustc_abi(assert_eq)]` on a type alias requires pair of function pointer types") ; } ; let abi2 = unwrap_fn_abi (tcx . fn_abi_of_fn_ptr (typing_env . as_query_input ((sig_tys2 . with (* hdr2) , ty :: List :: empty () ,))) , tcx , item_def_id ,) ; if ! test_abi_eq (abi1 , abi2) { tcx . dcx () . emit_err (AbiNe { span , left : format ! ("{:#?}" , abi1) , right : format ! ("{:#?}" , abi2) , }) ; } } _ => { tcx . dcx () . emit_err (UnrecognizedArgument { span : meta_item . span () }) ; } } } }
+// SRC: ../rust/compiler/rustc_passes/src/abi_test.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=5 */
+use crate::rustc_complete::Attribute;
+use crate::rustc_complete::def::DefKind;
+use crate::rustc_complete::def_id::LocalDefId;
+use crate::rustc_complete::span_bug;
+use crate::rustc_complete::ty::layout::{FnAbiError, LayoutError};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::ty::{self, GenericArgs, Instance, Ty, TyCtxt};
+/* AST_META: AST_ID=3 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=6 */
+use crate::rustc_complete::source_map::Spanned;
+use crate::rustc_complete::sym;
+use crate::rustc_target::callconv::FnAbi;
+
+use super::layout_test::ensure_wf;
+use crate::errors::{AbiInvalidAttribute, AbiNe, AbiOf, UnrecognizedArgument};
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=test_abi | COMPLEXITY=22 | LINES=22 */
+
+pub fn test_abi(tcx: TyCtxt<'_>) {
+    if !tcx.features().rustc_attrs() {
+        // if the `rustc_attrs` feature is not enabled, don't bother testing ABI
+        return;
+    }
+    for id in tcx.hir_crate_items(()).definitions() {
+        for attr in tcx.get_attrs(id, sym::rustc_abi) {
+            match tcx.def_kind(id) {
+                DefKind::Fn | DefKind::AssocFn => {
+                    dump_abi_of_fn_item(tcx, id, attr);
+                }
+                DefKind::TyAlias => {
+                    dump_abi_of_fn_type(tcx, id, attr);
+                }
+                _ => {
+                    tcx.dcx().emit_err(AbiInvalidAttribute { span: tcx.def_span(id) });
+                }
+            }
+        }
+    }
+}
+/* AST_META: AST_ID=5 | TYPE=FUNCTION | NAME=unwrap_fn_abi | COMPLEXITY=8 | LINES=16 */
+
+fn unwrap_fn_abi<'tcx>(
+    abi: Result<&'tcx FnAbi<'tcx, Ty<'tcx>>, &'tcx FnAbiError<'tcx>>,
+    tcx: TyCtxt<'tcx>,
+    item_def_id: LocalDefId,
+) -> &'tcx FnAbi<'tcx, Ty<'tcx>> {
+    match abi {
+        Ok(abi) => abi,
+        Err(FnAbiError::Layout(layout_error)) => {
+            tcx.dcx().emit_fatal(Spanned {
+                node: layout_error.into_diagnostic(),
+                span: tcx.def_span(item_def_id),
+            });
+        }
+    }
+}
+/* AST_META: AST_ID=6 | TYPE=FUNCTION | NAME=dump_abi_of_fn_item | COMPLEXITY=23 | LINES=46 */
+
+fn dump_abi_of_fn_item(tcx: TyCtxt<'_>, item_def_id: LocalDefId, attr: &Attribute) {
+    let typing_env = ty::TypingEnv::post_analysis(tcx, item_def_id);
+    let args = GenericArgs::identity_for_item(tcx, item_def_id);
+    let instance = match Instance::try_resolve(tcx, typing_env, item_def_id.into(), args) {
+        Ok(Some(instance)) => instance,
+        Ok(None) => {
+            // Not sure what to do here, but `LayoutError::Unknown` seems reasonable?
+            let ty = tcx.type_of(item_def_id).instantiate_identity();
+            tcx.dcx().emit_fatal(Spanned {
+                node: LayoutError::Unknown(ty).into_diagnostic(),
+
+                span: tcx.def_span(item_def_id),
+            });
+        }
+        Err(_guaranteed) => return,
+    };
+    let abi = unwrap_fn_abi(
+        tcx.fn_abi_of_instance(
+            typing_env.as_query_input((instance, /* extra_args */ ty::List::empty())),
+        ),
+        tcx,
+        item_def_id,
+    );
+
+    // Check out the `#[rustc_abi(..)]` attribute to tell what to dump.
+    // The `..` are the names of fields to dump.
+    let meta_items = attr.meta_item_list().unwrap_or_default();
+    for meta_item in meta_items {
+        match meta_item.name() {
+            Some(sym::debug) => {
+                let fn_name = tcx.item_name(item_def_id);
+                tcx.dcx().emit_err(AbiOf {
+                    span: tcx.def_span(item_def_id),
+                    fn_name,
+                    // FIXME: using the `Debug` impl here isn't ideal.
+                    fn_abi: format!("{:#?}", abi),
+                });
+            }
+
+            _ => {
+                tcx.dcx().emit_err(UnrecognizedArgument { span: meta_item.span() });
+            }
+        }
+    }
+}
+/* AST_META: AST_ID=7 | TYPE=FUNCTION | NAME=test_abi_eq | COMPLEXITY=5 | LINES=14 */
+
+fn test_abi_eq<'tcx>(abi1: &'tcx FnAbi<'tcx, Ty<'tcx>>, abi2: &'tcx FnAbi<'tcx, Ty<'tcx>>) -> bool {
+    if abi1.conv != abi2.conv
+        || abi1.args.len() != abi2.args.len()
+        || abi1.c_variadic != abi2.c_variadic
+        || abi1.fixed_count != abi2.fixed_count
+        || abi1.can_unwind != abi2.can_unwind
+    {
+        return false;
+    }
+
+    abi1.ret.eq_abi(&abi2.ret)
+        && abi1.args.iter().zip(abi2.args.iter()).all(|(arg1, arg2)| arg1.eq_abi(arg2))
+}
+/* AST_META: AST_ID=8 | TYPE=FUNCTION | NAME=dump_abi_of_fn_type | COMPLEXITY=35 | LINES=86 */
+
+fn dump_abi_of_fn_type(tcx: TyCtxt<'_>, item_def_id: LocalDefId, attr: &Attribute) {
+    let typing_env = ty::TypingEnv::post_analysis(tcx, item_def_id);
+    let ty = tcx.type_of(item_def_id).instantiate_identity();
+    let span = tcx.def_span(item_def_id);
+    if !ensure_wf(tcx, typing_env, ty, item_def_id, span) {
+        return;
+    }
+    let meta_items = attr.meta_item_list().unwrap_or_default();
+    for meta_item in meta_items {
+        match meta_item.name() {
+            Some(sym::debug) => {
+                let ty::FnPtr(sig_tys, hdr) = ty.kind() else {
+                    span_bug!(
+                        meta_item.span(),
+                        "`#[rustc_abi(debug)]` on a type alias requires function pointer type"
+                    );
+                };
+                let abi = unwrap_fn_abi(
+                    tcx.fn_abi_of_fn_ptr(typing_env.as_query_input((
+                        sig_tys.with(*hdr),
+                        /* extra_args */ ty::List::empty(),
+                    ))),
+                    tcx,
+                    item_def_id,
+                );
+
+                let fn_name = tcx.item_name(item_def_id);
+                tcx.dcx().emit_err(AbiOf { span, fn_name, fn_abi: format!("{:#?}", abi) });
+            }
+            Some(sym::assert_eq) => {
+                let ty::Tuple(fields) = ty.kind() else {
+                    span_bug!(
+                        meta_item.span(),
+                        "`#[rustc_abi(assert_eq)]` on a type alias requires pair type"
+                    );
+                };
+                let [field1, field2] = ***fields else {
+                    span_bug!(
+                        meta_item.span(),
+                        "`#[rustc_abi(assert_eq)]` on a type alias requires pair type"
+                    );
+                };
+                let ty::FnPtr(sig_tys1, hdr1) = field1.kind() else {
+                    span_bug!(
+                        meta_item.span(),
+                        "`#[rustc_abi(assert_eq)]` on a type alias requires pair of function pointer types"
+                    );
+                };
+                let abi1 = unwrap_fn_abi(
+                    tcx.fn_abi_of_fn_ptr(typing_env.as_query_input((
+                        sig_tys1.with(*hdr1),
+                        /* extra_args */ ty::List::empty(),
+                    ))),
+                    tcx,
+                    item_def_id,
+                );
+                let ty::FnPtr(sig_tys2, hdr2) = field2.kind() else {
+                    span_bug!(
+                        meta_item.span(),
+                        "`#[rustc_abi(assert_eq)]` on a type alias requires pair of function pointer types"
+                    );
+                };
+                let abi2 = unwrap_fn_abi(
+                    tcx.fn_abi_of_fn_ptr(typing_env.as_query_input((
+                        sig_tys2.with(*hdr2),
+                        /* extra_args */ ty::List::empty(),
+                    ))),
+                    tcx,
+                    item_def_id,
+                );
+
+                if !test_abi_eq(abi1, abi2) {
+                    tcx.dcx().emit_err(AbiNe {
+                        span,
+                        left: format!("{:#?}", abi1),
+                        right: format!("{:#?}", abi2),
+                    });
+                }
+            }
+            _ => {
+                tcx.dcx().emit_err(UnrecognizedArgument { span: meta_item.span() });
+            }
+        }
+    }
+}

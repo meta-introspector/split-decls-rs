@@ -1,4 +1,39 @@
-/* FP:unicode.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_util_unicode_CONST_0001
-/* FP:unicode.rs-0002 */ pub const TEXT_FLOW_CONTROL_CHARS : & [char] = & ['\u{202A}' , '\u{202B}' , '\u{202D}' , '\u{202E}' , '\u{2066}' , '\u{2067}' , '\u{2068}' , '\u{202C}' , '\u{2069}' ,] ;
-/* FP:unicode.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_util_unicode_FN_0002
-/* FP:unicode.rs-0004 */ # [inline] pub fn contains_text_flow_control_chars (s : & str) -> bool { let mut bytes = s . as_bytes () ; loop { match memchr :: memchr (0xE2 , bytes) { Some (idx) => { let ch = & bytes [idx .. idx + 3] ; match ch { [_ , 0x80 , 0xAA ..= 0xAE] | [_ , 0x81 , 0xA6 ..= 0xA9] => break true , _ => { } } bytes = & bytes [idx + 3 ..] ; } None => { break false ; } } } }
+// SRC: ../rust/compiler/rustc_ast/src/util/unicode.rs
+/* AST_META: AST_ID=1 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=9 | LINES=2 */
+pub const TEXT_FLOW_CONTROL_CHARS: &[char] = &[
+    '\u{202A}', '\u{202B}', '\u{202D}', '\u{202E}', '\u{2066}', '\u{2067}', '\u{2068}', '\u{202C}',
+/* AST_META: AST_ID=2 | TYPE=BLOCK | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+    '\u{2069}',
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=contains_text_flow_control_chars | COMPLEXITY=17 | LINES=32 */
+];
+
+#[inline]
+pub fn contains_text_flow_control_chars(s: &str) -> bool {
+    // Char   - UTF-8
+    // U+202A - E2 80 AA
+    // U+202B - E2 80 AB
+    // U+202C - E2 80 AC
+    // U+202D - E2 80 AD
+    // U+202E - E2 80 AE
+    // U+2066 - E2 81 A6
+    // U+2067 - E2 81 A7
+    // U+2068 - E2 81 A8
+    // U+2069 - E2 81 A9
+    let mut bytes = s.as_bytes();
+    loop {
+        match memchr::memchr(0xE2, bytes) {
+            Some(idx) => {
+                // bytes are valid UTF-8 -> E2 must be followed by two bytes
+                let ch = &bytes[idx..idx + 3];
+                match ch {
+                    [_, 0x80, 0xAA..=0xAE] | [_, 0x81, 0xA6..=0xA9] => break true,
+                    _ => {}
+                }
+                bytes = &bytes[idx + 3..];
+            }
+            None => {
+                break false;
+            }
+        }
+    }
+}

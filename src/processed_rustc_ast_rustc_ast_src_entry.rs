@@ -1,8 +1,56 @@
-/* FP:entry.rs-0001 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_entry_USE_0001
-/* FP:entry.rs-0002 */ use crate :: rustc_complete :: { Symbol , sym } ;
-/* FP:entry.rs-0003 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_entry_USE_0002
-/* FP:entry.rs-0004 */ use crate :: attr :: { self , AttributeExt } ;
-/* FP:entry.rs-0005 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_entry_ENUM_0003
-/* FP:entry.rs-0006 */ # [derive (Debug)] pub enum EntryPointType { # [doc = " This function is not an entrypoint."] None , # [doc = " This is a function called `main` at the root level."] # [doc = " ```"] # [doc = " fn main() {}"] # [doc = " ```"] MainNamed , # [doc = " This is a function with the `#[rustc_main]` attribute."] # [doc = " Used by the testing harness to create the test entrypoint."] # [doc = " ```ignore (clashes with test entrypoint)"] # [doc = " #[rustc_main]"] # [doc = " fn main() {}"] # [doc = " ```"] RustcMainAttr , # [doc = " This function is **not** an entrypoint but simply named `main` (not at the root)."] # [doc = " This is only used for diagnostics."] # [doc = " ```"] # [doc = " #[allow(dead_code)]"] # [doc = " mod meow {"] # [doc = "     fn main() {}"] # [doc = " }"] # [doc = " ```"] OtherMain , }
-/* FP:entry.rs-0007 */ #[warn(unused_variables)] // AST_.._rust_compiler_rustc_ast_src_entry_FN_0004
-/* FP:entry.rs-0008 */ pub fn entry_point_type (attrs : & [impl AttributeExt] , at_root : bool , name : Option < Symbol > ,) -> EntryPointType { if attr :: contains_name (attrs , sym :: rustc_main) { EntryPointType :: RustcMainAttr } else if let Some (name) = name && name == sym :: main { if at_root { EntryPointType :: MainNamed } else { EntryPointType :: OtherMain } } else { EntryPointType :: None } }
+// SRC: ../rust/compiler/rustc_ast/src/entry.rs
+/* AST_META: AST_ID=1 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=1 */
+use crate::rustc_complete::{Symbol, sym};
+/* AST_META: AST_ID=2 | TYPE=USE | NAME=UNNAMED | COMPLEXITY=2 | LINES=2 */
+
+use crate::attr::{self, AttributeExt};
+/* AST_META: AST_ID=3 | TYPE=FUNCTION | NAME=UNNAMED | COMPLEXITY=9 | LINES=27 */
+
+#[derive(Debug)]
+pub enum EntryPointType {
+    /// This function is not an entrypoint.
+    None,
+    /// This is a function called `main` at the root level.
+    /// ```
+    /// fn main() {}
+    /// ```
+    MainNamed,
+    /// This is a function with the `#[rustc_main]` attribute.
+    /// Used by the testing harness to create the test entrypoint.
+    /// ```ignore (clashes with test entrypoint)
+    /// #[rustc_main]
+    /// fn main() {}
+    /// ```
+    RustcMainAttr,
+    /// This function is **not** an entrypoint but simply named `main` (not at the root).
+    /// This is only used for diagnostics.
+    /// ```
+    /// #[allow(dead_code)]
+    /// mod meow {
+    ///     fn main() {}
+    /// }
+    /// ```
+    OtherMain,
+}
+/* AST_META: AST_ID=4 | TYPE=FUNCTION | NAME=entry_point_type | COMPLEXITY=14 | LINES=21 */
+
+pub fn entry_point_type(
+    attrs: &[impl AttributeExt],
+    at_root: bool,
+    name: Option<Symbol>,
+) -> EntryPointType {
+    if attr::contains_name(attrs, sym::rustc_main) {
+        EntryPointType::RustcMainAttr
+    } else if let Some(name) = name
+        && name == sym::main
+    {
+        if at_root {
+            // This is a top-level function so it can be `main`.
+            EntryPointType::MainNamed
+        } else {
+            EntryPointType::OtherMain
+        }
+    } else {
+        EntryPointType::None
+    }
+}
