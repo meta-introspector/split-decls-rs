@@ -695,11 +695,11 @@ fn load_symbol_map(symbol_map_path: &str) -> Result<HashMap<String, Value>, Box<
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-changed=error_list.txt");
-    println!("🚀 BUILD.RS STARTING - This should appear in cargo build output!");
-    println!("🔧 Incremental Build.rs - Processing files one by one");
+    println!("🚀 BUILD.RS - rustc_complete.rs generation moved to gen_rustc_partial.rs");
     
-    // Generate rustc_complete.rs with exclusions
-    build_rustc_from_symbol_map()?;
+    // Just set environment variables, no file generation
+    println!("cargo:rustc-env=CFG_RELEASE_CHANNEL=dev");
+    println!("cargo:rustc-env=RUSTC_INSTALL_BINDIR=/usr/local/bin");
     
     Ok(())
 }
@@ -782,29 +782,25 @@ fn build_rustc_from_symbol_map() -> Result<(), Box<dyn std::error::Error>> {
     // Group files by crate (excluding error-prone files)
     let mut crate_files: HashMap<String, Vec<String>> = HashMap::new();
     let mut excluded_count = 0;
-    let mut stopped_at_first_error = false;
+    let mut processed_count = 0;
     
-    for file in &source_files {
-        // Stop processing after first exclusion
-        if stopped_at_first_error {
-            println!("🛑 Stopped processing after first excluded file");
-            break;
-        }
-        
-        // Check if file should be excluded
-        if should_exclude_file(file, &exclusions) {
-            println!("⏭️  Skipping {} (in error exclusion list)", file);
+    for (i, file) in source_files.iter().enumerate() {
+        // Only include the very first file (macro_call_matches - zero deps)
+        if i > 0 {
+            println!("⏭️  Skipping {} (only including first file)", file);
             excluded_count += 1;
-            stopped_at_first_error = true;
             continue;
         }
         
+        println!("✅ Including ONLY first file: {}", file);
+        
         if let Some(crate_name) = extract_crate_name(file) {
             crate_files.entry(crate_name).or_insert_with(Vec::new).push(file.to_string());
+            processed_count += 1;
         }
     }
-    println!("📊 Excluded {} files, processing {} files in {} crates (stopped at first error: {})", 
-             excluded_count, source_files.len() - excluded_count, crate_files.len(), stopped_at_first_error);
+    println!("📊 Processed {} files, excluded {} files in {} crates", 
+             processed_count, excluded_count, crate_files.len());
     
     // Generate include file with all submodules
     generate_complete_includes(&crate_files)?;

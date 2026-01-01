@@ -3,7 +3,7 @@
 
 use std::fs;
 use std::path::Path;
-use std::process::Command;
+// use std::process::Command;  // Commented out - unused
 use anyhow::Result;
 
 pub struct DependencyPath {

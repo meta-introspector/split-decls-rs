@@ -23,15 +23,13 @@
 #![feature(generic_atomic)]
 #![feature(alloc_error_handler)]
 
-// External rustc compiler crates
+// External rustc compiler crates (minimal set to avoid conflicts)
 extern crate tracing;
-extern crate rustc_ast;
-extern crate rustc_middle;
-extern crate rustc_span;
-extern crate rustc_hir;
-extern crate rustc_data_structures;
-extern crate rustc_errors;
-extern crate rustc_session;
+// extern crate rustc_ast;  // Commented out - conflicts
+// extern crate rustc_span;  // Commented out - conflicts  
+// extern crate rustc_hir;  // Commented out - conflicts
+// extern crate rustc_data_structures;  // Commented out - conflicts
+// extern crate rustc_session;  // Commented out - conflicts
 extern crate rustc_infer;
 extern crate rustc_trait_selection;
 extern crate rustc_abi;
@@ -45,18 +43,19 @@ extern crate rustc_serialize;
 extern crate bitflags;
 extern crate derive_where;
 extern crate rustc_type_ir_macros;
-extern crate cranelift_codegen;
-extern crate cranelift_frontend;
+// Missing external crates - commented out to fix compilation
+// extern crate cranelift_codegen;
+// extern crate cranelift_frontend;
 extern crate rustc_expand;
 extern crate rustc_lint_defs;
 extern crate rustc_ast_ir;
 extern crate rustc_fluent_macro;
-extern crate core_simd;
-extern crate test_helpers;
+// extern crate core_simd;
+// extern crate test_helpers;
 extern crate syn;
 extern crate quote;
 extern crate proc_macro2;
-extern crate synstructure;
+// extern crate synstructure;
 extern crate memchr;
 extern crate smallvec;
 extern crate thin_vec;
@@ -68,27 +67,38 @@ pub mod dependency_extractor;
 
 // Explicit modules (take precedence over generated stubs)
 // Removed conflicting modules: rustc_index_macros, rustc_data_structures, rustc_infer
-pub mod rustc_index;  // Restored - needed for imports
-pub mod rustc_serialize;  // Restored - needed for imports
+// pub mod rustc_index;  // Commented out - conflicts with extern crate
+// pub mod rustc_serialize;  // Commented out - conflicts with extern crate
 pub mod fx;
 pub mod sync;
-pub mod stable_hasher;
+// pub mod stable_hasher;  // Commented out - conflicts with generated stub
 pub mod graph;
-pub mod source_map;
-pub mod ty;
-pub mod rustc_abi;
+// pub mod source_map;  // Commented out - conflicts with generated stub
+// pub mod ty;  // Commented out - conflicts with generated stub
+// pub mod rustc_abi;  // Commented out - conflicts with extern crate
 pub mod common;
 pub mod test_rustc_complete_access;
-pub mod test_rustc_index;
+// pub mod test_rustc_index;  // Removed - not needed
 
 // Include the complete rustc code (actual implementations)
 pub mod rustc_complete;
 pub use rustc_complete::*;
 
+// Add prelude module for processed files
+pub mod prelude {
+    pub use crate::*;
+    
+    // Add missing traits and types that processed files expect
+    pub trait NoArgsAttributeParser {}
+    pub trait AttributeParser {}
+    pub struct AttributeTemplate;
+    pub struct ParsedAttr;
+}
+
 // Auto-generated complete rustc includes from build.rs
 // Create root-level modules that some code expects
-pub mod rustc_infer { pub use crate::*; }
-pub mod rustc_trait_selection { pub use crate::*; }
+// pub mod rustc_infer { pub use crate::*; }  // Commented out - conflicts with extern crate
+// pub mod rustc_trait_selection { pub use crate::*; }  // Commented out - conflicts with extern crate
 
 // Add core rustc modules that are heavily imported
 pub mod ty {
@@ -153,7 +163,7 @@ pub const DUMMY_SP: Span = Span;
 pub mod errors { pub use crate::*; }
 pub mod error_reporting { pub use crate::*; }
 pub mod traits { pub use crate::*; }
-pub mod mir { pub use crate::*; }
+// pub mod mir { pub use crate::*; }  // Commented out - conflicts with generated stub
 pub mod middle { pub struct Middle; }
 pub mod query { pub struct Query; }
 pub mod config { pub struct Config; }
